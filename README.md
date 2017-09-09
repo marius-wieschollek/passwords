@@ -1,6 +1,8 @@
 # Passwords
 **A simple, yet feature rich password manager for Nextcloud**
 
+Looking for the old app? [Klick here](https://github.com/marius-wieschollek/passwords-legacy).
+
 ## Contents
 * [Features](#features)
 * [Security](#security)
