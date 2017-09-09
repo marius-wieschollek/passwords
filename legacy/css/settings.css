@@ -1,0 +1,96 @@
+#passwords-admin .gitcode {
+	font-family: "Courier New" !important;
+	font-size: 0.9em;
+	color: #000;
+	margin-left: 20px;
+}
+#passwords-admin #app_path {
+	width: 200px;
+	text-align: right;
+}
+#passwords-admin red {
+	color: #a00;
+	line-height: 3;
+}
+#passwords-admin orange {
+	color: #c80;
+	line-height: 3;
+}
+#passwords-admin green {
+	color: #0a0;
+	line-height: 3;
+}
+#passwords-admin h3 {
+	text-decoration: underline;
+}
+#passwords-admin .https_warning {
+	color: #a00;
+	opacity: 1;
+}
+#passwords-admin .descr {
+	margin-bottom: 10px;
+}
+#passwords-admin .radiotext {
+	margin-left: 5px;
+}
+#passwords-admin .linkDDG:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+#passwords-admin .fieldDays {
+	width: 50px !important;
+	text-align: center;
+}
+#passwords-admin .msg-passwords,
+#passwords-personal .msg-passwords {
+	padding: 3px;
+}
+#passwords-admin .msg_error,
+#passwords-personal .msg_error {
+	background-color: #a00;
+	color: #fff;
+}
+#passwords-admin .msg_success,
+#passwords-personal .msg_success {
+	background-color: #0a0;
+	color: #fff;
+}
+#passwords-personal #icons_size_preview {
+	width: 100%;
+}
+#passwords-personal #icons_size_preview tr {
+	height: 40px;
+}
+#passwords-personal #icons_size_preview td {
+	border-top: 1px dashed #999;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px dashed #999;
+	padding-right: 10px;
+}
+#passwords-personal #icons_size_preview img {
+	vertical-align: middle;
+	margin-right: 5px;
+}
+#passwords-personal #timer {
+	width: 30px;
+	text-align: center;
+}
+#passwords-personal #timersettext {
+	display: none;
+}
+#passwords-personal hr {
+	width: 100%;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+	height: 1px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.nav-icon-passwords,
+.nav-icon-parolalar,
+.nav-icon-passwörter {
+	background-image: url('../../img/app_black.svg?v=1');
+}

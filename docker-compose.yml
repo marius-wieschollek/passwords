@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: nextcloud:fpm
+    links:
+      - db
+    volumes:
+      - /var/www/html
+      - ./src:/var/www/html/custom_apps/passwords
+    restart: always
+
+  web:
+    image: nginx
+    ports:
+      - 80:80
+    links:
+      - app
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    volumes_from:
+      - app
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    links:
+      - db
+    environment:
+      MYSQL_ROOT_PASSWORD: "nextcloud"
+      PMA_ABSOLUTE_URI: http://localhost:8080
+      PMA_HOSTS: db
+      PMA_USER: root
+      PMA_PASSWORD: nextcloud
+
+volumes:
+  db:
