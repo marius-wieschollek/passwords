@@ -3,6 +3,7 @@ version: '2'
 services:
   db:
     image: mariadb
+    container_name: "passwords-db"
     restart: always
     volumes:
       - db:/var/lib/mysql
@@ -14,6 +15,7 @@ services:
 
   app:
     image: nextcloud:fpm
+    container_name: "passwords-php"
     links:
       - db
     volumes:
@@ -23,6 +25,7 @@ services:
 
   web:
     image: nginx
+    container_name: "passwords-nginx"
     ports:
       - 80:80
     links:
@@ -35,6 +38,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: "passwords-phpmyadmin"
     ports:
       - 8080:80
     links:
