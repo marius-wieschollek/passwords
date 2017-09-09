@@ -72,6 +72,5 @@ Passwords offers complete API, giving you access to all features of the app.
 * openssl
 
 ## Development
-**Soon to come:**
-* Do you want to help us? Read the [Guide](CONTRIBUTING.md) and get started.
-* Do you want do want to use the API? Read the [docs](https://github.com/marius-wieschollek/passwords/wiki).
+* Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
+* **Soon to come:** Do you want do want to use the API? Read the [docs](https://github.com/marius-wieschollek/passwords/wiki).
