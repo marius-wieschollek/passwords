@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<info xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>passwords</id>
+	<name>Passwords</name>
+	<summary>Passwords lets you manage all your passwords easily on your Nextcloud.</summary>
+	<description>
+		This is a port of the original passwords app by Fallon Turner.
+
+		**Features**
+		* Server Side Encryption
+		* Password creation
+		* Password Safety Checks
+		* API for third party apps
+		* Easy to use user interface
+		* Categories
+	</description>
+	<licence>AGPL</licence>
+	<author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">Marius David Wieschollek</author>
+	<version>2017.9.007</version>
+	<apiVersion>20-beta9</apiVersion>
+	<api>
+		<version>2017.9</version>
+		<legacyApi>20-beta9</legacyApi>
+	</api>
+	<namespace>Passwords</namespace>
+	<category>tools</category>
+	<bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
+	<repository type="git">https://github.com/marius-wieschollek/passwords/passwords.git</repository>
+	<dependencies>
+		<nextcloud min-version="12" max-version="12" />
+		<php min-version="7.1"/>
+		<database>sqlite</database>
+		<database>mysql</database>
+		<database>pgsql</database>
+	</dependencies>
+	<navigations>
+		<navigation>
+			<name>Passwords</name>
+			<route>passwords.access.index</route>
+		</navigation>
+	</navigations>
+	<settings>
+		<admin>OCA\Passwords\Settings\AdminSettings</admin>
+	</settings>
+	<documentation>
+		<user>https://github.com/marius-wieschollek/passwords/blob/stable/README.md</user>
+		<admin>https://github.com/marius-wieschollek/passwords/wiki</admin>
+	</documentation>
+</info>

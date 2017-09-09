@@ -1,0 +1,1507 @@
+/* make OC dialog functional, readable, just... useable. */
+.oc-dialog {
+	z-index : 9999999999;
+}
+
+.oc-dialog-dim {
+	z-index : 999999999;
+}
+
+.oc-dialog-buttonrow.twobuttons button:nth-child(1) {
+	float       : right !important;
+	margin-left : 10px;
+}
+
+.oc-dialog-buttonrow button {
+	width : 70px !important;
+}
+
+.oc-dialog h3 {
+	width  : 100%;
+	margin : 0;
+}
+
+.ui-icon-notice {
+	background-image    : url('../../../core/img/actions/info.svg') !important;
+	background-position : 0px !important;
+	height              : 30px !important;
+	width               : 30px !important;
+	background-size     : 30px !important;
+}
+
+#CSVcontent,
+#CSVcolumnCount {
+	display : none;
+}
+
+#CSVbuttons button.CSVbuttonOff {
+	background-color   : #ddd !important;
+	color              : #555 !important;
+	-webkit-transition : all 200ms !important;
+	transition         : all 200ms !important;
+}
+
+#CSVbuttons button {
+	background-color   : #0a0 !important;
+	color              : #fff !important;
+	width              : 175px;
+	height             : 50px;
+	-webkit-transition : all 200ms !important;
+	transition         : all 200ms !important;
+	float              : left;
+	border             : 0 !important;
+	border-radius      : 10px !important;
+	font-weight        : normal;
+}
+
+#CSVbuttons button:hover {
+	opacity            : 0.75 !important;
+	-webkit-transition : all 200ms !important;
+	transition         : all 200ms !important;
+}
+
+#CSVtableDIV {
+	display    : none;
+	position   : fixed;
+	background : #fff;
+	padding    : 20px;
+	border     : 1px solid #999;
+	max-width  : 95%;
+}
+
+#CSVtableScroll {
+	overflow-y : auto;
+	margin-top : 5px;
+	overflow-x : hidden;
+}
+
+#CSVtableDIV h2 {
+	font-size     : 2em;
+	font-weight   : bold;
+	margin-bottom : 10px;
+}
+
+#CSVtableDIV h3 {
+	font-size   : 1.2em;
+	font-weight : bold;
+	text-align  : left;
+	margin      : 0;
+}
+
+#CSVtable {
+	border-collapse : collapse;
+}
+
+#CSVtable td {
+	border     : 0 !important;
+	text-align : center;
+}
+
+#CSVtable thead td {
+	border-top : 0;
+	text-align : center;
+}
+
+#CSVtable tr {
+	border-bottom : 1px solid #ddd !important;
+}
+
+#CSVtable textarea {
+	height     : 50px;
+	width      : 100%;
+	text-align : center;
+	resize     : none;
+	background : transparent !important;
+	border     : 0 !important;
+	color      : #000 !important;
+}
+
+#CSVtable select {
+	margin      : 5px;
+	opacity     : 0.9;
+	text-indent : 5px;
+	width       : 90%;
+}
+
+#CSVtable input[type="checkbox"] {
+	-ms-transform     : scale(2, 2);
+	-webkit-transform : scale(2, 2);
+	transform         : scale(2, 2);
+}
+
+.CSVcolumnInvalid {
+	background : #a00;
+}
+
+#importStart,
+#importCancel {
+	float      : right;
+	margin-top : 10px;
+}
+
+#CSVerrorfield {
+	padding-top : 10px;
+}
+
+#CSVerrorfield p {
+	background  : #a00;
+	color       : #fff;
+	padding     : 5px;
+	font-weight : bold;
+}
+
+#CSVprogressDIV {
+	position     : fixed;
+	top          : 25%;
+	left         : 37%;
+	border       : 2px solid #555;
+	width        : 26%;
+	min-width    : 300px;
+	height       : 125px;
+	background   : #fff;
+	margin-left  : auto;
+	margin-right : auto;
+	display      : none;
+}
+
+#CSVprogressActive,
+#CSVprogressTotal,
+#update_progress_active,
+#update_progress_total {
+	display : none;
+}
+
+#CSVprogressTitle,
+#CSVprogressText2,
+#update_progress_text {
+	text-align  : center;
+	color       : #555;
+	font-weight : bold;
+}
+
+#CSVprogressText1 {
+	text-align : center;
+	color      : #555;
+}
+
+#CSVprogressTitle {
+	font-size     : 1.2em;
+	margin-top    : 5px;
+	margin-bottom : 15px;
+}
+
+#CSVprogressBar,
+#update_progress_bar {
+	border       : 2px solid #555;
+	margin-left  : 20px;
+	margin-right : 20px;
+	height       : 20px;
+}
+
+#CSVprogressDone,
+#update_progress_done {
+	width      : 0px;
+	background : #555;
+	height     : 18px
+}
+
+#section_update,
+#update_progress,
+#update_done {
+	display : none;
+}
+
+#update_box {
+	position   : fixed;
+	background : #efefef;
+	border     : 2px solid #555;
+	width      : 40%;
+	top        : 10%;
+	left       : 30%;
+	padding    : 20px;
+	text-align : center;
+	z-index    : 100001;
+	max-height : 80%;
+	overflow-y : scroll;
+}
+
+#update_box h2 {
+	font-weight : bold;
+	font-size   : 1.5em;
+}
+
+#update_box p {
+	padding-left   : 5%;
+	padding-right  : 5%;
+	padding-top    : 15px;
+	padding-bottom : 15px;
+}
+
+#update_overlay {
+	position         : fixed;
+	background-color : #000;
+	width            : 100%;
+	height           : 100%;
+	top              : 0;
+	left             : 0;
+	opacity          : 0.6;
+	z-index          : 100000;
+}
+
+p, h2, label, .emptyinfo {
+	color : #555;
+}
+
+tr {
+	height : 40px !important;
+}
+
+tr:hover,
+tr.activerow {
+	background : #f8f8fa !important;
+}
+
+#CategoriesTableContent tr:hover {
+	background : #fff !important;
+}
+
+#loading {
+	position            : fixed;
+	top                 : 40%;
+	left                : 45%;
+	height              : 70px;
+	width               : 20%;
+	background-color    : #fff;
+	background-size     : 32px;
+	background-position : center bottom;
+	text-align          : center;
+}
+
+#loading_text {
+	font-weight : bold;
+	font-size   : 1.2em;
+}
+
+#PasswordsTable,
+#ShareUsersTable {
+	display : none;
+}
+
+.btn_commands_inline,
+.btn_commands_newline,
+#commands_popup {
+	display : none;
+}
+
+#commands_popup {
+	position         : fixed;
+	width            : 200px;
+	border           : 1px solid #bbb;
+	background-color : #eee;
+	text-align       : center;
+	z-index          : 200;
+	border-radius    : 3px;
+}
+
+#commands_popup input {
+	width        : 90px;
+	margin-right : 3px !important;
+	margin-left  : 3px !important;
+	border: 1px solid #dbdbdb;
+}
+
+#commands_popup input:hover {
+	border-color: #0057ae;
+}
+
+tr > td:hover .btn_commands_inline,
+tr.activerow > td .btn_commands_inline {
+	display  : block;
+	position : absolute;
+	top      : 0;
+	right    : 5px;
+}
+
+tr > td:nth-child(4):hover .btn_commands_inline,
+tr.activerow > td:nth-child(4) .btn_commands_inline,
+tr > td:nth-child(5):hover .btn_commands_inline,
+tr.activerow > td:nth-child(5) .btn_commands_inline {
+	display  : inline-block;
+	position : static;
+}
+
+tr:hover > td .btn_commands_newline,
+tr.activerow > td .btn_commands_newline {
+	display : block;
+}
+
+td.green:hover > span,
+td.red:hover > span,
+td.orange:hover > span,
+tr.activerow > .green span,
+tr.activerow > .red span,
+tr.activerow > .orange span {
+	display : none;
+}
+
+td[type="loginname"]:hover,
+td[type="pass"]:hover {
+	cursor : pointer;
+}
+
+.btn_commands_open {
+	background : url(../../../core/img/actions/settings.svg) no-repeat center center;
+	width      : 36px !important;
+}
+
+#cmd_id,
+#cmd_type,
+#cmd_value,
+#cmd_website,
+#cmd_loginname,
+#cmd_pass,
+#cmd_notes,
+#cmd_sharedwith,
+#cmd_category,
+#cmd_address {
+	display : none;
+}
+
+#zeroclipboard_copied {
+	display       : none;
+	position      : fixed;
+	left          : 40%;
+	width         : 30%;
+	top           : 7px;
+	text-align    : center;
+	font-size     : 1.1em;
+	font-weight   : bold;
+	background    : #fff;
+	border-radius : 10px;
+	padding       : 5px;
+	z-index       : 999999;
+}
+
+#copied_text {
+	color : #1d2d44; /*header colour of core*/
+}
+
+#CategoriesTableContent .icon-delete,
+#PasswordsTableContent .icon-delete,
+#PasswordsTableContent .icon-category,
+#PasswordsTableContent .icon-notes,
+#PasswordsTableContent .icon-history,
+#PasswordsTableContent .icon-info,
+#PasswordsTableContent .icon-share {
+	opacity : 0.3;
+}
+
+#PasswordsTableContent .icon-public {
+	opacity : 0.6;
+}
+
+#CategoriesTableContent .icon-delete:hover,
+#PasswordsTableContent .icon-delete:hover,
+#PasswordsTableContent .cell_category:hover,
+#PasswordsTableContent .category:hover,
+#PasswordsTableContent .icon-category:hover,
+#PasswordsTableContent .icon-notes:hover,
+#PasswordsTableContent .icon-history:hover,
+#PasswordsTableContent .icon-info:hover,
+#PasswordsTableContent .icon-share:hover,
+#PasswordsTableContent .icon-shared:hover,
+#PasswordsTableContent .icon-public:hover,
+.sharedto_count:hover,
+.sharedto_count span:hover {
+	opacity : 1;
+	cursor  : pointer;
+}
+
+#PasswordsTableContent .icon-category,
+#PasswordsTableContent .icon-notes,
+#PasswordsTableContent .icon-info,
+#PasswordsTableContent .icon-history,
+#PasswordsTableContent .icon-share,
+#PasswordsTableContent .icon-shared,
+#PasswordsTableContent .icon-public,
+#PasswordsTableContent .icon-delete {
+	background-size : 28px !important;
+}
+
+#new_value_popup label span:hover {
+	cursor : pointer;
+}
+
+.share_avatar,
+.share_avatar img {
+	display       : inline-block;
+	margin-right  : 5px;
+	margin-bottom : 4px;
+	border-radius : 50%;
+	padding-left  : 2px;
+	width         : 32px !important;
+	opacity       : 1 !important;
+	height        : 32px !important;
+}
+
+.share_avatar:hover,
+.share_avatar img:hover {
+	cursor : pointer;
+}
+
+.is_sharedby {
+	background-color : #fbfbfb;
+}
+
+.sharedto_count {
+	border           : 1px solid #555;
+	background-color : #555;
+	font-size        : 10px;
+	border-radius    : 50px;
+	text-align       : center;
+	height           : 22px;
+	margin-top       : 10%;
+	float            : right;
+	padding-left     : 5px;
+	padding-right    : 5px;
+	display          : none;
+}
+
+.is_sharedto {
+	display : block !important;
+}
+
+.sharedto_count span {
+	color : #fff !important;
+}
+
+#column_website,
+#column_username,
+#column_password {
+	width : 250px;
+}
+
+#column_strength {
+	width : 100px;
+}
+
+#column_datechanged {
+	width : 150px;
+}
+
+#column_category,
+#column_notes,
+#column_info,
+#column_share,
+#column_delete {
+	width : 30px;
+}
+
+.has-note {
+	opacity : 1 !important;
+}
+
+#PasswordsTableContent .icon-notes {
+	background-image : url(../img/notes.svg);
+}
+
+.icon-category {
+	background-image : url(../img/category.svg);
+}
+
+.icon-notes span,
+.icon-history span {
+	display : none;
+}
+
+.is_website a {
+	color : #00a !important;
+}
+
+.is_website a:hover {
+	text-decoration : underline;
+}
+
+.edit_value {
+	margin-left    : 5px;
+	vertical-align : middle;
+	opacity        : 0.5;
+	visibility     : hidden;
+}
+
+td:hover > .edit_value {
+	visibility : visible;
+}
+
+.edit_value:hover {
+	opacity : 1;
+	cursor  : pointer;
+}
+
+.hide_always,
+#hide_always {
+	display : none;
+}
+
+.websitepic {
+	vertical-align : middle;
+	margin-right   : 5px;
+	margin-bottom  : 1px;
+}
+
+#app-settings-content {
+	overflow-y : scroll !important;
+	max-height : 400px;
+}
+
+#app-settings-content h3 {
+	margin-top    : 5px;
+	margin-bottom : 5px;
+	font-size     : 13px
+}
+
+#app-settings-content h3,
+#app-settings-content p {
+	color : #777;
+}
+
+#nav_buttons {
+	margin-top : 20px;
+}
+
+.nav-btn {
+	padding-left          : 30px;
+	background-size       : 20px 20px;
+	background-position   : left center;
+	background-position-x : 5px;
+	margin-left           : 5%;
+	width                 : 90%;
+	margin-top            : 5px;
+	margin-bottom         : 10px;
+}
+
+hr {
+	border           : 0;
+	color            : #eee;
+	background-color : #eee;
+	height           : 1px;
+}
+
+.icon-passwords {
+	background-image : url(../../img/app_black.svg);
+}
+
+.icon-passwords-blocked {
+	background-image : url(../../img/app_red.svg);
+}
+
+#auth_div {
+	background-image      : url(../../img/app_black.svg);
+	background-size       : 10%;
+	background-repeat     : no-repeat;
+	background-position   : center left;
+	background-position-x : 10%;
+	background-position   : center left+10%;
+	text-align            : center;
+	position              : absolute;
+	margin-left           : 10%;
+	margin-right          : 10%;
+	width                 : 80%;
+	top                   : 10%;
+	background-color      : #efefef;
+	padding               : 25px;
+}
+
+#auth_div h2 {
+	font-size     : 2.5em;
+	margin-top    : 25px;
+	margin-bottom : 25px;
+}
+
+#auth_div h3 {
+	font-size     : 1.5em;
+	font-weight   : normal;
+	margin-bottom : 2px;
+}
+
+#auth_div p {
+	margin-top : 25px;
+}
+
+#auth_pass {
+	font-size  : 1.5em;
+	width      : 50%;
+	text-align : center;
+}
+
+#auth_footer {
+	position   : absolute;
+	text-align : center;
+	width      : 100%;
+	bottom     : 20px;
+}
+
+#auth_btn {
+	transform    : scale(1.5);
+	margin-top   : 15px;
+	margin-right : 0px
+}
+
+#auth_timer {
+	width        : 40px !important;
+	text-align   : center;
+	margin-right : 0px;
+}
+
+#extra_password {
+	width       : 90%;
+	margin-left : 5%;
+}
+
+#new_masterkey1,
+#new_masterkey2 {
+	width : 95%;
+}
+
+#div_master_password,
+#div_edit_master_password {
+	display : none;
+}
+
+#div_extra_auth_password,
+#div_master_password,
+#div_extra_auth_password,
+#div_edit_master_password {
+	margin-left : 5%;
+}
+
+#invalid_auth {
+	display          : none;
+	background-color : #a00;
+	color            : #fff;
+	width            : 30%;
+	margin-left      : 35%;
+	margin-top       : 0 !important;
+	font-weight      : bold;
+	padding          : 5px;
+	border-radius    : 5px;
+}
+
+#lock_btn {
+	display          : none;
+	width            : 90%;
+	margin-top       : 5px;
+	margin-left      : 5%;
+	background-color : #f7f7f7;
+	color            : #545454;
+	text-align       : center;
+	transition       : background-color 0.25s ease-in-out;
+}
+
+#lock_btn:hover {
+	background-color : #ff8080;
+}
+
+#add_password_div {
+	display : none;
+}
+
+#new_generate,
+#new_website,
+#new_address,
+#new_username,
+#new_password,
+#new_category select,
+#new_category p,
+#new_notes {
+	margin-left   : 1%;
+	margin-bottom : 1%;
+	width         : 90%;
+	height        : 28px;
+	padding-top   : 2px;
+}
+
+#new_generate {
+	margin-left : 33px;
+}
+
+#new_category,
+#new_category p {
+	display : inline;
+}
+
+#new_category p {
+	line-height : 2;
+	margin-left : 3% !important;
+}
+
+#new_category select {
+	height : 28px !important
+}
+
+#new_notes {
+	height : 52px !important;
+}
+
+.icon-rename {
+	margin-top : -45px;
+}
+
+#popupContent img {
+	width               : 4%;
+	opacity             : 0.5;
+	background-size     : 100%;
+	vertical-align      : middle;
+	margin-left         : 2%;
+	height              : 28px;
+	background-repeat   : no-repeat;
+	background-position : center center;
+}
+
+.password_field {
+	font-family : Consolas, Courier !important;
+	font-size   : 1.1em !important;
+}
+
+#generate_passwordtools label,
+#generate_strength {
+	margin-left : 10%;
+}
+
+#generate_strength {
+	text-align   : center;
+	margin-right : 10%;
+}
+
+#gen_length,
+#gen_length_popup {
+	width : 38px;
+}
+
+#generate_passwordtools {
+	display : none;
+}
+
+h3 {
+	color       : #555;
+	font-weight : bold;
+	text-align  : center;
+}
+
+#PasswordsTable table {
+	border : 0;
+	width  : 100%;
+}
+
+#PasswordsTable table th {
+	color          : #555;
+	font-weight    : bold;
+	border         : 0;
+	text-align     : center;
+	padding-bottom : 10px;
+	word-wrap      : break-word;
+}
+
+#PasswordsTable table th:hover {
+	cursor          : pointer;
+	text-decoration : underline;
+}
+
+#PasswordsTable table td {
+	color         : #555;
+	text-align    : left;
+	border        : 0;
+	border-bottom : 1px solid #ddd;
+	padding       : 5px;
+	position      : relative;
+}
+
+.is_deleted,
+.is_deleted td.icon-share,
+.is_deleted td.icon-shared,
+.is_deleted td.icon-public {
+	display : none;
+}
+
+#emptycontent {
+	display : none;
+}
+
+#emptytrashbin {
+	display    : none;
+	font-size  : 16px;
+	color      : #888;
+	position   : absolute;
+	text-align : center;
+	top        : 30%;
+	width      : 100%;
+}
+
+#emptytrashbin h2 {
+	font-size     : 22px;
+	margin-bottom : 10px;
+}
+
+#cleartrashbin {
+	text-align : center;
+	display    : none;
+}
+
+#cleartrashbin #delete_trashbin,
+#back_to_passwords {
+	font-weight  : bold !important;
+	padding      : 10px;
+	border-width : 3px !important;
+}
+
+#emptytrashbin [class^="icon-"],
+.emptytrashbin [class^="icon-"],
+#emptytrashbin [class*=" icon-"],
+.emptytrashbin [class*=" icon-"] {
+	background-size : 64px;
+	height          : 64px;
+	width           : 64px;
+	margin          : 0 auto 15px;
+	-ms-filter      : "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+	opacity         : .4;
+}
+
+#blockedcontent {
+	font-size   : 16px;
+	color       : #888;
+	position    : absolute;
+	text-align  : center;
+	top         : 30%;
+	width       : 75%;
+	margin-left : 12.5%;
+}
+
+#blockedcontent [class^="icon-"],
+#blockedcontent [class*=" icon-"] {
+	background-size : 64px;
+	height          : 64px;
+	width           : 64px;
+	margin          : 0 auto 15px;
+}
+
+#blockedcontent h2 {
+	font-size     : 22px;
+	margin-bottom : 10px;
+	color         : #a00;
+	font-weight   : bold;
+}
+
+.nav-cat-counter,
+#list_category #nav_category_list {
+	width : 175px !important;
+}
+
+#nav_category_list select {
+	padding-right : 5px !important;
+	max-width     : 150px;
+}
+
+#session_lifetime {
+	display : none;
+}
+
+#idleTimer {
+	width            : 50px;
+	height           : 50px;
+	right            : 10px;
+	bottom           : 10px;
+	border           : 2px solid #ddd;
+	background-color : #eee;
+}
+
+#idleTimer,
+#outerRing {
+	position      : fixed;
+	border-radius : 25px;
+	display       : none;
+	z-index       : 10000;
+}
+
+#explnSec {
+	position           : fixed;
+	bottom             : 70px;
+	right              : 0;
+	width              : 100px;
+	text-align         : center;
+	opacity            : 0;
+	-webkit-transition : all 150ms; /* for out */
+	transition         : all 150ms; /* for out */
+	z-index            : 10001;
+}
+
+#idleTimer:hover > #explnSec {
+	opacity            : 1;
+	-webkit-transition : all 400ms; /* for in */
+	transition         : all 400ms; /* for in */
+}
+
+#explnSec:hover {
+	opacity : 0 !important;
+}
+
+#outerRing {
+	animation : rotate 1s linear infinite;
+	width     : 40px;
+	height    : 40px;
+	right     : 15px;
+	bottom    : 15px;
+}
+
+#outerRing:before {
+	content       : '';
+	position      : absolute;
+	height        : 5px;
+	width         : 5px;
+	background    : #fff;
+	border-radius : 25px;
+	animation     : rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+	100% {
+		transform : rotate(360deg);
+	}
+}
+
+#countSec {
+	text-align : center;
+	margin-top : 25%;
+	font-size  : 16px;
+	color      : #999;
+}
+
+.green,
+.green span,
+green {
+	color : #0a0 !important;
+}
+
+.red,
+.red span,
+red {
+	color : #a00 !important;
+}
+
+.orange,
+.orange span,
+orange {
+	color : #c80 !important;
+}
+
+.hide_attributes {
+	display : none;
+}
+
+#PasswordsTableSearch {
+	width      : 90%;
+	margin     : 0 auto;
+	margin-top : 10px;
+}
+
+#PasswordsTableSearch p {
+	font-style : italic;
+}
+
+#search_text {
+	background   : #fff url(../../../core/img/actions/search.svg) no-repeat 6px center;
+	padding-left : 26px;
+	padding-top  : 3px;
+	width        : 100%;
+	height       : 30px;
+}
+
+#search_clear {
+	width : 100%;
+}
+
+/* hover on x days ago */
+.dateChanged {
+	font-weight : bold;
+}
+
+#app-settings-header {
+	border : 1px solid #eee !important;
+}
+
+#app-settings-backup {
+	/* Will be shown when backup_allowed is true */
+	/* This is a bugfix for IE7 and lower */
+	display : none;
+}
+
+#githubref,
+#githubref a {
+	color      : #555;
+	text-align : center;
+}
+
+#githubref a {
+	font-weight : bold;
+}
+
+#githubref a:hover {
+	text-decoration : underline;
+}
+
+#subtitle {
+	font-style    : italic;
+	margin-bottom : 5px;
+}
+
+#upload_csv {
+	color      : #555;
+	margin-top : 10px;
+	width      : 100%;
+}
+
+/* Editor */
+#overlay {
+	position           : absolute;
+	top                : -50%;
+	bottom             : 0;
+	left               : 0;
+	right              : 0;
+	width              : 100%;
+	height             : 150%;
+	z-index            : 9998;
+	background-color   : #000;
+	opacity            : 0;
+	-webkit-transition : all 300ms;
+	transition         : all 300ms;
+}
+
+#popup {
+	position           : fixed;
+	top                : 0;
+	left               : 50%;
+	width              : 500px;
+	margin-left        : -250px;
+	-webkit-transition : all 300ms;
+	transition         : all 300ms;
+	z-index            : 9999;
+	max-height         : 75%;
+	overflow-y         : auto;
+}
+
+#popupTitle {
+	width          : 100%;
+	height         : 63px;
+	background     : #102044;
+	color          : #fff;
+	font-size      : 2em;
+	vertical-align : middle;
+	padding        : 10px;
+	text-align     : center;
+	overflow       : hidden;
+}
+
+#popupSubTitle {
+	font-size  : 0.5em;
+	font-style : italic;
+}
+
+#popupContent {
+	width      : 100%;
+	height     : 75%;
+	background : #fff;
+	padding    : 10px;
+}
+
+#popupInvalid {
+	display : none;
+	color   : #a00;
+}
+
+#new_value_popup,
+#new_address_popup {
+	width : 100%;
+}
+
+#popupContent p {
+	margin-left  : 10px;
+	margin-right : 10px;
+}
+
+#popupContent .checkbox,
+#gen_length_popup,
+#new_generate_popup,
+#keep_old_popup,
+p#generate_strength_popup,
+#new_value_popup label {
+	margin-left  : 25px;
+	margin-right : 5px;
+}
+
+#keep_old_popup {
+	margin-top : 15px;
+}
+
+.share_scroll {
+	max-height : 250px;
+	overflow-y : scroll;
+}
+
+#accept,
+#cancel,
+#stop,
+#mail {
+	margin-top : 5px;
+}
+
+#accept,
+#cancel {
+	float : right;
+}
+
+#stop,
+#mail {
+	float                 : left;
+	padding-left          : 21px;
+	background-position-x : 3px;
+	background-size       : 16px;
+}
+
+#popupButtons {
+	width      : 100%;
+	height     : 40px;
+	background : #ddd;
+	padding    : 0px 10px;
+}
+
+/* sidebar */
+#passwordSidebar h3 {
+	background-color : #eee;
+	width            : 95%;
+	margin           : 0;
+	font-size        : 12px;
+}
+
+#passwordSidebar {
+	margin-left  : 12px;
+	margin-right : 8px;
+	background   : #fff;
+}
+
+#sidebarClose {
+	position    : absolute;
+	top         : 0;
+	height      : 20px;
+	width       : 25px;
+	right       : 8%;
+	font-size   : 16px;
+	line-height : 0;
+	font-weight : bold !important;
+	background  : #fff !important;
+	color       : #555 !important;
+}
+
+#sidebarRow {
+	display : none;
+}
+
+.content-wrapper-sidebar {
+	min-width : 0 !important;
+	width     : 80% !important;
+}
+
+#app-sidebar-wrapper {
+	width    : 17%;
+	height   : 100%;
+	float    : right;
+	position : fixed;
+	right    : 0;
+	display  : none;
+	z-index  : 1000;
+}
+
+.leftCol,
+.rightCol {
+	float   : left;
+	display : inline;
+}
+
+.leftCol {
+	width : 40%;
+}
+
+.rightCol {
+	width : 60%;
+}
+
+#sidebarNotes,
+#sidebarCategories {
+	width      : 90%;
+	background : transparent !important;
+	resize     : none;
+	border     : 0 !important;
+	padding    : 0;
+}
+
+#sidebarNotes {
+	font-style  : italic;
+	height      : 1000px;
+	margin-left : 10px;
+}
+
+#sidebarNotes:hover,
+#sidebarCategories:hover {
+	border : 0 !important;
+}
+
+#sidebarWebsiteHeader,
+#sidebarAddressHeader,
+#sidebarUsernameHeader,
+#sidebarWebsite,
+#sidebarAddress,
+#sidebarUsername {
+	max-width     : 95%;
+	text-overflow : ellipsis;
+	overflow      : hidden;
+	white-space   : nowrap;
+}
+
+#sidebarUsername,
+#sidebarChanged,
+#sidebarSpecial {
+	margin-bottom : 20px;
+}
+
+#sidebarChanged {
+	line-height : 1.1;
+}
+
+#section_categories {
+	display     : none;
+	margin-left : 40px;
+}
+
+h2 {
+	font-size     : 1.2em;
+	margin-top    : 25px;
+	margin-bottom : 5px;
+}
+
+#emptycategories {
+	display : none;
+}
+
+#cat_add {
+	padding-left  : 7px;
+	padding-right : 7px;
+}
+
+#cat_colour {
+	display : none;
+}
+
+#cat_name {
+	width : 150px;
+}
+
+#CategoriesTableContent td.icon-delete {
+	width           : 26px;
+	background-size : contain;
+}
+
+#CategoriesTableContent .category {
+	padding       : 10px;
+	margin        : 2px;
+	border-radius : 15px;
+	min-width     : 150px;
+	text-align    : center;
+	font-weight   : bold;
+	font-size     : 1.2em;
+}
+
+#PasswordsTableContent .category {
+	border-radius : 15px;
+	max-width     : 150px;
+	text-align    : center;
+	font-weight   : bold;
+}
+
+.category_colorpicker {
+	background : #eee !important;
+	border     : 1px solid #555 !important;
+	margin-top : -5px !important;
+}
+
+.sp-replacer.sp-light.category_colorpicker {
+	background   : white !important;
+	border-color : #bbb !important;
+}
+
+.category_colorpicker .sp-thumb-el:hover,
+.category_colorpicker .sp-thumb-active {
+	border-color : #555 !important;
+}
+
+.category_colorpicker .sp-picker-container {
+	border-left : 1px solid #999 !important;
+}
+
+.category_colorpicker .sp-palette-container {
+	border : 0 !important;
+}
+
+.category_colorpicker .sp-dd:hover,
+.category_colorpicker .sp-replacer:hover,
+.category_colorpicker .sp-preview:hover,
+.category_colorpicker .sp-preview-inner:hover,
+.category_colorpicker .sp-alpha-inner:hover,
+.category_colorpicker .sp-thumb-inner:hover {
+	cursor : pointer !important;
+}
+
+/* old */
+#app-content-wrapper {
+	height : 100%;
+}
+
+/* hide if screen too small */
+@media screen and (max-width : 1150px) {
+	/* sidebar */
+	#column_info, .icon-info, #app-sidebar-wrapper {
+		display : none !important;
+	}
+
+	.content-wrapper-sidebar {
+		min-width : 100% !important;
+		width     : 100% !important;
+	}
+
+	#column_datechanged, .cell_datechanged {
+		display : none;
+	}
+
+	#column_category, .cell_category {
+		display : none;
+	}
+}
+
+@media screen and (max-width : 1000px) {
+	#column_strength, .cell_strength {
+		display : none;
+	}
+}
+
+@media screen and (max-width : 600px) {
+	/* mobile phone etc. */
+	#column_website,
+	#column_username,
+	#column_password {
+		width : 25%;
+	}
+
+	#PasswordsTable table {
+		table-layout : fixed;
+		font-size    : 85%;
+	}
+
+	#PasswordsTable table td {
+		word-wrap : break-word;
+	}
+
+	#popup {
+		top         : 10% !important;
+		left        : 10% !important;
+		width       : 80% !important;
+		margin-left : 0px !important;
+	}
+
+	#popupContent img {
+		display : none;
+	}
+
+	#popupContent input[type="text"]:not(#gen_length):not(#gen_length_popup),
+	#popupContent input[type="button"],
+	#popupContent textarea,
+	#popupContent select {
+		margin-left   : 2%;
+		width         : 96%;
+		margin-bottom : 1%;
+	}
+
+	#popupTitle {
+		font-size : 1.5em;
+	}
+
+	#PasswordsTableContent .icon-category,
+	#PasswordsTableContent .icon-notes,
+	#PasswordsTableContent .icon-info,
+	#PasswordsTableContent .icon-history,
+	#PasswordsTableContent .icon-share,
+	#PasswordsTableContent .icon-shared,
+	#PasswordsTableContent .icon-public,
+	#PasswordsTableContent .icon-delete {
+		background-size : 20px !important;
+	}
+
+	.websitepic {
+		height : 20px;
+		width  : 20px;
+	}
+}
+
+@media screen and (max-width : 450px) {
+	/* mobile phone etc. */
+	#PasswordsTable table {
+		font-size : 70%;
+	}
+
+	#commands_popup {
+		width : 90px;
+	}
+
+	.websitepic {
+		height : 16px;
+		width  : 16px;
+	}
+}
+
+@media screen and (max-width : 450px) {
+	/* mobile phone etc. */
+	#PasswordsTable table thead {
+		display : none;
+	}
+
+	#PasswordsTable table tr {
+		height        : auto !important;
+		display       : block;
+		border-bottom : 5px solid #ddd;
+	}
+
+	#PasswordsTable table td {
+		display     : block;
+		width       : 100%;
+		height      : 40px;
+		font-size   : 1.7em;
+		line-height : 30px;
+		text-align  : center;
+	}
+
+	#PasswordsTable table td[class^=icon-] {
+		display : inline-block;
+		width   : 25%;
+	}
+
+	#PasswordsTableContent .category {
+		margin      : 0 auto;
+		height      : 30px;
+		line-height : 30px;
+	}
+
+	td:nth-child(1) .btn_commands_inline,
+	td:nth-child(2) .btn_commands_inline,
+	td:nth-child(3) .btn_commands_inline {
+		display  : block;
+		position : absolute;
+		top      : 0;
+		right    : 5px;
+	}
+}

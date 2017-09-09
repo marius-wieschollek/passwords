@@ -1,0 +1,454 @@
+$color-green : #00994d;
+$color-red : #f33;
+$color-yellow : #fc0;
+$color-black : #000;
+$color-grey-dark : #6e6e6e;
+$color-grey : #b1b1b1;
+$color-grey-light : #dbdbdb;
+$color-grey-lighter : #eee;
+$color-white : #fff;
+
+.passwords {
+    @import "FontAwesome/scss/font-awesome";
+
+    [data-constant="constant"] {
+        display : none;
+    }
+
+    .passwords-browser-compatibility {
+        position         : absolute;
+        top              : 0;
+        left             : 0;
+        bottom           : 0;
+        right            : 0;
+        background-color : rgba(0, 0, 0, 0.7);
+        z-index          : 3001;
+
+        .title,
+        .message {
+            background    : $color-yellow;
+            color         : $color-black;
+            margin        : 25px auto 0;
+            padding       : 25px;
+            max-width     : 1000px;
+            font-size     : 1rem;
+            text-align    : center;
+            border-radius : 3px;
+        }
+        .title {
+            background     : #bf0303;
+            color          : $color-white;
+            font-size      : 1.25rem;
+            text-transform : uppercase;
+        }
+        .browser {
+            margin    : 25px auto 0;
+            padding   : 25px;
+            font-size : 1.25rem;
+            width     : 850px;
+
+            a {
+                display         : block;
+                width           : 200px;
+                padding         : 225px 20px 20px;
+                float           : left;
+                background      : no-repeat center 25px;
+                background-size : 150px;
+                text-align      : center;
+                border-radius   : 3px;
+
+                &:hover {
+                    background      : #00994d no-repeat center 10px;
+                    background-size : 180px;
+                }
+
+                @media (max-width : 649px) {
+                    width  : 360px;
+                    margin : 0 auto 25px;
+                    float  : none;
+                }
+            }
+        }
+    }
+
+    #app-navigation {
+        li {
+            line-height   : 44px;
+            padding       : 0 12px;
+            white-space   : nowrap;
+            text-overflow : ellipsis;
+            color         : $color-grey-dark;
+            cursor        : pointer;
+
+            &:hover,
+            &:active { color : $color-black; }
+
+            &:before {
+                font-family   : FontAwesome, sans-serif;
+                font-size     : 1.2rem;
+                padding-right : 10px;
+                position      : relative;
+                bottom        : -2px;
+            }
+
+            &.nav-icon-all:before { content : "\f0ac"; }
+            &.nav-icon-folders:before { content : "\f07b"; }
+            &.nav-icon-recent:before { content : "\f017"; }
+            &.nav-icon-tags:before { content : "\f02b"; }
+            &.nav-icon-security:before { content : "\f132"; }
+            &.nav-icon-shared:before { content : "\f1e0"; }
+            &.nav-icon-favourites:before { content : "\f005"; }
+            &.nav-icon-trash:before { content : "\f014"; }
+        }
+    }
+
+    #controls .actions.creatable {
+        margin-left : 10px;
+        display     : inline-block;
+        position    : relative;
+
+        .newPasswordMenu {
+            max-height : 0;
+            margin     : 0;
+            overflow   : hidden;
+            transition : max-height 0.25s ease-in-out;
+        }
+
+        &.active .newPasswordMenu {
+            overflow   : visible;
+            max-height : 75px;
+            animation  : 0.25s delay-overflow;
+        }
+    }
+
+    #content {
+        position   : relative;
+        top        : 44px;
+        border-top : 1px solid $color-grey-lighter;
+
+        .content-list {
+            .row {
+                height        : 51px;
+                font-size     : 0;
+                border-bottom : 1px solid $color-grey-lighter;
+                cursor        : pointer;
+
+                .favourite {
+                    line-height : 50px;
+                    width       : 40px;
+                    text-align  : center;
+                    color       : $color-grey-light;
+                    font-size   : 1rem;
+
+                    &:hover,
+                    &.active {
+                        color : $color-yellow;
+                    }
+                }
+
+                .favicon {
+                    display         : inline-block;
+                    background      : no-repeat center;
+                    background-size : 32px;
+                    line-height     : 50px;
+                    width           : 50px;
+                    font-size       : 1rem;
+                    cursor          : pointer;
+                }
+
+                .title {
+                    font-size    : 0.8rem;
+                    padding-left : 8px;
+                    cursor       : pointer;
+                }
+
+                .more,
+                .security {
+                    float       : right;
+                    line-height : 50px;
+                    width       : 50px;
+                    font-size   : 1rem;
+                    text-align  : center;
+
+                    &.ok {
+                        color : $color-green;
+                    }
+                    &.warn {
+                        color : $color-yellow;
+                    }
+                    &.fail {
+                        color : $color-red;
+                    }
+                }
+
+                .more {
+                    position : relative;
+                    color    : $color-grey;
+
+                    > i {
+                        cursor : pointer;
+
+                        &:active,
+                        &:hover {
+                            color            : $color-black;
+                        }
+                    }
+
+                    .menu {
+                        li {
+                            line-height : 40px;
+                            font-size   : 0.8rem;
+                            padding     : 0 20px 0 15px;
+                            white-space : nowrap;
+                            color       : $color-grey-dark;
+                            cursor      : pointer;
+
+                            a { color : $color-grey-dark; }
+
+                            i {
+                                margin-right : 10px;
+                                font-size    : 1rem;
+                                width        : 1rem;
+                                text-align   : center;
+                                position     : relative;
+                                bottom       : -0.1rem;
+                                cursor       : pointer;
+                            }
+
+                            span {
+                                font-weight : 300;
+                                cursor      : pointer;
+                            }
+
+                            &:active,
+                            &:hover {
+                                background-color : darken($color-white, 3);
+                                color            : $color-black;
+
+                                a { color : $color-black; }
+                            }
+                        }
+                    }
+                }
+
+                .date {
+                    float       : right;
+                    line-height : 50px;
+                    font-size   : 0.8rem;
+                    padding     : 0 15px 0 5px;
+                    color       : $color-grey-dark;
+                }
+
+                &:active,
+                &:hover {
+                    background-color : darken($color-white, 3);
+
+                    .favourite {
+                        color : darken($color-grey-light, 3);
+
+                        &:hover,
+                        &.active {
+                            color : $color-yellow;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .foldout-container {
+        .foldout-title {
+            cursor        : pointer;
+            font-size     : 1.1rem;
+            padding       : 1rem 0 0.25rem 0;
+            border-bottom : 1px solid transparent;
+            transition    : border-color 0.25s ease-in-out;
+
+            .fa-chevron-right {
+                font-size   : 0.9rem;
+                margin-left : 3px;
+                transition  : transform 0.25s ease-in-out;
+            }
+        }
+
+        .foldout-content {
+            max-height : 0;
+            overflow   : hidden;
+            transition : max-height 0.25s ease-in-out;
+        }
+
+        &.open {
+
+            .foldout-title {
+                border-color : $color-grey-light;
+
+                .fa-chevron-right {
+                    transform : rotate(90deg);
+                }
+            }
+
+            .foldout-content {
+                max-height : 250px;
+            }
+        }
+    }
+
+    #app-popup {
+        .background {
+            position         : fixed;
+            top              : 0;
+            left             : 0;
+            width            : 100%;
+            height           : 100%;
+            background-color : rgba(0, 0, 0, 0.7);
+            z-index          : 3001;
+
+            .window {
+                position              : fixed;
+                top                   : 6%;
+                left                  : 15%;
+                width                 : 70%;
+                height                : 88%;
+                z-index               : 9999;
+                overflow              : hidden;
+                background-color      : $color-white;
+                border-radius         : 3px;
+                box-sizing            : border-box;
+                display               : grid;
+                grid-template-columns : 100%;
+                grid-template-areas   : "title" "content";
+                grid-template-rows    : 3.25rem auto;
+                justify-items         : stretch;
+                align-items           : stretch;
+
+                .title {
+                    grid-area : title;
+                    padding   : 1rem;
+                    font-size : 1.25rem;
+
+                    .close {
+                        float  : right;
+                        cursor : pointer;
+                    }
+                }
+
+                .content {
+                    grid-area : content;
+                    overflow  : auto;
+                }
+            }
+        }
+
+        #passwords-create-new {
+            .content {
+                display               : grid;
+                grid-template-columns : 1fr 1fr;
+                grid-template-rows    : 9fr 1fr;
+                grid-template-areas   : "form notes" "controls notes";
+                grid-column-gap       : 15px;
+                padding               : 15px;
+
+                .form {
+                    grid-area : form;
+
+                    .form-grid {
+                        display               : grid;
+                        grid-template-columns : auto 3fr;
+                        grid-template-rows    : 1fr;
+                        grid-row-gap          : 5px;
+                        justify-items         : left;
+                        align-items           : end;
+
+                        .tags-container,
+                        .foldout-container {
+                            grid-column  : 1 / span 2;
+                            justify-self : stretch;
+                        }
+
+                        label {
+                            padding : 0 0.9rem 5px 0;
+                        }
+                    }
+
+                    .section-title {
+                        font-size     : 1.1rem;
+                        padding       : 0 0 0.25rem 0;
+                        border-bottom : 1px solid $color-grey-light;
+                    }
+
+                    .password-field {
+                        display   : block;
+                        width     : 100%;
+                        max-width : 275px;
+                        position  : relative;
+
+                        input {
+                            max-width : initial;
+                        }
+
+                        .icons {
+                            position    : absolute;
+                            top         : 0;
+                            right       : 3px;
+                            bottom      : 0;
+                            display     : flex;
+                            align-items : center;
+
+                            i.fa {
+                                font-size : 1rem;
+                                cursor    : pointer;
+                                margin    : 3px;
+                            }
+                        }
+                    }
+
+                    label {
+                        display   : block;
+                        font-size : 0.9rem;
+                    }
+
+                    input[type=text],
+                    input[type=password] {
+                        cursor    : text;
+                        width     : 100%;
+                        max-width : 275px;
+                    }
+
+                    select {
+                        width     : 100%;
+                        max-width : 275px;
+                    }
+                }
+
+                .notes {
+                    grid-area : notes;
+
+                    label {
+                        font-size     : 1.1rem;
+                        padding       : 0 0 0.25rem 0;
+                        border-bottom : 1px solid $color-grey-light;
+                        display       : block;
+                        margin-bottom : 0.25rem;
+                        cursor        : default;
+                    }
+                }
+
+                .controls {
+                    grid-area  : controls;
+                    align-self : end;
+
+                    input {
+                        width     : 100%;
+                        font-size : 1.1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes delay-overflow {
+    0% { overflow : hidden; }
+    99% { overflow : hidden; }
+    100% { overflow : visible; }
+}
