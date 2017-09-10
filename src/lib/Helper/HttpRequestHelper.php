@@ -26,6 +26,11 @@ class HttpRequestHelper {
     protected $post;
 
     /**
+     * @var array
+     */
+    protected $header;
+
+    /**
      * @param string $url
      *
      * @return HttpRequestHelper
@@ -48,6 +53,17 @@ class HttpRequestHelper {
     }
 
     /**
+     * @param array $header
+     *
+     * @return HttpRequestHelper
+     */
+    public function setHeader(array $header): HttpRequestHelper {
+        $this->header = $header;
+
+        return $this;
+    }
+
+    /**
      * @param string|null $url
      *
      * @return bool|mixed
@@ -61,6 +77,15 @@ class HttpRequestHelper {
         if(!empty($this->post)) {
             curl_setopt($ch, CURLOPT_POST, 2);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->post));
+        }
+        if(!empty($this->header)) {
+            $header = [];
+
+            foreach ($this->header as $key => $value) {
+                $header[] = "{$key}: {$value}";
+            }
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         }
 
         $response = curl_exec($ch);
