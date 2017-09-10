@@ -8,9 +8,11 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\PasswordGenerationHelper;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\PageShotService;
+use OCA\Passwords\Services\PasswordGenerationService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
@@ -26,7 +28,7 @@ class ServiceApiController extends AbstractApiController {
     /**
      * @var PasswordGenerationHelper
      */
-    protected $passwordCreationHelper;
+    protected $passwordGenerationService;
 
     /**
      * @var FaviconService
@@ -40,18 +42,18 @@ class ServiceApiController extends AbstractApiController {
     /**
      * PasswordApiController constructor.
      *
-     * @param string                   $appName
-     * @param IRequest                 $request
-     * @param FaviconService           $faviconService
-     * @param PageShotService          $previewService
-     * @param PasswordGenerationHelper $passwordCreationHelper
+     * @param string                    $appName
+     * @param IRequest                  $request
+     * @param FaviconService            $faviconService
+     * @param PageShotService           $previewService
+     * @param PasswordGenerationService $passwordGenerationService
      */
     public function __construct(
         $appName,
         IRequest $request,
         FaviconService $faviconService,
         PageShotService $previewService,
-        PasswordGenerationHelper $passwordCreationHelper
+        PasswordGenerationService $passwordGenerationService
     ) {
         parent::__construct(
             $appName,
@@ -61,9 +63,9 @@ class ServiceApiController extends AbstractApiController {
             1728000
         );
 
-        $this->faviconService         = $faviconService;
-        $this->passwordCreationHelper = $passwordCreationHelper;
-        $this->previewService = $previewService;
+        $this->faviconService            = $faviconService;
+        $this->passwordGenerationService = $passwordGenerationService;
+        $this->previewService            = $previewService;
     }
 
     /**
@@ -74,10 +76,14 @@ class ServiceApiController extends AbstractApiController {
      */
     public function generatePassword(): JSONResponse {
 
-        list($password, $words) = $this->passwordCreationHelper->create(1, false, false, false);
+        try {
+            list($password, $words) = $this->passwordGenerationService->getPassword(1, false, false, false);
 
-        if(empty($password)) {
-            return $this->createErrorResponse(new \Exception('Unable to create password'));
+            if(empty($password)) {
+                throw new ApiException('Unable to create password');
+            }
+        }catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
         }
 
         return $this->createResponse(
@@ -104,6 +110,7 @@ class ServiceApiController extends AbstractApiController {
      */
     public function getFavicon(string $domain, int $size = 24) {
         $file = $this->faviconService->getFavicon($domain, $size);
+
         return new FileDisplayResponse(
             $file,
             Http::STATUS_OK,
@@ -125,6 +132,7 @@ class ServiceApiController extends AbstractApiController {
     public function getPreview(string $domain, string $view = 'desktop', int $width = 550, int $height = 0) {
 
         $file = $this->previewService->getPreview($domain, $view, $width, $height);
+
         return new FileDisplayResponse(
             $file,
             Http::STATUS_OK,

@@ -90,11 +90,11 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
-     * @param $url
+     * @param string $url
      *
      * @return mixed
      */
-    protected function getHttpRequest($url) {
+    protected function getHttpRequest(string $url) {
         $request = new HttpRequestHelper();
         $request->setUrl($url);
 
