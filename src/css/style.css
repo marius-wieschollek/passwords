@@ -1805,8 +1805,10 @@
       .passwords #content .item-list .row .date {
         float: right;
         line-height: 50px;
+        width: 85px;
         font-size: 0.8rem;
         padding: 0 15px 0 5px;
+        text-align: right;
         color: #6e6e6e; }
       .passwords #content .item-list .row:active, .passwords #content .item-list .row:hover {
         background-color: #f7f7f7; }

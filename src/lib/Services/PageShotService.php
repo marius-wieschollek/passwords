@@ -12,7 +12,9 @@ use Gmagick;
 use Imagick;
 use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
 use OCA\Passwords\Helper\PageShot\DefaultHelper;
+use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
+use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Image;
@@ -27,9 +29,11 @@ class PageShotService {
     const VIEWPORT_DESKTOP = 'desktop';
     const VIEWPORT_MOBILE  = 'mobile';
 
-    const SERVICE_SCREEN_SHOT_LAYER = 'sl';
-    const SERVICE_WKHTML            = 'wkhtml';
-    const SERVICE_DEFAULT           = 'default';
+    const SERVICE_SCREEN_SHOT_LAYER   = 'ssl';
+    const SERVICE_SCREEN_SHOT_MACHINE = 'ssm';
+    const SERVICE_SCREEN_SHOT_API     = 'ssa';
+    const SERVICE_WKHTML              = 'wkhtml';
+    const SERVICE_DEFAULT             = 'default';
 
     /**
      * @var FileCacheService
@@ -148,8 +152,12 @@ class PageShotService {
         switch ($this->config->getUserValue('service/pageshot', self::SERVICE_WKHTML)) {
             case self::SERVICE_WKHTML:
                 return new WkhtmlImageHelper($this->fileCacheService);
+            case self::SERVICE_SCREEN_SHOT_API:
+                return new ScreenShotApiHelper($this->fileCacheService, $this->config);
             case self::SERVICE_SCREEN_SHOT_LAYER:
                 return new ScreenShotLayerHelper($this->fileCacheService, $this->config);
+            case self::SERVICE_SCREEN_SHOT_MACHINE:
+                return new ScreenShotMachineHelper($this->fileCacheService, $this->config);
             case self::SERVICE_DEFAULT:
                 return new DefaultHelper($this->fileCacheService);
         }

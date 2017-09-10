@@ -130,16 +130,16 @@ $color-white : #fff;
         justify-items         : stretch;
         align-items           : stretch;
         transition            : grid-template-columns 0.5s ease-in-out;
-        margin-top: -1px;
+        margin-top            : -1px;
 
         .content-left {
             grid-area  : left;
             margin-top : 44px;
         }
         .content-right {
-            grid-area : right;
-            z-index   : 50;
-            border-left: 1px solid $color-grey-light
+            grid-area   : right;
+            z-index     : 50;
+            border-left : 1px solid $color-grey-light
         }
 
         &.show-details {
@@ -254,8 +254,10 @@ $color-white : #fff;
                 .date {
                     float       : right;
                     line-height : 50px;
+                    width       : 85px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
+                    text-align: right;
                     color       : $color-grey-dark;
                 }
 
@@ -277,13 +279,13 @@ $color-white : #fff;
 
         .item-details {
             .image-container {
-                height: 290px;
-                overflow: hidden;
+                height   : 290px;
+                overflow : hidden;
 
                 img {
-                    width: 100%;
-                    margin-top: 0;
-                    transition            : margin-top 10s ease-in-out;
+                    width      : 100%;
+                    margin-top : 0;
+                    transition : margin-top 10s ease-in-out;
                 }
             }
         }
