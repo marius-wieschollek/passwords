@@ -17,10 +17,12 @@ use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\RevisionMapper;
 use OCA\Passwords\Helper\PasswordApiObjectHelper;
 use OCA\Passwords\Helper\PasswordGenerationHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\PasswordService;
+use OCA\Passwords\Services\PreviewService;
 use OCA\Passwords\Services\RevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\App;
@@ -105,6 +107,7 @@ class Application extends App {
                 $c->query('AppName'),
                 $c->query('Request'),
                 $c->query('FaviconService'),
+                $c->query('PreviewService'),
                 $c->query('PasswordGenerationHelper')
             );
         });
@@ -159,6 +162,19 @@ class Application extends App {
         $container->registerService('FaviconService', function (IAppContainer $c) {
             return new FaviconService(
                 $c->query('FileCacheService')
+            );
+        });
+        $container->registerService('PreviewService', function (IAppContainer $c) {
+            return new PreviewService(
+                $c->query('FileCacheService')
+            );
+        });
+        $container->registerService('ConfigurationService', function (IAppContainer $c) {
+            $server = $this->getContainer()->getServer();
+
+            return new ConfigurationService(
+                $server->getUserSession()->getUser()->getUID(),
+                $server->getConfig()
             );
         });
 

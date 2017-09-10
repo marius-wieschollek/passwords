@@ -160,28 +160,6 @@ class EnhancedApi extends SimpleApi {
     }
 
     /**
-     * Loads a favicon blob over the favicon service
-     *
-     * @param host
-     * @param size
-     * @returns {Promise}
-     */
-    getFavicon(host, size = 24) {
-        return super.getFavicon(host, size);
-    }
-
-    /**
-     * Returns the URL which retrieves the favicon with the given settings
-     *
-     * @param host
-     * @param size
-     * @returns {Promise}
-     */
-    getFaviconUrl(host, size = 32) {
-        return super.getFaviconUrl(host, size);
-    }
-
-    /**
      *
      * @param message
      * @returns {Promise}
@@ -201,9 +179,12 @@ class EnhancedApi extends SimpleApi {
             let password = data[i];
 
             if(password.url) {
-                password.icon = this.getFaviconUrl(SimpleApi.parseUrl(password.url, 'host'))
+                let host = SimpleApi.parseUrl(password.url, 'host');
+                password.icon = this.getFaviconUrl(host);
+                password.image = this.getPreviewUrl(host);
             } else {
-                password.icon = this.getFaviconUrl(null)
+                password.icon = this.getFaviconUrl(null);
+                password.image = this.getPreviewUrl(null);
             }
 
             switch(password.secure) {
