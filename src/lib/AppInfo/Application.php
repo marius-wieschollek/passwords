@@ -21,8 +21,9 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\PasswordService;
 use OCA\Passwords\Services\PageShotService;
+use OCA\Passwords\Services\PasswordGenerationService;
+use OCA\Passwords\Services\PasswordService;
 use OCA\Passwords\Services\RevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\App;
@@ -108,7 +109,7 @@ class Application extends App {
                 $c->query('Request'),
                 $c->query('FaviconService'),
                 $c->query('PageShotService'),
-                $c->query('PasswordGenerationHelper')
+                $c->query('PasswordGenerationService')
             );
         });
 
@@ -195,7 +196,7 @@ class Application extends App {
         $container->registerAlias('AppData', IAppData::class);
         $container->registerAlias('ValidationService', ValidationService::class);
         $container->registerAlias('EncryptionService', EncryptionService::class);
-        $container->registerAlias('PasswordGenerationHelper', PasswordGenerationHelper::class);
+        $container->registerAlias('PasswordGenerationService', PasswordGenerationService::class);
     }
 
 }
