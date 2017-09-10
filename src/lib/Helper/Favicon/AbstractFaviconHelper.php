@@ -51,8 +51,7 @@ abstract class AbstractFaviconHelper {
         }
 
         $url         = $this->getFaviconUrl($domain);
-        $apiRequest  = $this->getHttpRequest($url);
-        $faviconData = $this->sendApiRequest($apiRequest);
+        $faviconData  = $this->getHttpRequest($url);
 
         if($faviconData === null) {
             return $this->getDefaultFavicon();
@@ -93,30 +92,13 @@ abstract class AbstractFaviconHelper {
     /**
      * @param $url
      *
-     * @return HttpRequestHelper
+     * @return mixed
      */
-    protected function getHttpRequest($url): HttpRequestHelper {
+    protected function getHttpRequest($url) {
         $request = new HttpRequestHelper();
         $request->setUrl($url);
 
-        return $request;
-    }
-
-    /**
-     * @param $apiRequest
-     *
-     * @return null
-     */
-    protected function sendApiRequest(HttpRequestHelper $apiRequest) {
-        $retries = 0;
-        while ($retries < 5) {
-            $result = $apiRequest->send();
-
-            if($result != null) return $result;
-            $retries++;
-        }
-
-        return null;
+        return $request->sendWithRetry();
     }
 
     /**
