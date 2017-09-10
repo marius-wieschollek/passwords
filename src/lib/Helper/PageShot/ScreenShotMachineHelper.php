@@ -17,12 +17,12 @@ use OCA\Passwords\Services\PageShotService;
  *
  * @package OCA\Passwords\Helper\PageShot
  */
-class ScreenShotLayerHelper extends AbstractPageShotHelper {
+class ScreenShotMachineHelper extends AbstractPageShotHelper {
 
     /**
      * @var string
      */
-    protected $prefix = 'ssl';
+    protected $prefix = 'ssm';
 
     /**
      * @var ConfigurationService
@@ -47,12 +47,12 @@ class ScreenShotLayerHelper extends AbstractPageShotHelper {
      * @return string
      */
     protected function getPageShotUrl(string $domain, string $view): string {
-        $apiKey = $this->config->getAppValue('service/pageshot/screenshotlayer/apiKey');
+        $apiKey = $this->config->getAppValue('service/pageshot/screenshotmachine/apiKey');
 
         if($view === PageShotService::VIEWPORT_DESKTOP) {
-            return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport=1280x720&width=720&fullpage=1&url=http://{$domain}";
+            return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=720xfull&device=desktop&format=jpg&url=http://{$domain}";
         }
 
-        return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport=360x640&width=720&fullpage=1&url=http://{$domain}";
+        return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=720xfull&device=phone&format=jpg&url=http://{$domain}";
     }
 }
