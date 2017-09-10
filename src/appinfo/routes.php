@@ -54,8 +54,21 @@ $application->registerRoutes($this, [
         ['name' => 'settings_api#reset', 'url' => '/api/1.0/setting/reset/{id}', 'verb' => 'GET'],
 
         ['name' => 'service_api#generate_password', 'url' => '/api/1.0/service/password', 'verb' => 'GET'],
-        ['name' => 'service_api#generate_password', 'url' => '/api/1.0/service/password', 'verb' => 'POST', 'postfix' => 'POST'],
-        ['name' => 'service_api#get_favicon', 'url' => '/api/1.0/service/icon/{domain}/{size}', 'verb' => 'GET'],
+        ['name'    => 'service_api#generate_password',
+         'url'     => '/api/1.0/service/password',
+         'verb'    => 'POST',
+         'postfix' => 'POST'
+        ],
+        ['name'     => 'service_api#get_favicon',
+         'url'      => '/api/1.0/service/icon/{domain}/{size}',
+         'verb'     => 'GET',
+         'defaults' => ['domain' => '', 'size' => 24]
+        ],
+        ['name'     => 'service_api#get_preview',
+         'url'      => '/api/1.0/service/image/{domain}/{view}/{width}/{height}',
+         'verb'     => 'GET',
+         'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 500, 'height' => 0]
+        ],
     ]
 ]);
 

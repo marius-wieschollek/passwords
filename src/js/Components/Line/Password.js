@@ -1,6 +1,6 @@
 Vue.component('passwords-line-password', {
     template: '#passwords-template-password-line',
-    name    : 'PasswordsFoldout',
+    name    : 'PasswordLine',
 
     props: {
         password: {
@@ -24,7 +24,6 @@ Vue.component('passwords-line-password', {
             return new Date(this.password.updated * 1e3).toLocaleDateString();
         },
         securityCheck() {
-            console.log(this.password.secure);
             switch(this.password.secure) {
                 case 0: return 'ok';
                 case 1: return 'warn';
@@ -59,6 +58,12 @@ Vue.component('passwords-line-password', {
         copyUrlAction() {
             copyToClipboard(this.password.url);
             PasswordsUi.notification('Url was copied to clipboard')
+        },
+        detailsAction($event, section = null) {
+            this.$parent.detail = {
+                type: 'password',
+                element: this.password
+            }
         },
         deleteAction() {
             PasswordsUi.confirm('Do you want to delete the password', 'Delete password')
