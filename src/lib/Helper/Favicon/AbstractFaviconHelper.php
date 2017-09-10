@@ -51,7 +51,7 @@ abstract class AbstractFaviconHelper {
         }
 
         $url         = $this->getFaviconUrl($domain);
-        $faviconData  = $this->getHttpRequest($url);
+        $faviconData = $this->getHttpRequest($url);
 
         if($faviconData === null) {
             return $this->getDefaultFavicon();

@@ -49,6 +49,7 @@ class PasswordGenerationService {
      * @param bool $addSmileys
      *
      * @return array
+     * @throws ApiException
      */
     public function getPassword(
         int $strength = 1,
@@ -162,7 +163,9 @@ class PasswordGenerationService {
      * @TODO support more services
      */
     protected function getWordsGenerator(): AbstractWordsHelper {
-        switch ($this->config->getUserValue('service/words', self::SERVICE_SNAKES)) {
+        $service = $this->config->getAppValue('service/words', self::SERVICE_SNAKES);
+
+        switch ($service) {
             case self::SERVICE_LOCAL:
                 return new LocalWordsHelper();
             case self::SERVICE_SNAKES:

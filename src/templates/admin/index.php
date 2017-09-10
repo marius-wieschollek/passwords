@@ -1,10 +1,11 @@
 <?php
 /** @var $l \OCP\IL10N */
+
+use OCA\Passwords\AppInfo\Application;
+
 /** @var $_ array */
 
-#script('passwords', 'admin');         // adds a Javascript file
-style('passwords', 'admin');    // adds a CSS file
+script(Application::APP_NAME, ['utility', 'admin']);
+style(Application::APP_NAME, 'passwords-admin');
 
-$tmpl = new \OCP\Template('passwords', 'admin/settings');
-
-return $tmpl->fetchPage();
+print_unescaped($this->inc('admin/settings'));

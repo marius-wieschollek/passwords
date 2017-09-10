@@ -6,44 +6,49 @@
  * Time: 18:22
  */
 
+/** @var $_ array */
 ?>
 
-<div id="passwords" class="section">
+<section id="passwords" class="section">
     <h2><?php p($l->t('Passwords')); ?></h2>
 
-<p>
-    <?php p($l->t('Only administrators are allowed to click the red button')); ?>
-</p>
+    <form>
+        <h3><?php p($l->t('External Services')); ?></h3>
+        <div class="area services">
+            <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
+            <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
+                <?php foreach($_['wordsServices'] as $service): ?>
+                    <option value="<?php echo $service['id'];?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-<button><?php p($l->t('Click red button')); ?></button>
+            <label for="passwords-favicon"><?php p($l->t('Favicon Service')); ?></label>
+            <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service/favicon">
+                <?php foreach($_['faviconServices'] as $service): ?>
+                    <option value="<?php echo $service['id'];?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-<p>
-    <input id="your_app_magic" name="your_app_magic"
-           type="checkbox" class="checkbox" value="1" <?php if ($_['is_enabled']): ?> checked="checked"<?php endif; ?> />
-    <label for="your_app_magic"><?php p($l->t('Do some magic')); ?></label>
-</p>
+            <label for="passwords-pageshot"><?php p($l->t('Website Preview Service')); ?></label>
+            <select id="passwords-pageshot" name="passwords-pageshot" name="pageshot" data-setting="service/pageshot">
+                <?php foreach($_['pageshotServices'] as $service): ?>
+                    <option value="<?php echo $service['id'];?>" <?php echo $service['current'] ? 'selected':''; ?> data-api="<?php p(json_encode($service['api'])); ?>"><?php echo $service['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <div class="container" id="passwords-pageshot-apikey-container">
+                <label for="passwords-pageshot-apikey"><?php p($l->t('API Key')); ?></label>
+                <input id="passwords-pageshot-apikey" name="pageshot-apikey" data-setting="">
+            </div>
+        </div>
+    </form>
 
-<h3><?php p($l->t('Things to define')); ?></h3>
-<?php
-foreach ($_['categories'] as $category => $data) {
-    ?>
-    <p>
-        <input id="your_app_<?php p($category); ?>" name="your_app_<?php p($category); ?>"
-               type="checkbox" class="checkbox your_app_category" value="1" <?php if ($data['enabled']): ?> checked="checked"<?php endif; ?> />
-        <label for="your_app_<?php p($category); ?>"><?php print_unescaped($data['displayName']); ?></label>
-    </p>
-    <?php
-}
-?>
-
-<?php if (!empty($_['last_report'])): ?>
-
-    <h3><?php p($l->t('Last report')); ?></h3>
-
-    <p><textarea title="<?php p($l->t('Last report')); ?>" class="last_report" readonly="readonly"><?php p($_['last_report']);?></textarea></p>
-
-    <em class="last_sent"><?php p($l->t('Sent on: %s', [$_['last_sent']])); ?></em>
-
-<?php endif; ?>
-
-</div>
+    <form>
+        <h3><?php p($l->t('Caches')); ?></h3>
+        <?php foreach($_['caches'] as $cache): ?>
+            <div  class="area cache">
+                <label><?php p($l->t('%s Cache (%s Files, %s)', [ucfirst($cache['name']), $cache['files'], human_file_size($cache['size'])])); ?></label>
+                <input type="button" value="<?php p($l->t('clear')); ?>" data-clear-cache="<?php p($cache['name']); ?>"/>
+            </div>
+        <?php endforeach; ?>
+    </form>
+</section>

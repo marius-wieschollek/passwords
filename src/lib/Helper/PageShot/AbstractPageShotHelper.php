@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\HttpRequestHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -45,10 +46,10 @@ abstract class AbstractPageShotHelper {
      * @return ISimpleFile
      */
     function getPageShot(string $domain, string $view): ISimpleFile {
-        $faviconFile = $this->getPageShotFilename($domain, $view);
+        $pageshotFile = $this->getPageShotFilename($domain, $view);
 
-        if($this->fileCacheService->hasFile($faviconFile)) {
-            return $this->fileCacheService->getFile($faviconFile);
+        if($this->fileCacheService->hasFile($pageshotFile)) {
+            return $this->fileCacheService->getFile($pageshotFile);
         }
 
         $url          = $this->getPageShotUrl($domain, $view);
@@ -58,7 +59,7 @@ abstract class AbstractPageShotHelper {
             return $this->getDefaultPageShot();
         }
 
-        return $this->fileCacheService->putFile($faviconFile, $pageShotData);
+        return $this->fileCacheService->putFile($pageshotFile, $pageShotData);
     }
 
     /**
@@ -79,30 +80,37 @@ abstract class AbstractPageShotHelper {
 
     /**
      * @param string   $domain
+     * @param string   $view
      * @param int|null $width
      * @param int|null $height
      *
      * @return string
-     *
      */
     public function getPageShotFilename(string $domain, string $view, int $width = null, int $height = null): string {
         if($width !== null) {
-            return "{$this->prefix}_{$domain}_{$view}_{$width}x{$height}.png";
+            return "{$this->prefix}_{$domain}_{$view}_{$width}x{$height}.jpg";
         }
 
-        return "{$this->prefix}_{$domain}_{$view}.png";
+        return "{$this->prefix}_{$domain}_{$view}.jpg";
     }
 
     /**
      * @param string $url
      *
      * @return mixed
+     * @throws ApiException
      */
     protected function getHttpRequest(string $url) {
         $request = new HttpRequestHelper();
         $request->setUrl($url);
+        $data = $request->sendWithRetry();
 
-        return $request->sendWithRetry();
+        $type = $request->getInfo()['content_type'];
+        if(substr($type, 0, 5) != 'image') {
+            throw new ApiException('API Request Failed');
+        }
+
+        return $data;
     }
 
     /**
