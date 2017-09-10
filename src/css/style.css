@@ -2411,7 +2411,6 @@
     max-height: 75px;
     animation: 0.25s delay-overflow; }
 .passwords #content {
-  border-top: 1px solid #eee;
   display: grid;
   grid-template-columns: 3fr 0;
   grid-template-areas: "left right";
@@ -2419,7 +2418,9 @@
   justify-items: stretch;
   align-items: stretch;
   transition: grid-template-columns 0.5s ease-in-out;
-  margin-top: -1px; }
+  position: absolute;
+  top: 0;
+  bottom: 0; }
   .passwords #content .content-left {
     grid-area: left;
     margin-top: 44px; }

@@ -122,7 +122,6 @@ $color-white : #fff;
     }
 
     #content {
-        border-top            : 1px solid $color-grey-lighter;
         display               : grid;
         grid-template-columns : 3fr 0;
         grid-template-areas   : "left right";
@@ -130,7 +129,9 @@ $color-white : #fff;
         justify-items         : stretch;
         align-items           : stretch;
         transition            : grid-template-columns 0.5s ease-in-out;
-        margin-top            : -1px;
+        position              : absolute;
+        top                   : 0;
+        bottom                : 0;
 
         .content-left {
             grid-area  : left;
@@ -257,7 +258,7 @@ $color-white : #fff;
                     width       : 85px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
-                    text-align: right;
+                    text-align  : right;
                     color       : $color-grey-dark;
                 }
 

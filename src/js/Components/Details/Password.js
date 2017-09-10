@@ -14,6 +14,9 @@ Vue.component('passwords-details-password', {
     },
 
     computed: {
+        date() {
+            return new Date(this.password.updated * 1e3).toLocaleDateString();
+        },
     },
 
     methods: {
@@ -30,6 +33,11 @@ Vue.component('passwords-details-password', {
             console.log('test');
 
             $element.css('margin-top', 0);
-        }
+        },
+        favouriteAction($event) {
+            $event.stopPropagation();
+            this.password.favourite = !this.password.favourite;
+            PasswordsUi.getApi().updatePassword(this.password);
+        },
     }
 });

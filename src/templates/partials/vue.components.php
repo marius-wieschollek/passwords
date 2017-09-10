@@ -13,28 +13,28 @@
             </div>
         </div>
         <div class="actions creatable" v-if="showAddNew">
-			<span class="button new" @click="clickAddButton($event)">
-				<span class="icon icon-add"></span>
-			</span>
+            <span class="button new" @click="clickAddButton($event)">
+                <span class="icon icon-add"></span>
+            </span>
             <div class="newPasswordMenu popovermenu bubble menu open menu-left" @click="clickAddButton($event)">
                 <ul>
                     <li>
-						<span class="menuitem" data-action="folder" v-if="newFolder">
-							<span class="icon icon-folder svg"></span>
-							<span class="displayname">Neuer Ordner</span>
-						</span>
+                        <span class="menuitem" data-action="folder" v-if="newFolder">
+                            <span class="icon icon-folder svg"></span>
+                            <span class="displayname">Neuer Ordner</span>
+                        </span>
                     </li>
                     <li>
-						<span class="menuitem" data-action="tag" v-if="newTag">
-							<span class="icon icon-tag svg"></span>
-							<span class="displayname">Neuer Tag</span>
-						</span>
+                        <span class="menuitem" data-action="tag" v-if="newTag">
+                            <span class="icon icon-tag svg"></span>
+                            <span class="displayname">Neuer Tag</span>
+                        </span>
                     </li>
                     <li>
-						<span class="menuitem" data-action="file" @click="clickCreatePassword($event)">
-							<span class="icon icon-filetype-text svg"></span>
-							<span class="displayname">Neues Passwort</span>
-						</span>
+                        <span class="menuitem" data-action="file" @click="clickCreatePassword($event)">
+                            <span class="icon icon-filetype-text svg"></span>
+                            <span class="displayname">Neues Passwort</span>
+                        </span>
                     </li>
                 </ul>
             </div>
@@ -73,7 +73,8 @@
                 <ul>
                     <li @click="detailsAction($event);"><span><i class="fa fa-info"></i> Details</span></li>
                     <li v-if="password.url" @click="copyUrlAction()"><span><i class="fa fa-clipboard"></i> Copy Url</span></li>
-                    <li v-if="password.url"><a :href="password.url" target="_blank"><span><i class="fa fa-link"></i> Open Url</span></a></li>
+                    <li v-if="password.url"><a :href="password.url"
+                                               target="_blank"><span><i class="fa fa-link"></i> Open Url</span></a></li>
                     <li><span><i class="fa fa-pencil"></i> Edit</span></li>
                     <li @click="deleteAction()"><span><i class="fa fa-trash"></i> Delete</span></li>
                 </ul>
@@ -87,5 +88,19 @@
         <div class="image-container">
             <img :src="password.image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut($event)" alt="">
         </div>
+        <div class="title">
+            <img :src="password.icon" alt="">
+            {{ password.title }}
+        </div>
+        <div class="infos">
+            <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
+            <span class="date">{{ date }}</span>
+        </div>
+        <ul>
+            <li>Details</li>
+            <li>Notes</li>
+            <li>Share</li>
+            <li>Revisions</li>
+        </ul>
     </div>
 </script>
