@@ -62,10 +62,7 @@
 
 <script type="text/x-template" id="passwords-template-password-line">
     <div class="row password" @click="singleClickAction($event)" @dblclick="doubleClickAction()">
-        <i class="fa fa-star favourite"
-           v-bind:class="{ active: password.favourite }"
-          
-           @click="favouriteAction($event)"></i>
+        <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
         <span class="title">{{ password.title }}</span>
         <div class="date">{{ date }}</div>
@@ -74,13 +71,21 @@
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu">
                 <ul>
-                    <li><span><i class="fa fa-info"></i> Details</span></li>
+                    <li @click="detailsAction($event);"><span><i class="fa fa-info"></i> Details</span></li>
                     <li v-if="password.url" @click="copyUrlAction()"><span><i class="fa fa-clipboard"></i> Copy Url</span></li>
                     <li v-if="password.url"><a :href="password.url" target="_blank"><span><i class="fa fa-link"></i> Open Url</span></a></li>
                     <li><span><i class="fa fa-pencil"></i> Edit</span></li>
                     <li @click="deleteAction()"><span><i class="fa fa-trash"></i> Delete</span></li>
                 </ul>
             </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="passwords-template-password-details">
+    <div class="item-details">
+        <div class="image-container">
+            <img :src="password.image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut($event)" alt="">
         </div>
     </div>
 </script>

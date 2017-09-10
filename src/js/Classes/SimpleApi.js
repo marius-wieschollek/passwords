@@ -44,6 +44,7 @@ class SimpleApi {
             'password.delete'  : 'api/1.0/password/delete/{id}',
             'password.generate': 'api/1.0/service/password',
             'service.favicon'  : 'api/1.0/service/icon/{domain}/{size}',
+            'service.preview'  : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
         };
     }
 
@@ -149,6 +150,40 @@ class SimpleApi {
      */
     getFaviconUrl(host, size = 32) {
         return this._endpoint + SimpleApi.processUrl(this._paths['service.favicon'], {domain: host, size: size});
+    }
+
+    /**
+     * Loads a preview image as blob over the preview service
+     *
+     * @param host
+     * @param view
+     * @param width
+     * @param height
+     * @returns {Promise}
+     */
+    getPreview(host, view = 'desktop', width = 550, height = 0) {
+        return this._createRequest(
+            ['service.preview', {domain: host, view: view, width: width, height: height}],
+            null,
+            'GET',
+            'text'
+        );
+    }
+
+    /**
+     * Returns the URL which retrieves the preview image with the given settings
+     *
+     * @param host
+     * @param view
+     * @param width
+     * @param height
+     * @returns {Promise}
+     */
+    getPreviewUrl(host, view = 'desktop', width = 550, height = 0) {
+        return this._endpoint + SimpleApi.processUrl(
+            this._paths['service.preview'],
+            {domain: host, view: view, width: width, height: height}
+        );
     }
 
     /**

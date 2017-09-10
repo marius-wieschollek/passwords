@@ -1,8 +1,14 @@
-PasswordsUi.registerComponent('section.all', {
+PasswordsUi.registerComponent(
+    'section.all',
+    {
         template: '#passwords-section-all',
         data() {
             return {
-                passwords: []
+                passwords: [],
+                detail   : {
+                    type   : 'none',
+                    element: null
+                }
             }
         },
 
@@ -13,6 +19,12 @@ PasswordsUi.registerComponent('section.all', {
 
         beforeDestroy() {
             PasswordsUi.removeEventListener('data.changed', this.openAllPasswordsPage)
+        },
+
+        computed: {
+            showDetails() {
+                return this.detail.type !== 'none';
+            }
         },
 
         methods: {

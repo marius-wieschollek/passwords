@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: marius
+ * Date: 10.09.17
+ * Time: 02:34
+ */
+
+namespace OCA\Passwords\Helper\Favicon;
+
+/**
+ * Class DuckDuckGoHelper
+ *
+ * @package OCA\Passwords\Helper\Favicon
+ */
+class DuckDuckGoHelper extends AbstractFaviconHelper {
+
+    /**
+     * @var string
+     */
+    protected $prefix = 'ddg';
+
+    /**
+     * @param string $domain
+     *
+     * @return string
+     */
+    protected function getFaviconUrl(string $domain): string {
+        return "https://icons.duckduckgo.com/ip2/{$domain}.ico";
+    }
+}

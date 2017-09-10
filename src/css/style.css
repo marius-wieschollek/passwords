@@ -13,8 +13,8 @@
 @font-face {
   .passwords {
     font-family: 'FontAwesome';
-    src: url("FontAwesome/fonts/fontawesome-webfont.eot?v=4.7.0");
-    src: url("FontAwesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("FontAwesome/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("FontAwesome/fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("FontAwesome/fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("FontAwesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
+    src: url("./FontAwesome/fonts/fontawesome-webfont.eot?v=4.7.0");
+    src: url("./FontAwesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("./FontAwesome/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("./FontAwesome/fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("./FontAwesome/fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("./FontAwesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
     font-weight: normal;
     font-style: normal; } }
   .passwords .fa {
@@ -1711,23 +1711,38 @@
       max-height: 75px;
       animation: 0.25s delay-overflow; }
   .passwords #content {
-    position: relative;
-    top: 44px;
-    border-top: 1px solid #eee; }
-    .passwords #content .content-list .row {
+    border-top: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 3fr 0;
+    grid-template-areas: "left right";
+    grid-template-rows: auto;
+    justify-items: stretch;
+    align-items: stretch;
+    transition: grid-template-columns 0.5s ease-in-out;
+    margin-top: -1px; }
+    .passwords #content .content-left {
+      grid-area: left;
+      margin-top: 44px; }
+    .passwords #content .content-right {
+      grid-area: right;
+      z-index: 50;
+      border-left: 1px solid #dbdbdb; }
+    .passwords #content.show-details {
+      grid-template-columns: 2.05fr 0.95fr; }
+    .passwords #content .item-list .row {
       height: 51px;
       font-size: 0;
       border-bottom: 1px solid #eee;
       cursor: pointer; }
-      .passwords #content .content-list .row .favourite {
+      .passwords #content .item-list .row .favourite {
         line-height: 50px;
         width: 40px;
         text-align: center;
         color: #dbdbdb;
         font-size: 1rem; }
-        .passwords #content .content-list .row .favourite:hover, .passwords #content .content-list .row .favourite.active {
+        .passwords #content .item-list .row .favourite:hover, .passwords #content .item-list .row .favourite.active {
           color: #fc0; }
-      .passwords #content .content-list .row .favicon {
+      .passwords #content .item-list .row .favicon {
         display: inline-block;
         background: no-repeat center;
         background-size: 32px;
@@ -1735,43 +1750,43 @@
         width: 50px;
         font-size: 1rem;
         cursor: pointer; }
-      .passwords #content .content-list .row .title {
+      .passwords #content .item-list .row .title {
         font-size: 0.8rem;
         padding-left: 8px;
         cursor: pointer; }
-      .passwords #content .content-list .row .more,
-      .passwords #content .content-list .row .security {
+      .passwords #content .item-list .row .more,
+      .passwords #content .item-list .row .security {
         float: right;
         line-height: 50px;
         width: 50px;
         font-size: 1rem;
         text-align: center; }
-        .passwords #content .content-list .row .more.ok,
-        .passwords #content .content-list .row .security.ok {
+        .passwords #content .item-list .row .more.ok,
+        .passwords #content .item-list .row .security.ok {
           color: #00994d; }
-        .passwords #content .content-list .row .more.warn,
-        .passwords #content .content-list .row .security.warn {
+        .passwords #content .item-list .row .more.warn,
+        .passwords #content .item-list .row .security.warn {
           color: #fc0; }
-        .passwords #content .content-list .row .more.fail,
-        .passwords #content .content-list .row .security.fail {
+        .passwords #content .item-list .row .more.fail,
+        .passwords #content .item-list .row .security.fail {
           color: #f33; }
-      .passwords #content .content-list .row .more {
+      .passwords #content .item-list .row .more {
         position: relative;
         color: #b1b1b1; }
-        .passwords #content .content-list .row .more > i {
+        .passwords #content .item-list .row .more > i {
           cursor: pointer; }
-          .passwords #content .content-list .row .more > i:active, .passwords #content .content-list .row .more > i:hover {
+          .passwords #content .item-list .row .more > i:active, .passwords #content .item-list .row .more > i:hover {
             color: #000; }
-        .passwords #content .content-list .row .more .menu li {
+        .passwords #content .item-list .row .more .menu li {
           line-height: 40px;
           font-size: 0.8rem;
           padding: 0 20px 0 15px;
           white-space: nowrap;
           color: #6e6e6e;
           cursor: pointer; }
-          .passwords #content .content-list .row .more .menu li a {
+          .passwords #content .item-list .row .more .menu li a {
             color: #6e6e6e; }
-          .passwords #content .content-list .row .more .menu li i {
+          .passwords #content .item-list .row .more .menu li i {
             margin-right: 10px;
             font-size: 1rem;
             width: 1rem;
@@ -1779,26 +1794,33 @@
             position: relative;
             bottom: -0.1rem;
             cursor: pointer; }
-          .passwords #content .content-list .row .more .menu li span {
+          .passwords #content .item-list .row .more .menu li span {
             font-weight: 300;
             cursor: pointer; }
-          .passwords #content .content-list .row .more .menu li:active, .passwords #content .content-list .row .more .menu li:hover {
+          .passwords #content .item-list .row .more .menu li:active, .passwords #content .item-list .row .more .menu li:hover {
             background-color: #f7f7f7;
             color: #000; }
-            .passwords #content .content-list .row .more .menu li:active a, .passwords #content .content-list .row .more .menu li:hover a {
+            .passwords #content .item-list .row .more .menu li:active a, .passwords #content .item-list .row .more .menu li:hover a {
               color: #000; }
-      .passwords #content .content-list .row .date {
+      .passwords #content .item-list .row .date {
         float: right;
         line-height: 50px;
         font-size: 0.8rem;
         padding: 0 15px 0 5px;
         color: #6e6e6e; }
-      .passwords #content .content-list .row:active, .passwords #content .content-list .row:hover {
+      .passwords #content .item-list .row:active, .passwords #content .item-list .row:hover {
         background-color: #f7f7f7; }
-        .passwords #content .content-list .row:active .favourite, .passwords #content .content-list .row:hover .favourite {
+        .passwords #content .item-list .row:active .favourite, .passwords #content .item-list .row:hover .favourite {
           color: lightgray; }
-          .passwords #content .content-list .row:active .favourite:hover, .passwords #content .content-list .row:active .favourite.active, .passwords #content .content-list .row:hover .favourite:hover, .passwords #content .content-list .row:hover .favourite.active {
+          .passwords #content .item-list .row:active .favourite:hover, .passwords #content .item-list .row:active .favourite.active, .passwords #content .item-list .row:hover .favourite:hover, .passwords #content .item-list .row:hover .favourite.active {
             color: #fc0; }
+    .passwords #content .item-details .image-container {
+      height: 290px;
+      overflow: hidden; }
+      .passwords #content .item-details .image-container img {
+        width: 100%;
+        margin-top: 0;
+        transition: margin-top 10s ease-in-out; }
   .passwords .foldout-container .foldout-title {
     cursor: pointer;
     font-size: 1.1rem;

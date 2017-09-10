@@ -9,6 +9,7 @@ script('passwords', 'Classes/SimpleApi');
 script('passwords', 'Classes/EnhancedApi');
 script('passwords', 'Classes/UserInterface');
 script('passwords', 'main');
+script('passwords', 'Components/Details/Password');
 script('passwords', 'Components/Line/Password');
 script('passwords', 'Components/Breadcrumbs');
 script('passwords', 'Components/DialogPasswordCreate');
@@ -39,8 +40,8 @@ style('passwords', 'style');
 
 	<div id="app-content">
 		<div id="app-content-wrapper">
-			<?php print_unescaped($this->inc('content/index')); ?>
-		</div>
+            <?php print_unescaped($this->inc('content/index')); ?>
+        </div>
 	</div>
     <div id="app-popup"><div></div></div>
 </div>
