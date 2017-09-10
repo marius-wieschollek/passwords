@@ -67,32 +67,7 @@ $application->registerRoutes($this, [
         ['name'     => 'service_api#get_preview',
          'url'      => '/api/1.0/service/image/{domain}/{view}/{width}/{height}',
          'verb'     => 'GET',
-         'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 500, 'height' => 0]
+         'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 550, 'height' => 0]
         ],
     ]
 ]);
-
-/*
-return [
-	'routes' => [
-        ['name' => 'access#index', 'url' => '/', 'verb' => 'GET'],
-        ['name' => 'page#show_all', 'url' => '/show/all', 'verb' => 'GET'],
-        ['name' => 'page#show_folders', 'url' => '/folders', 'verb' => 'GET'],
-        ['name' => 'page#show_recent', 'url' => '/recent', 'verb' => 'GET'],
-        ['name' => 'page#show_favorites', 'url' => '/favorites', 'verb' => 'GET'],
-        ['name' => 'page#show_shared', 'url' => '/shared', 'verb' => 'GET'],
-        ['name' => 'page#show_tags', 'url' => '/tags', 'verb' => 'GET'],
-        ['name' => 'page#show_trash', 'url' => '/trash', 'verb' => 'GET'],
-        ['name' => 'page#test', 'url' => '/trash', 'verb' => 'GET'],
-        ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
-
-		['name' => 'settings#set', 'url' => '/settings/{setting}/{value}', 'verb' => 'POST'],
-		['name' => 'settings#setadmin', 'url' => '/settings/{setting}/{value}/{admin1}/{admin2}', 'verb' => 'POST'],
-		['name' => 'settings#get', 'url' => '/settings', 'verb' => 'GET'],
-		['name' => 'auth#checkauth', 'url' => '/auth', 'verb' => 'POST'],
-		['name' => 'password#sendmail', 'url' => '/mail', 'verb' => 'POST'],
-		//['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-		['name' => 'password_api#preflighted_cors', 'url' => '/api/0.1/{path}',
-		 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']]
-	]
-];*/
