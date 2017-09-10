@@ -37,7 +37,7 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
     protected function getHttpRequest(string $url) {
         $result = parent::getHttpRequest($url);
 
-        $data = gzdecode($result);
+        $data = @gzdecode($result);
         if($data) return $data;
 
         return $result;
