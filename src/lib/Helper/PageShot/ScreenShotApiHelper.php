@@ -59,28 +59,28 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @throws ApiException
      */
     protected function getHttpRequest(string $url) {
-        $request = new HttpRequestHelper();
-        $request->setUrl($url)
-                ->setPost($this->getServiceOptions())
-                ->setHeader($this->getServiceAuth()());
+        $request = $this->getAuthorizedRequest($url);
+        $request->setJson($this->getServiceOptions());
 
-        $imageRequest = json_decode($request->sendWithRetry(), true);
+        $image = json_decode($request->sendWithRetry(), true);
 
-        if(!$imageRequest['status'] === 'accepted') {
+        if($image['status'] !== 'accepted' && $image['status'] !== 'ready') {
             \OC::$server->getLogger()->error('PageShot service refused request');
 
             return null;
         }
 
         while (1) {
-            $request = new HttpRequestHelper();
-            $request->setUrl('https://api.screenshotapi.io/retrieve?key='.$imageRequest['key']);
-            $readyRequest = json_decode($request->sendWithRetry(), true);
+            $request = $this->getAuthorizedRequest('https://api.screenshotapi.io/retrieve?key='.$image['key']);
+            $check   = json_decode($request->sendWithRetry(1), true);
 
-            if($readyRequest['status'] === 'ready') {
-                return $readyRequest['imageUrl'];
-            } else if($readyRequest['status'] === 'error') {
-                \OC::$server->getLogger()->error($readyRequest['msg']);
+            if($check['status'] === 'ready') {
+                $load = new HttpRequestHelper($check['imageUrl']);
+
+                return $load->sendWithRetry();
+            } else if($check['status'] === 'error' || isset($check['error'])) {
+                $message = isset($check['msg']) ? $check['msg']:$check['message'];
+                \OC::$server->getLogger()->error($message);
 
                 return null;
             }
@@ -89,6 +89,17 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
         }
 
         return null;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return HttpRequestHelper
+     */
+    protected function getAuthorizedRequest(string $url): HttpRequestHelper {
+        $request = new HttpRequestHelper($url);
+
+        return $request->setHeader($this->getServiceAuth())->setAcceptResponseCodes([]);
     }
 
     /**
@@ -102,8 +113,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             'fullpage'    => true,
             'javascript'  => true,
             'webdriver'   => 'firefox',
-            'device'      => '',
-            'waitSeconds' => 1,
+            'waitSeconds' => 2,
             'fresh'       => false
         ];
     }
@@ -112,11 +122,9 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @return array
      */
     protected function getServiceAuth(): array {
-        $apiKey = $this->config->getAppValue('service/pageshot/screenshtoapi/apiKey');
+        $apiKey = $this->config->getAppValue('service/pageshot/ssa/key');
 
-        return [
-            'apikey' => $apiKey
-        ];
+        return ['apikey' => $apiKey];
     }
 
     /**

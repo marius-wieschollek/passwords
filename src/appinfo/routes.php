@@ -7,6 +7,8 @@ $application->registerRoutes($this, [
     'routes' => [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
         ['name' => 'access#index', 'url' => '/authenticate', 'verb' => 'GET'],
+        ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
+        ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
 
         ['name' => 'authorisation_api#info', 'url' => '/api/1.0/authorisation/info', 'verb' => 'GET'],
         ['name' => 'authorisation_api#request', 'url' => '/api/1.0/authorisation/request', 'verb' => 'POST'],

@@ -15,6 +15,7 @@ use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
 use OCA\Passwords\Helper\Favicon\GoogleHelper;
+use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -27,6 +28,7 @@ class FaviconService {
     const SERVICE_BETTER_IDEA  = 'bi';
     const SERVICE_DUCK_DUCK_GO = 'ddg';
     const SERVICE_GOOGLE       = 'gl';
+    const SERVICE_LOCAL        = 'local';
     const SERVICE_DEFAULT      = 'default';
 
     /**
@@ -94,10 +96,10 @@ class FaviconService {
     protected function resizeWithImageMagick(ISimpleFile $file, int $size) {
         try {
             $image = class_exists(Imagick::class) ? new Imagick():new Gmagick();
-            $image->readImageBlob($file->getContent());
-            $image->resizeImage($size, $size, 0, 0);
+            $image->readImageBlob($file->getContent(), $file->getName());
             $image->stripImage();
             $image->setImageFormat('png');
+            $image->adaptiveResizeImage($size, $size, 0);
             $image->setImageCompressionQuality(9);
 
             return $image->getImageBlob();
@@ -125,17 +127,19 @@ class FaviconService {
 
     /**
      * @return AbstractFaviconHelper
-     * @TODO add local service
      */
     protected function getFaviconService(): AbstractFaviconHelper {
+        $service = $this->config->getAppValue('service/favicon', self::SERVICE_BETTER_IDEA);
 
-        switch ($this->config->getUserValue('service/favicon', self::SERVICE_BETTER_IDEA)) {
+        switch ($service) {
             case self::SERVICE_BETTER_IDEA:
                 return new BetterIdeaHelper($this->fileCacheService);
             case self::SERVICE_DUCK_DUCK_GO:
                 return new DuckDuckGoHelper($this->fileCacheService);
             case self::SERVICE_GOOGLE:
                 return new GoogleHelper($this->fileCacheService);
+            case self::SERVICE_LOCAL:
+                return new LocalFaviconHelper($this->fileCacheService);
             case self::SERVICE_DEFAULT:
                 return new DefaultHelper($this->fileCacheService);
         }
