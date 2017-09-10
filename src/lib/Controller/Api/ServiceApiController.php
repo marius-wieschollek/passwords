@@ -10,7 +10,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Helper\PasswordGenerationHelper;
 use OCA\Passwords\Services\FaviconService;
-use OCA\Passwords\Services\PreviewService;
+use OCA\Passwords\Services\PageShotService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
@@ -33,7 +33,7 @@ class ServiceApiController extends AbstractApiController {
      */
     protected $faviconService;
     /**
-     * @var PreviewService
+     * @var PageShotService
      */
     private $previewService;
 
@@ -43,14 +43,14 @@ class ServiceApiController extends AbstractApiController {
      * @param string                   $appName
      * @param IRequest                 $request
      * @param FaviconService           $faviconService
-     * @param PreviewService           $previewService
+     * @param PageShotService          $previewService
      * @param PasswordGenerationHelper $passwordCreationHelper
      */
     public function __construct(
         $appName,
         IRequest $request,
         FaviconService $faviconService,
-        PreviewService $previewService,
+        PageShotService $previewService,
         PasswordGenerationHelper $passwordCreationHelper
     ) {
         parent::__construct(

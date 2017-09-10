@@ -21,12 +21,28 @@ class HttpRequestHelper {
     protected $url;
 
     /**
+     * @var array
+     */
+    protected $post;
+
+    /**
      * @param string $url
      *
      * @return HttpRequestHelper
      */
     public function setUrl(string $url): HttpRequestHelper {
         $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @param array $post
+     *
+     * @return HttpRequestHelper
+     */
+    public function setPost(array $post): HttpRequestHelper {
+        $this->post = $post;
 
         return $this;
     }
@@ -41,6 +57,12 @@ class HttpRequestHelper {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+
+        if(!empty($this->post)) {
+            curl_setopt($ch, CURLOPT_POST, 2);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->post));
+        }
+
         $response = curl_exec($ch);
         $status   = in_array(curl_getinfo($ch, CURLINFO_HTTP_CODE), ['200', '201', '202']);
         curl_close($ch);
@@ -48,5 +70,22 @@ class HttpRequestHelper {
         if(!$status) return false;
 
         return $response;
+    }
+
+    /**
+     * @param int $maxRetries
+     *
+     * @return mixed
+     */
+    public function sendWithRetry($maxRetries = 5) {
+        $retries = 0;
+        while ($retries < $maxRetries) {
+            $result = $this->send();
+
+            if($result != null) return $result;
+            $retries++;
+        }
+
+        return null;
     }
 }

@@ -12,17 +12,17 @@ use Gmagick;
 use Imagick;
 use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
 use OCA\Passwords\Helper\PageShot\DefaultHelper;
-use OCA\Passwords\Helper\PageShot\ScreenshotLayerHelper;
+use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Image;
 
 /**
- * Class PreviewService
+ * Class PageShotService
  *
  * @package OCA\Passwords\Services
  */
-class PreviewService {
+class PageShotService {
 
     const VIEWPORT_DESKTOP = 'desktop';
     const VIEWPORT_MOBILE  = 'mobile';
@@ -149,7 +149,7 @@ class PreviewService {
             case self::SERVICE_WKHTML:
                 return new WkhtmlImageHelper($this->fileCacheService);
             case self::SERVICE_SCREEN_SHOT_LAYER:
-                return new ScreenshotLayerHelper($this->fileCacheService, $this->config);
+                return new ScreenShotLayerHelper($this->fileCacheService, $this->config);
             case self::SERVICE_DEFAULT:
                 return new DefaultHelper($this->fileCacheService);
         }

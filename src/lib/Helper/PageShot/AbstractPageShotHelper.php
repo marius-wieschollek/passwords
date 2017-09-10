@@ -51,15 +51,14 @@ abstract class AbstractPageShotHelper {
             return $this->fileCacheService->getFile($faviconFile);
         }
 
-        $url         = $this->getPageShotUrl($domain, $view);
-        $apiRequest  = $this->getHttpRequest($url);
-        $faviconData = $this->sendApiRequest($apiRequest);
+        $url          = $this->getPageShotUrl($domain, $view);
+        $pageShotData = $this->getHttpRequest($url);
 
-        if($faviconData === null) {
+        if($pageShotData === null) {
             return $this->getDefaultPageShot();
         }
 
-        return $this->fileCacheService->putFile($faviconFile, $faviconData);
+        return $this->fileCacheService->putFile($faviconFile, $pageShotData);
     }
 
     /**
@@ -97,30 +96,13 @@ abstract class AbstractPageShotHelper {
     /**
      * @param $url
      *
-     * @return HttpRequestHelper
+     * @return mixed
      */
-    protected function getHttpRequest($url): HttpRequestHelper {
+    protected function getHttpRequest($url) {
         $request = new HttpRequestHelper();
         $request->setUrl($url);
 
-        return $request;
-    }
-
-    /**
-     * @param $apiRequest
-     *
-     * @return null
-     */
-    protected function sendApiRequest(HttpRequestHelper $apiRequest) {
-        $retries = 0;
-        while ($retries < 5) {
-            $result = $apiRequest->send();
-
-            if($result != null) return $result;
-            $retries++;
-        }
-
-        return null;
+        return $request->sendWithRetry();
     }
 
     /**
