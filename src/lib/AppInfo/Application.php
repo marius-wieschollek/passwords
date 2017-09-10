@@ -22,7 +22,7 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\PasswordService;
-use OCA\Passwords\Services\PreviewService;
+use OCA\Passwords\Services\PageShotService;
 use OCA\Passwords\Services\RevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\App;
@@ -107,7 +107,7 @@ class Application extends App {
                 $c->query('AppName'),
                 $c->query('Request'),
                 $c->query('FaviconService'),
-                $c->query('PreviewService'),
+                $c->query('PageShotService'),
                 $c->query('PasswordGenerationHelper')
             );
         });
@@ -161,11 +161,13 @@ class Application extends App {
         });
         $container->registerService('FaviconService', function (IAppContainer $c) {
             return new FaviconService(
+                $c->query('ConfigurationService'),
                 $c->query('FileCacheService')
             );
         });
-        $container->registerService('PreviewService', function (IAppContainer $c) {
-            return new PreviewService(
+        $container->registerService('PageShotService', function (IAppContainer $c) {
+            return new PageShotService(
+                $c->query('ConfigurationService'),
                 $c->query('FileCacheService')
             );
         });

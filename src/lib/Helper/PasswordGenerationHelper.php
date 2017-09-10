@@ -47,24 +47,16 @@ class PasswordGenerationHelper {
     }
 
     /**
-     * @param $options
+     * @param array $options
      *
      * @return string
      */
-    protected function sendRandomWordRequest($options): string {
-        $ch = curl_init('http://watchout4snakes.com/wo4snakes/Random/RandomPhrase');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, 2);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($options));
-        $response = curl_exec($ch);
-        $status   = in_array(curl_getinfo($ch, CURLINFO_HTTP_CODE), ['200', '201', '202']);
-        curl_close($ch);
+    protected function sendRandomWordRequest(array $options): string {
+        $request = new HttpRequestHelper();
+        $request->setUrl('http://watchout4snakes.com/wo4snakes/Random/RandomPhrase')
+                ->setPost($options);
 
-        if(!$status) return false;
-
-        return $response;
+        return $request->sendWithRetry();
     }
 
     /**

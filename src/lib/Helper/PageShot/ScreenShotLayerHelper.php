@@ -10,14 +10,14 @@ namespace OCA\Passwords\Helper\PageShot;
 
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\PreviewService;
+use OCA\Passwords\Services\PageShotService;
 
 /**
- * Class ScreenshotLayerHelper
+ * Class ScreenShotLayerHelper
  *
  * @package OCA\Passwords\Helper\PageShot
  */
-class ScreenshotLayerHelper extends AbstractPageShotHelper {
+class ScreenShotLayerHelper extends AbstractPageShotHelper {
 
     /**
      * @var string
@@ -30,7 +30,7 @@ class ScreenshotLayerHelper extends AbstractPageShotHelper {
     protected $config;
 
     /**
-     * ScreenshotLayerHelper constructor.
+     * ScreenShotLayerHelper constructor.
      *
      * @param FileCacheService     $fileCacheService
      * @param ConfigurationService $config
@@ -49,7 +49,7 @@ class ScreenshotLayerHelper extends AbstractPageShotHelper {
     protected function getPageShotUrl(string $domain, string $view): string {
         $apiKey = $this->config->getAppValue('service/pageshot/screenshotlayer/apiKey');
 
-        if($view === PreviewService::VIEWPORT_DESKTOP) {
+        if($view === PageShotService::VIEWPORT_DESKTOP) {
             return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport=1280x720&width=720&fullpage=1&url=http://{$domain}";
         }
 
