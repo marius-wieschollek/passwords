@@ -2,96 +2,89 @@
 /**
  * Created by PhpStorm.
  * User: marius
- * Date: 29.08.17
- * Time: 22:01
+ * Date: 10.09.17
+ * Time: 13:24
  */
 
-namespace OCA\Passwords\Helper;
+namespace OCA\Passwords\Services;
+
+use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 
 /**
- * Class PasswordGenerationHelper
+ * Class PasswordGenerationService
  *
- * @package OCA\Passwords\Helper
+ * @package OCA\Passwords\Services
  */
-class PasswordGenerationHelper {
+class PasswordGenerationService {
+
+    const SERVICE_LOCAL  = 'local';
+    const SERVICE_SNAKES = 'wo4snakes';
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
+     * @var int
+     */
+    protected $retries = 0;
+
+    /**
+     * FaviconService constructor.
+     *
+     * @param ConfigurationService $config
+     */
+    public function __construct(ConfigurationService $config) {
+        $this->config = $config;
+    }
 
     /**
      * @param int  $strength
      * @param bool $addNumbers
      * @param bool $addSpecialCharacters
-     *
      * @param bool $addSmileys
      *
      * @return array
      */
-    public function create(
+    public function getPassword(
         int $strength = 1,
         bool $addNumbers = false,
         bool $addSpecialCharacters = false,
         bool $addSmileys = false
-    ): array {
+    ) {
+        $this->retries++;
+        if($this->retries > 5) {
+            throw new ApiException("Password Generation Service Unavailable");
+        }
 
-        $options = $this->getRequestOptions($strength);
+        $wordsGenerator = $this->getWordsGenerator();
+        $words          = $wordsGenerator->getWords($strength);
+        $password       = $this->wordsToPassword($words);
 
-        $words    = $this->sendRandomWordRequest($options);
-        $password = $this->wordsToPassword($words);
-
-        if(strlen($password) < 12) return $this->create($strength, $addNumbers, $addSpecialCharacters, $addSmileys);
+        /** @TODO this could run forever potentially */
+        if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters, $addSmileys);
 
         $amount = $strength == 1 ? 2:$strength;
         if($addNumbers) $password = $this->addNumbers($password, $amount);
         if($addSpecialCharacters) $password = $this->addSpecialCharacters($password, $amount);
         if($addSmileys) $password = $this->addSmileys($password, $amount);
 
-        return [$password, explode(' ', $words)];
+        return [$password, $words];
     }
 
     /**
-     * @param array $options
+     * @param array $words
      *
      * @return string
      */
-    protected function sendRandomWordRequest(array $options): string {
-        $request = new HttpRequestHelper();
-        $request->setUrl('http://watchout4snakes.com/wo4snakes/Random/RandomPhrase')
-                ->setPost($options);
+    protected function wordsToPassword(array $words): string {
+        $words = array_map('ucfirst', $words);
 
-        return $request->sendWithRetry();
-    }
-
-    /**
-     * @param int $strength
-     *
-     * @return array
-     */
-    protected function getRequestOptions(int $strength): array {
-        $options = [
-            'Pos1'   => 'a',
-            'Level1' => $strength == 4 ? 50:35,
-            'Pos2'   => $strength == 1 ? 'n':'a',
-            'Level2' => $strength == 1 ? 35:50,
-        ];
-
-        if($strength >= 2) {
-            $options['Pos3']   = $strength > 2 ? 'a':'n';
-            $options['Level3'] = $strength == 4 ? 60:50;
-        }
-
-        if($strength >= 3) {
-            $options['Pos4']   = 'n';
-            $options['Level4'] = $strength == 4 ? 70:60;
-        }
-
-        return $options;
-    }
-
-    /**
-     * @param string $words
-     *
-     * @return string
-     */
-    protected function wordsToPassword(string $words): string {
-        return str_replace(' ', '', ucwords($words));
+        return implode('', $words);
     }
 
     /**
@@ -162,5 +155,20 @@ class PasswordGenerationHelper {
         }
 
         return $word;
+    }
+
+    /**
+     * @return AbstractWordsHelper
+     * @TODO support more services
+     */
+    protected function getWordsGenerator(): AbstractWordsHelper {
+        switch ($this->config->getUserValue('service/words', self::SERVICE_SNAKES)) {
+            case self::SERVICE_LOCAL:
+                return new LocalWordsHelper();
+            case self::SERVICE_SNAKES:
+                return new SnakesWordsHelper();
+        }
+
+        return new LocalWordsHelper();
     }
 }
