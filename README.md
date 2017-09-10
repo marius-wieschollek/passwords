@@ -69,7 +69,9 @@ Passwords offers complete API, giving you access to all features of the app.
 #### Requirements
 * Nextcloud 12+
 * PHP 7.0+
-* openssl
+* libXrender1
+* libfontconfig1
+* libXext6
 
 ## Development
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.

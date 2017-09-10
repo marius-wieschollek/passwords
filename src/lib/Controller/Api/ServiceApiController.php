@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Helper\PasswordGenerationHelper;
 use OCA\Passwords\Services\FaviconService;
+use OCA\Passwords\Services\PreviewService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
@@ -31,6 +32,10 @@ class ServiceApiController extends AbstractApiController {
      * @var FaviconService
      */
     protected $faviconService;
+    /**
+     * @var PreviewService
+     */
+    private $previewService;
 
     /**
      * PasswordApiController constructor.
@@ -38,12 +43,14 @@ class ServiceApiController extends AbstractApiController {
      * @param string                   $appName
      * @param IRequest                 $request
      * @param FaviconService           $faviconService
+     * @param PreviewService           $previewService
      * @param PasswordGenerationHelper $passwordCreationHelper
      */
     public function __construct(
         $appName,
         IRequest $request,
         FaviconService $faviconService,
+        PreviewService $previewService,
         PasswordGenerationHelper $passwordCreationHelper
     ) {
         parent::__construct(
@@ -56,6 +63,7 @@ class ServiceApiController extends AbstractApiController {
 
         $this->faviconService         = $faviconService;
         $this->passwordCreationHelper = $passwordCreationHelper;
+        $this->previewService = $previewService;
     }
 
     /**
@@ -96,6 +104,27 @@ class ServiceApiController extends AbstractApiController {
      */
     public function getFavicon(string $domain, int $size = 24) {
         $file = $this->faviconService->getFavicon($domain, $size);
+        return new FileDisplayResponse(
+            $file,
+            Http::STATUS_OK,
+            ['Content-Type' => $file->getMimeType()]
+        );
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $domain
+     * @param string $view
+     * @param int    $width
+     * @param int    $height
+     *
+     * @return FileDisplayResponse
+     */
+    public function getPreview(string $domain, string $view = 'desktop', int $width = 550, int $height = 0) {
+
+        $file = $this->previewService->getPreview($domain, $view, $width, $height);
         return new FileDisplayResponse(
             $file,
             Http::STATUS_OK,
