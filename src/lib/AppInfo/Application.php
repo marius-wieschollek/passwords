@@ -10,6 +10,7 @@ namespace OCA\Passwords\AppInfo;
 
 use OCA\Passwords\Activity;
 use OCA\Passwords\Controller\AccessController;
+use OCA\Passwords\Controller\AdminSettingsController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\PageController;
@@ -26,6 +27,7 @@ use OCA\Passwords\Services\PasswordGenerationService;
 use OCA\Passwords\Services\PasswordService;
 use OCA\Passwords\Services\RevisionService;
 use OCA\Passwords\Services\ValidationService;
+use OCA\Passwords\Settings\AdminSettings;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\Files\IAppData;
@@ -113,6 +115,15 @@ class Application extends App {
             );
         });
 
+        $container->registerService('AdminSettingsController', function (IAppContainer $c) {
+            return new AdminSettingsController(
+                $c->query('AppName'),
+                $c->query('Request'),
+                $this->getContainer()->getServer()->getConfig(),
+                clone $c->query('FileCacheService')
+            );
+        });
+
         /**
          * Mappers
          */
@@ -163,13 +174,13 @@ class Application extends App {
         $container->registerService('FaviconService', function (IAppContainer $c) {
             return new FaviconService(
                 $c->query('ConfigurationService'),
-                $c->query('FileCacheService')
+                clone $c->query('FileCacheService')
             );
         });
         $container->registerService('PageShotService', function (IAppContainer $c) {
             return new PageShotService(
                 $c->query('ConfigurationService'),
-                $c->query('FileCacheService')
+                clone $c->query('FileCacheService')
             );
         });
         $container->registerService('ConfigurationService', function (IAppContainer $c) {
@@ -181,12 +192,27 @@ class Application extends App {
             );
         });
 
+        $container->registerService('LocalisationService', function (IAppContainer $c) {
+            return $c->query('ServerContainer')->getL10N(self::APP_NAME);
+        });
+
         /**
          * Helper
          */
         $container->registerService('PasswordApiObjectHelper', function (IAppContainer $c) {
             return new PasswordApiObjectHelper(
                 $c->query('RevisionService')
+            );
+        });
+
+        /**
+         * Admin Settings
+         */
+        $container->registerService('AdminSettings', function (IAppContainer $c) {
+            return new AdminSettings(
+                $c->query('LocalisationService'),
+                $c->query('ConfigurationService'),
+                clone $c->query('FileCacheService')
             );
         });
 

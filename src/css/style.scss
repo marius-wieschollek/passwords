@@ -8,9 +8,9 @@ $color-grey-light : #dbdbdb;
 $color-grey-lighter : #eee;
 $color-white : #fff;
 
-.passwords {
-    @import "FontAwesome/scss/font-awesome";
+@import "FontAwesome/scss/font-awesome";
 
+.passwords {
     [data-constant="constant"] {
         display : none;
     }

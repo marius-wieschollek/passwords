@@ -103,17 +103,16 @@ class PageShotService {
             $image = class_exists(Imagick::class) ? new Imagick():new Gmagick();
             $image->readImageBlob($file->getContent());
 
-            $size        = $image->getSize();
-            $scaleHeight = $width * ($size['rows'] / $size['colums']);
-            $image->resizeImage($width, $scaleHeight, 0, 0);
+            $scaleHeight = $width * ($image->getImageHeight() / $image->getImageWidth());
+            $image->adaptiveResizeImage($width, $scaleHeight, 0);
 
-            $size = $image->getSize();
-            if($height != 0 && $height < $size['rows']) {
+            if($height != 0 && $height < $image->getImageHeight()) {
                 $image->cropImage($width, $height, 0, 0);
             }
 
             $image->stripImage();
             $image->setImageFormat('jpg');
+            $image->setImageCompression($image::COMPRESSION_JPEG);
             $image->setImageCompressionQuality(90);
 
             return $image->getImageBlob();
@@ -146,10 +145,11 @@ class PageShotService {
 
     /**
      * @return AbstractPageShotHelper
-     * @TODO support gnome-web-photo service
      */
     protected function getPageShotService(): AbstractPageShotHelper {
-        switch ($this->config->getUserValue('service/pageshot', self::SERVICE_WKHTML)) {
+        $service = $this->config->getAppValue('service/pageshot', self::SERVICE_WKHTML);
+
+        switch ($service) {
             case self::SERVICE_WKHTML:
                 return new WkhtmlImageHelper($this->fileCacheService);
             case self::SERVICE_SCREEN_SHOT_API:
