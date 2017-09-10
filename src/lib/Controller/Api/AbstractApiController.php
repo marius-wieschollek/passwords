@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Exception\ApiException;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
 
@@ -36,12 +37,25 @@ abstract class AbstractApiController extends ApiController {
      * @return JSONResponse
      */
     protected function createErrorResponse(\Throwable $e): JSONResponse {
+        $message    = "Unable to complete request";
+        $id         = 0;
+        $statusCode = 500;
+
+        \OC::$server->getLogger()->logException($e);
+
+        if(get_class($e) === ApiException::class || is_subclass_of($e, ApiException::class)) {
+            /** @var ApiException $e */
+            $id         = $e->getId();
+            $message    = $e->getMessage();
+            $statusCode = $e->getHttpCode();
+        }
+
         return new JSONResponse(
             [
                 'status'  => 'error',
-                // @TODO It's never a good idea to pass all error messages to the frontend
-                'message' => $e->getMessage()
-            ], 400
+                'id'      => $id,
+                'message' => $message
+            ], $statusCode
         );
     }
 }
