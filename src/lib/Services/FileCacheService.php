@@ -48,12 +48,39 @@ class FileCacheService {
      *
      * @return ISimpleFolder
      */
-    public function getCache(string $cache): ISimpleFolder {
+    public function getCache(string $cache = null): ISimpleFolder {
+        $cache = $this->validateCacheName($cache);
+
         try {
             return $this->appData->getFolder($cache.'Cache');
         } catch (NotFoundException $e) {
             return $this->appData->newFolder($cache.'Cache');
         }
+    }
+
+    /**
+     * @param null $cache
+     *
+     * @return array
+     */
+    public function getCacheInfo($cache = null): array {
+        $cache = $this->validateCacheName($cache);
+
+        $fileCache   = $this->getCache($cache);
+        $cachedFiles = $fileCache->getDirectoryListing();
+
+        $info = [
+            'name'  => $cache,
+            'size'  => 0,
+            'files' => 0
+        ];
+
+        foreach ($cachedFiles as $file) {
+            $info['size'] += $file->getSize();
+            $info['files']++;
+        }
+
+        return $info;
     }
 
     /**

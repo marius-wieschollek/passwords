@@ -50,9 +50,9 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @return bool|string
      */
     protected function capturePageShot(string $domain, string $view) {
-        $tempFile = \OC::$server->getConfig()->getSystemValue('tempdirectory', '/tmp/').uniqid().'.png';
+        $tempFile = \OC::$server->getConfig()->getSystemValue('tempdirectory', '/tmp/').uniqid().'.jpg';
         $cmd      = $this->getWkHtmlBinary().
-                    ' --quiet --no-stop-slow-scripts --disable-smart-width --javascript-delay 1500 --width '.
+                    ' --quiet --no-stop-slow-scripts --disable-smart-width --javascript-delay 1500 --format JPG --width '.
                     ($view === 'desktop' ? 1280:360).
                     ' '.escapeshellarg('http://'.$domain).' '.$tempFile;
 
@@ -61,10 +61,10 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
             @exec($cmd, $output, $returnCode);
 
             if($returnCode == 0 && is_file($tempFile)) {
-                $contents = file_get_contents($tempFile);
+                $content = file_get_contents($tempFile);
                 unlink($tempFile);
 
-                return $contents;
+                return $content;
             } else {
                 $retries++;
             }

@@ -31,6 +31,37 @@ class HttpRequestHelper {
     protected $header;
 
     /**
+     * @var array
+     */
+    protected $json;
+
+    /**
+     * @var int[]
+     */
+    protected $acceptResponseCodes = [200, 201, 202];
+
+    /**
+     * @var array
+     */
+    protected $info;
+
+    /**
+     * @var string
+     */
+    protected $response;
+
+    /**
+     * HttpRequestHelper constructor.
+     *
+     * @param string|null $url
+     */
+    public function __construct(string $url = null) {
+        if($url !== null) {
+            $this->setUrl($url);
+        }
+    }
+
+    /**
      * @param string $url
      *
      * @return HttpRequestHelper
@@ -64,6 +95,28 @@ class HttpRequestHelper {
     }
 
     /**
+     * @param array $json
+     *
+     * @return HttpRequestHelper
+     */
+    public function setJson(array $json): HttpRequestHelper {
+        $this->json = $json;
+
+        return $this;
+    }
+
+    /**
+     * @param int[] $acceptResponseCodes
+     *
+     * @return HttpRequestHelper
+     */
+    public function setAcceptResponseCodes(array $acceptResponseCodes): HttpRequestHelper {
+        $this->acceptResponseCodes = $acceptResponseCodes;
+
+        return $this;
+    }
+
+    /**
      * @param string|null $url
      *
      * @return bool|mixed
@@ -78,6 +131,13 @@ class HttpRequestHelper {
             curl_setopt($ch, CURLOPT_POST, 2);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->post));
         }
+        if(!empty($this->json)) {
+            $json = json_encode($this->json);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+            $this->header['Content-Type']   = 'application/json';
+            $this->header['Content-Length'] = strlen($json);
+        }
         if(!empty($this->header)) {
             $header = [];
 
@@ -88,13 +148,16 @@ class HttpRequestHelper {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         }
 
-        $response = curl_exec($ch);
-        $status   = in_array(curl_getinfo($ch, CURLINFO_HTTP_CODE), ['200', '201', '202']);
+        $this->response = curl_exec($ch);
+        $this->info     = curl_getinfo($ch);
         curl_close($ch);
 
-        if(!$status) return false;
+        if(!empty($this->acceptResponseCodes)) {
+            $status = in_array($this->info['http_code'], ['200', '201', '202']);
+            if(!$status) return false;
+        }
 
-        return $response;
+        return $this->response;
     }
 
     /**
@@ -112,5 +175,19 @@ class HttpRequestHelper {
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInfo(): array {
+        return $this->info;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponse() {
+        return $this->response;
     }
 }

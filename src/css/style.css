@@ -1,84 +1,94 @@
 @charset "UTF-8";
-.passwords {
-  /*!
-   *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
-   *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
-   */
-  /* FONT PATH
-   * -------------------------- */
-  /* makes the font 33% larger relative to the icon container */
-  /* Deprecated as of 4.4.0 */
-  /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
-     readers do not read off random characters that represent icons */ }
+/* FONT PATH
+ * -------------------------- */
 @font-face {
-  .passwords {
-    font-family: 'FontAwesome';
-    src: url("./FontAwesome/fonts/fontawesome-webfont.eot?v=4.7.0");
-    src: url("./FontAwesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("./FontAwesome/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("./FontAwesome/fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("./FontAwesome/fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("./FontAwesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
-    font-weight: normal;
-    font-style: normal; } }
-  .passwords .fa {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; }
-  .passwords .fa-lg {
-    font-size: 1.3333333333em;
-    line-height: 0.75em;
-    vertical-align: -15%; }
-  .passwords .fa-2x {
-    font-size: 2em; }
-  .passwords .fa-3x {
-    font-size: 3em; }
-  .passwords .fa-4x {
-    font-size: 4em; }
-  .passwords .fa-5x {
-    font-size: 5em; }
-  .passwords .fa-fw {
-    width: 1.2857142857em;
-    text-align: center; }
-  .passwords .fa-ul {
-    padding-left: 0;
-    margin-left: 2.1428571429em;
-    list-style-type: none; }
-    .passwords .fa-ul > li {
-      position: relative; }
-  .passwords .fa-li {
-    position: absolute;
-    left: -2.1428571429em;
-    width: 2.1428571429em;
-    top: 0.1428571429em;
-    text-align: center; }
-    .passwords .fa-li.fa-lg {
-      left: -1.8571428571em; }
-  .passwords .fa-border {
-    padding: .2em .25em .15em;
-    border: solid 0.08em #eee;
-    border-radius: .1em; }
-  .passwords .fa-pull-left {
-    float: left; }
-  .passwords .fa-pull-right {
-    float: right; }
-  .passwords .fa.fa-pull-left {
-    margin-right: .3em; }
-  .passwords .fa.fa-pull-right {
-    margin-left: .3em; }
-  .passwords .pull-right {
-    float: right; }
-  .passwords .pull-left {
-    float: left; }
-  .passwords .fa.pull-left {
-    margin-right: .3em; }
-  .passwords .fa.pull-right {
-    margin-left: .3em; }
-  .passwords .fa-spin {
-    -webkit-animation: fa-spin 2s infinite linear;
-    animation: fa-spin 2s infinite linear; }
-  .passwords .fa-pulse {
-    -webkit-animation: fa-spin 1s infinite steps(8);
-    animation: fa-spin 1s infinite steps(8); }
+  font-family: 'FontAwesome';
+  src: url("./FontAwesome/fonts/fontawesome-webfont.eot?v=4.7.0");
+  src: url("./FontAwesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("./FontAwesome/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("./FontAwesome/fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("./FontAwesome/fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("./FontAwesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+/* makes the font 33% larger relative to the icon container */
+.fa-lg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -15%; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-fw {
+  width: 1.2857142857em;
+  text-align: center; }
+
+.fa-ul {
+  padding-left: 0;
+  margin-left: 2.1428571429em;
+  list-style-type: none; }
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  position: absolute;
+  left: -2.1428571429em;
+  width: 2.1428571429em;
+  top: 0.1428571429em;
+  text-align: center; }
+  .fa-li.fa-lg {
+    left: -1.8571428571em; }
+
+.fa-border {
+  padding: .2em .25em .15em;
+  border: solid 0.08em #eee;
+  border-radius: .1em; }
+
+.fa-pull-left {
+  float: left; }
+
+.fa-pull-right {
+  float: right; }
+
+.fa.fa-pull-left {
+  margin-right: .3em; }
+.fa.fa-pull-right {
+  margin-left: .3em; }
+
+/* Deprecated as of 4.4.0 */
+.pull-right {
+  float: right; }
+
+.pull-left {
+  float: left; }
+
+.fa.pull-left {
+  margin-right: .3em; }
+.fa.pull-right {
+  margin-left: .3em; }
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear; }
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8); }
+
 @-webkit-keyframes fa-spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -93,1861 +103,2551 @@
   100% {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
-  .passwords .fa-rotate-90 {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg); }
-  .passwords .fa-rotate-180 {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-    -webkit-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    transform: rotate(180deg); }
-  .passwords .fa-rotate-270 {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-    -webkit-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    transform: rotate(270deg); }
-  .passwords .fa-flip-horizontal {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-    -webkit-transform: scale(-1, 1);
-    -ms-transform: scale(-1, 1);
-    transform: scale(-1, 1); }
-  .passwords .fa-flip-vertical {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-    -webkit-transform: scale(1, -1);
-    -ms-transform: scale(1, -1);
-    transform: scale(1, -1); }
-  .passwords :root .fa-rotate-90,
-  .passwords :root .fa-rotate-180,
-  .passwords :root .fa-rotate-270,
-  .passwords :root .fa-flip-horizontal,
-  .passwords :root .fa-flip-vertical {
-    filter: none; }
-  .passwords .fa-stack {
-    position: relative;
-    display: inline-block;
-    width: 2em;
-    height: 2em;
-    line-height: 2em;
-    vertical-align: middle; }
-  .passwords .fa-stack-1x, .passwords .fa-stack-2x {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    text-align: center; }
-  .passwords .fa-stack-1x {
-    line-height: inherit; }
-  .passwords .fa-stack-2x {
-    font-size: 2em; }
-  .passwords .fa-inverse {
-    color: #fff; }
-  .passwords .fa-glass:before {
-    content: ""; }
-  .passwords .fa-music:before {
-    content: ""; }
-  .passwords .fa-search:before {
-    content: ""; }
-  .passwords .fa-envelope-o:before {
-    content: ""; }
-  .passwords .fa-heart:before {
-    content: ""; }
-  .passwords .fa-star:before {
-    content: ""; }
-  .passwords .fa-star-o:before {
-    content: ""; }
-  .passwords .fa-user:before {
-    content: ""; }
-  .passwords .fa-film:before {
-    content: ""; }
-  .passwords .fa-th-large:before {
-    content: ""; }
-  .passwords .fa-th:before {
-    content: ""; }
-  .passwords .fa-th-list:before {
-    content: ""; }
-  .passwords .fa-check:before {
-    content: ""; }
-  .passwords .fa-remove:before,
-  .passwords .fa-close:before,
-  .passwords .fa-times:before {
-    content: ""; }
-  .passwords .fa-search-plus:before {
-    content: ""; }
-  .passwords .fa-search-minus:before {
-    content: ""; }
-  .passwords .fa-power-off:before {
-    content: ""; }
-  .passwords .fa-signal:before {
-    content: ""; }
-  .passwords .fa-gear:before,
-  .passwords .fa-cog:before {
-    content: ""; }
-  .passwords .fa-trash-o:before {
-    content: ""; }
-  .passwords .fa-home:before {
-    content: ""; }
-  .passwords .fa-file-o:before {
-    content: ""; }
-  .passwords .fa-clock-o:before {
-    content: ""; }
-  .passwords .fa-road:before {
-    content: ""; }
-  .passwords .fa-download:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-o-down:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-o-up:before {
-    content: ""; }
-  .passwords .fa-inbox:before {
-    content: ""; }
-  .passwords .fa-play-circle-o:before {
-    content: ""; }
-  .passwords .fa-rotate-right:before,
-  .passwords .fa-repeat:before {
-    content: ""; }
-  .passwords .fa-refresh:before {
-    content: ""; }
-  .passwords .fa-list-alt:before {
-    content: ""; }
-  .passwords .fa-lock:before {
-    content: ""; }
-  .passwords .fa-flag:before {
-    content: ""; }
-  .passwords .fa-headphones:before {
-    content: ""; }
-  .passwords .fa-volume-off:before {
-    content: ""; }
-  .passwords .fa-volume-down:before {
-    content: ""; }
-  .passwords .fa-volume-up:before {
-    content: ""; }
-  .passwords .fa-qrcode:before {
-    content: ""; }
-  .passwords .fa-barcode:before {
-    content: ""; }
-  .passwords .fa-tag:before {
-    content: ""; }
-  .passwords .fa-tags:before {
-    content: ""; }
-  .passwords .fa-book:before {
-    content: ""; }
-  .passwords .fa-bookmark:before {
-    content: ""; }
-  .passwords .fa-print:before {
-    content: ""; }
-  .passwords .fa-camera:before {
-    content: ""; }
-  .passwords .fa-font:before {
-    content: ""; }
-  .passwords .fa-bold:before {
-    content: ""; }
-  .passwords .fa-italic:before {
-    content: ""; }
-  .passwords .fa-text-height:before {
-    content: ""; }
-  .passwords .fa-text-width:before {
-    content: ""; }
-  .passwords .fa-align-left:before {
-    content: ""; }
-  .passwords .fa-align-center:before {
-    content: ""; }
-  .passwords .fa-align-right:before {
-    content: ""; }
-  .passwords .fa-align-justify:before {
-    content: ""; }
-  .passwords .fa-list:before {
-    content: ""; }
-  .passwords .fa-dedent:before,
-  .passwords .fa-outdent:before {
-    content: ""; }
-  .passwords .fa-indent:before {
-    content: ""; }
-  .passwords .fa-video-camera:before {
-    content: ""; }
-  .passwords .fa-photo:before,
-  .passwords .fa-image:before,
-  .passwords .fa-picture-o:before {
-    content: ""; }
-  .passwords .fa-pencil:before {
-    content: ""; }
-  .passwords .fa-map-marker:before {
-    content: ""; }
-  .passwords .fa-adjust:before {
-    content: ""; }
-  .passwords .fa-tint:before {
-    content: ""; }
-  .passwords .fa-edit:before,
-  .passwords .fa-pencil-square-o:before {
-    content: ""; }
-  .passwords .fa-share-square-o:before {
-    content: ""; }
-  .passwords .fa-check-square-o:before {
-    content: ""; }
-  .passwords .fa-arrows:before {
-    content: ""; }
-  .passwords .fa-step-backward:before {
-    content: ""; }
-  .passwords .fa-fast-backward:before {
-    content: ""; }
-  .passwords .fa-backward:before {
-    content: ""; }
-  .passwords .fa-play:before {
-    content: ""; }
-  .passwords .fa-pause:before {
-    content: ""; }
-  .passwords .fa-stop:before {
-    content: ""; }
-  .passwords .fa-forward:before {
-    content: ""; }
-  .passwords .fa-fast-forward:before {
-    content: ""; }
-  .passwords .fa-step-forward:before {
-    content: ""; }
-  .passwords .fa-eject:before {
-    content: ""; }
-  .passwords .fa-chevron-left:before {
-    content: ""; }
-  .passwords .fa-chevron-right:before {
-    content: ""; }
-  .passwords .fa-plus-circle:before {
-    content: ""; }
-  .passwords .fa-minus-circle:before {
-    content: ""; }
-  .passwords .fa-times-circle:before {
-    content: ""; }
-  .passwords .fa-check-circle:before {
-    content: ""; }
-  .passwords .fa-question-circle:before {
-    content: ""; }
-  .passwords .fa-info-circle:before {
-    content: ""; }
-  .passwords .fa-crosshairs:before {
-    content: ""; }
-  .passwords .fa-times-circle-o:before {
-    content: ""; }
-  .passwords .fa-check-circle-o:before {
-    content: ""; }
-  .passwords .fa-ban:before {
-    content: ""; }
-  .passwords .fa-arrow-left:before {
-    content: ""; }
-  .passwords .fa-arrow-right:before {
-    content: ""; }
-  .passwords .fa-arrow-up:before {
-    content: ""; }
-  .passwords .fa-arrow-down:before {
-    content: ""; }
-  .passwords .fa-mail-forward:before,
-  .passwords .fa-share:before {
-    content: ""; }
-  .passwords .fa-expand:before {
-    content: ""; }
-  .passwords .fa-compress:before {
-    content: ""; }
-  .passwords .fa-plus:before {
-    content: ""; }
-  .passwords .fa-minus:before {
-    content: ""; }
-  .passwords .fa-asterisk:before {
-    content: ""; }
-  .passwords .fa-exclamation-circle:before {
-    content: ""; }
-  .passwords .fa-gift:before {
-    content: ""; }
-  .passwords .fa-leaf:before {
-    content: ""; }
-  .passwords .fa-fire:before {
-    content: ""; }
-  .passwords .fa-eye:before {
-    content: ""; }
-  .passwords .fa-eye-slash:before {
-    content: ""; }
-  .passwords .fa-warning:before,
-  .passwords .fa-exclamation-triangle:before {
-    content: ""; }
-  .passwords .fa-plane:before {
-    content: ""; }
-  .passwords .fa-calendar:before {
-    content: ""; }
-  .passwords .fa-random:before {
-    content: ""; }
-  .passwords .fa-comment:before {
-    content: ""; }
-  .passwords .fa-magnet:before {
-    content: ""; }
-  .passwords .fa-chevron-up:before {
-    content: ""; }
-  .passwords .fa-chevron-down:before {
-    content: ""; }
-  .passwords .fa-retweet:before {
-    content: ""; }
-  .passwords .fa-shopping-cart:before {
-    content: ""; }
-  .passwords .fa-folder:before {
-    content: ""; }
-  .passwords .fa-folder-open:before {
-    content: ""; }
-  .passwords .fa-arrows-v:before {
-    content: ""; }
-  .passwords .fa-arrows-h:before {
-    content: ""; }
-  .passwords .fa-bar-chart-o:before,
-  .passwords .fa-bar-chart:before {
-    content: ""; }
-  .passwords .fa-twitter-square:before {
-    content: ""; }
-  .passwords .fa-facebook-square:before {
-    content: ""; }
-  .passwords .fa-camera-retro:before {
-    content: ""; }
-  .passwords .fa-key:before {
-    content: ""; }
-  .passwords .fa-gears:before,
-  .passwords .fa-cogs:before {
-    content: ""; }
-  .passwords .fa-comments:before {
-    content: ""; }
-  .passwords .fa-thumbs-o-up:before {
-    content: ""; }
-  .passwords .fa-thumbs-o-down:before {
-    content: ""; }
-  .passwords .fa-star-half:before {
-    content: ""; }
-  .passwords .fa-heart-o:before {
-    content: ""; }
-  .passwords .fa-sign-out:before {
-    content: ""; }
-  .passwords .fa-linkedin-square:before {
-    content: ""; }
-  .passwords .fa-thumb-tack:before {
-    content: ""; }
-  .passwords .fa-external-link:before {
-    content: ""; }
-  .passwords .fa-sign-in:before {
-    content: ""; }
-  .passwords .fa-trophy:before {
-    content: ""; }
-  .passwords .fa-github-square:before {
-    content: ""; }
-  .passwords .fa-upload:before {
-    content: ""; }
-  .passwords .fa-lemon-o:before {
-    content: ""; }
-  .passwords .fa-phone:before {
-    content: ""; }
-  .passwords .fa-square-o:before {
-    content: ""; }
-  .passwords .fa-bookmark-o:before {
-    content: ""; }
-  .passwords .fa-phone-square:before {
-    content: ""; }
-  .passwords .fa-twitter:before {
-    content: ""; }
-  .passwords .fa-facebook-f:before,
-  .passwords .fa-facebook:before {
-    content: ""; }
-  .passwords .fa-github:before {
-    content: ""; }
-  .passwords .fa-unlock:before {
-    content: ""; }
-  .passwords .fa-credit-card:before {
-    content: ""; }
-  .passwords .fa-feed:before,
-  .passwords .fa-rss:before {
-    content: ""; }
-  .passwords .fa-hdd-o:before {
-    content: ""; }
-  .passwords .fa-bullhorn:before {
-    content: ""; }
-  .passwords .fa-bell:before {
-    content: ""; }
-  .passwords .fa-certificate:before {
-    content: ""; }
-  .passwords .fa-hand-o-right:before {
-    content: ""; }
-  .passwords .fa-hand-o-left:before {
-    content: ""; }
-  .passwords .fa-hand-o-up:before {
-    content: ""; }
-  .passwords .fa-hand-o-down:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-left:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-right:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-up:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-down:before {
-    content: ""; }
-  .passwords .fa-globe:before {
-    content: ""; }
-  .passwords .fa-wrench:before {
-    content: ""; }
-  .passwords .fa-tasks:before {
-    content: ""; }
-  .passwords .fa-filter:before {
-    content: ""; }
-  .passwords .fa-briefcase:before {
-    content: ""; }
-  .passwords .fa-arrows-alt:before {
-    content: ""; }
-  .passwords .fa-group:before,
-  .passwords .fa-users:before {
-    content: ""; }
-  .passwords .fa-chain:before,
-  .passwords .fa-link:before {
-    content: ""; }
-  .passwords .fa-cloud:before {
-    content: ""; }
-  .passwords .fa-flask:before {
-    content: ""; }
-  .passwords .fa-cut:before,
-  .passwords .fa-scissors:before {
-    content: ""; }
-  .passwords .fa-copy:before,
-  .passwords .fa-files-o:before {
-    content: ""; }
-  .passwords .fa-paperclip:before {
-    content: ""; }
-  .passwords .fa-save:before,
-  .passwords .fa-floppy-o:before {
-    content: ""; }
-  .passwords .fa-square:before {
-    content: ""; }
-  .passwords .fa-navicon:before,
-  .passwords .fa-reorder:before,
-  .passwords .fa-bars:before {
-    content: ""; }
-  .passwords .fa-list-ul:before {
-    content: ""; }
-  .passwords .fa-list-ol:before {
-    content: ""; }
-  .passwords .fa-strikethrough:before {
-    content: ""; }
-  .passwords .fa-underline:before {
-    content: ""; }
-  .passwords .fa-table:before {
-    content: ""; }
-  .passwords .fa-magic:before {
-    content: ""; }
-  .passwords .fa-truck:before {
-    content: ""; }
-  .passwords .fa-pinterest:before {
-    content: ""; }
-  .passwords .fa-pinterest-square:before {
-    content: ""; }
-  .passwords .fa-google-plus-square:before {
-    content: ""; }
-  .passwords .fa-google-plus:before {
-    content: ""; }
-  .passwords .fa-money:before {
-    content: ""; }
-  .passwords .fa-caret-down:before {
-    content: ""; }
-  .passwords .fa-caret-up:before {
-    content: ""; }
-  .passwords .fa-caret-left:before {
-    content: ""; }
-  .passwords .fa-caret-right:before {
-    content: ""; }
-  .passwords .fa-columns:before {
-    content: ""; }
-  .passwords .fa-unsorted:before,
-  .passwords .fa-sort:before {
-    content: ""; }
-  .passwords .fa-sort-down:before,
-  .passwords .fa-sort-desc:before {
-    content: ""; }
-  .passwords .fa-sort-up:before,
-  .passwords .fa-sort-asc:before {
-    content: ""; }
-  .passwords .fa-envelope:before {
-    content: ""; }
-  .passwords .fa-linkedin:before {
-    content: ""; }
-  .passwords .fa-rotate-left:before,
-  .passwords .fa-undo:before {
-    content: ""; }
-  .passwords .fa-legal:before,
-  .passwords .fa-gavel:before {
-    content: ""; }
-  .passwords .fa-dashboard:before,
-  .passwords .fa-tachometer:before {
-    content: ""; }
-  .passwords .fa-comment-o:before {
-    content: ""; }
-  .passwords .fa-comments-o:before {
-    content: ""; }
-  .passwords .fa-flash:before,
-  .passwords .fa-bolt:before {
-    content: ""; }
-  .passwords .fa-sitemap:before {
-    content: ""; }
-  .passwords .fa-umbrella:before {
-    content: ""; }
-  .passwords .fa-paste:before,
-  .passwords .fa-clipboard:before {
-    content: ""; }
-  .passwords .fa-lightbulb-o:before {
-    content: ""; }
-  .passwords .fa-exchange:before {
-    content: ""; }
-  .passwords .fa-cloud-download:before {
-    content: ""; }
-  .passwords .fa-cloud-upload:before {
-    content: ""; }
-  .passwords .fa-user-md:before {
-    content: ""; }
-  .passwords .fa-stethoscope:before {
-    content: ""; }
-  .passwords .fa-suitcase:before {
-    content: ""; }
-  .passwords .fa-bell-o:before {
-    content: ""; }
-  .passwords .fa-coffee:before {
-    content: ""; }
-  .passwords .fa-cutlery:before {
-    content: ""; }
-  .passwords .fa-file-text-o:before {
-    content: ""; }
-  .passwords .fa-building-o:before {
-    content: ""; }
-  .passwords .fa-hospital-o:before {
-    content: ""; }
-  .passwords .fa-ambulance:before {
-    content: ""; }
-  .passwords .fa-medkit:before {
-    content: ""; }
-  .passwords .fa-fighter-jet:before {
-    content: ""; }
-  .passwords .fa-beer:before {
-    content: ""; }
-  .passwords .fa-h-square:before {
-    content: ""; }
-  .passwords .fa-plus-square:before {
-    content: ""; }
-  .passwords .fa-angle-double-left:before {
-    content: ""; }
-  .passwords .fa-angle-double-right:before {
-    content: ""; }
-  .passwords .fa-angle-double-up:before {
-    content: ""; }
-  .passwords .fa-angle-double-down:before {
-    content: ""; }
-  .passwords .fa-angle-left:before {
-    content: ""; }
-  .passwords .fa-angle-right:before {
-    content: ""; }
-  .passwords .fa-angle-up:before {
-    content: ""; }
-  .passwords .fa-angle-down:before {
-    content: ""; }
-  .passwords .fa-desktop:before {
-    content: ""; }
-  .passwords .fa-laptop:before {
-    content: ""; }
-  .passwords .fa-tablet:before {
-    content: ""; }
-  .passwords .fa-mobile-phone:before,
-  .passwords .fa-mobile:before {
-    content: ""; }
-  .passwords .fa-circle-o:before {
-    content: ""; }
-  .passwords .fa-quote-left:before {
-    content: ""; }
-  .passwords .fa-quote-right:before {
-    content: ""; }
-  .passwords .fa-spinner:before {
-    content: ""; }
-  .passwords .fa-circle:before {
-    content: ""; }
-  .passwords .fa-mail-reply:before,
-  .passwords .fa-reply:before {
-    content: ""; }
-  .passwords .fa-github-alt:before {
-    content: ""; }
-  .passwords .fa-folder-o:before {
-    content: ""; }
-  .passwords .fa-folder-open-o:before {
-    content: ""; }
-  .passwords .fa-smile-o:before {
-    content: ""; }
-  .passwords .fa-frown-o:before {
-    content: ""; }
-  .passwords .fa-meh-o:before {
-    content: ""; }
-  .passwords .fa-gamepad:before {
-    content: ""; }
-  .passwords .fa-keyboard-o:before {
-    content: ""; }
-  .passwords .fa-flag-o:before {
-    content: ""; }
-  .passwords .fa-flag-checkered:before {
-    content: ""; }
-  .passwords .fa-terminal:before {
-    content: ""; }
-  .passwords .fa-code:before {
-    content: ""; }
-  .passwords .fa-mail-reply-all:before,
-  .passwords .fa-reply-all:before {
-    content: ""; }
-  .passwords .fa-star-half-empty:before,
-  .passwords .fa-star-half-full:before,
-  .passwords .fa-star-half-o:before {
-    content: ""; }
-  .passwords .fa-location-arrow:before {
-    content: ""; }
-  .passwords .fa-crop:before {
-    content: ""; }
-  .passwords .fa-code-fork:before {
-    content: ""; }
-  .passwords .fa-unlink:before,
-  .passwords .fa-chain-broken:before {
-    content: ""; }
-  .passwords .fa-question:before {
-    content: ""; }
-  .passwords .fa-info:before {
-    content: ""; }
-  .passwords .fa-exclamation:before {
-    content: ""; }
-  .passwords .fa-superscript:before {
-    content: ""; }
-  .passwords .fa-subscript:before {
-    content: ""; }
-  .passwords .fa-eraser:before {
-    content: ""; }
-  .passwords .fa-puzzle-piece:before {
-    content: ""; }
-  .passwords .fa-microphone:before {
-    content: ""; }
-  .passwords .fa-microphone-slash:before {
-    content: ""; }
-  .passwords .fa-shield:before {
-    content: ""; }
-  .passwords .fa-calendar-o:before {
-    content: ""; }
-  .passwords .fa-fire-extinguisher:before {
-    content: ""; }
-  .passwords .fa-rocket:before {
-    content: ""; }
-  .passwords .fa-maxcdn:before {
-    content: ""; }
-  .passwords .fa-chevron-circle-left:before {
-    content: ""; }
-  .passwords .fa-chevron-circle-right:before {
-    content: ""; }
-  .passwords .fa-chevron-circle-up:before {
-    content: ""; }
-  .passwords .fa-chevron-circle-down:before {
-    content: ""; }
-  .passwords .fa-html5:before {
-    content: ""; }
-  .passwords .fa-css3:before {
-    content: ""; }
-  .passwords .fa-anchor:before {
-    content: ""; }
-  .passwords .fa-unlock-alt:before {
-    content: ""; }
-  .passwords .fa-bullseye:before {
-    content: ""; }
-  .passwords .fa-ellipsis-h:before {
-    content: ""; }
-  .passwords .fa-ellipsis-v:before {
-    content: ""; }
-  .passwords .fa-rss-square:before {
-    content: ""; }
-  .passwords .fa-play-circle:before {
-    content: ""; }
-  .passwords .fa-ticket:before {
-    content: ""; }
-  .passwords .fa-minus-square:before {
-    content: ""; }
-  .passwords .fa-minus-square-o:before {
-    content: ""; }
-  .passwords .fa-level-up:before {
-    content: ""; }
-  .passwords .fa-level-down:before {
-    content: ""; }
-  .passwords .fa-check-square:before {
-    content: ""; }
-  .passwords .fa-pencil-square:before {
-    content: ""; }
-  .passwords .fa-external-link-square:before {
-    content: ""; }
-  .passwords .fa-share-square:before {
-    content: ""; }
-  .passwords .fa-compass:before {
-    content: ""; }
-  .passwords .fa-toggle-down:before,
-  .passwords .fa-caret-square-o-down:before {
-    content: ""; }
-  .passwords .fa-toggle-up:before,
-  .passwords .fa-caret-square-o-up:before {
-    content: ""; }
-  .passwords .fa-toggle-right:before,
-  .passwords .fa-caret-square-o-right:before {
-    content: ""; }
-  .passwords .fa-euro:before,
-  .passwords .fa-eur:before {
-    content: ""; }
-  .passwords .fa-gbp:before {
-    content: ""; }
-  .passwords .fa-dollar:before,
-  .passwords .fa-usd:before {
-    content: ""; }
-  .passwords .fa-rupee:before,
-  .passwords .fa-inr:before {
-    content: ""; }
-  .passwords .fa-cny:before,
-  .passwords .fa-rmb:before,
-  .passwords .fa-yen:before,
-  .passwords .fa-jpy:before {
-    content: ""; }
-  .passwords .fa-ruble:before,
-  .passwords .fa-rouble:before,
-  .passwords .fa-rub:before {
-    content: ""; }
-  .passwords .fa-won:before,
-  .passwords .fa-krw:before {
-    content: ""; }
-  .passwords .fa-bitcoin:before,
-  .passwords .fa-btc:before {
-    content: ""; }
-  .passwords .fa-file:before {
-    content: ""; }
-  .passwords .fa-file-text:before {
-    content: ""; }
-  .passwords .fa-sort-alpha-asc:before {
-    content: ""; }
-  .passwords .fa-sort-alpha-desc:before {
-    content: ""; }
-  .passwords .fa-sort-amount-asc:before {
-    content: ""; }
-  .passwords .fa-sort-amount-desc:before {
-    content: ""; }
-  .passwords .fa-sort-numeric-asc:before {
-    content: ""; }
-  .passwords .fa-sort-numeric-desc:before {
-    content: ""; }
-  .passwords .fa-thumbs-up:before {
-    content: ""; }
-  .passwords .fa-thumbs-down:before {
-    content: ""; }
-  .passwords .fa-youtube-square:before {
-    content: ""; }
-  .passwords .fa-youtube:before {
-    content: ""; }
-  .passwords .fa-xing:before {
-    content: ""; }
-  .passwords .fa-xing-square:before {
-    content: ""; }
-  .passwords .fa-youtube-play:before {
-    content: ""; }
-  .passwords .fa-dropbox:before {
-    content: ""; }
-  .passwords .fa-stack-overflow:before {
-    content: ""; }
-  .passwords .fa-instagram:before {
-    content: ""; }
-  .passwords .fa-flickr:before {
-    content: ""; }
-  .passwords .fa-adn:before {
-    content: ""; }
-  .passwords .fa-bitbucket:before {
-    content: ""; }
-  .passwords .fa-bitbucket-square:before {
-    content: ""; }
-  .passwords .fa-tumblr:before {
-    content: ""; }
-  .passwords .fa-tumblr-square:before {
-    content: ""; }
-  .passwords .fa-long-arrow-down:before {
-    content: ""; }
-  .passwords .fa-long-arrow-up:before {
-    content: ""; }
-  .passwords .fa-long-arrow-left:before {
-    content: ""; }
-  .passwords .fa-long-arrow-right:before {
-    content: ""; }
-  .passwords .fa-apple:before {
-    content: ""; }
-  .passwords .fa-windows:before {
-    content: ""; }
-  .passwords .fa-android:before {
-    content: ""; }
-  .passwords .fa-linux:before {
-    content: ""; }
-  .passwords .fa-dribbble:before {
-    content: ""; }
-  .passwords .fa-skype:before {
-    content: ""; }
-  .passwords .fa-foursquare:before {
-    content: ""; }
-  .passwords .fa-trello:before {
-    content: ""; }
-  .passwords .fa-female:before {
-    content: ""; }
-  .passwords .fa-male:before {
-    content: ""; }
-  .passwords .fa-gittip:before,
-  .passwords .fa-gratipay:before {
-    content: ""; }
-  .passwords .fa-sun-o:before {
-    content: ""; }
-  .passwords .fa-moon-o:before {
-    content: ""; }
-  .passwords .fa-archive:before {
-    content: ""; }
-  .passwords .fa-bug:before {
-    content: ""; }
-  .passwords .fa-vk:before {
-    content: ""; }
-  .passwords .fa-weibo:before {
-    content: ""; }
-  .passwords .fa-renren:before {
-    content: ""; }
-  .passwords .fa-pagelines:before {
-    content: ""; }
-  .passwords .fa-stack-exchange:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-o-right:before {
-    content: ""; }
-  .passwords .fa-arrow-circle-o-left:before {
-    content: ""; }
-  .passwords .fa-toggle-left:before,
-  .passwords .fa-caret-square-o-left:before {
-    content: ""; }
-  .passwords .fa-dot-circle-o:before {
-    content: ""; }
-  .passwords .fa-wheelchair:before {
-    content: ""; }
-  .passwords .fa-vimeo-square:before {
-    content: ""; }
-  .passwords .fa-turkish-lira:before,
-  .passwords .fa-try:before {
-    content: ""; }
-  .passwords .fa-plus-square-o:before {
-    content: ""; }
-  .passwords .fa-space-shuttle:before {
-    content: ""; }
-  .passwords .fa-slack:before {
-    content: ""; }
-  .passwords .fa-envelope-square:before {
-    content: ""; }
-  .passwords .fa-wordpress:before {
-    content: ""; }
-  .passwords .fa-openid:before {
-    content: ""; }
-  .passwords .fa-institution:before,
-  .passwords .fa-bank:before,
-  .passwords .fa-university:before {
-    content: ""; }
-  .passwords .fa-mortar-board:before,
-  .passwords .fa-graduation-cap:before {
-    content: ""; }
-  .passwords .fa-yahoo:before {
-    content: ""; }
-  .passwords .fa-google:before {
-    content: ""; }
-  .passwords .fa-reddit:before {
-    content: ""; }
-  .passwords .fa-reddit-square:before {
-    content: ""; }
-  .passwords .fa-stumbleupon-circle:before {
-    content: ""; }
-  .passwords .fa-stumbleupon:before {
-    content: ""; }
-  .passwords .fa-delicious:before {
-    content: ""; }
-  .passwords .fa-digg:before {
-    content: ""; }
-  .passwords .fa-pied-piper-pp:before {
-    content: ""; }
-  .passwords .fa-pied-piper-alt:before {
-    content: ""; }
-  .passwords .fa-drupal:before {
-    content: ""; }
-  .passwords .fa-joomla:before {
-    content: ""; }
-  .passwords .fa-language:before {
-    content: ""; }
-  .passwords .fa-fax:before {
-    content: ""; }
-  .passwords .fa-building:before {
-    content: ""; }
-  .passwords .fa-child:before {
-    content: ""; }
-  .passwords .fa-paw:before {
-    content: ""; }
-  .passwords .fa-spoon:before {
-    content: ""; }
-  .passwords .fa-cube:before {
-    content: ""; }
-  .passwords .fa-cubes:before {
-    content: ""; }
-  .passwords .fa-behance:before {
-    content: ""; }
-  .passwords .fa-behance-square:before {
-    content: ""; }
-  .passwords .fa-steam:before {
-    content: ""; }
-  .passwords .fa-steam-square:before {
-    content: ""; }
-  .passwords .fa-recycle:before {
-    content: ""; }
-  .passwords .fa-automobile:before,
-  .passwords .fa-car:before {
-    content: ""; }
-  .passwords .fa-cab:before,
-  .passwords .fa-taxi:before {
-    content: ""; }
-  .passwords .fa-tree:before {
-    content: ""; }
-  .passwords .fa-spotify:before {
-    content: ""; }
-  .passwords .fa-deviantart:before {
-    content: ""; }
-  .passwords .fa-soundcloud:before {
-    content: ""; }
-  .passwords .fa-database:before {
-    content: ""; }
-  .passwords .fa-file-pdf-o:before {
-    content: ""; }
-  .passwords .fa-file-word-o:before {
-    content: ""; }
-  .passwords .fa-file-excel-o:before {
-    content: ""; }
-  .passwords .fa-file-powerpoint-o:before {
-    content: ""; }
-  .passwords .fa-file-photo-o:before,
-  .passwords .fa-file-picture-o:before,
-  .passwords .fa-file-image-o:before {
-    content: ""; }
-  .passwords .fa-file-zip-o:before,
-  .passwords .fa-file-archive-o:before {
-    content: ""; }
-  .passwords .fa-file-sound-o:before,
-  .passwords .fa-file-audio-o:before {
-    content: ""; }
-  .passwords .fa-file-movie-o:before,
-  .passwords .fa-file-video-o:before {
-    content: ""; }
-  .passwords .fa-file-code-o:before {
-    content: ""; }
-  .passwords .fa-vine:before {
-    content: ""; }
-  .passwords .fa-codepen:before {
-    content: ""; }
-  .passwords .fa-jsfiddle:before {
-    content: ""; }
-  .passwords .fa-life-bouy:before,
-  .passwords .fa-life-buoy:before,
-  .passwords .fa-life-saver:before,
-  .passwords .fa-support:before,
-  .passwords .fa-life-ring:before {
-    content: ""; }
-  .passwords .fa-circle-o-notch:before {
-    content: ""; }
-  .passwords .fa-ra:before,
-  .passwords .fa-resistance:before,
-  .passwords .fa-rebel:before {
-    content: ""; }
-  .passwords .fa-ge:before,
-  .passwords .fa-empire:before {
-    content: ""; }
-  .passwords .fa-git-square:before {
-    content: ""; }
-  .passwords .fa-git:before {
-    content: ""; }
-  .passwords .fa-y-combinator-square:before,
-  .passwords .fa-yc-square:before,
-  .passwords .fa-hacker-news:before {
-    content: ""; }
-  .passwords .fa-tencent-weibo:before {
-    content: ""; }
-  .passwords .fa-qq:before {
-    content: ""; }
-  .passwords .fa-wechat:before,
-  .passwords .fa-weixin:before {
-    content: ""; }
-  .passwords .fa-send:before,
-  .passwords .fa-paper-plane:before {
-    content: ""; }
-  .passwords .fa-send-o:before,
-  .passwords .fa-paper-plane-o:before {
-    content: ""; }
-  .passwords .fa-history:before {
-    content: ""; }
-  .passwords .fa-circle-thin:before {
-    content: ""; }
-  .passwords .fa-header:before {
-    content: ""; }
-  .passwords .fa-paragraph:before {
-    content: ""; }
-  .passwords .fa-sliders:before {
-    content: ""; }
-  .passwords .fa-share-alt:before {
-    content: ""; }
-  .passwords .fa-share-alt-square:before {
-    content: ""; }
-  .passwords .fa-bomb:before {
-    content: ""; }
-  .passwords .fa-soccer-ball-o:before,
-  .passwords .fa-futbol-o:before {
-    content: ""; }
-  .passwords .fa-tty:before {
-    content: ""; }
-  .passwords .fa-binoculars:before {
-    content: ""; }
-  .passwords .fa-plug:before {
-    content: ""; }
-  .passwords .fa-slideshare:before {
-    content: ""; }
-  .passwords .fa-twitch:before {
-    content: ""; }
-  .passwords .fa-yelp:before {
-    content: ""; }
-  .passwords .fa-newspaper-o:before {
-    content: ""; }
-  .passwords .fa-wifi:before {
-    content: ""; }
-  .passwords .fa-calculator:before {
-    content: ""; }
-  .passwords .fa-paypal:before {
-    content: ""; }
-  .passwords .fa-google-wallet:before {
-    content: ""; }
-  .passwords .fa-cc-visa:before {
-    content: ""; }
-  .passwords .fa-cc-mastercard:before {
-    content: ""; }
-  .passwords .fa-cc-discover:before {
-    content: ""; }
-  .passwords .fa-cc-amex:before {
-    content: ""; }
-  .passwords .fa-cc-paypal:before {
-    content: ""; }
-  .passwords .fa-cc-stripe:before {
-    content: ""; }
-  .passwords .fa-bell-slash:before {
-    content: ""; }
-  .passwords .fa-bell-slash-o:before {
-    content: ""; }
-  .passwords .fa-trash:before {
-    content: ""; }
-  .passwords .fa-copyright:before {
-    content: ""; }
-  .passwords .fa-at:before {
-    content: ""; }
-  .passwords .fa-eyedropper:before {
-    content: ""; }
-  .passwords .fa-paint-brush:before {
-    content: ""; }
-  .passwords .fa-birthday-cake:before {
-    content: ""; }
-  .passwords .fa-area-chart:before {
-    content: ""; }
-  .passwords .fa-pie-chart:before {
-    content: ""; }
-  .passwords .fa-line-chart:before {
-    content: ""; }
-  .passwords .fa-lastfm:before {
-    content: ""; }
-  .passwords .fa-lastfm-square:before {
-    content: ""; }
-  .passwords .fa-toggle-off:before {
-    content: ""; }
-  .passwords .fa-toggle-on:before {
-    content: ""; }
-  .passwords .fa-bicycle:before {
-    content: ""; }
-  .passwords .fa-bus:before {
-    content: ""; }
-  .passwords .fa-ioxhost:before {
-    content: ""; }
-  .passwords .fa-angellist:before {
-    content: ""; }
-  .passwords .fa-cc:before {
-    content: ""; }
-  .passwords .fa-shekel:before,
-  .passwords .fa-sheqel:before,
-  .passwords .fa-ils:before {
-    content: ""; }
-  .passwords .fa-meanpath:before {
-    content: ""; }
-  .passwords .fa-buysellads:before {
-    content: ""; }
-  .passwords .fa-connectdevelop:before {
-    content: ""; }
-  .passwords .fa-dashcube:before {
-    content: ""; }
-  .passwords .fa-forumbee:before {
-    content: ""; }
-  .passwords .fa-leanpub:before {
-    content: ""; }
-  .passwords .fa-sellsy:before {
-    content: ""; }
-  .passwords .fa-shirtsinbulk:before {
-    content: ""; }
-  .passwords .fa-simplybuilt:before {
-    content: ""; }
-  .passwords .fa-skyatlas:before {
-    content: ""; }
-  .passwords .fa-cart-plus:before {
-    content: ""; }
-  .passwords .fa-cart-arrow-down:before {
-    content: ""; }
-  .passwords .fa-diamond:before {
-    content: ""; }
-  .passwords .fa-ship:before {
-    content: ""; }
-  .passwords .fa-user-secret:before {
-    content: ""; }
-  .passwords .fa-motorcycle:before {
-    content: ""; }
-  .passwords .fa-street-view:before {
-    content: ""; }
-  .passwords .fa-heartbeat:before {
-    content: ""; }
-  .passwords .fa-venus:before {
-    content: ""; }
-  .passwords .fa-mars:before {
-    content: ""; }
-  .passwords .fa-mercury:before {
-    content: ""; }
-  .passwords .fa-intersex:before,
-  .passwords .fa-transgender:before {
-    content: ""; }
-  .passwords .fa-transgender-alt:before {
-    content: ""; }
-  .passwords .fa-venus-double:before {
-    content: ""; }
-  .passwords .fa-mars-double:before {
-    content: ""; }
-  .passwords .fa-venus-mars:before {
-    content: ""; }
-  .passwords .fa-mars-stroke:before {
-    content: ""; }
-  .passwords .fa-mars-stroke-v:before {
-    content: ""; }
-  .passwords .fa-mars-stroke-h:before {
-    content: ""; }
-  .passwords .fa-neuter:before {
-    content: ""; }
-  .passwords .fa-genderless:before {
-    content: ""; }
-  .passwords .fa-facebook-official:before {
-    content: ""; }
-  .passwords .fa-pinterest-p:before {
-    content: ""; }
-  .passwords .fa-whatsapp:before {
-    content: ""; }
-  .passwords .fa-server:before {
-    content: ""; }
-  .passwords .fa-user-plus:before {
-    content: ""; }
-  .passwords .fa-user-times:before {
-    content: ""; }
-  .passwords .fa-hotel:before,
-  .passwords .fa-bed:before {
-    content: ""; }
-  .passwords .fa-viacoin:before {
-    content: ""; }
-  .passwords .fa-train:before {
-    content: ""; }
-  .passwords .fa-subway:before {
-    content: ""; }
-  .passwords .fa-medium:before {
-    content: ""; }
-  .passwords .fa-yc:before,
-  .passwords .fa-y-combinator:before {
-    content: ""; }
-  .passwords .fa-optin-monster:before {
-    content: ""; }
-  .passwords .fa-opencart:before {
-    content: ""; }
-  .passwords .fa-expeditedssl:before {
-    content: ""; }
-  .passwords .fa-battery-4:before,
-  .passwords .fa-battery:before,
-  .passwords .fa-battery-full:before {
-    content: ""; }
-  .passwords .fa-battery-3:before,
-  .passwords .fa-battery-three-quarters:before {
-    content: ""; }
-  .passwords .fa-battery-2:before,
-  .passwords .fa-battery-half:before {
-    content: ""; }
-  .passwords .fa-battery-1:before,
-  .passwords .fa-battery-quarter:before {
-    content: ""; }
-  .passwords .fa-battery-0:before,
-  .passwords .fa-battery-empty:before {
-    content: ""; }
-  .passwords .fa-mouse-pointer:before {
-    content: ""; }
-  .passwords .fa-i-cursor:before {
-    content: ""; }
-  .passwords .fa-object-group:before {
-    content: ""; }
-  .passwords .fa-object-ungroup:before {
-    content: ""; }
-  .passwords .fa-sticky-note:before {
-    content: ""; }
-  .passwords .fa-sticky-note-o:before {
-    content: ""; }
-  .passwords .fa-cc-jcb:before {
-    content: ""; }
-  .passwords .fa-cc-diners-club:before {
-    content: ""; }
-  .passwords .fa-clone:before {
-    content: ""; }
-  .passwords .fa-balance-scale:before {
-    content: ""; }
-  .passwords .fa-hourglass-o:before {
-    content: ""; }
-  .passwords .fa-hourglass-1:before,
-  .passwords .fa-hourglass-start:before {
-    content: ""; }
-  .passwords .fa-hourglass-2:before,
-  .passwords .fa-hourglass-half:before {
-    content: ""; }
-  .passwords .fa-hourglass-3:before,
-  .passwords .fa-hourglass-end:before {
-    content: ""; }
-  .passwords .fa-hourglass:before {
-    content: ""; }
-  .passwords .fa-hand-grab-o:before,
-  .passwords .fa-hand-rock-o:before {
-    content: ""; }
-  .passwords .fa-hand-stop-o:before,
-  .passwords .fa-hand-paper-o:before {
-    content: ""; }
-  .passwords .fa-hand-scissors-o:before {
-    content: ""; }
-  .passwords .fa-hand-lizard-o:before {
-    content: ""; }
-  .passwords .fa-hand-spock-o:before {
-    content: ""; }
-  .passwords .fa-hand-pointer-o:before {
-    content: ""; }
-  .passwords .fa-hand-peace-o:before {
-    content: ""; }
-  .passwords .fa-trademark:before {
-    content: ""; }
-  .passwords .fa-registered:before {
-    content: ""; }
-  .passwords .fa-creative-commons:before {
-    content: ""; }
-  .passwords .fa-gg:before {
-    content: ""; }
-  .passwords .fa-gg-circle:before {
-    content: ""; }
-  .passwords .fa-tripadvisor:before {
-    content: ""; }
-  .passwords .fa-odnoklassniki:before {
-    content: ""; }
-  .passwords .fa-odnoklassniki-square:before {
-    content: ""; }
-  .passwords .fa-get-pocket:before {
-    content: ""; }
-  .passwords .fa-wikipedia-w:before {
-    content: ""; }
-  .passwords .fa-safari:before {
-    content: ""; }
-  .passwords .fa-chrome:before {
-    content: ""; }
-  .passwords .fa-firefox:before {
-    content: ""; }
-  .passwords .fa-opera:before {
-    content: ""; }
-  .passwords .fa-internet-explorer:before {
-    content: ""; }
-  .passwords .fa-tv:before,
-  .passwords .fa-television:before {
-    content: ""; }
-  .passwords .fa-contao:before {
-    content: ""; }
-  .passwords .fa-500px:before {
-    content: ""; }
-  .passwords .fa-amazon:before {
-    content: ""; }
-  .passwords .fa-calendar-plus-o:before {
-    content: ""; }
-  .passwords .fa-calendar-minus-o:before {
-    content: ""; }
-  .passwords .fa-calendar-times-o:before {
-    content: ""; }
-  .passwords .fa-calendar-check-o:before {
-    content: ""; }
-  .passwords .fa-industry:before {
-    content: ""; }
-  .passwords .fa-map-pin:before {
-    content: ""; }
-  .passwords .fa-map-signs:before {
-    content: ""; }
-  .passwords .fa-map-o:before {
-    content: ""; }
-  .passwords .fa-map:before {
-    content: ""; }
-  .passwords .fa-commenting:before {
-    content: ""; }
-  .passwords .fa-commenting-o:before {
-    content: ""; }
-  .passwords .fa-houzz:before {
-    content: ""; }
-  .passwords .fa-vimeo:before {
-    content: ""; }
-  .passwords .fa-black-tie:before {
-    content: ""; }
-  .passwords .fa-fonticons:before {
-    content: ""; }
-  .passwords .fa-reddit-alien:before {
-    content: ""; }
-  .passwords .fa-edge:before {
-    content: ""; }
-  .passwords .fa-credit-card-alt:before {
-    content: ""; }
-  .passwords .fa-codiepie:before {
-    content: ""; }
-  .passwords .fa-modx:before {
-    content: ""; }
-  .passwords .fa-fort-awesome:before {
-    content: ""; }
-  .passwords .fa-usb:before {
-    content: ""; }
-  .passwords .fa-product-hunt:before {
-    content: ""; }
-  .passwords .fa-mixcloud:before {
-    content: ""; }
-  .passwords .fa-scribd:before {
-    content: ""; }
-  .passwords .fa-pause-circle:before {
-    content: ""; }
-  .passwords .fa-pause-circle-o:before {
-    content: ""; }
-  .passwords .fa-stop-circle:before {
-    content: ""; }
-  .passwords .fa-stop-circle-o:before {
-    content: ""; }
-  .passwords .fa-shopping-bag:before {
-    content: ""; }
-  .passwords .fa-shopping-basket:before {
-    content: ""; }
-  .passwords .fa-hashtag:before {
-    content: ""; }
-  .passwords .fa-bluetooth:before {
-    content: ""; }
-  .passwords .fa-bluetooth-b:before {
-    content: ""; }
-  .passwords .fa-percent:before {
-    content: ""; }
-  .passwords .fa-gitlab:before {
-    content: ""; }
-  .passwords .fa-wpbeginner:before {
-    content: ""; }
-  .passwords .fa-wpforms:before {
-    content: ""; }
-  .passwords .fa-envira:before {
-    content: ""; }
-  .passwords .fa-universal-access:before {
-    content: ""; }
-  .passwords .fa-wheelchair-alt:before {
-    content: ""; }
-  .passwords .fa-question-circle-o:before {
-    content: ""; }
-  .passwords .fa-blind:before {
-    content: ""; }
-  .passwords .fa-audio-description:before {
-    content: ""; }
-  .passwords .fa-volume-control-phone:before {
-    content: ""; }
-  .passwords .fa-braille:before {
-    content: ""; }
-  .passwords .fa-assistive-listening-systems:before {
-    content: ""; }
-  .passwords .fa-asl-interpreting:before,
-  .passwords .fa-american-sign-language-interpreting:before {
-    content: ""; }
-  .passwords .fa-deafness:before,
-  .passwords .fa-hard-of-hearing:before,
-  .passwords .fa-deaf:before {
-    content: ""; }
-  .passwords .fa-glide:before {
-    content: ""; }
-  .passwords .fa-glide-g:before {
-    content: ""; }
-  .passwords .fa-signing:before,
-  .passwords .fa-sign-language:before {
-    content: ""; }
-  .passwords .fa-low-vision:before {
-    content: ""; }
-  .passwords .fa-viadeo:before {
-    content: ""; }
-  .passwords .fa-viadeo-square:before {
-    content: ""; }
-  .passwords .fa-snapchat:before {
-    content: ""; }
-  .passwords .fa-snapchat-ghost:before {
-    content: ""; }
-  .passwords .fa-snapchat-square:before {
-    content: ""; }
-  .passwords .fa-pied-piper:before {
-    content: ""; }
-  .passwords .fa-first-order:before {
-    content: ""; }
-  .passwords .fa-yoast:before {
-    content: ""; }
-  .passwords .fa-themeisle:before {
-    content: ""; }
-  .passwords .fa-google-plus-circle:before,
-  .passwords .fa-google-plus-official:before {
-    content: ""; }
-  .passwords .fa-fa:before,
-  .passwords .fa-font-awesome:before {
-    content: ""; }
-  .passwords .fa-handshake-o:before {
-    content: ""; }
-  .passwords .fa-envelope-open:before {
-    content: ""; }
-  .passwords .fa-envelope-open-o:before {
-    content: ""; }
-  .passwords .fa-linode:before {
-    content: ""; }
-  .passwords .fa-address-book:before {
-    content: ""; }
-  .passwords .fa-address-book-o:before {
-    content: ""; }
-  .passwords .fa-vcard:before,
-  .passwords .fa-address-card:before {
-    content: ""; }
-  .passwords .fa-vcard-o:before,
-  .passwords .fa-address-card-o:before {
-    content: ""; }
-  .passwords .fa-user-circle:before {
-    content: ""; }
-  .passwords .fa-user-circle-o:before {
-    content: ""; }
-  .passwords .fa-user-o:before {
-    content: ""; }
-  .passwords .fa-id-badge:before {
-    content: ""; }
-  .passwords .fa-drivers-license:before,
-  .passwords .fa-id-card:before {
-    content: ""; }
-  .passwords .fa-drivers-license-o:before,
-  .passwords .fa-id-card-o:before {
-    content: ""; }
-  .passwords .fa-quora:before {
-    content: ""; }
-  .passwords .fa-free-code-camp:before {
-    content: ""; }
-  .passwords .fa-telegram:before {
-    content: ""; }
-  .passwords .fa-thermometer-4:before,
-  .passwords .fa-thermometer:before,
-  .passwords .fa-thermometer-full:before {
-    content: ""; }
-  .passwords .fa-thermometer-3:before,
-  .passwords .fa-thermometer-three-quarters:before {
-    content: ""; }
-  .passwords .fa-thermometer-2:before,
-  .passwords .fa-thermometer-half:before {
-    content: ""; }
-  .passwords .fa-thermometer-1:before,
-  .passwords .fa-thermometer-quarter:before {
-    content: ""; }
-  .passwords .fa-thermometer-0:before,
-  .passwords .fa-thermometer-empty:before {
-    content: ""; }
-  .passwords .fa-shower:before {
-    content: ""; }
-  .passwords .fa-bathtub:before,
-  .passwords .fa-s15:before,
-  .passwords .fa-bath:before {
-    content: ""; }
-  .passwords .fa-podcast:before {
-    content: ""; }
-  .passwords .fa-window-maximize:before {
-    content: ""; }
-  .passwords .fa-window-minimize:before {
-    content: ""; }
-  .passwords .fa-window-restore:before {
-    content: ""; }
-  .passwords .fa-times-rectangle:before,
-  .passwords .fa-window-close:before {
-    content: ""; }
-  .passwords .fa-times-rectangle-o:before,
-  .passwords .fa-window-close-o:before {
-    content: ""; }
-  .passwords .fa-bandcamp:before {
-    content: ""; }
-  .passwords .fa-grav:before {
-    content: ""; }
-  .passwords .fa-etsy:before {
-    content: ""; }
-  .passwords .fa-imdb:before {
-    content: ""; }
-  .passwords .fa-ravelry:before {
-    content: ""; }
-  .passwords .fa-eercast:before {
-    content: ""; }
-  .passwords .fa-microchip:before {
-    content: ""; }
-  .passwords .fa-snowflake-o:before {
-    content: ""; }
-  .passwords .fa-superpowers:before {
-    content: ""; }
-  .passwords .fa-wpexplorer:before {
-    content: ""; }
-  .passwords .fa-meetup:before {
-    content: ""; }
-  .passwords .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0; }
-  .passwords .sr-only-focusable:active, .passwords .sr-only-focusable:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    clip: auto; }
-  .passwords [data-constant="constant"] {
-    display: none; }
-  .passwords .passwords-browser-compatibility {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 3001; }
-    .passwords .passwords-browser-compatibility .title,
-    .passwords .passwords-browser-compatibility .message {
-      background: #fc0;
-      color: #000;
-      margin: 25px auto 0;
-      padding: 25px;
-      max-width: 1000px;
-      font-size: 1rem;
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1); }
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1); }
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  filter: none; }
+
+.fa-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle; }
+
+.fa-stack-1x, .fa-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center; }
+
+.fa-stack-1x {
+  line-height: inherit; }
+
+.fa-stack-2x {
+  font-size: 2em; }
+
+.fa-inverse {
+  color: #fff; }
+
+/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+   readers do not read off random characters that represent icons */
+.fa-glass:before {
+  content: ""; }
+
+.fa-music:before {
+  content: ""; }
+
+.fa-search:before {
+  content: ""; }
+
+.fa-envelope-o:before {
+  content: ""; }
+
+.fa-heart:before {
+  content: ""; }
+
+.fa-star:before {
+  content: ""; }
+
+.fa-star-o:before {
+  content: ""; }
+
+.fa-user:before {
+  content: ""; }
+
+.fa-film:before {
+  content: ""; }
+
+.fa-th-large:before {
+  content: ""; }
+
+.fa-th:before {
+  content: ""; }
+
+.fa-th-list:before {
+  content: ""; }
+
+.fa-check:before {
+  content: ""; }
+
+.fa-remove:before,
+.fa-close:before,
+.fa-times:before {
+  content: ""; }
+
+.fa-search-plus:before {
+  content: ""; }
+
+.fa-search-minus:before {
+  content: ""; }
+
+.fa-power-off:before {
+  content: ""; }
+
+.fa-signal:before {
+  content: ""; }
+
+.fa-gear:before,
+.fa-cog:before {
+  content: ""; }
+
+.fa-trash-o:before {
+  content: ""; }
+
+.fa-home:before {
+  content: ""; }
+
+.fa-file-o:before {
+  content: ""; }
+
+.fa-clock-o:before {
+  content: ""; }
+
+.fa-road:before {
+  content: ""; }
+
+.fa-download:before {
+  content: ""; }
+
+.fa-arrow-circle-o-down:before {
+  content: ""; }
+
+.fa-arrow-circle-o-up:before {
+  content: ""; }
+
+.fa-inbox:before {
+  content: ""; }
+
+.fa-play-circle-o:before {
+  content: ""; }
+
+.fa-rotate-right:before,
+.fa-repeat:before {
+  content: ""; }
+
+.fa-refresh:before {
+  content: ""; }
+
+.fa-list-alt:before {
+  content: ""; }
+
+.fa-lock:before {
+  content: ""; }
+
+.fa-flag:before {
+  content: ""; }
+
+.fa-headphones:before {
+  content: ""; }
+
+.fa-volume-off:before {
+  content: ""; }
+
+.fa-volume-down:before {
+  content: ""; }
+
+.fa-volume-up:before {
+  content: ""; }
+
+.fa-qrcode:before {
+  content: ""; }
+
+.fa-barcode:before {
+  content: ""; }
+
+.fa-tag:before {
+  content: ""; }
+
+.fa-tags:before {
+  content: ""; }
+
+.fa-book:before {
+  content: ""; }
+
+.fa-bookmark:before {
+  content: ""; }
+
+.fa-print:before {
+  content: ""; }
+
+.fa-camera:before {
+  content: ""; }
+
+.fa-font:before {
+  content: ""; }
+
+.fa-bold:before {
+  content: ""; }
+
+.fa-italic:before {
+  content: ""; }
+
+.fa-text-height:before {
+  content: ""; }
+
+.fa-text-width:before {
+  content: ""; }
+
+.fa-align-left:before {
+  content: ""; }
+
+.fa-align-center:before {
+  content: ""; }
+
+.fa-align-right:before {
+  content: ""; }
+
+.fa-align-justify:before {
+  content: ""; }
+
+.fa-list:before {
+  content: ""; }
+
+.fa-dedent:before,
+.fa-outdent:before {
+  content: ""; }
+
+.fa-indent:before {
+  content: ""; }
+
+.fa-video-camera:before {
+  content: ""; }
+
+.fa-photo:before,
+.fa-image:before,
+.fa-picture-o:before {
+  content: ""; }
+
+.fa-pencil:before {
+  content: ""; }
+
+.fa-map-marker:before {
+  content: ""; }
+
+.fa-adjust:before {
+  content: ""; }
+
+.fa-tint:before {
+  content: ""; }
+
+.fa-edit:before,
+.fa-pencil-square-o:before {
+  content: ""; }
+
+.fa-share-square-o:before {
+  content: ""; }
+
+.fa-check-square-o:before {
+  content: ""; }
+
+.fa-arrows:before {
+  content: ""; }
+
+.fa-step-backward:before {
+  content: ""; }
+
+.fa-fast-backward:before {
+  content: ""; }
+
+.fa-backward:before {
+  content: ""; }
+
+.fa-play:before {
+  content: ""; }
+
+.fa-pause:before {
+  content: ""; }
+
+.fa-stop:before {
+  content: ""; }
+
+.fa-forward:before {
+  content: ""; }
+
+.fa-fast-forward:before {
+  content: ""; }
+
+.fa-step-forward:before {
+  content: ""; }
+
+.fa-eject:before {
+  content: ""; }
+
+.fa-chevron-left:before {
+  content: ""; }
+
+.fa-chevron-right:before {
+  content: ""; }
+
+.fa-plus-circle:before {
+  content: ""; }
+
+.fa-minus-circle:before {
+  content: ""; }
+
+.fa-times-circle:before {
+  content: ""; }
+
+.fa-check-circle:before {
+  content: ""; }
+
+.fa-question-circle:before {
+  content: ""; }
+
+.fa-info-circle:before {
+  content: ""; }
+
+.fa-crosshairs:before {
+  content: ""; }
+
+.fa-times-circle-o:before {
+  content: ""; }
+
+.fa-check-circle-o:before {
+  content: ""; }
+
+.fa-ban:before {
+  content: ""; }
+
+.fa-arrow-left:before {
+  content: ""; }
+
+.fa-arrow-right:before {
+  content: ""; }
+
+.fa-arrow-up:before {
+  content: ""; }
+
+.fa-arrow-down:before {
+  content: ""; }
+
+.fa-mail-forward:before,
+.fa-share:before {
+  content: ""; }
+
+.fa-expand:before {
+  content: ""; }
+
+.fa-compress:before {
+  content: ""; }
+
+.fa-plus:before {
+  content: ""; }
+
+.fa-minus:before {
+  content: ""; }
+
+.fa-asterisk:before {
+  content: ""; }
+
+.fa-exclamation-circle:before {
+  content: ""; }
+
+.fa-gift:before {
+  content: ""; }
+
+.fa-leaf:before {
+  content: ""; }
+
+.fa-fire:before {
+  content: ""; }
+
+.fa-eye:before {
+  content: ""; }
+
+.fa-eye-slash:before {
+  content: ""; }
+
+.fa-warning:before,
+.fa-exclamation-triangle:before {
+  content: ""; }
+
+.fa-plane:before {
+  content: ""; }
+
+.fa-calendar:before {
+  content: ""; }
+
+.fa-random:before {
+  content: ""; }
+
+.fa-comment:before {
+  content: ""; }
+
+.fa-magnet:before {
+  content: ""; }
+
+.fa-chevron-up:before {
+  content: ""; }
+
+.fa-chevron-down:before {
+  content: ""; }
+
+.fa-retweet:before {
+  content: ""; }
+
+.fa-shopping-cart:before {
+  content: ""; }
+
+.fa-folder:before {
+  content: ""; }
+
+.fa-folder-open:before {
+  content: ""; }
+
+.fa-arrows-v:before {
+  content: ""; }
+
+.fa-arrows-h:before {
+  content: ""; }
+
+.fa-bar-chart-o:before,
+.fa-bar-chart:before {
+  content: ""; }
+
+.fa-twitter-square:before {
+  content: ""; }
+
+.fa-facebook-square:before {
+  content: ""; }
+
+.fa-camera-retro:before {
+  content: ""; }
+
+.fa-key:before {
+  content: ""; }
+
+.fa-gears:before,
+.fa-cogs:before {
+  content: ""; }
+
+.fa-comments:before {
+  content: ""; }
+
+.fa-thumbs-o-up:before {
+  content: ""; }
+
+.fa-thumbs-o-down:before {
+  content: ""; }
+
+.fa-star-half:before {
+  content: ""; }
+
+.fa-heart-o:before {
+  content: ""; }
+
+.fa-sign-out:before {
+  content: ""; }
+
+.fa-linkedin-square:before {
+  content: ""; }
+
+.fa-thumb-tack:before {
+  content: ""; }
+
+.fa-external-link:before {
+  content: ""; }
+
+.fa-sign-in:before {
+  content: ""; }
+
+.fa-trophy:before {
+  content: ""; }
+
+.fa-github-square:before {
+  content: ""; }
+
+.fa-upload:before {
+  content: ""; }
+
+.fa-lemon-o:before {
+  content: ""; }
+
+.fa-phone:before {
+  content: ""; }
+
+.fa-square-o:before {
+  content: ""; }
+
+.fa-bookmark-o:before {
+  content: ""; }
+
+.fa-phone-square:before {
+  content: ""; }
+
+.fa-twitter:before {
+  content: ""; }
+
+.fa-facebook-f:before,
+.fa-facebook:before {
+  content: ""; }
+
+.fa-github:before {
+  content: ""; }
+
+.fa-unlock:before {
+  content: ""; }
+
+.fa-credit-card:before {
+  content: ""; }
+
+.fa-feed:before,
+.fa-rss:before {
+  content: ""; }
+
+.fa-hdd-o:before {
+  content: ""; }
+
+.fa-bullhorn:before {
+  content: ""; }
+
+.fa-bell:before {
+  content: ""; }
+
+.fa-certificate:before {
+  content: ""; }
+
+.fa-hand-o-right:before {
+  content: ""; }
+
+.fa-hand-o-left:before {
+  content: ""; }
+
+.fa-hand-o-up:before {
+  content: ""; }
+
+.fa-hand-o-down:before {
+  content: ""; }
+
+.fa-arrow-circle-left:before {
+  content: ""; }
+
+.fa-arrow-circle-right:before {
+  content: ""; }
+
+.fa-arrow-circle-up:before {
+  content: ""; }
+
+.fa-arrow-circle-down:before {
+  content: ""; }
+
+.fa-globe:before {
+  content: ""; }
+
+.fa-wrench:before {
+  content: ""; }
+
+.fa-tasks:before {
+  content: ""; }
+
+.fa-filter:before {
+  content: ""; }
+
+.fa-briefcase:before {
+  content: ""; }
+
+.fa-arrows-alt:before {
+  content: ""; }
+
+.fa-group:before,
+.fa-users:before {
+  content: ""; }
+
+.fa-chain:before,
+.fa-link:before {
+  content: ""; }
+
+.fa-cloud:before {
+  content: ""; }
+
+.fa-flask:before {
+  content: ""; }
+
+.fa-cut:before,
+.fa-scissors:before {
+  content: ""; }
+
+.fa-copy:before,
+.fa-files-o:before {
+  content: ""; }
+
+.fa-paperclip:before {
+  content: ""; }
+
+.fa-save:before,
+.fa-floppy-o:before {
+  content: ""; }
+
+.fa-square:before {
+  content: ""; }
+
+.fa-navicon:before,
+.fa-reorder:before,
+.fa-bars:before {
+  content: ""; }
+
+.fa-list-ul:before {
+  content: ""; }
+
+.fa-list-ol:before {
+  content: ""; }
+
+.fa-strikethrough:before {
+  content: ""; }
+
+.fa-underline:before {
+  content: ""; }
+
+.fa-table:before {
+  content: ""; }
+
+.fa-magic:before {
+  content: ""; }
+
+.fa-truck:before {
+  content: ""; }
+
+.fa-pinterest:before {
+  content: ""; }
+
+.fa-pinterest-square:before {
+  content: ""; }
+
+.fa-google-plus-square:before {
+  content: ""; }
+
+.fa-google-plus:before {
+  content: ""; }
+
+.fa-money:before {
+  content: ""; }
+
+.fa-caret-down:before {
+  content: ""; }
+
+.fa-caret-up:before {
+  content: ""; }
+
+.fa-caret-left:before {
+  content: ""; }
+
+.fa-caret-right:before {
+  content: ""; }
+
+.fa-columns:before {
+  content: ""; }
+
+.fa-unsorted:before,
+.fa-sort:before {
+  content: ""; }
+
+.fa-sort-down:before,
+.fa-sort-desc:before {
+  content: ""; }
+
+.fa-sort-up:before,
+.fa-sort-asc:before {
+  content: ""; }
+
+.fa-envelope:before {
+  content: ""; }
+
+.fa-linkedin:before {
+  content: ""; }
+
+.fa-rotate-left:before,
+.fa-undo:before {
+  content: ""; }
+
+.fa-legal:before,
+.fa-gavel:before {
+  content: ""; }
+
+.fa-dashboard:before,
+.fa-tachometer:before {
+  content: ""; }
+
+.fa-comment-o:before {
+  content: ""; }
+
+.fa-comments-o:before {
+  content: ""; }
+
+.fa-flash:before,
+.fa-bolt:before {
+  content: ""; }
+
+.fa-sitemap:before {
+  content: ""; }
+
+.fa-umbrella:before {
+  content: ""; }
+
+.fa-paste:before,
+.fa-clipboard:before {
+  content: ""; }
+
+.fa-lightbulb-o:before {
+  content: ""; }
+
+.fa-exchange:before {
+  content: ""; }
+
+.fa-cloud-download:before {
+  content: ""; }
+
+.fa-cloud-upload:before {
+  content: ""; }
+
+.fa-user-md:before {
+  content: ""; }
+
+.fa-stethoscope:before {
+  content: ""; }
+
+.fa-suitcase:before {
+  content: ""; }
+
+.fa-bell-o:before {
+  content: ""; }
+
+.fa-coffee:before {
+  content: ""; }
+
+.fa-cutlery:before {
+  content: ""; }
+
+.fa-file-text-o:before {
+  content: ""; }
+
+.fa-building-o:before {
+  content: ""; }
+
+.fa-hospital-o:before {
+  content: ""; }
+
+.fa-ambulance:before {
+  content: ""; }
+
+.fa-medkit:before {
+  content: ""; }
+
+.fa-fighter-jet:before {
+  content: ""; }
+
+.fa-beer:before {
+  content: ""; }
+
+.fa-h-square:before {
+  content: ""; }
+
+.fa-plus-square:before {
+  content: ""; }
+
+.fa-angle-double-left:before {
+  content: ""; }
+
+.fa-angle-double-right:before {
+  content: ""; }
+
+.fa-angle-double-up:before {
+  content: ""; }
+
+.fa-angle-double-down:before {
+  content: ""; }
+
+.fa-angle-left:before {
+  content: ""; }
+
+.fa-angle-right:before {
+  content: ""; }
+
+.fa-angle-up:before {
+  content: ""; }
+
+.fa-angle-down:before {
+  content: ""; }
+
+.fa-desktop:before {
+  content: ""; }
+
+.fa-laptop:before {
+  content: ""; }
+
+.fa-tablet:before {
+  content: ""; }
+
+.fa-mobile-phone:before,
+.fa-mobile:before {
+  content: ""; }
+
+.fa-circle-o:before {
+  content: ""; }
+
+.fa-quote-left:before {
+  content: ""; }
+
+.fa-quote-right:before {
+  content: ""; }
+
+.fa-spinner:before {
+  content: ""; }
+
+.fa-circle:before {
+  content: ""; }
+
+.fa-mail-reply:before,
+.fa-reply:before {
+  content: ""; }
+
+.fa-github-alt:before {
+  content: ""; }
+
+.fa-folder-o:before {
+  content: ""; }
+
+.fa-folder-open-o:before {
+  content: ""; }
+
+.fa-smile-o:before {
+  content: ""; }
+
+.fa-frown-o:before {
+  content: ""; }
+
+.fa-meh-o:before {
+  content: ""; }
+
+.fa-gamepad:before {
+  content: ""; }
+
+.fa-keyboard-o:before {
+  content: ""; }
+
+.fa-flag-o:before {
+  content: ""; }
+
+.fa-flag-checkered:before {
+  content: ""; }
+
+.fa-terminal:before {
+  content: ""; }
+
+.fa-code:before {
+  content: ""; }
+
+.fa-mail-reply-all:before,
+.fa-reply-all:before {
+  content: ""; }
+
+.fa-star-half-empty:before,
+.fa-star-half-full:before,
+.fa-star-half-o:before {
+  content: ""; }
+
+.fa-location-arrow:before {
+  content: ""; }
+
+.fa-crop:before {
+  content: ""; }
+
+.fa-code-fork:before {
+  content: ""; }
+
+.fa-unlink:before,
+.fa-chain-broken:before {
+  content: ""; }
+
+.fa-question:before {
+  content: ""; }
+
+.fa-info:before {
+  content: ""; }
+
+.fa-exclamation:before {
+  content: ""; }
+
+.fa-superscript:before {
+  content: ""; }
+
+.fa-subscript:before {
+  content: ""; }
+
+.fa-eraser:before {
+  content: ""; }
+
+.fa-puzzle-piece:before {
+  content: ""; }
+
+.fa-microphone:before {
+  content: ""; }
+
+.fa-microphone-slash:before {
+  content: ""; }
+
+.fa-shield:before {
+  content: ""; }
+
+.fa-calendar-o:before {
+  content: ""; }
+
+.fa-fire-extinguisher:before {
+  content: ""; }
+
+.fa-rocket:before {
+  content: ""; }
+
+.fa-maxcdn:before {
+  content: ""; }
+
+.fa-chevron-circle-left:before {
+  content: ""; }
+
+.fa-chevron-circle-right:before {
+  content: ""; }
+
+.fa-chevron-circle-up:before {
+  content: ""; }
+
+.fa-chevron-circle-down:before {
+  content: ""; }
+
+.fa-html5:before {
+  content: ""; }
+
+.fa-css3:before {
+  content: ""; }
+
+.fa-anchor:before {
+  content: ""; }
+
+.fa-unlock-alt:before {
+  content: ""; }
+
+.fa-bullseye:before {
+  content: ""; }
+
+.fa-ellipsis-h:before {
+  content: ""; }
+
+.fa-ellipsis-v:before {
+  content: ""; }
+
+.fa-rss-square:before {
+  content: ""; }
+
+.fa-play-circle:before {
+  content: ""; }
+
+.fa-ticket:before {
+  content: ""; }
+
+.fa-minus-square:before {
+  content: ""; }
+
+.fa-minus-square-o:before {
+  content: ""; }
+
+.fa-level-up:before {
+  content: ""; }
+
+.fa-level-down:before {
+  content: ""; }
+
+.fa-check-square:before {
+  content: ""; }
+
+.fa-pencil-square:before {
+  content: ""; }
+
+.fa-external-link-square:before {
+  content: ""; }
+
+.fa-share-square:before {
+  content: ""; }
+
+.fa-compass:before {
+  content: ""; }
+
+.fa-toggle-down:before,
+.fa-caret-square-o-down:before {
+  content: ""; }
+
+.fa-toggle-up:before,
+.fa-caret-square-o-up:before {
+  content: ""; }
+
+.fa-toggle-right:before,
+.fa-caret-square-o-right:before {
+  content: ""; }
+
+.fa-euro:before,
+.fa-eur:before {
+  content: ""; }
+
+.fa-gbp:before {
+  content: ""; }
+
+.fa-dollar:before,
+.fa-usd:before {
+  content: ""; }
+
+.fa-rupee:before,
+.fa-inr:before {
+  content: ""; }
+
+.fa-cny:before,
+.fa-rmb:before,
+.fa-yen:before,
+.fa-jpy:before {
+  content: ""; }
+
+.fa-ruble:before,
+.fa-rouble:before,
+.fa-rub:before {
+  content: ""; }
+
+.fa-won:before,
+.fa-krw:before {
+  content: ""; }
+
+.fa-bitcoin:before,
+.fa-btc:before {
+  content: ""; }
+
+.fa-file:before {
+  content: ""; }
+
+.fa-file-text:before {
+  content: ""; }
+
+.fa-sort-alpha-asc:before {
+  content: ""; }
+
+.fa-sort-alpha-desc:before {
+  content: ""; }
+
+.fa-sort-amount-asc:before {
+  content: ""; }
+
+.fa-sort-amount-desc:before {
+  content: ""; }
+
+.fa-sort-numeric-asc:before {
+  content: ""; }
+
+.fa-sort-numeric-desc:before {
+  content: ""; }
+
+.fa-thumbs-up:before {
+  content: ""; }
+
+.fa-thumbs-down:before {
+  content: ""; }
+
+.fa-youtube-square:before {
+  content: ""; }
+
+.fa-youtube:before {
+  content: ""; }
+
+.fa-xing:before {
+  content: ""; }
+
+.fa-xing-square:before {
+  content: ""; }
+
+.fa-youtube-play:before {
+  content: ""; }
+
+.fa-dropbox:before {
+  content: ""; }
+
+.fa-stack-overflow:before {
+  content: ""; }
+
+.fa-instagram:before {
+  content: ""; }
+
+.fa-flickr:before {
+  content: ""; }
+
+.fa-adn:before {
+  content: ""; }
+
+.fa-bitbucket:before {
+  content: ""; }
+
+.fa-bitbucket-square:before {
+  content: ""; }
+
+.fa-tumblr:before {
+  content: ""; }
+
+.fa-tumblr-square:before {
+  content: ""; }
+
+.fa-long-arrow-down:before {
+  content: ""; }
+
+.fa-long-arrow-up:before {
+  content: ""; }
+
+.fa-long-arrow-left:before {
+  content: ""; }
+
+.fa-long-arrow-right:before {
+  content: ""; }
+
+.fa-apple:before {
+  content: ""; }
+
+.fa-windows:before {
+  content: ""; }
+
+.fa-android:before {
+  content: ""; }
+
+.fa-linux:before {
+  content: ""; }
+
+.fa-dribbble:before {
+  content: ""; }
+
+.fa-skype:before {
+  content: ""; }
+
+.fa-foursquare:before {
+  content: ""; }
+
+.fa-trello:before {
+  content: ""; }
+
+.fa-female:before {
+  content: ""; }
+
+.fa-male:before {
+  content: ""; }
+
+.fa-gittip:before,
+.fa-gratipay:before {
+  content: ""; }
+
+.fa-sun-o:before {
+  content: ""; }
+
+.fa-moon-o:before {
+  content: ""; }
+
+.fa-archive:before {
+  content: ""; }
+
+.fa-bug:before {
+  content: ""; }
+
+.fa-vk:before {
+  content: ""; }
+
+.fa-weibo:before {
+  content: ""; }
+
+.fa-renren:before {
+  content: ""; }
+
+.fa-pagelines:before {
+  content: ""; }
+
+.fa-stack-exchange:before {
+  content: ""; }
+
+.fa-arrow-circle-o-right:before {
+  content: ""; }
+
+.fa-arrow-circle-o-left:before {
+  content: ""; }
+
+.fa-toggle-left:before,
+.fa-caret-square-o-left:before {
+  content: ""; }
+
+.fa-dot-circle-o:before {
+  content: ""; }
+
+.fa-wheelchair:before {
+  content: ""; }
+
+.fa-vimeo-square:before {
+  content: ""; }
+
+.fa-turkish-lira:before,
+.fa-try:before {
+  content: ""; }
+
+.fa-plus-square-o:before {
+  content: ""; }
+
+.fa-space-shuttle:before {
+  content: ""; }
+
+.fa-slack:before {
+  content: ""; }
+
+.fa-envelope-square:before {
+  content: ""; }
+
+.fa-wordpress:before {
+  content: ""; }
+
+.fa-openid:before {
+  content: ""; }
+
+.fa-institution:before,
+.fa-bank:before,
+.fa-university:before {
+  content: ""; }
+
+.fa-mortar-board:before,
+.fa-graduation-cap:before {
+  content: ""; }
+
+.fa-yahoo:before {
+  content: ""; }
+
+.fa-google:before {
+  content: ""; }
+
+.fa-reddit:before {
+  content: ""; }
+
+.fa-reddit-square:before {
+  content: ""; }
+
+.fa-stumbleupon-circle:before {
+  content: ""; }
+
+.fa-stumbleupon:before {
+  content: ""; }
+
+.fa-delicious:before {
+  content: ""; }
+
+.fa-digg:before {
+  content: ""; }
+
+.fa-pied-piper-pp:before {
+  content: ""; }
+
+.fa-pied-piper-alt:before {
+  content: ""; }
+
+.fa-drupal:before {
+  content: ""; }
+
+.fa-joomla:before {
+  content: ""; }
+
+.fa-language:before {
+  content: ""; }
+
+.fa-fax:before {
+  content: ""; }
+
+.fa-building:before {
+  content: ""; }
+
+.fa-child:before {
+  content: ""; }
+
+.fa-paw:before {
+  content: ""; }
+
+.fa-spoon:before {
+  content: ""; }
+
+.fa-cube:before {
+  content: ""; }
+
+.fa-cubes:before {
+  content: ""; }
+
+.fa-behance:before {
+  content: ""; }
+
+.fa-behance-square:before {
+  content: ""; }
+
+.fa-steam:before {
+  content: ""; }
+
+.fa-steam-square:before {
+  content: ""; }
+
+.fa-recycle:before {
+  content: ""; }
+
+.fa-automobile:before,
+.fa-car:before {
+  content: ""; }
+
+.fa-cab:before,
+.fa-taxi:before {
+  content: ""; }
+
+.fa-tree:before {
+  content: ""; }
+
+.fa-spotify:before {
+  content: ""; }
+
+.fa-deviantart:before {
+  content: ""; }
+
+.fa-soundcloud:before {
+  content: ""; }
+
+.fa-database:before {
+  content: ""; }
+
+.fa-file-pdf-o:before {
+  content: ""; }
+
+.fa-file-word-o:before {
+  content: ""; }
+
+.fa-file-excel-o:before {
+  content: ""; }
+
+.fa-file-powerpoint-o:before {
+  content: ""; }
+
+.fa-file-photo-o:before,
+.fa-file-picture-o:before,
+.fa-file-image-o:before {
+  content: ""; }
+
+.fa-file-zip-o:before,
+.fa-file-archive-o:before {
+  content: ""; }
+
+.fa-file-sound-o:before,
+.fa-file-audio-o:before {
+  content: ""; }
+
+.fa-file-movie-o:before,
+.fa-file-video-o:before {
+  content: ""; }
+
+.fa-file-code-o:before {
+  content: ""; }
+
+.fa-vine:before {
+  content: ""; }
+
+.fa-codepen:before {
+  content: ""; }
+
+.fa-jsfiddle:before {
+  content: ""; }
+
+.fa-life-bouy:before,
+.fa-life-buoy:before,
+.fa-life-saver:before,
+.fa-support:before,
+.fa-life-ring:before {
+  content: ""; }
+
+.fa-circle-o-notch:before {
+  content: ""; }
+
+.fa-ra:before,
+.fa-resistance:before,
+.fa-rebel:before {
+  content: ""; }
+
+.fa-ge:before,
+.fa-empire:before {
+  content: ""; }
+
+.fa-git-square:before {
+  content: ""; }
+
+.fa-git:before {
+  content: ""; }
+
+.fa-y-combinator-square:before,
+.fa-yc-square:before,
+.fa-hacker-news:before {
+  content: ""; }
+
+.fa-tencent-weibo:before {
+  content: ""; }
+
+.fa-qq:before {
+  content: ""; }
+
+.fa-wechat:before,
+.fa-weixin:before {
+  content: ""; }
+
+.fa-send:before,
+.fa-paper-plane:before {
+  content: ""; }
+
+.fa-send-o:before,
+.fa-paper-plane-o:before {
+  content: ""; }
+
+.fa-history:before {
+  content: ""; }
+
+.fa-circle-thin:before {
+  content: ""; }
+
+.fa-header:before {
+  content: ""; }
+
+.fa-paragraph:before {
+  content: ""; }
+
+.fa-sliders:before {
+  content: ""; }
+
+.fa-share-alt:before {
+  content: ""; }
+
+.fa-share-alt-square:before {
+  content: ""; }
+
+.fa-bomb:before {
+  content: ""; }
+
+.fa-soccer-ball-o:before,
+.fa-futbol-o:before {
+  content: ""; }
+
+.fa-tty:before {
+  content: ""; }
+
+.fa-binoculars:before {
+  content: ""; }
+
+.fa-plug:before {
+  content: ""; }
+
+.fa-slideshare:before {
+  content: ""; }
+
+.fa-twitch:before {
+  content: ""; }
+
+.fa-yelp:before {
+  content: ""; }
+
+.fa-newspaper-o:before {
+  content: ""; }
+
+.fa-wifi:before {
+  content: ""; }
+
+.fa-calculator:before {
+  content: ""; }
+
+.fa-paypal:before {
+  content: ""; }
+
+.fa-google-wallet:before {
+  content: ""; }
+
+.fa-cc-visa:before {
+  content: ""; }
+
+.fa-cc-mastercard:before {
+  content: ""; }
+
+.fa-cc-discover:before {
+  content: ""; }
+
+.fa-cc-amex:before {
+  content: ""; }
+
+.fa-cc-paypal:before {
+  content: ""; }
+
+.fa-cc-stripe:before {
+  content: ""; }
+
+.fa-bell-slash:before {
+  content: ""; }
+
+.fa-bell-slash-o:before {
+  content: ""; }
+
+.fa-trash:before {
+  content: ""; }
+
+.fa-copyright:before {
+  content: ""; }
+
+.fa-at:before {
+  content: ""; }
+
+.fa-eyedropper:before {
+  content: ""; }
+
+.fa-paint-brush:before {
+  content: ""; }
+
+.fa-birthday-cake:before {
+  content: ""; }
+
+.fa-area-chart:before {
+  content: ""; }
+
+.fa-pie-chart:before {
+  content: ""; }
+
+.fa-line-chart:before {
+  content: ""; }
+
+.fa-lastfm:before {
+  content: ""; }
+
+.fa-lastfm-square:before {
+  content: ""; }
+
+.fa-toggle-off:before {
+  content: ""; }
+
+.fa-toggle-on:before {
+  content: ""; }
+
+.fa-bicycle:before {
+  content: ""; }
+
+.fa-bus:before {
+  content: ""; }
+
+.fa-ioxhost:before {
+  content: ""; }
+
+.fa-angellist:before {
+  content: ""; }
+
+.fa-cc:before {
+  content: ""; }
+
+.fa-shekel:before,
+.fa-sheqel:before,
+.fa-ils:before {
+  content: ""; }
+
+.fa-meanpath:before {
+  content: ""; }
+
+.fa-buysellads:before {
+  content: ""; }
+
+.fa-connectdevelop:before {
+  content: ""; }
+
+.fa-dashcube:before {
+  content: ""; }
+
+.fa-forumbee:before {
+  content: ""; }
+
+.fa-leanpub:before {
+  content: ""; }
+
+.fa-sellsy:before {
+  content: ""; }
+
+.fa-shirtsinbulk:before {
+  content: ""; }
+
+.fa-simplybuilt:before {
+  content: ""; }
+
+.fa-skyatlas:before {
+  content: ""; }
+
+.fa-cart-plus:before {
+  content: ""; }
+
+.fa-cart-arrow-down:before {
+  content: ""; }
+
+.fa-diamond:before {
+  content: ""; }
+
+.fa-ship:before {
+  content: ""; }
+
+.fa-user-secret:before {
+  content: ""; }
+
+.fa-motorcycle:before {
+  content: ""; }
+
+.fa-street-view:before {
+  content: ""; }
+
+.fa-heartbeat:before {
+  content: ""; }
+
+.fa-venus:before {
+  content: ""; }
+
+.fa-mars:before {
+  content: ""; }
+
+.fa-mercury:before {
+  content: ""; }
+
+.fa-intersex:before,
+.fa-transgender:before {
+  content: ""; }
+
+.fa-transgender-alt:before {
+  content: ""; }
+
+.fa-venus-double:before {
+  content: ""; }
+
+.fa-mars-double:before {
+  content: ""; }
+
+.fa-venus-mars:before {
+  content: ""; }
+
+.fa-mars-stroke:before {
+  content: ""; }
+
+.fa-mars-stroke-v:before {
+  content: ""; }
+
+.fa-mars-stroke-h:before {
+  content: ""; }
+
+.fa-neuter:before {
+  content: ""; }
+
+.fa-genderless:before {
+  content: ""; }
+
+.fa-facebook-official:before {
+  content: ""; }
+
+.fa-pinterest-p:before {
+  content: ""; }
+
+.fa-whatsapp:before {
+  content: ""; }
+
+.fa-server:before {
+  content: ""; }
+
+.fa-user-plus:before {
+  content: ""; }
+
+.fa-user-times:before {
+  content: ""; }
+
+.fa-hotel:before,
+.fa-bed:before {
+  content: ""; }
+
+.fa-viacoin:before {
+  content: ""; }
+
+.fa-train:before {
+  content: ""; }
+
+.fa-subway:before {
+  content: ""; }
+
+.fa-medium:before {
+  content: ""; }
+
+.fa-yc:before,
+.fa-y-combinator:before {
+  content: ""; }
+
+.fa-optin-monster:before {
+  content: ""; }
+
+.fa-opencart:before {
+  content: ""; }
+
+.fa-expeditedssl:before {
+  content: ""; }
+
+.fa-battery-4:before,
+.fa-battery:before,
+.fa-battery-full:before {
+  content: ""; }
+
+.fa-battery-3:before,
+.fa-battery-three-quarters:before {
+  content: ""; }
+
+.fa-battery-2:before,
+.fa-battery-half:before {
+  content: ""; }
+
+.fa-battery-1:before,
+.fa-battery-quarter:before {
+  content: ""; }
+
+.fa-battery-0:before,
+.fa-battery-empty:before {
+  content: ""; }
+
+.fa-mouse-pointer:before {
+  content: ""; }
+
+.fa-i-cursor:before {
+  content: ""; }
+
+.fa-object-group:before {
+  content: ""; }
+
+.fa-object-ungroup:before {
+  content: ""; }
+
+.fa-sticky-note:before {
+  content: ""; }
+
+.fa-sticky-note-o:before {
+  content: ""; }
+
+.fa-cc-jcb:before {
+  content: ""; }
+
+.fa-cc-diners-club:before {
+  content: ""; }
+
+.fa-clone:before {
+  content: ""; }
+
+.fa-balance-scale:before {
+  content: ""; }
+
+.fa-hourglass-o:before {
+  content: ""; }
+
+.fa-hourglass-1:before,
+.fa-hourglass-start:before {
+  content: ""; }
+
+.fa-hourglass-2:before,
+.fa-hourglass-half:before {
+  content: ""; }
+
+.fa-hourglass-3:before,
+.fa-hourglass-end:before {
+  content: ""; }
+
+.fa-hourglass:before {
+  content: ""; }
+
+.fa-hand-grab-o:before,
+.fa-hand-rock-o:before {
+  content: ""; }
+
+.fa-hand-stop-o:before,
+.fa-hand-paper-o:before {
+  content: ""; }
+
+.fa-hand-scissors-o:before {
+  content: ""; }
+
+.fa-hand-lizard-o:before {
+  content: ""; }
+
+.fa-hand-spock-o:before {
+  content: ""; }
+
+.fa-hand-pointer-o:before {
+  content: ""; }
+
+.fa-hand-peace-o:before {
+  content: ""; }
+
+.fa-trademark:before {
+  content: ""; }
+
+.fa-registered:before {
+  content: ""; }
+
+.fa-creative-commons:before {
+  content: ""; }
+
+.fa-gg:before {
+  content: ""; }
+
+.fa-gg-circle:before {
+  content: ""; }
+
+.fa-tripadvisor:before {
+  content: ""; }
+
+.fa-odnoklassniki:before {
+  content: ""; }
+
+.fa-odnoklassniki-square:before {
+  content: ""; }
+
+.fa-get-pocket:before {
+  content: ""; }
+
+.fa-wikipedia-w:before {
+  content: ""; }
+
+.fa-safari:before {
+  content: ""; }
+
+.fa-chrome:before {
+  content: ""; }
+
+.fa-firefox:before {
+  content: ""; }
+
+.fa-opera:before {
+  content: ""; }
+
+.fa-internet-explorer:before {
+  content: ""; }
+
+.fa-tv:before,
+.fa-television:before {
+  content: ""; }
+
+.fa-contao:before {
+  content: ""; }
+
+.fa-500px:before {
+  content: ""; }
+
+.fa-amazon:before {
+  content: ""; }
+
+.fa-calendar-plus-o:before {
+  content: ""; }
+
+.fa-calendar-minus-o:before {
+  content: ""; }
+
+.fa-calendar-times-o:before {
+  content: ""; }
+
+.fa-calendar-check-o:before {
+  content: ""; }
+
+.fa-industry:before {
+  content: ""; }
+
+.fa-map-pin:before {
+  content: ""; }
+
+.fa-map-signs:before {
+  content: ""; }
+
+.fa-map-o:before {
+  content: ""; }
+
+.fa-map:before {
+  content: ""; }
+
+.fa-commenting:before {
+  content: ""; }
+
+.fa-commenting-o:before {
+  content: ""; }
+
+.fa-houzz:before {
+  content: ""; }
+
+.fa-vimeo:before {
+  content: ""; }
+
+.fa-black-tie:before {
+  content: ""; }
+
+.fa-fonticons:before {
+  content: ""; }
+
+.fa-reddit-alien:before {
+  content: ""; }
+
+.fa-edge:before {
+  content: ""; }
+
+.fa-credit-card-alt:before {
+  content: ""; }
+
+.fa-codiepie:before {
+  content: ""; }
+
+.fa-modx:before {
+  content: ""; }
+
+.fa-fort-awesome:before {
+  content: ""; }
+
+.fa-usb:before {
+  content: ""; }
+
+.fa-product-hunt:before {
+  content: ""; }
+
+.fa-mixcloud:before {
+  content: ""; }
+
+.fa-scribd:before {
+  content: ""; }
+
+.fa-pause-circle:before {
+  content: ""; }
+
+.fa-pause-circle-o:before {
+  content: ""; }
+
+.fa-stop-circle:before {
+  content: ""; }
+
+.fa-stop-circle-o:before {
+  content: ""; }
+
+.fa-shopping-bag:before {
+  content: ""; }
+
+.fa-shopping-basket:before {
+  content: ""; }
+
+.fa-hashtag:before {
+  content: ""; }
+
+.fa-bluetooth:before {
+  content: ""; }
+
+.fa-bluetooth-b:before {
+  content: ""; }
+
+.fa-percent:before {
+  content: ""; }
+
+.fa-gitlab:before {
+  content: ""; }
+
+.fa-wpbeginner:before {
+  content: ""; }
+
+.fa-wpforms:before {
+  content: ""; }
+
+.fa-envira:before {
+  content: ""; }
+
+.fa-universal-access:before {
+  content: ""; }
+
+.fa-wheelchair-alt:before {
+  content: ""; }
+
+.fa-question-circle-o:before {
+  content: ""; }
+
+.fa-blind:before {
+  content: ""; }
+
+.fa-audio-description:before {
+  content: ""; }
+
+.fa-volume-control-phone:before {
+  content: ""; }
+
+.fa-braille:before {
+  content: ""; }
+
+.fa-assistive-listening-systems:before {
+  content: ""; }
+
+.fa-asl-interpreting:before,
+.fa-american-sign-language-interpreting:before {
+  content: ""; }
+
+.fa-deafness:before,
+.fa-hard-of-hearing:before,
+.fa-deaf:before {
+  content: ""; }
+
+.fa-glide:before {
+  content: ""; }
+
+.fa-glide-g:before {
+  content: ""; }
+
+.fa-signing:before,
+.fa-sign-language:before {
+  content: ""; }
+
+.fa-low-vision:before {
+  content: ""; }
+
+.fa-viadeo:before {
+  content: ""; }
+
+.fa-viadeo-square:before {
+  content: ""; }
+
+.fa-snapchat:before {
+  content: ""; }
+
+.fa-snapchat-ghost:before {
+  content: ""; }
+
+.fa-snapchat-square:before {
+  content: ""; }
+
+.fa-pied-piper:before {
+  content: ""; }
+
+.fa-first-order:before {
+  content: ""; }
+
+.fa-yoast:before {
+  content: ""; }
+
+.fa-themeisle:before {
+  content: ""; }
+
+.fa-google-plus-circle:before,
+.fa-google-plus-official:before {
+  content: ""; }
+
+.fa-fa:before,
+.fa-font-awesome:before {
+  content: ""; }
+
+.fa-handshake-o:before {
+  content: ""; }
+
+.fa-envelope-open:before {
+  content: ""; }
+
+.fa-envelope-open-o:before {
+  content: ""; }
+
+.fa-linode:before {
+  content: ""; }
+
+.fa-address-book:before {
+  content: ""; }
+
+.fa-address-book-o:before {
+  content: ""; }
+
+.fa-vcard:before,
+.fa-address-card:before {
+  content: ""; }
+
+.fa-vcard-o:before,
+.fa-address-card-o:before {
+  content: ""; }
+
+.fa-user-circle:before {
+  content: ""; }
+
+.fa-user-circle-o:before {
+  content: ""; }
+
+.fa-user-o:before {
+  content: ""; }
+
+.fa-id-badge:before {
+  content: ""; }
+
+.fa-drivers-license:before,
+.fa-id-card:before {
+  content: ""; }
+
+.fa-drivers-license-o:before,
+.fa-id-card-o:before {
+  content: ""; }
+
+.fa-quora:before {
+  content: ""; }
+
+.fa-free-code-camp:before {
+  content: ""; }
+
+.fa-telegram:before {
+  content: ""; }
+
+.fa-thermometer-4:before,
+.fa-thermometer:before,
+.fa-thermometer-full:before {
+  content: ""; }
+
+.fa-thermometer-3:before,
+.fa-thermometer-three-quarters:before {
+  content: ""; }
+
+.fa-thermometer-2:before,
+.fa-thermometer-half:before {
+  content: ""; }
+
+.fa-thermometer-1:before,
+.fa-thermometer-quarter:before {
+  content: ""; }
+
+.fa-thermometer-0:before,
+.fa-thermometer-empty:before {
+  content: ""; }
+
+.fa-shower:before {
+  content: ""; }
+
+.fa-bathtub:before,
+.fa-s15:before,
+.fa-bath:before {
+  content: ""; }
+
+.fa-podcast:before {
+  content: ""; }
+
+.fa-window-maximize:before {
+  content: ""; }
+
+.fa-window-minimize:before {
+  content: ""; }
+
+.fa-window-restore:before {
+  content: ""; }
+
+.fa-times-rectangle:before,
+.fa-window-close:before {
+  content: ""; }
+
+.fa-times-rectangle-o:before,
+.fa-window-close-o:before {
+  content: ""; }
+
+.fa-bandcamp:before {
+  content: ""; }
+
+.fa-grav:before {
+  content: ""; }
+
+.fa-etsy:before {
+  content: ""; }
+
+.fa-imdb:before {
+  content: ""; }
+
+.fa-ravelry:before {
+  content: ""; }
+
+.fa-eercast:before {
+  content: ""; }
+
+.fa-microchip:before {
+  content: ""; }
+
+.fa-snowflake-o:before {
+  content: ""; }
+
+.fa-superpowers:before {
+  content: ""; }
+
+.fa-wpexplorer:before {
+  content: ""; }
+
+.fa-meetup:before {
+  content: ""; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto; }
+
+.passwords [data-constant="constant"] {
+  display: none; }
+.passwords .passwords-browser-compatibility {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3001; }
+  .passwords .passwords-browser-compatibility .title,
+  .passwords .passwords-browser-compatibility .message {
+    background: #fc0;
+    color: #000;
+    margin: 25px auto 0;
+    padding: 25px;
+    max-width: 1000px;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 3px; }
+  .passwords .passwords-browser-compatibility .title {
+    background: #bf0303;
+    color: #fff;
+    font-size: 1.25rem;
+    text-transform: uppercase; }
+  .passwords .passwords-browser-compatibility .browser {
+    margin: 25px auto 0;
+    padding: 25px;
+    font-size: 1.25rem;
+    width: 850px; }
+    .passwords .passwords-browser-compatibility .browser a {
+      display: block;
+      width: 200px;
+      padding: 225px 20px 20px;
+      float: left;
+      background: no-repeat center 25px;
+      background-size: 150px;
       text-align: center;
       border-radius: 3px; }
-    .passwords .passwords-browser-compatibility .title {
-      background: #bf0303;
-      color: #fff;
-      font-size: 1.25rem;
-      text-transform: uppercase; }
-    .passwords .passwords-browser-compatibility .browser {
-      margin: 25px auto 0;
-      padding: 25px;
-      font-size: 1.25rem;
-      width: 850px; }
-      .passwords .passwords-browser-compatibility .browser a {
-        display: block;
-        width: 200px;
-        padding: 225px 20px 20px;
-        float: left;
-        background: no-repeat center 25px;
-        background-size: 150px;
-        text-align: center;
-        border-radius: 3px; }
-        .passwords .passwords-browser-compatibility .browser a:hover {
-          background: #00994d no-repeat center 10px;
-          background-size: 180px; }
-        @media (max-width: 649px) {
-          .passwords .passwords-browser-compatibility .browser a {
-            width: 360px;
-            margin: 0 auto 25px;
-            float: none; } }
-  .passwords #app-navigation li {
-    line-height: 44px;
-    padding: 0 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #6e6e6e;
-    cursor: pointer; }
-    .passwords #app-navigation li:hover, .passwords #app-navigation li:active {
-      color: #000; }
-    .passwords #app-navigation li:before {
-      font-family: FontAwesome, sans-serif;
-      font-size: 1.2rem;
-      padding-right: 10px;
-      position: relative;
-      bottom: -2px; }
-    .passwords #app-navigation li.nav-icon-all:before {
-      content: "\f0ac"; }
-    .passwords #app-navigation li.nav-icon-folders:before {
-      content: "\f07b"; }
-    .passwords #app-navigation li.nav-icon-recent:before {
-      content: "\f017"; }
-    .passwords #app-navigation li.nav-icon-tags:before {
-      content: "\f02b"; }
-    .passwords #app-navigation li.nav-icon-security:before {
-      content: "\f132"; }
-    .passwords #app-navigation li.nav-icon-shared:before {
-      content: "\f1e0"; }
-    .passwords #app-navigation li.nav-icon-favourites:before {
-      content: "\f005"; }
-    .passwords #app-navigation li.nav-icon-trash:before {
-      content: "\f014"; }
-  .passwords #controls .actions.creatable {
-    margin-left: 10px;
-    display: inline-block;
-    position: relative; }
-    .passwords #controls .actions.creatable .newPasswordMenu {
-      max-height: 0;
-      margin: 0;
-      overflow: hidden;
-      transition: max-height 0.25s ease-in-out; }
-    .passwords #controls .actions.creatable.active .newPasswordMenu {
-      overflow: visible;
-      max-height: 75px;
-      animation: 0.25s delay-overflow; }
-  .passwords #content {
-    border-top: 1px solid #eee;
-    display: grid;
-    grid-template-columns: 3fr 0;
-    grid-template-areas: "left right";
-    grid-template-rows: auto;
-    justify-items: stretch;
-    align-items: stretch;
-    transition: grid-template-columns 0.5s ease-in-out;
-    margin-top: -1px; }
-    .passwords #content .content-left {
-      grid-area: left;
-      margin-top: 44px; }
-    .passwords #content .content-right {
-      grid-area: right;
-      z-index: 50;
-      border-left: 1px solid #dbdbdb; }
-    .passwords #content.show-details {
-      grid-template-columns: 2.05fr 0.95fr; }
-    .passwords #content .item-list .row {
-      height: 51px;
-      font-size: 0;
-      border-bottom: 1px solid #eee;
-      cursor: pointer; }
-      .passwords #content .item-list .row .favourite {
-        line-height: 50px;
-        width: 40px;
-        text-align: center;
-        color: #dbdbdb;
-        font-size: 1rem; }
-        .passwords #content .item-list .row .favourite:hover, .passwords #content .item-list .row .favourite.active {
-          color: #fc0; }
-      .passwords #content .item-list .row .favicon {
-        display: inline-block;
-        background: no-repeat center;
-        background-size: 32px;
-        line-height: 50px;
-        width: 50px;
-        font-size: 1rem;
-        cursor: pointer; }
-      .passwords #content .item-list .row .title {
-        font-size: 0.8rem;
-        padding-left: 8px;
-        cursor: pointer; }
-      .passwords #content .item-list .row .more,
-      .passwords #content .item-list .row .security {
-        float: right;
-        line-height: 50px;
-        width: 50px;
-        font-size: 1rem;
-        text-align: center; }
-        .passwords #content .item-list .row .more.ok,
-        .passwords #content .item-list .row .security.ok {
-          color: #00994d; }
-        .passwords #content .item-list .row .more.warn,
-        .passwords #content .item-list .row .security.warn {
-          color: #fc0; }
-        .passwords #content .item-list .row .more.fail,
-        .passwords #content .item-list .row .security.fail {
-          color: #f33; }
-      .passwords #content .item-list .row .more {
-        position: relative;
-        color: #b1b1b1; }
-        .passwords #content .item-list .row .more > i {
-          cursor: pointer; }
-          .passwords #content .item-list .row .more > i:active, .passwords #content .item-list .row .more > i:hover {
-            color: #000; }
-        .passwords #content .item-list .row .more .menu li {
-          line-height: 40px;
-          font-size: 0.8rem;
-          padding: 0 20px 0 15px;
-          white-space: nowrap;
-          color: #6e6e6e;
-          cursor: pointer; }
-          .passwords #content .item-list .row .more .menu li a {
-            color: #6e6e6e; }
-          .passwords #content .item-list .row .more .menu li i {
-            margin-right: 10px;
-            font-size: 1rem;
-            width: 1rem;
-            text-align: center;
-            position: relative;
-            bottom: -0.1rem;
-            cursor: pointer; }
-          .passwords #content .item-list .row .more .menu li span {
-            font-weight: 300;
-            cursor: pointer; }
-          .passwords #content .item-list .row .more .menu li:active, .passwords #content .item-list .row .more .menu li:hover {
-            background-color: #f7f7f7;
-            color: #000; }
-            .passwords #content .item-list .row .more .menu li:active a, .passwords #content .item-list .row .more .menu li:hover a {
-              color: #000; }
-      .passwords #content .item-list .row .date {
-        float: right;
-        line-height: 50px;
-        width: 85px;
-        font-size: 0.8rem;
-        padding: 0 15px 0 5px;
-        text-align: right;
-        color: #6e6e6e; }
-      .passwords #content .item-list .row:active, .passwords #content .item-list .row:hover {
-        background-color: #f7f7f7; }
-        .passwords #content .item-list .row:active .favourite, .passwords #content .item-list .row:hover .favourite {
-          color: lightgray; }
-          .passwords #content .item-list .row:active .favourite:hover, .passwords #content .item-list .row:active .favourite.active, .passwords #content .item-list .row:hover .favourite:hover, .passwords #content .item-list .row:hover .favourite.active {
-            color: #fc0; }
-    .passwords #content .item-details .image-container {
-      height: 290px;
-      overflow: hidden; }
-      .passwords #content .item-details .image-container img {
-        width: 100%;
-        margin-top: 0;
-        transition: margin-top 10s ease-in-out; }
-  .passwords .foldout-container .foldout-title {
-    cursor: pointer;
-    font-size: 1.1rem;
-    padding: 1rem 0 0.25rem 0;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.25s ease-in-out; }
-    .passwords .foldout-container .foldout-title .fa-chevron-right {
-      font-size: 0.9rem;
-      margin-left: 3px;
-      transition: transform 0.25s ease-in-out; }
-  .passwords .foldout-container .foldout-content {
+      .passwords .passwords-browser-compatibility .browser a:hover {
+        background: #00994d no-repeat center 10px;
+        background-size: 180px; }
+      @media (max-width: 649px) {
+        .passwords .passwords-browser-compatibility .browser a {
+          width: 360px;
+          margin: 0 auto 25px;
+          float: none; } }
+.passwords #app-navigation li {
+  line-height: 44px;
+  padding: 0 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #6e6e6e;
+  cursor: pointer; }
+  .passwords #app-navigation li:hover, .passwords #app-navigation li:active {
+    color: #000; }
+  .passwords #app-navigation li:before {
+    font-family: FontAwesome, sans-serif;
+    font-size: 1.2rem;
+    padding-right: 10px;
+    position: relative;
+    bottom: -2px; }
+  .passwords #app-navigation li.nav-icon-all:before {
+    content: "\f0ac"; }
+  .passwords #app-navigation li.nav-icon-folders:before {
+    content: "\f07b"; }
+  .passwords #app-navigation li.nav-icon-recent:before {
+    content: "\f017"; }
+  .passwords #app-navigation li.nav-icon-tags:before {
+    content: "\f02b"; }
+  .passwords #app-navigation li.nav-icon-security:before {
+    content: "\f132"; }
+  .passwords #app-navigation li.nav-icon-shared:before {
+    content: "\f1e0"; }
+  .passwords #app-navigation li.nav-icon-favourites:before {
+    content: "\f005"; }
+  .passwords #app-navigation li.nav-icon-trash:before {
+    content: "\f014"; }
+.passwords #controls .actions.creatable {
+  margin-left: 10px;
+  display: inline-block;
+  position: relative; }
+  .passwords #controls .actions.creatable .newPasswordMenu {
     max-height: 0;
+    margin: 0;
     overflow: hidden;
     transition: max-height 0.25s ease-in-out; }
-  .passwords .foldout-container.open .foldout-title {
-    border-color: #dbdbdb; }
-    .passwords .foldout-container.open .foldout-title .fa-chevron-right {
-      transform: rotate(90deg); }
-  .passwords .foldout-container.open .foldout-content {
-    max-height: 250px; }
-  .passwords #app-popup .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 3001; }
-    .passwords #app-popup .background .window {
-      position: fixed;
-      top: 6%;
-      left: 15%;
-      width: 70%;
-      height: 88%;
-      z-index: 9999;
-      overflow: hidden;
-      background-color: #fff;
-      border-radius: 3px;
-      box-sizing: border-box;
-      display: grid;
-      grid-template-columns: 100%;
-      grid-template-areas: "title" "content";
-      grid-template-rows: 3.25rem auto;
-      justify-items: stretch;
-      align-items: stretch; }
-      .passwords #app-popup .background .window .title {
-        grid-area: title;
-        padding: 1rem;
-        font-size: 1.25rem; }
-        .passwords #app-popup .background .window .title .close {
-          float: right;
+  .passwords #controls .actions.creatable.active .newPasswordMenu {
+    overflow: visible;
+    max-height: 75px;
+    animation: 0.25s delay-overflow; }
+.passwords #content {
+  border-top: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 3fr 0;
+  grid-template-areas: "left right";
+  grid-template-rows: auto;
+  justify-items: stretch;
+  align-items: stretch;
+  transition: grid-template-columns 0.5s ease-in-out;
+  margin-top: -1px; }
+  .passwords #content .content-left {
+    grid-area: left;
+    margin-top: 44px; }
+  .passwords #content .content-right {
+    grid-area: right;
+    z-index: 50;
+    border-left: 1px solid #dbdbdb; }
+  .passwords #content.show-details {
+    grid-template-columns: 2.05fr 0.95fr; }
+  .passwords #content .item-list .row {
+    height: 51px;
+    font-size: 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer; }
+    .passwords #content .item-list .row .favourite {
+      line-height: 50px;
+      width: 40px;
+      text-align: center;
+      color: #dbdbdb;
+      font-size: 1rem; }
+      .passwords #content .item-list .row .favourite:hover, .passwords #content .item-list .row .favourite.active {
+        color: #fc0; }
+    .passwords #content .item-list .row .favicon {
+      display: inline-block;
+      background: no-repeat center;
+      background-size: 32px;
+      line-height: 50px;
+      width: 50px;
+      font-size: 1rem;
+      cursor: pointer; }
+    .passwords #content .item-list .row .title {
+      font-size: 0.8rem;
+      padding-left: 8px;
+      cursor: pointer; }
+    .passwords #content .item-list .row .more,
+    .passwords #content .item-list .row .security {
+      float: right;
+      line-height: 50px;
+      width: 50px;
+      font-size: 1rem;
+      text-align: center; }
+      .passwords #content .item-list .row .more.ok,
+      .passwords #content .item-list .row .security.ok {
+        color: #00994d; }
+      .passwords #content .item-list .row .more.warn,
+      .passwords #content .item-list .row .security.warn {
+        color: #fc0; }
+      .passwords #content .item-list .row .more.fail,
+      .passwords #content .item-list .row .security.fail {
+        color: #f33; }
+    .passwords #content .item-list .row .more {
+      position: relative;
+      color: #b1b1b1; }
+      .passwords #content .item-list .row .more > i {
+        cursor: pointer; }
+        .passwords #content .item-list .row .more > i:active, .passwords #content .item-list .row .more > i:hover {
+          color: #000; }
+      .passwords #content .item-list .row .more .menu li {
+        line-height: 40px;
+        font-size: 0.8rem;
+        padding: 0 20px 0 15px;
+        white-space: nowrap;
+        color: #6e6e6e;
+        cursor: pointer; }
+        .passwords #content .item-list .row .more .menu li a {
+          color: #6e6e6e; }
+        .passwords #content .item-list .row .more .menu li i {
+          margin-right: 10px;
+          font-size: 1rem;
+          width: 1rem;
+          text-align: center;
+          position: relative;
+          bottom: -0.1rem;
           cursor: pointer; }
-      .passwords #app-popup .background .window .content {
-        grid-area: content;
-        overflow: auto; }
-  .passwords #app-popup #passwords-create-new .content {
+        .passwords #content .item-list .row .more .menu li span {
+          font-weight: 300;
+          cursor: pointer; }
+        .passwords #content .item-list .row .more .menu li:active, .passwords #content .item-list .row .more .menu li:hover {
+          background-color: #f7f7f7;
+          color: #000; }
+          .passwords #content .item-list .row .more .menu li:active a, .passwords #content .item-list .row .more .menu li:hover a {
+            color: #000; }
+    .passwords #content .item-list .row .date {
+      float: right;
+      line-height: 50px;
+      width: 85px;
+      font-size: 0.8rem;
+      padding: 0 15px 0 5px;
+      text-align: right;
+      color: #6e6e6e; }
+    .passwords #content .item-list .row:active, .passwords #content .item-list .row:hover {
+      background-color: #f7f7f7; }
+      .passwords #content .item-list .row:active .favourite, .passwords #content .item-list .row:hover .favourite {
+        color: lightgray; }
+        .passwords #content .item-list .row:active .favourite:hover, .passwords #content .item-list .row:active .favourite.active, .passwords #content .item-list .row:hover .favourite:hover, .passwords #content .item-list .row:hover .favourite.active {
+          color: #fc0; }
+  .passwords #content .item-details .image-container {
+    height: 290px;
+    overflow: hidden; }
+    .passwords #content .item-details .image-container img {
+      width: 100%;
+      margin-top: 0;
+      transition: margin-top 10s ease-in-out; }
+.passwords .foldout-container .foldout-title {
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 1rem 0 0.25rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease-in-out; }
+  .passwords .foldout-container .foldout-title .fa-chevron-right {
+    font-size: 0.9rem;
+    margin-left: 3px;
+    transition: transform 0.25s ease-in-out; }
+.passwords .foldout-container .foldout-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-in-out; }
+.passwords .foldout-container.open .foldout-title {
+  border-color: #dbdbdb; }
+  .passwords .foldout-container.open .foldout-title .fa-chevron-right {
+    transform: rotate(90deg); }
+.passwords .foldout-container.open .foldout-content {
+  max-height: 250px; }
+.passwords #app-popup .background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3001; }
+  .passwords #app-popup .background .window {
+    position: fixed;
+    top: 6%;
+    left: 15%;
+    width: 70%;
+    height: 88%;
+    z-index: 9999;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 3px;
+    box-sizing: border-box;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 9fr 1fr;
-    grid-template-areas: "form notes" "controls notes";
-    grid-column-gap: 15px;
-    padding: 15px; }
-    .passwords #app-popup #passwords-create-new .content .form {
-      grid-area: form; }
-      .passwords #app-popup #passwords-create-new .content .form .form-grid {
-        display: grid;
-        grid-template-columns: auto 3fr;
-        grid-template-rows: 1fr;
-        grid-row-gap: 5px;
-        justify-items: left;
-        align-items: end; }
-        .passwords #app-popup #passwords-create-new .content .form .form-grid .tags-container,
-        .passwords #app-popup #passwords-create-new .content .form .form-grid .foldout-container {
-          grid-column: 1 / span 2;
-          justify-self: stretch; }
-        .passwords #app-popup #passwords-create-new .content .form .form-grid label {
-          padding: 0 0.9rem 5px 0; }
-      .passwords #app-popup #passwords-create-new .content .form .section-title {
-        font-size: 1.1rem;
-        padding: 0 0 0.25rem 0;
-        border-bottom: 1px solid #dbdbdb; }
-      .passwords #app-popup #passwords-create-new .content .form .password-field {
-        display: block;
-        width: 100%;
-        max-width: 275px;
-        position: relative; }
-        .passwords #app-popup #passwords-create-new .content .form .password-field input {
-          max-width: initial; }
-        .passwords #app-popup #passwords-create-new .content .form .password-field .icons {
-          position: absolute;
-          top: 0;
-          right: 3px;
-          bottom: 0;
-          display: flex;
-          align-items: center; }
-          .passwords #app-popup #passwords-create-new .content .form .password-field .icons i.fa {
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 3px; }
-      .passwords #app-popup #passwords-create-new .content .form label {
-        display: block;
-        font-size: 0.9rem; }
-      .passwords #app-popup #passwords-create-new .content .form input[type=text],
-      .passwords #app-popup #passwords-create-new .content .form input[type=password] {
-        cursor: text;
-        width: 100%;
-        max-width: 275px; }
-      .passwords #app-popup #passwords-create-new .content .form select {
-        width: 100%;
-        max-width: 275px; }
-    .passwords #app-popup #passwords-create-new .content .notes {
-      grid-area: notes; }
-      .passwords #app-popup #passwords-create-new .content .notes label {
-        font-size: 1.1rem;
-        padding: 0 0 0.25rem 0;
-        border-bottom: 1px solid #dbdbdb;
-        display: block;
-        margin-bottom: 0.25rem;
-        cursor: default; }
-    .passwords #app-popup #passwords-create-new .content .controls {
-      grid-area: controls;
-      align-self: end; }
-      .passwords #app-popup #passwords-create-new .content .controls input {
-        width: 100%;
-        font-size: 1.1rem; }
+    grid-template-columns: 100%;
+    grid-template-areas: "title" "content";
+    grid-template-rows: 3.25rem auto;
+    justify-items: stretch;
+    align-items: stretch; }
+    .passwords #app-popup .background .window .title {
+      grid-area: title;
+      padding: 1rem;
+      font-size: 1.25rem; }
+      .passwords #app-popup .background .window .title .close {
+        float: right;
+        cursor: pointer; }
+    .passwords #app-popup .background .window .content {
+      grid-area: content;
+      overflow: auto; }
+.passwords #app-popup #passwords-create-new .content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 9fr 1fr;
+  grid-template-areas: "form notes" "controls notes";
+  grid-column-gap: 15px;
+  padding: 15px; }
+  .passwords #app-popup #passwords-create-new .content .form {
+    grid-area: form; }
+    .passwords #app-popup #passwords-create-new .content .form .form-grid {
+      display: grid;
+      grid-template-columns: auto 3fr;
+      grid-template-rows: 1fr;
+      grid-row-gap: 5px;
+      justify-items: left;
+      align-items: end; }
+      .passwords #app-popup #passwords-create-new .content .form .form-grid .tags-container,
+      .passwords #app-popup #passwords-create-new .content .form .form-grid .foldout-container {
+        grid-column: 1 / span 2;
+        justify-self: stretch; }
+      .passwords #app-popup #passwords-create-new .content .form .form-grid label {
+        padding: 0 0.9rem 5px 0; }
+    .passwords #app-popup #passwords-create-new .content .form .section-title {
+      font-size: 1.1rem;
+      padding: 0 0 0.25rem 0;
+      border-bottom: 1px solid #dbdbdb; }
+    .passwords #app-popup #passwords-create-new .content .form .password-field {
+      display: block;
+      width: 100%;
+      max-width: 275px;
+      position: relative; }
+      .passwords #app-popup #passwords-create-new .content .form .password-field input {
+        max-width: initial; }
+      .passwords #app-popup #passwords-create-new .content .form .password-field .icons {
+        position: absolute;
+        top: 0;
+        right: 3px;
+        bottom: 0;
+        display: flex;
+        align-items: center; }
+        .passwords #app-popup #passwords-create-new .content .form .password-field .icons i.fa {
+          font-size: 1rem;
+          cursor: pointer;
+          margin: 3px; }
+    .passwords #app-popup #passwords-create-new .content .form label {
+      display: block;
+      font-size: 0.9rem; }
+    .passwords #app-popup #passwords-create-new .content .form input[type=text],
+    .passwords #app-popup #passwords-create-new .content .form input[type=password] {
+      cursor: text;
+      width: 100%;
+      max-width: 275px; }
+    .passwords #app-popup #passwords-create-new .content .form select {
+      width: 100%;
+      max-width: 275px; }
+  .passwords #app-popup #passwords-create-new .content .notes {
+    grid-area: notes; }
+    .passwords #app-popup #passwords-create-new .content .notes label {
+      font-size: 1.1rem;
+      padding: 0 0 0.25rem 0;
+      border-bottom: 1px solid #dbdbdb;
+      display: block;
+      margin-bottom: 0.25rem;
+      cursor: default; }
+  .passwords #app-popup #passwords-create-new .content .controls {
+    grid-area: controls;
+    align-self: end; }
+    .passwords #app-popup #passwords-create-new .content .controls input {
+      width: 100%;
+      font-size: 1.1rem; }
 
 @keyframes delay-overflow {
   0% {
