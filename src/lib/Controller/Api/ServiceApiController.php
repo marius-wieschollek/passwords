@@ -9,7 +9,6 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\PasswordGenerationHelper;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\PageShotService;
 use OCA\Passwords\Services\PasswordGenerationService;
@@ -26,7 +25,7 @@ use OCP\IRequest;
 class ServiceApiController extends AbstractApiController {
 
     /**
-     * @var PasswordGenerationHelper
+     * @var PasswordGenerationService
      */
     protected $passwordGenerationService;
 
@@ -82,7 +81,7 @@ class ServiceApiController extends AbstractApiController {
             if(empty($password)) {
                 throw new ApiException('Unable to create password');
             }
-        }catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
 
@@ -124,19 +123,44 @@ class ServiceApiController extends AbstractApiController {
      *
      * @param string $domain
      * @param string $view
-     * @param int    $width
-     * @param int    $height
+     * @param string $width
+     * @param string $height
      *
-     * @return FileDisplayResponse
+     * @return FileDisplayResponse|JSONResponse
      */
-    public function getPreview(string $domain, string $view = 'desktop', int $width = 550, int $height = 0) {
+    public function getPreview(string $domain, string $view = 'desktop', string $width = '550', string $height = '0') {
+        try {
+            list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
+            list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
 
-        $file = $this->previewService->getPreview($domain, $view, $width, $height);
+            $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
+        }
 
         return new FileDisplayResponse(
             $file,
             Http::STATUS_OK,
             ['Content-Type' => $file->getMimeType()]
         );
+    }
+
+    /**
+     * @param $size
+     *
+     * @return array
+     * @throws ApiException
+     */
+    protected function validatePreviewSize($size) {
+        if(is_numeric($size)) {
+            return [intval($size), intval($size)];
+        } else if(preg_match("/([0-9]+)?\.\.\.([0-9]+)?/", $size, $matches)) {
+            if(!isset($matches[1])) $matches[1] = 0;
+            if(!isset($matches[2])) $matches[2] = 0;
+            return [intval($matches[1]), intval($matches[2])];
+        }
+
+        throw new ApiException('Invalid Size Specified');
     }
 }

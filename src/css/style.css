@@ -2425,11 +2425,14 @@
     grid-area: left;
     margin-top: 44px; }
   .passwords #content .content-right {
+    display: none;
     grid-area: right;
     z-index: 50;
     border-left: 1px solid #dbdbdb; }
   .passwords #content.show-details {
     grid-template-columns: 2.05fr 0.95fr; }
+    .passwords #content.show-details .content-right {
+      display: block; }
   .passwords #content .item-list .row {
     height: 51px;
     font-size: 0;
@@ -2520,10 +2523,13 @@
   .passwords #content .item-details .image-container {
     height: 290px;
     overflow: hidden; }
-    .passwords #content .item-details .image-container img {
-      width: 100%;
-      margin-top: 0;
-      transition: margin-top 10s ease-in-out; }
+    .passwords #content .item-details .image-container a {
+      display: block;
+      font-size: 0; }
+      .passwords #content .item-details .image-container a img {
+        width: 100%;
+        margin-top: 0;
+        transition: margin-top 10s ease-in-out; }
 .passwords .foldout-container .foldout-title {
   cursor: pointer;
   font-size: 1.1rem;

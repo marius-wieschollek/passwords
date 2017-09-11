@@ -172,6 +172,12 @@ class EnhancedApi extends SimpleApi {
         });
     }
 
+    /**
+     *
+     * @param data
+     * @returns {{}}
+     * @private
+     */
     _processPasswordList(data) {
         let passwords = {};
 

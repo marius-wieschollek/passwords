@@ -23,14 +23,14 @@ Vue.component('passwords-details-password', {
         imageMouseOver($event) {
             let $element = $($event.target),
                 $parent = $element.parent(),
-                height = $element.height() - $parent.height();
-            console.log(height, $element.height(), $parent.height());
+                margin = $element.height() - $parent.height();
 
-            $element.css('margin-top', '-' + height + 'px');
+            if(margin > 0) {
+                $element.css('margin-top', '-' + margin + 'px');
+            }
         },
         imageMouseOut($event) {
             let $element = $($event.target);
-            console.log('test');
 
             $element.css('margin-top', 0);
         },

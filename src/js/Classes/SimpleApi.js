@@ -179,7 +179,7 @@ class SimpleApi {
      * @param height
      * @returns {Promise}
      */
-    getPreviewUrl(host, view = 'desktop', width = 550, height = 0) {
+    getPreviewUrl(host, view = 'desktop', width = 550, height = '315...') {
         return this._endpoint + SimpleApi.processUrl(
             this._paths['service.preview'],
             {domain: host, view: view, width: width, height: height}

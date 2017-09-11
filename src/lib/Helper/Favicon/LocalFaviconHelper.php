@@ -8,8 +8,8 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
-use Gmagick;
-use Imagick;
+use OCA\Passwords\Helper\Image\AbstractImageHelper;
+use OCA\Passwords\Services\FileCacheService;
 
 /**
  * Class LocalFaviconHelper
@@ -23,7 +23,26 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      */
     protected $prefix = 'local';
 
+    /**
+     * @var string
+     */
     protected $icoFile;
+
+    /**
+     * @var AbstractImageHelper
+     */
+    protected $imageHelper;
+
+    /**
+     * LocalFaviconHelper constructor.
+     *
+     * @param FileCacheService    $fileCacheService
+     * @param AbstractImageHelper $imageHelper
+     */
+    public function __construct(FileCacheService $fileCacheService, AbstractImageHelper $imageHelper) {
+        parent::__construct($fileCacheService);
+        $this->imageHelper = $imageHelper;
+    }
 
     /**
      * @param string $domain
@@ -33,10 +52,13 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected function getFaviconUrl(string $domain): string {
 
         $html     = $this->getHttpRequest('http://'.$domain);
-        $patterns = $this->getSearchPatterns();
-        foreach ($patterns as $pattern) {
-            $url = $this->checkForImage($html, $pattern['html'], $pattern['tag'], $domain);
-            if($url !== null) return $url;
+        if(!empty($html)) {
+            $patterns = $this->getSearchPatterns();
+            foreach ($patterns as $pattern) {
+                $url = $this->checkForImage($html, $pattern['html'], $pattern['tag'], $domain);
+
+                if($url !== null) return $url;
+            }
         }
 
         $pngFavicon = "http://{$domain}/favicon.png";
@@ -68,26 +90,9 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return string
      */
     protected function convertIcoFile($data) {
-        if(empty($data) || (!class_exists(Imagick::class) && !class_exists(Gmagick::class))) {
-            return $data;
-        }
+        if(empty($data)) return null;
 
-        try {
-            $image    = class_exists(Imagick::class) ? new Imagick():new Gmagick();
-            $tempFile = '/tmp/'.uniqid().'.ico';
-            file_put_contents($tempFile, $data);
-            $image->readImage($tempFile);
-            $image->setImageFormat('png');
-            $content = $image->getImageBlob();
-            $image->destroy();
-            unlink($tempFile);
-
-            return $content;
-        } catch (\Throwable $e) {
-            \OC::$server->getLogger()->error($e->getMessage());
-
-            return $data;
-        }
+        return $this->imageHelper->convertIcoToPng($data);
     }
 
     /**
@@ -105,9 +110,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
                 if(preg_match($tagPattern, $tagSource, $tagMatches)) {
                     $url = $this->makeUrl($tagMatches[1], $domain);
 
-                    if(@fopen($url, 'r')) {
-                        return $url;
-                    }
+                    if(@fopen($url, 'r')) return $url;
                 }
             }
         };
@@ -164,6 +167,15 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             ],
             [
                 'html' => '/(link[^>]+rel[^>]+apple-touch-icon-precomposed[^>]+)/',
+                'tag'  => '/href=[\'"](\S+)[\'"]/'
+            ],
+            [
+                // Just for youtube
+                'html' => '/(link[^>]+rel[^>]+icon[^>]+sizes[^>]+1[0-9]+x1[0-9]+[^>]+)/',
+                'tag'  => '/href=[\'"](\S+)[\'"]/'
+            ],
+            [
+                'html' => '/(link[^>]+rel[^>]+shortcut\s+icon[^>]+)/',
                 'tag'  => '/href=[\'"](\S+)[\'"]/'
             ],
             [

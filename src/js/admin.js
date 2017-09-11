@@ -51,7 +51,6 @@ class PasswordsAdminSettings {
             $apiInput.parent().hide();
         } else {
             $apiInput.parent().show();
-            console.log(data);
 
             $apiInput.data('setting', data.key);
             $apiInput.val(data.value);

@@ -287,10 +287,15 @@ $color-white : #fff;
                 height   : 290px;
                 overflow : hidden;
 
-                img {
-                    width      : 100%;
-                    margin-top : 0;
-                    transition : margin-top 10s ease-in-out;
+                a {
+                    display: block;
+                    font-size: 0;
+
+                    img {
+                        width      : 100%;
+                        margin-top : 0;
+                        transition : margin-top 10s ease-in-out;
+                    }
                 }
             }
         }
