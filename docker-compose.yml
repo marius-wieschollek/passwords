@@ -14,7 +14,7 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
-    image: nextcloud:fpm
+    build: ./docker/php/
     container_name: "passwords-php"
     links:
       - db
