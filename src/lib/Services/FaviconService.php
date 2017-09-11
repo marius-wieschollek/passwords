@@ -97,15 +97,40 @@ class FaviconService {
         try {
             $image = class_exists(Imagick::class) ? new Imagick():new Gmagick();
             $image->readImageBlob($file->getContent(), $file->getName());
+            if($image->getImageWidth() != $image->getImageHeight()) {
+                $image = $this->cropImage($image);
+            }
             $image->stripImage();
             $image->setImageFormat('png');
-            $image->adaptiveResizeImage($size, $size, 0);
+            $image->resizeImage($size, $size, $image::FILTER_LANCZOS, 1);
             $image->setImageCompressionQuality(9);
 
             return $image->getImageBlob();
         } catch (\Throwable $e) {
+            \OC::$server->getLogger()->error($e->getMessage());
             return null;
         }
+    }
+
+    /**
+     * @param Imagick $image
+     *
+     * @return Imagick
+     */
+    protected function cropImage($image) {
+        $width  = $image->getImageWidth();
+        $height = $image->getImageHeight();
+
+        if($width > $height) {
+            $padding = ($width - $height) / 2;
+            $image->cropImage($height, $height, $padding, 0);
+        }
+        if($width < $height) {
+            $padding = ($height - $width) / 2;
+            $image->cropImage($width, $width, 0, $padding);
+        }
+
+        return $image;
     }
 
     /**
@@ -129,7 +154,7 @@ class FaviconService {
      * @return AbstractFaviconHelper
      */
     protected function getFaviconService(): AbstractFaviconHelper {
-        $service = $this->config->getAppValue('service/favicon', self::SERVICE_BETTER_IDEA);
+        $service = $this->config->getAppValue('service/favicon', self::SERVICE_LOCAL);
 
         switch ($service) {
             case self::SERVICE_BETTER_IDEA:

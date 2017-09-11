@@ -74,7 +74,11 @@ class LocalWordsHelper extends AbstractWordsHelper {
             if(is_file('/usr/share/dict/words')) {
                 return '/usr/share/dict/words';
             }
-            throw new ApiException('No local words file found');
+
+
+            \OC::$server->getLogger()->error('No local words file found. Install a words file in /usr/share/dict/words');
+
+            throw new ApiException('Incorrect Words API Configuration');
         }
 
         return $wordsFile;

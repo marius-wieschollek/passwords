@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
+use OCA\Passwords\Exception\ApiException;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -54,10 +55,11 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
         $cmd      = $this->getWkHtmlBinary().
                     ' --quiet --no-stop-slow-scripts --disable-smart-width --javascript-delay 1500 --format JPG --width '.
                     ($view === 'desktop' ? 1280:360).
-                    ' '.escapeshellarg('http://'.$domain).' '.$tempFile;
+                    ' '.escapeshellarg('http://'.$domain).' '.$tempFile.' 2>&1';
 
         $retries = 0;
         while ($retries < 5) {
+            $output = [];
             @exec($cmd, $output, $returnCode);
 
             if($returnCode == 0 && is_file($tempFile)) {
@@ -70,19 +72,44 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
             }
         }
 
+        \OC::$server->getLogger()->error('WKHTML said: '.PHP_EOL.implode(PHP_EOL, $output));
+
         return null;
     }
 
     /**
      * @return string
+     * @throws ApiException
      */
     protected function getWkHtmlBinary(): string {
-        $bin = dirname(dirname(dirname(__DIR__))).'/bin/wkhtml/'.PHP_OS;
-        if(PHP_INT_SIZE == 8) {
-            return $bin.'64';
-        } else {
-            return $bin.'32';
+        $path = self::getWkHtmlPath();
+
+        if($path === null) {
+            \OC::$server->getLogger()->error('WKHTML binary not found or not accessible. You can install WKHTML binary from admin page');
+
+            throw new ApiException('Incorrect PageShot API Configuration');
         }
+
+        return $path;
+    }
+
+    /**
+     * @return null|string
+     */
+    public static function getWkHtmlPath() {
+        $serverPath = @exec('which wkhtmltoimage');
+
+        if(!empty($serverPath) && is_file($serverPath)) {
+            return $serverPath;
+        }
+
+        $localPath = dirname(dirname(dirname(__DIR__))).'/bin/wkhtmltoimage';
+
+        if(!empty($localPath) && is_file($localPath)) {
+            return $localPath;
+        }
+
+        return null;
     }
 
     /**

@@ -138,6 +138,7 @@ $color-white : #fff;
             margin-top : 44px;
         }
         .content-right {
+            display: none;
             grid-area   : right;
             z-index     : 50;
             border-left : 1px solid $color-grey-light
@@ -145,6 +146,9 @@ $color-white : #fff;
 
         &.show-details {
             grid-template-columns : 2.05fr 0.95fr;
+            .content-right {
+                display: block;
+            }
         }
 
         .item-list {
