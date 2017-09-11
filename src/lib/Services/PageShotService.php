@@ -104,7 +104,7 @@ class PageShotService {
             $image->readImageBlob($file->getContent());
 
             $scaleHeight = $width * ($image->getImageHeight() / $image->getImageWidth());
-            $image->adaptiveResizeImage($width, $scaleHeight, 0);
+            $image->resizeImage($width, $scaleHeight, $image::FILTER_LANCZOS, 1);
 
             if($height != 0 && $height < $image->getImageHeight()) {
                 $image->cropImage($width, $height, 0, 0);
