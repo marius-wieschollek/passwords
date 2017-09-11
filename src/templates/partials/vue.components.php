@@ -86,7 +86,9 @@
 <script type="text/x-template" id="passwords-template-password-details">
     <div class="item-details">
         <div class="image-container">
-            <img :src="password.image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut($event)" alt="">
+            <a :href="password.url" target="_blank">
+                <img :src="password.image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut($event)" alt="">
+            </a>
         </div>
         <div class="title">
             <img :src="password.icon" alt="">
