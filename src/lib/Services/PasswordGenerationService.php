@@ -59,7 +59,7 @@ class PasswordGenerationService {
     ) {
         $this->retries++;
         if($this->retries > 5) {
-            throw new ApiException("Password Generation Service Unavailable");
+            throw new ApiException('Passwords Service Not Responding');
         }
 
         $wordsGenerator = $this->getWordsGenerator();

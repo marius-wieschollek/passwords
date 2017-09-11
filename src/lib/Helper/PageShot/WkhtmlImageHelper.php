@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
+use OCA\Passwords\Exception\ApiException;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -75,14 +76,24 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
 
     /**
      * @return string
+     * @throws ApiException
      */
     protected function getWkHtmlBinary(): string {
-        $bin = dirname(dirname(dirname(__DIR__))).'/bin/wkhtml/'.PHP_OS;
-        if(PHP_INT_SIZE == 8) {
-            return $bin.'64';
-        } else {
-            return $bin.'32';
+        $serverPath = @exec('which wkhtmltoimage');
+
+        if(!empty($serverPath) && is_file($serverPath)) {
+            return $serverPath;
         }
+
+        $localPath = dirname(dirname(dirname(__DIR__))).'/bin/wkhtmltoimage';
+
+        if(!empty($localPath) && is_file($localPath)) {
+            return $localPath;
+        }
+
+        \OC::$server->getLogger()->error('WKHTML binary not found or not accessible. You can install WKHTML binary from admin page');
+
+        throw new ApiException('Icorrect PageShot API Configuration');
     }
 
     /**
