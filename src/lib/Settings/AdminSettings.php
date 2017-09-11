@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Settings;
 
+use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
@@ -135,8 +136,9 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => PageShotService::SERVICE_WKHTML,
-                'label'   => $this->localisation->t('WKHTML (built-in)'),
+                'label'   => $this->localisation->t('WKHTML (local)'),
                 'current' => $current === PageShotService::SERVICE_WKHTML,
+                'path'    => WkhtmlImageHelper::getWkhtmlPath(),
                 'api'     => null
             ],
             [
