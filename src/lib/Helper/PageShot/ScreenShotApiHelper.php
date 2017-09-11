@@ -65,12 +65,13 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
         $image = json_decode($request->sendWithRetry(), true);
 
         if($image['status'] !== 'accepted' && $image['status'] !== 'ready') {
-            \OC::$server->getLogger()->error('PageShot service refused request');
+            \OC::$server->getLogger()->error('screenshotapi.io service refused request');
 
             return null;
         }
 
-        while (1) {
+        $seconds = 0;
+        while ($seconds < 60) {
             $request = $this->getAuthorizedRequest('https://api.screenshotapi.io/retrieve?key='.$image['key']);
             $check   = json_decode($request->sendWithRetry(1), true);
 
@@ -86,8 +87,10 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             }
 
             sleep(1);
+            $seconds++;
         }
 
+        \OC::$server->getLogger()->error('screenshotapi.io service did not complete within 60 seconds');
         return null;
     }
 
