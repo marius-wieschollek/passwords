@@ -81,14 +81,23 @@ abstract class AbstractPageShotHelper {
     /**
      * @param string   $domain
      * @param string   $view
-     * @param int|null $width
-     * @param int|null $height
+     * @param int|null $minWidth
+     * @param int|null $minHeight
+     * @param int|null $maxWidth
+     * @param int|null $maxHeight
      *
      * @return string
      */
-    public function getPageShotFilename(string $domain, string $view, int $width = null, int $height = null): string {
-        if($width !== null) {
-            return "{$this->prefix}_{$domain}_{$view}_{$width}x{$height}.jpg";
+    public function getPageShotFilename(
+        string $domain,
+        string $view,
+        int $minWidth = null,
+        int $minHeight = null,
+        int $maxWidth = null,
+        int $maxHeight = null
+    ): string {
+        if($minWidth !== null) {
+            return "{$this->prefix}_{$domain}_{$view}_{$minWidth}x{$minHeight}_{$maxWidth}x{$maxHeight}.jpg";
         }
 
         return "{$this->prefix}_{$domain}_{$view}.jpg";

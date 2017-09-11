@@ -8,14 +8,13 @@
 
 namespace OCA\Passwords\Services;
 
-use Gmagick;
-use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
 use OCA\Passwords\Helper\Favicon\GoogleHelper;
 use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
+use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -42,15 +41,22 @@ class FaviconService {
     protected $config;
 
     /**
+     * @var AbstractImageHelper
+     */
+    protected $imageHelper;
+
+    /**
      * FaviconService constructor.
      *
+     * @param ImageService         $imageService
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
-    public function __construct(ConfigurationService $config, FileCacheService $fileCacheService) {
+    public function __construct(ImageService $imageService, ConfigurationService $config, FileCacheService $fileCacheService) {
         $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
         $this->fileCacheService = $fileCacheService;
         $this->config           = $config;
+        $this->imageHelper      = $imageService->getImageHelper();
     }
 
     /**
@@ -74,63 +80,15 @@ class FaviconService {
             $favicon = $faviconService->getFavicon($domain);
         }
 
-        $faviconData = null;
-        if(class_exists(Imagick::class) || class_exists(Gmagick::class)) {
-            $faviconData = $this->resizeWithImageMagick($favicon, $size);
-        }
-
-        if($faviconData === null) {
-            $faviconData = $favicon->getContent();
+        $faviconData = $favicon->getContent();
+        if($this->imageHelper->supportsImage($faviconData)) {
+            $image = $this->imageHelper->getImageFromBlob($faviconData);
+            $this->imageHelper->simpleResizeImage($image, $size);
+            $faviconData = $this->imageHelper->exportPng($image);
+            $this->imageHelper->destroyImage($image);
         }
 
         return $this->fileCacheService->putFile($fileName, $faviconData);
-    }
-
-    /**
-     * @param ISimpleFile $file
-     * @param int         $size
-     *
-     * @return null
-     * @internal param string $url
-     */
-    protected function resizeWithImageMagick(ISimpleFile $file, int $size) {
-        try {
-            $image = class_exists(Imagick::class) ? new Imagick():new Gmagick();
-            $image->readImageBlob($file->getContent(), $file->getName());
-            if($image->getImageWidth() != $image->getImageHeight()) {
-                $image = $this->cropImage($image);
-            }
-            $image->stripImage();
-            $image->setImageFormat('png');
-            $image->resizeImage($size, $size, $image::FILTER_LANCZOS, 1);
-            $image->setImageCompressionQuality(9);
-
-            return $image->getImageBlob();
-        } catch (\Throwable $e) {
-            \OC::$server->getLogger()->error($e->getMessage());
-            return null;
-        }
-    }
-
-    /**
-     * @param Imagick $image
-     *
-     * @return Imagick
-     */
-    protected function cropImage($image) {
-        $width  = $image->getImageWidth();
-        $height = $image->getImageHeight();
-
-        if($width > $height) {
-            $padding = ($width - $height) / 2;
-            $image->cropImage($height, $height, $padding, 0);
-        }
-        if($width < $height) {
-            $padding = ($height - $width) / 2;
-            $image->cropImage($width, $width, 0, $padding);
-        }
-
-        return $image;
     }
 
     /**
@@ -164,7 +122,7 @@ class FaviconService {
             case self::SERVICE_GOOGLE:
                 return new GoogleHelper($this->fileCacheService);
             case self::SERVICE_LOCAL:
-                return new LocalFaviconHelper($this->fileCacheService);
+                return new LocalFaviconHelper($this->fileCacheService, $this->imageHelper);
             case self::SERVICE_DEFAULT:
                 return new DefaultHelper($this->fileCacheService);
         }

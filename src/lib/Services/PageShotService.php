@@ -8,8 +8,7 @@
 
 namespace OCA\Passwords\Services;
 
-use Gmagick;
-use Imagick;
+use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
 use OCA\Passwords\Helper\PageShot\DefaultHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
@@ -17,7 +16,6 @@ use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
-use OCP\Image;
 
 /**
  * Class PageShotService
@@ -46,30 +44,48 @@ class PageShotService {
     protected $config;
 
     /**
+     * @var AbstractImageHelper
+     */
+    protected $imageHelper;
+
+    /**
      * FaviconService constructor.
      *
+     * @param ImageService         $imageService
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
-    public function __construct(ConfigurationService $config, FileCacheService $fileCacheService) {
+    public function __construct(ImageService $imageService, ConfigurationService $config, FileCacheService $fileCacheService) {
         $fileCacheService->setDefaultCache($fileCacheService::PAGESHOT_CACHE);
         $this->fileCacheService = $fileCacheService;
         $this->config           = $config;
+        $this->imageHelper      = $imageService->getImageHelper();
     }
 
     /**
      * @param string $domain
      * @param string $view
-     * @param int    $width
-     * @param int    $height
+     * @param int    $minWidth
+     * @param int    $minHeight
+     *
+     * @param int    $maxWidth
+     * @param int    $maxHeight
      *
      * @return ISimpleFile
      */
-    public function getPreview(string $domain, string $view = self::VIEWPORT_DESKTOP, int $width = 550, int $height = 0) {
-        list($domain, $width, $height) = $this->validateInput($domain, $width, $height);
+    public function getPreview(
+        string $domain,
+        string $view = self::VIEWPORT_DESKTOP,
+        int $minWidth = 550,
+        int $minHeight = 0,
+        int $maxWidth = 550,
+        int $maxHeight = 0
+    ) {
+        list($domain, $minWidth, $minHeight, $maxWidth, $maxHeight) = $this->validateInput($domain, $minWidth, $minHeight,
+                                                                                           $maxWidth, $maxHeight);
 
         $pageShotService = $this->getPageShotService();
-        $fileName        = $pageShotService->getPageShotFilename($domain, $view, $width, $height);
+        $fileName        = $pageShotService->getPageShotFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
@@ -80,67 +96,14 @@ class PageShotService {
             $pageShot = $pageShotService->getPageShot($domain, $view);
         }
 
-        if(class_exists(Imagick::class) || class_exists(Gmagick::class)) {
-            $imageData = $this->resizeWithImageMagick($pageShot, $width, $height);
-        } else {
-            $imageData = $this->resizeWithNextcloud($pageShot, $width, $height);
-        }
+        $image     = $this->imageHelper->getImageFromBlob($pageShot->getContent());
+        $image     = $this->imageHelper->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        $imageData = $this->imageHelper->exportJpeg($image);
+        $this->imageHelper->destroyImage($image);
 
         if($imageData === null) $imageData = $pageShot->getContent();
 
         return $this->fileCacheService->putFile($fileName, $imageData);
-    }
-
-    /**
-     * @param ISimpleFile $file
-     * @param int         $width
-     * @param int         $height
-     *
-     * @return null|string
-     */
-    protected function resizeWithImageMagick(ISimpleFile $file, int $width, int $height) {
-        try {
-            $image = class_exists(Imagick::class) ? new Imagick():new Gmagick();
-            $image->readImageBlob($file->getContent());
-
-            $scaleHeight = $width * ($image->getImageHeight() / $image->getImageWidth());
-            $image->resizeImage($width, $scaleHeight, $image::FILTER_LANCZOS, 1);
-
-            if($height != 0 && $height < $image->getImageHeight()) {
-                $image->cropImage($width, $height, 0, 0);
-            }
-
-            $image->stripImage();
-            $image->setImageFormat('jpg');
-            $image->setImageCompression($image::COMPRESSION_JPEG);
-            $image->setImageCompressionQuality(90);
-
-            return $image->getImageBlob();
-        } catch (\Throwable $e) {
-            return null;
-        }
-    }
-
-    /**
-     * @param ISimpleFile $pageShot
-     * @param int         $width
-     * @param int         $height
-     *
-     * @return null|string
-     */
-    protected function resizeWithNextcloud(ISimpleFile $pageShot, int $width, int $height) {
-        try {
-            $image = new Image($pageShot->getContent());
-            $image->fitIn($width, $image->height());
-
-            if($height != 0 && $height < $image->height()) {
-                $image->crop(0, 0, $width, $height);
-            }
-
-            return $image->data();
-        } catch (\Throwable $e) {
-            return null;
-        }
     }
 
     /**
@@ -167,24 +130,28 @@ class PageShotService {
 
     /**
      * @param string $domain
-     * @param int    $width
-     * @param int    $height
+     * @param int    $minWidth
+     * @param int    $minHeight
+     * @param int    $maxWidth
+     * @param int    $maxHeight
      *
      * @return array
      */
-    protected function validateInput(string $domain, int $width, int $height): array {
+    protected function validateInput(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
-        if($width > 720) {
-            $width = 720;
-        } else if($width < 240) {
-            $width = 240;
-        }
-        if($height > 1280) {
-            $height = 1280;
-        } else if($height < 240 && $height != 0) {
-            $height = 240;
-        }
 
-        return [$domain, $width, $height];
+        if($minWidth > 720) $minWidth = 720;
+        if($minWidth < 240 && $minWidth != 0) $minWidth = 240;
+        if($maxWidth < $minWidth) $maxWidth = $minWidth;
+        if($maxWidth > 720) $maxWidth = 720;
+        if($maxWidth < 240 && $maxWidth != 0) $maxWidth = 240;
+
+        if($minHeight > 1280) $minHeight = 1280;
+        if($minHeight < 240 && $minHeight != 0) $minHeight = 240;
+        if($maxHeight < $minHeight) $maxHeight = $minHeight;
+        if($maxHeight > 1280) $maxHeight = 1280;
+        if($maxHeight < 240 && $maxHeight != 0) $maxHeight = 240;
+
+        return [$domain, $minWidth, $minHeight, $maxWidth, $maxHeight];
     }
 }
