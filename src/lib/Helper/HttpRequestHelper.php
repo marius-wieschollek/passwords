@@ -36,6 +36,11 @@ class HttpRequestHelper {
     protected $json;
 
     /**
+     * @var array
+     */
+    protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0';
+
+    /**
      * @var int[]
      */
     protected $acceptResponseCodes = [200, 201, 202];
@@ -106,6 +111,17 @@ class HttpRequestHelper {
     }
 
     /**
+     * @param array $userAgent
+     *
+     * @return HttpRequestHelper
+     */
+    public function setUserAgent(array $userAgent): HttpRequestHelper {
+        $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    /**
      * @param int[] $acceptResponseCodes
      *
      * @return HttpRequestHelper
@@ -125,6 +141,7 @@ class HttpRequestHelper {
         $ch = curl_init($url == null ? $this->url:$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
         curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 
         if(!empty($this->post)) {

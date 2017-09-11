@@ -6,9 +6,6 @@
 #### First run
 * Open a shell on your computer and navigate to the projects directory
 * Run `docker-compose up -d`
-* Run `docker exec -it passwords-php bash`
-* Run `chmod 775 custom_apps`
-* Run `chown root:www-data custom_apps`
 * Open your browser and type [http://localhost/](http://localhost/)
 * Create your Nextcloud administrator account
 * Click "Storage & Database"
