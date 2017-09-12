@@ -24,8 +24,3 @@ RUN wget -O /tmp/wkthml.tar.gz https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 RUN tar -xf /tmp/wkthml.tar.gz -C /tmp/ && \
     mv /tmp/wkhtmltox/bin/wkhtmltoimage /usr/local/bin/wkhtmltoimage && \
     rm -rf /tmp/wkthml.tar.gz /tmp/wkhtmltox
-
-RUN mkdir -p /var/www/html/custom_apps && \
-    chmod 775 /var/www/html/custom_apps && \
-    chown root:www-data /var/www/html/custom_apps
-

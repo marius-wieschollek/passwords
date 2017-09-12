@@ -6,6 +6,7 @@
 #### First run
 * Open a shell on your computer and navigate to the projects directory
 * Run `docker-compose up -d`
+* Run `docker exec passwords-php chown www-data:www-data /var/www/html/custom_apps`
 * Open your browser and type [http://localhost/](http://localhost/)
 * Create your Nextcloud administrator account
 * Click "Storage & Database"
@@ -13,7 +14,8 @@
 * Enter "nextcloud" for username, password and database
 * Enter "db" for database (usually filled already with "localhost")
 * Finish the installation
-* Go to "Settings" > "Apps" > "Disabled Apps" and enable Passwords
+* Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
+* You can now access the [app](http://localhost/index.php/apps/passwords)
 
 #### First steps
 * [Issues for beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)

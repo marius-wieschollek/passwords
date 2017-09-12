@@ -20,7 +20,7 @@ services:
       - db
     volumes:
       - /var/www/html
-      - ./src:/var/www/html/custom_apps/passwords
+      - ./src/:/var/www/html/custom_apps/passwords
     restart: always
 
   web:
