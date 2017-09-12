@@ -17,7 +17,7 @@
 
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
-  font-size: 1.3333333333em;
+  font-size: 1.33333em;
   line-height: 0.75em;
   vertical-align: -15%; }
 
@@ -34,24 +34,24 @@
   font-size: 5em; }
 
 .fa-fw {
-  width: 1.2857142857em;
+  width: 1.28571em;
   text-align: center; }
 
 .fa-ul {
   padding-left: 0;
-  margin-left: 2.1428571429em;
+  margin-left: 2.14286em;
   list-style-type: none; }
   .fa-ul > li {
     position: relative; }
 
 .fa-li {
   position: absolute;
-  left: -2.1428571429em;
-  width: 2.1428571429em;
-  top: 0.1428571429em;
+  left: -2.14286em;
+  width: 2.14286em;
+  top: 0.14286em;
   text-align: center; }
   .fa-li.fa-lg {
-    left: -1.8571428571em; }
+    left: -1.85714em; }
 
 .fa-border {
   padding: .2em .25em .15em;
@@ -2528,8 +2528,17 @@
       font-size: 0; }
       .passwords #content .item-details .image-container a img {
         width: 100%;
-        margin-top: 0;
-        transition: margin-top 10s ease-in-out; }
+        margin-top: 0; }
+        .passwords #content .item-details .image-container a img.s1 {
+          transition: margin-top 1s ease-in-out; }
+        .passwords #content .item-details .image-container a img.s5 {
+          transition: margin-top 5s ease-in-out; }
+        .passwords #content .item-details .image-container a img.s10 {
+          transition: margin-top 10s ease-in-out; }
+        .passwords #content .item-details .image-container a img.s15 {
+          transition: margin-top 15s ease-in-out; }
+        .passwords #content .item-details .image-container a img.s20 {
+          transition: margin-top 20s ease-in-out; }
 .passwords .foldout-container .foldout-title {
   cursor: pointer;
   font-size: 1.1rem;

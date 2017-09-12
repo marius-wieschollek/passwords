@@ -22,10 +22,17 @@ Vue.component('passwords-details-password', {
     methods: {
         imageMouseOver($event) {
             let $element = $($event.target),
-                $parent = $element.parent(),
+                $parent = $element.parent().parent(),
                 margin = $element.height() - $parent.height();
 
+            $element.attr('class', '');
+
             if(margin > 0) {
+                if(margin < 250) $element.addClass('s1');
+                else if(margin < 1000) $element.addClass('s5');
+                else if(margin < 2500) $element.addClass('s10');
+                else if(margin < 4000) $element.addClass('s15');
+                else $element.addClass('s20');
                 $element.css('margin-top', '-' + margin + 'px');
             }
         },

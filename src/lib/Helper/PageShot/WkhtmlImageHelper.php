@@ -18,6 +18,8 @@ use OCP\Files\SimpleFS\ISimpleFile;
  */
 class WkhtmlImageHelper extends AbstractPageShotHelper {
 
+    const CAPTURE_MAX_RETRIES = 5;
+
     /**
      * @var string
      */
@@ -54,11 +56,12 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
         $tempFile = \OC::$server->getConfig()->getSystemValue('tempdirectory', '/tmp/').uniqid().'.jpg';
         $cmd      = $this->getWkHtmlBinary().
                     ' --quiet --no-stop-slow-scripts --disable-smart-width --javascript-delay 1500 --format JPG --width '.
-                    ($view === 'desktop' ? 1280:360).
+                    ($view === 'desktop' ? self::WIDTH_DESKTOP:self::WIDTH_MOBILE).
                     ' '.escapeshellarg('http://'.$domain).' '.$tempFile.' 2>&1';
 
         $retries = 0;
-        while ($retries < 5) {
+        $output  = [];
+        while ($retries < self::CAPTURE_MAX_RETRIES) {
             $output = [];
             @exec($cmd, $output, $returnCode);
 
@@ -97,17 +100,12 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @return null|string
      */
     public static function getWkHtmlPath() {
-        $serverPath = @exec('which wkhtmltoimage');
-
-        if(!empty($serverPath) && is_file($serverPath)) {
-            return $serverPath;
-        }
 
         $localPath = dirname(dirname(dirname(__DIR__))).'/bin/wkhtmltoimage';
+        if(!empty($localPath) && is_file($localPath)) return $localPath;
 
-        if(!empty($localPath) && is_file($localPath)) {
-            return $localPath;
-        }
+        $serverPath = @exec('which wkhtmltoimage');
+        if(!empty($serverPath) && is_file($serverPath)) return $serverPath;
 
         return null;
     }

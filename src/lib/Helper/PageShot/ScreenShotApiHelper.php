@@ -20,6 +20,7 @@ use OCA\Passwords\Services\PageShotService;
  * @package OCA\Passwords\Helper\PageShot
  */
 class ScreenShotApiHelper extends AbstractPageShotHelper {
+    const SERVICE_PROCESSING_TIMEOUT = 60;
 
     /**
      * @var string
@@ -71,7 +72,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
         }
 
         $seconds = 0;
-        while ($seconds < 60) {
+        while ($seconds < self::SERVICE_PROCESSING_TIMEOUT) {
             $request = $this->getAuthorizedRequest('https://api.screenshotapi.io/retrieve?key='.$image['key']);
             $check   = json_decode($request->sendWithRetry(1), true);
 
@@ -91,6 +92,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
         }
 
         \OC::$server->getLogger()->error('screenshotapi.io service did not complete within 60 seconds');
+
         return null;
     }
 
@@ -138,10 +140,10 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      */
     protected function getPageShotUrl(string $domain, string $view): string {
         $this->domain   = 'http://'.$domain;
-        $this->viewport = '360x640';
+        $this->viewport = self::VIEWPORT_MOBILE;
 
         if($view === PageShotService::VIEWPORT_DESKTOP) {
-            $this->viewport = '1280x720';
+            $this->viewport = self::VIEWPORT_DESKTOP;
         }
 
         return 'https://api.screenshotapi.io/capture';

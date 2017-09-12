@@ -58,7 +58,7 @@ class GdHelper extends AbstractImageHelper {
      *
      * @return Image
      */
-    protected function cropImageRectangular($image) {
+    public function cropImageRectangular($image) {
 
         $width  = $image->width();
         $height = $image->height();
@@ -72,7 +72,7 @@ class GdHelper extends AbstractImageHelper {
             $image->crop(0, $padding, $width, $width);
         }
 
-        return $image();
+        return $image;
     }
 
     /**

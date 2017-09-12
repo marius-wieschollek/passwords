@@ -50,9 +50,9 @@ class ScreenShotMachineHelper extends AbstractPageShotHelper {
         $apiKey = $this->config->getAppValue('service/pageshot/ssm/key');
 
         if($view === PageShotService::VIEWPORT_DESKTOP) {
-            return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=720xfull&device=desktop&format=jpg&url=http://{$domain}";
+            return "http://api.screenshotmachine.com/?key={$apiKey}&dimension={$this::WIDTH_DESKTOP}xfull&device=desktop&format=jpg&url=http://{$domain}";
         }
 
-        return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=720xfull&device=phone&format=jpg&url=http://{$domain}";
+        return "http://api.screenshotmachine.com/?key={$apiKey}&dimension={$this::WIDTH_MOBILE}xfull&device=phone&format=jpg&url=http://{$domain}";
     }
 }

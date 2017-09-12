@@ -82,7 +82,7 @@ class PageShotService {
         int $maxHeight = 0
     ) {
         list($domain, $minWidth, $minHeight, $maxWidth, $maxHeight) = $this->validateInput($domain, $minWidth, $minHeight,
-                                                                                           $maxWidth, $maxHeight);
+            $maxWidth, $maxHeight);
 
         $pageShotService = $this->getPageShotService();
         $fileName        = $pageShotService->getPageShotFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
@@ -140,15 +140,20 @@ class PageShotService {
     protected function validateInput(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
 
+        $minWidth  = round($minWidth, -1);
+        $maxWidth  = round($maxWidth, -1);
+        $minHeight = round($minHeight, -1);
+        $maxHeight = round($maxHeight, -1);
+
         if($minWidth > 720) $minWidth = 720;
         if($minWidth < 240 && $minWidth != 0) $minWidth = 240;
-        if($maxWidth < $minWidth) $maxWidth = $minWidth;
+        if($maxWidth < $minWidth && $maxWidth != 0) $maxWidth = $minWidth;
         if($maxWidth > 720) $maxWidth = 720;
         if($maxWidth < 240 && $maxWidth != 0) $maxWidth = 240;
 
         if($minHeight > 1280) $minHeight = 1280;
         if($minHeight < 240 && $minHeight != 0) $minHeight = 240;
-        if($maxHeight < $minHeight) $maxHeight = $minHeight;
+        if($maxHeight < $minHeight && $maxHeight != 0) $maxHeight = $minHeight;
         if($maxHeight > 1280) $maxHeight = 1280;
         if($maxHeight < 240 && $maxHeight != 0) $maxHeight = 240;
 
