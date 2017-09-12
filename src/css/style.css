@@ -2528,7 +2528,8 @@
       font-size: 0; }
       .passwords #content .item-details .image-container a img {
         width: 100%;
-        margin-top: 0; }
+        margin-top: 0;
+        transition: none; }
         .passwords #content .item-details .image-container a img.s1 {
           transition: margin-top 1s ease-in-out; }
         .passwords #content .item-details .image-container a img.s5 {

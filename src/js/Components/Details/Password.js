@@ -10,30 +10,51 @@ Vue.component('passwords-details-password', {
 
     data() {
         return {
+            image: {
+                'class': '',
+                'style': {
+                    'marginTop': 0
+                },
+            }
         }
     },
 
     computed: {
         date() {
             return new Date(this.password.updated * 1e3).toLocaleDateString();
-        },
+        }
+    },
+
+    watch: {
+        password: function (value) {
+            this.image.class = '';
+            this.image.style = {
+                'marginTop': 0
+            };
+        }
     },
 
     methods: {
         imageMouseOver($event) {
             let $element = $($event.target),
-                $parent = $element.parent().parent(),
-                margin = $element.height() - $parent.height();
+                $parent  = $element.parent().parent(),
+                margin   = $element.height() - $parent.height();
 
-            $element.attr('class', '');
-
-            if(margin > 0) {
-                if(margin < 250) $element.addClass('s1');
-                else if(margin < 1000) $element.addClass('s5');
-                else if(margin < 2500) $element.addClass('s10');
-                else if(margin < 4000) $element.addClass('s15');
-                else $element.addClass('s20');
-                $element.css('margin-top', '-' + margin + 'px');
+            if (margin > 0) {
+                if (margin < 500) {
+                    this.image.class = 's1';
+                } else if (margin < 1000) {
+                    this.image.class = 's5';
+                } else if (margin < 2500) {
+                    this.image.class = 's10';
+                } else if (margin < 4000) {
+                    this.image.class = 's15';
+                } else {
+                    this.image.class = 's20';
+                }
+                this.image.style = {
+                    'marginTop': '-' + margin + 'px'
+                };
             }
         },
         imageMouseOut($event) {

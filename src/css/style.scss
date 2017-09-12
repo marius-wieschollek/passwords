@@ -138,7 +138,7 @@ $color-white : #fff;
             margin-top : 44px;
         }
         .content-right {
-            display: none;
+            display     : none;
             grid-area   : right;
             z-index     : 50;
             border-left : 1px solid $color-grey-light
@@ -147,7 +147,7 @@ $color-white : #fff;
         &.show-details {
             grid-template-columns : 2.05fr 0.95fr;
             .content-right {
-                display: block;
+                display : block;
             }
         }
 
@@ -288,12 +288,13 @@ $color-white : #fff;
                 overflow : hidden;
 
                 a {
-                    display: block;
-                    font-size: 0;
+                    display   : block;
+                    font-size : 0;
 
                     img {
                         width      : 100%;
                         margin-top : 0;
+                        transition : none;
 
                         &.s1 { transition : margin-top 1s ease-in-out; }
                         &.s5 { transition : margin-top 5s ease-in-out; }
