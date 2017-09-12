@@ -24,7 +24,7 @@ services:
     restart: always
 
   web:
-    image: nginx
+    image: nginx:alpine
     container_name: "passwords-nginx"
     ports:
       - 80:80

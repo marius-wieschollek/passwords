@@ -83,6 +83,7 @@ class FaviconService {
         $faviconData = $favicon->getContent();
         if($this->imageHelper->supportsImage($faviconData)) {
             $image = $this->imageHelper->getImageFromBlob($faviconData);
+            $this->imageHelper->cropImageRectangular($image);
             $this->imageHelper->simpleResizeImage($image, $size);
             $faviconData = $this->imageHelper->exportPng($image);
             $this->imageHelper->destroyImage($image);

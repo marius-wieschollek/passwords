@@ -20,6 +20,11 @@ use OCP\Files\SimpleFS\ISimpleFile;
  */
 abstract class AbstractPageShotHelper {
 
+    const VIEWPORT_DESKTOP = '1280x800';
+    const VIEWPORT_MOBILE  = '360x640';
+    const WIDTH_DESKTOP    = 1280;
+    const WIDTH_MOBILE     = 360;
+
     /**
      * @var string
      */

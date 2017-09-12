@@ -15,6 +15,9 @@ namespace OCA\Passwords\Helper;
  */
 class HttpRequestHelper {
 
+    const REQUEST_MAX_RETRIES = 5;
+    const REQUEST_TIMEOUT     = 15;
+
     /**
      * @var string
      */
@@ -142,7 +145,7 @@ class HttpRequestHelper {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        curl_setopt($ch, CURLOPT_TIMEOUT, self::REQUEST_TIMEOUT);
 
         if(!empty($this->post)) {
             curl_setopt($ch, CURLOPT_POST, 2);
@@ -170,7 +173,7 @@ class HttpRequestHelper {
         curl_close($ch);
 
         if(!empty($this->acceptResponseCodes)) {
-            $status = in_array($this->info['http_code'], ['200', '201', '202']);
+            $status = in_array($this->info['http_code'], $this->acceptResponseCodes);
             if(!$status) return false;
         }
 
@@ -182,7 +185,7 @@ class HttpRequestHelper {
      *
      * @return mixed
      */
-    public function sendWithRetry($maxRetries = 5) {
+    public function sendWithRetry($maxRetries = self::REQUEST_MAX_RETRIES) {
         $retries = 0;
         while ($retries < $maxRetries) {
             $result = $this->send();

@@ -10,29 +10,51 @@ Vue.component('passwords-details-password', {
 
     data() {
         return {
+            image: {
+                'class': '',
+                'style': {
+                    'marginTop': 0
+                },
+            }
         }
     },
 
     computed: {
         date() {
             return new Date(this.password.updated * 1e3).toLocaleDateString();
-        },
+        }
+    },
+
+    watch: {
+        password: function (value) {
+            this.image.class = '';
+            this.image.style = {'marginTop': 0};
+        }
     },
 
     methods: {
         imageMouseOver($event) {
             let $element = $($event.target),
-                $parent = $element.parent(),
-                margin = $element.height() - $parent.height();
+                $parent  = $element.parent().parent(),
+                margin   = $element.height() - $parent.height();
 
-            if(margin > 0) {
-                $element.css('margin-top', '-' + margin + 'px');
+            if (margin > 0) {
+                if (margin < 500) {
+                    this.image.class = 's1';
+                } else if (margin < 1000) {
+                    this.image.class = 's5';
+                } else if (margin < 2500) {
+                    this.image.class = 's10';
+                } else if (margin < 4000) {
+                    this.image.class = 's15';
+                } else {
+                    this.image.class = 's20';
+                }
+                this.image.style = {'marginTop': '-' + margin + 'px'};
             }
         },
         imageMouseOut($event) {
-            let $element = $($event.target);
-
-            $element.css('margin-top', 0);
+            this.image.style = {'marginTop': 0};
         },
         favouriteAction($event) {
             $event.stopPropagation();

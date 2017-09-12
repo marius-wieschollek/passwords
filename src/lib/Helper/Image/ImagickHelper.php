@@ -57,7 +57,7 @@ class ImagickHelper extends AbstractImageHelper {
      *
      * @return Imagick|Gmagick
      */
-    protected function cropImageRectangular($image) {
+    public function cropImageRectangular($image) {
         $width  = $image->getImageWidth();
         $height = $image->getImageHeight();
 

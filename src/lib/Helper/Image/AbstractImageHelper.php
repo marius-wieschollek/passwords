@@ -53,6 +53,7 @@ abstract class AbstractImageHelper {
             if($maxWidth !== 0 && $size['width'] > $maxWidth) {
                 $size['cropX']      = ($size['width'] - $maxWidth) / 2;
                 $size['cropWidth']  = $maxWidth;
+                $size['cropHeight'] = $size['height'];
                 $size['cropNeeded'] = true;
             }
         } else if($maxHeight != 0 && $size['height'] > $maxHeight) {
@@ -61,14 +62,21 @@ abstract class AbstractImageHelper {
             if($maxWidth !== 0 && $size['width'] > $maxWidth) {
                 $size['width']      = $maxWidth;
                 $size['height']     = $maxWidth * $heightWidthRatio;
+                $size['cropWidth']  = $size['width'];
                 $size['cropHeight'] = $maxHeight;
                 $size['cropNeeded'] = true;
             } else if($size['width'] < $minWidth) {
                 $size['width']      = $minWidth;
                 $size['height']     = $minWidth * $heightWidthRatio;
+                $size['cropWidth']  = $size['width'];
                 $size['cropHeight'] = $maxHeight;
                 $size['cropNeeded'] = true;
             }
+        }
+
+        if($size['width'] == 0 && $size['height'] == 0) {
+            $size['width']  = $width;
+            $size['height'] = $height;
         }
 
         return $size;
@@ -92,6 +100,13 @@ abstract class AbstractImageHelper {
      * @return mixed
      */
     abstract public function simpleResizeImage($image, int $size);
+
+    /**
+     * @param $image
+     *
+     * @return mixed
+     */
+    abstract public function cropImageRectangular($image);
 
     /**
      * @param $imageBlob

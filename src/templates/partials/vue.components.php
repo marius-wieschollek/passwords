@@ -87,7 +87,7 @@
     <div class="item-details">
         <div class="image-container">
             <a :href="password.url" target="_blank">
-                <img :src="password.image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut($event)" alt="">
+                <img :class="image.class" :style="image.style" :src="password.image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut($event)" alt="">
             </a>
         </div>
         <div class="title">
