@@ -28,9 +28,7 @@ Vue.component('passwords-details-password', {
     watch: {
         password: function (value) {
             this.image.class = '';
-            this.image.style = {
-                'marginTop': 0
-            };
+            this.image.style = {'marginTop': 0};
         }
     },
 
@@ -52,15 +50,11 @@ Vue.component('passwords-details-password', {
                 } else {
                     this.image.class = 's20';
                 }
-                this.image.style = {
-                    'marginTop': '-' + margin + 'px'
-                };
+                this.image.style = {'marginTop': '-' + margin + 'px'};
             }
         },
         imageMouseOut($event) {
-            let $element = $($event.target);
-
-            $element.css('margin-top', 0);
+            this.image.style = {'marginTop': 0};
         },
         favouriteAction($event) {
             $event.stopPropagation();
