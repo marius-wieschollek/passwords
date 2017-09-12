@@ -60,7 +60,6 @@ class RevisionService {
         $this->revisionMapper    = $revisionMapper;
     }
 
-
     /**
      * @param int $revisionId
      *
@@ -68,13 +67,12 @@ class RevisionService {
      */
     public function getRevisionById(int $revisionId): Revision {
         /** @var Revision $revision */
-        $revision =  $this->revisionMapper->findById(
+        $revision = $this->revisionMapper->findById(
             $revisionId
         );
 
         return $this->encryptionService->decryptRevision($revision);
     }
-
 
     /**
      * @param string $revisionId
@@ -83,13 +81,12 @@ class RevisionService {
      */
     public function getRevisionByUuid(string $revisionId): Revision {
         /** @var Revision $revision */
-        $revision =  $this->revisionMapper->findByUuid(
+        $revision = $this->revisionMapper->findByUuid(
             $revisionId
         );
 
         return $this->encryptionService->decryptRevision($revision);
     }
-
 
     /**
      * @param Password $password
@@ -113,7 +110,7 @@ class RevisionService {
      * @param string $title
      * @param string $url
      * @param string $notes
-     * @param bool    $hidden
+     * @param bool   $hidden
      * @param bool   $favourite
      *
      * @return Revision
@@ -154,6 +151,7 @@ class RevisionService {
             return $this->revisionMapper->insert($revision);
         } else {
             $revision->setUpdated(time());
+
             return $this->revisionMapper->update($revision);
         }
     }

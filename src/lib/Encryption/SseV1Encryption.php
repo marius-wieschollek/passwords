@@ -9,7 +9,6 @@
 namespace OCA\Passwords\Encryption;
 
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Revision;
 
 /**

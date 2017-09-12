@@ -2,7 +2,6 @@
 
 namespace OCA\Passwords\Controller;
 
-use OC\Security\CSP\ContentSecurityPolicy;
 use OCA\Passwords\AppInfo\Application;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -18,8 +17,8 @@ class PageController extends Controller {
     /**
      * PageController constructor.
      *
-     * @param string        $appName
-     * @param IRequest      $request
+     * @param string   $appName
+     * @param IRequest $request
      */
     public function __construct($appName, IRequest $request) {
         parent::__construct($appName, $request);

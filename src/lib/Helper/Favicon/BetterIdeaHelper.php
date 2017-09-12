@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Services\HelperService;
+
 /**
  * Class BetterIdeaHelper
  */
@@ -16,7 +18,7 @@ class BetterIdeaHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = 'bi';
+    protected $prefix = HelperService::FAVICON_BETTER_IDEA;
 
     /**
      * @param string $domain

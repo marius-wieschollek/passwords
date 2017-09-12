@@ -42,6 +42,7 @@ abstract class AbstractFaviconHelper {
      * @param string $domain
      *
      * @return ISimpleFile
+     * @throws \Exception
      */
     public function getFavicon(string $domain): ISimpleFile {
         $faviconFile = $this->getFaviconFilename($domain);
@@ -54,7 +55,7 @@ abstract class AbstractFaviconHelper {
         $faviconData = $this->getHttpRequest($url);
 
         if($faviconData === null) {
-            return $this->getDefaultFavicon();
+            throw new \Exception('Favicon service returned no data');
         }
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);

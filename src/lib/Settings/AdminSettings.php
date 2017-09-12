@@ -10,10 +10,8 @@ namespace OCA\Passwords\Settings;
 
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\PageShotService;
-use OCA\Passwords\Services\PasswordGenerationService;
+use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
@@ -59,10 +57,11 @@ class AdminSettings implements ISettings {
     public function getForm() {
 
         return new TemplateResponse('passwords', 'admin/index', [
+            'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
             'pageshotServices' => $this->getPageShotServices(),
-            'caches' => $this->getFileCaches()
+            'caches'           => $this->getFileCaches()
         ]);
     }
 
@@ -70,18 +69,38 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', PasswordGenerationService::SERVICE_SNAKES);
+        $current = $this->config->getAppValue('service/words', HelperService::WORDS_SNAKES);
 
         return [
             [
-                'id'      => PasswordGenerationService::SERVICE_LOCAL,
+                'id'      => HelperService::WORDS_LOCAL,
                 'label'   => $this->localisation->t('Local'),
-                'current' => $current === PasswordGenerationService::SERVICE_LOCAL
+                'current' => $current === HelperService::WORDS_LOCAL
             ],
             [
-                'id'      => PasswordGenerationService::SERVICE_SNAKES,
+                'id'      => HelperService::WORDS_SNAKES,
                 'label'   => $this->localisation->t('watchout4snakes.com (recommended)'),
-                'current' => $current === PasswordGenerationService::SERVICE_SNAKES
+                'current' => $current === HelperService::WORDS_SNAKES
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getImageServices(): array {
+        $current = $this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK);
+
+        return [
+            [
+                'id'      => HelperService::IMAGES_IMAGICK,
+                'label'   => $this->localisation->t('Imagick/GMagick (recommended)'),
+                'current' => $current === HelperService::IMAGES_IMAGICK
+            ],
+            [
+                'id'      => HelperService::IMAGES_GDLIB,
+                'label'   => $this->localisation->t('PHP GDLib'),
+                'current' => $current === HelperService::IMAGES_GDLIB
             ]
         ];
     }
@@ -90,33 +109,33 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getFaviconServices(): array {
-        $current = $this->config->getAppValue('service/favicon', FaviconService::SERVICE_BETTER_IDEA);
+        $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_BETTER_IDEA);
 
         return [
             [
-                'id'      => FaviconService::SERVICE_LOCAL,
+                'id'      => HelperService::FAVICON_LOCAL,
                 'label'   => $this->localisation->t('Local'),
-                'current' => $current === FaviconService::SERVICE_LOCAL
+                'current' => $current === HelperService::FAVICON_LOCAL
             ],
             [
-                'id'      => FaviconService::SERVICE_BETTER_IDEA,
+                'id'      => HelperService::FAVICON_BETTER_IDEA,
                 'label'   => $this->localisation->t('icons.better-idea.org (recommended)'),
-                'current' => $current === FaviconService::SERVICE_BETTER_IDEA
+                'current' => $current === HelperService::FAVICON_BETTER_IDEA
             ],
             [
-                'id'      => FaviconService::SERVICE_DUCK_DUCK_GO,
+                'id'      => HelperService::FAVICON_DUCK_DUCK_GO,
                 'label'   => $this->localisation->t('duckduckgo.com'),
-                'current' => $current === FaviconService::SERVICE_DUCK_DUCK_GO
+                'current' => $current === HelperService::FAVICON_DUCK_DUCK_GO
             ],
             [
-                'id'      => FaviconService::SERVICE_GOOGLE,
+                'id'      => HelperService::FAVICON_GOOGLE,
                 'label'   => $this->localisation->t('google.com'),
-                'current' => $current === FaviconService::SERVICE_GOOGLE
+                'current' => $current === HelperService::FAVICON_GOOGLE
             ],
             [
-                'id'      => FaviconService::SERVICE_DEFAULT,
+                'id'      => HelperService::FAVICON_DEFAULT,
                 'label'   => $this->localisation->t('None'),
-                'current' => $current === FaviconService::SERVICE_DEFAULT
+                'current' => $current === HelperService::FAVICON_DEFAULT
             ]
         ];
     }
@@ -125,44 +144,44 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPageShotServices(): array {
-        $current = $this->config->getAppValue('service/pageshot', PageShotService::SERVICE_WKHTML);
+        $current = $this->config->getAppValue('service/pageshot', HelperService::PAGESHOT_WKHTML);
 
         return [
             [
-                'id'      => PageShotService::SERVICE_DEFAULT,
+                'id'      => HelperService::PAGESHOT_DEFAULT,
                 'label'   => $this->localisation->t('None'),
-                'current' => $current === PageShotService::SERVICE_DEFAULT,
+                'current' => $current === HelperService::PAGESHOT_DEFAULT,
                 'api'     => null
             ],
             [
-                'id'      => PageShotService::SERVICE_WKHTML,
+                'id'      => HelperService::PAGESHOT_WKHTML,
                 'label'   => $this->localisation->t('WKHTML (local)'),
-                'current' => $current === PageShotService::SERVICE_WKHTML,
+                'current' => $current === HelperService::PAGESHOT_WKHTML,
                 'path'    => WkhtmlImageHelper::getWkhtmlPath(),
                 'api'     => null
             ],
             [
-                'id'      => PageShotService::SERVICE_SCREEN_SHOT_API,
+                'id'      => HelperService::PAGESHOT_SCREEN_SHOT_API,
                 'label'   => $this->localisation->t('screenshotapi.io (recommended)'),
-                'current' => $current === PageShotService::SERVICE_SCREEN_SHOT_API,
+                'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_API,
                 'api'     => [
                     'key'   => 'service/pageshot/ssa/key',
                     'value' => $this->config->getAppValue('service/pageshot/ssa/key')
                 ]
             ],
             [
-                'id'      => PageShotService::SERVICE_SCREEN_SHOT_LAYER,
+                'id'      => HelperService::PAGESHOT_SCREEN_SHOT_LAYER,
                 'label'   => $this->localisation->t('screenshotlayer.com'),
-                'current' => $current === PageShotService::SERVICE_SCREEN_SHOT_LAYER,
+                'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_LAYER,
                 'api'     => [
                     'key'   => 'service/pageshot/ssl/key',
                     'value' => $this->config->getAppValue('service/pageshot/ssl/key')
                 ]
             ],
             [
-                'id'      => PageShotService::SERVICE_SCREEN_SHOT_MACHINE,
+                'id'      => HelperService::PAGESHOT_SCREEN_SHOT_MACHINE,
                 'label'   => $this->localisation->t('screenshotmachine.com'),
-                'current' => $current === PageShotService::SERVICE_SCREEN_SHOT_MACHINE,
+                'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_MACHINE,
                 'api'     => [
                     'key'   => 'service/pageshot/ssm/key',
                     'value' => $this->config->getAppValue('service/pageshot/ssm/key')

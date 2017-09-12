@@ -54,6 +54,7 @@ class PasswordService {
             $search
         );
     }
+
     /**
      * @param int $passwordId
      *
@@ -64,7 +65,6 @@ class PasswordService {
             $passwordId
         );
     }
-
 
     /**
      * @param string $passwordId
@@ -96,6 +96,7 @@ class PasswordService {
             return $this->passwordMapper->insert($password);
         } else {
             $password->setUpdated(time());
+
             return $this->passwordMapper->update($password);
         }
     }

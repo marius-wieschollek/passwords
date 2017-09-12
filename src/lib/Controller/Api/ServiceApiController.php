@@ -11,7 +11,7 @@ namespace OCA\Passwords\Controller\Api;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\PageShotService;
-use OCA\Passwords\Services\PasswordGenerationService;
+use OCA\Passwords\Services\WordsService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
@@ -25,9 +25,9 @@ use OCP\IRequest;
 class ServiceApiController extends AbstractApiController {
 
     /**
-     * @var PasswordGenerationService
+     * @var WordsService
      */
-    protected $passwordGenerationService;
+    protected $wordsService;
 
     /**
      * @var FaviconService
@@ -41,18 +41,18 @@ class ServiceApiController extends AbstractApiController {
     /**
      * PasswordApiController constructor.
      *
-     * @param string                    $appName
-     * @param IRequest                  $request
-     * @param FaviconService            $faviconService
-     * @param PageShotService           $previewService
-     * @param PasswordGenerationService $passwordGenerationService
+     * @param string          $appName
+     * @param IRequest        $request
+     * @param FaviconService  $faviconService
+     * @param PageShotService $previewService
+     * @param WordsService    $wordsService
      */
     public function __construct(
         $appName,
         IRequest $request,
         FaviconService $faviconService,
         PageShotService $previewService,
-        PasswordGenerationService $passwordGenerationService
+        WordsService $wordsService
     ) {
         parent::__construct(
             $appName,
@@ -62,9 +62,9 @@ class ServiceApiController extends AbstractApiController {
             1728000
         );
 
-        $this->faviconService            = $faviconService;
-        $this->passwordGenerationService = $passwordGenerationService;
-        $this->previewService            = $previewService;
+        $this->faviconService = $faviconService;
+        $this->wordsService   = $wordsService;
+        $this->previewService = $previewService;
     }
 
     /**
@@ -76,7 +76,7 @@ class ServiceApiController extends AbstractApiController {
     public function generatePassword(): JSONResponse {
 
         try {
-            list($password, $words) = $this->passwordGenerationService->getPassword(1, false, false, false);
+            list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
 
             if(empty($password)) {
                 throw new ApiException('Unable to create password');
@@ -158,6 +158,7 @@ class ServiceApiController extends AbstractApiController {
         } else if(preg_match("/([0-9]+)?\.\.\.([0-9]+)?/", $size, $matches)) {
             if(!isset($matches[1])) $matches[1] = 0;
             if(!isset($matches[2])) $matches[2] = 0;
+
             return [intval($matches[1]), intval($matches[2])];
         }
 

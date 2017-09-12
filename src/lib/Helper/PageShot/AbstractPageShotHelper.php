@@ -49,6 +49,7 @@ abstract class AbstractPageShotHelper {
      * @param string $view
      *
      * @return ISimpleFile
+     * @throws \Exception
      */
     function getPageShot(string $domain, string $view): ISimpleFile {
         $pageshotFile = $this->getPageShotFilename($domain, $view);
@@ -61,7 +62,7 @@ abstract class AbstractPageShotHelper {
         $pageShotData = $this->getHttpRequest($url);
 
         if($pageShotData === null) {
-            return $this->getDefaultPageShot();
+            throw new \Exception('PageShot service returned no data');
         }
 
         return $this->fileCacheService->putFile($pageshotFile, $pageShotData);

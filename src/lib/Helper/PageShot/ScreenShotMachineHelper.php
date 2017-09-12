@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\PageShot;
 
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\PageShotService;
 
 /**
@@ -22,7 +23,7 @@ class ScreenShotMachineHelper extends AbstractPageShotHelper {
     /**
      * @var string
      */
-    protected $prefix = 'ssm';
+    protected $prefix = HelperService::PAGESHOT_SCREEN_SHOT_MACHINE;
 
     /**
      * @var ConfigurationService

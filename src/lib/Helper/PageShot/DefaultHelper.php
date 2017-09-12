@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
+use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -16,6 +17,11 @@ use OCP\Files\SimpleFS\ISimpleFile;
  * @package OCA\Passwords\Helper\PageShot
  */
 class DefaultHelper extends AbstractPageShotHelper {
+
+    /**
+     * @var string
+     */
+    protected $prefix = HelperService::PAGESHOT_DEFAULT;
 
     /**
      * @param string $domain

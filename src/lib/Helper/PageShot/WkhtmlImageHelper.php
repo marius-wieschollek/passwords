@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
-use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -23,13 +23,14 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
     /**
      * @var string
      */
-    protected $prefix = 'wk';
+    protected $prefix = HelperService::PAGESHOT_WKHTML;
 
     /**
      * @param string $domain
      * @param string $view
      *
      * @return ISimpleFile
+     * @throws \Exception
      */
     function getPageShot(string $domain, string $view): ISimpleFile {
         $pageShotFile = $this->getPageShotFilename($domain, $view);
@@ -40,7 +41,7 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
         $pageShotData = $this->capturePageShot($domain, $view);
 
         if($pageShotData === null) {
-            return $this->getDefaultPageShot();
+            throw new \Exception('PageShot service returned no data');
         }
 
         return $this->fileCacheService->putFile($pageShotFile, $pageShotData);
@@ -51,6 +52,7 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @param string $view
      *
      * @return bool|string
+     * @throws \Exception
      */
     protected function capturePageShot(string $domain, string $view) {
         $tempFile = \OC::$server->getConfig()->getSystemValue('tempdirectory', '/tmp/').uniqid().'.jpg';
@@ -75,22 +77,18 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
             }
         }
 
-        \OC::$server->getLogger()->error('WKHTML said: '.PHP_EOL.implode(PHP_EOL, $output));
-
-        return null;
+        throw new \Exception('WKHTML said: '.PHP_EOL.implode(PHP_EOL, $output));
     }
 
     /**
      * @return string
-     * @throws ApiException
+     * @throws \Exception
      */
     protected function getWkHtmlBinary(): string {
         $path = self::getWkHtmlPath();
 
         if($path === null) {
-            \OC::$server->getLogger()->error('WKHTML binary not found or not accessible. You can install WKHTML binary from admin page');
-
-            throw new ApiException('Incorrect PageShot API Configuration');
+            throw new \Exception('WKHTML binary not found or not accessible. You can install WKHTML binary from admin page');
         }
 
         return $path;

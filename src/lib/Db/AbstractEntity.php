@@ -15,7 +15,7 @@ use OCP\AppFramework\Db\Entity;
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractEntity extends Entity  {
+abstract class AbstractEntity extends Entity {
 
     /**
      * @param string $property

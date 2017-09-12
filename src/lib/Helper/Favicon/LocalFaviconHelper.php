@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\Favicon;
 
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 
 /**
  * Class LocalFaviconHelper
@@ -21,7 +22,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = 'local';
+    protected $prefix = HelperService::FAVICON_LOCAL;
 
     /**
      * @var string
@@ -51,7 +52,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      */
     protected function getFaviconUrl(string $domain): string {
 
-        $html     = $this->getHttpRequest('http://'.$domain);
+        $html = $this->getHttpRequest('http://'.$domain);
         if(!empty($html)) {
             $patterns = $this->getSearchPatterns();
             foreach ($patterns as $pattern) {

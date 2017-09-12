@@ -8,10 +8,10 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\HttpRequestHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\PageShotService;
 
 /**
@@ -20,12 +20,11 @@ use OCA\Passwords\Services\PageShotService;
  * @package OCA\Passwords\Helper\PageShot
  */
 class ScreenShotApiHelper extends AbstractPageShotHelper {
-    const SERVICE_PROCESSING_TIMEOUT = 60;
 
     /**
      * @var string
      */
-    protected $prefix = 'ssa';
+    protected $prefix = HelperService::PAGESHOT_SCREEN_SHOT_API;
 
     /**
      * @var string
@@ -57,22 +56,20 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @param string $url
      *
      * @return mixed
-     * @throws ApiException
+     * @throws \Exception
      */
     protected function getHttpRequest(string $url) {
         $request = $this->getAuthorizedRequest($url);
         $request->setJson($this->getServiceOptions());
 
         $image = json_decode($request->sendWithRetry(), true);
-
         if($image['status'] !== 'accepted' && $image['status'] !== 'ready') {
-            \OC::$server->getLogger()->error('screenshotapi.io service refused request');
-
-            return null;
+            throw new \Exception('screenshotapi.io service refused request');
         }
 
-        $seconds = 0;
-        while ($seconds < self::SERVICE_PROCESSING_TIMEOUT) {
+        $seconds          = 0;
+        $maxExecutionTime = ini_get('max_execution_time') - 5;
+        while ($seconds < $maxExecutionTime) {
             $request = $this->getAuthorizedRequest('https://api.screenshotapi.io/retrieve?key='.$image['key']);
             $check   = json_decode($request->sendWithRetry(1), true);
 
@@ -82,18 +79,14 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
                 return $load->sendWithRetry();
             } else if($check['status'] === 'error' || isset($check['error'])) {
                 $message = isset($check['msg']) ? $check['msg']:$check['message'];
-                \OC::$server->getLogger()->error($message);
-
-                return null;
+                throw new \Exception('screenshotapi.io said '.$message);
             }
 
             sleep(1);
             $seconds++;
         }
 
-        \OC::$server->getLogger()->error('screenshotapi.io service did not complete within 60 seconds');
-
-        return null;
+        throw new \Exception('screenshotapi.io did not complete in time');
     }
 
     /**

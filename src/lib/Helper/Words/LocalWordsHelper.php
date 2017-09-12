@@ -8,8 +8,6 @@
 
 namespace OCA\Passwords\Helper\Words;
 
-use OCA\Passwords\Exception\ApiException;
-
 /**
  * Class LocalWordsHelper
  *
@@ -28,7 +26,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
 
     /**
      * @return string
-     * @throws ApiException
+     * @throws \Exception
      */
     protected function getWordsUrl(): string {
         $langCode = \OC::$server->getL10N('core')->getLanguageCode();
@@ -75,10 +73,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
                 return '/usr/share/dict/words';
             }
 
-
-            \OC::$server->getLogger()->error('No local words file found. Install a words file in /usr/share/dict/words');
-
-            throw new ApiException('Incorrect Words API Configuration');
+            throw new \Exception('No local words file found. Install a words file in /usr/share/dict/words');
         }
 
         return $wordsFile;

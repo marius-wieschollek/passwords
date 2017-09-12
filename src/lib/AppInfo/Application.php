@@ -17,17 +17,16 @@ use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\RevisionMapper;
 use OCA\Passwords\Helper\PasswordApiObjectHelper;
-use OCA\Passwords\Helper\PasswordGenerationHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\ImageService;
+use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\PageShotService;
-use OCA\Passwords\Services\PasswordGenerationService;
 use OCA\Passwords\Services\PasswordService;
 use OCA\Passwords\Services\RevisionService;
 use OCA\Passwords\Services\ValidationService;
+use OCA\Passwords\Services\WordsService;
 use OCA\Passwords\Settings\AdminSettings;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
@@ -112,7 +111,7 @@ class Application extends App {
                 $c->query('Request'),
                 $c->query('FaviconService'),
                 $c->query('PageShotService'),
-                $c->query('PasswordGenerationService')
+                $c->query('WordsService')
             );
         });
 
@@ -174,18 +173,33 @@ class Application extends App {
         });
         $container->registerService('FaviconService', function (IAppContainer $c) {
             return new FaviconService(
-                $c->query('ImageService'),
-                $c->query('ConfigurationService'),
-                clone $c->query('FileCacheService')
+                $c->query('HelperService'),
+                clone $c->query('FileCacheService'),
+                $c->query('ValidationService'),
+                $c->getServer()->getLogger()
             );
         });
         $container->registerService('PageShotService', function (IAppContainer $c) {
             return new PageShotService(
-                $c->query('ImageService'),
-                $c->query('ConfigurationService'),
-                clone $c->query('FileCacheService')
+                $c->query('HelperService'),
+                clone $c->query('FileCacheService'),
+                $c->query('ValidationService'),
+                $c->getServer()->getLogger()
             );
         });
+        $container->registerService('WordsService', function (IAppContainer $c) {
+            return new WordsService(
+                $c->query('HelperService'),
+                $c->getServer()->getLogger()
+            );
+        });
+        $container->registerService('HelperService', function (IAppContainer $c) {
+            return new HelperService(
+                $c->query('ConfigurationService'),
+                $c->query('FileCacheService')
+            );
+        });
+
         $container->registerService('ConfigurationService', function (IAppContainer $c) {
             $server = $this->getContainer()->getServer();
 
@@ -225,8 +239,6 @@ class Application extends App {
         $container->registerAlias('AppData', IAppData::class);
         $container->registerAlias('ValidationService', ValidationService::class);
         $container->registerAlias('EncryptionService', EncryptionService::class);
-        $container->registerAlias('PasswordGenerationService', PasswordGenerationService::class);
-        $container->registerAlias('ImageService', ImageService::class);
     }
 
 }

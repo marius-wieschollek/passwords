@@ -8,25 +8,16 @@
 
 namespace OCA\Passwords\Services;
 
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Words\AbstractWordsHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCP\ILogger;
 
 /**
- * Class PasswordGenerationService
+ * Class WordsService
  *
  * @package OCA\Passwords\Services
  */
-class PasswordGenerationService {
-
-    const SERVICE_LOCAL  = 'local';
-    const SERVICE_SNAKES = 'wo4snakes';
-
-    /**
-     * @var ConfigurationService
-     */
-    protected $config;
+class WordsService {
 
     /**
      * @var int
@@ -34,12 +25,24 @@ class PasswordGenerationService {
     protected $retries = 0;
 
     /**
+     * @var HelperService
+     */
+    protected $helperService;
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
+
+    /**
      * FaviconService constructor.
      *
-     * @param ConfigurationService $config
+     * @param HelperService $helperService
+     * @param ILogger       $logger
      */
-    public function __construct(ConfigurationService $config) {
-        $this->config = $config;
+    public function __construct(HelperService $helperService, ILogger $logger) {
+        $this->helperService = $helperService;
+        $this->logger        = $logger;
     }
 
     /**
@@ -57,24 +60,27 @@ class PasswordGenerationService {
         bool $addSpecialCharacters = false,
         bool $addSmileys = false
     ) {
-        $this->retries++;
-        if($this->retries > 5) {
-            throw new ApiException('Passwords Service Not Responding');
+        try {
+            $this->retries++;
+            if($this->retries > 5) throw new \Exception('Passwords Service Not Responding');
+
+            $wordsGenerator = $this->helperService->getWordsHelper();
+            $words          = $wordsGenerator->getWords($strength);
+            $password       = $this->wordsToPassword($words);
+
+            if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters, $addSmileys);
+
+            $amount = $strength == 1 ? 2:$strength;
+            if($addNumbers) $password = $this->addNumbers($password, $amount);
+            if($addSpecialCharacters) $password = $this->addSpecialCharacters($password, $amount);
+            if($addSmileys) $password = $this->addSmileys($password, $amount);
+
+            return [$password, $words];
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+
+            throw new ApiException('Internal Words API Error');
         }
-
-        $wordsGenerator = $this->getWordsGenerator();
-        $words          = $wordsGenerator->getWords($strength);
-        $password       = $this->wordsToPassword($words);
-
-        /** @TODO this could run forever potentially */
-        if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters, $addSmileys);
-
-        $amount = $strength == 1 ? 2:$strength;
-        if($addNumbers) $password = $this->addNumbers($password, $amount);
-        if($addSpecialCharacters) $password = $this->addSpecialCharacters($password, $amount);
-        if($addSmileys) $password = $this->addSmileys($password, $amount);
-
-        return [$password, $words];
     }
 
     /**
@@ -156,22 +162,5 @@ class PasswordGenerationService {
         }
 
         return $word;
-    }
-
-    /**
-     * @return AbstractWordsHelper
-     * @TODO support more services
-     */
-    protected function getWordsGenerator(): AbstractWordsHelper {
-        $service = $this->config->getAppValue('service/words', self::SERVICE_SNAKES);
-
-        switch ($service) {
-            case self::SERVICE_LOCAL:
-                return new LocalWordsHelper();
-            case self::SERVICE_SNAKES:
-                return new SnakesWordsHelper();
-        }
-
-        return new LocalWordsHelper();
     }
 }

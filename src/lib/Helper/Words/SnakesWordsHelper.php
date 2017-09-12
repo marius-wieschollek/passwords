@@ -8,10 +8,7 @@
 
 namespace OCA\Passwords\Helper\Words;
 
-use OCA\Passwords\Helper\HttpRequestHelper;
-
 class SnakesWordsHelper extends AbstractWordsHelper {
-
 
     /**
      * @param int $strength

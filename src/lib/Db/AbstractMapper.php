@@ -29,8 +29,9 @@ abstract class AbstractMapper extends Mapper {
      * AbstractMapper constructor.
      *
      * @param IDBConnection $db
+     * @param string        $userId
      */
-    public function __construct(IDBConnection $db, string $userId) {
+    public function __construct(IDBConnection $db, $userId) {
         parent::__construct($db, static::TABLE_NAME);
         $this->userId = $userId;
     }

@@ -21,8 +21,8 @@ class EncryptionService {
 
     const DEFAULT_CSE_ENCRYPTION = 'none';
     const DEFAULT_SSE_ENCRYPTION = 'SSEv1r1';
-    const CSE_ENCRYPTION_NONE = 'none';
-    const SSE_ENCRYPTION_V1 = 'SSEv1r1';
+    const CSE_ENCRYPTION_NONE    = 'none';
+    const SSE_ENCRYPTION_V1      = 'SSEv1r1';
 
     protected $encryptionMapping
         = [

@@ -7,6 +7,7 @@
  */
 
 namespace OCA\Passwords\Exception;
+
 /**
  * Class ApiException
  *

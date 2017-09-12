@@ -59,8 +59,8 @@ class PasswordApiController extends AbstractApiController {
             'Authorization, Content-Type, Accept',
             1728000
         );
-        $this->passwordService = $passwordService;
-        $this->revisionService = $revisionService;
+        $this->passwordService         = $passwordService;
+        $this->revisionService         = $revisionService;
         $this->passwordApiObjectHelper = $passwordApiObjectHelper;
     }
 
@@ -75,10 +75,10 @@ class PasswordApiController extends AbstractApiController {
     public function list(string $level = 'default'): JSONResponse {
 
         $passwords = $this->passwordService->findPasswords();
-        $results = [];
+        $results   = [];
 
-        foreach($passwords as $password) {
-            $results[] =  $this->passwordApiObjectHelper->getPasswordInformation($password, $level);
+        foreach ($passwords as $password) {
+            $results[] = $this->passwordApiObjectHelper->getPasswordInformation($password, $level);
         }
 
         return $this->createResponse(
@@ -98,7 +98,7 @@ class PasswordApiController extends AbstractApiController {
      * @param string $title
      * @param string $url
      * @param string $notes
-     * @param bool    $hidden
+     * @param bool   $hidden
      * @param bool   $favourite
      * @param array  $folders
      * @param array  $tags

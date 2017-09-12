@@ -26,15 +26,15 @@ class ConfigurationService {
     /**
      * @var string
      */
-    protected   $userId;
+    protected $userId;
 
     /**
      * FaviconService constructor.
      *
-     * @param string           $userId
-     * @param IConfig          $config
+     * @param string  $userId
+     * @param IConfig $config
      */
-    public function __construct(string $userId, IConfig $config) {
+    public function __construct($userId, IConfig $config) {
         $this->config = $config;
         $this->userId = $userId;
     }

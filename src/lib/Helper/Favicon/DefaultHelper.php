@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -16,6 +17,11 @@ use OCP\Files\SimpleFS\ISimpleFile;
  * @package OCA\Passwords\Helper\Favicon
  */
 class DefaultHelper extends AbstractFaviconHelper {
+
+    /**
+     * @var string
+     */
+    protected $prefix = HelperService::FAVICON_DEFAULT;
 
     /**
      * @param string $domain

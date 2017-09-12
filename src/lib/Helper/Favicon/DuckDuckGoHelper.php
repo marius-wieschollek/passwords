@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Services\HelperService;
+
 /**
  * Class DuckDuckGoHelper
  *
@@ -18,7 +20,7 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = 'ddg';
+    protected $prefix = HelperService::FAVICON_DUCK_DUCK_GO;
 
     /**
      * @param string $domain

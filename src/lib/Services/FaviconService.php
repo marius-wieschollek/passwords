@@ -8,14 +8,10 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
-use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
-use OCA\Passwords\Helper\Favicon\DefaultHelper;
-use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
-use OCA\Passwords\Helper\Favicon\GoogleHelper;
-use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
-use OCA\Passwords\Helper\Image\AbstractImageHelper;
+use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Exception\ApiException;
 use OCP\Files\SimpleFS\ISimpleFile;
+use OCP\ILogger;
 
 /**
  * Class FaviconService
@@ -24,11 +20,10 @@ use OCP\Files\SimpleFS\ISimpleFile;
  */
 class FaviconService {
 
-    const SERVICE_BETTER_IDEA  = 'bi';
-    const SERVICE_DUCK_DUCK_GO = 'ddg';
-    const SERVICE_GOOGLE       = 'gl';
-    const SERVICE_LOCAL        = 'local';
-    const SERVICE_DEFAULT      = 'default';
+    /**
+     * @var HelperService
+     */
+    protected $helperService;
 
     /**
      * @var FileCacheService
@@ -36,27 +31,34 @@ class FaviconService {
     protected $fileCacheService;
 
     /**
-     * @var ConfigurationService
+     * @var ValidationService
      */
-    protected $config;
+    protected $validationService;
 
     /**
-     * @var AbstractImageHelper
+     * @var ILogger
      */
-    protected $imageHelper;
+    protected $logger;
 
     /**
      * FaviconService constructor.
      *
-     * @param ImageService         $imageService
-     * @param ConfigurationService $config
-     * @param FileCacheService     $fileCacheService
+     * @param HelperService     $helperService
+     * @param FileCacheService  $fileCacheService
+     * @param ValidationService $validationService
+     * @param ILogger           $logger
      */
-    public function __construct(ImageService $imageService, ConfigurationService $config, FileCacheService $fileCacheService) {
+    public function __construct(
+        HelperService $helperService,
+        FileCacheService $fileCacheService,
+        ValidationService $validationService,
+        ILogger $logger
+    ) {
         $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
-        $this->fileCacheService = $fileCacheService;
-        $this->config           = $config;
-        $this->imageHelper      = $imageService->getImageHelper();
+        $this->fileCacheService  = $fileCacheService;
+        $this->validationService = $validationService;
+        $this->helperService     = $helperService;
+        $this->logger            = $logger;
     }
 
     /**
@@ -64,29 +66,56 @@ class FaviconService {
      * @param int    $size
      *
      * @return ISimpleFile
+     * @throws ApiException
      */
     public function getFavicon(string $domain, int $size = 24) {
         list($domain, $size) = $this->validateInput($domain, $size);
 
-        $faviconService = $this->getFaviconService();
+        $faviconService = $this->helperService->getFaviconHelper();
         $fileName       = $faviconService->getFaviconFilename($domain, $size);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        if(!preg_match("/^([\w_-]+\.){1,}\w+$/", $domain)) {
-            $favicon = $faviconService->getDefaultFavicon();
-        } else {
-            $favicon = $faviconService->getFavicon($domain);
-        }
+        try {
+            if(!$this->validationService->isValidDomain($domain)) {
+                $favicon = $faviconService->getDefaultFavicon();
+            } else {
+                $favicon = $faviconService->getFavicon($domain);
+            }
 
+            return $this->resizeFavicon($favicon, $fileName, $size);
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+
+            try {
+                $favicon = $faviconService->getDefaultFavicon();
+
+                return $this->resizeFavicon($favicon, 'error.png', $size);
+            } catch (\Throwable $e) {
+                $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+
+                throw new ApiException('Internal Favicon API Error');
+            }
+        }
+    }
+
+    /**
+     * @param ISimpleFile $favicon
+     * @param string      $fileName
+     * @param int         $size
+     *
+     * @return ISimpleFile
+     */
+    protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ISimpleFile {
         $faviconData = $favicon->getContent();
-        if($this->imageHelper->supportsImage($faviconData)) {
-            $image = $this->imageHelper->getImageFromBlob($faviconData);
-            $this->imageHelper->cropImageRectangular($image);
-            $this->imageHelper->simpleResizeImage($image, $size);
-            $faviconData = $this->imageHelper->exportPng($image);
-            $this->imageHelper->destroyImage($image);
+        $imageHelper = $this->helperService->getImageHelper();
+        if($imageHelper->supportsImage($faviconData)) {
+            $image = $imageHelper->getImageFromBlob($faviconData);
+            $imageHelper->cropImageRectangular($image);
+            $imageHelper->simpleResizeImage($image, $size);
+            $faviconData = $imageHelper->exportPng($image);
+            $imageHelper->destroyImage($image);
         }
 
         return $this->fileCacheService->putFile($fileName, $faviconData);
@@ -107,27 +136,5 @@ class FaviconService {
         }
 
         return [$domain, $size];
-    }
-
-    /**
-     * @return AbstractFaviconHelper
-     */
-    protected function getFaviconService(): AbstractFaviconHelper {
-        $service = $this->config->getAppValue('service/favicon', self::SERVICE_LOCAL);
-
-        switch ($service) {
-            case self::SERVICE_BETTER_IDEA:
-                return new BetterIdeaHelper($this->fileCacheService);
-            case self::SERVICE_DUCK_DUCK_GO:
-                return new DuckDuckGoHelper($this->fileCacheService);
-            case self::SERVICE_GOOGLE:
-                return new GoogleHelper($this->fileCacheService);
-            case self::SERVICE_LOCAL:
-                return new LocalFaviconHelper($this->fileCacheService, $this->imageHelper);
-            case self::SERVICE_DEFAULT:
-                return new DefaultHelper($this->fileCacheService);
-        }
-
-        return new DefaultHelper($this->fileCacheService);
     }
 }

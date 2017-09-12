@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Services\HelperService;
+
 /**
  * Class GoogleHelper
  *
@@ -18,7 +20,7 @@ class GoogleHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = 'gl';
+    protected $prefix = HelperService::FAVICON_GOOGLE;
 
     /**
      * @param string $domain
