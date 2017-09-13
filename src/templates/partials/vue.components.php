@@ -106,3 +106,6 @@
         </ul>
     </div>
 </script>
+<script type="text/x-template" id="passwords-translate">
+    <span>{{ getText }}</span>
+</script>
