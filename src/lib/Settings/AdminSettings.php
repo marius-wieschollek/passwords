@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\Settings;
 
+use Gmagick;
+use Imagick;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -61,8 +63,29 @@ class AdminSettings implements ISettings {
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
             'pageshotServices' => $this->getPageShotServices(),
+            'securityServices' => $this->getSecurityServices(),
             'caches'           => $this->getFileCaches()
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getSecurityServices(): array {
+        $current = $this->config->getAppValue('service/security', HelperService::SECURITY_HBIP_ONLINE);
+
+        return [
+            [
+                'id'      => HelperService::SECURITY_HBIP_ONLINE,
+                'label'   => $this->localisation->t('haveibeenpwned.com (recommended)'),
+                'current' => $current === HelperService::SECURITY_HBIP_ONLINE
+            ],
+            [
+                'id'      => HelperService::SECURITY_LOCAL,
+                'label'   => $this->localisation->t('Local'),
+                'current' => $current === HelperService::SECURITY_LOCAL
+            ]
+        ];
     }
 
     /**
@@ -90,6 +113,10 @@ class AdminSettings implements ISettings {
      */
     protected function getImageServices(): array {
         $current = $this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK);
+
+        if($current == HelperService::IMAGES_IMAGICK && !class_exists(Imagick::class) && !class_exists(Gmagick::class)) {
+            $current = HelperService::IMAGES_GDLIB;
+        }
 
         return [
             [

@@ -28,6 +28,13 @@
     <form>
         <h3><?php p($l->t('External Services')); ?></h3>
         <div class="area services">
+            <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
+            <select id="passwords-security" name="passwords-security" name="security" data-setting="service/security">
+                <?php foreach ($_['securityServices'] as $service): ?>
+                    <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
+
             <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
             <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
                 <?php foreach ($_['wordsServices'] as $service): ?>
@@ -42,7 +49,7 @@
                 <?php endforeach; ?>
             </select>
 
-            <label for="passwords-pageshot"><?php p($l->t('Website Preview Service')); ?></label>
+            <label for="passwords-pageshot"><?php p($l->t('Website PageShot Service')); ?></label>
             <select id="passwords-pageshot" name="passwords-pageshot" name="pageshot" data-setting="service/pageshot">
                 <?php foreach ($_['pageshotServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>
@@ -50,7 +57,7 @@
                 <?php endforeach; ?>
             </select>
             <div class="container" id="passwords-pageshot-apikey-container">
-                <label for="passwords-pageshot-apikey"><?php p($l->t('API Key')); ?></label>
+                <label for="passwords-pageshot-apikey"><?php p($l->t('PageShot Service API Key')); ?></label>
                 <input id="passwords-pageshot-apikey" name="pageshot-apikey" data-setting="">
             </div>
         </div>

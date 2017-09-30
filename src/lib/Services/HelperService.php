@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\Services;
 
+use Gmagick;
+use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultHelper as DefaultFaviconHelper;
@@ -23,6 +25,9 @@ use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\HbipOnlineHelper;
+use OCA\Passwords\Helper\SecurityCheck\LocalSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
@@ -49,6 +54,10 @@ class HelperService {
     const WORDS_LOCAL  = 'local';
     const WORDS_SNAKES = 'wo4snakes';
 
+    const SECURITY_LOCAL = 'local';
+    const SECURITY_HBIP_ONLINE = 'hbip';
+    const SECURITY_HBIP_OFFLINE = 'hbip_offline';
+
     const IMAGES_IMAGICK = 'imagick';
     const IMAGES_GDLIB   = 'gdlib';
     /**
@@ -73,7 +82,7 @@ class HelperService {
     public function getImageHelper(): AbstractImageHelper {
         $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
 
-        if($service == self::IMAGES_IMAGICK && class_exists(\Imagick::class) || class_exists(\Gmagick::class)) {
+        if($service == self::IMAGES_IMAGICK && class_exists(Imagick::class) || class_exists(Gmagick::class)) {
             return new ImagickHelper();
         }
 
@@ -142,6 +151,23 @@ class HelperService {
                 return new SnakesWordsHelper();
         }
 
-        return new LocalWordsHelper();
+        return new SnakesWordsHelper();
+    }
+
+    /**
+     * @return AbstractSecurityCheckHelper
+     * @TODO support more services
+     */
+    public function getSecurityHelper(): AbstractSecurityCheckHelper {
+        $service = $this->config->getAppValue('service/security', self::SECURITY_HBIP_ONLINE);
+
+        switch ($service) {
+            case self::SECURITY_HBIP_ONLINE:
+                return new HbipOnlineHelper();
+            case self::SECURITY_LOCAL:
+                return new LocalSecurityCheckHelper();
+        }
+
+        return new HbipOnlineHelper();
     }
 }

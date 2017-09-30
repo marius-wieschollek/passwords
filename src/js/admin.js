@@ -8,7 +8,7 @@ class PasswordsAdminSettings {
                     key     = $target.data('setting'),
                     value   = $target.val();
 
-                this.setValue(key, value);
+                PasswordsAdminSettings.setValue(key, value);
             }
         );
         $('[data-clear-cache]').click(
@@ -19,27 +19,27 @@ class PasswordsAdminSettings {
 
                 $target.parent().find('label').text(label);
 
-                this.clearCache(cache);
+                PasswordsAdminSettings.clearCache(cache);
             }
         );
 
         $('#passwords-pageshot').on(
             'change',
-            (e) => { this.updatePageshotField(); }
+            (e) => { PasswordsAdminSettings.updatePageshotField(); }
         );
 
-        this.updatePageshotField();
+        PasswordsAdminSettings.updatePageshotField();
     }
 
-    setValue(key, value) {
+    static setValue(key, value) {
         $.post('/index.php/apps/passwords/admin/set', {'key': key, 'value': value})
     }
 
-    clearCache(key) {
+    static clearCache(key) {
         $.post('/index.php/apps/passwords/admin/cache', {'key': key})
     }
 
-    updatePageshotField() {
+    static updatePageshotField() {
         let $target   = $('#passwords-pageshot'),
             value     = $target.val(),
             $option   = $target.find('[value=' + value + ']'),

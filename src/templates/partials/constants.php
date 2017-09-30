@@ -1,1 +1,0 @@
-<span data-constant="imagePath" data-value="<?php print_unescaped(image_path('passwords', null)); ?>"></span>

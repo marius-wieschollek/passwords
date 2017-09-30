@@ -1,6 +1,11 @@
 # IntelliJ project files
 .idea
 
-# CSS map files
+# CSS files
 src/css/*.map
+src/js/Static/passwords.js
+src/css/Static/passwords.css
+
+# Other files
 src/bin
+node_modules/
