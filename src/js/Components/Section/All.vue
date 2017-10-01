@@ -1,12 +1,12 @@
 <template type="text/x-template" id="passwords-section-all">
-    <div id="content" v-bind:class="{ 'show-details': showDetails }">
-        <div class="content-left">
+    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+        <div class="app-content-left">
             <passwords-breadcrumb></passwords-breadcrumb>
             <div class="item-list">
                 <passwords-line-password :password="password" v-for="password in passwords"></passwords-line-password>
             </div>
         </div>
-        <div class="content-right">
+        <div class="app-content-right">
             <passwords-details-password v-if="detail.type == 'password'" :password="detail.element"></passwords-details-password>
         </div>
     </div>
@@ -66,38 +66,36 @@
 
 <style lang="scss">
 
-    #content {
-        display               : grid;
-        grid-template-columns : 3fr 0;
-        grid-template-areas   : "left right";
-        grid-template-rows    : auto;
-        justify-items         : stretch;
-        align-items           : stretch;
-        transition            : grid-template-columns 0.5s ease-in-out;
-        position              : absolute;
-        top                   : 0;
-        bottom                : 0;
+    #app-content {
+        position   : relative;
+        height     : 100%;
+        overflow-y : auto;
+        transition : margin-right 300ms;
 
-        .content-left {
-            grid-area  : left;
-            margin-top : 44px;
-        }
-        .content-right {
-            display     : none;
-            grid-area   : right;
+        .app-content-right {
             z-index     : 50;
-            border-left : 1px solid $color-grey-light
+            border-left : 1px solid $color-grey-light;
+            transition  : right 300ms;
+            right       : -27%;
         }
 
         &.show-details {
-            grid-template-columns : 2.05fr 0.95fr;
-            .content-right {
-                display : block;
+            margin-right : 27%;
+
+            .app-content-right {
+                display   : block;
+                position  : fixed;
+                top       : 45px;
+                right     : 0;
+                left      : auto;
+                bottom    : 0;
+                width     : 27%;
             }
         }
 
         .item-list {
-            margin-top : 44px;
+            padding-top : 44px;
+
             .row {
                 height        : 51px;
                 font-size     : 0;
@@ -223,30 +221,6 @@
                         &.active {
                             color : $color-yellow;
                         }
-                    }
-                }
-            }
-        }
-
-        .item-details {
-            .image-container {
-                height   : 290px;
-                overflow : hidden;
-
-                a {
-                    display   : block;
-                    font-size : 0;
-
-                    img {
-                        width      : 100%;
-                        margin-top : 0;
-                        transition : none;
-
-                        &.s1 { transition : margin-top 1s ease-in-out; }
-                        &.s5 { transition : margin-top 5s ease-in-out; }
-                        &.s10 { transition : margin-top 10s ease-in-out; }
-                        &.s15 { transition : margin-top 15s ease-in-out; }
-                        &.s20 { transition : margin-top 20s ease-in-out; }
                     }
                 }
             }

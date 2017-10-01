@@ -1,5 +1,6 @@
 <template id="passwords-template-password-details">
     <div class="item-details">
+        <i class="fa fa-times" @click="closeDetails()"></i>
         <div class="image-container">
             <a :href="password.url" target="_blank">
                 <img :class="image.className"
@@ -106,6 +107,52 @@
                 this.password.favourite = !this.password.favourite;
                 API.updatePassword(this.password);
             },
+            closeDetails() {
+                this.$parent.detail = {
+                    type   : 'none',
+                    element: null
+                }
+            }
         }
     }
 </script>
+
+<style lang="scss">
+    .item-details {
+        .fa.fa-times {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            padding: 0.75rem;
+            font-size: 1.3rem;
+            color: $color-black;
+
+            &:hover {
+                text-shadow: 0 0 2px $color-white;
+            }
+        }
+
+        .image-container {
+            height   : 290px;
+            overflow : hidden;
+
+            a {
+                display   : block;
+                font-size : 0;
+
+                img {
+                    width      : 100%;
+                    margin-top : 0;
+                    transition : none;
+
+                    &.s1 { transition : margin-top 1s ease-in-out; }
+                    &.s5 { transition : margin-top 5s ease-in-out; }
+                    &.s10 { transition : margin-top 10s ease-in-out; }
+                    &.s15 { transition : margin-top 15s ease-in-out; }
+                    &.s20 { transition : margin-top 20s ease-in-out; }
+                }
+            }
+        }
+    }
+</style>

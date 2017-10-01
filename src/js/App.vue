@@ -32,16 +32,12 @@
                     <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
                 </div>
                 <div id="app-settings-content">
-                    <!-- Your settings in here -->
+
                 </div>
             </div>
         </div>
 
-        <div id="app-content">
-            <div id="app-content-wrapper">
-                <router-view name="main"></router-view>
-            </div>
-        </div>
+        <router-view name="main"></router-view>
         <div id="app-popup">
             <div></div>
         </div>

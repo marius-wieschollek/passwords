@@ -59,15 +59,15 @@
 
         props: {
             newFolder : {
-                type   : Boolean,
+                type     : Boolean,
                 'default': false
             },
             newTag    : {
-                type   : Boolean,
+                type     : Boolean,
                 'default': false
             },
             showAddNew: {
-                type   : Boolean,
+                type     : Boolean,
                 'default': true
             }
         },
@@ -85,28 +85,34 @@
 </script>
 
 <style lang="scss">
-    #controls .actions.creatable {
-        margin-left : 10px;
-        display     : inline-block;
-        position    : relative;
+    #controls {
+        top   : auto;
+        right : auto;
+        left  : auto;
 
-        .newPasswordMenu {
-            max-height : 0;
-            margin     : 0;
-            overflow   : hidden;
-            transition : max-height 0.25s ease-in-out;
+        .actions.creatable {
+            margin-left : 10px;
+            display     : inline-block;
+            position    : relative;
+
+            .newPasswordMenu {
+                max-height : 0;
+                margin     : 0;
+                overflow   : hidden;
+                transition : max-height 0.25s ease-in-out;
+            }
+
+            &.active .newPasswordMenu {
+                overflow   : visible;
+                max-height : 75px;
+                animation  : 0.25s delay-overflow;
+            }
         }
 
-        &.active .newPasswordMenu {
-            overflow   : visible;
-            max-height : 75px;
-            animation  : 0.25s delay-overflow;
+        @keyframes delay-overflow {
+            0% { overflow : hidden; }
+            99% { overflow : hidden; }
+            100% { overflow : visible; }
         }
-    }
-
-    @keyframes delay-overflow {
-        0% { overflow : hidden; }
-        99% { overflow : hidden; }
-        100% { overflow : visible; }
     }
 </style>
