@@ -41,6 +41,9 @@
 	<settings>
 		<admin>OCA\Passwords\Settings\AdminSettings</admin>
 	</settings>
+	<background-jobs>
+		<job>OCA\Passwords\Cron\CheckPasswordsJob</job>
+	</background-jobs>
 	<documentation>
 		<user>https://github.com/marius-wieschollek/passwords/blob/stable/README.md</user>
 		<admin>https://github.com/marius-wieschollek/passwords/wiki</admin>
