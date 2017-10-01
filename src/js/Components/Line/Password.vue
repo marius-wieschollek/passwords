@@ -51,7 +51,7 @@
                 return new Date(this.password.updated * 1e3).toLocaleDateString();
             },
             securityCheck() {
-                switch (this.password.secure) {
+                switch (this.password.status) {
                     case 0:
                         return 'ok';
                     case 1:

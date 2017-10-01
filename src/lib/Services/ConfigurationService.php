@@ -41,7 +41,6 @@ class ConfigurationService {
 
     /**
      * @param string $key
-     *
      * @param null   $default
      *
      * @return string
@@ -68,6 +67,51 @@ class ConfigurationService {
      */
     public function getSystemValue(string $key, $default = null) {
         return $this->config->getSystemValue($key, $default);
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     */
+    public function setUserValue(string $key, $value) {
+        $this->config->setUserValue($this->userId, Application::APP_NAME, $key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     */
+    public function setAppValue(string $key, $value) {
+        $this->config->setAppValue(Application::APP_NAME, $key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     */
+    public function setSystemValue(string $key, $value) {
+        $this->config->setSystemValue($key, $value);
+    }
+
+    /**
+     * @param string $key
+     */
+    public function deleteUserValue(string $key) {
+        $this->config->deleteUserValue($this->userId, Application::APP_NAME, $key);
+    }
+
+    /**
+     * @param string $key
+     */
+    public function deleteAppValue(string $key) {
+        $this->config->deleteAppValue(Application::APP_NAME, $key);
+    }
+
+    /**
+     * @param string $key
+     */
+    public function deleteSystemValue(string $key) {
+        $this->config->deleteSystemValue($key);
     }
 
     /**

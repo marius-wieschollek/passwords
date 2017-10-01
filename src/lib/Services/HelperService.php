@@ -39,9 +39,9 @@ class HelperService {
     const WORDS_LOCAL  = 'local';
     const WORDS_SNAKES = 'wo4snakes';
 
-    const SECURITY_LOCAL        = 'local';
-    const SECURITY_HBIP_ONLINE  = 'hbip';
-    const SECURITY_HBIP_OFFLINE = 'hbip_offline';
+    const SECURITY_BIG_LOCAL   = '10mio';
+    const SECURITY_SMALL_LOCAL = '1mio';
+    const SECURITY_HIBP        = 'hibp';
 
     const IMAGES_IMAGICK = 'imagick';
     const IMAGES_GDLIB   = 'gdlib';
@@ -128,7 +128,7 @@ class HelperService {
                 return $this->container->query('DefaultFaviconHelper');
         }
 
-        return $this->container->query('DefaultFaviconHelper');
+        return $this->container->query('LocalFaviconHelper');
     }
 
     /**
@@ -150,18 +150,19 @@ class HelperService {
 
     /**
      * @return AbstractSecurityCheckHelper
-     * @TODO support more services
      */
     public function getSecurityHelper(): AbstractSecurityCheckHelper {
-        $service = $this->config->getAppValue('service/security', self::SECURITY_HBIP_ONLINE);
+        $service = $this->config->getAppValue('service/security', self::SECURITY_HIBP);
 
         switch ($service) {
-            case self::SECURITY_HBIP_ONLINE:
-                return $this->container->query('HbipOnlineHelper');
-            case self::SECURITY_LOCAL:
-                return $this->container->query('LocalSecurityCheckHelper');
+            case self::SECURITY_HIBP:
+                return $this->container->query('HaveIBeenPwnedHelper');
+            case self::SECURITY_BIG_LOCAL:
+                return $this->container->query('BigLocalDbSecurityCheckHelper');
+            case self::SECURITY_SMALL_LOCAL:
+                return $this->container->query('SmallLocalDbSecurityCheckHelper');
         }
 
-        return $this->container->query('HbipOnlineHelper');
+        return $this->container->query('HaveIBeenPwnedHelper');
     }
 }

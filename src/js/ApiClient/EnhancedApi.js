@@ -195,12 +195,6 @@ export default class EnhancedApi extends SimpleApi {
                 password.image = this.getPreviewUrl(null);
             }
 
-            switch(password.secure) {
-                // @TODO add warning if custom requirements fail
-                case true: password.secure = 0; break;
-                case false: password.secure = 2; break;
-            }
-
             passwords[password.id] = password;
         }
 

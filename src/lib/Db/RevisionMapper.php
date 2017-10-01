@@ -17,16 +17,5 @@ class RevisionMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_revision';
 
-    /**
-     * @param string $user
-     * @param int    $password
-     *
-     * @return Revision[]
-     */
-    public function findByPassword(string $user, int $password): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.self::TABLE_NAME.'`'.
-               'WHERE `password` = ? AND `user` = ?';
-
-        return $this->findEntities($sql, [$password, $user]);
-    }
+    protected $allowedFields = ['id', 'uuid', 'password_id', 'status'];
 }

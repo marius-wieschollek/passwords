@@ -39,7 +39,7 @@ class RequestHelper {
     protected $json;
 
     /**
-     * @var array
+     * @var string
      */
     protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0';
 
@@ -47,6 +47,11 @@ class RequestHelper {
      * @var int[]
      */
     protected $acceptResponseCodes = [200, 201, 202];
+
+    /**
+     * @var int
+     */
+    protected $retryTimeout = 0;
 
     /**
      * @var array
@@ -114,11 +119,11 @@ class RequestHelper {
     }
 
     /**
-     * @param array $userAgent
+     * @param string $userAgent
      *
      * @return RequestHelper
      */
-    public function setUserAgent(array $userAgent): RequestHelper {
+    public function setUserAgent(string $userAgent): RequestHelper {
         $this->userAgent = $userAgent;
 
         return $this;
@@ -131,6 +136,17 @@ class RequestHelper {
      */
     public function setAcceptResponseCodes(array $acceptResponseCodes): RequestHelper {
         $this->acceptResponseCodes = $acceptResponseCodes;
+
+        return $this;
+    }
+
+    /**
+     * @param int $retryTimeout
+     *
+     * @return RequestHelper
+     */
+    public function setRetryTimeout(int $retryTimeout): RequestHelper {
+        $this->retryTimeout = $retryTimeout;
 
         return $this;
     }
@@ -150,9 +166,7 @@ class RequestHelper {
         curl_close($ch);
 
         if(!empty($this->acceptResponseCodes)) {
-            $status = in_array($this->info['http_code'], $this->acceptResponseCodes);
-
-            if(!$status) return false;
+            if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) return false;
         }
 
         return $this->response;
@@ -168,7 +182,8 @@ class RequestHelper {
         while ($retries < $maxRetries) {
             $result = $this->send();
 
-            if($result != null) return $result;
+            if($result !== false) return $result;
+            if($this->retryTimeout) usleep($this->retryTimeout * 1000);
             $retries++;
         }
 
@@ -176,10 +191,12 @@ class RequestHelper {
     }
 
     /**
+     * @param string|null $key
+     *
      * @return array
      */
-    public function getInfo(): array {
-        return $this->info;
+    public function getInfo(string $key = null) {
+        return $key === null ? $this->info:$this->info[ $key ];
     }
 
     /**

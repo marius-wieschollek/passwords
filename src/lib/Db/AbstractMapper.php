@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
 
@@ -24,6 +25,10 @@ abstract class AbstractMapper extends Mapper {
      * @var string
      */
     protected $userId;
+
+    protected $allowedFields       = ['id', 'uuid'];
+    protected $logicalOperators    = ['AND', 'OR'];
+    protected $comparisonOperators = ['=', '!=', '<', '>'];
 
     /**
      * AbstractMapper constructor.
@@ -52,33 +57,36 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @param int $id
      *
-     * @return AbstractEntity
+     * @return AbstractEntity|Entity
      */
     public function findById(int $id): AbstractEntity {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` '.
-               'WHERE `id` = ? AND `user` = ? AND `deleted` = 0 ';
+        list($sql, $params) = $this->getStatement();
 
-        return $this->findEntity($sql, [$id, $this->userId]);
+        $sql .= ' AND `id` = ?';
+        $params[] = $id;
+
+        return $this->findEntity($sql, $params);
     }
 
     /**
-     * @param string $id
+     * @param string $uuid
      *
-     * @return AbstractEntity
+     * @return AbstractEntity|Entity
      */
-    public function findByUuid(string $id): AbstractEntity {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` '.
-               'WHERE `uuid` = ? AND `user` = ? AND `deleted` = 0 ';
+    public function findByUuid(string $uuid): AbstractEntity {
+        list($sql, $params) = $this->getStatement();
 
-        return $this->findEntity($sql, [$id, $this->userId]);
+        $sql .= ' AND `uuid` = ?';
+        $params[] = $uuid;
+
+        return $this->findEntity($sql, $params);
     }
 
     /**
      * @return AbstractEntity[]
      */
     public function findAll(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'`'.
-               'WHERE `user` = ? AND `deleted` = 0 ';
+        list($sql, $params) = $this->getStatement();
 
         return $this->findEntities($sql, [$this->userId]);
     }
@@ -113,16 +121,36 @@ abstract class AbstractMapper extends Mapper {
      *
      * @return AbstractEntity[]
      */
-    public function findMatching(array $search, int $limit = null): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'`'.
-               'WHERE `user` = ? AND `deleted` = 0 ';
+    public function findMatching(array $search = [], int $limit = null): array {
+        if(isset($search[0]) && !is_array($search[0])) $search = [$search];
+        list($sql, $params) = $this->getStatement();
 
-        $params = [$this->userId];
-        foreach ($search as $key => $value) {
-            $sql      .= ' AND `'.$key.'` = ? ';
+        foreach ($search as $criteria) {
+            if(!isset($criteria[2]) || !in_array($criteria[2], $this->comparisonOperators)) $criteria[2] = '=';
+            if(!isset($criteria[3]) || !in_array($criteria[3], $this->logicalOperators)) $criteria[3] = 'AND';
+
+            list($field, $value, $operator, $concat) = $criteria;
+            if(!in_array($field, $this->allowedFields)) continue;
+
+            $sql      .= ' '.$concat.' `'.$field.'` '.$operator.' ? ';
             $params[] = $value;
         }
 
         return $this->findEntities($sql, $params, $limit);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getStatement(): array {
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = 0 ';
+
+        $params = [];
+        if($this->userId != '') {
+            $sql      .= ' AND `user` = ?';
+            $params[] = $this->userId;
+        }
+
+        return [$sql, $params];
     }
 }

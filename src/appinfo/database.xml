@@ -162,10 +162,10 @@
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>secure</name>
+				<name>status</name>
 				<type>integer</type>
 				<length>1</length>
-				<default>1</default>
+				<default>0</default>
 				<notnull>true</notnull>
 			</field>
 			<field>

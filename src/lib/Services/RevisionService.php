@@ -191,7 +191,7 @@ class RevisionService {
         $model->setUuid($this->revisionMapper->generateUuidV4());
         $model->setCreated(time());
         $model->setUpdated(time());
-        $model->setSecure(1);
+        $model->setStatus(0);
         $model->setKey('');
 
         $model->setPasswordId($passwordId);

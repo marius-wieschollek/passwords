@@ -72,18 +72,23 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getSecurityServices(): array {
-        $current = $this->config->getAppValue('service/security', HelperService::SECURITY_HBIP_ONLINE);
+        $current = $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP);
 
         return [
             [
-                'id'      => HelperService::SECURITY_HBIP_ONLINE,
-                'label'   => $this->localisation->t('haveibeenpwned.com (recommended)'),
-                'current' => $current === HelperService::SECURITY_HBIP_ONLINE
+                'id'      => HelperService::SECURITY_HIBP,
+                'label'   => $this->localisation->t('Have I been pwned? (recommended)'),
+                'current' => $current === HelperService::SECURITY_HIBP
             ],
             [
-                'id'      => HelperService::SECURITY_LOCAL,
-                'label'   => $this->localisation->t('Local'),
-                'current' => $current === HelperService::SECURITY_LOCAL
+                'id'      => HelperService::SECURITY_BIG_LOCAL,
+                'label'   => $this->localisation->t('10 Million Passwords (Local)'),
+                'current' => $current === HelperService::SECURITY_BIG_LOCAL
+            ],
+            [
+                'id'      => HelperService::SECURITY_SMALL_LOCAL,
+                'label'   => $this->localisation->t('1 Million Passwords (Local)'),
+                'current' => $current === HelperService::SECURITY_SMALL_LOCAL
             ]
         ];
     }
@@ -136,7 +141,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getFaviconServices(): array {
-        $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_BETTER_IDEA);
+        $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_LOCAL);
 
         return [
             [

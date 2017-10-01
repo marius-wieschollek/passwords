@@ -65,8 +65,8 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    createPassword(data = {}) {
-        data.hash = this._encryption.getHash(data.password);
+    async createPassword(data = {}) {
+        data.hash = await this._encryption.getHash(data.password);
         return this._createRequest('password.create', data);
     }
 
@@ -76,8 +76,8 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    updatePassword(data = {}) {
-        data.hash = this._encryption.getHash(data.password);
+    async updatePassword(data = {}) {
+        data.hash = await this._encryption.getHash(data.password);
         return this._createRequest(['password.update', data], data, 'PATCH');
     }
 

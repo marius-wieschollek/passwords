@@ -2,81 +2,85 @@
 /**
  * Created by PhpStorm.
  * User: marius
- * Date: 30.09.17
- * Time: 22:01
+ * Date: 16.09.17
+ * Time: 22:39
  */
 
-namespace OCA\Passwords\Helper;
+namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
 use OCA\Passwords\Helper\Http\FileDownloadHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCP\ILogger;
 use Throwable;
+use ZipArchive;
 
 /**
- * Class CommonPasswordsDownloadHelper
+ * Class BigLocalDbSecurityCheckHelper
  *
- * @package OCA\Passwords\Helper
+ * @package OCA\Passwords\Helper\SecurityCheck
  */
-class CommonPasswordsDownloadHelper {
+class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
     const LOW_RAM_LIMIT = 3145728;
     const ARCHIVE_URL   = 'https://archive.org/download/10MillionPasswords/10-million-combos.zip';
+    const PASSWORD_DB   = 'large';
 
     /**
-     * @var FileCacheService
+     * @var ILogger
      */
-    protected $fileCacheService;
+    protected $log;
 
     /**
-     * @var ConfigurationService
-     */
-    protected $config;
-
-    /**
-     * CommonPasswordsDownloadHelper constructor.
+     * BigPasswordDbHelper constructor.
      *
      * @param FileCacheService     $fileCacheService
      * @param ConfigurationService $configurationService
+     * @param ILogger              $log
      */
-    public function __construct(FileCacheService $fileCacheService, ConfigurationService $configurationService) {
-        $fileCacheService->setDefaultCache($fileCacheService::PASSWORDS_CACHE);
-        $this->fileCacheService = $fileCacheService;
-        $this->config           = $configurationService;
+    public function __construct(FileCacheService $fileCacheService, ConfigurationService $configurationService, ILogger $log) {
+        parent::__construct($fileCacheService, $configurationService);
+        $this->log = $log;
     }
 
     /**
-     * @return bool
+     * @inheritdoc
      */
-    public function isUpdateRequired() {
-        return $this->fileCacheService->isCacheEmpty();
+    public function dbUpdateRequired(): bool {
+        $installedType = $this->config->getAppValue(self::CONFIG_DB_TYPE);
+
+        return $this->fileCacheService->isCacheEmpty() || $installedType != static::PASSWORD_DB;
     }
 
     /**
-     *
+     * @inheritdoc
      */
-    public function update() {
+    public function updateDb(): void {
         ini_set('memory_limit', -1);
-        $zipFile = $this->config->getTempDir().uniqid().'.zip';
         $txtFile = $this->config->getTempDir().uniqid().'.txt';
 
-        $this->downloadPasswordsFile($zipFile);
-        $this->unpackPasswordsFile($zipFile, $txtFile);
+        $this->downloadPasswordsFile($txtFile);
 
         if($this->isLowMemorySystem()) {
             $this->lowMemoryHashAlgorithm($txtFile);
         } else {
             $this->highMemoryHashAlgorithm($txtFile);
         }
+
+        $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
+        $this->logPasswordUpdate();
     }
 
     /**
-     * @param $zipFile
+     * @param string $txtFile
      *
      * @throws Exception
+     *
      */
-    protected function downloadPasswordsFile($zipFile) {
+    protected function downloadPasswordsFile(string $txtFile) {
+        $zipFile = $this->config->getTempDir().uniqid().'.zip';
+
         $request = new FileDownloadHelper();
         $success = $request
             ->setOutputFile($zipFile)
@@ -84,6 +88,8 @@ class CommonPasswordsDownloadHelper {
             ->sendWithRetry();
         if(!$success) throw new Exception('Failed to download common passwords zip file');
         unset($request);
+
+        $this->unpackPasswordsFile($zipFile, $txtFile);
     }
 
     /**
@@ -94,7 +100,7 @@ class CommonPasswordsDownloadHelper {
      */
     protected function unpackPasswordsFile(string $zipFile, string $txtFile) {
         try {
-            $zip = new \ZipArchive;
+            $zip = new ZipArchive;
             if($zip->open($zipFile) === true) {
                 $name = $zip->getNameIndex(0);
                 $zip->extractTo($this->config->getTempDir(), $name);
@@ -112,7 +118,7 @@ class CommonPasswordsDownloadHelper {
     }
 
     /**
-     * This way to create the hashes takes only 180MB of ram.
+     * This way to create the hashes takes only 115MB of ram.
      * But it also needs 15x the time.
      *
      * @param string $txtFile
@@ -120,26 +126,34 @@ class CommonPasswordsDownloadHelper {
     protected function lowMemoryHashAlgorithm(string $txtFile) {
         $null = null;
         for ($i = 0; $i < 16; $i++) {
-            $key    = dechex($i);
+            $hexKey = dechex($i);
             $hashes = [];
             $fh     = fopen($txtFile, 'r');
             while (($line = fgets($fh)) !== false) {
-                list($a, $b) = explode("\t", $line."\t000000");
+                list($a, $b) = explode("\t", "$line\t000000");
 
                 $hash = sha1($a);
-                if($hash[0] == $key) $hashes[ $hash ] = &$null;
+                if($hash[0] == $hexKey) {
+                    $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
+                    if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
+                    $hashes[ $key ][ $hash ] = &$null;
+                }
 
                 $hash = sha1($b);
-                if($hash[0] == $key) $hashes[ $hash ] = &$null;
+                if($hash[0] == $hexKey) {
+                    $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
+                    if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
+                    $hashes[ $key ][ $hash ] = &$null;
+                }
             }
-            $this->fileCacheService->putFile("$key.json", json_encode(array_keys($hashes)));
             fclose($fh);
+            $this->storeHashes($hashes);
         }
         unlink($txtFile);
     }
 
     /**
-     * This way to create the hashes takes up to 1.7GB of ram.
+     * This way to create the hashes takes up to 1.625GB of ram.
      * It is also quite fast.
      *
      * @param string $txtFile
@@ -149,24 +163,35 @@ class CommonPasswordsDownloadHelper {
         $hashes = [];
         $fh     = fopen($txtFile, 'r');
         while (($line = fgets($fh)) !== false) {
-            list($a, $b) = explode("\t", $line."\t000000");
+            list($a, $b) = explode("\t", "$line\t000000");
 
             $hash = sha1($a);
-            $key  = $hash[0];
+            $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
             if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
             $hashes[ $key ][ $hash ] = &$null;
 
             $hash = sha1($b);
-            $key  = $hash[0];
+            $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
             if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
             $hashes[ $key ][ $hash ] = &$null;
         }
         fclose($fh);
+        $this->storeHashes($hashes);
 
-        foreach ($hashes as $key => $data) {
-            $this->fileCacheService->putFile("$key.json", json_encode(array_keys($data)));
-        }
         unlink($txtFile);
+    }
+
+    protected function storeHashes(array $hashes) {
+        foreach ($hashes as $key => $data) {
+            $data = json_encode(array_keys($data));
+            if(extension_loaded('zlib')) {
+                $data = gzcompress($data);
+                $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_GZIP);
+            } else {
+                $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_PLAIN);
+            }
+            $this->fileCacheService->putFile("$key.json", $data);
+        }
     }
 
     /**
@@ -174,9 +199,17 @@ class CommonPasswordsDownloadHelper {
      */
     protected function isLowMemorySystem(): bool {
         if(preg_match('/MemAvailable:\s+([0-9]+)/', @file_get_contents('/proc/meminfo'), $matches)) {
-            return $matches[1] < self::LOW_RAM_LIMIT;
+            return $matches[1] < static::LOW_RAM_LIMIT;
         }
 
         return true;
+    }
+
+    /**
+     *
+     */
+    protected function logPasswordUpdate() {
+        $ram = memory_get_peak_usage(true) / 1024 / 1024;
+        $this->log->info("Updated local password db. DB: ".static::PASSWORD_DB.", RAM: {$ram}MiB");
     }
 }

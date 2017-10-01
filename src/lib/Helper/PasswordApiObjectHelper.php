@@ -72,8 +72,11 @@ class PasswordApiObjectHelper {
             'login'     => $revision->getLogin(),
             'password'  => $revision->getPassword(),
             'favourite' => $revision->getFavourite(),
-            'secure'    => $revision->getSecure(),
-            'url'       => $revision->getUrl()
+            'url'       => $revision->getUrl(),
+            'status'    => $revision->getStatus(),
+            'hash'      => $revision->getHash(),
+            'cseType'   => $revision->getCseType(),
+            'sseType'   => $revision->getSseType()
         ];
     }
 }

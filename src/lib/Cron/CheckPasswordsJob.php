@@ -9,8 +9,9 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
-use OCA\Passwords\Helper\CommonPasswordsDownloadHelper;
-use OCA\Passwords\Helper\SecurityCheck\LocalSecurityCheckHelper;
+use OCA\Passwords\Db\Revision;
+use OCA\Passwords\Db\RevisionMapper;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Services\HelperService;
 
 /**
@@ -26,36 +27,53 @@ class CheckPasswordsJob extends TimedJob {
     protected $helperService;
 
     /**
-     * @var CommonPasswordsDownloadHelper
+     * @var RevisionMapper
      */
-    protected $localPasswordListHelper;
+    protected $revisionMapper;
 
     /**
      * CheckPasswordsJob constructor.
      *
-     * @param HelperService                 $helperService
-     * @param CommonPasswordsDownloadHelper $localPasswordListHelper
+     * @param HelperService  $helperService
+     * @param RevisionMapper $revisionMapper
      */
     public function __construct(
         HelperService $helperService,
-        CommonPasswordsDownloadHelper $localPasswordListHelper
+        RevisionMapper $revisionMapper
     ) {
         // Run once per day
-        //$this->setInterval(24 * 60 * 60);
-        $this->setInterval(15 * 60);
-        $this->helperService           = $helperService;
-        $this->localPasswordListHelper = $localPasswordListHelper;
+        $this->setInterval(24 * 60 * 60);
+        //$this->setInterval(15 * 60);
+        $this->helperService  = $helperService;
+        $this->revisionMapper = $revisionMapper;
     }
 
     /**
      * @param $argument
      */
-    protected function run($argument) {
-        $passwordCheckHelper = $this->helperService->getSecurityHelper();
+    protected function run($argument): void {
+        $securityHelper = $this->helperService->getSecurityHelper();
 
-        if(get_class($passwordCheckHelper) == LocalSecurityCheckHelper::class &&
-           $this->localPasswordListHelper->isUpdateRequired()) {
-            $this->localPasswordListHelper->update();
+        if($securityHelper->dbUpdateRequired()) {
+            $securityHelper->updateDb();
+        }
+        $this->checkRevisionStatus($securityHelper);
+    }
+
+    /**
+     * @param $securityHelper
+     */
+    protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
+        /** @var Revision[] $revisions */
+        $revisions = $this->revisionMapper->findAllMatching(['status', 2, '!=']);
+        foreach ($revisions as $revision) {
+            $oldStatus = $revision->getStatus();
+            $newStatus = $securityHelper->getRevisionSecurityLevel($revision);
+
+            if($oldStatus != $newStatus) {
+                $revision->setStatus($newStatus);
+                $this->revisionMapper->update($revision);
+            }
         }
     }
 }

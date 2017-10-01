@@ -16,7 +16,6 @@ use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\RevisionMapper;
-use OCA\Passwords\Helper\CommonPasswordsDownloadHelper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
@@ -30,8 +29,9 @@ use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCA\Passwords\Helper\PasswordApiObjectHelper;
-use OCA\Passwords\Helper\SecurityCheck\HbipOnlineHelper;
-use OCA\Passwords\Helper\SecurityCheck\LocalSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
+use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
@@ -124,7 +124,7 @@ class Application extends App {
             return new AdminSettings(
                 $c->query('LocalisationService'),
                 $c->query('ConfigurationService'),
-                $this->getFileCacheService($c)
+                $this->getFileCacheService()
             );
         });
 
@@ -134,13 +134,7 @@ class Application extends App {
         $container->registerService('CheckPasswordsJob', function (IAppContainer $c) {
             return new CheckPasswordsJob(
                 $c->query('HelperService'),
-                $c->query('CommonPasswordsDownloadHelper')
-            );
-        });
-        $container->registerService('CommonPasswordsDownloadHelper', function (IAppContainer $c) {
-            return new CommonPasswordsDownloadHelper(
-                $this->getFileCacheService($c),
-                $c->query('ConfigurationService')
+                $c->query('RevisionMapper')
             );
         });
 
@@ -153,12 +147,19 @@ class Application extends App {
     }
 
     /**
-     * @param IAppContainer $c
-     *
      * @return FileCacheService
      */
-    protected function getFileCacheService(IAppContainer $c): FileCacheService {
-        return clone $c->query('FileCacheService');
+    protected function getFileCacheService(): FileCacheService {
+        return clone $this->getContainer()->query('FileCacheService');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUserId(): string {
+        $user = $this->getContainer()->getServer()->getUserSession()->getUser();
+
+        return $user === null ? '':$user->getUID();
     }
 
     /**
@@ -207,7 +208,7 @@ class Application extends App {
                 $c->query('AppName'),
                 $c->query('Request'),
                 $c->getServer()->getConfig(),
-                $this->getFileCacheService($c)
+                $this->getFileCacheService()
             );
         });
     }
@@ -219,20 +220,16 @@ class Application extends App {
         $container = $this->getContainer();
 
         $container->registerService('PasswordMapper', function (IAppContainer $c) {
-            $server = $c->getServer();
-
             return new PasswordMapper(
-                $server->getDatabaseConnection(),
-                $server->getUserSession()->getUser()->getUID()
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
             );
         });
 
         $container->registerService('RevisionMapper', function (IAppContainer $c) {
-            $server = $c->getServer();
-
             return new RevisionMapper(
-                $server->getDatabaseConnection(),
-                $server->getUserSession()->getUser()->getUID()
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
             );
         });
     }
@@ -268,7 +265,7 @@ class Application extends App {
         $container->registerService('FaviconService', function (IAppContainer $c) {
             return new FaviconService(
                 $c->query('HelperService'),
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ValidationService'),
                 $c->getServer()->getLogger()
             );
@@ -277,7 +274,7 @@ class Application extends App {
         $container->registerService('PageShotService', function (IAppContainer $c) {
             return new PageShotService(
                 $c->query('HelperService'),
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ValidationService'),
                 $c->getServer()->getLogger()
             );
@@ -299,11 +296,9 @@ class Application extends App {
         });
 
         $container->registerService('ConfigurationService', function (IAppContainer $c) {
-            $server = $c->getServer();
-
             return new ConfigurationService(
-                $server->getUserSession()->getUser()->getUID(),
-                $server->getConfig()
+                $this->getUserId(),
+                $c->getServer()->getConfig()
             );
         });
 
@@ -339,35 +334,35 @@ class Application extends App {
 
         $container->registerService('WkhtmlImageHelper', function (IAppContainer $c) {
             return new WkhtmlImageHelper(
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ConfigurationService')
             );
         });
 
         $container->registerService('ScreenShotApiHelper', function (IAppContainer $c) {
             return new ScreenShotApiHelper(
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ConfigurationService')
             );
         });
 
         $container->registerService('ScreenShotLayerHelper', function (IAppContainer $c) {
             return new ScreenShotLayerHelper(
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ConfigurationService')
             );
         });
 
         $container->registerService('ScreenShotMachineHelper', function (IAppContainer $c) {
             return new ScreenShotMachineHelper(
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ConfigurationService')
             );
         });
 
         $container->registerService('DefaultPageShotHelper', function (IAppContainer $c) {
             return new DefaultPageShotHelper(
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('ConfigurationService')
             );
         });
@@ -381,32 +376,32 @@ class Application extends App {
 
         $container->registerService('BetterIdeaHelper', function (IAppContainer $c) {
             return new BetterIdeaHelper(
-                $this->getFileCacheService($c)
+                $this->getFileCacheService()
             );
         });
 
         $container->registerService('DuckDuckGoHelper', function (IAppContainer $c) {
             return new DuckDuckGoHelper(
-                $this->getFileCacheService($c)
+                $this->getFileCacheService()
             );
         });
 
         $container->registerService('GoogleFaviconHelper', function (IAppContainer $c) {
             return new GoogleFaviconHelper(
-                $this->getFileCacheService($c)
+                $this->getFileCacheService()
             );
         });
 
         $container->registerService('LocalFaviconHelper', function (IAppContainer $c) {
             return new LocalFaviconHelper(
-                $this->getFileCacheService($c),
+                $this->getFileCacheService(),
                 $c->query('HelperService')->getImageHelper()
             );
         });
 
         $container->registerService('DefaultFaviconHelper', function (IAppContainer $c) {
             return new DefaultFaviconHelper(
-                $this->getFileCacheService($c)
+                $this->getFileCacheService()
             );
         });
     }
@@ -434,12 +429,27 @@ class Application extends App {
     protected function registerSecurityCheckHelper(): void {
         $container = $this->getContainer();
 
-        $container->registerService('HbipOnlineHelper', function (IAppContainer $c) {
-            return new HbipOnlineHelper();
+        $container->registerService('HaveIBeenPwnedHelper', function (IAppContainer $c) {
+            return new HaveIBeenPwnedHelper(
+                $this->getFileCacheService(),
+                $c->query('ConfigurationService')
+            );
         });
 
-        $container->registerService('LocalSecurityCheckHelper', function (IAppContainer $c) {
-            return new LocalSecurityCheckHelper();
+        $container->registerService('BigLocalDbSecurityCheckHelper', function (IAppContainer $c) {
+            return new BigLocalDbSecurityCheckHelper(
+                $this->getFileCacheService(),
+                $c->query('ConfigurationService'),
+                $c->getServer()->getLogger()
+            );
+        });
+
+        $container->registerService('SmallLocalDbSecurityCheckHelper', function (IAppContainer $c) {
+            return new SmallLocalDbSecurityCheckHelper(
+                $this->getFileCacheService(),
+                $c->query('ConfigurationService'),
+                $c->getServer()->getLogger()
+            );
         });
     }
 }

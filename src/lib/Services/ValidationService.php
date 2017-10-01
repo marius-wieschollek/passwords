@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\Revision;
+use OCA\Passwords\Exception\ApiException;
 
 /**
  * Class ValidationService
@@ -23,18 +24,17 @@ class ValidationService {
      * @return Revision
      */
     public function validateRevision(Revision $revision): Revision {
-
-        if(empty($revision->getTitle())) {
-            $title = $revision->getLogin();
-            if(!empty($revision->getUrl())) $title .= '@'.parse_url($revision->getUrl(), PHP_URL_HOST);
-            $revision->setTitle($title);
-        }
-
         if(empty($revision->getSseType())) {
             $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if(empty($revision->getCseType())) {
-            $revision->setCseType(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+            throw new ApiException('Field "cseType" can not be empty');
+        }
+        if(empty($revision->getTitle())) {
+            throw new ApiException('Field "title" can not be empty');
+        }
+        if(empty($revision->getHash())) {
+            throw new ApiException('Field "hash" can not be empty');
         }
 
         return $revision;

@@ -43,8 +43,8 @@ use JsonSerializable;
  * @method void setHash(string $hash)
  * @method bool getFavourite()
  * @method void setFavourite(bool $favourite)
- * @method bool getSecure()
- * @method void setSecure(bool $secure)
+ * @method int getStatus()
+ * @method void setStatus(int $status)
  * @method int getPasswordId()
  * @method void setPasswordId(int $passwordId)
  * @method int getCreated()
@@ -124,12 +124,12 @@ class Revision extends AbstractEntity implements JsonSerializable {
     /**
      * @var bool
      */
-    protected $secure;
+    protected $favourite;
 
     /**
-     * @var bool
+     * @var int
      */
-    protected $favourite;
+    protected $status;
 
     /**
      * @var int
@@ -162,21 +162,14 @@ class Revision extends AbstractEntity implements JsonSerializable {
         $this->addType('cseType', 'string');
         $this->addType('password', 'string');
 
-        $this->addType('secure', 'boolean');
         $this->addType('hidden', 'boolean');
         $this->addType('deleted', 'boolean');
         $this->addType('favourite', 'boolean');
 
+        $this->addType('status', 'integer');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');
         $this->addType('passwordId', 'integer');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSecure(): bool {
-        return $this->getSecure();
     }
 
     /**
@@ -221,10 +214,10 @@ class Revision extends AbstractEntity implements JsonSerializable {
             'cseType'    => $this->getCseType(),
             'sseType'    => $this->getSseType(),
             'password'   => $this->getPassword(),
-            'secure'     => $this->isSecure(),
             'hidden'     => $this->isHidden(),
             'deleted'    => $this->isDeleted(),
             'favourite'  => $this->isFavourite(),
+            'status'     => $this->getStatus(),
             'passwordId' => $this->getPasswordId(),
             'created'    => $this->getCreated(),
             'updated'    => $this->getUpdated(),
