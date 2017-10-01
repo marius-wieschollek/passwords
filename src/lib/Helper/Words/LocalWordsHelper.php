@@ -8,12 +8,37 @@
 
 namespace OCA\Passwords\Helper\Words;
 
+use Exception;
+
 /**
  * Class LocalWordsHelper
  *
  * @package OCA\Passwords\Helper\Words
  */
 class LocalWordsHelper extends AbstractWordsHelper {
+
+    const WORDS_DE      = '/usr/share/dict/ngerman';
+    const WORDS_US      = '/usr/share/dict/american-english';
+    const WORDS_GB      = '/usr/share/dict/british-english';
+    const WORDS_FR      = '/usr/share/dict/french';
+    const WORDS_IT      = '/usr/share/dict/italian';
+    const WORDS_ES      = '/usr/share/dict/spanish';
+    const WORDS_PT      = '/usr/share/dict/portuguese';
+    const WORDS_DEFAULT = '/usr/share/dict/words';
+
+    /**
+     * @var string
+     */
+    protected $langCode;
+
+    /**
+     * LocalWordsHelper constructor.
+     *
+     * @param string $langCode
+     */
+    public function __construct(string $langCode) {
+        $this->langCode = $langCode;
+    }
 
     /**
      * @param int $strength
@@ -26,54 +51,52 @@ class LocalWordsHelper extends AbstractWordsHelper {
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getWordsUrl(): string {
-        $langCode = \OC::$server->getL10N('core')->getLanguageCode();
-
         $wordsFile = '';
-        switch ($langCode) {
+        switch ($this->langCode) {
             case 'de':
-                $wordsFile = '/usr/share/dict/ngerman';
+                $wordsFile = self::WORDS_DE;
                 break;
             case 'de_DE':
-                $wordsFile = '/usr/share/dict/ngerman';
+                $wordsFile = self::WORDS_DE;
                 break;
             case 'en':
-                $wordsFile = '/usr/share/dict/american-english';
+                $wordsFile = self::WORDS_US;
                 break;
             case 'en_GB':
-                $wordsFile = '/usr/share/dict/british-english';
+                $wordsFile = self::WORDS_GB;
                 break;
             case 'fr':
-                $wordsFile = '/usr/share/dict/french';
+                $wordsFile = self::WORDS_FR;
                 break;
             case 'it':
-                $wordsFile = '/usr/share/dict/italian';
+                $wordsFile = self::WORDS_IT;
                 break;
             case 'es':
-                $wordsFile = '/usr/share/dict/spanish';
+                $wordsFile = self::WORDS_ES;
                 break;
             case 'es_MX':
-                $wordsFile = '/usr/share/dict/spanish';
+                $wordsFile = self::WORDS_ES;
                 break;
             case 'es_AR':
-                $wordsFile = '/usr/share/dict/spanish';
+                $wordsFile = self::WORDS_ES;
                 break;
             case 'pt':
-                $wordsFile = '/usr/share/dict/portuguese';
+                $wordsFile = self::WORDS_PT;
                 break;
             case 'pt_BR':
-                $wordsFile = '/usr/share/dict/portuguese';
+                $wordsFile = self::WORDS_PT;
                 break;
         }
 
         if(!is_file($wordsFile)) {
-            if(is_file('/usr/share/dict/words')) {
-                return '/usr/share/dict/words';
+            if(is_file(self::WORDS_DEFAULT)) {
+                return self::WORDS_DEFAULT;
             }
 
-            throw new \Exception('No local words file found. Install a words file in /usr/share/dict/words');
+            throw new Exception('No local words file found. Install a words file in /usr/share/dict/words');
         }
 
         return $wordsFile;

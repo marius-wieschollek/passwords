@@ -7,6 +7,11 @@ use OCP\AppFramework\Http\RedirectResponse;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 
+/**
+ * Class AccessController
+ *
+ * @package OCA\Passwords\Controller
+ */
 class AccessController extends Controller {
 
     /**
@@ -14,6 +19,13 @@ class AccessController extends Controller {
      */
     protected $urlGenerator;
 
+    /**
+     * AccessController constructor.
+     *
+     * @param string        $appName
+     * @param IRequest      $request
+     * @param IURLGenerator $urlGenerator
+     */
     public function __construct($appName, IRequest $request, IURLGenerator $urlGenerator) {
         parent::__construct($appName, $request);
         $this->urlGenerator = $urlGenerator;

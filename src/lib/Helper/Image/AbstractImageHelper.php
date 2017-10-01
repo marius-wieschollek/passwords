@@ -8,12 +8,28 @@
 
 namespace OCA\Passwords\Helper\Image;
 
+use OCA\Passwords\Services\ConfigurationService;
+
 /**
  * Class AbstractImageHelper
  *
  * @package OCA\Passwords\Helper\Image
  */
 abstract class AbstractImageHelper {
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
+     * AbstractImageHelper constructor.
+     *
+     * @param ConfigurationService $configurationService
+     */
+    public function __construct(ConfigurationService $configurationService) {
+        $this->config = $configurationService;
+    }
 
     /**
      * @param int $width

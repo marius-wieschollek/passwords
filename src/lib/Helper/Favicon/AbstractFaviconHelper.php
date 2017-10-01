@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
-use OCA\Passwords\Helper\HttpRequestHelper;
+use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
@@ -35,6 +35,7 @@ abstract class AbstractFaviconHelper {
      * @param FileCacheService $fileCacheService
      */
     public function __construct(FileCacheService $fileCacheService) {
+        $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
         $this->fileCacheService = $fileCacheService;
     }
 
@@ -96,7 +97,7 @@ abstract class AbstractFaviconHelper {
      * @return mixed
      */
     protected function getHttpRequest(string $url) {
-        $request = new HttpRequestHelper();
+        $request = new RequestHelper();
         $request->setUrl($url);
 
         return $request->sendWithRetry();

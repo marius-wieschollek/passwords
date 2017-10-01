@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\Image;
 
 use Gmagick;
 use Imagick;
+use Throwable;
 
 /**
  * Class ImagickHelper
@@ -145,19 +146,26 @@ class ImagickHelper extends AbstractImageHelper {
      * @param string $data
      *
      * @return string
+     * @throws Throwable
      */
     public function convertIcoToPng($data) {
+        $tempFile = $this->config->getTempDir().uniqid().'.ico';
 
-        $tempFile = '/tmp/'.uniqid().'.ico';
-        file_put_contents($tempFile, $data);
+        try {
+            file_put_contents($tempFile, $data);
 
-        $image = $this->getNewImageObject();
-        $image->readImage($tempFile);
-        $image->setImageFormat('png');
-        $content = $image->getImageBlob();
+            $image = $this->getNewImageObject();
+            $image->readImage($tempFile);
+            $image->setImageFormat('png');
+            $content = $image->getImageBlob();
 
-        $image->destroy();
-        unlink($tempFile);
+            $image->destroy();
+            unlink($tempFile);
+
+        } catch (Throwable $e) {
+            if(is_file($tempFile)) @unlink($tempFile);
+            throw $e;
+        }
 
         return $content;
     }

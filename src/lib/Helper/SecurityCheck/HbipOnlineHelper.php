@@ -10,6 +10,11 @@ namespace OCA\Passwords\Helper\SecurityCheck;
 
 use OCA\Passwords\Db\Revision;
 
+/**
+ * Class HbipOnlineHelper
+ *
+ * @package OCA\Passwords\Helper\SecurityCheck
+ */
 class HbipOnlineHelper extends AbstractSecurityCheckHelper {
 
     /**

@@ -69,4 +69,11 @@ class ConfigurationService {
     public function getSystemValue(string $key, $default = null) {
         return $this->config->getSystemValue($key, $default);
     }
+
+    /**
+     * @return string
+     */
+    public function getTempDir(): string {
+        return $this->getSystemValue('tempdirectory', '/tmp/');
+    }
 }

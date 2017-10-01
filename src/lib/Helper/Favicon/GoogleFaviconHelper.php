@@ -11,11 +11,11 @@ namespace OCA\Passwords\Helper\Favicon;
 use OCA\Passwords\Services\HelperService;
 
 /**
- * Class GoogleHelper
+ * Class GoogleFaviconHelper
  *
  * @package OCA\Passwords\Helper\Favicon
  */
-class GoogleHelper extends AbstractFaviconHelper {
+class GoogleFaviconHelper extends AbstractFaviconHelper {
 
     /**
      * @var string

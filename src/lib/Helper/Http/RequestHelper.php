@@ -6,14 +6,14 @@
  * Time: 00:29
  */
 
-namespace OCA\Passwords\Helper;
+namespace OCA\Passwords\Helper\Http;
 
 /**
- * Class HttpRequestHelper
+ * Class RequestHelper
  *
  * @package OCA\Passwords\Helper
  */
-class HttpRequestHelper {
+class RequestHelper {
 
     const REQUEST_MAX_RETRIES = 5;
     const REQUEST_TIMEOUT     = 15;
@@ -59,7 +59,7 @@ class HttpRequestHelper {
     protected $response;
 
     /**
-     * HttpRequestHelper constructor.
+     * RequestHelper constructor.
      *
      * @param string|null $url
      */
@@ -72,9 +72,9 @@ class HttpRequestHelper {
     /**
      * @param string $url
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    public function setUrl(string $url): HttpRequestHelper {
+    public function setUrl(string $url): RequestHelper {
         $this->url = $url;
 
         return $this;
@@ -83,9 +83,9 @@ class HttpRequestHelper {
     /**
      * @param array $post
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    public function setPost(array $post): HttpRequestHelper {
+    public function setPost(array $post): RequestHelper {
         $this->post = $post;
 
         return $this;
@@ -94,9 +94,9 @@ class HttpRequestHelper {
     /**
      * @param array $header
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    public function setHeader(array $header): HttpRequestHelper {
+    public function setHeader(array $header): RequestHelper {
         $this->header = $header;
 
         return $this;
@@ -105,9 +105,9 @@ class HttpRequestHelper {
     /**
      * @param array $json
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    public function setJson(array $json): HttpRequestHelper {
+    public function setJson(array $json): RequestHelper {
         $this->json = $json;
 
         return $this;
@@ -116,9 +116,9 @@ class HttpRequestHelper {
     /**
      * @param array $userAgent
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    public function setUserAgent(array $userAgent): HttpRequestHelper {
+    public function setUserAgent(array $userAgent): RequestHelper {
         $this->userAgent = $userAgent;
 
         return $this;
@@ -127,9 +127,9 @@ class HttpRequestHelper {
     /**
      * @param int[] $acceptResponseCodes
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    public function setAcceptResponseCodes(array $acceptResponseCodes): HttpRequestHelper {
+    public function setAcceptResponseCodes(array $acceptResponseCodes): RequestHelper {
         $this->acceptResponseCodes = $acceptResponseCodes;
 
         return $this;
@@ -141,32 +141,9 @@ class HttpRequestHelper {
      * @return bool|mixed
      */
     public function send(string $url = null) {
-        $ch = curl_init($url == null ? $this->url:$url);
+        $ch = $this->prepareCurlRequest($url);
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
-        curl_setopt($ch, CURLOPT_TIMEOUT, self::REQUEST_TIMEOUT);
-
-        if(!empty($this->post)) {
-            curl_setopt($ch, CURLOPT_POST, 2);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->post));
-        }
-        if(!empty($this->json)) {
-            $json = json_encode($this->json);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-            $this->header['Content-Type']   = 'application/json';
-            $this->header['Content-Length'] = strlen($json);
-        }
-        if(!empty($this->header)) {
-            $header = [];
-
-            foreach ($this->header as $key => $value) {
-                $header[] = "{$key}: {$value}";
-            }
-
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        }
 
         $this->response = curl_exec($ch);
         $this->info     = curl_getinfo($ch);
@@ -174,6 +151,7 @@ class HttpRequestHelper {
 
         if(!empty($this->acceptResponseCodes)) {
             $status = in_array($this->info['http_code'], $this->acceptResponseCodes);
+
             if(!$status) return false;
         }
 
@@ -209,5 +187,45 @@ class HttpRequestHelper {
      */
     public function getResponse() {
         return $this->response;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return resource
+     */
+    protected function prepareCurlRequest(string $url = null) {
+        $ch = curl_init($url == null ? $this->url:$url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, static::REQUEST_TIMEOUT);
+
+        if(!empty($this->post)) {
+            curl_setopt($ch, CURLOPT_POST, 2);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->post));
+        }
+
+        if(!empty($this->json)) {
+            $json = json_encode($this->json);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+            $this->header['Content-Type']   = 'application/json';
+            $this->header['Content-Length'] = strlen($json);
+        }
+
+        if(!empty($this->header)) {
+            $header = [];
+
+            foreach ($this->header as $key => $value) {
+                $header[] = "{$key}: {$value}";
+            }
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        }
+
+        return $ch;
     }
 }

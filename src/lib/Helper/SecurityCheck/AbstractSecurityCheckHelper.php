@@ -10,6 +10,11 @@ namespace OCA\Passwords\Helper\SecurityCheck;
 
 use OCA\Passwords\Db\Revision;
 
+/**
+ * Class AbstractSecurityCheckHelper
+ *
+ * @package OCA\Passwords\Helper\SecurityCheck
+ */
 abstract class AbstractSecurityCheckHelper {
 
     /**

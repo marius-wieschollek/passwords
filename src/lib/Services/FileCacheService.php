@@ -20,9 +20,10 @@ use OCP\Files\SimpleFS\ISimpleFolder;
  */
 class FileCacheService {
 
-    const DEFAULT_CACHE  = 'default';
-    const FAVICON_CACHE  = 'favicon';
-    const PAGESHOT_CACHE = 'pageshot';
+    const DEFAULT_CACHE   = 'default';
+    const FAVICON_CACHE   = 'favicon';
+    const PAGESHOT_CACHE  = 'pageshot';
+    const PASSWORDS_CACHE = 'passwords';
 
     /**
      * @var IAppData
@@ -91,6 +92,7 @@ class FileCacheService {
             self::DEFAULT_CACHE,
             self::FAVICON_CACHE,
             self::PAGESHOT_CACHE,
+            self::PASSWORDS_CACHE,
         ];
     }
 
@@ -135,6 +137,17 @@ class FileCacheService {
         foreach ($caches as $cache) {
             $this->clearCache($cache);
         }
+    }
+
+    /**
+     * @param string $cache
+     *
+     * @return bool
+     */
+    public function isCacheEmpty(string $cache = null): bool {
+        $info = $this->getCacheInfo($cache);
+
+        return $info['files'] == 0;
     }
 
     /**

@@ -8,9 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
-use OCA\Passwords\Helper\HttpRequestHelper;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\PageShotService;
 
@@ -20,6 +18,8 @@ use OCA\Passwords\Services\PageShotService;
  * @package OCA\Passwords\Helper\PageShot
  */
 class ScreenShotApiHelper extends AbstractPageShotHelper {
+
+    const SERVICE_URL = 'https://api.screenshotapi.io/capture';
 
     /**
      * @var string
@@ -35,22 +35,6 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @var string
      */
     protected $viewport = '';
-
-    /**
-     * @var ConfigurationService
-     */
-    protected $config;
-
-    /**
-     * ScreenShotLayerHelper constructor.
-     *
-     * @param FileCacheService     $fileCacheService
-     * @param ConfigurationService $config
-     */
-    public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
-        parent::__construct($fileCacheService);
-        $this->config = $config;
-    }
 
     /**
      * @param string $url
@@ -74,7 +58,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             $check   = json_decode($request->sendWithRetry(1), true);
 
             if($check['status'] === 'ready') {
-                $load = new HttpRequestHelper($check['imageUrl']);
+                $load = new RequestHelper($check['imageUrl']);
 
                 return $load->sendWithRetry();
             } else if($check['status'] === 'error' || isset($check['error'])) {
@@ -92,10 +76,10 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
     /**
      * @param string $url
      *
-     * @return HttpRequestHelper
+     * @return RequestHelper
      */
-    protected function getAuthorizedRequest(string $url): HttpRequestHelper {
-        $request = new HttpRequestHelper($url);
+    protected function getAuthorizedRequest(string $url): RequestHelper {
+        $request = new RequestHelper($url);
 
         return $request->setHeader($this->getServiceAuth())->setAcceptResponseCodes([]);
     }
@@ -139,6 +123,6 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             $this->viewport = self::VIEWPORT_DESKTOP;
         }
 
-        return 'https://api.screenshotapi.io/capture';
+        return self::SERVICE_URL;
     }
 }

@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
 use OCP\ILogger;
@@ -62,7 +63,7 @@ class WordsService {
     ) {
         try {
             $this->retries++;
-            if($this->retries > 5) throw new \Exception('Passwords Service Not Responding');
+            if($this->retries > 5) throw new Exception('Passwords Service Not Responding');
 
             $wordsGenerator = $this->helperService->getWordsHelper();
             $words          = $wordsGenerator->getWords($strength);

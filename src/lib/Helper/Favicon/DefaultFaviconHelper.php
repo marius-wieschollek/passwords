@@ -12,11 +12,11 @@ use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
- * Class DefaultHelper
+ * Class DefaultPageShotHelper
  *
  * @package OCA\Passwords\Helper\Favicon
  */
-class DefaultHelper extends AbstractFaviconHelper {
+class DefaultFaviconHelper extends AbstractFaviconHelper {
 
     /**
      * @var string

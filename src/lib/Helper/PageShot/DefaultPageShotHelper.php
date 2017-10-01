@@ -12,11 +12,11 @@ use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
- * Class DefaultHelper
+ * Class DefaultPageShotHelper
  *
  * @package OCA\Passwords\Helper\PageShot
  */
-class DefaultHelper extends AbstractPageShotHelper {
+class DefaultPageShotHelper extends AbstractPageShotHelper {
 
     /**
      * @var string

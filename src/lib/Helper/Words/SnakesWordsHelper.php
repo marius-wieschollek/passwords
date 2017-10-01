@@ -8,7 +8,14 @@
 
 namespace OCA\Passwords\Helper\Words;
 
+/**
+ * Class SnakesWordsHelper
+ *
+ * @package OCA\Passwords\Helper\Words
+ */
 class SnakesWordsHelper extends AbstractWordsHelper {
+
+    const SERVICE_URL = 'http://watchout4snakes.com/wo4snakes/Random/RandomPhrase';
 
     /**
      * @param int $strength
@@ -40,6 +47,6 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @return string
      */
     protected function getWordsUrl(): string {
-        return 'http://watchout4snakes.com/wo4snakes/Random/RandomPhrase';
+        return self::SERVICE_URL;
     }
 }

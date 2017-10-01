@@ -15,10 +15,18 @@ namespace OCA\Passwords\Exception;
  */
 class ApiException extends \Exception {
 
+    /**
+     * ApiException constructor.
+     *
+     * @param string $message
+     */
     public function __construct($message = "") {
         parent::__construct($message, E_USER_ERROR, null);
     }
 
+    /**
+     * @return int
+     */
     public function getHttpCode() {
         return 500;
     }

@@ -8,8 +8,6 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\PageShotService;
 
@@ -24,22 +22,6 @@ class ScreenShotLayerHelper extends AbstractPageShotHelper {
      * @var string
      */
     protected $prefix = HelperService::PAGESHOT_SCREEN_SHOT_LAYER;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected $config;
-
-    /**
-     * ScreenShotLayerHelper constructor.
-     *
-     * @param FileCacheService     $fileCacheService
-     * @param ConfigurationService $config
-     */
-    public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
-        parent::__construct($fileCacheService);
-        $this->config = $config;
-    }
 
     /**
      * @param string $domain

@@ -9,7 +9,8 @@
 namespace OCA\Passwords\Helper\PageShot;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\HttpRequestHelper;
+use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
@@ -36,12 +37,20 @@ abstract class AbstractPageShotHelper {
     protected $fileCacheService;
 
     /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
      * BetterIdeaHelper constructor.
      *
-     * @param FileCacheService $fileCacheService
+     * @param FileCacheService     $fileCacheService
+     * @param ConfigurationService $config
      */
-    public function __construct(FileCacheService $fileCacheService) {
+    public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
+        $fileCacheService->setDefaultCache($fileCacheService::PAGESHOT_CACHE);
         $this->fileCacheService = $fileCacheService;
+        $this->config           = $config;
     }
 
     /**
@@ -116,7 +125,7 @@ abstract class AbstractPageShotHelper {
      * @throws ApiException
      */
     protected function getHttpRequest(string $url) {
-        $request = new HttpRequestHelper();
+        $request = new RequestHelper();
         $request->setUrl($url);
         $data = $request->sendWithRetry();
 

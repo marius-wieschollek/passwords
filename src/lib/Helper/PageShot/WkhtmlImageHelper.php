@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\PageShot;
 
+use Exception;
 use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
@@ -30,7 +31,7 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @param string $view
      *
      * @return ISimpleFile
-     * @throws \Exception
+     * @throws Exception
      */
     function getPageShot(string $domain, string $view): ISimpleFile {
         $pageShotFile = $this->getPageShotFilename($domain, $view);
@@ -41,7 +42,7 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
         $pageShotData = $this->capturePageShot($domain, $view);
 
         if($pageShotData === null) {
-            throw new \Exception('PageShot service returned no data');
+            throw new Exception('PageShot service returned no data');
         }
 
         return $this->fileCacheService->putFile($pageShotFile, $pageShotData);
@@ -52,10 +53,10 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @param string $view
      *
      * @return bool|string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function capturePageShot(string $domain, string $view) {
-        $tempFile = \OC::$server->getConfig()->getSystemValue('tempdirectory', '/tmp/').uniqid().'.jpg';
+        $tempFile = $this->config->getTempDir().uniqid().'.jpg';
         $cmd      = $this->getWkHtmlBinary().
                     ' --quiet --no-stop-slow-scripts --disable-smart-width --javascript-delay 1500 --format JPG --width '.
                     ($view === 'desktop' ? self::WIDTH_DESKTOP:self::WIDTH_MOBILE).
@@ -77,18 +78,18 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
             }
         }
 
-        throw new \Exception('WKHTML said: '.PHP_EOL.implode(PHP_EOL, $output));
+        throw new Exception('WKHTML said: '.PHP_EOL.implode(PHP_EOL, $output));
     }
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getWkHtmlBinary(): string {
         $path = self::getWkHtmlPath();
 
         if($path === null) {
-            throw new \Exception('WKHTML binary not found or not accessible. You can install WKHTML binary from admin page');
+            throw new Exception('WKHTML binary not found or not accessible. You can install WKHTML binary from admin page');
         }
 
         return $path;

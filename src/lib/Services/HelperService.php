@@ -11,26 +11,11 @@ namespace OCA\Passwords\Services;
 use Gmagick;
 use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
-use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
-use OCA\Passwords\Helper\Favicon\DefaultHelper as DefaultFaviconHelper;
-use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
-use OCA\Passwords\Helper\Favicon\GoogleHelper;
-use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
-use OCA\Passwords\Helper\Image\GdHelper;
-use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
-use OCA\Passwords\Helper\PageShot\DefaultHelper as DefaultPageShotHelper;
-use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
-use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\HbipOnlineHelper;
-use OCA\Passwords\Helper\SecurityCheck\LocalSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCP\AppFramework\IAppContainer;
 
 /**
  * Class HelperService
@@ -54,26 +39,39 @@ class HelperService {
     const WORDS_LOCAL  = 'local';
     const WORDS_SNAKES = 'wo4snakes';
 
-    const SECURITY_LOCAL = 'local';
-    const SECURITY_HBIP_ONLINE = 'hbip';
+    const SECURITY_LOCAL        = 'local';
+    const SECURITY_HBIP_ONLINE  = 'hbip';
     const SECURITY_HBIP_OFFLINE = 'hbip_offline';
 
     const IMAGES_IMAGICK = 'imagick';
     const IMAGES_GDLIB   = 'gdlib';
+
     /**
      * @var FileCacheService
      */
-    private $fileCacheService;
+    protected $fileCacheService;
+
+    /**
+     * @var IAppContainer
+     */
+    protected $container;
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
 
     /**
      * FaviconService constructor.
      *
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
+     * @param IAppContainer        $container
      */
-    public function __construct(ConfigurationService $config, FileCacheService $fileCacheService) {
+    public function __construct(ConfigurationService $config, FileCacheService $fileCacheService, IAppContainer $container) {
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
+        $this->container        = $container;
     }
 
     /**
@@ -83,58 +81,54 @@ class HelperService {
         $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
 
         if($service == self::IMAGES_IMAGICK && class_exists(Imagick::class) || class_exists(Gmagick::class)) {
-            return new ImagickHelper();
+            return $this->container->query('ImagickHelper');
         }
 
-        return new GdHelper();
+        return $this->container->query('GdHelper');
     }
 
     /**
      * @return AbstractPageShotHelper
      */
     public function getPageShotHelper(): AbstractPageShotHelper {
-        $service          = $this->config->getAppValue('service/pageshot', self::PAGESHOT_WKHTML);
-        $fileCacheService = clone $this->fileCacheService;
-        $fileCacheService->setDefaultCache($fileCacheService::PAGESHOT_CACHE);
+        $service = $this->config->getAppValue('service/pageshot', self::PAGESHOT_WKHTML);
 
         switch ($service) {
             case self::PAGESHOT_WKHTML:
-                return new WkhtmlImageHelper($fileCacheService);
+                return $this->container->query('WkhtmlImageHelper');
             case self::PAGESHOT_SCREEN_SHOT_API:
-                return new ScreenShotApiHelper($fileCacheService, $this->config);
+                return $this->container->query('ScreenShotApiHelper');
             case self::PAGESHOT_SCREEN_SHOT_LAYER:
-                return new ScreenShotLayerHelper($fileCacheService, $this->config);
+                return $this->container->query('ScreenShotLayerHelper');
             case self::PAGESHOT_SCREEN_SHOT_MACHINE:
-                return new ScreenShotMachineHelper($fileCacheService, $this->config);
+                return $this->container->query('ScreenShotMachineHelper');
             case self::PAGESHOT_DEFAULT:
-                return new DefaultPageShotHelper($fileCacheService);
+                return $this->container->query('DefaultPageShotHelper');
         }
 
-        return new DefaultPageShotHelper($fileCacheService);
+        return $this->container->query('DefaultPageShotHelper');
     }
 
     /**
      * @return AbstractFaviconHelper
      */
     public function getFaviconHelper(): AbstractFaviconHelper {
-        $service          = $this->config->getAppValue('service/favicon', self::FAVICON_LOCAL);
-        $fileCacheService = clone $this->fileCacheService;
-        $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
+        $service = $this->config->getAppValue('service/favicon', self::FAVICON_LOCAL);
 
         switch ($service) {
             case self::FAVICON_BETTER_IDEA:
-                return new BetterIdeaHelper($fileCacheService);
+                return $this->container->query('BetterIdeaHelper');
             case self::FAVICON_DUCK_DUCK_GO:
-                return new DuckDuckGoHelper($fileCacheService);
+                return $this->container->query('DuckDuckGoHelper');
             case self::FAVICON_GOOGLE:
-                return new GoogleHelper($fileCacheService);
+                return $this->container->query('GoogleFaviconHelper');
             case self::FAVICON_LOCAL:
-                return new LocalFaviconHelper($fileCacheService, $this->getImageHelper());
+                return $this->container->query('LocalFaviconHelper');
             case self::FAVICON_DEFAULT:
-                return new DefaultFaviconHelper($fileCacheService);
+                return $this->container->query('DefaultFaviconHelper');
         }
 
-        return new DefaultFaviconHelper($fileCacheService);
+        return $this->container->query('DefaultFaviconHelper');
     }
 
     /**
@@ -146,12 +140,12 @@ class HelperService {
 
         switch ($service) {
             case self::WORDS_LOCAL:
-                return new LocalWordsHelper();
+                return $this->container->query('LocalWordsHelper');
             case self::WORDS_SNAKES:
-                return new SnakesWordsHelper();
+                return $this->container->query('SnakesWordsHelper');
         }
 
-        return new SnakesWordsHelper();
+        return $this->container->query('SnakesWordsHelper');
     }
 
     /**
@@ -163,11 +157,11 @@ class HelperService {
 
         switch ($service) {
             case self::SECURITY_HBIP_ONLINE:
-                return new HbipOnlineHelper();
+                return $this->container->query('HbipOnlineHelper');
             case self::SECURITY_LOCAL:
-                return new LocalSecurityCheckHelper();
+                return $this->container->query('LocalSecurityCheckHelper');
         }
 
-        return new HbipOnlineHelper();
+        return $this->container->query('HbipOnlineHelper');
     }
 }

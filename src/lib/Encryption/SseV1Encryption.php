@@ -16,7 +16,7 @@ use OCA\Passwords\Db\Revision;
  *
  * @package OCA\Passwords\Encryption
  */
-class SseV1Encryption implements \OCA\Passwords\Encryption\EncryptionInterface {
+class SseV1Encryption implements EncryptionInterface {
 
     const MINIMUM_KEY_LENGTH = 512;
 

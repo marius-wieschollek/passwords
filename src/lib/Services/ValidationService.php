@@ -31,10 +31,10 @@ class ValidationService {
         }
 
         if(empty($revision->getSseType())) {
-            $revision->setSseType(\OCA\Passwords\Services\EncryptionService::DEFAULT_SSE_ENCRYPTION);
+            $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if(empty($revision->getCseType())) {
-            $revision->setCseType(\OCA\Passwords\Services\EncryptionService::DEFAULT_CSE_ENCRYPTION);
+            $revision->setCseType(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         }
 
         return $revision;

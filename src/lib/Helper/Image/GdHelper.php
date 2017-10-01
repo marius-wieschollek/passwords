@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Helper\Image;
 
 use OCP\Image;
+use Throwable;
 
 /**
  * Class GdHelper
@@ -79,16 +80,22 @@ class GdHelper extends AbstractImageHelper {
      * @param $imageBlob
      *
      * @return Image
+     * @throws Throwable
      */
     public function getImageFromBlob($imageBlob) {
-        $size    = getimagesizefromstring($imageBlob);
-        $mime    = substr($size['mime'], 6);
-        $tmpFile = '/tmp/'.uniqid().'.'.$mime;
-        file_put_contents($tmpFile, $imageBlob);
+        $size     = getimagesizefromstring($imageBlob);
+        $mime     = substr($size['mime'], 6);
+        $tempFile = $this->config->getTempDir().uniqid().'.'.$mime;
 
-        $image = $this->getNewImageObject();
-        $image->load($tmpFile);
-        unlink($tmpFile);
+        try {
+            file_put_contents($tempFile, $imageBlob);
+            $image = $this->getNewImageObject();
+            $image->load($tempFile);
+            unlink($tempFile);
+        } catch (Throwable $e) {
+            if(is_file($tempFile)) @unlink($tempFile);
+            throw $e;
+        }
 
         return $image;
     }
@@ -108,12 +115,19 @@ class GdHelper extends AbstractImageHelper {
      * @param Image $image
      *
      * @return string
+     * @throws Throwable
      */
     public function exportJpeg($image) {
-        $tmpFile = '/tmp/'.uniqid();
-        $image->save($tmpFile, 'image/jpeg');
-        $content = file_get_contents($tmpFile);
-        unlink($tmpFile);
+        $tempFile = $this->config->getTempDir().uniqid();
+
+        try {
+            $image->save($tempFile, 'image/jpeg');
+            $content = file_get_contents($tempFile);
+            unlink($tempFile);
+        } catch (Throwable $e) {
+            if(is_file($tempFile)) @unlink($tempFile);
+            throw $e;
+        }
 
         return $content;
     }
@@ -122,12 +136,19 @@ class GdHelper extends AbstractImageHelper {
      * @param Image $image
      *
      * @return string
+     * @throws Throwable
      */
     public function exportPng($image) {
-        $tmpFile = '/tmp/'.uniqid();
-        $image->save($tmpFile, 'image/png');
-        $content = file_get_contents($tmpFile);
-        unlink($tmpFile);
+        $tempFile = $this->config->getTempDir().uniqid();
+
+        try {
+            $image->save($tempFile, 'image/png');
+            $content = file_get_contents($tempFile);
+            unlink($tempFile);
+        } catch (Throwable $e) {
+            if(is_file($tempFile)) @unlink($tempFile);
+            throw $e;
+        }
 
         return $content;
     }

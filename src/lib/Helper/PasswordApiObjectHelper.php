@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper;
 
+use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Services\RevisionService;
 
@@ -41,7 +42,7 @@ class PasswordApiObjectHelper {
      * @param string   $level
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getPasswordInformation(Password $password, string $level = self::LEVEL_DEFAULT) {
         switch ($level) {
@@ -50,7 +51,7 @@ class PasswordApiObjectHelper {
                 break;
         }
 
-        throw new \Exception('Invalid information detail level');
+        throw new Exception('Invalid information detail level');
     }
 
     /**
