@@ -75,7 +75,7 @@ class FileDownloadHelper extends RequestHelper {
         $retries = 0;
         while ($retries < $maxRetries) {
             if($this->send()) return true;
-            if($this->retryTimeout) usleep($this->retryTimeout * 1000);
+            if($this->retryTimeout) sleep($this->retryTimeout);
             $retries++;
         }
 

@@ -45,7 +45,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      */
     protected function getHttpRequest(string $url) {
         $request = $this->getAuthorizedRequest($url);
-        $request->setJson($this->getServiceOptions());
+        $request->setJsonData($this->getServiceOptions());
 
         $image = json_decode($request->sendWithRetry(), true);
         if($image['status'] !== 'accepted' && $image['status'] !== 'ready') {
@@ -82,7 +82,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
     protected function getAuthorizedRequest(string $url): RequestHelper {
         $request = new RequestHelper($url);
 
-        return $request->setHeader($this->getServiceAuth())->setAcceptResponseCodes([]);
+        return $request->setHeaderData($this->getServiceAuth())->setAcceptResponseCodes([]);
     }
 
     /**

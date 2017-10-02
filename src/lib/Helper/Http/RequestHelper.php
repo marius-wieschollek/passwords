@@ -26,17 +26,22 @@ class RequestHelper {
     /**
      * @var array
      */
-    protected $post;
+    protected $postData;
 
     /**
      * @var array
      */
-    protected $header;
+    protected $headerData;
 
     /**
      * @var array
      */
-    protected $json;
+    protected $jsonData;
+
+    /**
+     * @var string
+     */
+    protected $cookieJar;
 
     /**
      * @var string
@@ -62,6 +67,16 @@ class RequestHelper {
      * @var string
      */
     protected $response;
+
+    /**
+     * @var
+     */
+    protected $responseBody;
+
+    /**
+     * @var
+     */
+    protected $responseHeader;
 
     /**
      * RequestHelper constructor.
@@ -90,8 +105,8 @@ class RequestHelper {
      *
      * @return RequestHelper
      */
-    public function setPost(array $post): RequestHelper {
-        $this->post = $post;
+    public function setPostData(array $post): RequestHelper {
+        $this->postData = $post;
 
         return $this;
     }
@@ -101,8 +116,8 @@ class RequestHelper {
      *
      * @return RequestHelper
      */
-    public function setHeader(array $header): RequestHelper {
-        $this->header = $header;
+    public function setHeaderData(array $header): RequestHelper {
+        $this->headerData = $header;
 
         return $this;
     }
@@ -112,8 +127,8 @@ class RequestHelper {
      *
      * @return RequestHelper
      */
-    public function setJson(array $json): RequestHelper {
-        $this->json = $json;
+    public function setJsonData(array $json): RequestHelper {
+        $this->jsonData = $json;
 
         return $this;
     }
@@ -152,6 +167,17 @@ class RequestHelper {
     }
 
     /**
+     * @param string $cookieJar
+     *
+     * @return RequestHelper
+     */
+    public function setCookieJar(string $cookieJar): RequestHelper {
+        $this->cookieJar = $cookieJar;
+
+        return $this;
+    }
+
+    /**
      * @param string|null $url
      *
      * @return bool|mixed
@@ -160,16 +186,21 @@ class RequestHelper {
         $ch = $this->prepareCurlRequest($url);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, true);
 
         $this->response = curl_exec($ch);
         $this->info     = curl_getinfo($ch);
         curl_close($ch);
 
+        $header_size        = $this->info['header_size'];
+        $this->responseHeader   = substr($this->response, 0, $header_size);
+        $this->responseBody = substr($this->response, $header_size);
+
         if(!empty($this->acceptResponseCodes)) {
             if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) return false;
         }
 
-        return $this->response;
+        return $this->responseBody;
     }
 
     /**
@@ -183,7 +214,7 @@ class RequestHelper {
             $result = $this->send();
 
             if($result !== false) return $result;
-            if($this->retryTimeout) usleep($this->retryTimeout * 1000);
+            if($this->retryTimeout) sleep($this->retryTimeout);
             $retries++;
         }
 
@@ -207,6 +238,20 @@ class RequestHelper {
     }
 
     /**
+     * @return mixed
+     */
+    public function getResponseHeader() {
+        return $this->responseHeader;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponseBody() {
+        return $this->responseBody;
+    }
+
+    /**
      * @param string $url
      *
      * @return resource
@@ -220,27 +265,32 @@ class RequestHelper {
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_TIMEOUT, static::REQUEST_TIMEOUT);
 
-        if(!empty($this->post)) {
+        if(!empty($this->postData)) {
             curl_setopt($ch, CURLOPT_POST, 2);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->post));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->postData));
         }
 
-        if(!empty($this->json)) {
-            $json = json_encode($this->json);
+        if(!empty($this->jsonData)) {
+            $json = json_encode($this->jsonData);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-            $this->header['Content-Type']   = 'application/json';
-            $this->header['Content-Length'] = strlen($json);
+            $this->headerData['Content-Type']   = 'application/json';
+            $this->headerData['Content-Length'] = strlen($json);
         }
 
-        if(!empty($this->header)) {
+        if(!empty($this->headerData)) {
             $header = [];
 
-            foreach ($this->header as $key => $value) {
+            foreach ($this->headerData as $key => $value) {
                 $header[] = "{$key}: {$value}";
             }
 
             curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        }
+
+        if($this->cookieJar) {
+            curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookieJar);
+            curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookieJar);
         }
 
         return $ch;

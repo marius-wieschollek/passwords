@@ -46,7 +46,7 @@ abstract class AbstractWordsHelper {
         $request->setUrl($url);
 
         if(!empty($options)) {
-            $request->setPost($options);
+            $request->setPostData($options);
         }
 
         return $request->sendWithRetry();
