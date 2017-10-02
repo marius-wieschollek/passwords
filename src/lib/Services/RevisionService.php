@@ -120,28 +120,32 @@ class RevisionService {
      * @param string $url
      * @param string $notes
      * @param bool   $hidden
+     * @param bool   $trashed
+     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return Revision
      */
     public function createRevision(
         int $passwordId,
-        string $login,
         string $password,
-        string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
-        string $hash = '',
-        string $title = '',
-        string $url = '',
-        string $notes = '',
-        bool $hidden = false,
-        bool $favourite = false
+        string $login,
+        string $cseType,
+        string $sseType,
+        string $hash,
+        string $title,
+        string $url,
+        string $notes,
+        bool $hidden,
+        bool $trashed,
+        bool $deleted,
+        bool $favourite
     ): Revision {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
         $revisionModel = $this->createRevisionModel(
-            $passwordId, $login, $password, $cseType, $sseType, $hash, $title, $url, $hidden, $notes, $favourite
-        );
+            $passwordId, $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed, $deleted,
+            $favourite);
 
         $revisionModel = $this->validationService->validateRevision($revisionModel);
 
@@ -170,6 +174,27 @@ class RevisionService {
     }
 
     /**
+     * @param Revision $revision
+     *
+     * @return Revision
+     */
+    public function cloneRevision(Revision $revision): Revision {
+        $clone = new Revision();
+        $fields = array_keys($clone->getFieldTypes());
+
+        foreach ($fields as $field) {
+            if($field == 'id' || $field == 'uuid') continue;
+            $clone->setProperty($field, $revision->getProperty($field));
+        }
+
+        $clone->setUuid($this->revisionMapper->generateUuidV4());
+        $clone->setCreated(time());
+        $clone->setUpdated(time());
+
+        return $clone;
+    }
+
+    /**
      * @param int    $passwordId
      * @param string $login
      * @param string $password
@@ -178,23 +203,27 @@ class RevisionService {
      * @param string $hash
      * @param string $title
      * @param string $url
-     * @param int    $hidden
      * @param string $notes
+     * @param bool   $hidden
+     * @param bool   $trashed
+     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return Revision
      */
     protected function createRevisionModel(
         int $passwordId,
-        string $login,
         string $password,
+        string $login,
         string $cseType,
         string $sseType,
         string $hash,
         string $title,
         string $url,
-        int $hidden,
         string $notes,
+        bool $hidden,
+        bool $trashed,
+        bool $deleted,
         bool $favourite
     ): Revision {
 
@@ -213,6 +242,8 @@ class RevisionService {
         $model->setCseType($cseType);
         $model->setSseType($sseType);
         $model->setHidden($hidden);
+        $model->setDeleted($deleted);
+        $model->setTrashed($trashed);
         $model->setHash($hash);
         $model->setTitle($title);
         $model->setUrl($url);

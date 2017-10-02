@@ -1,5 +1,6 @@
 ## Set up the local environment
 #### Requirements
+* NPM
 * Docker
 * Docker Compose
 

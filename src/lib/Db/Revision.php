@@ -19,6 +19,8 @@ use JsonSerializable;
  * @method void setDeleted(bool $deleted)
  * @method bool getHidden()
  * @method void setHidden(bool $hidden)
+ * @method bool getTrashed()
+ * @method void setTrashed(bool $trashed)
  * @method string getUser()
  * @method void setUser(string $user)
  * @method string getUuid()
@@ -121,6 +123,12 @@ class Revision extends AbstractEntity implements JsonSerializable {
      */
     protected $hidden;
 
+
+    /**
+     * @var bool
+     */
+    protected $trashed;
+
     /**
      * @var bool
      */
@@ -164,6 +172,7 @@ class Revision extends AbstractEntity implements JsonSerializable {
 
         $this->addType('hidden', 'boolean');
         $this->addType('deleted', 'boolean');
+        $this->addType('trashed', 'boolean');
         $this->addType('favourite', 'boolean');
 
         $this->addType('status', 'integer');
@@ -184,6 +193,13 @@ class Revision extends AbstractEntity implements JsonSerializable {
      */
     public function isDeleted(): bool {
         return $this->getDeleted();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTrashed(): bool {
+        return $this->getTrashed();
     }
 
     /**
@@ -216,6 +232,7 @@ class Revision extends AbstractEntity implements JsonSerializable {
             'password'   => $this->getPassword(),
             'hidden'     => $this->isHidden(),
             'deleted'    => $this->isDeleted(),
+            'trashed'    => $this->isTrashed(),
             'favourite'  => $this->isFavourite(),
             'status'     => $this->getStatus(),
             'passwordId' => $this->getPasswordId(),

@@ -62,7 +62,7 @@ abstract class AbstractMapper extends Mapper {
     public function findById(int $id): AbstractEntity {
         list($sql, $params) = $this->getStatement();
 
-        $sql .= ' AND `id` = ?';
+        $sql      .= ' AND `id` = ?';
         $params[] = $id;
 
         return $this->findEntity($sql, $params);
@@ -76,7 +76,7 @@ abstract class AbstractMapper extends Mapper {
     public function findByUuid(string $uuid): AbstractEntity {
         list($sql, $params) = $this->getStatement();
 
-        $sql .= ' AND `uuid` = ?';
+        $sql      .= ' AND `uuid` = ?';
         $params[] = $uuid;
 
         return $this->findEntity($sql, $params);
@@ -130,7 +130,9 @@ abstract class AbstractMapper extends Mapper {
             if(!isset($criteria[3]) || !in_array($criteria[3], $this->logicalOperators)) $criteria[3] = 'AND';
 
             list($field, $value, $operator, $concat) = $criteria;
-            if(!in_array($field, $this->allowedFields)) continue;
+            if(!in_array($field, $this->allowedFields)) {
+                throw new \Exception('Illegal field `'.static::TABLE_NAME.'`.`'.$field.'` in database request');
+            }
 
             $sql      .= ' '.$concat.' `'.$field.'` '.$operator.' ? ';
             $params[] = $value;

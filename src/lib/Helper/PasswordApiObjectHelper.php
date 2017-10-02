@@ -71,12 +71,14 @@ class PasswordApiObjectHelper {
             'title'     => $revision->getTitle(),
             'login'     => $revision->getLogin(),
             'password'  => $revision->getPassword(),
-            'favourite' => $revision->getFavourite(),
             'url'       => $revision->getUrl(),
             'status'    => $revision->getStatus(),
             'hash'      => $revision->getHash(),
             'cseType'   => $revision->getCseType(),
-            'sseType'   => $revision->getSseType()
+            'sseType'   => $revision->getSseType(),
+            'hidden'    => $revision->getHidden(),
+            'trashed'   => $revision->getTrashed(),
+            'favourite' => $revision->getFavourite()
         ];
     }
 }

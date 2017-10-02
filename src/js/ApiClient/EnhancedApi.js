@@ -106,7 +106,7 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async updatePassword(data = {}) {
-        if(!data.id) return this.createPassword(data);
+        if (!data.id) return this.createPassword(data);
 
         try {
             data = EnhancedApi.validatePassword(data);
@@ -185,10 +185,10 @@ export default class EnhancedApi extends SimpleApi {
     _processPasswordList(data) {
         let passwords = {};
 
-        for(let i=0; i<data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             let password = data[i];
 
-            if(password.url) {
+            if (password.url) {
                 let host = SimpleApi.parseUrl(password.url, 'host');
                 password.icon = this.getFaviconUrl(host);
                 password.image = this.getPreviewUrl(host);
@@ -209,9 +209,9 @@ export default class EnhancedApi extends SimpleApi {
      */
     static getPasswordDefinition() {
         return {
-            id    : {
-                type    : 'string',
-                length  : 36
+            id       : {
+                type  : 'string',
+                length: 36
             },
             login    : {
                 type    : 'string',
@@ -249,6 +249,14 @@ export default class EnhancedApi extends SimpleApi {
                 default: null
             },
             hidden   : {
+                type   : 'boolean',
+                default: false
+            },
+            deleted  : {
+                type   : 'boolean',
+                default: false
+            },
+            trashed  : {
                 type   : 'boolean',
                 default: false
             },

@@ -78,7 +78,11 @@ class PasswordApiController extends AbstractApiController {
         $results   = [];
 
         foreach ($passwords as $password) {
-            $results[] = $this->passwordApiObjectHelper->getPasswordInformation($password, $level);
+            $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $level);
+
+            if(!$object['hidden']) {
+                $results[] = $object;
+            }
         }
 
         return $this->createResponse(
@@ -106,8 +110,8 @@ class PasswordApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function create(
-        string $login,
         string $password,
+        string $login,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         string $hash = '',
@@ -122,7 +126,7 @@ class PasswordApiController extends AbstractApiController {
 
         try {
             $revisionModel = $this->revisionService->createRevision(
-                0, $login, $password, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $favourite
+                0, $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, false, false, $favourite
             );
 
             $passwordModel = $this->passwordService->createPassword();
@@ -155,6 +159,8 @@ class PasswordApiController extends AbstractApiController {
      * @param string $url
      * @param string $notes
      * @param bool   $hidden
+     * @param bool   $trashed
+     * @param bool   $deleted
      * @param bool   $favourite
      * @param array  $folders
      * @param array  $tags
@@ -163,8 +169,8 @@ class PasswordApiController extends AbstractApiController {
      */
     public function update(
         string $id,
-        string $login,
         string $password,
+        string $login,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         string $hash = '',
@@ -172,6 +178,8 @@ class PasswordApiController extends AbstractApiController {
         string $url = '',
         string $notes = '',
         bool $hidden = false,
+        bool $trashed = false,
+        bool $deleted = false,
         bool $favourite = false,
         array $folders = [],
         array $tags = []
@@ -181,9 +189,10 @@ class PasswordApiController extends AbstractApiController {
             $passwordModel = $this->passwordService->getPasswordByUuid($id);
 
             $revisionModel = $this->revisionService->createRevision(
-                $passwordModel->getId(), $login, $password, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $favourite
+                $passwordModel->getId(), $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed, $deleted, $favourite
             );
-            $revisionModel = $this->revisionService->saveRevision($revisionModel);
+
+            $this->revisionService->saveRevision($revisionModel);
             $this->passwordService->setPasswordRevision($passwordModel, $revisionModel);
         } catch (\Throwable $e) {
 
@@ -192,6 +201,36 @@ class PasswordApiController extends AbstractApiController {
 
         return $this->createResponse(
             ['password' => $passwordModel->getUuid(), 'revision' => $revisionModel->getUuid()], 200
+        );
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return JSONResponse
+     */
+    public function delete(string $id): JSONResponse {
+        try {
+            $passwordModel = $this->passwordService->getPasswordByUuid($id);
+            $oldRevision = $this->revisionService->getCurrentRevision($passwordModel);
+            $newRevision = $this->revisionService->cloneRevision($oldRevision);
+
+            if(!$newRevision->isTrashed()) {
+                $newRevision->setTrashed(true);
+            } else {
+                $newRevision->setDeleted(true);
+                $passwordModel->setDeleted(true);
+            }
+
+            $this->revisionService->saveRevision($newRevision);
+            $this->passwordService->setPasswordRevision($passwordModel, $newRevision);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
+        }
+
+        return $this->createResponse(
+            ['password' => $passwordModel->getUuid(), 'revision' => $newRevision->getUuid()], 200
         );
     }
 }

@@ -1,5 +1,5 @@
 <template id="passwords-template-password-line">
-    <div class="row password" @click="singleClickAction($event)" @dblclick="doubleClickAction()">
+    <div class="row password" @click="singleClickAction($event)" @dblclick="doubleClickAction()" :data-password-id="password.id">
         <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
         <span class="title">{{ password.title }}</span>
