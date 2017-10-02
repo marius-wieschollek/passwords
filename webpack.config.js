@@ -10,12 +10,13 @@ module.exports = {
         filename: "./src/js/Static/passwords.js"
     },
     resolve: {
+        modules   : ['node_modules', 'src'],
         extensions: ['.js', '.vue', '.json'],
         alias     : {
             'vue$': 'vue/dist/vue.esm.js',
             '@'   : path.join(__dirname, 'src'),
             '@js' : path.join(__dirname, 'src/js'),
-            '@vc' : path.join(__dirname, 'src/js/Components'),
+            '@vc' : path.join(__dirname, 'src/js/Components')
         }
     },
     module : {
@@ -45,11 +46,20 @@ module.exports = {
                         )
                     }
                 }
+            },
+            {
+                test   : /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                loader : 'url-loader',
+                options: {
+                    limit: 2048,
+                    outputPath: 'src/css/Static/css/',
+                    useRelativePath: true
+                }
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin('./src/css/Static/passwords.css'),
+        new ExtractTextPlugin('./src/css/Static/css/passwords.css'),
         new OptimizeCSSPlugin(
             {
                 cssProcessorOptions: {

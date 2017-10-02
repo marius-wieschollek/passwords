@@ -10,6 +10,7 @@ _Looking for the old app? [Klick here](https://github.com/marius-wieschollek/pas
 * [API](#api)
 * [Installation](#installation)
 * [Development](#development)
+* [Licenses](Licenses.md)
 
 ## Features
 #### Easy to use web interface
@@ -20,12 +21,12 @@ Keep your password collection manageable with folders and tags.
 The integrated password generator follows the new [NIST Digital Identity Guidelines](https://pages.nist.gov/800-63-3/).
 It generates long passwords which are easy to remember, yet long and secure.
 Say goodbye to pseudo random letters and numbers, random password requirements and contra productive expiration guidelines without reason.
-Why? Because it is easier for you to remember that your twitter account unlocks with a "furiousToothbrush" than "fAu*j,4?rQ:25(#c".
+Why? Because it is easier for you to remember that your twitter account unlocks with a "FuriousToothbrush" than "fAu*j,4?rQ:25(#c".
 Of course we know that most websites still require numbers and special characters, sou we will help you with that as well.
 
 #### Integrated security check
-**Soon to come:** Passwords can check automatically if your accounts or passwords have been compromised.
-You can get convenient e-mail updates when the security status of a password has changed.
+Passwords can check automatically if your accounts or passwords have been compromised.
+**Soon to come:** You can get convenient e-mail updates when the security status of a password has changed.
 **Soon to come:** You can also define custom password rules to make sure all your passwords live up to your expectations.
 
 #### Legacy API and APP Migration support
@@ -76,3 +77,6 @@ Passwords offers complete API, giving you access to all features of the app.
 ## Development
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
 * **Soon to come:** Do you want do want to use the API? Read the [docs](https://github.com/marius-wieschollek/passwords/wiki).
+
+## Licenses
+See [Licenses.md](Licenses.md)

@@ -57,7 +57,7 @@
 
 <script>
     import PasswordsFoldout from '@vc/Foldout.vue';
-    import SimpleMDE from '@js/Libraries/simplemde.min';
+    import SimpleMDE from 'simplemde';
     import PwEvents  from '@js/Classes/Events';
     import PwMessages  from '@js/Classes/Messages';
     import API from "@js/Helper/api";
@@ -141,6 +141,7 @@
 </script>
 
 <style lang="scss">
+    @import "~simplemde/dist/simplemde.min.css";
 
     #app-popup {
         .background {

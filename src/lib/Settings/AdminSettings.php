@@ -151,12 +151,12 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::FAVICON_BETTER_IDEA,
-                'label'   => $this->localisation->t('icons.better-idea.org (recommended)'),
+                'label'   => $this->localisation->t('The Favicon Finder (recommended)'),
                 'current' => $current === HelperService::FAVICON_BETTER_IDEA
             ],
             [
                 'id'      => HelperService::FAVICON_DUCK_DUCK_GO,
-                'label'   => $this->localisation->t('duckduckgo.com'),
+                'label'   => $this->localisation->t('DuckDuckGo'),
                 'current' => $current === HelperService::FAVICON_DUCK_DUCK_GO
             ],
             [

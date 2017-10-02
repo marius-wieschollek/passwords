@@ -1,4 +1,6 @@
 import Vue from 'vue';
-import App from '@js/App.vue'
+import App from '@js/App.vue';
 
-$(window).on('load', function() { new Vue(App) });
+$(window).on('load', function() {
+    new Vue(App);
+});

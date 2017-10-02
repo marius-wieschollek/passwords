@@ -3,8 +3,10 @@
 
 # CSS files
 src/css/*.map
-src/js/Static/passwords.js
-src/css/Static/passwords.css
+src/css/Static/
+
+# JS files
+src/js/Static/
 
 # Other files
 src/bin
