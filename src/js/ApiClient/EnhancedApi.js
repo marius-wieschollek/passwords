@@ -52,7 +52,9 @@ export default class EnhancedApi extends SimpleApi {
             }
 
             if (definition.type && definition.type !== type && (definition.type !== 'array' || !Array.isArray(attribute))) {
-                if (!strict && definition.hasOwnProperty('default')) {
+                if (!strict && definition.type === 'boolean') {
+                    attribute = Boolean(attribute);
+                } else if (!strict && definition.hasOwnProperty('default')) {
                     attribute = definition.default;
                 } else if (strict || definition.required) {
                     throw "Property " + property + " has invalid type " + type;
@@ -239,7 +241,7 @@ export default class EnhancedApi extends SimpleApi {
             cseType  : {
                 type   : 'string',
                 length : 10,
-                default: null
+                default: 'none'
             },
             sseType  : {
                 type   : 'string',

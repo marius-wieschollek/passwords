@@ -11,6 +11,7 @@ namespace OCA\Passwords\Services;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Revision;
 use OCA\Passwords\Db\RevisionMapper;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCP\IUser;
 
 /**
@@ -41,23 +42,31 @@ class RevisionService {
     protected $revisionMapper;
 
     /**
+     * @var AbstractSecurityCheckHelper
+     */
+    protected $securityCheck;
+
+    /**
      * PasswordService constructor.
      *
-     * @param IUser             $user
-     * @param ValidationService $validationService
-     * @param EncryptionService $encryptionService
-     * @param RevisionMapper    $revisionMapper
+     * @param IUser                       $user
+     * @param ValidationService           $validationService
+     * @param EncryptionService           $encryptionService
+     * @param RevisionMapper              $revisionMapper
+     * @param AbstractSecurityCheckHelper $securityCheck
      */
     public function __construct(
         IUser $user,
         ValidationService $validationService,
         EncryptionService $encryptionService,
-        RevisionMapper $revisionMapper
+        RevisionMapper $revisionMapper,
+        AbstractSecurityCheckHelper $securityCheck
     ) {
         $this->user              = $user;
         $this->validationService = $validationService;
         $this->encryptionService = $encryptionService;
         $this->revisionMapper    = $revisionMapper;
+        $this->securityCheck     = $securityCheck;
     }
 
     /**
@@ -146,6 +155,10 @@ class RevisionService {
      */
     public function saveRevision(Revision $revision): Revision {
         $revision = $this->encryptionService->encryptRevision($revision);
+
+        if($revision->getStatus() == 0) {
+            $revision->setStatus($this->securityCheck->getRevisionSecurityLevel($revision));
+        }
 
         if(empty($revision->getId())) {
             return $this->revisionMapper->insert($revision);

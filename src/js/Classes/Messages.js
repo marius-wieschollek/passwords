@@ -5,7 +5,7 @@ class Messages {
      * @param notification
      */
     notification(notification) {
-        let $element = OC.Notification.show(notification);
+        let $element = OC.Notification.show(this._translate(notification));
 
         setTimeout(function () {
             OC.Notification.hide($element);
@@ -18,9 +18,9 @@ class Messages {
      * @param title
      * @returns {Promise}
      */
-    alert(message, title = 'Message') {
+    alert(message, title = 'Alert') {
         return new Promise((resolve, reject) => {
-            OC.dialogs.alert(message, title, function (success) {
+            OC.dialogs.alert(this._translate(message), this._translate(title), function (success) {
                 if (success) {resolve();}
                 else {reject();}
             });
@@ -33,9 +33,9 @@ class Messages {
      * @param title
      * @returns {Promise}
      */
-    info(message, title = 'Message') {
+    info(message, title = 'Info') {
         return new Promise((resolve, reject) => {
-            OC.dialogs.info(message, title, function (success) {
+            OC.dialogs.info(this._translate(message), this._translate(title), function (success) {
                 if (success) {resolve();}
                 else {reject();}
             });
@@ -47,13 +47,20 @@ class Messages {
      * @param message
      * @param title
      */
-    confirm(message, title = 'Message') {
+    confirm(message, title = 'Confirm') {
         return new Promise((resolve, reject) => {
-            OC.dialogs.confirm(message, title, function (success) {
+            OC.dialogs.confirm(this._translate(message), this._translate(title), function (success) {
                 if (success) {resolve();}
                 else {reject();}
             });
         });
+    }
+
+    _translate(text) {
+        if(Array.isArray(text)) {
+            return t('passwords', text[0], text[1]);
+        }
+        return t('passwords', text);
     }
 }
 

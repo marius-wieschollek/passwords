@@ -33,7 +33,7 @@
                         <passwords-foldout name="extraOptions" title="More Options">
                             <div slot="content" class="form-grid">
                                 <label for="password-favourite">Favourite</label>
-                                <input id="password-favourite" name="favourite" type="checkbox">
+                                <input id="password-favourite" name="favourite" type="checkbox" value="1">
                                 <label for="password-sse">Encryption</label>
                                 <select id="password-sse" name="sse" disabled title="There is only one option right now">
                                     <option value="SSEv1r1" title="Use Simple Server Side Encryption V1" selected>SSE V1

@@ -252,7 +252,8 @@ class Application extends App {
                 $c->getServer()->getUserSession()->getUser(),
                 $c->query('ValidationService'),
                 $c->query('EncryptionService'),
-                $c->query('RevisionMapper')
+                $c->query('RevisionMapper'),
+                $c->query('HelperService')->getSecurityHelper()
             );
         });
 
@@ -374,19 +375,19 @@ class Application extends App {
     protected function registerFaviconHelper(): void {
         $container = $this->getContainer();
 
-        $container->registerService('BetterIdeaHelper', function (IAppContainer $c) {
+        $container->registerService('BetterIdeaHelper', function () {
             return new BetterIdeaHelper(
                 $this->getFileCacheService()
             );
         });
 
-        $container->registerService('DuckDuckGoHelper', function (IAppContainer $c) {
+        $container->registerService('DuckDuckGoHelper', function () {
             return new DuckDuckGoHelper(
                 $this->getFileCacheService()
             );
         });
 
-        $container->registerService('GoogleFaviconHelper', function (IAppContainer $c) {
+        $container->registerService('GoogleFaviconHelper', function () {
             return new GoogleFaviconHelper(
                 $this->getFileCacheService()
             );
@@ -399,7 +400,7 @@ class Application extends App {
             );
         });
 
-        $container->registerService('DefaultFaviconHelper', function (IAppContainer $c) {
+        $container->registerService('DefaultFaviconHelper', function () {
             return new DefaultFaviconHelper(
                 $this->getFileCacheService()
             );
@@ -418,7 +419,7 @@ class Application extends App {
             );
         });
 
-        $container->registerService('SnakesWordsHelper', function (IAppContainer $c) {
+        $container->registerService('SnakesWordsHelper', function () {
             return new SnakesWordsHelper();
         });
     }

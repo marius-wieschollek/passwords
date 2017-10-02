@@ -1,6 +1,6 @@
 <template id="passwords-template-foldout">
-    <div class="foldout-container" :data-foldout="name">
-        <div class="foldout-title" @click="toggleContent()">
+    <div v-bind:class="{ open: open }" class="foldout-container" :data-foldout="name">
+        <div class="foldout-title" @click="toggleContent()" v-bind:style="titleStyle">
             <i class="fa fa-chevron-right"></i>
             {{title}}
         </div>
@@ -17,11 +17,11 @@
 
         props: {
             name : {
-                type   : String,
+                type     : String,
                 'default': ''
             },
             title: {
-                type   : String,
+                type     : String,
                 'default': 'More Options'
             }
         },
@@ -32,23 +32,27 @@
             }
         },
 
+        computed: {
+            titleStyle() {
+                if (OCA.Theming && this.open) {
+                    return {
+                        'border-color': OCA.Theming.color
+                    };
+                }
+
+                return {};
+            }
+        },
+
         methods: {
             toggleContent: function () {
-                let $element = $('.foldout-container[data-foldout=' + this.name + ']');
-                if (OCA.Theming) {
-                    if ($element.hasClass('open')) {
-                        $element.find('.foldout-title').css('border-color', '');
-                    } else {
-                        $element.find('.foldout-title').css('border-color', OCA.Theming.color);
-                    }
-                }
-                $element.toggleClass('open');
+                this.open = !this.open;
             }
         }
     };
 </script>
 
-<style type="scss">
+<style lang="scss">
     .foldout-container {
         .foldout-title {
             cursor        : pointer;
