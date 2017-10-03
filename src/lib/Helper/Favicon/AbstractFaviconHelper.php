@@ -9,7 +9,9 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Theming\ThemingDefaults;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -30,13 +32,27 @@ abstract class AbstractFaviconHelper {
     protected $fileCacheService;
 
     /**
+     * @var AbstractImageHelper
+     */
+    protected $imageHelper;
+
+    /**
+     * @var ThemingDefaults
+     */
+    protected $themingDefaults;
+
+    /**
      * BetterIdeaHelper constructor.
      *
-     * @param FileCacheService $fileCacheService
+     * @param FileCacheService             $fileCacheService
+     * @param AbstractImageHelper          $imageHelper
+     * @param \OC_Defaults $themingDefaults
      */
-    public function __construct(FileCacheService $fileCacheService) {
+    public function __construct(FileCacheService $fileCacheService, AbstractImageHelper $imageHelper, \OC_Defaults $themingDefaults) {
         $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
         $this->fileCacheService = $fileCacheService;
+        $this->imageHelper = $imageHelper;
+        $this->themingDefaults = $themingDefaults;
     }
 
     /**
@@ -71,8 +87,7 @@ abstract class AbstractFaviconHelper {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $path    = dirname(dirname(dirname(__DIR__))).'/img/app_black.png';
-        $content = file_get_contents($path);
+        $content = $this->recolorDefaultFavicon();
 
         return $this->fileCacheService->putFile($fileName, $content);
     }
@@ -104,9 +119,24 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
+     * @return mixed
+     */
+    protected function recolorDefaultFavicon() {
+        $path  = dirname(dirname(dirname(__DIR__))).'/img/app_black.png';
+        $image = $this->imageHelper->getImageFromFile($path);
+        $image = $this->imageHelper->recolorImage($image, '#000000', $this->themingDefaults->getColorPrimary());
+
+        $content = $this->imageHelper->exportPng($image);
+        $this->imageHelper->destroyImage($image);
+
+        return $content;
+    }
+
+    /**
      * @param string $domain
      *
      * @return string
      */
     abstract protected function getFaviconUrl(string $domain): string;
+
 }

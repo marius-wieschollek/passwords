@@ -125,11 +125,27 @@ abstract class AbstractImageHelper {
     abstract public function cropImageRectangular($image);
 
     /**
+     * @param        $image
+     * @param string $from
+     * @param string $to
+     *
+     * @return mixed
+     */
+    abstract public function recolorImage($image, string $from, string $to);
+
+    /**
      * @param $imageBlob
      *
      * @return mixed
      */
     abstract public function getImageFromBlob($imageBlob);
+
+    /**
+     * @param string $file
+     *
+     * @return mixed
+     */
+    abstract public function getImageFromFile(string  $file);
 
     /**
      * @param $image

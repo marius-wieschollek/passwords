@@ -375,34 +375,43 @@ class Application extends App {
     protected function registerFaviconHelper(): void {
         $container = $this->getContainer();
 
-        $container->registerService('BetterIdeaHelper', function () {
+        $container->registerService('BetterIdeaHelper', function (IAppContainer $c) {
             return new BetterIdeaHelper(
-                $this->getFileCacheService()
+                $this->getFileCacheService(),
+                $c->query('HelperService')->getImageHelper(),
+                $c->query('OC_Defaults')
             );
         });
 
-        $container->registerService('DuckDuckGoHelper', function () {
+        $container->registerService('DuckDuckGoHelper', function (IAppContainer $c) {
             return new DuckDuckGoHelper(
-                $this->getFileCacheService()
+                $this->getFileCacheService(),
+                $c->query('HelperService')->getImageHelper(),
+                $c->query('OC_Defaults')
             );
         });
 
-        $container->registerService('GoogleFaviconHelper', function () {
+        $container->registerService('GoogleFaviconHelper', function (IAppContainer $c) {
             return new GoogleFaviconHelper(
-                $this->getFileCacheService()
+                $this->getFileCacheService(),
+                $c->query('HelperService')->getImageHelper(),
+                $c->query('OC_Defaults')
             );
         });
 
         $container->registerService('LocalFaviconHelper', function (IAppContainer $c) {
             return new LocalFaviconHelper(
                 $this->getFileCacheService(),
-                $c->query('HelperService')->getImageHelper()
+                $c->query('HelperService')->getImageHelper(),
+                $c->query('OC_Defaults')
             );
         });
 
-        $container->registerService('DefaultFaviconHelper', function () {
+        $container->registerService('DefaultFaviconHelper', function (IAppContainer $c) {
             return new DefaultFaviconHelper(
-                $this->getFileCacheService()
+                $this->getFileCacheService(),
+                $c->query('HelperService')->getImageHelper(),
+                $c->query('OC_Defaults')
             );
         });
     }

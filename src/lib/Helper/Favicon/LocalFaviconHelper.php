@@ -35,17 +35,6 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected $imageHelper;
 
     /**
-     * LocalFaviconHelper constructor.
-     *
-     * @param FileCacheService    $fileCacheService
-     * @param AbstractImageHelper $imageHelper
-     */
-    public function __construct(FileCacheService $fileCacheService, AbstractImageHelper $imageHelper) {
-        parent::__construct($fileCacheService);
-        $this->imageHelper = $imageHelper;
-    }
-
-    /**
      * @param string $domain
      *
      * @return string
@@ -81,6 +70,10 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
         }
 
         $imageData = parent::getHttpRequest($this->icoFile);
+
+        if(empty($imageData)) {
+            return $this->getDefaultFavicon()->getContent();
+        }
 
         return $this->convertIcoFile($imageData);
     }

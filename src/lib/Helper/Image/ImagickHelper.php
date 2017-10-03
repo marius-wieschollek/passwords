@@ -75,6 +75,20 @@ class ImagickHelper extends AbstractImageHelper {
     }
 
     /**
+     * @param Imagick|Gmagick $image
+     * @param string          $from
+     * @param string          $to
+     *
+     * @return Gmagick|Imagick
+     */
+    public function recolorImage($image, string $from, string $to) {
+        $fuzz = 0.05 * $image->getQuantumRange()['quantumRangeLong'];
+        $image->opaquePaintImage($from, $to, $fuzz, false);
+
+        return $image;
+    }
+
+    /**
      * @param $imageBlob
      *
      * @return Imagick|Gmagick
@@ -88,6 +102,19 @@ class ImagickHelper extends AbstractImageHelper {
 
         $image = $this->getNewImageObject();
         $image->readImageBlob($imageBlob);
+        $image->stripImage();
+
+        return $image;
+    }
+
+    /**
+     * @param string $file
+     *
+     * @return Gmagick|Imagick
+     */
+    public function getImageFromFile(string $file) {
+        $image = $this->getNewImageObject();
+        $image->readImage($file);
         $image->stripImage();
 
         return $image;
@@ -161,7 +188,6 @@ class ImagickHelper extends AbstractImageHelper {
 
             $image->destroy();
             unlink($tempFile);
-
         } catch (Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
