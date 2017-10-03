@@ -1,33 +1,38 @@
-<template id="passwords-translate">
-    <span>{{ getText }}</span>
+<template>
+    <span>
+        <i v-if="icon" :class="getIcon"></i>
+        {{ getText }}
+    </span>
 </template>
 
 <script>
-    export default {
-        template: '#passwords-translate',
+    import Utility from "@js/Classes/Utility";
 
+    export default {
         props: {
             say      : {
                 type     : String,
-                'default': ''
+                'default': null
             },
             variables: {
                 type     : Object,
                 'default': () => {}
+            },
+            icon     : {
+                type     : String,
+                'default': null
             }
         },
 
         computed: {
             getText() {
-                if (OC !== undefined) {
-                    return this.ocTranslate(this.say, this.variables)
+                if(this.$slots.default) {
+                    return Utility.translate(this.$slots.default[0].text.trim(), this.variables)
                 }
-            }
-        },
-
-        methods: {
-            ocTranslate(text, variables = {}) {
-                return OC.L10N.translate('passwords', text, variables);
+                return Utility.translate(this.say, this.variables)
+            },
+            getIcon() {
+                return 'fa fa-' + this.icon;
             }
         }
     };

@@ -1,30 +1,30 @@
-<template id="passwords-template">
+<template>
     <div id="app" class="passwords">
         <div id="app-navigation">
             <ul>
-                <router-link class="nav-icon-all" to="/show/all" active-class="active" tag="li">
-                    <passwords-translate say="All"></passwords-translate>
+                <router-link class="nav-icon-all" to="/" active-class="active" exact="true" tag="li">
+                    <translate say="All"></translate>
                 </router-link>
                 <router-link class="nav-icon-folders" to="/show/folders" active-class="active" tag="li">
-                    <passwords-translate say="Folders"></passwords-translate>
+                    <translate say="Folders"></translate>
                 </router-link>
                 <router-link class="nav-icon-recent" to="/show/recent" active-class="active" tag="li">
-                    <passwords-translate say="Recent"></passwords-translate>
+                    <translate say="Recent"></translate>
                 </router-link>
                 <router-link class="nav-icon-favourites" to="/show/favourites" active-class="active" tag="li">
-                    <passwords-translate say="Favourites"></passwords-translate>
+                    <translate say="Favourites"></translate>
                 </router-link>
                 <router-link class="nav-icon-shared" to="/show/shared" active-class="active" tag="li">
-                    <passwords-translate say="Shared"></passwords-translate>
+                    <translate say="Shared"></translate>
                 </router-link>
                 <router-link class="nav-icon-tags" to="/show/tags" active-class="active" tag="li">
-                    <passwords-translate say="Tags"></passwords-translate>
+                    <translate say="Tags"></translate>
                 </router-link>
                 <router-link class="nav-icon-security" to="/show/security" active-class="active" tag="li">
-                    <passwords-translate say="Security"></passwords-translate>
+                    <translate say="Security"></translate>
                 </router-link>
                 <router-link class="nav-icon-trash" to="/show/trash" active-class="active" tag="li">
-                    <passwords-translate say="Trash"></passwords-translate>
+                    <translate say="Trash"></translate>
                 </router-link>
             </ul>
             <div id="app-settings">
@@ -43,6 +43,21 @@
         </div>
     </div>
 </template>
+
+<script>
+    import Vue from 'vue';
+    import router from '@js/Helper/router';
+    import Translate from '@vc/Translate.vue';
+
+    export default {
+        el        : '#main',
+        router,
+        components: {
+            app: {router},
+            Translate
+        }
+    }
+</script>
 
 <style lang="scss">
     @import "~font-awesome/css/font-awesome.min.css";
@@ -116,7 +131,7 @@
 
             &:hover,
             &:active,
-            &.active{ color : $color-black;            }
+            &.active { color : $color-black; }
 
             &:before {
                 font-family   : FontAwesome, sans-serif;
@@ -136,25 +151,9 @@
             &.nav-icon-trash:before { content : "\f014"; }
 
             span {
-                cursor        : pointer;
+                cursor : pointer;
             }
         }
     }
 
 </style>
-
-<script>
-    import Vue from 'vue';
-    import router from '@js/Helper/router';
-    import Translate from '@vc/Translate.vue';
-
-    export default {
-        el        : '#main',
-        router,
-        template  : '#passwords-template',
-        components: {
-            app                  : {router},
-            'passwords-translate': Translate
-        }
-    }
-</script>

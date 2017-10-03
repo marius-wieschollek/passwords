@@ -14,15 +14,14 @@ Vue.use(Router);
 export default new Router(
     {
         routes: [
-            {path: '*', components: {main: SectionAll}},
-            {path: '/show/all', components: {main: SectionAll}},
-            {path: '/show/folders', components: {main: SectionFolders}},
-            {path: '/show/tags', components: {main: SectionTags}},
-            {path: '/show/recent', components: {main: SectionRecent}},
-            {path: '/show/favourites', components: {main: SectionFavourites}},
-            {path: '/show/shared', components: {main: SectionShared}},
-            {path: '/show/security', components: {main: SectionSecurity}},
-            {path: '/show/trash', components: {main: SectionTrash}}
+            {name:"All", path: '*', components: {main: SectionAll}},
+            {name:"Folders", path: '/show/folders', components: {main: SectionFolders}},
+            {name:"Tags", path: '/show/tags', components: {main: SectionTags}},
+            {name:"Recent", path: '/show/recent', components: {main: SectionRecent}},
+            {name:"Favourites", path: '/show/favourites', components: {main: SectionFavourites}},
+            {name:"Shared", path: '/show/shared', components: {main: SectionShared}},
+            {name:"Security", path: '/show/security', components: {main: SectionSecurity}},
+            {name:"Trash", path: '/show/trash', components: {main: SectionTrash}}
         ]
     }
 );

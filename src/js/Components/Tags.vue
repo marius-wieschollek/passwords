@@ -1,4 +1,4 @@
-<template id="passwords-template-tags">
+<template>
     <div class="tags-container">
         Tags
     </div>
@@ -6,6 +6,5 @@
 
 <script>
     export default {
-        template: '#passwords-template-tags',
     };
 </script>

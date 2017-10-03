@@ -1,4 +1,4 @@
-<template id="passwords-template-password-details">
+<template>
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
         <div class="image-container">
@@ -21,16 +21,16 @@
         </div>
         <ul>
             <li>
-                <passwords-translate say="Details"></passwords-translate>
+                <translate say="Details"></translate>
             </li>
             <li>
-                <passwords-translate say="Notes"></passwords-translate>
+                <translate say="Notes"></translate>
             </li>
             <li>
-                <passwords-translate say="Share"></passwords-translate>
+                <translate say="Share"></translate>
             </li>
             <li>
-                <passwords-translate say="Revisions"></passwords-translate>
+                <translate say="Revisions"></translate>
             </li>
         </ul>
     </div>
@@ -41,11 +41,8 @@
     import API from '@js/Helper/api';
 
     export default {
-        template: '#passwords-template-password-details',
-        name    : 'PasswordDetails',
-
         components: {
-            'passwords-translate': Translate
+            Translate
         },
 
         props: {
@@ -120,16 +117,16 @@
 <style lang="scss">
     .item-details {
         .fa.fa-times {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-            padding: 0.75rem;
-            font-size: 1.3rem;
-            color: $color-black;
+            position  : absolute;
+            top       : 5px;
+            right     : 5px;
+            cursor    : pointer;
+            padding   : 0.75rem;
+            font-size : 1.3rem;
+            color     : $color-black;
 
             &:hover {
-                text-shadow: 0 0 2px $color-white;
+                text-shadow : 0 0 2px $color-white;
             }
         }
 

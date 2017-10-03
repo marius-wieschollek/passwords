@@ -1,50 +1,61 @@
-<template id="passwords-partial-password-create">
+<template>
     <div class="background" id="passwords-create-new">
         <div class="window">
             <div class="title nc-theming-main-background nc-theming-contrast">
-                Create a new password
-                <i class="fa fa-times close" aria-hidden="true" @click="closeWindow()"></i>
+                <translate>Create a new password</translate>
+                <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
             <form class="content" v-on:submit.prevent="submitCreatePassword($event);">
                 <div class="form">
-                    <div class="section-title">General</div>
+                    <div class="section-title">
+                        <translate>General</translate>
+                    </div>
                     <div class="form-grid">
-                        <label for="password-title">Name</label>
+                        <label for="password-title">
+                            <translate>Name</translate>
+                        </label>
                         <input id="password-title" type="text" name="title" maxlength="48" value="">
-                        <label for="password-login">Username</label>
+                        <label for="password-login">
+                            <translate>Username</translate>
+                        </label>
                         <input id="password-login" type="text" name="login" maxlength="48" value="" required>
-                        <label for="password-password">Password</label>
+                        <label for="password-password">
+                            <translate>Password</translate>
+                        </label>
                         <div class="password-field">
                             <div class="icons">
-                                <i class="fa fa-eye"
-                                   aria-hidden="true"
-                                   @click="togglePasswordVisibility()"
-                                   title="Toggle visibility"></i>
-                                <i class="fa fa-refresh"
-                                   aria-hidden="true"
-                                   @click="generateRandomPassword()"
-                                   title="Generate random password"></i>
+                                <i class="fa fa-eye" @click="togglePasswordVisibility()" title="Toggle visibility"></i>
+                                <i class="fa fa-refresh" @click="generateRandomPassword()" title="Generate random password"></i>
                             </div>
                             <input id="password-password" type="password" name="password" maxlength="48" value="" required>
                         </div>
-                        <label for="password-url">Website</label>
+                        <label for="password-url">
+                            <translate>Website</translate>
+                        </label>
                         <input id="password-url" type="text" name="url" maxlength="2048" value="">
                         <!-- <passwords-tags></passwords-tags> -->
-                        <passwords-foldout name="extraOptions" title="More Options">
+                        <foldout title="More Options">
                             <div slot="content" class="form-grid">
-                                <label for="password-favourite">Favourite</label>
+                                <label for="password-favourite">
+                                    <translate>Favourite</translate>
+                                </label>
                                 <input id="password-favourite" name="favourite" type="checkbox" value="1">
-                                <label for="password-sse">Encryption</label>
+                                <label for="password-sse">
+                                    <translate>Encryption</translate>
+                                </label>
                                 <select id="password-sse" name="sse" disabled title="There is only one option right now">
-                                    <option value="SSEv1r1" title="Use Simple Server Side Encryption V1" selected>SSE V1
+                                    <option value="SSEv1r1" title="Use Simple Server Side Encryption V1" selected>
+                                        <translate>SSE V1</translate>
                                     </option>
                                 </select>
                             </div>
-                        </passwords-foldout>
+                        </foldout>
                     </div>
                 </div>
                 <div class="notes">
-                    <label for="password-notes">Notes</label>
+                    <label for="password-notes">
+                        <translate>Notes</translate>
+                    </label>
                     <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                 </div>
                 <div class="controls">
@@ -56,21 +67,23 @@
 </template>
 
 <script>
-    import PasswordsFoldout from '@vc/Foldout.vue';
+    import Foldout from '@vc/Foldout.vue';
+    import Translate from '@vc/Translate.vue';
     import SimpleMDE from 'simplemde';
-    import PwEvents  from '@js/Classes/Events';
-    import PwMessages  from '@js/Classes/Messages';
+    import Utility from '@js/Classes/Utility';
+    import PwEvents from '@js/Classes/Events';
+    import PwMessages from '@js/Classes/Messages';
     import API from "@js/Helper/api";
 
     export default {
-        template  : '#passwords-partial-password-create',
         data() {
             return {
                 showPassword: false
             }
         },
         components: {
-            'passwords-foldout': PasswordsFoldout
+            Foldout,
+            Translate
         },
         mounted() {
             let Notes = new SimpleMDE(
@@ -79,7 +92,7 @@
                     hideIcons              : ['fullscreen', 'side-by-side'],
                     autoDownloadFontAwesome: false,
                     spellChecker           : false,
-                    placeholder            : 'Make some notes',
+                    placeholder            : Utility.translate('Take some notes'),
                     status                 : false
                 });
             if (OCA.Theming) {
@@ -217,6 +230,10 @@
 
                         label {
                             padding : 0 0.9rem 5px 0;
+
+                            span {
+                                cursor : pointer;
+                            }
                         }
                     }
 

@@ -1,8 +1,7 @@
-<template id="passwords-template-foldout">
-    <div v-bind:class="{ open: open }" class="foldout-container" :data-foldout="name">
+<template>
+    <div v-bind:class="{ open: open }" class="foldout-container">
         <div class="foldout-title" @click="toggleContent()" v-bind:style="titleStyle">
-            <i class="fa fa-chevron-right"></i>
-            {{title}}
+            <translate icon="chevron-right">{{title}}</translate>
         </div>
         <div class="foldout-content">
             <slot name="content"></slot>
@@ -11,19 +10,17 @@
 </template>
 
 <script>
-    export default {
-        template: '#passwords-template-foldout',
-        name    : 'PasswordsFoldout',
+    import Translate from '@vc/Translate.vue';
 
-        props: {
-            name : {
-                type     : String,
-                'default': ''
-            },
+    export default {
+        props     : {
             title: {
                 type     : String,
                 'default': 'More Options'
             }
+        },
+        components: {
+            Translate
         },
 
         data() {
@@ -62,9 +59,14 @@
             transition    : border-color 0.25s ease-in-out;
 
             .fa-chevron-right {
+                cursor      : pointer;
                 font-size   : 0.9rem;
                 margin-left : 3px;
                 transition  : transform 0.25s ease-in-out;
+            }
+
+            span {
+                cursor : pointer;
             }
         }
 

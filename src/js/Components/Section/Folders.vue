@@ -1,8 +1,13 @@
-<template id="passwords-section-folders">
-    <div id="content">
-        <passwords-breadcrumb></passwords-breadcrumb>
-        <div class="item-list">
-            <passwords-line-password :password="password" v-for="password in passwords"></passwords-line-password>
+<template>
+    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+        <div class="app-content-left">
+            <breadcrumb :newFolder="true"></breadcrumb>
+            <div class="item-list">
+                <password-line :password="password" v-for="password in passwords" :key="password.uuid"></password-line>
+            </div>
+        </div>
+        <div class="app-content-right">
+            <password-details v-if="detail.type == 'password'" :password="detail.element"></password-details>
         </div>
     </div>
 </template>
@@ -13,11 +18,10 @@
     import PasswordDetails from '@vc/Details/Password.vue';
 
     export default {
-        template: '#passwords-section-folders',
         components: {
-            'passwords-breadcrumb': Breadcrumb,
-            'passwords-details-password': PasswordDetails,
-            'passwords-line-password': PasswordLine
+            Breadcrumb,
+            'password-details': PasswordDetails,
+            'password-line': PasswordLine
         },
         data() {
             return {
@@ -26,6 +30,11 @@
                     type   : 'none',
                     element: null
                 }
+            }
+        },
+        computed: {
+            showDetails() {
+                return this.detail.type !== 'none';
             }
         }
     };

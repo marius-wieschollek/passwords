@@ -1,5 +1,8 @@
-<template id="passwords-template-password-line">
-    <div class="row password" @click="singleClickAction($event)" @dblclick="doubleClickAction()" :data-password-id="password.id">
+<template>
+    <div class="row password"
+         @click="singleClickAction($event)"
+         @dblclick="doubleClickAction()"
+         :data-password-id="password.id">
         <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
         <span class="title">{{ password.title }}</span>
@@ -9,12 +12,23 @@
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu">
                 <ul>
-                    <li @click="detailsAction($event);"><span><i class="fa fa-info"></i> Details</span></li>
-                    <li v-if="password.url" @click="copyUrlAction()"><span><i class="fa fa-clipboard"></i> Copy Url</span></li>
-                    <li v-if="password.url"><a :href="password.url"
-                                               target="_blank"><span><i class="fa fa-link"></i> Open Url</span></a></li>
-                    <li><span><i class="fa fa-pencil"></i> Edit</span></li>
-                    <li @click="deleteAction()"><span><i class="fa fa-trash"></i> Delete</span></li>
+                    <li @click="detailsAction($event);">
+                        <translate say="Details" icon="info"></translate>
+                    </li>
+                    <li v-if="password.url" @click="copyUrlAction()">
+                        <translate say="Copy Url" icon="clipboard"></translate>
+                    </li>
+                    <li v-if="password.url">
+                        <a :href="password.url" target="_blank">
+                            <translate say="Open Url" icon="link"></translate>
+                        </a>
+                    </li>
+                    <li>
+                        <translate say="Edit" icon="pencil"></translate>
+                    </li>
+                    <li @click="deleteAction()">
+                        <translate say="Delete" icon="trash"></translate>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -22,12 +36,15 @@
 </template>
 
 <script>
-    import PwMessages  from '@js/Classes/Messages';
+    import PwMessages from '@js/Classes/Messages';
+    import Utility from "@js/Classes/Utility";
     import API from '@js/Helper/api';
+    import Translate from '@vc/Translate.vue';
 
     export default {
-        template: '#passwords-template-password-line',
-        name    : 'PasswordLine',
+        components: {
+            Translate
+        },
 
         props: {
             password: {
@@ -65,7 +82,7 @@
         methods: {
             singleClickAction($event) {
                 if ($event.detail !== 1) return;
-                copyToClipboard(this.password.password);
+                Utility.copyToClipboard(this.password.password);
 
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
                 this.clickTimeout =
@@ -74,7 +91,7 @@
             doubleClickAction() {
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
 
-                copyToClipboard(this.password.login);
+                Utility.copyToClipboard(this.password.login);
                 PwMessages.notification('Username was copied to clipboard');
             },
             favouriteAction($event) {
@@ -87,7 +104,7 @@
                 $($event.target).parents('.row.password').find('.passwordActionsMenu').toggleClass('open');
             },
             copyUrlAction() {
-                copyToClipboard(this.password.url);
+                Utility.copyToClipboard(this.password.url);
                 PwMessages.notification('Url was copied to clipboard')
             },
             detailsAction($event, section = null) {
@@ -110,3 +127,141 @@
         }
     }
 </script>
+
+
+<style lang="scss">
+
+    #app-content {
+        .item-list {
+            .row {
+                height        : 51px;
+                font-size     : 0;
+                border-bottom : 1px solid $color-grey-lighter;
+                cursor        : pointer;
+
+                .favourite {
+                    line-height : 50px;
+                    width       : 40px;
+                    text-align  : center;
+                    color       : $color-grey-light;
+                    font-size   : 1rem;
+
+                    &:hover,
+                    &.active {
+                        color : $color-yellow;
+                    }
+                }
+
+                .favicon {
+                    display         : inline-block;
+                    background      : no-repeat center;
+                    background-size : 32px;
+                    line-height     : 50px;
+                    width           : 50px;
+                    font-size       : 1rem;
+                    cursor          : pointer;
+                }
+
+                .title {
+                    font-size    : 0.8rem;
+                    padding-left : 8px;
+                    cursor       : pointer;
+                }
+
+                .more,
+                .security {
+                    float       : right;
+                    line-height : 50px;
+                    width       : 50px;
+                    font-size   : 1rem;
+                    text-align  : center;
+
+                    &.ok {
+                        color : $color-green;
+                    }
+                    &.warn {
+                        color : $color-yellow;
+                    }
+                    &.fail {
+                        color : $color-red;
+                    }
+                }
+
+                .more {
+                    position : relative;
+                    color    : $color-grey;
+
+                    > i {
+                        cursor : pointer;
+
+                        &:active,
+                        &:hover {
+                            color : $color-black;
+                        }
+                    }
+
+                    .menu {
+                        li {
+                            line-height : 40px;
+                            font-size   : 0.8rem;
+                            padding     : 0 20px 0 15px;
+                            white-space : nowrap;
+                            color       : $color-grey-dark;
+                            cursor      : pointer;
+
+                            a { color : $color-grey-dark; }
+
+                            i {
+                                margin-right : 10px;
+                                font-size    : 1rem;
+                                width        : 1rem;
+                                text-align   : center;
+                                position     : relative;
+                                bottom       : -0.03rem;
+                                cursor       : pointer;
+                            }
+
+                            span {
+                                font-weight : 300;
+                                cursor      : pointer;
+                            }
+
+                            &:active,
+                            &:hover {
+                                background-color : darken($color-white, 3);
+                                color            : $color-black;
+
+                                a { color : $color-black; }
+                            }
+                        }
+                    }
+                }
+
+                .date {
+                    float       : right;
+                    line-height : 50px;
+                    width       : 85px;
+                    font-size   : 0.8rem;
+                    padding     : 0 15px 0 5px;
+                    text-align  : right;
+                    color       : $color-grey-dark;
+                }
+
+                &:active,
+                &:hover {
+                    background-color : darken($color-white, 3);
+
+                    .favourite {
+                        color : darken($color-grey-light, 3);
+
+                        &:hover,
+                        &.active {
+                            color : $color-yellow;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+</style>

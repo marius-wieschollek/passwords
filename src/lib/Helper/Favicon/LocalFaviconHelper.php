@@ -9,7 +9,6 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
-use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 
 /**

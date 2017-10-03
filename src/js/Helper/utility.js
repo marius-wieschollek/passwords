@@ -26,19 +26,3 @@ Array.prototype.remove = function (index) {
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
-
-/**
- *
- * @param text
- */
-function copyToClipboard(text) {
-    let id = 'ctc-' + Math.random(),
-        $element = $('<textarea id="' + id + '">' + text + '</textarea>');
-
-    $('body').append($element);
-    $element.select();
-
-    document.execCommand('copy');
-
-    $element.remove();
-}

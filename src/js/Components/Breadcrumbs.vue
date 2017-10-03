@@ -1,4 +1,4 @@
-<template id="passwords-template-breadcrumb">
+<template>
     <div id="controls">
         <div class="breadcrumb">
             <div class="crumb svg ui-droppable" data-dir="/">
@@ -6,10 +6,8 @@
                     <img class="svg" src="/core/img/places/home.svg" alt="Home">
                 </a>
             </div>
-            <div class="crumb svg ui-droppable" v-for="item in items">
-                <router-link :to="item.link">
-                    {{ item.label }}
-                </router-link>
+            <div class="crumb svg ui-droppable" v-for="item in getItems">
+                <router-link :to="item.path">{{ item.label }}</router-link>
             </div>
         </div>
         <div class="actions creatable" v-if="showAddNew">
@@ -21,19 +19,19 @@
                     <li>
                         <span class="menuitem" data-action="folder" v-if="newFolder">
                             <span class="icon icon-folder svg"></span>
-                            <span class="displayname">Neuer Ordner</span>
+                            <translate class="displayname">New Folder</translate>
                         </span>
                     </li>
                     <li>
                         <span class="menuitem" data-action="tag" v-if="newTag">
                             <span class="icon icon-tag svg"></span>
-                            <span class="displayname">Neuer Tag</span>
+                            <translate class="displayname">New Tag</translate>
                         </span>
                     </li>
                     <li>
                         <span class="menuitem" data-action="file" @click="clickCreatePassword($event)">
                             <span class="icon icon-filetype-text svg"></span>
-                            <span class="displayname">Neues Passwort</span>
+                            <translate class="displayname">New Password</translate>
                         </span>
                     </li>
                 </ul>
@@ -45,17 +43,27 @@
 <script>
     import Vue from 'vue';
     import CreateDialog from '@vc/Dialog/CreatePassword.vue';
+    import Translate from '@vc/Translate.vue';
+    import Utility from '@js/Classes/Utility';
 
     export default {
-        template: '#passwords-template-breadcrumb',
         data() {
             return {
-                items: [
-                    {link: '', label: 'All'}
-                ]
+                items: []
             }
         },
+        components: {
+            Translate
+        },
 
+        computed: {
+            getItems() {
+                this.items.unshift({path: this.$route.path, label: Utility.translate(this.$route.name)});
+
+
+                return this.items;
+            }
+        },
 
         props: {
             newFolder : {

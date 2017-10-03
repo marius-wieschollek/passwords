@@ -3,5 +3,5 @@ OC.L10N.register(
     {
         "Passwords": "Passwords"
     },
-    ''
+    'nplurals=2; plural=(n != 1);'
 );
