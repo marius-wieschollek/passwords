@@ -115,7 +115,8 @@
             cursor        : pointer;
 
             &:hover,
-            &:active { color : $color-black; }
+            &:active,
+            &.active{ color : $color-black;            }
 
             &:before {
                 font-family   : FontAwesome, sans-serif;
@@ -133,6 +134,10 @@
             &.nav-icon-shared:before { content : "\f1e0"; }
             &.nav-icon-favourites:before { content : "\f005"; }
             &.nav-icon-trash:before { content : "\f014"; }
+
+            span {
+                cursor        : pointer;
+            }
         }
     }
 

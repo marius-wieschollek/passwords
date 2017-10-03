@@ -19,5 +19,14 @@
             'passwords-details-password': PasswordDetails,
             'passwords-line-password': PasswordLine
         },
+        data() {
+            return {
+                passwords: [],
+                detail   : {
+                    type   : 'none',
+                    element: null
+                }
+            }
+        }
     };
 </script>

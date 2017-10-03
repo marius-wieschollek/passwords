@@ -20,7 +20,7 @@
     import API from '@js/Helper/api';
 
     export default {
-        template: '#passwords-section-all',
+        template: '#passwords-section-trash',
         data() {
             return {
                 passwords: [],
@@ -38,12 +38,12 @@
         },
 
         created() {
-            this.openAllPasswordsPage();
-            PwEvents.on('data.changed', this.openAllPasswordsPage);
+            this.refreshView();
+            PwEvents.on('data.changed', this.refreshView);
         },
 
         beforeDestroy() {
-            PwEvents.off('data.changed', this.openAllPasswordsPage)
+            PwEvents.off('data.changed', this.refreshView)
         },
 
         computed: {
@@ -53,7 +53,7 @@
         },
 
         methods: {
-            openAllPasswordsPage: function () {
+            refreshView: function () {
                 API.listPasswords().then(this.updateContentList);
             },
 

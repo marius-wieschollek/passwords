@@ -14,10 +14,19 @@
 
     export default {
         template  : '#passwords-section-tags',
+        data() {
+            return {
+                passwords: [],
+                detail   : {
+                    type   : 'none',
+                    element: null
+                }
+            }
+        },
         components: {
             'passwords-breadcrumb'      : Breadcrumb,
             'passwords-details-password': PasswordDetails,
             'passwords-line-password'   : PasswordLine
-        },
+        }
     };
 </script>
