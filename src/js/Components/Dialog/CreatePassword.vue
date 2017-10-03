@@ -35,7 +35,7 @@
                         <input id="password-url" type="text" name="url" maxlength="2048" value="">
                         <!-- <passwords-tags></passwords-tags> -->
                         <foldout title="More Options">
-                            <div slot="content" class="form-grid">
+                            <div class="form-grid">
                                 <label for="password-favourite">
                                     <translate>Favourite</translate>
                                 </label>
@@ -67,18 +67,19 @@
 </template>
 
 <script>
-    import Foldout from '@vc/Foldout.vue';
-    import Translate from '@vc/Translate.vue';
     import SimpleMDE from 'simplemde';
-    import Utility from '@js/Classes/Utility';
-    import PwEvents from '@js/Classes/Events';
+    import Translate from '@vc/Translate.vue';
+    import Foldout from '@vc/Foldout.vue';
     import PwMessages from '@js/Classes/Messages';
+    import PwEvents from '@js/Classes/Events';
+    import Utility from '@js/Classes/Utility';
     import API from "@js/Helper/api";
 
     export default {
         data() {
             return {
-                showPassword: false
+                showPassword: false,
+                simplemde   : null,
             }
         },
         components: {
@@ -86,9 +87,9 @@
             Translate
         },
         mounted() {
-            let Notes = new SimpleMDE(
+            this.simplemde = new SimpleMDE(
                 {
-                    element                : document.getElementById("password-notes"),
+                    element                : document.getElementById('password-notes'),
                     hideIcons              : ['fullscreen', 'side-by-side'],
                     autoDownloadFontAwesome: false,
                     spellChecker           : false,
@@ -138,6 +139,7 @@
                     let entry = $data[i];
                     password[entry.name] = entry.value;
                 }
+                password.notes = this.simplemde.value();
 
                 try {
                     let response = await API.createPassword(password);

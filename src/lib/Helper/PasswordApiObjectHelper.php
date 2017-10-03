@@ -71,6 +71,7 @@ class PasswordApiObjectHelper {
             'title'     => $revision->getTitle(),
             'login'     => $revision->getLogin(),
             'password'  => $revision->getPassword(),
+            'notes'     => $revision->getNotes(),
             'url'       => $revision->getUrl(),
             'status'    => $revision->getStatus(),
             'hash'      => $revision->getHash(),

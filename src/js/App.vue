@@ -2,7 +2,7 @@
     <div id="app" class="passwords">
         <div id="app-navigation">
             <ul>
-                <router-link class="nav-icon-all" to="/" active-class="active" exact="true" tag="li">
+                <router-link class="nav-icon-all" to="/" active-class="active" :exact="true" tag="li">
                     <translate say="All"></translate>
                 </router-link>
                 <router-link class="nav-icon-folders" to="/show/folders" active-class="active" tag="li">
@@ -126,7 +126,7 @@
             padding       : 0 12px;
             white-space   : nowrap;
             text-overflow : ellipsis;
-            color         : $color-grey-dark;
+            color         : $color-grey-darker;
             cursor        : pointer;
 
             &:hover,

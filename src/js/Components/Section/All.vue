@@ -88,13 +88,14 @@
             margin-right : 27%;
 
             .app-content-right {
-                display  : block;
-                position : fixed;
-                top      : 45px;
-                right    : 0;
-                left     : auto;
-                bottom   : 0;
-                width    : 27%;
+                display    : block;
+                position   : fixed;
+                top        : 45px;
+                right      : 0;
+                left       : auto;
+                bottom     : 0;
+                width      : 27%;
+                overflow-y : auto;
             }
         }
 

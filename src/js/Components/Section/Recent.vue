@@ -57,7 +57,7 @@
             },
 
             updateContentList: function (passwords) {
-                let array = Utility.sortApiObjectArray(passwords, 'updated', true);
+                let array = Utility.sortApiObjectArray(passwords, 'updated', false);
                 this.passwords = array.slice(0,15);
             }
         }

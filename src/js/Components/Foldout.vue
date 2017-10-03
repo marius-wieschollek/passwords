@@ -4,7 +4,7 @@
             <translate icon="chevron-right">{{title}}</translate>
         </div>
         <div class="foldout-content">
-            <slot name="content"></slot>
+            <slot></slot>
         </div>
     </div>
 </template>

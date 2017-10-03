@@ -2,6 +2,7 @@
     <div class="row password"
          @click="singleClickAction($event)"
          @dblclick="doubleClickAction()"
+         v-if="password"
          :data-password-id="password.id">
         <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
@@ -118,6 +119,11 @@
                     .then(() => {
                         API.deletePassword(this.password.id)
                             .then(() => {
+                                if(this.password.trashed) {
+                                    this.password = undefined;
+                                } else {
+                                    this.password.trashed = true;
+                                }
                                 PwMessages.notification('Password was deleted');
                             }).catch(() => {
                             PwMessages.notification('Deleting password failed');
@@ -206,10 +212,10 @@
                             font-size   : 0.8rem;
                             padding     : 0 20px 0 15px;
                             white-space : nowrap;
-                            color       : $color-grey-dark;
+                            color       : $color-grey-darker;
                             cursor      : pointer;
 
-                            a { color : $color-grey-dark; }
+                            a { color : $color-grey-darker; }
 
                             i {
                                 margin-right : 10px;
@@ -244,7 +250,7 @@
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
                     text-align  : right;
-                    color       : $color-grey-dark;
+                    color       : $color-grey-darker;
                 }
 
                 &:active,
