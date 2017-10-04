@@ -37,11 +37,15 @@
                     </div>
                     <div slot="qrcode" class="password-share-qrcode">
                         <select id="password-details-qrcode" @change="changeQrCode($event)">
-                            <option value="login">Username</option>
-                            <option value="password" selected>Password</option>
-                            <option value="url">Website</option>
+                            <translate tag="option" value="login">Username</translate>
+                            <translate tag="option" value="password" selected>Password</translate>
+                            <translate tag="option" value="url">Website</translate>
                         </select>
-                        <qr-code :text="qrcode.text" :color="qrcode.color" bgColor="#ffffff" size="256" errorLevel="L"></qr-code>
+                        <qr-code :text="qrcode.text"
+                                 :color="qrcode.color"
+                                 bgColor="#ffffff"
+                                 :size="256"
+                                 errorLevel="L"></qr-code>
                     </div>
                 </tabs>
             </div>
@@ -76,7 +80,7 @@
             let qrCodeColor = OCA.Theming ? OCA.Theming.color:'#000000';
 
             return {
-                image: {
+                image : {
                     'className': '',
                     'style'    : {
                         'marginTop': 0
@@ -84,7 +88,7 @@
                 },
                 qrcode: {
                     color: qrCodeColor,
-                    text: this.password.password
+                    text : this.password.password
                 }
             }
         },
@@ -265,18 +269,28 @@
             a {
                 text-decoration : underline;
             }
+            .CodeMirror {
+                border                     : none;
+                border-bottom-left-radius  : 0;
+                border-bottom-right-radius : 0;
+
+                .editor-preview {
+                    padding    : 0;
+                    background : #fff;
+                }
+            }
         }
 
         .password-share-qrcode {
             select {
-                width: 100%;
-                margin-bottom: 15px;
+                width         : 100%;
+                margin-bottom : 15px;
             }
 
             img,
             canvas {
-                display: block;
-                margin: 0 auto;
+                display : block;
+                margin  : 0 auto;
             }
         }
     }

@@ -1,14 +1,16 @@
 <template>
     <div class="tab-container" :data-tab-uuid="uuid">
         <ul class="tab-titles">
-            <li v-for="(tab, name) in tabs"
+            <translate tag="li"
+                       v-for="(tab, name) in tabs"
+                       :key="name"
                 :data-tab="name"
                 class="tab-title"
                 :class="{ active: isCurrentTab(name) }"
                 :style="tabStyle"
                 @click="setCurrentTab(name)">
-                <translate :say="tab"></translate>
-            </li>
+                {{tab}}
+            </translate>
         </ul>
         <div class="tab-contents">
             <div v-for="(tab, name) in tabs" :data-tab="name" class="tab-content" v-bind:class="{ active: isCurrentTab(name) }">

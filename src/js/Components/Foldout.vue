@@ -1,8 +1,8 @@
 <template>
     <div v-bind:class="{ open: open }" class="foldout-container">
-        <div class="foldout-title" @click="toggleContent()" v-bind:style="titleStyle">
-            <translate icon="chevron-right">{{title}}</translate>
-        </div>
+        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" v-bind:style="titleStyle">
+            {{title}}
+        </translate>
         <div class="foldout-content">
             <slot></slot>
         </div>

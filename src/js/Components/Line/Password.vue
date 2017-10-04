@@ -13,23 +13,13 @@
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu">
                 <ul>
-                    <li @click="detailsAction($event);">
-                        <translate say="Details" icon="info"></translate>
-                    </li>
-                    <li v-if="password.url" @click="copyUrlAction()">
-                        <translate say="Copy Url" icon="clipboard"></translate>
-                    </li>
+                    <translate tag="li" @click="detailsAction($event);" icon="info">Details</translate>
+                    <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
                     <li v-if="password.url">
-                        <a :href="password.url" target="_blank">
-                            <translate say="Open Url" icon="link"></translate>
-                        </a>
+                        <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
                     </li>
-                    <li>
-                        <translate say="Edit" icon="pencil"></translate>
-                    </li>
-                    <li @click="deleteAction()">
-                        <translate say="Delete" icon="trash"></translate>
-                    </li>
+                    <translate tag="li" icon="pencil">Edit</translate>
+                    <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
                 </ul>
             </div>
         </div>
@@ -119,7 +109,7 @@
                     .then(() => {
                         API.deletePassword(this.password.id)
                             .then(() => {
-                                if(this.password.trashed) {
+                                if (this.password.trashed) {
                                     this.password = undefined;
                                 } else {
                                     this.password.trashed = true;
@@ -218,12 +208,10 @@
                             a { color : $color-grey-darker; }
 
                             i {
+                                line-height  : 40px;
                                 margin-right : 10px;
                                 font-size    : 1rem;
                                 width        : 1rem;
-                                text-align   : center;
-                                position     : relative;
-                                bottom       : -0.03rem;
                                 cursor       : pointer;
                             }
 
