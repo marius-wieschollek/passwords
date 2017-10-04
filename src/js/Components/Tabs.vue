@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-container">
+    <div class="tab-container" :data-tab-uuid="uuid">
         <ul class="tab-titles">
             <li v-for="(tab, name) in tabs"
                 :data-tab="name"
@@ -29,6 +29,9 @@
         props: {
             tabs: {
                 type: Object
+            },
+            uuid: {
+                type: String
             }
         },
 
@@ -59,7 +62,7 @@
             }
         },
         watch  : {
-            tabs: function() {
+            uuid: function() {
                 this.tab = Object.keys(this.tabs)[0];
             }
         }

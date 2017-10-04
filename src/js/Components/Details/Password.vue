@@ -18,7 +18,7 @@
             <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
             <span class="date">{{ date }}</span>
         </div>
-        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}">
+        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="password.uuid">
             <div slot="details">
                 <pre>
                 Title: {{ password.title }}
@@ -31,7 +31,19 @@
                 <textarea id="password-details-notes">{{ password.notes }}</textarea>
             </div>
             <div slot="share">
-
+                <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="password.uuid">
+                    <div slot="nextcloud" class="password-share-nextcloud">
+                        nc
+                    </div>
+                    <div slot="qrcode" class="password-share-qrcode">
+                        <select id="password-details-qrcode" @change="changeQrCode($event)">
+                            <option value="login">Username</option>
+                            <option value="password" selected>Password</option>
+                            <option value="url">Website</option>
+                        </select>
+                        <qr-code :text="qrcode.text" :color="qrcode.color"></qr-code>
+                    </div>
+                </tabs>
             </div>
             <div slot="revisions">
 
@@ -42,6 +54,7 @@
 
 <script>
     import Translate from '@vc/Translate.vue';
+    import QrCode from 'vue-qrcode-component'
     import Tabs from '@vc/Tabs.vue';
     import API from '@js/Helper/api';
     import SimpleMDE from 'simplemde';
@@ -49,6 +62,7 @@
     export default {
         components: {
             Translate,
+            QrCode,
             Tabs
         },
 
@@ -59,12 +73,18 @@
         },
 
         data() {
+            let qrCodeColor = OCA.Theming ? OCA.Theming.color:'#000000';
+
             return {
                 image: {
                     'className': '',
                     'style'    : {
                         'marginTop': 0
                     },
+                },
+                qrcode: {
+                    color: qrCodeColor,
+                    text: this.password.password
                 }
             }
         },
@@ -96,6 +116,8 @@
             password: function (value) {
                 this.image.className = '';
                 this.image.style = {'marginTop': 0};
+                this.qrcode.text = this.password.password;
+                $('#password-details-qrcode').val('password')
             }
         },
 
@@ -133,6 +155,10 @@
                     type   : 'none',
                     element: null
                 }
+            },
+            changeQrCode($event) {
+                let property = $($event.target).val();
+                this.qrcode.text = this.password[property];
             }
         }
     }
@@ -203,7 +229,7 @@
             }
         }
 
-        .tab-container {
+        > .tab-container {
             padding : 0 15px 15px;
         }
 
@@ -238,6 +264,19 @@
             }
             a {
                 text-decoration : underline;
+            }
+        }
+
+        .password-share-qrcode {
+            select {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            img,
+            canvas {
+                display: block;
+                margin: 0 auto;
             }
         }
     }

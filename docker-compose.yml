@@ -4,7 +4,7 @@ services:
   db:
     image: mariadb
     container_name: "passwords-db"
-    restart: always
+    restart: on-failure
     volumes:
       - db:/var/lib/mysql
     environment:
@@ -16,16 +16,17 @@ services:
   app:
     build: ./docker/php/
     container_name: "passwords-php"
+    restart: on-failure
     links:
       - db
     volumes:
       - /var/www/html
       - ./src/:/var/www/html/custom_apps/passwords
-    restart: always
 
   web:
     image: nginx:alpine
     container_name: "passwords-nginx"
+    restart: on-failure
     ports:
       - 80:80
     links:
@@ -34,7 +35,6 @@ services:
       - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
-    restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

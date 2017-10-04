@@ -28,7 +28,7 @@ The licenses and/or terms of service of any service or third party sources used 
 * [Webpack](https://webpack.js.org/) - [MIT](https://webpack.js.org/license)
 * [FontAwesome](http://fontawesome.io/) - [MIT](https://opensource.org/licenses/mit-license.html)
 * [SimpleMDE](https://simplemde.com/) - [MIT](https://github.com/sparksuite/simplemde-markdown-editor/blob/master/LICENSE)
-* [qr-js](https://www.npmjs.com/package/qr-js) - [GPL-3.0](http://spdx.org/licenses/GPL-3.0.html)
+* [vue-qrcode-component](https://github.com/gerardreches/vue-qrcode-component) - [MIT](https://spdx.org/licenses/MIT.html)
 * [Nextcloud](https://nextcloud.com/) - [AGPL V3](https://github.com/nextcloud/server/blob/master/COPYING)
 * [PHP](http://php.net) - [PHP License v3.01](http://php.net/license/index.php)
 * [ImageMagick](https://www.imagemagick.org/) - [ImageMagick License](https://github.com/ImageMagick/ImageMagick/blob/master/LICENSE)
