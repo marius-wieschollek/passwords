@@ -109,11 +109,7 @@
                     .then(() => {
                         API.deletePassword(this.password.id)
                             .then(() => {
-                                if (this.password.trashed) {
-                                    this.password = undefined;
-                                } else {
-                                    this.password.trashed = true;
-                                }
+                                this.password = undefined;
                                 PwMessages.notification('Password was deleted');
                             }).catch(() => {
                             PwMessages.notification('Deleting password failed');

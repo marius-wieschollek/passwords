@@ -68,17 +68,51 @@ class PasswordApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $level
+     * @param string $details
      *
      * @return JSONResponse
      */
-    public function list(string $level = 'default'): JSONResponse {
+    public function list(string $details = 'default'): JSONResponse {
 
         $passwords = $this->passwordService->findPasswords();
         $results   = [];
 
         foreach ($passwords as $password) {
-            $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $level);
+            $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $details);
+
+            if(!$object['hidden'] && !$object['trashed']) {
+                $results[] = $object;
+            }
+        }
+
+        return $this->createResponse(
+            $results, 200
+        );
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $details
+     * @param array  $criteria
+     *
+     * @return JSONResponse
+     */
+    public function find(string $details = 'default', $criteria = []): JSONResponse {
+
+        $passwords = $this->passwordService->findPasswords();
+        $results   = [];
+
+        foreach ($passwords as $password) {
+            $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $details);
+
+            foreach($criteria as $key => $value) {
+                if($value == 'true') $value = true;
+                else if($value == 'false') $value = false;
+
+                if($object[$key] != $value) continue 2;
+            }
 
             if(!$object['hidden']) {
                 $results[] = $object;
@@ -220,6 +254,7 @@ class PasswordApiController extends AbstractApiController {
             } else {
                 $newRevision->setDeleted(true);
                 $passwordModel->setDeleted(true);
+                // @TODO Delete all revisions, remove from all folders and tags
             }
 
             $this->revisionService->saveRevision($newRevision);

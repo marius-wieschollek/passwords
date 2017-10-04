@@ -54,7 +54,7 @@
 
         methods: {
             refreshView: function () {
-                API.listPasswords().then(this.updateContentList);
+                API.findPasswords({trashed:true}).then(this.updateContentList);
             },
 
             updateContentList: function (passwords) {

@@ -134,7 +134,7 @@ export default class EnhancedApi extends SimpleApi {
     }
 
     /**
-     * Gets all the passwords, including those in the trash
+     * Gets all the passwords, excluding those hidden or in trash
      *
      * @param detailLevel
      * @returns {Promise}
@@ -142,6 +142,24 @@ export default class EnhancedApi extends SimpleApi {
     listPasswords(detailLevel = 'default') {
         return new Promise((resolve, reject) => {
             super.listPasswords(detailLevel)
+                .then((data) => {
+                    data = this._processPasswordList(data);
+                    resolve(data);
+                })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the passwords matching the criteria
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findPasswords(criteria = {}, detailLevel = 'default') {
+        return new Promise((resolve, reject) => {
+            super.findPasswords(criteria, detailLevel)
                 .then((data) => {
                     data = this._processPasswordList(data);
                     resolve(data);

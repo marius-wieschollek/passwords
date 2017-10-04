@@ -41,6 +41,7 @@ export default class SimpleApi {
         this._encryption = new Encryption();
         this._paths = {
             'password.list'    : 'api/1.0/password/list',
+            'password.find'    : 'api/1.0/password/find',
             'password.create'  : 'api/1.0/password/create',
             'password.update'  : 'api/1.0/password/update/{id}',
             'password.delete'  : 'api/1.0/password/delete/{id}',
@@ -114,7 +115,7 @@ export default class SimpleApi {
     }
 
     /**
-     * Gets all the passwords, including those in the trash
+     * Gets all the passwords, excluding those hidden or in trash
      *
      * @param detailLevel
      * @returns {Promise}
@@ -124,12 +125,27 @@ export default class SimpleApi {
         if (detailLevel !== 'default') {
             return this._createRequest(
                 'password.list',
-                {level: detailLevel},
+                {details: detailLevel},
                 'POST'
             );
         }
 
         return this._createRequest('password.list');
+    }
+
+    /**
+     * Gets all the passwords matching the criteria
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findPasswords(criteria = {}, detailLevel = 'default') {
+        return this._createRequest(
+            'password.find',
+            {details: detailLevel, criteria: criteria},
+            'POST'
+        );
     }
 
     /**

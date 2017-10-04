@@ -3,12 +3,7 @@
         <div class="app-content-left">
             <breadcrumb></breadcrumb>
             <div class="item-list">
-                <password-line
-                        :password="password"
-                        v-for="password in passwords"
-                        v-if="!password.trashed"
-                        :key="password.uuid">
-                </password-line>
+                <password-line :password="password" v-for="password in passwords" :key="password.uuid"></password-line>
             </div>
         </div>
         <div class="app-content-right">
