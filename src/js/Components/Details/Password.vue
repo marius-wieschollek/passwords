@@ -18,7 +18,7 @@
             <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
             <span class="date">{{ date }}</span>
         </div>
-        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="password.uuid">
+        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="password.id">
             <div slot="details">
                 <pre>
                 Title: {{ password.title }}
@@ -31,7 +31,7 @@
                 <textarea id="password-details-notes">{{ password.notes }}</textarea>
             </div>
             <div slot="share">
-                <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="password.uuid">
+                <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="password.id">
                     <div slot="nextcloud" class="password-share-nextcloud">
                         nc
                     </div>
@@ -41,7 +41,7 @@
                             <option value="password" selected>Password</option>
                             <option value="url">Website</option>
                         </select>
-                        <qr-code :text="qrcode.text" :color="qrcode.color"></qr-code>
+                        <qr-code :text="qrcode.text" :color="qrcode.color" bgColor="#ffffff" size="256" errorLevel="L"></qr-code>
                     </div>
                 </tabs>
             </div>
