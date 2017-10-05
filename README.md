@@ -25,7 +25,8 @@ Why? Because it is easier for you to remember that your twitter account unlocks 
 Of course we know that most websites still require numbers and special characters, sou we will help you with that as well.
 
 #### Integrated security check
-Passwords can check automatically if your accounts or passwords have been compromised.
+Passwords like "P@55w0rd" may fool most generic security checks, but they are so common that most hackers have them in their lists.
+This is why passwords checks automatically if your passwords have been compromised by integrating the [Have I been pwned](https://haveibeenpwned.com/) service.
 **Soon to come:** You can get convenient e-mail updates when the security status of a password has changed.
 **Soon to come:** You can also define custom password rules to make sure all your passwords live up to your expectations.
 

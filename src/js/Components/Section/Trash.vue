@@ -4,7 +4,7 @@
             <breadcrumb :showAddNew="false"></breadcrumb>
             <div class="item-list">
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.uuid">
-                    <translate tag="li" icon="undo" slot="option-top" @click="untrashAction(password)">Untrash</translate>
+                    <translate tag="li" icon="undo" slot="option-top" @click="restoreAction(password)">Restore</translate>
                 </password-line>
             </div>
         </div>
@@ -65,7 +65,7 @@
                 this.passwords = Utility.sortApiObjectArray(passwords, 'title');
             },
 
-            untrashAction(password) {
+            restoreAction(password) {
                 password.trashed = false;
                 API.updatePassword(password);
             }

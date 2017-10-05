@@ -58,10 +58,11 @@
 
         computed: {
             getItems() {
-                this.items.unshift({path: this.$route.path, label: Utility.translate(this.$route.name)});
+                let items = this.items.clone();
+				items.unshift({path: this.$route.path, label: Utility.translate(this.$route.name)});
 
 
-                return this.items;
+                return items;
             }
         },
 

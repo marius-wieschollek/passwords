@@ -8,7 +8,7 @@
         <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
         <span class="title">{{ password.title }}</span>
         <div class="date">{{ date }}</div>
-        <i v-bind:class="securityCheck" class="fa fa-circle security"></i>
+        <i v-bind:class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu">
@@ -164,6 +164,8 @@
                     font-size    : 0.8rem;
                     padding-left : 8px;
                     cursor       : pointer;
+                    line-height     : 50px;
+                    display: inline-flex;
                 }
 
                 .more,
@@ -173,6 +175,10 @@
                     width       : 50px;
                     font-size   : 1rem;
                     text-align  : center;
+
+                    &.security {
+                        font-size   : 1.25rem;
+                    }
 
                     &.ok {
                         color : $color-green;

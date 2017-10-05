@@ -22,6 +22,10 @@
                 type     : String,
                 'default': null
             },
+            iconClass     : {
+                type     : String,
+                'default': null
+            },
             tag      : {
                 type     : String,
                 'default': 'span'
@@ -36,7 +40,7 @@
                 return Utility.translate(this.say, this.variables)
             },
             getIcon() {
-                return 'fa fa-' + this.icon;
+                return 'fa fa-' + this.icon + ' ' + this.iconClass;
             }
         },
         methods: {
