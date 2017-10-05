@@ -3,7 +3,9 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false"></breadcrumb>
             <div class="item-list">
-                <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.uuid"></password-line>
+                <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.uuid">
+                    <translate tag="li" icon="undo" slot="option-top" @click="untrashAction(password)">Untrash</translate>
+                </password-line>
             </div>
         </div>
         <div class="app-content-right">
@@ -15,6 +17,7 @@
 <script>
     import PwEvents from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
+    import Translate from '@vc/Translate.vue';
     import Breadcrumb from '@vc/Breadcrumbs.vue';
     import PasswordLine from '@vc/Line/Password.vue';
     import PasswordDetails from '@vc/Details/Password.vue';
@@ -32,6 +35,7 @@
         },
 
         components: {
+            Translate,
             Breadcrumb,
             'password-details': PasswordDetails,
             'password-line'   : PasswordLine
@@ -59,6 +63,11 @@
 
             updateContentList: function (passwords) {
                 this.passwords = Utility.sortApiObjectArray(passwords, 'title');
+            },
+
+            untrashAction(password) {
+                password.trashed = false;
+                API.updatePassword(password);
             }
         }
     }

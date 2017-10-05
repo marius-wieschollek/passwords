@@ -12,7 +12,9 @@
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu">
+                <slot name="menu">
                 <ul>
+                    <slot name="option-top"></slot>
                     <translate tag="li" @click="detailsAction($event);" icon="info">Details</translate>
                     <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
                     <li v-if="password.url">
@@ -20,9 +22,12 @@
                     </li>
                     <translate tag="li" icon="pencil">Edit</translate>
                     <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                    <slot name="option-bottom"></slot>
                 </ul>
+                </slot>
             </div>
         </div>
+        <slot name="buttons"></slot>
     </div>
 </template>
 
@@ -104,22 +109,23 @@
                     element: this.password
                 }
             },
-            deleteAction() {
-                PwMessages.confirm('Do you want to delete the password', 'Delete password')
-                    .then(() => {
-                        API.deletePassword(this.password.id)
-                            .then(() => {
-                                this.password = undefined;
-                                PwMessages.notification('Password was deleted');
-                            }).catch(() => {
-                            PwMessages.notification('Deleting password failed');
-                        });
-                    })
+            deleteAction(skipConfirm = false) {
+                if(skipConfirm || !this.password.trashed) {
+                    API.deletePassword(this.password.id)
+                        .then(() => {
+                            this.password = undefined;
+                            PwMessages.notification('Password was deleted');
+                        }).catch(() => {
+                        PwMessages.notification('Deleting password failed');
+                    });
+                } else {
+                    PwMessages.confirm('Do you want to delete the password', 'Delete password')
+                        .then(() => { this.deleteAction(true); })
+                }
             }
         }
     }
 </script>
-
 
 <style lang="scss">
 
@@ -199,9 +205,13 @@
                             padding     : 0 20px 0 15px;
                             white-space : nowrap;
                             color       : $color-grey-darker;
+                            font-weight : 300;
                             cursor      : pointer;
 
-                            a { color : $color-grey-darker; }
+                            a {
+                                color : $color-grey-darker;
+                                opacity: 1 !important;
+                            }
 
                             i {
                                 line-height  : 40px;
@@ -209,11 +219,6 @@
                                 font-size    : 1rem;
                                 width        : 1rem;
                                 cursor       : pointer;
-                            }
-
-                            span {
-                                font-weight : 300;
-                                cursor      : pointer;
                             }
 
                             &:active,

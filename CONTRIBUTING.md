@@ -1,8 +1,8 @@
 ## Set up the local environment
 #### Requirements
-* NPM
-* Docker
-* Docker Compose
+* [Node](https://nodejs.org/)
+* [Docker](https://store.docker.com/search?type=edition&offering=community)
+* [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
 
 #### First run
 * Open a shell on your computer and navigate to the projects directory
@@ -13,7 +13,7 @@
 * Click "Storage & Database"
 * Select "MySQL/MariaDB" as database
 * Enter "nextcloud" for username, password and database
-* Enter "db" for database (usually filled already with "localhost")
+* Enter "db" for host (usually filled already with "localhost")
 * Finish the installation
 * Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
 * Run `npm install`

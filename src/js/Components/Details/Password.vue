@@ -185,7 +185,7 @@
         }
 
         .image-container {
-            height   : 290px;
+            max-height   : 290px;
             overflow : hidden;
 
             a {
