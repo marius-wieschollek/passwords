@@ -47,22 +47,21 @@
     import Utility from '@js/Classes/Utility';
 
     export default {
-        data() {
-            return {
-                items: []
-            }
-        },
         components: {
             Translate
         },
 
         computed: {
             getItems() {
-                let items = this.items.clone();
-				items.unshift({path: this.$route.path, label: Utility.translate(this.$route.name)});
+
+                if(this.items.length === 0) {
+                    return [
+                        {path: this.$route.path, label: Utility.translate(this.$route.name)}
+                    ]
+                }
 
 
-                return items;
+                return this.items;
             }
         },
 
@@ -78,6 +77,10 @@
             showAddNew: {
                 type     : Boolean,
                 'default': true
+            },
+            items: {
+                type     : Array,
+                'default': () => { return []; }
             }
         },
 

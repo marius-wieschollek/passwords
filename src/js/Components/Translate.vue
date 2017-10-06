@@ -16,7 +16,7 @@
             },
             variables: {
                 type     : Object,
-                'default': () => {}
+                'default': () => { return {}; }
             },
             icon     : {
                 type     : String,
