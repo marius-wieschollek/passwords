@@ -74,20 +74,23 @@ class PasswordApiController extends AbstractApiController {
      */
     public function list(string $details = 'default'): JSONResponse {
 
-        $passwords = $this->passwordService->findPasswords();
-        $results   = [];
+        try {
+            $passwords = $this->passwordService->findPasswords();
+            $results   = [];
 
-        foreach ($passwords as $password) {
-            $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $details);
+            foreach ($passwords as $password) {
+                $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $details);
 
-            if(!$object['hidden'] && !$object['trashed']) {
-                $results[] = $object;
+                if(!$object['hidden'] && !$object['trashed']) $results[] = $object;
             }
+
+            ksort($results, SORT_NATURAL);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
         }
 
-        return $this->createResponse(
-            $results, 200
-        );
+        return $this->createResponse($results, 200);
     }
 
     /**
@@ -101,27 +104,53 @@ class PasswordApiController extends AbstractApiController {
      */
     public function find(string $details = 'default', $criteria = []): JSONResponse {
 
-        $passwords = $this->passwordService->findPasswords();
-        $results   = [];
+        try {
+            $passwords = $this->passwordService->findPasswords();
+            $results   = [];
 
-        foreach ($passwords as $password) {
-            $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $details);
+            foreach ($passwords as $password) {
+                $object = $this->passwordApiObjectHelper->getPasswordInformation($password, $details);
 
-            foreach($criteria as $key => $value) {
-                if($value == 'true') $value = true;
-                else if($value == 'false') $value = false;
+                foreach ($criteria as $key => $value) {
+                    if($value == 'true') {
+                        $value = true;
+                    } else if($value == 'false') $value = false;
 
-                if($object[$key] != $value) continue 2;
+                    if($object[ $key ] != $value) continue 2;
+                }
+
+                if(!$object['hidden']) $results[] = $object;
             }
 
-            if(!$object['hidden']) {
-                $results[] = $object;
-            }
+            ksort($results, SORT_NATURAL);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
         }
 
-        return $this->createResponse(
-            $results, 200
-        );
+        return $this->createResponse($results, 200);
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $id
+     * @param string $details
+     *
+     * @return JSONResponse
+     */
+    public function show(string $id, string $details = 'default'): JSONResponse {
+
+        try {
+            $model    = $this->passwordService->getPasswordByUuid($id);
+            $password = $this->passwordApiObjectHelper->getPasswordInformation($model, $details);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
+        }
+
+        return $this->createResponse($password, 200);
     }
 
     /**
@@ -223,7 +252,8 @@ class PasswordApiController extends AbstractApiController {
             $passwordModel = $this->passwordService->getPasswordByUuid($id);
 
             $revisionModel = $this->revisionService->createRevision(
-                $passwordModel->getId(), $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed, $deleted, $favourite
+                $passwordModel->getId(), $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed,
+                $deleted, $favourite
             );
 
             $this->revisionService->saveRevision($revisionModel);
@@ -246,8 +276,8 @@ class PasswordApiController extends AbstractApiController {
     public function delete(string $id): JSONResponse {
         try {
             $passwordModel = $this->passwordService->getPasswordByUuid($id);
-            $oldRevision = $this->revisionService->getCurrentRevision($passwordModel);
-            $newRevision = $this->revisionService->cloneRevision($oldRevision);
+            $oldRevision   = $this->revisionService->getCurrentRevision($passwordModel);
+            $newRevision   = $this->revisionService->cloneRevision($oldRevision);
 
             if(!$newRevision->isTrashed()) {
                 $newRevision->setTrashed(true);

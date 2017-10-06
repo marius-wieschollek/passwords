@@ -20,6 +20,7 @@ use OCA\Passwords\Services\RevisionService;
 class PasswordApiObjectHelper {
 
     const LEVEL_DEFAULT = 'default';
+    const LEVEL_DETAILS = 'details';
 
     /**
      * @var RevisionService
@@ -48,6 +49,9 @@ class PasswordApiObjectHelper {
         switch ($level) {
             case self::LEVEL_DEFAULT:
                 return $this->getDefaultPasswordInformation($password);
+                break;
+            case self::LEVEL_DETAILS:
+                return $this->getDetailedPasswordInformation($password);
                 break;
         }
 
@@ -79,7 +83,45 @@ class PasswordApiObjectHelper {
             'sseType'   => $revision->getSseType(),
             'hidden'    => $revision->getHidden(),
             'trashed'   => $revision->getTrashed(),
-            'favourite' => $revision->getFavourite()
+            'favourite' => $revision->getFavourite(),
+            'tags'      => [],
+            'folders'   => [],
         ];
+    }
+
+    /**
+     * @param Password $password
+     *
+     * @return array
+     */
+    protected function getDetailedPasswordInformation(Password $password): array {
+        $object  = $this->getDefaultPasswordInformation($password);
+        $revisions = $this->revisionService->getRevisionsByPassword($password->getId());
+
+        $object['revisions'] = [];
+        foreach ($revisions as $revision) {
+            [
+                $object['revisions'][] = [
+                    'id'        => $revision->getUuid(),
+                    'owner'     => $revision->getUser(),
+                    'created'   => $revision->getCreated(),
+                    'updated'   => $revision->getUpdated(),
+                    'title'     => $revision->getTitle(),
+                    'login'     => $revision->getLogin(),
+                    'password'  => $revision->getPassword(),
+                    'notes'     => $revision->getNotes(),
+                    'url'       => $revision->getUrl(),
+                    'status'    => $revision->getStatus(),
+                    'hash'      => $revision->getHash(),
+                    'cseType'   => $revision->getCseType(),
+                    'sseType'   => $revision->getSseType(),
+                    'hidden'    => $revision->getHidden(),
+                    'trashed'   => $revision->getTrashed(),
+                    'favourite' => $revision->getFavourite(),
+                ]
+            ];
+        }
+
+        return $object;
     }
 }

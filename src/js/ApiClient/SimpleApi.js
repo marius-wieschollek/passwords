@@ -42,6 +42,7 @@ export default class SimpleApi {
         this._paths = {
             'password.list'    : 'api/1.0/password/list',
             'password.find'    : 'api/1.0/password/find',
+            'password.show'    : 'api/1.0/password/show/{id}',
             'password.create'  : 'api/1.0/password/create',
             'password.update'  : 'api/1.0/password/update/{id}',
             'password.delete'  : 'api/1.0/password/delete/{id}',
@@ -72,6 +73,26 @@ export default class SimpleApi {
     }
 
     /**
+     * Returns the password with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showPassword(id, detailLevel = 'default') {
+
+        if (detailLevel !== 'default') {
+            return this._createRequest(
+                ['password.show', {id: id}],
+                {details: detailLevel},
+                'POST'
+            );
+        }
+
+        return this._createRequest(['password.show', {id: id}]);
+    }
+
+    /**
      * Updates an existing password with the given attributes
      *
      * @param data
@@ -90,28 +111,6 @@ export default class SimpleApi {
      */
     deletePassword(id) {
         return this._createRequest(['password.delete', {id: id}], null, 'DELETE');
-    }
-
-    /**
-     * Generates a password with the given strength and the given options
-     *
-     * @param strength
-     * @param useNumbers
-     * @param useSpecialCharacters
-     * @param useSmileys
-     * @returns {Promise}
-     */
-    generatePassword(strength = 1, useNumbers = false, useSpecialCharacters = false, useSmileys = false) {
-        if (strength === 1 && useNumbers === false && useSpecialCharacters === false && useSmileys === false) {
-            return this._createRequest('password.generate');
-        }
-
-        return this._createRequest('password.generate', {
-            'strength': strength,
-            'numbers' : useNumbers,
-            'special' : useSpecialCharacters,
-            'smileys' : useSmileys,
-        });
     }
 
     /**
@@ -146,6 +145,28 @@ export default class SimpleApi {
             {details: detailLevel, criteria: criteria},
             'POST'
         );
+    }
+
+    /**
+     * Generates a password with the given strength and the given options
+     *
+     * @param strength
+     * @param useNumbers
+     * @param useSpecialCharacters
+     * @param useSmileys
+     * @returns {Promise}
+     */
+    generatePassword(strength = 1, useNumbers = false, useSpecialCharacters = false, useSmileys = false) {
+        if (strength === 1 && useNumbers === false && useSpecialCharacters === false && useSmileys === false) {
+            return this._createRequest('password.generate');
+        }
+
+        return this._createRequest('password.generate', {
+            'strength': strength,
+            'numbers' : useNumbers,
+            'special' : useSpecialCharacters,
+            'smileys' : useSmileys,
+        });
     }
 
     /**

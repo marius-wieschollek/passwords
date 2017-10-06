@@ -98,6 +98,24 @@ class RevisionService {
     }
 
     /**
+     * @param string $passwordId
+     *
+     * @return Revision[]
+     */
+    public function getRevisionsByPassword(string $passwordId): array {
+        /** @var Revision[] $revisions */
+        $revisions = $this->revisionMapper->findAllMatching(
+            ['password_id', $passwordId]
+        );
+
+        foreach($revisions as $revision) {
+            $this->encryptionService->decryptRevision($revision);
+        }
+
+        return $revisions;
+    }
+
+    /**
      * @param Password $password
      *
      * @return Revision
