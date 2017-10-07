@@ -25,11 +25,6 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     const COOKIE_FILE         = 'nc_pw_hibp_api_cookies.txt';
 
     /**
-     * @var int
-     */
-    protected static $lastRequestTime = 0;
-
-    /**
      * @param string $hash
      *
      * @return bool
@@ -59,14 +54,14 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      * @throws \Exception
      */
     protected function isHashInHibpDb(string $hash): bool {
-        if(self::$lastRequestTime != 0 && time() - self::$lastRequestTime < self::API_WAIT_TIME) {
+        if($this->getLastRequestTime() != 0 && time() - $this->getLastRequestTime() < self::API_WAIT_TIME) {
             sleep(self::API_WAIT_TIME);
         }
 
         $apiUrl = self::SERVICE_URL.$hash;
         $request = new RequestHelper();
         $request->setUrl($apiUrl)
-                ->setAcceptResponseCodes([200, 404, 503])
+                ->setAcceptResponseCodes([200, 404, 429, 503])
                 ->setRetryTimeout(self::API_WAIT_TIME)
                 ->setCookieJar($this->config->getTempDir().self::COOKIE_FILE)
                 ->setUserAgent(
@@ -83,12 +78,17 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
                     ->sendWithRetry();
         }
 
+        $this->setLastRequestTime();
+
+        if($request->getInfo('http_code') === 429) {
+            return $this->isHashInHibpDb($hash);
+        }
+
         $responseCode = $request->getInfo('http_code');
         if(!in_array($responseCode, [200, 404])) {
             throw new \Exception('HIBP API returned invalid response code: '.$responseCode);
         }
 
-        self::$lastRequestTime = time();
 
         return $responseCode == 200;
     }
@@ -188,5 +188,19 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         preg_match_all("/action=\"(\S+)\"/", $html, $matches);
 
         return $baseUrl.$matches[1][0].'?'.http_build_query($getFields);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getLastRequestTime(): int {
+        return $this->config->getAppValue('security/hibp/api/request', 0);
+    }
+
+    /**
+     *
+     */
+    protected function setLastRequestTime() {
+        $this->config->setAppValue('security/hibp/api/request', time());
     }
 }

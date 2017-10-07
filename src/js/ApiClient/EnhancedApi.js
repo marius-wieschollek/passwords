@@ -288,7 +288,7 @@ export default class EnhancedApi extends SimpleApi {
             },
             folders  : {
                 type   : 'array',
-                default: []
+                default: ['00000000-0000-0000-0000-000000000000']
             }
         }
     }

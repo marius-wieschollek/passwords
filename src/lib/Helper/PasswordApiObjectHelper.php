@@ -96,7 +96,7 @@ class PasswordApiObjectHelper {
      */
     protected function getDetailedPasswordInformation(Password $password): array {
         $object  = $this->getDefaultPasswordInformation($password);
-        $revisions = $this->revisionService->getRevisionsByPassword($password->getId());
+        $revisions = $this->revisionService->getRevisionsByPassword($password->getUuid());
 
         $object['revisions'] = [];
         foreach ($revisions as $revision) {

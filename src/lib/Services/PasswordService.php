@@ -9,6 +9,8 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\Password;
+use OCA\Passwords\Db\PasswordFolderRelation;
+use OCA\Passwords\Db\PasswordFolderRelationMapper;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\Revision;
 use OCP\IUser;
@@ -31,17 +33,64 @@ class PasswordService {
     protected $passwordMapper;
 
     /**
+     * @var PasswordFolderRelationMapper
+     */
+    protected $folderRelationMapper;
+
+    /**
      * PasswordService constructor.
      *
-     * @param IUser          $user
-     * @param PasswordMapper $passwordMapper
+     * @param IUser                        $user
+     * @param PasswordMapper               $passwordMapper
+     * @param PasswordFolderRelationMapper $folderRelationMapper
      */
     public function __construct(
         IUser $user,
-        PasswordMapper $passwordMapper
+        PasswordMapper $passwordMapper,
+        PasswordFolderRelationMapper $folderRelationMapper
     ) {
         $this->user           = $user;
         $this->passwordMapper = $passwordMapper;
+        $this->folderRelationMapper = $folderRelationMapper;
+    }
+
+    /**
+     * @param string $passwordUuid
+     *
+     * @return array|\OCA\Passwords\Db\AbstractEntity[]|\OCP\AppFramework\Db\Entity[]
+     */
+    public function getPasswordFolderRelations(string $passwordUuid) {
+        return $this->folderRelationMapper->findByPassword($passwordUuid);
+    }
+
+    /**
+     * @param string $passwordUuid
+     * @param array  $folders
+     */
+    public function setPasswordFolderRelations(string $passwordUuid, array $folders) {
+        $relations = $this->folderRelationMapper->findByPassword($passwordUuid);
+
+        foreach($relations as $relation) {
+            if(($key = array_search($relation->getFolder(), $folders)) !== false) {
+                unset($folders[$key]);
+                $relation->setUpdated(time());
+                $this->folderRelationMapper->update($relation);
+            } else {
+                $relation->setUpdated(time());
+                $relation->setDeleted(true);
+                $this->folderRelationMapper->update($relation);
+            }
+        }
+
+        foreach($folders as $folder) {
+            $relation = new PasswordFolderRelation();
+            $relation->setPassword($passwordUuid);
+            $relation->setFolder($folder);
+            $relation->setUser($this->user->getUID());
+            $relation->setUpdated(time());
+            $relation->setCreated(time());
+            $this->folderRelationMapper->insert($relation);
+        }
     }
 
     /**
@@ -115,12 +164,12 @@ class PasswordService {
      * @throws \Exception
      */
     public function setPasswordRevision(Password $password, Revision $revision) {
-        if($revision->getPasswordId() === $password->getId()) {
+        if($revision->getPasswordId() === $password->getUuid()) {
             $password->setRevision($revision->getUuid());
             $password->setUpdated(time());
             $this->savePassword($password);
         } else {
-            throw new \Exception('Password ID does not match when setting password revision');
+            throw new \Exception('Password ID did not match when setting password revision');
         }
     }
 

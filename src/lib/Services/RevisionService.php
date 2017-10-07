@@ -128,7 +128,7 @@ class RevisionService {
     }
 
     /**
-     * @param int    $passwordId
+     * @param string $passwordId
      * @param string $login
      * @param string $password
      * @param string $cseType
@@ -145,7 +145,7 @@ class RevisionService {
      * @return Revision
      */
     public function createRevision(
-        int $passwordId,
+        string $passwordId,
         string $password,
         string $login,
         string $cseType,
@@ -213,7 +213,7 @@ class RevisionService {
     }
 
     /**
-     * @param int    $passwordId
+     * @param string $passwordId
      * @param string $login
      * @param string $password
      * @param string $cseType
@@ -230,7 +230,7 @@ class RevisionService {
      * @return Revision
      */
     protected function createRevisionModel(
-        int $passwordId,
+        string $passwordId,
         string $password,
         string $login,
         string $cseType,

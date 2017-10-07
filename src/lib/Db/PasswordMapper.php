@@ -16,4 +16,5 @@ namespace OCA\Passwords\Db;
 class PasswordMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_password';
+
 }

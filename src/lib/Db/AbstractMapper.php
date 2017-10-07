@@ -120,6 +120,7 @@ abstract class AbstractMapper extends Mapper {
      * @param int|null $limit
      *
      * @return AbstractEntity[]
+     * @throws \Exception
      */
     public function findMatching(array $search = [], int $limit = null): array {
         if(isset($search[0]) && !is_array($search[0])) $search = [$search];

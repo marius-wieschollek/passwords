@@ -14,7 +14,10 @@ use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
+use OCA\Passwords\Db\FolderFolderRelationMapper;
+use OCA\Passwords\Db\PasswordFolderRelationMapper;
 use OCA\Passwords\Db\PasswordMapper;
+use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\RevisionMapper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
@@ -232,6 +235,27 @@ class Application extends App {
                 $this->getUserId()
             );
         });
+
+        $container->registerService('PasswordFolderRelationMapper', function (IAppContainer $c) {
+            return new PasswordFolderRelationMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
+        $container->registerService('PasswordTagRelationMapper', function (IAppContainer $c) {
+            return new PasswordTagRelationMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
+        $container->registerService('FolderFolderRelationMapper', function (IAppContainer $c) {
+            return new FolderFolderRelationMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
     }
 
     /**
@@ -243,7 +267,8 @@ class Application extends App {
         $container->registerService('PasswordService', function (IAppContainer $c) {
             return new PasswordService(
                 $c->getServer()->getUserSession()->getUser(),
-                $c->query('PasswordMapper')
+                $c->query('PasswordMapper'),
+                $c->query('PasswordFolderRelationMapper')
             );
         });
 

@@ -42,13 +42,13 @@ use JsonSerializable;
  * @method string getNotes()
  * @method void setNotes(string $notes)
  * @method string getHash()
+ * @method string getPasswordId()
+ * @method void setPasswordId(string $passwordId)
  * @method void setHash(string $hash)
  * @method bool getFavourite()
  * @method void setFavourite(bool $favourite)
  * @method int getStatus()
  * @method void setStatus(int $status)
- * @method int getPasswordId()
- * @method void setPasswordId(int $passwordId)
  * @method int getCreated()
  * @method void setCreated(int $created)
  * @method int getUpdated()
@@ -56,7 +56,7 @@ use JsonSerializable;
  *
  * @package OCA\Passwords\Db
  */
-class Revision extends AbstractEntity implements JsonSerializable {
+class Revision extends AbstractEntity {
 
     /**
      * @var string
@@ -140,7 +140,7 @@ class Revision extends AbstractEntity implements JsonSerializable {
     protected $status;
 
     /**
-     * @var int
+     * @var string
      */
     protected $passwordId;
 
@@ -169,6 +169,7 @@ class Revision extends AbstractEntity implements JsonSerializable {
         $this->addType('sseType', 'string');
         $this->addType('cseType', 'string');
         $this->addType('password', 'string');
+        $this->addType('passwordId', 'string');
 
         $this->addType('hidden', 'boolean');
         $this->addType('deleted', 'boolean');
@@ -178,7 +179,6 @@ class Revision extends AbstractEntity implements JsonSerializable {
         $this->addType('status', 'integer');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');
-        $this->addType('passwordId', 'integer');
     }
 
     /**
@@ -207,37 +207,5 @@ class Revision extends AbstractEntity implements JsonSerializable {
      */
     public function isFavourite(): bool {
         return $this->getFavourite();
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
-     */
-    function jsonSerialize() {
-        return [
-            'id'         => $this->getId(),
-            'url'        => $this->getUrl(),
-            'hash'       => $this->getHash(),
-            'user'       => $this->getUser(),
-            'uuid'       => $this->getUuid(),
-            'login'      => $this->getLogin(),
-            'notes'      => $this->getNotes(),
-            'title'      => $this->getTitle(),
-            'cseType'    => $this->getCseType(),
-            'sseType'    => $this->getSseType(),
-            'password'   => $this->getPassword(),
-            'hidden'     => $this->isHidden(),
-            'deleted'    => $this->isDeleted(),
-            'trashed'    => $this->isTrashed(),
-            'favourite'  => $this->isFavourite(),
-            'status'     => $this->getStatus(),
-            'passwordId' => $this->getPasswordId(),
-            'created'    => $this->getCreated(),
-            'updated'    => $this->getUpdated(),
-        ];
     }
 }

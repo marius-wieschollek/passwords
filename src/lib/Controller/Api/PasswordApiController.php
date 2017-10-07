@@ -183,21 +183,21 @@ class PasswordApiController extends AbstractApiController {
         string $notes = '',
         bool $hidden = false,
         bool $favourite = false,
-        array $folders = [],
+        array $folders = ['00000000-0000-0000-0000-000000000000'],
         array $tags = []
     ): JSONResponse {
 
         try {
+            $passwordModel = $this->passwordService->createPassword();
             $revisionModel = $this->revisionService->createRevision(
-                0, $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, false, false, $favourite
+                $passwordModel->getUuid(), $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, false, false, $favourite
             );
 
-            $passwordModel = $this->passwordService->createPassword();
+            $passwordModel->setRevision($revisionModel->getUuid());
             $passwordModel = $this->passwordService->savePassword($passwordModel);
-            $revisionModel->setPasswordId($passwordModel->getId());
             $revisionModel = $this->revisionService->saveRevision($revisionModel);
 
-            $this->passwordService->setPasswordRevision($passwordModel, $revisionModel);
+            $this->passwordService->setPasswordFolderRelations($passwordModel->getUuid(), $folders);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
@@ -244,7 +244,7 @@ class PasswordApiController extends AbstractApiController {
         bool $trashed = false,
         bool $deleted = false,
         bool $favourite = false,
-        array $folders = [],
+        array $folders = ['00000000-0000-0000-0000-000000000000'],
         array $tags = []
     ): JSONResponse {
 
@@ -252,12 +252,13 @@ class PasswordApiController extends AbstractApiController {
             $passwordModel = $this->passwordService->getPasswordByUuid($id);
 
             $revisionModel = $this->revisionService->createRevision(
-                $passwordModel->getId(), $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed,
+                $passwordModel->getUuid(), $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed,
                 $deleted, $favourite
             );
 
             $this->revisionService->saveRevision($revisionModel);
             $this->passwordService->setPasswordRevision($passwordModel, $revisionModel);
+            $this->passwordService->setPasswordFolderRelations($passwordModel->getUuid(), $folders);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);

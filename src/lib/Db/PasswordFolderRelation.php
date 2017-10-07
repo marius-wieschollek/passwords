@@ -2,35 +2,33 @@
 /**
  * Created by PhpStorm.
  * User: marius
- * Date: 26.08.17
- * Time: 20:35
+ * Date: 07.10.17
+ * Time: 16:41
  */
 
 namespace OCA\Passwords\Db;
 
-use JsonSerializable;
-
 /**
- * Class Password
+ * Class PasswordFolderRelation
+ *
+ * @package OCA\Passwords\Db
  *
  * @method int getId()
  * @method void setId(int $id)
- * @method bool getDeleted()
- * @method void setDeleted(bool $deleted)
  * @method string getUser()
  * @method void setUser(string $user)
- * @method string getUuid()
- * @method void setUuid(string $uuid)
- * @method string getRevision()
- * @method void setRevision(string $revision)
+ * @method string getFolder()
+ * @method void setFolder(string $folder)
+ * @method string getPassword()
+ * @method void setPassword(string $password)
+ * @method bool getDeleted()
+ * @method void setDeleted(bool $deleted)
  * @method int getCreated()
  * @method void setCreated(int $created)
  * @method int getUpdated()
  * @method void setUpdated(int $updated)
- *
- * @package OCA\Passwords\Db
  */
-class Password extends AbstractEntity {
+class PasswordFolderRelation extends AbstractEntity {
 
     /**
      * @var string
@@ -40,17 +38,17 @@ class Password extends AbstractEntity {
     /**
      * @var string
      */
-    protected $uuid;
+    protected $folder;
+
+    /**
+     * @var string
+     */
+    protected $password;
 
     /**
      * @var bool
      */
     protected $deleted;
-
-    /**
-     * @var string
-     */
-    protected $revision;
 
     /**
      * @var int
@@ -63,21 +61,14 @@ class Password extends AbstractEntity {
     protected $updated;
 
     /**
-     * Password constructor.
+     * PasswordFolderRelation constructor.
      */
     public function __construct() {
         $this->addType('user', 'string');
-        $this->addType('uuid', 'string');
-        $this->addType('revision', 'string');
+        $this->addType('folder', 'string');
+        $this->addType('password', 'string');
         $this->addType('deleted', 'boolean');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDeleted(): bool {
-        return $this->getDeleted();
     }
 }
