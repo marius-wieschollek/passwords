@@ -6,12 +6,14 @@
  * Time: 23:34
  */
 
-namespace OCA\Passwords\Services;
+namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Revision;
 use OCA\Passwords\Db\RevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\ValidationService;
 use OCP\IUser;
 
 /**
@@ -252,7 +254,7 @@ class RevisionService {
         $model->setCreated(time());
         $model->setUpdated(time());
         $model->setStatus(0);
-        $model->setKey('');
+        $model->setSseKey('');
 
         $model->setPasswordId($passwordId);
         $model->setLogin($login);

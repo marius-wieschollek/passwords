@@ -9,7 +9,10 @@
 namespace OCA\Passwords\Encryption;
 
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Db\AbstractEncryptedEntity;
+use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\Revision;
+use OCA\Passwords\Db\Tag;
 
 /**
  * Class SseV1Encryption
@@ -23,7 +26,7 @@ class SseV1Encryption implements EncryptionInterface {
     /**
      * @var array
      */
-    protected $revisionFields
+    protected $revision
         = [
             'title',
             'url',
@@ -31,45 +34,110 @@ class SseV1Encryption implements EncryptionInterface {
             'password',
             'notes'
         ];
+    /**
+     * @var array
+     */
+    protected $folder = ['name'];
+
+    /**
+     * @var array
+     */
+    protected $tag = ['name', 'color'];
 
     /**
      * @param Revision $revision
      *
-     * @return Revision
+     * @return Revision|AbstractEncryptedEntity
      */
     public function encryptRevision(Revision $revision): Revision {
-
-        $passwordKey   = $this->getUserKey();
-        $encryptionKey = $this->getEncryptionKey($passwordKey);
-
-        foreach ($this->revisionFields as $field) {
-            $value          = $revision->getProperty($field);
-            $encryptedValue = \OC::$server->getCrypto()->encrypt($value, $encryptionKey);
-            $revision->setProperty($field, base64_encode($encryptedValue));
-        }
-
-        $revision->setKey(base64_encode($passwordKey));
-
-        return $revision;
+        return $this->encryptObject($revision, 'revision');
     }
 
     /**
      * @param Revision $revision
      *
-     * @return Revision
+     * @return Revision|AbstractEncryptedEntity
      */
     public function decryptRevision(Revision $revision): Revision {
+        return $this->decryptObject($revision, 'revision');
+    }
 
-        $passwordKey   = base64_decode($revision->getKey());
-        $encryptionKey = $this->getEncryptionKey($passwordKey);
+    /**
+     * @param Folder $folder
+     *
+     * @return Folder|AbstractEncryptedEntity
+     */
+    public function encryptFolder(Folder $folder): Folder {
+        return $this->encryptObject($folder, 'folder');
+    }
 
-        foreach ($this->revisionFields as $field) {
-            $value          = base64_decode($revision->getProperty($field));
-            $decryptedValue = \OC::$server->getCrypto()->decrypt($value, $encryptionKey);
-            $revision->setProperty($field, $decryptedValue);
+    /**
+     * @param Folder $folder
+     *
+     * @return Folder|AbstractEncryptedEntity
+     */
+    public function decryptFolder(Folder $folder): Folder {
+        return $this->decryptObject($folder, 'folder');
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return Tag|AbstractEncryptedEntity
+     */
+    public function encryptTag(Tag $tag): Tag {
+        return $this->encryptObject($tag, 'tag');
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return Tag|AbstractEncryptedEntity
+     */
+    public function decryptTag(Tag $tag): Tag {
+        return $this->decryptObject($tag, 'tag');
+    }
+
+    /**
+     * @param AbstractEncryptedEntity $object
+     * @param                         $type
+     *
+     * @return AbstractEncryptedEntity
+     */
+    public function encryptObject(AbstractEncryptedEntity $object, string $type): AbstractEncryptedEntity {
+
+        $sseKey        = $this->getUserKey();
+        $encryptionKey = $this->getEncryptionKey($sseKey);
+
+        foreach ($this->{$type} as $field) {
+            $value          = $object->getProperty($field);
+            $encryptedValue = \OC::$server->getCrypto()->encrypt($value, $encryptionKey);
+            $object->setProperty($field, base64_encode($encryptedValue));
         }
 
-        return $revision;
+        $object->setSseKey(base64_encode($sseKey));
+
+        return $object;
+    }
+
+    /**
+     * @param AbstractEncryptedEntity $object
+     * @param                         $type
+     *
+     * @return AbstractEncryptedEntity
+     */
+    public function decryptObject(AbstractEncryptedEntity $object, string $type): AbstractEncryptedEntity {
+
+        $sseKey        = base64_decode($object->getSseKey());
+        $encryptionKey = $this->getEncryptionKey($sseKey);
+
+        foreach ($this->{$type} as $field) {
+            $value          = base64_decode($object->getProperty($field));
+            $decryptedValue = \OC::$server->getCrypto()->decrypt($value, $encryptionKey);
+            $object->setProperty($field, $decryptedValue);
+        }
+
+        return $object;
     }
 
     /**

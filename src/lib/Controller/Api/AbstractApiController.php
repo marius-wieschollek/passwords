@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 
 /**
@@ -25,7 +26,7 @@ abstract class AbstractApiController extends ApiController {
      *
      * @return JSONResponse
      */
-    protected function createResponse($response, int $statusCode = 200): JSONResponse {
+    protected function createJsonResponse($response, int $statusCode = Http::STATUS_OK): JSONResponse {
         return new JSONResponse(
             $response, $statusCode
         );
@@ -39,7 +40,7 @@ abstract class AbstractApiController extends ApiController {
     protected function createErrorResponse(\Throwable $e): JSONResponse {
         $message    = "Unable to complete request";
         $id         = 0;
-        $statusCode = 500;
+        $statusCode = Http::STATUS_SERVICE_UNAVAILABLE;
 
         \OC::$server->getLogger()->logException($e);
 

@@ -10,15 +10,22 @@ namespace OCA\Passwords\AppInfo;
 
 use OCA\Passwords\Controller\AccessController;
 use OCA\Passwords\Controller\AdminSettingsController;
+use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
+use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
 use OCA\Passwords\Db\FolderFolderRelationMapper;
+use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\PasswordFolderRelationMapper;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\RevisionMapper;
+use OCA\Passwords\Db\TagMapper;
+use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
+use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
+use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
@@ -31,7 +38,6 @@ use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
-use OCA\Passwords\Helper\PasswordApiObjectHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
@@ -42,9 +48,11 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\RevisionService;
+use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\PageShotService;
-use OCA\Passwords\Services\PasswordService;
-use OCA\Passwords\Services\RevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCA\Passwords\Services\WordsService;
 use OCA\Passwords\Settings\AdminSettings;
@@ -65,17 +73,7 @@ class Application extends App {
         parent::__construct(self::APP_NAME, $urlParams);
 
         $this->registerPersonalSettings();
-        //$this->registerActivities();
         $this->registerDiClasses();
-    }
-
-    /**
-     *
-     */
-    protected function registerActivities(): void {
-        $this->getContainer()->getServer()->getActivityManager()->registerExtension(function () {
-            return $this->getContainer()->query('ActivityService');
-        });
     }
 
     /**
@@ -109,9 +107,19 @@ class Application extends App {
         /**
          * Helper
          */
-        $container->registerService('PasswordApiObjectHelper', function (IAppContainer $c) {
-            return new PasswordApiObjectHelper(
+        $container->registerService('PasswordObjectHelper', function (IAppContainer $c) {
+            return new PasswordObjectHelper(
                 $c->query('RevisionService')
+            );
+        });
+        $container->registerService('FolderObjectHelper', function (IAppContainer $c) {
+            return new FolderObjectHelper(
+                $c->query('FolderService')
+            );
+        });
+        $container->registerService('TagObjectHelper', function (IAppContainer $c) {
+            return new TagObjectHelper(
+                $c->query('TagService')
             );
         });
         $this->registerImageHelper();
@@ -192,7 +200,25 @@ class Application extends App {
                 $c->query('Request'),
                 $c->query('PasswordService'),
                 $c->query('RevisionService'),
-                $c->query('PasswordApiObjectHelper')
+                $c->query('PasswordObjectHelper')
+            );
+        });
+
+        $container->registerService('FolderApiController', function (IAppContainer $c) {
+            return new FolderApiController(
+                $c->query('AppName'),
+                $c->query('Request'),
+                $c->query('FolderService'),
+                $c->query('FolderObjectHelper')
+            );
+        });
+
+        $container->registerService('TagApiController', function (IAppContainer $c) {
+            return new TagApiController(
+                $c->query('AppName'),
+                $c->query('Request'),
+                $c->query('TagService'),
+                $c->query('TagObjectHelper')
             );
         });
 
@@ -231,6 +257,20 @@ class Application extends App {
 
         $container->registerService('RevisionMapper', function (IAppContainer $c) {
             return new RevisionMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
+        $container->registerService('FolderMapper', function (IAppContainer $c) {
+            return new FolderMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
+        $container->registerService('TagMapper', function (IAppContainer $c) {
+            return new TagMapper(
                 $c->getServer()->getDatabaseConnection(),
                 $this->getUserId()
             );
@@ -279,6 +319,24 @@ class Application extends App {
                 $c->query('EncryptionService'),
                 $c->query('RevisionMapper'),
                 $c->query('HelperService')->getSecurityHelper()
+            );
+        });
+
+        $container->registerService('FolderService', function (IAppContainer $c) {
+            return new FolderService(
+                $c->getServer()->getUserSession()->getUser(),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService'),
+                $c->query('FolderMapper')
+            );
+        });
+
+        $container->registerService('TagService', function (IAppContainer $c) {
+            return new TagService(
+                $c->getServer()->getUserSession()->getUser(),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService'),
+                $c->query('TagMapper')
             );
         });
 

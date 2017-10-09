@@ -13,9 +13,55 @@ use OCP\AppFramework\Db\Entity;
 /**
  * Class AbstractEntity
  *
+ * @method string getUser()
+ * @method void setUser(string $user)
+ * @method bool getDeleted()
+ * @method void setDeleted(bool $deleted)
+ * @method int getCreated()
+ * @method void setCreated(int $created)
+ * @method int getUpdated()
+ * @method void setUpdated(int $updated)
+ *
  * @package OCA\Passwords\Db
  */
 abstract class AbstractEntity extends Entity {
+
+    /**
+     * @var string
+     */
+    protected $user;
+
+    /**
+     * @var bool
+     */
+    protected $deleted;
+
+    /**
+     * @var int
+     */
+    protected $created;
+
+    /**
+     * @var int
+     */
+    protected $updated;
+
+    /**
+     * Folder constructor.
+     */
+    public function __construct() {
+        $this->addType('user', 'string');
+        $this->addType('deleted', 'boolean');
+        $this->addType('created', 'integer');
+        $this->addType('updated', 'integer');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted(): bool {
+        return $this->getDeleted();
+    }
 
     /**
      * @param string $property

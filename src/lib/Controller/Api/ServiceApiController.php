@@ -15,6 +15,7 @@ use OCA\Passwords\Services\WordsService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IRequest;
 
 /**
@@ -78,14 +79,13 @@ class ServiceApiController extends AbstractApiController {
         try {
             list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
 
-            if(empty($password)) {
-                throw new ApiException('Unable to create password');
-            }
+            if(empty($password)) throw new ApiException('Unable to generate password');
+
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
 
-        return $this->createResponse(
+        return $this->createJsonResponse(
             [
                 'password' => $password,
                 'words'    => $words,
@@ -105,16 +105,16 @@ class ServiceApiController extends AbstractApiController {
      *
      * @param int    $size
      *
-     * @return FileDisplayResponse
+     * @return FileDisplayResponse|JSONResponse
      */
     public function getFavicon(string $domain, int $size = 24) {
-        $file = $this->faviconService->getFavicon($domain, $size);
+        try {
+            $file = $this->faviconService->getFavicon($domain, $size);
 
-        return new FileDisplayResponse(
-            $file,
-            Http::STATUS_OK,
-            ['Content-Type' => $file->getMimeType()]
-        );
+            return $this->createFileDisplayResponse($file);
+        } catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
+        }
     }
 
     /**
@@ -134,14 +134,24 @@ class ServiceApiController extends AbstractApiController {
             list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
 
             $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
+
+            return $this->createFileDisplayResponse($file);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
         }
+    }
 
+    /**
+     * @param ISimpleFile $file
+     * @param int         $statusCode
+     *
+     * @return FileDisplayResponse
+     */
+    protected function createFileDisplayResponse(ISimpleFile $file, int $statusCode = Http::STATUS_OK): FileDisplayResponse {
         return new FileDisplayResponse(
             $file,
-            Http::STATUS_OK,
+            $statusCode,
             ['Content-Type' => $file->getMimeType()]
         );
     }

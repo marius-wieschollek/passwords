@@ -6,7 +6,7 @@
  * Time: 21:18
  */
 
-namespace OCA\Passwords\Services;
+namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordFolderRelation;

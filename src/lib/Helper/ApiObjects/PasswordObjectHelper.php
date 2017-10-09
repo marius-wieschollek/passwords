@@ -6,18 +6,18 @@
  * Time: 00:19
  */
 
-namespace OCA\Passwords\Helper;
+namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
 use OCA\Passwords\Db\Password;
-use OCA\Passwords\Services\RevisionService;
+use OCA\Passwords\Services\Object\RevisionService;
 
 /**
- * Class PasswordApiObjectHelper
+ * Class PasswordObjectHelper
  *
  * @package OCA\Passwords\Helper
  */
-class PasswordApiObjectHelper {
+class PasswordObjectHelper {
 
     const LEVEL_DEFAULT = 'default';
     const LEVEL_DETAILS = 'details';
@@ -32,9 +32,7 @@ class PasswordApiObjectHelper {
      *
      * @param RevisionService $revisionService
      */
-    public function __construct(
-        RevisionService $revisionService
-    ) {
+    public function __construct(RevisionService $revisionService) {
         $this->revisionService = $revisionService;
     }
 
@@ -45,13 +43,13 @@ class PasswordApiObjectHelper {
      * @return array
      * @throws Exception
      */
-    public function getPasswordInformation(Password $password, string $level = self::LEVEL_DEFAULT) {
+    public function getApiObject(Password $password, string $level = self::LEVEL_DEFAULT) {
         switch ($level) {
             case self::LEVEL_DEFAULT:
-                return $this->getDefaultPasswordInformation($password);
+                return $this->getDefaultPasswordObject($password);
                 break;
             case self::LEVEL_DETAILS:
-                return $this->getDetailedPasswordInformation($password);
+                return $this->getDetailedPasswordObject($password);
                 break;
         }
 
@@ -63,7 +61,7 @@ class PasswordApiObjectHelper {
      *
      * @return array
      */
-    protected function getDefaultPasswordInformation(Password $password): array {
+    protected function getDefaultPasswordObject(Password $password): array {
         $revision = $this->revisionService->getCurrentRevision($password);
 
         return [
@@ -94,8 +92,8 @@ class PasswordApiObjectHelper {
      *
      * @return array
      */
-    protected function getDetailedPasswordInformation(Password $password): array {
-        $object  = $this->getDefaultPasswordInformation($password);
+    protected function getDetailedPasswordObject(Password $password): array {
+        $object  = $this->getDefaultPasswordObject($password);
         $revisions = $this->revisionService->getRevisionsByPassword($password->getUuid());
 
         $object['revisions'] = [];

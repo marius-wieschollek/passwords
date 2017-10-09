@@ -61,15 +61,17 @@ $application->registerRoutes($this, [
          'verb'    => 'POST',
          'postfix' => 'POST'
         ],
-        ['name'     => 'service_api#get_favicon',
-         'url'      => '/api/1.0/service/icon/{domain}/{size}',
-         'verb'     => 'GET',
-         'defaults' => ['domain' => '', 'size' => 24]
+        [
+            'name'     => 'service_api#get_favicon',
+            'url'      => '/api/1.0/service/icon/{domain}/{size}',
+            'verb'     => 'GET',
+            'defaults' => ['domain' => '', 'size' => 24]
         ],
-        ['name'     => 'service_api#get_preview',
-         'url'      => '/api/1.0/service/image/{domain}/{view}/{width}/{height}',
-         'verb'     => 'GET',
-         'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 550, 'height' => 0]
+        [
+            'name'     => 'service_api#get_preview',
+            'url'      => '/api/1.0/service/image/{domain}/{view}/{width}/{height}',
+            'verb'     => 'GET',
+            'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 550, 'height' => 0]
         ],
     ]
 ]);
