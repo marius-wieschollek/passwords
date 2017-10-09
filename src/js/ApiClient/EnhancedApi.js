@@ -27,12 +27,12 @@ export default class EnhancedApi extends SimpleApi {
     /**
      *
      * @param attributes
+     * @param definitions
      * @param strict
      * @returns object
      */
-    static validatePassword(attributes, strict = false) {
-        let password    = {},
-            definitions = EnhancedApi.getPasswordDefinition();
+    static _validateObject(attributes, definitions, strict = false) {
+        let object = {};
 
         for (let property in definitions) {
             if (!definitions.hasOwnProperty(property)) continue;
@@ -40,7 +40,7 @@ export default class EnhancedApi extends SimpleApi {
 
             if (!attributes.hasOwnProperty(property)) {
                 if (definition.required) throw "Property " + property + " is required but missing";
-                password[property] = definition.hasOwnProperty('default') ? definition.default:null;
+                object[property] = definition.hasOwnProperty('default') ? definition.default:null;
                 continue;
             }
 
@@ -73,11 +73,11 @@ export default class EnhancedApi extends SimpleApi {
                 }
             }
 
-            password[property] = attribute;
+            object[property] = attribute;
         }
 
 
-        return password;
+        return object;
     }
 
     /**
@@ -120,17 +120,18 @@ export default class EnhancedApi extends SimpleApi {
     }
 
     /**
-     * Generates an automatic title from the given data
+     * Returns the password with the given id and the given detail level
      *
-     * @param data
-     * @returns string
-     * @private
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
      */
-    static _generatePasswordTitle(data) {
-        data.title = String(data.login);
-        if (data.url !== null) {
-            data.title += '@' + SimpleApi.parseUrl(data.url, 'host').replace('www.', '');
-        }
+    showPassword(id, detailLevel = 'default') {
+        return new Promise((resolve, reject) => {
+            super.showPassword(id, detailLevel)
+                .then((data) => { resolve(this._processPassword(data)); })
+                .catch(reject);
+        });
     }
 
     /**
@@ -142,10 +143,7 @@ export default class EnhancedApi extends SimpleApi {
     listPasswords(detailLevel = 'default') {
         return new Promise((resolve, reject) => {
             super.listPasswords(detailLevel)
-                .then((data) => {
-                    data = this._processPasswordList(data);
-                    resolve(data);
-                })
+                .then((data) => { resolve(this._processPasswordList(data)); })
                 .catch(reject);
         });
     }
@@ -160,12 +158,25 @@ export default class EnhancedApi extends SimpleApi {
     findPasswords(criteria = {}, detailLevel = 'default') {
         return new Promise((resolve, reject) => {
             super.findPasswords(criteria, detailLevel)
-                .then((data) => {
-                    data = this._processPasswordList(data);
-                    resolve(data);
-                })
+                .then((data) => { resolve(this._processPasswordList(data)); })
                 .catch(reject);
         });
+    }
+
+    /**
+     * Creates a new password with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async createFolder(data = {}) {
+        try {
+            data = EnhancedApi.validateFolder(data);
+        } catch (e) {
+            return this.createRejectedPromise(e);
+        }
+
+        return super.createFolder(data);
     }
 
     /**
@@ -204,21 +215,67 @@ export default class EnhancedApi extends SimpleApi {
         let passwords = {};
 
         for (let i = 0; i < data.length; i++) {
-            let password = data[i];
-
-            if (password.url) {
-                let host = SimpleApi.parseUrl(password.url, 'host');
-                password.icon = this.getFaviconUrl(host);
-                password.image = this.getPreviewUrl(host);
-            } else {
-                password.icon = this.getFaviconUrl(null);
-                password.image = this.getPreviewUrl(null);
-            }
-
+            let password = _processPassword(data[i]);
             passwords[password.id] = password;
         }
 
         return passwords;
+    }
+
+    /**
+     *
+     * @param password
+     * @returns {{}}
+     * @private
+     */
+    _processPassword(password) {
+        if (password.url) {
+            let host = SimpleApi.parseUrl(password.url, 'host');
+            password.icon = this.getFaviconUrl(host);
+            password.image = this.getPreviewUrl(host);
+        } else {
+            password.icon = this.getFaviconUrl(null);
+            password.image = this.getPreviewUrl(null);
+        }
+
+        return password;
+    }
+
+    /**
+     *
+     * @param password
+     * @param strict
+     * @private
+     */
+    static validatePassword(password, strict = false) {
+        let definitions = EnhancedApi.getPasswordDefinition();
+        return EnhancedApi._validateObject(password, definitions, strict);
+    }
+
+    /**
+     *
+     * @param folder
+     * @param strict
+     * @returns {Object}
+     * @private
+     */
+    static validateFolder(folder, strict = false) {
+        let definitions = EnhancedApi.getFolderDefinition();
+        return EnhancedApi._validateObject(folder, definitions, strict);
+    }
+
+    /**
+     * Generates an automatic title from the given data
+     *
+     * @param data
+     * @returns string
+     * @private
+     */
+    static _generatePasswordTitle(data) {
+        data.title = String(data.login);
+        if (data.url !== null) {
+            data.title += '@' + SimpleApi.parseUrl(data.url, 'host').replace('www.', '');
+        }
     }
 
     /**
@@ -270,10 +327,6 @@ export default class EnhancedApi extends SimpleApi {
                 type   : 'boolean',
                 default: false
             },
-            deleted  : {
-                type   : 'boolean',
-                default: false
-            },
             trashed  : {
                 type   : 'boolean',
                 default: false
@@ -289,6 +342,54 @@ export default class EnhancedApi extends SimpleApi {
             folders  : {
                 type   : 'array',
                 default: ['00000000-0000-0000-0000-000000000000']
+            }
+        }
+    }
+
+    /**
+     *
+     * @returns object
+     */
+    static getFolderDefinition() {
+        return {
+            id       : {
+                type  : 'string',
+                length: 36
+            },
+            name     : {
+                type    : 'string',
+                length  : 48,
+                required: true
+            },
+            cseType  : {
+                type   : 'string',
+                length : 10,
+                default: 'none'
+            },
+            sseType  : {
+                type   : 'string',
+                length : 10,
+                default: null
+            },
+            hidden   : {
+                type   : 'boolean',
+                default: false
+            },
+            trashed  : {
+                type   : 'boolean',
+                default: false
+            },
+            favourite: {
+                type   : 'boolean',
+                default: false
+            },
+            folders  : {
+                type   : 'array',
+                default: ['00000000-0000-0000-0000-000000000000']
+            },
+            passwords: {
+                type   : 'array',
+                default: []
             }
         }
     }

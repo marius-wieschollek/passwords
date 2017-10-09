@@ -59,9 +59,9 @@ class RevisionService {
      */
     public function __construct(
         IUser $user,
+        RevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService,
-        RevisionMapper $revisionMapper,
         AbstractSecurityCheckHelper $securityCheck
     ) {
         $this->user              = $user;
@@ -163,13 +163,13 @@ class RevisionService {
     ): Revision {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
-        $revisionModel = $this->createRevisionModel(
+        $model = $this->createRevisionModel(
             $passwordId, $password, $login, $cseType, $sseType, $hash, $title, $url, $notes, $hidden, $trashed, $deleted,
             $favourite);
 
-        $revisionModel = $this->validationService->validateRevision($revisionModel);
+        $model = $this->validationService->validateRevision($model);
 
-        return $revisionModel;
+        return $model;
     }
 
     /**

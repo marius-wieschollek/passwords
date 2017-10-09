@@ -113,7 +113,11 @@ class FolderService {
         bool $deleted,
         bool $favourite
     ): Folder {
-        return $this->createFolderModel($name, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
+        $model = $this->createFolderModel($name, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
+
+        $model = $this->validationService->validateFolder($model);
+
+        return $model;
     }
 
     /**
@@ -122,6 +126,8 @@ class FolderService {
      * @return Folder|\OCP\AppFramework\Db\Entity
      */
     public function saveFolder(Folder $folder): Folder {
+        $folder = $this->encryptionService->encryptFolder($folder);
+
         if(empty($folder->getId())) {
             return $this->folderMapper->insert($folder);
         } else {

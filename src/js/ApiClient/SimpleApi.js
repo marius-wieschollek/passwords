@@ -46,6 +46,12 @@ export default class SimpleApi {
             'password.create'  : 'api/1.0/password/create',
             'password.update'  : 'api/1.0/password/update/{id}',
             'password.delete'  : 'api/1.0/password/delete/{id}',
+            'folder.list'      : 'api/1.0/folder/list',
+            'folder.find'      : 'api/1.0/folder/find',
+            'folder.show'      : 'api/1.0/folder/show/{id}',
+            'folder.create'    : 'api/1.0/folder/create',
+            'folder.update'    : 'api/1.0/folder/update/{id}',
+            'folder.delete'    : 'api/1.0/folder/delete/{id}',
             'password.generate': 'api/1.0/service/password',
             'service.favicon'  : 'api/1.0/service/icon/{domain}/{size}',
             'service.preview'  : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
@@ -145,6 +151,36 @@ export default class SimpleApi {
             {details: detailLevel, criteria: criteria},
             'POST'
         );
+    }
+
+    /**
+     * Creates a new folder with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async createFolder(data = {}) {
+        return this._createRequest('folder.create', data);
+    }
+
+    /**
+     * Returns the folder with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showFolder(id = '00000000-0000-0000-0000-000000000000', detailLevel = 'default') {
+
+        if (detailLevel !== 'default') {
+            return this._createRequest(
+                ['folder.show', {id: id}],
+                {details: detailLevel},
+                'POST'
+            );
+        }
+
+        return this._createRequest(['folder.show', {id: id}]);
     }
 
     /**

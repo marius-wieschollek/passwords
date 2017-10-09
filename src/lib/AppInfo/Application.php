@@ -315,9 +315,9 @@ class Application extends App {
         $container->registerService('RevisionService', function (IAppContainer $c) {
             return new RevisionService(
                 $c->getServer()->getUserSession()->getUser(),
+                $c->query('RevisionMapper'),
                 $c->query('ValidationService'),
                 $c->query('EncryptionService'),
-                $c->query('RevisionMapper'),
                 $c->query('HelperService')->getSecurityHelper()
             );
         });
@@ -325,18 +325,18 @@ class Application extends App {
         $container->registerService('FolderService', function (IAppContainer $c) {
             return new FolderService(
                 $c->getServer()->getUserSession()->getUser(),
+                $c->query('FolderMapper'),
                 $c->query('ValidationService'),
-                $c->query('EncryptionService'),
-                $c->query('FolderMapper')
+                $c->query('EncryptionService')
             );
         });
 
         $container->registerService('TagService', function (IAppContainer $c) {
             return new TagService(
                 $c->getServer()->getUserSession()->getUser(),
+                $c->query('TagMapper'),
                 $c->query('ValidationService'),
-                $c->query('EncryptionService'),
-                $c->query('TagMapper')
+                $c->query('EncryptionService')
             );
         });
 

@@ -44,7 +44,7 @@ class TagService {
      * TagService constructor.
      *
      * @param IUser             $user
-     * @param TagMapper      $tagMapper
+     * @param TagMapper         $tagMapper
      * @param ValidationService $validationService
      * @param EncryptionService $encryptionService
      */
@@ -55,7 +55,7 @@ class TagService {
         EncryptionService $encryptionService
     ) {
         $this->user              = $user;
-        $this->tagMapper      = $tagMapper;
+        $this->tagMapper         = $tagMapper;
         $this->validationService = $validationService;
         $this->encryptionService = $encryptionService;
     }
@@ -115,7 +115,11 @@ class TagService {
         bool $deleted,
         bool $favourite
     ): Tag {
-        return $this->createTagModel($name, $color, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
+        $model = $this->createTagModel($name, $color, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
+
+        $model = $this->validationService->validateTag($model);
+
+        return $model;
     }
 
     /**
@@ -124,6 +128,8 @@ class TagService {
      * @return Tag|\OCP\AppFramework\Db\Entity
      */
     public function saveTag(Tag $tag): Tag {
+        $tag = $this->encryptionService->encryptTag($tag);
+
         if(empty($tag->getId())) {
             return $this->tagMapper->insert($tag);
         } else {

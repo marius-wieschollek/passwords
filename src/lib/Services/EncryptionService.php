@@ -8,7 +8,9 @@
 
 namespace OCA\Passwords\Services;
 
+use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\Revision;
+use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Encryption\EncryptionInterface;
 use OCA\Passwords\Encryption\SseV1Encryption;
 
@@ -64,5 +66,49 @@ class EncryptionService {
         $encryption = $this->getEncryptionByType($revision->getSseType());
 
         return $encryption->decryptRevision($revision);
+    }
+
+    /**
+     * @param Folder $folder
+     *
+     * @return Folder
+     */
+    public function encryptFolder(Folder $folder): Folder {
+        $encryption = $this->getEncryptionByType($folder->getSseType());
+
+        return $encryption->encryptFolder($folder);
+    }
+
+    /**
+     * @param Folder $folder
+     *
+     * @return Folder
+     */
+    public function decryptFolder(Folder $folder): Folder {
+        $encryption = $this->getEncryptionByType($folder->getSseType());
+
+        return $encryption->decryptFolder($folder);
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return Tag
+     */
+    public function encryptTag(Tag $tag): Tag {
+        $encryption = $this->getEncryptionByType($tag->getSseType());
+
+        return $encryption->encryptTag($tag);
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return Tag
+     */
+    public function decryptTag(Tag $tag): Tag {
+        $encryption = $this->getEncryptionByType($tag->getSseType());
+
+        return $encryption->decryptTag($tag);
     }
 }
