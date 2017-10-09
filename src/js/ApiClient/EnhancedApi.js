@@ -24,6 +24,174 @@ export default class EnhancedApi extends SimpleApi {
         return numeric ? 100:'0.1.0';
     }
 
+
+    /**
+     * Passwords
+     */
+
+    /**
+     * Creates a new password with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async createPassword(data = {}) {
+        try {
+            data = EnhancedApi.validatePassword(data);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        if (!data.title) EnhancedApi._generatePasswordTitle(data);
+
+        return super.createPassword(data);
+    }
+
+    /**
+     * Update an existing password with the given attributes.
+     * If data does not contain an id, a new password will be created.
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async updatePassword(data = {}) {
+        if (!data.id) return this.createPassword(data);
+
+        try {
+            data = EnhancedApi.validatePassword(data);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        if (!data.title) EnhancedApi._generatePasswordTitle(data);
+
+        return super.updatePassword(data);
+    }
+
+    /**
+     * Returns the password with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showPassword(id, detailLevel = 'default') {
+        return new Promise((resolve, reject) => {
+            super.showPassword(id, detailLevel)
+                .then((data) => { resolve(this._processPassword(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the passwords, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listPasswords(detailLevel = 'default') {
+        return new Promise((resolve, reject) => {
+            super.listPasswords(detailLevel)
+                .then((data) => { resolve(this._processPasswordList(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the passwords matching the criteria
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findPasswords(criteria = {}, detailLevel = 'default') {
+        return new Promise((resolve, reject) => {
+            super.findPasswords(criteria, detailLevel)
+                .then((data) => { resolve(this._processPasswordList(data)); })
+                .catch(reject);
+        });
+    }
+
+
+    /**
+     * Folders
+     */
+
+    /**
+     * Creates a new folder with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async createFolder(data = {}) {
+        try {
+            data = EnhancedApi.validateFolder(data);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        return super.createFolder(data);
+    }
+
+
+    /**
+     * Tags
+     */
+
+    /**
+     * Creates a new tag with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async createTag(data = {}) {
+        try {
+            data = EnhancedApi.validateTag(data);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        return super.createTag(data);
+    }
+
+
+    /**
+     * Validation
+     */
+
+    /**
+     *
+     * @param password
+     * @param strict
+     * @returns {Object}
+     */
+    static validatePassword(password, strict = false) {
+        let definitions = EnhancedApi.getPasswordDefinition();
+        return EnhancedApi._validateObject(password, definitions, strict);
+    }
+
+    /**
+     *
+     * @param folder
+     * @param strict
+     * @returns {Object}
+     */
+    static validateFolder(folder, strict = false) {
+        let definitions = EnhancedApi.getFolderDefinition();
+        return EnhancedApi._validateObject(folder, definitions, strict);
+    }
+
+    /**
+     *
+     * @param tag
+     * @param strict
+     * @returns {Object}
+     */
+    static validateTag(tag, strict = false) {
+        let definitions = EnhancedApi.getTagDefinition();
+        return EnhancedApi._validateObject(tag, definitions, strict);
+    }
+
     /**
      *
      * @param attributes
@@ -80,124 +248,18 @@ export default class EnhancedApi extends SimpleApi {
         return object;
     }
 
-    /**
-     * Creates a new password with the given attributes
-     *
-     * @param data
-     * @returns {Promise}
-     */
-    async createPassword(data = {}) {
-        try {
-            data = EnhancedApi.validatePassword(data);
-        } catch (e) {
-            return this.createRejectedPromise(e);
-        }
-
-        if (!data.title) EnhancedApi._generatePasswordTitle(data);
-
-        return super.createPassword(data);
-    }
 
     /**
-     * Update an existing password with the given attributes.
-     * If data does not contain an id, a new password will be created.
-     *
-     * @param data
-     * @returns {Promise}
+     * Internal
      */
-    async updatePassword(data = {}) {
-        if (!data.id) return this.createPassword(data);
-
-        try {
-            data = EnhancedApi.validatePassword(data);
-        } catch (e) {
-            return this.createRejectedPromise(e);
-        }
-
-        if (!data.title) EnhancedApi._generatePasswordTitle(data);
-
-        return super.updatePassword(data);
-    }
-
-    /**
-     * Returns the password with the given id and the given detail level
-     *
-     * @param id
-     * @param detailLevel
-     * @returns {Promise}
-     */
-    showPassword(id, detailLevel = 'default') {
-        return new Promise((resolve, reject) => {
-            super.showPassword(id, detailLevel)
-                .then((data) => { resolve(this._processPassword(data)); })
-                .catch(reject);
-        });
-    }
-
-    /**
-     * Gets all the passwords, excluding those hidden or in trash
-     *
-     * @param detailLevel
-     * @returns {Promise}
-     */
-    listPasswords(detailLevel = 'default') {
-        return new Promise((resolve, reject) => {
-            super.listPasswords(detailLevel)
-                .then((data) => { resolve(this._processPasswordList(data)); })
-                .catch(reject);
-        });
-    }
-
-    /**
-     * Gets all the passwords matching the criteria
-     *
-     * @param criteria
-     * @param detailLevel
-     * @returns {Promise}
-     */
-    findPasswords(criteria = {}, detailLevel = 'default') {
-        return new Promise((resolve, reject) => {
-            super.findPasswords(criteria, detailLevel)
-                .then((data) => { resolve(this._processPasswordList(data)); })
-                .catch(reject);
-        });
-    }
-
-    /**
-     * Creates a new password with the given attributes
-     *
-     * @param data
-     * @returns {Promise}
-     */
-    async createFolder(data = {}) {
-        try {
-            data = EnhancedApi.validateFolder(data);
-        } catch (e) {
-            return this.createRejectedPromise(e);
-        }
-
-        return super.createFolder(data);
-    }
-
-    /**
-     * Generates a password with the given strength and the given options
-     *
-     * @param strength
-     * @param useNumbers
-     * @param useSpecialCharacters
-     * @param useSmileys
-     * @returns {Promise}
-     */
-    generatePassword(strength = 1, useNumbers = false, useSpecialCharacters = false, useSmileys = false) {
-        return super.generatePassword(strength, useNumbers, useSpecialCharacters, useSmileys);
-    }
 
     /**
      *
      * @param message
      * @returns {Promise}
+     * @private
      */
-    createRejectedPromise(message) {
+    _createRejectedPromise(message) {
         return new Promise((resolve, reject) => {
             let error = {status: 'error', message: message};
             if (this._debug) console.error(error);
@@ -215,7 +277,7 @@ export default class EnhancedApi extends SimpleApi {
         let passwords = {};
 
         for (let i = 0; i < data.length; i++) {
-            let password = _processPassword(data[i]);
+            let password = this._processPassword(data[i]);
             passwords[password.id] = password;
         }
 
@@ -242,29 +304,6 @@ export default class EnhancedApi extends SimpleApi {
     }
 
     /**
-     *
-     * @param password
-     * @param strict
-     * @private
-     */
-    static validatePassword(password, strict = false) {
-        let definitions = EnhancedApi.getPasswordDefinition();
-        return EnhancedApi._validateObject(password, definitions, strict);
-    }
-
-    /**
-     *
-     * @param folder
-     * @param strict
-     * @returns {Object}
-     * @private
-     */
-    static validateFolder(folder, strict = false) {
-        let definitions = EnhancedApi.getFolderDefinition();
-        return EnhancedApi._validateObject(folder, definitions, strict);
-    }
-
-    /**
      * Generates an automatic title from the given data
      *
      * @param data
@@ -277,6 +316,11 @@ export default class EnhancedApi extends SimpleApi {
             data.title += '@' + SimpleApi.parseUrl(data.url, 'host').replace('www.', '');
         }
     }
+
+
+    /**
+     * Object Definitions
+     */
 
     /**
      *
@@ -386,6 +430,55 @@ export default class EnhancedApi extends SimpleApi {
             folders  : {
                 type   : 'array',
                 default: ['00000000-0000-0000-0000-000000000000']
+            },
+            passwords: {
+                type   : 'array',
+                default: []
+            }
+        }
+    }
+
+    /**
+     *
+     * @returns object
+     */
+    static getTagDefinition() {
+        return {
+            id       : {
+                type  : 'string',
+                length: 36
+            },
+            name     : {
+                type    : 'string',
+                length  : 48,
+                required: true
+            },
+            color    : {
+                type    : 'string',
+                length  : 48,
+                required: true
+            },
+            cseType  : {
+                type   : 'string',
+                length : 10,
+                default: 'none'
+            },
+            sseType  : {
+                type   : 'string',
+                length : 10,
+                default: null
+            },
+            hidden   : {
+                type   : 'boolean',
+                default: false
+            },
+            trashed  : {
+                type   : 'boolean',
+                default: false
+            },
+            favourite: {
+                type   : 'boolean',
+                default: false
             },
             passwords: {
                 type   : 'array',

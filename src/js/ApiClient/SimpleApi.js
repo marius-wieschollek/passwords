@@ -40,18 +40,24 @@ export default class SimpleApi {
 
         this._encryption = new Encryption();
         this._paths = {
-            'password.list'    : 'api/1.0/password/list',
-            'password.find'    : 'api/1.0/password/find',
-            'password.show'    : 'api/1.0/password/show/{id}',
-            'password.create'  : 'api/1.0/password/create',
-            'password.update'  : 'api/1.0/password/update/{id}',
-            'password.delete'  : 'api/1.0/password/delete/{id}',
+            'tag.list'         : 'api/1.0/tag/list',
+            'tag.find'         : 'api/1.0/tag/find',
+            'tag.show'         : 'api/1.0/tag/show',
+            'tag.create'       : 'api/1.0/tag/create',
+            'tag.update'       : 'api/1.0/tag/update',
+            'tag.delete'       : 'api/1.0/tag/delete',
             'folder.list'      : 'api/1.0/folder/list',
             'folder.find'      : 'api/1.0/folder/find',
-            'folder.show'      : 'api/1.0/folder/show/{id}',
+            'folder.show'      : 'api/1.0/folder/show',
             'folder.create'    : 'api/1.0/folder/create',
-            'folder.update'    : 'api/1.0/folder/update/{id}',
-            'folder.delete'    : 'api/1.0/folder/delete/{id}',
+            'folder.update'    : 'api/1.0/folder/update',
+            'folder.delete'    : 'api/1.0/folder/delete',
+            'password.list'    : 'api/1.0/password/list',
+            'password.find'    : 'api/1.0/password/find',
+            'password.show'    : 'api/1.0/password/show',
+            'password.create'  : 'api/1.0/password/create',
+            'password.update'  : 'api/1.0/password/update',
+            'password.delete'  : 'api/1.0/password/delete',
             'password.generate': 'api/1.0/service/password',
             'service.favicon'  : 'api/1.0/service/icon/{domain}/{size}',
             'service.preview'  : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
@@ -66,6 +72,11 @@ export default class SimpleApi {
     static getClientVersion(numeric = false) {
         return numeric ? 100:'0.1.0';
     }
+
+
+    /**
+     * Passwords
+     */
 
     /**
      * Creates a new password with the given attributes
@@ -86,16 +97,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     showPassword(id, detailLevel = 'default') {
-
-        if (detailLevel !== 'default') {
-            return this._createRequest(
-                ['password.show', {id: id}],
-                {details: detailLevel},
-                'POST'
-            );
-        }
-
-        return this._createRequest(['password.show', {id: id}]);
+        return this._createRequest('password.show', {id: id, details: detailLevel}, 'POST');
     }
 
     /**
@@ -106,7 +108,7 @@ export default class SimpleApi {
      */
     async updatePassword(data = {}) {
         data.hash = await this._encryption.getHash(data.password);
-        return this._createRequest(['password.update', data], data, 'PATCH');
+        return this._createRequest('password.update', data, 'PATCH');
     }
 
     /**
@@ -116,7 +118,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deletePassword(id) {
-        return this._createRequest(['password.delete', {id: id}], null, 'DELETE');
+        return this._createRequest('password.delete', {id: id}, 'DELETE');
     }
 
     /**
@@ -126,32 +128,24 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listPasswords(detailLevel = 'default') {
-
-        if (detailLevel !== 'default') {
-            return this._createRequest(
-                'password.list',
-                {details: detailLevel},
-                'POST'
-            );
-        }
-
-        return this._createRequest('password.list');
+        return this._createRequest('password.list', {details: detailLevel}, 'POST');
     }
 
     /**
-     * Gets all the passwords matching the criteria
+     * Gets all the passwords matching the criteria, excluding those hidden
      *
      * @param criteria
      * @param detailLevel
      * @returns {Promise}
      */
     findPasswords(criteria = {}, detailLevel = 'default') {
-        return this._createRequest(
-            'password.find',
-            {details: detailLevel, criteria: criteria},
-            'POST'
-        );
+        return this._createRequest('password.find', {details: detailLevel, criteria: criteria}, 'POST');
     }
+
+
+    /**
+     * Folders
+     */
 
     /**
      * Creates a new folder with the given attributes
@@ -171,17 +165,121 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     showFolder(id = '00000000-0000-0000-0000-000000000000', detailLevel = 'default') {
-
-        if (detailLevel !== 'default') {
-            return this._createRequest(
-                ['folder.show', {id: id}],
-                {details: detailLevel},
-                'POST'
-            );
-        }
-
-        return this._createRequest(['folder.show', {id: id}]);
+        return this._createRequest('folder.show', {id: id, details: detailLevel}, 'POST');
     }
+
+    /**
+     * Updates an existing folder with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async updateFolder(data = {}) {
+        return this._createRequest('folder.update', data, 'PATCH');
+    }
+
+    /**
+     * Deletes the existing folder with the given id
+     *
+     * @param id
+     * @returns {Promise}
+     */
+    deleteFolder(id) {
+        return this._createRequest('folder.delete', {id: id}, 'DELETE');
+    }
+
+    /**
+     * Gets all the folders, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listFolders(detailLevel = 'default') {
+        return this._createRequest('folder.list', {details: detailLevel}, 'POST');
+    }
+
+    /**
+     * Gets all the folders matching the criteria, excluding those hidden
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findFolders(criteria = {}, detailLevel = 'default') {
+        return this._createRequest('folder.find', {details: detailLevel, criteria: criteria}, 'POST');
+    }
+
+
+    /**
+     * Tags
+     */
+
+    /**
+     * Creates a new tag with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async createTag(data = {}) {
+        return this._createRequest('tag.create', data);
+    }
+
+    /**
+     * Returns the tag with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showTag(id, detailLevel = 'default') {
+        return this._createRequest('tag.show', {id: id, details: detailLevel}, 'POST');
+    }
+
+    /**
+     * Updates an existing tag with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async updateTag(data = {}) {
+        return this._createRequest('tag.update', data, 'PATCH');
+    }
+
+    /**
+     * Deletes the existing tag with the given id
+     *
+     * @param id
+     * @returns {Promise}
+     */
+    deleteTag(id) {
+        return this._createRequest('tag.delete', {id: id}, 'DELETE');
+    }
+
+    /**
+     * Gets all the tag, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listTags(detailLevel = 'default') {
+        return this._createRequest('tag.list', {details: detailLevel}, 'POST');
+    }
+
+    /**
+     * Gets all the tag matching the criteria, excluding those hidden
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findTags(criteria = {}, detailLevel = 'default') {
+        return this._createRequest('tag.find', {details: detailLevel, criteria: criteria}, 'POST');
+    }
+
+
+    /**
+     * Misc Services
+     */
 
     /**
      * Generates a password with the given strength and the given options
@@ -260,6 +358,11 @@ export default class SimpleApi {
             {domain: host, view: view, width: width, height: height}
         );
     }
+
+
+    /**
+     * Internal
+     */
 
     /**
      * Creates an api request
