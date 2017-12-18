@@ -17,12 +17,12 @@
 * Finish the installation
 * Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
 * Run `npm install`
-* Run `npm run build`
+* Run `npm run watch`
 * You can now access the [app](http://localhost/index.php/apps/passwords)
 
 #### Helpful commands
-* `npm run build` - Build JS/CSS from vue files
-* `npm run watch` - Build JS/CSS from vue files and watch for changes
+* `npm run build` - Create production build of JS/CSS files
+* `npm run watch` - Create development build of JS/CSS files and watch for changes
 
 #### First steps
 * [Issues for beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)

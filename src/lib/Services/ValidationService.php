@@ -9,8 +9,9 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\Folder;
-use OCA\Passwords\Db\Revision;
-use OCA\Passwords\Db\Tag;
+use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
 
 /**
@@ -21,20 +22,20 @@ use OCA\Passwords\Exception\ApiException;
 class ValidationService {
 
     /**
-     * @param Revision $revision
+     * @param PasswordRevision $revision
      *
-     * @return Revision
+     * @return PasswordRevision
      * @throws ApiException
      */
-    public function validateRevision(Revision $revision): Revision {
+    public function validateRevision(PasswordRevision $revision): PasswordRevision {
         if(empty($revision->getSseType())) {
             $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if(empty($revision->getCseType())) {
             throw new ApiException('Field "cseType" can not be empty');
         }
-        if(empty($revision->getTitle())) {
-            throw new ApiException('Field "title" can not be empty');
+        if(empty($revision->getLabel())) {
+            throw new ApiException('Field "label" can not be empty');
         }
         if(empty($revision->getHash())) {
             throw new ApiException('Field "hash" can not be empty');
@@ -44,40 +45,40 @@ class ValidationService {
     }
 
     /**
-     * @param Folder $folder
+     * @param FolderRevision $folder
      *
-     * @return Folder
+     * @return FolderRevision
      * @throws ApiException
      */
-    public function validateFolder(Folder $folder): Folder {
+    public function validateFolder(FolderRevision $folder): FolderRevision {
         if(empty($folder->getSseType())) {
             $folder->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if(empty($folder->getCseType())) {
             throw new ApiException('Field "cseType" can not be empty');
         }
-        if(empty($folder->getName())) {
-            throw new ApiException('Field "name" can not be empty');
+        if(empty($folder->getLabel())) {
+            throw new ApiException('Field "label" can not be empty');
         }
 
         return $folder;
     }
 
     /**
-     * @param Tag $tag
+     * @param TagRevision $tag
      *
-     * @return Tag
+     * @return TagRevision
      * @throws ApiException
      */
-    public function validateTag(Tag $tag): Tag {
+    public function validateTag(TagRevision $tag): TagRevision {
         if(empty($tag->getSseType())) {
             $tag->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if(empty($tag->getCseType())) {
             throw new ApiException('Field "cseType" can not be empty');
         }
-        if(empty($tag->getName())) {
-            throw new ApiException('Field "name" can not be empty');
+        if(empty($tag->getLabel())) {
+            throw new ApiException('Field "label" can not be empty');
         }
         if(empty($tag->getColor())) {
             throw new ApiException('Field "color" can not be empty');

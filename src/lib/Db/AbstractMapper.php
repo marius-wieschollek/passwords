@@ -58,6 +58,9 @@ abstract class AbstractMapper extends Mapper {
      * @param int $id
      *
      * @return AbstractEntity|Entity
+     *
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findById(int $id): AbstractEntity {
         list($sql, $params) = $this->getStatement();
@@ -72,6 +75,9 @@ abstract class AbstractMapper extends Mapper {
      * @param string $uuid
      *
      * @return AbstractEntity|Entity
+     *
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): AbstractEntity {
         list($sql, $params) = $this->getStatement();
@@ -88,13 +94,14 @@ abstract class AbstractMapper extends Mapper {
     public function findAll(): array {
         list($sql, $params) = $this->getStatement();
 
-        return $this->findEntities($sql, [$this->userId]);
+        return $this->findEntities($sql, $params);
     }
 
     /**
      * @param array $search
      *
      * @return AbstractEntity[]
+     * @throws \Exception
      */
     public function findAllMatching(array $search): array {
         return $this->findMatching($search);
@@ -104,6 +111,7 @@ abstract class AbstractMapper extends Mapper {
      * @param array $search
      *
      * @return null|AbstractEntity
+     * @throws \Exception
      */
     public function findOneMatching(array $search): ?AbstractEntity {
         $matches = $this->findMatching($search, 1);
@@ -150,7 +158,7 @@ abstract class AbstractMapper extends Mapper {
 
         $params = [];
         if($this->userId != '') {
-            $sql      .= ' AND `user` = ?';
+            $sql      .= ' AND `user_id` = ?';
             $params[] = $this->userId;
         }
 

@@ -8,9 +8,11 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
-use Exception;
 use OCA\Passwords\Db\Folder;
+use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\PasswordService;
 
 /**
  * Class FolderObjectHelper
@@ -19,8 +21,11 @@ use OCA\Passwords\Services\Object\FolderService;
  */
 class FolderObjectHelper {
 
-    const LEVEL_DEFAULT = 'default';
-    const LEVEL_DETAILS = 'details';
+    const LEVEL_MODEL     = 'model';
+    const LEVEL_REVISIONS = 'revisions';
+    const LEVEL_PARENT    = 'parent';
+    const LEVEL_FOLDERS   = 'folders';
+    const LEVEL_PASSWORDS = 'passwords';
 
     /**
      * @var FolderService
@@ -28,12 +33,43 @@ class FolderObjectHelper {
     protected $folderService;
 
     /**
+     * @var FolderRevisionService
+     */
+    protected $folderRevisionService;
+
+    /**
+     * @var PasswordService
+     */
+    protected $passwordService;
+
+    /**
+     * @var PasswordObjectHelper
+     */
+    protected $passwordObjectHelper;
+
+    /**
+     * @var FolderRevision[]
+     */
+    protected $revisionCache = [];
+
+    /**
      * FolderObjectHelper constructor.
      *
-     * @param FolderService $folderService
+     * @param FolderService         $folderService
+     * @param PasswordService       $passwordService
+     * @param PasswordObjectHelper  $passwordObjectHelper
+     * @param FolderRevisionService $folderRevisionService
      */
-    public function __construct(FolderService $folderService) {
-        $this->folderService = $folderService;
+    public function __construct(
+        FolderService $folderService,
+        PasswordService $passwordService,
+        PasswordObjectHelper $passwordObjectHelper,
+        FolderRevisionService $folderRevisionService
+    ) {
+        $this->folderService         = $folderService;
+        $this->passwordService       = $passwordService;
+        $this->passwordObjectHelper  = $passwordObjectHelper;
+        $this->folderRevisionService = $folderRevisionService;
     }
 
     /**
@@ -41,19 +77,28 @@ class FolderObjectHelper {
      * @param string $level
      *
      * @return array
-     * @throws Exception
      */
-    public function getApiObject(Folder $folder, string $level = self::LEVEL_DEFAULT): array {
-        switch ($level) {
-            case self::LEVEL_DEFAULT:
-                return $this->getDefaultFolderObject($folder);
-                break;
-            case self::LEVEL_DETAILS:
-                return $this->getDetailedFolderObject($folder);
-                break;
+    public function getApiObject(Folder $folder, string $level = self::LEVEL_MODEL): array {
+        $detailLevel = explode('+', $level);
+
+        $object = [];
+        if(in_array(self::LEVEL_MODEL, $detailLevel)) {
+            $object = $this->getModel($folder);
+        }
+        if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
+            $object = $this->getRevisions($folder, $object);
+        }
+        if(in_array(self::LEVEL_PARENT, $detailLevel)) {
+            $object = $this->getParent($folder, $object);
+        }
+        if(in_array(self::LEVEL_FOLDERS, $detailLevel)) {
+            $object = $this->getFolders($folder, $object);
+        }
+        if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
+            $object = $this->getPasswords($folder, $object);
         }
 
-        throw new Exception('Invalid information detail level');
+        return $object;
     }
 
     /**
@@ -61,28 +106,96 @@ class FolderObjectHelper {
      *
      * @return array
      */
-    protected function getDefaultFolderObject(Folder $folder): array {
+    protected function getModel(Folder $folder): array {
+        $revision = $this->getCurrentFolderRevision($folder);
 
         return [
             'id'        => $folder->getUuid(),
-            'owner'     => $folder->getUser(),
+            'owner'     => $folder->getUserId(),
             'created'   => $folder->getCreated(),
             'updated'   => $folder->getUpdated(),
-            'hidden'    => $folder->getHidden(),
-            'trashed'   => $folder->getTrashed(),
-            'name'      => $folder->getName(),
-            'folders'   => [],
-            'passwords' => []
+            'revision'  => $revision->getUuid(),
+            'label'     => $revision->getLabel(),
+            'parent'    => $revision->getParent(),
+            'cseType'   => $revision->getCseType(),
+            'sseType'   => $revision->getSseType(),
+            'hidden'    => $revision->isHidden(),
+            'trashed'   => $revision->isTrashed() || $folder->isSuspended(),
+            'favourite' => $revision->isFavourite()
         ];
     }
 
     /**
-     * @param $folder
+     * @param Folder $folder
+     * @param array  $object
      *
      * @return array
      */
-    protected function getDetailedFolderObject($folder): array {
+    protected function getParent(Folder $folder, array $object): array {
 
-        return $this->getDefaultFolderObject($folder);
+        $revision         = $this->getCurrentFolderRevision($folder);
+        $parent           = $this->folderService->getFolderByUuid($revision->getParent());
+        $object['parent'] = $this->getApiObject($parent);
+
+        return $object;
+    }
+
+    /**
+     * @param Folder $parent
+     * @param array  $object
+     *
+     * @return array
+     */
+    protected function getFolders(Folder $parent, array $object): array {
+
+        $object['folders'] = [];
+        $folders           = $this->folderService->getFoldersByParent($parent->getUuid());
+        $revision          = $this->getCurrentFolderRevision($parent);
+        $trashed           = $revision->isTrashed() || $parent->isSuspended();
+
+        foreach ($folders as $folder) {
+            $child = $this->getApiObject($folder);
+
+            if(!$child['hidden'] && (!$child['trashed'] || $trashed)) $object['folders'][] = $child;
+        }
+
+        return $object;
+    }
+
+    /**
+     * @param Folder $parent
+     * @param array  $object
+     *
+     * @return array
+     */
+    protected function getPasswords(Folder $parent, array $object): array {
+
+        $object['passwords'] = [];
+        $passwords           = $this->passwordService->getPasswordsByFolder($parent->getUuid());
+        $revision            = $this->getCurrentFolderRevision($parent);
+        $trashed             = $revision->isTrashed() || $parent->isSuspended();
+
+        foreach ($passwords as $password) {
+            $child = $this->passwordObjectHelper->getApiObject($password);
+
+            if(!$child['hidden'] && (!$child['trashed'] || $trashed)) $object['passwords'][] = $child;
+        }
+
+        return $object;
+    }
+
+    /**
+     * @param Folder $folder
+     *
+     * @return FolderRevision
+     */
+    protected function getCurrentFolderRevision(Folder $folder): FolderRevision {
+        $id = $folder->getId();
+
+        if(!isset($this->revisionCache[ $id ])) {
+            $this->revisionCache[ $id ] = $this->folderRevisionService->getCurrentRevision($folder);
+        }
+
+        return $this->revisionCache[ $id ];
     }
 }

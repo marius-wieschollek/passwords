@@ -10,9 +10,9 @@ namespace OCA\Passwords\Encryption;
 
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\AbstractEncryptedEntity;
-use OCA\Passwords\Db\Folder;
-use OCA\Passwords\Db\Revision;
-use OCA\Passwords\Db\Tag;
+use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\TagRevision;
 
 /**
  * Class SseV1Encryption
@@ -28,81 +28,83 @@ class SseV1Encryption implements EncryptionInterface {
      */
     protected $revision
         = [
-            'title',
             'url',
-            'login',
+            'label',
+            'notes',
             'password',
-            'notes'
+            'username'
         ];
     /**
      * @var array
      */
-    protected $folder = ['name'];
+    protected $folder = ['label'];
 
     /**
      * @var array
      */
-    protected $tag = ['name', 'color'];
+    protected $tag = ['label', 'color'];
 
     /**
-     * @param Revision $revision
+     * @param PasswordRevision $revision
      *
-     * @return Revision|AbstractEncryptedEntity
+     * @return PasswordRevision|AbstractEncryptedEntity
      */
-    public function encryptRevision(Revision $revision): Revision {
+    public function encryptRevision(PasswordRevision $revision): PasswordRevision {
         return $this->encryptObject($revision, 'revision');
     }
 
     /**
-     * @param Revision $revision
+     * @param PasswordRevision $revision
      *
-     * @return Revision|AbstractEncryptedEntity
+     * @return PasswordRevision|AbstractEncryptedEntity
      */
-    public function decryptRevision(Revision $revision): Revision {
+    public function decryptRevision(PasswordRevision $revision): PasswordRevision {
         return $this->decryptObject($revision, 'revision');
     }
 
     /**
-     * @param Folder $folder
+     * @param FolderRevision $folder
      *
-     * @return Folder|AbstractEncryptedEntity
+     * @return FolderRevision|AbstractEncryptedEntity
      */
-    public function encryptFolder(Folder $folder): Folder {
+    public function encryptFolder(FolderRevision $folder): FolderRevision {
         return $this->encryptObject($folder, 'folder');
     }
 
     /**
-     * @param Folder $folder
+     * @param FolderRevision $folder
      *
-     * @return Folder|AbstractEncryptedEntity
+     * @return FolderRevision|AbstractEncryptedEntity
      */
-    public function decryptFolder(Folder $folder): Folder {
+    public function decryptFolder(FolderRevision $folder): FolderRevision {
         return $this->decryptObject($folder, 'folder');
     }
 
     /**
-     * @param Tag $tag
+     * @param TagRevision $tag
      *
-     * @return Tag|AbstractEncryptedEntity
+     * @return TagRevision|AbstractEncryptedEntity
      */
-    public function encryptTag(Tag $tag): Tag {
+    public function encryptTag(TagRevision $tag): TagRevision {
         return $this->encryptObject($tag, 'tag');
     }
 
     /**
-     * @param Tag $tag
+     * @param TagRevision $tag
      *
-     * @return Tag|AbstractEncryptedEntity
+     * @return TagRevision|AbstractEncryptedEntity
+     * @throws \Exception
      */
-    public function decryptTag(Tag $tag): Tag {
+    public function decryptTag(TagRevision $tag): TagRevision {
         return $this->decryptObject($tag, 'tag');
     }
 
     /**
      * @param AbstractEncryptedEntity $object
-     * @param                         $type
+     * @param string                  $type
      *
      * @return AbstractEncryptedEntity
+     * @throws \OCP\PreConditionNotMetException
      */
     public function encryptObject(AbstractEncryptedEntity $object, string $type): AbstractEncryptedEntity {
 
@@ -125,6 +127,7 @@ class SseV1Encryption implements EncryptionInterface {
      * @param                         $type
      *
      * @return AbstractEncryptedEntity
+     * @throws \Exception
      */
     public function decryptObject(AbstractEncryptedEntity $object, string $type): AbstractEncryptedEntity {
 
@@ -144,6 +147,7 @@ class SseV1Encryption implements EncryptionInterface {
      * @param string $passwordKey
      *
      * @return string
+     * @throws \OCP\PreConditionNotMetException
      */
     protected function getEncryptionKey(string $passwordKey): string {
         return base64_encode(
@@ -169,6 +173,7 @@ class SseV1Encryption implements EncryptionInterface {
 
     /**
      * @return string
+     * @throws \OCP\PreConditionNotMetException
      */
     protected function getUserKey(): string {
         $user    = \OC::$server->getUserSession()->getUser()->getUID();

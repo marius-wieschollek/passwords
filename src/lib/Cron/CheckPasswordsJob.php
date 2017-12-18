@@ -9,8 +9,8 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
-use OCA\Passwords\Db\Revision;
-use OCA\Passwords\Db\RevisionMapper;
+use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Services\HelperService;
 
@@ -27,19 +27,19 @@ class CheckPasswordsJob extends TimedJob {
     protected $helperService;
 
     /**
-     * @var RevisionMapper
+     * @var PasswordRevisionMapper
      */
     protected $revisionMapper;
 
     /**
      * CheckPasswordsJob constructor.
      *
-     * @param HelperService  $helperService
-     * @param RevisionMapper $revisionMapper
+     * @param HelperService          $helperService
+     * @param PasswordRevisionMapper $revisionMapper
      */
     public function __construct(
         HelperService $helperService,
-        RevisionMapper $revisionMapper
+        PasswordRevisionMapper $revisionMapper
     ) {
         // Run once per day
         $this->setInterval(24 * 60 * 60);
@@ -64,7 +64,7 @@ class CheckPasswordsJob extends TimedJob {
      * @param $securityHelper
      */
     protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
-        /** @var Revision[] $revisions */
+        /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionMapper->findAllMatching(['status', 2, '!=']);
         foreach ($revisions as $revision) {
             $oldStatus = $revision->getStatus();

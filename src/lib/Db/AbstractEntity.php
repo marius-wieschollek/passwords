@@ -13,8 +13,8 @@ use OCP\AppFramework\Db\Entity;
 /**
  * Class AbstractEntity
  *
- * @method string getUser()
- * @method void setUser(string $user)
+ * @method string getUserId()
+ * @method void setUserId(string $userId)
  * @method bool getDeleted()
  * @method void setDeleted(bool $deleted)
  * @method int getCreated()
@@ -29,7 +29,7 @@ abstract class AbstractEntity extends Entity {
     /**
      * @var string
      */
-    protected $user;
+    protected $userId;
 
     /**
      * @var bool
@@ -50,7 +50,7 @@ abstract class AbstractEntity extends Entity {
      * Folder constructor.
      */
     public function __construct() {
-        $this->addType('user', 'string');
+        $this->addType('userId', 'string');
         $this->addType('deleted', 'boolean');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');

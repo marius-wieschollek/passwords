@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: marius
- * Date: 09.10.17
- * Time: 14:34
+ * Date: 13.10.17
+ * Time: 17:12
  */
 
 namespace OCA\Passwords\Db;
@@ -11,32 +11,8 @@ namespace OCA\Passwords\Db;
 /**
  * Class Tag
  *
- * @method string getName()
- * @method void setName(string $name)
- * @method string getColor()
- * @method void setColor(string $color)
- *
  * @package OCA\Passwords\Db
  */
-class Tag extends AbstractEncryptedEntity {
+class Tag extends AbstractParentEntity{
 
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $color;
-
-    /**
-     * Tag constructor.
-     */
-    public function __construct() {
-        $this->addType('name', 'string');
-        $this->addType('color', 'string');
-
-        parent::__construct();
-    }
 }

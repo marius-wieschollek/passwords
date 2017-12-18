@@ -11,24 +11,29 @@ namespace OCA\Passwords\Db;
 /**
  * Class Folder
  *
- * @method string getName()
- * @method void setName(string $name)
- *
  * @package OCA\Passwords\Db
+ * @method string getSuspended()
+ * @method void setSuspended(bool $suspended)
  */
-class Folder extends AbstractEncryptedEntity {
-
+class Folder extends AbstractParentEntity {
     /**
      * @var string
      */
-    protected $name;
+    protected $suspended;
 
     /**
-     * Folder constructor.
+     * Password constructor.
      */
     public function __construct() {
-        $this->addType('name', 'string');
+        $this->addType('suspended', 'boolean');
 
         parent::__construct();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuspended(): bool {
+        return $this->getSuspended()===true;
     }
 }

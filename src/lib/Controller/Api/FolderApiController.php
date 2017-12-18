@@ -10,7 +10,8 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
-use \OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\FolderRevisionService;
+use OCA\Passwords\Services\Object\FolderService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -33,17 +34,24 @@ class FolderApiController extends AbstractApiController {
     protected $folderObjectHelper;
 
     /**
+     * @var FolderRevisionService
+     */
+    protected $revisionService;
+
+    /**
      * PasswordApiController constructor.
      *
-     * @param string             $appName
-     * @param IRequest           $request
-     * @param FolderService      $folderService
-     * @param FolderObjectHelper $folderObjectHelper
+     * @param string                        $appName
+     * @param IRequest                      $request
+     * @param FolderService                 $folderService
+     * @param FolderRevisionService         $revisionService
+     * @param FolderObjectHelper            $folderObjectHelper
      */
     public function __construct(
         $appName,
         IRequest $request,
         FolderService $folderService,
+        FolderRevisionService $revisionService,
         FolderObjectHelper $folderObjectHelper
     ) {
         parent::__construct(
@@ -55,6 +63,7 @@ class FolderApiController extends AbstractApiController {
         );
         $this->folderService      = $folderService;
         $this->folderObjectHelper = $folderObjectHelper;
+        $this->revisionService    = $revisionService;
     }
 
     /**
@@ -67,16 +76,15 @@ class FolderApiController extends AbstractApiController {
      */
     public function list(string $details = 'default'): JSONResponse {
         try {
-            $folders = $this->folderService->findFolders();
+            $folders = $this->folderService->getAllFolders();
             $results = [];
 
             foreach ($folders as $folder) {
-                if(!$folder->isHidden() && !$folder->isTrashed()) continue;
+                if($folder->isSuspended()) continue;
+                $object = $this->folderObjectHelper->getApiObject($folder, $details);
 
-                $results[] = $this->folderObjectHelper->getApiObject($folder, $details);
+                if(!$object['hidden'] && !$object['trashed']) $results[] = $object;
             }
-
-            ksort($results);
 
             return $this->createJsonResponse($results);
         } catch (\Throwable $e) {
@@ -96,12 +104,12 @@ class FolderApiController extends AbstractApiController {
      */
     public function find(string $details = 'default', $criteria = []): JSONResponse {
         try {
-            $folders = $this->folderService->findFolders();
+            $folders = $this->folderService->getAllFolders();
             $results = [];
 
             foreach ($folders as $folder) {
-                if(!$folder->isHidden()) continue;
                 $object = $this->folderObjectHelper->getApiObject($folder, $details);
+                if($object['hidden']) continue;
 
                 foreach ($criteria as $key => $value) {
                     if($value == 'true') {
@@ -113,8 +121,6 @@ class FolderApiController extends AbstractApiController {
 
                 $results[] = $object;
             }
-
-            ksort($results);
 
             return $this->createJsonResponse($results);
         } catch (\Throwable $e) {
@@ -148,16 +154,21 @@ class FolderApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $name
+     * @param string $label
+     * @param string $parent
      * @param string $cseType
      * @param string $sseType
      * @param bool   $hidden
      * @param bool   $favourite
      *
+     * @TODO check $parent access
+     * @TODO check is system trash
+     *
      * @return JSONResponse
      */
     public function create(
-        string $name,
+        string $label,
+        string $parent,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         bool $hidden = false,
@@ -165,10 +176,18 @@ class FolderApiController extends AbstractApiController {
     ): JSONResponse {
 
         try {
-            $model = $this->folderService->createFolder($name, $cseType, $sseType, $hidden, false, false, $favourite);
-            $model = $this->folderService->saveFolder($model);
+            $folder   = $this->folderService->createFolder();
+            $revision = $this->revisionService->createRevision(
+                $folder->getUuid(), $label, $parent, $cseType, $sseType, $hidden, false, false, $favourite
+            );
 
-            return $this->createJsonResponse(['folder' => $model->getUuid()], Http::STATUS_CREATED);
+            $this->revisionService->saveRevision($revision);
+            $this->folderService->setFolderRevision($folder, $revision);
+
+            return $this->createJsonResponse(
+                ['folder' => $folder->getUuid(), 'revision' => $revision->getUuid()],
+                Http::STATUS_CREATED
+            );
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
@@ -180,17 +199,22 @@ class FolderApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @param string $id
-     * @param string $name
+     * @param string $label
+     * @param string $parent
      * @param string $cseType
      * @param string $sseType
      * @param bool   $hidden
      * @param bool   $favourite
      *
+     * @TODO check $parent access
+     * @TODO check is system trash
+     *
      * @return JSONResponse
      */
     public function update(
         string $id,
-        string $name,
+        string $label,
+        string $parent,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         bool $hidden = false,
@@ -198,15 +222,16 @@ class FolderApiController extends AbstractApiController {
     ): JSONResponse {
 
         try {
-            $model = $this->folderService->getFolderByUuid($id);
-            $model->setName($name);
-            $model->setCseType($cseType);
-            $model->setSseType($sseType);
-            $model->setHidden($hidden);
-            $model->setFavourite($favourite);
-            $model = $this->folderService->saveFolder($model);
+            $folder = $this->folderService->getFolderByUuid($id);
 
-            return $this->createJsonResponse(['folder' => $model->getUuid()]);
+            $revision = $this->revisionService->createRevision(
+                $folder->getUuid(), $label, $parent, $cseType, $sseType, $hidden, false, false, $favourite
+            );
+
+            $this->revisionService->saveRevision($revision);
+            $this->folderService->setFolderRevision($folder, $revision);
+
+            return $this->createJsonResponse(['folder' => $folder->getUuid(), 'revision' => $revision->getUuid()]);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
@@ -220,18 +245,48 @@ class FolderApiController extends AbstractApiController {
      */
     public function delete(string $id): JSONResponse {
         try {
-            $model = $this->folderService->getFolderByUuid($id);
+            $folder      = $this->folderService->getFolderByUuid($id);
+            $oldRevision = $this->revisionService->getCurrentRevision($folder);
 
-            if(!$model->isTrashed()) {
-                $model->setTrashed(true);
-            } else {
-                $model->setDeleted(true);
+            if($oldRevision->isTrashed()) {
+                $this->folderService->deleteFolder($folder);
+
                 // @TODO Delete all passwords, remove from all folders
+                return $this->createJsonResponse(['folder' => $folder->getUuid()]);
             }
 
-            $this->folderService->saveFolder($model);
+            $newRevision = $this->revisionService->cloneRevision($oldRevision, ['trashed' => true]);
+            $this->revisionService->saveRevision($newRevision);
+            $this->folderService->setFolderRevision($folder, $newRevision);
 
-            return $this->createJsonResponse(['folder' => $model->getUuid()]);
+            return $this->createJsonResponse(['folder' => $folder->getUuid(), 'revision' => $newRevision->getUuid()]);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return JSONResponse
+     */
+    public function restore(string $id): JSONResponse {
+        try {
+
+            $folder      = $this->folderService->getFolderByUuid($id);
+            $oldRevision = $this->revisionService->getCurrentRevision($folder);
+
+            if($oldRevision->isTrashed()) {
+                // @TODO Release relations
+                $newRevision = $this->revisionService->cloneRevision($oldRevision, ['trashed' => false]);
+                $this->revisionService->saveRevision($newRevision);
+                $this->folderService->setFolderRevision($folder, $newRevision);
+
+                return $this->createJsonResponse(['folder' => $folder->getUuid(), 'revision' => $newRevision->getUuid()]);
+            }
+
+            return $this->createJsonResponse(['folder' => $folder->getUuid(), 'revision' => $oldRevision->getUuid()]);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);

@@ -1,8 +1,8 @@
 <?php
 use OCA\Passwords\AppInfo\Application;
 
-script(Application::APP_NAME, ['Helper/compatibility', 'Helper/utility', 'Static/passwords']);
-style(Application::APP_NAME, ['Static/css/passwords']);
+script(Application::APP_NAME, ['Helper/compatibility', 'Helper/utility', 'Static/common', 'Static/app']);
+style(Application::APP_NAME, ['app']);
 ?>
 
 <span data-constant="imagePath" data-value="<?php print_unescaped(image_path('passwords', null)); ?>" style="display:none;"></span>

@@ -9,9 +9,9 @@
 namespace OCA\Passwords\Encryption;
 
 use OCA\Passwords\Db\AbstractEncryptedEntity;
-use OCA\Passwords\Db\Folder;
-use OCA\Passwords\Db\Revision;
-use OCA\Passwords\Db\Tag;
+use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\TagRevision;
 
 /**
  * Interface EncryptionInterface
@@ -25,48 +25,48 @@ interface EncryptionInterface {
     /**
      * Encrypt the values of the given entity
      *
-     * @param Revision $revision
+     * @param PasswordRevision $revision
      *
-     * @return Revision
+     * @return PasswordRevision
      */
-    public function encryptRevision(Revision $revision): Revision;
+    public function encryptRevision(PasswordRevision $revision): PasswordRevision;
 
     /**
      * Decrypt the values of the given entity
      *
-     * @param Revision $revision
+     * @param PasswordRevision $revision
      *
-     * @return Revision
+     * @return PasswordRevision
      */
-    public function decryptRevision(Revision $revision): Revision;
+    public function decryptRevision(PasswordRevision $revision): PasswordRevision;
 
     /**
-     * @param Folder $folder
+     * @param FolderRevision $folder
      *
-     * @return Folder
+     * @return FolderRevision
      */
-    public function encryptFolder(Folder $folder): Folder;
+    public function encryptFolder(FolderRevision $folder): FolderRevision;
 
     /**
-     * @param Folder $folder
+     * @param FolderRevision $folder
      *
-     * @return Folder
+     * @return FolderRevision
      */
-    public function decryptFolder(Folder $folder): Folder;
+    public function decryptFolder(FolderRevision $folder): FolderRevision;
 
     /**
-     * @param Tag $tag
+     * @param TagRevision $tag
      *
-     * @return Tag
+     * @return TagRevision
      */
-    public function encryptTag(Tag $tag): Tag;
+    public function encryptTag(TagRevision $tag): TagRevision;
 
     /**
-     * @param Tag $tag
+     * @param TagRevision $tag
      *
-     * @return Tag
+     * @return TagRevision
      */
-    public function decryptTag(Tag $tag): Tag;
+    public function decryptTag(TagRevision $tag): TagRevision;
 
     /**
      * @param AbstractEncryptedEntity $object

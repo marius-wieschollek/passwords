@@ -13,32 +13,29 @@ use JsonSerializable;
 /**
  * Class Password
  *
- * @method string getUuid()
- * @method void setUuid(string $uuid)
- * @method string getRevision()
- * @method void setRevision(string $revision)
- *
  * @package OCA\Passwords\Db
+ * @method string getSuspended()
+ * @method void setSuspended(bool $suspended)
  */
-class Password extends AbstractEntity {
-
+class Password extends AbstractParentEntity {
     /**
      * @var string
      */
-    protected $uuid;
-
-    /**
-     * @var string
-     */
-    protected $revision;
+    protected $suspended;
 
     /**
      * Password constructor.
      */
     public function __construct() {
-        $this->addType('uuid', 'string');
-        $this->addType('revision', 'string');
+        $this->addType('suspended', 'boolean');
 
         parent::__construct();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuspended(): bool {
+        return $this->getSuspended();
     }
 }

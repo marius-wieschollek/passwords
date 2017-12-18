@@ -1,3 +1,5 @@
+import '@scss/admin';
+
 class PasswordsAdminSettings {
 
     initialize() {
@@ -58,8 +60,7 @@ class PasswordsAdminSettings {
     }
 }
 
-PwSettings = new PasswordsAdminSettings();
-
-$(window).load(function () {
+$(window).load(() => {
+    let PwSettings = new PasswordsAdminSettings();
     PwSettings.initialize();
 });

@@ -17,6 +17,10 @@ namespace OCA\Passwords\Db;
  * @method void setTag(string $tag)
  * @method string getPassword()
  * @method void setPassword(string $password)
+ * @method string getTagRevision()
+ * @method void setTagRevision(string $tagRevision)
+ * @method string getPasswordRevision()
+ * @method void setPasswordRevision(string $passwordRevision)
  */
 class PasswordTagRelation extends AbstractEntity {
 
@@ -31,11 +35,23 @@ class PasswordTagRelation extends AbstractEntity {
     protected $password;
 
     /**
+     * @var string
+     */
+    protected $tagRevision;
+
+    /**
+     * @var string
+     */
+    protected $passwordRevision;
+
+    /**
      * PasswordTagRelation constructor.
      */
     public function __construct() {
         $this->addType('tag', 'string');
         $this->addType('password', 'string');
+        $this->addType('tagRevision', 'string');
+        $this->addType('passwordRevision', 'string');
 
         parent::__construct();
     }

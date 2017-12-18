@@ -61,14 +61,15 @@ class TagService {
     }
 
     /**
-     * @param array $search
-     *
      * @return Tag[]
      */
-    public function findTags(array $search = []) {
-        return $this->tagMapper->findMatching(
-            $search
-        );
+    public function getAllTags() {
+        /** @var Tag[] $tags */
+        $tags = $this->tagMapper->findAll();
+
+        foreach($tags as $tag) $this->encryptionService->decryptTag($tag);
+
+        return $tags;
     }
 
     /**
@@ -77,9 +78,9 @@ class TagService {
      * @return \OCA\Passwords\Db\AbstractEntity|Tag
      */
     public function getTagById(int $tagId) {
-        return $this->tagMapper->findById(
-            $tagId
-        );
+        /** @var Tag $tag */
+        $tag = $this->tagMapper->findById($tagId);
+        return $this->encryptionService->decryptTag($tag);
     }
 
     /**
@@ -88,9 +89,9 @@ class TagService {
      * @return \OCA\Passwords\Db\AbstractEntity|Tag
      */
     public function getTagByUuid(string $tagId): Tag {
-        return $this->tagMapper->findByUuid(
-            $tagId
-        );
+        /** @var Tag $tag */
+        $tag = $this->tagMapper->findByUuid($tagId);
+        return $this->encryptionService->decryptTag($tag);
     }
 
     /**
@@ -105,21 +106,8 @@ class TagService {
      *
      * @return Tag
      */
-    public function createTag(
-        string $name,
-        string $color,
-        string $cseType,
-        string $sseType,
-        bool $hidden,
-        bool $trashed,
-        bool $deleted,
-        bool $favourite
-    ): Tag {
-        $model = $this->createTagModel($name, $color, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
-
-        $model = $this->validationService->validateTag($model);
-
-        return $model;
+    public function createTag(string $revisionUuid): Tag {
+        return $this->createTagModel($revisionUuid);
     }
 
     /**
@@ -147,38 +135,17 @@ class TagService {
     }
 
     /**
-     * @param string $name
-     * @param string $color
-     * @param string $cseType
-     * @param string $sseType
-     * @param bool   $hidden
-     * @param bool   $trashed
-     * @param bool   $deleted
-     * @param bool   $favourite
+     * @param string $revisionUuid
      *
      * @return Tag
+     *
      */
-    protected function createTagModel(
-        string $name,
-        string $color,
-        string $cseType,
-        string $sseType,
-        bool $hidden,
-        bool $trashed,
-        bool $deleted,
-        bool $favourite
-    ): Tag {
+    protected function createTagModel(string $revisionUuid): Tag {
         $model = new Tag();
-        $model->setUser($this->user->getUID());
+        $model->setUserId($this->user->getUID());
         $model->setUuid($this->tagMapper->generateUuidV4());
-        $model->setHidden($hidden);
-        $model->setTrashed($trashed);
-        $model->setDeleted($deleted);
-        $model->setFavourite($favourite);
-        $model->setName($name);
-        $model->setColor($color);
-        $model->setCseType($cseType);
-        $model->setSseType($sseType);
+        $model->setRevision($revisionUuid);
+        $model->setDeleted(false);
         $model->setCreated(time());
         $model->setUpdated(time());
 

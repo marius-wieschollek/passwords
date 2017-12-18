@@ -27,16 +27,10 @@ export default class SimpleApi {
      * @param debug
      */
     constructor(endpoint, username = null, password = null, token = null, debug = false) {
-        this._endpoint = endpoint;
         this._debug = false;
 
         this._headers = {};
-        if (username !== null && password !== null) {
-            this._headers['Authorization'] = 'Basic ' + username + ':' + password;
-        }
-        if (token !== null) {
-            this._headers['X-Passwords-Token'] = token;
-        }
+        this.login(endpoint, username, password, token);
 
         this._encryption = new Encryption();
         this._paths = {
@@ -46,22 +40,35 @@ export default class SimpleApi {
             'tag.create'       : 'api/1.0/tag/create',
             'tag.update'       : 'api/1.0/tag/update',
             'tag.delete'       : 'api/1.0/tag/delete',
+            'tag.restore'      : 'api/1.0/tag/restore',
             'folder.list'      : 'api/1.0/folder/list',
             'folder.find'      : 'api/1.0/folder/find',
             'folder.show'      : 'api/1.0/folder/show',
             'folder.create'    : 'api/1.0/folder/create',
             'folder.update'    : 'api/1.0/folder/update',
             'folder.delete'    : 'api/1.0/folder/delete',
+            'folder.restore'   : 'api/1.0/folder/restore',
             'password.list'    : 'api/1.0/password/list',
             'password.find'    : 'api/1.0/password/find',
             'password.show'    : 'api/1.0/password/show',
             'password.create'  : 'api/1.0/password/create',
             'password.update'  : 'api/1.0/password/update',
             'password.delete'  : 'api/1.0/password/delete',
+            'password.restore' : 'api/1.0/password/restore',
             'password.generate': 'api/1.0/service/password',
             'service.favicon'  : 'api/1.0/service/icon/{domain}/{size}',
             'service.preview'  : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
         };
+    }
+
+    login(endpoint, username = null, password = null, token = null) {
+        this._endpoint = endpoint;
+        if (username !== null && password !== null) {
+            this._headers['Authorization'] = 'Basic ' + btoa(username + ':' + password);
+        }
+        if (token !== null) {
+            this._headers['X-Passwords-Token'] = token;
+        }
     }
 
     /**
@@ -96,7 +103,7 @@ export default class SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showPassword(id, detailLevel = 'default') {
+    showPassword(id, detailLevel = 'model') {
         return this._createRequest('password.show', {id: id, details: detailLevel}, 'POST');
     }
 
@@ -122,12 +129,22 @@ export default class SimpleApi {
     }
 
     /**
+     * Restores the existing password with the given id from trash
+     *
+     * @param id
+     * @returns {Promise}
+     */
+    restorePassword(id) {
+        return this._createRequest('password.restore', {id: id}, 'PATCH');
+    }
+
+    /**
      * Gets all the passwords, excluding those hidden or in trash
      *
      * @param detailLevel
      * @returns {Promise}
      */
-    listPasswords(detailLevel = 'default') {
+    listPasswords(detailLevel = 'model') {
         return this._createRequest('password.list', {details: detailLevel}, 'POST');
     }
 
@@ -138,7 +155,7 @@ export default class SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findPasswords(criteria = {}, detailLevel = 'default') {
+    findPasswords(criteria = {}, detailLevel = 'model') {
         return this._createRequest('password.find', {details: detailLevel, criteria: criteria}, 'POST');
     }
 
@@ -164,7 +181,7 @@ export default class SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showFolder(id = '00000000-0000-0000-0000-000000000000', detailLevel = 'default') {
+    showFolder(id = '00000000-0000-0000-0000-000000000000', detailLevel = 'model') {
         return this._createRequest('folder.show', {id: id, details: detailLevel}, 'POST');
     }
 
@@ -189,12 +206,22 @@ export default class SimpleApi {
     }
 
     /**
+     * Restores the existing folder with the given id from trash
+     *
+     * @param id
+     * @returns {Promise}
+     */
+    restoreFolder(id) {
+        return this._createRequest('folder.restore', {id: id}, 'PATCH');
+    }
+
+    /**
      * Gets all the folders, excluding those hidden or in trash
      *
      * @param detailLevel
      * @returns {Promise}
      */
-    listFolders(detailLevel = 'default') {
+    listFolders(detailLevel = 'model') {
         return this._createRequest('folder.list', {details: detailLevel}, 'POST');
     }
 
@@ -205,7 +232,7 @@ export default class SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findFolders(criteria = {}, detailLevel = 'default') {
+    findFolders(criteria = {}, detailLevel = 'model') {
         return this._createRequest('folder.find', {details: detailLevel, criteria: criteria}, 'POST');
     }
 
@@ -231,7 +258,7 @@ export default class SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showTag(id, detailLevel = 'default') {
+    showTag(id, detailLevel = 'model') {
         return this._createRequest('tag.show', {id: id, details: detailLevel}, 'POST');
     }
 
@@ -256,12 +283,22 @@ export default class SimpleApi {
     }
 
     /**
+     * Restores the existing tag with the given id from trash
+     *
+     * @param id
+     * @returns {Promise}
+     */
+    restoreTag(id) {
+        return this._createRequest('tag.restore', {id: id}, 'PATCH');
+    }
+
+    /**
      * Gets all the tag, excluding those hidden or in trash
      *
      * @param detailLevel
      * @returns {Promise}
      */
-    listTags(detailLevel = 'default') {
+    listTags(detailLevel = 'model') {
         return this._createRequest('tag.list', {details: detailLevel}, 'POST');
     }
 
@@ -272,7 +309,7 @@ export default class SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findTags(criteria = {}, detailLevel = 'default') {
+    findTags(criteria = {}, detailLevel = 'model') {
         return this._createRequest('tag.find', {details: detailLevel, criteria: criteria}, 'POST');
     }
 
@@ -416,6 +453,9 @@ export default class SimpleApi {
      */
     static parseUrl(url, component = null) {
         let link = document.createElement('a');
+
+        if (url.indexOf('://') === -1) url = 'http://' + url;
+
         link.setAttribute('href', url);
 
         if (component !== null) return link[component];

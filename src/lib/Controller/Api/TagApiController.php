@@ -67,13 +67,13 @@ class TagApiController extends AbstractApiController {
      */
     public function list(string $details = 'default'): JSONResponse {
         try {
-            $tags = $this->tagService->findTags();
+            $tags = $this->tagService->getAllTags();
             $results = [];
 
             foreach ($tags as $tag) {
-                if(!$tag->isHidden() && !$tag->isTrashed()) continue;
+                $object = $this->tagObjectHelper->getApiObject($tag, $details);
 
-                $results[] = $this->tagObjectHelper->getApiObject($tag, $details);
+                if(!$object['hidden'] && !$object['trashed']) $results[] = $object;
             }
 
             ksort($results);
@@ -96,12 +96,12 @@ class TagApiController extends AbstractApiController {
      */
     public function find(string $details = 'default', $criteria = []): JSONResponse {
         try {
-            $tags = $this->tagService->findTags();
+            $tags = $this->tagService->getAllTags();
             $results = [];
 
             foreach ($tags as $tag) {
-                if(!$tag->isHidden()) continue;
                 $object = $this->tagObjectHelper->getApiObject($tag, $details);
+                if(!$object['hidden']) continue;
 
                 foreach ($criteria as $key => $value) {
                     if($value == 'true') {
@@ -148,7 +148,7 @@ class TagApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $name
+     * @param string $label
      * @param string $color
      * @param string $cseType
      * @param string $sseType
@@ -158,7 +158,7 @@ class TagApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function create(
-        string $name,
+        string $label,
         string $color,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
@@ -167,7 +167,7 @@ class TagApiController extends AbstractApiController {
     ): JSONResponse {
 
         try {
-            $model = $this->tagService->createTag($name, $color, $cseType, $sseType, $hidden, false, false, $favourite);
+            $model = $this->tagService->createTag($label, $color, $cseType, $sseType, $hidden, false, false, $favourite);
             $model = $this->tagService->saveTag($model);
 
             return $this->createJsonResponse(['tag' => $model->getUuid()], Http::STATUS_CREATED);
@@ -235,6 +235,28 @@ class TagApiController extends AbstractApiController {
             }
 
             $this->tagService->saveTag($model);
+
+            return $this->createJsonResponse(['tag' => $model->getUuid()]);
+        } catch (\Throwable $e) {
+
+            return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return JSONResponse
+     */
+    public function restore(string $id): JSONResponse {
+        try {
+            $model = $this->tagService->getTagByUuid($id);
+
+            if($model->isTrashed()) {
+                $model->setTrashed(false);
+                // @TODO Release relations
+                $this->tagService->saveTag($model);
+            }
 
             return $this->createJsonResponse(['tag' => $model->getUuid()]);
         } catch (\Throwable $e) {

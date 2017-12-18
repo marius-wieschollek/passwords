@@ -21,6 +21,7 @@ $application->registerRoutes($this, [
         ['name' => 'password_api#create', 'url' => '/api/1.0/password/create', 'verb' => 'POST'],
         ['name' => 'password_api#update', 'url' => '/api/1.0/password/update', 'verb' => 'PATCH'],
         ['name' => 'password_api#delete', 'url' => '/api/1.0/password/delete', 'verb' => 'DELETE'],
+        ['name' => 'password_api#restore', 'url' => '/api/1.0/password/restore', 'verb' => 'PATCH'],
 
         ['name' => 'folder_api#find', 'url' => '/api/1.0/folder/find', 'verb' => 'POST'],
         ['name' => 'folder_api#list', 'url' => '/api/1.0/folder/list', 'verb' => 'GET'],
@@ -29,6 +30,7 @@ $application->registerRoutes($this, [
         ['name' => 'folder_api#create', 'url' => '/api/1.0/folder/create', 'verb' => 'POST'],
         ['name' => 'folder_api#update', 'url' => '/api/1.0/folder/update', 'verb' => 'PATCH'],
         ['name' => 'folder_api#delete', 'url' => '/api/1.0/folder/delete', 'verb' => 'DELETE'],
+        ['name' => 'folder_api#restore', 'url' => '/api/1.0/folder/restore', 'verb' => 'PATCH'],
 
         ['name' => 'tag_api#find', 'url' => '/api/1.0/tag/find', 'verb' => 'POST'],
         ['name' => 'tag_api#list', 'url' => '/api/1.0/tag/list', 'verb' => 'GET'],
@@ -37,6 +39,7 @@ $application->registerRoutes($this, [
         ['name' => 'tag_api#create', 'url' => '/api/1.0/tag/create', 'verb' => 'POST'],
         ['name' => 'tag_api#update', 'url' => '/api/1.0/tag/update', 'verb' => 'PATCH'],
         ['name' => 'tag_api#delete', 'url' => '/api/1.0/tag/delete', 'verb' => 'DELETE'],
+        ['name' => 'tag_api#restore', 'url' => '/api/1.0/tag/restore', 'verb' => 'PATCH'],
 
         ['name' => 'share_api#find', 'url' => '/api/1.0/share/find', 'verb' => 'POST'],
         ['name' => 'share_api#list', 'url' => '/api/1.0/share/list', 'verb' => 'GET'],

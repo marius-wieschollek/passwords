@@ -10,8 +10,8 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
-use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\ValidationService;
+use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCP\IUser;
 
 /**
@@ -19,7 +19,8 @@ use OCP\IUser;
  *
  * @package OCA\Passwords\Services
  */
-class FolderService {
+class FolderService extends AbstractService {
+    const BASE_FOLDER_UUID = '00000000-0000-0000-0000-000000000000';
 
     /**
      * @var IUser
@@ -27,97 +28,93 @@ class FolderService {
     protected $user;
 
     /**
-     * @var ValidationService
-     */
-    protected $validationService;
-
-    /**
-     * @var EncryptionService
-     */
-    protected $encryptionService;
-    /**
      * @var FolderMapper
      */
-    private $folderMapper;
+    protected $folderMapper;
+
+    /**
+     * @var HookManager
+     */
+    protected $hookManager;
 
     /**
      * FolderService constructor.
      *
-     * @param IUser             $user
-     * @param FolderMapper      $folderMapper
-     * @param ValidationService $validationService
-     * @param EncryptionService $encryptionService
+     * @param IUser        $user
+     * @param HookManager  $hookManager
+     * @param FolderMapper $folderMapper
      */
     public function __construct(
         IUser $user,
-        FolderMapper $folderMapper,
-        ValidationService $validationService,
-        EncryptionService $encryptionService
+        HookManager $hookManager,
+        FolderMapper $folderMapper
     ) {
-        $this->user              = $user;
-        $this->folderMapper      = $folderMapper;
-        $this->validationService = $validationService;
-        $this->encryptionService = $encryptionService;
+        $this->user         = $user;
+        $this->folderMapper = $folderMapper;
+        $this->hookManager  = $hookManager;
     }
 
     /**
-     * @param array $search
-     *
      * @return Folder[]
      */
-    public function findFolders(array $search = []) {
-        return $this->folderMapper->findMatching(
-            $search
-        );
+    public function getAllFolders() {
+        /** @var Folder[] $folders */
+        return $this->folderMapper->findAll();
     }
 
     /**
-     * @param int $folderId
+     * @param int $id
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Folder
+     *
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getFolderById(int $folderId) {
-        return $this->folderMapper->findById(
-            $folderId
-        );
+    public function getFolderById(int $id) {
+        return $this->folderMapper->findById($id);
     }
 
     /**
-     * @param string $folderId
+     * @param string $uuid
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Folder
+     *
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getFolderByUuid(string $folderId): Folder {
-        return $this->folderMapper->findByUuid(
-            $folderId
-        );
+    public function getFolderByUuid(string $uuid): Folder {
+        if($uuid === self::BASE_FOLDER_UUID) return $this->getBaseFolder();
+
+        return $this->folderMapper->findByUuid($uuid);
     }
 
     /**
-     * @param string $name
-     * @param string $cseType
-     * @param string $sseType
-     * @param bool   $hidden
-     * @param bool   $trashed
-     * @param bool   $deleted
-     * @param bool   $favourite
+     * @param string $uuid
+     *
+     * @return \OCA\Passwords\Db\AbstractEntity|Folder[]
+     */
+    public function getFoldersByParent(string $uuid): array {
+        return $this->folderMapper->getByParentFolder($uuid);
+    }
+
+    /**
+     * @return Folder
+     */
+    public function getBaseFolder(): Folder {
+
+        $model = $this->createModel(FolderRevisionService::BASE_REVISION_UUID);
+        $model->setUuid(self::BASE_FOLDER_UUID);
+
+        return $model;
+    }
+
+    /**
+     * @param string $revisionUuid
      *
      * @return Folder
      */
-    public function createFolder(
-        string $name,
-        string $cseType,
-        string $sseType,
-        bool $hidden,
-        bool $trashed,
-        bool $deleted,
-        bool $favourite
-    ): Folder {
-        $model = $this->createFolderModel($name, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
-
-        $model = $this->validationService->validateFolder($model);
-
-        return $model;
+    public function createFolder(string $revisionUuid = ''): Folder {
+        return $this->createModel($revisionUuid);
     }
 
     /**
@@ -126,8 +123,9 @@ class FolderService {
      * @return Folder|\OCP\AppFramework\Db\Entity
      */
     public function saveFolder(Folder $folder): Folder {
-        $folder = $this->encryptionService->encryptFolder($folder);
+        if($folder->getUuid() === self::BASE_FOLDER_UUID) return $folder;
 
+        $this->hookManager->emit(Folder::class, 'preSave', [$folder]);
         if(empty($folder->getId())) {
             return $this->folderMapper->insert($folder);
         } else {
@@ -139,43 +137,71 @@ class FolderService {
 
     /**
      * @param Folder $folder
-     */
-    public function destroyFolder(Folder $folder) {
-        $this->folderMapper->delete($folder);
-    }
-
-    /**
-     * @param string $name
-     * @param string $cseType
-     * @param string $sseType
-     * @param bool   $hidden
-     * @param bool   $trashed
-     * @param bool   $deleted
-     * @param bool   $favourite
+     * @param array  $overwrites
      *
      * @return Folder
      */
-    protected function createFolderModel(
-        string $name,
-        string $cseType,
-        string $sseType,
-        bool $hidden,
-        bool $trashed,
-        bool $deleted,
-        bool $favourite
-    ): Folder {
+    public function cloneFolder(Folder $folder, array $overwrites = []): Folder {
+        $this->hookManager->emit(Folder::class, 'preClone', [$folder]);
+        /** @var Folder $clone */
+        $clone = $this->cloneModel($folder, $overwrites);
+        $clone->setUuid($this->folderMapper->generateUuidV4());
+        $this->hookManager->emit(Folder::class, 'postClone', [$folder, $clone]);
+
+        return $clone;
+    }
+
+    /**
+     * @param Folder $folder
+     */
+    public function deleteFolder(Folder $folder) {
+        $this->hookManager->emit(Folder::class, 'preDelete', [$folder]);
+        $folder->setDeleted(true);
+        $this->saveFolder($folder);
+        $this->hookManager->emit(Folder::class, 'postDelete', [$folder]);
+    }
+
+    /**
+     * @param Folder $folder
+     */
+    public function destroyFolder(Folder $folder) {
+        $this->hookManager->emit(Folder::class, 'preDestroy', [$folder]);
+        $this->folderMapper->delete($folder);
+        $this->hookManager->emit(Folder::class, 'postDestroy', [$folder]);
+    }
+
+    /**
+     * @param Folder         $folder
+     * @param FolderRevision $revision
+     *
+     * @throws \Exception
+     */
+    public function setFolderRevision(Folder $folder, FolderRevision $revision) {
+        if($revision->getModel() === $folder->getUuid()) {
+            $this->hookManager->emit(Folder::class, 'preSetRevision', [$folder, $revision]);
+            $folder->setRevision($revision->getUuid());
+            $folder->setUpdated(time());
+            $this->saveFolder($folder);
+            $this->hookManager->emit(Folder::class, 'postSetRevision', [$folder, $revision]);
+        } else {
+            throw new \Exception('Password ID did not match when setting password revision');
+        }
+    }
+
+    /**
+     * @param string $revisionUuid
+     *
+     * @return Folder
+     */
+    protected function createModel(string $revisionUuid): Folder {
         $model = new Folder();
-        $model->setUser($this->user->getUID());
+        $model->setUserId($this->user->getUID());
         $model->setUuid($this->folderMapper->generateUuidV4());
-        $model->setHidden($hidden);
-        $model->setTrashed($trashed);
-        $model->setDeleted($deleted);
-        $model->setFavourite($favourite);
-        $model->setName($name);
-        $model->setCseType($cseType);
-        $model->setSseType($sseType);
+        $model->setDeleted(false);
         $model->setCreated(time());
         $model->setUpdated(time());
+
+        $model->setRevision($revisionUuid);
 
         return $model;
     }

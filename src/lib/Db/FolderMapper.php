@@ -17,4 +17,21 @@ class FolderMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_folder';
 
+    /**
+     * @param string $parentUuid
+     *
+     * @return array
+     */
+    public function getByParentFolder(string $parentUuid) {
+        $folderTable = '`*PREFIX*'.static::TABLE_NAME.'`';
+        $revisionTable = '`*PREFIX*'.FolderRevisionMapper::TABLE_NAME.'`';
+
+        $sql = 'SELECT '.$folderTable.'.* FROM '.$folderTable.
+               'INNER JOIN '.$revisionTable.' ON '.$folderTable.'.`revision` = '.$revisionTable.'.`uuid`'.
+               ' WHERE '.$folderTable.'.`deleted` = 0  AND '.$folderTable.'.`user_id` = ?'.
+               ' AND '.$revisionTable.'.`parent` = ? AND '.$revisionTable.'.`deleted` = 0  AND '.$revisionTable.'.`user_id` = ?';
+
+        return $this->findEntities($sql, [$this->userId, $parentUuid, $this->userId]);
+    }
+
 }

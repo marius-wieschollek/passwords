@@ -2,12 +2,10 @@
 .idea
 
 # CSS files
-src/css/*.map
-src/css/Static/
+src/css/
 
 # JS files
 src/js/Static/
 
 # Other files
-src/bin
 node_modules/

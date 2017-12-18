@@ -16,12 +16,11 @@ use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
-use OCA\Passwords\Db\FolderFolderRelationMapper;
 use OCA\Passwords\Db\FolderMapper;
-use OCA\Passwords\Db\PasswordFolderRelationMapper;
+use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\PasswordMapper;
+use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
-use OCA\Passwords\Db\RevisionMapper;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
@@ -43,14 +42,16 @@ use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
-use OCA\Passwords\Services\Object\RevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\PageShotService;
 use OCA\Passwords\Services\ValidationService;
@@ -88,6 +89,7 @@ class Application extends App {
      */
     protected function registerDiClasses(): void {
         $container = $this->getContainer();
+        $container->getServer()->getUserManager();
 
         /**
          * Controllers
@@ -100,6 +102,13 @@ class Application extends App {
         $this->registerMapper();
 
         /**
+         * Hooks
+         */
+        $container->registerService('HookManager', function (IAppContainer $c) {
+            return new HookManager();
+        });
+
+        /**
          * Services
          */
         $this->registerServices();
@@ -109,12 +118,15 @@ class Application extends App {
          */
         $container->registerService('PasswordObjectHelper', function (IAppContainer $c) {
             return new PasswordObjectHelper(
-                $c->query('RevisionService')
+                $c->query('PasswordRevisionService')
             );
         });
         $container->registerService('FolderObjectHelper', function (IAppContainer $c) {
             return new FolderObjectHelper(
-                $c->query('FolderService')
+                $c->query('FolderService'),
+                $c->query('PasswordService'),
+                $c->query('PasswordObjectHelper'),
+                $c->query('FolderRevisionService')
             );
         });
         $container->registerService('TagObjectHelper', function (IAppContainer $c) {
@@ -145,7 +157,7 @@ class Application extends App {
         $container->registerService('CheckPasswordsJob', function (IAppContainer $c) {
             return new CheckPasswordsJob(
                 $c->query('HelperService'),
-                $c->query('RevisionMapper')
+                $c->query('PasswordRevisionMapper')
             );
         });
 
@@ -181,14 +193,14 @@ class Application extends App {
 
         $container->registerService('PageController', function (IAppContainer $c) {
             return new PageController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request')
             );
         });
 
         $container->registerService('AccessController', function (IAppContainer $c) {
             return new AccessController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request'),
                 $c->getServer()->getURLGenerator()
             );
@@ -196,26 +208,27 @@ class Application extends App {
 
         $container->registerService('PasswordApiController', function (IAppContainer $c) {
             return new PasswordApiController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request'),
                 $c->query('PasswordService'),
-                $c->query('RevisionService'),
+                $c->query('PasswordRevisionService'),
                 $c->query('PasswordObjectHelper')
             );
         });
 
         $container->registerService('FolderApiController', function (IAppContainer $c) {
             return new FolderApiController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request'),
                 $c->query('FolderService'),
+                $c->query('FolderRevisionService'),
                 $c->query('FolderObjectHelper')
             );
         });
 
         $container->registerService('TagApiController', function (IAppContainer $c) {
             return new TagApiController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request'),
                 $c->query('TagService'),
                 $c->query('TagObjectHelper')
@@ -224,7 +237,7 @@ class Application extends App {
 
         $container->registerService('ServiceApiController', function (IAppContainer $c) {
             return new ServiceApiController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request'),
                 $c->query('FaviconService'),
                 $c->query('PageShotService'),
@@ -234,7 +247,7 @@ class Application extends App {
 
         $container->registerService('AdminSettingsController', function (IAppContainer $c) {
             return new AdminSettingsController(
-                $c->query('AppName'),
+                self::APP_NAME,
                 $c->query('Request'),
                 $c->getServer()->getConfig(),
                 $this->getFileCacheService()
@@ -255,8 +268,8 @@ class Application extends App {
             );
         });
 
-        $container->registerService('RevisionMapper', function (IAppContainer $c) {
-            return new RevisionMapper(
+        $container->registerService('PasswordRevisionMapper', function (IAppContainer $c) {
+            return new PasswordRevisionMapper(
                 $c->getServer()->getDatabaseConnection(),
                 $this->getUserId()
             );
@@ -264,6 +277,12 @@ class Application extends App {
 
         $container->registerService('FolderMapper', function (IAppContainer $c) {
             return new FolderMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+        $container->registerService('FolderRevisionMapper', function (IAppContainer $c) {
+            return new FolderRevisionMapper(
                 $c->getServer()->getDatabaseConnection(),
                 $this->getUserId()
             );
@@ -276,22 +295,8 @@ class Application extends App {
             );
         });
 
-        $container->registerService('PasswordFolderRelationMapper', function (IAppContainer $c) {
-            return new PasswordFolderRelationMapper(
-                $c->getServer()->getDatabaseConnection(),
-                $this->getUserId()
-            );
-        });
-
         $container->registerService('PasswordTagRelationMapper', function (IAppContainer $c) {
             return new PasswordTagRelationMapper(
-                $c->getServer()->getDatabaseConnection(),
-                $this->getUserId()
-            );
-        });
-
-        $container->registerService('FolderFolderRelationMapper', function (IAppContainer $c) {
-            return new FolderFolderRelationMapper(
                 $c->getServer()->getDatabaseConnection(),
                 $this->getUserId()
             );
@@ -304,30 +309,39 @@ class Application extends App {
     protected function registerServices(): void {
         $container = $this->getContainer();
 
-        $container->registerService('PasswordService', function (IAppContainer $c) {
-            return new PasswordService(
+        $container->registerService('FolderRevisionService', function (IAppContainer $c) {
+            return new FolderRevisionService(
                 $c->getServer()->getUserSession()->getUser(),
-                $c->query('PasswordMapper'),
-                $c->query('PasswordFolderRelationMapper')
+                $c->query('HookManager'),
+                $c->query('FolderRevisionMapper'),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
+            );
+        });
+        $container->registerService('FolderService', function (IAppContainer $c) {
+            return new FolderService(
+                $c->getServer()->getUserSession()->getUser(),
+                $c->query('HookManager'),
+                $c->query('FolderMapper')
             );
         });
 
-        $container->registerService('RevisionService', function (IAppContainer $c) {
-            return new RevisionService(
+        $container->registerService('PasswordRevisionService', function (IAppContainer $c) {
+            return new PasswordRevisionService(
                 $c->getServer()->getUserSession()->getUser(),
-                $c->query('RevisionMapper'),
+                $c->query('HookManager'),
                 $c->query('ValidationService'),
                 $c->query('EncryptionService'),
+                $c->query('PasswordRevisionMapper'),
                 $c->query('HelperService')->getSecurityHelper()
             );
         });
 
-        $container->registerService('FolderService', function (IAppContainer $c) {
-            return new FolderService(
+        $container->registerService('PasswordService', function (IAppContainer $c) {
+            return new PasswordService(
                 $c->getServer()->getUserSession()->getUser(),
-                $c->query('FolderMapper'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService')
+                $c->query('PasswordMapper'),
+                $c->query('HookManager')
             );
         });
 

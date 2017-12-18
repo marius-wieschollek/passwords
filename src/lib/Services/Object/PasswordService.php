@@ -9,10 +9,9 @@
 namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Password;
-use OCA\Passwords\Db\PasswordFolderRelation;
-use OCA\Passwords\Db\PasswordFolderRelationMapper;
 use OCA\Passwords\Db\PasswordMapper;
-use OCA\Passwords\Db\Revision;
+use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCP\IUser;
 
 /**
@@ -20,7 +19,7 @@ use OCP\IUser;
  *
  * @package OCA\Passwords\Services
  */
-class PasswordService {
+class PasswordService extends AbstractService {
 
     /**
      * @var IUser
@@ -33,97 +32,55 @@ class PasswordService {
     protected $passwordMapper;
 
     /**
-     * @var PasswordFolderRelationMapper
+     * @var HookManager
      */
-    protected $folderRelationMapper;
+    protected $hookManager;
 
     /**
      * PasswordService constructor.
      *
-     * @param IUser                        $user
-     * @param PasswordMapper               $passwordMapper
-     * @param PasswordFolderRelationMapper $folderRelationMapper
+     * @param IUser          $user
+     * @param PasswordMapper $passwordMapper
+     * @param HookManager    $hookManager
      */
-    public function __construct(
-        IUser $user,
-        PasswordMapper $passwordMapper,
-        PasswordFolderRelationMapper $folderRelationMapper
-    ) {
+    public function __construct(IUser $user, PasswordMapper $passwordMapper, HookManager $hookManager) {
         $this->user           = $user;
         $this->passwordMapper = $passwordMapper;
-        $this->folderRelationMapper = $folderRelationMapper;
+        $this->hookManager    = $hookManager;
     }
 
     /**
-     * @param string $passwordUuid
-     *
-     * @return array|\OCA\Passwords\Db\AbstractEntity[]|\OCP\AppFramework\Db\Entity[]
-     */
-    public function getPasswordFolderRelations(string $passwordUuid) {
-        return $this->folderRelationMapper->findByPassword($passwordUuid);
-    }
-
-    /**
-     * @param string $passwordUuid
-     * @param array  $folders
-     */
-    public function setPasswordFolderRelations(string $passwordUuid, array $folders) {
-        $relations = $this->folderRelationMapper->findByPassword($passwordUuid);
-
-        foreach($relations as $relation) {
-            if(($key = array_search($relation->getFolder(), $folders)) !== false) {
-                unset($folders[$key]);
-                $relation->setUpdated(time());
-                $this->folderRelationMapper->update($relation);
-            } else {
-                $relation->setUpdated(time());
-                $relation->setDeleted(true);
-                $this->folderRelationMapper->update($relation);
-            }
-        }
-
-        foreach($folders as $folder) {
-            $relation = new PasswordFolderRelation();
-            $relation->setPassword($passwordUuid);
-            $relation->setFolder($folder);
-            $relation->setUser($this->user->getUID());
-            $relation->setUpdated(time());
-            $relation->setCreated(time());
-            $this->folderRelationMapper->insert($relation);
-        }
-    }
-
-    /**
-     * @param array $search
-     *
      * @return Password[]
      */
-    public function findPasswords(array $search = []) {
-        return $this->passwordMapper->findMatching(
-            $search
-        );
+    public function getAllPasswords() {
+        return $this->passwordMapper->findAll();
     }
 
     /**
-     * @param int $passwordId
+     * @param int $id
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Password
      */
-    public function getPasswordById(int $passwordId) {
-        return $this->passwordMapper->findById(
-            $passwordId
-        );
+    public function getPasswordById(int $id) {
+        return $this->passwordMapper->findById($id);
     }
 
     /**
-     * @param string $passwordId
+     * @param string $uuid
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Password
      */
-    public function getPasswordByUuid(string $passwordId): Password {
-        return $this->passwordMapper->findByUuid(
-            $passwordId
-        );
+    public function getPasswordByUuid(string $uuid): Password {
+        return $this->passwordMapper->findByUuid($uuid);
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return \OCA\Passwords\Db\AbstractEntity|Password[]
+     */
+    public function getPasswordsByFolder(string $uuid): array {
+        return $this->passwordMapper->getByFolder($uuid);
     }
 
     /**
@@ -132,7 +89,7 @@ class PasswordService {
      * @return Password
      */
     public function createPassword(string $revisionUuid = ''): Password {
-        return $this->createPasswordModel($revisionUuid);
+        return $this->createModel($revisionUuid);
     }
 
     /**
@@ -141,6 +98,7 @@ class PasswordService {
      * @return Password|\OCP\AppFramework\Db\Entity
      */
     public function savePassword(Password $password): Password {
+        $this->hookManager->emit(Password::class, 'preSave', [$password]);
         if(empty($password->getId())) {
             return $this->passwordMapper->insert($password);
         } else {
@@ -152,22 +110,53 @@ class PasswordService {
 
     /**
      * @param Password $password
+     * @param array    $overwrites
+     *
+     * @return Password
      */
-    public function destroyPassword(Password $password) {
-        $this->passwordMapper->delete($password);
+    public function clonePassword(Password $password, array $overwrites = []): Password {
+        $this->hookManager->emit(Password::class, 'preClone', [$password]);
+        /** @var Password $clone */
+        $clone = $this->cloneModel($password, $overwrites);
+        $clone->setUuid($this->passwordMapper->generateUuidV4());
+        $this->hookManager->emit(Password::class, 'postClone', [$password, $clone]);
+
+        return $clone;
     }
 
     /**
      * @param Password $password
-     * @param Revision $revision
+     */
+    public function deletePassword(Password $password) {
+        $this->hookManager->emit(Password::class, 'preDelete', [$password]);
+        $password->setDeleted(true);
+        $this->savePassword($password);
+        $this->hookManager->emit(Password::class, 'postDelete', [$password]);
+    }
+
+    /**
+     * @param Password $password
+     */
+    public function destroyPassword(Password $password) {
+        if(!$password->isDeleted()) $this->deletePassword($password);
+        $this->hookManager->emit(Password::class, 'preDestroy', [$password]);
+        $this->passwordMapper->delete($password);
+        $this->hookManager->emit(Password::class, 'postDestroy', [$password]);
+    }
+
+    /**
+     * @param Password         $password
+     * @param PasswordRevision $revision
      *
      * @throws \Exception
      */
-    public function setPasswordRevision(Password $password, Revision $revision) {
-        if($revision->getPasswordId() === $password->getUuid()) {
+    public function setPasswordRevision(Password $password, PasswordRevision $revision) {
+        if($revision->getModel() === $password->getUuid()) {
+            $this->hookManager->emit(Password::class, 'preSetRevision', [$password, $revision]);
             $password->setRevision($revision->getUuid());
             $password->setUpdated(time());
             $this->savePassword($password);
+            $this->hookManager->emit(Password::class, 'postSetRevision', [$password, $revision]);
         } else {
             throw new \Exception('Password ID did not match when setting password revision');
         }
@@ -178,14 +167,15 @@ class PasswordService {
      *
      * @return Password
      */
-    protected function createPasswordModel(string $revision): Password {
+    protected function createModel(string $revision): Password {
         $model = new Password();
-        $model->setDeleted(0);
-        $model->setUser($this->user->getUID());
+        $model->setDeleted(false);
+        $model->setUserId($this->user->getUID());
         $model->setUuid($this->passwordMapper->generateUuidV4());
-        $model->setRevision($revision);
         $model->setCreated(time());
         $model->setUpdated(time());
+
+        $model->setRevision($revision);
 
         return $model;
     }

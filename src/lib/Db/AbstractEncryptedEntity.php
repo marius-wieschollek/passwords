@@ -19,6 +19,8 @@ namespace OCA\Passwords\Db;
  * @method void setSseType(string $sseType)
  * @method string getCseType()
  * @method void setCseType(string $cseType)
+ * @method string getModel()
+ * @method void setModel(string $model)
  * @method bool getHidden()
  * @method void setHidden(bool $hidden)
  * @method bool getTrashed()
@@ -51,10 +53,14 @@ class AbstractEncryptedEntity extends AbstractEntity {
     protected $cseType;
 
     /**
+     * @var string
+     */
+    protected $model;
+
+    /**
      * @var bool
      */
     protected $hidden;
-
 
     /**
      * @var bool
@@ -67,6 +73,11 @@ class AbstractEncryptedEntity extends AbstractEntity {
     protected $favourite;
 
     /**
+     * @var bool
+     */
+    protected $_decrypted = false;
+
+    /**
      * AbstractEncryptedEntity constructor.
      */
     public function __construct() {
@@ -75,6 +86,7 @@ class AbstractEncryptedEntity extends AbstractEntity {
         $this->addType('cseType', 'string');
 
         $this->addType('uuid', 'string');
+        $this->addType('model', 'string');
         $this->addType('hidden', 'boolean');
         $this->addType('trashed', 'boolean');
         $this->addType('favourite', 'boolean');
@@ -100,6 +112,20 @@ class AbstractEncryptedEntity extends AbstractEntity {
      * @return bool
      */
     public function isFavourite(): bool {
-        return $this->getHidden();
+        return $this->getFavourite();
+    }
+
+    /**
+     * @return bool
+     */
+    public function _isDecrypted(): bool {
+        return $this->_decrypted === true;
+    }
+
+    /**
+     * @param bool $decrypted
+     */
+    public function _setDecrypted(bool $decrypted) {
+        $this->_decrypted = $decrypted === true;
     }
 }

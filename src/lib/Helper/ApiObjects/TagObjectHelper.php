@@ -19,8 +19,9 @@ use OCA\Passwords\Services\Object\TagService;
  */
 class TagObjectHelper {
 
-    const LEVEL_DEFAULT = 'default';
-    const LEVEL_DETAILS = 'details';
+    const LEVEL_MODEL     = 'default';
+    const LEVEL_RELATIONS = 'relations';
+    const LEVEL_PASSWORDS = 'passwords';
 
     /**
      * @var TagService
@@ -37,23 +38,27 @@ class TagObjectHelper {
     }
 
     /**
-     * @param Tag    $tag
-     * @param string $level
+     * @param Tag $tag
+     * @param string      $level
      *
      * @return array
      * @throws Exception
      */
-    public function getApiObject(Tag $tag, string $level = self::LEVEL_DEFAULT): array {
-        switch ($level) {
-            case self::LEVEL_DEFAULT:
-                return $this->getDefaultTagObject($tag);
-                break;
-            case self::LEVEL_DETAILS:
-                return $this->getDetailedTagObject($tag);
-                break;
+    public function getApiObject(Tag $tag, string $level = self::LEVEL_MODEL): array {
+        $detailLevel = explode('+', $level);
+
+        $object = [];
+        if(in_array(self::LEVEL_MODEL, $detailLevel)) {
+            $object = $this->getModel($tag);
+        }
+        if(in_array(self::LEVEL_RELATIONS, $detailLevel)) {
+            $object = $this->getRelations($tag, $object);
+        }
+        if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
+            $object = $this->getPasswords($tag, $object);
         }
 
-        throw new Exception('Invalid information detail level');
+        return $object;
     }
 
     /**
@@ -61,28 +66,45 @@ class TagObjectHelper {
      *
      * @return array
      */
-    protected function getDefaultTagObject(Tag $tag): array {
+    protected function getModel(Tag $tag): array {
 
         return [
             'id'        => $tag->getUuid(),
-            'owner'     => $tag->getUser(),
+            'owner'     => $tag->getUserId(),
             'created'   => $tag->getCreated(),
             'updated'   => $tag->getUpdated(),
+            'revision'   => $tag->getRevision(),
             'hidden'    => $tag->getHidden(),
             'trashed'   => $tag->getTrashed(),
+            'favourite' => $tag->getFavourite(),
             'name'      => $tag->getName(),
-            'color'     => $tag->getColor(),
-            'passwords' => []
+            'color'     => $tag->getColor()
         ];
     }
 
     /**
-     * @param $tag
+     * @param Tag $tag
+     * @param array       $object
      *
      * @return array
      */
-    protected function getDetailedTagObject($tag): array {
+    protected function getRelations(Tag $tag, array $object): array {
 
-        return $this->getDefaultTagObject($tag);
+        $object['passwords'] = [];
+
+        return $object;
+    }
+
+    /**
+     * @param $tag
+     * @param array $object
+     *
+     * @return array
+     */
+    protected function getPasswords(Tag $tag, array $object): array {
+
+        $object['passwords'] = [];
+
+        return $object;
     }
 }

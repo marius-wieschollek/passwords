@@ -2,8 +2,8 @@
 /** @var $l \OCP\IL10N */
 /** @var $_ array */
 
-#script('passwords', 'personal');         // adds a Javascript file
-style('passwords', 'personal');    // adds a CSS file
+script('passwords', ['Static/common', 'Static/personal']);
+style('passwords', 'personal');
 
 $tmpl = new \OCP\Template('passwords', 'personal/settings');
 

@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
-use OCA\Passwords\Db\Revision;
+use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 
@@ -58,11 +58,11 @@ abstract class AbstractSecurityCheckHelper {
      * No all user password standards can be checked server side
      * 0 = secure, 1 = user standard violation, 2 = hacked
      *
-     * @param Revision $revision
+     * @param PasswordRevision $revision
      *
      * @return int
      */
-    public function getRevisionSecurityLevel(Revision $revision): int {
+    public function getRevisionSecurityLevel(PasswordRevision $revision): int {
 
         if(!$this->isHashSecure($revision->getHash())) return 2;
 
