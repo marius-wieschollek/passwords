@@ -79,6 +79,7 @@
                 ];
 
                 if (typeof data.parent !== 'string' && data.parent.id !== this.defaultFolder) {
+					this.breadcrumb = [{path: '/show/folders', label: '…'}];
                     this.breadcrumb.push({path : '/show/folders/' + data.parent.id, label: data.parent.label})
                 }
 
