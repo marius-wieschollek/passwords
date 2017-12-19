@@ -57,9 +57,9 @@ Each password is encrypted with it's own unique key.
 ## Apps
 There are no apps for the modern API right now. But there are some for the legacy API.
 
-* [Firefox Add-On](https://addons.mozilla.org/en-US/firefox/addon/firefox-owncloud-passwords/)
-* [Chrome Extension](https://github.com/thefirstofthe300/ownCloud-Passwords)
-* [Android App](https://github.com/intirix/cloudpasswordmanager)
+* [Official Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
+* [Official Chrome Extension](https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds)
+* [Android App by Intirix](https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager)
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.
@@ -70,10 +70,7 @@ Passwords offers complete API, giving you access to all features of the app.
 
 #### Requirements
 * Nextcloud 12+
-* PHP 7.0+
-* libXrender1
-* libfontconfig1
-* libXext6
+* PHP 7.1+
 
 ## Development
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
