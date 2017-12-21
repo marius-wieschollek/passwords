@@ -4,7 +4,7 @@
 * [Docker](https://store.docker.com/search?type=edition&offering=community)
 * [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
 
-#### First run
+#### Project Setup
 * Open a shell on your computer and navigate to the projects directory
 * Run `docker-compose up -d`
 * Run `docker exec passwords-php chown www-data:www-data /var/www/html/custom_apps`

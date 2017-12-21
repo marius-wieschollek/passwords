@@ -1,3 +1,3 @@
 # Authors
 
-* Marius Wieschollek <passwords.github@mdns.eu>
+* Marius Wieschollek <passwords.public@mdns.eu>
