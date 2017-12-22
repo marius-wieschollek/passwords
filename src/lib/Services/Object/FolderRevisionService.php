@@ -16,6 +16,11 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\IUser;
 
+/**
+ * Class FolderRevisionService
+ *
+ * @package OCA\Passwords\Services\Object
+ */
 class FolderRevisionService extends AbstractService {
 
     const BASE_REVISION_UUID = '00000000-0000-0000-0000-000000000000';
@@ -73,6 +78,10 @@ class FolderRevisionService extends AbstractService {
      * @param bool $decrypt
      *
      * @return FolderRevision
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getRevisionById(int $id, bool $decrypt = true): FolderRevision {
         /** @var FolderRevision $revision */
@@ -87,6 +96,10 @@ class FolderRevisionService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return FolderRevision
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getRevisionByUuid(string $uuid, bool $decrypt = true): FolderRevision {
         if($uuid === self::BASE_REVISION_UUID) return $this->getBaseRevision();
@@ -122,6 +135,10 @@ class FolderRevisionService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return FolderRevision
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getCurrentRevision(Folder $folder, bool $decrypt = true): FolderRevision {
         return $this->getRevisionByUuid($folder->getRevision(), $decrypt);
@@ -210,49 +227,17 @@ class FolderRevisionService extends AbstractService {
         $this->hookManager->emit(FolderRevision::class, 'preClone', [$revision]);
         /** @var FolderRevision $clone */
         $clone = $this->cloneModel($revision, $overwrites);
-        $clone->setUuid($this->revisionMapper->generateUuidV4());
         $this->hookManager->emit(FolderRevision::class, 'postClone', [$revision, $clone]);
 
         return $clone;
     }
 
     /**
-     * @param Folder $from
-     * @param Folder $to
-     *
-     * @throws \Exception
-     */
-    public function cloneAllRevisionsForFolder(Folder $from, Folder $to) {
-        /** @var FolderRevision[] $revisions */
-        $revisions = $this->getRevisionsByFolder($from, false);
-
-        foreach ($revisions as $revision) {
-            $clone = $this->cloneRevision($revision, ['folder' => $to->getUuid()]);
-            $this->saveRevision($clone);
-            if($revision->getUuid() == $from->getRevision()) {
-                $to->setRevision($clone->getUuid());
-            }
-        }
-    }
-
-    /**
-     * @param Folder $folder
-     *
-     * @throws \Exception
-     */
-    public function deleteAllRevisionsForFolder(Folder $folder) {
-        /** @var FolderRevision[] $revisions */
-        $revisions = $this->getRevisionsByFolder($folder, false);
-
-        foreach ($revisions as $revision) {
-            $this->deleteRevision($revision);
-        }
-    }
-
-    /**
      * @param FolderRevision $revision
+     *
+     * @throws \Exception
      */
-    public function deleteRevision(FolderRevision $revision) {
+    public function deleteRevision(FolderRevision $revision): void {
         $this->hookManager->emit(FolderRevision::class, 'preDelete', [$revision]);
         $revision->setDeleted(true);
         $this->saveRevision($revision);
@@ -285,7 +270,7 @@ class FolderRevisionService extends AbstractService {
     ): FolderRevision {
         $model = new FolderRevision();
         $model->setUserId($this->user->getUID());
-        $model->setUuid($this->revisionMapper->generateUuidV4());
+        $model->setUuid($this->generateUuidV4());
         $model->setHidden($hidden);
         $model->setTrashed($trashed);
         $model->setDeleted($deleted);

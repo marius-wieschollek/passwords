@@ -88,6 +88,7 @@ class PasswordRevisionService extends AbstractService {
      *
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
     public function getRevisionById(int $id, bool $decrypt = true): PasswordRevision {
         /** @var PasswordRevision $revision */
@@ -105,6 +106,7 @@ class PasswordRevisionService extends AbstractService {
      *
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
     public function getRevisionByUuid(string $uuid, bool $decrypt = true): PasswordRevision {
         /** @var PasswordRevision $revision */
@@ -234,51 +236,21 @@ class PasswordRevisionService extends AbstractService {
         $this->hookManager->emit(PasswordRevision::class, 'preClone', [$revision]);
         /** @var PasswordRevision $clone */
         $clone = $this->cloneModel($revision, $overwrites);
-        $clone->setUuid($this->revisionMapper->generateUuidV4());
         $this->hookManager->emit(PasswordRevision::class, 'postClone', [$revision, $clone]);
 
         return $clone;
     }
 
     /**
-     * @param Password $from
-     * @param Password $to
+     * @param PasswordRevision $revision
      *
      * @throws \Exception
      */
-    public function cloneAllRevisionsForPassword(Password $from, Password $to) {
-        /** @var PasswordRevision[] $revisions */
-        $revisions = $this->getRevisionsByPassword($from, false);
-
-        foreach ($revisions as $revision) {
-            $clone = $this->cloneRevision($revision, ['password' => $to->getUuid()]);
-            $this->saveRevision($clone);
-            if($revision->getUuid() == $from->getRevision()) {
-                $to->setRevision($clone->getUuid());
-            }
-        }
-    }
-
-    /**
-     * @param PasswordRevision $revision
-     */
-    public function deleteRevision(PasswordRevision $revision) {
+    public function deleteRevision(PasswordRevision $revision): void {
         $this->hookManager->emit(PasswordRevision::class, 'preDelete', [$revision]);
         $revision->setDeleted(true);
         $this->saveRevision($revision);
         $this->hookManager->emit(PasswordRevision::class, 'postDelete', [$revision]);
-    }
-
-    /**
-     * @param Password $password
-     */
-    public function deleteAllRevisionsForPassword(Password $password) {
-        /** @var PasswordRevision[] $revisions */
-        $revisions = $this->getRevisionsByPassword($password, false);
-
-        foreach ($revisions as $revision) {
-            $this->deleteRevision($revision);
-        }
     }
 
     /**
@@ -319,7 +291,7 @@ class PasswordRevisionService extends AbstractService {
         $revision = new PasswordRevision();
         $revision->setDeleted(0);
         $revision->setUserId($this->user->getUID());
-        $revision->setUuid($this->revisionMapper->generateUuidV4());
+        $revision->setUuid($this->generateUuidV4());
         $revision->setCreated(time());
         $revision->setUpdated(time());
         $revision->setStatus(0);

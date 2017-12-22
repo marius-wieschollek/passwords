@@ -10,8 +10,6 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
-use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\ValidationService;
 use OCP\IUser;
 
 /**
@@ -19,7 +17,7 @@ use OCP\IUser;
  *
  * @package OCA\Passwords\Services\Object
  */
-class TagService {
+class TagService extends AbstractService {
 
     /**
      * @var IUser
@@ -27,82 +25,60 @@ class TagService {
     protected $user;
 
     /**
-     * @var ValidationService
-     */
-    protected $validationService;
-
-    /**
-     * @var EncryptionService
-     */
-    protected $encryptionService;
-    /**
      * @var TagMapper
      */
-    private $tagMapper;
+    protected $tagMapper;
 
     /**
      * TagService constructor.
      *
-     * @param IUser             $user
-     * @param TagMapper         $tagMapper
-     * @param ValidationService $validationService
-     * @param EncryptionService $encryptionService
+     * @param IUser     $user
+     * @param TagMapper $tagMapper
      */
     public function __construct(
         IUser $user,
-        TagMapper $tagMapper,
-        ValidationService $validationService,
-        EncryptionService $encryptionService
+        TagMapper $tagMapper
     ) {
-        $this->user              = $user;
-        $this->tagMapper         = $tagMapper;
-        $this->validationService = $validationService;
-        $this->encryptionService = $encryptionService;
+        $this->user      = $user;
+        $this->tagMapper = $tagMapper;
     }
 
     /**
      * @return Tag[]
+     * @throws \Exception
      */
-    public function getAllTags() {
+    public function getAllTags(): array {
         /** @var Tag[] $tags */
-        $tags = $this->tagMapper->findAll();
-
-        foreach($tags as $tag) $this->encryptionService->decryptTag($tag);
-
-        return $tags;
+        return $this->tagMapper->findAll();
     }
 
     /**
      * @param int $tagId
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Tag
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getTagById(int $tagId) {
-        /** @var Tag $tag */
-        $tag = $this->tagMapper->findById($tagId);
-        return $this->encryptionService->decryptTag($tag);
+    public function getTagById(int $tagId): Tag {
+        return $this->tagMapper->findById($tagId);
     }
 
     /**
      * @param string $tagId
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Tag
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getTagByUuid(string $tagId): Tag {
-        /** @var Tag $tag */
-        $tag = $this->tagMapper->findByUuid($tagId);
-        return $this->encryptionService->decryptTag($tag);
+        return $this->tagMapper->findByUuid($tagId);
     }
 
     /**
-     * @param string $name
-     * @param string $color
-     * @param string $cseType
-     * @param string $sseType
-     * @param bool   $hidden
-     * @param bool   $trashed
-     * @param bool   $deleted
-     * @param bool   $favourite
+     * @param string $revisionUuid
      *
      * @return Tag
      */
@@ -116,8 +92,6 @@ class TagService {
      * @return Tag|\OCP\AppFramework\Db\Entity
      */
     public function saveTag(Tag $tag): Tag {
-        $tag = $this->encryptionService->encryptTag($tag);
-
         if(empty($tag->getId())) {
             return $this->tagMapper->insert($tag);
         } else {
@@ -130,7 +104,7 @@ class TagService {
     /**
      * @param Tag $tag
      */
-    public function destroyTag(Tag $tag) {
+    public function destroyTag(Tag $tag): void {
         $this->tagMapper->delete($tag);
     }
 
@@ -143,7 +117,7 @@ class TagService {
     protected function createTagModel(string $revisionUuid): Tag {
         $model = new Tag();
         $model->setUserId($this->user->getUID());
-        $model->setUuid($this->tagMapper->generateUuidV4());
+        $model->setUuid($this->generateUuidV4());
         $model->setRevision($revisionUuid);
         $model->setDeleted(false);
         $model->setCreated(time());

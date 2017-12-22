@@ -17,7 +17,7 @@ use OC\Hooks\BasicEmitter;
  */
 class HookManager extends BasicEmitter {
 
-    public function emit($scope, $method, array $arguments = array()) {
+    public function emit($scope, $method, array $arguments = array()): void {
         parent::emit($scope, $method, $arguments);
     }
 }

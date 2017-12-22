@@ -57,7 +57,7 @@ class FolderService extends AbstractService {
     /**
      * @return Folder[]
      */
-    public function getAllFolders() {
+    public function getAllFolders(): array {
         /** @var Folder[] $folders */
         return $this->folderMapper->findAll();
     }
@@ -70,7 +70,7 @@ class FolderService extends AbstractService {
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getFolderById(int $id) {
+    public function getFolderById(int $id): Folder {
         return $this->folderMapper->findById($id);
     }
 
@@ -145,7 +145,6 @@ class FolderService extends AbstractService {
         $this->hookManager->emit(Folder::class, 'preClone', [$folder]);
         /** @var Folder $clone */
         $clone = $this->cloneModel($folder, $overwrites);
-        $clone->setUuid($this->folderMapper->generateUuidV4());
         $this->hookManager->emit(Folder::class, 'postClone', [$folder, $clone]);
 
         return $clone;
@@ -154,7 +153,7 @@ class FolderService extends AbstractService {
     /**
      * @param Folder $folder
      */
-    public function deleteFolder(Folder $folder) {
+    public function deleteFolder(Folder $folder): void {
         $this->hookManager->emit(Folder::class, 'preDelete', [$folder]);
         $folder->setDeleted(true);
         $this->saveFolder($folder);
@@ -164,7 +163,7 @@ class FolderService extends AbstractService {
     /**
      * @param Folder $folder
      */
-    public function destroyFolder(Folder $folder) {
+    public function destroyFolder(Folder $folder): void {
         $this->hookManager->emit(Folder::class, 'preDestroy', [$folder]);
         $this->folderMapper->delete($folder);
         $this->hookManager->emit(Folder::class, 'postDestroy', [$folder]);
@@ -176,7 +175,7 @@ class FolderService extends AbstractService {
      *
      * @throws \Exception
      */
-    public function setFolderRevision(Folder $folder, FolderRevision $revision) {
+    public function setFolderRevision(Folder $folder, FolderRevision $revision): void {
         if($revision->getModel() === $folder->getUuid()) {
             $this->hookManager->emit(Folder::class, 'preSetRevision', [$folder, $revision]);
             $folder->setRevision($revision->getUuid());
@@ -184,7 +183,7 @@ class FolderService extends AbstractService {
             $this->saveFolder($folder);
             $this->hookManager->emit(Folder::class, 'postSetRevision', [$folder, $revision]);
         } else {
-            throw new \Exception('Password ID did not match when setting password revision');
+            throw new \Exception('Folder ID did not match when setting folder revision');
         }
     }
 
@@ -196,7 +195,7 @@ class FolderService extends AbstractService {
     protected function createModel(string $revisionUuid): Folder {
         $model = new Folder();
         $model->setUserId($this->user->getUID());
-        $model->setUuid($this->folderMapper->generateUuidV4());
+        $model->setUuid($this->generateUuidV4());
         $model->setDeleted(false);
         $model->setCreated(time());
         $model->setUpdated(time());

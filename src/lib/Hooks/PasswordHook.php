@@ -6,10 +6,10 @@
  * Time: 23:23
  */
 
-namespace OCA\Passwords\Hooks\Password;
+namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\Password;
-use OCA\Passwords\Services\Object\PasswordFolderRelationService;
+use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 
 /**
@@ -25,36 +25,44 @@ class PasswordHook {
     protected $revisionService;
 
     /**
-     * @var PasswordFolderRelationService
-     */
-    protected $folderRelationService;
-
-    /**
      * PasswordHook constructor.
      *
-     * @param PasswordRevisionService       $revisionService
-     * @param PasswordFolderRelationService $folderRelationService
+     * @param PasswordRevisionService $revisionService
      */
-    public function __construct(
-        PasswordRevisionService $revisionService,
-        PasswordFolderRelationService $folderRelationService
-    ) {
+    public function __construct(PasswordRevisionService $revisionService) {
         $this->revisionService = $revisionService;
-        $this->folderRelationService = $folderRelationService;
     }
 
     /**
      * @param Password $password
+     *
+     * @throws \Exception
      */
-    public function postDelete(Password $password) {
-        $this->revisionService->deleteAllRevisionsForPassword($password);
+    public function postDelete(Password $password): void {
+        /** @var PasswordRevision[] $revisions */
+        $revisions = $this->revisionService->getRevisionsByPassword($password, false);
+
+        foreach ($revisions as $revision) {
+            $this->revisionService->deleteRevision($revision);
+        }
     }
 
     /**
-     * @param Password $original
-     * @param Password $clone
+     * @param Password $originalPassword
+     * @param Password $clonedPassword
+     *
+     * @throws \Exception
      */
-    public function postClone(Password $original, Password $clone) {
-        $this->revisionService->cloneAllRevisionsForPassword($original, $clone);
+    public function postClone(Password $originalPassword, Password $clonedPassword): void {
+        /** @var PasswordRevision[] $revisions */
+        $revisions = $this->revisionService->getRevisionsByPassword($originalPassword, false);
+
+        foreach ($revisions as $revision) {
+            $revisionClone = $this->revisionService->cloneRevision($revision, ['password' => $clonedPassword->getUuid()]);
+            $this->revisionService->saveRevision($revisionClone);
+            if($revision->getUuid() == $originalPassword->getRevision()) {
+                $clonedPassword->setRevision($revisionClone->getUuid());
+            }
+        }
     }
 }

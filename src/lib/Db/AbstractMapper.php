@@ -43,6 +43,7 @@ abstract class AbstractMapper extends Mapper {
 
     /**
      * @return string
+     * @deprecated
      */
     public function generateUuidV4() {
         return implode('-', [

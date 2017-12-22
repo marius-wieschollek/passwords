@@ -9,11 +9,16 @@
 namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\Folder;
+use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Services\Object\FolderRevisionService;
-use OCA\Passwords\Services\Object\PasswordFolderRelationService;
-use OCA\Passwords\Services\Object\PasswordRevisionService;
+use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
 
+/**
+ * Class FolderHook
+ *
+ * @package OCA\Passwords\Hooks
+ */
 class FolderHook {
 
     /**
@@ -22,9 +27,9 @@ class FolderHook {
     protected $revisionService;
 
     /**
-     * @var PasswordRevisionService
+     * @var FolderService
      */
-    protected $passwordRevisionService;
+    protected $folderService;
 
     /**
      * @var PasswordService
@@ -32,47 +37,69 @@ class FolderHook {
     protected $passwordService;
 
     /**
-     * PasswordHook constructor.
+     * FolderHook constructor.
      *
-     * @param FolderRevisionService         $revisionService
-     * @param PasswordService               $passwordService
-     * @param PasswordRevisionService       $passwordRevisionService
+     * @param FolderService $folderService
+     * @param FolderRevisionService $revisionService
+     * @param PasswordService $passwordService
      */
     public function __construct(
+        FolderService $folderService,
         FolderRevisionService $revisionService,
-        PasswordService $passwordService,
-        PasswordRevisionService $passwordRevisionService
+        PasswordService $passwordService
     ) {
         $this->revisionService = $revisionService;
-        $this->passwordRevisionService = $passwordRevisionService;
+        $this->folderService   = $folderService;
         $this->passwordService = $passwordService;
     }
 
     /**
      * @param Folder $folder
+     *
+     * @throws \Exception
      */
-    public function preDelete(Folder $folder) {
-        //$folder;
+    public function preDelete(Folder $folder): void {
+        $folders = $this->folderService->getFoldersByParent($folder->getUuid());
+        foreach ($folders as $folder) {
+            $this->folderService->deleteFolder($folder);
+        }
 
-        /**
-         * get all password revisions with this folder and if they are the current revision of the password delete them
-         */
-
-
+        $passwords = $this->passwordService->getPasswordsByFolder($folder->getUuid());
+        foreach ($passwords as $password) {
+            $this->passwordService->deletePassword($password);
+        }
     }
 
     /**
      * @param Folder $folder
+     *
+     * @throws \Exception
      */
-    public function postDelete(Folder $folder) {
-        //$this->revisionService->deleteAllRevisionsForFolder($folder);
+    public function postDelete(Folder $folder): void {
+        /** @var FolderRevision[] $revisions */
+        $revisions = $this->revisionService->getRevisionsByFolder($folder, false);
+
+        foreach ($revisions as $revision) {
+            $this->revisionService->deleteRevision($revision);
+        }
     }
 
     /**
-     * @param Folder $original
-     * @param Folder $clone
+     * @param Folder $originalFolder
+     * @param Folder $clonedFolder
+     *
+     * @throws \Exception
      */
-    public function postClone(Folder $original, Folder $clone) {
-        //$this->revisionService->cloneAllRevisionsForFolder($original, $clone);
+    public function postClone(Folder $originalFolder, Folder $clonedFolder): void {
+        /** @var FolderRevision[] $revisions */
+        $revisions = $this->revisionService->getRevisionsByFolder($originalFolder, false);
+
+        foreach ($revisions as $revision) {
+            $clone = $this->revisionService->cloneRevision($revision, ['folder' => $clonedFolder->getUuid()]);
+            $this->revisionService->saveRevision($clone);
+            if($revision->getUuid() == $originalFolder->getRevision()) {
+                $clonedFolder->setRevision($clone->getUuid());
+            }
+        }
     }
 }

@@ -16,9 +16,13 @@ use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
+use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
+use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\FolderRevisionMapper;
+use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
+use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagMapper;
@@ -42,7 +46,11 @@ use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCA\Passwords\Hooks\FolderHook;
+use OCA\Passwords\Hooks\FolderRevisionHook;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCA\Passwords\Hooks\PasswordHook;
+use OCA\Passwords\Hooks\PasswordRevisionHook;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
@@ -70,6 +78,13 @@ class Application extends App {
 
     const APP_NAME = 'passwords';
 
+    /**
+     * Application constructor.
+     *
+     * @param array $urlParams
+     *
+     * @throws \OCP\AppFramework\QueryException
+     */
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
 
@@ -85,11 +100,10 @@ class Application extends App {
     }
 
     /**
-     *
+     * @throws \OCP\AppFramework\QueryException
      */
     protected function registerDiClasses(): void {
         $container = $this->getContainer();
-        $container->getServer()->getUserManager();
 
         /**
          * Controllers
@@ -104,9 +118,7 @@ class Application extends App {
         /**
          * Hooks
          */
-        $container->registerService('HookManager', function (IAppContainer $c) {
-            return new HookManager();
-        });
+        $this->registerHooks();
 
         /**
          * Services
@@ -116,24 +128,7 @@ class Application extends App {
         /**
          * Helper
          */
-        $container->registerService('PasswordObjectHelper', function (IAppContainer $c) {
-            return new PasswordObjectHelper(
-                $c->query('PasswordRevisionService')
-            );
-        });
-        $container->registerService('FolderObjectHelper', function (IAppContainer $c) {
-            return new FolderObjectHelper(
-                $c->query('FolderService'),
-                $c->query('PasswordService'),
-                $c->query('PasswordObjectHelper'),
-                $c->query('FolderRevisionService')
-            );
-        });
-        $container->registerService('TagObjectHelper', function (IAppContainer $c) {
-            return new TagObjectHelper(
-                $c->query('TagService')
-            );
-        });
+        $this->registerApiHelper();
         $this->registerImageHelper();
         $this->registerPageShotHelper();
         $this->registerFaviconHelper();
@@ -167,10 +162,16 @@ class Application extends App {
         $container->registerAlias('AppData', IAppData::class);
         $container->registerAlias('ValidationService', ValidationService::class);
         $container->registerAlias('EncryptionService', EncryptionService::class);
+
+        /**
+         * Register Hooks
+         */
+        $this->registerInternalHooks();
     }
 
     /**
      * @return FileCacheService
+     * @throws \OCP\AppFramework\QueryException
      */
     protected function getFileCacheService(): FileCacheService {
         return clone $this->getContainer()->query('FileCacheService');
@@ -306,6 +307,39 @@ class Application extends App {
     /**
      *
      */
+    protected function registerHooks(): void {
+        $container = $this->getContainer();
+
+        $container->registerService('HookManager', function () {
+            return new HookManager();
+        });
+        $container->registerService('FolderHook', function (IAppContainer $c) {
+            return new FolderHook(
+                $c->query('FolderService'),
+                $c->query('FolderRevisionService'),
+                $c->query('PasswordService')
+            );
+        });
+        $container->registerService('FolderRevisionHook', function (IAppContainer $c) {
+            return new FolderRevisionHook(
+                $c->query('FolderRevisionService')
+            );
+        });
+        $container->registerService('PasswordHook', function (IAppContainer $c) {
+            return new PasswordHook(
+                $c->query('PasswordRevisionService')
+            );
+        });
+        $container->registerService('PasswordRevisionHook', function (IAppContainer $c) {
+            return new PasswordRevisionHook(
+                $c->query('PasswordRevisionService')
+            );
+        });
+    }
+
+    /**
+     *
+     */
     protected function registerServices(): void {
         $container = $this->getContainer();
 
@@ -348,9 +382,7 @@ class Application extends App {
         $container->registerService('TagService', function (IAppContainer $c) {
             return new TagService(
                 $c->getServer()->getUserSession()->getUser(),
-                $c->query('TagMapper'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService')
+                $c->query('TagMapper')
             );
         });
 
@@ -402,6 +434,32 @@ class Application extends App {
 
         $container->registerService('LocalisationService', function (IAppContainer $c) {
             return $c->query('L10NFactory')->get(self::APP_NAME);
+        });
+    }
+
+    /**
+     *
+     */
+    protected function registerApiHelper(): void {
+        $container = $this->getContainer();
+
+        $container->registerService('PasswordObjectHelper', function (IAppContainer $c) {
+            return new PasswordObjectHelper(
+                $c->query('PasswordRevisionService')
+            );
+        });
+        $container->registerService('FolderObjectHelper', function (IAppContainer $c) {
+            return new FolderObjectHelper(
+                $c->query('FolderService'),
+                $c->query('PasswordService'),
+                $c->query('PasswordObjectHelper'),
+                $c->query('FolderRevisionService')
+            );
+        });
+        $container->registerService('TagObjectHelper', function (IAppContainer $c) {
+            return new TagObjectHelper(
+                $c->query('TagService')
+            );
         });
     }
 
@@ -558,5 +616,30 @@ class Application extends App {
                 $c->getServer()->getLogger()
             );
         });
+    }
+
+    /**
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function registerInternalHooks(): void {
+        $container = $this->getContainer();
+        /** @var HookManager $hookManager */
+        $hookManager = $container->query('HookManager');
+        /** @var FolderHook $folderHook */
+        $folderHook = $container->query('FolderHook');
+        $hookManager->listen(Folder::class, 'postClone', [$folderHook, 'postClone']);
+        $hookManager->listen(Folder::class, 'preDelete', [$folderHook, 'preDelete']);
+        $hookManager->listen(Folder::class, 'postDelete', [$folderHook, 'postDelete']);
+        /** @var FolderRevisionHook $folderHook */
+        $folderRevisionHook = $container->query('FolderRevisionHook');
+        $hookManager->listen(FolderRevision::class, 'postClone', [$folderRevisionHook, 'postClone']);
+        /** @var PasswordHook $passwordHook */
+        $passwordHook = $container->query('PasswordHook');
+        $hookManager->listen(Password::class, 'postClone', [$passwordHook, 'postClone']);
+        $hookManager->listen(Password::class, 'postDelete', [$passwordHook, 'postDelete']);
+        /** @var PasswordRevisionHook $passwordRevisionHook */
+        $passwordRevisionHook = $container->query('PasswordRevisionHook');
+        $hookManager->listen(PasswordRevision::class, 'postClone', [$passwordRevisionHook, 'postClone']);
+        $hookManager->listen(PasswordRevision::class, 'preDelete', [$passwordRevisionHook, 'preDelete']);
     }
 }

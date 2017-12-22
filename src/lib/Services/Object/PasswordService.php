@@ -52,7 +52,7 @@ class PasswordService extends AbstractService {
     /**
      * @return Password[]
      */
-    public function getAllPasswords() {
+    public function getAllPasswords(): array {
         return $this->passwordMapper->findAll();
     }
 
@@ -60,8 +60,10 @@ class PasswordService extends AbstractService {
      * @param int $id
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Password
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getPasswordById(int $id) {
+    public function getPasswordById(int $id): Password {
         return $this->passwordMapper->findById($id);
     }
 
@@ -69,6 +71,8 @@ class PasswordService extends AbstractService {
      * @param string $uuid
      *
      * @return \OCA\Passwords\Db\AbstractEntity|Password
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getPasswordByUuid(string $uuid): Password {
         return $this->passwordMapper->findByUuid($uuid);
@@ -118,7 +122,6 @@ class PasswordService extends AbstractService {
         $this->hookManager->emit(Password::class, 'preClone', [$password]);
         /** @var Password $clone */
         $clone = $this->cloneModel($password, $overwrites);
-        $clone->setUuid($this->passwordMapper->generateUuidV4());
         $this->hookManager->emit(Password::class, 'postClone', [$password, $clone]);
 
         return $clone;
@@ -127,7 +130,7 @@ class PasswordService extends AbstractService {
     /**
      * @param Password $password
      */
-    public function deletePassword(Password $password) {
+    public function deletePassword(Password $password): void {
         $this->hookManager->emit(Password::class, 'preDelete', [$password]);
         $password->setDeleted(true);
         $this->savePassword($password);
@@ -137,7 +140,7 @@ class PasswordService extends AbstractService {
     /**
      * @param Password $password
      */
-    public function destroyPassword(Password $password) {
+    public function destroyPassword(Password $password): void {
         if(!$password->isDeleted()) $this->deletePassword($password);
         $this->hookManager->emit(Password::class, 'preDestroy', [$password]);
         $this->passwordMapper->delete($password);
@@ -150,7 +153,7 @@ class PasswordService extends AbstractService {
      *
      * @throws \Exception
      */
-    public function setPasswordRevision(Password $password, PasswordRevision $revision) {
+    public function setPasswordRevision(Password $password, PasswordRevision $revision): void {
         if($revision->getModel() === $password->getUuid()) {
             $this->hookManager->emit(Password::class, 'preSetRevision', [$password, $revision]);
             $password->setRevision($revision->getUuid());
@@ -171,7 +174,7 @@ class PasswordService extends AbstractService {
         $model = new Password();
         $model->setDeleted(false);
         $model->setUserId($this->user->getUID());
-        $model->setUuid($this->passwordMapper->generateUuidV4());
+        $model->setUuid($this->generateUuidV4());
         $model->setCreated(time());
         $model->setUpdated(time());
 

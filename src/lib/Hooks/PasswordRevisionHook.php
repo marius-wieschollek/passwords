@@ -9,9 +9,13 @@
 namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\PasswordRevision;
-use OCA\Passwords\Services\Object\PasswordFolderRelationService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 
+/**
+ * Class PasswordRevisionHook
+ *
+ * @package OCA\Passwords\Hooks
+ */
 class PasswordRevisionHook {
 
     /**
@@ -20,28 +24,28 @@ class PasswordRevisionHook {
     protected $revisionService;
 
     /**
-     * PasswordHook constructor.
+     * PasswordRevisionHook constructor.
      *
-     * @param PasswordRevisionService       $revisionService
+     * @param PasswordRevisionService $revisionService
      */
-    public function __construct(
-        PasswordRevisionService $revisionService
-    ) {
-        $this->revisionService       = $revisionService;
+    public function __construct(PasswordRevisionService $revisionService) {
+        $this->revisionService = $revisionService;
     }
 
     /**
      * @param PasswordRevision $original
      * @param PasswordRevision $clone
+     *
      * @TODO Clone tag relations
      */
-    public function postClone(PasswordRevision $original, PasswordRevision $clone) {
+    public function postClone(PasswordRevision $original, PasswordRevision $clone): void {
     }
 
     /**
      * @param PasswordRevision $password
+     *
      * @TODO Remove from all tags
      */
-    public function postDelete(PasswordRevision $password) {
+    public function preDelete(PasswordRevision $password): void {
     }
 }
