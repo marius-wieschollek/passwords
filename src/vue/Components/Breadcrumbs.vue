@@ -42,7 +42,6 @@
 
 <script>
     import Vue from 'vue';
-    import $ from "jquery";
     import API from "@js/Helper/api";
     import Utility from '@js/Classes/Utility';
     import Translate from '@vc/Translate.vue';
@@ -57,7 +56,7 @@
         computed: {
             getItems() {
 
-                if(this.items.length === 0) {
+                if (this.items.length === 0) {
                     return [
                         {path: this.$route.path, label: Utility.translate(this.$route.name)}
                     ]
@@ -81,9 +80,13 @@
                 type     : Boolean,
                 'default': true
             },
-            items: {
+            items     : {
                 type     : Array,
                 'default': () => { return []; }
+            },
+            folder    : {
+                type     : String,
+                'default': '00000000-0000-0000-0000-000000000000'
             }
         },
         data() {
@@ -101,12 +104,12 @@
                     .prompt('Enter folder name', 'Create folder')
                     .then((title) => {
                         let folder = {
-                            label: title
+                            label: title,
+                            parent: this.folder
                         };
 
                         API.createFolder(folder)
                             .then(() => {
-
                                 PwMessages.notification('Folder created');
                             })
                     });
@@ -116,7 +119,8 @@
             },
             createPassword() {
                 let PasswordCreateDialog = Vue.extend(CreateDialog);
-                new PasswordCreateDialog().$mount('#app-popup div');
+                let DialogWindow = new PasswordCreateDialog().$mount('#app-popup div');
+                DialogWindow.folder = this.folder;
             }
         }
     };

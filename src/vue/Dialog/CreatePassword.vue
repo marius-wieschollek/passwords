@@ -37,9 +37,7 @@
                     </div>
                 </div>
                 <div class="notes">
-                    <translate tag="label" for="password-notes">
-                        Notes
-                    </translate>
+                    <translate tag="label" for="password-notes">Notes</translate>
                     <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                 </div>
                 <div class="controls">
@@ -65,6 +63,7 @@
             return {
                 showPassword: false,
                 simplemde   : null,
+                folder   : null,
             }
         },
         components: {
@@ -125,6 +124,8 @@
                     password[entry.name] = entry.value;
                 }
                 password.notes = this.simplemde.value();
+
+                if(this.folder) password.folder = this.folder;
 
                 try {
                     let response = await API.createPassword(password);

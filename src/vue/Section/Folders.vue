@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :newFolder="true" :items="breadcrumb"></breadcrumb>
+            <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"></breadcrumb>
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"></folder-line>
                 <password-line :password="password"
@@ -35,6 +35,7 @@
         data() {
             return {
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
+                currentFolder: '00000000-0000-0000-0000-000000000000',
                 folders      : [],
                 passwords    : [],
                 detail       : {
@@ -79,8 +80,8 @@
                 ];
 
                 if (typeof data.parent !== 'string' && data.parent.id !== this.defaultFolder) {
-					this.breadcrumb = [{path: '/show/folders', label: '…'}];
-                    this.breadcrumb.push({path : '/show/folders/' + data.parent.id, label: data.parent.label})
+                    this.breadcrumb = [{path: '/show/folders', label: '…'}];
+                    this.breadcrumb.push({path: '/show/folders/' + data.parent.id, label: data.parent.label})
                 }
 
                 if (data.id !== this.defaultFolder) {
@@ -89,6 +90,7 @@
 
                 this.folders = Utility.sortApiObjectArray(data.folders, 'label', true);
                 this.passwords = Utility.sortApiObjectArray(data.passwords, 'label', true);
+                this.currentFolder = data.id;
             }
         }
     };

@@ -11,7 +11,7 @@
                 <ul>
                     <slot name="option-top"></slot>
                     <translate tag="li" @click="detailsAction($event);" icon="info">Details</translate>
-                    <translate tag="li" icon="pencil">Edit</translate>
+                    <translate tag="li" @click="editAction()" icon="pencil">Rename</translate>
                     <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
                     <slot name="option-bottom"></slot>
                 </ul>
@@ -88,6 +88,18 @@
                         this.folder.parent = data.folderId;
                         API.updateFolder(this.folder)
                             .then(() => {this.$parent.refreshView();});
+                    });
+            },
+            editAction() {
+                PwMessages
+                    .prompt('Enter folder name', 'Rename folder', this.folder.label)
+                    .then((title) => {
+                        this.folder.label = title;
+
+                        API.updateFolder(this.folder)
+                            .then(() => {
+                                PwMessages.notification('Folder renamed');
+                            })
                     });
             }
         }

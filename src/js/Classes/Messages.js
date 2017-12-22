@@ -59,15 +59,40 @@ class Messages {
         });
     }
 
-    prompt(message, title = 'Prompt', isPassword = false) {
+    /**
+     *
+     * @param message
+     * @param title
+     * @param value
+     * @param isPassword
+     * @returns {Promise<any>}
+     */
+    prompt(message, title = 'Prompt', value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
             message = this._translate(message);
             title = this._translate(title);
             let callback = function (success, value) { success ? resolve(value):reject(value); };
-            let name = 'i' + Math.random();
 
             OC.dialogs.prompt('', title, callback, true, message, isPassword);
+            if(value !== null) {
+                this._setDialogValue(value);
+            }
         });
+    }
+
+    /**
+     * Sets the value of an input field because Nextcloud does not support this
+     *
+     * @param value
+     * @private
+     */
+    _setDialogValue(value) {
+        let $el =  $('.oc-dialog-content input');
+        if($el.length === 0) {
+            setTimeout(() => { this._setDialogValue(value) }, 10)
+        } else {
+            $el.val(value);
+        }
     }
 
     _translate(text) {
