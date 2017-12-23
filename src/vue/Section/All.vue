@@ -39,11 +39,11 @@
 
         created() {
             this.refreshView();
-            PwEvents.on('data.changed', this.refreshView);
+            PwEvents.on('password.changed', this.refreshView);
         },
 
         beforeDestroy() {
-            PwEvents.off('data.changed', this.refreshView)
+            PwEvents.off('password.changed', this.refreshView)
         },
 
         computed: {

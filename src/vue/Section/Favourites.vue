@@ -3,7 +3,8 @@
         <div class="app-content-left">
             <breadcrumb></breadcrumb>
             <div class="item-list">
-                <password-line :password="password" v-for="password in passwords" v-if="password.favourite" :key="password.id"></password-line>
+                <password-line :password="password" v-for="password in passwords" :key="password.id"></password-line>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"></folder-line>
             </div>
         </div>
         <div class="app-content-right">
@@ -16,6 +17,7 @@
     import PwEvents from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
     import Breadcrumb from '@vc/Breadcrumbs.vue';
+    import FolderLine from '@vue/Line/Folder.vue';
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
     import API from '@js/Helper/api';
@@ -24,6 +26,7 @@
         data() {
             return {
                 passwords: [],
+                folders: [],
                 detail   : {
                     type   : 'none',
                     element: null
@@ -33,8 +36,9 @@
 
         components: {
             Breadcrumb,
-            'password-details': PasswordDetails,
-            'password-line'   : PasswordLine
+            FolderLine,
+            PasswordLine,
+            PasswordDetails
         },
 
         created() {
@@ -54,11 +58,16 @@
 
         methods: {
             refreshView: function () {
-                API.listPasswords().then(this.updateContentList);
+                API.findPasswords({favourite:true}).then(this.updatePasswordList);
+                API.findFolders({favourite:true}, 'model+folders+passwords').then(this.updateFolderList);
             },
 
-            updateContentList: function (passwords) {
+            updatePasswordList: function (passwords) {
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label');
+            },
+
+            updateFolderList: function (folders) {
+                this.folders = Utility.sortApiObjectArray(folders, 'label');
             }
         }
     };

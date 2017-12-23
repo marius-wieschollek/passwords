@@ -5,6 +5,14 @@ class Events {
      */
     constructor() {
         this.events = [];
+        this.alias = {
+            "password.created": ["password.changed", "data.changed"],
+            "password.deleted": ["password.changed", "data.changed"],
+            "password.updated": ["password.changed", "data.changed"],
+            "folder.created": ["folder.changed", "data.changed"],
+            "folder.deleted": ["folder.changed", "data.changed"],
+            "folder.updated": ["folder.changed", "data.changed"]
+        };
     }
 
     /**
@@ -38,23 +46,32 @@ class Events {
     /**
      *
      * @param event
-     * @param data
+     * @param object
      */
-    run(event, data = {}) {
-        if (!this.events.hasOwnProperty(event)) return;
-        let callbacks = this.events[event];
-        data = {event: event, data: data};
+    fire(event, object = {}) {
 
-        for (let i = 0; i < callbacks.length; i++) {
-            try {
-                callbacks[i](data);
-            } catch (e) {
-                console.error(e);
+        let events = [event];
+        if (this.alias.hasOwnProperty(event)) {
+            events = events.concat(this.alias[event]);
+        }
+
+        for (let i = 0; i < events.length; i++) {
+            let event = events[i];
+            if (!this.events.hasOwnProperty(event)) continue;
+
+            let data = {event: event, object: object};
+            let callbacks = this.events[event];
+            for (let j = 0; j < callbacks.length; j++) {
+                try {
+                    callbacks[j](data);
+                } catch (e) {
+                    console.error(e);
+                }
             }
         }
     }
 }
 
-const PwEvents = new Events();
+let E = new Events();
 
-export default PwEvents
+export default E;

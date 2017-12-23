@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import PwEvents from "@js/Classes/Events";
+    import Events from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
     import Breadcrumb from '@vc/Breadcrumbs.vue';
     import FolderLine from '@vue/Line/Folder.vue';
@@ -53,16 +53,11 @@
 
         created() {
             this.refreshView();
-            PwEvents.on('data.changed', this.refreshView);
+            Events.on('data.changed', this.refreshViewIfRequired);
         },
 
         beforeDestroy() {
-            PwEvents.off('data.changed', this.refreshView)
-        },
-        watch: {
-            $route: function () {
-                this.refreshView()
-            }
+            Events.off('data.changed', this.refreshViewIfRequired)
         },
 
         methods: {
@@ -71,6 +66,30 @@
                     API.showFolder(this.$route.params.folder, 'model+folders+passwords+parent').then(this.updateContentList);
                 } else {
                     API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
+                }
+            },
+
+            refreshViewIfRequired: function (data) {
+                let object = data.object;
+
+                if(object.type === 'password' && object.parent === this.currentFolder) {
+                    if(object.trashed) {
+                        API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
+                    } else {
+                        let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
+                        this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
+                    }
+                } else if(object.type === 'folder' && object.id === this.currentFolder) {
+                    if(object.trashed) {
+                        API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
+                    } else if(object.passwords && object.folders && typeof object.parent !== 'string') {
+                        this.updateContentList(object);
+                    } else {
+                        API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
+                    }
+                } else if(object.type === 'folder' && object.parent === this.currentFolder) {
+                    let folders = Utility.replaceOrAppendApiObject(this.folders, object);
+                    this.folders = Utility.sortApiObjectArray(folders, 'label', true);
                 }
             },
 
@@ -91,6 +110,12 @@
                 this.folders = Utility.sortApiObjectArray(data.folders, 'label', true);
                 this.passwords = Utility.sortApiObjectArray(data.passwords, 'label', true);
                 this.currentFolder = data.id;
+            }
+        },
+
+        watch: {
+            $route: function () {
+                this.refreshView()
             }
         }
     };

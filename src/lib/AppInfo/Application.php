@@ -96,7 +96,7 @@ class Application extends App {
      *
      */
     protected function registerPersonalSettings(): void {
-        \OCP\App::registerPersonal('passwords', 'personal/index');
+        \OCP\App::registerPersonal(self::APP_NAME, 'personal/index');
     }
 
     /**

@@ -42,10 +42,9 @@
 
 <script>
     import Vue from 'vue';
-    import API from "@js/Helper/api";
     import Utility from '@js/Classes/Utility';
     import Translate from '@vc/Translate.vue';
-    import PwMessages from '@js/Classes/Messages';
+    import FolderManager from '@js/Manager/FolderManager';
     import CreateDialog from '@vue/Dialog/CreatePassword.vue';
 
     export default {
@@ -55,13 +54,11 @@
 
         computed: {
             getItems() {
-
                 if (this.items.length === 0) {
                     return [
                         {path: this.$route.path, label: Utility.translate(this.$route.name)}
                     ]
                 }
-
 
                 return this.items;
             }
@@ -100,22 +97,9 @@
                 this.isOpen = !this.isOpen;
             },
             createFolder() {
-                PwMessages
-                    .prompt('Enter folder name', 'Create folder')
-                    .then((title) => {
-                        let folder = {
-                            label: title,
-                            parent: this.folder
-                        };
-
-                        API.createFolder(folder)
-                            .then(() => {
-                                PwMessages.notification('Folder created');
-                            })
-                    });
+                FolderManager.createFolder(this.folder);
             },
             createTag() {
-                PwMessages.prompt('test');
             },
             createPassword() {
                 let PasswordCreateDialog = Vue.extend(CreateDialog);

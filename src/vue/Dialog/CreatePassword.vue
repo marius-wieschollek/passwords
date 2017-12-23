@@ -129,8 +129,7 @@
 
                 try {
                     let response = await API.createPassword(password);
-                    PwEvents.run('password.created', response);
-                    PwEvents.run('data.changed');
+                    PwEvents.fire('password.created', response);
                     PwMessages.notification('Password created');
                     this.closeWindow();
                 } catch (e) {

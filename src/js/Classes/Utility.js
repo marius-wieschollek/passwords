@@ -71,4 +71,23 @@ export default class Utility {
 
         return rObj;
     }
+
+    /**
+     *
+     * @param array
+     * @param object
+     * @returns {*}
+     */
+    static replaceOrAppendApiObject(array, object) {
+        for (let i = 0; i < array.length; i++) {
+            let current = array[i];
+            if (current.id === object.id) {
+                array[i] = object;
+                return array;
+            }
+        }
+        array.push(object);
+
+        return array;
+    }
 }

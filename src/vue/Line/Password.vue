@@ -12,11 +12,11 @@
         <i v-bind:class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
-            <div class="passwordActionsMenu popovermenu bubble menu">
+            <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
                         <slot name="option-top"></slot>
-                        <translate tag="li" @click="detailsAction($event);" icon="info">Details</translate>
+                        <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
                         <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
@@ -52,7 +52,8 @@
 
         data() {
             return {
-                clickTimeout: null
+                clickTimeout: null,
+                showMenu: false
             }
         },
 
@@ -96,7 +97,7 @@
             },
             toggleMenu($event) {
                 $event.stopPropagation();
-                $($event.target).parents('.row.password').find('.passwordActionsMenu').toggleClass('open');
+                this.showMenu = !this.showMenu;
             },
             copyUrlAction() {
                 Utility.copyToClipboard(this.password.url);

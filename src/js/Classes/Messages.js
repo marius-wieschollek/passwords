@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 class Messages {
 
     /**
@@ -5,11 +7,14 @@ class Messages {
      * @param notification
      */
     notification(notification) {
-        let $element = OC.Notification.show(this._translate(notification));
+        return new Promise((resolve, reject) => {
+            let $element = OC.Notification.show(Messages._translate(notification));
 
-        setTimeout(function () {
-            OC.Notification.hide($element);
-        }, 10000)
+            setTimeout(function () {
+                OC.Notification.hide($element);
+                resolve();
+            }, 10000)
+        });
     }
 
     /**
@@ -20,8 +25,8 @@ class Messages {
      */
     alert(message, title = 'Alert') {
         return new Promise((resolve, reject) => {
-            message = this._translate(message);
-            title = this._translate(title);
+            message = Messages._translate(message);
+            title = Messages._translate(title);
             let callback = function (success) { success ? resolve():reject(); };
 
             OC.dialogs.alert(message, title, callback, true);
@@ -36,8 +41,8 @@ class Messages {
      */
     info(message, title = 'Info') {
         return new Promise((resolve, reject) => {
-            message = this._translate(message);
-            title = this._translate(title);
+            message = Messages._translate(message);
+            title = Messages._translate(title);
             let callback = function (success) { success ? resolve():reject(); };
 
             OC.dialogs.info(message, title, callback, true);
@@ -51,8 +56,8 @@ class Messages {
      */
     confirm(message, title = 'Confirm') {
         return new Promise((resolve, reject) => {
-            message = this._translate(message);
-            title = this._translate(title);
+            message = Messages._translate(message);
+            title = Messages._translate(title);
             let callback = function (success) { success ? resolve():reject(); };
 
             OC.dialogs.confirm(message, title, callback, true);
@@ -69,12 +74,12 @@ class Messages {
      */
     prompt(message, title = 'Prompt', value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
-            message = this._translate(message);
-            title = this._translate(title);
+            message = Messages._translate(message);
+            title = Messages._translate(title);
             let callback = function (success, value) { success ? resolve(value):reject(value); };
 
             OC.dialogs.prompt('', title, callback, true, message, isPassword);
-            if(value !== null) {
+            if (value !== null) {
                 this._setDialogValue(value);
             }
         });
@@ -87,15 +92,15 @@ class Messages {
      * @private
      */
     _setDialogValue(value) {
-        let $el =  $('.oc-dialog-content input');
-        if($el.length === 0) {
+        let $el = $('.oc-dialog-content input');
+        if ($el.length === 0) {
             setTimeout(() => { this._setDialogValue(value) }, 10)
         } else {
             $el.val(value);
         }
     }
 
-    _translate(text) {
+    static _translate(text) {
         if (Array.isArray(text)) {
             return t('passwords', text[0], text[1]);
         }
@@ -103,6 +108,6 @@ class Messages {
     }
 }
 
-const PwMessages = new Messages();
+let M = new Messages();
 
-export default new Messages()
+export default M;

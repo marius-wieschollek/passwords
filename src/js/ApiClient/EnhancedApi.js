@@ -321,6 +321,7 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processPassword(password) {
+        password.type = 'password';
         if (password.url) {
             let host = SimpleApi.parseUrl(password.url, 'host');
             password.icon = this.getFaviconUrl(host);
@@ -359,6 +360,8 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processFolder(folder) {
+        folder.type = 'folder';
+        folder.icon = 'http://localhost/core/img/filetypes/folder.svg';
         if (folder.folders) {
             folder.folders = this._processFolderList(folder.folders);
         }
