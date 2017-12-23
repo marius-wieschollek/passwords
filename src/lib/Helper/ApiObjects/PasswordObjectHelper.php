@@ -91,7 +91,7 @@ class PasswordObjectHelper {
             'cseType'   => $revision->getCseType(),
             'sseType'   => $revision->getSseType(),
             'hidden'    => $revision->isHidden(),
-            'trashed'   => $revision->isTrashed() || $password->isSuspended(),
+            'trashed'   => $revision->isTrashed(),
             'favourite' => $revision->isFavourite()
         ];
     }

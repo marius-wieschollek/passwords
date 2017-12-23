@@ -3,11 +3,11 @@
         <div class="app-content-left">
             <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"></breadcrumb>
             <div class="item-list">
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"></folder-line>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="draggable"></folder-line>
                 <password-line :password="password"
                                v-for="password in passwords"
                                :key="password.id"
-                               draggable="true"></password-line>
+                               :draggable="draggable"></password-line>
             </div>
         </div>
         <div class="app-content-right">
@@ -35,7 +35,10 @@
         data() {
             return {
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
+                defaultTitle : Utility.translate('Folders'),
+                defaultPath  : '/show/folders/',
                 currentFolder: '00000000-0000-0000-0000-000000000000',
+                draggable    : 'true',
                 folders      : [],
                 passwords    : [],
                 detail       : {
@@ -72,34 +75,40 @@
             refreshViewIfRequired: function (data) {
                 let object = data.object;
 
-                if(object.type === 'password' && object.parent === this.currentFolder) {
-                    if(object.trashed) {
+                if (object.type === 'password' && object.parent === this.currentFolder) {
+                    if (object.trashed) {
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     } else {
                         let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
                         this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
                     }
-                } else if(object.type === 'folder' && object.id === this.currentFolder) {
-                    if(object.trashed) {
+                } else if (object.type === 'folder' && object.id === this.currentFolder) {
+                    if (object.trashed) {
                         API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
-                    } else if(object.passwords && object.folders && typeof object.parent !== 'string') {
+                    } else if (object.passwords && object.folders && typeof object.parent !== 'string') {
                         this.updateContentList(object);
                     } else {
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     }
-                } else if(object.type === 'folder' && object.parent === this.currentFolder) {
+                } else if (object.type === 'folder' && object.parent === this.currentFolder) {
                     let folders = Utility.replaceOrAppendApiObject(this.folders, object);
                     this.folders = Utility.sortApiObjectArray(folders, 'label', true);
                 }
             },
 
             updateContentList: function (data) {
+                if (data.trashed) {
+                    this.defaultTitle = Utility.translate('Trash');
+                    this.defaultPath = '/show/trash';
+                    this.draggable = false;
+                }
+
                 this.breadcrumb = [
-                    {path: '/show/folders', label: Utility.translate('Folders')}
+                    {path: this.defaultPath, label: this.defaultTitle}
                 ];
 
                 if (typeof data.parent !== 'string' && data.parent.id !== this.defaultFolder) {
-                    this.breadcrumb = [{path: '/show/folders', label: '…'}];
+                    this.breadcrumb = [{path: this.defaultPath, label: '…'}];
                     this.breadcrumb.push({path: '/show/folders/' + data.parent.id, label: data.parent.label})
                 }
 

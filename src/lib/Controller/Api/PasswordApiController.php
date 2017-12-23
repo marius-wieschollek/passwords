@@ -111,6 +111,7 @@ class PasswordApiController extends AbstractApiController {
             $results   = [];
 
             foreach ($passwords as $password) {
+                if($password->isSuspended()) continue;
                 $object = $this->passwordObjectHelper->getApiObject($password, $details);
                 if($object['hidden']) continue;
 

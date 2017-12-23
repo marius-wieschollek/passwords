@@ -120,7 +120,7 @@ class FolderObjectHelper {
             'cseType'   => $revision->getCseType(),
             'sseType'   => $revision->getSseType(),
             'hidden'    => $revision->isHidden(),
-            'trashed'   => $revision->isTrashed() || $folder->isSuspended(),
+            'trashed'   => $revision->isTrashed(),
             'favourite' => $revision->isFavourite()
         ];
     }

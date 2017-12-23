@@ -322,7 +322,10 @@ class Application extends App {
         });
         $container->registerService('FolderRevisionHook', function (IAppContainer $c) {
             return new FolderRevisionHook(
-                $c->query('FolderRevisionService')
+                $c->query('FolderService'),
+                $c->query('FolderRevisionService'),
+                $c->query('PasswordService'),
+                $c->query('PasswordRevisionService')
             );
         });
         $container->registerService('PasswordHook', function (IAppContainer $c) {

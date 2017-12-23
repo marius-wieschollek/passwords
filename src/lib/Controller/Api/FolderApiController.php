@@ -108,6 +108,7 @@ class FolderApiController extends AbstractApiController {
             $results = [];
 
             foreach ($folders as $folder) {
+                if($folder->isSuspended()) continue;
                 $object = $this->folderObjectHelper->getApiObject($folder, $details);
                 if($object['hidden']) continue;
 
@@ -250,8 +251,6 @@ class FolderApiController extends AbstractApiController {
 
             if($oldRevision->isTrashed()) {
                 $this->folderService->deleteFolder($folder);
-
-                // @TODO Delete all passwords, remove from all folders
                 return $this->createJsonResponse(['folder' => $folder->getUuid()]);
             }
 
@@ -278,7 +277,6 @@ class FolderApiController extends AbstractApiController {
             $oldRevision = $this->revisionService->getCurrentRevision($folder);
 
             if($oldRevision->isTrashed()) {
-                // @TODO Release relations
                 $newRevision = $this->revisionService->cloneRevision($oldRevision, ['trashed' => false]);
                 $this->revisionService->saveRevision($newRevision);
                 $this->folderService->setFolderRevision($folder, $newRevision);

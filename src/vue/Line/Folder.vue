@@ -41,7 +41,7 @@
 
         data() {
             return {
-                enabled: false,
+                enabled: true,
                 showMenu: false,
             }
         },
