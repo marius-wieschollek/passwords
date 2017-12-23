@@ -1,7 +1,7 @@
 <template>
     <div class="row folder" v-if="enabled" :data-folder-id="folder.id" @dragstart="dragStartAction($event)" data-drop-type="folder" @click="openAction()">
         <i class="fa fa-star favourite" v-bind:class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon">&nbsp;</div>
+        <div class="favicon" v-bind:style="faviconStyle">&nbsp;</div>
         <span class="title">{{ folder.label }}</span>
         <div class="date">{{ folder.updated.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
@@ -10,7 +10,7 @@
                 <slot name="menu">
                 <ul>
                     <slot name="option-top"></slot>
-                    <translate tag="li" @click="detailsAction($event);" icon="info">Details</translate>
+                    <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
                     <translate tag="li" @click="renameAction()" icon="pencil">Rename</translate>
                     <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
                     <slot name="option-bottom"></slot>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import API from '@js/Helper/api';
     import Translate from '@vc/Translate.vue';
     import DragManager from '@js/Manager/DragManager';
     import FolderManager from '@js/Manager/FolderManager';
@@ -46,11 +45,20 @@
             }
         },
 
+        computed: {
+            faviconStyle() {
+                return {
+                    backgroundImage: 'url(' + this.folder.icon + ')'
+                }
+            }
+        },
+
         methods: {
             favouriteAction($event) {
                 $event.stopPropagation();
                 this.folder.favourite = !this.folder.favourite;
-                API.updateFolder(this.folder);
+                FolderManager.updateFolder(this.folder)
+                    .catch(() => { this.folder.favourite = !this.folder.favourite; });
             },
             toggleMenu($event) {
                 $event.stopPropagation();
@@ -93,8 +101,7 @@
             .row.folder {
 
                 .favicon {
-                    background-image:url(/core/img/filetypes/folder.svg);
-                    background-size: 32px;
+                    background-size : 32px;
                 }
             }
         }

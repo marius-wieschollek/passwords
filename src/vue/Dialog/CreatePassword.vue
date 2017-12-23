@@ -5,7 +5,7 @@
                 <translate>Create a new password</translate>
                 <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
-            <form class="content" v-on:submit.prevent="submitCreatePassword($event);">
+            <form class="content" v-on:submit.prevent="submitAction($event)">
                 <div class="form">
                     <translate tag="div" class="section-title">General</translate>
                     <div class="form-grid">
@@ -16,10 +16,10 @@
                         <translate tag="label" for="password-password">Password</translate>
                         <div class="password-field">
                             <div class="icons">
-                                <i class="fa fa-eye" @click="togglePasswordVisibility()" title="Toggle visibility"></i>
-                                <i class="fa fa-refresh" @click="generateRandomPassword()" title="Generate random password"></i>
+                                <i class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"></i>
+                                <i class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate random password"></i>
                             </div>
-                            <input id="password-password" type="password" name="password" maxlength="48" value="" required>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" :value="password" required>
                         </div>
                         <translate tag="label" for="password-url">Website</translate>
                         <input id="password-url" type="text" name="url" maxlength="2048" value="">
@@ -52,9 +52,10 @@
     import SimpleMDE from 'simplemde';
     import Translate from '@vc/Translate.vue';
     import Foldout from '@vc/Foldout.vue';
-    import PwMessages from '@js/Classes/Messages';
-    import PwEvents from '@js/Classes/Events';
+    import Messages from '@js/Classes/Messages';
+    import Events from '@js/Classes/Events';
     import Utility from '@js/Classes/Utility';
+    import ThemeManager from '@js/Manager/ThemeManager';
     import API from "@js/Helper/api";
     import $ from "jquery";
 
@@ -62,14 +63,18 @@
         data() {
             return {
                 showPassword: false,
+                showLoader: false,
                 simplemde   : null,
+                password   : null,
                 folder   : null,
             }
         },
+
         components: {
             Foldout,
             Translate
         },
+
         mounted() {
             this.simplemde = new SimpleMDE(
                 {
@@ -80,41 +85,33 @@
                     placeholder            : Utility.translate('Take some notes'),
                     status                 : false
                 });
-            if (OCA.Theming) {
-                $('#passwords-create-new .section-title, #passwords-create-new .notes label')
-                    .css('border-color', OCA.Theming.color);
-            }
+            ThemeManager.setBorderColor('#passwords-create-new .section-title, #passwords-create-new .notes label');
         },
 
         methods: {
             closeWindow             : function () {
-                let $container = $('#app-popup');
                 this.$destroy();
+                let $container = $('#app-popup');
                 $container.find('div').remove();
                 $container.html('<div></div>');
             },
             togglePasswordVisibility: function () {
-                let $element = $('.password-field .icons i.fa:nth-child(1)');
-                if ($element.hasClass('fa-eye')) {
-                    $element.removeClass('fa-eye').addClass('fa-eye-slash');
-                    $element.parents('.password-field').find('input').attr('type', 'text');
-                } else {
-                    $element.removeClass('fa-eye-slash').addClass('fa-eye');
-                    $element.parents('.password-field').find('input').attr('type', 'password');
-                }
                 this.showPassword = !this.showPassword;
             },
-            generateRandomPassword  : async function () {
-                let $element = $('.password-field .icons  i.fa:nth-child(2)');
-                $element.addClass('fa-spin');
-                let password = await API.generatePassword();
-                $element.parents('.password-field').find('input').val(password.password);
-                $element.removeClass('fa-spin');
-                if (!this.showPassword) {
-                    this.togglePasswordVisibility()
-                }
+            generateRandomPassword  : function () {
+                this.showLoader = true;
+
+                API.generatePassword()
+                    .then((d) => {
+                        this.password = d.password;
+                        this.showLoader = false;
+                        this.showPassword = true;
+                    })
+                    .catch(() => {
+                        this.showLoader = false;
+                    });
             },
-            submitCreatePassword    : async function ($event) {
+            submitAction    : function ($event) {
                 let $element = $($event.target);
                 let $data = $element.serializeArray();
                 let password = {};
@@ -127,14 +124,15 @@
 
                 if(this.folder) password.folder = this.folder;
 
-                try {
-                    let response = await API.createPassword(password);
-                    PwEvents.fire('password.created', response);
-                    PwMessages.notification('Password created');
-                    this.closeWindow();
-                } catch (e) {
-                    PwMessages.alert(e.message, 'Creating Password Failed');
-                }
+                API.createPassword(password)
+                    .then(() => {
+                        this.closeWindow();
+                        Messages.notification('Password created');
+                        Events.fire('password.created', response);
+                    })
+                    .catch(() => {
+                        Messages.alert(e.message, 'Creating Password Failed');
+                    });
             }
         }
     };
@@ -172,6 +170,8 @@
                 align-items           : stretch;
 
                 .title {
+                    color: $color-contrast;
+                    background-color: $color-theme;
                     grid-area : title;
                     padding   : 1rem;
                     font-size : 1.25rem;

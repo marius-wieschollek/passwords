@@ -99,9 +99,28 @@ class FolderManager {
         });
     }
 
+    /**
+     *
+     * @param folder
+     * @returns {Promise}
+     */
+    updateFolder(folder) {
+        return new Promise((resolve, reject) => {
+            API.updateFolder(folder)
+                .then((d) => {
+                    folder.revision = d.revision;
+                    Events.fire('folder.updated', folder);
+                    resolve(folder);
+                })
+                .catch(() => {
+                    reject(folder);
+                });
+        });
+    }
+
     moveFolder(folder, parent) {
         return new Promise((resolve, reject) => {
-            if(folder.id === parent) reject(folder);
+            if (folder.id === parent) reject(folder);
 
             let originalParent = folder.parent;
             folder.parent = parent;

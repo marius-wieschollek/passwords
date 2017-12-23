@@ -41,11 +41,10 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import Utility from '@js/Classes/Utility';
     import Translate from '@vc/Translate.vue';
     import FolderManager from '@js/Manager/FolderManager';
-    import CreateDialog from '@vue/Dialog/CreatePassword.vue';
+    import PasswordManager from '@js/Manager/PasswordManager';
 
     export default {
         components: {
@@ -102,9 +101,7 @@
             createTag() {
             },
             createPassword() {
-                let PasswordCreateDialog = Vue.extend(CreateDialog);
-                let DialogWindow = new PasswordCreateDialog().$mount('#app-popup div');
-                DialogWindow.folder = this.folder;
+                PasswordManager.createPassword(this.folder);
             }
         }
     };
