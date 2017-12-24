@@ -192,9 +192,9 @@ class RequestHelper {
         $this->info     = curl_getinfo($ch);
         curl_close($ch);
 
-        $header_size        = $this->info['header_size'];
-        $this->responseHeader   = substr($this->response, 0, $header_size);
-        $this->responseBody = substr($this->response, $header_size);
+        $header_size          = $this->info['header_size'];
+        $this->responseHeader = substr($this->response, 0, $header_size);
+        $this->responseBody   = substr($this->response, $header_size);
 
         if(!empty($this->acceptResponseCodes)) {
             if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) return false;

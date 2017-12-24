@@ -13,6 +13,6 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class Tag extends AbstractParentEntity{
+class Tag extends AbstractModelEntity {
 
 }

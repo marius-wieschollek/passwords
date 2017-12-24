@@ -60,6 +60,7 @@ use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\PageShotService;
 use OCA\Passwords\Services\ValidationService;
@@ -160,7 +161,6 @@ class Application extends App {
          * Alias
          */
         $container->registerAlias('AppData', IAppData::class);
-        $container->registerAlias('ValidationService', ValidationService::class);
         $container->registerAlias('EncryptionService', EncryptionService::class);
 
         /**
@@ -232,6 +232,7 @@ class Application extends App {
                 self::APP_NAME,
                 $c->query('Request'),
                 $c->query('TagService'),
+                $c->query('TagRevisionService'),
                 $c->query('TagObjectHelper')
             );
         });
@@ -346,6 +347,14 @@ class Application extends App {
     protected function registerServices(): void {
         $container = $this->getContainer();
 
+        $container->registerService('FolderService', function (IAppContainer $c) {
+            return new FolderService(
+                $c->getServer()->getUserSession()->getUser(),
+                $c->query('HookManager'),
+                $c->query('FolderMapper')
+            );
+        });
+
         $container->registerService('FolderRevisionService', function (IAppContainer $c) {
             return new FolderRevisionService(
                 $c->getServer()->getUserSession()->getUser(),
@@ -355,11 +364,12 @@ class Application extends App {
                 $c->query('EncryptionService')
             );
         });
-        $container->registerService('FolderService', function (IAppContainer $c) {
-            return new FolderService(
+
+        $container->registerService('PasswordService', function (IAppContainer $c) {
+            return new PasswordService(
                 $c->getServer()->getUserSession()->getUser(),
                 $c->query('HookManager'),
-                $c->query('FolderMapper')
+                $c->query('PasswordMapper')
             );
         });
 
@@ -367,25 +377,27 @@ class Application extends App {
             return new PasswordRevisionService(
                 $c->getServer()->getUserSession()->getUser(),
                 $c->query('HookManager'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService'),
                 $c->query('PasswordRevisionMapper'),
-                $c->query('HelperService')->getSecurityHelper()
-            );
-        });
-
-        $container->registerService('PasswordService', function (IAppContainer $c) {
-            return new PasswordService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('PasswordMapper'),
-                $c->query('HookManager')
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
             );
         });
 
         $container->registerService('TagService', function (IAppContainer $c) {
             return new TagService(
                 $c->getServer()->getUserSession()->getUser(),
+                $c->query('HookManager'),
                 $c->query('TagMapper')
+            );
+        });
+
+        $container->registerService('TagRevisionService', function (IAppContainer $c) {
+            return new TagRevisionService(
+                $c->getServer()->getUserSession()->getUser(),
+                $c->query('HookManager'),
+                $c->query('TagRevisionMapper'),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
             );
         });
 
@@ -437,6 +449,12 @@ class Application extends App {
 
         $container->registerService('LocalisationService', function (IAppContainer $c) {
             return $c->query('L10NFactory')->get(self::APP_NAME);
+        });
+
+        $container->registerService('ValidationService', function (IAppContainer $c) {
+            return new ValidationService(
+                $c->query('HelperService')->getSecurityHelper()
+            );
         });
     }
 

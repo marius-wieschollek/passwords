@@ -8,9 +8,9 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractEncryptedEntity;
 use OCA\Passwords\Db\AbstractEntity;
-use OCA\Passwords\Db\AbstractParentEntity;
+use OCA\Passwords\Hooks\Manager\HookManager;
+use OCP\IUser;
 
 /**
  * Class AbstractService
@@ -18,6 +18,35 @@ use OCA\Passwords\Db\AbstractParentEntity;
  * @package OCA\Passwords\Services\Object
  */
 abstract class AbstractService {
+
+    /**
+     * @var IUser
+     */
+    protected $user;
+
+    /**
+     * @var HookManager
+     */
+    protected $hookManager;
+
+    /**
+     * @var string
+     */
+    protected $class;
+
+    /**
+     * PasswordService constructor.
+     *
+     * @param IUser       $user
+     * @param HookManager $hookManager
+     */
+    public function __construct(
+        IUser $user,
+        HookManager $hookManager
+    ) {
+        $this->user        = $user;
+        $this->hookManager = $hookManager;
+    }
 
     /**
      * @return string
@@ -30,6 +59,43 @@ abstract class AbstractService {
             bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
             bin2hex(random_bytes(6))
         ]);
+    }
+
+    /**
+     * @param AbstractEntity $model
+     *
+     * @return mixed
+     */
+    abstract public function save(AbstractEntity $model): AbstractEntity;
+
+    /**
+     * @param AbstractEntity $object
+     * @param array          $overwrites
+     *
+     * @return AbstractEntity
+     * @throws \Exception
+     */
+    public function clone(AbstractEntity $object, array $overwrites = []): AbstractEntity {
+        if(get_class($object) !== $this->class) throw new \Exception('Invalid revision class given');
+        $this->hookManager->emit($this->class, 'preClone', [$object]);
+        /** @var AbstractEntity $clone */
+        $clone = $this->cloneModel($object, $overwrites);
+        $this->hookManager->emit($this->class, 'postClone', [$object, $clone]);
+
+        return $clone;
+    }
+
+    /**
+     * @param AbstractEntity $revision
+     *
+     * @throws \Exception
+     */
+    public function delete(AbstractEntity $revision): void {
+        if(get_class($revision) !== $this->class) throw new \Exception('Invalid revision class given');
+        $this->hookManager->emit($this->class, 'preDelete', [$revision]);
+        $revision->setDeleted(true);
+        $this->save($revision);
+        $this->hookManager->emit($this->class, 'postDelete', [$revision]);
     }
 
     /**
@@ -55,18 +121,6 @@ abstract class AbstractService {
 
         $clone->setCreated(time());
         $clone->setUpdated(time());
-
-        if(is_subclass_of($original, AbstractEncryptedEntity::class)) {
-            /** @var AbstractEncryptedEntity $clone */
-            /** @var AbstractEncryptedEntity $original */
-            $clone->_setDecrypted($original->_isDecrypted());
-            $clone->setUuid($this->generateUuidV4());
-        }
-        if(is_subclass_of($original, AbstractParentEntity::class)) {
-            /** @var AbstractParentEntity $clone */
-            /** @var AbstractParentEntity $original */
-            $clone->setUuid($this->generateUuidV4());
-        }
 
         return $clone;
     }

@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
+use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Services\Object\TagService;
 
@@ -17,10 +18,8 @@ use OCA\Passwords\Services\Object\TagService;
  *
  * @package OCA\Passwords\Helper\ApiObjects
  */
-class TagObjectHelper {
+class TagObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_MODEL     = 'default';
-    const LEVEL_RELATIONS = 'relations';
     const LEVEL_PASSWORDS = 'passwords';
 
     /**
@@ -38,21 +37,18 @@ class TagObjectHelper {
     }
 
     /**
-     * @param Tag $tag
-     * @param string      $level
+     * @param AbstractModelEntity|Tag $tag
+     * @param string                  $level
      *
      * @return array
      * @throws Exception
      */
-    public function getApiObject(Tag $tag, string $level = self::LEVEL_MODEL): array {
+    public function getApiObject(AbstractModelEntity $tag, string $level = self::LEVEL_MODEL): array {
         $detailLevel = explode('+', $level);
 
         $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($tag);
-        }
-        if(in_array(self::LEVEL_RELATIONS, $detailLevel)) {
-            $object = $this->getRelations($tag, $object);
         }
         if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
             $object = $this->getPasswords($tag, $object);
@@ -73,7 +69,7 @@ class TagObjectHelper {
             'owner'     => $tag->getUserId(),
             'created'   => $tag->getCreated(),
             'updated'   => $tag->getUpdated(),
-            'revision'   => $tag->getRevision(),
+            'revision'  => $tag->getRevision(),
             'hidden'    => $tag->getHidden(),
             'trashed'   => $tag->getTrashed(),
             'favourite' => $tag->getFavourite(),
@@ -83,8 +79,8 @@ class TagObjectHelper {
     }
 
     /**
-     * @param Tag $tag
-     * @param array       $object
+     * @param Tag   $tag
+     * @param array $object
      *
      * @return array
      */
@@ -96,7 +92,7 @@ class TagObjectHelper {
     }
 
     /**
-     * @param $tag
+     * @param       $tag
      * @param array $object
      *
      * @return array

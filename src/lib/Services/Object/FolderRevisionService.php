@@ -8,88 +8,20 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\Folder;
+use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\FolderRevision;
-use OCA\Passwords\Db\FolderRevisionMapper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\ValidationService;
-use OCP\IUser;
 
 /**
  * Class FolderRevisionService
  *
  * @package OCA\Passwords\Services\Object
  */
-class FolderRevisionService extends AbstractService {
+class FolderRevisionService extends AbstractRevisionService {
 
     const BASE_REVISION_UUID = '00000000-0000-0000-0000-000000000000';
 
-    /**
-     * @var IUser
-     */
-    protected $user;
-
-    /**
-     * @var ValidationService
-     */
-    protected $validationService;
-
-    /**
-     * @var EncryptionService
-     */
-    protected $encryptionService;
-
-    /**
-     * @var FolderRevisionMapper
-     */
-    protected $revisionMapper;
-
-    /**
-     * @var HookManager
-     */
-    protected $hookManager;
-
-    /**
-     * FolderService constructor.
-     *
-     * @param IUser                $user
-     * @param HookManager          $hookManager
-     * @param FolderRevisionMapper $revisionMapper
-     * @param ValidationService    $validationService
-     * @param EncryptionService    $encryptionService
-     */
-    public function __construct(
-        IUser $user,
-        HookManager $hookManager,
-        FolderRevisionMapper $revisionMapper,
-        ValidationService $validationService,
-        EncryptionService $encryptionService
-    ) {
-        $this->user              = $user;
-        $this->hookManager       = $hookManager;
-        $this->revisionMapper    = $revisionMapper;
-        $this->validationService = $validationService;
-        $this->encryptionService = $encryptionService;
-    }
-
-    /**
-     * @param int  $id
-     * @param bool $decrypt
-     *
-     * @return FolderRevision
-     *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     */
-    public function getRevisionById(int $id, bool $decrypt = true): FolderRevision {
-        /** @var FolderRevision $revision */
-        $revision = $this->revisionMapper->findById($id);
-        if(!$decrypt) return $revision;
-
-        return $this->encryptionService->decryptFolder($revision);
-    }
+    protected $class = FolderRevision::class;
 
     /**
      * @param string $uuid
@@ -97,51 +29,14 @@ class FolderRevisionService extends AbstractService {
      *
      * @return FolderRevision
      *
-     * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
-    public function getRevisionByUuid(string $uuid, bool $decrypt = true): FolderRevision {
+    public function findByUuid(string $uuid, bool $decrypt = true): AbstractRevisionEntity {
         if($uuid === self::BASE_REVISION_UUID) return $this->getBaseRevision();
 
-        /** @var FolderRevision $revision */
-        $revision = $this->revisionMapper->findByUuid($uuid);
-        if(!$decrypt) return $revision;
-
-        return $this->encryptionService->decryptFolder($revision);
-    }
-
-    /**
-     * @param Folder $folder
-     * @param bool   $decrypt
-     *
-     * @return FolderRevision[]
-     * @throws \Exception
-     */
-    public function getRevisionsByFolder(Folder $folder, bool $decrypt = true): array {
-        /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionMapper->findAllMatching(['folder', $folder->getUuid()]);
-        if(!$decrypt) return $revisions;
-
-        foreach ($revisions as $revision) {
-            $this->encryptionService->decryptFolder($revision);
-        }
-
-        return $revisions;
-    }
-
-    /**
-     * @param Folder $folder
-     * @param bool   $decrypt
-     *
-     * @return FolderRevision
-     *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     */
-    public function getCurrentRevision(Folder $folder, bool $decrypt = true): FolderRevision {
-        return $this->getRevisionByUuid($folder->getRevision(), $decrypt);
+        return parent::findByUuid($uuid, $decrypt);
     }
 
     /**
@@ -180,7 +75,7 @@ class FolderRevisionService extends AbstractService {
      * @return FolderRevision
      * @throws \OCA\Passwords\Exception\ApiException
      */
-    public function createRevision(
+    public function create(
         string $folder,
         string $label,
         string $parent,
@@ -196,52 +91,6 @@ class FolderRevisionService extends AbstractService {
         $model = $this->validationService->validateFolder($model);
 
         return $model;
-    }
-
-    /**
-     * @param FolderRevision $revision
-     *
-     * @return FolderRevision|\OCP\AppFramework\Db\Entity
-     * @throws \Exception
-     */
-    public function saveRevision(FolderRevision $revision): FolderRevision {
-        $this->hookManager->emit(FolderRevision::class, 'preSave', [$revision]);
-
-        if($revision->_isDecrypted()) $revision = $this->encryptionService->encryptFolder($revision);
-        if(empty($revision->getId())) {
-            return $this->revisionMapper->insert($revision);
-        } else {
-            $revision->setUpdated(time());
-
-            return $this->revisionMapper->update($revision);
-        }
-    }
-
-    /**
-     * @param FolderRevision $revision
-     * @param array          $overwrites
-     *
-     * @return FolderRevision
-     */
-    public function cloneRevision(FolderRevision $revision, array $overwrites = []): FolderRevision {
-        $this->hookManager->emit(FolderRevision::class, 'preClone', [$revision]);
-        /** @var FolderRevision $clone */
-        $clone = $this->cloneModel($revision, $overwrites);
-        $this->hookManager->emit(FolderRevision::class, 'postClone', [$revision, $clone]);
-
-        return $clone;
-    }
-
-    /**
-     * @param FolderRevision $revision
-     *
-     * @throws \Exception
-     */
-    public function deleteRevision(FolderRevision $revision): void {
-        $this->hookManager->emit(FolderRevision::class, 'preDelete', [$revision]);
-        $revision->setDeleted(true);
-        $this->saveRevision($revision);
-        $this->hookManager->emit(FolderRevision::class, 'postDelete', [$revision]);
     }
 
     /**

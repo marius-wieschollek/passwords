@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
+use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
@@ -18,12 +19,10 @@ use OCA\Passwords\Services\Object\PasswordRevisionService;
  *
  * @package OCA\Passwords\Helper
  */
-class PasswordObjectHelper {
+class PasswordObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_MODEL     = 'model';
-    const LEVEL_REVISIONS = 'revisions';
-    const LEVEL_FOLDER    = 'folder';
-    const LEVEL_TAGS      = 'tags';
+    const LEVEL_FOLDER = 'folder';
+    const LEVEL_TAGS   = 'tags';
 
     /**
      * @var PasswordRevisionService
@@ -40,15 +39,19 @@ class PasswordObjectHelper {
     }
 
     /**
-     * @param Password $password
-     * @param string   $level
+     * @param AbstractModelEntity|Password $password
+     * @param string                       $level
      *
      * @return array
+     * @throws Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getApiObject(Password $password, string $level = self::LEVEL_MODEL) {
+    public function getApiObject(AbstractModelEntity $password, string $level = self::LEVEL_MODEL): array {
 
         $detailLevel = explode('+', $level);
-        $revision    = $this->revisionService->getCurrentRevision($password);
+        /** @var PasswordRevision $revision */
+        $revision = $this->revisionService->findByUuid($password->getRevision());
 
         $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
@@ -103,7 +106,7 @@ class PasswordObjectHelper {
      * @return array
      */
     protected function getRevisions(Password $password, array $object): array {
-        $revisions = $this->revisionService->getRevisionsByPassword($password);
+        $revisions = $this->revisionService->findByModel($password);
 
         $object['revisions'] = [];
         foreach ($revisions as $revision) {

@@ -9,7 +9,7 @@
 namespace OCA\Passwords\Encryption;
 
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Db\AbstractEncryptedEntity;
+use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
@@ -26,7 +26,7 @@ class SseV1Encryption implements EncryptionInterface {
     /**
      * @var array
      */
-    protected $revision
+    protected $password
         = [
             'url',
             'label',
@@ -45,73 +45,19 @@ class SseV1Encryption implements EncryptionInterface {
     protected $tag = ['label', 'color'];
 
     /**
-     * @param PasswordRevision $revision
+     * @param AbstractRevisionEntity $object
      *
-     * @return PasswordRevision|AbstractEncryptedEntity
-     */
-    public function encryptRevision(PasswordRevision $revision): PasswordRevision {
-        return $this->encryptObject($revision, 'revision');
-    }
-
-    /**
-     * @param PasswordRevision $revision
-     *
-     * @return PasswordRevision|AbstractEncryptedEntity
-     */
-    public function decryptRevision(PasswordRevision $revision): PasswordRevision {
-        return $this->decryptObject($revision, 'revision');
-    }
-
-    /**
-     * @param FolderRevision $folder
-     *
-     * @return FolderRevision|AbstractEncryptedEntity
-     */
-    public function encryptFolder(FolderRevision $folder): FolderRevision {
-        return $this->encryptObject($folder, 'folder');
-    }
-
-    /**
-     * @param FolderRevision $folder
-     *
-     * @return FolderRevision|AbstractEncryptedEntity
-     */
-    public function decryptFolder(FolderRevision $folder): FolderRevision {
-        return $this->decryptObject($folder, 'folder');
-    }
-
-    /**
-     * @param TagRevision $tag
-     *
-     * @return TagRevision|AbstractEncryptedEntity
-     */
-    public function encryptTag(TagRevision $tag): TagRevision {
-        return $this->encryptObject($tag, 'tag');
-    }
-
-    /**
-     * @param TagRevision $tag
-     *
-     * @return TagRevision|AbstractEncryptedEntity
+     * @return AbstractRevisionEntity
+     * @throws \OCP\PreConditionNotMetException
      * @throws \Exception
      */
-    public function decryptTag(TagRevision $tag): TagRevision {
-        return $this->decryptObject($tag, 'tag');
-    }
-
-    /**
-     * @param AbstractEncryptedEntity $object
-     * @param string                  $type
-     *
-     * @return AbstractEncryptedEntity
-     * @throws \OCP\PreConditionNotMetException
-     */
-    public function encryptObject(AbstractEncryptedEntity $object, string $type): AbstractEncryptedEntity {
+    public function encryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity {
 
         $sseKey        = $this->getUserKey();
         $encryptionKey = $this->getEncryptionKey($sseKey);
 
-        foreach ($this->{$type} as $field) {
+        $fields = $this->getFieldsToProcess($object);
+        foreach ($fields as $field) {
             $value          = $object->getProperty($field);
             $encryptedValue = \OC::$server->getCrypto()->encrypt($value, $encryptionKey);
             $object->setProperty($field, base64_encode($encryptedValue));
@@ -123,24 +69,43 @@ class SseV1Encryption implements EncryptionInterface {
     }
 
     /**
-     * @param AbstractEncryptedEntity $object
-     * @param                         $type
+     * @param AbstractRevisionEntity $object
      *
-     * @return AbstractEncryptedEntity
+     * @return AbstractRevisionEntity
      * @throws \Exception
      */
-    public function decryptObject(AbstractEncryptedEntity $object, string $type): AbstractEncryptedEntity {
+    public function decryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity {
 
         $sseKey        = base64_decode($object->getSseKey());
         $encryptionKey = $this->getEncryptionKey($sseKey);
 
-        foreach ($this->{$type} as $field) {
+        $fields = $this->getFieldsToProcess($object);
+        foreach ($fields as $field) {
             $value          = base64_decode($object->getProperty($field));
             $decryptedValue = \OC::$server->getCrypto()->decrypt($value, $encryptionKey);
             $object->setProperty($field, $decryptedValue);
         }
 
         return $object;
+    }
+
+    /**
+     * @param $object
+     *
+     * @return array
+     * @throws \Exception
+     */
+    protected function getFieldsToProcess($object): array {
+        switch (get_class($object)) {
+            case PasswordRevision::class:
+                return $this->password;
+            case FolderRevision::class:
+                return $this->folder;
+            case TagRevision::class:
+                return $this->tag;
+        }
+
+        throw new \Exception('Unknown object type');
     }
 
     /**

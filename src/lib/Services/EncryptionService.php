@@ -8,9 +8,7 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Db\FolderRevision;
-use OCA\Passwords\Db\PasswordRevision;
-use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Encryption\EncryptionInterface;
 use OCA\Passwords\Encryption\SseV1Encryption;
 
@@ -47,80 +45,28 @@ class EncryptionService {
     }
 
     /**
-     * @param PasswordRevision $password
+     * @param AbstractRevisionEntity $object
      *
-     * @return PasswordRevision
+     * @return AbstractRevisionEntity
      * @throws \Exception
      */
-    public function encryptRevision(PasswordRevision $password): PasswordRevision {
-        $encryption = $this->getEncryptionByType($password->getSseType());
-        $password->_setDecrypted(false);
+    public function encrypt(AbstractRevisionEntity $object): AbstractRevisionEntity {
+        $encryption = $this->getEncryptionByType($object->getSseType());
+        $object->_setDecrypted(false);
 
-        return $encryption->encryptRevision($password);
+        return $encryption->encryptObject($object);
     }
 
     /**
-     * @param PasswordRevision $password
+     * @param AbstractRevisionEntity $object
      *
-     * @return PasswordRevision
+     * @return AbstractRevisionEntity
      * @throws \Exception
      */
-    public function decryptRevision(PasswordRevision $password): PasswordRevision {
-        $encryption = $this->getEncryptionByType($password->getSseType());
-        $password->_setDecrypted(true);
+    public function decrypt(AbstractRevisionEntity $object): AbstractRevisionEntity {
+        $encryption = $this->getEncryptionByType($object->getSseType());
+        $object->_setDecrypted(true);
 
-        return $encryption->decryptRevision($password);
-    }
-
-    /**
-     * @param FolderRevision $folder
-     *
-     * @return FolderRevision
-     * @throws \Exception
-     */
-    public function encryptFolder(FolderRevision $folder): FolderRevision {
-        $encryption = $this->getEncryptionByType($folder->getSseType());
-        $folder->_setDecrypted(false);
-
-        return $encryption->encryptFolder($folder);
-    }
-
-    /**
-     * @param FolderRevision $folder
-     *
-     * @return FolderRevision
-     * @throws \Exception
-     */
-    public function decryptFolder(FolderRevision $folder): FolderRevision {
-        $encryption = $this->getEncryptionByType($folder->getSseType());
-        $folder->_setDecrypted(true);
-
-        return $encryption->decryptFolder($folder);
-    }
-
-    /**
-     * @param TagRevision $tag
-     *
-     * @return TagRevision
-     * @throws \Exception
-     */
-    public function encryptTag(TagRevision $tag): TagRevision {
-        $encryption = $this->getEncryptionByType($tag->getSseType());
-        $tag->_setDecrypted(false);
-
-        return $encryption->encryptTag($tag);
-    }
-
-    /**
-     * @param TagRevision $tag
-     *
-     * @return TagRevision
-     * @throws \Exception
-     */
-    public function decryptTag(TagRevision $tag): TagRevision {
-        $encryption = $this->getEncryptionByType($tag->getSseType());
-        $tag->_setDecrypted(true);
-
-        return $encryption->decryptTag($tag);
+        return $encryption->decryptObject($object);
     }
 }

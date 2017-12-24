@@ -18,7 +18,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class FolderRevision extends AbstractEncryptedEntity {
+class FolderRevision extends AbstractRevisionEntity {
 
     /**
      * @var string

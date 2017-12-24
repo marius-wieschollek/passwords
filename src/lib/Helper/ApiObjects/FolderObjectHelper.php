@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
+use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Services\Object\FolderRevisionService;
@@ -19,10 +20,8 @@ use OCA\Passwords\Services\Object\PasswordService;
  *
  * @package OCA\Passwords\Helper\ApiObjects
  */
-class FolderObjectHelper {
+class FolderObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_MODEL     = 'model';
-    const LEVEL_REVISIONS = 'revisions';
     const LEVEL_PARENT    = 'parent';
     const LEVEL_FOLDERS   = 'folders';
     const LEVEL_PASSWORDS = 'passwords';
@@ -73,12 +72,15 @@ class FolderObjectHelper {
     }
 
     /**
-     * @param Folder $folder
-     * @param string $level
+     * @param AbstractModelEntity|Folder $folder
+     * @param string                     $level
      *
      * @return array
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
-    public function getApiObject(Folder $folder, string $level = self::LEVEL_MODEL): array {
+    public function getApiObject(AbstractModelEntity $folder, string $level = self::LEVEL_MODEL): array {
         $detailLevel = explode('+', $level);
 
         $object = [];
@@ -105,6 +107,9 @@ class FolderObjectHelper {
      * @param Folder $folder
      *
      * @return array
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     protected function getModel(Folder $folder): array {
         $revision = $this->getCurrentFolderRevision($folder);
@@ -130,11 +135,14 @@ class FolderObjectHelper {
      * @param array  $object
      *
      * @return array
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
     protected function getParent(Folder $folder, array $object): array {
 
         $revision         = $this->getCurrentFolderRevision($folder);
-        $parent           = $this->folderService->getFolderByUuid($revision->getParent());
+        $parent           = $this->folderService->findByUuid($revision->getParent());
         $object['parent'] = $this->getApiObject($parent);
 
         return $object;
@@ -145,18 +153,19 @@ class FolderObjectHelper {
      * @param array  $object
      *
      * @return array
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
     protected function getFolders(Folder $parent, array $object): array {
 
         $object['folders'] = [];
-        $folders           = $this->folderService->getFoldersByParent($parent->getUuid());
-        $revision          = $this->getCurrentFolderRevision($parent);
-        $trashed           = $revision->isTrashed() || $parent->isSuspended();
+        $folders           = $this->folderService->findByParent($parent->getUuid());
 
         foreach ($folders as $folder) {
             $child = $this->getApiObject($folder);
 
-            if(!$child['hidden'] && (!$child['trashed'] || $trashed)) $object['folders'][] = $child;
+            if(!$child['hidden'] && !$child['trashed']) $object['folders'][] = $child;
         }
 
         return $object;
@@ -167,18 +176,17 @@ class FolderObjectHelper {
      * @param array  $object
      *
      * @return array
+     * @throws \Exception
      */
     protected function getPasswords(Folder $parent, array $object): array {
 
         $object['passwords'] = [];
-        $passwords           = $this->passwordService->getPasswordsByFolder($parent->getUuid());
-        $revision            = $this->getCurrentFolderRevision($parent);
-        $trashed             = $revision->isTrashed() || $parent->isSuspended();
+        $passwords           = $this->passwordService->findByFolder($parent->getUuid());
 
         foreach ($passwords as $password) {
             $child = $this->passwordObjectHelper->getApiObject($password);
 
-            if(!$child['hidden'] && (!$child['trashed'] || $trashed)) $object['passwords'][] = $child;
+            if(!$child['hidden'] && !$child['trashed']) $object['passwords'][] = $child;
         }
 
         return $object;
@@ -188,12 +196,15 @@ class FolderObjectHelper {
      * @param Folder $folder
      *
      * @return FolderRevision
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     protected function getCurrentFolderRevision(Folder $folder): FolderRevision {
         $id = $folder->getId();
 
         if(!isset($this->revisionCache[ $id ])) {
-            $this->revisionCache[ $id ] = $this->folderRevisionService->getCurrentRevision($folder);
+            $this->revisionCache[ $id ] = $this->folderRevisionService->findByUuid($folder->getRevision());
         }
 
         return $this->revisionCache[ $id ];

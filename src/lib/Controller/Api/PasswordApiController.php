@@ -10,7 +10,6 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\Object\PasswordFolderRelationService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\Http;
@@ -22,12 +21,12 @@ use OCP\IRequest;
  *
  * @package OCA\Passwords\Controller
  */
-class PasswordApiController extends AbstractApiController {
+class PasswordApiController extends AbstractObjectApiController {
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected $modelService;
 
     /**
      * @var PasswordRevisionService
@@ -37,122 +36,25 @@ class PasswordApiController extends AbstractApiController {
     /**
      * @var PasswordObjectHelper
      */
-    protected $passwordObjectHelper;
+    protected $objectHelper;
 
     /**
      * PasswordApiController constructor.
      *
-     * @param string                        $appName
-     * @param IRequest                      $request
-     * @param PasswordService               $passwordService
-     * @param PasswordRevisionService       $revisionService
-     * @param PasswordObjectHelper          $passwordObjectHelper
+     * @param string                  $appName
+     * @param IRequest                $request
+     * @param PasswordService         $modelService
+     * @param PasswordRevisionService $revisionService
+     * @param PasswordObjectHelper    $objectHelper
      */
     public function __construct(
         $appName,
         IRequest $request,
-        PasswordService $passwordService,
+        PasswordService $modelService,
         PasswordRevisionService $revisionService,
-        PasswordObjectHelper $passwordObjectHelper
+        PasswordObjectHelper $objectHelper
     ) {
-        parent::__construct(
-            $appName,
-            $request,
-            'PUT, POST, GET, DELETE, PATCH',
-            'Authorization, Content-Type, Accept',
-            1728000
-        );
-        $this->passwordService       = $passwordService;
-        $this->revisionService       = $revisionService;
-        $this->passwordObjectHelper  = $passwordObjectHelper;
-    }
-
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @param string $details
-     *
-     * @return JSONResponse
-     */
-    public function list(string $details = 'default'): JSONResponse {
-
-        try {
-            $passwords = $this->passwordService->getAllPasswords();
-            $results   = [];
-
-            foreach ($passwords as $password) {
-                if($password->isSuspended()) continue;
-                $object = $this->passwordObjectHelper->getApiObject($password, $details);
-
-                if(!$object['hidden'] && !$object['trashed']) $results[] = $object;
-            }
-
-            return $this->createJsonResponse($results);
-        } catch (\Throwable $e) {
-
-            return $this->createErrorResponse($e);
-        }
-    }
-
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @param array  $criteria
-     * @param string $details
-     *
-     * @return JSONResponse
-     */
-    public function find($criteria = [], string $details = 'default'): JSONResponse {
-
-        try {
-            $passwords = $this->passwordService->getAllPasswords();
-            $results   = [];
-
-            foreach ($passwords as $password) {
-                if($password->isSuspended()) continue;
-                $object = $this->passwordObjectHelper->getApiObject($password, $details);
-                if($object['hidden']) continue;
-
-                foreach ($criteria as $key => $value) {
-                    if($value == 'true') {
-                        $value = true;
-                    } else if($value == 'false') $value = false;
-
-                    if($object[ $key ] != $value) continue 2;
-                }
-
-                $results[] = $object;
-            }
-
-            return $this->createJsonResponse($results);
-        } catch (\Throwable $e) {
-
-            return $this->createErrorResponse($e);
-        }
-    }
-
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @param string $id
-     * @param string $details
-     *
-     * @return JSONResponse
-     */
-    public function show(string $id, string $details = 'default'): JSONResponse {
-
-        try {
-            $model    = $this->passwordService->getPasswordByUuid($id);
-            $password = $this->passwordObjectHelper->getApiObject($model, $details);
-
-            return $this->createJsonResponse($password);
-        } catch (\Throwable $e) {
-
-            return $this->createErrorResponse($e);
-        }
+        parent::__construct($appName, $request, $modelService, $revisionService, $objectHelper);
     }
 
     /**
@@ -172,9 +74,9 @@ class PasswordApiController extends AbstractApiController {
      * @param bool   $favourite
      * @param array  $tags
      *
-     * @TODO check folder access
-     * @TODO check is system trash
-     * @TODO check tag access
+     * @TODO     check folder access
+     * @TODO     check is system trash
+     * @TODO     check tag access
      *
      * @return JSONResponse
      * @internal param array $folders
@@ -195,14 +97,14 @@ class PasswordApiController extends AbstractApiController {
     ): JSONResponse {
 
         try {
-            $model = $this->passwordService->createPassword();
+            $model    = $this->modelService->create();
             $revision = $this->revisionService->createRevision(
                 $model->getUuid(), $password, $username, $cseType, $sseType, $hash, $label, $url, $notes, $folder, $hidden,
                 false, false, $favourite
             );
 
-            $this->revisionService->saveRevision($revision);
-            $this->passwordService->setPasswordRevision($model, $revision);
+            $this->revisionService->save($revision);
+            $this->modelService->setRevision($model, $revision);
 
             return $this->createJsonResponse(
                 ['password' => $model->getUuid(), 'revision' => $revision->getUuid()],
@@ -255,69 +157,17 @@ class PasswordApiController extends AbstractApiController {
     ): JSONResponse {
 
         try {
-            $model = $this->passwordService->getPasswordByUuid($id);
+            $model = $this->modelService->findByUuid($id);
 
             $revision = $this->revisionService->createRevision(
                 $model->getUuid(), $password, $username, $cseType, $sseType, $hash, $label, $url, $notes, $folder, $hidden,
                 false, false, $favourite
             );
 
-            $this->revisionService->saveRevision($revision);
-            $this->passwordService->setPasswordRevision($model, $revision);
+            $this->revisionService->save($revision);
+            $this->modelService->setRevision($model, $revision);
 
             return $this->createJsonResponse(['password' => $model->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch (\Throwable $e) {
-
-            return $this->createErrorResponse($e);
-        }
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return JSONResponse
-     */
-    public function delete(string $id): JSONResponse {
-        try {
-            $password    = $this->passwordService->getPasswordByUuid($id);
-            $oldRevision = $this->revisionService->getCurrentRevision($password);
-
-            if($oldRevision->isTrashed()) {
-                $this->passwordService->deletePassword($password);
-
-                return $this->createJsonResponse(['password' => $password->getUuid()]);
-            }
-
-            $newRevision = $this->revisionService->cloneRevision($oldRevision, ['trashed' => true]);
-            $this->revisionService->saveRevision($newRevision);
-            $this->passwordService->setPasswordRevision($password, $newRevision);
-
-            return $this->createJsonResponse(['password' => $password->getUuid(), 'revision' => $newRevision->getUuid()]);
-        } catch (\Throwable $e) {
-
-            return $this->createErrorResponse($e);
-        }
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return JSONResponse
-     */
-    public function restore(string $id): JSONResponse {
-        try {
-            $password    = $this->passwordService->getPasswordByUuid($id);
-            $oldRevision = $this->revisionService->getCurrentRevision($password);
-
-            if($oldRevision->isTrashed()) {
-                $newRevision = $this->revisionService->cloneRevision($oldRevision, ['trashed' => false]);
-                $this->revisionService->saveRevision($newRevision);
-                $this->passwordService->setPasswordRevision($password, $newRevision);
-
-                return $this->createJsonResponse(['password' => $password->getUuid(), 'revision' => $newRevision->getUuid()]);
-            }
-
-            return $this->createJsonResponse(['password' => $password->getUuid(), 'revision' => $oldRevision->getUuid()]);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);

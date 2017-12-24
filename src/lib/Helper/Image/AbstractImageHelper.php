@@ -145,7 +145,7 @@ abstract class AbstractImageHelper {
      *
      * @return mixed
      */
-    abstract public function getImageFromFile(string  $file);
+    abstract public function getImageFromFile(string $file);
 
     /**
      * @param $image

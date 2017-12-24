@@ -40,10 +40,10 @@ class PasswordHook {
      */
     public function postDelete(Password $password): void {
         /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionService->getRevisionsByPassword($password, false);
+        $revisions = $this->revisionService->findByModel($password->getUuid(), false);
 
         foreach ($revisions as $revision) {
-            $this->revisionService->deleteRevision($revision);
+            $this->revisionService->delete($revision);
         }
     }
 
@@ -55,11 +55,12 @@ class PasswordHook {
      */
     public function postClone(Password $originalPassword, Password $clonedPassword): void {
         /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionService->getRevisionsByPassword($originalPassword, false);
+        $revisions = $this->revisionService->findByModel($originalPassword->getUuid(), false);
 
         foreach ($revisions as $revision) {
-            $revisionClone = $this->revisionService->cloneRevision($revision, ['password' => $clonedPassword->getUuid()]);
-            $this->revisionService->saveRevision($revisionClone);
+            /** @var PasswordRevision $revisionClone */
+            $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedPassword->getUuid()]);
+            $this->revisionService->save($revisionClone);
             if($revision->getUuid() == $originalPassword->getRevision()) {
                 $clonedPassword->setRevision($revisionClone->getUuid());
             }

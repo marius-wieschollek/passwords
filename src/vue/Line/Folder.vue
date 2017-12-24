@@ -10,7 +10,7 @@
                 <slot name="menu">
                 <ul>
                     <slot name="option-top"></slot>
-                    <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
+                    <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
                     <translate tag="li" @click="renameAction()" icon="pencil">Rename</translate>
                     <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
                     <slot name="option-bottom"></slot>

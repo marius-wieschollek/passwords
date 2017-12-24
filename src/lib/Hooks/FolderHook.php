@@ -39,9 +39,9 @@ class FolderHook {
     /**
      * FolderHook constructor.
      *
-     * @param FolderService $folderService
+     * @param FolderService         $folderService
      * @param FolderRevisionService $revisionService
-     * @param PasswordService $passwordService
+     * @param PasswordService       $passwordService
      */
     public function __construct(
         FolderService $folderService,
@@ -59,14 +59,14 @@ class FolderHook {
      * @throws \Exception
      */
     public function preDelete(Folder $folder): void {
-        $folders = $this->folderService->getFoldersByParent($folder->getUuid());
+        $folders = $this->folderService->findByParent($folder->getUuid());
         foreach ($folders as $folder) {
-            $this->folderService->deleteFolder($folder);
+            $this->folderService->delete($folder);
         }
 
-        $passwords = $this->passwordService->getPasswordsByFolder($folder->getUuid());
+        $passwords = $this->passwordService->findByFolder($folder->getUuid());
         foreach ($passwords as $password) {
-            $this->passwordService->deletePassword($password);
+            $this->passwordService->delete($password);
         }
     }
 
@@ -77,10 +77,10 @@ class FolderHook {
      */
     public function postDelete(Folder $folder): void {
         /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionService->getRevisionsByFolder($folder, false);
+        $revisions = $this->revisionService->findByModel($folder->getUuid(), false);
 
         foreach ($revisions as $revision) {
-            $this->revisionService->deleteRevision($revision);
+            $this->revisionService->delete($revision);
         }
     }
 
@@ -92,11 +92,12 @@ class FolderHook {
      */
     public function postClone(Folder $originalFolder, Folder $clonedFolder): void {
         /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionService->getRevisionsByFolder($originalFolder, false);
+        $revisions = $this->revisionService->findByModel($originalFolder->getUuid(), false);
 
         foreach ($revisions as $revision) {
-            $clone = $this->revisionService->cloneRevision($revision, ['folder' => $clonedFolder->getUuid()]);
-            $this->revisionService->saveRevision($clone);
+            /** @var FolderRevision $clone */
+            $clone = $this->revisionService->clone($revision, ['folder' => $clonedFolder->getUuid()]);
+            $this->revisionService->save($clone);
             if($revision->getUuid() == $originalFolder->getRevision()) {
                 $clonedFolder->setRevision($clone->getUuid());
             }

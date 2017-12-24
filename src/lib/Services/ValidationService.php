@@ -8,11 +8,11 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 
 /**
  * Class ValidationService
@@ -20,6 +20,20 @@ use OCA\Passwords\Exception\ApiException;
  * @package OCA\Passwords\Services
  */
 class ValidationService {
+
+    /**
+     * @var AbstractSecurityCheckHelper
+     */
+    protected $securityCheck;
+
+    /**
+     * ValidationService constructor.
+     *
+     * @param AbstractSecurityCheckHelper $securityCheck
+     */
+    public function __construct(AbstractSecurityCheckHelper $securityCheck) {
+        $this->securityCheck = $securityCheck;
+    }
 
     /**
      * @param PasswordRevision $revision
@@ -39,6 +53,9 @@ class ValidationService {
         }
         if(empty($revision->getHash())) {
             throw new ApiException('Field "hash" can not be empty');
+        }
+        if($revision->getStatus() == 0) {
+            $revision->setStatus($this->securityCheck->getRevisionSecurityLevel($revision));
         }
 
         return $revision;

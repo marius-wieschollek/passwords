@@ -88,13 +88,13 @@ class FolderRevisionHook {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     protected function updateChildFolders(string $folderId, $suspend = true): void {
-        $folders = $this->folderService->getFoldersByParent($folderId);
+        $folders = $this->folderService->findByParent($folderId);
         foreach ($folders as $folder) {
             if($folder->isSuspended() === $suspend) continue;
-            $revision = $this->revisionService->getCurrentRevision($folder, false);
+            $revision = $this->revisionService->findByUuid($folder->getRevision(), false);
             if($revision->isTrashed()) continue;
             $folder->setSuspended($suspend);
-            $this->folderService->saveFolder($folder);
+            $this->folderService->save($folder);
             $this->updateChildFolders($folder->getUuid(), $suspend);
         }
         $this->updateChildPasswords($folderId, $suspend);
@@ -106,15 +106,16 @@ class FolderRevisionHook {
      *
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
     protected function updateChildPasswords(string $folderId, $suspend = true): void {
-        $passwords = $this->passwordService->getPasswordsByFolder($folderId);
+        $passwords = $this->passwordService->findByFolder($folderId);
         foreach ($passwords as $password) {
             if($password->isSuspended() === $suspend) continue;
-            $revision = $this->passwordRevisionService->getCurrentRevision($password, false);
+            $revision = $this->passwordRevisionService->findByUuid($password->getRevision(), false);
             if($revision->isTrashed()) continue;
             $password->setSuspended($suspend);
-            $this->passwordService->savePassword($password);
+            $this->passwordService->save($password);
         }
     }
 }

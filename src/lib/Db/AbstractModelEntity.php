@@ -9,16 +9,18 @@
 namespace OCA\Passwords\Db;
 
 /**
- * Class AbstractParentEntity
+ * Class AbstractModelEntity
  *
  * @method string getUuid()
  * @method void setUuid(string $uuid)
  * @method string getRevision()
  * @method void setRevision(string $revision)
+ * @method string getSuspended()
+ * @method void setSuspended(bool $suspended)
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractParentEntity extends AbstractEntity {
+abstract class AbstractModelEntity extends AbstractEntity {
 
     /**
      * @var string
@@ -31,12 +33,25 @@ abstract class AbstractParentEntity extends AbstractEntity {
     protected $revision;
 
     /**
+     * @var string
+     */
+    protected $suspended;
+
+    /**
      * Password constructor.
      */
     public function __construct() {
         $this->addType('uuid', 'string');
         $this->addType('revision', 'string');
+        $this->addType('suspended', 'boolean');
 
         parent::__construct();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuspended(): bool {
+        return $this->getSuspended() === true;
     }
 }

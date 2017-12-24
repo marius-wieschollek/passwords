@@ -58,7 +58,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
             sleep(self::API_WAIT_TIME);
         }
 
-        $apiUrl = self::SERVICE_URL.$hash;
+        $apiUrl  = self::SERVICE_URL.$hash;
         $request = new RequestHelper();
         $request->setUrl($apiUrl)
                 ->setAcceptResponseCodes([200, 404, 429, 503])
@@ -88,7 +88,6 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         if(!in_array($responseCode, [200, 404])) {
             throw new \Exception('HIBP API returned invalid response code: '.$responseCode);
         }
-
 
         return $responseCode == 200;
     }

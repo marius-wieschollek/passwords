@@ -9,7 +9,7 @@
 namespace OCA\Passwords\Db;
 
 /**
- * Class AbstractEncryptedEntity
+ * Class AbstractRevisionEntity
  *
  * @method string getUuid()
  * @method void setUuid(string $uuid)
@@ -30,7 +30,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class AbstractEncryptedEntity extends AbstractEntity {
+class AbstractRevisionEntity extends AbstractEntity {
 
     /**
      * @var string
@@ -78,7 +78,7 @@ class AbstractEncryptedEntity extends AbstractEntity {
     protected $_decrypted = false;
 
     /**
-     * AbstractEncryptedEntity constructor.
+     * AbstractRevisionEntity constructor.
      */
     public function __construct() {
         $this->addType('sseType', 'string');

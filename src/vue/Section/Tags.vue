@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false"></breadcrumb>
+            <breadcrumb :newTag="true"></breadcrumb>
             <div class="item-list">
                 <password-line :password="password" v-for="password in passwords" :key="password.id"></password-line>
             </div>
@@ -29,8 +29,8 @@
         },
         components: {
             Breadcrumb,
-            'password-details': PasswordDetails,
-            'password-line'   : PasswordLine
+            PasswordDetails,
+            PasswordLine
         },
         computed: {
             showDetails() {

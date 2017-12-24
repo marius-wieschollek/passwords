@@ -44,15 +44,19 @@ abstract class AbstractFaviconHelper {
     /**
      * BetterIdeaHelper constructor.
      *
-     * @param FileCacheService             $fileCacheService
-     * @param AbstractImageHelper          $imageHelper
-     * @param \OC_Defaults $themingDefaults
+     * @param FileCacheService    $fileCacheService
+     * @param AbstractImageHelper $imageHelper
+     * @param \OC_Defaults        $themingDefaults
      */
-    public function __construct(FileCacheService $fileCacheService, AbstractImageHelper $imageHelper, \OC_Defaults $themingDefaults) {
+    public function __construct(
+        FileCacheService $fileCacheService,
+        AbstractImageHelper $imageHelper,
+        \OC_Defaults $themingDefaults
+    ) {
         $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
         $this->fileCacheService = $fileCacheService;
-        $this->imageHelper = $imageHelper;
-        $this->themingDefaults = $themingDefaults;
+        $this->imageHelper      = $imageHelper;
+        $this->themingDefaults  = $themingDefaults;
     }
 
     /**

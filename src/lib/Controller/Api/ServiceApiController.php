@@ -80,7 +80,6 @@ class ServiceApiController extends AbstractApiController {
             list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
 
             if(empty($password)) throw new ApiException('Unable to generate password');
-
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }

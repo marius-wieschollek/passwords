@@ -8,8 +8,6 @@
 
 namespace OCA\Passwords\Db;
 
-use JsonSerializable;
-
 /**
  * Class PasswordRevision
  *
@@ -32,7 +30,7 @@ use JsonSerializable;
  *
  * @package OCA\Passwords\Db
  */
-class PasswordRevision extends AbstractEncryptedEntity {
+class PasswordRevision extends AbstractRevisionEntity {
 
     /**
      * @var string
