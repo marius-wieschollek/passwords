@@ -149,6 +149,20 @@ export default class EnhancedApi extends SimpleApi {
     }
 
     /**
+     * Gets all the folders, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listFolders(detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.listFolders(detailLevel)
+                .then((data) => { resolve(this._processFolderList(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
      * Gets all the folders matching the criteria
      *
      * @param criteria
@@ -182,6 +196,50 @@ export default class EnhancedApi extends SimpleApi {
         }
 
         return super.createTag(data);
+    }
+
+    /**
+     * Returns the tag with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showTag(id, detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.showFolder(id, detailLevel)
+                .then((data) => { resolve(this._processTag(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the tags, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listTags(detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.listTags(detailLevel)
+                .then((data) => { resolve(this._processTagList(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the tags matching the criteria
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findTags(criteria = {}, detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.findTags(criteria, detailLevel)
+                .then((data) => { resolve(this._processTagList(data)); })
+                .catch(reject);
+        });
     }
 
 
@@ -375,6 +433,40 @@ export default class EnhancedApi extends SimpleApi {
         folder.updated = new Date(folder.updated * 1e3);
 
         return folder;
+    }
+
+    /**
+     *
+     * @param data
+     * @returns {{}}
+     * @private
+     */
+    _processTagList(data) {
+        let tags = {};
+
+        for (let i = 0; i < data.length; i++) {
+            let tag = this._processTag(data[i]);
+            tags[tag.id] = tag;
+        }
+
+        return tags;
+    }
+
+    /**
+     *
+     * @param tag
+     * @returns {{}}
+     * @private
+     */
+    _processTag(tag) {
+        tag.type = 'tag';
+        if (tag.passwords) {
+            tag.passwords = this._processPasswordList(tag.passwords);
+        }
+        tag.created = new Date(tag.created * 1e3);
+        tag.updated = new Date(tag.updated * 1e3);
+
+        return tag;
     }
 
     /**

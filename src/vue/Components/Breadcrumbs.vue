@@ -43,6 +43,7 @@
 <script>
     import Utility from '@js/Classes/Utility';
     import Translate from '@vc/Translate.vue';
+    import TagManager from '@js/Manager/TagManager';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
@@ -99,6 +100,7 @@
                 FolderManager.createFolder(this.folder);
             },
             createTag() {
+                TagManager.createTag();
             },
             createPassword() {
                 PasswordManager.createPassword(this.folder);

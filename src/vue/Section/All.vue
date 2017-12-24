@@ -13,12 +13,12 @@
 </template>
 
 <script>
-    import PwEvents from "@js/Classes/Events";
+    import API from '@js/Helper/api';
+    import Events from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
     import Breadcrumb from '@vc/Breadcrumbs.vue';
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
-    import API from '@js/Helper/api';
 
     export default {
         data() {
@@ -39,11 +39,11 @@
 
         created() {
             this.refreshView();
-            PwEvents.on('password.changed', this.refreshView);
+            Events.on('password.changed', this.refreshView);
         },
 
         beforeDestroy() {
-            PwEvents.off('password.changed', this.refreshView)
+            Events.off('password.changed', this.refreshView)
         },
 
         computed: {

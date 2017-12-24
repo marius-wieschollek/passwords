@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :newTag="true"></breadcrumb>
             <div class="item-list">
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"></tag-line>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"></password-line>
             </div>
         </div>
@@ -13,13 +14,18 @@
 </template>
 
 <script>
+    import API from '@js/Helper/api';
+    import Events from "@js/Classes/Events";
+    import Utility from "@js/Classes/Utility";
     import Breadcrumb from '@vc/Breadcrumbs.vue';
+    import TagLine from '@vue/Line/Tag.vue';
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
 
     export default {
         data() {
             return {
+                tags     : [],
                 passwords: [],
                 detail   : {
                     type   : 'none',
@@ -27,14 +33,36 @@
                 }
             }
         },
+
         components: {
+            TagLine,
             Breadcrumb,
-            PasswordDetails,
-            PasswordLine
+            PasswordLine,
+            PasswordDetails
         },
+
+        created() {
+            this.refreshView();
+            Events.on('password.changed', this.refreshView);
+        },
+
+        beforeDestroy() {
+            Events.off('password.changed', this.refreshView)
+        },
+
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            }
+        },
+
+        methods: {
+            refreshView: function () {
+                API.listTags().then(this.updateContentList);
+            },
+
+            updateContentList: function (tags) {
+                this.tags = Utility.sortApiObjectArray(tags, 'label', true);
             }
         }
     };

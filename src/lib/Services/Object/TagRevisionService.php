@@ -24,10 +24,10 @@ class TagRevisionService extends AbstractRevisionService {
 
     /**
      * @param string $model
-     * @param string $cseType
-     * @param string $sseType
      * @param string $label
      * @param string $color
+     * @param string $cseType
+     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $deleted
@@ -39,17 +39,17 @@ class TagRevisionService extends AbstractRevisionService {
      */
     public function create(
         string $model,
-        string $cseType,
-        string $sseType,
         string $label,
         string $color,
+        string $cseType,
+        string $sseType,
         bool $hidden,
         bool $trashed,
         bool $deleted,
         bool $favourite
     ): TagRevision {
 
-        $revision = $this->createModel($model, $cseType, $sseType, $label, $color, $hidden, $trashed, $deleted, $favourite);
+        $revision = $this->createModel($model, $label, $color, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
 
         $revision = $this->validationService->validateTag($revision);
 
@@ -58,10 +58,10 @@ class TagRevisionService extends AbstractRevisionService {
 
     /**
      * @param string $model
-     * @param string $cseType
-     * @param string $sseType
      * @param string $label
      * @param string $color
+     * @param string $cseType
+     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $deleted
@@ -71,10 +71,10 @@ class TagRevisionService extends AbstractRevisionService {
      */
     protected function createModel(
         string $model,
-        string $cseType,
-        string $sseType,
         string $label,
         string $color,
+        string $cseType,
+        string $sseType,
         bool $hidden,
         bool $trashed,
         bool $deleted,

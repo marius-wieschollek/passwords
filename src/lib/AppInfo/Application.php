@@ -26,6 +26,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagMapper;
+use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
@@ -297,6 +298,13 @@ class Application extends App {
             );
         });
 
+        $container->registerService('TagRevisionMapper', function (IAppContainer $c) {
+            return new TagRevisionMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
         $container->registerService('PasswordTagRelationMapper', function (IAppContainer $c) {
             return new PasswordTagRelationMapper(
                 $c->getServer()->getDatabaseConnection(),
@@ -479,7 +487,8 @@ class Application extends App {
         });
         $container->registerService('TagObjectHelper', function (IAppContainer $c) {
             return new TagObjectHelper(
-                $c->query('TagService')
+                $c->query('TagService'),
+                $c->query('TagRevisionService')
             );
         });
     }

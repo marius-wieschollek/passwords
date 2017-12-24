@@ -11,6 +11,8 @@ namespace OCA\Passwords\Helper\ApiObjects;
 use Exception;
 use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\Tag;
+use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 
 /**
@@ -28,12 +30,19 @@ class TagObjectHelper extends AbstractObjectHelper {
     protected $tagService;
 
     /**
+     * @var TagRevisionService
+     */
+    protected $revisionService;
+
+    /**
      * TagObjectHelper constructor.
      *
-     * @param TagService $tagService
+     * @param TagService         $tagService
+     * @param TagRevisionService $revisionService
      */
-    public function __construct(TagService $tagService) {
+    public function __construct(TagService $tagService, TagRevisionService $revisionService) {
         $this->tagService = $tagService;
+        $this->revisionService = $revisionService;
     }
 
     /**
@@ -45,10 +54,12 @@ class TagObjectHelper extends AbstractObjectHelper {
      */
     public function getApiObject(AbstractModelEntity $tag, string $level = self::LEVEL_MODEL): array {
         $detailLevel = explode('+', $level);
+        /** @var TagRevision $revision */
+        $revision = $this->revisionService->findByUuid($tag->getRevision());
 
         $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
-            $object = $this->getModel($tag);
+            $object = $this->getModel($tag, $revision);
         }
         if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
             $object = $this->getPasswords($tag, $object);
@@ -58,11 +69,12 @@ class TagObjectHelper extends AbstractObjectHelper {
     }
 
     /**
-     * @param Tag $tag
+     * @param Tag         $tag
+     * @param TagRevision $revision
      *
      * @return array
      */
-    protected function getModel(Tag $tag): array {
+    protected function getModel(Tag $tag, TagRevision $revision): array {
 
         return [
             'id'        => $tag->getUuid(),
@@ -70,11 +82,11 @@ class TagObjectHelper extends AbstractObjectHelper {
             'created'   => $tag->getCreated(),
             'updated'   => $tag->getUpdated(),
             'revision'  => $tag->getRevision(),
-            'hidden'    => $tag->getHidden(),
-            'trashed'   => $tag->getTrashed(),
-            'favourite' => $tag->getFavourite(),
-            'name'      => $tag->getName(),
-            'color'     => $tag->getColor()
+            'hidden'    => $revision->isHidden(),
+            'trashed'   => $revision->isTrashed(),
+            'favourite' => $revision->isFavourite(),
+            'label'      => $revision->getLabel(),
+            'color'     => $revision->getColor()
         ];
     }
 

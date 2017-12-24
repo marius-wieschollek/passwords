@@ -86,6 +86,52 @@ class Messages {
     }
 
     /**
+     *
+     * @param form
+     * @param title
+     * @param message
+     * @returns {Promise<any>}
+     */
+    form(form, title = 'Form', message = '') {
+        let html = '',
+            id   = 'pw-form-' + Math.round(Math.random() * 10);
+        for (let name in form) {
+            if (!form.hasOwnProperty(name)) continue;
+            let field = form[name],
+                value = field.value ? field.value:'',
+                type  = field.type ? field.type:'text',
+                label = Messages._translate(field.label);
+
+            html +=
+                '<div><label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '"></div>';
+        }
+
+        if (message.length !== 0) message += '<br><br>';
+        html = '<form id="' + id + '">' + message + html + '</form>';
+
+        return new Promise((resolve, reject) => {
+            title = Messages._translate(title);
+            let callback = function (success) {
+                if (success) {
+                    let serialized = $('#' + id).serializeArray(),
+                        data       = {};
+
+                    for (let i = 0; i < serialized.length; i++) {
+                        let field = serialized[i];
+                        data[field.name] = field.value
+                    }
+
+                    resolve(data)
+                } else {
+                    reject()
+                }
+            };
+
+            OC.dialogs.confirmHtml(html, title, callback, true);
+        });
+    }
+
+    /**
      * Sets the value of an input field because Nextcloud does not support this
      *
      * @param value

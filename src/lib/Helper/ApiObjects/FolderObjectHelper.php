@@ -82,16 +82,17 @@ class FolderObjectHelper extends AbstractObjectHelper {
      */
     public function getApiObject(AbstractModelEntity $folder, string $level = self::LEVEL_MODEL): array {
         $detailLevel = explode('+', $level);
+        $revision = $this->folderRevisionService->findByUuid($folder->getRevision());
 
         $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
-            $object = $this->getModel($folder);
+            $object = $this->getModel($folder, $revision);
         }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($folder, $object);
         }
         if(in_array(self::LEVEL_PARENT, $detailLevel)) {
-            $object = $this->getParent($folder, $object);
+            $object = $this->getParent($folder, $revision->getParent(), $object);
         }
         if(in_array(self::LEVEL_FOLDERS, $detailLevel)) {
             $object = $this->getFolders($folder, $object);
@@ -104,15 +105,13 @@ class FolderObjectHelper extends AbstractObjectHelper {
     }
 
     /**
-     * @param Folder $folder
+     * @param Folder         $folder
+     *
+     * @param FolderRevision $revision
      *
      * @return array
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    protected function getModel(Folder $folder): array {
-        $revision = $this->getCurrentFolderRevision($folder);
+    protected function getModel(Folder $folder, FolderRevision $revision): array {
 
         return [
             'id'        => $folder->getUuid(),
@@ -132,17 +131,17 @@ class FolderObjectHelper extends AbstractObjectHelper {
 
     /**
      * @param Folder $folder
+     * @param string $parentId
      * @param array  $object
      *
      * @return array
+     * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
      */
-    protected function getParent(Folder $folder, array $object): array {
+    protected function getParent(Folder $folder, string $parentId, array $object): array {
 
-        $revision         = $this->getCurrentFolderRevision($folder);
-        $parent           = $this->folderService->findByUuid($revision->getParent());
+        $parent           = $this->folderService->findByUuid($parentId);
         $object['parent'] = $this->getApiObject($parent);
 
         return $object;
@@ -190,23 +189,5 @@ class FolderObjectHelper extends AbstractObjectHelper {
         }
 
         return $object;
-    }
-
-    /**
-     * @param Folder $folder
-     *
-     * @return FolderRevision
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     */
-    protected function getCurrentFolderRevision(Folder $folder): FolderRevision {
-        $id = $folder->getId();
-
-        if(!isset($this->revisionCache[ $id ])) {
-            $this->revisionCache[ $id ] = $this->folderRevisionService->findByUuid($folder->getRevision());
-        }
-
-        return $this->revisionCache[ $id ];
     }
 }

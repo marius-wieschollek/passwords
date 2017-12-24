@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import PwEvents from "@js/Classes/Events";
+    import Events from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
     import Breadcrumb from '@vc/Breadcrumbs.vue';
     import PasswordLine from '@vue/Line/Password.vue';
@@ -24,7 +24,7 @@
         components: {
             Breadcrumb,
             'password-details': PasswordDetails,
-            'password-line': PasswordLine
+            'password-line'   : PasswordLine
         },
         data() {
             return {
@@ -38,11 +38,11 @@
 
         created() {
             this.refreshView();
-            PwEvents.on('data.changed', this.refreshView);
+            Events.on('data.changed', this.refreshView);
         },
 
         beforeDestroy() {
-            PwEvents.off('data.changed', this.refreshView)
+            Events.off('data.changed', this.refreshView)
         },
 
         computed: {
@@ -58,7 +58,7 @@
 
             updateContentList: function (passwords) {
                 let array = Utility.sortApiObjectArray(passwords, 'updated', false);
-                this.passwords = array.slice(0,15);
+                this.passwords = array.slice(0, 15);
             }
         }
     };

@@ -20,8 +20,8 @@
     export default {
         components: {
             Breadcrumb,
-            'password-details': PasswordDetails,
-            'password-line': PasswordLine
+            PasswordDetails,
+            PasswordLine
         },
         data() {
             return {
