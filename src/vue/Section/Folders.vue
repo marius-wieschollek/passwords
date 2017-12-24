@@ -75,9 +75,9 @@
             refreshViewIfRequired: function (data) {
                 let object = data.object;
 
-                if (object.type === 'password' && object.parent === this.currentFolder) {
+                if (object.type === 'password' && object.folder === this.currentFolder) {
                     if (object.trashed) {
-                        API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
+                        this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                     } else {
                         let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
                         this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
@@ -91,8 +91,12 @@
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     }
                 } else if (object.type === 'folder' && object.parent === this.currentFolder) {
-                    let folders = Utility.replaceOrAppendApiObject(this.folders, object);
-                    this.folders = Utility.sortApiObjectArray(folders, 'label', true);
+                    if (object.trashed) {
+                        this.folders = Utility.removeApiObjectFromArray(this.folders, object);
+                    } else {
+                        let folders = Utility.replaceOrAppendApiObject(this.folders, object);
+                        this.folders = Utility.sortApiObjectArray(folders, 'label', true);
+                    }
                 }
             },
 

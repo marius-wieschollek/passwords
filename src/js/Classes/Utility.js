@@ -90,4 +90,21 @@ export default class Utility {
 
         return array;
     }
+
+    /**
+     *
+     * @param array
+     * @param object
+     * @returns {*}
+     */
+    static removeApiObjectFromArray(array, object) {
+        for (let i = 0; i < array.length; i++) {
+            let current = array[i];
+            if (current.id === object.id) {
+                return array.remove(i);
+            }
+        }
+
+        return array;
+    }
 }

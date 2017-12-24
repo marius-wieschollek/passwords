@@ -125,10 +125,15 @@
                 if(this.folder) password.folder = this.folder;
 
                 API.createPassword(password)
-                    .then(() => {
+                    .then((data) => {
                         this.closeWindow();
                         Messages.notification('Password created');
-                        Events.fire('password.created', response);
+                        password.type = 'password';
+                        password.id = data.id;
+                        password.revision = data.revision;
+                        password.created = new Date();
+                        password.updated = password.created;
+                        Events.fire('password.created', password);
                     })
                     .catch(() => {
                         Messages.alert(e.message, 'Creating Password Failed');
