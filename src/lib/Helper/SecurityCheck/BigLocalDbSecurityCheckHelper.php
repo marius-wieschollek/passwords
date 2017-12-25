@@ -23,7 +23,7 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
-    const LOW_RAM_LIMIT = 3145728;
+    const LOW_RAM_LIMIT = 4194304;
     const ARCHIVE_URL   = 'https://archive.org/download/10MillionPasswords/10-million-combos.zip';
     const PASSWORD_DB   = 'large';
 
@@ -61,7 +61,6 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
         $txtFile = $this->config->getTempDir().uniqid().'.txt';
 
         $this->downloadPasswordsFile($txtFile);
-
         if($this->isLowMemorySystem()) {
             $this->lowMemoryHashAlgorithm($txtFile);
         } else {

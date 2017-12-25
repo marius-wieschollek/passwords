@@ -50,6 +50,8 @@ class CheckPasswordsJob extends TimedJob {
 
     /**
      * @param $argument
+     *
+     * @throws \Exception
      */
     protected function run($argument): void {
         $securityHelper = $this->helperService->getSecurityHelper();
@@ -62,6 +64,8 @@ class CheckPasswordsJob extends TimedJob {
 
     /**
      * @param $securityHelper
+     *
+     * @throws \Exception
      */
     protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
         /** @var PasswordRevision[] $revisions */

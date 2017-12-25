@@ -91,11 +91,8 @@ class Application extends App {
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
 
-
-        if($this->getContainer()->getServer()->getUserSession()->getUser()) {
-            $this->registerPersonalSettings();
-            $this->registerDiClasses();
-        }
+        $this->registerPersonalSettings();
+        $this->registerDiClasses();
     }
 
     /**
@@ -362,67 +359,69 @@ class Application extends App {
     protected function registerServices(): void {
         $container = $this->getContainer();
 
-        $container->registerService('FolderService', function (IAppContainer $c) {
-            return new FolderService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('FolderMapper')
-            );
-        });
+        if($this->getContainer()->getServer()->getUserSession()->getUser()) {
+            $container->registerService('FolderService', function (IAppContainer $c) {
+                return new FolderService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('FolderMapper')
+                );
+            });
 
-        $container->registerService('FolderRevisionService', function (IAppContainer $c) {
-            return new FolderRevisionService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('FolderRevisionMapper'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService')
-            );
-        });
+            $container->registerService('FolderRevisionService', function (IAppContainer $c) {
+                return new FolderRevisionService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('FolderRevisionMapper'),
+                    $c->query('ValidationService'),
+                    $c->query('EncryptionService')
+                );
+            });
 
-        $container->registerService('PasswordService', function (IAppContainer $c) {
-            return new PasswordService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('PasswordMapper')
-            );
-        });
+            $container->registerService('PasswordService', function (IAppContainer $c) {
+                return new PasswordService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('PasswordMapper')
+                );
+            });
 
-        $container->registerService('PasswordRevisionService', function (IAppContainer $c) {
-            return new PasswordRevisionService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('PasswordRevisionMapper'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService')
-            );
-        });
+            $container->registerService('PasswordRevisionService', function (IAppContainer $c) {
+                return new PasswordRevisionService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('PasswordRevisionMapper'),
+                    $c->query('ValidationService'),
+                    $c->query('EncryptionService')
+                );
+            });
 
-        $container->registerService('TagService', function (IAppContainer $c) {
-            return new TagService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('TagMapper')
-            );
-        });
+            $container->registerService('TagService', function (IAppContainer $c) {
+                return new TagService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('TagMapper')
+                );
+            });
 
-        $container->registerService('TagRevisionService', function (IAppContainer $c) {
-            return new TagRevisionService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('TagRevisionMapper'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService')
-            );
-        });
+            $container->registerService('TagRevisionService', function (IAppContainer $c) {
+                return new TagRevisionService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('TagRevisionMapper'),
+                    $c->query('ValidationService'),
+                    $c->query('EncryptionService')
+                );
+            });
 
-        $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
-            return new PasswordTagRelationService(
-                $c->getServer()->getUserSession()->getUser(),
-                $c->query('HookManager'),
-                $c->query('PasswordTagRelationMapper')
-            );
-        });
+            $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
+                return new PasswordTagRelationService(
+                    $c->getServer()->getUserSession()->getUser(),
+                    $c->query('HookManager'),
+                    $c->query('PasswordTagRelationMapper')
+                );
+            });
+        }
 
         $container->registerService('FileCacheService', function (IAppContainer $c) {
             return new FileCacheService(
