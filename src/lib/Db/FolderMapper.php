@@ -20,15 +20,15 @@ class FolderMapper extends AbstractMapper {
     /**
      * @param string $parentUuid
      *
-     * @return array
+     * @return Folder[]
      */
-    public function getByParentFolder(string $parentUuid) {
+    public function getByParentFolder(string $parentUuid): array {
         $folderTable   = '`*PREFIX*'.static::TABLE_NAME.'`';
         $revisionTable = '`*PREFIX*'.FolderRevisionMapper::TABLE_NAME.'`';
 
         $sql = 'SELECT '.$folderTable.'.* FROM '.$folderTable.
-               'INNER JOIN '.$revisionTable.' ON '.$folderTable.'.`revision` = '.$revisionTable.'.`uuid`'.
-               ' WHERE '.$folderTable.'.`deleted` = 0  AND '.$folderTable.'.`user_id` = ?'.
+               ' INNER JOIN '.$revisionTable.' ON '.$folderTable.'.`revision` = '.$revisionTable.'.`uuid`'.
+               ' WHERE '.$folderTable.'.`deleted` = 0 AND '.$folderTable.'.`user_id` = ?'.
                ' AND '.$revisionTable.'.`parent` = ? AND '.$revisionTable.'.`deleted` = 0  AND '.$revisionTable.
                '.`user_id` = ?';
 

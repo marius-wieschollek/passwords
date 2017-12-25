@@ -94,7 +94,7 @@ class Messages {
      */
     form(form, title = 'Form', message = '') {
         let html = '',
-            id   = 'pw-form-' + Math.round(Math.random() * 10);
+            id   = 'passwords-form-' + Math.round(Math.random() * 10);
         for (let name in form) {
             if (!form.hasOwnProperty(name)) continue;
             let field = form[name],
@@ -102,12 +102,11 @@ class Messages {
                 type  = field.type ? field.type:'text',
                 label = Messages._translate(field.label);
 
-            html +=
-                '<div><label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '"></div>';
+            html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
         }
 
         if (message.length !== 0) message += '<br><br>';
-        html = '<form id="' + id + '">' + message + html + '</form>';
+        html = '<form class="passwords-form" id="' + id + '">' + message + html + '</form>';
 
         return new Promise((resolve, reject) => {
             title = Messages._translate(title);
@@ -121,6 +120,7 @@ class Messages {
                         data[field.name] = field.value
                     }
 
+                    $('.oc-dialog, .oc-dialog-dim').remove();
                     resolve(data)
                 } else {
                     reject()

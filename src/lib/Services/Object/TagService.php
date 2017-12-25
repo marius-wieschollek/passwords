@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Tag;
+use OCA\Passwords\Db\TagMapper;
 
 /**
  * Class TagService
@@ -18,7 +19,22 @@ use OCA\Passwords\Db\Tag;
 class TagService extends AbstractModelService {
 
     /**
+     * @var TagMapper
+     */
+    protected $mapper;
+
+    /**
      * @var string
      */
     protected $class = Tag::class;
+
+    /**
+     * @param string $passwordUuid
+     * @param bool   $includeHidden
+     *
+     * @return Tag[]
+     */
+    public function findByPassword(string $passwordUuid, bool $includeHidden = false): array {
+        return $this->mapper->getByPassword($passwordUuid, $includeHidden);
+    }
 }

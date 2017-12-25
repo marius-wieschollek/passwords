@@ -15,7 +15,7 @@ namespace OCA\Passwords\Db;
  * @method void setUuid(string $uuid)
  * @method string getRevision()
  * @method void setRevision(string $revision)
- * @method string getSuspended()
+ * @method bool getSuspended()
  * @method void setSuspended(bool $suspended)
  *
  * @package OCA\Passwords\Db

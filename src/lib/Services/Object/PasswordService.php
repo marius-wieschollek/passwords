@@ -31,9 +31,19 @@ class PasswordService extends AbstractModelService {
     /**
      * @param string $uuid
      *
-     * @return \OCA\Passwords\Db\AbstractEntity|Password[]
+     * @return Password[]
      */
     public function findByFolder(string $uuid): array {
         return $this->mapper->getByFolder($uuid);
+    }
+
+    /**
+     * @param string $tagUuid
+     * @param bool   $includeHidden
+     *
+     * @return Password[]
+     */
+    public function findByTag(string $tagUuid, bool $includeHidden = false): array {
+        return $this->mapper->getByTag($tagUuid, $includeHidden);
     }
 }

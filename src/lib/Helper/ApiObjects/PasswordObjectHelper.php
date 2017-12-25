@@ -12,7 +12,10 @@ use Exception;
 use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
+use OCA\Passwords\Services\Object\TagService;
+use OCP\AppFramework\IAppContainer;
 
 /**
  * Class PasswordObjectHelper
@@ -30,28 +33,69 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     protected $revisionService;
 
     /**
+     * @var TagService
+     */
+    protected $tagService;
+
+    /**
+     * @var FolderService
+     */
+    protected $folderService;
+
+    /**
+     * @var TagObjectHelper
+     */
+    protected $tagObjectHelper;
+
+    /**
+     * @var FolderObjectHelper
+     */
+    protected $folderObjectHelper;
+
+    /**
      * PasswordApiController constructor.
      *
+     * @param IAppContainer           $container
      * @param PasswordRevisionService $revisionService
+     * @param TagService              $tagService
+     * @param FolderService           $folderService
      */
-    public function __construct(PasswordRevisionService $revisionService) {
+    public function __construct(
+        IAppContainer $container,
+        TagService $tagService,
+        FolderService $folderService,
+        PasswordRevisionService $revisionService
+    ) {
+        parent::__construct($container);
+
+        $this->tagService      = $tagService;
+        $this->folderService   = $folderService;
         $this->revisionService = $revisionService;
     }
 
     /**
      * @param AbstractModelEntity|Password $password
      * @param string                       $level
+     * @param bool                         $excludeHidden
+     * @param bool                         $excludeTrash
      *
      * @return array
      * @throws Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function getApiObject(AbstractModelEntity $password, string $level = self::LEVEL_MODEL): array {
-
+    public function getApiObject(
+        AbstractModelEntity $password,
+        string $level = self::LEVEL_MODEL,
+        bool $excludeHidden = true,
+        bool $excludeTrash = false
+    ): ?array {
         $detailLevel = explode('+', $level);
         /** @var PasswordRevision $revision */
         $revision = $this->revisionService->findByUuid($password->getRevision());
+
+        if($excludeTrash && $revision->isTrashed()) return null;
+        if($excludeHidden && $revision->isHidden()) return null;
 
         $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
@@ -61,10 +105,10 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             $object = $this->getRevisions($password, $object);
         }
         if(in_array(self::LEVEL_FOLDER, $detailLevel)) {
-            //$object = $this->getFolders($password, $object);
+            $object = $this->getFolder($revision, $object);
         }
         if(in_array(self::LEVEL_TAGS, $detailLevel)) {
-            //$object = $this->getTags($password, $object);
+            $object = $this->getTags($revision, $object);
         }
 
         return $object;
@@ -104,9 +148,11 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @param array    $object
      *
      * @return array
+     * @throws Exception
      */
     protected function getRevisions(Password $password, array $object): array {
-        $revisions = $this->revisionService->findByModel($password);
+        /** @var PasswordRevision[] $revisions */
+        $revisions = $this->revisionService->findByModel($password->getUuid());
 
         $object['revisions'] = [];
         foreach ($revisions as $revision) {
@@ -115,8 +161,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
                 'owner'     => $revision->getUserId(),
                 'created'   => $revision->getCreated(),
                 'updated'   => $revision->getUpdated(),
-                'title'     => $revision->getLabel(),
-                'login'     => $revision->getUsername(),
+                'label'     => $revision->getLabel(),
+                'username'  => $revision->getUsername(),
                 'password'  => $revision->getPassword(),
                 'notes'     => $revision->getNotes(),
                 'url'       => $revision->getUrl(),
@@ -125,14 +171,88 @@ class PasswordObjectHelper extends AbstractObjectHelper {
                 'folder'    => $revision->getFolder(),
                 'cseType'   => $revision->getCseType(),
                 'sseType'   => $revision->getSseType(),
-                'hidden'    => $revision->getHidden(),
-                'trashed'   => $revision->getTrashed(),
-                'favourite' => $revision->getFavourite(),
+                'hidden'    => $revision->isHidden(),
+                'trashed'   => $revision->isTrashed(),
+                'favourite' => $revision->isFavourite(),
             ];
 
-            $object['revisions'][ $revision->getUuid() ] = $current;
+            $object['revisions'][] = $current;
         }
 
         return $object;
+    }
+
+    /**
+     * @param PasswordRevision $revision
+     * @param array            $object
+     *
+     * @return array
+     * @throws Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function getTags(PasswordRevision $revision, array $object): array {
+        $object['tags'] = [];
+        $objectHelper   = $this->getTagObjectHelper();
+        $tags           = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
+        foreach ($tags as $tag) {
+            $obj = $objectHelper->getApiObject($tag, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed());
+
+            if($obj !== null) $object['tags'][] = $obj;
+        }
+
+        return $object;
+    }
+
+    /**
+     * @param PasswordRevision $revision
+     * @param array            $object
+     *
+     * @return array
+     * @throws Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function getFolder(PasswordRevision $revision, array $object): array {
+        $object['folder'] = [];
+
+        $objectHelper = $this->getFolderObjectHelper();
+        $folder       = $this->folderService->findByUuid($revision->getFolder());
+        $obj          = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed());
+
+        if($obj !== null) {
+            $object['folder'] = $obj;
+        } else {
+            $folder           = $this->folderService->getBaseFolder();
+            $object['folder'] = $objectHelper->getApiObject($folder);
+        }
+
+        return $object;
+    }
+
+    /**
+     * @return TagObjectHelper
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function getTagObjectHelper(): TagObjectHelper {
+        if(!$this->tagObjectHelper) {
+            $this->tagObjectHelper = $this->container->query('TagObjectHelper');
+        }
+
+        return $this->tagObjectHelper;
+    }
+
+    /**
+     * @return FolderObjectHelper
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function getFolderObjectHelper(): FolderObjectHelper {
+        if(!$this->folderObjectHelper) {
+            $this->folderObjectHelper = $this->container->query('FolderObjectHelper');
+        }
+
+        return $this->folderObjectHelper;
     }
 }

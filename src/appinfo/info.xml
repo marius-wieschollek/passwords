@@ -16,7 +16,7 @@
 	</description>
 	<licence>AGPL</licence>
 	<author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">Marius David Wieschollek</author>
-	<version>2018.1.0.1</version>
+	<version>2018.1.0.2</version>
 	<api>
 		<legacyApi>20-beta9</legacyApi>
 	</api>

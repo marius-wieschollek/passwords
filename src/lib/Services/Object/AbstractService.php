@@ -69,33 +69,33 @@ abstract class AbstractService {
     abstract public function save(AbstractEntity $model): AbstractEntity;
 
     /**
-     * @param AbstractEntity $object
+     * @param AbstractEntity $entity
      * @param array          $overwrites
      *
      * @return AbstractEntity
      * @throws \Exception
      */
-    public function clone(AbstractEntity $object, array $overwrites = []): AbstractEntity {
-        if(get_class($object) !== $this->class) throw new \Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preClone', [$object]);
+    public function clone(AbstractEntity $entity, array $overwrites = []): AbstractEntity {
+        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
+        $this->hookManager->emit($this->class, 'preClone', [$entity]);
         /** @var AbstractEntity $clone */
-        $clone = $this->cloneModel($object, $overwrites);
-        $this->hookManager->emit($this->class, 'postClone', [$object, $clone]);
+        $clone = $this->cloneModel($entity, $overwrites);
+        $this->hookManager->emit($this->class, 'postClone', [$entity, $clone]);
 
         return $clone;
     }
 
     /**
-     * @param AbstractEntity $revision
+     * @param AbstractEntity $entity
      *
      * @throws \Exception
      */
-    public function delete(AbstractEntity $revision): void {
-        if(get_class($revision) !== $this->class) throw new \Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preDelete', [$revision]);
-        $revision->setDeleted(true);
-        $this->save($revision);
-        $this->hookManager->emit($this->class, 'postDelete', [$revision]);
+    public function delete(AbstractEntity $entity): void {
+        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
+        $this->hookManager->emit($this->class, 'preDelete', [$entity]);
+        $entity->setDeleted(true);
+        $this->save($entity);
+        $this->hookManager->emit($this->class, 'postDelete', [$entity]);
     }
 
     /**

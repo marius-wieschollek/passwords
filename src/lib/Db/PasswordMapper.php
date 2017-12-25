@@ -20,18 +20,39 @@ class PasswordMapper extends AbstractMapper {
     /**
      * @param string $parentUuid
      *
-     * @return array
+     * @return Password[]
      */
-    public function getByFolder(string $parentUuid) {
+    public function getByFolder(string $parentUuid): array {
         $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
         $revisionTable  = '`*PREFIX*'.PasswordRevisionMapper::TABLE_NAME.'`';
 
         $sql = 'SELECT '.$passwordsTable.'.* FROM '.$passwordsTable.
-               'INNER JOIN '.$revisionTable.' ON '.$passwordsTable.'.`revision` = '.$revisionTable.'.`uuid`'.
-               ' WHERE '.$passwordsTable.'.`deleted` = 0  AND '.$passwordsTable.'.`user_id` = ?'.
-               ' AND '.$revisionTable.'.`folder` = ? AND '.$revisionTable.'.`deleted` = 0  AND '.$revisionTable.
+               ' INNER JOIN '.$revisionTable.' ON '.$passwordsTable.'.`revision` = '.$revisionTable.'.`uuid`'.
+               ' WHERE '.$passwordsTable.'.`deleted` = 0 AND '.$passwordsTable.'.`user_id` = ?'.
+               ' AND '.$revisionTable.'.`folder` = ? AND '.$revisionTable.'.`deleted` = 0 AND '.$revisionTable.
                '.`user_id` = ?';
 
         return $this->findEntities($sql, [$this->userId, $parentUuid, $this->userId]);
+    }
+
+    /**
+     * @param string $tagUuid
+     * @param bool   $includeHidden
+     *
+     * @return Password[]
+     */
+    public function getByTag(string $tagUuid, bool $includeHidden = false): array {
+        $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
+        $relationTable  = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
+
+        $sql = 'SELECT '.$passwordsTable.'.* FROM '.$passwordsTable.
+               ' INNER JOIN '.$relationTable.' ON '.$passwordsTable.'.`uuid` = '.$relationTable.'.`password`'.
+               ' WHERE '.$passwordsTable.'.`deleted` = 0 AND '.$passwordsTable.'.`user_id` = ?'.
+               ' AND '.$relationTable.'.`tag` = ? AND '.$relationTable.'.`deleted` = 0 AND '.$relationTable.
+               '.`user_id` = ?';
+
+        if(!$includeHidden) $sql .= ' AND '.$relationTable.'.`hidden` = 0';
+
+        return $this->findEntities($sql, [$this->userId, $tagUuid, $this->userId]);
     }
 }

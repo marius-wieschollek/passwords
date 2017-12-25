@@ -7,7 +7,8 @@
         "watch": "webpack --env.production=0 --progress --colors --watch",
         "build": "webpack --env.production"
     },
-    "dependencies": {},
+    "dependencies": {
+    },
     "devDependencies": {
         "css-loader": "^0.28.7",
         "extract-text-webpack-plugin": "^3.0.0",
@@ -22,6 +23,7 @@
         "simplemde": "^1.11.2",
         "uglify-es": "^3.2.2",
         "uglifyjs-webpack-plugin": "^1.1.4",
+        "random-material-color": "^1.0.3",
         "url-loader": "^0.5.9",
         "vue": "^2.5.13",
         "vue-loader": "^13.6.1",

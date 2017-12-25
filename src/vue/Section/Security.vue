@@ -50,21 +50,16 @@
 
         created() {
             this.refreshView();
-            Events.on('data.changed', this.refreshView);
+            Events.on('password.changed', this.refreshView);
         },
 
         beforeDestroy() {
-            Events.off('data.changed', this.refreshView)
+            Events.off('password.changed', this.refreshView)
         },
 
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
-            }
-        },
-        watch   : {
-            $route: function () {
-                this.refreshView()
             }
         },
 
@@ -79,13 +74,18 @@
                         {path: this.$route.path, label: Utility.translate(label)}
                     ]
                 } else {
-                    this.passwords = {};
+                    this.passwords = [];
                     this.breadcrumb = [];
                 }
             },
 
             updateContentList: function (passwords) {
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
+            }
+        },
+        watch   : {
+            $route: function () {
+                this.refreshView()
             }
         }
     };

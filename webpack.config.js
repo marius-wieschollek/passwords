@@ -81,7 +81,7 @@ module.exports = env => {
                                             options: {minimize: production}
                                         }, {
                                             loader : 'sass-resources-loader',
-                                            options: {resources: 'src/scss/Partials/_variables.scss'}
+                                            options: {resources: 'src/scss/app.scss'}
                                         }
                                     ],
                                     fallback: 'vue-style-loader'

@@ -61,6 +61,7 @@ use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\PageShotService;
@@ -90,8 +91,11 @@ class Application extends App {
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
 
-        $this->registerPersonalSettings();
-        $this->registerDiClasses();
+
+        if($this->getContainer()->getServer()->getUserSession()->getUser()) {
+            $this->registerPersonalSettings();
+            $this->registerDiClasses();
+        }
     }
 
     /**
@@ -212,9 +216,12 @@ class Application extends App {
             return new PasswordApiController(
                 self::APP_NAME,
                 $c->query('Request'),
+                $c->query('TagService'),
                 $c->query('PasswordService'),
+                $c->query('TagRevisionService'),
                 $c->query('PasswordRevisionService'),
-                $c->query('PasswordObjectHelper')
+                $c->query('PasswordObjectHelper'),
+                $c->query('PasswordTagRelationService')
             );
         });
 
@@ -409,6 +416,14 @@ class Application extends App {
             );
         });
 
+        $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
+            return new PasswordTagRelationService(
+                $c->getServer()->getUserSession()->getUser(),
+                $c->query('HookManager'),
+                $c->query('PasswordTagRelationMapper')
+            );
+        });
+
         $container->registerService('FileCacheService', function (IAppContainer $c) {
             return new FileCacheService(
                 $c->query('AppData')
@@ -474,20 +489,25 @@ class Application extends App {
 
         $container->registerService('PasswordObjectHelper', function (IAppContainer $c) {
             return new PasswordObjectHelper(
+                $c,
+                $c->query('TagService'),
+                $c->query('FolderService'),
                 $c->query('PasswordRevisionService')
             );
         });
         $container->registerService('FolderObjectHelper', function (IAppContainer $c) {
             return new FolderObjectHelper(
+                $c,
                 $c->query('FolderService'),
                 $c->query('PasswordService'),
-                $c->query('PasswordObjectHelper'),
                 $c->query('FolderRevisionService')
             );
         });
         $container->registerService('TagObjectHelper', function (IAppContainer $c) {
             return new TagObjectHelper(
+                $c,
                 $c->query('TagService'),
+                $c->query('PasswordService'),
                 $c->query('TagRevisionService')
             );
         });
@@ -627,7 +647,8 @@ class Application extends App {
         $container->registerService('HaveIBeenPwnedHelper', function (IAppContainer $c) {
             return new HaveIBeenPwnedHelper(
                 $this->getFileCacheService(),
-                $c->query('ConfigurationService')
+                $c->query('ConfigurationService'),
+                $c->getServer()->getLogger()
             );
         });
 

@@ -17,6 +17,7 @@
         <div class="infos">
             <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
             <span class="date">{{ password.updated.toLocaleDateString() }}</span>
+            <tags :password="password"></tags>
         </div>
         <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="password.id">
             <div slot="details">
@@ -37,13 +38,13 @@
                     </div>
                     <div slot="qrcode" class="password-share-qrcode">
                         <select id="password-details-qrcode" @change="changeQrCode($event)">
-                            <translate tag="option" value="login">Username</translate>
+                            <translate tag="option" value="login" v-if="password.username">Username</translate>
                             <translate tag="option" value="password" selected>Password</translate>
-                            <translate tag="option" value="url">Website</translate>
+                            <translate tag="option" value="url" v-if="password.url">Website</translate>
                         </select>
                         <qr-code :text="qrcode.text"
                                  :color="qrcode.color"
-                                 bgColor="#ffffff"
+                                 :bgColor="qrcode.bgColor"
                                  :size="256"
                                  errorLevel="L"></qr-code>
                     </div>
@@ -59,15 +60,18 @@
     import Translate from '@vc/Translate.vue';
     import QrCode from 'vue-qrcode-component'
     import Tabs from '@vc/Tabs.vue';
+    import Tags from '@vc/Tags.vue';
     import API from '@js/Helper/api';
     import SimpleMDE from 'simplemde';
+    import ThemeManager from '@js/Manager/ThemeManager';
     import $ from "jquery";
 
     export default {
         components: {
             Translate,
             QrCode,
-            Tabs
+            Tabs,
+            Tags
         },
 
         props: {
@@ -77,8 +81,6 @@
         },
 
         data() {
-            let qrCodeColor = OCA.Theming ? OCA.Theming.color:'#000000';
-
             return {
                 image : {
                     'className': '',
@@ -87,8 +89,9 @@
                     },
                 },
                 qrcode: {
-                    color: qrCodeColor,
-                    text : this.password.password
+                    color  : ThemeManager.getColor(),
+                    bgColor: ThemeManager.getContrastColor(),
+                    text   : this.password.password
                 }
             }
         },
@@ -110,15 +113,6 @@
                 return {
                     backgroundImage: 'url(' + this.password.icon + ')'
                 }
-            }
-        },
-
-        watch: {
-            password: function (value) {
-                this.image.className = '';
-                this.image.style = {'marginTop': 0};
-                this.qrcode.text = this.password.password;
-                $('#password-details-qrcode').val('password')
             }
         },
 
@@ -161,13 +155,23 @@
                 let property = $($event.target).val();
                 this.qrcode.text = this.password[property];
             }
+        },
+
+        watch: {
+            password: function (value) {
+                this.image.className = '';
+                this.image.style = {'marginTop': 0};
+                this.qrcode.text = this.password.password;
+                $('#password-details-qrcode').val('password');
+                this.$forceUpdate();
+            }
         }
     }
 </script>
 
 <style lang="scss">
     .item-details {
-        .fa.fa-times {
+        & > .fa.fa-times:nth-child(1) {
             position  : absolute;
             top       : 5px;
             right     : 5px;
@@ -182,8 +186,8 @@
         }
 
         .image-container {
-            max-height   : 290px;
-            overflow : hidden;
+            max-height : 290px;
+            overflow   : hidden;
 
             a {
                 display   : block;
@@ -227,6 +231,12 @@
                 &.active {
                     color : $color-yellow;
                 }
+            }
+
+            .tags-container {
+                position : static;
+                display  : inline;
+                color    : $color-black-light;
             }
         }
 

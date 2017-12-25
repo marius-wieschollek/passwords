@@ -45,7 +45,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import router from '@js/Helper/router';
     import Translate from '@vc/Translate.vue';
 
@@ -60,66 +59,6 @@
 </script>
 
 <style lang="scss">
-    @import "~font-awesome/css/font-awesome.min.css";
-
-    #main {
-        .passwords-browser-compatibility {
-            position         : absolute;
-            top              : 0;
-            left             : 0;
-            bottom           : 0;
-            right            : 0;
-            background-color : rgba(0, 0, 0, 0.7);
-            z-index          : 3001;
-
-            .title,
-            .message {
-                background    : $color-yellow;
-                color         : $color-black;
-                margin        : 25px auto 0;
-                padding       : 25px;
-                max-width     : 1000px;
-                font-size     : 1rem;
-                text-align    : center;
-                border-radius : 3px;
-            }
-            .title {
-                background     : #bf0303;
-                color          : $color-white;
-                font-size      : 1.25rem;
-                text-transform : uppercase;
-            }
-            .browser {
-                margin    : 25px auto 0;
-                padding   : 25px 0;
-                font-size : 1.25rem;
-                width     : 880px;
-
-                a {
-                    display         : block;
-                    width           : 200px;
-                    padding         : 225px 10px 20px;
-                    float           : left;
-                    background      : no-repeat center 25px;
-                    background-size : 150px;
-                    text-align      : center;
-                    border-radius   : 3px;
-
-                    &:hover {
-                        background      : #00994d no-repeat center 10px;
-                        background-size : 180px;
-                    }
-
-                    @media (max-width : 649px) {
-                        width  : 360px;
-                        margin : 0 auto 25px;
-                        float  : none;
-                    }
-                }
-            }
-        }
-    }
-
     #app-navigation {
         li {
             line-height   : 44px;

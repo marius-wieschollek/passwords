@@ -529,7 +529,19 @@
 				<notnull>true</notnull>
 			</field>
 			<field>
+				<name>password</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>36</length>
+			</field>
+			<field>
 				<name>password_revision</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>36</length>
+			</field>
+			<field>
+				<name>tag</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>36</length>
@@ -542,6 +554,12 @@
 			</field>
 			<field>
 				<name>suspended</name>
+				<type>integer</type>
+				<default>0</default>
+				<notnull>true</notnull>
+			</field>
+			<field>
+				<name>hidden</name>
 				<type>integer</type>
 				<default>0</default>
 				<notnull>true</notnull>

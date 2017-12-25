@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import PwMessages from '@js/Classes/Messages';
+    import Messages from '@js/Classes/Messages';
     import Utility from "@js/Classes/Utility";
     import API from '@js/Helper/api';
     import DragManager from '@js/Manager/DragManager';
@@ -53,7 +53,7 @@
         data() {
             return {
                 clickTimeout: null,
-                showMenu: false
+                showMenu    : false
             }
         },
 
@@ -82,13 +82,13 @@
 
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
                 this.clickTimeout =
-                    setTimeout(function () { PwMessages.notification('Password was copied to clipboard') }, 300);
+                    setTimeout(function () { Messages.notification('Password was copied to clipboard') }, 300);
             },
             doubleClickAction() {
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 Utility.copyToClipboard(this.password.login);
-                PwMessages.notification('Username was copied to clipboard');
+                Messages.notification('Username was copied to clipboard');
             },
             favouriteAction($event) {
                 $event.stopPropagation();
@@ -101,12 +101,15 @@
             },
             copyUrlAction() {
                 Utility.copyToClipboard(this.password.url);
-                PwMessages.notification('Url was copied to clipboard')
+                Messages.notification('Url was copied to clipboard')
             },
             detailsAction($event, section = null) {
-                this.$parent.detail = {
-                    type   : 'password',
-                    element: this.password
+                this.$parent.detail = {type: 'password', element: this.password};
+                if (!this.password.hasOwnProperty('revisions')) {
+                    API.showPassword(this.password.id, 'model+folder+tags+revisions')
+                        .then((p) => {
+                            this.$parent.detail = {type: 'password', element: p};
+                        })
                 }
             },
             deleteAction(skipConfirm = false) {
@@ -114,12 +117,12 @@
                     API.deletePassword(this.password.id)
                         .then(() => {
                             this.password = undefined;
-                            PwMessages.notification('Password was deleted');
+                            Messages.notification('Password was deleted');
                         }).catch(() => {
-                        PwMessages.notification('Deleting password failed');
+                        Messages.notification('Deleting password failed');
                     });
                 } else {
-                    PwMessages.confirm('Do you want to delete the password', 'Delete password')
+                    Messages.confirm('Do you want to delete the password', 'Delete password')
                         .then(() => { this.deleteAction(true); })
                 }
             },

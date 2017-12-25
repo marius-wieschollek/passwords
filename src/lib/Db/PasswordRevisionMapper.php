@@ -17,5 +17,5 @@ class PasswordRevisionMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_password_revision';
 
-    protected $allowedFields = ['id', 'uuid', 'password_id', 'status'];
+    protected $allowedFields = ['id', 'uuid', 'model', 'status'];
 }

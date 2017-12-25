@@ -34,7 +34,7 @@ class TagRevision extends AbstractRevisionEntity {
      * TagRevision constructor.
      */
     public function __construct() {
-        $this->addType('name', 'string');
+        $this->addType('label', 'string');
         $this->addType('color', 'string');
 
         parent::__construct();

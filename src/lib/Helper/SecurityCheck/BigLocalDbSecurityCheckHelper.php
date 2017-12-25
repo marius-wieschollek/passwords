@@ -76,9 +76,9 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @param string $txtFile
      *
      * @throws Exception
-     *
+     * @throws Throwable
      */
-    protected function downloadPasswordsFile(string $txtFile) {
+    protected function downloadPasswordsFile(string $txtFile): void {
         $zipFile = $this->config->getTempDir().uniqid().'.zip';
 
         $request = new FileDownloadHelper();
@@ -98,7 +98,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      *
      * @throws Throwable
      */
-    protected function unpackPasswordsFile(string $zipFile, string $txtFile) {
+    protected function unpackPasswordsFile(string $zipFile, string $txtFile): void {
         try {
             $zip = new ZipArchive;
             if($zip->open($zipFile) === true) {
@@ -123,7 +123,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      *
      * @param string $txtFile
      */
-    protected function lowMemoryHashAlgorithm(string $txtFile) {
+    protected function lowMemoryHashAlgorithm(string $txtFile): void {
         $null = null;
         for ($i = 0; $i < 16; $i++) {
             $hexKey = dechex($i);
@@ -158,7 +158,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      *
      * @param string $txtFile
      */
-    protected function highMemoryHashAlgorithm(string $txtFile) {
+    protected function highMemoryHashAlgorithm(string $txtFile): void {
         $null   = null;
         $hashes = [];
         $fh     = fopen($txtFile, 'r');
@@ -181,7 +181,10 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
         unlink($txtFile);
     }
 
-    protected function storeHashes(array $hashes) {
+    /**
+     * @param array $hashes
+     */
+    protected function storeHashes(array $hashes): void {
         foreach ($hashes as $key => $data) {
             $data = json_encode(array_keys($data));
             if(extension_loaded('zlib')) {
@@ -208,7 +211,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     /**
      *
      */
-    protected function logPasswordUpdate() {
+    protected function logPasswordUpdate(): void {
         $ram = memory_get_peak_usage(true) / 1024 / 1024;
         $this->log->info("Updated local password db. DB: ".static::PASSWORD_DB.", RAM: {$ram}MiB");
     }

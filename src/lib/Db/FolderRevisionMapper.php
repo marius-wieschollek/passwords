@@ -12,4 +12,6 @@ class FolderRevisionMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_folder_revision';
 
+    protected $allowedFields = ['id', 'uuid', 'model'];
+
 }

@@ -80,9 +80,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
             foreach ($folders as $folder) {
                 if($folder->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($folder, $details);
+                $object = $this->objectHelper->getApiObject($folder, $details, true, true);
 
-                if(!$object['hidden'] && !$object['trashed']) $results[] = $object;
+                if($object !== null) $results[] = $object;
             }
 
             return $this->createJsonResponse($results);
@@ -109,7 +109,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             foreach ($folders as $folder) {
                 if($folder->isSuspended()) continue;
                 $object = $this->objectHelper->getApiObject($folder, $details);
-                if($object['hidden']) continue;
+                if($object === null) continue;
 
                 foreach ($criteria as $key => $value) {
                     if($value == 'true') {
@@ -141,7 +141,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
             $model  = $this->modelService->findByUuid($id);
-            $folder = $this->objectHelper->getApiObject($model, $details);
+            $folder = $this->objectHelper->getApiObject($model, $details, false);
 
             return $this->createJsonResponse($folder);
         } catch (\Throwable $e) {

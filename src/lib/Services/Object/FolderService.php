@@ -48,7 +48,7 @@ class FolderService extends AbstractModelService {
     /**
      * @param string $uuid
      *
-     * @return \OCA\Passwords\Db\AbstractEntity|Folder[]
+     * @return Folder[]
      */
     public function findByParent(string $uuid): array {
         return $this->mapper->getByParentFolder($uuid);

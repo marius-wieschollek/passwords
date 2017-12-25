@@ -9,6 +9,9 @@
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\FileCacheService;
+use OCP\ILogger;
 
 /**
  * Class HaveIBeenPwnedHelper
@@ -25,9 +28,27 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     const COOKIE_FILE         = 'nc_pw_hibp_api_cookies.txt';
 
     /**
+     * @var ILogger
+     */
+    protected $log;
+
+    /**
+     * BigPasswordDbHelper constructor.
+     *
+     * @param FileCacheService     $fileCacheService
+     * @param ConfigurationService $configurationService
+     * @param ILogger              $log
+     */
+    public function __construct(FileCacheService $fileCacheService, ConfigurationService $configurationService, ILogger $log) {
+        parent::__construct($fileCacheService, $configurationService);
+        $this->log = $log;
+    }
+
+    /**
      * @param string $hash
      *
      * @return bool
+     * @throws \Exception
      */
     public function isHashSecure(string $hash): bool {
         if(!isset($this->hashStatusCache[ $hash ])) {
@@ -67,7 +88,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
                 ->setUserAgent(
                     'Nextcloud/'.$this->config->getSystemValue('version').
                     ' Passwords/'.$this->config->getAppValue('installed_version').
-                    ' Instance/'.$this->config->getSystemValue('ocb335283f10')
+                    ' Instance/'.$this->config->getSystemValue('instanceid')
                 )->sendWithRetry();
 
         if($request->getInfo('http_code') === 503) {
@@ -95,7 +116,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     /**
      * @param string $hash
      */
-    protected function addHashToLocalDb(string $hash) {
+    protected function addHashToLocalDb(string $hash): void {
         $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
 
         $data = [];
@@ -121,9 +142,10 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      *
      * @return string
      */
-    protected function getCloudFlareRedirectUrl(string $html) {
+    protected function getCloudFlareRedirectUrl(string $html): string {
         $getFields                 = $this->getHiddenFields($html);
         $getFields['jschl_answer'] = $this->getMagicNumber($html, self::MAGIC_NUMBER_OFFSET);
+        $this->log->info("Bypassed cloudflare protection with magic number: ".$getFields['jschl_answer']);
 
         return $this->getTargetUrl($html, self::SERVICE_BASE_URL, $getFields);
     }
@@ -134,7 +156,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      *
      * @return int
      */
-    protected function getMagicNumber(string $html, int $add = 0) {
+    protected function getMagicNumber(string $html, int $add = 0): int {
         preg_match("/e,a,k,i,n,g,f, \w+={\"(\w+)\":([+()!\[\]]+)/", $html, $matches);
         $key  = $matches[1];
         $calc = $matches[2];
@@ -165,7 +187,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      *
      * @return array
      */
-    protected function getHiddenFields(string $html) {
+    protected function getHiddenFields(string $html): array {
         preg_match_all("/input\s+type=\"hidden\"\s+name=\"(\S+)\"\s+value=\"(\S+)\"/", $html, $matches);
 
         $fields = [];
@@ -183,7 +205,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      *
      * @return string
      */
-    protected function getTargetUrl($html, $baseUrl, $getFields) {
+    protected function getTargetUrl($html, $baseUrl, $getFields): string {
         preg_match_all("/action=\"(\S+)\"/", $html, $matches);
 
         return $baseUrl.$matches[1][0].'?'.http_build_query($getFields);
@@ -199,7 +221,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     /**
      *
      */
-    protected function setLastRequestTime() {
+    protected function setLastRequestTime(): void {
         $this->config->setAppValue('security/hibp/api/request', time());
     }
 }

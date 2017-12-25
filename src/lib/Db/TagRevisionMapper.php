@@ -12,4 +12,5 @@ class TagRevisionMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_tag_revision';
 
+    protected $allowedFields = ['id', 'uuid', 'model'];
 }

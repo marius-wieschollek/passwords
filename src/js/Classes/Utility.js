@@ -74,6 +74,20 @@ export default class Utility {
 
     /**
      *
+     * @param object
+     * @returns {Array}
+     */
+    static objectToArray(object) {
+        let array = [];
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+            array.push(object[key]);
+        }
+        return array;
+    }
+
+    /**
+     *
      * @param array
      * @param object
      * @returns {*}
@@ -106,5 +120,20 @@ export default class Utility {
         }
 
         return array;
+    }
+
+    /**
+     *
+     * @param array
+     * @param object
+     * @returns {*}
+     */
+    static searchApiObjectInArray(array, object) {
+        for (let i = 0; i < array.length; i++) {
+            let current = array[i];
+            if (current.id === object.id) return i;
+        }
+
+        return -1;
     }
 }

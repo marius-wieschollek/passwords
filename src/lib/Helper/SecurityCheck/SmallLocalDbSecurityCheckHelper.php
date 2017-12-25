@@ -11,6 +11,11 @@ namespace OCA\Passwords\Helper\SecurityCheck;
 use Exception;
 use OCA\Passwords\Helper\Http\FileDownloadHelper;
 
+/**
+ * Class SmallLocalDbSecurityCheckHelper
+ *
+ * @package OCA\Passwords\Helper\SecurityCheck
+ */
 class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckHelper {
 
     const LOW_RAM_LIMIT = 262144;
@@ -22,7 +27,7 @@ class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckHelper {
      *
      * @throws Exception
      */
-    protected function downloadPasswordsFile(string $txtFile) {
+    protected function downloadPasswordsFile(string $txtFile): void {
         $request = new FileDownloadHelper();
         $success = $request
             ->setOutputFile($txtFile)

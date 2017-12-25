@@ -100,8 +100,8 @@
                 }
             },
 
-            updateContentList: function (data) {
-                if (data.trashed) {
+            updateContentList: function (folder) {
+                if (folder.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
                     this.defaultPath = '/show/trash';
                     this.draggable = false;
@@ -111,18 +111,18 @@
                     {path: this.defaultPath, label: this.defaultTitle}
                 ];
 
-                if (typeof data.parent !== 'string' && data.parent.id !== this.defaultFolder) {
+                if (typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder) {
                     this.breadcrumb = [{path: this.defaultPath, label: '…'}];
-                    this.breadcrumb.push({path: '/show/folders/' + data.parent.id, label: data.parent.label})
+                    this.breadcrumb.push({path: '/show/folders/' + folder.parent.id, label: folder.parent.label})
                 }
 
-                if (data.id !== this.defaultFolder) {
-                    this.breadcrumb.push({path: this.$route.path, label: data.label});
+                if (folder.id !== this.defaultFolder) {
+                    this.breadcrumb.push({path: this.$route.path, label: folder.label});
                 }
 
-                this.folders = Utility.sortApiObjectArray(data.folders, 'label', true);
-                this.passwords = Utility.sortApiObjectArray(data.passwords, 'label', true);
-                this.currentFolder = data.id;
+                this.folders = Utility.sortApiObjectArray(folder.folders, 'label', true);
+                this.passwords = Utility.sortApiObjectArray(folder.passwords, 'label', true);
+                this.currentFolder = folder.id;
             }
         },
 

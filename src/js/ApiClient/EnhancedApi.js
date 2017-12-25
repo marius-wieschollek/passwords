@@ -36,15 +36,18 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async createPassword(data = {}) {
+        let object = EnhancedApi._cloneObject(data);
+
         try {
-            data = EnhancedApi.validatePassword(data);
+            object = EnhancedApi.flattenPassword(object);
+            object = EnhancedApi.validatePassword(object);
         } catch (e) {
             return this._createRejectedPromise(e);
         }
 
-        if (!data.label) EnhancedApi._generatePasswordTitle(data);
+        if (!object.label) EnhancedApi._generatePasswordTitle(object);
 
-        return super.createPassword(data);
+        return super.createPassword(object);
     }
 
     /**
@@ -56,16 +59,18 @@ export default class EnhancedApi extends SimpleApi {
      */
     async updatePassword(data = {}) {
         if (!data.id) return this.createPassword(data);
+        let object = EnhancedApi._cloneObject(data);
 
         try {
-            data = EnhancedApi.validatePassword(data);
+            object = EnhancedApi.flattenPassword(object);
+            object = EnhancedApi.validatePassword(object);
         } catch (e) {
             return this._createRejectedPromise(e);
         }
 
-        if (!data.label) EnhancedApi._generatePasswordTitle(data);
+        if (!object.label) EnhancedApi._generatePasswordTitle(object);
 
-        return super.updatePassword(data);
+        return super.updatePassword(object);
     }
 
     /**
@@ -124,13 +129,37 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async createFolder(data = {}) {
+        let object = EnhancedApi._cloneObject(data);
+
         try {
-            data = EnhancedApi.validateFolder(data);
+            object = EnhancedApi.flattenFolder(object);
+            object = EnhancedApi.validateFolder(object);
         } catch (e) {
             return this._createRejectedPromise(e);
         }
 
-        return super.createFolder(data);
+        return super.createFolder(object);
+    }
+
+    /**
+     * Update an existing folder with the given attributes.
+     * If data does not contain an id, a new folder will be created.
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async updateFolder(data = {}) {
+        if (!data.id) return this.createFolder(data);
+        let object = EnhancedApi._cloneObject(data);
+
+        try {
+            object = EnhancedApi.flattenFolder(object);
+            object = EnhancedApi.validateFolder(object);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        return super.updateFolder(object);
     }
 
     /**
@@ -189,13 +218,35 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async createTag(data = {}) {
+        let object = EnhancedApi._cloneObject(data);
+
         try {
-            data = EnhancedApi.validateTag(data);
+            object = EnhancedApi.validateTag(object);
         } catch (e) {
             return this._createRejectedPromise(e);
         }
 
-        return super.createTag(data);
+        return super.createTag(object);
+    }
+
+    /**
+     * Update an existing tag with the given attributes.
+     * If data does not contain an id, a new tag will be created.
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    async updateTag(data = {}) {
+        if (!data.id) return this.createTag(data);
+        let object = EnhancedApi._cloneObject(data);
+
+        try {
+            object = EnhancedApi.validateTag(object);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        return super.updateTag(object);
     }
 
     /**
@@ -207,7 +258,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     showTag(id, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
-            super.showFolder(id, detailLevel)
+            super.showTag(id, detailLevel)
                 .then((data) => { resolve(this._processTag(data)); })
                 .catch(reject);
         });
@@ -246,6 +297,33 @@ export default class EnhancedApi extends SimpleApi {
     /**
      * Validation
      */
+
+    /**
+     *
+     * @param password
+     * @returns {*}
+     */
+    static flattenPassword(password) {
+        if(typeof password.folder !== 'string') {
+            password.folder = password.folder.id
+        }
+        password = EnhancedApi._convertTags(password);
+
+        return password;
+    }
+
+    /**
+     *
+     * @param folder
+     * @returns {*}
+     */
+    static flattenFolder(folder) {
+        if(typeof folder.parent !== 'string') {
+            folder.parent = folder.parent.id
+        }
+
+        return folder;
+    }
 
     /**
      *
@@ -336,6 +414,31 @@ export default class EnhancedApi extends SimpleApi {
         return object;
     }
 
+    /**
+     *
+     * @param data
+     * @private
+     */
+    static _convertTags(data) {
+        if (data.hasOwnProperty('tags')) {
+            for (let i = 0; i < data.tags.length; i++) {
+                let tag = data.tags[i];
+                if (typeof tag !== 'string') data.tags[i] = tag.id;
+            }
+        }
+
+        return data;
+    }
+
+    /**
+     *
+     * @param object
+     * @private
+     */
+    static _cloneObject(object) {
+        return JSON.parse(JSON.stringify(object));
+    }
+
 
     /**
      * Internal
@@ -388,6 +491,17 @@ export default class EnhancedApi extends SimpleApi {
             password.icon = this.getFaviconUrl(null);
             password.image = this.getPreviewUrl(null);
         }
+
+        if(password.tags) {
+            password.tags = this._processTagList(password.tags);
+        }
+        if(password.revisions) {
+            password.revisions = this._processPasswordList(password.revisions);
+        }
+        if(typeof password.folder !== 'string') {
+            password.folder = this._processFolder(password.folder);
+        }
+
         password.created = new Date(password.created * 1e3);
         password.updated = new Date(password.updated * 1e3);
 
@@ -426,6 +540,9 @@ export default class EnhancedApi extends SimpleApi {
         if (folder.passwords) {
             folder.passwords = this._processPasswordList(folder.passwords);
         }
+        if(folder.revisions) {
+            folder.revisions = this._processFolderList(folder.revisions);
+        }
         if (typeof folder.parent !== 'string') {
             folder.parent = this._processFolder(folder.parent);
         }
@@ -462,6 +579,9 @@ export default class EnhancedApi extends SimpleApi {
         tag.type = 'tag';
         if (tag.passwords) {
             tag.passwords = this._processPasswordList(tag.passwords);
+        }
+        if (tag.revisions) {
+            tag.revisions = this._processTagList(tag.revisions);
         }
         tag.created = new Date(tag.created * 1e3);
         tag.updated = new Date(tag.updated * 1e3);

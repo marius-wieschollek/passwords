@@ -8,10 +8,15 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\PasswordTagRelationService;
+use OCA\Passwords\Services\Object\TagRevisionService;
+use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -37,24 +42,46 @@ class PasswordApiController extends AbstractObjectApiController {
      * @var PasswordObjectHelper
      */
     protected $objectHelper;
+    /**
+     * @var PasswordTagRelationService
+     */
+    private $relationService;
+    /**
+     * @var TagService
+     */
+    private $tagService;
+    /**
+     * @var TagRevisionService
+     */
+    private $tagRevisionService;
 
     /**
      * PasswordApiController constructor.
      *
-     * @param string                  $appName
-     * @param IRequest                $request
-     * @param PasswordService         $modelService
-     * @param PasswordRevisionService $revisionService
-     * @param PasswordObjectHelper    $objectHelper
+     * @param string                     $appName
+     * @param IRequest                   $request
+     * @param TagService                 $tagService
+     * @param TagRevisionService         $tagRevisionService
+     * @param PasswordService            $modelService
+     * @param PasswordRevisionService    $revisionService
+     * @param PasswordObjectHelper       $objectHelper
+     * @param PasswordTagRelationService $relationService
      */
     public function __construct(
         $appName,
         IRequest $request,
+        TagService $tagService,
         PasswordService $modelService,
+        TagRevisionService $tagRevisionService,
         PasswordRevisionService $revisionService,
-        PasswordObjectHelper $objectHelper
+        PasswordObjectHelper $objectHelper,
+        PasswordTagRelationService $relationService
     ) {
         parent::__construct($appName, $request, $modelService, $revisionService, $objectHelper);
+
+        $this->tagService         = $tagService;
+        $this->relationService    = $relationService;
+        $this->tagRevisionService = $tagRevisionService;
     }
 
     /**
@@ -75,8 +102,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param array  $tags
      *
      * @TODO     check folder access
-     * @TODO     check is system trash
-     * @TODO     check tag access
+     * @TODO     check folder is system trash
      *
      * @return JSONResponse
      * @internal param array $folders
@@ -106,8 +132,10 @@ class PasswordApiController extends AbstractObjectApiController {
             $this->revisionService->save($revision);
             $this->modelService->setRevision($model, $revision);
 
+            if(!empty($tags)) $this->updateTags($tags, $revision);
+
             return $this->createJsonResponse(
-                ['password' => $model->getUuid(), 'revision' => $revision->getUuid()],
+                ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
         } catch (\Throwable $e) {
@@ -135,8 +163,6 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param array  $tags
      *
      * @TODO check folder access
-     * @TODO check is system trash
-     * @TODO check tag access
      *
      * @return JSONResponse
      */
@@ -167,10 +193,42 @@ class PasswordApiController extends AbstractObjectApiController {
             $this->revisionService->save($revision);
             $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(['password' => $model->getUuid(), 'revision' => $revision->getUuid()]);
+            if(!empty($tags)) $this->updateTags($tags, $revision);
+
+            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @param                  $tags
+     * @param PasswordRevision $passwordRevision
+     *
+     * @throws \Exception
+     */
+    protected function updateTags($tags, PasswordRevision $passwordRevision) {
+        $skip         = [];
+        $tagRelations = $this->relationService->findByPassword($passwordRevision->getModel());
+
+        foreach ($tagRelations as $tagRelation) {
+            if(in_array($tagRelation->getTag(), $tags)) {
+                $skip[] = $tagRelation->getTag();
+                continue;
+            }
+
+            $this->relationService->delete($tagRelation);
+        }
+
+        foreach ($tags as $tag) {
+            if(in_array($tag, $skip)) continue;
+            $tag = $this->tagService->findByUuid($tag);
+            /** @var TagRevision $revision */
+            $revision = $this->tagRevisionService->findByUuid($tag->getRevision(), false);
+
+            $relation = $this->relationService->create($passwordRevision, $revision);
+            $this->relationService->save($relation);
         }
     }
 }

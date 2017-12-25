@@ -1,20 +1,20 @@
 <template>
     <div class="row tag" v-if="enabled" :data-tag-id="tag.id" @click="openAction()">
         <i class="fa fa-star favourite" v-bind:class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon fa fa-tag " v-bind:style="faviconStyle"></div>
+        <div class="favicon fa fa-tag" v-bind:style="faviconStyle"></div>
         <span class="title">{{ tag.label }}</span>
         <div class="date">{{ tag.updated.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
-                <ul>
-                    <slot name="option-top"></slot>
-                    <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
-                    <translate tag="li" @click="editAction()" icon="edit">Edit</translate>
-                    <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
-                    <slot name="option-bottom"></slot>
-                </ul>
+                    <ul>
+                        <slot name="option-top"></slot>
+                        <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
+                        <translate tag="li" @click="editAction()" icon="edit">Edit</translate>
+                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <slot name="option-bottom"></slot>
+                    </ul>
                 </slot>
             </div>
         </div>
@@ -39,7 +39,7 @@
 
         data() {
             return {
-                enabled: true,
+                enabled : true,
                 showMenu: false,
             }
         },
@@ -90,7 +90,9 @@
         .item-list {
             .row.tag {
                 .favicon {
-                    text-align: center;
+                    text-align : center;
+                    font-size  : 2.25rem;
+                    vertical-align: top;
                 }
             }
         }
