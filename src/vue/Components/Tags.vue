@@ -11,8 +11,8 @@
             <li class="result"
                 v-for="match in searchResults"
                 :key="match.id"
-                :style="{'background-color': match.color}"
-                @click="addTag(match)">{{match.label}}
+                @click="addTag(match)">
+                <i class="fa fa-tag" :style="{color: match.color}"></i>{{match.label}}
             </li>
         </ul>
     </div>
@@ -57,8 +57,10 @@
                 let key = $e.keyCode;
                 if ([8, 13, 46].indexOf(key) === -1 && $e.key.length === 1 && this.inputText.length !== 0) {
                     this.searchAction(this.inputText);
+                    this.wasBackspace = false;
                 } else if (key === 13 && this.inputText.length !== 0) {
                     this.createAndAddTag(this.inputText);
+                    this.wasBackspace = false;
                 } else if (key === 8 && this.wasBackspace && this.inputText.length === 0) {
                     this.removeLastTag();
                 } else if (key === 8 && this.inputText.length === 0) {
@@ -113,7 +115,7 @@
                 this.inputText = '';
                 this.searchResults = [];
                 if (this.password) {
-                    this.password.tags = this.tags;
+                    this.password.tags = this.tags.length === 0 ? ['']:this.tags;
                     PasswordManager.updatePassword(this.password);
                 }
             },
@@ -185,16 +187,32 @@
         }
 
         .add-tags {
-            display : inline-block;
-            border  : none;
+            display    : inline-block;
+            border     : none;
+            padding    : 0;
+            margin     : 0;
+            min-height : 0;
         }
 
         .tag-search {
-            position : absolute;
+            position         : absolute;
+            border           : 1px solid $color-theme;
+            background-color : $color-contrast;
+            border-radius    : 2px;
+            max-height       : 120px;
+            overflow-y       : auto;
+
+            &:empty {
+                display : none;
+            }
 
             .result {
                 padding : 3px 5px;
                 cursor  : pointer;
+
+                .fa {
+                    margin-right : 5px;
+                }
             }
         }
     }

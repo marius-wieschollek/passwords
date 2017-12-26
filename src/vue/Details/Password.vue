@@ -234,9 +234,10 @@
             }
 
             .tags-container {
-                position : static;
-                display  : inline;
-                color    : $color-black-light;
+                position    : static;
+                display     : inline;
+                color       : $color-black-light;
+                margin-left : 3px;
             }
         }
 
