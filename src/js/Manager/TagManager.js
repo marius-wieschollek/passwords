@@ -1,5 +1,6 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
+import Utility from "@js/Classes/Utility";
 import Messages from '@js/Classes/Messages';
 import EnhancedApi from "@/js/ApiClient/EnhancedApi";
 import * as randomMC from "random-material-color";
@@ -16,7 +17,7 @@ class TagManager {
     createTag() {
         let form = {
             label: {
-                label: 'Title',
+                label: 'Name',
                 type : 'text'
             },
             color: {
@@ -44,7 +45,7 @@ class TagManager {
      */
     createTagFromData(tag) {
         console.log(tag);
-        if (!tag.label) tag.label = 'New Tag';
+        if (!tag.label) tag.label = Utility.translate('New Tag');
         if (!tag.color) tag.color = randomMC.getColor();
         tag = EnhancedApi.validateTag(tag);
         tag.type = 'tag';
@@ -71,7 +72,7 @@ class TagManager {
     editTag(tag) {
         let form = {
             label: {
-                label: 'Title',
+                label: 'Name',
                 type : 'text',
                 value: tag.label
             },

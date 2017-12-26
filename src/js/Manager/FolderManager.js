@@ -16,7 +16,7 @@ class FolderManager {
     createFolder(parent = null) {
         return new Promise((resolve, reject) => {
             Messages
-                .prompt('Enter folder name', 'Create folder')
+                .prompt('Name', 'Create folder')
                 .then((title) => {
                     let folder = {label: title};
                     if (parent) folder.parent = parent;
@@ -50,7 +50,7 @@ class FolderManager {
     renameFolder(folder) {
         return new Promise((resolve, reject) => {
             Messages
-                .prompt('Enter folder name', 'Rename folder', folder.label)
+                .prompt('Name', 'Rename folder', folder.label)
                 .then((title) => {
                     let originalTitle = folder.label;
                     folder.label = title;
