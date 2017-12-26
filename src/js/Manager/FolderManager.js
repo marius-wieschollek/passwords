@@ -124,7 +124,7 @@ class FolderManager {
                         folder.trashed = true;
                         folder.revision = d.revision;
                         Events.fire('folder.deleted', folder);
-                        Messages.notification('Folder was deleted');
+                        Messages.notification('Folder deleted');
                         resolve(folder);
                     })
                     .catch(() => {
@@ -147,12 +147,12 @@ class FolderManager {
     restoreFolder(folder) {
         return new Promise((resolve, reject) => {
             if (folder.trashed) {
-                API.restorePassword(folder.id)
+                API.restoreFolder(folder.id)
                     .then((d) => {
                         folder.trashed = false;
                         folder.revision = d.revision;
                         Events.fire('folder.restored', folder);
-                        Messages.notification('Tag was restored');
+                        Messages.notification('Folder restored');
                         resolve(folder);
                     })
                     .catch(() => {

@@ -55,7 +55,7 @@ class PasswordManager {
                         password.trashed = false;
                         password.revision = d.revision;
                         Events.fire('password.restored', password);
-                        Messages.notification('Tag was restored');
+                        Messages.notification('Password restored');
                         resolve(password);
                     })
                     .catch(() => {

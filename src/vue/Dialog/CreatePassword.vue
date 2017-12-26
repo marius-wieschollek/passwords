@@ -1,8 +1,8 @@
-<template>
+ <template>
     <div class="background" id="passwords-create-new">
         <div class="window">
             <div class="title nc-theming-main-background nc-theming-contrast">
-                <translate>Create a new password</translate>
+                <translate>New password</translate>
                 <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
             <form class="content" v-on:submit.prevent="submitAction($event)">
@@ -16,8 +16,8 @@
                         <translate tag="label" for="password-password">Password</translate>
                         <div class="password-field">
                             <div class="icons">
-                                <i class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"></i>
-                                <i class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate random password"></i>
+                                <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility" />
+                                <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password" />
                             </div>
                             <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" :value="password" required>
                         </div>
@@ -30,7 +30,7 @@
                                 <input id="password-favourite" name="favourite" type="checkbox" value="1">
                                 <translate tag="label" for="password-sse">Encryption</translate>
                                 <select id="password-sse" name="sse" disabled title="There is only one option right now">
-                                    <translate tag="option" value="SSEv1r1" title="Use Simple Server Side Encryption V1" selected>SSE V1</translate>
+                                    <translate tag="option" value="SSEv1r1" title="Simple Server Side Encryption V1" selected>SSE V1</translate>
                                 </select>
                             </div>
                         </foldout>
@@ -41,7 +41,7 @@
                     <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                 </div>
                 <div class="controls">
-                    <input class="nc-theming-main-background nc-theming-contrast" type="submit" value="Save">
+                    <translate tag="input" class="nc-theming-main-background nc-theming-contrast" type="submit" value="Save" />
                 </div>
             </form>
         </div>

@@ -141,7 +141,7 @@ class TagManager {
                         tag.trashed = true;
                         tag.revision = d.revision;
                         Events.fire('tag.deleted', tag);
-                        Messages.notification('Tag was deleted');
+                        Messages.notification('Tag deleted');
                         resolve(tag);
                     })
                     .catch(() => {
@@ -169,7 +169,7 @@ class TagManager {
                         tag.trashed = false;
                         tag.revision = d.revision;
                         Events.fire('tag.restored', tag);
-                        Messages.notification('Tag was restored');
+                        Messages.notification('Tag restored');
                         resolve(tag);
                     })
                     .catch(() => {

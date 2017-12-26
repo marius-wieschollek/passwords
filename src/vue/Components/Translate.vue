@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" @click="fireEvent($event)" :title="getTitle">
+    <component :is="tag" @click="fireEvent($event)" :title="getTitle" :value="getValue">
         <i v-if="icon" :class="getIcon"></i>
         {{ getText }}
     </component>
@@ -30,6 +30,10 @@
                 type     : String,
                 'default': ''
             },
+            value      : {
+                type     : String,
+                'default': ''
+            },
             tag      : {
                 type     : String,
                 'default': 'span'
@@ -39,12 +43,18 @@
         computed: {
             getText() {
                 if (this.$slots.default) {
-                    return Utility.translate(this.$slots.default[0].text.trim(), this.variables)
+                    return Utility.translate(this.$slots.default[0].text.trim(), this.variables);
                 }
-                return Utility.translate(this.say, this.variables)
+                if(this.say) {
+                    return Utility.translate(this.say, this.variables);
+                }
+                return '';
             },
             getTitle() {
-                return this.title ? Utility.translate(this.title, this.variables):'';
+                return this.title ? Utility.translate(this.title, this.variables):false;
+            },
+            getValue() {
+                return this.value ? Utility.translate(this.value, this.variables):false;
             },
             getIcon() {
                 return 'fa fa-' + this.icon + ' ' + this.iconClass;

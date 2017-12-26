@@ -1,5 +1,5 @@
-.oc-dialog-content p .ui-icon.ui-icon-notice{
-    display: none;
+.oc-dialog-content p .ui-icon.ui-icon-notice {
+    display : none;
 }
 
 form.passwords-form {
@@ -9,17 +9,19 @@ form.passwords-form {
     grid-row-gap          : 5px;
     width                 : 250px;
     max-width             : 100%;
-    padding: 10px;
+    padding               : 10px;
 
     label {
         line-height : 30px;
     }
 
     input {
-        width : auto;
+        width  : auto;
+        cursor : text;
 
         &[type=color] {
             margin-left : 80%;
+            cursor      : pointer;
         }
     }
 }
