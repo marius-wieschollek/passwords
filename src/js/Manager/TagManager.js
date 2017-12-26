@@ -50,7 +50,6 @@ class TagManager {
         tag.type = 'tag';
         tag.created = new Date();
         tag.updated = tag.created;
-        console.log(tag);
 
         return new Promise((resolve, reject) => {
             API.createTag(tag)

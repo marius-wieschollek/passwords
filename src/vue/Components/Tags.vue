@@ -127,7 +127,7 @@
                 if (i !== -1) this.tags.remove(i);
 
                 if (this.password) {
-                    this.password.tags = this.tags;
+                    this.password.tags = this.tags.length === 0 ? ['']:this.tags;
                     PasswordManager.updatePassword(this.password);
                 }
             },
@@ -168,7 +168,7 @@
 
                 .label {
                     display : inline-block;
-                    padding : 3px 0 3px 3px;
+                    padding : 3px 0 3px 5px;
                     cursor  : pointer;
                 }
 

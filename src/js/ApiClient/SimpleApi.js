@@ -27,7 +27,7 @@ export default class SimpleApi {
      * @param debug
      */
     constructor(endpoint, username = null, password = null, token = null, debug = false) {
-        this._debug = false;
+        this._debug = debug;
 
         this._headers = {};
         this.login(endpoint, username, password, token);

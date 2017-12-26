@@ -222,7 +222,7 @@ class PasswordApiController extends AbstractObjectApiController {
         }
 
         foreach ($tags as $tag) {
-            if(in_array($tag, $skip)) continue;
+            if(in_array($tag, $skip) || empty($tag)) continue;
             $tag = $this->tagService->findByUuid($tag);
             /** @var TagRevision $revision */
             $revision = $this->tagRevisionService->findByUuid($tag->getRevision(), false);
