@@ -44,16 +44,28 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @param int $strength
      *
      * @return array
+     * @throws Exception
      */
-    protected function getServiceOptions(int $strength): array {
-        return ['length' => $strength == 1 ? 2:$strength];
+    public function getWords(int $strength): array {
+        $length = $strength == 1 ? 2:$strength;
+        $file = $this->getWordsFile();
+
+        $retires = 0;
+        while ($retires < 5) {
+            exec("shuf -n {$length} {$file}", $result, $code);
+
+            if($code == 0) return $result;
+            $retires++;
+        }
+
+        return [];
     }
 
     /**
      * @return string
      * @throws Exception
      */
-    protected function getWordsUrl(): string {
+    protected function getWordsFile(): string {
         $wordsFile = '';
         switch ($this->langCode) {
             case 'de':
@@ -96,29 +108,9 @@ class LocalWordsHelper extends AbstractWordsHelper {
                 return self::WORDS_DEFAULT;
             }
 
-            throw new Exception('No local words file found. Install a words file in /usr/share/dict/words');
+            throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
         }
 
         return $wordsFile;
-    }
-
-    /**
-     * @param string $url
-     * @param array  $options
-     *
-     * @return string
-     */
-    protected function getHttpRequest(string $url, array $options = []) {
-        $retires = 0;
-        while ($retires < 5) {
-            exec("shuf -n {$options['length']} {$url}", $result, $code);
-
-            if($code == 0) {
-                return implode(' ', $result);
-            }
-            $retires++;
-        }
-
-        return '';
     }
 }

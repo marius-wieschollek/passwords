@@ -106,6 +106,11 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::WORDS_LOCAL
             ],
             [
+                'id'      => HelperService::WORDS_RANDOM,
+                'label'   => $this->localisation->t('Random Characters'),
+                'current' => $current === HelperService::WORDS_RANDOM
+            ],
+            [
                 'id'      => HelperService::WORDS_SNAKES,
                 'label'   => $this->localisation->t('watchout4snakes.com (recommended)'),
                 'current' => $current === HelperService::WORDS_SNAKES
@@ -176,7 +181,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPageShotServices(): array {
-        $current = $this->config->getAppValue('service/pageshot', HelperService::PAGESHOT_WKHTML);
+        $current = $this->config->getAppValue('service/pageshot', HelperService::PAGESHOT_DEFAULT);
 
         return [
             [

@@ -46,6 +46,7 @@ use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Hooks\FolderHook;
 use OCA\Passwords\Hooks\FolderRevisionHook;
@@ -634,6 +635,10 @@ class Application extends App {
 
         $container->registerService('SnakesWordsHelper', function () {
             return new SnakesWordsHelper();
+        });
+
+        $container->registerService('RandomCharactersHelper', function () {
+            return new RandomCharactersHelper();
         });
     }
 

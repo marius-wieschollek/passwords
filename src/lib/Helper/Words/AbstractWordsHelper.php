@@ -8,8 +8,6 @@
 
 namespace OCA\Passwords\Helper\Words;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
-
 /**
  * Class AbstractWordsHelper
  *
@@ -22,45 +20,5 @@ abstract class AbstractWordsHelper {
      *
      * @return array
      */
-    public function getWords(int $strength): array {
-
-        $url     = $this->getWordsUrl();
-        $options = $this->getServiceOptions($strength);
-        $result  = $this->getHttpRequest($url, $options);
-
-        if(empty($result)) {
-            return [];
-        }
-
-        return explode(' ', $result);
-    }
-
-    /**
-     * @param string $url
-     * @param array  $options
-     *
-     * @return mixed
-     */
-    protected function getHttpRequest(string $url, array $options = []) {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-
-        if(!empty($options)) {
-            $request->setPostData($options);
-        }
-
-        return $request->sendWithRetry();
-    }
-
-    /**
-     * @param int $strength
-     *
-     * @return array
-     */
-    abstract protected function getServiceOptions(int $strength): array;
-
-    /**
-     * @return string
-     */
-    abstract protected function getWordsUrl(): string;
+    abstract public function getWords(int $strength): array;
 }

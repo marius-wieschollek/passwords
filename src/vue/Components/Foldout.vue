@@ -1,6 +1,6 @@
 <template>
     <div v-bind:class="{ open: open }" class="foldout-container">
-        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" v-bind:style="titleStyle">
+        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="{'border-color': borderColor }">
             {{title}}
         </translate>
         <div class="foldout-content">
@@ -11,6 +11,7 @@
 
 <script>
     import Translate from '@vc/Translate.vue';
+    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         props     : {
@@ -25,19 +26,8 @@
 
         data() {
             return {
-                open: false
-            }
-        },
-
-        computed: {
-            titleStyle() {
-                if (OCA.Theming && this.open) {
-                    return {
-                        'border-color': OCA.Theming.color
-                    };
-                }
-
-                return {};
+                open: false,
+                borderColor: ThemeManager.getColor()
             }
         },
 

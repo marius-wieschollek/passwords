@@ -10,27 +10,27 @@
                     <translate tag="div" class="section-title">General</translate>
                     <div class="form-grid">
                         <translate tag="label" for="password-label">Name</translate>
-                        <input id="password-label" type="text" name="label" maxlength="48" value="">
+                        <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
                         <translate tag="label" for="password-username">Username</translate>
-                        <input id="password-username" type="text" name="username" maxlength="48" value="" required>
+                        <input id="password-username" type="text" name="username" maxlength="48" v-model="password.username" required>
                         <translate tag="label" for="password-password">Password</translate>
                         <div class="password-field">
                             <div class="icons">
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility" />
                                 <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password" />
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" :value="password" required>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required>
                         </div>
                         <translate tag="label" for="password-url">Website</translate>
-                        <input id="password-url" type="text" name="url" maxlength="2048" value="">
+                        <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
                         <foldout title="More Options">
                             <div class="form-grid">
                                 <translate tag="label" for="password-favourite">Favourite</translate>
-                                <input id="password-favourite" name="favourite" type="checkbox" value="1">
+                                <input id="password-favourite" name="favourite" type="checkbox" v-model="password.favourite">
                                 <translate tag="label" for="password-sse">Encryption</translate>
-                                <select id="password-sse" name="sse" disabled title="There is only one option right now">
-                                    <translate tag="option" value="SSEv1r1" title="Simple Server Side Encryption V1" selected>SSE V1</translate>
+                                <select id="password-sse" name="sseType" disabled title="There is only one option right now" v-model="password.sseType">
+                                    <translate tag="option" value="SSEv1r1" title="Simple Server Side Encryption V1">SSE V1</translate>
                                 </select>
                             </div>
                         </foldout>
@@ -49,15 +49,16 @@
 </template>
 
 <script>
+    import $ from "jquery";
     import SimpleMDE from 'simplemde';
-    import Translate from '@vc/Translate.vue';
     import Foldout from '@vc/Foldout.vue';
-    import Messages from '@js/Classes/Messages';
+    import Translate from '@vc/Translate.vue';
+    import API from "@js/Helper/api";
     import Events from '@js/Classes/Events';
     import Utility from '@js/Classes/Utility';
+    import Messages from '@js/Classes/Messages';
     import ThemeManager from '@js/Manager/ThemeManager';
-    import API from "@js/Helper/api";
-    import $ from "jquery";
+    import EnhancedApi from "@/js/ApiClient/EnhancedApi";
 
     export default {
         data() {
@@ -65,7 +66,7 @@
                 showPassword: false,
                 showLoader: false,
                 simplemde   : null,
-                password   : null,
+                password   : {sseType: 'SSEv1r1'},
                 folder   : null,
             }
         },
@@ -103,7 +104,7 @@
 
                 API.generatePassword()
                     .then((d) => {
-                        this.password = d.password;
+                        this.password.password = d.password;
                         this.showLoader = false;
                         this.showPassword = true;
                     })
@@ -112,27 +113,19 @@
                     });
             },
             submitAction    : function ($event) {
-                let $element = $($event.target);
-                let $data = $element.serializeArray();
-                let password = {};
 
-                for (let i = 0; i < $data.length; i++) {
-                    let entry = $data[i];
-                    password[entry.name] = entry.value;
-                }
-                password.notes = this.simplemde.value();
-
+                let password = EnhancedApi.validatePassword(this.password);
                 if(this.folder) password.folder = this.folder;
+                password.notes = this.simplemde.value();
+                password = EnhancedApi.validatePassword(this.password);
 
                 API.createPassword(password)
                     .then((data) => {
                         this.closeWindow();
                         Messages.notification('Password created');
-                        password.type = 'password';
                         password.id = data.id;
-                        password.revision = data.revision;
-                        password.created = new Date();
-                        password.updated = password.created;
+                        password = API._processPassword(password);
+
                         Events.fire('password.created', password);
                     })
                     .catch(() => {

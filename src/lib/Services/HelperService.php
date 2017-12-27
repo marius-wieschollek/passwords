@@ -37,6 +37,7 @@ class HelperService {
     const FAVICON_DEFAULT      = 'default';
 
     const WORDS_LOCAL  = 'local';
+    const WORDS_RANDOM = 'random';
     const WORDS_SNAKES = 'wo4snakes';
 
     const SECURITY_BIG_LOCAL   = '10mio';
@@ -76,6 +77,7 @@ class HelperService {
 
     /**
      * @return AbstractImageHelper
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getImageHelper(): AbstractImageHelper {
         $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
@@ -89,9 +91,10 @@ class HelperService {
 
     /**
      * @return AbstractPageShotHelper
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getPageShotHelper(): AbstractPageShotHelper {
-        $service = $this->config->getAppValue('service/pageshot', self::PAGESHOT_WKHTML);
+        $service = $this->config->getAppValue('service/pageshot', self::PAGESHOT_DEFAULT);
 
         switch ($service) {
             case self::PAGESHOT_WKHTML:
@@ -111,6 +114,7 @@ class HelperService {
 
     /**
      * @return AbstractFaviconHelper
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getFaviconHelper(): AbstractFaviconHelper {
         $service = $this->config->getAppValue('service/favicon', self::FAVICON_LOCAL);
@@ -133,7 +137,7 @@ class HelperService {
 
     /**
      * @return AbstractWordsHelper
-     * @TODO support more services
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getWordsHelper(): AbstractWordsHelper {
         $service = $this->config->getAppValue('service/words', self::WORDS_SNAKES);
@@ -141,6 +145,8 @@ class HelperService {
         switch ($service) {
             case self::WORDS_LOCAL:
                 return $this->container->query('LocalWordsHelper');
+            case self::WORDS_RANDOM:
+                return $this->container->query('RandomCharactersHelper');
             case self::WORDS_SNAKES:
                 return $this->container->query('SnakesWordsHelper');
         }
@@ -150,6 +156,7 @@ class HelperService {
 
     /**
      * @return AbstractSecurityCheckHelper
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getSecurityHelper(): AbstractSecurityCheckHelper {
         $service = $this->config->getAppValue('service/security', self::SECURITY_HIBP);
