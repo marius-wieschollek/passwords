@@ -32,6 +32,14 @@ export default class Utility {
 
     /**
      *
+     * @returns {number}
+     */
+    static getTimestamp() {
+        return Math.floor(new Date().getTime()/1000);
+    }
+
+    /**
+     *
      * @param object        The object to be sorted
      * @param property      The property to sort by
      * @param ascending     Sort ascending if true, descending if false

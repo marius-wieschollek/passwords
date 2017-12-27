@@ -1,25 +1,43 @@
- <template>
+<template>
     <div class="background" id="passwords-create-new">
         <div class="window">
             <div class="title nc-theming-main-background nc-theming-contrast">
-                <translate>New password</translate>
+                <translate :say="title"/>
                 <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
-            <form class="content" v-on:submit.prevent="submitAction($event)">
+            <form class="content" v-on:submit.prevent="submitAction()">
                 <div class="form">
                     <translate tag="div" class="section-title">General</translate>
                     <div class="form-grid">
                         <translate tag="label" for="password-label">Name</translate>
                         <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
                         <translate tag="label" for="password-username">Username</translate>
-                        <input id="password-username" type="text" name="username" maxlength="48" v-model="password.username" required>
+                        <input id="password-username"
+                               type="text"
+                               name="username"
+                               maxlength="48"
+                               v-model="password.username"
+                               required>
                         <translate tag="label" for="password-password">Password</translate>
                         <div class="password-field">
                             <div class="icons">
-                                <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility" />
-                                <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password" />
+                                <translate tag="i"
+                                           class="fa"
+                                           :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }"
+                                           @click="togglePasswordVisibility()"
+                                           title="Toggle visibility"/>
+                                <translate tag="i"
+                                           class="fa fa-refresh"
+                                           :class="{ 'fa-spin': showLoader }"
+                                           @click="generateRandomPassword()"
+                                           title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required>
+                            <input id="password-password"
+                                   :type="showPassword ? 'text':'password'"
+                                   name="password"
+                                   maxlength="48"
+                                   v-model="password.password"
+                                   required>
                         </div>
                         <translate tag="label" for="password-url">Website</translate>
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
@@ -29,8 +47,13 @@
                                 <translate tag="label" for="password-favourite">Favourite</translate>
                                 <input id="password-favourite" name="favourite" type="checkbox" v-model="password.favourite">
                                 <translate tag="label" for="password-sse">Encryption</translate>
-                                <select id="password-sse" name="sseType" disabled title="There is only one option right now" v-model="password.sseType">
-                                    <translate tag="option" value="SSEv1r1" title="Simple Server Side Encryption V1">SSE V1</translate>
+                                <select id="password-sse"
+                                        name="sseType"
+                                        disabled
+                                        title="There is only one option right now"
+                                        v-model="password.sseType">
+                                    <translate tag="option" value="SSEv1r1" title="Simple Server Side Encryption V1">SSE V1
+                                    </translate>
                                 </select>
                             </div>
                         </foldout>
@@ -41,7 +64,7 @@
                     <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                 </div>
                 <div class="controls">
-                    <translate tag="input" class="nc-theming-main-background nc-theming-contrast" type="submit" value="Save" />
+                    <translate tag="input" class="nc-theming-main-background nc-theming-contrast" type="submit" value="Save"/>
                 </div>
             </form>
         </div>
@@ -54,20 +77,21 @@
     import Foldout from '@vc/Foldout.vue';
     import Translate from '@vc/Translate.vue';
     import API from "@js/Helper/api";
-    import Events from '@js/Classes/Events';
     import Utility from '@js/Classes/Utility';
-    import Messages from '@js/Classes/Messages';
     import ThemeManager from '@js/Manager/ThemeManager';
     import EnhancedApi from "@/js/ApiClient/EnhancedApi";
 
     export default {
         data() {
             return {
+                title       : 'New password',
                 showPassword: false,
-                showLoader: false,
+                showLoader  : false,
                 simplemde   : null,
-                password   : {sseType: 'SSEv1r1'},
-                folder   : null,
+                password    : {sseType: 'SSEv1r1'},
+                isSubmitted : false,
+                _success    : null,
+                _fail       : null,
             }
         },
 
@@ -91,6 +115,10 @@
 
         methods: {
             closeWindow             : function () {
+                if (this._fail && !this.isSubmitted) {
+                    this._fail();
+                }
+
                 this.$destroy();
                 let $container = $('#app-popup');
                 $container.find('div').remove();
@@ -112,25 +140,20 @@
                         this.showLoader = false;
                     });
             },
-            submitAction    : function ($event) {
-
-                let password = EnhancedApi.validatePassword(this.password);
-                if(this.folder) password.folder = this.folder;
+            submitAction            : function () {
+                let password = this.password;
                 password.notes = this.simplemde.value();
                 password = EnhancedApi.validatePassword(this.password);
+                this.isSubmitted = true;
 
-                API.createPassword(password)
-                    .then((data) => {
+                if (this._success) {
+                    try {
+                        this._success(password);
                         this.closeWindow();
-                        Messages.notification('Password created');
-                        password.id = data.id;
-                        password = API._processPassword(password);
-
-                        Events.fire('password.created', password);
-                    })
-                    .catch(() => {
-                        Messages.alert(e.message, 'Creating Password Failed');
-                    });
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
             }
         }
     };
@@ -168,11 +191,11 @@
                 align-items           : stretch;
 
                 .title {
-                    color: $color-contrast;
-                    background-color: $color-theme;
-                    grid-area : title;
-                    padding   : 1rem;
-                    font-size : 1.25rem;
+                    color            : $color-contrast;
+                    background-color : $color-theme;
+                    grid-area        : title;
+                    padding          : 1rem;
+                    font-size        : 1.25rem;
 
                     .close {
                         float  : right;
@@ -215,7 +238,7 @@
 
                         label {
                             padding : 0 0.9rem 5px 0;
-                            cursor : pointer;
+                            cursor  : pointer;
                         }
                     }
 
@@ -232,7 +255,8 @@
                         position  : relative;
 
                         input {
-                            max-width : initial;
+                            max-width     : initial;
+                            padding-right : 45px;
                         }
 
                         .icons {

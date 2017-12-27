@@ -1,6 +1,6 @@
 <template>
     <div v-bind:class="{ open: open }" class="foldout-container">
-        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="{'border-color': borderColor }">
+        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="titleStyle">
             {{title}}
         </translate>
         <div class="foldout-content">
@@ -14,20 +14,34 @@
     import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
+
+        components: {
+            Translate
+        },
+
         props     : {
             title: {
                 type     : String,
                 'default': 'More Options'
             }
         },
-        components: {
-            Translate
-        },
 
         data() {
             return {
                 open: false,
                 borderColor: ThemeManager.getColor()
+            }
+        },
+
+        computed: {
+            titleStyle() {
+                if (this.open) {
+                    return {
+                        'border-color': ThemeManager.getColor()
+                    };
+                }
+
+                return {};
             }
         },
 
@@ -67,7 +81,6 @@
         }
 
         &.open {
-
             .foldout-title {
                 border-color : $color-grey-light;
 

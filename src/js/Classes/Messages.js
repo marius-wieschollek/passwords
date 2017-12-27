@@ -1,4 +1,5 @@
 import $ from "jquery";
+import Utility from "@js/Classes/Utility";
 
 class Messages {
 
@@ -100,7 +101,7 @@ class Messages {
             let field = form[name],
                 value = field.value ? field.value:'',
                 type  = field.type ? field.type:'text',
-                label = Messages._translate(field.label);
+                label = Utility.translate(field.label);
 
             html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
         }
@@ -146,11 +147,17 @@ class Messages {
         }
     }
 
+    /**
+     *
+     * @param text
+     * @returns {*}
+     * @private
+     */
     static _translate(text) {
         if (Array.isArray(text)) {
-            return t('passwords', text[0], text[1]);
+            return Utility.translate(text[0], text[1]);
         }
-        return t('passwords', text);
+        return Utility.translate(text);
     }
 }
 

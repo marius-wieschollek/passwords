@@ -546,6 +546,7 @@ export default class EnhancedApi extends SimpleApi {
         if (typeof folder.parent !== 'string') {
             folder.parent = this._processFolder(folder.parent);
         }
+
         folder.created = new Date(folder.created * 1e3);
         folder.updated = new Date(folder.updated * 1e3);
 

@@ -1,5 +1,6 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
+import Utility from "@/js/Classes/Utility";
 import Messages from '@js/Classes/Messages';
 import EnhancedApi from "@/js/ApiClient/EnhancedApi";
 
@@ -22,14 +23,12 @@ class FolderManager {
                     if (parent) folder.parent = parent;
 
                     folder = EnhancedApi.validateFolder(folder);
-                    folder.type = 'folder';
-                    folder.icon = 'http://localhost/core/img/filetypes/folder.svg';
-                    folder.created = new Date();
-                    folder.updated = folder.created;
                     API.createFolder(folder)
                         .then((d) => {
                             folder.id = d.id;
                             folder.revision = d.revision;
+                            folder.created = folder.updated = Utility.getTimestamp();
+                            folder = API._processFolder(folder);
                             Events.fire('folder.created', folder);
                             Messages.notification('Folder created');
                             resolve(folder);
@@ -56,6 +55,7 @@ class FolderManager {
                     folder.label = title;
                     API.updateFolder(folder)
                         .then((d) => {
+                            folder.updated = new Date();
                             folder.revision = d.revision;
                             Events.fire('folder.deleted', folder);
                             Messages.notification('Folder renamed');
@@ -78,6 +78,7 @@ class FolderManager {
             folder.parent = parent;
             API.updateFolder(folder)
                 .then((d) => {
+                    folder.updated = new Date();
                     folder.revision = d.revision;
                     Events.fire('folder.updated', folder);
                     Messages.notification('Folder moved');
@@ -100,6 +101,7 @@ class FolderManager {
         return new Promise((resolve, reject) => {
             API.updateFolder(folder)
                 .then((d) => {
+                    folder.updated = new Date();
                     folder.revision = d.revision;
                     Events.fire('folder.updated', folder);
                     resolve(folder);
@@ -122,6 +124,7 @@ class FolderManager {
                 API.deleteFolder(folder.id)
                     .then((d) => {
                         folder.trashed = true;
+                        folder.updated = new Date();
                         folder.revision = d.revision;
                         Events.fire('folder.deleted', folder);
                         Messages.notification('Folder deleted');
@@ -150,6 +153,7 @@ class FolderManager {
                 API.restoreFolder(folder.id)
                     .then((d) => {
                         folder.trashed = false;
+                        folder.updated = new Date();
                         folder.revision = d.revision;
                         Events.fire('folder.restored', folder);
                         Messages.notification('Folder restored');

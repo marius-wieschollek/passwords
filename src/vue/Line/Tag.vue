@@ -78,7 +78,7 @@
             },
             editAction() {
                 TagManager.editTag(this.tag)
-                    .then((f) => {this.tag = f;});
+                    .then((t) => {this.tag = t;});
             }
         }
     }

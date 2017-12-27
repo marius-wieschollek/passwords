@@ -32,6 +32,7 @@ OC.L10N.register(
         "Color"                           : "Farbe",
         "Name"                            : "Name",
         "New password"                    : "Neues Passwort erstellen",
+        "Edit password"                   : "Passwort bearbeiten",
         "General"                         : "Eigenschaften",
         "More Options"                    : "Erweiterte Optionen",
         "Favourite"                       : "Favorit",
@@ -70,6 +71,11 @@ OC.L10N.register(
         "Restoring tag failed"            : "Wiederherstellen des Tags fehlgeschlagen",
         "Password restored"               : "Passwort wiederhergestellt",
         "Restoring password failed"       : "Wiederherstellen des Passworts fehlgeschlagen",
+        "Open Url"                        : "Webseite öffnen",
+        "Copy Url"                        : "Webseite kopieren",
+        "Password was copied to clipboard": "Das Passwort wurde in die Zwischenablage kopiert",
+        "Username was copied to clipboard": "Der Benutzername wurde in die Zwischenablage kopiert",
+        "Url was copied to clipboard"     : "Die Webseite wurde in die Zwischenablage kopiert",
     },
     'nplurals=2; plural=(n != 1);'
 );

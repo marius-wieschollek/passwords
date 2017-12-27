@@ -1,9 +1,9 @@
 <template>
     <div class="row password"
-         @click="singleClickAction($event)"
-         @dblclick="doubleClickAction()"
+         v-if="enabled"
+         @click="copyPasswordAction($event)"
+         @dblclick="copyUsernameAction()"
          @dragstart="dragStartAction($event)"
-         v-if="password"
          :data-password-id="password.id">
         <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
@@ -21,8 +21,8 @@
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
                         </li>
-                        <translate tag="li" icon="pencil">Edit</translate>
-                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <translate tag="li" @click="editAction()" icon="pencil">Edit</translate>
+                        <translate tag="li" icon="trash">Delete</translate>
                         <slot name="option-bottom"></slot>
                     </ul>
                 </slot>
@@ -33,11 +33,12 @@
 </template>
 
 <script>
-    import Messages from '@js/Classes/Messages';
-    import Utility from "@js/Classes/Utility";
     import API from '@js/Helper/api';
-    import DragManager from '@js/Manager/DragManager';
     import Translate from '@vc/Translate.vue';
+    import Utility from "@js/Classes/Utility";
+    import Messages from '@js/Classes/Messages';
+    import DragManager from '@js/Manager/DragManager';
+    import PasswordManager from '@js/Manager/PasswordManager';
 
     export default {
         components: {
@@ -52,6 +53,7 @@
 
         data() {
             return {
+                enabled     : true,
                 clickTimeout: null,
                 showMenu    : false
             }
@@ -76,7 +78,7 @@
         },
 
         methods: {
-            singleClickAction($event) {
+            copyPasswordAction($event) {
                 if ($event.detail !== 1) return;
                 Utility.copyToClipboard(this.password.password);
 
@@ -84,24 +86,25 @@
                 this.clickTimeout =
                     setTimeout(function () { Messages.notification('Password was copied to clipboard') }, 300);
             },
-            doubleClickAction() {
+            copyUsernameAction() {
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
 
-                Utility.copyToClipboard(this.password.login);
+                Utility.copyToClipboard(this.password.username);
                 Messages.notification('Username was copied to clipboard');
-            },
-            favouriteAction($event) {
-                $event.stopPropagation();
-                this.password.favourite = !this.password.favourite;
-                API.updatePassword(this.password);
-            },
-            toggleMenu($event) {
-                $event.stopPropagation();
-                this.showMenu = !this.showMenu;
             },
             copyUrlAction() {
                 Utility.copyToClipboard(this.password.url);
                 Messages.notification('Url was copied to clipboard')
+            },
+            favouriteAction($event) {
+                $event.stopPropagation();
+                this.password.favourite = !this.password.favourite;
+                PasswordManager.updatePassword(this.password)
+                    .catch(() => { this.password.favourite = !this.password.favourite; });
+            },
+            toggleMenu($event) {
+                $event.stopPropagation();
+                this.showMenu = !this.showMenu;
             },
             detailsAction($event, section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
@@ -112,26 +115,22 @@
                         })
                 }
             },
-            deleteAction(skipConfirm = false) {
-                if (skipConfirm || !this.password.trashed) {
-                    API.deletePassword(this.password.id)
-                        .then(() => {
-                            this.password = undefined;
-                            Messages.notification('Password was deleted');
-                        }).catch(() => {
-                        Messages.notification('Deleting password failed');
-                    });
-                } else {
-                    Messages.confirm('Do you want to delete the password', 'Delete password')
-                        .then(() => { this.deleteAction(true); })
-                }
+            editAction() {
+                PasswordManager
+                    .editPassword(this.password)
+                    .then((p) => {this.password = p;});
+            },
+            deleteAction() {
+                PasswordManager.deleteTag(this.password)
+                    .then(() => {this.enabled = false;});
             },
             dragStartAction($e) {
                 DragManager.start($e, this.password.label, this.password.icon, ['folder'])
                     .then((data) => {
-                        this.password.folder = data.folderId;
-                        API.updatePassword(this.password)
-                            .then(() => {this.$parent.refreshView();});
+                        this.enabled = false;
+                        PasswordManager.movePassword(this.password, data.folderId)
+                            .then((p) => {this.password = p;})
+                            .catch(() => {this.enabled = true;});
                     });
             }
         }

@@ -34,7 +34,7 @@ class TagManager {
                         .then(resolve)
                         .catch(reject);
                 })
-                .catch(() => {reject();})
+                .catch(reject)
         });
     }
 
@@ -48,15 +48,14 @@ class TagManager {
         if (!tag.label) tag.label = Utility.translate('New Tag');
         if (!tag.color) tag.color = randomMC.getColor();
         tag = EnhancedApi.validateTag(tag);
-        tag.type = 'tag';
-        tag.created = new Date();
-        tag.updated = tag.created;
 
         return new Promise((resolve, reject) => {
             API.createTag(tag)
                 .then((d) => {
                     tag.id = d.id;
                     tag.revision = d.revision;
+                    tag.created = tag.updated = Utility.getTimestamp();
+                    tag = API._processTag(tag);
                     Events.fire('tag.created', tag);
                     Messages.notification('Tag created');
                     resolve(tag);
@@ -88,12 +87,10 @@ class TagManager {
                 .then((data) => {
                     tag.label = data.label;
                     tag.color = data.color;
-                    tag = EnhancedApi.validateTag(tag);
-                    tag.type = 'tag';
-                    tag.updated = new Date();
 
                     API.updateTag(tag)
                         .then((d) => {
+                            tag.updated = new Date();
                             tag.revision = d.revision;
                             Events.fire('tag.updated', tag);
                             Messages.notification('Tag saved');
@@ -117,8 +114,9 @@ class TagManager {
         return new Promise((resolve, reject) => {
             API.updateTag(tag)
                 .then((d) => {
+                    tag.updated = new Date();
                     tag.revision = d.revision;
-                    Events.fire('folder.updated', tag);
+                    Events.fire('tag.updated', tag);
                     resolve(tag);
                 })
                 .catch(() => {
@@ -139,6 +137,7 @@ class TagManager {
                 API.deleteTag(tag.id)
                     .then((d) => {
                         tag.trashed = true;
+                        tag.updated = new Date();
                         tag.revision = d.revision;
                         Events.fire('tag.deleted', tag);
                         Messages.notification('Tag deleted');
@@ -167,6 +166,7 @@ class TagManager {
                 API.restoreTag(tag.id)
                     .then((d) => {
                         tag.trashed = false;
+                        tag.updated = new Date();
                         tag.revision = d.revision;
                         Events.fire('tag.restored', tag);
                         Messages.notification('Tag restored');

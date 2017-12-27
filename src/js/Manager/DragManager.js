@@ -8,7 +8,15 @@ export default new class DragManager {
         $(document).on('dragover', this.over);
     }
 
-    start(event, label, image, types = {}) {
+    /**
+     *
+     * @param event
+     * @param label
+     * @param image
+     * @param types
+     * @returns {Promise<any>}
+     */
+    start(event, label, image, types = []) {
         let $el = $('<div id="dragicon" style="background-image:url(' + image + ')">' + label + '</div>');
         $('body').append($el);
 
