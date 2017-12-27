@@ -2,55 +2,70 @@
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
         <div class="image-container">
-            <a :href="password.url" target="_blank">
+            <a :href="object.url" target="_blank">
                 <img :class="image.className"
                      :style="image.style"
-                     :src="password.image"
+                     :src="object.image"
                      @mouseover="imageMouseOver($event)"
                      @mouseout="imageMouseOut($event)"
                      alt="">
             </a>
         </div>
-        <h3 class="title" v-bind:style="faviconStyle">
-            {{ password.label }}
-        </h3>
+        <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
-            <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
-            <span class="date">{{ password.updated.toLocaleDateString() }}</span>
-            <tags :password="password"></tags>
+            <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>
+            <span class="date">{{ object.updated.toLocaleDateString() }}</span>
+            <tags :password="object"/>
         </div>
-        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="password.id">
+        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="object.id">
             <div slot="details">
                 <pre>
-                Title: {{ password.label }}
-                User: {{ password.username }}
-                Password: {{ password.password }}
-                Website: {{ password.url }}
+                Title: {{ object.label }}
+                User: {{ object.username }}
+                Password: {{ object.password }}
+                Website: {{ object.url }}
                 </pre>
             </div>
             <div slot="notes" class="notes">
-                <textarea id="password-details-notes">{{ password.notes }}</textarea>
+                <textarea id="password-details-notes">{{ object.notes }}</textarea>
             </div>
             <div slot="share">
-                <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="password.id">
+                <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="object.id">
                     <div slot="nextcloud" class="password-share-nextcloud">
                         nc
                     </div>
                     <div slot="qrcode" class="password-share-qrcode">
                         <select id="password-details-qrcode" @change="changeQrCode($event)">
-                            <translate tag="option" value="login" v-if="password.username">Username</translate>
+                            <translate tag="option" value="login" v-if="object.username">Username</translate>
                             <translate tag="option" value="password" selected>Password</translate>
-                            <translate tag="option" value="url" v-if="password.url">Website</translate>
+                            <translate tag="option" value="url" v-if="object.url">Website</translate>
                         </select>
                         <qr-code :text="qrcode.text"
                                  :color="qrcode.color"
                                  :bgColor="qrcode.bgColor"
                                  :size="256"
-                                 errorLevel="L"></qr-code>
+                                 errorLevel="L"/>
                     </div>
                 </tabs>
             </div>
             <div slot="revisions">
+                <ul class="revision-list">
+                    <li class="revision"
+                        v-for="revision in getRevisions"
+                        :key="revision.id"
+                        :style="{'background-image': 'url(' + revision.icon + ')'}">
+                        <span>
+                            {{ revision.label }}<br>
+                            <span class="time">
+                                {{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}
+                            </span>
+                        </span>
+                        <translate icon="undo"
+                                   title="Restore revision"
+                                   @click="restoreAction(revision)"
+                                   v-if="revision.id !== object.revision"/>
+                    </li>
+                </ul>
             </div>
         </tabs>
     </div>
@@ -62,9 +77,12 @@
     import Tags from '@vc/Tags.vue';
     import API from '@js/Helper/api';
     import SimpleMDE from 'simplemde';
+    import Events from "@js/Classes/Events";
     import QrCode from 'vue-qrcode-component'
     import Translate from '@vc/Translate.vue';
     import ThemeManager from '@js/Manager/ThemeManager';
+    import PasswordManager from '@js/Manager/PasswordManager';
+    import Utility from "@js/Classes/Utility";
 
     export default {
         components: {
@@ -92,9 +110,11 @@
                     color  : ThemeManager.getColor(),
                     bgColor: ThemeManager.getContrastColor(),
                     text   : this.password.password
-                }
+                },
+                object: this.password
             }
         },
+
         mounted() {
             let simplemde = new SimpleMDE(
                 {
@@ -103,16 +123,22 @@
                     autoDownloadFontAwesome: false,
                     spellChecker           : false,
                     status                 : false,
-                    initialValue           : this.password.notes
+                    initialValue           : this.object.notes
                 });
             simplemde.togglePreview();
         },
 
+        created() {
+            Events.on('password.changed', this.refreshView);
+        },
+
+        beforeDestroy() {
+            Events.off('password.changed', this.refreshView)
+        },
+
         computed: {
-            faviconStyle() {
-                return {
-                    backgroundImage: 'url(' + this.password.icon + ')'
-                }
+            getRevisions() {
+                return Utility.sortApiObjectArray(this.object.revisions, 'created', false)
             }
         },
 
@@ -142,8 +168,8 @@
             },
             favouriteAction($event) {
                 $event.stopPropagation();
-                this.password.favourite = !this.password.favourite;
-                API.updatePassword(this.password);
+                this.object.favourite = !this.object.favourite;
+                API.updatePassword(this.object);
             },
             closeDetails() {
                 this.$parent.detail = {
@@ -153,7 +179,13 @@
             },
             changeQrCode($event) {
                 let property = $($event.target).val();
-                this.qrcode.text = this.password[property];
+                this.qrcode.text = this.object[property];
+            },
+            restoreAction(revision) {
+                PasswordManager.restoreRevision(this.object, revision)
+            },
+            refreshView(event) {
+                this.object = Utility.mergeObject(this.object, event.object);
             }
         },
 
@@ -161,7 +193,8 @@
             password: function (value) {
                 this.image.className = '';
                 this.image.style = {'marginTop': 0};
-                this.qrcode.text = this.password.password;
+                this.qrcode.text = value.password;
+                this.object = value;
                 $('#password-details-qrcode').val('password');
                 this.$forceUpdate();
             }
@@ -299,6 +332,48 @@
             canvas {
                 display : block;
                 margin  : 0 auto;
+            }
+        }
+
+        .revision-list {
+            .revision {
+                position        : relative;
+                background      : no-repeat 3px center;
+                background-size : 32px;
+                padding         : 5px 20px 5px 38px;
+                font-size       : 1.1em;
+                cursor          : pointer;
+                border-bottom   : 1px solid $color-grey-lighter;
+
+                &:last-child {
+                    border-bottom : none;
+                }
+
+                span {
+                    cursor : pointer;
+                }
+
+                .time {
+                    color       : $color-grey-dark;
+                    font-size   : 0.9em;
+                    font-style  : italic;
+                    line-height : 0.9em;
+                }
+
+                .fa {
+                    position : absolute;
+                    right    : 5px;
+                    top      : 10px;
+
+                    &:before {
+                        line-height : 32px;
+                        padding     : 0 5px;
+                    }
+                }
+
+                &:hover {
+                    background-color : darken($color-white, 3);
+                }
             }
         }
     }

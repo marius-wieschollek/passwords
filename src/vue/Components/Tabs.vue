@@ -13,7 +13,7 @@
             </translate>
         </ul>
         <div class="tab-contents">
-            <div v-for="(tab, name) in tabs" :data-tab="name" class="tab-content" v-bind:class="{ active: isCurrentTab(name) }">
+            <div v-for="(tab, name) in tabs" :data-tab="name" class="tab-content" :class="{ active: isCurrentTab(name) }">
                 <slot :name="name"></slot>
             </div>
         </div>

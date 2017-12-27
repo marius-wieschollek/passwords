@@ -1,22 +1,22 @@
 <template>
     <div id="controls">
         <div class="breadcrumb">
-            <div class="crumb svg ui-droppable" data-dir="/">
+            <div class="crumb svg" data-dir="/">
                 <a href="/index.php/apps/passwords">
                     <img class="svg" src="/core/img/places/home.svg" alt="Home">
                 </a>
             </div>
-            <div class="crumb svg ui-droppable" v-for="item in getItems">
+            <div class="crumb svg" v-for="item in getItems">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
                     {{ item.label }}
                 </router-link>
             </div>
         </div>
-        <div class="actions creatable" v-if="showAddNew" v-bind:class="{active: isOpen}">
+        <div class="actions creatable" v-if="showAddNew" :class="{active: showMenu}">
             <span class="button new" @click="toggleMenu()">
                 <span class="icon icon-add"></span>
             </span>
-            <div class="newPasswordMenu popovermenu bubble menu menu-left" @click="toggleMenu()">
+            <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
                 <ul>
                     <li>
                         <span class="menuitem" data-action="folder" v-if="newFolder" @click="createFolder">
@@ -31,7 +31,7 @@
                         </span>
                     </li>
                     <li>
-                        <span class="menuitem" data-action="file" @click="createPassword($event)">
+                        <span class="menuitem" data-action="file" @click="createPassword()">
                             <span class="icon icon-filetype-text svg"></span>
                             <translate class="displayname">New Password</translate>
                         </span>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+    import $ from "jquery";
     import Utility from '@js/Classes/Utility';
     import Translate from '@vc/Translate.vue';
     import TagManager from '@js/Manager/TagManager';
@@ -90,13 +91,19 @@
         },
         data() {
             return {
-                isOpen: false
+                showMenu: false
             }
         },
 
         methods: {
             toggleMenu() {
-                this.isOpen = !this.isOpen;
+                this.showMenu = !this.showMenu;
+                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+            },
+            menuEvent($e) {
+                if ($($e.target).closest('.actions.creatable').length !== 0) return;
+                this.showMenu = false;
+                $(document).off('click', this.menuEvent);
             },
             createFolder() {
                 FolderManager.createFolder(this.folder);

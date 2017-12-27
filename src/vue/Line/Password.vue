@@ -4,11 +4,11 @@
          @dblclick="copyUsernameAction($event)"
          @dragstart="dragStartAction($event)"
          :data-password-id="password.id">
-        <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
-        <div v-bind:style="faviconStyle" class="favicon">&nbsp;</div>
+        <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
+        <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ password.label }}</span>
         <div class="date">{{ password.updated.toLocaleDateString() }}</div>
-        <i v-bind:class="securityCheck" class="fa fa-shield security"></i>
+        <i :class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -59,11 +59,6 @@
         },
 
         computed: {
-            faviconStyle() {
-                return {
-                    backgroundImage: 'url(' + this.password.icon + ')'
-                }
-            },
             securityCheck() {
                 switch (this.password.status) {
                     case 0:

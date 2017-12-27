@@ -185,6 +185,40 @@ class PasswordManager {
             }
         });
     }
+
+    /**
+     *
+     * @param password
+     * @param revision
+     * @param confirm
+     * @returns {Promise<any>}
+     */
+    restoreRevision(password, revision, confirm = true) {
+        return new Promise((resolve, reject) => {
+            if (password.revision === revision.id) reject(password);
+
+            if (!confirm) {
+                API.restorePassword(password.id, revision.id)
+                    .then((d) => {
+                        password = Utility.mergeObject(password, revision);
+                        password.id = d.id;
+                        password.updated = new Date();
+                        password.revision = d.revision;
+                        Events.fire('password.restored', password);
+                        Messages.notification('Revision restored');
+                        resolve(password);
+                    })
+                    .catch(() => {
+                        Messages.notification('Restoring revision failed');
+                        reject(password);
+                    });
+            } else {
+                Messages.confirm('Do you want to restore the revision?', 'Restore revision')
+                    .then(() => { this.restoreRevision(password, revision, false); })
+                    .catch(() => {reject(password);});
+            }
+        });
+    }
 }
 
 let PM = new PasswordManager();

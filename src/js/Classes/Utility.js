@@ -35,7 +35,7 @@ export default class Utility {
      * @returns {number}
      */
     static getTimestamp() {
-        return Math.floor(new Date().getTime()/1000);
+        return Math.floor(new Date().getTime() / 1000);
     }
 
     /**
@@ -143,5 +143,48 @@ export default class Utility {
         }
 
         return -1;
+    }
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @returns {*}
+     */
+    static mergeObject(a, b) {
+        let object = Utility.cloneObject(a);
+
+        for (let key in b) {
+            if (!b.hasOwnProperty(key)) continue;
+            object[key] = b[key];
+        }
+
+        return object;
+    }
+
+    /**
+     *
+     * @param object
+     * @private
+     */
+    static cloneObject(object) {
+        let clone = new object.constructor();
+
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+            let element = object[key];
+
+            if (Array.isArray(element)) {
+                clone[key] = element.slice(0);
+            } else if (element instanceof Date) {
+                clone[key] = new Date(element.getTime());
+            } else if(typeof element === "object") {
+                clone[key] = Utility.cloneObject(element);
+            } else {
+                clone[key] = element;
+            }
+        }
+
+        return clone;
     }
 }

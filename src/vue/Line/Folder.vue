@@ -4,8 +4,8 @@
          data-drop-type="folder"
          @click="openAction($event)"
          @dragstart="dragStartAction($event)">
-        <i class="fa fa-star favourite" v-bind:class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon" v-bind:style="faviconStyle">&nbsp;</div>
+        <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
+        <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
         <span class="title">{{ folder.label }}</span>
         <div class="date">{{ folder.updated.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
@@ -46,14 +46,6 @@
         data() {
             return {
                 showMenu: false,
-            }
-        },
-
-        computed: {
-            faviconStyle() {
-                return {
-                    backgroundImage: 'url(' + this.folder.icon + ')'
-                }
             }
         },
 

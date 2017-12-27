@@ -1,7 +1,7 @@
 <template>
     <div class="row tag" :data-tag-id="tag.id" @click="openAction($event)">
-        <i class="fa fa-star favourite" v-bind:class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon fa fa-tag" v-bind:style="faviconStyle"></div>
+        <i class="fa fa-star favourite" :class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
+        <div class="favicon" :style="{color: this.tag.color}">&nbsp;</div>
         <span class="title">{{ tag.label }}</span>
         <div class="date">{{ tag.updated.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
@@ -41,14 +41,6 @@
         data() {
             return {
                 showMenu: false,
-            }
-        },
-
-        computed: {
-            faviconStyle() {
-                return {
-                    color: this.tag.color
-                }
             }
         },
 

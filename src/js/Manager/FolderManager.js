@@ -172,6 +172,40 @@ class FolderManager {
             }
         });
     }
+
+    /**
+     *
+     * @param folder
+     * @param revision
+     * @param confirm
+     * @returns {Promise<any>}
+     */
+    restoreRevision(folder, revision, confirm = true) {
+        return new Promise((resolve, reject) => {
+            if (folder.revision === revision.id) reject(folder);
+
+            if (!confirm) {
+                API.restorePassword(folder.id, revision.id)
+                    .then((d) => {
+                        folder = Utility.mergeObject(folder, revision);
+                        folder.id = d.id;
+                        folder.updated = new Date();
+                        folder.revision = d.revision;
+                        Events.fire('folder.restored', folder);
+                        Messages.notification('Revision restored');
+                        resolve(folder);
+                    })
+                    .catch(() => {
+                        Messages.notification('Restoring revision failed');
+                        reject(folder);
+                    });
+            } else {
+                Messages.confirm('Do you want to restore the revision?', 'Restore revision')
+                    .then(() => { this.restoreRevision(folder, revision, false); })
+                    .catch(() => {reject(folder);});
+            }
+        });
+    }
 }
 
 let FM = new FolderManager();

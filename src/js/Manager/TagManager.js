@@ -181,6 +181,40 @@ class TagManager {
             }
         });
     }
+
+    /**
+     *
+     * @param tag
+     * @param revision
+     * @param confirm
+     * @returns {Promise<any>}
+     */
+    restoreRevision(tag, revision, confirm = true) {
+        return new Promise((resolve, reject) => {
+            if (tag.revision === revision.id) reject(tag);
+
+            if (!confirm) {
+                API.restoreTag(tag.id, revision.id)
+                    .then((d) => {
+                        tag = Utility.mergeObject(tag, revision);
+                        tag.id = d.id;
+                        tag.updated = new Date();
+                        tag.revision = d.revision;
+                        Events.fire('tag.restored', tag);
+                        Messages.notification('Revision restored');
+                        resolve(tag);
+                    })
+                    .catch(() => {
+                        Messages.notification('Restoring revision failed');
+                        reject(tag);
+                    });
+            } else {
+                Messages.confirm('Do you want to restore the revision?', 'Restore revision')
+                    .then(() => { this.restoreRevision(tag, revision, false); })
+                    .catch(() => {reject(tag);});
+            }
+        });
+    }
 }
 
 let TM = new TagManager();

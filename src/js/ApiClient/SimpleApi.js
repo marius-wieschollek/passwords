@@ -132,10 +132,11 @@ export default class SimpleApi {
      * Restores the existing password with the given id from trash
      *
      * @param id
+     * @param revision
      * @returns {Promise}
      */
-    restorePassword(id) {
-        return this._createRequest('password.restore', {id: id}, 'PATCH');
+    restorePassword(id, revision = null) {
+        return this._createRequest('password.restore', {id: id, revision: revision}, 'PATCH');
     }
 
     /**
@@ -209,10 +210,11 @@ export default class SimpleApi {
      * Restores the existing folder with the given id from trash
      *
      * @param id
+     * @param revision
      * @returns {Promise}
      */
-    restoreFolder(id) {
-        return this._createRequest('folder.restore', {id: id}, 'PATCH');
+    restoreFolder(id, revision = null) {
+        return this._createRequest('folder.restore', {id: id, revision: revision}, 'PATCH');
     }
 
     /**
@@ -286,10 +288,11 @@ export default class SimpleApi {
      * Restores the existing tag with the given id from trash
      *
      * @param id
+     * @param revision
      * @returns {Promise}
      */
-    restoreTag(id) {
-        return this._createRequest('tag.restore', {id: id}, 'PATCH');
+    restoreTag(id, revision = null) {
+        return this._createRequest('tag.restore', {id: id, revision: revision}, 'PATCH');
     }
 
     /**

@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Db\AbstractRevisionEntity;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
@@ -157,21 +158,21 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function delete(string $id): JSONResponse {
         try {
-            $folder      = $this->modelService->findByUuid($id);
-            $oldRevision = $this->revisionService->findByUuid($folder->getRevision());
+            $model       = $this->modelService->findByUuid($id);
+            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
             if($oldRevision->isTrashed()) {
-                $this->modelService->delete($folder);
+                $this->modelService->delete($model);
 
-                return $this->createJsonResponse(['folder' => $folder->getUuid()]);
+                return $this->createJsonResponse(['id' => $model->getUuid()]);
             }
 
             /** @var AbstractRevisionEntity $newRevision */
             $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => true]);
             $this->revisionService->save($newRevision);
-            $this->modelService->setRevision($folder, $newRevision);
+            $this->modelService->setRevision($model, $newRevision);
 
-            return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $newRevision->getUuid()]);
+            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
@@ -180,25 +181,31 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
     /**
      * @param string $id
+     * @param null   $revision
      *
      * @return JSONResponse
      */
-    public function restore(string $id): JSONResponse {
+    public function restore(string $id, $revision = null): JSONResponse {
         try {
+            $model = $this->modelService->findByUuid($id);
 
-            $folder      = $this->modelService->findByUuid($id);
-            $oldRevision = $this->revisionService->findByUuid($folder->getRevision());
+            if($revision === null) $revision = $model->getRevision();
+            $oldRevision = $this->revisionService->findByUuid($revision);
 
-            if($oldRevision->isTrashed()) {
-                /** @var AbstractRevisionEntity $newRevision */
-                $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => false]);
-                $this->revisionService->save($newRevision);
-                $this->modelService->setRevision($folder, $newRevision);
-
-                return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $newRevision->getUuid()]);
+            if($oldRevision->getModel() !== $model->getUuid()) {
+                throw new ApiException('Invalid revision id');
             }
 
-            return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $oldRevision->getUuid()]);
+            if(!$oldRevision->isTrashed() && $oldRevision->getUuid() === $model->getRevision()) {
+                return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $oldRevision->getUuid()]);
+            }
+
+            /** @var AbstractRevisionEntity $newRevision */
+            $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => false]);
+            $this->revisionService->save($newRevision);
+            $this->modelService->setRevision($model, $newRevision);
+
+            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
         } catch (\Throwable $e) {
 
             return $this->createErrorResponse($e);
