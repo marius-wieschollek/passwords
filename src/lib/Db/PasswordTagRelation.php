@@ -23,8 +23,6 @@ namespace OCA\Passwords\Db;
  * @method void setPasswordRevision(string $passwordRevision)
  * @method bool getHidden()
  * @method void setHidden(bool $hidden)
- * @method bool getSuspended()
- * @method void setSuspended(bool $suspended)
  */
 class PasswordTagRelation extends AbstractEntity {
 
@@ -54,11 +52,6 @@ class PasswordTagRelation extends AbstractEntity {
     protected $hidden;
 
     /**
-     * @var bool
-     */
-    protected $suspended;
-
-    /**
      * PasswordTagRelation constructor.
      */
     public function __construct() {
@@ -68,16 +61,8 @@ class PasswordTagRelation extends AbstractEntity {
         $this->addType('passwordRevision', 'string');
 
         $this->addType('hidden', 'boolean');
-        $this->addType('suspended', 'boolean');
 
         parent::__construct();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuspended(): bool {
-        return $this->getSuspended() === true;
     }
 
     /**

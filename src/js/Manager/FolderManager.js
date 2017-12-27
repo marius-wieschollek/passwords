@@ -72,7 +72,11 @@ class FolderManager {
 
     moveFolder(folder, parent) {
         return new Promise((resolve, reject) => {
-            if (folder.id === parent) reject(folder);
+            if (folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
+                reject(folder);
+                return;
+            }
+
 
             let originalParent = folder.parent;
             folder.parent = parent;
@@ -136,7 +140,7 @@ class FolderManager {
                     });
             } else {
                 Messages.confirm('Do you want to delete the folder', 'Delete folder')
-                    .then(() => { this.deleteFolder(true); })
+                    .then(() => { this.deleteFolder(folder, false); })
                     .catch(() => {reject(folder);});
             }
         });

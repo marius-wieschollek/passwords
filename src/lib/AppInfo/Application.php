@@ -22,9 +22,9 @@ use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
-use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
+use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
@@ -53,6 +53,7 @@ use OCA\Passwords\Hooks\FolderRevisionHook;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Hooks\PasswordHook;
 use OCA\Passwords\Hooks\PasswordRevisionHook;
+use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
@@ -344,12 +345,16 @@ class Application extends App {
         });
         $container->registerService('PasswordHook', function (IAppContainer $c) {
             return new PasswordHook(
-                $c->query('PasswordRevisionService')
+                $c->query('TagRevisionService'),
+                $c->query('PasswordRevisionService'),
+                $c->query('PasswordTagRelationService')
             );
         });
-        $container->registerService('PasswordRevisionHook', function (IAppContainer $c) {
-            return new PasswordRevisionHook(
-                $c->query('PasswordRevisionService')
+        $container->registerService('TagHook', function (IAppContainer $c) {
+            return new TagHook(
+                $c->query('TagRevisionService'),
+                $c->query('PasswordRevisionService'),
+                $c->query('PasswordTagRelationService')
             );
         });
     }
@@ -691,10 +696,14 @@ class Application extends App {
         /** @var PasswordHook $passwordHook */
         $passwordHook = $container->query('PasswordHook');
         $hookManager->listen(Password::class, 'postClone', [$passwordHook, 'postClone']);
+        $hookManager->listen(Password::class, 'preDelete', [$passwordHook, 'preDelete']);
         $hookManager->listen(Password::class, 'postDelete', [$passwordHook, 'postDelete']);
-        /** @var PasswordRevisionHook $passwordRevisionHook */
-        $passwordRevisionHook = $container->query('PasswordRevisionHook');
-        $hookManager->listen(PasswordRevision::class, 'postClone', [$passwordRevisionHook, 'postClone']);
-        $hookManager->listen(PasswordRevision::class, 'preDelete', [$passwordRevisionHook, 'preDelete']);
+        $hookManager->listen(Password::class, 'preSetRevision', [$passwordHook, 'preSetRevision']);
+        /** @var TagHook $passwordHook */
+        $tagHook = $container->query('TagHook');
+        $hookManager->listen(Tag::class, 'postClone', [$tagHook, 'postClone']);
+        $hookManager->listen(Tag::class, 'preDelete', [$tagHook, 'preDelete']);
+        $hookManager->listen(Tag::class, 'postDelete', [$tagHook, 'postDelete']);
+        $hookManager->listen(Tag::class, 'preSetRevision', [$tagHook, 'preSetRevision']);
     }
 }

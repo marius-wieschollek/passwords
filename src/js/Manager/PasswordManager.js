@@ -49,7 +49,7 @@ class PasswordManager {
                     Events.fire('password.created', password);
                 })
                 .catch(() => {
-                    Messages.notification('Creating Password Failed');
+                    Messages.notification('Creating password failed');
                     reject(password);
                 });
         });
@@ -87,7 +87,10 @@ class PasswordManager {
 
     movePassword(password, folder) {
         return new Promise((resolve, reject) => {
-            if (password.id === folder) reject(password);
+            if (password.id === folder || password.folder === folder) {
+                reject(password);
+                return;
+            }
 
             let originalFolder = password.folder;
             password.folder = folder;
@@ -151,7 +154,7 @@ class PasswordManager {
                     });
             } else {
                 Messages.confirm('Do you want to delete the password', 'Delete password')
-                    .then(() => { this.deletePassword(true); })
+                    .then(() => { this.deletePassword(password, false); })
                     .catch(() => {reject(password);});
             }
         });

@@ -91,6 +91,7 @@
                     this.password.tags = this.tags;
                     PasswordManager.updatePassword(this.password);
                 }
+                $('div.tags-container input.add-tags').focus();
             },
             createAndAddTag: function (label) {
                 let query = label.toLowerCase();

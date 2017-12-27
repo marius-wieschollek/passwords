@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false" :items="breadcrumb"></breadcrumb>
+            <breadcrumb :showAddNew="false" :items="breadcrumb" />
             <div class="item-list">
                 <security-line v-if="$route.params.status === undefined"
                                v-for="(title, index) in securityStatus"
@@ -9,11 +9,11 @@
                                :status="index"
                                :label="title">
                 </security-line>
-                <password-line :password="password" v-for="password in passwords" :key="password.id"></password-line>
+                <password-line :password="password" v-for="password in passwords" :key="password.id" />
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type == 'password'" :password="detail.element"></password-details>
+            <password-details v-if="detail.type === 'password'" :password="detail.element" />
         </div>
     </div>
 </template>

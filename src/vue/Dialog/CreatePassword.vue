@@ -84,7 +84,7 @@
     export default {
         data() {
             return {
-                title       : 'New password',
+                title       : 'Create password',
                 showPassword: false,
                 showLoader  : false,
                 simplemde   : null,

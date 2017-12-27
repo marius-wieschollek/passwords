@@ -23,8 +23,8 @@
     export default {
         components: {
             Breadcrumb,
-            'password-details': PasswordDetails,
-            'password-line'   : PasswordLine
+            PasswordDetails,
+            PasswordLine
         },
         data() {
             return {
@@ -38,11 +38,11 @@
 
         created() {
             this.refreshView();
-            Events.on('data.changed', this.refreshView);
+            Events.on('password.changed', this.refreshView);
         },
 
         beforeDestroy() {
-            Events.off('data.changed', this.refreshView)
+            Events.off('password.changed', this.refreshView)
         },
 
         computed: {

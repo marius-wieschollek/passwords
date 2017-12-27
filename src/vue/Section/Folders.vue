@@ -1,17 +1,17 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"></breadcrumb>
+            <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"/>
             <div class="item-list">
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="draggable"></folder-line>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="draggable"/>
                 <password-line :password="password"
                                v-for="password in passwords"
                                :key="password.id"
-                               :draggable="draggable"></password-line>
+                               :draggable="draggable"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element"></password-details>
+            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -36,7 +36,7 @@
             return {
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
                 defaultTitle : Utility.translate('Folders'),
-                defaultPath  : '/show/folders/',
+                defaultPath  : '/show/folders',
                 currentFolder: '00000000-0000-0000-0000-000000000000',
                 draggable    : 'true',
                 folders      : [],
@@ -97,6 +97,10 @@
                         let folders = Utility.replaceOrAppendApiObject(this.folders, object);
                         this.folders = Utility.sortApiObjectArray(folders, 'label', true);
                     }
+                } else if (object.type === 'folder' && Utility.searchApiObjectInArray(this.folders, object) !== -1) {
+                    this.folders = Utility.removeApiObjectFromArray(this.folders, object);
+                } else if (object.type === 'password' && Utility.searchApiObjectInArray(this.passwords, object) !== -1) {
+                    this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                 }
             },
 
@@ -107,22 +111,39 @@
                     this.draggable = false;
                 }
 
-                this.breadcrumb = [
-                    {path: this.defaultPath, label: this.defaultTitle}
-                ];
-
-                if (typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder) {
-                    this.breadcrumb = [{path: this.defaultPath, label: '…'}];
-                    this.breadcrumb.push({path: '/show/folders/' + folder.parent.id, label: folder.parent.label})
-                }
-
-                if (folder.id !== this.defaultFolder) {
-                    this.breadcrumb.push({path: this.$route.path, label: folder.label});
-                }
-
                 this.folders = Utility.sortApiObjectArray(folder.folders, 'label', true);
                 this.passwords = Utility.sortApiObjectArray(folder.passwords, 'label', true);
                 this.currentFolder = folder.id;
+                this.updateBreadcrumb(folder);
+            },
+            updateBreadcrumb : function (folder) {
+                this.breadcrumb = [
+                    {path: this.defaultPath, label: this.defaultTitle, dropType: 'folder', folderId: this.defaultFolder}
+                ];
+
+                if (typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder) {
+                    this.breadcrumb[0].label = '…';
+                    let parent = folder.parent;
+                    this.breadcrumb.push(
+                        {
+                            path    : '/show/folders/' + parent.id,
+                            label   : parent.label,
+                            dropType: 'folder',
+                            folderId: parent.id
+                        }
+                    )
+                }
+
+                if (folder.id !== this.defaultFolder) {
+                    this.breadcrumb.push(
+                        {
+                            path    : this.$route.path,
+                            label   : folder.label,
+                            dropType: 'folder',
+                            folderId: folder.id
+                        }
+                    );
+                }
             }
         },
 

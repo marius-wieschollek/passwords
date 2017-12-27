@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false"></breadcrumb>
+            <breadcrumb :showAddNew="false" />
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <translate tag="li" icon="undo" slot="option-top" @click="restoreFolderAction(folder)">Restore</translate>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element"></password-details>
+            <password-details v-if="detail.type === 'password'" :password="detail.element" />
         </div>
     </div>
 </template>

@@ -1,10 +1,11 @@
 import $ from "jquery";
 
+/**
+ *
+ */
 export default new class DragManager {
 
     constructor() {
-        this._data = {};
-
         $(document).on('dragover', this.over);
     }
 
@@ -27,20 +28,19 @@ export default new class DragManager {
         return new Promise((resolve, reject) => {
             document.addEventListener('drop', (e) => {
                 e.preventDefault();
-                let $target = $(e.target).parents('[data-drop-type]');
                 $el.remove();
+                let $target = $(e.target);
+                if(!$target.data().dropType) {
+                    $target = $(e.target).parents('[data-drop-type]');
+                }
 
                 if ($target.length !== 0 && types.indexOf($target.data().dropType) !== -1) {
                     resolve($target.data())
                 } else {
-                    reject();
+                    reject({});
                 }
             }, false);
         })
-    }
-
-    drop(e, types, resolve, reject) {
-
     }
 
     over() {

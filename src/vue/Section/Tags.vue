@@ -1,14 +1,14 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :newTag="true" :items="breadcrumb"></breadcrumb>
+            <breadcrumb :newTag="true" :items="breadcrumb" />
             <div class="item-list">
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"></tag-line>
-                <password-line :password="password" v-for="password in passwords" :key="password.id"></password-line>
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" />
+                <password-line :password="password" v-for="password in passwords" :key="password.id" />
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type == 'password'" :password="detail.element"></password-details>
+            <password-details v-if="detail.type === 'password'" :password="detail.element" />
         </div>
     </div>
 </template>
@@ -63,8 +63,6 @@
         methods: {
             refreshView: function () {
                 this.breadcrumb = [];
-                this.passwords = [];
-                this.tags = [];
 
                 if (this.$route.params.tag !== undefined) {
                     let tag = this.$route.params.tag;
@@ -75,10 +73,12 @@
             },
 
             updateTagList: function (tags) {
+                this.passwords = [];
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },
 
             updatePasswordList: function (tag) {
+                this.tags = [];
                 if (tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
                     this.defaultPath = '/show/trash';

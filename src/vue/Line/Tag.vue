@@ -1,5 +1,5 @@
 <template>
-    <div class="row tag" v-if="enabled" :data-tag-id="tag.id" @click="openAction()">
+    <div class="row tag" :data-tag-id="tag.id" @click="openAction($event)">
         <i class="fa fa-star favourite" v-bind:class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon fa fa-tag" v-bind:style="faviconStyle"></div>
         <span class="title">{{ tag.label }}</span>
@@ -9,20 +9,21 @@
             <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
-                        <slot name="option-top"></slot>
+                        <slot name="option-top"/>
                         <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
                         <translate tag="li" @click="editAction()" icon="edit">Edit</translate>
                         <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
-                        <slot name="option-bottom"></slot>
+                        <slot name="option-bottom"/>
                     </ul>
                 </slot>
             </div>
         </div>
-        <slot name="buttons"></slot>
+        <slot name="buttons"/>
     </div>
 </template>
 
 <script>
+    import $ from "jquery";
     import Translate from '@vc/Translate.vue';
     import TagManager from '@js/Manager/TagManager';
 
@@ -39,7 +40,6 @@
 
         data() {
             return {
-                enabled : true,
                 showMenu: false,
             }
         },
@@ -60,10 +60,16 @@
                     .catch(() => { this.tag.favourite = !this.tag.favourite; });
             },
             toggleMenu($event) {
-                $event.stopPropagation();
                 this.showMenu = !this.showMenu;
+                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
-            openAction() {
+            menuEvent($e) {
+                if ($($e.target).closest('[data-tag-id=' + this.tag.id + '] .more').length !== 0) return;
+                this.showMenu = false;
+                $(document).off('click', this.menuEvent);
+            },
+            openAction($event) {
+                if ($($event.target).closest('.more').length !== 0) return;
                 this.$router.push({name: 'Tags', params: {tag: this.tag.id}});
             },
             detailsAction($event, section = null) {
@@ -73,8 +79,7 @@
                 }
             },
             deleteAction(skipConfirm = false) {
-                TagManager.deleteTag(this.tag)
-                    .then(() => {this.enabled = false;});
+                TagManager.deleteTag(this.tag);
             },
             editAction() {
                 TagManager.editTag(this.tag)
@@ -90,9 +95,9 @@
         .item-list {
             .row.tag {
                 .favicon {
-                    text-align : center;
-                    font-size  : 2.25rem;
-                    vertical-align: top;
+                    text-align     : center;
+                    font-size      : 2.25rem;
+                    vertical-align : top;
                 }
             }
         }

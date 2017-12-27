@@ -7,14 +7,16 @@
                 </a>
             </div>
             <div class="crumb svg ui-droppable" v-for="item in getItems">
-                <router-link :to="item.path">{{ item.label }}</router-link>
+                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
+                    {{ item.label }}
+                </router-link>
             </div>
         </div>
         <div class="actions creatable" v-if="showAddNew" v-bind:class="{active: isOpen}">
             <span class="button new" @click="toggleMenu()">
                 <span class="icon icon-add"></span>
             </span>
-            <div class="newPasswordMenu popovermenu bubble menu open menu-left" @click="toggleMenu()">
+            <div class="newPasswordMenu popovermenu bubble menu menu-left" @click="toggleMenu()">
                 <ul>
                     <li>
                         <span class="menuitem" data-action="folder" v-if="newFolder" @click="createFolder">

@@ -1,5 +1,9 @@
 <template>
-    <div class="row folder" v-if="enabled" :data-folder-id="folder.id" @dragstart="dragStartAction($event)" data-drop-type="folder" @click="openAction()">
+    <div class="row folder"
+         :data-folder-id="folder.id"
+         data-drop-type="folder"
+         @click="openAction($event)"
+         @dragstart="dragStartAction($event)">
         <i class="fa fa-star favourite" v-bind:class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" v-bind:style="faviconStyle">&nbsp;</div>
         <span class="title">{{ folder.label }}</span>
@@ -8,21 +12,22 @@
             <i class="fa fa-ellipsis-h"></i>
             <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
-                <ul>
-                    <slot name="option-top"></slot>
-                    <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
-                    <translate tag="li" @click="renameAction()" icon="pencil">Rename</translate>
-                    <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
-                    <slot name="option-bottom"></slot>
-                </ul>
+                    <ul>
+                        <slot name="option-top"/>
+                        <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
+                        <translate tag="li" @click="renameAction()" icon="pencil">Rename</translate>
+                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <slot name="option-bottom"/>
+                    </ul>
                 </slot>
             </div>
         </div>
-        <slot name="buttons"></slot>
+        <slot name="buttons"/>
     </div>
 </template>
 
 <script>
+    import $ from "jquery";
     import Translate from '@vc/Translate.vue';
     import DragManager from '@js/Manager/DragManager';
     import FolderManager from '@js/Manager/FolderManager';
@@ -40,7 +45,6 @@
 
         data() {
             return {
-                enabled: true,
                 showMenu: false,
             }
         },
@@ -61,10 +65,16 @@
                     .catch(() => { this.folder.favourite = !this.folder.favourite; });
             },
             toggleMenu($event) {
-                $event.stopPropagation();
                 this.showMenu = !this.showMenu;
+                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
-            openAction() {
+            menuEvent($e) {
+                if ($($e.target).closest('[data-folder-id=' + this.folder.id + '] .more').length !== 0) return;
+                this.showMenu = false;
+                $(document).off('click', this.menuEvent);
+            },
+            openAction($event) {
+                if ($($event.target).closest('.more').length !== 0) return;
                 this.$router.push({name: 'Folders', params: {folder: this.folder.id}});
             },
             detailsAction($event, section = null) {
@@ -74,8 +84,7 @@
                 }
             },
             deleteAction(skipConfirm = false) {
-                FolderManager.deleteFolder(this.folder)
-                    .then(() => {this.enabled = false;});
+                FolderManager.deleteFolder(this.folder);
             },
             renameAction() {
                 FolderManager.renameFolder(this.folder)
@@ -84,10 +93,8 @@
             dragStartAction($e) {
                 DragManager.start($e, this.folder.label, this.folder.icon, ['folder'])
                     .then((data) => {
-                        this.enabled = false;
                         FolderManager.moveFolder(this.folder, data.folderId)
-                            .then((f) => {this.folder = f;})
-                            .catch(() => {this.enabled = true;});
+                            .then((f) => {this.folder = f;});
                     });
             }
         }

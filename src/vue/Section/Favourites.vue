@@ -1,15 +1,15 @@
 <template>
     <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb></breadcrumb>
+            <breadcrumb />
             <div class="item-list">
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"></folder-line>
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"></tag-line>
-                <password-line :password="password" v-for="password in passwords" :key="password.id"></password-line>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" />
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" />
+                <password-line :password="password" v-for="password in passwords" :key="password.id" />
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type == 'password'" :password="detail.element"></password-details>
+            <password-details v-if="detail.type === 'password'" :password="detail.element" />
         </div>
     </div>
 </template>

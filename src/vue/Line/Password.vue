@@ -1,8 +1,7 @@
 <template>
     <div class="row password"
-         v-if="enabled"
          @click="copyPasswordAction($event)"
-         @dblclick="copyUsernameAction()"
+         @dblclick="copyUsernameAction($event)"
          @dragstart="dragStartAction($event)"
          :data-password-id="password.id">
         <i class="fa fa-star favourite" v-bind:class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
@@ -15,24 +14,25 @@
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
-                        <slot name="option-top"></slot>
+                        <slot name="option-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
                         <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
                         </li>
                         <translate tag="li" @click="editAction()" icon="pencil">Edit</translate>
-                        <translate tag="li" icon="trash">Delete</translate>
-                        <slot name="option-bottom"></slot>
+                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <slot name="option-bottom"/>
                     </ul>
                 </slot>
             </div>
         </div>
-        <slot name="buttons"></slot>
+        <slot name="buttons"/>
     </div>
 </template>
 
 <script>
+    import $ from "jquery";
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate.vue';
     import Utility from "@js/Classes/Utility";
@@ -53,7 +53,6 @@
 
         data() {
             return {
-                enabled     : true,
                 clickTimeout: null,
                 showMenu    : false
             }
@@ -79,14 +78,15 @@
 
         methods: {
             copyPasswordAction($event) {
-                if ($event.detail !== 1) return;
+                if ($event.detail !== 1 || $($event.target).closest('.more').length !== 0) return;
                 Utility.copyToClipboard(this.password.password);
 
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
                 this.clickTimeout =
                     setTimeout(function () { Messages.notification('Password was copied to clipboard') }, 300);
             },
-            copyUsernameAction() {
+            copyUsernameAction($event) {
+                if ($($event.target).closest('.more').length !== 0) return;
                 if (this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 Utility.copyToClipboard(this.password.username);
@@ -103,8 +103,13 @@
                     .catch(() => { this.password.favourite = !this.password.favourite; });
             },
             toggleMenu($event) {
-                $event.stopPropagation();
                 this.showMenu = !this.showMenu;
+                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+            },
+            menuEvent($e) {
+                if ($($e.target).closest('[data-password-id=' + this.password.id + '] .more').length !== 0) return;
+                this.showMenu = false;
+                $(document).off('click', this.menuEvent);
             },
             detailsAction($event, section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
@@ -121,16 +126,13 @@
                     .then((p) => {this.password = p;});
             },
             deleteAction() {
-                PasswordManager.deleteTag(this.password)
-                    .then(() => {this.enabled = false;});
+                PasswordManager.deletePassword(this.password);
             },
             dragStartAction($e) {
                 DragManager.start($e, this.password.label, this.password.icon, ['folder'])
                     .then((data) => {
-                        this.enabled = false;
                         PasswordManager.movePassword(this.password, data.folderId)
-                            .then((p) => {this.password = p;})
-                            .catch(() => {this.enabled = true;});
+                            .then((p) => {this.password = p;});
                     });
             }
         }

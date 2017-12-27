@@ -149,7 +149,7 @@ class TagManager {
                     });
             } else {
                 Messages.confirm('Do you want to delete the tag', 'Delete tag')
-                    .then(() => { this.deleteTag(true); })
+                    .then(() => { this.deleteTag(tag, false); })
                     .catch(() => {reject(tag);});
             }
         });

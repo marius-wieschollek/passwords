@@ -16,7 +16,9 @@ Array.prototype.remove = function (index) {
         this.shift();
         return this;
     }
-    return this.splice(index, 1);
+
+    this.splice(index, 1);
+    return this;
 };
 
 /**

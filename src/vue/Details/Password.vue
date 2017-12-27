@@ -57,14 +57,14 @@
 </template>
 
 <script>
-    import Translate from '@vc/Translate.vue';
-    import QrCode from 'vue-qrcode-component'
+    import $ from "jquery";
     import Tabs from '@vc/Tabs.vue';
     import Tags from '@vc/Tags.vue';
     import API from '@js/Helper/api';
     import SimpleMDE from 'simplemde';
+    import QrCode from 'vue-qrcode-component'
+    import Translate from '@vc/Translate.vue';
     import ThemeManager from '@js/Manager/ThemeManager';
-    import $ from "jquery";
 
     export default {
         components: {

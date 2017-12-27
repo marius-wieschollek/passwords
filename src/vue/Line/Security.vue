@@ -1,6 +1,6 @@
 <template>
     <div class="row security" :data-security-level="status" @click="setSecurityStatus">
-        <translate class="title" icon="shield" :iconClass="securityCheck" :say="label"></translate>
+        <translate class="title" icon="shield" :iconClass="securityCheck" :say="label" />
     </div>
 </template>
 
