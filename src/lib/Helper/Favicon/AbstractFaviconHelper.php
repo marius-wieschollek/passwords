@@ -72,12 +72,8 @@ abstract class AbstractFaviconHelper {
             return $this->fileCacheService->getFile($faviconFile);
         }
 
-        $url         = $this->getFaviconUrl($domain);
-        $faviconData = $this->getHttpRequest($url);
-
-        if($faviconData === null) {
-            throw new \Exception('Favicon service returned no data');
-        }
+        $faviconData = $this->getFaviconData($domain);
+        if($faviconData === null) throw new \Exception('Favicon service returned no data');
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }
@@ -111,18 +107,6 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
-     * @param string $url
-     *
-     * @return mixed
-     */
-    protected function getHttpRequest(string $url) {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-
-        return $request->sendWithRetry();
-    }
-
-    /**
      * @return mixed
      */
     protected function recolorDefaultFavicon() {
@@ -137,10 +121,34 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
+     * @param string $url
+     *
+     * @return mixed
+     */
+    protected function getHttpRequest(string $url) {
+        $request = new RequestHelper();
+        $request->setUrl($url);
+
+        return $request->sendWithRetry();
+    }
+
+    /**
+     * @param string $domain
+     *
+     * @return null|string
+     */
+    protected function getFaviconData(string $domain): ?string {
+        $url = $this->getFaviconUrl($domain);
+
+        return $this->getHttpRequest($url);
+    }
+
+    /**
      * @param string $domain
      *
      * @return string
      */
-    abstract protected function getFaviconUrl(string $domain): string;
-
+    protected function getFaviconUrl(string $domain): string {
+        return "http://{$domain}/favicon.ico";
+    }
 }

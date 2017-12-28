@@ -67,6 +67,7 @@ class FaviconService {
      *
      * @return ISimpleFile
      * @throws ApiException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getFavicon(string $domain, int $size = 24) {
         list($domain, $size) = $this->validateInput($domain, $size);
@@ -106,6 +107,7 @@ class FaviconService {
      * @param int         $size
      *
      * @return ISimpleFile
+     * @throws \OCP\AppFramework\QueryException
      */
     protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ISimpleFile {
         $faviconData = $favicon->getContent();

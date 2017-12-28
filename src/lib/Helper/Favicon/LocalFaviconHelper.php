@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\HelperService;
 
@@ -36,26 +37,33 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return string
+     * @return null|string
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getFaviconData(string $domain): ?string {
+        list($html, $url) = $this->getHttpRequest('https://panel.preyproject.com/login');//'http://'.$domain);
 
-        $html = $this->getHttpRequest('http://'.$domain);
         if(!empty($html)) {
             $patterns = $this->getSearchPatterns();
             foreach ($patterns as $pattern) {
-                $url = $this->checkForImage($html, $pattern['html'], $pattern['tag'], $domain);
+                $image = $this->checkForImage($html, $pattern['html'], $pattern['tag'], $domain);
 
-                if($url !== null) return $url;
+                if($image !== null) return $image;
             }
         }
 
-        $pngFavicon = "http://{$domain}/favicon.png";
-        if(@fopen($pngFavicon, 'r')) return $pngFavicon;
+        list($data, , , $isIcon) = $this->getHttpRequest("http://{$domain}/favicon.png");
+        if($isIcon && $data) return $data;
 
-        $this->icoFile = "http://{$domain}/favicon.ico";
+        list($data, , , $isIcon) = $this->getHttpRequest($url."/favicon.png");
+        if($isIcon && $data) return $data;
 
-        return 'icon';
+        list($data, , , $isIcon) = $this->getHttpRequest("http://{$domain}/favicon.ico");
+        if($isIcon && $data) return $this->convertIcoFile($data);
+
+        list($data, , , $isIcon) = $this->getHttpRequest($url."/favicon.ico");
+        if($isIcon && $data) return $this->convertIcoFile($data);
+
+        return $this->getDefaultFavicon()->getContent();
     }
 
     /**
@@ -64,17 +72,20 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return mixed|string
      */
     protected function getHttpRequest(string $url) {
-        if($url !== 'icon') {
-            return parent::getHttpRequest($url);
-        }
+        $request = new RequestHelper();
+        $request->setUrl($url);
+        $data = $request->sendWithRetry();
 
-        $imageData = parent::getHttpRequest($this->icoFile);
+        $url         = $request->getInfo('url');
+        $contentType = $request->getInfo('content_type');
+        $isIcon      = substr($contentType, 0, 5) === 'image';
 
-        if(empty($imageData)) {
-            return $this->getDefaultFavicon()->getContent();
-        }
-
-        return $this->convertIcoFile($imageData);
+        return [
+            $data,
+            $url,
+            $contentType,
+            $isIcon
+        ];
     }
 
     /**
@@ -102,8 +113,9 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             foreach ($htmlMatches[1] as $tagSource) {
                 if(preg_match($tagPattern, $tagSource, $tagMatches)) {
                     $url = $this->makeUrl($tagMatches[1], $domain);
+                    list($data, , , $isIcon) = $this->getHttpRequest($url);
 
-                    if(@fopen($url, 'r')) return $url;
+                    if($isIcon && $data) return $data;
                 }
             }
         };
@@ -118,10 +130,13 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return string
      */
     protected function makeUrl(string $url, string $domain): string {
-        if(substr($url, 0, 2) == '//') {
+        if(substr($url, 0, 2) === '//') {
             return 'http:'.$url;
         }
-        if(substr($url, 0, 1) == '/') {
+        if(substr($url, 0, 1) === '/') {
+            return "http://{$domain}{$url}";
+        }
+        if(substr($url, 0, 4) !== 'http') {
             return "http://{$domain}/{$url}";
         }
 

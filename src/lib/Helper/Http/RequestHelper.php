@@ -46,7 +46,7 @@ class RequestHelper {
     /**
      * @var string
      */
-    protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0';
+    protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0';
 
     /**
      * @var int[]
@@ -224,7 +224,7 @@ class RequestHelper {
     /**
      * @param string|null $key
      *
-     * @return array
+     * @return mixed
      */
     public function getInfo(string $key = null) {
         return $key === null ? $this->info:$this->info[ $key ];
