@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\Encryption;
 
+use Exception;
+use OC;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\FolderRevision;
@@ -49,17 +51,17 @@ class SseV1Encryption implements EncryptionInterface {
      *
      * @return AbstractRevisionEntity
      * @throws \OCP\PreConditionNotMetException
-     * @throws \Exception
+     * @throws Exception
      */
     public function encryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity {
 
-        $sseKey        = $this->getUserKey();
-        $encryptionKey = $this->getEncryptionKey($sseKey);
+        $sseKey        = $this->getSecureRandom();
+        $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
         foreach ($fields as $field) {
             $value          = $object->getProperty($field);
-            $encryptedValue = \OC::$server->getCrypto()->encrypt($value, $encryptionKey);
+            $encryptedValue = OC::$server->getCrypto()->encrypt($value, $encryptionKey);
             $object->setProperty($field, base64_encode($encryptedValue));
         }
 
@@ -72,17 +74,17 @@ class SseV1Encryption implements EncryptionInterface {
      * @param AbstractRevisionEntity $object
      *
      * @return AbstractRevisionEntity
-     * @throws \Exception
+     * @throws Exception
      */
     public function decryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity {
 
         $sseKey        = base64_decode($object->getSseKey());
-        $encryptionKey = $this->getEncryptionKey($sseKey);
+        $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
         foreach ($fields as $field) {
             $value          = base64_decode($object->getProperty($field));
-            $decryptedValue = \OC::$server->getCrypto()->decrypt($value, $encryptionKey);
+            $decryptedValue = OC::$server->getCrypto()->decrypt($value, $encryptionKey);
             $object->setProperty($field, $decryptedValue);
         }
 
@@ -93,7 +95,7 @@ class SseV1Encryption implements EncryptionInterface {
      * @param $object
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getFieldsToProcess($object): array {
         switch (get_class($object)) {
@@ -105,19 +107,22 @@ class SseV1Encryption implements EncryptionInterface {
                 return $this->tag;
         }
 
-        throw new \Exception('Unknown object type');
+        throw new Exception('Unknown object type');
     }
 
     /**
      * @param string $passwordKey
      *
+     * @param string $userId
+     *
      * @return string
      * @throws \OCP\PreConditionNotMetException
+     * @throws  Exception
      */
-    protected function getEncryptionKey(string $passwordKey): string {
+    protected function getEncryptionKey(string $passwordKey, string $userId): string {
         return base64_encode(
             $this->getServerKey().
-            $this->getUserKey().
+            $this->getUserKey($userId).
             $passwordKey
         );
     }
@@ -126,27 +131,33 @@ class SseV1Encryption implements EncryptionInterface {
      * @return string
      */
     protected function getServerKey(): string {
-        $serverKey = \OC::$server->getConfig()->getAppValue(Application::APP_NAME, 'SSEv1ServerKey', null);
+        $serverKey = OC::$server->getConfig()->getAppValue(Application::APP_NAME, 'SSEv1ServerKey', null);
 
         if($serverKey === null || strlen($serverKey) < self::MINIMUM_KEY_LENGTH) {
             $serverKey = $this->getSecureRandom();
-            \OC::$server->getConfig()->setAppValue(Application::APP_NAME, 'SSEv1ServerKey', $serverKey);
+            OC::$server->getConfig()->setAppValue(Application::APP_NAME, 'SSEv1ServerKey', $serverKey);
         }
 
         return $serverKey;
     }
 
     /**
+     * @param string $userId
+     *
      * @return string
+     * @throws Exception
      * @throws \OCP\PreConditionNotMetException
      */
-    protected function getUserKey(): string {
-        $user    = \OC::$server->getUserSession()->getUser()->getUID();
-        $userKey = \OC::$server->getConfig()->getUserValue($user, Application::APP_NAME, 'SSEv1UserKey', null);
+    protected function getUserKey(string $userId): string {
+        $user    = OC::$server->getUserSession()->getUser();
+        if($user !== null && $user->getUID() !== $userId) {
+            throw new Exception('User key requested with illegal user id: '.$userId);
+        }
+        $userKey = OC::$server->getConfig()->getUserValue($userId, Application::APP_NAME, 'SSEv1UserKey', null);
 
         if($userKey === null || strlen($userKey) < self::MINIMUM_KEY_LENGTH) {
             $userKey = $this->getSecureRandom();
-            \OC::$server->getConfig()->setUserValue($user, Application::APP_NAME, 'SSEv1UserKey', $userKey);
+            OC::$server->getConfig()->setUserValue($userId, Application::APP_NAME, 'SSEv1UserKey', $userKey);
         }
 
         return $userKey;
@@ -158,10 +169,8 @@ class SseV1Encryption implements EncryptionInterface {
      * @return string
      */
     protected function getSecureRandom(int $length = self::MINIMUM_KEY_LENGTH): string {
-        if($length < self::MINIMUM_KEY_LENGTH) {
-            $length = self::MINIMUM_KEY_LENGTH;
-        }
+        if($length < self::MINIMUM_KEY_LENGTH) $length = self::MINIMUM_KEY_LENGTH;
 
-        return \OC::$server->getSecureRandom()->generate($length);
+        return OC::$server->getSecureRandom()->generate($length);
     }
 }

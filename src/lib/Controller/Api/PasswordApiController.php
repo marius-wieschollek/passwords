@@ -101,8 +101,8 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      * @param array  $tags
      *
-     * @TODO     check folder access
-     * @TODO     check folder is system trash
+     * @TODO check folder access
+     * @TODO check folder is system trash
      *
      * @return JSONResponse
      * @internal param array $folders

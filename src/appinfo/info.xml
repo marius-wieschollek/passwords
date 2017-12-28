@@ -43,6 +43,11 @@
 	<background-jobs>
 		<job>OCA\Passwords\Cron\CheckPasswordsJob</job>
 	</background-jobs>
+	<repair-steps>
+		<post-migration>
+			<step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
+		</post-migration>
+	</repair-steps>
 	<documentation>
 		<user>https://github.com/marius-wieschollek/passwords/blob/stable/README.md</user>
 		<admin>https://github.com/marius-wieschollek/passwords/wiki</admin>

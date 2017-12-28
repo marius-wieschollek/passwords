@@ -76,19 +76,18 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
-            $folders = $this->modelService->findAll();
+            $models = $this->modelService->findAll();
             $results = [];
 
-            foreach ($folders as $folder) {
-                if($folder->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($folder, $details, true, true);
+            foreach ($models as $model) {
+                if($model->isSuspended()) continue;
+                $object = $this->objectHelper->getApiObject($model, $details, true, true);
 
                 if($object !== null) $results[] = $object;
             }
 
             return $this->createJsonResponse($results);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -104,12 +103,12 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
-            $folders = $this->modelService->findAll();
+            $models = $this->modelService->findAll();
             $results = [];
 
-            foreach ($folders as $folder) {
-                if($folder->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($folder, $details);
+            foreach ($models as $model) {
+                if($model->isSuspended()) continue;
+                $object = $this->objectHelper->getApiObject($model, $details);
                 if($object === null) continue;
 
                 foreach ($criteria as $key => $value) {
@@ -125,7 +124,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
             return $this->createJsonResponse($results);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -142,11 +140,10 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
             $model  = $this->modelService->findByUuid($id);
-            $folder = $this->objectHelper->getApiObject($model, $details, false);
+            $object = $this->objectHelper->getApiObject($model, $details, false);
 
-            return $this->createJsonResponse($folder);
+            return $this->createJsonResponse($object);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -174,7 +171,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -207,7 +203,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }

@@ -20,6 +20,8 @@ use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\FolderRevisionMapper;
+use OCA\Passwords\Db\Legacy\LegacyCategoryMapper;
+use OCA\Passwords\Db\Legacy\LegacyPasswordMapper;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
@@ -52,8 +54,11 @@ use OCA\Passwords\Hooks\FolderHook;
 use OCA\Passwords\Hooks\FolderRevisionHook;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Hooks\PasswordHook;
-use OCA\Passwords\Hooks\PasswordRevisionHook;
 use OCA\Passwords\Hooks\TagHook;
+use OCA\Passwords\Migration\Legacy\DecryptionModule;
+use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
+use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
+use OCA\Passwords\Migration\LegacyDatabaseMigration;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
@@ -82,6 +87,11 @@ use OCP\Files\IAppData;
 class Application extends App {
 
     const APP_NAME = 'passwords';
+
+    /**
+     * @var null
+     */
+    protected $userId = false;
 
     /**
      * Application constructor.
@@ -171,6 +181,11 @@ class Application extends App {
          * Register Hooks
          */
         $this->registerInternalHooks();
+
+        /**
+         * Register Legacy Migration Classes
+         */
+        $this->registerLegacyClasses();
     }
 
     /**
@@ -182,12 +197,16 @@ class Application extends App {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected function getUserId(): string {
-        $user = $this->getContainer()->getServer()->getUserSession()->getUser();
+    protected function getUserId(): ?string {
+        if($this->userId === false) {
+            $user = $this->getContainer()->getServer()->getUserSession()->getUser();
 
-        return $user === null ? '':$user->getUID();
+            $this->userId = $user === null ? null:$user->getUID();
+        }
+
+        return $this->userId;
     }
 
     /**
@@ -365,69 +384,67 @@ class Application extends App {
     protected function registerServices(): void {
         $container = $this->getContainer();
 
-        if($this->getContainer()->getServer()->getUserSession()->getUser()) {
-            $container->registerService('FolderService', function (IAppContainer $c) {
-                return new FolderService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('FolderMapper')
-                );
-            });
+        $container->registerService('FolderService', function (IAppContainer $c) {
+            return new FolderService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('FolderMapper')
+            );
+        });
 
-            $container->registerService('FolderRevisionService', function (IAppContainer $c) {
-                return new FolderRevisionService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('FolderRevisionMapper'),
-                    $c->query('ValidationService'),
-                    $c->query('EncryptionService')
-                );
-            });
+        $container->registerService('FolderRevisionService', function (IAppContainer $c) {
+            return new FolderRevisionService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('FolderRevisionMapper'),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
+            );
+        });
 
-            $container->registerService('PasswordService', function (IAppContainer $c) {
-                return new PasswordService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('PasswordMapper')
-                );
-            });
+        $container->registerService('PasswordService', function (IAppContainer $c) {
+            return new PasswordService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('PasswordMapper')
+            );
+        });
 
-            $container->registerService('PasswordRevisionService', function (IAppContainer $c) {
-                return new PasswordRevisionService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('PasswordRevisionMapper'),
-                    $c->query('ValidationService'),
-                    $c->query('EncryptionService')
-                );
-            });
+        $container->registerService('PasswordRevisionService', function (IAppContainer $c) {
+            return new PasswordRevisionService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('PasswordRevisionMapper'),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
+            );
+        });
 
-            $container->registerService('TagService', function (IAppContainer $c) {
-                return new TagService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('TagMapper')
-                );
-            });
+        $container->registerService('TagService', function (IAppContainer $c) {
+            return new TagService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('TagMapper')
+            );
+        });
 
-            $container->registerService('TagRevisionService', function (IAppContainer $c) {
-                return new TagRevisionService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('TagRevisionMapper'),
-                    $c->query('ValidationService'),
-                    $c->query('EncryptionService')
-                );
-            });
+        $container->registerService('TagRevisionService', function (IAppContainer $c) {
+            return new TagRevisionService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('TagRevisionMapper'),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
+            );
+        });
 
-            $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
-                return new PasswordTagRelationService(
-                    $c->getServer()->getUserSession()->getUser(),
-                    $c->query('HookManager'),
-                    $c->query('PasswordTagRelationMapper')
-                );
-            });
-        }
+        $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
+            return new PasswordTagRelationService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('PasswordTagRelationMapper')
+            );
+        });
 
         $container->registerService('FileCacheService', function (IAppContainer $c) {
             return new FileCacheService(
@@ -674,6 +691,53 @@ class Application extends App {
                 $this->getFileCacheService(),
                 $c->query('ConfigurationService'),
                 $c->getServer()->getLogger()
+            );
+        });
+    }
+
+    /**
+     *
+     */
+    protected function registerLegacyClasses(): void {
+        $container = $this->getContainer();
+
+        $container->registerAlias('DecryptionModule', DecryptionModule::class);
+
+        $container->registerService('LegacyPasswordMapper', function (IAppContainer $c) {
+            return new LegacyPasswordMapper(
+                $c->getServer()->getDatabaseConnection()
+            );
+        });
+
+        $container->registerService('LegacyCategoryMapper', function (IAppContainer $c) {
+            return new LegacyCategoryMapper(
+                $c->getServer()->getDatabaseConnection()
+            );
+        });
+
+        $container->registerService('LegacyPasswordMigration', function (IAppContainer $c) {
+            return new LegacyPasswordMigration(
+                $c->query('PasswordService'),
+                $c->query('DecryptionModule'),
+                $c->query('LegacyPasswordMapper'),
+                $c->query('PasswordRevisionService'),
+                $c->query('PasswordTagRelationService')
+            );
+        });
+
+        $container->registerService('LegacyCategoryMigration', function (IAppContainer $c) {
+            return new LegacyCategoryMigration(
+                $c->query('TagService'),
+                $c->query('LegacyCategoryMapper'),
+                $c->query('TagRevisionService')
+            );
+        });
+
+        $container->registerService(LegacyDatabaseMigration::class, function (IAppContainer $c) {
+            return new LegacyDatabaseMigration(
+                $c->query('ConfigurationService'),
+                $c->query('LegacyCategoryMigration'),
+                $c->query('LegacyPasswordMigration')
             );
         });
     }

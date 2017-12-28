@@ -118,7 +118,7 @@ class FolderRevisionService extends AbstractRevisionService {
         bool $favourite
     ): FolderRevision {
         $model = new FolderRevision();
-        $model->setUserId($this->user->getUID());
+        $model->setUserId($this->userId);
         $model->setUuid($this->generateUuidV4());
         $model->setHidden($hidden);
         $model->setTrashed($trashed);

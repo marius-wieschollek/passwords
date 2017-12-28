@@ -34,9 +34,9 @@ abstract class AbstractMapper extends Mapper {
      * AbstractMapper constructor.
      *
      * @param IDBConnection $db
-     * @param string        $userId
+     * @param string|null   $userId
      */
-    public function __construct(IDBConnection $db, $userId) {
+    public function __construct(IDBConnection $db, string $userId = null) {
         parent::__construct($db, static::TABLE_NAME);
         $this->userId = $userId;
     }
@@ -144,7 +144,7 @@ abstract class AbstractMapper extends Mapper {
                 throw new \Exception('Illegal field `'.static::TABLE_NAME.'`.`'.$field.'` in database request');
             }
 
-            $sql      .= ' '.$concat.' `'.$field.'` '.$operator.' ? ';
+            $sql      .= " {$concat} `{$field}` {$operator} ? ";
             $params[] = $value;
         }
 
@@ -155,10 +155,10 @@ abstract class AbstractMapper extends Mapper {
      * @return array
      */
     protected function getStatement(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = 0 ';
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = 0';
 
         $params = [];
-        if($this->userId != '') {
+        if($this->userId !== null) {
             $sql      .= ' AND `user_id` = ?';
             $params[] = $this->userId;
         }

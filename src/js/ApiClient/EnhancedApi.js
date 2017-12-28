@@ -600,7 +600,11 @@ export default class EnhancedApi extends SimpleApi {
     static _generatePasswordTitle(data) {
         data.label = String(data.username);
         if (data.url) {
-            data.label += '@' + SimpleApi.parseUrl(data.url, 'host').replace('www.', '');
+            if(data.label.indexOf('@') !== -1) {
+                data.label = data.label.substr(0, data.label.indexOf('@'));
+            }
+            data.label += '@' + SimpleApi.parseUrl(data.url, 'host')
+                .replace(/^(m|www|www2|mail|email|login|signin)\./, '');
         }
     }
 

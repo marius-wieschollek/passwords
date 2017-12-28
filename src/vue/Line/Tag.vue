@@ -1,7 +1,7 @@
 <template>
     <div class="row tag" :data-tag-id="tag.id" @click="openAction($event)">
         <i class="fa fa-star favourite" :class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon" :style="{color: this.tag.color}">&nbsp;</div>
+        <div class="favicon fa fa-tag" :style="{color: this.tag.color}"></div>
         <span class="title">{{ tag.label }}</span>
         <div class="date">{{ tag.updated.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">

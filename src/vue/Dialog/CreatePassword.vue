@@ -88,7 +88,7 @@
                 showPassword: false,
                 showLoader  : false,
                 simplemde   : null,
-                password    : {sseType: 'SSEv1r1'},
+                password    : {sseType: 'SSEv1r1', notes: ''},
                 isSubmitted : false,
                 _success    : null,
                 _fail       : null,
@@ -108,7 +108,8 @@
                     autoDownloadFontAwesome: false,
                     spellChecker           : false,
                     placeholder            : Utility.translate('Take some notes'),
-                    status                 : false
+                    status                 : false,
+                    initialValue           : this.password.notes
                 });
             ThemeManager.setBorderColor('#passwords-create-new .section-title, #passwords-create-new .notes label');
         },
@@ -154,6 +155,12 @@
                         console.error(e);
                     }
                 }
+            }
+        },
+
+        watch: {
+            password: function (password) {
+                this.simplemde.value(password.notes);
             }
         }
     };

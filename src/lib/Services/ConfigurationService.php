@@ -34,7 +34,7 @@ class ConfigurationService {
      * @param string  $userId
      * @param IConfig $config
      */
-    public function __construct($userId, IConfig $config) {
+    public function __construct(?string $userId, IConfig $config) {
         $this->config = $config;
         $this->userId = $userId;
     }

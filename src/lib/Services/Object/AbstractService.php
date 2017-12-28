@@ -10,7 +10,6 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\AbstractEntity;
 use OCA\Passwords\Hooks\Manager\HookManager;
-use OCP\IUser;
 
 /**
  * Class AbstractService
@@ -20,9 +19,9 @@ use OCP\IUser;
 abstract class AbstractService {
 
     /**
-     * @var IUser
+     * @var string
      */
-    protected $user;
+    protected $userId;
 
     /**
      * @var HookManager
@@ -37,14 +36,14 @@ abstract class AbstractService {
     /**
      * PasswordService constructor.
      *
-     * @param IUser       $user
+     * @param string      $userId
      * @param HookManager $hookManager
      */
     public function __construct(
-        IUser $user,
+        ?string $userId,
         HookManager $hookManager
     ) {
-        $this->user        = $user;
+        $this->userId      = $userId;
         $this->hookManager = $hookManager;
     }
 

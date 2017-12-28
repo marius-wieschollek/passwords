@@ -13,7 +13,6 @@ use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Hooks\Manager\HookManager;
-use OCP\IUser;
 
 /**
  * Class AbstractModelService
@@ -30,14 +29,14 @@ abstract class AbstractModelService extends AbstractService {
     /**
      * AbstractParentEntityService constructor.
      *
-     * @param IUser          $user
+     * @param string         $userId
      * @param AbstractMapper $mapper
      * @param HookManager    $hookManager
      */
-    public function __construct(IUser $user, HookManager $hookManager, AbstractMapper $mapper) {
+    public function __construct(?string $userId, HookManager $hookManager, AbstractMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($user, $hookManager);
+        parent::__construct($userId, $hookManager);
     }
 
     /**
@@ -105,7 +104,7 @@ abstract class AbstractModelService extends AbstractService {
         /** @var AbstractModelEntity $model */
         $model = new $this->class();
         $model->setDeleted(false);
-        $model->setUserId($this->user->getUID());
+        $model->setUserId($this->userId);
         $model->setUuid($this->generateUuidV4());
         $model->setCreated(time());
         $model->setUpdated(time());

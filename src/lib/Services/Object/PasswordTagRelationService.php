@@ -14,7 +14,6 @@ use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Hooks\Manager\HookManager;
-use OCP\IUser;
 
 /**
  * Class PasswordTagRelationService
@@ -36,14 +35,14 @@ class PasswordTagRelationService extends AbstractService {
     /**
      * AbstractParentEntityService constructor.
      *
-     * @param IUser                     $user
+     * @param string                    $userId
      * @param PasswordTagRelationMapper $mapper
      * @param HookManager               $hookManager
      */
-    public function __construct(IUser $user, HookManager $hookManager, PasswordTagRelationMapper $mapper) {
+    public function __construct(?string $userId, HookManager $hookManager, PasswordTagRelationMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($user, $hookManager);
+        parent::__construct($userId, $hookManager);
     }
 
     /**
@@ -106,7 +105,7 @@ class PasswordTagRelationService extends AbstractService {
     protected function createModel(PasswordRevision $password, TagRevision $tag): PasswordTagRelation {
         $model = new PasswordTagRelation();
         $model->setDeleted(false);
-        $model->setUserId($this->user->getUID());
+        $model->setUserId($this->userId);
         $model->setCreated(time());
         $model->setUpdated(time());
 

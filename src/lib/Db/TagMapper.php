@@ -17,7 +17,6 @@ class TagMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_tag';
 
-
     /**
      * @param string $passwordUuid
      * @param bool   $includeHidden
@@ -25,19 +24,21 @@ class TagMapper extends AbstractMapper {
      * @return Tag[]
      */
     public function getByPassword(string $passwordUuid, bool $includeHidden = false): array {
-        $tagTable = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $relationTable  = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
+        $tagTable      = '`*PREFIX*'.static::TABLE_NAME.'`';
+        $relationTable = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
 
-        $sql = 'SELECT '.$tagTable.'.* FROM '.$tagTable.
-               ' INNER JOIN '.$relationTable.' ON '.$tagTable.'.`uuid` = '.$relationTable.'.`tag`'.
-               ' WHERE '.$tagTable.'.`deleted` = 0 AND '.$tagTable.'.`user_id` = ?'.
-               ' AND '.$relationTable.'.`password` = ? AND '.$relationTable.'.`deleted` = 0 AND '.$relationTable.
-               '.`user_id` = ?';
+        $sql = "SELECT {$tagTable}.* FROM {$tagTable}".
+               " INNER JOIN {$relationTable} ON {$tagTable}.`uuid` = {$relationTable}.`tag`".
+               " WHERE {$tagTable}.`deleted` = 0".
+               ($this->userId !== null ? " AND {$tagTable}.`user_id` = ?":'').
+               " AND {$relationTable}.`password` = ? AND {$relationTable}.`deleted` = 0".
+               ($this->userId !== null ? " AND {$relationTable}.`user_id` = ?":'');
 
-        if(!$includeHidden) $sql .= ' AND '.$relationTable.'.`hidden` = 0';
+        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = 0";
 
-        //var_dump($sql);
+        $params = [$passwordUuid];
+        if($this->userId !== null) $params = [$this->userId, $passwordUuid, $this->userId];
 
-        return $this->findEntities($sql, [$this->userId, $passwordUuid, $this->userId]);
+        return $this->findEntities($sql, $params);
     }
 }
