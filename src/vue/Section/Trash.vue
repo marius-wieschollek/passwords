@@ -1,7 +1,7 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false" />
+            <breadcrumb :showAddNew="false"/>
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <translate tag="li" icon="undo" slot="option-top" @click="restoreFolderAction(folder)">Restore</translate>
@@ -10,12 +10,13 @@
                     <translate tag="li" icon="undo" slot="option-top" @click="restoreTagAction(tag)">Restore</translate>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
-                    <translate tag="li" icon="undo" slot="option-top" @click="restorePasswordAction(password)">Restore</translate>
+                    <translate tag="li" icon="undo" slot="option-top" @click="restorePasswordAction(password)">Restore
+                    </translate>
                 </password-line>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element" />
+            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -37,8 +38,9 @@
     export default {
         data() {
             return {
-                tags: [],
-                folders: [],
+                loading  : true,
+                tags     : [],
+                folders  : [],
                 passwords: [],
                 detail   : {
                     type   : 'none',
@@ -73,36 +75,39 @@
 
         methods: {
             refreshView: function () {
-                API.findPasswords({trashed:true}).then(this.updatePasswordList);
-                API.findFolders({trashed:true}).then(this.updateFolderList);
-                API.findTags({trashed:true}).then(this.updateTagList);
+                API.findPasswords({trashed: true}).then(this.updatePasswordList);
+                API.findFolders({trashed: true}).then(this.updateFolderList);
+                API.findTags({trashed: true}).then(this.updateTagList);
             },
 
             updatePasswordList: function (passwords) {
+                this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label');
             },
 
             updateFolderList: function (folders) {
+                this.loading = false;
                 this.folders = Utility.sortApiObjectArray(folders, 'label');
             },
 
             updateTagList: function (tags) {
+                this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },
 
             restorePasswordAction(password) {
                 PasswordManager.restorePassword(password);
-                API.findPasswords({trashed:true}).then(this.updatePasswordList);
+                API.findPasswords({trashed: true}).then(this.updatePasswordList);
             },
 
             restoreFolderAction(folder) {
                 FolderManager.restoreFolder(folder);
-                API.findFolders({trashed:true}).then(this.updateFolderList);
+                API.findFolders({trashed: true}).then(this.updateFolderList);
             },
 
             restoreTagAction(tag) {
                 TagManager.restoreTag(tag);
-                API.findTags({trashed:true}).then(this.updateTagList);
+                API.findTags({trashed: true}).then(this.updateTagList);
             }
         }
     }

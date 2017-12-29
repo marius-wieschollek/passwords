@@ -1,15 +1,15 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb />
+            <breadcrumb/>
             <div class="item-list">
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" />
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" />
-                <password-line :password="password" v-for="password in passwords" :key="password.id" />
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
+                <password-line :password="password" v-for="password in passwords" :key="password.id"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element" />
+            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -27,6 +27,7 @@
     export default {
         data() {
             return {
+                loading  : true,
                 passwords: [],
                 folders  : [],
                 tags     : [],
@@ -68,14 +69,17 @@
             },
 
             updatePasswordList: function (passwords) {
+                this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label');
             },
 
             updateFolderList: function (folders) {
+                this.loading = false;
                 this.folders = Utility.sortApiObjectArray(folders, 'label');
             },
 
             updateTagList: function (tags) {
+                this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             }
         }

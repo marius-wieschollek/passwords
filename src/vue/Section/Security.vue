@@ -1,7 +1,7 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false" :items="breadcrumb" />
+            <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
                 <security-line v-if="$route.params.status === undefined"
                                v-for="(title, index) in securityStatus"
@@ -9,11 +9,11 @@
                                :status="index"
                                :label="title">
                 </security-line>
-                <password-line :password="password" v-for="password in passwords" :key="password.id" />
+                <password-line :password="password" v-for="password in passwords" :key="password.id"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element" />
+            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -36,6 +36,7 @@
         },
         data() {
             return {
+                loading       : false,
                 passwords     : [],
                 detail        : {
                     type   : 'none',
@@ -44,7 +45,7 @@
                 securityStatus: [
                     'Secure', 'Weak', 'Broken'
                 ],
-                breadcrumb: []
+                breadcrumb    : []
             }
         },
 
@@ -67,10 +68,12 @@
             refreshView: function () {
                 if (this.$route.params.status !== undefined) {
                     let status = this.$route.params.status,
-                        label = this.securityStatus[status];
+                        label  = this.securityStatus[status];
                     API.findPasswords({status: status}).then(this.updateContentList);
+
+                    if (this.passwords.length === 0) this.loading = true;
                     this.breadcrumb = [
-                        {path: '/show/security', label: Utility.translate('Security')},
+                        {path: '/security', label: Utility.translate('Security')},
                         {path: this.$route.path, label: Utility.translate(label)}
                     ]
                 } else {
@@ -80,10 +83,11 @@
             },
 
             updateContentList: function (passwords) {
+                this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
             }
         },
-        watch   : {
+        watch  : {
             $route: function () {
                 this.refreshView()
             }

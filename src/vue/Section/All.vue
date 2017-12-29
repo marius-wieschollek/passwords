@@ -1,13 +1,13 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb />
+            <breadcrumb/>
             <div class="item-list">
-                <password-line :password="password" v-for="password in passwords" :key="password.id" />
+                <password-line :password="password" v-for="password in passwords" :key="password.id"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element" />
+            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -23,6 +23,7 @@
     export default {
         data() {
             return {
+                loading  : true,
                 passwords: [],
                 detail   : {
                     type   : 'none',
@@ -58,6 +59,7 @@
             },
 
             updateContentList: function (passwords) {
+                this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
             }
         }

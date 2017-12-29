@@ -19,8 +19,7 @@ export default class Utility {
      * @param text
      */
     static copyToClipboard(text) {
-        let id       = 'ctc-' + Math.random(),
-            $element = $('<textarea id="' + id + '">' + text + '</textarea>');
+        let $element = $('<textarea>' + text + '</textarea>');
 
         $('body').append($element);
         $element.select();
@@ -28,6 +27,24 @@ export default class Utility {
         document.execCommand('copy');
 
         $element.remove();
+    }
+
+    /**
+     *
+     * @param content
+     * @param name
+     * @param type
+     */
+    static createDownload(content, name = null, type = 'text/plain') {
+        if (name === null) name = new Date().toISOString() + '.txt';
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:' + type + ';charset=utf-8,' + encodeURIComponent(content));
+        element.setAttribute('download', name);
+        element.style.display = 'none';
+
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 
     /**
@@ -178,7 +195,7 @@ export default class Utility {
                 clone[key] = element.slice(0);
             } else if (element instanceof Date) {
                 clone[key] = new Date(element.getTime());
-            } else if(typeof element === "object") {
+            } else if (typeof element === "object") {
                 clone[key] = Utility.cloneObject(element);
             } else {
                 clone[key] = element;

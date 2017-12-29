@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails }">
         <div class="app-content-left">
             <breadcrumb :newTag="true" :items="breadcrumb" />
             <div class="item-list">
@@ -26,7 +26,7 @@
         data() {
             return {
                 defaultTitle: Utility.translate('Tags'),
-                defaultPath : '/show/tags/',
+                defaultPath : '/tags/',
                 tags        : [],
                 passwords   : [],
                 detail      : {
@@ -81,7 +81,7 @@
                 this.tags = [];
                 if (tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
-                    this.defaultPath = '/show/trash';
+                    this.defaultPath = '/trash';
                 }
 
                 this.passwords = Utility.sortApiObjectArray(tag.passwords, 'label');

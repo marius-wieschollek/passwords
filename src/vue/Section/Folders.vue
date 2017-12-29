@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
             <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"/>
             <div class="item-list">
@@ -34,9 +34,10 @@
         },
         data() {
             return {
+                loading      : true,
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
                 defaultTitle : Utility.translate('Folders'),
-                defaultPath  : '/show/folders',
+                defaultPath  : '/folders',
                 currentFolder: '00000000-0000-0000-0000-000000000000',
                 draggable    : 'true',
                 folders      : [],
@@ -65,6 +66,9 @@
 
         methods: {
             refreshView: function () {
+                this.loading = true;
+                this.folders = [];
+                this.passwords = [];
                 if (this.$route.params.folder !== undefined) {
                     API.showFolder(this.$route.params.folder, 'model+folders+passwords+parent').then(this.updateContentList);
                 } else {
@@ -84,10 +88,12 @@
                     }
                 } else if (object.type === 'folder' && object.id === this.currentFolder) {
                     if (object.trashed) {
+                        this.loading = true;
                         API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
                     } else if (object.passwords && object.folders && typeof object.parent !== 'string') {
                         this.updateContentList(object);
                     } else {
+                        this.loading = true;
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     }
                 } else if (object.type === 'folder' && object.parent === this.currentFolder) {
@@ -105,9 +111,10 @@
             },
 
             updateContentList: function (folder) {
+                this.loading = false;
                 if (folder.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
-                    this.defaultPath = '/show/trash';
+                    this.defaultPath = '/trash';
                     this.draggable = false;
                 }
 
@@ -126,7 +133,7 @@
                     let parent = folder.parent;
                     this.breadcrumb.push(
                         {
-                            path    : '/show/folders/' + parent.id,
+                            path    : '/folders/' + parent.id,
                             label   : parent.label,
                             dropType: 'folder',
                             folderId: parent.id

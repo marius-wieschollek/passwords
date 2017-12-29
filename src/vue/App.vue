@@ -3,28 +3,28 @@
         <div id="app-navigation">
             <ul>
                 <router-link class="nav-icon-all" to="/" active-class="active" :exact="true" tag="li">
-                    <translate say="All"></translate>
+                    <translate>All</translate>
                 </router-link>
-                <router-link class="nav-icon-folders" to="/show/folders" active-class="active" tag="li">
-                    <translate say="Folders"></translate>
+                <router-link class="nav-icon-folders" to="/folders" active-class="active" tag="li">
+                    <translate>Folders</translate>
                 </router-link>
-                <router-link class="nav-icon-recent" to="/show/recent" active-class="active" tag="li">
-                    <translate say="Recent"></translate>
+                <router-link class="nav-icon-recent" to="/recent" active-class="active" tag="li">
+                    <translate>Recent</translate>
                 </router-link>
-                <router-link class="nav-icon-favourites" to="/show/favourites" active-class="active" tag="li">
-                    <translate say="Favourites"></translate>
+                <router-link class="nav-icon-favourites" to="/favourites" active-class="active" tag="li">
+                    <translate>Favourites</translate>
                 </router-link>
-                <router-link class="nav-icon-shared" to="/show/shared" active-class="active" tag="li">
-                    <translate say="Shared"></translate>
+                <router-link class="nav-icon-shared" to="/shared" active-class="active" tag="li">
+                    <translate>Shared</translate>
                 </router-link>
-                <router-link class="nav-icon-tags" to="/show/tags" active-class="active" tag="li">
-                    <translate say="Tags"></translate>
+                <router-link class="nav-icon-tags" to="/tags" active-class="active" tag="li">
+                    <translate>Tags</translate>
                 </router-link>
-                <router-link class="nav-icon-security" to="/show/security" active-class="active" tag="li">
-                    <translate say="Security"></translate>
+                <router-link class="nav-icon-security" to="/security" active-class="active" tag="li">
+                    <translate>Security</translate>
                 </router-link>
-                <router-link class="nav-icon-trash" to="/show/trash" active-class="active" tag="li">
-                    <translate say="Trash"></translate>
+                <router-link class="nav-icon-trash" to="/trash" active-class="active" tag="li">
+                    <translate>Trash</translate>
                 </router-link>
             </ul>
             <div id="app-settings">
@@ -32,12 +32,14 @@
                     <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
                 </div>
                 <div id="app-settings-content">
-
+                    <router-link class="nav-icon-trash" to="/backup" active-class="active" tag="li">
+                        <translate>Backup</translate>
+                    </router-link>
                 </div>
             </div>
         </div>
 
-        <router-view name="main"></router-view>
+        <router-view name="main" />
         <div id="app-popup">
             <div></div>
         </div>

@@ -8,20 +8,22 @@ import SectionFavourites from '@vue/Section/Favourites.vue';
 import SectionShared from '@vue/Section/Shared.vue';
 import SectionSecurity from '@vue/Section/Security.vue';
 import SectionTrash from '@vue/Section/Trash.vue';
+import SectionBackup from '@vue/Section/Backup.vue';
 
 Vue.use(Router);
 
 export default new Router(
     {
         routes: [
-            {name:"All", path: '*', components: {main: SectionAll}},
-            {name:"Folders", path: '/show/folders/:folder?', components: {main: SectionFolders}},
-            {name:"Tags", path: '/show/tags/:tag?', components: {main: SectionTags}},
-            {name:"Recent", path: '/show/recent', components: {main: SectionRecent}},
-            {name:"Favourites", path: '/show/favourites', components: {main: SectionFavourites}},
-            {name:"Shared", path: '/show/shared', components: {main: SectionShared}},
-            {name:"Security", path: '/show/security/:status?', components: {main: SectionSecurity}},
-            {name:"Trash", path: '/show/trash', components: {main: SectionTrash}}
+            {name: "All", path: '*', components: {main: SectionAll}},
+            {name: "Folders", path: '/folders/:folder?', components: {main: SectionFolders}},
+            {name: "Tags", path: '/tags/:tag?', components: {main: SectionTags}},
+            {name: "Recent", path: '/recent', components: {main: SectionRecent}},
+            {name: "Favourites", path: '/favourites', components: {main: SectionFavourites}},
+            {name: "Shared", path: '/shared', components: {main: SectionShared}},
+            {name: "Security", path: '/security/:status?', components: {main: SectionSecurity}},
+            {name: "Backup", path: '/backup', components: {main: SectionBackup}},
+            {name: "Trash", path: '/trash', components: {main: SectionTrash}}
         ]
     }
 );

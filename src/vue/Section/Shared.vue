@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" v-bind:class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails }">
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" />
             <div class="item-list">
