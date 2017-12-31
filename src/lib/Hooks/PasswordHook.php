@@ -10,9 +10,12 @@ namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\ShareRevision;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
+use OCA\Passwords\Services\Object\ShareRevisionService;
+use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -39,20 +42,36 @@ class PasswordHook {
     protected $tagRevisionService;
 
     /**
+     * @var ShareService
+     */
+    protected $shareService;
+
+    /**
+     * @var ShareRevisionService
+     */
+    protected $shareRevisionService;
+
+    /**
      * PasswordHook constructor.
      *
+     * @param ShareService               $shareService
      * @param TagRevisionService         $tagRevisionService
      * @param PasswordRevisionService    $revisionService
+     * @param ShareRevisionService       $shareRevisionService
      * @param PasswordTagRelationService $relationService
      */
     public function __construct(
+        ShareService $shareService,
         TagRevisionService $tagRevisionService,
         PasswordRevisionService $revisionService,
+        ShareRevisionService $shareRevisionService,
         PasswordTagRelationService $relationService
     ) {
-        $this->revisionService    = $revisionService;
-        $this->relationService    = $relationService;
-        $this->tagRevisionService = $tagRevisionService;
+        $this->shareService         = $shareService;
+        $this->revisionService      = $revisionService;
+        $this->relationService      = $relationService;
+        $this->tagRevisionService   = $tagRevisionService;
+        $this->shareRevisionService = $shareRevisionService;
     }
 
     /**
@@ -64,7 +83,9 @@ class PasswordHook {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function preSetRevision(Password $password, PasswordRevision $newRevision): void {
-        if($password->getRevision() === null) return;
+        if($password->getShareId() || $newRevision->isShared()) {
+            if($password->getRevision() === null) return;
+        }
         /** @var PasswordRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($password->getRevision(), false);
 
@@ -81,9 +102,66 @@ class PasswordHook {
     }
 
     /**
+     * @param Password         $password
+     * @param PasswordRevision $revision
+     *
+     * @throws DoesNotExistException
+     * @throws \Exception
+     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    protected function updateShares(Password $password, PasswordRevision $revision) {
+        if(!$password->isEditable()) return;
+        if($password->getShareId()) {
+            $share = $this->shareService->findByUuid($password->getShareId());
+            /** @var ShareRevision $shareRevision */
+            $shareRevision = $this->shareRevisionService->findByUuid($share->getUuid(), false);
+
+            if($shareRevision->isEditable()) {
+                $revision = $this->shareRevisionService->create(
+                    $share->getUuid(),
+                    $revision->getPassword(),
+                    $revision->getUsername(),
+                    $revision->getUrl(),
+                    $revision->getLabel(),
+                    $revision->getNotes(),
+                    $revision->getHash(),
+                    $revision->getCseType(),
+                    true
+                );
+                $this->shareRevisionService->save($revision);
+                $this->shareService->setRevision($share, $revision);
+            }
+        }
+
+        if($revision->isShared()) {
+            $shares = $this->shareService->findByPassword($password->getUuid());
+            foreach ($shares as $share) {
+                /** @var ShareRevision $shareRevision */
+                $shareRevision = $this->shareRevisionService->findByUuid($share->getUuid(), false);
+
+                $revision = $this->shareRevisionService->create(
+                    $share->getUuid(),
+                    $revision->getPassword(),
+                    $revision->getUsername(),
+                    $revision->getUrl(),
+                    $revision->getLabel(),
+                    $revision->getNotes(),
+                    $revision->getHash(),
+                    $revision->getCseType(),
+                    $shareRevision->isEditable()
+                );
+                $this->shareRevisionService->save($revision);
+                $this->shareService->setRevision($share, $revision);
+            }
+        }
+    }
+
+    /**
      * @param Password $password
      *
      * @throws \Exception
+    // @TODO delete shares
      */
     public function preDelete(Password $password): void {
         $relations = $this->relationService->findByPassword($password->getUuid());

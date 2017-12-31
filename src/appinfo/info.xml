@@ -4,19 +4,18 @@
 	<name>Passwords</name>
 	<summary>Passwords lets you manage all your passwords easily on your Nextcloud.</summary>
 	<description>
-		This is a port of the original passwords app by Fallon Turner.
-
 		**Features**
-		* Server Side Encryption
-		* Password creation
-		* Password Safety Checks
-		* API for third party apps
-		* Easy to use user interface
-		* Categories
+		* Intuitive and modern user interface
+		* Password safety checks
+		* Server side encryption
+		* Folder &amp; Tags
+		* Password sharing
+		* Powerful API
+		* Import / Export
 	</description>
 	<licence>AGPL</licence>
 	<author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">Marius David Wieschollek</author>
-	<version>2018.1.0.2</version>
+	<version>2018.1.0.1</version>
 	<api>
 		<legacyApi>20-beta9</legacyApi>
 	</api>

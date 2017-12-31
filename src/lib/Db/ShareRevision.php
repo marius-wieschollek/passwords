@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: marius
- * Date: 09.10.17
- * Time: 19:06
+ * Date: 29.12.17
+ * Time: 14:14
  */
 
 namespace OCA\Passwords\Db;
 
 /**
- * Class AbstractRevisionEntity
+ * Class ShareRevision
  *
  * @method string getUuid()
  * @method void setUuid(string $uuid)
@@ -25,16 +25,24 @@ namespace OCA\Passwords\Db;
  * @method void setLabel(string $label)
  * @method string getClient()
  * @method void setClient(string $client)
- * @method bool getHidden()
- * @method void setHidden(bool $hidden)
- * @method bool getTrashed()
- * @method void setTrashed(bool $trashed)
- * @method bool getFavourite()
- * @method void setFavourite(bool $favourite)
+ * @method string getUrl()
+ * @method void setUrl(string $url)
+ * @method string getUsername()
+ * @method void setUsername(string $username)
+ * @method string getPassword()
+ * @method void setPassword(string $password)
+ * @method string getNotes()
+ * @method void setNotes(string $notes)
+ * @method string getHash()
+ * @method void setHash(string $hash)
+ * @method bool getEditable()
+ * @method void setEditable(bool $editable)
+ * @method bool getSynchronized()
+ * @method void setSynchronized(bool $synchronized)
  *
  * @package OCA\Passwords\Db
  */
-class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface {
+class ShareRevision extends AbstractEntity implements RevisionInterface {
 
     /**
      * @var string
@@ -72,19 +80,39 @@ class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface
     protected $client;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $hidden;
+    protected $url;
+
+    /**
+     * @var string
+     */
+    protected $username;
+
+    /**
+     * @var string
+     */
+    protected $password;
+
+    /**
+     * @var string
+     */
+    protected $notes;
+
+    /**
+     * @var string
+     */
+    protected $hash;
 
     /**
      * @var bool
      */
-    protected $trashed;
+    protected $editable;
 
     /**
      * @var bool
      */
-    protected $favourite;
+    protected $synchronized;
 
     /**
      * @var bool
@@ -95,40 +123,37 @@ class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface
      * AbstractRevisionEntity constructor.
      */
     public function __construct() {
+        parent::__construct();
         $this->addType('sseType', 'string');
         $this->addType('sseKey', 'string');
         $this->addType('cseType', 'string');
-
         $this->addType('uuid', 'string');
         $this->addType('model', 'string');
-        $this->addType('label', 'string');
         $this->addType('client', 'string');
-        $this->addType('hidden', 'boolean');
-        $this->addType('trashed', 'boolean');
-        $this->addType('favourite', 'boolean');
 
-        parent::__construct();
+        $this->addType('url', 'string');
+        $this->addType('hash', 'string');
+        $this->addType('label', 'string');
+        $this->addType('notes', 'string');
+        $this->addType('username', 'string');
+        $this->addType('password', 'string');
+
+        $this->addType('editable', 'boolean');
+        $this->addType('synchronized', 'boolean');
     }
 
     /**
      * @return bool
      */
-    public function isTrashed(): bool {
-        return $this->getTrashed();
+    public function isEditable(): bool {
+        return $this->getEditable() === true;
     }
 
     /**
      * @return bool
      */
-    public function isHidden(): bool {
-        return $this->getHidden();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isFavourite(): bool {
-        return $this->getFavourite();
+    public function isSynchronized(): bool {
+        return $this->getSynchronized() === true;
     }
 
     /**

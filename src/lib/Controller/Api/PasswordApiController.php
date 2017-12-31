@@ -42,18 +42,21 @@ class PasswordApiController extends AbstractObjectApiController {
      * @var PasswordObjectHelper
      */
     protected $objectHelper;
+
     /**
      * @var PasswordTagRelationService
      */
-    private $relationService;
+    protected $relationService;
+
     /**
      * @var TagService
      */
-    private $tagService;
+    protected $tagService;
+
     /**
      * @var TagRevisionService
      */
-    private $tagRevisionService;
+    protected $tagRevisionService;
 
     /**
      * PasswordApiController constructor.
@@ -91,7 +94,6 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $password
      * @param string $username
      * @param string $cseType
-     * @param string $sseType
      * @param string $hash
      * @param string $label
      * @param string $url
@@ -102,7 +104,6 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param array  $tags
      *
      * @TODO check folder access
-     * @TODO check folder is system trash
      *
      * @return JSONResponse
      * @internal param array $folders
@@ -111,7 +112,6 @@ class PasswordApiController extends AbstractObjectApiController {
         string $password,
         string $username = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         string $hash = '',
         string $label = '',
         string $url = '',
@@ -121,11 +121,11 @@ class PasswordApiController extends AbstractObjectApiController {
         bool $favourite = false,
         array $tags = []
     ): JSONResponse {
-
         try {
+            $this->checkAccessPermissions();
             $model    = $this->modelService->create();
             $revision = $this->revisionService->createRevision(
-                $model->getUuid(), $password, $username, $cseType, $sseType, $hash, $label, $url, $notes, $folder, $hidden,
+                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
                 false, false, $favourite
             );
 
@@ -139,7 +139,6 @@ class PasswordApiController extends AbstractObjectApiController {
                 Http::STATUS_CREATED
             );
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -152,7 +151,6 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $password
      * @param string $username
      * @param string $cseType
-     * @param string $sseType
      * @param string $hash
      * @param string $label
      * @param string $url
@@ -171,7 +169,6 @@ class PasswordApiController extends AbstractObjectApiController {
         string $password,
         string $username = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         string $hash = '',
         string $label = '',
         string $url = '',
@@ -181,13 +178,15 @@ class PasswordApiController extends AbstractObjectApiController {
         bool $favourite = false,
         array $tags = []
     ): JSONResponse {
-
         try {
+            $this->checkAccessPermissions();
             $model = $this->modelService->findByUuid($id);
+            /** @var PasswordRevision $oldRevision */
+            $oldRevision = $this->revisionService->findByUuid($model->getRevision(), false);
 
             $revision = $this->revisionService->createRevision(
-                $model->getUuid(), $password, $username, $cseType, $sseType, $hash, $label, $url, $notes, $folder, $hidden,
-                false, false, $favourite
+                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
+                $oldRevision->isShared(), false, $favourite
             );
 
             $this->revisionService->save($revision);
@@ -197,7 +196,6 @@ class PasswordApiController extends AbstractObjectApiController {
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }

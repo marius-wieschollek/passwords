@@ -58,12 +58,12 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @param int $id
      *
-     * @return AbstractEntity|Entity
+     * @return EntityInterface|Entity
      *
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function findById(int $id): AbstractEntity {
+    public function findById(int $id): EntityInterface {
         list($sql, $params) = $this->getStatement();
 
         $sql      .= ' AND `id` = ?';
@@ -75,12 +75,12 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @param string $uuid
      *
-     * @return AbstractEntity|Entity
+     * @return EntityInterface|Entity
      *
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function findByUuid(string $uuid): AbstractEntity {
+    public function findByUuid(string $uuid): EntityInterface {
         list($sql, $params) = $this->getStatement();
 
         $sql      .= ' AND `uuid` = ?';
@@ -90,7 +90,7 @@ abstract class AbstractMapper extends Mapper {
     }
 
     /**
-     * @return AbstractEntity[]
+     * @return EntityInterface[]
      */
     public function findAll(): array {
         list($sql, $params) = $this->getStatement();
@@ -101,7 +101,7 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @param array $search
      *
-     * @return AbstractEntity[]
+     * @return EntityInterface[]
      * @throws \Exception
      */
     public function findAllMatching(array $search): array {
@@ -111,10 +111,10 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @param array $search
      *
-     * @return null|AbstractEntity
+     * @return null|EntityInterface
      * @throws \Exception
      */
-    public function findOneMatching(array $search): ?AbstractEntity {
+    public function findOneMatching(array $search): ?EntityInterface {
         $matches = $this->findMatching($search, 1);
 
         if(isset($matches[0])) {
@@ -128,7 +128,7 @@ abstract class AbstractMapper extends Mapper {
      * @param array    $search
      * @param int|null $limit
      *
-     * @return AbstractEntity[]
+     * @return EntityInterface[]
      * @throws \Exception
      */
     public function findMatching(array $search = [], int $limit = null): array {

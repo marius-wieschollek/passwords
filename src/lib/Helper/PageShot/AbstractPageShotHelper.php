@@ -57,10 +57,10 @@ abstract class AbstractPageShotHelper {
      * @param string $domain
      * @param string $view
      *
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      * @throws \Exception
      */
-    function getPageShot(string $domain, string $view): ISimpleFile {
+    function getPageShot(string $domain, string $view): ?ISimpleFile {
         $pageshotFile = $this->getPageShotFilename($domain, $view);
 
         if($this->fileCacheService->hasFile($pageshotFile)) {
@@ -78,9 +78,9 @@ abstract class AbstractPageShotHelper {
     }
 
     /**
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      */
-    public function getDefaultPageShot(): ISimpleFile {
+    public function getDefaultPageShot(): ?ISimpleFile {
         $random   = rand(1, 5);
         $fileName = "{$this->prefix}_default_{$random}.jpg";
         if($this->fileCacheService->hasFile($fileName)) {

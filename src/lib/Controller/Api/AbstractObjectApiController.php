@@ -76,6 +76,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
+            $this->checkAccessPermissions();
             $models = $this->modelService->findAll();
             $results = [];
 
@@ -103,6 +104,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
+            $this->checkAccessPermissions();
             $models = $this->modelService->findAll();
             $results = [];
 
@@ -139,6 +141,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
+            $this->checkAccessPermissions();
             $model  = $this->modelService->findByUuid($id);
             $object = $this->objectHelper->getApiObject($model, $details, false);
 
@@ -155,7 +158,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function delete(string $id): JSONResponse {
         try {
+            $this->checkAccessPermissions();
             $model       = $this->modelService->findByUuid($id);
+            /** @var AbstractRevisionEntity $oldRevision */
             $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
             if($oldRevision->isTrashed()) {
@@ -183,13 +188,15 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      */
     public function restore(string $id, $revision = null): JSONResponse {
         try {
+            $this->checkAccessPermissions();
             $model = $this->modelService->findByUuid($id);
 
             if($revision === null) $revision = $model->getRevision();
+            /** @var AbstractRevisionEntity $oldRevision */
             $oldRevision = $this->revisionService->findByUuid($revision);
 
             if($oldRevision->getModel() !== $model->getUuid()) {
-                throw new ApiException('Invalid revision id');
+                throw new ApiException('Invalid revision id', 400);
             }
 
             if(!$oldRevision->isTrashed() && $oldRevision->getUuid() === $model->getRevision()) {

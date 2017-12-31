@@ -34,10 +34,11 @@ class ServiceApiController extends AbstractApiController {
      * @var FaviconService
      */
     protected $faviconService;
+
     /**
      * @var PageShotService
      */
-    private $previewService;
+    protected $previewService;
 
     /**
      * PasswordApiController constructor.
@@ -75,8 +76,8 @@ class ServiceApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function generatePassword(): JSONResponse {
-
         try {
+            $this->checkAccessPermissions();
             list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
 
             if(empty($password)) throw new ApiException('Unable to generate password');

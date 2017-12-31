@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 
@@ -45,5 +46,16 @@ class PasswordService extends AbstractModelService {
      */
     public function findByTag(string $tagUuid, bool $includeHidden = false): array {
         return $this->mapper->getByTag($tagUuid, $includeHidden);
+    }
+
+    /**
+     * @return Password
+     */
+    protected function createModel(): ModelInterface {
+        /** @var Password $model */
+        $model = parent::createModel();
+        $model->setEditable(true);
+
+        return $model;
     }
 }

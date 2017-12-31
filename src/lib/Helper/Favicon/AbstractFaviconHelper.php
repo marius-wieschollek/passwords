@@ -62,10 +62,10 @@ abstract class AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      * @throws \Exception
      */
-    public function getFavicon(string $domain): ISimpleFile {
+    public function getFavicon(string $domain): ?ISimpleFile {
         $faviconFile = $this->getFaviconFilename($domain);
 
         if($this->fileCacheService->hasFile($faviconFile)) {
@@ -79,9 +79,9 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      */
-    public function getDefaultFavicon(): ISimpleFile {
+    public function getDefaultFavicon(): ?ISimpleFile {
         $fileName = "{$this->prefix}_default.png";
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);

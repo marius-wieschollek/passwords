@@ -8,10 +8,10 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractEntity;
-use OCA\Passwords\Db\AbstractModelEntity;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
+use OCA\Passwords\Db\ModelInterface;
 
 /**
  * Class FolderService
@@ -19,6 +19,7 @@ use OCA\Passwords\Db\FolderMapper;
  * @package OCA\Passwords\Services
  */
 class FolderService extends AbstractModelService {
+
     const BASE_FOLDER_UUID = '00000000-0000-0000-0000-000000000000';
 
     /**
@@ -34,12 +35,12 @@ class FolderService extends AbstractModelService {
     /**
      * @param string $uuid
      *
-     * @return \OCA\Passwords\Db\AbstractEntity|Folder
+     * @return \OCA\Passwords\Db\EntityInterface|Folder
      *
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function findByUuid(string $uuid): AbstractModelEntity {
+    public function findByUuid(string $uuid): ModelInterface {
         if($uuid === self::BASE_FOLDER_UUID) return $this->getBaseFolder();
 
         return parent::findByUuid($uuid);
@@ -55,7 +56,7 @@ class FolderService extends AbstractModelService {
     }
 
     /**
-     * @return Folder|AbstractModelEntity
+     * @return Folder|ModelInterface
      */
     public function getBaseFolder(): Folder {
 
@@ -67,22 +68,22 @@ class FolderService extends AbstractModelService {
     }
 
     /**
-     * @param AbstractModelEntity|AbstractEntity $model
+     * @param ModelInterface|EntityInterface $model
      *
      * @return Folder|\OCP\AppFramework\Db\Entity
      */
-    public function save(AbstractEntity $model): AbstractEntity {
+    public function save(EntityInterface $model): EntityInterface {
         if($model->getUuid() === self::BASE_FOLDER_UUID) return $model;
 
         return parent::save($model);
     }
 
     /**
-     * @param AbstractModelEntity|AbstractEntity $model
+     * @param ModelInterface|EntityInterface $model
      *
      * @throws \Exception
      */
-    public function delete(AbstractEntity $model): void {
+    public function delete(EntityInterface $model): void {
         if($model->getUuid() === self::BASE_FOLDER_UUID) return;
 
         parent::delete($model);

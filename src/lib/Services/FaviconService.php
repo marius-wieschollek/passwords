@@ -106,10 +106,10 @@ class FaviconService {
      * @param string      $fileName
      * @param int         $size
      *
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      * @throws \OCP\AppFramework\QueryException
      */
-    protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ISimpleFile {
+    protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ?ISimpleFile {
         $faviconData = $favicon->getContent();
         $imageHelper = $this->helperService->getImageHelper();
         if($imageHelper->supportsImage($faviconData)) {

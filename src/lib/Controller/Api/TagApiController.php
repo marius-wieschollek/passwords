@@ -74,25 +74,24 @@ class TagApiController extends AbstractObjectApiController {
         string $label,
         string $color,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
         try {
-            $folder   = $this->modelService->create();
+            $this->checkAccessPermissions();
+            $tag   = $this->modelService->create();
             $revision = $this->revisionService->create(
-                $folder->getUuid(), $label, $color, $cseType, $sseType, $hidden, false, false, $favourite
+                $tag->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
             );
 
             $this->revisionService->save($revision);
-            $this->modelService->setRevision($folder, $revision);
+            $this->modelService->setRevision($tag, $revision);
 
             return $this->createJsonResponse(
-                ['id' => $folder->getUuid(), 'revision' => $revision->getUuid()],
+                ['id' => $tag->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -110,7 +109,6 @@ class TagApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      *
      * @return JSONResponse
-     * @TODO check is system trash
      *
      */
     public function update(
@@ -118,24 +116,22 @@ class TagApiController extends AbstractObjectApiController {
         string $label,
         string $color,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-
         try {
-            $folder = $this->modelService->findByUuid($id);
+            $this->checkAccessPermissions();
+            $tag = $this->modelService->findByUuid($id);
 
             $revision = $this->revisionService->create(
-                $folder->getUuid(), $label, $color, $cseType, $sseType, $hidden, false, false, $favourite
+                $tag->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
             );
 
             $this->revisionService->save($revision);
-            $this->modelService->setRevision($folder, $revision);
+            $this->modelService->setRevision($tag, $revision);
 
-            return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $revision->getUuid()]);
+            return $this->createJsonResponse(['id' => $tag->getUuid(), 'revision' => $revision->getUuid()]);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }

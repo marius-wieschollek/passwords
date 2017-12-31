@@ -8,8 +8,10 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Exception\ApiAccessDeniedException;
 use OCA\Passwords\Exception\ApiException;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 
@@ -51,12 +53,35 @@ abstract class AbstractApiController extends ApiController {
             $statusCode = $e->getHttpCode();
         }
 
-        return new JSONResponse(
+        if(get_class($e) === DoesNotExistException::class) {
+            $id = 404;
+            $message = 'Resource not found';
+            $statusCode = 404;
+        }
+
+        $response = new JSONResponse(
             [
                 'status'  => 'error',
                 'id'      => $id,
                 'message' => $message
             ], $statusCode
         );
+
+        if(get_class($e) === ApiAccessDeniedException::class) {
+            $headers = $response->getHeaders();
+            $headers['WWW-Authenticate'] = 'basic + token';
+            $response->setHeaders($headers);
+        }
+        return $response;
+    }
+
+    /**
+     * @throws ApiAccessDeniedException
+     */
+    protected function checkAccessPermissions() {
+        $token = $this->request->getHeader('X-Passwords-Token');
+        if(empty($token)) {
+            throw new ApiAccessDeniedException();
+        }
     }
 }

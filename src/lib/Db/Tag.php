@@ -14,5 +14,4 @@ namespace OCA\Passwords\Db;
  * @package OCA\Passwords\Db
  */
 class Tag extends AbstractModelEntity {
-
 }

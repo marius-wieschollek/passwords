@@ -8,9 +8,11 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Db\AbstractRevisionEntity;
+use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Encryption\EncryptionInterface;
+use OCA\Passwords\Encryption\ShareV1Encryption;
 use OCA\Passwords\Encryption\SseV1Encryption;
+use OCP\AppFramework\IAppContainer;
 
 /**
  * Class EncryptionService
@@ -19,15 +21,30 @@ use OCA\Passwords\Encryption\SseV1Encryption;
  */
 class EncryptionService {
 
-    const DEFAULT_CSE_ENCRYPTION = 'none';
-    const DEFAULT_SSE_ENCRYPTION = 'SSEv1r1';
-    const CSE_ENCRYPTION_NONE    = 'none';
-    const SSE_ENCRYPTION_V1      = 'SSEv1r1';
+    const DEFAULT_CSE_ENCRYPTION   = 'none';
+    const DEFAULT_SSE_ENCRYPTION   = 'SSEv1r1';
+    const DEFAULT_SHARE_ENCRYPTION = 'SSSEv1r1';
+    const CSE_ENCRYPTION_NONE      = 'none';
+    const SSE_ENCRYPTION_V1        = 'SSEv1r1';
+    const SHARE_ENCRYPTION_V1      = 'SSSEv1r1';
 
-    protected $encryptionMapping
-        = [
-            self::SSE_ENCRYPTION_V1 => SseV1Encryption::class
-        ];
+    protected $encryptionMapping = [
+        self::SSE_ENCRYPTION_V1   => SseV1Encryption::class,
+        self::SHARE_ENCRYPTION_V1 => ShareV1Encryption::class
+    ];
+    /**
+     * @var IAppContainer
+     */
+    private $container;
+
+    /**
+     * EncryptionService constructor.
+     *
+     * @param IAppContainer $container
+     */
+    public function __construct(IAppContainer $container) {
+        $this->container = $container;
+    }
 
     /**
      * @param string $type
@@ -41,16 +58,16 @@ class EncryptionService {
             throw new \Exception("Encryption type {$type} does not exsist");
         }
 
-        return new $this->encryptionMapping[$type];
+        return $this->container->query($this->encryptionMapping[ $type ]);
     }
 
     /**
-     * @param AbstractRevisionEntity $object
+     * @param RevisionInterface $object
      *
-     * @return AbstractRevisionEntity
+     * @return RevisionInterface
      * @throws \Exception
      */
-    public function encrypt(AbstractRevisionEntity $object): AbstractRevisionEntity {
+    public function encrypt(RevisionInterface $object): RevisionInterface {
         $encryption = $this->getEncryptionByType($object->getSseType());
         $object->_setDecrypted(false);
 
@@ -58,12 +75,12 @@ class EncryptionService {
     }
 
     /**
-     * @param AbstractRevisionEntity $object
+     * @param RevisionInterface $object
      *
-     * @return AbstractRevisionEntity
+     * @return RevisionInterface
      * @throws \Exception
      */
-    public function decrypt(AbstractRevisionEntity $object): AbstractRevisionEntity {
+    public function decrypt(RevisionInterface $object): RevisionInterface {
         $encryption = $this->getEncryptionByType($object->getSseType());
         $object->_setDecrypted(true);
 

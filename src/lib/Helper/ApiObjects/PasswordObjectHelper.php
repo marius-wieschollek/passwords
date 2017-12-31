@@ -9,7 +9,7 @@
 namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
-use OCA\Passwords\Db\AbstractModelEntity;
+use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\Object\FolderService;
@@ -24,6 +24,7 @@ use OCP\AppFramework\IAppContainer;
  */
 class PasswordObjectHelper extends AbstractObjectHelper {
 
+    const LEVEL_SHARES = 'shares';
     const LEVEL_FOLDER = 'folder';
     const LEVEL_TAGS   = 'tags';
 
@@ -74,7 +75,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     }
 
     /**
-     * @param AbstractModelEntity|Password $password
+     * @param ModelInterface|Password $password
      * @param string                       $level
      * @param bool                         $excludeHidden
      * @param bool                         $excludeTrash
@@ -85,7 +86,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getApiObject(
-        AbstractModelEntity $password,
+        ModelInterface $password,
         string $level = self::LEVEL_MODEL,
         bool $excludeHidden = true,
         bool $excludeTrash = false
@@ -127,6 +128,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             'created'   => $password->getCreated(),
             'updated'   => $password->getUpdated(),
             'revision'  => $revision->getUuid(),
+            'shareId'   => $password->getShareId(),
             'label'     => $revision->getLabel(),
             'username'  => $revision->getUsername(),
             'password'  => $revision->getPassword(),
@@ -139,7 +141,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             'sseType'   => $revision->getSseType(),
             'hidden'    => $revision->isHidden(),
             'trashed'   => $revision->isTrashed(),
-            'favourite' => $revision->isFavourite()
+            'favourite' => $revision->isFavourite(),
+            'editable'  => $password->isEditable()
         ];
     }
 
@@ -220,7 +223,9 @@ class PasswordObjectHelper extends AbstractObjectHelper {
 
         $objectHelper = $this->getFolderObjectHelper();
         $folder       = $this->folderService->findByUuid($revision->getFolder());
-        $obj          = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed());
+        $obj          = $objectHelper->getApiObject(
+            $folder, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed()
+        );
 
         if($obj !== null) {
             $object['folder'] = $obj;

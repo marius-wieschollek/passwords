@@ -43,10 +43,14 @@ class ConfigurationService {
      * @param string $key
      * @param null   $default
      *
+     * @param null   $user
+     *
      * @return string
      */
-    public function getUserValue(string $key, $default = null) {
-        return $this->config->getUserValue($this->userId, Application::APP_NAME, $key, $default);
+    public function getUserValue(string $key, $default = null, $user = null) {
+        $userId = $this->userId;
+        if($userId === null) $userId = $user;
+        return $this->config->getUserValue($userId, Application::APP_NAME, $key, $default);
     }
 
     /**
@@ -72,9 +76,15 @@ class ConfigurationService {
     /**
      * @param string $key
      * @param        $value
+     *
+     * @param null   $user
+     *
+     * @throws \OCP\PreConditionNotMetException
      */
-    public function setUserValue(string $key, $value) {
-        $this->config->setUserValue($this->userId, Application::APP_NAME, $key, $value);
+    public function setUserValue(string $key, $value, $user = null) {
+        $userId = $this->userId;
+        if($userId === null) $userId = $user;
+        $this->config->setUserValue($userId, Application::APP_NAME, $key, $value);
     }
 
     /**
@@ -96,8 +106,10 @@ class ConfigurationService {
     /**
      * @param string $key
      */
-    public function deleteUserValue(string $key) {
-        $this->config->deleteUserValue($this->userId, Application::APP_NAME, $key);
+    public function deleteUserValue(string $key, $user = null) {
+        $userId = $this->userId;
+        if($userId === null) $userId = $user;
+        $this->config->deleteUserValue($userId, Application::APP_NAME, $key);
     }
 
     /**

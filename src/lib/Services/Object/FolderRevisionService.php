@@ -8,8 +8,8 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Services\EncryptionService;
 
 /**
@@ -33,7 +33,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \Exception
      */
-    public function findByUuid(string $uuid, bool $decrypt = true): AbstractRevisionEntity {
+    public function findByUuid(string $uuid, bool $decrypt = true): RevisionInterface {
         if($uuid === self::BASE_REVISION_UUID) return $this->getBaseRevision();
 
         return parent::findByUuid($uuid, $decrypt);
@@ -51,8 +51,6 @@ class FolderRevisionService extends AbstractRevisionService {
             EncryptionService::DEFAULT_CSE_ENCRYPTION,
             EncryptionService::DEFAULT_SSE_ENCRYPTION,
             false,
-            false,
-            false,
             false
         );
         $model->setUuid(self::BASE_REVISION_UUID);
@@ -66,10 +64,8 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $parent
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $trashed
-     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return FolderRevision
@@ -80,59 +76,54 @@ class FolderRevisionService extends AbstractRevisionService {
         string $label,
         string $parent,
         string $cseType,
-        string $sseType,
         bool $hidden,
         bool $trashed,
-        bool $deleted,
         bool $favourite
     ): FolderRevision {
-        $model = $this->createModel($folder, $label, $parent, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
+        $revision = $this->createModel($folder, $label, $parent, $cseType, $hidden, $trashed, $favourite);
 
-        $model = $this->validationService->validateFolder($model);
+        $revision = $this->validationService->validateFolder($revision);
+        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
-        return $model;
+        return $revision;
     }
 
     /**
-     * @param string $folder
+     * @param string $model
      * @param string $label
      * @param string $parent
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $trashed
-     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return FolderRevision
      */
     protected function createModel(
-        string $folder,
+        string $model,
         string $label,
         string $parent,
         string $cseType,
-        string $sseType,
         bool $hidden,
         bool $trashed,
-        bool $deleted,
         bool $favourite
     ): FolderRevision {
-        $model = new FolderRevision();
-        $model->setUserId($this->userId);
-        $model->setUuid($this->generateUuidV4());
-        $model->setHidden($hidden);
-        $model->setTrashed($trashed);
-        $model->setDeleted($deleted);
-        $model->setModel($folder);
-        $model->setFavourite($favourite);
-        $model->setLabel($label);
-        $model->setParent($parent);
-        $model->setCseType($cseType);
-        $model->setSseType($sseType);
-        $model->setCreated(time());
-        $model->setUpdated(time());
-        $model->_setDecrypted(true);
+        $revision = new FolderRevision();
+        $revision->setUserId($this->userId);
+        $revision->setUuid($this->generateUuidV4());
+        $revision->setHidden($hidden);
+        $revision->setTrashed($trashed);
+        $revision->setDeleted(false);
+        $revision->setModel($model);
+        $revision->setFavourite($favourite);
+        $revision->setLabel($label);
+        $revision->setParent($parent);
+        $revision->setCseType($cseType);
+        $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $revision->setCreated(time());
+        $revision->setUpdated(time());
+        $revision->_setDecrypted(true);
 
-        return $model;
+        return $revision;
     }
 }

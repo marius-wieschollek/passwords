@@ -14,21 +14,27 @@ namespace OCA\Passwords\Exception;
  * @package OCA\Passwords\Exception
  */
 class ApiException extends \Exception {
+    /**
+     * @var int
+     */
+    private $httpCode;
 
     /**
      * ApiException constructor.
      *
      * @param string $message
+     * @param int    $httpCode
      */
-    public function __construct($message = "") {
+    public function __construct($message = "", $httpCode = 500) {
         parent::__construct($message, E_USER_ERROR, null);
+        $this->httpCode = $httpCode;
     }
 
     /**
      * @return int
      */
     public function getHttpCode() {
-        return 500;
+        return $this->httpCode;
     }
 
     /**

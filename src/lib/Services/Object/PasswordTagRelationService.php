@@ -8,12 +8,13 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractEntity;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCP\AppFramework\Db\Entity;
 
 /**
  * Class PasswordTagRelationService
@@ -77,15 +78,18 @@ class PasswordTagRelationService extends AbstractService {
             throw new \Exception('User ID did not match when creating password to tag relation');
         }
 
-        return $this->createModel($password, $tag);
+        $model = $this->createModel($password, $tag);
+        $this->hookManager->emit($this->class, 'postCreate', [$model]);
+
+        return $model;
     }
 
     /**
-     * @param AbstractEntity $model
+     * @param EntityInterface|Entity $model
      *
      * @return mixed
      */
-    public function save(AbstractEntity $model): AbstractEntity {
+    public function save(EntityInterface $model): EntityInterface {
         $this->hookManager->emit($this->class, 'preSave', [$model]);
         if(empty($model->getId())) {
             return $this->mapper->insert($model);

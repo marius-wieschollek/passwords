@@ -75,6 +75,7 @@ class PageShotService {
      *
      * @return ISimpleFile
      * @throws ApiException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getPreview(
         string $domain,
@@ -124,7 +125,8 @@ class PageShotService {
      * @param int         $maxWidth
      * @param int         $maxHeight
      *
-     * @return ISimpleFile
+     * @return ISimpleFile|null
+     * @throws \OCP\AppFramework\QueryException
      */
     protected function resizePageShot(
         ISimpleFile $pageShot,
@@ -133,7 +135,7 @@ class PageShotService {
         int $minHeight,
         int $maxWidth,
         int $maxHeight
-    ): ISimpleFile {
+    ): ?ISimpleFile {
 
         $imageHelper = $this->helperService->getImageHelper();
         $image       = $imageHelper->getImageFromBlob($pageShot->getContent());

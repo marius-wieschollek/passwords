@@ -9,7 +9,7 @@
 namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
-use OCA\Passwords\Db\AbstractModelEntity;
+use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\Object\PasswordService;
@@ -68,7 +68,7 @@ class TagObjectHelper extends AbstractObjectHelper {
     }
 
     /**
-     * @param AbstractModelEntity|Tag $tag
+     * @param ModelInterface|Tag $tag
      * @param string                  $level
      *
      * @param bool                    $excludeHidden
@@ -80,7 +80,7 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getApiObject(
-        AbstractModelEntity $tag,
+        ModelInterface $tag,
         string $level = self::LEVEL_MODEL,
         bool $excludeHidden = true,
         bool $excludeTrash = false

@@ -13,6 +13,7 @@ use OCA\Passwords\Controller\AdminSettingsController;
 use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
+use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
@@ -26,11 +27,16 @@ use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
+use OCA\Passwords\Db\ShareMapper;
+use OCA\Passwords\Db\ShareRevisionMapper;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
+use OCA\Passwords\Encryption\ShareV1Encryption;
+use OCA\Passwords\Encryption\SseV1Encryption;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
+use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
@@ -69,6 +75,8 @@ use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
+use OCA\Passwords\Services\Object\ShareRevisionService;
+use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\PageShotService;
@@ -78,6 +86,7 @@ use OCA\Passwords\Settings\AdminSettings;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\Files\IAppData;
+use OCP\Share\IManager;
 
 /**
  * Class Application
@@ -172,10 +181,14 @@ class Application extends App {
         });
 
         /**
+         * Encryption
+         */
+        $this->registerEncryption();
+
+        /**
          * Alias
          */
         $container->registerAlias('AppData', IAppData::class);
-        $container->registerAlias('EncryptionService', EncryptionService::class);
 
         /**
          * Register Hooks
@@ -273,6 +286,20 @@ class Application extends App {
             );
         });
 
+        $container->registerService('ShareApiController', function (IAppContainer $c) {
+            return new ShareApiController(
+                self::APP_NAME,
+                $this->getUserId(),
+                $c->query('Request'),
+                $c->query(IManager::class),
+                $c->query('ShareService'),
+                $c->query('ShareRevisionService'),
+                $c->query('PasswordService'),
+                $c->query('PasswordRevisionService'),
+                $c->query('ShareObjectHelper')
+            );
+        });
+
         $container->registerService('AdminSettingsController', function (IAppContainer $c) {
             return new AdminSettingsController(
                 self::APP_NAME,
@@ -330,6 +357,20 @@ class Application extends App {
             );
         });
 
+        $container->registerService('ShareMapper', function (IAppContainer $c) {
+            return new ShareMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
+        $container->registerService('ShareRevisionMapper', function (IAppContainer $c) {
+            return new ShareRevisionMapper(
+                $c->getServer()->getDatabaseConnection(),
+                $this->getUserId()
+            );
+        });
+
         $container->registerService('PasswordTagRelationMapper', function (IAppContainer $c) {
             return new PasswordTagRelationMapper(
                 $c->getServer()->getDatabaseConnection(),
@@ -364,8 +405,10 @@ class Application extends App {
         });
         $container->registerService('PasswordHook', function (IAppContainer $c) {
             return new PasswordHook(
+                $c->query('ShareService'),
                 $c->query('TagRevisionService'),
                 $c->query('PasswordRevisionService'),
+                $c->query('ShareRevisionService'),
                 $c->query('PasswordTagRelationService')
             );
         });
@@ -438,6 +481,24 @@ class Application extends App {
             );
         });
 
+        $container->registerService('ShareService', function (IAppContainer $c) {
+            return new ShareService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('ShareMapper')
+            );
+        });
+
+        $container->registerService('ShareRevisionService', function (IAppContainer $c) {
+            return new ShareRevisionService(
+                $this->getUserId(),
+                $c->query('HookManager'),
+                $c->query('ShareRevisionMapper'),
+                $c->query('ValidationService'),
+                $c->query('EncryptionService')
+            );
+        });
+
         $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
             return new PasswordTagRelationService(
                 $this->getUserId(),
@@ -448,7 +509,8 @@ class Application extends App {
 
         $container->registerService('FileCacheService', function (IAppContainer $c) {
             return new FileCacheService(
-                $c->query('AppData')
+                $c->query('AppData'),
+                $c->getServer()->getLogger()
             );
         });
 
@@ -531,6 +593,13 @@ class Application extends App {
                 $c->query('TagService'),
                 $c->query('PasswordService'),
                 $c->query('TagRevisionService')
+            );
+        });
+        $container->registerService('ShareObjectHelper', function (IAppContainer $c) {
+            return new ShareObjectHelper(
+                $c,
+                $c->query('ShareService'),
+                $c->query('ShareRevisionService')
             );
         });
     }
@@ -691,6 +760,36 @@ class Application extends App {
                 $this->getFileCacheService(),
                 $c->query('ConfigurationService'),
                 $c->getServer()->getLogger()
+            );
+        });
+    }
+
+    /**
+     *
+     */
+    protected function registerEncryption(): void {
+        $container = $this->getContainer();
+
+        $container->registerService('EncryptionService', function (IAppContainer $c) {
+            return new EncryptionService($c);
+        });
+
+        $container->registerService(SseV1Encryption::class, function (IAppContainer $c) {
+            return new SseV1Encryption(
+                $this->getUserId(),
+                $c->getServer()->getCrypto(),
+                $c->getServer()->getSecureRandom(),
+                $c->query('ConfigurationService')
+            );
+        });
+        $container->registerService(ShareV1Encryption::class, function (IAppContainer $c) {
+            return new ShareV1Encryption(
+                $this->getUserId(),
+                $c->getServer()->getCrypto(),
+                $c->getServer()->getSecureRandom(),
+                $c->query('ConfigurationService'),
+                $c->query('ShareService'),
+                $c->query('ShareRevisionService')
             );
         });
     }

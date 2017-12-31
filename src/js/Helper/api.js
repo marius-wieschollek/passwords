@@ -1,5 +1,7 @@
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
-const api = new EnhancedApi(location.origin, null, null, null, true);
+let token = 'passwords-webui-' + Math.random();
+
+const api = new EnhancedApi(location.origin, null, null, token, true);
 
 export default api;

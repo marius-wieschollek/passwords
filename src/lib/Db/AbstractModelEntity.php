@@ -20,7 +20,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractModelEntity extends AbstractEntity {
+abstract class AbstractModelEntity extends AbstractEntity implements ModelInterface {
 
     /**
      * @var string

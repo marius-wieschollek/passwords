@@ -9,12 +9,14 @@
 namespace OCA\Passwords\Encryption;
 
 use Exception;
-use OC;
-use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Db\ShareRevision;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Services\ConfigurationService;
+use OCP\Security\ICrypto;
+use OCP\Security\ISecureRandom;
 
 /**
  * Class SseV1Encryption
@@ -36,6 +38,12 @@ class SseV1Encryption implements EncryptionInterface {
             'password',
             'username'
         ];
+
+    /**
+     * @var array
+     */
+    protected $share = [];
+
     /**
      * @var array
      */
@@ -47,21 +55,60 @@ class SseV1Encryption implements EncryptionInterface {
     protected $tag = ['label', 'color'];
 
     /**
-     * @param AbstractRevisionEntity $object
+     * @var null|string
+     */
+    protected $userId;
+
+    /**
+     * @var ICrypto
+     */
+    protected $crypto;
+
+    /**
+     * @var ISecureRandom
+     */
+    protected $secureRandom;
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $configurationService;
+
+    /**
+     * ShareV1Encryption constructor.
      *
-     * @return AbstractRevisionEntity
+     * @param null|string          $userId
+     * @param ICrypto              $crypto
+     * @param ISecureRandom        $secureRandom
+     * @param ConfigurationService $configurationService
+     */
+    public function __construct(
+        ?string $userId,
+        ICrypto $crypto,
+        ISecureRandom $secureRandom,
+        ConfigurationService $configurationService
+    ) {
+        $this->userId               = $userId;
+        $this->crypto               = $crypto;
+        $this->secureRandom         = $secureRandom;
+        $this->configurationService = $configurationService;
+    }
+
+    /**
+     * @param RevisionInterface $object
+     *
+     * @return RevisionInterface
      * @throws \OCP\PreConditionNotMetException
      * @throws Exception
      */
-    public function encryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity {
-
+    public function encryptObject(RevisionInterface $object): RevisionInterface {
         $sseKey        = $this->getSecureRandom();
         $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
         foreach ($fields as $field) {
             $value          = $object->getProperty($field);
-            $encryptedValue = OC::$server->getCrypto()->encrypt($value, $encryptionKey);
+            $encryptedValue = $this->crypto->encrypt($value, $encryptionKey);
             $object->setProperty($field, base64_encode($encryptedValue));
         }
 
@@ -71,20 +118,19 @@ class SseV1Encryption implements EncryptionInterface {
     }
 
     /**
-     * @param AbstractRevisionEntity $object
+     * @param RevisionInterface $object
      *
-     * @return AbstractRevisionEntity
+     * @return RevisionInterface
      * @throws Exception
      */
-    public function decryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity {
-
+    public function decryptObject(RevisionInterface $object): RevisionInterface {
         $sseKey        = base64_decode($object->getSseKey());
         $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
         foreach ($fields as $field) {
             $value          = base64_decode($object->getProperty($field));
-            $decryptedValue = OC::$server->getCrypto()->decrypt($value, $encryptionKey);
+            $decryptedValue = $this->crypto->decrypt($value, $encryptionKey);
             $object->setProperty($field, $decryptedValue);
         }
 
@@ -103,6 +149,8 @@ class SseV1Encryption implements EncryptionInterface {
                 return $this->password;
             case FolderRevision::class:
                 return $this->folder;
+            case ShareRevision::class:
+                return $this->share;
             case TagRevision::class:
                 return $this->tag;
         }
@@ -131,11 +179,11 @@ class SseV1Encryption implements EncryptionInterface {
      * @return string
      */
     protected function getServerKey(): string {
-        $serverKey = OC::$server->getConfig()->getAppValue(Application::APP_NAME, 'SSEv1ServerKey', null);
+        $serverKey = $this->configurationService->getAppValue('SSEv1ServerKey', null);
 
         if($serverKey === null || strlen($serverKey) < self::MINIMUM_KEY_LENGTH) {
             $serverKey = $this->getSecureRandom();
-            OC::$server->getConfig()->setAppValue(Application::APP_NAME, 'SSEv1ServerKey', $serverKey);
+            $this->configurationService->setAppValue('SSEv1ServerKey', $serverKey);
         }
 
         return $serverKey;
@@ -149,15 +197,14 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws \OCP\PreConditionNotMetException
      */
     protected function getUserKey(string $userId): string {
-        $user    = OC::$server->getUserSession()->getUser();
-        if($user !== null && $user->getUID() !== $userId) {
+        if($this->userId !== null && $this->userId !== $userId) {
             throw new Exception('User key requested with illegal user id: '.$userId);
         }
-        $userKey = OC::$server->getConfig()->getUserValue($userId, Application::APP_NAME, 'SSEv1UserKey', null);
+        $userKey = $this->configurationService->getUserValue('SSEv1UserKey', null, $userId);
 
         if($userKey === null || strlen($userKey) < self::MINIMUM_KEY_LENGTH) {
             $userKey = $this->getSecureRandom();
-            OC::$server->getConfig()->setUserValue($userId, Application::APP_NAME, 'SSEv1UserKey', $userKey);
+            $this->configurationService->setUserValue('SSEv1UserKey', $userKey, $userId);
         }
 
         return $userKey;
@@ -171,6 +218,6 @@ class SseV1Encryption implements EncryptionInterface {
     protected function getSecureRandom(int $length = self::MINIMUM_KEY_LENGTH): string {
         if($length < self::MINIMUM_KEY_LENGTH) $length = self::MINIMUM_KEY_LENGTH;
 
-        return OC::$server->getSecureRandom()->generate($length);
+        return $this->secureRandom->generate($length);
     }
 }

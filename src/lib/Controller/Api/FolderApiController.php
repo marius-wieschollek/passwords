@@ -69,7 +69,6 @@ class FolderApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      *
      * @TODO check $parent access
-     * @TODO check is system trash
      *
      * @return JSONResponse
      */
@@ -77,15 +76,14 @@ class FolderApiController extends AbstractObjectApiController {
         string $label,
         string $parent,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-
         try {
+            $this->checkAccessPermissions();
             $folder   = $this->modelService->create();
             $revision = $this->revisionService->create(
-                $folder->getUuid(), $label, $parent, $cseType, $sseType, $hidden, false, false, $favourite
+                $folder->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
             );
 
             $this->revisionService->save($revision);
@@ -96,7 +94,6 @@ class FolderApiController extends AbstractObjectApiController {
                 Http::STATUS_CREATED
             );
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }
@@ -114,7 +111,6 @@ class FolderApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      *
      * @TODO check $parent access
-     * @TODO check is system trash
      *
      * @return JSONResponse
      */
@@ -123,16 +119,15 @@ class FolderApiController extends AbstractObjectApiController {
         string $label,
         string $parent,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        string $sseType = EncryptionService::DEFAULT_SSE_ENCRYPTION,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-
         try {
+            $this->checkAccessPermissions();
             $folder = $this->modelService->findByUuid($id);
 
             $revision = $this->revisionService->create(
-                $folder->getUuid(), $label, $parent, $cseType, $sseType, $hidden, false, false, $favourite
+                $folder->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
             );
 
             $this->revisionService->save($revision);
@@ -140,7 +135,6 @@ class FolderApiController extends AbstractObjectApiController {
 
             return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $revision->getUuid()]);
         } catch (\Throwable $e) {
-
             return $this->createErrorResponse($e);
         }
     }

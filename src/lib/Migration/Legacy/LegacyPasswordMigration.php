@@ -131,7 +131,6 @@ class LegacyPasswordMigration {
             FolderService::BASE_FOLDER_UUID,
             false,
             $this->getTrashed($properties),
-            false,
             false
         );
 

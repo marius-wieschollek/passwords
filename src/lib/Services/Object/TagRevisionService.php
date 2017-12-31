@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Services\EncryptionService;
 
 /**
  * Class TagRevisionService
@@ -27,10 +28,8 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $color
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $trashed
-     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return TagRevision
@@ -42,16 +41,15 @@ class TagRevisionService extends AbstractRevisionService {
         string $label,
         string $color,
         string $cseType,
-        string $sseType,
         bool $hidden,
         bool $trashed,
-        bool $deleted,
         bool $favourite
     ): TagRevision {
 
-        $revision = $this->createModel($model, $label, $color, $cseType, $sseType, $hidden, $trashed, $deleted, $favourite);
+        $revision = $this->createModel($model, $label, $color, $cseType, $hidden, $trashed, $favourite);
 
         $revision = $this->validationService->validateTag($revision);
+        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;
     }
@@ -61,10 +59,8 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $color
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $trashed
-     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return TagRevision
@@ -74,27 +70,23 @@ class TagRevisionService extends AbstractRevisionService {
         string $label,
         string $color,
         string $cseType,
-        string $sseType,
         bool $hidden,
         bool $trashed,
-        bool $deleted,
         bool $favourite
     ): TagRevision {
 
         $revision = new TagRevision();
-        $revision->setDeleted(0);
         $revision->setUserId($this->userId);
         $revision->setUuid($this->generateUuidV4());
         $revision->setCreated(time());
         $revision->setUpdated(time());
-        $revision->setSseKey('');
+        $revision->setDeleted(false);
         $revision->_setDecrypted(true);
 
         $revision->setModel($model);
         $revision->setCseType($cseType);
-        $revision->setSseType($sseType);
+        $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $revision->setHidden($hidden);
-        $revision->setDeleted($deleted);
         $revision->setTrashed($trashed);
         $revision->setLabel($label);
         $revision->setColor($color);

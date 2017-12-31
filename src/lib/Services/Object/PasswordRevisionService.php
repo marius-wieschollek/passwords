@@ -34,15 +34,14 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $password
      * @param string $username
      * @param string $cseType
-     * @param string $sseType
      * @param string $hash
      * @param string $label
      * @param string $url
      * @param string $notes
      * @param string $folder
      * @param bool   $hidden
+     * @param bool   $shared
      * @param bool   $trashed
-     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return PasswordRevision
@@ -54,25 +53,24 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $password,
         string $username,
         string $cseType,
-        string $sseType,
         string $hash,
         string $label,
         string $url,
         string $notes,
         string $folder,
         bool $hidden,
+        bool $shared,
         bool $trashed,
-        bool $deleted,
         bool $favourite
     ): PasswordRevision {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
         $revision = $this->createModel(
-            $model, $password, $username, $cseType, $sseType, $hash, $label, $url, $notes, $folder, $hidden, $trashed, $deleted,
-            $favourite
+            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $shared, $trashed, $favourite
         );
 
         $revision = $this->validationService->validateRevision($revision);
+        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;
     }
@@ -82,15 +80,14 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $password
      * @param string $username
      * @param string $cseType
-     * @param string $sseType
      * @param string $hash
      * @param string $label
      * @param string $url
      * @param string $notes
      * @param string $folder
      * @param bool   $hidden
+     * @param bool   $shared
      * @param bool   $trashed
-     * @param bool   $deleted
      * @param bool   $favourite
      *
      * @return PasswordRevision
@@ -100,42 +97,45 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $password,
         string $username,
         string $cseType,
-        string $sseType,
         string $hash,
         string $label,
         string $url,
         string $notes,
         string $folder,
         bool $hidden,
+        bool $shared,
         bool $trashed,
-        bool $deleted,
         bool $favourite
     ): PasswordRevision {
 
         $revision = new PasswordRevision();
-        $revision->setDeleted(0);
         $revision->setUserId($this->userId);
         $revision->setUuid($this->generateUuidV4());
         $revision->setCreated(time());
         $revision->setUpdated(time());
         $revision->setStatus(0);
-        $revision->setSseKey('');
+        $revision->setDeleted(false);
         $revision->_setDecrypted(true);
 
         $revision->setModel($model);
         $revision->setUsername($username);
         $revision->setPassword($password);
         $revision->setCseType($cseType);
-        $revision->setSseType($sseType);
         $revision->setHidden($hidden);
-        $revision->setDeleted($deleted);
         $revision->setTrashed($trashed);
         $revision->setHash($hash);
         $revision->setLabel($label);
         $revision->setUrl($url);
         $revision->setNotes($notes);
         $revision->setFolder($folder);
+        $revision->setShared($shared);
         $revision->setFavourite($favourite);
+
+        if($shared) {
+            $revision->setSseType(EncryptionService::DEFAULT_SHARE_ENCRYPTION);
+        } else {
+            $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        }
 
         return $revision;
     }

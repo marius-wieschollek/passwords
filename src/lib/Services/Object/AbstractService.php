@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractEntity;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
 
 /**
@@ -61,23 +61,23 @@ abstract class AbstractService {
     }
 
     /**
-     * @param AbstractEntity $model
+     * @param EntityInterface $model
      *
      * @return mixed
      */
-    abstract public function save(AbstractEntity $model): AbstractEntity;
+    abstract public function save(EntityInterface $model): EntityInterface;
 
     /**
-     * @param AbstractEntity $entity
-     * @param array          $overwrites
+     * @param EntityInterface $entity
+     * @param array           $overwrites
      *
-     * @return AbstractEntity
+     * @return EntityInterface
      * @throws \Exception
      */
-    public function clone(AbstractEntity $entity, array $overwrites = []): AbstractEntity {
+    public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
         if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preClone', [$entity]);
-        /** @var AbstractEntity $clone */
+        /** @var EntityInterface $clone */
         $clone = $this->cloneModel($entity, $overwrites);
         $this->hookManager->emit($this->class, 'postClone', [$entity, $clone]);
 
@@ -85,11 +85,11 @@ abstract class AbstractService {
     }
 
     /**
-     * @param AbstractEntity $entity
+     * @param EntityInterface $entity
      *
      * @throws \Exception
      */
-    public function delete(AbstractEntity $entity): void {
+    public function delete(EntityInterface $entity): void {
         if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preDelete', [$entity]);
         $entity->setDeleted(true);
@@ -98,14 +98,14 @@ abstract class AbstractService {
     }
 
     /**
-     * @param AbstractEntity $original
-     * @param array          $overwrites
+     * @param EntityInterface $original
+     * @param array           $overwrites
      *
-     * @return AbstractEntity
+     * @return EntityInterface
      */
-    protected function cloneModel(AbstractEntity $original, array $overwrites = []): AbstractEntity {
+    protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
         $class = get_class($original);
-        /** @var AbstractEntity $clone */
+        /** @var EntityInterface $clone */
         $clone  = new $class;
         $fields = array_keys($clone->getFieldTypes());
 

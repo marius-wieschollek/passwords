@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
-use OCA\Passwords\Db\AbstractModelEntity;
+use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Services\Object\FolderRevisionService;
@@ -74,7 +74,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
     }
 
     /**
-     * @param AbstractModelEntity|Folder $folder
+     * @param ModelInterface|Folder $folder
      * @param string                     $level
      * @param bool                       $excludeHidden
      * @param bool                       $excludeTrash
@@ -85,7 +85,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function getApiObject(
-        AbstractModelEntity $folder,
+        ModelInterface $folder,
         string $level = self::LEVEL_MODEL,
         bool $excludeHidden = true,
         bool $excludeTrash = false

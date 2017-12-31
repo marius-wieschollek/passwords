@@ -8,11 +8,12 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractEntity;
 use OCA\Passwords\Db\AbstractMapper;
-use OCA\Passwords\Db\AbstractModelEntity;
-use OCA\Passwords\Db\AbstractRevisionEntity;
+use OCA\Passwords\Db\EntityInterface;
+use OCA\Passwords\Db\ModelInterface;
+use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCP\AppFramework\Db\Entity;
 
 /**
  * Class AbstractModelService
@@ -40,7 +41,7 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
-     * @return AbstractModelEntity[]
+     * @return ModelInterface[]
      */
     public function findAll(): array {
         return $this->mapper->findAll();
@@ -49,44 +50,50 @@ abstract class AbstractModelService extends AbstractService {
     /**
      * @param string $uuid
      *
-     * @return \OCA\Passwords\Db\AbstractEntity|AbstractModelEntity
+     * @return ModelInterface|EntityInterface
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function findByUuid(string $uuid): AbstractModelEntity {
+    public function findByUuid(string $uuid): ModelInterface {
         return $this->mapper->findByUuid($uuid);
     }
 
     /**
-     * @return AbstractModelEntity
+     * @return ModelInterface
      */
-    public function create(): AbstractModelEntity {
-        return $this->createModel();
+    public function create(): ModelInterface {
+        $model = $this->createModel();
+        $this->hookManager->emit($this->class, 'postCreate', [$model]);
+
+        return $model;
     }
 
     /**
-     * @param AbstractEntity|AbstractModelEntity $model
+     * @param EntityInterface|ModelInterface|Entity $model
      *
-     * @return AbstractModelEntity|\OCP\AppFramework\Db\Entity
+     * @return ModelInterface|Entity
      */
-    public function save(AbstractEntity $model): AbstractEntity {
+    public function save(EntityInterface $model): EntityInterface {
         $this->hookManager->emit($this->class, 'preSave', [$model]);
         if(empty($model->getId())) {
-            return $this->mapper->insert($model);
+            $saved = $this->mapper->insert($model);
         } else {
             $model->setUpdated(time());
 
-            return $this->mapper->update($model);
+            $saved = $this->mapper->update($model);
         }
+        $this->hookManager->emit($this->class, 'postSave', [$saved]);
+
+        return $saved;
     }
 
     /**
-     * @param AbstractModelEntity    $model
-     * @param AbstractRevisionEntity $revision
+     * @param ModelInterface    $model
+     * @param RevisionInterface $revision
      *
      * @throws \Exception
      */
-    public function setRevision(AbstractModelEntity $model, AbstractRevisionEntity $revision): void {
+    public function setRevision(ModelInterface $model, RevisionInterface $revision): void {
         if($revision->getModel() === $model->getUuid()) {
             $this->hookManager->emit($this->class, 'preSetRevision', [$model, $revision]);
             $model->setRevision($revision->getUuid());
@@ -98,10 +105,10 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
-     * @return AbstractModelEntity
+     * @return ModelInterface
      */
-    protected function createModel(): AbstractModelEntity {
-        /** @var AbstractModelEntity $model */
+    protected function createModel(): ModelInterface {
+        /** @var ModelInterface $model */
         $model = new $this->class();
         $model->setDeleted(false);
         $model->setUserId($this->userId);
@@ -113,14 +120,14 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
-     * @param AbstractEntity|AbstractModelEntity $original
-     * @param array                              $overwrites
+     * @param ModelInterface|EntityInterface $original
+     * @param array                          $overwrites
      *
-     * @return AbstractEntity|AbstractModelEntity
+     * @return ModelInterface
      */
-    protected function cloneModel(AbstractEntity $original, array $overwrites = []): AbstractEntity {
+    protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
 
-        /** @var AbstractModelEntity $clone */
+        /** @var ModelInterface $clone */
         $clone = parent::cloneModel($original, $overwrites);
         $clone->setUuid($this->generateUuidV4());
 

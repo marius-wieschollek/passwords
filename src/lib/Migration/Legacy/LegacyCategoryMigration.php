@@ -98,8 +98,6 @@ class LegacyCategoryMigration {
             EncryptionService::CSE_ENCRYPTION_NONE,
             EncryptionService::SSE_ENCRYPTION_V1,
             false,
-            false,
-            false,
             false
         );
 

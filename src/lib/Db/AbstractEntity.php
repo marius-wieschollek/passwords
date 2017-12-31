@@ -24,7 +24,7 @@ use OCP\AppFramework\Db\Entity;
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractEntity extends Entity {
+abstract class AbstractEntity extends Entity implements EntityInterface {
 
     /**
      * @var string

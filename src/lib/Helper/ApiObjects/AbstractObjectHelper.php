@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
-use OCA\Passwords\Db\AbstractModelEntity;
+use OCA\Passwords\Db\ModelInterface;
 use OCP\AppFramework\IAppContainer;
 
 /**
@@ -36,7 +36,7 @@ abstract class AbstractObjectHelper {
     }
 
     /**
-     * @param AbstractModelEntity $model
+     * @param ModelInterface $model
      * @param string              $level
      * @param bool                $excludeHidden
      * @param bool                $excludeTrash
@@ -44,7 +44,7 @@ abstract class AbstractObjectHelper {
      * @return array|null
      */
     abstract public function getApiObject(
-        AbstractModelEntity $model,
+        ModelInterface $model,
         string $level = self::LEVEL_MODEL,
         bool $excludeHidden = true,
         bool $excludeTrash = false

@@ -12,6 +12,7 @@ use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Files\SimpleFS\ISimpleFolder;
+use OCP\ILogger;
 
 /**
  * Class FileCacheService
@@ -31,6 +32,11 @@ class FileCacheService {
     protected $appData;
 
     /**
+     * @var ILogger
+     */
+    protected $logger;
+
+    /**
      * @var string
      */
     protected $defaultCache = self::DEFAULT_CACHE;
@@ -39,15 +45,19 @@ class FileCacheService {
      * FileCacheService constructor.
      *
      * @param IAppData $appData
+     * @param ILogger  $logger
      */
-    public function __construct(IAppData $appData) {
+    public function __construct(IAppData $appData, ILogger $logger) {
         $this->appData = $appData;
+        $this->logger  = $logger;
     }
 
     /**
      * @param string $cache
      *
      * @return ISimpleFolder
+     * @throws \Exception
+     * @throws \OCP\Files\NotPermittedException
      */
     public function getCache(string $cache = null): ISimpleFolder {
         $cache = $this->validateCacheName($cache);
@@ -63,6 +73,8 @@ class FileCacheService {
      * @param null $cache
      *
      * @return array
+     * @throws \Exception
+     * @throws \OCP\Files\NotPermittedException
      */
     public function getCacheInfo($cache = null): array {
         $cache = $this->validateCacheName($cache);
@@ -123,10 +135,13 @@ class FileCacheService {
     /**
      * @param string $cache
      */
-    public function clearCache(string $cache = null) {
-        $cache = $this->validateCacheName($cache);
-
-        $this->getCache($cache)->delete();
+    public function clearCache(string $cache = null): void {
+        try {
+            $cache = $this->validateCacheName($cache);
+            $this->getCache($cache)->delete();
+        } catch (\Throwable $e) {
+            $this->logger->logException($e);
+        }
     }
 
     /**
@@ -145,9 +160,15 @@ class FileCacheService {
      * @return bool
      */
     public function isCacheEmpty(string $cache = null): bool {
-        $info = $this->getCacheInfo($cache);
+        try {
+            $info = $this->getCacheInfo($cache);
 
-        return $info['files'] == 0;
+            return $info['files'] == 0;
+        } catch (\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return true;
     }
 
     /**
@@ -157,9 +178,15 @@ class FileCacheService {
      * @return bool
      */
     public function hasFile(string $file, string $cache = null): bool {
-        $cache = $this->validateCacheName($cache);
+        try {
+            $cache = $this->validateCacheName($cache);
 
-        return $this->getCache($cache)->fileExists($file);
+            return $this->getCache($cache)->fileExists($file);
+        } catch (\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
     }
 
     /**
@@ -168,12 +195,16 @@ class FileCacheService {
      *
      * @return ISimpleFile
      */
-    public function getFile(string $file, string $cache = null) {
-        $cache = $this->validateCacheName($cache);
-        $cache = $this->getCache($cache);
+    public function getFile(string $file, string $cache = null): ?ISimpleFile {
+        try {
+            $cache = $this->validateCacheName($cache);
+            $cache = $this->getCache($cache);
 
-        if($cache->fileExists($file)) {
-            return $cache->getFile($file);
+            if($cache->fileExists($file)) {
+                return $cache->getFile($file);
+            }
+        } catch (\Throwable $e) {
+            $this->logger->logException($e);
         }
 
         return null;
@@ -184,31 +215,41 @@ class FileCacheService {
      * @param string $content
      * @param string $cache
      *
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      */
-    public function putFile(string $file, string $content, string $cache = null): ISimpleFile {
-        $cache = $this->validateCacheName($cache);
-        $cache = $this->getCache($cache);
+    public function putFile(string $file, string $content, string $cache = null): ?ISimpleFile {
+        try {
+            $cache = $this->validateCacheName($cache);
+            $cache = $this->getCache($cache);
 
-        if($cache->fileExists($file)) {
-            $fileModel = $cache->getFile($file);
-        } else {
-            $fileModel = $cache->newFile($file);
+            if($cache->fileExists($file)) {
+                $fileModel = $cache->getFile($file);
+            } else {
+                $fileModel = $cache->newFile($file);
+            }
+
+            $fileModel->putContent($content);
+
+            return $fileModel;
+        } catch (\Throwable $e) {
+            $this->logger->logException($e);
         }
 
-        $fileModel->putContent($content);
-
-        return $fileModel;
+        return null;
     }
 
     /**
      * @param string $file
      * @param string $cache
      */
-    public function removeFile(string $file, string $cache = null) {
-        $cache = $this->validateCacheName($cache);
+    public function removeFile(string $file, string $cache = null): void {
+        try {
+            $cache = $this->validateCacheName($cache);
 
-        $this->getFile($file, $cache)->delete();
+            $this->getFile($file, $cache)->delete();
+        } catch (\Throwable $e) {
+            $this->logger->logException($e);
+        }
     }
 
     /**

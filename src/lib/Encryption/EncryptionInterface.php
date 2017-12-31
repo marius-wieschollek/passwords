@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Encryption;
 
-use OCA\Passwords\Db\AbstractRevisionEntity;
+use OCA\Passwords\Db\RevisionInterface;
 
 /**
  * Interface EncryptionInterface
@@ -20,16 +20,16 @@ interface EncryptionInterface {
     const ENCRYPT_AES_256 = 'aes-256-cbc';
 
     /**
-     * @param AbstractRevisionEntity $object
+     * @param RevisionInterface $object
      *
-     * @return AbstractRevisionEntity
+     * @return RevisionInterface
      */
-    public function encryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity;
+    public function encryptObject(RevisionInterface $object): RevisionInterface;
 
     /**
-     * @param AbstractRevisionEntity $object
+     * @param RevisionInterface $object
      *
-     * @return AbstractRevisionEntity
+     * @return RevisionInterface
      */
-    public function decryptObject(AbstractRevisionEntity $object): AbstractRevisionEntity;
+    public function decryptObject(RevisionInterface $object): RevisionInterface;
 }

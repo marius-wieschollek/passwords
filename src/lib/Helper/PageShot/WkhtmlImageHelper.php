@@ -30,10 +30,10 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @param string $domain
      * @param string $view
      *
-     * @return ISimpleFile
+     * @return ISimpleFile|null
      * @throws Exception
      */
-    function getPageShot(string $domain, string $view): ISimpleFile {
+    function getPageShot(string $domain, string $view): ?ISimpleFile {
         $pageShotFile = $this->getPageShotFilename($domain, $view);
         if($this->fileCacheService->hasFile($pageShotFile)) {
             return $this->fileCacheService->getFile($pageShotFile);
