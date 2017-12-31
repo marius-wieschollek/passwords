@@ -96,7 +96,7 @@ class FaviconService {
             } catch (\Throwable $e) {
                 $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
 
-                throw new ApiException('Internal Favicon API Error');
+                throw new ApiException('Internal Favicon API Error', 502);
             }
         }
     }

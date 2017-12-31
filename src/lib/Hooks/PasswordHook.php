@@ -87,14 +87,14 @@ class PasswordHook {
             if($password->getRevision() === null) return;
         }
         /** @var PasswordRevision $oldRevision */
-        $oldRevision = $this->revisionService->findByUuid($password->getRevision(), false);
+        $oldRevision = $this->revisionService->findByUuid($password->getRevision());
 
         if($oldRevision->getHidden() != $newRevision->getHidden()) {
             $relations = $this->relationService->findByPassword($password->getUuid());
 
             foreach ($relations as $relation) {
                 /** @var TagRevision $tagRevision */
-                $tagRevision = $this->tagRevisionService->findByModel($relation->getTag(), false);
+                $tagRevision = $this->tagRevisionService->findByModel($relation->getTag());
                 $relation->setHidden($newRevision->isHidden() || $tagRevision->isHidden());
                 $this->relationService->save($relation);
             }
@@ -111,11 +111,11 @@ class PasswordHook {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     protected function updateShares(Password $password, PasswordRevision $revision) {
-        if(!$password->isEditable()) return;
+        if(!$password->isEditable() || !$revision->_isDecrypted()) return;
         if($password->getShareId()) {
             $share = $this->shareService->findByUuid($password->getShareId());
             /** @var ShareRevision $shareRevision */
-            $shareRevision = $this->shareRevisionService->findByUuid($share->getUuid(), false);
+            $shareRevision = $this->shareRevisionService->findByUuid($share->getUuid());
 
             if($shareRevision->isEditable()) {
                 $revision = $this->shareRevisionService->create(
@@ -138,7 +138,7 @@ class PasswordHook {
             $shares = $this->shareService->findByPassword($password->getUuid());
             foreach ($shares as $share) {
                 /** @var ShareRevision $shareRevision */
-                $shareRevision = $this->shareRevisionService->findByUuid($share->getUuid(), false);
+                $shareRevision = $this->shareRevisionService->findByUuid($share->getUuid());
 
                 $revision = $this->shareRevisionService->create(
                     $share->getUuid(),
@@ -178,7 +178,7 @@ class PasswordHook {
      */
     public function postDelete(Password $password): void {
         /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($password->getUuid(), false);
+        $revisions = $this->revisionService->findByModel($password->getUuid());
 
         foreach ($revisions as $revision) {
             $this->revisionService->delete($revision);
@@ -193,7 +193,7 @@ class PasswordHook {
      */
     public function postClone(Password $originalPassword, Password $clonedPassword): void {
         /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($originalPassword->getUuid(), false);
+        $revisions = $this->revisionService->findByModel($originalPassword->getUuid());
 
         $currentClonedRevision = null;
         foreach ($revisions as $revision) {

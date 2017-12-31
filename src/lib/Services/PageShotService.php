@@ -112,7 +112,7 @@ class PageShotService {
             } catch (\Throwable $e) {
                 $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
 
-                throw new ApiException('Internal PageShot API Error');
+                throw new ApiException('Internal PageShot API Error', 502);
             }
         }
     }

@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
@@ -37,6 +38,11 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @var AbstractRevisionService
      */
     protected $revisionService;
+
+    /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType'];
 
     /**
      * PasswordApiController constructor.
@@ -77,12 +83,13 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $models = $this->modelService->findAll();
+            /** @var AbstractModelEntity[] $models */
+            $models  = $this->modelService->findAll();
             $results = [];
 
             foreach ($models as $model) {
                 if($model->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($model, $details, true, true);
+                $object = $this->objectHelper->getApiObject($model, $details, ['hidden' => false, 'trashed' => false]);
 
                 if($object !== null) $results[] = $object;
             }
@@ -105,22 +112,16 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $models = $this->modelService->findAll();
+            $filters           = $this->processSearchCriteria($criteria);
+            $filters['hidden'] = false;
+            /** @var AbstractModelEntity[] $models */
+            $models  = $this->modelService->findAll();
             $results = [];
 
             foreach ($models as $model) {
                 if($model->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($model, $details);
+                $object = $this->objectHelper->getApiObject($model, $details, $filters);
                 if($object === null) continue;
-
-                foreach ($criteria as $key => $value) {
-                    if($value == 'true') {
-                        $value = true;
-                    } else if($value == 'false') $value = false;
-
-                    if($object[ $key ] != $value) continue 2;
-                }
-
                 $results[] = $object;
             }
 
@@ -128,6 +129,33 @@ abstract class AbstractObjectApiController extends AbstractApiController {
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
+    }
+
+    /**
+     * @param array $criteria
+     *
+     * @return array
+     * @throws ApiException
+     */
+    protected function processSearchCriteria($criteria = []) {
+        $filters = [];
+        foreach ($criteria as $key => $value) {
+            if(!in_array($key, $this->allowedFilterFields)) {
+                throw new ApiException('Illegal field '.$key, 400);
+            }
+
+            if($value === 'true') {
+                $value = true;
+            } else if($value === 'false') {
+                $value = false;
+            } else if(is_array($value) && !in_array($value[0], AbstractObjectHelper::$filterOperators)) {
+                throw new ApiException('Illegal operator '.$value[0], 400);
+            }
+
+            $filters[ $key ] = $value;
+        }
+
+        return $filters;
     }
 
     /**
@@ -143,7 +171,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
         try {
             $this->checkAccessPermissions();
             $model  = $this->modelService->findByUuid($id);
-            $object = $this->objectHelper->getApiObject($model, $details, false);
+            $object = $this->objectHelper->getApiObject($model, $details);
 
             return $this->createJsonResponse($object);
         } catch (\Throwable $e) {
@@ -159,7 +187,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     public function delete(string $id): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $model       = $this->modelService->findByUuid($id);
+            $model = $this->modelService->findByUuid($id);
             /** @var AbstractRevisionEntity $oldRevision */
             $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
@@ -193,7 +221,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
             if($revision === null) $revision = $model->getRevision();
             /** @var AbstractRevisionEntity $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($revision);
+            $oldRevision = $this->revisionService->findByUuid($revision, true);
 
             if($oldRevision->getModel() !== $model->getUuid()) {
                 throw new ApiException('Invalid revision id', 400);

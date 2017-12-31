@@ -12,6 +12,7 @@ use Exception;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
@@ -32,11 +33,6 @@ class TagObjectHelper extends AbstractObjectHelper {
     protected $tagService;
 
     /**
-     * @var TagRevisionService
-     */
-    protected $revisionService;
-
-    /**
      * @var PasswordService
      */
     protected $passwordService;
@@ -53,46 +49,43 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @param TagService         $tagService
      * @param PasswordService    $passwordService
      * @param TagRevisionService $revisionService
+     * @param EncryptionService  $encryptionService
      */
     public function __construct(
         IAppContainer $container,
         TagService $tagService,
         PasswordService $passwordService,
-        TagRevisionService $revisionService
+        TagRevisionService $revisionService,
+        EncryptionService $encryptionService
     ) {
-        parent::__construct($container);
+        parent::__construct($container, $encryptionService, $revisionService);
 
         $this->tagService      = $tagService;
-        $this->revisionService = $revisionService;
         $this->passwordService = $passwordService;
     }
 
     /**
      * @param ModelInterface|Tag $tag
-     * @param string                  $level
-     *
-     * @param bool                    $excludeHidden
-     * @param bool                    $excludeTrash
+     * @param string             $level
+     * @param array              $filter
      *
      * @return array
      * @throws Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getApiObject(
         ModelInterface $tag,
         string $level = self::LEVEL_MODEL,
-        bool $excludeHidden = true,
-        bool $excludeTrash = false
+        $filter = []
     ): ?array {
-        $detailLevel = explode('+', $level);
         /** @var TagRevision $revision */
-        $revision = $this->revisionService->findByUuid($tag->getRevision());
+        $revision = $this->getRevision($tag, $filter);
+        if($revision === null) return null;
 
-        if($excludeTrash && $revision->isTrashed()) return null;
-        if($excludeHidden && $revision->isHidden()) return null;
-
-        $object = [];
+        $detailLevel = explode('+', $level);
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($tag, $revision);
         }
@@ -137,7 +130,7 @@ class TagObjectHelper extends AbstractObjectHelper {
      */
     protected function getRevisions(Tag $tag, array $object): array {
         /** @var TagRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($tag->getUuid());
+        $revisions = $this->revisionService->findByModel($tag->getUuid(), true);
 
         $object['revisions'] = [];
         foreach ($revisions as $revision) {
@@ -170,12 +163,17 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     protected function getPasswords(TagRevision $revision, array $object): array {
+
+        $filters = [];
+        if(!$revision->isHidden()) $filters['hidden'] = false;
+        if(!$revision->isTrashed()) $filters['trashed'] = false;
+
         $object['passwords'] = [];
         $objectHelper        = $this->getPasswordObjectHelper();
         $passwords           = $this->passwordService->findByTag($revision->getModel());
 
         foreach ($passwords as $password) {
-            $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed());
+            $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['passwords'][] = $obj;
         }

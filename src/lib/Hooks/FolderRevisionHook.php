@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
@@ -91,7 +92,7 @@ class FolderRevisionHook {
         $folders = $this->folderService->findByParent($folderId);
         foreach ($folders as $folder) {
             if($folder->isSuspended() === $suspend) continue;
-            $revision = $this->revisionService->findByUuid($folder->getRevision(), false);
+            $revision = $this->revisionService->findByUuid($folder->getRevision());
             if($revision->isTrashed()) continue;
             $folder->setSuspended($suspend);
             $this->folderService->save($folder);
@@ -112,7 +113,8 @@ class FolderRevisionHook {
         $passwords = $this->passwordService->findByFolder($folderId);
         foreach ($passwords as $password) {
             if($password->isSuspended() === $suspend) continue;
-            $revision = $this->passwordRevisionService->findByUuid($password->getRevision(), false);
+            /** @var PasswordRevision $revision */
+            $revision = $this->passwordRevisionService->findByUuid($password->getRevision());
             if($revision->isTrashed()) continue;
             $password->setSuspended($suspend);
             $this->passwordService->save($password);

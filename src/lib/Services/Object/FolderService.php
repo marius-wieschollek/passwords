@@ -12,6 +12,7 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\ModelInterface;
+use OCA\Passwords\Db\RevisionInterface;
 
 /**
  * Class FolderService
@@ -79,6 +80,19 @@ class FolderService extends AbstractModelService {
     }
 
     /**
+     * @param ModelInterface|EntityInterface $entity
+     * @param array           $overwrites
+     *
+     * @return EntityInterface
+     * @throws \Exception
+     */
+    public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
+        if($entity->getUuid() === self::BASE_FOLDER_UUID) return $entity;
+
+        return parent::clone($entity, $overwrites);
+    }
+
+    /**
      * @param ModelInterface|EntityInterface $model
      *
      * @throws \Exception
@@ -87,5 +101,17 @@ class FolderService extends AbstractModelService {
         if($model->getUuid() === self::BASE_FOLDER_UUID) return;
 
         parent::delete($model);
+    }
+
+    /**
+     * @param ModelInterface    $model
+     * @param RevisionInterface $revision
+     *
+     * @throws \Exception
+     */
+    public function setRevision(ModelInterface $model, RevisionInterface $revision): void {
+        if($model->getUuid() === self::BASE_FOLDER_UUID) return;
+
+        parent::setRevision($model, $revision);
     }
 }

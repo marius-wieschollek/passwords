@@ -576,6 +576,7 @@ class Application extends App {
                 $c,
                 $c->query('TagService'),
                 $c->query('FolderService'),
+                $c->query('EncryptionService'),
                 $c->query('PasswordRevisionService')
             );
         });
@@ -584,6 +585,7 @@ class Application extends App {
                 $c,
                 $c->query('FolderService'),
                 $c->query('PasswordService'),
+                $c->query('EncryptionService'),
                 $c->query('FolderRevisionService')
             );
         });
@@ -592,13 +594,15 @@ class Application extends App {
                 $c,
                 $c->query('TagService'),
                 $c->query('PasswordService'),
-                $c->query('TagRevisionService')
+                $c->query('TagRevisionService'),
+                $c->query('EncryptionService')
             );
         });
         $container->registerService('ShareObjectHelper', function (IAppContainer $c) {
             return new ShareObjectHelper(
                 $c,
                 $c->query('ShareService'),
+                $c->query('EncryptionService'),
                 $c->query('ShareRevisionService')
             );
         });

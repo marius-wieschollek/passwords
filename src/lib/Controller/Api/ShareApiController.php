@@ -57,16 +57,22 @@ class ShareApiController extends AbstractObjectApiController {
      * @var IManager
      */
     private $shareManager;
+
     /**
-     * @var null|string
+     * @var string
      */
-    private $userId;
+    protected $userId;
+
+    /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'type'];
 
     /**
      * TagApiController constructor.
      *
      * @param string                  $appName
-     * @param null|string             $userId
+     * @param string             $userId
      * @param IRequest                $request
      * @param IManager                $shareManager
      * @param ShareService            $modelService
@@ -118,15 +124,7 @@ class ShareApiController extends AbstractObjectApiController {
             $passwordRevision = $this->passwordRevisionService->findByUuid($passwordModel->getRevision());
 
             if($passwordRevision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                throw new ApiException('Resource has CSE activated', 400);
-            }
-
-            if($passwordRevision->getSseType() !== EncryptionService::SHARE_ENCRYPTION_V1) {
-                $passwordRevision = $this->passwordRevisionService->clone(
-                    $passwordRevision, ['sseType' => EncryptionService::SHARE_ENCRYPTION_V1]
-                );
-                $this->passwordRevisionService->save($passwordRevision);
-                $this->passwordModelService->setRevision($passwordModel, $passwordRevision);
+                throw new ApiException('Resource has CSE activated', 420);
             }
 
             $share = $this->modelService->create(

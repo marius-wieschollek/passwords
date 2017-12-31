@@ -39,6 +39,11 @@ class TagApiController extends AbstractObjectApiController {
     protected $objectHelper;
 
     /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'trashed', 'favourite'];
+
+    /**
      * TagApiController constructor.
      *
      * @param string             $appName
@@ -64,7 +69,6 @@ class TagApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $color
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $favourite
      *
@@ -104,7 +108,6 @@ class TagApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $color
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $favourite
      *

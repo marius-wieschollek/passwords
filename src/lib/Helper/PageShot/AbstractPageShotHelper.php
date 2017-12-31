@@ -131,7 +131,7 @@ abstract class AbstractPageShotHelper {
 
         $type = $request->getInfo()['content_type'];
         if(substr($type, 0, 5) != 'image') {
-            throw new ApiException('API Request Failed');
+            throw new ApiException('API Request Failed', 502);
         }
 
         return $data;

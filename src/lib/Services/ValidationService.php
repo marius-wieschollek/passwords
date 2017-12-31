@@ -52,16 +52,16 @@ class ValidationService {
             $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if(!in_array($revision->getSseType(), $this->passwordSseTypes)) {
-            throw new ApiException('Invalid server side encryption type');
+            throw new ApiException('Invalid server side encryption type', 400);
         }
         if($revision->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
-            throw new ApiException('Invalid client side encryption type');
+            throw new ApiException('Invalid client side encryption type', 400);
         }
         if(empty($revision->getLabel())) {
-            throw new ApiException('Field "label" can not be empty');
+            throw new ApiException('Field "label" can not be empty', 400);
         }
         if(empty($revision->getHash())) {
-            throw new ApiException('Field "hash" can not be empty');
+            throw new ApiException('Field "hash" can not be empty', 400);
         }
         if($revision->getStatus() == 0) {
             $revision->setStatus($this->securityCheck->getRevisionSecurityLevel($revision));
@@ -81,13 +81,13 @@ class ValidationService {
             $folder->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if($folder->getSseType() !== EncryptionService::DEFAULT_SSE_ENCRYPTION) {
-            throw new ApiException('Invalid server side encryption type');
+            throw new ApiException('Invalid server side encryption type', 400);
         }
         if($folder->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
-            throw new ApiException('Invalid client side encryption type');
+            throw new ApiException('Invalid client side encryption type', 400);
         }
         if(empty($folder->getLabel())) {
-            throw new ApiException('Field "label" can not be empty');
+            throw new ApiException('Field "label" can not be empty', 400);
         }
 
         return $folder;
@@ -104,16 +104,16 @@ class ValidationService {
             $tag->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
         if($tag->getSseType() !== EncryptionService::DEFAULT_SSE_ENCRYPTION) {
-            throw new ApiException('Invalid server side encryption type');
+            throw new ApiException('Invalid server side encryption type', 400);
         }
         if($tag->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
-            throw new ApiException('Invalid client side encryption type');
+            throw new ApiException('Invalid client side encryption type', 400);
         }
         if(empty($tag->getLabel())) {
-            throw new ApiException('Field "label" can not be empty');
+            throw new ApiException('Field "label" can not be empty', 400);
         }
         if(empty($tag->getColor())) {
-            throw new ApiException('Field "color" can not be empty');
+            throw new ApiException('Field "color" can not be empty', 400);
         }
 
         return $tag;
@@ -130,7 +130,7 @@ class ValidationService {
             $share->setSseType(EncryptionService::DEFAULT_SHARE_ENCRYPTION);
         }
         if($share->getSseType() !== EncryptionService::DEFAULT_SHARE_ENCRYPTION) {
-            throw new ApiException('Invalid server side encryption type');
+            throw new ApiException('Invalid server side encryption type', 400);
         }
 
         return $share;

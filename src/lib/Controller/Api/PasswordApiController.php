@@ -59,6 +59,11 @@ class PasswordApiController extends AbstractObjectApiController {
     protected $tagRevisionService;
 
     /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'status', 'trashed', 'favourite'];
+
+    /**
      * PasswordApiController constructor.
      *
      * @param string                     $appName
@@ -182,7 +187,7 @@ class PasswordApiController extends AbstractObjectApiController {
             $this->checkAccessPermissions();
             $model = $this->modelService->findByUuid($id);
             /** @var PasswordRevision $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($model->getRevision(), false);
+            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
             $revision = $this->revisionService->createRevision(
                 $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
@@ -223,7 +228,7 @@ class PasswordApiController extends AbstractObjectApiController {
             if(in_array($tag, $skip) || empty($tag)) continue;
             $tag = $this->tagService->findByUuid($tag);
             /** @var TagRevision $revision */
-            $revision = $this->tagRevisionService->findByUuid($tag->getRevision(), false);
+            $revision = $this->tagRevisionService->findByUuid($tag->getRevision());
 
             $relation = $this->relationService->create($passwordRevision, $revision);
             $this->relationService->save($relation);

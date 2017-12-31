@@ -12,6 +12,7 @@ use Exception;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\TagService;
@@ -27,11 +28,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     const LEVEL_SHARES = 'shares';
     const LEVEL_FOLDER = 'folder';
     const LEVEL_TAGS   = 'tags';
-
-    /**
-     * @var PasswordRevisionService
-     */
-    protected $revisionService;
 
     /**
      * @var TagService
@@ -57,47 +53,45 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * PasswordApiController constructor.
      *
      * @param IAppContainer           $container
-     * @param PasswordRevisionService $revisionService
      * @param TagService              $tagService
      * @param FolderService           $folderService
+     * @param EncryptionService       $encryptionService
+     * @param PasswordRevisionService $revisionService
      */
     public function __construct(
         IAppContainer $container,
         TagService $tagService,
         FolderService $folderService,
+        EncryptionService $encryptionService,
         PasswordRevisionService $revisionService
     ) {
-        parent::__construct($container);
+        parent::__construct($container, $encryptionService, $revisionService);
 
         $this->tagService      = $tagService;
         $this->folderService   = $folderService;
-        $this->revisionService = $revisionService;
     }
 
     /**
      * @param ModelInterface|Password $password
-     * @param string                       $level
-     * @param bool                         $excludeHidden
-     * @param bool                         $excludeTrash
+     * @param string         $level
+     * @param array          $filter
      *
-     * @return array
+     * @return array|null
      * @throws Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getApiObject(
         ModelInterface $password,
         string $level = self::LEVEL_MODEL,
-        bool $excludeHidden = true,
-        bool $excludeTrash = false
+        $filter = []
     ): ?array {
-        $detailLevel = explode('+', $level);
         /** @var PasswordRevision $revision */
-        $revision = $this->revisionService->findByUuid($password->getRevision());
+        $revision = $this->getRevision($password, $filter);
+        if($revision === null) return null;
 
-        if($excludeTrash && $revision->isTrashed()) return null;
-        if($excludeHidden && $revision->isHidden()) return null;
-
+        $detailLevel = explode('+', $level);
         $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($password, $revision);
@@ -155,7 +149,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     protected function getRevisions(Password $password, array $object): array {
         /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($password->getUuid());
+        $revisions = $this->revisionService->findByModel($password->getUuid(), true);
 
         $object['revisions'] = [];
         foreach ($revisions as $revision) {
@@ -197,10 +191,15 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     protected function getTags(PasswordRevision $revision, array $object): array {
         $object['tags'] = [];
+
+        $filters = [];
+        if(!$revision->isHidden()) $filters['hidden'] = false;
+        if(!$revision->isTrashed()) $filters['trashed'] = false;
+
         $objectHelper   = $this->getTagObjectHelper();
         $tags           = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
         foreach ($tags as $tag) {
-            $obj = $objectHelper->getApiObject($tag, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed());
+            $obj = $objectHelper->getApiObject($tag, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['tags'][] = $obj;
         }
@@ -221,11 +220,13 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     protected function getFolder(PasswordRevision $revision, array $object): array {
         $object['folder'] = [];
 
+        $filters = [];
+        if(!$revision->isHidden()) $filters['hidden'] = false;
+        if(!$revision->isTrashed()) $filters['trashed'] = false;
+
         $objectHelper = $this->getFolderObjectHelper();
         $folder       = $this->folderService->findByUuid($revision->getFolder());
-        $obj          = $objectHelper->getApiObject(
-            $folder, self::LEVEL_MODEL, !$revision->isHidden(), !$revision->isTrashed()
-        );
+        $obj          = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, $filters);
 
         if($obj !== null) {
             $object['folder'] = $obj;

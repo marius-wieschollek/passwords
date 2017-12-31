@@ -172,6 +172,6 @@ class ServiceApiController extends AbstractApiController {
             return [intval($matches[1]), intval($matches[2])];
         }
 
-        throw new ApiException('Invalid Size Specified');
+        throw new ApiException('Invalid Size Specified', 400);
     }
 }

@@ -77,7 +77,7 @@ class FolderHook {
      */
     public function postDelete(Folder $folder): void {
         /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($folder->getUuid(), false);
+        $revisions = $this->revisionService->findByModel($folder->getUuid());
 
         foreach ($revisions as $revision) {
             $this->revisionService->delete($revision);
@@ -92,7 +92,7 @@ class FolderHook {
      */
     public function postClone(Folder $originalFolder, Folder $clonedFolder): void {
         /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($originalFolder->getUuid(), false);
+        $revisions = $this->revisionService->findByModel($originalFolder->getUuid());
 
         foreach ($revisions as $revision) {
             /** @var FolderRevision $clone */

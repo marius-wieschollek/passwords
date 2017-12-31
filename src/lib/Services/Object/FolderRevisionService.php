@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Services\EncryptionService;
@@ -33,7 +34,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \Exception
      */
-    public function findByUuid(string $uuid, bool $decrypt = true): RevisionInterface {
+    public function findByUuid(string $uuid, bool $decrypt = false): RevisionInterface {
         if($uuid === self::BASE_REVISION_UUID) return $this->getBaseRevision();
 
         return parent::findByUuid($uuid, $decrypt);
@@ -86,6 +87,45 @@ class FolderRevisionService extends AbstractRevisionService {
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;
+    }
+
+    /**
+     * @param RevisionInterface|EntityInterface $model
+     *
+     * @return FolderRevision|\OCP\AppFramework\Db\Entity
+     * @throws \Exception
+     */
+    public function save(EntityInterface $model): EntityInterface {
+        if($model->getUuid() === self::BASE_REVISION_UUID ||
+           $model->getModel() === FolderService::BASE_FOLDER_UUID) {
+            return $model;
+        }
+
+        return parent::save($model);
+    }
+
+    /**
+     * @param RevisionInterface|EntityInterface $entity
+     * @param array                             $overwrites
+     *
+     * @return EntityInterface
+     * @throws \Exception
+     */
+    public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
+        if($entity->getUuid() === self::BASE_REVISION_UUID) return $entity;
+
+        return parent::clone($entity, $overwrites);
+    }
+
+    /**
+     * @param RevisionInterface|EntityInterface $entity
+     *
+     * @throws \Exception
+     */
+    public function delete(EntityInterface $entity): void {
+        if($entity->getUuid() === self::BASE_REVISION_UUID) return;
+
+        parent::delete($entity);
     }
 
     /**

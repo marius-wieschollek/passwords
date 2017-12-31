@@ -71,7 +71,7 @@ abstract class AbstractRevisionService extends AbstractService {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \Exception
      */
-    public function findByUuid(string $uuid, bool $decrypt = true): RevisionInterface {
+    public function findByUuid(string $uuid, bool $decrypt = false): RevisionInterface {
         /** @var RevisionInterface $revision */
         $revision = $this->mapper->findByUuid($uuid);
 
@@ -86,7 +86,7 @@ abstract class AbstractRevisionService extends AbstractService {
      *
      * @throws \Exception
      */
-    public function findByModel(string $modelUuid, bool $decrypt = true): array {
+    public function findByModel(string $modelUuid, bool $decrypt = false): array {
         /** @var RevisionInterface[] $revisions */
         $revisions = $this->mapper->findAllMatching(['model', $modelUuid]);
 

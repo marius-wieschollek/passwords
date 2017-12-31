@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
@@ -39,6 +40,11 @@ class FolderApiController extends AbstractObjectApiController {
     protected $revisionService;
 
     /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'trashed', 'favourite'];
+
+    /**
      * PasswordApiController constructor.
      *
      * @param string                $appName
@@ -64,7 +70,6 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $parent
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $favourite
      *
@@ -106,7 +111,6 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $parent
      * @param string $cseType
-     * @param string $sseType
      * @param bool   $hidden
      * @param bool   $favourite
      *
@@ -124,6 +128,8 @@ class FolderApiController extends AbstractObjectApiController {
     ): JSONResponse {
         try {
             $this->checkAccessPermissions();
+            if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
+
             $folder = $this->modelService->findByUuid($id);
 
             $revision = $this->revisionService->create(
@@ -137,5 +143,36 @@ class FolderApiController extends AbstractObjectApiController {
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return JSONResponse
+     */
+    public function delete(string $id): JSONResponse {
+        if($id === $this->modelService::BASE_FOLDER_UUID) {
+            return $this->createErrorResponse(
+                new ApiException('Can not edit base folder', 422)
+            );
+        }
+
+        return parent::delete($id);
+    }
+
+    /**
+     * @param string $id
+     * @param null   $revision
+     *
+     * @return JSONResponse
+     */
+    public function restore(string $id, $revision = null): JSONResponse {
+        if($id === $this->modelService::BASE_FOLDER_UUID || $revision == $this->revisionService::BASE_REVISION_UUID) {
+            return $this->createErrorResponse(
+                new ApiException('Can not edit base folder', 422)
+            );
+        }
+
+        return parent::restore($id, $revision);
     }
 }

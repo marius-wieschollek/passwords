@@ -66,14 +66,14 @@ class TagHook {
     public function preSetRevision(Tag $tag, TagRevision $newRevision): void {
         if($tag->getRevision() === null) return;
         /** @var TagRevision $oldRevision */
-        $oldRevision = $this->revisionService->findByUuid($tag->getRevision(), false);
+        $oldRevision = $this->revisionService->findByUuid($tag->getRevision());
 
         if($oldRevision->getHidden() != $newRevision->getHidden()) {
             $relations = $this->relationService->findByTag($tag->getUuid());
 
             foreach ($relations as $relation) {
                 /** @var PasswordRevision $passwordRevision */
-                $passwordRevision = $this->passwordRevisionService->findByModel($relation->getPassword(), false);
+                $passwordRevision = $this->passwordRevisionService->findByModel($relation->getPassword());
                 $relation->setHidden($newRevision->isHidden() || $passwordRevision->isHidden());
                 $this->relationService->save($relation);
             }
@@ -100,7 +100,7 @@ class TagHook {
      */
     public function postDelete(Tag $tag): void {
         /** @var TagRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($tag->getUuid(), false);
+        $revisions = $this->revisionService->findByModel($tag->getUuid());
 
         foreach ($revisions as $revision) {
             $this->revisionService->delete($revision);
@@ -115,7 +115,7 @@ class TagHook {
      */
     public function postClone(Tag $originalTag, Tag $clonedTag): void {
         /** @var TagRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($originalTag->getUuid(), false);
+        $revisions = $this->revisionService->findByModel($originalTag->getUuid());
 
         $currentClonedRevision = null;
         foreach ($revisions as $revision) {
