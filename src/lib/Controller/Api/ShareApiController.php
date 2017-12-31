@@ -66,7 +66,7 @@ class ShareApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'type'];
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType'];
 
     /**
      * TagApiController constructor.
@@ -106,6 +106,9 @@ class ShareApiController extends AbstractObjectApiController {
      * @param string $with
      * @param bool   $editable
      * @param string $cseType
+     *
+     * @TODO check if share exists for $with user
+     * @TODO check if cseType is same as with all other shares
      *
      * @return JSONResponse
      */
@@ -157,20 +160,35 @@ class ShareApiController extends AbstractObjectApiController {
         }
     }
 
+    /**
+     * @param string $id
+     * @param bool   $editable
+     * @param string $cseType
+     *
+     * @TODO check if cseType matches password cseType
+     * @TODO check if cseType is same as with all other shares or update
+     *
+     * @return JSONResponse
+     */
     public function update(
         string $id,
-        string $password,
-        string $type,
-        string $with,
         bool $editable = false,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION
     ): JSONResponse {
 
         try {
             $this->checkAccessPermissions();
-            $folder = $this->modelService->findByUuid($id);
+            $share = $this->modelService->findByUuid($id);
+            /** @var ShareRevision $oldRevision */
+            $oldRevision = $this->revisionService->findByModel($share->getUuid());
 
-            return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $revision->getUuid()]);
+
+            /** @var ShareRevision $newRevision */
+            $newRevision = $this->revisionService->clone($oldRevision, ['editable' => $editable, 'cseType' => $cseType]);
+            $this->revisionService->save($newRevision);
+            $this->modelService->setRevision($share, $newRevision);
+
+            return $this->createJsonResponse(['id' => $share->getUuid(), 'revision' => $newRevision->getUuid()]);
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }

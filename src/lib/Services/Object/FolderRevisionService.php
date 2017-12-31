@@ -151,18 +151,20 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision = new FolderRevision();
         $revision->setUserId($this->userId);
         $revision->setUuid($this->generateUuidV4());
-        $revision->setHidden($hidden);
-        $revision->setTrashed($trashed);
         $revision->setDeleted(false);
+        $revision->setCreated(time());
+        $revision->setUpdated(time());
+        $revision->_setDecrypted(true);
+
         $revision->setModel($model);
         $revision->setFavourite($favourite);
         $revision->setLabel($label);
         $revision->setParent($parent);
         $revision->setCseType($cseType);
+        $revision->setHidden($hidden);
+        $revision->setTrashed($trashed);
         $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $revision->setCreated(time());
-        $revision->setUpdated(time());
-        $revision->_setDecrypted(true);
+        $revision->setClient('');
 
         return $revision;
     }

@@ -195,7 +195,7 @@
 			<field>
 				<name>client</name>
 				<type>text</type>
-				<length>32</length>
+				<length>36</length>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -365,7 +365,7 @@
 			<field>
 				<name>client</name>
 				<type>text</type>
-				<length>32</length>
+				<length>36</length>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -523,7 +523,7 @@
 			<field>
 				<name>client</name>
 				<type>text</type>
-				<length>32</length>
+				<length>36</length>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -786,7 +786,7 @@
 			<field>
 				<name>client</name>
 				<type>text</type>
-				<length>32</length>
+				<length>36</length>
 				<notnull>true</notnull>
 			</field>
 			<field>

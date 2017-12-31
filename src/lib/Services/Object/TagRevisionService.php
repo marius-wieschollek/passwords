@@ -91,6 +91,7 @@ class TagRevisionService extends AbstractRevisionService {
         $revision->setLabel($label);
         $revision->setColor($color);
         $revision->setFavourite($favourite);
+        $revision->setClient('');
 
         return $revision;
     }

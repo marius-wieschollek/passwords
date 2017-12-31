@@ -26,14 +26,14 @@ class WordsService {
     protected $retries = 0;
 
     /**
-     * @var HelperService
-     */
-    protected $helperService;
-
-    /**
      * @var ILogger
      */
     protected $logger;
+
+    /**
+     * @var HelperService
+     */
+    protected $helperService;
 
     /**
      * FaviconService constructor.

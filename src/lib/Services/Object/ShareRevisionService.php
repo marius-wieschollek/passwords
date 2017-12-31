@@ -109,6 +109,7 @@ class ShareRevisionService extends AbstractRevisionService {
         $revision->setNotes($notes);
         $revision->setEditable($editable);
         $revision->setSynchronized(!$editable);
+        $revision->setClient('');
 
         return $revision;
     }

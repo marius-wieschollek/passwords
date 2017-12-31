@@ -130,6 +130,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setFolder($folder);
         $revision->setShared($shared);
         $revision->setFavourite($favourite);
+        $revision->setClient('');
 
         if($shared) {
             $revision->setSseType(EncryptionService::DEFAULT_SHARE_ENCRYPTION);
