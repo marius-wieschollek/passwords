@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb/>
+            <breadcrumb :showAddNew="false" />
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>

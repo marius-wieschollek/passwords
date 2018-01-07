@@ -40,7 +40,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return null|string
      */
     protected function getFaviconData(string $domain): ?string {
-        list($html, $url) = $this->getHttpRequest('https://panel.preyproject.com/login');//'http://'.$domain);
+        list($html, $url) = $this->getHttpRequest('http://'.$domain);
 
         if(!empty($html)) {
             $patterns = $this->getSearchPatterns();
