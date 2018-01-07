@@ -34,37 +34,56 @@ export default class SimpleApi {
 
         this._encryption = new Encryption();
         this._paths = {
-            'tag.list'         : 'api/1.0/tag/list',
-            'tag.find'         : 'api/1.0/tag/find',
-            'tag.show'         : 'api/1.0/tag/show',
-            'tag.create'       : 'api/1.0/tag/create',
-            'tag.update'       : 'api/1.0/tag/update',
-            'tag.delete'       : 'api/1.0/tag/delete',
-            'tag.restore'      : 'api/1.0/tag/restore',
-            'folder.list'      : 'api/1.0/folder/list',
-            'folder.find'      : 'api/1.0/folder/find',
-            'folder.show'      : 'api/1.0/folder/show',
-            'folder.create'    : 'api/1.0/folder/create',
-            'folder.update'    : 'api/1.0/folder/update',
-            'folder.delete'    : 'api/1.0/folder/delete',
-            'folder.restore'   : 'api/1.0/folder/restore',
-            'password.list'    : 'api/1.0/password/list',
-            'password.find'    : 'api/1.0/password/find',
-            'password.show'    : 'api/1.0/password/show',
-            'password.create'  : 'api/1.0/password/create',
-            'password.update'  : 'api/1.0/password/update',
-            'password.delete'  : 'api/1.0/password/delete',
-            'password.restore' : 'api/1.0/password/restore',
-            'password.generate': 'api/1.0/service/password',
-            'service.favicon'  : 'api/1.0/service/icon/{domain}/{size}',
-            'service.preview'  : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
+            'tag.list'            : 'api/1.0/tag/list',
+            'tag.find'            : 'api/1.0/tag/find',
+            'tag.show'            : 'api/1.0/tag/show',
+            'tag.create'          : 'api/1.0/tag/create',
+            'tag.update'          : 'api/1.0/tag/update',
+            'tag.delete'          : 'api/1.0/tag/delete',
+            'tag.restore'         : 'api/1.0/tag/restore',
+            'share.info'          : 'api/1.0/share/info',
+            'share.create'        : 'api/1.0/share/create',
+            'share.update'        : 'api/1.0/share/update',
+            'share.delete'        : 'api/1.0/share/delete',
+            'share.partners'      : 'api/1.0/share/partners',
+            'client.list'         : 'api/1.0/client/list',
+            'client.show'         : 'api/1.0/client/show',
+            'client.create'       : 'api/1.0/client/create',
+            'client.update'       : 'api/1.0/client/update',
+            'client.delete'       : 'api/1.0/client/delete',
+            'folder.list'         : 'api/1.0/folder/list',
+            'folder.find'         : 'api/1.0/folder/find',
+            'folder.show'         : 'api/1.0/folder/show',
+            'folder.create'       : 'api/1.0/folder/create',
+            'folder.update'       : 'api/1.0/folder/update',
+            'folder.delete'       : 'api/1.0/folder/delete',
+            'folder.restore'      : 'api/1.0/folder/restore',
+            'password.list'       : 'api/1.0/password/list',
+            'password.find'       : 'api/1.0/password/find',
+            'password.show'       : 'api/1.0/password/show',
+            'password.create'     : 'api/1.0/password/create',
+            'password.update'     : 'api/1.0/password/update',
+            'password.delete'     : 'api/1.0/password/delete',
+            'password.restore'    : 'api/1.0/password/restore',
+            'password.generate'   : 'api/1.0/service/password',
+            'settings.get'        : 'api/1.0/settings/get',
+            'settings.set'        : 'api/1.0/settings/set',
+            'settings.list'       : 'api/1.0/settings/list',
+            'settings.reset'      : 'api/1.0/settings/reset',
+            'authorisation.info'  : 'api/1.0/authorisation/info',
+            'authorisation.login' : 'api/1.0/authorisation/login',
+            'authorisation.logout': 'api/1.0/authorisation/logout',
+            'service.coffee'      : 'api/1.0/service/coffee',
+            'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
+            'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
+            'service.preview'     : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
         };
     }
 
     login(endpoint, username = null, password = null, token = null) {
         this._endpoint = endpoint;
         if (username !== null && password !== null) {
-            this._headers['Authorization'] = 'Basic ' + btoa(username + ':' + password);
+            this._headers.Authorization = 'Basic ' + btoa(username + ':' + password);
         }
         if (token !== null) {
             this._headers['X-Passwords-Token'] = token;
@@ -171,7 +190,7 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async createFolder(data = {}) {
+    createFolder(data = {}) {
         return this._createRequest('folder.create', data);
     }
 
@@ -192,7 +211,7 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async updateFolder(data = {}) {
+    updateFolder(data = {}) {
         return this._createRequest('folder.update', data, 'PATCH');
     }
 
@@ -249,7 +268,7 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async createTag(data = {}) {
+    createTag(data = {}) {
         return this._createRequest('tag.create', data);
     }
 
@@ -270,7 +289,7 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async updateTag(data = {}) {
+    updateTag(data = {}) {
         return this._createRequest('tag.update', data, 'PATCH');
     }
 
@@ -318,6 +337,60 @@ export default class SimpleApi {
 
 
     /**
+     * Sharing
+     */
+
+    /**
+     * Creates a new share with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    createShare(data = {}) {
+        return this._createRequest('share.create', data);
+    }
+
+    /**
+     * Update a share
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    updateShare(data = {}) {
+        return this._createRequest('share.update', data, 'PATCH');
+    }
+
+    /**
+     * Deletes a share
+     *
+     * @returns {Promise}
+     * @param id
+     */
+    deleteShare(id) {
+        return this._createRequest('share.delete', {id: id}, 'DELETE');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    getSharingInfo() {
+        return this._createRequest('share.info');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    findSharePartners(search = '') {
+        if(search.length === 0) {
+            return this._createRequest('share.partners');
+        }
+        return this._createRequest('share.partners', {search: search}, 'POST');
+    }
+
+
+    /**
      * Misc Services
      */
 
@@ -344,13 +417,35 @@ export default class SimpleApi {
     }
 
     /**
+     * Loads a favicon blob over the avatar service
+     *
+     * @param user
+     * @param size
+     * @returns {Promise}
+     */
+    getAvatar(user, size = 32) {
+        return this._createRequest(['service.avatar', {user: user, size: size}], null, 'GET', 'text');
+    }
+
+    /**
+     * Returns the URL which retrieves the avatar with the given settings
+     *
+     * @param user
+     * @param size
+     * @returns {*}
+     */
+    getAvatarUrl(user, size = 32) {
+        return this._endpoint + SimpleApi.processUrl(this._paths['service.avatar'], {user: user, size: size});
+    }
+
+    /**
      * Loads a favicon blob over the favicon service
      *
      * @param host
      * @param size
      * @returns {Promise}
      */
-    getFavicon(host, size = 24) {
+    getFavicon(host, size = 32) {
         return this._createRequest(['service.favicon', {domain: host, size: size}], null, 'GET', 'text');
     }
 
@@ -374,7 +469,7 @@ export default class SimpleApi {
      * @param height
      * @returns {Promise}
      */
-    getPreview(host, view = 'desktop', width = '560', height = '350...') {
+    getPreview(host, view = 'desktop', width = '550', height = '350...') {
         return this._createRequest(
             ['service.preview', {domain: host, view: view, width: width, height: height}],
             null,

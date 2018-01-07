@@ -12,11 +12,15 @@ use Exception;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
+use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\IAppContainer;
+use OCP\IUserManager;
 
 /**
  * Class PasswordObjectHelper
@@ -33,6 +37,16 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @var TagService
      */
     protected $tagService;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
+
+    /**
+     * @var ShareService
+     */
+    protected $shareService;
 
     /**
      * @var FolderService
@@ -54,6 +68,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      *
      * @param IAppContainer           $container
      * @param TagService              $tagService
+     * @param IUserManager            $userManager
+     * @param ShareService            $shareService
      * @param FolderService           $folderService
      * @param EncryptionService       $encryptionService
      * @param PasswordRevisionService $revisionService
@@ -61,20 +77,24 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     public function __construct(
         IAppContainer $container,
         TagService $tagService,
+        IUserManager $userManager,
+        ShareService $shareService,
         FolderService $folderService,
         EncryptionService $encryptionService,
         PasswordRevisionService $revisionService
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
 
-        $this->tagService      = $tagService;
-        $this->folderService   = $folderService;
+        $this->tagService    = $tagService;
+        $this->userManager   = $userManager;
+        $this->shareService  = $shareService;
+        $this->folderService = $folderService;
     }
 
     /**
      * @param ModelInterface|Password $password
-     * @param string         $level
-     * @param array          $filter
+     * @param string                  $level
+     * @param array                   $filter
      *
      * @return array|null
      * @throws Exception
@@ -92,7 +112,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object = [];
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($password, $revision);
         }
@@ -104,6 +124,9 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         }
         if(in_array(self::LEVEL_TAGS, $detailLevel)) {
             $object = $this->getTags($revision, $object);
+        }
+        if(in_array(self::LEVEL_SHARES, $detailLevel)) {
+            $object = $this->getShares($revision, $object);
         }
 
         return $object;
@@ -118,11 +141,10 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     protected function getModel(Password $password, PasswordRevision $revision): array {
         return [
             'id'        => $password->getUuid(),
-            'owner'     => $password->getUserId(),
             'created'   => $password->getCreated(),
             'updated'   => $password->getUpdated(),
+            'share'     => $password->getShareId(),
             'revision'  => $revision->getUuid(),
-            'shareId'   => $password->getShareId(),
             'label'     => $revision->getLabel(),
             'username'  => $revision->getUsername(),
             'password'  => $revision->getPassword(),
@@ -155,7 +177,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         foreach ($revisions as $revision) {
             $current = [
                 'id'        => $revision->getUuid(),
-                'owner'     => $revision->getUserId(),
                 'created'   => $revision->getCreated(),
                 'updated'   => $revision->getUpdated(),
                 'label'     => $revision->getLabel(),
@@ -196,8 +217,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if(!$revision->isHidden()) $filters['hidden'] = false;
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
-        $objectHelper   = $this->getTagObjectHelper();
-        $tags           = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
+        $objectHelper = $this->getTagObjectHelper();
+        $tags         = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
         foreach ($tags as $tag) {
             $obj = $objectHelper->getApiObject($tag, self::LEVEL_MODEL, $filters);
 
@@ -236,6 +257,79 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         }
 
         return $object;
+    }
+
+    /**
+     * @param PasswordRevision $revision
+     * @param                  $object
+     *
+     * @return array
+     * @throws Exception
+     */
+    protected function getShares(PasswordRevision $revision, $object): array {
+        $object['shares'] = [];
+        $shares           = $this->shareService->findBySourcePassword($revision->getModel());
+        foreach ($shares as $share) {
+            $object['shares'][] = $this->formatShare($share);
+        }
+
+        if($object['share']) {
+            $share           = $this->shareService->findByUuid($object['share']);
+            $object['share'] = $this->formatShare($share);
+        }
+
+        return $object;
+    }
+
+    /**
+     * @param Share $share
+     *
+     * @return array
+     */
+    protected function formatShare(Share $share): array {
+        $owner    = $this->userManager->get($share->getUserId());
+        $receiver = $this->userManager->get($share->getReceiver());
+
+        return [
+            'id'            => $share->getUuid(),
+            'created'       => $share->getCreated(),
+            'updated'       => $share->getUpdated(),
+            'expires'       => $share->getExpires(),
+            'editable'      => $share->isEditable(),
+            'shareable'     => $share->isShareable(),
+            'updatePending' => $share->isSourceUpdated() || $share->isTargetUpdated(),
+            'owner'         => [
+                'id'   => $owner->getUID(),
+                'name' => $owner->getDisplayName()
+            ],
+            'receiver'      => [
+                'id'   => $receiver->getUID(),
+                'name' => $receiver->getDisplayName()
+            ]
+        ];
+    }
+
+    /**
+     * @param ModelInterface|Password $model
+     * @param array          $filters
+     *
+     * @return null|RevisionInterface
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    protected function getRevision(ModelInterface $model, array $filters): ?RevisionInterface {
+        if(isset($filters['sharedWithMe'])) {
+            if($filters['sharedWithMe'] !== !empty($model->getShareId())) return null;
+            unset($filters['sharedWithMe']);
+        }
+
+        if(isset($filters['sharedByMe'])) {
+            if($filters['sharedByMe'] !== $model->hasShares()) return null;
+            unset($filters['sharedByMe']);
+        }
+
+        return parent::getRevision($model, $filters);
     }
 
     /**

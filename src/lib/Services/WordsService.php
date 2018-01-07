@@ -9,9 +9,7 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
-use OCP\ILogger;
 
 /**
  * Class WordsService
@@ -26,7 +24,7 @@ class WordsService {
     protected $retries = 0;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -38,10 +36,10 @@ class WordsService {
     /**
      * FaviconService constructor.
      *
-     * @param HelperService $helperService
-     * @param ILogger       $logger
+     * @param HelperService  $helperService
+     * @param LoggingService $logger
      */
-    public function __construct(HelperService $helperService, ILogger $logger) {
+    public function __construct(HelperService $helperService, LoggingService $logger) {
         $this->helperService = $helperService;
         $this->logger        = $logger;
     }
@@ -78,7 +76,7 @@ class WordsService {
 
             return [$password, $words];
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+            $this->logger->error($e->getMessage());
 
             throw new ApiException('Internal Words API Error'. 502);
         }

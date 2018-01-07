@@ -8,7 +8,6 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OCA\Passwords\Controller\AccessController;
 use OCA\Passwords\Controller\AdminSettingsController;
 use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
@@ -17,6 +16,7 @@ use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
+use OCA\Passwords\Cron\SynchronizeShares;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevision;
@@ -27,16 +27,14 @@ use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
+use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
-use OCA\Passwords\Db\ShareRevisionMapper;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
-use OCA\Passwords\Encryption\ShareV1Encryption;
 use OCA\Passwords\Encryption\SseV1Encryption;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
-use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
 use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
@@ -50,6 +48,7 @@ use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
+use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
@@ -60,22 +59,24 @@ use OCA\Passwords\Hooks\FolderHook;
 use OCA\Passwords\Hooks\FolderRevisionHook;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Hooks\PasswordHook;
+use OCA\Passwords\Hooks\ShareHook;
 use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Migration\Legacy\DecryptionModule;
 use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
 use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
 use OCA\Passwords\Migration\LegacyDatabaseMigration;
+use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
-use OCA\Passwords\Services\Object\ShareRevisionService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
@@ -86,7 +87,7 @@ use OCA\Passwords\Settings\AdminSettings;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\Files\IAppData;
-use OCP\Share\IManager;
+use OCP\IGroupManager;
 
 /**
  * Class Application
@@ -173,10 +174,19 @@ class Application extends App {
         /**
          * Cron Jobs
          */
-        $container->registerService('CheckPasswordsJob', function (IAppContainer $c) {
+        $container->registerService(CheckPasswordsJob::class, function (IAppContainer $c) {
             return new CheckPasswordsJob(
+                $c->query('LoggingService'),
                 $c->query('HelperService'),
                 $c->query('PasswordRevisionMapper')
+            );
+        });
+        $container->registerService(SynchronizeShares::class, function (IAppContainer $c) {
+            return new SynchronizeShares(
+                $c->query('LoggingService'),
+                $c->query('ShareService'),
+                $c->query('PasswordService'),
+                $c->query('PasswordRevisionService')
             );
         });
 
@@ -235,14 +245,6 @@ class Application extends App {
             );
         });
 
-        $container->registerService('AccessController', function (IAppContainer $c) {
-            return new AccessController(
-                self::APP_NAME,
-                $c->query('Request'),
-                $c->getServer()->getURLGenerator()
-            );
-        });
-
         $container->registerService('PasswordApiController', function (IAppContainer $c) {
             return new PasswordApiController(
                 self::APP_NAME,
@@ -280,23 +282,27 @@ class Application extends App {
             return new ServiceApiController(
                 self::APP_NAME,
                 $c->query('Request'),
+                $c->query('WordsService'),
+                $c->query('AvatarService'),
                 $c->query('FaviconService'),
-                $c->query('PageShotService'),
-                $c->query('WordsService')
+                $c->query('PageShotService')
             );
         });
 
         $container->registerService('ShareApiController', function (IAppContainer $c) {
+            $server = $c->getServer();
+
             return new ShareApiController(
                 self::APP_NAME,
-                $this->getUserId(),
+                $server->getUserSession()->getUser(),
+                $server->getConfig(),
                 $c->query('Request'),
-                $c->query(IManager::class),
+                $server->getShareManager(),
+                $server->getUserManager(),
                 $c->query('ShareService'),
-                $c->query('ShareRevisionService'),
+                $c->query(IGroupManager::class),
                 $c->query('PasswordService'),
-                $c->query('PasswordRevisionService'),
-                $c->query('ShareObjectHelper')
+                $c->query('PasswordRevisionService')
             );
         });
 
@@ -364,13 +370,6 @@ class Application extends App {
             );
         });
 
-        $container->registerService('ShareRevisionMapper', function (IAppContainer $c) {
-            return new ShareRevisionMapper(
-                $c->getServer()->getDatabaseConnection(),
-                $this->getUserId()
-            );
-        });
-
         $container->registerService('PasswordTagRelationMapper', function (IAppContainer $c) {
             return new PasswordTagRelationMapper(
                 $c->getServer()->getDatabaseConnection(),
@@ -408,7 +407,6 @@ class Application extends App {
                 $c->query('ShareService'),
                 $c->query('TagRevisionService'),
                 $c->query('PasswordRevisionService'),
-                $c->query('ShareRevisionService'),
                 $c->query('PasswordTagRelationService')
             );
         });
@@ -417,6 +415,12 @@ class Application extends App {
                 $c->query('TagRevisionService'),
                 $c->query('PasswordRevisionService'),
                 $c->query('PasswordTagRelationService')
+            );
+        });
+        $container->registerService('ShareHook', function (IAppContainer $c) {
+            return new ShareHook(
+                $c->query('ShareService'),
+                $c->query('PasswordService')
             );
         });
     }
@@ -489,16 +493,6 @@ class Application extends App {
             );
         });
 
-        $container->registerService('ShareRevisionService', function (IAppContainer $c) {
-            return new ShareRevisionService(
-                $this->getUserId(),
-                $c->query('HookManager'),
-                $c->query('ShareRevisionMapper'),
-                $c->query('ValidationService'),
-                $c->query('EncryptionService')
-            );
-        });
-
         $container->registerService('PasswordTagRelationService', function (IAppContainer $c) {
             return new PasswordTagRelationService(
                 $this->getUserId(),
@@ -510,7 +504,7 @@ class Application extends App {
         $container->registerService('FileCacheService', function (IAppContainer $c) {
             return new FileCacheService(
                 $c->query('AppData'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
             );
         });
 
@@ -519,7 +513,7 @@ class Application extends App {
                 $c->query('HelperService'),
                 $this->getFileCacheService(),
                 $c->query('ValidationService'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
             );
         });
 
@@ -528,14 +522,23 @@ class Application extends App {
                 $c->query('HelperService'),
                 $this->getFileCacheService(),
                 $c->query('ValidationService'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
             );
         });
 
         $container->registerService('WordsService', function (IAppContainer $c) {
             return new WordsService(
                 $c->query('HelperService'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
+            );
+        });
+
+        $container->registerService('AvatarService', function (IAppContainer $c) {
+            return new AvatarService(
+                $c->getServer()->getUserManager(),
+                $c->query('HelperService')->getImageHelper(),
+                $this->getFileCacheService(),
+                $c->query('ConfigurationService')
             );
         });
 
@@ -563,6 +566,12 @@ class Application extends App {
                 $c->query('HelperService')->getSecurityHelper()
             );
         });
+
+        $container->registerService('LoggingService', function (IAppContainer $c) {
+            return new LoggingService(
+                $c->getServer()->getLogger()
+            );
+        });
     }
 
     /**
@@ -575,6 +584,8 @@ class Application extends App {
             return new PasswordObjectHelper(
                 $c,
                 $c->query('TagService'),
+                $c->getServer()->getUserManager(),
+                $c->query('ShareService'),
                 $c->query('FolderService'),
                 $c->query('EncryptionService'),
                 $c->query('PasswordRevisionService')
@@ -596,14 +607,6 @@ class Application extends App {
                 $c->query('PasswordService'),
                 $c->query('TagRevisionService'),
                 $c->query('EncryptionService')
-            );
-        });
-        $container->registerService('ShareObjectHelper', function (IAppContainer $c) {
-            return new ShareObjectHelper(
-                $c,
-                $c->query('ShareService'),
-                $c->query('EncryptionService'),
-                $c->query('ShareRevisionService')
             );
         });
     }
@@ -747,7 +750,7 @@ class Application extends App {
             return new HaveIBeenPwnedHelper(
                 $this->getFileCacheService(),
                 $c->query('ConfigurationService'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
             );
         });
 
@@ -755,7 +758,7 @@ class Application extends App {
             return new BigLocalDbSecurityCheckHelper(
                 $this->getFileCacheService(),
                 $c->query('ConfigurationService'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
             );
         });
 
@@ -763,7 +766,17 @@ class Application extends App {
             return new SmallLocalDbSecurityCheckHelper(
                 $this->getFileCacheService(),
                 $c->query('ConfigurationService'),
-                $c->getServer()->getLogger()
+                $c->query('LoggingService')
+            );
+        });
+
+        $container->registerService('BigDbPlusHibpSecurityCheckHelper', function (IAppContainer $c) {
+            return new BigDbPlusHibpSecurityCheckHelper(
+                $this->getFileCacheService(),
+                $c->query('ConfigurationService'),
+                $c->query('LoggingService'),
+                $c->query('BigLocalDbSecurityCheckHelper'),
+                $c->query('HaveIBeenPwnedHelper')
             );
         });
     }
@@ -784,16 +797,6 @@ class Application extends App {
                 $c->getServer()->getCrypto(),
                 $c->getServer()->getSecureRandom(),
                 $c->query('ConfigurationService')
-            );
-        });
-        $container->registerService(ShareV1Encryption::class, function (IAppContainer $c) {
-            return new ShareV1Encryption(
-                $this->getUserId(),
-                $c->getServer()->getCrypto(),
-                $c->getServer()->getSecureRandom(),
-                $c->query('ConfigurationService'),
-                $c->query('ShareService'),
-                $c->query('ShareRevisionService')
             );
         });
     }
@@ -866,11 +869,14 @@ class Application extends App {
         $hookManager->listen(Password::class, 'preDelete', [$passwordHook, 'preDelete']);
         $hookManager->listen(Password::class, 'postDelete', [$passwordHook, 'postDelete']);
         $hookManager->listen(Password::class, 'preSetRevision', [$passwordHook, 'preSetRevision']);
-        /** @var TagHook $passwordHook */
+        /** @var TagHook $tagHook */
         $tagHook = $container->query('TagHook');
         $hookManager->listen(Tag::class, 'postClone', [$tagHook, 'postClone']);
         $hookManager->listen(Tag::class, 'preDelete', [$tagHook, 'preDelete']);
         $hookManager->listen(Tag::class, 'postDelete', [$tagHook, 'postDelete']);
         $hookManager->listen(Tag::class, 'preSetRevision', [$tagHook, 'preSetRevision']);
+        /** @var ShareHook $shareHook */
+        $shareHook = $container->query('ShareHook');
+        $hookManager->listen(Share::class, 'postDelete', [$shareHook, 'postDelete']);
     }
 }

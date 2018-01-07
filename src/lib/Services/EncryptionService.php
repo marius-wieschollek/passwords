@@ -10,7 +10,6 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Encryption\EncryptionInterface;
-use OCA\Passwords\Encryption\ShareV1Encryption;
 use OCA\Passwords\Encryption\SseV1Encryption;
 use OCP\AppFramework\IAppContainer;
 
@@ -28,10 +27,10 @@ class EncryptionService {
     const SSE_ENCRYPTION_V1        = 'SSEv1r1';
     const SHARE_ENCRYPTION_V1      = 'SSSEv1r1';
 
-    protected $encryptionMapping = [
-        self::SSE_ENCRYPTION_V1   => SseV1Encryption::class,
-        self::SHARE_ENCRYPTION_V1 => ShareV1Encryption::class
-    ];
+    protected $encryptionMapping
+        = [
+            self::SSE_ENCRYPTION_V1 => SseV1Encryption::class
+        ];
     /**
      * @var IAppContainer
      */
@@ -68,6 +67,8 @@ class EncryptionService {
      * @throws \Exception
      */
     public function encrypt(RevisionInterface $object): RevisionInterface {
+        if(!$object->_isDecrypted()) return $object;
+
         $encryption = $this->getEncryptionByType($object->getSseType());
         $object->_setDecrypted(false);
 
@@ -81,6 +82,8 @@ class EncryptionService {
      * @throws \Exception
      */
     public function decrypt(RevisionInterface $object): RevisionInterface {
+        if($object->_isDecrypted()) return $object;
+
         $encryption = $this->getEncryptionByType($object->getSseType());
         $object->_setDecrypted(true);
 

@@ -17,6 +17,8 @@ namespace OCA\Passwords\Db;
  * @method void setShareId(string $shareId)
  * @method bool getEditable()
  * @method void setEditable(bool $editable)
+ * @method bool getHasShares()
+ * @method void setHasShares(bool $hasShares)
  */
 class Password extends AbstractModelEntity {
 
@@ -28,6 +30,11 @@ class Password extends AbstractModelEntity {
     /**
      * @var bool
      */
+    protected $hasShares;
+
+    /**
+     * @var bool
+     */
     protected $editable;
 
     /**
@@ -35,7 +42,8 @@ class Password extends AbstractModelEntity {
      */
     public function __construct() {
         $this->addType('shareId', 'string');
-        $this->addType('writable', 'boolean');
+
+        $this->addType('hasShares', 'boolean');
 
         parent::__construct();
     }
@@ -45,5 +53,12 @@ class Password extends AbstractModelEntity {
      */
     public function isEditable(): bool {
         return $this->getEditable();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasShares(): bool {
+        return $this->getHasShares() === true;
     }
 }

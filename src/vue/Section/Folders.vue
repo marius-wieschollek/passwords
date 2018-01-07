@@ -79,7 +79,7 @@
             refreshViewIfRequired: function (data) {
                 let object = data.object;
 
-                if (object.type === 'password' && object.folder === this.currentFolder) {
+                if (object.type === 'password' && (object.folder === this.currentFolder || object.folder.id === this.currentFolder)) {
                     if (object.trashed) {
                         this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                     } else {

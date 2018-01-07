@@ -8,9 +8,9 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
-use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
@@ -91,7 +91,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object = [];
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($folder, $revision);
         }
@@ -122,7 +122,6 @@ class FolderObjectHelper extends AbstractObjectHelper {
 
         return [
             'id'        => $folder->getUuid(),
-            'owner'     => $folder->getUserId(),
             'created'   => $folder->getCreated(),
             'updated'   => $folder->getUpdated(),
             'revision'  => $revision->getUuid(),

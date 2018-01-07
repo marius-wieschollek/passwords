@@ -295,6 +295,48 @@ export default class EnhancedApi extends SimpleApi {
 
 
     /**
+     * Shares
+     */
+
+    /**
+     * Creates a new share with the given attributes
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    createShare(data = {}) {
+        let object = EnhancedApi._cloneObject(data);
+
+        try {
+            object = EnhancedApi.flattenShare(object);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        return super.createShare(object);
+    }
+
+    /**
+     * Update a share
+     *
+     * @param data
+     * @returns {Promise}
+     */
+    updateShare(data = {}) {
+        if (!data.id) return this.createShare(data);
+        let object = EnhancedApi._cloneObject(data);
+
+        try {
+            object = EnhancedApi.flattenShare(object);
+        } catch (e) {
+            return this._createRejectedPromise(e);
+        }
+
+        return super.updateShare(object);
+    }
+
+
+    /**
      * Validation
      */
 
@@ -323,6 +365,20 @@ export default class EnhancedApi extends SimpleApi {
         }
 
         return folder;
+    }
+
+    /**
+     *
+     * @param share
+     * @returns {*}
+     */
+    static flattenShare(share) {
+        if(share.expires !== null && Number.isNaN(share.expires)) {
+            let date = new Date(share.expires);
+            share.expires = Math.floor(date.getTime() / 1000);
+        }
+
+        return share;
     }
 
     /**
@@ -498,8 +554,14 @@ export default class EnhancedApi extends SimpleApi {
         if(password.revisions) {
             password.revisions = this._processPasswordList(password.revisions);
         }
-        if(typeof password.folder !== 'string') {
+        if(typeof password.folder === 'object') {
             password.folder = this._processFolder(password.folder);
+        }
+        if(password.share !== null && typeof password.share === 'object') {
+            password.share = this._processShare(password.share);
+        }
+        if(Array.isArray(password.shares)) {
+            password.shares = this._processShareList(password.shares);
         }
 
         password.created = new Date(password.created * 1e3);
@@ -588,6 +650,39 @@ export default class EnhancedApi extends SimpleApi {
         tag.updated = new Date(tag.updated * 1e3);
 
         return tag;
+    }
+
+    /**
+     *
+     * @param data
+     * @returns {{}}
+     * @private
+     */
+    _processShareList(data) {
+        let shares = {};
+
+        for (let i = 0; i < data.length; i++) {
+            let share = this._processShare(data[i]);
+            shares[share.id] = share;
+        }
+
+        return shares;
+    }
+
+    /**
+     *
+     * @param share
+     * @returns {*}
+     * @private
+     */
+    _processShare(share) {
+        share.created = new Date(share.created * 1e3);
+        share.updated = new Date(share.updated * 1e3);
+        share.owner.icon = this.getAvatarUrl(share.owner.id);
+        share.receiver.icon = this.getAvatarUrl(share.receiver.id);
+        if(share.expires !== null) share.expires = new Date(share.expires * 1e3);
+
+        return share;
     }
 
     /**

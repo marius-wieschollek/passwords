@@ -18,6 +18,59 @@ class PasswordMapper extends AbstractMapper {
     const TABLE_NAME = 'passwords_entity_password';
 
     /**
+     * @var array
+     */
+    protected $allowedFields       = ['id', 'uuid', 'has_shares'];
+
+    /**
+     * @param string $shareUuid
+     * @param bool   $source
+     *
+     * @return null|Password|\OCP\AppFramework\Db\Entity
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    public function findPasswordByShare(string $shareUuid, bool $source = true): ?Password {
+        $passwordTable = '`*PREFIX*'.PasswordMapper::TABLE_NAME.'`';
+        $shareTable    = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
+        $mapField = $source ? 'source_password':'target_password';
+
+        $sql = "SELECT {$passwordTable}.* FROM {$passwordTable} ".
+               "INNER JOIN {$shareTable} ".
+               "ON {$passwordTable}.`uuid` = {$shareTable}.`{$mapField}` ".
+               "WHERE {$passwordTable}.`deleted` = 0 ".
+               "AND {$shareTable}.`deleted` = 0 ".
+               "AND ( {$passwordTable}.`user_id` = {$shareTable}.`user_id` ".
+               "OR {$passwordTable}.`user_id` = {$shareTable}.`receiver` ) ".
+               "AND {$shareTable}.`uuid` = ?";
+
+        $params = [$shareUuid];
+        if($this->userId !== null) {
+            $sql      .= " AND ({$shareTable}.`user_id` = ? OR {$shareTable}.`receiver` = ? )";
+            $params[] = $this->userId;
+            $params[] = $this->userId;
+        }
+
+        return $this->findEntity($sql, $params);
+    }
+
+    /**
+     * @return Password[]
+     */
+    public function findOrphanedTargetPasswords(): array {
+        $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
+        $shareTable    = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
+
+        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
+               "INNER JOIN {$shareTable} ".
+               "ON {$passwordsTable}.`uuid` = {$shareTable}.`target_password` ".
+               "WHERE {$passwordsTable}.`deleted` = 0 ".
+               "AND {$shareTable}.`deleted` = 1 ";
+
+        return $this->findEntities($sql);
+    }
+
+    /**
      * @param string $folderUuid
      *
      * @return Password[]

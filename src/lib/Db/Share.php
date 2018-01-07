@@ -15,16 +15,26 @@ namespace OCA\Passwords\Db;
  * @method void setUuid(string $uuid)
  * @method string getType()
  * @method void setType(string $type)
- * @method string getRevision()
- * @method void setRevision(string $revision)
- * @method string getPasswordId()
- * @method void setPasswordId(string $passwordId)
- * @method string getReceiverId()
- * @method void setReceiverId(string $receiverId)
+ * @method string getSourcePassword()
+ * @method void setSourcePassword(string $sourcePassword)
+ * @method string getTargetPassword()
+ * @method void setTargetPassword(string $targetPassword)
+ * @method string getReceiver()
+ * @method void setReceiver(string $receiver)
+ * @method bool getEditable()
+ * @method void setEditable(bool $editable)
+ * @method bool getShareable()
+ * @method void setShareable(bool $shareable)
+ * @method bool getSourceUpdated()
+ * @method void setSourceUpdated(bool $sourceUpdated)
+ * @method bool getTargetUpdated()
+ * @method void setTargetUpdated(bool $targetUpdated)
+ * @method int getExpires()
+ * @method void setExpires(int $expires)
  *
  * @package OCA\Passwords\Db
  */
-class Share extends AbstractEntity implements ModelInterface {
+class Share extends AbstractEntity implements EntityInterface {
 
     const TYPE_USER  = 'user';
     const TYPE_GROUP = 'group';
@@ -43,17 +53,42 @@ class Share extends AbstractEntity implements ModelInterface {
     /**
      * @var string
      */
-    protected $revision;
+    protected $receiver;
+
+    /**
+     * @var bool
+     */
+    protected $editable;
+
+    /**
+     * @var bool
+     */
+    protected $shareable;
+
+    /**
+     * @var int
+     */
+    protected $expires;
 
     /**
      * @var string
      */
-    protected $passwordId;
+    protected $sourcePassword;
 
     /**
      * @var string
      */
-    protected $receiverId;
+    protected $targetPassword;
+
+    /**
+     * @var bool
+     */
+    protected $sourceUpdated;
+
+    /**
+     * @var bool
+     */
+    protected $targetUpdated;
 
     /**
      * Password constructor.
@@ -61,10 +96,45 @@ class Share extends AbstractEntity implements ModelInterface {
     public function __construct() {
         $this->addType('uuid', 'string');
         $this->addType('type', 'string');
-        $this->addType('revision', 'string');
-        $this->addType('passwordId', 'string');
-        $this->addType('receiverId', 'string');
+        $this->addType('receiver', 'string');
+        $this->addType('sourcePassword', 'string');
+        $this->addType('targetPassword', 'string');
+
+        $this->addType('expires', 'integer');
+
+        $this->addType('editable', 'boolean');
+        $this->addType('shareable', 'boolean');
+        $this->addType('sourceUpdated', 'boolean');
+        $this->addType('targetUpdated', 'boolean');
 
         parent::__construct();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEditable(): bool {
+        return $this->getEditable() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShareable(): bool {
+        return $this->getShareable() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSourceUpdated(): bool {
+        return $this->getSourceUpdated() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTargetUpdated(): bool {
+        return $this->getTargetUpdated() === true;
     }
 }

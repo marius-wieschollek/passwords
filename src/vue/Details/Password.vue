@@ -18,13 +18,23 @@
             <tags :password="object"/>
         </div>
         <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="object.id">
-            <div slot="details">
-                <pre>
-                Title: {{ object.label }}
-                User: {{ object.username }}
-                Password: {{ object.password }}
-                Website: {{ object.url }}
-                </pre>
+            <div slot="details" class="details">
+                <translate tag="div" say="Name"><span>{{ object.label }}</span></translate>
+                <translate tag="div" say="Username"><span>{{ object.username }}</span></translate>
+                <translate tag="div" say="Password">
+                    <span @mouseover="showPw=true" @mouseout="showPw=false" class="password">{{ showPassword }}</span>
+                </translate>
+                <translate tag="div" say="Website"><a :href="object.url" target="_blank">{{ object.url }}</a></translate>
+
+                <translate tag="div" say="Statistics" class="header"/>
+                <translate tag="div" say="Created on"><span>{{ object.created.toLocaleDateString() }}</span></translate>
+                <translate tag="div" say="Last updated"><span>{{ object.updated.toLocaleDateString() }}</span></translate>
+                <translate tag="div" say="Revisions">
+                    <translate say="{count} revisions" :variables="{count:countRevisions}"/>
+                </translate>
+                <translate tag="div" say="Shares">
+                    <translate say="{count} shares" :variables="{count:countShares}"/>
+                </translate>
             </div>
             <div slot="notes" class="notes">
                 <textarea id="password-details-notes">{{ object.notes }}</textarea>
@@ -32,7 +42,7 @@
             <div slot="share">
                 <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="object.id">
                     <div slot="nextcloud" class="password-share-nextcloud">
-                        nc
+                        <sharing :password="object"/>
                     </div>
                     <div slot="qrcode" class="password-share-qrcode">
                         <select id="password-details-qrcode" @change="changeQrCode($event)">
@@ -77,6 +87,7 @@
     import Tags from '@vc/Tags.vue';
     import API from '@js/Helper/api';
     import SimpleMDE from 'simplemde';
+    import Sharing from '@vc/Sharing.vue';
     import Events from "@js/Classes/Events";
     import QrCode from 'vue-qrcode-component'
     import Translate from '@vc/Translate.vue';
@@ -88,6 +99,7 @@
         components: {
             Translate,
             QrCode,
+            Sharing,
             Tabs,
             Tags
         },
@@ -111,7 +123,8 @@
                     bgColor: ThemeManager.getContrastColor(),
                     text   : this.password.password
                 },
-                object: this.password
+                object: this.password,
+                showPw: false
             }
         },
 
@@ -139,6 +152,23 @@
         computed: {
             getRevisions() {
                 return Utility.sortApiObjectArray(this.object.revisions, 'created', false)
+            },
+            countShares() {
+                let count = 0;
+                for (let i in this.object.shares) {
+                    if (this.object.shares.hasOwnProperty(i)) count++;
+                }
+                return count;
+            },
+            countRevisions() {
+                let count = 0;
+                for (let i in this.object.revisions) {
+                    if (this.object.revisions.hasOwnProperty(i)) count++;
+                }
+                return count;
+            },
+            showPassword() {
+                return this.showPw ? this.object.password:''.padStart(this.object.password.length, '*');
             }
         },
 
@@ -276,6 +306,47 @@
 
         > .tab-container {
             padding : 0 15px 15px;
+        }
+
+        .details {
+            padding-top: 10px;
+
+            div:not(.header) {
+                font-size     : 0.9em;
+                font-style    : italic;
+                margin-bottom : 5px;
+                color         : $color-grey-darker;
+
+                a,
+                span {
+                    display    : block;
+                    font-style : normal;
+                    font-size  : 1.3em;
+                    color      : $color-black-light;
+                    text-align : right;
+                    cursor     : text;
+
+                    &.password {
+                        cursor : pointer;
+                    }
+                }
+
+                a {
+                    color  : $color-theme;
+                    cursor : pointer;
+
+                    &:hover {
+                        text-decoration : underline;
+                    }
+                }
+            }
+
+            .header {
+                margin-top  : 20px;
+                font-size   : 1.3em;
+                font-weight : bold;
+                color       : $color-black-light;
+            }
         }
 
         .notes {

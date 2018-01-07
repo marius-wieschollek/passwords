@@ -40,8 +40,9 @@ class HelperService {
     const WORDS_RANDOM = 'random';
     const WORDS_SNAKES = 'wo4snakes';
 
-    const SECURITY_BIG_LOCAL   = '10mio';
-    const SECURITY_SMALL_LOCAL = '1mio';
+    const SECURITY_BIGDB_HIBP  = 'bigdb+hibp';
+    const SECURITY_BIG_LOCAL   = 'bigdb';
+    const SECURITY_SMALL_LOCAL = 'smalldb';
     const SECURITY_HIBP        = 'hibp';
 
     const IMAGES_IMAGICK = 'imagick';
@@ -168,6 +169,8 @@ class HelperService {
                 return $this->container->query('BigLocalDbSecurityCheckHelper');
             case self::SECURITY_SMALL_LOCAL:
                 return $this->container->query('SmallLocalDbSecurityCheckHelper');
+            case self::SECURITY_BIGDB_HIBP:
+                return $this->container->query('BigDbPlusHibpSecurityCheckHelper');
         }
 
         return $this->container->query('HaveIBeenPwnedHelper');

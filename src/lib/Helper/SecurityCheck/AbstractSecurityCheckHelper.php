@@ -11,6 +11,7 @@ namespace OCA\Passwords\Helper\SecurityCheck;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\LoggingService;
 
 /**
  * Class AbstractSecurityCheckHelper
@@ -37,6 +38,11 @@ abstract class AbstractSecurityCheckHelper {
     protected $config;
 
     /**
+     * @var LoggingService
+     */
+    protected $logger;
+
+    /**
      * @var array
      */
     protected $hashStatusCache = [];
@@ -46,11 +52,17 @@ abstract class AbstractSecurityCheckHelper {
      *
      * @param FileCacheService     $fileCacheService
      * @param ConfigurationService $configurationService
+     * @param LoggingService       $logger
      */
-    public function __construct(FileCacheService $fileCacheService, ConfigurationService $configurationService) {
+    public function __construct(
+        FileCacheService $fileCacheService,
+        ConfigurationService $configurationService,
+        LoggingService $logger
+    ) {
         $fileCacheService->setDefaultCache($fileCacheService::PASSWORDS_CACHE);
         $this->fileCacheService = $fileCacheService;
         $this->config           = $configurationService;
+        $this->logger           = $logger;
     }
 
     /**
@@ -63,7 +75,6 @@ abstract class AbstractSecurityCheckHelper {
      * @return int
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): int {
-
         if(!$this->isHashSecure($revision->getHash())) return 2;
 
         return 0;

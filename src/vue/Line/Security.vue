@@ -1,13 +1,10 @@
 <template>
     <div class="row security" :data-security-level="status" @click="setSecurityStatus">
-        <translate class="title" icon="shield" :iconClass="securityCheck" :say="label" />
+        <translate class="title" icon="shield" :iconClass="securityCheck" :say="label"/>
     </div>
 </template>
 
 <script>
-    import PwMessages from '@js/Classes/Messages';
-    import Utility from "@js/Classes/Utility";
-    import API from '@js/Helper/api';
     import Translate from '@vc/Translate.vue';
 
     export default {

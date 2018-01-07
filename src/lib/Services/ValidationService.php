@@ -27,11 +27,6 @@ class ValidationService {
      */
     protected $securityCheck;
 
-    protected $passwordSseTypes = [
-        EncryptionService::SSE_ENCRYPTION_V1,
-        EncryptionService::SHARE_ENCRYPTION_V1
-    ];
-
     /**
      * ValidationService constructor.
      *
@@ -51,7 +46,7 @@ class ValidationService {
         if(empty($revision->getSseType())) {
             $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
-        if(!in_array($revision->getSseType(), $this->passwordSseTypes)) {
+        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
             throw new ApiException('Invalid server side encryption type', 400);
         }
         if($revision->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
@@ -117,23 +112,6 @@ class ValidationService {
         }
 
         return $tag;
-    }
-
-    /**
-     * @param ShareRevision $share
-     *
-     * @return ShareRevision
-     * @throws ApiException
-     */
-    public function validateShare(ShareRevision $share): ShareRevision {
-        if(empty($share->getSseType())) {
-            $share->setSseType(EncryptionService::DEFAULT_SHARE_ENCRYPTION);
-        }
-        if($share->getSseType() !== EncryptionService::DEFAULT_SHARE_ENCRYPTION) {
-            throw new ApiException('Invalid server side encryption type', 400);
-        }
-
-        return $share;
     }
 
     /**

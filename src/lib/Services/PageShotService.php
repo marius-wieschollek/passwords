@@ -8,10 +8,8 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
 use OCP\Files\SimpleFS\ISimpleFile;
-use OCP\ILogger;
 
 /**
  * Class PageShotService
@@ -39,7 +37,7 @@ class PageShotService {
     protected $validationService;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -49,13 +47,13 @@ class PageShotService {
      * @param HelperService     $helperService
      * @param FileCacheService  $fileCacheService
      * @param ValidationService $validationService
-     * @param ILogger           $logger
+     * @param LoggingService    $logger
      */
     public function __construct(
         HelperService $helperService,
         FileCacheService $fileCacheService,
         ValidationService $validationService,
-        ILogger $logger
+        LoggingService $logger
     ) {
         $fileCacheService->setDefaultCache($fileCacheService::PAGESHOT_CACHE);
         $this->fileCacheService  = $fileCacheService;
@@ -103,14 +101,14 @@ class PageShotService {
 
             return $this->resizePageShot($pageShot, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+            $this->logger->error($e->getMessage());
 
             try {
                 $pageShot = $pageShotService->getDefaultPageShot();
 
                 return $this->resizePageShot($pageShot, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
             } catch (\Throwable $e) {
-                $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+                $this->logger->error($e->getMessage());
 
                 throw new ApiException('Internal PageShot API Error', 502);
             }

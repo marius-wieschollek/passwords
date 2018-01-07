@@ -96,7 +96,7 @@ class LegacyCategoryMigration {
             trim($category->getCategoryName()),
             '#'.trim($category->getCategoryColour()),
             EncryptionService::CSE_ENCRYPTION_NONE,
-            EncryptionService::SSE_ENCRYPTION_V1,
+            false,
             false,
             false
         );

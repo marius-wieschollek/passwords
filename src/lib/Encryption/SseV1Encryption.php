@@ -25,7 +25,7 @@ use OCP\Security\ISecureRandom;
  */
 class SseV1Encryption implements EncryptionInterface {
 
-    const MINIMUM_KEY_LENGTH = 512;
+    const MINIMUM_KEY_LENGTH = 1024;
 
     /**
      * @var array
@@ -38,11 +38,6 @@ class SseV1Encryption implements EncryptionInterface {
             'password',
             'username'
         ];
-
-    /**
-     * @var array
-     */
-    protected $share = [];
 
     /**
      * @var array
@@ -109,10 +104,10 @@ class SseV1Encryption implements EncryptionInterface {
         foreach ($fields as $field) {
             $value          = $object->getProperty($field);
             $encryptedValue = $this->crypto->encrypt($value, $encryptionKey);
-            $object->setProperty($field, base64_encode($encryptedValue));
+            $object->setProperty($field, $encryptedValue);
         }
 
-        $object->setSseKey(base64_encode($sseKey));
+        $object->setSseKey($sseKey);
 
         return $object;
     }
@@ -124,12 +119,12 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws Exception
      */
     public function decryptObject(RevisionInterface $object): RevisionInterface {
-        $sseKey        = base64_decode($object->getSseKey());
+        $sseKey        = $object->getSseKey();
         $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
         foreach ($fields as $field) {
-            $value          = base64_decode($object->getProperty($field));
+            $value          = $object->getProperty($field);
             $decryptedValue = $this->crypto->decrypt($value, $encryptionKey);
             $object->setProperty($field, $decryptedValue);
         }
@@ -149,8 +144,6 @@ class SseV1Encryption implements EncryptionInterface {
                 return $this->password;
             case FolderRevision::class:
                 return $this->folder;
-            case ShareRevision::class:
-                return $this->share;
             case TagRevision::class:
                 return $this->tag;
         }
@@ -168,11 +161,9 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws  Exception
      */
     protected function getEncryptionKey(string $passwordKey, string $userId): string {
-        return base64_encode(
-            $this->getServerKey().
+        return $this->getServerKey().
             $this->getUserKey($userId).
-            $passwordKey
-        );
+            $passwordKey;
     }
 
     /**

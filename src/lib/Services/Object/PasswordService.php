@@ -49,6 +49,21 @@ class PasswordService extends AbstractModelService {
     }
 
     /**
+     * @return Password[]
+     * @throws \Exception
+     */
+    public function findShared(): array {
+        return $this->mapper->findAllMatching(['has_shares', true]);
+    }
+
+    /**
+     * @return Password[]
+     */
+    public function findOrphanedTargetPasswords(): array {
+        return $this->mapper->findOrphanedTargetPasswords();
+    }
+
+    /**
      * @return Password
      */
     protected function createModel(): ModelInterface {

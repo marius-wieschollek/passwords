@@ -40,7 +40,6 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $notes
      * @param string $folder
      * @param bool   $hidden
-     * @param bool   $shared
      * @param bool   $trashed
      * @param bool   $favourite
      *
@@ -59,14 +58,13 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $notes,
         string $folder,
         bool $hidden,
-        bool $shared,
         bool $trashed,
         bool $favourite
     ): PasswordRevision {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
         $revision = $this->createModel(
-            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $shared, $trashed, $favourite
+            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $trashed, $favourite
         );
 
         $revision = $this->validationService->validateRevision($revision);
@@ -86,7 +84,6 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $notes
      * @param string $folder
      * @param bool   $hidden
-     * @param bool   $shared
      * @param bool   $trashed
      * @param bool   $favourite
      *
@@ -103,7 +100,6 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $notes,
         string $folder,
         bool $hidden,
-        bool $shared,
         bool $trashed,
         bool $favourite
     ): PasswordRevision {
@@ -128,15 +124,9 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setUrl($url);
         $revision->setNotes($notes);
         $revision->setFolder($folder);
-        $revision->setShared($shared);
         $revision->setFavourite($favourite);
         $revision->setClient('');
-
-        if($shared) {
-            $revision->setSseType(EncryptionService::DEFAULT_SHARE_ENCRYPTION);
-        } else {
-            $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        }
+        $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
 
         return $revision;
     }

@@ -13,6 +13,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\Services\LoggingService;
 
 /**
  * Class CheckPasswordsJob
@@ -32,20 +33,27 @@ class CheckPasswordsJob extends TimedJob {
     protected $revisionMapper;
 
     /**
+     * @var LoggingService
+     */
+    protected $logger;
+
+    /**
      * CheckPasswordsJob constructor.
      *
+     * @param LoggingService         $logger
      * @param HelperService          $helperService
      * @param PasswordRevisionMapper $revisionMapper
      */
     public function __construct(
+        LoggingService $logger,
         HelperService $helperService,
         PasswordRevisionMapper $revisionMapper
     ) {
         // Run once per day
         $this->setInterval(24 * 60 * 60);
-        //$this->setInterval(15 * 60);
         $this->helperService  = $helperService;
         $this->revisionMapper = $revisionMapper;
+        $this->logger = $logger;
     }
 
     /**
@@ -70,6 +78,8 @@ class CheckPasswordsJob extends TimedJob {
     protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
         /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionMapper->findAllMatching(['status', 2, '!=']);
+
+        $badPasswordCounter = 0;
         foreach ($revisions as $revision) {
             $oldStatus = $revision->getStatus();
             $newStatus = $securityHelper->getRevisionSecurityLevel($revision);
@@ -77,7 +87,10 @@ class CheckPasswordsJob extends TimedJob {
             if($oldStatus != $newStatus) {
                 $revision->setStatus($newStatus);
                 $this->revisionMapper->update($revision);
+                $badPasswordCounter++;
             }
         }
+
+        $this->logger->info(['Checked %s passwords. %s new bad passwords found', count($revisions), $badPasswordCounter]);
     }
 }

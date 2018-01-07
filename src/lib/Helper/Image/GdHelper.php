@@ -84,8 +84,6 @@ class GdHelper extends AbstractImageHelper {
      * @return Image
      */
     public function recolorImage($image, string $from, string $to) {
-        //imagefilter($image->resource(), IMG_FILTER_COLORIZE, $r, $g, $b);
-
         $from = sscanf($from, "#%02x%02x%02x");
         $to   = sscanf($to, "#%02x%02x%02x");
 

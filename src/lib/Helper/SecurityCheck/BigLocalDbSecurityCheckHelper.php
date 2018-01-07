@@ -10,9 +10,6 @@ namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
 use OCA\Passwords\Helper\Http\FileDownloadHelper;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\FileCacheService;
-use OCP\ILogger;
 use Throwable;
 use ZipArchive;
 
@@ -25,24 +22,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
     const LOW_RAM_LIMIT = 4194304;
     const ARCHIVE_URL   = 'https://archive.org/download/10MillionPasswords/10-million-combos.zip';
-    const PASSWORD_DB   = 'large';
-
-    /**
-     * @var ILogger
-     */
-    protected $log;
-
-    /**
-     * BigPasswordDbHelper constructor.
-     *
-     * @param FileCacheService     $fileCacheService
-     * @param ConfigurationService $configurationService
-     * @param ILogger              $log
-     */
-    public function __construct(FileCacheService $fileCacheService, ConfigurationService $configurationService, ILogger $log) {
-        parent::__construct($fileCacheService, $configurationService);
-        $this->log = $log;
-    }
+    const PASSWORD_DB   = 'bigdb';
 
     /**
      * @inheritdoc
@@ -85,7 +65,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             ->setOutputFile($zipFile)
             ->setUrl(self::ARCHIVE_URL)
             ->sendWithRetry();
-        if(!$success) throw new Exception('Failed to download common passwords zip file');
+        if(!$success) throw new Exception('Failed to download common passwords zip file: HTTP'.$request->getInfo('http_code'));
         unset($request);
 
         $this->unpackPasswordsFile($zipFile, $txtFile);
@@ -211,7 +191,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      *
      */
     protected function logPasswordUpdate(): void {
-        $ram = memory_get_peak_usage(true) / 1024 / 1024;
-        $this->log->info("Updated local password db. DB: ".static::PASSWORD_DB.", RAM: {$ram}MiB");
+        $ram = round(memory_get_peak_usage(true) / 1024 / 1024, 2);
+        $this->logger->info(["Updated local password db. DB: %s, RAM: %s MiB", static::PASSWORD_DB, $ram]);
     }
 }

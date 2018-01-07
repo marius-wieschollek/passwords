@@ -72,6 +72,7 @@ abstract class AbstractApiController extends ApiController {
             $headers['WWW-Authenticate'] = 'basic + token';
             $response->setHeaders($headers);
         }
+
         return $response;
     }
 

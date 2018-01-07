@@ -13,9 +13,11 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class PasswordRevisionMapper extends AbstractMapper {
+class PasswordRevisionMapper extends AbstractRevisionMapper {
 
     const TABLE_NAME = 'passwords_entity_password_revision';
+
+    const MODEL_TABLE_NAME = 'passwords_entity_password';
 
     protected $allowedFields = ['id', 'uuid', 'model', 'status'];
 }

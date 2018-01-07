@@ -20,7 +20,7 @@
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
                         </li>
-                        <translate tag="li" @click="editAction()" icon="pencil">Edit</translate>
+                        <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable">Edit</translate>
                         <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
                         <slot name="option-bottom"/>
                     </ul>
@@ -109,7 +109,7 @@
             detailsAction($event, section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
                 if (!this.password.hasOwnProperty('revisions')) {
-                    API.showPassword(this.password.id, 'model+folder+tags+revisions')
+                    API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
                         .then((p) => {
                             this.$parent.detail = {type: 'password', element: p};
                         })

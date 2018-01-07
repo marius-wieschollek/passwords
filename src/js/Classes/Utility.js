@@ -7,9 +7,8 @@ export default class Utility {
      * @returns {string}
      */
     static translate(text, variables = {}) {
-        if (OC !== undefined) {
-            return t('passwords', text, variables);
-        }
+        if (text === undefined) return '';
+        if (OC !== undefined) return t('passwords', text, variables);
 
         return '';
     }
@@ -195,6 +194,8 @@ export default class Utility {
                 clone[key] = element.slice(0);
             } else if (element instanceof Date) {
                 clone[key] = new Date(element.getTime());
+            } else if (element === null) {
+                clone[key] = null;
             } else if (typeof element === "object") {
                 clone[key] = Utility.cloneObject(element);
             } else {

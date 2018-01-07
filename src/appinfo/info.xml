@@ -15,7 +15,7 @@
 	</description>
 	<licence>AGPL</licence>
 	<author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">Marius David Wieschollek</author>
-	<version>2018.1.0.1</version>
+	<version>2018.1.0</version>
 	<api>
 		<legacyApi>20-beta9</legacyApi>
 	</api>
@@ -33,7 +33,7 @@
 	<navigations>
 		<navigation>
 			<name>Passwords</name>
-			<route>passwords.access.index</route>
+			<route>passwords.page.index</route>
 		</navigation>
 	</navigations>
 	<settings>
@@ -41,6 +41,7 @@
 	</settings>
 	<background-jobs>
 		<job>OCA\Passwords\Cron\CheckPasswordsJob</job>
+		<job>OCA\Passwords\Cron\SynchronizeShares</job>
 	</background-jobs>
 	<repair-steps>
 		<post-migration>
@@ -48,7 +49,7 @@
 		</post-migration>
 	</repair-steps>
 	<documentation>
-		<user>https://github.com/marius-wieschollek/passwords/blob/stable/README.md</user>
-		<admin>https://github.com/marius-wieschollek/passwords/wiki</admin>
+		<user>https://git.mdns.eu/nextcloud/passwords/wikis/home</user>
+		<admin>https://git.mdns.eu/nextcloud/passwords/wikis/home</admin>
 	</documentation>
 </info>

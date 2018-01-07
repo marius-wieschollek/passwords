@@ -27,8 +27,6 @@ namespace OCA\Passwords\Db;
  * @method void setFolder(string $folder)
  * @method int getStatus()
  * @method void setStatus(int $status)
- * @method bool getShared()
- * @method void setShared(int $shared)
  *
  * @package OCA\Passwords\Db
  */
@@ -75,11 +73,6 @@ class PasswordRevision extends AbstractRevisionEntity {
     protected $status;
 
     /**
-     * @var bool
-     */
-    protected $shared;
-
-    /**
      * Password constructor.
      */
     public function __construct() {
@@ -93,15 +86,6 @@ class PasswordRevision extends AbstractRevisionEntity {
 
         $this->addType('status', 'integer');
 
-        $this->addType('shared', 'boolean');
-
         parent::__construct();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isShared(): bool {
-        return $this->getShared() === true;
     }
 }

@@ -8,7 +8,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
-use OCA\Passwords\Db\AbstractMapper;
+use OCA\Passwords\Db\AbstractRevisionMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
@@ -34,23 +34,23 @@ abstract class AbstractRevisionService extends AbstractService {
     protected $encryptionService;
 
     /**
-     * @var AbstractMapper
+     * @var AbstractRevisionMapper
      */
     protected $mapper;
 
     /**
      * PasswordService constructor.
      *
-     * @param string            $userId
-     * @param HookManager       $hookManager
-     * @param ValidationService $validationService
-     * @param EncryptionService $encryptionService
-     * @param AbstractMapper    $revisionMapper
+     * @param string                 $userId
+     * @param HookManager            $hookManager
+     * @param AbstractRevisionMapper $revisionMapper
+     * @param ValidationService      $validationService
+     * @param EncryptionService      $encryptionService
      */
     public function __construct(
         ?string $userId,
         HookManager $hookManager,
-        AbstractMapper $revisionMapper,
+        AbstractRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
@@ -97,6 +97,20 @@ abstract class AbstractRevisionService extends AbstractService {
         }
 
         return $revisions;
+    }
+
+    /**
+     * @param string $modelUuid
+     * @param bool   $decrypt
+     *
+     * @return RevisionInterface
+     * @throws \Exception
+     */
+    public function findCurrentRevisionByModel(string $modelUuid, bool $decrypt = false): RevisionInterface {
+        /** @var RevisionInterface $revision */
+        $revision = $this->mapper->findCurrentRevisionByModel($modelUuid);
+
+        return $decrypt ? $this->encryptionService->decrypt($revision):$revision;
     }
 
     /**

@@ -28,7 +28,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function (success) { success ? resolve():reject(); };
+            let callback = function () { resolve(); };
 
             OC.dialogs.alert(message, title, callback, true);
         });
@@ -101,12 +101,12 @@ class Messages {
             let field = form[name],
                 value = field.value ? field.value:'',
                 type  = field.type ? field.type:'text',
-                label = Utility.translate(field.label);
+                label = Utility.translate(field.label ? field.label:name.capitalize());
 
             html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
         }
 
-        if (message.length !== 0) message += '<br><br>';
+        if (message.length !== 0) message = '<div class="message">' + message + '</div>';
         html = '<form class="passwords-form" id="' + id + '">' + message + html + '</form>';
 
         return new Promise((resolve, reject) => {

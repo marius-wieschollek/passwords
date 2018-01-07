@@ -12,7 +12,6 @@ use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Files\SimpleFS\ISimpleFolder;
-use OCP\ILogger;
 
 /**
  * Class FileCacheService
@@ -22,6 +21,7 @@ use OCP\ILogger;
 class FileCacheService {
 
     const DEFAULT_CACHE   = 'default';
+    const AVATAR_CACHE    = 'avatars';
     const FAVICON_CACHE   = 'favicon';
     const PAGESHOT_CACHE  = 'pageshot';
     const PASSWORDS_CACHE = 'passwords';
@@ -32,7 +32,7 @@ class FileCacheService {
     protected $appData;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -44,10 +44,10 @@ class FileCacheService {
     /**
      * FileCacheService constructor.
      *
-     * @param IAppData $appData
-     * @param ILogger  $logger
+     * @param IAppData       $appData
+     * @param LoggingService $logger
      */
-    public function __construct(IAppData $appData, ILogger $logger) {
+    public function __construct(IAppData $appData, LoggingService $logger) {
         $this->appData = $appData;
         $this->logger  = $logger;
     }
@@ -102,6 +102,7 @@ class FileCacheService {
     public function listCaches(): array {
         return [
             self::DEFAULT_CACHE,
+            self::AVATAR_CACHE,
             self::FAVICON_CACHE,
             self::PAGESHOT_CACHE,
             self::PASSWORDS_CACHE,

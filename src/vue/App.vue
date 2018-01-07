@@ -47,6 +47,7 @@
 </template>
 
 <script>
+    import "@scss/app";
     import router from '@js/Helper/router';
     import Translate from '@vc/Translate.vue';
 
@@ -85,7 +86,7 @@
             &.nav-icon-all:before { content : "\f0ac"; }
             &.nav-icon-folders:before { content : "\f07b"; }
             &.nav-icon-recent:before { content : "\f017"; }
-            &.nav-icon-tags:before { content : "\f02b"; }
+            &.nav-icon-tags:before { content : "\f02c"; }
             &.nav-icon-security:before { content : "\f132"; }
             &.nav-icon-shared:before { content : "\f1e0"; }
             &.nav-icon-favourites:before { content : "\f005"; }

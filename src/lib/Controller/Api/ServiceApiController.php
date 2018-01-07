@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\PageShotService;
 use OCA\Passwords\Services\WordsService;
@@ -41,10 +42,16 @@ class ServiceApiController extends AbstractApiController {
     protected $previewService;
 
     /**
+     * @var AvatarService
+     */
+    protected $avatarService;
+
+    /**
      * PasswordApiController constructor.
      *
      * @param string          $appName
      * @param IRequest        $request
+     * @param AvatarService   $avatarService
      * @param FaviconService  $faviconService
      * @param PageShotService $previewService
      * @param WordsService    $wordsService
@@ -52,9 +59,10 @@ class ServiceApiController extends AbstractApiController {
     public function __construct(
         $appName,
         IRequest $request,
+        WordsService $wordsService,
+        AvatarService $avatarService,
         FaviconService $faviconService,
-        PageShotService $previewService,
-        WordsService $wordsService
+        PageShotService $previewService
     ) {
         parent::__construct(
             $appName,
@@ -67,6 +75,7 @@ class ServiceApiController extends AbstractApiController {
         $this->faviconService = $faviconService;
         $this->wordsService   = $wordsService;
         $this->previewService = $previewService;
+        $this->avatarService = $avatarService;
     }
 
     /**
@@ -81,20 +90,39 @@ class ServiceApiController extends AbstractApiController {
             list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
 
             if(empty($password)) throw new ApiException('Unable to generate password');
+
+            return $this->createJsonResponse(
+                [
+                    'password' => $password,
+                    'words'    => $words,
+                    'strength' => 1,
+                    'numbers'  => false,
+                    'special'  => false,
+                    'smileys'  => false
+                ]
+            );
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
+    }
 
-        return $this->createJsonResponse(
-            [
-                'password' => $password,
-                'words'    => $words,
-                'strength' => 1,
-                'numbers'  => false,
-                'special'  => false,
-                'smileys'  => false
-            ]
-        );
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $user
+     * @param int    $size
+     *
+     * @return FileDisplayResponse|JSONResponse
+     */
+    public function getAvatar(string $user, int $size = 32) {
+        try {
+            $file = $this->avatarService->getAvatar($user, $size);
+
+            return $this->createFileDisplayResponse($file);
+        } catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
+        }
     }
 
     /**
@@ -107,7 +135,7 @@ class ServiceApiController extends AbstractApiController {
      *
      * @return FileDisplayResponse|JSONResponse
      */
-    public function getFavicon(string $domain, int $size = 24) {
+    public function getFavicon(string $domain, int $size = 32) {
         try {
             $file = $this->faviconService->getFavicon($domain, $size);
 
@@ -138,6 +166,22 @@ class ServiceApiController extends AbstractApiController {
             return $this->createFileDisplayResponse($file);
         } catch (\Throwable $e) {
 
+            return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @return JSONResponse
+     */
+    public function coffee() {
+        try {
+            $this->checkAccessPermissions();
+
+            return $this->createErrorResponse(new ApiException('I’m a password manager', 418));
+        } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }

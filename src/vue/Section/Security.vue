@@ -19,13 +19,13 @@
 </template>
 
 <script>
+    import API from '@js/Helper/api';
     import Events from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
     import Breadcrumb from '@vc/Breadcrumbs.vue';
     import PasswordLine from '@vue/Line/Password.vue';
     import SecurityLine from '@vue/Line/Security.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
-    import API from '@js/Helper/api';
 
     export default {
         components: {

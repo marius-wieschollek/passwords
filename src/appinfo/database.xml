@@ -19,14 +19,13 @@
 				<name>user_id</name>
 				<type>text</type>
 				<length>48</length>
-				<default></default>
 				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>uuid</name>
 				<type>string</type>
-				<notnull>true</notnull>
 				<length>36</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>revision</name>
@@ -37,18 +36,26 @@
 			<field>
 				<name>share_id</name>
 				<type>string</type>
-				<notnull>true</notnull>
 				<length>36</length>
+			</field>
+			<field>
+				<name>has_shares</name>
+				<type>integer</type>
+				<length>1</length>
+				<default>0</default>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>editable</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>1</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>suspended</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -127,7 +134,6 @@
 				<name>cse_type</name>
 				<type>text</type>
 				<length>10</length>
-				<default>none</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -140,37 +146,31 @@
 				<name>sse_key</name>
 				<type>blob</type>
 				<length>2048</length>
-				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>username</name>
 				<type>blob</type>
 				<length>1024</length>
-				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>password</name>
 				<type>blob</type>
 				<length>1024</length>
-				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>label</name>
 				<type>blob</type>
 				<length>1024</length>
-				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>url</name>
 				<type>blob</type>
 				<length>4096</length>
-				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>notes</name>
 				<type>blob</type>
 				<length>8192</length>
-				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>hash</name>
@@ -199,14 +199,9 @@
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>shared</name>
-				<type>integer</type>
-				<default>0</default>
-				<notnull>true</notnull>
-			</field>
-			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -257,12 +252,14 @@
 			<field>
 				<name>suspended</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -326,7 +323,6 @@
 				<name>cse_type</name>
 				<type>text</type>
 				<length>10</length>
-				<default>none</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -371,6 +367,7 @@
 			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -402,8 +399,8 @@
 			</field>
 			<field>
 				<name>user_id</name>
-				<type>blob</type>
-				<length>1024</length>
+				<type>text</type>
+				<length>48</length>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -421,6 +418,7 @@
 			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -452,8 +450,8 @@
 			</field>
 			<field>
 				<name>user_id</name>
-				<type>blob</type>
-				<length>1024</length>
+				<type>text</type>
+				<length>48</length>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -472,7 +470,6 @@
 				<name>cse_type</name>
 				<type>text</type>
 				<length>10</length>
-				<default>none</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -529,6 +526,7 @@
 			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -591,12 +589,14 @@
 			<field>
 				<name>hidden</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
@@ -630,7 +630,6 @@
 				<name>user_id</name>
 				<type>text</type>
 				<length>48</length>
-				<default></default>
 				<notnull>true</notnull>
 			</field>
 			<field>
@@ -640,158 +639,65 @@
 				<length>36</length>
 			</field>
 			<field>
-				<name>revision</name>
-				<type>string</type>
-				<notnull>true</notnull>
-				<length>36</length>
-			</field>
-			<field>
-				<name>password_id</name>
-				<type>string</type>
-				<notnull>true</notnull>
-				<length>36</length>
-			</field>
-			<field>
-				<name>receiver_id</name>
+				<name>receiver</name>
 				<type>text</type>
 				<length>48</length>
-				<default></default>
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>type</name>
-				<type>text</type>
-				<length>12</length>
-				<default></default>
+				<name>source_password</name>
+				<type>string</type>
 				<notnull>true</notnull>
+				<length>36</length>
 			</field>
 			<field>
-				<name>deleted</name>
+				<name>target_password</name>
+				<type>string</type>
+				<length>36</length>
+			</field>
+			<field>
+				<name>source_updated</name>
 				<type>integer</type>
 				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>created</name>
+				<name>target_updated</name>
 				<type>integer</type>
+				<length>1</length>
+				<default>0</default>
+				<notnull>true</notnull>
+			</field>
+			<field>
+				<name>type</name>
+				<type>text</type>
 				<length>12</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>updated</name>
-				<type>integer</type>
-				<length>12</length>
-				<notnull>true</notnull>
-			</field>
-		</declaration>
-	</table>
-	<table>
-		<name>*dbprefix*passwords_entity_share_revision</name>
-		<declaration>
-			<field>
-				<name>id</name>
-				<type>integer</type>
-				<notnull>true</notnull>
-				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
-				<primary>true</primary>
-				<length>8</length>
-			</field>
-			<field>
-				<name>user_id</name>
-				<type>text</type>
-				<length>48</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>uuid</name>
-				<type>string</type>
-				<notnull>true</notnull>
-				<length>36</length>
-			</field>
-			<field>
-				<name>model</name>
-				<type>text</type>
-				<notnull>true</notnull>
-				<length>36</length>
-			</field>
-			<field>
-				<name>cse_type</name>
-				<type>text</type>
-				<length>10</length>
-				<default>none</default>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>sse_type</name>
-				<type>text</type>
-				<length>10</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>sse_key</name>
-				<type>blob</type>
-				<length>2048</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>username</name>
-				<type>blob</type>
-				<length>1024</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>password</name>
-				<type>blob</type>
-				<length>1024</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>label</name>
-				<type>blob</type>
-				<length>1024</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>url</name>
-				<type>blob</type>
-				<length>4096</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>notes</name>
-				<type>blob</type>
-				<length>8192</length>
-				<notnull>true</notnull>
-			</field>
-			<field>
-				<name>hash</name>
-				<type>text</type>
-				<length>64</length>
 				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>editable</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>synchronized</name>
+				<name>shareable</name>
 				<type>integer</type>
-				<default>0</default>
+				<length>1</length>
+				<default>1</default>
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>client</name>
-				<type>text</type>
-				<length>36</length>
-				<notnull>true</notnull>
+				<name>expires</name>
+				<type>integer</type>
+				<length>12</length>
 			</field>
 			<field>
 				<name>deleted</name>
 				<type>integer</type>
+				<length>1</length>
 				<default>0</default>
 				<notnull>true</notnull>
 			</field>

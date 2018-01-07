@@ -8,9 +8,9 @@
 
 namespace OCA\Passwords\Db;
 
-class TagRevisionMapper extends AbstractMapper {
+class TagRevisionMapper extends AbstractRevisionMapper {
 
     const TABLE_NAME = 'passwords_entity_tag_revision';
 
-    protected $allowedFields = ['id', 'uuid', 'model'];
+    const MODEL_TABLE_NAME = 'passwords_entity_tag';
 }

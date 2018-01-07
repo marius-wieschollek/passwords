@@ -109,7 +109,6 @@ class TagObjectHelper extends AbstractObjectHelper {
 
         return [
             'id'        => $tag->getUuid(),
-            'owner'     => $tag->getUserId(),
             'created'   => $tag->getCreated(),
             'updated'   => $tag->getUpdated(),
             'revision'  => $tag->getRevision(),

@@ -8,8 +8,10 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
@@ -61,7 +63,7 @@ class PasswordApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'status', 'trashed', 'favourite'];
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'status', 'trashed', 'favourite', 'sharedByMe', 'sharedWithMe'];
 
     /**
      * PasswordApiController constructor.
@@ -108,7 +110,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      * @param array  $tags
      *
-     * @TODO check folder access
+     * @TODO     check folder access
      *
      * @return JSONResponse
      * @internal param array $folders
@@ -131,7 +133,7 @@ class PasswordApiController extends AbstractObjectApiController {
             $model    = $this->modelService->create();
             $revision = $this->revisionService->createRevision(
                 $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
-                false, false, $favourite
+                false, $favourite
             );
 
             $this->revisionService->save($revision);
@@ -185,13 +187,28 @@ class PasswordApiController extends AbstractObjectApiController {
     ): JSONResponse {
         try {
             $this->checkAccessPermissions();
+
+            /** @var Password $model */
             $model = $this->modelService->findByUuid($id);
-            /** @var PasswordRevision $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
+
+            if(!$model->isEditable()) {
+                /** @var PasswordRevision $oldRevision */
+                $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
+
+                $password = $oldRevision->getPassword();
+                $username = $oldRevision->getUsername();
+                $cseType  = $oldRevision->getCseType();
+                $label    = $oldRevision->getLabel();
+                $notes    = $oldRevision->getNotes();
+                $hash     = $oldRevision->getHash();
+                $url      = $oldRevision->getUrl();
+            } else if(($model->hasShares() || $model->getShareId()) && $cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
+                throw new ApiException('CSE type does not support sharing', 400);
+            }
 
             $revision = $this->revisionService->createRevision(
-                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
-                $oldRevision->isShared(), false, $favourite
+                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, false,
+                $favourite
             );
 
             $this->revisionService->save($revision);
@@ -200,6 +217,35 @@ class PasswordApiController extends AbstractObjectApiController {
             if(!empty($tags)) $this->updateTags($tags, $revision);
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
+        } catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @param string $id
+     * @param null   $revision
+     *
+     * @return JSONResponse
+     */
+    public function restore(string $id, $revision = null): JSONResponse {
+        try {
+            $this->checkAccessPermissions();
+
+            if($revision !== null) {
+                /** @var Password $model */
+                $model = $this->modelService->findByUuid($id);
+
+                if($model->hasShares() || $model->getShareId()) {
+                    $revision = $this->revisionService->findByUuid($revision);
+
+                    if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
+                        throw new ApiException('CSE type does not support sharing', 400);
+                    }
+                }
+            }
+
+            return parent::restore($id, $revision);
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }

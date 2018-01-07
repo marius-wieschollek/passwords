@@ -88,6 +88,11 @@ class AdminSettings implements ISettings {
                 'id'      => HelperService::SECURITY_SMALL_LOCAL,
                 'label'   => $this->localisation->t('1 Million Passwords (Local)'),
                 'current' => $current === HelperService::SECURITY_SMALL_LOCAL
+            ],
+            [
+                'id'      => HelperService::SECURITY_BIGDB_HIBP,
+                'label'   => $this->localisation->t('10Mio Passwords & Hibp?'),
+                'current' => $current === HelperService::SECURITY_BIGDB_HIBP
             ]
         ];
     }
@@ -232,12 +237,15 @@ class AdminSettings implements ISettings {
     protected function getFileCaches(): array {
         $caches = $this->fileCacheService->listCaches();
 
-        $infos = [];
+        $info = [];
         foreach ($caches as $cache) {
-            $infos[] = $this->fileCacheService->getCacheInfo($cache);
+            try {
+                $info[] = $this->fileCacheService->getCacheInfo($cache);
+            } catch (\Exception $e) {
+            }
         }
 
-        return $infos;
+        return $info;
     }
 
     /**

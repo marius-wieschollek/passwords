@@ -1,7 +1,7 @@
 <template>
     <div class="tags-container" @mouseover="updateSearchResults" @mouseout="updateSearchResults">
         <ul class="tags" v-if="tags">
-            <li class="tag" v-for="tag in tags" :key="tag.id" :style="{'background-color': tag.color}">
+            <li class="tag" v-for="tag in tags" :key="tag.id" :style="{'background-color': tag.color}" v-if="tag !== ''">
                 <div class="label" @click="editAction(tag)">{{tag.label}}</div>
                 <i class="fa fa-times" @click="removeAction($event, tag)"></i>
             </li>

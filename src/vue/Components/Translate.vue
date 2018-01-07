@@ -2,6 +2,7 @@
     <component :is="tag" @click="fireEvent($event)" :title="getTitle" :value="getValue">
         <i v-if="icon" :class="getIcon"></i>
         {{ getText }}
+        <slot name="default" v-if="say"></slot>
     </component>
 </template>
 
@@ -22,15 +23,15 @@
                 type     : String,
                 'default': null
             },
-            iconClass     : {
+            iconClass: {
                 type     : String,
                 'default': null
             },
-            title      : {
+            title    : {
                 type     : String,
                 'default': ''
             },
-            value      : {
+            value    : {
                 type     : String,
                 'default': ''
             },
@@ -42,11 +43,11 @@
 
         computed: {
             getText() {
+                if (this.say) {
+                    return Utility.translate(this.say, this.variables);
+                }
                 if (this.$slots.default) {
                     return Utility.translate(this.$slots.default[0].text.trim(), this.variables);
-                }
-                if(this.say) {
-                    return Utility.translate(this.say, this.variables);
                 }
                 return '';
             },
@@ -57,10 +58,10 @@
                 return this.value ? Utility.translate(this.value, this.variables):false;
             },
             getIcon() {
-                return 'fa fa-' + this.icon + ' ' + this.iconClass;
+                return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);
             }
         },
-        methods: {
+        methods : {
             fireEvent($event) {
                 this.$emit($event.type, $event)
             }

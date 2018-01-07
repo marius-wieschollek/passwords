@@ -26,8 +26,19 @@ abstract class AbstractMapper extends Mapper {
      */
     protected $userId;
 
+    /**
+     * @var array
+     */
     protected $allowedFields       = ['id', 'uuid'];
+
+    /**
+     * @var array
+     */
     protected $logicalOperators    = ['AND', 'OR'];
+
+    /**
+     * @var array
+     */
     protected $comparisonOperators = ['=', '!=', '<', '>'];
 
     /**
@@ -144,8 +155,14 @@ abstract class AbstractMapper extends Mapper {
                 throw new \Exception('Illegal field `'.static::TABLE_NAME.'`.`'.$field.'` in database request');
             }
 
-            $sql      .= " {$concat} `{$field}` {$operator} ? ";
-            $params[] = $value;
+            if($value !== null) {
+                $sql      .= " {$concat} `{$field}` {$operator} ? ";
+                $params[] = $value;
+            } else if($operator === '!=') {
+                $sql .= " {$concat} `{$field}` IS NOT NULL ";
+            } else {
+                $sql .= " {$concat} `{$field}` IS NULL ";
+            }
         }
 
         return $this->findEntities($sql, $params, $limit);
@@ -159,7 +176,7 @@ abstract class AbstractMapper extends Mapper {
 
         $params = [];
         if($this->userId !== null) {
-            $sql      .= ' AND `user_id` = ?';
+            $sql      .= ' AND `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
             $params[] = $this->userId;
         }
 

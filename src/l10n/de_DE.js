@@ -89,6 +89,14 @@ OC.L10N.register(
         "Revision restored"                   : "Version wiederhergestellt",
         "Restoring revision failed"           : "Wiederherstellen der Version fehlgeschlagen",
         "Do you want to restore the revision?": "Möchten Sie die Version wiederherstellen?",
+        "Shared with me"                      : "Mit mir geteilt",
+        "Shared by me"                        : "Von mir geteilt",
+        "Statistics"                          : "Statistiken",
+        "Created on"                          : "Erstellt am",
+        "Last updated"                        : "Zuletzt geändert",
+        "{count} revisions"                   : "{count} Versionen",
+        "Shares"                              : "Freigaben",
+        "{count} shares"                      : "{count} mal geteilt"
     },
     'nplurals=2; plural=(n != 1);'
 );

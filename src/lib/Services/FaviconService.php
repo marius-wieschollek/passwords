@@ -8,10 +8,8 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
 use OCP\Files\SimpleFS\ISimpleFile;
-use OCP\ILogger;
 
 /**
  * Class FaviconService
@@ -36,7 +34,7 @@ class FaviconService {
     protected $validationService;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -46,13 +44,13 @@ class FaviconService {
      * @param HelperService     $helperService
      * @param FileCacheService  $fileCacheService
      * @param ValidationService $validationService
-     * @param ILogger           $logger
+     * @param LoggingService    $logger
      */
     public function __construct(
         HelperService $helperService,
         FileCacheService $fileCacheService,
         ValidationService $validationService,
-        ILogger $logger
+        LoggingService $logger
     ) {
         $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
         $this->fileCacheService  = $fileCacheService;
@@ -69,7 +67,7 @@ class FaviconService {
      * @throws ApiException
      * @throws \OCP\AppFramework\QueryException
      */
-    public function getFavicon(string $domain, int $size = 24) {
+    public function getFavicon(string $domain, int $size = 32): ISimpleFile {
         list($domain, $size) = $this->validateInput($domain, $size);
 
         $faviconService = $this->helperService->getFaviconHelper();
@@ -87,14 +85,14 @@ class FaviconService {
 
             return $this->resizeFavicon($favicon, $fileName, $size);
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+            $this->logger->error($e->getMessage());
 
             try {
                 $favicon = $faviconService->getDefaultFavicon();
 
                 return $this->resizeFavicon($favicon, 'error.png', $size);
             } catch (\Throwable $e) {
-                $this->logger->error($e->getMessage(), ['app' => Application::APP_NAME]);
+                $this->logger->error($e->getMessage());
 
                 throw new ApiException('Internal Favicon API Error', 502);
             }
@@ -131,8 +129,9 @@ class FaviconService {
      */
     protected function validateInput(string $domain, int $size): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
-        if($size > 128) {
-            $size = 128;
+        $size = round($size/8)*8;
+        if($size > 256) {
+            $size = 256;
         } else if($size < 16) {
             $size = 16;
         }
