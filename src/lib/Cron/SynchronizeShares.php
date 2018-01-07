@@ -42,7 +42,7 @@ class SynchronizeShares extends TimedJob {
     protected $passwordRevisionService;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
