@@ -162,10 +162,6 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
                 'tag'  => '/href=[\'"](\S+)[\'"]/'
             ],
             [
-                'html' => '/(meta[^>]+property[^>]+og:image[^>]+)/',
-                'tag'  => '/content=[\'"](\S+)[\'"]/'
-            ],
-            [
                 'html' => '/(meta[^>]+property[^>]+twitter:image:src[^>]+)/',
                 'tag'  => '/content=[\'"](\S+)[\'"]/'
             ],
@@ -181,6 +177,10 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
                 // Just for youtube
                 'html' => '/(link[^>]+rel[^>]+icon[^>]+sizes[^>]+1[0-9]+x1[0-9]+[^>]+)/',
                 'tag'  => '/href=[\'"](\S+)[\'"]/'
+            ],
+            [
+                'html' => '/(meta[^>]+property[^>]+og:image[^>]+)/',
+                'tag'  => '/content=[\'"](\S+)[\'"]/'
             ],
             [
                 'html' => '/(link[^>]+rel[^>]+shortcut\s+icon[^>]+)/',
