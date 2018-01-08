@@ -40,7 +40,7 @@ class ShareHook {
      */
     public function __construct(ShareService $shareService, PasswordService $passwordService) {
         $this->passwordService = $passwordService;
-        $this->shareService = $shareService;
+        $this->shareService    = $shareService;
     }
 
     /**
@@ -59,6 +59,7 @@ class ShareHook {
                 $password->setHasShares(false);
                 $this->passwordService->save($password);
             }
-        } catch (DoesNotExistException $e) {}
+        } catch(DoesNotExistException $e) {
+        }
     }
 }

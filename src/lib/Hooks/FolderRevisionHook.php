@@ -90,7 +90,7 @@ class FolderRevisionHook {
      */
     protected function updateChildFolders(string $folderId, $suspend = true): void {
         $folders = $this->folderService->findByParent($folderId);
-        foreach ($folders as $folder) {
+        foreach($folders as $folder) {
             if($folder->isSuspended() === $suspend) continue;
             $revision = $this->revisionService->findByUuid($folder->getRevision());
             if($revision->isTrashed()) continue;
@@ -111,7 +111,7 @@ class FolderRevisionHook {
      */
     protected function updateChildPasswords(string $folderId, $suspend = true): void {
         $passwords = $this->passwordService->findByFolder($folderId);
-        foreach ($passwords as $password) {
+        foreach($passwords as $password) {
             if($password->isSuspended() === $suspend) continue;
             /** @var PasswordRevision $revision */
             $revision = $this->passwordRevisionService->findByUuid($password->getRevision());

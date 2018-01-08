@@ -22,7 +22,7 @@ use OCP\AppFramework\Db\Entity;
  */
 class LegacyCategory extends Entity {
 
-    public $id;
+    public    $id;
     protected $userId;
     protected $categoryName;
     protected $categoryColour;

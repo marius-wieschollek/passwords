@@ -24,7 +24,7 @@ use OCP\AppFramework\Db\Entity;
  */
 class LegacyPassword extends Entity {
 
-    public $id;
+    public    $id;
     protected $userId;
     protected $website;
     protected $pass;

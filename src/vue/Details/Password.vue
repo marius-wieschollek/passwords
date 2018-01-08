@@ -155,15 +155,15 @@
             },
             countShares() {
                 let count = 0;
-                for (let i in this.object.shares) {
-                    if (this.object.shares.hasOwnProperty(i)) count++;
+                for(let i in this.object.shares) {
+                    if(this.object.shares.hasOwnProperty(i)) count++;
                 }
                 return count;
             },
             countRevisions() {
                 let count = 0;
-                for (let i in this.object.revisions) {
-                    if (this.object.revisions.hasOwnProperty(i)) count++;
+                for(let i in this.object.revisions) {
+                    if(this.object.revisions.hasOwnProperty(i)) count++;
                 }
                 return count;
             },
@@ -178,14 +178,14 @@
                     $parent  = $element.parent().parent(),
                     margin   = $element.height() - $parent.height();
 
-                if (margin > 0) {
-                    if (margin < 500) {
+                if(margin > 0) {
+                    if(margin < 500) {
                         this.image.className = 's1';
-                    } else if (margin < 1000) {
+                    } else if(margin < 1000) {
                         this.image.className = 's5';
-                    } else if (margin < 2500) {
+                    } else if(margin < 2500) {
                         this.image.className = 's10';
-                    } else if (margin < 4000) {
+                    } else if(margin < 4000) {
                         this.image.className = 's15';
                     } else {
                         this.image.className = 's20';
@@ -220,7 +220,7 @@
         },
 
         watch: {
-            password: function (value) {
+            password: function(value) {
                 this.image.className = '';
                 this.image.style = {'marginTop': 0};
                 this.qrcode.text = value.password;
@@ -309,7 +309,7 @@
         }
 
         .details {
-            padding-top: 10px;
+            padding-top : 10px;
 
             div:not(.header) {
                 font-size     : 0.9em;

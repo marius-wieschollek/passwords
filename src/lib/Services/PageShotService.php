@@ -100,14 +100,14 @@ class PageShotService {
             }
 
             return $this->resizePageShot($pageShot, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->error($e->getMessage());
 
             try {
                 $pageShot = $pageShotService->getDefaultPageShot();
 
                 return $this->resizePageShot($pageShot, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
-            } catch (\Throwable $e) {
+            } catch(\Throwable $e) {
                 $this->logger->error($e->getMessage());
 
                 throw new ApiException('Internal PageShot API Error', 502);

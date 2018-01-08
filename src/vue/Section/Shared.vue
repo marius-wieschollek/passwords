@@ -65,17 +65,17 @@
         },
 
         methods: {
-            refreshView      : function () {
-                if (this.$route.params.type !== undefined) {
+            refreshView      : function() {
+                if(this.$route.params.type !== undefined) {
                     let status = this.$route.params.type,
                         label  = this.shareType[status];
-                    if (status === 0) {
+                    if(status === 0) {
                         API.findShares({receiver: '_self'}, 'model+password').then(this.updateContentList);
                     } else {
                         API.findShares({owner: '_self'}, 'model+password').then(this.updateContentList);
                     }
 
-                    if (this.passwords.length === 0) this.loading = true;
+                    if(this.passwords.length === 0) this.loading = true;
                     this.breadcrumb = [
                         {path: '/shared', label: Utility.translate('Shared')},
                         {path: this.$route.path, label: Utility.translate(label)}
@@ -85,12 +85,12 @@
                     this.breadcrumb = [];
                 }
             },
-            updateContentList: function (shares) {
+            updateContentList: function(shares) {
                 this.loading = false;
 
                 let passwords = {};
-                for (let i in shares) {
-                    if (!shares.hasOwnProperty(i)) continue;
+                for(let i in shares) {
+                    if(!shares.hasOwnProperty(i)) continue;
                     let password = shares[i].password;
                     passwords[password.id] = password;
                 }
@@ -99,7 +99,7 @@
             }
         },
         watch  : {
-            $route: function () {
+            $route: function() {
                 this.refreshView()
             }
         }

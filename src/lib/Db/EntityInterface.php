@@ -24,7 +24,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-interface EntityInterface{
+interface EntityInterface {
 
     /**
      * @return bool

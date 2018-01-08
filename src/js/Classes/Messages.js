@@ -11,7 +11,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             let $element = OC.Notification.show(Messages._translate(notification));
 
-            setTimeout(function () {
+            setTimeout(function() {
                 OC.Notification.hide($element);
                 resolve();
             }, 10000)
@@ -28,7 +28,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function () { resolve(); };
+            let callback = function() { resolve(); };
 
             OC.dialogs.alert(message, title, callback, true);
         });
@@ -44,7 +44,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function (success) { success ? resolve():reject(); };
+            let callback = function(success) { success ? resolve():reject(); };
 
             OC.dialogs.info(message, title, callback, true);
         });
@@ -59,7 +59,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function (success) { success ? resolve():reject(); };
+            let callback = function(success) { success ? resolve():reject(); };
 
             OC.dialogs.confirm(message, title, callback, true);
         });
@@ -77,10 +77,10 @@ class Messages {
         return new Promise((resolve, reject) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function (success, value) { success ? resolve(value):reject(value); };
+            let callback = function(success, value) { success ? resolve(value):reject(value); };
 
             OC.dialogs.prompt('', title, callback, true, message, isPassword);
-            if (value !== null) {
+            if(value !== null) {
                 this._setDialogValue(value);
             }
         });
@@ -96,8 +96,8 @@ class Messages {
     form(form, title = 'Form', message = '') {
         let html = '',
             id   = 'passwords-form-' + Math.round(Math.random() * 10);
-        for (let name in form) {
-            if (!form.hasOwnProperty(name)) continue;
+        for(let name in form) {
+            if(!form.hasOwnProperty(name)) continue;
             let field = form[name],
                 value = field.value ? field.value:'',
                 type  = field.type ? field.type:'text',
@@ -106,17 +106,17 @@ class Messages {
             html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
         }
 
-        if (message.length !== 0) message = '<div class="message">' + message + '</div>';
+        if(message.length !== 0) message = '<div class="message">' + message + '</div>';
         html = '<form class="passwords-form" id="' + id + '">' + message + html + '</form>';
 
         return new Promise((resolve, reject) => {
             title = Messages._translate(title);
-            let callback = function (success) {
-                if (success) {
+            let callback = function(success) {
+                if(success) {
                     let serialized = $('#' + id).serializeArray(),
                         data       = {};
 
-                    for (let i = 0; i < serialized.length; i++) {
+                    for(let i = 0; i < serialized.length; i++) {
                         let field = serialized[i];
                         data[field.name] = field.value
                     }
@@ -140,7 +140,7 @@ class Messages {
      */
     _setDialogValue(value) {
         let $el = $('.oc-dialog-content input');
-        if ($el.length === 0) {
+        if($el.length === 0) {
             setTimeout(() => { this._setDialogValue(value) }, 10)
         } else {
             $el.val(value);
@@ -154,7 +154,7 @@ class Messages {
      * @private
      */
     static _translate(text) {
-        if (Array.isArray(text)) {
+        if(Array.isArray(text)) {
             return Utility.translate(text[0], text[1]);
         }
         return Utility.translate(text);

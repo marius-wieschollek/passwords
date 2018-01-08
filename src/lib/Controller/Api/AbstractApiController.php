@@ -60,8 +60,8 @@ abstract class AbstractApiController extends ApiController {
         }
 
         if(get_class($e) === DoesNotExistException::class) {
-            $id = 404;
-            $message = 'Resource not found';
+            $id         = 404;
+            $message    = 'Resource not found';
             $statusCode = 404;
         }
 
@@ -74,7 +74,7 @@ abstract class AbstractApiController extends ApiController {
         );
 
         if(get_class($e) === ApiAccessDeniedException::class) {
-            $headers = $response->getHeaders();
+            $headers                     = $response->getHeaders();
             $headers['WWW-Authenticate'] = 'basic + token';
             $response->setHeaders($headers);
         }
@@ -100,7 +100,7 @@ abstract class AbstractApiController extends ApiController {
      */
     protected function processSearchCriteria($criteria = []): array {
         $filters = [];
-        foreach ($criteria as $key => $value) {
+        foreach($criteria as $key => $value) {
             if(!in_array($key, $this->allowedFilterFields)) {
                 throw new ApiException('Illegal field '.$key, 400);
             }

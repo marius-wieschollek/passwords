@@ -7,7 +7,7 @@ class ThemeManager {
         this._color = '#0082C9';
         this._contrastColor = '#fff';
 
-        if (OCA.Theming) {
+        if(OCA.Theming) {
             this._color = OCA.Theming.color;
             this._contrastColor = OCA.Theming.inverted ? '#000':'#fff';
 
@@ -34,7 +34,7 @@ class ThemeManager {
     }
 
     /**
-     * 
+     *
      * @returns {string|*}
      */
     getColor() {

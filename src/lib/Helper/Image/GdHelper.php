@@ -89,8 +89,8 @@ class GdHelper extends AbstractImageHelper {
 
         $resource = $image->resource();
         imagealphablending($resource, false);
-        for ($x = 0; $x < imagesx($resource); $x++) {
-            for ($y = 0; $y < imagesy($resource); $y++) {
+        for($x = 0; $x < imagesx($resource); $x++) {
+            for($y = 0; $y < imagesy($resource); $y++) {
                 $index = imagecolorat($resource, $x, $y);
                 $color = imagecolorsforindex($resource, $index);
                 if($color['red'] == $from[0] && $color['green'] == $from[1] && $color['blue'] == $from[2]) {
@@ -121,7 +121,7 @@ class GdHelper extends AbstractImageHelper {
             $image = $this->getNewImageObject();
             $image->load($tempFile);
             unlink($tempFile);
-        } catch (Throwable $e) {
+        } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
         }
@@ -165,7 +165,7 @@ class GdHelper extends AbstractImageHelper {
             $image->save($tempFile, 'image/jpeg');
             $content = file_get_contents($tempFile);
             unlink($tempFile);
-        } catch (Throwable $e) {
+        } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
         }
@@ -186,7 +186,7 @@ class GdHelper extends AbstractImageHelper {
             $image->save($tempFile, 'image/png');
             $content = file_get_contents($tempFile);
             unlink($tempFile);
-        } catch (Throwable $e) {
+        } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
         }

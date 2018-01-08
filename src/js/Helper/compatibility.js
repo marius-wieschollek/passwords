@@ -11,7 +11,7 @@ function isCompatibleBrowser() {
         eval('"use strict"; class PasswordsTestBrowserClassSupport {}');
         eval('"use strict"; var PasswordsTestAsyncBrowserFunctionSupport = async function(){}');
         return window.hasOwnProperty('crypto');
-    } catch (e) {
+    } catch(e) {
         console.log(e);
 
         return false;

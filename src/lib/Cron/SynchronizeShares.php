@@ -17,7 +17,6 @@ use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\ILogger;
 
 /**
  * Class SynchronizeShares
@@ -92,13 +91,13 @@ class SynchronizeShares extends TimedJob {
             $count     = count($passwords);
             $total     += $count;
 
-            foreach ($passwords as $password) {
+            foreach($passwords as $password) {
                 $shares = $this->shareService->findBySourcePassword($password->getUuid());
-                foreach ($shares as $share) {
+                foreach($shares as $share) {
                     $this->shareService->delete($share);
                 }
             }
-        } while ($count !== 0);
+        } while($count !== 0);
 
         $this->logger->info(['Deleted %s orphaned password(s)', $total]);
     }
@@ -113,15 +112,15 @@ class SynchronizeShares extends TimedJob {
             $count  = count($shares);
             $total  += $count;
 
-            foreach ($shares as $share) {
+            foreach($shares as $share) {
                 try {
                     $password = $this->passwordService->findByUuid($share->getTargetPassword());
                     $this->passwordService->delete($password);
-                } catch (DoesNotExistException $e) {
+                } catch(DoesNotExistException $e) {
                 }
                 $this->shareService->delete($share);
             }
-        } while ($count !== 0);
+        } while($count !== 0);
 
         $this->logger->info(['Deleted %s expired share(s)', $total]);
     }
@@ -132,7 +131,7 @@ class SynchronizeShares extends TimedJob {
     protected function createNewShares(): void {
         $shares = $this->shareService->findNew();
 
-        foreach ($shares as $share) {
+        foreach($shares as $share) {
             /** @var Password $model */
             $model = $this->passwordService->create();
             $model->setUserId($share->getReceiver());
@@ -175,7 +174,7 @@ class SynchronizeShares extends TimedJob {
         $passwords = $this->passwordService->findShared();
         $total     = 0;
 
-        foreach ($passwords as $password) {
+        foreach($passwords as $password) {
             $shares = $this->shareService->findBySourcePassword($password->getUuid());
 
             if(empty($shares)) {
@@ -199,7 +198,7 @@ class SynchronizeShares extends TimedJob {
             $count = $this->updateTargetPasswords();
             $count += $this->updateSourcePasswords();
             $total += $count;
-        } while ($count !== 0);
+        } while($count !== 0);
 
         $this->logger->info(['Updated %s share(s)', $total]);
     }
@@ -217,7 +216,7 @@ class SynchronizeShares extends TimedJob {
             $count  = count($shares);
             $total  += $count;
 
-            foreach ($shares as $share) {
+            foreach($shares as $share) {
                 $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
                 /** @var Password $password */
@@ -229,7 +228,7 @@ class SynchronizeShares extends TimedJob {
                 $share->setSourceUpdated(false);
                 $this->shareService->save($share);
             }
-        } while ($count !== 0);
+        } while($count !== 0);
 
         return $total;
     }
@@ -247,7 +246,7 @@ class SynchronizeShares extends TimedJob {
             $count  = count($shares);
             $total  += $count;
 
-            foreach ($shares as $share) {
+            foreach($shares as $share) {
                 if($share->isEditable()) {
                     $revision = $this->createNewPasswordRevision($share->getTargetPassword(), $share->getSourcePassword());
 
@@ -259,7 +258,7 @@ class SynchronizeShares extends TimedJob {
                 $share->setSourceUpdated(false);
                 $this->shareService->save($share);
             }
-        } while ($count !== 0);
+        } while($count !== 0);
 
         return $total;
     }

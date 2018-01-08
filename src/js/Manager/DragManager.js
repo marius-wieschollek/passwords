@@ -30,11 +30,11 @@ export default new class DragManager {
                 e.preventDefault();
                 $el.remove();
                 let $target = $(e.target);
-                if (!$target.data().dropType) {
+                if(!$target.data().dropType) {
                     $target = $(e.target).parents('[data-drop-type]');
                 }
 
-                if ($target.length !== 0 && types.indexOf($target.data().dropType) !== -1) {
+                if($target.length !== 0 && types.indexOf($target.data().dropType) !== -1) {
                     resolve($target.data())
                 } else {
                     reject({});
@@ -48,7 +48,7 @@ export default new class DragManager {
             $app   = $('#app-content'),
             offset = $app.scrollTop();
 
-        if (e.originalEvent.clientY < height * 0.25) {
+        if(e.originalEvent.clientY < height * 0.25) {
             $app.scrollTop(offset - 5);
         } else if(e.originalEvent.clientY > height * 0.75) {
             $app.scrollTop(offset + 5);

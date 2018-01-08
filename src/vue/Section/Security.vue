@@ -65,13 +65,13 @@
         },
 
         methods: {
-            refreshView: function () {
-                if (this.$route.params.status !== undefined) {
+            refreshView: function() {
+                if(this.$route.params.status !== undefined) {
                     let status = this.$route.params.status,
                         label  = this.securityStatus[status];
                     API.findPasswords({status: status}).then(this.updateContentList);
 
-                    if (this.passwords.length === 0) this.loading = true;
+                    if(this.passwords.length === 0) this.loading = true;
                     this.breadcrumb = [
                         {path: '/security', label: Utility.translate('Security')},
                         {path: this.$route.path, label: Utility.translate(label)}
@@ -82,13 +82,13 @@
                 }
             },
 
-            updateContentList: function (passwords) {
+            updateContentList: function(passwords) {
                 this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
             }
         },
         watch  : {
-            $route: function () {
+            $route: function() {
                 this.refreshView()
             }
         }

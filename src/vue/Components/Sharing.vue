@@ -112,11 +112,11 @@
                 Messages.form(form, 'Share expiration date', 'Choose an expiration date or leave empty to share forever')
                     .then((data) => {
                         let expires = data.expires;
-                        if (expires.length === 0) {
+                        if(expires.length === 0) {
                             expires = null;
                         } else {
                             expires = new Date(data.expires.replace(/([0-9]+)\.([0-9]+)\.([0-9]+)/g, '$2/$1/$3'));
-                            if (expires < new Date()) {
+                            if(expires < new Date()) {
                                 Messages.alert('Please choose a date in the future', 'Invalid date');
                                 return;
                             }
@@ -132,19 +132,19 @@
                 this.$forceUpdate();
             },
             submitAction($event) {
-                if ($event.keyCode === 13) {
+                if($event.keyCode === 13) {
                     this.addShare();
                 }
             }
         },
 
         watch: {
-            password: function (value) {
+            password: function(value) {
                 this.object = value;
                 this.$forceUpdate();
             },
-            user    : function (value) {
-                if (!this.partnersLoaded) { this.loadPartners(); }
+            user    : function(value) {
+                if(!this.partnersLoaded) { this.loadPartners(); }
             }
         }
     }

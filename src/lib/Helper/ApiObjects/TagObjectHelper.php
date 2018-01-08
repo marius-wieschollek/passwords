@@ -60,7 +60,7 @@ class TagObjectHelper extends AbstractObjectHelper {
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
 
-        $this->tagService = $tagService;
+        $this->tagService      = $tagService;
         $this->passwordService = $passwordService;
     }
 
@@ -85,7 +85,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object = [];
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($tag, $revision);
         }
@@ -132,7 +132,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         $revisions = $this->revisionService->findByModel($tag->getUuid(), true);
 
         $object['revisions'] = [];
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $current = [
                 'id'        => $revision->getUuid(),
                 'owner'     => $revision->getUserId(),
@@ -168,10 +168,10 @@ class TagObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['passwords'] = [];
-        $objectHelper = $this->getPasswordObjectHelper();
-        $passwords = $this->passwordService->findByTag($revision->getModel());
+        $objectHelper        = $this->getPasswordObjectHelper();
+        $passwords           = $this->passwordService->findByTag($revision->getModel());
 
-        foreach ($passwords as $password) {
+        foreach($passwords as $password) {
             $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['passwords'][] = $obj;

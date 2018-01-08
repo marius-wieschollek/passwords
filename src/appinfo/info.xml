@@ -1,55 +1,57 @@
 <?xml version="1.0"?>
 <info xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-	<id>passwords</id>
-	<name>Passwords</name>
-	<summary>Passwords lets you manage all your passwords easily on your Nextcloud.</summary>
-	<description>
-		**Features**
-		* Intuitive and modern user interface
-		* Password safety checks
-		* Server side encryption
-		* Folder &amp; Tags
-		* Password sharing
-		* Powerful API
-		* Import / Export
-	</description>
-	<licence>AGPL</licence>
-	<author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">Marius David Wieschollek</author>
-	<version>2018.1.0</version>
-	<api>
-		<legacyApi>20-beta9</legacyApi>
-	</api>
-	<namespace>Passwords</namespace>
-	<category>tools</category>
-	<bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
-	<repository type="git">https://github.com/marius-wieschollek/passwords/passwords.git</repository>
-	<dependencies>
-		<nextcloud min-version="12" max-version="12" />
-		<php min-version="7.1"/>
-		<database>sqlite</database>
-		<database>mysql</database>
-		<database>pgsql</database>
-	</dependencies>
-	<navigations>
-		<navigation>
-			<name>Passwords</name>
-			<route>passwords.page.index</route>
-		</navigation>
-	</navigations>
-	<settings>
-		<admin>OCA\Passwords\Settings\AdminSettings</admin>
-	</settings>
-	<background-jobs>
-		<job>OCA\Passwords\Cron\CheckPasswordsJob</job>
-		<job>OCA\Passwords\Cron\SynchronizeShares</job>
-	</background-jobs>
-	<repair-steps>
-		<post-migration>
-			<step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
-		</post-migration>
-	</repair-steps>
-	<documentation>
-		<user>https://git.mdns.eu/nextcloud/passwords/wikis/home</user>
-		<admin>https://git.mdns.eu/nextcloud/passwords/wikis/home</admin>
-	</documentation>
+    <id>passwords</id>
+    <name>Passwords</name>
+    <summary>Passwords lets you manage all your passwords easily on your Nextcloud.</summary>
+    <description>
+        **Features**
+        * Intuitive and modern user interface
+        * Password safety checks
+        * Server side encryption
+        * Folder &amp; Tags
+        * Password sharing
+        * Powerful API
+        * Import / Export
+    </description>
+    <licence>AGPL</licence>
+    <author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">
+        Marius David Wieschollek
+    </author>
+    <version>2018.1.0</version>
+    <api>
+        <legacyApi>20-beta9</legacyApi>
+    </api>
+    <namespace>Passwords</namespace>
+    <category>tools</category>
+    <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
+    <repository type="git">https://github.com/marius-wieschollek/passwords/passwords.git</repository>
+    <dependencies>
+        <nextcloud min-version="12" max-version="12" />
+        <php min-version="7.1" />
+        <database>sqlite</database>
+        <database>mysql</database>
+        <database>pgsql</database>
+    </dependencies>
+    <navigations>
+        <navigation>
+            <name>Passwords</name>
+            <route>passwords.page.index</route>
+        </navigation>
+    </navigations>
+    <settings>
+        <admin>OCA\Passwords\Settings\AdminSettings</admin>
+    </settings>
+    <background-jobs>
+        <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
+        <job>OCA\Passwords\Cron\SynchronizeShares</job>
+    </background-jobs>
+    <repair-steps>
+        <post-migration>
+            <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
+        </post-migration>
+    </repair-steps>
+    <documentation>
+        <user>https://git.mdns.eu/nextcloud/passwords/wikis/home</user>
+        <admin>https://git.mdns.eu/nextcloud/passwords/wikis/home</admin>
+    </documentation>
 </info>

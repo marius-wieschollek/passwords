@@ -49,21 +49,21 @@
         },
 
         methods: {
-            loadTags       : function () {
+            loadTags       : function() {
                 API.listTags()
                     .then((t) => { this.allTags = Utility.objectToArray(t); })
             },
-            keyUpAction    : function ($e) {
+            keyUpAction    : function($e) {
                 let key = $e.keyCode;
-                if ([8, 13, 46].indexOf(key) === -1 && $e.key.length === 1 && this.inputText.length !== 0) {
+                if([8, 13, 46].indexOf(key) === -1 && $e.key.length === 1 && this.inputText.length !== 0) {
                     this.searchAction(this.inputText);
                     this.wasBackspace = false;
-                } else if (key === 13 && this.inputText.length !== 0) {
+                } else if(key === 13 && this.inputText.length !== 0) {
                     this.createAndAddTag(this.inputText);
                     this.wasBackspace = false;
-                } else if (key === 8 && this.wasBackspace && this.inputText.length === 0) {
+                } else if(key === 8 && this.wasBackspace && this.inputText.length === 0) {
                     this.removeLastTag();
-                } else if (key === 8 && this.inputText.length === 0) {
+                } else if(key === 8 && this.inputText.length === 0) {
                     this.searchResults = [];
                     this.wasBackspace = true;
                 } else {
@@ -71,39 +71,39 @@
                     this.wasBackspace = false;
                 }
             },
-            searchAction   : function (query) {
+            searchAction   : function(query) {
                 this.searchResults = [];
                 query = query.toLowerCase();
 
-                for (let i = 0; i < this.allTags.length; i++) {
+                for(let i = 0; i < this.allTags.length; i++) {
                     let tag = this.allTags[i];
 
-                    if (Utility.searchApiObjectInArray(this.tags, tag) !== -1) continue;
+                    if(Utility.searchApiObjectInArray(this.tags, tag) !== -1) continue;
 
-                    if (tag.label.toLowerCase().indexOf(query) !== -1) {
+                    if(tag.label.toLowerCase().indexOf(query) !== -1) {
                         this.searchResults.push(tag);
                     }
                 }
                 this.updateSearchResults();
             },
-            addTag         : function (tag) {
+            addTag         : function(tag) {
                 this.tags.push(tag);
                 this.inputText = '';
                 this.searchResults = [];
 
-                if (this.password) {
+                if(this.password) {
                     this.password.tags = this.tags;
                     PasswordManager.updatePassword(this.password);
                 }
                 $('div.tags-container input.add-tags').focus();
             },
-            createAndAddTag: function (label) {
+            createAndAddTag: function(label) {
                 let query = label.toLowerCase();
 
-                for (let i = 0; i < this.allTags.length; i++) {
+                for(let i = 0; i < this.allTags.length; i++) {
                     let tag = this.allTags[i];
 
-                    if (tag.label.toLowerCase() === query) {
+                    if(tag.label.toLowerCase() === query) {
                         this.addTag(tag);
                         return;
                     }
@@ -115,31 +115,31 @@
                         this.addTag(tag);
                     })
             },
-            removeLastTag  : function () {
+            removeLastTag  : function() {
                 this.tags.pop();
                 this.inputText = '';
                 this.searchResults = [];
-                if (this.password) {
+                if(this.password) {
                     this.password.tags = this.tags.length === 0 ? ['']:this.tags;
                     PasswordManager.updatePassword(this.password);
                 }
             },
-            editAction     : function (tag) {
+            editAction     : function(tag) {
                 TagManager.editTag(tag);
             },
-            removeAction   : function ($event, tag) {
+            removeAction   : function($event, tag) {
                 $event.stopPropagation();
                 let i = this.tags.indexOf(tag);
 
-                if (i !== -1) this.tags.remove(i);
+                if(i !== -1) this.tags.remove(i);
 
-                if (this.password) {
+                if(this.password) {
                     this.password.tags = this.tags.length === 0 ? ['']:this.tags;
                     PasswordManager.updatePassword(this.password);
                 }
             },
             updateSearchResults() {
-                if (this.inputText.length === 0) return;
+                if(this.inputText.length === 0) return;
 
                 let $input   = $('div.tags-container input.add-tags'),
                     $search  = $('div.tags-container ul.tag-search'),
@@ -154,7 +154,7 @@
         },
 
         watch: {
-            password: function (newPassword) {
+            password: function(newPassword) {
                 this.tags = Utility.sortApiObjectArray(newPassword.tags, 'label');
             }
         }

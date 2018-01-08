@@ -20,7 +20,7 @@ class FolderManager {
                 .prompt('Name', 'Create folder')
                 .then((title) => {
                     let folder = {label: title};
-                    if (parent) folder.parent = parent;
+                    if(parent) folder.parent = parent;
 
                     folder = EnhancedApi.validateFolder(folder);
                     API.createFolder(folder)
@@ -72,7 +72,7 @@ class FolderManager {
 
     moveFolder(folder, parent) {
         return new Promise((resolve, reject) => {
-            if (folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
+            if(folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
                 reject(folder);
                 return;
             }
@@ -124,7 +124,7 @@ class FolderManager {
      */
     deleteFolder(folder, confirm = true) {
         return new Promise((resolve, reject) => {
-            if (!confirm || !folder.trashed) {
+            if(!confirm || !folder.trashed) {
                 API.deleteFolder(folder.id)
                     .then((d) => {
                         folder.trashed = true;
@@ -153,7 +153,7 @@ class FolderManager {
      */
     restoreFolder(folder) {
         return new Promise((resolve, reject) => {
-            if (folder.trashed) {
+            if(folder.trashed) {
                 API.restoreFolder(folder.id)
                     .then((d) => {
                         folder.trashed = false;
@@ -182,9 +182,9 @@ class FolderManager {
      */
     restoreRevision(folder, revision, confirm = true) {
         return new Promise((resolve, reject) => {
-            if (folder.revision === revision.id) reject(folder);
+            if(folder.revision === revision.id) reject(folder);
 
-            if (!confirm) {
+            if(!confirm) {
                 API.restorePassword(folder.id, revision.id)
                     .then((d) => {
                         folder = Utility.mergeObject(folder, revision);

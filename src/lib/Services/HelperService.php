@@ -97,7 +97,7 @@ class HelperService {
     public function getPageShotHelper(): AbstractPageShotHelper {
         $service = $this->config->getAppValue('service/pageshot', self::PAGESHOT_DEFAULT);
 
-        switch ($service) {
+        switch($service) {
             case self::PAGESHOT_WKHTML:
                 return $this->container->query('WkhtmlImageHelper');
             case self::PAGESHOT_SCREEN_SHOT_API:
@@ -120,7 +120,7 @@ class HelperService {
     public function getFaviconHelper(): AbstractFaviconHelper {
         $service = $this->config->getAppValue('service/favicon', self::FAVICON_LOCAL);
 
-        switch ($service) {
+        switch($service) {
             case self::FAVICON_BETTER_IDEA:
                 return $this->container->query('BetterIdeaHelper');
             case self::FAVICON_DUCK_DUCK_GO:
@@ -143,7 +143,7 @@ class HelperService {
     public function getWordsHelper(): AbstractWordsHelper {
         $service = $this->config->getAppValue('service/words', self::WORDS_SNAKES);
 
-        switch ($service) {
+        switch($service) {
             case self::WORDS_LOCAL:
                 return $this->container->query('LocalWordsHelper');
             case self::WORDS_RANDOM:
@@ -162,7 +162,7 @@ class HelperService {
     public function getSecurityHelper(): AbstractSecurityCheckHelper {
         $service = $this->config->getAppValue('service/security', self::SECURITY_HIBP);
 
-        switch ($service) {
+        switch($service) {
             case self::SECURITY_HIBP:
                 return $this->container->query('HaveIBeenPwnedHelper');
             case self::SECURITY_BIG_LOCAL:

@@ -10,10 +10,8 @@ namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
 use OCA\Passwords\Db\EntityInterface;
-use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
-use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
@@ -82,8 +80,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
 
-        $this->tagService = $tagService;
-        $this->shareService = $shareService;
+        $this->tagService    = $tagService;
+        $this->shareService  = $shareService;
         $this->folderService = $folderService;
     }
 
@@ -108,7 +106,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object = [];
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($password, $revision);
         }
@@ -170,7 +168,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         $revisions = $this->revisionService->findByModel($password->getUuid(), true);
 
         $object['revisions'] = [];
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $current = [
                 'id'        => $revision->getUuid(),
                 'created'   => $revision->getCreated(),
@@ -214,8 +212,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $objectHelper = $this->getTagObjectHelper();
-        $tags = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
-        foreach ($tags as $tag) {
+        $tags         = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
+        foreach($tags as $tag) {
             $obj = $objectHelper->getApiObject($tag, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['tags'][] = $obj;
@@ -242,13 +240,13 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $objectHelper = $this->getFolderObjectHelper();
-        $folder = $this->folderService->findByUuid($revision->getFolder());
-        $obj = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, $filters);
+        $folder       = $this->folderService->findByUuid($revision->getFolder());
+        $obj          = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, $filters);
 
         if($obj !== null) {
             $object['folder'] = $obj;
         } else {
-            $folder = $this->folderService->getBaseFolder();
+            $folder           = $this->folderService->getBaseFolder();
             $object['folder'] = $objectHelper->getApiObject($folder);
         }
 
@@ -266,13 +264,13 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         $objectHelper = $this->getShareObjectHelper();
 
         $object['shares'] = [];
-        $shares = $this->shareService->findBySourcePassword($revision->getModel());
-        foreach ($shares as $share) {
+        $shares           = $this->shareService->findBySourcePassword($revision->getModel());
+        foreach($shares as $share) {
             $object['shares'][] = $objectHelper->getApiObject($share);
         }
 
         if($object['share']) {
-            $share = $this->shareService->findByUuid($object['share']);
+            $share           = $this->shareService->findByUuid($object['share']);
             $object['share'] = $objectHelper->getApiObject($share);
         }
 

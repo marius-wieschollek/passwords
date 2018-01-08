@@ -110,10 +110,10 @@ class DecryptionModule {
         $size   = strlen(hash($algorithm, '', true));
         $len    = ceil($length / $size);
         $result = '';
-        for ($i = 1; $i <= $len; $i++) {
+        for($i = 1; $i <= $len; $i++) {
             $tmp = hash_hmac($algorithm, $salt.pack('N', $i), $key, true);
             $res = $tmp;
-            for ($j = 1; $j < 100; $j++) {
+            for($j = 1; $j < 100; $j++) {
                 $tmp = hash_hmac($algorithm, $tmp, $key, true);
                 $res ^= $tmp;
             }

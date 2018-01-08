@@ -85,10 +85,10 @@ export default class SimpleApi {
 
     login(endpoint, username = null, password = null, token = null) {
         this._endpoint = endpoint;
-        if (username !== null && password !== null) {
+        if(username !== null && password !== null) {
             this._headers.Authorization = 'Basic ' + btoa(username + ':' + password);
         }
-        if (token !== null) {
+        if(token !== null) {
             this._headers['X-Passwords-Token'] = token;
         }
     }
@@ -418,7 +418,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findSharePartners(search = '') {
-        if (search.length === 0) {
+        if(search.length === 0) {
             return this._createRequest('share.partners');
         }
         return this._createRequest('share.partners', {search: search}, 'POST');
@@ -439,7 +439,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     generatePassword(strength = 1, useNumbers = false, useSpecialCharacters = false, useSmileys = false) {
-        if (strength === 1 && useNumbers === false && useSpecialCharacters === false && useSmileys === false) {
+        if(strength === 1 && useNumbers === false && useSpecialCharacters === false && useSmileys === false) {
             return this._createRequest('password.generate');
         }
 
@@ -546,11 +546,11 @@ export default class SimpleApi {
      */
     _createRequest(path, data = null, method = null, dataType = 'json') {
 
-        if (method === null) {
+        if(method === null) {
             method = data === null ? 'GET':'POST';
         }
 
-        if (Array.isArray(path)) {
+        if(Array.isArray(path)) {
             path = SimpleApi.processUrl(this._paths[path[0]], path[1]);
         } else {
             path = this._paths[path];
@@ -568,10 +568,10 @@ export default class SimpleApi {
                            try {
                                let response = JSON.parse(data.responseText);
                                data.message = response.message;
-                           } catch (e) {
+                           } catch(e) {
                                data.message = data.status + ': ' + data.statusText;
                            }
-                           if (this._debug) console.error(data);
+                           if(this._debug) console.error(data);
                            reject(data);
                        }
                    });
@@ -587,11 +587,11 @@ export default class SimpleApi {
     static parseUrl(url, component = null) {
         let link = document.createElement('a');
 
-        if (url.indexOf('://') === -1) url = 'http://' + url;
+        if(url.indexOf('://') === -1) url = 'http://' + url;
 
         link.setAttribute('href', url);
 
-        if (component !== null) return link[component];
+        if(component !== null) return link[component];
 
         return link;
     }
@@ -603,8 +603,8 @@ export default class SimpleApi {
      * @returns {*}
      */
     static processUrl(url, data = {}) {
-        for (let property in data) {
-            if (!data.hasOwnProperty(property)) continue;
+        for(let property in data) {
+            if(!data.hasOwnProperty(property)) continue;
 
             url = url.replace('{' + property + '}', data[property]);
         }

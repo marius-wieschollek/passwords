@@ -8,7 +8,6 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -211,7 +210,7 @@ class AvatarService {
             $image = $this->imageHelper->getImageFromFile($tempFile);
             $image = $this->imageHelper->simpleResizeImage($image, $size);
             unlink($tempFile);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
         }
@@ -228,7 +227,7 @@ class AvatarService {
         $max    = count($this->colors);
         $number = array_sum(str_split(dechex(md5($string)), 2));
 
-        while ($number >= $max) {
+        while($number >= $max) {
             $number -= $max;
         }
 

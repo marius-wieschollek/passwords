@@ -19,7 +19,7 @@
             Translate
         },
 
-        props     : {
+        props: {
             title: {
                 type     : String,
                 'default': 'More Options'
@@ -28,14 +28,14 @@
 
         data() {
             return {
-                open: false,
+                open       : false,
                 borderColor: ThemeManager.getColor()
             }
         },
 
         computed: {
             titleStyle() {
-                if (this.open) {
+                if(this.open) {
                     return {
                         'border-color': ThemeManager.getColor()
                     };
@@ -46,7 +46,7 @@
         },
 
         methods: {
-            toggleContent: function () {
+            toggleContent: function() {
                 this.open = !this.open;
             }
         }

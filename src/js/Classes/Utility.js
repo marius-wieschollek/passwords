@@ -7,8 +7,8 @@ export default class Utility {
      * @returns {string}
      */
     static translate(text, variables = {}) {
-        if (text === undefined) return '';
-        if (OC !== undefined) return t('passwords', text, variables);
+        if(text === undefined) return '';
+        if(OC !== undefined) return t('passwords', text, variables);
 
         return '';
     }
@@ -35,7 +35,7 @@ export default class Utility {
      * @param type
      */
     static createDownload(content, name = null, type = 'text/plain') {
-        if (name === null) name = new Date().toISOString() + '.txt';
+        if(name === null) name = new Date().toISOString() + '.txt';
         let element = document.createElement('a');
         element.setAttribute('href', 'data:' + type + ';charset=utf-8,' + encodeURIComponent(content));
         element.setAttribute('download', name);
@@ -66,29 +66,29 @@ export default class Utility {
     static sortApiObjectArray(object, property = 'uuid', ascending = true, returnArray = true, sortFunction) {
         let rArr = [], rObj = {};
 
-        if (sortFunction === undefined) {
+        if(sortFunction === undefined) {
             sortFunction = (a, b) => {
                 let aP = a[property], bP = b[property];
-                if (aP === bP) return 0;
-                if (typeof aP === 'string') {
-                    if (ascending) return aP.localeCompare(bP, 'kn', {sensitivity: 'base'});
+                if(aP === bP) return 0;
+                if(typeof aP === 'string') {
+                    if(ascending) return aP.localeCompare(bP, 'kn', {sensitivity: 'base'});
                     return bP.localeCompare(aP, 'kn', {sensitivity: 'base'}) === 1 ? -1:1;
                 }
-                if (ascending) return aP < bP ? -1:1;
+                if(ascending) return aP < bP ? -1:1;
                 return aP > bP ? -1:1;
             }
         }
 
-        for (let key in object) {
-            if (!object.hasOwnProperty(key)) continue;
+        for(let key in object) {
+            if(!object.hasOwnProperty(key)) continue;
             rArr.push(object[key]);
         }
 
         rArr.sort(sortFunction);
 
-        if (returnArray) return rArr;
+        if(returnArray) return rArr;
 
-        for (let i = 0; i < rArr.length; i++) {
+        for(let i = 0; i < rArr.length; i++) {
             let element = rArr[i];
             rObj[element.uuid] = element;
         }
@@ -103,8 +103,8 @@ export default class Utility {
      */
     static objectToArray(object) {
         let array = [];
-        for (let key in object) {
-            if (!object.hasOwnProperty(key)) continue;
+        for(let key in object) {
+            if(!object.hasOwnProperty(key)) continue;
             array.push(object[key]);
         }
         return array;
@@ -117,9 +117,9 @@ export default class Utility {
      * @returns {*}
      */
     static replaceOrAppendApiObject(array, object) {
-        for (let i = 0; i < array.length; i++) {
+        for(let i = 0; i < array.length; i++) {
             let current = array[i];
-            if (current.id === object.id) {
+            if(current.id === object.id) {
                 array[i] = object;
                 return array;
             }
@@ -136,9 +136,9 @@ export default class Utility {
      * @returns {*}
      */
     static removeApiObjectFromArray(array, object) {
-        for (let i = 0; i < array.length; i++) {
+        for(let i = 0; i < array.length; i++) {
             let current = array[i];
-            if (current.id === object.id) {
+            if(current.id === object.id) {
                 return array.remove(i);
             }
         }
@@ -153,9 +153,9 @@ export default class Utility {
      * @returns {*}
      */
     static searchApiObjectInArray(array, object) {
-        for (let i = 0; i < array.length; i++) {
+        for(let i = 0; i < array.length; i++) {
             let current = array[i];
-            if (current.id === object.id) return i;
+            if(current.id === object.id) return i;
         }
 
         return -1;
@@ -170,8 +170,8 @@ export default class Utility {
     static mergeObject(a, b) {
         let object = Utility.cloneObject(a);
 
-        for (let key in b) {
-            if (!b.hasOwnProperty(key)) continue;
+        for(let key in b) {
+            if(!b.hasOwnProperty(key)) continue;
             object[key] = b[key];
         }
 
@@ -186,17 +186,17 @@ export default class Utility {
     static cloneObject(object) {
         let clone = new object.constructor();
 
-        for (let key in object) {
-            if (!object.hasOwnProperty(key)) continue;
+        for(let key in object) {
+            if(!object.hasOwnProperty(key)) continue;
             let element = object[key];
 
-            if (Array.isArray(element)) {
+            if(Array.isArray(element)) {
                 clone[key] = element.slice(0);
-            } else if (element instanceof Date) {
+            } else if(element instanceof Date) {
                 clone[key] = new Date(element.getTime());
-            } else if (element === null) {
+            } else if(element === null) {
                 clone[key] = null;
-            } else if (typeof element === "object") {
+            } else if(typeof element === "object") {
                 clone[key] = Utility.cloneObject(element);
             } else {
                 clone[key] = element;

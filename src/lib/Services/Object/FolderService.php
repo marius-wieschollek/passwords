@@ -81,7 +81,7 @@ class FolderService extends AbstractModelService {
 
     /**
      * @param ModelInterface|EntityInterface $entity
-     * @param array           $overwrites
+     * @param array                          $overwrites
      *
      * @return EntityInterface
      * @throws \Exception

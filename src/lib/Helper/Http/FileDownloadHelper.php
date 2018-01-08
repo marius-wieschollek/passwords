@@ -73,7 +73,7 @@ class FileDownloadHelper extends RequestHelper {
      */
     public function sendWithRetry($maxRetries = self::REQUEST_MAX_RETRIES) {
         $retries = 0;
-        while ($retries < $maxRetries) {
+        while($retries < $maxRetries) {
             if($this->send()) return true;
             if($this->retryTimeout) sleep($this->retryTimeout);
             $retries++;

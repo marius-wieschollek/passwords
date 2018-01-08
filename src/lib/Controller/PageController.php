@@ -2,7 +2,6 @@
 
 namespace OCA\Passwords\Controller;
 
-use OCA\Passwords\AppInfo\Application;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;

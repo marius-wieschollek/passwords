@@ -60,7 +60,7 @@
 
         computed: {
             securityCheck() {
-                switch (this.password.status) {
+                switch(this.password.status) {
                     case 0:
                         return 'ok';
                     case 1:
@@ -73,16 +73,16 @@
 
         methods: {
             copyPasswordAction($event) {
-                if ($event.detail !== 1 || $($event.target).closest('.more').length !== 0) return;
+                if($event.detail !== 1 || $($event.target).closest('.more').length !== 0) return;
                 Utility.copyToClipboard(this.password.password);
 
-                if (this.clickTimeout) clearTimeout(this.clickTimeout);
+                if(this.clickTimeout) clearTimeout(this.clickTimeout);
                 this.clickTimeout =
-                    setTimeout(function () { Messages.notification('Password was copied to clipboard') }, 300);
+                    setTimeout(function() { Messages.notification('Password was copied to clipboard') }, 300);
             },
             copyUsernameAction($event) {
-                if ($($event.target).closest('.more').length !== 0) return;
-                if (this.clickTimeout) clearTimeout(this.clickTimeout);
+                if($($event.target).closest('.more').length !== 0) return;
+                if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 Utility.copyToClipboard(this.password.username);
                 Messages.notification('Username was copied to clipboard');
@@ -102,13 +102,13 @@
                 this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
             menuEvent($e) {
-                if ($($e.target).closest('[data-password-id=' + this.password.id + '] .more').length !== 0) return;
+                if($($e.target).closest('[data-password-id=' + this.password.id + '] .more').length !== 0) return;
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },
             detailsAction($event, section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
-                if (!this.password.hasOwnProperty('revisions')) {
+                if(!this.password.hasOwnProperty('revisions')) {
                     API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
                         .then((p) => {
                             this.$parent.detail = {type: 'password', element: p};

@@ -88,7 +88,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             } else {
                 throw new Exception('Unable to read common passwords zip file');
             }
-        } catch (Throwable $e) {
+        } catch(Throwable $e) {
             if(is_file($txtFile)) @unlink($txtFile);
             if(is_file($zipFile)) @unlink($zipFile);
             throw $e;
@@ -104,11 +104,11 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      */
     protected function lowMemoryHashAlgorithm(string $txtFile): void {
         $null = null;
-        for ($i = 0; $i < 16; $i++) {
+        for($i = 0; $i < 16; $i++) {
             $hexKey = dechex($i);
             $hashes = [];
             $fh     = fopen($txtFile, 'r');
-            while (($line = fgets($fh)) !== false) {
+            while(($line = fgets($fh)) !== false) {
                 list($a, $b) = explode("\t", "$line\t000000");
 
                 $hash = sha1($a);
@@ -141,7 +141,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
         $null   = null;
         $hashes = [];
         $fh     = fopen($txtFile, 'r');
-        while (($line = fgets($fh)) !== false) {
+        while(($line = fgets($fh)) !== false) {
             list($a, $b) = explode("\t", "$line\t000000");
 
             $hash = sha1($a);
@@ -164,7 +164,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @param array $hashes
      */
     protected function storeHashes(array $hashes): void {
-        foreach ($hashes as $key => $data) {
+        foreach($hashes as $key => $data) {
             $data = json_encode(array_keys($data));
             if(extension_loaded('zlib')) {
                 $data = gzcompress($data);

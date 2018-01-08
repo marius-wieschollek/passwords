@@ -92,7 +92,7 @@ class PasswordHook {
         if($oldRevision->getHidden() != $newRevision->getHidden()) {
             $relations = $this->relationService->findByPassword($password->getUuid());
 
-            foreach ($relations as $relation) {
+            foreach($relations as $relation) {
                 /** @var TagRevision $tagRevision */
                 $tagRevision = $this->tagRevisionService->findByModel($relation->getTag());
                 $relation->setHidden($newRevision->isHidden() || $tagRevision->isHidden());
@@ -102,7 +102,7 @@ class PasswordHook {
     }
 
     /**
-     * @param Password         $password
+     * @param Password $password
      *
      * @throws \Exception
      */
@@ -115,7 +115,7 @@ class PasswordHook {
 
         if($password->hasShares()) {
             $shares = $this->shareService->findBySourcePassword($password->getUuid());
-            foreach ($shares as $share) {
+            foreach($shares as $share) {
                 $share->setSourceUpdated(true);
                 $this->shareService->save($share);
             }
@@ -131,13 +131,13 @@ class PasswordHook {
     public function preDelete(Password $password): void {
         $relations = $this->relationService->findByPassword($password->getUuid());
 
-        foreach ($relations as $relation) {
+        foreach($relations as $relation) {
             $this->relationService->delete($relation);
         }
 
         if($password->hasShares()) {
             $shares = $this->shareService->findBySourcePassword($password->getUuid());
-            foreach ($shares as $share) {
+            foreach($shares as $share) {
                 $this->shareService->delete($share);
             }
             $password->setHasShares(false);
@@ -153,7 +153,7 @@ class PasswordHook {
         /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionService->findByModel($password->getUuid());
 
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $this->revisionService->delete($revision);
         }
 
@@ -174,7 +174,7 @@ class PasswordHook {
         $revisions = $this->revisionService->findByModel($originalPassword->getUuid());
 
         $currentClonedRevision = null;
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             /** @var PasswordRevision $revisionClone */
             $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedPassword->getUuid()]);
             $this->revisionService->save($revisionClone);
@@ -185,7 +185,7 @@ class PasswordHook {
         }
 
         $relations = $this->relationService->findByPassword($originalPassword->getUuid());
-        foreach ($relations as $relation) {
+        foreach($relations as $relation) {
             $relationClone = $this->relationService->clone($relation, [
                 'password'         => $currentClonedRevision->getModel(),
                 'passwordRevision' => $currentClonedRevision->getUuid(),

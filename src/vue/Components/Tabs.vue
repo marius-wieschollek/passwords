@@ -4,11 +4,11 @@
             <translate tag="li"
                        v-for="(tab, name) in tabs"
                        :key="name"
-                :data-tab="name"
-                class="tab-title"
-                :class="{ active: isCurrentTab(name) }"
-                :style="tabStyle"
-                @click="setCurrentTab(name)">
+                       :data-tab="name"
+                       class="tab-title"
+                       :class="{ active: isCurrentTab(name) }"
+                       :style="tabStyle"
+                       @click="setCurrentTab(name)">
                 {{tab}}
             </translate>
         </ul>
@@ -45,7 +45,7 @@
 
         computed: {
             tabStyle() {
-                if (OCA.Theming) {
+                if(OCA.Theming) {
                     return {
                         'border-color': OCA.Theming.color
                     };

@@ -67,10 +67,10 @@ class LegacyCategoryMigration {
         $count = count($categories);
         $output->info("Migrating Categories (total: {$count})");
         $output->startProgress($count);
-        foreach ($categories as $category) {
+        foreach($categories as $category) {
             try {
                 $tags[ $category->getId() ] = $this->migrateCategory($category);
-            } catch (\Throwable $e) {
+            } catch(\Throwable $e) {
                 $output->warning(
                     "Failed migrating category #{$category->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );

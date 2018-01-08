@@ -37,7 +37,8 @@ class ShareMapper extends AbstractMapper {
 
         $params = [];
         if($this->userId !== null) {
-            $sql .= ' AND (`*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ? OR `*PREFIX*'.static::TABLE_NAME.'`.`receiver` = ?) ';
+            $sql      .= ' AND (`*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ? OR `*PREFIX*'.static::TABLE_NAME.
+                         '`.`receiver` = ?) ';
             $params[] = $this->userId;
             $params[] = $this->userId;
         }

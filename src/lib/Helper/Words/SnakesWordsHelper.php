@@ -35,7 +35,7 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     }
 
     /**
-     * @param array  $options
+     * @param array $options
      *
      * @return mixed
      */

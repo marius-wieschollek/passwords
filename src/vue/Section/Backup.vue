@@ -75,7 +75,12 @@
                 ExportManager.exportDatabase(this.exportSettings.format, this.exportSettings.models);
             },
             importDb() {
-                ImportManager.importDatabase(this.importSettings.data, this.importSettings.type, this.importSettings.mode, this.registerProgress);
+                ImportManager.importDatabase(
+                    this.importSettings.data,
+                    this.importSettings.type,
+                    this.importSettings.mode,
+                    this.registerProgress
+                );
             },
             processFile(event) {
                 let file   = event.target.files[0],
@@ -86,7 +91,7 @@
             registerProgress(processed, total, status) {
                 this.importStatus.processed = processed;
                 this.importStatus.total = total;
-                if (status !== null) {
+                if(status !== null) {
                     this.importStatus.status = Utility.translate(status);
                 }
             }

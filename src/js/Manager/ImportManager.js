@@ -27,7 +27,7 @@ class ImportManager {
         this.progress = progress;
         this.countProgress('Parsing input file');
 
-        switch (type) {
+        switch(type) {
             case 'json':
                 data = JSON.parse(data);
                 break;
@@ -36,27 +36,27 @@ class ImportManager {
         }
 
         this.total = 0;
-        for (let k in data) {
-            if (!data.hasOwnProperty(k) || !Array.isArray(data[k])) continue;
+        for(let k in data) {
+            if(!data.hasOwnProperty(k) || !Array.isArray(data[k])) continue;
             this.total += data[k].length;
         }
 
         let tagMapping = {};
-        if (data.tags) {
+        if(data.tags) {
             this.countProgress('Importing tags');
             tagMapping = await this.importTags(data.tags, mode);
         }
 
         let folderMapping = {};
-        if (data.folders) {
+        if(data.folders) {
             this.countProgress('Importing folders');
             folderMapping = await this.importFolders(data.folders, mode);
         }
 
         let passwordMapping = {};
-        if (data.passwords) {
-            if (!data.hasOwnProperty('tags')) tagMapping = await this.getTagMapping();
-            if (!data.hasOwnProperty('folders')) folderMapping = await this.getFolderMapping();
+        if(data.passwords) {
+            if(!data.hasOwnProperty('tags')) tagMapping = await this.getTagMapping();
+            if(!data.hasOwnProperty('folders')) folderMapping = await this.getFolderMapping();
             this.countProgress('Importing passwords');
 
             passwordMapping = this.importPasswords(data.passwords, mode, tagMapping, folderMapping);
@@ -73,8 +73,8 @@ class ImportManager {
         let tags  = await API.listTags(),
             idMap = {};
 
-        for (let k in tags) {
-            if (!tags.hasOwnProperty(k)) continue;
+        for(let k in tags) {
+            if(!tags.hasOwnProperty(k)) continue;
             idMap[k] = k;
         }
 
@@ -91,8 +91,8 @@ class ImportManager {
         let folders = await API.listFolders(),
             idMap   = {'00000000-0000-0000-0000-000000000000': this.defaultFolder};
 
-        for (let k in folders) {
-            if (!folders.hasOwnProperty(k)) continue;
+        for(let k in folders) {
+            if(!folders.hasOwnProperty(k)) continue;
             idMap[k] = k;
         }
 
@@ -109,16 +109,16 @@ class ImportManager {
         let db    = await API.listTags(),
             idMap = {};
 
-        for (let k in db) {
-            if (!db.hasOwnProperty(k)) continue;
+        for(let k in db) {
+            if(!db.hasOwnProperty(k)) continue;
             idMap[k] = k;
         }
 
-        for (let i = 0; i < tags.length; i++) {
+        for(let i = 0; i < tags.length; i++) {
             let tag = tags[i];
 
-            if (mode !== 3 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
-                if (mode === 1 || (mode === 0 && db[tag.id].revision === tag.revision)) {
+            if(mode !== 3 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
+                if(mode === 1 || (mode === 0 && db[tag.id].revision === tag.revision)) {
                     this.countProgress();
                     continue;
                 }
@@ -146,39 +146,39 @@ class ImportManager {
         let db    = await API.listFolders(),
             idMap = {'00000000-0000-0000-0000-000000000000': this.defaultFolder};
 
-        for (let k in db) {
-            if (!db.hasOwnProperty(k)) continue;
+        for(let k in db) {
+            if(!db.hasOwnProperty(k)) continue;
             idMap[k] = k;
         }
 
         folders.sort((a, b) => {
-            if (a.parent === null || b.parent === null) return 0;
-            if (a.id === null || b.id === null) return 0;
-            if (a.parent === b.id) return 1;
-            if (b.parent === a.id) return -1;
+            if(a.parent === null || b.parent === null) return 0;
+            if(a.id === null || b.id === null) return 0;
+            if(a.parent === b.id) return 1;
+            if(b.parent === a.id) return -1;
             return 0;
         });
 
-        for (let i = 0; i < folders.length; i++) {
+        for(let i = 0; i < folders.length; i++) {
             let folder = folders[i];
 
-            if (folder.id === this.defaultFolder) {
+            if(folder.id === this.defaultFolder) {
                 this.countProgress();
                 continue;
             }
 
-            if (idMap.hasOwnProperty(folder.parent)) {
+            if(idMap.hasOwnProperty(folder.parent)) {
                 folder.parent = idMap[folder.parent];
             } else {
                 folder.parent = this.defaultFolder;
             }
 
-            if (folder.parent === folder.id) {
+            if(folder.parent === folder.id) {
                 folder.parent = this.defaultFolder;
             }
 
-            if (mode !== 3 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
-                if (mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
+            if(mode !== 3 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
+                if(mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
                     this.countProgress();
                     continue;
                 }
@@ -208,34 +208,34 @@ class ImportManager {
         let db    = await API.listPasswords(),
             idMap = {};
 
-        for (let k in db) {
-            if (!db.hasOwnProperty(k)) continue;
+        for(let k in db) {
+            if(!db.hasOwnProperty(k)) continue;
             idMap[k] = k;
         }
 
-        for (let i = 0; i < passwords.length; i++) {
+        for(let i = 0; i < passwords.length; i++) {
             let password = passwords[i];
 
-            if (password.tags) {
+            if(password.tags) {
                 let tags = [];
-                for (let j = 0; j < password.tags.length; j++) {
+                for(let j = 0; j < password.tags.length; j++) {
                     let id = password.tags[j];
 
-                    if (tagMapping.hasOwnProperty(id)) {
+                    if(tagMapping.hasOwnProperty(id)) {
                         tags.push(tagMapping[id])
                     }
                 }
                 password.tags = tags;
             }
 
-            if (folderMapping.hasOwnProperty(password.folder)) {
+            if(folderMapping.hasOwnProperty(password.folder)) {
                 password.folder = folderMapping[password.folder];
             } else {
                 password.folder = this.defaultFolder;
             }
 
-            if (mode !== 3 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
-                if (mode === 1 || (mode === 0 && db[password.id].revision === password.revision)) {
+            if(mode !== 3 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
+                if(mode === 1 || (mode === 0 && db[password.id].revision === password.revision)) {
                     this.countProgress();
                     continue;
                 }
@@ -254,7 +254,7 @@ class ImportManager {
     }
 
     countProgress(status = null) {
-        if (status === null) this.processed++;
+        if(status === null) this.processed++;
         this.progress(this.processed, this.total, status);
     }
 }

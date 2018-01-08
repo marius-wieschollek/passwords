@@ -238,10 +238,10 @@ class AdminSettings implements ISettings {
         $caches = $this->fileCacheService->listCaches();
 
         $info = [];
-        foreach ($caches as $cache) {
+        foreach($caches as $cache) {
             try {
                 $info[] = $this->fileCacheService->getCacheInfo($cache);
-            } catch (\Exception $e) {
+            } catch(\Exception $e) {
             }
         }
 

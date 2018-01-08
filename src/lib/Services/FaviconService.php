@@ -84,14 +84,14 @@ class FaviconService {
             }
 
             return $this->resizeFavicon($favicon, $fileName, $size);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->error($e->getMessage());
 
             try {
                 $favicon = $faviconService->getDefaultFavicon();
 
                 return $this->resizeFavicon($favicon, 'error.png', $size);
-            } catch (\Throwable $e) {
+            } catch(\Throwable $e) {
                 $this->logger->error($e->getMessage());
 
                 throw new ApiException('Internal Favicon API Error', 502);
@@ -129,7 +129,7 @@ class FaviconService {
      */
     protected function validateInput(string $domain, int $size): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
-        $size = round($size/8)*8;
+        $size = round($size / 8) * 8;
         if($size > 256) {
             $size = 256;
         } else if($size < 16) {

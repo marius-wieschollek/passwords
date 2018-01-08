@@ -75,7 +75,7 @@ class ServiceApiController extends AbstractApiController {
         $this->faviconService = $faviconService;
         $this->wordsService   = $wordsService;
         $this->previewService = $previewService;
-        $this->avatarService = $avatarService;
+        $this->avatarService  = $avatarService;
     }
 
     /**
@@ -101,7 +101,7 @@ class ServiceApiController extends AbstractApiController {
                     'smileys'  => false
                 ]
             );
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -120,7 +120,7 @@ class ServiceApiController extends AbstractApiController {
             $file = $this->avatarService->getAvatar($user, $size);
 
             return $this->createFileDisplayResponse($file);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -140,7 +140,7 @@ class ServiceApiController extends AbstractApiController {
             $file = $this->faviconService->getFavicon($domain, $size);
 
             return $this->createFileDisplayResponse($file);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -164,7 +164,7 @@ class ServiceApiController extends AbstractApiController {
             $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
             return $this->createFileDisplayResponse($file);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
 
             return $this->createErrorResponse($e);
         }
@@ -181,7 +181,7 @@ class ServiceApiController extends AbstractApiController {
             $this->checkAccessPermissions();
 
             return $this->createErrorResponse(new ApiException('I’m a password manager', 418));
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }

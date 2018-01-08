@@ -10,7 +10,6 @@ namespace OCA\Passwords\Helper\ApiObjects;
 
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Share;
-use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\IAppContainer;
 use OCP\IUserManager;
@@ -48,10 +47,10 @@ class ShareObjectHelper extends AbstractObjectHelper {
     /**
      * AbstractObjectHelper constructor.
      *
-     * @param null|string       $userId
-     * @param IAppContainer     $container
-     * @param IUserManager      $userManager
-     * @param PasswordService   $passwordService
+     * @param null|string     $userId
+     * @param IAppContainer   $container
+     * @param IUserManager    $userManager
+     * @param PasswordService $passwordService
      */
     public function __construct(
         ?string $userId,
@@ -59,9 +58,9 @@ class ShareObjectHelper extends AbstractObjectHelper {
         IUserManager $userManager,
         PasswordService $passwordService
     ) {
-        $this->userId = $userId;
-        $this->container = $container;
-        $this->userManager = $userManager;
+        $this->userId          = $userId;
+        $this->container       = $container;
+        $this->userManager     = $userManager;
         $this->passwordService = $passwordService;
     }
 
@@ -85,7 +84,7 @@ class ShareObjectHelper extends AbstractObjectHelper {
         if(!$this->filter($share, $filter)) return null;
 
         $detailLevel = explode('+', $level);
-        $object = [];
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($share);
         }
@@ -102,7 +101,7 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @return array
      */
     protected function getModel(Share $share): array {
-        $owner = $this->userManager->get($share->getUserId());
+        $owner    = $this->userManager->get($share->getUserId());
         $receiver = $this->userManager->get($share->getReceiver());
 
         $password = $this->userId === $share->getUserId() ? $share->getSourcePassword():$share->getTargetPassword();
@@ -137,8 +136,8 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     protected function getPassword(array $object): array {
-        $objectHelper = $this->getPasswordObjectHelper();
-        $password = $this->passwordService->findByUuid($object['password']);
+        $objectHelper       = $this->getPasswordObjectHelper();
+        $password           = $this->passwordService->findByUuid($object['password']);
         $object['password'] = $objectHelper->getApiObject($password);
 
         return $object;

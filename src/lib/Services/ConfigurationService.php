@@ -50,6 +50,7 @@ class ConfigurationService {
     public function getUserValue(string $key, $default = null, $user = null) {
         $userId = $this->userId;
         if($userId === null) $userId = $user;
+
         return $this->config->getUserValue($userId, Application::APP_NAME, $key, $default);
     }
 

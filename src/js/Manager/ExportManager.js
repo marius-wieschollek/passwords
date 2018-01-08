@@ -8,10 +8,10 @@ class ExportManager {
 
     // noinspection JSMethodCanBeStatic
     async exportDatabase(format = 'json', model = null) {
-        if (model === null) model = ['passwords', 'folders', 'tags'];
+        if(model === null) model = ['passwords', 'folders', 'tags'];
 
         let data = '';
-        switch (format) {
+        switch(format) {
             case 'json':
                 data = await ExportManager.exportJson(model);
                 break;
@@ -33,13 +33,13 @@ class ExportManager {
     static async exportJson(model = []) {
 
         let json = {version: 1};
-        if (model.indexOf('passwords') !== -1) {
+        if(model.indexOf('passwords') !== -1) {
             json.passwords = await ExportManager.getPasswordsForExport()
         }
-        if (model.indexOf('folders') !== -1) {
+        if(model.indexOf('folders') !== -1) {
             json.folders = await ExportManager.getFoldersForExport()
         }
-        if (model.indexOf('tags') !== -1) {
+        if(model.indexOf('tags') !== -1) {
             json.tags = await ExportManager.getTagsForExport()
         }
 
@@ -54,8 +54,8 @@ class ExportManager {
         let data = await API.listPasswords('model+tags');
 
         let passwords = [];
-        for (let i in data) {
-            if (!data.hasOwnProperty(i)) continue;
+        for(let i in data) {
+            if(!data.hasOwnProperty(i)) continue;
             let element  = data[i],
                 password = {
                     id       : element.id,
@@ -70,8 +70,8 @@ class ExportManager {
                 };
 
             password.tags = [];
-            for (let j in element.tags) {
-                if (!element.tags.hasOwnProperty(j)) continue;
+            for(let j in element.tags) {
+                if(!element.tags.hasOwnProperty(j)) continue;
                 password.tags.push(element.tags[j].id);
             }
 
@@ -89,8 +89,8 @@ class ExportManager {
         let data = await API.listFolders();
 
         let folders = [];
-        for (let i in data) {
-            if (!data.hasOwnProperty(i)) continue;
+        for(let i in data) {
+            if(!data.hasOwnProperty(i)) continue;
             let element = data[i];
             folders.push(
                 {
@@ -114,8 +114,8 @@ class ExportManager {
         let data = await API.listTags();
 
         let tags = [];
-        for (let i in data) {
-            if (!data.hasOwnProperty(i)) continue;
+        for(let i in data) {
+            if(!data.hasOwnProperty(i)) continue;
             let element = data[i];
             tags.push(
                 {

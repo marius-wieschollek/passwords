@@ -48,10 +48,10 @@ class LocalWordsHelper extends AbstractWordsHelper {
      */
     public function getWords(int $strength): array {
         $length = $strength == 1 ? 2:$strength;
-        $file = $this->getWordsFile();
+        $file   = $this->getWordsFile();
 
         $retires = 0;
-        while ($retires < 10) {
+        while($retires < 10) {
             exec("shuf -n {$length} {$file}", $result, $code);
 
             if($code == 0) {
@@ -72,7 +72,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
      */
     protected function getWordsFile(): string {
         $wordsFile = '';
-        switch ($this->langCode) {
+        switch($this->langCode) {
             case 'de':
                 $wordsFile = self::WORDS_DE;
                 break;

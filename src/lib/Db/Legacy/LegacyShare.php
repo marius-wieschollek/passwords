@@ -12,7 +12,7 @@ use OCP\AppFramework\Db\Entity;
 
 class LegacyShare extends Entity {
 
-    public $id;
+    public    $id;
     protected $pwid;
     protected $sharedto;
     protected $sharekey;

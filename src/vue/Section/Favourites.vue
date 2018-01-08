@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false" />
+            <breadcrumb :showAddNew="false"/>
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
@@ -62,23 +62,23 @@
         },
 
         methods: {
-            refreshView: function () {
+            refreshView: function() {
                 API.findPasswords({favourite: true}).then(this.updatePasswordList);
                 API.findFolders({favourite: true}).then(this.updateFolderList);
                 API.findTags({favourite: true}).then(this.updateTagList);
             },
 
-            updatePasswordList: function (passwords) {
+            updatePasswordList: function(passwords) {
                 this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label');
             },
 
-            updateFolderList: function (folders) {
+            updateFolderList: function(folders) {
                 this.loading = false;
                 this.folders = Utility.sortApiObjectArray(folders, 'label');
             },
 
-            updateTagList: function (tags) {
+            updateTagList: function(tags) {
                 this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             }

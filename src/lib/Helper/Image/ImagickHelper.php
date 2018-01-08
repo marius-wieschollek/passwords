@@ -188,7 +188,7 @@ class ImagickHelper extends AbstractImageHelper {
 
             $image->destroy();
             unlink($tempFile);
-        } catch (Throwable $e) {
+        } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
         }

@@ -145,7 +145,7 @@ class PasswordApiController extends AbstractObjectApiController {
                 ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -222,7 +222,7 @@ class PasswordApiController extends AbstractObjectApiController {
             if(!empty($tags)) $this->updateTags($tags, $revision);
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -255,7 +255,7 @@ class PasswordApiController extends AbstractObjectApiController {
             }
 
             return parent::restore($id, $revision);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -270,7 +270,7 @@ class PasswordApiController extends AbstractObjectApiController {
         $skip         = [];
         $tagRelations = $this->relationService->findByPassword($passwordRevision->getModel());
 
-        foreach ($tagRelations as $tagRelation) {
+        foreach($tagRelations as $tagRelation) {
             if(in_array($tagRelation->getTag(), $tags)) {
                 $skip[] = $tagRelation->getTag();
                 continue;
@@ -279,7 +279,7 @@ class PasswordApiController extends AbstractObjectApiController {
             $this->relationService->delete($tagRelation);
         }
 
-        foreach ($tags as $tag) {
+        foreach($tags as $tag) {
             if(in_array($tag, $skip) || empty($tag)) continue;
             $tag = $this->tagService->findByUuid($tag);
             /** @var TagRevision $revision */

@@ -64,7 +64,7 @@ class FileCacheService {
 
         try {
             return $this->appData->getFolder($cache.'Cache');
-        } catch (NotFoundException $e) {
+        } catch(NotFoundException $e) {
             return $this->appData->newFolder($cache.'Cache');
         }
     }
@@ -88,7 +88,7 @@ class FileCacheService {
             'files' => 0
         ];
 
-        foreach ($cachedFiles as $file) {
+        foreach($cachedFiles as $file) {
             $info['size'] += $file->getSize();
             $info['files']++;
         }
@@ -140,7 +140,7 @@ class FileCacheService {
         try {
             $cache = $this->validateCacheName($cache);
             $this->getCache($cache)->delete();
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
     }
@@ -150,7 +150,7 @@ class FileCacheService {
      */
     public function clearAllCaches() {
         $caches = $this->listCaches();
-        foreach ($caches as $cache) {
+        foreach($caches as $cache) {
             $this->clearCache($cache);
         }
     }
@@ -165,7 +165,7 @@ class FileCacheService {
             $info = $this->getCacheInfo($cache);
 
             return $info['files'] == 0;
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
 
@@ -183,7 +183,7 @@ class FileCacheService {
             $cache = $this->validateCacheName($cache);
 
             return $this->getCache($cache)->fileExists($file);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
 
@@ -204,7 +204,7 @@ class FileCacheService {
             if($cache->fileExists($file)) {
                 return $cache->getFile($file);
             }
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
 
@@ -232,7 +232,7 @@ class FileCacheService {
             $fileModel->putContent($content);
 
             return $fileModel;
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
 
@@ -248,7 +248,7 @@ class FileCacheService {
             $cache = $this->validateCacheName($cache);
 
             $this->getFile($file, $cache)->delete();
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
     }

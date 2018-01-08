@@ -44,8 +44,8 @@ class TagManager {
      * @returns {Promise<any>}
      */
     createTagFromData(tag) {
-        if (!tag.label) tag.label = Utility.translate('New Tag');
-        if (!tag.color) tag.color = randomMC.getColor();
+        if(!tag.label) tag.label = Utility.translate('New Tag');
+        if(!tag.color) tag.color = randomMC.getColor();
         tag = EnhancedApi.validateTag(tag);
 
         return new Promise((resolve, reject) => {
@@ -131,7 +131,7 @@ class TagManager {
      */
     deleteTag(tag, confirm = true) {
         return new Promise((resolve, reject) => {
-            if (!confirm || !tag.trashed) {
+            if(!confirm || !tag.trashed) {
                 API.deleteTag(tag.id)
                     .then((d) => {
                         tag.trashed = true;
@@ -160,7 +160,7 @@ class TagManager {
      */
     restoreTag(tag) {
         return new Promise((resolve, reject) => {
-            if (tag.trashed) {
+            if(tag.trashed) {
                 API.restoreTag(tag.id)
                     .then((d) => {
                         tag.trashed = false;
@@ -189,9 +189,9 @@ class TagManager {
      */
     restoreRevision(tag, revision, confirm = true) {
         return new Promise((resolve, reject) => {
-            if (tag.revision === revision.id) reject(tag);
+            if(tag.revision === revision.id) reject(tag);
 
-            if (!confirm) {
+            if(!confirm) {
                 API.restoreTag(tag.id, revision.id)
                     .then((d) => {
                         tag = Utility.mergeObject(tag, revision);

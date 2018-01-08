@@ -18,7 +18,7 @@
         <div class="area datenverarbeitung">
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
             <select id="passwords-image" name="passwords-favicon" name="image" data-setting="service/images">
-                <?php foreach ($_['imageServices'] as $service): ?>
+                <?php foreach($_['imageServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
             </select>
@@ -30,28 +30,28 @@
         <div class="area services">
             <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
             <select id="passwords-security" name="passwords-security" name="security" data-setting="service/security">
-                <?php foreach ($_['securityServices'] as $service): ?>
+                <?php foreach($_['securityServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
             </select>
 
             <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
             <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
-                <?php foreach ($_['wordsServices'] as $service): ?>
+                <?php foreach($_['wordsServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
             </select>
 
             <label for="passwords-favicon"><?php p($l->t('Favicon Service')); ?></label>
             <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service/favicon">
-                <?php foreach ($_['faviconServices'] as $service): ?>
+                <?php foreach($_['faviconServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
             </select>
 
             <label for="passwords-pageshot"><?php p($l->t('Website PageShot Service')); ?></label>
             <select id="passwords-pageshot" name="passwords-pageshot" name="pageshot" data-setting="service/pageshot">
-                <?php foreach ($_['pageshotServices'] as $service): ?>
+                <?php foreach($_['pageshotServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>
                             data-api="<?php p(json_encode($service['api'])); ?>"><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
@@ -65,7 +65,7 @@
 
     <form>
         <h3><?php p($l->t('Caches')); ?></h3>
-        <?php foreach ($_['caches'] as $cache): ?>
+        <?php foreach($_['caches'] as $cache): ?>
             <div class="area cache">
                 <label><?php p($l->t('%s Cache (%s Files, %s)',
                                      [ucfirst($cache['name']), $cache['files'], human_file_size($cache['size'])])); ?></label>

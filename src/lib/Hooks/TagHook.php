@@ -71,7 +71,7 @@ class TagHook {
         if($oldRevision->getHidden() != $newRevision->getHidden()) {
             $relations = $this->relationService->findByTag($tag->getUuid());
 
-            foreach ($relations as $relation) {
+            foreach($relations as $relation) {
                 /** @var PasswordRevision $passwordRevision */
                 $passwordRevision = $this->passwordRevisionService->findByModel($relation->getPassword());
                 $relation->setHidden($newRevision->isHidden() || $passwordRevision->isHidden());
@@ -88,7 +88,7 @@ class TagHook {
     public function preDelete(Tag $tag): void {
         $relations = $this->relationService->findByTag($tag->getUuid());
 
-        foreach ($relations as $relation) {
+        foreach($relations as $relation) {
             $this->relationService->delete($relation);
         }
     }
@@ -102,7 +102,7 @@ class TagHook {
         /** @var TagRevision[] $revisions */
         $revisions = $this->revisionService->findByModel($tag->getUuid());
 
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $this->revisionService->delete($revision);
         }
     }
@@ -118,7 +118,7 @@ class TagHook {
         $revisions = $this->revisionService->findByModel($originalTag->getUuid());
 
         $currentClonedRevision = null;
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             /** @var TagRevision $revisionClone */
             $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedTag->getUuid()]);
             $this->revisionService->save($revisionClone);
@@ -129,7 +129,7 @@ class TagHook {
         }
 
         $relations = $this->relationService->findByTag($originalTag->getUuid());
-        foreach ($relations as $relation) {
+        foreach($relations as $relation) {
             $relationClone = $this->relationService->clone($relation, [
                 'tag'         => $currentClonedRevision->getModel(),
                 'tagRevision' => $currentClonedRevision->getUuid(),

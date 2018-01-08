@@ -115,8 +115,8 @@
         },
 
         methods: {
-            closeWindow             : function () {
-                if (this._fail && !this.isSubmitted) {
+            closeWindow             : function() {
+                if(this._fail && !this.isSubmitted) {
                     this._fail();
                 }
 
@@ -125,10 +125,10 @@
                 $container.find('div').remove();
                 $container.html('<div></div>');
             },
-            togglePasswordVisibility: function () {
+            togglePasswordVisibility: function() {
                 this.showPassword = !this.showPassword;
             },
-            generateRandomPassword  : function () {
+            generateRandomPassword  : function() {
                 this.showLoader = true;
 
                 API.generatePassword()
@@ -141,17 +141,17 @@
                         this.showLoader = false;
                     });
             },
-            submitAction            : function () {
+            submitAction            : function() {
                 let password = this.password;
                 password.notes = this.simplemde.value();
                 password = EnhancedApi.validatePassword(this.password);
                 this.isSubmitted = true;
 
-                if (this._success) {
+                if(this._success) {
                     try {
                         this._success(password);
                         this.closeWindow();
-                    } catch (e) {
+                    } catch(e) {
                         console.error(e);
                     }
                 }
@@ -159,7 +159,7 @@
         },
 
         watch: {
-            password: function (password) {
+            password: function(password) {
                 this.simplemde.value(password.notes);
             }
         }

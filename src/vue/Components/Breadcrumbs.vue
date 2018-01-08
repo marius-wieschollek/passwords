@@ -57,7 +57,7 @@
 
         computed: {
             getItems() {
-                if (this.items.length === 0) {
+                if(this.items.length === 0) {
                     return [
                         {path: this.$route.path, label: Utility.translate(this.$route.name)}
                     ]
@@ -101,7 +101,7 @@
                 this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
             menuEvent($e) {
-                if ($($e.target).closest('.actions.creatable').length !== 0) return;
+                if($($e.target).closest('.actions.creatable').length !== 0) return;
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },

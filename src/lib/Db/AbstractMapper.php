@@ -29,12 +29,12 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @var array
      */
-    protected $allowedFields       = ['id', 'uuid'];
+    protected $allowedFields = ['id', 'uuid'];
 
     /**
      * @var array
      */
-    protected $logicalOperators    = ['AND', 'OR'];
+    protected $logicalOperators = ['AND', 'OR'];
 
     /**
      * @var array
@@ -146,7 +146,7 @@ abstract class AbstractMapper extends Mapper {
         if(isset($search[0]) && !is_array($search[0])) $search = [$search];
         list($sql, $params) = $this->getStatement();
 
-        foreach ($search as $criteria) {
+        foreach($search as $criteria) {
             if(!isset($criteria[2]) || !in_array($criteria[2], $this->comparisonOperators)) $criteria[2] = '=';
             if(!isset($criteria[3]) || !in_array($criteria[3], $this->logicalOperators)) $criteria[3] = 'AND';
 

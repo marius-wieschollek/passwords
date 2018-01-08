@@ -2,7 +2,7 @@
  *
  * @returns {Array.<*>}
  */
-Array.prototype.clone = function () {
+Array.prototype.clone = function() {
     return this.slice(0);
 };
 
@@ -11,8 +11,8 @@ Array.prototype.clone = function () {
  * @param index
  * @returns {*}
  */
-Array.prototype.remove = function (index) {
-    if (index === 0) {
+Array.prototype.remove = function(index) {
+    if(index === 0) {
         this.shift();
         return this;
     }

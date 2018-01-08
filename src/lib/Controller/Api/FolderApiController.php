@@ -98,7 +98,7 @@ class FolderApiController extends AbstractObjectApiController {
                 ['id' => $folder->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -140,7 +140,7 @@ class FolderApiController extends AbstractObjectApiController {
             $this->modelService->setRevision($folder, $revision);
 
             return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }

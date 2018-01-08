@@ -65,54 +65,54 @@
         },
 
         methods: {
-            refreshView: function () {
+            refreshView: function() {
                 this.loading = true;
                 this.folders = [];
                 this.passwords = [];
-                if (this.$route.params.folder !== undefined) {
+                if(this.$route.params.folder !== undefined) {
                     API.showFolder(this.$route.params.folder, 'model+folders+passwords+parent').then(this.updateContentList);
                 } else {
                     API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
                 }
             },
 
-            refreshViewIfRequired: function (data) {
+            refreshViewIfRequired: function(data) {
                 let object = data.object;
 
-                if (object.type === 'password' && (object.folder === this.currentFolder || object.folder.id === this.currentFolder)) {
-                    if (object.trashed) {
+                if(object.type === 'password' && (object.folder === this.currentFolder || object.folder.id === this.currentFolder)) {
+                    if(object.trashed) {
                         this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                     } else {
                         let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
                         this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
                     }
-                } else if (object.type === 'folder' && object.id === this.currentFolder) {
-                    if (object.trashed) {
+                } else if(object.type === 'folder' && object.id === this.currentFolder) {
+                    if(object.trashed) {
                         this.loading = true;
                         API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
-                    } else if (object.passwords && object.folders && typeof object.parent !== 'string') {
+                    } else if(object.passwords && object.folders && typeof object.parent !== 'string') {
                         this.updateContentList(object);
                     } else {
                         this.loading = true;
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     }
-                } else if (object.type === 'folder' && object.parent === this.currentFolder) {
-                    if (object.trashed) {
+                } else if(object.type === 'folder' && object.parent === this.currentFolder) {
+                    if(object.trashed) {
                         this.folders = Utility.removeApiObjectFromArray(this.folders, object);
                     } else {
                         let folders = Utility.replaceOrAppendApiObject(this.folders, object);
                         this.folders = Utility.sortApiObjectArray(folders, 'label', true);
                     }
-                } else if (object.type === 'folder' && Utility.searchApiObjectInArray(this.folders, object) !== -1) {
+                } else if(object.type === 'folder' && Utility.searchApiObjectInArray(this.folders, object) !== -1) {
                     this.folders = Utility.removeApiObjectFromArray(this.folders, object);
-                } else if (object.type === 'password' && Utility.searchApiObjectInArray(this.passwords, object) !== -1) {
+                } else if(object.type === 'password' && Utility.searchApiObjectInArray(this.passwords, object) !== -1) {
                     this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                 }
             },
 
-            updateContentList: function (folder) {
+            updateContentList: function(folder) {
                 this.loading = false;
-                if (folder.trashed) {
+                if(folder.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
                     this.defaultPath = '/trash';
                     this.draggable = false;
@@ -123,12 +123,12 @@
                 this.currentFolder = folder.id;
                 this.updateBreadcrumb(folder);
             },
-            updateBreadcrumb : function (folder) {
+            updateBreadcrumb : function(folder) {
                 this.breadcrumb = [
                     {path: this.defaultPath, label: this.defaultTitle, dropType: 'folder', folderId: this.defaultFolder}
                 ];
 
-                if (typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder) {
+                if(typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder) {
                     this.breadcrumb[0].label = '…';
                     let parent = folder.parent;
                     this.breadcrumb.push(
@@ -141,7 +141,7 @@
                     )
                 }
 
-                if (folder.id !== this.defaultFolder) {
+                if(folder.id !== this.defaultFolder) {
                     this.breadcrumb.push(
                         {
                             path    : this.$route.path,
@@ -155,7 +155,7 @@
         },
 
         watch: {
-            $route: function () {
+            $route: function() {
                 this.refreshView()
             }
         }

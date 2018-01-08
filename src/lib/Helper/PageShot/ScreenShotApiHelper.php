@@ -54,7 +54,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
 
         $seconds          = 0;
         $maxExecutionTime = ini_get('max_execution_time') - 5;
-        while ($seconds < $maxExecutionTime) {
+        while($seconds < $maxExecutionTime) {
             $request = $this->getAuthorizedRequest('https://api.screenshotapi.io/retrieve?key='.$image['key']);
             $check   = json_decode($request->sendWithRetry(1), true);
 

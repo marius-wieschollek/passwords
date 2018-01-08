@@ -67,9 +67,13 @@ abstract class AbstractObjectHelper {
      * @param EncryptionService       $encryptionService
      * @param AbstractRevisionService $revisionService
      */
-    public function __construct(IAppContainer $container, EncryptionService $encryptionService, AbstractRevisionService $revisionService) {
-        $this->container = $container;
-        $this->revisionService = $revisionService;
+    public function __construct(
+        IAppContainer $container,
+        EncryptionService $encryptionService,
+        AbstractRevisionService $revisionService
+    ) {
+        $this->container         = $container;
+        $this->revisionService   = $revisionService;
         $this->encryptionService = $encryptionService;
     }
 
@@ -80,7 +84,7 @@ abstract class AbstractObjectHelper {
      * @return bool
      */
     protected function filter(EntityInterface $revision, array $filter) {
-        foreach ($filter as $key => $value) {
+        foreach($filter as $key => $value) {
             $property = $revision->getProperty($key);
             if(!is_array($value)) {
                 if($property != $value) return false;

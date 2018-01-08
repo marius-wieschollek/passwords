@@ -151,15 +151,15 @@ class ShareApiController extends AbstractApiController {
         try {
             $this->checkAccessPermissions();
             /** @var Share[] $models */
-            $models  = $this->modelService->findAll();
+            $models = $this->modelService->findAll();
 
             $results = [];
-            foreach ($models as $model) {
+            foreach($models as $model) {
                 $results[] = $this->objectHelper->getApiObject($model, $details);
             }
 
             return $this->createJsonResponse($results);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -181,14 +181,14 @@ class ShareApiController extends AbstractApiController {
             $models = $this->modelService->findAll();
 
             $results = [];
-            foreach ($models as $model) {
+            foreach($models as $model) {
                 $object = $this->objectHelper->getApiObject($model, $details, $filters);
                 if($object === null) continue;
                 $results[] = $object;
             }
 
             return $this->createJsonResponse($results);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -209,7 +209,7 @@ class ShareApiController extends AbstractApiController {
             $object = $this->objectHelper->getApiObject($model, $details);
 
             return $this->createJsonResponse($object);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -292,7 +292,7 @@ class ShareApiController extends AbstractApiController {
             return $this->createJsonResponse(
                 ['id' => $share->getUuid()], Http::STATUS_CREATED
             );
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -330,7 +330,7 @@ class ShareApiController extends AbstractApiController {
             $this->modelService->save($share);
 
             return $this->createJsonResponse(['id' => $share->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -354,7 +354,7 @@ class ShareApiController extends AbstractApiController {
             $this->modelService->delete($model);
 
             return $this->createJsonResponse(['id' => $model->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -377,7 +377,7 @@ class ShareApiController extends AbstractApiController {
             ];
 
             return $this->createJsonResponse($info);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -400,7 +400,7 @@ class ShareApiController extends AbstractApiController {
             }
 
             return $this->createJsonResponse($partners);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -445,9 +445,9 @@ class ShareApiController extends AbstractApiController {
         $partners = [];
         if($this->shareManager->shareWithGroupMembersOnly()) {
             $userGroups = $this->groupManager->getUserGroupIds($this->user);
-            foreach ($userGroups as $userGroup) {
+            foreach($userGroups as $userGroup) {
                 $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, self::USER_SEARCH_LIMIT);
-                foreach ($users as $uid => $name) {
+                foreach($users as $uid => $name) {
                     if($uid == $this->userId) continue;
                     $partners[ $uid ] = $name;
                 }
@@ -456,7 +456,7 @@ class ShareApiController extends AbstractApiController {
         } else {
             $usersTmp = $this->userManager->search($pattern, self::USER_SEARCH_LIMIT);
 
-            foreach ($usersTmp as $user) {
+            foreach($usersTmp as $user) {
                 if($user->getUID() == $this->userId) continue;
                 $partners[ $user->getUID() ] = $user->getDisplayName();
             }

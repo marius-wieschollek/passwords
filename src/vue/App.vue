@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <router-view name="main" />
+        <router-view name="main"/>
         <div id="app-popup">
             <div></div>
         </div>

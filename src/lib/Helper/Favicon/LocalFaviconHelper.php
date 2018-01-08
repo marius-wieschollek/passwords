@@ -44,7 +44,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
 
         if(!empty($html)) {
             $patterns = $this->getSearchPatterns();
-            foreach ($patterns as $pattern) {
+            foreach($patterns as $pattern) {
                 $image = $this->checkForImage($html, $pattern['html'], $pattern['tag'], $domain);
 
                 if($image !== null) return $image;
@@ -110,7 +110,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected function checkForImage(string $htmlSource, string $htmlPattern, string $tagPattern, string $domain) {
 
         if(preg_match_all($htmlPattern, $htmlSource, $htmlMatches)) {
-            foreach ($htmlMatches[1] as $tagSource) {
+            foreach($htmlMatches[1] as $tagSource) {
                 if(preg_match($tagPattern, $tagSource, $tagMatches)) {
                     $url = $this->makeUrl($tagMatches[1], $domain);
                     list($data, , , $isIcon) = $this->getHttpRequest($url);

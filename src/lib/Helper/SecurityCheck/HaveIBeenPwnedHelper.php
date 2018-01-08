@@ -142,7 +142,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         $calc = $matches[2];
 
         preg_match_all("/{$key}([+\-\*\/])=([+()!\[\]]+);/", $html, $matches);
-        foreach ($matches[1] as $i => $v) {
+        foreach($matches[1] as $i => $v) {
             $calc = '('.$calc.')'.$v.'('.$matches[2][ $i ].')';
         }
 
@@ -152,7 +152,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
         $number = 0;
         preg_match_all("/(\([1+0]+\))/", $calc, $matches);
-        foreach ($matches[0] as $match) {
+        foreach($matches[0] as $match) {
             eval('$number='.$match.';');
             $calc = str_replace($match, $number, $calc);
         }
@@ -171,7 +171,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         preg_match_all("/input\s+type=\"hidden\"\s+name=\"(\S+)\"\s+value=\"(\S+)\"/", $html, $matches);
 
         $fields = [];
-        foreach ($matches[1] as $i => $key) {
+        foreach($matches[1] as $i => $key) {
             $fields[ $key ] = $matches[2][ $i ];
         }
 

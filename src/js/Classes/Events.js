@@ -27,7 +27,7 @@ class Events {
      * @param callback
      */
     on(event, callback) {
-        if (!this.events.hasOwnProperty(event)) {
+        if(!this.events.hasOwnProperty(event)) {
             this.events[event] = [];
         }
 
@@ -40,10 +40,10 @@ class Events {
      * @param callback
      */
     off(event, callback) {
-        if (!this.events.hasOwnProperty(event)) return;
+        if(!this.events.hasOwnProperty(event)) return;
         let callbacks = this.events[event];
 
-        while (callbacks.indexOf(callback) !== -1) {
+        while(callbacks.indexOf(callback) !== -1) {
             let index = callbacks.indexOf(callback);
             callbacks = callbacks.remove(index);
         }
@@ -57,20 +57,20 @@ class Events {
     fire(event, object = {}) {
 
         let events = [event];
-        if (this.alias.hasOwnProperty(event)) {
+        if(this.alias.hasOwnProperty(event)) {
             events = events.concat(this.alias[event]);
         }
 
-        for (let i = 0; i < events.length; i++) {
+        for(let i = 0; i < events.length; i++) {
             let event = events[i];
-            if (!this.events.hasOwnProperty(event)) continue;
+            if(!this.events.hasOwnProperty(event)) continue;
 
             let data = {event: event, object: object};
             let callbacks = this.events[event];
-            for (let j = 0; j < callbacks.length; j++) {
+            for(let j = 0; j < callbacks.length; j++) {
                 try {
                     callbacks[j](data);
-                } catch (e) {
+                } catch(e) {
                     console.error(e);
                 }
             }

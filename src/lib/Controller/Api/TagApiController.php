@@ -83,7 +83,7 @@ class TagApiController extends AbstractObjectApiController {
     ): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $tag   = $this->modelService->create();
+            $tag      = $this->modelService->create();
             $revision = $this->revisionService->create(
                 $tag->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
             );
@@ -95,7 +95,7 @@ class TagApiController extends AbstractObjectApiController {
                 ['id' => $tag->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -134,7 +134,7 @@ class TagApiController extends AbstractObjectApiController {
             $this->modelService->setRevision($tag, $revision);
 
             return $this->createJsonResponse(['id' => $tag->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }

@@ -101,7 +101,7 @@ class SseV1Encryption implements EncryptionInterface {
         $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
-        foreach ($fields as $field) {
+        foreach($fields as $field) {
             $value          = $object->getProperty($field);
             $encryptedValue = $this->crypto->encrypt($value, $encryptionKey);
             $object->setProperty($field, $encryptedValue);
@@ -123,7 +123,7 @@ class SseV1Encryption implements EncryptionInterface {
         $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
-        foreach ($fields as $field) {
+        foreach($fields as $field) {
             $value          = $object->getProperty($field);
             $decryptedValue = $this->crypto->decrypt($value, $encryptionKey);
             $object->setProperty($field, $decryptedValue);
@@ -139,7 +139,7 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws Exception
      */
     protected function getFieldsToProcess($object): array {
-        switch (get_class($object)) {
+        switch(get_class($object)) {
             case PasswordRevision::class:
                 return $this->password;
             case FolderRevision::class:
@@ -162,8 +162,8 @@ class SseV1Encryption implements EncryptionInterface {
      */
     protected function getEncryptionKey(string $passwordKey, string $userId): string {
         return $this->getServerKey().
-            $this->getUserKey($userId).
-            $passwordKey;
+               $this->getUserKey($userId).
+               $passwordKey;
     }
 
     /**

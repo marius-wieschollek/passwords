@@ -64,7 +64,7 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
 
         $retries = 0;
         $output  = [];
-        while ($retries < self::CAPTURE_MAX_RETRIES) {
+        while($retries < self::CAPTURE_MAX_RETRIES) {
             $output = [];
             @exec($cmd, $output, $returnCode);
 

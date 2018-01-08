@@ -1,14 +1,14 @@
 <template>
     <div id="app-content" :class="{ 'show-details': showDetails }">
         <div class="app-content-left">
-            <breadcrumb :newTag="true" :items="breadcrumb" />
+            <breadcrumb :newTag="true" :items="breadcrumb"/>
             <div class="item-list">
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" />
-                <password-line :password="password" v-for="password in passwords" :key="password.id" />
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
+                <password-line :password="password" v-for="password in passwords" :key="password.id"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element" />
+            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -61,10 +61,10 @@
         },
 
         methods: {
-            refreshView: function () {
+            refreshView: function() {
                 this.breadcrumb = [];
 
-                if (this.$route.params.tag !== undefined) {
+                if(this.$route.params.tag !== undefined) {
                     let tag = this.$route.params.tag;
                     API.showTag(tag, 'model+passwords').then(this.updatePasswordList);
                 } else {
@@ -72,14 +72,14 @@
                 }
             },
 
-            updateTagList: function (tags) {
+            updateTagList: function(tags) {
                 this.passwords = [];
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },
 
-            updatePasswordList: function (tag) {
+            updatePasswordList: function(tag) {
                 this.tags = [];
-                if (tag.trashed) {
+                if(tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
                     this.defaultPath = '/trash';
                 }
@@ -92,7 +92,7 @@
             }
         },
         watch  : {
-            $route: function () {
+            $route: function() {
                 this.refreshView()
             }
         }

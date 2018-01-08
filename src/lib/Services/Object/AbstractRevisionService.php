@@ -92,7 +92,7 @@ abstract class AbstractRevisionService extends AbstractService {
 
         if(!$decrypt) return $revisions;
 
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $this->encryptionService->decrypt($revision);
         }
 

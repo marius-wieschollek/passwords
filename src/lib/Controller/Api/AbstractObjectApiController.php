@@ -16,7 +16,6 @@ use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
-use OCP\ISession;
 
 /**
  * Class AbstractObjectApiController
@@ -88,7 +87,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             $models  = $this->modelService->findAll();
             $results = [];
 
-            foreach ($models as $model) {
+            foreach($models as $model) {
                 if($model->isSuspended()) continue;
                 $object = $this->objectHelper->getApiObject($model, $details, ['hidden' => false, 'trashed' => false]);
 
@@ -96,7 +95,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             }
 
             return $this->createJsonResponse($results);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -119,7 +118,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             $models  = $this->modelService->findAll();
             $results = [];
 
-            foreach ($models as $model) {
+            foreach($models as $model) {
                 if($model->isSuspended()) continue;
                 $object = $this->objectHelper->getApiObject($model, $details, $filters);
                 if($object === null) continue;
@@ -127,7 +126,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             }
 
             return $this->createJsonResponse($results);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -148,7 +147,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             $object = $this->objectHelper->getApiObject($model, $details);
 
             return $this->createJsonResponse($object);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -177,7 +176,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             $this->modelService->setRevision($model, $newRevision);
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }
@@ -211,7 +210,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             $this->modelService->setRevision($model, $newRevision);
 
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
     }

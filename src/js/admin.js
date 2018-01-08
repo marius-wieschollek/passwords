@@ -49,7 +49,7 @@ class PasswordsAdminSettings {
             $apiInput = $('#passwords-pageshot-apikey');
 
 
-        if (data === null) {
+        if(data === null) {
             $apiInput.parent().hide();
         } else {
             $apiInput.parent().show();

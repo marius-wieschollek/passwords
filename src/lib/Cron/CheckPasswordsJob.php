@@ -53,7 +53,7 @@ class CheckPasswordsJob extends TimedJob {
         $this->setInterval(24 * 60 * 60);
         $this->helperService  = $helperService;
         $this->revisionMapper = $revisionMapper;
-        $this->logger = $logger;
+        $this->logger         = $logger;
     }
 
     /**
@@ -80,7 +80,7 @@ class CheckPasswordsJob extends TimedJob {
         $revisions = $this->revisionMapper->findAllMatching(['status', 2, '!=']);
 
         $badPasswordCounter = 0;
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $oldStatus = $revision->getStatus();
             $newStatus = $securityHelper->getRevisionSecurityLevel($revision);
 

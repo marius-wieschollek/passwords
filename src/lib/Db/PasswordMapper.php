@@ -20,7 +20,7 @@ class PasswordMapper extends AbstractMapper {
     /**
      * @var array
      */
-    protected $allowedFields       = ['id', 'uuid', 'has_shares'];
+    protected $allowedFields = ['id', 'uuid', 'has_shares'];
 
     /**
      * @param string $shareUuid
@@ -33,7 +33,7 @@ class PasswordMapper extends AbstractMapper {
     public function findPasswordByShare(string $shareUuid, bool $source = true): ?Password {
         $passwordTable = '`*PREFIX*'.PasswordMapper::TABLE_NAME.'`';
         $shareTable    = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
-        $mapField = $source ? 'source_password':'target_password';
+        $mapField      = $source ? 'source_password':'target_password';
 
         $sql = "SELECT {$passwordTable}.* FROM {$passwordTable} ".
                "INNER JOIN {$shareTable} ".
@@ -59,7 +59,7 @@ class PasswordMapper extends AbstractMapper {
      */
     public function findOrphanedTargetPasswords(): array {
         $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $shareTable    = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
+        $shareTable     = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
 
         $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
                "INNER JOIN {$shareTable} ".

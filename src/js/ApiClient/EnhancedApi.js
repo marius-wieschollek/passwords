@@ -41,11 +41,11 @@ export default class EnhancedApi extends SimpleApi {
         try {
             object = EnhancedApi.flattenPassword(object);
             object = EnhancedApi.validatePassword(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
-        if (!object.label) EnhancedApi._generatePasswordTitle(object);
+        if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
         return super.createPassword(object);
     }
@@ -58,17 +58,17 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async updatePassword(data = {}) {
-        if (!data.id) return this.createPassword(data);
+        if(!data.id) return this.createPassword(data);
         let object = EnhancedApi._cloneObject(data);
 
         try {
             object = EnhancedApi.flattenPassword(object);
             object = EnhancedApi.validatePassword(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
-        if (!object.label) EnhancedApi._generatePasswordTitle(object);
+        if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
         return super.updatePassword(object);
     }
@@ -134,7 +134,7 @@ export default class EnhancedApi extends SimpleApi {
         try {
             object = EnhancedApi.flattenFolder(object);
             object = EnhancedApi.validateFolder(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
@@ -149,13 +149,13 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async updateFolder(data = {}) {
-        if (!data.id) return this.createFolder(data);
+        if(!data.id) return this.createFolder(data);
         let object = EnhancedApi._cloneObject(data);
 
         try {
             object = EnhancedApi.flattenFolder(object);
             object = EnhancedApi.validateFolder(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
@@ -222,7 +222,7 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.validateTag(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
@@ -237,12 +237,12 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async updateTag(data = {}) {
-        if (!data.id) return this.createTag(data);
+        if(!data.id) return this.createTag(data);
         let object = EnhancedApi._cloneObject(data);
 
         try {
             object = EnhancedApi.validateTag(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
@@ -309,7 +309,7 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenShare(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
@@ -323,12 +323,12 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     updateShare(data = {}) {
-        if (!data.id) return this.createShare(data);
+        if(!data.id) return this.createShare(data);
         let object = EnhancedApi._cloneObject(data);
 
         try {
             object = EnhancedApi.flattenShare(object);
-        } catch (e) {
+        } catch(e) {
             return this._createRejectedPromise(e);
         }
 
@@ -468,12 +468,12 @@ export default class EnhancedApi extends SimpleApi {
     static _validateObject(attributes, definitions, strict = false) {
         let object = {};
 
-        for (let property in definitions) {
-            if (!definitions.hasOwnProperty(property)) continue;
+        for(let property in definitions) {
+            if(!definitions.hasOwnProperty(property)) continue;
             let definition = definitions[property];
 
-            if (!attributes.hasOwnProperty(property)) {
-                if (definition.required) throw "Property " + property + " is required but missing";
+            if(!attributes.hasOwnProperty(property)) {
+                if(definition.required) throw "Property " + property + " is required but missing";
                 object[property] = definition.hasOwnProperty('default') ? definition.default:null;
                 continue;
             }
@@ -481,28 +481,28 @@ export default class EnhancedApi extends SimpleApi {
             let attribute = attributes[property],
                 type      = typeof attribute;
 
-            if (definition.required && (!attribute || 0 === attribute.length)) {
+            if(definition.required && (!attribute || 0 === attribute.length)) {
                 throw "Property " + property + " is required but missing";
             }
 
-            if (definition.type && definition.type !== type && (definition.type !== 'array' || !Array.isArray(attribute))) {
-                if (!strict && definition.type === 'boolean') {
+            if(definition.type && definition.type !== type && (definition.type !== 'array' || !Array.isArray(attribute))) {
+                if(!strict && definition.type === 'boolean') {
                     attribute = Boolean(attribute);
-                } else if (!strict && definition.hasOwnProperty('default')) {
+                } else if(!strict && definition.hasOwnProperty('default')) {
                     attribute = definition.default;
-                } else if (strict || definition.required) {
+                } else if(strict || definition.required) {
                     throw "Property " + property + " has invalid type " + type;
                 } else {
                     attribute = null;
                 }
             }
 
-            if (definition.length) {
-                if (Array.isArray(attribute) && attribute.length > definition.length) {
-                    if (strict) throw "Property " + property + " exceeds the maximum length of " + definition.length;
+            if(definition.length) {
+                if(Array.isArray(attribute) && attribute.length > definition.length) {
+                    if(strict) throw "Property " + property + " exceeds the maximum length of " + definition.length;
                     attribute = attribute.slice(0, definition.length)
-                } else if (type === 'string' && attribute.length > definition.length) {
-                    if (strict) throw "Property " + property + " exceeds the maximum length of " + definition.length;
+                } else if(type === 'string' && attribute.length > definition.length) {
+                    if(strict) throw "Property " + property + " exceeds the maximum length of " + definition.length;
                     attribute = attribute.substr(0, definition.length)
                 }
             }
@@ -520,10 +520,10 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     static _convertTags(data) {
-        if (data.hasOwnProperty('tags')) {
-            for (let i = 0; i < data.tags.length; i++) {
+        if(data.hasOwnProperty('tags')) {
+            for(let i = 0; i < data.tags.length; i++) {
                 let tag = data.tags[i];
-                if (typeof tag !== 'string') data.tags[i] = tag.id;
+                if(typeof tag !== 'string') data.tags[i] = tag.id;
             }
         }
 
@@ -553,7 +553,7 @@ export default class EnhancedApi extends SimpleApi {
     _createRejectedPromise(message) {
         return new Promise((resolve, reject) => {
             let error = {status: 'error', message: message};
-            if (this._debug) console.error(error);
+            if(this._debug) console.error(error);
             reject(error);
         });
     }
@@ -567,7 +567,7 @@ export default class EnhancedApi extends SimpleApi {
     _processPasswordList(data) {
         let passwords = {};
 
-        for (let i = 0; i < data.length; i++) {
+        for(let i = 0; i < data.length; i++) {
             let password = this._processPassword(data[i]);
             passwords[password.id] = password;
         }
@@ -583,7 +583,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     _processPassword(password) {
         password.type = 'password';
-        if (password.url) {
+        if(password.url) {
             let host = SimpleApi.parseUrl(password.url, 'host');
             password.icon = this.getFaviconUrl(host);
             password.image = this.getPreviewUrl(host);
@@ -623,7 +623,7 @@ export default class EnhancedApi extends SimpleApi {
     _processFolderList(data) {
         let folders = {};
 
-        for (let i = 0; i < data.length; i++) {
+        for(let i = 0; i < data.length; i++) {
             let folder = this._processFolder(data[i]);
             folders[folder.id] = folder;
         }
@@ -640,16 +640,16 @@ export default class EnhancedApi extends SimpleApi {
     _processFolder(folder) {
         folder.type = 'folder';
         folder.icon = 'http://localhost/core/img/filetypes/folder.svg';
-        if (folder.folders) {
+        if(folder.folders) {
             folder.folders = this._processFolderList(folder.folders);
         }
-        if (folder.passwords) {
+        if(folder.passwords) {
             folder.passwords = this._processPasswordList(folder.passwords);
         }
         if(folder.revisions) {
             folder.revisions = this._processFolderList(folder.revisions);
         }
-        if (typeof folder.parent !== 'string') {
+        if(typeof folder.parent !== 'string') {
             folder.parent = this._processFolder(folder.parent);
         }
 
@@ -668,7 +668,7 @@ export default class EnhancedApi extends SimpleApi {
     _processTagList(data) {
         let tags = {};
 
-        for (let i = 0; i < data.length; i++) {
+        for(let i = 0; i < data.length; i++) {
             let tag = this._processTag(data[i]);
             tags[tag.id] = tag;
         }
@@ -684,10 +684,10 @@ export default class EnhancedApi extends SimpleApi {
      */
     _processTag(tag) {
         tag.type = 'tag';
-        if (tag.passwords) {
+        if(tag.passwords) {
             tag.passwords = this._processPasswordList(tag.passwords);
         }
-        if (tag.revisions) {
+        if(tag.revisions) {
             tag.revisions = this._processTagList(tag.revisions);
         }
         tag.created = new Date(tag.created * 1e3);
@@ -705,7 +705,7 @@ export default class EnhancedApi extends SimpleApi {
     _processShareList(data) {
         let shares = {};
 
-        for (let i = 0; i < data.length; i++) {
+        for(let i = 0; i < data.length; i++) {
             let share = this._processShare(data[i]);
             shares[share.id] = share;
         }
@@ -722,7 +722,7 @@ export default class EnhancedApi extends SimpleApi {
     _processShare(share) {
         share.type = 'share';
 
-        if (typeof share.password !== 'string') {
+        if(typeof share.password !== 'string') {
             share.password = this._processPassword(share.password);
         }
 
@@ -745,7 +745,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     static _generatePasswordTitle(data) {
         data.label = String(data.username);
-        if (data.url) {
+        if(data.url) {
             if(data.label.indexOf('@') !== -1) {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }

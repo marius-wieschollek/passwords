@@ -21,7 +21,7 @@ class PasswordManager {
             let PwCreateDialog = Vue.extend(CreateDialog);
             let DialogWindow = new PwCreateDialog().$mount('#app-popup div');
 
-            if (folder) DialogWindow.password.folder = folder;
+            if(folder) DialogWindow.password.folder = folder;
             DialogWindow._success = (p) => {
                 this.createPasswordFromData(p)
                     .then(resolve)
@@ -46,7 +46,7 @@ class PasswordManager {
                     password.status = 0;
                     password.revision = data.revision;
                     password.created = password.updated = Utility.getTimestamp();
-                    if (!password.label) EnhancedApi._generatePasswordTitle(password);
+                    if(!password.label) EnhancedApi._generatePasswordTitle(password);
                     password = API._processPassword(password);
                     Events.fire('password.created', password);
                 })
@@ -89,7 +89,7 @@ class PasswordManager {
 
     movePassword(password, folder) {
         return new Promise((resolve, reject) => {
-            if (password.id === folder || password.folder === folder) {
+            if(password.id === folder || password.folder === folder) {
                 reject(password);
                 return;
             }
@@ -140,7 +140,7 @@ class PasswordManager {
      */
     deletePassword(password, confirm = true) {
         return new Promise((resolve, reject) => {
-            if (!confirm || !password.trashed) {
+            if(!confirm || !password.trashed) {
                 API.deletePassword(password.id)
                     .then((d) => {
                         password.trashed = true;
@@ -169,7 +169,7 @@ class PasswordManager {
      */
     restorePassword(password) {
         return new Promise((resolve, reject) => {
-            if (password.trashed) {
+            if(password.trashed) {
                 API.restorePassword(password.id)
                     .then((d) => {
                         password.trashed = false;
@@ -197,9 +197,9 @@ class PasswordManager {
      */
     restoreRevision(password, revision, confirm = true) {
         return new Promise((resolve, reject) => {
-            if (password.revision === revision.id) reject(password);
+            if(password.revision === revision.id) reject(password);
 
-            if (!confirm) {
+            if(!confirm) {
                 API.restorePassword(password.id, revision.id)
                     .then((d) => {
                         password = Utility.mergeObject(password, revision);

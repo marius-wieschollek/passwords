@@ -1,6 +1,6 @@
 {
-    "translations" : {
-        "Passwords" : "Passwörter"
+    "translations": {
+        "Passwords": "Passwörter"
     },
-    "pluralForm": "nplurals=2; plural=(n != 1);"
+    "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

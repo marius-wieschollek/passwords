@@ -56,12 +56,12 @@
                 this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
             menuEvent($e) {
-                if ($($e.target).closest('[data-tag-id=' + this.tag.id + '] .more').length !== 0) return;
+                if($($e.target).closest('[data-tag-id=' + this.tag.id + '] .more').length !== 0) return;
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },
             openAction($event) {
-                if ($($event.target).closest('.more').length !== 0) return;
+                if($($event.target).closest('.more').length !== 0) return;
                 this.$router.push({name: 'Tags', params: {tag: this.tag.id}});
             },
             detailsAction($event, section = null) {

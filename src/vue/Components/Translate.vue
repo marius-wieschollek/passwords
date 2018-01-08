@@ -43,10 +43,10 @@
 
         computed: {
             getText() {
-                if (this.say) {
+                if(this.say) {
                     return Utility.translate(this.say, this.variables);
                 }
-                if (this.$slots.default) {
+                if(this.$slots.default) {
                     return Utility.translate(this.$slots.default[0].text.trim(), this.variables);
                 }
                 return '';

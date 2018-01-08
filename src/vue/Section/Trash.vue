@@ -74,23 +74,23 @@
         },
 
         methods: {
-            refreshView: function () {
+            refreshView: function() {
                 API.findPasswords({trashed: true}).then(this.updatePasswordList);
                 API.findFolders({trashed: true}).then(this.updateFolderList);
                 API.findTags({trashed: true}).then(this.updateTagList);
             },
 
-            updatePasswordList: function (passwords) {
+            updatePasswordList: function(passwords) {
                 this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label');
             },
 
-            updateFolderList: function (folders) {
+            updateFolderList: function(folders) {
                 this.loading = false;
                 this.folders = Utility.sortApiObjectArray(folders, 'label');
             },
 
-            updateTagList: function (tags) {
+            updateTagList: function(tags) {
                 this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },

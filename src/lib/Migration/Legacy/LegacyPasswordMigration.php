@@ -90,10 +90,10 @@ class LegacyPasswordMigration {
         $count = count($passwords);
         $output->info("Migrating Passwords (total: {$count})");
         $output->startProgress($count);
-        foreach ($passwords as $password) {
+        foreach($passwords as $password) {
             try {
                 $this->migratePassword($password);
-            } catch (\Throwable $e) {
+            } catch(\Throwable $e) {
                 $output->warning(
                     "Failed migrating password #{$password->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );

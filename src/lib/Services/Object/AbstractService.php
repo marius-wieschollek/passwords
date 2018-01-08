@@ -109,7 +109,7 @@ abstract class AbstractService {
         $clone  = new $class;
         $fields = array_keys($clone->getFieldTypes());
 
-        foreach ($fields as $field) {
+        foreach($fields as $field) {
             if($field == 'id' || $field == 'uuid') continue;
             if(isset($overwrites[ $field ])) {
                 $clone->setProperty($field, $overwrites[ $field ]);

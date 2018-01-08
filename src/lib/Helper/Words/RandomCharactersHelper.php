@@ -27,7 +27,7 @@ class RandomCharactersHelper extends AbstractWordsHelper {
         $length   = $strength * 3;
         $words    = [];
 
-        for ($i = 0; $i < $strength; $i++) {
+        for($i = 0; $i < $strength; $i++) {
             $string  = str_shuffle(self::CHARACTER_LIST);
             $start   = random_int(0, strlen($string) - $length);
             $words[] = substr($string, $start, $length);

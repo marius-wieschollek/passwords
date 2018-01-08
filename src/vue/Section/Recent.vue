@@ -53,11 +53,11 @@
         },
 
         methods: {
-            refreshView: function () {
+            refreshView: function() {
                 API.listPasswords().then(this.updateContentList);
             },
 
-            updateContentList: function (passwords) {
+            updateContentList: function(passwords) {
                 let array = Utility.sortApiObjectArray(passwords, 'updated', false);
                 this.loading = false;
                 this.passwords = array.slice(0, 15);

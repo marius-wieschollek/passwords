@@ -75,7 +75,7 @@ class WordsService {
             if($addSmileys) $password = $this->addSmileys($password, $amount);
 
             return [$password, $words];
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->error($e->getMessage());
 
             throw new ApiException('Internal Words API Error'. 502);
@@ -140,8 +140,8 @@ class WordsService {
         $rounds       = 0;
         $replacements = 0;
         $reverse      = false;
-        while ($rounds < $amount && $replacements < $amount) {
-            foreach ($list as $find => $replace) {
+        while($rounds < $amount && $replacements < $amount) {
+            foreach($list as $find => $replace) {
                 if(stripos($word, $find) !== false) {
                     if($reverse) {
                         $word    = strrev($word);

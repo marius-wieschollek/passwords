@@ -66,7 +66,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
     ) {
         parent::__construct($container, $encryptionService, $folderRevisionService);
 
-        $this->folderService = $folderService;
+        $this->folderService   = $folderService;
         $this->passwordService = $passwordService;
     }
 
@@ -91,7 +91,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object = [];
+        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($folder, $revision);
         }
@@ -147,7 +147,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
         $revisions = $this->revisionService->findByModel($folder->getUuid(), true);
 
         $object['revisions'] = [];
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $current = [
                 'id'        => $revision->getUuid(),
                 'owner'     => $revision->getUserId(),
@@ -183,12 +183,12 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if(!$revision->isHidden()) $filters['hidden'] = false;
         if(!$revision->isTrashed()) $filters['trashed'] = false;
         $parent = $this->folderService->findByUuid($revision->getParent());
-        $obj = $this->getApiObject($parent, self::LEVEL_MODEL, $filters);
+        $obj    = $this->getApiObject($parent, self::LEVEL_MODEL, $filters);
 
         if($obj !== null) {
             $object['parent'] = $obj;
         } else {
-            $folder = $this->folderService->getBaseFolder();
+            $folder           = $this->folderService->getBaseFolder();
             $object['parent'] = $this->getApiObject($folder);
         }
 
@@ -211,9 +211,9 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['folders'] = [];
-        $folders = $this->folderService->findByParent($revision->getModel());
+        $folders           = $this->folderService->findByParent($revision->getModel());
 
-        foreach ($folders as $folder) {
+        foreach($folders as $folder) {
             $obj = $this->getApiObject($folder, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['folders'][] = $obj;
@@ -239,10 +239,10 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['passwords'] = [];
-        $objectHelper = $this->getPasswordObjectHelper();
-        $passwords = $this->passwordService->findByFolder($revision->getModel());
+        $objectHelper        = $this->getPasswordObjectHelper();
+        $passwords           = $this->passwordService->findByFolder($revision->getModel());
 
-        foreach ($passwords as $password) {
+        foreach($passwords as $password) {
             $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['passwords'][] = $obj;

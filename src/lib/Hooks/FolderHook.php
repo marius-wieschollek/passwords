@@ -60,12 +60,12 @@ class FolderHook {
      */
     public function preDelete(Folder $folder): void {
         $folders = $this->folderService->findByParent($folder->getUuid());
-        foreach ($folders as $folder) {
+        foreach($folders as $folder) {
             $this->folderService->delete($folder);
         }
 
         $passwords = $this->passwordService->findByFolder($folder->getUuid());
-        foreach ($passwords as $password) {
+        foreach($passwords as $password) {
             $this->passwordService->delete($password);
         }
     }
@@ -79,7 +79,7 @@ class FolderHook {
         /** @var FolderRevision[] $revisions */
         $revisions = $this->revisionService->findByModel($folder->getUuid());
 
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             $this->revisionService->delete($revision);
         }
     }
@@ -94,7 +94,7 @@ class FolderHook {
         /** @var FolderRevision[] $revisions */
         $revisions = $this->revisionService->findByModel($originalFolder->getUuid());
 
-        foreach ($revisions as $revision) {
+        foreach($revisions as $revision) {
             /** @var FolderRevision $clone */
             $clone = $this->revisionService->clone($revision, ['folder' => $clonedFolder->getUuid()]);
             $this->revisionService->save($clone);

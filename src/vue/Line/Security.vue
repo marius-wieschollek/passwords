@@ -27,7 +27,7 @@
 
         computed: {
             securityCheck() {
-                switch (this.status) {
+                switch(this.status) {
                     case 0:
                         return 'security ok';
                     case 1:

@@ -210,7 +210,7 @@ class RequestHelper {
      */
     public function sendWithRetry($maxRetries = self::REQUEST_MAX_RETRIES) {
         $retries = 0;
-        while ($retries < $maxRetries) {
+        while($retries < $maxRetries) {
             $result = $this->send();
 
             if($result !== false) return $result;
@@ -281,7 +281,7 @@ class RequestHelper {
         if(!empty($this->headerData)) {
             $header = [];
 
-            foreach ($this->headerData as $key => $value) {
+            foreach($this->headerData as $key => $value) {
                 $header[] = "{$key}: {$value}";
             }
 
