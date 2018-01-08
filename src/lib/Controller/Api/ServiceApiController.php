@@ -8,7 +8,6 @@
 
 namespace OCA\Passwords\Controller\Api;
 
-use OC\Http\Client\Response;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\FaviconService;
@@ -114,9 +113,9 @@ class ServiceApiController extends AbstractApiController {
      * @param string $user
      * @param int    $size
      *
-     * @return FileDisplayResponse|JSONResponse|Response
+     * @return FileDisplayResponse|JSONResponse
      */
-    public function getAvatar(string $user, int $size = 32): Response {
+    public function getAvatar(string $user, int $size = 32) {
         try {
             $file = $this->avatarService->getAvatar($user, $size);
 
@@ -134,9 +133,9 @@ class ServiceApiController extends AbstractApiController {
      *
      * @param int    $size
      *
-     * @return FileDisplayResponse|JSONResponse|Response
+     * @return FileDisplayResponse|JSONResponse
      */
-    public function getFavicon(string $domain, int $size = 32): Response {
+    public function getFavicon(string $domain, int $size = 32) {
         try {
             $file = $this->faviconService->getFavicon($domain, $size);
 
@@ -155,9 +154,9 @@ class ServiceApiController extends AbstractApiController {
      * @param string $width
      * @param string $height
      *
-     * @return FileDisplayResponse|JSONResponse|Response
+     * @return FileDisplayResponse|JSONResponse
      */
-    public function getPreview(string $domain, string $view = 'desktop', string $width = '550', string $height = '0'): Response {
+    public function getPreview(string $domain, string $view = 'desktop', string $width = '550', string $height = '0') {
         try {
             list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
             list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
