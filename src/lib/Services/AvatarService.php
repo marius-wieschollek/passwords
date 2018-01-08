@@ -89,7 +89,6 @@ class AvatarService {
      * @param int    $size
      *
      * @return null|\OCP\Files\SimpleFS\ISimpleFile
-     * @throws ApiException
      * @throws \Throwable
      */
     public function getAvatar(string $userId, int $size = 32): ?ISimpleFile {
@@ -101,13 +100,15 @@ class AvatarService {
         }
 
         $user = $this->userManager->get($userId);
-        if($user === null) throw new ApiException('User not found', 404);
-
-        $image = $user->getAvatarImage($size);
-        if($image === null || !$image->valid()) {
-            $imageData = $this->getDefaultAvatar($user->getDisplayName(), $size);
+        if($user !== null) {
+            $image = $user->getAvatarImage($size);
+            if($image === null || !$image->valid()) {
+                $imageData = $this->getImage($image, $user->getDisplayName(), $size);
+            } else {
+                $imageData = $this->getDefaultAvatar($user->getDisplayName(), $size);
+            }
         } else {
-            $imageData = $this->getImage($image, $user->getDisplayName(), $size);
+            $imageData = $this->getDefaultAvatar($user->getDisplayName(), $size);
         }
 
         return $this->fileCacheService->putFile($fileName, $imageData);
