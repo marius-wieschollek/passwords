@@ -30,7 +30,7 @@ class LegacyShareMapper extends Mapper {
     }
 
     /**
-     * @return LegacyPassword[]
+     * @return LegacyShare[]
      */
     public function findAll(): array {
         return $this->findEntities($this->getStatement());
@@ -40,7 +40,7 @@ class LegacyShareMapper extends Mapper {
      * @return string
      */
     protected function getStatement(): string {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = 0';
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE sharedto != \'\'';
 
         return $sql;
     }

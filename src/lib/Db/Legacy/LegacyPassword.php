@@ -15,7 +15,6 @@ use OCP\AppFramework\Db\Entity;
  *
  * @package OCA\Passwords\Db
  *
- * @method string getId()
  * @method string getPass()
  * @method string getNotes()
  * @method string getUserId()
@@ -24,7 +23,6 @@ use OCP\AppFramework\Db\Entity;
  */
 class LegacyPassword extends Entity {
 
-    public    $id;
     protected $userId;
     protected $website;
     protected $pass;

@@ -15,14 +15,12 @@ use OCP\AppFramework\Db\Entity;
  *
  * @package OCA\Passwords\Db\Legacy
  *
- * @method string getId()
  * @method string getUserId()
  * @method string getCategoryName()
  * @method string getCategoryColour()
  */
 class LegacyCategory extends Entity {
 
-    public    $id;
     protected $userId;
     protected $categoryName;
     protected $categoryColour;

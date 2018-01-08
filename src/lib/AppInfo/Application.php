@@ -23,6 +23,7 @@ use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\Legacy\LegacyCategoryMapper;
 use OCA\Passwords\Db\Legacy\LegacyPasswordMapper;
+use OCA\Passwords\Db\Legacy\LegacyShareMapper;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
@@ -65,6 +66,7 @@ use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Migration\Legacy\DecryptionModule;
 use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
 use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
+use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Migration\LegacyDatabaseMigration;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
@@ -898,6 +900,12 @@ class Application extends App {
                     $c->getServer()->getDatabaseConnection()
                 );
             });
+        $container->registerService('LegacyShareMapper',
+            function (IAppContainer $c) {
+                return new LegacyShareMapper(
+                    $c->getServer()->getDatabaseConnection()
+                );
+            });
 
         $container->registerService('LegacyPasswordMigration',
             function (IAppContainer $c) {
@@ -919,12 +927,23 @@ class Application extends App {
                 );
             });
 
+        $container->registerService('LegacyShareMigration',
+            function (IAppContainer $c) {
+                return new LegacyShareMigration(
+                    $c->getServer()->getUserManager(),
+                    $c->query('ShareService'),
+                    $c->query('LegacyShareMapper'),
+                    $c->query('PasswordService')
+                );
+            });
+
         $container->registerService(LegacyDatabaseMigration::class,
             function (IAppContainer $c) {
                 return new LegacyDatabaseMigration(
                     $c->query('ConfigurationService'),
                     $c->query('LegacyCategoryMigration'),
-                    $c->query('LegacyPasswordMigration')
+                    $c->query('LegacyPasswordMigration'),
+                    $c->query('LegacyShareMigration')
                 );
             });
     }

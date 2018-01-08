@@ -10,9 +10,17 @@ namespace OCA\Passwords\Db\Legacy;
 
 use OCP\AppFramework\Db\Entity;
 
+/**
+ * Class LegacyShare
+ *
+ * @package OCA\Passwords\Db\Legacy
+ *
+ * @method getPwid()
+ * @method getSharedto()
+ * @method getSharekey()
+ */
 class LegacyShare extends Entity {
 
-    public    $id;
     protected $pwid;
     protected $sharedto;
     protected $sharekey;

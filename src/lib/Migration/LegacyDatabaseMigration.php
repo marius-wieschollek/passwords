@@ -10,6 +10,7 @@ namespace OCA\Passwords\Migration;
 
 use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
 use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
+use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
@@ -20,6 +21,11 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class LegacyDatabaseMigration implements IRepairStep {
+
+    /**
+     * @var LegacyShareMigration
+     */
+    protected $shareMigration;
 
     /**
      * @var LegacyPasswordMigration
@@ -42,15 +48,18 @@ class LegacyDatabaseMigration implements IRepairStep {
      * @param ConfigurationService    $configurationService
      * @param LegacyCategoryMigration $categoryMigration
      * @param LegacyPasswordMigration $passwordMigration
+     * @param LegacyShareMigration    $shareMigration
      */
     public function __construct(
         ConfigurationService $configurationService,
         LegacyCategoryMigration $categoryMigration,
-        LegacyPasswordMigration $passwordMigration
+        LegacyPasswordMigration $passwordMigration,
+        LegacyShareMigration $shareMigration
     ) {
         $this->passwordMigration    = $passwordMigration;
         $this->categoryMigration    = $categoryMigration;
         $this->configurationService = $configurationService;
+        $this->shareMigration       = $shareMigration;
     }
 
     /**
@@ -76,9 +85,9 @@ class LegacyDatabaseMigration implements IRepairStep {
         $version = $this->configurationService->getAppValue('installed_version');
 
         if(version_compare($version, '2018.0.0') < 0) {
-            $tags = $this->categoryMigration->migrateCategories($output);
-            $this->passwordMigration->migratePasswords($output, $tags);
-            //$this->passwordMigration->migratePasswords($output);
+            $tags   = $this->categoryMigration->migrateCategories($output);
+            $shares = $this->passwordMigration->migratePasswords($output, $tags);
+            $this->shareMigration->migratePasswords($output, $shares);
         } else {
             $output->info('Legacy upgrade not available for version '.$version);
         }

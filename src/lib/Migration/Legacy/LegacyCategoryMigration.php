@@ -65,7 +65,7 @@ class LegacyCategoryMigration {
         $tags       = [];
 
         $count = count($categories);
-        $output->info("Migrating Categories (total: {$count})");
+        $output->info("Migrating categories (total: {$count})");
         $output->startProgress($count);
         foreach($categories as $category) {
             try {

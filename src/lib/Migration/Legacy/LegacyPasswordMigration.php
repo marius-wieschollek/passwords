@@ -26,6 +26,7 @@ use stdClass;
  * @package OCA\Passwords\Migration
  */
 class LegacyPasswordMigration {
+
     /**
      * @var LegacyPasswordMapper
      */
@@ -82,17 +83,21 @@ class LegacyPasswordMigration {
     /**
      * @param IOutput $output
      * @param array   $tags
+     *
+     * @return array
      */
-    public function migratePasswords(IOutput $output, array $tags): void {
+    public function migratePasswords(IOutput $output, array $tags): array {
         $passwords  = $this->passwordMapper->findAll();
         $this->tags = $tags;
+        $shares     = [];
 
         $count = count($passwords);
-        $output->info("Migrating Passwords (total: {$count})");
+        $output->info("Migrating passwords (total: {$count})");
         $output->startProgress($count);
         foreach($passwords as $password) {
             try {
-                $this->migratePassword($password);
+                list($shareId, $passwordId) = $this->migratePassword($password);
+                if(!empty($shareId)) $shares[ $shareId ] = $passwordId;
             } catch(\Throwable $e) {
                 $output->warning(
                     "Failed migrating password #{$password->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
@@ -101,15 +106,18 @@ class LegacyPasswordMigration {
             $output->advance(1);
         }
         $output->finishProgress();
+
+        return $shares;
     }
 
     /**
      * @param LegacyPassword $password
      *
+     * @return array
      * @throws \OCA\Passwords\Exception\ApiException
      * @throws \Exception
      */
-    protected function migratePassword(LegacyPassword $password): void {
+    protected function migratePassword(LegacyPassword $password): array {
         $key = $this->decryptionModule->makeKey($password->getUserId(), $password->getWebsite());
 
         $prData = $this->decryptionModule->decrypt($password->getProperties(), $key);
@@ -147,6 +155,8 @@ class LegacyPasswordMigration {
         $this->passwordService->save($passwordModel);
 
         $this->convertCategory($passwordRevision, $properties);
+
+        return [$properties->sharekey, $passwordModel->getUuid()];
     }
 
     /**

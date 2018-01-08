@@ -31,9 +31,10 @@ This is why passwords checks automatically if your passwords have been compromis
 **Soon to come:** You can also define custom password rules to make sure all your passwords live up to your expectations.
 
 #### Legacy API and APP Migration support
-**Soon to come:** Are you using Fallon Turners Passwords app for Nextcloud/OwnCloud? No problem!
-Passwords has a migration tool and will automatically import all the passwords on your Nextcloud instance.
-Thanks to the legacy API support you can even keep applications using the old API.
+Are you using Fallon Turners Passwords app for Nextcloud/OwnCloud? No problem!
+Passwords will automatically import all the passwords from the old app.
+Take a look at the [legacy migration guide](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Legacy-Migration) for more details.
+**Soon to come:** Thanks to the legacy API support you can even keep applications using the old API.
 (But passwords with client side encryption are not available on the old API)
 
 #### Build upon modern standards
@@ -74,7 +75,7 @@ Passwords offers complete API, giving you access to all features of the app.
 
 ## Development
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
-* **Soon to come:** Do you want do want to use the API? Read the [docs](https://github.com/marius-wieschollek/passwords/wiki).
+* **Soon to come:** Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis).
 
 ## Licenses
 See [Licenses.md](Licenses.md)
