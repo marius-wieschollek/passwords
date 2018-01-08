@@ -44,7 +44,7 @@ abstract class AbstractApiController extends ApiController {
         $id         = 0;
         $statusCode = Http::STATUS_SERVICE_UNAVAILABLE;
 
-        \OC::$server->getLogger()->logException($e);
+        \OC::$server->getLogger()->logException($e, ['app' => $this->appName]);
 
         if(get_class($e) === ApiException::class || is_subclass_of($e, ApiException::class)) {
             /** @var ApiException $e */
