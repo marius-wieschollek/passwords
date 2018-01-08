@@ -16,6 +16,7 @@ use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use OCP\ISession;
 
 /**
  * Class AbstractObjectApiController
@@ -129,33 +130,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
-    }
-
-    /**
-     * @param array $criteria
-     *
-     * @return array
-     * @throws ApiException
-     */
-    protected function processSearchCriteria($criteria = []) {
-        $filters = [];
-        foreach ($criteria as $key => $value) {
-            if(!in_array($key, $this->allowedFilterFields)) {
-                throw new ApiException('Illegal field '.$key, 400);
-            }
-
-            if($value === 'true') {
-                $value = true;
-            } else if($value === 'false') {
-                $value = false;
-            } else if(is_array($value) && !in_array($value[0], AbstractObjectHelper::$filterOperators)) {
-                throw new ApiException('Illegal operator '.$value[0], 400);
-            }
-
-            $filters[ $key ] = $value;
-        }
-
-        return $filters;
     }
 
     /**

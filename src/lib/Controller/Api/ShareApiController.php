@@ -10,13 +10,13 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
-use OCA\Passwords\Db\ShareRevision;
+use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
-use OCA\Passwords\Services\Object\ShareRevisionService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
@@ -55,6 +55,7 @@ class ShareApiController extends AbstractApiController {
      * @var IUserManager
      */
     protected $userManager;
+
     /**
      * @var ShareService
      */
@@ -71,6 +72,11 @@ class ShareApiController extends AbstractApiController {
     protected $groupManager;
 
     /**
+     * @var ShareObjectHelper
+     */
+    protected $objectHelper;
+
+    /**
      * @var PasswordService
      */
     protected $passwordModelService;
@@ -79,6 +85,11 @@ class ShareApiController extends AbstractApiController {
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
+
+    /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable'];
 
     /**
      * TagApiController constructor.
@@ -91,6 +102,7 @@ class ShareApiController extends AbstractApiController {
      * @param IUserManager            $userManager
      * @param ShareService            $modelService
      * @param IGroupManager           $groupManager
+     * @param ShareObjectHelper       $objectHelper
      * @param PasswordService         $passwordModelService
      * @param PasswordRevisionService $passwordRevisionService
      */
@@ -103,6 +115,7 @@ class ShareApiController extends AbstractApiController {
         IUserManager $userManager,
         ShareService $modelService,
         IGroupManager $groupManager,
+        ShareObjectHelper $objectHelper,
         PasswordService $passwordModelService,
         PasswordRevisionService $passwordRevisionService
     ) {
@@ -121,8 +134,84 @@ class ShareApiController extends AbstractApiController {
         $this->groupManager            = $groupManager;
         $this->modelService            = $modelService;
         $this->shareManager            = $shareManager;
+        $this->objectHelper            = $objectHelper;
         $this->passwordModelService    = $passwordModelService;
         $this->passwordRevisionService = $passwordRevisionService;
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $details
+     *
+     * @return JSONResponse
+     */
+    public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
+        try {
+            $this->checkAccessPermissions();
+            /** @var Share[] $models */
+            $models  = $this->modelService->findAll();
+
+            $results = [];
+            foreach ($models as $model) {
+                $results[] = $this->objectHelper->getApiObject($model, $details);
+            }
+
+            return $this->createJsonResponse($results);
+        } catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param array  $criteria
+     * @param string $details
+     *
+     * @return JSONResponse
+     */
+    public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
+        try {
+            $this->checkAccessPermissions();
+            $filters = $this->processSearchCriteria($criteria);
+            /** @var Share[] $models */
+            $models = $this->modelService->findAll();
+
+            $results = [];
+            foreach ($models as $model) {
+                $object = $this->objectHelper->getApiObject($model, $details, $filters);
+                if($object === null) continue;
+                $results[] = $object;
+            }
+
+            return $this->createJsonResponse($results);
+        } catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
+        }
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $id
+     * @param string $details
+     *
+     * @return JSONResponse
+     */
+    public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
+        try {
+            $this->checkAccessPermissions();
+            $model  = $this->modelService->findByUuid($id);
+            $object = $this->objectHelper->getApiObject($model, $details);
+
+            return $this->createJsonResponse($object);
+        } catch (\Throwable $e) {
+            return $this->createErrorResponse($e);
+        }
     }
 
     /**
@@ -314,6 +403,37 @@ class ShareApiController extends AbstractApiController {
         } catch (\Throwable $e) {
             return $this->createErrorResponse($e);
         }
+    }
+
+    /**
+     * @param array $criteria
+     *
+     * @return array
+     * @throws ApiException
+     */
+    protected function processSearchCriteria($criteria = []): array {
+        if(isset($criteria['owner'])) {
+            $criteria['userId'] = $criteria['owner'];
+            unset($criteria['owner']);
+        }
+
+        if(isset($criteria['userId'])) {
+            if(is_array($criteria['userId'])) {
+                if($criteria['userId'][1] === '_self') $criteria['userId'][1] = $this->userId;
+            } else if($criteria['userId'] === '_self') {
+                $criteria['userId'] = $this->userId;
+            }
+        }
+
+        if(isset($criteria['receiver'])) {
+            if(is_array($criteria['receiver'])) {
+                if($criteria['receiver'][1] === '_self') $criteria['receiver'][1] = $this->userId;
+            } else if($criteria['receiver'] === '_self') {
+                $criteria['receiver'] = $this->userId;
+            }
+        }
+
+        return parent::processSearchCriteria($criteria);
     }
 
     /**

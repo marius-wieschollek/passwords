@@ -311,6 +311,7 @@ class Application extends App {
                     $server->getUserManager(),
                     $c->query('ShareService'),
                     $c->query(IGroupManager::class),
+                    $c->query('ShareObjectHelper'),
                     $c->query('PasswordService'),
                     $c->query('PasswordRevisionService')
                 );

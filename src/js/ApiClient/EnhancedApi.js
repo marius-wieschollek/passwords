@@ -335,6 +335,50 @@ export default class EnhancedApi extends SimpleApi {
         return super.updateShare(object);
     }
 
+    /**
+     * Returns the share with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showShare(id, detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.showShare(id, detailLevel)
+                .then((data) => { resolve(this._processShare(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the shares, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listShares(detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.listShares(detailLevel)
+                .then((data) => { resolve(this._processShareList(data)); })
+                .catch(reject);
+        });
+    }
+
+    /**
+     * Gets all the shares matching the criteria
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findShares(criteria = {}, detailLevel = 'model') {
+        return new Promise((resolve, reject) => {
+            super.findShares(criteria, detailLevel)
+                .then((data) => { resolve(this._processShareList(data)); })
+                .catch(reject);
+        });
+    }
+
 
     /**
      * Validation
@@ -676,8 +720,15 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processShare(share) {
+        share.type = 'share';
+
+        if (typeof share.password !== 'string') {
+            share.password = this._processPassword(share.password);
+        }
+
         share.created = new Date(share.created * 1e3);
         share.updated = new Date(share.updated * 1e3);
+
         share.owner.icon = this.getAvatarUrl(share.owner.id);
         share.receiver.icon = this.getAvatarUrl(share.receiver.id);
         if(share.expires !== null) share.expires = new Date(share.expires * 1e3);

@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiAccessDeniedException;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
@@ -21,6 +22,11 @@ use OCP\AppFramework\Http\JSONResponse;
  * @package OCA\Passwords\Controller
  */
 abstract class AbstractApiController extends ApiController {
+
+    /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated'];
 
     /**
      * @param     $response
@@ -84,5 +90,32 @@ abstract class AbstractApiController extends ApiController {
         if(empty($token)) {
             throw new ApiAccessDeniedException();
         }
+    }
+
+    /**
+     * @param array $criteria
+     *
+     * @return array
+     * @throws ApiException
+     */
+    protected function processSearchCriteria($criteria = []): array {
+        $filters = [];
+        foreach ($criteria as $key => $value) {
+            if(!in_array($key, $this->allowedFilterFields)) {
+                throw new ApiException('Illegal field '.$key, 400);
+            }
+
+            if($value === 'true') {
+                $value = true;
+            } else if($value === 'false') {
+                $value = false;
+            } else if(is_array($value) && !in_array($value[0], AbstractObjectHelper::$filterOperators)) {
+                throw new ApiException('Illegal operator '.$value[0], 400);
+            }
+
+            $filters[ $key ] = $value;
+        }
+
+        return $filters;
     }
 }

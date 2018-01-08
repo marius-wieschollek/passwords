@@ -280,29 +280,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     }
 
     /**
-     * @param ModelInterface|Password $model
-     * @param array                   $filters
-     *
-     * @return null|RevisionInterface
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     */
-    protected function getRevision(ModelInterface $model, array $filters): ?RevisionInterface {
-        if(isset($filters['sharedWithMe'])) {
-            if($filters['sharedWithMe'] !== !empty($model->getShareId())) return null;
-            unset($filters['sharedWithMe']);
-        }
-
-        if(isset($filters['sharedByMe'])) {
-            if($filters['sharedByMe'] !== $model->hasShares()) return null;
-            unset($filters['sharedByMe']);
-        }
-
-        return parent::getRevision($model, $filters);
-    }
-
-    /**
      * @return TagObjectHelper
      * @throws \OCP\AppFramework\QueryException
      */

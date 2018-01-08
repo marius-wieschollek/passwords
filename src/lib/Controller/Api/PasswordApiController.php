@@ -63,7 +63,7 @@ class PasswordApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'status', 'trashed', 'favourite', 'sharedByMe', 'sharedWithMe'];
+    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'status', 'trashed', 'favourite'];
 
     /**
      * PasswordApiController constructor.
@@ -202,8 +202,13 @@ class PasswordApiController extends AbstractObjectApiController {
                 $notes    = $oldRevision->getNotes();
                 $hash     = $oldRevision->getHash();
                 $url      = $oldRevision->getUrl();
-            } else if(($model->hasShares() || $model->getShareId()) && $cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                throw new ApiException('CSE type does not support sharing', 400);
+            } else if(($model->hasShares() || $model->getShareId())) {
+                if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
+                    throw new ApiException('CSE type does not support sharing', 400);
+                }
+                if($hidden) {
+                    throw new ApiException('Shared password can not be hidden', 400);
+                }
             }
 
             $revision = $this->revisionService->createRevision(
@@ -237,10 +242,14 @@ class PasswordApiController extends AbstractObjectApiController {
                 $model = $this->modelService->findByUuid($id);
 
                 if($model->hasShares() || $model->getShareId()) {
+                    /** @var PasswordRevision $revision */
                     $revision = $this->revisionService->findByUuid($revision);
 
                     if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
                         throw new ApiException('CSE type does not support sharing', 400);
+                    }
+                    if($revision->isHidden()) {
+                        throw new ApiException('Shared password can not be hidden', 400);
                     }
                 }
             }

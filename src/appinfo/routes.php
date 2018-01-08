@@ -40,11 +40,15 @@ $application->registerRoutes($this, [
         ['name' => 'tag_api#delete', 'url' => '/api/1.0/tag/delete', 'verb' => 'DELETE'],
         ['name' => 'tag_api#restore', 'url' => '/api/1.0/tag/restore', 'verb' => 'PATCH'],
 
+        ['name' => 'share_api#info', 'url' => '/api/1.0/share/info', 'verb' => 'GET'],
+        ['name' => 'share_api#list', 'url' => '/api/1.0/share/list', 'verb' => 'GET'],
+        ['name' => 'share_api#list', 'url' => '/api/1.0/share/list', 'verb' => 'POST', 'postfix' => 'POST'],
+        ['name' => 'share_api#show', 'url' => '/api/1.0/share/show', 'verb' => 'POST'],
+        ['name' => 'share_api#find', 'url' => '/api/1.0/share/find', 'verb' => 'POST'],
+        ['name' => 'share_api#types', 'url' => '/api/1.0/share/types', 'verb' => 'GET'],
         ['name' => 'share_api#create', 'url' => '/api/1.0/share/create', 'verb' => 'POST'],
         ['name' => 'share_api#update', 'url' => '/api/1.0/share/update', 'verb' => 'PATCH'],
         ['name' => 'share_api#delete', 'url' => '/api/1.0/share/delete', 'verb' => 'DELETE'],
-        ['name' => 'share_api#types', 'url' => '/api/1.0/share/types', 'verb' => 'GET'],
-        ['name' => 'share_api#info', 'url' => '/api/1.0/share/info', 'verb' => 'GET'],
         ['name' => 'share_api#partners', 'url' => '/api/1.0/share/partners', 'verb' => 'GET'],
         ['name' => 'share_api#partners', 'url' => '/api/1.0/share/partners', 'verb' => 'POST', 'postfix' => 'POST'],
 

@@ -41,6 +41,9 @@ export default class SimpleApi {
             'tag.update'          : 'api/1.0/tag/update',
             'tag.delete'          : 'api/1.0/tag/delete',
             'tag.restore'         : 'api/1.0/tag/restore',
+            'share.list'          : 'api/1.0/share/list',
+            'share.find'          : 'api/1.0/share/find',
+            'share.show'          : 'api/1.0/share/show',
             'share.info'          : 'api/1.0/share/info',
             'share.create'        : 'api/1.0/share/create',
             'share.update'        : 'api/1.0/share/update',
@@ -315,7 +318,7 @@ export default class SimpleApi {
     }
 
     /**
-     * Gets all the tag, excluding those hidden or in trash
+     * Gets all the tags, excluding those hidden or in trash
      *
      * @param detailLevel
      * @returns {Promise}
@@ -325,7 +328,7 @@ export default class SimpleApi {
     }
 
     /**
-     * Gets all the tag matching the criteria, excluding those hidden
+     * Gets all the tags matching the criteria, excluding those hidden
      *
      * @param criteria
      * @param detailLevel
@@ -351,6 +354,17 @@ export default class SimpleApi {
     }
 
     /**
+     * Returns the share with the given id and the given detail level
+     *
+     * @param id
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    showShare(id, detailLevel = 'model') {
+        return this._createRequest('share.show', {id: id, details: detailLevel}, 'POST');
+    }
+
+    /**
      * Update a share
      *
      * @param data
@@ -371,6 +385,27 @@ export default class SimpleApi {
     }
 
     /**
+     * Gets all the shares, excluding those hidden or in trash
+     *
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    listShares(detailLevel = 'model') {
+        return this._createRequest('share.list', {details: detailLevel}, 'POST');
+    }
+
+    /**
+     * Gets all the shares matching the criteria, excluding those hidden
+     *
+     * @param criteria
+     * @param detailLevel
+     * @returns {Promise}
+     */
+    findShares(criteria = {}, detailLevel = 'model') {
+        return this._createRequest('share.find', {details: detailLevel, criteria: criteria}, 'POST');
+    }
+
+    /**
      *
      * @returns {Promise}
      */
@@ -383,7 +418,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findSharePartners(search = '') {
-        if(search.length === 0) {
+        if (search.length === 0) {
             return this._createRequest('share.partners');
         }
         return this._createRequest('share.partners', {search: search}, 'POST');

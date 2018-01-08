@@ -36,7 +36,7 @@
         },
         data() {
             return {
-                loading       : false,
+                loading   : false,
                 passwords : [],
                 shareType : [
                     'Shared with me', 'Shared by me'
@@ -58,7 +58,7 @@
             Events.off('password.changed', this.refreshView)
         },
 
-        computed  : {
+        computed: {
             showDetails() {
                 return this.detail.type !== 'none';
             }
@@ -69,10 +69,10 @@
                 if (this.$route.params.type !== undefined) {
                     let status = this.$route.params.type,
                         label  = this.shareType[status];
-                    if(status === 0) {
-                        API.findPasswords({sharedWithMe: true}).then(this.updateContentList);
+                    if (status === 0) {
+                        API.findShares({receiver: '_self'}, 'model+password').then(this.updateContentList);
                     } else {
-                        API.findPasswords({sharedByMe: true}).then(this.updateContentList);
+                        API.findShares({owner: '_self'}, 'model+password').then(this.updateContentList);
                     }
 
                     if (this.passwords.length === 0) this.loading = true;
@@ -85,8 +85,16 @@
                     this.breadcrumb = [];
                 }
             },
-            updateContentList: function (passwords) {
+            updateContentList: function (shares) {
                 this.loading = false;
+
+                let passwords = {};
+                for (let i in shares) {
+                    if (!shares.hasOwnProperty(i)) continue;
+                    let password = shares[i].password;
+                    passwords[password.id] = password;
+                }
+
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
             }
         },

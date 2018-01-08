@@ -105,7 +105,7 @@ class ShareObjectHelper extends AbstractObjectHelper {
         $owner = $this->userManager->get($share->getUserId());
         $receiver = $this->userManager->get($share->getReceiver());
 
-        $password = $this->userId === $owner ? $share->getSourcePassword():$share->getTargetPassword();
+        $password = $this->userId === $share->getUserId() ? $share->getSourcePassword():$share->getTargetPassword();
 
         return [
             'id'            => $share->getUuid(),
