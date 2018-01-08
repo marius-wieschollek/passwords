@@ -8,9 +8,9 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
-use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
@@ -66,14 +66,14 @@ class FolderObjectHelper extends AbstractObjectHelper {
     ) {
         parent::__construct($container, $encryptionService, $folderRevisionService);
 
-        $this->folderService   = $folderService;
+        $this->folderService = $folderService;
         $this->passwordService = $passwordService;
     }
 
     /**
-     * @param ModelInterface|Folder $folder
-     * @param string                $level
-     * @param array                 $filter
+     * @param EntityInterface|Folder $folder
+     * @param string                 $level
+     * @param array                  $filter
      *
      * @return array
      * @throws \Exception
@@ -82,7 +82,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getApiObject(
-        ModelInterface $folder,
+        EntityInterface $folder,
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array {
@@ -91,7 +91,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object      = [];
+        $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($folder, $revision);
         }
@@ -183,12 +183,12 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if(!$revision->isHidden()) $filters['hidden'] = false;
         if(!$revision->isTrashed()) $filters['trashed'] = false;
         $parent = $this->folderService->findByUuid($revision->getParent());
-        $obj    = $this->getApiObject($parent, self::LEVEL_MODEL, $filters);
+        $obj = $this->getApiObject($parent, self::LEVEL_MODEL, $filters);
 
         if($obj !== null) {
             $object['parent'] = $obj;
         } else {
-            $folder           = $this->folderService->getBaseFolder();
+            $folder = $this->folderService->getBaseFolder();
             $object['parent'] = $this->getApiObject($folder);
         }
 
@@ -211,7 +211,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['folders'] = [];
-        $folders           = $this->folderService->findByParent($revision->getModel());
+        $folders = $this->folderService->findByParent($revision->getModel());
 
         foreach ($folders as $folder) {
             $obj = $this->getApiObject($folder, self::LEVEL_MODEL, $filters);
@@ -239,8 +239,8 @@ class FolderObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['passwords'] = [];
-        $objectHelper        = $this->getPasswordObjectHelper();
-        $passwords           = $this->passwordService->findByFolder($revision->getModel());
+        $objectHelper = $this->getPasswordObjectHelper();
+        $passwords = $this->passwordService->findByFolder($revision->getModel());
 
         foreach ($passwords as $password) {
             $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);

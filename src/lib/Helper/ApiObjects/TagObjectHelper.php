@@ -9,7 +9,7 @@
 namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
-use OCA\Passwords\Db\ModelInterface;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\EncryptionService;
@@ -60,14 +60,14 @@ class TagObjectHelper extends AbstractObjectHelper {
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
 
-        $this->tagService      = $tagService;
+        $this->tagService = $tagService;
         $this->passwordService = $passwordService;
     }
 
     /**
-     * @param ModelInterface|Tag $tag
-     * @param string             $level
-     * @param array              $filter
+     * @param EntityInterface|Tag $tag
+     * @param string              $level
+     * @param array               $filter
      *
      * @return array
      * @throws Exception
@@ -76,7 +76,7 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getApiObject(
-        ModelInterface $tag,
+        EntityInterface $tag,
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array {
@@ -85,7 +85,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object      = [];
+        $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($tag, $revision);
         }
@@ -168,8 +168,8 @@ class TagObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['passwords'] = [];
-        $objectHelper        = $this->getPasswordObjectHelper();
-        $passwords           = $this->passwordService->findByTag($revision->getModel());
+        $objectHelper = $this->getPasswordObjectHelper();
+        $passwords = $this->passwordService->findByTag($revision->getModel());
 
         foreach ($passwords as $password) {
             $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);

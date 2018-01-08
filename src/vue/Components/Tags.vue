@@ -64,7 +64,11 @@
                 } else if (key === 8 && this.wasBackspace && this.inputText.length === 0) {
                     this.removeLastTag();
                 } else if (key === 8 && this.inputText.length === 0) {
+                    this.searchResults = [];
                     this.wasBackspace = true;
+                } else {
+                    this.searchAction(this.inputText);
+                    this.wasBackspace = false;
                 }
             },
             searchAction   : function (query) {
@@ -202,6 +206,7 @@
             border-radius    : 2px;
             max-height       : 120px;
             overflow-y       : auto;
+            z-index          : 1;
 
             &:empty {
                 display : none;

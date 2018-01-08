@@ -75,7 +75,7 @@ abstract class AbstractObjectHelper {
 
     /**
      * @param EntityInterface $revision
-     * @param array             $filter
+     * @param array           $filter
      *
      * @return bool
      */
@@ -112,19 +112,19 @@ abstract class AbstractObjectHelper {
     protected function getRevision(ModelInterface $model, array $filters): ?RevisionInterface {
         $revision = $this->revisionService->findByUuid($model->getRevision());
         if(!$this->filter($revision, $filters)) return null;
+
         return $this->encryptionService->decrypt($revision);
     }
 
     /**
-     * @param ModelInterface $model
-     * @param string         $level
-     *
-     * @param array          $filter
+     * @param EntityInterface $model
+     * @param string          $level
+     * @param array           $filter
      *
      * @return array|null
      */
     abstract public function getApiObject(
-        ModelInterface $model,
+        EntityInterface $model,
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array;

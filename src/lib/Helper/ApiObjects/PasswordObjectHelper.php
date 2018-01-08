@@ -9,18 +9,17 @@
 namespace OCA\Passwords\Helper\ApiObjects;
 
 use Exception;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
-use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\IAppContainer;
-use OCP\IUserManager;
 
 /**
  * Class PasswordObjectHelper
@@ -39,11 +38,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     protected $tagService;
 
     /**
-     * @var IUserManager
-     */
-    protected $userManager;
-
-    /**
      * @var ShareService
      */
     protected $shareService;
@@ -59,6 +53,11 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     protected $tagObjectHelper;
 
     /**
+     * @var ShareObjectHelper
+     */
+    protected $shareObjectHelper;
+
+    /**
      * @var FolderObjectHelper
      */
     protected $folderObjectHelper;
@@ -68,7 +67,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      *
      * @param IAppContainer           $container
      * @param TagService              $tagService
-     * @param IUserManager            $userManager
      * @param ShareService            $shareService
      * @param FolderService           $folderService
      * @param EncryptionService       $encryptionService
@@ -77,7 +75,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     public function __construct(
         IAppContainer $container,
         TagService $tagService,
-        IUserManager $userManager,
         ShareService $shareService,
         FolderService $folderService,
         EncryptionService $encryptionService,
@@ -85,16 +82,15 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
 
-        $this->tagService    = $tagService;
-        $this->userManager   = $userManager;
-        $this->shareService  = $shareService;
+        $this->tagService = $tagService;
+        $this->shareService = $shareService;
         $this->folderService = $folderService;
     }
 
     /**
-     * @param ModelInterface|Password $password
-     * @param string                  $level
-     * @param array                   $filter
+     * @param EntityInterface|Password $password
+     * @param string                   $level
+     * @param array                    $filter
      *
      * @return array|null
      * @throws Exception
@@ -103,7 +99,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getApiObject(
-        ModelInterface $password,
+        EntityInterface $password,
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array {
@@ -112,7 +108,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if($revision === null) return null;
 
         $detailLevel = explode('+', $level);
-        $object      = [];
+        $object = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($password, $revision);
         }
@@ -218,7 +214,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $objectHelper = $this->getTagObjectHelper();
-        $tags         = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
+        $tags = $this->tagService->findByPassword($revision->getModel(), $revision->isHidden());
         foreach ($tags as $tag) {
             $obj = $objectHelper->getApiObject($tag, self::LEVEL_MODEL, $filters);
 
@@ -246,13 +242,13 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $objectHelper = $this->getFolderObjectHelper();
-        $folder       = $this->folderService->findByUuid($revision->getFolder());
-        $obj          = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, $filters);
+        $folder = $this->folderService->findByUuid($revision->getFolder());
+        $obj = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, $filters);
 
         if($obj !== null) {
             $object['folder'] = $obj;
         } else {
-            $folder           = $this->folderService->getBaseFolder();
+            $folder = $this->folderService->getBaseFolder();
             $object['folder'] = $objectHelper->getApiObject($folder);
         }
 
@@ -267,51 +263,25 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @throws Exception
      */
     protected function getShares(PasswordRevision $revision, $object): array {
+        $objectHelper = $this->getShareObjectHelper();
+
         $object['shares'] = [];
-        $shares           = $this->shareService->findBySourcePassword($revision->getModel());
+        $shares = $this->shareService->findBySourcePassword($revision->getModel());
         foreach ($shares as $share) {
-            $object['shares'][] = $this->formatShare($share);
+            $object['shares'][] = $objectHelper->getApiObject($share);
         }
 
         if($object['share']) {
-            $share           = $this->shareService->findByUuid($object['share']);
-            $object['share'] = $this->formatShare($share);
+            $share = $this->shareService->findByUuid($object['share']);
+            $object['share'] = $objectHelper->getApiObject($share);
         }
 
         return $object;
     }
 
     /**
-     * @param Share $share
-     *
-     * @return array
-     */
-    protected function formatShare(Share $share): array {
-        $owner    = $this->userManager->get($share->getUserId());
-        $receiver = $this->userManager->get($share->getReceiver());
-
-        return [
-            'id'            => $share->getUuid(),
-            'created'       => $share->getCreated(),
-            'updated'       => $share->getUpdated(),
-            'expires'       => $share->getExpires(),
-            'editable'      => $share->isEditable(),
-            'shareable'     => $share->isShareable(),
-            'updatePending' => $share->isSourceUpdated() || $share->isTargetUpdated(),
-            'owner'         => [
-                'id'   => $owner->getUID(),
-                'name' => $owner->getDisplayName()
-            ],
-            'receiver'      => [
-                'id'   => $receiver->getUID(),
-                'name' => $receiver->getDisplayName()
-            ]
-        ];
-    }
-
-    /**
      * @param ModelInterface|Password $model
-     * @param array          $filters
+     * @param array                   $filters
      *
      * @return null|RevisionInterface
      * @throws \Exception
@@ -354,5 +324,17 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         }
 
         return $this->folderObjectHelper;
+    }
+
+    /**
+     * @return ShareObjectHelper
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function getShareObjectHelper(): ShareObjectHelper {
+        if(!$this->shareObjectHelper) {
+            $this->shareObjectHelper = $this->container->query('ShareObjectHelper');
+        }
+
+        return $this->shareObjectHelper;
     }
 }

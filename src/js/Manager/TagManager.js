@@ -44,7 +44,6 @@ class TagManager {
      * @returns {Promise<any>}
      */
     createTagFromData(tag) {
-        console.log(tag);
         if (!tag.label) tag.label = Utility.translate('New Tag');
         if (!tag.color) tag.color = randomMC.getColor();
         tag = EnhancedApi.validateTag(tag);
@@ -61,7 +60,6 @@ class TagManager {
                     resolve(tag);
                 })
                 .catch((d) => {
-                    console.log(d);
                     Messages.notification('Creating tag failed');
                     reject(tag);
                 });
