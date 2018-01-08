@@ -6,7 +6,7 @@ import $ from "jquery";
 export default new class DragManager {
 
     constructor() {
-        $(document).on('dragover', this.over);
+        $(document).on('dragover', DragManager.scrollContent);
     }
 
     /**
@@ -30,7 +30,7 @@ export default new class DragManager {
                 e.preventDefault();
                 $el.remove();
                 let $target = $(e.target);
-                if(!$target.data().dropType) {
+                if (!$target.data().dropType) {
                     $target = $(e.target).parents('[data-drop-type]');
                 }
 
@@ -43,7 +43,16 @@ export default new class DragManager {
         })
     }
 
-    over() {
+    static scrollContent(e) {
+        let height = window.innerHeight,
+            $app   = $('#app-content'),
+            offset = $app.scrollTop();
+
+        if (e.originalEvent.clientY < height * 0.25) {
+            $app.scrollTop(offset - 5);
+        } else if(e.originalEvent.clientY > height * 0.75) {
+            $app.scrollTop(offset + 5);
+        }
         return false;
     }
 }

@@ -4,6 +4,7 @@ import Events from '@js/Classes/Events';
 import Utility from "@/js/Classes/Utility";
 import Messages from '@js/Classes/Messages';
 import CreateDialog from '@vue/Dialog/CreatePassword.vue';
+import EnhancedApi from "@/js/ApiClient/EnhancedApi";
 
 /**
  *
@@ -45,6 +46,7 @@ class PasswordManager {
                     password.status = 0;
                     password.revision = data.revision;
                     password.created = password.updated = Utility.getTimestamp();
+                    if (!password.label) EnhancedApi._generatePasswordTitle(password);
                     password = API._processPassword(password);
                     Events.fire('password.created', password);
                 })
