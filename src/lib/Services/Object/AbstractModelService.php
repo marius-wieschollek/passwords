@@ -59,6 +59,22 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
+     * @param $search
+     *
+     * @return ModelInterface|EntityInterface|null
+     * @deprecated
+     * @throws \Exception
+     */
+    public function findByIdOrUuid($search): ?ModelInterface {
+        return $this->mapper->findOneMatching(
+            [
+                ['id', $search, '=', 'OR'],
+                ['uuid', $search, '=', 'OR']
+            ]
+        );
+    }
+
+    /**
      * @return ModelInterface
      */
     public function create(): ModelInterface {

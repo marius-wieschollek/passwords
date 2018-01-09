@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
@@ -86,16 +87,16 @@ class FolderApiController extends AbstractObjectApiController {
     ): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $folder   = $this->modelService->create();
+            $model    = $this->modelService->create();
             $revision = $this->revisionService->create(
-                $folder->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
+                $model->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
             );
 
             $this->revisionService->save($revision);
-            $this->modelService->setRevision($folder, $revision);
+            $this->modelService->setRevision($model, $revision);
 
             return $this->createJsonResponse(
-                ['id' => $folder->getUuid(), 'revision' => $revision->getUuid()],
+                ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
         } catch(\Throwable $e) {
@@ -130,16 +131,18 @@ class FolderApiController extends AbstractObjectApiController {
             $this->checkAccessPermissions();
             if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
 
-            $folder = $this->modelService->findByUuid($id);
+            $model = $this->modelService->findByUuid($id);
+            /** @var FolderRevision $oldRevision */
+            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
             $revision = $this->revisionService->create(
-                $folder->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
+                $model->getUuid(), $label, $parent, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
             );
 
             $this->revisionService->save($revision);
-            $this->modelService->setRevision($folder, $revision);
+            $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(['id' => $folder->getUuid(), 'revision' => $revision->getUuid()]);
+            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
         } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }

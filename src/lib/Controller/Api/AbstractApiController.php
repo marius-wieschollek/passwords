@@ -8,7 +8,6 @@
 
 namespace OCA\Passwords\Controller\Api;
 
-use OCA\Passwords\Exception\ApiAccessDeniedException;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCP\AppFramework\ApiController;
@@ -73,24 +72,13 @@ abstract class AbstractApiController extends ApiController {
             ], $statusCode
         );
 
-        if(get_class($e) === ApiAccessDeniedException::class) {
-            $headers                     = $response->getHeaders();
-            $headers['WWW-Authenticate'] = 'basic + token';
-            $response->setHeaders($headers);
-        }
-
         return $response;
     }
 
     /**
-     * @throws ApiAccessDeniedException
      * @throws ApiException
      */
     protected function checkAccessPermissions() {
-        $token = $this->request->getHeader('X-Passwords-Token');
-        if(empty($token)) {
-            throw new ApiAccessDeniedException();
-        }
         if(!$this->checkIfHttpsUsed()) {
             throw new ApiException('HTTPS required', 400);
         }

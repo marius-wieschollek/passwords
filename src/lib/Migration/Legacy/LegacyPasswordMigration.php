@@ -126,7 +126,7 @@ class LegacyPasswordMigration {
         $properties = $this->parseProperties($prData);
 
         $passwordModel    = $this->passwordService->create();
-        $passwordRevision = $this->passwordRevisionService->createRevision(
+        $passwordRevision = $this->passwordRevisionService->create(
             $passwordModel->getUuid(),
             $pwData,
             $this->getUsername($properties),

@@ -153,6 +153,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param string $id
      *
      * @return JSONResponse
@@ -182,6 +185,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param string $id
      * @param null   $revision
      *

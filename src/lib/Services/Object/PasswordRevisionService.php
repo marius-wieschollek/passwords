@@ -47,7 +47,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      *
      * @throws \OCA\Passwords\Exception\ApiException
      */
-    public function createRevision(
+    public function create(
         string $model,
         string $password,
         string $username,

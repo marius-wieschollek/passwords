@@ -140,7 +140,7 @@ class SynchronizeShares extends TimedJob {
 
             /** @var PasswordRevision $sourceRevision */
             $sourceRevision = $this->passwordRevisionService->findCurrentRevisionByModel($share->getSourcePassword(), true);
-            $revision       = $this->passwordRevisionService->createRevision(
+            $revision       = $this->passwordRevisionService->create(
                 $model->getUuid(),
                 $sourceRevision->getPassword(),
                 $sourceRevision->getUsername(),

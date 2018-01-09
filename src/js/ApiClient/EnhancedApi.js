@@ -8,11 +8,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param endpoint
      * @param username
      * @param password
-     * @param token
      * @param debug
      */
-    constructor(endpoint, username = null, password = null, token = null, debug = false) {
-        super(endpoint + '/index.php/apps/passwords/', username, password, token, debug);
+    constructor(endpoint, username = null, password = null, debug = false) {
+        super(endpoint + '/index.php/apps/passwords/', username, password, debug);
     }
 
     /**

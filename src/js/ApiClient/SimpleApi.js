@@ -23,14 +23,13 @@ export default class SimpleApi {
      * @param endpoint
      * @param username
      * @param password
-     * @param token
      * @param debug
      */
-    constructor(endpoint, username = null, password = null, token = null, debug = false) {
+    constructor(endpoint, username = null, password = null, debug = false) {
         this._debug = debug;
 
         this._headers = {};
-        this.login(endpoint, username, password, token);
+        this.login(endpoint, username, password);
 
         this._encryption = new Encryption();
         this._paths = {
@@ -83,13 +82,10 @@ export default class SimpleApi {
         };
     }
 
-    login(endpoint, username = null, password = null, token = null) {
+    login(endpoint, username = null, password = null) {
         this._endpoint = endpoint;
         if(username !== null && password !== null) {
             this._headers.Authorization = 'Basic ' + btoa(username + ':' + password);
-        }
-        if(token !== null) {
-            this._headers['X-Passwords-Token'] = token;
         }
     }
 

@@ -14,6 +14,7 @@ use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
@@ -123,7 +124,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $label = '',
         string $url = '',
         string $notes = '',
-        string $folder = '00000000-0000-0000-0000-000000000000',
+        string $folder = FolderService::BASE_FOLDER_UUID,
         bool $hidden = false,
         bool $favourite = false,
         array $tags = []
@@ -131,7 +132,7 @@ class PasswordApiController extends AbstractObjectApiController {
         try {
             $this->checkAccessPermissions();
             $model    = $this->modelService->create();
-            $revision = $this->revisionService->createRevision(
+            $revision = $this->revisionService->create(
                 $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
                 false, $favourite
             );
@@ -180,7 +181,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $label = '',
         string $url = '',
         string $notes = '',
-        string $folder = '00000000-0000-0000-0000-000000000000',
+        string $folder = FolderService::BASE_FOLDER_UUID,
         bool $hidden = false,
         bool $favourite = false,
         array $tags = []
@@ -190,11 +191,10 @@ class PasswordApiController extends AbstractObjectApiController {
 
             /** @var Password $model */
             $model = $this->modelService->findByUuid($id);
+            /** @var PasswordRevision $oldRevision */
+            $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
 
             if(!$model->isEditable()) {
-                /** @var PasswordRevision $oldRevision */
-                $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
-
                 $password = $oldRevision->getPassword();
                 $username = $oldRevision->getUsername();
                 $cseType  = $oldRevision->getCseType();
@@ -211,8 +211,8 @@ class PasswordApiController extends AbstractObjectApiController {
                 }
             }
 
-            $revision = $this->revisionService->createRevision(
-                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, false,
+            $revision = $this->revisionService->create(
+                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $oldRevision->isTrashed(),
                 $favourite
             );
 

@@ -67,6 +67,22 @@ class PasswordTagRelationService extends AbstractService {
     }
 
     /**
+     * @param string $tagUuid
+     * @param string $passwordUuid
+     *
+     * @return PasswordTagRelation|EntityInterface|null
+     * @throws \Exception
+     */
+    public function findByTagAndPassword(string $tagUuid, string $passwordUuid): ?PasswordTagRelation {
+        return $this->mapper->findOneMatching(
+            [
+                ['tag', $tagUuid],
+                ['password', $passwordUuid]
+            ]
+        );
+    }
+
+    /**
      * @param PasswordRevision $password
      * @param TagRevision      $tag
      *

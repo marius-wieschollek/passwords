@@ -8,6 +8,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\TagRevisionService;
@@ -83,16 +84,16 @@ class TagApiController extends AbstractObjectApiController {
     ): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $tag      = $this->modelService->create();
+            $model    = $this->modelService->create();
             $revision = $this->revisionService->create(
-                $tag->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
+                $model->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
             );
 
             $this->revisionService->save($revision);
-            $this->modelService->setRevision($tag, $revision);
+            $this->modelService->setRevision($model, $revision);
 
             return $this->createJsonResponse(
-                ['id' => $tag->getUuid(), 'revision' => $revision->getUuid()],
+                ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
                 Http::STATUS_CREATED
             );
         } catch(\Throwable $e) {
@@ -124,16 +125,18 @@ class TagApiController extends AbstractObjectApiController {
     ): JSONResponse {
         try {
             $this->checkAccessPermissions();
-            $tag = $this->modelService->findByUuid($id);
+            $model = $this->modelService->findByUuid($id);
 
-            $revision = $this->revisionService->create(
-                $tag->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
+            /** @var TagRevision $oldRevision */
+            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
+            $revision    = $this->revisionService->create(
+                $model->getUuid(), $label, $color, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
             );
 
             $this->revisionService->save($revision);
-            $this->modelService->setRevision($tag, $revision);
+            $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(['id' => $tag->getUuid(), 'revision' => $revision->getUuid()]);
+            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
         } catch(\Throwable $e) {
             return $this->createErrorResponse($e);
         }
