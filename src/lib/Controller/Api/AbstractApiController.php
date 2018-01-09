@@ -84,11 +84,15 @@ abstract class AbstractApiController extends ApiController {
 
     /**
      * @throws ApiAccessDeniedException
+     * @throws ApiException
      */
     protected function checkAccessPermissions() {
         $token = $this->request->getHeader('X-Passwords-Token');
         if(empty($token)) {
             throw new ApiAccessDeniedException();
+        }
+        if(!$this->checkIfHttpsUsed()) {
+            throw new ApiException('HTTPS required', 400);
         }
     }
 
@@ -117,5 +121,17 @@ abstract class AbstractApiController extends ApiController {
         }
 
         return $filters;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkIfHttpsUsed(): bool {
+        $config      = \OC::$server->getConfig();
+        $forceSsl    = $config->getSystemValue('forcessl', false);
+        $protocol    = $config->getSystemValue('overwriteprotocol', '');
+        $ignoreHttps = $config->getAppValue('passwords', 'environment', 'production') === 'dev';
+
+        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https' || $forceSsl || $ignoreHttps;
     }
 }

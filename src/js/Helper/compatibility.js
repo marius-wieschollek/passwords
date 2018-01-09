@@ -1,6 +1,4 @@
-if(!isCompatibleBrowser()) {
-    $(window).on('load', showBrowserCompatibilityWarning);
-}
+$(window).on('load', checkSystem);
 
 /**
  *
@@ -37,4 +35,13 @@ function showBrowserCompatibilityWarning() {
     );
 
     throw "Browser does not suport ECMAScript 2017 / ES2017";
+}
+
+function checkSystem() {
+    var link = document.getElementById('pw-link-https');
+    if(link) {
+        link.setAttribute('href', location.href.replace('http://', 'https://'));
+    } else if(!isCompatibleBrowser()) {
+        showBrowserCompatibilityWarning();
+    }
 }

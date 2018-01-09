@@ -18,12 +18,17 @@
             font-size     : 1rem;
             text-align    : center;
             border-radius : 3px;
+
+            a {
+                text-decoration : underline;
+            }
         }
         .title {
             background     : $color-red-dark;
             color          : $color-white;
             font-size      : 1.25rem;
             text-transform : uppercase;
+            font-weight    : bold;
         }
         .browser {
             margin    : 25px auto 0;
