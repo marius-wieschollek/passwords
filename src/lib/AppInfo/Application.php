@@ -10,6 +10,7 @@ namespace OCA\Passwords\AppInfo;
 
 use OCA\Passwords\Controller\AdminSettingsController;
 use OCA\Passwords\Controller\Api\FolderApiController;
+use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\ShareApiController;
@@ -214,7 +215,14 @@ class Application extends App {
         /**
          * Register Legacy Migration Classes
          */
-        $this->registerLegacyClasses();
+        $this->registerLegacyMigrationClasses();
+
+        /**
+         * Register Legacy Api Controller Classes
+         */
+        $this->registerLegacyApiControllers();
+
+
     }
 
     /**
@@ -882,7 +890,7 @@ class Application extends App {
     /**
      *
      */
-    protected function registerLegacyClasses(): void {
+    protected function registerLegacyMigrationClasses(): void {
         $container = $this->getContainer();
 
         $container->registerAlias('DecryptionModule', DecryptionModule::class);
@@ -946,6 +954,24 @@ class Application extends App {
                     $c->query('LegacyShareMigration')
                 );
             });
+    }
+
+    /**
+     *
+     */
+    protected function registerLegacyApiControllers(): void {
+        $container = $this->getContainer();
+
+        $container->registerService('LegacyPasswordApiController',
+            function (IAppContainer $c) {
+                return new LegacyPasswordApiController(
+                    $c->query('Request'),
+                    $c->query('TagService'),
+                    $c->query('PasswordService'),
+                    $c->query('PasswordRevisionService')
+                );
+            });
+
     }
 
     /**

@@ -3,7 +3,14 @@
 namespace OCA\Passwords\AppInfo;
 
 $application = new Application();
+
+/** @var $this \OC\Route\CachingRouter */
 $application->registerRoutes($this, [
+    'resources' => [
+        'legacy_category_api' => ['url' => '/api/0.1/categories'],
+        'legacy_password_api' => ['url' => '/api/0.1/passwords'],
+        'legacy_version_api' => ['url' => '/api/0.1/version']
+    ],
     'routes' => [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
         ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
