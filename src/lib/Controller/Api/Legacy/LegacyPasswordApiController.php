@@ -11,6 +11,7 @@ namespace OCA\Passwords\Controller\Api\Legacy;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
@@ -161,8 +162,9 @@ class LegacyPasswordApiController extends ApiController {
         $this->passwordRevisionService->save($revision);
         $this->passwordService->setRevision($model, $revision);
 
+        /** @var Tag $tag */
         $tag = $this->tagService->findByIdOrUuid($category);
-        if($tag !== null) {
+        if($tag !== null && !$tag->isSuspended()) {
             /** @var TagRevision $tagRevision */
             $tagRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
             $this->passwordTagRelationService->create($revision, $tagRevision);
@@ -207,16 +209,7 @@ class LegacyPasswordApiController extends ApiController {
         $this->passwordRevisionService->save($revision);
         $this->passwordService->setRevision($model, $revision);
 
-        $tag = $this->tagService->findByIdOrUuid($category);
-        if($tag !== null) {
-            $relation = $this->passwordTagRelationService->findByTagAndPassword($tag->getUuid(), $model->getUuid());
-
-            if($relation === null) {
-                /** @var TagRevision $tagRevision */
-                $tagRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
-                $this->passwordTagRelationService->create($revision, $tagRevision);
-            }
-        }
+        $this->updatePasswordCategory($category, $model, $revision);
 
         return new JSONResponse($this->getPasswordObject($model));
     }
@@ -272,9 +265,8 @@ class LegacyPasswordApiController extends ApiController {
             return null;
         }
 
-        $category = 0;
-        $tags     = $this->tagService->findByPassword($password->getUuid());
-        if(!empty($tags)) $category = $tags[0]->getId();
+        $tag      = $this->findCategoryForPassword($password);
+        $category = $tag === null ? 0:$tag->getId();
 
         $properties = [
             'loginname'   => $revision->getUsername(),
@@ -305,5 +297,63 @@ class LegacyPasswordApiController extends ApiController {
             'creation_date' => date("Y-m-d", $password->getCreated()),
             'properties'    => $properties
         ];
+    }
+
+    /**
+     * @param Password $password
+     *
+     * @return Tag
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    protected function findCategoryForPassword(Password $password): Tag {
+        $tags = $this->tagService->findByPassword($password->getUuid());
+
+        foreach($tags as $tag) {
+            if($tag->isSuspended()) continue;
+            /** @var TagRevision $revision */
+            $revision = $this->tagRevisionService->findByUuid($tag->getRevision());
+
+            if($revision->isTrashed() || $revision->isHidden()) continue;
+            if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) continue;
+            if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) continue;
+
+            return $tag;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $category
+     * @param $model
+     * @param $revision
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    protected function updatePasswordCategory($category, Password $model, PasswordRevision $revision): void {
+        if($category) {
+            /** @var Tag $tag */
+            $tag = $this->tagService->findByIdOrUuid($category);
+            if($tag !== null && !$tag->isSuspended()) {
+                $relation = $this->passwordTagRelationService->findByTagAndPassword($tag->getUuid(), $model->getUuid());
+
+                if($relation === null) {
+                    /** @var TagRevision $tagRevision */
+                    $tagRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
+                    $this->passwordTagRelationService->create($revision, $tagRevision);
+                }
+            }
+        } else {
+            $tag = $this->findCategoryForPassword($model);
+
+            if($tag !== null) {
+                $relation = $this->passwordTagRelationService->findByTagAndPassword($tag->getUuid(), $model->getUuid());
+                $this->passwordTagRelationService->delete($relation);
+            }
+        }
     }
 }
