@@ -57,7 +57,6 @@ Each password is encrypted with it's own unique key.
 
 ## Apps
 There are no apps for the modern API right now. But there are some for the legacy API.
-
 * [Official Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
 * [Official Chrome Extension](https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds)
 * [Android App](https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager) by [Intirix](https://github.com/intirix/cloudpasswordmanager)
@@ -77,5 +76,5 @@ Passwords offers complete API, giving you access to all features of the app.
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
 * **Soon to come:** Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis).
 
-## Licenses
+## Licenses and Legal Information
 See [Licenses.md](Licenses.md)

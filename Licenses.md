@@ -1,6 +1,15 @@
 # Licenses
 > Passwords - [AGPL V3](LICENSE)
 
+#### Disclaimer
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#### Nextcloud
+This project is not related to the Nextcloud Open Source project in any way.
+The suffix "for Nextcloud" only implies, that the software is designed to run on the Nextcloud app platform or a compatible framework.
+
+## Third Party Services
 The licenses and/or terms of service of any service or third party sources used in the passwords app can be found here.
 
 #### Password Checks
