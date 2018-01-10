@@ -66,6 +66,7 @@ class FaviconService {
      * @return ISimpleFile
      * @throws ApiException
      * @throws \OCP\AppFramework\QueryException
+     * @throws \Throwable
      */
     public function getFavicon(string $domain, int $size = 32): ISimpleFile {
         list($domain, $size) = $this->validateInput($domain, $size);
@@ -76,21 +77,19 @@ class FaviconService {
             return $this->fileCacheService->getFile($fileName);
         }
 
+        if(!$this->validationService->isValidDomain($domain)) {
+            return $faviconService->getDefaultFavicon($domain, $size);
+        }
+
         try {
-            if(!$this->validationService->isValidDomain($domain)) {
-                $favicon = $faviconService->getDefaultFavicon();
-            } else {
-                $favicon = $faviconService->getFavicon($domain);
-            }
+            $favicon = $faviconService->getFavicon($domain, $size);
 
             return $this->resizeFavicon($favicon, $fileName, $size);
         } catch(\Throwable $e) {
             $this->logger->error($e->getMessage());
 
             try {
-                $favicon = $faviconService->getDefaultFavicon();
-
-                return $this->resizeFavicon($favicon, 'error.png', $size);
+                return $faviconService->getDefaultFavicon($domain, $size);
             } catch(\Throwable $e) {
                 $this->logger->error($e->getMessage());
 

@@ -9,9 +9,9 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Theming\ThemingDefaults;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -37,87 +37,79 @@ abstract class AbstractFaviconHelper {
     protected $imageHelper;
 
     /**
-     * @var ThemingDefaults
+     * @var FallbackIconGenerator
      */
-    protected $themingDefaults;
+    protected $fallbackIconGenerator;
 
     /**
-     * BetterIdeaHelper constructor.
+     * AbstractFaviconHelper constructor.
      *
-     * @param FileCacheService    $fileCacheService
-     * @param AbstractImageHelper $imageHelper
-     * @param \OC_Defaults        $themingDefaults
+     * @param AbstractImageHelper   $imageHelper
+     * @param FileCacheService      $fileCacheService
+     * @param FallbackIconGenerator $fallbackIconGenerator
      */
     public function __construct(
-        FileCacheService $fileCacheService,
         AbstractImageHelper $imageHelper,
-        \OC_Defaults $themingDefaults
+        FileCacheService $fileCacheService,
+        FallbackIconGenerator $fallbackIconGenerator
     ) {
         $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
-        $this->fileCacheService = $fileCacheService;
-        $this->imageHelper      = $imageHelper;
-        $this->themingDefaults  = $themingDefaults;
+        $this->imageHelper           = $imageHelper;
+        $this->fileCacheService      = $fileCacheService;
+        $this->fallbackIconGenerator = $fallbackIconGenerator;
     }
 
     /**
      * @param string $domain
+     * @param int    $size
      *
      * @return ISimpleFile|null
      * @throws \Exception
      */
-    public function getFavicon(string $domain): ?ISimpleFile {
-        $faviconFile = $this->getFaviconFilename($domain);
+    public function getFavicon(string $domain, int $size): ?ISimpleFile {
+        $faviconFile = $this->getFaviconFilename($domain, $size);
 
         if($this->fileCacheService->hasFile($faviconFile)) {
             return $this->fileCacheService->getFile($faviconFile);
         }
 
-        $faviconData = $this->getFaviconData($domain);
+        $faviconData = $this->getFaviconData($domain, $size);
         if($faviconData === null) throw new \Exception('Favicon service returned no data');
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }
 
     /**
+     * @param string $domain
+     * @param int    $size
+     *
      * @return ISimpleFile|null
+     * @throws \Throwable
      */
-    public function getDefaultFavicon(): ?ISimpleFile {
-        $fileName = "{$this->prefix}_default.png";
+    public function getDefaultFavicon(string $domain, int $size): ?ISimpleFile {
+        $fileName = $this->getFaviconFilename($domain, $size);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $content = $this->recolorDefaultFavicon();
+        $domain = preg_replace('/^(m|de|www|www2|mail|email|login|signin)\./', '' , $domain);
+        $content = $this->fallbackIconGenerator->createIcon($domain, $size);
 
         return $this->fileCacheService->putFile($fileName, $content);
     }
 
     /**
      * @param string   $domain
-     * @param int|null $size
+     * @param int $size
      *
      * @return string
      */
-    public function getFaviconFilename(string $domain, int $size = null): string {
+    public function getFaviconFilename(string $domain, int $size): string {
         if($size !== null) {
             return "{$this->prefix}_{$domain}_{$size}.png";
         }
 
         return "{$this->prefix}_{$domain}.png";
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function recolorDefaultFavicon() {
-        $path  = dirname(dirname(dirname(__DIR__))).'/img/app_black.png';
-        $image = $this->imageHelper->getImageFromFile($path);
-        $image = $this->imageHelper->recolorImage($image, '#000000', $this->themingDefaults->getColorPrimary());
-
-        $content = $this->imageHelper->exportPng($image);
-        $this->imageHelper->destroyImage($image);
-
-        return $content;
     }
 
     /**
@@ -134,21 +126,23 @@ abstract class AbstractFaviconHelper {
 
     /**
      * @param string $domain
+     * @param int    $size
      *
      * @return null|string
      */
-    protected function getFaviconData(string $domain): ?string {
-        $url = $this->getFaviconUrl($domain);
+    protected function getFaviconData(string $domain, int $size): ?string {
+        $url = $this->getFaviconUrl($domain, $size);
 
         return $this->getHttpRequest($url);
     }
 
     /**
      * @param string $domain
+     * @param int    $size
      *
      * @return string
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getFaviconUrl(string $domain, int $size): string {
         return "http://{$domain}/favicon.ico";
     }
 }

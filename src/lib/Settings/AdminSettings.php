@@ -101,7 +101,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', HelperService::WORDS_SNAKES);
+        $current = $this->config->getAppValue('service/words', HelperService::WORDS_RANDOM);
 
         return [
             [
@@ -150,7 +150,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getFaviconServices(): array {
-        $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_LOCAL);
+        $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
 
         return [
             [

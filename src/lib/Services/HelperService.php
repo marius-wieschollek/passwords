@@ -49,9 +49,9 @@ class HelperService {
     const IMAGES_GDLIB   = 'gdlib';
 
     /**
-     * @var FileCacheService
+     * @var ConfigurationService
      */
-    protected $fileCacheService;
+    protected $config;
 
     /**
      * @var IAppContainer
@@ -59,9 +59,9 @@ class HelperService {
     protected $container;
 
     /**
-     * @var ConfigurationService
+     * @var FileCacheService
      */
-    protected $config;
+    protected $fileCacheService;
 
     /**
      * FaviconService constructor.
@@ -118,7 +118,7 @@ class HelperService {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getFaviconHelper(): AbstractFaviconHelper {
-        $service = $this->config->getAppValue('service/favicon', self::FAVICON_LOCAL);
+        $service = $this->config->getAppValue('service/favicon', self::FAVICON_DEFAULT);
 
         switch($service) {
             case self::FAVICON_BETTER_IDEA:
@@ -141,7 +141,7 @@ class HelperService {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getWordsHelper(): AbstractWordsHelper {
-        $service = $this->config->getAppValue('service/words', self::WORDS_SNAKES);
+        $service = $this->config->getAppValue('service/words', self::WORDS_RANDOM);
 
         switch($service) {
             case self::WORDS_LOCAL:

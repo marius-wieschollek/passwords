@@ -46,6 +46,7 @@ use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
 use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
 use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
+use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\PageShot\DefaultPageShotHelper;
@@ -585,9 +586,8 @@ class Application extends App {
             function (IAppContainer $c) {
                 return new AvatarService(
                     $c->getServer()->getUserManager(),
-                    $c->query('HelperService')->getImageHelper(),
                     $this->getFileCacheService(),
-                    $c->query('ConfigurationService')
+                    $c->query('FallbackIconGenerator')
                 );
             });
 
@@ -750,48 +750,55 @@ class Application extends App {
     protected function registerFaviconHelper(): void {
         $container = $this->getContainer();
 
+        $container->registerService('FallbackIconGenerator',
+            function (IAppContainer $c) {
+                return new FallbackIconGenerator(
+                    $c->query('HelperService')->getImageHelper(),
+                    $c->query('ConfigurationService')
+                );
+            });
         $container->registerService('BetterIdeaHelper',
             function (IAppContainer $c) {
                 return new BetterIdeaHelper(
-                    $this->getFileCacheService(),
                     $c->query('HelperService')->getImageHelper(),
-                    $c->query('OC_Defaults')
+                    $this->getFileCacheService(),
+                    $c->query('FallbackIconGenerator')
                 );
             });
 
         $container->registerService('DuckDuckGoHelper',
             function (IAppContainer $c) {
                 return new DuckDuckGoHelper(
-                    $this->getFileCacheService(),
                     $c->query('HelperService')->getImageHelper(),
-                    $c->query('OC_Defaults')
+                    $this->getFileCacheService(),
+                    $c->query('FallbackIconGenerator')
                 );
             });
 
         $container->registerService('GoogleFaviconHelper',
             function (IAppContainer $c) {
                 return new GoogleFaviconHelper(
-                    $this->getFileCacheService(),
                     $c->query('HelperService')->getImageHelper(),
-                    $c->query('OC_Defaults')
+                    $this->getFileCacheService(),
+                    $c->query('FallbackIconGenerator')
                 );
             });
 
         $container->registerService('LocalFaviconHelper',
             function (IAppContainer $c) {
                 return new LocalFaviconHelper(
-                    $this->getFileCacheService(),
                     $c->query('HelperService')->getImageHelper(),
-                    $c->query('OC_Defaults')
+                    $this->getFileCacheService(),
+                    $c->query('FallbackIconGenerator')
                 );
             });
 
         $container->registerService('DefaultFaviconHelper',
             function (IAppContainer $c) {
                 return new DefaultFaviconHelper(
-                    $this->getFileCacheService(),
                     $c->query('HelperService')->getImageHelper(),
-                    $c->query('OC_Defaults')
+                    $this->getFileCacheService(),
+                    $c->query('FallbackIconGenerator')
                 );
             });
     }

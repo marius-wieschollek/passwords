@@ -7,7 +7,7 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMA
 
 #### Nextcloud
 This project is not related to the Nextcloud Open Source project in any way.
-The suffix "for Nextcloud" only implies, that the software is designed to run on the Nextcloud app platform or a compatible framework.
+The software is designed to run on the Nextcloud app platform or a compatible framework.
 
 ## Third Party Services
 The licenses and/or terms of service of any service or third party sources used in the passwords app can be found here.

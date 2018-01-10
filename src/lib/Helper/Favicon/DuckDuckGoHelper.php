@@ -24,10 +24,11 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
 
     /**
      * @param string $domain
+     * @param int    $size
      *
      * @return string
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getFaviconUrl(string $domain, int $size): string {
         return "https://icons.duckduckgo.com/ip2/{$domain}.ico";
     }
 

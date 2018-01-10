@@ -77,10 +77,13 @@
 
             &:before {
                 font-family   : FontAwesome, sans-serif;
-                font-size     : 1.2rem;
+                font-size     : 1rem;
                 padding-right : 10px;
                 position      : relative;
                 bottom        : -2px;
+                width         : 1rem;
+                text-align    : center;
+                display       : inline-block;
             }
 
             &.nav-icon-all:before { content : "\f0ac"; }

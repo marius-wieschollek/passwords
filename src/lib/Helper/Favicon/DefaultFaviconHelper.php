@@ -26,18 +26,12 @@ class DefaultFaviconHelper extends AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return ISimpleFile
-     */
-    public function getFavicon(string $domain): ISimpleFile {
-        return $this->getDefaultFavicon();
-    }
-
-    /**
-     * @param string $domain
+     * @param int    $size
      *
-     * @return string
+     * @return ISimpleFile
+     * @throws \Throwable
      */
-    protected function getFaviconUrl(string $domain): string {
-        return '';
+    public function getFavicon(string $domain, int $size): ISimpleFile {
+        return $this->getDefaultFavicon($domain, $size);
     }
 }

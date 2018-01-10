@@ -24,10 +24,11 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
 
     /**
      * @param string $domain
+     * @param int    $size
      *
      * @return string
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getFaviconUrl(string $domain, int $size): string {
         return 'https://www.google.com/s2/favicons?domain='.$domain;
     }
 }

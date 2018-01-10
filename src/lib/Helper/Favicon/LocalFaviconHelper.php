@@ -36,10 +36,12 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
 
     /**
      * @param string $domain
+     * @param int    $size
      *
      * @return null|string
+     * @throws \Throwable
      */
-    protected function getFaviconData(string $domain): ?string {
+    protected function getFaviconData(string $domain, int $size): ?string {
         list($html, $url) = $this->getHttpRequest('http://'.$domain);
 
         if(!empty($html)) {
@@ -63,7 +65,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
         list($data, , , $isIcon) = $this->getHttpRequest($url."/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
-        return $this->getDefaultFavicon()->getContent();
+        return $this->getDefaultFavicon($domain, $size)->getContent();
     }
 
     /**
@@ -71,7 +73,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      *
      * @return mixed|string
      */
-    protected function getHttpRequest(string $url) {
+    protected function getHttpRequest(string $url): string {
         $request = new RequestHelper();
         $request->setUrl($url);
         $data = $request->sendWithRetry();
@@ -93,7 +95,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      *
      * @return string
      */
-    protected function convertIcoFile($data) {
+    protected function convertIcoFile($data): string {
         if(empty($data)) return null;
 
         return $this->imageHelper->convertIcoToPng($data);
@@ -107,7 +109,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      *
      * @return null|string
      */
-    protected function checkForImage(string $htmlSource, string $htmlPattern, string $tagPattern, string $domain) {
+    protected function checkForImage(string $htmlSource, string $htmlPattern, string $tagPattern, string $domain): ?string {
 
         if(preg_match_all($htmlPattern, $htmlSource, $htmlMatches)) {
             foreach($htmlMatches[1] as $tagSource) {
