@@ -81,7 +81,7 @@ $application->registerRoutes($this, [
             'name'     => 'service_api#get_favicon',
             'url'      => '/api/1.0/service/favicon/{domain}/{size}',
             'verb'     => 'GET',
-            'defaults' => ['domain' => '', 'size' => 32]
+            'defaults' => ['domain' => 'default', 'size' => 32]
         ],
         [
             'name'     => 'service_api#get_avatar',
@@ -93,7 +93,7 @@ $application->registerRoutes($this, [
             'name'     => 'service_api#get_preview',
             'url'      => '/api/1.0/service/image/{domain}/{view}/{width}/{height}',
             'verb'     => 'GET',
-            'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 550, 'height' => 0]
+            'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 550, 'height' => 0]
         ],
         ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
     ]

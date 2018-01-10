@@ -30,7 +30,7 @@ class DefaultPageShotHelper extends AbstractPageShotHelper {
      * @return ISimpleFile
      */
     function getPageShot(string $domain, string $view): ISimpleFile {
-        return $this->getDefaultPageShot();
+        return $this->getDefaultPageShot($domain);
     }
 
     /**

@@ -78,11 +78,15 @@ abstract class AbstractPageShotHelper {
     }
 
     /**
+     * @param string $domain
+     *
      * @return ISimpleFile|null
      */
-    public function getDefaultPageShot(): ?ISimpleFile {
-        $random   = rand(1, 5);
-        $fileName = "{$this->prefix}_default_{$random}.jpg";
+    public function getDefaultPageShot(string $domain): ?ISimpleFile {
+        $number = array_sum(str_split(dechex(crc32($domain)), 2));
+        while($number >= 5) $number -= 5;
+
+        $fileName = "{$this->prefix}_default_{$number}.jpg";
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
