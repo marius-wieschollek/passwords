@@ -34,7 +34,7 @@ This is why passwords checks automatically if your passwords have been compromis
 Are you using Fallon Turners Passwords app for Nextcloud/OwnCloud? No problem!
 Passwords will automatically import all the passwords from the old app.
 Take a look at the [legacy migration guide](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Legacy-Migration) for more details.
-**Soon to come:** Thanks to the legacy API support you can even keep applications using the old API.
+Thanks to the legacy API support you can even keep applications using the old API.
 (But passwords with client side encryption are not available on the old API)
 
 #### Build upon modern standards
@@ -60,7 +60,7 @@ There are no apps for the modern API right now. But there are some for the legac
 
 * [Official Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
 * [Official Chrome Extension](https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds)
-* [Android App by Intirix](https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager)
+* [Android App](https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager) by [Intirix](https://github.com/intirix/cloudpasswordmanager)
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.
