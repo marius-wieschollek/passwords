@@ -69,7 +69,6 @@ class PasswordApiController extends AbstractObjectApiController {
     /**
      * PasswordApiController constructor.
      *
-     * @param string                     $appName
      * @param IRequest                   $request
      * @param TagService                 $tagService
      * @param TagRevisionService         $tagRevisionService
@@ -79,7 +78,6 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param PasswordTagRelationService $relationService
      */
     public function __construct(
-        $appName,
         IRequest $request,
         TagService $tagService,
         PasswordService $modelService,
@@ -88,7 +86,7 @@ class PasswordApiController extends AbstractObjectApiController {
         PasswordObjectHelper $objectHelper,
         PasswordTagRelationService $relationService
     ) {
-        parent::__construct($appName, $request, $modelService, $revisionService, $objectHelper);
+        parent::__construct($request, $modelService, $revisionService, $objectHelper);
 
         $this->tagService         = $tagService;
         $this->relationService    = $relationService;
@@ -96,6 +94,7 @@ class PasswordApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -152,6 +151,7 @@ class PasswordApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -228,6 +228,10 @@ class PasswordApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param string $id
      * @param null   $revision
      *

@@ -16,10 +16,6 @@ $application->registerRoutes($this, [
         ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
         ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
 
-        ['name' => 'authorisation_api#info', 'url' => '/api/1.0/authorisation/info', 'verb' => 'GET'],
-        ['name' => 'authorisation_api#login', 'url' => '/api/1.0/authorisation/login', 'verb' => 'POST'],
-        ['name' => 'authorisation_api#logout', 'url' => '/api/1.0/authorisation/logout', 'verb' => 'POST'],
-
         ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'GET'],
         ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'POST', 'postfix' => 'POST'],
         ['name' => 'password_api#show', 'url' => '/api/1.0/password/show', 'verb' => 'POST'],
@@ -59,12 +55,6 @@ $application->registerRoutes($this, [
         ['name' => 'share_api#partners', 'url' => '/api/1.0/share/partners', 'verb' => 'GET'],
         ['name' => 'share_api#partners', 'url' => '/api/1.0/share/partners', 'verb' => 'POST', 'postfix' => 'POST'],
 
-        ['name' => 'client_api#list', 'url' => '/api/1.0/client/list', 'verb' => 'GET'],
-        ['name' => 'client_api#show', 'url' => '/api/1.0/client/show', 'verb' => 'POST'],
-        ['name' => 'client_api#create', 'url' => '/api/1.0/client/create', 'verb' => 'POST'],
-        ['name' => 'client_api#update', 'url' => '/api/1.0/client/update', 'verb' => 'PATCH'],
-        ['name' => 'client_api#delete', 'url' => '/api/1.0/client/delete', 'verb' => 'DELETE'],
-
         ['name' => 'settings_api#get', 'url' => '/api/1.0/setting/get', 'verb' => 'POST'],
         ['name' => 'settings_api#set', 'url' => '/api/1.0/setting/set', 'verb' => 'POST'],
         ['name' => 'settings_api#list', 'url' => '/api/1.0/setting/list', 'verb' => 'GET'],
@@ -96,5 +86,11 @@ $application->registerRoutes($this, [
             'defaults' => ['domain' => '', 'view' => 'desktop', 'width' => 550, 'height' => 0]
         ],
         ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
+        ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'share_api#preflighted_cors', 'url' => '/api/1.0/share/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'folder_api#preflighted_cors', 'url' => '/api/1.0/folder/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'service_api#preflighted_cors', 'url' => '/api/1.0/service/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'settings_api#preflighted_cors', 'url' => '/api/1.0/setting/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'password_api#preflighted_cors', 'url' => '/api/1.0/password/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ]
 ]);

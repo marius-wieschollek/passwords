@@ -2,7 +2,7 @@
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
         <div class="image-container">
-            <a :href="object.url" target="_blank">
+            <a :href="object.url" target="_blank" v-if="object.revisions">
                 <img :class="image.className"
                      :style="image.style"
                      :src="object.image"

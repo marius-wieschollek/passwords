@@ -94,7 +94,6 @@ class ShareApiController extends AbstractApiController {
     /**
      * TagApiController constructor.
      *
-     * @param string                  $appName
      * @param IUser                   $user
      * @param IConfig                 $config
      * @param IRequest                $request
@@ -107,7 +106,6 @@ class ShareApiController extends AbstractApiController {
      * @param PasswordRevisionService $passwordRevisionService
      */
     public function __construct(
-        string $appName,
         IUser $user,
         IConfig $config,
         IRequest $request,
@@ -119,13 +117,7 @@ class ShareApiController extends AbstractApiController {
         PasswordService $passwordModelService,
         PasswordRevisionService $passwordRevisionService
     ) {
-        parent::__construct(
-            $appName,
-            $request,
-            'PUT, POST, GET, DELETE, PATCH',
-            'Authorization, Content-Type, Accept',
-            1728000
-        );
+        parent::__construct($request);
 
         $this->user                    = $user;
         $this->config                  = $config;
@@ -140,6 +132,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -165,6 +158,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -194,6 +188,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -215,6 +210,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -298,6 +294,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -336,6 +333,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -360,6 +358,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -383,6 +382,7 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *

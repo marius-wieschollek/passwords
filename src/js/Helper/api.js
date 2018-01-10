@@ -1,5 +1,7 @@
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
-const api = new EnhancedApi(location.origin, null, null, true);
+let password = prompt('Enter Nextcloud Password');
+
+const api = new EnhancedApi(location.origin, 'marius', password, true);
 
 export default api;

@@ -47,9 +47,8 @@ class ServiceApiController extends AbstractApiController {
     protected $avatarService;
 
     /**
-     * PasswordApiController constructor.
+     * ServiceApiController constructor.
      *
-     * @param string          $appName
      * @param IRequest        $request
      * @param AvatarService   $avatarService
      * @param FaviconService  $faviconService
@@ -57,21 +56,13 @@ class ServiceApiController extends AbstractApiController {
      * @param WordsService    $wordsService
      */
     public function __construct(
-        $appName,
         IRequest $request,
         WordsService $wordsService,
         AvatarService $avatarService,
         FaviconService $faviconService,
         PageShotService $previewService
     ) {
-        parent::__construct(
-            $appName,
-            $request,
-            'GET',
-            'Authorization, Content-Type, Accept',
-            1728000
-        );
-
+        parent::__construct($request);
         $this->faviconService = $faviconService;
         $this->wordsService   = $wordsService;
         $this->previewService = $previewService;
@@ -79,6 +70,7 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -130,7 +122,6 @@ class ServiceApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @param string $domain
-     *
      * @param int    $size
      *
      * @return FileDisplayResponse|JSONResponse
@@ -171,6 +162,7 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *

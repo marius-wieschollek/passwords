@@ -45,25 +45,7 @@ class TagApiController extends AbstractObjectApiController {
     protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'trashed', 'favourite'];
 
     /**
-     * TagApiController constructor.
-     *
-     * @param string             $appName
-     * @param IRequest           $request
-     * @param TagService         $modelService
-     * @param TagRevisionService $revisionService
-     * @param TagObjectHelper    $objectHelper
-     */
-    public function __construct(
-        $appName,
-        IRequest $request,
-        TagService $modelService,
-        TagRevisionService $revisionService,
-        TagObjectHelper $objectHelper
-    ) {
-        parent::__construct($appName, $request, $modelService, $revisionService, $objectHelper);
-    }
-
-    /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -102,6 +84,7 @@ class TagApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *

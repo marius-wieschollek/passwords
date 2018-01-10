@@ -264,7 +264,6 @@ class Application extends App {
         $container->registerService('PasswordApiController',
             function (IAppContainer $c) {
                 return new PasswordApiController(
-                    self::APP_NAME,
                     $c->query('Request'),
                     $c->query('TagService'),
                     $c->query('PasswordService'),
@@ -278,7 +277,6 @@ class Application extends App {
         $container->registerService('FolderApiController',
             function (IAppContainer $c) {
                 return new FolderApiController(
-                    self::APP_NAME,
                     $c->query('Request'),
                     $c->query('FolderService'),
                     $c->query('FolderRevisionService'),
@@ -289,7 +287,6 @@ class Application extends App {
         $container->registerService('TagApiController',
             function (IAppContainer $c) {
                 return new TagApiController(
-                    self::APP_NAME,
                     $c->query('Request'),
                     $c->query('TagService'),
                     $c->query('TagRevisionService'),
@@ -300,7 +297,6 @@ class Application extends App {
         $container->registerService('ServiceApiController',
             function (IAppContainer $c) {
                 return new ServiceApiController(
-                    self::APP_NAME,
                     $c->query('Request'),
                     $c->query('WordsService'),
                     $c->query('AvatarService'),
@@ -314,7 +310,6 @@ class Application extends App {
                 $server = $c->getServer();
 
                 return new ShareApiController(
-                    self::APP_NAME,
                     $server->getUserSession()->getUser(),
                     $server->getConfig(),
                     $c->query('Request'),

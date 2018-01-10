@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
@@ -46,25 +47,7 @@ class FolderApiController extends AbstractObjectApiController {
     protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'trashed', 'favourite'];
 
     /**
-     * PasswordApiController constructor.
-     *
-     * @param string                $appName
-     * @param IRequest              $request
-     * @param FolderService         $modelService
-     * @param FolderRevisionService $revisionService
-     * @param FolderObjectHelper    $objectHelper
-     */
-    public function __construct(
-        $appName,
-        IRequest $request,
-        FolderService $modelService,
-        FolderRevisionService $revisionService,
-        FolderObjectHelper $objectHelper
-    ) {
-        parent::__construct($appName, $request, $modelService, $revisionService, $objectHelper);
-    }
-
-    /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -105,6 +88,7 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -149,6 +133,10 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param string $id
      *
      * @return JSONResponse
@@ -164,6 +152,10 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param string $id
      * @param null   $revision
      *

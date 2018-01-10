@@ -8,12 +8,14 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IRequest;
 
 /**
  * Class AbstractApiController
@@ -21,6 +23,17 @@ use OCP\AppFramework\Http\JSONResponse;
  * @package OCA\Passwords\Controller
  */
 abstract class AbstractApiController extends ApiController {
+
+
+    public function __construct(IRequest $request) {
+        parent::__construct(
+            Application::APP_NAME,
+            $request,
+            'PUT, POST, GET, DELETE, PATCH',
+            'Authorization, Content-Type, Accept',
+            1728000
+        );
+    }
 
     /**
      * @var array

@@ -47,32 +47,25 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     /**
      * PasswordApiController constructor.
      *
-     * @param string                  $appName
      * @param IRequest                $request
      * @param AbstractModelService    $modelService
      * @param AbstractRevisionService $revisionService
      * @param AbstractObjectHelper    $objectHelper
      */
     public function __construct(
-        $appName,
         IRequest $request,
         AbstractModelService $modelService,
         AbstractRevisionService $revisionService,
         AbstractObjectHelper $objectHelper
     ) {
-        parent::__construct(
-            $appName,
-            $request,
-            'PUT, POST, GET, DELETE, PATCH',
-            'Authorization, Content-Type, Accept',
-            1728000
-        );
+        parent::__construct($request);
         $this->modelService    = $modelService;
         $this->objectHelper    = $objectHelper;
         $this->revisionService = $revisionService;
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -101,6 +94,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -132,6 +126,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -153,6 +148,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -185,6 +181,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
