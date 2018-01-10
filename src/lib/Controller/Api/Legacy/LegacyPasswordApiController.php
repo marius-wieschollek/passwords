@@ -78,7 +78,7 @@ class LegacyPasswordApiController extends ApiController {
             $request,
             'GET, POST, DELETE, PUT, PATCH',
             'Authorization, Content-Type, Accept',
-            86400
+            1728000
         );
         $this->tagService                 = $tagService;
         $this->passwordService            = $passwordService;
@@ -241,7 +241,7 @@ class LegacyPasswordApiController extends ApiController {
         if($oldRevision->isTrashed()) {
             $this->passwordService->delete($model);
 
-            return new JSONResponse(['id' => $model->getUuid()]);
+            return new JSONResponse(['id' => $model->getId()]);
         }
 
         /** @var PasswordRevision $newRevision */
@@ -295,6 +295,7 @@ class LegacyPasswordApiController extends ApiController {
 
         return [
             'id'            => $password->getId(),
+            'user_id'       => $password->getUserId(),
             'loginname'     => $revision->getUsername(),
             'pass'          => $revision->getPassword(),
             'website'       => parse_url($revision->getUrl(), PHP_URL_HOST),

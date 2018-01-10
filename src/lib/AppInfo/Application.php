@@ -8,6 +8,8 @@
 
 namespace OCA\Passwords\AppInfo;
 
+use Controller\Api\Legacy\LegacyCategoryApiController;
+use Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Controller\AdminSettingsController;
 use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
@@ -221,8 +223,6 @@ class Application extends App {
          * Register Legacy Api Controller Classes
          */
         $this->registerLegacyApiControllers();
-
-
     }
 
     /**
@@ -962,16 +962,34 @@ class Application extends App {
     protected function registerLegacyApiControllers(): void {
         $container = $this->getContainer();
 
+        $container->registerService('LegacyVersionApiController',
+            function (IAppContainer $c) {
+                return new LegacyVersionApiController(
+                    self::APP_NAME,
+                    $c->query('Request')
+                );
+            });
+
         $container->registerService('LegacyPasswordApiController',
             function (IAppContainer $c) {
                 return new LegacyPasswordApiController(
                     $c->query('Request'),
                     $c->query('TagService'),
                     $c->query('PasswordService'),
-                    $c->query('PasswordRevisionService')
+                    $c->query('TagRevisionService'),
+                    $c->query('PasswordRevisionService'),
+                    $c->query('PasswordTagRelationService')
                 );
             });
 
+        $container->registerService('LegacyCategoryApiController',
+            function (IAppContainer $c) {
+                return new LegacyCategoryApiController(
+                    $c->query('Request'),
+                    $c->query('TagService'),
+                    $c->query('TagRevisionService')
+                );
+            });
     }
 
     /**

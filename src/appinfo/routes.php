@@ -9,9 +9,9 @@ $application->registerRoutes($this, [
     'resources' => [
         'legacy_category_api' => ['url' => '/api/0.1/categories'],
         'legacy_password_api' => ['url' => '/api/0.1/passwords'],
-        'legacy_version_api' => ['url' => '/api/0.1/version']
+        'legacy_version_api'  => ['url' => '/api/0.1/version']
     ],
-    'routes' => [
+    'routes'    => [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
         ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
         ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
