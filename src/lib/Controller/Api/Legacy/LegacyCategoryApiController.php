@@ -173,7 +173,7 @@ class LegacyCategoryApiController extends ApiController {
             'id'             => $tag->getId(),
             'user_id'        => $tag->getUserId(),
             'category_name'  => $revision->getLabel(),
-            'category_color' => substr($revision->getColor(), 1)
+            'category_colour' => substr($revision->getColor(), 1)
         ];
     }
 }

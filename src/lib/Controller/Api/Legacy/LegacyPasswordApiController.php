@@ -281,9 +281,6 @@ class LegacyPasswordApiController extends ApiController {
             'datechanged' => date("Y-m-d", $revision->getCreated()),
             'notes'       => $revision->getNotes()
         ];
-        $properties = json_encode($properties);
-
-        //$properties = substr($properties, 1, strlen($properties) - 2);
 
         return [
             'id'            => $password->getId(),
@@ -295,7 +292,7 @@ class LegacyPasswordApiController extends ApiController {
             'notes'         => $revision->getNotes(),
             'deleted'       => $revision->isTrashed(),
             'creation_date' => date("Y-m-d", $password->getCreated()),
-            'properties'    => $properties
+            'properties'    => json_encode($properties)
         ];
     }
 
