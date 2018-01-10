@@ -94,7 +94,7 @@ class PageShotService {
 
         try {
             if(!$this->validationService->isValidDomain($domain)) {
-                $pageShot = $pageShotService->getDefaultPageShot();
+                $pageShot = $pageShotService->getDefaultPageShot('domain');
             } else {
                 $pageShot = $pageShotService->getPageShot($domain, $view);
             }
@@ -104,7 +104,7 @@ class PageShotService {
             $this->logger->error($e->getMessage());
 
             try {
-                $pageShot = $pageShotService->getDefaultPageShot();
+                $pageShot = $pageShotService->getDefaultPageShot($domain);
 
                 return $this->resizePageShot($pageShot, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
             } catch(\Throwable $e) {

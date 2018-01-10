@@ -78,7 +78,7 @@ class FaviconService {
         }
 
         if(!$this->validationService->isValidDomain($domain)) {
-            return $faviconService->getDefaultFavicon($domain, $size);
+            return $faviconService->getDefaultFavicon('default', $size);
         }
 
         try {
