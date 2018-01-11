@@ -253,13 +253,13 @@ class Application extends App {
     protected function registerController(): void {
         $container = $this->getContainer();
 
-        $container->registerService('PageController',
+        /*$container->registerService('PageController',
             function (IAppContainer $c) {
                 return new PageController(
                     self::APP_NAME,
                     $c->query('Request')
                 );
-            });
+            });*/
 
         $container->registerService('PasswordApiController',
             function (IAppContainer $c) {

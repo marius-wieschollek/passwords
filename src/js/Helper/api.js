@@ -1,16 +1,21 @@
+import $ from "jquery";
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
-let user = '';
-let password = false;
-if(user = prompt('Enter Nextcloud User')) {
-    password = prompt('Enter Nextcloud Password');
+class PwApi extends EnhancedApi {
+    constructor(debug = false) {
+        super(location.origin, null, null, debug);
+
+        $(window).on('load', () => {
+            let user = document.querySelector('head[data-user]').getAttribute('data-user');
+            let password = document.querySelector('meta[pwui-token]').getAttribute('pwui-token');
+            if(!password) password = prompt('Enter Nextcloud Password');
+
+            this.login(location.origin + '/index.php/apps/passwords/', user, password);
+        });
+    }
 }
 
-let api = {};
-if(user && password) {
-    api = new EnhancedApi(location.origin, user, password, true);
-} else {
-    alert('Authentication failure');
-}
+const api = new PwApi(true);
+
 
 export default api;

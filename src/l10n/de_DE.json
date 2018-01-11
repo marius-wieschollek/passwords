@@ -7,7 +7,8 @@
         "This application requires %s in order to work safely."                    : "Diese Anwendung benötigt %s um sicher zu funktionieren.",
         "Consult the %s to configure Nextcloud correctly."                         : "Wenn Sie der Administrator sind, lesen Sie die %s um Nextcloud korrekt zu konfigurieren.",
         "If you do not have a HTTPS certificate, get one for free from %s."        : "Sollten Sie kein HTTPS Zertifikat haben können Sie eines kostenlos bei %s erhalten.",
-        "If you think your server has HTTPS enabled, you can try to %s with HTTPS.": "Wenn HTTPS auf dem Server aktiviert ist können Sie die Seite %s."
+        "If you think your server has HTTPS enabled, you can try to %s with HTTPS.": "Wenn HTTPS auf dem Server aktiviert ist können Sie die Seite %s.",
+        "Passwords WebUI Access (see %s)"                                          : "Passwords WebUi Zugriff (siehe %s)"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

@@ -550,46 +550,46 @@ export default class SimpleApi {
         }
 
         let headers = new Headers();
-        for (let header in this._headers) {
-            if (!this._headers.hasOwnProperty(header)) continue;
+        for(let header in this._headers) {
+            if(!this._headers.hasOwnProperty(header)) continue;
             headers.append(header, this._headers[header]);
         }
         headers.append('Accept', 'application/' + dataType + ', text/plain, */*');
 
-        let options = {method : method, headers: headers};
-        if (data) {
-            headers.append('Content-Type','application/json');
-            options.body = JSON.stringify( data );
+        let options = {method: method, headers: headers};
+        if(data) {
+            headers.append('Content-Type', 'application/json');
+            options.body = JSON.stringify(data);
         }
 
         return new Promise((resolve, reject) => {
             fetch(new Request(this._endpoint + path, options))
                 .then((response) => {
-                    if (!response.ok) {
-                        if (this._debug) console.error('Request failed', request, response);
+                    if(!response.ok) {
+                        if(this._debug) console.error('Request failed', response);
                         reject(response)
                     }
                     response.json()
                         .then((d) => {resolve(d);})
                         .catch((response) => {
-                            if (this._debug) console.error('Encoding response failed', request, response);
+                            if(this._debug) console.error('Encoding response failed', response);
                             reject(response)
                         })
                 })
                 .catch((response) => {
-                    if (this._debug) console.error('Request failed', request, response);
+                    if(this._debug) console.error('Request failed', response);
                     reject(response)
                 });
         });
     }
 
     buildFormData(formData, data, parentKey) {
-        if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
+        if(data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
             Object.keys(data).forEach(key => {
-                this.buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+                this.buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]`:key);
             });
         } else {
-            const value = data == null ? '' : data;
+            const value = data == null ? '':data;
 
             formData.append(parentKey, value);
         }
