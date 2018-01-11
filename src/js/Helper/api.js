@@ -1,7 +1,10 @@
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
-let user = 'admin';
-let password = prompt('Enter Nextcloud Password');
+let user = '';
+let password = false;
+if(user = prompt('Enter Nextcloud User')) {
+    password = prompt('Enter Nextcloud Password');
+}
 
 let api = {};
 if(user && password) {

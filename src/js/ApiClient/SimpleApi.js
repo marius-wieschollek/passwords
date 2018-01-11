@@ -540,44 +540,8 @@ export default class SimpleApi {
      * @returns {Promise}
      * @private
      */
-/*    _createRequest(path, data = null, method = null, dataType = 'json') {
-
-        if(method === null) {
-            method = data === null ? 'GET':'POST';
-        }
-
-        if(Array.isArray(path)) {
-            path = SimpleApi.processUrl(this._paths[path[0]], path[1]);
-        } else {
-            path = this._paths[path];
-        }
-        this._headers['Cookie'] = '';
-
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                       type    : method,
-                       dataType: dataType,
-                       headers : this._headers,
-                       url     : this._endpoint + path,
-                       data    : data,
-                       success : (data) => { resolve(data); },
-                       error   : (data) => {
-                           try {
-                               let response = JSON.parse(data.responseText);
-                               data.message = response.message;
-                           } catch(e) {
-                               data.message = data.status + ': ' + data.statusText;
-                           }
-                           if(this._debug) console.error(data);
-                           reject(data);
-                       }
-                   });
-        });
-    }*/
     _createRequest(path, data = null, method = null, dataType = 'json') {
-        if(method === null) {
-            method = data === null ? 'GET':'POST';
-        }
+        if(method === null || method === 'GET') method = data === null ? 'GET':'POST';
 
         if(Array.isArray(path)) {
             path = SimpleApi.processUrl(this._paths[path[0]], path[1]);
@@ -591,21 +555,15 @@ export default class SimpleApi {
             headers.append(header, this._headers[header]);
         }
         headers.append('Accept', 'application/' + dataType + ', text/plain, */*');
-        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
-        if (data && method === 'GET') method = 'POST';
-        let options = {
-            method : method,
-            headers: headers
-        };
-        if (data) options.body = JSON.stringify(data);
-        let request = new Request(
-            this._endpoint + path,
-            options
-        );
+        let options = {method : method, headers: headers};
+        if (data) {
+            headers.append('Content-Type','application/json');
+            options.body = JSON.stringify( data );
+        }
 
         return new Promise((resolve, reject) => {
-            fetch(request)
+            fetch(new Request(this._endpoint + path, options))
                 .then((response) => {
                     if (!response.ok) {
                         if (this._debug) console.error('Request failed', request, response);
@@ -623,6 +581,26 @@ export default class SimpleApi {
                     reject(response)
                 });
         });
+    }
+
+    buildFormData(formData, data, parentKey) {
+        if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
+            Object.keys(data).forEach(key => {
+                this.buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+            });
+        } else {
+            const value = data == null ? '' : data;
+
+            formData.append(parentKey, value);
+        }
+    }
+
+    jsonToFormData(data) {
+        const formData = new FormData();
+
+        this.buildFormData(formData, data);
+
+        return formData;
     }
 
     /**
