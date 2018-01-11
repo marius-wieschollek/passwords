@@ -967,7 +967,6 @@ class Application extends App {
         $container->registerService('LegacyVersionApiController',
             function (IAppContainer $c) {
                 return new LegacyVersionApiController(
-                    self::APP_NAME,
                     $c->query('Request')
                 );
             });

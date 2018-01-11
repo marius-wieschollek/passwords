@@ -92,5 +92,8 @@ $application->registerRoutes($this, [
         ['name' => 'service_api#preflighted_cors', 'url' => '/api/1.0/service/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
         ['name' => 'settings_api#preflighted_cors', 'url' => '/api/1.0/setting/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
         ['name' => 'password_api#preflighted_cors', 'url' => '/api/1.0/password/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'legacy_version_api#preflighted_cors', 'url' => '/api/0.1/version/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'legacy_category_api#preflighted_cors', 'url' => '/api/1.0/category/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+        ['name' => 'legacy_password_api#preflighted_cors', 'url' => '/api/1.0/passwords/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ]
 ]);

@@ -540,7 +540,7 @@ export default class SimpleApi {
      * @returns {Promise}
      * @private
      */
-    _createRequest(path, data = null, method = null, dataType = 'json') {
+/*    _createRequest(path, data = null, method = null, dataType = 'json') {
 
         if(method === null) {
             method = data === null ? 'GET':'POST';
@@ -551,6 +551,7 @@ export default class SimpleApi {
         } else {
             path = this._paths[path];
         }
+        this._headers['Cookie'] = '';
 
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -571,6 +572,56 @@ export default class SimpleApi {
                            reject(data);
                        }
                    });
+        });
+    }*/
+    _createRequest(path, data = null, method = null, dataType = 'json') {
+        if(method === null) {
+            method = data === null ? 'GET':'POST';
+        }
+
+        if(Array.isArray(path)) {
+            path = SimpleApi.processUrl(this._paths[path[0]], path[1]);
+        } else {
+            path = this._paths[path];
+        }
+
+        let headers = new Headers();
+        for (let header in this._headers) {
+            if (!this._headers.hasOwnProperty(header)) continue;
+            headers.append(header, this._headers[header]);
+        }
+        headers.append('Accept', 'application/' + dataType + ', text/plain, */*');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+        if (data && method === 'GET') method = 'POST';
+        let options = {
+            method : method,
+            headers: headers
+        };
+        if (data) options.body = JSON.stringify(data);
+        let request = new Request(
+            this._endpoint + path,
+            options
+        );
+
+        return new Promise((resolve, reject) => {
+            fetch(request)
+                .then((response) => {
+                    if (!response.ok) {
+                        if (this._debug) console.error('Request failed', request, response);
+                        reject(response)
+                    }
+                    response.json()
+                        .then((d) => {resolve(d);})
+                        .catch((response) => {
+                            if (this._debug) console.error('Encoding response failed', request, response);
+                            reject(response)
+                        })
+                })
+                .catch((response) => {
+                    if (this._debug) console.error('Request failed', request, response);
+                    reject(response)
+                });
         });
     }
 

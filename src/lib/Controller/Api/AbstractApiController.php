@@ -24,7 +24,6 @@ use OCP\IRequest;
  */
 abstract class AbstractApiController extends ApiController {
 
-
     public function __construct(IRequest $request) {
         parent::__construct(
             Application::APP_NAME,

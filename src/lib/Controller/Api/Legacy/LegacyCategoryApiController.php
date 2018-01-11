@@ -59,6 +59,7 @@ class LegacyCategoryApiController extends ApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      */
@@ -84,6 +85,10 @@ class LegacyCategoryApiController extends ApiController {
     }
 
     /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param $id
      *
      * @return mixed
@@ -102,6 +107,10 @@ class LegacyCategoryApiController extends ApiController {
     }
 
     /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param $categoryName
      * @param $categoryColour
      *
@@ -125,6 +134,10 @@ class LegacyCategoryApiController extends ApiController {
     }
 
     /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
      * @param $id
      *
      * @return JSONResponse

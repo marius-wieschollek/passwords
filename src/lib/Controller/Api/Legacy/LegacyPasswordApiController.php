@@ -114,6 +114,7 @@ class LegacyPasswordApiController extends ApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -133,6 +134,7 @@ class LegacyPasswordApiController extends ApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -174,6 +176,7 @@ class LegacyPasswordApiController extends ApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
@@ -215,6 +218,7 @@ class LegacyPasswordApiController extends ApiController {
     }
 
     /**
+     * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
      *
