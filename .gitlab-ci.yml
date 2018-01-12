@@ -1,9 +1,10 @@
 stages:
-  - build
+  - compile
+  - assemble
   - pack
 
 compile:
-  stage: build
+  stage: compile
   script:
     - npm install
     - npm run build
@@ -13,13 +14,13 @@ compile:
       - ./src/css/*
 
 assemble:
-  stage: pack
+  stage: assemble
   script:
     - mkdir passwords
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
 
-zip:
+pack:
   stage: pack
   script:
     - tar -zcf passwords.tar.gz passwords
