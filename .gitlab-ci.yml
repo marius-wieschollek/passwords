@@ -2,8 +2,8 @@ stages:
   - build
   - pack
 
-npm-build:
-  stage: compile
+compile:
+  stage: build
   script:
     - npm install
     - npm run build
@@ -12,14 +12,14 @@ npm-build:
       - ./src/js/Static/*
       - ./src/css/*
 
-cleanup:
+assemble:
   stage: pack
   script:
     - mkdir passwords
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
 
-asseble:
+zip:
   stage: pack
   script:
     - tar -zcf passwords.tar.gz passwords
