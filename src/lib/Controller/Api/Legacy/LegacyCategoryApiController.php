@@ -93,8 +93,6 @@ class LegacyCategoryApiController extends ApiController {
      *
      * @return mixed
      * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function show($id): JSONResponse {
         /** @var Tag $tag */
@@ -117,8 +115,6 @@ class LegacyCategoryApiController extends ApiController {
      * @return JSONResponse
      * @throws \Exception
      * @throws \OCA\Passwords\Exception\ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function create($categoryName, $categoryColour): JSONResponse {
         /** @var Tag $model */

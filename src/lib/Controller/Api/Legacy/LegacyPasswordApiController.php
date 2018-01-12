@@ -149,7 +149,7 @@ class LegacyPasswordApiController extends ApiController {
      * @throws \OCA\Passwords\Exception\ApiException
      * @throws \Exception
      */
-    public function create($website, $pass, $loginname, $address, $notes, $category) {
+    public function create($website, $pass, $loginname, $address, $notes, $category): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->create();
         /** @var PasswordRevision $revision */
@@ -193,7 +193,7 @@ class LegacyPasswordApiController extends ApiController {
      * @return mixed
      * @throws \Exception
      */
-    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted, $sharewith = '') {
+    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted, $sharewith = ''): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);
@@ -226,10 +226,8 @@ class LegacyPasswordApiController extends ApiController {
      *
      * @return JSONResponse
      * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function destroy($id) {
+    public function destroy($id): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->findByUuid($id);
         /** @var PasswordRevision $oldRevision */
