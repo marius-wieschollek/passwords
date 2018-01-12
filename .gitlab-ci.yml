@@ -24,4 +24,4 @@ asseble:
     - gzip src
   artifacts:
     paths:
-      - *.zip
+      - ./*.zip
