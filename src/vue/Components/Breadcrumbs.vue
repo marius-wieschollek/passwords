@@ -1,5 +1,6 @@
 <template>
     <div id="controls">
+        <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
                 <a href="/index.php/apps/passwords">
@@ -113,6 +114,9 @@
             },
             createPassword() {
                 PasswordManager.createPassword(this.folder);
+            },
+            showNavigation() {
+                $('#app-content').toggleClass('mobile-open');
             }
         }
     };
@@ -143,10 +147,20 @@
             }
         }
 
+        #app-navigation-toggle {
+            top: 0;
+        }
+
         @keyframes delay-overflow {
             0% { overflow : hidden; }
             99% { overflow : hidden; }
             100% { overflow : visible; }
+        }
+
+        @media(min-width: $mobile-width) {
+            #app-navigation-toggle {
+                display: none;
+            }
         }
     }
 </style>

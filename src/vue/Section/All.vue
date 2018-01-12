@@ -72,13 +72,14 @@
         position   : relative;
         height     : 100%;
         overflow-y : auto;
-        transition : margin-right 300ms;
+        transition : margin-right 300ms, transform 300ms;
 
         .app-content-right {
-            z-index     : 50;
-            border-left : 1px solid $color-grey-light;
-            transition  : right 300ms;
-            right       : -27%;
+            background-color : white;
+            z-index          : 50;
+            border-left      : 1px solid $color-grey-light;
+            transition       : right 300ms;
+            right            : -27%;
         }
 
         &.show-details {
@@ -98,6 +99,27 @@
 
         .item-list {
             padding-top : 44px;
+        }
+
+        @media(max-width : $mobile-width) {
+            transform: translate3d(0, 0, 0);
+
+            .app-content-right {
+                border-left : none;
+                transition  : width 300ms;
+            }
+
+            &.show-details {
+                margin-right : 0;
+
+                .app-content-right {
+                    width : 100%;
+                }
+            }
+
+            &.mobile-open {
+                transform: translate3d(250px, 0px, 0px);
+            }
         }
     }
 

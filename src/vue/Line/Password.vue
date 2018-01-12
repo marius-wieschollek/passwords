@@ -283,6 +283,12 @@
                         }
                     }
                 }
+
+                @media(max-width: $mobile-width) {
+                    .date {
+                        display: none;
+                    }
+                }
             }
         }
     }
