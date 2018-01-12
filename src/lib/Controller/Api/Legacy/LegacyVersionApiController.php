@@ -6,7 +6,7 @@
  * Time: 10:47
  */
 
-namespace Controller\Api\Legacy;
+namespace OCA\Passwords\Controller\Api\Legacy;
 
 use OCA\Passwords\AppInfo\Application;
 use OCP\AppFramework\ApiController;

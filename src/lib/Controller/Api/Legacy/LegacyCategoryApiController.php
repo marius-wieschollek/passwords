@@ -6,7 +6,7 @@
  * Time: 12:03
  */
 
-namespace Controller\Api\Legacy;
+namespace OCA\Passwords\Controller\Api\Legacy;
 
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\Tag;

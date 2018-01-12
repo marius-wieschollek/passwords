@@ -8,16 +8,15 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use Controller\Api\Legacy\LegacyCategoryApiController;
-use Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Controller\AdminSettingsController;
 use OCA\Passwords\Controller\Api\FolderApiController;
+use OCA\Passwords\Controller\Api\Legacy\LegacyCategoryApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
+use OCA\Passwords\Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
-use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Cron\CheckPasswordsJob;
 use OCA\Passwords\Cron\SynchronizeShares;
 use OCA\Passwords\Db\Folder;

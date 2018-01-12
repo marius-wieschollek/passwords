@@ -308,7 +308,7 @@ class LegacyPasswordApiController extends ApiController {
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    protected function findCategoryForPassword(Password $password): Tag {
+    protected function findCategoryForPassword(Password $password): ?Tag {
         $tags = $this->tagService->findByPassword($password->getUuid());
 
         foreach($tags as $tag) {
