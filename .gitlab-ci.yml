@@ -3,7 +3,7 @@ stages:
   - assembling
   - packaging
 
-run-npm:
+NPM:
   stage: compiling
   script:
     - npm install
@@ -13,7 +13,7 @@ run-npm:
       - ./src/js/Static/*
       - ./src/css/*
 
-copy-files:
+Assemble:
   stage: assembling
   script:
     - mkdir passwords
@@ -23,7 +23,7 @@ copy-files:
     paths:
       - ./passwords
 
-run-tar:
+Pack:
   stage: packaging
   script:
     - tar -zcf passwords.tar.gz passwords
