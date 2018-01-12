@@ -1,4 +1,4 @@
-image: mkenney/npm:node-8-alpine
+image: npmrunner
 stages:
   - build
   - pack
