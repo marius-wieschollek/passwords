@@ -20,7 +20,7 @@ module.exports = env => {
         new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity})
     ];
 
-    if (env.production) {
+    if(env.production) {
         plugins.push(new OptimizeCSSPlugin({cssProcessorOptions: {safe: true}}));
         plugins.push(
             new UglifyJSPlugin(
@@ -42,9 +42,11 @@ module.exports = env => {
 
     return {
         entry  : {
-            app     : __dirname + '/src/js/app.js',
-            admin   : __dirname + '/src/js/admin.js',
-            personal: __dirname + '/src/js/personal.js'
+            app          : __dirname + '/src/js/app.js',
+            admin        : __dirname + '/src/js/admin.js',
+            utility      : __dirname + '/src/js/Helper/utility.js',
+            personal     : __dirname + '/src/js/personal.js',
+            compatibility: __dirname + '/src/js/Helper/compatibility.js'
         },
         output : {
             path    : __dirname + '/src/',

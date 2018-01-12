@@ -1,0 +1,27 @@
+stages:
+  - build
+  - pack
+
+npm-build:
+  stage: compile
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - ./src/js/Static/*
+      - ./src/css/*
+
+cleanup:
+  stage: pack
+  script:
+    - find src/js ! -name 'Static' -type f -exec rm -f {} +
+    - rm -rf src/scss src/vue
+
+asseble:
+  stage: pack
+  script:
+    - gzip src
+  artifacts:
+    paths:
+      - *.zip
