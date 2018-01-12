@@ -125,7 +125,7 @@ class FallbackIconGenerator {
      * @throws \Throwable
      */
     protected function createDefaultSvgAvatar(string $color, string $text, int $size): string {
-        $svg = file_get_contents(dirname(dirname(dirname(__DIR__))).'/img/Avatar.svg');
+        $svg = file_get_contents(dirname(dirname(dirname(__DIR__))).'/img/default.svg');
 
         $svg = str_replace('#000', $color, $svg);
         $svg = str_replace('#TXT', $text, $svg);

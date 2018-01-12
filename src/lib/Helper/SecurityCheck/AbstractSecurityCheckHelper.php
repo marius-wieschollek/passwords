@@ -107,7 +107,12 @@ abstract class AbstractSecurityCheckHelper {
 
                 if($this->config->getAppValue(self::CONFIG_DB_ENCODING) === self::ENCODING_GZIP) $data = gzuncompress($data);
 
-                $this->hashStatusCache[ $hash ] = !in_array($hash, json_decode($data, true));
+                $hashes = json_decode($data, true);
+                if(is_array($hashes)) {
+                    $this->hashStatusCache[ $hash ] = !in_array($hash, $hashes);
+                } else {
+                    $this->hashStatusCache[ $hash ] = true;
+                }
             } else {
                 $this->hashStatusCache[ $hash ] = true;
             }

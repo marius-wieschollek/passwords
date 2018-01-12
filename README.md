@@ -40,7 +40,7 @@ Thanks to the legacy API support you can even keep applications using the old AP
 #### Build upon modern standards
 Passwords is fast and uses modern web technology to give you the best experience possible.
 Rather than implementing own and possibly error-prone encryption algorithms Passwords uses standardized and well checked APIs to encrypt your passwords.
-**Soon to come:** The web interface is mobile friendly and can be used with any modern web browser.
+The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
 **Soon to come:** Passwords is available in english, german, french, spanish, italian, dutch and polish.
