@@ -151,6 +151,7 @@
                 font-size     : 0;
                 border-bottom : 1px solid $color-grey-lighter;
                 cursor        : pointer;
+                display       : flex;
 
                 .favourite {
                     line-height : 50px;
@@ -158,6 +159,7 @@
                     text-align  : center;
                     color       : $color-grey-light;
                     font-size   : 1rem;
+                    flex-shrink : 0;
 
                     &:hover,
                     &.active {
@@ -173,6 +175,7 @@
                     width           : 50px;
                     font-size       : 1rem;
                     cursor          : pointer;
+                    flex-shrink     : 0;
                 }
 
                 .title {
@@ -180,16 +183,20 @@
                     padding-left : 8px;
                     cursor       : pointer;
                     line-height  : 50px;
-                    display      : inline-flex;
+                    min-width    : 0;
+                    white-space  : nowrap;
+                    overflow     : hidden;
+                    text-overflow: ellipsis;
+                    flex-grow    : 1;
                 }
 
                 .more,
                 .security {
-                    float       : right;
                     line-height : 50px;
                     width       : 50px;
                     font-size   : 1rem;
                     text-align  : center;
+                    flex-shrink : 0;
 
                     &.security {
                         font-size : 1.25rem;
@@ -254,13 +261,13 @@
                 }
 
                 .date {
-                    float       : right;
                     line-height : 50px;
                     width       : 85px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
                     text-align  : right;
                     color       : $color-grey-darker;
+                    flex-shrink : 0;
                 }
 
                 &:active,
