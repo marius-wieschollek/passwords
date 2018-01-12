@@ -9,36 +9,18 @@
                 <div class="form">
                     <translate tag="div" class="section-title">General</translate>
                     <div class="form-grid">
-                        <translate tag="label" for="password-label">Name</translate>
-                        <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
                         <translate tag="label" for="password-username">Username</translate>
-                        <input id="password-username"
-                               type="text"
-                               name="username"
-                               maxlength="48"
-                               v-model="password.username"
-                               required>
+                        <input id="password-username" type="text" name="username" maxlength="48" v-model="password.username" required>
                         <translate tag="label" for="password-password">Password</translate>
                         <div class="password-field">
                             <div class="icons">
-                                <translate tag="i"
-                                           class="fa"
-                                           :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }"
-                                           @click="togglePasswordVisibility()"
-                                           title="Toggle visibility"/>
-                                <translate tag="i"
-                                           class="fa fa-refresh"
-                                           :class="{ 'fa-spin': showLoader }"
-                                           @click="generateRandomPassword()"
-                                           title="Generate password"/>
+                                <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
+                                <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
                             </div>
-                            <input id="password-password"
-                                   :type="showPassword ? 'text':'password'"
-                                   name="password"
-                                   maxlength="48"
-                                   v-model="password.password"
-                                   required>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required>
                         </div>
+                        <translate tag="label" for="password-label">Name</translate>
+                        <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
                         <translate tag="label" for="password-url">Website</translate>
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
@@ -214,6 +196,16 @@
                     grid-area : content;
                     overflow  : auto;
                 }
+
+                @media (max-width : $mobile-width) {
+                    border-radius : 0;
+                    top           : 0;
+                    left          : 0;
+                    bottom        : 0;
+                    right         : 0;
+                    width         : 100%;
+                    height        : 100%;
+                }
             }
         }
 
@@ -320,6 +312,34 @@
                     input {
                         width     : 100%;
                         font-size : 1.1rem;
+                    }
+                }
+
+                @media (max-width : $mobile-width) {
+                    grid-template-columns : 1fr;
+                    grid-template-rows    : 1fr;
+                    grid-template-areas   : "form" "notes" "controls";
+
+                    .notes {
+                        padding-top : 1.25rem;
+
+                        .CodeMirror {
+                            min-height : 100px;
+                            transition : min-height 0.25s;
+
+                            .CodeMirror-scroll {
+                                min-height : 100px;
+                                transition : min-height 0.25s;
+                            }
+
+                            &.CodeMirror-focused {
+                                min-height : 300px;
+
+                                .CodeMirror-scroll {
+                                    min-height : 300px;
+                                }
+                            }
+                        }
                     }
                 }
             }

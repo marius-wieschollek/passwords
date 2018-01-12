@@ -1,5 +1,6 @@
 let webpack = require('webpack');
 let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let ProgressBarPlugin = require('progress-bar-webpack-plugin');
 let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -17,6 +18,12 @@ module.exports = env => {
             }
         ),
         new ExtractTextPlugin('css/[name].css'),
+        new CopyWebpackPlugin(
+            [
+                {from: __dirname + '/src/js/Helper/utility.js', to: __dirname + '/src/js/Static/utility.js'},
+                {from: __dirname + '/src/js/Helper/compatibility.js', to: __dirname + '/src/js/Static/compatibility.js'}
+            ]
+        ),
         new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity})
     ];
 
@@ -42,11 +49,9 @@ module.exports = env => {
 
     return {
         entry  : {
-            app          : __dirname + '/src/js/app.js',
-            admin        : __dirname + '/src/js/admin.js',
-            utility      : __dirname + '/src/js/Helper/utility.js',
-            personal     : __dirname + '/src/js/personal.js',
-            compatibility: __dirname + '/src/js/Helper/compatibility.js'
+            app     : __dirname + '/src/js/app.js',
+            admin   : __dirname + '/src/js/admin.js',
+            personal: __dirname + '/src/js/personal.js'
         },
         output : {
             path    : __dirname + '/src/',

@@ -1,5 +1,4 @@
 /**
- *
  * @returns {Array.<*>}
  */
 Array.prototype.clone = function() {
@@ -7,7 +6,6 @@ Array.prototype.clone = function() {
 };
 
 /**
- *
  * @param index
  * @returns {*}
  */
@@ -22,7 +20,6 @@ Array.prototype.remove = function(index) {
 };
 
 /**
- *
  * @returns {string}
  */
 String.prototype.capitalize = function() {

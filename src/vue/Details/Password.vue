@@ -1,7 +1,7 @@
 <template>
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
-        <div class="image-container">
+        <div class="image-container" v-if="!isMobile">
             <a :href="object.url" target="_blank">
                 <img :class="image.className"
                      :style="image.style"
@@ -169,6 +169,9 @@
             },
             showPassword() {
                 return this.showPw ? this.object.password:''.padStart(this.object.password.length, '*');
+            },
+            isMobile() {
+                return window.innerWidth < 361;
             }
         },
 
@@ -267,6 +270,10 @@
                     &.s15 { transition : margin-top 15s ease-in-out; }
                     &.s20 { transition : margin-top 20s ease-in-out; }
                 }
+            }
+
+            &.hidden {
+                display: none;
             }
         }
 
@@ -445,6 +452,16 @@
                 &:hover {
                     background-color : darken($color-white, 3);
                 }
+            }
+        }
+
+        @media (max-width : $mobile-width) {
+            .image-container {
+                display : none;
+            }
+
+            .title {
+                margin-bottom : 1rem;
             }
         }
     }

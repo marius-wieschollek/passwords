@@ -102,7 +102,7 @@
         }
 
         @media(max-width : $mobile-width) {
-            transform: translate3d(0, 0, 0);
+            transform : translate3d(0, 0, 0);
 
             .app-content-right {
                 border-left : none;
@@ -112,13 +112,17 @@
             &.show-details {
                 margin-right : 0;
 
+                .app-content-left {
+                    display : none;
+                }
                 .app-content-right {
                     width : 100%;
+                    top   : 0;
                 }
             }
 
             &.mobile-open {
-                transform: translate3d(250px, 0px, 0px);
+                transform : translate3d(250px, 0px, 0px);
             }
         }
     }

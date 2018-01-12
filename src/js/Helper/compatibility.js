@@ -1,9 +1,5 @@
 $(window).on('load', checkSystem);
 
-/**
- *
- * @returns {boolean}
- */
 function isCompatibleBrowser() {
     try {
         eval('"use strict"; class PasswordsTestBrowserClassSupport {}');
@@ -16,9 +12,6 @@ function isCompatibleBrowser() {
     }
 }
 
-/**
- *
- */
 function showBrowserCompatibilityWarning() {
     var imgpath = $('[data-constant=imagePath]').attr('data-value') + 'browser/';
     $('#main').html(

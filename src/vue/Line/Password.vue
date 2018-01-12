@@ -16,6 +16,8 @@
                     <ul>
                         <slot name="option-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
+                        <translate tag="li" v-if="isMobile" @click="copyPasswordAction()" icon="clipboard">Copy Password</translate>
+                        <translate tag="li" v-if="isMobile" @click="copyUsernameAction()" icon="clipboard">Copy User</translate>
                         <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
@@ -68,12 +70,15 @@
                     case 2:
                         return 'fail';
                 }
+            },
+            isMobile() {
+                return window.innerWidth < 361;
             }
         },
 
         methods: {
             copyPasswordAction($event) {
-                if($event.detail !== 1 || $($event.target).closest('.more').length !== 0) return;
+                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0)) return;
                 Utility.copyToClipboard(this.password.password);
 
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
@@ -81,7 +86,7 @@
                     setTimeout(function() { Messages.notification('Password was copied to clipboard') }, 300);
             },
             copyUsernameAction($event) {
-                if($($event.target).closest('.more').length !== 0) return;
+                if($event && $($event.target).closest('.more').length !== 0) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 Utility.copyToClipboard(this.password.username);
