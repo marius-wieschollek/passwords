@@ -1,3 +1,4 @@
+image: mkenney/npm:node-8-alpine
 stages:
   - build
   - pack
