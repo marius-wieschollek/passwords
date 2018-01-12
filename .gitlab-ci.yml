@@ -15,13 +15,14 @@ npm-build:
 cleanup:
   stage: pack
   script:
-    - find src/js ! -name 'Static' -type f -exec rm -f {} +
-    - rm -rf src/scss src/vue
+    - mkdir passwords
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
+    - rsync -r src/js/Static passwords/js/
 
 asseble:
   stage: pack
   script:
-    - gzip src
+    - tar -zcf passwords.tar.gz passwords
   artifacts:
     paths:
-      - ./*.zip
+      - ./passwords.tar.gz
