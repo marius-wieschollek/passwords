@@ -55,12 +55,11 @@ abstract class AbstractSecurityCheckHelper {
      * @param LoggingService       $logger
      */
     public function __construct(
+        LoggingService $logger,
         FileCacheService $fileCacheService,
-        ConfigurationService $configurationService,
-        LoggingService $logger
+        ConfigurationService $configurationService
     ) {
-        $fileCacheService->setDefaultCache($fileCacheService::PASSWORDS_CACHE);
-        $this->fileCacheService = $fileCacheService;
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
         $this->config           = $configurationService;
         $this->logger           = $logger;
     }

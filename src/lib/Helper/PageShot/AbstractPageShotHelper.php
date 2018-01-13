@@ -48,8 +48,7 @@ abstract class AbstractPageShotHelper {
      * @param ConfigurationService $config
      */
     public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
-        $fileCacheService->setDefaultCache($fileCacheService::PAGESHOT_CACHE);
-        $this->fileCacheService = $fileCacheService;
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PAGESHOT_CACHE);
         $this->config           = $config;
     }
 

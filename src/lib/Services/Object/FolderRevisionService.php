@@ -10,8 +10,11 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\ValidationService;
 
 /**
  * Class FolderRevisionService
@@ -23,6 +26,25 @@ class FolderRevisionService extends AbstractRevisionService {
     const BASE_REVISION_UUID = '00000000-0000-0000-0000-000000000000';
 
     protected $class = FolderRevision::class;
+
+    /**
+     * FolderRevisionService constructor.
+     *
+     * @param null|string          $userId
+     * @param HookManager          $hookManager
+     * @param FolderRevisionMapper $revisionMapper
+     * @param ValidationService    $validationService
+     * @param EncryptionService    $encryptionService
+     */
+    public function __construct(
+        ?string $userId,
+        HookManager $hookManager,
+        FolderRevisionMapper $revisionMapper,
+        ValidationService $validationService,
+        EncryptionService $encryptionService
+    ) {
+        parent::__construct($userId, $hookManager, $revisionMapper, $validationService, $encryptionService);
+    }
 
     /**
      * @param string $uuid

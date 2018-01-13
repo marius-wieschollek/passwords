@@ -41,13 +41,13 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @param HaveIBeenPwnedHelper          $hibpSecurityCheck
      */
     public function __construct(
-        FileCacheService $fileCacheService,
-        ConfigurationService $configurationService,
         LoggingService $logger,
-        BigLocalDbSecurityCheckHelper $localSecurityCheck,
-        HaveIBeenPwnedHelper $hibpSecurityCheck
+        FileCacheService $fileCacheService,
+        HaveIBeenPwnedHelper $hibpSecurityCheck,
+        ConfigurationService $configurationService,
+        BigLocalDbSecurityCheckHelper $localSecurityCheck
     ) {
-        parent::__construct($fileCacheService, $configurationService, $logger);
+        parent::__construct($logger, $fileCacheService, $configurationService);
         $this->localSecurityCheck = $localSecurityCheck;
         $this->hibpSecurityCheck  = $hibpSecurityCheck;
     }

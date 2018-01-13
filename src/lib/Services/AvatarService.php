@@ -47,10 +47,9 @@ class AvatarService {
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
-        $fileCacheService->setDefaultCache($fileCacheService::AVATAR_CACHE);
-        $this->userManager           = $userManager;
-        $this->fileCacheService      = $fileCacheService;
+        $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::AVATAR_CACHE);
         $this->fallbackIconGenerator = $fallbackIconGenerator;
+        $this->userManager           = $userManager;
     }
 
     /**

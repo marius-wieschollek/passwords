@@ -188,7 +188,7 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws \OCP\PreConditionNotMetException
      */
     protected function getUserKey(string $userId): string {
-        if($this->userId !== null && $this->userId !== $userId) {
+        if($this->userId !== null && $this->userId !== $userId && !$this->configurationService->getSystemValue('maintenance', false)) {
             throw new Exception('User key requested with illegal user id: '.$userId);
         }
         $userKey = $this->configurationService->getUserValue('SSEv1UserKey', null, $userId);

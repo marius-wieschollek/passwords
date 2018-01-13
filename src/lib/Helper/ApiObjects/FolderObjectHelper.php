@@ -257,7 +257,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
      */
     protected function getPasswordObjectHelper(): PasswordObjectHelper {
         if(!$this->passwordObjectHelper) {
-            $this->passwordObjectHelper = $this->container->query('PasswordObjectHelper');
+            $this->passwordObjectHelper = $this->container->query(PasswordObjectHelper::class);
         }
 
         return $this->passwordObjectHelper;

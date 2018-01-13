@@ -283,7 +283,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     protected function getTagObjectHelper(): TagObjectHelper {
         if(!$this->tagObjectHelper) {
-            $this->tagObjectHelper = $this->container->query('TagObjectHelper');
+            $this->tagObjectHelper = $this->container->query(TagObjectHelper::class);
         }
 
         return $this->tagObjectHelper;
@@ -295,7 +295,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     protected function getFolderObjectHelper(): FolderObjectHelper {
         if(!$this->folderObjectHelper) {
-            $this->folderObjectHelper = $this->container->query('FolderObjectHelper');
+            $this->folderObjectHelper = $this->container->query(FolderObjectHelper::class);
         }
 
         return $this->folderObjectHelper;
@@ -307,7 +307,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     protected function getShareObjectHelper(): ShareObjectHelper {
         if(!$this->shareObjectHelper) {
-            $this->shareObjectHelper = $this->container->query('ShareObjectHelper');
+            $this->shareObjectHelper = $this->container->query(ShareObjectHelper::class);
         }
 
         return $this->shareObjectHelper;

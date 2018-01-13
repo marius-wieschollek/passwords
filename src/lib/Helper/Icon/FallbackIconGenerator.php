@@ -11,6 +11,7 @@ namespace OCA\Passwords\Helper\Icon;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\HelperService;
 
 /**
  * Class FallbackIconGenerator
@@ -53,10 +54,13 @@ class FallbackIconGenerator {
     /**
      * AvatarService constructor.
      *
-     * @param AbstractImageHelper $imageHelper
+     * @param HelperService        $helperService
+     * @param ConfigurationService $configurationService
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
-    public function __construct(AbstractImageHelper $imageHelper, ConfigurationService $configurationService) {
-        $this->imageHelper          = $imageHelper;
+    public function __construct(HelperService $helperService, ConfigurationService $configurationService) {
+        $this->imageHelper          = $helperService->getImageHelper();
         $this->configurationService = $configurationService;
     }
 

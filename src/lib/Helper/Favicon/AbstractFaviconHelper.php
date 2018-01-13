@@ -12,6 +12,7 @@ use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -44,19 +45,20 @@ abstract class AbstractFaviconHelper {
     /**
      * AbstractFaviconHelper constructor.
      *
-     * @param AbstractImageHelper   $imageHelper
+     * @param HelperService         $helperService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
-        AbstractImageHelper $imageHelper,
+        HelperService $helperService,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
-        $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
-        $this->imageHelper           = $imageHelper;
-        $this->fileCacheService      = $fileCacheService;
+        $this->imageHelper           = $helperService->getImageHelper();
         $this->fallbackIconGenerator = $fallbackIconGenerator;
+        $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
     }
 
     /**
@@ -92,15 +94,15 @@ abstract class AbstractFaviconHelper {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $domain = preg_replace('/^(m|de|www|www2|mail|email|login|signin)\./', '' , $domain);
+        $domain  = preg_replace('/^(m|de|www|www2|mail|email|login|signin)\./', '', $domain);
         $content = $this->fallbackIconGenerator->createIcon($domain, $size);
 
         return $this->fileCacheService->putFile($fileName, $content);
     }
 
     /**
-     * @param string   $domain
-     * @param int $size
+     * @param string $domain
+     * @param int    $size
      *
      * @return string
      */

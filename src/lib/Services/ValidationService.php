@@ -23,17 +23,17 @@ use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 class ValidationService {
 
     /**
-     * @var AbstractSecurityCheckHelper
+     * @var HelperService
      */
-    protected $securityCheck;
+    private $helperService;
 
     /**
      * ValidationService constructor.
      *
-     * @param AbstractSecurityCheckHelper $securityCheck
+     * @param HelperService $helperService
      */
-    public function __construct(AbstractSecurityCheckHelper $securityCheck) {
-        $this->securityCheck = $securityCheck;
+    public function __construct(HelperService $helperService) {
+        $this->helperService = $helperService;
     }
 
     /**
@@ -41,6 +41,7 @@ class ValidationService {
      *
      * @return PasswordRevision
      * @throws ApiException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function validateRevision(PasswordRevision $revision): PasswordRevision {
         if(empty($revision->getSseType())) {
@@ -59,7 +60,8 @@ class ValidationService {
             throw new ApiException('Field "hash" can not be empty', 400);
         }
         if($revision->getStatus() == 0) {
-            $revision->setStatus($this->securityCheck->getRevisionSecurityLevel($revision));
+            $securityCheck = $this->helperService->getSecurityHelper();
+            $revision->setStatus($securityCheck->getRevisionSecurityLevel($revision));
         }
 
         return $revision;

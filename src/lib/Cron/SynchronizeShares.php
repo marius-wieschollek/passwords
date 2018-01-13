@@ -26,6 +26,11 @@ use OCP\AppFramework\Db\DoesNotExistException;
 class SynchronizeShares extends TimedJob {
 
     /**
+     * @var LoggingService
+     */
+    protected $logger;
+
+    /**
      * @var ShareService
      */
     protected $shareService;
@@ -39,11 +44,6 @@ class SynchronizeShares extends TimedJob {
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
-
-    /**
-     * @var LoggingService
-     */
-    protected $logger;
 
     /**
      * SynchronizeShares constructor.

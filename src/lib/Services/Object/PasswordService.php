@@ -11,6 +11,7 @@ namespace OCA\Passwords\Services\Object;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
+use OCA\Passwords\Hooks\Manager\HookManager;
 
 /**
  * Class PasswordService
@@ -28,6 +29,17 @@ class PasswordService extends AbstractModelService {
      * @var string
      */
     protected $class = Password::class;
+
+    /**
+     * PasswordService constructor.
+     *
+     * @param null|string    $userId
+     * @param HookManager    $hookManager
+     * @param PasswordMapper $mapper
+     */
+    public function __construct(?string $userId, HookManager $hookManager, PasswordMapper $mapper) {
+        parent::__construct($userId, $hookManager, $mapper);
+    }
 
     /**
      * @param string $uuid

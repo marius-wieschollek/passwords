@@ -47,6 +47,23 @@ class FolderApiController extends AbstractObjectApiController {
     protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'trashed', 'favourite'];
 
     /**
+     * FolderApiController constructor.
+     *
+     * @param IRequest              $request
+     * @param FolderService         $modelService
+     * @param FolderObjectHelper    $objectHelper
+     * @param FolderRevisionService $revisionService
+     */
+    public function __construct(
+        IRequest $request,
+        FolderService $modelService,
+        FolderObjectHelper $objectHelper,
+        FolderRevisionService $revisionService
+    ) {
+        parent::__construct($request, $modelService, $objectHelper, $revisionService);
+    }
+
+    /**
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired

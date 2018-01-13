@@ -13,6 +13,7 @@ use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Hooks\Manager\HookManager;
 
 /**
  * Class FolderService
@@ -32,6 +33,17 @@ class FolderService extends AbstractModelService {
      * @var string
      */
     protected $class = Folder::class;
+
+    /**
+     * AbstractParentEntityService constructor.
+     *
+     * @param string         $userId
+     * @param FolderMapper $mapper
+     * @param HookManager    $hookManager
+     */
+    public function __construct(?string $userId, HookManager $hookManager, FolderMapper $mapper) {
+        parent::__construct($userId, $hookManager, $mapper);
+    }
 
     /**
      * @param string $uuid

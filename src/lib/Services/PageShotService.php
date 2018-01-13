@@ -55,8 +55,7 @@ class PageShotService {
         ValidationService $validationService,
         LoggingService $logger
     ) {
-        $fileCacheService->setDefaultCache($fileCacheService::PAGESHOT_CACHE);
-        $this->fileCacheService  = $fileCacheService;
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PAGESHOT_CACHE);
         $this->validationService = $validationService;
         $this->helperService     = $helperService;
         $this->logger            = $logger;

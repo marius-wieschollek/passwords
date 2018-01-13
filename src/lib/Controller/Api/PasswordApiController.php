@@ -81,12 +81,12 @@ class PasswordApiController extends AbstractObjectApiController {
         IRequest $request,
         TagService $tagService,
         PasswordService $modelService,
+        PasswordObjectHelper $objectHelper,
         TagRevisionService $tagRevisionService,
         PasswordRevisionService $revisionService,
-        PasswordObjectHelper $objectHelper,
         PasswordTagRelationService $relationService
     ) {
-        parent::__construct($request, $modelService, $revisionService, $objectHelper);
+        parent::__construct($request, $modelService, $objectHelper, $revisionService);
 
         $this->tagService         = $tagService;
         $this->relationService    = $relationService;

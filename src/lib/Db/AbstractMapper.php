@@ -10,6 +10,7 @@ namespace OCA\Passwords\Db;
 
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\Mapper;
+use OCP\IConfig;
 use OCP\IDBConnection;
 
 /**
@@ -45,11 +46,16 @@ abstract class AbstractMapper extends Mapper {
      * AbstractMapper constructor.
      *
      * @param IDBConnection $db
+     * @param IConfig       $config
      * @param string|null   $userId
      */
-    public function __construct(IDBConnection $db, string $userId = null) {
+    public function __construct(IDBConnection $db, IConfig $config, string $userId = null) {
         parent::__construct($db, static::TABLE_NAME);
+
         $this->userId = $userId;
+        if($config->getSystemValue('maintenance', false)) {
+            $this->userId = null;
+        }
     }
 
     /**

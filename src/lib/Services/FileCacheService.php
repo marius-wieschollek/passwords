@@ -254,9 +254,23 @@ class FileCacheService {
     }
 
     /**
+     * @param string $cache
+     *
+     * @return FileCacheService
+     */
+    public function getCacheService(string $cache = self::DEFAULT_CACHE): FileCacheService {
+        if(!$this->hasCache($cache)) $cache = self::DEFAULT_CACHE;
+
+        $service = clone $this;
+        $service->setDefaultCache($cache);
+
+        return $service;
+    }
+
+    /**
      * @param string $defaultCache
      */
-    public function setDefaultCache(string $defaultCache = self::DEFAULT_CACHE) {
+    protected function setDefaultCache(string $defaultCache = self::DEFAULT_CACHE) {
         $this->defaultCache = $defaultCache;
     }
 }

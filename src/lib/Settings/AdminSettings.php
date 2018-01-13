@@ -24,15 +24,15 @@ use OCP\Settings\ISettings;
  * @package OCA\Passwords\Settings
  */
 class AdminSettings implements ISettings {
-    /**
-     * @var IL10N
-     */
-    protected $localisation;
 
     /**
      * @var ConfigurationService
      */
     protected $config;
+    /**
+     * @var IL10N
+     */
+    protected $localisation;
 
     /**
      * @var FileCacheService
@@ -42,12 +42,12 @@ class AdminSettings implements ISettings {
     /**
      * AdminSettings constructor.
      *
-     * @param IL10N                $localisationService
+     * @param IL10N                $localisation
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
-    public function __construct(IL10N $localisationService, ConfigurationService $config, FileCacheService $fileCacheService) {
-        $this->localisation     = $localisationService;
+    public function __construct(IL10N $localisation, ConfigurationService $config, FileCacheService $fileCacheService) {
+        $this->localisation     = $localisation;
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
     }

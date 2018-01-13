@@ -10,7 +10,9 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\ValidationService;
 
 /**
  * Class PasswordRevisionService
@@ -28,6 +30,25 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @var string
      */
     protected $class = PasswordRevision::class;
+
+    /**
+     * PasswordRevisionService constructor.
+     *
+     * @param null|string            $userId
+     * @param HookManager            $hookManager
+     * @param PasswordRevisionMapper $revisionMapper
+     * @param ValidationService      $validationService
+     * @param EncryptionService      $encryptionService
+     */
+    public function __construct(
+        ?string $userId,
+        HookManager $hookManager,
+        PasswordRevisionMapper $revisionMapper,
+        ValidationService $validationService,
+        EncryptionService $encryptionService
+    ) {
+        parent::__construct($userId, $hookManager, $revisionMapper, $validationService, $encryptionService);
+    }
 
     /**
      * @param string $model

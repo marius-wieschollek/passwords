@@ -30,11 +30,6 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected $icoFile;
 
     /**
-     * @var AbstractImageHelper
-     */
-    protected $imageHelper;
-
-    /**
      * @param string $domain
      * @param int    $size
      *

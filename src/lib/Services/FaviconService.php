@@ -52,8 +52,7 @@ class FaviconService {
         ValidationService $validationService,
         LoggingService $logger
     ) {
-        $fileCacheService->setDefaultCache($fileCacheService::FAVICON_CACHE);
-        $this->fileCacheService  = $fileCacheService;
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
         $this->validationService = $validationService;
         $this->helperService     = $helperService;
         $this->logger            = $logger;

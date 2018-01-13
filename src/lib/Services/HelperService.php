@@ -11,10 +11,29 @@ namespace OCA\Passwords\Services;
 use Gmagick;
 use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
+use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
+use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
+use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
+use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
+use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
+use OCA\Passwords\Helper\Image\GdHelper;
+use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
+use OCA\Passwords\Helper\PageShot\DefaultPageShotHelper;
+use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
+use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
+use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
+use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Helper\Words\RandomCharactersHelper;
+use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCP\AppFramework\IAppContainer;
 
 /**
@@ -59,20 +78,13 @@ class HelperService {
     protected $container;
 
     /**
-     * @var FileCacheService
-     */
-    protected $fileCacheService;
-
-    /**
      * FaviconService constructor.
      *
      * @param ConfigurationService $config
-     * @param FileCacheService     $fileCacheService
      * @param IAppContainer        $container
      */
-    public function __construct(ConfigurationService $config, FileCacheService $fileCacheService, IAppContainer $container) {
+    public function __construct(ConfigurationService $config, IAppContainer $container) {
         $this->config           = $config;
-        $this->fileCacheService = $fileCacheService;
         $this->container        = $container;
     }
 
@@ -84,10 +96,10 @@ class HelperService {
         $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
 
         if($service == self::IMAGES_IMAGICK && class_exists(Imagick::class) || class_exists(Gmagick::class)) {
-            return $this->container->query('ImagickHelper');
+            return $this->container->query(ImagickHelper::class);
         }
 
-        return $this->container->query('GdHelper');
+        return $this->container->query(GdHelper::class);
     }
 
     /**
@@ -99,18 +111,18 @@ class HelperService {
 
         switch($service) {
             case self::PAGESHOT_WKHTML:
-                return $this->container->query('WkhtmlImageHelper');
+                return $this->container->query(WkhtmlImageHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_API:
-                return $this->container->query('ScreenShotApiHelper');
+                return $this->container->query(ScreenShotApiHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_LAYER:
-                return $this->container->query('ScreenShotLayerHelper');
+                return $this->container->query(ScreenShotLayerHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_MACHINE:
-                return $this->container->query('ScreenShotMachineHelper');
+                return $this->container->query(ScreenShotMachineHelper::class);
             case self::PAGESHOT_DEFAULT:
-                return $this->container->query('DefaultPageShotHelper');
+                return $this->container->query(DefaultPageShotHelper::class);
         }
 
-        return $this->container->query('DefaultPageShotHelper');
+        return $this->container->query(DefaultPageShotHelper::class);
     }
 
     /**
@@ -122,18 +134,18 @@ class HelperService {
 
         switch($service) {
             case self::FAVICON_BETTER_IDEA:
-                return $this->container->query('BetterIdeaHelper');
+                return $this->container->query(BetterIdeaHelper::class);
             case self::FAVICON_DUCK_DUCK_GO:
-                return $this->container->query('DuckDuckGoHelper');
+                return $this->container->query(DuckDuckGoHelper::class);
             case self::FAVICON_GOOGLE:
-                return $this->container->query('GoogleFaviconHelper');
+                return $this->container->query(GoogleFaviconHelper::class);
             case self::FAVICON_LOCAL:
-                return $this->container->query('LocalFaviconHelper');
+                return $this->container->query(LocalFaviconHelper::class);
             case self::FAVICON_DEFAULT:
-                return $this->container->query('DefaultFaviconHelper');
+                return $this->container->query(DefaultFaviconHelper::class);
         }
 
-        return $this->container->query('LocalFaviconHelper');
+        return $this->container->query(LocalFaviconHelper::class);
     }
 
     /**
@@ -145,14 +157,14 @@ class HelperService {
 
         switch($service) {
             case self::WORDS_LOCAL:
-                return $this->container->query('LocalWordsHelper');
+                return $this->container->query(LocalWordsHelper::class);
             case self::WORDS_RANDOM:
-                return $this->container->query('RandomCharactersHelper');
+                return $this->container->query(RandomCharactersHelper::class);
             case self::WORDS_SNAKES:
-                return $this->container->query('SnakesWordsHelper');
+                return $this->container->query(SnakesWordsHelper::class);
         }
 
-        return $this->container->query('SnakesWordsHelper');
+        return $this->container->query(SnakesWordsHelper::class);
     }
 
     /**
@@ -164,15 +176,15 @@ class HelperService {
 
         switch($service) {
             case self::SECURITY_HIBP:
-                return $this->container->query('HaveIBeenPwnedHelper');
+                return $this->container->query(HaveIBeenPwnedHelper::class);
             case self::SECURITY_BIG_LOCAL:
-                return $this->container->query('BigLocalDbSecurityCheckHelper');
+                return $this->container->query(BigLocalDbSecurityCheckHelper::class);
             case self::SECURITY_SMALL_LOCAL:
-                return $this->container->query('SmallLocalDbSecurityCheckHelper');
+                return $this->container->query(SmallLocalDbSecurityCheckHelper::class);
             case self::SECURITY_BIGDB_HIBP:
-                return $this->container->query('BigDbPlusHibpSecurityCheckHelper');
+                return $this->container->query(BigDbPlusHibpSecurityCheckHelper::class);
         }
 
-        return $this->container->query('HaveIBeenPwnedHelper');
+        return $this->container->query(HaveIBeenPwnedHelper::class);
     }
 }

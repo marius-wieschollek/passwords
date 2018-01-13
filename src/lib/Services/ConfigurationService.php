@@ -37,6 +37,9 @@ class ConfigurationService {
     public function __construct(?string $userId, IConfig $config) {
         $this->config = $config;
         $this->userId = $userId;
+        if($this->config->getSystemValue('maintenance', false)) {
+            $this->userId = null;
+        }
     }
 
     /**

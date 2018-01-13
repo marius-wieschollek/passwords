@@ -45,18 +45,18 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType'];
 
     /**
-     * PasswordApiController constructor.
+     * AbstractObjectApiController constructor.
      *
      * @param IRequest                $request
      * @param AbstractModelService    $modelService
-     * @param AbstractRevisionService $revisionService
      * @param AbstractObjectHelper    $objectHelper
+     * @param AbstractRevisionService $revisionService
      */
     public function __construct(
         IRequest $request,
         AbstractModelService $modelService,
-        AbstractRevisionService $revisionService,
-        AbstractObjectHelper $objectHelper
+        AbstractObjectHelper $objectHelper,
+        AbstractRevisionService $revisionService
     ) {
         parent::__construct($request);
         $this->modelService    = $modelService;

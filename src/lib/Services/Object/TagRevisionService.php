@@ -9,7 +9,10 @@
 namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Db\TagRevisionMapper;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\ValidationService;
 
 /**
  * Class TagRevisionService
@@ -22,6 +25,25 @@ class TagRevisionService extends AbstractRevisionService {
      * @var string
      */
     protected $class = TagRevision::class;
+
+    /**
+     * TagRevisionService constructor.
+     *
+     * @param null|string       $userId
+     * @param HookManager       $hookManager
+     * @param TagRevisionMapper $revisionMapper
+     * @param ValidationService $validationService
+     * @param EncryptionService $encryptionService
+     */
+    public function __construct(
+        ?string $userId,
+        HookManager $hookManager,
+        TagRevisionMapper $revisionMapper,
+        ValidationService $validationService,
+        EncryptionService $encryptionService
+    ) {
+        parent::__construct($userId, $hookManager, $revisionMapper, $validationService, $encryptionService);
+    }
 
     /**
      * @param string $model
