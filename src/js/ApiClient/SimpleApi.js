@@ -503,6 +503,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getPreview(host, view = 'desktop', width = '550', height = '350...') {
+        if(host === null) host = 'default';
         return this._createRequest(
             ['service.preview', {domain: host, view: view, width: width, height: height}],
             null,
@@ -521,6 +522,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getPreviewUrl(host, view = 'desktop', width = '560', height = '350...') {
+        if(host === null) host = 'default';
         return this._endpoint + SimpleApi.processUrl(
             this._paths['service.preview'],
             {domain: host, view: view, width: width, height: height}

@@ -33,9 +33,9 @@ class ScreenShotLayerHelper extends AbstractPageShotHelper {
         $apiKey = $this->config->getAppValue('service/pageshot/ssl/key');
 
         if($view === PageShotService::VIEWPORT_DESKTOP) {
-            return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport={$this::VIEWPORT_DESKTOP}&width=720&fullpage=1&url=http://{$domain}";
+            return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport=".self::VIEWPORT_DESKTOP."&width=720&fullpage=1&url=http://{$domain}";
         }
 
-        return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport={$this::VIEWPORT_MOBILE}&width=720&fullpage=1&url=http://{$domain}";
+        return "http://api.screenshotlayer.com/api/capture?access_key={$apiKey}&viewport=".self::VIEWPORT_MOBILE."&width=720&fullpage=1&url=http://{$domain}";
     }
 }

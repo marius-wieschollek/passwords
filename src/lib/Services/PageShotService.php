@@ -92,7 +92,7 @@ class PageShotService {
 
         try {
             if(!$this->validationService->isValidDomain($domain)) {
-                $pageShot = $pageShotService->getDefaultPageShot('domain');
+                $pageShot = $pageShotService->getDefaultPageShot('default');
             } else {
                 $pageShot = $pageShotService->getPageShot($domain, $view);
             }
