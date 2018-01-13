@@ -32,6 +32,11 @@ class ServiceApiController extends AbstractApiController {
     protected $wordsService;
 
     /**
+     * @var AvatarService
+     */
+    protected $avatarService;
+
+    /**
      * @var FaviconService
      */
     protected $faviconService;
@@ -40,11 +45,6 @@ class ServiceApiController extends AbstractApiController {
      * @var PageShotService
      */
     protected $previewService;
-
-    /**
-     * @var AvatarService
-     */
-    protected $avatarService;
 
     /**
      * ServiceApiController constructor.
@@ -75,27 +75,23 @@ class ServiceApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws \Throwable
      */
     public function generatePassword(): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
+        list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
 
-            if(empty($password)) throw new ApiException('Unable to generate password');
+        if(empty($password)) throw new ApiException('Unable to generate password');
 
-            return $this->createJsonResponse(
-                [
-                    'password' => $password,
-                    'words'    => $words,
-                    'strength' => 1,
-                    'numbers'  => false,
-                    'special'  => false,
-                    'smileys'  => false
-                ]
-            );
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse(
+            [
+                'password' => $password,
+                'words'    => $words,
+                'strength' => 1,
+                'numbers'  => false,
+                'special'  => false,
+                'smileys'  => false
+            ]
+        );
     }
 
     /**
@@ -106,15 +102,12 @@ class ServiceApiController extends AbstractApiController {
      * @param int    $size
      *
      * @return FileDisplayResponse|JSONResponse
+     * @throws \Throwable
      */
     public function getAvatar(string $user, int $size = 32) {
-        try {
-            $file = $this->avatarService->getAvatar($user, $size);
+        $file = $this->avatarService->getAvatar($user, $size);
 
-            return $this->createFileDisplayResponse($file);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createFileDisplayResponse($file);
     }
 
     /**
@@ -125,15 +118,12 @@ class ServiceApiController extends AbstractApiController {
      * @param int    $size
      *
      * @return FileDisplayResponse|JSONResponse
+     * @throws \Throwable
      */
     public function getFavicon(string $domain, int $size = 32) {
-        try {
-            $file = $this->faviconService->getFavicon($domain, $size);
+        $file = $this->faviconService->getFavicon($domain, $size);
 
-            return $this->createFileDisplayResponse($file);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createFileDisplayResponse($file);
     }
 
     /**
@@ -146,19 +136,16 @@ class ServiceApiController extends AbstractApiController {
      * @param string $height
      *
      * @return FileDisplayResponse|JSONResponse
+     * @throws ApiException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function getPreview(string $domain, string $view = 'desktop', string $width = '550', string $height = '0') {
-        try {
-            list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
-            list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
+        list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
+        list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
 
-            $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
-            return $this->createFileDisplayResponse($file);
-        } catch(\Throwable $e) {
-
-            return $this->createErrorResponse($e);
-        }
+        return $this->createFileDisplayResponse($file);
     }
 
     /**
@@ -167,15 +154,10 @@ class ServiceApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws ApiException
      */
     public function coffee(): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-
-            return $this->createErrorResponse(new ApiException('I’m a password manager', 418));
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        throw new ApiException('I’m a password manager', 418);
     }
 
     /**
@@ -208,6 +190,6 @@ class ServiceApiController extends AbstractApiController {
             return [intval($matches[1]), intval($matches[2])];
         }
 
-        throw new ApiException('Invalid Size Specified', 400);
+        throw new ApiException('Invalid dimensions given', 400);
     }
 }

@@ -186,14 +186,13 @@ class LegacyPasswordApiController extends ApiController {
      * @param $loginname
      * @param $address
      * @param $notes
-     * @param $sharewith
      * @param $category
      * @param $deleted
      *
      * @return mixed
      * @throws \Exception
      */
-    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted, $sharewith = ''): JSONResponse {
+    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);

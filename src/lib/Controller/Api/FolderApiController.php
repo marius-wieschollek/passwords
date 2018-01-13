@@ -10,11 +10,11 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -52,15 +52,17 @@ class FolderApiController extends AbstractObjectApiController {
      * @param IRequest              $request
      * @param FolderService         $modelService
      * @param FolderObjectHelper    $objectHelper
+     * @param ValidationService     $validationService
      * @param FolderRevisionService $revisionService
      */
     public function __construct(
         IRequest $request,
         FolderService $modelService,
         FolderObjectHelper $objectHelper,
+        ValidationService $validationService,
         FolderRevisionService $revisionService
     ) {
-        parent::__construct($request, $modelService, $objectHelper, $revisionService);
+        parent::__construct($request, $modelService, $objectHelper, $validationService, $revisionService);
     }
 
     /**
@@ -74,9 +76,10 @@ class FolderApiController extends AbstractObjectApiController {
      * @param bool   $hidden
      * @param bool   $favourite
      *
-     * @TODO check $parent access
-     *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     *
      */
     public function create(
         string $label,
@@ -85,23 +88,18 @@ class FolderApiController extends AbstractObjectApiController {
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model    = $this->modelService->create();
-            $revision = $this->revisionService->create(
-                $model->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
-            );
+        $model    = $this->modelService->create();
+        $revision = $this->revisionService->create(
+            $model->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
+        );
 
-            $this->revisionService->save($revision);
-            $this->modelService->setRevision($model, $revision);
+        $this->revisionService->save($revision);
+        $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(
-                ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
-                Http::STATUS_CREATED
-            );
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse(
+            ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
+            Http::STATUS_CREATED
+        );
     }
 
     /**
@@ -116,9 +114,12 @@ class FolderApiController extends AbstractObjectApiController {
      * @param bool   $hidden
      * @param bool   $favourite
      *
-     * @TODO check $parent access
-     *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     *
      */
     public function update(
         string $id,
@@ -128,25 +129,20 @@ class FolderApiController extends AbstractObjectApiController {
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
+        if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
 
-            $model = $this->modelService->findByUuid($id);
-            /** @var FolderRevision $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
+        $model = $this->modelService->findByUuid($id);
+        /** @var FolderRevision $oldRevision */
+        $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
-            $revision = $this->revisionService->create(
-                $model->getUuid(), $label, $parent, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
-            );
+        $revision = $this->revisionService->create(
+            $model->getUuid(), $label, $parent, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
+        );
 
-            $this->revisionService->save($revision);
-            $this->modelService->setRevision($model, $revision);
+        $this->revisionService->save($revision);
+        $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
     }
 
     /**
@@ -157,12 +153,14 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $id
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function delete(string $id): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) {
-            return $this->createErrorResponse(
-                new ApiException('Can not edit base folder', 422)
-            );
+            throw new ApiException('Can not edit base folder', 422);
         }
 
         return parent::delete($id);
@@ -177,12 +175,14 @@ class FolderApiController extends AbstractObjectApiController {
      * @param null   $revision
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID || $revision == $this->revisionService::BASE_REVISION_UUID) {
-            return $this->createErrorResponse(
-                new ApiException('Can not edit base folder', 422)
-            );
+            throw new ApiException('Can not edit base folder', 422);
         }
 
         return parent::restore($id, $revision);

@@ -67,6 +67,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @return PasswordRevision
      *
      * @throws \OCA\Passwords\Exception\ApiException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function create(
         string $model,
@@ -88,7 +89,7 @@ class PasswordRevisionService extends AbstractRevisionService {
             $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $trashed, $favourite
         );
 
-        $revision = $this->validationService->validateRevision($revision);
+        $revision = $this->validationService->validatePassword($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;

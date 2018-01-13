@@ -10,10 +10,10 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
-use OCA\Passwords\Db\ShareRevision;
+use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\Object\FolderService;
 
 /**
  * Class ValidationService
@@ -25,46 +25,64 @@ class ValidationService {
     /**
      * @var HelperService
      */
-    private $helperService;
+    protected $helperService;
+
+    /**
+     * @var FolderService
+     */
+    protected $folderService;
 
     /**
      * ValidationService constructor.
      *
      * @param HelperService $helperService
+     * @param FolderService $folderService
      */
-    public function __construct(HelperService $helperService) {
+    public function __construct(HelperService $helperService, FolderService $folderService) {
         $this->helperService = $helperService;
+        $this->folderService = $folderService;
     }
 
     /**
-     * @param PasswordRevision $revision
+     * @param PasswordRevision $password
      *
      * @return PasswordRevision
      * @throws ApiException
      * @throws \OCP\AppFramework\QueryException
      */
-    public function validateRevision(PasswordRevision $revision): PasswordRevision {
-        if(empty($revision->getSseType())) {
-            $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+    public function validatePassword(PasswordRevision $password): PasswordRevision {
+        if(empty($password->getSseType())) {
+            $password->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
-        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
+        if($password->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
             throw new ApiException('Invalid server side encryption type', 400);
         }
-        if($revision->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
+        if($password->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
             throw new ApiException('Invalid client side encryption type', 400);
         }
-        if(empty($revision->getLabel())) {
+        if(empty($password->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
-        if(empty($revision->getHash())) {
-            throw new ApiException('Field "hash" can not be empty', 400);
+        if(empty($password->getHash()) || preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
+            throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }
-        if($revision->getStatus() == 0) {
+        if($password->getFolder() !== $this->folderService::BASE_FOLDER_UUID) {
+            if(!$this->isValidUuid($password)) {
+                $password->setFolder($this->folderService::BASE_FOLDER_UUID);
+            } else {
+                try {
+                    $this->folderService->findByUuid($password->getFolder());
+                } catch(\Throwable $e) {
+                    $password->setFolder($this->folderService::BASE_FOLDER_UUID);
+                }
+            }
+        }
+        if($password->getStatus() == 0) {
             $securityCheck = $this->helperService->getSecurityHelper();
-            $revision->setStatus($securityCheck->getRevisionSecurityLevel($revision));
+            $password->setStatus($securityCheck->getRevisionSecurityLevel($password));
         }
 
-        return $revision;
+        return $password;
     }
 
     /**
@@ -85,6 +103,17 @@ class ValidationService {
         }
         if(empty($folder->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
+        }
+        if($folder->getParent() !== $this->folderService::BASE_FOLDER_UUID) {
+            if(!$this->isValidUuid($folder)) {
+                $folder->setParent($this->folderService::BASE_FOLDER_UUID);
+            } else {
+                try {
+                    $this->folderService->findByUuid($folder->getParent());
+                } catch(\Throwable $e) {
+                    $folder->setParent($this->folderService::BASE_FOLDER_UUID);
+                }
+            }
         }
 
         return $folder;
@@ -117,6 +146,28 @@ class ValidationService {
     }
 
     /**
+     * @param RevisionInterface $object
+     *
+     * @return RevisionInterface
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\QueryException
+     */
+    public function validateObject(RevisionInterface $object): RevisionInterface {
+
+        switch(get_class($object)) {
+            case PasswordRevision::class:
+                return $this->validatePassword($object);
+            case FolderRevision::class:
+                return $this->validateFolder($object);
+            case TagRevision::class:
+                return $this->validateTag($object);
+        }
+
+        throw new \Exception('Unknown object type');
+    }
+
+    /**
      * @param string $domain
      *
      * @return bool
@@ -127,5 +178,14 @@ class ValidationService {
         if(!checkdnsrr($domain, 'A')) return false;
 
         return true;
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return bool
+     */
+    public function isValidUuid(string $uuid): bool {
+        return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) === true;
     }
 }

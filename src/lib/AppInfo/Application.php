@@ -30,6 +30,8 @@ use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Hooks\PasswordHook;
 use OCA\Passwords\Hooks\ShareHook;
 use OCA\Passwords\Hooks\TagHook;
+use OCA\Passwords\Middleware\ApiSecurityMiddleware;
+use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
@@ -61,6 +63,7 @@ class Application extends App {
         $this->registerPersonalSettings();
         $this->registerDiClasses();
         $this->registerInternalHooks();
+        $this->registerMiddleware();
     }
 
     /**
@@ -94,6 +97,21 @@ class Application extends App {
          * Register Legacy Api Controller Classes
          */
         $this->registerLegacyApiControllers();
+    }
+
+    /**
+     *
+     */
+    protected function registerMiddleware(): void {
+        $container = $this->getContainer();
+
+        $container->registerAlias('ApiSecurityMiddleware', ApiSecurityMiddleware::class);
+        $container->registerMiddleware('ApiSecurityMiddleware');
+
+        if($container->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+            $container->registerAlias('LegacyMiddleware', LegacyMiddleware::class);
+            $container->registerMiddleware('LegacyMiddleware');
+        }
     }
 
     /**

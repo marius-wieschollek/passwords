@@ -57,13 +57,20 @@ class AdminSettings implements ISettings {
      */
     public function getForm() {
 
+        $legacyEnabled  = $this->config->getAppValue('legacy_api_enabled', true);
+        $legacyLastUsed = null;
+        if($legacyEnabled) {
+            $legacyLastUsed = $this->config->getAppValue('legacy_last_used', null);
+        }
+
         return new TemplateResponse('passwords', 'admin/index', [
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
             'pageshotServices' => $this->getPageShotServices(),
             'securityServices' => $this->getSecurityServices(),
-            'legacyAppEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
+            'legacyApiEnabled' => $legacyEnabled,
+            'legacyLastUsed'   => $legacyLastUsed,
             'caches'           => $this->getFileCaches()
         ]);
     }
@@ -107,7 +114,7 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::WORDS_LOCAL,
-                'label'   => $this->localisation->t('Local'),
+                'label'   => $this->localisation->t('Local dictionary'),
                 'current' => $current === HelperService::WORDS_LOCAL
             ],
             [
@@ -156,7 +163,7 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::FAVICON_LOCAL,
-                'label'   => $this->localisation->t('Local'),
+                'label'   => $this->localisation->t('Local analyzer'),
                 'current' => $current === HelperService::FAVICON_LOCAL
             ],
             [
@@ -197,7 +204,7 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::PAGESHOT_WKHTML,
-                'label'   => $this->localisation->t('WKHTML (local)'),
+                'label'   => $this->localisation->t('WKHTML (Local)'),
                 'current' => $current === HelperService::PAGESHOT_WKHTML,
                 'path'    => WkhtmlImageHelper::getWkhtmlPath(),
                 'api'     => null

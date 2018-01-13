@@ -31,8 +31,8 @@ abstract class AbstractModelService extends AbstractService {
      * AbstractParentEntityService constructor.
      *
      * @param string         $userId
-     * @param AbstractMapper $mapper
      * @param HookManager    $hookManager
+     * @param AbstractMapper $mapper
      */
     public function __construct(?string $userId, HookManager $hookManager, AbstractMapper $mapper) {
         $this->mapper = $mapper;

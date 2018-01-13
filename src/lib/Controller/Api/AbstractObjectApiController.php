@@ -14,6 +14,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
+use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -40,6 +41,11 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     protected $revisionService;
 
     /**
+     * @var ValidationService
+     */
+    protected $validationService;
+
+    /**
      * @var array
      */
     protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType'];
@@ -50,18 +56,21 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @param IRequest                $request
      * @param AbstractModelService    $modelService
      * @param AbstractObjectHelper    $objectHelper
+     * @param ValidationService       $validationService
      * @param AbstractRevisionService $revisionService
      */
     public function __construct(
         IRequest $request,
         AbstractModelService $modelService,
         AbstractObjectHelper $objectHelper,
+        ValidationService $validationService,
         AbstractRevisionService $revisionService
     ) {
         parent::__construct($request);
-        $this->modelService    = $modelService;
-        $this->objectHelper    = $objectHelper;
-        $this->revisionService = $revisionService;
+        $this->modelService      = $modelService;
+        $this->objectHelper      = $objectHelper;
+        $this->revisionService   = $revisionService;
+        $this->validationService = $validationService;
     }
 
     /**
@@ -74,23 +83,18 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            /** @var AbstractModelEntity[] $models */
-            $models  = $this->modelService->findAll();
-            $results = [];
+        /** @var AbstractModelEntity[] $models */
+        $models  = $this->modelService->findAll();
+        $results = [];
 
-            foreach($models as $model) {
-                if($model->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($model, $details, ['hidden' => false, 'trashed' => false]);
+        foreach($models as $model) {
+            if($model->isSuspended()) continue;
+            $object = $this->objectHelper->getApiObject($model, $details, ['hidden' => false, 'trashed' => false]);
 
-                if($object !== null) $results[] = $object;
-            }
-
-            return $this->createJsonResponse($results);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+            if($object !== null) $results[] = $object;
         }
+
+        return $this->createJsonResponse($results);
     }
 
     /**
@@ -102,27 +106,23 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
+     * @throws ApiException
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $filters           = $this->processSearchCriteria($criteria);
-            $filters['hidden'] = false;
-            /** @var AbstractModelEntity[] $models */
-            $models  = $this->modelService->findAll();
-            $results = [];
+        $filters           = $this->processSearchCriteria($criteria);
+        $filters['hidden'] = false;
+        /** @var AbstractModelEntity[] $models */
+        $models  = $this->modelService->findAll();
+        $results = [];
 
-            foreach($models as $model) {
-                if($model->isSuspended()) continue;
-                $object = $this->objectHelper->getApiObject($model, $details, $filters);
-                if($object === null) continue;
-                $results[] = $object;
-            }
-
-            return $this->createJsonResponse($results);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        foreach($models as $model) {
+            if($model->isSuspended()) continue;
+            $object = $this->objectHelper->getApiObject($model, $details, $filters);
+            if($object === null) continue;
+            $results[] = $object;
         }
+
+        return $this->createJsonResponse($results);
     }
 
     /**
@@ -134,17 +134,14 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model  = $this->modelService->findByUuid($id);
-            $object = $this->objectHelper->getApiObject($model, $details);
+        $model  = $this->modelService->findByUuid($id);
+        $object = $this->objectHelper->getApiObject($model, $details);
 
-            return $this->createJsonResponse($object);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse($object);
     }
 
     /**
@@ -155,29 +152,27 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @param string $id
      *
      * @return JSONResponse
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function delete(string $id): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model = $this->modelService->findByUuid($id);
-            /** @var AbstractRevisionEntity $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
+        $model = $this->modelService->findByUuid($id);
+        /** @var AbstractRevisionEntity $oldRevision */
+        $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
-            if($oldRevision->isTrashed()) {
-                $this->modelService->delete($model);
+        if($oldRevision->isTrashed()) {
+            $this->modelService->delete($model);
 
-                return $this->createJsonResponse(['id' => $model->getUuid()]);
-            }
-
-            /** @var AbstractRevisionEntity $newRevision */
-            $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => true]);
-            $this->revisionService->save($newRevision);
-            $this->modelService->setRevision($model, $newRevision);
-
-            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+            return $this->createJsonResponse(['id' => $model->getUuid()]);
         }
+
+        /** @var AbstractRevisionEntity $newRevision */
+        $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => true]);
+        $this->revisionService->save($newRevision);
+        $this->modelService->setRevision($model, $newRevision);
+
+        return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
     }
 
     /**
@@ -189,32 +184,32 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @param null   $revision
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model = $this->modelService->findByUuid($id);
+        $model = $this->modelService->findByUuid($id);
 
-            if($revision === null) $revision = $model->getRevision();
-            /** @var AbstractRevisionEntity $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($revision, true);
+        if($revision === null) $revision = $model->getRevision();
+        /** @var AbstractRevisionEntity $oldRevision */
+        $oldRevision = $this->revisionService->findByUuid($revision, true);
 
-            if($oldRevision->getModel() !== $model->getUuid()) {
-                throw new ApiException('Invalid revision id', 400);
-            }
-
-            if(!$oldRevision->isTrashed() && $oldRevision->getUuid() === $model->getRevision()) {
-                return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $oldRevision->getUuid()]);
-            }
-
-            /** @var AbstractRevisionEntity $newRevision */
-            $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => false]);
-            $this->revisionService->save($newRevision);
-            $this->modelService->setRevision($model, $newRevision);
-
-            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        if($oldRevision->getModel() !== $model->getUuid()) {
+            throw new ApiException('Invalid revision id', 400);
         }
+
+        if(!$oldRevision->isTrashed() && $oldRevision->getUuid() === $model->getRevision()) {
+            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $oldRevision->getUuid()]);
+        }
+
+        /** @var AbstractRevisionEntity $newRevision */
+        $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => false]);
+        $newRevision = $this->validationService->validateObject($newRevision);
+        $this->revisionService->save($newRevision);
+        $this->modelService->setRevision($model, $newRevision);
+
+        return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $newRevision->getUuid()]);
     }
 }

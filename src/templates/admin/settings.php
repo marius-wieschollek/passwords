@@ -17,7 +17,11 @@
 
         <div class="area legacy_support">
             <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
-            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyAppEnabled'] ? 'checked':''?>>
+            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
+            <?php if($_['legacyApiEnabled']): ?>
+                <label for="passwords-legacy-used"><?php p($l->t('Legacy API was last used on')); ?></label>
+                <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):'never'?>" disabled>
+            <?php endif; ?>
         </div>
     </form>
 
@@ -76,8 +80,8 @@
         <h3><?php p($l->t('Caches')); ?></h3>
         <?php foreach($_['caches'] as $cache): ?>
             <div class="area cache">
-                <label><?php p($l->t('%s Cache (%s Files, %s)',
-                                     [ucfirst($cache['name']), $cache['files'], human_file_size($cache['size'])])); ?></label>
+                <label><?php p($l->t(ucfirst($cache['name']).' Cache (%s files, %s)',
+                                     [$cache['files'], human_file_size($cache['size'])])); ?></label>
                 <input type="button" value="<?php p($l->t('clear')); ?>" data-clear-cache="<?php p($cache['name']); ?>"/>
             </div>
         <?php endforeach; ?>

@@ -13,6 +13,7 @@ use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
+use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -30,14 +31,14 @@ class TagApiController extends AbstractObjectApiController {
     protected $modelService;
 
     /**
-     * @var TagRevisionService
-     */
-    protected $revisionService;
-
-    /**
      * @var TagObjectHelper
      */
     protected $objectHelper;
+
+    /**
+     * @var TagRevisionService
+     */
+    protected $revisionService;
 
     /**
      * @var array
@@ -51,14 +52,16 @@ class TagApiController extends AbstractObjectApiController {
      * @param TagService         $modelService
      * @param TagObjectHelper    $objectHelper
      * @param TagRevisionService $revisionService
+     * @param ValidationService  $validationService
      */
     public function __construct(
         IRequest $request,
         TagService $modelService,
         TagObjectHelper $objectHelper,
-        TagRevisionService $revisionService
+        TagRevisionService $revisionService,
+        ValidationService $validationService
     ) {
-        parent::__construct($request, $modelService, $objectHelper, $revisionService);
+        parent::__construct($request, $modelService, $objectHelper, $validationService, $revisionService);
     }
 
     /**
@@ -73,6 +76,8 @@ class TagApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      *
      * @return JSONResponse
+     * @throws \Exception
+     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function create(
         string $label,
@@ -81,23 +86,18 @@ class TagApiController extends AbstractObjectApiController {
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model    = $this->modelService->create();
-            $revision = $this->revisionService->create(
-                $model->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
-            );
+        $model    = $this->modelService->create();
+        $revision = $this->revisionService->create(
+            $model->getUuid(), $label, $color, $cseType, $hidden, false, $favourite
+        );
 
-            $this->revisionService->save($revision);
-            $this->modelService->setRevision($model, $revision);
+        $this->revisionService->save($revision);
+        $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(
-                ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
-                Http::STATUS_CREATED
-            );
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse(
+            ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
+            Http::STATUS_CREATED
+        );
     }
 
     /**
@@ -113,7 +113,10 @@ class TagApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      *
      * @return JSONResponse
-     *
+     * @throws \Exception
+     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function update(
         string $id,
@@ -123,22 +126,17 @@ class TagApiController extends AbstractObjectApiController {
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model = $this->modelService->findByUuid($id);
+        $model = $this->modelService->findByUuid($id);
 
-            /** @var TagRevision $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($model->getRevision());
-            $revision    = $this->revisionService->create(
-                $model->getUuid(), $label, $color, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
-            );
+        /** @var TagRevision $oldRevision */
+        $oldRevision = $this->revisionService->findByUuid($model->getRevision());
+        $revision    = $this->revisionService->create(
+            $model->getUuid(), $label, $color, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
+        );
 
-            $this->revisionService->save($revision);
-            $this->modelService->setRevision($model, $revision);
+        $this->revisionService->save($revision);
+        $this->modelService->setRevision($model, $revision);
 
-            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
     }
 }

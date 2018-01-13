@@ -20,6 +20,7 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
+use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -32,14 +33,14 @@ use OCP\IRequest;
 class PasswordApiController extends AbstractObjectApiController {
 
     /**
+     * @var TagService
+     */
+    protected $tagService;
+
+    /**
      * @var PasswordService
      */
     protected $modelService;
-
-    /**
-     * @var PasswordRevisionService
-     */
-    protected $revisionService;
 
     /**
      * @var PasswordObjectHelper
@@ -47,14 +48,14 @@ class PasswordApiController extends AbstractObjectApiController {
     protected $objectHelper;
 
     /**
+     * @var PasswordRevisionService
+     */
+    protected $revisionService;
+
+    /**
      * @var PasswordTagRelationService
      */
     protected $relationService;
-
-    /**
-     * @var TagService
-     */
-    protected $tagService;
 
     /**
      * @var TagRevisionService
@@ -71,10 +72,11 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @param IRequest                   $request
      * @param TagService                 $tagService
-     * @param TagRevisionService         $tagRevisionService
      * @param PasswordService            $modelService
-     * @param PasswordRevisionService    $revisionService
      * @param PasswordObjectHelper       $objectHelper
+     * @param ValidationService          $validationService
+     * @param TagRevisionService         $tagRevisionService
+     * @param PasswordRevisionService    $revisionService
      * @param PasswordTagRelationService $relationService
      */
     public function __construct(
@@ -82,11 +84,12 @@ class PasswordApiController extends AbstractObjectApiController {
         TagService $tagService,
         PasswordService $modelService,
         PasswordObjectHelper $objectHelper,
+        ValidationService $validationService,
         TagRevisionService $tagRevisionService,
         PasswordRevisionService $revisionService,
         PasswordTagRelationService $relationService
     ) {
-        parent::__construct($request, $modelService, $objectHelper, $revisionService);
+        parent::__construct($request, $modelService, $objectHelper, $validationService, $revisionService);
 
         $this->tagService         = $tagService;
         $this->relationService    = $relationService;
@@ -110,10 +113,9 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      * @param array  $tags
      *
-     * @TODO     check folder access
-     *
      * @return JSONResponse
-     * @internal param array $folders
+     * @throws ApiException
+     * @throws \Exception
      */
     public function create(
         string $password,
@@ -128,26 +130,21 @@ class PasswordApiController extends AbstractObjectApiController {
         bool $favourite = false,
         array $tags = []
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model    = $this->modelService->create();
-            $revision = $this->revisionService->create(
-                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
-                false, $favourite
-            );
+        $model    = $this->modelService->create();
+        $revision = $this->revisionService->create(
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
+            false, $favourite
+        );
 
-            $this->revisionService->save($revision);
-            $this->modelService->setRevision($model, $revision);
+        $this->revisionService->save($revision);
+        $this->modelService->setRevision($model, $revision);
 
-            if(!empty($tags)) $this->updateTags($tags, $revision);
+        if(!empty($tags)) $this->updateTags($tags, $revision);
 
-            return $this->createJsonResponse(
-                ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
-                Http::STATUS_CREATED
-            );
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse(
+            ['id' => $model->getUuid(), 'revision' => $revision->getUuid()],
+            Http::STATUS_CREATED
+        );
     }
 
     /**
@@ -168,9 +165,12 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param bool   $favourite
      * @param array  $tags
      *
-     * @TODO check folder access
-     *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     *
      */
     public function update(
         string $id,
@@ -186,45 +186,39 @@ class PasswordApiController extends AbstractObjectApiController {
         bool $favourite = false,
         array $tags = []
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
+        /** @var Password $model */
+        $model = $this->modelService->findByUuid($id);
+        /** @var PasswordRevision $oldRevision */
+        $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
 
-            /** @var Password $model */
-            $model = $this->modelService->findByUuid($id);
-            /** @var PasswordRevision $oldRevision */
-            $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
-
-            if(!$model->isEditable()) {
-                $password = $oldRevision->getPassword();
-                $username = $oldRevision->getUsername();
-                $cseType  = $oldRevision->getCseType();
-                $label    = $oldRevision->getLabel();
-                $notes    = $oldRevision->getNotes();
-                $hash     = $oldRevision->getHash();
-                $url      = $oldRevision->getUrl();
-            } else if(($model->hasShares() || $model->getShareId())) {
-                if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                    throw new ApiException('CSE type does not support sharing', 400);
-                }
-                if($hidden) {
-                    throw new ApiException('Shared password can not be hidden', 400);
-                }
+        if(!$model->isEditable()) {
+            $password = $oldRevision->getPassword();
+            $username = $oldRevision->getUsername();
+            $cseType  = $oldRevision->getCseType();
+            $label    = $oldRevision->getLabel();
+            $notes    = $oldRevision->getNotes();
+            $hash     = $oldRevision->getHash();
+            $url      = $oldRevision->getUrl();
+        } else if(($model->hasShares() || $model->getShareId())) {
+            if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
+                throw new ApiException('CSE type does not support sharing', 400);
             }
-
-            $revision = $this->revisionService->create(
-                $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $oldRevision->isTrashed(),
-                $favourite
-            );
-
-            $this->revisionService->save($revision);
-            $this->modelService->setRevision($model, $revision);
-
-            if(!empty($tags)) $this->updateTags($tags, $revision);
-
-            return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+            if($hidden) {
+                throw new ApiException('Shared entity can not be hidden', 400);
+            }
         }
+
+        $revision = $this->revisionService->create(
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $oldRevision->isTrashed(),
+            $favourite
+        );
+
+        $this->revisionService->save($revision);
+        $this->modelService->setRevision($model, $revision);
+
+        if(!empty($tags)) $this->updateTags($tags, $revision);
+
+        return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $revision->getUuid()]);
     }
 
     /**
@@ -236,32 +230,30 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param null   $revision
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
+        if($revision !== null) {
+            /** @var Password $model */
+            $model = $this->modelService->findByUuid($id);
 
-            if($revision !== null) {
-                /** @var Password $model */
-                $model = $this->modelService->findByUuid($id);
+            if($model->hasShares() || $model->getShareId()) {
+                /** @var PasswordRevision $revision */
+                $revision = $this->revisionService->findByUuid($revision);
 
-                if($model->hasShares() || $model->getShareId()) {
-                    /** @var PasswordRevision $revision */
-                    $revision = $this->revisionService->findByUuid($revision);
-
-                    if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                        throw new ApiException('CSE type does not support sharing', 400);
-                    }
-                    if($revision->isHidden()) {
-                        throw new ApiException('Shared password can not be hidden', 400);
-                    }
+                if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
+                    throw new ApiException('CSE type does not support sharing', 400);
+                }
+                if($revision->isHidden()) {
+                    throw new ApiException('Shared entity can not be hidden', 400);
                 }
             }
-
-            return parent::restore($id, $revision);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
         }
+
+        return parent::restore($id, $revision);
     }
 
     /**

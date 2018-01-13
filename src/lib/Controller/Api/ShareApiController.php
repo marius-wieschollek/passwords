@@ -139,22 +139,23 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            /** @var Share[] $models */
-            $models = $this->modelService->findAll();
+        $this->checkAccessPermissions();
+        /** @var Share[] $models */
+        $models = $this->modelService->findAll();
 
-            $results = [];
-            foreach($models as $model) {
-                $results[] = $this->objectHelper->getApiObject($model, $details);
-            }
-
-            return $this->createJsonResponse($results);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        $results = [];
+        foreach($models as $model) {
+            $results[] = $this->objectHelper->getApiObject($model, $details);
         }
+
+        return $this->createJsonResponse($results);
     }
 
     /**
@@ -166,25 +167,26 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $filters = $this->processSearchCriteria($criteria);
-            /** @var Share[] $models */
-            $models = $this->modelService->findAll();
+        $this->checkAccessPermissions();
+        $filters = $this->processSearchCriteria($criteria);
+        /** @var Share[] $models */
+        $models = $this->modelService->findAll();
 
-            $results = [];
-            foreach($models as $model) {
-                $object = $this->objectHelper->getApiObject($model, $details, $filters);
-                if($object === null) continue;
-                $results[] = $object;
-            }
-
-            return $this->createJsonResponse($results);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        $results = [];
+        foreach($models as $model) {
+            $object = $this->objectHelper->getApiObject($model, $details, $filters);
+            if($object === null) continue;
+            $results[] = $object;
         }
+
+        return $this->createJsonResponse($results);
     }
 
     /**
@@ -196,17 +198,18 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
      */
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model  = $this->modelService->findByUuid($id);
-            $object = $this->objectHelper->getApiObject($model, $details);
+        $this->checkAccessPermissions();
+        $model  = $this->modelService->findByUuid($id);
+        $object = $this->objectHelper->getApiObject($model, $details);
 
-            return $this->createJsonResponse($object);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse($object);
     }
 
     /**
@@ -222,6 +225,10 @@ class ShareApiController extends AbstractApiController {
      * @param bool     $shareable
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function create(
         string $password,
@@ -231,66 +238,66 @@ class ShareApiController extends AbstractApiController {
         bool $editable = false,
         bool $shareable = false
     ): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
+        $this->checkAccessPermissions();
 
-            $partners = $this->getSharePartners('');
-            if(!isset($partners[ $receiver ])) throw new ApiException('Invalid receiver uid', 403);
+        $partners = $this->getSharePartners('');
+        if(!isset($partners[ $receiver ])) throw new ApiException('Invalid receiver uid', 403);
 
-            if(empty($expires)) $expires = null;
-            if($expires !== null && $expires < time()) {
-                throw new ApiException('Invalid expiration date', 400);
-            }
-            if($type !== 'user') {
-                throw new ApiException('Invalid share type', 400);
-            }
-
-            /** @var Password $model */
-            $model = $this->passwordModelService->findByUuid($password);
-            if($model->getShareId()) {
-                $sourceShare = $this->modelService->findByUuid($model->getShareId());
-                $reSharing   = $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
-                if(!$sourceShare->isShareable() || !$reSharing) {
-                    throw new ApiException('Sharing not allowed', 403);
-                }
-                if(!$sourceShare->isEditable()) $editable = false;
-            }
-
-            $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
-            if($shares !== null) {
-                throw new ApiException('Password already shared with user', 420);
-            }
-
-            /** @var PasswordRevision $revision */
-            $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
-
-            if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                throw new ApiException('CSE type does not support sharing', 420);
-            }
-
-            if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
-                $revision = $this->passwordRevisionService->clone(
-                    $revision,
-                    ['sseType' => EncryptionService::SSE_ENCRYPTION_V1]
-                );
-                $this->passwordRevisionService->save($revision);
-                $this->passwordModelService->setRevision($model, $revision);
-            }
-
-            $share = $this->modelService->create($model->getUuid(), $receiver, $type, $editable, $expires, $shareable);
-            $this->modelService->save($share);
-
-            if(!$model->hasShares()) {
-                $model->setHasShares(true);
-                $this->passwordModelService->save($model);
-            }
-
-            return $this->createJsonResponse(
-                ['id' => $share->getUuid()], Http::STATUS_CREATED
-            );
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        if(empty($expires)) $expires = null;
+        if($expires !== null && $expires < time()) {
+            throw new ApiException('Invalid expiration date', 400);
         }
+        if($type !== 'user') {
+            throw new ApiException('Invalid share type', 400);
+        }
+
+        /** @var Password $model */
+        $model = $this->passwordModelService->findByUuid($password);
+        if($model->getShareId()) {
+            $sourceShare = $this->modelService->findByUuid($model->getShareId());
+            $reSharing   = $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
+            if(!$sourceShare->isShareable() || !$reSharing) {
+                throw new ApiException('Entity not shareable', 403);
+            }
+            if(!$sourceShare->isEditable()) $editable = false;
+        }
+
+        $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
+        if($shares !== null) {
+            throw new ApiException('Entity already shared with user', 420);
+        }
+
+        /** @var PasswordRevision $revision */
+        $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
+
+        if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
+            throw new ApiException('CSE type does not support sharing', 420);
+        }
+
+        if($revision->isHidden()) {
+            throw new ApiException('Shared entity can not be hidden', 420);
+        }
+
+        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
+            $revision = $this->passwordRevisionService->clone(
+                $revision,
+                ['sseType' => EncryptionService::SSE_ENCRYPTION_V1]
+            );
+            $this->passwordRevisionService->save($revision);
+            $this->passwordModelService->setRevision($model, $revision);
+        }
+
+        $share = $this->modelService->create($model->getUuid(), $receiver, $type, $editable, $expires, $shareable);
+        $this->modelService->save($share);
+
+        if(!$model->hasShares()) {
+            $model->setHasShares(true);
+            $this->passwordModelService->save($model);
+        }
+
+        return $this->createJsonResponse(
+            ['id' => $share->getUuid()], Http::STATUS_CREATED
+        );
     }
 
     /**
@@ -304,32 +311,30 @@ class ShareApiController extends AbstractApiController {
      * @param bool     $shareable
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function update(string $id, int $expires = null, bool $editable = false, bool $shareable = true): JSONResponse {
+        $this->checkAccessPermissions();
 
-        try {
-            $this->checkAccessPermissions();
-
-            if(empty($expires)) $expires = null;
-            if($expires !== null && $expires < time()) {
-                throw new ApiException('Invalid expiration date', 400);
-            }
-
-            $share = $this->modelService->findByUuid($id);
-            if($share->getUserId() !== $this->userId) {
-                throw new ApiException('Access denied', 403);
-            }
-
-            $share->setExpires($expires);
-            $share->setEditable($editable);
-            $share->setShareable($shareable);
-            $share->setSourceUpdated(true);
-            $this->modelService->save($share);
-
-            return $this->createJsonResponse(['id' => $share->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        if(empty($expires)) $expires = null;
+        if($expires !== null && $expires < time()) {
+            throw new ApiException('Invalid expiration date', 400);
         }
+
+        $share = $this->modelService->findByUuid($id);
+        if($share->getUserId() !== $this->userId) {
+            throw new ApiException('Access denied', 403);
+        }
+
+        $share->setExpires($expires);
+        $share->setEditable($editable);
+        $share->setShareable($shareable);
+        $share->setSourceUpdated(true);
+        $this->modelService->save($share);
+
+        return $this->createJsonResponse(['id' => $share->getUuid()]);
     }
 
     /**
@@ -340,21 +345,21 @@ class ShareApiController extends AbstractApiController {
      * @param string $id
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function delete(string $id): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
-            $model = $this->modelService->findByUuid($id);
-            if($model->getUserId() !== $this->userId) {
-                throw new ApiException('Access denied', 403);
-            }
-
-            $this->modelService->delete($model);
-
-            return $this->createJsonResponse(['id' => $model->getUuid()]);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        $this->checkAccessPermissions();
+        $model = $this->modelService->findByUuid($id);
+        if($model->getUserId() !== $this->userId) {
+            throw new ApiException('Access denied', 403);
         }
+
+        $this->modelService->delete($model);
+
+        return $this->createJsonResponse(['id' => $model->getUuid()]);
     }
 
     /**
@@ -363,22 +368,19 @@ class ShareApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws ApiException
      */
     public function info(): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
+        $this->checkAccessPermissions();
 
-            $info = [
-                'enabled'   => $this->shareManager->shareApiEnabled() &&
-                               !$this->shareManager->sharingDisabledForUser($this->userId),
-                'resharing' => $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes',
-                'types'     => ['user']
-            ];
+        $info = [
+            'enabled'   => $this->shareManager->shareApiEnabled() &&
+                           !$this->shareManager->sharingDisabledForUser($this->userId),
+            'resharing' => $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes',
+            'types'     => ['user']
+        ];
 
-            return $this->createJsonResponse($info);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
-        }
+        return $this->createJsonResponse($info);
     }
 
     /**
@@ -389,20 +391,17 @@ class ShareApiController extends AbstractApiController {
      * @param string $search
      *
      * @return JSONResponse
+     * @throws ApiException
      */
     public function partners(string $search = ''): JSONResponse {
-        try {
-            $this->checkAccessPermissions();
+        $this->checkAccessPermissions();
 
-            $partners = [];
-            if($this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'no') === 'yes') {
-                $partners = $this->getSharePartners($search);
-            }
-
-            return $this->createJsonResponse($partners);
-        } catch(\Throwable $e) {
-            return $this->createErrorResponse($e);
+        $partners = [];
+        if($this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'no') === 'yes') {
+            $partners = $this->getSharePartners($search);
         }
+
+        return $this->createJsonResponse($partners);
     }
 
     /**
@@ -475,7 +474,5 @@ class ShareApiController extends AbstractApiController {
         if($this->shareManager->sharingDisabledForUser($this->userId)) {
             throw new ApiException('Sharing disabled for user', 403);
         }
-
-        parent::checkAccessPermissions();
     }
 }
