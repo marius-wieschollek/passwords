@@ -64,8 +64,7 @@ class LegacyCategoryApiController extends ApiController {
      * @NoAdminRequired
      */
     public function index(): JSONResponse {
-        $counter    = 0;
-        $categories = new \stdClass();
+        $categories = [];
         /** @var Tag[] $models */
         $models = $this->tagService->findAll();
         foreach($models as $model) {
@@ -75,10 +74,7 @@ class LegacyCategoryApiController extends ApiController {
             } catch(\Exception $e) {
                 continue;
             }
-            if($category !== null) {
-                $counter++;
-                $categories->{$counter} = $category;
-            }
+            if($category !== null) $categories[] = $category;
         }
 
         return new JSONResponse($categories);
