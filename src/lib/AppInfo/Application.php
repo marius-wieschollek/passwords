@@ -134,9 +134,11 @@ class Application extends App {
     protected function registerLegacyApiControllers(): void {
         $container = $this->getContainer();
 
-        $container->registerAlias('LegacyVersionApiController', LegacyVersionApiController::class);
-        $container->registerAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
-        $container->registerAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
+        if($container->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+            $container->registerAlias('LegacyVersionApiController', LegacyVersionApiController::class);
+            $container->registerAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
+            $container->registerAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
+        }
     }
 
     /**

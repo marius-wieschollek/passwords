@@ -145,7 +145,7 @@ class HelperService {
                 return $this->container->query(DefaultFaviconHelper::class);
         }
 
-        return $this->container->query(LocalFaviconHelper::class);
+        return $this->container->query(DefaultFaviconHelper::class);
     }
 
     /**
@@ -158,13 +158,13 @@ class HelperService {
         switch($service) {
             case self::WORDS_LOCAL:
                 return $this->container->query(LocalWordsHelper::class);
-            case self::WORDS_RANDOM:
-                return $this->container->query(RandomCharactersHelper::class);
             case self::WORDS_SNAKES:
                 return $this->container->query(SnakesWordsHelper::class);
+            case self::WORDS_RANDOM:
+                return $this->container->query(RandomCharactersHelper::class);
         }
 
-        return $this->container->query(SnakesWordsHelper::class);
+        return $this->container->query(RandomCharactersHelper::class);
     }
 
     /**
@@ -186,5 +186,13 @@ class HelperService {
         }
 
         return $this->container->query(HaveIBeenPwnedHelper::class);
+    }
+
+    /**
+     * @return DefaultFaviconHelper
+     * @throws \OCP\AppFramework\QueryException
+     */
+    public function getDefaultFaviconHelper(): DefaultFaviconHelper {
+        return $this->container->query(DefaultFaviconHelper::class);
     }
 }

@@ -477,6 +477,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getFavicon(host, size = 32) {
+        if(host === null) host = 'default';
         return this._createRequest(['service.favicon', {domain: host, size: size}], null, 'GET', 'text');
     }
 
@@ -488,6 +489,7 @@ export default class SimpleApi {
      * @returns {*}
      */
     getFaviconUrl(host, size = 32) {
+        if(host === null) host = 'default';
         return this._endpoint + SimpleApi.processUrl(this._paths['service.favicon'], {domain: host, size: size});
     }
 

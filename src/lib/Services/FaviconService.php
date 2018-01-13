@@ -77,7 +77,13 @@ class FaviconService {
         }
 
         if(!$this->validationService->isValidDomain($domain)) {
-            return $faviconService->getDefaultFavicon('default', $size);
+            if($domain !== 'default') {
+                $pad    = str_pad(' ', strlen($domain), ' ');
+                $domain = $domain[0].$pad;
+            } else {
+                $domain = '      ';
+            }
+            $faviconService = $this->helperService->getDefaultFaviconHelper();
         }
 
         try {
@@ -85,12 +91,12 @@ class FaviconService {
 
             return $this->resizeFavicon($favicon, $fileName, $size);
         } catch(\Throwable $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->logException($e);
 
             try {
                 return $faviconService->getDefaultFavicon($domain, $size);
             } catch(\Throwable $e) {
-                $this->logger->error($e->getMessage());
+                $this->logger->logException($e);
 
                 throw new ApiException('Internal Favicon API Error', 502);
             }

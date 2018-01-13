@@ -17,6 +17,11 @@
             width        : 100%;
         }
 
+        input[type=checkbox] {
+            width        : auto;
+            justify-self : left;
+        }
+
         .container {
             grid-column  : 1 / span 2;
             justify-self : stretch;

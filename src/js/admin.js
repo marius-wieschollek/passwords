@@ -10,6 +10,10 @@ class PasswordsAdminSettings {
                     key     = $target.data('setting'),
                     value   = $target.val();
 
+                if($target.attr('type') === 'checkbox') {
+                    value = $target[0].checked ? 'true':'false';
+                }
+
                 PasswordsAdminSettings.setValue(key, value);
             }
         );

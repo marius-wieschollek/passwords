@@ -66,7 +66,6 @@ class PageShotService {
      * @param string $view
      * @param int    $minWidth
      * @param int    $minHeight
-     *
      * @param int    $maxWidth
      * @param int    $maxHeight
      *
@@ -100,14 +99,14 @@ class PageShotService {
 
             return $this->resizePageShot($pageShot, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(\Throwable $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->logException($e);
 
             try {
                 $pageShot = $pageShotService->getDefaultPageShot($domain);
 
                 return $this->resizePageShot($pageShot, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
             } catch(\Throwable $e) {
-                $this->logger->error($e->getMessage());
+                $this->logger->logException($e);
 
                 throw new ApiException('Internal PageShot API Error', 502);
             }

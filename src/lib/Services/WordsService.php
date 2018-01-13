@@ -76,7 +76,7 @@ class WordsService {
 
             return [$password, $words];
         } catch(\Throwable $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->logException($e);
 
             throw new ApiException('Internal Words API Error'. 502);
         }

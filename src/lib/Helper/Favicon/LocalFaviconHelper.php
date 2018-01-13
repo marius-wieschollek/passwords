@@ -68,7 +68,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      *
      * @return mixed|string
      */
-    protected function getHttpRequest(string $url): string {
+    protected function getHttpRequest(string $url): array {
         $request = new RequestHelper();
         $request->setUrl($url);
         $data = $request->sendWithRetry();

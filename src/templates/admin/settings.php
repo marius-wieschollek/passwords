@@ -13,6 +13,15 @@
     <h2><?php p($l->t('Passwords')); ?></h2>
 
     <form>
+        <h3><?php p($l->t('Legacy Api Support')); ?></h3>
+
+        <div class="area legacy_support">
+            <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
+            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyAppEnabled'] ? 'checked':''?>>
+        </div>
+    </form>
+
+    <form>
         <h3><?php p($l->t('Internal Data Processing')); ?></h3>
 
         <div class="area datenverarbeitung">

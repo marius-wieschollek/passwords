@@ -22,6 +22,12 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
      */
     protected $prefix = HelperService::FAVICON_DUCK_DUCK_GO;
 
+    /** @var string */
+    protected $domain;
+
+    /** @var int */
+    protected $size = 32;
+
     /**
      * @param string $domain
      * @param int    $size
@@ -29,6 +35,9 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
      * @return string
      */
     protected function getFaviconUrl(string $domain, int $size): string {
+        $this->domain = $domain;
+        $this->size   = $size;
+
         return "https://icons.duckduckgo.com/ip2/{$domain}.ico";
     }
 
@@ -36,9 +45,12 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
      * @param string $url
      *
      * @return mixed|string
+     * @throws \Throwable
      */
     protected function getHttpRequest(string $url) {
         $result = parent::getHttpRequest($url);
+
+        if(!$result) return $this->getDefaultFavicon($this->domain, $this->size)->getContent();
 
         $data = @gzdecode($result);
         if($data) return $data;

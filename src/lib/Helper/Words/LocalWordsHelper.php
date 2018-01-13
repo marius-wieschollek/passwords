@@ -51,7 +51,8 @@ class LocalWordsHelper extends AbstractWordsHelper {
         $file   = $this->getWordsFile();
 
         $retires = 0;
-        while($retires < 10) {
+        while($retires < 24) {
+            $result = [];
             exec("shuf -n {$length} {$file}", $result, $code);
 
             if($code == 0) {

@@ -63,6 +63,7 @@ class AdminSettings implements ISettings {
             'faviconServices'  => $this->getFaviconServices(),
             'pageshotServices' => $this->getPageShotServices(),
             'securityServices' => $this->getSecurityServices(),
+            'legacyAppEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'caches'           => $this->getFileCaches()
         ]);
     }
