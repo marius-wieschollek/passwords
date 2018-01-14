@@ -85,6 +85,7 @@ class TagManager {
                 .then((data) => {
                     tag.label = data.label;
                     tag.color = data.color;
+                    tag.edited = new Date();
 
                     API.updateTag(tag)
                         .then((d) => {

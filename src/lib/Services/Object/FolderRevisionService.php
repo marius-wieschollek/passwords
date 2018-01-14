@@ -72,7 +72,8 @@ class FolderRevisionService extends AbstractRevisionService {
             'Home',
             FolderService::BASE_FOLDER_UUID,
             EncryptionService::DEFAULT_CSE_ENCRYPTION,
-            EncryptionService::DEFAULT_SSE_ENCRYPTION,
+            time(),
+            false,
             false,
             false
         );
@@ -87,6 +88,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $parent
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $favourite
@@ -99,11 +101,12 @@ class FolderRevisionService extends AbstractRevisionService {
         string $label,
         string $parent,
         string $cseType,
+        int $edited,
         bool $hidden,
         bool $trashed,
         bool $favourite
     ): FolderRevision {
-        $revision = $this->createModel($folder, $label, $parent, $cseType, $hidden, $trashed, $favourite);
+        $revision = $this->createModel($folder, $label, $parent, $cseType, $edited, $hidden, $trashed, $favourite);
 
         $revision = $this->validationService->validateFolder($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
@@ -155,6 +158,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $parent
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $favourite
@@ -166,6 +170,7 @@ class FolderRevisionService extends AbstractRevisionService {
         string $label,
         string $parent,
         string $cseType,
+        int $edited,
         bool $hidden,
         bool $trashed,
         bool $favourite
@@ -185,6 +190,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->setCseType($cseType);
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);
+        $revision->setEdited($edited);
         $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $revision->setClient('');
 

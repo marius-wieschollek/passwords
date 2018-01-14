@@ -124,6 +124,7 @@ class LegacyPasswordMigration {
         $pwData = $this->decryptionModule->decrypt($password->getPass(), $key);
 
         $properties = $this->parseProperties($prData);
+        $timestamp = strtotime($properties->datechanged);
 
         $passwordModel    = $this->passwordService->create();
         $passwordRevision = $this->passwordRevisionService->create(
@@ -136,12 +137,11 @@ class LegacyPasswordMigration {
             $this->getUrl($properties, $password),
             $this->getNotes($properties, $password, $key),
             FolderService::BASE_FOLDER_UUID,
-            false,
+            $timestamp, false,
             $this->getTrashed($properties),
             false
         );
 
-        $timestamp = strtotime($properties->datechanged);
 
         $passwordRevision->setUserId($password->getUserId());
         $passwordRevision->setCreated($timestamp);

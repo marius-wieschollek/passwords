@@ -181,7 +181,6 @@ export default class Utility {
     /**
      *
      * @param object
-     * @private
      */
     static cloneObject(object) {
         let clone = new object.constructor();

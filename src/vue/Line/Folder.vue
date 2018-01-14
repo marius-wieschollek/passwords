@@ -7,7 +7,7 @@
         <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
         <span class="title">{{ folder.label }}</span>
-        <div class="date">{{ folder.updated.toLocaleDateString() }}</div>
+        <div class="date">{{ folder.edited.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">

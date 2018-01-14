@@ -132,7 +132,7 @@ class PasswordApiController extends AbstractObjectApiController {
     ): JSONResponse {
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden,
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, time(), $hidden,
             false, $favourite
         );
 
@@ -161,6 +161,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $url
      * @param string $notes
      * @param string $folder
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $favourite
      * @param array  $tags
@@ -170,7 +171,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function update(
         string $id,
@@ -182,6 +183,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $url = '',
         string $notes = '',
         string $folder = FolderService::BASE_FOLDER_UUID,
+        int $edited = 0,
         bool $hidden = false,
         bool $favourite = false,
         array $tags = []
@@ -195,6 +197,7 @@ class PasswordApiController extends AbstractObjectApiController {
             $password = $oldRevision->getPassword();
             $username = $oldRevision->getUsername();
             $cseType  = $oldRevision->getCseType();
+            $edited   = $oldRevision->getEdited();
             $label    = $oldRevision->getLabel();
             $notes    = $oldRevision->getNotes();
             $hash     = $oldRevision->getHash();
@@ -208,8 +211,9 @@ class PasswordApiController extends AbstractObjectApiController {
             }
         }
 
+        if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $oldRevision->isTrashed(),
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $edited, $hidden, $oldRevision->isTrashed(),
             $favourite
         );
 

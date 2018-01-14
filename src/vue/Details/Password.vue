@@ -14,7 +14,7 @@
         <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
             <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>
-            <span class="date">{{ object.updated.toLocaleDateString() }}</span>
+            <span class="date">{{ object.edited.toLocaleDateString() }}</span>
             <tags :password="object"/>
         </div>
         <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="object.id">
@@ -27,8 +27,8 @@
                 <translate tag="div" say="Website"><a :href="object.url" target="_blank">{{ object.url }}</a></translate>
 
                 <translate tag="div" say="Statistics" class="header"/>
-                <translate tag="div" say="Created on"><span>{{ object.created.toLocaleDateString() }}</span></translate>
-                <translate tag="div" say="Last updated"><span>{{ object.updated.toLocaleDateString() }}</span></translate>
+                <translate tag="div" say="Created on"><span>{{ object.created.toLocaleDateString() }} {{ object.created.toLocaleTimeString() }}</span></translate>
+                <translate tag="div" say="Last updated"><span>{{ object.edited.toLocaleDateString() }} {{ object.edited.toLocaleTimeString() }}</span></translate>
                 <translate tag="div" say="Revisions">
                     <translate say="{count} revisions" :variables="{count:countRevisions}"/>
                 </translate>
@@ -273,7 +273,7 @@
             }
 
             &.hidden {
-                display: none;
+                display : none;
             }
         }
 

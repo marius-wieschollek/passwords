@@ -150,6 +150,7 @@ class SynchronizeShares extends TimedJob {
                 $sourceRevision->getUrl(),
                 $sourceRevision->getNotes(),
                 FolderService::BASE_FOLDER_UUID,
+                time(),
                 false,
                 false,
                 false

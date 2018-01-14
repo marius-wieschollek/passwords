@@ -68,15 +68,16 @@ class PasswordManager {
             let DialogWindow = new PwCreateDialog().$mount('#app-popup div');
 
             DialogWindow.title = 'Edit password';
-            DialogWindow.password = password;
+            DialogWindow.password = Utility.cloneObject(password);
             DialogWindow._success = (p) => {
-                API.updatePassword(password)
+                p.edited = new Date();
+                API.updatePassword(p)
                     .then((d) => {
-                        password.revision = d.revision;
-                        password.updated = new Date();
-                        Events.fire('password.updated', password);
+                        p.revision = d.revision;
+                        p.updated = new Date();
+                        Events.fire('password.updated', p);
                         Messages.notification('Password saved');
-                        resolve(password);
+                        resolve(p);
                     })
                     .catch(() => {
                         Messages.notification('Saving password failed');

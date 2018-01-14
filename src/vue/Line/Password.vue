@@ -7,7 +7,7 @@
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ password.label }}</span>
-        <div class="date">{{ password.updated.toLocaleDateString() }}</div>
+        <div class="date">{{ password.edited.toLocaleDateString() }}</div>
         <i :class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>

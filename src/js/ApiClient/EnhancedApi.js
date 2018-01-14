@@ -220,6 +220,7 @@ export default class EnhancedApi extends SimpleApi {
         let object = EnhancedApi._cloneObject(data);
 
         try {
+            object = EnhancedApi.flattenTag(object);
             object = EnhancedApi.validateTag(object);
         } catch(e) {
             return this._createRejectedPromise(e);
@@ -240,6 +241,7 @@ export default class EnhancedApi extends SimpleApi {
         let object = EnhancedApi._cloneObject(data);
 
         try {
+            object = EnhancedApi.flattenTag(object);
             object = EnhancedApi.validateTag(object);
         } catch(e) {
             return this._createRejectedPromise(e);
@@ -392,6 +394,10 @@ export default class EnhancedApi extends SimpleApi {
         if(typeof password.folder !== 'string') {
             password.folder = password.folder.id
         }
+
+        if(password.edited instanceof Date) {
+            password.edited = Math.floor(password.edited.getTime() / 1000);
+        }
         password = EnhancedApi._convertTags(password);
 
         return password;
@@ -406,8 +412,24 @@ export default class EnhancedApi extends SimpleApi {
         if(typeof folder.parent !== 'string') {
             folder.parent = folder.parent.id
         }
+        if(folder.edited instanceof Date) {
+            folder.edited = Math.floor(folder.edited.getTime() / 1000);
+        }
 
         return folder;
+    }
+
+    /**
+     *
+     * @param tag
+     * @returns {*}
+     */
+    static flattenTag(tag) {
+        if(tag.edited instanceof Date) {
+            tag.edited = Math.floor(tag.edited.getTime() / 1000);
+        }
+
+        return tag;
     }
 
     /**
@@ -416,9 +438,8 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {*}
      */
     static flattenShare(share) {
-        if(share.expires !== null && Number.isNaN(share.expires)) {
-            let date = new Date(share.expires);
-            share.expires = Math.floor(date.getTime() / 1000);
+        if(share.expires !== null && share.expires instanceof Date) {
+            share.expires = Math.floor(share.expires.getTime() / 1000);
         }
 
         return share;
@@ -535,7 +556,26 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     static _cloneObject(object) {
-        return JSON.parse(JSON.stringify(object));
+        let clone = new object.constructor();
+
+        for(let key in object) {
+            if(!object.hasOwnProperty(key)) continue;
+            let element = object[key];
+
+            if(Array.isArray(element)) {
+                clone[key] = element.slice(0);
+            } else if(element instanceof Date) {
+                clone[key] = new Date(element.getTime());
+            } else if(element === null) {
+                clone[key] = null;
+            } else if(typeof element === "object") {
+                clone[key] = EnhancedApi._cloneObject(element);
+            } else {
+                clone[key] = element;
+            }
+        }
+
+        return clone;
     }
 
 
@@ -609,6 +649,7 @@ export default class EnhancedApi extends SimpleApi {
 
         password.created = new Date(password.created * 1e3);
         password.updated = new Date(password.updated * 1e3);
+        password.edited = new Date(password.edited * 1e3);
 
         return password;
     }
@@ -654,6 +695,7 @@ export default class EnhancedApi extends SimpleApi {
 
         folder.created = new Date(folder.created * 1e3);
         folder.updated = new Date(folder.updated * 1e3);
+        folder.edited = new Date(folder.edited * 1e3);
 
         return folder;
     }
@@ -691,6 +733,7 @@ export default class EnhancedApi extends SimpleApi {
         }
         tag.created = new Date(tag.created * 1e3);
         tag.updated = new Date(tag.updated * 1e3);
+        tag.edited = new Date(tag.edited * 1e3);
 
         return tag;
     }
@@ -727,6 +770,7 @@ export default class EnhancedApi extends SimpleApi {
 
         share.created = new Date(share.created * 1e3);
         share.updated = new Date(share.updated * 1e3);
+        share.edited = new Date(share.updated * 1e3);
 
         share.owner.icon = this.getAvatarUrl(share.owner.id);
         share.receiver.icon = this.getAvatarUrl(share.receiver.id);
@@ -803,10 +847,9 @@ export default class EnhancedApi extends SimpleApi {
                 length : 10,
                 default: 'none'
             },
-            sseType  : {
-                type   : 'string',
-                length : 10,
-                default: null
+            edited   : {
+                type   : 'number',
+                default: 0
             },
             hidden   : {
                 type   : 'boolean',
@@ -852,10 +895,9 @@ export default class EnhancedApi extends SimpleApi {
                 length : 10,
                 default: 'none'
             },
-            sseType  : {
-                type   : 'string',
-                length : 10,
-                default: null
+            edited   : {
+                type   : 'number',
+                default: 0
             },
             hidden   : {
                 type   : 'boolean',
@@ -897,10 +939,9 @@ export default class EnhancedApi extends SimpleApi {
                 length : 10,
                 default: 'none'
             },
-            sseType  : {
-                type   : 'string',
-                length : 10,
-                default: null
+            edited   : {
+                type   : 'number',
+                default: 0
             },
             hidden   : {
                 type   : 'boolean',
@@ -913,10 +954,6 @@ export default class EnhancedApi extends SimpleApi {
             favourite: {
                 type   : 'boolean',
                 default: false
-            },
-            passwords: {
-                type   : 'array',
-                default: []
             }
         }
     }

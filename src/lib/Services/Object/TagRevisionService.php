@@ -50,6 +50,7 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $color
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $favourite
@@ -63,12 +64,13 @@ class TagRevisionService extends AbstractRevisionService {
         string $label,
         string $color,
         string $cseType,
+        int $edited,
         bool $hidden,
         bool $trashed,
         bool $favourite
     ): TagRevision {
 
-        $revision = $this->createModel($model, $label, $color, $cseType, $hidden, $trashed, $favourite);
+        $revision = $this->createModel($model, $label, $color, $cseType, $edited, $hidden, $trashed, $favourite);
 
         $revision = $this->validationService->validateTag($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
@@ -81,6 +83,7 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $color
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $favourite
@@ -92,6 +95,7 @@ class TagRevisionService extends AbstractRevisionService {
         string $label,
         string $color,
         string $cseType,
+        int $edited,
         bool $hidden,
         bool $trashed,
         bool $favourite
@@ -112,6 +116,7 @@ class TagRevisionService extends AbstractRevisionService {
         $revision->setTrashed($trashed);
         $revision->setLabel($label);
         $revision->setColor($color);
+        $revision->setEdited($edited);
         $revision->setFavourite($favourite);
         $revision->setClient('');
 

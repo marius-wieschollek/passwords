@@ -25,6 +25,8 @@ namespace OCA\Passwords\Db;
  * @method void setLabel(string $label)
  * @method string getClient()
  * @method void setClient(string $client)
+ * @method int getEdited()
+ * @method void setEdited(int $edited)
  * @method bool getHidden()
  * @method void setHidden(bool $hidden)
  * @method bool getTrashed()
@@ -72,6 +74,11 @@ class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface
     protected $client;
 
     /**
+     * @var int
+     */
+    protected $edited;
+
+    /**
      * @var bool
      */
     protected $hidden;
@@ -103,6 +110,7 @@ class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface
         $this->addType('model', 'string');
         $this->addType('label', 'string');
         $this->addType('client', 'string');
+        $this->addType('edited', 'integer');
         $this->addType('hidden', 'boolean');
         $this->addType('trashed', 'boolean');
         $this->addType('favourite', 'boolean');

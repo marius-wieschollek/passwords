@@ -60,6 +60,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $url
      * @param string $notes
      * @param string $folder
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $favourite
@@ -79,6 +80,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $url,
         string $notes,
         string $folder,
+        int $edited,
         bool $hidden,
         bool $trashed,
         bool $favourite
@@ -86,7 +88,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
         $revision = $this->createModel(
-            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $hidden, $trashed, $favourite
+            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $edited, $hidden, $trashed, $favourite
         );
 
         $revision = $this->validationService->validatePassword($revision);
@@ -105,6 +107,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $url
      * @param string $notes
      * @param string $folder
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
      * @param bool   $favourite
@@ -121,6 +124,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $url,
         string $notes,
         string $folder,
+        int $edited,
         bool $hidden,
         bool $trashed,
         bool $favourite
@@ -148,6 +152,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setFolder($folder);
         $revision->setFavourite($favourite);
         $revision->setClient('');
+        $revision->setEdited($edited);
         $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
 
         return $revision;

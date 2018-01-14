@@ -159,7 +159,7 @@ class LegacyPasswordApiController extends ApiController {
             EncryptionService::CSE_ENCRYPTION_NONE,
             '', $website, $address, $notes,
             FolderService::BASE_FOLDER_UUID,
-            false, false, false
+            time(), false, false, false
         );
         $this->passwordRevisionService->save($revision);
         $this->passwordService->setRevision($model, $revision);
@@ -188,11 +188,16 @@ class LegacyPasswordApiController extends ApiController {
      * @param $notes
      * @param $category
      * @param $deleted
+     * @param $datechanged
      *
      * @return mixed
      * @throws \Exception
+     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \OCP\AppFramework\QueryException
      */
-    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted): JSONResponse {
+    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted, $datechanged): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);
@@ -204,6 +209,7 @@ class LegacyPasswordApiController extends ApiController {
             EncryptionService::CSE_ENCRYPTION_NONE,
             '', $website, $address, $notes,
             $revision->getFolder(),
+            strtotime($datechanged),
             $revision->isHidden(),
             $deleted,
             $revision->isFavourite()

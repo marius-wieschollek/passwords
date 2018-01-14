@@ -90,7 +90,7 @@ class FolderApiController extends AbstractObjectApiController {
     ): JSONResponse {
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $hidden, false, $favourite
+            $model->getUuid(), $label, $parent, $cseType, time(), $hidden, false, $favourite
         );
 
         $this->revisionService->save($revision);
@@ -111,6 +111,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $parent
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $favourite
      *
@@ -119,13 +120,13 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     *
      */
     public function update(
         string $id,
         string $label,
         string $parent,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
+        int $edited = 0,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
@@ -135,8 +136,9 @@ class FolderApiController extends AbstractObjectApiController {
         /** @var FolderRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
+        if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $hidden, $oldRevision->isTrashed(), $favourite
+            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favourite
         );
 
         $this->revisionService->save($revision);

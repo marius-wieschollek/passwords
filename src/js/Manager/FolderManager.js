@@ -53,6 +53,8 @@ class FolderManager {
                 .then((title) => {
                     let originalTitle = folder.label;
                     folder.label = title;
+                    folder.edited = new Date();
+
                     API.updateFolder(folder)
                         .then((d) => {
                             folder.updated = new Date();

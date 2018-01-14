@@ -66,6 +66,7 @@ class ExportManager {
                     notes    : element.notes,
                     url      : element.url,
                     folder   : element.folder,
+                    edited   : element.edited,
                     favourite: element.favourite
                 };
 
@@ -98,6 +99,7 @@ class ExportManager {
                     revision : element.revision,
                     label    : element.label,
                     parent   : element.parent,
+                    edited   : element.edited,
                     favourite: element.favourite
                 }
             );
@@ -123,6 +125,7 @@ class ExportManager {
                     revision : element.revision,
                     label    : element.label,
                     color    : element.color,
+                    edited   : element.edited,
                     favourite: element.favourite
                 }
             );

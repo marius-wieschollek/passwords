@@ -116,7 +116,7 @@ class LegacyCategoryApiController extends ApiController {
         /** @var Tag $model */
         $model    = $this->tagService->create();
         $revision = $this->tagRevisionService->create(
-            $model->getUuid(), $categoryName, '#'.$categoryColour, EncryptionService::CSE_ENCRYPTION_NONE, false, false, false
+            $model->getUuid(), $categoryName, '#'.$categoryColour, EncryptionService::CSE_ENCRYPTION_NONE, time(), false, false, false
         );
 
         $this->tagRevisionService->save($revision);
@@ -175,9 +175,9 @@ class LegacyCategoryApiController extends ApiController {
         }
 
         return [
-            'id'             => $tag->getId(),
-            'user_id'        => $tag->getUserId(),
-            'category_name'  => $revision->getLabel(),
+            'id'              => $tag->getId(),
+            'user_id'         => $tag->getUserId(),
+            'category_name'   => $revision->getLabel(),
             'category_colour' => substr($revision->getColor(), 1)
         ];
     }

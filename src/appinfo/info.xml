@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<info xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>passwords</id>
     <name>Passwords</name>
     <summary>Passwords lets you manage all your passwords easily on your Nextcloud.</summary>
@@ -8,23 +8,19 @@
         * Intuitive and modern user interface
         * Password safety checks
         * Server side encryption
-        * Folder &amp; Tags
+        * Folders &amp; Tags
         * Password sharing
         * Powerful API
-        * Import / Export
     </description>
     <licence>AGPL</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://github.com/marius-wieschollek/passwords">
         Marius David Wieschollek
     </author>
-    <version>2018.1.0</version>
-    <api>
-        <legacyApi>20-beta9</legacyApi>
-    </api>
+    <version>2018.1.1</version>
     <namespace>Passwords</namespace>
     <category>tools</category>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
-    <repository type="git">https://github.com/marius-wieschollek/passwords/passwords.git</repository>
+    <repository type="git">https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
     <dependencies>
         <nextcloud min-version="12" max-version="12" />
         <php min-version="7.1" />

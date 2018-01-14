@@ -63,11 +63,11 @@ class ValidationService {
         if(empty($password->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
-        if(empty($password->getHash()) || preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
+        if(empty($password->getHash()) || !preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
             throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }
         if($password->getFolder() !== $this->folderService::BASE_FOLDER_UUID) {
-            if(!$this->isValidUuid($password)) {
+            if(!$this->isValidUuid($password->getFolder())) {
                 $password->setFolder($this->folderService::BASE_FOLDER_UUID);
             } else {
                 try {
@@ -80,6 +80,9 @@ class ValidationService {
         if($password->getStatus() == 0) {
             $securityCheck = $this->helperService->getSecurityHelper();
             $password->setStatus($securityCheck->getRevisionSecurityLevel($password));
+        }
+        if($password->getEdited() > strtotime('+1 hour')) {
+            $password->setEdited(time());
         }
 
         return $password;
@@ -105,7 +108,7 @@ class ValidationService {
             throw new ApiException('Field "label" can not be empty', 400);
         }
         if($folder->getParent() !== $this->folderService::BASE_FOLDER_UUID) {
-            if(!$this->isValidUuid($folder)) {
+            if(!$this->isValidUuid($folder->getParent())) {
                 $folder->setParent($this->folderService::BASE_FOLDER_UUID);
             } else {
                 try {
@@ -114,6 +117,9 @@ class ValidationService {
                     $folder->setParent($this->folderService::BASE_FOLDER_UUID);
                 }
             }
+        }
+        if($folder->getEdited() > strtotime('+1 hour')) {
+            $folder->setEdited(time());
         }
 
         return $folder;
@@ -140,6 +146,9 @@ class ValidationService {
         }
         if(empty($tag->getColor())) {
             throw new ApiException('Field "color" can not be empty', 400);
+        }
+        if($tag->getEdited() > strtotime('+1 hour')) {
+            $tag->setEdited(time());
         }
 
         return $tag;
@@ -186,6 +195,6 @@ class ValidationService {
      * @return bool
      */
     public function isValidUuid(string $uuid): bool {
-        return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) === true;
+        return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) != false;
     }
 }
