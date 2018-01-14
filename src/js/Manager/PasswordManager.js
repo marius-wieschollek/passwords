@@ -70,7 +70,13 @@ class PasswordManager {
             DialogWindow.title = 'Edit password';
             DialogWindow.password = Utility.cloneObject(password);
             DialogWindow._success = (p) => {
-                p.edited = new Date();
+                p = Utility.mergeObject(password, p);
+                if(password.password !== p.password) {
+                    p.edited = new Date();
+                } else {
+                    p.edited = password.edited;
+                }
+
                 API.updatePassword(p)
                     .then((d) => {
                         p.revision = d.revision;

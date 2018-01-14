@@ -124,7 +124,7 @@
                     });
             },
             submitAction            : function() {
-                let password = this.password;
+                let password = Utility.cloneObject(this.password);
                 password.notes = this.simplemde.value();
                 password = EnhancedApi.validatePassword(this.password);
                 this.isSubmitted = true;
