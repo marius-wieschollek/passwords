@@ -27,16 +27,13 @@
                     <translate>Trash</translate>
                 </router-link>
             </ul>
-            <div id="app-settings">
-                <div id="app-settings-header">
-                    <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
-                </div>
-                <div id="app-settings-content">
-                    <router-link class="nav-icon-trash" to="/backup" active-class="active" tag="li">
-                        <translate>Backup</translate>
-                    </router-link>
-                </div>
-            </div>
+            <ul id="app-settings" :class="{open: showMore}">
+                <translate tag="li" class="nav-icon-more" @click="showMore = !showMore">More</translate>
+                <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage">Browser Extension</translate>
+                <!--<router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
+                    <translate>Backup</translate>
+                </router-link>-->
+            </ul>
         </div>
 
         <router-view name="main"/>
@@ -49,6 +46,7 @@
 <script>
     import "@scss/app";
     import router from '@js/Helper/router';
+    import Utility from "@js/Classes/Utility";
     import Translate from '@vc/Translate.vue';
 
     export default {
@@ -57,6 +55,22 @@
         components: {
             app: {router},
             Translate
+        },
+
+        data() {
+            return {
+                showMore: false
+            }
+        },
+
+        methods: {
+            openBrowserAddonPage() {
+                if(navigator.userAgent.indexOf('Firefox') !== -1) {
+                    Utility.openLink('https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords');
+                } else {
+                    Utility.openLink('https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds');
+                }
+            }
         }
     }
 </script>
@@ -94,11 +108,27 @@
             &.nav-icon-shared:before { content : "\f1e0"; }
             &.nav-icon-favourites:before { content : "\f005"; }
             &.nav-icon-trash:before { content : "\f014"; }
+            &.nav-icon-more:before { content : "\f078"; }
+            &.nav-icon-settings:before { content : "\f013"; }
+            &.nav-icon-addon:before { content : "\f12e"; }
+            &.nav-icon-backup:before { content : "\f187"; }
 
             span {
                 cursor : pointer;
             }
         }
-    }
 
+        #app-settings {
+            position   : fixed;
+            overflow   : hidden;
+            max-height : 45px;
+            transition : max-height 0.25s ease-in-out;
+
+            &.open {
+                max-height : 90px;
+
+                li.nav-icon-more:before { content : "\f054"; }
+            }
+        }
+    }
 </style>

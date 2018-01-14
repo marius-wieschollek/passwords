@@ -98,7 +98,10 @@ OC.L10N.register(
         "Last updated"                        : "Zuletzt geändert",
         "{count} revisions"                   : "{count} Versionen",
         "Shares"                              : "Freigaben",
-        "{count} shares"                      : "{count} mal geteilt"
+        "{count} shares"                      : "{count} mal geteilt",
+        "More"                                : "Mehr",
+        "Backup"                              : "Sichern & Importieren",
+        "Browser Extension"                   : "Browser Extension"
     },
     'nplurals=2; plural=(n != 1);'
 );

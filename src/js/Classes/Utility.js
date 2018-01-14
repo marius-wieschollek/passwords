@@ -48,6 +48,22 @@ export default class Utility {
 
     /**
      *
+     * @param url
+     * @param target
+     */
+    static openLink(url, target = '_blank') {
+        let element = document.createElement('a');
+        element.setAttribute('href', url);
+        element.setAttribute('target', target);
+        element.style.display = 'none';
+
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
+    /**
+     *
      * @returns {number}
      */
     static getTimestamp() {
