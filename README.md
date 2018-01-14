@@ -1,8 +1,6 @@
 # Passwords
 > Easy to use yet feature-rich and secure password manager for Nextcloud
 
-_Looking for the old app? [Click here](https://github.com/marius-wieschollek/passwords-legacy)._
-
 ## Contents
 * [Features](#features)
 * [Security](#security)
@@ -69,12 +67,13 @@ Passwords offers complete API, giving you access to all features of the app.
 **Soon to come:** Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/).
 
 #### Requirements
+* Linux based OS
 * Nextcloud 12+
 * PHP 7.1+
 
 ## Development
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
-* **Soon to come:** Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis).
+* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Api/Api).
 
 ## Licenses and Legal Information
 See [Licenses.md](Licenses.md)
