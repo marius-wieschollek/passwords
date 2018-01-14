@@ -36,7 +36,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface {
+abstract class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface {
 
     /**
      * @var string

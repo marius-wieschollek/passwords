@@ -81,7 +81,7 @@ class ValidationService {
             $securityCheck = $this->helperService->getSecurityHelper();
             $password->setStatus($securityCheck->getRevisionSecurityLevel($password));
         }
-        if($password->getEdited() > strtotime('+1 hour')) {
+        if(empty($password->getEdited()) || $password->getEdited() > strtotime('+1 hour')) {
             $password->setEdited(time());
         }
 
@@ -118,7 +118,7 @@ class ValidationService {
                 }
             }
         }
-        if($folder->getEdited() > strtotime('+1 hour')) {
+        if(empty($folder->getEdited()) || $folder->getEdited() > strtotime('+1 hour')) {
             $folder->setEdited(time());
         }
 
@@ -147,7 +147,7 @@ class ValidationService {
         if(empty($tag->getColor())) {
             throw new ApiException('Field "color" can not be empty', 400);
         }
-        if($tag->getEdited() > strtotime('+1 hour')) {
+        if(empty($tag->getEdited()) || $tag->getEdited() > strtotime('+1 hour')) {
             $tag->setEdited(time());
         }
 

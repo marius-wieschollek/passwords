@@ -17,6 +17,9 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
 
     const MODEL_TABLE_NAME = 'passwords_model';
 
+    /**
+     * @var array
+     */
     protected $allowedFields = ['id', 'uuid', 'model'];
 
     /**
