@@ -7,8 +7,6 @@
                @keypress="submitAction($event)"/>
         <ul class="shares" v-for="share in object.shares" :key="share.id">
             <li class="share">
-                <img :src="share.receiver.icon" :alt="share.receiver.name">
-                {{share.receiver.name}}
                 <div class="options">
                     <translate icon="pencil"
                                :class="{active: share.editable}"
@@ -24,6 +22,8 @@
                                @click="setExpires(share)"/>
                     <translate icon="trash" title="Delete share" @click="deleteAction(share)"/>
                 </div>
+                <img :src="share.receiver.icon" :alt="share.receiver.name">
+                {{share.receiver.name}}
             </li>
         </ul>
     </div>
@@ -105,6 +105,7 @@
                     form = {
                         expires: {
                             value: date.toLocaleDateString(),
+                            type : 'date',
                             label: 'Date'
                         }
                     };
