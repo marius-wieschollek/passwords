@@ -36,8 +36,8 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
         $sql = "SELECT {$revisionTable}.* FROM {$revisionTable} ".
                "INNER JOIN {$passwordTable} ".
                "ON {$revisionTable}.`model` = {$passwordTable}.`uuid` ".
-               "WHERE {$revisionTable}.`deleted` = 0 ".
-               "AND {$passwordTable}.`deleted` = 0 ".
+               "WHERE {$revisionTable}.`deleted` = false ".
+               "AND {$passwordTable}.`deleted` = false ".
                "AND {$passwordTable}.`user_id` = {$revisionTable}.`user_id` ".
                "AND {$passwordTable}.`revision` = {$revisionTable}.`uuid` ".
                "AND {$passwordTable}.`uuid` = ?";

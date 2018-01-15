@@ -1,24 +1,35 @@
 version: '2'
 
 services:
-  db:
+  mysql:
     image: mariadb
-    container_name: "passwords-db"
+    container_name: "passwords-mysql"
     restart: on-failure
     volumes:
-      - db:/var/lib/mysql
+      - mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=nextcloud
       - MYSQL_PASSWORD=nextcloud
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
 
+  postgres:
+    image: postgres:alpine
+    container_name: "passwords-postgres"
+    restart: on-failure
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_DB=nextcloud
+
   app:
     build: ./docker/php/
     container_name: "passwords-php"
     restart: on-failure
     links:
-      - db
+      - mysql
     volumes:
       - /var/www/html
       - ./src/:/var/www/html/custom_apps/passwords
@@ -42,13 +53,14 @@ services:
     ports:
       - 8080:80
     links:
-      - db
+      - mysql
     environment:
       MYSQL_ROOT_PASSWORD: "nextcloud"
       PMA_ABSOLUTE_URI: http://localhost:8080
-      PMA_HOSTS: db
+      PMA_HOSTS: mysql
       PMA_USER: root
       PMA_PASSWORD: nextcloud
 
 volumes:
-  db:
+  mysql:
+  postgres:

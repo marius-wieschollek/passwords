@@ -33,7 +33,7 @@ class ShareMapper extends AbstractMapper {
      * @return array
      */
     protected function getStatement(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = 0';
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = false';
 
         $params = [];
         if($this->userId !== null) {

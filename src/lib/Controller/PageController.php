@@ -76,7 +76,7 @@ class PageController extends Controller {
      */
     public function __construct(
         string $appName,
-        string $userId,
+        ?string $userId,
         IRequest $request,
         ISession $session,
         IL10N $localisation,

@@ -13,7 +13,7 @@
 * Click "Storage & Database"
 * Select "MySQL/MariaDB" as database
 * Enter "nextcloud" for username, password and database
-* Enter "db" for host (usually filled already with "localhost")
+* Enter "mysql" for host (usually filled already with "localhost")
 * Finish the installation
 * Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
 * Run `docker exec -u www-data passwords-php /var/www/html/occ config:app:set passwords environment --value dev`

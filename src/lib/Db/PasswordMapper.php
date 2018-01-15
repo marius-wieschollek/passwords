@@ -38,8 +38,8 @@ class PasswordMapper extends AbstractMapper {
         $sql = "SELECT {$passwordTable}.* FROM {$passwordTable} ".
                "INNER JOIN {$shareTable} ".
                "ON {$passwordTable}.`uuid` = {$shareTable}.`{$mapField}` ".
-               "WHERE {$passwordTable}.`deleted` = 0 ".
-               "AND {$shareTable}.`deleted` = 0 ".
+               "WHERE {$passwordTable}.`deleted` = false ".
+               "AND {$shareTable}.`deleted` = false ".
                "AND ( {$passwordTable}.`user_id` = {$shareTable}.`user_id` ".
                "OR {$passwordTable}.`user_id` = {$shareTable}.`receiver` ) ".
                "AND {$shareTable}.`uuid` = ?";
@@ -64,8 +64,8 @@ class PasswordMapper extends AbstractMapper {
         $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
                "INNER JOIN {$shareTable} ".
                "ON {$passwordsTable}.`uuid` = {$shareTable}.`target_password` ".
-               "WHERE {$passwordsTable}.`deleted` = 0 ".
-               "AND {$shareTable}.`deleted` = 1 ";
+               "WHERE {$passwordsTable}.`deleted` = false ".
+               "AND {$shareTable}.`deleted` = true ";
 
         return $this->findEntities($sql);
     }
@@ -81,9 +81,9 @@ class PasswordMapper extends AbstractMapper {
 
         $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable}".
                " INNER JOIN {$revisionTable} ON {$passwordsTable}.`revision` = {$revisionTable}.`uuid`".
-               " WHERE {$passwordsTable}.`deleted` = 0".
+               " WHERE {$passwordsTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$passwordsTable}.`user_id` = ?":'').
-               " AND {$revisionTable}.`folder` = ? AND {$revisionTable}.`deleted` = 0".
+               " AND {$revisionTable}.`folder` = ? AND {$revisionTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$revisionTable}.`user_id` = ?":'');
 
         $params = [$folderUuid];
@@ -104,12 +104,12 @@ class PasswordMapper extends AbstractMapper {
 
         $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable}".
                " INNER JOIN {$relationTable} ON {$passwordsTable}.`uuid` = {$relationTable}.`password`".
-               " WHERE {$passwordsTable}.`deleted` = 0".
+               " WHERE {$passwordsTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$passwordsTable}.`user_id` = ?":'').
-               " AND {$relationTable}.`tag` = ? AND {$relationTable}.`deleted` = 0".
+               " AND {$relationTable}.`tag` = ? AND {$relationTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$relationTable}.`user_id` = ?":'');
 
-        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = 0";
+        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = false";
 
         $params = [$tagUuid];
         if($this->userId !== null) $params = [$this->userId, $tagUuid, $this->userId];

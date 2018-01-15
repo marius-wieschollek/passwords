@@ -40,7 +40,7 @@ class LegacyPasswordMapper extends Mapper {
      * @return string
      */
     protected function getStatement(): string {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = 0';
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = false';
 
         return $sql;
     }

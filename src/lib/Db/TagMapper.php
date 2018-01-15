@@ -29,12 +29,12 @@ class TagMapper extends AbstractMapper {
 
         $sql = "SELECT {$tagTable}.* FROM {$tagTable}".
                " INNER JOIN {$relationTable} ON {$tagTable}.`uuid` = {$relationTable}.`tag`".
-               " WHERE {$tagTable}.`deleted` = 0".
+               " WHERE {$tagTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$tagTable}.`user_id` = ?":'').
-               " AND {$relationTable}.`password` = ? AND {$relationTable}.`deleted` = 0".
+               " AND {$relationTable}.`password` = ? AND {$relationTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$relationTable}.`user_id` = ?":'');
 
-        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = 0";
+        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = false";
 
         $params = [$passwordUuid];
         if($this->userId !== null) $params = [$this->userId, $passwordUuid, $this->userId];

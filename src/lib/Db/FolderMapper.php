@@ -28,9 +28,9 @@ class FolderMapper extends AbstractMapper {
 
         $sql = "SELECT {$folderTable}.* FROM {$folderTable}".
                " INNER JOIN {$revisionTable} ON {$folderTable}.`revision` = {$revisionTable}.`uuid`".
-               " WHERE {$folderTable}.`deleted` = 0".
+               " WHERE {$folderTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$folderTable}.`user_id` = ?":'').
-               " AND {$revisionTable}.`parent` = ? AND {$revisionTable}.`deleted` = 0".
+               " AND {$revisionTable}.`parent` = ? AND {$revisionTable}.`deleted` = false".
                ($this->userId !== null ? " AND {$revisionTable}.`user_id` = ?":'');
 
         $params = [$parentUuid];
