@@ -9,11 +9,14 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Notification\Notifier;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\Notification\IManager;
 
 /**
  * Class CheckPasswordsJob
@@ -21,6 +24,11 @@ use OCA\Passwords\Services\LoggingService;
  * @package OCA\Passwords\Cron
  */
 class CheckPasswordsJob extends TimedJob {
+
+    /**
+     * @var LoggingService
+     */
+    protected $logger;
 
     /**
      * @var HelperService
@@ -33,27 +41,35 @@ class CheckPasswordsJob extends TimedJob {
     protected $revisionMapper;
 
     /**
-     * @var LoggingService
+     * @var IManager
      */
-    protected $logger;
+    protected $notificationManager;
+
+    /**
+     * @var array
+     */
+    protected $notifiedUsers = [];
 
     /**
      * CheckPasswordsJob constructor.
      *
      * @param LoggingService         $logger
      * @param HelperService          $helperService
+     * @param IManager               $notificationManager
      * @param PasswordRevisionMapper $revisionMapper
      */
     public function __construct(
         LoggingService $logger,
         HelperService $helperService,
+        IManager $notificationManager,
         PasswordRevisionMapper $revisionMapper
     ) {
         // Run once per day
         $this->setInterval(24 * 60 * 60);
-        $this->helperService  = $helperService;
-        $this->revisionMapper = $revisionMapper;
-        $this->logger         = $logger;
+        $this->logger              = $logger;
+        $this->helperService       = $helperService;
+        $this->revisionMapper      = $revisionMapper;
+        $this->notificationManager = $notificationManager;
     }
 
     /**
@@ -79,7 +95,7 @@ class CheckPasswordsJob extends TimedJob {
         /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionMapper->findAllMatching(['status', 2, '!=']);
 
-        $badPasswordCounter = 0;
+        $badRevisionCounter = 0;
         foreach($revisions as $revision) {
             $oldStatus = $revision->getStatus();
             $newStatus = $securityHelper->getRevisionSecurityLevel($revision);
@@ -87,10 +103,36 @@ class CheckPasswordsJob extends TimedJob {
             if($oldStatus != $newStatus) {
                 $revision->setStatus($newStatus);
                 $this->revisionMapper->update($revision);
-                $badPasswordCounter++;
+                $this->sendBadPasswordNotification($revision);
+                $badRevisionCounter++;
             }
         }
 
-        $this->logger->info(['Checked %s passwords. %s new bad passwords found', count($revisions), $badPasswordCounter]);
+        $this->logger->info(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter]);
+    }
+
+    /**
+     * @param PasswordRevision $revision
+     */
+    protected function sendBadPasswordNotification(PasswordRevision $revision): void {
+        $user = $revision->getUserId();
+        if(in_array($user, $this->notifiedUsers)) return;
+
+        try {
+            $current = $this->revisionMapper->findCurrentRevisionByModel($revision->getModel());
+            if($current->getUuid() !== $revision->getUuid()) return;
+        } catch(\Throwable $e) {
+            return;
+        }
+
+        $notification = $this->notificationManager->createNotification();
+        $notification->setApp(Application::APP_NAME)
+                     ->setUser($user)
+                     ->setObject('object', 'password')
+                     ->setSubject(Notifier::NOTIFICATION_PASSWORD_BAD)
+                     ->setDateTime(new \DateTime());
+        $this->notificationManager->notify($notification);
+
+        $this->notifiedUsers[] = $user;
     }
 }

@@ -32,12 +32,14 @@ use OCA\Passwords\Hooks\ShareHook;
 use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
+use OCA\Passwords\Notification\Notifier;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IGroupManager;
+use OCP\IL10N;
 use OCP\IRequest;
 use OCP\L10N\IFactory;
 
@@ -60,10 +62,11 @@ class Application extends App {
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
 
-        $this->registerPersonalSettings();
+        //$this->registerPersonalSettings();
         $this->registerDiClasses();
         $this->registerInternalHooks();
         $this->registerMiddleware();
+        $this->registerNotificationNotifier();
     }
 
     /**
@@ -189,5 +192,21 @@ class Application extends App {
         /** @var ShareHook $shareHook */
         $shareHook = $container->query(ShareHook::class);
         $hookManager->listen(Share::class, 'postDelete', [$shareHook, 'postDelete']);
+    }
+
+    /**
+     *
+     */
+    protected function registerNotificationNotifier(): void {
+        $this->getContainer()->getServer()->getNotificationManager()->registerNotifier(
+            function () {
+                return $this->getContainer()->query(Notifier::class);
+            },
+            function () {
+                $l = $this->getContainer()->query(IL10N::class);
+
+                return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
+            }
+            );
     }
 }

@@ -38,7 +38,11 @@
         "Favicon Cache (%s files, %s)"                                             : "Favicon (%s Dateien, %s)",
         "Pageshot Cache (%s files, %s)"                                            : "Webseitenansichten (%s Dateien, %s)",
         "Passwords Cache (%s files, %s)"                                           : "Schlechte Passwörter (%s Dateien, %s)",
-        "clear"                                                                    : "leeren"
+        "clear"                                                                    : "leeren",
+        "Password not shared"                                                      : "Password nicht geteilt",
+        "A password was not shared with %1$s because it already is"                : "Ein Passwort wurde nicht mit %1$s geteilt, da dies bereits von einer anderen Person getan wurde.",
+        "Insecure password found"                                                  : "Unsicheres Passwort gefunden",
+        "One of your passwords is no longer secure"                                : "Eines Ihrer Passwörter ist nicht mehr sicher und sollte geändert werden."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
