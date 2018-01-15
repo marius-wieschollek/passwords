@@ -108,7 +108,7 @@
             &.nav-icon-shared:before { content : "\f1e0"; }
             &.nav-icon-favourites:before { content : "\f005"; }
             &.nav-icon-trash:before { content : "\f014"; }
-            &.nav-icon-more:before { content : "\f078"; }
+            &.nav-icon-more:before { content : "\f067"; }
             &.nav-icon-settings:before { content : "\f013"; }
             &.nav-icon-addon:before { content : "\f12e"; }
             &.nav-icon-backup:before { content : "\f187"; }
@@ -127,7 +127,7 @@
             &.open {
                 max-height : 90px;
 
-                li.nav-icon-more:before { content : "\f054"; }
+                li.nav-icon-more:before { content : "\f068"; }
             }
         }
     }
