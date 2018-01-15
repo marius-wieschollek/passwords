@@ -25,6 +25,7 @@
 #### Helpful commands
 * `npm run build` - Create production build of JS/CSS files
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
+* `docker exec -u www-data passwords-php php /var/www/html/cron.php` - Execute cron jobs
 
 #### First steps
 * [Issues for beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)

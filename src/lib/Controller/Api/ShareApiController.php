@@ -241,7 +241,7 @@ class ShareApiController extends AbstractApiController {
         $this->checkAccessPermissions();
 
         $partners = $this->getSharePartners('');
-        if(!isset($partners[ $receiver ])) throw new ApiException('Invalid receiver uid', 403);
+        if(!isset($partners[ $receiver ])) throw new ApiException('Invalid receiver uid', 400);
 
         if(empty($expires)) $expires = null;
         if($expires !== null && $expires < time()) {
@@ -255,21 +255,19 @@ class ShareApiController extends AbstractApiController {
         $model = $this->passwordModelService->findByUuid($password);
         if($model->getShareId()) {
             $sourceShare = $this->modelService->findByUuid($model->getShareId());
+            if($sourceShare->getUserId() === $receiver)  throw new ApiException('Invalid receiver uid', 400);
+
             $reSharing   = $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
-            if(!$sourceShare->isShareable() || !$reSharing) {
-                throw new ApiException('Entity not shareable', 403);
-            }
+            if(!$sourceShare->isShareable() || !$reSharing) throw new ApiException('Entity not shareable', 403);
+
             if(!$sourceShare->isEditable()) $editable = false;
         }
 
         $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
-        if($shares !== null) {
-            throw new ApiException('Entity already shared with user', 420);
-        }
+        if($shares !== null) throw new ApiException('Entity already shared with user', 400);
 
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
-
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
             throw new ApiException('CSE type does not support sharing', 420);
         }

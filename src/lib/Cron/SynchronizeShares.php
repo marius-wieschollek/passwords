@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\LoggingService;
@@ -22,6 +23,10 @@ use OCP\AppFramework\Db\DoesNotExistException;
  * Class SynchronizeShares
  *
  * @package OCA\Passwords\Cron
+ *
+ * @TODO check for deleted users
+ * @TODO deadlock prevention
+ * @TODO check if not shareable shares were shared
  */
 class SynchronizeShares extends TimedJob {
 
@@ -60,7 +65,7 @@ class SynchronizeShares extends TimedJob {
         PasswordRevisionService $passwordRevisionService
     ) {
         // Run every minute
-        $this->setInterval(60);
+        $this->setInterval(1);
 
         $this->logger                  = $logger;
         $this->shareService            = $shareService;
@@ -96,6 +101,7 @@ class SynchronizeShares extends TimedJob {
                 foreach($shares as $share) {
                     $this->shareService->delete($share);
                 }
+                $this->passwordService->delete($password);
             }
         } while($count !== 0);
 
@@ -222,8 +228,8 @@ class SynchronizeShares extends TimedJob {
 
                 /** @var Password $password */
                 $password = $this->passwordService->findByUuid($share->getTargetPassword());
-                $this->passwordService->setRevision($password, $revision);
                 $password->setEditable($share->isEditable());
+                $this->passwordService->setRevision($password, $revision);
 
                 $share->setTargetUpdated(false);
                 $share->setSourceUpdated(false);
@@ -268,7 +274,7 @@ class SynchronizeShares extends TimedJob {
      * @param string $sourceUuid
      * @param string $targetUuid
      *
-     * @return PasswordRevision
+     * @return PasswordRevision|EntityInterface
      * @throws \Exception
      */
     protected function createNewPasswordRevision(string $sourceUuid, string $targetUuid): PasswordRevision {
@@ -288,6 +294,6 @@ class SynchronizeShares extends TimedJob {
             'status'   => $sourceRevision->getStatus(),
         ]);
 
-        return $newRevision;
+        return $this->passwordRevisionService->save($newRevision);
     }
 }
