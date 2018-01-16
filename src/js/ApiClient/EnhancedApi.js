@@ -770,7 +770,6 @@ export default class EnhancedApi extends SimpleApi {
 
         share.created = new Date(share.created * 1e3);
         share.updated = new Date(share.updated * 1e3);
-        share.edited = new Date(share.updated * 1e3);
 
         share.owner.icon = this.getAvatarUrl(share.owner.id);
         share.receiver.icon = this.getAvatarUrl(share.receiver.id);

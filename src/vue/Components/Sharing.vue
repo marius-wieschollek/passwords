@@ -5,21 +5,12 @@
                class="share-add-user"
                placeholder="Search username"
                @keypress="submitAction($event)"/>
-        <ul class="shares" v-for="share in object.shares" :key="share.id">
+        <ul class="shares" v-for="share in object.shares" :key="share.id" :data-share-id="share.id">
             <li class="share">
                 <div class="options">
-                    <translate icon="pencil"
-                               :class="{active: share.editable}"
-                               title="Toggle write permissions"
-                               @click="toggleEditable(share)"/>
-                    <translate icon="share-alt"
-                               :class="{active: share.shareable}"
-                               title="Toggle share permissions"
-                               @click="toggleShareable(share)"/>
-                    <translate icon="calendar"
-                               :class="{active: share.expires}"
-                               title="Set expiration date"
-                               @click="setExpires(share)"/>
+                    <translate icon="pencil" :class="{active: share.editable}" title="Toggle write permissions" @click="toggleEditable(share)"/>
+                    <translate icon="share-alt" :class="{active: share.shareable}" title="Toggle share permissions" @click="toggleShareable(share)"/>
+                    <translate icon="calendar" :class="{active: share.expires}" title="Set expiration date" @click="setExpires(share)"/>
                     <translate icon="trash" title="Delete share" @click="deleteAction(share)"/>
                 </div>
                 <img :src="share.receiver.icon" :alt="share.receiver.name">
@@ -54,7 +45,11 @@
                 partnersLoaded: false,
                 object        : this.password,
                 editable      : false,
-                expires       : null
+                expires       : null,
+                owner : {
+                    id: $('head[data-user]').attr('data-user'),
+                    name: $('head[data-user-displayname]').attr('data-user-displayname')
+                }
             }
         },
 
@@ -83,7 +78,7 @@
                 API.createShare(share).then(
                     (d) => {
                         share.id = d.id;
-                        share.owner = {id: 'null'};
+                        share.owner = this.owner;
                         share.receiver = {id: share.receiver, name: share.receiver.capitalize()};
                         this.object.shares[d.id] = API._processShare(share);
                         this.$forceUpdate();
@@ -94,11 +89,13 @@
                 share.editable = !share.editable;
 
                 API.updateShare(share);
+                this.$forceUpdate();
             },
             toggleShareable(share) {
                 share.shareable = !share.shareable;
 
                 API.updateShare(share);
+                this.$forceUpdate();
             },
             setExpires(share) {
                 let date = share.expires ? new Date(share.expires):new Date(),
@@ -125,6 +122,7 @@
 
                         share.expires = expires;
                         API.updateShare(share);
+                        this.$forceUpdate();
                     });
             },
             deleteAction(share) {
