@@ -56,7 +56,6 @@ class PasswordHook {
      * PasswordHook constructor.
      *
      * @param ShareService               $shareService
-     * @param PasswordService            $passwordService
      * @param TagRevisionService         $tagRevisionService
      * @param PasswordRevisionService    $revisionService
      * @param PasswordTagRelationService $relationService

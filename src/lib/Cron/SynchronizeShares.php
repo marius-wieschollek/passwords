@@ -297,6 +297,7 @@ class SynchronizeShares extends TimedJob {
                     foreach($subShares as $subShare) {
                         if($subShare->isEditable()) {
                             $subShare->setEditable(false);
+                            $subShare->setSourceUpdated(true);
                             $this->shareService->save($subShare);
                         }
                     }
