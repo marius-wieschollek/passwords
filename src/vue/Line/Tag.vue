@@ -3,22 +3,22 @@
         <i class="fa fa-star favourite" :class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}"></div>
         <span class="title">{{ tag.label }}</span>
+        <slot name="middle"/>
         <div class="date">{{ tag.edited.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
-                        <slot name="option-top"/>
+                        <slot name="menu-top"/>
                         <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
                         <translate tag="li" @click="editAction()" icon="edit">Edit</translate>
                         <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
-                        <slot name="option-bottom"/>
+                        <slot name="menu-bottom"/>
                     </ul>
                 </slot>
             </div>
         </div>
-        <slot name="buttons"/>
     </div>
 </template>
 

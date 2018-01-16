@@ -4,14 +4,13 @@
             <breadcrumb :showAddNew="false"/>
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
-                    <translate tag="li" icon="undo" slot="option-top" @click="restoreFolderAction(folder)">Restore</translate>
+                    <translate tag="li" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)">Restore</translate>
                 </folder-line>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id">
-                    <translate tag="li" icon="undo" slot="option-top" @click="restoreTagAction(tag)">Restore</translate>
+                    <translate tag="li" icon="undo" slot="menu-top" @click="restoreTagAction(tag)">Restore</translate>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
-                    <translate tag="li" icon="undo" slot="option-top" @click="restorePasswordAction(password)">Restore
-                    </translate>
+                    <translate tag="li" icon="undo" slot="menu-top" @click="restorePasswordAction(password)">Restore</translate>
                 </password-line>
             </div>
         </div>

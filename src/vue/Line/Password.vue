@@ -7,6 +7,7 @@
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ password.label }}</span>
+        <slot name="middle"/>
         <div class="date">{{ password.edited.toLocaleDateString() }}</div>
         <i :class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
@@ -14,7 +15,7 @@
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
-                        <slot name="option-top"/>
+                        <slot name="menu-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
                         <translate tag="li" v-if="isMobile" @click="copyPasswordAction()" icon="clipboard">Copy Password</translate>
                         <translate tag="li" v-if="isMobile" @click="copyUsernameAction()" icon="clipboard">Copy User</translate>
@@ -24,12 +25,11 @@
                         </li>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable">Edit</translate>
                         <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
-                        <slot name="option-bottom"/>
+                        <slot name="menu-bottom"/>
                     </ul>
                 </slot>
             </div>
         </div>
-        <slot name="buttons"/>
     </div>
 </template>
 
@@ -184,15 +184,17 @@
                 }
 
                 .title {
-                    font-size    : 0.8rem;
-                    padding-left : 8px;
-                    cursor       : pointer;
-                    line-height  : 50px;
-                    min-width    : 0;
-                    white-space  : nowrap;
-                    overflow     : hidden;
-                    text-overflow: ellipsis;
-                    flex-grow    : 1;
+                    font-size      : 0.8rem;
+                    padding-left   : 8px;
+                    cursor         : pointer;
+                    line-height    : 50px;
+                    min-width      : 0;
+                    white-space    : nowrap;
+                    overflow       : hidden;
+                    text-overflow  : ellipsis;
+                    flex-grow      : 1;
+                    vertical-align : baseline;
+                    display        : flex;
                 }
 
                 .more,
@@ -289,9 +291,9 @@
                     }
                 }
 
-                @media(max-width: $mobile-width) {
+                @media(max-width : $mobile-width) {
                     .date {
-                        display: none;
+                        display : none;
                     }
                 }
             }

@@ -106,7 +106,7 @@ class Messages {
             html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
         }
 
-        if(message.length !== 0) message = '<div class="message">' + message + '</div>';
+        if(message.length !== 0) message = '<div class="message">' + Utility.translate(message) + '</div>';
         html = '<form class="passwords-form" id="' + id + '">' + message + html + '</form>';
 
         return new Promise((resolve, reject) => {

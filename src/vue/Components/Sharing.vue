@@ -3,7 +3,7 @@
         <input type="text"
                v-model="user"
                class="share-add-user"
-               placeholder="Search username"
+               :placeholder="placeholder"
                @keypress="submitAction($event)"/>
         <ul class="shares" v-for="share in object.shares" :key="share.id" :data-share-id="share.id">
             <li class="share">
@@ -11,7 +11,7 @@
                     <translate icon="pencil" :class="{active: share.editable}" title="Toggle write permissions" @click="toggleEditable(share)"/>
                     <translate icon="share-alt" :class="{active: share.shareable}" title="Toggle share permissions" @click="toggleShareable(share)"/>
                     <translate icon="calendar" :class="{active: share.expires}" title="Set expiration date" @click="setExpires(share)"/>
-                    <translate icon="trash" title="Delete share" @click="deleteAction(share)"/>
+                    <translate icon="trash" title="Stop sharing" @click="deleteAction(share)"/>
                 </div>
                 <img :src="share.receiver.icon" :alt="share.receiver.name">
                 {{share.receiver.name}}
@@ -23,6 +23,7 @@
 
 <script>
     import API from '@js/Helper/api';
+    import Utility from "@js/Classes/Utility";
     import Messages from '@js/Classes/Messages';
     import Translate from '@vc/Translate.vue';
 
@@ -46,8 +47,9 @@
                 object        : this.password,
                 editable      : false,
                 expires       : null,
-                owner : {
-                    id: $('head[data-user]').attr('data-user'),
+                placeholder   : Utility.translate('Search user'),
+                owner         : {
+                    id  : $('head[data-user]').attr('data-user'),
                     name: $('head[data-user-displayname]').attr('data-user-displayname')
                 }
             }
@@ -107,7 +109,7 @@
                         }
                     };
 
-                Messages.form(form, 'Share expiration date', 'Choose an expiration date or leave empty to share forever')
+                Messages.form(form, 'Set expiration date', 'Choose expiration date')
                     .then((data) => {
                         let expires = data.expires;
                         if(expires.length === 0) {
@@ -140,6 +142,7 @@
         watch: {
             password: function(value) {
                 this.object = value;
+                if(value.share.shareable === false) this.enabled = false;
                 this.$forceUpdate();
             },
             user    : function(value) {

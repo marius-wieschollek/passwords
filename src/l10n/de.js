@@ -101,7 +101,17 @@ OC.L10N.register(
         "{count} shares"                      : "{count} mal geteilt",
         "More"                                : "Mehr",
         "Backup"                              : "Sichern & Importieren",
-        "Browser Extension"                   : "Browser Extension"
+        "Browser Extension"                   : "Browser Extension",
+        "Search user"                         : "Benutzer suchen",
+        "Sharing is not enabled"              : "Teilen ist nicht aktiviert",
+        "Set expiration date"                 : "Ablaufdatum setzen",
+        "Choose expiration date"              : "Wähle ein Ablaufdatum oder lass das Feld leer um endlos zu teilen",
+        "Please choose a date in the future"  : "Bitte wähle ein Ablaufdatum in der Zukunft",
+        "Invalid date"                        : "Ungültiges Datum",
+        "Toggle write permissions"            : "Schreibrechte umschalten",
+        "Toggle share permissions"            : "Weiterverteilrechte umschalten",
+        "Stop sharing"                        : "Teilen beenden",
+        "Date"                                : "Datum"
     },
     'nplurals=2; plural=(n != 1);'
 );

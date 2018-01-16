@@ -3,13 +3,16 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
-                <share-line v-if="$route.params.type === undefined"
-                            v-for="(title, index) in shareType"
-                            :key="title"
-                            :type="index"
-                            :label="title">
+                <share-line v-if="$route.params.type === undefined" v-for="(title, index) in shareType" :key="title" :type="index" :label="title">
                 </share-line>
-                <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <password-line :password="password" v-for="password in passwords" :key="password.id">
+                    <ul slot="middle" class="line-share-icons">
+                        <li v-for="user in getShareUsers(password.id)" :key="user.id" :title="user.name">
+                            <img :src="user.icon" :alt="user.name"/>
+                            {{user.name}}
+                        </li>
+                    </ul>
+                </password-line>
             </div>
         </div>
         <div class="app-content-right">
@@ -45,7 +48,8 @@
                     type   : 'none',
                     element: null
                 },
-                breadcrumb: []
+                breadcrumb: [],
+                shareUsers: []
             }
         },
 
@@ -67,8 +71,9 @@
         methods: {
             refreshView      : function() {
                 if(this.$route.params.type !== undefined) {
-                    let status = this.$route.params.type,
+                    let status = Number.parseInt(this.$route.params.type),
                         label  = this.shareType[status];
+
                     if(status === 0) {
                         API.findShares({receiver: '_self'}, 'model+password').then(this.updateContentList);
                     } else {
@@ -88,14 +93,30 @@
             updateContentList: function(shares) {
                 this.loading = false;
 
-                let passwords = {};
+                let passwords  = {},
+                    shareUsers = [],
+                    status     = this.$route.params.type;
                 for(let i in shares) {
                     if(!shares.hasOwnProperty(i)) continue;
-                    let password = shares[i].password;
-                    passwords[password.id] = password;
+                    let password = shares[i].password,
+                        id       = password.id;
+                    if(!passwords.hasOwnProperty(id)) {
+                        passwords[id] = password;
+                        shareUsers[id] = [];
+                    }
+
+                    if(status === 0) {
+                        shareUsers[id].push(shares[i].owner);
+                    } else {
+                        shareUsers[id].push(shares[i].receiver);
+                    }
                 }
 
+                this.shareUsers = shareUsers;
                 this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
+            },
+            getShareUsers(id) {
+                return this.shareUsers[id];
             }
         },
         watch  : {
@@ -105,3 +126,35 @@
         }
     };
 </script>
+
+<style lang="scss">
+    .line-share-icons {
+        height      : 50px;
+        flex-shrink : 0;
+        line-height : 50px;
+
+        li {
+            display     : inline-block;
+            margin-left : -12px;
+            transition  : margin-left 0.25s ease-in-out;
+
+            img {
+                height        : 24px;
+                border-radius : 12px;
+                margin        : 13px 0;
+            }
+        }
+
+        &:hover {
+            li {
+                margin-left : 3px;
+            }
+        }
+    }
+
+    @media (max-width : $mobile-width) {
+        .line-share-icons {
+            display : none;
+        }
+    }
+</style>

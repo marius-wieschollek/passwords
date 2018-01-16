@@ -207,6 +207,6 @@ class Application extends App {
 
                 return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
             }
-            );
+        );
     }
 }
