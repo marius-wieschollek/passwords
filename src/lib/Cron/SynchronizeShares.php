@@ -29,8 +29,7 @@ use OCP\Notification\IManager;
  *
  * @package OCA\Passwords\Cron
  *
- * @TODO    check for deleted users
- * @TODO    check if not shareable shares were shared
+ * @TODO  check for deleted users
  */
 class SynchronizeShares extends TimedJob {
 
@@ -272,6 +271,7 @@ class SynchronizeShares extends TimedJob {
             $total  += $count;
 
             foreach($shares as $share) {
+                /** @var PasswordRevision $revision */
                 $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
                 /** @var Password $password */
@@ -282,6 +282,26 @@ class SynchronizeShares extends TimedJob {
                 $share->setTargetUpdated(false);
                 $share->setSourceUpdated(false);
                 $this->shareService->save($share);
+
+                if(!$share->isShareable() && $password->hasShares()) {
+                    $subShares = $this->shareService->findBySourcePassword($password->getUuid());
+                    foreach($subShares as $subShare) {
+                        $this->shareService->delete($subShare);
+                    }
+                    $this->deleteOrphanedTargetPasswords();
+                    break;
+                }
+
+                if(!$share->isShareable() && !$share->isEditable()) {
+                    $subShares = $this->shareService->findBySourcePassword($password->getUuid());
+                    foreach($subShares as $subShare) {
+                        if($subShare->isEditable()) {
+                            $subShare->setEditable(false);
+                            $this->shareService->save($subShare);
+                        }
+                    }
+                    break;
+                }
             }
         } while($count !== 0);
 
