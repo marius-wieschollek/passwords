@@ -42,21 +42,25 @@
             <field>
                 <name>has_shares</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>editable</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>true</default>
             </field>
             <field>
                 <name>suspended</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -112,11 +116,13 @@
             <field>
                 <name>hidden</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>trashed</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -133,33 +139,27 @@
             </field>
             <field>
                 <name>sse_key</name>
-                <type>text</type>
-                <length>2048</length>
+                <type>clob</type>
             </field>
             <field>
                 <name>username</name>
-                <type>text</type>
-                <length>1024</length>
+                <type>clob</type>
             </field>
             <field>
                 <name>password</name>
-                <type>text</type>
-                <length>1024</length>
+                <type>clob</type>
             </field>
             <field>
                 <name>label</name>
-                <type>text</type>
-                <length>1024</length>
+                <type>clob</type>
             </field>
             <field>
                 <name>url</name>
-                <type>text</type>
-                <length>4096</length>
+                <type>clob</type>
             </field>
             <field>
                 <name>notes</name>
-                <type>text</type>
-                <length>4096</length>
+                <type>clob</type>
             </field>
             <field>
                 <name>hash</name>
@@ -170,6 +170,7 @@
             <field>
                 <name>favourite</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -188,6 +189,7 @@
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -243,11 +245,13 @@
             <field>
                 <name>suspended</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -302,9 +306,7 @@
             </field>
             <field>
                 <name>label</name>
-                <type>text</type>
-                <length>1024</length>
-                <notnull>true</notnull>
+                <type>clob</type>
             </field>
             <field>
                 <name>cse_type</name>
@@ -320,23 +322,24 @@
             </field>
             <field>
                 <name>sse_key</name>
-                <type>text</type>
-                <length>2048</length>
-                <notnull>true</notnull>
+                <type>clob</type>
             </field>
             <field>
                 <name>favourite</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>hidden</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>trashed</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -348,6 +351,7 @@
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -403,6 +407,7 @@
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -463,35 +468,32 @@
             </field>
             <field>
                 <name>sse_key</name>
-                <type>text</type>
-                <length>2048</length>
-                <notnull>true</notnull>
+                <type>clob</type>
             </field>
             <field>
                 <name>label</name>
-                <type>text</type>
-                <length>1024</length>
-                <notnull>true</notnull>
+                <type>clob</type>
             </field>
             <field>
                 <name>color</name>
-                <type>text</type>
-                <length>1024</length>
-                <notnull>true</notnull>
+                <type>clob</type>
             </field>
             <field>
                 <name>favourite</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>hidden</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>trashed</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -503,6 +505,7 @@
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -570,11 +573,13 @@
             <field>
                 <name>hidden</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -635,11 +640,13 @@
             <field>
                 <name>source_updated</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>target_updated</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
@@ -651,13 +658,14 @@
             <field>
                 <name>editable</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>
                 <name>shareable</name>
-                <type>integer</type>
                 <type>boolean</type>
-                <default>true</default>
+                <notnull>true</notnull>
+                <default>false</default>
             </field>
             <field>
                 <name>expires</name>
@@ -667,6 +675,7 @@
             <field>
                 <name>deleted</name>
                 <type>boolean</type>
+                <notnull>true</notnull>
                 <default>false</default>
             </field>
             <field>

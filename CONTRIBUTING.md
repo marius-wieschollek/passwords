@@ -7,14 +7,8 @@
 #### Project Setup
 * Open a shell on your computer and navigate to the projects directory
 * Run `docker-compose up -d`
-* Run `docker exec passwords-php chown www-data:www-data /var/www/html/custom_apps`
 * Open your browser and type [http://localhost/](http://localhost/)
-* Create your Nextcloud administrator account
-* Click "Storage & Database"
-* Select "MySQL/MariaDB" as database
-* Enter "nextcloud" for username, password and database
-* Enter "mysql" for host (usually filled already with "localhost")
-* Finish the installation
+* Log in with the username `admin` and the password `admin`
 * Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
 * Run `docker exec -u www-data passwords-php /var/www/html/occ config:app:set passwords environment --value dev`
 * Run `npm install`

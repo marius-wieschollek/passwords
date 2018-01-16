@@ -24,3 +24,8 @@ RUN wget -O /tmp/wkthml.tar.gz https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 RUN tar -xf /tmp/wkthml.tar.gz -C /tmp/ && \
     mv /tmp/wkhtmltox/bin/wkhtmltoimage /usr/local/bin/wkhtmltoimage && \
     rm -rf /tmp/wkthml.tar.gz /tmp/wkhtmltox
+
+COPY startup.sh /usr/local/bin/startup
+RUN chmod +x /usr/local/bin/startup
+
+CMD ["/usr/local/bin/startup"]
