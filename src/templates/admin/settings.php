@@ -20,7 +20,7 @@
             <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
             <?php if($_['legacyApiEnabled']): ?>
                 <label for="passwords-legacy-used"><?php p($l->t('Legacy API was last used on')); ?></label>
-                <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):'never'?>" disabled>
+                <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):$l->t('never')?>" disabled>
             <?php endif; ?>
         </div>
     </form>

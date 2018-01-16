@@ -178,7 +178,7 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::FAVICON_GOOGLE,
-                'label'   => $this->localisation->t('google.com'),
+                'label'   => $this->localisation->t('Google'),
                 'current' => $current === HelperService::FAVICON_GOOGLE
             ],
             [
