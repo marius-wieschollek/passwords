@@ -38,7 +38,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @return mixed
      * @throws Exception
      */
-    protected function getImageData(array $serviceOptions) {
+    protected function getImageData(array $serviceOptions): string {
         $request = $this->getAuthorizedRequest(self::CAPTURE_URL);
         $request->setJsonData($serviceOptions);
 

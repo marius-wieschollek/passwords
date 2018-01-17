@@ -21,9 +21,9 @@ use OCP\Files\SimpleFS\ISimpleFile;
  */
 abstract class AbstractPageShotHelper {
 
-    const VIEWPORT_DESKTOP = '1280x800';
+    const VIEWPORT_DESKTOP = '1366x768';
     const VIEWPORT_MOBILE  = '360x640';
-    const WIDTH_DESKTOP    = 1280;
+    const WIDTH_DESKTOP    = 1366;
     const WIDTH_MOBILE     = 360;
 
     /**
@@ -32,14 +32,14 @@ abstract class AbstractPageShotHelper {
     protected $prefix = 'af';
 
     /**
-     * @var FileCacheService
-     */
-    protected $fileCacheService;
-
-    /**
      * @var ConfigurationService
      */
     protected $config;
+
+    /**
+     * @var FileCacheService
+     */
+    protected $fileCacheService;
 
     /**
      * BetterIdeaHelper constructor.
@@ -60,16 +60,16 @@ abstract class AbstractPageShotHelper {
      * @throws \Exception
      */
     function getPageShot(string $domain, string $view): ?ISimpleFile {
-        $pageshotFile = $this->getPageShotFilename($domain, $view);
+        $pageShotFile = $this->getPageShotFilename($domain, $view);
 
-        if($this->fileCacheService->hasFile($pageshotFile)) {
-            return $this->fileCacheService->getFile($pageshotFile);
+        if($this->fileCacheService->hasFile($pageShotFile)) {
+            return $this->fileCacheService->getFile($pageShotFile);
         }
 
         $pageShotData = $this->getPageShotData($domain, $view);
-        if($pageShotData === null) throw new \Exception('PageShot service returned no data');
+        if(empty($pageShotData)) throw new \Exception('PageShot service returned no data');
 
-        return $this->fileCacheService->putFile($pageshotFile, $pageShotData);
+        return $this->fileCacheService->putFile($pageShotFile, $pageShotData);
     }
 
     /**
@@ -125,7 +125,7 @@ abstract class AbstractPageShotHelper {
      * @return mixed
      * @throws ApiException
      */
-    protected function getHttpRequest(string $url) {
+    protected function getHttpRequest(string $url): string {
         $request = new RequestHelper();
         $request->setUrl($url);
         $data = $request->sendWithRetry();
@@ -142,11 +142,11 @@ abstract class AbstractPageShotHelper {
      * @param string $domain
      * @param string $view
      *
-     * @return mixed
+     * @return string
      * @throws ApiException
      * @throws \Exception
      */
-    protected function getPageShotData(string $domain, string $view) {
+    protected function getPageShotData(string $domain, string $view): string {
         $url          = $this->getPageShotUrl($domain, $view);
         $pageShotData = $this->getHttpRequest($url);
 

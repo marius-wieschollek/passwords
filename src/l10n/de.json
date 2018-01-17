@@ -32,6 +32,7 @@
         "None"                                                                     : "Keiner",
         "Website PageShot Service"                                                 : "Webseitenansichtengenerator",
         "PageShot Service API Key"                                                 : "API Schlüssel",
+        "Pageres/PhantomJS (Local)"                                                : "Pageres/PhantomJS (Lokal)",
         "WKHTML (Local)"                                                           : "WKHTML (Lokal)",
         "screenshotapi.io"                                                         : "screenshotapi.io",
         "Caches"                                                                   : "Zwischenspeicher",

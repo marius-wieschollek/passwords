@@ -47,7 +47,7 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
      * @return mixed|string
      * @throws \Throwable
      */
-    protected function getHttpRequest(string $url) {
+    protected function getHttpRequest(string $url): string {
         $result = parent::getHttpRequest($url);
 
         if(!$result) return $this->getDefaultFavicon($this->domain, $this->size)->getContent();

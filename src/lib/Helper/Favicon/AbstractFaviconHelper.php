@@ -76,7 +76,7 @@ abstract class AbstractFaviconHelper {
         }
 
         $faviconData = $this->getFaviconData($domain, $size);
-        if($faviconData === null) throw new \Exception('Favicon service returned no data');
+        if(empty($faviconData)) throw new \Exception('Favicon service returned no data');
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }
@@ -117,9 +117,9 @@ abstract class AbstractFaviconHelper {
     /**
      * @param string $url
      *
-     * @return mixed
+     * @return string
      */
-    protected function getHttpRequest(string $url) {
+    protected function getHttpRequest(string $url): string {
         $request = new RequestHelper();
         $request->setUrl($url);
 
@@ -132,7 +132,7 @@ abstract class AbstractFaviconHelper {
      *
      * @return null|string
      */
-    protected function getFaviconData(string $domain, int $size): ?string {
+    protected function getFaviconData(string $domain, int $size): string {
         $url = $this->getFaviconUrl($domain, $size);
 
         return $this->getHttpRequest($url);

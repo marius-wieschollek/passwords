@@ -36,8 +36,8 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return null|string
      * @throws \Throwable
      */
-    protected function getFaviconData(string $domain, int $size): ?string {
-        list($html, $url) = $this->getHttpRequest('http://'.$domain);
+    protected function getFaviconData(string $domain, int $size): string {
+        list($html, $url) = $this->getUrl('http://'.$domain);
 
         if(!empty($html)) {
             $patterns = $this->getSearchPatterns();
@@ -48,16 +48,16 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             }
         }
 
-        list($data, , , $isIcon) = $this->getHttpRequest("http://{$domain}/favicon.png");
+        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.png");
         if($isIcon && $data) return $data;
 
-        list($data, , , $isIcon) = $this->getHttpRequest($url."/favicon.png");
+        list($data, , , $isIcon) = $this->getUrl($url."/favicon.png");
         if($isIcon && $data) return $data;
 
-        list($data, , , $isIcon) = $this->getHttpRequest("http://{$domain}/favicon.ico");
+        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
-        list($data, , , $isIcon) = $this->getHttpRequest($url."/favicon.ico");
+        list($data, , , $isIcon) = $this->getUrl($url."/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
         return $this->getDefaultFavicon($domain, $size)->getContent();
@@ -68,7 +68,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      *
      * @return mixed|string
      */
-    protected function getHttpRequest(string $url): array {
+    protected function getUrl(string $url): array {
         $request = new RequestHelper();
         $request->setUrl($url);
         $data = $request->sendWithRetry();
@@ -110,7 +110,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             foreach($htmlMatches[1] as $tagSource) {
                 if(preg_match($tagPattern, $tagSource, $tagMatches)) {
                     $url = $this->makeUrl($tagMatches[1], $domain);
-                    list($data, , , $isIcon) = $this->getHttpRequest($url);
+                    list($data, , , $isIcon) = $this->getUrl($url);
 
                     if($isIcon && $data) return $data;
                 }

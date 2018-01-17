@@ -32,14 +32,4 @@ class DefaultPageShotHelper extends AbstractPageShotHelper {
     function getPageShot(string $domain, string $view): ISimpleFile {
         return $this->getDefaultPageShot($domain);
     }
-
-    /**
-     * @param string $domain
-     * @param string $view
-     *
-     * @return string
-     */
-    protected function getPageShotUrl(string $domain, string $view): string {
-        return '';
-    }
 }

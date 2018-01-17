@@ -21,6 +21,7 @@ use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
 use OCA\Passwords\Helper\PageShot\DefaultPageShotHelper;
+use OCA\Passwords\Helper\PageShot\PageresCliHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
@@ -46,6 +47,7 @@ class HelperService {
     const PAGESHOT_SCREEN_SHOT_MACHINE = 'ssm';
     const PAGESHOT_SCREEN_SHOT_API     = 'ssa';
     const PAGESHOT_WKHTML              = 'wkhtml';
+    const PAGESHOT_PAGERES             = 'pageres';
     const PAGESHOT_DEFAULT             = 'default';
 
     const FAVICON_BETTER_IDEA  = 'bi';
@@ -83,8 +85,8 @@ class HelperService {
      * @param IAppContainer        $container
      */
     public function __construct(ConfigurationService $config, IAppContainer $container) {
-        $this->config           = $config;
-        $this->container        = $container;
+        $this->config    = $config;
+        $this->container = $container;
     }
 
     /**
@@ -111,6 +113,8 @@ class HelperService {
         switch($service) {
             case self::PAGESHOT_WKHTML:
                 return $this->container->query(WkhtmlImageHelper::class);
+            case self::PAGESHOT_PAGERES:
+                return $this->container->query(PageresCliHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_API:
                 return $this->container->query(ScreenShotApiHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_MACHINE:

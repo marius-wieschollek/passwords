@@ -48,7 +48,7 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
      * @return mixed|null|\OCP\Files\SimpleFS\ISimpleFile|string
      * @throws \Throwable
      */
-    protected function getHttpRequest(string $url) {
+    protected function getHttpRequest(string $url): string {
         $result = parent::getHttpRequest($url);
 
         if(md5($result) === self::DEFAULT_ICON_MD5) {

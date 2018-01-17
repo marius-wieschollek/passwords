@@ -204,6 +204,12 @@ class AdminSettings implements ISettings {
                 'api'     => null
             ],
             [
+                'id'      => HelperService::PAGESHOT_PAGERES,
+                'label'   => $this->localisation->t('Pageres/PhantomJS (Local)'),
+                'current' => $current === HelperService::PAGESHOT_PAGERES,
+                'api'     => null
+            ],
+            [
                 'id'      => HelperService::PAGESHOT_SCREEN_SHOT_API,
                 'label'   => $this->localisation->t('screenshotapi.io'),
                 'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_API,

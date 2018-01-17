@@ -1,5 +1,6 @@
 FROM nextcloud:fpm
 
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update -y && \
     apt-get install -y \
     libmagickwand-6.q16-dev \
@@ -14,8 +15,12 @@ RUN apt-get update -y && \
     witalian \
     wportuguese \
     wget \
-    tar && \
+    tar \
+    nodejs && \
     apt-get clean
+
+RUN npm install --global pageres-cli --unsafe-perm
+RUN chown -R www-data:$(id -gn www-data) /var/www/.config
 
 RUN printf "\n" | pecl install imagick
 RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/docker-php-ext-imagick.ini
