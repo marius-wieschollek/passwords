@@ -48,7 +48,7 @@ abstract class AbstractPageShotHelper {
      * @param ConfigurationService $config
      */
     public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
-        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PAGESHOT_CACHE);
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PAGESHOT_CACHE);
         $this->config           = $config;
     }
 
@@ -66,12 +66,8 @@ abstract class AbstractPageShotHelper {
             return $this->fileCacheService->getFile($pageshotFile);
         }
 
-        $url          = $this->getPageShotUrl($domain, $view);
-        $pageShotData = $this->getHttpRequest($url);
-
-        if($pageShotData === null) {
-            throw new \Exception('PageShot service returned no data');
-        }
+        $pageShotData = $this->getPageShotData($domain, $view);
+        if($pageShotData === null) throw new \Exception('PageShot service returned no data');
 
         return $this->fileCacheService->putFile($pageshotFile, $pageShotData);
     }
@@ -83,7 +79,9 @@ abstract class AbstractPageShotHelper {
      */
     public function getDefaultPageShot(string $domain): ?ISimpleFile {
         $number = array_sum(str_split(dechex(crc32($domain)), 2));
-        while($number >= 5) $number -= 5;
+        while($number >= 5) {
+            $number -= 5;
+        }
 
         $fileName = "{$this->prefix}_default_{$number}.jpg";
         if($this->fileCacheService->hasFile($fileName)) {
@@ -144,7 +142,25 @@ abstract class AbstractPageShotHelper {
      * @param string $domain
      * @param string $view
      *
-     * @return string
+     * @return mixed
+     * @throws ApiException
+     * @throws \Exception
      */
-    abstract protected function getPageShotUrl(string $domain, string $view): string;
+    protected function getPageShotData(string $domain, string $view) {
+        $url          = $this->getPageShotUrl($domain, $view);
+        $pageShotData = $this->getHttpRequest($url);
+
+        return $pageShotData;
+    }
+
+    /**
+     * @param string $domain
+     * @param string $view
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function getPageShotUrl(string $domain, string $view): string {
+        throw new \Exception('No Pageshot Url defined for '.$domain.$view, 502);
+    }
 }

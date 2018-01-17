@@ -142,7 +142,7 @@
         watch: {
             password: function(value) {
                 this.object = value;
-                if(value.share.shareable === false) this.enabled = false;
+                if(value.share && value.share.shareable === false) this.enabled = false;
                 this.$forceUpdate();
             },
             user    : function(value) {

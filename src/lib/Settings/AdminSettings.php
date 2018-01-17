@@ -118,14 +118,14 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::WORDS_LOCAL
             ],
             [
-                'id'      => HelperService::WORDS_RANDOM,
-                'label'   => $this->localisation->t('Random Characters'),
-                'current' => $current === HelperService::WORDS_RANDOM
-            ],
-            [
                 'id'      => HelperService::WORDS_SNAKES,
                 'label'   => $this->localisation->t('watchout4snakes.com (recommended)'),
                 'current' => $current === HelperService::WORDS_SNAKES
+            ],
+            [
+                'id'      => HelperService::WORDS_RANDOM,
+                'label'   => $this->localisation->t('Random Characters'),
+                'current' => $current === HelperService::WORDS_RANDOM
             ]
         ];
     }
@@ -197,12 +197,6 @@ class AdminSettings implements ISettings {
 
         return [
             [
-                'id'      => HelperService::PAGESHOT_DEFAULT,
-                'label'   => $this->localisation->t('None'),
-                'current' => $current === HelperService::PAGESHOT_DEFAULT,
-                'api'     => null
-            ],
-            [
                 'id'      => HelperService::PAGESHOT_WKHTML,
                 'label'   => $this->localisation->t('WKHTML (Local)'),
                 'current' => $current === HelperService::PAGESHOT_WKHTML,
@@ -211,7 +205,7 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::PAGESHOT_SCREEN_SHOT_API,
-                'label'   => $this->localisation->t('screenshotapi.io (recommended)'),
+                'label'   => $this->localisation->t('screenshotapi.io'),
                 'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_API,
                 'api'     => [
                     'key'   => 'service/pageshot/ssa/key',
@@ -235,6 +229,12 @@ class AdminSettings implements ISettings {
                     'key'   => 'service/pageshot/ssm/key',
                     'value' => $this->config->getAppValue('service/pageshot/ssm/key')
                 ]
+            ],
+            [
+                'id'      => HelperService::PAGESHOT_DEFAULT,
+                'label'   => $this->localisation->t('None'),
+                'current' => $current === HelperService::PAGESHOT_DEFAULT,
+                'api'     => null
             ]
         ];
     }

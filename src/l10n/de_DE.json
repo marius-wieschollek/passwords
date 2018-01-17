@@ -33,7 +33,7 @@
         "Website PageShot Service"                                                 : "Webseitenansichtengenerator",
         "PageShot Service API Key"                                                 : "API Schlüssel",
         "WKHTML (Local)"                                                           : "WKHTML (Lokal)",
-        "screenshotapi.io (recommended)"                                           : "screenshotapi.io (empfohlen)",
+        "screenshotapi.io"                                                         : "screenshotapi.io",
         "Caches"                                                                   : "Zwischenspeicher",
         "Default Cache (%s files, %s)"                                             : "Standard Cache (%s Dateien, %s)",
         "Avatars Cache (%s files, %s)"                                             : "Profilbilder (%s Dateien, %s)",
