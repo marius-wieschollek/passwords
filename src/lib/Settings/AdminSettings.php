@@ -213,15 +213,6 @@ class AdminSettings implements ISettings {
                 ]
             ],
             [
-                'id'      => HelperService::PAGESHOT_SCREEN_SHOT_LAYER,
-                'label'   => $this->localisation->t('screenshotlayer.com'),
-                'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_LAYER,
-                'api'     => [
-                    'key'   => 'service/pageshot/ssl/key',
-                    'value' => $this->config->getAppValue('service/pageshot/ssl/key')
-                ]
-            ],
-            [
                 'id'      => HelperService::PAGESHOT_SCREEN_SHOT_MACHINE,
                 'label'   => $this->localisation->t('screenshotmachine.com'),
                 'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_MACHINE,

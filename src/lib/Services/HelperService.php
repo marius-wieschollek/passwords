@@ -43,7 +43,6 @@ use OCP\AppFramework\IAppContainer;
  */
 class HelperService {
 
-    const PAGESHOT_SCREEN_SHOT_LAYER   = 'ssl';
     const PAGESHOT_SCREEN_SHOT_MACHINE = 'ssm';
     const PAGESHOT_SCREEN_SHOT_API     = 'ssa';
     const PAGESHOT_WKHTML              = 'wkhtml';
@@ -114,8 +113,6 @@ class HelperService {
                 return $this->container->query(WkhtmlImageHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_API:
                 return $this->container->query(ScreenShotApiHelper::class);
-            case self::PAGESHOT_SCREEN_SHOT_LAYER:
-                return $this->container->query(ScreenShotLayerHelper::class);
             case self::PAGESHOT_SCREEN_SHOT_MACHINE:
                 return $this->container->query(ScreenShotMachineHelper::class);
             case self::PAGESHOT_DEFAULT:

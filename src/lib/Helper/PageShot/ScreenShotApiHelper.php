@@ -20,7 +20,8 @@ use OCA\Passwords\Services\PageShotService;
  */
 class ScreenShotApiHelper extends AbstractPageShotHelper {
 
-    const SERVICE_URL       = 'https://api.screenshotapi.io/capture';
+    const CAPTURE_URL       = 'https://api.screenshotapi.io/capture';
+    const RETRIEVE_URL      = 'https://api.screenshotapi.io/retrieve?key=';
     const WEBDRIVER_FIREFOX = 'firefox';
     const WEBDRIVER_CHROME  = 'chrome';
     const VIEWPORT_DESKTOP  = '1480x1037';
@@ -38,7 +39,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @throws Exception
      */
     protected function getImageData(array $serviceOptions) {
-        $request = $this->getAuthorizedRequest(self::SERVICE_URL);
+        $request = $this->getAuthorizedRequest(self::CAPTURE_URL);
         $request->setJsonData($serviceOptions);
 
         $image = json_decode($request->sendWithRetry(), true);
@@ -49,7 +50,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
         $seconds          = 0;
         $maxExecutionTime = (ini_get('max_execution_time') / 2) - 2;
         while($seconds < $maxExecutionTime) {
-            $request = $this->getAuthorizedRequest('https://api.screenshotapi.io/retrieve?key='.$image['key']);
+            $request = $this->getAuthorizedRequest(self::RETRIEVE_URL.$image['key']);
             $check   = json_decode($request->sendWithRetry(1), true);
 
             if($check['status'] === 'ready') {

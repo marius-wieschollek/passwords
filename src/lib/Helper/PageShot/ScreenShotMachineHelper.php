@@ -12,7 +12,7 @@ use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\PageShotService;
 
 /**
- * Class ScreenShotLayerHelper
+ * Class ScreenShotMachineHelper
  *
  * @package OCA\Passwords\Helper\PageShot
  */
@@ -33,9 +33,9 @@ class ScreenShotMachineHelper extends AbstractPageShotHelper {
         $apiKey = $this->config->getAppValue('service/pageshot/ssm/key');
 
         if($view === PageShotService::VIEWPORT_DESKTOP) {
-            return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_DESKTOP."xfull&device=desktop&format=jpg&url=http://{$domain}";
+            return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_DESKTOP."xfull&device=desktop&format=jpg&url={$domain}";
         }
 
-        return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_MOBILE."xfull&device=phone&format=jpg&url=http://{$domain}";
+        return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_MOBILE."xfull&device=phone&format=jpg&url={$domain}";
     }
 }
