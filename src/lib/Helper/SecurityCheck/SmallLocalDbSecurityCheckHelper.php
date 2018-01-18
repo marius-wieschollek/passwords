@@ -34,8 +34,7 @@ class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckHelper {
             ->setUrl(self::ARCHIVE_URL)
             ->sendWithRetry();
         if(!$success) {
-            throw new Exception('Failed to download common passwords text file: HTTP '.
-                                $request->getInfo('http_code'));
+            throw new Exception('Failed to download common passwords text file: HTTP '.$request->getInfo('http_code'));
         }
         unset($request);
     }

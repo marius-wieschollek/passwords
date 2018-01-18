@@ -20,6 +20,7 @@ RUN apt-get update -y && \
     apt-get clean
 
 RUN npm install --global pageres-cli --unsafe-perm
+RUN touch /var/www/.config
 RUN chown -R www-data:$(id -gn www-data) /var/www/.config
 
 RUN printf "\n" | pecl install imagick

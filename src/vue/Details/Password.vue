@@ -1,16 +1,7 @@
 <template>
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
-        <div class="image-container" v-if="!isMobile">
-            <a :href="object.url" target="_blank">
-                <img :class="image.className"
-                     :style="image.style"
-                     :src="object.image"
-                     @mouseover="imageMouseOver($event)"
-                     @mouseout="imageMouseOut($event)"
-                     alt="">
-            </a>
-        </div>
+        <image-container v-if="!isMobile" :image="object.image" :link="object.url" :title="object.title"/>
         <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
             <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>
@@ -35,6 +26,12 @@
                 <translate tag="div" say="Shares">
                     <translate say="{count} shares" :variables="{count:countShares}"/>
                 </translate>
+
+                <translate tag="div" say="Security" class="header"/>
+                <translate tag="div" say="Status">
+                    <translate :say="getSecurityStatus" :class="getSecurityStatus.toLowerCase()"/>
+                </translate>
+                <translate tag="div" say="SHA1 Hash"><span>{{ object.hash }}</span></translate>
             </div>
             <div slot="notes" class="notes">
                 <textarea id="password-details-notes">{{ object.notes }}</textarea>
@@ -50,11 +47,7 @@
                             <translate tag="option" value="password" selected>Password</translate>
                             <translate tag="option" value="url" v-if="object.url">Website</translate>
                         </select>
-                        <qr-code :text="qrcode.text"
-                                 :color="qrcode.color"
-                                 :bgColor="qrcode.bgColor"
-                                 :size="256"
-                                 errorLevel="L"/>
+                        <qr-code :text="qrcode.text" :color="qrcode.color" :bgColor="qrcode.bgColor" :size="256" errorLevel="L"/>
                     </div>
                 </tabs>
             </div>
@@ -70,10 +63,7 @@
                                 {{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}
                             </span>
                         </span>
-                        <translate icon="undo"
-                                   title="Restore revision"
-                                   @click="restoreAction(revision)"
-                                   v-if="revision.id !== object.revision"/>
+                        <translate icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== object.revision"/>
                     </li>
                 </ul>
             </div>
@@ -90,18 +80,20 @@
     import Sharing from '@vc/Sharing.vue';
     import Events from "@js/Classes/Events";
     import QrCode from 'vue-qrcode-component'
+    import Utility from "@js/Classes/Utility";
     import Translate from '@vc/Translate.vue';
+    import ImageContainer from '@vc/ImageContainer.vue';
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
-    import Utility from "@js/Classes/Utility";
 
     export default {
         components: {
-            Translate,
+            Tabs,
+            Tags,
             QrCode,
             Sharing,
-            Tabs,
-            Tags
+            Translate,
+            ImageContainer
         },
 
         props: {
@@ -112,12 +104,6 @@
 
         data() {
             return {
-                image : {
-                    'className': '',
-                    'style'    : {
-                        'marginTop': 0
-                    },
-                },
                 qrcode: {
                     color  : ThemeManager.getColor(),
                     bgColor: ThemeManager.getContrastColor(),
@@ -170,35 +156,17 @@
             showPassword() {
                 return this.showPw ? this.object.password:''.padStart(this.object.password.length, '*');
             },
+            getSecurityStatus() {
+                let status = ['Secure', 'Weak', 'Broken'];
+
+                return status[this.object.status];
+            },
             isMobile() {
                 return window.innerWidth < 361;
             }
         },
 
         methods: {
-            imageMouseOver($event) {
-                let $element = $($event.target),
-                    $parent  = $element.parent().parent(),
-                    margin   = $element.height() - $parent.height();
-
-                if(margin > 0) {
-                    if(margin < 500) {
-                        this.image.className = 's1';
-                    } else if(margin < 1000) {
-                        this.image.className = 's5';
-                    } else if(margin < 2500) {
-                        this.image.className = 's10';
-                    } else if(margin < 4000) {
-                        this.image.className = 's15';
-                    } else {
-                        this.image.className = 's20';
-                    }
-                    this.image.style = {'marginTop': '-' + margin + 'px'};
-                }
-            },
-            imageMouseOut() {
-                this.image.style = {'marginTop': 0};
-            },
             favouriteAction($event) {
                 $event.stopPropagation();
                 this.object.favourite = !this.object.favourite;
@@ -224,8 +192,6 @@
 
         watch: {
             password: function(value) {
-                this.image.className = '';
-                this.image.style = {'marginTop': 0};
                 this.qrcode.text = value.password;
                 this.object = value;
                 $('#password-details-qrcode').val('password');
@@ -245,35 +211,10 @@
             padding   : 0.75rem;
             font-size : 1.3rem;
             color     : $color-black;
+            z-index   : 1;
 
             &:hover {
                 text-shadow : 0 0 2px $color-white;
-            }
-        }
-
-        .image-container {
-            max-height : 290px;
-            overflow   : hidden;
-
-            a {
-                display   : block;
-                font-size : 0;
-
-                img {
-                    width      : 100%;
-                    margin-top : 0;
-                    transition : none;
-
-                    &.s1 { transition : margin-top 1s ease-in-out; }
-                    &.s5 { transition : margin-top 5s ease-in-out; }
-                    &.s10 { transition : margin-top 10s ease-in-out; }
-                    &.s15 { transition : margin-top 15s ease-in-out; }
-                    &.s20 { transition : margin-top 20s ease-in-out; }
-                }
-            }
-
-            &.hidden {
-                display : none;
             }
         }
 
@@ -336,6 +277,10 @@
                     &.password {
                         cursor : pointer;
                     }
+
+                    &.secure {color : $color-green;}
+                    &.weak {color : $color-yellow;}
+                    &.broken {color : $color-red;}
                 }
 
                 a {

@@ -614,6 +614,7 @@ export default class SimpleApi {
      * @returns {*}
      */
     static parseUrl(url, component = null) {
+        if(url === undefined) return null;
         let link = document.createElement('a');
 
         if(url.indexOf('://') === -1) url = 'http://' + url;
