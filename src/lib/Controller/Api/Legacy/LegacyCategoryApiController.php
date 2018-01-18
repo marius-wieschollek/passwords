@@ -116,7 +116,7 @@ class LegacyCategoryApiController extends ApiController {
         /** @var Tag $model */
         $model    = $this->tagService->create();
         $revision = $this->tagRevisionService->create(
-            $model->getUuid(), $categoryName, '#'.$categoryColour, EncryptionService::CSE_ENCRYPTION_NONE, time(), false, false, false
+            $model->getUuid(), strval($categoryName), '#'.strval($categoryColour), EncryptionService::CSE_ENCRYPTION_NONE, time(), false, false, false
         );
 
         $this->tagRevisionService->save($revision);

@@ -155,9 +155,10 @@ class LegacyPasswordApiController extends ApiController {
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
             $model->getUuid(),
-            $pass, $loginname,
+            $pass, strval($loginname),
             EncryptionService::CSE_ENCRYPTION_NONE,
-            '', $website, $address, $notes,
+            '', strval($loginname).'@'.strval($website),
+            strval($address), strval($notes),
             FolderService::BASE_FOLDER_UUID,
             time(), false, false, false
         );
@@ -205,13 +206,14 @@ class LegacyPasswordApiController extends ApiController {
 
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
-            $model->getUuid(), $pass, $loginname,
+            $model->getUuid(), strval($pass), strval($loginname),
             EncryptionService::CSE_ENCRYPTION_NONE,
-            '', $website, $address, $notes,
+            '', strval($loginname).'@'.strval($website),
+            strval($address), strval($notes),
             $revision->getFolder(),
             strtotime($datechanged),
             $revision->isHidden(),
-            $deleted,
+            $deleted==true,
             $revision->isFavourite()
         );
         $this->passwordRevisionService->save($revision);
