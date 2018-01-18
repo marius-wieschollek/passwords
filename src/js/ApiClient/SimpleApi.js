@@ -573,12 +573,17 @@ export default class SimpleApi {
                         if(this._debug) console.error('Request failed', response);
                         reject(response)
                     }
-                    response.json()
-                        .then((d) => {resolve(d);})
-                        .catch((response) => {
-                            if(this._debug) console.error('Encoding response failed', response);
-                            reject(response)
-                        })
+                    let contentType = response.headers.get("content-type");
+                    if(contentType && contentType.indexOf("application/json") !== -1) {
+                        response.json()
+                            .then((d) => {resolve(d);})
+                            .catch((response) => {
+                                if(this._debug) console.error('Encoding response failed', response);
+                                reject(response)
+                            })
+                    } else {
+                        resolve(response.blob());
+                    }
                 })
                 .catch((response) => {
                     if(this._debug) console.error('Request failed', response);

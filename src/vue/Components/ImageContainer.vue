@@ -2,7 +2,9 @@
     <div class="image-container">
         <a :href="link" target="_blank" :title="title">
             <div class="loader" :style="getLoaderStyle"></div>
-            <img :class="imgClass" :style="style" :src="image" @mouseover="imageMouseOver($event)" @mouseout="imageMouseOut()" @load="loaded()" :alt="title">
+            <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
+                <img :src="image" @load="imageLoaded" :alt="title">
+            </div>
         </a>
     </div>
 </template>
@@ -32,7 +34,7 @@
         data() {
             return {
                 loading : true,
-                imgClass: '',
+                imgClass: 'loading',
                 style   : {
                     marginTop: 0
                 },
@@ -54,8 +56,7 @@
             imageMouseOver($event) {
                 if(this.loading) return;
                 let $element = $($event.target),
-                    $parent  = $element.parent().parent(),
-                    margin   = $element.height() - $parent.height();
+                    margin   = $element.height() - 290;
 
                 if(margin > 0) {
                     if(margin < 500) {
@@ -75,7 +76,7 @@
             imageMouseOut() {
                 this.style.marginTop = 0;
             },
-            loaded() {
+            imageLoaded() {
                 this.loading = false;
                 this.imgClass = '';
             }
@@ -103,18 +104,22 @@
                 display   : block;
                 font-size : 0;
 
-                > img {
-                    width      : 100%;
+                .image {
                     margin-top : 0;
+                    min-height : 290px;
                     position   : relative;
                     opacity    : 1;
                     transition : opacity 0.5s ease-in-out;
 
-                    &.s1 { transition : margin-top 1s ease-in-out; }
-                    &.s5 { transition : margin-top 5s ease-in-out; }
-                    &.s10 { transition : margin-top 10s ease-in-out; }
-                    &.s15 { transition : margin-top 15s ease-in-out; }
-                    &.s20 { transition : margin-top 20s ease-in-out; }
+                    img {
+                        width : 100%;
+                    }
+
+                    &.s1 { transition : opacity 0.15s ease-in-out, margin-top 1s ease-in-out; }
+                    &.s5 { transition : opacity 0.15s ease-in-out, margin-top 5s ease-in-out; }
+                    &.s10 { transition : opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
+                    &.s15 { transition : opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
+                    &.s20 { transition : opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
                     &.loading {
                         opacity    : 0;
                         transition : opacity 0.15s ease-in-out;

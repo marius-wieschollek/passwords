@@ -93,6 +93,7 @@
                 left       : auto;
                 bottom     : 0;
                 width      : 27%;
+                min-width  : 360px;
                 overflow-y : auto;
             }
         }
