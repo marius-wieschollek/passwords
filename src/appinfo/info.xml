@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>passwords</id>
     <name>Passwords</name>
     <summary>Store, manage and access all your passwords easily.</summary>
+    <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter sicher und überall.</summary>
     <description><![CDATA[Passwords allows you to store your passwords safely with Nextcloud.
 The intuitive and modern web interface of the app makes it easy to update and add new passwords from anywhere.
 Included security checks help you to keep your online accounts safe and up-to-date.
@@ -19,6 +20,22 @@ You can also share passwords with other Nextcloud users.
  * ... and many more to come
 ]]>
     </description>
+    <description lang="de"><![CDATA[Passwörter erlaubt es Ihnen, Ihre Passwörter sicher mit Nextcloud zu verwalten.
+Die intuitive Weboberfläche macht es einfch, Passwörter von überall aus hinzuzufügen oder zu aktualisieren.
+Die eingebauten Sicherheitstests helfen Ihnen, Ihre Benutzerkonten sicher und Ihre Passwörter aktuell zu halten.
+Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
+
+**Funktionsumfang**
+ * Intuitive und moderne Weboberfläche
+ * Passwort-Sicherheitstest
+ * Serverseitige Verschlüsselung
+ * Ordner &amp; Tags
+ * Teilen-Funktion
+ * Passwort API
+ * Browser Extensions
+ * ... und vieles mehr
+]]>
+    </description>
     <version>2018.1.1</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">
@@ -33,6 +50,24 @@ You can also share passwords with other Nextcloud users.
     <category>tools</category>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
     <repository type="git">https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
+    <screenshot small-thumbnail="https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/_previews/feature-overview.gif">
+        https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/feature-overview.gif
+    </screenshot>
+    <screenshot small-thumbnail="https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/_previews/01-section-all.png">
+        https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/01-section-all.png
+    </screenshot>
+    <screenshot small-thumbnail="https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/_previews/02-section-folders.png">
+        https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/02-section-folders.png
+    </screenshot>
+    <screenshot small-thumbnail="https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/_previews/03-section-tags.png">
+        https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/03-section-tags.png
+    </screenshot>
+    <screenshot small-thumbnail="https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/_previews/04-section-security.png">
+        https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/04-section-security.png
+    </screenshot>
+    <screenshot small-thumbnail="https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/_previews/05-section-trash.png">
+        https://git.mdns.eu/nextcloud/passwords/wikis/_files/Gallery/05-section-trash.png
+    </screenshot>
     <dependencies>
         <php min-version="7.1" />
         <database>sqlite</database>
