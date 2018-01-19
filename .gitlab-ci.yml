@@ -37,7 +37,7 @@ Pack:
 Publish:
   stage: publishing
   script:
-    - source job.id
+#    - source job.id
     - echo $SIGN_KEY
     - echo $SIGN_KEY > sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64)
