@@ -43,6 +43,6 @@ Publish:
     - echo "-----END PRIVATE KEY-----" >> sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64)
     - rm sign.key
-    - 'curl -X POST -u "${API_USER}:${API_TOKEN}" ${API_URL} -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}-/jobs/${JOB_ID}/artifacts/file/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+    - 'curl -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}-/jobs/${JOB_ID}/artifacts/file/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   only:
     - master
