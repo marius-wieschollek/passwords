@@ -27,7 +27,7 @@ class FolderManager {
                         .then((d) => {
                             folder.id = d.id;
                             folder.revision = d.revision;
-                            folder.created = folder.updated = Utility.getTimestamp();
+                            folder.edited = folder.created = folder.updated = Utility.getTimestamp();
                             folder = API._processFolder(folder);
                             Events.fire('folder.created', folder);
                             Messages.notification('Folder created');

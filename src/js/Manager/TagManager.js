@@ -53,7 +53,7 @@ class TagManager {
                 .then((d) => {
                     tag.id = d.id;
                     tag.revision = d.revision;
-                    tag.created = tag.updated = Utility.getTimestamp();
+                    tag.edited = tag.created = tag.updated = Utility.getTimestamp();
                     tag = API._processTag(tag);
                     Events.fire('tag.created', tag);
                     Messages.notification('Tag created');

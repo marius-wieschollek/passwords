@@ -117,8 +117,9 @@
                     display : none;
                 }
                 .app-content-right {
-                    width : 100%;
-                    top   : 0;
+                    width     : 100%;
+                    min-width : auto;
+                    top       : 0;
                 }
             }
 

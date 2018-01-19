@@ -17,13 +17,13 @@
                     <ul>
                         <slot name="menu-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
+                        <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable">Edit</translate>
                         <translate tag="li" v-if="isMobile" @click="copyPasswordAction()" icon="clipboard">Copy Password</translate>
                         <translate tag="li" v-if="isMobile" @click="copyUsernameAction()" icon="clipboard">Copy User</translate>
                         <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
                         </li>
-                        <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable">Edit</translate>
                         <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
                         <slot name="menu-bottom"/>
                     </ul>

@@ -45,7 +45,7 @@ class PasswordManager {
                     password.id = data.id;
                     password.status = 0;
                     password.revision = data.revision;
-                    password.created = password.updated = Utility.getTimestamp();
+                    password.edited = password.created = password.updated = Utility.getTimestamp();
                     if(!password.label) EnhancedApi._generatePasswordTitle(password);
                     password = API._processPassword(password);
                     Events.fire('password.created', password);
