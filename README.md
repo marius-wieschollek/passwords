@@ -64,7 +64,7 @@ Passwords offers complete API, giving you access to all features of the app.
 **Soon to come:** Documentation and JavaScript Example Implementation will be available soon
 
 ## Installation
-**Soon to come:** Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/).
+Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/apps/passwords).
 
 #### Requirements
 * Linux based OS
