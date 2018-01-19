@@ -34,7 +34,7 @@ Pack:
       - ./passwords.tar.gz
       - job.id
 
-Publish:
+Publish Nightly:
   stage: publishing
   script:
     - source job.id
@@ -43,6 +43,23 @@ Publish:
     - echo "-----END PRIVATE KEY-----" >> sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
-    - 'curl -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+  environment:
+    name: Testing
   only:
-    - master
+  - testing
+
+Publish Stable:
+  stage: publishing
+  script:
+    - source job.id
+    - echo "-----BEGIN PRIVATE KEY-----" > sign.key
+    - echo $SIGN_KEY | tr " " "\n" >> sign.key
+    - echo "-----END PRIVATE KEY-----" >> sign.key
+    - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - rm sign.key
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+  environment:
+    name: Stable
+  only:
+  - stable
