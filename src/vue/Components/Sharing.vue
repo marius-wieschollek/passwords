@@ -86,6 +86,7 @@
                         this.$forceUpdate();
                     }
                 );
+                this.user = '';
             },
             toggleEditable(share) {
                 share.editable = !share.editable;

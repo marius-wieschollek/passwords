@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<database>
+<database xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/database.xsd">
     <name>*dbname*</name>
     <create>true</create>
     <overwrite>true</overwrite>
@@ -10,11 +10,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -31,8 +31,8 @@
             <field>
                 <name>revision</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>share_id</name>
@@ -83,11 +83,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -98,20 +98,20 @@
             <field>
                 <name>uuid</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>model</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>folder</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>hidden</name>
@@ -177,8 +177,8 @@
                 <name>status</name>
                 <type>integer</type>
                 <length>1</length>
-                <default>0</default>
                 <notnull>true</notnull>
+                <default>0</default>
             </field>
             <field>
                 <name>client</name>
@@ -218,11 +218,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -233,14 +233,14 @@
             <field>
                 <name>uuid</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>revision</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>suspended</name>
@@ -274,11 +274,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -289,20 +289,20 @@
             <field>
                 <name>uuid</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>model</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>parent</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>label</name>
@@ -380,11 +380,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -395,14 +395,14 @@
             <field>
                 <name>uuid</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>revision</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>deleted</name>
@@ -430,11 +430,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -445,14 +445,14 @@
             <field>
                 <name>uuid</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>model</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>cse_type</name>
@@ -534,11 +534,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -549,26 +549,26 @@
             <field>
                 <name>password</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>password_revision</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>tag</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>tag_revision</name>
                 <type>text</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>hidden</name>
@@ -602,11 +602,11 @@
             <field>
                 <name>id</name>
                 <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
                 <notnull>true</notnull>
                 <autoincrement>true</autoincrement>
-                <unsigned>true</unsigned>
                 <primary>true</primary>
-                <length>8</length>
             </field>
             <field>
                 <name>user_id</name>
@@ -617,8 +617,8 @@
             <field>
                 <name>uuid</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>receiver</name>
@@ -629,8 +629,8 @@
             <field>
                 <name>source_password</name>
                 <type>string</type>
-                <notnull>true</notnull>
                 <length>36</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>target_password</name>

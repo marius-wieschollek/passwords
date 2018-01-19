@@ -3,11 +3,8 @@
         <div class="app-content-left">
             <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"/>
             <div class="item-list">
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="draggable"/>
-                <password-line :password="password"
-                               v-for="password in passwords"
-                               :key="password.id"
-                               :draggable="draggable"/>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"/>
+                <password-line :password="password" v-for="password in passwords" :key="password.id" draggable="true"/>
             </div>
         </div>
         <div class="app-content-right">
