@@ -97,9 +97,6 @@ class FallbackIconGenerator {
         $center = round($size / 2);
 
         $image = imagecreatetruecolor($size, $size);
-        imageantialias($image, true);
-
-        $circleWidth = round($size * 0.9);
         $bgColor     = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
         imagefill($image, 0, 0, $bgColor);
 
