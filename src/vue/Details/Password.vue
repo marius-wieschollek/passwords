@@ -1,7 +1,7 @@
 <template>
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
-        <image-container v-if="!showImage" :image="object.image" :link="object.url" :title="object.title"/>
+        <image-container v-if="!showImage" :image="object.image" :icon="object.icon" :link="object.url" :title="object.title"/>
         <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
             <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>

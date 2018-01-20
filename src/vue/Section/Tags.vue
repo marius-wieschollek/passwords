@@ -78,6 +78,7 @@
             },
 
             updatePasswordList: function(tag) {
+                this.detail.type = 'none';
                 this.tags = [];
                 if(tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');

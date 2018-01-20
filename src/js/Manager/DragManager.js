@@ -50,7 +50,7 @@ export default new class DragManager {
 
         if(e.originalEvent.clientY < height * 0.25) {
             $app.scrollTop(offset - 5);
-        } else if(e.originalEvent.clientY > height * 0.75) {
+        } else if(e.originalEvent.clientY > height * 0.85) {
             $app.scrollTop(offset + 5);
         }
         return false;

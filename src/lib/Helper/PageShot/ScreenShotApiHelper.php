@@ -83,10 +83,11 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
     /**
      * @param string $domain
      * @param string $view
+     * @param bool   $fullpage
      *
      * @return array
      */
-    protected function getServiceOptions(string $domain, string $view): array {
+    protected function getServiceOptions(string $domain, string $view, bool $fullpage = true): array {
         $options = [
             'url'         => 'http://'.$domain,
             'javascript'  => true,
@@ -99,8 +100,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             $options['viewport']  = self::VIEWPORT_DESKTOP;
             $options['fullpage']  = true;
 
-            // Fullpage of youtube crashes for some reason
-            if(strpos($domain, 'youtube') !== false) {
+            if(!$fullpage) {
                 $options['webdriver'] = self::WEBDRIVER_CHROME;
                 $options['fullpage']  = false;
             }
@@ -133,6 +133,13 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
     protected function getPageShotData(string $domain, string $view): string {
         $options = $this->getServiceOptions($domain, $view);
 
-        return $this->getImageData($options);
+        try {
+            return $this->getImageData($options);
+        } catch(\Exception $e) {
+            // If the service fails, ist often a full page issue
+            $options = $this->getServiceOptions($domain, $view, false);
+
+            return $this->getImageData($options);
+        }
     }
 }

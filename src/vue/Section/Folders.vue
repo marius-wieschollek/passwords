@@ -86,11 +86,13 @@
                 } else if(object.type === 'folder' && object.id === this.currentFolder) {
                     if(object.trashed) {
                         this.loading = true;
+                        this.detail.type = 'none';
                         API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
                     } else if(object.passwords && object.folders && typeof object.parent !== 'string') {
                         this.updateContentList(object);
                     } else {
                         this.loading = true;
+                        this.detail.type = 'none';
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     }
                 } else if(object.type === 'folder' && object.parent === this.currentFolder) {

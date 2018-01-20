@@ -1,7 +1,9 @@
 <template>
     <div class="image-container">
         <a :href="link" target="_blank" :title="title">
-            <div class="loader" :style="getLoaderStyle"></div>
+            <div class="loader">
+                <img :src="loadingIcon" alt="">
+            </div>
             <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
                 <img :src="image" @load="imageLoaded" :alt="title">
             </div>
@@ -21,6 +23,10 @@
                 type     : String,
                 'default': ''
             },
+            icon : {
+                type     : String,
+                'default': ''
+            },
             link : {
                 type     : String,
                 'default': ''
@@ -33,23 +39,17 @@
 
         data() {
             return {
-                loading : true,
-                imgClass: 'loading',
-                style   : {
+                loading    : true,
+                loadingIcon: this.icon,
+                imgClass   : 'hidden',
+                style      : {
                     marginTop: 0
                 },
             }
         },
 
-        computed: {
-            getLoaderStyle() {
-                if(this.link.length === 0) return {};
-
-                let host = SimpleApi.parseUrl(this.link, 'host'),
-                    icon = API.getFaviconUrl(host, 96);
-
-                return {'background-image': 'url(' + icon + ')'}
-            }
+        created() {
+            this.loadFavicon(this.link);
         },
 
         methods: {
@@ -79,14 +79,24 @@
             imageLoaded() {
                 this.loading = false;
                 this.imgClass = '';
+            },
+            loadFavicon(url) {
+                let host = SimpleApi.parseUrl(url, 'host');
+                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(host, 96);}, 350);
             }
         },
         watch  : {
             image() {
                 this.loading = true;
-                this.imgClass = 'loading';
+                this.imgClass = 'hidden';
                 this.style.marginTop = 0;
                 this.$forceUpdate();
+            },
+            icon(value) {
+                this.loadingIcon = value;
+            },
+            link(value) {
+                this.loadFavicon(value);
             }
         }
     }
@@ -120,25 +130,33 @@
                     &.s10 { transition : opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
                     &.s15 { transition : opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
                     &.s20 { transition : opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
-                    &.loading {
+                    &.hidden {
                         opacity    : 0;
                         transition : opacity 0.15s ease-in-out;
                     }
                 }
 
                 .loader {
-                    position        : absolute;
-                    top             : 0;
-                    right           : 0;
-                    bottom          : 0;
-                    left            : 0;
-                    background      : no-repeat center;
-                    background-size : 72px;
-                    transition      : background-size 0.15s ease-in-out;
+                    position : absolute;
+                    top      : 0;
+                    right    : 0;
+                    bottom   : 0;
+                    left     : 0;
+
+                    img {
+                        transform  : translate(-50%, -50%);
+                        position   : absolute;
+                        left       : 50%;
+                        top        : 50%;
+                        width      : 72px;
+                        height     : 72px;
+                        transition : height 0.15s ease-in-out, width 0.15s ease-in-out;
+                    }
                 }
 
-                &:hover .loader {
-                    background-size : 96px;
+                &:hover .loader img {
+                    width  : 96px;
+                    height : 96px;
                 }
             }
 
