@@ -21,7 +21,7 @@ class PasswordsAdminSettings {
             (e) => {
                 let $target = $(e.target),
                     cache   = $target.data('clear-cache'),
-                    label   = OC.L10N.translate('passwords', '{cache} Cache (0 files, 0 B)', {cache: cache.capitalize()});
+                    label   = OC.L10N.translate('passwords', cache.capitalize() + ' Cache (0 files, 0 B)');
 
                 $target.parent().find('label').text(label);
 
