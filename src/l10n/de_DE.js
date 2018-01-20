@@ -112,11 +112,11 @@ OC.L10N.register(
         "Toggle share permissions"            : "Weiterverteilrechte umschalten",
         "Stop sharing"                        : "Teilen beenden",
         "Date"                                : "Datum",
-        "Default Cache (%s files, %s)"        : "Standard Cache (%s Dateien, %s)",
-        "Avatars Cache (%s files, %s)"        : "Profilbilder (%s Dateien, %s)",
-        "Favicon Cache (%s files, %s)"        : "Favicon (%s Dateien, %s)",
-        "Pageshot Cache (%s files, %s)"       : "Webseitenansichten (%s Dateien, %s)",
-        "Passwords Cache (%s files, %s)"      : "Schlechte Passwörter (%s Dateien, %s)",
+        "Default Cache (0 files, 0 B)"        : "Standard Cache (0 Dateien, 0 B)",
+        "Avatars Cache (0 files, 0 B)"        : "Profilbilder (0 Dateien, 0 B)",
+        "Favicon Cache (0 files, 0 B)"        : "Favicon (0 Dateien, 0 B)",
+        "Pageshot Cache (0 files, 0 B)"       : "Webseitenansichten (0 Dateien, 0 B)",
+        "Passwords Cache (0 files, 0 B)"      : "Schlechte Passwörter (0 Dateien, 0 B)",
     },
     'nplurals=2; plural=(n != 1);'
 );
