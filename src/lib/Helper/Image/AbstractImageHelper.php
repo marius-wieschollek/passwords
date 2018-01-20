@@ -176,6 +176,13 @@ abstract class AbstractImageHelper {
     abstract public function supportsImage($blob): bool;
 
     /**
+     * @param string $format
+     *
+     * @return bool
+     */
+    abstract public function supportsFormat(string $format): bool;
+
+    /**
      * @param $data
      *
      * @return mixed

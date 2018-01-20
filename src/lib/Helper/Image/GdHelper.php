@@ -201,6 +201,13 @@ class GdHelper extends AbstractImageHelper {
      */
     public function supportsImage($blob): bool {
         $size = getimagesizefromstring($blob);
+        list($type, $format) = explode('/', $size['mime']);
+
+        if($type != 'image') return false;
+        if($format == 'vnd.microsoft.icon') $format = 'icon';
+
+        return $this->supportsFormat($format);
+        $size = getimagesizefromstring($blob);
 
         if($size['mime'] == 'image/icon') {
             return false;
@@ -209,6 +216,17 @@ class GdHelper extends AbstractImageHelper {
         }
 
         return substr($size['mime'], 0, 5) == 'image';
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return bool
+     */
+    public function supportsFormat(string $format): bool {
+        $format = strtolower($format);
+
+        return in_array($format, ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'x-bmp']);
     }
 
     /**

@@ -165,8 +165,27 @@ class ImagickHelper extends AbstractImageHelper {
      */
     public function supportsImage($blob): bool {
         $size = getimagesizefromstring($blob);
+        list($type, $format) = explode('/', $size['mime']);
 
-        return substr($size['mime'], 0, 5) == 'image';
+        if($type != 'image') return false;
+
+        return $this->supportsFormat($format);
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return bool
+     */
+    public function supportsFormat(string $format): bool {
+        $i = $this->getNewImageObject();
+
+        if($format == 'vnd.microsoft.icon') $format = 'icon';
+        else if($format == 'x-bmp') $format = 'bmp';
+        else if($format == 'svg+xml') $format = 'svg';
+        $format = strtoupper($format);
+
+        return !empty($i->queryFormats($format));
     }
 
     /**

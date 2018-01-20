@@ -75,7 +75,7 @@ class FallbackIconGenerator {
         $color = $this->stringToColor($text);
         $char  = strtoupper($text[0]);
 
-        if(get_class($this->imageHelper) === GdHelper::class) {
+        if(get_class($this->imageHelper) === GdHelper::class || !$this->imageHelper->supportsFormat('svg')) {
             return $this->createDefaultAvatarWithGd($color, $char, $size);
         }
 
