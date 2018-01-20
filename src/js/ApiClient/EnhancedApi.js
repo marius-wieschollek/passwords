@@ -12,6 +12,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     constructor(endpoint, username = null, password = null, debug = false) {
         super(endpoint + '/index.php/apps/passwords/', username, password, debug);
+        this._baseUrl = endpoint;
     }
 
     /**
@@ -679,7 +680,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     _processFolder(folder) {
         folder.type = 'folder';
-        folder.icon = 'http://localhost/core/img/filetypes/folder.svg';
+        folder.icon = this._baseUrl + '/core/img/filetypes/folder.svg';
         if(folder.folders) {
             folder.folders = this._processFolderList(folder.folders);
         }
