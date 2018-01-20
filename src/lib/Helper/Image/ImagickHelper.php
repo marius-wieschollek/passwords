@@ -92,6 +92,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param $imageBlob
      *
      * @return Imagick|Gmagick
+     * @throws Throwable
      */
     public function getImageFromBlob($imageBlob) {
         $size = getimagesizefromstring($imageBlob);
@@ -141,6 +142,8 @@ class ImagickHelper extends AbstractImageHelper {
         $image->setImageFormat('jpg');
         $image->setImageCompression($image::COMPRESSION_JPEG);
         $image->setImageCompressionQuality(90);
+        $image->setCompressionQuality(100);
+        $image->stripImage();
 
         return $image->getImageBlob();
     }
@@ -154,6 +157,8 @@ class ImagickHelper extends AbstractImageHelper {
 
         $image->setImageFormat('png');
         $image->setImageCompressionQuality(9);
+        $image->setCompressionQuality(100);
+        $image->stripImage();
 
         return $image->getImageBlob();
     }
@@ -180,9 +185,11 @@ class ImagickHelper extends AbstractImageHelper {
     public function supportsFormat(string $format): bool {
         $i = $this->getNewImageObject();
 
-        if($format == 'vnd.microsoft.icon') $format = 'icon';
-        else if($format == 'x-bmp') $format = 'bmp';
-        else if($format == 'svg+xml') $format = 'svg';
+        if($format == 'vnd.microsoft.icon') {
+            $format = 'icon';
+        } else if($format == 'x-bmp') {
+            $format = 'bmp';
+        } else if($format == 'svg+xml') $format = 'svg';
         $format = strtoupper($format);
 
         return !empty($i->queryFormats($format));

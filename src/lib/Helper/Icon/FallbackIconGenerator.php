@@ -76,10 +76,10 @@ class FallbackIconGenerator {
         $char  = strtoupper($text[0]);
 
         if(get_class($this->imageHelper) === GdHelper::class || !$this->imageHelper->supportsFormat('svg')) {
-            return $this->createDefaultAvatarWithGd($color, $char, $size);
+            return $this->createIconWithGd($color, $char, $size);
         }
 
-        return $this->createDefaultSvgAvatar($color, $char, $size);
+        return $this->createIconFromSvg($color, $char, $size);
     }
 
     /**
@@ -89,15 +89,15 @@ class FallbackIconGenerator {
      *
      * @return string
      */
-    protected function createDefaultAvatarWithGd(string $color, string $text, int $realSize): string {
+    protected function createIconWithGd(string $color, string $text, int $realSize): string {
         $rgb = str_split(substr($color, 1), 2);
 
         $size   = $realSize > 48 ? 48:$realSize;
         $size   = $size < 24 ? 24:$size;
         $center = round($size / 2);
 
-        $image = imagecreatetruecolor($size, $size);
-        $bgColor     = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
+        $image   = imagecreatetruecolor($size, $size);
+        $bgColor = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
         imagefill($image, 0, 0, $bgColor);
 
         $fgColor = imagecolorallocate($image, 255, 255, 255);
@@ -125,7 +125,7 @@ class FallbackIconGenerator {
      * @return string
      * @throws \Throwable
      */
-    protected function createDefaultSvgAvatar(string $color, string $text, int $size): string {
+    protected function createIconFromSvg(string $color, string $text, int $size): string {
         $svg = file_get_contents(dirname(dirname(dirname(__DIR__))).'/img/default.svg');
 
         $svg = str_replace('#000', $color, $svg);
@@ -137,6 +137,7 @@ class FallbackIconGenerator {
             file_put_contents($tempFile, $svg);
             $image = $this->imageHelper->getImageFromFile($tempFile);
             $image = $this->imageHelper->simpleResizeImage($image, $size);
+            $image->setImageDepth(8);
             unlink($tempFile);
         } catch(\Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
