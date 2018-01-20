@@ -47,9 +47,9 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             throw new Exception('screenshotapi.io service refused request: '.$image['message']);
         }
 
-        $seconds          = 0;
+        $start            = time();
         $maxExecutionTime = (ini_get('max_execution_time') / 2) - 2;
-        while($seconds < $maxExecutionTime) {
+        while(time() - $start < $maxExecutionTime) {
             $request = $this->getAuthorizedRequest(self::RETRIEVE_URL.$image['key']);
             $check   = json_decode($request->sendWithRetry(1), true);
 
@@ -63,7 +63,6 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             }
 
             sleep(1);
-            $seconds++;
         }
 
         throw new Exception('screenshotapi.io did not complete in time');
