@@ -66,7 +66,7 @@
         methods: {
             openBrowserAddonPage() {
                 if(navigator.userAgent.indexOf('Firefox') !== -1) {
-                    Utility.openLink('https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords');
+                    Utility.openLink('https://addons.mozilla.org/firefox/addon/nextcloud-passwords');
                 } else {
                     Utility.openLink('https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds');
                 }
