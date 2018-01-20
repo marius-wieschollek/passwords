@@ -111,7 +111,12 @@ OC.L10N.register(
         "Toggle write permissions"            : "Schreibrechte umschalten",
         "Toggle share permissions"            : "Weiterverteilrechte umschalten",
         "Stop sharing"                        : "Teilen beenden",
-        "Date"                                : "Datum"
+        "Date"                                : "Datum",
+        "Default Cache (%s files, %s)"        : "Standard Cache (%s Dateien, %s)",
+        "Avatars Cache (%s files, %s)"        : "Profilbilder (%s Dateien, %s)",
+        "Favicon Cache (%s files, %s)"        : "Favicon (%s Dateien, %s)",
+        "Pageshot Cache (%s files, %s)"       : "Webseitenansichten (%s Dateien, %s)",
+        "Passwords Cache (%s files, %s)"      : "Schlechte Passwörter (%s Dateien, %s)",
     },
     'nplurals=2; plural=(n != 1);'
 );
