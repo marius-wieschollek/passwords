@@ -74,11 +74,11 @@
 
             updateTagList: function(tags) {
                 this.passwords = [];
+                this.detail.type = 'none';
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },
 
             updatePasswordList: function(tag) {
-                this.detail.type = 'none';
                 this.tags = [];
                 if(tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
