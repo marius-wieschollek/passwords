@@ -64,6 +64,7 @@
             refreshView: function() {
                 this.breadcrumb = [];
 
+                this.detail.type = 'none';
                 if(this.$route.params.tag !== undefined) {
                     let tag = this.$route.params.tag;
                     API.showTag(tag, 'model+passwords').then(this.updatePasswordList);
@@ -74,7 +75,6 @@
 
             updateTagList: function(tags) {
                 this.passwords = [];
-                this.detail.type = 'none';
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },
 

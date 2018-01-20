@@ -66,6 +66,7 @@
                 this.loading = true;
                 this.folders = [];
                 this.passwords = [];
+                this.detail.type = 'none';
                 if(this.$route.params.folder !== undefined) {
                     API.showFolder(this.$route.params.folder, 'model+folders+passwords+parent').then(this.updateContentList);
                 } else {
