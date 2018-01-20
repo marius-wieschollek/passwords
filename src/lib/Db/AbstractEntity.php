@@ -77,7 +77,6 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
      * @param        $value
      */
     public function setProperty(string $property, $value): void {
-        $method = 'set'.ucfirst($property);
-        $this->{$method}($value);
+        $this->setter($property, [$value]);
     }
 }

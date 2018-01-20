@@ -26,9 +26,7 @@ namespace OCA\Passwords\Db;
  * @method bool getShareable()
  * @method void setShareable(bool $shareable)
  * @method bool getSourceUpdated()
- * @method void setSourceUpdated(bool $sourceUpdated)
  * @method bool getTargetUpdated()
- * @method void setTargetUpdated(bool $targetUpdated)
  * @method int getExpires()
  * @method void setExpires(int $expires)
  *
@@ -132,9 +130,25 @@ class Share extends AbstractEntity implements EntityInterface {
     }
 
     /**
+     * @param bool $sourceUpdated
+     */
+    public function setSourceUpdated(bool $sourceUpdated): void {
+        $this->sourceUpdated = $sourceUpdated === true;
+        $this->markFieldUpdated('sourceUpdated');
+    }
+
+    /**
      * @return bool
      */
     public function isTargetUpdated(): bool {
         return $this->getTargetUpdated() === true;
+    }
+
+    /**
+     * @param bool $targetUpdated
+     */
+    public function setTargetUpdated(bool $targetUpdated): void {
+        $this->targetUpdated = $targetUpdated === true;
+        $this->markFieldUpdated('targetUpdated');
     }
 }
