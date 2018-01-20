@@ -94,6 +94,7 @@ class ShareService extends AbstractService {
 
     /**
      * @param string $passwordUuid
+     * @param string $userId
      *
      * @return Share|EntityInterface|null
      *

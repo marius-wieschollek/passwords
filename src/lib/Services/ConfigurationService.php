@@ -80,12 +80,11 @@ class ConfigurationService {
     /**
      * @param string $key
      * @param        $value
-     *
      * @param null   $user
      *
      * @throws \OCP\PreConditionNotMetException
      */
-    public function setUserValue(string $key, $value, $user = null) {
+    public function setUserValue(string $key, $value, $user = null): void {
         $userId = $this->userId;
         if($userId === null) $userId = $user;
         $this->config->setUserValue($userId, Application::APP_NAME, $key, $value);
@@ -95,7 +94,7 @@ class ConfigurationService {
      * @param string $key
      * @param        $value
      */
-    public function setAppValue(string $key, $value) {
+    public function setAppValue(string $key, $value): void {
         $this->config->setAppValue(Application::APP_NAME, $key, $value);
     }
 
@@ -103,14 +102,15 @@ class ConfigurationService {
      * @param string $key
      * @param        $value
      */
-    public function setSystemValue(string $key, $value) {
+    public function setSystemValue(string $key, $value): void {
         $this->config->setSystemValue($key, $value);
     }
 
     /**
      * @param string $key
+     * @param null   $user
      */
-    public function deleteUserValue(string $key, $user = null) {
+    public function deleteUserValue(string $key, $user = null): void {
         $userId = $this->userId;
         if($userId === null) $userId = $user;
         $this->config->deleteUserValue($userId, Application::APP_NAME, $key);
@@ -119,14 +119,14 @@ class ConfigurationService {
     /**
      * @param string $key
      */
-    public function deleteAppValue(string $key) {
+    public function deleteAppValue(string $key): void {
         $this->config->deleteAppValue(Application::APP_NAME, $key);
     }
 
     /**
      * @param string $key
      */
-    public function deleteSystemValue(string $key) {
+    public function deleteSystemValue(string $key): void {
         $this->config->deleteSystemValue($key);
     }
 
