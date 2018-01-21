@@ -23,12 +23,13 @@
                 <router-link class="nav-icon-security" to="/security" active-class="active" tag="li">
                     <translate>Security</translate>
                 </router-link>
+            </ul>
+            <ul id="app-settings" :class="{open: showMore}">
                 <router-link class="nav-icon-trash" to="/trash" active-class="active" tag="li">
                     <translate>Trash</translate>
                 </router-link>
-            </ul>
-            <ul id="app-settings" :class="{open: showMore}">
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore">More</translate>
+                <translate tag="li" class="nav-icon-help" @click="openWikiPage">Handbook</translate>
                 <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage">Browser Extension</translate>
                 <!--<router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
                     <translate>Backup</translate>
@@ -70,6 +71,9 @@
                 } else {
                     Utility.openLink('https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds');
                 }
+            },
+            openWikiPage() {
+                Utility.openLink('https://git.mdns.eu/nextcloud/passwords/wikis/home#users');
             }
         }
     }
@@ -111,6 +115,7 @@
             &.nav-icon-more:before { content : "\f067"; }
             &.nav-icon-settings:before { content : "\f013"; }
             &.nav-icon-addon:before { content : "\f12e"; }
+            &.nav-icon-help:before { content : "\f059"; }
             &.nav-icon-backup:before { content : "\f187"; }
 
             span {
@@ -119,13 +124,15 @@
         }
 
         #app-settings {
-            position   : fixed;
-            overflow   : hidden;
-            max-height : 45px;
-            transition : max-height 0.25s ease-in-out;
+            position         : fixed;
+            overflow         : hidden;
+            max-height       : 90px;
+            background-color : $color-white;
+            border-right     : 1px solid $color-grey-lighter;
+            transition       : max-height 0.25s ease-in-out;
 
             &.open {
-                max-height : 90px;
+                max-height : 180px;
 
                 li.nav-icon-more:before { content : "\f068"; }
             }

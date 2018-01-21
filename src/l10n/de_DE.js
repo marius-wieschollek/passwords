@@ -102,6 +102,7 @@ OC.L10N.register(
         "More"                                : "Mehr",
         "Backup"                              : "Sichern & Importieren",
         "Browser Extension"                   : "Browser Extension",
+        "Handbook"                            : "Handbuch",
         "Search user"                         : "Benutzer suchen",
         "Sharing is not enabled"              : "Teilen ist nicht aktiviert",
         "Set expiration date"                 : "Ablaufdatum setzen",

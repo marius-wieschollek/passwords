@@ -70,6 +70,7 @@
 
         methods: {
             refreshView      : function() {
+                this.detail.type = 'none';
                 if(this.$route.params.type !== undefined) {
                     let status = Number.parseInt(this.$route.params.type),
                         label  = this.shareType[status];

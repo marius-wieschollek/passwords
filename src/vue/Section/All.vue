@@ -102,7 +102,7 @@
             padding-top : 44px;
         }
 
-        @media(max-width : $mobile-width) {
+        @media(max-width : $tablet-width) {
             transform : translate3d(0, 0, 0);
 
             .app-content-right {

@@ -66,6 +66,7 @@
 
         methods: {
             refreshView: function() {
+                this.detail.type = 'none';
                 if(this.$route.params.status !== undefined) {
                     let status = this.$route.params.status,
                         label  = this.securityStatus[status];
