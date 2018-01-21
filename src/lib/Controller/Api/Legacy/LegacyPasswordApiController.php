@@ -138,7 +138,6 @@ class LegacyPasswordApiController extends ApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param $website
      * @param $pass
      * @param $loginname
      * @param $address
@@ -149,9 +148,10 @@ class LegacyPasswordApiController extends ApiController {
      * @throws \OCA\Passwords\Exception\ApiException
      * @throws \Exception
      */
-    public function create($website, $pass, $loginname, $address, $notes, $category): JSONResponse {
+    public function create($pass, $loginname, $address, $notes, $category): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->create();
+        $website = parse_url($address, PHP_URL_HOST);
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
             $model->getUuid(),
@@ -182,7 +182,6 @@ class LegacyPasswordApiController extends ApiController {
      * @NoAdminRequired
      *
      * @param $id
-     * @param $website
      * @param $pass
      * @param $loginname
      * @param $address
@@ -198,11 +197,12 @@ class LegacyPasswordApiController extends ApiController {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \OCP\AppFramework\QueryException
      */
-    public function update($id, $website, $pass, $loginname, $address, $notes, $category, $deleted, $datechanged): JSONResponse {
+    public function update($id, $pass, $loginname, $address, $notes, $category, $deleted, $datechanged): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
+        $website = parse_url($address, PHP_URL_HOST);
 
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
@@ -287,7 +287,7 @@ class LegacyPasswordApiController extends ApiController {
             'number'      => preg_match('/[0-9]+/', $revision->getPassword()),
             'special'     => preg_match('/[^a-zA-Z0-9]+/', $revision->getPassword()),
             'category'    => $category,
-            'datechanged' => date("Y-m-d", $revision->getCreated()),
+            'datechanged' => date("Y-m-d", $revision->getEdited()),
             'notes'       => $revision->getNotes()
         ];
 
