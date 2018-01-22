@@ -148,7 +148,7 @@
         }
 
         #app-navigation-toggle {
-            top: 0;
+            top : 0;
         }
 
         @keyframes delay-overflow {
@@ -157,9 +157,21 @@
             100% { overflow : visible; }
         }
 
-        @media(min-width: $mobile-width) {
+        @media(min-width : $mobile-width) {
             #app-navigation-toggle {
-                display: none;
+                display : none;
+            }
+        }
+    }
+
+    .edge {
+        .bubble,
+        .popovermenu,
+        #app-navigation .app-navigation-entry-menu {
+            border : none !important;
+
+            &:after {
+                border : none !important;
             }
         }
     }

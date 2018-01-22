@@ -298,6 +298,12 @@
                 }
             }
         }
+
+        @media(max-width : $desktop-width) {
+            &.show-details .item-list .row .date {
+                display : none;
+            }
+        }
     }
 
 </style>
