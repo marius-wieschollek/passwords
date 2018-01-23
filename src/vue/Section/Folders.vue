@@ -118,7 +118,7 @@
                     this.defaultPath = '/trash';
                     this.showAddNew = false;
                     this.draggable = false;
-                } else if(this.defaultPath === '/trash') {
+                } else if(this.defaultPath === '/trash' && this.$route.params.folder === undefined) {
                     this.defaultTitle = Utility.translate('Folders');
                     this.defaultPath = '/folders';
                     this.showAddNew = true;

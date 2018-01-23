@@ -181,11 +181,9 @@ class FolderObjectHelper extends AbstractObjectHelper {
      */
     protected function getParent(FolderRevision $revision, array $object): array {
 
-        $filters = [];
-        if(!$revision->isHidden()) $filters['hidden'] = false;
-        if(!$revision->isTrashed()) $filters['trashed'] = false;
-        $parent = $this->folderService->findByUuid($revision->getParent());
-        $obj    = $this->getApiObject($parent, self::LEVEL_MODEL, $filters);
+        $filters = $revision->isHidden() ? []:['hidden' => false];
+        $parent  = $this->folderService->findByUuid($revision->getParent());
+        $obj     = $this->getApiObject($parent, self::LEVEL_MODEL, $filters);
 
         if($obj !== null) {
             $object['parent'] = $obj;
@@ -208,9 +206,8 @@ class FolderObjectHelper extends AbstractObjectHelper {
      */
     protected function getFolders(FolderRevision $revision, array $object): array {
 
-        $filters = [];
+        $filters = ['trashed' => false];
         if(!$revision->isHidden()) $filters['hidden'] = false;
-        if(!$revision->isTrashed()) $filters['trashed'] = false;
 
         $object['folders'] = [];
         $folders           = $this->folderService->findByParent($revision->getModel());

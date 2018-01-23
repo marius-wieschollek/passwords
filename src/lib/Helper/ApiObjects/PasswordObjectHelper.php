@@ -237,10 +237,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     protected function getFolder(PasswordRevision $revision, array $object): array {
         $object['folder'] = [];
 
-        $filters = [];
-        if(!$revision->isHidden()) $filters['hidden'] = false;
-        if(!$revision->isTrashed()) $filters['trashed'] = false;
-
+        $filters      = $revision->isHidden() ? []:['hidden' => false];
         $objectHelper = $this->getFolderObjectHelper();
         $folder       = $this->folderService->findByUuid($revision->getFolder());
         $obj          = $objectHelper->getApiObject($folder, self::LEVEL_MODEL, $filters);
