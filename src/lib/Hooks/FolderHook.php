@@ -10,8 +10,10 @@ namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
+use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 
 /**
@@ -37,20 +39,68 @@ class FolderHook {
     protected $passwordService;
 
     /**
+     * @var PasswordRevisionService
+     */
+    protected $passwordRevisionService;
+
+    /**
      * FolderHook constructor.
      *
-     * @param FolderService         $folderService
-     * @param FolderRevisionService $revisionService
-     * @param PasswordService       $passwordService
+     * @param FolderService           $folderService
+     * @param PasswordService         $passwordService
+     * @param FolderRevisionService   $revisionService
+     * @param PasswordRevisionService $passwordRevisionService
      */
     public function __construct(
         FolderService $folderService,
+        PasswordService $passwordService,
         FolderRevisionService $revisionService,
-        PasswordService $passwordService
+        PasswordRevisionService $passwordRevisionService
     ) {
         $this->revisionService = $revisionService;
         $this->folderService   = $folderService;
         $this->passwordService = $passwordService;
+        $this->passwordRevisionService = $passwordRevisionService;
+    }
+
+    /**
+     * @param Folder         $folder
+     * @param FolderRevision $revision
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    public function preSetRevision(Folder $folder, FolderRevision $revision): void {
+        if($folder->getRevision() === null) return;
+
+        $oldRevision = $this->revisionService->findByUuid($folder->getRevision());
+        if($revision->isHidden() && !$oldRevision->isHidden()) {
+            $folders = $this->folderService->findByParent($folder->getUuid());
+            foreach($folders as $subFolder) {
+                $folderRevision = $this->revisionService->findByUuid($subFolder->getRevision());
+
+                if(!$folderRevision->isHidden()) {
+                    /** @var FolderRevision $clonedRevision */
+                    $clonedRevision = $this->revisionService->clone($folderRevision, ['hidden' => true]);
+                    $this->revisionService->save($clonedRevision);
+                    $this->folderService->setRevision($subFolder, $clonedRevision);
+                }
+            }
+
+            $passwords = $this->passwordService->findByFolder($folder->getUuid());
+            foreach($passwords as $password) {
+                /** @var PasswordRevision $passwordRevision */
+                $passwordRevision = $this->passwordRevisionService->findByUuid($password->getRevision());
+
+                if(!$passwordRevision->isHidden()) {
+                    /** @var PasswordRevision $clonedRevision */
+                    $clonedRevision = $this->passwordRevisionService->clone($passwordRevision, ['hidden' => true]);
+                    $this->passwordRevisionService->save($clonedRevision);
+                    $this->passwordService->setRevision($password, $clonedRevision);
+                }
+            }
+        }
     }
 
     /**
@@ -60,8 +110,8 @@ class FolderHook {
      */
     public function preDelete(Folder $folder): void {
         $folders = $this->folderService->findByParent($folder->getUuid());
-        foreach($folders as $folder) {
-            $this->folderService->delete($folder);
+        foreach($folders as $subFolder) {
+            $this->folderService->delete($subFolder);
         }
 
         $passwords = $this->passwordService->findByFolder($folder->getUuid());

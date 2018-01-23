@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb"/>
+            <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb" :showAddNew="showAddNew"/>
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id" draggable="true"/>
@@ -43,6 +43,7 @@
                     type   : 'none',
                     element: null
                 },
+                showAddNew   : true,
                 breadcrumb   : []
             }
         },
@@ -115,7 +116,13 @@
                 if(folder.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
                     this.defaultPath = '/trash';
+                    this.showAddNew = false;
                     this.draggable = false;
+                } else if(this.defaultPath === '/trash') {
+                    this.defaultTitle = Utility.translate('Folders');
+                    this.defaultPath = '/folders';
+                    this.showAddNew = true;
+                    this.draggable = true;
                 }
 
                 this.folders = Utility.sortApiObjectArray(folder.folders, 'label', true);

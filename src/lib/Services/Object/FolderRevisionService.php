@@ -63,6 +63,20 @@ class FolderRevisionService extends AbstractRevisionService {
     }
 
     /**
+     * @param string $modelUuid
+     * @param bool   $decrypt
+     *
+     * @return FolderRevision
+     *
+     * @throws \Exception
+     */
+    public function findCurrentRevisionByModel(string $modelUuid, bool $decrypt = false): RevisionInterface {
+        if($modelUuid === FolderService::BASE_FOLDER_UUID) return $this->getBaseRevision();
+
+        return parent::findCurrentRevisionByModel($modelUuid, $decrypt);
+    }
+
+    /**
      * @return FolderRevision
      */
     public function getBaseRevision(): FolderRevision {

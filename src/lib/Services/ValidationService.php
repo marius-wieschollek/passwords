@@ -13,7 +13,9 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCP\AppFramework\IAppContainer;
 
 /**
  * Class ValidationService
@@ -23,24 +25,24 @@ use OCA\Passwords\Services\Object\FolderService;
 class ValidationService {
 
     /**
+     * @var IAppContainer
+     */
+    protected $container;
+
+    /**
      * @var HelperService
      */
     protected $helperService;
 
     /**
-     * @var FolderService
-     */
-    protected $folderService;
-
-    /**
      * ValidationService constructor.
      *
      * @param HelperService $helperService
-     * @param FolderService $folderService
+     * @param IAppContainer $container
      */
-    public function __construct(HelperService $helperService, FolderService $folderService) {
+    public function __construct(HelperService $helperService, IAppContainer $container) {
         $this->helperService = $helperService;
-        $this->folderService = $folderService;
+        $this->container     = $container;
     }
 
     /**
@@ -66,17 +68,6 @@ class ValidationService {
         if(empty($password->getHash()) || !preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
             throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }
-        if($password->getFolder() !== $this->folderService::BASE_FOLDER_UUID) {
-            if(!$this->isValidUuid($password->getFolder())) {
-                $password->setFolder($this->folderService::BASE_FOLDER_UUID);
-            } else {
-                try {
-                    $this->folderService->findByUuid($password->getFolder());
-                } catch(\Throwable $e) {
-                    $password->setFolder($this->folderService::BASE_FOLDER_UUID);
-                }
-            }
-        }
         if($password->getStatus() == 0) {
             $securityCheck = $this->helperService->getSecurityHelper();
             $password->setStatus($securityCheck->getRevisionSecurityLevel($password));
@@ -84,6 +75,9 @@ class ValidationService {
         if(empty($password->getEdited()) || $password->getEdited() > strtotime('+1 hour')) {
             $password->setEdited(time());
         }
+        $password->setFolder(
+            $this->validateFolderRelation($password->getFolder(), $password->isHidden())
+        );
 
         return $password;
     }
@@ -107,20 +101,12 @@ class ValidationService {
         if(empty($folder->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
-        if($folder->getParent() !== $this->folderService::BASE_FOLDER_UUID) {
-            if(!$this->isValidUuid($folder->getParent())) {
-                $folder->setParent($this->folderService::BASE_FOLDER_UUID);
-            } else {
-                try {
-                    $this->folderService->findByUuid($folder->getParent());
-                } catch(\Throwable $e) {
-                    $folder->setParent($this->folderService::BASE_FOLDER_UUID);
-                }
-            }
-        }
         if(empty($folder->getEdited()) || $folder->getEdited() > strtotime('+1 hour')) {
             $folder->setEdited(time());
         }
+        $folder->setParent(
+            $this->validateFolderRelation($folder->getParent(), $folder->isHidden())
+        );
 
         return $folder;
     }
@@ -196,5 +182,32 @@ class ValidationService {
      */
     public function isValidUuid(string $uuid): bool {
         return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) != false;
+    }
+
+    /**
+     * @param string $folderUuid
+     * @param bool   $isHidden
+     *
+     * @return string
+     */
+    protected function validateFolderRelation(string $folderUuid, bool $isHidden): string {
+        if($folderUuid !== FolderService::BASE_FOLDER_UUID) {
+            if(!$this->isValidUuid($folderUuid)) {
+                return FolderService::BASE_FOLDER_UUID;
+            } else {
+                try {
+                    $folderRevisionService = $this->container->query(FolderRevisionService::class);
+                    /** @var FolderRevision $folderRevision */
+                    $folderRevision = $folderRevisionService->findCurrentRevisionByModel($folderUuid, false);
+                    if($folderRevision->isHidden() && !$isHidden) {
+                        return FolderService::BASE_FOLDER_UUID;
+                    }
+                } catch(\Throwable $e) {
+                    return FolderService::BASE_FOLDER_UUID;
+                }
+            }
+        }
+
+        return $folderUuid;
     }
 }
