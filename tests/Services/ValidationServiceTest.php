@@ -21,8 +21,8 @@ class ValidationServiceTest extends TestCase {
 
     protected function setUp() {
         $helperService           = $this->createMock('\OCA\Passwords\Services\HelperService');
-        $folderService           = $this->createMock('\OCA\Passwords\Services\Object\FolderService');
-        $this->validationService = new \OCA\Passwords\Services\ValidationService($helperService, $folderService);
+        $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $this->validationService = new \OCA\Passwords\Services\ValidationService($helperService, $container);
     }
 
 
@@ -37,10 +37,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordInvalidSse() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'setSseType'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         try {
             $this->validationService->validatePassword($mock);
@@ -57,11 +54,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordInvalidCse() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType'])
-            ->getMock();
-
+        $mock = $this->getPasswordMock();
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
 
         try {
@@ -79,10 +72,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordEmptyLabel() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -102,10 +92,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordEmptyHash() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getHash'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -126,10 +113,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordInvalidHash() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getHash'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -151,10 +135,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordSetsSseType() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getLabel', 'getHash', 'getFolder', 'getStatus', 'getEdited'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->expects($this->any())
              ->method('getSseType')
@@ -176,10 +157,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordCorrectsInvalidFolderUuid() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getHash', 'getFolder', 'setFolder', 'getStatus', 'getEdited'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -198,10 +176,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordSetsEditedWhenEmpty() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getHash', 'getFolder', 'getStatus', 'getEdited', 'setEdited'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -220,10 +195,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidatePasswordSetsEditedWhenInFuture() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getHash', 'getFolder', 'getStatus', 'getEdited', 'setEdited'])
-            ->getMock();
+        $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -250,10 +222,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderInvalidSse() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'setSseType'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         try {
             $this->validationService->validateFolder($mock);
@@ -270,10 +239,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderInvalidCse() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'getCseType'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
 
@@ -292,10 +258,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderEmptyLabel() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -315,10 +278,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderSetsSseType() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getLabel', 'getParent', 'getEdited'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         $mock->expects($this->any())
              ->method('getSseType')
@@ -338,10 +298,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderCorrectsInvalidFolderUuid() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getParent', 'setParent', 'getEdited'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -358,10 +315,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderSetsEditedWhenEmpty() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getParent', 'getEdited', 'setEdited'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -378,10 +332,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateFolderSetsEditedWhenInFuture() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getParent', 'getEdited', 'setEdited'])
-            ->getMock();
+        $mock = $this->getFolderMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -406,10 +357,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagInvalidSse() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'setSseType'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         try {
             $this->validationService->validateTag($mock);
@@ -426,10 +374,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagInvalidCse() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'getCseType'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
 
@@ -448,10 +393,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagEmptyLabel() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -471,10 +413,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagEmptyColor() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getColor'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -495,10 +434,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagSetsSseType() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getLabel', 'getColor', 'getEdited'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         $mock->expects($this->any())
              ->method('getSseType')
@@ -518,10 +454,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenEmpty() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -538,10 +471,7 @@ class ValidationServiceTest extends TestCase {
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenInFuture() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'getCseType', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
-            ->getMock();
+        $mock = $this->getTagMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
@@ -607,5 +537,50 @@ class ValidationServiceTest extends TestCase {
             false,
             $this->validationService->isValidUuid('not-a-uuid')
         );
+    }
+
+
+
+
+    /**
+     * @return \OCA\Passwords\Db\PasswordRevision
+     */
+    protected function getPasswordMock() {
+        $mock = $this
+            ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
+            ->setMethods(['getSseType', 'setSseType', 'getHidden', 'getCseType', 'getLabel', 'getHash', 'getFolder', 'setFolder', 'getStatus', 'getEdited', 'setEdited'])
+            ->getMock();
+
+        $mock->method('getHidden')->willReturn(false);
+
+        return $mock;
+    }
+
+    /**
+     * @return \OCA\Passwords\Db\FolderRevision
+     */
+    protected function getFolderMock() {
+        $mock = $this
+            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
+            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getHidden', 'getLabel', 'getParent', 'setParent', 'getEdited', 'setEdited'])
+            ->getMock();
+
+        $mock->method('getHidden')->willReturn(false);
+
+        return $mock;
+    }
+
+    /**
+     * @return \OCA\Passwords\Db\TagRevision
+     */
+    protected function getTagMock() {
+        $mock = $this
+            ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
+            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getHidden', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
+            ->getMock();
+
+        $mock->method('getHidden')->willReturn(false);
+
+        return $mock;
     }
 }
