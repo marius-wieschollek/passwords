@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" :class="{ 'show-details': showDetails }">
+    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
             <breadcrumb :newTag="true" :items="breadcrumb"/>
             <div class="item-list">
@@ -25,6 +25,7 @@
     export default {
         data() {
             return {
+                loading   : true,
                 defaultTitle: Utility.translate('Tags'),
                 defaultPath : '/tags/',
                 tags        : [],
@@ -64,22 +65,25 @@
             refreshView: function() {
                 this.breadcrumb = [];
 
+                this.loading = true;
                 this.detail.type = 'none';
                 if(this.$route.params.tag !== undefined) {
                     let tag = this.$route.params.tag;
+                    this.tags = [];
                     API.showTag(tag, 'model+passwords').then(this.updatePasswordList);
                 } else {
+                    this.passwords = [];
                     API.listTags().then(this.updateTagList);
                 }
             },
 
             updateTagList: function(tags) {
-                this.passwords = [];
+                this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, 'label');
             },
 
             updatePasswordList: function(tag) {
-                this.tags = [];
+                this.loading = false;
                 if(tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
                     this.defaultPath = '/trash';
