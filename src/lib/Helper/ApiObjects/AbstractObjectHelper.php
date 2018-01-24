@@ -26,7 +26,7 @@ abstract class AbstractObjectHelper {
     const LEVEL_REVISIONS = 'revisions';
 
     const OPERATOR_EQUALS            = 'eq';
-    const OPERATOR_NOT_EQUALS        = 'nq';
+    const OPERATOR_NOT_EQUALS        = 'ne';
     const OPERATOR_LESS              = 'lt';
     const OPERATOR_GREATER           = 'gt';
     const OPERATOR_EQUALS_OR_LESS    = 'le';

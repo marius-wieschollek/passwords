@@ -65,7 +65,7 @@ class PasswordApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType', 'status', 'trashed', 'favourite'];
+    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'status', 'trashed', 'favourite'];
 
     /**
      * PasswordApiController constructor.
