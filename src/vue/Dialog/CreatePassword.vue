@@ -17,7 +17,7 @@
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
                                 <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required readonly>
                         </div>
                         <translate tag="label" for="password-label">Name</translate>
                         <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
@@ -94,6 +94,7 @@
                     initialValue           : this.password.notes
                 });
             ThemeManager.setBorderColor('#passwords-create-new .section-title, #passwords-create-new .notes label');
+            setTimeout(() => {$('#password-password').removeAttr('readonly')}, 250)
         },
 
         methods: {
