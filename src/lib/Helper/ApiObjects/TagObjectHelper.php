@@ -136,7 +136,6 @@ class TagObjectHelper extends AbstractObjectHelper {
         foreach($revisions as $revision) {
             $current = [
                 'id'        => $revision->getUuid(),
-                'owner'     => $revision->getUserId(),
                 'created'   => $revision->getCreated(),
                 'updated'   => $revision->getUpdated(),
                 'edited'    => $revision->getEdited(),
