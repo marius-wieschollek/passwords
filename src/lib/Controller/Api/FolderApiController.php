@@ -73,24 +73,27 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $parent
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $favourite
      *
      * @return JSONResponse
      * @throws ApiException
      * @throws \Exception
-     *
      */
     public function create(
         string $label,
         string $parent,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
+        int $edited = 0,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
+        if($edited === 0) $edited = time();
+
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, time(), $hidden, false, $favourite
+            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, false, $favourite
         );
 
         $this->revisionService->save($revision);
