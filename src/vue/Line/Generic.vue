@@ -1,6 +1,6 @@
 <template>
-    <div class="row shared" @click="setSharedType">
-        <translate class="title" icon="share-alt" :say="label" iconClass="shareIcon"/>
+    <div class="row" :class="rowClass" @click="setUrl">
+        <translate class="title" :icon="icon" :say="label" iconClass="genericIcon"/>
     </div>
 </template>
 
@@ -13,30 +13,35 @@
         },
 
         props: {
-            type : {
-                type: Number
+            params: {
+                type: Object
             },
-            label: {
+            label : {
+                type: String
+            },
+            icon  : {
                 type: String
             }
         },
 
         data() {
-            return {}
+            return {
+                route   : this.$route.name,
+                rowClass: this.$route.name.toLowerCase()
+            }
         },
 
         methods: {
-            setSharedType() {
-                this.$router.push({name: 'Shared', params: {type: this.type}});
+            setUrl() {
+                this.$router.push({name: this.route, params: this.params});
             }
         }
     }
 </script>
 
 <style lang="scss">
-
-    #app-content .item-list .row.shared {
-        .shareIcon {
+    #app-content .item-list .row {
+        .genericIcon {
             float       : none;
             font-size   : 1.75rem;
             line-height : 50px;
@@ -45,5 +50,4 @@
             color       : $color-black-lighter;
         }
     }
-
 </style>

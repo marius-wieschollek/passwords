@@ -3,8 +3,13 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
-                <share-line v-if="$route.params.type === undefined" v-for="(title, index) in shareType" :key="title" :type="index" :label="title">
-                </share-line>
+                <generic-line
+                        v-if="$route.params.type === undefined"
+                        v-for="(title, index) in shareType"
+                        :key="title"
+                        :label="title"
+                        icon="share-alt"
+                        :params="{type: index}"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id">
                     <ul slot="middle" class="line-share-icons">
                         <li v-for="user in getShareUsers(password.id)" :key="user.id" :title="user.name">
@@ -23,17 +28,17 @@
 
 <script>
     import API from '@js/Helper/api';
-    import ShareLine from "@vue/Line/Share";
     import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
+    import GenericLine from "@vue/Line/Generic";
+    import PasswordLine from '@vue/Line/Password';
+    import PasswordDetails from '@vue/Details/Password';
 
     export default {
         components: {
-            ShareLine,
             Breadcrumb,
+            GenericLine,
             PasswordLine,
             PasswordDetails
         },

@@ -22,7 +22,7 @@ export default new Router(
             {name: "Favourites", path: '/favourites', components: {main: SectionFavourites}},
             {name: "Shared", path: '/shared/:type?', components: {main: SectionShared}},
             {name: "Security", path: '/security/:status?', components: {main: SectionSecurity}},
-            {name: "Backup", path: '/backup', components: {main: SectionBackup}},
+            {name: "Backup", path: '/backup/:action?', components: {main: SectionBackup}},
             {name: "Trash", path: '/trash', components: {main: SectionTrash}}
         ]
     }
