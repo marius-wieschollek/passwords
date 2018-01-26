@@ -72,6 +72,7 @@ class TagApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $color
      * @param string $cseType
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $favourite
      *
@@ -83,12 +84,15 @@ class TagApiController extends AbstractObjectApiController {
         string $label,
         string $color,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
+        int $edited = 0,
         bool $hidden = false,
         bool $favourite = false
     ): JSONResponse {
+        if($edited === 0) $edited = time();
+
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $color, $cseType, time(), $hidden, false, $favourite
+            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, false, $favourite
         );
 
         $this->revisionService->save($revision);

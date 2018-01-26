@@ -109,6 +109,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $url
      * @param string $notes
      * @param string $folder
+     * @param int    $edited
      * @param bool   $hidden
      * @param bool   $favourite
      * @param array  $tags
@@ -116,6 +117,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @return JSONResponse
      * @throws ApiException
      * @throws \Exception
+     * @throws \OCP\AppFramework\QueryException
      */
     public function create(
         string $password,
@@ -126,13 +128,16 @@ class PasswordApiController extends AbstractObjectApiController {
         string $url = '',
         string $notes = '',
         string $folder = FolderService::BASE_FOLDER_UUID,
+        int $edited = 0,
         bool $hidden = false,
         bool $favourite = false,
         array $tags = []
     ): JSONResponse {
+        if($edited === 0) $edited = time();
+
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, time(), $hidden,
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $edited, $hidden,
             false, $favourite
         );
 
