@@ -47,15 +47,14 @@ services:
 #      - POSTGRES_HOST=postgres5432
 
   web:
-    image: nginx:alpine
+    build: ./docker/nginx/
     container_name: "passwords-nginx"
     restart: on-failure
     ports:
       - 80:80
+      - 443:443
     links:
       - app
-    volumes:
-      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
 

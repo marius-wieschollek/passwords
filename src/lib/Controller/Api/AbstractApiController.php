@@ -24,6 +24,11 @@ use OCP\IRequest;
 abstract class AbstractApiController extends ApiController {
 
     /**
+     * @var array
+     */
+    protected $allowedFilterFields = ['created', 'updated'];
+
+    /**
      * AbstractApiController constructor.
      *
      * @param IRequest $request
@@ -37,11 +42,6 @@ abstract class AbstractApiController extends ApiController {
             1728000
         );
     }
-
-    /**
-     * @var array
-     */
-    protected $allowedFilterFields = ['created', 'updated'];
 
     /**
      * @param     $response
