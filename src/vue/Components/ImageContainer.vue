@@ -41,7 +41,7 @@
             return {
                 loading    : true,
                 loadingIcon: this.icon,
-                imgClass   : 'hidden',
+                imgClass   : 'loading-hidden',
                 style      : {
                     marginTop: 0
                 },
@@ -88,7 +88,7 @@
         watch  : {
             image() {
                 this.loading = true;
-                this.imgClass = 'hidden';
+                this.imgClass = 'loading-hidden';
                 this.style.marginTop = 0;
                 this.$forceUpdate();
             },
@@ -130,7 +130,7 @@
                     &.s10 { transition : opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
                     &.s15 { transition : opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
                     &.s20 { transition : opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
-                    &.hidden {
+                    &.loading-hidden {
                         opacity    : 0;
                         transition : opacity 0.15s ease-in-out;
                     }
