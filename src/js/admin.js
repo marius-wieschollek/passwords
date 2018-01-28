@@ -29,12 +29,12 @@ class PasswordsAdminSettings {
             }
         );
 
-        $('#passwords-pageshot').on(
+        $('#passwords-preview').on(
             'change',
-            (e) => { PasswordsAdminSettings.updatePageshotField(); }
+            (e) => { PasswordsAdminSettings.updateWebsitePreviewField(); }
         );
 
-        PasswordsAdminSettings.updatePageshotField();
+        PasswordsAdminSettings.updateWebsitePreviewField();
     }
 
     static setValue(key, value) {
@@ -45,12 +45,12 @@ class PasswordsAdminSettings {
         $.post('/index.php/apps/passwords/admin/cache', {'key': key})
     }
 
-    static updatePageshotField() {
-        let $target   = $('#passwords-pageshot'),
+    static updateWebsitePreviewField() {
+        let $target   = $('#passwords-preview'),
             value     = $target.val(),
             $option   = $target.find('[value=' + value + ']'),
             data      = $option.data('api'),
-            $apiInput = $('#passwords-pageshot-apikey');
+            $apiInput = $('#passwords-preview-apikey');
 
 
         if(data === null) {

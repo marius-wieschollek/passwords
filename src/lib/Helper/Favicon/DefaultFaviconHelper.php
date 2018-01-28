@@ -12,7 +12,7 @@ use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
- * Class DefaultPageShotHelper
+ * Class DefaultPreviewHelper
  *
  * @package OCA\Passwords\Helper\Favicon
  */

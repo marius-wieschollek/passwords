@@ -6,17 +6,17 @@
  * Time: 21:32
  */
 
-namespace OCA\Passwords\Helper\PageShot;
+namespace OCA\Passwords\Helper\Preview;
 
 use OCA\Passwords\Services\HelperService;
-use OCA\Passwords\Services\PageShotService;
+use OCA\Passwords\Services\WebsitePreviewService;
 
 /**
  * Class PageresCliHelper
  *
- * @package OCA\Passwords\Helper\PageShot
+ * @package OCA\Passwords\Helper\Preview
  */
-class PageresCliHelper extends AbstractPageShotHelper {
+class PageresCliHelper extends AbstractPreviewHelper {
 
     const CAPTURE_MAX_RETRIES = 5;
     const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0';
@@ -25,7 +25,7 @@ class PageresCliHelper extends AbstractPageShotHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PAGESHOT_PAGERES;
+    protected $prefix = HelperService::PREVIEW_PAGERES;
 
     /**
      * @param string $domain
@@ -34,7 +34,7 @@ class PageresCliHelper extends AbstractPageShotHelper {
      * @return bool|string
      * @throws \Exception
      */
-    protected function getPageShotData(string $domain, string $view): string {
+    protected function getPreviewData(string $domain, string $view): string {
         $tempFile = uniqid();
         $tempDir  = $this->config->getTempDir();
         $tempPath = $tempDir.$tempFile.'.png';
@@ -42,8 +42,8 @@ class PageresCliHelper extends AbstractPageShotHelper {
         $domain   = escapeshellarg($domain);
 
         $cmd = "cd {$tempDir} && {$command} {$domain} ".
-               ($view === PageShotService::VIEWPORT_DESKTOP ? self::VIEWPORT_DESKTOP:self::VIEWPORT_MOBILE).
-               ' --user-agent='.escapeshellarg($view === PageShotService::VIEWPORT_DESKTOP ? self::USER_AGENT_DESKTOP:self::USER_AGENT_MOBILE).
+               ($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::VIEWPORT_DESKTOP:self::VIEWPORT_MOBILE).
+               ' --user-agent='.escapeshellarg($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::USER_AGENT_DESKTOP:self::USER_AGENT_MOBILE).
                ' --delay=4 --filename='.escapeshellarg($tempFile).' --overwrite 2>&1';
 
         $retries = 0;

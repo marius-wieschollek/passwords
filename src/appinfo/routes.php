@@ -75,7 +75,7 @@ $routes = [
     ],
     [
         'name'     => 'service_api#get_preview',
-        'url'      => '/api/1.0/service/image/{domain}/{view}/{width}/{height}',
+        'url'      => '/api/1.0/service/preview/{domain}/{view}/{width}/{height}',
         'verb'     => 'GET',
         'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 550, 'height' => 0]
     ],

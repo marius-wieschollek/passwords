@@ -116,7 +116,7 @@ OC.L10N.register(
         "Default Cache (0 files, 0 B)"        : "Standard Cache (0 Dateien, 0 B)",
         "Avatars Cache (0 files, 0 B)"        : "Profilbilder (0 Dateien, 0 B)",
         "Favicon Cache (0 files, 0 B)"        : "Favicon (0 Dateien, 0 B)",
-        "Pageshot Cache (0 files, 0 B)"       : "Webseitenansichten (0 Dateien, 0 B)",
+        "Preview Cache (0 files, 0 B)"        : "Webseitenansichten (0 Dateien, 0 B)",
         "Passwords Cache (0 files, 0 B)"      : "Schlechte Passwörter (0 Dateien, 0 B)",
     },
     'nplurals=2; plural=(n != 1);'

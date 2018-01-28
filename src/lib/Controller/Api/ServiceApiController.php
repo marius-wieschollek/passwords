@@ -11,7 +11,7 @@ namespace OCA\Passwords\Controller\Api;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\FaviconService;
-use OCA\Passwords\Services\PageShotService;
+use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Services\WordsService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
@@ -42,25 +42,25 @@ class ServiceApiController extends AbstractApiController {
     protected $faviconService;
 
     /**
-     * @var PageShotService
+     * @var WebsitePreviewService
      */
     protected $previewService;
 
     /**
      * ServiceApiController constructor.
      *
-     * @param IRequest        $request
-     * @param AvatarService   $avatarService
-     * @param FaviconService  $faviconService
-     * @param PageShotService $previewService
-     * @param WordsService    $wordsService
+     * @param IRequest              $request
+     * @param AvatarService         $avatarService
+     * @param FaviconService        $faviconService
+     * @param WebsitePreviewService $previewService
+     * @param WordsService          $wordsService
      */
     public function __construct(
         IRequest $request,
         WordsService $wordsService,
         AvatarService $avatarService,
         FaviconService $faviconService,
-        PageShotService $previewService
+        WebsitePreviewService $previewService
     ) {
         parent::__construct($request);
         $this->faviconService = $faviconService;
@@ -74,11 +74,16 @@ class ServiceApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
+     * @param int  $strength
+     * @param bool $numbers
+     * @param bool $special
+     * @param bool $smileys
+     *
      * @return JSONResponse
-     * @throws \Throwable
+     * @throws ApiException
      */
-    public function generatePassword(): JSONResponse {
-        list($password, $words) = $this->wordsService->getPassword(1, false, false, false);
+    public function generatePassword(int $strength = 1, bool $numbers = false, bool $special = false, bool $smileys = false): JSONResponse {
+        list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special, $smileys);
 
         if(empty($password)) throw new ApiException('Unable to generate password');
 
@@ -86,10 +91,10 @@ class ServiceApiController extends AbstractApiController {
             [
                 'password' => $password,
                 'words'    => $words,
-                'strength' => 1,
-                'numbers'  => false,
-                'special'  => false,
-                'smileys'  => false
+                'strength' => $strength,
+                'numbers'  => $numbers,
+                'special'  => $special,
+                'smileys'  => $smileys
             ]
         );
     }

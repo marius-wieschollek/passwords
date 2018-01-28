@@ -6,7 +6,7 @@
  * Time: 01:06
  */
 
-namespace OCA\Passwords\Helper\PageShot;
+namespace OCA\Passwords\Helper\Preview;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Http\RequestHelper;
@@ -15,11 +15,11 @@ use OCA\Passwords\Services\FileCacheService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
- * Class AbstractPageShotHelper
+ * Class AbstractPreviewHelper
  *
- * @package OCA\Passwords\Helper\Pageshot
+ * @package OCA\Passwords\Helper\Preview
  */
-abstract class AbstractPageShotHelper {
+abstract class AbstractPreviewHelper {
 
     const VIEWPORT_DESKTOP = '1366x768';
     const VIEWPORT_MOBILE  = '360x640';
@@ -48,7 +48,7 @@ abstract class AbstractPageShotHelper {
      * @param ConfigurationService $config
      */
     public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
-        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PAGESHOT_CACHE);
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
         $this->config           = $config;
     }
 
@@ -59,17 +59,17 @@ abstract class AbstractPageShotHelper {
      * @return ISimpleFile|null
      * @throws \Exception
      */
-    function getPageShot(string $domain, string $view): ?ISimpleFile {
-        $pageShotFile = $this->getPageShotFilename($domain, $view);
+    function getPreview(string $domain, string $view): ?ISimpleFile {
+        $previewFile = $this->getPreviewFilename($domain, $view);
 
-        if($this->fileCacheService->hasFile($pageShotFile)) {
-            return $this->fileCacheService->getFile($pageShotFile);
+        if($this->fileCacheService->hasFile($previewFile)) {
+            return $this->fileCacheService->getFile($previewFile);
         }
 
-        $pageShotData = $this->getPageShotData($domain, $view);
-        if(empty($pageShotData)) throw new \Exception('PageShot service returned no data');
+        $previewData = $this->getPreviewData($domain, $view);
+        if(empty($previewData)) throw new \Exception('Website preview service returned no data');
 
-        return $this->fileCacheService->putFile($pageShotFile, $pageShotData);
+        return $this->fileCacheService->putFile($previewFile, $previewData);
     }
 
     /**
@@ -77,7 +77,7 @@ abstract class AbstractPageShotHelper {
      *
      * @return ISimpleFile|null
      */
-    public function getDefaultPageShot(string $domain): ?ISimpleFile {
+    public function getDefaultPreview(string $domain): ?ISimpleFile {
         $number = array_sum(str_split(dechex(crc32($domain)), 2));
         while($number >= 5) {
             $number -= 5;
@@ -104,7 +104,7 @@ abstract class AbstractPageShotHelper {
      *
      * @return string
      */
-    public function getPageShotFilename(
+    public function getPreviewFilename(
         string $domain,
         string $view,
         int $minWidth = null,
@@ -146,11 +146,10 @@ abstract class AbstractPageShotHelper {
      * @throws ApiException
      * @throws \Exception
      */
-    protected function getPageShotData(string $domain, string $view): string {
-        $url          = $this->getPageShotUrl($domain, $view);
-        $pageShotData = $this->getHttpRequest($url);
+    protected function getPreviewData(string $domain, string $view): string {
+        $url = $this->getPreviewUrl($domain, $view);
 
-        return $pageShotData;
+        return $this->getHttpRequest($url);
     }
 
     /**
@@ -160,7 +159,7 @@ abstract class AbstractPageShotHelper {
      * @return string
      * @throws \Exception
      */
-    protected function getPageShotUrl(string $domain, string $view): string {
-        throw new \Exception('No Pageshot Url defined for '.$domain.$view, 502);
+    protected function getPreviewUrl(string $domain, string $view): string {
+        throw new \Exception('No preview url defined for '.$domain.$view, 502);
     }
 }

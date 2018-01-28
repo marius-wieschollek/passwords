@@ -6,24 +6,24 @@
  * Time: 01:05
  */
 
-namespace OCA\Passwords\Helper\PageShot;
+namespace OCA\Passwords\Helper\Preview;
 
 use OCA\Passwords\Services\HelperService;
-use OCA\Passwords\Services\PageShotService;
+use OCA\Passwords\Services\WebsitePreviewService;
 
 /**
  * Class WkhtmlImageHelper
  *
- * @package OCA\Passwords\Helper\Pageshot
+ * @package OCA\Passwords\Helper\Preview
  */
-class WkhtmlImageHelper extends AbstractPageShotHelper {
+class WkhtmlImageHelper extends AbstractPreviewHelper {
 
     const CAPTURE_MAX_RETRIES = 5;
 
     /**
      * @var string
      */
-    protected $prefix = HelperService::PAGESHOT_WKHTML;
+    protected $prefix = HelperService::PREVIEW_WKHTML;
 
     /**
      * @param string $domain
@@ -32,11 +32,11 @@ class WkhtmlImageHelper extends AbstractPageShotHelper {
      * @return bool|string
      * @throws \Exception
      */
-    protected function getPageShotData(string $domain, string $view): string {
+    protected function getPreviewData(string $domain, string $view): string {
         $tempFile = $this->config->getTempDir().uniqid().'.jpg';
         $cmd      = $this->getWkHtmlBinary().
                     ' --quiet --no-stop-slow-scripts --disable-smart-width --javascript-delay 1500 --format JPG --width '.
-                    ($view === PageShotService::VIEWPORT_DESKTOP ? self::WIDTH_DESKTOP:self::WIDTH_MOBILE).
+                    ($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::WIDTH_DESKTOP:self::WIDTH_MOBILE).
                     ' '.escapeshellarg('http://'.$domain).' '.escapeshellarg($tempFile).' 2>&1';
 
         $retries = 0;
