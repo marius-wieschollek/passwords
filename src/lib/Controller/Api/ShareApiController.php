@@ -89,7 +89,7 @@ class ShareApiController extends AbstractApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable'];
+    protected $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
 
     /**
      * TagApiController constructor.
@@ -139,7 +139,6 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
-     * @throws ApiException
      * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
@@ -196,7 +195,6 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
-     * @throws ApiException
      * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
@@ -343,7 +341,6 @@ class ShareApiController extends AbstractApiController {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function delete(string $id): JSONResponse {
-        $this->checkAccessPermissions();
         $model = $this->modelService->findByUuid($id);
         if($model->getUserId() !== $this->userId) {
             throw new ApiException('Access denied', 403);
@@ -360,11 +357,8 @@ class ShareApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws ApiException
      */
     public function info(): JSONResponse {
-        $this->checkAccessPermissions();
-
         $info = [
             'enabled'      => $this->shareManager->shareApiEnabled() &&
                               !$this->shareManager->sharingDisabledForUser($this->userId),
