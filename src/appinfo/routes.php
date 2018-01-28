@@ -77,7 +77,7 @@ $routes = [
         'name'     => 'service_api#get_preview',
         'url'      => '/api/1.0/service/preview/{domain}/{view}/{width}/{height}',
         'verb'     => 'GET',
-        'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 550, 'height' => 0]
+        'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 640, 'height' => '360...']
     ],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],

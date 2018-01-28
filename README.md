@@ -12,8 +12,8 @@
 
 ## Features
 #### Easy to use web interface
-Manage your passwords with ease thanks to the modern and clear web interface provided in Nextcloud.
-Keep your password collection manageable with folders and tags.
+Manage your passwords with ease in Nextcloud thanks to the modern and clear web interface provided.
+Keep your password database manageable and accessible with folders and tags.
 
 #### Modern password generator
 The integrated password generator follows the new [NIST Digital Identity Guidelines](https://pages.nist.gov/800-63-3/).
@@ -73,7 +73,7 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 
 ## Development
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
-* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Api/Api).
+* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/home#developers).
 
 ## Licenses and Legal Information
 See [Licenses.md](Licenses.md)

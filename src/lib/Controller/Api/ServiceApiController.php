@@ -144,7 +144,7 @@ class ServiceApiController extends AbstractApiController {
      * @throws ApiException
      * @throws \OCP\AppFramework\QueryException
      */
-    public function getPreview(string $domain, string $view = 'desktop', string $width = '550', string $height = '0') {
+    public function getPreview(string $domain, string $view = 'desktop', string $width = '640', string $height = '360...') {
         list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
         list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
 
