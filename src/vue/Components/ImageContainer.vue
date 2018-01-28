@@ -105,8 +105,7 @@
 <style lang="scss">
     .item-details {
         .image-container {
-            height     : 290px;
-            max-height : 290px;
+            max-height : 274px;
             overflow   : hidden;
             position   : relative;
 
@@ -116,23 +115,24 @@
 
                 .image {
                     margin-top : 0;
-                    min-height : 290px;
+                    min-height : 0;
                     position   : relative;
                     opacity    : 1;
-                    transition : opacity 0.5s ease-in-out;
+                    transition : min-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
 
                     img {
                         width : 100%;
                     }
 
-                    &.s1 { transition : opacity 0.15s ease-in-out, margin-top 1s ease-in-out; }
-                    &.s5 { transition : opacity 0.15s ease-in-out, margin-top 5s ease-in-out; }
-                    &.s10 { transition : opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
-                    &.s15 { transition : opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
-                    &.s20 { transition : opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
+                    &.s1 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 1s ease-in-out; }
+                    &.s5 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 5s ease-in-out; }
+                    &.s10 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
+                    &.s15 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
+                    &.s20 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
                     &.loading-hidden {
                         opacity    : 0;
-                        transition : opacity 0.15s ease-in-out;
+                        min-height : 274px;
+                        transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
                     }
                 }
 
