@@ -63,3 +63,40 @@
         }
     }
 </script>
+
+<style lang="scss">
+    .backup-dialog {
+        h1 {
+            font-size        : 1.25em;
+            padding          : 10px;
+            line-height      : 30px;
+            border-top       : 1px solid $color-grey-lighter;
+            border-bottom    : 1px solid $color-grey-lighter;
+            background-color : darken($color-white, 3);
+
+            &:before {
+                content       : '1';
+                color         : $color-grey-darker;
+                border        : 1px solid $color-grey;
+                border-radius : 15px;
+                width         : 30px;
+                display       : inline-block;
+                text-align    : center;
+                font-weight   : bold;
+                margin-right  : 5px;
+            }
+        }
+
+        .step-2 h1::before {
+            content : '2';
+        }
+
+        .step-3 h1::before {
+            content : '3';
+        }
+
+        .step-4 h1::before {
+            content : '4';
+        }
+    }
+</style>

@@ -33,7 +33,7 @@
 
         methods: {
             setUrl() {
-                this.$router.push({name: this.route, params: this.params});
+                if(this.params) this.$router.push({name: this.route, params: this.params});
             }
         }
     }

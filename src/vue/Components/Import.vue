@@ -1,25 +1,38 @@
 <template>
-    <div class="import-container">
-        <select v-model="importSettings.type">
-            <translate tag="option" value="json">JSON Backup</translate>
-            <!--
-            <translate tag="option" value="legacy">Legacy Passwords App</translate>
-            <translate tag="option" value="csvFolder">CSV Tags Backup</translate>
-            <translate tag="option" value="csvTags">CSV Folders Backup</translate>
-            <translate tag="option" value="csvPassword">CSV Password Backup</translate>
-            -->
-        </select>
+    <div class="backup-dialog import-container">
+        <div class="step-1">
+            <translate tag="h1" say="Choose Format"/>
+            <select v-model="importSettings.type">
+                <translate tag="option" value="json">Passwords Backup</translate>
+                <!--
+                <translate tag="option" value="legacy">Legacy Passwords App</translate>
+                <translate tag="option" value="csvFolder">CSV Tags Backup</translate>
+                <translate tag="option" value="csvTags">CSV Folders Backup</translate>
+                <translate tag="option" value="csvPassword">CSV Password Backup</translate>
+                -->
+            </select>
+        </div>
 
-        <select v-model="importSettings.mode">
-            <translate tag="option" value="0">Skip if same revision</translate>
-            <translate tag="option" value="1">Skip if id exists</translate>
-            <translate tag="option" value="2">Always overwrite</translate>
-            <translate tag="option" value="3">Clone if id exists</translate>
-        </select>
+        <div class="step-2">
+            <translate tag="h1" say="Select Import Options"/>
+            <select v-model="importSettings.mode">
+                <translate tag="option" value="0">Skip if same revision</translate>
+                <translate tag="option" value="1">Skip if id exists</translate>
+                <translate tag="option" value="2">Always overwrite</translate>
+                <translate tag="option" value="3">Clone if id exists</translate>
+            </select>
+        </div>
 
-        <input type="file" :accept="importSettings.mime" @change="processFile($event)" value="Select File">
-        <translate tag="button" @click="importDb">Import</translate>
-        <progress :value="importStatus.processed" :max="importStatus.total" :title="importStatus.status"/>
+        <div class="step-3">
+            <translate tag="h1" say="Select File"/>
+            <input type="file" :accept="importSettings.mime" @change="processFile($event)" value="Select File">
+        </div>
+
+        <div class="step-4">
+            <translate tag="h1" say="Run Import"/>
+            <translate tag="button" @click="importDb">Import</translate>
+            <progress :value="importStatus.processed" :max="importStatus.total" :title="importStatus.status"/>
+        </div>
     </div>
 </template>
 
