@@ -12,6 +12,7 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\IAppContainer;
+use OCP\IConfig;
 use OCP\IUserManager;
 
 /**
@@ -27,6 +28,11 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @var null|string
      */
     protected $userId;
+
+    /**
+     * @var IConfig
+     */
+    protected $config;
 
     /**
      * @var IUserManager
@@ -48,17 +54,20 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * AbstractObjectHelper constructor.
      *
      * @param null|string     $userId
+     * @param IConfig    $config
      * @param IAppContainer   $container
      * @param IUserManager    $userManager
      * @param PasswordService $passwordService
      */
     public function __construct(
         ?string $userId,
+        IConfig $config,
         IAppContainer $container,
         IUserManager $userManager,
         PasswordService $passwordService
     ) {
         $this->userId          = $userId;
+        $this->config = $config;
         $this->container       = $container;
         $this->userManager     = $userManager;
         $this->passwordService = $passwordService;
@@ -106,13 +115,16 @@ class ShareObjectHelper extends AbstractObjectHelper {
 
         $password = $this->userId === $share->getUserId() ? $share->getSourcePassword():$share->getTargetPassword();
 
+        $shareable = $share->isShareable();
+        if($this->userId !== $share->getUserId() && !$this->isReShareable()) $shareable = false;
+
         return [
             'id'            => $share->getUuid(),
             'created'       => $share->getCreated(),
             'updated'       => $share->getUpdated(),
             'expires'       => $share->getExpires(),
             'editable'      => $share->isEditable(),
-            'shareable'     => $share->isShareable(),
+            'shareable'     => $shareable,
             'password'      => $password,
             'updatePending' => $share->isSourceUpdated() || $share->isTargetUpdated(),
             'owner'         => [
@@ -153,5 +165,12 @@ class ShareObjectHelper extends AbstractObjectHelper {
         }
 
         return $this->passwordObjectHelper;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isReShareable(): bool {
+        return $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
     }
 }

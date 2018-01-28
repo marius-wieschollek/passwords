@@ -146,7 +146,6 @@ class ShareApiController extends AbstractApiController {
      * @throws \OCP\AppFramework\QueryException
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        $this->checkAccessPermissions();
         /** @var Share[] $models */
         $models = $this->modelService->findAll();
 
@@ -174,7 +173,6 @@ class ShareApiController extends AbstractApiController {
      * @throws \OCP\AppFramework\QueryException
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        $this->checkAccessPermissions();
         $filters = $this->processSearchCriteria($criteria);
         /** @var Share[] $models */
         $models = $this->modelService->findAll();
@@ -205,7 +203,6 @@ class ShareApiController extends AbstractApiController {
      * @throws \OCP\AppFramework\QueryException
      */
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        $this->checkAccessPermissions();
         $model  = $this->modelService->findByUuid($id);
         $object = $this->objectHelper->getApiObject($model, $details);
 
@@ -255,11 +252,8 @@ class ShareApiController extends AbstractApiController {
         $model = $this->passwordModelService->findByUuid($password);
         if($model->getShareId()) {
             $sourceShare = $this->modelService->findByUuid($model->getShareId());
-            if($sourceShare->getUserId() === $receiver)  throw new ApiException('Invalid receiver uid', 400);
-
-            $reSharing   = $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
-            if(!$sourceShare->isShareable() || !$reSharing) throw new ApiException('Entity not shareable', 403);
-
+            if($sourceShare->getUserId() === $receiver) throw new ApiException('Invalid receiver uid', 400);
+            if(!$sourceShare->isShareable() || !$this->isReSharingEnabled()) throw new ApiException('Entity not shareable', 403);
             if(!$sourceShare->isEditable()) $editable = false;
         }
 
@@ -372,10 +366,11 @@ class ShareApiController extends AbstractApiController {
         $this->checkAccessPermissions();
 
         $info = [
-            'enabled'   => $this->shareManager->shareApiEnabled() &&
-                           !$this->shareManager->sharingDisabledForUser($this->userId),
-            'resharing' => $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes',
-            'types'     => ['user']
+            'enabled'      => $this->shareManager->shareApiEnabled() &&
+                              !$this->shareManager->sharingDisabledForUser($this->userId),
+            'resharing'    => $this->isReSharingEnabled(),
+            'autocomplete' => $this->isAutoCompleteEnabled(),
+            'types'        => ['user']
         ];
 
         return $this->createJsonResponse($info);
@@ -395,7 +390,7 @@ class ShareApiController extends AbstractApiController {
         $this->checkAccessPermissions();
 
         $partners = [];
-        if($this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'no') === 'yes') {
+        if($this->isAutoCompleteEnabled()) {
             $partners = $this->getSharePartners($search);
         }
 
@@ -472,5 +467,19 @@ class ShareApiController extends AbstractApiController {
         if($this->shareManager->sharingDisabledForUser($this->userId)) {
             throw new ApiException('Sharing disabled for user', 403);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isReSharingEnabled(): bool {
+        return $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isAutoCompleteEnabled(): bool {
+        return $this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'no') === 'yes';
     }
 }
