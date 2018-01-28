@@ -19,13 +19,13 @@ use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
-use OCA\Passwords\Helper\PageShot\AbstractPageShotHelper;
-use OCA\Passwords\Helper\PageShot\DefaultPageShotHelper;
-use OCA\Passwords\Helper\PageShot\PageresCliHelper;
-use OCA\Passwords\Helper\PageShot\ScreenShotApiHelper;
-use OCA\Passwords\Helper\PageShot\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\PageShot\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
+use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
+use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
+use OCA\Passwords\Helper\Preview\PageresCliHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\Preview\WkhtmlImageHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
@@ -44,11 +44,11 @@ use OCP\AppFramework\IAppContainer;
  */
 class HelperService {
 
-    const PAGESHOT_SCREEN_SHOT_MACHINE = 'ssm';
-    const PAGESHOT_SCREEN_SHOT_API     = 'ssa';
-    const PAGESHOT_WKHTML              = 'wkhtml';
-    const PAGESHOT_PAGERES             = 'pageres';
-    const PAGESHOT_DEFAULT             = 'default';
+    const PREVIEW_SCREEN_SHOT_MACHINE = 'ssm';
+    const PREVIEW_SCREEN_SHOT_API     = 'ssa';
+    const PREVIEW_WKHTML              = 'wkhtml';
+    const PREVIEW_PAGERES             = 'pageres';
+    const PREVIEW_DEFAULT             = 'default';
 
     const FAVICON_BETTER_IDEA  = 'bi';
     const FAVICON_DUCK_DUCK_GO = 'ddg';
@@ -104,26 +104,26 @@ class HelperService {
     }
 
     /**
-     * @return AbstractPageShotHelper
+     * @return AbstractPreviewHelper
      * @throws \OCP\AppFramework\QueryException
      */
-    public function getPageShotHelper(): AbstractPageShotHelper {
-        $service = $this->config->getAppValue('service/pageshot', self::PAGESHOT_DEFAULT);
+    public function getWebsitePreviewHelper(): AbstractPreviewHelper {
+        $service = $this->config->getAppValue('service/preview', self::PREVIEW_DEFAULT);
 
         switch($service) {
-            case self::PAGESHOT_WKHTML:
+            case self::PREVIEW_WKHTML:
                 return $this->container->query(WkhtmlImageHelper::class);
-            case self::PAGESHOT_PAGERES:
+            case self::PREVIEW_PAGERES:
                 return $this->container->query(PageresCliHelper::class);
-            case self::PAGESHOT_SCREEN_SHOT_API:
+            case self::PREVIEW_SCREEN_SHOT_API:
                 return $this->container->query(ScreenShotApiHelper::class);
-            case self::PAGESHOT_SCREEN_SHOT_MACHINE:
+            case self::PREVIEW_SCREEN_SHOT_MACHINE:
                 return $this->container->query(ScreenShotMachineHelper::class);
-            case self::PAGESHOT_DEFAULT:
-                return $this->container->query(DefaultPageShotHelper::class);
+            case self::PREVIEW_DEFAULT:
+                return $this->container->query(DefaultPreviewHelper::class);
         }
 
-        return $this->container->query(DefaultPageShotHelper::class);
+        return $this->container->query(DefaultPreviewHelper::class);
     }
 
     /**

@@ -10,7 +10,7 @@ namespace OCA\Passwords\Settings;
 
 use Gmagick;
 use Imagick;
-use OCA\Passwords\Helper\PageShot\WkhtmlImageHelper;
+use OCA\Passwords\Helper\Preview\WkhtmlImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -67,7 +67,7 @@ class AdminSettings implements ISettings {
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
-            'pageshotServices' => $this->getPageShotServices(),
+            'previewServices' => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
             'legacyApiEnabled' => $legacyEnabled,
             'legacyLastUsed'   => $legacyLastUsed,
@@ -192,45 +192,45 @@ class AdminSettings implements ISettings {
     /**
      * @return array
      */
-    protected function getPageShotServices(): array {
-        $current = $this->config->getAppValue('service/pageshot', HelperService::PAGESHOT_DEFAULT);
+    protected function getWebsitePreviewServices(): array {
+        $current = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
 
         return [
             [
-                'id'      => HelperService::PAGESHOT_WKHTML,
+                'id'      => HelperService::PREVIEW_WKHTML,
                 'label'   => $this->localisation->t('WKHTML (Local)'),
-                'current' => $current === HelperService::PAGESHOT_WKHTML,
+                'current' => $current === HelperService::PREVIEW_WKHTML,
                 'path'    => WkhtmlImageHelper::getWkhtmlPath(),
                 'api'     => null
             ],
             [
-                'id'      => HelperService::PAGESHOT_PAGERES,
+                'id'      => HelperService::PREVIEW_PAGERES,
                 'label'   => $this->localisation->t('Pageres/PhantomJS (Local)'),
-                'current' => $current === HelperService::PAGESHOT_PAGERES,
+                'current' => $current === HelperService::PREVIEW_PAGERES,
                 'api'     => null
             ],
             [
-                'id'      => HelperService::PAGESHOT_SCREEN_SHOT_API,
+                'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
                 'label'   => $this->localisation->t('screenshotapi.io'),
-                'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_API,
+                'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
                 'api'     => [
-                    'key'   => 'service/pageshot/ssa/key',
-                    'value' => $this->config->getAppValue('service/pageshot/ssa/key')
+                    'key'   => 'service/preview/ssa/key',
+                    'value' => $this->config->getAppValue('service/preview/ssa/key')
                 ]
             ],
             [
-                'id'      => HelperService::PAGESHOT_SCREEN_SHOT_MACHINE,
+                'id'      => HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'label'   => $this->localisation->t('screenshotmachine.com'),
-                'current' => $current === HelperService::PAGESHOT_SCREEN_SHOT_MACHINE,
+                'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'api'     => [
-                    'key'   => 'service/pageshot/ssm/key',
-                    'value' => $this->config->getAppValue('service/pageshot/ssm/key')
+                    'key'   => 'service/preview/ssm/key',
+                    'value' => $this->config->getAppValue('service/preview/ssm/key')
                 ]
             ],
             [
-                'id'      => HelperService::PAGESHOT_DEFAULT,
+                'id'      => HelperService::PREVIEW_DEFAULT,
                 'label'   => $this->localisation->t('None'),
-                'current' => $current === HelperService::PAGESHOT_DEFAULT,
+                'current' => $current === HelperService::PREVIEW_DEFAULT,
                 'api'     => null
             ]
         ];

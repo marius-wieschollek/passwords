@@ -12,11 +12,11 @@ use OCA\Passwords\Exception\ApiException;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
- * Class PageShotService
+ * Class WebsitePreviewService
  *
  * @package OCA\Passwords\Services
  */
-class PageShotService {
+class WebsitePreviewService {
 
     const VIEWPORT_DESKTOP = 'desktop';
     const VIEWPORT_MOBILE  = 'mobile';
@@ -55,7 +55,7 @@ class PageShotService {
         ValidationService $validationService,
         LoggingService $logger
     ) {
-        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PAGESHOT_CACHE);
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
         $this->validationService = $validationService;
         $this->helperService     = $helperService;
         $this->logger            = $logger;
@@ -84,37 +84,37 @@ class PageShotService {
         list($domain, $minWidth, $minHeight, $maxWidth, $maxHeight)
             = $this->validateInput($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
-        $pageShotService = $this->helperService->getPageShotHelper();
-        $fileName        = $pageShotService->getPageShotFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        $previewHelper = $this->helperService->getWebsitePreviewHelper();
+        $fileName        = $previewHelper->getPreviewFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
 
         try {
             if(!$this->validationService->isValidDomain($domain)) {
-                $pageShot = $pageShotService->getDefaultPageShot('default');
+                $websitePreview = $previewHelper->getDefaultPreview('default');
             } else {
-                $pageShot = $pageShotService->getPageShot($domain, $view);
+                $websitePreview = $previewHelper->getPreview($domain, $view);
             }
 
-            return $this->resizePageShot($pageShot, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
+            return $this->resizePreview($websitePreview, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(\Throwable $e) {
             $this->logger->logException($e);
 
             try {
-                $pageShot = $pageShotService->getDefaultPageShot($domain);
+                $websitePreview = $previewHelper->getDefaultPreview($domain);
 
-                return $this->resizePageShot($pageShot, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
+                return $this->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
             } catch(\Throwable $e) {
                 $this->logger->logException($e);
 
-                throw new ApiException('Internal PageShot API Error', 502);
+                throw new ApiException('Internal Website Preview API Error', 502);
             }
         }
     }
 
     /**
-     * @param ISimpleFile $pageShot
+     * @param ISimpleFile $preview
      * @param string      $fileName
      * @param int         $minWidth
      * @param int         $minHeight
@@ -124,8 +124,8 @@ class PageShotService {
      * @return ISimpleFile|null
      * @throws \OCP\AppFramework\QueryException
      */
-    protected function resizePageShot(
-        ISimpleFile $pageShot,
+    protected function resizePreview(
+        ISimpleFile $preview,
         string $fileName,
         int $minWidth,
         int $minHeight,
@@ -134,7 +134,7 @@ class PageShotService {
     ): ?ISimpleFile {
 
         $imageHelper = $this->helperService->getImageHelper();
-        $image       = $imageHelper->getImageFromBlob($pageShot->getContent());
+        $image       = $imageHelper->getImageFromBlob($preview->getContent());
         $image       = $imageHelper->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
         $imageData   = $imageHelper->exportJpeg($image);
         $imageHelper->destroyImage($image);

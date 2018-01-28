@@ -6,19 +6,19 @@
  * Time: 15:23
  */
 
-namespace OCA\Passwords\Helper\PageShot;
+namespace OCA\Passwords\Helper\Preview;
 
 use Exception;
 use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Services\HelperService;
-use OCA\Passwords\Services\PageShotService;
+use OCA\Passwords\Services\WebsitePreviewService;
 
 /**
  * Class ScreenShotApiHelper
  *
- * @package OCA\Passwords\Helper\PageShot
+ * @package OCA\Passwords\Helper\Preview
  */
-class ScreenShotApiHelper extends AbstractPageShotHelper {
+class ScreenShotApiHelper extends AbstractPreviewHelper {
 
     const CAPTURE_URL       = 'https://api.screenshotapi.io/capture';
     const RETRIEVE_URL      = 'https://api.screenshotapi.io/retrieve?key=';
@@ -30,7 +30,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PAGESHOT_SCREEN_SHOT_API;
+    protected $prefix = HelperService::PREVIEW_SCREEN_SHOT_API;
 
     /**
      * @param array $serviceOptions
@@ -94,7 +94,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
             'fresh'       => false
         ];
 
-        if($view === PageShotService::VIEWPORT_DESKTOP) {
+        if($view === WebsitePreviewService::VIEWPORT_DESKTOP) {
             $options['webdriver'] = self::WEBDRIVER_FIREFOX;
             $options['viewport']  = self::VIEWPORT_DESKTOP;
             $options['fullpage']  = true;
@@ -117,7 +117,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @return array
      */
     protected function getServiceAuth(): array {
-        $apiKey = $this->config->getAppValue('service/pageshot/ssa/key');
+        $apiKey = $this->config->getAppValue('service/preview/ssa/key');
 
         return ['apikey' => $apiKey];
     }
@@ -129,7 +129,7 @@ class ScreenShotApiHelper extends AbstractPageShotHelper {
      * @return string
      * @throws Exception
      */
-    protected function getPageShotData(string $domain, string $view): string {
+    protected function getPreviewData(string $domain, string $view): string {
         $options = $this->getServiceOptions($domain, $view);
 
         try {

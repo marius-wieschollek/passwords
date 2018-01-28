@@ -78,7 +78,7 @@ export default class SimpleApi {
             'service.coffee'      : 'api/1.0/service/coffee',
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
-            'service.preview'     : 'api/1.0/service/image/{domain}/{view}/{width}/{height}',
+            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
         };
     }
 

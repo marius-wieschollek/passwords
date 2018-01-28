@@ -62,16 +62,16 @@
                 <?php endforeach; ?>
             </select>
 
-            <label for="passwords-pageshot"><?php p($l->t('Website PageShot Service')); ?></label>
-            <select id="passwords-pageshot" name="passwords-pageshot" name="pageshot" data-setting="service/pageshot">
-                <?php foreach($_['pageshotServices'] as $service): ?>
+            <label for="passwords-preview"><?php p($l->t('Website Preview Service')); ?></label>
+            <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service/preview">
+                <?php foreach($_['previewServices'] as $service): ?>
                     <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>
                             data-api="<?php p(json_encode($service['api'])); ?>"><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
             </select>
-            <div class="container" id="passwords-pageshot-apikey-container">
-                <label for="passwords-pageshot-apikey"><?php p($l->t('PageShot Service API Key')); ?></label>
-                <input id="passwords-pageshot-apikey" name="pageshot-apikey" data-setting="">
+            <div class="container" id="passwords-preview-apikey-container">
+                <label for="passwords-preview-apikey"><?php p($l->t('Website Preview API Key')); ?></label>
+                <input id="passwords-preview-apikey" name="preview-apikey" data-setting="">
             </div>
         </div>
     </form>

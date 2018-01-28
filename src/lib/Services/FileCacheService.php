@@ -23,7 +23,7 @@ class FileCacheService {
     const DEFAULT_CACHE   = 'default';
     const AVATAR_CACHE    = 'avatars';
     const FAVICON_CACHE   = 'favicon';
-    const PAGESHOT_CACHE  = 'pageshot';
+    const PREVIEW_CACHE   = 'preview';
     const PASSWORDS_CACHE = 'passwords';
 
     /**
@@ -104,7 +104,7 @@ class FileCacheService {
             self::DEFAULT_CACHE,
             self::AVATAR_CACHE,
             self::FAVICON_CACHE,
-            self::PAGESHOT_CACHE,
+            self::PREVIEW_CACHE,
             self::PASSWORDS_CACHE,
         ];
     }
