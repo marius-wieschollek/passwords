@@ -108,8 +108,7 @@ class ApiSecurityMiddleware extends Middleware {
     protected function checkIfHttpsUsed(): bool {
         $forceSsl    = $this->config->getSystemValue('forcessl', false);
         $protocol    = $this->config->getSystemValue('overwriteprotocol', '');
-        $ignoreHttps = $this->config->getAppValue('environment', 'production') === 'dev';
 
-        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https' || $forceSsl || $ignoreHttps;
+        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https' || $forceSsl;
     }
 }

@@ -116,9 +116,8 @@ class PageController extends Controller {
     protected function checkIfHttpsUsed(): bool {
         $forceSsl    = $this->configurationService->getSystemValue('forcessl', false);
         $protocol    = $this->configurationService->getSystemValue('overwriteprotocol', '');
-        $ignoreHttps = $this->configurationService->getAppValue('environment', 'production') === 'dev';
 
-        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https' || $forceSsl || $ignoreHttps;
+        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https' || $forceSsl;
     }
 
     /**
