@@ -3,7 +3,7 @@
     <id>passwords</id>
     <name>Passwords</name>
     <summary>Store, manage and access all your passwords easily.</summary>
-    <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter sicher und überall.</summary>
+    <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter schnell, sicher und überall.</summary>
     <description><![CDATA[Passwords allows you to store your passwords safely with Nextcloud.
 The intuitive and modern web interface of the app makes it easy to update and add new passwords from anywhere.
 Included security checks help you to keep your online accounts safe and up-to-date.
@@ -21,7 +21,7 @@ You can also share passwords with other Nextcloud users.
 ]]>
     </description>
     <description lang="de"><![CDATA[Passwords ermöglicht es Ihnen, Ihre Passwörter sicher und einfach mit Nextcloud zu verwalten.
-Die intuitive Weboberfläche macht es einfch, Passwörter von überall aus hinzuzufügen oder zu aktualisieren.
+Die intuitive Weboberfläche macht es einfach Passwörter von überall aus hinzuzufügen oder zu aktualisieren.
 Dank des eingebauten Sicherheitstests können Sie Ihre Benutzerkonten sicher und Ihre Passwörter aktuell halten.
 Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
 
