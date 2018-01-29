@@ -42,8 +42,8 @@
                         <sharing :password="object"/>
                     </div>
                     <div slot="qrcode" class="password-share-qrcode">
-                        <select id="password-details-qrcode" @change="changeQrCode($event)">
-                            <translate tag="option" value="login" v-if="object.username">Username</translate>
+                        <select id="password-details-qrcode" v-model="qrModel">
+                            <translate tag="option" value="username" v-if="object.username">Username</translate>
                             <translate tag="option" value="password" selected>Password</translate>
                             <translate tag="option" value="url" v-if="object.url">Website</translate>
                         </select>
@@ -104,13 +104,14 @@
 
         data() {
             return {
-                qrcode: {
+                qrcode : {
                     color  : ThemeManager.getColor(),
                     bgColor: ThemeManager.getContrastColor(),
                     text   : this.password.password
                 },
-                object: this.password,
-                showPw: false
+                qrModel: 'password',
+                object : this.password,
+                showPw : false
             }
         },
 
@@ -178,10 +179,6 @@
                     element: null
                 }
             },
-            changeQrCode($event) {
-                let property = $($event.target).val();
-                this.qrcode.text = this.object[property];
-            },
             restoreAction(revision) {
                 PasswordManager.restoreRevision(this.object, revision)
             },
@@ -196,6 +193,9 @@
                 this.object = value;
                 $('#password-details-qrcode').val('password');
                 this.$forceUpdate();
+            },
+            qrModel: function(value) {
+                this.qrcode.text = this.object[value];
             }
         }
     }
