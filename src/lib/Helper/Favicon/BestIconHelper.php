@@ -13,12 +13,14 @@ use OCA\Passwords\Services\HelperService;
 /**
  * Class BetterIdeaHelper
  */
-class BetterIdeaHelper extends AbstractFaviconHelper {
+class BestIconHelper extends AbstractFaviconHelper {
+
+    const BESTICON_DEFAULT_URL = 'https://besticon-demo.herokuapp.com/icon';
 
     /**
      * @var string
      */
-    protected $prefix = HelperService::FAVICON_BETTER_IDEA;
+    protected $prefix = HelperService::FAVICON_BESTICON;
 
     /**
      * @param string $domain
@@ -27,6 +29,8 @@ class BetterIdeaHelper extends AbstractFaviconHelper {
      * @return string
      */
     protected function getFaviconUrl(string $domain, int $size): string {
-        return 'https://icons.better-idea.org/icon?size=32&url='.$domain;
+        $fallbackColor = substr($this->fallbackIconGenerator->stringToColor($domain), 1);
+
+        return self::BESTICON_DEFAULT_URL."?size=16..128..256&fallback_icon_color={$fallbackColor}&url={$domain}";
     }
 }

@@ -11,7 +11,7 @@ namespace OCA\Passwords\Services;
 use Gmagick;
 use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
-use OCA\Passwords\Helper\Favicon\BetterIdeaHelper;
+use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
 use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
@@ -50,7 +50,7 @@ class HelperService {
     const PREVIEW_PAGERES             = 'pageres';
     const PREVIEW_DEFAULT             = 'default';
 
-    const FAVICON_BETTER_IDEA  = 'bi';
+    const FAVICON_BESTICON     = 'bi';
     const FAVICON_DUCK_DUCK_GO = 'ddg';
     const FAVICON_GOOGLE       = 'gl';
     const FAVICON_LOCAL        = 'local';
@@ -134,8 +134,8 @@ class HelperService {
         $service = $this->config->getAppValue('service/favicon', self::FAVICON_DEFAULT);
 
         switch($service) {
-            case self::FAVICON_BETTER_IDEA:
-                return $this->container->query(BetterIdeaHelper::class);
+            case self::FAVICON_BESTICON:
+                return $this->container->query(BestIconHelper::class);
             case self::FAVICON_DUCK_DUCK_GO:
                 return $this->container->query(DuckDuckGoHelper::class);
             case self::FAVICON_GOOGLE:
