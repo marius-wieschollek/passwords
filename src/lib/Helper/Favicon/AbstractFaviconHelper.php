@@ -117,9 +117,9 @@ abstract class AbstractFaviconHelper {
     /**
      * @param string $url
      *
-     * @return string
+     * @return string|null
      */
-    protected function getHttpRequest(string $url): string {
+    protected function getHttpRequest(string $url): ?string {
         $request = new RequestHelper();
         $request->setUrl($url);
 
@@ -132,7 +132,7 @@ abstract class AbstractFaviconHelper {
      *
      * @return null|string
      */
-    protected function getFaviconData(string $domain, int $size): string {
+    protected function getFaviconData(string $domain, int $size): ?string {
         $url = $this->getFaviconUrl($domain, $size);
 
         return $this->getHttpRequest($url);

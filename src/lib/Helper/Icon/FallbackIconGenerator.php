@@ -152,7 +152,7 @@ class FallbackIconGenerator {
      *
      * @return string
      */
-    protected function stringToColor(string $string): string {
+    public function stringToColor(string $string): string {
         $max    = count($this->colors);
         $number = array_sum(str_split(dechex(crc32($string)), 2));
 
