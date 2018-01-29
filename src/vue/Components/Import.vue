@@ -2,7 +2,9 @@
     <div class="backup-dialog import-container">
         <div class="step-1">
             <translate tag="h1" say="Choose Format"/>
-            <select v-model="importSettings.type">
+            <translate tag="label" for="passwords-import-format" say="Import format"/>
+            <select id="passwords-import-format" v-model="type">
+                <translate tag="option" value="null">Please choose</translate>
                 <translate tag="option" value="json">Passwords Backup</translate>
                 <!--
                 <translate tag="option" value="legacy">Legacy Passwords App</translate>
@@ -13,9 +15,17 @@
             </select>
         </div>
 
-        <div class="step-2">
+        <div class="step-2" v-if="step > 1">
+            <translate tag="h1" say="Select File"/>
+            <translate tag="label" for="passwords-import-file" say="Import File"/>
+            <input type="file" for="passwords-import-file" :accept="mime" @change="processFile($event)" value="Select File">
+        </div>
+
+        <div class="step-3" v-if="step > 2">
             <translate tag="h1" say="Select Import Options"/>
-            <select v-model="importSettings.mode">
+            <translate tag="label" for="passwords-import-mode" say="Import Mode"/>
+            <select id="passwords-import-mode" v-model="mode">
+                <translate tag="option" value="null">Please choose</translate>
                 <translate tag="option" value="0">Skip if same revision</translate>
                 <translate tag="option" value="1">Skip if id exists</translate>
                 <translate tag="option" value="2">Always overwrite</translate>
@@ -23,12 +33,7 @@
             </select>
         </div>
 
-        <div class="step-3">
-            <translate tag="h1" say="Select File"/>
-            <input type="file" :accept="importSettings.mime" @change="processFile($event)" value="Select File">
-        </div>
-
-        <div class="step-4">
+        <div class="step-4" v-if="step > 3">
             <translate tag="h1" say="Run Import"/>
             <translate tag="button" @click="importDb">Import</translate>
             <progress :value="importStatus.processed" :max="importStatus.total" :title="importStatus.status"/>
@@ -49,33 +54,33 @@
 
         data() {
             return {
-                importSettings: {
-                    type: 'json',
-                    mime: 'application/json',
-                    mode: 0,
-                    data: null
-                },
-                importStatus  : {
+                type: 'null',
+                mime: 'application/json',
+                mode: 'null',
+                file: null,
+
+                importStatus: {
                     processed: 0,
                     total    : 0,
                     status   : ''
-                }
+                },
+                step        : 1
             }
         },
 
         methods: {
             importDb() {
                 ImportManager.importDatabase(
-                    this.importSettings.data,
-                    this.importSettings.type,
-                    this.importSettings.mode,
+                    this.file,
+                    this.type,
+                    this.mode,
                     this.registerProgress
                 );
             },
             processFile(event) {
                 let file   = event.target.files[0],
                     reader = new FileReader();
-                reader.onload = (e) => { this.importSettings.data = e.target.result; };
+                reader.onload = (e) => { this.file = e.target.result; };
                 reader.readAsText(file)
             },
             registerProgress(processed, total, status) {
@@ -84,6 +89,39 @@
                 if(status !== null) {
                     this.importStatus.status = Utility.translate(status);
                 }
+            }
+        },
+
+        watch: {
+            type(d) {
+                if(d === 'null') {
+                    this.step = 1;
+                    this.file = null;
+                    return;
+                }
+
+                if(this.step === 1) this.step = 2;
+                switch(d) {
+                    case 'json':
+                        this.mime = 'application/json';
+                        break;
+                    case 'csv':
+                        this.mime = 'text/csv';
+                        break;
+                }
+            },
+            file(d) {
+                if(d !== null && this.step === 2) {
+                    this.step = 3;
+                }
+            },
+            mode(d) {
+                if(d === 'null') {
+                    this.step = 3;
+                    return;
+                }
+
+                if(this.step === 3) this.step = 4;
             }
         }
     }

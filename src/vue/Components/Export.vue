@@ -4,6 +4,7 @@
             <translate tag="h1" say="Choose Format"/>
             <translate tag="label" for="passwords-export-format" say="Export format"/>
             <select id="passwords-export-format" v-model="format">
+                <translate tag="option" value="null">Please choose</translate>
                 <translate tag="option" value="json">Passwords Backup</translate>
                 <translate tag="option" value="csv">CSV</translate>
             </select>
@@ -35,8 +36,8 @@
 
         data() {
             return {
-                format: null,
-                models: null,
+                format: 'null',
+                models: [],
                 step  : 1
             }
         },
@@ -48,11 +49,13 @@
         },
 
         watch: {
-            format() {
+            format(d) {
                 if(this.step === 1) this.step = 2;
+                if(d === 'null') this.step = 1;
             },
-            models() {
+            models(d) {
                 if(this.step === 2) this.step = 3;
+                if(d.length === 0) this.step = 2;
             }
         }
     }
