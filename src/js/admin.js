@@ -2,6 +2,10 @@ import '@scss/admin';
 
 class PasswordsAdminSettings {
 
+    constructor() {
+        this._timer = {success: null, error: null};
+    }
+
     initialize() {
         $('[data-setting]').on(
             'change',
@@ -14,7 +18,7 @@ class PasswordsAdminSettings {
                     value = $target[0].checked ? 'true':'false';
                 }
 
-                PasswordsAdminSettings.setValue(key, value);
+                this.setValue(key, value);
             }
         );
         $('[data-clear-cache]').click(
@@ -37,8 +41,21 @@ class PasswordsAdminSettings {
         PasswordsAdminSettings.updateWebsitePreviewField();
     }
 
-    static setValue(key, value) {
+    setValue(key, value) {
         $.post('/index.php/apps/passwords/admin/set', {'key': key, 'value': value})
+            .success(() => {this.showMessage('success');})
+            .fail(() => {this.showMessage('error');})
+    }
+
+    showMessage(type) {
+        let $el = $('#passwords').find('.msg.' + type);
+        $el.removeClass('active').addClass('active');
+
+        clearTimeout(this._timer[type]);
+        this._timer[type] = setTimeout(
+            () => { $el.removeClass('active'); },
+            500
+        );
     }
 
     static clearCache(key) {
