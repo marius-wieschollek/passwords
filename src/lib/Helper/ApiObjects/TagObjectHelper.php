@@ -173,6 +173,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         $passwords           = $this->passwordService->findByTag($revision->getModel());
 
         foreach($passwords as $password) {
+            if(!$revision->isTrashed() && $password->isSuspended()) continue;
             $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);
 
             if($obj !== null) $object['passwords'][] = $obj;

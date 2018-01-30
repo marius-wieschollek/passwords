@@ -26,15 +26,19 @@ class FolderMapper extends AbstractMapper {
         $folderTable   = '`*PREFIX*'.static::TABLE_NAME.'`';
         $revisionTable = '`*PREFIX*'.FolderRevisionMapper::TABLE_NAME.'`';
 
-        $sql = "SELECT {$folderTable}.* FROM {$folderTable}".
-               " INNER JOIN {$revisionTable} ON {$folderTable}.`revision` = {$revisionTable}.`uuid`".
-               " WHERE {$folderTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$folderTable}.`user_id` = ?":'').
-               " AND {$revisionTable}.`parent` = ? AND {$revisionTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$revisionTable}.`user_id` = ?":'');
+        $sql = "SELECT {$folderTable}.* FROM {$folderTable} ".
+               "INNER JOIN {$revisionTable} ON {$folderTable}.`revision` = {$revisionTable}.`uuid` ".
+               "WHERE {$folderTable}.`deleted` = ? ".
+               "AND {$revisionTable}.`deleted` = ? ".
+               "AND {$revisionTable}.`parent` = ?";
 
-        $params = [$parentUuid];
-        if($this->userId !== null) $params = [$this->userId, $parentUuid, $this->userId];
+        $params = [false, false, $parentUuid];
+        if($this->userId !== null) {
+            $sql      .= " AND {$folderTable}.`user_id` = ?";
+            $sql      .= " AND {$revisionTable}.`user_id` = ?";
+            $params[] = $this->userId;
+            $params[] = $this->userId;
+        }
 
         return $this->findEntities($sql, $params);
     }

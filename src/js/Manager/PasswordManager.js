@@ -44,6 +44,7 @@ class PasswordManager {
 
                     password.id = data.id;
                     password.status = 0;
+                    password.editable = true;
                     password.revision = data.revision;
                     password.edited = password.created = password.updated = Utility.getTimestamp();
                     if(!password.label) EnhancedApi._generatePasswordTitle(password);

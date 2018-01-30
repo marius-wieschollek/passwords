@@ -13,17 +13,6 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
 
-#  postgres:
-#    image: postgres:alpine
-#    container_name: "passwords-postgres"
-#    restart: on-failure
-#    volumes:
-#      - postgres:/var/lib/postgresql/data
-#    environment:
-#      - POSTGRES_PASSWORD=nextcloud
-#      - POSTGRES_USER=nextcloud
-#      - POSTGRES_DB=nextcloud
-
   app:
     build: ./docker/php/
     container_name: "passwords-php"
@@ -47,15 +36,14 @@ services:
 #      - POSTGRES_HOST=postgres5432
 
   web:
-    image: nginx:alpine
+    build: ./docker/nginx/
     container_name: "passwords-nginx"
     restart: on-failure
     ports:
       - 80:80
+      - 443:443
     links:
       - app
-    volumes:
-      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
     volumes_from:
       - app
 
@@ -72,6 +60,25 @@ services:
       PMA_HOSTS: mysql
       PMA_USER: root
       PMA_PASSWORD: nextcloud
+
+#  postgres:
+#    image: postgres:alpine
+#    container_name: "passwords-postgres"
+#    restart: on-failure
+#    volumes:
+#      - postgres:/var/lib/postgresql/data
+#    environment:
+#      - POSTGRES_PASSWORD=nextcloud
+#      - POSTGRES_USER=nextcloud
+#      - POSTGRES_DB=nextcloud
+
+#  iconserver:
+#    image: matthiasluedtke/iconserver
+#    container_name: "passwords-iconserver"
+#    ports:
+#      - 7070:7070
+#    environment:
+#      PORT: 7070
 
 volumes:
   mysql:

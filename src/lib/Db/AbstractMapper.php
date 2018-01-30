@@ -178,9 +178,9 @@ abstract class AbstractMapper extends Mapper {
      * @return array
      */
     protected function getStatement(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = false';
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = ?';
 
-        $params = [];
+        $params = [false];
         if($this->userId !== null) {
             $sql      .= ' AND `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
             $params[] = $this->userId;

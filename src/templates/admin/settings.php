@@ -10,7 +10,11 @@
 ?>
 
 <section id="passwords" class="section">
-    <h2><?php p($l->t('Passwords')); ?></h2>
+    <h2>
+        <?php p($l->t('Passwords')); ?>
+        <span class="msg success"><?php p($l->t('Saved')); ?></span>
+        <span class="msg error"><?php p($l->t('Failed')); ?></span>
+    </h2>
 
     <form>
         <h3><?php p($l->t('Legacy Api Support')); ?></h3>

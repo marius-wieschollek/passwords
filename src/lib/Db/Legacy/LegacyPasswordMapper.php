@@ -33,15 +33,17 @@ class LegacyPasswordMapper extends Mapper {
      * @return LegacyPassword[]
      */
     public function findAll(): array {
-        return $this->findEntities($this->getStatement());
+        list($sql, $params) = $this->getStatement();
+
+        return $this->findEntities($sql, $params);
     }
 
     /**
-     * @return string
+     * @return array
      */
-    protected function getStatement(): string {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = false';
+    protected function getStatement(): array {
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = ?';
 
-        return $sql;
+        return [$sql, [false]];
     }
 }

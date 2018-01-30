@@ -1,4 +1,24 @@
 #passwords {
+    .msg.error,
+    .msg.success {
+        font-size     : 0.65em;
+        opacity       : 0;
+        border-radius : 3px;
+        transition    : opacity 0.5s ease-in-out;
+        position      : absolute;
+        line-height   : 1;
+        bottom        : 2px;
+        margin-left   : 6px;
+
+        &.active {
+            opacity : 1;
+        }
+    }
+
+    h2 {
+        position : relative;
+    }
+
     .container,
     .area {
         display               : grid;

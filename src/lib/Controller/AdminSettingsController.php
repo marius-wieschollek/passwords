@@ -26,10 +26,11 @@ class AdminSettingsController extends Controller {
      * @var IConfig
      */
     protected $config;
+
     /**
      * @var FileCacheService
      */
-    private $fileCacheService;
+    protected $fileCacheService;
 
     /**
      * AdminSettingsController constructor.

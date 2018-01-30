@@ -8,9 +8,9 @@
 * Open a shell on your computer and navigate to the projects directory
 * Run `docker-compose up -d`
 * Open your browser and type [http://localhost/](http://localhost/)
+* Allow the connection using a self signed https certificate
 * Log in with the username `admin` and the password `admin`
 * Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
-* Run `docker exec -u www-data passwords-php /var/www/html/occ config:app:set passwords environment --value dev`
 * Run `npm install`
 * Run `npm run watch`
 * You can now access the [app](http://localhost/index.php/apps/passwords)

@@ -43,13 +43,11 @@ class ImportManager {
 
         let tagMapping = {};
         if(data.tags) {
-            this.countProgress('Importing tags');
             tagMapping = await this.importTags(data.tags, mode);
         }
 
         let folderMapping = {};
         if(data.folders) {
-            this.countProgress('Importing folders');
             folderMapping = await this.importFolders(data.folders, mode);
         }
 
@@ -57,9 +55,8 @@ class ImportManager {
         if(data.passwords) {
             if(!data.hasOwnProperty('tags')) tagMapping = await this.getTagMapping();
             if(!data.hasOwnProperty('folders')) folderMapping = await this.getFolderMapping();
-            this.countProgress('Importing passwords');
 
-            passwordMapping = this.importPasswords(data.passwords, mode, tagMapping, folderMapping);
+            passwordMapping = await this.importPasswords(data.passwords, mode, tagMapping, folderMapping);
         }
     }
 
@@ -68,7 +65,7 @@ class ImportManager {
      * @returns {Promise<{}>}
      */
     async getTagMapping() {
-        this.countProgress('Analyzing database');
+        this.countProgress('Analyzing tags');
 
         let tags  = await API.listTags(),
             idMap = {};
@@ -86,7 +83,7 @@ class ImportManager {
      * @returns {Promise<{string: string}>}
      */
     async getFolderMapping() {
-        this.countProgress('Analyzing database');
+        this.countProgress('Analyzing folders');
 
         let folders = await API.listFolders(),
             idMap   = {'00000000-0000-0000-0000-000000000000': this.defaultFolder};
@@ -106,6 +103,7 @@ class ImportManager {
      * @returns {Promise<{}>}
      */
     async importTags(tags, mode = 0) {
+        this.countProgress('Reading tags');
         let db    = await API.listTags(),
             idMap = {};
 
@@ -114,6 +112,7 @@ class ImportManager {
             idMap[k] = k;
         }
 
+        this.countProgress('Importing tags');
         for(let i = 0; i < tags.length; i++) {
             let tag = tags[i];
 
@@ -143,6 +142,7 @@ class ImportManager {
      * @returns {Promise<{}>}
      */
     async importFolders(folders, mode = 0) {
+        this.countProgress('Reading folders');
         let db    = await API.listFolders(),
             idMap = {'00000000-0000-0000-0000-000000000000': this.defaultFolder};
 
@@ -159,6 +159,7 @@ class ImportManager {
             return 0;
         });
 
+        this.countProgress('Importing folders');
         for(let i = 0; i < folders.length; i++) {
             let folder = folders[i];
 
@@ -205,6 +206,7 @@ class ImportManager {
      * @returns {Promise<{}>}
      */
     async importPasswords(passwords, mode = 0, tagMapping = {}, folderMapping = {}) {
+        this.countProgress('Reading passwords');
         let db    = await API.listPasswords(),
             idMap = {};
 
@@ -213,6 +215,7 @@ class ImportManager {
             idMap[k] = k;
         }
 
+        this.countProgress('Importing passwords');
         for(let i = 0; i < passwords.length; i++) {
             let password = passwords[i];
 

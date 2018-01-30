@@ -1,100 +1,119 @@
 <template>
     <div id="app-content">
         <div class="app-content-left">
-            <translate tag="h2" icon="download">Export Database</translate>
-            <select v-model="exportSettings.models" multiple>
-                <translate tag="option" value="passwords">Passwords</translate>
-                <translate tag="option" value="folders">Folders</translate>
-                <translate tag="option" value="tags">Tags</translate>
-            </select>
-            <select v-model="exportSettings.format">
-                <translate tag="option" value="json">JSON</translate>
-                <translate tag="option" value="csv">CSV</translate>
-            </select>
-            <translate tag="button" @click="exportDb">Export</translate>
-
-            <translate tag="h2" icon="upload">Import Database</translate>
-            <select v-model="importSettings.type">
-                <translate tag="option" value="json">JSON Backup</translate>
-                <!--
-                <translate tag="option" value="legacy">Legacy Passwords App</translate>
-                <translate tag="option" value="csvFolder">CSV Tags Backup</translate>
-                <translate tag="option" value="csvTags">CSV Folders Backup</translate>
-                <translate tag="option" value="csvPassword">CSV Password Backup</translate>
-                -->
-            </select>
-
-
-            <select v-model="importSettings.mode">
-                <translate tag="option" value="0">Skip if same revision</translate>
-                <translate tag="option" value="1">Skip if id exists</translate>
-                <translate tag="option" value="2">Always overwrite</translate>
-                <translate tag="option" value="3">Clone if id exists</translate>
-            </select>
-
-            <input type="file" :accept="importSettings.mime" @change="processFile($event)" value="Select File">
-            <translate tag="button" @click="importDb">Import</translate>
-            <progress :value="importStatus.processed" :max="importStatus.total" :title="importStatus.status"/>
+            <breadcrumb :showAddNew="false" :items="breadcrumb"/>
+            <div class="item-list">
+                <generic-line v-if="$route.params.action === undefined" v-for="(data, index) in options" :key="index" :label="data[0]" :icon="data[1]" :params="{action: index}"/>
+                <export v-if="$route.params.action === 'export'"/>
+                <import v-if="$route.params.action === 'import'"/>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Translate from '@vc/Translate.vue';
+    import Export from '@vc/Export';
+    import Import from '@vc/Import';
+    import Translate from '@vc/Translate';
+    import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import ExportManager from '@js/Manager/ExportManager';
-    import ImportManager from '@js/Manager/ImportManager';
+    import GenericLine from "@vue/Line/Generic";
 
     export default {
+        components: {
+            Export,
+            Import,
+            Translate,
+            Breadcrumb,
+            GenericLine
+        },
+
         data() {
             return {
-                exportSettings: {
-                    models: ['passwords', 'folders', 'tags'],
-                    format: 'json'
-                },
-                importSettings: {
-                    type: 'json',
-                    mime: 'application/json',
-                    mode: 0,
-                    data: null
-                },
-                importStatus  : {
-                    processed: 0,
-                    total    : 0,
-                    status   : ''
+                breadcrumb: [],
+                options   : {
+                    export: ['Backup or export', 'download'], import: ['Restore or import', 'upload']
                 }
             }
         },
 
-        components: {
-            Translate
+        created() {
+            this.updateRoute();
         },
 
         methods: {
-            exportDb() {
-                ExportManager.exportDatabase(this.exportSettings.format, this.exportSettings.models);
-            },
-            importDb() {
-                ImportManager.importDatabase(
-                    this.importSettings.data,
-                    this.importSettings.type,
-                    this.importSettings.mode,
-                    this.registerProgress
-                );
-            },
-            processFile(event) {
-                let file   = event.target.files[0],
-                    reader = new FileReader();
-                reader.onload = (e) => { this.importSettings.data = e.target.result; };
-                reader.readAsText(file)
-            },
-            registerProgress(processed, total, status) {
-                this.importStatus.processed = processed;
-                this.importStatus.total = total;
-                if(status !== null) {
-                    this.importStatus.status = Utility.translate(status);
+            updateRoute() {
+                if(this.$route.params.action !== undefined) {
+                    let data = this.options[this.$route.params.action];
+
+                    this.breadcrumb = [
+                        {path: '/backup', label: Utility.translate('Backup')},
+                        {path: this.$route.path, label: Utility.translate(data[0])}
+                    ]
+                } else {
+                    this.breadcrumb = [];
                 }
+            }
+        },
+
+        watch: {
+            $route: function() {
+                this.updateRoute();
             }
         }
     }
 </script>
+
+<style lang="scss">
+    .backup-dialog {
+        h1 {
+            font-size        : 1.25em;
+            padding          : 10px;
+            line-height      : 30px;
+            border-top       : 1px solid $color-grey-lighter;
+            border-bottom    : 1px solid $color-grey-lighter;
+            background-color : darken($color-white, 3);
+
+            &:before {
+                content       : '1';
+                color         : $color-grey-darker;
+                border        : 1px solid $color-grey;
+                border-radius : 15px;
+                width         : 30px;
+                display       : inline-block;
+                text-align    : center;
+                font-weight   : bold;
+                margin-right  : 5px;
+            }
+        }
+
+        .step-2 h1::before {
+            content : '2';
+        }
+
+        .step-3 h1::before {
+            content : '3';
+        }
+
+        .step-4 h1::before {
+            content : '4';
+        }
+
+        .step-content {
+            padding : 5px;
+
+            input[type=checkbox] {
+                display : inline-block;
+                margin  : 0 5px 0;
+                float   : left;
+                height  : 32px;
+            }
+
+            input[type=checkbox] + label {
+                line-height : 32px;
+                display     : inline-block;
+                font-size   : 1.2em;
+            }
+        }
+    }
+</style>

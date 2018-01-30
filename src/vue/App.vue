@@ -29,11 +29,11 @@
                     <translate>Trash</translate>
                 </router-link>
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore">More</translate>
+                <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
+                    <translate>Backup</translate>
+                </router-link>
                 <translate tag="li" class="nav-icon-help" @click="openWikiPage">Handbook</translate>
                 <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage">Browser Extension</translate>
-                <!--<router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
-                    <translate>Backup</translate>
-                </router-link>-->
             </ul>
         </div>
 
@@ -132,7 +132,7 @@
             transition       : max-height 0.25s ease-in-out;
 
             &.open {
-                max-height : 180px;
+                max-height : 225px;
 
                 li.nav-icon-more:before { content : "\f068"; }
             }

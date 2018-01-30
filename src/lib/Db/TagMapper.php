@@ -27,17 +27,23 @@ class TagMapper extends AbstractMapper {
         $tagTable      = '`*PREFIX*'.static::TABLE_NAME.'`';
         $relationTable = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
 
-        $sql = "SELECT {$tagTable}.* FROM {$tagTable}".
-               " INNER JOIN {$relationTable} ON {$tagTable}.`uuid` = {$relationTable}.`tag`".
-               " WHERE {$tagTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$tagTable}.`user_id` = ?":'').
-               " AND {$relationTable}.`password` = ? AND {$relationTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$relationTable}.`user_id` = ?":'');
+        $sql = "SELECT {$tagTable}.* FROM {$tagTable} ".
+               "INNER JOIN {$relationTable} ON {$tagTable}.`uuid` = {$relationTable}.`tag` ".
+               "WHERE {$tagTable}.`deleted` = ? ".
+               "AND {$relationTable}.`deleted` = ? ".
+               "AND {$relationTable}.`password` = ?";
 
-        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = false";
-
-        $params = [$passwordUuid];
-        if($this->userId !== null) $params = [$this->userId, $passwordUuid, $this->userId];
+        $params = [false, false, $passwordUuid];
+        if($this->userId !== null) {
+            $sql      .= " AND {$tagTable}.`user_id` = ?";
+            $sql      .= " AND {$relationTable}.`user_id` = ?";
+            $params[] = $this->userId;
+            $params[] = $this->userId;
+        }
+        if(!$includeHidden) {
+            $sql      .= " AND {$relationTable}.`hidden` = ?";
+            $params[] = false;
+        }
 
         return $this->findEntities($sql, $params);
     }
