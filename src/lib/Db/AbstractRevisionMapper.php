@@ -36,13 +36,13 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
         $sql = "SELECT {$revisionTable}.* FROM {$revisionTable} ".
                "INNER JOIN {$passwordTable} ".
                "ON {$revisionTable}.`model` = {$passwordTable}.`uuid` ".
-               "WHERE {$revisionTable}.`deleted` = false ".
-               "AND {$passwordTable}.`deleted` = false ".
+               "WHERE {$revisionTable}.`deleted` = ? ".
+               "AND {$passwordTable}.`deleted` = ? ".
                "AND {$passwordTable}.`user_id` = {$revisionTable}.`user_id` ".
                "AND {$passwordTable}.`revision` = {$revisionTable}.`uuid` ".
                "AND {$passwordTable}.`uuid` = ?";
 
-        $params = [$passwordUuid];
+        $params = [false, false, $passwordUuid];
         if($this->userId !== null) {
             $sql      .= " AND {$passwordTable}.`user_id` = ?";
             $params[] = $this->userId;

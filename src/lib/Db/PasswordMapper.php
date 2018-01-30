@@ -38,13 +38,13 @@ class PasswordMapper extends AbstractMapper {
         $sql = "SELECT {$passwordTable}.* FROM {$passwordTable} ".
                "INNER JOIN {$shareTable} ".
                "ON {$passwordTable}.`uuid` = {$shareTable}.`{$mapField}` ".
-               "WHERE {$passwordTable}.`deleted` = false ".
-               "AND {$shareTable}.`deleted` = false ".
+               "WHERE {$passwordTable}.`deleted` = ? ".
+               "AND {$shareTable}.`deleted` = ? ".
                "AND ( {$passwordTable}.`user_id` = {$shareTable}.`user_id` ".
                "OR {$passwordTable}.`user_id` = {$shareTable}.`receiver` ) ".
                "AND {$shareTable}.`uuid` = ?";
 
-        $params = [$shareUuid];
+        $params = [false, false, $shareUuid];
         if($this->userId !== null) {
             $sql      .= " AND ({$shareTable}.`user_id` = ? OR {$shareTable}.`receiver` = ? )";
             $params[] = $this->userId;
@@ -64,10 +64,10 @@ class PasswordMapper extends AbstractMapper {
         $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
                "INNER JOIN {$shareTable} ".
                "ON {$passwordsTable}.`uuid` = {$shareTable}.`target_password` ".
-               "WHERE {$passwordsTable}.`deleted` = false ".
-               "AND {$shareTable}.`deleted` = true ";
+               "WHERE {$passwordsTable}.`deleted` = ? ".
+               "AND {$shareTable}.`deleted` = ? ";
 
-        return $this->findEntities($sql);
+        return $this->findEntities($sql, [false, false]);
     }
 
     /**
@@ -79,15 +79,19 @@ class PasswordMapper extends AbstractMapper {
         $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
         $revisionTable  = '`*PREFIX*'.PasswordRevisionMapper::TABLE_NAME.'`';
 
-        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable}".
-               " INNER JOIN {$revisionTable} ON {$passwordsTable}.`revision` = {$revisionTable}.`uuid`".
-               " WHERE {$passwordsTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$passwordsTable}.`user_id` = ?":'').
-               " AND {$revisionTable}.`folder` = ? AND {$revisionTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$revisionTable}.`user_id` = ?":'');
+        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
+               "INNER JOIN {$revisionTable} ON {$passwordsTable}.`revision` = {$revisionTable}.`uuid` ".
+               "WHERE {$passwordsTable}.`deleted` = ? ".
+               "AND {$revisionTable}.`deleted` = ? ".
+               "AND {$revisionTable}.`folder` = ?";
 
-        $params = [$folderUuid];
-        if($this->userId !== null) $params = [$this->userId, $folderUuid, $this->userId];
+        $params = [false, false, $folderUuid];
+        if($this->userId !== null) {
+            $sql      .= " AND {$passwordsTable}.`user_id` = ?";
+            $sql      .= " AND {$revisionTable}.`user_id` = ?";
+            $params[] = $this->userId;
+            $params[] = $this->userId;
+        }
 
         return $this->findEntities($sql, $params);
     }
@@ -102,17 +106,23 @@ class PasswordMapper extends AbstractMapper {
         $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
         $relationTable  = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
 
-        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable}".
-               " INNER JOIN {$relationTable} ON {$passwordsTable}.`uuid` = {$relationTable}.`password`".
-               " WHERE {$passwordsTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$passwordsTable}.`user_id` = ?":'').
-               " AND {$relationTable}.`tag` = ? AND {$relationTable}.`deleted` = false".
-               ($this->userId !== null ? " AND {$relationTable}.`user_id` = ?":'');
+        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
+               "INNER JOIN {$relationTable} ON {$passwordsTable}.`uuid` = {$relationTable}.`password` ".
+               "WHERE {$passwordsTable}.`deleted` = ? ".
+               "AND {$relationTable}.`deleted` = ? ".
+               "AND {$relationTable}.`tag` = ?";
 
-        if(!$includeHidden) $sql .= " AND {$relationTable}.`hidden` = false";
-
-        $params = [$tagUuid];
-        if($this->userId !== null) $params = [$this->userId, $tagUuid, $this->userId];
+        $params = [false, false, $tagUuid];
+        if($this->userId !== null) {
+            $sql      .= " AND {$passwordsTable}.`user_id` = ?";
+            $sql      .= " AND {$relationTable}.`user_id` = ?";
+            $params[] = $this->userId;
+            $params[] = $this->userId;
+        }
+        if(!$includeHidden) {
+            $sql      .= " AND {$relationTable}.`hidden` = ?";
+            $params[] = false;
+        }
 
         return $this->findEntities($sql, $params);
     }
