@@ -98,5 +98,22 @@
         .step-4 h1::before {
             content : '4';
         }
+
+        .step-content {
+            padding : 5px;
+
+            input[type=checkbox] {
+                display : inline-block;
+                margin  : 0 5px 0;
+                float   : left;
+                height  : 32px;
+            }
+
+            input[type=checkbox] + label {
+                line-height : 32px;
+                display     : inline-block;
+                font-size   : 1.2em;
+            }
+        }
     }
 </style>

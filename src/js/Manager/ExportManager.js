@@ -1,5 +1,4 @@
 import API from '@js/Helper/api';
-import Utility from "@js/Classes/Utility";
 
 /**
  *
@@ -15,14 +14,14 @@ class ExportManager {
             case 'json':
                 data = await ExportManager.exportJson(model);
                 break;
+            case 'csv':
+                data = await ExportManager.exportCsv(model);
+                break;
             default:
                 throw "Invalid export format: " + format;
         }
 
-        let date     = new Date(),
-            filename = Utility.translate('Passwords') + '_' + date.toLocaleDateString() + '_' + date.toLocaleTimeString() + '.' + format;
-
-        Utility.createDownload(data, filename);
+        return data;
     }
 
     /**
@@ -48,6 +47,57 @@ class ExportManager {
 
     /**
      *
+     * @param model
+     * @returns {Promise<{}>}
+     */
+    static async exportCsv(model = []) {
+        let csv = {};
+
+        if(model.indexOf('passwords') !== -1) {
+            let data = await ExportManager.getPasswordsForExport();
+            csv.passwords = ExportManager.convertObjectToCsv(data);
+        }
+        if(model.indexOf('folders') !== -1) {
+            let data = await ExportManager.getFoldersForExport();
+            csv.folders = ExportManager.convertObjectToCsv(data);
+        }
+        if(model.indexOf('tags') !== -1) {
+            let data = await ExportManager.getTagsForExport();
+            csv.tags = ExportManager.convertObjectToCsv(data);
+        }
+
+        if(model.length === 1) csv = csv[model[0]];
+
+        return csv;
+    }
+
+    /**
+     *
+     * @param object
+     * @returns {string}
+     */
+    static convertObjectToCsv(object) {
+        let csv = [];
+
+        for(let i = 0; i < object.length; i++) {
+            let element = object[i],
+                line    = [];
+
+            for(let j in element) {
+                if(!element.hasOwnProperty(j)) continue;
+                let value = element[j];
+
+                line.push('"' + value.toString().replace('"', '\\"') + '"');
+            }
+
+            csv.push(line.join(';'));
+        }
+
+        return csv.join("\n");
+    }
+
+    /**
+     *
      * @returns {Promise<Array>}
      */
     static async getPasswordsForExport() {
@@ -66,7 +116,7 @@ class ExportManager {
                     notes    : element.notes,
                     url      : element.url,
                     folder   : element.folder,
-                    edited   : element.edited,
+                    edited   : Math.floor(element.edited.getTime() / 1000),
                     favourite: element.favourite
                 };
 
@@ -99,7 +149,7 @@ class ExportManager {
                     revision : element.revision,
                     label    : element.label,
                     parent   : element.parent,
-                    edited   : element.edited,
+                    edited   : Math.floor(element.edited.getTime() / 1000),
                     favourite: element.favourite
                 }
             );
@@ -125,7 +175,7 @@ class ExportManager {
                     revision : element.revision,
                     label    : element.label,
                     color    : element.color,
-                    edited   : element.edited,
+                    edited   : Math.floor(element.edited.getTime() / 1000),
                     favourite: element.favourite
                 }
             );
