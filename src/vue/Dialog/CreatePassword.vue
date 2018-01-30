@@ -127,6 +127,10 @@
             submitAction            : function() {
                 let password = Utility.cloneObject(this.password);
                 password.notes = this.simplemde.value();
+                if(typeof password.folder === 'object') {
+                    password.folder = password.folder.id;
+                }
+
                 password = EnhancedApi.validatePassword(password);
                 this.isSubmitted = true;
 

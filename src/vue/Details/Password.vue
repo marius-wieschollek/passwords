@@ -183,7 +183,10 @@
                 PasswordManager.restoreRevision(this.object, revision)
             },
             refreshView(event) {
-                this.object = Utility.mergeObject(this.object, event.object);
+                if(event.object.id === this.object.id) {
+                    API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
+                        .then((p) => {this.object = p;})
+                }
             }
         },
 
@@ -194,7 +197,7 @@
                 $('#password-details-qrcode').val('password');
                 this.$forceUpdate();
             },
-            qrModel: function(value) {
+            qrModel : function(value) {
                 this.qrcode.text = this.object[value];
             }
         }
