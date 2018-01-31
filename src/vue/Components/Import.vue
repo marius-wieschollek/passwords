@@ -4,9 +4,9 @@
             <translate tag="h1" say="Choose Format"/>
 
             <div class="step-content">
-                <select v-model="type" :disabled="importing">
-                    <translate tag="option" value="null" say="Please choose"/>
+                <select v-model="source" :disabled="importing">
                     <translate tag="option" value="json" say="Database Backup"/>
+                    <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <!--
                     <translate tag="option" value="legacy">Legacy Passwords App</translate>
                     <translate tag="option" value="csvFolder">CSV Tags Backup</translate>
@@ -27,14 +27,17 @@
         <div class="step-3" v-if="step > 2">
             <translate tag="h1" say="Select Import Options"/>
             <div class="step-content">
-                <translate tag="label" for="passwords-import-mode" say="Import Mode"/>
-                <select id="passwords-import-mode" v-model="mode" :disabled="importing">
-                    <translate tag="option" value="null" say="Please choose"/>
-                    <translate tag="option" value="0" say="Skip if same revision"/>
-                    <translate tag="option" value="1" say="Skip if id exists"/>
-                    <translate tag="option" value="2" say="Overwrite if id exists"/>
-                    <translate tag="option" value="3" say="Clone if id exists"/>
-                </select>
+                <div v-if="!skipOptions">
+                    <translate tag="label" for="passwords-import-mode" say="Import Mode"/>
+                    <select id="passwords-import-mode" v-model="options.mode" :disabled="importing">
+                        <translate tag="option" value="null" say="Please choose"/>
+                        <translate tag="option" value="0" say="Skip if same revision"/>
+                        <translate tag="option" value="1" say="Skip if id exists"/>
+                        <translate tag="option" value="2" say="Overwrite if id exists"/>
+                        <translate tag="option" value="3" say="Clone if id exists"/>
+                    </select>
+                </div>
+                <translate tag="div" say="No options available" class="no-options" v-else/>
             </div>
         </div>
 
@@ -44,7 +47,7 @@
                 <translate tag="button" @click="importDb" say="Import" v-if="progress.status === null"/>
                 <div class="import-progress" v-else>
                     <progress :value="progress.processed" :max="progress.total" :title="progress.status" :class="progress.style"></progress>
-                    <span>{{progress.status}}</span>
+                    <translate :say="progress.status"/>
                 </div>
             </div>
         </div>
@@ -53,7 +56,6 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
     import ImportManager from '@js/Manager/ImportManager';
 
 
@@ -64,12 +66,14 @@
 
         data() {
             return {
-                type     : 'null',
-                mime     : 'application/json',
-                mode     : 'null',
-                file     : null,
-                step     : 1,
-                importing: false,
+                source     : 'json',
+                type       : 'json',
+                mime       : 'application/json',
+                file       : null,
+                options    : {mode: 'null'},
+                skipOptions: false,
+                step       : 2,
+                importing  : false,
 
                 progress: {
                     style    : '',
@@ -84,7 +88,7 @@
             importDb() {
                 this.progress.style = '';
                 this.importing = true;
-                ImportManager.importDatabase(this.file, this.type, this.mode, this.registerProgress)
+                ImportManager.importDatabase(this.file, this.type, this.options, this.registerProgress)
                     .catch((e) => {
                         this.importing = false;
                         this.progress.style = 'error';
@@ -92,9 +96,11 @@
                         alert(e);
                     })
                     .then((d) => {
-                        this.importing = false;
-                        this.progress.style = 'success';
-                        this.progress.status = 'Import successful';
+                        if(this.progress.style !== 'error') {
+                            this.importing = false;
+                            this.progress.style = 'success';
+                            this.progress.status = 'Import successful';
+                        }
                     });
             },
             processFile(event) {
@@ -106,27 +112,27 @@
             registerProgress(processed, total, status) {
                 this.progress.processed = processed;
                 this.progress.total = total;
-                if(status !== null) {
-                    this.progress.status = Utility.translate(status);
-                }
+                if(status !== null) this.progress.status = status;
             }
         },
 
         watch: {
-            type(d) {
+            source(d) {
                 this.progress.status = null;
-                if(d === 'null') {
-                    this.step = 1;
-                    this.file = null;
-                    return;
-                }
-
-                if(this.step === 1) this.step = 2;
                 switch(d) {
                     case 'json':
+                        this.type = 'json';
                         this.mime = 'application/json';
                         break;
+                    case 'legacy':
+                        this.options = {mode: 0, firstLine: 1, delimiter: ',', db: 'passwords', mapping: ['label', 'username', 'password', 'url', 'notes'], repair: true};
+                        this.skipOptions = true;
+                        this.type = 'csv';
+                        this.mime = 'text/csv';
+                        break;
                     case 'csv':
+                        this.options = {mode: 0, firstLine: 0, delimiter: ',', db: 'passwords', mapping: []};
+                        this.type = 'csv';
                         this.mime = 'text/csv';
                         break;
                 }
@@ -134,12 +140,12 @@
             file(d) {
                 this.progress.status = null;
                 if(d !== null && this.step === 2) {
-                    this.step = 3;
+                    this.step = this.skipOptions ? 4:3;
                 }
             },
-            mode(d) {
+            options(d) {
                 this.progress.status = null;
-                if(d === 'null') {
+                if(d.mode === 'null') {
                     this.step = 3;
                     return;
                 }
@@ -156,6 +162,11 @@
             .step-content {
                 label {
                     margin-right : 5px;
+                }
+
+                .no-options {
+                    margin : 10px;
+                    color  : $color-grey-darker;
                 }
             }
         }

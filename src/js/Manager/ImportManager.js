@@ -1,4 +1,6 @@
 import API from '@js/Helper/api';
+import Utility from "@js/Classes/Utility";
+import SimpleApi from "@/js/ApiClient/SimpleApi";
 
 /**
  *
@@ -16,12 +18,12 @@ class ImportManager {
      *
      * @param data
      * @param type
-     * @param mode
+     * @param options
      * @param progress
      * @returns {Promise<void>}
      */
-    async importDatabase(data, type = 'json', mode = 0, progress = () => {}) {
-        mode = Number.parseInt(mode);
+    async importDatabase(data, type = 'json', options = {}, progress = () => {}) {
+        options.mode = Number.parseInt(options.mode);
         this.total = 1;
         this.processed = 0;
         this.progress = progress;
@@ -30,6 +32,9 @@ class ImportManager {
         switch(type) {
             case 'json':
                 data = JSON.parse(data);
+                break;
+            case 'csv':
+                data = ImportManager.convertCSV(data, options);
                 break;
             default:
                 throw "Invalid import type: " + type;
@@ -43,12 +48,12 @@ class ImportManager {
 
         let tagMapping = {};
         if(data.tags) {
-            tagMapping = await this.importTags(data.tags, mode);
+            tagMapping = await this.importTags(data.tags, options.mode);
         }
 
         let folderMapping = {};
         if(data.folders) {
-            folderMapping = await this.importFolders(data.folders, mode);
+            folderMapping = await this.importFolders(data.folders, options.mode);
         }
 
         let passwordMapping = {};
@@ -56,9 +61,58 @@ class ImportManager {
             if(!data.hasOwnProperty('tags')) tagMapping = await this.getTagMapping();
             if(!data.hasOwnProperty('folders')) folderMapping = await this.getFolderMapping();
 
-            passwordMapping = await this.importPasswords(data.passwords, mode, tagMapping, folderMapping);
+            passwordMapping = await this.importPasswords(data.passwords, options.mode, tagMapping, folderMapping);
         }
     }
+
+    /**
+     * Parse a csv file
+     *
+     * @param csv
+     * @param options
+     * @returns {{}}
+     */
+    static convertCSV(csv, options) {
+        let data    = Utility.parseCsv(csv, options.delimiter),
+            mapping = options.mapping,
+            db      = [];
+
+        for(let i = options.firstLine; i < data.length; i++) {
+            let line   = data[i],
+                object = {};
+
+            for(let j = 0; j < line.length; j++) {
+                let field = mapping[j];
+
+                if(field.length !== 0) {
+                    object[field] = line[j];
+                }
+            }
+
+            if(options.repair) ImportManager.repairObject(object);
+            db.push(object);
+        }
+
+        let tmp = {};
+        tmp[options.db] = db;
+
+        return tmp;
+    }
+
+    /**
+     * Can improve bad input data
+     *
+     * @param object
+     */
+    static repairObject(object) {
+        if(!object.url || object.url.length === 0) {
+            if(object.label && object.label.match(/^([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.){1,}[a-zA-Z]{2,}$/)) {
+                object.url = SimpleApi.parseUrl(object.label, 'href');
+                object.label = null;
+            }
+        }
+    }
+
 
     /**
      *

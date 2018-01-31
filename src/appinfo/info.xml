@@ -38,9 +38,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </description>
     <version>2018.2.0-alpha1</version>
     <licence>agpl</licence>
-    <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">
-        Marius David Wieschollek
-    </author>
+    <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
     <documentation>
         <user>https://git.mdns.eu/nextcloud/passwords/wikis/home#users</user>
@@ -73,7 +71,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <database>sqlite</database>
         <database>mysql</database>
         <database>pgsql</database>
-        <nextcloud min-version="12" max-version="14" />
+        <nextcloud min-version="12" max-version="13" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>

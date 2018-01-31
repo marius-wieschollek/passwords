@@ -147,7 +147,8 @@ OC.L10N.register(
         "Reading passwords"                   : "Lade Passwörter",
         "Importing passwords"                 : "Importiere Passwörter",
         "Import failed"                       : "Import fehlgeschlagen",
-        "Import successful"                   : "Import erfolgreich"
+        "Import successful"                   : "Import erfolgreich",
+        "No options available"                : "Keine Optionen verfügbar",
     },
     'nplurals=2; plural=(n != 1);'
 );

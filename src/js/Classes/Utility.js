@@ -220,4 +220,50 @@ export default class Utility {
 
         return clone;
     }
+
+    /**
+     *
+     * @param csv
+     * @param delimiter
+     * @param lines
+     * @returns {*[]}
+     */
+    static parseCsv(csv, delimiter = ',', lines = 0) {
+        let regex = new RegExp(
+            (
+                "(\\" + delimiter + "|\\r?\\n|\\r|^)" +
+                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+                "([^\"\\" + delimiter + "\\r\\n]*))"
+            ),
+            "gi"),
+            data  = [[]],
+            matches;
+
+        while(matches = regex.exec(csv)) {
+            let match = matches[1];
+            if(match.length && match !== delimiter) {
+                if(lines !== 0 && data.length === lines) {
+                    return data;
+                }
+
+                if(matches[2]) {
+                    data.push([]);
+                } else {
+                    continue;
+                }
+            }
+
+            let strMatchedValue;
+            if(matches[2]) {
+                strMatchedValue = matches[2].replace(new RegExp("\"\"", "g"), "\"");
+            } else {
+                strMatchedValue = matches[3];
+
+            }
+
+            data[data.length - 1].push(strMatchedValue);
+        }
+
+        return data;
+    }
 }
