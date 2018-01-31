@@ -119,7 +119,7 @@ class GdHelper extends AbstractImageHelper {
         try {
             file_put_contents($tempFile, $imageBlob);
             $image = $this->getNewImageObject();
-            $image->load($tempFile);
+            $image->loadFromFile($tempFile);
             unlink($tempFile);
         } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
@@ -136,7 +136,7 @@ class GdHelper extends AbstractImageHelper {
      */
     public function getImageFromFile(string $file) {
         $image = $this->getNewImageObject();
-        $image->load($file);
+        $image->loadFromFile($file);
 
         return $image;
     }
