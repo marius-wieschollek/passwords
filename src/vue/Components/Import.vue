@@ -143,9 +143,9 @@
                     this.step = this.skipOptions ? 4:3;
                 }
             },
-            options(d) {
+            'options.mode'(d) {
                 this.progress.status = null;
-                if(d.mode === 'null') {
+                if(d === 'null') {
                     this.step = 3;
                     return;
                 }
