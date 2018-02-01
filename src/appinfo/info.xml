@@ -16,6 +16,7 @@ You can also share passwords with other Nextcloud users.
  * Folders &amp; Tags
  * Password sharing
  * Password API
+ * Import &amp; Export
  * Browser Extensions
  * ... and many more to come
 ]]>
@@ -32,11 +33,12 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * Ordner &amp; Tags
  * Teilen-Funktion
  * Passwort API
+ * Import &amp; Export
  * Browser Extensions
  * ... und vieles mehr
 ]]>
     </description>
-    <version>2018.2.0-alpha1</version>
+    <version>2018.2.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>

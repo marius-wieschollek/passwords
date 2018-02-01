@@ -9,6 +9,8 @@ NPM:
   script:
     - npm install
     - npm run build
+    - if [ "${CI_ENVIRONMENT_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD//g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_ENVIRONMENT_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
   artifacts:
     paths:
       - ./src/js/Static/*
