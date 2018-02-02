@@ -102,6 +102,10 @@
             padding-top : 44px;
         }
 
+        > #app-navigation-toggle {
+            display: none !important;
+        }
+
         @media(max-width : $tablet-width) {
             transform : translate3d(0, 0, 0);
 

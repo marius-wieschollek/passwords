@@ -12,32 +12,32 @@
                     {{ item.label }}
                 </router-link>
             </div>
-        </div>
-        <div class="actions creatable" v-if="showAddNew" :class="{active: showMenu}">
+            <div class="actions creatable" v-if="showAddNew" :class="{active: showMenu}">
             <span class="button new" @click="toggleMenu()">
                 <span class="icon icon-add"></span>
             </span>
-            <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
-                <ul>
-                    <li>
+                <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
+                    <ul>
+                        <li>
                         <span class="menuitem" data-action="folder" v-if="newFolder" @click="createFolder">
                             <span class="icon icon-folder svg"></span>
                             <translate class="displayname">New Folder</translate>
                         </span>
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                         <span class="menuitem" data-action="tag" v-if="newTag" @click="createTag">
                             <span class="icon icon-tag svg"></span>
                             <translate class="displayname">New Tag</translate>
                         </span>
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                         <span class="menuitem" data-action="file" @click="createPassword()">
                             <span class="icon icon-filetype-text svg"></span>
                             <translate class="displayname">New Password</translate>
                         </span>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -144,6 +144,14 @@
                 overflow   : visible;
                 max-height : 75px;
                 animation  : 0.25s delay-overflow;
+            }
+        }
+
+        .breadcrumb {
+            display    : flex;
+
+            .crumb {
+                white-space : nowrap;
             }
         }
 

@@ -23,7 +23,7 @@
         </div>
 
         <div class="step-3" v-if="step > 2">
-            <translate tag="h1" say="Select Import Options"/>
+            <translate tag="h1" say="Select Options"/>
             <div class="step-content">
                 <div v-if="!noOptions">
                     <translate tag="label" for="passwords-import-mode" say="Import Mode"/>
@@ -33,10 +33,10 @@
                         <translate tag="option" value="2" say="Overwrite if id exists"/>
                         <translate tag="option" value="3" say="Clone if id exists"/>
                     </select>
-                    <div v-if="type === 'csv'">
+                    <div v-if="source === 'csv'">
                         <br>
-                        <translate tag="h3" say="Csv Options"/>
-                        <translate tag="label" for="passwords-import-csv-db" say="Object Type"/>
+                        <translate tag="h3" say="CSV Options"/>
+                        <translate tag="label" for="passwords-import-csv-db" say="Database"/>
                         <select id="passwords-import-csv-db" v-model="options.db" :disabled="importing">
                             <translate tag="option" value="passwords" say="Passwords"/>
                             <translate tag="option" value="folders" say="Folders"/>
@@ -44,7 +44,12 @@
                         </select>
                         <br>
                         <translate tag="label" for="passwords-import-csv-delimiter" say="Field delimiter"/>
-                        <input type="text" id="passwords-import-csv-delimiter" v-model="options.delimiter" :disabled="importing" minlength="1" maxlength="1"/>
+                        <select id="passwords-import-csv-delimiter" v-model="options.delimiter" :disabled="importing">
+                            <translate tag="option" value="," say="Comma"/>
+                            <translate tag="option" value=";" say="Semicolon"/>
+                            <translate tag="option" value=" " say="Space"/>
+                            <translate tag="option" value="	" say="Tab"/>
+                        </select>
                         <br>
                         <br>
                         <input type="checkbox" id="passwords-import-csv-skip" v-model="options.firstLine" :disabled="importing"/>
@@ -55,22 +60,20 @@
                         <br>
                         <br>
 
-                        <translate tag="h3" say="Csv Field Mapping"/>
-                        <table class="csv-mapping">
-                            <tbody>
-                            <tr>
-                                <td v-for="field in csvSampleData">{{ field }}</td>
-                            </tr>
-                            <tr>
-                                <td v-for="(id, field) in csvSampleData">
-                                    <select @change="setField($event, id)" :disabled="importing">
-                                        <translate tag="option" value="" say="Ignore"/>
-                                        <translate tag="option" v-for="option in pwdMapFields" :value="option" :say="option.capitalize()"/>
-                                    </select>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <translate tag="h3" say="CSV Field Mapping"/>
+                        <translate tag="label" for="passwords-import-csv-preview-line" say="Preview Line"/>
+                        <select id="passwords-import-csv-preview-line" v-model="previewLine" :disabled="importing">
+                            <translate tag="option" v-for="index in 10" :value="index.toString()" say="Line {line}" :variables="{line:index}" :key="index"/>
+                        </select>
+                        <div class="csv-mapping">
+                            <div v-for="value in csvSampleData" class="csv-mapping-data" :key="value">{{ value }}</div>
+                            <div v-for="id in csvSampleData.length" class="csv-mapping-field" :key="id">
+                                <select @change="csvFieldMapping($event, id)" :disabled="importing">
+                                    <translate tag="option" value="null" say="Ignore" />
+                                    <translate tag="option" v-for="(label, option) in csvFieldOptions(id)" :value="option" :say="label" :key="option"/>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <translate tag="div" say="No options available" class="no-options" v-else/>
@@ -103,17 +106,20 @@
 
         data() {
             return {
-                source      : 'json',
-                type        : 'json',
-                mime        : 'application/json',
-                pwdMapFields: ['id', 'revision', 'label', 'username', 'password', 'notes', 'url', 'folder', 'edited', 'favourite', 'tags'],
-                fldMapFields: ['id', 'revision', 'label', 'parent', 'edited', 'favourite'],
-                tagMapFields: ['id', 'revision', 'label', 'color', 'edited', 'favourite'],
-                file        : null,
-                options     : {mode: 0},
-                noOptions   : false,
-                step        : 2,
-                importing   : false,
+                source     : 'json',
+                type       : 'json',
+                mime       : 'application/json',
+                fieldMap   : {
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folder', 'tags', 'id', 'revision'],
+                    folders  : ['label', 'edited', 'favourite', 'parent', 'id', 'revision'],
+                    tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
+                },
+                file       : null,
+                options    : {mode: 0},
+                noOptions  : false,
+                step       : 2,
+                previewLine: 1,
+                importing  : false,
 
                 progress: {
                     style    : '',
@@ -126,8 +132,9 @@
 
         computed: {
             csvSampleData() {
-                let column = this.options.firstLine ? 1:0;
-                return Utility.parseCsv(this.file, this.options.delimiter, 1 + column)[column];
+                let data = Utility.parseCsv(this.file, this.options.delimiter, this.previewLine);
+
+                return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length];
             }
         },
 
@@ -160,16 +167,39 @@
                 this.progress.processed = processed;
                 this.progress.total = total;
                 if(status !== null) this.progress.status = status;
+            },
+            csvFieldOptions(current) {
+                let fields  = this.fieldMap[this.options.db],
+                    options = {};
+
+                for(let i = 0; i < fields.length; i++) {
+                    let field = fields[i],
+                        index = this.options.mapping.indexOf(field);
+
+                    if(index === -1 || index === current - 1) {
+                        options[field] = field.capitalize();
+                    }
+                }
+
+                return options;
+            },
+            csvFieldMapping(event, id) {
+                let mapping = this.options.mapping.clone(),
+                value = $(event.target).val();
+
+                if(value === 'null') value = null;
+                mapping[id - 1] = value;
+                this.options.mapping = mapping;
             }
         },
 
         watch: {
-            source(d) {
+            source(value) {
                 this.progress.status = null;
                 this.noOptions = false;
-                let oldmime = this.mime;
+                let oldMime = this.mime;
 
-                switch(d) {
+                switch(value) {
                     case 'json':
                         this.type = 'json';
                         this.mime = 'application/json';
@@ -184,8 +214,8 @@
                         this.options =
                             {
                                 mode     : 0,
-                                firstLine: 0,
-                                delimiter: ';',
+                                firstLine: 1,
+                                delimiter: ',',
                                 db       : 'passwords',
                                 mapping  : ['id', 'revision', 'label', 'username', 'password', 'notes', 'url', 'folder', 'edited', 'favourite', 'tags']
                             };
@@ -193,12 +223,12 @@
                         this.mime = 'text/csv';
                         break;
                     case 'fldCsv':
-                        this.options = {mode: 0, firstLine: 0, delimiter: ';', db: 'folders', mapping: ['id', 'revision', 'label', 'parent', 'edited', 'favourite']};
+                        this.options = {mode: 0, firstLine: 1, delimiter: ',', db: 'folders', mapping: ['id', 'revision', 'label', 'parent', 'edited', 'favourite']};
                         this.type = 'csv';
                         this.mime = 'text/csv';
                         break;
                     case 'tagCsv':
-                        this.options = {mode: 0, firstLine: 0, delimiter: ';', db: 'tags', mapping: ['id', 'revision', 'label', 'color', 'edited', 'favourite']};
+                        this.options = {mode: 0, firstLine: 1, delimiter: ',', db: 'tags', mapping: ['id', 'revision', 'label', 'color', 'edited', 'favourite']};
                         this.type = 'csv';
                         this.mime = 'text/csv';
                         break;
@@ -209,21 +239,33 @@
                         break;
                 }
 
-                if(oldmime !== this.mime && this.file) {
+                if(oldMime !== this.mime && this.file) {
                     $('#passwords-import-file').val('');
                     this.file = null;
                     this.step = 2
+                } else if(this.step === 4 && this.source === 'csv') {
+                    this.step = 3;
                 }
             },
-            file(d) {
+            file(data) {
                 this.progress.status = null;
-                if(d !== null && this.step === 2) {
+                if(data !== null && this.step === 2) {
+                    this.step = this.source === 'csv' ? 3:4;
+                }
+            },
+            options() {
+                this.progress.status = null;
+            },
+            'options.db'() {
+                $('.csv-mapping-field select').val('');
+                this.options.mapping = [];
+            },
+            'options.mapping'(mapping) {
+                if(mapping.indexOf('password') !== -1 && mapping.indexOf('username') !== -1) {
                     this.step = 4;
+                } else if(this.step === 4) {
+                    this.step = 3;
                 }
-            },
-            options(d) {
-                this.progress.status = null;
-                console.log(d);
             }
         }
     }
@@ -237,9 +279,38 @@
                     margin-right : 5px;
                 }
 
+                label {
+                    min-width : 90px;
+                    display   : inline-block;
+                }
+
+                label[for=passwords-import-csv-preview-line] {
+                    padding-left : 5px;
+                }
+
                 .no-options {
                     margin : 10px;
                     color  : $color-grey-darker;
+                }
+            }
+        }
+
+        .csv-mapping {
+            display       : grid;
+            margin-bottom : 10px;
+            overflow-x: scroll;
+
+            .csv-mapping-data {
+                padding : 0 5px;
+                min-width: 105px;
+            }
+
+            .csv-mapping-field {
+                grid-row : 2;
+                padding  : 0 5px;
+
+                select {
+                    width : 100%;
                 }
             }
         }

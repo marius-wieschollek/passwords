@@ -1,4 +1,5 @@
 import API from '@js/Helper/api';
+import Utility from "@/js/Classes/Utility";
 
 /**
  *
@@ -55,15 +56,15 @@ class ExportManager {
 
         if(model.indexOf('passwords') !== -1) {
             let data = await ExportManager.getPasswordsForExport();
-            csv.passwords = ExportManager.convertObjectToCsv(data);
+            csv.passwords = ExportManager.convertObjectToCsv(data, ['id', 'revision', 'label', 'username', 'password', 'notes', 'url', 'folder', 'edited', 'favourite', 'tags']);
         }
         if(model.indexOf('folders') !== -1) {
             let data = await ExportManager.getFoldersForExport();
-            csv.folders = ExportManager.convertObjectToCsv(data);
+            csv.folders = ExportManager.convertObjectToCsv(data, ['id', 'revision', 'label', 'parent', 'edited', 'favourite']);
         }
         if(model.indexOf('tags') !== -1) {
             let data = await ExportManager.getTagsForExport();
-            csv.tags = ExportManager.convertObjectToCsv(data);
+            csv.tags = ExportManager.convertObjectToCsv(data, ['id', 'revision', 'label', 'color', 'edited', 'favourite']);
         }
 
         if(model.length === 1) csv = csv[model[0]];
@@ -74,10 +75,22 @@ class ExportManager {
     /**
      *
      * @param object
+     * @param header
+     * @param delimiter
      * @returns {string}
      */
-    static convertObjectToCsv(object) {
+    static convertObjectToCsv(object, header, delimiter = ',') {
         let csv = [];
+
+        if(Array.isArray(header)) {
+            let line = [];
+
+            for(let i = 0; i < header.length; i++) {
+                line.push('"' + Utility.translate(header[i].capitalize()).replace('"', '\\"') + '"');
+            }
+
+            csv.push(line.join(delimiter));
+        }
 
         for(let i = 0; i < object.length; i++) {
             let element = object[i],
@@ -90,7 +103,7 @@ class ExportManager {
                 line.push('"' + value.toString().replace('"', '\\"') + '"');
             }
 
-            csv.push(line.join(';'));
+            csv.push(line.join(delimiter));
         }
 
         return csv.join("\n");

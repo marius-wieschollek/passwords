@@ -51,23 +51,17 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
     <repository type="git">https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/_previews/feature-overview.gif">
-        https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/feature-overview.gif
-    </screenshot>
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/feature-overview.gif]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/_previews/01-section-all.png">
-        https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/01-section-all.png
-    </screenshot>
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/01-section-all.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/_previews/02-section-folders.png">
-        https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/02-section-folders.png
-    </screenshot>
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/02-section-folders.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/_previews/03-section-tags.png">
-        https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/03-section-tags.png
-    </screenshot>
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/03-section-tags.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/_previews/04-section-security.png">
-        https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/04-section-security.png
-    </screenshot>
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/04-section-security.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/_previews/05-section-trash.png">
-        https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/05-section-trash.png
-    </screenshot>
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/_files/Gallery/05-section-trash.png]]></screenshot>
     <dependencies>
         <php min-version="7.1" />
         <database>sqlite</database>
