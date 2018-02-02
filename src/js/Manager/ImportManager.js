@@ -85,6 +85,16 @@ class ImportManager {
                 let field = mapping[j];
 
                 if(field.length !== 0) {
+                    let value = line[j];
+
+                    if(!isNan(value)) {
+                        value = Number.parseInt(value);
+                    } else if(value === 'false' || value === 'true') {
+                        value = value === 'true';
+                    } else if(field === 'tags' && value.length !== 0) {
+                        value = value.split(',');
+                    }
+
                     object[field] = line[j];
                 }
             }
