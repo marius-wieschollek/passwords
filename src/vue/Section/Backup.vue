@@ -47,11 +47,11 @@
                     let data = this.options[this.$route.params.action];
 
                     this.breadcrumb = [
-                        {path: '/backup', label: Utility.translate('Backup')},
+                        {path: '/backup', label: Utility.translate('Backup and Restore')},
                         {path: this.$route.path, label: Utility.translate(data[0])}
                     ]
                 } else {
-                    this.breadcrumb = [];
+                    this.breadcrumb = [{path: '/backup', label: Utility.translate('Backup and Restore')}];
                 }
             }
         },
@@ -113,6 +113,26 @@
                 line-height : 32px;
                 display     : inline-block;
                 font-size   : 1.2em;
+            }
+        }
+
+        .csv-mapping {
+            display           : grid;
+            margin-bottom     : 10px;
+            overflow-x        : auto;
+            grid-auto-columns : minmax(105px, 20%);
+
+            .csv-mapping-data {
+                padding : 0 5px;
+            }
+
+            .csv-mapping-field {
+                grid-row : 2;
+                padding  : 0 5px;
+
+                select {
+                    width : 100%;
+                }
             }
         }
     }

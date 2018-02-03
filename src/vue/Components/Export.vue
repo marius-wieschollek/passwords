@@ -64,8 +64,9 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import ExportManager from '@js/Manager/ExportManager';
     import Utility from "@js/Classes/Utility";
+    import Messages from "@js/Classes/Messages";
+    import ExportManager from '@js/Manager/ExportManager';
 
     export default {
         components: {
@@ -102,14 +103,18 @@
                     return;
                 }
 
-                ExportManager.exportDatabase(this.format, this.models)
+                ExportManager.exportDatabase(this.format, this.models, this.options)
                     .catch((e) => {
                         this.exporting = false;
-                        alert(e);
+                        Messages.alert(e);
                     })
                     .then((d) => {
-                        this.data = d;
-                        this.buttonText = 'Download {format}';
+                        if(d) {
+                            this.data = d;
+                            this.buttonText = 'Download {format}';
+                        } else {
+                            Messages.alert('There is no data to export', 'Nothing to export');
+                        }
                         this.exporting = false;
                     });
 
@@ -130,13 +135,14 @@
             },
             generateFilename(models) {
                 let date    = new Date(),
-                    exports = [];
+                    exports = [],
+                    fileExt = this.format === 'customCsv' ? 'csv':this.format;
 
                 for(let i = 0; i < models.length; i++) {
                     exports.push(Utility.translate(models[i].capitalize()))
                 }
 
-                return exports.join('+') + '_' + date.toLocaleDateString() + '.' + this.format;
+                return exports.join('+') + '_' + date.toLocaleDateString() + '.' + fileExt;
             },
             downloadFile() {
                 if(typeof this.data === 'string') {
@@ -161,6 +167,10 @@
                 if(!value && id + 1 === mapping.length) mapping = mapping.remove(id);
 
                 this.options.mapping = mapping;
+            },
+            resetExportButton() {
+                this.buttonText = 'Export';
+                this.data = null;
             }
         },
 
@@ -172,20 +182,48 @@
                     this.step = 3;
                 }
 
-                this.buttonText = 'Export';
-                this.data = null;
+                this.resetExportButton();
             },
             models(value) {
-                if(this.step === 2) this.step = 3;
+                if(this.step === 2 && this.format !== 'customCsv') this.step = 3;
                 if(value.length === 0 && this.step === 3) this.step = 2;
-                this.buttonText = 'Export';
-                this.data = null;
+                this.resetExportButton();
+            },
+            'options.db'(value) {
+                this.models = [value];
+                this.options.mapping = [];
+                $('.csv-mapping-field select').val('');
+                this.resetExportButton();
             },
             'options.mapping'(value) {
                 if(value.length !== 0 && this.step === 2) {
                     this.step = 3;
                 } else if(value.length === 0 && this.step === 3) this.step = 2;
+                this.resetExportButton();
+            },
+            'options.delimiter'() {
+                this.resetExportButton();
+            },
+            'options.header'() {
+                this.resetExportButton();
             }
         }
     }
 </script>
+
+<style lang="scss">
+    .export-container {
+        .step-2 {
+            .step-content {
+                label {
+                    margin-right : 5px;
+                }
+
+                label {
+                    min-width : 90px;
+                    display   : inline-block;
+                }
+            }
+        }
+    }
+</style>

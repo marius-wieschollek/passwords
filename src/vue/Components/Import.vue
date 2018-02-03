@@ -69,7 +69,7 @@
                             <div v-for="value in csvSampleData" class="csv-mapping-data" :key="value">{{ value }}</div>
                             <div v-for="id in csvSampleData.length" class="csv-mapping-field" :key="id">
                                 <select @change="csvFieldMapping($event, id)" :disabled="importing">
-                                    <translate tag="option" value="null" say="Ignore" />
+                                    <translate tag="option" value="null" say="Ignore"/>
                                     <translate tag="option" v-for="(label, option) in csvFieldOptions(id)" :value="option" :say="label" :key="option"/>
                                 </select>
                             </div>
@@ -185,7 +185,7 @@
             },
             csvFieldMapping(event, id) {
                 let mapping = this.options.mapping.clone(),
-                value = $(event.target).val();
+                    value   = $(event.target).val();
 
                 if(value === 'null') value = null;
                 mapping[id - 1] = value;
@@ -261,7 +261,11 @@
                 this.options.mapping = [];
             },
             'options.mapping'(mapping) {
-                if(mapping.indexOf('password') !== -1 && mapping.indexOf('username') !== -1) {
+                if(
+                    (this.options.db === 'passwords' && mapping.indexOf('password') !== -1) ||
+                    (this.options.db === 'folders' && mapping.indexOf('label') !== -1) ||
+                    (this.options.db === 'tags' && mapping.indexOf('label') !== -1 && mapping.indexOf('color') !== -1)
+                ) {
                     this.step = 4;
                 } else if(this.step === 4) {
                     this.step = 3;
@@ -291,26 +295,6 @@
                 .no-options {
                     margin : 10px;
                     color  : $color-grey-darker;
-                }
-            }
-        }
-
-        .csv-mapping {
-            display       : grid;
-            margin-bottom : 10px;
-            overflow-x: scroll;
-
-            .csv-mapping-data {
-                padding : 0 5px;
-                min-width: 105px;
-            }
-
-            .csv-mapping-field {
-                grid-row : 2;
-                padding  : 0 5px;
-
-                select {
-                    width : 100%;
                 }
             }
         }

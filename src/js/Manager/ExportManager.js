@@ -6,8 +6,12 @@ import Utility from "@/js/Classes/Utility";
  */
 class ExportManager {
 
+    constructor() {
+        this.defaultFolder = '00000000-0000-0000-0000-000000000000';
+    }
+
     // noinspection JSMethodCanBeStatic
-    async exportDatabase(format = 'json', model = null) {
+    async exportDatabase(format = 'json', model = null, options = {}) {
         if(model === null) model = ['passwords', 'folders', 'tags'];
 
         let data = '';
@@ -17,6 +21,9 @@ class ExportManager {
                 break;
             case 'csv':
                 data = await ExportManager.exportCsv(model);
+                break;
+            case 'customCsv':
+                data = await ExportManager.exportCustomCsv(options);
                 break;
             default:
                 throw "Invalid export format: " + format;
@@ -74,15 +81,90 @@ class ExportManager {
 
     /**
      *
+     * @param options
+     * @returns {Promise<string>}
+     */
+    static async exportCustomCsv(options) {
+        let header = [];
+
+        if(options.header) {
+            header = options.mapping;
+        }
+
+        if(options.db === 'passwords') {
+            let data = await ExportManager.getPasswordsForExport();
+            data = await ExportManager.createCustomCsvObject(data, options.mapping);
+            return ExportManager.convertObjectToCsv(data, header, options.delimiter);
+        }
+    }
+
+    /**
+     *
+     * @param db
+     * @param mapping
+     * @returns {Promise<Array>}
+     */
+    static async createCustomCsvObject(db, mapping) {
+        let tagDb = {}, folderDb = {}, data = [];
+
+        if(mapping.indexOf('folderlabel') !== -1 || mapping.indexOf('parentlabel') !== -1) {
+            let folders = await API.listFolders();
+            folderDb[this.defaultFolder] = Utility.translate('Home');
+
+            for(let i in folders) {
+                if(!folders.hasOwnProperty(i)) continue;
+                folderDb[folders[i].id] = folders[i].label;
+            }
+        }
+
+        if(mapping.indexOf('taglabels') !== -1) {
+            let tags = await API.listTags();
+
+            for(let i in tags) {
+                if(!tags.hasOwnProperty(i)) continue;
+                tagDb[tags[i].id] = tags[i].label;
+            }
+        }
+
+        for(let i in db) {
+            if(!db.hasOwnProperty(i)) continue;
+            let element = db[i], object = {};
+
+            for(let j = 0; j < mapping.length; j++) {
+                let field = mapping[j];
+
+                if(field === 'folderlabel') {
+                    object.folderlabel = folderDb.hasOwnProperty(element.folder) ? folderDb[element.folder]:'';
+                } else if(field === 'parentlabel') {
+                    object.parentlabel = folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'';
+                } else if(field === 'taglabels') {
+                    object.taglabels = [];
+                    for(let k in element.tags) {
+                        if(!element.tags.hasOwnProperty(k)) continue;
+                        object.taglabels.push(tagDb[element.tags[k]]);
+                    }
+                } else {
+                    object[field] = element[field];
+                }
+            }
+
+            data.push(object);
+        }
+
+        return data;
+    }
+
+    /**
+     *
      * @param object
      * @param header
      * @param delimiter
      * @returns {string}
      */
-    static convertObjectToCsv(object, header, delimiter = ',') {
+    static convertObjectToCsv(object, header = [], delimiter = ',') {
         let csv = [];
 
-        if(Array.isArray(header)) {
+        if(header && header.length !== 0) {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {

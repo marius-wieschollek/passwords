@@ -30,10 +30,10 @@
                 </router-link>
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore">More</translate>
                 <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
-                    <translate>Backup</translate>
+                    <translate say="Backup and Restore"/>
                 </router-link>
-                <translate tag="li" class="nav-icon-help" @click="openWikiPage">Handbook</translate>
-                <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage">Browser Extension</translate>
+                <translate tag="li" class="nav-icon-help" @click="openWikiPage" say="Handbook"/>
+                <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage" say="Browser Extension"/>
             </ul>
         </div>
 
