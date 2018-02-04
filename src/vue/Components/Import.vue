@@ -6,10 +6,11 @@
             <div class="step-content">
                 <select v-model="source" :disabled="importing">
                     <translate tag="option" value="json" say="Database Backup"/>
-                    <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pwdCsv" say="Passwords CSV"/>
                     <translate tag="option" value="fldCsv" say="Folder CSV"/>
                     <translate tag="option" value="tagCsv" say="Tags CSV"/>
+                    <translate tag="option" value="legacy" say="ownCloud Passwords"/>
+                    <translate tag="option" value="pmanCsv" say="Passman CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -216,37 +217,33 @@
                         this.type = 'json';
                         break;
                     case 'legacy':
-                        this.options = {mode: 0, skipShared: true, firstLine: 1, delimiter: ',', db: 'passwords', mapping: ['label', 'username', 'password', 'url', 'notes'], repair: true};
+                        this.options = {mode: 0, skipShared: true, profile: 'legacy'};
                         this.noOptions = true;
                         this.mime = 'text/csv';
                         this.type = 'csv';
                         break;
                     case 'pwdCsv':
-                        this.options =
-                            {
-                                mode      : 0,
-                                skipShared: true,
-                                firstLine : 1,
-                                delimiter : ',',
-                                db        : 'passwords',
-                                mapping   : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'edited', 'favourite', 'tagLabels', 'id', 'revision', 'folderId']
-                            };
+                        this.options = {mode: 0, skipShared: true, profile: 'passwords'};
                         this.mime = 'text/csv';
                         this.type = 'csv';
                         break;
                     case 'fldCsv':
-                        this.options =
-                            {mode: 0, skipShared: true, firstLine: 1, delimiter: ',', db: 'folders', mapping: ['label', 'parentLabel', 'edited', 'favourite', 'id', 'revision', 'parentId']};
+                        this.options = {mode: 0, skipShared: true, profile: 'folders'};
                         this.mime = 'text/csv';
                         this.type = 'csv';
                         break;
                     case 'tagCsv':
-                        this.options = {mode: 0, skipShared: true, firstLine: 1, delimiter: ',', db: 'tags', mapping: ['label', 'color', 'edited', 'favourite', 'id', 'revision']};
+                        this.options = {mode: 0, skipShared: true, profile: 'tags'};
                         this.mime = 'text/csv';
                         this.type = 'csv';
                         break;
+                    case 'pmanCsv':
+                        this.options = {mode: 0, skipShared: true};
+                        this.mime = 'text/csv';
+                        this.type = 'pmanCsv';
+                        break;
                     case 'csv':
-                        this.options = {mode: 0, skipShared: true, firstLine: 0, delimiter: ',', db: 'passwords', mapping: [], repair: true};
+                        this.options = {mode: 0, skipShared: true, firstLine: 0, delimiter: ',', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
                         this.mime = 'text/csv';
                         this.type = 'csv';
                         break;
