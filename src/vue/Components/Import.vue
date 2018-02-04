@@ -33,8 +33,8 @@
                         <translate tag="option" value="2" say="Overwrite if id exists"/>
                         <translate tag="option" value="3" say="Clone if id exists"/>
                     </select>
+                    <br>
                     <div v-if="source === 'csv'">
-                        <br>
                         <translate tag="h3" say="CSV Options"/>
                         <translate tag="label" for="passwords-import-csv-db" say="Database"/>
                         <select id="passwords-import-csv-db" v-model="options.db" :disabled="importing">
@@ -50,6 +50,7 @@
                             <translate tag="option" value=" " say="Space"/>
                             <translate tag="option" value="	" say="Tab"/>
                         </select>
+
                         <br>
                         <br>
                         <input type="checkbox" id="passwords-import-csv-skip" v-model="options.firstLine" :disabled="importing"/>
@@ -57,6 +58,9 @@
                         <br>
                         <input type="checkbox" id="passwords-import-csv-repair" v-model="options.repair" :disabled="importing"/>
                         <translate tag="label" for="passwords-import-csv-repair" say="Interpolate missing fields"/>
+                        <br>
+                        <input type="checkbox" id="passwords-export-csv-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3' && options.db === 'passwords'"/>
+                        <translate tag="label" for="passwords-export-csv-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3' && options.db === 'passwords'"/>
                         <br>
                         <br>
 
@@ -74,6 +78,11 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div v-else>
+                        <br>
+                        <input type="checkbox" id="passwords-export-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3'"/>
+                        <translate tag="label" for="passwords-export-shared" say="Dont't edit passwords shared with me" v-if="options.mode !== '3'"/>
                     </div>
                 </div>
                 <translate tag="div" say="No options available" class="no-options" v-else/>
@@ -96,6 +105,7 @@
 <script>
     import Translate from '@vc/Translate';
     import Utility from "@js/Classes/Utility";
+    import Messages from "@js/Classes/Messages";
     import ImportManager from '@js/Manager/ImportManager';
 
 
@@ -110,12 +120,12 @@
                 type       : 'json',
                 mime       : 'application/json',
                 fieldMap   : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folder', 'tags', 'id', 'revision'],
-                    folders  : ['label', 'edited', 'favourite', 'parent', 'id', 'revision'],
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
+                    folders  : ['label', 'edited', 'favourite', 'parentLabel', 'parentId', 'id', 'revision'],
                     tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
                 },
                 file       : null,
-                options    : {mode: 0},
+                options    : {mode: 0, skipShared: true},
                 noOptions  : false,
                 step       : 2,
                 previewLine: 1,
@@ -147,7 +157,8 @@
                         this.importing = false;
                         this.progress.style = 'error';
                         this.progress.status = 'Import failed';
-                        alert(e);
+                        if(typeof e !== 'string') e = e.message;
+                        Messages.alert(e, 'Import error');
                     })
                     .then((d) => {
                         if(this.progress.style !== 'error') {
@@ -201,41 +212,43 @@
 
                 switch(value) {
                     case 'json':
-                        this.type = 'json';
                         this.mime = 'application/json';
+                        this.type = 'json';
                         break;
                     case 'legacy':
-                        this.options = {mode: 0, firstLine: 1, delimiter: ',', db: 'passwords', mapping: ['label', 'username', 'password', 'url', 'notes'], repair: true};
+                        this.options = {mode: 0, skipShared: true, firstLine: 1, delimiter: ',', db: 'passwords', mapping: ['label', 'username', 'password', 'url', 'notes'], repair: true};
                         this.noOptions = true;
-                        this.type = 'csv';
                         this.mime = 'text/csv';
+                        this.type = 'csv';
                         break;
                     case 'pwdCsv':
                         this.options =
                             {
-                                mode     : 0,
-                                firstLine: 1,
-                                delimiter: ',',
-                                db       : 'passwords',
-                                mapping  : ['id', 'revision', 'label', 'username', 'password', 'notes', 'url', 'folder', 'edited', 'favourite', 'tags']
+                                mode      : 0,
+                                skipShared: true,
+                                firstLine : 1,
+                                delimiter : ',',
+                                db        : 'passwords',
+                                mapping   : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'edited', 'favourite', 'tagLabels', 'id', 'revision', 'folderId']
                             };
-                        this.type = 'csv';
                         this.mime = 'text/csv';
+                        this.type = 'csv';
                         break;
                     case 'fldCsv':
-                        this.options = {mode: 0, firstLine: 1, delimiter: ',', db: 'folders', mapping: ['id', 'revision', 'label', 'parent', 'edited', 'favourite']};
-                        this.type = 'csv';
+                        this.options =
+                            {mode: 0, skipShared: true, firstLine: 1, delimiter: ',', db: 'folders', mapping: ['label', 'parentLabel', 'edited', 'favourite', 'id', 'revision', 'parentId']};
                         this.mime = 'text/csv';
+                        this.type = 'csv';
                         break;
                     case 'tagCsv':
-                        this.options = {mode: 0, firstLine: 1, delimiter: ',', db: 'tags', mapping: ['id', 'revision', 'label', 'color', 'edited', 'favourite']};
-                        this.type = 'csv';
+                        this.options = {mode: 0, skipShared: true, firstLine: 1, delimiter: ',', db: 'tags', mapping: ['label', 'color', 'edited', 'favourite', 'id', 'revision']};
                         this.mime = 'text/csv';
+                        this.type = 'csv';
                         break;
                     case 'csv':
-                        this.options = {mode: 0, firstLine: 0, delimiter: ',', db: 'passwords', mapping: [], repair: true};
-                        this.type = 'csv';
+                        this.options = {mode: 0, skipShared: true, firstLine: 0, delimiter: ',', db: 'passwords', mapping: [], repair: true};
                         this.mime = 'text/csv';
+                        this.type = 'csv';
                         break;
                 }
 
@@ -258,9 +271,14 @@
             },
             'options.db'() {
                 $('.csv-mapping-field select').val('');
-                this.options.mapping = [];
+                this.progress.status = null;
+                if(this.source === 'csv') this.options.mapping = [];
+            },
+            'options.skipShared'() {
+                this.progress.status = null;
             },
             'options.mapping'(mapping) {
+                if(!this.file) return;
                 if(
                     (this.options.db === 'passwords' && mapping.indexOf('password') !== -1) ||
                     (this.options.db === 'folders' && mapping.indexOf('label') !== -1) ||

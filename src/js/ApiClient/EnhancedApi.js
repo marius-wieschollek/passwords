@@ -392,7 +392,7 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {*}
      */
     static flattenPassword(password) {
-        if(typeof password.folder !== 'string') {
+        if(password.folder && typeof password.folder !== 'string') {
             password.folder = password.folder.id
         }
 
@@ -410,7 +410,7 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {*}
      */
     static flattenFolder(folder) {
-        if(typeof folder.parent !== 'string') {
+        if(folder.parent && typeof folder.parent !== 'string') {
             folder.parent = folder.parent.id
         }
         if(folder.edited instanceof Date) {
@@ -586,13 +586,13 @@ export default class EnhancedApi extends SimpleApi {
 
     /**
      *
-     * @param message
+     * @param e
      * @returns {Promise}
      * @private
      */
-    _createRejectedPromise(message) {
+    _createRejectedPromise(e) {
         return new Promise((resolve, reject) => {
-            let error = {status: 'error', message: message};
+            let error = {status: 'error', message: e.message, error: e};
             if(this._debug) console.error(error);
             reject(error);
         });

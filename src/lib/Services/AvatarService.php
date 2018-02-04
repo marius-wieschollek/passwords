@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCP\Files\SimpleFS\ISimpleFile;
+use OCP\IAvatarManager;
 use OCP\IImage;
 use OCP\IUserManager;
 
@@ -34,22 +35,29 @@ class AvatarService {
      * @var FallbackIconGenerator
      */
     protected $fallbackIconGenerator;
+    /**
+     * @var IAvatarManager
+     */
+    private $avatarManager;
 
     /**
      * AvatarService constructor.
      *
      * @param IUserManager          $userManager
+     * @param IAvatarManager        $avatarManager
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
      */
     public function __construct(
         IUserManager $userManager,
+        IAvatarManager $avatarManager,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
         $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::AVATAR_CACHE);
         $this->fallbackIconGenerator = $fallbackIconGenerator;
         $this->userManager           = $userManager;
+        $this->avatarManager         = $avatarManager;
     }
 
     /**
@@ -70,11 +78,16 @@ class AvatarService {
         $user      = $this->userManager->get($userId);
         $imageData = null;
         if($user !== null) {
-            $image = $user->getAvatarImage($size);
-            if($image !== null && $image->valid()) $imageData = $this->getImage($image, $user->getDisplayName(), $size);
+            $avatar = $this->avatarManager->getAvatar($userId);
+            if($avatar->exists()) {
+                $image = $avatar->get($size);
+                if($image !== null && $image->valid()) $imageData = $this->getImage($image, $user->getDisplayName(), $size);
+            } else {
+                $imageData = $this->fallbackIconGenerator->createIcon($user->getDisplayName(), $size);
+            }
+        } else {
+            $imageData = $this->fallbackIconGenerator->createIcon(strtolower($user), $size);
         }
-
-        if($imageData === null) $imageData = $this->fallbackIconGenerator->createIcon($user->getDisplayName(), $size);
 
         return $this->fileCacheService->putFile($fileName, $imageData);
     }

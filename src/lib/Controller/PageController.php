@@ -98,6 +98,7 @@ class PageController extends Controller {
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
+     * @throws \OCP\SessionNotAvailableException
      */
     public function index(): TemplateResponse {
 
@@ -106,7 +107,10 @@ class PageController extends Controller {
         return new TemplateResponse(
             $this->appName,
             'index',
-            ['https' => $this->checkIfHttpsUsed()]
+            [
+                'https'   => $this->checkIfHttpsUsed(),
+                'version' => $this->getServerVersion()
+            ]
         );
     }
 
@@ -114,8 +118,8 @@ class PageController extends Controller {
      * @return bool
      */
     protected function checkIfHttpsUsed(): bool {
-        $forceSsl    = $this->configurationService->getSystemValue('forcessl', false);
-        $protocol    = $this->configurationService->getSystemValue('overwriteprotocol', '');
+        $forceSsl = $this->configurationService->getSystemValue('forcessl', false);
+        $protocol = $this->configurationService->getSystemValue('overwriteprotocol', '');
 
         return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https' || $forceSsl;
     }
@@ -161,5 +165,14 @@ class PageController extends Controller {
         }
 
         return implode('-', $groups);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getServerVersion(): string {
+        $version = $this->configurationService->getSystemValue('version');
+
+        return explode('.', $version, 2)[0];
     }
 }

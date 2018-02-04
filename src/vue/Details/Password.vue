@@ -34,6 +34,7 @@
                 <translate tag="div" say="SHA1 Hash"><span>{{ object.hash }}</span></translate>
             </div>
             <div slot="notes" class="notes">
+                <translate say="No notes" v-if="object.notes.length === 0"/>
                 <textarea id="password-details-notes">{{ object.notes }}</textarea>
             </div>
             <div slot="share">

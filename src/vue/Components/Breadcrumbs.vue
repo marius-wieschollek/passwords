@@ -7,7 +7,7 @@
                     <img class="svg" src="/core/img/places/home.svg" alt="Home">
                 </a>
             </div>
-            <div class="crumb svg" v-for="item in getItems">
+            <div class="crumb svg" v-for="(item, index) in getItems" :class="{current:index === getItems.length - 1}">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
                     {{ item.label }}
                 </router-link>
@@ -132,6 +132,7 @@
             margin-left : 10px;
             display     : inline-block;
             position    : relative;
+            order       : 2;
 
             .newPasswordMenu {
                 max-height : 0;
@@ -148,10 +149,14 @@
         }
 
         .breadcrumb {
-            display    : flex;
+            display : flex;
 
             .crumb {
                 white-space : nowrap;
+
+                &.current {
+                    font-weight : 600;
+                }
             }
         }
 

@@ -103,6 +103,7 @@ class FallbackIconGenerator {
         $fgColor = imagecolorallocate($image, 255, 255, 255);
         $fontX   = $center - round(imagefontwidth(5) / 2.5);
         $fontY   = $center - round(imagefontheight(5) / 2);
+        // @TODO use freetype whit NC 13 if possible
         imagestring($image, 5, $fontX, $fontY, $text, $fgColor);
 
         if($realSize !== $size) {

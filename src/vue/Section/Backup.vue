@@ -123,7 +123,8 @@
             grid-auto-columns : minmax(105px, 20%);
 
             .csv-mapping-data {
-                padding : 0 5px;
+                padding   : 0 5px;
+                word-wrap : break-word;
             }
 
             .csv-mapping-field {

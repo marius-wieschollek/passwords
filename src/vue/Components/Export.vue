@@ -21,6 +21,10 @@
                 <br>
                 <input type="checkbox" id="passwords-export-tags" value="tags" @change="setExportModel($event)" :disabled="exporting" :checked="models.indexOf('tags') !== -1"/>
                 <translate tag="label" for="passwords-export-tags" say="Export Tags"/>
+                <br>
+                <br>
+                <input type="checkbox" id="passwords-export-shared" v-model="options.excludeShared" :disabled="exporting" v-if="models.indexOf('passwords') !== -1"/>
+                <translate tag="label" for="passwords-export-shared" say="Export passwords shared with me" v-if="models.indexOf('passwords') !== -1"/>
             </div>
             <div class="step-content" v-else>
                 <translate tag="label" for="passwords-export-csv-db" say="Database"/>
@@ -39,6 +43,13 @@
                 </select>
                 <br>
                 <br>
+                <input type="checkbox" id="passwords-export-csv-header" v-model="options.header" :disabled="exporting"/>
+                <translate tag="label" for="passwords-export-csv-header" say="Add Header Line"/>
+                <br>
+                <input type="checkbox" id="passwords-export-csv-shared" v-model="options.excludeShared" :disabled="exporting" v-if="options.db === 'passwords'"/>
+                <translate tag="label" for="passwords-export-csv-shared" say="Export passwords shared with me" v-if="options.db === 'passwords'"/>
+                <br>
+                <br>
                 <translate tag="h3" say="CSV Field Mapping"/>
                 <div class="csv-mapping">
                     <div v-for="id in options.mapping.length+1" class="csv-mapping-field" :key="id">
@@ -48,8 +59,6 @@
                         </select>
                     </div>
                 </div>
-                <input type="checkbox" id="passwords-export-csv-header" v-model="options.header" :disabled="exporting"/>
-                <translate tag="label" for="passwords-export-csv-header" say="Add Header Line"/>
             </div>
         </div>
 
@@ -76,16 +85,16 @@
         data() {
             return {
                 format    : 'json',
-                options   : {},
+                options   : { includeShared: false },
                 models    : ['passwords', 'folders', 'tags'],
                 step      : 3,
                 data      : null,
                 buttonText: 'Export',
                 exporting : false,
                 fieldMap  : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folderlabel', 'taglabels', 'folder', 'tags', 'id', 'revision'],
-                    folders  : ['label', 'edited', 'favourite', 'parentlabel', 'parent', 'id', 'revision'],
-                    tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'folderLabel', 'tagLabels', 'edited', 'created', 'favourite', 'id', 'revision', 'folderId', 'tagIds'],
+                    folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId'],
+                    tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision']
                 }
             }
         },
@@ -106,7 +115,8 @@
                 ExportManager.exportDatabase(this.format, this.models, this.options)
                     .catch((e) => {
                         this.exporting = false;
-                        Messages.alert(e);
+                        if(typeof e !== 'string') e = e.message;
+                        Messages.alert(e, 'Export error');
                     })
                     .then((d) => {
                         if(d) {
@@ -199,6 +209,9 @@
                 if(value.length !== 0 && this.step === 2) {
                     this.step = 3;
                 } else if(value.length === 0 && this.step === 3) this.step = 2;
+                this.resetExportButton();
+            },
+            'options.includeShared'() {
                 this.resetExportButton();
             },
             'options.delimiter'() {

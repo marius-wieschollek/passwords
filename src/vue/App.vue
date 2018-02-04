@@ -1,34 +1,34 @@
 <template>
-    <div id="app" class="passwords">
+    <div id="app" class="passwords" :data-server-version="serverVersion">
         <div id="app-navigation">
             <ul>
                 <router-link class="nav-icon-all" to="/" active-class="active" :exact="true" tag="li">
-                    <translate>All</translate>
+                    <translate say="All"/>
                 </router-link>
                 <router-link class="nav-icon-folders" to="/folders" active-class="active" tag="li">
-                    <translate>Folders</translate>
+                    <translate say="Folders"/>
                 </router-link>
                 <router-link class="nav-icon-recent" to="/recent" active-class="active" tag="li">
-                    <translate>Recent</translate>
+                    <translate say="Recent"/>
                 </router-link>
                 <router-link class="nav-icon-favourites" to="/favourites" active-class="active" tag="li">
-                    <translate>Favourites</translate>
+                    <translate say="Favourites"/>
                 </router-link>
                 <router-link class="nav-icon-shared" to="/shared" active-class="active" tag="li">
-                    <translate>Shared</translate>
+                    <translate say="Shared"/>
                 </router-link>
                 <router-link class="nav-icon-tags" to="/tags" active-class="active" tag="li">
-                    <translate>Tags</translate>
+                    <translate say="Tags"/>
                 </router-link>
                 <router-link class="nav-icon-security" to="/security" active-class="active" tag="li">
-                    <translate>Security</translate>
+                    <translate say="Security"/>
                 </router-link>
             </ul>
             <ul id="app-settings" :class="{open: showMore}">
                 <router-link class="nav-icon-trash" to="/trash" active-class="active" tag="li">
-                    <translate>Trash</translate>
+                    <translate say="Trash"/>
                 </router-link>
-                <translate tag="li" class="nav-icon-more" @click="showMore = !showMore">More</translate>
+                <translate tag="li" class="nav-icon-more" @click="showMore = !showMore" say="More"/>
                 <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
                     <translate say="Backup and Restore"/>
                 </router-link>
@@ -59,8 +59,11 @@
         },
 
         data() {
+            let serverVersion = document.querySelector('[data-constant="serverVersion"]').getAttribute('data-value');
+
             return {
-                showMore: false
+                serverVersion: serverVersion,
+                showMore     : false
             }
         },
 
@@ -80,6 +83,11 @@
 </script>
 
 <style lang="scss">
+    [data-constant] {
+        display    : none;
+        visibility : hidden;
+    }
+
     #app-navigation {
         li {
             line-height   : 44px;
@@ -126,15 +134,25 @@
         #app-settings {
             position         : fixed;
             overflow         : hidden;
-            max-height       : 90px;
+            max-height       : 88px;
             background-color : $color-white;
             border-right     : 1px solid $color-grey-lighter;
             transition       : max-height 0.25s ease-in-out;
 
             &.open {
-                max-height : 225px;
+                max-height : 220px;
 
                 li.nav-icon-more:before { content : "\f068"; }
+            }
+        }
+    }
+
+    [data-server-version="12"] #app-navigation {
+        #app-settings {
+            max-height : 90px;
+
+            &.open {
+                max-height : 225px;
             }
         }
     }

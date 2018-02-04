@@ -98,12 +98,8 @@
             }
         }
 
-        .item-list {
-            padding-top : 44px;
-        }
-
         > #app-navigation-toggle {
-            display: none !important;
+            display : none !important;
         }
 
         @media(max-width : $tablet-width) {
@@ -148,4 +144,9 @@
         }
     }
 
+    [data-server-version="12"] #app-content {
+        .item-list {
+            padding-top : 44px;
+        }
+    }
 </style>
