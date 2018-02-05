@@ -1,8 +1,6 @@
 import API from '@js/Helper/api';
-import Utility from "@js/Classes/Utility";
-import SimpleApi from "@/js/ApiClient/SimpleApi";
 import ImportCsvConversionHelper from '@js/Helper/ImportCsvConversionHelper';
-import * as randomMC from "random-material-color";
+import ImportJsonConversionHelper from '@js/Helper/ImportJsonConversionHelper';
 
 /**
  *
@@ -33,13 +31,16 @@ class ImportManager {
 
         switch(type) {
             case 'json':
-                data = JSON.parse(data);
+                data = await ImportJsonConversionHelper.processBackupJson(data);
                 break;
-            case 'csv':
-                data = await ImportCsvConversionHelper.processGenericCsv(data, options);
+            case 'pmanJson':
+                data = await ImportJsonConversionHelper.processPassmanJson(data);
                 break;
             case 'pmanCsv':
                 data = await ImportCsvConversionHelper.processPassmanCsv(data);
+                break;
+            case 'csv':
+                data = await ImportCsvConversionHelper.processGenericCsv(data, options);
                 break;
             default:
                 throw "Invalid import type: " + type;
