@@ -108,7 +108,7 @@ class Notifier implements INotifier {
     protected function processBadPasswordNotification(INotification $notification): INotification {
         $title   = $this->localisation->t('Insecure password found');
         $message = $this->localisation->t('One of your passwords is no longer secure');
-        $link    = $this->urlGenerator->linkToRoute('passwords.page.index');
+        $link    = $this->urlGenerator->linkToRoute('passwords.page.index').'#/security/2';
         $icon    = $this->urlGenerator->imagePath(Application::APP_NAME, 'app-dark.svg');
 
         return $notification->setParsedSubject($title)

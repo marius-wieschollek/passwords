@@ -22,7 +22,12 @@ class ImportCsvConversionHelper {
     async processGenericCsv(csv, options) {
         let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile),
             data    = Utility.parseCsv(csv, profile.delimiter);
-        return await this._processCsv(data, profile);
+
+        let d = await ImportCsvConversionHelper._processCsv(data, profile);
+        console.log(d);
+        return {};
+
+        return d;
     }
 
     /**
@@ -40,7 +45,7 @@ class ImportCsvConversionHelper {
             data[i][5] = line[5].substr(1, line[5].length - 2)
         }
 
-        return await this._processCsv(data, ImportCsvConversionHelper._getPassmanProfile());
+        return await ImportCsvConversionHelper._processCsv(data, ImportCsvConversionHelper._getPassmanProfile());
     }
 
     /**
@@ -50,15 +55,12 @@ class ImportCsvConversionHelper {
      * @returns {Promise<{}>}
      * @private
      */
-    async _processCsv(data, options) {
+    static async _processCsv(data, options) {
         let mapping = options.mapping,
             db      = [];
 
         if(data[0].length < mapping.length) throw "CSV file can not be mapped";
-        if(options.firstLine) data.splice(0, options.firstLine);
-        data = await this._processSpecialFields(data, mapping, options.db);
-
-        for(let i = 0; i < data.length; i++) {
+        for(let i = options.firstLine; i < data.length; i++) {
             let line   = data[i],
                 object = {};
 
@@ -77,10 +79,7 @@ class ImportCsvConversionHelper {
             db.push(object);
         }
 
-        let tmp = {};
-        tmp[options.db] = db;
-
-        return tmp;
+        return db;
     }
 
     /**
@@ -102,7 +101,7 @@ class ImportCsvConversionHelper {
             return value === 'true';
         } else if(field === 'edited') {
             return new Date(value);
-        } else if(field === 'tags' && value.length !== 0 && !Array.isArray(value)) {
+        } else if((field === 'tags' || field === 'tagLabels') && value.length !== 0 && !Array.isArray(value)) {
             return value.split(',');
         }
         return value;
