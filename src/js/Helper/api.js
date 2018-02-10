@@ -3,6 +3,11 @@ import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
 class PwApi extends EnhancedApi {
     constructor(debug = false) {
+        if(location.protocol !== 'https:') {
+            location.href = location.origin + location.pathname + '?https=false';
+            return;
+        }
+
         super(location.origin, null, null, debug);
 
         this.count = 0;

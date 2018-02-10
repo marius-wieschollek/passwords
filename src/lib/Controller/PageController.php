@@ -12,6 +12,7 @@ use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
 use OCP\IRequest;
 use OCP\ISession;
+use OCP\IUserManager;
 use OCP\Security\ISecureRandom;
 use OCP\Util;
 
@@ -32,7 +33,7 @@ class PageController extends Controller {
     protected $session;
 
     /**
-     * @var
+     * @var string
      */
     protected $userId;
 
@@ -45,6 +46,11 @@ class PageController extends Controller {
      * @var SimpleEncryption
      */
     protected $encryption;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
 
     /**
      * @var IL10N
@@ -65,7 +71,8 @@ class PageController extends Controller {
      * PageController constructor.
      *
      * @param string               $appName
-     * @param string               $userId
+     * @param null|string          $userId
+     * @param IUserManager         $userManager
      * @param IRequest             $request
      * @param ISession             $session
      * @param IL10N                $localisation
@@ -82,6 +89,7 @@ class PageController extends Controller {
         IL10N $localisation,
         ISecureRandom $random,
         IProvider $tokenProvider,
+        IUserManager $userManager,
         SimpleEncryption $encryption,
         ConfigurationService $configurationService
     ) {
@@ -93,6 +101,7 @@ class PageController extends Controller {
         $this->localisation         = $localisation;
         $this->tokenProvider        = $tokenProvider;
         $this->configurationService = $configurationService;
+        $this->userManager          = $userManager;
     }
 
     /**
@@ -102,13 +111,18 @@ class PageController extends Controller {
      */
     public function index(): TemplateResponse {
 
-        Util::addHeader('meta', ['pwui-token' => $this->generateToken()]);
+        $isSecure = $this->checkIfHttpsUsed();
+        if($isSecure) {
+            Util::addHeader('meta', ['pwui-token' => $this->generateToken()]);
+        } else {
+            $this->destroyToken();
+        }
 
         return new TemplateResponse(
             $this->appName,
             'index',
             [
-                'https'   => $this->checkIfHttpsUsed(),
+                'https'   => $isSecure,
                 'version' => $this->getServerVersion()
             ]
         );
@@ -118,9 +132,9 @@ class PageController extends Controller {
      * @return bool
      */
     protected function checkIfHttpsUsed(): bool {
-        $protocol = $this->configurationService->getSystemValue('overwriteprotocol', '');
+        $httpsParam = $this->request->getParam('https', 'true') === 'true';
 
-        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https';
+        return $this->request->getServerProtocol() === 'https' && $httpsParam;
     }
 
     /**
@@ -164,6 +178,19 @@ class PageController extends Controller {
         }
 
         return implode('-', $groups);
+    }
+
+    /**
+     *
+     */
+    protected function destroyToken() {
+        $tokenId = $this->configurationService->getUserValue(self::WEBUI_TOKEN_ID, false);
+        if($tokenId !== false) {
+            $this->tokenProvider->invalidateTokenById(
+                $this->userManager->get($this->userId),
+                $tokenId
+            );
+        }
     }
 
     /**

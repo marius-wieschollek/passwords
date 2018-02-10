@@ -9,6 +9,7 @@
 namespace OCA\Passwords\Middleware;
 
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -16,6 +17,7 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Middleware;
 use OCP\ILogger;
+use OCP\IRequest;
 
 /**
  * Class ApiSecurityMiddleware
@@ -30,6 +32,11 @@ class ApiSecurityMiddleware extends Middleware {
     protected $logger;
 
     /**
+     * @var IRequest
+     */
+    protected $request;
+
+    /**
      * @var ConfigurationService
      */
     protected $config;
@@ -39,10 +46,12 @@ class ApiSecurityMiddleware extends Middleware {
      *
      * @param ILogger              $logger
      * @param ConfigurationService $config
+     * @param IRequest             $request
      */
-    public function __construct(ILogger $logger, ConfigurationService $config) {
+    public function __construct(ILogger $logger, ConfigurationService $config, IRequest $request) {
         $this->logger = $logger;
         $this->config = $config;
+        $this->request = $request;
     }
 
     /**
@@ -53,8 +62,8 @@ class ApiSecurityMiddleware extends Middleware {
      */
     public function beforeController($controller, $methodName): void {
 
-        if(substr(get_class($controller), 0, 28) === 'OCA\Passwords\Controller\Api') {
-            if(!$this->checkIfHttpsUsed()) throw new ApiException('HTTPS required', 400);
+        if(get_class($controller) !== PageController::class && $this->request->getServerProtocol() !== 'https') {
+            throw new ApiException('HTTPS required', 400);
         }
 
         parent::beforeController($controller, $methodName);
@@ -100,14 +109,5 @@ class ApiSecurityMiddleware extends Middleware {
         );
 
         return $response;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function checkIfHttpsUsed(): bool {
-        $protocol    = $this->config->getSystemValue('overwriteprotocol', '');
-
-        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443 || $protocol === 'https';
     }
 }

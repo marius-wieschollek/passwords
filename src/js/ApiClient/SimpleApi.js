@@ -82,7 +82,15 @@ export default class SimpleApi {
         };
     }
 
+    /**
+     *
+     * @param endpoint
+     * @param username
+     * @param password
+     */
     login(endpoint, username = null, password = null) {
+        if(endpoint.substr(0, 5) !== 'https') throw "HTTPS required for api";
+
         this._endpoint = endpoint;
         if(username !== null && password !== null) {
             this._headers.Authorization = 'Basic ' + btoa(username + ':' + password);
