@@ -10,12 +10,11 @@ namespace OCA\Passwords\Hooks;
 
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
-use OCA\Passwords\Db\ShareRevision;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
-use OCA\Passwords\Services\Object\ShareRevisionService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -51,22 +50,29 @@ class PasswordHook {
      * @var TagRevisionService
      */
     protected $tagRevisionService;
+    /**
+     * @var HelperService
+     */
+    private $helperService;
 
     /**
      * PasswordHook constructor.
      *
      * @param ShareService               $shareService
+     * @param HelperService              $helperService
      * @param TagRevisionService         $tagRevisionService
      * @param PasswordRevisionService    $revisionService
      * @param PasswordTagRelationService $relationService
      */
     public function __construct(
         ShareService $shareService,
+        HelperService $helperService,
         TagRevisionService $tagRevisionService,
         PasswordRevisionService $revisionService,
         PasswordTagRelationService $relationService
     ) {
         $this->shareService       = $shareService;
+        $this->helperService      = $helperService;
         $this->revisionService    = $revisionService;
         $this->relationService    = $relationService;
         $this->tagRevisionService = $tagRevisionService;
@@ -81,7 +87,13 @@ class PasswordHook {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function preSetRevision(Password $password, PasswordRevision $newRevision): void {
-        if($password->getRevision() === null) return;
+        if($password->getRevision() === null) {
+            $this->checkSecurityStatus($newRevision);
+            $this->revisionService->save($newRevision);
+
+            return;
+        }
+
         if($password->isEditable() && ($password->getShareId() || $password->hasShares())) {
             $this->updateShares($password);
         }
@@ -89,35 +101,16 @@ class PasswordHook {
         /** @var PasswordRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($password->getRevision());
         if($oldRevision->getHidden() != $newRevision->getHidden()) {
-            $relations = $this->relationService->findByPassword($password->getUuid());
-
-            foreach($relations as $relation) {
-                /** @var TagRevision $tagRevision */
-                $tagRevision = $this->tagRevisionService->findByModel($relation->getTag());
-                $relation->setHidden($newRevision->isHidden() || $tagRevision->isHidden());
-                $this->relationService->save($relation);
-            }
-        }
-    }
-
-    /**
-     * @param Password $password
-     *
-     * @throws \Exception
-     */
-    protected function updateShares(Password $password): void {
-        if($password->getShareId()) {
-            $share = $this->shareService->findByTargetPassword($password->getUuid());
-            $share->setTargetUpdated(true);
-            $this->shareService->save($share);
+            $this->updateRelations($password, $newRevision);
         }
 
-        if($password->hasShares()) {
-            $shares = $this->shareService->findBySourcePassword($password->getUuid());
-            foreach($shares as $share) {
-                $share->setSourceUpdated(true);
-                $this->shareService->save($share);
+        if($newRevision->getStatus() === 0) {
+            if($newRevision->getHash() === $oldRevision->getHash()) {
+                $newRevision->setStatus($oldRevision->getStatus());
+            } else {
+                $this->checkSecurityStatus($newRevision);
             }
+            $this->revisionService->save($newRevision);
         }
     }
 
@@ -191,6 +184,54 @@ class PasswordHook {
                 'hidden'           => $currentClonedRevision->isHidden() || $relation->isHidden()
             ]);
             $this->relationService->save($relationClone);
+        }
+    }
+
+    /**
+     * @param Password $password
+     *
+     * @throws \Exception
+     */
+    protected function updateShares(Password $password): void {
+        if($password->getShareId()) {
+            $share = $this->shareService->findByTargetPassword($password->getUuid());
+            $share->setTargetUpdated(true);
+            $this->shareService->save($share);
+        }
+
+        if($password->hasShares()) {
+            $shares = $this->shareService->findBySourcePassword($password->getUuid());
+            foreach($shares as $share) {
+                $share->setSourceUpdated(true);
+                $this->shareService->save($share);
+            }
+        }
+    }
+
+    /**
+     * @param PasswordRevision $newRevision
+     *
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function checkSecurityStatus(PasswordRevision $newRevision): void {
+        $securityCheck = $this->helperService->getSecurityHelper();
+        $newRevision->setStatus($securityCheck->getRevisionSecurityLevel($newRevision));
+    }
+
+    /**
+     * @param Password         $password
+     * @param PasswordRevision $newRevision
+     *
+     * @throws \Exception
+     */
+    protected function updateRelations(Password $password, PasswordRevision $newRevision): void {
+        $relations = $this->relationService->findByPassword($password->getUuid());
+
+        foreach($relations as $relation) {
+            /** @var TagRevision $tagRevision */
+            $tagRevision = $this->tagRevisionService->findByModel($relation->getTag());
+            $relation->setHidden($newRevision->isHidden() || $tagRevision->isHidden());
+            $this->relationService->save($relation);
         }
     }
 }

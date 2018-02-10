@@ -30,19 +30,12 @@ class ValidationService {
     protected $container;
 
     /**
-     * @var HelperService
-     */
-    protected $helperService;
-
-    /**
      * ValidationService constructor.
      *
-     * @param HelperService $helperService
      * @param IAppContainer $container
      */
-    public function __construct(HelperService $helperService, IAppContainer $container) {
-        $this->helperService = $helperService;
-        $this->container     = $container;
+    public function __construct(IAppContainer $container) {
+        $this->container = $container;
     }
 
     /**
@@ -50,7 +43,6 @@ class ValidationService {
      *
      * @return PasswordRevision
      * @throws ApiException
-     * @throws \OCP\AppFramework\QueryException
      */
     public function validatePassword(PasswordRevision $password): PasswordRevision {
         if(empty($password->getSseType())) {
@@ -67,10 +59,6 @@ class ValidationService {
         }
         if(empty($password->getHash()) || !preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
             throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
-        }
-        if($password->getStatus() == 0) {
-            $securityCheck = $this->helperService->getSecurityHelper();
-            $password->setStatus($securityCheck->getRevisionSecurityLevel($password));
         }
         if(empty($password->getEdited()) || $password->getEdited() > strtotime('+1 hour')) {
             $password->setEdited(time());

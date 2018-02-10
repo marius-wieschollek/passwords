@@ -12,7 +12,6 @@ use Exception;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
-use OCA\Passwords\Db\ShareRevision;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\Security\ICrypto;
