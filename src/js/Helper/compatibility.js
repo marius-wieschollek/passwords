@@ -33,7 +33,7 @@ function showBrowserCompatibilityWarning() {
 function checkSystem() {
     var link = document.getElementById('pw-link-https');
     if(link) {
-        link.setAttribute('href', location.href.replace('http://', 'https://'));
+        link.setAttribute('href', 'https://' + location.host + location.pathname);
     } else if(!isCompatibleBrowser()) {
         showBrowserCompatibilityWarning();
     }

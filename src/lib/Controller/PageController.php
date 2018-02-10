@@ -107,7 +107,6 @@ class PageController extends Controller {
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
-     * @throws \OCP\SessionNotAvailableException
      */
     public function index(): TemplateResponse {
 
@@ -139,7 +138,6 @@ class PageController extends Controller {
 
     /**
      * @return null|string
-     * @throws \OCP\SessionNotAvailableException
      */
     protected function generateToken(): string {
         try {
@@ -160,7 +158,7 @@ class PageController extends Controller {
             $deviceToken->setScope(['filesystem' => false]);
             $this->tokenProvider->updateToken($deviceToken);
             $this->configurationService->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
-            $this->configurationService->setUserValue(self::WEBUI_TOKEN_ID.'', $deviceToken->getId());
+            $this->configurationService->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
 
             return $token;
         } catch(\Throwable $e) {
@@ -183,13 +181,15 @@ class PageController extends Controller {
     /**
      *
      */
-    protected function destroyToken() {
+    protected function destroyToken(): void {
         $tokenId = $this->configurationService->getUserValue(self::WEBUI_TOKEN_ID, false);
         if($tokenId !== false) {
             $this->tokenProvider->invalidateTokenById(
                 $this->userManager->get($this->userId),
                 $tokenId
             );
+            $this->configurationService->deleteUserValue(self::WEBUI_TOKEN);
+            $this->configurationService->deleteUserValue(self::WEBUI_TOKEN_ID);
         }
     }
 
