@@ -1,3 +1,7 @@
+#### 2018.2.1 - Bugfix Release
+* Fixed share deletion error
+* Fixed password check running too often
+
 #### 2018.2.0 - Feature Release
 * Added backup page
 * Improved admin settings ui
