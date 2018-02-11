@@ -65,8 +65,7 @@ class CheckPasswordsJob extends TimedJob {
         PasswordRevisionMapper $revisionMapper
     ) {
         // Run once per day
-        //$this->setInterval(24 * 60 * 60);
-        $this->setInterval(1);
+        $this->setInterval(24 * 60 * 60);
         $this->logger              = $logger;
         $this->helperService       = $helperService;
         $this->revisionMapper      = $revisionMapper;

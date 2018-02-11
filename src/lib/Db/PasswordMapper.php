@@ -67,7 +67,7 @@ class PasswordMapper extends AbstractMapper {
                "WHERE {$passwordsTable}.`deleted` = ? ".
                "AND {$shareTable}.`deleted` = ? ";
 
-        return $this->findEntities($sql, [false, false]);
+        return $this->findEntities($sql, [false, true]);
     }
 
     /**
