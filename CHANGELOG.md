@@ -1,5 +1,6 @@
 #### 2018.3.0 - Feature Release
 * Improved bad password notification
+* Improved https detection
 
 #### 2018.2.1 - Bugfix Release
 * Fixed share deletion error

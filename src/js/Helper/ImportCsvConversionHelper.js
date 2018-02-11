@@ -3,14 +3,7 @@ import Utility from "@/js/Classes/Utility";
 import SimpleApi from "@/js/ApiClient/SimpleApi";
 import * as randomMC from "random-material-color";
 
-/**
- *
- */
-class ImportCsvConversionHelper {
-
-    constructor() {
-        this.defaultFolder = '00000000-0000-0000-0000-000000000000';
-    }
+export default class ImportCsvConversionHelper {
 
     /**
      * Parse a generic csv file
@@ -19,11 +12,14 @@ class ImportCsvConversionHelper {
      * @param options
      * @returns {{}}
      */
-    async processGenericCsv(csv, options) {
+    static async processGenericCsv(csv, options) {
         let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile),
             data    = Utility.parseCsv(csv, profile.delimiter);
 
-        let d = await ImportCsvConversionHelper._processCsv(data, profile);
+        let d = ImportCsvConversionHelper._processCsv(data, profile);
+
+        console.log(d);
+        d = await ImportCsvConversionHelper._convertCsv(d, profile);
         console.log(d);
         return {};
 
@@ -36,7 +32,7 @@ class ImportCsvConversionHelper {
      * @param csv
      * @returns {Promise<*>}
      */
-    async processPassmanCsv(csv) {
+    static async processPassmanCsv(csv) {
         let data = Utility.parseCsv(csv, ',');
 
         for(let i = 0; i < data.length; i++) {
@@ -45,7 +41,7 @@ class ImportCsvConversionHelper {
             data[i][5] = line[5].substr(1, line[5].length - 2)
         }
 
-        return await ImportCsvConversionHelper._processCsv(data, ImportCsvConversionHelper._getPassmanProfile());
+        return ImportCsvConversionHelper._processCsv(data, ImportCsvConversionHelper._getPassmanProfile());
     }
 
     /**
@@ -55,12 +51,12 @@ class ImportCsvConversionHelper {
      * @returns {Promise<{}>}
      * @private
      */
-    static async _processCsv(data, options) {
+    static _processCsv(data, options) {
         let mapping = options.mapping,
             db      = [];
 
         if(data[0].length < mapping.length) throw "CSV file can not be mapped";
-        for(let i = options.firstLine; i < data.length; i++) {
+        for(let i = Number.parseInt(options.firstLine); i < data.length; i++) {
             let line   = data[i],
                 object = {};
 
@@ -71,7 +67,17 @@ class ImportCsvConversionHelper {
                     let value = line[j];
 
                     if(value === undefined) continue;
-                    object[field] = ImportCsvConversionHelper._processCsvValue(value, field);
+
+                    let targetField = field;
+                    if(field === 'tagIds') {
+                        targetField = 'tags'
+                    } else if(field === 'folderId') {
+                        targetField = 'folder'
+                    } else if(field === 'parentId') {
+                        targetField = 'parent'
+                    }
+
+                    object[targetField] = ImportCsvConversionHelper._processCsvValue(value, field);
                 }
             }
 
@@ -109,195 +115,141 @@ class ImportCsvConversionHelper {
 
     /**
      *
-     * @param db
-     * @param mapping
-     * @param dbType
-     * @returns {Promise<Array>}
+     * @param data
+     * @param options
+     * @returns {Promise<{tags: Promise<Array>, folders: Promise<Array>}>}
+     * @private
      */
-    async _processSpecialFields(db, mapping, dbType) {
-        let tagDb = {}, folderDb = {}, folderIdMap = {}, idMap = {}, data = [];
+    static async _convertCsv(data, options) {
 
-        if(dbType === 'passwords' && mapping.indexOf('id') === -1) {
-            await ImportCsvConversionHelper._getPasswordMapForSpecialFields(idMap);
-        }
+        let [tags, tagMapping] = await ImportCsvConversionHelper._generateTags(data, options);
+        let [folders, folderMapping] = await ImportCsvConversionHelper._generateFolders(data, options);
 
-        if(mapping.indexOf('tagLabels') !== -1) {
-            idMap = await ImportCsvConversionHelper._getTagMapForSpecialFields(tagDb, dbType, idMap);
-        }
+        let db = {
+            tags   : tags,
+            folders: folders,
+        };
 
-        if(mapping.indexOf('folderLabel') !== -1 || mapping.indexOf('parentLabel') !== -1) {
-            idMap = await this._getFolderMapForSpecialFields(folderDb, folderIdMap, dbType, idMap);
-        }
+        return db;
+    }
 
-        if(mapping.indexOf('folderId') !== -1) mapping[mapping.indexOf('folderId')] = 'folder';
-        if(mapping.indexOf('parentId') !== -1) mapping[mapping.indexOf('parentId')] = 'parent';
-        if(mapping.indexOf('tagIds') !== -1) mapping[mapping.indexOf('tagIds')] = 'tags';
-        if(mapping.indexOf('id') === -1) mapping.push('id');
+    /**
+     *
+     * @param db
+     * @param options
+     * @returns {Promise<Array>}
+     * @private
+     */
+    static async _generateTags(db, options) {
+        if(options.mapping.indexOf('tagLabels') === -1) return [];
+        let tags    = [],
+            mapping = await ImportCsvConversionHelper._getTagLabelMapping();
 
         for(let i = 0; i < db.length; i++) {
-            let element = db[i], object = element;
+            let element = db[i];
 
-            for(let j = 0; j < mapping.length; j++) {
-                let field = mapping[j],
-                    value = element[j];
+            if(!element.hasOwnProperty('tagLabels')) continue;
+            if(!element.hasOwnProperty('tags')) element.tags = [];
 
-                if(field.length === 0) continue;
-                object[j] = await ImportCsvConversionHelper._processSpecialField(field, value, mapping, element, idMap, dbType, folderDb, folderIdMap, tagDb);
+            for(let j = 0; j < element.tagLabels.length; j++) {
+                let label = element.tagLabels[j];
+
+                if(!mapping.hasOwnProperty(label)) {
+                    tags.push({id: label, label: label, color: randomMC.getColor()});
+                    element.tags[j] = mapping[label];
+                    mapping[label] = label;
+                } else {
+                    element.tags[j] = mapping[label]
+                }
             }
-
-            data.push(object);
         }
 
-        if(mapping.indexOf('folderLabel') !== -1) mapping[mapping.indexOf('folderLabel')] = 'folder';
-        if(mapping.indexOf('parentLabel') !== -1) mapping[mapping.indexOf('parentLabel')] = 'parent';
-        if(mapping.indexOf('tagLabels') !== -1) mapping[mapping.indexOf('tagLabels')] = 'tags';
-
-        return data;
+        return [tags, mapping];
     }
 
     /**
      *
-     * @param field
-     * @param value
-     * @param mapping
-     * @param element
-     * @param idMap
-     * @param dbType
-     * @param folderDb
-     * @param folderIdMap
-     * @param tagDb
-     * @returns {Promise<*>}
-     * @private
-     */
-    static async _processSpecialField(field, value, mapping, element, idMap, dbType, folderDb, folderIdMap, tagDb) {
-        if(field === 'id' && value === undefined && mapping.indexOf('label') !== -1) {
-            let label = element[mapping.indexOf('label')];
-            if(idMap.hasOwnProperty(label)) return idMap[label];
-        } else if(field === 'label' && dbType === 'folders') {
-            // @TODO maybe only if id field was not in original csv
-            if(!folderDb.hasOwnProperty(value)) {
-                let folder = await API.createFolder({label: value});
-                folderDb[value] = folder.id;
-            }
-        } else if(field === 'folderLabel') {
-            return await this._processFolderLabelField(value, folderDb, mapping, element, folderIdMap, 'folder');
-        } else if(field === 'parentLabel') {
-            return await this._processFolderLabelField(value, folderDb, mapping, element, folderIdMap, 'parent');
-        } else if(field === 'tagLabels' && value) {
-            return await this._processTagLabelsField(value, tagDb);
-        }
-        return value;
-    }
-
-    /**
-     *
-     * @param value
-     * @param tagDb
+     * @param db
+     * @param options
      * @returns {Promise<Array>}
      * @private
-     * @TODO do something if tag id and tag labels field is present
      */
-    static async _processTagLabelsField(value, tagDb) {
-        let tagLabels = value.split(',');
-        value = [];
-        for(let k = 0; k < tagLabels.length; k++) {
-            let tagLabel = tagLabels[k];
+    static async _generateFolders(db, options) {
+        if(options.mapping.indexOf('folderLabel') === -1 && options.mapping.indexOf('parentLabel') === -1) return [];
+        let folders = [],
+            mapping = await ImportCsvConversionHelper._getFolderLabelMapping();
 
-            if(!tagDb.hasOwnProperty(tagLabel)) {
-                let tag = await API.createTag({label: tagLabel, color: randomMC.getColor()});
-                tagDb[tagLabel] = tag.id;
+        for(let i = 0; i < db.length; i++) {
+            let element = db[i];
+
+            if((element.hasOwnProperty('folder') && mapping.hasOwnProperty(element.folder) &&
+                element.hasOwnProperty('parent') && mapping.hasOwnProperty(element.parent)) ||
+               (!element.hasOwnProperty('folderLabel') && !element.hasOwnProperty('parentLabel'))
+            ) {
+                continue;
             }
 
-            value.push(tagDb[tagLabel]);
-        }
-        return value;
-    }
-
-    /**
-     *
-     * @param value
-     * @param folderDb
-     * @param mapping
-     * @param element
-     * @param folderIdMap
-     * @param backupField
-     * @returns {Promise<*>}
-     * @private
-     */
-    static async _processFolderLabelField(value, folderDb, mapping, element, folderIdMap, backupField) {
-        if(value === undefined) { value = Utility.translate('Home'); }
-        if(!folderDb.hasOwnProperty(value)) {
-            let folder = await API.createFolder({label: value});
-            folderDb[value] = folder.id;
-        }
-
-        let backupFieldIndex = mapping.indexOf(backupField);
-        if(backupFieldIndex !== -1) {
-            let folder = element[backupFieldIndex];
-
-            if(folderIdMap[folder] === value) {
-                return folderIdMap[folder];
-            } else {
-                element[backupFieldIndex] = folderDb[value];
+            if(element.hasOwnProperty('folderLabel')) {
+                let label = element.folderLabel;
+                if(!mapping.hasOwnProperty(label)) {
+                    folders.push({id: label, label: label});
+                    element.folder = label;
+                    mapping[label] = label;
+                } else {
+                    element.folder = mapping[label];
+                }
+            }
+            if(element.hasOwnProperty('parentLabel')) {
+                let label = element.parentLabel;
+                if(!mapping.hasOwnProperty(label)) {
+                    folders.push({id: label, label: label});
+                    element.parent = label;
+                    mapping[label] = label;
+                } else {
+                    element.parent = mapping[label];
+                }
             }
         }
-        return folderDb[value];
+
+        return [folders, mapping];
     }
 
     /**
      *
-     * @param idMap
-     * @returns {Promise<void>}
+     * @returns {Promise<{}>}
      * @private
      */
-    static async _getPasswordMapForSpecialFields(idMap) {
-        let passwords = await API.listPasswords();
-
-        for(let i in passwords) {
-            if(!passwords.hasOwnProperty(i)) continue;
-            idMap[passwords[i].label] = passwords[i].id;
-        }
-    }
-
-    /**
-     *
-     * @param folderDb
-     * @param folderIdMap
-     * @param dbType
-     * @param idMap
-     * @returns {Promise<*>}
-     * @private
-     */
-    async _getFolderMapForSpecialFields(folderDb, folderIdMap, dbType, idMap) {
-        let folders = await API.listFolders();
-        folderDb[Utility.translate('Home')] = this.defaultFolder;
-
-        for(let i in folders) {
-            if(!folders.hasOwnProperty(i)) continue;
-            folderDb[folders[i].label] = folders[i].id;
-            folderIdMap[folders[i].id] = folders[i].label;
-        }
-        if(dbType === 'folders') idMap = folderDb;
-        return idMap;
-    }
-
-    /**
-     *
-     * @param tagDb
-     * @param dbType
-     * @param idMap
-     * @returns {Promise<*>}
-     * @private
-     */
-    static async _getTagMapForSpecialFields(tagDb, dbType, idMap) {
-        let tags = await API.listTags();
+    static async _getTagLabelMapping() {
+        let tags    = await API.listTags(),
+            mapping = {};
 
         for(let i in tags) {
             if(!tags.hasOwnProperty(i)) continue;
-            tagDb[tags[i].label] = tags[i].id;
+            let id = tags[i].id;
+            mapping[tags[i].label] = id;
+            mapping[id] = id;
         }
-        if(dbType === 'tags') idMap = tagDb;
-        return idMap;
+
+        return mapping;
+    }
+
+    /**
+     *
+     * @returns {Promise<{}>}
+     * @private
+     */
+    static async _getFolderLabelMapping() {
+        let folders = await API.listFolders(),
+            mapping = {};
+
+        for(let i in folders) {
+            if(!folders.hasOwnProperty(i)) continue;
+            let id = folders[i].id;
+            mapping[folders[i].label] = id;
+            mapping[id] = id;
+        }
+
+        return mapping;
     }
 
     /**
@@ -366,7 +318,3 @@ class ImportCsvConversionHelper {
         return profiles[name];
     }
 }
-
-let ICCH = new ImportCsvConversionHelper();
-
-export default ICCH;

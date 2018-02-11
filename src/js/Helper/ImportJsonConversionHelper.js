@@ -1,18 +1,15 @@
 import API from "@/js/Helper/api";
-import * as randomMC from "random-material-color";
 import Utility from "@/js/Classes/Utility";
+import * as randomMC from "random-material-color";
 
-/**
- *
- */
-class ImportJsonConversionHelper {
+export default class ImportJsonConversionHelper {
 
     /**
      *
      * @param json
      * @returns {Promise<void>}
      */
-    async processBackupJson(json) {
+    static async processBackupJson(json) {
         return JSON.parse(json);
     }
 
@@ -21,7 +18,7 @@ class ImportJsonConversionHelper {
      * @param json
      * @returns {Promise<*>}
      */
-    async processPassmanJson(json) {
+    static async processPassmanJson(json) {
         let data = JSON.parse(json);
 
         return {
@@ -118,7 +115,3 @@ class ImportJsonConversionHelper {
         return mapping;
     }
 }
-
-let IJCH = new ImportJsonConversionHelper();
-
-export default IJCH;
