@@ -18,7 +18,7 @@
         },
 
         props: {
-            title: {
+            title        : {
                 type     : String,
                 'default': 'More Options'
             },
@@ -30,13 +30,22 @@
 
         data() {
             return {
+                observer   : null,
+                maxHeight  : 0,
                 open       : false,
+                fistOpen   : true,
                 borderColor: ThemeManager.getColor()
-            }
+            };
         },
 
         mounted() {
-            if(this.initiallyOpen) this.open = true
+            if(this.initiallyOpen) this.open = true;
+            this.observer = new MutationObserver(() => {this.maxHeight = this.$slots.default[0].elm.offsetHeight;});
+            this.observer.observe(this.$el.querySelector('.foldout-content'), {childList: true, subtree: true});
+        },
+
+        beforeDestroy: function() {
+            this.observer.disconnect();
         },
 
         computed: {
@@ -50,15 +59,17 @@
                 return {};
             },
             contentStyle() {
-                if(!this.open) {
-                    return {maxHeight: 0}
-                } else {
+                this.maxHeight = 0;
+                if(this.open) {
                     let $el = this.$slots.default[0].elm;
-                    if(!$el) return {maxHeight: 0};
-                    console.log($el.offsetHeight.toString());
-
-                    return {maxHeight: $el.offsetHeight.toString()+'px'}
+                    if($el) this.maxHeight = $el.offsetHeight;
                 }
+
+                if(this.initiallyOpen && this.open && this.fistOpen && this.maxHeight) {
+                    this.fistOpen = false;
+                    return {maxHeight: this.maxHeight.toString() + 'px', transition: 'none'};
+                }
+                return {maxHeight: this.maxHeight.toString() + 'px'};
             }
         },
 

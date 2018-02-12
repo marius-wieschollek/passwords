@@ -70,9 +70,7 @@
                 showLoader  : false,
                 simplemde   : null,
                 password    : {cseType: 'none', notes: ''},
-                isSubmitted : false,
-                _success    : null,
-                _fail       : null
+                _success    : null
             };
         },
 
@@ -98,10 +96,6 @@
 
         methods: {
             closeWindow             : function() {
-                if(this._fail && !this.isSubmitted) {
-                    this._fail();
-                }
-
                 this.$destroy();
                 let $container = $('#app-popup');
                 $container.find('div').remove();
@@ -131,8 +125,6 @@
                 }
 
                 password = EnhancedApi.validatePassword(password);
-                this.isSubmitted = true;
-
                 if(this._success) {
                     try {
                         this._success(password);

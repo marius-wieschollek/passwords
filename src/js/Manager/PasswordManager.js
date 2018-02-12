@@ -27,7 +27,6 @@ class PasswordManager {
                     .then(resolve)
                     .catch(reject);
             };
-            DialogWindow._fail = reject;
         });
     }
 
