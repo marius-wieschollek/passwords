@@ -1,9 +1,7 @@
 <template>
     <div v-bind:class="{ open: open }" class="foldout-container">
-        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="titleStyle">
-            {{title}}
-        </translate>
-        <div class="foldout-content">
+        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="titleStyle" :say="title"/>
+        <div class="foldout-content" :style="contentStyle">
             <slot></slot>
         </div>
     </div>
@@ -23,6 +21,10 @@
             title: {
                 type     : String,
                 'default': 'More Options'
+            },
+            initiallyOpen: {
+                type     : Boolean,
+                'default': false
             }
         },
 
@@ -31,6 +33,10 @@
                 open       : false,
                 borderColor: ThemeManager.getColor()
             }
+        },
+
+        mounted() {
+            if(this.initiallyOpen) this.open = true
         },
 
         computed: {
@@ -42,6 +48,17 @@
                 }
 
                 return {};
+            },
+            contentStyle() {
+                if(!this.open) {
+                    return {maxHeight: 0}
+                } else {
+                    let $el = this.$slots.default[0].elm;
+                    if(!$el) return {maxHeight: 0};
+                    console.log($el.offsetHeight.toString());
+
+                    return {maxHeight: $el.offsetHeight.toString()+'px'}
+                }
             }
         },
 
@@ -58,7 +75,7 @@
         .foldout-title {
             cursor        : pointer;
             font-size     : 1.1rem;
-            padding       : 1rem 0 0.25rem 0;
+            padding       : 0 0 0.25rem 0;
             border-bottom : 1px solid transparent;
             transition    : border-color 0.25s ease-in-out;
 
@@ -87,10 +104,6 @@
                 .fa-chevron-right {
                     transform : rotate(90deg);
                 }
-            }
-
-            .foldout-content {
-                max-height : 250px;
             }
         }
     }

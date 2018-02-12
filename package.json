@@ -33,7 +33,7 @@
         "vue-router": "^2.7.0",
         "vue-style-loader": "^3.1.2",
         "vue-template-compiler": "^2.5.13",
-        "webpack": "^3.10.0"
+        "webpack": "^3.11.0"
     },
     "repository": {
         "type": "git",

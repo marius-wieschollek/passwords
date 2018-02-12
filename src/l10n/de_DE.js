@@ -35,7 +35,7 @@ OC.L10N.register(
         "More Options"                        : "Erweiterte Optionen",
         "Favourite"                           : "Favorit",
         "Encryption"                          : "Verschlüsselung",
-        "SSE V1"                              : "Auf dem Server",
+        "On the server"                       : "Auf dem Server",
         "Toggle visibility"                   : "Sichtbarkeit umschalten",
         "Generate password"                   : "Passwort generieren",
         "Simple Server Side Encryption V1"    : "Verwenden Sie die einfache serverseitige Verschlüsselung in Variante 1",

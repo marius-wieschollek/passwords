@@ -6,7 +6,7 @@
                 <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
             <form class="content" v-on:submit.prevent="submitAction()">
-                <div class="form">
+                <div class="form left">
                     <translate tag="div" class="section-title">General</translate>
                     <div class="form-grid">
                         <translate tag="label" for="password-username">Username</translate>
@@ -24,26 +24,24 @@
                         <translate tag="label" for="password-url">Website</translate>
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
-                        <foldout title="More Options">
-                            <div class="form-grid">
-                                <translate tag="label" for="password-favourite">Favourite</translate>
-                                <input id="password-favourite" name="favourite" type="checkbox" v-model="password.favourite">
-                                <translate tag="label" for="password-sse">Encryption</translate>
-                                <select id="password-sse"
-                                        name="sseType"
-                                        disabled
-                                        title="There is only one option right now"
-                                        v-model="password.sseType">
-                                    <translate tag="option" value="SSEv1r1" title="Simple Server Side Encryption V1">SSE V1
-                                    </translate>
-                                </select>
-                            </div>
-                        </foldout>
                     </div>
                 </div>
-                <div class="notes">
-                    <translate tag="label" for="password-notes">Notes</translate>
-                    <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
+                <div class="form right">
+                    <foldout title="Notes" :initially-open="notesOpen">
+                        <div class="notes-container">
+                            <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
+                        </div>
+                    </foldout>
+                    <foldout title="More Options">
+                        <div class="form-grid">
+                            <translate tag="label" for="password-favourite">Favourite</translate>
+                            <input id="password-favourite" name="favourite" type="checkbox" v-model="password.favourite">
+                            <translate tag="label" for="password-cse">Encryption</translate>
+                            <select id="password-cse" name="cseType" title="There is only one option right now" v-model="password.cseType" disabled>
+                                <translate tag="option" value="none" say="On the server"/>
+                            </select>
+                        </div>
+                    </foldout>
                 </div>
                 <div class="controls">
                     <translate tag="input" class="nc-theming-main-background nc-theming-contrast" type="submit" value="Save"/>
@@ -55,10 +53,10 @@
 
 <script>
     import $ from "jquery";
-    import SimpleMDE from 'simplemde';
-    import Foldout from '@vc/Foldout.vue';
-    import Translate from '@vc/Translate.vue';
     import API from "@js/Helper/api";
+    import SimpleMDE from 'simplemde';
+    import Foldout from '@vc/Foldout';
+    import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import ThemeManager from '@js/Manager/ThemeManager';
     import EnhancedApi from "@/js/ApiClient/EnhancedApi";
@@ -67,14 +65,15 @@
         data() {
             return {
                 title       : 'Create password',
+                notesOpen   : window.innerWidth > 641,
                 showPassword: false,
                 showLoader  : false,
                 simplemde   : null,
-                password    : {sseType: 'SSEv1r1', notes: ''},
+                password    : {cseType: 'none', notes: ''},
                 isSubmitted : false,
                 _success    : null,
-                _fail       : null,
-            }
+                _fail       : null
+            };
         },
 
         components: {
@@ -93,8 +92,8 @@
                     status                 : false,
                     initialValue           : this.password.notes
                 });
-            ThemeManager.setBorderColor('#passwords-create-new .section-title, #passwords-create-new .notes label');
-            setTimeout(() => {$('#password-password').removeAttr('readonly')}, 250)
+            ThemeManager.setBorderColor('#passwords-create-new .section-title');
+            setTimeout(() => {$('#password-password').removeAttr('readonly');}, 250);
         },
 
         methods: {
@@ -115,14 +114,14 @@
                 this.showLoader = true;
 
                 API.generatePassword()
-                    .then((d) => {
-                        this.password.password = d.password;
-                        this.showLoader = false;
-                        this.showPassword = true;
-                    })
-                    .catch(() => {
-                        this.showLoader = false;
-                    });
+                   .then((d) => {
+                       this.password.password = d.password;
+                       this.showLoader = false;
+                       this.showPassword = true;
+                   })
+                   .catch(() => {
+                       this.showLoader = false;
+                   });
             },
             submitAction            : function() {
                 let password = Utility.cloneObject(this.password);
@@ -219,12 +218,12 @@
                 display               : grid;
                 grid-template-columns : 1fr 1fr;
                 grid-template-rows    : 9fr 1fr;
-                grid-template-areas   : "form notes" "controls notes";
+                grid-template-areas   : "left right" "controls right";
                 grid-column-gap       : 15px;
                 padding               : 15px;
 
                 .form {
-                    grid-area : form;
+                    grid-area : left;
 
                     .form-grid {
                         display               : grid;
@@ -291,22 +290,37 @@
                         max-width : 275px;
                     }
 
+                    input[type=checkbox] {
+                        cursor : pointer;
+                    }
+
                     select {
                         width     : 100%;
                         max-width : 275px;
                     }
-                }
 
-                .notes {
-                    grid-area : notes;
+                    &.right {
+                        grid-area  : right;
+                        overflow-y : auto;
 
-                    label {
-                        font-size     : 1.1rem;
-                        padding       : 0 0 0.25rem 0;
-                        border-bottom : 1px solid $color-grey-light;
-                        display       : block;
-                        margin-bottom : 0.25rem;
-                        cursor        : default;
+                        .notes-container {
+                            padding : 0.25em 0;
+
+                            .CodeMirror-scroll {
+                                overflow   : auto !important;
+                                min-height : 300px;
+                                max-height : 300px;
+                            }
+                        }
+
+                        .foldout-container {
+                            transition : padding-bottom 0.1s ease-in-out;
+
+                            &.open {
+                                padding-bottom : 1.25rem;
+                            }
+                        }
+
                     }
                 }
 
@@ -321,34 +335,13 @@
                 }
 
                 @media (max-width : $mobile-width) {
-                    grid-template-columns : 1fr;
-                    grid-template-rows    : 1fr;
-                    grid-template-areas   : "form" "notes" "controls";
+                    display : block;
 
-                    .notes {
-                        padding-top : 1.25rem;
-
-                        .CodeMirror {
-                            min-height : 100px;
-                            transition : min-height 0.25s;
-
-                            .CodeMirror-scroll {
-                                min-height : 100px;
-                                transition : min-height 0.25s;
-                            }
-
-                            &.CodeMirror-focused {
-                                min-height : 300px;
-
-                                .CodeMirror-scroll {
-                                    min-height : 300px;
-                                }
-                            }
-                        }
+                    .form.left {
+                        padding-bottom : 1.25rem;
                     }
                 }
             }
         }
     }
-
 </style>

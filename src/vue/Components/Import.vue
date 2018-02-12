@@ -138,8 +138,8 @@
                     processed: 0,
                     total    : 0,
                     status   : null
-                },
-            }
+                }
+            };
         },
 
         computed: {
@@ -155,26 +155,26 @@
                 this.progress.style = '';
                 this.importing = true;
                 ImportManager.importDatabase(this.file, this.type, this.options, this.registerProgress)
-                    .catch((e) => {
-                        this.importing = false;
-                        this.progress.style = 'error';
-                        this.progress.status = 'Import failed';
-                        if(typeof e !== 'string') e = e.message;
-                        Messages.alert(e, 'Import error');
-                    })
-                    .then((d) => {
-                        if(this.progress.style !== 'error') {
-                            this.importing = false;
-                            this.progress.style = 'success';
-                            this.progress.status = 'Import successful';
-                        }
-                    });
+                             .catch((e) => {
+                                 this.importing = false;
+                                 this.progress.style = 'error';
+                                 this.progress.status = 'Import failed';
+                                 if(typeof e !== 'string') e = e.message;
+                                 Messages.alert(e, 'Import error');
+                             })
+                             .then((d) => {
+                                 if(this.progress.style !== 'error') {
+                                     this.importing = false;
+                                     this.progress.style = 'success';
+                                     this.progress.status = 'Import successful';
+                                 }
+                             });
             },
             processFile(event) {
                 let file   = event.target.files[0],
                     reader = new FileReader();
                 reader.onload = (e) => { this.file = e.target.result; };
-                reader.readAsText(file)
+                reader.readAsText(file);
             },
             registerProgress(processed, total, status) {
                 this.progress.processed = processed;
@@ -247,7 +247,7 @@
                 if(oldMime !== this.mime && this.file) {
                     $('#passwords-import-file').val('');
                     this.file = null;
-                    this.step = 2
+                    this.step = 2;
                 } else if(this.step === 4 && this.source === 'csv') {
                     this.step = 3;
                 }
@@ -282,7 +282,7 @@
                 }
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
@@ -351,6 +351,7 @@
             span {
                 position    : absolute;
                 left        : 5px;
+                top         : 0;
                 line-height : 32px;
                 font-size   : 1.2em;
                 color       : $color-black-light;
