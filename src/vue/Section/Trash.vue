@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false"/>
+            <breadcrumb :deleteAll="true" :newPassword="false" v-on:deleteAll="clearTrash"/>
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)">Restore</translate>
@@ -21,15 +21,16 @@
 </template>
 
 <script>
+    import TagLine from '@vue/Line/Tag';
+    import Translate from '@vc/Translate';
     import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import Translate from '@vc/Translate.vue';
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import TagLine from '@vue/Line/Tag.vue';
-    import FolderLine from '@vue/Line/Folder.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
+    import FolderLine from '@vue/Line/Folder';
+    import Messages from "@js/Classes/Messages";
+    import PasswordLine from '@vue/Line/Password';
     import TagManager from '@js/Manager/TagManager';
+    import PasswordDetails from '@vue/Details/Password';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import API from '@js/Helper/api';
@@ -45,7 +46,7 @@
                     type   : 'none',
                     element: null
                 }
-            }
+            };
         },
 
         components: {
@@ -63,7 +64,7 @@
         },
 
         beforeDestroy() {
-            Events.off('data.changed', this.refreshView)
+            Events.off('data.changed', this.refreshView);
         },
 
         computed: {
@@ -107,7 +108,24 @@
             restoreTagAction(tag) {
                 TagManager.restoreTag(tag);
                 API.findTags({trashed: true}).then(this.updateTagList);
+            },
+
+            clearTrash() {
+                Messages.confirm('Delete all items in trash?', 'Empty Trash')
+                        .then(() => {
+                            for(let i = 0; i < this.passwords.length; i++) {
+                                PasswordManager.deletePassword(this.passwords[i], false);
+                            }
+                            for(let i = 0; i < this.folders.length; i++) {
+                                FolderManager.deleteFolder(this.folders[i], false);
+                            }
+                            for(let i = 0; i < this.tags.length; i++) {
+                                TagManager.deleteTag(this.tags[i], false);
+                            }
+
+                            Messages.notification('Trash emptied');
+                        });
             }
         }
-    }
+    };
 </script>

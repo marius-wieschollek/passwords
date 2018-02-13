@@ -3,41 +3,41 @@
         <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
-                <a href="/index.php/apps/passwords">
-                    <img class="svg" src="/core/img/places/home.svg" alt="Home">
-                </a>
+                <a href="/index.php/apps/passwords"><img class="svg" src="/core/img/places/home.svg" alt="Home"></a>
             </div>
             <div class="crumb svg" v-for="(item, index) in getItems" :class="{current:index === getItems.length - 1}">
-                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
-                    {{ item.label }}
-                </router-link>
+                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
             </div>
             <div class="actions creatable" v-if="showAddNew" :class="{active: showMenu}">
-            <span class="button new" @click="toggleMenu()">
-                <span class="icon icon-add"></span>
-            </span>
-                <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
-                    <ul>
-                        <li>
-                        <span class="menuitem" data-action="folder" v-if="newFolder" @click="createFolder">
+            <span class="button new" @click="toggleMenu()"><span class="icon icon-add"></span></span>
+            <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
+                <ul>
+                    <li>
+                        <span class="menuitem" v-if="newFolder" @click="createFolder">
                             <span class="icon icon-folder svg"></span>
-                            <translate class="displayname">New Folder</translate>
+                            <translate class="displayname" say="New Folder"/>
                         </span>
-                        </li>
-                        <li>
-                        <span class="menuitem" data-action="tag" v-if="newTag" @click="createTag">
+                    </li>
+                    <li>
+                        <span class="menuitem" v-if="newTag" @click="createTag">
                             <span class="icon icon-tag svg"></span>
-                            <translate class="displayname">New Tag</translate>
+                            <translate class="displayname" say="New Tag"/>
                         </span>
-                        </li>
-                        <li>
-                        <span class="menuitem" data-action="file" @click="createPassword()">
+                    </li>
+                    <li>
+                        <span class="menuitem" v-if="newPassword" @click="createPassword()">
                             <span class="icon icon-filetype-text svg"></span>
-                            <translate class="displayname">New Password</translate>
+                            <translate class="displayname" say="New Password"/>
                         </span>
-                        </li>
-                    </ul>
-                </div>
+                    </li>
+                    <li>
+                        <span class="menuitem" v-if="deleteAll" @click="deleteAllEvent">
+                            <span class="icon icon-delete svg"></span>
+                            <translate class="displayname" say="Delete All"/>
+                        </span>
+                    </li>
+                </ul>
+            </div>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 if(this.items.length === 0) {
                     return [
                         {path: this.$route.path, label: Utility.translate(this.$route.name)}
-                    ]
+                    ];
                 }
 
                 return this.items;
@@ -69,23 +69,31 @@
         },
 
         props: {
-            newFolder : {
+            newFolder  : {
                 type     : Boolean,
                 'default': false
             },
-            newTag    : {
+            newTag     : {
                 type     : Boolean,
                 'default': false
             },
-            showAddNew: {
+            newPassword: {
                 type     : Boolean,
                 'default': true
             },
-            items     : {
+            deleteAll : {
+                type     : Boolean,
+                'default': false
+            },
+            showAddNew : {
+                type     : Boolean,
+                'default': true
+            },
+            items      : {
                 type     : Array,
                 'default': () => { return []; }
             },
-            folder    : {
+            folder     : {
                 type     : String,
                 'default': '00000000-0000-0000-0000-000000000000'
             }
@@ -93,7 +101,7 @@
         data() {
             return {
                 showMenu: false
-            }
+            };
         },
 
         methods: {
@@ -117,6 +125,9 @@
             },
             showNavigation() {
                 $('#app-content').toggleClass('mobile-open');
+            },
+            deleteAllEvent() {
+                this.$emit('deleteAll');
             }
         }
     };

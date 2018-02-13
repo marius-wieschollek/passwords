@@ -1,9 +1,7 @@
 <template>
     <div :class="{open:open,'first-open':firstOpen}" class="foldout-container">
         <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="titleStyle" :say="title"/>
-        <div class="foldout-content" :style="contentStyle">
-            <slot/>
-        </div>
+        <div class="foldout-content" :style="contentStyle"><slot/></div>
     </div>
 </template>
 
