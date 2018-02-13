@@ -62,9 +62,14 @@
             <label for="passwords-favicon"><?php p($l->t('Favicon Service')); ?></label>
             <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service/favicon">
                 <?php foreach($_['faviconServices'] as $service): ?>
-                    <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>><?php echo $service['label']; ?></option>
+                    <option value="<?php echo $service['id']; ?>" <?php echo $service['current'] ? 'selected':''; ?>
+                            data-api="<?php p(json_encode($service['api'])); ?>"><?php echo $service['label']; ?></option>
                 <?php endforeach; ?>
             </select>
+            <div class="container" id="passwords-favicon-api-container">
+                <label for="passwords-favicon-api"><?php p($l->t('Favicon Service Api')); ?></label>
+                <input id="passwords-favicon-api" name="favicon-api" data-setting="">
+            </div>
 
             <label for="passwords-preview"><?php p($l->t('Website Preview Service')); ?></label>
             <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service/preview">
@@ -74,8 +79,8 @@
                 <?php endforeach; ?>
             </select>
             <div class="container" id="passwords-preview-apikey-container">
-                <label for="passwords-preview-apikey"><?php p($l->t('Website Preview API Key')); ?></label>
-                <input id="passwords-preview-apikey" name="preview-apikey" data-setting="">
+                <label for="passwords-preview-api"><?php p($l->t('Website Preview API Key')); ?></label>
+                <input id="passwords-preview-api" name="preview-api" data-setting="">
             </div>
         </div>
     </form>

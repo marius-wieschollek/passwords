@@ -18,7 +18,7 @@ class PasswordsAdminSettings {
                     value = $target[0].checked ? 'true':'false';
                 }
 
-                this.setValue(key, value);
+                this._setValue(key, value);
             }
         );
         $('[data-clear-cache]').click(
@@ -29,25 +29,44 @@ class PasswordsAdminSettings {
 
                 $target.parent().find('label').text(label);
 
-                PasswordsAdminSettings.clearCache(cache);
+                PasswordsAdminSettings._clearCache(cache);
             }
+        );
+
+        $('#passwords-favicon').on(
+            'change',
+            (e) => { PasswordsAdminSettings._updateApiField('favicon'); }
         );
 
         $('#passwords-preview').on(
             'change',
-            (e) => { PasswordsAdminSettings.updateWebsitePreviewField(); }
+            (e) => { PasswordsAdminSettings._updateApiField('preview'); }
         );
 
-        PasswordsAdminSettings.updateWebsitePreviewField();
+        PasswordsAdminSettings._updateApiField('favicon');
+        PasswordsAdminSettings._updateApiField('preview');
     }
 
-    setValue(key, value) {
+    /**
+     * Update configuration value
+     *
+     * @param key
+     * @param value
+     * @private
+     */
+    _setValue(key, value) {
         $.post('/index.php/apps/passwords/admin/set', {'key': key, 'value': value})
-            .success(() => {this.showMessage('success');})
-            .fail(() => {this.showMessage('error');})
+         .success(() => {this._showMessage('success');})
+         .fail(() => {this._showMessage('error');});
     }
 
-    showMessage(type) {
+    /**
+     * Show save success/fail message
+     *
+     * @param type
+     * @private
+     */
+    _showMessage(type) {
         let $el = $('#passwords').find('.msg.' + type);
         $el.removeClass('active').addClass('active');
 
@@ -58,16 +77,28 @@ class PasswordsAdminSettings {
         );
     }
 
-    static clearCache(key) {
-        $.post('/index.php/apps/passwords/admin/cache', {'key': key})
+    /**
+     * Clears a cache
+     *
+     * @param key
+     * @private
+     */
+    static _clearCache(key) {
+        $.post('/index.php/apps/passwords/admin/cache', {'key': key});
     }
 
-    static updateWebsitePreviewField() {
-        let $target   = $('#passwords-preview'),
+    /**
+     * Show the conditional field for api keys
+     *
+     * @param type
+     * @private
+     */
+    static _updateApiField(type) {
+        let $target   = $('#passwords-' + type),
             value     = $target.val(),
             $option   = $target.find('[value=' + value + ']'),
             data      = $option.data('api'),
-            $apiInput = $('#passwords-preview-apikey');
+            $apiInput = $('#passwords-' + type + '-api');
 
 
         if(data === null) {

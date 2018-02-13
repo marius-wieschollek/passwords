@@ -10,6 +10,9 @@ namespace OCA\Passwords\Settings;
 
 use Gmagick;
 use Imagick;
+use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WkhtmlImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -67,7 +70,7 @@ class AdminSettings implements ISettings {
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
-            'previewServices' => $this->getWebsitePreviewServices(),
+            'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
             'legacyApiEnabled' => $legacyEnabled,
             'legacyLastUsed'   => $legacyLastUsed,
@@ -164,27 +167,35 @@ class AdminSettings implements ISettings {
             [
                 'id'      => HelperService::FAVICON_LOCAL,
                 'label'   => $this->localisation->t('Local analyzer'),
-                'current' => $current === HelperService::FAVICON_LOCAL
+                'current' => $current === HelperService::FAVICON_LOCAL,
+                'api'     => null
             ],
             [
                 'id'      => HelperService::FAVICON_BESTICON,
                 'label'   => $this->localisation->t('Besticon (recommended)'),
-                'current' => $current === HelperService::FAVICON_BESTICON
+                'current' => $current === HelperService::FAVICON_BESTICON,
+                'api'     => [
+                    'key'   => BestIconHelper::BESTICON_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL)
+                ]
             ],
             [
                 'id'      => HelperService::FAVICON_DUCK_DUCK_GO,
                 'label'   => $this->localisation->t('DuckDuckGo'),
-                'current' => $current === HelperService::FAVICON_DUCK_DUCK_GO
+                'current' => $current === HelperService::FAVICON_DUCK_DUCK_GO,
+                'api'     => null
             ],
             [
                 'id'      => HelperService::FAVICON_GOOGLE,
                 'label'   => $this->localisation->t('Google'),
-                'current' => $current === HelperService::FAVICON_GOOGLE
+                'current' => $current === HelperService::FAVICON_GOOGLE,
+                'api'     => null
             ],
             [
                 'id'      => HelperService::FAVICON_DEFAULT,
                 'label'   => $this->localisation->t('None'),
-                'current' => $current === HelperService::FAVICON_DEFAULT
+                'current' => $current === HelperService::FAVICON_DEFAULT,
+                'api'     => null
             ]
         ];
     }
@@ -214,8 +225,8 @@ class AdminSettings implements ISettings {
                 'label'   => $this->localisation->t('screenshotapi.io'),
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
                 'api'     => [
-                    'key'   => 'service/preview/ssa/key',
-                    'value' => $this->config->getAppValue('service/preview/ssa/key')
+                    'key'   => ScreenShotApiHelper::SSA_API_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(ScreenShotApiHelper::SSA_API_CONFIG_KEY)
                 ]
             ],
             [
@@ -223,8 +234,8 @@ class AdminSettings implements ISettings {
                 'label'   => $this->localisation->t('screenshotmachine.com'),
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'api'     => [
-                    'key'   => 'service/preview/ssm/key',
-                    'value' => $this->config->getAppValue('service/preview/ssm/key')
+                    'key'   => ScreenShotMachineHelper::SSM_API_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(ScreenShotMachineHelper::SSM_API_CONFIG_KEY)
                 ]
             ],
             [

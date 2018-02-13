@@ -18,6 +18,8 @@ use OCA\Passwords\Services\WebsitePreviewService;
  */
 class ScreenShotMachineHelper extends AbstractPreviewHelper {
 
+    const SSM_API_CONFIG_KEY = 'service/preview/ssm/key';
+
     /**
      * @var string
      */
@@ -30,7 +32,7 @@ class ScreenShotMachineHelper extends AbstractPreviewHelper {
      * @return string
      */
     protected function getPreviewUrl(string $domain, string $view): string {
-        $apiKey = $this->config->getAppValue('service/preview/ssm/key');
+        $apiKey = $this->config->getAppValue(self::SSM_API_CONFIG_KEY);
 
         if($view === WebsitePreviewService::VIEWPORT_DESKTOP) {
             return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_DESKTOP."xfull&device=desktop&format=jpg&url={$domain}";

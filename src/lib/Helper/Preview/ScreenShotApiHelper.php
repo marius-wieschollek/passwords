@@ -20,12 +20,13 @@ use OCA\Passwords\Services\WebsitePreviewService;
  */
 class ScreenShotApiHelper extends AbstractPreviewHelper {
 
-    const CAPTURE_URL       = 'https://api.screenshotapi.io/capture';
-    const RETRIEVE_URL      = 'https://api.screenshotapi.io/retrieve?key=';
-    const WEBDRIVER_FIREFOX = 'firefox';
-    const WEBDRIVER_CHROME  = 'chrome';
-    const VIEWPORT_DESKTOP  = '1480x1037';
-    const DEVICE_MOBILE     = 'google_nexus_s';
+    const SSA_API_CONFIG_KEY = 'service/preview/ssa/key';
+    const CAPTURE_URL        = 'https://api.screenshotapi.io/capture';
+    const RETRIEVE_URL       = 'https://api.screenshotapi.io/retrieve?key=';
+    const WEBDRIVER_FIREFOX  = 'firefox';
+    const WEBDRIVER_CHROME   = 'chrome';
+    const VIEWPORT_DESKTOP   = '1480x1037';
+    const DEVICE_MOBILE      = 'google_nexus_s';
 
     /**
      * @var string
@@ -117,7 +118,7 @@ class ScreenShotApiHelper extends AbstractPreviewHelper {
      * @return array
      */
     protected function getServiceAuth(): array {
-        $apiKey = $this->config->getAppValue('service/preview/ssa/key');
+        $apiKey = $this->config->getAppValue(self::SSA_API_CONFIG_KEY);
 
         return ['apikey' => $apiKey];
     }
