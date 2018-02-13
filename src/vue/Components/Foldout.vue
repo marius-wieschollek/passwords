@@ -1,8 +1,8 @@
 <template>
-    <div v-bind:class="{ open: open }" class="foldout-container">
+    <div :class="{open:open,'first-open':firstOpen}" class="foldout-container">
         <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="titleStyle" :say="title"/>
         <div class="foldout-content" :style="contentStyle">
-            <slot></slot>
+            <slot/>
         </div>
     </div>
 </template>
@@ -12,7 +12,6 @@
     import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
-
         components: {
             Translate
         },
@@ -33,7 +32,7 @@
                 observer   : null,
                 maxHeight  : 0,
                 open       : false,
-                fistOpen   : true,
+                firstOpen  : true,
                 borderColor: ThemeManager.getColor()
             };
         },
@@ -65,10 +64,6 @@
                     if($el) this.maxHeight = $el.offsetHeight;
                 }
 
-                if(this.initiallyOpen && this.open && this.fistOpen && this.maxHeight) {
-                    this.fistOpen = false;
-                    return {maxHeight: this.maxHeight.toString() + 'px', transition: 'none'};
-                }
                 return {maxHeight: this.maxHeight.toString() + 'px'};
             }
         },
@@ -76,6 +71,7 @@
         methods: {
             toggleContent: function() {
                 this.open = !this.open;
+                this.firstOpen = false;
             }
         }
     };
@@ -116,6 +112,9 @@
                     transform : rotate(90deg);
                 }
             }
+        }
+        &.first-open .foldout-content {
+            transition : none;
         }
     }
 </style>

@@ -311,6 +311,10 @@
                             &.open {
                                 padding-bottom : 1.25rem;
                             }
+
+                            &.first-open {
+                                transition : none;
+                            }
                         }
 
                     }

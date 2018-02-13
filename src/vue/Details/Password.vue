@@ -35,7 +35,7 @@
             </div>
             <div slot="notes" class="notes">
                 <translate say="No notes" v-if="object.notes.length === 0"/>
-                <textarea id="password-details-notes">{{ object.notes }}</textarea>
+                <div v-html="getNotes"></div>
             </div>
             <div slot="share">
                 <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="object.id">
@@ -74,16 +74,16 @@
 
 <script>
     import $ from "jquery";
+    import marked from "marked";
     import Tabs from '@vc/Tabs.vue';
     import Tags from '@vc/Tags.vue';
     import API from '@js/Helper/api';
-    import SimpleMDE from 'simplemde';
-    import Sharing from '@vc/Sharing.vue';
+    import Sharing from '@vc/Sharing';
+    import Translate from '@vc/Translate';
     import Events from "@js/Classes/Events";
     import QrCode from 'vue-qrcode-component'
     import Utility from "@js/Classes/Utility";
-    import Translate from '@vc/Translate.vue';
-    import ImageContainer from '@vc/ImageContainer.vue';
+    import ImageContainer from '@vc/ImageContainer';
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
@@ -116,19 +116,6 @@
             }
         },
 
-        mounted() {
-            let simplemde = new SimpleMDE(
-                {
-                    element                : document.getElementById('password-details-notes'),
-                    toolbar                : false,
-                    autoDownloadFontAwesome: false,
-                    spellChecker           : false,
-                    status                 : false,
-                    initialValue           : this.object.notes
-                });
-            simplemde.togglePreview();
-        },
-
         created() {
             Events.on('password.changed', this.refreshView);
         },
@@ -138,6 +125,9 @@
         },
 
         computed: {
+            getNotes() {
+                return marked(this.object.notes, {breaks:true});
+            },
             getRevisions() {
                 return Utility.sortApiObjectArray(this.object.revisions, 'created', false)
             },
