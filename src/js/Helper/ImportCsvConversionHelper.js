@@ -16,14 +16,8 @@ export default class ImportCsvConversionHelper {
         let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile),
             data    = Utility.parseCsv(csv, profile.delimiter);
 
-        let d = ImportCsvConversionHelper._processCsv(data, profile);
-
-        console.log(d);
-        d = await ImportCsvConversionHelper._convertCsv(d, profile);
-        console.log(d);
-        return {};
-
-        return d;
+        let entries = ImportCsvConversionHelper._processCsv(data, profile);
+        return await ImportCsvConversionHelper._convertCsv(entries, profile);
     }
 
     /**
@@ -38,7 +32,7 @@ export default class ImportCsvConversionHelper {
         for(let i = 0; i < data.length; i++) {
             let line = data[i];
 
-            data[i][5] = line[5].substr(1, line[5].length - 2)
+            data[i][5] = line[5].substr(1, line[5].length - 2);
         }
 
         return ImportCsvConversionHelper._processCsv(data, ImportCsvConversionHelper._getPassmanProfile());
@@ -52,8 +46,9 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static _processCsv(data, options) {
-        let mapping = options.mapping,
-            db      = [];
+        let mapping  = options.mapping,
+            fieldMap = {tagIds: 'tags', folderId: 'folder', parentId: 'parent'},
+            db       = [];
 
         if(data[0].length < mapping.length) throw "CSV file can not be mapped";
         for(let i = Number.parseInt(options.firstLine); i < data.length; i++) {
@@ -67,16 +62,7 @@ export default class ImportCsvConversionHelper {
                     let value = line[j];
 
                     if(value === undefined) continue;
-
-                    let targetField = field;
-                    if(field === 'tagIds') {
-                        targetField = 'tags'
-                    } else if(field === 'folderId') {
-                        targetField = 'folder'
-                    } else if(field === 'parentId') {
-                        targetField = 'parent'
-                    }
-
+                    let targetField = fieldMap.hasOwnProperty(field) ? fieldMap[field]:field;
                     object[targetField] = ImportCsvConversionHelper._processCsvValue(value, field);
                 }
             }
@@ -99,12 +85,10 @@ export default class ImportCsvConversionHelper {
         let boolYes = Utility.translate('true'),
             boolNo  = Utility.translate('false');
 
-        if(value === boolYes || value === boolNo) {
-            return value === boolYes;
-        } else if(value === 'yes' || value === 'no') {
-            return value === 'yes';
-        } else if(value === 'false' || value === 'true') {
-            return value === 'true';
+        if([boolYes, 'yes', 'true'].indexOf(value) !== -1) {
+            return true;
+        } else if([boolNo, 'no', 'false'].indexOf(value) !== -1) {
+            return false;
         } else if(field === 'edited') {
             return new Date(value);
         } else if((field === 'tags' || field === 'tagLabels') && value.length !== 0 && !Array.isArray(value)) {
@@ -117,20 +101,45 @@ export default class ImportCsvConversionHelper {
      *
      * @param data
      * @param options
-     * @returns {Promise<{tags: Promise<Array>, folders: Promise<Array>}>}
+     * @returns {Promise<{tags: *, folders: *, passwords: {}}>}
      * @private
      */
     static async _convertCsv(data, options) {
+        let [tags, tagIdMap, tagKeyMap]          = await ImportCsvConversionHelper._generateTags(data, options),
+            [folders, folderIdMap, folderKeyMap] = await ImportCsvConversionHelper._generateFolders(data, options),
+            db                                   = {tags: tags, folders: folders, passwords: []};
 
-        let [tags, tagMapping] = await ImportCsvConversionHelper._generateTags(data, options);
-        let [folders, folderMapping] = await ImportCsvConversionHelper._generateFolders(data, options);
-
-        let db = {
-            tags   : tags,
-            folders: folders,
-        };
+        if(options.db === 'passwords') {
+            let passwordIdMap = ImportCsvConversionHelper._createLabelMapping(await API.listPasswords());
+            ImportCsvConversionHelper._setIds(data, db.passwords, passwordIdMap);
+        } else if(options.db === 'folders') {
+            ImportCsvConversionHelper._setIds(data, db.folders, folderIdMap, folderKeyMap);
+        } else if(options.db === 'tags') {
+            ImportCsvConversionHelper._setIds(data, db.tags, tagIdMap, tagKeyMap);
+        }
 
         return db;
+    }
+
+    /**
+     *
+     * @param data
+     * @param db
+     * @param idMap
+     * @param keyMap
+     * @private
+     */
+    static _setIds(data, db = [], idMap = {}, keyMap = {}) {
+        for(let i = 0; i < data.length; i++) {
+            let element = data[i], label = element.label;
+
+            if(idMap.hasOwnProperty(label)) element.id = idMap[label];
+            if(keyMap.hasOwnProperty(label)) {
+                db[keyMap[label]] = element;
+            } else {
+                db.push(element);
+            }
+        }
     }
 
     /**
@@ -141,9 +150,10 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static async _generateTags(db, options) {
-        if(options.mapping.indexOf('tagLabels') === -1) return [];
-        let tags    = [],
-            mapping = await ImportCsvConversionHelper._getTagLabelMapping();
+        if(options.mapping.indexOf('tagLabels') === -1) return [[],{},{}];
+        let tags   = [],
+            keyMap = {},
+            idMap  = ImportCsvConversionHelper._createLabelMapping(await API.listTags());
 
         for(let i = 0; i < db.length; i++) {
             let element = db[i];
@@ -154,102 +164,74 @@ export default class ImportCsvConversionHelper {
             for(let j = 0; j < element.tagLabels.length; j++) {
                 let label = element.tagLabels[j];
 
-                if(!mapping.hasOwnProperty(label)) {
+                if(!idMap.hasOwnProperty(label)) {
+                    keyMap[label] = tags.length;
                     tags.push({id: label, label: label, color: randomMC.getColor()});
-                    element.tags[j] = mapping[label];
-                    mapping[label] = label;
+                    element.tags[j] = idMap[label];
+                    idMap[label] = label;
                 } else {
-                    element.tags[j] = mapping[label]
+                    element.tags[j] = idMap[label];
                 }
             }
         }
 
-        return [tags, mapping];
+        return [tags, idMap, keyMap];
     }
 
     /**
      *
      * @param db
      * @param options
-     * @returns {Promise<Array>}
+     * @returns {Promise<*[]>}
      * @private
      */
     static async _generateFolders(db, options) {
-        if(options.mapping.indexOf('folderLabel') === -1 && options.mapping.indexOf('parentLabel') === -1) return [];
-        let folders = [],
-            mapping = await ImportCsvConversionHelper._getFolderLabelMapping();
+        if(options.mapping.indexOf('folderLabel') === -1 && options.mapping.indexOf('parentLabel') === -1) return [[],{},{}];
+        let folders    = [],
+            keyMap     = {},
+            properties = {folder: 'folderLabel', parent: 'parentLabel'},
+            idMap      = ImportCsvConversionHelper._createLabelMapping(await API.listFolders());
 
         for(let i = 0; i < db.length; i++) {
             let element = db[i];
 
-            if((element.hasOwnProperty('folder') && mapping.hasOwnProperty(element.folder) &&
-                element.hasOwnProperty('parent') && mapping.hasOwnProperty(element.parent)) ||
+            if((element.hasOwnProperty('folder') && idMap.hasOwnProperty(element.folder) &&
+                element.hasOwnProperty('parent') && idMap.hasOwnProperty(element.parent)) ||
                (!element.hasOwnProperty('folderLabel') && !element.hasOwnProperty('parentLabel'))
             ) {
                 continue;
             }
 
-            if(element.hasOwnProperty('folderLabel')) {
-                let label = element.folderLabel;
-                if(!mapping.hasOwnProperty(label)) {
-                    folders.push({id: label, label: label});
-                    element.folder = label;
-                    mapping[label] = label;
-                } else {
-                    element.folder = mapping[label];
-                }
-            }
-            if(element.hasOwnProperty('parentLabel')) {
-                let label = element.parentLabel;
-                if(!mapping.hasOwnProperty(label)) {
-                    folders.push({id: label, label: label});
-                    element.parent = label;
-                    mapping[label] = label;
-                } else {
-                    element.parent = mapping[label];
+            for(let j in properties) {
+                if(!properties.hasOwnProperty(j)) continue;
+                if(element.hasOwnProperty(properties[j])) {
+                    let label = element[properties[j]];
+                    if(!idMap.hasOwnProperty(label)) {
+                        keyMap[label] = folders.length;
+                        folders.push({id: label, label: label});
+                        element[j] = label;
+                        idMap[label] = label;
+                    } else {
+                        element[j] = idMap[label];
+                    }
                 }
             }
         }
 
-        return [folders, mapping];
+        return [folders, idMap, keyMap];
     }
 
-    /**
-     *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getTagLabelMapping() {
-        let tags    = await API.listTags(),
-            mapping = {};
+    static _createLabelMapping(db) {
+        let map = {};
 
-        for(let i in tags) {
-            if(!tags.hasOwnProperty(i)) continue;
-            let id = tags[i].id;
-            mapping[tags[i].label] = id;
-            mapping[id] = id;
+        for(let i in db) {
+            if(!db.hasOwnProperty(i)) continue;
+            let id = db[i].id;
+            map[db[i].label] = id;
+            map[id] = id;
         }
 
-        return mapping;
-    }
-
-    /**
-     *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getFolderLabelMapping() {
-        let folders = await API.listFolders(),
-            mapping = {};
-
-        for(let i in folders) {
-            if(!folders.hasOwnProperty(i)) continue;
-            let id = folders[i].id;
-            mapping[folders[i].label] = id;
-            mapping[id] = id;
-        }
-
-        return mapping;
+        return map;
     }
 
     /**
@@ -277,7 +259,7 @@ export default class ImportCsvConversionHelper {
             firstLine: 1,
             db       : 'passwords',
             mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url']
-        }
+        };
     }
 
     /**
