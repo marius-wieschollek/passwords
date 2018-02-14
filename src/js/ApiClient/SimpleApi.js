@@ -430,6 +430,15 @@ export default class SimpleApi {
 
 
     /**
+     * Settings
+     */
+
+    getSetting(key) {
+        return this._createRequest('settings.get', {key: key}, 'POST');
+    }
+
+
+    /**
      * Misc Services
      */
 

@@ -131,6 +131,13 @@ class ConfigurationService {
     }
 
     /**
+     * @return IConfig
+     */
+    public function getConfig() {
+        return $this->config;
+    }
+
+    /**
      * @return string
      */
     public function getTempDir(): string {

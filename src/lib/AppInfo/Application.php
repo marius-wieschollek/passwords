@@ -15,6 +15,7 @@ use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
+use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Db\Folder;
@@ -123,6 +124,7 @@ class Application extends App {
 
         $container->registerAlias('AdminSettingsController', AdminSettingsController::class);
         $container->registerAlias('PasswordApiController', PasswordApiController::class);
+        $container->registerAlias('SettingsApiController', SettingsApiController::class);
         $container->registerAlias('ServiceApiController', ServiceApiController::class);
         $container->registerAlias('FolderApiController', FolderApiController::class);
         $container->registerAlias('ShareApiController', ShareApiController::class);

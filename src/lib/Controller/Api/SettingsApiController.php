@@ -8,7 +8,9 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IRequest;
 
 /**
  * Class SettingsApiController
@@ -18,6 +20,22 @@ use OCP\AppFramework\Http\JSONResponse;
 class SettingsApiController extends AbstractApiController {
 
     /**
+     * @var SettingsService
+     */
+    protected $settings;
+
+    /**
+     * SettingsApiController constructor.
+     *
+     * @param IRequest        $request
+     * @param SettingsService $settings
+     */
+    public function __construct(IRequest $request, SettingsService $settings) {
+        parent::__construct($request);
+        $this->settings = $settings;
+    }
+
+    /**
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
@@ -25,10 +43,11 @@ class SettingsApiController extends AbstractApiController {
      * @param string $key
      *
      * @return JSONResponse
+     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function get(string $key): JSONResponse {
 
-        return $this->createJsonResponse($key);
+        return $this->createJsonResponse($this->settings->get($key));
     }
 
     /**
