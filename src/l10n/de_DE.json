@@ -9,6 +9,7 @@
         "If you do not have a HTTPS certificate, get one for free from %s."        : "Sollten Sie kein HTTPS Zertifikat haben können Sie eines kostenlos bei %s erhalten.",
         "If you think your server has HTTPS enabled, you can try to %s with HTTPS.": "Wenn HTTPS auf dem Server aktiviert ist können Sie die Seite %s.",
         "Passwords WebUI Access (see %s)"                                          : "Passwords WebUi Zugriff (siehe %s)",
+        "Open documentation"                                                       : "Dokumentation öffnen",
         "Legacy Api Support"                                                       : "Altes API",
         "Enable Legacy API"                                                        : "Altes API aktivieren",
         "Legacy API was last used on"                                              : "Altes API wurde zuletzt verwendet am",

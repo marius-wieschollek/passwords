@@ -80,6 +80,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </repair-steps>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>
+        <admin-section>OCA\Passwords\Settings\AdminSection</admin-section>
     </settings>
     <navigations>
         <navigation>

@@ -10,6 +10,7 @@ namespace OCA\Passwords\Settings;
 
 use Gmagick;
 use Imagick;
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
@@ -28,10 +29,13 @@ use OCP\Settings\ISettings;
  */
 class AdminSettings implements ISettings {
 
+    const DOCUMENTATION_URL = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrative-Settings';
+
     /**
      * @var ConfigurationService
      */
     protected $config;
+
     /**
      * @var IL10N
      */
@@ -58,22 +62,16 @@ class AdminSettings implements ISettings {
     /**
      * @return TemplateResponse returns the instance with all parameters set, ready to be rendered
      */
-    public function getForm() {
-
-        $legacyEnabled  = $this->config->getAppValue('legacy_api_enabled', true);
-        $legacyLastUsed = null;
-        if($legacyEnabled) {
-            $legacyLastUsed = $this->config->getAppValue('legacy_last_used', null);
-        }
-
+    public function getForm(): TemplateResponse {
         return new TemplateResponse('passwords', 'admin/index', [
+            'documentationUrl' => self::DOCUMENTATION_URL,
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
             'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
-            'legacyApiEnabled' => $legacyEnabled,
-            'legacyLastUsed'   => $legacyLastUsed,
+            'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
+            'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
             'caches'           => $this->getFileCaches()
         ]);
     }
@@ -267,8 +265,8 @@ class AdminSettings implements ISettings {
     /**
      * @return string the section ID, e.g. 'sharing'
      */
-    public function getSection() {
-        return 'additional';
+    public function getSection(): string {
+        return Application::APP_NAME;
     }
 
     /**
@@ -276,7 +274,7 @@ class AdminSettings implements ISettings {
      * the admin section. The forms are arranged in ascending order of the
      * priority values. It is required to return a value between 0 and 100.
      */
-    public function getPriority() {
-        return 70;
+    public function getPriority(): int {
+        return 0;
     }
 }

@@ -53,5 +53,28 @@
                 width        : auto;
             }
         }
+
+        @media (max-width : $mobile-width) {
+            grid-template-columns : 1fr;
+
+            &.cache,
+            &.legacy {
+                grid-template-columns : 5fr 1fr;
+
+                input {
+                    justify-self : right;
+                }
+            }
+        }
+    }
+
+    @media (max-width : $mobile-width) {
+        form {
+            margin-bottom : 4em;
+
+            &:last-child {
+                margin-bottom : 2em;
+            }
+        }
     }
 }

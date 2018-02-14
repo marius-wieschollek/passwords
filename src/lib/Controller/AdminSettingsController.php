@@ -52,7 +52,7 @@ class AdminSettingsController extends Controller {
      *
      * @return JSONResponse
      */
-    public function set(string $key, $value) {
+    public function set(string $key, $value): JSONResponse {
 
         if($value === 'true') $value = true;
         if($value === 'false') $value = false;
@@ -67,7 +67,7 @@ class AdminSettingsController extends Controller {
      *
      * @return JSONResponse
      */
-    public function cache(string $key) {
+    public function cache(string $key): JSONResponse {
         $this->fileCacheService->clearCache($key);
 
         return new JSONResponse(['status' => 'ok']);

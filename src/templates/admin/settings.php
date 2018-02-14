@@ -12,6 +12,7 @@
 <section id="passwords" class="section">
     <h2>
         <?php p($l->t('Passwords')); ?>
+        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<?php p($l->t('Open documentation'));?>" href="<?=$_['documentationUrl']?>"></a>
         <span class="msg success"><?php p($l->t('Saved')); ?></span>
         <span class="msg error"><?php p($l->t('Failed')); ?></span>
     </h2>
@@ -19,7 +20,7 @@
     <form>
         <h3><?php p($l->t('Legacy Api Support')); ?></h3>
 
-        <div class="area legacy_support">
+        <div class="area legacy">
             <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
             <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
             <?php if($_['legacyApiEnabled']): ?>
