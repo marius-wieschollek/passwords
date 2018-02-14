@@ -92,24 +92,10 @@ class FallbackIconGenerator {
     protected function createIconWithGd(string $color, string $text, int $realSize): string {
         $rgb = str_split(substr($color, 1), 2);
 
-        $size   = $realSize > 48 ? 48:$realSize;
-        $size   = $size < 24 ? 24:$size;
-        $center = round($size / 2);
-
-        $image   = imagecreatetruecolor($size, $size);
-        $bgColor = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
-        imagefill($image, 0, 0, $bgColor);
-
-        $fgColor = imagecolorallocate($image, 255, 255, 255);
-        $fontX   = $center - round(imagefontwidth(5) / 2.5);
-        $fontY   = $center - round(imagefontheight(5) / 2);
-        // @TODO use freetype whit NC 13 if possible
-        imagestring($image, 5, $fontX, $fontY, $text, $fgColor);
-
-        if($realSize !== $size) {
-            $im = new \OC_Image($image);
-            $im->resize($realSize);
-            $image = $im->resource();
+        if(!$this->hasFreeTypeSupport()) {
+            $image = $this->createGdIconNoFreeType($text, $realSize, $rgb);
+        } else {
+            $image = $this->createGdIconFreeType($text, $realSize, $rgb);
         }
 
         ob_start();
@@ -127,7 +113,7 @@ class FallbackIconGenerator {
      * @throws \Throwable
      */
     protected function createIconFromSvg(string $color, string $text, int $size): string {
-        $svg = file_get_contents(dirname(dirname(dirname(__DIR__))).'/img/default.svg');
+        $svg = file_get_contents(__DIR__.'/../../../img/default.svg');
 
         $svg = str_replace('#000', $color, $svg);
         $svg = str_replace('#TXT', $text, $svg);
@@ -162,5 +148,64 @@ class FallbackIconGenerator {
         }
 
         return '#'.$this->colors[ $number ];
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasFreeTypeSupport(): bool {
+        return function_exists('imagettfbbox') && function_exists('imagettftext');
+    }
+
+    /**
+     * @param string $text
+     * @param int    $realSize
+     * @param array  $rgb
+     *
+     * @return resource
+     */
+    protected function createGdIconNoFreeType(string $text, int $realSize, array $rgb) {
+        $image   = imagecreatetruecolor(24, 24);
+        $bgColor = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
+        imagefill($image, 0, 0, $bgColor);
+
+        $fgColor = imagecolorallocate($image, 255, 255, 255);
+        $fontX   = 12 - round(imagefontwidth(5) / 2.5);
+        $fontY   = 12 - round(imagefontheight(5) / 2);
+        imagestring($image, 5, $fontX, $fontY, $text, $fgColor);
+
+        if($realSize !== 24) {
+            $im = new \OC_Image($image);
+            $im->resize($realSize);
+            $image = $im->resource();
+        }
+
+        return $image;
+    }
+
+    /**
+     * @param string $text
+     * @param int    $realSize
+     * @param array  $rgb
+     *
+     * @return resource
+     */
+    protected function createGdIconFreeType(string $text, int $realSize, array $rgb) {
+        $center   = round($realSize / 2);
+        $fontSize = round($realSize * 0.50);
+
+        $image   = imagecreatetruecolor($realSize, $realSize);
+        $bgColor = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
+        imagefill($image, 0, 0, $bgColor);
+
+        $fontFile = __DIR__.'/../../../../../core/fonts/OpenSans-Regular.ttf';
+        $fontBox  = imagettfbbox($fontSize, 0, $fontFile, $text);
+        $fontY    = $center + (abs($fontBox[7])) / 2;
+        $fontX    = $center - (abs($fontBox[2]) + $realSize * 0.036) / 2;
+
+        $fgColor = imagecolorallocate($image, 255, 255, 255);
+        imagettftext($image, $fontSize, 0, $fontX, $fontY, $fgColor, $fontFile, $text);
+
+        return $image;
     }
 }

@@ -63,19 +63,18 @@ abstract class AbstractFaviconHelper {
 
     /**
      * @param string $domain
-     * @param int    $size
      *
      * @return ISimpleFile|null
      * @throws \Exception
      */
-    public function getFavicon(string $domain, int $size): ?ISimpleFile {
-        $faviconFile = $this->getFaviconFilename($domain, $size);
+    public function getFavicon(string $domain): ?ISimpleFile {
+        $faviconFile = $this->getFaviconFilename($domain);
 
         if($this->fileCacheService->hasFile($faviconFile)) {
             return $this->fileCacheService->getFile($faviconFile);
         }
 
-        $faviconData = $this->getFaviconData($domain, $size);
+        $faviconData = $this->getFaviconData($domain);
         if(empty($faviconData)) throw new \Exception('Favicon service returned no data');
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
@@ -88,8 +87,8 @@ abstract class AbstractFaviconHelper {
      * @return ISimpleFile|null
      * @throws \Throwable
      */
-    public function getDefaultFavicon(string $domain, int $size): ?ISimpleFile {
-        $fileName = $this->getFaviconFilename($domain, $size);
+    public function getDefaultFavicon(string $domain, int $size = 256): ?ISimpleFile {
+        $fileName = $this->getFaviconFilename($domain);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
@@ -106,7 +105,7 @@ abstract class AbstractFaviconHelper {
      *
      * @return string
      */
-    public function getFaviconFilename(string $domain, int $size): string {
+    public function getFaviconFilename(string $domain, int $size = null): string {
         if($size !== null) {
             return "{$this->prefix}_{$domain}_{$size}.png";
         }
@@ -128,23 +127,21 @@ abstract class AbstractFaviconHelper {
 
     /**
      * @param string $domain
-     * @param int    $size
      *
      * @return null|string
      */
-    protected function getFaviconData(string $domain, int $size): ?string {
-        $url = $this->getFaviconUrl($domain, $size);
+    protected function getFaviconData(string $domain): ?string {
+        $url = $this->getFaviconUrl($domain);
 
         return $this->getHttpRequest($url);
     }
 
     /**
      * @param string $domain
-     * @param int    $size
      *
      * @return string
      */
-    protected function getFaviconUrl(string $domain, int $size): string {
+    protected function getFaviconUrl(string $domain): string {
         return "http://{$domain}/favicon.ico";
     }
 }

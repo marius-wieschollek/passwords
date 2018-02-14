@@ -31,12 +31,11 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
 
     /**
      * @param string $domain
-     * @param int    $size
      *
      * @return null|string
      * @throws \Throwable
      */
-    protected function getFaviconData(string $domain, int $size): string {
+    protected function getFaviconData(string $domain): string {
         list($html, $url) = $this->getUrl('http://'.$domain);
 
         if(!empty($html)) {
@@ -60,7 +59,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
         list($data, , , $isIcon) = $this->getUrl($url."/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
-        return $this->getDefaultFavicon($domain, $size)->getContent();
+        return $this->getDefaultFavicon($domain)->getContent();
     }
 
     /**

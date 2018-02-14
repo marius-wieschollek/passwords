@@ -88,7 +88,7 @@ abstract class AbstractPreviewHelper {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $path    = dirname(dirname(dirname(__DIR__))).'/img/preview/preview_'.rand(1, 5).'.jpg';
+        $path    = __DIR__.'/../../../img/preview/preview_'.rand(1, 5).'.jpg';
         $content = file_get_contents($path);
 
         return $this->fileCacheService->putFile($fileName, $content);
