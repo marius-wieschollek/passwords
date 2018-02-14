@@ -33,7 +33,7 @@
     <form>
         <h3><?php p($l->t('Internal Data Processing')); ?></h3>
 
-        <div class="area datenverarbeitung">
+        <div class="area processing">
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
             <select id="passwords-image" name="passwords-favicon" name="image" data-setting="service/images">
                 <?php foreach($_['imageServices'] as $service): ?>

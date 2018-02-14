@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
-import ImportCsvConversionHelper from '@js/Helper/ImportCsvConversionHelper';
-import ImportJsonConversionHelper from '@js/Helper/ImportJsonConversionHelper';
+import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
+import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 
 /**
  *
