@@ -23,21 +23,18 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
      */
     protected $prefix = HelperService::FAVICON_GOOGLE;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $domain;
-
-    /** @var int */
-    protected $size = 32;
 
     /**
      * @param string $domain
-     * @param int    $size
      *
      * @return string
      */
-    protected function getFaviconUrl(string $domain, int $size): string {
+    protected function getFaviconUrl(string $domain): string {
         $this->domain = $domain;
-        $this->size   = $size;
 
         return 'https://www.google.com/s2/favicons?domain='.$domain;
     }
@@ -52,7 +49,7 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
         $result = parent::getHttpRequest($url);
 
         if(md5($result) === self::DEFAULT_ICON_MD5) {
-            return $this->getDefaultFavicon($this->domain, $this->size)->getContent();
+            return $this->getDefaultFavicon($this->domain)->getContent();
         };
 
         return $result;

@@ -25,11 +25,6 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected $prefix = HelperService::FAVICON_LOCAL;
 
     /**
-     * @var string
-     */
-    protected $icoFile;
-
-    /**
      * @param string $domain
      *
      * @return null|string
