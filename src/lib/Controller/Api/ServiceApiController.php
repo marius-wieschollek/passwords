@@ -77,13 +77,12 @@ class ServiceApiController extends AbstractApiController {
      * @param int  $strength
      * @param bool $numbers
      * @param bool $special
-     * @param bool $smileys
      *
      * @return JSONResponse
      * @throws ApiException
      */
-    public function generatePassword(int $strength = 1, bool $numbers = false, bool $special = false, bool $smileys = false): JSONResponse {
-        list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special, $smileys);
+    public function generatePassword(int $strength = 1, bool $numbers = false, bool $special = false): JSONResponse {
+        list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special);
 
         if(empty($password)) throw new ApiException('Unable to generate password');
 
@@ -93,8 +92,7 @@ class ServiceApiController extends AbstractApiController {
                 'words'    => $words,
                 'strength' => $strength,
                 'numbers'  => $numbers,
-                'special'  => $special,
-                'smileys'  => $smileys
+                'special'  => $special
             ]
         );
     }

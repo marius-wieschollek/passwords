@@ -32,6 +32,9 @@
                 <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
                     <translate say="Backup and Restore"/>
                 </router-link>
+                <router-link class="nav-icon-settings" to="/settings" active-class="active" tag="li">
+                    <translate say="Settings"/>
+                </router-link>
                 <translate tag="li" class="nav-icon-help" @click="openWikiPage" say="Handbook"/>
                 <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage" say="Browser Extension"/>
             </ul>
@@ -140,7 +143,7 @@
             transition       : max-height 0.25s ease-in-out;
 
             &.open {
-                max-height : 220px;
+                max-height : 264px;
 
                 li.nav-icon-more:before { content : "\f068"; }
             }
@@ -152,7 +155,7 @@
             max-height : 90px;
 
             &.open {
-                max-height : 225px;
+                max-height : 270px;
             }
         }
     }

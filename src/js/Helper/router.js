@@ -9,6 +9,7 @@ import SectionShared from '@vue/Section/Shared.vue';
 import SectionSecurity from '@vue/Section/Security.vue';
 import SectionTrash from '@vue/Section/Trash.vue';
 import SectionBackup from '@vue/Section/Backup.vue';
+import SectionSettings from '@vue/Section/Settings.vue';
 
 Vue.use(Router);
 
@@ -23,6 +24,7 @@ export default new Router(
             {name: "Shared", path: '/shared/:type?', components: {main: SectionShared}},
             {name: "Security", path: '/security/:status?', components: {main: SectionSecurity}},
             {name: "Backup", path: '/backup/:action?', components: {main: SectionBackup}},
+            {name: "Settings", path: '/settings', components: {main: SectionSettings}},
             {name: "Trash", path: '/trash', components: {main: SectionTrash}}
         ]
     }

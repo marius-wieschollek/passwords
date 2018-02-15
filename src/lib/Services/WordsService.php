@@ -48,7 +48,6 @@ class WordsService {
      * @param int  $strength
      * @param bool $addNumbers
      * @param bool $addSpecialCharacters
-     * @param bool $addSmileys
      *
      * @return array
      * @throws ApiException
@@ -56,8 +55,7 @@ class WordsService {
     public function getPassword(
         int $strength = 1,
         bool $addNumbers = false,
-        bool $addSpecialCharacters = false,
-        bool $addSmileys = false
+        bool $addSpecialCharacters = false
     ) {
         try {
             $this->retries++;
@@ -67,12 +65,11 @@ class WordsService {
             $words          = $wordsGenerator->getWords($strength);
             $password       = $this->wordsToPassword($words);
 
-            if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters, $addSmileys);
+            if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters);
 
             $amount = $strength == 1 ? 2:$strength;
             if($addNumbers) $password = $this->addNumbers($password, $amount);
             if($addSpecialCharacters) $password = $this->addSpecialCharacters($password, $amount);
-            if($addSmileys) $password = $this->addSmileys($password, $amount);
 
             return [$password, $words];
         } catch(\Throwable $e) {
@@ -113,18 +110,6 @@ class WordsService {
      */
     protected function addSpecialCharacters(string $word, int $amount): string {
         $list = ['e' => '€', 'a' => '@', 's' => '$', 'i' => '!'];
-
-        return $this->replaceCharacters($word, $amount, $list);
-    }
-
-    /**
-     * @param string $word
-     * @param int    $amount
-     *
-     * @return string
-     */
-    protected function addSmileys(string $word, int $amount): string {
-        $list = ['d' => ':D', 'p' => ';P', 'o' => ':O'];
 
         return $this->replaceCharacters($word, $amount, $list);
     }
