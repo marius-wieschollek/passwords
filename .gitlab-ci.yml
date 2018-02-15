@@ -4,11 +4,11 @@ stages:
   - packaging
   - publishing
 
-NPM:
+Compile:
   stage: compiling
   script:
-    - npm install
-    - npm run build
+    - yarn install
+    - yarn run build
   artifacts:
     paths:
       - ./src/js/Static/*
