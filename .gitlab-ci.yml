@@ -7,8 +7,8 @@ stages:
 Compile:
   stage: compiling
   script:
-    - yarn install
-    - yarn run build
+    - npm install
+    - npm run build
   artifacts:
     paths:
       - ./src/js/Static/*
