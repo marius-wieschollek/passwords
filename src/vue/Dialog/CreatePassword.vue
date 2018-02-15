@@ -1,17 +1,17 @@
 <template>
     <div class="background" id="passwords-create-new">
         <div class="window">
-            <div class="title nc-theming-main-background nc-theming-contrast">
+            <div class="title" :style="getTitleStyle">
                 <translate :say="title"/>
                 <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
             <form class="content" v-on:submit.prevent="submitAction()">
                 <div class="form left">
-                    <translate tag="div" class="section-title">General</translate>
+                    <translate tag="div" class="section-title" :style="getSectionStyle" say="General"/>
                     <div class="form-grid">
-                        <translate tag="label" for="password-username">Username</translate>
+                        <translate tag="label" for="password-username" say="Username"/>
                         <input id="password-username" type="text" name="username" maxlength="48" v-model="password.username" required>
-                        <translate tag="label" for="password-password">Password</translate>
+                        <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
@@ -19,9 +19,9 @@
                             </div>
                             <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required readonly>
                         </div>
-                        <translate tag="label" for="password-label">Name</translate>
+                        <translate tag="label" for="password-label" say="Name"/>
                         <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
-                        <translate tag="label" for="password-url">Website</translate>
+                        <translate tag="label" for="password-url" say="Website"/>
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
                     </div>
@@ -44,7 +44,7 @@
                     </foldout>
                 </div>
                 <div class="controls">
-                    <translate tag="input" class="nc-theming-main-background nc-theming-contrast" type="submit" value="Save"/>
+                    <translate tag="input" type="submit" value="Save"/>
                 </div>
             </form>
         </div>
@@ -90,8 +90,21 @@
                     status                 : false,
                     initialValue           : this.password.notes
                 });
-            ThemeManager.setBorderColor('#passwords-create-new .section-title');
             setTimeout(() => {$('#password-password').removeAttr('readonly');}, 250);
+        },
+
+        computed: {
+            getTitleStyle() {
+                return {
+                    color:ThemeManager.getContrastColor(),
+                    backgroundColor:ThemeManager.getColor()
+                }
+            },
+            getSectionStyle() {
+                return {
+                    borderColor:ThemeManager.getColor()
+                }
+            }
         },
 
         methods: {
@@ -176,8 +189,6 @@
                 align-items           : stretch;
 
                 .title {
-                    color            : $color-contrast;
-                    background-color : $color-theme;
                     grid-area        : title;
                     padding          : 1rem;
                     font-size        : 1.25rem;

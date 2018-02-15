@@ -65,21 +65,21 @@ class PageController extends Controller {
     /**
      * @var ConfigurationService
      */
-    protected $configurationService;
+    protected $config;
 
     /**
      * PageController constructor.
      *
      * @param string               $appName
      * @param null|string          $userId
-     * @param IUserManager         $userManager
      * @param IRequest             $request
      * @param ISession             $session
      * @param IL10N                $localisation
      * @param ISecureRandom        $random
      * @param IProvider            $tokenProvider
+     * @param IUserManager         $userManager
      * @param SimpleEncryption     $encryption
-     * @param ConfigurationService $configurationService
+     * @param ConfigurationService $config
      */
     public function __construct(
         string $appName,
@@ -91,17 +91,17 @@ class PageController extends Controller {
         IProvider $tokenProvider,
         IUserManager $userManager,
         SimpleEncryption $encryption,
-        ConfigurationService $configurationService
+        ConfigurationService $config
     ) {
         parent::__construct($appName, $request);
-        $this->random               = $random;
-        $this->userId               = $userId;
-        $this->session              = $session;
-        $this->encryption           = $encryption;
-        $this->localisation         = $localisation;
-        $this->tokenProvider        = $tokenProvider;
-        $this->configurationService = $configurationService;
-        $this->userManager          = $userManager;
+        $this->random        = $random;
+        $this->userId        = $userId;
+        $this->config        = $config;
+        $this->session       = $session;
+        $this->encryption    = $encryption;
+        $this->userManager   = $userManager;
+        $this->localisation  = $localisation;
+        $this->tokenProvider = $tokenProvider;
     }
 
     /**
@@ -141,8 +141,8 @@ class PageController extends Controller {
      */
     protected function generateToken(): string {
         try {
-            $token   = $this->configurationService->getUserValue(self::WEBUI_TOKEN, false);
-            $tokenId = $this->configurationService->getUserValue(self::WEBUI_TOKEN_ID, false);
+            $token   = $this->config->getUserValue(self::WEBUI_TOKEN, false);
+            $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
             if($token !== false && $tokenId !== false) {
                 try {
                     $iToken = $this->tokenProvider->getTokenById($tokenId);
@@ -157,8 +157,8 @@ class PageController extends Controller {
             $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->userId, null, $name, IToken::PERMANENT_TOKEN);
             $deviceToken->setScope(['filesystem' => false]);
             $this->tokenProvider->updateToken($deviceToken);
-            $this->configurationService->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
-            $this->configurationService->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
+            $this->config->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
+            $this->config->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
 
             return $token;
         } catch(\Throwable $e) {
@@ -182,14 +182,14 @@ class PageController extends Controller {
      *
      */
     protected function destroyToken(): void {
-        $tokenId = $this->configurationService->getUserValue(self::WEBUI_TOKEN_ID, false);
+        $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
         if($tokenId !== false) {
             $this->tokenProvider->invalidateTokenById(
                 $this->userManager->get($this->userId),
                 $tokenId
             );
-            $this->configurationService->deleteUserValue(self::WEBUI_TOKEN);
-            $this->configurationService->deleteUserValue(self::WEBUI_TOKEN_ID);
+            $this->config->deleteUserValue(self::WEBUI_TOKEN);
+            $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
         }
     }
 
@@ -197,7 +197,7 @@ class PageController extends Controller {
      * @return string
      */
     protected function getServerVersion(): string {
-        $version = $this->configurationService->getSystemValue('version');
+        $version = $this->config->getSystemValue('version');
 
         return explode('.', $version, 2)[0];
     }

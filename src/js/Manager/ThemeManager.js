@@ -1,55 +1,23 @@
 /**
  *
  */
-class ThemeManager {
-
-    constructor() {
-        this._color = '#0082C9';
-        this._contrastColor = '#fff';
-
-        if(OCA.Theming) {
-            this._color = OCA.Theming.color;
-            this._contrastColor = OCA.Theming.inverted ? '#000':'#fff';
-
-        }
-    }
+export default class ThemeManager {
 
     /**
      *
-     * @param selector
-     * @param contrast
+     * @returns {string|*}
      */
-    setBorderColor(selector, contrast = false) {
-        this.setCssProperty(selector, 'border-color', contrast);
-    }
-
-    /**
-     *
-     * @param selector
-     * @param property
-     * @param contrast
-     */
-    setCssProperty(selector, property, contrast = false) {
-        $(selector).css(property, contrast ? this._contrastColor:this._color);
+    static getColor() {
+        return OCA.Theming ? OCA.Theming.color:'#0082C9';
     }
 
     /**
      *
      * @returns {string|*}
      */
-    getColor() {
-        return this._color;
-    }
+    static getContrastColor() {
+        if(! OCA.Theming) return '#fff';
 
-    /**
-     *
-     * @returns {string|*}
-     */
-    getContrastColor() {
-        return this._contrastColor;
+        return OCA.Theming.inverted ? '#545454':'#fff';
     }
 }
-
-let TM = new ThemeManager();
-
-export default TM;

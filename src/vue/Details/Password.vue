@@ -15,7 +15,7 @@
                 <translate tag="div" say="Password">
                     <span @mouseover="showPw=true" @mouseout="showPw=false" class="password">{{ showPassword }}</span>
                 </translate>
-                <translate tag="div" say="Website"><a :href="object.url" target="_blank">{{ object.url }}</a></translate>
+                <translate tag="div" say="Website"><a :href="object.url" target="_blank" :style="getLinkStyle">{{ object.url }}</a></translate>
 
                 <translate tag="div" say="Statistics" class="header"/>
                 <translate tag="div" say="Created on"><span>{{ object.created.toLocaleDateString() }} {{ object.created.toLocaleTimeString() }}</span></translate>
@@ -81,7 +81,7 @@
     import Sharing from '@vc/Sharing';
     import Translate from '@vc/Translate';
     import Events from "@js/Classes/Events";
-    import QrCode from 'vue-qrcode-component'
+    import QrCode from 'vue-qrcode-component';
     import Utility from "@js/Classes/Utility";
     import ImageContainer from '@vc/ImageContainer';
     import ThemeManager from '@js/Manager/ThemeManager';
@@ -107,13 +107,12 @@
             return {
                 qrcode : {
                     color  : ThemeManager.getColor(),
-                    bgColor: ThemeManager.getContrastColor(),
                     text   : this.password.password
                 },
                 qrModel: 'password',
                 object : this.password,
                 showPw : false
-            }
+            };
         },
 
         created() {
@@ -121,15 +120,15 @@
         },
 
         beforeDestroy() {
-            Events.off('password.changed', this.refreshView)
+            Events.off('password.changed', this.refreshView);
         },
 
         computed: {
             getNotes() {
-                return marked(this.object.notes, {breaks:true});
+                return marked(this.object.notes, {breaks: true});
             },
             getRevisions() {
-                return Utility.sortApiObjectArray(this.object.revisions, 'created', false)
+                return Utility.sortApiObjectArray(this.object.revisions, 'created', false);
             },
             countShares() {
                 let count = 0;
@@ -155,6 +154,11 @@
             },
             showPreview() {
                 return window.innerWidth < 641;
+            },
+            getLinkStyle() {
+                return {
+                    color: ThemeManager.getColor()
+                };
             }
         },
 
@@ -168,15 +172,15 @@
                 this.$parent.detail = {
                     type   : 'none',
                     element: null
-                }
+                };
             },
             restoreAction(revision) {
-                PasswordManager.restoreRevision(this.object, revision)
+                PasswordManager.restoreRevision(this.object, revision);
             },
             refreshView(event) {
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {this.object = p;})
+                       .then((p) => {this.object = p;});
                 }
             }
         },
@@ -192,7 +196,7 @@
                 this.qrcode.text = this.object[value];
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
@@ -278,7 +282,6 @@
                 }
 
                 a {
-                    color  : $color-theme;
                     cursor : pointer;
 
                     &:hover {

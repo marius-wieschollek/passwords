@@ -30,8 +30,7 @@
                 observer   : null,
                 maxHeight  : 0,
                 open       : false,
-                firstOpen  : true,
-                borderColor: ThemeManager.getColor()
+                firstOpen  : true
             };
         },
 
@@ -49,7 +48,7 @@
             titleStyle() {
                 if(this.open) {
                     return {
-                        'border-color': ThemeManager.getColor()
+                        borderColor: ThemeManager.getColor()
                     };
                 }
 

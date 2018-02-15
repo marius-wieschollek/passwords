@@ -7,7 +7,7 @@
             </li>
         </ul>
         <input type="text" :placeholder="placeholder" class="add-tags" v-model="inputText" @keyup="keyUpAction($event)">
-        <ul class="tag-search" v-if="searchResults">
+        <ul class="tag-search" v-if="searchResults" :style="getPopupStyle">
             <li class="result"
                 v-for="match in searchResults"
                 :key="match.id"
@@ -23,6 +23,7 @@
     import API from '@js/Helper/api';
     import Utility from "@js/Classes/Utility";
     import TagManager from '@js/Manager/TagManager';
+    import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
     export default {
@@ -40,18 +41,26 @@
                 allTags      : [],
                 inputText    : '',
                 searchResults: [],
-                wasBackspace : false,
-            }
+                wasBackspace : false
+            };
         },
 
         created() {
             this.loadTags();
         },
 
+        computed: {
+            getPopupStyle() {
+                return {
+                    border: '1px solid ' + ThemeManager.getColor()
+                };
+            }
+        },
+
         methods: {
             loadTags       : function() {
                 API.listTags()
-                    .then((t) => { this.allTags = Utility.objectToArray(t); })
+                   .then((t) => { this.allTags = Utility.objectToArray(t); });
             },
             keyUpAction    : function($e) {
                 let key = $e.keyCode;
@@ -110,10 +119,10 @@
                 }
 
                 TagManager.createTagFromData({label: label})
-                    .then((tag) => {
-                        this.allTags.push(tag);
-                        this.addTag(tag);
-                    })
+                          .then((tag) => {
+                              this.allTags.push(tag);
+                              this.addTag(tag);
+                          });
             },
             removeLastTag  : function() {
                 this.tags.pop();
@@ -149,7 +158,7 @@
                                 top  : (position.top + $input.outerHeight()) + 'px',
                                 left : position.left + 'px',
                                 width: $input.outerWidth()
-                            })
+                            });
             }
         },
 
@@ -201,8 +210,7 @@
 
         .tag-search {
             position         : absolute;
-            border           : 1px solid $color-theme;
-            background-color : $color-contrast;
+            background-color : $color-white;
             border-radius    : 2px;
             max-height       : 120px;
             overflow-y       : auto;
