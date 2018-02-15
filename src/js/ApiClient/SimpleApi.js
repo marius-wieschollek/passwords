@@ -20,17 +20,12 @@ export default class SimpleApi {
     /**
      * SimpleApi Constructor
      *
-     * @param endpoint
-     * @param username
-     * @param password
      * @param debug
      */
-    constructor(endpoint, username = null, password = null, debug = false) {
+    constructor(debug = false) {
         this._debug = debug;
 
         this._headers = {};
-        this.login(endpoint, username, password);
-
         this._encryption = new Encryption();
         this._paths = {
             'tag.list'            : 'api/1.0/tag/list',

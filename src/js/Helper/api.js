@@ -8,12 +8,12 @@ class PwApi extends EnhancedApi {
             return;
         }
 
-        super(location.origin, null, null, debug);
+        super(debug);
 
-        this.count = 0;
         this.isLoaded = false;
         this.loadInterval = setInterval(() => {this.initializePwApi()}, 10);
         $(window).on('load', () => {this.initializePwApi()});
+
     }
 
     initializePwApi() {

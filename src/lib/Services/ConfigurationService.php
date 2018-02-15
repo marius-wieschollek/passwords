@@ -131,6 +131,15 @@ class ConfigurationService {
     }
 
     /**
+     * @param string $appName
+     *
+     * @return bool
+     */
+    public function isAppEnabled(string $appName): bool {
+        return $this->config->getAppValue($appName, 'enabled', 'no') === 'yes';
+    }
+
+    /**
      * @return IConfig
      */
     public function getConfig() {

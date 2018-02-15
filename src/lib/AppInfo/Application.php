@@ -127,7 +127,6 @@ class Application extends App {
         $container->registerAlias('SettingsApiController', SettingsApiController::class);
         $container->registerAlias('ServiceApiController', ServiceApiController::class);
         $container->registerAlias('FolderApiController', FolderApiController::class);
-        $container->registerAlias('ShareApiController', ShareApiController::class);
         $container->registerAlias('TagApiController', TagApiController::class);
 
         $container->registerService(ShareApiController::class,

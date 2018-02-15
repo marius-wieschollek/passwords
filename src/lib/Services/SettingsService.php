@@ -35,6 +35,18 @@ class SettingsService {
     protected $urlGenerator;
 
     /**
+     * @var array
+     */
+    protected $userSettings
+        = [
+            'password.generator.strength' => 'integer',
+            'password.generator.numbers'  => 'boolean',
+            'password.generator.special'  => 'boolean',
+            'password.generator.smileys'  => 'boolean',
+            'password.default.label'      => 'integer'
+        ];
+
+    /**
      * SettingsService constructor.
      *
      * @param ConfigurationService $config
@@ -57,6 +69,8 @@ class SettingsService {
         list($scope, $subKey) = explode('.', $key, 2);
 
         switch($scope) {
+            case 'user':
+                return $this->getUserValue($subKey);
             case 'server':
                 return $this->getServerValue($subKey);
             case 'theme':
@@ -64,6 +78,19 @@ class SettingsService {
         }
 
         throw new ApiException('Invalid Scope');
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return null|string
+     */
+    public function getUserValue(string $key) {
+        if(isset($this->userSettings, $key)) {
+            return $this->config->getUserValue('settings.'.$key, null);
+        }
+
+        return null;
     }
 
     /**
@@ -87,24 +114,32 @@ class SettingsService {
      */
     protected function getThemeValue(string $key) {
         switch($key) {
-            case 'theme.color':
+            case 'color':
                 return $this->theming->getColorPrimary();
-            case 'theme.background':
+            case 'text.color':
+                return $this->theming->getTextColorPrimary();
+            case 'background':
                 if(method_exists($this->theming, 'getBackground')) {
                     $url = $this->theming->getBackground();
                 } else {
                     list($version,) = explode('.', $this->config->getSystemValue('version'), 2);
                     $url = $this->urlGenerator->imagePath('core', 'background.'.($version === '12' ? 'jpg':'png'));
                 }
-                if($this->config->getConfig()->getAppValue('unsplash', 'enabled', 'no') === 'yes') {
+                if($this->config->isAppEnabled('unsplash')) {
                     return 'https://source.unsplash.com/random/featured';
                 }
 
                 return $this->urlGenerator->getAbsoluteURL($url);
-            case 'theme.logo':
+            case 'logo':
                 return $this->urlGenerator->getAbsoluteURL($this->theming->getLogo());
-            case 'theme.label':
+            case 'label':
                 return $this->theming->getEntity();
+            case 'folder.icon':
+                if($this->config->isAppEnabled('theming')) {
+                    return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg']);
+                }
+
+                return $this->urlGenerator->imagePath('core', 'filetypes/folder.svg');
         }
 
         return null;

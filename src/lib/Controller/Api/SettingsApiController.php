@@ -46,7 +46,6 @@ class SettingsApiController extends AbstractApiController {
      * @throws \OCA\Passwords\Exception\ApiException
      */
     public function get(string $key): JSONResponse {
-
         return $this->createJsonResponse($this->settings->get($key));
     }
 

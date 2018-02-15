@@ -3,25 +3,36 @@ import SimpleApi from './SimpleApi';
 export default class EnhancedApi extends SimpleApi {
 
     /**
-     * EnhancedApi Constructor
-     *
-     * @param endpoint
-     * @param username
-     * @param password
-     * @param debug
-     */
-    constructor(endpoint, username = null, password = null, debug = false) {
-        super(endpoint + '/index.php/apps/passwords/', username, password, debug);
-        this._baseUrl = endpoint;
-    }
-
-    /**
      *
      * @param numeric
      * @returns {*}
      */
     static getClientVersion(numeric = false) {
         return numeric ? 100:'0.1.0';
+    }
+
+    /**
+     *
+     * @param endpoint
+     * @param username
+     * @param password
+     * @returns {Promise<void>}
+     */
+    async login(endpoint, username = null, password = null) {
+        super.login(endpoint, username, password);
+
+        this._folderIcon = endpoint + '/core/img/filetypes/folder.svg';
+        if(username !== null && password !== null) {
+            if(window.localStorage.folderIcon) {
+                this._folderIcon = window.localStorage.folderIcon
+            }
+
+            this.getSetting('theme.folder.icon')
+                .then((url) => {
+                    window.localStorage.folderIcon = url;
+                    this._folderIcon = url;
+                });
+        }
     }
 
 
@@ -680,7 +691,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     _processFolder(folder) {
         folder.type = 'folder';
-        folder.icon = this._baseUrl + '/core/img/filetypes/folder.svg';
+        folder.icon = this._folderIcon;
         if(folder.folders) {
             folder.folders = this._processFolderList(folder.folders);
         }
