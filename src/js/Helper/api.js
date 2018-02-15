@@ -2,13 +2,13 @@ import $ from "jquery";
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
 class PwApi extends EnhancedApi {
-    constructor(debug = false) {
+    constructor() {
         if(location.protocol !== 'https:') {
             location.href = location.origin + location.pathname + '?https=false';
             return;
         }
 
-        super(debug);
+        super(process.env.NODE_ENV !== 'production');
 
         this.isLoaded = false;
         this.loadInterval = setInterval(() => {this.initializePwApi()}, 10);
@@ -31,6 +31,6 @@ class PwApi extends EnhancedApi {
     }
 }
 
-const api = new PwApi(true);
+const api = new PwApi();
 
 export default api;
