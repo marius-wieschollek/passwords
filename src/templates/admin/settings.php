@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 26.08.17
- * Time: 18:22
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 /** @var $_ array */

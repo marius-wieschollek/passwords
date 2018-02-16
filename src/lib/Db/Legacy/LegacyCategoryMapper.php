@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 27.12.17
- * Time: 23:27
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Db\Legacy;

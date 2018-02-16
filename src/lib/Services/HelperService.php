@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 11.09.17
- * Time: 21:29
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Services;
@@ -23,7 +22,6 @@ use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
 use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
 use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WkhtmlImageHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
