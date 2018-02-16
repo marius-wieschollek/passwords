@@ -25,7 +25,8 @@ class PwApi extends EnhancedApi {
             let password = document.querySelector('meta[pwui-token]').getAttribute('pwui-token');
             if(!password) password = prompt('Enter Nextcloud Password');
 
-            this.login(location.origin + '/index.php/apps/passwords/', user, password);
+            let baseUrl = location.href.substr(0, location.href.indexOf('index.php'));
+            this.login(baseUrl, user, password);
             window.initializePw();
         }
     }

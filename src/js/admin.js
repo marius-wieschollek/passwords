@@ -4,9 +4,14 @@ class PasswordsAdminSettings {
 
     constructor() {
         this._timer = {success: null, error: null};
+        this.cacheUrl = '';
+        this.settingsUrl = '';
     }
 
     initialize() {
+        this.cacheUrl = $('[data-constant="cacheUrl"]').data().value;
+        this.settingsUrl = $('[data-constant="settingsUrl"]').data().value;
+
         $('[data-setting]').on(
             'change',
             (e) => {
@@ -29,7 +34,7 @@ class PasswordsAdminSettings {
 
                 $target.parent().find('label').text(label);
 
-                PasswordsAdminSettings._clearCache(cache);
+                this._clearCache(cache);
             }
         );
 
@@ -55,7 +60,7 @@ class PasswordsAdminSettings {
      * @private
      */
     _setValue(key, value) {
-        $.post('/index.php/apps/passwords/admin/set', {'key': key, 'value': value})
+        $.post(this.settingsUrl, {'key': key, 'value': value})
          .success(() => {this._showMessage('success');})
          .fail(() => {this._showMessage('error');});
     }
@@ -83,8 +88,8 @@ class PasswordsAdminSettings {
      * @param key
      * @private
      */
-    static _clearCache(key) {
-        $.post('/index.php/apps/passwords/admin/cache', {'key': key});
+    _clearCache(key) {
+        $.post(this.cacheUrl, {'key': key});
     }
 
     /**

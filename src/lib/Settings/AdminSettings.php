@@ -20,6 +20,7 @@ use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
+use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
 
 /**
@@ -37,6 +38,11 @@ class AdminSettings implements ISettings {
     protected $config;
 
     /**
+     * @var IURLGenerator
+     */
+    protected $urlGenerator;
+
+    /**
      * @var IL10N
      */
     protected $localisation;
@@ -50,13 +56,20 @@ class AdminSettings implements ISettings {
      * AdminSettings constructor.
      *
      * @param IL10N                $localisation
+     * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
-    public function __construct(IL10N $localisation, ConfigurationService $config, FileCacheService $fileCacheService) {
+    public function __construct(
+        IL10N $localisation,
+        IURLGenerator $urlGenerator,
+        ConfigurationService $config,
+        FileCacheService $fileCacheService
+    ) {
         $this->localisation     = $localisation;
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
+        $this->urlGenerator     = $urlGenerator;
     }
 
     /**
@@ -64,6 +77,8 @@ class AdminSettings implements ISettings {
      */
     public function getForm(): TemplateResponse {
         return new TemplateResponse('passwords', 'admin/index', [
+            'saveSettingsUrl'  => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.set'),
+            'clearCacheUrl'    => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.cache'),
             'documentationUrl' => self::DOCUMENTATION_URL,
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),

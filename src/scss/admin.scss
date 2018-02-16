@@ -1,4 +1,9 @@
 #passwords {
+    [data-constant] {
+        display    : none;
+        visibility : hidden;
+    }
+
     .msg.error,
     .msg.success {
         font-size     : 0.65em;

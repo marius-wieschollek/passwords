@@ -139,7 +139,9 @@ class SettingsService {
                     return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg']);
                 }
 
-                return $this->urlGenerator->imagePath('core', 'filetypes/folder.svg');
+                return $this->urlGenerator->getAbsoluteURL(
+                    $this->urlGenerator->imagePath('core', 'filetypes/folder.svg')
+                );
         }
 
         return null;

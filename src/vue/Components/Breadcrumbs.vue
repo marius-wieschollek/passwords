@@ -3,7 +3,7 @@
         <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
-                <a href="/index.php/apps/passwords"><img class="svg" src="/core/img/places/home.svg" alt="Home"></a>
+                <a href="#"><img class="svg" :src="getHomeIcon" alt="Home"></a>
             </div>
             <div class="crumb svg" v-for="(item, index) in getItems" :class="{current:index === getItems.length - 1}">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
@@ -45,6 +45,7 @@
 
 <script>
     import $ from "jquery";
+    import API from '@js/Helper/api';
     import Utility from '@js/Classes/Utility';
     import Translate from '@vc/Translate.vue';
     import TagManager from '@js/Manager/TagManager';
@@ -54,18 +55,6 @@
     export default {
         components: {
             Translate
-        },
-
-        computed: {
-            getItems() {
-                if(this.items.length === 0) {
-                    return [
-                        {path: this.$route.path, label: Utility.translate(this.$route.name)}
-                    ];
-                }
-
-                return this.items;
-            }
         },
 
         props: {
@@ -102,6 +91,21 @@
             return {
                 showMenu: false
             };
+        },
+
+        computed: {
+            getHomeIcon() {
+                return API.baseUrl + 'core/img/places/home.svg';
+            },
+            getItems() {
+                if(this.items.length === 0) {
+                    return [
+                        {path: this.$route.path, label: Utility.translate(this.$route.name)}
+                    ];
+                }
+
+                return this.items;
+            }
         },
 
         methods: {

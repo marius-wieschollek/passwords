@@ -10,6 +10,8 @@
 ?>
 
 <section id="passwords" class="section">
+    <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
+    <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
     <h2>
         <?php p($l->t('Passwords')); ?>
         <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<?php p($l->t('Open documentation'));?>" href="<?=$_['documentationUrl']?>"></a>

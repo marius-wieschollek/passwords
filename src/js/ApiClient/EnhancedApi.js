@@ -2,6 +2,10 @@ import SimpleApi from './SimpleApi';
 
 export default class EnhancedApi extends SimpleApi {
 
+    get baseUrl() {
+        return this._baseUrl;
+    }
+
     /**
      *
      * @param numeric
@@ -13,15 +17,16 @@ export default class EnhancedApi extends SimpleApi {
 
     /**
      *
-     * @param endpoint
+     * @param baseUrl
      * @param username
      * @param password
      * @returns {Promise<void>}
      */
-    async login(endpoint, username = null, password = null) {
-        super.login(endpoint, username, password);
+    async login(baseUrl, username = null, password = null) {
+        super.login(baseUrl + 'index.php/apps/passwords/', username, password);
 
-        this._folderIcon = endpoint + '/core/img/filetypes/folder.svg';
+        this._baseUrl = baseUrl;
+        this._folderIcon = baseUrl + 'core/img/filetypes/folder.svg';
         if(username !== null && password !== null) {
             if(window.localStorage.folderIcon) {
                 this._folderIcon = window.localStorage.folderIcon
