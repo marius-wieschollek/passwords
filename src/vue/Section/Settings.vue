@@ -1,6 +1,8 @@
 <template>
     <div id="app-content">
         <div class="app-content-left settings">
+            Coming soon
+            <!--
             <section>
                 <translate tag="h1" say="Security"/>
                 <translate tag="h3" say="Password Generation"/>
@@ -16,12 +18,12 @@
                 <input type="checkbox" id="setting-include-special">
                 <translate tag="label" for="setting-include-special" say="Include special charaters"/>
             </section>
+            -->
         </div>
     </div>
 </template>
 
 <script>
-
     import Translate from "@/vue/Components/Translate";
 
     export default {
