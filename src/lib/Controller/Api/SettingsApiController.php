@@ -7,9 +7,11 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use OCP\PreConditionNotMetException;
 
 /**
  * Class SettingsApiController
@@ -57,10 +59,11 @@ class SettingsApiController extends AbstractApiController {
      * @param null   $value
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws PreConditionNotMetException
      */
     public function set(string $key, $value = null): JSONResponse {
-
-        return $this->createJsonResponse(['status' => 'ok']);
+        $this->createJsonResponse(['status' => 'ok']);
     }
 
     /**

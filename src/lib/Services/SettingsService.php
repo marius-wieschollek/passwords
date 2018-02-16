@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use OC_Defaults;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Theming\ThemingDefaults;
 use OCP\IURLGenerator;
@@ -41,7 +42,6 @@ class SettingsService {
             'password.generator.strength' => 'integer',
             'password.generator.numbers'  => 'boolean',
             'password.generator.special'  => 'boolean',
-            'password.generator.smileys'  => 'boolean',
             'password.default.label'      => 'integer'
         ];
 
@@ -49,10 +49,10 @@ class SettingsService {
      * SettingsService constructor.
      *
      * @param ConfigurationService $config
-     * @param \OC_Defaults         $theming
+     * @param OC_Defaults          $theming
      * @param IURLGenerator        $urlGenerator
      */
-    public function __construct(ConfigurationService $config, \OC_Defaults $theming, IURLGenerator $urlGenerator) {
+    public function __construct(ConfigurationService $config, OC_Defaults $theming, IURLGenerator $urlGenerator) {
         $this->config       = $config;
         $this->theming      = $theming;
         $this->urlGenerator = $urlGenerator;
@@ -62,7 +62,6 @@ class SettingsService {
      * @param string $key
      *
      * @return mixed
-     * @throws ApiException
      */
     public function get(string $key) {
         list($scope, $subKey) = explode('.', $key, 2);
@@ -70,13 +69,15 @@ class SettingsService {
         switch($scope) {
             case 'user':
                 return $this->getUserValue($subKey);
+            case 'client':
+                return $this->getClientValue($subKey);
             case 'server':
                 return $this->getServerValue($subKey);
             case 'theme':
                 return $this->getThemeValue($subKey);
         }
 
-        throw new ApiException('Invalid Scope');
+        return null;
     }
 
     /**
@@ -84,9 +85,27 @@ class SettingsService {
      *
      * @return null|string
      */
-    public function getUserValue(string $key) {
+    protected function getUserValue(string $key) {
         if(isset($this->userSettings, $key)) {
-            return $this->config->getUserValue('settings.'.$key, null);
+            $type  = $this->userSettings[ $key ];
+            $key   = str_replace('.', '/', $key);
+            $value = $this->config->getUserValue($key, null);
+
+            return $this->castValue($type, $value);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return null
+     */
+    protected function getClientValue(string $key) {
+        $data = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+        if(isset($data[ $key ])) {
+            return $data[ $key ];
         }
 
         return null;
@@ -144,5 +163,81 @@ class SettingsService {
         }
 
         return null;
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     *
+     * @throws ApiException
+     * @throws \OCP\PreConditionNotMetException
+     */
+    public function set(string $key, $value) {
+        list($scope, $subKey) = explode('.', $key, 2);
+
+        switch($scope) {
+            case 'user':
+                $this->setUserValue($subKey, $value);
+                break;
+            case 'client':
+                $this->setClientValue($subKey, $value);
+                break;
+        }
+
+        throw new ApiException('Invalid Key');
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     *
+     * @throws \OCP\PreConditionNotMetException
+     * @throws ApiException
+     */
+    protected function setUserValue(string $key, $value): void {
+        if(isset($this->userSettings, $key)) {
+            $key = str_replace('.', '/', $key);
+            $this->config->setUserValue($key, strval($value));
+        }
+
+        throw new ApiException('Invalid Key');
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     *
+     * @throws \OCP\PreConditionNotMetException
+     * @throws ApiException
+     */
+    protected function setClientValue(string $key, $value): void {
+        if(strlen($key) > 16) {
+            throw new ApiException('Key too long');
+        }
+        if(strlen(strval($value)) > 36) {
+            throw new ApiException('Value too long');
+        }
+
+        $data         = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+        $data[ $key ] = $value;
+        $this->config->setUserValue('client/settings', json_encode($data));
+    }
+
+    /**
+     * @param string $type
+     * @param        $value
+     *
+     * @return bool|float|int|string
+     */
+    protected function castValue(string $type, $value) {
+        if($type === 'integer') {
+            return intval($value);
+        } else if($type === 'float') {
+            return floatval($value);
+        } else if($type === 'boolean') {
+            return boolval($value);
+        }
+
+        return strval($value);
     }
 }

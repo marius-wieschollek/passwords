@@ -16,6 +16,11 @@ use OC\Hooks\BasicEmitter;
  */
 class HookManager extends BasicEmitter {
 
+    /**
+     * @param string $scope
+     * @param string $method
+     * @param array  $arguments
+     */
     public function emit($scope, $method, array $arguments = []): void {
         parent::emit($scope, $method, $arguments);
     }
