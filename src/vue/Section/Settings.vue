@@ -5,7 +5,7 @@
                 <translate tag="h1" say="Security"/>
                 <translate tag="h3" say="Password Generator"/>
 
-                <translate tag="label" for="setting-security-level" say="Security level"/>
+                <translate tag="label" for="setting-security-level" say="Password strength"/>
                 <select id="setting-security-level" v-model="user['password.generator.strength']">
                     <option value="1">1</option>
                     <option value="2">2</option>
