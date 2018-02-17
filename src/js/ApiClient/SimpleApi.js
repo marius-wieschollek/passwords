@@ -73,7 +73,7 @@ export default class SimpleApi {
             'service.coffee'      : 'api/1.0/service/coffee',
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
-            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
+            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}'
         };
     }
 
@@ -98,7 +98,7 @@ export default class SimpleApi {
      * @returns {*}
      */
     static getClientVersion(numeric = false) {
-        return numeric ? 100:'0.1.0';
+        return numeric ? 20:'0.2.0';
     }
 
 
@@ -417,9 +417,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findSharePartners(search = '') {
-        if(search.length === 0) {
-            return this._createRequest('share.partners');
-        }
+        if(search.length === 0) return this._createRequest('share.partners');
         return this._createRequest('share.partners', {search: search}, 'POST');
     }
 
@@ -430,6 +428,19 @@ export default class SimpleApi {
 
     getSetting(key) {
         return this._createRequest('settings.get', {key: key}, 'POST');
+    }
+
+    setSetting(key, value) {
+        return this._createRequest('settings.set', {key: key, value: value}, 'POST');
+    }
+
+    resetSetting(key) {
+        return this._createRequest('settings.reset', {key: key}, 'POST');
+    }
+
+    listSettings(scope = null) {
+        if(scope === null) return this._createRequest('settings.list');
+        return this._createRequest('settings.list', {scope: scope}, 'POST');
     }
 
 
@@ -455,7 +466,7 @@ export default class SimpleApi {
             'strength': strength,
             'numbers' : useNumbers,
             'special' : useSpecialCharacters,
-            'smileys' : useSmileys,
+            'smileys' : useSmileys
         });
     }
 
@@ -583,23 +594,23 @@ export default class SimpleApi {
                 .then((response) => {
                     if(!response.ok) {
                         if(this._debug) console.error('Request failed', response);
-                        reject(response)
+                        reject(response);
                     }
                     let contentType = response.headers.get("content-type");
                     if(contentType && contentType.indexOf("application/json") !== -1) {
                         response.json()
-                            .then((d) => {resolve(d);})
-                            .catch((response) => {
-                                if(this._debug) console.error('Encoding response failed', response);
-                                reject(response)
-                            })
+                                .then((d) => {resolve(d);})
+                                .catch((response) => {
+                                    if(this._debug) console.error('Encoding response failed', response);
+                                    reject(response);
+                                });
                     } else {
                         resolve(response.blob());
                     }
                 })
                 .catch((response) => {
                     if(this._debug) console.error('Request failed', response);
-                    reject(response)
+                    reject(response);
                 });
         });
     }

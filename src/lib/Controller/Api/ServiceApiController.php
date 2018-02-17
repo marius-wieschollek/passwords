@@ -9,6 +9,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\AvatarService;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Services\WordsService;
@@ -24,6 +25,11 @@ use OCP\IRequest;
  * @package OCA\Passwords\Controller
  */
 class ServiceApiController extends AbstractApiController {
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
 
     /**
      * @var WordsService
@@ -49,15 +55,17 @@ class ServiceApiController extends AbstractApiController {
      * ServiceApiController constructor.
      *
      * @param IRequest              $request
+     * @param WordsService          $wordsService
      * @param AvatarService         $avatarService
+     * @param ConfigurationService  $config
      * @param FaviconService        $faviconService
      * @param WebsitePreviewService $previewService
-     * @param WordsService          $wordsService
      */
     public function __construct(
         IRequest $request,
         WordsService $wordsService,
         AvatarService $avatarService,
+        ConfigurationService $config,
         FaviconService $faviconService,
         WebsitePreviewService $previewService
     ) {
@@ -66,6 +74,7 @@ class ServiceApiController extends AbstractApiController {
         $this->wordsService   = $wordsService;
         $this->previewService = $previewService;
         $this->avatarService  = $avatarService;
+        $this->config         = $config;
     }
 
     /**
@@ -80,9 +89,12 @@ class ServiceApiController extends AbstractApiController {
      * @return JSONResponse
      * @throws ApiException
      */
-    public function generatePassword(int $strength = 1, bool $numbers = false, bool $special = false): JSONResponse {
-        list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special);
+    public function generatePassword(?int $strength = null, ?bool $numbers = null, ?bool $special = null): JSONResponse {
+        if($strength === null) $strength = $this->config->getUserValue('password/generator/strength', 1);
+        if($numbers === null) $numbers = $this->config->getUserValue('password/generator/numbers', false);
+        if($special === null) $special = $this->config->getUserValue('password/generator/special', false);
 
+        list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special);
         if(empty($password)) throw new ApiException('Unable to generate password');
 
         return $this->createJsonResponse(

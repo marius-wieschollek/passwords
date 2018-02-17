@@ -12,7 +12,7 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {*}
      */
     static getClientVersion(numeric = false) {
-        return numeric ? 100:'0.1.0';
+        return numeric ? 20:'0.2.0';
     }
 
     /**
@@ -29,7 +29,7 @@ export default class EnhancedApi extends SimpleApi {
         this._folderIcon = baseUrl + 'core/img/filetypes/folder.svg';
         if(username !== null && password !== null) {
             if(window.localStorage.folderIcon) {
-                this._folderIcon = window.localStorage.folderIcon
+                this._folderIcon = window.localStorage.folderIcon;
             }
 
             this.getSetting('theme.folder.icon')
@@ -99,8 +99,8 @@ export default class EnhancedApi extends SimpleApi {
     showPassword(id, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.showPassword(id, detailLevel)
-                .then((data) => { resolve(this._processPassword(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processPassword(data)); })
+                 .catch(reject);
         });
     }
 
@@ -113,8 +113,8 @@ export default class EnhancedApi extends SimpleApi {
     listPasswords(detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.listPasswords(detailLevel)
-                .then((data) => { resolve(this._processPasswordList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processPasswordList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -128,8 +128,8 @@ export default class EnhancedApi extends SimpleApi {
     findPasswords(criteria = {}, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.findPasswords(criteria, detailLevel)
-                .then((data) => { resolve(this._processPasswordList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processPasswordList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -188,8 +188,8 @@ export default class EnhancedApi extends SimpleApi {
     showFolder(id, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.showFolder(id, detailLevel)
-                .then((data) => { resolve(this._processFolder(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processFolder(data)); })
+                 .catch(reject);
         });
     }
 
@@ -202,8 +202,8 @@ export default class EnhancedApi extends SimpleApi {
     listFolders(detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.listFolders(detailLevel)
-                .then((data) => { resolve(this._processFolderList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processFolderList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -217,8 +217,8 @@ export default class EnhancedApi extends SimpleApi {
     findFolders(criteria = {}, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.findFolders(criteria, detailLevel)
-                .then((data) => { resolve(this._processFolderList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processFolderList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -277,8 +277,8 @@ export default class EnhancedApi extends SimpleApi {
     showTag(id, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.showTag(id, detailLevel)
-                .then((data) => { resolve(this._processTag(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processTag(data)); })
+                 .catch(reject);
         });
     }
 
@@ -291,8 +291,8 @@ export default class EnhancedApi extends SimpleApi {
     listTags(detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.listTags(detailLevel)
-                .then((data) => { resolve(this._processTagList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processTagList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -306,8 +306,8 @@ export default class EnhancedApi extends SimpleApi {
     findTags(criteria = {}, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.findTags(criteria, detailLevel)
-                .then((data) => { resolve(this._processTagList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processTagList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -363,8 +363,8 @@ export default class EnhancedApi extends SimpleApi {
     showShare(id, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.showShare(id, detailLevel)
-                .then((data) => { resolve(this._processShare(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processShare(data)); })
+                 .catch(reject);
         });
     }
 
@@ -377,8 +377,8 @@ export default class EnhancedApi extends SimpleApi {
     listShares(detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.listShares(detailLevel)
-                .then((data) => { resolve(this._processShareList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processShareList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -392,8 +392,8 @@ export default class EnhancedApi extends SimpleApi {
     findShares(criteria = {}, detailLevel = 'model') {
         return new Promise((resolve, reject) => {
             super.findShares(criteria, detailLevel)
-                .then((data) => { resolve(this._processShareList(data)); })
-                .catch(reject);
+                 .then((data) => { resolve(this._processShareList(data)); })
+                 .catch(reject);
         });
     }
 
@@ -409,7 +409,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     static flattenPassword(password) {
         if(password.folder && typeof password.folder !== 'string') {
-            password.folder = password.folder.id
+            password.folder = password.folder.id;
         }
 
         if(password.edited instanceof Date) {
@@ -427,7 +427,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     static flattenFolder(folder) {
         if(folder.parent && typeof folder.parent !== 'string') {
-            folder.parent = folder.parent.id
+            folder.parent = folder.parent.id;
         }
         if(folder.edited instanceof Date) {
             folder.edited = Math.floor(folder.edited.getTime() / 1000);
@@ -537,10 +537,10 @@ export default class EnhancedApi extends SimpleApi {
             if(definition.length) {
                 if(Array.isArray(attribute) && attribute.length > definition.length) {
                     if(strict) throw "Property " + property + " exceeds the maximum length of " + definition.length;
-                    attribute = attribute.slice(0, definition.length)
+                    attribute = attribute.slice(0, definition.length);
                 } else if(type === 'string' && attribute.length > definition.length) {
                     if(strict) throw "Property " + property + " exceeds the maximum length of " + definition.length;
-                    attribute = attribute.substr(0, definition.length)
+                    attribute = attribute.substr(0, definition.length);
                 }
             }
 
@@ -809,7 +809,7 @@ export default class EnhancedApi extends SimpleApi {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }
             data.label += '@' + SimpleApi.parseUrl(data.url, 'host')
-                .replace(/^(m|de|www|www2|mail|email|login|signin)\./, '');
+                                         .replace(/^(m|de|www|www2|mail|email|login|signin)\./, '');
         }
     }
 
@@ -883,7 +883,7 @@ export default class EnhancedApi extends SimpleApi {
                 type   : 'array',
                 default: []
             }
-        }
+        };
     }
 
     /**
@@ -927,7 +927,7 @@ export default class EnhancedApi extends SimpleApi {
                 type   : 'boolean',
                 default: false
             }
-        }
+        };
     }
 
     /**
@@ -971,6 +971,6 @@ export default class EnhancedApi extends SimpleApi {
                 type   : 'boolean',
                 default: false
             }
-        }
+        };
     }
 }

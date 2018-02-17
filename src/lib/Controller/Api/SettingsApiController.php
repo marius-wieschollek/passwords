@@ -63,7 +63,9 @@ class SettingsApiController extends AbstractApiController {
      * @throws PreConditionNotMetException
      */
     public function set(string $key, $value = null): JSONResponse {
-        $this->createJsonResponse(['status' => 'ok']);
+        $this->settings->set($key, $value);
+
+        return $this->createJsonResponse(['status' => 'ok', 'key' => $key, 'value' => $value]);
     }
 
     /**
@@ -74,10 +76,12 @@ class SettingsApiController extends AbstractApiController {
      * @param string $scope
      *
      * @return JSONResponse
+     * @throws ApiException
      */
     public function list(string $scope = null): JSONResponse {
-
-        return $this->createJsonResponse([]);
+        return $this->createJsonResponse(
+            $this->settings->listSettings($scope)
+        );
     }
 
     /**
@@ -88,9 +92,12 @@ class SettingsApiController extends AbstractApiController {
      * @param string $key
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws PreConditionNotMetException
      */
     public function reset(string $key): JSONResponse {
+        $value = $this->settings->reset($key);
 
-        return $this->createJsonResponse(['key' => $key, 'value' => 'value']);
+        return $this->createJsonResponse(['status' => 'ok', 'key' => $key, 'value' => $value]);
     }
 }

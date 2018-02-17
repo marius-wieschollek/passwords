@@ -52,6 +52,7 @@ $routes = [
     ['name' => 'settings_api#get', 'url' => '/api/1.0/settings/get', 'verb' => 'POST'],
     ['name' => 'settings_api#set', 'url' => '/api/1.0/settings/set', 'verb' => 'POST'],
     ['name' => 'settings_api#list', 'url' => '/api/1.0/settings/list', 'verb' => 'GET'],
+    ['name' => 'settings_api#list', 'url' => '/api/1.0/settings/list', 'verb' => 'POST', 'postfix' => 'POST'],
     ['name' => 'settings_api#reset', 'url' => '/api/1.0/settings/reset', 'verb' => 'POST'],
 
     ['name' => 'service_api#generate_password', 'url' => '/api/1.0/service/password', 'verb' => 'GET'],
