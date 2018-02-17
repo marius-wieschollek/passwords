@@ -5,6 +5,7 @@
             <div class="item-list">
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id" draggable="true"/>
+                <empty v-if="isEmpty"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -21,9 +22,11 @@
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
     import API from '@js/Helper/api';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         components: {
+            Empty,
             Breadcrumb,
             PasswordDetails,
             PasswordLine,
@@ -45,11 +48,14 @@
                 },
                 showAddNew   : true,
                 breadcrumb   : []
-            }
+            };
         },
         computed  : {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            isEmpty() {
+                return !this.loading && !this.passwords.length && !this.folders.length;
             }
         },
 
@@ -59,7 +65,7 @@
         },
 
         beforeDestroy() {
-            Events.off('data.changed', this.refreshViewIfRequired)
+            Events.off('data.changed', this.refreshViewIfRequired);
         },
 
         methods: {
@@ -145,7 +151,7 @@
                             dropType: 'folder',
                             folderId: parent.id
                         }
-                    )
+                    );
                 }
 
                 if(folder.id !== this.defaultFolder) {
@@ -163,7 +169,7 @@
 
         watch: {
             $route: function() {
-                this.refreshView()
+                this.refreshView();
             }
         }
     };

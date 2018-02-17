@@ -18,6 +18,7 @@
                         </li>
                     </ul>
                 </password-line>
+                <empty v-if="isEmpty" :text="emptyText"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -34,9 +35,11 @@
     import GenericLine from "@vue/Line/Generic";
     import PasswordLine from '@vue/Line/Password';
     import PasswordDetails from '@vue/Details/Password';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         components: {
+            Empty,
             Breadcrumb,
             GenericLine,
             PasswordLine,
@@ -55,7 +58,7 @@
                 },
                 breadcrumb: [],
                 shareUsers: []
-            }
+            };
         },
 
         created() {
@@ -64,12 +67,21 @@
         },
 
         beforeDestroy() {
-            Events.off('password.changed', this.refreshView)
+            Events.off('password.changed', this.refreshView);
         },
 
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            isEmpty() {
+                return !this.loading && !this.passwords.length && this.$route.params.type !== undefined;
+            },
+            emptyText() {
+                if(this.$route.params.type.toString() === '0') {
+                    return 'No passwords were shared with you';
+                }
+                return "You did not share any passwords";
             }
         },
 
@@ -90,7 +102,7 @@
                     this.breadcrumb = [
                         {path: '/shared', label: Utility.translate('Shared')},
                         {path: this.$route.path, label: Utility.translate(label)}
-                    ]
+                    ];
                 } else {
                     this.passwords = [];
                     this.breadcrumb = [];
@@ -127,7 +139,7 @@
         },
         watch  : {
             $route: function() {
-                this.refreshView()
+                this.refreshView();
             }
         }
     };

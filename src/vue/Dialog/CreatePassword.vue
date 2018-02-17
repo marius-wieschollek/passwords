@@ -90,20 +90,22 @@
                     status                 : false,
                     initialValue           : this.password.notes
                 });
+
+            $('#password-username').focus();
             setTimeout(() => {$('#password-password').removeAttr('readonly');}, 250);
         },
 
         computed: {
             getTitleStyle() {
                 return {
-                    color:ThemeManager.getContrastColor(),
-                    backgroundColor:ThemeManager.getColor()
-                }
+                    color          : ThemeManager.getContrastColor(),
+                    backgroundColor: ThemeManager.getColor()
+                };
             },
             getSectionStyle() {
                 return {
-                    borderColor:ThemeManager.getColor()
-                }
+                    borderColor: ThemeManager.getColor()
+                };
             }
         },
 
@@ -189,9 +191,9 @@
                 align-items           : stretch;
 
                 .title {
-                    grid-area        : title;
-                    padding          : 1rem;
-                    font-size        : 1.25rem;
+                    grid-area : title;
+                    padding   : 1rem;
+                    font-size : 1.25rem;
 
                     .close {
                         float  : right;

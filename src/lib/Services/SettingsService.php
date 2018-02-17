@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Services;
 
 use OC_Defaults;
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Theming\ThemingDefaults;
 use OCP\IURLGenerator;
@@ -261,6 +262,14 @@ class SettingsService {
                 return $this->urlGenerator->getAbsoluteURL($this->theming->getLogo());
             case 'label':
                 return $this->theming->getEntity();
+            case 'app.icon':
+                if($this->config->isAppEnabled('theming')) {
+                    return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg']);
+                }
+
+                return $this->urlGenerator->getAbsoluteURL(
+                    $this->urlGenerator->imagePath(Application::APP_NAME, 'app-themed.svg')
+                );
             case 'folder.icon':
                 if($this->config->isAppEnabled('theming')) {
                     return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg']);

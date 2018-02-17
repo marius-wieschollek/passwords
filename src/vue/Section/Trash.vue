@@ -12,6 +12,7 @@
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
                     <translate tag="li" icon="undo" slot="menu-top" @click="restorePasswordAction(password)">Restore</translate>
                 </password-line>
+                <empty v-if="isEmpty" text="Deleted items will appear here"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -34,6 +35,7 @@
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import API from '@js/Helper/api';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         data() {
@@ -50,6 +52,7 @@
         },
 
         components: {
+            Empty,
             TagLine,
             Translate,
             Breadcrumb,
@@ -70,6 +73,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            isEmpty() {
+                return !this.loading && !this.passwords.length && !this.tags.length && !this.folders.length;
             }
         },
 

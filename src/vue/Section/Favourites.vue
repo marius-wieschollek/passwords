@@ -6,6 +6,7 @@
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <empty v-if="isEmpty" text="Your favorites will appear here"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -23,6 +24,7 @@
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
     import API from '@js/Helper/api';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         data() {
@@ -39,6 +41,7 @@
         },
 
         components: {
+            Empty,
             TagLine,
             Breadcrumb,
             FolderLine,
@@ -58,6 +61,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            isEmpty() {
+                return !this.loading && !this.passwords.length && !this.tags.length && !this.folders.length;
             }
         },
 

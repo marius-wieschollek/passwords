@@ -8,8 +8,6 @@
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ password.label }}</span>
         <slot name="middle"/>
-        <div class="date">{{ password.edited.toLocaleDateString() }}</div>
-        <i :class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -30,6 +28,8 @@
                 </slot>
             </div>
         </div>
+        <i :class="securityCheck" class="fa fa-shield security"></i>
+        <div class="date">{{ password.edited.toLocaleDateString() }}</div>
     </div>
 </template>
 

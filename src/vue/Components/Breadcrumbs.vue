@@ -9,35 +9,35 @@
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
             </div>
             <div class="actions creatable" v-if="showAddNew" :class="{active: showMenu}">
-            <span class="button new" @click="toggleMenu()"><span class="icon icon-add"></span></span>
-            <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
-                <ul>
-                    <li>
+                <span class="button new" @click="toggleMenu()"><span class="icon icon-add"></span></span>
+                <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
+                    <ul>
+                        <li>
                         <span class="menuitem" v-if="newFolder" @click="createFolder">
                             <span class="icon icon-folder svg"></span>
                             <translate class="displayname" say="New Folder"/>
                         </span>
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                         <span class="menuitem" v-if="newTag" @click="createTag">
                             <span class="icon icon-tag svg"></span>
                             <translate class="displayname" say="New Tag"/>
                         </span>
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                         <span class="menuitem" v-if="newPassword" @click="createPassword()">
                             <span class="icon icon-filetype-text svg"></span>
                             <translate class="displayname" say="New Password"/>
                         </span>
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                         <span class="menuitem" v-if="deleteAll" @click="deleteAllEvent">
                             <span class="icon icon-delete svg"></span>
                             <translate class="displayname" say="Delete All"/>
                         </span>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
                 type     : Boolean,
                 'default': true
             },
-            deleteAll : {
+            deleteAll  : {
                 type     : Boolean,
                 'default': false
             },
@@ -85,6 +85,10 @@
             folder     : {
                 type     : String,
                 'default': '00000000-0000-0000-0000-000000000000'
+            },
+            tag        : {
+                type     : String,
+                'default': null
             }
         },
         data() {
@@ -125,7 +129,7 @@
                 TagManager.createTag();
             },
             createPassword() {
-                PasswordManager.createPassword(this.folder);
+                PasswordManager.createPassword(this.folder, this.tag);
             },
             showNavigation() {
                 $('#app-content').toggleClass('mobile-open');

@@ -8,7 +8,6 @@
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
         <span class="title">{{ folder.label }}</span>
         <slot name="middle"/>
-        <div class="date">{{ folder.edited.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -23,6 +22,7 @@
                 </slot>
             </div>
         </div>
+        <div class="date">{{ folder.edited.toLocaleDateString() }}</div>
     </div>
 </template>
 

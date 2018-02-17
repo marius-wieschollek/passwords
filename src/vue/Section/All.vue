@@ -4,6 +4,7 @@
             <breadcrumb/>
             <div class="item-list">
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <empty v-if="!loading && !passwords.length" />
             </div>
         </div>
         <div class="app-content-right">
@@ -19,6 +20,7 @@
     import Breadcrumb from '@vc/Breadcrumbs.vue';
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         data() {
@@ -33,6 +35,7 @@
         },
 
         components: {
+            Empty,
             Breadcrumb,
             PasswordDetails,
             PasswordLine

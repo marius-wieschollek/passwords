@@ -4,7 +4,6 @@
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}"></div>
         <span class="title">{{ tag.label }}</span>
         <slot name="middle"/>
-        <div class="date">{{ tag.edited.toLocaleDateString() }}</div>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -19,6 +18,7 @@
                 </slot>
             </div>
         </div>
+        <div class="date">{{ tag.edited.toLocaleDateString() }}</div>
     </div>
 </template>
 

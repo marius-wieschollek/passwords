@@ -10,6 +10,7 @@
                                :label="title">
                 </security-line>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <empty v-if="isEmpty" :text="emptyText"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -26,9 +27,11 @@
     import PasswordLine from '@vue/Line/Password.vue';
     import SecurityLine from '@vue/Line/Security.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         components: {
+            Empty,
             Breadcrumb,
             PasswordDetails,
             PasswordLine,
@@ -46,7 +49,7 @@
                     'Secure', 'Weak', 'Broken'
                 ],
                 breadcrumb    : []
-            }
+            };
         },
 
         created() {
@@ -55,12 +58,21 @@
         },
 
         beforeDestroy() {
-            Events.off('password.changed', this.refreshView)
+            Events.off('password.changed', this.refreshView);
         },
 
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            isEmpty() {
+                return !this.loading && !this.passwords.length && this.$route.params.status !== undefined;
+            },
+            emptyText() {
+                if(this.$route.params.status.toString() === '0') {
+                    return 'Better check the other sections';
+                }
+                return "That's probably a good sign";
             }
         },
 
@@ -76,7 +88,7 @@
                     this.breadcrumb = [
                         {path: '/security', label: Utility.translate('Security')},
                         {path: this.$route.path, label: Utility.translate(label)}
-                    ]
+                    ];
                 } else {
                     this.passwords = [];
                     this.breadcrumb = [];
@@ -90,7 +102,7 @@
         },
         watch  : {
             $route: function() {
-                this.refreshView()
+                this.refreshView();
             }
         }
     };

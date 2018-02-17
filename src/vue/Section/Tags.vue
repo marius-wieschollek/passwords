@@ -1,10 +1,11 @@
 <template>
     <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
         <div class="app-content-left">
-            <breadcrumb :newTag="true" :items="breadcrumb"/>
+            <breadcrumb :newTag="!currentTag" :newPassword="currentTag !== null" :tag="currentTag" :items="breadcrumb"/>
             <div class="item-list">
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <empty v-if="isEmpty"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -21,11 +22,13 @@
     import TagLine from '@vue/Line/Tag.vue';
     import PasswordLine from '@vue/Line/Password.vue';
     import PasswordDetails from '@vue/Details/Password.vue';
+    import Empty from "@/vue/Components/Empty";
 
     export default {
         data() {
             return {
-                loading   : true,
+                loading     : true,
+                currentTag  : null,
                 defaultTitle: Utility.translate('Tags'),
                 defaultPath : '/tags/',
                 tags        : [],
@@ -34,10 +37,11 @@
                     type   : 'none',
                     element: null
                 }
-            }
+            };
         },
 
         components: {
+            Empty,
             TagLine,
             Breadcrumb,
             PasswordLine,
@@ -58,6 +62,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            isEmpty() {
+                return !this.loading && !this.passwords.length && !this.tags.length;
             }
         },
 
@@ -70,9 +77,11 @@
                 if(this.$route.params.tag !== undefined) {
                     let tag = this.$route.params.tag;
                     this.tags = [];
+                    this.currentTag = tag;
                     API.showTag(tag, 'model+passwords').then(this.updatePasswordList);
                 } else {
                     this.passwords = [];
+                    this.currentTag = null;
                     API.listTags().then(this.updateTagList);
                 }
             },
@@ -93,12 +102,12 @@
                 this.breadcrumb = [
                     {path: this.defaultPath, label: this.defaultTitle},
                     {path: this.$route.path, label: tag.label}
-                ]
+                ];
             }
         },
         watch  : {
             $route: function() {
-                this.refreshView()
+                this.refreshView();
             }
         }
     };
