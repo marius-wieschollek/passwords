@@ -32,12 +32,15 @@ export default class Utility {
      *
      * @param content
      * @param name
-     * @param type
+     * @param mime
      */
-    static createDownload(content, name = null, type = 'text/plain') {
+    static createDownload(content, name = null, mime = 'text/plain') {
         if(name === null) name = new Date().toISOString() + '.txt';
-        let element = document.createElement('a');
-        element.setAttribute('href', 'data:' + type + ';charset=utf-8,' + encodeURIComponent(content));
+        let element = document.createElement('a'),
+            blob = new Blob([content], {type: mime}),
+            url = window.URL.createObjectURL(blob);
+
+        element.setAttribute('href', url);
         element.setAttribute('download', name);
         element.style.display = 'none';
 

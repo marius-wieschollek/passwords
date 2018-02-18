@@ -124,6 +124,8 @@ OC.L10N.register(
         "Please choose"                       : "Bitte wählen",
         "Database Backup"                     : "Datenbank Backup",
         "Predefined CSV"                      : "Vordefiniertes CSV",
+        "Backup password"                     : "Backup-Passwort",
+        "(Optional) Encrypts the backup"      : "(Optional) Verschlüsselt das Backup mit einem mindestens 10 Zeichen langen Passwort",
         "Export Passwords"                    : "Passwörter exportieren",
         "Export Folders"                      : "Ordner exportieren",
         "Export Tags"                         : "Tags exportieren",

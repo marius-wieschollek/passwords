@@ -1,5 +1,6 @@
 import API from '@js/Helper/api';
 import Utility from "@/js/Classes/Utility";
+import Encryption from "@/js/ApiClient/Encryption";
 
 /**
  *
@@ -17,7 +18,7 @@ class ExportManager {
         let data = '';
         switch(format) {
             case 'json':
-                data = await ExportManager.exportJson(model, options.includeShared);
+                data = await ExportManager.exportJson(model, options);
                 break;
             case 'csv':
                 data = await ExportManager.exportCsv(model, options.includeShared);
@@ -35,20 +36,33 @@ class ExportManager {
     /**
      *
      * @param model
-     * @param includeShared
+     * @param options
      * @returns {Promise<string>}
      */
-    static async exportJson(model = [], includeShared = false) {
+    static async exportJson(model, options) {
 
-        let json = {version: 1};
+        let json = {version: 1, encrypted: false};
         if(model.indexOf('passwords') !== -1) {
-            json.passwords = await ExportManager.getPasswordsForExport(includeShared)
+            json.passwords = await ExportManager.getPasswordsForExport(options.includeShared);
         }
         if(model.indexOf('folders') !== -1) {
-            json.folders = await ExportManager.getFoldersForExport()
+            json.folders = await ExportManager.getFoldersForExport();
         }
         if(model.indexOf('tags') !== -1) {
-            json.tags = await ExportManager.getTagsForExport()
+            json.tags = await ExportManager.getTagsForExport();
+        }
+
+        if(options.password) {
+            let encryption = new Encryption();
+
+            for(let i in json) {
+                if(!json.hasOwnProperty(i) || ['version', 'encrypted'].indexOf(i) !== -1) continue;
+                let data = JSON.stringify(json[i]),
+                    key  = options.password + i;
+
+                json[i] = await encryption.encrypt(data, key);
+            }
+            json.encrypted = true;
         }
 
         return JSON.stringify(json);
@@ -76,7 +90,7 @@ class ExportManager {
             csv.folders = ExportManager.convertObjectToCsv(data, header);
         }
         if(model.indexOf('tags') !== -1) {
-            let data = await ExportManager.getTagsForExport(),
+            let data   = await ExportManager.getTagsForExport(),
                 header = ['label', 'color', 'edited', 'favourite', 'id', 'revision'];
             data = await ExportManager.createCustomCsvObject(data, header.clone());
             csv.tags = ExportManager.convertObjectToCsv(data, header);

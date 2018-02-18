@@ -12,6 +12,12 @@
         </div>
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select Options"/>
+            <div class="step-content" v-if="format === 'json'">
+                <translate tag="label" for="passwords-export-encrypt" say="Backup password" title="(Optional) Encrypts the backup"/>
+                <input type="password" id="passwords-export-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="exporting" readonly/>
+                <br>
+                <br>
+            </div>
             <div class="step-content" v-if="format !== 'customCsv'">
                 <input type="checkbox" id="passwords-export-passwords" value="passwords" @change="setExportModel($event)" :disabled="exporting" :checked="models.indexOf('passwords') !== -1"/>
                 <translate tag="label" for="passwords-export-passwords" say="Export Passwords"/>
@@ -85,7 +91,7 @@
         data() {
             return {
                 format    : 'json',
-                options   : { includeShared: false },
+                options   : {includeShared: false},
                 models    : ['passwords', 'folders', 'tags'],
                 step      : 3,
                 data      : null,
@@ -96,16 +102,26 @@
                     folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId'],
                     tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision']
                 }
-            }
+            };
         },
 
         computed: {
             csvFieldOptions() {
                 return this.fieldMap[this.options.db];
+            },
+            backupPasswordTitle() {
+                return Utility.translate('(Optional) Encrypts the backup');
             }
         },
 
+        created() {
+            this.preventPasswordFill(500);
+        },
+
         methods: {
+            preventPasswordFill(t = 300) {
+                setTimeout(() => {document.getElementById('passwords-export-encrypt').removeAttribute('readonly');}, t);
+            },
             exportDb() {
                 if(this.data) {
                     this.downloadFile();
@@ -113,20 +129,20 @@
                 }
 
                 ExportManager.exportDatabase(this.format, this.models, this.options)
-                    .catch((e) => {
-                        this.exporting = false;
-                        if(typeof e !== 'string') e = e.message;
-                        Messages.alert(e, 'Export error');
-                    })
-                    .then((d) => {
-                        if(d) {
-                            this.data = d;
-                            this.buttonText = 'Download {format}';
-                        } else {
-                            Messages.alert('There is no data to export', 'Nothing to export');
-                        }
-                        this.exporting = false;
-                    });
+                             .catch((e) => {
+                                 this.exporting = false;
+                                 if(typeof e !== 'string') e = e.message;
+                                 Messages.alert(e, 'Export error');
+                             })
+                             .then((d) => {
+                                 if(d) {
+                                     this.data = d;
+                                     this.buttonText = 'Download {format}';
+                                 } else {
+                                     Messages.alert('There is no data to export', 'Nothing to export');
+                                 }
+                                 this.exporting = false;
+                             });
 
                 this.buttonText = 'Waiting...';
                 this.exporting = true;
@@ -149,21 +165,22 @@
                     fileExt = this.format === 'customCsv' ? 'csv':this.format;
 
                 for(let i = 0; i < models.length; i++) {
-                    exports.push(Utility.translate(models[i].capitalize()))
+                    exports.push(Utility.translate(models[i].capitalize()));
                 }
 
                 return exports.join('+') + '_' + date.toLocaleDateString() + '.' + fileExt;
             },
             downloadFile() {
+                let mime = this.format === 'json' ? 'application/json':'text/csv';
                 if(typeof this.data === 'string') {
                     let filename = this.generateFilename(this.models);
-                    Utility.createDownload(this.data, filename);
+                    Utility.createDownload(this.data, filename, mime);
                 } else if(this.data !== null) {
                     for(let i in this.data) {
                         if(!this.data.hasOwnProperty(i)) continue;
 
                         let filename = this.generateFilename([i]);
-                        Utility.createDownload(this.data[i], filename);
+                        Utility.createDownload(this.data[i], filename, mime);
                     }
                 }
             },
@@ -178,7 +195,16 @@
 
                 this.options.mapping = mapping;
             },
-            resetExportButton() {
+            validateStep() {
+                if(this.models.length === 0) {
+                    this.step = 2;
+                } else if(this.format === 'json' && this.options.password && this.options.password.length < 10) {
+                    this.step = 2;
+                } else if(this.format === 'customCsv' && this.options.mapping.length === 0) {
+                    this.step = 2;
+                } else {
+                    this.step = 3;
+                }
                 this.buttonText = 'Export';
                 this.data = null;
             }
@@ -187,41 +213,37 @@
         watch: {
             format(value) {
                 if(value === 'customCsv') {
-                    this.options = {db: 'passwords', delimiter: ',', header: true, mapping: []}
-                } else {
-                    this.step = 3;
+                    this.options = {db: 'passwords', delimiter: ',', header: true, mapping: []};
+                } else if(value === 'json') {
+                    this.preventPasswordFill();
                 }
 
-                this.resetExportButton();
+                this.validateStep();
             },
             models(value) {
-                if(this.step === 2 && this.format !== 'customCsv') this.step = 3;
-                if(value.length === 0 && this.step === 3) this.step = 2;
-                this.resetExportButton();
+                this.validateStep();
             },
             'options.db'(value) {
                 this.models = [value];
                 this.options.mapping = [];
                 $('.csv-mapping-field select').val('');
-                this.resetExportButton();
+                this.validateStep();
             },
-            'options.mapping'(value) {
-                if(value.length !== 0 && this.step === 2) {
-                    this.step = 3;
-                } else if(value.length === 0 && this.step === 3) this.step = 2;
-                this.resetExportButton();
+            'options.password'(value) {
+                if(value.length !== 0 && value.length < 10) {
+                    document.getElementById('passwords-export-encrypt').className = 'invalid';
+                } else {
+                    document.getElementById('passwords-export-encrypt').className = '';
+                }
             },
-            'options.includeShared'() {
-                this.resetExportButton();
-            },
-            'options.delimiter'() {
-                this.resetExportButton();
-            },
-            'options.header'() {
-                this.resetExportButton();
+            options: {
+                handler(value) {
+                    this.validateStep();
+                },
+                deep: true
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
@@ -237,6 +259,11 @@
                     display   : inline-block;
                 }
             }
+        }
+
+        #passwords-export-encrypt.invalid,
+        #passwords-export-encrypt:invalid {
+            box-shadow : $color-red 0 0 3px 1px
         }
     }
 </style>
