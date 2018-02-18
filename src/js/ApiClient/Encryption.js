@@ -1,28 +1,140 @@
 export default class Encryption {
 
-    constructor() {
+    constructor() {}
+
+    async testEncryption() {
+        let text     = '', password = '✓ à la mode';
+        for(let i = 0; i < 96; i++) text += i + ': ✓ à la mode | ';
+
+        try {
+            let encData = await this.encrypt(text, password);
+
+            let t = JSON.stringify(encData);
+            let d = JSON.parse(t);
+
+            let decData = await this.decrypt(d, password);
+            console.log(text, encData, decData, text === decData);
+        } catch(e) {
+            console.error(e);
+        }
     }
 
     /**
      *
-     * @param baseHash
-     * @param dataHash
-     * @param length
-     * @returns {Uint8Array}
+     * @param rawData
+     * @param rawPassword
+     * @returns {Promise<string>}
      */
-    static calculateIv(baseHash, dataHash, length = 16) {
-        if(baseHash.length < length) throw "Password too short";
-        let iv        = '',
-            blocksize = Math.round(baseHash.length / length);
+    async encrypt(rawData, rawPassword) {
+        let data = new TextEncoder().encode(rawData);
+        let iv = crypto.getRandomValues(new Uint8Array(16));
 
-        for(let i = 0; i < length; i++) {
-            let char = 0;
-            for(let j = 0; j < blocksize; j++) char = baseHash.charCodeAt(char + j);
-            while(char > dataHash.length - blocksize) char -= dataHash.length;
-            iv += dataHash.charAt(char);
+        let password = new TextEncoder().encode(rawPassword);
+        let passwordHash = await crypto.subtle.digest('SHA-256', password);
+
+        let algorithm = {name: 'AES-CBC', iv: iv};
+        let key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['encrypt']);
+
+        let encryptedData = new Uint16Array(await crypto.subtle.encrypt(algorithm, key, data));
+        let mergedData = new Uint16Array(await Encryption.hideIv(encryptedData, password, iv));
+
+        return String.fromCharCode.apply(null, mergedData);
+    }
+
+    /**
+     *
+     * @param rawData
+     * @param rawPassword
+     * @returns {Promise<void>}
+     */
+    async decrypt(rawData, rawPassword) {
+        let password = new TextEncoder().encode(rawPassword);
+        let passwordHash = await crypto.subtle.digest('SHA-256', password);
+
+        let encryptedData = new Uint16Array(Encryption.stringToArrayBuffer(rawData));
+
+        let [data, iv] = await Encryption.extractIv(encryptedData, password, 16);
+        let arrayBuffer = new ArrayBuffer(data.length * 2);
+        let bufferView = new Uint16Array(arrayBuffer);
+        for(let i = 0; i < data.length; i++) bufferView[i] = data[i];
+
+        let algorithm = {name: 'AES-CBC', iv: iv};
+        let key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['decrypt']);
+
+        let decryptedData = await crypto.subtle.decrypt(algorithm, key, arrayBuffer);
+
+        return new TextDecoder().decode(decryptedData);
+    }
+
+    /**
+     *
+     * @returns {Uint8Array}
+     * @param password
+     * @param rawData
+     * @param iv
+     */
+    static async hideIv(rawData, password, iv) {
+        let data       = Array.from(rawData),
+            dataHash   = new Uint8Array(await crypto.subtle.digest('SHA-512', password)),
+            blockSize  = Math.round(dataHash.length / iv.length),
+            multiplier = Math.ceil(data.length / 640);
+
+        for(let i = 0; i < iv.length; i++) {
+            let start    = i * blockSize,
+                position = 0;
+
+            for(let j = 0; j < blockSize; j++) position += dataHash[start + j];
+            position = position * multiplier;
+            while(position > data.length) position -= data.length;
+            data.splice(position, 0, Math.pow(iv[i], 2));
         }
 
-        return new TextEncoder('utf-8').encode(value);
+        return data;
+    }
+
+    /**
+     *
+     * @param rawData
+     * @param password
+     * @param ivLength
+     * @returns {Promise<*[]>}
+     */
+    static async extractIv(rawData, password, ivLength) {
+        let data       = Array.from(rawData),
+            length     = data.length - ivLength,
+            dataHash   = new Uint8Array(await crypto.subtle.digest('SHA-512', password)),
+            blockSize  = Math.round(dataHash.length / ivLength),
+            multiplier = Math.ceil(length / 640),
+            iv         = new Uint8Array(ivLength);
+
+        if(length <= 0) throw "invalid encrypted data";
+
+        for(let i = ivLength - 1; i >= 0; i--) {
+            let start    = i * blockSize,
+                position = 0;
+
+            for(let j = 0; j < blockSize; j++) position += dataHash[start + j];
+            position = position * multiplier;
+            while(position > data.length - 1) position -= data.length - 1;
+            let entry = data.splice(position, 1);
+            iv[i] = Math.sqrt(entry);
+        }
+
+        return [data, iv];
+    }
+
+    /**
+     *
+     * @param string
+     * @returns {ArrayBuffer}
+     */
+    static stringToArrayBuffer(string) {
+        let arrayBuffer = new ArrayBuffer(string.length * 2);
+        let bufferView = new Uint16Array(arrayBuffer);
+        for(let i = 0; i < string.length; i++) {
+            bufferView[i] = string.charCodeAt(i);
+        }
+        return arrayBuffer;
     }
 
     async getHash(value, algorithm = 'SHA-1') {
