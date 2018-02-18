@@ -29,11 +29,11 @@
                     <translate say="Trash"/>
                 </router-link>
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore" say="More"/>
-                <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
-                    <translate say="Backup and Restore"/>
-                </router-link>
                 <router-link class="nav-icon-settings" to="/settings" active-class="active" tag="li">
                     <translate say="Settings"/>
+                </router-link>
+                <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
+                    <translate say="Backup and Restore"/>
                 </router-link>
                 <translate tag="li" class="nav-icon-help" @click="openWikiPage" say="Handbook"/>
                 <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage" say="Browser Extension"/>

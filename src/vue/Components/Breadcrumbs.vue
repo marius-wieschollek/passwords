@@ -3,7 +3,7 @@
         <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
-                <a href="#"><img class="svg" :src="getHomeIcon" alt="Home"></a>
+                <router-link to="/"><img class="svg" :src="getHomeIcon" alt="Home"></router-link>
             </div>
             <div class="crumb svg" v-for="(item, index) in getItems" :class="{current:index === getItems.length - 1}">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>

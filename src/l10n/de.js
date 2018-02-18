@@ -195,6 +195,7 @@ OC.L10N.register(
         "Empty Trash"                         : "Papierkorb leeren",
         "Delete all items in trash?"          : "Möchtest du alle Objekte im Papierkorb permanent löschen?",
         "Trash emptied"                       : "Papierkorb geleert",
+        "Settings"                            : "Einstellungen",
         "Password Generator"                  : "Passwortgenerator",
         "Password strength"                   : "Stärke",
         "Include numbers"                     : "Nummern verwenden",
