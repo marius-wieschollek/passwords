@@ -31,7 +31,7 @@ class ImportManager {
 
         switch(type) {
             case 'json':
-                data = await ImportJsonConversionHelper.processBackupJson(data);
+                data = await ImportJsonConversionHelper.processBackupJson(data, options);
                 break;
             case 'pmanJson':
                 data = await ImportJsonConversionHelper.processPassmanJson(data);

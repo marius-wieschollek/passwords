@@ -63,6 +63,7 @@ class ExportManager {
                 json[i] = await encryption.encrypt(data, key);
             }
             json.encrypted = true;
+            json.challenge = await encryption.encrypt(options.password, options.password + 'challenge');
         }
 
         return JSON.stringify(json);

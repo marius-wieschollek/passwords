@@ -6,10 +6,33 @@ export default class ImportJsonConversionHelper {
 
     /**
      *
-     * @param json
+     * @param data
+     * @param options
      * @returns {Promise<void>}
      */
-    static async processBackupJson(json) {
+    static async processBackupJson(data, options) {
+        let json = JSON.parse(data);
+
+        if(data.encrypted) {
+            let encryption = new Encryption();
+            if(!options.password) throw "Password missing";
+
+            let challenge = null;
+            try {
+                let challenge = await encryption.encrypt(options.password, options.password + 'challenge');
+            } catch(e) {
+                throw "Invalid password";
+            }
+
+            for(let i in json) {
+                if(!json.hasOwnProperty(i) || ['version', 'encrypted'].indexOf(i) !== -1) continue;
+                let data = JSON.stringify(json[i]),
+                    key  = options.password + i;
+
+                json[i] = await encryption.decrypt(data, key);
+            }
+        }
+
         return JSON.parse(json);
     }
 
