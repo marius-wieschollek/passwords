@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
                 <generic-line
                         v-if="$route.params.type === undefined"
                         v-for="(title, index) in shareType"
@@ -32,14 +33,16 @@
     import Events from "@js/Classes/Events";
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
+    import HeaderLine from "@/vue/Line/Header";
+    import Empty from "@/vue/Components/Empty";
     import GenericLine from "@vue/Line/Generic";
     import PasswordLine from '@vue/Line/Password';
     import PasswordDetails from '@vue/Details/Password';
-    import Empty from "@/vue/Components/Empty";
 
     export default {
         components: {
             Empty,
+            HeaderLine,
             Breadcrumb,
             GenericLine,
             PasswordLine,
@@ -57,7 +60,11 @@
                     element: null
                 },
                 breadcrumb: [],
-                shareUsers: []
+                shareUsers: [],
+                sort     : {
+                    by   : 'label',
+                    order: true
+                }
             };
         },
 
@@ -73,6 +80,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            showHeader() {
+                return !this.loading && this.passwords.length;
             },
             isEmpty() {
                 return !this.loading && !this.passwords.length && this.$route.params.type !== undefined;
@@ -131,10 +141,15 @@
                 }
 
                 this.shareUsers = shareUsers;
-                this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
+                this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
             },
             getShareUsers(id) {
                 return this.shareUsers[id];
+            },
+
+            updateSorting($event) {
+                this.sort = $event;
+                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
             }
         },
         watch  : {

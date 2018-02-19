@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb/>
             <div class="item-list">
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader" />
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
                 <empty v-if="!loading && !passwords.length" />
             </div>
@@ -14,20 +15,22 @@
 </template>
 
 <script>
-    import Events from "@js/Classes/Events";
-    import Utility from "@js/Classes/Utility";
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
     import API from '@js/Helper/api';
+    import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
+    import Utility from "@js/Classes/Utility";
     import Empty from "@/vue/Components/Empty";
+    import HeaderLine from "@/vue/Line/Header";
+    import PasswordLine from '@vue/Line/Password';
+    import PasswordDetails from '@vue/Details/Password';
 
     export default {
         components: {
             Empty,
             Breadcrumb,
-            PasswordDetails,
-            PasswordLine
+            HeaderLine,
+            PasswordLine,
+            PasswordDetails
         },
         data() {
             return {
@@ -36,6 +39,10 @@
                 detail   : {
                     type   : 'none',
                     element: null
+                },
+                sort: {
+                    by: 'edited',
+                    order: false
                 }
             }
         },
@@ -52,6 +59,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            showHeader() {
+                return !this.loading && this.passwords.length;
             }
         },
 
@@ -63,7 +73,11 @@
             updateContentList: function(passwords) {
                 let array = Utility.sortApiObjectArray(passwords, 'edited', false);
                 this.loading = false;
-                this.passwords = array.slice(0, 15);
+                this.passwords = Utility.sortApiObjectArray(array.slice(0, 15), this.sort.by, this.sort.order);
+            },
+            updateSorting($event) {
+                this.sort = $event;
+                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
             }
         }
     };

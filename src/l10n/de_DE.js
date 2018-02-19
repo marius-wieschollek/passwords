@@ -172,6 +172,7 @@ OC.L10N.register(
         "Preview Line"                        : "Zeige Zeile",
         "Line {line}"                         : "Zeile {line}",
         "Ignore"                              : "Ignorieren",
+        "Changed"                             : "Geändert",
         "Edited"                              : "Bearbeitet am",
         "Created"                             : "Erstellt am",
         "Folder"                              : "Ordner",

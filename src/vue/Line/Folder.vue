@@ -14,9 +14,9 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
-                        <translate tag="li" @click="renameAction()" icon="pencil">Rename</translate>
-                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <!-- <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/> -->
+                        <translate tag="li" @click="renameAction()" icon="pencil" say="Rename"/>
+                        <translate tag="li" @click="deleteAction()" icon="trash" say="Delete"/>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -94,11 +94,9 @@
 </script>
 
 <style lang="scss">
-
     #app-content {
         .item-list {
             .row.folder {
-
                 .favicon {
                     background-size : 32px;
                 }

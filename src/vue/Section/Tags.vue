@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :newTag="!currentTag" :newPassword="currentTag !== null" :tag="currentTag" :items="breadcrumb"/>
             <div class="item-list">
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
                 <empty v-if="isEmpty"/>
@@ -16,15 +17,25 @@
 
 <script>
     import API from '@js/Helper/api';
+    import TagLine from '@vue/Line/Tag';
     import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import TagLine from '@vue/Line/Tag.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
+    import HeaderLine from "@/vue/Line/Header";
     import Empty from "@/vue/Components/Empty";
+    import PasswordLine from '@vue/Line/Password';
+    import PasswordDetails from '@vue/Details/Password';
 
     export default {
+        components: {
+            Empty,
+            TagLine,
+            Breadcrumb,
+            HeaderLine,
+            PasswordLine,
+            PasswordDetails
+        },
+
         data() {
             return {
                 loading     : true,
@@ -36,16 +47,12 @@
                 detail      : {
                     type   : 'none',
                     element: null
+                },
+                sort     : {
+                    by   : 'label',
+                    order: true
                 }
             };
-        },
-
-        components: {
-            Empty,
-            TagLine,
-            Breadcrumb,
-            PasswordLine,
-            PasswordDetails
         },
 
         created() {
@@ -62,6 +69,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            showHeader() {
+                return !this.loading && (this.passwords.length || this.tags.length);
             },
             isEmpty() {
                 return !this.loading && !this.passwords.length && !this.tags.length;
@@ -88,7 +98,7 @@
 
             updateTagList: function(tags) {
                 this.loading = false;
-                this.tags = Utility.sortApiObjectArray(tags, 'label');
+                this.tags = Utility.sortApiObjectArray(tags, this.sort.by, this.sort.order);
             },
 
             updatePasswordList: function(tag) {
@@ -98,11 +108,17 @@
                     this.defaultPath = '/trash';
                 }
 
-                this.passwords = Utility.sortApiObjectArray(tag.passwords, 'label');
+                this.passwords = Utility.sortApiObjectArray(tag.passwords, this.sort.by, this.sort.order);
                 this.breadcrumb = [
                     {path: this.defaultPath, label: this.defaultTitle},
                     {path: this.$route.path, label: tag.label}
                 ];
+            },
+
+            updateSorting($event) {
+                this.sort = $event;
+                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
+                this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);
             }
         },
         watch  : {

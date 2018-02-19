@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb" :showAddNew="showAddNew"/>
             <div class="item-list">
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id" draggable="true"/>
                 <empty v-if="isEmpty"/>
@@ -15,22 +16,24 @@
 </template>
 
 <script>
-    import Events from "@js/Classes/Events";
-    import Utility from "@js/Classes/Utility";
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import FolderLine from '@vue/Line/Folder.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
     import API from '@js/Helper/api';
+    import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
+    import Utility from "@js/Classes/Utility";
+    import FolderLine from '@vue/Line/Folder';
     import Empty from "@/vue/Components/Empty";
+    import HeaderLine from "@/vue/Line/Header";
+    import PasswordLine from '@vue/Line/Password';
+    import PasswordDetails from '@vue/Details/Password';
 
     export default {
         components: {
             Empty,
+            FolderLine,
+            HeaderLine,
             Breadcrumb,
-            PasswordDetails,
             PasswordLine,
-            FolderLine
+            PasswordDetails
         },
         data() {
             return {
@@ -47,12 +50,19 @@
                     element: null
                 },
                 showAddNew   : true,
-                breadcrumb   : []
+                breadcrumb   : [],
+                sort         : {
+                    by   : 'label',
+                    order: true
+                }
             };
         },
         computed  : {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            showHeader() {
+                return !this.loading && (this.passwords.length || this.folders.length);
             },
             isEmpty() {
                 return !this.loading && !this.passwords.length && !this.folders.length;
@@ -80,7 +90,6 @@
                     API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
                 }
             },
-
             refreshViewIfRequired: function(data) {
                 let object = data.object;
 
@@ -116,7 +125,6 @@
                     this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                 }
             },
-
             updateContentList: function(folder) {
                 this.loading = false;
                 if(folder.trashed) {
@@ -131,8 +139,8 @@
                     this.draggable = true;
                 }
 
-                this.folders = Utility.sortApiObjectArray(folder.folders, 'label', true);
-                this.passwords = Utility.sortApiObjectArray(folder.passwords, 'label', true);
+                this.folders = Utility.sortApiObjectArray(folder.folders, this.sort.by, this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(folder.passwords, this.sort.by, this.sort.order);
                 this.currentFolder = folder.id;
                 this.updateBreadcrumb(folder);
             },
@@ -164,6 +172,11 @@
                         }
                     );
                 }
+            },
+            updateSorting($event) {
+                this.sort = $event;
+                this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
             }
         },
 

@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false"/>
             <div class="item-list">
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
@@ -16,15 +17,16 @@
 </template>
 
 <script>
-    import Events from "@js/Classes/Events";
-    import Utility from "@js/Classes/Utility";
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import TagLine from '@vue/Line/Tag.vue';
-    import FolderLine from '@vue/Line/Folder.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
     import API from '@js/Helper/api';
+    import TagLine from '@vue/Line/Tag';
+    import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
+    import FolderLine from '@vue/Line/Folder';
+    import Utility from "@js/Classes/Utility";
     import Empty from "@/vue/Components/Empty";
+    import HeaderLine from "@/vue/Line/Header";
+    import PasswordLine from '@vue/Line/Password';
+    import PasswordDetails from '@vue/Details/Password';
 
     export default {
         data() {
@@ -36,6 +38,10 @@
                 detail   : {
                     type   : 'none',
                     element: null
+                },
+                sort: {
+                    by: 'label',
+                    order: true
                 }
             }
         },
@@ -45,6 +51,7 @@
             TagLine,
             Breadcrumb,
             FolderLine,
+            HeaderLine,
             PasswordLine,
             PasswordDetails
         },
@@ -62,6 +69,9 @@
             showDetails() {
                 return this.detail.type !== 'none';
             },
+            showHeader() {
+                return !this.loading && (this.passwords.length || this.tags.length || this.folders.length);
+            },
             isEmpty() {
                 return !this.loading && !this.passwords.length && !this.tags.length && !this.folders.length;
             }
@@ -73,20 +83,23 @@
                 API.findFolders({favourite: true}).then(this.updateFolderList);
                 API.findTags({favourite: true}).then(this.updateTagList);
             },
-
             updatePasswordList: function(passwords) {
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, 'label');
+                this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
             },
-
             updateFolderList: function(folders) {
                 this.loading = false;
-                this.folders = Utility.sortApiObjectArray(folders, 'label');
+                this.folders = Utility.sortApiObjectArray(folders, this.sort.by, this.sort.order);
             },
-
             updateTagList: function(tags) {
                 this.loading = false;
-                this.tags = Utility.sortApiObjectArray(tags, 'label');
+                this.tags = Utility.sortApiObjectArray(tags, this.sort.by, this.sort.order);
+            },
+            updateSorting($event) {
+                this.sort = $event;
+                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
+                this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
+                this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);
             }
         }
     };

@@ -14,15 +14,15 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate>
-                        <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable">Edit</translate>
-                        <translate tag="li" v-if="isMobile" @click="copyPasswordAction()" icon="clipboard">Copy Password</translate>
-                        <translate tag="li" v-if="isMobile" @click="copyUsernameAction()" icon="clipboard">Copy User</translate>
-                        <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard">Copy Url</translate>
+                        <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
+                        <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
+                        <translate tag="li" v-if="isMobile" @click="copyPasswordAction()" icon="clipboard" say="Copy Password"/>
+                        <translate tag="li" v-if="isMobile" @click="copyUsernameAction()" icon="clipboard" say="Copy User"/>
+                        <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard" say="Copy Url"/>
                         <li v-if="password.url">
-                            <translate tag="a" :href="password.url" target="_blank" icon="link">Open Url</translate>
+                            <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
                         </li>
-                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <translate tag="li" @click="deleteAction()" icon="trash" say="Delete"/>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>

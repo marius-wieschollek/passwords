@@ -3,6 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
                 <security-line v-if="$route.params.status === undefined"
                                v-for="(title, index) in securityStatus"
                                :key="title"
@@ -22,25 +23,28 @@
 <script>
     import API from '@js/Helper/api';
     import Events from "@js/Classes/Events";
+    import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import Breadcrumb from '@vc/Breadcrumbs.vue';
-    import PasswordLine from '@vue/Line/Password.vue';
-    import SecurityLine from '@vue/Line/Security.vue';
-    import PasswordDetails from '@vue/Details/Password.vue';
     import Empty from "@/vue/Components/Empty";
+    import HeaderLine from "@/vue/Line/Header";
+    import PasswordLine from '@vue/Line/Password';
+    import SecurityLine from '@vue/Line/Security';
+    import PasswordDetails from '@vue/Details/Password';
 
     export default {
         components: {
             Empty,
+            HeaderLine,
             Breadcrumb,
-            PasswordDetails,
             PasswordLine,
-            SecurityLine
+            SecurityLine,
+            PasswordDetails
         },
         data() {
             return {
                 loading       : false,
                 passwords     : [],
+                breadcrumb    : [],
                 detail        : {
                     type   : 'none',
                     element: null
@@ -48,7 +52,10 @@
                 securityStatus: [
                     'Secure', 'Weak', 'Broken'
                 ],
-                breadcrumb    : []
+                sort     : {
+                    by   : 'label',
+                    order: true
+                }
             };
         },
 
@@ -64,6 +71,9 @@
         computed: {
             showDetails() {
                 return this.detail.type !== 'none';
+            },
+            showHeader() {
+                return !this.loading && this.passwords.length;
             },
             isEmpty() {
                 return !this.loading && !this.passwords.length && this.$route.params.status !== undefined;
@@ -97,7 +107,12 @@
 
             updateContentList: function(passwords) {
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
+                this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
+            },
+
+            updateSorting($event) {
+                this.sort = $event;
+                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
             }
         },
         watch  : {

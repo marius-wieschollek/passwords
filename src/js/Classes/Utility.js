@@ -37,8 +37,8 @@ export default class Utility {
     static createDownload(content, name = null, mime = 'text/plain') {
         if(name === null) name = new Date().toISOString() + '.txt';
         let element = document.createElement('a'),
-            blob = new Blob([content], {type: mime}),
-            url = window.URL.createObjectURL(blob);
+            blob    = new Blob([content], {type: mime}),
+            url     = window.URL.createObjectURL(blob);
 
         element.setAttribute('href', url);
         element.setAttribute('download', name);
@@ -91,11 +91,11 @@ export default class Utility {
                 if(aP === bP) return 0;
                 if(typeof aP === 'string') {
                     if(ascending) return aP.localeCompare(bP, 'kn', {sensitivity: 'base'});
-                    return bP.localeCompare(aP, 'kn', {sensitivity: 'base'}) === 1 ? -1:1;
+                    return bP.localeCompare(aP, 'kn', {sensitivity: 'base'});
                 }
                 if(ascending) return aP < bP ? -1:1;
                 return aP > bP ? -1:1;
-            }
+            };
         }
 
         for(let key in object) {
