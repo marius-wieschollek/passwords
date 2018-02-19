@@ -20,17 +20,14 @@ export default class EnhancedApi extends SimpleApi {
      * @param baseUrl
      * @param username
      * @param password
-     * @returns {Promise<void>}
      */
-    async login(baseUrl, username = null, password = null) {
+    login(baseUrl, username = null, password = null) {
         super.login(baseUrl + 'index.php/apps/passwords/', username, password);
 
         this._baseUrl = baseUrl;
         this._folderIcon = baseUrl + 'core/img/filetypes/folder.svg';
         if(username !== null && password !== null) {
-            if(window.localStorage.icon) {
-                this._folderIcon = window.localStorage.icon;
-            }
+            if(window.localStorage.icon) this._folderIcon = window.localStorage.icon;
 
             this.getSetting('theme.folder.icon')
                 .then((url) => {
@@ -51,7 +48,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async createPassword(data = {}) {
+    createPassword(data = {}) {
         let object = EnhancedApi._cloneObject(data);
 
         try {
@@ -73,7 +70,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async updatePassword(data = {}) {
+    updatePassword(data = {}) {
         if(!data.id) return this.createPassword(data);
         let object = EnhancedApi._cloneObject(data);
 
@@ -96,12 +93,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showPassword(id, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.showPassword(id, detailLevel)
-                 .then((data) => { resolve(this._processPassword(data)); })
-                 .catch(reject);
-        });
+    async showPassword(id, detailLevel = 'model') {
+        return this._processPassword(
+            await super.showPassword(id, detailLevel)
+        );
     }
 
     /**
@@ -110,12 +105,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    listPasswords(detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.listPasswords(detailLevel)
-                 .then((data) => { resolve(this._processPasswordList(data)); })
-                 .catch(reject);
-        });
+    async listPasswords(detailLevel = 'model') {
+        return this._processPasswordList(
+            await super.listPasswords(detailLevel)
+        );
     }
 
     /**
@@ -125,12 +118,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findPasswords(criteria = {}, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.findPasswords(criteria, detailLevel)
-                 .then((data) => { resolve(this._processPasswordList(data)); })
-                 .catch(reject);
-        });
+    async findPasswords(criteria = {}, detailLevel = 'model') {
+        return this._processPasswordList(
+            await super.findPasswords(criteria, detailLevel)
+        );
     }
 
 
@@ -144,7 +135,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async createFolder(data = {}) {
+    createFolder(data = {}) {
         let object = EnhancedApi._cloneObject(data);
 
         try {
@@ -164,7 +155,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async updateFolder(data = {}) {
+    updateFolder(data = {}) {
         if(!data.id) return this.createFolder(data);
         let object = EnhancedApi._cloneObject(data);
 
@@ -185,12 +176,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showFolder(id, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.showFolder(id, detailLevel)
-                 .then((data) => { resolve(this._processFolder(data)); })
-                 .catch(reject);
-        });
+    async showFolder(id, detailLevel = 'model') {
+        return this._processFolder(
+            await super.showFolder(id, detailLevel)
+        );
     }
 
     /**
@@ -199,12 +188,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    listFolders(detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.listFolders(detailLevel)
-                 .then((data) => { resolve(this._processFolderList(data)); })
-                 .catch(reject);
-        });
+    async listFolders(detailLevel = 'model') {
+        return this._processFolderList(
+            await super.listFolders(detailLevel)
+        );
     }
 
     /**
@@ -214,12 +201,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findFolders(criteria = {}, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.findFolders(criteria, detailLevel)
-                 .then((data) => { resolve(this._processFolderList(data)); })
-                 .catch(reject);
-        });
+    async findFolders(criteria = {}, detailLevel = 'model') {
+        return this._processFolderList(
+            await super.findFolders(criteria, detailLevel)
+        );
     }
 
 
@@ -233,7 +218,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async createTag(data = {}) {
+    createTag(data = {}) {
         let object = EnhancedApi._cloneObject(data);
 
         try {
@@ -253,7 +238,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async updateTag(data = {}) {
+    updateTag(data = {}) {
         if(!data.id) return this.createTag(data);
         let object = EnhancedApi._cloneObject(data);
 
@@ -274,12 +259,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showTag(id, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.showTag(id, detailLevel)
-                 .then((data) => { resolve(this._processTag(data)); })
-                 .catch(reject);
-        });
+    async showTag(id, detailLevel = 'model') {
+        return this._processTag(
+            await super.showTag(id, detailLevel)
+        );
     }
 
     /**
@@ -288,12 +271,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    listTags(detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.listTags(detailLevel)
-                 .then((data) => { resolve(this._processTagList(data)); })
-                 .catch(reject);
-        });
+    async listTags(detailLevel = 'model') {
+        return this._processTagList(
+            await super.listTags(detailLevel)
+        );
     }
 
     /**
@@ -303,12 +284,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findTags(criteria = {}, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.findTags(criteria, detailLevel)
-                 .then((data) => { resolve(this._processTagList(data)); })
-                 .catch(reject);
-        });
+    async findTags(criteria = {}, detailLevel = 'model') {
+        return this._processTagList(
+            await super.findTags(criteria, detailLevel)
+        );
     }
 
 
@@ -360,12 +339,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    showShare(id, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.showShare(id, detailLevel)
-                 .then((data) => { resolve(this._processShare(data)); })
-                 .catch(reject);
-        });
+    async showShare(id, detailLevel = 'model') {
+        return this._processShare(
+            await super.showShare(id, detailLevel)
+        );
     }
 
     /**
@@ -374,12 +351,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    listShares(detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.listShares(detailLevel)
-                 .then((data) => { resolve(this._processShareList(data)); })
-                 .catch(reject);
-        });
+    async listShares(detailLevel = 'model') {
+        return this._processShareList(
+            await super.listShares(detailLevel)
+        );
     }
 
     /**
@@ -389,12 +364,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param detailLevel
      * @returns {Promise}
      */
-    findShares(criteria = {}, detailLevel = 'model') {
-        return new Promise((resolve, reject) => {
-            super.findShares(criteria, detailLevel)
-                 .then((data) => { resolve(this._processShareList(data)); })
-                 .catch(reject);
-        });
+    async findShares(criteria = {}, detailLevel = 'model') {
+        return this._processShareList(
+            await super.findShares(criteria, detailLevel)
+        );
     }
 
 
@@ -857,7 +830,7 @@ export default class EnhancedApi extends SimpleApi {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }
             data.label += '@' + SimpleApi.parseUrl(data.url, 'host')
-                                         .replace(/^(m|de|www|www2|mail|email|login|signin)\./, '');
+                .replace(/^(m|de|www|www2|mail|email|login|signin)\./, '');
         }
     }
 
