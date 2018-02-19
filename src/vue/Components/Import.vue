@@ -35,6 +35,10 @@
                         <translate tag="option" value="2" say="Overwrite if id exists"/>
                         <translate tag="option" value="3" say="Clone if id exists"/>
                     </select>
+                    <div v-if="source === 'json'">
+                        <translate tag="label" for="passwords-import-encrypt" say="Backup password" title="For encrypted backups"/>
+                        <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" readonly/>
+                    </div>
                     <br>
                     <div v-if="source === 'csv'">
                         <translate tag="h3" say="CSV Options"/>
@@ -147,34 +151,46 @@
                 let data = Utility.parseCsv(this.file, this.options.delimiter, this.previewLine);
 
                 return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length];
+            },
+            backupPasswordTitle() {
+                return Utility.translate('For encrypted backups');
             }
         },
 
         methods: {
+            preventPasswordFill(t = 300) {
+                setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
+            },
             importDb() {
                 this.progress.style = '';
                 this.importing = true;
                 ImportManager.importDatabase(this.file, this.type, this.options, this.registerProgress)
-                             .catch((e) => {
-                                 this.importing = false;
-                                 this.progress.style = 'error';
-                                 this.progress.status = 'Import failed';
-                                 if(typeof e !== 'string') e = e.message;
-                                 Messages.alert(e, 'Import error');
-                             })
-                             .then((d) => {
-                                 if(this.progress.style !== 'error') {
-                                     this.importing = false;
-                                     this.progress.style = 'success';
-                                     this.progress.status = 'Import successful';
-                                 }
-                             });
+                    .catch((e) => {
+                        this.importing = false;
+                        this.progress.style = 'error';
+                        this.progress.status = 'Import failed';
+                        if(typeof e !== 'string') e = e.message;
+                        Messages.alert(e, 'Import error');
+                    })
+                    .then((d) => {
+                        if(this.progress.style !== 'error') {
+                            this.importing = false;
+                            this.progress.style = 'success';
+                            this.progress.status = 'Import successful';
+                        }
+                    });
             },
             processFile(event) {
                 let file   = event.target.files[0],
                     reader = new FileReader();
-                reader.onload = (e) => { this.file = e.target.result; };
-                reader.readAsText(file);
+                if(this.mime === file.type) {
+                    reader.onload = (e) => { this.file = e.target.result; };
+                    reader.readAsText(file, 'utf-8');
+                } else {
+                    $('#passwords-import-file').val('');
+                    this.file = null;
+                    Messages.alert('Invalid file type', 'Import error');
+                }
             },
             registerProgress(processed, total, status) {
                 this.progress.processed = processed;
@@ -203,6 +219,27 @@
                 if(value === 'null') value = null;
                 mapping[id - 1] = value;
                 this.options.mapping = mapping;
+            },
+            validateStep() {
+                this.progress.status = null;
+                if(this.file === null) {
+                    this.step = 2;
+                } else if(this.source === 'csv') {
+                    if(
+                        (this.options.db === 'passwords' && this.options.mapping.indexOf('password') !== -1) ||
+                        (this.options.db === 'folders' && this.options.mapping.indexOf('label') !== -1) ||
+                        (this.options.db === 'tags' && this.options.mapping.indexOf('label') !== -1 && this.options.mapping.indexOf('color') !== -1)
+                    ) {
+                        this.step = 4;
+                    } else {
+                        this.step = 3;
+                    }
+                } else if(this.source === 'json') {
+                    this.preventPasswordFill();
+                    this.step = 4;
+                } else {
+                    this.step = 4;
+                }
             }
         },
 
@@ -247,39 +284,22 @@
                 if(oldMime !== this.mime && this.file) {
                     $('#passwords-import-file').val('');
                     this.file = null;
-                    this.step = 2;
-                } else if(this.step === 4 && this.source === 'csv') {
-                    this.step = 3;
                 }
+                this.validateStep();
             },
-            file(data) {
-                this.progress.status = null;
-                if(data !== null && this.step === 2) {
-                    this.step = this.source === 'csv' ? 3:4;
-                }
+            file() {
+                this.validateStep();
             },
-            options() {
-                this.progress.status = null;
+            options: {
+                handler() {
+                    this.validateStep();
+                },
+                deep: true
             },
             'options.db'() {
                 $('.csv-mapping-field select').val('');
-                this.progress.status = null;
                 if(this.source === 'csv') this.options.mapping = [];
-            },
-            'options.skipShared'() {
-                this.progress.status = null;
-            },
-            'options.mapping'(mapping) {
-                if(!this.file) return;
-                if(
-                    (this.options.db === 'passwords' && mapping.indexOf('password') !== -1) ||
-                    (this.options.db === 'folders' && mapping.indexOf('label') !== -1) ||
-                    (this.options.db === 'tags' && mapping.indexOf('label') !== -1 && mapping.indexOf('color') !== -1)
-                ) {
-                    this.step = 4;
-                } else if(this.step === 4) {
-                    this.step = 3;
-                }
+                this.validateStep();
             }
         }
     };
@@ -294,7 +314,7 @@
                 }
 
                 label {
-                    min-width : 90px;
+                    min-width : 105px;
                     display   : inline-block;
                 }
 

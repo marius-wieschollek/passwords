@@ -220,7 +220,7 @@
 
                 this.validateStep();
             },
-            models(value) {
+            models() {
                 this.validateStep();
             },
             'options.db'(value) {
@@ -237,7 +237,7 @@
                 }
             },
             options: {
-                handler(value) {
+                handler() {
                     this.validateStep();
                 },
                 deep: true

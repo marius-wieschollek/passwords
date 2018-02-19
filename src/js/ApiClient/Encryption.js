@@ -3,7 +3,7 @@ export default class Encryption {
     constructor() {}
 
     async testEncryption() {
-        let text     = '', password = '✓ à la mode';
+        let text = '', password = '✓ à la mode';
         for(let i = 0; i < 96; i++) text += i + ': ✓ à la mode | ';
 
         try {
@@ -38,7 +38,7 @@ export default class Encryption {
         let encryptedData = new Uint16Array(await crypto.subtle.encrypt(algorithm, key, data));
         let mergedData = new Uint16Array(await Encryption.hideIv(encryptedData, password, iv));
 
-        return String.fromCharCode.apply(null, mergedData);
+        return this._utf8ArrayToBase64(new Uint8Array(mergedData.buffer));
     }
 
     /**
@@ -51,7 +51,7 @@ export default class Encryption {
         let password = new TextEncoder().encode(rawPassword);
         let passwordHash = await crypto.subtle.digest('SHA-256', password);
 
-        let encryptedData = new Uint16Array(Encryption.stringToArrayBuffer(rawData));
+        let encryptedData = new Uint16Array(this._base64ToUtf8Array(rawData).buffer);
 
         let [data, iv] = await Encryption.extractIv(encryptedData, password, 16);
         let arrayBuffer = new ArrayBuffer(data.length * 2);
@@ -142,5 +142,33 @@ export default class Encryption {
         let hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer);
         let hashArray = Array.from(new Uint8Array(hashBuffer));
         return hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+    }
+
+    /**
+     *
+     * @param buf
+     * @returns {*}
+     * @private
+     */
+    _utf8ArrayToBase64(buf) {
+        let binstr = Array.prototype.map.call(buf, function(ch) {
+            return String.fromCharCode(ch);
+        }).join('');
+        return btoa(binstr);
+    }
+
+    /**
+     *
+     * @param base64
+     * @returns {Uint8Array}
+     * @private
+     */
+    _base64ToUtf8Array(base64) {
+        let binstr = atob(base64);
+        let buf = new Uint8Array(binstr.length);
+        Array.prototype.forEach.call(binstr, function(ch, i) {
+            buf[i] = ch.charCodeAt(0);
+        });
+        return buf;
     }
 }

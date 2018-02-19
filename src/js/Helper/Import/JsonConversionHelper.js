@@ -1,6 +1,7 @@
 import API from "@/js/Helper/api";
 import Utility from "@/js/Classes/Utility";
 import * as randomMC from "random-material-color";
+import Encryption from "@/js/ApiClient/Encryption";
 
 export default class ImportJsonConversionHelper {
 
@@ -13,27 +14,41 @@ export default class ImportJsonConversionHelper {
     static async processBackupJson(data, options) {
         let json = JSON.parse(data);
 
-        if(data.encrypted) {
-            let encryption = new Encryption();
-            if(!options.password) throw "Password missing";
-
-            let challenge = null;
-            try {
-                let challenge = await encryption.encrypt(options.password, options.password + 'challenge');
-            } catch(e) {
-                throw "Invalid password";
-            }
-
-            for(let i in json) {
-                if(!json.hasOwnProperty(i) || ['version', 'encrypted'].indexOf(i) !== -1) continue;
-                let data = JSON.stringify(json[i]),
-                    key  = options.password + i;
-
-                json[i] = await encryption.decrypt(data, key);
-            }
+        if(json.encrypted) {
+            await this._decryptJsonBackup(options, json);
         }
 
-        return JSON.parse(json);
+        return json;
+    }
+
+    /**
+     *
+     * @param options
+     * @param json
+     * @returns {Promise<void>}
+     * @private
+     */
+    static async _decryptJsonBackup(options, json) {
+        if(!options.password) throw "Password required";
+        let encryption = new Encryption();
+
+        try {
+            await encryption.decrypt(json.challenge, options.password + 'challenge');
+        } catch(e) {
+            console.log(e);
+            throw "Password invalid";
+        }
+
+        for(let i in json) {
+            if(!json.hasOwnProperty(i) || ['version', 'encrypted', 'challenge'].indexOf(i) !== -1) continue;
+
+            try {
+                json[i] = JSON.parse(await encryption.decrypt(json[i], options.password + i));
+            } catch(e) {
+                console.log(e);
+                throw "Failed to decrypt " + i;
+            }
+        }
     }
 
     /**
