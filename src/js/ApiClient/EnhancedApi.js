@@ -399,6 +399,54 @@ export default class EnhancedApi extends SimpleApi {
 
 
     /**
+     * Settings
+     */
+
+    /**
+     *
+     * @param setting
+     * @returns {Promise<*>}
+     */
+    async getSetting(setting) {
+        let data = await super.getSettings([setting]);
+        return data[setting];
+    }
+
+    /**
+     *
+     * @param setting
+     * @param value
+     * @returns {*}
+     */
+    setSetting(setting, value) {
+        let settings = {};
+        settings[setting] = value;
+        let data = super.setSettings(settings);
+        return data[setting];
+    }
+
+    /**
+     *
+     * @param setting
+     * @returns {Promise<*>}
+     */
+    async resetSetting(setting) {
+        let data = await super.resetSettings([setting]);
+        return data[setting];
+    }
+
+    /**
+     *
+     * @param scopes
+     * @returns {*}
+     */
+    listSettings(scopes = null) {
+        if(typeof scopes === 'string') scopes = [scopes];
+        return super.listSettings(scopes);
+    }
+
+
+    /**
      * Validation
      */
 

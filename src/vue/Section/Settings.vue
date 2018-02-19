@@ -6,7 +6,7 @@
                 <translate tag="h3" say="Password Generator"/>
 
                 <translate tag="label" for="setting-security-level" say="Password strength"/>
-                <select id="setting-security-level" v-model="user['password.generator.strength']">
+                <select id="setting-security-level" v-model="settings['user.password.generator.strength']">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -15,11 +15,11 @@
                 <span></span>
 
                 <translate tag="label" for="setting-include-numbers" say="Include numbers"/>
-                <input type="checkbox" id="setting-include-numbers" v-model="user['password.generator.numbers']">
+                <input type="checkbox" id="setting-include-numbers" v-model="settings['user.password.generator.numbers']">
                 <span></span>
 
                 <translate tag="label" for="setting-include-special" say="Include special charaters"/>
-                <input type="checkbox" id="setting-include-special" v-model="user['password.generator.special']">
+                <input type="checkbox" id="setting-include-special" v-model="settings['user.password.generator.special']">
                 <span></span>
             </section>
         </div>
@@ -36,7 +36,7 @@
         },
         data() {
             return {
-                user: {}
+                settings: {}
             };
         },
         created() {
@@ -44,21 +44,20 @@
         },
         methods   : {
             loadSettings() {
+                this.settings = {};
                 API.listSettings('user')
-                   .then((d) => {this.user = d;});
+                   .then((d) => {this.settings = d;});
             },
-            setSetting(scope, key, value) {
-                API.setSetting(scope + '.' + key, value)
+            saveSettings() {
+                API.setSettings(this.settings)
                    .catch(this.loadSettings);
             }
         },
         watch     : {
-            user: {
+            settings: {
                 handler(value, oldValue) {
-                    for(let i in value) {
-                        if(value.hasOwnProperty(i) && oldValue.hasOwnProperty(i)) {
-                            this.setSetting('user', i, value[i]);
-                        }
+                    if(value.hasOwnProperty('user.password.generator.strength') && oldValue.hasOwnProperty('user.password.generator.strength')) {
+                        this.saveSettings();
                     }
                 },
                 deep: true

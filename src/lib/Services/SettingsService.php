@@ -147,41 +147,41 @@ class SettingsService {
     }
 
     /**
-     * @param string|null $scope
+     * @param array|null $scope
      *
      * @return array
      * @throws ApiException
      */
-    public function listSettings(string $scope = null): array {
+    public function listSettings(array $scope = null): array {
         $settings = [];
 
-        if($scope === null || $scope === 'server') {
-            $settings['server'] = [];
+        if($scope === null || in_array('server', $scope)) {
             foreach($this->serverSettings as $setting) {
-                $settings['server'][ $setting ] = $this->getServerSetting($setting);
+                $settings[ 'server.'.$setting ] = $this->getServerSetting($setting);
             }
         }
 
-        if($scope === null || $scope === 'theme') {
-            $settings['theme'] = [];
+        if($scope === null || in_array('theme', $scope)) {
             foreach($this->themeSettings as $setting) {
-                $settings['theme'][ $setting ] = $this->getThemeSetting($setting);
+                $settings[ 'theme.'.$setting ] = $this->getThemeSetting($setting);
             }
         }
 
-        if($scope === null || $scope === 'user') {
-            $settings['user'] = [];
+        if($scope === null || in_array('user', $scope)) {
             foreach(array_keys($this->userSettings) as $setting) {
                 $setting                      = str_replace('/', '.', $setting);
-                $settings['user'][ $setting ] = $this->getUserSetting($setting);
+                $settings[ 'user.'.$setting ] = $this->getUserSetting($setting);
             }
         }
 
-        if($scope === null || $scope === 'client') {
-            $settings['client'] = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+        if($scope === null || in_array('client', $scope)) {
+            $client = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+            foreach($client as $key => $value) {
+                $settings[ 'client.'.$key ] = $value;
+            }
         }
 
-        return $scope === null ? $settings:$settings[ $scope ];
+        return $settings;
     }
 
     /**

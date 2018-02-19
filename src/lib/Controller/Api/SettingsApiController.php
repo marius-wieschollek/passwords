@@ -41,31 +41,45 @@ class SettingsApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $key
-     *
      * @return JSONResponse
      * @throws \OCA\Passwords\Exception\ApiException
      */
-    public function get(string $key): JSONResponse {
-        return $this->createJsonResponse($this->settings->get($key));
+    public function get(): JSONResponse {
+        $params = $this->request->getParams();
+        unset($params['_route']);
+
+        if(empty($params)) throw new ApiException('Invalid Key', 400);
+
+        $settings = [];
+        foreach($params as $key) {
+            $settings[ $key ] = $this->settings->get($key);
+        }
+
+        return $this->createJsonResponse($settings);
     }
 
     /**
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
-     *
-     * @param string $key
-     * @param null   $value
      *
      * @return JSONResponse
      * @throws ApiException
      * @throws PreConditionNotMetException
      */
-    public function set(string $key, $value = null): JSONResponse {
-        $this->settings->set($key, $value);
+    public function set(): JSONResponse {
+        $params = $this->request->getParams();
+        unset($params['_route']);
 
-        return $this->createJsonResponse(['status' => 'ok', 'key' => $key, 'value' => $value]);
+        if(empty($params)) throw new ApiException('Invalid Key', 400);
+
+        $settings = [];
+        foreach($params as $key => $value) {
+            $this->settings->set($key, $value);
+            $settings[ $key ] = $value;
+        }
+
+        return $this->createJsonResponse($settings);
     }
 
     /**
@@ -73,14 +87,14 @@ class SettingsApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $scope
+     * @param array|null $scopes
      *
      * @return JSONResponse
      * @throws ApiException
      */
-    public function list(string $scope = null): JSONResponse {
+    public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
-            $this->settings->listSettings($scope)
+            $this->settings->listSettings($scopes)
         );
     }
 
@@ -89,15 +103,20 @@ class SettingsApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $key
-     *
      * @return JSONResponse
      * @throws ApiException
      * @throws PreConditionNotMetException
      */
-    public function reset(string $key): JSONResponse {
-        $value = $this->settings->reset($key);
+    public function reset(): JSONResponse {
+        $params = $this->request->getParams();
+        unset($params['_route']);
 
-        return $this->createJsonResponse(['status' => 'ok', 'key' => $key, 'value' => $value]);
+        $settings = [];
+        if(empty($params)) throw new ApiException('Invalid Key', 400);
+        foreach($params as $key) {
+            $settings[ $key ] = $this->settings->reset($key);
+        }
+
+        return $this->createJsonResponse($settings);
     }
 }

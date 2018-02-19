@@ -426,21 +426,41 @@ export default class SimpleApi {
      * Settings
      */
 
-    getSetting(key) {
-        return this._createRequest('settings.get', {key: key}, 'POST');
+    /**
+     *
+     * @param settings
+     * @returns {Promise}
+     */
+    getSettings(settings) {
+        return this._createRequest('settings.get', settings, 'POST');
     }
 
-    setSetting(key, value) {
-        return this._createRequest('settings.set', {key: key, value: value}, 'POST');
+    /**
+     *
+     * @param settings
+     * @returns {Promise}
+     */
+    setSettings(settings) {
+        return this._createRequest('settings.set', settings, 'POST');
     }
 
-    resetSetting(key) {
-        return this._createRequest('settings.reset', {key: key}, 'POST');
+    /**
+     *
+     * @param settings
+     * @returns {Promise}
+     */
+    resetSettings(settings) {
+        return this._createRequest('settings.reset', settings, 'POST');
     }
 
-    listSettings(scope = null) {
-        if(scope === null) return this._createRequest('settings.list');
-        return this._createRequest('settings.list', {scope: scope}, 'POST');
+    /**
+     *
+     * @param scopes
+     * @returns {Promise}
+     */
+    listSettings(scopes = null) {
+        if(scopes === null) return this._createRequest('settings.list');
+        return this._createRequest('settings.list', {scopes: scopes}, 'POST');
     }
 
 
