@@ -58,11 +58,8 @@
                         v-for="revision in getRevisions"
                         :key="revision.id"
                         :style="{'background-image': 'url(' + revision.icon + ')'}">
-                        <span>
-                            {{ revision.label }}<br>
-                            <span class="time">
-                                {{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}
-                            </span>
+                        <span>{{ revision.label }}<br>
+                            <span class="time">{{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}</span>
                         </span>
                         <translate icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== object.revision"/>
                     </li>
@@ -106,8 +103,8 @@
         data() {
             return {
                 qrcode : {
-                    color  : ThemeManager.getColor(),
-                    text   : this.password.password
+                    color: ThemeManager.getColor(),
+                    text : this.password.password
                 },
                 qrModel: 'password',
                 object : this.password,
@@ -180,7 +177,7 @@
             refreshView(event) {
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                       .then((p) => {this.object = p;});
+                        .then((p) => {this.object = p;});
                 }
             }
         },

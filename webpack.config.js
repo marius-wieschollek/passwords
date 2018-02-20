@@ -54,8 +54,9 @@ module.exports = env => {
             personal: __dirname + '/src/js/personal.js'
         },
         output : {
-            path    : __dirname + '/src/',
-            filename: "js/Static/[name].js"
+            path         : __dirname + '/src/',
+            filename     : 'js/Static/[name].js',
+            chunkFilename: 'js/Static/[name].js'
         },
         resolve: {
             modules   : ['node_modules', 'src'],

@@ -5,7 +5,7 @@ import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 /**
  *
  */
-class ImportManager {
+export class ImportManager {
 
     constructor() {
         this.defaultFolder = '00000000-0000-0000-0000-000000000000';
@@ -276,7 +276,3 @@ class ImportManager {
         this.progress(this.processed, this.total, status);
     }
 }
-
-let IM = new ImportManager();
-
-export default IM;

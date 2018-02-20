@@ -54,7 +54,6 @@
 <script>
     import $ from "jquery";
     import API from "@js/Helper/api";
-    import SimpleMDE from 'simplemde';
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
@@ -80,17 +79,7 @@
         },
 
         mounted() {
-            this.simplemde = new SimpleMDE(
-                {
-                    element                : document.getElementById('password-notes'),
-                    hideIcons              : ['fullscreen', 'side-by-side'],
-                    autoDownloadFontAwesome: false,
-                    spellChecker           : false,
-                    placeholder            : Utility.translate('Take some notes'),
-                    status                 : false,
-                    initialValue           : this.password.notes
-                });
-
+            this.loadSimpleMde();
             $('#password-username').focus();
             setTimeout(() => {$('#password-password').removeAttr('readonly');}, 250);
         },
@@ -123,14 +112,14 @@
                 this.showLoader = true;
 
                 API.generatePassword()
-                   .then((d) => {
-                       this.password.password = d.password;
-                       this.showLoader = false;
-                       this.showPassword = true;
-                   })
-                   .catch(() => {
-                       this.showLoader = false;
-                   });
+                    .then((d) => {
+                        this.password.password = d.password;
+                        this.showLoader = false;
+                        this.showPassword = true;
+                    })
+                    .catch(() => {
+                        this.showLoader = false;
+                    });
             },
             submitAction            : function() {
                 let password = Utility.cloneObject(this.password);
@@ -148,6 +137,28 @@
                         console.error(e);
                     }
                 }
+            },
+            async loadSimpleMde() {
+                let SimpleMDE;
+                try {
+                    SimpleMDE = await import(/* webpackChunkName: "simplemde" */ 'simplemde');
+                } catch(e) {
+                    console.error(e);
+                    Messages.alert(['Unable to load {module}', {module: 'SimpleMde'}], 'Network error');
+                    return;
+                }
+
+                this.simplemde = new SimpleMDE(
+                    {
+                        element                : document.getElementById('password-notes'),
+                        hideIcons              : ['fullscreen', 'side-by-side'],
+                        autoDownloadFontAwesome: false,
+                        spellChecker           : false,
+                        placeholder            : Utility.translate('Take some notes'),
+                        status                 : false,
+                        initialValue           : this.password.notes
+                    }
+                );
             }
         },
 

@@ -5,7 +5,7 @@ import Encryption from "@/js/ApiClient/Encryption";
 /**
  *
  */
-class ExportManager {
+export class ExportManager {
 
     constructor() {
         this.defaultFolder = '00000000-0000-0000-0000-000000000000';
@@ -313,7 +313,3 @@ class ExportManager {
         return tags;
     }
 }
-
-let EM = new ExportManager();
-
-export default EM;

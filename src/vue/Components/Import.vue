@@ -112,8 +112,6 @@
     import Translate from '@vc/Translate';
     import Utility from "@js/Classes/Utility";
     import Messages from "@js/Classes/Messages";
-    import ImportManager from '@js/Manager/ImportManager';
-
 
     export default {
         components: {
@@ -161,10 +159,22 @@
             preventPasswordFill(t = 300) {
                 setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
             },
-            importDb() {
+            async importDb() {
                 this.progress.style = '';
                 this.importing = true;
-                ImportManager.importDatabase(this.file, this.type, this.options, this.registerProgress)
+
+                let IM;
+                try {
+                    let module = await import(/* webpackChunkName: "ImportManager" */ '@js/Manager/ImportManager');
+                    IM = module.ImportManager;
+                } catch(e) {
+                    console.error(e);
+                    Messages.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
+                    return;
+                }
+
+                new IM()
+                    .importDatabase(this.file, this.type, this.options, this.registerProgress)
                     .catch((e) => {
                         this.importing = false;
                         this.progress.style = 'error';
@@ -172,7 +182,7 @@
                         if(typeof e !== 'string') e = e.message;
                         Messages.alert(e, 'Import error');
                     })
-                    .then((d) => {
+                    .then(() => {
                         if(this.progress.style !== 'error') {
                             this.importing = false;
                             this.progress.style = 'success';

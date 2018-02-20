@@ -8,6 +8,7 @@ use OC\Authentication\Token\IToken;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
 use OCP\IRequest;
@@ -117,7 +118,7 @@ class PageController extends Controller {
             $this->destroyToken();
         }
 
-        return new TemplateResponse(
+        $response = new TemplateResponse(
             $this->appName,
             'index',
             [
@@ -125,6 +126,12 @@ class PageController extends Controller {
                 'version' => $this->getServerVersion()
             ]
         );
+
+        $csp = new ContentSecurityPolicy();
+        $csp->addAllowedScriptDomain($this->request->getServerHost());
+        $response->setContentSecurityPolicy($csp);
+
+        return $response;
     }
 
     /**
