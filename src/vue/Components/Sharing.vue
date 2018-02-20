@@ -22,6 +22,7 @@
 </template>
 
 <script>
+    import $ from "jquery";
     import API from '@js/Helper/api';
     import Utility from "@js/Classes/Utility";
     import Messages from '@js/Classes/Messages';

@@ -197,8 +197,8 @@
                     reader.onload = (e) => { this.file = e.target.result; };
                     reader.readAsText(file, 'utf-8');
                 } else {
-                    $('#passwords-import-file').val('');
                     this.file = null;
+                    document.getElementById('passwords-import-file').value = null;
                     Messages.alert('Invalid file type', 'Import error');
                 }
             },
@@ -224,7 +224,7 @@
             },
             csvFieldMapping(event, id) {
                 let mapping = this.options.mapping.clone(),
-                    value   = $(event.target).val();
+                    value   = event.target.value;
 
                 if(value === 'null') value = null;
                 mapping[id - 1] = value;
@@ -292,7 +292,7 @@
                 }
 
                 if(oldMime !== this.mime && this.file) {
-                    $('#passwords-import-file').val('');
+                    document.getElementById('passwords-import-file').value = null;
                     this.file = null;
                 }
                 this.validateStep();
@@ -307,7 +307,7 @@
                 deep: true
             },
             'options.db'() {
-                $('.csv-mapping-field select').val('');
+                document.querySelectorAll('.csv-mapping-field select').forEach((e) => { e.value = null;});
                 if(this.source === 'csv') this.options.mapping = [];
                 this.validateStep();
             }

@@ -55,8 +55,7 @@
         methods: {
             imageMouseOver($event) {
                 if(this.loading) return;
-                let $element = $($event.target),
-                    margin   = $element.height() - 290;
+                let margin   = $event.target.height - 290;
 
                 if(margin > 0) {
                     if(margin < 500) {

@@ -58,7 +58,7 @@
                 <br>
                 <translate tag="h3" say="CSV Field Mapping"/>
                 <div class="csv-mapping">
-                    <div v-for="id in options.mapping.length+1" class="csv-mapping-field" :key="id">
+                    <div v-for="id in csvMappingFields" class="csv-mapping-field" :key="id">
                         <select @change="csvFieldMapping($event, id)" :disabled="exporting">
                             <translate tag="option" value="null" say="Empty"/>
                             <translate tag="option" v-for="option in csvFieldOptions" :value="option" :say="option.capitalize()" :key="option"/>
@@ -110,6 +110,9 @@
             },
             backupPasswordTitle() {
                 return Utility.translate('(Optional) Encrypts the backup');
+            },
+            csvMappingFields() {
+                return this.options.mapping.length + 1;
             }
         },
 
@@ -163,7 +166,7 @@
                 let model = $e.target.value,
                     index = this.models.indexOf(model);
 
-                if($($e.target).prop("checked")) {
+                if($e.target.checked) {
                     if(index === -1) {
                         this.models.push(model);
                     }
@@ -197,13 +200,16 @@
                 }
             },
             csvFieldMapping(event, id) {
-                let mapping = this.options.mapping.clone(),
-                    value   = $(event.target).val();
+                let mapping = this.options.mapping.clone();
 
-                id--;
-                if(value === 'null') value = null;
-                mapping[id] = value;
-                if(!value && id + 1 === mapping.length) mapping = mapping.remove(id);
+                mapping[id - 1] = event.target.value;
+                for(let i = mapping.length - 1; i > 0; i--) {
+                    if(mapping[i] === 'null' && (mapping[i - 1] === 'null' || i === mapping.length - 1)) {
+                        mapping.pop();
+                    } else {
+                        break;
+                    }
+                }
 
                 this.options.mapping = mapping;
             },
@@ -238,7 +244,7 @@
             'options.db'(value) {
                 this.models = [value];
                 this.options.mapping = [];
-                $('.csv-mapping-field select').val('');
+                document.querySelectorAll('.csv-mapping-field select').forEach((e) => { e.value = null;});
                 this.validateStep();
             },
             'options.password'(value) {
