@@ -4,6 +4,7 @@
 <script>
     import Events from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
+    import SettingsManager from "@js/Manager/SettingsManager";
 
     export default {
         data() {
@@ -15,8 +16,8 @@
                     element: null
                 },
                 sort   : {
-                    by   : 'label',
-                    order: true
+                    by   : SettingsManager.get('ui.sort.by', 'label'),
+                    order: SettingsManager.get('ui.sort.order', true)
                 }
             }
         },
@@ -43,9 +44,9 @@
             },
             showHeader() {
                 return !this.loading &&
-                       (!this.passwords || this.passwords.length) &&
-                       (!this.folders || this.folders.length) &&
-                       (!this.tags || this.tags.length);
+                       ((!this.passwords || this.passwords.length) ||
+                       (!this.folders || this.folders.length) ||
+                       (!this.tags || this.tags.length));
             },
             isEmpty() {
                 return !this.loading &&
@@ -61,6 +62,8 @@
         methods: {
             updateSorting($event) {
                 this.sort = $event;
+                SettingsManager.set('ui.sort.by', $event.by);
+                SettingsManager.set('ui.sort.order', $event.order);
                 if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
                 if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
                 if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);

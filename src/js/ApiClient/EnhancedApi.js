@@ -27,11 +27,11 @@ export default class EnhancedApi extends SimpleApi {
         this._baseUrl = baseUrl;
         this._folderIcon = baseUrl + 'core/img/filetypes/folder.svg';
         if(username !== null && password !== null) {
-            if(window.localStorage.icon) this._folderIcon = window.localStorage.icon;
+            if(window.localStorage.pwFolderIcon) this._folderIcon = window.localStorage.pwFolderIcon;
 
             this.getSetting('theme.folder.icon')
                 .then((url) => {
-                    window.localStorage.icon = url;
+                    window.localStorage.pwFolderIcon = url;
                     this._folderIcon = url;
                 });
         }
