@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <generic-line
                         v-if="$route.params.type === undefined"
                         v-for="(title, index) in shareType"
@@ -19,6 +19,7 @@
                         </li>
                     </ul>
                 </password-line>
+                <footer-line :passwords="passwords" v-if="showHeaderAndFooter"/>
                 <empty v-if="isEmpty" :text="emptyText"/>
             </div>
         </div>
@@ -32,8 +33,9 @@
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import HeaderLine from "@/vue/Line/Header";
-    import Empty from "@/vue/Components/Empty";
+    import HeaderLine from "@vue/Line/Header";
+    import FooterLine from "@vue/Line/Footer";
+    import Empty from "@vue/Components/Empty";
     import GenericLine from "@vue/Line/Generic";
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
@@ -43,8 +45,9 @@
         extends   : BaseSection,
         components: {
             Empty,
-            HeaderLine,
             Breadcrumb,
+            HeaderLine,
+            FooterLine,
             GenericLine,
             PasswordLine,
             PasswordDetails
@@ -70,6 +73,7 @@
         methods: {
             refreshView      : function() {
                 this.detail.type = 'none';
+
                 if(this.$route.params.type !== undefined) {
                     let status = Number.parseInt(this.$route.params.type),
                         label  = this.shareType[status];
@@ -80,7 +84,7 @@
                         API.findShares({owner: '_self'}, 'model+password').then(this.updateContentList);
                     }
 
-                    if(this.passwords.length === 0) this.loading = true;
+                    if(!this.passwords.length) this.loading = true;
                     this.breadcrumb = [
                         {path: '/shared', label: Utility.translate('Shared')},
                         {path: this.$route.path, label: Utility.translate(label)}

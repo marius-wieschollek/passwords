@@ -3,10 +3,11 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="showHeaderAndFooter"/>
                 <empty v-if="isEmpty" text="Your favorites will appear here"/>
             </div>
         </div>
@@ -21,8 +22,9 @@
     import TagLine from '@vue/Line/Tag';
     import Breadcrumb from '@vc/Breadcrumbs';
     import FolderLine from '@vue/Line/Folder';
-    import Empty from "@/vue/Components/Empty";
-    import HeaderLine from "@/vue/Line/Header";
+    import Empty from "@vue/Components/Empty";
+    import HeaderLine from "@vue/Line/Header";
+    import FooterLine from "@vue/Line/Footer";
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
@@ -36,6 +38,7 @@
             Breadcrumb,
             FolderLine,
             HeaderLine,
+            FooterLine,
             PasswordLine,
             PasswordDetails
         },

@@ -3,10 +3,10 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeader"/>
-                <security-line v-if="$route.params.status === undefined" v-for="(title, index) in securityStatus" :key="title" :status="index" :label="title">
-                </security-line>
+                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <security-line v-if="$route.params.status === undefined" v-for="(title, index) in securityStatus" :key="title" :status="index" :label="title"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
+                <footer-line :passwords="passwords" v-if="showHeaderAndFooter"/>
                 <empty v-if="isEmpty" :text="emptyText"/>
             </div>
         </div>
@@ -20,8 +20,9 @@
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
-    import Empty from "@/vue/Components/Empty";
-    import HeaderLine from "@/vue/Line/Header";
+    import Empty from "@vue/Components/Empty";
+    import HeaderLine from "@vue/Line/Header";
+    import FooterLine from "@vue/Line/Footer";
     import PasswordLine from '@vue/Line/Password';
     import SecurityLine from '@vue/Line/Security';
     import BaseSection from '@vue/Section/BaseSection';
@@ -31,8 +32,9 @@
         extends   : BaseSection,
         components: {
             Empty,
-            HeaderLine,
             Breadcrumb,
+            HeaderLine,
+            FooterLine,
             PasswordLine,
             SecurityLine,
             PasswordDetails
@@ -59,12 +61,14 @@
         methods: {
             refreshView: function() {
                 this.detail.type = 'none';
+
                 if(this.$route.params.status !== undefined) {
                     let status = this.$route.params.status,
                         label  = this.securityStatus[status];
-                    API.findPasswords({status: status}).then(this.updateContentList);
 
-                    if(this.passwords.length === 0) this.loading = true;
+                    API.findPasswords({status: status}).then(this.updatePasswordList);
+                    if(!this.passwords.length) this.loading = true;
+
                     this.breadcrumb = [
                         {path: '/security', label: Utility.translate('Security')},
                         {path: this.$route.path, label: Utility.translate(label)}

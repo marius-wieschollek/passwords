@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import Translate from "@/vue/Components/Translate";
+    import Translate from "@vue/Components/Translate";
 
     export default {
         components: {

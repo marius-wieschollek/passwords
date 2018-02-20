@@ -8,7 +8,7 @@
 
 <script>
     import API from '@js/Helper/api';
-    import Translate from "@/vue/Components/Translate";
+    import Translate from "@vue/Components/Translate";
 
     export default {
         components: {

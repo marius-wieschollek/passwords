@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
-import Utility from "@/js/Classes/Utility";
-import Encryption from "@/js/ApiClient/Encryption";
+import Utility from "@js/Classes/Utility";
+import Encryption from "@js/ApiClient/Encryption";
 
 /**
  *

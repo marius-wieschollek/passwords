@@ -1,6 +1,6 @@
-import API from "@/js/Helper/api";
-import Utility from "@/js/Classes/Utility";
-import SimpleApi from "@/js/ApiClient/SimpleApi";
+import API from "@js/Helper/api";
+import Utility from "@js/Classes/Utility";
+import SimpleApi from "@js/ApiClient/SimpleApi";
 import * as randomMC from "random-material-color";
 
 export default class ImportCsvConversionHelper {

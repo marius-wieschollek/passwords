@@ -58,7 +58,7 @@
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import ThemeManager from '@js/Manager/ThemeManager';
-    import EnhancedApi from "@/js/ApiClient/EnhancedApi";
+    import EnhancedApi from "@js/ApiClient/EnhancedApi";
 
     export default {
         data() {

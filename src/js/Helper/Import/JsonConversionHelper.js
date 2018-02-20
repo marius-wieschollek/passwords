@@ -1,7 +1,7 @@
-import API from "@/js/Helper/api";
-import Utility from "@/js/Classes/Utility";
+import API from "@js/Helper/api";
+import Utility from "@js/Classes/Utility";
 import * as randomMC from "random-material-color";
-import Encryption from "@/js/ApiClient/Encryption";
+import Encryption from "@js/ApiClient/Encryption";
 
 export default class ImportJsonConversionHelper {
 

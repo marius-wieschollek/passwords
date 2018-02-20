@@ -26,13 +26,13 @@
             this.refreshView();
             Events.on('password.changed', this.refreshView);
             if(this.folders) Events.on('folder.changed', this.refreshView);
-            if(this.tag) Events.on('tag.changed', this.refreshView);
+            if(this.tags) Events.on('tag.changed', this.refreshView);
         },
 
         beforeDestroy() {
             Events.off('password.changed', this.refreshView);
-            if(this.folders) Events.off('folder.changed', this.refreshView);
-            if(this.tag) Events.off('tag.changed', this.refreshView);
+            Events.off('folder.changed', this.refreshView);
+            Events.off('tag.changed', this.refreshView);
         },
 
         computed: {
@@ -42,11 +42,11 @@
                     'loading': this.loading
                 }
             },
-            showHeader() {
+            showHeaderAndFooter() {
                 return !this.loading &&
-                       ((!this.passwords || this.passwords.length) ||
-                       (!this.folders || this.folders.length) ||
-                       (!this.tags || this.tags.length));
+                       ((this.passwords && this.passwords.length) ||
+                       (this.folders && this.folders.length) ||
+                       (this.tags && this.tags.length));
             },
             isEmpty() {
                 return !this.loading &&
