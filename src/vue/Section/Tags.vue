@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
+    <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
             <breadcrumb :newTag="!currentTag" :newPassword="currentTag !== null" :tag="currentTag" :items="breadcrumb"/>
             <div class="item-list">
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -18,15 +18,17 @@
 <script>
     import API from '@js/Helper/api';
     import TagLine from '@vue/Line/Tag';
-    import Events from "@js/Classes/Events";
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
     import HeaderLine from "@/vue/Line/Header";
     import Empty from "@/vue/Components/Empty";
     import PasswordLine from '@vue/Line/Password';
+    import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
 
     export default {
+        extends: BaseSection,
+
         components: {
             Empty,
             TagLine,
@@ -38,44 +40,11 @@
 
         data() {
             return {
-                loading     : true,
                 currentTag  : null,
                 defaultTitle: Utility.translate('Tags'),
                 defaultPath : '/tags/',
-                tags        : [],
-                passwords   : [],
-                detail      : {
-                    type   : 'none',
-                    element: null
-                },
-                sort     : {
-                    by   : 'label',
-                    order: true
-                }
+                tags        : []
             };
-        },
-
-        created() {
-            this.refreshView();
-            Events.on('tag.changed', this.refreshView);
-            Events.on('password.changed', this.refreshView);
-        },
-
-        beforeDestroy() {
-            Events.off('tag.changed', this.refreshView);
-            Events.off('password.changed', this.refreshView);
-        },
-
-        computed: {
-            showDetails() {
-                return this.detail.type !== 'none';
-            },
-            showHeader() {
-                return !this.loading && (this.passwords.length || this.tags.length);
-            },
-            isEmpty() {
-                return !this.loading && !this.passwords.length && !this.tags.length;
-            }
         },
 
         methods: {
@@ -96,11 +65,6 @@
                 }
             },
 
-            updateTagList: function(tags) {
-                this.loading = false;
-                this.tags = Utility.sortApiObjectArray(tags, this.sort.by, this.sort.order);
-            },
-
             updatePasswordList: function(tag) {
                 this.loading = false;
                 if(tag.trashed) {
@@ -113,12 +77,6 @@
                     {path: this.defaultPath, label: this.defaultTitle},
                     {path: this.$route.path, label: tag.label}
                 ];
-            },
-
-            updateSorting($event) {
-                this.sort = $event;
-                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
-                this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);
             }
         },
         watch  : {

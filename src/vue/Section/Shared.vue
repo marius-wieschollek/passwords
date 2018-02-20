@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
+    <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
@@ -23,23 +23,24 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element"/>
         </div>
     </div>
 </template>
 
 <script>
     import API from '@js/Helper/api';
-    import Events from "@js/Classes/Events";
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
     import HeaderLine from "@/vue/Line/Header";
     import Empty from "@/vue/Components/Empty";
     import GenericLine from "@vue/Line/Generic";
     import PasswordLine from '@vue/Line/Password';
+    import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
 
     export default {
+        extends   : BaseSection,
         components: {
             Empty,
             HeaderLine,
@@ -51,47 +52,18 @@
         data() {
             return {
                 loading   : false,
-                passwords : [],
-                shareType : [
-                    'Shared with me', 'Shared by me'
-                ],
-                detail    : {
-                    type   : 'none',
-                    element: null
-                },
+                shareType : ['Shared with me', 'Shared by me'],
                 breadcrumb: [],
-                shareUsers: [],
-                sort     : {
-                    by   : 'label',
-                    order: true
-                }
+                shareUsers: []
             };
         },
 
-        created() {
-            this.refreshView();
-            Events.on('password.changed', this.refreshView);
-        },
-
-        beforeDestroy() {
-            Events.off('password.changed', this.refreshView);
-        },
-
         computed: {
-            showDetails() {
-                return this.detail.type !== 'none';
-            },
-            showHeader() {
-                return !this.loading && this.passwords.length;
-            },
             isEmpty() {
                 return !this.loading && !this.passwords.length && this.$route.params.type !== undefined;
             },
             emptyText() {
-                if(this.$route.params.type.toString() === '0') {
-                    return 'No passwords were shared with you';
-                }
-                return "You did not share any passwords";
+                return this.$route.params.type.toString() === '0' ? 'No passwords were shared with you':'You did not share any passwords';
             }
         },
 
@@ -146,11 +118,6 @@
             getShareUsers(id) {
                 return this.shareUsers[id];
             },
-
-            updateSorting($event) {
-                this.sort = $event;
-                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
-            }
         },
         watch  : {
             $route: function() {

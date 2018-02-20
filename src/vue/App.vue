@@ -149,14 +149,4 @@
             }
         }
     }
-
-    [data-server-version="12"] #app-navigation {
-        #app-settings {
-            max-height : 90px;
-
-            &.open {
-                max-height : 270px;
-            }
-        }
-    }
 </style>

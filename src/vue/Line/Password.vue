@@ -1,9 +1,5 @@
 <template>
-    <div class="row password"
-         @click="copyPasswordAction($event)"
-         @dblclick="copyUsernameAction($event)"
-         @dragstart="dragStartAction($event)"
-         :data-password-id="password.id">
+    <div class="row password" @click="copyPasswordAction($event)" @dblclick="copyUsernameAction($event)" @dragstart="dragStartAction($event)" :data-password-id="password.id">
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ password.label }}</span>

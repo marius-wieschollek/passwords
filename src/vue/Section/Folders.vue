@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
+    <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
             <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb" :showAddNew="showAddNew"/>
             <div class="item-list">
@@ -10,23 +10,25 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element"/>
         </div>
     </div>
 </template>
 
 <script>
     import API from '@js/Helper/api';
-    import Events from "@js/Classes/Events";
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
     import FolderLine from '@vue/Line/Folder';
     import Empty from "@/vue/Components/Empty";
     import HeaderLine from "@/vue/Line/Header";
     import PasswordLine from '@vue/Line/Password';
+    import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
 
     export default {
+        extends: BaseSection,
+
         components: {
             Empty,
             FolderLine,
@@ -35,51 +37,22 @@
             PasswordLine,
             PasswordDetails
         },
+
         data() {
             return {
-                loading      : true,
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
                 defaultTitle : Utility.translate('Folders'),
                 defaultPath  : '/folders',
                 currentFolder: '00000000-0000-0000-0000-000000000000',
                 draggable    : 'true',
                 folders      : [],
-                passwords    : [],
-                detail       : {
-                    type   : 'none',
-                    element: null
-                },
                 showAddNew   : true,
-                breadcrumb   : [],
-                sort         : {
-                    by   : 'label',
-                    order: true
-                }
+                breadcrumb   : []
             };
-        },
-        computed  : {
-            showDetails() {
-                return this.detail.type !== 'none';
-            },
-            showHeader() {
-                return !this.loading && (this.passwords.length || this.folders.length);
-            },
-            isEmpty() {
-                return !this.loading && !this.passwords.length && !this.folders.length;
-            }
-        },
-
-        created() {
-            this.refreshView();
-            Events.on('data.changed', this.refreshViewIfRequired);
-        },
-
-        beforeDestroy() {
-            Events.off('data.changed', this.refreshViewIfRequired);
         },
 
         methods: {
-            refreshView: function() {
+            refreshView          : function() {
                 this.loading = true;
                 this.folders = [];
                 this.passwords = [];
@@ -125,7 +98,7 @@
                     this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                 }
             },
-            updateContentList: function(folder) {
+            updateContentList    : function(folder) {
                 this.loading = false;
                 if(folder.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
@@ -144,7 +117,7 @@
                 this.currentFolder = folder.id;
                 this.updateBreadcrumb(folder);
             },
-            updateBreadcrumb : function(folder) {
+            updateBreadcrumb     : function(folder) {
                 this.breadcrumb = [
                     {path: this.defaultPath, label: this.defaultTitle, dropType: 'folder', folderId: this.defaultFolder}
                 ];
@@ -172,11 +145,6 @@
                         }
                     );
                 }
-            },
-            updateSorting($event) {
-                this.sort = $event;
-                this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
-                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
             }
         },
 

@@ -21,10 +21,6 @@
             }
         },
 
-        data() {
-            return {}
-        },
-
         computed: {
             securityCheck() {
                 switch(this.status) {
@@ -47,12 +43,10 @@
 </script>
 
 <style lang="scss">
-
     #app-content .item-list .row.security {
         .security {
             float     : none;
             font-size : 1.75rem;
         }
     }
-
 </style>

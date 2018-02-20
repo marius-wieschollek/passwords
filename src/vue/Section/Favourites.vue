@@ -1,5 +1,5 @@
 <template>
-    <div id="app-content" :class="{ 'show-details': showDetails, 'loading': loading }">
+    <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
             <breadcrumb :showAddNew="false"/>
             <div class="item-list">
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="detail.type === 'password'" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element"/>
         </div>
     </div>
 </template>
@@ -19,32 +19,16 @@
 <script>
     import API from '@js/Helper/api';
     import TagLine from '@vue/Line/Tag';
-    import Events from "@js/Classes/Events";
     import Breadcrumb from '@vc/Breadcrumbs';
     import FolderLine from '@vue/Line/Folder';
-    import Utility from "@js/Classes/Utility";
     import Empty from "@/vue/Components/Empty";
     import HeaderLine from "@/vue/Line/Header";
     import PasswordLine from '@vue/Line/Password';
+    import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
 
     export default {
-        data() {
-            return {
-                loading  : true,
-                passwords: [],
-                folders  : [],
-                tags     : [],
-                detail   : {
-                    type   : 'none',
-                    element: null
-                },
-                sort: {
-                    by: 'label',
-                    order: true
-                }
-            }
-        },
+        extends: BaseSection,
 
         components: {
             Empty,
@@ -56,24 +40,10 @@
             PasswordDetails
         },
 
-        created() {
-            this.refreshView();
-            Events.on('data.changed', this.refreshView);
-        },
-
-        beforeDestroy() {
-            Events.off('data.changed', this.refreshView)
-        },
-
-        computed: {
-            showDetails() {
-                return this.detail.type !== 'none';
-            },
-            showHeader() {
-                return !this.loading && (this.passwords.length || this.tags.length || this.folders.length);
-            },
-            isEmpty() {
-                return !this.loading && !this.passwords.length && !this.tags.length && !this.folders.length;
+        data() {
+            return {
+                folders: [],
+                tags   : []
             }
         },
 
@@ -82,24 +52,6 @@
                 API.findPasswords({favourite: true}).then(this.updatePasswordList);
                 API.findFolders({favourite: true}).then(this.updateFolderList);
                 API.findTags({favourite: true}).then(this.updateTagList);
-            },
-            updatePasswordList: function(passwords) {
-                this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
-            },
-            updateFolderList: function(folders) {
-                this.loading = false;
-                this.folders = Utility.sortApiObjectArray(folders, this.sort.by, this.sort.order);
-            },
-            updateTagList: function(tags) {
-                this.loading = false;
-                this.tags = Utility.sortApiObjectArray(tags, this.sort.by, this.sort.order);
-            },
-            updateSorting($event) {
-                this.sort = $event;
-                this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
-                this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
-                this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);
             }
         }
     };
