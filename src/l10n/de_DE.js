@@ -218,6 +218,8 @@ OC.L10N.register(
         "Your favorites will appear here"     : "Ihre Favoriten werden hier erscheinen",
         "Better check the other sections"     : "Möglicherweise haben Sie noch keine Passwörter",
         "That's probably a good sign"         : "Das ist sicherlich gut so",
+        "Network error"                       : "Netzwerkfehler",
+        "Unable to load {module}"             : "Das Modul {module} konnte nicht geladen werden. Möglicherweise ist die Verbindung zu Nextcloud unterbrochen",
         "{passwords} passwords"               : "{passwords} Passwörter",
         "1 password"                          : "1 Passwort",
         "{folders} folders"                   : "{folders} Ordner",

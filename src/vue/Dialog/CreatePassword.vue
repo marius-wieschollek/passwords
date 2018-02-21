@@ -57,8 +57,9 @@
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import ThemeManager from '@js/Manager/ThemeManager';
+    import Messages from "@js/Classes/Messages";
     import EnhancedApi from "@js/ApiClient/EnhancedApi";
+    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         data() {
@@ -99,16 +100,16 @@
         },
 
         methods: {
-            closeWindow             : function() {
+            closeWindow() {
                 this.$destroy();
                 let $container = $('#app-popup');
                 $container.find('div').remove();
                 $container.html('<div></div>');
             },
-            togglePasswordVisibility: function() {
+            togglePasswordVisibility() {
                 this.showPassword = !this.showPassword;
             },
-            generateRandomPassword  : function() {
+            generateRandomPassword() {
                 this.showLoader = true;
 
                 API.generatePassword()
@@ -121,7 +122,7 @@
                         this.showLoader = false;
                     });
             },
-            submitAction            : function() {
+            submitAction() {
                 let password = Utility.cloneObject(this.password);
                 password.notes = this.simplemde.value();
                 if(typeof password.folder === 'object') {
@@ -139,32 +140,30 @@
                 }
             },
             async loadSimpleMde() {
-                let SimpleMDE;
                 try {
-                    SimpleMDE = await import(/* webpackChunkName: "simplemde" */ 'simplemde');
+                    let SimpleMDE = await import(/* webpackChunkName: "simplemde" */ 'simplemde');
+
+                    this.simplemde = new SimpleMDE(
+                        {
+                            element                : document.getElementById('password-notes'),
+                            hideIcons              : ['fullscreen', 'side-by-side'],
+                            autoDownloadFontAwesome: false,
+                            spellChecker           : false,
+                            placeholder            : Utility.translate('Take some notes'),
+                            status                 : false,
+                            initialValue           : this.password.notes
+                        }
+                    );
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'SimpleMde'}], 'Network error');
-                    return;
                 }
-
-                this.simplemde = new SimpleMDE(
-                    {
-                        element                : document.getElementById('password-notes'),
-                        hideIcons              : ['fullscreen', 'side-by-side'],
-                        autoDownloadFontAwesome: false,
-                        spellChecker           : false,
-                        placeholder            : Utility.translate('Take some notes'),
-                        status                 : false,
-                        initialValue           : this.password.notes
-                    }
-                );
             }
         },
 
         watch: {
-            password: function(password) {
-                this.simplemde.value(password.notes);
+            password(password) {
+                if(this.simplemde) this.simplemde.value(password.notes);
             }
         }
     };
@@ -316,7 +315,7 @@
                     }
 
                     textarea {
-                        display : none;
+                        opacity : 0;
                     }
 
                     &.right {

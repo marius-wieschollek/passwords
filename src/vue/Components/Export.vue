@@ -133,34 +133,28 @@
                 this.buttonText = 'Waiting...';
                 this.exporting = true;
 
-                let EM;
                 try {
                     let module = await import(/* webpackChunkName: "ExportManager" */ '@js/Manager/ExportManager');
-                    EM = module.ExportManager;
+                    new module.ExportManager()
+                        .exportDatabase(this.format, this.models, this.options)
+                        .catch((e) => {
+                            this.exporting = false;
+                            if(typeof e !== 'string') e = e.message;
+                            Messages.alert(e, 'Export error');
+                        })
+                        .then((d) => {
+                            if(d) {
+                                this.data = d;
+                                this.buttonText = 'Download {format}';
+                            } else {
+                                Messages.alert('There is no data to export', 'Nothing to export');
+                            }
+                            this.exporting = false;
+                        });
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
-                    return;
                 }
-
-
-                new EM()
-                    .exportDatabase(this.format, this.models, this.options)
-                    .catch((e) => {
-                        this.exporting = false;
-                        if(typeof e !== 'string') e = e.message;
-                        Messages.alert(e, 'Export error');
-                    })
-                    .then((d) => {
-                        if(d) {
-                            this.data = d;
-                            this.buttonText = 'Download {format}';
-                        } else {
-                            Messages.alert('There is no data to export', 'Nothing to export');
-                        }
-                        this.exporting = false;
-                    });
-
             },
             setExportModel($e) {
                 let model = $e.target.value,

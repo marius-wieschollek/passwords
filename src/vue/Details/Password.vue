@@ -35,7 +35,7 @@
             </div>
             <div slot="notes" class="notes">
                 <translate say="No notes" v-if="object.notes.length === 0"/>
-                <div v-html="getNotes"></div>
+                <div v-html="notes"></div>
             </div>
             <div slot="share">
                 <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="object.id">
@@ -44,9 +44,9 @@
                     </div>
                     <div slot="qrcode" class="password-share-qrcode">
                         <select id="password-details-qrcode" v-model="qrModel">
-                            <translate tag="option" value="username" v-if="object.username">Username</translate>
-                            <translate tag="option" value="password" selected>Password</translate>
-                            <translate tag="option" value="url" v-if="object.url">Website</translate>
+                            <translate tag="option" value="username" v-if="object.username" say="Username"/>
+                            <translate tag="option" value="password" selected say="Password"/>
+                            <translate tag="option" value="url" v-if="object.url" say="Website"/>
                         </select>
                         <qr-code :text="qrcode.text" :color="qrcode.color" :bgColor="qrcode.bgColor" :size="256" errorLevel="L"/>
                     </div>
@@ -70,8 +70,6 @@
 </template>
 
 <script>
-    import $ from "jquery";
-    import marked from "marked";
     import Tabs from '@vc/Tabs.vue';
     import Tags from '@vc/Tags.vue';
     import API from '@js/Helper/api';
@@ -80,6 +78,7 @@
     import Events from "@js/Classes/Events";
     import QrCode from 'vue-qrcode-component';
     import Utility from "@js/Classes/Utility";
+    import Messages from "@js/Classes/Messages";
     import ImageContainer from '@vc/ImageContainer';
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
@@ -108,11 +107,13 @@
                 },
                 qrModel: 'password',
                 object : this.password,
+                notes  : this.password.notes,
                 showPw : false
             };
         },
 
         created() {
+            this.processNotes();
             Events.on('password.changed', this.refreshView);
         },
 
@@ -121,9 +122,6 @@
         },
 
         computed: {
-            getNotes() {
-                return marked(this.object.notes, {breaks: true});
-            },
             getRevisions() {
                 return Utility.sortApiObjectArray(this.object.revisions, 'created', false);
             },
@@ -175,21 +173,34 @@
                 PasswordManager.restoreRevision(this.object, revision);
             },
             refreshView(event) {
+                console.log('test');
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
                         .then((p) => {this.object = p;});
+                }
+            },
+            async processNotes() {
+                try {
+                    let marked = await import(/* webpackChunkName: "marked" */ 'marked');
+                    this.notes = marked(this.object.notes, {breaks: true});
+                } catch(e) {
+                    console.error(e);
+                    Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
                 }
             }
         },
 
         watch: {
-            password: function(value) {
-                this.qrcode.text = value.password;
+            password(value) {
                 this.object = value;
-                $('#password-details-qrcode').val('password');
+            },
+            object(value) {
+                this.qrModel = 'password';
+                this.qrcode.text = value.password;
+                this.processNotes();
                 this.$forceUpdate();
             },
-            qrModel : function(value) {
+            qrModel(value) {
                 this.qrcode.text = this.object[value];
             }
         }

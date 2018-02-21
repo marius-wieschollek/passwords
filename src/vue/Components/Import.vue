@@ -163,32 +163,28 @@
                 this.progress.style = '';
                 this.importing = true;
 
-                let IM;
                 try {
                     let module = await import(/* webpackChunkName: "ImportManager" */ '@js/Manager/ImportManager');
-                    IM = module.ImportManager;
+                    new module.ImportManager()
+                        .importDatabase(this.file, this.type, this.options, this.registerProgress)
+                        .catch((e) => {
+                            this.importing = false;
+                            this.progress.style = 'error';
+                            this.progress.status = 'Import failed';
+                            if(typeof e !== 'string') e = e.message;
+                            Messages.alert(e, 'Import error');
+                        })
+                        .then(() => {
+                            if(this.progress.style !== 'error') {
+                                this.importing = false;
+                                this.progress.style = 'success';
+                                this.progress.status = 'Import successful';
+                            }
+                        });
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
-                    return;
                 }
-
-                new IM()
-                    .importDatabase(this.file, this.type, this.options, this.registerProgress)
-                    .catch((e) => {
-                        this.importing = false;
-                        this.progress.style = 'error';
-                        this.progress.status = 'Import failed';
-                        if(typeof e !== 'string') e = e.message;
-                        Messages.alert(e, 'Import error');
-                    })
-                    .then(() => {
-                        if(this.progress.style !== 'error') {
-                            this.importing = false;
-                            this.progress.style = 'success';
-                            this.progress.status = 'Import successful';
-                        }
-                    });
             },
             processFile(event) {
                 let file   = event.target.files[0],
