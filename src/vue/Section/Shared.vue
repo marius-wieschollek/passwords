@@ -79,9 +79,11 @@
                         label  = this.shareType[status];
 
                     if(status === 0) {
-                        API.findShares({receiver: '_self'}, 'model+password').then(this.updateContentList);
+                        API.findShares({receiver: '_self'}, 'model+password')
+                            .then((d) => {this.updateContentList(d, status);});
                     } else {
-                        API.findShares({owner: '_self'}, 'model+password').then(this.updateContentList);
+                        API.findShares({owner: '_self'}, 'model+password')
+                            .then((d) => {this.updateContentList(d, status);});
                     }
 
                     if(!this.passwords.length) this.loading = true;
@@ -90,16 +92,17 @@
                         {path: this.$route.path, label: Utility.translate(label)}
                     ];
                 } else {
+                    this.loading = false;
                     this.passwords = [];
                     this.breadcrumb = [];
                 }
             },
-            updateContentList: function(shares) {
+            updateContentList: function(shares, status) {
+                if(this.$route.params.type !== status) return;
                 this.loading = false;
 
                 let passwords  = {},
-                    shareUsers = [],
-                    status     = this.$route.params.type;
+                    shareUsers = [];
                 for(let i in shares) {
                     if(!shares.hasOwnProperty(i)) continue;
                     let password = shares[i].password,

@@ -59,14 +59,15 @@
         },
 
         methods: {
-            refreshView: function() {
+            refreshView       : function() {
                 this.detail.type = 'none';
 
                 if(this.$route.params.status !== undefined) {
                     let status = this.$route.params.status,
                         label  = this.securityStatus[status];
 
-                    API.findPasswords({status: status}).then(this.updatePasswordList);
+                    API.findPasswords({status: status})
+                        .then((d) => {this.updatePasswordList(d, status);});
                     if(!this.passwords.length) this.loading = true;
 
                     this.breadcrumb = [
@@ -74,10 +75,17 @@
                         {path: this.$route.path, label: Utility.translate(label)}
                     ];
                 } else {
+                    this.loading = false;
                     this.passwords = [];
                     this.breadcrumb = [];
                 }
             },
+            updatePasswordList: function(passwords, status) {
+                if(this.$route.params.status === status) {
+                    this.loading = false;
+                    this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
+                }
+            }
         },
         watch  : {
             $route: function() {
