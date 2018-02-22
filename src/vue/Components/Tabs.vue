@@ -1,27 +1,19 @@
 <template>
-    <div class="tab-container" :data-tab-uuid="uuid">
+    <div class="tab-container">
         <ul class="tab-titles">
-            <translate tag="li"
-                       v-for="(tab, name) in tabs"
-                       :key="name"
-                       :data-tab="name"
-                       class="tab-title"
-                       :class="{ active: isCurrentTab(name) }"
-                       :style="tabStyle"
-                       @click="setCurrentTab(name)">
-                {{tab}}
-            </translate>
+            <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" :style="getStyle" @click="setCurrent(name)" :say="tab"/>
         </ul>
         <div class="tab-contents">
-            <div v-for="(tab, name) in tabs" :data-tab="name" class="tab-content" :class="{ active: isCurrentTab(name) }">
-                <slot :name="name"></slot>
+            <div v-for="(tab, name) in tabs" class="tab-content" :class="{ active: isCurrent(name) }">
+                <slot :name="name"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Translate from '@vc/Translate.vue';
+    import Translate from '@vc/Translate';
+    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         components: {
@@ -31,9 +23,6 @@
         props: {
             tabs: {
                 type: Object
-            },
-            uuid: {
-                type: String
             }
         },
 
@@ -44,28 +33,19 @@
         },
 
         computed: {
-            tabStyle() {
-                if(OCA.Theming) {
-                    return {
-                        'border-color': OCA.Theming.color
-                    };
-                }
-
-                return {};
+            getStyle() {
+                return {
+                    'border-color': ThemeManager.getColor()
+                };
             }
         },
 
         methods: {
-            isCurrentTab(tab) {
+            isCurrent(tab) {
                 return tab === this.tab
             },
-            setCurrentTab(tab) {
+            setCurrent(tab) {
                 this.tab = tab;
-            }
-        },
-        watch  : {
-            uuid: function() {
-                this.tab = Object.keys(this.tabs)[0];
             }
         }
     }

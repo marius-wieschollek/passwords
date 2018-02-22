@@ -74,7 +74,7 @@
                         this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                     } else {
                         let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
-                        this.passwords = Utility.sortApiObjectArray(passwords, 'label', true);
+                        this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
                     }
                 } else if(object.type === 'folder' && object.id === this.currentFolder) {
                     if(object.trashed) {
@@ -93,7 +93,7 @@
                         this.folders = Utility.removeApiObjectFromArray(this.folders, object);
                     } else {
                         let folders = Utility.replaceOrAppendApiObject(this.folders, object);
-                        this.folders = Utility.sortApiObjectArray(folders, 'label', true);
+                        this.folders = Utility.sortApiObjectArray(folders, this.sort.by, this.sort.order);
                     }
                 } else if(object.type === 'folder' && Utility.searchApiObjectInArray(this.folders, object) !== -1) {
                     this.folders = Utility.removeApiObjectFromArray(this.folders, object);

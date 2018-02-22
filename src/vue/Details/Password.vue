@@ -1,14 +1,14 @@
 <template>
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
-        <image-container v-if="!showPreview" :image="object.preview" :icon="object.icon" :link="object.url" :title="object.title"/>
+        <image-container v-if="showPreview" :image="object.preview" :icon="object.icon" :link="object.url" :title="object.title"/>
         <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
             <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>
             <span class="date">{{ object.edited.toLocaleDateString() }}</span>
             <tags :password="object"/>
         </div>
-        <tabs :tabs="{details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'}" :uuid="object.id">
+        <tabs :tabs="getTabs">
             <div slot="details" class="details">
                 <translate tag="div" say="Name"><span>{{ object.label }}</span></translate>
                 <translate tag="div" say="Username"><span>{{ object.username }}</span></translate>
@@ -38,7 +38,7 @@
                 <div v-html="notes"></div>
             </div>
             <div slot="share">
-                <tabs :tabs="{nextcloud: 'Share', qrcode: 'QR Code'}" :uuid="object.id">
+                <tabs :tabs="getSharingTabs">
                     <div slot="nextcloud" class="password-share-nextcloud">
                         <sharing :password="object"/>
                     </div>
@@ -54,10 +54,7 @@
             </div>
             <div slot="revisions">
                 <ul class="revision-list">
-                    <li class="revision"
-                        v-for="revision in getRevisions"
-                        :key="revision.id"
-                        :style="{'background-image': 'url(' + revision.icon + ')'}">
+                    <li class="revision"  v-for="revision in getRevisions"  :key="revision.id" :style="{'background-image': 'url(' + revision.icon + ')'}">
                         <span>{{ revision.label }}<br>
                             <span class="time">{{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}</span>
                         </span>
@@ -70,8 +67,8 @@
 </template>
 
 <script>
-    import Tabs from '@vc/Tabs.vue';
-    import Tags from '@vc/Tags.vue';
+    import Tabs from '@vc/Tabs';
+    import Tags from '@vc/Tags';
     import API from '@js/Helper/api';
     import Sharing from '@vc/Sharing';
     import Translate from '@vc/Translate';
@@ -148,12 +145,18 @@
                 return status[this.object.status];
             },
             showPreview() {
-                return window.innerWidth < 641;
+                return window.innerWidth > 640;
             },
             getLinkStyle() {
                 return {
                     color: ThemeManager.getColor()
                 };
+            },
+            getTabs() {
+                return {details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'};
+            },
+            getSharingTabs() {
+                return {nextcloud: 'Share', qrcode: 'QR Code'};
             }
         },
 
@@ -195,10 +198,8 @@
                 this.object = value;
             },
             object(value) {
-                this.qrModel = 'password';
-                this.qrcode.text = value.password;
+                this.qrcode.text = value[this.qrModel];
                 this.processNotes();
-                this.$forceUpdate();
             },
             qrModel(value) {
                 this.qrcode.text = this.object[value];

@@ -18,7 +18,7 @@
             </li>
         </ul>
     </div>
-    <translate v-else>Sharing is not enabled</translate>
+    <translate v-else say="Sharing is not enabled"/>
 </template>
 
 <script>
