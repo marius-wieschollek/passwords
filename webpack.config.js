@@ -121,7 +121,7 @@ module.exports = env => {
                     options: {
                         limit          : 2048,
                         outputPath     : 'css/',
-                        publicPath     : '../',
+                        publicPath     : './',
                         useRelativePath: false
                     }
                 }
