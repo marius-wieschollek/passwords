@@ -132,6 +132,16 @@ class Messages {
         });
     }
 
+    filePicker(title = 'Pick a file', mime, multiselect = false) {
+        return new Promise((resolve) => {
+            OC.dialogs.filepicker(title, (e,f) => {console.log(e,f);} , multiselect, mime, true, 1)
+        });
+    }
+
+    folderPicker(title) {
+        return this.filepicker(title, 'httpd/unix-directory', false);
+    }
+
     /**
      * Sets the value of an input field because Nextcloud does not support this
      *
