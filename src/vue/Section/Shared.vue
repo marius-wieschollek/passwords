@@ -98,7 +98,7 @@
                 }
             },
             updateContentList: function(shares, status) {
-                if(this.$route.params.type !== status) return;
+                if(Number.parseInt(this.$route.params.type) !== status) return;
                 this.loading = false;
 
                 let passwords  = {},

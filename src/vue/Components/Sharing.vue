@@ -1,10 +1,6 @@
 <template>
     <div class="sharing-container" v-if="enabled">
-        <input type="text"
-               v-model="user"
-               class="share-add-user"
-               :placeholder="placeholder"
-               @keypress="submitAction($event)"/>
+        <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
         <ul class="shares" v-for="share in object.shares" :key="share.id" :data-share-id="share.id">
             <li class="share">
                 <div class="options">
@@ -16,6 +12,9 @@
                 <img :src="share.receiver.icon" :alt="share.receiver.name">
                 {{share.receiver.name}}
             </li>
+        </ul>
+        <ul class="user-search">
+            <li v-for="(name,uid) in matches" @click="shareWithUser(uid)">{{name}}</li>
         </ul>
     </div>
     <translate v-else say="Sharing is not enabled"/>
@@ -41,15 +40,14 @@
 
         data() {
             return {
-                user          : '',
-                enabled       : false,
-                partners      : [],
-                partnersLoaded: false,
-                object        : this.password,
-                editable      : false,
-                expires       : null,
-                placeholder   : Utility.translate('Search user'),
-                owner         : {
+                enabled    : false,
+                search     : '',
+                matches    : [],
+                nameMap    : [],
+                idMap      : [],
+                object     : this.password,
+                placeholder: Utility.translate('Search user'),
+                owner      : {
                     id  : $('head[data-user]').attr('data-user'),
                     name: $('head[data-user-displayname]').attr('data-user-displayname')
                 }
@@ -62,32 +60,39 @@
         },
 
         methods: {
-            loadPartners() {
-                this.partnersLoaded = true;
+            async searchUsers() {
+                if(this.search === '') {
+                    this.matches = [];
+                    return;
+                }
 
-                API.findSharePartners()
-                    .then((p) => {
-                        this.partners = p;
-                    });
+                this.matches = await API.findSharePartners(this.search);
+                for(let i in this.matches) {
+                    if(!this.matches.hasOwnProperty(i)) continue;
+                    let name = this.matches[i];
+
+                    this.nameMap[name] = i;
+                    this.idMap[i] = name;
+                }
             },
-            addShare() {
+            addShare(receiver) {
                 let share = {
                     password : this.object.id,
                     expires  : null,
                     editable : false,
                     shareable: true,
-                    receiver : this.user
+                    receiver : receiver
                 };
                 API.createShare(share).then(
                     (d) => {
                         share.id = d.id;
                         share.owner = this.owner;
-                        share.receiver = {id: share.receiver, name: share.receiver.capitalize()};
+                        share.receiver = {id: receiver, name: this.idMap[receiver]};
                         this.object.shares[d.id] = API._processShare(share);
                         this.$forceUpdate();
+                        this.search = '';
                     }
                 );
-                this.user = '';
             },
             toggleEditable(share) {
                 share.editable = !share.editable;
@@ -136,8 +141,11 @@
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
-                    this.addShare();
+                    this.addShare(this.search);
                 }
+            },
+            shareWithUser(uid) {
+                this.addShare(uid);
             }
         },
 
@@ -147,8 +155,8 @@
                 if(value.share && value.share.shareable === false) this.enabled = false;
                 this.$forceUpdate();
             },
-            user    : function(value) {
-                if(!this.partnersLoaded) { this.loadPartners(); }
+            search  : function(value) {
+                this.searchUsers()
             }
         }
     }

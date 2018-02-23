@@ -473,6 +473,6 @@ class ShareApiController extends AbstractApiController {
      * @return bool
      */
     protected function isAutoCompleteEnabled(): bool {
-        return $this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'no') === 'yes';
+        return $this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'yes') === 'yes';
     }
 }

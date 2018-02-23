@@ -16,6 +16,9 @@ class ShareMapper extends AbstractMapper {
 
     const TABLE_NAME = 'passwords_entity_share';
 
+    /**
+     * @var array
+     */
     protected $allowedFields
         = [
             'id',
@@ -37,7 +40,7 @@ class ShareMapper extends AbstractMapper {
         $params = [false];
         if($this->userId !== null) {
             $sql      .= ' AND (`*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?'.
-                         ' OR `*PREFIX*'.static::TABLE_NAME.'`.`receiver` = ?) ';
+                         ' OR (`*PREFIX*'.static::TABLE_NAME.'`.`receiver` = ? AND `*PREFIX*'.static::TABLE_NAME.'`.`target_password` IS NOT NULL)) ';
             $params[] = $this->userId;
             $params[] = $this->userId;
         }
