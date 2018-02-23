@@ -52,7 +52,6 @@
 </template>
 
 <script>
-    import $ from "jquery";
     import API from "@js/Helper/api";
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
@@ -81,8 +80,11 @@
 
         mounted() {
             this.loadSimpleMde();
-            $('#password-username').focus();
-            setTimeout(() => {$('#password-password').removeAttr('readonly');}, 250);
+            document.getElementById('password-username').focus();
+            setTimeout(
+                () => {document.getElementById('password-password').removeAttribute('readonly');},
+                250
+            );
         },
 
         computed: {
@@ -102,9 +104,9 @@
         methods: {
             closeWindow() {
                 this.$destroy();
-                let $container = $('#app-popup');
-                $container.find('div').remove();
-                $container.html('<div></div>');
+                let container = document.getElementById('app-popup'),
+                    div= document.createElement('div');
+                container.replaceChild(div, container.childNodes[0]);
             },
             togglePasswordVisibility() {
                 this.showPassword = !this.showPassword;
