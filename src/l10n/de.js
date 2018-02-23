@@ -110,6 +110,8 @@ OC.L10N.register(
         "Choose expiration date"              : "Wähle ein Ablaufdatum oder lass das Feld leer um endlos zu teilen",
         "Please choose a date in the future"  : "Bitte Ablaufdatum in der Zukunft auswählen",
         "Invalid date"                        : "Ungültiges Datum",
+        "The user {uid} does not exist"       : "Der Nutzer {uid} existiert nicht",
+        "Invalid user"                        : "Ungültiger Nutzer",
         "Toggle write permissions"            : "Schreibrechte umschalten",
         "Toggle share permissions"            : "Weiterverteilrechte umschalten",
         "Stop sharing"                        : "Teilen beenden",

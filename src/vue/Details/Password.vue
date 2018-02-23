@@ -70,11 +70,11 @@
     import Tabs from '@vc/Tabs';
     import Tags from '@vc/Tags';
     import API from '@js/Helper/api';
-    import Sharing from '@vc/Sharing';
     import Translate from '@vc/Translate';
     import Events from "@js/Classes/Events";
     import QrCode from 'vue-qrcode-component';
     import Utility from "@js/Classes/Utility";
+    import Sharing from '@vc/Sharing/Sharing';
     import Messages from "@js/Classes/Messages";
     import ImageContainer from '@vc/ImageContainer';
     import ThemeManager from '@js/Manager/ThemeManager';

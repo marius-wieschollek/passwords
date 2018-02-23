@@ -91,6 +91,10 @@
         visibility : hidden;
     }
 
+    .oc-dialog-dim {
+        z-index: 1000;
+    }
+
     #app-navigation {
         li {
             line-height   : 44px;

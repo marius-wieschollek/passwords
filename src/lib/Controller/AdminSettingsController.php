@@ -56,7 +56,11 @@ class AdminSettingsController extends Controller {
         if($value === 'true') $value = true;
         if($value === 'false') $value = false;
 
-        $this->config->setAppValue(Application::APP_NAME, $key, $value);
+        if($value === '') {
+            $this->config->deleteAppValue(Application::APP_NAME, $key);
+        } else {
+            $this->config->setAppValue(Application::APP_NAME, $key, $value);
+        }
 
         return new JSONResponse(['status' => 'ok']);
     }

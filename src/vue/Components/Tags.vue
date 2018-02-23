@@ -7,11 +7,13 @@
             </li>
         </ul>
         <input type="text" :placeholder="placeholder" class="add-tags" v-model="inputText" @keyup="keyUpAction($event)">
-        <ul class="tag-search" v-if="searchResults" :style="getPopupStyle">
+        <ul class="tag-search" v-if="searchResults.length !== 0" :style="getPopupStyle">
             <li class="result"
                 v-for="match in searchResults"
                 :key="match.id"
-                @click="addTag(match)">
+                @click="addTag(match)"
+                @mouseover="getHoverStyle($event)"
+                @mouseout="getHoverStyle($event, false)">
                 <i class="fa fa-tag" :style="{color: match.color}"></i>{{match.label}}
             </li>
         </ul>
@@ -52,7 +54,9 @@
         computed: {
             getPopupStyle() {
                 return {
-                    border: '1px solid ' + ThemeManager.getColor()
+                    color: ThemeManager.getColor(),
+                    border: '1px solid ' + ThemeManager.getColor(),
+                    backgroundColor: ThemeManager.getContrastColor()
                 };
             }
         },
@@ -65,7 +69,6 @@
             keyUpAction    : function($e) {
                 let key = $e.keyCode;
                 if([8, 13, 46].indexOf(key) === -1 && $e.key.length === 1 && this.inputText.length !== 0) {
-                    this.searchAction(this.inputText);
                     this.wasBackspace = false;
                 } else if(key === 13 && this.inputText.length !== 0) {
                     this.createAndAddTag(this.inputText);
@@ -76,12 +79,12 @@
                     this.searchResults = [];
                     this.wasBackspace = true;
                 } else {
-                    this.searchAction(this.inputText);
                     this.wasBackspace = false;
                 }
             },
             searchAction   : function(query) {
                 this.searchResults = [];
+                if(query === '') return;
                 query = query.toLowerCase();
 
                 for(let i = 0; i < this.allTags.length; i++) {
@@ -159,12 +162,24 @@
                                 left : position.left + 'px',
                                 width: $input.outerWidth()
                             });
+            },
+            getHoverStyle($event, on = true) {
+                if(on) {
+                    $event.target.style.backgroundColor = ThemeManager.getColor();
+                    $event.target.style.color = ThemeManager.getContrastColor();
+                } else {
+                    $event.target.style.backgroundColor = null;
+                    $event.target.style.color = null;
+                }
             }
         },
 
         watch: {
             password: function(newPassword) {
                 this.tags = Utility.sortApiObjectArray(newPassword.tags, 'label');
+            },
+            inputText: function(value) {
+                this.searchAction(value);
             }
         }
     };
@@ -210,15 +225,10 @@
 
         .tag-search {
             position         : absolute;
-            background-color : $color-white;
             border-radius    : 2px;
             max-height       : 120px;
             overflow-y       : auto;
             z-index          : 1;
-
-            &:empty {
-                display : none;
-            }
 
             .result {
                 padding : 3px 5px;
