@@ -1,5 +1,6 @@
 import $ from "jquery";
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
+import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 class PwApi extends EnhancedApi {
     constructor() {
@@ -28,6 +29,7 @@ class PwApi extends EnhancedApi {
             let baseUrl = location.href.substr(0, location.href.indexOf('index.php'));
             this.login(baseUrl, user, password);
             window.initializePw();
+            EncryptionTestHelper.initTests();
         }
     }
 }

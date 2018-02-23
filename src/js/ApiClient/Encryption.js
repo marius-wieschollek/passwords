@@ -1,22 +1,53 @@
 export default class Encryption {
 
-    constructor() {}
+    constructor() {
+        this.fields = {
+            password:['url', 'label', 'notes', 'password', 'username'],
+            folder:['label'],
+            tag: ['label', 'color']
+        };
+    }
 
-    async testEncryption() {
-        let text = '', password = '✓ à la mode';
-        for(let i = 0; i < 96; i++) text += i + ': ✓ à la mode | ';
+    /**
+     * Encrypts an object with the given password
+     *
+     * @param object
+     * @param password
+     * @param type
+     * @returns {Promise<*>}
+     */
+    async encryptObject(object, password, type) {
+        if(!this.fields.hasOwnProperty(type)) throw "Invalid object type";
+        let fields = this.fields[type];
 
-        try {
-            let encData = await this.encrypt(text, password);
+        for(let i =0; i < fields.length; i++) {
+            let field = fields[i];
 
-            let t = JSON.stringify(encData);
-            let d = JSON.parse(t);
-
-            let decData = await this.decrypt(d, password);
-            console.log(text, encData, decData, text === decData);
-        } catch(e) {
-            console.error(e);
+            object[field] = await this.encrypt(object[field], password+field);
         }
+
+        return object;
+    }
+
+    /**
+     * Decrypts an object with the given password
+     *
+     * @param object
+     * @param password
+     * @param type
+     * @returns {Promise<*>}
+     */
+    async decryptObject(object, password, type) {
+        if(!this.fields.hasOwnProperty(type)) throw "Invalid object type";
+        let fields = this.fields[type];
+
+        for(let i =0; i < fields.length; i++) {
+            let field = fields[i];
+
+            object[field] = await this.decrypt(object[field], password+field);
+        }
+
+        return object;
     }
 
     /**

@@ -49,9 +49,9 @@
 
 <script>
     import "@scss/app";
+    import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
     import Utility from "@js/Classes/Utility";
-    import Translate from '@vc/Translate.vue';
 
     export default {
         el        : '#main',
