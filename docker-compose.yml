@@ -29,11 +29,6 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=mysql:3306
-#      - SQLITE_DATABASE
-#      - POSTGRES_DB=nextcloud
-#      - POSTGRES_USER=nextcloud
-#      - POSTGRES_PASSWORD=nextcloud
-#      - POSTGRES_HOST=postgres5432
 
   web:
     build: ./docker/nginx/
@@ -61,44 +56,5 @@ services:
       PMA_USER: root
       PMA_PASSWORD: nextcloud
 
-  openldap:
-    image: osixia/openldap
-    container_name: "passwords-openldap"
-    environment:
-      LDAP_ORGANISATION: nextcloud
-      LDAP_DOMAIN: nextcloud
-      LDAP_ADMIN_PASSWORD: nextcloud
-
-  phpldapadmin:
-    image: osixia/phpldapadmin
-    container_name: "passwords-phpldapadmin"
-    ports:
-      - 9090:443
-      - 9091:80
-    links:
-      - openldap
-    environment:
-      PHPLDAPADMIN_LDAP_HOSTS: openldap
-
-#  postgres:
-#    image: postgres:alpine
-#    container_name: "passwords-postgres"
-#    restart: on-failure
-#    volumes:
-#      - postgres:/var/lib/postgresql/data
-#    environment:
-#      - POSTGRES_PASSWORD=nextcloud
-#      - POSTGRES_USER=nextcloud
-#      - POSTGRES_DB=nextcloud
-
-#  iconserver:
-#    image: matthiasluedtke/iconserver
-#    container_name: "passwords-iconserver"
-#    ports:
-#      - 7070:7070
-#    environment:
-#      PORT: 7070
-
 volumes:
   mysql:
-  postgres:

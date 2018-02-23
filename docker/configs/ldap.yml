@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  openldap:
+    image: osixia/openldap
+    container_name: "passwords-openldap"
+    environment:
+      LDAP_ORGANISATION: nextcloud
+      LDAP_DOMAIN: nextcloud
+      LDAP_ADMIN_PASSWORD: nextcloud
+
+  phpldapadmin:
+    image: osixia/phpldapadmin
+    container_name: "passwords-phpldapadmin"
+    ports:
+      - 9090:443
+    links:
+      - openldap
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: openldap

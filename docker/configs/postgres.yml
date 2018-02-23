@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  app:
+    environment:
+      - MYSQL_PASSWORD=
+      - MYSQL_DATABASE=
+      - MYSQL_USER=
+      - MYSQL_HOST=
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_HOST=postgres:5432
+
+
+  postgres:
+    image: postgres:alpine
+    container_name: "passwords-postgres"
+    restart: on-failure
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_DB=nextcloud
+
+volumes:
+  postgres:
