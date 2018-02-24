@@ -1,7 +1,7 @@
 <template>
     <div id="app-content">
         <div class="app-content-left settings">
-            <section>
+            <section class="security">
                 <translate tag="h1" say="Security"/>
                 <translate tag="h3" say="Password Generator"/>
 
@@ -22,13 +22,22 @@
                 <input type="checkbox" id="setting-include-special" v-model="settings['user.password.generator.special']">
                 <span></span>
             </section>
+            <section class="tests">
+                <translate tag="h1" say="Field tests"/>
+
+                <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
+                <input type="button" id="setting-test-encryption" value="Run" @click="runTests($event)">
+                <span></span>
+            </section>
         </div>
     </div>
 </template>
 
 <script>
     import API from '@js/Helper/api';
+    import Messages from "@js/Classes/Messages";
     import Translate from "@vue/Components/Translate";
+    import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
     export default {
         components: {
@@ -51,6 +60,13 @@
             saveSettings() {
                 API.setSettings(this.settings)
                    .catch(this.loadSettings);
+            },
+            async runTests($event) {
+                console.log($event.target);
+                $event.target.setAttribute('disabled', 'disabled');
+                let result = await EncryptionTestHelper.runTests();
+                if(result) Messages.info('The client side encryption test completed successfully on this browser', 'Test successful');
+                $event.target.removeAttribute('disabled');
             }
         },
         watch     : {
@@ -84,6 +100,8 @@
             display               : grid;
             grid-template-columns : 3fr 2fr 1fr;
             max-width             : 400px;
+            float                 : left;
+            margin-bottom         : 2em;
 
             h1,
             h3 {
@@ -102,6 +120,7 @@
 
             input {
                 justify-self : end;
+                max-height   : 34px;
 
                 &[type=checkbox] {
                     cursor : pointer;

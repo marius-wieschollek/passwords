@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
-import SettingsManager from "@js/Manager/SettingsManager";
 import Encryption from "@/js/ApiClient/Encryption";
+import SettingsManager from "@js/Manager/SettingsManager";
 
 class EncryptionTestHelper {
     constructor() {
@@ -32,8 +32,10 @@ class EncryptionTestHelper {
             if(result !== true) return this.handleError(result);
             SettingsManager.set('encryption.tests.executed', true);
             console.log('Encryption tests ran successfully');
+            return true;
         } catch(e) {
             this.handleError({error: e});
+            return false;
         }
     }
 
@@ -108,6 +110,7 @@ class EncryptionTestHelper {
         result.userAgent = navigator.userAgent;
         result.protocol = location.protocol;
         result.crypto = !!window.crypto;
+        result.textencoder = !!window.TextEncoder;
         result.apps = Object.keys(oc_appswebroots);
         let json = JSON.stringify(result);
 
