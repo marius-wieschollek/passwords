@@ -21,9 +21,11 @@ export default class Encryption {
         let fields = this.fields[type];
 
         for(let i =0; i < fields.length; i++) {
-            let field = fields[i];
+            let field = fields[i],
+                data = object[field];
 
-            object[field] = await this.encrypt(object[field], password+field);
+            if(data.length === 0) continue;
+            object[field] = await this.encrypt(data, password+field);
         }
 
         return object;
@@ -42,9 +44,11 @@ export default class Encryption {
         let fields = this.fields[type];
 
         for(let i =0; i < fields.length; i++) {
-            let field = fields[i];
+            let field = fields[i],
+                data = object[field];
 
-            object[field] = await this.decrypt(object[field], password+field);
+            if(data.length === 0) continue;
+            object[field] = await this.decrypt(data, password+field);
         }
 
         return object;

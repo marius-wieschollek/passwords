@@ -47,21 +47,24 @@ class EncryptionTestHelper {
 
         try {
             let encData = await this.encryption.encrypt(text, password);
-            let json = JSON.stringify(encData);
-            let data = JSON.parse(json);
-            let decData = await this.encryption.decrypt(data, password);
-            if(text !== decData) {
-                return {
-                    type : 'encryption',
-                    error: "Decrypted Data Missmatch",
-                    data : [text, encData, decData, json, data]
-                };
+
+            try {
+                let json = JSON.stringify(encData);
+                let data = JSON.parse(json);
+                let decData = await this.encryption.decrypt(data, password);
+                if(text !== decData) {
+                    return {
+                        type: 'test',
+                        stage : 'validate',
+                        error: "Decrypted Data Missmatch",
+                        data : [text, encData, decData, json, data]
+                    };
+                }
+            } catch(e) {
+                return {type: 'test', stage : 'decrypt', error: e};
             }
         } catch(e) {
-            return {
-                type : 'encryption',
-                error: e
-            };
+            return {type: 'test', stage : 'encrypt', error: e};
         }
 
         return true;
@@ -90,10 +93,10 @@ class EncryptionTestHelper {
                 try {
                     await this.encryption.decryptObject(encrypted, this.password, type);
                 } catch(e) {
-                    return {type: type, step: 'decrypt', id: i, error: e};
+                    return {type: type, stage: 'decrypt', id: i, error: e};
                 }
             } catch(e) {
-                return {type: type, step: 'encrypt', id: i, error: e};
+                return {type: type, stage: 'encrypt', id: i, error: e};
             }
         }
 
@@ -113,8 +116,10 @@ class EncryptionTestHelper {
                    + '<b>These tests failed with your browser.</b><br>'
                    + 'To help us identify and fix the issues, we would ask you to<br>open an issue on our '
                    + '<a href="https://github.com/marius-wieschollek/passwords/issues" target="_blank" style="text-decoration:underline">public issue tracker</a> '
-                   + 'with the following<br>data attached:</p><br>'
-                   + '<div style="max-width:360px;word-break:break-all;background:#f7f7f7;padding:5px;cursor:text;">' + json + '</div>'
+                   + 'or send us an<br>'
+                   + '<a href="' + atob('bWFpbHRvOnBhc3N3b3Jkcy5lbmNyeXB0aW9udGVzdEBtZG5zLmV1') + '" target="_blank" style="text-decoration:underline">email</a> '
+                   + 'with the following data attached:</p><br>'
+                   + '<div style="max-width:360px;word-break:break-all;background:#f7f7f7;padding:5px;cursor:text;">' + btoa(json) + '</div>'
                    + '</div>';
 
         OC.dialogs.confirmHtml(

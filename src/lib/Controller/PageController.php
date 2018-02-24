@@ -2,9 +2,11 @@
 
 namespace OCA\Passwords\Controller;
 
+use OC\AppFramework\Http\Request;
 use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\AppFramework\Controller;
@@ -110,6 +112,7 @@ class PageController extends Controller {
      * @NoCSRFRequired
      */
     public function index(): TemplateResponse {
+        $this->includeBrowserPolyfills();
 
         $isSecure = $this->checkIfHttpsUsed();
         if($isSecure) {
@@ -207,5 +210,15 @@ class PageController extends Controller {
         $version = $this->config->getSystemValue('version');
 
         return explode('.', $version, 2)[0];
+    }
+
+    /**
+     *
+     */
+    protected function includeBrowserPolyfills(): void {
+        if($this->request->isUserAgent([Request::USER_AGENT_MS_EDGE, Request::USER_AGENT_SAFARI])) {
+            Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding');
+            Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding-indexes');
+        };
     }
 }
