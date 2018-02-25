@@ -157,6 +157,7 @@ class PageController extends Controller {
                 try {
                     $iToken = $this->tokenProvider->getTokenById($tokenId);
 
+                    // @TODO generate new token if decryption fails
                     if($iToken->getId() == $tokenId) return $this->encryption->decrypt($token);
                 } catch(InvalidTokenException $e) {
                 }
@@ -172,7 +173,8 @@ class PageController extends Controller {
 
             return $token;
         } catch(\Throwable $e) {
-            return null;
+            // @TODO error logging maybe?
+            return '';
         }
     }
 

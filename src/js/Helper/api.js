@@ -26,10 +26,15 @@ class PwApi extends EnhancedApi {
             let password = document.querySelector('meta[pwui-token]').getAttribute('pwui-token');
             if(!password) password = prompt('Enter Nextcloud Password');
 
-            let baseUrl = location.href.substr(0, location.href.indexOf('index.php'));
+            let baseUrl = location.href;
+            if(baseUrl.indexOf('index.php') !== -1) {
+                baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
+            } else {
+                baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
+            }
             this.login(baseUrl, user, password);
             window.initializePw();
-            EncryptionTestHelper.initTests();
+            if(this.debug) EncryptionTestHelper.initTests();
         }
     }
 }

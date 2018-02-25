@@ -35,7 +35,7 @@
                         <translate tag="option" value="2" say="Overwrite if id exists"/>
                         <translate tag="option" value="3" say="Clone if id exists"/>
                     </select>
-                    <div v-if="source === 'json'">
+                    <div v-if="source === 'json' && encryptionEnabled">
                         <translate tag="label" for="passwords-import-encrypt" say="Backup password" title="For encrypted backups"/>
                         <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" readonly/>
                     </div>
@@ -152,12 +152,17 @@
             },
             backupPasswordTitle() {
                 return Utility.translate('For encrypted backups');
+            },
+            encryptionEnabled() {
+                return process.env.NODE_ENV !== 'production';
             }
         },
 
         methods: {
             preventPasswordFill(t = 300) {
-                setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
+                if(process.env.NODE_ENV !== 'production') {
+                    setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
+                }
             },
             async importDb() {
                 this.progress.style = '';

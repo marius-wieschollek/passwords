@@ -58,7 +58,7 @@ class EncryptionTestHelper {
                     return {
                         type: 'test',
                         stage : 'validate',
-                        error: "Decrypted Data Missmatch",
+                        reason: "Decrypted Data Missmatch",
                         data : [text, encData, decData, json, data]
                     };
                 }
@@ -112,7 +112,16 @@ class EncryptionTestHelper {
         result.crypto = !!window.crypto;
         result.textencoder = !!window.TextEncoder;
         result.apps = Object.keys(oc_appswebroots);
-        let json = JSON.stringify(result);
+
+        if(result.error) {
+            result.error = {
+                file: result.error.fileName,
+                line: result.error.lineNumber,
+                column: result.error.columnNumber,
+                message: result.error.message,
+                stack: result.error.stack,
+            };
+        }
 
         let html = '<div><p>'
                    + 'Passwords is currently testing stronger encryption to keep<br>your passwords safe. '
@@ -122,7 +131,7 @@ class EncryptionTestHelper {
                    + 'or send us an<br>'
                    + '<a href="' + atob('bWFpbHRvOnBhc3N3b3Jkcy5lbmNyeXB0aW9udGVzdEBtZG5zLmV1') + '" target="_blank" style="text-decoration:underline">email</a> '
                    + 'with the following data attached:</p><br>'
-                   + '<div style="max-width:360px;word-break:break-all;background:#f7f7f7;padding:5px;cursor:text;">' + btoa(json) + '</div>'
+                   + '<div style="max-width:360px;word-break:break-all;background:#f7f7f7;padding:5px;cursor:text;">' + btoa(JSON.stringify(result)) + '</div>'
                    + '</div>';
 
         OC.dialogs.confirmHtml(

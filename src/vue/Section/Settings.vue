@@ -22,7 +22,7 @@
                 <input type="checkbox" id="setting-include-special" v-model="settings['user.password.generator.special']">
                 <span></span>
             </section>
-            <section class="tests">
+            <section class="tests" v-if="testsEnabled">
                 <translate tag="h1" say="Field tests"/>
 
                 <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
@@ -51,6 +51,11 @@
         created() {
             this.loadSettings();
         },
+        computed: {
+            testsEnabled() {
+                return process.env.NODE_ENV !== 'production';
+            }
+        },
         methods   : {
             loadSettings() {
                 this.settings = {};
@@ -62,7 +67,6 @@
                    .catch(this.loadSettings);
             },
             async runTests($event) {
-                console.log($event.target);
                 $event.target.setAttribute('disabled', 'disabled');
                 let result = await EncryptionTestHelper.runTests();
                 if(result) Messages.info('The client side encryption test completed successfully on this browser', 'Test successful');
