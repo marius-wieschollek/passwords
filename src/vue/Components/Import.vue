@@ -51,6 +51,7 @@
                         <br>
                         <translate tag="label" for="passwords-import-csv-delimiter" say="Field delimiter"/>
                         <select id="passwords-import-csv-delimiter" v-model="options.delimiter" :disabled="importing">
+                            <translate tag="option" value="auto" say="Detect"/>
                             <translate tag="option" value="," say="Comma"/>
                             <translate tag="option" value=";" say="Semicolon"/>
                             <translate tag="option" value=" " say="Space"/>
@@ -109,7 +110,6 @@
 </template>
 
 <script>
-    import Papa from 'papaparse';
     import Translate from '@vc/Translate';
     import Utility from "@js/Classes/Utility";
     import Messages from "@js/Classes/Messages";
@@ -206,22 +206,30 @@
                     this.resetFile('Invalid file type')
                 }
             },
-            readCsv(file) {
+            async readCsv(file) {
                 this.csvFile = file;
-                Papa.parse(file, {
-                    delimiter: this.delimiter,
-                    skipEmptyLines: true,
-                    complete: (result) => {
-                        if(result.errors.length === 0) {
-                            this.file = result.data
-                        } else {
-                            this.resetFile(result.errors[0].message)
+
+                try {
+                    let Papa = await import(/* webpackChunkName: "PapaParse" */ 'papaparse'),
+                        delimiter = this.options.delimiter;
+                    Papa.parse(file, {
+                        delimiter: delimiter === 'auto' ? '':delimiter,
+                        skipEmptyLines: true,
+                        complete: (result) => {
+                            if(result.errors.length === 0) {
+                                this.file = result.data
+                            } else {
+                                this.resetFile(result.errors[0].message)
+                            }
                         }
-                    }
-                });
+                    });
+                } catch(e) {
+                    Messages.alert(['Unable to load {module}', {module: 'PapaParse'}], 'Network error');
+                }
             },
             resetFile(error) {
                 this.file = null;
+                this.csvFile = null;
                 document.getElementById('passwords-import-file').value = null;
                 Messages.alert(error, 'Import error');
             },
@@ -310,7 +318,7 @@
                         this.type = 'pmanCsv';
                         break;
                     case 'csv':
-                        this.options = {mode: 0, skipShared: true, firstLine: 0, delimiter: ',', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
+                        this.options = {mode: 0, skipShared: true, firstLine: 0, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
                         break;
                 }
 
@@ -333,6 +341,9 @@
                 document.querySelectorAll('.csv-mapping-field select').forEach((e) => { e.value = null;});
                 if(this.source === 'csv') this.options.mapping = [];
                 this.validateStep();
+            },
+            'options.delimiter'() {
+                if(this.csvFile) this.readCsv(this.csvFile);
             }
         }
     };

@@ -8,25 +8,24 @@ export default class ImportCsvConversionHelper {
     /**
      * Parse a generic csv file
      *
-     * @param csv
+     * @param data
      * @param options
      * @returns {{}}
      */
-    static async processGenericCsv(csv, options) {
+    static async processGenericCsv(data, options) {
         let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile);
 
-        let entries = ImportCsvConversionHelper._processCsv(csv, profile);
+        let entries = ImportCsvConversionHelper._processCsv(data, profile);
         return await ImportCsvConversionHelper._convertCsv(entries, profile);
     }
 
     /**
      * Parse a csv file from Passman
      *
-     * @param csv
+     * @param data
      * @returns {Promise<*>}
      */
-    static async processPassmanCsv(csv) {
-        let data = Utility.parseCsv(csv, ',');
+    static async processPassmanCsv(data) {
 
         for(let i = 0; i < data.length; i++) {
             let line = data[i];
