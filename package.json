@@ -18,6 +18,7 @@
         "marked": "^0.3.16",
         "node-sass": "^4.7.2",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
+        "papaparse": "^4.3.7",
         "progress-bar-webpack-plugin": "^1.11.0",
         "random-material-color": "^1.0.3",
         "sass-loader": "^6.0.6",

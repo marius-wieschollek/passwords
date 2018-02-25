@@ -109,6 +109,7 @@
 </template>
 
 <script>
+    import Papa from 'papaparse';
     import Translate from '@vc/Translate';
     import Utility from "@js/Classes/Utility";
     import Messages from "@js/Classes/Messages";
@@ -129,6 +130,7 @@
                     tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
                 },
                 file       : null,
+                csvFile    : null,
                 options    : {mode: 0, skipShared: true},
                 noOptions  : false,
                 step       : 2,
@@ -146,9 +148,9 @@
 
         computed: {
             csvSampleData() {
-                let data = Utility.parseCsv(this.file, this.options.delimiter, this.previewLine);
+                let data = this.file;
 
-                return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length];
+                return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length-1];
             },
             backupPasswordTitle() {
                 return Utility.translate('For encrypted backups');
@@ -187,21 +189,41 @@
                             }
                         });
                 } catch(e) {
-                    console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
                 }
             },
             processFile(event) {
-                let file   = event.target.files[0],
-                    reader = new FileReader();
+                let file   = event.target.files[0];
                 if(this.mime === file.type) {
-                    reader.onload = (e) => { this.file = e.target.result; };
-                    reader.readAsText(file, 'utf-8');
+                    if(file.type === 'text/csv') {
+                        this.readCsv(file);
+                    } else {
+                        let reader = new FileReader();
+                        reader.onload = (e) => { this.file = e.target.result; };
+                        reader.readAsText(file);
+                    }
                 } else {
-                    this.file = null;
-                    document.getElementById('passwords-import-file').value = null;
-                    Messages.alert('Invalid file type', 'Import error');
+                    this.resetFile('Invalid file type')
                 }
+            },
+            readCsv(file) {
+                this.csvFile = file;
+                Papa.parse(file, {
+                    delimiter: this.delimiter,
+                    skipEmptyLines: true,
+                    complete: (result) => {
+                        if(result.errors.length === 0) {
+                            this.file = result.data
+                        } else {
+                            this.resetFile(result.errors[0].message)
+                        }
+                    }
+                });
+            },
+            resetFile(error) {
+                this.file = null;
+                document.getElementById('passwords-import-file').value = null;
+                Messages.alert(error, 'Import error');
             },
             registerProgress(processed, total, status) {
                 this.progress.processed = processed;

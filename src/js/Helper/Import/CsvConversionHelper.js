@@ -13,10 +13,9 @@ export default class ImportCsvConversionHelper {
      * @returns {{}}
      */
     static async processGenericCsv(csv, options) {
-        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile),
-            data    = Utility.parseCsv(csv, profile.delimiter);
+        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile);
 
-        let entries = ImportCsvConversionHelper._processCsv(data, profile);
+        let entries = ImportCsvConversionHelper._processCsv(csv, profile);
         return await ImportCsvConversionHelper._convertCsv(entries, profile);
     }
 

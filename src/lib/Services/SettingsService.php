@@ -64,7 +64,7 @@ class SettingsService {
             'password/generator/strength' => 1,
             'password/generator/numbers'  => false,
             'password/generator/special'  => false,
-            'password/default/label'      => 0
+            'password/label/default'      => 0
         ];
 
     /**
