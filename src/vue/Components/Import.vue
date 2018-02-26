@@ -150,7 +150,7 @@
             csvSampleData() {
                 let data = this.file;
 
-                return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length-1];
+                return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length - 1];
             },
             backupPasswordTitle() {
                 return Utility.translate('For encrypted backups');
@@ -175,17 +175,26 @@
                     new module.ImportManager()
                         .importDatabase(this.file, this.type, this.options, this.registerProgress)
                         .catch((e) => {
+                            console.error(e);
                             this.importing = false;
                             this.progress.style = 'error';
                             this.progress.status = 'Import failed';
                             if(typeof e !== 'string') e = e.message;
                             Messages.alert(e, 'Import error');
                         })
-                        .then(() => {
-                            if(this.progress.style !== 'error') {
-                                this.importing = false;
+                        .then((errors) => {
+                            console.log(errors);
+                            this.importing = false;
+                            if(this.progress.style !== 'error' && !errors.length) {
                                 this.progress.style = 'success';
                                 this.progress.status = 'Import successful';
+                            } else if(errors.length) {
+                                this.progress.style = 'warn';
+                                this.progress.status = 'Import partially failed';
+                                let message = Utility.translate('Some objects were skipped because of errors: ') +
+                                              errors.join(' ') +
+                                              Utility.translate('More information can be found in the console (Press F12)');
+                                Messages.alert(message, 'Import error');
                             }
                         });
                 } catch(e) {
@@ -193,7 +202,7 @@
                 }
             },
             processFile(event) {
-                let file   = event.target.files[0];
+                let file = event.target.files[0];
                 if(this.mime === file.type) {
                     if(file.type === 'text/csv') {
                         this.readCsv(file);
@@ -210,12 +219,12 @@
                 this.csvFile = file;
 
                 try {
-                    let Papa = await import(/* webpackChunkName: "PapaParse" */ 'papaparse'),
+                    let Papa      = await import(/* webpackChunkName: "PapaParse" */ 'papaparse'),
                         delimiter = this.options.delimiter;
                     Papa.parse(file, {
-                        delimiter: delimiter === 'auto' ? '':delimiter,
+                        delimiter     : delimiter === 'auto' ? '':delimiter,
                         skipEmptyLines: true,
-                        complete: (result) => {
+                        complete      : (result) => {
                             if(result.errors.length === 0) {
                                 this.file = result.data
                             } else {
@@ -394,20 +403,28 @@
                     transition       : background-color 0.25s ease-in-out;
                 }
 
-                &.error {
-                    &::-moz-progress-bar {
-                        background-color : $color-red-dark;
-                    }
-                    &::-webkit-progress-bar {
-                        background-color : $color-red-dark;
-                    }
-                }
                 &.success {
                     &::-moz-progress-bar {
                         background-color : $color-green;
                     }
                     &::-webkit-progress-bar {
                         background-color : $color-green;
+                    }
+                }
+                &.warn {
+                    &::-moz-progress-bar {
+                        background-color : $color-yellow;
+                    }
+                    &::-webkit-progress-bar {
+                        background-color : $color-yellow;
+                    }
+                }
+                &.error {
+                    &::-moz-progress-bar {
+                        background-color : $color-red-dark;
+                    }
+                    &::-webkit-progress-bar {
+                        background-color : $color-red-dark;
                     }
                 }
             }

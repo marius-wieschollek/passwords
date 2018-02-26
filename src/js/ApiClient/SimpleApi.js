@@ -612,20 +612,28 @@ export default class SimpleApi {
         return new Promise((resolve, reject) => {
             fetch(new Request(this._endpoint + path, options))
                 .then((response) => {
-                    if(!response.ok) {
-                        if(this._debug) console.error('Request failed', response);
-                        reject(response);
-                    }
                     let contentType = response.headers.get("content-type");
                     if(contentType && contentType.indexOf("application/json") !== -1) {
                         response.json()
-                                .then((d) => {resolve(d);})
-                                .catch((response) => {
-                                    if(this._debug) console.error('Encoding response failed', response);
-                                    reject(response);
-                                });
+                            .then((d) => {
+                                if(response.ok) {
+                                    resolve(d);
+                                } else {
+                                    if(this._debug) console.error('Request failed', response, d);
+                                    reject(d);
+                                }
+                            })
+                            .catch((response) => {
+                                if(this._debug) console.error('Decoding response failed', response);
+                                reject(response);
+                            });
                     } else {
-                        resolve(response.blob());
+                        if(response.ok) {
+                            resolve(response.blob());
+                        } else {
+                            if(this._debug) console.error('Request failed', response);
+                            reject(response);
+                        }
                     }
                 })
                 .catch((response) => {

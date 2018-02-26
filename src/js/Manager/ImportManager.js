@@ -1,4 +1,5 @@
 import API from '@js/Helper/api';
+import Utility from "@js/Classes/Utility";
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 
@@ -12,6 +13,7 @@ export class ImportManager {
         this.progress = () => {};
         this.processed = 0;
         this.total = 0;
+        this.errors = [];
     }
 
     /**
@@ -20,10 +22,11 @@ export class ImportManager {
      * @param type
      * @param options
      * @param progress
-     * @returns {Promise<void>}
+     * @returns {Promise<boolean>}
      */
     async importDatabase(data, type = 'json', options = {}, progress = () => {}) {
         options.mode = Number.parseInt(options.mode);
+        this.errors = [];
         this.total = 1;
         this.processed = 0;
         this.progress = progress;
@@ -52,23 +55,36 @@ export class ImportManager {
             this.total += data[k].length;
         }
 
-        let tagMapping = {};
-        if(data.tags) {
-            tagMapping = await this.importTags(data.tags, options.mode);
+        let tagMapping    = {},
+            folderMapping = {};
+
+        try {
+            if(data.tags) tagMapping = await this.importTags(data.tags, options.mode);
+        } catch(e) {
+            console.error(e);
+            throw "Unable to create tags";
         }
 
-        let folderMapping = {};
-        if(data.folders) {
-            folderMapping = await this.importFolders(data.folders, options.mode);
+        try {
+            if(data.folders) folderMapping = await this.importFolders(data.folders, options.mode);
+        } catch(e) {
+            console.error(e);
+            throw "Unable to create folders";
         }
 
-        let passwordMapping = {};
         if(data.passwords) {
             if(!data.hasOwnProperty('tags')) tagMapping = await this.getTagMapping();
             if(!data.hasOwnProperty('folders')) folderMapping = await this.getFolderMapping();
 
-            passwordMapping = await this.importPasswords(data.passwords, options.mode, options.skipShared, tagMapping, folderMapping);
+            try {
+                await this.importPasswords(data.passwords, options.mode, options.skipShared, tagMapping, folderMapping);
+            } catch(e) {
+                console.error(e);
+                throw "Unable to create passwords";
+            }
         }
+
+        return this.errors;
     }
 
     /**
@@ -128,17 +144,22 @@ export class ImportManager {
         for(let i = 0; i < tags.length; i++) {
             let tag = tags[i];
 
-            if(mode !== 3 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
-                if(mode === 1 || (mode === 0 && db[tag.id].revision === tag.revision)) {
-                    this.countProgress();
-                    continue;
-                }
+            try {
+                if(mode !== 3 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
+                    if(mode === 1 || (mode === 0 && db[tag.id].revision === tag.revision)) {
+                        this.countProgress();
+                        continue;
+                    }
 
-                idMap[tag.id] = tag.id;
-                await API.updateTag(tag);
-            } else {
-                let info = await API.createTag(tag);
-                idMap[tag.id] = info.id;
+                    idMap[tag.id] = tag.id;
+                    await API.updateTag(tag);
+                } else {
+                    let info = await API.createTag(tag);
+                    idMap[tag.id] = info.id;
+                }
+            } catch(e) {
+                console.error(e);
+                this.errors.push(Utility.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
             }
 
             this.countProgress();
@@ -191,17 +212,22 @@ export class ImportManager {
                 folder.parent = this.defaultFolder;
             }
 
-            if(mode !== 3 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
-                if(mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
-                    this.countProgress();
-                    continue;
-                }
+            try {
+                if(mode !== 3 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
+                    if(mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
+                        this.countProgress();
+                        continue;
+                    }
 
-                idMap[folder.id] = folder.id;
-                await API.updateFolder(folder);
-            } else {
-                let info = await API.createFolder(folder);
-                idMap[folder.id] = info.id;
+                    idMap[folder.id] = folder.id;
+                    await API.updateFolder(folder);
+                } else {
+                    let info = await API.createFolder(folder);
+                    idMap[folder.id] = info.id;
+                }
+            } catch(e) {
+                console.error(e);
+                this.errors.push(Utility.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
             }
 
             this.countProgress();
@@ -251,18 +277,23 @@ export class ImportManager {
                 password.folder = this.defaultFolder;
             }
 
-            if(mode !== 3 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
-                let current = db[password.id];
-                if(mode === 1 || (mode === 0 && current.revision === password.revision) || (skipShared && current.share !== null) || !current.editable) {
-                    this.countProgress();
-                    continue;
-                }
+            try {
+                if(mode !== 3 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
+                    let current = db[password.id];
+                    if(mode === 1 || (mode === 0 && current.revision === password.revision) || (skipShared && current.share !== null) || !current.editable) {
+                        this.countProgress();
+                        continue;
+                    }
 
-                idMap[password.id] = password.id;
-                await API.updatePassword(password);
-            } else {
-                let info = await API.createPassword(password);
-                idMap[info.id] = info.id;
+                    idMap[password.id] = password.id;
+                    await API.updatePassword(password);
+                } else {
+                    let info = await API.createPassword(password);
+                    idMap[info.id] = info.id;
+                }
+            } catch(e) {
+                console.error(e);
+                this.errors.push(Utility.translate('"{error}" in password "{label}".', {label: password.label, error: e.message}));
             }
 
             this.countProgress();
@@ -272,7 +303,11 @@ export class ImportManager {
     }
 
     countProgress(status = null) {
-        if(status === null) this.processed++;
+        if(status === null) {
+            this.processed++;
+        } else {
+            console.log('Passwords Import: ' + status);
+        }
         this.progress(this.processed, this.total, status);
     }
 }
