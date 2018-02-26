@@ -195,7 +195,7 @@ OC.L10N.register(
         "Import failed"                       : "Import fehlgeschlagen",
         "Import successful"                   : "Import erfolgreich",
         "Import error"                        : "Importfehler",
-        "Invalid file type"                   : "Falscher Dateityp",
+        "Invalid file type \"{type}\""        : "Falscher Dateityp \"{type}\"",
         "Password required"                   : "Passwort erforderlich",
         "Password invalid"                    : "Falsches Passwort",
         "Failed to decrypt passwords"         : "Konnte Passwörter nicht entschlüsseln",

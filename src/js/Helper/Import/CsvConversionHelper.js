@@ -46,10 +46,11 @@ export default class ImportCsvConversionHelper {
     static _processCsv(data, options) {
         let mapping  = options.mapping,
             fieldMap = {tagIds: 'tags', folderId: 'folder', parentId: 'parent'},
-            db       = [];
+            db       = [],
+            firstLine = Number.parseInt(0+options.firstLine);
 
         if(data[0].length < mapping.length) throw "CSV file can not be mapped";
-        for(let i = Number.parseInt(options.firstLine); i < data.length; i++) {
+        for(let i = firstLine; i < data.length; i++) {
             let line   = data[i],
                 object = {};
 

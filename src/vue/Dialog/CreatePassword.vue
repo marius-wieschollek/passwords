@@ -17,7 +17,7 @@
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
                                 <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern="[.](0,256)" v-model="password.password" required readonly>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" v-model="password.password" required readonly>
                         </div>
                         <translate tag="label" for="password-label" say="Name"/>
                         <input id="password-label" type="text" name="label" maxlength="64" v-model="password.label">

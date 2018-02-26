@@ -202,8 +202,8 @@
             },
             processFile(event) {
                 let file = event.target.files[0];
-                if(this.mime === file.type) {
-                    if(file.type === 'text/csv') {
+                if(this.mime === file.type || file.type === '') {
+                    if(this.mime === 'text/csv') {
                         this.readCsv(file);
                     } else {
                         let reader = new FileReader();
@@ -211,7 +211,7 @@
                         reader.readAsText(file);
                     }
                 } else {
-                    this.resetFile('Invalid file type')
+                    this.resetFile('Invalid file type "{type}"', {type:file.type})
                 }
             },
             async readCsv(file) {
