@@ -10,17 +10,17 @@
                     <translate tag="div" class="section-title" :style="getSectionStyle" say="General"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
-                        <input id="password-username" type="text" name="username" maxlength="48" v-model="password.username" required>
+                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" required>
                         <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
                                 <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" maxlength="48" v-model="password.password" required readonly>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern="[.](0,256)" v-model="password.password" required readonly>
                         </div>
                         <translate tag="label" for="password-label" say="Name"/>
-                        <input id="password-label" type="text" name="label" maxlength="48" v-model="password.label">
+                        <input id="password-label" type="text" name="label" maxlength="64" v-model="password.label">
                         <translate tag="label" for="password-url" say="Website"/>
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->

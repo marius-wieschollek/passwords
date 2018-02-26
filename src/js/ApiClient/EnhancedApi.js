@@ -851,17 +851,17 @@ export default class EnhancedApi extends SimpleApi {
             },
             username : {
                 type    : 'string',
-                length  : 48,
+                length  : 64,
                 required: true
             },
             password : {
                 type    : 'string',
-                length  : 48,
+                length  : 256,
                 required: true
             },
             label    : {
                 type   : 'string',
-                length : 48,
+                length : 64,
                 default: null
             },
             url      : {
