@@ -9,7 +9,7 @@ class PwApi extends EnhancedApi {
             return;
         }
 
-        super(true);
+        super(process.env.NODE_ENV !== 'production');
 
         this.isLoaded = false;
         this.loadInterval = setInterval(() => {this.initializePwApi()}, 10);

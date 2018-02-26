@@ -183,7 +183,6 @@
                             Messages.alert(e, 'Import error');
                         })
                         .then((errors) => {
-                            console.log(errors);
                             this.importing = false;
                             if(this.progress.style !== 'error' && !errors.length) {
                                 this.progress.style = 'success';

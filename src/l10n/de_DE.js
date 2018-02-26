@@ -101,7 +101,7 @@ OC.L10N.register(
         "{count} shares"                      : "{count} mal geteilt",
         "No notes"                            : "Keine Notizen",
         "More"                                : "Mehr",
-        "Backup"                              : "Sichern & Importieren",
+        "Backup and Restore"                  : "Sichern & Wiederherstellen",
         "Browser Extension"                   : "Browser Extension",
         "Handbook"                            : "Handbuch",
         "Search user"                         : "Benutzer suchen",
