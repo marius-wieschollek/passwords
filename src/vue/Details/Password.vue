@@ -54,7 +54,7 @@
             </div>
             <div slot="revisions">
                 <ul class="revision-list">
-                    <li class="revision"  v-for="revision in getRevisions"  :key="revision.id" :style="{'background-image': 'url(' + revision.icon + ')'}">
+                    <li class="revision" v-for="revision in getRevisions" :key="revision.id" :style="{'background-image': 'url(' + revision.icon + ')'}">
                         <span>{{ revision.label }}<br>
                             <span class="time">{{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}</span>
                         </span>
@@ -179,7 +179,7 @@
                 console.log('test');
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {this.object = p;});
+                       .then((p) => {this.object = p;});
                 }
             },
             async processNotes() {
@@ -282,7 +282,11 @@
                     cursor     : text;
 
                     &.password {
-                        cursor : pointer;
+                        cursor      : pointer;
+
+                        &:hover {
+                            font-family : monospace;
+                        }
                     }
 
                     &.secure {color : $color-green;}
