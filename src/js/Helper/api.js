@@ -12,8 +12,10 @@ class PwApi extends EnhancedApi {
         super(process.env.NODE_ENV !== 'production');
 
         this.isLoaded = false;
-        this.loadInterval = setInterval(() => {this.initializePwApi()}, 10);
-        $(window).on('load', () => {this.initializePwApi()});
+        if(isCompatibleBrowser()) {
+            this.loadInterval = setInterval(() => {this.initializePwApi()}, 10);
+            $(window).on('load', () => {this.initializePwApi()});
+        }
 
     }
 
