@@ -21,6 +21,7 @@
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
 * `docker-compose -f docker-compose.yml -f docker/configs/<service>.yml up -d` starts the system with additional services
 * `docker exec -u www-data passwords-php php /var/www/html/cron.php` - Execute cron jobs
+* `docker exec -u www-data passwords-php /var/www/html/occ  config:system:set loglevel --value=0 --type=int` - Set loglevel to info
 * `docker exec -itu www-data passwords-php bash` - Open shell in container as www-data
 * `docker exec -it passwords-php bash` - Open shell in container as root
 
