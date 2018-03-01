@@ -8,7 +8,7 @@ export default class Utility {
      */
     static translate(text, variables = {}) {
         if(text === undefined) return '';
-        if(OC !== undefined) return t('passwords', text, variables);
+        if(OC !== undefined) return OC.L10N.translate('passwords', text, variables);
 
         return '';
     }

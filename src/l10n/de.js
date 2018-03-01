@@ -202,7 +202,6 @@ OC.L10N.register(
         "Failed to decrypt folders"           : "Konnte Ordner nicht entschlüsseln",
         "Failed to decrypt tags"              : "Konnte Tags nicht entschlüsseln",
         "CSV file can not be mapped"          : "CSV Felder passen nicht zur Zuordnung",
-        "No options available"                : "Keine Optionen verfügbar",
         "Delete All"                          : "Alles löschen",
         "Empty Trash"                         : "Papierkorb leeren",
         "Delete all items in trash?"          : "Möchtest du alle Objekte im Papierkorb permanent löschen?",

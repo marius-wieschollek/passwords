@@ -293,6 +293,12 @@ export default class ImportCsvConversionHelper {
                 delimiter: ',',
                 mapping  : ['label', 'username', 'password', 'url', 'notes'],
                 repair   : true
+            },
+            keepass   : {
+                firstLine: 1,
+                db       : 'passwords',
+                delimiter: ',',
+                mapping  : ['label', 'username', 'password', 'url', 'notes']
             }
         };
 

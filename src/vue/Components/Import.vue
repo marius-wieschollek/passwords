@@ -12,6 +12,7 @@
                     <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
+                    <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -27,7 +28,7 @@
         <div class="step-3" v-if="step > 2">
             <translate tag="h1" say="Select Options"/>
             <div class="step-content">
-                <div v-if="!noOptions">
+                <div>
                     <translate tag="label" for="passwords-import-mode" say="Import Mode"/>
                     <select id="passwords-import-mode" v-model="options.mode" :disabled="importing">
                         <translate tag="option" value="0" say="Skip if same revision"/>
@@ -92,7 +93,6 @@
                         <translate tag="label" for="passwords-export-shared" say="Dont't edit passwords shared with me" v-if="options.mode !== '3'"/>
                     </div>
                 </div>
-                <translate tag="div" say="No options available" class="no-options" v-else/>
             </div>
         </div>
 
@@ -132,7 +132,6 @@
                 file       : null,
                 csvFile    : null,
                 options    : {mode: 0, skipShared: true},
-                noOptions  : false,
                 step       : 2,
                 previewLine: 1,
                 importing  : false,
@@ -296,7 +295,6 @@
             source(value) {
                 let oldMime = this.mime;
                 this.progress.status = null;
-                this.noOptions = false;
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
@@ -311,7 +309,11 @@
                         break;
                     case 'legacy':
                         this.options.profile = 'legacy';
-                        this.noOptions = true;
+                        this.options.mode = 1;
+                        break;
+                    case 'keepass':
+                        this.options.profile = 'keepass';
+                        this.options.mode = 1;
                         break;
                     case 'pwdCsv':
                         this.options.profile = 'passwords';
@@ -326,7 +328,7 @@
                         this.type = 'pmanCsv';
                         break;
                     case 'csv':
-                        this.options = {mode: 0, skipShared: true, firstLine: 0, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
+                        this.options = {mode: 1, skipShared: true, firstLine: 0, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
                         break;
                 }
 
