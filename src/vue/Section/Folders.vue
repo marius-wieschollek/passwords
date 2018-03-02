@@ -18,6 +18,7 @@
 
 <script>
     import API from '@js/Helper/api';
+    import Events from "@js/Classes/Events";
     import Breadcrumb from '@vc/Breadcrumbs';
     import Utility from "@js/Classes/Utility";
     import FolderLine from '@vue/Line/Folder';
@@ -54,6 +55,15 @@
             };
         },
 
+        created() {
+            this.refreshView();
+            Events.on('data.changed', this.refreshViewIfRequired);
+        },
+
+        beforeDestroy() {
+            Events.off('data.changed', this.refreshViewIfRequired);
+        },
+
         methods: {
             refreshView          : function() {
                 this.loading = true;
@@ -74,7 +84,7 @@
                         this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                     } else {
                         let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
-                        this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
+                        this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
                     }
                 } else if(object.type === 'folder' && object.id === this.currentFolder) {
                     if(object.trashed) {
@@ -116,7 +126,7 @@
                 }
 
                 this.folders = Utility.sortApiObjectArray(folder.folders, this.sort.by, this.sort.order);
-                this.passwords = Utility.sortApiObjectArray(folder.passwords, this.sort.by, this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(folder.passwords, this.getPasswordsSortingField(), this.sort.order);
                 this.currentFolder = folder.id;
                 this.updateBreadcrumb(folder);
             },

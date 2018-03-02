@@ -10,11 +10,11 @@ class EncryptionTestHelper {
 
     initTests() {
         if(new Date().getTime() > 1533247200000) return;
-        let testExecuted = SettingsManager.get('encryption.tests.executed', false),
-            testTimeout = SettingsManager.get('encryption.tests.timeout', 0);
+        let testExecuted = SettingsManager.get('local.test.encryption.executed', false),
+            testTimeout = SettingsManager.get('local.test.encryption.timeout', 0);
 
         if(testTimeout !== 0) {
-            SettingsManager.set('encryption.tests.timeout', testTimeout-1);
+            SettingsManager.set('local.test.encryption.timeout', testTimeout-1);
         } else if(!testExecuted) {
             setTimeout(() => {this.runTests();}, 15000);
         }
@@ -30,7 +30,7 @@ class EncryptionTestHelper {
             if(result !== true) return this.handleError(result);
             result = await this.testTags();
             if(result !== true) return this.handleError(result);
-            SettingsManager.set('encryption.tests.executed', true);
+            SettingsManager.set('local.test.encryption.executed', true);
             console.log('Encryption tests ran successfully');
             return true;
         } catch(e) {
@@ -139,9 +139,9 @@ class EncryptionTestHelper {
             'Encryption Tests Failed',
             (d) => {
                 if(d) {
-                    SettingsManager.set('encryption.tests.executed', true);
+                    SettingsManager.set('local.test.encryption.executed', true);
                 } else {
-                    SettingsManager.set('encryption.tests.timeout', 10);
+                    SettingsManager.set('local.test.encryption.timeout', 10);
                 }
             },
             true

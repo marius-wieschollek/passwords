@@ -662,9 +662,11 @@ export default class EnhancedApi extends SimpleApi {
         password.type = 'password';
         if(password.url) {
             let host = SimpleApi.parseUrl(password.url, 'host');
+            password.host = host;
             password.icon = this.getFaviconUrl(host);
             password.preview = this.getPreviewUrl(host);
         } else {
+            password.host = null;
             password.icon = this.getFaviconUrl(null);
             password.preview = this.getPreviewUrl(null);
         }

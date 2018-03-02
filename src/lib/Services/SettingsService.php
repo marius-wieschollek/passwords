@@ -52,8 +52,7 @@ class SettingsService {
         = [
             'password/generator/strength' => 'integer',
             'password/generator/numbers'  => 'boolean',
-            'password/generator/special'  => 'boolean',
-            'password/label/default'      => 'integer'
+            'password/generator/special'  => 'boolean'
         ];
 
     /**
@@ -63,8 +62,7 @@ class SettingsService {
         = [
             'password/generator/strength' => 1,
             'password/generator/numbers'  => false,
-            'password/generator/special'  => false,
-            'password/label/default'      => 0
+            'password/generator/special'  => false
         ];
 
     /**
@@ -208,7 +206,6 @@ class SettingsService {
      * @param string $key
      *
      * @return null
-     * @throws ApiException
      */
     protected function getClientSetting(string $key) {
         $data = json_decode($this->config->getUserValue('client/settings', '{}'), true);
@@ -216,7 +213,7 @@ class SettingsService {
             return $data[ $key ];
         }
 
-        throw new ApiException('Invalid Key', 400);
+        return null;
     }
 
     /**
@@ -311,10 +308,10 @@ class SettingsService {
      * @throws ApiException
      */
     protected function setClientSetting(string $key, $value): void {
-        if(strlen($key) > 16) {
+        if(strlen($key) > 48) {
             throw new ApiException('Key too long', 400);
         }
-        if(strlen(strval($value)) > 36) {
+        if(strlen(strval($value)) > 128) {
             throw new ApiException('Value too long', 400);
         }
 

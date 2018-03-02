@@ -16,8 +16,8 @@
                     element: null
                 },
                 sort   : {
-                    by   : SettingsManager.get('ui.sort.by', 'label'),
-                    order: SettingsManager.get('ui.sort.order', true)
+                    by   : SettingsManager.get('local.ui.sorting.field'),
+                    order: SettingsManager.get('local.ui.sorting.ascending', true)
                 }
             }
         },
@@ -62,15 +62,16 @@
         methods: {
             updateSorting($event) {
                 this.sort = $event;
-                SettingsManager.set('ui.sort.by', $event.by);
-                SettingsManager.set('ui.sort.order', $event.order);
-                if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.sort.by, this.sort.order);
+                SettingsManager.set('local.ui.sorting.field', $event.by);
+                SettingsManager.set('local.ui.sorting.ascending', $event.order);
+
+                if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.getPasswordsSortingField(), this.sort.order);
                 if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
                 if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);
             },
             updatePasswordList: function(passwords) {
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
             },
             updateFolderList: function(folders) {
                 this.loading = false;
@@ -79,6 +80,9 @@
             updateTagList: function(tags) {
                 this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, this.sort.by, this.sort.order);
+            },
+            getPasswordsSortingField() {
+                return this.sort.by === 'label' ? SettingsManager.get('client.ui.password.sorting.field'):this.sort.by;
             }
         }
     }

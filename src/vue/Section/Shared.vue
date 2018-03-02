@@ -120,7 +120,7 @@
                 }
 
                 this.shareUsers = shareUsers;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
             },
             getShareUsers(id) {
                 return this.shareUsers[id];

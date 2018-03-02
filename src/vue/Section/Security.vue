@@ -83,7 +83,7 @@
             updatePasswordList: function(passwords, status) {
                 if(this.$route.params.status === status) {
                     this.loading = false;
-                    this.passwords = Utility.sortApiObjectArray(passwords, this.sort.by, this.sort.order);
+                    this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
                 }
             }
         },

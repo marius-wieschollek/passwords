@@ -77,7 +77,7 @@
                     this.defaultPath = '/trash';
                 }
 
-                this.passwords = Utility.sortApiObjectArray(tag.passwords, this.sort.by, this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sort.order);
                 this.breadcrumb = [
                     {path: this.defaultPath, label: this.defaultTitle},
                     {path: this.$route.path, label: tag.label}

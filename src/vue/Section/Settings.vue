@@ -22,6 +22,17 @@
                 <input type="checkbox" id="setting-include-special" v-model="settings['user.password.generator.special']">
                 <span></span>
             </section>
+            <section class="ui">
+                <translate tag="h1" say="User Interface"/>
+
+                <translate tag="label" for="setting-password-field" say="Sort passwords by"/>
+                <select id="setting-password-field" v-model="settings['client.ui.password.sorting.field']">
+                    <translate tag="option" value="label" say="Name"></translate>
+                    <translate tag="option" value="host" say="Website"></translate>
+                    <translate tag="option" value="user" say="Username"></translate>
+                </select>
+                <span></span>
+            </section>
             <section class="tests" v-if="testsEnabled">
                 <translate tag="h1" say="Field tests"/>
 
@@ -34,9 +45,9 @@
 </template>
 
 <script>
-    import API from '@js/Helper/api';
     import Messages from "@js/Classes/Messages";
     import Translate from "@vue/Components/Translate";
+    import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
     export default {
@@ -45,26 +56,21 @@
         },
         data() {
             return {
-                settings: {}
+                settings: SettingsManager.getAll()
             };
         },
-        created() {
-            this.loadSettings();
-        },
-        computed: {
+        computed  : {
             testsEnabled() {
                 return process.env.NODE_ENV !== 'production';
             }
         },
         methods   : {
-            loadSettings() {
-                this.settings = {};
-                API.listSettings('user')
-                   .then((d) => {this.settings = d;});
-            },
             saveSettings() {
-                API.setSettings(this.settings)
-                   .catch(this.loadSettings);
+                for(let i in this.settings) {
+                    if(this.settings.hasOwnProperty(i)) {
+                        SettingsManager.set(i, this.settings[i]);
+                    }
+                }
             },
             async runTests($event) {
                 $event.target.setAttribute('disabled', 'disabled');
