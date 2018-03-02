@@ -265,6 +265,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         $shares           = $this->shareService->findBySourcePassword($revision->getModel());
         foreach($shares as $share) {
             $object['shares'][] = $objectHelper->getApiObject($share);
+
+            usort($object['shares'], function($a, $b) {return $a['receiver'] > $b['receiver'] ? 1:-1;});
         }
 
         if($object['share']) {

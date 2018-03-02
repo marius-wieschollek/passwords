@@ -2,7 +2,7 @@
     <div class="row password" @click="copyPasswordAction($event)" @dblclick="copyUsernameAction($event)" @dragstart="dragStartAction($event)" :data-password-id="password.id">
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
-        <span class="title">{{ password.label }}</span>
+        <span class="title">{{ getTitle }}</span>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
@@ -12,8 +12,8 @@
                         <slot name="menu-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
-                        <translate tag="li" v-if="isMobile" @click="copyPasswordAction()" icon="clipboard" say="Copy Password"/>
-                        <translate tag="li" v-if="isMobile" @click="copyUsernameAction()" icon="clipboard" say="Copy User"/>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyPasswordAction()" icon="clipboard" say="Copy Password"/>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyUsernameAction()" icon="clipboard" say="Copy User"/>
                         <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard" say="Copy Url"/>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
@@ -37,6 +37,7 @@
     import Messages from '@js/Classes/Messages';
     import DragManager from '@js/Manager/DragManager';
     import PasswordManager from '@js/Manager/PasswordManager';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         components: {
@@ -67,8 +68,13 @@
                         return 'fail';
                 }
             },
-            isMobile() {
-                return window.innerWidth < 361;
+            showCopyOptions() {
+                return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
+            },
+            getTitle() {
+                let titleField = SettingsManager.get('client.ui.password.field.title');
+
+                return this.password[titleField];
             }
         },
 

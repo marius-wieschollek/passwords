@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :deleteAll="true" :newPassword="false" v-on:deleteAll="clearTrash"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)" say="Restore"/>
                 </folder-line>

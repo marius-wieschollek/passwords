@@ -14,10 +14,10 @@
         },
 
         props: {
-            by   : {
+            field   : {
                 type: String
             },
-            order: {
+            ascending: {
                 type: Boolean
             }
         },
@@ -33,16 +33,16 @@
 
         methods: {
             getClass(field) {
-                if(this.by === field) {
-                    return this.order ? 'asc':'desc';
+                if(this.field === field) {
+                    return this.ascending ? 'asc':'desc';
                 }
                 return '';
             },
             updateSorting(field) {
-                if(this.by === field) {
-                    this.$emit('updateSorting', {by: field, order: !this.order});
+                if(this.field === field) {
+                    this.$emit('updateSorting', {field: field, ascending: !this.ascending});
                 } else {
-                    this.$emit('updateSorting', {by: field, order: true});
+                    this.$emit('updateSorting', {field: field, ascending: true});
                 }
             }
         }

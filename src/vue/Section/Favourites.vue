@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>

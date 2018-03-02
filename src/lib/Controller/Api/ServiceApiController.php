@@ -181,11 +181,19 @@ class ServiceApiController extends AbstractApiController {
      * @return FileDisplayResponse
      */
     protected function createFileDisplayResponse(ISimpleFile $file, int $statusCode = Http::STATUS_OK): FileDisplayResponse {
-        return new FileDisplayResponse(
+        $response = new FileDisplayResponse(
             $file,
             $statusCode,
             ['Content-Type' => $file->getMimeType()]
         );
+
+        $expires = new \DateTime();
+        $expires->setTimestamp(time()+259200);
+        $response->addHeader('Cache-Control', 'public, immutable, max-age=259200')
+                 ->addHeader('Expires', $expires->format(\DateTime::RFC2822))
+                 ->addHeader('Pragma', 'cache');
+
+        return $response;
     }
 
     /**

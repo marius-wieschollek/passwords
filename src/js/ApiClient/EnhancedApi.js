@@ -663,10 +663,12 @@ export default class EnhancedApi extends SimpleApi {
         if(password.url) {
             let host = SimpleApi.parseUrl(password.url, 'host');
             password.host = host;
+            password.website = EnhancedApi._getWebsiteNameFromDomain(host);
             password.icon = this.getFaviconUrl(host);
             password.preview = this.getPreviewUrl(host);
         } else {
             password.host = null;
+            password.website = '';
             password.icon = this.getFaviconUrl(null);
             password.preview = this.getPreviewUrl(null);
         }
@@ -831,9 +833,26 @@ export default class EnhancedApi extends SimpleApi {
             if(data.label.indexOf('@') !== -1) {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }
-            data.label += '@' + SimpleApi.parseUrl(data.url, 'host')
-                .replace(/^(m|de|www|www2|mail|email|login|signin)\./, '');
+            data.label += '@' + EnhancedApi._getWebsiteNameFromDomain(SimpleApi.parseUrl(data.url, 'host'));
         }
+    }
+
+    /**
+     * Converts a domain like www.example.com to example.com
+     *
+     * @param domain
+     * @private
+     */
+    static _getWebsiteNameFromDomain(domain) {
+        if((domain.match(/\./g) || []).length > 2) {
+            let array = domain.split('.');
+            domain = '.' + array.pop();
+            domain += '.' + array.pop();
+            domain += array.pop();
+        }
+        let regex = RegExp('^(m|' + navigator.language + '|www|www2|mail|email|login|signin)\.');
+
+        return domain.replace(regex, '');
     }
 
 

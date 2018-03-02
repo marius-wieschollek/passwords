@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :newTag="!currentTag" :newPassword="currentTag !== null" :tag="currentTag" :items="breadcrumb"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
                 <footer-line :passwords="passwords" :tags="tags" v-if="showHeaderAndFooter"/>
@@ -77,7 +77,7 @@
                     this.defaultPath = '/trash';
                 }
 
-                this.passwords = Utility.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                 this.breadcrumb = [
                     {path: this.defaultPath, label: this.defaultTitle},
                     {path: this.$route.path, label: tag.label}

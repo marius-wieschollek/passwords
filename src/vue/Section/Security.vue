@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <security-line v-if="$route.params.status === undefined" v-for="(title, index) in securityStatus" :key="title" :status="index" :label="title"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
                 <footer-line :passwords="passwords" v-if="showHeaderAndFooter"/>
@@ -83,7 +83,7 @@
             updatePasswordList: function(passwords, status) {
                 if(this.$route.params.status === status) {
                     this.loading = false;
-                    this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
+                    this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                 }
             }
         },

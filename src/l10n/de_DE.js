@@ -1,6 +1,5 @@
-OC.L10N.register(
-    "passwords",
-    {
+(function() {
+    let translations = {
         "Passwords"                           : "Passwörter",
         "All"                                 : "Alle",
         "Folders"                             : "Ordner",
@@ -211,9 +210,13 @@ OC.L10N.register(
         "Password Generator"                  : "Passwortgenerator",
         "Password strength"                   : "Stärke",
         "Include numbers"                     : "Nummern verwenden",
-        "Include special charaters"           : "Sonderzeichen verwenden",
+        "Include special characters"          : "Sonderzeichen verwenden",
         "User Interface"                      : "Benutzeroberfläche",
-        "Sort passwords by"                   : "Sortiere Passwörter nach",
+        "Passwords List View"                 : "Passwörter in der Listenansicht",
+        "Set title from"                      : "Dieses Feld als Titel verwenden",
+        "Sort by"                             : "Sortiere nach",
+        "Title field"                         : "Titelfeld",
+        "Add copy options in menu"            : "Zeige \"Kopieren\"-Einträge im Menü",
         "There is nothing here"               : "Hier ist nichts",
         "Click on \"+\" to add something"     : "Drücken Sie auf das \"+\"-Symbol, um etwas hinzuzufügen",
         "Deleted items will appear here"      : "Gelöschte Objekte werden hier erscheinen",
@@ -235,6 +238,18 @@ OC.L10N.register(
         "false"                               : "nein",
         "yes"                                 : "ja",
         "no"                                  : "nein"
-    },
-    'nplurals=2; plural=(n != 1);'
-);
+    };
+
+    let helpTexts = {
+        "A higher strength results in longer, more complex passwords"              : "Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter",
+        "Show the selected property as title in the list view"                     : "Zeigt das ausgewählte Attribut in der Listenansicht als Titel an",
+        "Sorts passwords by the selected property when sorting by name is selected": "Sortiert Passwörter nach dem angegebenen Attribut anstatt nach dem Namen",
+        "Shows options to copy the password and user name in the menu"             : "Zeigt die Optionen zum Kopieren von Password und Benutzername im Menü"
+    };
+
+    OC.L10N.register(
+        "passwords",
+        Object.assign(translations, helpTexts),
+        'nplurals=2; plural=(n != 1);'
+    );
+})();

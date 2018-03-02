@@ -1,7 +1,6 @@
 import $ from "jquery";
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 import SettingsManager from '@js/Manager/SettingsManager';
-import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 class PwApi extends EnhancedApi {
     constructor() {
@@ -14,8 +13,8 @@ class PwApi extends EnhancedApi {
 
         this.isLoaded = false;
         if(isCompatibleBrowser()) {
-            this.loadInterval = setInterval(() => {this.initializePwApi()}, 10);
-            $(window).on('load', () => {this.initializePwApi()});
+            this.loadInterval = setInterval(() => {this.initializePwApi();}, 10);
+            $(window).on('load', () => {this.initializePwApi();});
         }
 
     }
@@ -37,7 +36,6 @@ class PwApi extends EnhancedApi {
             }
             this.login(baseUrl, user, password);
             SettingsManager.init().then(window.initializePw);
-            if(this.debug) EncryptionTestHelper.initTests();
         }
     }
 }

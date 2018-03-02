@@ -10,7 +10,9 @@ class SettingsManager {
         this._settings = {
             'local.ui.sort.ascending'         : true,
             'local.ui.sort.field'             : 'label',
-            'client.ui.password.sorting.field': 'label'
+            'client.ui.password.field.title'  : 'label',
+            'client.ui.password.field.sorting': 'byTitle',
+            'client.ui.password.menu.copy'    : false
         };
     }
 
@@ -50,7 +52,9 @@ class SettingsManager {
                     'user.password.generator.strength',
                     'user.password.generator.numbers',
                     'user.password.generator.special',
-                    'client.ui.password.sorting.field'
+                    'client.ui.password.field.title',
+                    'client.ui.password.field.sorting',
+                    'client.ui.password.menu.copy'
                 ]
             )
         );
@@ -90,7 +94,7 @@ class SettingsManager {
         }
 
         settings[setting] = value;
-        window.localStorage.setItem('passwords.settings', JSON.stringify(settings))
+        window.localStorage.setItem('passwords.settings', JSON.stringify(settings));
     }
 
     /**

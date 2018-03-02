@@ -12,26 +12,40 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <span></span>
+                <settings-help text="A higher strength results in longer, more complex passwords"/>
 
                 <translate tag="label" for="setting-include-numbers" say="Include numbers"/>
                 <input type="checkbox" id="setting-include-numbers" v-model="settings['user.password.generator.numbers']">
                 <span></span>
 
-                <translate tag="label" for="setting-include-special" say="Include special charaters"/>
+                <translate tag="label" for="setting-include-special" say="Include special characters"/>
                 <input type="checkbox" id="setting-include-special" v-model="settings['user.password.generator.special']">
                 <span></span>
             </section>
             <section class="ui">
                 <translate tag="h1" say="User Interface"/>
 
-                <translate tag="label" for="setting-password-field" say="Sort passwords by"/>
-                <select id="setting-password-field" v-model="settings['client.ui.password.sorting.field']">
-                    <translate tag="option" value="label" say="Name"></translate>
-                    <translate tag="option" value="host" say="Website"></translate>
-                    <translate tag="option" value="user" say="Username"></translate>
+                <translate tag="h3" say="Passwords List View"/>
+                <translate tag="label" for="setting-password-title" say="Set title from"/>
+                <select id="setting-password-title" v-model="settings['client.ui.password.field.title']">
+                    <translate tag="option" value="label" say="Name"/>
+                    <translate tag="option" value="website" say="Website"/>
+                    <translate tag="option" value="user" say="Username"/>
                 </select>
-                <span></span>
+                <settings-help text="Show the selected property as title in the list view"/>
+
+                <translate tag="label" for="setting-password-sorting" say="Sort by"/>
+                <select id="setting-password-sorting" v-model="settings['client.ui.password.field.sorting']">
+                    <translate tag="option" value="byTitle" say="Title field"/>
+                    <translate tag="option" value="label" say="Name"/>
+                    <translate tag="option" value="website" say="Website"/>
+                    <translate tag="option" value="user" say="Username"/>
+                </select>
+                <settings-help text="Sorts passwords by the selected property when sorting by name is selected"/>
+
+                <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
+                <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
+                <settings-help text="Shows options to copy the password and user name in the menu"/>
             </section>
             <section class="tests" v-if="testsEnabled">
                 <translate tag="h1" say="Field tests"/>
@@ -49,9 +63,11 @@
     import Translate from "@vue/Components/Translate";
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
+    import SettingsHelp from "@/vue/Components/SettingsHelp";
 
     export default {
         components: {
+            SettingsHelp,
             Translate
         },
         data() {
@@ -108,7 +124,7 @@
 
         section {
             display               : grid;
-            grid-template-columns : 3fr 2fr 1fr;
+            grid-template-columns : 3fr 2fr 30px;
             max-width             : 400px;
             float                 : left;
             margin-bottom         : 2em;

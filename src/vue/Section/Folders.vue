@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :newFolder="true" :folder="currentFolder" :items="breadcrumb" :showAddNew="showAddNew"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" draggable="true"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id" draggable="true"/>
                 <footer-line :passwords="passwords" :folders="folders" v-if="showHeaderAndFooter"/>
@@ -84,7 +84,7 @@
                         this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
                     } else {
                         let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
-                        this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
+                        this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                     }
                 } else if(object.type === 'folder' && object.id === this.currentFolder) {
                     if(object.trashed) {
@@ -103,7 +103,7 @@
                         this.folders = Utility.removeApiObjectFromArray(this.folders, object);
                     } else {
                         let folders = Utility.replaceOrAppendApiObject(this.folders, object);
-                        this.folders = Utility.sortApiObjectArray(folders, this.sort.by, this.sort.order);
+                        this.folders = Utility.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
                     }
                 } else if(object.type === 'folder' && Utility.searchApiObjectInArray(this.folders, object) !== -1) {
                     this.folders = Utility.removeApiObjectFromArray(this.folders, object);
@@ -125,8 +125,8 @@
                     this.draggable = true;
                 }
 
-                this.folders = Utility.sortApiObjectArray(folder.folders, this.sort.by, this.sort.order);
-                this.passwords = Utility.sortApiObjectArray(folder.passwords, this.getPasswordsSortingField(), this.sort.order);
+                this.folders = Utility.sortApiObjectArray(folder.folders, this.sorting.field, this.sorting.ascending);
+                this.passwords = Utility.sortApiObjectArray(folder.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                 this.currentFolder = folder.id;
                 this.updateBreadcrumb(folder);
             },

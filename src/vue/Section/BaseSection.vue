@@ -15,9 +15,9 @@
                     type   : 'none',
                     element: null
                 },
-                sort   : {
-                    by   : SettingsManager.get('local.ui.sorting.field'),
-                    order: SettingsManager.get('local.ui.sorting.ascending', true)
+                sorting   : {
+                    field   : SettingsManager.get('local.ui.sorting.field', 'label'),
+                    ascending: SettingsManager.get('local.ui.sorting.ascending', true)
                 }
             }
         },
@@ -61,28 +61,30 @@
 
         methods: {
             updateSorting($event) {
-                this.sort = $event;
-                SettingsManager.set('local.ui.sorting.field', $event.by);
-                SettingsManager.set('local.ui.sorting.ascending', $event.order);
+                this.sorting = $event;
+                SettingsManager.set('local.ui.sorting.field', $event.field);
+                SettingsManager.set('local.ui.sorting.ascending', $event.ascending);
 
-                if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.getPasswordsSortingField(), this.sort.order);
-                if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sort.by, this.sort.order);
-                if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sort.by, this.sort.order);
+                if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
+                if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
             },
             updatePasswordList: function(passwords) {
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
             updateFolderList: function(folders) {
                 this.loading = false;
-                this.folders = Utility.sortApiObjectArray(folders, this.sort.by, this.sort.order);
+                this.folders = Utility.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
             },
             updateTagList: function(tags) {
                 this.loading = false;
-                this.tags = Utility.sortApiObjectArray(tags, this.sort.by, this.sort.order);
+                this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },
             getPasswordsSortingField() {
-                return this.sort.by === 'label' ? SettingsManager.get('client.ui.password.sorting.field'):this.sort.by;
+                let sortingField = this.sorting.field === 'label' ? SettingsManager.get('client.ui.password.field.sorting'):this.sorting.field;
+                if(sortingField === 'byTitle') sortingField = SettingsManager.get('client.ui.password.field.title');
+                return sortingField;
             }
         }
     }

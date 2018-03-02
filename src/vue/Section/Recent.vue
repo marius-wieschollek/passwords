@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id"/>
                 <footer-line :passwords="passwords" v-if="showHeaderAndFooter"/>
                 <empty v-if="isEmpty"/>
@@ -40,9 +40,9 @@
 
         data() {
             return {
-                sort: {
-                    by   : 'edited',
-                    order: false
+                sorting: {
+                    field   : 'edited',
+                    ascending: false
                 }
             }
         },
@@ -55,7 +55,7 @@
             updateContentList: function(passwords) {
                 let array = Utility.sortApiObjectArray(passwords, 'edited', false);
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(array.slice(0, 15), this.getPasswordsSortingField(), this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(array.slice(0, 15), this.getPasswordsSortingField(), this.sorting.ascending);
             }
         }
     };

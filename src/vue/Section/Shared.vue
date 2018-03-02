@@ -3,7 +3,7 @@
         <div class="app-content-left">
             <breadcrumb :showAddNew="false" :items="breadcrumb"/>
             <div class="item-list">
-                <header-line :by="sort.by" :order="sort.order" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
                 <generic-line
                         v-if="$route.params.type === undefined"
                         v-for="(title, index) in shareType"
@@ -119,8 +119,12 @@
                     }
                 }
 
+                for(let i in shareUsers) {
+                    if(shareUsers.hasOwnProperty(i)) shareUsers[i] = Utility.sortApiObjectArray(shareUsers[i], 'name');
+                }
+
                 this.shareUsers = shareUsers;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sort.order);
+                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
             getShareUsers(id) {
                 return this.shareUsers[id];
