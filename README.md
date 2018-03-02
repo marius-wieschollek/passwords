@@ -51,7 +51,7 @@ Each password is encrypted with it's own unique key.
 **Soon to come:** A master password will be available for additional security.
 
 #### Client Side Encryption
-**Soon to come:** Using the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API), you have the ability to choose a strong client side encryption for your passwords.
+**Soon to come:** Passwords supports a strong client side encryption for your passwords.
 
 ## Apps
 There are no apps for the modern API right now. But there are some for the legacy API.
