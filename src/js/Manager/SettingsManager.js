@@ -8,8 +8,9 @@ class SettingsManager {
 
     constructor() {
         this._settings = {
-            'local.ui.sort.ascending': true,
-            'local.ui.sort.field'    : 'label'
+            'local.ui.sort.ascending'         : true,
+            'local.ui.sort.field'             : 'label',
+            'client.ui.password.sorting.field': 'label'
         };
     }
 
@@ -99,7 +100,7 @@ class SettingsManager {
      */
     _addSettings(settings) {
         for(let i in settings) {
-            if(settings.hasOwnProperty(i)) this._settings[i] = settings[i];
+            if(settings.hasOwnProperty(i) && settings[i] !== null) this._settings[i] = settings[i];
         }
     }
 }
