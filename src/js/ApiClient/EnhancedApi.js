@@ -846,9 +846,12 @@ export default class EnhancedApi extends SimpleApi {
     static _getWebsiteNameFromDomain(domain) {
         if((domain.match(/\./g) || []).length > 2) {
             let array = domain.split('.');
-            domain = '.' + array.pop();
-            domain += '.' + array.pop();
-            domain += array.pop();
+            domain = '';
+            for(let i = 0; i<3; i++) {
+                let part = array.pop();
+                if(part === 'co' && i === 1) i--;
+                domain = (i===2 ? '':'.') + part + domain;
+            }
         }
         let regex = RegExp('^(m|' + navigator.language + '|www|www2|mail|email|login|signin)\.');
 
