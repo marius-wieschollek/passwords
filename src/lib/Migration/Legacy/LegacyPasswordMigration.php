@@ -242,7 +242,7 @@ class LegacyPasswordMigration {
             if(strpos($label, '@') !== false) {
                 $label = substr($label, 0, strpos($label, '@'));
             }
-            $label .= '@'.$host;
+            return $host.' - '.$label;
         }
 
         return $label;

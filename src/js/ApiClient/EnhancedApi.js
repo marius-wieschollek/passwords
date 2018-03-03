@@ -833,7 +833,7 @@ export default class EnhancedApi extends SimpleApi {
             if(data.label.indexOf('@') !== -1) {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }
-            data.label += '@' + EnhancedApi._getWebsiteNameFromDomain(SimpleApi.parseUrl(data.url, 'host'));
+            data.label = EnhancedApi._getWebsiteNameFromDomain(SimpleApi.parseUrl(data.url, 'host')) + ' - ' + data.label;
         }
     }
 
