@@ -13,6 +13,7 @@
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
                     <translate tag="option" value="keepass" say="KeePass CSV"/>
+                    <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -210,7 +211,7 @@
                         reader.readAsText(file);
                     }
                 } else {
-                    this.resetFile('Invalid file type "{type}"', {type:file.type})
+                    this.resetFile('Invalid file type "{type}"', {type: file.type});
                 }
             },
             async readCsv(file) {
@@ -224,9 +225,11 @@
                         skipEmptyLines: true,
                         complete      : (result) => {
                             if(result.errors.length === 0) {
-                                this.file = result.data
+                                this.file = result.data;
                             } else {
-                                this.resetFile(result.errors[0].message)
+                                let error = result.errors[0];
+                                console.log(result.errors);
+                                this.resetFile(['{error} in line {line} column {column}', {error: error.message, line: error.row + 1, column: error.index}]);
                             }
                         }
                     });
@@ -313,6 +316,10 @@
                         break;
                     case 'keepass':
                         this.options.profile = 'keepass';
+                        this.options.mode = 1;
+                        break;
+                    case 'lastpass':
+                        this.options.profile = 'lastpass';
                         this.options.mode = 1;
                         break;
                     case 'pwdCsv':

@@ -84,9 +84,9 @@ export default class ImportCsvConversionHelper {
         let boolYes = Utility.translate('true'),
             boolNo  = Utility.translate('false');
 
-        if([boolYes, 'yes', 'true'].indexOf(value) !== -1) {
+        if([boolYes, 'yes', 'true', '1'].indexOf(value) !== -1) {
             return true;
-        } else if([boolNo, 'no', 'false'].indexOf(value) !== -1) {
+        } else if([boolNo, 'no', 'false', '0'].indexOf(value) !== -1) {
             return false;
         } else if(field === 'edited') {
             return new Date(value);
@@ -299,6 +299,12 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 delimiter: ',',
                 mapping  : ['label', 'username', 'password', 'url', 'notes']
+            },
+            lastpass   : {
+                firstLine: 1,
+                db       : 'passwords',
+                delimiter: ',',
+                mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favourite']
             }
         };
 
