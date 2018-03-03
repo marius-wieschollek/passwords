@@ -43,7 +43,12 @@
                 allTags      : [],
                 inputText    : '',
                 searchResults: [],
-                wasBackspace : false
+                wasBackspace : false,
+                searchBox    : {
+                    top  : 0,
+                    left : 0,
+                    width: 0
+                }
             };
         },
 
@@ -54,9 +59,12 @@
         computed: {
             getPopupStyle() {
                 return {
-                    color: ThemeManager.getColor(),
-                    border: '1px solid ' + ThemeManager.getColor(),
-                    backgroundColor: ThemeManager.getContrastColor()
+                    color          : ThemeManager.getColor(),
+                    border         : '1px solid ' + ThemeManager.getColor(),
+                    backgroundColor: ThemeManager.getContrastColor(),
+                    top            : this.searchBox.top,
+                    left           : this.searchBox.left,
+                    width          : this.searchBox.width
                 };
             }
         },
@@ -157,11 +165,9 @@
                     $search  = $('div.tags-container ul.tag-search'),
                     position = $input.position();
 
-                $search.css({
-                                top  : (position.top + $input.outerHeight()) + 'px',
-                                left : position.left + 'px',
-                                width: $input.outerWidth()
-                            });
+                this.searchBox.top = (position.top + $input.outerHeight()) + 'px';
+                this.searchBox.left = position.left + 'px';
+                this.searchBox.width = $input.outerWidth();
             },
             getHoverStyle($event, on = true) {
                 if(on) {
@@ -175,7 +181,7 @@
         },
 
         watch: {
-            password: function(newPassword) {
+            password : function(newPassword) {
                 this.tags = Utility.sortApiObjectArray(newPassword.tags, 'label');
             },
             inputText: function(value) {
@@ -224,11 +230,11 @@
         }
 
         .tag-search {
-            position         : absolute;
-            border-radius    : 2px;
-            max-height       : 120px;
-            overflow-y       : auto;
-            z-index          : 1;
+            position      : absolute;
+            border-radius : 2px;
+            max-height    : 120px;
+            overflow-y    : auto;
+            z-index       : 1;
 
             .result {
                 padding : 3px 5px;

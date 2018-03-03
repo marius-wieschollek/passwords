@@ -176,7 +176,6 @@
                 PasswordManager.restoreRevision(this.object, revision);
             },
             refreshView(event) {
-                console.log('test');
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
                        .then((p) => {this.object = p;});

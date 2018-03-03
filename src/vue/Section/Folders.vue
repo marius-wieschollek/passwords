@@ -47,7 +47,7 @@
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
                 defaultTitle : Utility.translate('Folders'),
                 defaultPath  : '/folders',
-                currentFolder: '00000000-0000-0000-0000-000000000000',
+                currentFolder: '',
                 draggable    : 'true',
                 folders      : [],
                 showAddNew   : true,
@@ -66,13 +66,17 @@
 
         methods: {
             refreshView          : function() {
-                this.loading = true;
-                this.folders = [];
-                this.passwords = [];
-                this.detail.type = 'none';
-                if(this.$route.params.folder !== undefined) {
+                if(this.$route.params.folder !== undefined && this.$route.params.folder !== this.currentFolder) {
+                    this.loading = true;
+                    this.folders = [];
+                    this.passwords = [];
+                    this.detail.type = 'none';
                     API.showFolder(this.$route.params.folder, 'model+folders+passwords+parent').then(this.updateContentList);
-                } else {
+                } else if(this.$route.params.folder === undefined && this.defaultFolder !== this.currentFolder) {
+                    this.loading = true;
+                    this.folders = [];
+                    this.passwords = [];
+                    this.detail.type = 'none';
                     API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
                 }
             },
@@ -89,13 +93,11 @@
                 } else if(object.type === 'folder' && object.id === this.currentFolder) {
                     if(object.trashed) {
                         this.loading = true;
-                        this.detail.type = 'none';
                         API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
                     } else if(object.passwords && object.folders && typeof object.parent !== 'string') {
                         this.updateContentList(object);
                     } else {
                         this.loading = true;
-                        this.detail.type = 'none';
                         API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
                     }
                 } else if(object.type === 'folder' && object.parent === this.currentFolder) {
@@ -135,7 +137,7 @@
                     {path: this.defaultPath, label: this.defaultTitle, dropType: 'folder', folderId: this.defaultFolder}
                 ];
 
-                if(typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder) {
+                if(typeof folder.parent !== 'string' && folder.parent.id !== this.defaultFolder && !folder.trashed) {
                     this.breadcrumb[0].label = '…';
                     let parent = folder.parent;
                     this.breadcrumb.push(

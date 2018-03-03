@@ -853,7 +853,8 @@ export default class EnhancedApi extends SimpleApi {
                 domain = (i===2 ? '':'.') + part + domain;
             }
         }
-        let regex = RegExp('^(m|' + navigator.language + '|www|www2|mail|email|login|signin)\.');
+        let subdomains = ['m', 'www', 'www2', 'mail', 'email', 'login', 'signin', 'profile', 'account',  navigator.language],
+            regex = RegExp('^(' + subdomains.join('|') + ')\.');
 
         return domain.replace(regex, '');
     }
