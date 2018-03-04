@@ -332,6 +332,10 @@
                                 min-height : 300px;
                                 max-height : 300px;
                             }
+
+                            .editor-preview.editor-preview-active p {
+                                margin-bottom: 1em;
+                            }
                         }
 
                         .foldout-container {

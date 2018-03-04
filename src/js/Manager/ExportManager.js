@@ -215,7 +215,7 @@ export class ExportManager {
 
                 if(typeof value === 'boolean') value = Utility.translate(value.toString());
 
-                line.push('"' + value.toString().replace('"', '\\"') + '"');
+                line.push('"' + value.toString().replace(/"/g, '""') + '"');
             }
 
             csv.push(line.join(delimiter));

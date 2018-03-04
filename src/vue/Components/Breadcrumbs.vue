@@ -3,7 +3,7 @@
         <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
-                <router-link to="/"><img class="svg" :src="getHomeIcon" alt="Home"></router-link>
+                <router-link :to="getBaseRoute"><img class="svg" :src="getHomeIcon" alt="Home"></router-link>
             </div>
             <div class="crumb svg" v-for="(item, index) in getItems" :class="{current:index === getItems.length - 1}">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
@@ -101,6 +101,11 @@
             getHomeIcon() {
                 return API.baseUrl + 'core/img/places/home.svg';
             },
+            getBaseRoute() {
+                let route = this.$route.path;
+
+                return route.substr(0, route.indexOf('/', 1));
+            },
             getItems() {
                 if(this.items.length === 0) {
                     return [
@@ -143,9 +148,7 @@
 
 <style lang="scss">
     #controls {
-        top   : auto;
-        right : auto;
-        left  : auto;
+        position : sticky;
 
         .actions.creatable {
             margin-left : 10px;

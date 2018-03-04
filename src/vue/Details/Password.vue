@@ -342,15 +342,8 @@
             a {
                 text-decoration : underline;
             }
-            .CodeMirror {
-                border                     : none;
-                border-bottom-left-radius  : 0;
-                border-bottom-right-radius : 0;
-
-                .editor-preview {
-                    padding    : 0;
-                    background : #fff;
-                }
+            p {
+                margin-bottom: 1em;
             }
         }
 

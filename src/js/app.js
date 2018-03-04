@@ -24,7 +24,6 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
     }
 
     async function load() {
-        console.log(i++);
         if(isLoaded || !document.querySelector('meta[name=pwat]')) return;
         clearInterval(loadInterval);
         isLoaded = true;
