@@ -33,7 +33,9 @@ export default class ImportCsvConversionHelper {
             data[i][5] = line[5].substr(1, line[5].length - 2);
         }
 
-        return ImportCsvConversionHelper._processCsv(data, ImportCsvConversionHelper._getPassmanProfile());
+        let profile = ImportCsvConversionHelper._getPassmanProfile(),
+            entries = ImportCsvConversionHelper._processCsv(data, profile);
+        return await ImportCsvConversionHelper._convertCsv(entries, profile);
     }
 
     /**
