@@ -9,6 +9,8 @@ use OC\Authentication\Token\IToken;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -71,6 +73,15 @@ class PageController extends Controller {
     protected $config;
 
     /**
+     * @var SettingsService
+     */
+    protected $settingsService;
+    /**
+     * @var LoggingService
+     */
+    private $logger;
+
+    /**
      * PageController constructor.
      *
      * @param string               $appName
@@ -79,10 +90,12 @@ class PageController extends Controller {
      * @param ISession             $session
      * @param IL10N                $localisation
      * @param ISecureRandom        $random
+     * @param LoggingService       $logger
      * @param IProvider            $tokenProvider
      * @param IUserManager         $userManager
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
+     * @param SettingsService      $settingsService
      */
     public function __construct(
         string $appName,
@@ -91,32 +104,38 @@ class PageController extends Controller {
         ISession $session,
         IL10N $localisation,
         ISecureRandom $random,
+        LoggingService $logger,
         IProvider $tokenProvider,
         IUserManager $userManager,
         SimpleEncryption $encryption,
-        ConfigurationService $config
+        ConfigurationService $config,
+        SettingsService $settingsService
     ) {
         parent::__construct($appName, $request);
-        $this->random        = $random;
-        $this->userId        = $userId;
-        $this->config        = $config;
-        $this->session       = $session;
-        $this->encryption    = $encryption;
-        $this->userManager   = $userManager;
-        $this->localisation  = $localisation;
-        $this->tokenProvider = $tokenProvider;
+        $this->random          = $random;
+        $this->userId          = $userId;
+        $this->config          = $config;
+        $this->logger          = $logger;
+        $this->session         = $session;
+        $this->encryption      = $encryption;
+        $this->userManager     = $userManager;
+        $this->localisation    = $localisation;
+        $this->tokenProvider   = $tokenProvider;
+        $this->settingsService = $settingsService;
     }
 
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
+     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function index(): TemplateResponse {
-        $this->includeBrowserPolyfills();
 
         $isSecure = $this->checkIfHttpsUsed();
         if($isSecure) {
-            Util::addHeader('meta', ['pwui-token' => $this->generateToken()]);
+            $this->getUserSettings();
+            //$this->includeBrowserPolyfills();
+            Util::addHeader('meta', ['name' => 'pwat', 'content' => $this->generateToken()]);
         } else {
             $this->destroyToken();
         }
@@ -157,9 +176,12 @@ class PageController extends Controller {
                 try {
                     $iToken = $this->tokenProvider->getTokenById($tokenId);
 
-                    // @TODO generate new token if decryption fails
                     if($iToken->getId() == $tokenId) return $this->encryption->decrypt($token);
                 } catch(InvalidTokenException $e) {
+                } catch(\Throwable $e) {
+                    $this->logger
+                        ->logException($e)
+                        ->error('Failed to decrypt api token for '.$this->userId);
                 }
             }
 
@@ -173,7 +195,8 @@ class PageController extends Controller {
 
             return $token;
         } catch(\Throwable $e) {
-            // @TODO error logging maybe?
+            $this->logger->logException($e);
+
             return '';
         }
     }
@@ -215,12 +238,33 @@ class PageController extends Controller {
     }
 
     /**
+     * @throws \OCA\Passwords\Exception\ApiException
+     */
+    protected function getUserSettings() {
+        $keys = [
+            'user.password.generator.strength',
+            'user.password.generator.numbers',
+            'user.password.generator.special',
+            'client.ui.password.field.title',
+            'client.ui.password.field.sorting',
+            'client.ui.password.menu.copy'
+        ];
+
+        $settings = [];
+        foreach($keys as $key) {
+            $settings[ $key ] = $this->settingsService->get($key);
+        }
+
+        Util::addHeader('meta', ['name' => 'settings', 'content' => json_encode($settings)]);
+    }
+
+    /**
      *
      */
     protected function includeBrowserPolyfills(): void {
-/*        if($this->request->isUserAgent([Request::USER_AGENT_MS_EDGE])) {
+        if($this->request->isUserAgent([Request::USER_AGENT_MS_EDGE])) {
             Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding');
             Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding-indexes');
-        };*/
+        };
     }
 }

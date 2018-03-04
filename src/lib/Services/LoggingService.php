@@ -34,49 +34,61 @@ class LoggingService {
     /**
      * @param string|array $message
      * @param array        $context
+     *
+     * @return LoggingService
      */
-    public function fatal($message, array $context = []): void {
-        $this->log(Util::FATAL, $message, $context);
+    public function fatal($message, array $context = []): LoggingService {
+        return $this->log(Util::FATAL, $message, $context);
     }
 
     /**
      * @param string|array $message
      * @param array        $context
+     *
+     * @return LoggingService
      */
-    public function error($message, array $context = []): void {
-        $this->log(Util::ERROR, $message, $context);
+    public function error($message, array $context = []): LoggingService {
+        return $this->log(Util::ERROR, $message, $context);
     }
 
     /**
      * @param string|array $message
      * @param array        $context
+     *
+     * @return LoggingService
      */
-    public function warning($message, array $context = []): void {
-        $this->log(Util::WARN, $message, $context);
+    public function warning($message, array $context = []): LoggingService {
+        return $this->log(Util::WARN, $message, $context);
     }
 
     /**
      * @param string|array $message
      * @param array        $context
+     *
+     * @return LoggingService
      */
-    public function info($message, array $context = []): void {
-        $this->log(Util::INFO, $message, $context);
+    public function info($message, array $context = []): LoggingService {
+        return $this->log(Util::INFO, $message, $context);
     }
 
     /**
      * @param string|array $message
      * @param array        $context
+     *
+     * @return LoggingService
      */
-    public function debug($message, array $context = []): void {
-        $this->log(Util::DEBUG, $message, $context);
+    public function debug($message, array $context = []): LoggingService {
+        return $this->log(Util::DEBUG, $message, $context);
     }
 
     /**
      * @param int          $level
      * @param string|array $message
      * @param array        $context
+     *
+     * @return LoggingService
      */
-    public function log(int $level, $message, array $context = []): void {
+    public function log(int $level, $message, array $context = []): LoggingService {
         if(is_array($message)) {
             $string  = array_shift($message);
             $message = sprintf($string, ...$message);
@@ -84,14 +96,19 @@ class LoggingService {
         $context['app'] = Application::APP_NAME;
 
         $this->logger->log($level, $message, $context);
+        return $this;
     }
 
     /**
      * @param \Throwable $exception
      * @param array      $context
+     *
+     * @return LoggingService
      */
-    public function logException(\Throwable $exception, array $context = []): void {
+    public function logException(\Throwable $exception, array $context = []): LoggingService {
         $context['app'] = Application::APP_NAME;
         $this->logger->logException($exception, $context);
+
+        return $this;
     }
 }

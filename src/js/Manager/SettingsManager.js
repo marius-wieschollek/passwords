@@ -45,24 +45,14 @@ class SettingsManager {
         return Utility.cloneObject(this._settings);
     }
 
-    async init() {
-        this._addSettings(
-            await API.getSettings(
-                [
-                    'user.password.generator.strength',
-                    'user.password.generator.numbers',
-                    'user.password.generator.special',
-                    'client.ui.password.field.title',
-                    'client.ui.password.field.sorting',
-                    'client.ui.password.menu.copy'
-                ]
-            )
-        );
+    init() {
+        let settings = document.querySelector('meta[name=settings]');
+        if(settings) {
+            this._addSettings(JSON.parse(settings.getAttribute('content')));
+        }
 
         if(window.localStorage.hasOwnProperty('passwords.settings')) {
-            this._addSettings(
-                JSON.parse(window.localStorage.getItem('passwords.settings'))
-            );
+            this._addSettings(JSON.parse(window.localStorage.getItem('passwords.settings')));
         }
     }
 
