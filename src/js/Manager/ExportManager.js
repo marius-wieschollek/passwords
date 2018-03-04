@@ -80,19 +80,19 @@ export class ExportManager {
 
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager.getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'edited', 'favourite', 'tagLabels', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
             data = await ExportManager.createCustomCsvObject(data, header.clone());
             csv.passwords = ExportManager.convertObjectToCsv(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager.getFoldersForExport(),
-                header = ['label', 'parentLabel', 'edited', 'favourite', 'id', 'revision', 'parentId'];
+                header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
             data = await ExportManager.createCustomCsvObject(data, header.clone());
             csv.folders = ExportManager.convertObjectToCsv(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager.getTagsForExport(),
-                header = ['label', 'color', 'edited', 'favourite', 'id', 'revision'];
+                header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
             data = await ExportManager.createCustomCsvObject(data, header.clone());
             csv.tags = ExportManager.convertObjectToCsv(data, header);
         }

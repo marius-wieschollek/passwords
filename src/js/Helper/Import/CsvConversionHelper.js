@@ -273,19 +273,19 @@ export default class ImportCsvConversionHelper {
                 firstLine: 1,
                 db       : 'passwords',
                 delimiter: ',',
-                mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'edited', 'favourite', 'tagLabels', 'id', 'revision', 'folderId']
+                mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId']
             },
             folders  : {
                 firstLine: 1,
                 db       : 'folders',
                 delimiter: ',',
-                mapping  : ['label', 'parentLabel', 'edited', 'favourite', 'id', 'revision', 'parentId']
+                mapping  : ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId']
             },
             tags     : {
                 firstLine: 1,
                 delimiter: ',',
                 db       : 'tags',
-                mapping  : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
+                mapping  : ['label', 'color', 'favourite', 'edited', 'id', 'revision']
             },
             legacy   : {
                 firstLine: 1,
