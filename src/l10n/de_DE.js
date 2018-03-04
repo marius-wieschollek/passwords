@@ -128,6 +128,7 @@
         "Predefined CSV"                      : "Vordefiniertes CSV",
         "Backup password"                     : "Backup-Passwort",
         "(Optional) Encrypts the backup"      : "(Optional) Verschlüsselt das Backup mit einem mindestens 10 Zeichen langen Passwort",
+        "The import only supports CSV"        : "Der Import unterstützt nur CSV-Dateien",
         "Export Passwords"                    : "Passwörter exportieren",
         "Export Folders"                      : "Ordner exportieren",
         "Export Tags"                         : "Tags exportieren",

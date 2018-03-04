@@ -26,6 +26,12 @@ export class ExportManager {
             case 'customCsv':
                 data = await ExportManager.exportCustomCsv(options);
                 break;
+            case 'xlsx':
+                data = await ExportManager.exportOfficeDocument(model, options.includeShared, 'xlsx');
+                break;
+            case 'ods':
+                data = await ExportManager.exportOfficeDocument(model, options.includeShared, 'ods');
+                break;
             default:
                 throw "Invalid export format: " + format;
         }
@@ -43,13 +49,13 @@ export class ExportManager {
 
         let json = {version: 1, encrypted: false};
         if(model.indexOf('passwords') !== -1) {
-            json.passwords = await ExportManager.getPasswordsForExport(options.includeShared);
+            json.passwords = await ExportManager._getPasswordsForExport(options.includeShared);
         }
         if(model.indexOf('folders') !== -1) {
-            json.folders = await ExportManager.getFoldersForExport();
+            json.folders = await ExportManager._getFoldersForExport();
         }
         if(model.indexOf('tags') !== -1) {
-            json.tags = await ExportManager.getTagsForExport();
+            json.tags = await ExportManager._getTagsForExport();
         }
 
         if(options.password) {
@@ -79,22 +85,22 @@ export class ExportManager {
         let csv = {};
 
         if(model.indexOf('passwords') !== -1) {
-            let data   = await ExportManager.getPasswordsForExport(includeShared),
+            let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager.createCustomCsvObject(data, header.clone());
-            csv.passwords = ExportManager.convertObjectToCsv(data, header);
+            data = await ExportManager._createCustomDataObject(data, header.clone());
+            csv.passwords = ExportManager._convertObjectToCsv(data, header);
         }
         if(model.indexOf('folders') !== -1) {
-            let data   = await ExportManager.getFoldersForExport(),
+            let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager.createCustomCsvObject(data, header.clone());
-            csv.folders = ExportManager.convertObjectToCsv(data, header);
+            data = await ExportManager._createCustomDataObject(data, header.clone());
+            csv.folders = ExportManager._convertObjectToCsv(data, header);
         }
         if(model.indexOf('tags') !== -1) {
-            let data   = await ExportManager.getTagsForExport(),
+            let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager.createCustomCsvObject(data, header.clone());
-            csv.tags = ExportManager.convertObjectToCsv(data, header);
+            data = await ExportManager._createCustomDataObject(data, header.clone());
+            csv.tags = ExportManager._convertObjectToCsv(data, header);
         }
 
         if(model.length === 1) csv = csv[model[0]];
@@ -111,16 +117,62 @@ export class ExportManager {
         let header = [], data;
 
         if(options.db === 'passwords') {
-            data = await ExportManager.getPasswordsForExport(options.includeShared);
+            data = await ExportManager._getPasswordsForExport(options.includeShared);
         } else if(options.db === 'folders') {
-            data = await ExportManager.getFoldersForExport();
+            data = await ExportManager._getFoldersForExport();
         } else if(options.db === 'tags') {
-            data = await ExportManager.getTagsForExport();
+            data = await ExportManager._getTagsForExport();
         }
 
         if(options.header) header = Utility.cloneObject(options.mapping);
-        data = await ExportManager.createCustomCsvObject(data, options.mapping);
-        return ExportManager.convertObjectToCsv(data, header, options.delimiter);
+        data = await ExportManager._createCustomDataObject(data, options.mapping);
+        return ExportManager._convertObjectToCsv(data, header, options.delimiter);
+    }
+
+    /**
+     *
+     * @param model
+     * @param includeShared
+     * @param format
+     * @returns {Promise<void>}
+     */
+    static async exportOfficeDocument(model = [], includeShared = false, format) {
+        let sheets = {};
+        if(model.indexOf('passwords') !== -1) {
+            let data   = await ExportManager._getPasswordsForExport(includeShared),
+                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
+            data = await ExportManager._createCustomDataObject(data, header.clone());
+            sheets.passwords = ExportManager._convertObjectToOffice(data, header);
+        }
+        if(model.indexOf('folders') !== -1) {
+            let data   = await ExportManager._getFoldersForExport(),
+                header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
+            data = await ExportManager._createCustomDataObject(data, header.clone());
+            sheets.folders = ExportManager._convertObjectToOffice(data, header);
+        }
+        if(model.indexOf('tags') !== -1) {
+            let data   = await ExportManager._getTagsForExport(),
+                header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
+            data = await ExportManager._createCustomDataObject(data, header.clone());
+            sheets.tags = ExportManager._convertObjectToOffice(data, header);
+        }
+
+        try {
+            let XLSX     = await import(/* webpackChunkName: "xlsx" */ 'xlsx'),
+                workbook = {SheetNames: [], Sheets: {}};
+
+            for(let i in sheets) {
+                if(!sheets.hasOwnProperty(i)) continue;
+                let name = Utility.translate(i.capitalize());
+
+                workbook.SheetNames.push(name);
+                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i]);
+            }
+
+            return XLSX.write(workbook, {bookType: format, type: 'array'});
+        } catch(e) {
+            throw Utility.translate('Unable to load {module}', {module: 'xlsx'});
+        }
     }
 
     /**
@@ -128,8 +180,9 @@ export class ExportManager {
      * @param db
      * @param mapping
      * @returns {Promise<Array>}
+     * @private
      */
-    static async createCustomCsvObject(db, mapping) {
+    static async _createCustomDataObject(db, mapping) {
         let tagDb = {}, folderDb = {}, data = [];
 
         if(mapping.indexOf('folderLabel') !== -1 || mapping.indexOf('parentLabel') !== -1) {
@@ -191,15 +244,16 @@ export class ExportManager {
      * @param header
      * @param delimiter
      * @returns {string}
+     * @private
      */
-    static convertObjectToCsv(object, header = [], delimiter = ',') {
+    static _convertObjectToCsv(object, header = [], delimiter = ',') {
         let csv = [];
 
         if(header && header.length !== 0) {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {
-                line.push('"' + Utility.translate(header[i].capitalize()).replace('"', '\\"') + '"');
+                line.push('"' + Utility.translate(header[i].capitalize()).replace('"', '""') + '"');
             }
 
             csv.push(line.join(delimiter));
@@ -226,9 +280,52 @@ export class ExportManager {
 
     /**
      *
+     * @param object
+     * @param header
      * @returns {Promise<Array>}
+     * @private
      */
-    static async getPasswordsForExport(includeShared = false) {
+    static _convertObjectToOffice(object, header = []) {
+        let data = [];
+        if(header && header.length !== 0) {
+            let line = [];
+
+            for(let i = 0; i < header.length; i++) {
+                line.push(Utility.translate(header[i].capitalize()));
+            }
+
+            data.push(line);
+        }
+
+        for(let i = 0; i < object.length; i++) {
+            let element = object[i],
+                line    = [];
+
+            for(let j in element) {
+                if(!element.hasOwnProperty(j)) continue;
+                let value = element[j];
+
+                if(typeof value === 'boolean') {
+                    value = value ? 1:0;
+                } else {
+                    value = value.toString();
+                }
+
+                line.push(value);
+            }
+
+            data.push(line);
+        }
+
+        return data;
+    }
+
+    /**
+     *
+     * @returns {Promise<Array>}
+     * @private
+     */
+    static async _getPasswordsForExport(includeShared = false) {
         let data = await API.listPasswords('model+tags');
 
         let passwords = [];
@@ -264,8 +361,9 @@ export class ExportManager {
     /**
      *
      * @returns {Promise<Array>}
+     * @private
      */
-    static async getFoldersForExport() {
+    static async _getFoldersForExport() {
         let data = await API.listFolders();
 
         let folders = [];
@@ -290,8 +388,9 @@ export class ExportManager {
     /**
      *
      * @returns {Promise<Array>}
+     * @private
      */
-    static async getTagsForExport() {
+    static async _getTagsForExport() {
         let data = await API.listTags();
 
         let tags = [];

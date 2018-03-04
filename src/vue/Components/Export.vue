@@ -6,6 +6,8 @@
                 <select v-model="format" :disabled="exporting">
                     <translate tag="option" value="json" say="Database Backup"/>
                     <translate tag="option" value="csv" say="Predefined CSV"/>
+                    <translate tag="option" value="xlsx" say="Microsoft Excel"/>
+                    <translate tag="option" value="ods" say="Open Office Calc"/>
                     <translate tag="option" value="customCsv" say="Custom CSV"/>
                 </select>
             </div>
@@ -19,6 +21,7 @@
                 <br>
             </div>
             <div class="step-content" v-if="format !== 'customCsv'">
+                <translate tag="div" class="office warning" say="The import only supports CSV" v-if="format === 'xlsx' || format === 'ods'"/>
                 <input type="checkbox" id="passwords-export-passwords" value="passwords" @change="setExportModel($event)" :disabled="exporting" :checked="models.indexOf('passwords') !== -1"/>
                 <translate tag="label" for="passwords-export-passwords" say="Export Passwords"/>
                 <br>
@@ -142,6 +145,7 @@
                         .exportDatabase(this.format, this.models, this.options)
                         .catch((e) => {
                             this.exporting = false;
+                            console.log(e);
                             if(typeof e !== 'string') e = e.message;
                             Messages.alert(e, 'Export error');
                         })
@@ -149,7 +153,7 @@
                             if(d) {
                                 this.data = d;
                                 this.buttonText = 'Download {format}';
-                            } else {
+                            } else if(this.exporting) {
                                 Messages.alert('There is no data to export', 'Nothing to export');
                             }
                             this.exporting = false;
@@ -183,8 +187,9 @@
                 return exports.join('+') + '_' + date.toLocaleDateString() + '.' + fileExt;
             },
             downloadFile() {
+                //console.log(this.data);
                 let mime = this.format === 'json' ? 'application/json':'text/csv';
-                if(typeof this.data === 'string') {
+                if(typeof this.data === 'string' || this.data instanceof ArrayBuffer) {
                     let filename = this.generateFilename(this.models);
                     Utility.createDownload(this.data, filename, mime);
                 } else if(this.data !== null) {
@@ -265,6 +270,12 @@
     .export-container {
         .step-2 {
             .step-content {
+
+                .office {
+                    margin  : 5px !important;
+                    display : block;
+                }
+
                 label {
                     margin-right : 5px;
                 }
