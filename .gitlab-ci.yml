@@ -35,6 +35,9 @@ Pack:
     paths:
       - ./passwords.tar.gz
       - job.id
+  only:
+  - testing
+  - stable
 
 Publish Nightly:
   stage: publishing
