@@ -132,6 +132,7 @@
                 },
                 file       : null,
                 csvFile    : null,
+                csvEscapeChar    : '"',
                 options    : {mode: 0, skipShared: true},
                 step       : 2,
                 previewLine: 1,
@@ -222,6 +223,7 @@
                         delimiter = this.options.delimiter;
                     Papa.parse(file, {
                         delimiter     : delimiter === 'auto' ? '':delimiter,
+                        escapeChar: this.csvEscapeChar,
                         skipEmptyLines: true,
                         complete      : (result) => {
                             if(result.errors.length === 0) {
@@ -298,6 +300,7 @@
             source(value) {
                 let oldMime = this.mime;
                 this.progress.status = null;
+                this.csvEscapeChar = '"';
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
@@ -316,6 +319,7 @@
                         break;
                     case 'keepass':
                         this.options.profile = 'keepass';
+                        this.csvEscapeChar = '\\';
                         this.options.mode = 1;
                         break;
                     case 'lastpass':
