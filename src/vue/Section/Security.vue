@@ -64,9 +64,10 @@
 
                 if(this.$route.params.status !== undefined) {
                     let status = this.$route.params.status,
-                        label  = this.securityStatus[status];
+                        label  = this.securityStatus[status],
+                        model = this.ui.showTags ? 'model+tags':'model';
 
-                    API.findPasswords({status: status})
+                    API.findPasswords({status: status}, model)
                         .then((d) => {this.updatePasswordList(d, status);});
                     if(!this.passwords.length) this.loading = true;
 

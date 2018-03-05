@@ -39,7 +39,8 @@
 
         methods: {
             refreshView: function() {
-                API.listPasswords().then(this.updatePasswordList);
+                let model = this.ui.showTags ? 'model+tags':'model';
+                API.listPasswords(model).then(this.updatePasswordList);
             }
         }
     };

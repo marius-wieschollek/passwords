@@ -23,9 +23,11 @@ use OCP\AppFramework\IAppContainer;
  */
 class FolderObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_PARENT    = 'parent';
-    const LEVEL_FOLDERS   = 'folders';
-    const LEVEL_PASSWORDS = 'passwords';
+    const LEVEL_TAGS          = 'tags';
+    const LEVEL_PARENT        = 'parent';
+    const LEVEL_FOLDERS       = 'folders';
+    const LEVEL_PASSWORDS     = 'passwords';
+    const LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
      * @var FolderService
@@ -104,7 +106,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
             $object = $this->getFolders($revision, $object);
         }
         if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
-            $object = $this->getPasswords($revision, $object);
+            $object = $this->getPasswords($revision, $object, in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel));
         }
 
         return $object;
@@ -222,6 +224,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
     /**
      * @param FolderRevision $revision
      * @param array          $object
+     * @param bool           $includeTags
      *
      * @return array
      * @throws \Exception
@@ -229,7 +232,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \OCP\AppFramework\QueryException
      */
-    protected function getPasswords(FolderRevision $revision, array $object): array {
+    protected function getPasswords(FolderRevision $revision, array $object, bool $includeTags = false): array {
 
         $filters = [];
         if(!$revision->isHidden()) $filters['hidden'] = false;
@@ -239,8 +242,9 @@ class FolderObjectHelper extends AbstractObjectHelper {
         $objectHelper        = $this->getPasswordObjectHelper();
         $passwords           = $this->passwordService->findByFolder($revision->getModel());
 
+        $detailLevel = $includeTags ? self::LEVEL_MODEL.'+'.self::LEVEL_TAGS:self::LEVEL_MODEL;
         foreach($passwords as $password) {
-            $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);
+            $obj = $objectHelper->getApiObject($password, $detailLevel, $filters);
 
             if($obj !== null) $object['passwords'][] = $obj;
         }

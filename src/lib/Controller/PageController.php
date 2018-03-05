@@ -247,7 +247,8 @@ class PageController extends Controller {
             'user.password.generator.special',
             'client.ui.password.field.title',
             'client.ui.password.field.sorting',
-            'client.ui.password.menu.copy'
+            'client.ui.password.menu.copy',
+            'client.ui.list.tags.show'
         ];
 
         $settings = [];

@@ -46,6 +46,10 @@
                 <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                 <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
                 <settings-help text="Shows options to copy the password and user name in the menu"/>
+
+                <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
+                <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
+                <settings-help text="Shows the tags for a password in the main view. Can be slower."/>
             </section>
             <section class="tests" v-if="testsEnabled">
                 <translate tag="h1" say="Field tests"/>

@@ -18,6 +18,9 @@
                 sorting   : {
                     field   : SettingsManager.get('local.ui.sorting.field', 'label'),
                     ascending: SettingsManager.get('local.ui.sorting.ascending', true)
+                },
+                ui: {
+                    showTags: SettingsManager.get('client.ui.list.tags.show', false)
                 }
             }
         },

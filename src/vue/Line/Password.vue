@@ -3,6 +3,9 @@
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ getTitle }}</span>
+        <ul slot="middle" class="line-password-tags" v-if="password.tags">
+            <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
+        </ul>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
@@ -54,7 +57,7 @@
             return {
                 clickTimeout: null,
                 showMenu    : false
-            }
+            };
         },
 
         computed: {
@@ -75,6 +78,9 @@
                 let titleField = SettingsManager.get('client.ui.password.field.title');
 
                 return this.password[titleField];
+            },
+            getTags() {
+                return Utility.sortApiObjectArray(this.password.tags, 'label');
             }
         },
 
@@ -85,7 +91,7 @@
 
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
                 this.clickTimeout =
-                    setTimeout(function() { Messages.notification('Password was copied to clipboard') }, 300);
+                    setTimeout(function() { Messages.notification('Password was copied to clipboard'); }, 300);
             },
             copyUsernameAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
@@ -96,13 +102,13 @@
             },
             copyUrlAction() {
                 Utility.copyToClipboard(this.password.url);
-                Messages.notification('Url was copied to clipboard')
+                Messages.notification('Url was copied to clipboard');
             },
             favouriteAction($event) {
                 $event.stopPropagation();
                 this.password.favourite = !this.password.favourite;
                 PasswordManager.updatePassword(this.password)
-                    .catch(() => { this.password.favourite = !this.password.favourite; });
+                               .catch(() => { this.password.favourite = !this.password.favourite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;
@@ -117,9 +123,9 @@
                 this.$parent.detail = {type: 'password', element: this.password};
                 if(!this.password.hasOwnProperty('revisions')) {
                     API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {
-                            this.$parent.detail = {type: 'password', element: p};
-                        })
+                       .then((p) => {
+                           this.$parent.detail = {type: 'password', element: p};
+                       });
                 }
             },
             editAction() {
@@ -132,13 +138,17 @@
             },
             dragStartAction($e) {
                 DragManager.start($e, this.password.label, this.password.icon, ['folder'])
-                    .then((data) => {
-                        PasswordManager.movePassword(this.password, data.folderId)
-                            .then((p) => {this.password = p;});
-                    });
+                           .then((data) => {
+                               PasswordManager.movePassword(this.password, data.folderId)
+                                              .then((p) => {this.password = p;});
+                           });
+            },
+            openTagAction($event, tag) {
+                $event.stopPropagation();
+                this.$router.push({name: 'Tags', params: {tag: tag}});
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
@@ -197,6 +207,31 @@
                     flex-grow      : 1;
                     vertical-align : baseline;
                     display        : flex;
+                }
+
+                .line-password-tags {
+                    height      : 50px;
+                    flex-shrink : 0;
+                    line-height : 50px;
+                    font-size   : 24px;
+
+                    li {
+                        display     : inline-block;
+                        margin-left : -18px;
+                        transition  : margin-left 0.25s ease-in-out;
+
+                        &:before {
+                            content     : "\F02B";
+                            font-family : FontAwesome, sans-serif;
+                            cursor      : pointer;
+                        }
+                    }
+
+                    &:hover {
+                        li {
+                            margin-left : -6px;
+                        }
+                    }
                 }
 
                 .more,
