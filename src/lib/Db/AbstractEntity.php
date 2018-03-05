@@ -78,4 +78,13 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
     public function setProperty(string $property, $value): void {
         $this->setter($property, [$value]);
     }
+
+    /**
+     * @param string $property
+     *
+     * @return bool
+     */
+    public function hasProperty(string $property): bool {
+        return property_exists($this, $property);
+    }
 }

@@ -48,4 +48,11 @@ interface EntityInterface {
      */
     public function setProperty(string $property, $value): void;
 
+    /**
+     * @param string $property
+     *
+     * @return bool
+     */
+    public function hasProperty(string $property): bool;
+
 }
