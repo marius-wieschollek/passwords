@@ -1,7 +1,7 @@
 [data-server-version="12"] {
     #app-content {
-        .item-list {
-            padding-top : 44px;
+        #controls {
+            top: 0;
         }
     }
 
@@ -12,6 +12,12 @@
             &.open {
                 max-height : 270px;
             }
+        }
+    }
+
+    @media all and (max-width : 360px) {
+        #controls #app-navigation-toggle {
+            float: left;
         }
     }
 }
