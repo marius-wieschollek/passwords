@@ -14,7 +14,7 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
 
 (function() {
     let isLoaded = false,
-        loadInterval = null, i=0;
+        loadInterval = null;
 
     if(location.protocol !== 'https:') {
         location.href = location.origin + location.pathname + '?https=false';
@@ -31,7 +31,7 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
         await initApi();
         SettingsManager.init();
         initApp();
-        if(process.env.NODE_ENV !== 'production') EncryptionTestHelper.initTests();
+        if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
     }
 
     function initApp() {

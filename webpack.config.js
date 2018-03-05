@@ -6,14 +6,15 @@ let ProgressBarPlugin = require('progress-bar-webpack-plugin');
 let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = env => {
-    let production = env.production === true;
+    let production = !!(env && env.production);
     console.log('Production: ', production);
 
     let plugins = [
         new webpack.DefinePlugin(
             {
                 'process.env': {
-                    NODE_ENV: production ? '"production"':'"development"'
+                    NODE_ENV: production ? '"production"':'"development"',
+                    NIGHTLY_FEATURES: !production
                 }
             }
         ),
@@ -28,7 +29,7 @@ module.exports = env => {
         new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity})
     ];
 
-    if(env.production) {
+    if(production) {
         plugins.push(new OptimizeCSSPlugin({cssProcessorOptions: {safe: true}}));
         plugins.push(
             new UglifyJSPlugin(

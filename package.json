@@ -4,8 +4,9 @@
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
-        "watch": "webpack --env.production=0 --progress --colors --watch",
-        "build": "webpack --env.production"
+        "watch": "webpack --watch --progress",
+        "build": "webpack --env.production",
+        "build:nightly": "webpack"
     },
     "dependencies": {
         "xlsx": "^0.12.3"
