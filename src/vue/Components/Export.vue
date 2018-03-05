@@ -187,7 +187,6 @@
                 return exports.join('+') + '_' + date.toLocaleDateString() + '.' + fileExt;
             },
             downloadFile() {
-                //console.log(this.data);
                 let mime = this.format === 'json' ? 'application/json':'text/csv';
                 if(typeof this.data === 'string' || this.data instanceof ArrayBuffer) {
                     let filename = this.generateFilename(this.models);

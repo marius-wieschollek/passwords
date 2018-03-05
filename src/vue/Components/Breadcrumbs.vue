@@ -183,7 +183,7 @@
         }
 
         #app-navigation-toggle {
-            top : 0;
+            display : none !important;
         }
 
         @keyframes delay-overflow {
@@ -192,9 +192,22 @@
             100% { overflow : visible; }
         }
 
-        @media(min-width : $mobile-width) {
+        @media(max-width : $mobile-width) {
+            padding-left : 0 !important;
+            overflow-x   : auto;
+
             #app-navigation-toggle {
-                display : none;
+                display          : block !important;
+                position         : sticky;
+                min-width        : 44px;
+                top              : 0;
+                background-color : $color-white;
+                opacity          : 1;
+                color            : transparentize($color-black, 0.4);
+
+                &:hover {
+                    color : $color-black
+                }
             }
         }
     }
