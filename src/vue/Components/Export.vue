@@ -14,7 +14,7 @@
         </div>
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select Options"/>
-            <div class="step-content" v-if="format === 'json' && encryptionEnabled">
+            <div class="step-content" v-if="format === 'json' && process.env.NIGHTLY_FEATURES">
                 <translate tag="label" for="passwords-export-encrypt" say="Backup password" title="(Optional) Encrypts the backup"/>
                 <input type="password" id="passwords-export-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="exporting" readonly/>
                 <br>
@@ -116,9 +116,6 @@
             },
             csvMappingFields() {
                 return this.options.mapping.length + 1;
-            },
-            encryptionEnabled() {
-                return process.env.NODE_ENV !== 'production';
             }
         },
 

@@ -12,7 +12,7 @@
                     <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
-                    <translate tag="option" value="keepass" say="KeePass CSV"/>
+                    <translate tag="option" value="keepass" say="KeePass CSV" v-if="process.env.NIGHTLY_FEATURES"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
@@ -37,7 +37,7 @@
                         <translate tag="option" value="2" say="Overwrite if id exists"/>
                         <translate tag="option" value="3" say="Clone if id exists"/>
                     </select>
-                    <div v-if="source === 'json' && encryptionEnabled">
+                    <div v-if="source === 'json' && process.env.NIGHTLY_FEATURES">
                         <translate tag="label" for="passwords-import-encrypt" say="Backup password" title="For encrypted backups"/>
                         <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" readonly/>
                     </div>
@@ -155,15 +155,12 @@
             },
             backupPasswordTitle() {
                 return Utility.translate('For encrypted backups');
-            },
-            encryptionEnabled() {
-                return process.env.NODE_ENV !== 'production';
             }
         },
 
         methods: {
             preventPasswordFill(t = 300) {
-                if(process.env.NODE_ENV !== 'production') {
+                if(process.env.NIGHTLY_FEATURES) {
                     setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
                 }
             },
