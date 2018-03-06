@@ -47,7 +47,7 @@
                 <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
                 <settings-help text="Shows options to copy the password and user name in the menu"/>
             </section>
-            <section class="tests" v-if="process.env.NIGHTLY_FEATURES">
+            <section class="tests" v-if="nightly">
                 <translate tag="h1" say="Field tests"/>
 
                 <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
@@ -72,7 +72,8 @@
         },
         data() {
             return {
-                settings: SettingsManager.getAll()
+                settings: SettingsManager.getAll(),
+                nightly: process.env.NIGHTLY_FEATURES
             };
         },
         methods   : {

@@ -105,7 +105,7 @@
             closeWindow() {
                 this.$destroy();
                 let container = document.getElementById('app-popup'),
-                    div= document.createElement('div');
+                    div       = document.createElement('div');
                 container.replaceChild(div, container.childNodes[0]);
             },
             togglePasswordVisibility() {
@@ -126,7 +126,6 @@
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
-                password.notes = this.simplemde.value();
                 if(typeof password.folder === 'object') {
                     password.folder = password.folder.id;
                 }
@@ -153,9 +152,13 @@
                             spellChecker           : false,
                             placeholder            : Utility.translate('Take some notes'),
                             status                 : false,
+                            forceSync              : true,
                             initialValue           : this.password.notes
                         }
                     );
+                    this.simplemde.codemirror.on('change', () => {
+                        this.password.notes = this.simplemde.value()
+                    })
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'SimpleMde'}], 'Network error');
@@ -334,7 +337,7 @@
                             }
 
                             .editor-preview.editor-preview-active p {
-                                margin-bottom: 1em;
+                                margin-bottom : 1em;
                             }
                         }
 

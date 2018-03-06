@@ -73,6 +73,7 @@ class PasswordManager {
             DialogWindow.password = Utility.cloneObject(password);
             DialogWindow._success = (p) => {
                 p = Utility.mergeObject(password, p);
+                if(!p.label) EnhancedApi._generatePasswordTitle(p);
                 if(password.password !== p.password) {
                     p.edited = new Date();
                 } else {

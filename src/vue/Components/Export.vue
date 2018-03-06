@@ -14,7 +14,7 @@
         </div>
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select Options"/>
-            <div class="step-content" v-if="format === 'json' && process.env.NIGHTLY_FEATURES">
+            <div class="step-content" v-if="format === 'json' && nightly">
                 <translate tag="label" for="passwords-export-encrypt" say="Backup password" title="(Optional) Encrypts the backup"/>
                 <input type="password" id="passwords-export-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="exporting" readonly/>
                 <br>
@@ -103,7 +103,8 @@
                     passwords: ['password', 'username', 'label', 'notes', 'url', 'folderLabel', 'tagLabels', 'edited', 'created', 'favourite', 'id', 'revision', 'folderId', 'tagIds'],
                     folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId'],
                     tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision']
-                }
+                },
+                nightly: process.env.NIGHTLY_FEATURES
             };
         },
 
@@ -120,7 +121,7 @@
         },
 
         created() {
-            if(process.env.NODE_ENV !== 'production') this.preventPasswordFill(500);
+            if(process.env.NIGHTLY_FEATURES) this.preventPasswordFill(500);
         },
 
         methods: {

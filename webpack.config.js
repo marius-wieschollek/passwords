@@ -14,7 +14,7 @@ module.exports = env => {
             {
                 'process.env': {
                     NODE_ENV: production ? '"production"':'"development"',
-                    NIGHTLY_FEATURES: !production
+                    NIGHTLY_FEATURES: !!(env && env.features)
                 }
             }
         ),
