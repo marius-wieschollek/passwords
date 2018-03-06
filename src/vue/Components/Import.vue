@@ -11,7 +11,7 @@
                     <translate tag="option" value="tagCsv" say="Tags CSV"/>
                     <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
-                    <translate tag="option" value="pmanCsv" say="Passman CSV"/>
+                    <translate tag="option" value="pmanCsv" say="Passman CSV" v-if="nightly"/>
                     <translate tag="option" value="keepass" say="KeePass CSV" v-if="nightly"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>

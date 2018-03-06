@@ -13,7 +13,7 @@ export default class ImportCsvConversionHelper {
      * @returns {{}}
      */
     static async processGenericCsv(data, options) {
-        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getGenericProfiles(options.profile);
+        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getProfile(options.profile);
 
         let entries = ImportCsvConversionHelper._processCsv(data, profile);
         return await ImportCsvConversionHelper._convertCsv(entries, profile);
@@ -33,7 +33,7 @@ export default class ImportCsvConversionHelper {
             data[i][5] = line[5].substr(1, line[5].length - 2);
         }
 
-        let profile = ImportCsvConversionHelper._getPassmanProfile(),
+        let profile = ImportCsvConversionHelper._getProfile('passman'),
             entries = ImportCsvConversionHelper._processCsv(data, profile);
         return await ImportCsvConversionHelper._convertCsv(entries, profile);
     }
@@ -46,10 +46,10 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static _processCsv(data, options) {
-        let mapping  = options.mapping,
-            fieldMap = {tagIds: 'tags', folderId: 'folder', parentId: 'parent'},
-            db       = [],
-            firstLine = Number.parseInt(0+options.firstLine);
+        let mapping   = options.mapping,
+            fieldMap  = {tagIds: 'tags', folderId: 'folder', parentId: 'parent'},
+            db        = [],
+            firstLine = Number.parseInt(0 + options.firstLine);
 
         if(data[0].length < mapping.length) throw "CSV file can not be mapped";
         for(let i = firstLine; i < data.length; i++) {
@@ -151,7 +151,7 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static async _generateTags(db, options) {
-        if(options.mapping.indexOf('tagLabels') === -1) return [[],{},{}];
+        if(options.mapping.indexOf('tagLabels') === -1) return [[], {}, {}];
         let tags   = [],
             keyMap = {},
             idMap  = ImportCsvConversionHelper._createLabelMapping(await API.listTags());
@@ -187,7 +187,7 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static async _generateFolders(db, options) {
-        if(options.mapping.indexOf('folderLabel') === -1 && options.mapping.indexOf('parentLabel') === -1) return [[],{},{}];
+        if(options.mapping.indexOf('folderLabel') === -1 && options.mapping.indexOf('parentLabel') === -1) return [[], {}, {}];
         let folders    = [],
             keyMap     = {},
             properties = {folder: 'folderLabel', parent: 'parentLabel'},
@@ -250,26 +250,12 @@ export default class ImportCsvConversionHelper {
     }
 
     /**
-     * Get generic Passman Profile
-     *
-     * @returns {{firstLine: number, db: string, mapping: string[]}}
-     * @private
-     */
-    static _getPassmanProfile() {
-        return {
-            firstLine: 1,
-            db       : 'passwords',
-            mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url']
-        };
-    }
-
-    /**
      *
      * @param name
      * @returns {*}
      * @private
      */
-    static _getGenericProfiles(name) {
+    static _getProfile(name) {
         let profiles = {
             passwords: {
                 firstLine: 1,
@@ -296,17 +282,22 @@ export default class ImportCsvConversionHelper {
                 mapping  : ['label', 'username', 'password', 'url', 'notes'],
                 repair   : true
             },
-            keepass   : {
+            keepass  : {
                 firstLine: 1,
                 db       : 'passwords',
                 delimiter: ',',
                 mapping  : ['label', 'username', 'password', 'url', 'notes']
             },
-            lastpass   : {
+            lastpass : {
                 firstLine: 1,
                 db       : 'passwords',
                 delimiter: ',',
                 mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favourite']
+            },
+            passman  : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url']
             }
         };
 
