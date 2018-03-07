@@ -49,5 +49,9 @@
             text-align  : center;
             color       : $color-black-lighter;
         }
+
+        &.search-hidden {
+            display: none;
+        }
     }
 </style>

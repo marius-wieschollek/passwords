@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from '@vue/App';
 import API from '@js/Helper/api';
 import Messages from '@js/Classes/Messages';
+import SearchManager from "@/js/Manager/SearchManager";
 import SettingsManager from "@/js/Manager/SettingsManager";
 import EncryptionTestHelper from "@/js/Helper/EncryptionTestHelper";
 
@@ -31,6 +32,7 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
         await initApi();
         SettingsManager.init();
         initApp();
+        if(process.env.NIGHTLY_FEATURES) SearchManager.init();
         if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
     }
 
