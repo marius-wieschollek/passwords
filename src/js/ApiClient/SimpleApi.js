@@ -474,19 +474,17 @@ export default class SimpleApi {
      * @param strength
      * @param useNumbers
      * @param useSpecialCharacters
-     * @param useSmileys
      * @returns {Promise}
      */
-    generatePassword(strength = 1, useNumbers = false, useSpecialCharacters = false, useSmileys = false) {
-        if(strength === 1 && useNumbers === false && useSpecialCharacters === false && useSmileys === false) {
+    generatePassword(strength, useNumbers, useSpecialCharacters) {
+        if(strength === undefined && useNumbers === undefined && useSpecialCharacters === undefined) {
             return this._createRequest('password.generate');
         }
 
         return this._createRequest('password.generate', {
             'strength': strength,
             'numbers' : useNumbers,
-            'special' : useSpecialCharacters,
-            'smileys' : useSmileys
+            'special' : useSpecialCharacters
         });
     }
 

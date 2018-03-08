@@ -32,6 +32,8 @@
         "Name"                                : "Name",
         "Label"                               : "Name",
         "General"                             : "Eigenschaften",
+        "Numbers"                             : "Zahlen",
+        "Special Characters"                  : "Sonderzeichen",
         "More Options"                        : "Erweiterte Optionen",
         "Favourite"                           : "Favorit",
         "Encryption"                          : "Verschlüsselung",
