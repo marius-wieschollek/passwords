@@ -1,17 +1,19 @@
 #### 2018.3.0 - Feature Release
 * Added user settings
-* Added encrypted backups
 * Added delete all option in trash
 * Added custom besticon api url
 * Added sorting support
+* Added docx and ods export
 * Improved password import
-* Improved https detection
 * Improved admin settings
 * Improved sharing ui
 * Improved loading times and data usage
 * Improved password notification
 * Improved image rendering
+* Fixed https detection issues
 * Fixed baseUrl issues
+* Fixed custom csv import issues
+* Fixed several ui glitches
 
 #### 2018.2.1 - Bugfix Release
 * Fixed share deletion error
