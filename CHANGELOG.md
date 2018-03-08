@@ -1,3 +1,9 @@
+#### 2018.4.0 - Feature Release
+- Added in page search
+- Added email alerts for bad passwords
+- Added tags in the main view
+- Improved password generator
+
 #### 2018.3.0 - Feature Release
 * Added user settings
 * Added encrypted backups

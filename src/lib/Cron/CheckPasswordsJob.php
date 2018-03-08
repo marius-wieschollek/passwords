@@ -15,6 +15,7 @@ use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Notification\Notifier;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\MailService;
 use OCP\Notification\IManager;
 
 /**
@@ -28,6 +29,11 @@ class CheckPasswordsJob extends TimedJob {
      * @var LoggingService
      */
     protected $logger;
+
+    /**
+     * @var MailService
+     */
+    protected $mailService;
 
     /**
      * @var HelperService
@@ -47,28 +53,32 @@ class CheckPasswordsJob extends TimedJob {
     /**
      * @var array
      */
-    protected $notifiedUsers = [];
+    protected $badPasswords = [];
 
     /**
      * CheckPasswordsJob constructor.
      *
      * @param LoggingService         $logger
+     * @param MailService            $mailService
      * @param HelperService          $helperService
      * @param IManager               $notificationManager
      * @param PasswordRevisionMapper $revisionMapper
      */
     public function __construct(
         LoggingService $logger,
+        MailService $mailService,
         HelperService $helperService,
         IManager $notificationManager,
         PasswordRevisionMapper $revisionMapper
     ) {
         // Run once per day
-        $this->setInterval(24 * 60 * 60);
+        //$this->setInterval(24 * 60 * 60);
+        $this->setInterval(1);
         $this->logger              = $logger;
         $this->helperService       = $helperService;
         $this->revisionMapper      = $revisionMapper;
         $this->notificationManager = $notificationManager;
+        $this->mailService         = $mailService;
     }
 
     /**
@@ -107,6 +117,8 @@ class CheckPasswordsJob extends TimedJob {
             }
         }
 
+        $this->sendNotifications();
+        $this->sendEmails();
         $this->logger->info(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter]);
     }
 
@@ -114,24 +126,43 @@ class CheckPasswordsJob extends TimedJob {
      * @param PasswordRevision $revision
      */
     protected function sendBadPasswordNotification(PasswordRevision $revision): void {
-        $user = $revision->getUserId();
-        if(in_array($user, $this->notifiedUsers)) return;
-
         try {
             $current = $this->revisionMapper->findCurrentRevisionByModel($revision->getModel());
-            if($current->getUuid() !== $revision->getUuid()) return;
+            if($current->getUuid() === $revision->getUuid()) {
+                $user = $revision->getUserId();
+                if(!isset($this->badPasswords[ $user ])) {
+                    $this->badPasswords[ $user ] = 1;
+                } else {
+                    $this->badPasswords[ $user ]++;
+                }
+            }
         } catch(\Throwable $e) {
-            return;
+            $this->logger->logException($e);
         }
+    }
 
-        $notification = $this->notificationManager->createNotification();
-        $notification->setApp(Application::APP_NAME)
-                     ->setUser($user)
-                     ->setObject('object', 'password')
-                     ->setSubject(Notifier::NOTIFICATION_PASSWORD_BAD)
-                     ->setDateTime(new \DateTime());
-        $this->notificationManager->notify($notification);
+    /**
+     *
+     */
+    protected function sendNotifications(): void {
+        foreach($this->badPasswords as $user => $count) {
+            $notification = $this->notificationManager->createNotification();
 
-        $this->notifiedUsers[] = $user;
+            $notification->setApp(Application::APP_NAME)
+                         ->setUser($user)
+                         ->setObject('object', 'password')
+                         ->setSubject(Notifier::NOTIFICATION_PASSWORD_BAD, ['count' => $count])
+                         ->setDateTime(new \DateTime());
+            $this->notificationManager->notify($notification);
+        }
+    }
+
+    /**
+     *
+     */
+    protected function sendEmails(): void {
+        foreach($this->badPasswords as $user => $count) {
+            $this->mailService->sendBadPasswordMail($user, $count);
+        }
     }
 }
