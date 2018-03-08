@@ -65,7 +65,6 @@
         },
 
         created() {
-            this.refreshView();
             Events.on('data.changed', this.refreshViewIfRequired);
         },
 
