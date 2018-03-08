@@ -52,7 +52,8 @@
 
         methods: {
             refreshView: function() {
-                API.findPasswords({favourite: true}).then(this.updatePasswordList);
+                let model = this.ui.showTags ? 'model+tags':'model';
+                API.findPasswords({favourite: true}, model).then(this.updatePasswordList);
                 API.findFolders({favourite: true}).then(this.updateFolderList);
                 API.findTags({favourite: true}).then(this.updateTagList);
             }

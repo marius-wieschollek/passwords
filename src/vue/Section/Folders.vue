@@ -28,6 +28,7 @@
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
+    import SettingsManager from "@js/Manager/SettingsManager";
 
     export default {
         extends: BaseSection,
@@ -43,6 +44,10 @@
         },
 
         data() {
+            let showTags    = SettingsManager.get('client.ui.list.tags.show', false),
+                baseModel   = showTags ? 'model+folders+passwords+password-tags':'model+folders+passwords',
+                folderModel = showTags ? 'model+folders+passwords+password-tags+parent':'model+folders+passwords+parent';
+
             return {
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
                 defaultTitle : Utility.translate('Folders'),
@@ -51,7 +56,11 @@
                 draggable    : 'true',
                 folders      : [],
                 showAddNew   : true,
-                breadcrumb   : []
+                breadcrumb   : [],
+                model        : {
+                    base  : baseModel,
+                    folder: folderModel
+                }
             };
         },
 
@@ -71,13 +80,13 @@
                     this.folders = [];
                     this.passwords = [];
                     this.detail.type = 'none';
-                    API.showFolder(this.$route.params.folder, 'model+folders+passwords+parent').then(this.updateContentList);
+                    API.showFolder(this.$route.params.folder, this.model.folder).then(this.updateContentList);
                 } else if(this.$route.params.folder === undefined && this.defaultFolder !== this.currentFolder) {
                     this.loading = true;
                     this.folders = [];
                     this.passwords = [];
                     this.detail.type = 'none';
-                    API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
+                    API.showFolder(this.defaultFolder, this.model.base).then(this.updateContentList);
                 }
             },
             refreshViewIfRequired: function(data) {
@@ -93,12 +102,12 @@
                 } else if(object.type === 'folder' && object.id === this.currentFolder) {
                     if(object.trashed) {
                         this.loading = true;
-                        API.showFolder(this.defaultFolder, 'model+folders+passwords').then(this.updateContentList);
+                        API.showFolder(this.defaultFolder, this.model.base).then(this.updateContentList);
                     } else if(object.passwords && object.folders && typeof object.parent !== 'string') {
                         this.updateContentList(object);
                     } else {
                         this.loading = true;
-                        API.showFolder(this.currentFolder, 'model+folders+passwords+parent').then(this.updateContentList);
+                        API.showFolder(this.currentFolder, this.model.folder).then(this.updateContentList);
                     }
                 } else if(object.type === 'folder' && object.parent === this.currentFolder) {
                     if(object.trashed) {
