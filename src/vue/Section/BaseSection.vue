@@ -4,20 +4,24 @@
 <script>
     import Events from "@js/Classes/Events";
     import Utility from "@js/Classes/Utility";
+    import SearchManager from "@/js/Manager/SearchManager";
     import SettingsManager from "@js/Manager/SettingsManager";
 
     export default {
         data() {
             return {
                 passwords: [],
-                loading: true,
-                detail : {
+                loading  : true,
+                detail   : {
                     type   : 'none',
                     element: null
                 },
-                sorting   : {
-                    field   : SettingsManager.get('local.ui.sorting.field', 'label'),
+                sorting  : {
+                    field    : SettingsManager.get('local.ui.sorting.field', 'label'),
                     ascending: SettingsManager.get('local.ui.sorting.ascending', true)
+                },
+                ui: {
+                    showTags: SettingsManager.get('client.ui.list.tags.show', false)
                 }
             }
         },
@@ -27,26 +31,28 @@
             Events.on('password.changed', this.refreshView);
             if(this.folders) Events.on('folder.changed', this.refreshView);
             if(this.tags) Events.on('tag.changed', this.refreshView);
+            SearchManager.clearDatabase();
         },
 
         beforeDestroy() {
             Events.off('password.changed', this.refreshView);
             Events.off('folder.changed', this.refreshView);
             Events.off('tag.changed', this.refreshView);
+            SearchManager.clearDatabase();
         },
 
         computed: {
             getContentClass() {
                 return {
                     'show-details': this.detail.type !== 'none',
-                    'loading': this.loading
+                    'loading'     : this.loading
                 }
             },
             showHeaderAndFooter() {
                 return !this.loading &&
                        ((this.passwords && this.passwords.length) ||
-                       (this.folders && this.folders.length) ||
-                       (this.tags && this.tags.length));
+                        (this.folders && this.folders.length) ||
+                        (this.tags && this.tags.length));
             },
             isEmpty() {
                 return !this.loading &&
@@ -73,11 +79,11 @@
                 this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
-            updateFolderList: function(folders) {
+            updateFolderList  : function(folders) {
                 this.loading = false;
                 this.folders = Utility.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
             },
-            updateTagList: function(tags) {
+            updateTagList     : function(tags) {
                 this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },
@@ -86,6 +92,24 @@
                 if(sortingField === 'byTitle') sortingField = SettingsManager.get('client.ui.password.field.title');
                 return sortingField;
             }
+        },
+        watch  : {
+            passwords(passwords) {
+                let db = {passwords: passwords};
+                if(this.tags) db.tags = this.tags;
+                if(this.folders) db.folders = this.folders;
+                SearchManager.setDatabase(db);
+            },
+            tags(tags) {
+                let db = {passwords: this.passwords, tags: tags};
+                if(this.folders) db.folders = this.folders;
+                SearchManager.setDatabase(db);
+            },
+            folders(folders) {
+                let db = {passwords: this.passwords, folders: folders};
+                if(this.tags) db.tags = this.tags;
+                SearchManager.setDatabase(db);
+            },
         }
     }
 </script>

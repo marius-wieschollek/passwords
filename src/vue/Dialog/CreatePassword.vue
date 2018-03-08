@@ -19,6 +19,12 @@
                             </div>
                             <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" v-model="password.password" required readonly>
                         </div>
+                        <div class="settings" :class="{active: generator.active}">
+                            <input id="password-password-numbers" type="checkbox" v-model="generator.numbers"/>
+                            <translate tag="label" for="password-password-numbers" say="Numbers"/>
+                            <input id="password-password-special" type="checkbox" v-model="generator.special"/>
+                            <translate tag="label" for="password-password-special" say="Special Characters"/>
+                        </div>
                         <translate tag="label" for="password-label" say="Name"/>
                         <input id="password-label" type="text" name="label" maxlength="64" v-model="password.label">
                         <translate tag="label" for="password-url" say="Website"/>
@@ -68,6 +74,7 @@
                 showPassword: false,
                 showLoader  : false,
                 simplemde   : null,
+                generator   : {numbers: undefined, special: undefined, active: false},
                 password    : {cseType: 'none', notes: ''},
                 _success    : null
             };
@@ -112,17 +119,27 @@
                 this.showPassword = !this.showPassword;
             },
             generateRandomPassword() {
+                if(this.showLoader) return;
                 this.showLoader = true;
+                let numbers = undefined, special = undefined;
 
-                API.generatePassword()
-                    .then((d) => {
-                        this.password.password = d.password;
-                        this.showLoader = false;
-                        this.showPassword = true;
-                    })
-                    .catch(() => {
-                        this.showLoader = false;
-                    });
+                if(this.generator.active) {
+                    numbers = this.generator.numbers;
+                    special = this.generator.special;
+                }
+
+                API.generatePassword(undefined, numbers, special)
+                   .then((d) => {
+                       this.password.password = d.password;
+                       if(this.generator.active === false) {
+                           this.generator = {numbers: d.numbers, special: d.special, active: true};
+                       }
+                       this.showPassword = true;
+                       this.showLoader = false;
+                   })
+                   .catch(() => {
+                       this.showLoader = false;
+                   });
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
@@ -157,8 +174,8 @@
                         }
                     );
                     this.simplemde.codemirror.on('change', () => {
-                        this.password.notes = this.simplemde.value()
-                    })
+                        this.password.notes = this.simplemde.value();
+                    });
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'SimpleMde'}], 'Network error');
@@ -169,6 +186,12 @@
         watch: {
             password(password) {
                 if(this.simplemde) this.simplemde.value(password.notes);
+            },
+            'generator.numbers'(value, oldValue) {
+                if(oldValue !== undefined) this.generateRandomPassword();
+            },
+            'generator.special'(value, oldValue) {
+                if(oldValue !== undefined) this.generateRandomPassword();
             }
         }
     };
@@ -321,6 +344,28 @@
 
                     textarea {
                         opacity : 0;
+                    }
+
+                    .settings {
+                        grid-column-start : 2;
+                        grid-column-end   : 3;
+                        line-height       : 30px;
+                        display           : flex;
+                        overflow          : hidden;
+                        max-height        : 0;
+                        transition        : max-height 0.25s ease-in-out;
+
+                        &.active {
+                            max-height : 60px;
+                        }
+
+                        input {
+                            margin : 0;
+                        }
+
+                        label {
+                            padding : 0 10px 0 5px;
+                        }
                     }
 
                     &.right {

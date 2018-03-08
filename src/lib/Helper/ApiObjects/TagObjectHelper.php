@@ -25,6 +25,7 @@ use OCP\AppFramework\IAppContainer;
 class TagObjectHelper extends AbstractObjectHelper {
 
     const LEVEL_PASSWORDS = 'passwords';
+    const LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
      * @var TagService
@@ -88,11 +89,11 @@ class TagObjectHelper extends AbstractObjectHelper {
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($tag, $revision);
         }
-        if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
-            $object = $this->getPasswords($revision, $object);
-        }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($tag, $object);
+        }
+        if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
+            $object = $this->getPasswords($revision, $object, in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel));
         }
 
         return $object;
@@ -154,6 +155,7 @@ class TagObjectHelper extends AbstractObjectHelper {
     /**
      * @param TagRevision $revision
      * @param array       $object
+     * @param bool        $includeTags
      *
      * @return array
      * @throws Exception
@@ -161,7 +163,7 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \OCP\AppFramework\QueryException
      */
-    protected function getPasswords(TagRevision $revision, array $object): array {
+    protected function getPasswords(TagRevision $revision, array $object, bool $includeTags = false): array {
 
         $filters = [];
         if(!$revision->isHidden()) $filters['hidden'] = false;
@@ -171,9 +173,10 @@ class TagObjectHelper extends AbstractObjectHelper {
         $objectHelper        = $this->getPasswordObjectHelper();
         $passwords           = $this->passwordService->findByTag($revision->getModel());
 
+        $detailLevel = $includeTags ? self::LEVEL_MODEL.'+'.PasswordObjectHelper::LEVEL_TAGS:self::LEVEL_MODEL;
         foreach($passwords as $password) {
             if(!$revision->isTrashed() && $password->isSuspended()) continue;
-            $obj = $objectHelper->getApiObject($password, self::LEVEL_MODEL, $filters);
+            $obj = $objectHelper->getApiObject($password, $detailLevel, $filters);
 
             if($obj !== null) $object['passwords'][] = $obj;
         }

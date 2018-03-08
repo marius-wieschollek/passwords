@@ -64,7 +64,8 @@
 
         methods: {
             refreshView       : function() {
-                API.findPasswords({trashed: true}).then(this.updatePasswordList);
+                let model = this.ui.showTags ? 'model+tags':'model';
+                API.findPasswords({trashed: true}, model).then(this.updatePasswordList);
                 API.findFolders({trashed: true}).then(this.updateFolderList);
                 API.findTags({trashed: true}).then(this.updateTagList);
             },

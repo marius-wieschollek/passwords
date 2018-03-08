@@ -95,6 +95,10 @@
         z-index: 1000;
     }
 
+    form.searchbox {
+        transition: opacity .25s ease-in-out;
+    }
+
     #app-navigation {
         li {
             line-height   : 44px;

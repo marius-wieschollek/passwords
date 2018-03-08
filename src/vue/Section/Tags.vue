@@ -27,6 +27,7 @@
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
+    import SettingsManager from "@js/Manager/SettingsManager";
 
     export default {
         extends: BaseSection,
@@ -42,11 +43,14 @@
         },
 
         data() {
+            let showTags = SettingsManager.get('client.ui.list.tags.show', false),
+                model    = showTags ? 'model+passwords+password-tags':'model+passwords';
             return {
                 currentTag  : null,
                 defaultTitle: Utility.translate('Tags'),
                 defaultPath : '/tags/',
-                tags        : []
+                tags        : [],
+                model       : model
             };
         },
 
@@ -60,7 +64,7 @@
                     this.currentTag = tag;
                     this.tags = [];
                     if(!this.passwords.length) this.loading = true;
-                    API.showTag(tag, 'model+passwords').then(this.updatePasswordList);
+                    API.showTag(tag, this.model).then(this.updatePasswordList);
                 } else {
                     this.passwords = [];
                     this.currentTag = null;
