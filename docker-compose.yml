@@ -56,5 +56,15 @@ services:
       PMA_USER: root
       PMA_PASSWORD: nextcloud
 
+  mail:
+    image: mailhog/mailhog
+    container_name: "passwords-mail"
+    user: root
+    ports:
+      - 1080:1080
+    environment:
+      MH_API_BIND_ADDR: 0.0.0.0:1080
+      MH_UI_BIND_ADDR: 0.0.0.0:1080
+
 volumes:
   mysql:
