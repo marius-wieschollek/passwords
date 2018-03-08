@@ -5,8 +5,8 @@ class SearchManager {
         this.index = null;
         this.indexFields = {
             passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id'],
-            folders  : [],
-            tags     : []
+            folders  : ['label', 'id'],
+            tags     : ['label', 'id']
         };
         this.domIdentifiers = {
             passwords: 'data-password-id',
@@ -33,7 +33,7 @@ class SearchManager {
             return;
         }
 
-        let stats = {results: 0, start: new Date().getTime()};
+        let stats = {query: query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()};
         query = SearchManager._processQuery(query);
         let index = this._getSearchIndex();
         for(let key in index) {
@@ -44,13 +44,15 @@ class SearchManager {
             objs: for(let i = 0; i < section.length; i++) {
                 let object = section[i],
                     el     = document.querySelector('[' + identifier + '="' + object.id + '"]');
+                if(!el) continue;
 
                 for(let field in object) {
                     if(!object.hasOwnProperty(field)) continue;
 
                     if(object[field].indexOf(query) !== -1) {
                         if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
-                        stats.results ++;
+                        stats.results++;
+                        stats[key]++;
                         continue objs;
                     }
                 }
@@ -80,6 +82,7 @@ class SearchManager {
         this.db = database;
         this.index = null;
         document.querySelector('form.searchbox').style.opacity = '1';
+        document.getElementById('searchbox').value = '';
     }
 
     /**
@@ -125,11 +128,8 @@ class SearchManager {
 
                 for(let j = 0; j < fields.length; j++) {
                     let field = fields[j];
-                    if(object.hasOwnProperty(field)) {
-                        indexedObject[field] = object[field].toLowerCase();
-                    } else {
-                        indexedObject[field] = '';
-                    }
+
+                    indexedObject[field] = object.hasOwnProperty(field) ? object[field].toLowerCase():'';
                 }
                 this.index[key].push(indexedObject)
             }

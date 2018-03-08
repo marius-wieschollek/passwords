@@ -25,6 +25,13 @@
 * `docker exec -itu www-data passwords-php bash` - Open shell in container as www-data
 * `docker exec -it passwords-php bash` - Open shell in container as root
 
+#### Services
+ - [https://localhost](https://localhost) is Nextcloud
+ - [http://localhost:8080](http://localhost:8080) is PhpMyAdmin
+ - [http://localhost:1080](http://localhost:1080) is MailHog
+ - [http://localhost:7070](http://localhost:7070) is Besticon Iconserver (optional)
+ - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional)
+
 #### First steps
 * [Issues for beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)
 * [Wiki](https://github.com/marius-wieschollek/passwords/wiki)

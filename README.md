@@ -25,7 +25,7 @@ Of course we know that most websites still require numbers and special character
 #### Integrated security check
 Passwords like "P@55w0rd" may fool most generic security checks, but they are so common that most hackers have them in their lists.
 This is why passwords checks automatically if your passwords have been compromised by integrating the [Have I been pwned](https://haveibeenpwned.com/) service.
-**Soon to come:** You can get convenient e-mail updates when the security status of a password has changed.
+You can get convenient e-mail alerts when one of your passwords has been compromised.
 **Soon to come:** You can also define custom password rules to make sure all your passwords live up to your expectations.
 
 #### Legacy API and APP Migration support
