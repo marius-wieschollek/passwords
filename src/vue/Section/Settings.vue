@@ -51,6 +51,31 @@
                 <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                 <settings-help text="Shows the tags for a password in the main view. Can be slower."/>
             </section>
+            <section class="ui">
+                <translate tag="h1" say="Notifications"/>
+
+                <translate tag="h3" say="Send Emails for"/>
+                <translate tag="label" for="setting-mail-passwords" say="Compromised Passwords"/>
+                <input type="checkbox" id="setting-mail-passwords" v-model="settings['user.mail.password.security']">
+                <settings-help text="Sends you e-mail alerts"/>
+
+                <translate tag="label" for="setting-mail-sharing" say="Passwords Shared with me"/>
+                <input type="checkbox" id="setting-mail-sharing" v-model="settings['user.mail.share.new']">
+                <span></span>
+
+                <translate tag="h3" say="Show Notifications for"/>
+                <translate tag="label" for="setting-notification-passwords" say="Compromised Passwords"/>
+                <input type="checkbox" id="setting-notification-passwords" v-model="settings['user.notification.password.security']">
+                <span></span>
+
+                <translate tag="label" for="setting-notification-sharing" say="Passwords Shared with me"/>
+                <input type="checkbox" id="setting-notification-sharing" v-model="settings['user.notification.share.new']">
+                <span></span>
+
+                <translate tag="label" for="setting-notification-errors" say="Sharing errors"/>
+                <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.share.error']">
+                <span></span>
+            </section>
             <section class="tests" v-if="nightly">
                 <translate tag="h1" say="Field tests"/>
 
@@ -77,7 +102,7 @@
         data() {
             return {
                 settings: SettingsManager.getAll(),
-                nightly: process.env.NIGHTLY_FEATURES
+                nightly : process.env.NIGHTLY_FEATURES
             };
         },
         methods   : {
@@ -127,7 +152,7 @@
             grid-template-columns : 3fr 2fr 30px;
             max-width             : 400px;
             float                 : left;
-            margin-bottom         : 2em;
+            margin                : 0 2em 2em 0;
 
             h1,
             h3 {
@@ -151,6 +176,10 @@
                 &[type=checkbox] {
                     cursor : pointer;
                 }
+            }
+
+            @media all and (max-width : $mobile-width) {
+                margin : 0 0 2em 0;
             }
         }
     }
