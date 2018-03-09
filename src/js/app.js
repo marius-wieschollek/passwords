@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import App from '@vue/App';
 import API from '@js/Helper/api';
+import router from '@js/Helper/router';
+import SectionAll from '@vue/Section/All';
 import Messages from '@js/Classes/Messages';
 import SearchManager from "@/js/Manager/SearchManager";
 import SettingsManager from "@/js/Manager/SettingsManager";
@@ -14,14 +16,14 @@ import EncryptionTestHelper from "@/js/Helper/EncryptionTestHelper";
 __webpack_public_path__ = oc_appswebroots.passwords + '/';
 
 (function() {
-    let isLoaded = false,
+    let isLoaded     = false,
         loadInterval = null;
 
     if(location.protocol !== 'https:') {
         location.href = location.origin + location.pathname + '?https=false';
     } else {
-        window.addEventListener ('load', () => { load() }, false);
-        loadInterval = setInterval(() => { load() }, 10);
+        window.addEventListener('load', () => { load(); }, false);
+        loadInterval = setInterval(() => { load(); }, 10);
     }
 
     async function load() {
@@ -37,11 +39,24 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
     }
 
     function initApp() {
+        let section = SettingsManager.get('client.ui.section.default');
+
+        if(section === 'all') {
+            router.addRoutes([{name: "All", path: '*', components: {main: SectionAll}}]);
+        } else {
+            router.addRoutes(
+                [
+                    { name: "All", path: '/all', components: {main: SectionAll} },
+                    { path: '*', redirect: { name: section.capitalize()}}
+                ]
+            );
+        }
+
         new Vue(App);
     }
 
     async function initApi() {
-        let user = document.querySelector('head[data-user]').getAttribute('data-user'),
+        let user     = document.querySelector('head[data-user]').getAttribute('data-user'),
             password = document.querySelector('meta[name=pwat]').getAttribute('content');
         if(!password) password = await Messages.prompt('Password', 'Login', '', true);
 

@@ -1,22 +1,20 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import SectionAll from '@vue/Section/All.vue';
-import SectionFolders from '@vue/Section/Folders.vue';
-import SectionTags from '@vue/Section/Tags.vue';
-import SectionRecent from '@vue/Section/Recent.vue';
-import SectionFavourites from '@vue/Section/Favourites.vue';
-import SectionShared from '@vue/Section/Shared.vue';
-import SectionSecurity from '@vue/Section/Security.vue';
-import SectionTrash from '@vue/Section/Trash.vue';
-import SectionBackup from '@vue/Section/Backup.vue';
-import SectionSettings from '@vue/Section/Settings.vue';
+import SectionTags from '@vue/Section/Tags';
+import SectionTrash from '@vue/Section/Trash';
+import SectionBackup from '@vue/Section/Backup';
+import SectionRecent from '@vue/Section/Recent';
+import SectionShared from '@vue/Section/Shared';
+import SectionFolders from '@vue/Section/Folders';
+import SectionSecurity from '@vue/Section/Security';
+import SectionSettings from '@vue/Section/Settings';
+import SectionFavourites from '@vue/Section/Favourites';
 
 Vue.use(Router);
 
-export default new Router(
+let router = new Router(
     {
         routes: [
-            {name: "All", path: '*', components: {main: SectionAll}},
             {name: "Folders", path: '/folders/:folder?', components: {main: SectionFolders}},
             {name: "Tags", path: '/tags/:tag?', components: {main: SectionTags}},
             {name: "Recent", path: '/recent', components: {main: SectionRecent}},
@@ -29,3 +27,5 @@ export default new Router(
         ]
     }
 );
+
+export default router;

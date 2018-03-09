@@ -80,15 +80,15 @@
 
                     if(status === 0) {
                         API.findShares({receiver: '_self'}, 'model+password')
-                            .then((d) => {this.updateContentList(d, status);});
+                           .then((d) => {this.updateContentList(d, status);});
                     } else {
                         API.findShares({owner: '_self'}, 'model+password')
-                            .then((d) => {this.updateContentList(d, status);});
+                           .then((d) => {this.updateContentList(d, status);});
                     }
 
                     if(!this.passwords.length) this.loading = true;
                     this.breadcrumb = [
-                        {path: '/shared', label: Utility.translate('Shared')},
+                        {path: {name: 'Shared'}, label: Utility.translate('Shared')},
                         {path: this.$route.path, label: Utility.translate(label)}
                     ];
                 } else {
@@ -128,7 +128,7 @@
             },
             getShareUsers(id) {
                 return this.shareUsers[id];
-            },
+            }
         },
         watch  : {
             $route: function() {

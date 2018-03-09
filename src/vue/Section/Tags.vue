@@ -48,7 +48,7 @@
             return {
                 currentTag  : null,
                 defaultTitle: Utility.translate('Tags'),
-                defaultPath : '/tags/',
+                defaultPath : {name: 'Tags'},
                 tags        : [],
                 model       : model
             };
@@ -78,7 +78,7 @@
 
                 if(tag.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
-                    this.defaultPath = '/trash';
+                    this.defaultPath = {name: 'Trash'};
                 }
 
                 this.passwords = Utility.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sorting.ascending);

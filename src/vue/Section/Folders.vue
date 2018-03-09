@@ -51,7 +51,7 @@
             return {
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
                 defaultTitle : Utility.translate('Folders'),
-                defaultPath  : '/folders',
+                defaultPath  : {name: 'Folders'},
                 currentFolder: '',
                 draggable    : 'true',
                 folders      : [],
@@ -125,12 +125,12 @@
                 this.loading = false;
                 if(folder.trashed) {
                     this.defaultTitle = Utility.translate('Trash');
-                    this.defaultPath = '/trash';
+                    this.defaultPath = {name: 'Trash'};
                     this.showAddNew = false;
                     this.draggable = false;
-                } else if(this.defaultPath === '/trash' && this.$route.params.folder === undefined) {
+                } else if(this.defaultPath.name === 'Trash' && this.$route.params.folder === undefined) {
                     this.defaultTitle = Utility.translate('Folders');
-                    this.defaultPath = '/folders';
+                    this.defaultPath = {name: 'Folders'};
                     this.showAddNew = true;
                     this.draggable = true;
                 }
@@ -150,7 +150,7 @@
                     let parent = folder.parent;
                     this.breadcrumb.push(
                         {
-                            path    : '/folders/' + parent.id,
+                            path    : {name: 'Folders', params: {folder:  parent.id}},
                             label   : parent.label,
                             dropType: 'folder',
                             folderId: parent.id

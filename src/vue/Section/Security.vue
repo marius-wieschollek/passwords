@@ -72,7 +72,7 @@
                     if(!this.passwords.length) this.loading = true;
 
                     this.breadcrumb = [
-                        {path: '/security', label: Utility.translate('Security')},
+                        {path: {name: 'Security'}, label: Utility.translate('Security')},
                         {path: this.$route.path, label: Utility.translate(label)}
                     ];
                 } else {

@@ -25,6 +25,17 @@
             <section class="ui">
                 <translate tag="h1" say="User Interface"/>
 
+                <translate tag="h3" say="General"/>
+                <translate tag="label" for="setting-section-default" say="Default section"/>
+                <select id="setting-section-default" v-model="settings['client.ui.section.default']">
+                    <translate tag="option" value="all" say="All Passwords"/>
+                    <translate tag="option" value="favourites" say="Favourites"/>
+                    <translate tag="option" value="folders" say="Folders"/>
+                    <translate tag="option" value="tags" say="Tags"/>
+                    <translate tag="option" value="recent" say="Recent"/>
+                </select>
+                <settings-help text="The default section to be opened at startup"/>
+
                 <translate tag="h3" say="Passwords List View"/>
                 <translate tag="label" for="setting-password-title" say="Set title from"/>
                 <select id="setting-password-title" v-model="settings['client.ui.password.field.title']">
@@ -49,32 +60,32 @@
 
                 <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
                 <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
-                <settings-help text="Shows the tags for a password in the main view. Can be slower."/>
+                <settings-help text="Shows the tags for a password in the main view. Might be slower."/>
             </section>
             <section class="ui">
                 <translate tag="h1" say="Notifications"/>
 
                 <translate tag="h3" say="Send Emails for"/>
-                <translate tag="label" for="setting-mail-passwords" say="Compromised Passwords"/>
-                <input type="checkbox" id="setting-mail-passwords" v-model="settings['user.mail.password.security']">
-                <settings-help text="Sends you e-mail alerts"/>
+                <translate tag="label" for="setting-mail-security" say="Security issues"/>
+                <input type="checkbox" id="setting-mail-security" v-model="settings['user.mail.security']">
+                <settings-help text="Sends you e-mails about compromised passwords and other security issues"/>
 
-                <translate tag="label" for="setting-mail-sharing" say="Passwords Shared with me"/>
-                <input type="checkbox" id="setting-mail-sharing" v-model="settings['user.mail.share.new']">
-                <span></span>
+                <translate tag="label" for="setting-mail-shares" say="Passwords shared with me"/>
+                <input type="checkbox" id="setting-mail-shares" v-model="settings['user.mail.shares']">
+                <settings-help text="Sends you e-mails when other people share passwords with you"/>
 
                 <translate tag="h3" say="Show Notifications for"/>
-                <translate tag="label" for="setting-notification-passwords" say="Compromised Passwords"/>
-                <input type="checkbox" id="setting-notification-passwords" v-model="settings['user.notification.password.security']">
-                <span></span>
+                <translate tag="label" for="setting-notification-security" say="Security issues"/>
+                <input type="checkbox" id="setting-notification-security" v-model="settings['user.notification.security']">
+                <settings-help text="Notifies you when your passwords are compromised or other security issues appear"/>
 
-                <translate tag="label" for="setting-notification-sharing" say="Passwords Shared with me"/>
-                <input type="checkbox" id="setting-notification-sharing" v-model="settings['user.notification.share.new']">
-                <span></span>
+                <translate tag="label" for="setting-notification-sharing" say="Passwords shared with me"/>
+                <input type="checkbox" id="setting-notification-sharing" v-model="settings['user.notification.shares']">
+                <settings-help text="Notifies you when other people share passwords with you"/>
 
-                <translate tag="label" for="setting-notification-errors" say="Sharing errors"/>
-                <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.share.error']">
-                <span></span>
+                <translate tag="label" for="setting-notification-errors" say="Errors happening"/>
+                <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.errors']">
+                <settings-help text="Notifies you, when a background operation failed"/>
             </section>
             <section class="tests" v-if="nightly">
                 <translate tag="h1" say="Field tests"/>
@@ -108,9 +119,10 @@
         methods   : {
             saveSettings() {
                 for(let i in this.settings) {
-                    if(this.settings.hasOwnProperty(i)) {
-                        SettingsManager.set(i, this.settings[i]);
-                    }
+                    if(!this.settings.hasOwnProperty(i)) continue;
+                    let value = this.settings[i];
+
+                    if(SettingsManager.get(i) !== value) SettingsManager.set(i, value);
                 }
             },
             async runTests($event) {

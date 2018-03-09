@@ -7,7 +7,7 @@
             </div>
             <form class="content" v-on:submit.prevent="submitAction()">
                 <div class="form left">
-                    <translate tag="div" class="section-title" :style="getSectionStyle" say="General"/>
+                    <translate tag="div" class="section-title" :style="getSectionStyle" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
                         <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" required>

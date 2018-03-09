@@ -47,11 +47,11 @@
                     let data = this.options[this.$route.params.action];
 
                     this.breadcrumb = [
-                        {path: '/backup', label: Utility.translate('Backup and Restore')},
+                        {path: {name: 'Backup'}, label: Utility.translate('Backup and Restore')},
                         {path: this.$route.path, label: Utility.translate(data[0])}
                     ]
                 } else {
-                    this.breadcrumb = [{path: '/backup', label: Utility.translate('Backup and Restore')}];
+                    this.breadcrumb = [{path: {name: 'Backup'}, label: Utility.translate('Backup and Restore')}];
                 }
             }
         },

@@ -2,37 +2,37 @@
     <div id="app" class="passwords" :data-server-version="serverVersion">
         <div id="app-navigation">
             <ul>
-                <router-link class="nav-icon-all" to="/" active-class="active" :exact="true" tag="li">
+                <router-link class="nav-icon-all" :to="{ name: 'All'}" active-class="active" :exact="true" tag="li">
                     <translate say="All"/>
                 </router-link>
-                <router-link class="nav-icon-folders" to="/folders" active-class="active" tag="li">
+                <router-link class="nav-icon-folders" :to="{ name: 'Folders'}" active-class="active" tag="li">
                     <translate say="Folders"/>
                 </router-link>
-                <router-link class="nav-icon-recent" to="/recent" active-class="active" tag="li">
+                <router-link class="nav-icon-recent" :to="{ name: 'Recent'}" active-class="active" tag="li">
                     <translate say="Recent"/>
                 </router-link>
-                <router-link class="nav-icon-favourites" to="/favourites" active-class="active" tag="li">
+                <router-link class="nav-icon-favourites" :to="{ name: 'Favourites'}" active-class="active" tag="li">
                     <translate say="Favourites"/>
                 </router-link>
-                <router-link class="nav-icon-shared" to="/shared" active-class="active" tag="li">
+                <router-link class="nav-icon-shared" :to="{ name: 'Shared'}" active-class="active" tag="li">
                     <translate say="Shared"/>
                 </router-link>
-                <router-link class="nav-icon-tags" to="/tags" active-class="active" tag="li">
+                <router-link class="nav-icon-tags" :to="{ name: 'Tags'}" active-class="active" tag="li">
                     <translate say="Tags"/>
                 </router-link>
-                <router-link class="nav-icon-security" to="/security" active-class="active" tag="li">
+                <router-link class="nav-icon-security" :to="{ name: 'Security'}" active-class="active" tag="li">
                     <translate say="Security"/>
                 </router-link>
             </ul>
             <ul id="app-settings" :class="{open: showMore}">
-                <router-link class="nav-icon-trash" to="/trash" active-class="active" tag="li">
+                <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
                     <translate say="Trash"/>
                 </router-link>
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore" say="More"/>
-                <router-link class="nav-icon-settings" to="/settings" active-class="active" tag="li">
+                <router-link class="nav-icon-settings" :to="{ name: 'Settings'}" active-class="active" tag="li">
                     <translate say="Settings"/>
                 </router-link>
-                <router-link class="nav-icon-backup" to="/backup" active-class="active" tag="li">
+                <router-link class="nav-icon-backup" :to="{ name: 'Backup'}" active-class="active" tag="li">
                     <translate say="Backup and Restore"/>
                 </router-link>
                 <translate tag="li" class="nav-icon-help" @click="openWikiPage" say="Handbook"/>
