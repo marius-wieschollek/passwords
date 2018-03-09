@@ -41,7 +41,7 @@ class AdminSection implements IIconSection {
     }
 
     /**
-     * returns the relative path to an 16*16 icon describing the section.
+     * Returns the relative path to an 16*16 icon describing the section.
      * e.g. '/core/img/places/files.svg'
      *
      * @returns string
@@ -52,8 +52,8 @@ class AdminSection implements IIconSection {
     }
 
     /**
-     * returns the ID of the section. It is supposed to be a lower case string,
-     * e.g. 'ldap'
+     * Returns the ID of the section. It is supposed to be a lower case string,
+     * e.g. 'passwords'
      *
      * @returns string
      * @since 9.1
@@ -63,8 +63,8 @@ class AdminSection implements IIconSection {
     }
 
     /**
-     * returns the translated name as it should be displayed, e.g. 'LDAP / AD
-     * integration'. Use the L10N service to translate it.
+     * Returns the translated name as it should be displayed, e.g. 'Passwords'.
+     * Use the L10N service to translate it.
      *
      * @return string
      * @since 9.1
@@ -82,6 +82,6 @@ class AdminSection implements IIconSection {
      * @since 9.1
      */
     public function getPriority(): int {
-        return 70;
+        return 50;
     }
 }

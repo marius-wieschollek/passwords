@@ -201,7 +201,7 @@
             },
             processFile(event) {
                 let file = event.target.files[0];
-                if(this.mime === file.type || file.type === '') {
+                if(this.mime === file.type || file.type.length === 0 || !file.type ) {
                     if(this.mime === 'text/csv') {
                         this.readCsv(file);
                     } else {
@@ -210,7 +210,8 @@
                         reader.readAsText(file);
                     }
                 } else {
-                    this.resetFile('Invalid file type "{type}"', {type: file.type});
+                    console.log(file);
+                    this.resetFile(['Invalid file type "{type}"', {type: file.type}]);
                 }
             },
             async readCsv(file) {
