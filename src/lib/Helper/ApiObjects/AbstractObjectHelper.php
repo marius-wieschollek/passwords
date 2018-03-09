@@ -83,6 +83,7 @@ abstract class AbstractObjectHelper {
      * @return bool
      */
     protected function filter(EntityInterface $revision, array $filter) {
+        if(empty($filter)) return true;
         if(!isset($filter['trashed']) && $revision->hasProperty('trashed')) $filter['trashed'] = false;
 
         foreach($filter as $key => $value) {
