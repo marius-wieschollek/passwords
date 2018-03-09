@@ -160,14 +160,11 @@ class Messages {
     /**
      *
      * @param text
-     * @returns {*}
+     * @returns {string}
      * @private
      */
     static _translate(text) {
-        if(Array.isArray(text)) {
-            return Utility.translate(text[0], text[1]);
-        }
-        return Utility.translate(text);
+        return Array.isArray(text) ? Utility.translate(text[0], text[1]):Utility.translate(text);
     }
 }
 
