@@ -19,7 +19,7 @@
 <script>
     import API from '@js/Helper/api';
     import Events from "@js/Classes/Events";
-    import Breadcrumb from '@vc/Breadcrumbs';
+    import Breadcrumb from '@vc/Breadcrumb';
     import Utility from "@js/Classes/Utility";
     import FolderLine from '@vue/Line/Folder';
     import Empty from "@vue/Components/Empty";

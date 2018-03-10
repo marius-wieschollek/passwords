@@ -19,7 +19,7 @@
 <script>
     import API from '@js/Helper/api';
     import TagLine from '@vue/Line/Tag';
-    import Breadcrumb from '@vc/Breadcrumbs';
+    import Breadcrumb from '@vc/Breadcrumb';
     import Utility from "@js/Classes/Utility";
     import HeaderLine from "@vue/Line/Header";
     import FooterLine from "@vue/Line/Footer";

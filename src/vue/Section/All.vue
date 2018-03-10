@@ -17,7 +17,7 @@
 
 <script>
     import API from '@js/Helper/api';
-    import Breadcrumb from '@vc/Breadcrumbs';
+    import Breadcrumb from '@vc/Breadcrumb';
     import Empty from "@vue/Components/Empty";
     import HeaderLine from "@vue/Line/Header";
     import FooterLine from "@vue/Line/Footer";

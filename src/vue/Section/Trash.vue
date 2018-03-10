@@ -27,7 +27,7 @@
     import API from '@js/Helper/api';
     import TagLine from '@vue/Line/Tag';
     import Translate from '@vc/Translate';
-    import Breadcrumb from '@vc/Breadcrumbs';
+    import Breadcrumb from '@vc/Breadcrumb';
     import FolderLine from '@vue/Line/Folder';
     import HeaderLine from "@vue/Line/Header";
     import FooterLine from "@vue/Line/Footer";

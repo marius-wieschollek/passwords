@@ -15,7 +15,7 @@
     import Export from '@vc/Export';
     import Import from '@vc/Import';
     import Translate from '@vc/Translate';
-    import Breadcrumb from '@vc/Breadcrumbs';
+    import Breadcrumb from '@vc/Breadcrumb';
     import Utility from "@js/Classes/Utility";
     import GenericLine from "@vue/Line/Generic";
 

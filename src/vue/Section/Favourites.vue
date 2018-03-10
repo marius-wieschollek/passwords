@@ -20,7 +20,7 @@
 <script>
     import API from '@js/Helper/api';
     import TagLine from '@vue/Line/Tag';
-    import Breadcrumb from '@vc/Breadcrumbs';
+    import Breadcrumb from '@vc/Breadcrumb';
     import FolderLine from '@vue/Line/Folder';
     import Empty from "@vue/Components/Empty";
     import HeaderLine from "@vue/Line/Header";
