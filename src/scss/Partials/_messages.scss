@@ -1,5 +1,16 @@
+.oc-dialog-content p {
+    padding : 10px;
+    width   : 250px;
+}
+
 .oc-dialog-content p .ui-icon.ui-icon-notice {
     display : none;
+}
+
+.oc-dialog-buttonrow.twobuttons {
+    button.primary {
+        border-color: rgba(0,0,0,0);
+    }
 }
 
 form.passwords-form {
@@ -10,6 +21,7 @@ form.passwords-form {
     width                 : 250px;
     max-width             : 100%;
     padding               : 10px;
+    margin                : -25px 0;
 
     .message {
         grid-column-start : 1;

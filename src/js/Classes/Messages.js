@@ -107,7 +107,7 @@ class Messages {
         }
 
         if(message.length !== 0) message = '<div class="message">' + Utility.translate(message) + '</div>';
-        html = '<form class="passwords-form" id="' + id + '">' + message + html + '</form>';
+        html = '<form class="passwords-form" id="' + id + '">' + message.replace("\n",'<br>') + html + '</form>';
 
         return new Promise((resolve, reject) => {
             title = Messages._translate(title);
