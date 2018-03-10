@@ -6,7 +6,7 @@
 
 <script>
     import Translate from "@vue/Components/Translate";
-    import Utility from "@js/Classes/Utility";
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         components: {
@@ -32,28 +32,28 @@
                 let text = [];
 
                 if(this.passwords.length === 1) {
-                    text.push(Utility.translate('1 password'));
+                    text.push(Localisation.translate('1 password'));
                 } else if(this.passwords.length) {
-                    text.push(Utility.translate('{passwords} passwords', {passwords: this.passwords.length}));
+                    text.push(Localisation.translate('{passwords} passwords', {passwords: this.passwords.length}));
                 }
 
                 if(this.folders.length === 1) {
-                    text.push(Utility.translate('1 folder'));
+                    text.push(Localisation.translate('1 folder'));
                 } else if(this.folders.length) {
-                    text.push(Utility.translate('{folders} folders', {folders: this.folders.length}));
+                    text.push(Localisation.translate('{folders} folders', {folders: this.folders.length}));
                 }
 
                 if(this.tags.length === 1) {
-                    text.push(Utility.translate('1 tag'));
+                    text.push(Localisation.translate('1 tag'));
                 } else if(this.tags.length) {
-                    text.push(Utility.translate('{tags} tags', {tags: this.tags.length}));
+                    text.push(Localisation.translate('{tags} tags', {tags: this.tags.length}));
                 }
 
                 if(text.length === 3) {
-                    let and = Utility.translate(' and ');
+                    let and = Localisation.translate(' and ');
                     return text[0] + ', ' + text[1] + and + text[2];
                 } else if(text.length === 2) {
-                    let and = Utility.translate(' and ');
+                    let and = Localisation.translate(' and ');
                     return text[0] + and + text[1];
                 } else if(text.length === 1) {
                     return text[0];

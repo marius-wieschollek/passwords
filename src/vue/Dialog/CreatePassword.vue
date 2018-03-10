@@ -63,6 +63,7 @@
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import Messages from "@js/Classes/Messages";
+    import Localisation from '@js/Classes/Localisation';
     import EnhancedApi from "@js/ApiClient/EnhancedApi";
     import ThemeManager from '@js/Manager/ThemeManager';
 
@@ -167,7 +168,7 @@
                             hideIcons              : ['fullscreen', 'side-by-side'],
                             autoDownloadFontAwesome: false,
                             spellChecker           : false,
-                            placeholder            : Utility.translate('Take some notes'),
+                            placeholder            : Localisation.translate('Take some notes'),
                             status                 : false,
                             forceSync              : true,
                             initialValue           : this.password.notes

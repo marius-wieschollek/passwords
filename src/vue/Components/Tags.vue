@@ -25,6 +25,7 @@
     import API from '@js/Helper/api';
     import Utility from "@js/Classes/Utility";
     import TagManager from '@js/Manager/TagManager';
+    import Localisation from "@js/Classes/Localisation";
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
@@ -38,7 +39,7 @@
 
         data() {
             return {
-                placeholder  : Utility.translate('Add Tags...'),
+                placeholder  : Localisation.translate('Add Tags...'),
                 tags         : this.password.tags ? Utility.sortApiObjectArray(this.password.tags, 'label'):[],
                 allTags      : [],
                 inputText    : '',

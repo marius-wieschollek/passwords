@@ -1,5 +1,5 @@
 import API from '@js/Helper/api';
-import Utility from "@js/Classes/Utility";
+import Localisation from "@js/Classes/Localisation";
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 
@@ -159,7 +159,7 @@ export class ImportManager {
                 }
             } catch(e) {
                 console.error(e);
-                this.errors.push(Utility.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
+                this.errors.push(Localisation.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
             }
 
             this.countProgress();
@@ -227,7 +227,7 @@ export class ImportManager {
                 }
             } catch(e) {
                 console.error(e);
-                this.errors.push(Utility.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
+                this.errors.push(Localisation.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
             }
 
             this.countProgress();
@@ -293,7 +293,7 @@ export class ImportManager {
                 }
             } catch(e) {
                 console.error(e);
-                this.errors.push(Utility.translate('"{error}" in password "{label}".', {label: password.label, error: e.message}));
+                this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: e.message}));
             }
 
             this.countProgress();

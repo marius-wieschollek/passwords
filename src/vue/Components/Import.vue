@@ -133,8 +133,8 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
     import Messages from "@js/Classes/Messages";
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         components: {
@@ -178,7 +178,7 @@
                 return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length - 1];
             },
             backupPasswordTitle() {
-                return Utility.translate('For encrypted backups');
+                return Localisation.translate('For encrypted backups');
             }
         },
 
@@ -212,9 +212,9 @@
                             } else if(errors.length) {
                                 this.progress.style = 'warn';
                                 this.progress.status = 'Import partially failed';
-                                let message = Utility.translate('Some objects were skipped because of errors: ') +
+                                let message = Localisation.translate('Some objects were skipped because of errors: ') +
                                               errors.join(' ') +
-                                              Utility.translate('More information can be found in the console (Press F12)');
+                                              Localisation.translate('More information can be found in the console (Press F12)');
                                 Messages.alert(message, 'Import error');
                             }
                         });
@@ -255,7 +255,7 @@
                             } else {
                                 let error = result.errors[0];
                                 console.log(result.errors);
-                                let message = Utility.translate(error.message);
+                                let message = Localisation.translate(error.message);
                                 Messages.alert(['\"{error}\" in line {line}', {error: message, line: error.row + 1}], 'Import error');
                             }
                         }

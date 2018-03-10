@@ -29,8 +29,8 @@
 <script>
     import $ from "jquery";
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
     import DragManager from '@js/Manager/DragManager';
+    import Localisation from "@js/Classes/Localisation";
     import FolderManager from '@js/Manager/FolderManager';
 
     export default {
@@ -52,7 +52,7 @@
 
         computed: {
             getDate() {
-                return Utility.formatDate(this.folder.edited);
+                return Localisation.formatDate(this.folder.edited);
             }
         },
 

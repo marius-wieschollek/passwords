@@ -1,7 +1,7 @@
 import API from "@js/Helper/api";
-import Utility from "@js/Classes/Utility";
 import SimpleApi from "@js/ApiClient/SimpleApi";
 import * as randomMC from "random-material-color";
+import Localisation from "@js/Classes/Localisation";
 
 export default class ImportCsvConversionHelper {
 
@@ -83,8 +83,8 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static _processCsvValue(value, field) {
-        let boolYes = Utility.translate('true'),
-            boolNo  = Utility.translate('false');
+        let boolYes = Localisation.translate('true'),
+            boolNo  = Localisation.translate('false');
 
         if([boolYes, 'yes', 'true', '1'].indexOf(value) !== -1) {
             return true;

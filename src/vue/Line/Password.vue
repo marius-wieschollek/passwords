@@ -39,6 +39,7 @@
     import Utility from "@js/Classes/Utility";
     import Messages from '@js/Classes/Messages';
     import DragManager from '@js/Manager/DragManager';
+    import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsManager from '@js/Manager/SettingsManager';
 
@@ -86,7 +87,7 @@
                 return Utility.sortApiObjectArray(this.password.tags, 'label');
             },
             getDate() {
-                return Utility.formatDate(this.password.edited);
+                return Localisation.formatDate(this.password.edited);
             }
         },
 

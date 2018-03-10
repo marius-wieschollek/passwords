@@ -27,6 +27,7 @@
     import SecurityLine from '@vue/Line/Security';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         extends   : BaseSection,
@@ -72,8 +73,8 @@
                     if(!this.passwords.length) this.loading = true;
 
                     this.breadcrumb = [
-                        {path: {name: 'Security'}, label: Utility.translate('Security')},
-                        {path: this.$route.path, label: Utility.translate(label)}
+                        {path: {name: 'Security'}, label: Localisation.translate('Security')},
+                        {path: this.$route.path, label: Localisation.translate(label)}
                     ];
                 } else {
                     this.loading = false;

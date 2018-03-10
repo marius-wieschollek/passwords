@@ -28,6 +28,7 @@
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
+    import Localisation from "@js/Classes/Localisation";
     import SettingsManager from "@js/Manager/SettingsManager";
 
     export default {
@@ -50,7 +51,7 @@
 
             return {
                 defaultFolder: '00000000-0000-0000-0000-000000000000',
-                defaultTitle : Utility.translate('Folders'),
+                defaultTitle : Localisation.translate('Folders'),
                 defaultPath  : {name: 'Folders'},
                 currentFolder: '',
                 draggable    : 'true',
@@ -124,12 +125,12 @@
             updateContentList    : function(folder) {
                 this.loading = false;
                 if(folder.trashed) {
-                    this.defaultTitle = Utility.translate('Trash');
+                    this.defaultTitle = Localisation.translate('Trash');
                     this.defaultPath = {name: 'Trash'};
                     this.showAddNew = false;
                     this.draggable = false;
                 } else if(this.defaultPath.name === 'Trash' && this.$route.params.folder === undefined) {
-                    this.defaultTitle = Utility.translate('Folders');
+                    this.defaultTitle = Localisation.translate('Folders');
                     this.defaultPath = {name: 'Folders'};
                     this.showAddNew = true;
                     this.draggable = true;

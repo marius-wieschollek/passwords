@@ -21,7 +21,7 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
 
     if(location.protocol !== 'https:') {
         location.href = location.origin + location.pathname + '?https=false';
-    } else {
+    } else if(isCompatibleBrowser()) {
         window.addEventListener('load', () => { load(); }, false);
         loadInterval = setInterval(() => { load(); }, 10);
     }

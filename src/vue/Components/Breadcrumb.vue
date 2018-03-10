@@ -46,9 +46,9 @@
 <script>
     import $ from "jquery";
     import API from '@js/Helper/api';
-    import Utility from '@js/Classes/Utility';
-    import Translate from '@vc/Translate.vue';
+    import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
+    import Localisation from '@js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
@@ -109,7 +109,7 @@
             getItems() {
                 if(this.items.length === 0) {
                     return [
-                        {path: this.$route.path, label: Utility.translate(this.$route.name)}
+                        {path: this.$route.path, label: Localisation.translate(this.$route.name)}
                     ];
                 }
 

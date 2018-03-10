@@ -1,12 +1,10 @@
-$(window).on('load', checkSystem);
+window.addEventListener('load', checkSystem, false);
 
 function isCompatibleBrowser() {
     try {
         eval('"use strict"; class PasswordsTestBrowserClassSupport {}');
-        eval('"use strict"; let PwTextEncoderTest = new TextEncoder();');
         eval('"use strict"; let PasswordsTestAsyncBrowserFunctionSupport = async function(){}');
-        if(navigator.userAgent.indexOf(' Edge/') !== -1) return false;
-        return window.hasOwnProperty('crypto');
+        return window.crypto.subtle && window.TextEncoder;
     } catch(e) {
         console.log(e);
 

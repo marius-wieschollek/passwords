@@ -77,6 +77,7 @@
     import Sharing from '@vc/Sharing/Sharing';
     import Messages from "@js/Classes/Messages";
     import ImageContainer from '@vc/ImageContainer';
+    import Localisation from "@js/Classes/Localisation";
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
@@ -191,7 +192,7 @@
                 }
             },
             getDateTime(date) {
-                return Utility.formatDateTime(date);
+                return Localisation.formatDateTime(date);
             }
         },
 

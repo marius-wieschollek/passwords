@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import Utility from "@js/Classes/Utility";
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         props: {
@@ -44,18 +44,18 @@
         computed: {
             getText() {
                 if(this.say) {
-                    return Utility.translate(this.say, this.variables);
+                    return Localisation.translate(this.say, this.variables);
                 }
                 if(this.$slots.default) {
-                    return Utility.translate(this.$slots.default[0].text.trim(), this.variables);
+                    return Localisation.translate(this.$slots.default[0].text.trim(), this.variables);
                 }
                 return '';
             },
             getTitle() {
-                return this.title ? Utility.translate(this.title, this.variables):false;
+                return this.title ? Localisation.translate(this.title, this.variables):false;
             },
             getValue() {
-                return this.value ? Utility.translate(this.value, this.variables):false;
+                return this.value ? Localisation.translate(this.value, this.variables):false;
             },
             getIcon() {
                 return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);

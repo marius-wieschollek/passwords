@@ -27,6 +27,7 @@
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
+    import Localisation from "@js/Classes/Localisation";
     import SettingsManager from "@js/Manager/SettingsManager";
 
     export default {
@@ -47,7 +48,7 @@
                 model    = showTags ? 'model+passwords+password-tags':'model+passwords';
             return {
                 currentTag  : null,
-                defaultTitle: Utility.translate('Tags'),
+                defaultTitle: Localisation.translate('Tags'),
                 defaultPath : {name: 'Tags'},
                 tags        : [],
                 model       : model
@@ -77,7 +78,7 @@
                 this.loading = false;
 
                 if(tag.trashed) {
-                    this.defaultTitle = Utility.translate('Trash');
+                    this.defaultTitle = Localisation.translate('Trash');
                     this.defaultPath = {name: 'Trash'};
                 }
 

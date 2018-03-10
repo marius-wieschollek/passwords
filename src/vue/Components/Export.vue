@@ -84,6 +84,7 @@
     import Translate from '@vc/Translate';
     import Utility from "@js/Classes/Utility";
     import Messages from "@js/Classes/Messages";
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         components: {
@@ -113,7 +114,7 @@
                 return this.fieldMap[this.options.db];
             },
             backupPasswordTitle() {
-                return Utility.translate('(Optional) Encrypts the backup');
+                return Localisation.translate('(Optional) Encrypts the backup');
             },
             csvMappingFields() {
                 return this.options.mapping.length + 1;
@@ -179,7 +180,7 @@
                     fileExt = this.format === 'customCsv' ? 'csv':this.format;
 
                 for(let i = 0; i < models.length; i++) {
-                    exports.push(Utility.translate(models[i].capitalize()));
+                    exports.push(Localisation.translate(models[i].capitalize()));
                 }
 
                 return exports.join('+') + '_' + date.toLocaleDateString() + '.' + fileExt;

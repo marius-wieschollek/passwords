@@ -25,8 +25,8 @@
 <script>
     import $ from "jquery";
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
     import TagManager from '@js/Manager/TagManager';
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         components: {
@@ -47,7 +47,7 @@
 
         computed: {
             getDate() {
-                return Utility.formatDate(this.tag.edited);
+                return Localisation.formatDate(this.tag.edited);
             }
         },
 

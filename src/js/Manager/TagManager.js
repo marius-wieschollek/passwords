@@ -2,8 +2,9 @@ import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from "@js/Classes/Utility";
 import Messages from '@js/Classes/Messages';
-import EnhancedApi from "@js/ApiClient/EnhancedApi";
 import * as randomMC from "random-material-color";
+import EnhancedApi from "@js/ApiClient/EnhancedApi";
+import Localisation from "@js/Classes/Localisation";
 
 /**
  *
@@ -44,7 +45,7 @@ class TagManager {
      * @returns {Promise<any>}
      */
     createTagFromData(tag) {
-        if(!tag.label) tag.label = Utility.translate('New Tag');
+        if(!tag.label) tag.label = Localisation.translate('New Tag');
         if(!tag.color) tag.color = randomMC.getColor();
         tag = EnhancedApi.validateTag(tag);
 

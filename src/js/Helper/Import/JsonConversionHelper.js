@@ -1,7 +1,7 @@
 import API from "@js/Helper/api";
-import Utility from "@js/Classes/Utility";
 import * as randomMC from "random-material-color";
 import Encryption from "@js/ApiClient/Encryption";
+import Localisation from "@js/Classes/Localisation";
 
 export default class ImportJsonConversionHelper {
 
@@ -126,7 +126,7 @@ export default class ImportJsonConversionHelper {
                     object.username = element.email;
                 } else {
                     if(object.notes.length !== 0) object.notes += "\n\n";
-                    object.notes += Utility.translate('Email') + ': ' + element.email;
+                    object.notes += Localisation.translate('Email') + ': ' + element.email;
                 }
             }
 

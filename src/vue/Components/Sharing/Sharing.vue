@@ -16,9 +16,9 @@
 <script>
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
     import Messages from '@js/Classes/Messages';
     import Share from "@vue/Components/Sharing/Share";
+    import Localisation from "@js/Classes/Localisation";
     import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
@@ -41,7 +41,7 @@
                 nameMap    : [],
                 idMap      : [],
                 shares     : this.password.shares,
-                placeholder: Utility.translate('Search user')
+                placeholder: Localisation.translate('Search user')
             }
         },
 

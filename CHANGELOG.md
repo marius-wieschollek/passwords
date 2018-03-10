@@ -2,6 +2,9 @@
 * Added in page search
 * Added email alerts for bad passwords
 * Added tags in the main view
+* Added notification settings
+* Added configurable default section
+* Added start over option
 * Improved password generator
 * Improved mobile style
 

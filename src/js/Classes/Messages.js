@@ -1,5 +1,5 @@
 import $ from "jquery";
-import Utility from "@js/Classes/Utility";
+import Localisation from "@js/Classes/Localisation";
 
 class Messages {
 
@@ -101,12 +101,12 @@ class Messages {
             let field = form[name],
                 value = field.value ? field.value:'',
                 type  = field.type ? field.type:'text',
-                label = Utility.translate(field.label ? field.label:name.capitalize());
+                label = Messages._translate(field.label ? field.label:name.capitalize());
 
             html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
         }
 
-        if(message.length !== 0) message = '<div class="message">' + Utility.translate(message) + '</div>';
+        if(message.length !== 0) message = '<div class="message">' + Messages._translate(message) + '</div>';
         html = '<form class="passwords-form" id="' + id + '">' + message.replace("\n",'<br>') + html + '</form>';
 
         return new Promise((resolve, reject) => {
@@ -164,7 +164,7 @@ class Messages {
      * @private
      */
     static _translate(text) {
-        return Array.isArray(text) ? Utility.translate(text[0], text[1]):Utility.translate(text);
+        return Array.isArray(text) ? Localisation.translate(text[0], text[1]):Localisation.translate(text);
     }
 }
 

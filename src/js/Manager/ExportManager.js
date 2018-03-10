@@ -1,6 +1,7 @@
 import API from '@js/Helper/api';
 import Utility from "@js/Classes/Utility";
 import Encryption from "@js/ApiClient/Encryption";
+import Localisation from "@js/Classes/Localisation";
 
 /**
  *
@@ -163,7 +164,7 @@ export class ExportManager {
 
             for(let i in sheets) {
                 if(!sheets.hasOwnProperty(i)) continue;
-                let name = Utility.translate(i.capitalize());
+                let name = Localisation.translate(i.capitalize());
 
                 workbook.SheetNames.push(name);
                 workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i]);
@@ -171,7 +172,7 @@ export class ExportManager {
 
             return XLSX.write(workbook, {bookType: format, type: 'array'});
         } catch(e) {
-            throw Utility.translate('Unable to load {module}', {module: 'xlsx'});
+            throw Localisation.translate('Unable to load {module}', {module: 'xlsx'});
         }
     }
 
@@ -187,7 +188,7 @@ export class ExportManager {
 
         if(mapping.indexOf('folderLabel') !== -1 || mapping.indexOf('parentLabel') !== -1) {
             let folders = await API.listFolders();
-            folderDb[this.defaultFolder] = Utility.translate('Home');
+            folderDb[this.defaultFolder] = Localisation.translate('Home');
 
             for(let i in folders) {
                 if(!folders.hasOwnProperty(i)) continue;
@@ -253,7 +254,7 @@ export class ExportManager {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {
-                line.push('"' + Utility.translate(header[i].capitalize()).replace('"', '""') + '"');
+                line.push('"' + Localisation.translate(header[i].capitalize()).replace('"', '""') + '"');
             }
 
             csv.push(line.join(delimiter));
@@ -267,7 +268,7 @@ export class ExportManager {
                 if(!element.hasOwnProperty(j)) continue;
                 let value = element[j];
 
-                if(typeof value === 'boolean') value = Utility.translate(value.toString());
+                if(typeof value === 'boolean') value = Localisation.translate(value.toString());
 
                 line.push('"' + value.toString().replace(/"/g, '""') + '"');
             }
@@ -291,7 +292,7 @@ export class ExportManager {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {
-                line.push(Utility.translate(header[i].capitalize()));
+                line.push(Localisation.translate(header[i].capitalize()));
             }
 
             data.push(line);
