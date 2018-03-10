@@ -223,4 +223,26 @@ export default class Utility {
 
         return clone;
     }
+
+    /**
+     *
+     * @param date
+     * @returns {string}
+     */
+    static formatDate(date) {
+        let locale = navigator.language + '-' + navigator.language.toUpperCase();
+
+        return date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' })
+    }
+
+    /**
+     *
+     * @param date
+     * @returns {string}
+     */
+    static formatDateTime(date) {
+        let locale = navigator.language + '-' + navigator.language.toUpperCase();
+
+        return date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    }
 }

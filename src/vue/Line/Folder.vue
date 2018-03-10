@@ -22,13 +22,14 @@
                 </slot>
             </div>
         </div>
-        <div class="date">{{ folder.edited.toLocaleDateString() }}</div>
+        <div class="date">{{ getDate }}</div>
     </div>
 </template>
 
 <script>
     import $ from "jquery";
-    import Translate from '@vc/Translate.vue';
+    import Translate from '@vc/Translate';
+    import Utility from "@js/Classes/Utility";
     import DragManager from '@js/Manager/DragManager';
     import FolderManager from '@js/Manager/FolderManager';
 
@@ -48,6 +49,13 @@
                 showMenu: false,
             }
         },
+
+        computed: {
+            getDate() {
+                return Utility.formatDate(this.folder.edited);
+            }
+        },
+
 
         methods: {
             favouriteAction($event) {

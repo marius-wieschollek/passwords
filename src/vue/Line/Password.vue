@@ -7,6 +7,7 @@
             <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
         </ul>
         <slot name="middle"/>
+        <i :class="securityCheck" class="fa fa-shield security"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -27,15 +28,14 @@
                 </slot>
             </div>
         </div>
-        <i :class="securityCheck" class="fa fa-shield security"></i>
-        <div class="date">{{ password.edited.toLocaleDateString() }}</div>
+        <div class="date">{{ getDate }}</div>
     </div>
 </template>
 
 <script>
     import $ from "jquery";
     import API from '@js/Helper/api';
-    import Translate from '@vc/Translate.vue';
+    import Translate from '@vc/Translate';
     import Utility from "@js/Classes/Utility";
     import Messages from '@js/Classes/Messages';
     import DragManager from '@js/Manager/DragManager';
@@ -81,6 +81,9 @@
             },
             getTags() {
                 return Utility.sortApiObjectArray(this.password.tags, 'label');
+            },
+            getDate() {
+                return Utility.formatDate(this.password.edited);
             }
         },
 
@@ -306,7 +309,7 @@
 
                 .date {
                     line-height : 50px;
-                    width       : 85px;
+                    width       : 105px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
                     text-align  : right;

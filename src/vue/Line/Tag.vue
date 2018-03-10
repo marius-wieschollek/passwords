@@ -18,13 +18,14 @@
                 </slot>
             </div>
         </div>
-        <div class="date">{{ tag.edited.toLocaleDateString() }}</div>
+        <div class="date">{{ getDate }}</div>
     </div>
 </template>
 
 <script>
     import $ from "jquery";
-    import Translate from '@vc/Translate.vue';
+    import Translate from '@vc/Translate';
+    import Utility from "@js/Classes/Utility";
     import TagManager from '@js/Manager/TagManager';
 
     export default {
@@ -40,7 +41,13 @@
 
         data() {
             return {
-                showMenu: false,
+                showMenu: false
+            };
+        },
+
+        computed: {
+            getDate() {
+                return Utility.formatDate(this.tag.edited);
             }
         },
 
@@ -49,7 +56,7 @@
                 $event.stopPropagation();
                 this.tag.favourite = !this.tag.favourite;
                 TagManager.updateTag(this.tag)
-                    .catch(() => { this.tag.favourite = !this.tag.favourite; });
+                          .catch(() => { this.tag.favourite = !this.tag.favourite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;
@@ -68,17 +75,17 @@
                 this.$parent.detail = {
                     type   : 'tag',
                     element: this.tag
-                }
+                };
             },
             deleteAction(skipConfirm = false) {
                 TagManager.deleteTag(this.tag);
             },
             editAction() {
                 TagManager.editTag(this.tag)
-                    .then((t) => {this.tag = t;});
+                          .then((t) => {this.tag = t;});
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">

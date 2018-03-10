@@ -18,8 +18,8 @@
                 <translate tag="div" say="Website"><a :href="object.url" target="_blank" :style="getLinkStyle">{{ object.url }}</a></translate>
 
                 <translate tag="div" say="Statistics" class="header"/>
-                <translate tag="div" say="Created on"><span>{{ object.created.toLocaleDateString() }} {{ object.created.toLocaleTimeString() }}</span></translate>
-                <translate tag="div" say="Last updated"><span>{{ object.edited.toLocaleDateString() }} {{ object.edited.toLocaleTimeString() }}</span></translate>
+                <translate tag="div" say="Created on"><span>{{ getDateTime(object.created) }}</span></translate>
+                <translate tag="div" say="Last updated"><span>{{ getDateTime(object.edited) }}</span></translate>
                 <translate tag="div" say="Revisions">
                     <translate say="{count} revisions" :variables="{count:countRevisions}"/>
                 </translate>
@@ -56,7 +56,7 @@
                 <ul class="revision-list">
                     <li class="revision" v-for="revision in getRevisions" :key="revision.id" :style="{'background-image': 'url(' + revision.icon + ')'}">
                         <span>{{ revision.label }}<br>
-                            <span class="time">{{ revision.created.toLocaleDateString() }} {{ revision.created.toLocaleTimeString() }}</span>
+                            <span class="time">{{ getDateTime(revision.created) }}</span>
                         </span>
                         <translate icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== object.revision"/>
                     </li>
@@ -189,6 +189,9 @@
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
                 }
+            },
+            getDateTime(date) {
+                return Utility.formatDateTime(date);
             }
         },
 
