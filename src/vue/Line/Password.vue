@@ -3,7 +3,7 @@
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
         <span class="title">{{ getTitle }}</span>
-        <ul slot="middle" class="line-password-tags" v-if="password.tags">
+        <ul slot="middle" class="tags" v-if="showTags">
             <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
         </ul>
         <slot name="middle"/>
@@ -73,6 +73,9 @@
             },
             showCopyOptions() {
                 return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
+            },
+            showTags() {
+                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags;
             },
             getTitle() {
                 let titleField = SettingsManager.get('client.ui.password.field.title');
@@ -212,7 +215,7 @@
                     display        : flex;
                 }
 
-                .line-password-tags {
+                .tags {
                     height      : 50px;
                     flex-shrink : 0;
                     line-height : 50px;
@@ -339,9 +342,21 @@
             }
         }
 
-        @media(max-width : $desktop-width) {
-            &.show-details .item-list .row .date {
-                display : none;
+        @media(max-width : $width-large) {
+            &.show-details .item-list .row {
+                .date {
+                    display : none;
+                }
+            }
+        }
+
+        @media(max-width : $width-medium) {
+            &.show-details .item-list .row {
+                .tags,
+                .date,
+                .security {
+                    display : none;
+                }
             }
         }
     }

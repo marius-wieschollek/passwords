@@ -100,8 +100,8 @@
                             <translate tag="option" v-for="index in 10" :value="index.toString()" say="Line {line}" :variables="{line:index}" :key="index"/>
                         </select>
                         <div class="csv-mapping">
-                            <div v-for="value in csvSampleData" class="csv-mapping-data" :key="value">{{ value }}</div>
-                            <div v-for="id in csvSampleData.length" class="csv-mapping-field" :key="id">
+                            <div v-for="value in csvSampleData" class="csv-mapping-field" :key="value">
+                                <div class="value">{{ value }}</div>
                                 <select @change="csvFieldMapping($event, id)" :disabled="importing">
                                     <translate tag="option" value="null" say="Ignore"/>
                                     <translate tag="option" v-for="(label, option) in csvFieldOptions(id)" :value="option" :say="label" :key="option"/>
@@ -478,6 +478,13 @@
                 line-height : 32px;
                 font-size   : 1.2em;
                 color       : $color-black-light;
+            }
+        }
+
+        @media all and (max-width : $width-extra-small) {
+            .csv-mapping-field .value {
+                padding: 1em 0 .25em;
+                font-weight: bold;
             }
         }
     }

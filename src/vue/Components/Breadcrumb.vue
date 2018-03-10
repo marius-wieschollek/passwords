@@ -192,7 +192,7 @@
             100% { overflow : visible; }
         }
 
-        @media(max-width : $mobile-width) {
+        @media(max-width : $tablet-width) {
             padding-left : 0 !important;
             overflow-x   : auto;
 

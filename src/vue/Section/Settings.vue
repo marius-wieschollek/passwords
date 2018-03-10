@@ -241,9 +241,37 @@
             }
         }
 
-        @media all and (max-width : $mobile-width) {
+        @media all and (max-width : $width-extra-large) {
+            padding      : 10px 0 0 10px;
+
+            section {
+                width     : 33%;
+                max-width : 33%;
+                padding   : 0 2em 4em 0;
+            }
+        }
+
+        @media all and (max-width : $width-large) {
+            section {
+                width     : 50%;
+                max-width : 50%;
+                padding   : 0 2em 4em 0;
+            }
+        }
+
+        @media all and (max-width : $width-medium) {
+            padding      : 44px 0 0 10px;
+            #controls {
+                display  : flex;
+                position : fixed;
+                width    : 100%;
+                margin   : 0 -10px;
+            }
+        }
+
+        @media all and (max-width : $width-medium) {
             margin-right : 0;
-            padding-top  : 44px;
+            padding      : 44px 0 0 10px;
 
             #controls {
                 display  : flex;
@@ -253,8 +281,8 @@
             }
 
             section {
-                width     : 350px;
-                max-width : 350px;
+                width     : 100%;
+                max-width : 100%;
                 padding   : 0 0 4em 0;
             }
         }

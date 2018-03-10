@@ -34,7 +34,7 @@
                 options   : {
                     export: ['Backup or export', 'download'], import: ['Restore or import', 'upload']
                 }
-            }
+            };
         },
 
         created() {
@@ -49,7 +49,7 @@
                     this.breadcrumb = [
                         {path: {name: 'Backup'}, label: Utility.translate('Backup and Restore')},
                         {path: this.$route.path, label: Utility.translate(data[0])}
-                    ]
+                    ];
                 } else {
                     this.breadcrumb = [{path: {name: 'Backup'}, label: Utility.translate('Backup and Restore')}];
                 }
@@ -61,7 +61,7 @@
                 this.updateRoute();
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
@@ -134,6 +134,10 @@
                 select {
                     width : 100%;
                 }
+            }
+
+            @media all and (max-width : $width-extra-small) {
+                display : block;
             }
         }
     }

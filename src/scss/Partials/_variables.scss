@@ -14,6 +14,13 @@ $color-grey-light : #dbdbdb;
 $color-grey-lighter : #eee;
 $color-white : #fff;
 
-$mobile-width : 360px;
-$tablet-width : 768px;
-$desktop-width : 1024px;
+$width-extra-small : 480px;
+$width-small : 768px;
+$width-medium : 1024px;
+$width-large : 1366px;
+$width-extra-large : 1680px;
+
+/** @deprecated **/
+$mobile-width : $width-extra-small;
+$tablet-width : $width-small;
+$desktop-width : $width-large;

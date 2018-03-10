@@ -3,6 +3,7 @@
 * Added email alerts for bad passwords
 * Added tags in the main view
 * Improved password generator
+* Improved mobile style
 
 #### 2018.3.1 - Bugfix Release
 * Fixed folder view in trash
