@@ -1,0 +1,17 @@
+[data-constant] {
+    display    : none;
+    visibility : hidden;
+}
+
+.oc-dialog-dim {
+    z-index: 1000;
+}
+
+form.searchbox {
+    transition: opacity .15s ease-in-out;
+}
+
+select,
+input[type=button] {
+    transition: border-color .1s ease-in-out
+}

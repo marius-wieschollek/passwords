@@ -67,7 +67,7 @@
             return {
                 serverVersion: serverVersion,
                 showMore     : false
-            }
+            };
         },
 
         methods: {
@@ -82,23 +82,10 @@
                 Utility.openLink('https://git.mdns.eu/nextcloud/passwords/wikis/home#users');
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
-    [data-constant] {
-        display    : none;
-        visibility : hidden;
-    }
-
-    .oc-dialog-dim {
-        z-index: 1000;
-    }
-
-    form.searchbox {
-        transition: opacity .25s ease-in-out;
-    }
-
     #app-navigation {
         li {
             line-height   : 44px;
@@ -107,6 +94,7 @@
             text-overflow : ellipsis;
             color         : $color-grey-darker;
             cursor        : pointer;
+            transition    : box-shadow .1s ease-in-out, color .1s ease-in-out;
 
             &:hover,
             &:active,
