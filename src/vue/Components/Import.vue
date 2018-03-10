@@ -22,8 +22,38 @@
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select File"/>
             <div class="step-content">
+                <translate tag="div"
+                           class="file warning"
+                           :variables="{expected: mime, actual: fileMime}"
+                           say="The file has the type &quot;{actual}&quot; but &quot;{expected}&quot; is expected. You might have chosen the wrong file or importer."
+                           v-if="fileMime.length !== 0 && fileMime !== mime"/>
+
+                <div v-if="source === 'csv'">
+                    <translate tag="h3" say="CSV Options"/>
+                    <translate tag="label" for="passwords-import-csv-delimiter" say="Field delimiter"/>
+                    <select id="passwords-import-csv-delimiter" v-model="csv.delimiter" :disabled="importing">
+                        <translate tag="option" value="auto" say="Detect"/>
+                        <translate tag="option" value="," say="Comma"/>
+                        <translate tag="option" value=";" say="Semicolon"/>
+                        <translate tag="option" value=" " say="Space"/>
+                        <translate tag="option" value="	" say="Tab"/>
+                    </select>
+                    <br>
+                    <translate tag="label" for="passwords-import-csv-quote" say="Quote Character"/>
+                    <select id="passwords-import-csv-quote" v-model="csv.quoteChar" :disabled="importing">
+                        <translate tag="option" value='"' say="Quote"/>
+                        <translate tag="option" value="'" say="Single Quote"/>
+                    </select>
+                    <br>
+                    <translate tag="label" for="passwords-import-csv-escape" say="Escape Character" v-if="nightly"/>
+                    <select id="passwords-import-csv-escape" v-model="csv.escapeChar" :disabled="importing" v-if="nightly">
+                        <translate tag="option" value='"' say="Quote"/>
+                        <translate tag="option" value="'" say="Single Quote"/>
+                        <translate tag="option" value="\" say="Backslash"/>
+                    </select>
+                    <br><br>
+                </div>
                 <input type="file" :accept="mime" @change="processFile($event)" id="passwords-import-file" :disabled="importing">
-                <translate tag="div" class="file warning" :variables="{expected: mime, actual: fileMime}" say="The file has the type &quot;{actual}&quot; but &quot;{expected}&quot; is expected. You might have chosen the wrong file or importer." v-if="fileMime.length !== 0 && fileMime !== mime"/>
             </div>
         </div>
 
@@ -44,23 +74,13 @@
                     </div>
                     <br>
                     <div v-if="source === 'csv'">
-                        <translate tag="h3" say="CSV Options"/>
+                        <translate tag="h3" say="Import Options"/>
                         <translate tag="label" for="passwords-import-csv-db" say="Database"/>
                         <select id="passwords-import-csv-db" v-model="options.db" :disabled="importing">
                             <translate tag="option" value="passwords" say="Passwords"/>
                             <translate tag="option" value="folders" say="Folders"/>
                             <translate tag="option" value="tags" say="Tags"/>
                         </select>
-                        <br>
-                        <translate tag="label" for="passwords-import-csv-delimiter" say="Field delimiter"/>
-                        <select id="passwords-import-csv-delimiter" v-model="options.delimiter" :disabled="importing">
-                            <translate tag="option" value="auto" say="Detect"/>
-                            <translate tag="option" value="," say="Comma"/>
-                            <translate tag="option" value=";" say="Semicolon"/>
-                            <translate tag="option" value=" " say="Space"/>
-                            <translate tag="option" value="	" say="Tab"/>
-                        </select>
-
                         <br>
                         <br>
                         <input type="checkbox" id="passwords-import-csv-skip" v-model="options.firstLine" :disabled="importing"/>
@@ -123,22 +143,23 @@
 
         data() {
             return {
-                source       : 'json',
-                type         : 'json',
-                mime         : 'application/json',
-                fieldMap     : {
+                source     : 'json',
+                type       : 'json',
+                mime       : 'application/json',
+                fieldMap   : {
                     passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
                     folders  : ['label', 'edited', 'favourite', 'parentLabel', 'parentId', 'id', 'revision'],
                     tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
                 },
-                file         : null,
-                fileMime     : '',
-                csvFile      : null,
-                csvEscapeChar: '"',
-                options      : {mode: 0, skipShared: true},
-                step         : 2,
-                previewLine  : 1,
-                importing    : false,
+                file       : null,
+                fileMime   : '',
+                csvFile    : null,
+                csvReady   : false,
+                csv        : {delimiter: 'auto', quoteChar: '"', escapeChar: '"'},
+                options    : {mode: 0, skipShared: true},
+                step       : 2,
+                previewLine: 1,
+                importing  : false,
 
                 progress: {
                     style    : '',
@@ -214,34 +235,34 @@
                 }
             },
             async readCsv(file) {
+                this.csvReady = false;
                 this.csvFile = file;
+                this.file = file;
+                this.step = 2;
 
                 try {
                     let Papa      = await import(/* webpackChunkName: "PapaParse" */ 'papaparse'),
-                        delimiter = this.options.delimiter;
+                        delimiter = this.csv.delimiter;
                     Papa.parse(file, {
                         delimiter     : delimiter === 'auto' ? '':delimiter,
-                        escapeChar    : this.csvEscapeChar,
+                        quoteChar     : this.csv.quoteChar,
+                        escapeChar    : this.csv.escapeChar,
                         skipEmptyLines: true,
                         complete      : (result) => {
                             if(result.errors.length === 0) {
                                 this.file = result.data;
+                                this.csvReady = true;
                             } else {
                                 let error = result.errors[0];
                                 console.log(result.errors);
-                                this.resetFile(['{error} in line {line} column {column}', {error: error.message, line: error.row + 1, column: error.index}]);
+                                let message = Utility.translate(error.message);
+                                Messages.alert(['\"{error}\" in line {line}', {error: message, line: error.row + 1}], 'Import error');
                             }
                         }
                     });
                 } catch(e) {
                     Messages.alert(['Unable to load {module}', {module: 'PapaParse'}], 'Network error');
                 }
-            },
-            resetFile(error) {
-                this.file = null;
-                this.csvFile = null;
-                document.getElementById('passwords-import-file').value = null;
-                Messages.alert(error, 'Import error');
             },
             registerProgress(processed, total, status) {
                 this.progress.processed = processed;
@@ -281,9 +302,11 @@
                         (this.options.db === 'folders' && this.options.mapping.indexOf('label') !== -1) ||
                         (this.options.db === 'tags' && this.options.mapping.indexOf('label') !== -1 && this.options.mapping.indexOf('color') !== -1)
                     ) {
-                        this.step = 4;
-                    } else {
+                        this.step = this.csvReady ? 4:2;
+                    } else if(this.csvReady) {
                         this.step = 3;
+                    } else {
+                        this.step = 2;
                     }
                 } else if(this.source === 'json') {
                     this.preventPasswordFill();
@@ -298,7 +321,6 @@
             source(value) {
                 let oldMime = this.mime;
                 this.progress.status = null;
-                this.csvEscapeChar = '"';
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
@@ -317,7 +339,7 @@
                         break;
                     case 'keepass':
                         this.options.profile = 'keepass';
-                        this.csvEscapeChar = '\\';
+                        this.csv.escapeChar = '\\';
                         this.options.mode = 1;
                         break;
                     case 'lastpass':
@@ -343,6 +365,8 @@
 
                 if(oldMime !== this.mime && this.file) {
                     document.getElementById('passwords-import-file').value = null;
+                    this.fileMime = '';
+                    this.csvFile = null;
                     this.file = null;
                 }
                 this.validateStep();
@@ -356,13 +380,16 @@
                 },
                 deep: true
             },
+            csv    : {
+                handler() {
+                    if(this.csvFile) this.readCsv(this.csvFile);
+                },
+                deep: true
+            },
             'options.db'() {
                 document.querySelectorAll('.csv-mapping-field select').forEach((e) => { e.value = null;});
                 if(this.source === 'csv') this.options.mapping = [];
                 this.validateStep();
-            },
-            'options.delimiter'() {
-                if(this.csvFile) this.readCsv(this.csvFile);
             }
         }
     };
@@ -370,16 +397,13 @@
 
 <style lang="scss">
     .import-container {
-        .step-2 {
-            .step-content {
-                .file.warning {
-                    margin: 3px 0 !important;
-                }
-            }
-        }
-
+        .step-2,
         .step-3 {
             .step-content {
+                .file.warning {
+                    margin : 3px 0 !important;
+                }
+
                 label {
                     margin-right : 5px;
                 }
