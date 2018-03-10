@@ -1,6 +1,7 @@
 <template>
     <div id="app-content">
         <div class="app-content-left settings">
+            <breadcrumb :show-add-new="false"/>
             <section class="security">
                 <translate tag="h1" say="Security"/>
                 <translate tag="h3" say="Password Generator"/>
@@ -26,7 +27,7 @@
                 <translate tag="h1" say="User Interface"/>
 
                 <translate tag="h3" say="General"/>
-                <translate tag="label" for="setting-section-default" say="Default section"/>
+                <translate tag="label" for="setting-section-default" say="Initial section"/>
                 <select id="setting-section-default" v-model="settings['client.ui.section.default']">
                     <translate tag="option" value="all" say="All Passwords"/>
                     <translate tag="option" value="favourites" say="Favourites"/>
@@ -34,7 +35,7 @@
                     <translate tag="option" value="tags" say="Tags"/>
                     <translate tag="option" value="recent" say="Recent"/>
                 </select>
-                <settings-help text="The default section to be opened at startup"/>
+                <settings-help text="The initial section to be shown when the app is opened"/>
 
                 <translate tag="h3" say="Passwords List View"/>
                 <translate tag="label" for="setting-password-title" say="Set title from"/>
@@ -62,7 +63,7 @@
                 <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                 <settings-help text="Shows the tags for a password in the main view. Might be slower."/>
             </section>
-            <section class="ui">
+            <section class="notifications" v-if="nightly">
                 <translate tag="h1" say="Notifications"/>
 
                 <translate tag="h3" say="Send Emails for"/>
@@ -94,6 +95,17 @@
                 <input type="button" id="setting-test-encryption" value="Run" @click="runTests($event)">
                 <span></span>
             </section>
+            <section class="danger" v-if="nightly">
+                <translate tag="h1" say="Danger Zone"/>
+
+                <translate tag="label" for="danger-reset" say="Reset settings to defaults"/>
+                <input type="button" id="danger-reset" value="Reset" @click="resetSettings">
+                <settings-help text="Reset all settings to their defaults"/>
+
+                <translate tag="label" for="danger-purge" say="Delete everything and start over"/>
+                <input type="button" id="danger-purge" value="Delete" @click="deleteEverything">
+                <settings-help text="Start over and delete everything in the passwords app"/>
+            </section>
         </div>
     </div>
 </template>
@@ -104,9 +116,11 @@
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
     import SettingsHelp from "@/vue/Components/SettingsHelp";
+    import Breadcrumb from "@/vue/Components/Breadcrumb";
 
     export default {
         components: {
+            Breadcrumb,
             SettingsHelp,
             Translate
         },
@@ -130,6 +144,23 @@
                 let result = await EncryptionTestHelper.runTests();
                 if(result) Messages.info('The client side encryption test completed successfully on this browser', 'Test successful');
                 $event.target.removeAttribute('disabled');
+            },
+            async resetSettings() {
+                let choice = await Messages.confirm('This will reset all settings to their defaults. Do you want to continue?', 'Reset Settings');
+            },
+            async deleteEverything() {
+                try {
+                    let form = await Messages.form({password: {type: 'password'}},
+                                                   'DELETE EVERYTHING',
+                                                   'Do you want to delete all your passwords, folders and tags?\nIt will not be possible to undo this.');
+                    if(form.password) {
+                        window.localStorage.removeItem('passwords.settings');
+                        window.localStorage.removeItem('pwFolderIcon');
+                        location.href = location.href.replace(location.hash, '');
+                    }
+                } catch(e) {
+
+                }
             }
         },
         watch     : {
@@ -147,7 +178,12 @@
 
 <style lang="scss">
     .app-content-left.settings {
-        padding : 10px;
+        padding      : 10px;
+        margin-right : -2em;
+
+        #controls {
+            display : none;
+        }
 
         h1 {
             font-size   : 2.25em;
@@ -162,9 +198,10 @@
         section {
             display               : grid;
             grid-template-columns : 3fr 2fr 30px;
-            max-width             : 400px;
+            width                 : 420px;
+            max-width             : 25%;
             float                 : left;
-            margin                : 0 2em 2em 0;
+            padding               : 0 2em 4em 0;
 
             h1,
             h3 {
@@ -190,8 +227,35 @@
                 }
             }
 
-            @media all and (max-width : $mobile-width) {
-                margin : 0 0 2em 0;
+            &.danger {
+
+                input[type=button] {
+                    transition : color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
+
+                    &:hover {
+                        background-color : $color-red;
+                        border-color     : $color-red;
+                        color            : $color-white;
+                    }
+                }
+            }
+        }
+
+        @media all and (max-width : $mobile-width) {
+            margin-right : 0;
+            padding-top  : 44px;
+
+            #controls {
+                display  : flex;
+                position : fixed;
+                width    : 100%;
+                margin   : 0 -10px;
+            }
+
+            section {
+                width     : 350px;
+                max-width : 350px;
+                padding   : 0 0 4em 0;
             }
         }
     }

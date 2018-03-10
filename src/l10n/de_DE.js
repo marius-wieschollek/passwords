@@ -177,7 +177,7 @@
         "Semicolon"                           : "Semikolon",
         "Space"                               : "Leerzeichen",
         "Tab"                                 : "Tabulator",
-        "\"{error}\" in line {line}"              : "\"{error}\" in Zeile {line}",
+        "\"{error}\" in line {line}"          : "\"{error}\" in Zeile {line}",
         "Skip first line"                     : "Kopfzeile überspringen",
         "Interpolate missing fields"          : "Fehlende Felder interpolieren",
         "Don't edit passwords shared with me" : "Keine Passwörter ändern die mit mir geteilt wurden",
@@ -260,7 +260,7 @@
     };
 
     let longTexts = {
-        "The file has the type \"{actual}\" but \"{expected}\" is expected. You might have chosen the wrong file or importer.":"Die Datei ist vom Type \"{actual}\" aber \"{expected}\" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt."
+        "The file has the type \"{actual}\" but \"{expected}\" is expected. You might have chosen the wrong file or importer.": "Die Datei ist vom Type \"{actual}\" aber \"{expected}\" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt."
     };
 
     OC.L10N.register(

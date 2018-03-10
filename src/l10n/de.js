@@ -177,7 +177,7 @@
         "Semicolon"                           : "Semikolon",
         "Space"                               : "Leerzeichen",
         "Tab"                                 : "Tabulator",
-        "\"{error}\" in line {line}"              : "\"{error}\" in Zeile {line}",
+        "\"{error}\" in line {line}"          : "\"{error}\" in Zeile {line}",
         "Skip first line"                     : "Kopfzeile überspringen",
         "Interpolate missing fields"          : "Fehlende Felder interpolieren",
         "Don't edit passwords shared with me" : "Keine Passwörter ändern die mit mir geteilt wurden",
@@ -223,6 +223,8 @@
         "Include numbers"                     : "Nummern verwenden",
         "Include special characters"          : "Sonderzeichen verwenden",
         "User Interface"                      : "Benutzeroberfläche",
+        "Initial section"                     : "Initialer Bereich",
+        "All Passwords"                       : "Alle Passwörter",
         "Passwords List View"                 : "Passwörter in der Listenansicht",
         "Set title from"                      : "Dieses Feld als Titel verwenden",
         "Sort by"                             : "Sortiere nach",
@@ -256,6 +258,7 @@
         "Show the selected property as title in the list view"                     : "Zeigt das ausgewählte Attribut in der Listenansicht als Titel an",
         "Sorts passwords by the selected property when sorting by name is selected": "Sortiert Passwörter nach dem angegebenen Attribut anstatt nach dem Namen",
         "Shows options to copy the password and user name in the menu"             : "Zeigt die Optionen zum Kopieren von Password und Benutzername im Menü",
+        "The initial section to be shown when the app is opened"                   : "Der Bereich der angezeigt wird wenn die App geöffnet wird",
         "Trailing quote on quoted field is malformed"                              : "Das Feldzeichen ist falsch maskiert"
     };
 
