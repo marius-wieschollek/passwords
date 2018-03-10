@@ -41,16 +41,12 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
     function initApp() {
         let section = SettingsManager.get('client.ui.section.default');
 
-        if(section === 'all') {
-            router.addRoutes([{name: "All", path: '*', components: {main: SectionAll}}]);
-        } else {
-            router.addRoutes(
-                [
-                    { name: "All", path: '/all', components: {main: SectionAll} },
-                    { path: '*', redirect: { name: section.capitalize()}}
-                ]
-            );
-        }
+        router.addRoutes(
+            [
+                {name: "All", path: section === 'all' ? '/':'/all', param: [], components: {main: SectionAll}},
+                {path: '*', redirect: {name: section.capitalize()}}
+            ]
+        );
 
         new Vue(App);
     }
