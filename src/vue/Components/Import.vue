@@ -23,6 +23,7 @@
             <translate tag="h1" say="Select File"/>
             <div class="step-content">
                 <input type="file" :accept="mime" @change="processFile($event)" id="passwords-import-file" :disabled="importing">
+                <translate tag="div" class="file warning" :variables="{expected: mime, actual: fileMime}" say="The file has the type &quot;{actual}&quot; but &quot;{expected}&quot; is expected. You might have chosen the wrong file or importer." v-if="fileMime.length !== 0 && fileMime !== mime"/>
             </div>
         </div>
 
@@ -122,21 +123,22 @@
 
         data() {
             return {
-                source     : 'json',
-                type       : 'json',
-                mime       : 'application/json',
-                fieldMap   : {
+                source       : 'json',
+                type         : 'json',
+                mime         : 'application/json',
+                fieldMap     : {
                     passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
                     folders  : ['label', 'edited', 'favourite', 'parentLabel', 'parentId', 'id', 'revision'],
                     tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
                 },
-                file       : null,
-                csvFile    : null,
-                csvEscapeChar    : '"',
-                options    : {mode: 0, skipShared: true},
-                step       : 2,
-                previewLine: 1,
-                importing  : false,
+                file         : null,
+                fileMime     : '',
+                csvFile      : null,
+                csvEscapeChar: '"',
+                options      : {mode: 0, skipShared: true},
+                step         : 2,
+                previewLine  : 1,
+                importing    : false,
 
                 progress: {
                     style    : '',
@@ -144,7 +146,7 @@
                     total    : 0,
                     status   : null
                 },
-                nightly: process.env.NIGHTLY_FEATURES
+                nightly : process.env.NIGHTLY_FEATURES
             };
         },
 
@@ -201,17 +203,14 @@
             },
             processFile(event) {
                 let file = event.target.files[0];
-                if(this.mime === file.type || file.type.length === 0 || !file.type ) {
-                    if(this.mime === 'text/csv') {
-                        this.readCsv(file);
-                    } else {
-                        let reader = new FileReader();
-                        reader.onload = (e) => { this.file = e.target.result; };
-                        reader.readAsText(file);
-                    }
+                this.fileMime = file.type;
+
+                if(this.mime === 'text/csv') {
+                    this.readCsv(file);
                 } else {
-                    console.log(file);
-                    this.resetFile(['Invalid file type "{type}"', {type: file.type}]);
+                    let reader = new FileReader();
+                    reader.onload = (e) => { this.file = e.target.result; };
+                    reader.readAsText(file);
                 }
             },
             async readCsv(file) {
@@ -222,7 +221,7 @@
                         delimiter = this.options.delimiter;
                     Papa.parse(file, {
                         delimiter     : delimiter === 'auto' ? '':delimiter,
-                        escapeChar: this.csvEscapeChar,
+                        escapeChar    : this.csvEscapeChar,
                         skipEmptyLines: true,
                         complete      : (result) => {
                             if(result.errors.length === 0) {
@@ -371,6 +370,14 @@
 
 <style lang="scss">
     .import-container {
+        .step-2 {
+            .step-content {
+                .file.warning {
+                    margin: 3px 0 !important;
+                }
+            }
+        }
+
         .step-3 {
             .step-content {
                 label {

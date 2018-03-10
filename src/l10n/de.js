@@ -248,12 +248,18 @@
         "A higher strength results in longer, more complex passwords"              : "Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter",
         "Show the selected property as title in the list view"                     : "Zeigt das ausgewählte Attribut in der Listenansicht als Titel an",
         "Sorts passwords by the selected property when sorting by name is selected": "Sortiert Passwörter nach dem angegebenen Attribut anstatt nach dem Namen",
-        "Shows options to copy the password and user name in the menu"             : "Zeigt die Optionen zum Kopieren von Password und Benutzername im Menü"
+        "Shows options to copy the password and user name in the menu"             : "Zeigt die Optionen zum Kopieren von Password und Benutzername im Menü",
     };
+
+    let longTexts = {
+        "The file has the type \"{actual}\" but \"{expected}\" is expected. You might have chosen the wrong file or importer.":"Die Datei ist vom Type \"{actual}\" aber \"{expected}\" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt."
+    };
+
+    console.log(Object.assign(translations, helpTexts, longTexts));
 
     OC.L10N.register(
         "passwords",
-        Object.assign(translations, helpTexts),
+        Object.assign(translations, helpTexts, longTexts),
         'nplurals=2; plural=(n != 1);'
     );
 })();

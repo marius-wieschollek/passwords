@@ -268,7 +268,7 @@
         .step-2 {
             .step-content {
 
-                .office {
+                .office.warning {
                     margin  : 5px !important;
                     display : block;
                 }

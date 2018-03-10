@@ -1,8 +1,13 @@
 #### 2018.4.0 - Feature Release
-- Added in page search
-- Added email alerts for bad passwords
-- Added tags in the main view
-- Improved password generator
+* Added in page search
+* Added email alerts for bad passwords
+* Added tags in the main view
+* Improved password generator
+
+#### 2018.3.1 - Bugfix Release
+* Fixed folder view in trash
+* Fixed mime type detection
+* Fixed double call when opening folders
 
 #### 2018.3.0 - Feature Release
 * Added user settings
