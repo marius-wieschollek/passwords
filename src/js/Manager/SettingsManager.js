@@ -7,14 +7,16 @@ import Utility from "@/js/Classes/Utility";
 class SettingsManager {
 
     constructor() {
-        this._settings = {
+        this._defaults = {
             'local.ui.sort.ascending'         : true,
             'local.ui.sort.field'             : 'label',
             'client.ui.section.default'       : 'all',
             'client.ui.password.field.title'  : 'label',
             'client.ui.password.field.sorting': 'byTitle',
-            'client.ui.password.menu.copy'    : false
+            'client.ui.password.menu.copy'    : false,
+            'client.ui.list.tags.show'        : false
         };
+        this._settings = Utility.cloneObject(this._defaults);
     }
 
     /**
@@ -37,6 +39,23 @@ class SettingsManager {
         if(this._settings.hasOwnProperty(setting)) return this._settings[setting];
         if(standard !== undefined) return standard;
         return null;
+    }
+
+    /**
+     *
+     * @param setting
+     * @returns {Promise<*>}
+     */
+    async reset(setting) {
+        if(setting.substr(0, 6) === 'local.') {
+            this._settings[setting] = this._resetLocalSetting(setting);
+        } else {
+            this._settings[setting] = await API.resetSetting(setting);
+            if(this._defaults.hasOwnProperty(setting)) {
+                this._settings[setting] = this._defaults[setting];
+            }
+        }
+        return this._settings[setting];
     }
 
     /**
@@ -86,6 +105,26 @@ class SettingsManager {
 
         settings[setting] = value;
         window.localStorage.setItem('passwords.settings', JSON.stringify(settings));
+    }
+
+    /**
+     *
+     * @param setting
+     * @private
+     */
+    _resetLocalSetting(setting) {
+        let settings = {};
+        if(window.localStorage.hasOwnProperty('passwords.settings')) {
+            settings = JSON.parse(window.localStorage.getItem('passwords.settings'));
+        }
+
+        if(settings.hasOwnProperty(setting)) {
+            delete settings[setting];
+            window.localStorage.setItem('passwords.settings', JSON.stringify(settings));
+            return this._defaults[setting];
+        }
+
+        return null;
     }
 
     /**

@@ -63,7 +63,7 @@
                 <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                 <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
             </section>
-            <section class="notifications" v-if="nightly">
+            <section class="notifications">
                 <translate tag="h1" say="Notifications"/>
 
                 <translate tag="h3" say="Send Emails for"/>
@@ -98,13 +98,13 @@
             <section class="danger" v-if="nightly">
                 <translate tag="h1" say="Danger Zone"/>
 
-                <translate tag="label" for="danger-reset" say="Reset settings to defaults"/>
-                <input type="button" id="danger-reset" value="Reset" @click="resetSettings">
-                <settings-help text="Reset all settings to their defaults"/>
+                <translate tag="label" for="danger-reset" say="Reset all settings"/>
+                <translate tag="input" type="button" id="danger-reset" value="Reset" @click="resetSettingsAction"/>
+                <settings-help text="Reset all settings on this page to their defaults"/>
 
-                <translate tag="label" for="danger-purge" say="Delete everything and start over"/>
-                <input type="button" id="danger-purge" value="Delete" @click="deleteEverything">
-                <settings-help text="Start over and delete everything in the passwords app"/>
+                <translate tag="label" for="danger-purge" say="Delete everything"/>
+                <translate tag="input" type="button" id="danger-purge" value="Delete" @click="deleteEverything"/>
+                <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
             </section>
         </div>
     </div>
@@ -113,10 +113,10 @@
 <script>
     import Messages from "@js/Classes/Messages";
     import Translate from "@vue/Components/Translate";
+    import Breadcrumb from "@/vue/Components/Breadcrumb";
+    import SettingsHelp from "@/vue/Components/SettingsHelp";
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
-    import SettingsHelp from "@/vue/Components/SettingsHelp";
-    import Breadcrumb from "@/vue/Components/Breadcrumb";
 
     export default {
         components: {
@@ -127,11 +127,13 @@
         data() {
             return {
                 settings: SettingsManager.getAll(),
-                nightly : process.env.NIGHTLY_FEATURES
+                nightly : process.env.NIGHTLY_FEATURES,
+                noSave  : false
             };
         },
         methods   : {
             saveSettings() {
+                if(this.noSave) return;
                 for(let i in this.settings) {
                     if(!this.settings.hasOwnProperty(i)) continue;
                     let value = this.settings[i];
@@ -145,15 +147,26 @@
                 if(result) Messages.info('The client side encryption test completed successfully on this browser', 'Test successful');
                 $event.target.removeAttribute('disabled');
             },
+            resetSettingsAction() {
+                Messages.confirm('This will reset all settings to their defaults. Do you want to continue?', 'Reset all settings')
+                        .then(() => { this.resetSettings(); });
+            },
             async resetSettings() {
-                let choice = await Messages.confirm('This will reset all settings to their defaults. Do you want to continue?', 'Reset Settings');
+                this.noSave = true;
+                for(let i in this.settings) {
+                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsManager.reset(i);
+                }
+                this.noSave = false;
             },
             async deleteEverything() {
                 try {
-                    let form = await Messages.form({password: {type: 'password'}},
-                                                   'DELETE EVERYTHING',
-                                                   'Do you want to delete all your passwords, folders and tags?\nIt will not be possible to undo this.');
+                    let form = await Messages.form(
+                        {password: {type: 'password'}},
+                        'DELETE EVERYTHING',
+                        'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'
+                    );
                     if(form.password) {
+                        await this.resetSettings();
                         window.localStorage.removeItem('passwords.settings');
                         window.localStorage.removeItem('pwFolderIcon');
                         location.href = location.href.replace(location.hash, '');
@@ -166,9 +179,7 @@
         watch     : {
             settings: {
                 handler(value, oldValue) {
-                    if(value.hasOwnProperty('user.password.generator.strength') && oldValue.hasOwnProperty('user.password.generator.strength')) {
-                        this.saveSettings();
-                    }
+                    this.saveSettings();
                 },
                 deep: true
             }

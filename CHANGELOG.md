@@ -1,8 +1,7 @@
 #### 2018.4.0 - Feature Release
 * Added in page search
-* Added email alerts for bad passwords
+* Added email alerts and notifications
 * Added tags in the main view
-* Added notification settings
 * Added configurable default section
 * Added start over option
 * Improved password generator

@@ -237,6 +237,11 @@
         "Passwords shared with me"            : "Mit mir geteilte Passwörter",
         "Show Notifications for"              : "Sende Benachrichtigungen für",
         "Other errors"                        : "Andere Fehler",
+        "Danger Zone"                         : "Gefahrenzone",
+        "Reset all settings"                  : "Einstellungen Zurücksetzen",
+        "Reset"                               : "Zurücksetzen",
+        "Delete everything"                   : "Alles löschen",
+        "DELETE EVERYTHING"                   : "ALLES LÖSCHEN",
         "There is nothing here"               : "Hier ist nichts",
         "Click on \"+\" to add something"     : "Drücke auf das \"+\"-Symbol, um etwas hinzuzufügen",
         "Deleted items will appear here"      : "Gelöschte Objekte werden hier erscheinen",
@@ -272,11 +277,15 @@
         "Notifies you about compromised passwords and other security issues"       : "Benachrichtigt dich bei kompromittierten Passwörtern und anderen Sicherheitsproblemen",
         "Notifies you when other people share passwords with you"                  : "Benachrichtigt dich, wenn andere Passwörter mit dir teilen",
         "Notifies you when a background operation fails"                           : "Benachrichtigt dich, wenn Hintergrundaufgaben fehlschlagen",
+        "Reset all settings on this page to their defaults"                        : "Alle Einstellungen auf dieser Seite zurücksetzen",
+        "This will reset all settings to their defaults. Do you want to continue?" : "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchtest du fortfahren?",
+        "Start over and delete all configuration, passwords, folders and tags"     : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen",
         "Trailing quote on quoted field is malformed"                              : "Das Feldzeichen ist falsch maskiert"
     };
 
     let longTexts = {
-        "The file has the type \"{actual}\" but \"{expected}\" is expected. You might have chosen the wrong file or importer.": "Die Datei ist vom Type \"{actual}\" aber \"{expected}\" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt."
+        "The file has the type \"{actual}\" but \"{expected}\" is expected. You might have chosen the wrong file or importer.": "Die Datei ist vom Type \"{actual}\" aber \"{expected}\" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.",
+        "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this."        : "Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen."
     };
 
     OC.L10N.register(
