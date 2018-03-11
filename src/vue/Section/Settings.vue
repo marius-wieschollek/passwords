@@ -61,7 +61,7 @@
 
                 <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
                 <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
-                <settings-help text="Shows the tags for a password in the main view. Might be slower."/>
+                <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
             </section>
             <section class="notifications" v-if="nightly">
                 <translate tag="h1" say="Notifications"/>
@@ -78,22 +78,22 @@
                 <translate tag="h3" say="Show Notifications for"/>
                 <translate tag="label" for="setting-notification-security" say="Security issues"/>
                 <input type="checkbox" id="setting-notification-security" v-model="settings['user.notification.security']">
-                <settings-help text="Notifies you when your passwords are compromised or other security issues appear"/>
+                <settings-help text="Notifies you about compromised passwords and other security issues"/>
 
                 <translate tag="label" for="setting-notification-sharing" say="Passwords shared with me"/>
                 <input type="checkbox" id="setting-notification-sharing" v-model="settings['user.notification.shares']">
                 <settings-help text="Notifies you when other people share passwords with you"/>
 
-                <translate tag="label" for="setting-notification-errors" say="Errors happening"/>
+                <translate tag="label" for="setting-notification-errors" say="Other errors"/>
                 <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.errors']">
-                <settings-help text="Notifies you, when a background operation failed"/>
+                <settings-help text="Notifies you when a background operation fails"/>
             </section>
             <section class="tests" v-if="nightly">
                 <translate tag="h1" say="Field tests"/>
 
                 <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
-                <input type="button" id="setting-test-encryption" value="Run" @click="runTests($event)">
-                <span></span>
+                <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
+                <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
             </section>
             <section class="danger" v-if="nightly">
                 <translate tag="h1" say="Danger Zone"/>
@@ -242,7 +242,7 @@
         }
 
         @media all and (max-width : $width-extra-large) {
-            padding      : 10px 0 0 10px;
+            padding : 10px 0 0 10px;
 
             section {
                 width     : 33%;
@@ -260,7 +260,7 @@
         }
 
         @media all and (max-width : $width-medium) {
-            padding      : 44px 0 0 10px;
+            padding : 44px 0 0 10px;
             #controls {
                 display  : flex;
                 position : fixed;

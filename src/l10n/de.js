@@ -230,6 +230,13 @@
         "Sort by"                             : "Sortiere nach",
         "Title field"                         : "Titel-Feld",
         "Add copy options in menu"            : "Zeige \"Kopieren\"-Einträge im Menü",
+        "Show tags in list view"              : "Zeige Tags in der Listenansicht",
+        "Notifications"                       : "Benachrichtigungen",
+        "Send Emails for"                     : "Sende E-Mails für",
+        "Security issues"                     : "Sicherheitsrelevante Ereignisse",
+        "Passwords shared with me"            : "Mit mir geteilte Passwörter",
+        "Show Notifications for"              : "Sende Benachrichtigungen für",
+        "Other errors"                        : "Andere Fehler",
         "There is nothing here"               : "Hier ist nichts",
         "Click on \"+\" to add something"     : "Drücke auf das \"+\"-Symbol, um etwas hinzuzufügen",
         "Deleted items will appear here"      : "Gelöschte Objekte werden hier erscheinen",
@@ -259,6 +266,12 @@
         "Sorts passwords by the selected property when sorting by name is selected": "Sortiert Passwörter nach dem angegebenen Attribut anstatt nach dem Namen",
         "Shows options to copy the password and user name in the menu"             : "Zeigt die Optionen zum Kopieren von Password und Benutzername im Menü",
         "The initial section to be shown when the app is opened"                   : "Der Bereich der angezeigt wird wenn die App geöffnet wird",
+        "Show the tags for each password in the list view. Increases loading times": "Zeigt die Tags für jedes Passwort in der Listenansicht. Erhöht die Ladezeit",
+        "Sends you e-mails about compromised passwords and other security issues"  : "Sendet dir E-Mails wenn Passwörter komprommitiert werden oder Sicherheitsprobleme auftreten",
+        "Sends you e-mails when other people share passwords with you"             : "Sendet dir E-Mails wenn andere Passwörter mit dir teilen",
+        "Notifies you about compromised passwords and other security issues"       : "Benachrichtigt dich bei kompromittierten Passwörtern und anderen Sicherheitsproblemen",
+        "Notifies you when other people share passwords with you"                  : "Benachrichtigt dich, wenn andere Passwörter mit dir teilen",
+        "Notifies you when a background operation fails"                           : "Benachrichtigt dich, wenn Hintergrundaufgaben fehlschlagen",
         "Trailing quote on quoted field is malformed"                              : "Das Feldzeichen ist falsch maskiert"
     };
 

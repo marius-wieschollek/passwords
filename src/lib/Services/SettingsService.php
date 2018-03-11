@@ -90,18 +90,19 @@ class SettingsService {
 
     /**
      * @param string $key
+     * @param string|null $userId
      *
      * @return mixed
      * @throws ApiException
      */
-    public function get(string $key) {
+    public function get(string $key, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);
 
         switch($scope) {
             case 'user':
-                return $this->getUserSetting($subKey);
+                return $this->getUserSetting($subKey, $userId);
             case 'client':
-                return $this->getClientSetting($subKey);
+                return $this->getClientSetting($subKey, $userId);
             case 'server':
                 return $this->getServerSetting($subKey);
             case 'theme':
@@ -194,17 +195,18 @@ class SettingsService {
 
     /**
      * @param string $key
+     * @param string|null $userId
      *
      * @return null|string
      * @throws ApiException
      */
-    protected function getUserSetting(string $key) {
+    protected function getUserSetting(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
 
         if(isset($this->userSettings[ $key ])) {
             $type    = $this->userSettings[ $key ];
             $default = $this->userDefaults[ $key ];
-            $value   = $this->config->getUserValue($key, $default);
+            $value   = $this->config->getUserValue($key, $default, $userId);
 
             return $this->castValue($type, $value);
         }
@@ -213,12 +215,13 @@ class SettingsService {
     }
 
     /**
-     * @param string $key
+     * @param string      $key
+     * @param string|null $userId
      *
      * @return null
      */
-    protected function getClientSetting(string $key) {
-        $data = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+    protected function getClientSetting(string $key, string $userId = null) {
+        $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
         if(isset($data[ $key ])) {
             return $data[ $key ];
         }

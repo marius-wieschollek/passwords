@@ -150,7 +150,7 @@ class PasswordHook {
 
         if($password->getShareId()) {
             $share = $this->shareService->findByTargetPassword($password->getUuid());
-            $this->shareService->delete($share);
+            if($share !== null) $this->shareService->delete($share);
         }
     }
 

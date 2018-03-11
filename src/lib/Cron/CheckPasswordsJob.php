@@ -8,15 +8,14 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Notification\Notifier;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
-use OCP\Notification\IManager;
+use OCA\Passwords\Services\NotificationService;
 
 /**
  * Class CheckPasswordsJob
@@ -46,9 +45,9 @@ class CheckPasswordsJob extends TimedJob {
     protected $revisionMapper;
 
     /**
-     * @var IManager
+     * @var NotificationService
      */
-    protected $notificationManager;
+    protected $notificationService;
 
     /**
      * @var array
@@ -61,24 +60,23 @@ class CheckPasswordsJob extends TimedJob {
      * @param LoggingService         $logger
      * @param MailService            $mailService
      * @param HelperService          $helperService
-     * @param IManager               $notificationManager
      * @param PasswordRevisionMapper $revisionMapper
+     * @param NotificationService    $notificationService
      */
     public function __construct(
         LoggingService $logger,
         MailService $mailService,
         HelperService $helperService,
-        IManager $notificationManager,
-        PasswordRevisionMapper $revisionMapper
+        PasswordRevisionMapper $revisionMapper,
+        NotificationService $notificationService
     ) {
         // Run once per day
-        //$this->setInterval(24 * 60 * 60);
-        $this->setInterval(1);
+        $this->setInterval(24 * 60 * 60);
         $this->logger              = $logger;
         $this->helperService       = $helperService;
         $this->revisionMapper      = $revisionMapper;
-        $this->notificationManager = $notificationManager;
         $this->mailService         = $mailService;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -117,8 +115,7 @@ class CheckPasswordsJob extends TimedJob {
             }
         }
 
-        $this->sendNotifications();
-        $this->sendEmails();
+        $this->notifyUsers();
         $this->logger->info(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter]);
     }
 
@@ -144,25 +141,14 @@ class CheckPasswordsJob extends TimedJob {
     /**
      *
      */
-    protected function sendNotifications(): void {
+    protected function notifyUsers(): void {
         foreach($this->badPasswords as $user => $count) {
-            $notification = $this->notificationManager->createNotification();
-
-            $notification->setApp(Application::APP_NAME)
-                         ->setUser($user)
-                         ->setObject('object', 'password')
-                         ->setSubject(Notifier::NOTIFICATION_PASSWORD_BAD, ['count' => $count])
-                         ->setDateTime(new \DateTime());
-            $this->notificationManager->notify($notification);
-        }
-    }
-
-    /**
-     *
-     */
-    protected function sendEmails(): void {
-        foreach($this->badPasswords as $user => $count) {
-            $this->mailService->sendBadPasswordMail($user, $count);
+            try {
+                $this->notificationService->sendBadPasswordNotification($user, $count);
+                $this->mailService->sendBadPasswordMail($user, $count);
+            } catch(ApiException $e) {
+                $this->logger->logException($e);
+            }
         }
     }
 }

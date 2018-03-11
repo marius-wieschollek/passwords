@@ -40,6 +40,11 @@ class MailService {
     protected $config;
 
     /**
+     * @var SettingsService
+     */
+    protected $settings;
+
+    /**
      * @var IUserManager
      */
     protected $userManager;
@@ -62,12 +67,13 @@ class MailService {
     /**
      * MailService constructor.
      *
-     * @param IMailer        $mailer
-     * @param IConfig        $config
-     * @param IFactory       $l10NFactory
-     * @param LoggingService $logger
-     * @param IUserManager   $userManager
-     * @param IURLGenerator  $urlGenerator
+     * @param IMailer         $mailer
+     * @param IConfig         $config
+     * @param IFactory        $l10NFactory
+     * @param LoggingService  $logger
+     * @param IUserManager    $userManager
+     * @param SettingsService $settings
+     * @param IURLGenerator   $urlGenerator
      */
     public function __construct(
         IMailer $mailer,
@@ -75,21 +81,26 @@ class MailService {
         IFactory $l10NFactory,
         LoggingService $logger,
         IUserManager $userManager,
+        SettingsService $settings,
         IURLGenerator $urlGenerator
     ) {
         $this->mailer       = $mailer;
         $this->logger       = $logger;
+        $this->config       = $config;
+        $this->settings     = $settings;
         $this->userManager  = $userManager;
         $this->l10NFactory  = $l10NFactory;
-        $this->config       = $config;
         $this->urlGenerator = $urlGenerator;
     }
 
     /**
      * @param string $userId
      * @param int    $passwords
+     *
+     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendBadPasswordMail(string $userId, int $passwords) {
+        if(!$this->settings->get('user.mail.security', $userId)) return;
         $user         = $this->userManager->get($userId);
         $lang         = $this->config->getUserValue($userId, 'core', 'lang');
         $localisation = $this->l10NFactory->get(Application::APP_NAME, $lang);
@@ -159,6 +170,7 @@ class MailService {
             $this->mailer->send($message);
         } catch(\Exception $e) {
             $this->logger->logException($e);
+
             return false;
         }
 

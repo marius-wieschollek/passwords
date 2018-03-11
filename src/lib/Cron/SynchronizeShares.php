@@ -8,27 +8,26 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
-use OCA\Passwords\Notification\Notifier;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\Notification\IManager;
 
 /**
  * Class SynchronizeShares
  *
  * @package OCA\Passwords\Cron
  *
- * @TODO  check for deleted users
+ * @TODO    check for deleted users
  */
 class SynchronizeShares extends TimedJob {
 
@@ -48,9 +47,9 @@ class SynchronizeShares extends TimedJob {
     protected $passwordService;
 
     /**
-     * @var IManager
+     * @var NotificationService
      */
-    protected $notificationManager;
+    protected $notificationService;
 
     /**
      * @var PasswordRevisionService
@@ -58,19 +57,24 @@ class SynchronizeShares extends TimedJob {
     protected $passwordRevisionService;
 
     /**
+     * @var array
+     */
+    protected $notifications = ['created' => [], 'deleted' => [], 'loop' => []];
+
+    /**
      * SynchronizeShares constructor.
      *
      * @param LoggingService          $logger
      * @param ShareService            $shareService
-     * @param IManager                $notificationManager
      * @param PasswordService         $passwordService
+     * @param NotificationService     $notificationService
      * @param PasswordRevisionService $passwordRevisionService
      */
     public function __construct(
         LoggingService $logger,
         ShareService $shareService,
-        IManager $notificationManager,
         PasswordService $passwordService,
+        NotificationService $notificationService,
         PasswordRevisionService $passwordRevisionService
     ) {
         // Run always
@@ -79,7 +83,7 @@ class SynchronizeShares extends TimedJob {
         $this->logger                  = $logger;
         $this->shareService            = $shareService;
         $this->passwordService         = $passwordService;
-        $this->notificationManager     = $notificationManager;
+        $this->notificationService     = $notificationService;
         $this->passwordRevisionService = $passwordRevisionService;
     }
 
@@ -94,6 +98,7 @@ class SynchronizeShares extends TimedJob {
         $this->createNewShares();
         $this->removeSharedAttribute();
         $this->updatePasswords();
+        $this->notifyUsers();
     }
 
     /**
@@ -148,16 +153,13 @@ class SynchronizeShares extends TimedJob {
         $shares = $this->shareService->findNew();
 
         foreach($shares as $share) {
-            if($this->shareLineageHasLoop($share)) {
-                $this->shareService->delete($share);
-
-                $this->sendLoopNotification($share);
-                continue;
-            }
+            if($this->shareLineageHasLoop($share)) continue;
+            $receiverId = $share->getReceiver();
+            $userId     = $share->getUserId();
 
             /** @var Password $model */
             $model = $this->passwordService->create();
-            $model->setUserId($share->getReceiver());
+            $model->setUserId($receiverId);
             $model->setShareId($share->getUuid());
             $model->setEditable($share->getEditable());
 
@@ -178,7 +180,7 @@ class SynchronizeShares extends TimedJob {
                 false,
                 false
             );
-            $revision->setUserId($share->getReceiver());
+            $revision->setUserId($receiverId);
 
             $this->passwordRevisionService->save($revision);
             $this->passwordService->setRevision($model, $revision);
@@ -186,6 +188,10 @@ class SynchronizeShares extends TimedJob {
             $share->setTargetPassword($model->getUuid());
             $share->setSourceUpdated(false);
             $this->shareService->save($share);
+
+            if(!isset($this->notifications['created'][ $receiverId ])) $this->notifications['created'][ $receiverId ] = [];
+            if(!isset($this->notifications['created'][ $receiverId ][ $userId ])) $this->notifications['created'][ $receiverId ][ $userId ] = 0;
+            $this->notifications['created'][ $receiverId ][ $userId ]++;
         }
 
         $this->logger->info(['Created %s new share(s)', count($shares)]);
@@ -196,6 +202,7 @@ class SynchronizeShares extends TimedJob {
      *
      * @return bool
      * @throws MultipleObjectsReturnedException
+     * @throws \Exception
      */
     protected function shareLineageHasLoop(Share $share): bool {
         $sourceUuid = $share->getSourcePassword();
@@ -206,7 +213,17 @@ class SynchronizeShares extends TimedJob {
             } catch(DoesNotExistException $e) {
                 return false;
             }
-            if($password->getUserId() === $share->getReceiver()) return true;
+            if($password->getUserId() === $share->getReceiver()) {
+                $this->shareService->delete($share);
+
+                $userId = $share->getUserId();
+                if(!isset($this->notifications['loop'][ $userId ])) {
+                    $this->notifications['loop'][ $userId ] = 0;
+                }
+                $this->notifications['loop'][ $userId ]++;
+
+                return true;
+            }
             if($password->getShareId() === null) return false;
 
             try {
@@ -366,15 +383,22 @@ class SynchronizeShares extends TimedJob {
     }
 
     /**
-     * @param $share
+     *
      */
-    protected function sendLoopNotification(Share $share): void {
-        $notification = $this->notificationManager->createNotification();
-        $notification->setApp(Application::APP_NAME)
-                     ->setUser($share->getUserId())
-                     ->setSubject(Notifier::NOTIFICATION_SHARE_LOOP)
-                     ->setObject('receiver', $share->getReceiver())
-                     ->setDateTime(new \DateTime());
-        $this->notificationManager->notify($notification);
+    protected function notifyUsers(): void {
+        foreach($this->notifications['created'] as $receiver => $owners) {
+            try {
+                $this->notificationService->sendShareCreateNotification($receiver, $owners);
+            } catch(ApiException $e) {
+                $this->logger->logException($e);
+            }
+        }
+        foreach($this->notifications['loop'] as $user => $amount) {
+            try {
+                $this->notificationService->sendShareLoopNotification($user, $amount);
+            } catch(ApiException $e) {
+                $this->logger->logException($e);
+            }
+        }
     }
 }

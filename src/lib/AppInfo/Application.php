@@ -30,7 +30,7 @@ use OCA\Passwords\Hooks\ShareHook;
 use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
-use OCA\Passwords\Notification\Notifier;
+use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
@@ -197,7 +197,7 @@ class Application extends App {
     protected function registerNotificationNotifier(): void {
         $this->getContainer()->getServer()->getNotificationManager()->registerNotifier(
             function () {
-                return $this->getContainer()->query(Notifier::class);
+                return $this->getContainer()->query(NotificationService::class);
             },
             function () {
                 $l = $this->getContainer()->query(IL10N::class);

@@ -108,6 +108,7 @@
                     if(!shares.hasOwnProperty(i)) continue;
                     let password = shares[i].password,
                         id       = password.id;
+                    if(password.trashed) continue;
                     if(!passwords.hasOwnProperty(id)) {
                         passwords[id] = password;
                         shareUsers[id] = [];
