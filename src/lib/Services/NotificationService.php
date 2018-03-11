@@ -26,6 +26,7 @@ class NotificationService implements INotifier {
     const NOTIFICATION_SHARE_LOOP   = 'share_loop';
     const NOTIFICATION_SHARE_CREATE = 'share_create';
     const NOTIFICATION_PASSWORD_BAD = 'bad_password';
+    const NOTIFICATION_TOKEN_ERROR  = 'token_error';
 
     /**
      * @var SettingsService
@@ -109,7 +110,7 @@ class NotificationService implements INotifier {
 
     /**
      * @param string $userId
-     * @param string $passwords
+     * @param int    $passwords
      *
      * @throws \OCA\Passwords\Exception\ApiException
      */
@@ -120,6 +121,21 @@ class NotificationService implements INotifier {
             = $this->createNotification($userId)
                    ->setSubject(NotificationService::NOTIFICATION_SHARE_LOOP, ['passwords' => $passwords])
                    ->setObject('share', 'loop');
+        $this->notificationManager->notify($notification);
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @throws \OCA\Passwords\Exception\ApiException
+     */
+    public function sendTokenErrorNotification(string $userId): void {
+        if(!$this->settings->get('user.notification.security', $userId)) return;
+
+        $notification
+            = $this->createNotification($userId)
+                   ->setSubject(NotificationService::NOTIFICATION_TOKEN_ERROR)
+                   ->setObject('token', 'error');
         $this->notificationManager->notify($notification);
     }
 
@@ -160,6 +176,8 @@ class NotificationService implements INotifier {
                 return $this->processShareCreateNotification($notification, $localisation);
             case self::NOTIFICATION_SHARE_LOOP:
                 return $this->processShareLoopNotification($notification, $localisation);
+            case self::NOTIFICATION_TOKEN_ERROR:
+                return $this->processTokenErrorNotification($notification, $localisation);
         }
 
         return $notification;
@@ -247,5 +265,20 @@ class NotificationService implements INotifier {
         return $notification->setParsedSubject($title)
                             ->setParsedMessage($message)
                             ->setLink($link);
+    }
+
+    /**
+     * @param INotification $notification
+     * @param IL10N         $localisation
+     *
+     * @return INotification
+     */
+    protected function processTokenErrorNotification(INotification $notification, IL10N $localisation): INotification {
+        $title   = $localisation->t('Passwords could not decrypt the API access token.')
+                   .' '.$localisation->t('A new token was created instead.');
+        $message = $localisation->t('This can indicate that the data stored on the server has been altered by someone.');
+
+        return $notification->setParsedSubject($title)
+                            ->setParsedMessage($message);
     }
 }

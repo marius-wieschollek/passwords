@@ -10,6 +10,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
@@ -80,6 +81,10 @@ class PageController extends Controller {
      * @var LoggingService
      */
     private $logger;
+    /**
+     * @var NotificationService
+     */
+    private $notificationService;
 
     /**
      * PageController constructor.
@@ -96,6 +101,7 @@ class PageController extends Controller {
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
      * @param SettingsService      $settingsService
+     * @param NotificationService  $notificationService
      */
     public function __construct(
         string $appName,
@@ -109,7 +115,8 @@ class PageController extends Controller {
         IUserManager $userManager,
         SimpleEncryption $encryption,
         ConfigurationService $config,
-        SettingsService $settingsService
+        SettingsService $settingsService,
+        NotificationService $notificationService
     ) {
         parent::__construct($appName, $request);
         $this->random          = $random;
@@ -122,6 +129,7 @@ class PageController extends Controller {
         $this->localisation    = $localisation;
         $this->tokenProvider   = $tokenProvider;
         $this->settingsService = $settingsService;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -179,6 +187,7 @@ class PageController extends Controller {
                     if($iToken->getId() == $tokenId) return $this->encryption->decrypt($token);
                 } catch(InvalidTokenException $e) {
                 } catch(\Throwable $e) {
+                    $this->notificationService->sendTokenErrorNotification($this->userId);
                     $this->logger
                         ->logException($e)
                         ->error('Failed to decrypt api token for '.$this->userId);
