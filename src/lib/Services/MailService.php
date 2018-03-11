@@ -7,9 +7,10 @@
 
 namespace OCA\Passwords\Services;
 
+use OC_Defaults;
 use OCA\Passwords\AppInfo\Application;
-use OCP\Defaults;
 use OCP\IConfig;
+use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\IUserManager;
@@ -63,12 +64,17 @@ class MailService {
      * @var array
      */
     protected $sender;
+    /**
+     * @var OC_Defaults
+     */
+    private $defaults;
 
     /**
      * MailService constructor.
      *
      * @param IMailer         $mailer
      * @param IConfig         $config
+     * @param OC_Defaults     $defaults
      * @param IFactory        $l10NFactory
      * @param LoggingService  $logger
      * @param IUserManager    $userManager
@@ -78,6 +84,7 @@ class MailService {
     public function __construct(
         IMailer $mailer,
         IConfig $config,
+        OC_Defaults $defaults,
         IFactory $l10NFactory,
         LoggingService $logger,
         IUserManager $userManager,
@@ -91,6 +98,7 @@ class MailService {
         $this->userManager  = $userManager;
         $this->l10NFactory  = $l10NFactory;
         $this->urlGenerator = $urlGenerator;
+        $this->defaults     = $defaults;
     }
 
     /**
@@ -102,8 +110,7 @@ class MailService {
     public function sendBadPasswordMail(string $userId, int $passwords) {
         if(!$this->settings->get('user.mail.security', $userId)) return;
         $user         = $this->userManager->get($userId);
-        $lang         = $this->config->getUserValue($userId, 'core', 'lang');
-        $localisation = $this->l10NFactory->get(Application::APP_NAME, $lang);
+        $localisation = $this->getLocalisation($userId);
 
         $subject = $localisation->n('You have an insecure password', 'You have insecure passwords', $passwords);
         $title   = $localisation->n('One of your passwords is no longer secure', 'Some of your passwords are no longer secure', $passwords);
@@ -139,6 +146,54 @@ class MailService {
         ];
 
         $this->sendMail($user, $subject, $title, implode(' ', $body), $button);
+    }
+
+    /**
+     * @param string $userId
+     * @param array  $owners
+     *
+     * @throws \OCA\Passwords\Exception\ApiException
+     */
+    public function sendShareCreateMail(string $userId, array $owners) {
+        if(!$this->settings->get('user.mail.shares', $userId)) return;
+        $user          = $this->userManager->get($userId);
+        $localisation  = $this->getLocalisation($userId);
+        $ownerCount    = count($owners);
+        $passwordCount = 0;
+
+        if($ownerCount === 1) {
+            $ownerId       = key($owners);
+            $owner         = $this->userManager->get($ownerId)->getDisplayName();
+            $passwordCount = $owners[ $ownerId ];
+
+            $body = $localisation->n('%s shared a password with you.', '%s shared %s passwords with you.', $passwordCount, [$owner, $passwordCount]);
+        } else {
+            $params = [];
+            foreach($owners as $ownerId => $amount) {
+                if(count($params) < 4) $params[] = $this->userManager->get($ownerId)->getDisplayName();
+                $passwordCount += $amount;
+            }
+            $params = array_reverse($params);
+            array_unshift($params, $passwordCount, $ownerCount - 2);
+
+            $text = ($ownerCount > 2 ? '%5$s, %4$s':'%4$s').' and '.($ownerCount > 3 ? '%2$s others':'%3$s').' shared %1$s passwords with you.';
+            $body = $localisation->t($text, $params);
+        }
+        $body .= ' '.$localisation->t('Open the passwords app to see '.($passwordCount === 1 ? 'it.':'them.'));
+
+        $button = [
+            'text' => $localisation->t('View passwords shared with me'),
+            'url'  => $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/0'
+        ];
+
+        $title = $localisation->n(
+            'A password was shared with you on %s',
+            'Several passwords were shared with you on %s',
+            $passwordCount,
+            [$this->defaults->getName()]
+        );
+
+        $this->sendMail($user, $title, $title, $body, $button);
     }
 
     /**
@@ -184,10 +239,21 @@ class MailService {
      */
     protected function getSenderData() {
         if(!$this->sender) {
-            $defaults     = new Defaults();
-            $this->sender = [Util::getDefaultEmailAddress('no-reply') => $defaults->getName()];
+            $this->sender = [Util::getDefaultEmailAddress('no-reply') => $this->defaults->getName()];
         }
 
         return $this->sender;
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return IL10N
+     */
+    protected function getLocalisation(string $userId): IL10N {
+        $lang         = $this->config->getUserValue($userId, 'core', 'lang');
+        $localisation = $this->l10NFactory->get(Application::APP_NAME, $lang);
+
+        return $localisation;
     }
 }

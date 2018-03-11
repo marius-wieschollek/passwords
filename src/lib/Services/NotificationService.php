@@ -242,7 +242,7 @@ class NotificationService implements INotifier {
         }
 
         $title .= ' '.$localisation->t('Open the passwords app to see '.($passwordCount === 1 ? 'it.':'them.'));
-        $link  = $this->urlGenerator->linkToRoute('passwords.page.index').'#/shared/0';
+        $link  = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/0';
 
         return $notification->setParsedSubject($title)->setLink($link);
     }
@@ -260,7 +260,7 @@ class NotificationService implements INotifier {
                    .' '.$localisation->t('Open the passwords app to see your shared passwords.');
         $message = $localisation->t('Sharing a password that has been shared with you can sometimes create a loop.')
                    .' '.$localisation->t('To prevent this, these passwords will not be shared.');
-        $link    = $this->urlGenerator->linkToRoute('passwords.page.index').'#/shared/1';
+        $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/1';
 
         return $notification->setParsedSubject($title)
                             ->setParsedMessage($message)

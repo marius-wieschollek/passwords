@@ -14,6 +14,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
@@ -35,6 +36,11 @@ class SynchronizeShares extends TimedJob {
      * @var LoggingService
      */
     protected $logger;
+
+    /**
+     * @var MailService
+     */
+    protected $mailService;
 
     /**
      * @var ShareService
@@ -65,6 +71,7 @@ class SynchronizeShares extends TimedJob {
      * SynchronizeShares constructor.
      *
      * @param LoggingService          $logger
+     * @param MailService             $mailService
      * @param ShareService            $shareService
      * @param PasswordService         $passwordService
      * @param NotificationService     $notificationService
@@ -72,6 +79,7 @@ class SynchronizeShares extends TimedJob {
      */
     public function __construct(
         LoggingService $logger,
+        MailService $mailService,
         ShareService $shareService,
         PasswordService $passwordService,
         NotificationService $notificationService,
@@ -85,6 +93,7 @@ class SynchronizeShares extends TimedJob {
         $this->passwordService         = $passwordService;
         $this->notificationService     = $notificationService;
         $this->passwordRevisionService = $passwordRevisionService;
+        $this->mailService = $mailService;
     }
 
     /**
@@ -389,6 +398,7 @@ class SynchronizeShares extends TimedJob {
         foreach($this->notifications['created'] as $receiver => $owners) {
             try {
                 $this->notificationService->sendShareCreateNotification($receiver, $owners);
+                $this->mailService->sendShareCreateMail($receiver, $owners);
             } catch(ApiException $e) {
                 $this->logger->logException($e);
             }
