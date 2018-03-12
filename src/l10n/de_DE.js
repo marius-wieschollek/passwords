@@ -204,6 +204,7 @@
         "Reading passwords"                   : "Lade Passwörter",
         "Importing passwords"                 : "Importiere Passwörter",
         "Import failed"                       : "Import fehlgeschlagen",
+        "Import partially failed"             : "Import teilweise fehlgeschlagen",
         "Import successful"                   : "Import erfolgreich",
         "Import error"                        : "Importfehler",
         "Invalid file type \"{type}\""        : "Falscher Dateityp \"{type}\"",
