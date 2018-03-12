@@ -192,6 +192,7 @@ export default class ImportCsvConversionHelper {
             keyMap     = {},
             properties = {folder: 'folderLabel', parent: 'parentLabel'},
             idMap      = ImportCsvConversionHelper._createLabelMapping(await API.listFolders());
+        idMap[""] = '00000000-0000-0000-0000-000000000000';
 
         for(let i = 0; i < db.length; i++) {
             let element = db[i];

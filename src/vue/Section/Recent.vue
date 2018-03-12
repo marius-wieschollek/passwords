@@ -41,7 +41,7 @@
         data() {
             return {
                 sorting: {
-                    field   : 'edited',
+                    field    : 'edited',
                     ascending: false
                 }
             }
@@ -50,7 +50,7 @@
         methods: {
             refreshView: function() {
                 let model = this.ui.showTags ? 'model+tags':'model';
-                API.listPasswords(model).then(this.updatePasswordList);
+                API.listPasswords(model).then(this.updateContentList);
             },
 
             updateContentList: function(passwords) {

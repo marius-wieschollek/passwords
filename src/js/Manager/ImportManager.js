@@ -158,7 +158,7 @@ export class ImportManager {
                     idMap[tag.id] = info.id;
                 }
             } catch(e) {
-                console.error(e);
+                console.error(e, tag);
                 this.errors.push(Localisation.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
             }
 
@@ -170,28 +170,22 @@ export class ImportManager {
 
     /**
      *
-     * @param folders
+     * @param folderDb
      * @param mode
      * @returns {Promise<{}>}
      */
-    async importFolders(folders, mode = 0) {
+    async importFolders(folderDb, mode = 0) {
         this.countProgress('Reading folders');
         let db    = await API.listFolders(),
             idMap = {};
+
 
         idMap[this.defaultFolder] = this.defaultFolder;
         for(let k in db) {
             if(!db.hasOwnProperty(k)) continue;
             idMap[k] = k;
         }
-
-        folders.sort((a, b) => {
-            if(a.parent === null || b.parent === null) return 0;
-            if(a.id === null || b.id === null) return 0;
-            if(a.parent === b.id) return 1;
-            if(b.parent === a.id) return -1;
-            return 0;
-        });
+        let folders = ImportManager._sortFoldersForImport(folderDb, idMap);
 
         this.countProgress('Importing folders');
         for(let i = 0; i < folders.length; i++) {
@@ -226,7 +220,7 @@ export class ImportManager {
                     idMap[folder.id] = info.id;
                 }
             } catch(e) {
-                console.error(e);
+                console.error(e, folder);
                 this.errors.push(Localisation.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
             }
 
@@ -234,6 +228,42 @@ export class ImportManager {
         }
 
         return idMap;
+    }
+
+    /**
+     *
+     * @param folderDb
+     * @param idMap
+     * @returns {Array}
+     * @private
+     */
+    static _sortFoldersForImport(folderDb, idMap) {
+        let lastLength = folderDb.length,
+            folders    = [],
+            sortLog    = [];
+
+        while(folderDb.length !== 0) {
+            for(let i = 0; i < folderDb.length; i++) {
+                let folder = folderDb[i];
+                if(idMap.hasOwnProperty(folder.parent) ||
+                   sortLog.indexOf(folder.parent) !== -1 ||
+                   !folder.hasOwnProperty('parent') ||
+                   folder.parent === null
+                ) {
+                    sortLog.push(folder.id);
+                    folders.push(folder);
+                    folderDb.splice(i, 1);
+                    i--;
+                }
+            }
+            if(lastLength === folderDb.length) {
+                folders.concat(folderDb);
+                break;
+            }
+            lastLength = folderDb.length
+        }
+
+        return folders;
     }
 
     /**
@@ -292,7 +322,7 @@ export class ImportManager {
                     idMap[info.id] = info.id;
                 }
             } catch(e) {
-                console.error(e);
+                console.error(e, password);
                 this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: e.message}));
             }
 

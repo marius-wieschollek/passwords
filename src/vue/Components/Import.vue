@@ -100,7 +100,7 @@
                             <translate tag="option" v-for="index in 10" :value="index.toString()" say="Line {line}" :variables="{line:index}" :key="index"/>
                         </select>
                         <div class="csv-mapping">
-                            <div v-for="value in csvSampleData" class="csv-mapping-field" :key="value">
+                            <div v-for="(value, id) in csvSampleData" class="csv-mapping-field" :key="id" :data-value="value" :data-id="id">
                                 <div class="value">{{ value }}</div>
                                 <select @change="csvFieldMapping($event, id)" :disabled="importing">
                                     <translate tag="option" value="null" say="Ignore"/>
@@ -277,7 +277,7 @@
                     let field = fields[i],
                         index = this.options.mapping.indexOf(field);
 
-                    if(index === -1 || index === current - 1) {
+                    if(index === -1 || index === current) {
                         options[field] = field.capitalize();
                     }
                 }
@@ -289,7 +289,7 @@
                     value   = event.target.value;
 
                 if(value === 'null') value = null;
-                mapping[id - 1] = value;
+                mapping[id] = value;
                 this.options.mapping = mapping;
             },
             validateStep() {
@@ -428,10 +428,12 @@
             position : relative;
 
             progress {
-                width         : 100%;
-                height        : 34px;
-                border-radius : 3px;
-                border        : none;
+                width              : 100%;
+                height             : 34px;
+                border-radius      : 3px;
+                border             : none;
+                -webkit-appearance : none;
+                background-color   : $color-grey-lighter;
 
                 &::-moz-progress-bar {
                     background-color : $color-theme;
@@ -439,7 +441,7 @@
                     transition       : background-color 0.25s ease-in-out;
                 }
 
-                &::-webkit-progress-bar {
+                &::-webkit-progress-value {
                     background-color : $color-theme;
                     border-radius    : 3px;
                     transition       : background-color 0.25s ease-in-out;
@@ -449,7 +451,7 @@
                     &::-moz-progress-bar {
                         background-color : $color-green;
                     }
-                    &::-webkit-progress-bar {
+                    &::-webkit-progress-value {
                         background-color : $color-green;
                     }
                 }
@@ -457,7 +459,7 @@
                     &::-moz-progress-bar {
                         background-color : $color-yellow;
                     }
-                    &::-webkit-progress-bar {
+                    &::-webkit-progress-value {
                         background-color : $color-yellow;
                     }
                 }
@@ -465,7 +467,7 @@
                     &::-moz-progress-bar {
                         background-color : $color-red-dark;
                     }
-                    &::-webkit-progress-bar {
+                    &::-webkit-progress-value {
                         background-color : $color-red-dark;
                     }
                 }
@@ -483,8 +485,8 @@
 
         @media all and (max-width : $width-extra-small) {
             .csv-mapping-field .value {
-                padding: 1em 0 .25em;
-                font-weight: bold;
+                padding     : 1em 0 .25em;
+                font-weight : bold;
             }
         }
     }
