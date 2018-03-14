@@ -12,7 +12,7 @@ class SearchManager {
             passwords: 'data-password-id',
             folders  : 'data-folder-id',
             tags     : 'data-tag-id'
-        }
+        };
     }
 
     init() {
@@ -59,7 +59,7 @@ class SearchManager {
                 el.classList.add('search-hidden');
             }
         }
-        console.log(stats.results + ' results in ' + (new Date().getTime() - stats.start) + ' milliseconds')
+        console.log(stats.results + ' results in ' + (new Date().getTime() - stats.start) + ' milliseconds');
     }
 
     /**
@@ -104,7 +104,49 @@ class SearchManager {
      * @private
      */
     static _processQuery(query) {
-        return query.toLowerCase();
+        query = query.toLowerCase();
+        return query;
+
+        let isQuoted      = false,
+            currentValue  = '',
+            currentString = '',
+            currentField  = 'all',
+            searchParams  = [];
+
+        for(let i = 0; i < query.length; i++) {
+            let char = query[i];
+
+            if(char === ':' && currentString.length !== 0) {
+                if(currentValue.length !== 0) {
+                    searchParams.push({field: currentField, value: currentValue.trim()});
+                    currentValue = '';
+                }
+
+                currentField = currentString;
+                currentString = '';
+            } else if(char === ' ') {
+                currentValue += currentString + ' ';
+                currentString = '';
+            } else if(char === '"') {
+                if(currentValue.length !== 0) {
+                    currentValue += currentString;
+                    searchParams.push({field: currentField, value: currentValue.trim()});
+                    currentField = 'all';
+                    currentString = '';
+                    currentValue = '';
+                }
+                isQuoted = !isQuoted;
+            } else if(isQuoted && char === '\\' && query[i + 1] === '"') {
+                currentString += '"';
+                i++;
+            } else {
+                currentString += char;
+            }
+        }
+        if(currentString.length !== 0) currentValue += currentString;
+        if(currentValue.length !== 0) searchParams.push({field: currentField, value: currentValue.trim()});
+
+        return searchParams;
     }
 
     /**
@@ -131,7 +173,7 @@ class SearchManager {
 
                     indexedObject[field] = object.hasOwnProperty(field) ? object[field].toLowerCase():'';
                 }
-                this.index[key].push(indexedObject)
+                this.index[key].push(indexedObject);
             }
         }
 
