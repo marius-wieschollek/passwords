@@ -5,8 +5,8 @@ class SearchManager {
         this.index = null;
         this.indexFields = {
             passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id'],
-            folders  : ['label', 'id'],
-            tags     : ['label', 'id']
+            folders  : ['label', 'type', 'id'],
+            tags     : ['label', 'type', 'id']
         };
         this.domIdentifiers = {
             passwords: 'data-password-id',
@@ -33,33 +33,61 @@ class SearchManager {
             return;
         }
 
-        let stats = {query: query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()};
-        query = SearchManager._processQuery(query);
-        let index = this._getSearchIndex();
+        let stats = {query: query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
+            searchParams = SearchManager._processQuery(query),
+            index = this._getSearchIndex();
         for(let key in index) {
             if(!index.hasOwnProperty(key)) continue;
             let section    = index[key],
                 identifier = this.domIdentifiers[key];
 
-            objs: for(let i = 0; i < section.length; i++) {
+            for(let i = 0; i < section.length; i++) {
                 let object = section[i],
                     el     = document.querySelector('[' + identifier + '="' + object.id + '"]');
                 if(!el) continue;
 
-                for(let field in object) {
-                    if(!object.hasOwnProperty(field)) continue;
-
-                    if(object[field].indexOf(query) !== -1) {
-                        if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
-                        stats.results++;
-                        stats[key]++;
-                        continue objs;
-                    }
+                if(SearchManager._entryMatchesQuery(object, searchParams)){
+                    if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
+                    stats.results++;
+                    stats[key]++;
+                } else {
+                    el.classList.add('search-hidden');
                 }
-                el.classList.add('search-hidden');
             }
         }
         console.log(stats.results + ' results in ' + (new Date().getTime() - stats.start) + ' milliseconds');
+    }
+
+    /**
+     *
+     * @param entry
+     * @param query
+     * @returns {boolean}
+     * @private
+     */
+    static _entryMatchesQuery(entry, query) {
+        for(let j = 0; j < query.length; j++) {
+            let fields  = query[j].field,
+                search = query[j].value;
+
+            if(fields === 'all') {
+                fields = ['website', 'username', 'url', 'notes', 'label'];
+            } else if(fields === 'name' || fields === 'title') {
+                fields = ['label'];
+            } else {
+                fields = [fields];
+            }
+
+            for(let k=0; k<fields.length; k++) {
+                let field = fields[k];
+                if(!entry.hasOwnProperty(field)) continue;
+
+                if(entry[field].indexOf(search) === -1) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -104,19 +132,17 @@ class SearchManager {
      * @private
      */
     static _processQuery(query) {
-        query = query.toLowerCase();
-        return query;
-
         let isQuoted      = false,
             currentValue  = '',
             currentString = '',
             currentField  = 'all',
             searchParams  = [];
 
+        query = query.toLowerCase();
         for(let i = 0; i < query.length; i++) {
             let char = query[i];
 
-            if(char === ':' && currentString.length !== 0) {
+            if(!isQuoted && char === ':' && currentString.length !== 0) {
                 if(currentValue.length !== 0) {
                     searchParams.push({field: currentField, value: currentValue.trim()});
                     currentValue = '';
@@ -128,7 +154,7 @@ class SearchManager {
                 currentValue += currentString + ' ';
                 currentString = '';
             } else if(char === '"') {
-                if(currentValue.length !== 0) {
+                if(currentValue.length !== 0 || currentString.length !== 0) {
                     currentValue += currentString;
                     searchParams.push({field: currentField, value: currentValue.trim()});
                     currentField = 'all';
