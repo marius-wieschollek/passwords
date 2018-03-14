@@ -33,9 +33,9 @@ class SearchManager {
             return;
         }
 
-        let stats = {query: query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
+        let stats        = {query: query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
             searchParams = SearchManager._processQuery(query),
-            index = this._getSearchIndex();
+            index        = this._getSearchIndex();
         for(let key in index) {
             if(!index.hasOwnProperty(key)) continue;
             let section    = index[key],
@@ -46,7 +46,7 @@ class SearchManager {
                     el     = document.querySelector('[' + identifier + '="' + object.id + '"]');
                 if(!el) continue;
 
-                if(SearchManager._entryMatchesQuery(object, searchParams)){
+                if(SearchManager._entryMatchesQuery(object, searchParams)) {
                     if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
                     stats.results++;
                     stats[key]++;
@@ -67,7 +67,7 @@ class SearchManager {
      */
     static _entryMatchesQuery(entry, query) {
         for(let j = 0; j < query.length; j++) {
-            let fields  = query[j].field,
+            let fields = query[j].field,
                 search = query[j].value;
 
             if(fields === 'all') {
@@ -78,7 +78,7 @@ class SearchManager {
                 fields = [fields];
             }
 
-            for(let k=0; k<fields.length; k++) {
+            for(let k = 0; k < fields.length; k++) {
                 let field = fields[k];
                 if(!entry.hasOwnProperty(field)) continue;
 
@@ -132,47 +132,50 @@ class SearchManager {
      * @private
      */
     static _processQuery(query) {
-        let isQuoted      = false,
-            currentValue  = '',
-            currentString = '',
-            currentField  = 'all',
-            searchParams  = [];
+        let isQuoted  = false,
+            value     = '',
+            substring = '',
+            field     = 'all',
+            params    = [];
 
         query = query.toLowerCase();
         for(let i = 0; i < query.length; i++) {
             let char = query[i];
 
-            if(!isQuoted && char === ':' && currentString.length !== 0) {
-                if(currentValue.length !== 0) {
-                    searchParams.push({field: currentField, value: currentValue.trim()});
-                    currentValue = '';
-                }
+            if(!isQuoted && char === ':' && substring.length !== 0) {
+                SearchManager._addFieldToSearchParams(params, field, value);
 
-                currentField = currentString;
-                currentString = '';
+                field = substring;
+                substring = '';
+                value = '';
             } else if(char === ' ') {
-                currentValue += currentString + ' ';
-                currentString = '';
+                value += substring + ' ';
+                substring = '';
             } else if(char === '"') {
-                if(currentValue.length !== 0 || currentString.length !== 0) {
-                    currentValue += currentString;
-                    searchParams.push({field: currentField, value: currentValue.trim()});
-                    currentField = 'all';
-                    currentString = '';
-                    currentValue = '';
+                if(value.length !== 0 || substring.length !== 0) {
+                    SearchManager._addFieldToSearchParams(params, field, value + substring);
+                    substring = '';
+                    field = 'all';
+                    value = '';
                 }
                 isQuoted = !isQuoted;
             } else if(isQuoted && char === '\\' && query[i + 1] === '"') {
-                currentString += '"';
+                substring += '"';
                 i++;
             } else {
-                currentString += char;
+                substring += char;
             }
         }
-        if(currentString.length !== 0) currentValue += currentString;
-        if(currentValue.length !== 0) searchParams.push({field: currentField, value: currentValue.trim()});
+        if(substring.length !== 0) value += substring;
+        if(value.length !== 0) SearchManager._addFieldToSearchParams(params, field, value);
 
-        return searchParams;
+        console.log(params);
+        return params;
+    }
+
+    static _addFieldToSearchParams(params, field, value) {
+        let realValue = value.trim();
+        if(realValue.length > 2) params.push({field: field, value: realValue});
     }
 
     /**
