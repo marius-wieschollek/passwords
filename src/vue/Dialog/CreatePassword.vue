@@ -35,6 +35,7 @@
                 <div class="form right">
                     <foldout title="Notes" :initially-open="notesOpen">
                         <div class="notes-container">
+                            <translate tag="div" class="warning" say="You have reached the maximum length of 4096 characters" v-if="password.notes.length > 4095"/>
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
                     </foldout>
@@ -175,7 +176,12 @@
                         }
                     );
                     this.simplemde.codemirror.on('change', () => {
-                        this.password.notes = this.simplemde.value();
+                        let value = this.simplemde.value();
+                        if(value.length > 4096) {
+                            value = value.substring(0, 4096);
+                            this.simplemde.value(value);
+                        }
+                        this.password.notes = value;
                     });
                 } catch(e) {
                     console.error(e);
@@ -384,6 +390,10 @@
 
                             .editor-preview.editor-preview-active p {
                                 margin-bottom : 1em;
+                            }
+
+                            .warning {
+                                margin: 0 0 4px;
                             }
                         }
 
