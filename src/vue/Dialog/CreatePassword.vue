@@ -170,9 +170,14 @@
                             autoDownloadFontAwesome: false,
                             spellChecker           : false,
                             placeholder            : Localisation.translate('Take some notes'),
-                            status                 : false,
                             forceSync              : true,
-                            initialValue           : this.password.notes
+                            initialValue           : this.password.notes,
+                            status                 : [
+                                {
+                                    defaultValue: (el) => {el.innerHTML = this.password.notes.length + '/4096';},
+                                    onUpdate    : (el) => {el.innerHTML = this.password.notes.length + '/4096';}
+                                }
+                            ]
                         }
                     );
                     this.simplemde.codemirror.on('change', () => {
@@ -393,7 +398,7 @@
                             }
 
                             .warning {
-                                margin: 0 0 4px;
+                                margin : 0 0 4px;
                             }
                         }
 
