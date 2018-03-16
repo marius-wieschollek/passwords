@@ -52,6 +52,7 @@
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
     import Utility from "@js/Classes/Utility";
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         el        : '#main',
@@ -62,7 +63,7 @@
         },
 
         data() {
-            let serverVersion = document.querySelector('[data-constant="serverVersion"]').getAttribute('data-value');
+            let serverVersion = SettingsManager.get('server.version');
 
             return {
                 serverVersion: serverVersion,

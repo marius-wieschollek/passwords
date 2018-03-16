@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\Settings;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
 
 /**
@@ -16,6 +17,11 @@ use OCP\IURLGenerator;
  * @package OCA\Passwords\Helper\Settings
  */
 class ServerSettingsHelper {
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
 
     /**
      * @var IURLGenerator
@@ -35,18 +41,21 @@ class ServerSettingsHelper {
     /**
      * ServerSettingsHelper constructor.
      *
-     * @param ShareSettingsHelper $shareSettings
-     * @param ThemeSettingsHelper $themeSettings
-     * @param IURLGenerator       $urlGenerator
+     * @param IURLGenerator        $urlGenerator
+     * @param ConfigurationService $config
+     * @param ShareSettingsHelper  $shareSettings
+     * @param ThemeSettingsHelper  $themeSettings
      */
     public function __construct(
         IURLGenerator $urlGenerator,
+        ConfigurationService $config,
         ShareSettingsHelper $shareSettings,
         ThemeSettingsHelper $themeSettings
     ) {
         $this->urlGenerator  = $urlGenerator;
         $this->shareSettings = $shareSettings;
         $this->themeSettings = $themeSettings;
+        $this->config        = $config;
     }
 
     /**
@@ -56,9 +65,16 @@ class ServerSettingsHelper {
      * @throws ApiException
      */
     public function get(string $key) {
-        list($scope, $subKey) = explode('.', $key, 2);
+        if(strpos($key, '.') !== false) {
+            list($scope, $subKey) = explode('.', $key, 2);
+        } else {
+            $scope  = $key;
+            $subKey = '';
+        }
 
         switch($scope) {
+            case 'version':
+                return $this->getServerVersion();
             case 'baseUrl':
                 return $this->urlGenerator->getBaseUrl();
             case 'theme':
@@ -76,9 +92,21 @@ class ServerSettingsHelper {
      */
     public function list(): array {
         return array_merge(
-            ['server.baseUrl' => $this->get('baseUrl')],
+            [
+                'server.baseUrl' => $this->get('baseUrl'),
+                'server.version' => $this->get('version')
+            ],
             $this->themeSettings->list(),
             $this->shareSettings->list()
         );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getServerVersion(): string {
+        $version = $this->config->getSystemValue('version');
+
+        return explode('.', $version, 2)[0];
     }
 }

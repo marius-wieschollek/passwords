@@ -149,10 +149,7 @@ class PageController extends Controller {
         $response = new TemplateResponse(
             $this->appName,
             'index',
-            [
-                'https'   => $isSecure,
-                'version' => $this->getServerVersion()
-            ]
+            ['https'   => $isSecure]
         );
 
         $csp = new ContentSecurityPolicy();
@@ -233,15 +230,6 @@ class PageController extends Controller {
             $this->config->deleteUserValue(self::WEBUI_TOKEN);
             $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getServerVersion(): string {
-        $version = $this->config->getSystemValue('version');
-
-        return explode('.', $version, 2)[0];
     }
 
     /**
