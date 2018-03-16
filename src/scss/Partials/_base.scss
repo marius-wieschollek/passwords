@@ -4,14 +4,18 @@
 }
 
 .oc-dialog-dim {
-    z-index: 1000;
+    z-index : 1000;
 }
 
 form.searchbox {
-    transition: opacity .15s ease-in-out;
+    transition : opacity .15s ease-in-out;
+
+    #searchbox:valid {
+        padding-right : 25px;
+    }
 }
 
 select,
 input[type=button] {
-    transition: border-color .1s ease-in-out
+    transition : border-color .1s ease-in-out
 }

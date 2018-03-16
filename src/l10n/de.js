@@ -281,6 +281,7 @@
         "Reset all settings on this page to their defaults"                        : "Alle Einstellungen auf dieser Seite zurücksetzen",
         "This will reset all settings to their defaults. Do you want to continue?" : "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchtest du fortfahren?",
         "Start over and delete all configuration, passwords, folders and tags"     : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen",
+        "You have reached the maximum length of 4096 characters"                   : "Du hast die Maximallänge von 4096 Zeichern erreicht",
         "Trailing quote on quoted field is malformed"                              : "Das Feldzeichen ist falsch maskiert"
     };
 
