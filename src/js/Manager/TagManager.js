@@ -1,10 +1,10 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Utility from "@js/Classes/Utility";
+import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
-import * as randomMC from "random-material-color";
-import EnhancedApi from "@js/ApiClient/EnhancedApi";
-import Localisation from "@js/Classes/Localisation";
+import * as randomMC from 'random-material-color';
+import EnhancedApi from '@js/ApiClient/EnhancedApi';
+import Localisation from '@js/Classes/Localisation';
 
 /**
  *

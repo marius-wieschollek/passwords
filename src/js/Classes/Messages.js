@@ -1,5 +1,5 @@
-import $ from "jquery";
-import Localisation from "@js/Classes/Localisation";
+import $ from 'jquery';
+import Localisation from '@js/Classes/Localisation';
 
 class Messages {
 
@@ -95,7 +95,7 @@ class Messages {
      */
     form(form, title = 'Form', message = '') {
         let html = '',
-            id   = 'passwords-form-' + Math.round(Math.random() * 10);
+            id   = `passwords-form-${Math.round(Math.random() * 10)}`;
         for(let name in form) {
             if(!form.hasOwnProperty(name)) continue;
             let field = form[name],
@@ -103,11 +103,11 @@ class Messages {
                 type  = field.type ? field.type:'text',
                 label = Messages._translate(field.label ? field.label:name.capitalize());
 
-            html += '<label>' + label + '</label><input type="' + type + '" value="' + value + '" name="' + name + '">';
+            html += `<label>${label}</label><input type="${type}" value="${value}" name="${name}">`;
         }
 
-        if(message.length !== 0) message = '<div class="message">' + Messages._translate(message) + '</div>';
-        html = '<form class="passwords-form" id="' + id + '">' + message.replace("\n",'<br>') + html + '</form>';
+        if(message.length !== 0) message = `<div class="message">${Messages._translate(message)}</div>`;
+        html = `<form class="passwords-form" id="${id}">${message.replace('\n', '<br>')}${html}</form>`;
 
         return new Promise((resolve, reject) => {
             title = Messages._translate(title);

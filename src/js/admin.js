@@ -30,7 +30,7 @@ class PasswordsAdminSettings {
             (e) => {
                 let $target = $(e.target),
                     cache   = $target.data('clear-cache'),
-                    label   = OC.L10N.translate('passwords', cache.capitalize() + ' Cache (0 files, 0 B)');
+                    label   = OC.L10N.translate('passwords', `${cache.capitalize()} Cache (0 files, 0 B)`);
 
                 $target.parent().find('label').text(label);
 
@@ -72,7 +72,7 @@ class PasswordsAdminSettings {
      * @private
      */
     _showMessage(type) {
-        let $el = $('#passwords').find('.msg.' + type);
+        let $el = $('#passwords').find(`.msg.${type}`);
         $el.removeClass('active').addClass('active');
 
         clearTimeout(this._timer[type]);
@@ -99,11 +99,11 @@ class PasswordsAdminSettings {
      * @private
      */
     static _updateApiField(type) {
-        let $target   = $('#passwords-' + type),
+        let $target   = $(`#passwords-${type}`),
             value     = $target.val(),
-            $option   = $target.find('[value=' + value + ']'),
+            $option   = $target.find(`[value=${value}]`),
             data      = $option.data('api'),
-            $apiInput = $('#passwords-' + type + '-api');
+            $apiInput = $(`#passwords-${type}-api`);
 
 
         if(data === null) {

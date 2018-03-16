@@ -3,10 +3,10 @@ import App from '@vue/App';
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import SectionAll from '@vue/Section/All';
-import Messages from '@js/Classes/Messages';
-import SearchManager from "@/js/Manager/SearchManager";
-import SettingsManager from "@/js/Manager/SettingsManager";
-import EncryptionTestHelper from "@/js/Helper/EncryptionTestHelper";
+import Messages from "@js/Classes/Messages";
+import SearchManager from '@/js/Manager/SearchManager';
+import SettingsManager from '@/js/Manager/SettingsManager';
+import EncryptionTestHelper from '@/js/Helper/EncryptionTestHelper';
 
 /**
  * Set global webpack path
@@ -37,7 +37,7 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
 
         router.addRoutes(
             [
-                {name: "All", path: section === 'all' ? '/':'/all', param: [], components: {main: SectionAll}},
+                {name: 'All', path: section === 'all' ? '/':'/all', param: [], components: {main: SectionAll}},
                 {path: '*', redirect: {name: section.capitalize()}}
             ]
         );

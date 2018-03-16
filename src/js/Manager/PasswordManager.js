@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Utility from "@js/Classes/Utility";
+import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
+import EnhancedApi from '@js/ApiClient/EnhancedApi';
 import CreateDialog from '@vue/Dialog/CreatePassword.vue';
-import EnhancedApi from "@js/ApiClient/EnhancedApi";
 
 /**
  *

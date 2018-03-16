@@ -610,8 +610,8 @@ export default class SimpleApi {
         return new Promise((resolve, reject) => {
             fetch(new Request(this._endpoint + path, options))
                 .then((response) => {
-                    let contentType = response.headers.get("content-type");
-                    if(contentType && contentType.indexOf("application/json") !== -1) {
+                    let contentType = response.headers.get('content-type');
+                    if(contentType && contentType.indexOf('application/json') !== -1) {
                         response.json()
                             .then((d) => {
                                 if(response.ok) {
@@ -670,7 +670,7 @@ export default class SimpleApi {
         for(let property in data) {
             if(!data.hasOwnProperty(property)) continue;
 
-            url = url.replace('{' + property + '}', data[property]);
+            url = url.replace(`{${property}}`, data[property]);
         }
 
         return url;

@@ -1,5 +1,5 @@
 import API from '@js/Helper/api';
-import Utility from "@/js/Classes/Utility";
+import Utility from '@/js/Classes/Utility';
 
 /**
  *

@@ -1,7 +1,7 @@
-import API from "@js/Helper/api";
-import SimpleApi from "@js/ApiClient/SimpleApi";
-import * as randomMC from "random-material-color";
-import Localisation from "@js/Classes/Localisation";
+import API from '@js/Helper/api';
+import SimpleApi from '@js/ApiClient/SimpleApi';
+import * as randomMC from 'random-material-color';
+import Localisation from '@js/Classes/Localisation';
 
 export default class ImportCsvConversionHelper {
 
@@ -51,7 +51,7 @@ export default class ImportCsvConversionHelper {
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
-        if(data[0].length < mapping.length) throw "CSV file can not be mapped";
+        if(data[0].length < mapping.length) throw 'CSV file can not be mapped';
         for(let i = firstLine; i < data.length; i++) {
             let line   = data[i],
                 object = {};
@@ -192,7 +192,7 @@ export default class ImportCsvConversionHelper {
             keyMap     = {},
             properties = {folder: 'folderLabel', parent: 'parentLabel'},
             idMap      = ImportCsvConversionHelper._createLabelMapping(await API.listFolders());
-        idMap[""] = '00000000-0000-0000-0000-000000000000';
+        idMap[''] = '00000000-0000-0000-0000-000000000000';
 
         for(let i = 0; i < db.length; i++) {
             let element = db[i];

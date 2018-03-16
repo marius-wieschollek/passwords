@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
-import Encryption from "@/js/ApiClient/Encryption";
-import SettingsManager from "@js/Manager/SettingsManager";
+import Encryption from '@/js/ApiClient/Encryption';
+import SettingsManager from '@js/Manager/SettingsManager';
 
 class EncryptionTestHelper {
     constructor() {
@@ -58,7 +58,7 @@ class EncryptionTestHelper {
                     return {
                         type: 'test',
                         stage : 'validate',
-                        reason: "Decrypted Data Missmatch",
+                        reason: 'Decrypted Data Missmatch',
                         data : [text, encData, decData, json, data]
                     };
                 }

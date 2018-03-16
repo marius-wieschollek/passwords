@@ -201,7 +201,7 @@ export default class Utility {
                 clone[key] = new Date(element.getTime());
             } else if(element === null) {
                 clone[key] = null;
-            } else if(typeof element === "object") {
+            } else if(typeof element === 'object') {
                 clone[key] = Utility.cloneObject(element);
             } else {
                 clone[key] = element;

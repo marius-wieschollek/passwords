@@ -2,6 +2,7 @@
     "brace-style": ["1tbs", "stroustrup", { "allowSingleLine": true }],
     "globals": {
         "OC"    : true,
-        "window": true
+        "window": true,
+        "oc_appswebroots": true
     }
 }

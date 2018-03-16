@@ -55,7 +55,7 @@ class SearchManager {
                 }
             }
         }
-        console.log(stats.results + ' results in ' + (new Date().getTime() - stats.start) + ' milliseconds');
+        console.log(`${stats.results} results in ${new Date().getTime() - stats.start} milliseconds`);
     }
 
     /**

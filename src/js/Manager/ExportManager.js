@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
-import Utility from "@js/Classes/Utility";
-import Encryption from "@js/ApiClient/Encryption";
-import Localisation from "@js/Classes/Localisation";
+import Utility from '@js/Classes/Utility';
+import Encryption from '@js/ApiClient/Encryption';
+import Localisation from '@js/Classes/Localisation';
 
 /**
  *
@@ -34,7 +34,7 @@ export class ExportManager {
                 data = await ExportManager.exportOfficeDocument(model, options.includeShared, 'ods');
                 break;
             default:
-                throw "Invalid export format: " + format;
+                throw `Invalid export format: ${format}`;
         }
 
         return data;
@@ -70,7 +70,7 @@ export class ExportManager {
                 json[i] = await encryption.encrypt(data, key);
             }
             json.encrypted = true;
-            json.challenge = await encryption.encrypt(options.password, options.password + 'challenge');
+            json.challenge = await encryption.encrypt(options.password, `${options.password}challenge`);
         }
 
         return JSON.stringify(json);
@@ -276,7 +276,7 @@ export class ExportManager {
             csv.push(line.join(delimiter));
         }
 
-        return csv.join("\n");
+        return csv.join('\n');
     }
 
     /**

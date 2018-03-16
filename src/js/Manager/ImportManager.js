@@ -1,5 +1,5 @@
 import API from '@js/Helper/api';
-import Localisation from "@js/Classes/Localisation";
+import Localisation from '@js/Classes/Localisation';
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 
@@ -46,7 +46,7 @@ export class ImportManager {
                 data = await ImportCsvConversionHelper.processGenericCsv(data, options);
                 break;
             default:
-                throw "Invalid import type: " + type;
+                throw `Invalid import type: ${type}`;
         }
 
         this.total = 0;
@@ -62,14 +62,14 @@ export class ImportManager {
             if(data.tags) tagMapping = await this.importTags(data.tags, options.mode);
         } catch(e) {
             console.error(e);
-            throw "Unable to create tags";
+            throw 'Unable to create tags';
         }
 
         try {
             if(data.folders) folderMapping = await this.importFolders(data.folders, options.mode);
         } catch(e) {
             console.error(e);
-            throw "Unable to create folders";
+            throw 'Unable to create folders';
         }
 
         if(data.passwords) {
@@ -80,7 +80,7 @@ export class ImportManager {
                 await this.importPasswords(data.passwords, options.mode, options.skipShared, tagMapping, folderMapping);
             } catch(e) {
                 console.error(e);
-                throw "Unable to create passwords";
+                throw 'Unable to create passwords';
             }
         }
 
@@ -336,7 +336,7 @@ export class ImportManager {
         if(status === null) {
             this.processed++;
         } else {
-            console.log('Passwords Import: ' + status);
+            console.log(`Passwords Import: ${status}`);
         }
         this.progress(this.processed, this.total, status);
     }

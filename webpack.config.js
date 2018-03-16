@@ -1,7 +1,7 @@
 let webpack = require('webpack');
 let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let ProgressBarPlugin = require('progress-bar-webpack-plugin');
 let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 
