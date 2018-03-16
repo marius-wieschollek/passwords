@@ -1,0 +1,213 @@
+<?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
+
+namespace OCA\Passwords\Helper\Token;
+
+use OC\Authentication\Exceptions\InvalidTokenException;
+use OC\Authentication\Token\IProvider;
+use OC\Authentication\Token\IToken;
+use OCA\Passwords\Encryption\SimpleEncryption;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\NotificationService;
+use OCP\IL10N;
+use OCP\IUserManager;
+use OCP\Security\ISecureRandom;
+
+/**
+ * Class TokenHelper
+ *
+ * @package OCA\Passwords\Helper\Token
+ */
+class TokenHelper {
+
+    const WEBUI_TOKEN      = 'webui_token';
+    const WEBUI_TOKEN_ID   = 'webui_token_id';
+    const WEBUI_TOKEN_HELP = 'https://git.mdns.eu/nextcloud/passwords/wikis/Users/F.A.Q';
+
+    /**
+     * @var null|string
+     */
+    protected $userId;
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
+     * @var LoggingService
+     */
+    protected $logger;
+
+    /**
+     * @var ISecureRandom
+     */
+    protected $random;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
+
+    /**
+     * @var SimpleEncryption
+     */
+    protected $encryption;
+
+    /**
+     * @var IL10N
+     */
+    protected $localisation;
+
+    /**
+     * @var IProvider
+     */
+    protected $tokenProvider;
+
+    /**
+     * @var NotificationService
+     */
+    protected $notificationService;
+
+    /**
+     * TokenHelper constructor.
+     *
+     * @param null|string          $userId
+     * @param IL10N                $localisation
+     * @param ISecureRandom        $random
+     * @param LoggingService       $logger
+     * @param IProvider            $tokenProvider
+     * @param IUserManager         $userManager
+     * @param SimpleEncryption     $encryption
+     * @param ConfigurationService $config
+     * @param NotificationService  $notificationService
+     */
+    public function __construct(
+        ?string $userId,
+        IL10N $localisation,
+        ISecureRandom $random,
+        LoggingService $logger,
+        IProvider $tokenProvider,
+        IUserManager $userManager,
+        SimpleEncryption $encryption,
+        ConfigurationService $config,
+        NotificationService $notificationService
+    ) {
+        $this->userId              = $userId;
+        $this->random              = $random;
+        $this->logger              = $logger;
+        $this->config              = $config;
+        $this->encryption          = $encryption;
+        $this->userManager         = $userManager;
+        $this->localisation        = $localisation;
+        $this->tokenProvider       = $tokenProvider;
+        $this->notificationService = $notificationService;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getWebUiToken(): string {
+        try {
+            $token = $this->loadWebUiToken();
+            if($token !== false) return $token;
+
+            return $this->createWebUiToken();
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+
+            return '';
+        }
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return array
+     */
+    public function createToken(string $name): array {
+        $token       = $this->generateRandomDeviceToken();
+        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->userId, null, $name, IToken::PERMANENT_TOKEN);
+        $deviceToken->setScope(['filesystem' => false]);
+        $this->tokenProvider->updateToken($deviceToken);
+
+        return [$token, $deviceToken];
+    }
+
+    /**
+     * @param string $tokenId
+     */
+    public function destroyToken(string $tokenId): void {
+        $this->tokenProvider->invalidateTokenById(
+            $this->userManager->get($this->userId),
+            $tokenId
+        );
+    }
+
+    /**
+     *
+     */
+    public function destroyWebUiToken(): void {
+        $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
+        if($tokenId !== false) {
+            $this->destroyToken($tokenId);
+            $this->config->deleteUserValue(self::WEBUI_TOKEN);
+            $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
+        }
+    }
+
+    /**
+     * @return bool|string
+     * @throws \OCA\Passwords\Exception\ApiException
+     */
+    protected function loadWebUiToken() {
+        $token   = $this->config->getUserValue(self::WEBUI_TOKEN, false);
+        $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
+        if($token !== false && $tokenId !== false) {
+            try {
+                $iToken = $this->tokenProvider->getTokenById($tokenId);
+
+                if($iToken->getId() == $tokenId) return $this->encryption->decrypt($token);
+            } catch(InvalidTokenException $e) {
+            } catch(\Throwable $e) {
+                $this->notificationService->sendTokenErrorNotification($this->userId);
+                $this->logger
+                    ->logException($e)
+                    ->error('Failed to decrypt api token for '.$this->userId);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     * @throws \OCP\PreConditionNotMetException
+     */
+    protected function createWebUiToken(): string {
+        $name = $this->localisation->t('Passwords WebUI Access (see %s)', [self::WEBUI_TOKEN_HELP]);
+        list($token, $deviceToken) = $this->createToken($name);
+        $this->config->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
+        $this->config->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
+
+        return $token;
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateRandomDeviceToken(): string {
+        $groups = [];
+        for($i = 0; $i < 5; $i++) {
+            $groups[] = $this->random->generate(5, ISecureRandom::CHAR_HUMAN_READABLE);
+        }
+
+        return implode('-', $groups);
+    }
+}
