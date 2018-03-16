@@ -24,12 +24,12 @@ $messageReload      = $l->t('If you think your server has HTTPS enabled, you can
 ?>
 <div id="main">
     <div class="passwords-browser-compatibility">
-        <h1 class="title"><?=$title?></h1>
+        <h1 class="title"><?php p($title);?></h1>
         <div class="message">
-            <b><?=$messageHead?></b>
-            <br><br><?=$messageConfigure?>
-            <?=$messageCertificate?>
-            <br><br><?=$messageReload?>
+            <b><?php p($messageHead); ?></b>
+            <br><br><?php p($messageConfigure); ?>
+            <?php p($messageCertificate); ?>
+            <br><br><?php p($messageReload); ?>
         </div>
     </div>
 </div>

@@ -223,6 +223,12 @@ export default class ImportCsvConversionHelper {
         return [folders, idMap, keyMap];
     }
 
+    /**
+     *
+     * @param db
+     * @returns {{}}
+     * @private
+     */
     static _createLabelMapping(db) {
         let map = {};
 

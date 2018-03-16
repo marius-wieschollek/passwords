@@ -13,7 +13,6 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Preview\WkhtmlImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -223,7 +222,6 @@ class AdminSettings implements ISettings {
                 'id'      => HelperService::PREVIEW_WKHTML,
                 'label'   => $this->localisation->t('WKHTML (Local)'),
                 'current' => $current === HelperService::PREVIEW_WKHTML,
-                'path'    => WkhtmlImageHelper::getWkhtmlPath(),
                 'api'     => null
             ],
             [

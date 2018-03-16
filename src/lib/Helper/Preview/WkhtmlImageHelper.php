@@ -62,20 +62,9 @@ class WkhtmlImageHelper extends AbstractPreviewHelper {
      * @throws \Exception
      */
     protected function getWkHtmlBinary(): string {
-        $path = self::getWkHtmlPath();
-        if($path === null) throw new \Exception('WKHTML not found or not accessible');
+        $cmdPath = @exec('which wkhtmltoimage');
+        if(!empty($cmdPath) && is_readable($cmdPath)) return $cmdPath;
 
-        return $path;
-    }
-
-    /**
-     * @return null|string
-     */
-    public static function getWkHtmlPath() {
-
-        $serverPath = @exec('which wkhtmltoimage');
-        if(!empty($serverPath) && is_readable($serverPath)) return $serverPath;
-
-        return null;
+        throw new \Exception('WKHTML not found or not accessible');
     }
 }

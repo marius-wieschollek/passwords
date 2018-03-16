@@ -88,26 +88,25 @@ class ScreenShotApiHelper extends AbstractPreviewHelper {
      */
     protected function getServiceOptions(string $domain, string $view, bool $fullpage = true): array {
         $options = [
+            'webdriver'   => self::WEBDRIVER_FIREFOX,
+            'viewport'    => self::VIEWPORT_DESKTOP,
+            'fullpage'    => true,
             'url'         => 'http://'.$domain,
             'javascript'  => true,
             'waitSeconds' => 2,
             'fresh'       => false
         ];
 
-        if($view === WebsitePreviewService::VIEWPORT_DESKTOP) {
-            $options['webdriver'] = self::WEBDRIVER_FIREFOX;
-            $options['viewport']  = self::VIEWPORT_DESKTOP;
-            $options['fullpage']  = true;
-
-            if(!$fullpage) {
-                $options['webdriver'] = self::WEBDRIVER_CHROME;
-                $options['fullpage']  = false;
-            }
-        } else {
+        if($view === WebsitePreviewService::VIEWPORT_MOBILE) {
             $options['webdriver'] = self::WEBDRIVER_CHROME;
             $options['viewport']  = self::VIEWPORT_MOBILE;
             $options['fullpage']  = false;
             $options['device']    = self::DEVICE_MOBILE;
+
+            return $options;
+        } else if(!$fullpage) {
+            $options['webdriver'] = self::WEBDRIVER_CHROME;
+            $options['fullpage']  = false;
         }
 
         return $options;

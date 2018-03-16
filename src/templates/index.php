@@ -8,7 +8,7 @@ if($_['https']) {
     ?>
 
     <span data-constant="imagePath" data-value="<?php print_unescaped(image_path('passwords', '')); ?>"></span>
-    <span data-constant="serverVersion" data-value="<?=$_['version']?>"></span>
+    <span data-constant="serverVersion" data-value="<?php p($_['version']); ?>"></span>
     <div id="main"></div>
 <?php } else {
     include "partials/https.php";

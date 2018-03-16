@@ -17,14 +17,8 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
 
 (function() {
     let isLoaded     = false,
-        loadInterval = null;
-
-    if(location.protocol !== 'https:') {
-        location.href = location.origin + location.pathname + '?https=false';
-    } else if(isCompatibleBrowser()) {
-        window.addEventListener('load', () => { load(); }, false);
-        loadInterval = setInterval(() => { load(); }, 10);
-    }
+        loadInterval = null,
+        app = null;
 
     async function load() {
         if(isLoaded || !document.querySelector('meta[name=pwat]')) return;
@@ -48,7 +42,7 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
             ]
         );
 
-        new Vue(App);
+        app = new Vue(App);
     }
 
     async function initApi() {
@@ -63,5 +57,12 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
             baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
         }
         API.login(baseUrl, user, password);
+    }
+
+    if(location.protocol !== 'https:') {
+        location.href = location.origin + location.pathname + '?https=false';
+    } else if(isCompatibleBrowser()) {
+        window.addEventListener('load', () => { load(); }, false);
+        loadInterval = setInterval(() => { load(); }, 10);
     }
 })();
