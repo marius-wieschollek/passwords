@@ -7,24 +7,17 @@
 
 namespace OCA\Passwords\Controller\Api;
 
-use OCA\Passwords\Db\Password;
-use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
-use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\Object\PasswordRevisionService;
-use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
+use OCA\Passwords\Helper\Sharing\CreatePasswordShareHelper;
+use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\IConfig;
-use OCP\IGroupManager;
 use OCP\IRequest;
-use OCP\IUser;
-use OCP\IUserManager;
-use OCP\Share\IManager;
 
 /**
  * Class ShareApiController
@@ -33,27 +26,10 @@ use OCP\Share\IManager;
  */
 class ShareApiController extends AbstractApiController {
 
-    const USER_SEARCH_LIMIT = 512;
-
-    /**
-     * @var IUser
-     */
-    protected $user;
-
     /**
      * @var string
      */
     protected $userId;
-
-    /**
-     * @var IConfig
-     */
-    protected $config;
-
-    /**
-     * @var IUserManager
-     */
-    protected $userManager;
 
     /**
      * @var ShareService
@@ -61,29 +37,24 @@ class ShareApiController extends AbstractApiController {
     protected $modelService;
 
     /**
-     * @var IManager
-     */
-    protected $shareManager;
-
-    /**
-     * @var IGroupManager
-     */
-    protected $groupManager;
-
-    /**
      * @var ShareObjectHelper
      */
     protected $objectHelper;
 
     /**
-     * @var PasswordService
+     * @var ShareSettingsHelper
      */
-    protected $passwordModelService;
+    protected $shareSettings;
 
     /**
-     * @var PasswordRevisionService
+     * @var ShareUserListHelper
      */
-    protected $passwordRevisionService;
+    protected $shareUserList;
+
+    /**
+     * @var CreatePasswordShareHelper
+     */
+    protected $createPasswordShare;
 
     /**
      * @var array
@@ -91,43 +62,33 @@ class ShareApiController extends AbstractApiController {
     protected $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
 
     /**
-     * TagApiController constructor.
+     * ShareApiController constructor.
      *
-     * @param IUser                   $user
-     * @param IConfig                 $config
-     * @param IRequest                $request
-     * @param IManager                $shareManager
-     * @param IUserManager            $userManager
-     * @param ShareService            $modelService
-     * @param IGroupManager           $groupManager
-     * @param ShareObjectHelper       $objectHelper
-     * @param PasswordService         $passwordModelService
-     * @param PasswordRevisionService $passwordRevisionService
+     * @param null|string               $userId
+     * @param IRequest                  $request
+     * @param ShareService              $modelService
+     * @param ShareObjectHelper         $objectHelper
+     * @param ShareSettingsHelper       $shareSettings
+     * @param ShareUserListHelper       $shareUserList
+     * @param CreatePasswordShareHelper $createPasswordShare
      */
     public function __construct(
-        IUser $user,
-        IConfig $config,
+        ?string $userId,
         IRequest $request,
-        IManager $shareManager,
-        IUserManager $userManager,
         ShareService $modelService,
-        IGroupManager $groupManager,
         ShareObjectHelper $objectHelper,
-        PasswordService $passwordModelService,
-        PasswordRevisionService $passwordRevisionService
+        ShareSettingsHelper $shareSettings,
+        ShareUserListHelper $shareUserList,
+        CreatePasswordShareHelper $createPasswordShare
     ) {
         parent::__construct($request);
 
-        $this->user                    = $user;
-        $this->config                  = $config;
-        $this->userId                  = $user->getUID();
-        $this->userManager             = $userManager;
-        $this->groupManager            = $groupManager;
-        $this->modelService            = $modelService;
-        $this->shareManager            = $shareManager;
-        $this->objectHelper            = $objectHelper;
-        $this->passwordModelService    = $passwordModelService;
-        $this->passwordRevisionService = $passwordRevisionService;
+        $this->userId              = $userId;
+        $this->modelService        = $modelService;
+        $this->objectHelper        = $objectHelper;
+        $this->shareSettings       = $shareSettings;
+        $this->shareUserList       = $shareUserList;
+        $this->createPasswordShare = $createPasswordShare;
     }
 
     /**
@@ -234,55 +195,17 @@ class ShareApiController extends AbstractApiController {
     ): JSONResponse {
         $this->checkAccessPermissions();
 
-        $partners = $this->getSharePartners('');
+        $partners = $this->shareUserList->getShareUsers($receiver);
         if(!isset($partners[ $receiver ])) throw new ApiException('Invalid receiver uid', 400);
 
-        if(empty($expires)) $expires = null;
-        if($expires !== null && $expires < time()) {
-            throw new ApiException('Invalid expiration date', 400);
-        }
-        if($type !== 'user') {
-            throw new ApiException('Invalid share type', 400);
-        }
-
-        /** @var Password $model */
-        $model = $this->passwordModelService->findByUuid($password);
-        if($model->getShareId()) {
-            $sourceShare = $this->modelService->findByUuid($model->getShareId());
-            if($sourceShare->getUserId() === $receiver) throw new ApiException('Invalid receiver uid', 400);
-            if(!$sourceShare->isShareable() || !$this->isReSharingEnabled()) throw new ApiException('Entity not shareable', 403);
-            if(!$sourceShare->isEditable()) $editable = false;
-        }
-
-        $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
-        if($shares !== null) throw new ApiException('Entity already shared with user', 400);
-
-        /** @var PasswordRevision $revision */
-        $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
-        if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
-            throw new ApiException('CSE type does not support sharing', 420);
-        }
-
-        if($revision->isHidden()) {
-            throw new ApiException('Shared entity can not be hidden', 420);
-        }
-
-        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
-            $revision = $this->passwordRevisionService->clone(
-                $revision,
-                ['sseType' => EncryptionService::SSE_ENCRYPTION_V1]
-            );
-            $this->passwordRevisionService->save($revision);
-            $this->passwordModelService->setRevision($model, $revision);
-        }
-
-        $share = $this->modelService->create($model->getUuid(), $receiver, $type, $editable, $expires, $shareable);
-        $this->modelService->save($share);
-
-        if(!$model->hasShares()) {
-            $model->setHasShares(true);
-            $this->passwordModelService->save($model);
-        }
+        $share = $this->createPasswordShare->createPasswordShare(
+            $password,
+            $receiver,
+            $type,
+            $expires,
+            $editable,
+            $shareable
+        );
 
         return $this->createJsonResponse(
             ['id' => $share->getUuid()], Http::STATUS_CREATED
@@ -356,14 +279,15 @@ class ShareApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @deprecated
      */
     public function info(): JSONResponse {
         $info = [
-            'enabled'      => $this->shareManager->shareApiEnabled() &&
-                              !$this->shareManager->sharingDisabledForUser($this->userId),
-            'resharing'    => $this->isReSharingEnabled(),
-            'autocomplete' => $this->isAutoCompleteEnabled(),
-            'types'        => ['user']
+            'enabled'      => $this->shareSettings->get('enabled'),
+            'resharing'    => $this->shareSettings->get('resharing'),
+            'autocomplete' => $this->shareSettings->get('autocomplete'),
+            'types'        => $this->shareSettings->get('types')
         ];
 
         return $this->createJsonResponse($info);
@@ -383,8 +307,8 @@ class ShareApiController extends AbstractApiController {
         $this->checkAccessPermissions();
 
         $partners = [];
-        if($this->isAutoCompleteEnabled()) {
-            $partners = $this->getSharePartners($search);
+        if($this->shareSettings->get('autocomplete')) {
+            $partners = $this->shareUserList->getShareUsers($search);
         }
 
         return $this->createJsonResponse($partners);
@@ -422,57 +346,9 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @param string $pattern
-     *
-     * @return array
-     */
-    protected function getSharePartners(string $pattern): array {
-        $partners = [];
-        if($this->shareManager->shareWithGroupMembersOnly()) {
-            $userGroups = $this->groupManager->getUserGroupIds($this->user);
-            foreach($userGroups as $userGroup) {
-                $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, self::USER_SEARCH_LIMIT);
-                foreach($users as $uid => $name) {
-                    if($uid == $this->userId) continue;
-                    $partners[ $uid ] = $name;
-                }
-                if(count($partners) >= self::USER_SEARCH_LIMIT) break;
-            }
-        } else {
-            $usersTmp = $this->userManager->search($pattern, self::USER_SEARCH_LIMIT);
-
-            foreach($usersTmp as $user) {
-                if($user->getUID() == $this->userId) continue;
-                $partners[ $user->getUID() ] = $user->getDisplayName();
-            }
-        }
-
-        return $partners;
-    }
-
-    /**
      * @throws ApiException
      */
     protected function checkAccessPermissions(): void {
-        if(!$this->shareManager->shareApiEnabled()) {
-            throw new ApiException('Sharing disabled', 403);
-        }
-        if($this->shareManager->sharingDisabledForUser($this->userId)) {
-            throw new ApiException('Sharing disabled for user', 403);
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isReSharingEnabled(): bool {
-        return $this->config->getAppValue('core', 'shareapi_allow_resharing', 'yes') === 'yes';
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isAutoCompleteEnabled(): bool {
-        return $this->config->getAppValue('core', 'shareapi_allow_share_dialog_user_enumeration', 'yes') === 'yes';
+        if(!$this->shareSettings->get('enabled')) throw new ApiException('Sharing disabled', 403);
     }
 }

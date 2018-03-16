@@ -21,7 +21,7 @@ use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
-use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
+use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Hooks\FolderHook;
 use OCA\Passwords\Hooks\Manager\HookManager;
@@ -31,14 +31,10 @@ use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Services\NotificationService;
-use OCA\Passwords\Services\Object\PasswordRevisionService;
-use OCA\Passwords\Services\Object\PasswordService;
-use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IGroupManager;
 use OCP\IL10N;
-use OCP\IRequest;
 use OCP\L10N\IFactory;
 
 /**
@@ -129,21 +125,15 @@ class Application extends App {
         $container->registerAlias('ShareApiController', ShareApiController::class);
         $container->registerAlias('TagApiController', TagApiController::class);
 
-        $container->registerService(ShareApiController::class,
+        $container->registerService(ShareUserListHelper::class,
             function (IAppContainer $c) {
                 $server = $c->getServer();
 
-                return new ShareApiController(
+                return new ShareUserListHelper(
                     $server->getUserSession()->getUser(),
-                    $server->getConfig(),
-                    $c->query(IRequest::class),
                     $server->getShareManager(),
                     $server->getUserManager(),
-                    $c->query(ShareService::class),
-                    $c->query(IGroupManager::class),
-                    $c->query(ShareObjectHelper::class),
-                    $c->query(PasswordService::class),
-                    $c->query(PasswordRevisionService::class)
+                    $c->query(IGroupManager::class)
                 );
             });
     }
