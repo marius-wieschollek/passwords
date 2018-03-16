@@ -47,14 +47,17 @@ class SettingsManager {
      * @returns {Promise<*>}
      */
     async reset(setting) {
-        if(setting.substr(0, 6) === 'local.') {
+        let [scope, ] = setting.split('.', 2);
+
+        if(scope === 'local.') {
             this._settings[setting] = this._resetLocalSetting(setting);
-        } else {
+        } else if(scope === 'user' || scope === 'client') {
             this._settings[setting] = await API.resetSetting(setting);
             if(this._defaults.hasOwnProperty(setting)) {
                 this._settings[setting] = this._defaults[setting];
             }
         }
+
         return this._settings[setting];
     }
 
@@ -84,9 +87,11 @@ class SettingsManager {
      * @private
      */
     static async _setSetting(setting, value) {
-        if(setting.substr(0, 6) === 'local.') {
+        let [scope, ] = setting.split('.', 2);
+
+        if(scope === 'local.') {
             return SettingsManager._setLocalSetting(setting, value);
-        } else {
+        } else if(scope === 'user' || scope === 'client') {
             return await API.setSetting(setting, value);
         }
     }

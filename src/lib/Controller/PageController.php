@@ -89,7 +89,6 @@ class PageController extends Controller {
     /**
      * PageController constructor.
      *
-     * @param string               $appName
      * @param null|string          $userId
      * @param IRequest             $request
      * @param ISession             $session
@@ -104,7 +103,6 @@ class PageController extends Controller {
      * @param NotificationService  $notificationService
      */
     public function __construct(
-        string $appName,
         ?string $userId,
         IRequest $request,
         ISession $session,
@@ -118,17 +116,17 @@ class PageController extends Controller {
         SettingsService $settingsService,
         NotificationService $notificationService
     ) {
-        parent::__construct($appName, $request);
-        $this->random          = $random;
-        $this->userId          = $userId;
-        $this->config          = $config;
-        $this->logger          = $logger;
-        $this->session         = $session;
-        $this->encryption      = $encryption;
-        $this->userManager     = $userManager;
-        $this->localisation    = $localisation;
-        $this->tokenProvider   = $tokenProvider;
-        $this->settingsService = $settingsService;
+        parent::__construct(Application::APP_NAME, $request);
+        $this->random              = $random;
+        $this->userId              = $userId;
+        $this->config              = $config;
+        $this->logger              = $logger;
+        $this->session             = $session;
+        $this->encryption          = $encryption;
+        $this->userManager         = $userManager;
+        $this->localisation        = $localisation;
+        $this->tokenProvider       = $tokenProvider;
+        $this->settingsService     = $settingsService;
         $this->notificationService = $notificationService;
     }
 
@@ -250,28 +248,13 @@ class PageController extends Controller {
      * @throws \OCA\Passwords\Exception\ApiException
      */
     protected function getUserSettings() {
-        $keys = [
-            'user.password.generator.strength',
-            'user.password.generator.numbers',
-            'user.password.generator.special',
-            'user.mail.security',
-            'user.mail.shares',
-            'user.notification.security',
-            'user.notification.shares',
-            'user.notification.errors',
-            'client.ui.section.default',
-            'client.ui.password.field.title',
-            'client.ui.password.field.sorting',
-            'client.ui.password.menu.copy',
-            'client.ui.list.tags.show'
-        ];
-
-        $settings = [];
-        foreach($keys as $key) {
-            $settings[ $key ] = $this->settingsService->get($key);
-        }
-
-        Util::addHeader('meta', ['name' => 'settings', 'content' => json_encode($settings)]);
+        Util::addHeader(
+            'meta',
+            [
+                'name'    => 'settings',
+                'content' => json_encode($this->settingsService->list())
+            ]
+        );
     }
 
     /**

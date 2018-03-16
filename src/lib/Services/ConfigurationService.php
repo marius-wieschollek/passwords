@@ -62,8 +62,8 @@ class ConfigurationService {
      *
      * @return string
      */
-    public function getAppValue(string $key, $default = null) {
-        return $this->config->getAppValue(Application::APP_NAME, $key, $default);
+    public function getAppValue(string $key, $default = null, $app = Application::APP_NAME) {
+        return $this->config->getAppValue($app, $key, $default);
     }
 
     /**

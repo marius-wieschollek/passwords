@@ -29,7 +29,7 @@ export default class EnhancedApi extends SimpleApi {
         if(username !== null && password !== null) {
             if(window.localStorage.pwFolderIcon) this._folderIcon = window.localStorage.pwFolderIcon;
 
-            this.getSetting('theme.folder.icon')
+            this.getSetting('server.theme.folder.icon')
                 .then((url) => {
                     window.localStorage.pwFolderIcon = url;
                     this._folderIcon = url;

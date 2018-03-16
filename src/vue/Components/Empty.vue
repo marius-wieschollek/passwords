@@ -26,7 +26,7 @@
             };
         },
         created() {
-            API.getSetting('theme.app.icon')
+            API.getSetting('server.theme.app.icon')
                 .then((d) => {this.icon = d});
         }
     };

@@ -94,7 +94,7 @@ class SettingsApiController extends AbstractApiController {
      */
     public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
-            $this->settings->listSettings($scopes)
+            $this->settings->list($scopes)
         );
     }
 
