@@ -125,7 +125,7 @@ class UserSettingsHelper {
      */
     public function list(): array {
         $settings = [];
-        foreach($this->userSettings as $key => $type) {
+        foreach(array_keys($this->userSettings) as $key) {
             $setting              = 'user.'.str_replace('/', '.', $key);
             $settings[ $setting ] = $this->get($key);
         }

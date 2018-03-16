@@ -112,7 +112,7 @@
                     <div v-else>
                         <br>
                         <input type="checkbox" id="passwords-export-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3'"/>
-                        <translate tag="label" for="passwords-export-shared" say="Dont't edit passwords shared with me" v-if="options.mode !== '3'"/>
+                        <translate tag="label" for="passwords-export-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3'"/>
                     </div>
                 </div>
             </div>

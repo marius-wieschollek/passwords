@@ -6,18 +6,18 @@ class Events {
     constructor() {
         this.events = [];
         this.alias = {
-            "password.created" : ["password.changed", "data.changed"],
-            "password.updated" : ["password.changed", "data.changed"],
-            "password.deleted" : ["password.changed", "data.changed"],
-            "password.restored": ["password.changed", "data.changed"],
-            "folder.created"   : ["folder.changed", "data.changed"],
-            "folder.updated"   : ["folder.changed", "data.changed"],
-            "folder.deleted"   : ["folder.changed", "data.changed"],
-            "folder.restored"  : ["folder.changed", "data.changed"],
-            "tag.created"      : ["tag.changed", "data.changed"],
-            "tag.deleted"      : ["tag.changed", "data.changed"],
-            "tag.updated"      : ["tag.changed", "data.changed"],
-            "tag.restored"     : ["tag.changed", "data.changed"]
+            'password.created' : ['password.changed', 'data.changed'],
+            'password.updated' : ['password.changed', 'data.changed'],
+            'password.deleted' : ['password.changed', 'data.changed'],
+            'password.restored': ['password.changed', 'data.changed'],
+            'folder.created'   : ['folder.changed', 'data.changed'],
+            'folder.updated'   : ['folder.changed', 'data.changed'],
+            'folder.deleted'   : ['folder.changed', 'data.changed'],
+            'folder.restored'  : ['folder.changed', 'data.changed'],
+            'tag.created'      : ['tag.changed', 'data.changed'],
+            'tag.deleted'      : ['tag.changed', 'data.changed'],
+            'tag.updated'      : ['tag.changed', 'data.changed'],
+            'tag.restored'     : ['tag.changed', 'data.changed']
         };
     }
 
