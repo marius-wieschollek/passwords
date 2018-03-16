@@ -137,7 +137,7 @@ class LegacyPasswordMigration {
             $this->getNotes($properties, $password, $key),
             FolderService::BASE_FOLDER_UUID,
             $timestamp, false,
-            $this->getTrashed($properties),
+            $this->isTrashed($properties),
             false
         );
 
@@ -274,7 +274,7 @@ class LegacyPasswordMigration {
      *
      * @return bool
      */
-    protected function getTrashed(stdClass $properties): bool {
+    protected function isTrashed(stdClass $properties): bool {
         if(property_exists($properties, 'deleted')) {
             return $properties->deleted == true;
         }
