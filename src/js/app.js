@@ -3,7 +3,7 @@ import App from '@vue/App';
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import SectionAll from '@vue/Section/All';
-import Messages from "@js/Classes/Messages";
+import Messages from '@js/Classes/Messages';
 import SearchManager from '@/js/Manager/SearchManager';
 import SettingsManager from '@/js/Manager/SettingsManager';
 import EncryptionTestHelper from '@/js/Helper/EncryptionTestHelper';
