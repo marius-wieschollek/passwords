@@ -141,7 +141,7 @@ export default class Encryption {
                 position = 0;
 
             for(let j = 0; j < blockSize; j++) position += dataHash[start + j];
-            position = position * multiplier;
+            position *= multiplier;
             while(position > data.length - 1) position -= data.length - 1;
             iv[i] =data.splice(position, 1);
         }

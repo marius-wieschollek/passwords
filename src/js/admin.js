@@ -40,12 +40,12 @@ class PasswordsAdminSettings {
 
         $('#passwords-favicon').on(
             'change',
-            (e) => { PasswordsAdminSettings._updateApiField('favicon'); }
+            () => { PasswordsAdminSettings._updateApiField('favicon'); }
         );
 
         $('#passwords-preview').on(
             'change',
-            (e) => { PasswordsAdminSettings._updateApiField('preview'); }
+            () => { PasswordsAdminSettings._updateApiField('preview'); }
         );
 
         PasswordsAdminSettings._updateApiField('favicon');

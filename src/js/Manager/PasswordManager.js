@@ -66,8 +66,8 @@ class PasswordManager {
      */
     editPassword(password) {
         return new Promise((resolve, reject) => {
-            let PwCreateDialog = Vue.extend(CreateDialog);
-            let DialogWindow = new PwCreateDialog().$mount('#app-popup div');
+            let PwCreateDialog = Vue.extend(CreateDialog),
+                DialogWindow = new PwCreateDialog().$mount('#app-popup div');
 
             DialogWindow.title = 'Edit password';
             DialogWindow.password = Utility.cloneObject(password);
