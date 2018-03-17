@@ -25,7 +25,7 @@ class Messages {
      * @returns {Promise}
      */
     alert(message, title = 'Alert') {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
             let callback = function() { resolve(); };

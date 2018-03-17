@@ -106,8 +106,8 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
         for($i = 0; $i < 16; $i++) {
             $hexKey = dechex($i);
             $hashes = [];
-            $fh     = fopen($txtFile, 'r');
-            while(($line = fgets($fh)) !== false) {
+            $file   = fopen($txtFile, 'r');
+            while(($line = fgets($file)) !== false) {
                 list($first, $second) = explode("\t", "$line\t000000");
 
                 $hash = sha1($first);
@@ -124,7 +124,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
                     $hashes[ $key ][ $hash ] = &$null;
                 }
             }
-            fclose($fh);
+            fclose($file);
             $this->storeHashes($hashes);
         }
         unlink($txtFile);
@@ -139,21 +139,21 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     protected function highMemoryHashAlgorithm(string $txtFile): void {
         $null   = null;
         $hashes = [];
-        $fh     = fopen($txtFile, 'r');
-        while(($line = fgets($fh)) !== false) {
-            list($a, $b) = explode("\t", "$line\t000000");
+        $file   = fopen($txtFile, 'r');
+        while(($line = fgets($file)) !== false) {
+            list($first, $second) = explode("\t", "$line\t000000");
 
-            $hash = sha1(trim($a));
+            $hash = sha1(trim($first));
             $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
             if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
             $hashes[ $key ][ $hash ] = &$null;
 
-            $hash = sha1($b);
+            $hash = sha1($second);
             $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
             if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
             $hashes[ $key ][ $hash ] = &$null;
         }
-        fclose($fh);
+        fclose($file);
         $this->storeHashes($hashes);
 
         unlink($txtFile);

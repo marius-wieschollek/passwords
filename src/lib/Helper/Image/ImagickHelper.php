@@ -168,7 +168,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @return bool
      */
     public function supportsFormat(string $format): bool {
-        $i = $this->getNewImageObject();
+        $image = $this->getNewImageObject();
 
         if($format == 'vnd.microsoft.icon') {
             $format = 'icon';
@@ -177,7 +177,7 @@ class ImagickHelper extends AbstractImageHelper {
         } else if($format == 'svg+xml') $format = 'svg';
         $format = strtoupper($format);
 
-        return !empty($i->queryFormats($format));
+        return !empty($image->queryFormats($format));
     }
 
     /**
