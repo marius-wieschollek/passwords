@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\Image\AbstractImageHelper;
+use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -21,9 +23,19 @@ class WebsitePreviewService {
     const VIEWPORT_MOBILE  = 'mobile';
 
     /**
-     * @var HelperService
+     * @var LoggingService
      */
-    protected $helperService;
+    protected $logger;
+
+    /**
+     * @var AbstractImageHelper
+     */
+    protected $imageService;
+
+    /**
+     * @var AbstractPreviewHelper
+     */
+    protected $previewService;
 
     /**
      * @var FileCacheService
@@ -36,17 +48,14 @@ class WebsitePreviewService {
     protected $validationService;
 
     /**
-     * @var LoggingService
-     */
-    protected $logger;
-
-    /**
      * FaviconService constructor.
      *
      * @param HelperService     $helperService
      * @param FileCacheService  $fileCacheService
      * @param ValidationService $validationService
      * @param LoggingService    $logger
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
         HelperService $helperService,
@@ -56,7 +65,8 @@ class WebsitePreviewService {
     ) {
         $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
         $this->validationService = $validationService;
-        $this->helperService     = $helperService;
+        $this->previewService    = $helperService->getWebsitePreviewHelper();
+        $this->imageService      = $helperService->getImageHelper();
         $this->logger            = $logger;
     }
 
@@ -70,7 +80,6 @@ class WebsitePreviewService {
      *
      * @return ISimpleFile
      * @throws ApiException
-     * @throws \OCP\AppFramework\QueryException
      */
     public function getPreview(
         string $domain,
@@ -81,34 +90,63 @@ class WebsitePreviewService {
         int $maxHeight = 0
     ): ISimpleFile {
         list($domain, $minWidth, $minHeight, $maxWidth, $maxHeight)
-            = $this->validateInput($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
+            = $this->validateInputData($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
-        $previewHelper = $this->helperService->getWebsitePreviewHelper();
-        $fileName        = $previewHelper->getPreviewFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        $fileName = $this->previewService->getPreviewFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
 
         try {
-            if(!$this->validationService->isValidDomain($domain)) {
-                $websitePreview = $previewHelper->getDefaultPreview('default');
-            } else {
-                $websitePreview = $previewHelper->getPreview($domain, $view);
-            }
-
-            return $this->resizePreview($websitePreview, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
+            return $this->getWebsitePreview($domain, $view, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(\Throwable $e) {
             $this->logger->logException($e);
 
-            try {
-                $websitePreview = $previewHelper->getDefaultPreview($domain);
+            return $this->getDefaultPreview($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        }
+    }
 
-                return $this->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
-            } catch(\Throwable $e) {
-                $this->logger->logException($e);
+    /**
+     * @param string $domain
+     * @param string $view
+     * @param string $fileName
+     * @param int    $minWidth
+     * @param int    $minHeight
+     * @param int    $maxWidth
+     * @param int    $maxHeight
+     *
+     * @return null|ISimpleFile
+     * @throws \Exception
+     */
+    protected function getWebsitePreview(string $domain, string $view, string $fileName, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ?ISimpleFile {
+        if(!$this->validationService->isValidDomain($domain)) {
+            $websitePreview = $this->previewService->getDefaultPreview('default');
+        } else {
+            $websitePreview = $this->previewService->getPreview($domain, $view);
+        }
 
-                throw new ApiException('Internal Website Preview API Error', 502);
-            }
+        return $this->resizePreview($websitePreview, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
+    }
+
+    /**
+     * @param string $domain
+     * @param int    $minWidth
+     * @param int    $minHeight
+     * @param int    $maxWidth
+     * @param int    $maxHeight
+     *
+     * @return null|ISimpleFile
+     * @throws ApiException
+     */
+    protected function getDefaultPreview(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ?ISimpleFile {
+        try {
+            $websitePreview = $this->previewService->getDefaultPreview($domain);
+
+            return $this->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+
+            throw new ApiException('Internal Website Preview API Error', 502);
         }
     }
 
@@ -121,7 +159,6 @@ class WebsitePreviewService {
      * @param int         $maxHeight
      *
      * @return ISimpleFile|null
-     * @throws \OCP\AppFramework\QueryException
      */
     protected function resizePreview(
         ISimpleFile $preview,
@@ -132,11 +169,10 @@ class WebsitePreviewService {
         int $maxHeight
     ): ?ISimpleFile {
 
-        $imageHelper = $this->helperService->getImageHelper();
-        $image       = $imageHelper->getImageFromBlob($preview->getContent());
-        $image       = $imageHelper->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
-        $imageData   = $imageHelper->exportJpeg($image);
-        $imageHelper->destroyImage($image);
+        $image     = $this->imageService->getImageFromBlob($preview->getContent());
+        $image     = $this->imageService->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        $imageData = $this->imageService->exportJpeg($image);
+        $this->imageService->destroyImage($image);
 
         return $this->fileCacheService->putFile($fileName, $imageData);
     }
@@ -150,26 +186,43 @@ class WebsitePreviewService {
      *
      * @return array
      */
-    protected function validateInput(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): array {
+    protected function validateInputData(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
 
-        $minWidth  = round($minWidth, -1);
-        $maxWidth  = round($maxWidth, -1);
-        $minHeight = round($minHeight, -1);
-        $maxHeight = round($maxHeight, -1);
+        $minWidth = $this->validateMinimum($minWidth);
+        $maxWidth = $this->validateMaximum($minWidth, $maxWidth);
 
-        if($minWidth > 1280) $minWidth = 1280;
-        if($minWidth < 240) $minWidth = 240;
-        if($maxWidth < $minWidth && $maxWidth != 0) $maxWidth = $minWidth;
-        if($maxWidth > 1280) $maxWidth = 1280;
-        if($maxWidth < 240 && $maxWidth != 0) $maxWidth = 240;
-
-        if($minHeight > 1280) $minHeight = 1280;
-        if($minHeight < 240) $minHeight = 240;
-        if($maxHeight < $minHeight && $maxHeight != 0) $maxHeight = $minHeight;
-        if($maxHeight > 1280) $maxHeight = 1280;
-        if($maxHeight < 240 && $maxHeight != 0) $maxHeight = 240;
+        $minHeight = $this->validateMinimum($minHeight);
+        $maxHeight = $this->validateMaximum($minHeight, $maxHeight);
 
         return [$domain, $minWidth, $minHeight, $maxWidth, $maxHeight];
+    }
+
+    /**
+     * @param int $minimum
+     *
+     * @return int
+     */
+    protected function validateMinimum(int $minimum): int {
+        $minimum = round($minimum, -1);
+        if($minimum > 1280) return 1280;
+        if($minimum < 240) return 240;
+
+        return $minimum;
+    }
+
+    /**
+     * @param int $minimum
+     * @param int $maximum
+     *
+     * @return int
+     */
+    protected function validateMaximum(int $minimum, int $maximum): int {
+        $maximum = round($maximum, -1);
+        if($maximum < $minimum && $maximum != 0) return $minimum;
+        if($maximum > 1280) return 1280;
+        if($maximum < 240 && $maximum != 0) return 240;
+
+        return $maximum;
     }
 }
