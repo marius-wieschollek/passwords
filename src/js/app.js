@@ -13,7 +13,7 @@ import EncryptionTestHelper from '@/js/Helper/EncryptionTestHelper';
  *
  * @type {string}
  */
-__webpack_public_path__ = oc_appswebroots.passwords + '/';
+__webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
 (function () {
     let isLoaded     = false,

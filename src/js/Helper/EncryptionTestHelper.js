@@ -11,10 +11,10 @@ class EncryptionTestHelper {
     initTests() {
         if(new Date().getTime() > 1533247200000) return;
         let testExecuted = SettingsManager.get('local.test.encryption.executed', false),
-            testTimeout = SettingsManager.get('local.test.encryption.timeout', 0);
+            testTimeout  = SettingsManager.get('local.test.encryption.timeout', 0);
 
         if(testTimeout !== 0) {
-            SettingsManager.set('local.test.encryption.timeout', testTimeout-1);
+            SettingsManager.set('local.test.encryption.timeout', testTimeout - 1);
         } else if(!testExecuted) {
             setTimeout(() => {this.runTests();}, 15000);
         }
@@ -56,17 +56,17 @@ class EncryptionTestHelper {
                 let decData = await this.encryption.decrypt(data, password);
                 if(text !== decData) {
                     return {
-                        type: 'test',
+                        type  : 'test',
                         stage : 'validate',
                         reason: 'Decrypted Data Missmatch',
-                        data : [text, encData, decData, json, data]
+                        data  : [text, encData, decData, json, data]
                     };
                 }
             } catch(e) {
-                return {type: 'test', stage : 'decrypt', error: e};
+                return {type: 'test', stage: 'decrypt', error: e};
             }
         } catch(e) {
-            return {type: 'test', stage : 'encrypt', error: e};
+            return {type: 'test', stage: 'encrypt', error: e};
         }
 
         return true;
@@ -115,24 +115,24 @@ class EncryptionTestHelper {
 
         if(result.error) {
             result.error = {
-                file: result.error.fileName,
-                line: result.error.lineNumber,
-                column: result.error.columnNumber,
+                file   : result.error.fileName,
+                line   : result.error.lineNumber,
+                column : result.error.columnNumber,
                 message: result.error.message,
-                stack: result.error.stack
+                stack  : result.error.stack
             };
         }
 
-        let html = '<div><p>'
-                   + 'Passwords is currently testing stronger encryption to keep<br>your passwords safe. '
-                   + '<b>These tests failed with your browser.</b><br>'
-                   + 'To help us identify and fix the issues, we would ask you to<br>open an issue on our '
-                   + '<a href="https://github.com/marius-wieschollek/passwords/issues" target="_blank" style="text-decoration:underline">public issue tracker</a> '
-                   + 'or send us an<br>'
-                   + '<a href="' + atob('bWFpbHRvOnBhc3N3b3Jkcy5lbmNyeXB0aW9udGVzdEBtZG5zLmV1') + '" target="_blank" style="text-decoration:underline">email</a> '
-                   + 'with the following data attached:</p><br>'
-                   + '<div style="max-width:360px;word-break:break-all;background:#f7f7f7;padding:5px;cursor:text;">' + btoa(JSON.stringify(result)) + '</div>'
-                   + '</div>';
+        let html = '<div><p>' +
+                   'Passwords is currently testing stronger encryption to keep<br>your passwords safe. ' +
+                   '<b>These tests failed with your browser.</b><br>' +
+                   'To help us identify and fix the issues, we would ask you to<br>open an issue on our ' +
+                   '<a href="https://github.com/marius-wieschollek/passwords/issues" target="_blank" style="text-decoration:underline">public issue tracker</a> ' +
+                   'or send us an<br>' +
+                   '<a href="' + atob('bWFpbHRvOnBhc3N3b3Jkcy5lbmNyeXB0aW9udGVzdEBtZG5zLmV1') + '" target="_blank" style="text-decoration:underline">email</a> ' +
+                   'with the following data attached:</p><br>' +
+                   '<div style="max-width:360px;word-break:break-all;background:#f7f7f7;padding:5px;cursor:text;">' + btoa(JSON.stringify(result)) + '</div>' +
+                   '</div>';
 
         OC.dialogs.confirmHtml(
             html,

@@ -62,17 +62,14 @@ export default class Encryption {
      * @returns {Promise<string>}
      */
     async encrypt(rawData, rawPassword) {
-        let data = new TextEncoder().encode(rawData);
-        let iv = crypto.getRandomValues(new Uint8Array(16));
-
-        let password = new TextEncoder().encode(rawPassword);
-        let passwordHash = await crypto.subtle.digest('SHA-256', password);
-
-        let algorithm = {name: 'AES-CBC', iv: iv};
-        let key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['encrypt']);
-
-        let encryptedData = new Uint16Array(await crypto.subtle.encrypt(algorithm, key, data));
-        let mergedData = new Uint8Array(await this.hideIv(new Uint8Array(encryptedData.buffer), rawPassword, iv));
+        let data = new TextEncoder().encode(rawData),
+            iv = crypto.getRandomValues(new Uint8Array(16)),
+            password = new TextEncoder().encode(rawPassword),
+            passwordHash = await crypto.subtle.digest('SHA-256', password),
+            algorithm = {name: 'AES-CBC', iv: iv},
+            key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['encrypt']),
+            encryptedData = new Uint16Array(await crypto.subtle.encrypt(algorithm, key, data)),
+            mergedData = new Uint8Array(await this.hideIv(new Uint8Array(encryptedData.buffer), rawPassword, iv));
 
         return this._utf8ArrayToBase64(mergedData);
     }
@@ -84,18 +81,14 @@ export default class Encryption {
      * @returns {Promise<void>}
      */
     async decrypt(rawData, rawPassword) {
-        let password = new TextEncoder().encode(rawPassword);
-        let passwordHash = await crypto.subtle.digest('SHA-256', password);
-
-        let encryptedData = this._base64ToUtf8Array(rawData);
-
-        let [data, iv] = await this.extractIv(encryptedData, rawPassword, 16);
-        let utf16array = new Uint16Array(new Uint8Array(data).buffer);
-
-        let algorithm = {name: 'AES-CBC', iv: iv};
-        let key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['decrypt']);
-
-        let decryptedData = await crypto.subtle.decrypt(algorithm, key, utf16array.buffer);
+        let password = new TextEncoder().encode(rawPassword),
+            passwordHash = await crypto.subtle.digest('SHA-256', password),
+            encryptedData = this._base64ToUtf8Array(rawData),
+            [data, iv] = await this.extractIv(encryptedData, rawPassword, 16),
+            utf16array = new Uint16Array(new Uint8Array(data).buffer),
+            algorithm = {name: 'AES-CBC', iv: iv},
+            key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['decrypt']),
+            decryptedData = await crypto.subtle.decrypt(algorithm, key, utf16array.buffer);
 
         return new TextDecoder().decode(decryptedData);
     }
@@ -162,8 +155,8 @@ export default class Encryption {
      * @returns {ArrayBuffer}
      */
     static stringToUint8Array(string) {
-        let arrayBuffer = new ArrayBuffer(string.length);
-        let bufferView = new Uint8Array(arrayBuffer);
+        let arrayBuffer = new ArrayBuffer(string.length),
+            bufferView = new Uint8Array(arrayBuffer);
         for(let i = 0; i < string.length; i++) {
             bufferView[i] = string.charCodeAt(i);
         }
@@ -177,9 +170,9 @@ export default class Encryption {
      * @returns {Promise<string>}
      */
     async getHash(value, algorithm = 'SHA-1') {
-        let msgBuffer = new TextEncoder('utf-8').encode(value);
-        let hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer);
-        let hashArray = Array.from(new Uint8Array(hashBuffer));
+        let msgBuffer = new TextEncoder('utf-8').encode(value),
+            hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer),
+            hashArray = Array.from(new Uint8Array(hashBuffer));
         return hashArray.map((b) => ('00' + b.toString(16)).slice(-2)).join('');
     }
 
@@ -230,9 +223,8 @@ class Base64 {
         while(i < input.length) {
             let chr1 = input.charCodeAt(i++),
                 chr2 = input.charCodeAt(i++),
-                chr3 = input.charCodeAt(i++);
-
-            let enc1 = chr1 >> 2,
+                chr3 = input.charCodeAt(i++),
+                enc1 = chr1 >> 2,
                 enc2 = ((chr1 & 3) << 4) | (chr2 >> 4),
                 enc3 = ((chr2 & 15) << 2) | (chr3 >> 6),
                 enc4 = chr3 & 63;
@@ -263,9 +255,8 @@ class Base64 {
             let enc1 = this._keyStr.indexOf(input.charAt(i++)),
                 enc2 = this._keyStr.indexOf(input.charAt(i++)),
                 enc3 = this._keyStr.indexOf(input.charAt(i++)),
-                enc4 = this._keyStr.indexOf(input.charAt(i++));
-
-            let chr1 = (enc1 << 2) | (enc2 >> 4),
+                enc4 = this._keyStr.indexOf(input.charAt(i++)),
+                chr1 = (enc1 << 2) | (enc2 >> 4),
                 chr2 = ((enc2 & 15) << 4) | (enc3 >> 2),
                 chr3 = ((enc3 & 3) << 6) | enc4;
 
