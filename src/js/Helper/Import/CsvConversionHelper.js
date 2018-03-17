@@ -248,8 +248,9 @@ export default class ImportCsvConversionHelper {
      * @param object
      */
     static _repairObject(object) {
+        let domain = new RegExp('^([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.){1,}[a-zA-Z]{2,}$');
         if(!object.url || object.url.length === 0) {
-            if(object.label && object.label.match(/^([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.){1,}[a-zA-Z]{2,}$/)) {
+            if(object.label && domain.test(object.label)) {
                 object.url = SimpleApi.parseUrl(object.label, 'href');
                 object.label = null;
             }
