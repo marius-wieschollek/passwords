@@ -260,7 +260,7 @@ export class ImportManager {
                 folders.concat(folderDb);
                 break;
             }
-            lastLength = folderDb.length
+            lastLength = folderDb.length;
         }
 
         return folders;
@@ -295,7 +295,7 @@ export class ImportManager {
                     let id = password.tags[j];
 
                     if(tagMapping.hasOwnProperty(id)) {
-                        tags.push(tagMapping[id])
+                        tags.push(tagMapping[id]);
                     }
                 }
                 password.tags = tags;

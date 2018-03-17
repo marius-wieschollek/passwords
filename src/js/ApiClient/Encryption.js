@@ -18,7 +18,7 @@ export default class Encryption {
      * @returns {Promise<*>}
      */
     async encryptObject(object, password, type) {
-        if(!this.fields.hasOwnProperty(type)) throw "Invalid object type";
+        if(!this.fields.hasOwnProperty(type)) throw 'Invalid object type';
         let fields = this.fields[type];
 
         for(let i = 0; i < fields.length; i++) {
@@ -41,7 +41,7 @@ export default class Encryption {
      * @returns {Promise<*>}
      */
     async decryptObject(object, password, type) {
-        if(!this.fields.hasOwnProperty(type)) throw "Invalid object type";
+        if(!this.fields.hasOwnProperty(type)) throw 'Invalid object type';
         let fields = this.fields[type];
 
         for(let i = 0; i < fields.length; i++) {
@@ -141,7 +141,7 @@ export default class Encryption {
             multiplier = Math.ceil(length / 640),
             iv         = new Uint8Array(ivLength);
 
-        if(length <= 0) throw "invalid encrypted data";
+        if(length <= 0) throw 'Invalid encrypted data';
 
         for(let i = ivLength - 1; i >= 0; i--) {
             let start    = i * blockSize,
@@ -180,7 +180,7 @@ export default class Encryption {
         let msgBuffer = new TextEncoder('utf-8').encode(value);
         let hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer);
         let hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+        return hashArray.map((b) => ('00' + b.toString(16)).slice(-2)).join('');
     }
 
     /**
@@ -190,7 +190,7 @@ export default class Encryption {
      * @private
      */
     _utf8ArrayToBase64(buffer) {
-        let binary = Array.prototype.map.call(buffer, function(ch) {return String.fromCharCode(ch);}).join('');
+        let binary = Array.prototype.map.call(buffer, (ch) => {return String.fromCharCode(ch);}).join('');
         return this.base64.encode(binary);
     }
 
@@ -203,7 +203,7 @@ export default class Encryption {
     _base64ToUtf8Array(base64) {
         let binary = this.base64.decode(base64),
             buffer = new Uint8Array(binary.length);
-        Array.prototype.forEach.call(binary, function(ch, i) {buffer[i] = ch.charCodeAt(0);});
+        Array.prototype.forEach.call(binary, (ch, i) => {buffer[i] = ch.charCodeAt(0);});
         return buffer;
     }
 }
@@ -256,7 +256,7 @@ class Base64 {
      * @returns {*}
      */
     decode(input) {
-        input = input.replace(/[^A-Za-z0-9+\/=]/g, "");
+        input = input.replace(/[^A-Za-z0-9+\/=]/g, '');
 
         let output = '', i = 0;
         while(i < input.length) {
@@ -284,7 +284,7 @@ class Base64 {
      * @private
      */
     static _utf8Encode(string) {
-        string = string.replace(/\r\n/g, "\n");
+        string = string.replace(/\r\n/g, '\n');
 
         let utf8text = '';
         for(let i = 0; i < string.length; i++) {

@@ -14,7 +14,7 @@ class Messages {
             setTimeout(function() {
                 OC.Notification.hide($element);
                 resolve();
-            }, 10000)
+            }, 10000);
         });
     }
 
@@ -118,13 +118,13 @@ class Messages {
 
                     for(let i = 0; i < serialized.length; i++) {
                         let field = serialized[i];
-                        data[field.name] = field.value
+                        data[field.name] = field.value;
                     }
 
                     $('.oc-dialog, .oc-dialog-dim').remove();
-                    resolve(data)
+                    resolve(data);
                 } else {
-                    reject()
+                    reject();
                 }
             };
 
@@ -151,7 +151,7 @@ class Messages {
     _setDialogValue(value) {
         let $el = $('.oc-dialog-content input');
         if($el.length === 0) {
-            setTimeout(() => { this._setDialogValue(value) }, 10)
+            setTimeout(() => { this._setDialogValue(value) }, 10);
         } else {
             $el.val(value);
         }

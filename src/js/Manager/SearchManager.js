@@ -33,7 +33,7 @@ class SearchManager {
             return;
         }
 
-        let stats        = {query: query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
+        let stats        = {query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
             searchParams = SearchManager._processQuery(query),
             index        = this._getSearchIndex();
         for(let key in index) {
@@ -169,13 +169,19 @@ class SearchManager {
         if(substring.length !== 0) value += substring;
         if(value.length !== 0) SearchManager._addFieldToSearchParams(params, field, value);
 
-        console.log(params);
         return params;
     }
 
-    static _addFieldToSearchParams(params, field, value) {
-        let realValue = value.trim();
-        if(realValue.length > 2) params.push({field: field, value: realValue});
+    /**
+     *
+     * @param params
+     * @param field
+     * @param rawValue
+     * @private
+     */
+    static _addFieldToSearchParams(params, field, rawValue) {
+        let value = rawValue.trim();
+        if(value.length > 2) params.push({field, value});
     }
 
     /**

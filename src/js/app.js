@@ -15,7 +15,7 @@ import EncryptionTestHelper from '@/js/Helper/EncryptionTestHelper';
  */
 __webpack_public_path__ = oc_appswebroots.passwords + '/';
 
-(function() {
+(function () {
     let isLoaded     = false,
         loadInterval = null,
         app = null;
@@ -65,4 +65,4 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
         window.addEventListener('load', () => { load(); }, false);
         loadInterval = setInterval(() => { load(); }, 10);
     }
-})();
+}());

@@ -108,7 +108,7 @@ export default class ImportCsvConversionHelper {
     static async _convertCsv(data, options) {
         let [tags, tagIdMap, tagKeyMap]          = await ImportCsvConversionHelper._generateTags(data, options),
             [folders, folderIdMap, folderKeyMap] = await ImportCsvConversionHelper._generateFolders(data, options),
-            db                                   = {tags: tags, folders: folders, passwords: []};
+            db                                   = {tags, folders, passwords: []};
 
         if(options.db === 'passwords') {
             let passwordIdMap = ImportCsvConversionHelper._createLabelMapping(await API.listPasswords());
@@ -167,7 +167,7 @@ export default class ImportCsvConversionHelper {
 
                 if(!idMap.hasOwnProperty(label)) {
                     keyMap[label] = tags.length;
-                    tags.push({id: label, label: label, color: randomMC.getColor()});
+                    tags.push({id: label, label, color: randomMC.getColor()});
                     element.tags[j] = idMap[label];
                     idMap[label] = label;
                 } else {
@@ -210,7 +210,7 @@ export default class ImportCsvConversionHelper {
                     let label = element[properties[j]];
                     if(!idMap.hasOwnProperty(label)) {
                         keyMap[label] = folders.length;
-                        folders.push({id: label, label: label});
+                        folders.push({id: label, label});
                         element[j] = label;
                         idMap[label] = label;
                     } else {

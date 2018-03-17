@@ -95,10 +95,10 @@ class EncryptionTestHelper {
                 try {
                     await this.encryption.decryptObject(encrypted, this.password, type);
                 } catch(e) {
-                    return {type: type, stage: 'decrypt', id: i, error: e};
+                    return {type, stage: 'decrypt', id: i, error: e};
                 }
             } catch(e) {
-                return {type: type, stage: 'encrypt', id: i, error: e};
+                return {type, stage: 'encrypt', id: i, error: e};
             }
         }
 

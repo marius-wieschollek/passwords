@@ -47,7 +47,7 @@ class SettingsManager {
      * @returns {Promise<*>}
      */
     async reset(setting) {
-        let [scope, ] = setting.split('.', 2);
+        let [scope] = setting.split('.', 2);
 
         if(scope === 'local.') {
             this._settings[setting] = this._resetLocalSetting(setting);

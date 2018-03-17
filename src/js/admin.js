@@ -60,7 +60,7 @@ class PasswordsAdminSettings {
      * @private
      */
     _setValue(key, value) {
-        $.post(this.settingsUrl, {'key': key, 'value': value})
+        $.post(this.settingsUrl, {key, value})
          .success(() => {this._showMessage('success');})
          .fail(() => {this._showMessage('error');});
     }
@@ -89,7 +89,7 @@ class PasswordsAdminSettings {
      * @private
      */
     _clearCache(key) {
-        $.post(this.cacheUrl, {'key': key});
+        $.post(this.cacheUrl, {key});
     }
 
     /**

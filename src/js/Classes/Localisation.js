@@ -19,7 +19,7 @@ export default class Localisation {
      * @returns {string}
      */
     static formatDate(date) {
-        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month: 'short', day: 'numeric' })
+        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
     /**
@@ -28,7 +28,7 @@ export default class Localisation {
      * @returns {string}
      */
     static formatDateTime(date) {
-        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
     }
 
     /**

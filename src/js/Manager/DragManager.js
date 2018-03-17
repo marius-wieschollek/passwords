@@ -35,12 +35,12 @@ export default new class DragManager {
                 }
 
                 if($target.length !== 0 && types.indexOf($target.data().dropType) !== -1) {
-                    resolve($target.data())
+                    resolve($target.data());
                 } else {
                     reject({});
                 }
             }, false);
-        })
+        });
     }
 
     static scrollContent(e) {
@@ -55,4 +55,4 @@ export default new class DragManager {
         }
         return false;
     }
-}
+};

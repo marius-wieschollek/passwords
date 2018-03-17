@@ -35,7 +35,7 @@ class TagManager {
                         .then(resolve)
                         .catch(reject);
                 })
-                .catch(reject)
+                .catch(reject);
         });
     }
 
@@ -101,7 +101,7 @@ class TagManager {
                             reject(tag);
                         });
                 })
-                .catch(() => {reject();})
+                .catch(() => {reject();});
         });
     }
 

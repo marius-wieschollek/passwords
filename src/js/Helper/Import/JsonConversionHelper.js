@@ -88,7 +88,7 @@ export default class ImportJsonConversionHelper {
                     mapping[label] = label;
                     tags.push({
                                   id   : label,
-                                  label: label,
+                                  label,
                                   color: randomMC.getColor()
                               });
                 }
@@ -125,7 +125,7 @@ export default class ImportJsonConversionHelper {
                 if(object.username.length === 0) {
                     object.username = element.email;
                 } else {
-                    if(object.notes.length !== 0) object.notes += "\n\n";
+                    if(object.notes.length !== 0) object.notes += '\n\n';
                     object.notes += Localisation.translate('Email') + ': ' + element.email;
                 }
             }

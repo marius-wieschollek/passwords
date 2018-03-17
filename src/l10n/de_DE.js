@@ -1,4 +1,4 @@
-(function() {
+(function () {
     let translations = {
         'Passwords'                           : 'Passwörter',
         'All'                                 : 'Alle',
@@ -294,4 +294,4 @@
         Object.assign(translations, helpTexts, longTexts),
         'nplurals=2; plural=(n != 1);'
     );
-})();
+}());

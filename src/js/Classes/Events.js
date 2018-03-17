@@ -65,7 +65,7 @@ class Events {
             let event = events[i];
             if(!this.events.hasOwnProperty(event)) continue;
 
-            let data = {event: event, object: object};
+            let data = {event, object};
             let callbacks = this.events[event];
             for(let j = 0; j < callbacks.length; j++) {
                 try {

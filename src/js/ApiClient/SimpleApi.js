@@ -84,11 +84,11 @@ export default class SimpleApi {
      * @param password
      */
     login(baseUrl, username = null, password = null) {
-        if(baseUrl.substr(0, 5) !== 'https') throw "HTTPS required for api";
+        if(baseUrl.substr(0, 5) !== 'https') throw 'HTTPS required for api';
 
         this._endpoint = baseUrl;
         if(username !== null && password !== null) {
-            this._headers.Authorization = 'Basic ' + btoa(username + ':' + password);
+            this._headers.Authorization = `Basic ${btoa(username + ':' + password)}`;
         }
     }
 
@@ -121,11 +121,11 @@ export default class SimpleApi {
      * Returns the password with the given id and the given detail level
      *
      * @param id
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    showPassword(id, detailLevel = 'model') {
-        return this._createRequest('password.show', {id: id, details: detailLevel}, 'POST');
+    showPassword(id, details = 'model') {
+        return this._createRequest('password.show', {id, details}, 'POST');
     }
 
     /**
@@ -146,7 +146,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deletePassword(id) {
-        return this._createRequest('password.delete', {id: id}, 'DELETE');
+        return this._createRequest('password.delete', {id}, 'DELETE');
     }
 
     /**
@@ -157,28 +157,28 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     restorePassword(id, revision = null) {
-        return this._createRequest('password.restore', {id: id, revision: revision}, 'PATCH');
+        return this._createRequest('password.restore', {id, revision}, 'PATCH');
     }
 
     /**
      * Gets all the passwords, excluding those hidden or in trash
      *
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    listPasswords(detailLevel = 'model') {
-        return this._createRequest('password.list', {details: detailLevel}, 'POST');
+    listPasswords(details = 'model') {
+        return this._createRequest('password.list', {details}, 'POST');
     }
 
     /**
      * Gets all the passwords matching the criteria, excluding those hidden
      *
      * @param criteria
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    findPasswords(criteria = {}, detailLevel = 'model') {
-        return this._createRequest('password.find', {details: detailLevel, criteria: criteria}, 'POST');
+    findPasswords(criteria = {}, details = 'model') {
+        return this._createRequest('password.find', {details, criteria}, 'POST');
     }
 
 
@@ -200,11 +200,11 @@ export default class SimpleApi {
      * Returns the folder with the given id and the given detail level
      *
      * @param id
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    showFolder(id = '00000000-0000-0000-0000-000000000000', detailLevel = 'model') {
-        return this._createRequest('folder.show', {id: id, details: detailLevel}, 'POST');
+    showFolder(id = '00000000-0000-0000-0000-000000000000', details = 'model') {
+        return this._createRequest('folder.show', {id, details}, 'POST');
     }
 
     /**
@@ -224,7 +224,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deleteFolder(id) {
-        return this._createRequest('folder.delete', {id: id}, 'DELETE');
+        return this._createRequest('folder.delete', {id}, 'DELETE');
     }
 
     /**
@@ -235,28 +235,28 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     restoreFolder(id, revision = null) {
-        return this._createRequest('folder.restore', {id: id, revision: revision}, 'PATCH');
+        return this._createRequest('folder.restore', {id, revision}, 'PATCH');
     }
 
     /**
      * Gets all the folders, excluding those hidden or in trash
      *
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    listFolders(detailLevel = 'model') {
-        return this._createRequest('folder.list', {details: detailLevel}, 'POST');
+    listFolders(details = 'model') {
+        return this._createRequest('folder.list', {details}, 'POST');
     }
 
     /**
      * Gets all the folders matching the criteria, excluding those hidden
      *
      * @param criteria
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    findFolders(criteria = {}, detailLevel = 'model') {
-        return this._createRequest('folder.find', {details: detailLevel, criteria: criteria}, 'POST');
+    findFolders(criteria = {}, details = 'model') {
+        return this._createRequest('folder.find', {details, criteria}, 'POST');
     }
 
 
@@ -278,11 +278,11 @@ export default class SimpleApi {
      * Returns the tag with the given id and the given detail level
      *
      * @param id
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    showTag(id, detailLevel = 'model') {
-        return this._createRequest('tag.show', {id: id, details: detailLevel}, 'POST');
+    showTag(id, details = 'model') {
+        return this._createRequest('tag.show', {id, details}, 'POST');
     }
 
     /**
@@ -302,7 +302,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deleteTag(id) {
-        return this._createRequest('tag.delete', {id: id}, 'DELETE');
+        return this._createRequest('tag.delete', {id}, 'DELETE');
     }
 
     /**
@@ -313,28 +313,28 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     restoreTag(id, revision = null) {
-        return this._createRequest('tag.restore', {id: id, revision: revision}, 'PATCH');
+        return this._createRequest('tag.restore', {id, revision}, 'PATCH');
     }
 
     /**
      * Gets all the tags, excluding those hidden or in trash
      *
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    listTags(detailLevel = 'model') {
-        return this._createRequest('tag.list', {details: detailLevel}, 'POST');
+    listTags(details = 'model') {
+        return this._createRequest('tag.list', {details}, 'POST');
     }
 
     /**
      * Gets all the tags matching the criteria, excluding those hidden
      *
      * @param criteria
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    findTags(criteria = {}, detailLevel = 'model') {
-        return this._createRequest('tag.find', {details: detailLevel, criteria: criteria}, 'POST');
+    findTags(criteria = {}, details = 'model') {
+        return this._createRequest('tag.find', {details, criteria}, 'POST');
     }
 
 
@@ -356,11 +356,11 @@ export default class SimpleApi {
      * Returns the share with the given id and the given detail level
      *
      * @param id
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    showShare(id, detailLevel = 'model') {
-        return this._createRequest('share.show', {id: id, details: detailLevel}, 'POST');
+    showShare(id, details = 'model') {
+        return this._createRequest('share.show', {id, details}, 'POST');
     }
 
     /**
@@ -380,28 +380,28 @@ export default class SimpleApi {
      * @param id
      */
     deleteShare(id) {
-        return this._createRequest('share.delete', {id: id}, 'DELETE');
+        return this._createRequest('share.delete', {id}, 'DELETE');
     }
 
     /**
      * Gets all the shares, excluding those hidden or in trash
      *
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    listShares(detailLevel = 'model') {
-        return this._createRequest('share.list', {details: detailLevel}, 'POST');
+    listShares(details = 'model') {
+        return this._createRequest('share.list', {details}, 'POST');
     }
 
     /**
      * Gets all the shares matching the criteria, excluding those hidden
      *
      * @param criteria
-     * @param detailLevel
+     * @param details
      * @returns {Promise}
      */
-    findShares(criteria = {}, detailLevel = 'model') {
-        return this._createRequest('share.find', {details: detailLevel, criteria: criteria}, 'POST');
+    findShares(criteria = {}, details = 'model') {
+        return this._createRequest('share.find', {details, criteria}, 'POST');
     }
 
     /**
@@ -418,7 +418,7 @@ export default class SimpleApi {
      */
     findSharePartners(search = '') {
         if(search.length === 0) return this._createRequest('share.partners');
-        return this._createRequest('share.partners', {search: search}, 'POST');
+        return this._createRequest('share.partners', {search}, 'POST');
     }
 
 
@@ -460,7 +460,7 @@ export default class SimpleApi {
      */
     listSettings(scopes = null) {
         if(scopes === null) return this._createRequest('settings.list');
-        return this._createRequest('settings.list', {scopes: scopes}, 'POST');
+        return this._createRequest('settings.list', {scopes}, 'POST');
     }
 
 
@@ -472,20 +472,19 @@ export default class SimpleApi {
      * Generates a password with the given strength and the given options
      *
      * @param strength
-     * @param useNumbers
-     * @param useSpecialCharacters
+     * @param numbers
+     * @param special
      * @returns {Promise}
      */
-    generatePassword(strength, useNumbers, useSpecialCharacters) {
-        if(strength === undefined && useNumbers === undefined && useSpecialCharacters === undefined) {
+    generatePassword(strength, numbers, special) {
+        if(strength === undefined && numbers === undefined && special === undefined) {
             return this._createRequest('password.generate');
         }
 
-        return this._createRequest('password.generate', {
-            'strength': strength,
-            'numbers' : useNumbers,
-            'special' : useSpecialCharacters
-        });
+        return this._createRequest(
+            'password.generate',
+            {strength, numbers, special}
+        );
     }
 
     /**
@@ -496,7 +495,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getAvatar(user, size = 32) {
-        return this._createRequest(['service.avatar', {user: user, size: size}], null, 'GET', 'text');
+        return this._createRequest(['service.avatar', {user, size}], null, 'GET', 'text');
     }
 
     /**
@@ -507,46 +506,46 @@ export default class SimpleApi {
      * @returns {*}
      */
     getAvatarUrl(user, size = 32) {
-        return this._endpoint + SimpleApi.processUrl(this._paths['service.avatar'], {user: user, size: size});
+        return this._endpoint + SimpleApi.processUrl(this._paths['service.avatar'], {user, size});
     }
 
     /**
      * Loads a favicon blob over the favicon service
      *
-     * @param host
+     * @param domain
      * @param size
      * @returns {Promise}
      */
-    getFavicon(host, size = 32) {
-        if(host === null) host = 'default';
-        return this._createRequest(['service.favicon', {domain: host, size: size}], null, 'GET', 'text');
+    getFavicon(domain, size = 32) {
+        if(domain === null) domain = 'default';
+        return this._createRequest(['service.favicon', {domain, size}], null, 'GET', 'text');
     }
 
     /**
      * Returns the URL which retrieves the favicon with the given settings
      *
-     * @param host
+     * @param domain
      * @param size
      * @returns {*}
      */
-    getFaviconUrl(host, size = 32) {
-        if(host === null) host = 'default';
-        return this._endpoint + SimpleApi.processUrl(this._paths['service.favicon'], {domain: host, size: size});
+    getFaviconUrl(domain, size = 32) {
+        if(domain === null) domain = 'default';
+        return this._endpoint + SimpleApi.processUrl(this._paths['service.favicon'], {domain, size});
     }
 
     /**
      * Loads a preview image as blob over the preview service
      *
-     * @param host
+     * @param domain
      * @param view
      * @param width
      * @param height
      * @returns {Promise}
      */
-    getPreview(host, view = 'desktop', width = '640', height = '360...') {
-        if(host === null) host = 'default';
+    getPreview(domain, view = 'desktop', width = '640', height = '360...') {
+        if(domain === null) domain = 'default';
         return this._createRequest(
-            ['service.preview', {domain: host, view: view, width: width, height: height}],
+            ['service.preview', {domain, view, width, height}],
             null,
             'GET',
             'text'
@@ -556,17 +555,17 @@ export default class SimpleApi {
     /**
      * Returns the URL which retrieves the preview image with the given settings
      *
-     * @param host
+     * @param domain
      * @param view
      * @param width
      * @param height
      * @returns {Promise}
      */
-    getPreviewUrl(host, view = 'desktop', width = '640', height = '360...') {
-        if(host === null) host = 'default';
+    getPreviewUrl(domain, view = 'desktop', width = '640', height = '360...') {
+        if(domain === null) domain = 'default';
         return this._endpoint + SimpleApi.processUrl(
             this._paths['service.preview'],
-            {domain: host, view: view, width: width, height: height}
+            {domain, view, width, height}
         );
     }
 
@@ -599,9 +598,9 @@ export default class SimpleApi {
             if(!this._headers.hasOwnProperty(header)) continue;
             headers.append(header, this._headers[header]);
         }
-        headers.append('Accept', 'application/' + dataType + ', text/plain, */*');
+        headers.append('Accept', `application/${dataType}, text/plain, */*`);
 
-        let options = {method: method, headers: headers};
+        let options = {method, headers};
         if(data) {
             headers.append('Content-Type', 'application/json');
             options.body = JSON.stringify(data);
@@ -613,18 +612,18 @@ export default class SimpleApi {
                     let contentType = response.headers.get('content-type');
                     if(contentType && contentType.indexOf('application/json') !== -1) {
                         response.json()
-                            .then((d) => {
-                                if(response.ok) {
-                                    resolve(d);
-                                } else {
-                                    if(this._debug) console.error('Request failed', response, d);
-                                    reject(d);
-                                }
-                            })
-                            .catch((response) => {
-                                if(this._debug) console.error('Decoding response failed', response);
-                                reject(response);
-                            });
+                                .then((d) => {
+                                    if(response.ok) {
+                                        resolve(d);
+                                    } else {
+                                        if(this._debug) console.error('Request failed', response, d);
+                                        reject(d);
+                                    }
+                                })
+                                .catch((response) => {
+                                    if(this._debug) console.error('Decoding response failed', response);
+                                    reject(response);
+                                });
                     } else {
                         if(response.ok) {
                             resolve(response.blob());

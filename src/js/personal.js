@@ -1,1 +1,1 @@
-import '@scss/personal'
+import '@scss/personal';
