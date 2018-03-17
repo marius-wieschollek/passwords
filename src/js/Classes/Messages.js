@@ -8,7 +8,7 @@ class Messages {
      * @param notification
      */
     notification(notification) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             let $element = OC.Notification.show(Messages._translate(notification));
 
             setTimeout(() => {
@@ -134,7 +134,7 @@ class Messages {
 
     filePicker(title = 'Pick a file', mime, multiselect = false) {
         return new Promise((resolve) => {
-            OC.dialogs.filepicker(title, (e,f) => {console.log(e,f);} , multiselect, mime, true, 1);
+            OC.dialogs.filepicker(title, (e, f) => {resolve(e, f);} , multiselect, mime, true, 1);
         });
     }
 

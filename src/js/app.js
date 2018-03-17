@@ -17,8 +17,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
 (function () {
     let isLoaded     = false,
-        loadInterval = null,
-        app = null;
+        loadInterval = null;
 
     function initApp() {
         let section = SettingsManager.get('client.ui.section.default');
@@ -30,7 +29,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
             ]
         );
 
-        app = new Vue(App);
+        new Vue(App);
     }
 
     async function initApi() {

@@ -86,7 +86,7 @@ export default class Encryption {
             encryptedData = this._base64ToUtf8Array(rawData),
             [data, iv] = await this.extractIv(encryptedData, rawPassword, 16),
             utf16array = new Uint16Array(new Uint8Array(data).buffer),
-            algorithm = {name: 'AES-CBC', iv: iv},
+            algorithm = {name: 'AES-CBC', iv},
             key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['decrypt']),
             decryptedData = await crypto.subtle.decrypt(algorithm, key, utf16array.buffer);
 

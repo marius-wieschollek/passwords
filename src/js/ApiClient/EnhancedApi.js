@@ -854,7 +854,7 @@ export default class EnhancedApi extends SimpleApi {
             }
         }
         let subdomains = ['m', 'en', 'www', 'www2', 'mail', 'email', 'login', 'signin', 'profile', 'account',  navigator.language],
-            regex = RegExp('^(' + subdomains.join('|') + ')\\.');
+            regex = RegExp(`^(${subdomains.join('|')})\\.`);
 
         return domain.replace(regex, '');
     }

@@ -80,17 +80,7 @@ class FolderHook {
             $this->suspendSubFolders($folder->getUuid(), false);
         }
 
-        if($folder->isSuspended()) {
-            $parent = $this->folderService->findByUuid($revision->getParent());
-            if(!$parent->isSuspended()) {
-                $parentRevision = $this->revisionService->findByUuid($parent->getRevision());
-                if(!$parentRevision->isTrashed()) {
-                    $folder->setSuspended(false);
-                    $this->folderService->save($folder);
-                }
-            }
-        }
-
+        $this->checkSuspendedFlag($folder, $revision);
         if($revision->isHidden() && !$oldRevision->isHidden()) {
             $this->hideSubFolders($folder->getUuid());
             $this->hideSubPasswords($folder->getUuid());
@@ -229,6 +219,27 @@ class FolderHook {
                 $clonedRevision = $this->passwordRevisionService->clone($passwordRevision, ['hidden' => true]);
                 $this->passwordRevisionService->save($clonedRevision);
                 $this->passwordService->setRevision($password, $clonedRevision);
+            }
+        }
+    }
+
+    /**
+     * @param Folder         $folder
+     * @param FolderRevision $revision
+     *
+     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    protected function checkSuspendedFlag(Folder $folder, FolderRevision $revision): void {
+        if($folder->isSuspended()) {
+            $parent = $this->folderService->findByUuid($revision->getParent());
+            if(!$parent->isSuspended()) {
+                $parentRevision = $this->revisionService->findByUuid($parent->getRevision());
+                if(!$parentRevision->isTrashed()) {
+                    $folder->setSuspended(false);
+                    $this->folderService->save($folder);
+                }
             }
         }
     }

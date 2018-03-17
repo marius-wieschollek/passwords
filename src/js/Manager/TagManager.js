@@ -60,7 +60,7 @@ class TagManager {
                     Messages.notification('Tag created');
                     resolve(tag);
                 })
-                .catch((d) => {
+                .catch(() => {
                     Messages.notification('Creating tag failed');
                     reject(tag);
                 });

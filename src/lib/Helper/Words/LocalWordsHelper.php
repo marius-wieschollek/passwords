@@ -74,8 +74,6 @@ class LocalWordsHelper extends AbstractWordsHelper {
         $wordsFile = '';
         switch($this->langCode) {
             case 'de':
-                $wordsFile = self::WORDS_DE;
-                break;
             case 'de_DE':
                 $wordsFile = self::WORDS_DE;
                 break;
@@ -92,30 +90,28 @@ class LocalWordsHelper extends AbstractWordsHelper {
                 $wordsFile = self::WORDS_IT;
                 break;
             case 'es':
-                $wordsFile = self::WORDS_ES;
-                break;
             case 'es_MX':
-                $wordsFile = self::WORDS_ES;
-                break;
             case 'es_AR':
                 $wordsFile = self::WORDS_ES;
                 break;
             case 'pt':
-                $wordsFile = self::WORDS_PT;
-                break;
             case 'pt_BR':
                 $wordsFile = self::WORDS_PT;
                 break;
         }
 
-        if(!is_file($wordsFile)) {
-            if(is_file(self::WORDS_DEFAULT)) {
-                return self::WORDS_DEFAULT;
-            }
+        if(is_file($wordsFile)) return $wordsFile;
 
-            throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
-        }
+        return $this->getDefaultWordsFile();
+    }
 
-        return $wordsFile;
+    /**
+     * @return string
+     * @throws Exception
+     */
+    protected function getDefaultWordsFile(): string {
+        if(is_file(self::WORDS_DEFAULT)) return self::WORDS_DEFAULT;
+
+        throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
     }
 }
