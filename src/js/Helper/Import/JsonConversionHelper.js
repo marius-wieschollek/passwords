@@ -126,7 +126,7 @@ export default class ImportJsonConversionHelper {
                     object.username = element.email;
                 } else {
                     if(object.notes.length !== 0) object.notes += '\n\n';
-                    object.notes += Localisation.translate('Email') + ': ' + element.email;
+                    object.notes += `${Localisation.translate('Email')}: ${element.email}`;
                 }
             }
 

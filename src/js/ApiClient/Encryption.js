@@ -173,7 +173,7 @@ export default class Encryption {
         let msgBuffer = new TextEncoder('utf-8').encode(value),
             hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer),
             hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map((b) => ('00' + b.toString(16)).slice(-2)).join('');
+        return hashArray.map((b) => (`00${b.toString(16)}`).slice(-2)).join('');
     }
 
     /**

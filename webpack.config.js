@@ -21,9 +21,9 @@ module.exports = (env) => {
         new ExtractTextPlugin('css/[name].css'),
         new CopyWebpackPlugin(
             [
-                {from: __dirname + '/src/js/Helper/utility.js', to: __dirname + '/src/js/Static/utility.js'},
-                {from: __dirname + '/src/js/Helper/compatibility.js', to: __dirname + '/src/js/Static/compatibility.js'},
-                {from: __dirname + '/src/js/Polyfill', to: __dirname + '/src/js/Static/Polyfill'}
+                {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`},
+                {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`},
+                {from: `${__dirname}/src/js/Polyfill`, to: `${__dirname}/src/js/Static/Polyfill`}
             ]
         ),
         new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity})
@@ -51,12 +51,12 @@ module.exports = (env) => {
 
     return {
         entry  : {
-            app     : __dirname + '/src/js/app.js',
-            admin   : __dirname + '/src/js/admin.js',
-            personal: __dirname + '/src/js/personal.js'
+            app     : `${__dirname}/src/js/app.js`,
+            admin   : `${__dirname}/src/js/admin.js`,
+            personal: `${__dirname}/src/js/personal.js`
         },
         output : {
-            path         : __dirname + '/src/',
+            path         : `${__dirname}/src/`,
             filename     : 'js/Static/[name].js',
             chunkFilename: 'js/Static/[name].js'
         },
@@ -65,11 +65,11 @@ module.exports = (env) => {
             extensions: ['.js', '.vue', '.scss'],
             alias     : {
                 'vue$' : 'vue/dist/vue.esm.js',
-                '@'    : __dirname + '/src',
-                '@js'  : __dirname + '/src/js',
-                '@vue' : __dirname + '/src/vue',
-                '@scss': __dirname + '/src/scss',
-                '@vc'  : __dirname + '/src/vue/Components'
+                '@'    : `${__dirname}/src`,
+                '@js'  : `${__dirname}/src/js`,
+                '@vue' : `${__dirname}/src/vue`,
+                '@scss': `${__dirname}/src/scss`,
+                '@vc'  : `${__dirname}/src/vue/Components`
             }
         },
         module : {

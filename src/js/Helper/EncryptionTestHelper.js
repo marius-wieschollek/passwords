@@ -45,7 +45,7 @@ class EncryptionTestHelper {
      */
     async testEncryption() {
         let text = '', password = '✓ à la mode';
-        for(let i = 0; i < 96; i++) text += i + ': ✓ à la mode | ';
+        for(let i = 0; i < 96; i++) text += `${i}: ✓ à la mode | `;
 
         try {
             let encData = await this.encryption.encrypt(text, password);

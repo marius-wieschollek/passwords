@@ -43,7 +43,7 @@ class SearchManager {
 
             for(let i = 0; i < section.length; i++) {
                 let object = section[i],
-                    el     = document.querySelector('[' + identifier + '="' + object.id + '"]');
+                    el     = document.querySelector(`[${identifier}="${object.id}"]`);
                 if(!el) continue;
 
                 if(SearchManager._entryMatchesQuery(object, searchParams)) {
@@ -149,7 +149,7 @@ class SearchManager {
                 substring = '';
                 value = '';
             } else if(char === ' ') {
-                value += substring + ' ';
+                value += `${substring} `;
                 substring = '';
             } else if(char === '"') {
                 if(value.length !== 0 || substring.length !== 0) {

@@ -113,7 +113,7 @@ class Messages {
             title = Messages._translate(title);
             let callback = function(success) {
                 if(success) {
-                    let serialized = $('#' + id).serializeArray(),
+                    let serialized = $(`#${id}`).serializeArray(),
                         data       = {};
 
                     for(let i = 0; i < serialized.length; i++) {

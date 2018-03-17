@@ -254,7 +254,7 @@ export class ExportManager {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {
-                line.push('"' + Localisation.translate(header[i].capitalize()).replace('"', '""') + '"');
+                line.push(`"${Localisation.translate(header[i].capitalize()).replace('"', '""')}"`);
             }
 
             csv.push(line.join(delimiter));
@@ -270,7 +270,7 @@ export class ExportManager {
 
                 if(typeof value === 'boolean') value = Localisation.translate(value.toString());
 
-                line.push('"' + value.toString().replace(/"/g, '""') + '"');
+                line.push(`"${value.toString().replace(/"/g, '""')}"`);
             }
 
             csv.push(line.join(delimiter));

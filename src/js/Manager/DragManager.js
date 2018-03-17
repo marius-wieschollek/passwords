@@ -18,7 +18,7 @@ export default new class DragManager {
      * @returns {Promise<any>}
      */
     start(event, label, image, types = []) {
-        let $el = $('<div id="dragicon" style="background-image:url(' + image + ')">' + label + '</div>');
+        let $el = $(`<div id="dragicon" style="background-image:url(${image})">${label}</div>`);
         $('body').append($el);
 
         event.dataTransfer.effectAllowed = 'all';

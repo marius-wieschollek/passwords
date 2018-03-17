@@ -22,10 +22,10 @@ export default class EnhancedApi extends SimpleApi {
      * @param password
      */
     login(baseUrl, username = null, password = null) {
-        super.login(baseUrl + 'index.php/apps/passwords/', username, password);
+        super.login(`${baseUrl}index.php/apps/passwords/`, username, password);
 
         this._baseUrl = baseUrl;
-        this._folderIcon = baseUrl + 'core/img/filetypes/folder.svg';
+        this._folderIcon = `${baseUrl}core/img/filetypes/folder.svg`;
         if(username !== null && password !== null) {
             if(window.localStorage.pwFolderIcon) this._folderIcon = window.localStorage.pwFolderIcon;
 
@@ -833,7 +833,7 @@ export default class EnhancedApi extends SimpleApi {
             if(data.label.indexOf('@') !== -1) {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }
-            data.label = EnhancedApi._getWebsiteNameFromDomain(SimpleApi.parseUrl(data.url, 'host')) + ' - ' + data.label;
+            data.label = `${EnhancedApi._getWebsiteNameFromDomain(SimpleApi.parseUrl(data.url, 'host'))} - ${data.label}`;
         }
     }
 
