@@ -19,8 +19,8 @@ class PasswordManager {
      */
     createPassword(folder = null, tag = null) {
         return new Promise((resolve, reject) => {
-            let PwCreateDialog = Vue.extend(CreateDialog);
-            let DialogWindow = new PwCreateDialog().$mount('#app-popup div');
+            let PwCreateDialog = Vue.extend(CreateDialog),
+                DialogWindow   = new PwCreateDialog().$mount('#app-popup div');
 
             if(folder) DialogWindow.password.folder = folder;
             if(tag) DialogWindow.password.tags = [{id: tag}];
@@ -52,7 +52,7 @@ class PasswordManager {
                    password = API._processPassword(password);
                    Events.fire('password.created', password);
                })
-               .catch((e) => {
+               .catch(() => {
                    Messages.notification('Creating password failed');
                    reject(password);
                });
