@@ -1,6 +1,8 @@
 <template>
     <div class="row footer">
-        <translate class="title" :say="getText"/>
+        <div class="title" :title="getText">
+            <translate :say="getText"/>
+        </div>
     </div>
 </template>
 

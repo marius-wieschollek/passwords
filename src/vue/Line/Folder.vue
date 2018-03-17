@@ -6,7 +6,7 @@
          @dragstart="dragStartAction($event)">
         <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
-        <span class="title">{{ folder.label }}</span>
+        <div class="title" :title="getTitle"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
@@ -46,8 +46,8 @@
 
         data() {
             return {
-                showMenu: false,
-            }
+                showMenu: false
+            };
         },
 
         computed: {
@@ -62,7 +62,7 @@
                 $event.stopPropagation();
                 this.folder.favourite = !this.folder.favourite;
                 FolderManager.updateFolder(this.folder)
-                    .catch(() => { this.folder.favourite = !this.folder.favourite; });
+                             .catch(() => { this.folder.favourite = !this.folder.favourite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;
@@ -81,24 +81,24 @@
                 this.$parent.detail = {
                     type   : 'folder',
                     element: this.folder
-                }
+                };
             },
             deleteAction(skipConfirm = false) {
                 FolderManager.deleteFolder(this.folder);
             },
             renameAction() {
                 FolderManager.renameFolder(this.folder)
-                    .then((f) => {this.folder = f;});
+                             .then((f) => {this.folder = f;});
             },
             dragStartAction($e) {
                 DragManager.start($e, this.folder.label, this.folder.icon, ['folder'])
-                    .then((data) => {
-                        FolderManager.moveFolder(this.folder, data.folderId)
-                            .then((f) => {this.folder = f;});
-                    });
+                           .then((data) => {
+                               FolderManager.moveFolder(this.folder, data.folderId)
+                                            .then((f) => {this.folder = f;});
+                           });
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">

@@ -2,8 +2,8 @@
     <div class="row password" @click="copyPasswordAction($event)" @dblclick="copyUsernameAction($event)" @dragstart="dragStartAction($event)" :data-password-id="password.id">
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
-        <span class="title">{{ getTitle }}</span>
-        <ul slot="middle" class="tags" v-if="showTags">
+        <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
+        <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
             <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
         </ul>
         <slot name="middle"/>
@@ -76,7 +76,7 @@
                 return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
             },
             showTags() {
-                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags;
+                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags.length;
             },
             getTitle() {
                 let titleField = SettingsManager.get('client.ui.password.field.title');
@@ -85,6 +85,16 @@
             },
             getTags() {
                 return Utility.sortApiObjectArray(this.password.tags, 'label');
+            },
+            tagStyle() {
+                let length = Utility.objectToArray(this.password.tags).length;
+                if(length) {
+                    return {
+                        'padding-left': (length + 18) + 'px'
+                    };
+                }
+
+                return {};
             },
             getDate() {
                 return Localisation.formatDate(this.password.edited);
@@ -214,13 +224,21 @@
                     flex-grow      : 1;
                     vertical-align : baseline;
                     display        : flex;
+
+                    > span {
+                        text-overflow : ellipsis;
+                        overflow      : hidden;
+                    }
                 }
 
                 .tags {
-                    height      : 50px;
-                    flex-shrink : 0;
-                    line-height : 50px;
-                    font-size   : 24px;
+                    height       : 50px;
+                    flex-shrink  : 0;
+                    line-height  : 50px;
+                    font-size    : 24px;
+                    z-index      : 1;
+                    padding-left : 0;
+                    transition   : padding-left 0.25s ease-in-out;
 
                     li {
                         display     : inline-block;
@@ -235,6 +253,8 @@
                     }
 
                     &:hover {
+                        padding-left : 5px !important;
+
                         li {
                             margin-left : -6px;
                         }
