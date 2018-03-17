@@ -86,15 +86,15 @@ class DecryptionModule {
     }
 
     /**
-     * @param $a
-     * @param $b
+     * @param $firstValue
+     * @param $secondValue
      *
      * @return bool
      */
-    function hashEquals($a, $b) {
+    function hashEquals($firstValue, $secondValue) {
         $key = mcrypt_create_iv(128, MCRYPT_DEV_URANDOM);
 
-        return hash_hmac('sha512', $a, $key) === hash_hmac('sha512', $b, $key);
+        return hash_hmac('sha512', $firstValue, $key) === hash_hmac('sha512', $secondValue, $key);
     }
 
     /**

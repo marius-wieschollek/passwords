@@ -174,9 +174,9 @@ class FallbackIconGenerator {
         imagestring($image, 5, $fontX, $fontY, $text, $fgColor);
 
         if($realSize !== 24) {
-            $im = new \OC_Image($image);
-            $im->resize($realSize);
-            $image = $im->resource();
+            $tempImage = new \OC_Image($image);
+            $tempImage->resize($realSize);
+            $image = $tempImage->resource();
         }
 
         return $image;

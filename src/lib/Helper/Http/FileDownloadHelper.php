@@ -39,17 +39,17 @@ class FileDownloadHelper extends RequestHelper {
      * @return bool|mixed
      */
     public function send(string $url = null, string $file = null) {
-        $ch = $this->prepareCurlRequest($url);
+        $curl = $this->prepareCurlRequest($url);
 
         $fileHandle = fopen($file == null ? $this->file:$file, 'w+');
-        curl_setopt($ch, CURLOPT_FILE, $fileHandle);
+        curl_setopt($curl, CURLOPT_FILE, $fileHandle);
 
-        curl_exec($ch);
-        $this->info = curl_getinfo($ch);
+        curl_exec($curl);
+        $this->info = curl_getinfo($curl);
 
-        curl_close($ch);
+        curl_close($curl);
         fclose($fileHandle);
-        unset($ch);
+        unset($curl);
         unset($fileHandle);
 
         $status = true;

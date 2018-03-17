@@ -182,18 +182,18 @@ class RequestHelper {
      * @return bool|mixed
      */
     public function send(string $url = null) {
-        $ch = $this->prepareCurlRequest($url);
+        $curl = $this->prepareCurlRequest($url);
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, true);
 
-        $this->response = curl_exec($ch);
-        $this->info     = curl_getinfo($ch);
-        curl_close($ch);
+        $this->response = curl_exec($curl);
+        $this->info     = curl_getinfo($curl);
+        curl_close($curl);
 
-        $header_size          = $this->info['header_size'];
-        $this->responseHeader = substr($this->response, 0, $header_size);
-        $this->responseBody   = substr($this->response, $header_size);
+        $headerSize          = $this->info['header_size'];
+        $this->responseHeader = substr($this->response, 0, $headerSize);
+        $this->responseBody   = substr($this->response, $headerSize);
 
         if(!empty($this->acceptResponseCodes)) {
             if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) return false;
@@ -256,23 +256,23 @@ class RequestHelper {
      * @return resource
      */
     protected function prepareCurlRequest(string $url = null) {
-        $ch = curl_init($url == null ? $this->url:$url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, static::REQUEST_TIMEOUT);
+        $curl = curl_init($url == null ? $this->url:$url);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_AUTOREFERER, true);
+        curl_setopt($curl, CURLOPT_USERAGENT, $this->userAgent);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_TIMEOUT, static::REQUEST_TIMEOUT);
 
         if(!empty($this->postData)) {
-            curl_setopt($ch, CURLOPT_POST, 2);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->postData));
+            curl_setopt($curl, CURLOPT_POST, 2);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($this->postData));
         }
 
         if(!empty($this->jsonData)) {
             $json = json_encode($this->jsonData);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
             $this->headerData['Content-Type']   = 'application/json';
             $this->headerData['Content-Length'] = strlen($json);
         }
@@ -284,14 +284,14 @@ class RequestHelper {
                 $header[] = "{$key}: {$value}";
             }
 
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
         }
 
         if($this->cookieJar) {
-            curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookieJar);
-            curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookieJar);
+            curl_setopt($curl, CURLOPT_COOKIEJAR, $this->cookieJar);
+            curl_setopt($curl, CURLOPT_COOKIEFILE, $this->cookieJar);
         }
 
-        return $ch;
+        return $curl;
     }
 }

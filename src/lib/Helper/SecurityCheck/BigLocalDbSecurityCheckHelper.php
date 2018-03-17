@@ -108,16 +108,16 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             $hashes = [];
             $fh     = fopen($txtFile, 'r');
             while(($line = fgets($fh)) !== false) {
-                list($a, $b) = explode("\t", "$line\t000000");
+                list($first, $second) = explode("\t", "$line\t000000");
 
-                $hash = sha1($a);
+                $hash = sha1($first);
                 if($hash[0] == $hexKey) {
                     $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
                     if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
                     $hashes[ $key ][ $hash ] = &$null;
                 }
 
-                $hash = sha1($b);
+                $hash = sha1($second);
                 if($hash[0] == $hexKey) {
                     $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
                     if(!isset($hashes[ $key ])) $hashes[ $key ] = [];

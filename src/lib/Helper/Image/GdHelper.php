@@ -76,35 +76,6 @@ class GdHelper extends AbstractImageHelper {
     }
 
     /**
-     * @param Image  $image
-     * @param string $from
-     * @param string $to
-     *
-     * @return Image
-     */
-    public function recolorImage($image, string $from, string $to) {
-        $from = sscanf($from, "#%02x%02x%02x");
-        $to   = sscanf($to, "#%02x%02x%02x");
-
-        $resource = $image->resource();
-        imagealphablending($resource, false);
-        for($x = 0; $x < imagesx($resource); $x++) {
-            for($y = 0; $y < imagesy($resource); $y++) {
-                $index = imagecolorat($resource, $x, $y);
-                $color = imagecolorsforindex($resource, $index);
-                if($color['red'] == $from[0] && $color['green'] == $from[1] && $color['blue'] == $from[2]) {
-                    $newColor = imagecolorallocatealpha($resource, $to[0], $to[1], $to[2], $color['alpha']);
-                    imagesetpixel($resource, $x, $y, $newColor);
-                }
-            }
-        }
-        imageAlphaBlending($resource, true);
-        imageSaveAlpha($resource, true);
-
-        return $image;
-    }
-
-    /**
      * @param $imageBlob
      *
      * @return Image

@@ -74,20 +74,6 @@ class ImagickHelper extends AbstractImageHelper {
     }
 
     /**
-     * @param Imagick|Gmagick $image
-     * @param string          $from
-     * @param string          $to
-     *
-     * @return Gmagick|Imagick
-     */
-    public function recolorImage($image, string $from, string $to) {
-        $fuzz = 0.05 * $image->getQuantumRange()['quantumRangeLong'];
-        $image->opaquePaintImage($from, $to, $fuzz, false);
-
-        return $image;
-    }
-
-    /**
      * @param $imageBlob
      *
      * @return Imagick|Gmagick

@@ -26,6 +26,11 @@ class AvatarService {
     protected $userManager;
 
     /**
+     * @var IAvatarManager
+     */
+    protected $avatarManager;
+
+    /**
      * @var FileCacheService
      */
     protected $fileCacheService;
@@ -34,10 +39,6 @@ class AvatarService {
      * @var FallbackIconGenerator
      */
     protected $fallbackIconGenerator;
-    /**
-     * @var IAvatarManager
-     */
-    private $avatarManager;
 
     /**
      * AvatarService constructor.
@@ -102,11 +103,11 @@ class AvatarService {
      */
     protected function getImage(IImage $image, string $name, int $size): string {
         ob_start();
-        $a    = $image->resize($size);
-        $b    = imagepng($image->resource());
-        $data = ob_get_clean();
+        $resize = $image->resize($size);
+        $export = imagepng($image->resource());
+        $data   = ob_get_clean();
 
-        if(!$a || !$b) return $this->fallbackIconGenerator->createIcon($name, $size);
+        if(!$resize || !$export) return $this->fallbackIconGenerator->createIcon($name, $size);
 
         return $data;
     }

@@ -134,7 +134,7 @@ class Messages {
 
     filePicker(title = 'Pick a file', mime, multiselect = false) {
         return new Promise((resolve) => {
-            OC.dialogs.filepicker(title, (e, f) => {resolve(e, f);} , multiselect, mime, true, 1);
+            OC.dialogs.filepicker(title, (e, f) => {resolve(e, f);}, multiselect, mime, true, 1);
         });
     }
 
