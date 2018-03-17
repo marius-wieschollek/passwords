@@ -84,7 +84,7 @@ export default class SimpleApi {
      * @param password
      */
     login(baseUrl, username = null, password = null) {
-        if(baseUrl.substr(0, 5) !== 'https') throw 'HTTPS required for api';
+        if(baseUrl.substr(0, 5) !== 'https') throw new Error('HTTPS required for api');
 
         this._endpoint = baseUrl;
         if(username !== null && password !== null) {

@@ -34,7 +34,7 @@ export class ExportManager {
                 data = await ExportManager.exportOfficeDocument(model, options.includeShared, 'ods');
                 break;
             default:
-                throw `Invalid export format: ${format}`;
+                throw new Error(`Invalid export format: ${format}`);
         }
 
         return data;
@@ -172,7 +172,7 @@ export class ExportManager {
 
             return XLSX.write(workbook, {bookType: format, type: 'array'});
         } catch(e) {
-            throw Localisation.translate('Unable to load {module}', {module: 'xlsx'});
+            throw new Error(Localisation.translate('Unable to load {module}', {module: 'xlsx'}));
         }
     }
 

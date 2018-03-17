@@ -25,7 +25,7 @@ function showBrowserCompatibilityWarning() {
         '</div></div>'
     );
 
-    throw 'Browser does not suport ECMAScript 2017 / ES2017';
+    throw new Error('Browser does not suport ECMAScript 2017 / ES2017');
 }
 
 function checkSystem() {

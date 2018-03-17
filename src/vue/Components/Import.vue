@@ -201,8 +201,7 @@
                             this.importing = false;
                             this.progress.style = 'error';
                             this.progress.status = 'Import failed';
-                            if(typeof e !== 'string') e = e.message;
-                            Messages.alert(e, 'Import error');
+                            Messages.alert(e.message, 'Import error');
                         })
                         .then((errors) => {
                             this.importing = false;

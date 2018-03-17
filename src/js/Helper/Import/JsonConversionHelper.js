@@ -29,14 +29,14 @@ export default class ImportJsonConversionHelper {
      * @private
      */
     static async _decryptJsonBackup(options, json) {
-        if(!options.password) throw 'Password required';
+        if(!options.password) throw new Error('Password required');
         let encryption = new Encryption();
 
         try {
             await encryption.decrypt(json.challenge, `${options.password}challenge`);
         } catch(e) {
             console.log(e);
-            throw 'Password invalid';
+            throw new Error('Password invalid');
         }
 
         for(let i in json) {
@@ -46,7 +46,7 @@ export default class ImportJsonConversionHelper {
                 json[i] = JSON.parse(await encryption.decrypt(json[i], options.password + i));
             } catch(e) {
                 console.log(e);
-                throw `Failed to decrypt ${i}`;
+                throw new Error(`Failed to decrypt ${i}`);
             }
         }
     }

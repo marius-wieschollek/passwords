@@ -531,7 +531,7 @@ export default class EnhancedApi extends SimpleApi {
             let definition = definitions[property];
 
             if(!attributes.hasOwnProperty(property)) {
-                if(definition.required) throw `Property ${property} is required but missing`;
+                if(definition.required) throw new Error(`Property ${property} is required but missing`);
                 object[property] = definition.hasOwnProperty('default') ? definition.default:null;
                 continue;
             }
@@ -540,7 +540,7 @@ export default class EnhancedApi extends SimpleApi {
                 type      = typeof attribute;
 
             if(definition.required && (!attribute || 0 === attribute.length)) {
-                throw `Property ${property} is required but missing`;
+                throw new Error(`Property ${property} is required but missing`);
             }
 
             if(definition.type && definition.type !== type && (definition.type !== 'array' || !Array.isArray(attribute))) {
@@ -549,7 +549,7 @@ export default class EnhancedApi extends SimpleApi {
                 } else if(!strict && definition.hasOwnProperty('default')) {
                     attribute = definition.default;
                 } else if(strict || definition.required) {
-                    throw `Property ${property} has invalid type ${type}`;
+                    throw new Error(`Property ${property} has invalid type ${type}`);
                 } else {
                     attribute = null;
                 }
@@ -557,10 +557,10 @@ export default class EnhancedApi extends SimpleApi {
 
             if(definition.length) {
                 if(Array.isArray(attribute) && attribute.length > definition.length) {
-                    if(strict) throw `Property ${property} exceeds the maximum length of ${definition.length}`;
+                    if(strict) throw new Error(`Property ${property} exceeds the maximum length of ${definition.length}`);
                     attribute = attribute.slice(0, definition.length);
                 } else if(type === 'string' && attribute.length > definition.length) {
-                    if(strict) throw `Property ${property} exceeds the maximum length of ${definition.length}`;
+                    if(strict) throw new Error(`Property ${property} exceeds the maximum length of ${definition.length}`);
                     attribute = attribute.substr(0, definition.length);
                 }
             }

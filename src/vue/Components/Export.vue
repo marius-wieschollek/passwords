@@ -145,8 +145,7 @@
                         .catch((e) => {
                             this.exporting = false;
                             console.log(e);
-                            if(typeof e !== 'string') e = e.message;
-                            Messages.alert(e, 'Export error');
+                            Messages.alert(e.message, 'Export error');
                         })
                         .then((d) => {
                             if(d) {

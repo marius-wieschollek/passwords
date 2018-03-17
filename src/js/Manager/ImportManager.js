@@ -46,7 +46,7 @@ export class ImportManager {
                 data = await ImportCsvConversionHelper.processGenericCsv(data, options);
                 break;
             default:
-                throw `Invalid import type: ${type}`;
+                throw new Error(`Invalid import type: ${type}`);
         }
 
         this.total = 0;
@@ -62,14 +62,14 @@ export class ImportManager {
             if(data.tags) tagMapping = await this.importTags(data.tags, options.mode);
         } catch(e) {
             console.error(e);
-            throw 'Unable to create tags';
+            throw new Error('Unable to create tags');
         }
 
         try {
             if(data.folders) folderMapping = await this.importFolders(data.folders, options.mode);
         } catch(e) {
             console.error(e);
-            throw 'Unable to create folders';
+            throw new Error('Unable to create folders');
         }
 
         if(data.passwords) {
@@ -80,7 +80,7 @@ export class ImportManager {
                 await this.importPasswords(data.passwords, options.mode, options.skipShared, tagMapping, folderMapping);
             } catch(e) {
                 console.error(e);
-                throw 'Unable to create passwords';
+                throw new Error('Unable to create passwords');
             }
         }
 

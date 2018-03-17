@@ -18,7 +18,7 @@ export default class Encryption {
      * @returns {Promise<*>}
      */
     async encryptObject(object, password, type) {
-        if(!this.fields.hasOwnProperty(type)) throw 'Invalid object type';
+        if(!this.fields.hasOwnProperty(type)) throw new Error('Invalid object type');
         let fields = this.fields[type];
 
         for(let i = 0; i < fields.length; i++) {
@@ -41,7 +41,7 @@ export default class Encryption {
      * @returns {Promise<*>}
      */
     async decryptObject(object, password, type) {
-        if(!this.fields.hasOwnProperty(type)) throw 'Invalid object type';
+        if(!this.fields.hasOwnProperty(type)) throw new Error('Invalid object type');
         let fields = this.fields[type];
 
         for(let i = 0; i < fields.length; i++) {
@@ -141,7 +141,7 @@ export default class Encryption {
             multiplier = Math.ceil(length / 640),
             iv         = new Uint8Array(ivLength);
 
-        if(length <= 0) throw 'Invalid encrypted data';
+        if(length <= 0) throw new Error('Invalid encrypted data');
 
         for(let i = ivLength - 1; i >= 0; i--) {
             let start    = i * blockSize,
