@@ -13,9 +13,9 @@ export default class ImportCsvConversionHelper {
      * @returns {{}}
      */
     static async processGenericCsv(data, options) {
-        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getProfile(options.profile);
+        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getProfile(options.profile),
+            entries = ImportCsvConversionHelper._processCsv(data, profile);
 
-        let entries = ImportCsvConversionHelper._processCsv(data, profile);
         return await ImportCsvConversionHelper._convertCsv(entries, profile);
     }
 

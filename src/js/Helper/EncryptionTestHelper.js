@@ -51,9 +51,9 @@ class EncryptionTestHelper {
             let encData = await this.encryption.encrypt(text, password);
 
             try {
-                let json = JSON.stringify(encData);
-                let data = JSON.parse(json);
-                let decData = await this.encryption.decrypt(data, password);
+                let json = JSON.stringify(encData),
+                    data = JSON.parse(json),
+                    decData = await this.encryption.decrypt(data, password);
                 if(text !== decData) {
                     return {
                         type  : 'test',

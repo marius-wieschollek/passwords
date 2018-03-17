@@ -327,9 +327,9 @@ export class ExportManager {
      * @private
      */
     static async _getPasswordsForExport(includeShared = false) {
-        let data = await API.listPasswords('model+tags');
+        let data = await API.listPasswords('model+tags'),
+            passwords = [];
 
-        let passwords = [];
         for(let i in data) {
             if(!data.hasOwnProperty(i)) continue;
             if(includeShared && data[i].share !== null) continue;
@@ -365,9 +365,9 @@ export class ExportManager {
      * @private
      */
     static async _getFoldersForExport() {
-        let data = await API.listFolders();
+        let data = await API.listFolders(),
+            folders = [];
 
-        let folders = [];
         for(let i in data) {
             if(!data.hasOwnProperty(i)) continue;
             let element = data[i];
@@ -392,9 +392,9 @@ export class ExportManager {
      * @private
      */
     static async _getTagsForExport() {
-        let data = await API.listTags();
+        let data = await API.listTags(),
+            tags = [];
 
-        let tags = [];
         for(let i in data) {
             if(!data.hasOwnProperty(i)) continue;
             let element = data[i];

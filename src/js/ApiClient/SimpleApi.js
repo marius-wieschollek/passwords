@@ -88,7 +88,7 @@ export default class SimpleApi {
 
         this._endpoint = baseUrl;
         if(username !== null && password !== null) {
-            this._headers.Authorization = `Basic ${btoa(username + ':' + password)}`;
+            this._headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
         }
     }
 

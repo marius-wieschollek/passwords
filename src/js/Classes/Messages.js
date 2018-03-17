@@ -11,7 +11,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             let $element = OC.Notification.show(Messages._translate(notification));
 
-            setTimeout(function() {
+            setTimeout(() => {
                 OC.Notification.hide($element);
                 resolve();
             }, 10000);

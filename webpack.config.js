@@ -1,9 +1,9 @@
-let webpack = require('webpack');
-let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-let CopyWebpackPlugin = require('copy-webpack-plugin');
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let ProgressBarPlugin = require('progress-bar-webpack-plugin');
-let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+let webpack = require('webpack'),
+    UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+    CopyWebpackPlugin = require('copy-webpack-plugin'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    ProgressBarPlugin = require('progress-bar-webpack-plugin'),
+    OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env) => {
     let production = !!(env && env.production);

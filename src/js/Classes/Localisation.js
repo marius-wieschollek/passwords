@@ -38,6 +38,6 @@ export default class Localisation {
     static getLocale() {
         let locale = navigator.language;
 
-        return locale.length === 2 ? locale + '-' + locale.toUpperCase():locale;
+        return locale.length === 2 ? `${locale}-${locale.toUpperCase()}`:locale;
     }
 }

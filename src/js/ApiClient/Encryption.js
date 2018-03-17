@@ -66,7 +66,7 @@ export default class Encryption {
             iv = crypto.getRandomValues(new Uint8Array(16)),
             password = new TextEncoder().encode(rawPassword),
             passwordHash = await crypto.subtle.digest('SHA-256', password),
-            algorithm = {name: 'AES-CBC', iv: iv},
+            algorithm = {name: 'AES-CBC', iv},
             key = await crypto.subtle.importKey('raw', passwordHash, algorithm, false, ['encrypt']),
             encryptedData = new Uint16Array(await crypto.subtle.encrypt(algorithm, key, data)),
             mergedData = new Uint8Array(await this.hideIv(new Uint8Array(encryptedData.buffer), rawPassword, iv));
@@ -111,7 +111,7 @@ export default class Encryption {
                 position = 0;
 
             for(let j = 0; j < blockSize; j++) position += dataHash[start + j];
-            position = position * multiplier;
+            position *= multiplier;
             while(position > data.length) position -= data.length;
             data.splice(position, 0, iv[i]);
         }
@@ -317,8 +317,8 @@ class Base64 {
                 string += String.fromCharCode(((charCode & 31) << 6) | (c2 & 63));
                 i += 2;
             } else {
-                let c2 = utf8text.charCodeAt(i + 1);
-                let c3 = utf8text.charCodeAt(i + 2);
+                let c2 = utf8text.charCodeAt(i + 1),
+                    c3 = utf8text.charCodeAt(i + 2);
                 string += String.fromCharCode(((charCode & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
                 i += 3;
             }
