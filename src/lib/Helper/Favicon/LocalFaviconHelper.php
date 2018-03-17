@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use OCA\Passwords\Helper\Http\RequestHelper;
-use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\HelperService;
 
 /**
@@ -32,6 +31,22 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected function getFaviconData(string $domain): string {
         list($html, $url) = $this->getUrl('http://'.$domain);
 
+        $icon = $this->getFaviconFromSourceCode($domain, $html);
+        if($icon !== null) return $icon;
+
+        $icon = $this->tryDefaultIconPaths($domain, $url);
+        if($icon !== null) return $icon;
+
+        return $this->getDefaultFavicon($domain)->getContent();
+    }
+
+    /**
+     * @param string      $domain
+     * @param null|string $html
+     *
+     * @return null|string
+     */
+    protected function getFaviconFromSourceCode(string $domain, ?string $html): ?string {
         if(!empty($html)) {
             $patterns = $this->getSearchPatterns();
             foreach($patterns as $pattern) {
@@ -41,6 +56,16 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             }
         }
 
+        return null;
+    }
+
+    /**
+     * @param string $domain
+     * @param        $url
+     *
+     * @return mixed|null|string
+     */
+    protected function tryDefaultIconPaths(string $domain, $url): ?string {
         list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.png");
         if($isIcon && $data) return $data;
 
@@ -53,7 +78,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
         list($data, , , $isIcon) = $this->getUrl($url."/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
-        return $this->getDefaultFavicon($domain)->getContent();
+        return null;
     }
 
     /**
@@ -76,17 +101,6 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             $contentType,
             $isIcon
         ];
-    }
-
-    /**
-     * @param string $data
-     *
-     * @return string
-     */
-    protected function convertIcoFile($data): string {
-        if(empty($data)) return null;
-
-        return $this->imageHelper->convertIcoToPng($data);
     }
 
     /**
@@ -134,10 +148,20 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     }
 
     /**
+     * @param string $data
+     *
+     * @return string
+     */
+    protected function convertIcoFile($data): string {
+        if(empty($data)) return null;
+
+        return $this->imageHelper->convertIcoToPng($data);
+    }
+
+    /**
      * @return array
      */
     protected function getSearchPatterns(): array {
-
         return [
             [
                 'html' => '/(meta[^>]+itemprop[^>]+image[^>]+)/',

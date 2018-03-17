@@ -327,16 +327,16 @@ class ShareApiController extends AbstractApiController {
         }
 
         if(isset($criteria['userId'])) {
-            if(is_array($criteria['userId'])) {
-                if($criteria['userId'][1] === '_self') $criteria['userId'][1] = $this->userId;
+            if(is_array($criteria['userId']) && $criteria['userId'][1] === '_self') {
+                $criteria['userId'][1] = $this->userId;
             } else if($criteria['userId'] === '_self') {
                 $criteria['userId'] = $this->userId;
             }
         }
 
         if(isset($criteria['receiver'])) {
-            if(is_array($criteria['receiver'])) {
-                if($criteria['receiver'][1] === '_self') $criteria['receiver'][1] = $this->userId;
+            if(is_array($criteria['receiver']) && $criteria['receiver'][1] === '_self') {
+                $criteria['receiver'][1] = $this->userId;
             } else if($criteria['receiver'] === '_self') {
                 $criteria['receiver'] = $this->userId;
             }

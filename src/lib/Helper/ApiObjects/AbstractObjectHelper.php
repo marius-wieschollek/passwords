@@ -88,18 +88,8 @@ abstract class AbstractObjectHelper {
 
         foreach($filter as $key => $value) {
             $property = $revision->getProperty($key);
-            if(!is_array($value)) {
-                if($property != $value) return false;
-            } else {
-                list($operator, $value) = $value;
-                if(($operator === self::OPERATOR_EQUALS && $property != $value) ||
-                   ($operator === self::OPERATOR_NOT_EQUALS && $property == $value) ||
-                   ($operator === self::OPERATOR_LESS && $property >= $value) ||
-                   ($operator === self::OPERATOR_GREATER && $property <= $value) ||
-                   ($operator === self::OPERATOR_EQUALS_OR_LESS && $property > $value) ||
-                   ($operator === self::OPERATOR_EQUALS_OR_GREATER && $property < $value)) {
-                    return false;
-                }
+            if(!is_array($value) && $property != $value || !$this->valueMatchesAdvancedFilter($value, $property)) {
+                return false;
             }
         }
 
@@ -134,4 +124,24 @@ abstract class AbstractObjectHelper {
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array;
+
+    /**
+     * @param $value
+     * @param $property
+     *
+     * @return bool
+     */
+    protected function valueMatchesAdvancedFilter($value, $property): bool {
+        list($operator, $value) = $value;
+        if(($operator === self::OPERATOR_EQUALS && $property != $value) ||
+           ($operator === self::OPERATOR_NOT_EQUALS && $property == $value) ||
+           ($operator === self::OPERATOR_LESS && $property >= $value) ||
+           ($operator === self::OPERATOR_GREATER && $property <= $value) ||
+           ($operator === self::OPERATOR_EQUALS_OR_LESS && $property > $value) ||
+           ($operator === self::OPERATOR_EQUALS_OR_GREATER && $property < $value)) {
+            return false;
+        }
+
+        return true;
+    }
 }

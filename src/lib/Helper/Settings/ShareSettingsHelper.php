@@ -55,11 +55,11 @@ class ShareSettingsHelper {
     public function get($key) {
         switch($key) {
             case 'enabled':
-                return $this->getSharingEnabled();
+                return $this->isSharingEnabled();
             case 'resharing':
-                return $this->getReSharingEnabled();
+                return $this->isReSharingEnabled();
             case 'autocomplete':
-                return $this->getSharingEnumerationEnabled();
+                return $this->isSharingEnumerationEnabled();
             case 'types':
                 return ['user'];
         }
@@ -73,9 +73,9 @@ class ShareSettingsHelper {
      */
     public function list(): array {
         return [
-            'server.sharing.enabled'      => $this->getSharingEnabled(),
-            'server.sharing.resharing'    => $this->getReSharingEnabled(),
-            'server.sharing.autocomplete' => $this->getSharingEnumerationEnabled(),
+            'server.sharing.enabled'      => $this->isSharingEnabled(),
+            'server.sharing.resharing'    => $this->isReSharingEnabled(),
+            'server.sharing.autocomplete' => $this->isSharingEnumerationEnabled(),
             'server.sharing.types'        => $this->get('types')
         ];
     }
@@ -83,7 +83,7 @@ class ShareSettingsHelper {
     /**
      * @return bool
      */
-    protected function getSharingEnabled(): bool {
+    protected function isSharingEnabled(): bool {
         if($this->userId === null) {
             return $this->shareManager->shareApiEnabled();
         }
@@ -94,14 +94,14 @@ class ShareSettingsHelper {
     /**
      * @return bool
      */
-    protected function getReSharingEnabled(): bool {
+    protected function isReSharingEnabled(): bool {
         return $this->config->getAppValue('shareapi_allow_resharing', 'yes', 'core') === 'yes';
     }
 
     /**
      * @return bool
      */
-    protected function getSharingEnumerationEnabled(): bool {
+    protected function isSharingEnumerationEnabled(): bool {
         return $this->config->getAppValue('shareapi_allow_share_dialog_user_enumeration', 'yes', 'core') === 'yes';
     }
 }

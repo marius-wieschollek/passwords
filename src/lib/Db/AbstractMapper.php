@@ -152,13 +152,7 @@ abstract class AbstractMapper extends Mapper {
         list($sql, $params) = $this->getStatement();
 
         foreach($search as $criteria) {
-            if(!isset($criteria[2]) || !in_array($criteria[2], $this->comparisonOperators)) $criteria[2] = '=';
-            if(!isset($criteria[3]) || !in_array($criteria[3], $this->logicalOperators)) $criteria[3] = 'AND';
-
-            list($field, $value, $operator, $concat) = $criteria;
-            if(!in_array($field, $this->allowedFields)) {
-                throw new \Exception('Illegal field `'.static::TABLE_NAME.'`.`'.$field.'` in database request');
-            }
+            list($field, $value, $operator, $concat) = $this->processCriteria($criteria);
 
             if($value !== null) {
                 $sql      .= " {$concat} `{$field}` {$operator} ? ";
@@ -186,5 +180,22 @@ abstract class AbstractMapper extends Mapper {
         }
 
         return [$sql, $params];
+    }
+
+    /**
+     * @param $criteria
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function processCriteria(array $criteria): array {
+        if(!isset($criteria[2]) || !in_array($criteria[2], $this->comparisonOperators)) $criteria[2] = '=';
+        if(!isset($criteria[3]) || !in_array($criteria[3], $this->logicalOperators)) $criteria[3] = 'AND';
+
+        if(!in_array($criteria[0], $this->allowedFields)) {
+            throw new \Exception('Illegal field `'.static::TABLE_NAME.'`.`'.$criteria[0].'` in database request');
+        }
+
+        return $criteria;
     }
 }
