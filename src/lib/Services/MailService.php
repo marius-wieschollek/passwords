@@ -64,10 +64,11 @@ class MailService {
      * @var array
      */
     protected $sender;
+
     /**
      * @var OC_Defaults
      */
-    private $defaults;
+    protected $defaults;
 
     /**
      * MailService constructor.

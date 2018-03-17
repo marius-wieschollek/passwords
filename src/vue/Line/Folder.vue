@@ -6,7 +6,7 @@
          @dragstart="dragStartAction($event)">
         <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
-        <div class="title" :title="getTitle"><span>{{ folder.label }}</span></div>
+        <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>

@@ -2,7 +2,7 @@
     <div class="row tag" :data-tag-id="tag.id" @click="openAction($event)">
         <i class="fa fa-star favourite" :class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}"></div>
-        <div class="title" :title="getTitle"><span>{{ tag.label }}</span></div>
+        <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>

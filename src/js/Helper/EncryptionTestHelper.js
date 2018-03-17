@@ -119,7 +119,7 @@ class EncryptionTestHelper {
                 line: result.error.lineNumber,
                 column: result.error.columnNumber,
                 message: result.error.message,
-                stack: result.error.stack,
+                stack: result.error.stack
             };
         }
 

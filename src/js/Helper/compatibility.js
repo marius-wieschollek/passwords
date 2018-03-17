@@ -1,5 +1,3 @@
-window.addEventListener('load', checkSystem, false);
-
 function isCompatibleBrowser() {
     try {
         eval('"use strict"; class PasswordsTestBrowserClassSupport {}');
@@ -38,3 +36,5 @@ function checkSystem() {
         showBrowserCompatibilityWarning();
     }
 }
+
+window.addEventListener('load', checkSystem, false);

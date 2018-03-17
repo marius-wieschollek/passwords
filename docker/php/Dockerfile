@@ -22,7 +22,7 @@ RUN apt-get update -y && \
 
 RUN npm install --global pageres-cli --unsafe-perm
 RUN touch /var/www/.config
-RUN chown -R www-data:$(id -gn www-data) /var/www/.config
+RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
 
 RUN printf "\n" | pecl install imagick
 RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/docker-php-ext-imagick.ini

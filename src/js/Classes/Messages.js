@@ -134,7 +134,7 @@ class Messages {
 
     filePicker(title = 'Pick a file', mime, multiselect = false) {
         return new Promise((resolve) => {
-            OC.dialogs.filepicker(title, (e,f) => {console.log(e,f);} , multiselect, mime, true, 1)
+            OC.dialogs.filepicker(title, (e,f) => {console.log(e,f);} , multiselect, mime, true, 1);
         });
     }
 
@@ -151,7 +151,7 @@ class Messages {
     _setDialogValue(value) {
         let $el = $('.oc-dialog-content input');
         if($el.length === 0) {
-            setTimeout(() => { this._setDialogValue(value) }, 10);
+            setTimeout(() => { this._setDialogValue(value); }, 10);
         } else {
             $el.val(value);
         }

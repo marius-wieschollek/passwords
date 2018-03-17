@@ -20,18 +20,6 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
         loadInterval = null,
         app = null;
 
-    async function load() {
-        if(isLoaded || !document.querySelector('meta[name=pwat]')) return;
-        clearInterval(loadInterval);
-        isLoaded = true;
-
-        await initApi();
-        SettingsManager.init();
-        initApp();
-        if(process.env.NIGHTLY_FEATURES) SearchManager.init();
-        if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
-    }
-
     function initApp() {
         let section = SettingsManager.get('client.ui.section.default');
 
@@ -57,6 +45,18 @@ __webpack_public_path__ = oc_appswebroots.passwords + '/';
             baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
         }
         API.login(baseUrl, user, password);
+    }
+
+    async function load() {
+        if(isLoaded || !document.querySelector('meta[name=pwat]')) return;
+        clearInterval(loadInterval);
+        isLoaded = true;
+
+        await initApi();
+        SettingsManager.init();
+        initApp();
+        if(process.env.NIGHTLY_FEATURES) SearchManager.init();
+        if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
     }
 
     if(location.protocol !== 'https:') {

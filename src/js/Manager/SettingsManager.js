@@ -87,7 +87,7 @@ class SettingsManager {
      * @private
      */
     static async _setSetting(setting, value) {
-        let [scope, ] = setting.split('.', 2);
+        let [scope] = setting.split('.', 2);
 
         if(scope === 'local.') {
             return SettingsManager._setLocalSetting(setting, value);
