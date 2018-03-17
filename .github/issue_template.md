@@ -1,7 +1,7 @@
+ISSUES ARE NOT FOR SUPPORT. Please go to the Nextcloud forum if you have questions or need help.
+ -> https://help.nextcloud.com/c/apps/passwords
 Please check the existing issues before creating a new one.
  -> https://github.com/marius-wieschollek/passwords/issues?utf8=%E2%9C%93&q=is%3Aissue
-This is not a support form. Please go to the Nextcloud forum if you have questions or need help.
- -> https://help.nextcloud.com/c/apps/passwords
 If you are reporting a bug, please check if it still exists in the nightly version.
  -> https://apps.nextcloud.com/apps/passwords/releases
 Describe your issue here and remember not to include personal data as this is public.
