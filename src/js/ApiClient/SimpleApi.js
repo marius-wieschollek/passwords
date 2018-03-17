@@ -38,7 +38,6 @@ export default class SimpleApi {
             'share.list'          : 'api/1.0/share/list',
             'share.find'          : 'api/1.0/share/find',
             'share.show'          : 'api/1.0/share/show',
-            'share.info'          : 'api/1.0/share/info',
             'share.create'        : 'api/1.0/share/create',
             'share.update'        : 'api/1.0/share/update',
             'share.delete'        : 'api/1.0/share/delete',
@@ -402,14 +401,6 @@ export default class SimpleApi {
      */
     findShares(criteria = {}, details = 'model') {
         return this._createRequest('share.find', {details, criteria}, 'POST');
-    }
-
-    /**
-     *
-     * @returns {Promise}
-     */
-    getSharingInfo() {
-        return this._createRequest('share.info');
     }
 
     /**

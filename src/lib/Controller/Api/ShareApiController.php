@@ -278,26 +278,6 @@ class ShareApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @return JSONResponse
-     * @throws ApiException
-     * @deprecated
-     */
-    public function info(): JSONResponse {
-        $info = [
-            'enabled'      => $this->shareSettings->get('enabled'),
-            'resharing'    => $this->shareSettings->get('resharing'),
-            'autocomplete' => $this->shareSettings->get('autocomplete'),
-            'types'        => $this->shareSettings->get('types')
-        ];
-
-        return $this->createJsonResponse($info);
-    }
-
-    /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $search
      *
      * @return JSONResponse

@@ -38,7 +38,6 @@ $routes = [
     ['name' => 'tag_api#delete', 'url' => '/api/1.0/tag/delete', 'verb' => 'DELETE'],
     ['name' => 'tag_api#restore', 'url' => '/api/1.0/tag/restore', 'verb' => 'PATCH'],
 
-    ['name' => 'share_api#info', 'url' => '/api/1.0/share/info', 'verb' => 'GET'],
     ['name' => 'share_api#list', 'url' => '/api/1.0/share/list', 'verb' => 'GET'],
     ['name' => 'share_api#list', 'url' => '/api/1.0/share/list', 'verb' => 'POST', 'postfix' => 'POST'],
     ['name' => 'share_api#show', 'url' => '/api/1.0/share/show', 'verb' => 'POST'],

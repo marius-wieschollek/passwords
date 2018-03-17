@@ -88,19 +88,19 @@ export class ExportManager {
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager._createCustomDataObject(data, header.clone());
+            data = await ExportManager._convertDbToExportStructure(data, header.clone());
             csv.passwords = ExportManager._convertObjectToCsv(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager._createCustomDataObject(data, header.clone());
+            data = await ExportManager._convertDbToExportStructure(data, header.clone());
             csv.folders = ExportManager._convertObjectToCsv(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager._createCustomDataObject(data, header.clone());
+            data = await ExportManager._convertDbToExportStructure(data, header.clone());
             csv.tags = ExportManager._convertObjectToCsv(data, header);
         }
 
@@ -126,7 +126,7 @@ export class ExportManager {
         }
 
         if(options.header) header = Utility.cloneObject(options.mapping);
-        data = await ExportManager._createCustomDataObject(data, options.mapping);
+        data = await ExportManager._convertDbToExportStructure(data, options.mapping);
         return ExportManager._convertObjectToCsv(data, header, options.delimiter);
     }
 
@@ -142,19 +142,19 @@ export class ExportManager {
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager._createCustomDataObject(data, header.clone());
+            data = await ExportManager._convertDbToExportStructure(data, header.clone());
             sheets.passwords = ExportManager._convertObjectToOffice(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager._createCustomDataObject(data, header.clone());
+            data = await ExportManager._convertDbToExportStructure(data, header.clone());
             sheets.folders = ExportManager._convertObjectToOffice(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager._createCustomDataObject(data, header.clone());
+            data = await ExportManager._convertDbToExportStructure(data, header.clone());
             sheets.tags = ExportManager._convertObjectToOffice(data, header);
         }
 
@@ -183,9 +183,32 @@ export class ExportManager {
      * @returns {Promise<Array>}
      * @private
      */
-    static async _createCustomDataObject(db, mapping) {
-        let tagDb = {}, folderDb = {}, data = [];
+    static async _convertDbToExportStructure(db, mapping) {
+        let folderDb = await this._createExportFolderMapping(mapping),
+            tagDb    = await this._createExportTagMapping(mapping),
+            data     = [];
 
+        if(mapping.indexOf('folderId') !== -1) mapping[mapping.indexOf('folderId')] = 'folder';
+        if(mapping.indexOf('parentId') !== -1) mapping[mapping.indexOf('parentId')] = 'parent';
+        if(mapping.indexOf('tagIds') !== -1) mapping[mapping.indexOf('tagIds')] = 'tags';
+
+        for(let i in db) {
+            if(!db.hasOwnProperty(i)) continue;
+            let object = this._convertObjectForExport(db[i], mapping, folderDb, tagDb);
+            data.push(object);
+        }
+
+        return data;
+    }
+
+    /**
+     *
+     * @param mapping
+     * @returns {Promise<{}>}
+     * @private
+     */
+    static async _createExportFolderMapping(mapping) {
+        let folderDb = {};
         if(mapping.indexOf('folderLabel') !== -1 || mapping.indexOf('parentLabel') !== -1) {
             let folders = await API.listFolders();
             folderDb[this.defaultFolder] = Localisation.translate('Home');
@@ -195,7 +218,17 @@ export class ExportManager {
                 folderDb[folders[i].id] = folders[i].label;
             }
         }
+        return folderDb;
+    }
 
+    /**
+     *
+     * @param mapping
+     * @returns {Promise<{}>}
+     * @private
+     */
+    static async _createExportTagMapping(mapping) {
+        let tagDb = {};
         if(mapping.indexOf('tagLabels') !== -1) {
             let tags = await API.listTags();
 
@@ -204,39 +237,39 @@ export class ExportManager {
                 tagDb[tags[i].id] = tags[i].label;
             }
         }
+        return tagDb;
+    }
 
-        if(mapping.indexOf('folderId') !== -1) mapping[mapping.indexOf('folderId')] = 'folder';
-        if(mapping.indexOf('parentId') !== -1) mapping[mapping.indexOf('parentId')] = 'parent';
-        if(mapping.indexOf('tagIds') !== -1) mapping[mapping.indexOf('tagIds')] = 'tags';
+    /**
+     *
+     * @param element
+     * @param mapping
+     * @param folderDb
+     * @param tagDb
+     * @private
+     */
+    static _convertObjectForExport(element, mapping, folderDb, tagDb) {
+        let object = {};
+        for(let j = 0; j < mapping.length; j++) {
+            let field = mapping[j];
 
-        for(let i in db) {
-            if(!db.hasOwnProperty(i)) continue;
-            let element = db[i], object = {};
-
-            for(let j = 0; j < mapping.length; j++) {
-                let field = mapping[j];
-
-                if(field === 'folderLabel') {
-                    object.folderLabel = folderDb.hasOwnProperty(element.folder) ? folderDb[element.folder]:'';
-                } else if(field === 'parentLabel') {
-                    object.parentLabel = folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'';
-                } else if(field === 'tagLabels') {
-                    object.tagLabels = [];
-                    for(let k in element.tags) {
-                        if(!element.tags.hasOwnProperty(k)) continue;
-                        object.tagLabels.push(tagDb[element.tags[k]]);
-                    }
-                } else if(field === 'edited' || field === 'updated' || field === 'created') {
-                    object[field] = new Date(element[field] * 1e3).toString();
-                } else {
-                    object[field] = element[field];
+            if(field === 'folderLabel') {
+                object.folderLabel = folderDb.hasOwnProperty(element.folder) ? folderDb[element.folder]:'';
+            } else if(field === 'parentLabel') {
+                object.parentLabel = folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'';
+            } else if(field === 'tagLabels') {
+                object.tagLabels = [];
+                for(let k in element.tags) {
+                    if(!element.tags.hasOwnProperty(k)) continue;
+                    object.tagLabels.push(tagDb[element.tags[k]]);
                 }
+            } else if(field === 'edited' || field === 'updated' || field === 'created') {
+                object[field] = new Date(element[field] * 1e3).toString();
+            } else {
+                object[field] = element[field];
             }
-
-            data.push(object);
         }
-
-        return data;
+        return object;
     }
 
     /**
@@ -327,7 +360,7 @@ export class ExportManager {
      * @private
      */
     static async _getPasswordsForExport(includeShared = false) {
-        let data = await API.listPasswords('model+tags'),
+        let data      = await API.listPasswords('model+tags'),
             passwords = [];
 
         for(let i in data) {
@@ -365,7 +398,7 @@ export class ExportManager {
      * @private
      */
     static async _getFoldersForExport() {
-        let data = await API.listFolders(),
+        let data    = await API.listFolders(),
             folders = [];
 
         for(let i in data) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="sharing-container" v-if="enabled">
+    <div class="sharing-container">
         <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
         <ul class="shares" v-for="share in shares" :key="share.id" :data-share-id="share.id">
             <share :share="share" v-on:delete="deleteShare($event)"></share>
@@ -10,7 +10,6 @@
             </li>
         </ul>
     </div>
-    <translate v-else say="Sharing is not enabled"/>
 </template>
 
 <script>
@@ -35,7 +34,6 @@
 
         data() {
             return {
-                enabled    : false,
                 search     : '',
                 matches    : [],
                 nameMap    : [],
@@ -43,11 +41,6 @@
                 shares     : this.password.shares,
                 placeholder: Localisation.translate('Search user')
             }
-        },
-
-        created() {
-            API.getSharingInfo()
-                .then((e) => {this.enabled = e.enabled;});
         },
 
         computed: {
@@ -136,7 +129,6 @@
         watch: {
             password: function(value) {
                 this.shares = value.shares;
-                if(value.share && value.share.shareable === false) this.enabled = false;
                 this.$forceUpdate();
             },
             search  : function(value) {

@@ -20,10 +20,10 @@
                     field    : SettingsManager.get('local.ui.sorting.field', 'label'),
                     ascending: SettingsManager.get('local.ui.sorting.ascending', true)
                 },
-                ui: {
+                ui       : {
                     showTags: SettingsManager.get('client.ui.list.tags.show', false)
                 }
-            }
+            };
         },
 
         created() {
@@ -46,7 +46,7 @@
                 return {
                     'show-details': this.detail.type !== 'none',
                     'loading'     : this.loading
-                }
+                };
             },
             showHeaderAndFooter() {
                 return !this.loading &&
@@ -109,9 +109,9 @@
                 let db = {passwords: this.passwords, folders: folders};
                 if(this.tags) db.tags = this.tags;
                 SearchManager.setDatabase(db);
-            },
+            }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
@@ -119,6 +119,7 @@
         position   : relative;
         height     : 100%;
         overflow-y : auto;
+        overflow-x : hidden;
         transition : margin-right 300ms, transform 300ms;
 
         .app-content-right {

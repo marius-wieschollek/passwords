@@ -34,7 +34,6 @@
                 <translate tag="div" say="SHA1 Hash"><span>{{ object.hash }}</span></translate>
             </div>
             <div slot="notes" class="notes">
-                <translate say="No notes" v-if="object.notes.length === 0"/>
                 <div v-html="notes"></div>
             </div>
             <div slot="share">
@@ -80,6 +79,7 @@
     import Localisation from "@js/Classes/Localisation";
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         components: {
@@ -154,10 +154,16 @@
                 };
             },
             getTabs() {
-                return {details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'};
+                if(this.object.notes.length !== 0) {
+                    return {details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'};
+                }
+                return {details: 'Details', share: 'Share', revisions: 'Revisions'};
             },
             getSharingTabs() {
-                return {nextcloud: 'Share', qrcode: 'QR Code'};
+                if(SettingsManager.get('server.sharing.enabled') && (this.object.share === null || this.object.share.shareable === true)) {
+                    return {nextcloud: 'Share', qrcode: 'QR Code'};
+                }
+                return {qrcode: 'QR Code'};
             }
         },
 
