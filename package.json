@@ -48,10 +48,16 @@
         "security"
     ],
     "eslintConfig": {
-        "brace-style": ["1tbs", "stroustrup", { "allowSingleLine": true }],
+        "brace-style": [
+            "1tbs",
+            "stroustrup",
+            {
+                "allowSingleLine": true
+            }
+        ],
         "globals": {
-            "OC"    : true,
-            "OCA"    : true,
+            "OC": true,
+            "OCA": true,
             "window": true,
             "oc_appswebroots": true,
             "__webpack_public_path__": true
