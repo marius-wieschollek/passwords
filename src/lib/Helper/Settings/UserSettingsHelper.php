@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -66,7 +65,6 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return null|string
-     * @throws ApiException
      */
     public function get(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -79,34 +77,39 @@ class UserSettingsHelper {
             return $this->castValue($type, $value);
         }
 
-        throw new ApiException('Invalid Key', 400);
+        return null;
     }
 
     /**
      * @param string $key
      * @param        $value
      *
+     * @return bool|float|int|null|string
      * @throws \OCP\PreConditionNotMetException
-     * @throws ApiException
      */
-    public function set(string $key, $value): void {
+    public function set(string $key, $value) {
         $key = str_replace('.', '/', $key);
 
         if(isset($this->userSettings[ $key ])) {
             $type  = $this->userSettings[ $key ];
             $value = $this->castValue($type, $value);
-            if($type === 'boolean') $value = intval($value);
-            $this->config->setUserValue($key, $value);
-        } else {
-            throw new ApiException('Invalid Key', 400);
+
+            if($type === 'boolean') {
+                $this->config->setUserValue($key, intval($value));
+            } else {
+                $this->config->setUserValue($key, intval($value));
+            }
+
+            return $value;
         }
+
+        return null;
     }
 
     /**
      * @param string $key
      *
      * @return mixed
-     * @throws ApiException
      */
     public function reset(string $key) {
         $key = str_replace('.', '/', $key);
@@ -117,11 +120,11 @@ class UserSettingsHelper {
             return $this->userDefaults[ $key ];
         }
 
-        throw new ApiException('Invalid Key', 400);
+        return null;
     }
 
     /**
-     * @throws ApiException
+     * @return array
      */
     public function list(): array {
         $settings = [];

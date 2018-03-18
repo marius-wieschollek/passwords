@@ -4,6 +4,8 @@ Please check the existing issues before creating a new one.
  -> https://github.com/marius-wieschollek/passwords/issues?utf8=%E2%9C%93&q=is%3Aissue
 If you are reporting a bug, please check if it still exists in the nightly version.
  -> https://apps.nextcloud.com/apps/passwords/releases
+If you are experiencing issues with the browser extension, report the issue in the repository
+ -> https://github.com/marius-wieschollek/passwords-webextension
 Describe your issue here and remember not to include personal data as this is public.
 
 ### System Information

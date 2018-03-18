@@ -39,9 +39,7 @@ class ClientSettingsHelper {
      */
     public function get(string $key, string $userId = null) {
         $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
-        if(isset($data[ $key ])) {
-            return $data[ $key ];
-        }
+        if(isset($data[ $key ])) return $data[ $key ];
 
         return null;
     }
@@ -50,10 +48,11 @@ class ClientSettingsHelper {
      * @param string $key
      * @param        $value
      *
+     * @return mixed
      * @throws \OCP\PreConditionNotMetException
      * @throws ApiException
      */
-    public function set(string $key, $value): void {
+    public function set(string $key, $value) {
         if(strlen($key) > 48) {
             throw new ApiException('Key too long', 400);
         }
@@ -64,6 +63,8 @@ class ClientSettingsHelper {
         $data         = json_decode($this->config->getUserValue('client/settings', '{}'), true);
         $data[ $key ] = $value;
         $this->config->setUserValue('client/settings', json_encode($data));
+
+        return $value;
     }
 
     /**

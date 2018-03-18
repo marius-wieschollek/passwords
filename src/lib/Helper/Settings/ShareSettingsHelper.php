@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\Share\IManager;
 
@@ -50,7 +49,6 @@ class ShareSettingsHelper {
      * @param $key
      *
      * @return mixed
-     * @throws ApiException
      */
     public function get($key) {
         switch($key) {
@@ -64,12 +62,11 @@ class ShareSettingsHelper {
                 return ['user'];
         }
 
-        throw new ApiException('Invalid Key', 400);
+        return null;
     }
 
     /**
      * @return array
-     * @throws ApiException
      */
     public function list(): array {
         return [

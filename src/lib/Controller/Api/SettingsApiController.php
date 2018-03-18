@@ -42,13 +42,10 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function get(): JSONResponse {
-        $params = $this->request->getParams();
-        unset($params['_route']);
-
-        if(empty($params)) throw new ApiException('Invalid Key', 400);
+        $params = $this->getParams();
+        if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
         foreach($params as $key) {
@@ -68,15 +65,12 @@ class SettingsApiController extends AbstractApiController {
      * @throws PreConditionNotMetException
      */
     public function set(): JSONResponse {
-        $params = $this->request->getParams();
-        unset($params['_route']);
-
-        if(empty($params)) throw new ApiException('Invalid Key', 400);
+        $params = $this->getParams();
+        if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
         foreach($params as $key => $value) {
-            $this->settings->set($key, $value);
-            $settings[ $key ] = $value;
+            $settings[ $key ] = $this->settings->set($key, $value);
         }
 
         return $this->createJsonResponse($settings);
@@ -90,7 +84,6 @@ class SettingsApiController extends AbstractApiController {
      * @param array|null $scopes
      *
      * @return JSONResponse
-     * @throws ApiException
      */
     public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
@@ -104,19 +97,27 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws ApiException
      * @throws PreConditionNotMetException
      */
     public function reset(): JSONResponse {
-        $params = $this->request->getParams();
-        unset($params['_route']);
+        $params = $this->getParams();
+        if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
-        if(empty($params)) throw new ApiException('Invalid Key', 400);
         foreach($params as $key) {
             $settings[ $key ] = $this->settings->reset($key);
         }
 
         return $this->createJsonResponse($settings);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getParams(): array {
+        $params = $this->request->getParams();
+        unset($params['_route']);
+
+        return $params;
     }
 }

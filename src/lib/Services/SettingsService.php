@@ -56,7 +56,6 @@ class SettingsService {
      * @param string|null $userId
      *
      * @return mixed
-     * @throws ApiException
      */
     public function get(string $key, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);
@@ -70,13 +69,14 @@ class SettingsService {
                 return $this->serverSettings->get($subKey);
         }
 
-        throw new ApiException('Invalid Scope', 400);
+        return null;
     }
 
     /**
      * @param string $key
      * @param        $value
      *
+     * @return bool|float|int|mixed|null|string
      * @throws ApiException
      * @throws \OCP\PreConditionNotMetException
      */
@@ -85,22 +85,18 @@ class SettingsService {
 
         switch($scope) {
             case 'user':
-                $this->userSettings->set($subKey, $value);
-                break;
+                return $this->userSettings->set($subKey, $value);
             case 'client':
-                $this->clientSettings->set($subKey, $value);
-                break;
-            default:
-                throw new ApiException('Invalid Scope', 400);
-                break;
+                return $this->clientSettings->set($subKey, $value);
         }
+
+        return null;
     }
 
     /**
      * @param string $key
      *
      * @return mixed|null
-     * @throws ApiException
      * @throws \OCP\PreConditionNotMetException
      */
     public function reset(string $key) {
@@ -113,14 +109,13 @@ class SettingsService {
                 return $this->clientSettings->reset($subKey);
         }
 
-        throw new ApiException('Invalid Scope', 400);
+        return null;
     }
 
     /**
      * @param array|null $scope
      *
      * @return array
-     * @throws ApiException
      */
     public function list(array $scope = null): array {
         $settings = [];

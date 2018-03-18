@@ -54,7 +54,6 @@ class PageController extends Controller {
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function index(): TemplateResponse {
 
@@ -90,7 +89,7 @@ class PageController extends Controller {
     }
 
     /**
-     * @throws \OCA\Passwords\Exception\ApiException
+     *
      */
     protected function getUserSettings(): void {
         Util::addHeader(

@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
 
@@ -62,7 +61,6 @@ class ServerSettingsHelper {
      * @param string $key
      *
      * @return null|string
-     * @throws ApiException
      */
     public function get(string $key) {
         if(strpos($key, '.') !== false) {
@@ -83,12 +81,11 @@ class ServerSettingsHelper {
                 return $this->shareSettings->get($subKey);
         }
 
-        throw new ApiException('Invalid Key', 400);
+        return null;
     }
 
     /**
      * @return array
-     * @throws ApiException
      */
     public function list(): array {
         return array_merge(

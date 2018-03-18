@@ -9,9 +9,7 @@ namespace OCA\Passwords\Helper\Settings;
 
 use OC_Defaults;
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
-use OCA\Theming\ThemingDefaults;
 use OCP\IURLGenerator;
 
 /**
@@ -27,7 +25,7 @@ class ThemeSettingsHelper {
     protected $config;
 
     /**
-     * @var ThemingDefaults
+     * @var OC_Defaults
      */
     protected $theming;
 
@@ -53,7 +51,6 @@ class ThemeSettingsHelper {
      * @param string $key
      *
      * @return null|string
-     * @throws ApiException
      */
     public function get(string $key) {
         switch($key) {
@@ -73,12 +70,11 @@ class ThemeSettingsHelper {
                 return $this->getFolderIcon();
         }
 
-        throw new ApiException('Invalid Key', 400);
+        return null;
     }
 
     /**
      * @return array
-     * @throws ApiException
      */
     public function list(): array {
         return [
