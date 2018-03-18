@@ -86,6 +86,7 @@ class ClientSettingsHelper {
      * @return array
      */
     public function list(): array {
+        $settings = [];
         $client = json_decode($this->config->getUserValue('client/settings', '{}'), true);
         foreach($client as $key => $value) {
             $settings[ 'client.'.$key ] = $value;
