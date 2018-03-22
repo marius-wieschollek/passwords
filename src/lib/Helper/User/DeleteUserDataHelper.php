@@ -133,9 +133,9 @@ class DeleteUserDataHelper {
      * @param string $userId
      */
     protected function deleteUserSettings(?string $userId = null): void {
-        $settings = $this->settings->list($userId);
+        $settings = array_keys($this->settings->list($userId));
 
-        foreach($settings as $setting => $value) {
+        foreach($settings as $setting) {
             $this->settings->reset($setting, $userId);
         }
     }

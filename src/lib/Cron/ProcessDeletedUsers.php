@@ -42,20 +42,12 @@ class ProcessDeletedUsers extends TimedJob {
      * ProcessDeletedUsers constructor.
      *
      * @param LoggingService       $logger
-     * @param TagService           $tagService
-     * @param UserSettingsHelper   $settings
-     * @param FolderService        $folderService
      * @param ConfigurationService $config
-     * @param PasswordService      $passwordService
      * @param DeleteUserDataHelper $deleteUserDataHelper
      */
     public function __construct(
         LoggingService $logger,
-        TagService $tagService,
-        UserSettingsHelper $settings,
-        FolderService $folderService,
         ConfigurationService $config,
-        PasswordService $passwordService,
         DeleteUserDataHelper $deleteUserDataHelper
     ) {
         // Run always
@@ -75,7 +67,7 @@ class ProcessDeletedUsers extends TimedJob {
         $usersToDelete   = json_decode($this->config->getAppValue('deleted_users', '{}'), true);
         $usersNotDeleted = [];
         $deleted         = 0;
-        foreach($usersToDelete as $i => $userId) {
+        foreach($usersToDelete as $userId) {
             if($this->deleteUserData($userId)) {
                 $deleted++;
             } else {
