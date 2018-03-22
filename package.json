@@ -9,7 +9,7 @@
         "build:nightly": "webpack --env.production --env.features"
     },
     "dependencies": {
-        "xlsx": "^0.12.5"
+        "xlsx": "^0.12.6"
     },
     "devDependencies": {
         "copy-webpack-plugin": "^4.5.1",
@@ -19,7 +19,7 @@
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
         "marked": "^0.3.17",
-        "node-sass": "^4.8.2",
+        "node-sass": "^4.8.3",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
         "papaparse": "^4.3.7",
         "progress-bar-webpack-plugin": "^1.11.0",
@@ -34,7 +34,7 @@
         "vue-loader": "^14.2.1",
         "vue-qrcode-component": "^2.1.1",
         "vue-router": "^3.0.1",
-        "vue-style-loader": "^4.0.2",
+        "vue-style-loader": "^4.1.0",
         "vue-template-compiler": "^2.5.16",
         "webpack": "^3.11.0"
     },

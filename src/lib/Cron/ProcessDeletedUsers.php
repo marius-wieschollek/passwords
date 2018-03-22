@@ -1,0 +1,105 @@
+<?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
+
+namespace OCA\Passwords\Cron;
+
+use OC\BackgroundJob\TimedJob;
+use OCA\Passwords\Helper\Settings\UserSettingsHelper;
+use OCA\Passwords\Helper\User\DeleteUserDataHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\TagService;
+
+/**
+ * Class ProcessDeletedUsers
+ *
+ * @package OCA\Passwords\Cron
+ */
+class ProcessDeletedUsers extends TimedJob {
+
+    /**
+     * @var LoggingService
+     */
+    protected $logger;
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
+     * @var DeleteUserDataHelper
+     */
+    protected $deleteUserDataHelper;
+
+    /**
+     * ProcessDeletedUsers constructor.
+     *
+     * @param LoggingService       $logger
+     * @param TagService           $tagService
+     * @param UserSettingsHelper   $settings
+     * @param FolderService        $folderService
+     * @param ConfigurationService $config
+     * @param PasswordService      $passwordService
+     * @param DeleteUserDataHelper $deleteUserDataHelper
+     */
+    public function __construct(
+        LoggingService $logger,
+        TagService $tagService,
+        UserSettingsHelper $settings,
+        FolderService $folderService,
+        ConfigurationService $config,
+        PasswordService $passwordService,
+        DeleteUserDataHelper $deleteUserDataHelper
+    ) {
+        // Run always
+        $this->setInterval(1);
+
+        $this->logger               = $logger;
+        $this->config               = $config;
+        $this->deleteUserDataHelper = $deleteUserDataHelper;
+    }
+
+    /**
+     * @param $argument
+     *
+     * @throws \Exception
+     */
+    protected function run($argument): void {
+        $usersToDelete   = json_decode($this->config->getAppValue('deleted_users', '{}'), true);
+        $usersNotDeleted = [];
+        $deleted         = 0;
+        foreach($usersToDelete as $i => $userId) {
+            if($this->deleteUserData($userId)) {
+                $deleted++;
+            } else {
+                $usersNotDeleted[] = $userId;
+            };
+        }
+        $this->logger->info(['Deleted %s users', $deleted]);
+        $this->config->setAppValue('deleted_users', json_encode($usersNotDeleted));
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return bool
+     */
+    protected function deleteUserData(string $userId): bool {
+        try {
+            $this->deleteUserDataHelper->deleteUserData($userId);
+
+            return true;
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
+}

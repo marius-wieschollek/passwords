@@ -17,7 +17,6 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
 
@@ -41,11 +40,6 @@ class AdminSettings implements ISettings {
     protected $urlGenerator;
 
     /**
-     * @var IL10N
-     */
-    protected $localisation;
-
-    /**
      * @var FileCacheService
      */
     protected $fileCacheService;
@@ -53,18 +47,15 @@ class AdminSettings implements ISettings {
     /**
      * AdminSettings constructor.
      *
-     * @param IL10N                $localisation
      * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
-        IL10N $localisation,
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         FileCacheService $fileCacheService
     ) {
-        $this->localisation     = $localisation;
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
         $this->urlGenerator     = $urlGenerator;
@@ -83,6 +74,7 @@ class AdminSettings implements ISettings {
             'faviconServices'  => $this->getFaviconServices(),
             'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
+            'purgeTimeout'     => $this->getPurgeTimeout(),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
             'caches'           => $this->getFileCaches()
@@ -98,22 +90,22 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::SECURITY_HIBP,
-                'label'   => $this->localisation->t('Have I been pwned? (recommended)'),
+                'label'   => 'Have I been pwned? (recommended)',
                 'current' => $current === HelperService::SECURITY_HIBP
             ],
             [
                 'id'      => HelperService::SECURITY_BIG_LOCAL,
-                'label'   => $this->localisation->t('10 Million Passwords (Local)'),
+                'label'   => '10 Million Passwords (Local)',
                 'current' => $current === HelperService::SECURITY_BIG_LOCAL
             ],
             [
                 'id'      => HelperService::SECURITY_SMALL_LOCAL,
-                'label'   => $this->localisation->t('1 Million Passwords (Local)'),
+                'label'   => '1 Million Passwords (Local)',
                 'current' => $current === HelperService::SECURITY_SMALL_LOCAL
             ],
             [
                 'id'      => HelperService::SECURITY_BIGDB_HIBP,
-                'label'   => $this->localisation->t('10Mio Passwords & Hibp?'),
+                'label'   => '10Mio Passwords & Hibp?',
                 'current' => $current === HelperService::SECURITY_BIGDB_HIBP
             ]
         ];
@@ -128,17 +120,17 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::WORDS_LOCAL,
-                'label'   => $this->localisation->t('Local dictionary'),
+                'label'   => 'Local dictionary',
                 'current' => $current === HelperService::WORDS_LOCAL
             ],
             [
                 'id'      => HelperService::WORDS_SNAKES,
-                'label'   => $this->localisation->t('watchout4snakes.com (recommended)'),
+                'label'   => 'watchout4snakes.com (recommended)',
                 'current' => $current === HelperService::WORDS_SNAKES
             ],
             [
                 'id'      => HelperService::WORDS_RANDOM,
-                'label'   => $this->localisation->t('Random Characters'),
+                'label'   => 'Random Characters',
                 'current' => $current === HelperService::WORDS_RANDOM
             ]
         ];
@@ -157,12 +149,12 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::IMAGES_IMAGICK,
-                'label'   => $this->localisation->t('Imagick/GMagick (recommended)'),
+                'label'   => 'Imagick/GMagick (recommended)',
                 'current' => $current === HelperService::IMAGES_IMAGICK
             ],
             [
                 'id'      => HelperService::IMAGES_GDLIB,
-                'label'   => $this->localisation->t('PHP GDLib'),
+                'label'   => 'PHP GDLib',
                 'current' => $current === HelperService::IMAGES_GDLIB
             ]
         ];
@@ -177,13 +169,13 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::FAVICON_LOCAL,
-                'label'   => $this->localisation->t('Local analyzer'),
+                'label'   => 'Local analyzer',
                 'current' => $current === HelperService::FAVICON_LOCAL,
                 'api'     => null
             ],
             [
                 'id'      => HelperService::FAVICON_BESTICON,
-                'label'   => $this->localisation->t('Besticon (recommended)'),
+                'label'   => 'Besticon (recommended)',
                 'current' => $current === HelperService::FAVICON_BESTICON,
                 'api'     => [
                     'key'   => BestIconHelper::BESTICON_CONFIG_KEY,
@@ -192,19 +184,19 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::FAVICON_DUCK_DUCK_GO,
-                'label'   => $this->localisation->t('DuckDuckGo'),
+                'label'   => 'DuckDuckGo',
                 'current' => $current === HelperService::FAVICON_DUCK_DUCK_GO,
                 'api'     => null
             ],
             [
                 'id'      => HelperService::FAVICON_GOOGLE,
-                'label'   => $this->localisation->t('Google'),
+                'label'   => 'Google',
                 'current' => $current === HelperService::FAVICON_GOOGLE,
                 'api'     => null
             ],
             [
                 'id'      => HelperService::FAVICON_DEFAULT,
-                'label'   => $this->localisation->t('None'),
+                'label'   => 'None',
                 'current' => $current === HelperService::FAVICON_DEFAULT,
                 'api'     => null
             ]
@@ -220,19 +212,19 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::PREVIEW_WKHTML,
-                'label'   => $this->localisation->t('WKHTML (Local)'),
+                'label'   => 'WKHTML (Local)',
                 'current' => $current === HelperService::PREVIEW_WKHTML,
                 'api'     => null
             ],
             [
                 'id'      => HelperService::PREVIEW_PAGERES,
-                'label'   => $this->localisation->t('Pageres/PhantomJS (Local)'),
+                'label'   => 'Pageres/PhantomJS (Local)',
                 'current' => $current === HelperService::PREVIEW_PAGERES,
                 'api'     => null
             ],
             [
                 'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
-                'label'   => $this->localisation->t('screenshotapi.io'),
+                'label'   => 'screenshotapi.io',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
                 'api'     => [
                     'key'   => ScreenShotApiHelper::SSA_API_CONFIG_KEY,
@@ -241,7 +233,7 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
-                'label'   => $this->localisation->t('screenshotmachine.com'),
+                'label'   => 'screenshotmachine.com',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'api'     => [
                     'key'   => ScreenShotMachineHelper::SSM_API_CONFIG_KEY,
@@ -250,9 +242,27 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::PREVIEW_DEFAULT,
-                'label'   => $this->localisation->t('None'),
+                'label'   => 'None',
                 'current' => $current === HelperService::PREVIEW_DEFAULT,
                 'api'     => null
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPurgeTimeout(): array {
+        return [
+            'current' => $this->config->getAppValue('entity/purge/timeout', -1),
+            'options' => [
+                -1       => 'Never',
+                0        => 'Immediately',
+                7200     => 'After two hours',
+                86400    => 'After one day',
+                1209600  => 'After two weeks',
+                2592000  => 'After one month',
+                31536000 => 'After one year'
             ]
         ];
     }

@@ -36,9 +36,9 @@
 
         <div class="area processing">
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
-            <select id="passwords-image" name="passwords-favicon" name="image" data-setting="service/images">
+            <select id="passwords-image" name="passwords-image" name="image" data-setting="service/images">
                 <?php foreach($_['imageServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($service['label']); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -50,14 +50,14 @@
             <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
             <select id="passwords-security" name="passwords-security" name="security" data-setting="service/security">
                 <?php foreach($_['securityServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($service['label']); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
             <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
             <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
                 <?php foreach($_['wordsServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($service['label']); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -65,7 +65,7 @@
             <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service/favicon">
                 <?php foreach($_['faviconServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>
-                            data-api="<?php p(json_encode($service['api'])); ?>"><?php p($service['label']); ?></option>
+                            data-api="<?php p(json_encode($service['api'])); ?>"><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
             <div class="container" id="passwords-favicon-api-container">
@@ -77,13 +77,26 @@
             <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service/preview">
                 <?php foreach($_['previewServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>
-                            data-api="<?php p(json_encode($service['api'])); ?>"><?php p($service['label']); ?></option>
+                            data-api="<?php p(json_encode($service['api'])); ?>"><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
             <div class="container" id="passwords-preview-apikey-container">
                 <label for="passwords-preview-api"><?php p($l->t('Website Preview API Key')); ?></label>
                 <input id="passwords-preview-api" name="preview-api" data-setting="">
             </div>
+        </div>
+    </form>
+
+    <form>
+        <h3><?php p($l->t('Other Settings')); ?></h3>
+
+        <div class="area other">
+            <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
+            <select id="passwords-purge-timeout" name="passwords-purge-timeout" name="image" data-setting="entity/purge/timeout">
+                <?php foreach($_['purgeTimeout']['options'] as $value=>$label): ?>
+                    <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current']==$value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
     </form>
 

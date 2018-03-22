@@ -106,6 +106,35 @@ abstract class AbstractMapper extends Mapper {
     }
 
     /**
+     * @param string $userId
+     *
+     * @return EntityInterface[]
+     */
+    public function findByUserId(string $userId): array {
+        list($sql, $params) = $this->getStatement();
+
+        $sql      .= ' AND `user_id` = ?';
+        $params[] = $userId;
+
+        return $this->findEntities($sql, $params);
+    }
+
+    /**
+     * @return EntityInterface[]
+     */
+    public function findDeleted(): array {
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = ?';
+
+        $params = [true];
+        if($this->userId !== null) {
+            $sql      .= ' AND `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
+            $params[] = $this->userId;
+        }
+
+        return $this->findEntities($sql, $params);
+    }
+
+    /**
      * @return EntityInterface[]
      */
     public function findAll(): array {

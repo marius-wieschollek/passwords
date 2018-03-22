@@ -70,6 +70,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <nextcloud min-version="12" max-version="13" />
     </dependencies>
     <background-jobs>
+        <job>OCA\Passwords\Cron\ProcessDeletedUsers</job>
+        <job>OCA\Passwords\Cron\ProcessDeletedEntities</job>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
     </background-jobs>

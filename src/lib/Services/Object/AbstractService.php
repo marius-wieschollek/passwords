@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
 
@@ -33,6 +34,11 @@ abstract class AbstractService {
     protected $class;
 
     /**
+     * @var AbstractMapper
+     */
+    protected $mapper;
+
+    /**
      * PasswordService constructor.
      *
      * @param string      $userId
@@ -57,6 +63,13 @@ abstract class AbstractService {
             bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
             bin2hex(random_bytes(6))
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    public function findDeleted(): array {
+        return $this->mapper->findDeleted();
     }
 
     /**
@@ -94,6 +107,19 @@ abstract class AbstractService {
         $entity->setDeleted(true);
         $this->save($entity);
         $this->hookManager->emit($this->class, 'postDelete', [$entity]);
+    }
+
+    /**
+     * @param EntityInterface|\OCP\AppFramework\Db\Entity $entity
+     *
+     * @throws \Exception
+     */
+    public function destroy(EntityInterface $entity): void {
+        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
+        $this->hookManager->emit($this->class, 'preDestroy', [$entity]);
+        if(!$entity->isDeleted()) $this->delete($entity);
+        $this->mapper->delete($entity);
+        $this->hookManager->emit($this->class, 'postDestroy', [$entity]);
     }
 
     /**

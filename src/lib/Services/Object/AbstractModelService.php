@@ -22,11 +22,6 @@ use OCP\AppFramework\Db\Entity;
 abstract class AbstractModelService extends AbstractService {
 
     /**
-     * @var AbstractMapper
-     */
-    protected $mapper;
-
-    /**
      * AbstractParentEntityService constructor.
      *
      * @param string         $userId
@@ -55,6 +50,15 @@ abstract class AbstractModelService extends AbstractService {
      */
     public function findByUuid(string $uuid): ModelInterface {
         return $this->mapper->findByUuid($uuid);
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return ModelInterface[]
+     */
+    public function findByUserId(string $userId): array {
+        return $this->mapper->findByUserId($userId);
     }
 
     /**

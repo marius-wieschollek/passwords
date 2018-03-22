@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FaviconService;
@@ -18,6 +19,8 @@ use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IRequest;
+use OCP\ISession;
+use OCP\IUserManager;
 
 /**
  * Class ServiceApiController
@@ -52,29 +55,54 @@ class ServiceApiController extends AbstractApiController {
     protected $previewService;
 
     /**
+     * @var string
+     */
+    protected $userId;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
+
+    /**
+     * @var DeleteUserDataHelper
+     */
+    protected $deleteUserDataHelper;
+
+    /**
      * ServiceApiController constructor.
      *
+     * @param string                $userId
      * @param IRequest              $request
      * @param WordsService          $wordsService
      * @param AvatarService         $avatarService
      * @param ConfigurationService  $config
      * @param FaviconService        $faviconService
      * @param WebsitePreviewService $previewService
+     * @param DeleteUserDataHelper  $deleteUserDataHelper
+     * @param IUserManager          $userManager
      */
     public function __construct(
+        string $userId,
         IRequest $request,
         WordsService $wordsService,
         AvatarService $avatarService,
         ConfigurationService $config,
         FaviconService $faviconService,
-        WebsitePreviewService $previewService
+        WebsitePreviewService $previewService,
+        IUserManager $userManager,
+        DeleteUserDataHelper $deleteUserDataHelper
     ) {
         parent::__construct($request);
-        $this->faviconService = $faviconService;
-        $this->wordsService   = $wordsService;
-        $this->previewService = $previewService;
-        $this->avatarService  = $avatarService;
-        $this->config         = $config;
+        $this->faviconService       = $faviconService;
+        $this->wordsService         = $wordsService;
+        $this->previewService       = $previewService;
+        $this->avatarService        = $avatarService;
+        $this->config               = $config;
+
+        $this->userId               = $userId;
+        $this->userManager          = $userManager;
+        $this->deleteUserDataHelper = $deleteUserDataHelper;
     }
 
     /**
@@ -115,10 +143,10 @@ class ServiceApiController extends AbstractApiController {
      * @param string $user
      * @param int    $size
      *
-     * @return FileDisplayResponse|JSONResponse
+     * @return FileDisplayResponse
      * @throws \Throwable
      */
-    public function getAvatar(string $user, int $size = 32) {
+    public function getAvatar(string $user, int $size = 32): FileDisplayResponse {
         $file = $this->avatarService->getAvatar($user, $size);
 
         return $this->createFileDisplayResponse($file);
@@ -131,10 +159,10 @@ class ServiceApiController extends AbstractApiController {
      * @param string $domain
      * @param int    $size
      *
-     * @return FileDisplayResponse|JSONResponse
+     * @return FileDisplayResponse
      * @throws \Throwable
      */
-    public function getFavicon(string $domain, int $size = 32) {
+    public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
         $file = $this->faviconService->getFavicon($domain, $size);
 
         return $this->createFileDisplayResponse($file);
@@ -149,17 +177,50 @@ class ServiceApiController extends AbstractApiController {
      * @param string $width
      * @param string $height
      *
-     * @return FileDisplayResponse|JSONResponse
+     * @return FileDisplayResponse
      * @throws ApiException
-     * @throws \OCP\AppFramework\QueryException
      */
-    public function getPreview(string $domain, string $view = 'desktop', string $width = '640', string $height = '360...') {
+    public function getPreview(string $domain, string $view = 'desktop', string $width = '640', string $height = '360...'): FileDisplayResponse {
         list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
         list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
 
         $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
         return $this->createFileDisplayResponse($file);
+    }
+
+    /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param $password
+     *
+     * @return JSONResponse
+     * @throws ApiException
+     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
+     */
+    public function resetUserAccount(string $password): JSONResponse {
+        if(!$this->userManager->checkPassword($this->userId, $password)) {
+            throw new ApiException('Password invalid', 403);
+        }
+
+        $timeout    = $this->config->getUserValue('reset_timeout', 0);
+        $time       = $this->config->getUserValue('reset_time', 0);
+        $difference = time() - $timeout - $time;
+        if($difference > 0 && $difference < 300) {
+            $this->deleteUserDataHelper->deleteUserData();
+
+            return $this->createJsonResponse(['status' => 'ok'], 200);
+        }
+
+        $timeout = rand(5, 15);
+        $time    = time();
+        $this->config->setUserValue('reset_time', $time);
+        $this->config->setUserValue('reset_timeout', $timeout);
+
+        return $this->createJsonResponse(['status' => 'accepted', 'wait' => $timeout], 202);
     }
 
     /**
@@ -188,7 +249,7 @@ class ServiceApiController extends AbstractApiController {
         );
 
         $expires = new \DateTime();
-        $expires->setTimestamp(time()+259200);
+        $expires->setTimestamp(time() + 259200);
         $response->addHeader('Cache-Control', 'public, immutable, max-age=259200')
                  ->addHeader('Expires', $expires->format(\DateTime::RFC2822))
                  ->addHeader('Pragma', 'cache');

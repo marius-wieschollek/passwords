@@ -69,6 +69,7 @@ export default class SimpleApi {
             'authorisation.info'  : 'api/1.0/authorisation/info',
             'authorisation.login' : 'api/1.0/authorisation/login',
             'authorisation.logout': 'api/1.0/authorisation/logout',
+            'service.resetAccount':'/api/1.0/service/x-reset-user-account',
             'service.coffee'      : 'api/1.0/service/coffee',
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
@@ -476,6 +477,16 @@ export default class SimpleApi {
             'password.generate',
             {strength, numbers, special}
         );
+    }
+
+    /**
+     * Resets the user account.
+     * First you get a wait time, then you can reset.
+     *
+     * @returns {Promise}
+     */
+    resetUserAccount(password) {
+        return this._createRequest('service.resetAccount', {password});
     }
 
     /**

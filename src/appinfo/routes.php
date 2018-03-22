@@ -79,6 +79,7 @@ $routes = [
         'verb'     => 'GET',
         'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 640, 'height' => '360...']
     ],
+    ['name' => 'service_api#reset_user_account', 'url' => '/api/1.0/service/x-reset-user-account', 'verb' => 'POST'],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
 
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],

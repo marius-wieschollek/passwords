@@ -47,12 +47,13 @@ class ClientSettingsHelper {
     /**
      * @param string $key
      * @param        $value
+     * @param string|null $userId
      *
      * @return mixed
      * @throws \OCP\PreConditionNotMetException
      * @throws ApiException
      */
-    public function set(string $key, $value) {
+    public function set(string $key, $value, string $userId = null) {
         if(strlen($key) > 48) {
             throw new ApiException('Key too long', 400);
         }
@@ -60,24 +61,25 @@ class ClientSettingsHelper {
             throw new ApiException('Value too long', 400);
         }
 
-        $data         = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+        $data         = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
         $data[ $key ] = $value;
-        $this->config->setUserValue('client/settings', json_encode($data));
+        $this->config->setUserValue('client/settings', json_encode($data), $userId);
 
         return $value;
     }
 
     /**
      * @param string $key
+     * @param string|null $userId
      *
      * @return null
      * @throws \OCP\PreConditionNotMetException
      */
-    public function reset(string $key) {
-        $data = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+    public function reset(string $key, string $userId = null) {
+        $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
         if(isset($data[ $key ])) {
             unset($data[ $key ]);
-            $this->config->setUserValue('client/settings', json_encode($data));
+            $this->config->setUserValue('client/settings', json_encode($data), $userId);
         }
 
         return null;
@@ -85,10 +87,11 @@ class ClientSettingsHelper {
 
     /**
      * @return array
+     * @param string|null $userId
      */
-    public function list(): array {
+    public function list(string $userId = null): array {
         $settings = [];
-        $client = json_decode($this->config->getUserValue('client/settings', '{}'), true);
+        $client = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
         foreach($client as $key => $value) {
             $settings[ 'client.'.$key ] = $value;
         }

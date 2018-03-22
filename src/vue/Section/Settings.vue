@@ -103,7 +103,7 @@
                 <settings-help text="Reset all settings on this page to their defaults"/>
 
                 <translate tag="label" for="danger-purge" say="Delete everything"/>
-                <translate tag="input" type="button" id="danger-purge" value="Delete" @click="deleteEverything"/>
+                <translate tag="input" type="button" id="danger-purge" value="Delete" @click="resetUserAccount"/>
                 <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
             </section>
         </div>
@@ -111,10 +111,11 @@
 </template>
 
 <script>
-    import Messages from "@js/Classes/Messages";
-    import Translate from "@vue/Components/Translate";
-    import Breadcrumb from "@/vue/Components/Breadcrumb";
-    import SettingsHelp from "@/vue/Components/SettingsHelp";
+    import API from '@js/Helper/api';
+    import Messages from '@js/Classes/Messages';
+    import Translate from '@vue/Components/Translate';
+    import Breadcrumb from '@vue/Components/Breadcrumb';
+    import SettingsHelp from '@vue/Components/SettingsHelp';
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
@@ -158,7 +159,7 @@
                 }
                 this.noSave = false;
             },
-            async deleteEverything() {
+            async resetUserAccount() {
                 try {
                     let form = await Messages.form(
                         {password: {type: 'password'}},
@@ -166,13 +167,27 @@
                         'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'
                     );
                     if(form.password) {
-                        await this.resetSettings();
+                        this.performUserAccountReset(form.password);
+                    }
+                } catch(e) {
+
+                }
+            },
+            async performUserAccountReset(password) {
+                try {
+                    let response = await API.resetUserAccount(password);
+
+                    if(response.status === 'accepted') {
+                        Messages.confirm(['You have to wait {seconds} seconds before you can reset your account', {seconds: response.wait}], 'Account reset requested')
+                            .then(() => { this.performUserAccountReset(password); })
+                    } else if(response.status === 'ok') {
                         window.localStorage.removeItem('passwords.settings');
                         window.localStorage.removeItem('pwFolderIcon');
                         location.href = location.href.replace(location.hash, '');
                     }
                 } catch(e) {
-
+                    console.log(e);
+                    Messages.alert('Invalid Password');
                 }
             }
         },

@@ -28,6 +28,7 @@ use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Hooks\PasswordHook;
 use OCA\Passwords\Hooks\ShareHook;
 use OCA\Passwords\Hooks\TagHook;
+use OCA\Passwords\Hooks\UserHook;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Services\NotificationService;
@@ -35,6 +36,7 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IGroupManager;
 use OCP\IL10N;
+use OCP\IUserManager;
 use OCP\L10N\IFactory;
 
 /**
@@ -58,6 +60,7 @@ class Application extends App {
 
         //$this->registerPersonalSettings();
         $this->registerDiClasses();
+        $this->registerSystemHooks();
         $this->registerInternalHooks();
         $this->registerMiddleware();
         $this->registerNotificationNotifier();
@@ -179,6 +182,20 @@ class Application extends App {
         /** @var ShareHook $shareHook */
         $shareHook = $container->query(ShareHook::class);
         $hookManager->listen(Share::class, 'postDelete', [$shareHook, 'postDelete']);
+    }
+
+    /**
+     * @throws \OCP\AppFramework\QueryException
+     */
+    protected function registerSystemHooks() {
+        $container = $this->getContainer();
+
+        /** @var UserHook $userHook */
+        $userHook = $container->query(UserHook::class);
+
+        /** @var \OC\User\Manager $userManager */
+        $userManager = $container->query(IUserManager::class);
+        $userManager->listen('\OC\User', 'postDelete', [$userHook, 'postDelete']);
     }
 
     /**

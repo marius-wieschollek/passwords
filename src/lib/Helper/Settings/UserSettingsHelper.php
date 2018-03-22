@@ -81,13 +81,14 @@ class UserSettingsHelper {
     }
 
     /**
-     * @param string $key
-     * @param        $value
+     * @param string      $key
+     * @param             $value
+     * @param string|null $userId
      *
      * @return bool|float|int|null|string
      * @throws \OCP\PreConditionNotMetException
      */
-    public function set(string $key, $value) {
+    public function set(string $key, $value, string $userId = null) {
         $key = str_replace('.', '/', $key);
 
         if(isset($this->userSettings[ $key ])) {
@@ -95,9 +96,9 @@ class UserSettingsHelper {
             $value = $this->castValue($type, $value);
 
             if($type === 'boolean') {
-                $this->config->setUserValue($key, intval($value));
+                $this->config->setUserValue($key, intval($value), $userId);
             } else {
-                $this->config->setUserValue($key, intval($value));
+                $this->config->setUserValue($key, intval($value), $userId);
             }
 
             return $value;
@@ -107,15 +108,16 @@ class UserSettingsHelper {
     }
 
     /**
-     * @param string $key
+     * @param string      $key
+     * @param string|null $userId
      *
      * @return mixed
      */
-    public function reset(string $key) {
+    public function reset(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
 
         if(isset($this->userSettings[ $key ])) {
-            $this->config->deleteUserValue($key);
+            $this->config->deleteUserValue($key, $userId);
 
             return $this->userDefaults[ $key ];
         }
@@ -124,13 +126,15 @@ class UserSettingsHelper {
     }
 
     /**
+     * @param string|null $userId
+     *
      * @return array
      */
-    public function list(): array {
+    public function list(string $userId = null): array {
         $settings = [];
         foreach(array_keys($this->userSettings) as $key) {
             $setting              = 'user.'.str_replace('/', '.', $key);
-            $settings[ $setting ] = $this->get($key);
+            $settings[ $setting ] = $this->get($key, $userId);
         }
 
         return $settings;

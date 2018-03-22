@@ -75,19 +75,20 @@ class SettingsService {
     /**
      * @param string $key
      * @param        $value
+     * @param string|null $userId
      *
      * @return bool|float|int|mixed|null|string
      * @throws ApiException
      * @throws \OCP\PreConditionNotMetException
      */
-    public function set(string $key, $value) {
+    public function set(string $key, $value, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);
 
         switch($scope) {
             case 'user':
-                return $this->userSettings->set($subKey, $value);
+                return $this->userSettings->set($subKey, $value, $userId);
             case 'client':
-                return $this->clientSettings->set($subKey, $value);
+                return $this->clientSettings->set($subKey, $value, $userId);
         }
 
         return null;
@@ -95,18 +96,19 @@ class SettingsService {
 
     /**
      * @param string $key
+     * @param string|null $userId
      *
      * @return mixed|null
      * @throws \OCP\PreConditionNotMetException
      */
-    public function reset(string $key) {
+    public function reset(string $key, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);
 
         switch($scope) {
             case 'user':
-                return $this->userSettings->reset($subKey);
+                return $this->userSettings->reset($subKey, $userId);
             case 'client':
-                return $this->clientSettings->reset($subKey);
+                return $this->clientSettings->reset($subKey, $userId);
         }
 
         return null;
@@ -114,10 +116,11 @@ class SettingsService {
 
     /**
      * @param array|null $scope
+     * @param string|null $userId
      *
      * @return array
      */
-    public function list(array $scope = null): array {
+    public function list(array $scope = null, string $userId = null): array {
         $settings = [];
 
         if($scope === null || in_array('server', $scope)) {
@@ -125,11 +128,11 @@ class SettingsService {
         }
 
         if($scope === null || in_array('user', $scope)) {
-            $settings = array_merge($settings, $this->userSettings->list());
+            $settings = array_merge($settings, $this->userSettings->list($userId));
         }
 
         if($scope === null || in_array('client', $scope)) {
-            $settings = array_merge($settings, $this->clientSettings->list());
+            $settings = array_merge($settings, $this->clientSettings->list($userId));
         }
 
         return $settings;
