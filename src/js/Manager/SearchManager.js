@@ -1,14 +1,19 @@
 class SearchManager {
 
+    get status() {
+        return this._status;
+    }
+
     constructor() {
-        this.db = {};
-        this.index = null;
-        this.indexFields = {
+        this._db = {};
+        this._status = {active: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
+        this._index = null;
+        this._indexFields = {
             passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id'],
             folders  : ['label', 'type', 'id'],
             tags     : ['label', 'type', 'id']
         };
-        this.domIdentifiers = {
+        this._domIdentifiers = {
             passwords: 'data-password-id',
             folders  : 'data-folder-id',
             tags     : 'data-tag-id'
@@ -28,18 +33,18 @@ class SearchManager {
     }
 
     search(query) {
-        if(query === undefined || query.length === 0) {
-            SearchManager._resetSearch();
+        if(query === undefined || query.trim().length === 0) {
+            this._resetSearch();
             return;
         }
 
-        let stats        = {query, results: 0, passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
+        let stats        = {passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
             searchParams = SearchManager._processQuery(query),
             index        = this._getSearchIndex();
         for(let key in index) {
             if(!index.hasOwnProperty(key)) continue;
             let section    = index[key],
-                identifier = this.domIdentifiers[key];
+                identifier = this._domIdentifiers[key];
 
             for(let i = 0; i < section.length; i++) {
                 let object = section[i],
@@ -48,14 +53,29 @@ class SearchManager {
 
                 if(SearchManager._entryMatchesQuery(object, searchParams)) {
                     if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
-                    stats.results++;
                     stats[key]++;
                 } else {
                     el.classList.add('search-hidden');
                 }
             }
         }
-        console.log(`${stats.results} results in ${new Date().getTime() - stats.start} milliseconds`);
+        this._updateStatus(query, stats);
+    }
+
+    /**
+     *
+     * @param query
+     * @param stats
+     * @private
+     */
+    _updateStatus(query, stats) {
+        this._status.active = true;
+        this._status.query = query;
+        this._status.total = stats.passwords + stats.folders + stats.tags;
+        this._status.passwords = stats.passwords;
+        this._status.folders = stats.folders;
+        this._status.tags = stats.tags;
+        this._status.time = new Date().getTime() - stats.start;
     }
 
     /**
@@ -66,7 +86,7 @@ class SearchManager {
      * @private
      */
     static _entryMatchesQuery(entry, query) {
-        for(let j = 0; j < query.length; j++) {
+        queryLoop: for(let j = 0; j < query.length; j++) {
             let fields = query[j].field,
                 search = query[j].value;
 
@@ -78,14 +98,16 @@ class SearchManager {
                 fields = [fields];
             }
 
+            let entryMatches = false;
             for(let k = 0; k < fields.length; k++) {
                 let field = fields[k];
                 if(!entry.hasOwnProperty(field)) continue;
 
-                if(entry[field].indexOf(search) === -1) {
-                    return false;
+                if(entry[field].indexOf(search) !== -1) {
+                    continue queryLoop;
                 }
             }
+            return false;
         }
         return true;
     }
@@ -94,8 +116,9 @@ class SearchManager {
      * Clears the search database
      */
     clearDatabase() {
-        this.db = {};
-        this.index = null;
+        this._db = {};
+        this._index = null;
+        this._resetSearch();
 
         document.querySelector('form.searchbox').style.opacity = '0';
         document.getElementById('searchbox').value = '';
@@ -107,8 +130,10 @@ class SearchManager {
      * @param database
      */
     setDatabase(database) {
-        this.db = database;
-        this.index = null;
+        this._db = database;
+        this._index = null;
+        this._resetSearch();
+
         document.querySelector('form.searchbox').style.opacity = '1';
         document.getElementById('searchbox').value = '';
     }
@@ -117,7 +142,8 @@ class SearchManager {
      *
      * @private
      */
-    static _resetSearch() {
+    _resetSearch() {
+        this._status.active = false;
         let elements = document.querySelectorAll('.search-hidden');
 
         elements.forEach((el) => {
@@ -181,7 +207,7 @@ class SearchManager {
      */
     static _addFieldToSearchParams(params, field, rawValue) {
         let value = rawValue.trim();
-        if(value.length > 2) params.push({field, value});
+        params.push({field, value});
     }
 
     /**
@@ -190,15 +216,15 @@ class SearchManager {
      * @private
      */
     _getSearchIndex() {
-        if(this.index !== null) return this.index;
+        if(this._index !== null) return this._index;
 
-        this.index = {};
-        for(let key in this.db) {
-            if(!this.db.hasOwnProperty(key)) continue;
-            let section = this.db[key],
-                fields  = this.indexFields[key];
+        this._index = {};
+        for(let key in this._db) {
+            if(!this._db.hasOwnProperty(key)) continue;
+            let section = this._db[key],
+                fields  = this._indexFields[key];
 
-            this.index[key] = [];
+            this._index[key] = [];
             for(let i = 0; i < section.length; i++) {
                 let object        = section[i],
                     indexedObject = {};
@@ -208,11 +234,11 @@ class SearchManager {
 
                     indexedObject[field] = object.hasOwnProperty(field) ? object[field].toLowerCase():'';
                 }
-                this.index[key].push(indexedObject);
+                this._index[key].push(indexedObject);
             }
         }
 
-        return this.index;
+        return this._index;
     }
 }
 

@@ -9,12 +9,14 @@
 <script>
     import Translate from "@vue/Components/Translate";
     import Localisation from "@js/Classes/Localisation";
+    import SearchManager from "@js/Manager/SearchManager";
 
     export default {
         components: {
             Translate
         },
-        props     : {
+
+        props: {
             passwords: {
                 type     : Array,
                 'default': () => { return []; }
@@ -29,26 +31,54 @@
             }
         },
 
+        data() {
+            return {
+                search: SearchManager.status
+            };
+        },
+
         computed: {
             getText() {
+                if(this.search.active !== false) {
+                    return this.getSearchText();
+                }
+                return this.getFooterText(this.passwords.length, this.folders.length, this.tags.length);
+            }
+        },
+
+        methods: {
+            getSearchText() {
+                let text = this.getFooterText(this.search.passwords, this.search.folders, this.search.tags),
+                    matches = '';
+
+                if(this.search.total < 2) {
+                    matches = Localisation.translate('matches')
+                } else {
+                    matches = Localisation.translate('match')
+                }
+
+                return `${text} ${matches} "${this.search.query}"`;
+            },
+
+            getFooterText(passwords, folders, tags) {
                 let text = [];
 
-                if(this.passwords.length === 1) {
+                if(passwords === 1) {
                     text.push(Localisation.translate('1 password'));
-                } else if(this.passwords.length) {
-                    text.push(Localisation.translate('{passwords} passwords', {passwords: this.passwords.length}));
+                } else if(passwords) {
+                    text.push(Localisation.translate('{passwords} passwords', {passwords: passwords}));
                 }
 
-                if(this.folders.length === 1) {
+                if(folders === 1) {
                     text.push(Localisation.translate('1 folder'));
-                } else if(this.folders.length) {
-                    text.push(Localisation.translate('{folders} folders', {folders: this.folders.length}));
+                } else if(folders) {
+                    text.push(Localisation.translate('{folders} folders', {folders: folders}));
                 }
 
-                if(this.tags.length === 1) {
+                if(tags === 1) {
                     text.push(Localisation.translate('1 tag'));
-                } else if(this.tags.length) {
-                    text.push(Localisation.translate('{tags} tags', {tags: this.tags.length}));
+                } else if(tags) {
+                    text.push(Localisation.translate('{tags} tags', {tags: tags}));
                 }
 
                 if(text.length === 3) {

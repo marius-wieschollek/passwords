@@ -257,6 +257,8 @@
             '{tags} tags'                         : '{tags} Tags',
             '1 tag'                               : '1 Tag',
             ' and '                               : ' und ',
+            'match'                               : 'passen zu',
+            'matches'                             : 'passt zu',
             'true'                                : 'ja',
             'false'                               : 'nein',
             'yes'                                 : 'ja',
