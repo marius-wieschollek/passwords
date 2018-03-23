@@ -240,6 +240,7 @@
             'Reset'                               : 'Zurücksetzen',
             'Delete everything'                   : 'Alles löschen',
             'DELETE EVERYTHING'                   : 'ALLES LÖSCHEN',
+            'Account reset requested'             : 'Benutzerkonto zurücksetzen',
             'There is nothing here'               : 'Hier ist nichts',
             'Click on "+" to add something'       : 'Drücken Sie auf das "+"-Symbol, um etwas hinzuzufügen',
             'Deleted items will appear here'      : 'Gelöschte Objekte werden hier erscheinen',
@@ -280,7 +281,8 @@
             'This will reset all settings to their defaults. Do you want to continue?' : 'Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchten Sie fortfahren?',
             'Start over and delete all configuration, passwords, folders and tags'     : 'Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen',
             'You have reached the maximum length of 4096 characters'                   : 'Sie haben die Maximallänge von 4096 Zeichern erreicht',
-            'Trailing quote on quoted field is malformed'                              : 'Das Feldzeichen ist falsch maskiert'
+            'Trailing quote on quoted field is malformed'                              : 'Das Feldzeichen ist falsch maskiert',
+            'You have to wait {seconds} seconds before you can reset your account.'    : 'Sie müssen {seconds} Sekunden warten bevor Sie ihr Benutzerkonto zurücksetzen können.'
         },
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.': 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',

@@ -178,7 +178,7 @@
                     let response = await API.resetUserAccount(password);
 
                     if(response.status === 'accepted') {
-                        Messages.confirm(['You have to wait {seconds} seconds before you can reset your account', {seconds: response.wait}], 'Account reset requested')
+                        Messages.confirm(['You have to wait {seconds} seconds before you can reset your account.', {seconds: response.wait}], 'Account reset requested')
                             .then(() => { this.performUserAccountReset(password); })
                     } else if(response.status === 'ok') {
                         window.localStorage.removeItem('passwords.settings');
