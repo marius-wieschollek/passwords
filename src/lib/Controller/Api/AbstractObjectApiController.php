@@ -108,7 +108,8 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @throws ApiException
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        $filters           = $this->processSearchCriteria($criteria);
+        $filters = $this->processSearchCriteria($criteria);
+        if(!isset($filters['trashed'])) $filters['trashed'] = false;
         $filters['hidden'] = false;
         /** @var AbstractModelEntity[] $models */
         $models  = $this->modelService->findAll();

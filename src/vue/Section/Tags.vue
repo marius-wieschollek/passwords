@@ -1,71 +1,56 @@
-<template>
-    <div id="app-content" :class="getContentClass">
-        <div class="app-content-left">
-            <breadcrumb :newTag="!currentTag" :newPassword="currentTag !== null" :tag="currentTag" :items="breadcrumb"/>
-            <div class="item-list">
-                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id"/>
-                <password-line :password="password" v-for="password in passwords" :key="password.id"/>
-                <footer-line :passwords="passwords" :tags="tags" v-if="showHeaderAndFooter"/>
-                <empty v-if="isEmpty"/>
-            </div>
-        </div>
-        <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element"/>
-        </div>
-    </div>
-</template>
-
 <script>
     import API from '@js/Helper/api';
-    import TagLine from '@vue/Line/Tag';
-    import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from "@js/Classes/Utility";
-    import HeaderLine from "@vue/Line/Header";
-    import FooterLine from "@vue/Line/Footer";
-    import Empty from "@vue/Components/Empty";
-    import PasswordLine from '@vue/Line/Password';
+    import Utility from '@js/Classes/Utility';
     import BaseSection from '@vue/Section/BaseSection';
-    import PasswordDetails from '@vue/Details/Password';
-    import Localisation from "@js/Classes/Localisation";
-    import SettingsManager from "@js/Manager/SettingsManager";
+    import Localisation from '@js/Classes/Localisation';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         extends: BaseSection,
 
-        components: {
-            Empty,
-            TagLine,
-            Breadcrumb,
-            HeaderLine,
-            FooterLine,
-            PasswordLine,
-            PasswordDetails
-        },
-
         data() {
             let showTags = SettingsManager.get('client.ui.list.tags.show', false),
                 model    = showTags ? 'model+passwords+password-tags':'model+passwords';
+
             return {
                 currentTag  : null,
-                defaultTitle: Localisation.translate('Tags'),
-                defaultPath : {name: 'Tags'},
-                tags        : [],
                 model       : model
             };
         },
 
+        computed: {
+            getBreadcrumb() {
+                let showAddNew = true,
+                    items = [],
+                    tagId;
+                if(this.currentTag !== null) {
+                    showAddNew = !this.currentTag.trashed;
+                    tagId = this.currentTag.id;
+                    let route = this.currentTag.trashed ? 'Trash':'Tags';
+
+                    items = [
+                        {path: {name:route}, label: Localisation.translate(route)},
+                        {path: this.$route.path, label: this.currentTag.label}
+                    ];
+                }
+
+                return {
+                    newTag     : this.currentTag === null,
+                    newPassword: this.currentTag !== null,
+                    tag        : tagId,
+                    showAddNew,
+                    items
+                };
+            }
+        },
+
         methods: {
             refreshView: function() {
-                this.breadcrumb = [];
-
                 this.detail.type = 'none';
                 if(this.$route.params.tag !== undefined) {
-                    let tag = this.$route.params.tag;
-                    this.currentTag = tag;
                     this.tags = [];
                     if(!this.passwords.length) this.loading = true;
-                    API.showTag(tag, this.model).then(this.updatePasswordList);
+                    API.showTag(this.$route.params.tag, this.model).then(this.updatePasswordList);
                 } else {
                     this.passwords = [];
                     this.currentTag = null;
@@ -76,17 +61,8 @@
 
             updatePasswordList: function(tag) {
                 this.loading = false;
-
-                if(tag.trashed) {
-                    this.defaultTitle = Localisation.translate('Trash');
-                    this.defaultPath = {name: 'Trash'};
-                }
-
+                this.currentTag = tag;
                 this.passwords = Utility.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
-                this.breadcrumb = [
-                    {path: this.defaultPath, label: this.defaultTitle},
-                    {path: this.$route.path, label: tag.label}
-                ];
             }
         },
         watch  : {

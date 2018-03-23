@@ -228,6 +228,7 @@
                     > span {
                         text-overflow : ellipsis;
                         overflow      : hidden;
+                        cursor        : pointer;
                     }
                 }
 

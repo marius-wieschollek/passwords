@@ -282,6 +282,7 @@
             'Start over and delete all configuration, passwords, folders and tags'     : 'Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen',
             'You have reached the maximum length of 4096 characters'                   : 'Sie haben die Maximallänge von 4096 Zeichern erreicht',
             'Trailing quote on quoted field is malformed'                              : 'Das Feldzeichen ist falsch maskiert',
+            'We could not find anything for "{query}"'                                 : 'Die Suche nach "{query}" erzielte keinen Treffer',
             'You have to wait {seconds} seconds before you can reset your account.'    : 'Sie müssen {seconds} Sekunden warten bevor Sie ihr Benutzerkonto zurücksetzen können.'
         },
         longTexts    = {

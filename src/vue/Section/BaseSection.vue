@@ -1,16 +1,61 @@
 <template>
+    <div id="app-content" :class="getContentClass">
+        <div class="app-content-left">
+            <breadcrumb
+                    :showAddNew="getBreadcrumb.showAddNew"
+                    :newPassword="getBreadcrumb.newPassword"
+                    :newFolder="getBreadcrumb.newFolder"
+                    :newTag="getBreadcrumb.newTag"
+                    :folder="getBreadcrumb.folder"
+                    :tag="getBreadcrumb.tag"
+                    :items="getBreadcrumb.items"/>
+            <div class="item-list">
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="isDraggable"/>
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" :draggable="isDraggable"/>
+                <password-line :password="password" v-for="password in passwords" :key="password.id" :draggable="isDraggable"/>
+                <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
+                <empty v-if="isEmpty" :text="getEmptyText"/>
+            </div>
+        </div>
+        <div class="app-content-right">
+            <password-details v-if="showPasswordDetails" :password="detail.element"/>
+        </div>
+    </div>
 </template>
 
 <script>
-    import Events from "@js/Classes/Events";
-    import Utility from "@js/Classes/Utility";
-    import SearchManager from "@/js/Manager/SearchManager";
-    import SettingsManager from "@js/Manager/SettingsManager";
+    import TagLine from '@vue/Line/Tag';
+    import Breadcrumb from '@vc/Breadcrumb';
+    import Events from '@js/Classes/Events';
+    import Utility from '@js/Classes/Utility';
+    import FolderLine from '@vue/Line/Folder';
+    import Empty from '@vue/Components/Empty';
+    import HeaderLine from '@vue/Line/Header';
+    import FooterLine from '@vue/Line/Footer';
+    import PasswordLine from '@vue/Line/Password';
+    import PasswordDetails from '@vue/Details/Password';
+    import Localisation from '@/js/Classes/Localisation';
+    import SearchManager from '@/js/Manager/SearchManager';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
+        components: {
+            Empty,
+            TagLine,
+            Breadcrumb,
+            FolderLine,
+            HeaderLine,
+            FooterLine,
+            PasswordLine,
+            PasswordDetails
+        },
+
         data() {
             return {
                 passwords: [],
+                folders  : [],
+                tags     : [],
                 loading  : true,
                 detail   : {
                     type   : 'none',
@@ -22,22 +67,19 @@
                 },
                 ui       : {
                     showTags: SettingsManager.get('client.ui.list.tags.show', false)
-                }
+                },
+                search   : SearchManager.status
             };
         },
 
         created() {
             this.refreshView();
-            Events.on('password.changed', this.refreshView);
-            if(this.folders) Events.on('folder.changed', this.refreshView);
-            if(this.tags) Events.on('tag.changed', this.refreshView);
+            Events.on('data.changed', this.refreshView);
             SearchManager.clearDatabase();
         },
 
         beforeDestroy() {
-            Events.off('password.changed', this.refreshView);
-            Events.off('folder.changed', this.refreshView);
-            Events.off('tag.changed', this.refreshView);
+            Events.off('data.changed', this.refreshView);
             SearchManager.clearDatabase();
         },
 
@@ -48,20 +90,34 @@
                     'loading'     : this.loading
                 };
             },
-            showHeaderAndFooter() {
-                return !this.loading &&
-                       ((this.passwords && this.passwords.length) ||
-                        (this.folders && this.folders.length) ||
-                        (this.tags && this.tags.length));
-            },
-            isEmpty() {
-                return !this.loading &&
-                       (!this.passwords || !this.passwords.length) &&
-                       (!this.folders || !this.folders.length) &&
-                       (!this.tags || !this.tags.length);
-            },
             showPasswordDetails() {
                 return this.detail.type === 'password';
+            },
+            isNotEmpty() {
+                return !this.loading && !this.isEmpty;
+            },
+            isEmpty() {
+                if(this.loading) return false;
+                if(this.search.active && this.search.total === 0) return true;
+
+                return !this.passwords.length && !this.folders.length && !this.tags.length;
+            },
+            getEmptyText() {
+                if(this.search.active) {
+                    return Localisation.translate('We could not find anything for "{query}"', {query:this.search.query});
+                }
+
+                return undefined;
+            },
+            getBreadcrumb() {
+                return {};
+            },
+            isDraggable() {
+                return false;
+            },
+            /** @deprecated **/
+            showHeaderAndFooter() {
+                return this.isNotEmpty;
             }
         },
 
@@ -95,19 +151,15 @@
         },
         watch  : {
             passwords(passwords) {
-                let db = {passwords: passwords};
-                if(this.tags) db.tags = this.tags;
-                if(this.folders) db.folders = this.folders;
+                let db = {passwords, folders: this.folders, tags: this.tags};
                 SearchManager.setDatabase(db);
             },
             tags(tags) {
-                let db = {passwords: this.passwords, tags: tags};
-                if(this.folders) db.folders = this.folders;
+                let db = {passwords: this.passwords, folders: this.folders, tags};
                 SearchManager.setDatabase(db);
             },
             folders(folders) {
-                let db = {passwords: this.passwords, folders: folders};
-                if(this.tags) db.tags = this.tags;
+                let db = {passwords: this.passwords, folders, tags: this.tags};
                 SearchManager.setDatabase(db);
             }
         }

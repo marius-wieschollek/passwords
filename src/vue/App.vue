@@ -48,10 +48,10 @@
 </template>
 
 <script>
-    import "@scss/app";
+    import '@scss/app';
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
-    import Utility from "@js/Classes/Utility";
+    import Utility from '@js/Classes/Utility';
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {

@@ -1,9 +1,9 @@
 <template>
     <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="false" :items="breadcrumb"/>
+            <breadcrumb :showAddNew="false" :items="getBreadcrumb"/>
             <div class="item-list">
-                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
                 <generic-line
                         v-if="$route.params.type === undefined"
                         v-for="(title, index) in shareType"
@@ -19,8 +19,8 @@
                         </li>
                     </ul>
                 </password-line>
-                <footer-line :passwords="passwords" v-if="showHeaderAndFooter"/>
-                <empty v-if="isEmpty" :text="emptyText"/>
+                <footer-line :passwords="passwords" v-if="isNotEmpty"/>
+                <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -32,18 +32,19 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from "@js/Classes/Utility";
-    import HeaderLine from "@vue/Line/Header";
-    import FooterLine from "@vue/Line/Footer";
-    import Empty from "@vue/Components/Empty";
-    import GenericLine from "@vue/Line/Generic";
+    import Utility from '@js/Classes/Utility';
+    import HeaderLine from '@vue/Line/Header';
+    import FooterLine from '@vue/Line/Footer';
+    import Empty from '@vue/Components/Empty';
+    import GenericLine from '@vue/Line/Generic';
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
-    import Localisation from "@js/Classes/Localisation";
+    import Localisation from '@js/Classes/Localisation';
 
     export default {
-        extends   : BaseSection,
+        extends: BaseSection,
+
         components: {
             Empty,
             Breadcrumb,
@@ -57,17 +58,36 @@
             return {
                 loading   : false,
                 shareType : ['Shared with me', 'Shared by me'],
-                breadcrumb: [],
                 shareUsers: []
             };
         },
 
         computed: {
             isEmpty() {
-                return !this.loading && !this.passwords.length && this.$route.params.type !== undefined;
+                if(this.loading) return false;
+                if(this.search.active && this.search.total === 0) return true;
+
+                return !this.passwords.length && this.$route.params.type !== undefined;
             },
-            emptyText() {
+            getEmptyText() {
+                if(this.search.active) {
+                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                }
+
                 return this.$route.params.type.toString() === '0' ? 'No passwords were shared with you':'You did not share any passwords';
+            },
+            getBreadcrumb() {
+                if(this.$route.params.type !== undefined) {
+                    let status = Number.parseInt(this.$route.params.type),
+                        label  = this.shareType[status];
+
+                    return [
+                        {path: {name: 'Shared'}, label: Localisation.translate('Shared')},
+                        {path: this.$route.path, label: Localisation.translate(label)}
+                    ];
+                }
+
+                return [];
             }
         },
 
@@ -76,8 +96,7 @@
                 this.detail.type = 'none';
 
                 if(this.$route.params.type !== undefined) {
-                    let status = Number.parseInt(this.$route.params.type),
-                        label  = this.shareType[status];
+                    let status = Number.parseInt(this.$route.params.type);
 
                     if(status === 0) {
                         API.findShares({receiver: '_self'}, 'model+password')
@@ -88,14 +107,9 @@
                     }
 
                     if(!this.passwords.length) this.loading = true;
-                    this.breadcrumb = [
-                        {path: {name: 'Shared'}, label: Localisation.translate('Shared')},
-                        {path: this.$route.path, label: Localisation.translate(label)}
-                    ];
                 } else {
                     this.loading = false;
                     this.passwords = [];
-                    this.breadcrumb = [];
                 }
             },
             updateContentList: function(shares, status) {

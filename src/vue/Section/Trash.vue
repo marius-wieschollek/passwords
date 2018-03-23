@@ -1,9 +1,9 @@
 <template>
     <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
-            <breadcrumb :deleteAll="true" :newPassword="false" v-on:deleteAll="clearTrash"/>
+            <breadcrumb :showAddNew="isNotEmpty" :deleteAll="true" :newPassword="false" v-on:deleteAll="clearTrash"/>
             <div class="item-list">
-                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="showHeaderAndFooter"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)" say="Restore"/>
                 </folder-line>
@@ -13,8 +13,8 @@
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
                     <translate tag="li" icon="undo" slot="menu-top" @click="restorePasswordAction(password)" say="Restore"/>
                 </password-line>
-                <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="showHeaderAndFooter"/>
-                <empty v-if="isEmpty" text="Deleted items will appear here"/>
+                <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
+                <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
         </div>
         <div class="app-content-right">
@@ -29,26 +29,20 @@
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
     import FolderLine from '@vue/Line/Folder';
-    import HeaderLine from "@vue/Line/Header";
-    import FooterLine from "@vue/Line/Footer";
-    import Empty from "@vue/Components/Empty";
-    import Messages from "@js/Classes/Messages";
+    import HeaderLine from '@vue/Line/Header';
+    import FooterLine from '@vue/Line/Footer';
+    import Empty from '@vue/Components/Empty';
+    import Messages from '@js/Classes/Messages';
     import PasswordLine from '@vue/Line/Password';
     import TagManager from '@js/Manager/TagManager';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
+    import Localisation from '@/js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
     export default {
         extends: BaseSection,
-
-        data() {
-            return {
-                folders  : [],
-                tags     : []
-            };
-        },
 
         components: {
             Empty,
@@ -60,6 +54,16 @@
             FooterLine,
             PasswordLine,
             PasswordDetails
+        },
+
+        computed: {
+            getEmptyText() {
+                if(this.search.active) {
+                    return Localisation.translate('We could not find anything for "{query}"', {query:this.search.query});
+                }
+
+                return 'Deleted items will appear here';
+            },
         },
 
         methods: {

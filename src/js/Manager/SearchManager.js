@@ -133,8 +133,10 @@ class SearchManager {
         this._index = null;
         this._resetSearch();
 
-        document.querySelector('form.searchbox').style.opacity = '1';
-        document.getElementById('searchbox').value = '';
+        if(database.passwords.length || database.folders.length || database.tags.length) {
+            document.querySelector('form.searchbox').style.opacity = '1';
+            document.getElementById('searchbox').value = '';
+        }
     }
 
     /**

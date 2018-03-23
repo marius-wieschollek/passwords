@@ -58,6 +58,10 @@
         },
 
         props: {
+            newPassword: {
+                type     : Boolean,
+                'default': true
+            },
             newFolder  : {
                 type     : Boolean,
                 'default': false
@@ -65,10 +69,6 @@
             newTag     : {
                 type     : Boolean,
                 'default': false
-            },
-            newPassword: {
-                type     : Boolean,
-                'default': true
             },
             deleteAll  : {
                 type     : Boolean,
@@ -84,7 +84,7 @@
             },
             folder     : {
                 type     : String,
-                'default': '00000000-0000-0000-0000-000000000000'
+                'default': null
             },
             tag        : {
                 type     : String,
