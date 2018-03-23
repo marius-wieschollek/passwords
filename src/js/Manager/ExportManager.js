@@ -258,18 +258,29 @@ export class ExportManager {
             } else if(field === 'parentLabel') {
                 object.parentLabel = folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'';
             } else if(field === 'tagLabels') {
-                object.tagLabels = [];
-                for(let k in element.tags) {
-                    if(!element.tags.hasOwnProperty(k)) continue;
-                    object.tagLabels.push(tagDb[element.tags[k]]);
-                }
-            } else if(field === 'edited' || field === 'updated' || field === 'created') {
+                object.tagLabels = ExportManager._convertTagLabelsForExport(element);
+            } else if(['edited', 'updated', 'created'].indexOf(field) !== -1) {
                 object[field] = new Date(element[field] * 1e3).toString();
             } else {
                 object[field] = element[field];
             }
         }
         return object;
+    }
+
+    /**
+     *
+     * @param element
+     * @returns {Array}
+     * @private
+     */
+    static _convertTagLabelsForExport(element) {
+        let tagLabels = [];
+        for(let k in element.tags) {
+            if(!element.tags.hasOwnProperty(k)) continue;
+            tagLabels.push(tagDb[element.tags[k]]);
+        }
+        return tagLabels;
     }
 
     /**

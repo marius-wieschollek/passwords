@@ -51,7 +51,7 @@ class SearchManager {
                     el     = document.querySelector(`[${identifier}="${object.id}"]`);
                 if(!el) continue;
 
-                if(SearchManager._entryMatchesQuery(object, searchParams)) {
+                if(SearchManager._checkIfObjectMatchesQuery(object, searchParams)) {
                     if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
                     stats[key]++;
                 } else {
@@ -85,7 +85,7 @@ class SearchManager {
      * @returns {boolean}
      * @private
      */
-    static _entryMatchesQuery(entry, query) {
+    static _checkIfObjectMatchesQuery(entry, query) {
         queryLoop: for(let j = 0; j < query.length; j++) {
             let fields = query[j].field,
                 search = query[j].value;
@@ -98,7 +98,6 @@ class SearchManager {
                 fields = [fields];
             }
 
-            let entryMatches = false;
             for(let k = 0; k < fields.length; k++) {
                 let field = fields[k];
                 if(!entry.hasOwnProperty(field)) continue;

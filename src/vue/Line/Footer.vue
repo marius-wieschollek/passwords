@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    import Translate from "@vue/Components/Translate";
-    import Localisation from "@js/Classes/Localisation";
-    import SearchManager from "@js/Manager/SearchManager";
+    import Translate from '@vue/Components/Translate';
+    import Localisation from '@js/Classes/Localisation';
+    import SearchManager from '@js/Manager/SearchManager';
 
     export default {
         components: {

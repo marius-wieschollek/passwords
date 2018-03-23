@@ -542,34 +542,62 @@ export default class EnhancedApi extends SimpleApi {
             if(definition.required && (!attribute || 0 === attribute.length)) {
                 throw new Error(`Property ${property} is required but missing`);
             }
-
-            if(definition.type && definition.type !== type && (definition.type !== 'array' || !Array.isArray(attribute))) {
-                if(!strict && definition.type === 'boolean') {
-                    attribute = Boolean(attribute);
-                } else if(!strict && definition.hasOwnProperty('default')) {
-                    attribute = definition.default;
-                } else if(strict || definition.required) {
-                    throw new Error(`Property ${property} has invalid type ${type}`);
-                } else {
-                    attribute = null;
-                }
-            }
-
-            if(definition.length) {
-                if(Array.isArray(attribute) && attribute.length > definition.length) {
-                    if(strict) throw new Error(`Property ${property} exceeds the maximum length of ${definition.length}`);
-                    attribute = attribute.slice(0, definition.length);
-                } else if(type === 'string' && attribute.length > definition.length) {
-                    if(strict) throw new Error(`Property ${property} exceeds the maximum length of ${definition.length}`);
-                    attribute = attribute.substr(0, definition.length);
-                }
-            }
+            attribute = this._validateObjectAttributeType(definition, type, attribute, strict, property);
+            attribute = this._validateObjectAttributeLength(definition, attribute, strict, property, type);
 
             object[property] = attribute;
         }
 
 
         return object;
+    }
+
+    /**
+     *
+     * @param definition
+     * @param type
+     * @param attribute
+     * @param strict
+     * @param property
+     * @returns {*}
+     * @private
+     */
+    static _validateObjectAttributeType(definition, type, attribute, strict, property) {
+        if(definition.type && definition.type !== type && (definition.type !== 'array' || !Array.isArray(attribute))) {
+            if(!strict && definition.type === 'boolean') {
+                attribute = Boolean(attribute);
+            } else if(!strict && definition.hasOwnProperty('default')) {
+                attribute = definition.default;
+            } else if(strict || definition.required) {
+                throw new Error(`Property ${property} has invalid type ${type}`);
+            } else {
+                attribute = null;
+            }
+        }
+        return attribute;
+    }
+
+    /**
+     *
+     * @param definition
+     * @param attribute
+     * @param strict
+     * @param property
+     * @param type
+     * @returns {*}
+     * @private
+     */
+    static _validateObjectAttributeLength(definition, attribute, strict, property, type) {
+        if(definition.length) {
+            if(Array.isArray(attribute) && attribute.length > definition.length) {
+                if(strict) throw new Error(`Property ${property} exceeds the maximum length of ${definition.length}`);
+                attribute = attribute.slice(0, definition.length);
+            } else if(type === 'string' && attribute.length > definition.length) {
+                if(strict) throw new Error(`Property ${property} exceeds the maximum length of ${definition.length}`);
+                attribute = attribute.substr(0, definition.length);
+            }
+        }
+        return attribute;
     }
 
     /**
