@@ -258,7 +258,7 @@ export class ExportManager {
             } else if(field === 'parentLabel') {
                 object.parentLabel = folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'';
             } else if(field === 'tagLabels') {
-                object.tagLabels = ExportManager._convertTagLabelsForExport(element);
+                object.tagLabels = ExportManager._convertTagLabelsForExport(element, tagDb);
             } else if(['edited', 'updated', 'created'].indexOf(field) !== -1) {
                 object[field] = new Date(element[field] * 1e3).toString();
             } else {
@@ -271,10 +271,11 @@ export class ExportManager {
     /**
      *
      * @param element
+     * @param tagDb
      * @returns {Array}
      * @private
      */
-    static _convertTagLabelsForExport(element) {
+    static _convertTagLabelsForExport(element, tagDb) {
         let tagLabels = [];
         for(let k in element.tags) {
             if(!element.tags.hasOwnProperty(k)) continue;
