@@ -49,7 +49,7 @@ class SettingsManager {
     async reset(setting) {
         let [scope] = setting.split('.', 2);
 
-        if(scope === 'local.') {
+        if(scope === 'local') {
             this._settings[setting] = this._resetLocalSetting(setting);
         } else if(scope === 'user' || scope === 'client') {
             this._settings[setting] = await API.resetSetting(setting);
@@ -68,6 +68,9 @@ class SettingsManager {
         return Utility.cloneObject(this._settings);
     }
 
+    /**
+     *
+     */
     init() {
         let settings = document.querySelector('meta[name=settings]');
         if(settings) {
@@ -89,7 +92,7 @@ class SettingsManager {
     static async _setSetting(setting, value) {
         let [scope] = setting.split('.', 2);
 
-        if(scope === 'local.') {
+        if(scope === 'local') {
             return SettingsManager._setLocalSetting(setting, value);
         } else if(scope === 'user' || scope === 'client') {
             return await API.setSetting(setting, value);

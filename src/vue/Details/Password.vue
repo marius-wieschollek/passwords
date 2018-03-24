@@ -70,13 +70,13 @@
     import Tags from '@vc/Tags';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Events from "@js/Classes/Events";
+    import Events from '@js/Classes/Events';
     import QrCode from 'vue-qrcode-component';
-    import Utility from "@js/Classes/Utility";
+    import Utility from '@js/Classes/Utility';
     import Sharing from '@vc/Sharing/Sharing';
-    import Messages from "@js/Classes/Messages";
+    import Messages from '@js/Classes/Messages';
     import ImageContainer from '@vc/ImageContainer';
-    import Localisation from "@js/Classes/Localisation";
+    import Localisation from '@js/Classes/Localisation';
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsManager from '@js/Manager/SettingsManager';

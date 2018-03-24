@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import SectionTags from '@vue/Section/Tags';
+import SectionHelp from '@vue/Section/Help';
 import SectionTrash from '@vue/Section/Trash';
 import SectionBackup from '@vue/Section/Backup';
 import SectionRecent from '@vue/Section/Recent';
@@ -23,7 +24,8 @@ let router = new Router(
             {name: 'Security', path: '/security/:status?', components: {main: SectionSecurity}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
-            {name: 'Trash', path: '/trash', components: {main: SectionTrash}}
+            {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
+            {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}}
         ]
     }
 );

@@ -35,7 +35,9 @@
                 <router-link class="nav-icon-backup" :to="{ name: 'Backup'}" active-class="active" tag="li">
                     <translate say="Backup and Restore"/>
                 </router-link>
-                <translate tag="li" class="nav-icon-help" @click="openWikiPage" say="Handbook"/>
+                <router-link class="nav-icon-help" :to="{ name: 'Help'}" active-class="active" tag="li">
+                    <translate say="Handbook"/>
+                </router-link>
                 <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage" say="Browser Extension"/>
             </ul>
         </div>

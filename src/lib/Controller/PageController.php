@@ -74,6 +74,8 @@ class PageController extends Controller {
 
         $csp = new ContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
+        $csp->addAllowedConnectDomain('raw.githubusercontent.com');
+        $csp->addAllowedImageDomain('raw.githubusercontent.com');
         $response->setContentSecurityPolicy($csp);
 
         return $response;
