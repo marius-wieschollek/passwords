@@ -112,7 +112,6 @@
             input[type=checkbox] + label {
                 line-height : 32px;
                 display     : inline-block;
-                font-size   : 1.2em;
             }
         }
 

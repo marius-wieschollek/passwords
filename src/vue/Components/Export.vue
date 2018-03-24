@@ -61,9 +61,9 @@
                 <br>
                 <translate tag="h3" say="CSV Field Mapping"/>
                 <div class="csv-mapping">
-                    <div v-for="id in csvMappingFields" class="csv-mapping-field" :key="id">
+                    <div v-for="id in csvMappedFieldsSize" class="csv-mapping-field" :key="id">
                         <select @change="csvFieldMapping($event, id)" :disabled="exporting">
-                            <translate tag="option" value="null" say="Empty"/>
+                            <translate tag="option" say="Please choose" v-if="id === csvMappedFieldsSize"/>
                             <translate tag="option" v-for="option in csvFieldOptions" :value="option" :say="option.capitalize()" :key="option"/>
                         </select>
                     </div>
@@ -101,9 +101,9 @@
                 buttonText: 'Export',
                 exporting : false,
                 fieldMap  : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'folderLabel', 'tagLabels', 'edited', 'created', 'favourite', 'id', 'revision', 'folderId', 'tagIds'],
-                    folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId'],
-                    tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision']
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'folderLabel', 'tagLabels', 'edited', 'created', 'favourite', 'id', 'revision', 'folderId', 'tagIds', 'empty'],
+                    folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId', 'empty'],
+                    tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision', 'empty']
                 },
                 nightly: process.env.NIGHTLY_FEATURES
             };
@@ -116,7 +116,7 @@
             backupPasswordTitle() {
                 return Localisation.translate('(Optional) Encrypts the backup');
             },
-            csvMappingFields() {
+            csvMappedFieldsSize() {
                 return this.options.mapping.length + 1;
             }
         },

@@ -14,6 +14,8 @@
                     <translate tag="option" value="pmanCsv" say="Passman CSV" v-if="nightly"/>
                     <translate tag="option" value="keepass" say="KeePass CSV" v-if="nightly"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
+                    <translate tag="option" value="dashlane" say="Dashlane CSV"/>
+                    <translate tag="option" value="enpass" say="Enpass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -27,6 +29,11 @@
                            :variables="{expected: mime, actual: fileMime}"
                            say="The file has the type &quot;{actual}&quot; but &quot;{expected}&quot; is expected. You might have chosen the wrong file or importer."
                            v-if="fileMime.length !== 0 && fileMime !== mime"/>
+                <translate tag="div"
+                           class="file warning"
+                           :variables="{service: source.capitalize()}"
+                           say="{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed."
+                           v-if="csv.badQuotes && source !== 'csv'"/>
 
                 <div v-if="source === 'csv'">
                     <translate tag="h3" say="CSV Options"/>
@@ -51,6 +58,9 @@
                         <translate tag="option" value="'" say="Single Quote"/>
                         <translate tag="option" value="\" say="Backslash"/>
                     </select>
+                    <br>
+                    <input type="checkbox" id="passwords-import-csv-badQuotes" v-model="csv.badQuotes" :disabled="importing" v-if="nightly"/>
+                    <translate tag="label" for="passwords-import-csv-badQuotes" say="Detect unescaped quotes" v-if="nightly"/>
                     <br><br>
                 </div>
                 <input type="file" :accept="mime" @change="processFile($event)" id="passwords-import-file" :disabled="importing">
@@ -155,7 +165,7 @@
                 fileMime   : '',
                 csvFile    : null,
                 csvReady   : false,
-                csv        : {delimiter: 'auto', quoteChar: '"', escapeChar: '"'},
+                csv        : {delimiter: 'auto', quoteChar: '"', escapeChar: '"', badQuotes: false},
                 options    : {mode: 0, skipShared: true},
                 step       : 2,
                 previewLine: 1,
@@ -237,7 +247,6 @@
                 this.csvReady = false;
                 this.csvFile = file;
                 this.file = file;
-                this.step = 2;
 
                 try {
                     let Papa      = await import(/* webpackChunkName: "PapaParse" */ 'papaparse'),
@@ -246,21 +255,29 @@
                         delimiter     : delimiter === 'auto' ? '':delimiter,
                         quoteChar     : this.csv.quoteChar,
                         escapeChar    : this.csv.escapeChar,
+                        badQuotes     : this.csv.badQuotes,
                         skipEmptyLines: true,
-                        complete      : (result) => {
-                            if(result.errors.length === 0) {
-                                this.file = result.data;
-                                this.csvReady = true;
-                            } else {
-                                let error = result.errors[0];
-                                console.log(result.errors);
-                                let message = Localisation.translate(error.message);
-                                Messages.alert(['\"{error}\" in line {line}', {error: message, line: error.row + 1}], 'Import error');
-                            }
-                        }
+                        complete      : (result) => { this.csvParseComplete(result);}
                     });
                 } catch(e) {
                     Messages.alert(['Unable to load {module}', {module: 'PapaParse'}], 'Network error');
+                }
+            },
+            csvParseComplete(result) {
+                if(result.errors.length === 0) {
+                    this.file = result.data;
+                    this.csvReady = true;
+                } else {
+                    this.csvFile = null;
+                    this.file = null;
+                    let message = [];
+                    for(let i = 0; i < result.errors.length; i++) {
+                        let error = Localisation.translate(result.errors[i].message),
+                            line  = result.errors[i].row + 1;
+                        message.push(Localisation.translate('{error} in line {line}.', {error, line}));
+                    }
+                    Messages.alert(['The file could not be parsed: {errors}', {errors: message.join(' ')}], 'Import error');
+                    console.log(result.errors);
                 }
             },
             registerProgress(processed, total, status) {
@@ -320,9 +337,11 @@
             source(value) {
                 let oldMime = this.mime;
                 this.progress.status = null;
+                this.csv.badQuotes = false;
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
+                // noinspection FallThroughInSwitchStatementJS
                 switch(value) {
                     case 'json':
                         this.mime = 'application/json';
@@ -332,17 +351,18 @@
                         this.mime = 'application/json';
                         this.type = 'pmanJson';
                         break;
-                    case 'legacy':
-                        this.options.profile = 'legacy';
-                        this.options.mode = 1;
-                        break;
                     case 'keepass':
-                        this.options.profile = 'keepass';
                         this.csv.escapeChar = '\\';
+                    case 'enpass':
+                    case 'legacy':
+                    case 'lastpass':
+                        this.options.profile = value;
                         this.options.mode = 1;
                         break;
-                    case 'lastpass':
-                        this.options.profile = 'lastpass';
+                    case 'pmanCsv':
+                    case 'dashlane':
+                        this.options.profile = value;
+                        this.csv.badQuotes = true;
                         this.options.mode = 1;
                         break;
                     case 'pwdCsv':
@@ -353,9 +373,6 @@
                         break;
                     case 'tagCsv':
                         this.options.profile = 'tags';
-                        break;
-                    case 'pmanCsv':
-                        this.type = 'pmanCsv';
                         break;
                     case 'csv':
                         this.options = {mode: 1, skipShared: true, firstLine: 0, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
@@ -405,11 +422,8 @@
 
                 label {
                     margin-right : 5px;
-                }
-
-                label {
-                    min-width : 105px;
-                    display   : inline-block;
+                    min-width    : 105px;
+                    display      : inline-block;
                 }
 
                 label[for=passwords-import-csv-preview-line] {

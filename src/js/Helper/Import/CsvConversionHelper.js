@@ -51,7 +51,7 @@ export default class ImportCsvConversionHelper {
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
-        if(data[0].length < mapping.length) throw new Error('CSV file can not be mapped');
+        if(data[firstLine].length < mapping.length) throw new Error('CSV file can not be mapped');
         for(let i = firstLine; i < data.length; i++) {
             let line   = data[i],
                 object = {};
@@ -249,7 +249,9 @@ export default class ImportCsvConversionHelper {
      */
     static _repairObject(object) {
         let domain = new RegExp('^([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.){1,}[a-zA-Z]{2,}$');
-        if(!object.url || object.url.length === 0) {
+        if(object.url && object.url.length !== 0 && object.url.indexOf('://')) {
+            object.url = `http://${object.url}`;
+        } else if(!object.url || object.url.length === 0) {
             if(object.label && domain.test(object.label)) {
                 object.url = SimpleApi.parseUrl(object.label, 'href');
                 object.label = null;
@@ -268,44 +270,50 @@ export default class ImportCsvConversionHelper {
             passwords: {
                 firstLine: 1,
                 db       : 'passwords',
-                delimiter: ',',
                 mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId']
             },
             folders  : {
                 firstLine: 1,
                 db       : 'folders',
-                delimiter: ',',
                 mapping  : ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId']
             },
             tags     : {
                 firstLine: 1,
-                delimiter: ',',
                 db       : 'tags',
                 mapping  : ['label', 'color', 'favourite', 'edited', 'id', 'revision']
             },
             legacy   : {
                 firstLine: 1,
                 db       : 'passwords',
-                delimiter: ',',
                 mapping  : ['label', 'username', 'password', 'url', 'notes'],
                 repair   : true
             },
             keepass  : {
                 firstLine: 1,
                 db       : 'passwords',
-                delimiter: ',',
                 mapping  : ['label', 'username', 'password', 'url', 'notes']
             },
             lastpass : {
                 firstLine: 1,
                 db       : 'passwords',
-                delimiter: ',',
                 mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favourite']
             },
             passman  : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url']
+            },
+            dashlane  : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['label', 'url', 'username', 'password', 'notes'],
+                repair   : true
+            },
+            enpass  : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['label', '', 'username', '', 'password', '', 'url'],
+                repair   : true
             }
         };
 

@@ -175,7 +175,8 @@
             'Semicolon'                           : 'Semikolon',
             'Space'                               : 'Leerzeichen',
             'Tab'                                 : 'Tabulator',
-            '"{error}" in line {line}'            : '"{error}" in Zeile {line}',
+            'Detect unescaped quotes'             : 'Nicht maskierte Fluchtzeichen erkennen',
+            '{error} in line {line}.'             : '{error} in Zeile {line}.',
             'Skip first line'                     : 'Kopfzeile überspringen',
             'Interpolate missing fields'          : 'Fehlende Felder interpolieren',
             'CSV Field Mapping'                   : 'CSV Felder zuordnen',
@@ -283,11 +284,13 @@
             'You have reached the maximum length of 4096 characters'                   : 'Sie haben die Maximallänge von 4096 Zeichern erreicht',
             'Trailing quote on quoted field is malformed'                              : 'Das Feldzeichen ist falsch maskiert',
             'We could not find anything for "{query}"'                                 : 'Die Suche nach "{query}" erzielte keinen Treffer',
+            'The file could not be parsed: {errors}'                                   : 'Die Datei konnte nicht verarbeitet werden',
             'You have to wait {seconds} seconds before you can reset your account.'    : 'Sie müssen {seconds} Sekunden warten bevor Sie ihr Benutzerkonto zurücksetzen können.'
         },
         longTexts    = {
-            'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.': 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
-            'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'    : 'Möchten Sie wirklich alle Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.'
+            'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
+            'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Möchten Sie wirklich alle Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.',
+            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür fehlerhafte Exportdateien zu erstellen. Sehen Sie im Handbuch nach, wenn die Datei nicht verarbeitet werden kann.'
         };
 
     OC.L10N.register(

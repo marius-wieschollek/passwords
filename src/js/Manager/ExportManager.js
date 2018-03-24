@@ -88,20 +88,20 @@ export class ExportManager {
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager._convertDbToExportStructure(data, header.clone());
-            csv.passwords = ExportManager._convertObjectToCsv(data, header);
+            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            csv.passwords = ExportManager._createCsvExport(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager._convertDbToExportStructure(data, header.clone());
-            csv.folders = ExportManager._convertObjectToCsv(data, header);
+            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            csv.folders = ExportManager._createCsvExport(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager._convertDbToExportStructure(data, header.clone());
-            csv.tags = ExportManager._convertObjectToCsv(data, header);
+            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            csv.tags = ExportManager._createCsvExport(data, header);
         }
 
         if(model.length === 1) csv = csv[model[0]];
@@ -126,8 +126,8 @@ export class ExportManager {
         }
 
         if(options.header) header = Utility.cloneObject(options.mapping);
-        data = await ExportManager._convertDbToExportStructure(data, options.mapping);
-        return ExportManager._convertObjectToCsv(data, header, options.delimiter);
+        data = await ExportManager._convertDbToExportArray(data, options.mapping);
+        return ExportManager._createCsvExport(data, header, options.delimiter);
     }
 
     /**
@@ -142,20 +142,20 @@ export class ExportManager {
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager._convertDbToExportStructure(data, header.clone());
-            sheets.passwords = ExportManager._convertObjectToOffice(data, header);
+            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            sheets.passwords = ExportManager._convertOfficeExport(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager._convertDbToExportStructure(data, header.clone());
-            sheets.folders = ExportManager._convertObjectToOffice(data, header);
+            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            sheets.folders = ExportManager._convertOfficeExport(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager._convertDbToExportStructure(data, header.clone());
-            sheets.tags = ExportManager._convertObjectToOffice(data, header);
+            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            sheets.tags = ExportManager._convertOfficeExport(data, header);
         }
 
         try {
@@ -183,7 +183,7 @@ export class ExportManager {
      * @returns {Promise<Array>}
      * @private
      */
-    static async _convertDbToExportStructure(db, mapping) {
+    static async _convertDbToExportArray(db, mapping) {
         let folderDb = await this._createExportFolderMapping(mapping),
             tagDb    = await this._createExportTagMapping(mapping),
             data     = [];
@@ -194,7 +194,7 @@ export class ExportManager {
 
         for(let i in db) {
             if(!db.hasOwnProperty(i)) continue;
-            let object = this._convertObjectForExport(db[i], mapping, folderDb, tagDb);
+            let object = this._convertObjectToExportArray(db[i], mapping, folderDb, tagDb);
             data.push(object);
         }
 
@@ -248,21 +248,23 @@ export class ExportManager {
      * @param tagDb
      * @private
      */
-    static _convertObjectForExport(element, mapping, folderDb, tagDb) {
-        let object = {};
+    static _convertObjectToExportArray(element, mapping, folderDb, tagDb) {
+        let object = [];
         for(let j = 0; j < mapping.length; j++) {
             let field = mapping[j];
 
             if(field === 'folderLabel') {
-                object.folderLabel = folderDb.hasOwnProperty(element.folder) ? folderDb[element.folder]:'';
+                object.push(folderDb.hasOwnProperty(element.folder) ? folderDb[element.folder]:'');
             } else if(field === 'parentLabel') {
-                object.parentLabel = folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'';
+                object.push(folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'');
             } else if(field === 'tagLabels') {
-                object.tagLabels = ExportManager._convertTagLabelsForExport(element, tagDb);
+                object.push(ExportManager._convertTagLabelsForExport(element, tagDb));
             } else if(['edited', 'updated', 'created'].indexOf(field) !== -1) {
-                object[field] = new Date(element[field] * 1e3).toString();
+                object.push(new Date(element[field] * 1e3).toString());
+            } else if(field === 'empty') {
+                object.push('');
             } else {
-                object[field] = element[field];
+                object.push(element[field]);
             }
         }
         return object;
@@ -286,13 +288,13 @@ export class ExportManager {
 
     /**
      *
-     * @param object
+     * @param db
      * @param header
      * @param delimiter
      * @returns {string}
      * @private
      */
-    static _convertObjectToCsv(object, header = [], delimiter = ',') {
+    static _createCsvExport(db, header = [], delimiter = ',') {
         let csv = [];
 
         if(header && header.length !== 0) {
@@ -305,14 +307,14 @@ export class ExportManager {
             csv.push(line.join(delimiter));
         }
 
-        for(let i = 0; i < object.length; i++) {
-            let element = object[i],
+        for(let i = 0; i < db.length; i++) {
+            let element = db[i],
                 line    = [];
 
-            for(let j in element) {
-                if(!element.hasOwnProperty(j)) continue;
+            for(let j = 0; j < element.length; j++) {
                 let value = element[j];
 
+                console.log(value,element,j,typeof value);
                 if(typeof value === 'boolean') value = Localisation.translate(value.toString());
 
                 line.push(`"${value.toString().replace(/"/g, '""')}"`);
@@ -326,12 +328,12 @@ export class ExportManager {
 
     /**
      *
-     * @param object
+     * @param db
      * @param header
      * @returns {Promise<Array>}
      * @private
      */
-    static _convertObjectToOffice(object, header = []) {
+    static _convertOfficeExport(db, header = []) {
         let data = [];
         if(header && header.length !== 0) {
             let line = [];
@@ -343,12 +345,11 @@ export class ExportManager {
             data.push(line);
         }
 
-        for(let i = 0; i < object.length; i++) {
-            let element = object[i],
+        for(let i = 0; i < db.length; i++) {
+            let element = db[i],
                 line    = [];
 
-            for(let j in element) {
-                if(!element.hasOwnProperty(j)) continue;
+            for(let j = 0; j < element.length; j++) {
                 let value = element[j];
 
                 if(typeof value === 'boolean') {
