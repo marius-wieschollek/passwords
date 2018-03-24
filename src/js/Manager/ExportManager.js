@@ -313,10 +313,7 @@ export class ExportManager {
 
             for(let j = 0; j < element.length; j++) {
                 let value = element[j];
-
-                console.log(value,element,j,typeof value);
                 if(typeof value === 'boolean') value = Localisation.translate(value.toString());
-
                 line.push(`"${value.toString().replace(/"/g, '""')}"`);
             }
 
@@ -353,12 +350,10 @@ export class ExportManager {
                 let value = element[j];
 
                 if(typeof value === 'boolean') {
-                    value = value ? 1:0;
+                    line.push(value ? 1:0);
                 } else {
-                    value = value.toString();
+                    line.push(value.toString());
                 }
-
-                line.push(value);
             }
 
             data.push(line);
