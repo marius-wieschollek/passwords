@@ -33,7 +33,7 @@ let router = new Router(
 
             let $el = document.querySelector(`#app-content ${to.hash}`);
             if($el) {
-                document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight
+                document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight;
             }
 
             return { x: 0, y: 0 };

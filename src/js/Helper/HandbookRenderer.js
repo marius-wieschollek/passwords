@@ -48,7 +48,7 @@ class HandbookRenderer {
         renderer.image = (href, title, text) => { return this._renderImage(href, title, text);};
         renderer.heading = HandbookRenderer._renderHeader;
 
-        return marked(markdown, {renderer: renderer});
+        return marked(markdown, {renderer});
     }
 
     /**
@@ -70,7 +70,7 @@ class HandbookRenderer {
             target = '_self';
         } else if(href.substring(0, 4) !== 'http') {
             let route = VueRouter.resolve({name: 'Help', params: {page: href}});
-            if(title === null) title = Localisation.translate('Go to {href}', {href: href});
+            if(title === null) title = Localisation.translate('Go to {href}', {href});
             href = route.href;
             target = '_self';
         }
