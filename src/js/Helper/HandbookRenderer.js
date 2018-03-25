@@ -12,6 +12,7 @@ class HandbookRenderer {
     constructor() {
         this.baseUrl = SettingsManager.get('server.manual.url');
         this.pages = [];
+        this.imageCounter = 0;
     }
 
     /**
@@ -43,6 +44,7 @@ class HandbookRenderer {
      * @returns {*}
      */
     render(markdown) {
+        this.imageCounter = 0;
         let renderer = new marked.Renderer();
         renderer.link = HandbookRenderer._renderLink;
         renderer.image = (href, title, text) => { return this._renderImage(href, title, text);};
@@ -69,7 +71,9 @@ class HandbookRenderer {
             href = route.href;
             target = '_self';
         } else if(href.substring(0, 4) !== 'http') {
-            let route = VueRouter.resolve({name: 'Help', params: {page: href}});
+            let hash = null;
+            if(href.indexOf('#') !== -1) [href, hash] = href.split('#');
+            let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash: `#help-${hash}`});
             if(title === null) title = Localisation.translate('Go to {href}', {href});
             href = route.href;
             target = '_self';
@@ -105,8 +109,10 @@ class HandbookRenderer {
 
         if(text === null) text = href;
         if(title === null) title = text;
+        this.imageCounter++;
+        let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title});
 
-        return `<img src="${href}" title="${title}" alt="${text}">`;
+        return `<span class="md-image-container"><a class="md-image-link" title="${title}" href="${href}" target="_blank"><img src="${href}" alt="${text}" class="md-image" ><span class="md-image-caption">${caption}</span></a></span>`;
     }
 }
 

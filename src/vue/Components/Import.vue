@@ -37,7 +37,7 @@
 
                 <div v-if="source === 'csv'">
                     <translate tag="h3" say="CSV Options"/>
-                    <translate tag="label" for="passwords-import-csv-delimiter" say="Field delimiter"/>
+                    <translate tag="label" for="passwords-import-csv-delimiter" say="Field Delimiter"/>
                     <select id="passwords-import-csv-delimiter" v-model="csv.delimiter" :disabled="importing">
                         <translate tag="option" value="auto" say="Detect"/>
                         <translate tag="option" value="," say="Comma"/>
@@ -315,8 +315,7 @@
                 } else if(this.source === 'csv') {
                     if(
                         (this.options.db === 'passwords' && this.options.mapping.indexOf('password') !== -1) ||
-                        (this.options.db === 'folders' && this.options.mapping.indexOf('label') !== -1) ||
-                        (this.options.db === 'tags' && this.options.mapping.indexOf('label') !== -1 && this.options.mapping.indexOf('color') !== -1)
+                        this.options.mapping.indexOf('label') !== -1
                     ) {
                         this.step = this.csvReady ? 4:2;
                     } else if(this.csvReady) {

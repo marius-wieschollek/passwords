@@ -42,6 +42,14 @@
             this.refreshView();
         },
 
+        updated() {
+            let images = document.querySelectorAll('#app-content .handbook-page img');
+            for(let i = 0; i < images.length; i++) {
+                images[i].addEventListener('load', () => { this.jumpToAnchor(); });
+            }
+            this.jumpToAnchor();
+        },
+
         computed: {
             getBreadcrumbIcons() {
                 let items = [
@@ -98,6 +106,12 @@
                         Messages.alert(['Unable to load {module}', {module: 'ManualRenderer'}], 'Network error');
                     }
                     this.loading = false;
+                }
+            },
+            jumpToAnchor() {
+                let $el = document.querySelector(`#app-content ${this.$route.hash}`);
+                if($el) {
+                    document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight;
                 }
             }
         },
@@ -253,15 +267,37 @@
                 margin     : 1rem 0;
             }
 
-            p > a:only-child > img,
-            p > img:only-child {
+            p > .md-image-container:only-child {
                 display : block;
-                margin  : 1em auto;
             }
 
-            img {
+            .md-image-container {
                 max-width : 100%;
-                border    : 1px solid $color-grey-lighter;
+                display   : inline-block;
+
+                .md-image-link {
+                    border  : 1px solid $color-grey-lighter;
+                    display : inline-block;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        text-decoration : none;
+                    }
+                }
+
+                .md-image {
+                    display   : block;
+                    max-width : 100%;
+                }
+
+                .md-image-caption {
+                    display    : block;
+                    border-top : 1px solid $color-grey-lighter;
+                    padding    : 2px;
+                    color      : $color-black-lighter;
+                    font-style : italic;
+                }
             }
         }
 

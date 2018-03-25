@@ -166,7 +166,7 @@
             'Database'                            : 'Datenbank',
             'Quote Character'                     : 'Feldzeichen',
             'Escape Character'                    : 'Fluchtsymbol',
-            'Field delimiter'                     : 'Trennzeichen',
+            'Field Delimiter'                     : 'Trennzeichen',
             'Quote'                               : 'Hochkomma',
             'Single Quote'                        : 'Einfaches Hochkomma',
             'Backslash'                           : 'Umgekehrter Schrägstrich',
