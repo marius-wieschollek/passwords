@@ -286,7 +286,8 @@
             'Trailing quote on quoted field is malformed'                              : 'Das Feldzeichen ist falsch maskiert',
             'We could not find anything for "{query}"'                                 : 'Wir konnten nichts zu "{query}" finden',
             'The file could not be parsed: {errors}'                                   : 'Die Datei konnte nicht verarbeitet werden',
-            'You have to wait {seconds} seconds before you can reset your account.'    : 'Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst.'
+            'You have to wait {seconds} seconds before you can reset your account.'    : 'Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst.',
+            'The page "{page}" could not be fetched from the handbook server.'         : 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.'
         },
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',

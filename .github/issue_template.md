@@ -13,6 +13,7 @@ Describe your issue here and remember not to include personal data as this is pu
 - PHP Version:
 - Passwords Version
 - Browser and Version:
+- Client OS and Version:
 - Server OS and Version:
 
 ### Steps to reproduce

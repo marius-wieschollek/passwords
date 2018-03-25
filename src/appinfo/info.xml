@@ -43,9 +43,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
     <documentation>
-        <user>https://git.mdns.eu/nextcloud/passwords/wikis/home#users</user>
-        <admin>https://git.mdns.eu/nextcloud/passwords/wikis/home#administrators</admin>
-        <developer>https://git.mdns.eu/nextcloud/passwords/wikis/home#developers</developer>
+        <user>https://git.mdns.eu/nextcloud/passwords/wikis/users/index</user>
+        <admin>https://git.mdns.eu/nextcloud/passwords/wikis/administrators/index</admin>
+        <developer>https://git.mdns.eu/nextcloud/passwords/wikis/developers/index</developer>
     </documentation>
     <category>security</category>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>

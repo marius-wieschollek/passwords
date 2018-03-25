@@ -62,7 +62,7 @@
         methods: {
             refreshView() {
                 if(this.$route.params.page === undefined) {
-                    this.showPage('Home');
+                    this.showPage('Index');
                 } else {
                     this.showPage(this.$route.params.page);
                 }
@@ -71,12 +71,17 @@
                 this.loading = true;
                 this.source = '';
                 try {
-                    let Manual = await import(/* webpackChunkName: "ManualRenderer" */ '@js/Helper/ManualRenderer');
-                    this.source = await Manual.Renderer.fetchPage(page);
+                    let Handbook = await import(/* webpackChunkName: "HandbookRenderer" */ '@js/Helper/HandbookRenderer');
+                    this.source = await Handbook.Renderer.fetchPage(page);
                     this.loading = false;
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'ManualRenderer'}], 'Network error');
+                    if(e.message === 'Not Found') {
+                        Messages.alert(['The page "{page}" could not be fetched from the handbook server.', {page}], 'Network error');
+                    } else {
+                        Messages.alert(['Unable to load {module}', {module: 'ManualRenderer'}], 'Network error');
+                    }
+                    this.loading = false;
                 }
             }
         },

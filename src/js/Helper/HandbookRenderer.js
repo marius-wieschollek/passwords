@@ -7,7 +7,7 @@ import SettingsManager from '@js/Manager/SettingsManager';
 /**
  *
  */
-class ManualRenderer {
+class HandbookRenderer {
 
     constructor() {
         this.baseUrl = SettingsManager.get('server.manual.url');
@@ -44,9 +44,9 @@ class ManualRenderer {
      */
     render(markdown) {
         let renderer = new marked.Renderer();
-        renderer.link = ManualRenderer._renderLink;
+        renderer.link = HandbookRenderer._renderLink;
         renderer.image = (href, title, text) => { return this._renderImage(href, title, text);};
-        renderer.heading = ManualRenderer._renderHeader;
+        renderer.heading = HandbookRenderer._renderHeader;
 
         return marked(markdown, {renderer: renderer});
     }
@@ -110,4 +110,4 @@ class ManualRenderer {
     }
 }
 
-export let Renderer = new ManualRenderer();
+export let Renderer = new HandbookRenderer();
