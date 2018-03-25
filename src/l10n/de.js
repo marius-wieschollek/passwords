@@ -251,6 +251,8 @@
             'Better check the other sections'     : 'Schau besser mal in den anderen Bereichen nach',
             'That\'s probably a good sign'        : 'Das ist wohl besser so',
             'Go to {href}'                        : 'Öffne {href}',
+            'Missing something or found an error?': 'Fehlt etwas oder hast du einen Fehler gefunden?',
+            'Tell us!'                            : 'Sag uns bescheid!',
             'Network error'                       : 'Netzwerkfehler',
             'Unable to load {module}'             : 'Das Modul {module} konnte nicht geladen werden. Möglicherweise ist die Verbindung zu Nextcloud unterbrochen',
             '{passwords} passwords'               : '{passwords} Passwörter',

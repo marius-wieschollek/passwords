@@ -2,8 +2,18 @@
     <div id="app-content" :class="{loading: loading}">
         <div class="app-content-left help">
             <breadcrumb :items="getBreadcrumbIcons" :showAddNew="false"/>
-            <translate tag="h1" :say="getPageTitle" id="help-top"/>
-            <div class="handbook-page" v-html="source"></div>
+            <article v-if="!loading">
+                <header>
+                    <translate tag="h1" :say="getPageTitle" id="help-top"/>
+                </header>
+                <section class="handbook-page" v-html="source"></section>
+                <div class="handbook-footer">
+                    <footer>
+                        <translate say="Missing something or found an error?"/>
+                        <translate tag="a" say="Tell us!" target="_blank" :style="getHrefStyle" href="https://github.com/marius-wieschollek/passwords/issues/new"/>
+                    </footer>
+                </div>
+            </article>
         </div>
     </div>
 </template>
@@ -13,6 +23,7 @@
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import Localisation from '@js/Classes/Localisation';
+    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         components: {
@@ -56,6 +67,11 @@
                     title = path.substr(path.lastIndexOf('/') + 1);
 
                 return title.replace('-', ' ');
+            },
+            getHrefStyle() {
+                return {
+                    color: ThemeManager.getColor()
+                };
             }
         },
 
@@ -96,13 +112,15 @@
 <style lang="scss">
 
     #app-content .help {
-        padding : 0 10px 10px;
+        padding    : 0 10px 10px;
+        position   : relative;
+        min-height : 100%;
 
         #controls {
             margin : 0 -10px;
         }
 
-        > h1 {
+        header > h1 {
             font-size   : 2.5rem;
             font-weight : 300;
             margin      : 10px auto 40px;
@@ -234,12 +252,37 @@
             p > a:only-child > img,
             p > img:only-child {
                 display : block;
-                margin  : 0 auto;
+                margin  : 1em auto;
             }
 
             img {
                 max-width : 100%;
                 border    : 1px solid $color-grey-lighter;
+            }
+        }
+
+        .handbook-footer {
+            position : absolute;
+            bottom   : 0;
+            left     : 0;
+            right    : 0;
+
+            footer {
+                font-size  : 0.9rem;
+                max-width  : 968px;
+                margin     : 1em auto;
+                text-align : right;
+
+                a:hover,
+                a:focus,
+                a:active {
+                    cursor          : pointer;
+                    text-decoration : underline;
+                }
+
+                @media all and (max-width : $width-extra-small) {
+                    padding : 0 1em;
+                }
             }
         }
     }

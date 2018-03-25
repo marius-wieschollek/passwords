@@ -10,7 +10,7 @@
         extends: BaseSection,
 
         data() {
-            let showTags    = SettingsManager.get('client.ui.list.tags.show', false),
+            let showTags    = SettingsManager.get('client.ui.list.tags.show', false) && window.innerWidth > 360,
                 baseModel   = showTags ? 'model+folders+passwords+password-tags':'model+folders+passwords',
                 folderModel = showTags ? 'model+folders+passwords+password-tags+parent':'model+folders+passwords+parent';
 

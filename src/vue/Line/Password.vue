@@ -76,7 +76,7 @@
                 return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
             },
             showTags() {
-                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags.length;
+                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags;
             },
             getTitle() {
                 let titleField = SettingsManager.get('client.ui.password.field.title');

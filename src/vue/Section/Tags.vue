@@ -9,7 +9,7 @@
         extends: BaseSection,
 
         data() {
-            let showTags = SettingsManager.get('client.ui.list.tags.show', false),
+            let showTags = SettingsManager.get('client.ui.list.tags.show', false) && window.innerWidth > 360,
                 model    = showTags ? 'model+passwords+password-tags':'model+passwords';
 
             return {

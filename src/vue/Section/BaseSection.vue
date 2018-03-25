@@ -66,7 +66,7 @@
                     ascending: SettingsManager.get('local.ui.sorting.ascending', true)
                 },
                 ui       : {
-                    showTags: SettingsManager.get('client.ui.list.tags.show', false)
+                    showTags: SettingsManager.get('client.ui.list.tags.show', false) && window.innerWidth > 360
                 },
                 search   : SearchManager.status
             };
@@ -114,10 +114,6 @@
             },
             isDraggable() {
                 return false;
-            },
-            /** @deprecated **/
-            showHeaderAndFooter() {
-                return this.isNotEmpty;
             }
         },
 
