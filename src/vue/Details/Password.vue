@@ -294,7 +294,7 @@
                         cursor      : pointer;
 
                         &:hover {
-                            font-family : monospace;
+                            font-family : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
                         }
                     }
 

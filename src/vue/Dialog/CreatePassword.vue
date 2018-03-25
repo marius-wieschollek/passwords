@@ -315,6 +315,7 @@
                         input {
                             max-width     : initial;
                             padding-right : 45px;
+                            font-family   : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
                         }
 
                         .icons {

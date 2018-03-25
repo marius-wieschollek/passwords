@@ -198,9 +198,11 @@
             code {
                 background    : $color-grey-lighter;
                 color         : $color-black-lighter;
-                padding       : 2px 3px;
+                padding       : 1px 3px;
                 border        : 1px solid $color-grey-light;
                 border-radius : 3px;
+                white-space   : nowrap;
+                font-family   : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
             }
 
             pre {
@@ -209,6 +211,8 @@
                 padding       : 2px 3px;
                 border        : 1px solid $color-grey-light;
                 border-radius : 3px;
+                overflow-x    : auto;
+                font-family   : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
 
                 code {
                     background    : inherit;
