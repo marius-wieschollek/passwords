@@ -26,7 +26,18 @@ let router = new Router(
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
             {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}}
-        ]
+        ],
+
+        scrollBehavior (to, from, savedPosition) {
+            if(!to.hash) return { x: 0, y: 0 };
+
+            let $el = document.querySelector(`#app-content ${to.hash}`);
+            if($el) {
+                document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight
+            }
+
+            return { x: 0, y: 0 };
+        }
     }
 );
 

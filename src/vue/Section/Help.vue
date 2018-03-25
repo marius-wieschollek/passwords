@@ -2,17 +2,17 @@
     <div id="app-content" :class="{loading: loading}">
         <div class="app-content-left help">
             <breadcrumb :items="getBreadcrumbIcons" :showAddNew="false"/>
-            <translate tag="h1" :say="getPageTitle" id="top"/>
-            <div class="handbook-page" v-html="pageHtml"></div>
+            <translate tag="h1" :say="getPageTitle" id="help-top"/>
+            <div class="handbook-page" v-html="source"></div>
         </div>
     </div>
 </template>
 
 <script>
     import Messages from '@js/Classes/Messages';
+    import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import Localisation from '@js/Classes/Localisation';
-    import Translate from "@/vue/Components/Translate";
 
     export default {
         components: {
@@ -22,9 +22,8 @@
 
         data() {
             return {
-                loading : true,
-                pages   : [],
-                pageHtml: ''
+                loading: true,
+                source : ''
             };
         },
 
@@ -45,7 +44,7 @@
                 for(let i = 0; i < path.length; i++) {
                     current += `/${path[i]}`;
                     items.push(
-                        {path: {name: 'Help', params: {page: current}}, label: path[i]}
+                        {path: {name: 'Help', params: {page: current}}, label: Localisation.translate(path[i])}
                     );
                 }
 
@@ -68,50 +67,17 @@
                     this.showPage(this.$route.params.page);
                 }
             },
-            showPage(page) {
-                if(!process.env.NIGHTLY_FEATURES) return;
-
-                if(this.pages.hasOwnProperty(page)) {
-                    this.pageHtml = this.pages[page];
-                    return;
-                }
-
+            async showPage(page) {
                 this.loading = true;
-                this.pageHtml = '';
-                // Unsafe, needs to be done better
-                $.get(`https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/${page}.md`)
-                 .success((d) => {this.renderPage(d, page);});
-            },
-            async renderPage(markdown, page) {
+                this.source = '';
                 try {
-                    let marked   = await import(/* webpackChunkName: "marked" */ 'marked'),
-                        renderer = new marked.Renderer();
-
-                    renderer.link = this.renderLink;
-                    this.pages[page] = marked(markdown, {renderer: renderer});
-                    this.pageHtml = this.pages[page];
+                    let Manual = await import(/* webpackChunkName: "ManualRenderer" */ '@js/Helper/ManualRenderer');
+                    this.source = await Manual.Renderer.fetchPage(page);
                     this.loading = false;
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
+                    Messages.alert(['Unable to load {module}', {module: 'ManualRenderer'}], 'Network error');
                 }
-            },
-            renderLink(href, title, text) {
-                let target = '_blank';
-                console.log(href, title, text);
-                console.log(this.$route);
-
-                if(href.substring(0, 5) === 'Users') {
-                    let route = this.$router.resolve({name: 'Help', params: {page: href.substring(6)}});
-                    href = route.href;
-                    target = '_self';
-                } else if(href[0] === '#') {
-                    let route = this.$router.resolve({name: 'Help', params: {page: this.$route.params.page}, hash: href});
-                    href = route.href;
-                    target = '_self';
-                }
-
-                return `<a href="${href}" title="${title}" target="${target}">${text}</a>`;
             }
         },
         watch  : {
@@ -132,12 +98,17 @@
         }
 
         > h1 {
-            font-size   : 2rem;
+            font-size   : 2.5rem;
             font-weight : 300;
-            margin      : 10px 0 20px;
+            margin      : 10px auto 40px;
+            max-width   : 968px;
         }
 
         .handbook-page {
+            font-size : 0.9rem;
+            max-width : 968px;
+            margin    : 0 auto 4rem;
+
             * {
                 cursor         : text;
                 vertical-align : top;
@@ -198,7 +169,7 @@
             }
 
             em {
-                font-style: italic;
+                font-style : italic;
             }
 
             code {
@@ -225,9 +196,16 @@
                 }
             }
 
+            blockquote {
+                border-left   : 4px solid $color-grey;
+                background    : $color-grey-lighter;
+                padding       : 1em 1em 0 1em;
+                margin-bottom : 1em;
+            }
+
             table {
                 border-collapse : collapse;
-                padding-bottom : 1em;
+                padding-bottom  : 1em;
 
                 tr {
                     th {
@@ -235,17 +213,28 @@
                     }
                     th,
                     td {
-                        border           : 1px solid $color-grey-light;
-                        padding          : 2px;
+                        border  : 1px solid $color-grey-light;
+                        padding : 2px;
                     }
                 }
             }
 
             hr {
-                border: none;
-                height: 1px;
-                background: $color-black-lighter;
-                margin: 1rem 0;
+                border     : none;
+                height     : 1px;
+                background : $color-black-lighter;
+                margin     : 1rem 0;
+            }
+
+            p > a:only-child > img,
+            p > img:only-child {
+                display : block;
+                margin  : 0 auto;
+            }
+
+            img {
+                max-width : 100%;
+                border    : 1px solid $color-grey-lighter;
             }
         }
     }

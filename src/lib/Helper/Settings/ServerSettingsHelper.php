@@ -17,6 +17,8 @@ use OCP\IURLGenerator;
  */
 class ServerSettingsHelper {
 
+    const SERVER_MANUAL_URL = 'https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/';
+
     /**
      * @var ConfigurationService
      */
@@ -79,6 +81,8 @@ class ServerSettingsHelper {
                 return $this->themeSettings->get($subKey);
             case 'sharing':
                 return $this->shareSettings->get($subKey);
+            case 'manual':
+                return $this->config->getAppValue('manual/url', self::SERVER_MANUAL_URL);
         }
 
         return null;
@@ -90,8 +94,9 @@ class ServerSettingsHelper {
     public function list(): array {
         return array_merge(
             [
-                'server.baseUrl' => $this->get('baseUrl'),
-                'server.version' => $this->get('version')
+                'server.baseUrl'    => $this->get('baseUrl'),
+                'server.version'    => $this->get('version'),
+                'server.manual.url' => $this->get('manual.url')
             ],
             $this->themeSettings->list(),
             $this->shareSettings->list()

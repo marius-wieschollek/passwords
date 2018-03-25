@@ -73,8 +73,8 @@ class SettingsService {
     }
 
     /**
-     * @param string $key
-     * @param        $value
+     * @param string      $key
+     * @param             $value
      * @param string|null $userId
      *
      * @return bool|float|int|mixed|null|string
@@ -95,7 +95,7 @@ class SettingsService {
     }
 
     /**
-     * @param string $key
+     * @param string      $key
      * @param string|null $userId
      *
      * @return mixed|null
@@ -115,7 +115,7 @@ class SettingsService {
     }
 
     /**
-     * @param array|null $scope
+     * @param array|null  $scope
      * @param string|null $userId
      *
      * @return array

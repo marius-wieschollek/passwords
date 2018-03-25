@@ -250,6 +250,7 @@
             'Your favorites will appear here'     : 'Ihre Favoriten werden hier erscheinen',
             'Better check the other sections'     : 'Möglicherweise haben Sie noch keine Passwörter',
             'That\'s probably a good sign'        : 'Das ist sicherlich gut so',
+            'Go to {href}'                        : 'Gehe zu {href}',
             'Network error'                       : 'Netzwerkfehler',
             'Unable to load {module}'             : 'Das Modul {module} konnte nicht geladen werden. Möglicherweise ist die Verbindung zu Nextcloud unterbrochen',
             '{passwords} passwords'               : '{passwords} Passwörter',

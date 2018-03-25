@@ -72,11 +72,7 @@ class PageController extends Controller {
             ['https' => $isSecure]
         );
 
-        $csp = new ContentSecurityPolicy();
-        $csp->addAllowedScriptDomain($this->request->getServerHost());
-        $csp->addAllowedConnectDomain('raw.githubusercontent.com');
-        $csp->addAllowedImageDomain('raw.githubusercontent.com');
-        $response->setContentSecurityPolicy($csp);
+        $response->setContentSecurityPolicy($this->getContentSecurityPolicy());
 
         return $response;
     }
@@ -111,5 +107,18 @@ class PageController extends Controller {
             Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding');
             Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding-indexes');
         };
+    }
+
+    /**
+     * @return ContentSecurityPolicy
+     */
+    protected function getContentSecurityPolicy(): ContentSecurityPolicy {
+        $manualHost = parse_url($this->settingsService->get('server.manual.url'), PHP_URL_HOST);
+        $csp        = new ContentSecurityPolicy();
+        $csp->addAllowedScriptDomain($this->request->getServerHost());
+        $csp->addAllowedConnectDomain($manualHost);
+        $csp->addAllowedImageDomain($manualHost);
+
+        return $csp;
     }
 }

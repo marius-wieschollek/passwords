@@ -36,6 +36,7 @@ class SettingsManager {
      * @returns {*}
      */
     get(setting, standard) {
+        console.log(this._settings);
         if(this._settings.hasOwnProperty(setting)) return this._settings[setting];
         if(standard !== undefined) return standard;
         return null;
