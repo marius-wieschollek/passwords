@@ -251,6 +251,7 @@
             'Better check the other sections'     : 'Schau besser mal in den anderen Bereichen nach',
             'That\'s probably a good sign'        : 'Das ist wohl besser so',
             'Go to {href}'                        : 'Öffne {href}',
+            'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Missing something or found an error?': 'Fehlt etwas oder hast du einen Fehler gefunden?',
             'Tell us!'                            : 'Sag uns bescheid!',
             'Network error'                       : 'Netzwerkfehler',

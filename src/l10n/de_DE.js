@@ -251,6 +251,7 @@
             'Better check the other sections'     : 'Möglicherweise haben Sie noch keine Passwörter',
             'That\'s probably a good sign'        : 'Das ist sicherlich gut so',
             'Go to {href}'                        : 'Gehe zu {href}',
+            'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Missing something or found an error?': 'Vermissen Sie etwas oder haben Sie einen Fehler gefunden?',
             'Tell us!'                            : 'Melden Sie es uns!',
             'Network error'                       : 'Netzwerkfehler',
