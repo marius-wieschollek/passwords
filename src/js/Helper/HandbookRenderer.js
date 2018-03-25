@@ -65,22 +65,36 @@ class HandbookRenderer {
         let target = '_blank';
 
         if(href[0] === '#') {
-            let anchor = href.trim().substr(1).toLowerCase().replace(/[^\w]+/g, '-'),
-                route  = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash: `#help-${anchor}`});
+            let hash = HandbookRenderer._getLinkAnchor(href.substr(1)),
+                route  = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash});
             if(title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1)});
             href = route.href;
             target = '_self';
         } else if(href.substring(0, 4) !== 'http') {
-            let hash = null;
-            if(href.indexOf('#') !== -1) [href, hash] = href.split('#');
-            let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash: `#help-${hash}`});
-            if(title === null) title = Localisation.translate('Go to {href}', {href});
+            let hash = undefined;
+            if(href.indexOf('#') !== -1) {
+                [href, hash] = href.split('#');
+                hash = HandbookRenderer._getLinkAnchor(hash);
+            }
+            if(href.substr(0, 2) === './') href = href.substr(2);
+            let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash});
             href = route.href;
             target = '_self';
         }
 
         if(title === null) title = Localisation.translate('Go to {href}', {href});
         return `<a href="${href}" title="${title}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
+    }
+
+    /**
+     *
+     * @param hash
+     * @returns {string}
+     * @private
+     */
+    static _getLinkAnchor(hash) {
+        let anchor = hash.trim().toLowerCase().replace(/[^\w]+/g, '-');
+        return `#help-${anchor}`;
     }
 
     /**
@@ -112,7 +126,7 @@ class HandbookRenderer {
         this.imageCounter++;
         let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title});
 
-        return `<span class="md-image-container"><a class="md-image-link" title="${title}" href="${href}" target="_blank"><img src="${href}" alt="${text}" class="md-image" ><span class="md-image-caption">${caption}</span></a></span>`;
+        return `<span class="md-image-container" id="help-image-${this.imageCounter}"><a class="md-image-link" title="${title}" href="${href}" target="_blank"><img src="${href}" alt="${text}" class="md-image" ><span class="md-image-caption">${caption}</span></a></span>`;
     }
 }
 
