@@ -19,11 +19,11 @@
 </template>
 
 <script>
-    import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import Localisation from '@js/Classes/Localisation';
     import ThemeManager from '@js/Manager/ThemeManager';
+    import HandbookRenderer from '@js/Helper/HandbookRenderer';
 
     export default {
         components: {
@@ -93,20 +93,8 @@
             },
             async showPage(page) {
                 this.loading = true;
-                this.source = '';
-                try {
-                    let Handbook = await import(/* webpackChunkName: "HandbookRenderer" */ '@js/Helper/HandbookRenderer');
-                    this.source = await Handbook.Renderer.fetchPage(page);
-                    this.loading = false;
-                } catch(e) {
-                    console.error(e);
-                    if(e.message === 'Not Found') {
-                        Messages.alert(['The page "{page}" could not be fetched from the handbook server.', {page}], 'Network error');
-                    } else {
-                        Messages.alert(['Unable to load {module}', {module: 'ManualRenderer'}], 'Network error');
-                    }
-                    this.loading = false;
-                }
+                this.source = await HandbookRenderer.fetchPage(page);
+                this.loading = false;
             },
             jumpToAnchor() {
                 let $el = document.querySelector(`#app-content ${this.$route.hash}`);
@@ -138,12 +126,12 @@
             font-size   : 2.5rem;
             font-weight : 300;
             margin      : 10px auto 40px;
-            max-width   : 968px;
+            max-width   : 975px;
         }
 
         .handbook-page {
             font-size : 0.9rem;
-            max-width : 968px;
+            max-width : 975px;
             margin    : 0 auto 4rem;
 
             * {
@@ -268,12 +256,14 @@
             }
 
             p > .md-image-container:only-child {
-                display : block;
+                display       : block;
+                margin-bottom : 0;
             }
 
             .md-image-container {
-                max-width : 100%;
-                display   : inline-block;
+                max-width     : 100%;
+                display       : inline-block;
+                margin-bottom : 1em;
 
                 .md-image-link {
                     border  : 1px solid $color-grey-lighter;
@@ -289,6 +279,7 @@
                 .md-image {
                     display   : block;
                     max-width : 100%;
+                    margin    : 0 auto;
                 }
 
                 .md-image-caption {
@@ -309,7 +300,7 @@
 
             footer {
                 font-size  : 0.9rem;
-                max-width  : 968px;
+                max-width  : 975px;
                 margin     : 1em auto;
                 text-align : right;
 

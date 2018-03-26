@@ -186,7 +186,7 @@
                         location.href = location.href.replace(location.hash, '');
                     }
                 } catch(e) {
-                    console.log(e);
+                    console.error(e);
                     Messages.alert('Invalid Password');
                 }
             }

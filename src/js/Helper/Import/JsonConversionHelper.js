@@ -35,7 +35,7 @@ export default class ImportJsonConversionHelper {
         try {
             await encryption.decrypt(json.challenge, `${options.password}challenge`);
         } catch(e) {
-            console.log(e);
+            console.error(e);
             throw new Error('Password invalid');
         }
 
@@ -45,7 +45,7 @@ export default class ImportJsonConversionHelper {
             try {
                 json[i] = JSON.parse(await encryption.decrypt(json[i], options.password + i));
             } catch(e) {
-                console.log(e);
+                console.error(e);
                 throw new Error(`Failed to decrypt ${i}`);
             }
         }

@@ -4,7 +4,7 @@ function isCompatibleBrowser() {
         eval('"use strict"; let PasswordsTestAsyncBrowserFunctionSupport = async function(){}');
         return window.crypto.subtle && window.TextEncoder;
     } catch(e) {
-        console.log(e);
+        console.error(e);
 
         return false;
     }

@@ -31,7 +31,7 @@ class EncryptionTestHelper {
             result = await this.testTags();
             if(result !== true) return this.handleError(result);
             SettingsManager.set('local.test.encryption.executed', true);
-            console.log('Encryption tests ran successfully');
+            console.info('Encryption tests ran successfully');
             return true;
         } catch(e) {
             this.handleError({error: e});

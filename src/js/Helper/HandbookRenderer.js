@@ -65,25 +65,50 @@ class HandbookRenderer {
         let target = '_blank';
 
         if(href[0] === '#') {
-            let hash = HandbookRenderer._getLinkAnchor(href.substr(1)),
-                route  = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash});
-            if(title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1)});
-            href = route.href;
-            target = '_self';
+            [href, title, target] = HandbookRenderer._processAnchorLink(href, title, target);
         } else if(href.substring(0, 4) !== 'http') {
-            let hash = undefined;
-            if(href.indexOf('#') !== -1) {
-                [href, hash] = href.split('#');
-                hash = HandbookRenderer._getLinkAnchor(hash);
-            }
-            if(href.substr(0, 2) === './') href = href.substr(2);
-            let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash});
-            href = route.href;
-            target = '_self';
+            [href, title, target] = HandbookRenderer._processInternalLink(href, title, target);
         }
 
         if(title === null) title = Localisation.translate('Go to {href}', {href});
         return `<a href="${href}" title="${title}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
+    }
+
+    /**
+     *
+     * @param href
+     * @param title
+     * @param target
+     * @returns {*[]}
+     * @private
+     */
+    static _processAnchorLink(href, title, target) {
+        let hash  = HandbookRenderer._getLinkAnchor(href.substr(1)),
+            route = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash});
+        if(title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1)});
+
+        return [route.href, title, '_self'];
+    }
+
+    /**
+     *
+     * @param href
+     * @param title
+     * @param target
+     * @returns {*[]}
+     * @private
+     */
+    static _processInternalLink(href, title, target) {
+        let hash = undefined;
+        if(href.indexOf('#') !== -1) {
+            [href, hash] = href.split('#');
+            hash = HandbookRenderer._getLinkAnchor(hash);
+        }
+        if(href.substr(0, 2) === './') href = href.substr(2);
+        let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash});
+        if(title === null) title = Localisation.translate('Go to {href}', {href: href.replace(/-{1}/g, ' ')});
+
+        return [route.href, title, '_self'];
     }
 
     /**
@@ -121,13 +146,19 @@ class HandbookRenderer {
     _renderImage(href, title, text) {
         if(href.substr(0, 5) !== 'https') href = this.baseUrl + href;
 
+        this.imageCounter++;
         if(text === null) text = href;
         if(title === null) title = text;
-        this.imageCounter++;
         let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title});
 
-        return `<span class="md-image-container" id="help-image-${this.imageCounter}"><a class="md-image-link" title="${title}" href="${href}" target="_blank"><img src="${href}" alt="${text}" class="md-image" ><span class="md-image-caption">${caption}</span></a></span>`;
+        return `<span class="md-image-container" id="help-image-${this.imageCounter}">
+                <a class="md-image-link" title="${title}" href="${href}" target="_blank">
+                <img src="${href}" alt="${text}" class="md-image" >
+                <span class="md-image-caption">${caption}</span>
+                </a></span>`;
     }
 }
 
-export let Renderer = new HandbookRenderer();
+let HR = new HandbookRenderer();
+
+export default HR;

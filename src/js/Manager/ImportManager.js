@@ -427,7 +427,7 @@ export class ImportManager {
         if(status === null) {
             this.processed++;
         } else {
-            console.log(`Passwords Import: ${status}`);
+            console.info(`Passwords Import: ${status}`);
         }
         this.progress(this.processed, this.total, status);
     }

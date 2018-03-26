@@ -82,9 +82,9 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
-    import Messages from "@js/Classes/Messages";
-    import Localisation from "@js/Classes/Localisation";
+    import Utility from '@js/Classes/Utility';
+    import Messages from '@js/Classes/Messages';
+    import Localisation from '@js/Classes/Localisation';
 
     export default {
         components: {
@@ -144,7 +144,7 @@
                         .exportDatabase(this.format, this.models, this.options)
                         .catch((e) => {
                             this.exporting = false;
-                            console.log(e);
+                            console.error(e);
                             Messages.alert(e.message, 'Export error');
                         })
                         .then((d) => {

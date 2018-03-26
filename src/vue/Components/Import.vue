@@ -143,8 +143,8 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Messages from "@js/Classes/Messages";
-    import Localisation from "@js/Classes/Localisation";
+    import Messages from '@js/Classes/Messages';
+    import Localisation from '@js/Classes/Localisation';
 
     export default {
         components: {
@@ -277,7 +277,7 @@
                         message.push(Localisation.translate('{error} in line {line}.', {error, line}));
                     }
                     Messages.alert(['The file could not be parsed: {errors}', {errors: message.join(' ')}], 'Import error');
-                    console.log(result.errors);
+                    console.error(result.errors);
                 }
             },
             registerProgress(processed, total, status) {
