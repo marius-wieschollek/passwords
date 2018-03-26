@@ -63,7 +63,7 @@
                 for(let i = 0; i < path.length; i++) {
                     current += `/${path[i]}`;
                     items.push(
-                        {path: {name: 'Help', params: {page: current}}, label: Localisation.translate(path[i])}
+                        {path: {name: 'Help', params: {page: current}}, label: Localisation.translate(path[i].replace(/-{1}/g, ' '))}
                     );
                 }
 
