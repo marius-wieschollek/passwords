@@ -31,9 +31,15 @@
                         </span>
                         </li>
                         <li>
+                        <span class="menuitem" v-if="restoreAll" @click="restoreAllEvent">
+                            <span class="icon icon-history svg"></span>
+                            <translate class="displayname" say="Restore All Items"/>
+                        </span>
+                        </li>
+                        <li>
                         <span class="menuitem" v-if="deleteAll" @click="deleteAllEvent">
                             <span class="icon icon-delete svg"></span>
-                            <translate class="displayname" say="Delete All"/>
+                            <translate class="displayname" say="Delete All Items"/>
                         </span>
                         </li>
                     </ul>
@@ -71,6 +77,10 @@
                 'default': false
             },
             deleteAll  : {
+                type     : Boolean,
+                'default': false
+            },
+            restoreAll  : {
                 type     : Boolean,
                 'default': false
             },
@@ -141,6 +151,9 @@
             },
             deleteAllEvent() {
                 this.$emit('deleteAll');
+            },
+            restoreAllEvent() {
+                this.$emit('restoreAll');
             }
         }
     };

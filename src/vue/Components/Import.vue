@@ -99,8 +99,8 @@
                         <input type="checkbox" id="passwords-import-csv-repair" v-model="options.repair" :disabled="importing"/>
                         <translate tag="label" for="passwords-import-csv-repair" say="Interpolate missing fields"/>
                         <br>
-                        <input type="checkbox" id="passwords-export-csv-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3' && options.db === 'passwords'"/>
-                        <translate tag="label" for="passwords-export-csv-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3' && options.db === 'passwords'"/>
+                        <input type="checkbox" id="passwords-import-csv-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3' && options.db === 'passwords'"/>
+                        <translate tag="label" for="passwords-import-csv-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3' && options.db === 'passwords'"/>
                         <br>
                         <br>
 
@@ -121,8 +121,8 @@
                     </div>
                     <div v-else>
                         <br>
-                        <input type="checkbox" id="passwords-export-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3'"/>
-                        <translate tag="label" for="passwords-export-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3'"/>
+                        <input type="checkbox" id="passwords-import-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3'"/>
+                        <translate tag="label" for="passwords-import-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3'"/>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
         <div class="step-4" v-if="step > 3">
             <translate tag="h1" say="Run Import"/>
             <div class="step-content">
-                <translate tag="button" @click="importDb" say="Import" v-if="progress.status === null"/>
+                <translate tag="button" @click="importDb" say="Import" v-if="progress.status === null" id="passwords-import-execute"/>
                 <div class="import-progress" v-else>
                     <progress :value="progress.processed" :max="progress.total" :title="progress.status" :class="progress.style"></progress>
                     <translate :say="progress.status"/>

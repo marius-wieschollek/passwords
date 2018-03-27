@@ -74,7 +74,7 @@
         <div class="step-3" v-if="step > 2">
             <translate tag="h1" say="Run Export"/>
             <div class="step-content">
-                <translate tag="button" @click="exportDb" :say="buttonText" :variables="{format: this.format.toUpperCase()}" :disabled="exporting"/>
+                <translate tag="button" @click="exportDb" :say="buttonText" :variables="{format: this.format.toUpperCase()}" :disabled="exporting" id="passwords-export-execute"/>
             </div>
         </div>
     </div>

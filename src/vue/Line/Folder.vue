@@ -3,7 +3,7 @@
          :data-folder-id="folder.id"
          data-drop-type="folder"
          @click="openAction($event)"
-         @dragstart="dragStartAction($event)">
+         @dragstart="dragStartAction($event)" :title="folder.label">
         <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
