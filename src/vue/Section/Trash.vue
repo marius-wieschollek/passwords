@@ -1,7 +1,7 @@
 <template>
     <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="isNotEmpty" :deleteAll="true" :newPassword="false" v-on:deleteAll="clearTrash"/>
+            <breadcrumb :showAddNew="isNotEmpty" :deleteAll="true" :restoreAll="true" :newPassword="false" v-on:deleteAll="clearTrash" v-on:restoreAll="restoreTrash"/>
             <div class="item-list">
                 <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
@@ -84,6 +84,22 @@
             restoreTagAction(tag) {
                 TagManager.restoreTag(tag);
                 API.findTags({trashed: true}).then(this.updateTagList);
+            },
+            restoreTrash() {
+                Messages.confirm('Restore all items in trash?', 'Restore Items')
+                        .then(() => {
+                            for(let i = 0; i < this.passwords.length; i++) {
+                                PasswordManager.restorePassword(this.passwords[i]);
+                            }
+                            for(let i = 0; i < this.folders.length; i++) {
+                                FolderManager.restoreFolder(this.folders[i]);
+                            }
+                            for(let i = 0; i < this.tags.length; i++) {
+                                TagManager.restoreTag(this.tags[i]);
+                            }
+
+                            Messages.notification('Items restored');
+                        });
             },
             clearTrash() {
                 Messages.confirm('Delete all items in trash?', 'Empty Trash')
