@@ -19,7 +19,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>48</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -92,7 +92,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>48</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -227,7 +227,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>32</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -283,7 +283,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>32</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -389,7 +389,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>48</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -439,7 +439,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>48</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -543,7 +543,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>32</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -611,7 +611,7 @@
             <field>
                 <name>user_id</name>
                 <type>text</type>
-                <length>48</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -623,7 +623,7 @@
             <field>
                 <name>receiver</name>
                 <type>text</type>
-                <length>48</length>
+                <length>64</length>
                 <notnull>true</notnull>
             </field>
             <field>
