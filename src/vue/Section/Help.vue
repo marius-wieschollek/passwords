@@ -100,6 +100,8 @@
                 let $el = document.querySelector(`#app-content ${this.$route.hash}`);
                 if($el) {
                     document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight;
+                    $el.classList.add('highlight');
+                    $el.addEventListener('animationend', () => {$el.classList.remove('highlight')})
                 }
             }
         },
@@ -156,6 +158,8 @@
             h1, h2, h3, h4, h5, h6 {
                 font-weight : 500;
                 position    : relative;
+                margin      : 0.85rem -3px 0;
+                border-radius     : 2px;
 
                 a.help-anchor {
                     vertical-align : middle;
@@ -169,33 +173,55 @@
                     text-decoration : none;
                     color           : $color-grey;
                 }
+
+                &.highlight {
+                    -webkit-animation : Highlight 1s ease .5s 2;
+                    -moz-animation    : Highlight 1s ease .5s 2;
+                    animation         : Highlight 1s ease .5s 2;
+
+                    @-webkit-keyframes Highlight {
+                        0% {background-color : transparent}
+                        50% {background-color : $color-green}
+                        100% {background-color : transparent}
+                    }
+                    @-moz-keyframes Highlight {
+                        0% {background-color : transparent}
+                        50% {background-color : $color-green}
+                        100% {background-color : transparent}
+                    }
+                    @keyframes Highlight {
+                        0% {background-color : transparent}
+                        50% {background-color : $color-green}
+                        100% {background-color : transparent}
+                    }
+                }
             }
 
             h1 {
                 font-size : 1.75rem;
-                margin    : 1.75rem 0 0.5rem;
+                padding   : 1.6rem 3px .5rem;
             }
 
             h2 {
                 font-size : 1.5rem;
-                margin    : 1.5rem 0 0.25rem;
+                padding   : 1.35rem 3px .25rem;
             }
 
             h3 {
                 font-size : 1.25rem;
-                margin    : 1.25rem 0 0.25rem;
+                padding   : 1.1rem 3px .25rem;
             }
 
             h4 {
                 font-size   : 1rem;
                 font-weight : 600;
-                margin      : 1rem 0 0.15rem;
+                padding     : .15rem 3px .15rem;
             }
 
             h5 {
                 font-size   : 0.85rem;
                 font-weight : 600;
-                margin      : 0.85rem 0 0;
+                padding     : 0 3px;
             }
 
             p {
