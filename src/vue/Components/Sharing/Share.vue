@@ -116,6 +116,13 @@
                 height           : 32px;
                 width            : 32px;
                 background-color : transparentize($color-white, 0.75);
+                animation         : ShareUpdating 0.8s infinite ease-in-out, rotate 0.8s infinite linear;
+
+                @keyframes ShareUpdating {
+                    0% {background-color : transparent}
+                    50% {background-color : transparentize($color-white, 0.25)}
+                    100% {background-color : transparent}
+                }
             }
         }
 

@@ -175,20 +175,8 @@
                 }
 
                 &.highlight {
-                    -webkit-animation : Highlight 1s ease .5s 2;
-                    -moz-animation    : Highlight 1s ease .5s 2;
                     animation         : Highlight 1s ease .5s 2;
 
-                    @-webkit-keyframes Highlight {
-                        0% {background-color : transparent}
-                        50% {background-color : $color-green}
-                        100% {background-color : transparent}
-                    }
-                    @-moz-keyframes Highlight {
-                        0% {background-color : transparent}
-                        50% {background-color : $color-green}
-                        100% {background-color : transparent}
-                    }
                     @keyframes Highlight {
                         0% {background-color : transparent}
                         50% {background-color : $color-green}
