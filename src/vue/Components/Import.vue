@@ -213,7 +213,7 @@
                             this.progress.status = 'Import failed';
                             Messages.alert(e.message, 'Import error');
                         })
-                        .then((errors) => {
+                        .then((errors = []) => {
                             this.importing = false;
                             if(this.progress.style !== 'error' && !errors.length) {
                                 this.progress.style = 'success';
@@ -260,6 +260,7 @@
                         complete      : (result) => { this.csvParseComplete(result);}
                     });
                 } catch(e) {
+                    console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'PapaParse'}], 'Network error');
                 }
             },
@@ -276,8 +277,8 @@
                             line  = result.errors[i].row + 1;
                         message.push(Localisation.translate('{error} in line {line}.', {error, line}));
                     }
-                    Messages.alert(['The file could not be parsed: {errors}', {errors: message.join(' ')}], 'Import error');
                     console.error(result.errors);
+                    Messages.alert(['The file could not be parsed: {errors}', {errors: message.join(' ')}], 'Import error');
                 }
             },
             registerProgress(processed, total, status) {

@@ -180,9 +180,10 @@ class HandbookRenderer {
      * @private
      */
     static _renderHeader(text, level) {
-        let id = text.trim().toLowerCase().replace(/[^\w]+/g, '-');
+        let id = text.trim().toLowerCase().replace(/[^\w]+/g, '-'),
+            [link] = HandbookRenderer._processAnchorLink(`#${id}`, '', '');
 
-        return `<h${level} id="help-${id}">${text}</h${level}>`;
+        return `<h${level} id="help-${id}"><a href="${link}" class="fa fa-link help-anchor" aria-hidden="true"></a>${text}</h${level}>`;
     }
 
     /**

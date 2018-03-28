@@ -25,9 +25,8 @@ use OCP\Security\ISecureRandom;
  */
 class TokenHelper {
 
-    const WEBUI_TOKEN      = 'webui_token';
-    const WEBUI_TOKEN_ID   = 'webui_token_id';
-    const WEBUI_TOKEN_HELP = 'https://git.mdns.eu/nextcloud/passwords/wikis/Users/F.A.Q';
+    const WEBUI_TOKEN    = 'webui_token';
+    const WEBUI_TOKEN_ID = 'webui_token_id';
 
     /**
      * @var null|string
@@ -191,7 +190,7 @@ class TokenHelper {
      * @throws \OCP\PreConditionNotMetException
      */
     protected function createWebUiToken(): string {
-        $name = $this->localisation->t('Passwords WebUI Access (see %s)', [self::WEBUI_TOKEN_HELP]);
+        $name = $this->localisation->t('Passwords WebUI Access (see Passwords F.A.Q)');
         list($token, $deviceToken) = $this->createToken($name);
         $this->config->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
         $this->config->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
