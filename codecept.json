@@ -1,0 +1,21 @@
+{
+  "tests": "tests/codecept/tests/*.js",
+  "timeout": 10000,
+  "output": "tests/codecept/output",
+  "helpers": {
+    "WebDriverIO": {
+      "url": "https://localhost",
+      "browser": "chrome",
+      "windowSize": "1280x905",
+      "restart": false,
+      "keepBrowserState": true,
+      "keepCookies": true,
+      "capabilities": {
+        "acceptInsecureCerts": true
+      }
+    }
+  },
+  "bootstrap": false,
+  "mocha": {},
+  "name": "passwords"
+}

@@ -1,53 +1,57 @@
 {
-    "name": "passwords",
-    "version": "2018.4.0",
-    "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
-    "private": true,
-    "scripts": {
-        "watch": "webpack --env.features --watch --progress",
-        "build": "webpack --env.production",
+    "name"           : "passwords",
+    "version"        : "2018.4.0",
+    "description"    : "Easy to use yet feature-rich and secure password manager for Nextcloud",
+    "private"        : true,
+    "scripts"        : {
+        "watch"        : "webpack --env.features --watch --progress",
+        "build"        : "webpack --env.production",
+        "handbook"     : "codeceptjs run handbook --steps",
         "build:nightly": "webpack --env.production --env.features"
     },
-    "dependencies": {
-        "xlsx": "^0.12.6"
+    "dependencies"   : {
     },
     "devDependencies": {
-        "copy-webpack-plugin": "^4.5.1",
-        "css-loader": "^0.28.11",
-        "extract-text-webpack-plugin": "^3.0.2",
-        "file-loader": "^1.1.11",
-        "font-awesome": "^4.7.0",
-        "jquery": "^3.3.1",
-        "marked": "^0.3.19",
-        "node-sass": "^4.8.3",
+        "codeceptjs"                        : "^1.1.7",
+        "copy-webpack-plugin"               : "^4.5.1",
+        "css-loader"                        : "^0.28.11",
+        "download"                          : "^6.2.5",
+        "extract-text-webpack-plugin"       : "^3.0.2",
+        "file-loader"                       : "^1.1.11",
+        "font-awesome"                      : "^4.7.0",
+        "jquery"                            : "^3.3.1",
+        "marked"                            : "^0.3.19",
+        "node-sass"                         : "^4.8.3",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
-        "papaparse": "^4.3.7",
-        "progress-bar-webpack-plugin": "^1.11.0",
-        "random-material-color": "^1.0.3",
-        "sass-loader": "^6.0.7",
-        "sass-resources-loader": "^1.3.3",
-        "simplemde": "^1.11.2",
-        "uglify-es": "3.3.9",
-        "uglifyjs-webpack-plugin": "^1.2.4",
-        "url-loader": "^0.6.2",
-        "vue": "^2.5.16",
-        "vue-loader": "^14.2.2",
-        "vue-qrcode-component": "^2.1.1",
-        "vue-router": "^3.0.1",
-        "vue-style-loader": "^4.1.0",
-        "vue-template-compiler": "^2.5.16",
-        "webpack": "^3.11.0"
+        "papaparse"                         : "^4.3.7",
+        "progress-bar-webpack-plugin"       : "^1.11.0",
+        "random-material-color"             : "^1.0.3",
+        "sass-loader"                       : "^6.0.7",
+        "sass-resources-loader"             : "^1.3.3",
+        "simplemde"                         : "^1.11.2",
+        "uglify-es"                         : "3.3.9",
+        "uglifyjs-webpack-plugin"           : "^1.2.4",
+        "url-loader"                        : "^0.6.2",
+        "vue"                               : "^2.5.16",
+        "vue-loader"                        : "^14.2.2",
+        "vue-qrcode-component"              : "^2.1.1",
+        "vue-router"                        : "^3.0.1",
+        "vue-style-loader"                  : "^4.1.0",
+        "xlsx"                              : "^0.12.6",
+        "vue-template-compiler"             : "^2.5.16",
+        "webdriverio"                       : "^4.12.0",
+        "webpack"                           : "^3.11.0"
     },
-    "repository": {
+    "repository"     : {
         "type": "git",
-        "url": "ssh://git@git.mdns.eu:2024/nextcloud/passwords.git"
+        "url" : "ssh://git@git.mdns.eu:2024/nextcloud/passwords.git"
     },
-    "keywords": [
+    "keywords"       : [
         "passwords",
         "nextcloud",
         "security"
     ],
-    "eslintConfig": {
+    "eslintConfig"   : {
         "brace-style": [
             "1tbs",
             "stroustrup",
@@ -55,14 +59,14 @@
                 "allowSingleLine": true
             }
         ],
-        "globals": {
-            "OC": true,
-            "OCA": true,
-            "window": true,
-            "oc_appswebroots": true,
+        "globals"    : {
+            "OC"                     : true,
+            "OCA"                    : true,
+            "window"                 : true,
+            "oc_appswebroots"        : true,
             "__webpack_public_path__": true
         }
     },
-    "author": "Marius Wieschollek",
-    "license": "SEE LICENSE IN LICENSE"
+    "author"         : "Marius Wieschollek",
+    "license"        : "SEE LICENSE IN LICENSE"
 }
