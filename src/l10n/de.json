@@ -8,7 +8,7 @@
         "Consult the %s to configure Nextcloud correctly."                                          : "Wenn du der Administrator bist, lies die %s um Nextcloud korrekt zu konfigurieren.",
         "If you do not have a HTTPS certificate, get one for free from %s."                         : "Solltest du kein HTTPS Zertifikat haben kannst du eines kostenlos bei %s erhalten.",
         "If you think your server has HTTPS enabled, you can try to %s with HTTPS."                 : "Wenn HTTPS auf dem Server aktiviert ist kannst du die Seite %s.",
-        "Passwords WebUI Access (see %s)"                                                           : "Passwords WebUi Zugriff (siehe %s)",
+        "Passwords WebUI Access (see Passwords F.A.Q)"                                              : "Passwords WebUi Zugriff (siehe Passwords F.A.Q)",
         "Open documentation"                                                                        : "Dokumentation öffnen",
         "Legacy Api Support"                                                                        : "Altes API",
         "Enable Legacy API"                                                                         : "Altes API aktivieren",

@@ -153,22 +153,37 @@
                 }
             }
 
-            h1 {
-                font-size   : 1.75rem;
+            h1, h2, h3, h4, h5, h6 {
                 font-weight : 500;
-                margin      : 1.75rem 0 0.5rem;
+                position    : relative;
+
+                a.help-anchor {
+                    vertical-align : middle;
+                    margin         : 0.25em 0 0 -1.1em;
+                    color          : transparent;
+                    transition     : color .15s ease-in-out;
+                    position       : absolute;
+                }
+
+                &:hover a.help-anchor {
+                    text-decoration : none;
+                    color           : $color-grey;
+                }
+            }
+
+            h1 {
+                font-size : 1.75rem;
+                margin    : 1.75rem 0 0.5rem;
             }
 
             h2 {
-                font-size   : 1.5rem;
-                font-weight : 500;
-                margin      : 1.5rem 0 0.25rem;
+                font-size : 1.5rem;
+                margin    : 1.5rem 0 0.25rem;
             }
 
             h3 {
-                font-size   : 1.25rem;
-                font-weight : 500;
-                margin      : 1.25rem 0 0.25rem;
+                font-size : 1.25rem;
+                margin    : 1.25rem 0 0.25rem;
             }
 
             h4 {
