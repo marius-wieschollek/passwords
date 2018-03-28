@@ -6,7 +6,7 @@
 
 #### Project Setup
 * Open a shell on your computer and navigate to the projects directory
-* Run `docker-compose up -d`
+* Run `npm run start`
 * Open your browser and type [http://localhost/](http://localhost/)
 * Allow the connection using a self signed https certificate
 * Log in with the username `admin` and the password `admin`
@@ -19,6 +19,8 @@
 A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/Sample%20Passwords.json) is available in the wiki and can be imported on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
 #### Helpful commands
+* `npm run start` - Start the docker server
+* `npm run stop` - Stop the docker server
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
 * `npm run build` - Create production build of JS/CSS files
 * `npm run build:nightly` - Create nightly build of JS/CSS files
