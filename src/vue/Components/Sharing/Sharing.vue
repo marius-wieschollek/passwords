@@ -6,7 +6,7 @@
         </ul>
         <ul class="user-search" :style="getDropDownStyle" v-if="matches.length !== 0">
             <li v-for="(name,uid) in matches" @click="shareWithUser(uid)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
-                <img :src="getAvatarUrl(uid)" :alt="name" class="avatar">{{name}}
+                <img :src="getAvatarUrl(uid)" :alt="name" class="avatar">&nbsp;{{name}}
             </li>
         </ul>
     </div>
@@ -39,15 +39,24 @@
                 nameMap    : [],
                 idMap      : [],
                 shares     : this.password.shares,
-                placeholder: Localisation.translate('Search user')
+                placeholder: Localisation.translate('Search user'),
+                interval: null,
             }
+        },
+
+        created() {
+            this.interval = setInterval(() => { this.refreshShares() }, 10000)
+        },
+
+        beforeDestroy() {
+            clearInterval(this.interval);
         },
 
         computed: {
             getDropDownStyle() {
                 return {
-                    color: ThemeManager.getColor(),
-                    border: '1px solid ' + ThemeManager.getColor(),
+                    color          : ThemeManager.getColor(),
+                    border         : '1px solid ' + ThemeManager.getColor(),
                     backgroundColor: ThemeManager.getContrastColor()
                 };
             }
@@ -80,6 +89,7 @@
                 API.createShare(share).then(
                     (d) => {
                         share.id = d.id;
+                        share.updatePending = true;
                         share.owner = {
                             id  : document.querySelector('head[data-user]').getAttribute('data-user'),
                             name: document.querySelector('head[data-user-displayname]').getAttribute('data-user-displayname')
@@ -100,6 +110,10 @@
                     $event.target.style.color = null;
                 }
             },
+            refreshShares() {
+                API.showPassword(this.password.id, 'shares')
+                    .then((d) => { this.shares = d.shares;});
+            },
             submitAction($event) {
                 if($event.keyCode === 13) {
                     let uid = this.search;
@@ -110,7 +124,7 @@
                     if(this.idMap.hasOwnProperty(uid)) {
                         this.addShare(uid);
                     } else {
-                        Messages.alert(['The user {uid} does not exist', {uid:uid}], 'Invalid user');
+                        Messages.alert(['The user {uid} does not exist', {uid: uid}], 'Invalid user');
                     }
                 }
             },
@@ -140,16 +154,10 @@
 
 <style lang="scss">
     .sharing-container {
-        position: relative;
+        position : relative;
 
         .share-add-user {
             width : 100%;
-        }
-
-        img.avatar {
-            border-radius : 16px;
-            margin-right  : 5px;
-            height        : 32px;
         }
 
         .shares {
@@ -157,16 +165,17 @@
         }
 
         .user-search {
-            position: absolute;
-            top: 37px;
-            width: 100%;
-            border-radius: 3px;
+            position      : absolute;
+            top           : 37px;
+            width         : 100%;
+            border-radius : 3px;
+            z-index       : 2;
 
             li {
-                line-height: 32px;
-                display: flex;
-                padding: 3px;
-                cursor:pointer;
+                line-height : 32px;
+                display     : flex;
+                padding     : 3px;
+                cursor      : pointer;
             }
         }
     }

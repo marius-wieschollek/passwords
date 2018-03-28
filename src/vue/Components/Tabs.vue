@@ -4,8 +4,8 @@
             <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" :style="getStyle" @click="setCurrent(name)" :say="tab"/>
         </ul>
         <div class="tab-contents">
-            <div v-for="(tab, name) in tabs" class="tab-content" :class="{ active: isCurrent(name) }">
-                <slot :name="name"/>
+            <div class="tab-content active">
+                <slot :name="tab"/>
             </div>
         </div>
     </div>
