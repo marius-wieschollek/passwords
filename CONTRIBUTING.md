@@ -16,7 +16,7 @@
 * You can now access the [app](http://localhost/index.php/apps/passwords)
 
 #### Sample Data
-A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/_files/Sample%20Passwords.json) is available in the wiki and can be imported on the [backups page](http://localhost/index.php/apps/passwords#/backup).
+A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/Sample%20Passwords.json) is available in the wiki and can be imported on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
