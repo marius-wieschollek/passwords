@@ -43,7 +43,7 @@
         "vue-template-compiler": "^2.5.16",
         "webdriverio": "^4.12.0",
         "webpack": "^3.11.0",
-        "xlsx": "^0.12.6"
+        "xlsx": "^0.12.7"
     },
     "repository": {
         "type": "git",

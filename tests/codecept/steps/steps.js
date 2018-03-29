@@ -40,8 +40,8 @@ module.exports = function() {
 
             /**
              *
-             * @param name    The file name
-             * @param wait    Wait for x seconds before capturing
+             * @param name  The file name
+             * @param wait  Wait for x seconds before capturing
              * @param full  Capture full page
              */
             captureWholePage: function(name, wait = 1, full = false) {
