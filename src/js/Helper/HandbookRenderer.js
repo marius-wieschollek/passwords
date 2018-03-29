@@ -24,7 +24,7 @@ class HandbookRenderer {
         if(this.pages.hasOwnProperty(page)) return this.pages[page];
 
         try {
-            let url = this.baseUrl + page,
+            let url      = this.baseUrl + page,
                 response = await fetch(new Request(`${url}.md`));
 
             if(response.ok) {
@@ -63,6 +63,13 @@ class HandbookRenderer {
      */
     static _extendMarkedLexer() {
         marked.InlineLexer.prototype.outputLink = function(cap, link) {
+            function escape(html) {
+                return html
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
+
             let href  = escape(link.href),
                 title = link.title ? escape(link.title):null;
 
@@ -77,15 +84,6 @@ class HandbookRenderer {
 
             this.isRenderingImage = true;
             return this.renderer.image(href, title, escape(cap[1]), this.isRenderingLink);
-
-            function escape(html, encode) {
-                return html
-                    .replace(!encode ? /&(?!#?\w+;)/g:/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#39;');
-            }
         };
     }
 
@@ -101,12 +99,12 @@ class HandbookRenderer {
      */
     _renderLink(href, title, text, wrap = false, pageUrl) {
         let target = '_blank',
-            url = new URL(href, pageUrl);
+            url    = new URL(href, pageUrl);
 
         if(url.href.indexOf(pageUrl) !== -1 && url.hash.length) {
             [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title, target);
         } else if(url.href.indexOf(this.baseUrl) !== -1) {
-            let mime = href.substr(url.href.lastIndexOf('.')+1);
+            let mime = href.substr(url.href.lastIndexOf('.') + 1);
             if(['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
                 [href, title, target] = this._processInternalLink(url, title, target);
             } else {
@@ -180,7 +178,7 @@ class HandbookRenderer {
      * @private
      */
     static _renderHeader(text, level) {
-        let id = text.trim().toLowerCase().replace(/[^\w]+/g, '-'),
+        let id     = text.trim().toLowerCase().replace(/[^\w]+/g, '-'),
             [link] = HandbookRenderer._processAnchorLink(`#${id}`, '', '');
 
         return `<h${level} id="help-${id}"><a href="${link}" class="fa fa-link help-anchor" aria-hidden="true"></a>${text}</h${level}>`;
@@ -205,7 +203,7 @@ class HandbookRenderer {
         let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title}),
             source  = `<img src="${href}" alt="${text}" class="md-image"><span class="md-image-caption">${caption}</span>`;
 
-        return nowrap ? source:this._wrapImage(href, title, source)
+        return nowrap ? source:this._wrapImage(href, title, source);
     }
 
     /**

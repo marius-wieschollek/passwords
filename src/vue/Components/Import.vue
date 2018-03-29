@@ -4,7 +4,7 @@
             <translate tag="h1" say="Choose Format"/>
 
             <div class="step-content">
-                <select v-model="source" :disabled="importing">
+                <select v-model="source" id="passwords-import-source" :disabled="importing">
                     <translate tag="option" value="json" say="Database Backup"/>
                     <translate tag="option" value="pwdCsv" say="Passwords CSV"/>
                     <translate tag="option" value="fldCsv" say="Folder CSV"/>
@@ -112,7 +112,7 @@
                         <div class="csv-mapping">
                             <div v-for="(value, id) in csvSampleData" class="csv-mapping-field" :key="id" :data-value="value" :data-id="id">
                                 <div class="value">{{ value }}</div>
-                                <select @change="csvFieldMapping($event, id)" :disabled="importing">
+                                <select @change="csvFieldMapping($event, id)" :id="`passwords-mapping-${id}`" :disabled="importing">
                                     <translate tag="option" value="null" say="Ignore"/>
                                     <translate tag="option" v-for="(label, option) in csvFieldOptions(id)" :value="option" :say="label" :key="option"/>
                                 </select>
@@ -373,7 +373,7 @@
                         this.options.profile = 'tags';
                         break;
                     case 'csv':
-                        this.options = {mode: 1, skipShared: true, firstLine: 0, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
+                        this.options = {mode: 1, skipShared: true, firstLine: 1, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
                         break;
                 }
 

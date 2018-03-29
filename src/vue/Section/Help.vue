@@ -61,7 +61,7 @@
                     current = '';
 
                 for(let i = 0; i < path.length; i++) {
-                    current += `/${path[i]}`;
+                    current += path[i];
                     items.push(
                         {path: {name: 'Help', params: {page: current}}, label: Localisation.translate(path[i].replace(/-{1}/g, ' '))}
                     );
@@ -101,7 +101,7 @@
                 if($el) {
                     document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight;
                     $el.classList.add('highlight');
-                    $el.addEventListener('animationend', () => {$el.classList.remove('highlight')})
+                    $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
                 }
             }
         },
@@ -156,10 +156,10 @@
             }
 
             h1, h2, h3, h4, h5, h6 {
-                font-weight : 500;
-                position    : relative;
-                margin      : 0.85rem -3px 0;
-                border-radius     : 2px;
+                font-weight   : 500;
+                position      : relative;
+                margin        : 0.85rem -3px 0;
+                border-radius : 2px;
 
                 a.help-anchor {
                     vertical-align : middle;
@@ -175,7 +175,7 @@
                 }
 
                 &.highlight {
-                    animation         : Highlight 1s ease .5s 2;
+                    animation : Highlight 1s ease .5s 2;
 
                     @keyframes Highlight {
                         0% {background-color : transparent}

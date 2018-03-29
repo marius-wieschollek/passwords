@@ -3,7 +3,7 @@
         <div class="step-1">
             <translate tag="h1" say="Choose Format"/>
             <div class="step-content">
-                <select v-model="format" :disabled="exporting">
+                <select v-model="format" id="passwords-export-target" :disabled="exporting">
                     <translate tag="option" value="json" say="Database Backup"/>
                     <translate tag="option" value="csv" say="Predefined CSV"/>
                     <translate tag="option" value="xlsx" say="Microsoft Excel"/>
@@ -62,7 +62,7 @@
                 <translate tag="h3" say="CSV Field Mapping"/>
                 <div class="csv-mapping">
                     <div v-for="id in csvMappedFieldsSize" class="csv-mapping-field" :key="id">
-                        <select @change="csvFieldMapping($event, id)" :disabled="exporting">
+                        <select @change="csvFieldMapping($event, id)" :id="`passwords-mapping-${id}`" :disabled="exporting">
                             <translate tag="option" say="Please choose" v-if="id === csvMappedFieldsSize"/>
                             <translate tag="option" v-for="option in csvFieldOptions" :value="option" :say="option.capitalize()" :key="option"/>
                         </select>

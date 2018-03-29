@@ -8,6 +8,7 @@
         "stop": "docker-compose stop",
         "watch": "webpack --env.features --watch --progress",
         "build": "webpack --env.production",
+        "cron": "docker exec -u www-data passwords-php php /var/www/html/cron.php",
         "handbook": "codeceptjs run handbook --steps",
         "selenium": "docker run --net=host selenium/standalone-chrome",
         "build:nightly": "webpack --env.production --env.features"

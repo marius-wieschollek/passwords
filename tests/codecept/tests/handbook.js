@@ -21,7 +21,7 @@ Scenario('Reset the Account', (I) => {
     I.fillField('#pw-field-password', 'admin');
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
 
-    I.waitForInvisible('.passwords-form', 2);
+    I.waitForInvisible('.passwords-form', 5);
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.wait(15);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
@@ -29,13 +29,13 @@ Scenario('Reset the Account', (I) => {
 });
 
 Scenario('Import the sample database', async (I) => {
-    await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/Sample%20Passwords.json', 'tests/codecept/data/');
+    await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json', 'tests/codecept/data/');
 
     I.amOnPage('/index.php/apps/passwords/#/backup/import');
     I.refreshPage();
     I.waitForElement('div.import-container', 10);
     I.click('#app-settings li.nav-icon-more');
-    I.attachFile('#passwords-import-file', 'tests/codecept/data/Sample Passwords.json');
+    I.attachFile('#passwords-import-file', 'tests/codecept/data/SamplePasswords.json');
     I.waitForElement('#passwords-import-execute');
     I.captureWholePage('import-section');
 
@@ -125,11 +125,36 @@ Scenario('Show Export Section', async (I) => {
     I.click('#app-settings li.nav-icon-more');
     I.captureWholePage('export-section', .25);
 
-    I.selectOption('.step-1 select', 'customCsv');
+    I.selectOption('#passwords-export-target', 'customCsv');
     I.waitForElement('.csv-mapping');
-    I.selectOption('.csv-mapping div:nth-child(1) > select', 'password');
+    I.selectOption('#passwords-mapping-1', 'label');
+    I.selectOption('#passwords-mapping-2', 'username');
+    I.selectOption('#passwords-mapping-3', 'password');
     I.waitForElement('.csv-mapping div:nth-child(2)');
-    I.captureElement('export-custom-csv', '.step-2', 0, 420);
+    I.captureElement('export-custom-csv', '.step-2', 0, 825);
+});
+
+Scenario('Show Import Section', async (I) => {
+    await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/PasswordList.csv', 'tests/codecept/data/');
+
+    I.amOnPage('/index.php/apps/passwords/#/backup/import');
+    I.refreshPage();
+    I.waitForElement('div.import-container', 10);
+    I.click('#app-settings li.nav-icon-more');
+
+    I.selectOption('#passwords-import-source', 'csv');
+    I.waitForElement('#passwords-import-csv-delimiter', 10);
+    I.attachFile('#passwords-import-file', 'tests/codecept/data/PasswordList.csv');
+    I.waitForElement('#passwords-import-csv-skip', 10);
+    I.selectOption('#passwords-mapping-0', 'label');
+    I.selectOption('#passwords-mapping-1', 'username');
+    I.selectOption('#passwords-mapping-2', 'password');
+    I.selectOption('#passwords-mapping-3', 'tagLabels');
+    I.selectOption('#passwords-mapping-4', 'url');
+    I.selectOption('#passwords-mapping-5', 'notes');
+    await I.captureElement('import-custom-csv-options', '.step-2', 0, 420);
+    await I.captureElement('import-custom-csv-mapping', '.step-3');
+
 });
 
 Scenario('Show Handbook Section', (I) => {
