@@ -122,7 +122,7 @@
         },
 
         created() {
-            if(process.env.NIGHTLY_FEATURES) this.preventPasswordFill(500);
+            if(this.nightly) this.preventPasswordFill(500);
         },
 
         methods: {

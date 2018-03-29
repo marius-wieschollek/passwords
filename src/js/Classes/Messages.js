@@ -103,7 +103,7 @@ class Messages {
                 type  = field.type ? field.type:'text',
                 label = Messages._translate(field.label ? field.label:name.capitalize());
 
-            html += `<label>${label}</label><input type="${type}" value="${value}" name="${name}">`;
+            html += `<label>${label}</label><input type="${type}" value="${value}" name="${name}" id="pw-field-${name}">`;
         }
 
         if(message.length !== 0) message = `<div class="message">${Messages._translate(message)}</div>`;

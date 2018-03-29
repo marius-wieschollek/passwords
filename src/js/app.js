@@ -54,8 +54,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         await initApi();
         SettingsManager.init();
         initApp();
-        if(process.env.NIGHTLY_FEATURES) SearchManager.init();
-        if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
+        SearchManager.init();
+        //if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
     }
 
     if(location.protocol !== 'https:') {

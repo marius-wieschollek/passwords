@@ -210,6 +210,8 @@ class ServiceApiController extends AbstractApiController {
         $time       = $this->config->getUserValue('reset_time', 0);
         $difference = time() - $timeout - $time;
         if($difference > 0 && $difference < 300) {
+            $this->config->deleteUserValue('reset_time');
+            $this->config->deleteUserValue('reset_timeout');
             $this->deleteUserDataHelper->deleteUserData();
 
             return $this->createJsonResponse(['status' => 'ok'], 200);

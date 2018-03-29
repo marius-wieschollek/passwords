@@ -12,25 +12,52 @@ Scenario('Log into Nextcloud', (I) => {
     I.click('#submit');
 });
 
+Scenario('Reset the Account', (I) => {
+    I.amOnPage('/index.php/apps/passwords/#/settings');
+    I.waitForElement('#danger-purge', 10);
+    I.click('#danger-purge');
+
+    I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
+    I.fillField('#pw-field-password', 'admin');
+    I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
+
+    I.waitForInvisible('.passwords-form', 2);
+    I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
+    I.wait(15);
+    I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
+    I.waitUrlEquals('/index.php/apps/passwords/#/', 10);
+});
+
 Scenario('Import the sample database', async (I) => {
-    let data = await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/Sample%20Passwords.json', 'tests/codecept/data/');
+    await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/Sample%20Passwords.json', 'tests/codecept/data/');
 
     I.amOnPage('/index.php/apps/passwords/#/backup/import');
-    I.click('li.nav-icon-more');
+    I.refreshPage();
     I.waitForElement('div.import-container', 10);
+    I.click('#app-settings li.nav-icon-more');
     I.attachFile('#passwords-import-file', 'tests/codecept/data/Sample Passwords.json');
     I.waitForElement('#passwords-import-execute');
     ImakeScreenShot(I, 'import-section');
-
 
     I.click('#passwords-import-execute');
     I.waitForElement('progress.success', 60);
 });
 
-Scenario('Show All Section', (I) => {
+Scenario('Show Password Details', (I) => {
     I.amOnPage('/index.php/apps/passwords/');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'main-section', 3.5);
+    I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
+    I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(1)');
+    I.waitForElement('div.item-details', 10);
+    I.waitForInvisible('.image-container .image.loading-hidden', 10);
+
+    ImakeScreenShot(I, 'password-details', 4);
+});
+
+Scenario('Show Main Section', (I) => {
+    I.amOnPage('/index.php/apps/passwords/');
+    I.waitForElement('div.row', 10);
+    ImakeScreenShot(I, 'main-section', 3);
 });
 
 Scenario('Show Folder Section', (I) => {
@@ -73,15 +100,25 @@ Scenario('Show Security Section', (I) => {
 
 Scenario('Show Settings Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/settings');
-    I.click('li.nav-icon-more');
+    I.refreshPage();
     I.waitForElement('section.security', 10);
+    I.click('#app-settings li.nav-icon-more');
     ImakeScreenShot(I, 'settings-section', .25);
+});
+
+Scenario('Show Export Section', async (I) => {
+    I.amOnPage('/index.php/apps/passwords/#/backup/export');
+    I.refreshPage();
+    I.waitForElement('#passwords-export-execute');
+    I.click('#app-settings li.nav-icon-more');
+    ImakeScreenShot(I, 'export-section', .25);
 });
 
 Scenario('Show Handbook Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/help');
-    I.click('li.nav-icon-more');
+    I.refreshPage();
     I.waitForElement('h1#help-top', 10);
+    I.click('#app-settings li.nav-icon-more');
     ImakeScreenShot(I, 'handbook-section', .25);
 });
 
@@ -114,6 +151,6 @@ Scenario('Show Trash Section', (I) => {
 
 function ImakeScreenShot(I, name, wait = 1) {
     I.moveCursorTo('#nextcloud');
-    I.wait(wait);
+    if(wait) I.wait(wait);
     I.saveScreenshot(`${name}.png`);
 }

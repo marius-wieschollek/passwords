@@ -11,7 +11,7 @@
                     <translate tag="option" value="tagCsv" say="Tags CSV"/>
                     <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
-                    <translate tag="option" value="pmanCsv" say="Passman CSV" v-if="nightly"/>
+                    <translate tag="option" value="pmanCsv" say="Passman CSV"/>
                     <translate tag="option" value="keepass" say="KeePass CSV" v-if="nightly"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
@@ -52,15 +52,15 @@
                         <translate tag="option" value="'" say="Single Quote"/>
                     </select>
                     <br>
-                    <translate tag="label" for="passwords-import-csv-escape" say="Escape Character" v-if="nightly"/>
-                    <select id="passwords-import-csv-escape" v-model="csv.escapeChar" :disabled="importing" v-if="nightly">
+                    <translate tag="label" for="passwords-import-csv-escape" say="Escape Character"/>
+                    <select id="passwords-import-csv-escape" v-model="csv.escapeChar" :disabled="importing">
                         <translate tag="option" value='"' say="Quote"/>
                         <translate tag="option" value="'" say="Single Quote"/>
                         <translate tag="option" value="\" say="Backslash"/>
                     </select>
                     <br>
-                    <input type="checkbox" id="passwords-import-csv-badQuotes" v-model="csv.badQuotes" :disabled="importing" v-if="nightly"/>
-                    <translate tag="label" for="passwords-import-csv-badQuotes" say="Detect unescaped quotes" v-if="nightly"/>
+                    <input type="checkbox" id="passwords-import-csv-badQuotes" v-model="csv.badQuotes" :disabled="importing"/>
+                    <translate tag="label" for="passwords-import-csv-badQuotes" say="Detect unescaped quotes"/>
                     <br><br>
                 </div>
                 <input type="file" :accept="mime" @change="processFile($event)" id="passwords-import-file" :disabled="importing">
@@ -194,9 +194,7 @@
 
         methods: {
             preventPasswordFill(t = 300) {
-                if(process.env.NIGHTLY_FEATURES) {
-                    setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
-                }
+                if(this.nightly) setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
             },
             async importDb() {
                 this.progress.style = '';

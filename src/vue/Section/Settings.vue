@@ -95,7 +95,7 @@
                 <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
                 <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
             </section>
-            <section class="danger" v-if="nightly">
+            <section class="danger">
                 <translate tag="h1" say="Danger Zone"/>
 
                 <translate tag="label" for="danger-reset" say="Reset all settings"/>
