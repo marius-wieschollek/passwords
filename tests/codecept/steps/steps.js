@@ -1,4 +1,4 @@
-const {crop} = require('easyimage');
+const {crop, thumbnail} = require('easyimage');
 
 function getElementPosition(el) {
     document.querySelector(el).scrollIntoView(false);
@@ -27,33 +27,46 @@ module.exports = function() {
                 if(wait) this.wait(wait);
                 let data  = await this.executeScript(getElementPosition, element),
                     stats = JSON.parse(data);
-                await this.captureWholePage(file, 0, true);
+                await this.captureWholePage(file, 0, true, false);
 
                 if(width === null || width > stats.width) width = stats.width;
                 if(height === null || height > stats.height) height = stats.height;
 
                 await crop(
-                        {
-                            src       : `tests/codecept/output/${file}.png`,
-                            dst       : `tests/codecept/output/${file}.png`,
-                            y         : stats.top,
-                            x         : stats.left,
-                            cropWidth : width,
-                            cropHeight: height
-                        }
-                    );
+                    {
+                        src       : `tests/codecept/output/${file}.png`,
+                        dst       : `tests/codecept/output/${file}.png`,
+                        y         : stats.top,
+                        x         : stats.left,
+                        cropWidth : width,
+                        cropHeight: height
+                    }
+                );
             },
 
             /**
              *
-             * @param name  The file name
-             * @param wait  Wait for x seconds before capturing
-             * @param full  Capture full page
+             * @param file     The file name
+             * @param wait     Wait for x seconds before capturing
+             * @param full     Capture full page
+             * @param preview  Create a preview image
              */
-            async captureWholePage(name, wait = 1, full = false) {
+            async captureWholePage(file, wait = 1, full = false, preview = true) {
                 this.moveCursorTo('#nextcloud');
                 if(wait) this.wait(wait);
-                await this.saveScreenshot(`${name}.png`, full);
+                await this.saveScreenshot(`${file}.png`, full);
+
+                if(preview) {
+                    await thumbnail(
+                        {
+                            src    : `tests/codecept/output/${file}.png`,
+                            dst    : `tests/codecept/output/_previews/${file}.jpg`,
+                            quality: 85,
+                            width  : 320,
+                            height : 200
+                        }
+                    );
+                }
             }
         }
     );

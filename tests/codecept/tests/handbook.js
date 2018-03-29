@@ -131,7 +131,7 @@ Scenario('Show Export Section', async (I) => {
     I.selectOption('#passwords-mapping-2', 'username');
     I.selectOption('#passwords-mapping-3', 'password');
     I.waitForElement('.csv-mapping div:nth-child(2)');
-    I.captureElement('export-custom-csv', '.step-2', 0, 825);
+    await I.captureElement('export-custom-csv', '.step-2', 0, 825);
 });
 
 Scenario('Show Import Section', async (I) => {
