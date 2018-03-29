@@ -37,7 +37,7 @@ Scenario('Import the sample database', async (I) => {
     I.click('#app-settings li.nav-icon-more');
     I.attachFile('#passwords-import-file', 'tests/codecept/data/Sample Passwords.json');
     I.waitForElement('#passwords-import-execute');
-    ImakeScreenShot(I, 'import-section');
+    I.captureWholePage('import-section');
 
     I.click('#passwords-import-execute');
     I.waitForElement('progress.success', 60);
@@ -51,13 +51,25 @@ Scenario('Show Password Details', (I) => {
     I.waitForElement('div.item-details', 10);
     I.waitForInvisible('.image-container .image.loading-hidden', 10);
 
-    ImakeScreenShot(I, 'password-details', 4);
+    I.captureWholePage('password-details', 4);
+});
+
+Scenario('Show Create Password Dialog', (I) => {
+    I.amOnPage('/index.php/apps/passwords/');
+
+    I.waitForElement('#controls > div.breadcrumb > div.actions.creatable > span', 10);
+    I.click('#controls > div.breadcrumb > div.actions.creatable > span');
+    I.waitForVisible('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(3)', 20);
+    I.click('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(3)');
+    I.waitForElement('#passwords-create-new', 10);
+
+    I.captureWholePage('password-create', 4);
 });
 
 Scenario('Show Main Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'main-section', 3);
+    I.captureWholePage('main-section', 3);
 });
 
 Scenario('Show Folder Section', (I) => {
@@ -65,37 +77,37 @@ Scenario('Show Folder Section', (I) => {
     I.waitForElement('div.title[title=Work]', 10);
     I.click('div.title[title=Work]');
     I.waitForElement('div.title[title=Development]', 10);
-    ImakeScreenShot(I, 'folder-section');
+    I.captureWholePage('folder-section');
 });
 
 Scenario('Show Recent Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/recent');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'recent-section');
+    I.captureWholePage('recent-section');
 });
 
 Scenario('Show Favourites Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/favourites');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'favourites-section');
+    I.captureWholePage('favourites-section');
 });
 
 Scenario('Show Tags Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/tags');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'tags-section', 0);
+    I.captureWholePage('tags-section', 0);
 });
 
 Scenario('Show Shared Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/shared');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'shared-section', 0);
+    I.captureWholePage('shared-section', 0);
 });
 
 Scenario('Show Security Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/security');
     I.waitForElement('div.row', 10);
-    ImakeScreenShot(I, 'security-section', 0);
+    I.captureWholePage('security-section', 0);
 });
 
 Scenario('Show Settings Section', (I) => {
@@ -103,7 +115,7 @@ Scenario('Show Settings Section', (I) => {
     I.refreshPage();
     I.waitForElement('section.security', 10);
     I.click('#app-settings li.nav-icon-more');
-    ImakeScreenShot(I, 'settings-section', .25);
+    I.captureWholePage('settings-section', .25);
 });
 
 Scenario('Show Export Section', async (I) => {
@@ -111,7 +123,13 @@ Scenario('Show Export Section', async (I) => {
     I.refreshPage();
     I.waitForElement('#passwords-export-execute');
     I.click('#app-settings li.nav-icon-more');
-    ImakeScreenShot(I, 'export-section', .25);
+    I.captureWholePage('export-section', .25);
+
+    I.selectOption('.step-1 select', 'customCsv');
+    I.waitForElement('.csv-mapping');
+    I.selectOption('.csv-mapping div:nth-child(1) > select', 'password');
+    I.waitForElement('.csv-mapping div:nth-child(2)');
+    I.captureElement('export-custom-csv', '.step-2', 0, 420);
 });
 
 Scenario('Show Handbook Section', (I) => {
@@ -119,7 +137,7 @@ Scenario('Show Handbook Section', (I) => {
     I.refreshPage();
     I.waitForElement('h1#help-top', 10);
     I.click('#app-settings li.nav-icon-more');
-    ImakeScreenShot(I, 'handbook-section', .25);
+    I.captureWholePage('handbook-section', .25);
 });
 
 Scenario('Show Trash Section', (I) => {
@@ -140,7 +158,7 @@ Scenario('Show Trash Section', (I) => {
 
     I.amOnPage('/index.php/apps/passwords/#/trash');
     I.waitForInvisible('#notification .row', 20);
-    ImakeScreenShot(I, 'trash-section', 0);
+    I.captureWholePage('trash-section', 0);
 
     I.click('#controls > div.breadcrumb > div.actions.creatable > span');
     I.waitForVisible('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(4)', 20);
@@ -148,9 +166,3 @@ Scenario('Show Trash Section', (I) => {
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
 });
-
-function ImakeScreenShot(I, name, wait = 1) {
-    I.moveCursorTo('#nextcloud');
-    if(wait) I.wait(wait);
-    I.saveScreenshot(`${name}.png`);
-}

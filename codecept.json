@@ -15,6 +15,9 @@
       }
     }
   },
+  "include": {
+    "I": "./tests/codecept/steps/steps.js"
+  },
   "bootstrap": false,
   "mocha": {},
   "name": "passwords"
