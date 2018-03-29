@@ -87,7 +87,7 @@ class ProcessDeletedEntities extends TimedJob {
     /**
      * @var array
      */
-    protected $userDeleteTime = [];
+    protected $userExists = [];
 
     /**
      * @var int
@@ -125,7 +125,6 @@ class ProcessDeletedEntities extends TimedJob {
         // Run always
         $this->setInterval(1);
 
-        $this->time                       = time();
         $this->logger                     = $logger;
         $this->config                     = $config;
         $this->tagService                 = $tagService;
@@ -143,9 +142,10 @@ class ProcessDeletedEntities extends TimedJob {
      * @param $argument
      */
     protected function run($argument): void {
-        $timeout = $this->config->getSystemValue('entity/purge/timeout', -1);
+        $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
         if($timeout < 0) return;
 
+        $this->time = time() - $timeout;
         $objects = $this->deleteObjects($this->tagService);
         $objects += $this->deleteObjects($this->shareService);
         $objects += $this->deleteObjects($this->folderService);
@@ -170,8 +170,7 @@ class ProcessDeletedEntities extends TimedJob {
 
             $counter = 0;
             foreach($objects as $object) {
-                $userDeleteTime = $this->getUserDeleteTime($object->getUserId());
-                if($userDeleteTime > $object->getUpdated()) {
+                if($this->time > $object->getUpdated() || !$this->userExists($object->getUserId())) {
                     $counter++;
                     $service->destroy($object);
                 }
@@ -188,24 +187,12 @@ class ProcessDeletedEntities extends TimedJob {
     /**
      * @param string $userId
      *
-     * @return int
+     * @return bool
      */
-    protected function getUserDeleteTime(string $userId): int {
-        if(isset($this->userDeleteTime[ $userId ])) {
-            return $this->userDeleteTime[ $userId ];
+    protected function userExists(string $userId): bool {
+        if(!isset($this->userExists[ $userId ])) {
+            $this->userExists[ $userId ] = $this->userManager->userExists($userId);
         }
-
-        $deleteTime = $this->time;
-        if($this->userManager->userExists($userId)) {
-            $threshold  = $this->config->getSystemValue('entity/purge/timeout', -1);
-            if($threshold >= 0) {
-                $deleteTime -= $threshold;
-            } else {
-                $deleteTime = 0;
-            }
-        }
-        $this->userDeleteTime[ $userId ] = $deleteTime;
-
-        return $deleteTime;
+        return $this->userExists[ $userId ];
     }
 }

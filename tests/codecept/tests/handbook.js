@@ -25,7 +25,7 @@ Scenario('Reset the Account', (I) => {
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.wait(15);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
-    I.waitUrlEquals('/index.php/apps/passwords/#/', 10);
+    I.waitUrlEquals('/index.php/apps/passwords/#/', 20);
 });
 
 Scenario('Import the sample database', async (I) => {

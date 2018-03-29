@@ -269,7 +269,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             usort($object['shares'], function($a, $b) {return $a['receiver'] > $b['receiver'] ? 1:-1;});
         }
 
-        if($object['share']) {
+        if(isset($object['share']) && $object['share']) {
             $share           = $this->shareService->findByUuid($object['share']);
             $object['share'] = $objectHelper->getApiObject($share);
         }
