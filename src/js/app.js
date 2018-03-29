@@ -6,7 +6,6 @@ import SectionAll from '@vue/Section/All';
 import Messages from '@js/Classes/Messages';
 import SearchManager from '@/js/Manager/SearchManager';
 import SettingsManager from '@/js/Manager/SettingsManager';
-import EncryptionTestHelper from '@/js/Helper/EncryptionTestHelper';
 
 /**
  * Set global webpack path
@@ -15,7 +14,7 @@ import EncryptionTestHelper from '@/js/Helper/EncryptionTestHelper';
  */
 __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
-(function () {
+(function() {
     let isLoaded     = false,
         loadInterval = null;
 
@@ -55,7 +54,6 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         SettingsManager.init();
         initApp();
         SearchManager.init();
-        //if(process.env.NIGHTLY_FEATURES) EncryptionTestHelper.initTests();
     }
 
     if(location.protocol !== 'https:') {
