@@ -55,6 +55,24 @@
         "nextcloud",
         "security"
     ],
+    "eslintConfig"   : {
+        "brace-style": [
+            "1tbs",
+            "stroustrup",
+            {
+                "allowSingleLine": true
+            }
+        ],
+        "globals"    : {
+            "OC"                     : true,
+            "OCA"                    : true,
+            "actor"                 : true,
+            "window"                 : true,
+            "Scenario"                 : true,
+            "oc_appswebroots"        : true,
+            "__webpack_public_path__": true
+        }
+    },
     "author": "Marius Wieschollek",
     "license": "SEE LICENSE IN LICENSE"
 }

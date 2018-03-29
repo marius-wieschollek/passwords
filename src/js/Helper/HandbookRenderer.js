@@ -102,11 +102,11 @@ class HandbookRenderer {
             url    = new URL(href, pageUrl);
 
         if(url.href.indexOf(pageUrl) !== -1 && url.hash.length) {
-            [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title, target);
+            [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title);
         } else if(url.href.indexOf(this.baseUrl) !== -1) {
             let mime = href.substr(url.href.lastIndexOf('.') + 1);
             if(['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
-                [href, title, target] = this._processInternalLink(url, title, target);
+                [href, title, target] = this._processInternalLink(url, title);
             } else {
                 href = url.href;
             }
@@ -116,20 +116,19 @@ class HandbookRenderer {
 
         if(title === null) title = Localisation.translate('Go to {href}', {href});
 
-        return wrap
-            ? this._wrapImage(href, title, text)
-            :`<a href="${href}" title="${title}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
+        return wrap ?
+               this._wrapImage(href, title, text) :
+               `<a href="${href}" title="${title}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
     }
 
     /**
      *
      * @param href
      * @param title
-     * @param target
      * @returns {*[]}
      * @private
      */
-    static _processAnchorLink(href, title, target) {
+    static _processAnchorLink(href, title) {
         let hash  = HandbookRenderer._getLinkAnchor(href),
             route = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash});
         if(title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1).replace(/-{1}/g, ' ')});
@@ -141,11 +140,10 @@ class HandbookRenderer {
      *
      * @param url
      * @param title
-     * @param target
      * @returns {*[]}
      * @private
      */
-    _processInternalLink(url, title, target) {
+    _processInternalLink(url, title) {
         let hash = undefined,
             href = url.href.substr(this.baseUrl.length);
         if(url.hash.length) {
