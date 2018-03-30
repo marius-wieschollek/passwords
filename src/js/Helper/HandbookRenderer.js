@@ -13,6 +13,7 @@ class HandbookRenderer {
         this.baseUrl = SettingsManager.get('server.manual.url');
         this.pages = [];
         this.imageCounter = 0;
+        this.imageCaption = null;
     }
 
     /**
@@ -101,24 +102,21 @@ class HandbookRenderer {
         let target = '_blank',
             url    = new URL(href, pageUrl);
 
+        href = url.href;
         if(url.href.indexOf(pageUrl) !== -1 && url.hash.length) {
             [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title);
         } else if(url.href.indexOf(this.baseUrl) !== -1) {
-            let mime = href.substr(url.href.lastIndexOf('.') + 1);
+            let mime = url.href.substr(url.href.lastIndexOf('.') + 1);
             if(['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
                 [href, title, target] = this._processInternalLink(url, title);
-            } else {
-                href = url.href;
             }
-        } else {
-            href = url.href;
         }
 
-        if(title === null) title = Localisation.translate('Go to {href}', {href});
+        if(title === null) title = wrap ? this.imageCaption:Localisation.translate('Go to {href}', {href});
 
         return wrap ?
                this._wrapImage(href, title, text) :
-               `<a href="${href}" title="${title}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
+               `<a href="${href}" title="${decodeURI(title)}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
     }
 
     /**
@@ -199,9 +197,10 @@ class HandbookRenderer {
         if(title === null) title = text;
 
         let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title}),
-            source  = `<img src="${href}" alt="${text}" class="md-image"><span class="md-image-caption">${caption}</span>`;
+            source  = `<img src="${href}" alt="${decodeURI(text)}" class="md-image"><span class="md-image-caption">${caption}</span>`;
+        this.imageCaption = caption;
 
-        return nowrap ? source:this._wrapImage(href, title, source);
+        return nowrap ? source:this._wrapImage(href, caption, source);
     }
 
     /**
@@ -213,8 +212,8 @@ class HandbookRenderer {
      * @private
      */
     _wrapImage(href, title, source) {
-        return `<span class="md-image-container" id="help-image-${this.imageCounter}">
-                <a class="md-image-link" title="${title}" href="${href}" target="_blank">
+        return `<span class="md-image-container" id="help-image-${this.imageCounter}" data-image-id="${this.imageCounter}">
+                <a class="md-image-link" title="${decodeURI(title)}" href="${href}" target="_blank">
                 ${source}</a></span>`;
     }
 }
