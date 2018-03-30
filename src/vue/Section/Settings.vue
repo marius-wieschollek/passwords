@@ -107,6 +107,7 @@
                 <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
             </section>
         </div>
+        <div id="settings-reset" class="loading" v-if="locked"></div>
     </div>
 </template>
 
@@ -129,7 +130,8 @@
             return {
                 settings: SettingsManager.getAll(),
                 nightly : process.env.NIGHTLY_FEATURES,
-                noSave  : false
+                noSave  : false,
+                locked  : false
             };
         },
         methods   : {
@@ -153,11 +155,13 @@
                         .then(() => { this.resetSettings(); });
             },
             async resetSettings() {
+                this.locked = true;
                 this.noSave = true;
                 for(let i in this.settings) {
                     if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsManager.reset(i);
                 }
                 this.noSave = false;
+                this.locked = false;
             },
             async resetUserAccount() {
                 try {
@@ -175,11 +179,13 @@
             },
             async performUserAccountReset(password) {
                 try {
+                    this.locked = true;
                     let response = await API.resetUserAccount(password);
 
                     if(response.status === 'accepted') {
+                        this.locked = false;
                         Messages.confirm(['You have to wait {seconds} seconds before you can reset your account.', {seconds: response.wait}], 'Account reset requested')
-                            .then(() => { this.performUserAccountReset(password); })
+                                .then(() => { this.performUserAccountReset(password); });
                     } else if(response.status === 'ok') {
                         window.localStorage.removeItem('passwords.settings');
                         window.localStorage.removeItem('pwFolderIcon');
@@ -312,5 +318,16 @@
                 padding   : 0 0 4em 0;
             }
         }
+    }
+
+    #settings-reset {
+        position         : fixed;
+        top              : 0;
+        right            : 0;
+        bottom           : 0;
+        left             : 0;
+        background-color : transparentize($color-black, 0.9);
+        cursor           : wait;
+        z-index: 2000;
     }
 </style>

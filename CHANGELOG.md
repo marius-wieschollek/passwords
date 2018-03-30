@@ -8,8 +8,7 @@
 * Improved import and export
 * Improved password generator
 * Improved mobile style
-
-#### 2018.3.1 - Bugfix Release
+* Improved loading times
 * Fixed folder view in trash
 * Fixed mime type detection
 * Fixed double call when opening folders

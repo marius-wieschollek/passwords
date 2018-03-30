@@ -247,7 +247,7 @@
                 this.file = file;
 
                 try {
-                    let Papa      = await import(/* webpackChunkName: "PapaParse" */ 'papaparse'),
+                    let Papa      = await import(/* webpackChunkName: "PapaParse" */ '@js/Helper/PapaParse'),
                         delimiter = this.csv.delimiter;
                     Papa.parse(file, {
                         delimiter     : delimiter === 'auto' ? '':delimiter,

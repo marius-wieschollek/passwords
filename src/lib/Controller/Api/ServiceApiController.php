@@ -251,8 +251,8 @@ class ServiceApiController extends AbstractApiController {
         );
 
         $expires = new \DateTime();
-        $expires->setTimestamp(time() + 259200);
-        $response->addHeader('Cache-Control', 'public, immutable, max-age=259200')
+        $expires->setTimestamp(time() + 604800);
+        $response->addHeader('Cache-Control', 'public, immutable, max-age=604800')
                  ->addHeader('Expires', $expires->format(\DateTime::RFC2822))
                  ->addHeader('Pragma', 'cache');
 

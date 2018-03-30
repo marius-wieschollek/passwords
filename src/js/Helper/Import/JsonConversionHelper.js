@@ -78,6 +78,7 @@ export default class ImportJsonConversionHelper {
         for(let i = 0; i < db.length; i++) {
             let element = db[i];
 
+            if(!element.tags) continue;
             for(let j = 0; j < element.tags.length; j++) {
                 let label = element.tags[j].text,
                     id    = label;
@@ -122,10 +123,10 @@ export default class ImportJsonConversionHelper {
 
             if(element.hidden) continue;
             if(element.email) {
-                if(object.username.length === 0) {
+                if(!object.username || object.username.length === 0) {
                     object.username = element.email;
                 } else {
-                    if(object.notes.length !== 0) object.notes += '\n\n';
+                    if(object.notes && object.notes.length !== 0) object.notes += '\n\n';
                     object.notes += `${Localisation.translate('Email')}: ${element.email}`;
                 }
             }
