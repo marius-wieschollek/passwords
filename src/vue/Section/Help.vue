@@ -38,8 +38,7 @@
             return {
                 loading: true,
                 source : '',
-                images: [],
-                gallery: {images:[], index: null}
+                gallery: {images: [], index: null}
             };
         },
 
@@ -113,41 +112,42 @@
             updateImageGallery() {
                 let images  = document.querySelectorAll('.md-image-link'),
                     gallery = [];
-                if(this.images.length === images.length) return;
+                if(this.gallery.images.length === images.length) return;
 
                 for(let i = 0; i < images.length; i++) {
                     let image = images[i],
-                        mime = image.href.substr(image.href.lastIndexOf('.') + 1);
+                        mime  = image.href.substr(image.href.lastIndexOf('.') + 1);
 
                     if(['png', 'jpg', 'jpeg', 'gif'].indexOf(mime) !== -1) {
                         gallery.push(
                             {
-                                title: image.title,
-                                href: image.href,
-                                type: 'image/'+mime,
+                                title : image.title,
+                                href  : image.href,
+                                type  : `image/${mime}`,
                                 poster: image.href
                             }
                         );
                     } else if(['mp4', 'm4v', 'ogg', 'webm'].indexOf(mime) !== -1) {
+                        let poster = image.querySelector('img').src;
                         gallery.push(
                             {
                                 title: image.title,
-                                href: image.href,
-                                type: 'video/'+mime
+                                href : image.href,
+                                type : `video/${mime}`,
+                                poster
                             }
                         );
                     } else {
-                        continue
+                        continue;
                     }
 
                     image.addEventListener('click', (e) => {
                         e.preventDefault();
                         this.gallery.index = i;
-                    })
+                    });
                 }
 
                 this.gallery.images = gallery;
-                this.images = images;
             }
         },
         watch  : {

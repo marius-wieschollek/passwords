@@ -96,7 +96,10 @@
 
                 let image = this.images[index];
                 if(image !== undefined) {
-                    this.imageUrl = image.href
+                    this.imageUrl = image.href;
+                    if(image.type.substr(0, 5) === 'video') {
+                        slide.querySelector('a').click();
+                    }
                 }
             }
         }
@@ -107,7 +110,7 @@
     @import '~blueimp-gallery/css/blueimp-gallery.min.css';
 
     .blueimp-gallery {
-        background-color: transparentize($color-black, 0.25);
+        background-color : transparentize($color-black, 0.25);
 
         > .description {
             position : absolute;
@@ -117,34 +120,50 @@
             display  : none;
         }
 
-        &.blueimp-gallery-controls > .description {
+        > .close,
+        > .title,
+        > .description,
+        > .play-pause {
             display : block;
+        }
+
+        > .slides > .slide > .video-content {
+            display         : flex;
+            justify-content : center;
+
+            > video {
+                position : static;
+                width    : auto;
+                height   : auto;
+            }
         }
 
         .next,
         .prev {
-            font-family: FontAwesome, sans-serif;
-            border: none;
-            background: none;
+            font-family : FontAwesome, sans-serif;
+            border      : none;
+            background  : none;
+            display     : block;
         }
 
         .open {
-            padding: 15px;
-            right: 60px;
-            left: auto;
-            margin: -15px;
-            font-size: 30px;
-            text-decoration: none;
-            cursor: pointer;
-            position: absolute;
-            top: 18px;
-            line-height: 30px;
-            color: #fff;
-            text-shadow: 0 0 2px #000;
-            opacity: .8;
+            padding         : 15px;
+            right           : 60px;
+            left            : auto;
+            margin          : -15px;
+            font-size       : 30px;
+            text-decoration : none;
+            cursor          : pointer;
+            position        : absolute;
+            top             : 18px;
+            line-height     : 30px;
+            color           : #fff;
+            text-shadow     : 0 0 2px #000;
+            opacity         : .8;
+            display         : block;
 
             &:hover {
-                opacity: 1;
+                opacity : 1;
             }
         }
     }
