@@ -15,6 +15,7 @@
     },
     "dependencies": {},
     "devDependencies": {
+        "blueimp-gallery": "^2.33.0",
         "codeceptjs": "^1.1.7",
         "copy-webpack-plugin": "^4.5.1",
         "css-loader": "^0.28.11",
@@ -55,7 +56,7 @@
         "nextcloud",
         "security"
     ],
-    "eslintConfig"   : {
+    "eslintConfig": {
         "brace-style": [
             "1tbs",
             "stroustrup",
@@ -63,13 +64,13 @@
                 "allowSingleLine": true
             }
         ],
-        "globals"    : {
-            "OC"                     : true,
-            "OCA"                    : true,
-            "actor"                 : true,
-            "window"                 : true,
-            "Scenario"                 : true,
-            "oc_appswebroots"        : true,
+        "globals": {
+            "OC": true,
+            "OCA": true,
+            "actor": true,
+            "window": true,
+            "Scenario": true,
+            "oc_appswebroots": true,
             "__webpack_public_path__": true
         }
     },

@@ -118,6 +118,7 @@ class PageController extends Controller {
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
         $csp->addAllowedImageDomain($manualHost);
+        $csp->addAllowedMediaDomain($manualHost);
 
         return $csp;
     }

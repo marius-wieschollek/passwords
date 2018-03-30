@@ -14,11 +14,13 @@
                     </footer>
                 </div>
             </article>
+            <gallery :images="gallery.images" :index="gallery.index" @close="gallery.index = null"/>
         </div>
     </div>
 </template>
 
 <script>
+    import Gallery from '@vue/Components/Gallery';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import Localisation from '@js/Classes/Localisation';
@@ -27,6 +29,7 @@
 
     export default {
         components: {
+            Gallery,
             Translate,
             Breadcrumb
         },
@@ -34,7 +37,9 @@
         data() {
             return {
                 loading: true,
-                source : ''
+                source : '',
+                images: [],
+                gallery: {images:[], index: null}
             };
         },
 
@@ -48,6 +53,7 @@
                 images[i].addEventListener('load', () => { this.jumpToAnchor(); });
             }
             this.jumpToAnchor();
+            this.updateImageGallery();
         },
 
         computed: {
@@ -103,6 +109,45 @@
                     $el.classList.add('highlight');
                     $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
                 }
+            },
+            updateImageGallery() {
+                let images  = document.querySelectorAll('.md-image-link'),
+                    gallery = [];
+                if(this.images.length === images.length) return;
+
+                for(let i = 0; i < images.length; i++) {
+                    let image = images[i],
+                        mime = image.href.substr(image.href.lastIndexOf('.') + 1);
+
+                    if(['png', 'jpg', 'jpeg', 'gif'].indexOf(mime) !== -1) {
+                        gallery.push(
+                            {
+                                title: image.title,
+                                href: image.href,
+                                type: 'image/'+mime,
+                                poster: image.href
+                            }
+                        );
+                    } else if(['mp4', 'm4v', 'ogg', 'webm'].indexOf(mime) !== -1) {
+                        gallery.push(
+                            {
+                                title: image.title,
+                                href: image.href,
+                                type: 'video/'+mime
+                            }
+                        );
+                    } else {
+                        continue
+                    }
+
+                    image.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.gallery.index = i;
+                    })
+                }
+
+                this.gallery.images = gallery;
+                this.images = images;
             }
         },
         watch  : {

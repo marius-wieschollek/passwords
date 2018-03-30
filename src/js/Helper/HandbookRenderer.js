@@ -197,7 +197,7 @@ class HandbookRenderer {
         if(title === null) title = text;
 
         let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title}),
-            source  = `<img src="${href}" alt="${decodeURI(text)}" class="md-image"><span class="md-image-caption">${caption}</span>`;
+            source  = `<img src="${href}" alt="${text.replace(/"/g, '&quot;')}" class="md-image"><span class="md-image-caption">${caption}</span>`;
         this.imageCaption = caption;
 
         return nowrap ? source:this._wrapImage(href, caption, source);
@@ -213,7 +213,7 @@ class HandbookRenderer {
      */
     _wrapImage(href, title, source) {
         return `<span class="md-image-container" id="help-image-${this.imageCounter}" data-image-id="${this.imageCounter}">
-                <a class="md-image-link" title="${decodeURI(title)}" href="${href}" target="_blank">
+                <a class="md-image-link" title="${title}" href="${href}" target="_blank">
                 ${source}</a></span>`;
     }
 }
