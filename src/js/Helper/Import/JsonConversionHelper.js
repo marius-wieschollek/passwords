@@ -121,7 +121,6 @@ export default class ImportJsonConversionHelper {
                 tags    : element.tags
             };
 
-            if(element.hidden) continue;
             if(element.email) {
                 if(!object.username || object.username.length === 0) {
                     object.username = element.email;

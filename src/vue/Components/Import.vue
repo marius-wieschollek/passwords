@@ -47,13 +47,13 @@
                     </select>
                     <br>
                     <translate tag="label" for="passwords-import-csv-quote" say="Quote Character"/>
-                    <select id="passwords-import-csv-quote" v-model="csv.quoteChar" :disabled="importing">
+                    <select id="passwords-import-csv-quote" v-model="csv.quotes" :disabled="importing">
                         <translate tag="option" value='"' say="Quote"/>
                         <translate tag="option" value="'" say="Single Quote"/>
                     </select>
                     <br>
                     <translate tag="label" for="passwords-import-csv-escape" say="Escape Character"/>
-                    <select id="passwords-import-csv-escape" v-model="csv.escapeChar" :disabled="importing">
+                    <select id="passwords-import-csv-escape" v-model="csv.escape" :disabled="importing">
                         <translate tag="option" value='"' say="Quote"/>
                         <translate tag="option" value="'" say="Single Quote"/>
                         <translate tag="option" value="\" say="Backslash"/>
@@ -165,7 +165,7 @@
                 fileMime   : '',
                 csvFile    : null,
                 csvReady   : false,
-                csv        : {delimiter: 'auto', quoteChar: '"', escapeChar: '"', badQuotes: false},
+                csv        : {delimiter: 'auto', quotes: '"', escape: '"', badQuotes: false},
                 options    : {mode: 0, skipShared: true},
                 step       : 2,
                 previewLine: 1,
@@ -247,23 +247,26 @@
                 this.file = file;
 
                 try {
-                    let Papa      = await import(/* webpackChunkName: "PapaParse" */ '@js/Helper/PapaParse'),
-                        delimiter = this.csv.delimiter;
-                    Papa.parse(file, {
-                        delimiter     : delimiter === 'auto' ? '':delimiter,
-                        quoteChar     : this.csv.quoteChar,
-                        escapeChar    : this.csv.escapeChar,
-                        badQuotes     : this.csv.badQuotes,
-                        skipEmptyLines: true,
-                        complete      : (result) => { this.csvParseComplete(result);}
-                    });
+                    let Parser    = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero'),
+                        delimiter = this.csv.delimiter,
+                        result    = await Parser.parse(file, {
+                            delimiter         : delimiter === 'auto' ? '':delimiter,
+                            quotes            : this.csv.quotes,
+                            escape            : this.csv.escape,
+                            skipEmptyRows     : true,
+                            skipEmptyFieldRows: true,
+                            trimFields        : true
+                        });
+
+                    this.csvParseComplete(result);
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'PapaParse'}], 'Network error');
+                    Messages.alert(['Unable to load {module}', {module: 'CsvHero'}], 'Network error');
                 }
             },
             csvParseComplete(result) {
                 if(result.errors.length === 0) {
+                    console.log(result.data);
                     this.file = result.data;
                     this.csvReady = true;
                 } else {
@@ -271,9 +274,10 @@
                     this.file = null;
                     let message = [];
                     for(let i = 0; i < result.errors.length; i++) {
-                        let error = Localisation.translate(result.errors[i].message),
-                            line  = result.errors[i].row + 1;
-                        message.push(Localisation.translate('{error} in line {line}.', {error, line}));
+                        let error   = result.errors[i],
+                            message = Localisation.translate(error.message);
+
+                        message.push(Localisation.translate('{message} in line {line} character {character}.', {message, 'line': error.line, 'character': error.character}));
                     }
                     console.error(result.errors);
                     Messages.alert(['The file could not be parsed: {errors}', {errors: message.join(' ')}], 'Import error');
@@ -325,6 +329,8 @@
                 } else if(this.source === 'json') {
                     this.preventPasswordFill();
                     this.step = 4;
+                } else if(this.mime === 'text/csv' && !this.csvReady) {
+                    this.step = 2;
                 } else {
                     this.step = 4;
                 }
@@ -350,7 +356,7 @@
                         this.type = 'pmanJson';
                         break;
                     case 'keepass':
-                        this.csv.escapeChar = '\\';
+                        this.csv.escape = '\\';
                     case 'enpass':
                     case 'legacy':
                     case 'lastpass':

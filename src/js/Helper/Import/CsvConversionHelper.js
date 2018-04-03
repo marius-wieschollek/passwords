@@ -303,13 +303,13 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url']
             },
-            dashlane  : {
+            dashlane : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password', 'notes'],
                 repair   : true
             },
-            enpass  : {
+            enpass   : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', '', 'username', '', 'password', '', 'url'],

@@ -176,7 +176,6 @@
             'Space'                               : 'Leerzeichen',
             'Tab'                                 : 'Tabulator',
             'Detect unescaped quotes'             : 'Nicht maskierte Fluchtzeichen erkennen',
-            '{error} in line {line}.'             : '{error} in Zeile {line}.',
             'Skip first line'                     : 'Kopfzeile überspringen',
             'Interpolate missing fields'          : 'Fehlende Felder interpolieren',
             'CSV Field Mapping'                   : 'CSV Felder zuordnen',
@@ -290,12 +289,13 @@
             'This will reset all settings to their defaults. Do you want to continue?' : 'Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchtest du fortfahren?',
             'Start over and delete all configuration, passwords, folders and tags'     : 'Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen',
             'You have reached the maximum length of 4096 characters'                   : 'Du hast die Maximallänge von 4096 Zeichern erreicht',
-            'Trailing quote on quoted field is malformed'                              : 'Das Feldzeichen ist falsch maskiert',
+            'Invalid trailing quote in quoted field'                                   : 'Das Feldzeichen ist falsch maskiert',
             'We could not find anything for "{query}"'                                 : 'Wir konnten nichts zu "{query}" finden',
             'The file could not be parsed: {errors}'                                   : 'Die Datei konnte nicht verarbeitet werden',
             'You have to wait {seconds} seconds before you can reset your account.'    : 'Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst.',
             'The page "{page}" could not be fetched from the handbook server.'         : 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',
-            'Some data is waiting to be synchronized'                                  : 'Einige Daten warten darauf synchronisiert zu werden'
+            'Some data is waiting to be synchronized'                                  : 'Einige Daten warten darauf synchronisiert zu werden',
+            '{message} in line {line} character {character}.'                          : '{message} in Zeile {line}, Zeichen {character}.'
         },
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',

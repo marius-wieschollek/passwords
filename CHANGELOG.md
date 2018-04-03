@@ -1,8 +1,9 @@
 #### 2018.4.0 - Feature Release
 * Added in app user handbook
 * Added in page search
-* Added email alerts and notifications
-* Added tags in the main view
+* Added email alerts
+* Added notification settings
+* Added tags in the list view
 * Added configurable default section
 * Added start over option
 * Improved import and export

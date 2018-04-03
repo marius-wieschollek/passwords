@@ -62,6 +62,10 @@ Scenario('Show Create Password Dialog', (I) => {
     I.waitForVisible('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(3)', 20);
     I.click('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(3)');
     I.waitForElement('#passwords-create-new', 10);
+    I.fillField('#password-username', 'myuser');
+    I.fillField('#password-password', 'LongAndStrongPassword');
+    I.fillField('#password-url', 'https://www.example.com');
+    I.click('#passwords-create-new');
 
     I.captureWholePage('password-create', 4);
 });
@@ -131,10 +135,12 @@ Scenario('Show Export Section', async (I) => {
     I.selectOption('#passwords-mapping-2', 'username');
     I.selectOption('#passwords-mapping-3', 'password');
     I.waitForElement('.csv-mapping div:nth-child(2)');
+    I.click('.step-2');
+
     await I.captureElement('export-custom-csv', '.step-2', 0, 825);
 });
 
-Scenario('Show Import Section', async (I) => {
+Scenario('Show Import Custom CSV', async (I) => {
     await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/PasswordList.csv', 'tests/codecept/data/');
 
     I.amOnPage('/index.php/apps/passwords/#/backup/import');
@@ -152,6 +158,8 @@ Scenario('Show Import Section', async (I) => {
     I.selectOption('#passwords-mapping-3', 'tagLabels');
     I.selectOption('#passwords-mapping-4', 'url');
     I.selectOption('#passwords-mapping-5', 'notes');
+    I.click('.step-2');
+
     await I.captureElement('import-custom-csv-options', '.step-2', 0, 420);
     await I.captureElement('import-custom-csv-mapping', '.step-3');
 
