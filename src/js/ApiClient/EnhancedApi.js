@@ -904,8 +904,7 @@ export default class EnhancedApi extends SimpleApi {
             },
             username : {
                 type    : 'string',
-                length  : 64,
-                required: true
+                length  : 64
             },
             password : {
                 type    : 'string',

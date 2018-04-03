@@ -10,7 +10,7 @@
                     <translate tag="div" class="section-title" :style="getSectionStyle" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
-                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" required>
+                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username">
                         <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
