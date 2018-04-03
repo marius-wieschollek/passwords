@@ -13,13 +13,14 @@
         "selenium": "docker run --net=host selenium/standalone-chrome",
         "build:nightly": "webpack --env.production --env.features"
     },
-    "dependencies": {},
+    "dependencies": {
+    },
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
         "codeceptjs": "^1.1.7",
         "copy-webpack-plugin": "^4.5.1",
         "css-loader": "^0.28.11",
-        "csv-hero": "https://git.mdns.eu/marius/csv-hero/repository/master/archive.tar.gz",
+        "csv-hero": "0.0.1"
         "download": "^6.2.5",
         "easyimage": "^3.1.0",
         "extract-text-webpack-plugin": "^3.0.2",
@@ -49,7 +50,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "ssh://git@git.mdns.eu:2024/nextcloud/passwords.git"
+        "url": "https://git.mdns.eu/nextcloud/passwords.git"
     },
     "keywords": [
         "passwords",

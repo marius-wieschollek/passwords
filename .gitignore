@@ -11,3 +11,4 @@ src/js/Static/
 node_modules/
 /tests/codecept/data/*
 /tests/codecept/output/*
+package-lock.json
