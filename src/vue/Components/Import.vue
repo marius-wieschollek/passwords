@@ -248,9 +248,8 @@
 
                 try {
                     let Parser    = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero'),
-                        delimiter = this.csv.delimiter,
                         result    = await Parser.parse(file, {
-                            delimiter         : delimiter === 'auto' ? '':delimiter,
+                            delimiter         : this.csv.delimiter,
                             quotes            : this.csv.quotes,
                             escape            : this.csv.escape,
                             skipEmptyRows     : true,
