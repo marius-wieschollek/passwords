@@ -247,11 +247,14 @@
                 this.file = file;
 
                 try {
-                    let Parser    = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero'),
-                        result    = await Parser.parse(file, {
+                    let Parser = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero'),
+                        result = await Parser.parse(file, {
                             delimiter         : this.csv.delimiter,
                             quotes            : this.csv.quotes,
                             escape            : this.csv.escape,
+                            strictSpaces      : false,
+                            strictRows        : false,
+                            strictQuotes      : this.csv.badQuotes,
                             skipEmptyRows     : true,
                             skipEmptyFieldRows: true,
                             trimFields        : true

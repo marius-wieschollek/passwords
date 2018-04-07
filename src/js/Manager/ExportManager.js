@@ -314,7 +314,7 @@ export class ExportManager {
             for(let j = 0; j < element.length; j++) {
                 let value = element[j];
                 if(typeof value === 'boolean') value = Localisation.translate(value.toString());
-                line.push(`"${value.toString().replace(/"/g, '""')}"`);
+                line.push(`"${value.toString().replaceAll('"', '""')}"`);
             }
 
             csv.push(line.join(delimiter));
