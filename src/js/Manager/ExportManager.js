@@ -207,7 +207,7 @@ export class ExportManager {
      * @returns {Promise<{}>}
      * @private
      */
-    static async _createExportFolderMapping(mapping) {
+    async _createExportFolderMapping(mapping) {
         let folderDb = {};
         if(mapping.indexOf('folderLabel') !== -1 || mapping.indexOf('parentLabel') !== -1) {
             let folders = await API.listFolders();
@@ -327,7 +327,7 @@ export class ExportManager {
      *
      * @param db
      * @param header
-     * @returns {Promise<Array>}
+     * @returns {Array}
      * @private
      */
     static _convertOfficeExport(db, header = []) {
