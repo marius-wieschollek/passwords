@@ -1,7 +1,7 @@
 <template>
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
-        <image-container v-if="showPreview" :image="object.preview" :icon="object.icon" :link="object.url" :title="object.title" :host="object.website"/>
+        <preview :image="object.preview" :icon="object.icon" :link="object.url" :title="object.title" :host="object.website"/>
         <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
             <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>
@@ -9,58 +9,15 @@
             <tags :password="object"/>
         </div>
         <tabs :tabs="getTabs">
-            <div slot="details" class="details">
-                <translate tag="div" say="Name"><span>{{ object.label }}</span></translate>
-                <translate tag="div" say="Username"><span>{{ object.username }}</span></translate>
-                <translate tag="div" say="Password">
-                    <span @mouseover="showPw=true" @mouseout="showPw=false" class="password">{{ showPassword }}</span>
-                </translate>
-                <translate tag="div" say="Website"><a :href="object.url" target="_blank" :style="getLinkStyle">{{ object.url }}</a></translate>
-
-                <translate tag="div" say="Statistics" class="header"/>
-                <translate tag="div" say="Created on"><span>{{ getDateTime(object.created) }}</span></translate>
-                <translate tag="div" say="Last updated"><span>{{ getDateTime(object.edited) }}</span></translate>
-                <translate tag="div" say="Revisions">
-                    <translate say="{count} revisions" :variables="{count:countRevisions}"/>
-                </translate>
-                <translate tag="div" say="Shares">
-                    <translate say="{count} shares" :variables="{count:countShares}"/>
-                </translate>
-
-                <translate tag="div" say="Security" class="header"/>
-                <translate tag="div" say="Status">
-                    <translate :say="getSecurityStatus" :class="getSecurityStatus.toLowerCase()"/>
-                </translate>
-                <translate tag="div" say="SHA1 Hash"><span>{{ object.hash }}</span></translate>
-            </div>
-            <div slot="notes" class="notes">
-                <div v-html="notes"></div>
-            </div>
+            <pw-details slot="details" :password="object" />
+            <notes slot="notes" :password="object"/>
             <div slot="share">
                 <tabs :tabs="getSharingTabs">
-                    <div slot="nextcloud" class="password-share-nextcloud">
-                        <sharing :password="object"/>
-                    </div>
-                    <div slot="qrcode" class="password-share-qrcode">
-                        <select id="password-details-qrcode" v-model="qrModel">
-                            <translate tag="option" value="username" v-if="object.username" say="Username"/>
-                            <translate tag="option" value="password" selected say="Password"/>
-                            <translate tag="option" value="url" v-if="object.url" say="Website"/>
-                        </select>
-                        <qr-code :text="qrcode.text" :color="qrcode.color" :bgColor="qrcode.bgColor" :size="256" errorLevel="L"/>
-                    </div>
+                    <sharing slot="nextcloud" :password="object" class="password-share-nextcloud"/>
+                    <qr-code slot="qrcode" :password="object"/>
                 </tabs>
             </div>
-            <div slot="revisions">
-                <ul class="revision-list">
-                    <li class="revision" v-for="revision in getRevisions" :key="revision.id" :style="{'background-image': 'url(' + revision.icon + ')'}">
-                        <span>{{ revision.label }}<br>
-                            <span class="time">{{ getDateTime(revision.created) }}</span>
-                        </span>
-                        <translate icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== object.revision"/>
-                    </li>
-                </ul>
-            </div>
+            <revisions slot="revisions" :password="object"/>
         </tabs>
     </div>
 </template>
@@ -71,24 +28,26 @@
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Events from '@js/Classes/Events';
-    import QrCode from 'vue-qrcode-component';
-    import Utility from '@js/Classes/Utility';
-    import Sharing from '@vc/Sharing/Sharing';
-    import Messages from '@js/Classes/Messages';
-    import ImageContainer from '@vc/ImageContainer';
-    import Localisation from '@js/Classes/Localisation';
-    import ThemeManager from '@js/Manager/ThemeManager';
-    import PasswordManager from '@js/Manager/PasswordManager';
+    import Notes from '@vue/Details/Password/Notes';
+    import QrCode from '@vue/Details/Password/QrCode';
+    import Preview from '@vue/Details/Password/Preview';
+    import PwDetails from '@vue/Details/Password/Details';
+    import Revisions from '@vue/Details/Password/Revisions';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import PasswordManager from '@js/Manager/PasswordManager';
+    import Sharing from '@vue/Details/Password/Sharing/Sharing';
 
     export default {
         components: {
             Tabs,
             Tags,
+            Notes,
             QrCode,
             Sharing,
-            Translate,
-            ImageContainer
+            Preview,
+            PwDetails,
+            Revisions,
+            Translate
         },
 
         props: {
@@ -99,19 +58,11 @@
 
         data() {
             return {
-                qrcode : {
-                    color: ThemeManager.getColor(),
-                    text : this.password.password
-                },
-                qrModel: 'password',
-                object : this.password,
-                notes  : this.password.notes,
-                showPw : false
+                object : this.password
             };
         },
 
         created() {
-            this.processNotes();
             Events.on('password.changed', this.refreshView);
         },
 
@@ -120,39 +71,6 @@
         },
 
         computed: {
-            getRevisions() {
-                return Utility.sortApiObjectArray(this.object.revisions, 'created', false);
-            },
-            countShares() {
-                let count = 0;
-                for(let i in this.object.shares) {
-                    if(this.object.shares.hasOwnProperty(i)) count++;
-                }
-                return count;
-            },
-            countRevisions() {
-                let count = 0;
-                for(let i in this.object.revisions) {
-                    if(this.object.revisions.hasOwnProperty(i)) count++;
-                }
-                return count;
-            },
-            showPassword() {
-                return this.showPw ? this.object.password:''.padStart(this.object.password.length, '*');
-            },
-            getSecurityStatus() {
-                let status = ['Secure', 'Weak', 'Broken'];
-
-                return status[this.object.status];
-            },
-            showPreview() {
-                return window.innerWidth > 640;
-            },
-            getLinkStyle() {
-                return {
-                    color: ThemeManager.getColor()
-                };
-            },
             getTabs() {
                 if(this.object.notes.length !== 0) {
                     return {details: 'Details', notes: 'Notes', share: 'Share', revisions: 'Revisions'};
@@ -170,8 +88,8 @@
         methods: {
             favouriteAction($event) {
                 $event.stopPropagation();
-                this.object.favourite = !this.object.favourite;
-                API.updatePassword(this.object);
+                PasswordManager.updatePassword(this.object)
+                               .catch(() => { this.object.favourite = !this.object.favourite; });
             },
             closeDetails() {
                 this.$parent.detail = {
@@ -179,39 +97,17 @@
                     element: null
                 };
             },
-            restoreAction(revision) {
-                PasswordManager.restoreRevision(this.object, revision);
-            },
             refreshView(event) {
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
                        .then((p) => {this.object = p;});
                 }
-            },
-            async processNotes() {
-                try {
-                    let marked = await import(/* webpackChunkName: "marked" */ 'marked');
-                    this.notes = marked(this.object.notes, {breaks: true});
-                } catch(e) {
-                    console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
-                }
-            },
-            getDateTime(date) {
-                return Localisation.formatDateTime(date);
             }
         },
 
         watch: {
             password(value) {
                 this.object = value;
-            },
-            object(value) {
-                this.qrcode.text = value[this.qrModel];
-                this.processNotes();
-            },
-            qrModel(value) {
-                this.qrcode.text = this.object[value];
             }
         }
     };
@@ -272,151 +168,7 @@
             padding : 0 15px 15px;
         }
 
-        .details {
-            padding-top : 10px;
-
-            div:not(.header) {
-                font-size     : 0.9em;
-                font-style    : italic;
-                margin-bottom : 5px;
-                color         : $color-grey-darker;
-
-                a,
-                span {
-                    display    : block;
-                    font-style : normal;
-                    font-size  : 1.3em;
-                    color      : $color-black-light;
-                    text-align : right;
-                    cursor     : text;
-
-                    &.password {
-                        cursor      : pointer;
-
-                        &:hover {
-                            font-family : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
-                        }
-                    }
-
-                    &.secure {color : $color-green;}
-                    &.weak {color : $color-yellow;}
-                    &.broken {color : $color-red;}
-                }
-
-                a {
-                    cursor : pointer;
-
-                    &:hover {
-                        text-decoration : underline;
-                    }
-                }
-            }
-
-            .header {
-                margin-top  : 20px;
-                font-size   : 1.3em;
-                font-weight : bold;
-                color       : $color-black-light;
-            }
-        }
-
-        .notes {
-            blockquote {
-                font-family : monospace;
-                margin      : 5px 0;
-                padding     : 10px 0 10px 15px;
-                border-left : 2px solid $color-grey-dark;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-size   : 1.75rem;
-                font-weight : 600;
-                display     : block;
-                padding     : 0;
-                margin      : 0.25rem 0 0.5rem;
-                line-height : initial;
-            }
-            h2 { font-size : 1.6rem; }
-            h3 { font-size : 1.4rem; }
-            h4 { font-size : 1.2rem; }
-            h5 { font-size : 1.1rem; }
-            h6 { font-size : 0.9rem; }
-            em { font-style : italic; }
-            ul {
-                list-style   : disc;
-                padding-left : 15px;
-            }
-            ol {
-                list-style   : decimal;
-                padding-left : 15px;
-            }
-            a {
-                text-decoration : underline;
-            }
-            p {
-                margin-bottom: 1em;
-            }
-        }
-
-        .password-share-qrcode {
-            select {
-                width         : 100%;
-                margin-bottom : 15px;
-            }
-
-            img,
-            canvas {
-                display : block;
-                margin  : 0 auto;
-            }
-        }
-
-        .revision-list {
-            .revision {
-                position        : relative;
-                background      : no-repeat 3px center;
-                background-size : 32px;
-                padding         : 5px 20px 5px 38px;
-                font-size       : 1.1em;
-                cursor          : pointer;
-                border-bottom   : 1px solid $color-grey-lighter;
-
-                &:last-child {
-                    border-bottom : none;
-                }
-
-                span {
-                    cursor : pointer;
-                }
-
-                .time {
-                    color       : $color-grey-dark;
-                    font-size   : 0.9em;
-                    font-style  : italic;
-                    line-height : 0.9em;
-                }
-
-                .fa {
-                    position : absolute;
-                    right    : 5px;
-                    top      : 10px;
-
-                    &:before {
-                        line-height : 32px;
-                        padding     : 0 5px;
-                    }
-                }
-
-                &:hover {
-                    background-color : darken($color-white, 3);
-                }
-            }
-        }
-
         @media (max-width : $mobile-width) {
-            .image-container {
-                display : none;
-            }
-
             .title {
                 margin-bottom : 1rem;
             }

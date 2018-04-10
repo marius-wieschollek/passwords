@@ -16,9 +16,9 @@
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
-    import Share from "@vue/Components/Sharing/Share";
     import Localisation from "@js/Classes/Localisation";
     import ThemeManager from '@js/Manager/ThemeManager';
+    import Share from '@vue/Details/Password/Sharing/Share';
 
     export default {
         components: {
@@ -59,6 +59,18 @@
                     border         : '1px solid ' + ThemeManager.getColor(),
                     backgroundColor: ThemeManager.getContrastColor()
                 };
+            },
+            getSharedWithUsers() {
+                let users = [];
+                for(let i in this.shares) {
+                    if(this.shares.hasOwnProperty(i)) users.push(this.shares[i].receiver.id);
+                }
+
+                if(this.password.share !== null) {
+                    users.push(this.password.share.owner.id);
+                }
+
+                return users;
             }
         },
 
@@ -69,11 +81,15 @@
                     return;
                 }
 
-                this.matches = await API.findSharePartners(this.search);
-                for(let i in this.matches) {
-                    if(!this.matches.hasOwnProperty(i)) continue;
-                    let name = this.matches[i];
+                let users = this.getSharedWithUsers,
+                    matches = await API.findSharePartners(this.search);
+                this.matches = [];
 
+                for(let i in matches) {
+                    if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
+                    let name = matches[i];
+
+                    this.matches[i] = name;
                     this.nameMap[name] = i;
                     this.idMap[i] = name;
                 }

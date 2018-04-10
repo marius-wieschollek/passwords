@@ -1,5 +1,5 @@
 <template>
-    <div class="image-container">
+    <div class="preview-container" v-if="showPreview">
         <a :href="link" target="_blank" :title="title">
             <div class="loader">
                 <img :src="loadingIcon" alt="">
@@ -13,11 +13,8 @@
 
 <script>
     import API from "@js/Helper/api";
-    import SimpleApi from "@js/ApiClient/SimpleApi";
 
     export default {
-        name: "image-container",
-
         props: {
             image: {
                 type     : String,
@@ -35,7 +32,7 @@
                 type     : String,
                 'default': ''
             },
-            host: {
+            host : {
                 type     : String,
                 'default': 'default'
             }
@@ -48,18 +45,24 @@
                 imgClass   : 'loading-hidden',
                 style      : {
                     marginTop: 0
-                },
-            }
+                }
+            };
         },
 
         created() {
             this.loadFavicon(this.link);
         },
 
+        computed: {
+            showPreview() {
+                return window.innerWidth > 640;
+            }
+        },
+
         methods: {
             imageMouseOver($event) {
                 if(this.loading) return;
-                let margin   = $event.target.height - 290;
+                let margin = $event.target.height - 290;
 
                 if(margin > 0) {
                     if(margin < 500) {
@@ -101,70 +104,72 @@
                 this.loadFavicon(value);
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
-    .item-details {
-        .image-container {
-            max-height : 274px;
-            overflow   : hidden;
-            position   : relative;
+    .preview-container {
+        max-height : 274px;
+        overflow   : hidden;
+        position   : relative;
 
-            a {
-                display   : block;
-                font-size : 0;
+        a {
+            display   : block;
+            font-size : 0;
 
-                .image {
-                    margin-top : 0;
-                    min-height : 0;
-                    position   : relative;
-                    opacity    : 1;
-                    transition : min-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            .image {
+                margin-top : 0;
+                min-height : 0;
+                position   : relative;
+                opacity    : 1;
+                transition : min-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
 
-                    img {
-                        width : 100%;
-                    }
-
-                    &.s1 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 1s ease-in-out; }
-                    &.s5 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 5s ease-in-out; }
-                    &.s10 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
-                    &.s15 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
-                    &.s20 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
-                    &.loading-hidden {
-                        opacity    : 0;
-                        min-height : 274px;
-                        transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
-                    }
+                img {
+                    width : 100%;
                 }
 
-                .loader {
-                    position : absolute;
-                    top      : 0;
-                    right    : 0;
-                    bottom   : 0;
-                    left     : 0;
-
-                    img {
-                        transform  : translate(-50%, -50%);
-                        position   : absolute;
-                        left       : 50%;
-                        top        : 50%;
-                        width      : 72px;
-                        height     : 72px;
-                        transition : height 0.15s ease-in-out, width 0.15s ease-in-out;
-                    }
-                }
-
-                &:hover .loader img {
-                    width  : 96px;
-                    height : 96px;
+                &.s1 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 1s ease-in-out; }
+                &.s5 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 5s ease-in-out; }
+                &.s10 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
+                &.s15 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
+                &.s20 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
+                &.loading-hidden {
+                    opacity    : 0;
+                    min-height : 274px;
+                    transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
                 }
             }
 
-            &.hidden {
-                display : none;
+            .loader {
+                position : absolute;
+                top      : 0;
+                right    : 0;
+                bottom   : 0;
+                left     : 0;
+
+                img {
+                    transform  : translate(-50%, -50%);
+                    position   : absolute;
+                    left       : 50%;
+                    top        : 50%;
+                    width      : 72px;
+                    height     : 72px;
+                    transition : height 0.15s ease-in-out, width 0.15s ease-in-out;
+                }
             }
+
+            &:hover .loader img {
+                width  : 96px;
+                height : 96px;
+            }
+        }
+
+        &.hidden {
+            display : none;
+        }
+
+        @media (max-width : $mobile-width) {
+            display : none;
         }
     }
 </style>
