@@ -191,6 +191,12 @@ class AdminSettings implements ISettings {
                 ]
             ],
             [
+                'id'      => HelperService::FAVICON_FAVICON_GRABBER,
+                'label'   => 'favicongrabber.com',
+                'current' => $current === HelperService::FAVICON_FAVICON_GRABBER,
+                'api'     => null
+            ],
+            [
                 'id'      => HelperService::FAVICON_DUCK_DUCK_GO,
                 'label'   => 'DuckDuckGo',
                 'current' => $current === HelperService::FAVICON_DUCK_DUCK_GO,

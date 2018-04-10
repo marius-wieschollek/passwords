@@ -54,10 +54,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      * @throws \Exception
      */
     protected function isHashInHibpDb(string $hash): bool {
-        if($this->getLastRequestTime() != 0 && time() - $this->getLastRequestTime() < self::API_WAIT_TIME) {
-            sleep(self::API_WAIT_TIME);
-        }
-
+        $this->checkRequestTimeout();
         $apiUrl  = self::SERVICE_URL.$hash;
         $request = new RequestHelper();
         $request->setUrl($apiUrl)
@@ -77,7 +74,6 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
                     ->setHeaderData(['Referer' => $apiUrl])
                     ->sendWithRetry();
         }
-
         $this->setLastRequestTime();
 
         if($request->getInfo('http_code') === 429) {
@@ -191,10 +187,13 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
-     * @return int
+     *
      */
-    protected function getLastRequestTime(): int {
-        return $this->config->getAppValue('security/hibp/api/request', 0);
+    protected function checkRequestTimeout(): void {
+        $lastRequest = $this->config->getAppValue('security/hibp/api/request', 0);
+        if(time()-$lastRequest < self::API_WAIT_TIME) {
+            sleep(self::API_WAIT_TIME);
+        }
     }
 
     /**

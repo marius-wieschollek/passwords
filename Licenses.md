@@ -25,6 +25,7 @@ The licenses and/or terms of service of any service or third party sources used 
 
 #### Favicons
 * [Besticon](https://github.com/mat/besticon) - [MIT](https://github.com/mat/besticon/blob/master/LICENSE)
+* [favicongrabber.com](http://favicongrabber.com/) - [MIT](https://github.com/antongunov/favicongrabber.com/blob/master/LICENSE)
 * [DuckDuckGo](https://duckduckgo.com/) - [Privacy](https://duckduckgo.com/privacy)
 * [Google](https://www.google.com/) - [ToS](https://www.google.com/intl/en/policies/terms/) - [Privacy](https://www.google.com/intl/en/policies/privacy/)
 

@@ -13,6 +13,7 @@ use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
 use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
+use OCA\Passwords\Helper\Favicon\FaviconGrabberHelper;
 use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
 use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
@@ -48,11 +49,12 @@ class HelperService {
     const PREVIEW_PAGERES             = 'pageres';
     const PREVIEW_DEFAULT             = 'default';
 
-    const FAVICON_BESTICON     = 'bi';
-    const FAVICON_DUCK_DUCK_GO = 'ddg';
-    const FAVICON_GOOGLE       = 'gl';
-    const FAVICON_LOCAL        = 'local';
-    const FAVICON_DEFAULT      = 'default';
+    const FAVICON_BESTICON        = 'bi';
+    const FAVICON_FAVICON_GRABBER = 'fg';
+    const FAVICON_DUCK_DUCK_GO    = 'ddg';
+    const FAVICON_GOOGLE          = 'gl';
+    const FAVICON_LOCAL           = 'local';
+    const FAVICON_DEFAULT         = 'default';
 
     const WORDS_LOCAL  = 'local';
     const WORDS_RANDOM = 'random';
@@ -134,6 +136,8 @@ class HelperService {
         switch($service) {
             case self::FAVICON_BESTICON:
                 return $this->container->query(BestIconHelper::class);
+            case self::FAVICON_FAVICON_GRABBER:
+                return $this->container->query(FaviconGrabberHelper::class);
             case self::FAVICON_DUCK_DUCK_GO:
                 return $this->container->query(DuckDuckGoHelper::class);
             case self::FAVICON_GOOGLE:

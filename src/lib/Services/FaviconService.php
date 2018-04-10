@@ -93,7 +93,7 @@ class FaviconService {
             $this->logger->logException($e);
 
             try {
-                return $faviconService->getDefaultFavicon($domain);
+                return $faviconService->getDefaultFavicon($domain, $size);
             } catch(\Throwable $e) {
                 $this->logger->logException($e);
 
