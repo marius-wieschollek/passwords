@@ -34,6 +34,10 @@
             title: {
                 type     : String,
                 'default': ''
+            },
+            host: {
+                type     : String,
+                'default': 'default'
             }
         },
 
@@ -80,8 +84,7 @@
                 this.imgClass = '';
             },
             loadFavicon(url) {
-                let host = SimpleApi.parseUrl(url, 'host');
-                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(host, 96);}, 350);
+                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 350);
             }
         },
         watch  : {

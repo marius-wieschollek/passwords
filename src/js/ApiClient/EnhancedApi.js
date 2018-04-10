@@ -689,11 +689,12 @@ export default class EnhancedApi extends SimpleApi {
     _processPassword(password) {
         password.type = 'password';
         if(password.url) {
-            let host = SimpleApi.parseUrl(password.url, 'host');
+            let host    = SimpleApi.parseUrl(password.url, 'host'),
+                website = EnhancedApi._getWebsiteNameFromDomain(host);
             password.host = host;
-            password.website = EnhancedApi._getWebsiteNameFromDomain(host);
-            password.icon = this.getFaviconUrl(host);
-            password.preview = this.getPreviewUrl(host);
+            password.website = website;
+            password.icon = this.getFaviconUrl(website);
+            password.preview = this.getPreviewUrl(website);
         } else {
             password.host = null;
             password.website = '';
@@ -875,14 +876,14 @@ export default class EnhancedApi extends SimpleApi {
         if((domain.match(/\./g) || []).length > 2) {
             let array = domain.split('.');
             domain = '';
-            for(let i = 0; i<3; i++) {
+            for(let i = 0; i < 3; i++) {
                 let part = array.pop();
                 if(part === 'co' && i === 1) i--;
-                domain = (i===2 ? '':'.') + part + domain;
+                domain = (i === 2 ? '':'.') + part + domain;
             }
         }
-        let subdomains = ['m', 'en', 'www', 'www2', 'mail', 'email', 'login', 'signin', 'profile', 'account',  navigator.language],
-            regex = RegExp(`^(${subdomains.join('|')})\\.`);
+        let subdomains = ['m', 'en', 'www', 'web', 'www2', 'mail', 'email', 'login', 'signin', 'profile', 'account', navigator.language],
+            regex      = RegExp(`^(${subdomains.join('|')})\\.`);
 
         return domain.replace(regex, '');
     }
@@ -903,8 +904,8 @@ export default class EnhancedApi extends SimpleApi {
                 length: 36
             },
             username : {
-                type    : 'string',
-                length  : 64
+                type  : 'string',
+                length: 64
             },
             password : {
                 type    : 'string',

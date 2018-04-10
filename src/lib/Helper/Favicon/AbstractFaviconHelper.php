@@ -92,7 +92,7 @@ abstract class AbstractFaviconHelper {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $domain  = preg_replace('/^(m|de|www|www2|mail|email|login|signin)\./', '', $domain);
+        $domain  = preg_replace('/^(m|de|web|www|www2|mail|email|login|signin)\./', '', $domain);
         $content = $this->fallbackIconGenerator->createIcon($domain, $size);
 
         return $this->fileCacheService->putFile($fileName, $content);

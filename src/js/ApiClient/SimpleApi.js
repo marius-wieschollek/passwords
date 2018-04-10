@@ -519,7 +519,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getFavicon(domain, size = 32) {
-        if(domain === null) domain = 'default';
+        if(domain === null || domain.length === 0) domain = 'default';
         return this._createRequest(['service.favicon', {domain, size}], null, 'GET', 'text');
     }
 
@@ -531,7 +531,7 @@ export default class SimpleApi {
      * @returns {*}
      */
     getFaviconUrl(domain, size = 32) {
-        if(domain === null) domain = 'default';
+        if(domain === null || domain.length === 0) domain = 'default';
         return this._endpoint + SimpleApi.processUrl(this._paths['service.favicon'], {domain, size});
     }
 
@@ -545,7 +545,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getPreview(domain, view = 'desktop', width = '640', height = '360...') {
-        if(domain === null) domain = 'default';
+        if(domain === null || domain.length === 0) domain = 'default';
         return this._createRequest(
             ['service.preview', {domain, view, width, height}],
             null,
@@ -564,7 +564,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getPreviewUrl(domain, view = 'desktop', width = '640', height = '360...') {
-        if(domain === null) domain = 'default';
+        if(domain === null || domain.length === 0) domain = 'default';
         return this._endpoint + SimpleApi.processUrl(
             this._paths['service.preview'],
             {domain, view, width, height}
