@@ -1,9 +1,4 @@
-#passwords {
-    [data-constant] {
-        display    : none;
-        visibility : hidden;
-    }
-
+header.section.passwords {
     .msg.error,
     .msg.success {
         font-size     : 0.65em;
@@ -22,6 +17,15 @@
 
     h2 {
         position : relative;
+    }
+}
+
+section.section.passwords {
+    padding-top: 0;
+
+    [data-constant] {
+        display    : none;
+        visibility : hidden;
     }
 
     .container,

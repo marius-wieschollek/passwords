@@ -10,7 +10,7 @@
                 <div class="handbook-footer">
                     <footer>
                         <translate say="Missing something or found an error?"/>
-                        <translate tag="a" say="Tell us!" target="_blank" :style="getHrefStyle" href="https://github.com/marius-wieschollek/passwords/issues/new"/>
+                        <translate tag="a" say="Tell us!" target="_blank" :style="getHrefStyle" :href="issuesPage"/>
                     </footer>
                 </div>
             </article>
@@ -36,9 +36,10 @@
 
         data() {
             return {
-                loading: true,
-                source : '',
-                gallery: {images: [], index: null}
+                loading   : true,
+                source    : '',
+                gallery   : {images: [], index: null},
+                issuesPage: 'https://github.com/marius-wieschollek/passwords/issues'
             };
         },
 

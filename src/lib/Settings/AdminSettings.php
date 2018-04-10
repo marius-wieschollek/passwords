@@ -27,7 +27,10 @@ use OCP\Settings\ISettings;
  */
 class AdminSettings implements ISettings {
 
-    const DOCUMENTATION_URL = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrative-Settings';
+    const LINK_DOCUMENTATION = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index';
+    const LINK_HELP          = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrative-Settings';
+    const LINK_ISSUES        = 'https://github.com/marius-wieschollek/passwords/issues';
+    const LINK_FORUM         = 'https://help.nextcloud.com/c/apps/passwords';
 
     /**
      * @var ConfigurationService
@@ -68,7 +71,6 @@ class AdminSettings implements ISettings {
         return new TemplateResponse('passwords', 'admin/index', [
             'saveSettingsUrl'  => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.set'),
             'clearCacheUrl'    => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.cache'),
-            'documentationUrl' => self::DOCUMENTATION_URL,
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
@@ -77,7 +79,13 @@ class AdminSettings implements ISettings {
             'purgeTimeout'     => $this->getPurgeTimeout(),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
-            'caches'           => $this->getFileCaches()
+            'caches'           => $this->getFileCaches(),
+            'links'            => [
+                'documentation' => self::LINK_DOCUMENTATION,
+                'issues'        => self::LINK_ISSUES,
+                'forum'         => self::LINK_FORUM,
+                'help'          => self::LINK_HELP
+            ]
         ]);
     }
 

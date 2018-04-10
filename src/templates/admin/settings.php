@@ -6,17 +6,30 @@
  */
 
 /** @var $_ array */
-?>
 
-<section id="passwords" class="section">
-    <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
-    <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
+$textForum         = $l->t('Need help');
+$textIssues        = $l->t('found a bug');
+$textDocumentation = $l->t('looking for the documentation');
+
+$links         = [
+    "<a href=\"{$_['links']['forum']}\" rel=\"noreferrer noopener\" target=\"_blank\">{$textForum}</a>",
+    "<a href=\"{$_['links']['issues']}\" rel=\"noreferrer noopener\" target=\"_blank\">{$textIssues}</a>",
+    "<a href=\"{$_['links']['documentation']}\" rel=\"noreferrer noopener\" target=\"_blank\">{$textDocumentation}</a>"
+];
+$footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
+
+?>
+<header class="section passwords">
     <h2>
         <?php p($l->t('Passwords')); ?>
-        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<?php p($l->t('Open documentation'));?>" href="<?=$_['documentationUrl']?>"></a>
+        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<?php p($l->t('Open documentation')); ?>" href="<?=$_['links']['help']?>"></a>
         <span class="msg success"><?php p($l->t('Saved')); ?></span>
         <span class="msg error"><?php p($l->t('Failed')); ?></span>
     </h2>
+</header>
+<section class="section passwords">
+    <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
+    <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
 
     <form>
         <h3><?php p($l->t('Legacy Api Support')); ?></h3>
@@ -93,8 +106,8 @@
         <div class="area other">
             <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
             <select id="passwords-purge-timeout" name="passwords-purge-timeout" name="image" data-setting="entity/purge/timeout">
-                <?php foreach($_['purgeTimeout']['options'] as $value=>$label): ?>
-                    <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current']==$value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                <?php foreach($_['purgeTimeout']['options'] as $value => $label): ?>
+                    <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -111,3 +124,6 @@
         <?php endforeach; ?>
     </form>
 </section>
+<footer class="section passwords">
+    <?php print_unescaped($footerMessage); ?>
+</footer>
