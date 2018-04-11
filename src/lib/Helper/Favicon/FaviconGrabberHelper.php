@@ -72,7 +72,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      *
      * @return array
      */
-    protected function sendApiRequest(string $domain): array {
+    protected function sendApiRequest(string $domain): ?array {
         $this->checkRequestTimeout();
         $request = new RequestHelper();
         $data = $request
