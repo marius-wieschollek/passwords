@@ -64,8 +64,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
         $json = $this->sendApiRequest($domain);
         $icon = $this->analyzeApiResponse($json);
 
-        if($icon === null) return $this->getDefaultFavicon($domain)->getContent();
-        return $this->getHttpRequest($icon);
+        return $icon !== null ? $icon:$this->getDefaultFavicon($domain)->getContent();
     }
 
     /**
@@ -98,22 +97,34 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected function analyzeApiResponse(array $json): ?string {
         if(isset($json['error'])) throw new \Exception("Favicongrabber said: {$json['error']}");
 
-        $iconUrl = null;
+        $iconData = null;
         $sizeOffset = null;
         foreach($json['icons'] as $icon) {
-            if($iconUrl === null) {
-                $iconUrl = $icon['src'];
-            } else if(isset($icon['sizes']) && $icon['sizes'] !== 'any') {
+            if($iconData === null) {
+                $iconData = $this->loadIcon($icon['src']);
+            } else if(isset($icon['sizes'])) {
                 $size = explode($icon['sizes'], 'x')[0];
+                if(!is_numeric($size)) continue;
                 $offset = abs(256 - $size);
                 if($offset < $sizeOffset || $sizeOffset === null) {
                     $sizeOffset = $offset;
-                    $iconUrl = $icon['src'];
+                    $iconData = $this->loadIcon($icon['src'], $iconData);
                 }
             }
         }
 
-        return $iconUrl;
+        return $iconData;
+    }
+
+    /**
+     * @param string      $url
+     * @param string|null $data
+     *
+     * @return null|string
+     */
+    protected function loadIcon(string $url, string $data = null): ?string {
+        $iconData = $this->getHttpRequest($url);
+        return empty($iconData) ? $data:$iconData;
     }
 
     /**
