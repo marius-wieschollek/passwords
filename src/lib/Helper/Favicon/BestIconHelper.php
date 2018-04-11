@@ -17,7 +17,7 @@ use OCA\Passwords\Services\HelperService;
  */
 class BestIconHelper extends AbstractFaviconHelper {
 
-    const BESTICON_DEFAULT_URL = 'https://besticon-demo.herokuapp.com/icon';
+    const BESTICON_DEFAULT_URL = 'https://passwords-app-favicons.herokuapp.com/icon';
     const BESTICON_CONFIG_KEY  = 'service/favicon/bi/url';
 
     /**
