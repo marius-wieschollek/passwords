@@ -100,10 +100,13 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
         $iconData = null;
         $sizeOffset = null;
         foreach($json['icons'] as $icon) {
+            $ext = pathinfo($icon['src'])['extension'];
+            if(!in_array($ext, ['png', 'ico', 'gif', 'jpg', 'jpeg'])) continue;
+
             if($iconData === null) {
                 $iconData = $this->loadIcon($icon['src']);
             } else if(isset($icon['sizes'])) {
-                $size = explode($icon['sizes'], 'x')[0];
+                $size = explode('x', $icon['sizes'])[0];
                 if(!is_numeric($size)) continue;
                 $offset = abs(256 - $size);
                 if($offset < $sizeOffset || $sizeOffset === null) {
