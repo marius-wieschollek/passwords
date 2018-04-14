@@ -113,10 +113,11 @@ class HandbookRenderer {
         }
 
         if(title === null) title = wrap ? this.imageCaption:Localisation.translate('Go to {href}', {href});
+        let rel = target === '_blank' ? 'rel="noreferrer noopener"':'';
 
         return wrap ?
                this._wrapImage(href, title, text) :
-               `<a href="${href}" title="${decodeURI(title)}" target="${target}" style="color:${ThemeManager.getColor()}">${text}</a>`;
+               `<a href="${href}" title="${decodeURI(title)}" target="${target}" style="color:${ThemeManager.getColor()}" ${rel}>${text}</a>`;
     }
 
     /**
@@ -213,7 +214,7 @@ class HandbookRenderer {
      */
     _wrapImage(href, title, source) {
         return `<span class="md-image-container" id="help-image-${this.imageCounter}" data-image-id="${this.imageCounter}">
-                <a class="md-image-link" title="${title}" href="${href}" target="_blank">
+                <a class="md-image-link" title="${title}" href="${href}" target="_blank" rel="noreferrer noopener">
                 ${source}</a></span>`;
     }
 }

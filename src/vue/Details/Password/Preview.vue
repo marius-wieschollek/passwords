@@ -1,20 +1,22 @@
 <template>
     <div class="preview-container" v-if="showPreview">
-        <a :href="link" target="_blank" :title="title">
+        <web :href="link">
             <div class="loader">
                 <img :src="loadingIcon" alt="">
             </div>
             <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
-                <img :src="image" @load="imageLoaded" :alt="title">
+                <img :src="image" @load="imageLoaded" alt="">
             </div>
-        </a>
+        </web>
     </div>
 </template>
 
 <script>
-    import API from "@js/Helper/api";
+    import Web from '@vc/Web';
+    import API from '@js/Helper/api';
 
     export default {
+        components: {Web},
         props: {
             image: {
                 type     : String,
@@ -25,10 +27,6 @@
                 'default': ''
             },
             link : {
-                type     : String,
-                'default': ''
-            },
-            title: {
                 type     : String,
                 'default': ''
             },

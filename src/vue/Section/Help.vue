@@ -10,7 +10,7 @@
                 <div class="handbook-footer">
                     <footer>
                         <translate say="Missing something or found an error?"/>
-                        <translate tag="a" say="Tell us!" target="_blank" :style="getHrefStyle" :href="issuesPage"/>
+                        <web text="Tell us!" :href="issuesPage"/>
                     </footer>
                 </div>
             </article>
@@ -20,16 +20,17 @@
 </template>
 
 <script>
-    import Gallery from '@vue/Components/Gallery';
-    import Translate from '@vue/Components/Translate';
-    import Breadcrumb from '@vue/Components/Breadcrumb';
+    import Web from '@vc/Web';
+    import Gallery from '@vc/Gallery';
+    import Translate from '@vc/Translate';
+    import Breadcrumb from '@vc/Breadcrumb';
     import Localisation from '@js/Classes/Localisation';
-    import ThemeManager from '@js/Manager/ThemeManager';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
 
     // noinspection JSUnusedGlobalSymbols
     export default {
         components: {
+            Web,
             Gallery,
             Translate,
             Breadcrumb
@@ -82,11 +83,6 @@
                     title = path.substr(path.lastIndexOf('/') + 1);
 
                 return title.replace('-', ' ');
-            },
-            getHrefStyle() {
-                return {
-                    color: ThemeManager.getColor()
-                };
             }
         },
 

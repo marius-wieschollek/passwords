@@ -7,17 +7,19 @@
         <i class="prev fa fa-angle-left" aria-hidden="true"></i>
         <i class="next fa fa-angle-right" aria-hidden="true"></i>
         <i class="close fa fa-close" aria-hidden="true"></i>
-        <a class="open fa fa-external-link" target="_blank" :href="imageUrl"></a>
+        <web class="open fa fa-external-link" css="" :href="imageUrl" v-if="imageUrl"></web>
     </div>
 </template>
 
 <script>
+    import Web from '@vc/Web';
     import 'blueimp-gallery/js/blueimp-gallery-fullscreen.js';
     import 'blueimp-gallery/js/blueimp-gallery-video.js';
     import 'blueimp-gallery/js/blueimp-gallery-youtube.js';
     import BlueImp from 'blueimp-gallery/js/blueimp-gallery.js';
 
     export default {
+        components: {Web},
         props: {
             images: {
                 type: Array,

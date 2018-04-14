@@ -5,7 +5,7 @@
         <translate tag="div" say="Password">
             <span @mouseover="showPassword=true" @mouseout="showPassword=false" class="password">{{ togglePassword }}</span>
         </translate>
-        <translate tag="div" say="Website"><a :href="password.url" target="_blank" :style="linkStyle">{{ password.url }}</a></translate>
+        <translate tag="div" say="Website"><web :href="password.url">{{ password.url }}</web></translate>
 
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
@@ -26,12 +26,13 @@
 </template>
 
 <script>
+    import Web from '@vc/Web';
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         components: {
+            Web,
             Translate
         },
 
@@ -69,11 +70,6 @@
                 let status = ['Secure', 'Weak', 'Broken'];
 
                 return status[this.password.status];
-            },
-            linkStyle() {
-                return {
-                    color: ThemeManager.getColor()
-                };
             }
         },
         methods : {

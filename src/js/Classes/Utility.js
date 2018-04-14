@@ -45,6 +45,7 @@ export default class Utility {
         let element = document.createElement('a');
         element.setAttribute('href', url);
         element.setAttribute('target', target);
+        if(target === '_blank' || element.host !== location.host) element.setAttribute('rel', 'noreferrer noopener');
         element.style.display = 'none';
 
         document.body.appendChild(element);
