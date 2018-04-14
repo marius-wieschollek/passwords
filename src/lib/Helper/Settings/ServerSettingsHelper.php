@@ -81,8 +81,8 @@ class ServerSettingsHelper {
                 return $this->themeSettings->get($subKey);
             case 'sharing':
                 return $this->shareSettings->get($subKey);
-            case 'manual':
-                return $this->config->getAppValue('manual/url', self::SERVER_MANUAL_URL);
+            case 'handbook':
+                return $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
         }
 
         return null;
@@ -96,7 +96,7 @@ class ServerSettingsHelper {
             [
                 'server.baseUrl'    => $this->get('baseUrl'),
                 'server.version'    => $this->get('version'),
-                'server.manual.url' => $this->get('manual.url')
+                'server.handbook.url' => $this->get('handbook.url')
             ],
             $this->themeSettings->list(),
             $this->shareSettings->list()

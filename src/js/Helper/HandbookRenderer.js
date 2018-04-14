@@ -10,7 +10,7 @@ import SettingsManager from '@js/Manager/SettingsManager';
 class HandbookRenderer {
 
     constructor() {
-        this.baseUrl = SettingsManager.get('server.manual.url');
+        this.baseUrl = SettingsManager.get('server.handbook.url');
         this.pages = [];
         this.imageCounter = 0;
         this.imageCaption = null;

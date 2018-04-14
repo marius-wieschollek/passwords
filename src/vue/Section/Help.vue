@@ -27,6 +27,7 @@
     import ThemeManager from '@js/Manager/ThemeManager';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
 
+    // noinspection JSUnusedGlobalSymbols
     export default {
         components: {
             Gallery,

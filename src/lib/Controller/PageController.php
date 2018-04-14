@@ -113,7 +113,7 @@ class PageController extends Controller {
      * @return ContentSecurityPolicy
      */
     protected function getContentSecurityPolicy(): ContentSecurityPolicy {
-        $manualHost = parse_url($this->settingsService->get('server.manual.url'), PHP_URL_HOST);
+        $manualHost = parse_url($this->settingsService->get('server.handbook.url'), PHP_URL_HOST);
         $csp        = new ContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
