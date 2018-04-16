@@ -7,11 +7,12 @@
 
 namespace OCA\Passwords\Controller;
 
-use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\IConfig;
 use OCP\IRequest;
 
 /**
@@ -22,7 +23,7 @@ use OCP\IRequest;
 class AdminSettingsController extends Controller {
 
     /**
-     * @var IConfig
+     * @var ConfigurationService
      */
     protected $config;
 
@@ -34,12 +35,12 @@ class AdminSettingsController extends Controller {
     /**
      * AdminSettingsController constructor.
      *
-     * @param string           $appName
-     * @param IRequest         $request
-     * @param IConfig          $config
-     * @param FileCacheService $fileCacheService
+     * @param string               $appName
+     * @param IRequest             $request
+     * @param ConfigurationService $config
+     * @param FileCacheService     $fileCacheService
      */
-    public function __construct($appName, IRequest $request, IConfig $config, FileCacheService $fileCacheService) {
+    public function __construct($appName, IRequest $request, ConfigurationService $config, FileCacheService $fileCacheService) {
         parent::__construct($appName, $request);
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
@@ -57,9 +58,9 @@ class AdminSettingsController extends Controller {
         if($value === 'false') $value = false;
 
         if($value === '') {
-            $this->config->deleteAppValue(Application::APP_NAME, $key);
+            $this->config->deleteAppValue($key);
         } else {
-            $this->config->setAppValue(Application::APP_NAME, $key, $value);
+            $this->config->setAppValue($key, $value);
         }
 
         return new JSONResponse(['status' => 'ok']);
@@ -72,6 +73,14 @@ class AdminSettingsController extends Controller {
      */
     public function cache(string $key): JSONResponse {
         $this->fileCacheService->clearCache($key);
+
+        if(
+            $this->fileCacheService::FAVICON_CACHE == $key &&
+            $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
+            $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL) === BestIconHelper::BESTICON_DEFAULT_URL
+        ) {
+            return new JSONResponse(['status' => 'error'], 400);
+        }
 
         return new JSONResponse(['status' => 'ok']);
     }

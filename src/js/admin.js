@@ -61,8 +61,20 @@ class PasswordsAdminSettings {
      */
     _setValue(key, value) {
         $.post(this.settingsUrl, {key, value})
-         .success(() => {this._showMessage('success');})
-         .fail(() => {this._showMessage('error');});
+            .success(() => {this._showMessage('saved');})
+            .fail(() => {this._showMessage('error');});
+    }
+
+    /**
+     * Clears a cache
+     *
+     * @param key
+     * @private
+     */
+    _clearCache(key) {
+        $.post(this.cacheUrl, {key})
+            .success(() => {this._showMessage('cleared');})
+            .fail(() => {this._showMessage('error');});
     }
 
     /**
@@ -77,19 +89,11 @@ class PasswordsAdminSettings {
 
         clearTimeout(this._timer[type]);
         this._timer[type] = setTimeout(
-            () => { $el.removeClass('active'); },
-            500
-        );
-    }
-
-    /**
-     * Clears a cache
-     *
-     * @param key
-     * @private
-     */
-    _clearCache(key) {
-        $.post(this.cacheUrl, {key});
+            () => {
+                $el.removeClass('active');
+                if(type === 'error') location.reload(true);
+            },
+            1500);
     }
 
     /**
