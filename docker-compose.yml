@@ -20,7 +20,7 @@ services:
     links:
       - mysql
     volumes:
-      - ./docker/volumes/html:/var/www/html
+      - /var/www/html
       - ./src/:/var/www/html/custom_apps/passwords
     environment:
       - NEXTCLOUD_ADMIN_USER=admin
