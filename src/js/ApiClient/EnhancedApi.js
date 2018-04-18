@@ -863,6 +863,15 @@ export default class EnhancedApi extends SimpleApi {
                 data.label = data.label.substr(0, data.label.indexOf('@'));
             }
             data.label = `${EnhancedApi._getWebsiteNameFromDomain(SimpleApi.parseUrl(data.url, 'host'))} - ${data.label}`;
+        } else {
+            let date     = new Date(),
+                text     = 'Password',
+                l10n     = {'de': 'Passwort'},
+                language = navigator.language.substr(0, 2);
+            if(l10n.hasOwnProperty(language)) text = l10n[language];
+            if(data.created) date.setTime(data.created);
+
+            data.label = `${text} ${date.toLocaleDateString()}`;
         }
     }
 
