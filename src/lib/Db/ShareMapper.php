@@ -23,6 +23,7 @@ class ShareMapper extends AbstractMapper {
         = [
             'id',
             'uuid',
+            'user_id',
             'source_password',
             'target_password',
             'source_updated',

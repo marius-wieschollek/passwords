@@ -89,11 +89,11 @@ class SynchronizeShares extends TimedJob {
         $this->setInterval(1);
 
         $this->logger                  = $logger;
+        $this->mailService             = $mailService;
         $this->shareService            = $shareService;
         $this->passwordService         = $passwordService;
         $this->notificationService     = $notificationService;
         $this->passwordRevisionService = $passwordRevisionService;
-        $this->mailService = $mailService;
     }
 
     /**

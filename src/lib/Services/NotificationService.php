@@ -10,7 +10,6 @@ namespace OCA\Passwords\Services;
 use OCA\Passwords\AppInfo\Application;
 use OCP\IL10N;
 use OCP\IURLGenerator;
-use OCP\IUserManager;
 use OCP\L10N\IFactory;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
@@ -39,9 +38,9 @@ class NotificationService implements INotifier {
     protected $l10NFactory;
 
     /**
-     * @var IUserManager
+     * @var UserService
      */
-    protected $userManager;
+    protected $userService;
 
     /**
      * @var IURLGenerator
@@ -58,29 +57,27 @@ class NotificationService implements INotifier {
      *
      * @param IFactory        $l10nFactory
      * @param IURLGenerator   $urlGenerator
-     * @param IUserManager    $userManager
+     * @param UserService     $userService
      * @param SettingsService $settings
      * @param IManager        $notificationManager
      */
     public function __construct(
         IFactory $l10nFactory,
-        IURLGenerator $urlGenerator,
-        IUserManager $userManager,
+        UserService $userService,
         SettingsService $settings,
+        IURLGenerator $urlGenerator,
         IManager $notificationManager
     ) {
-        $this->l10NFactory         = $l10nFactory;
-        $this->urlGenerator        = $urlGenerator;
-        $this->userManager         = $userManager;
         $this->settings            = $settings;
+        $this->l10NFactory         = $l10nFactory;
+        $this->userService         = $userService;
+        $this->urlGenerator        = $urlGenerator;
         $this->notificationManager = $notificationManager;
     }
 
     /**
      * @param string $userId
      * @param int    $passwords
-     *
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendBadPasswordNotification(string $userId, int $passwords): void {
         if(!$this->settings->get('user.notification.security', $userId)) return;
@@ -95,8 +92,6 @@ class NotificationService implements INotifier {
     /**
      * @param string $receiverId
      * @param array  $owners
-     *
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendShareCreateNotification(string $receiverId, array $owners): void {
         if(!$this->settings->get('user.notification.shares', $receiverId)) return;
@@ -111,8 +106,6 @@ class NotificationService implements INotifier {
     /**
      * @param string $userId
      * @param int    $passwords
-     *
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendShareLoopNotification(string $userId, int $passwords): void {
         if(!$this->settings->get('user.notification.errors', $userId)) return;
@@ -126,8 +119,6 @@ class NotificationService implements INotifier {
 
     /**
      * @param string $userId
-     *
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendTokenErrorNotification(string $userId): void {
         if(!$this->settings->get('user.notification.security', $userId)) return;
@@ -224,14 +215,14 @@ class NotificationService implements INotifier {
 
         if($ownerCount === 1) {
             $ownerId       = key($owners);
-            $owner         = $this->userManager->get($ownerId)->getDisplayName();
+            $owner         = $this->userService->getUserName($ownerId);
             $passwordCount = $owners[ $ownerId ];
 
             $title = $localisation->n('%s shared a password with you.', '%s shared %s passwords with you.', $passwordCount, [$owner, $passwordCount]);
         } else {
             $params = [];
             foreach($owners as $ownerId => $amount) {
-                if(count($params) < 4) $params[] = $this->userManager->get($ownerId)->getDisplayName();
+                if(count($params) < 4) $params[] = $this->userService->getUserName($ownerId);
                 $passwordCount += $amount;
             }
             $params = array_reverse($params);

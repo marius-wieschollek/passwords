@@ -5,8 +5,8 @@
             <share :share="share" v-on:delete="deleteShare($event)"></share>
         </ul>
         <ul class="user-search" :style="getDropDownStyle" v-if="matches.length !== 0">
-            <li v-for="(name,uid) in matches" @click="shareWithUser(uid)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
-                <img :src="getAvatarUrl(uid)" :alt="name" class="avatar">&nbsp;{{name}}
+            <li v-for="match in matches" @click="shareWithUser(match.id)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
+                <img :src="getAvatarUrl(match.id)" :alt="match.name" class="avatar">&nbsp;{{match.name}}
             </li>
         </ul>
     </div>
@@ -89,7 +89,7 @@
                     if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
                     let name = matches[i];
 
-                    this.matches[i] = name;
+                    this.matches.push({id:i,name});
                     this.nameMap[name] = i;
                     this.idMap[i] = name;
                 }

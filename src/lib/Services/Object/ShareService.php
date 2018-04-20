@@ -100,12 +100,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourcePasswordAndReceiver(string $passwordUuid, string $userId): ?Share {
-        return $this->mapper->findOneMatching(
-            [
-                ['source_password', $passwordUuid],
-                ['receiver', $userId]
-            ]
-        );
+        return $this->mapper->findOneMatching([['source_password', $passwordUuid], ['receiver', $userId]]);
     }
 
     /**
@@ -133,6 +128,16 @@ class ShareService extends AbstractService {
      */
     public function findByUuid(string $uuid): Share {
         return $this->mapper->findByUuid($uuid);
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return ModelInterface[]
+     * @throws \Exception
+     */
+    public function findByUserId(string $userId): array {
+        return $this->mapper->findAllMatching([['user_id', $userId, '=', 'OR'], ['receiver', $userId]]);
     }
 
     /**

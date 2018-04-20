@@ -17,7 +17,6 @@ RUN apt-get update -y && \
     msmtp \
     wget \
     tar \
-    php-xdebug \
     nodejs && \
     apt-get clean
 

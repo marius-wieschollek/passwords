@@ -72,7 +72,7 @@ class FallbackIconGenerator {
      */
     public function createIcon(string $text, int $size): string {
         $color = $this->stringToColor($text);
-        $char  = strtoupper($text[0]);
+        $char  = isset($text[0]) ? strtoupper($text[0]):'';
 
         if(get_class($this->imageHelper) === GdHelper::class || !$this->imageHelper->supportsFormat('svg')) {
             return $this->createIconWithGd($color, $char, $size);

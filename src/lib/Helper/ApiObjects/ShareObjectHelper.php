@@ -10,9 +10,9 @@ namespace OCA\Passwords\Helper\ApiObjects;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\UserService;
 use OCP\AppFramework\IAppContainer;
 use OCP\IConfig;
-use OCP\IUserManager;
 
 /**
  * Class ShareObjectHelper
@@ -34,9 +34,9 @@ class ShareObjectHelper extends AbstractObjectHelper {
     protected $config;
 
     /**
-     * @var IUserManager
+     * @var UserService
      */
-    protected $userManager;
+    protected $userService;
 
     /**
      * @var PasswordService
@@ -53,22 +53,22 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * AbstractObjectHelper constructor.
      *
      * @param null|string     $userId
-     * @param IConfig    $config
+     * @param IConfig         $config
+     * @param UserService     $userService
      * @param IAppContainer   $container
-     * @param IUserManager    $userManager
      * @param PasswordService $passwordService
      */
     public function __construct(
         ?string $userId,
         IConfig $config,
+        UserService $userService,
         IAppContainer $container,
-        IUserManager $userManager,
         PasswordService $passwordService
     ) {
         $this->userId          = $userId;
-        $this->config = $config;
+        $this->config          = $config;
         $this->container       = $container;
-        $this->userManager     = $userManager;
+        $this->userService     = $userService;
         $this->passwordService = $passwordService;
     }
 
@@ -109,9 +109,6 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @return array
      */
     protected function getModel(Share $share): array {
-        $owner    = $this->userManager->get($share->getUserId());
-        $receiver = $this->userManager->get($share->getReceiver());
-
         $password = $this->userId === $share->getUserId() ? $share->getSourcePassword():$share->getTargetPassword();
 
         $shareable = $share->isShareable();
@@ -127,12 +124,12 @@ class ShareObjectHelper extends AbstractObjectHelper {
             'password'      => $password,
             'updatePending' => $share->isSourceUpdated() || $share->isTargetUpdated(),
             'owner'         => [
-                'id'   => $owner->getUID(),
-                'name' => $owner->getDisplayName()
+                'id'   => $share->getUserId(),
+                'name' => $this->userService->getUserName($share->getUserId())
             ],
             'receiver'      => [
-                'id'   => $receiver->getUID(),
-                'name' => $receiver->getDisplayName()
+                'id'   => $share->getReceiver(),
+                'name' => $this->userService->getUserName($share->getReceiver())
             ]
         ];
     }

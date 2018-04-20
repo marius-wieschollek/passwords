@@ -13,7 +13,6 @@ use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
-use OCP\IUserManager;
 use OCP\L10N\IFactory;
 use OCP\Mail\IMailer;
 use OCP\Util;
@@ -46,9 +45,9 @@ class MailService {
     protected $settings;
 
     /**
-     * @var IUserManager
+     * @var UserService
      */
-    protected $userManager;
+    protected $userService;
 
     /**
      * @var IFactory
@@ -78,7 +77,7 @@ class MailService {
      * @param OC_Defaults     $defaults
      * @param IFactory        $l10NFactory
      * @param LoggingService  $logger
-     * @param IUserManager    $userManager
+     * @param UserService     $userService
      * @param SettingsService $settings
      * @param IURLGenerator   $urlGenerator
      */
@@ -88,7 +87,7 @@ class MailService {
         OC_Defaults $defaults,
         IFactory $l10NFactory,
         LoggingService $logger,
-        IUserManager $userManager,
+        UserService $userService,
         SettingsService $settings,
         IURLGenerator $urlGenerator
     ) {
@@ -96,7 +95,7 @@ class MailService {
         $this->logger       = $logger;
         $this->config       = $config;
         $this->settings     = $settings;
-        $this->userManager  = $userManager;
+        $this->userService  = $userService;
         $this->l10NFactory  = $l10NFactory;
         $this->urlGenerator = $urlGenerator;
         $this->defaults     = $defaults;
@@ -110,7 +109,9 @@ class MailService {
      */
     public function sendBadPasswordMail(string $userId, int $passwords) {
         if(!$this->settings->get('user.mail.security', $userId)) return;
-        $user         = $this->userManager->get($userId);
+        $user = $this->userService->getUser($userId);
+        if($user === null) return;
+
         $localisation = $this->getLocalisation($userId);
 
         $subject = $localisation->n('You have an insecure password', 'You have insecure passwords', $passwords);
@@ -157,21 +158,23 @@ class MailService {
      */
     public function sendShareCreateMail(string $userId, array $owners) {
         if(!$this->settings->get('user.mail.shares', $userId)) return;
-        $user          = $this->userManager->get($userId);
+        $user = $this->userService->getUser($userId);
+        if($user === null) return;
+
         $localisation  = $this->getLocalisation($userId);
         $ownerCount    = count($owners);
         $passwordCount = 0;
 
         if($ownerCount === 1) {
             $ownerId       = key($owners);
-            $owner         = $this->userManager->get($ownerId)->getDisplayName();
+            $owner         = $this->userService->getUserName($ownerId);
             $passwordCount = $owners[ $ownerId ];
 
             $body = $localisation->n('%s shared a password with you.', '%s shared %s passwords with you.', $passwordCount, [$owner, $passwordCount]);
         } else {
             $params = [];
             foreach($owners as $ownerId => $amount) {
-                if(count($params) < 4) $params[] = $this->userManager->get($ownerId)->getDisplayName();
+                if(count($params) < 4) $params[] = $this->userService->getUserName($ownerId);
                 $passwordCount += $amount;
             }
             $params = array_reverse($params);
