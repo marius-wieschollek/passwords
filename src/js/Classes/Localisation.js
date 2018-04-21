@@ -16,10 +16,11 @@ export default class Localisation {
     /**
      *
      * @param date
+     * @param month
      * @returns {string}
      */
-    static formatDate(date) {
-        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month: 'short', day: 'numeric' });
+    static formatDate(date, month = 'short') {
+        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month, day: 'numeric' });
     }
 
     /**

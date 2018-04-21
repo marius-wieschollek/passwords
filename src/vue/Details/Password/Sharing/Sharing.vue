@@ -104,6 +104,7 @@
                 };
                 API.createShare(share).then(
                     (d) => {
+                        this.getSharedWithUsers.push(receiver);
                         share.id = d.id;
                         share.updatePending = true;
                         share.owner = {
@@ -115,7 +116,9 @@
                         this.search = '';
                         this.$forceUpdate();
                     }
-                );
+                ).catch((e) => {
+                    Messages.notification(['Unable to share password: {message}', {message:e.message}]);
+                });
             },
             getHoverStyle($event, on = true) {
                 if(on) {
@@ -140,7 +143,7 @@
                     if(this.idMap.hasOwnProperty(uid)) {
                         this.addShare(uid);
                     } else {
-                        Messages.alert(['The user {uid} does not exist', {uid: uid}], 'Invalid user');
+                        Messages.notification(['The user {uid} does not exist', {uid}]);
                     }
                 }
             },

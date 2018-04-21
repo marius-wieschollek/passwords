@@ -3,7 +3,7 @@
         <div class="options">
             <translate icon="pencil" :class="{active: share.editable}" title="Toggle write permissions" @click="toggleEditable(share)"/>
             <translate icon="share-alt" :class="{active: share.shareable}" title="Toggle share permissions" @click="toggleShareable(share)"/>
-            <translate icon="calendar" :class="{active: share.expires}" title="Set expiration date" @click="setExpires(share)"/>
+            <translate icon="calendar" :class="{active: share.expires}" :title="getExpirationDateTitle" @click="setExpires(share)"/>
             <translate icon="trash" title="Stop sharing" @click="deleteAction(share)"/>
         </div>
         <img :src="share.receiver.icon" :alt="share.receiver.name" class="avatar">
@@ -35,6 +35,10 @@
                     return Localisation.translate('Some data is waiting to be synchronized');
                 }
                 return undefined;
+            },
+            getExpirationDateTitle() {
+                if(!this.share.expires) return 'Set expiration date';
+                return Localisation.translate('Expires on {date}', {date: Localisation.formatDate(this.share.expires, 'long')});
             }
         },
 
@@ -54,10 +58,10 @@
                 this.$forceUpdate();
             },
             setExpires(share) {
-                let date = share.expires ? new Date(share.expires):new Date(),
+                let value = share.expires ? new Date(share.expires).toISOString().substring(0, 10):null,
                     form = {
                         expires: {
-                            value: date.toLocaleDateString(),
+                            value: value,
                             type : 'date',
                             label: 'Date'
                         }
