@@ -217,7 +217,7 @@ class ServiceApiController extends AbstractApiController {
             return $this->createJsonResponse(['status' => 'ok'], 200);
         }
 
-        $timeout = rand(5, 15);
+        $timeout = rand(5, 10);
         $time    = time();
         $this->config->setUserValue('reset_time', $time);
         $this->config->setUserValue('reset_timeout', $timeout);

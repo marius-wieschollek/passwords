@@ -23,7 +23,7 @@ Scenario('Reset the Account', (I) => {
 
     I.waitForInvisible('.passwords-form', 5);
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
-    I.wait(15);
+    I.wait(10);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
     I.waitUrlEquals('/index.php/apps/passwords/#/', 20);
 });
