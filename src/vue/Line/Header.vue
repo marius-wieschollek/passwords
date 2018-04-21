@@ -1,7 +1,7 @@
 <template>
     <div class="row header">
-        <translate class="title" :class="titleClass" say="Name" @click="updateSorting('label')"/>
-        <translate class="date" :class="dateClass" say="Changed" @click="updateSorting('edited')"/>
+        <translate class="title" :class="titleClass" say="Name" @click="updateSorting('label')" title="Sort by name"/>
+        <translate class="date" :class="dateClass" say="Modified" @click="updateSorting('edited')" title="Sort by modified date"/>
     </div>
 </template>
 

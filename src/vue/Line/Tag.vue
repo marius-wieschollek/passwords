@@ -1,7 +1,7 @@
 <template>
-    <div class="row tag" :data-tag-id="tag.id" @click="openAction($event)" :title="tag.label">
+    <div class="row tag" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
         <i class="fa fa-star favourite" :class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon fa fa-tag" :style="{color: this.tag.color}"></div>
+        <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
@@ -18,7 +18,7 @@
                 </slot>
             </div>
         </div>
-        <div class="date">{{ getDate }}</div>
+        <div class="date" :title="dateTitle">{{ getDate }}</div>
     </div>
 </template>
 
@@ -48,6 +48,9 @@
         computed: {
             getDate() {
                 return Localisation.formatDate(this.tag.edited);
+            },
+            dateTitle() {
+                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.tag.edited, 'long')});
             }
         },
 

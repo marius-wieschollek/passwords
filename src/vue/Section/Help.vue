@@ -259,10 +259,14 @@
                 padding-bottom : 1em;
             }
 
-            ol,
+            ol {
+                padding-left    : 1em;
+                list-style-type : decimal;
+            }
+
             ul {
                 padding-left    : 1em;
-                list-style-type : initial;
+                list-style-type : circle;
             }
 
             em {

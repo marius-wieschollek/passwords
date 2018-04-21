@@ -1,11 +1,12 @@
 <template>
     <div class="row folder"
-         :data-folder-id="folder.id"
-         data-drop-type="folder"
          @click="openAction($event)"
-         @dragstart="dragStartAction($event)" :title="folder.label">
+         @dragstart="dragStartAction($event)"
+         :data-folder-id="folder.id"
+         :data-folder-title="folder.label"
+         data-drop-type="folder">
         <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}">&nbsp;</div>
+        <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
         <div class="more" @click="toggleMenu($event)">
@@ -22,7 +23,7 @@
                 </slot>
             </div>
         </div>
-        <div class="date">{{ getDate }}</div>
+        <div class="date" :title="dateTitle">{{ getDate }}</div>
     </div>
 </template>
 
@@ -53,6 +54,9 @@
         computed: {
             getDate() {
                 return Localisation.formatDate(this.folder.edited);
+            },
+            dateTitle() {
+                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.folder.edited, 'long')});
             }
         },
 

@@ -23,9 +23,9 @@ Scenario('Reset the Account', (I) => {
 
     I.waitForInvisible('.passwords-form', 5);
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
-    I.wait(10);
+    I.wait(11);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
-    I.waitUrlEquals('/index.php/apps/passwords/#/', 20);
+    I.waitUrlEquals('/index.php/apps/passwords/#/', 30);
 });
 
 Scenario('Import the sample database', async (I) => {
@@ -76,12 +76,24 @@ Scenario('Show Main Section', (I) => {
     I.captureWholePage('main-section', 3);
 });
 
+Scenario('Show Single Password', (I) => {
+    I.amOnPage('/index.php/apps/passwords/');
+    I.waitForElement('div.row', 10);
+    I.captureElement('password-single', 'div[data-password-title=Amazon]', 0);
+});
+
 Scenario('Show Folder Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/folders');
-    I.waitForElement('div.title[title=Work]', 10);
-    I.click('div.title[title=Work]');
-    I.waitForElement('div.title[title=Development]', 10);
+    I.waitForElement('div[data-folder-title=Work]', 10);
+    I.click('div[data-folder-title=Work]');
+    I.waitForElement('div[data-folder-title=Development]', 10);
     I.captureWholePage('folder-section');
+});
+
+Scenario('Show Single Folder', (I) => {
+    I.amOnPage('/index.php/apps/passwords/#/folders');
+    I.waitForElement('div[data-folder-title=Work]', 10);
+    I.captureElement('folder-single', 'div[data-folder-title=Work]', 0);
 });
 
 Scenario('Show Recent Section', (I) => {
@@ -100,6 +112,12 @@ Scenario('Show Tags Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/tags');
     I.waitForElement('div.row', 10);
     I.captureWholePage('tags-section', 0);
+});
+
+Scenario('Show Single Tag', (I) => {
+    I.amOnPage('/index.php/apps/passwords/#/tags');
+    I.waitForElement('div[data-tag-title=Communication]', 10);
+    I.captureElement('tag-single', 'div[data-tag-title=Communication]', 0);
 });
 
 Scenario('Show Shared Section', (I) => {

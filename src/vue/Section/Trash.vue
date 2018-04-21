@@ -5,12 +5,15 @@
             <div class="item-list">
                 <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
+                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password)" :title="restoreTitle"></i>
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)" say="Restore"/>
                 </folder-line>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id">
+                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password)" :title="restoreTitle"></i>
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreTagAction(tag)" say="Restore"/>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
+                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password)" :title="restoreTitle"></i>
                     <translate tag="li" icon="undo" slot="menu-top" @click="restorePasswordAction(password)" say="Restore"/>
                 </password-line>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
@@ -57,6 +60,9 @@
         },
 
         computed: {
+            restoreTitle() {
+                return Localisation.translate('Restore this item');
+            },
             getEmptyText() {
                 if(this.search.active) {
                     return Localisation.translate('We could not find anything for "{query}"', {query:this.search.query});

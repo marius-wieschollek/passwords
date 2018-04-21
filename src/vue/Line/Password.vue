@@ -1,13 +1,18 @@
 <template>
-    <div class="row password" @click="copyPasswordAction($event)" @dblclick="copyUsernameAction($event)" @dragstart="dragStartAction($event)" :data-password-id="password.id" :title="password.label">
+    <div class="row password"
+         @click="copyPasswordAction($event)"
+         @dblclick="copyUsernameAction($event)"
+         @dragstart="dragStartAction($event)"
+         :data-password-id="password.id"
+         :data-password-title="password.label">
         <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
-        <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}">&nbsp;</div>
+        <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}" :title="getTitle">&nbsp;</div>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
             <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
         </ul>
         <slot name="middle"/>
-        <i :class="securityCheck" class="fa fa-shield security"></i>
+        <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -28,7 +33,7 @@
                 </slot>
             </div>
         </div>
-        <div class="date">{{ getDate }}</div>
+        <div class="date" :title="dateTitle">{{ getDate }}</div>
     </div>
 </template>
 
@@ -72,6 +77,13 @@
                         return 'fail';
                 }
             },
+            securityTitle() {
+                let label = 'Secure';
+                if(this.password.status === 1) label = 'Weak';
+                if(this.password.status === 2) label = 'Broken';
+
+                return Localisation.translate(label);
+            },
             showCopyOptions() {
                 return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
             },
@@ -98,6 +110,9 @@
             },
             getDate() {
                 return Localisation.formatDate(this.password.edited);
+            },
+            dateTitle() {
+                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.password.edited, 'long')});
             }
         },
 
@@ -263,15 +278,24 @@
                 }
 
                 .more,
+                .icon,
                 .security {
                     line-height : 50px;
                     width       : 50px;
                     font-size   : 1rem;
                     text-align  : center;
                     flex-shrink : 0;
+                    color       : $color-grey;
+                    transition  : color 0.2s ease-in-out;
 
+                    &.icon,
                     &.security {
                         font-size : 1.25rem;
+                    }
+
+                    &:active,
+                    &:hover {
+                        color : $color-black;
                     }
 
                     &.ok {
@@ -287,15 +311,9 @@
 
                 .more {
                     position : relative;
-                    color    : $color-grey;
 
                     > i {
                         cursor : pointer;
-
-                        &:active,
-                        &:hover {
-                            color : $color-black;
-                        }
                     }
 
                     .menu {

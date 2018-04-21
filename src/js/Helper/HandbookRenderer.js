@@ -10,7 +10,7 @@ import SettingsManager from '@js/Manager/SettingsManager';
 class HandbookRenderer {
 
     constructor() {
-        this.baseUrl = SettingsManager.get('server.handbook.url');
+        this.handbookUrl = SettingsManager.get('server.handbook.url');
         this.pages = [];
         this.imageCounter = 0;
         this.imageCaption = null;
@@ -25,15 +25,16 @@ class HandbookRenderer {
         if(this.pages.hasOwnProperty(page)) return this.pages[page];
 
         try {
-            let url      = this.baseUrl + page,
-                response = await fetch(new Request(`${url}.md`));
+            let url      = this.handbookUrl + page,
+                response = await fetch(new Request(`${url}.md`)),
+                baseUrl = url.substr(url, url.lastIndexOf('/')+1);
 
             if(response.ok) {
-                let html = this.render(await response.text(), url);
+                let html = this.render(await response.text(), baseUrl, url);
                 this.pages[page] = html;
                 return html;
             }
-            throw new Error(response.statusText);
+            return Localisation.translate('Unable to fetch page: {message}.', {message: Localisation.translate(response.statusText)});
         } catch(e) {
             if(process.env.NODE_ENV === 'development') console.error('Request failed', e);
             throw e;
@@ -43,15 +44,16 @@ class HandbookRenderer {
     /**
      *
      * @param markdown
-     * @param url
+     * @param baseUrl
+     * @param documentUrl
      * @returns {*}
      */
-    render(markdown, url) {
+    render(markdown, baseUrl, documentUrl) {
         this.imageCounter = 0;
 
         let renderer = new marked.Renderer();
-        renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, url);};
-        renderer.image = (href, title, text, nowrap) => { return this._renderImage(href, title, text, nowrap);};
+        renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl);};
+        renderer.image = (href, title, text, nowrap) => { return this._renderImage(href, title, text, nowrap, baseUrl);};
         renderer.heading = HandbookRenderer._renderHeader;
         HandbookRenderer._extendMarkedLexer();
 
@@ -94,18 +96,19 @@ class HandbookRenderer {
      * @param title
      * @param text
      * @param wrap
-     * @param pageUrl
+     * @param baseUrl
+     * @param documentUrl
      * @returns {string}
      * @private
      */
-    _renderLink(href, title, text, wrap = false, pageUrl) {
+    _renderLink(href, title, text, wrap, baseUrl, documentUrl) {
         let target = '_blank',
-            url    = new URL(href, pageUrl);
+            url    = new URL(href, baseUrl);
 
         href = url.href;
-        if(url.href.indexOf(pageUrl) !== -1 && url.hash.length) {
+        if(url.href.indexOf(documentUrl) !== -1 && url.hash.length) {
             [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title);
-        } else if(url.href.indexOf(this.baseUrl) !== -1) {
+        } else if(url.href.indexOf(this.handbookUrl) !== -1) {
             let mime = url.href.substr(url.href.lastIndexOf('.') + 1);
             if(['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
                 [href, title, target] = this._processInternalLink(url, title);
@@ -144,7 +147,7 @@ class HandbookRenderer {
      */
     _processInternalLink(url, title) {
         let hash = undefined,
-            href = url.href.substr(this.baseUrl.length);
+            href = url.href.substr(this.handbookUrl.length);
         if(url.hash.length) {
             hash = HandbookRenderer._getLinkAnchor(url.hash);
             href = href.substring(0, href.indexOf(url.hash));
@@ -176,7 +179,7 @@ class HandbookRenderer {
      */
     static _renderHeader(text, level) {
         let id     = text.trim().toLowerCase().replace(/[^\w]+/g, '-'),
-            [link] = HandbookRenderer._processAnchorLink(`#${id}`, '', '');
+            [link] = HandbookRenderer._processAnchorLink(`#${id}`, '');
 
         return `<h${level} id="help-${id}"><a href="${link}" class="fa fa-link help-anchor" aria-hidden="true"></a>${text}</h${level}>`;
     }
@@ -187,21 +190,22 @@ class HandbookRenderer {
      * @param title
      * @param text
      * @param nowrap
+     * @param baseUrl
      * @returns {string}
      * @private
      */
-    _renderImage(href, title, text, nowrap = false) {
-        if(href.substr(0, 5) !== 'https') href = this.baseUrl + href;
+    _renderImage(href, title, text, nowrap, baseUrl) {
+        let url    = new URL(href, baseUrl);
 
         this.imageCounter++;
         if(text === null) text = href;
         if(title === null) title = text;
 
         let caption = Localisation.translate('Figure {count}: {title}', {count: this.imageCounter, title}),
-            source  = `<img src="${href}" alt="${text.replace(/"/g, '&quot;')}" class="md-image"><span class="md-image-caption">${caption}</span>`;
+            source  = `<img src="${url}" alt="${text.replace(/"/g, '&quot;')}" class="md-image"><span class="md-image-caption">${caption}</span>`;
         this.imageCaption = caption;
 
-        return nowrap ? source:this._wrapImage(href, caption, source);
+        return nowrap ? source:this._wrapImage(url, caption, source);
     }
 
     /**
