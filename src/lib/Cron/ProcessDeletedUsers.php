@@ -74,7 +74,7 @@ class ProcessDeletedUsers extends TimedJob {
                 $usersNotDeleted[] = $userId;
             };
         }
-        $this->logger->info(['Deleted %s users', $deleted]);
+        $this->logger->info(['Deleted %s user(s)', $deleted]);
         $this->config->setAppValue('deleted_users', json_encode($usersNotDeleted));
     }
 

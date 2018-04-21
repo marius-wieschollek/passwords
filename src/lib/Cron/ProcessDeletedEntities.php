@@ -143,9 +143,8 @@ class ProcessDeletedEntities extends TimedJob {
      */
     protected function run($argument): void {
         $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
-        if($timeout < 0) return;
+        if($timeout > 0) $this->time = time() - $timeout;
 
-        $this->time = time() - $timeout;
         $objects = $this->deleteObjects($this->tagService);
         $objects += $this->deleteObjects($this->shareService);
         $objects += $this->deleteObjects($this->folderService);
@@ -155,7 +154,7 @@ class ProcessDeletedEntities extends TimedJob {
         $objects += $this->deleteObjects($this->passwordRevisionService);
         $objects += $this->deleteObjects($this->passwordTagRelationService);
 
-        $this->logger->info(['Deleted %s objects permanently', $objects]);
+        $this->logger->info(['Deleted %s object(s) permanently', $objects]);
     }
 
     /**
@@ -170,7 +169,7 @@ class ProcessDeletedEntities extends TimedJob {
 
             $counter = 0;
             foreach($objects as $object) {
-                if($this->time > $object->getUpdated() || !$this->userExists($object->getUserId())) {
+                if(($this->time > 0 && $this->time > $object->getUpdated()) || !$this->userExists($object->getUserId())) {
                     $counter++;
                     $service->destroy($object);
                 }
