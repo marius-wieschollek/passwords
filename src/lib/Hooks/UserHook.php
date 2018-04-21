@@ -32,11 +32,30 @@ class UserHook {
     }
 
     /**
+     * @param string $user
+     *
+     * @throws \Exception
+     */
+    public function preCreateUser(string $user) {
+        $deletedUsers = $this->getDeletedUsers();
+        if(in_array($user, $deletedUsers)) throw new \InvalidArgumentException("The username {$user} is queued for deletion");
+    }
+
+    /**
      * @param IUser $user
      */
     public function postDelete(IUser $user): void {
-        $deletedUsers   = json_decode($this->config->getAppValue('deleted_users', '{}'), true);
+        $deletedUsers   = $this->getDeletedUsers();
         $deletedUsers[] = $user->getUID();
         $this->config->setAppValue('deleted_users', json_encode($deletedUsers));
+    }
+
+    /**
+     * @return array
+     */
+    protected function getDeletedUsers(): array {
+        $deletedUsers = json_decode($this->config->getAppValue('deleted_users', '{}'), true);
+
+        return $deletedUsers;
     }
 }

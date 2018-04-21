@@ -195,6 +195,7 @@ class Application extends App {
 
         /** @var \OC\User\Manager $userManager */
         $userManager = $container->query(IUserManager::class);
+        $userManager->listen('\OC\User', 'preCreateUser', [$userHook, 'preCreateUser']);
         $userManager->listen('\OC\User', 'postDelete', [$userHook, 'postDelete']);
     }
 
