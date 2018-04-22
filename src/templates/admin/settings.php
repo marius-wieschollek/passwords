@@ -22,7 +22,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 <header class="section passwords" id="passwords">
     <h2>
         <? p($l->t('Passwords')); ?>
-        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<? p($l->t('Open documentation')); ?>" href=""></a>
+        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<? p($l->t('Open documentation')); ?>" href="<?=$_['links']['help']?>"></a>
         <span class="msg success saved"><? p($l->t('Saved')); ?></span>
         <span class="msg success cleared"><? p($l->t('Cleared')); ?></span>
         <span class="msg error"><? p($l->t('Failed')); ?></span>
