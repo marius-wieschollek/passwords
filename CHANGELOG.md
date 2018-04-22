@@ -1,3 +1,6 @@
+#### 2018.4.1 - Bugfix Release
+- Fix syntax error in index.php
+
 #### 2018.4.0 - Feature Release
 * Added in app user handbook
 * Added in page search
