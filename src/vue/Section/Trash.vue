@@ -5,15 +5,15 @@
             <div class="item-list">
                 <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
-                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password)" :title="restoreTitle"></i>
+                    <i class="icon fa fa-undo" slot="middle" @click="restoreFolderAction(folder, $event)" :title="restoreTitle"></i>
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)" say="Restore"/>
                 </folder-line>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id">
-                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password)" :title="restoreTitle"></i>
+                    <i class="icon fa fa-undo" slot="middle" @click="restoreTagAction(tag, $event)" :title="restoreTitle"></i>
                     <translate tag="li" icon="undo" slot="menu-top" @click="restoreTagAction(tag)" say="Restore"/>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
-                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password)" :title="restoreTitle"></i>
+                    <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password, $event)" :title="restoreTitle"></i>
                     <translate tag="li" icon="undo" slot="menu-top" @click="restorePasswordAction(password)" say="Restore"/>
                 </password-line>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
@@ -79,15 +79,18 @@
                 API.findFolders({trashed: true}).then(this.updateFolderList);
                 API.findTags({trashed: true}).then(this.updateTagList);
             },
-            restorePasswordAction(password) {
+            restorePasswordAction(password, $event) {
+                if($event) $event.stopPropagation();
                 PasswordManager.restorePassword(password);
                 API.findPasswords({trashed: true}).then(this.updatePasswordList);
             },
-            restoreFolderAction(folder) {
+            restoreFolderAction(folder, $event) {
+                if($event) $event.stopPropagation();
                 FolderManager.restoreFolder(folder);
                 API.findFolders({trashed: true}).then(this.updateFolderList);
             },
-            restoreTagAction(tag) {
+            restoreTagAction(tag, $event) {
+                if($event) $event.stopPropagation();
                 TagManager.restoreTag(tag);
                 API.findTags({trashed: true}).then(this.updateTagList);
             },
