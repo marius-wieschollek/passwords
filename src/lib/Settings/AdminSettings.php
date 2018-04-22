@@ -29,6 +29,7 @@ class AdminSettings implements ISettings {
 
     const LINK_DOCUMENTATION = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index';
     const LINK_HELP          = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrative-Settings';
+    const LINK_REQUIREMENTS  = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/System-Requirements';
     const LINK_ISSUES        = 'https://github.com/marius-wieschollek/passwords/issues';
     const LINK_FORUM         = 'https://help.nextcloud.com/c/apps/passwords';
 
@@ -80,8 +81,10 @@ class AdminSettings implements ISettings {
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
             'caches'           => $this->getFileCaches(),
+            'support'          => $this->getPlatformSupport(),
             'links'            => [
                 'documentation' => self::LINK_DOCUMENTATION,
+                'requirements'  => self::LINK_REQUIREMENTS,
                 'issues'        => self::LINK_ISSUES,
                 'forum'         => self::LINK_FORUM,
                 'help'          => self::LINK_HELP
@@ -304,6 +307,16 @@ class AdminSettings implements ISettings {
         }
 
         return $info;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPlatformSupport(): array {
+        return [
+            'php'   => PHP_VERSION_ID >= 70100,
+            'https' => \OC::$server->getRequest()->getHttpProtocol() !== 'https'
+        ];
     }
 
     /**

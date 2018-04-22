@@ -97,6 +97,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param string $file
      *
      * @return Gmagick|Imagick
+     * @throws \ImagickException
      */
     public function getImageFromFile(string $file) {
         $image = $this->getNewImageObject();
@@ -152,6 +153,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param $blob
      *
      * @return bool
+     * @throws \ImagickException
      */
     public function supportsImage($blob): bool {
         $size = getimagesizefromstring($blob);
@@ -166,6 +168,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param string $format
      *
      * @return bool
+     * @throws \ImagickException
      */
     public function supportsFormat(string $format): bool {
         $image = $this->getNewImageObject();
@@ -209,6 +212,7 @@ class ImagickHelper extends AbstractImageHelper {
 
     /**
      * @return Imagick|Gmagick
+     * @throws \ImagickException
      */
     protected function getNewImageObject() {
         return class_exists(Imagick::class) ? new Imagick():new Gmagick();

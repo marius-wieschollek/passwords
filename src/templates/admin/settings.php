@@ -22,7 +22,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 <header class="section passwords" id="passwords">
     <h2>
         <? p($l->t('Passwords')); ?>
-        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<? p($l->t('Open documentation')); ?>" href="<?=$_['links']['help']?>"></a>
+        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<? p($l->t('Open documentation')); ?>" href=""></a>
         <span class="msg success saved"><? p($l->t('Saved')); ?></span>
         <span class="msg success cleared"><? p($l->t('Cleared')); ?></span>
         <span class="msg error"><? p($l->t('Failed')); ?></span>
@@ -31,6 +31,19 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 <section class="section passwords">
     <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
     <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
+
+    <? if(!$_['support']['php']): ?>
+        <div class="message error">
+            <? p($l->t('PHP %s is no longer supported.', [PHP_VERSION])); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><? p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <? endif; ?>
+    <? if(!$_['support']['https']): ?>
+        <div class="message error">
+            <? p($l->t('Passwords requires HTTPS.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><? p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <? endif; ?>
 
     <form>
         <h3><? p($l->t('Legacy Api Support')); ?></h3>

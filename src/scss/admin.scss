@@ -21,11 +21,30 @@ header.section.passwords {
 }
 
 section.section.passwords {
-    padding-top: 0;
+    padding-top : 0;
 
     [data-constant] {
         display    : none;
         visibility : hidden;
+    }
+
+    .message {
+        padding       : 3px 5px;
+        border-radius : 3px;
+        margin-bottom : .25em;
+
+        &.error {
+            background-color : $color-red-dark;
+            color            : $color-white;
+        }
+
+        &:first-of-type {
+            margin-top : -1em;
+        }
+
+        &:last-of-type {
+            margin-bottom : 2em;
+        }
     }
 
     .container,
