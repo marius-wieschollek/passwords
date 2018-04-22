@@ -21,127 +21,127 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 ?>
 <header class="section passwords" id="passwords">
     <h2>
-        <? p($l->t('Passwords')); ?>
-        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<? p($l->t('Open documentation')); ?>" href="<?=$_['links']['help']?>"></a>
-        <span class="msg success saved"><? p($l->t('Saved')); ?></span>
-        <span class="msg success cleared"><? p($l->t('Cleared')); ?></span>
-        <span class="msg error"><? p($l->t('Failed')); ?></span>
+        <?php p($l->t('Passwords')); ?>
+        <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<?php p($l->t('Open documentation')); ?>" href="<?=$_['links']['help']?>"></a>
+        <span class="msg success saved"><?php p($l->t('Saved')); ?></span>
+        <span class="msg success cleared"><?php p($l->t('Cleared')); ?></span>
+        <span class="msg error"><?php p($l->t('Failed')); ?></span>
     </h2>
 </header>
 <section class="section passwords">
     <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
     <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
 
-    <? if(!$_['support']['php']): ?>
+    <?php if(!$_['support']['php']): ?>
         <div class="message error">
-            <? p($l->t('PHP %s is no longer supported.', [PHP_VERSION])); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><? p($l->t('Please check the system requirements.')); ?></a>
+            <?php p($l->t('PHP %s is no longer supported.', [PHP_VERSION])); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
-    <? endif; ?>
-    <? if(!$_['support']['https']): ?>
+    <?php endif; ?>
+    <?php if(!$_['support']['https']): ?>
         <div class="message error">
-            <? p($l->t('Passwords requires HTTPS.')); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><? p($l->t('Please check the system requirements.')); ?></a>
+            <?php p($l->t('Passwords requires HTTPS.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 
     <form>
-        <h3><? p($l->t('Legacy Api Support')); ?></h3>
+        <h3><?php p($l->t('Legacy Api Support')); ?></h3>
 
         <div class="area legacy">
-            <label for="passwords-legacy-enable"><? p($l->t('Enable Legacy API')); ?></label>
+            <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
             <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
             <?php if($_['legacyApiEnabled']): ?>
-                <label for="passwords-legacy-used"><? p($l->t('Legacy API was last used on')); ?></label>
+                <label for="passwords-legacy-used"><?php p($l->t('Legacy API was last used on')); ?></label>
                 <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):$l->t('never')?>" disabled>
             <?php endif; ?>
         </div>
     </form>
 
     <form>
-        <h3><? p($l->t('Internal Data Processing')); ?></h3>
+        <h3><?php p($l->t('Internal Data Processing')); ?></h3>
 
         <div class="area processing">
-            <label for="passwords-image"><? p($l->t('Image Rendering')); ?></label>
+            <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
             <select id="passwords-image" name="passwords-image" name="image" data-setting="service/images">
                 <?php foreach($_['imageServices'] as $service): ?>
-                    <option value="<? p($service['id']); ?>" <? p($service['current'] ? 'selected':''); ?>><? p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
     </form>
 
     <form>
-        <h3><? p($l->t('External Services')); ?></h3>
+        <h3><?php p($l->t('External Services')); ?></h3>
         <div class="area services">
-            <label for="passwords-security"><? p($l->t('Password Security Checks')); ?></label>
+            <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
             <select id="passwords-security" name="passwords-security" name="security" data-setting="service/security">
                 <?php foreach($_['securityServices'] as $service): ?>
-                    <option value="<? p($service['id']); ?>" <? p($service['current'] ? 'selected':''); ?>><? p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
-            <label for="passwords-words"><? p($l->t('Password Generator Service')); ?></label>
+            <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
             <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
                 <?php foreach($_['wordsServices'] as $service): ?>
-                    <option value="<? p($service['id']); ?>" <? p($service['current'] ? 'selected':''); ?>><? p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
-            <label for="passwords-favicon"><? p($l->t('Favicon Service')); ?></label>
+            <label for="passwords-favicon"><?php p($l->t('Favicon Service')); ?></label>
             <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service/favicon">
                 <?php foreach($_['faviconServices'] as $service): ?>
-                    <option value="<? p($service['id']); ?>" <? p($service['current'] ? 'selected':''); ?>
-                            data-api="<? p(json_encode($service['api'])); ?>"><? p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>
+                            data-api="<?php p(json_encode($service['api'])); ?>"><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
             <div class="container" id="passwords-favicon-api-container">
-                <label for="passwords-favicon-api"><? p($l->t('Favicon Service Api')); ?></label>
+                <label for="passwords-favicon-api"><?php p($l->t('Favicon Service Api')); ?></label>
                 <input id="passwords-favicon-api" name="favicon-api" data-setting="">
             </div>
 
-            <label for="passwords-preview"><? p($l->t('Website Preview Service')); ?></label>
+            <label for="passwords-preview"><?php p($l->t('Website Preview Service')); ?></label>
             <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service/preview">
                 <?php foreach($_['previewServices'] as $service): ?>
-                    <option value="<? p($service['id']); ?>" <? p($service['current'] ? 'selected':''); ?>
-                            data-api="<? p(json_encode($service['api'])); ?>"><? p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>
+                            data-api="<?php p(json_encode($service['api'])); ?>"><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
             <div class="container" id="passwords-preview-apikey-container">
-                <label for="passwords-preview-api"><? p($l->t('Website Preview API Key')); ?></label>
+                <label for="passwords-preview-api"><?php p($l->t('Website Preview API Key')); ?></label>
                 <input id="passwords-preview-api" name="preview-api" data-setting="">
             </div>
         </div>
     </form>
 
     <form>
-        <h3><? p($l->t('Other Settings')); ?></h3>
+        <h3><?php p($l->t('Other Settings')); ?></h3>
 
         <div class="area other">
-            <label for="passwords-purge-timeout"><? p($l->t('Remove deleted objects from database')); ?></label>
+            <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
             <select id="passwords-purge-timeout" name="passwords-purge-timeout" name="image" data-setting="entity/purge/timeout">
                 <?php foreach($_['purgeTimeout']['options'] as $value => $label): ?>
-                    <option value="<? p($value); ?>" <? p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><? p($l->t($label)); ?></option>
+                    <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
     </form>
 
     <form>
-        <h3><? p($l->t('Caches')); ?></h3>
+        <h3><?php p($l->t('Caches')); ?></h3>
         <?php foreach($_['caches'] as $cache): ?>
             <div class="area cache">
-                <label><? p($l->t(ucfirst($cache['name']).' Cache (%s files, %s)', [$cache['files'], human_file_size($cache['size'])])); ?></label>
+                <label><?php p($l->t(ucfirst($cache['name']).' Cache (%s files, %s)', [$cache['files'], human_file_size($cache['size'])])); ?></label>
                 <input type="button"
-                       value="<? p($l->t('clear')); ?>"
-                       data-clear-cache="<? p($cache['name']); ?>"
-                       title="<? p($l->t($cache['clearable'] ? 'Clear this cache':'You can not clear a cache using a shared service')); ?>"
-                    <? p($cache['clearable'] ? '':'disabled'); ?>
+                       value="<?php p($l->t('clear')); ?>"
+                       data-clear-cache="<?php p($cache['name']); ?>"
+                       title="<?php p($l->t($cache['clearable'] ? 'Clear this cache':'You can not clear a cache using a shared service')); ?>"
+                    <?php p($cache['clearable'] ? '':'disabled'); ?>
                 />
             </div>
         <?php endforeach; ?>
     </form>
 </section>
 <footer class="section passwords">
-    <? print_unescaped($footerMessage); ?>
+    <?php print_unescaped($footerMessage); ?>
 </footer>
