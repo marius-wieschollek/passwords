@@ -1,7 +1,7 @@
 <template>
     <div class="tab-container">
         <ul class="tab-titles">
-            <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" :style="getStyle" @click="setCurrent(name)" :say="tab"/>
+            <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" :style="getStyle" @click="setCurrent(name)" :say="tab" :data-tab="name"/>
         </ul>
         <div class="tab-contents">
             <div class="tab-content active">

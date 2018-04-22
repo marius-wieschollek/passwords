@@ -43,17 +43,6 @@ Scenario('Import the sample database', async (I) => {
     I.waitForElement('progress.success', 60);
 });
 
-Scenario('Show Password Details', (I) => {
-    I.amOnPage('/index.php/apps/passwords/');
-    I.waitForElement('div.row', 10);
-    I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
-    I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(1)');
-    I.waitForElement('div.item-details', 10);
-    I.waitForInvisible('.image-container .image.loading-hidden', 10);
-
-    I.captureWholePage('password-details', 4);
-});
-
 Scenario('Show Create Password Dialog', (I) => {
     I.amOnPage('/index.php/apps/passwords/');
 
@@ -74,26 +63,16 @@ Scenario('Show Main Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/');
     I.waitForElement('div.row', 10);
     I.captureWholePage('main-section', 3);
-});
-
-Scenario('Show Single Password', (I) => {
-    I.amOnPage('/index.php/apps/passwords/');
-    I.waitForElement('div.row', 10);
     I.captureElement('password-single', 'div[data-password-title=Amazon]', 0);
 });
 
-Scenario('Show Folder Section', (I) => {
+Scenario('Show Folder Section', async (I) => {
     I.amOnPage('/index.php/apps/passwords/#/folders');
     I.waitForElement('div[data-folder-title=Work]', 10);
+    await I.captureElement('folder-single', 'div[data-folder-title=Work]', 0);
     I.click('div[data-folder-title=Work]');
     I.waitForElement('div[data-folder-title=Development]', 10);
     I.captureWholePage('folder-section');
-});
-
-Scenario('Show Single Folder', (I) => {
-    I.amOnPage('/index.php/apps/passwords/#/folders');
-    I.waitForElement('div[data-folder-title=Work]', 10);
-    I.captureElement('folder-single', 'div[data-folder-title=Work]', 0);
 });
 
 Scenario('Show Recent Section', (I) => {
@@ -110,13 +89,8 @@ Scenario('Show Favourites Section', (I) => {
 
 Scenario('Show Tags Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/tags');
-    I.waitForElement('div.row', 10);
-    I.captureWholePage('tags-section', 0);
-});
-
-Scenario('Show Single Tag', (I) => {
-    I.amOnPage('/index.php/apps/passwords/#/tags');
     I.waitForElement('div[data-tag-title=Communication]', 10);
+    I.captureWholePage('tags-section', 0);
     I.captureElement('tag-single', 'div[data-tag-title=Communication]', 0);
 });
 
@@ -216,4 +190,29 @@ Scenario('Show Trash Section', (I) => {
     I.click('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(4)');
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
+});
+
+Scenario('Show Password Details', async (I) => {
+    I.amOnPage('/index.php/apps/passwords/');
+    I.waitForElement('div.row', 10);
+    I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
+    I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(1)');
+    I.waitForElement('div.item-details', 10);
+    I.waitForInvisible('.image-container .image.loading-hidden', 10);
+
+    I.captureWholePage('password-details', 4);
+    I.resizeWindow(1280, 1280);
+    await I.captureElement('password-details-details', '.item-details');
+    I.click('.item-details [data-tab=notes]');
+    await I.captureElement('password-details-notes', '.item-details');
+    I.click('.item-details [data-tab=share]');
+    /**
+     * This photo is currently useless
+     await I.captureElement('password-details-sharing', '.item-details');
+     */
+    I.click('.item-details [data-tab=qrcode]');
+    I.selectOption('#password-details-qrcode', 'url');
+    await I.captureElement('password-details-qrcode', '.item-details');
+    I.click('.item-details [data-tab=revisions]');
+    await I.captureElement('password-details-revisions', '.item-details');
 });
