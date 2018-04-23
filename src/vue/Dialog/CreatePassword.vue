@@ -31,6 +31,9 @@
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
                     </div>
+                    <foldout title="Custom Fields">
+                        <custom-fields :fields="password.customFields"/>
+                    </foldout>
                 </div>
                 <div class="form right">
                     <foldout title="Notes" :initially-open="notesOpen">
@@ -67,6 +70,7 @@
     import Localisation from '@js/Classes/Localisation';
     import EnhancedApi from "@js/ApiClient/EnhancedApi";
     import ThemeManager from '@js/Manager/ThemeManager';
+    import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
         data() {
@@ -77,14 +81,15 @@
                 showLoader  : false,
                 simplemde   : null,
                 generator   : {numbers: undefined, special: undefined, active: false},
-                password    : {cseType: 'none', notes: ''},
+                password    : {cseType: 'none', notes: '', customFields: {}},
                 _success    : null
             };
         },
 
         components: {
             Foldout,
-            Translate
+            Translate,
+            CustomFields
         },
 
         mounted() {
