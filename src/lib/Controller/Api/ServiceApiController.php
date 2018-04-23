@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
@@ -19,7 +20,6 @@ use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IRequest;
-use OCP\ISession;
 use OCP\IUserManager;
 
 /**
@@ -30,9 +30,19 @@ use OCP\IUserManager;
 class ServiceApiController extends AbstractApiController {
 
     /**
+     * @var string
+     */
+    protected $userId;
+
+    /**
      * @var ConfigurationService
      */
     protected $config;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
 
     /**
      * @var WordsService
@@ -40,14 +50,14 @@ class ServiceApiController extends AbstractApiController {
     protected $wordsService;
 
     /**
+     * @var UserSettingsHelper
+     */
+    protected $userSettings;
+
+    /**
      * @var AvatarService
      */
     protected $avatarService;
-
-    /**
-     * @var FaviconService
-     */
-    protected $faviconService;
 
     /**
      * @var WebsitePreviewService
@@ -55,14 +65,9 @@ class ServiceApiController extends AbstractApiController {
     protected $previewService;
 
     /**
-     * @var string
+     * @var FaviconService
      */
-    protected $userId;
-
-    /**
-     * @var IUserManager
-     */
-    protected $userManager;
+    protected $faviconService;
 
     /**
      * @var DeleteUserDataHelper
@@ -76,32 +81,34 @@ class ServiceApiController extends AbstractApiController {
      * @param IRequest              $request
      * @param WordsService          $wordsService
      * @param AvatarService         $avatarService
+     * @param UserSettingsHelper    $userSettings
      * @param ConfigurationService  $config
      * @param FaviconService        $faviconService
      * @param WebsitePreviewService $previewService
-     * @param DeleteUserDataHelper  $deleteUserDataHelper
      * @param IUserManager          $userManager
+     * @param DeleteUserDataHelper  $deleteUserDataHelper
      */
     public function __construct(
         string $userId,
         IRequest $request,
+        IUserManager $userManager,
         WordsService $wordsService,
         AvatarService $avatarService,
         ConfigurationService $config,
         FaviconService $faviconService,
+        UserSettingsHelper $userSettings,
         WebsitePreviewService $previewService,
-        IUserManager $userManager,
         DeleteUserDataHelper $deleteUserDataHelper
     ) {
         parent::__construct($request);
-        $this->faviconService       = $faviconService;
-        $this->wordsService         = $wordsService;
-        $this->previewService       = $previewService;
-        $this->avatarService        = $avatarService;
         $this->config               = $config;
-
         $this->userId               = $userId;
         $this->userManager          = $userManager;
+        $this->userSettings         = $userSettings;
+        $this->wordsService         = $wordsService;
+        $this->avatarService        = $avatarService;
+        $this->previewService       = $previewService;
+        $this->faviconService       = $faviconService;
         $this->deleteUserDataHelper = $deleteUserDataHelper;
     }
 
@@ -118,9 +125,9 @@ class ServiceApiController extends AbstractApiController {
      * @throws ApiException
      */
     public function generatePassword(?int $strength = null, ?bool $numbers = null, ?bool $special = null): JSONResponse {
-        if($strength === null) $strength = $this->config->getUserValue('password/generator/strength', 1);
-        if($numbers === null) $numbers = $this->config->getUserValue('password/generator/numbers', false);
-        if($special === null) $special = $this->config->getUserValue('password/generator/special', false);
+        if($strength === null) $strength = $this->userSettings->get('password.generator.strength');
+        if($numbers === null) $numbers = $this->userSettings->get('password.generator.numbers');
+        if($special === null) $special = $this->userSettings->get('password.generator.special');
 
         list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special);
         if(empty($password)) throw new ApiException('Unable to generate password');
