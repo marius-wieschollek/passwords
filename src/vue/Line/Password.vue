@@ -119,7 +119,6 @@
         methods: {
             rowClickAction($event) {
               const action = SettingsManager.get('client.ui.password.click.action');
-              console.log("Action is", action);
               if (action === 'copyPassword') return this.copyPasswordAction($event);
               if (action === 'showDetails')  return this.detailsAction($event);
               if (action === 'copyWebsite')  return this.copyUrlAction();
