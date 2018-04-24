@@ -1,6 +1,6 @@
 <template>
     <div class="row password"
-         @click="copyPasswordAction($event)"
+         @click="rowClickAction($event)"
          @dblclick="copyUsernameAction($event)"
          @dragstart="dragStartAction($event)"
          :data-password-id="password.id"
@@ -117,6 +117,13 @@
         },
 
         methods: {
+            rowClickAction($event) {
+              const action = SettingsManager.get('client.ui.password.click.action');
+              console.log("Action is", action);
+              if (action === 'copyPassword') return this.copyPasswordAction($event);
+              if (action === 'showDetails')  return this.detailsAction($event);
+              if (action === 'copyWebsite')  return this.copyUrlAction();
+            },
             copyPasswordAction($event) {
                 if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0)) return;
                 Utility.copyToClipboard(this.password.password);
