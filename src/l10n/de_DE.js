@@ -109,7 +109,7 @@
             'Handbook'                            : 'Handbuch',
             'Search user'                         : 'Benutzer suchen',
             'Set expiration date'                 : 'Ablaufdatum setzen',
-            'Expires on {date}'                   : 'Läuft am {date} ab',
+            'Expires {date}'                      : 'Läuft {date} ab',
             'Choose expiration date'              : 'Wählen Sie ein Ablaufdatum oder lassen Sie das Feld leer um endlos zu teilen',
             'Please choose a date in the future'  : 'Bitte Ablaufdatum in der Zukunft auswählen',
             'Invalid date'                        : 'Ungültiges Datum',

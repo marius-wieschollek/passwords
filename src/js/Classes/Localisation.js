@@ -16,11 +16,10 @@ export default class Localisation {
     /**
      *
      * @param date
-     * @param month
      * @returns {string}
      */
-    static formatDate(date, month = 'short') {
-        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month, day: 'numeric' });
+    static formatDate(date) {
+        return OC.Util.relativeModifiedDate(date);
     }
 
     /**
@@ -29,16 +28,6 @@ export default class Localisation {
      * @returns {string}
      */
     static formatDateTime(date) {
-        return date.toLocaleDateString(Localisation.getLocale(), { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    }
-
-    /**
-     *
-     * @returns {string}
-     */
-    static getLocale() {
-        let locale = navigator.language;
-
-        return locale.length === 2 ? `${locale}-${locale.toUpperCase()}`:locale;
+        return OC.Util.formatDate(date, 'LLL');
     }
 }

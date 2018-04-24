@@ -38,7 +38,7 @@
             },
             getExpirationDateTitle() {
                 if(!this.share.expires) return 'Set expiration date';
-                return Localisation.translate('Expires on {date}', {date: Localisation.formatDate(this.share.expires, 'long')});
+                return Localisation.translate('Expires {date}', {date: Localisation.formatDate(this.share.expires)});
             }
         },
 

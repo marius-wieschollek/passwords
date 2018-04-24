@@ -112,7 +112,7 @@
                 return Localisation.formatDate(this.password.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.password.edited, 'long')});
+                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDateTime(this.password.edited)});
             }
         },
 
@@ -352,7 +352,7 @@
 
                 .date {
                     line-height : 50px;
-                    width       : 105px;
+                    width       : 115px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
                     text-align  : right;
