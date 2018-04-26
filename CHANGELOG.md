@@ -1,5 +1,6 @@
 #### 2018.4.2 - Bugfix Release
 - Fixed reporting of password generator settings
+- Fixed sharing issues with LDAP
 
 #### 2018.4.1 - Bugfix Release
 - Fixed syntax error in index.php
