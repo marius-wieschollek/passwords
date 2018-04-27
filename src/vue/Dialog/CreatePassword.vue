@@ -31,9 +31,6 @@
                         <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
                     </div>
-                    <foldout title="Custom Fields">
-                        <custom-fields :fields="password.customFields"/>
-                    </foldout>
                 </div>
                 <div class="form right">
                     <foldout title="Notes" :initially-open="notesOpen">
@@ -41,6 +38,9 @@
                             <translate tag="div" class="warning" say="You have reached the maximum length of 4096 characters" v-if="password.notes.length > 4095"/>
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
+                    </foldout>
+                    <foldout title="Custom Fields">
+                        <custom-fields :fields="password.customFields"/>
                     </foldout>
                     <foldout title="More Options">
                         <div class="form-grid">
