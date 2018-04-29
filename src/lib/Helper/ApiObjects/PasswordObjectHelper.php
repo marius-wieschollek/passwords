@@ -133,26 +133,27 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     protected function getModel(Password $password, PasswordRevision $revision): array {
         return [
-            'id'        => $password->getUuid(),
-            'created'   => $password->getCreated(),
-            'updated'   => $password->getUpdated(),
-            'edited'    => $revision->getEdited(),
-            'share'     => $password->getShareId(),
-            'revision'  => $revision->getUuid(),
-            'label'     => $revision->getLabel(),
-            'username'  => $revision->getUsername(),
-            'password'  => $revision->getPassword(),
-            'notes'     => $revision->getNotes(),
-            'url'       => $revision->getUrl(),
-            'status'    => $revision->getStatus(),
-            'hash'      => $revision->getHash(),
-            'folder'    => $revision->getFolder(),
-            'cseType'   => $revision->getCseType(),
-            'sseType'   => $revision->getSseType(),
-            'hidden'    => $revision->isHidden(),
-            'trashed'   => $revision->isTrashed(),
-            'favourite' => $revision->isFavourite(),
-            'editable'  => $password->isEditable()
+            'id'           => $password->getUuid(),
+            'created'      => $password->getCreated(),
+            'updated'      => $password->getUpdated(),
+            'edited'       => $revision->getEdited(),
+            'share'        => $password->getShareId(),
+            'revision'     => $revision->getUuid(),
+            'label'        => $revision->getLabel(),
+            'username'     => $revision->getUsername(),
+            'password'     => $revision->getPassword(),
+            'notes'        => $revision->getNotes(),
+            'customFields' => $revision->getCustomFields(),
+            'url'          => $revision->getUrl(),
+            'status'       => $revision->getStatus(),
+            'hash'         => $revision->getHash(),
+            'folder'       => $revision->getFolder(),
+            'cseType'      => $revision->getCseType(),
+            'sseType'      => $revision->getSseType(),
+            'hidden'       => $revision->isHidden(),
+            'trashed'      => $revision->isTrashed(),
+            'favourite'    => $revision->isFavourite(),
+            'editable'     => $password->isEditable()
         ];
     }
 
@@ -266,7 +267,9 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         foreach($shares as $share) {
             $object['shares'][] = $objectHelper->getApiObject($share);
 
-            usort($object['shares'], function($a, $b) {return $a['receiver'] > $b['receiver'] ? 1:-1;});
+            usort($object['shares'], function ($a, $b) {
+                return $a['receiver'] > $b['receiver'] ? 1:-1;
+            });
         }
 
         if(isset($object['share']) && $object['share']) {

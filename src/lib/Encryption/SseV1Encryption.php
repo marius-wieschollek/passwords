@@ -34,7 +34,8 @@ class SseV1Encryption implements EncryptionInterface {
             'label',
             'notes',
             'password',
-            'username'
+            'username',
+            'customFields'
         ];
 
     /**
@@ -123,6 +124,8 @@ class SseV1Encryption implements EncryptionInterface {
         $fields = $this->getFieldsToProcess($object);
         foreach($fields as $field) {
             $value          = $object->getProperty($field);
+            if($value === null) continue;
+
             $decryptedValue = $this->crypto->decrypt($value, $encryptionKey);
             $object->setProperty($field, $decryptedValue);
         }

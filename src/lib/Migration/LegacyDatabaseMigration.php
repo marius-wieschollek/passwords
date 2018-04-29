@@ -11,15 +11,17 @@ use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
 use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
 use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Services\ConfigurationService;
-use OCP\Migration\IOutput;
+use OCP\DB\ISchemaWrapper;
+use OCP\Migration\IMigrationStep;
 use OCP\Migration\IRepairStep;
+use OCP\Migration\IOutput;
 
 /**
  * Class LegacyDatabaseMigration
  *
  * @package OCA\Passwords\Migration
  */
-class LegacyDatabaseMigration implements IRepairStep {
+class LegacyDatabaseMigration implements IMigrationStep, IRepairStep {
 
     /**
      * @var LegacyShareMigration
@@ -94,5 +96,38 @@ class LegacyDatabaseMigration implements IRepairStep {
         } else {
             $output->info('Legacy migration not available for version '.$version);
         }
+    }
+
+    /**
+     * @param IOutput  $output
+     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+     * @param array    $options
+     *
+     * @since 13.0.0
+     * @throws \Exception
+     */
+    public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {
+        $this->run($output);
+    }
+
+    /**
+     * @param IOutput  $output
+     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+     * @param array    $options
+     *
+     * @since 13.0.0
+     */
+    public function preSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {}
+
+    /**
+     * @param IOutput  $output
+     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+     * @param array    $options
+     *
+     * @return null|ISchemaWrapper
+     * @since 13.0.0
+     */
+    public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options): ?ISchemaWrapper {
+        return null;
     }
 }

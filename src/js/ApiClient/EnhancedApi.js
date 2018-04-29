@@ -433,6 +433,10 @@ export default class EnhancedApi extends SimpleApi {
             password.folder = password.folder.id;
         }
 
+        if(password.customFields && typeof password.customFields !== 'string') {
+            password.customFields = JSON.stringify(password.customFields);
+        }
+
         if(password.edited instanceof Date) {
             password.edited = Math.floor(password.edited.getTime() / 1000);
         }
@@ -702,6 +706,13 @@ export default class EnhancedApi extends SimpleApi {
             password.preview = this.getPreviewUrl(null);
         }
 
+        if(password.customFields) {
+            password.customFields = JSON.parse(password.customFields);
+        } else {
+            password.customFields = {};
+        }
+
+
         if(password.tags) {
             password.tags = this._processTagList(password.tags);
         }
@@ -908,61 +919,66 @@ export default class EnhancedApi extends SimpleApi {
      */
     static getPasswordDefinition() {
         return {
-            id       : {
+            id          : {
                 type  : 'string',
                 length: 36
             },
-            username : {
+            username    : {
                 type  : 'string',
                 length: 64
             },
-            password : {
+            password    : {
                 type    : 'string',
                 length  : 256,
                 required: true
             },
-            label    : {
+            label       : {
                 type   : 'string',
                 length : 64,
                 default: null
             },
-            url      : {
+            url         : {
                 type   : 'string',
                 length : 2048,
                 default: null
             },
-            notes    : {
+            notes       : {
                 type   : 'string',
                 length : 4096,
                 default: null
             },
-            folder   : {
+            customFields: {
+                type   : 'string',
+                length : 10240,
+                default: '{}'
+            },
+            folder      : {
                 type   : 'string',
                 length : 36,
                 default: '00000000-0000-0000-0000-000000000000'
             },
-            cseType  : {
+            cseType     : {
                 type   : 'string',
                 length : 10,
                 default: 'none'
             },
-            edited   : {
+            edited      : {
                 type   : 'number',
                 default: 0
             },
-            hidden   : {
+            hidden      : {
                 type   : 'boolean',
                 default: false
             },
-            trashed  : {
+            trashed     : {
                 type   : 'boolean',
                 default: false
             },
-            favourite: {
+            favourite   : {
                 type   : 'boolean',
                 default: false
             },
-            tags     : {
+            tags        : {
                 type   : 'array',
                 default: []
             }

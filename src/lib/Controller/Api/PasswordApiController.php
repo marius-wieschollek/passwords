@@ -107,6 +107,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $url
      * @param string $notes
+     * @param string $customFields
      * @param string $folder
      * @param int    $edited
      * @param bool   $hidden
@@ -115,8 +116,6 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\QueryException
      */
     public function create(
         string $password,
@@ -126,6 +125,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $label = '',
         string $url = '',
         string $notes = '',
+        string $customFields = '{}',
         string $folder = FolderService::BASE_FOLDER_UUID,
         int $edited = 0,
         bool $hidden = false,
@@ -136,7 +136,7 @@ class PasswordApiController extends AbstractObjectApiController {
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $edited, $hidden,
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden,
             false, $favourite
         );
 
@@ -164,6 +164,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $label
      * @param string $url
      * @param string $notes
+     * @param string $customFields
      * @param string $folder
      * @param int    $edited
      * @param bool   $hidden
@@ -172,10 +173,8 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
      */
     public function update(
         string $id,
@@ -186,6 +185,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $label = '',
         string $url = '',
         string $notes = '',
+        string $customFields = '{}',
         string $folder = FolderService::BASE_FOLDER_UUID,
         int $edited = 0,
         bool $hidden = false,
@@ -217,7 +217,7 @@ class PasswordApiController extends AbstractObjectApiController {
 
         if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $edited, $hidden, $oldRevision->isTrashed(),
+            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
             $favourite
         );
 

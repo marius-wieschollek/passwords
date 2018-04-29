@@ -40,7 +40,7 @@
                         </div>
                     </foldout>
                     <foldout title="Custom Fields">
-                        <custom-fields :fields="password.customFields"/>
+                        <custom-fields :fields="password.customFields" @updated="updateCustomFields"/>
                     </foldout>
                     <foldout title="More Options">
                         <div class="form-grid">
@@ -148,13 +148,14 @@
                        this.showLoader = false;
                    });
             },
+            updateCustomFields($event) {
+                this.password.customFields = $event;
+            },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
-                if(typeof password.folder === 'object') {
-                    password.folder = password.folder.id;
-                }
-
+                password = EnhancedApi.flattenPassword(password);
                 password = EnhancedApi.validatePassword(password);
+
                 if(this._success) {
                     try {
                         this._success(password);
