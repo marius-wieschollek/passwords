@@ -1,6 +1,12 @@
 <template>
     <div class="custom-fields" id="custom-fields">
-        <custom-field-form :field="field" :taken-names="getTakenNames" @deleted="deleteField" @updated="updateField" v-for="(field, index) in getFields">
+        <custom-field-form :field="field"
+                           :taken-names="getTakenNames"
+                           @deleted="deleteField"
+                           @updated="updateField"
+                           v-for="(field, index) in getFields"
+                           :key="index"
+                           :is-blank="field === undefined">
             <hr v-if="index !== getFields.length-1">
         </custom-field-form>
     </div>
@@ -19,20 +25,20 @@
         },
         data() {
             return {
-                currentFields: this.fields
+                customFields: this.fields
             };
         },
         computed  : {
             getFields() {
                 let fields = [];
 
-                for(let name in this.currentFields) {
-                    if(!this.currentFields.hasOwnProperty(name)) continue;
+                for(let name in this.customFields) {
+                    if(!this.customFields.hasOwnProperty(name)) continue;
                     fields.push(
                         {
                             name,
-                            type : this.currentFields[name].type,
-                            value: this.currentFields[name].value
+                            type : this.customFields[name].type,
+                            value: this.customFields[name].value
                         }
                     );
                 }
@@ -41,12 +47,12 @@
                 return fields;
             },
             getTakenNames() {
-                return Object.keys(this.currentFields);
+                return Object.keys(this.customFields);
             }
         },
         methods   : {
             updateField($event) {
-                let fields = Utility.cloneObject(this.currentFields);
+                let fields = Utility.cloneObject(this.customFields);
                 if($event.originalName !== '' && $event.originalName !== $event.name) {
                     delete fields[$event.originalName];
                 }
@@ -54,10 +60,24 @@
                     type : $event.type,
                     value: $event.value
                 };
-                this.currentFields = fields;
+                this.customFields = fields;
             },
             deleteField($event) {
-                delete this.currentFields[$event];
+                let fields = Utility.cloneObject(this.customFields);
+                delete fields[$event];
+                this.customFields = fields;
+            }
+        },
+        watch     : {
+            customFields() {
+                let fields = {};
+                for(let name in this.customFields) {
+                    if(!this.customFields.hasOwnProperty(name) || !name.length) continue;
+                    let field = this.customFields[name];
+                    fields[name] = {type: field.type, value: field.value};
+                }
+
+                this.$emit('updated', fields);
             }
         }
     };

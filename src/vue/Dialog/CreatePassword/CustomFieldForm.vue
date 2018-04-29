@@ -3,12 +3,12 @@
         <input type="text" placeholder="Name" class="field-name" v-model="name" maxlength="48" :class="{error:!isValidName}">
         <select class="field-type" v-model="type" :disabled="!isValidName">
             <translate tag="option" value="text">Text</translate>
-            <translate tag="option" value="secret">Geheimnis</translate>
+            <translate tag="option" value="secret">Secret</translate>
             <translate tag="option" value="email">Email</translate>
             <translate tag="option" value="url">Link</translate>
             <translate tag="option" value="file">File</translate>
         </select>
-        <button class="fa fa-folder file-picker" @click="openNextcloudFile" v-if="showFilePicker" :disabled="!isValidName">{{value}}</button>
+        <input class="file-picker" type="button" @click="openNextcloudFile" v-if="showFilePicker" :disabled="!isValidName" :style="getFileButtonStyle" :value="value"/>
         <input class="field-value" :type="getFieldType" placeholder="Value" v-model="value" maxlength="320" v-if="!showFilePicker" :disabled="!isValidName"/>
         <button class="fa fa-undo field-button" @click="revertField" :disabled="isRevertable"></button>
         <button class="fa fa-trash field-button" @click="deleteField" :disabled="!isValidName"></button>
@@ -19,6 +19,7 @@
 <script>
     import Messages from '@js/Classes/Messages';
     import Translate from "@/vue/Components/Translate";
+    import SettingsManager from "@/js/Manager/SettingsManager";
 
     export default {
         name      : 'custom-field-form',
@@ -36,22 +37,27 @@
             },
             takenNames: {
                 type     : Array,
-                'default': []
+                'default': () => {
+                    return [];
+                }
+            },
+            isBlank   : {
+                type     : Boolean,
+                'default': false
             }
         },
         data() {
             return {
-                name : this.field.name,
-                type : this.field.type,
-                value: this.field.value
+                name        : this.field.name,
+                type        : this.field.type,
+                value       : this.field.value,
+                originalName: this.field.name
             };
         },
 
         computed: {
             isValidName() {
-                return this.name.length &&
-                       this.name.substr(0, 1) !== '_' &&
-                       (this.takenNames.indexOf(this.name) === -1 || this.field.name === this.name);
+                return this.name.length && (this.takenNames.indexOf(this.name) === -1 || this.originalName === this.name);
             },
             isRevertable() {
                 return this.isValidName && this.field.name.length;
@@ -62,7 +68,12 @@
                 return 'text';
             },
             showFilePicker() {
-                return this.isValidName && this.type === 'file';
+                return this.type === 'file';
+            },
+            getFileButtonStyle() {
+                return {
+                    backgroundImage: `url(${SettingsManager.get('server.theme.folder.icon')})`
+                };
             }
         },
         methods : {
@@ -77,28 +88,45 @@
             deleteField() {
                 this.$emit('deleted', this.name);
             },
-            updateField(oldValue = '') {
+            updateField() {
                 this.$emit(
                     'updated',
                     {
                         name        : this.name,
                         type        : this.type,
                         value       : this.value,
-                        originalName: oldValue
+                        originalName: this.originalName
                     }
                 );
+                this.originalName = this.name;
             }
         },
 
         watch: {
-            name(value, oldValue) {
-                if(this.isValidName) this.updateField(oldValue)
+            name() {
+                if(this.isValidName) this.updateField();
             },
-            type() {
-                if(this.isValidName) this.updateField()
+            type(value) {
+                if(value === 'file') this.value = null;
+                if(this.isValidName) this.updateField();
             },
             value() {
-                if(this.isValidName) this.updateField()
+                if(this.isValidName) this.updateField();
+            },
+            isBlank(newValue, oldValue) {
+                if(newValue && newValue !== oldValue) {
+                    this.name = '';
+                    this.type = 'text';
+                    this.value = '';
+                }
+            },
+            field(newValue) {
+                if(newValue.name !== this.name) {
+                    this.name = newValue.name;
+                    this.originalName = newValue.name;
+                }
+                if(newValue.type !== this.type) this.type = newValue.type;
+                if(newValue.value !== this.value) this.value = newValue.value;
             }
         }
     };
@@ -111,7 +139,7 @@
             max-width : none;
 
             &.error {
-                border: 1px solid $color-red;
+                border : 1px solid $color-red;
             }
         }
 
@@ -124,6 +152,17 @@
         .file-picker {
             width     : 85.5%;
             max-width : none;
+        }
+
+        .file-picker {
+            background    : no-repeat center;
+            padding       : 0 25px;
+            overflow      : hidden;
+            text-overflow : ellipsis;
+
+            &[value] {
+                background-position : 5px center;
+            }
         }
 
         .field-button {
