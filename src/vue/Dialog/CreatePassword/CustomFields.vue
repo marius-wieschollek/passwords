@@ -69,6 +69,11 @@
             }
         },
         watch     : {
+            fields() {
+                if(JSON.stringify(this.fields) !== JSON.stringify(this.customFields)) {
+                    this.customFields = this.fields;
+                }
+            },
             customFields() {
                 let fields = {};
                 for(let name in this.customFields) {
