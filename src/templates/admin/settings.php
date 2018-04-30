@@ -115,6 +115,17 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
+        <h3><?php p($l->t('Default Email Settings')); ?></h3>
+
+        <div class="area mails">
+            <label for="passwords-mail-security"><?php p($l->t('Send emails for security events')); ?></label>
+            <input id="passwords-mail-security" name="mail-security" data-setting="settings/mail/security" type="checkbox" <?=$_['mailSecurity'] ? 'checked':''?>>
+            <label for="passwords-mail-shares"><?php p($l->t('Send emails for sharing events')); ?></label>
+            <input id="passwords-mail-shares" name="mail-shares" data-setting="settings/mail/shares" type="checkbox" <?=$_['mailSharing'] ? 'checked':''?>>
+        </div>
+    </form>
+
+    <form>
         <h3><?php p($l->t('Other Settings')); ?></h3>
 
         <div class="area other">

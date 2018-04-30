@@ -1,3 +1,12 @@
+#### 2018.5.0 - Feature Release
+- Added custom fields
+- Added advanced settings
+- Added user name in list view
+- Added configurable click actions
+- Added email default settings
+- Improved password title
+- Improved password details
+
 #### 2018.4.2 - Bugfix Release
 - Fixed reporting of password generator settings
 - Fixed sharing issues with LDAP

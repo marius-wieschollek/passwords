@@ -71,7 +71,7 @@ class UserSettingsHelper {
 
         if(isset($this->userSettings[ $key ])) {
             $type    = $this->userSettings[ $key ];
-            $default = $this->userDefaults[ $key ];
+            $default = $this->getDefaultValue($key);
             $value   = $this->config->getUserValue($key, $default, $userId);
 
             return $this->castValue($type, $value);
@@ -98,7 +98,7 @@ class UserSettingsHelper {
             if($type === 'boolean') {
                 $this->config->setUserValue($key, intval($value), $userId);
             } else {
-                $this->config->setUserValue($key, intval($value), $userId);
+                $this->config->setUserValue($key, $value, $userId);
             }
 
             return $value;
@@ -119,7 +119,7 @@ class UserSettingsHelper {
         if(isset($this->userSettings[ $key ])) {
             $this->config->deleteUserValue($key, $userId);
 
-            return $this->userDefaults[ $key ];
+            return $this->getDefaultValue($key);
         }
 
         return null;
@@ -156,5 +156,19 @@ class UserSettingsHelper {
         }
 
         return strval($value);
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    protected function getDefaultValue(string $key) {
+        $default = $this->userDefaults[ $key ];
+        if(in_array($key, ['mail/security', 'mail/shares'])) {
+            $default = $this->config->getAppValue('settings/'.$key, $default);
+        }
+
+        return $default;
     }
 }

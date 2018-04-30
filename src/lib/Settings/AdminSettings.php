@@ -78,6 +78,8 @@ class AdminSettings implements ISettings {
             'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
             'purgeTimeout'     => $this->getPurgeTimeout(),
+            'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
+            'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
             'caches'           => $this->getFileCaches(),
