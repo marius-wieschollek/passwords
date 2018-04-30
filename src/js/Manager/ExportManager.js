@@ -376,16 +376,17 @@ export class ExportManager {
             if(includeShared && data[i].share !== null) continue;
             let element  = data[i],
                 password = {
-                    id       : element.id,
-                    revision : element.revision,
-                    label    : element.label,
-                    username : element.username,
-                    password : element.password,
-                    notes    : element.notes,
-                    url      : element.url,
-                    folder   : element.folder,
-                    edited   : Math.floor(element.edited.getTime() / 1000),
-                    favourite: element.favourite
+                    id          : element.id,
+                    revision    : element.revision,
+                    label       : element.label,
+                    username    : element.username,
+                    password    : element.password,
+                    notes       : element.notes,
+                    url         : element.url,
+                    customFields: element.customFields,
+                    folder      : element.folder,
+                    edited      : Math.floor(element.edited.getTime() / 1000),
+                    favourite   : element.favourite
                 };
 
             password.tags = [];

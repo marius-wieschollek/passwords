@@ -162,6 +162,10 @@
                 <type>clob</type>
             </field>
             <field>
+                <name>custom_fields</name>
+                <type>clob</type>
+            </field>
+            <field>
                 <name>hash</name>
                 <type>text</type>
                 <length>64</length>

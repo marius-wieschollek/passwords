@@ -8,14 +8,16 @@ class SettingsManager {
 
     constructor() {
         this._defaults = {
-            'local.ui.sort.ascending'         : true,
-            'local.ui.sort.field'             : 'label',
-            'client.ui.section.default'       : 'all',
-            'client.ui.password.field.title'  : 'label',
+            'local.ui.sort.ascending'            : true,
+            'local.ui.sort.field'                : 'label',
+            'client.ui.section.default'          : 'all',
+            'client.ui.password.field.title'     : 'label',
             'client.ui.password.click.action' : 'copyPassword',
-            'client.ui.password.field.sorting': 'byTitle',
-            'client.ui.password.menu.copy'    : false,
-            'client.ui.list.tags.show'        : false
+            'client.ui.password.field.sorting'   : 'byTitle',
+            'client.ui.password.menu.copy'       : false,
+            'client.ui.custom.fields.show.hidden': false,
+            'client.ui.list.tags.show'           : false,
+            'client.settings.expert'             : false
         };
         this._settings = Utility.cloneObject(this._defaults);
     }

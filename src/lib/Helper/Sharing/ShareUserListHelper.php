@@ -72,10 +72,8 @@ class ShareUserListHelper {
      *
      * @return array
      */
-    public function getShareUsers(string $pattern): array {
-        if($this->shareManager->shareWithGroupMembersOnly()) {
-            return $this->getUsersFromUserGroup($pattern);
-        }
+    public function getShareUsers(string $pattern = ''): array {
+        if($this->shareManager->shareWithGroupMembersOnly()) return $this->getUsersFromUserGroup($pattern);
 
         return $this->getAllUsers($pattern);
     }
@@ -83,9 +81,9 @@ class ShareUserListHelper {
     /**
      * @param string $pattern
      *
-     * @return mixed
+     * @return array
      */
-    protected function getUsersFromUserGroup(string $pattern) {
+    protected function getUsersFromUserGroup(string $pattern): array {
         $partners   = [];
         $userGroups = $this->groupManager->getUserGroupIds($this->user);
         foreach($userGroups as $userGroup) {
@@ -115,5 +113,24 @@ class ShareUserListHelper {
         }
 
         return $partners;
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return bool
+     */
+    public function canShareWithUser(string $uid): bool {
+        if($uid === $this->userId) return false;
+        if(!$this->userManager->userExists($uid)) return false;
+        if(!$this->shareManager->shareWithGroupMembersOnly()) return true;
+
+        $user       = $this->userManager->get($uid);
+        $userGroups = $this->groupManager->getUserGroupIds($this->user);
+        foreach($userGroups as $userGroup) {
+            if($this->groupManager->get($userGroup)->inGroup($user)) return true;
+        }
+
+        return false;
     }
 }

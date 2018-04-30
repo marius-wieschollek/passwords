@@ -39,6 +39,9 @@
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
                     </foldout>
+                    <foldout title="Custom Fields">
+                        <custom-fields :fields="password.customFields" @updated="updateCustomFields"/>
+                    </foldout>
                     <foldout title="More Options">
                         <div class="form-grid">
                             <translate tag="label" for="password-favourite" say="Favourite"/>
@@ -67,6 +70,7 @@
     import Localisation from '@js/Classes/Localisation';
     import EnhancedApi from "@js/ApiClient/EnhancedApi";
     import ThemeManager from '@js/Manager/ThemeManager';
+    import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
         data() {
@@ -77,14 +81,15 @@
                 showLoader  : false,
                 simplemde   : null,
                 generator   : {numbers: undefined, special: undefined, active: false},
-                password    : {cseType: 'none', notes: ''},
+                password    : {cseType: 'none', notes: '', customFields: {}},
                 _success    : null
             };
         },
 
         components: {
             Foldout,
-            Translate
+            Translate,
+            CustomFields
         },
 
         mounted() {
@@ -143,13 +148,14 @@
                        this.showLoader = false;
                    });
             },
+            updateCustomFields($event) {
+                this.password.customFields = $event;
+            },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
-                if(typeof password.folder === 'object') {
-                    password.folder = password.folder.id;
-                }
-
+                password = EnhancedApi.flattenPassword(password);
                 password = EnhancedApi.validatePassword(password);
+
                 if(this._success) {
                     try {
                         this._success(password);

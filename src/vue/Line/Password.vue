@@ -41,7 +41,7 @@
     import $ from "jquery";
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Utility from "@js/Classes/Utility";
+    import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
@@ -112,7 +112,7 @@
                 return Localisation.formatDate(this.password.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.password.edited, 'long')});
+                return Localisation.translate('Last modified on {date}', {date: Localisation.formatDateTime(this.password.edited)});
             }
         },
 
@@ -129,18 +129,18 @@
 
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
                 this.clickTimeout =
-                    setTimeout(function() { Messages.notification('Password was copied to clipboard'); }, 300);
+                    setTimeout(function() { Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate('Password')}]); }, 300);
             },
             copyUsernameAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 Utility.copyToClipboard(this.password.username);
-                Messages.notification('Username was copied to clipboard');
+                Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate('Username')}]);
             },
             copyUrlAction() {
                 Utility.copyToClipboard(this.password.url);
-                Messages.notification('Url was copied to clipboard');
+                Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate('Url')}]);
             },
             favouriteAction($event) {
                 $event.stopPropagation();
@@ -358,7 +358,7 @@
 
                 .date {
                     line-height : 50px;
-                    width       : 105px;
+                    width       : 115px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
                     text-align  : right;

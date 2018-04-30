@@ -20,6 +20,8 @@ namespace OCA\Passwords\Db;
  * @method void setPassword(string $password)
  * @method string getNotes()
  * @method void setNotes(string $notes)
+ * @method string getCustomFields()
+ * @method void setCustomFields(string $customFields)
  * @method string getHash()
  * @method void setHash(string $hash)
  * @method string getFolder()
@@ -72,6 +74,11 @@ class PasswordRevision extends AbstractRevisionEntity {
     protected $status;
 
     /**
+     * @var int
+     */
+    protected $customFields;
+
+    /**
      * Password constructor.
      */
     public function __construct() {
@@ -82,6 +89,7 @@ class PasswordRevision extends AbstractRevisionEntity {
         $this->addType('folder', 'string');
         $this->addType('username', 'string');
         $this->addType('password', 'string');
+        $this->addType('customFields', 'string');
 
         $this->addType('status', 'integer');
 

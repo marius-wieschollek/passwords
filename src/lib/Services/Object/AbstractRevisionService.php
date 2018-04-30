@@ -61,6 +61,24 @@ abstract class AbstractRevisionService extends AbstractService {
     }
 
     /**
+     * @param bool $decrypt
+     *
+     * @return RevisionInterface[]
+     * @throws \Exception
+     */
+    public function findAll($decrypt = false): array {
+        /** @var RevisionInterface[] $revisions */
+        $revisions = $this->mapper->findAll();
+        if(!$decrypt) return $revisions;
+
+        foreach($revisions as $revision) {
+            $this->encryptionService->decrypt($revision);
+        }
+
+        return $revisions;
+    }
+
+    /**
      * @param string $uuid
      * @param bool   $decrypt
      *
@@ -128,7 +146,6 @@ abstract class AbstractRevisionService extends AbstractService {
             $saved = $this->mapper->insert($revision);
         } else {
             $revision->setUpdated(time());
-
             $saved = $this->mapper->update($revision);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);

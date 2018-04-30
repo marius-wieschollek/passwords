@@ -58,6 +58,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $url
      * @param string $notes
+     * @param string $customFields
      * @param string $folder
      * @param int    $edited
      * @param bool   $hidden
@@ -67,7 +68,6 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @return PasswordRevision
      *
      * @throws \OCA\Passwords\Exception\ApiException
-     * @throws \OCP\AppFramework\QueryException
      */
     public function create(
         string $model,
@@ -78,6 +78,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $label,
         string $url,
         string $notes,
+        string $customFields,
         string $folder,
         int $edited,
         bool $hidden,
@@ -87,7 +88,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
         $revision = $this->createModel(
-            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $folder, $edited, $hidden, $trashed, $favourite
+            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $trashed, $favourite
         );
 
         $revision = $this->validationService->validatePassword($revision);
@@ -105,6 +106,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $url
      * @param string $notes
+     * @param string $customFields
      * @param string $folder
      * @param int    $edited
      * @param bool   $hidden
@@ -122,6 +124,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $label,
         string $url,
         string $notes,
+        string $customFields,
         string $folder,
         int $edited,
         bool $hidden,
@@ -148,6 +151,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setLabel($label);
         $revision->setUrl($url);
         $revision->setNotes($notes);
+        $revision->setCustomFields($customFields);
         $revision->setFolder($folder);
         $revision->setFavourite($favourite);
         $revision->setClient('');

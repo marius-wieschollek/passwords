@@ -1,11 +1,6 @@
 <template>
     <div slot="details" class="details">
-        <translate tag="div" say="Name"><span>{{ password.label }}</span></translate>
-        <translate tag="div" say="Username"><span>{{ password.username }}</span></translate>
-        <translate tag="div" say="Password">
-            <span @mouseover="showPassword=true" @mouseout="showPassword=false" class="password">{{ togglePassword }}</span>
-        </translate>
-        <translate tag="div" say="Website"><web :href="password.url">{{ password.url }}</web></translate>
+        <detail-field v-for="(field, index) in getCustomFields" :key="index" :name="field.name" :type="field.type" :value="field.value" />
 
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
@@ -27,12 +22,15 @@
 
 <script>
     import Web from '@vc/Web';
+    import DetailField from '@vue/Details/Password/DetailField';
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         components: {
             Web,
+            DetailField,
             Translate
         },
 
@@ -44,7 +42,7 @@
 
         data() {
             return {
-                showPassword: false
+                showHiddenFields: SettingsManager.get('client.ui.custom.fields.show.hidden')
             };
         },
 
@@ -63,13 +61,34 @@
                 }
                 return count;
             },
-            togglePassword() {
-                return this.showPassword ? this.password.password:''.padStart(this.password.password.length, '*');
-            },
             getSecurityStatus() {
                 let status = ['Secure', 'Weak', 'Broken'];
 
                 return status[this.password.status];
+            },
+            getCustomFields() {
+                let fields = [],
+                    customFields = this.password.customFields;
+
+                fields.push({name: Localisation.translate('Name'), value:this.password.label});
+                if(this.password.username) fields.push({name: Localisation.translate('Username'), value:this.password.username});
+                fields.push({name: Localisation.translate('Password'), value:this.password.password, type: 'secret'});
+                if(this.password.url) fields.push({name: Localisation.translate('Website'), value:this.password.url, type:'url'});
+
+
+                for(let name in customFields) {
+                    if(!customFields.hasOwnProperty(name) || (!this.showHiddenFields && name.substr(0, 1) === '_')) continue;
+
+                    fields.push(
+                        {
+                            name,
+                            type : customFields[name].type,
+                            value: customFields[name].value
+                        }
+                    );
+                }
+
+                return fields;
             }
         },
         methods : {
@@ -99,7 +118,7 @@
                 text-align : right;
                 cursor     : text;
 
-                &.password {
+                &.secret {
                     cursor : pointer;
 
                     &:hover {

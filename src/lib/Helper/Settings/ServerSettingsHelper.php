@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Settings;
 
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
+use OCP\Util;
 
 /**
  * Class ServerSettingsHelper
@@ -76,6 +77,7 @@ class ServerSettingsHelper {
             case 'version':
                 return $this->getServerVersion();
             case 'baseUrl':
+                if($subKey === 'webdav') return Util::linkToRemote('webdav');
                 return $this->urlGenerator->getBaseUrl();
             case 'theme':
                 return $this->themeSettings->get($subKey);
@@ -83,6 +85,7 @@ class ServerSettingsHelper {
                 return $this->shareSettings->get($subKey);
             case 'handbook':
                 $handbookUrl = $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
+
                 return empty($handbookUrl) ? self::SERVER_MANUAL_URL:$handbookUrl;
         }
 
@@ -95,9 +98,10 @@ class ServerSettingsHelper {
     public function list(): array {
         return array_merge(
             [
-                'server.baseUrl'    => $this->get('baseUrl'),
-                'server.version'    => $this->get('version'),
-                'server.handbook.url' => $this->get('handbook.url')
+                'server.baseUrl'        => $this->get('baseUrl'),
+                'server.baseUrl.webdav' => $this->get('baseUrl.webdav'),
+                'server.version'        => $this->get('version'),
+                'server.handbook.url'   => $this->get('handbook.url')
             ],
             $this->themeSettings->list(),
             $this->shareSettings->list()

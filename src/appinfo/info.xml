@@ -40,7 +40,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * ... und vieles mehr
 ]]>
     </description>
-    <version>2018.4.1-BUILD</version>
+    <version>2018.5.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -84,6 +84,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <repair-steps>
         <post-migration>
             <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
+            <step>OCA\Passwords\Migration\CreateCustomFields</step>
         </post-migration>
     </repair-steps>
     <settings>

@@ -32,7 +32,10 @@ RUN tar -xf /tmp/wkthml.tar.gz -C /tmp/ && \
     mv /tmp/wkhtmltox/bin/wkhtmltoimage /usr/local/bin/wkhtmltoimage && \
     rm -rf /tmp/wkthml.tar.gz /tmp/wkhtmltox
 
+RUN pecl install xdebug
+
 COPY files/mailhog.ini /usr/local/etc/php/conf.d/mailhog.ini
+COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 COPY startup.sh /usr/local/bin/startup
 RUN chmod +x /usr/local/bin/startup
