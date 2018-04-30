@@ -3,10 +3,10 @@
         <div class="app-content-left settings">
             <breadcrumb :show-add-new="false">
                 <div class="settings-level">
-                    <translate tag="label" for="setting-settings-expert" say="View"/>
-                    <select id="setting-settings-expert" v-model="expert">
+                    <translate tag="label" for="setting-settings-advanced" say="View"/>
+                    <select id="setting-settings-advanced" v-model="advanced">
                         <translate tag="option" value="0" say="Normal"/>
-                        <translate tag="option" value="1" say="Expert"/>
+                        <translate tag="option" value="1" say="Advanced"/>
                     </select>
                 </div>
             </breadcrumb>
@@ -56,32 +56,32 @@
                     </select>
                     <settings-help text="Show the selected property as title in the list view"/>
 
-                    <translate tag="label" for="setting-password-sorting" say="Sort by" v-if="expertSettings"/>
-                    <select id="setting-password-sorting" v-model="settings['client.ui.password.field.sorting']" v-if="expertSettings">
+                    <translate tag="label" for="setting-password-sorting" say="Sort by" v-if="advancedSettings"/>
+                    <select id="setting-password-sorting" v-model="settings['client.ui.password.field.sorting']" v-if="advancedSettings">
                         <translate tag="option" value="byTitle" say="Title field"/>
                         <translate tag="option" value="label" say="Name"/>
                         <translate tag="option" value="website" say="Website"/>
                         <translate tag="option" value="user" say="Username"/>
                     </select>
-                    <settings-help text="Sorts passwords by the selected property when sorting by name is selected" v-if="expertSettings"/>
+                    <settings-help text="Sorts passwords by the selected property when sorting by name is selected" v-if="advancedSettings"/>
 
-                    <translate tag="label" for="setting-password-click" say="Single click action" v-if="expertSettings"/>
-                    <select id="setting-password-click" v-model="settings['client.ui.password.click.action']" v-if="expertSettings">
+                    <translate tag="label" for="setting-password-click" say="Single click action" v-if="advancedSettings"/>
+                    <select id="setting-password-click" v-model="settings['client.ui.password.click.action']" v-if="advancedSettings">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
                     </select>
-                    <settings-help text="Action to perform when clicking on a password in the list view" v-if="expertSettings"/>
+                    <settings-help text="Action to perform when clicking on a password in the list view" v-if="advancedSettings"/>
 
-                    <translate tag="label" for="setting-password-dblClick" say="Double click action" v-if="expertSettings"/>
-                    <select id="setting-password-dblClick" v-model="settings['client.ui.password.dblClick.action']" v-if="expertSettings">
+                    <translate tag="label" for="setting-password-dblClick" say="Double click action" v-if="advancedSettings"/>
+                    <select id="setting-password-dblClick" v-model="settings['client.ui.password.dblClick.action']" v-if="advancedSettings">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
                     </select>
-                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="expertSettings"/>
+                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advancedSettings"/>
 
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
@@ -91,9 +91,9 @@
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
 
-                    <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="expertSettings"/>
-                    <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="expertSettings">
-                    <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="expertSettings"/>
+                    <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="advancedSettings">
+                    <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="advancedSettings"/>
                 </section>
                 <section class="notifications">
                     <translate tag="h1" say="Notifications"/>
@@ -116,9 +116,9 @@
                     <input type="checkbox" id="setting-notification-sharing" v-model="settings['user.notification.shares']">
                     <settings-help text="Notifies you when other people share passwords with you"/>
 
-                    <translate tag="label" for="setting-notification-errors" say="Other errors" v-if="expertSettings"/>
-                    <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.errors']" v-if="expertSettings">
-                    <settings-help text="Notifies you when a background operation fails" v-if="expertSettings"/>
+                    <translate tag="label" for="setting-notification-errors" say="Other errors" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.errors']" v-if="advancedSettings">
+                    <settings-help text="Notifies you when a background operation fails" v-if="advancedSettings"/>
                 </section>
                 <section class="tests" v-if="nightly">
                     <translate tag="h1" say="Field tests"/>
@@ -160,12 +160,12 @@
             Translate
         },
         data() {
-            let expertSettings = SettingsManager.get('client.settings.expert');
+            let advancedSettings = SettingsManager.get('client.settings.advanced');
 
             return {
                 settings: SettingsManager.getAll(),
-                expertSettings,
-                expert  : expertSettings ? '1':'0',
+                advancedSettings,
+                advanced: advancedSettings ? '1':'0',
                 nightly : process.env.NIGHTLY_FEATURES,
                 noSave  : false,
                 locked  : false
@@ -197,8 +197,8 @@
                 for(let i in this.settings) {
                     if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsManager.reset(i);
                 }
-                this.expertSettings = false;
-                this.expert = '0';
+                this.advancedSettings = false;
+                this.advanced = '0';
                 this.noSave = false;
                 this.locked = false;
             },
@@ -238,13 +238,13 @@
         },
         watch     : {
             settings: {
-                handler(value, oldValue) {
+                handler() {
                     this.saveSettings();
                 },
                 deep: true
             },
-            expert(value) {
-                this.expertSettings = this.settings['client.settings.expert'] = value === '1';
+            advanced(value) {
+                this.advancedSettings = this.settings['client.settings.advanced'] = value === '1';
             }
         }
     };

@@ -18,7 +18,7 @@ class SettingsManager {
             'client.ui.password.menu.copy'       : false,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
-            'client.settings.expert'             : false
+            'client.settings.advanced'           : false
         };
         this._settings = Utility.cloneObject(this._defaults);
     }

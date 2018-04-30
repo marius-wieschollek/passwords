@@ -258,7 +258,7 @@
             'DELETE EVERYTHING'                   : 'ALLES LÖSCHEN',
             'Account reset requested'             : 'Benutzerkonto zurücksetzen',
             'View'                                : 'Ansicht',
-            'Expert'                              : 'Experte',
+            'Advanced'                            : 'Erweitert',
             'There is nothing here'               : 'Hier ist nichts',
             'Click on "+" to add something'       : 'Drücke auf das "+"-Symbol, um etwas hinzuzufügen',
             'Deleted items will appear here'      : 'Gelöschte Objekte werden hier erscheinen',
