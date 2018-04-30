@@ -111,6 +111,10 @@
                 .title {
                     padding-left : 99px;
                     cursor       : default;
+
+                    span {
+                        cursor       : default;
+                    }
                 }
 
                 &:active,

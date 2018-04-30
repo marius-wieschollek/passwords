@@ -91,9 +91,14 @@
                 return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags;
             },
             getTitle() {
-                let titleField = SettingsManager.get('client.ui.password.field.title');
+                let titleField = SettingsManager.get('client.ui.password.field.title'),
+                    showUser   = SettingsManager.get('client.ui.password.user.show'),
+                    title      = this.password[titleField];
 
-                return this.password[titleField];
+                if(!title && this.password.label) title = this.password.label;
+                if(!title && this.password.website) title = this.password.website;
+                if(showUser && this.password.username) title = `${title} – ${this.password.username}`;
+                return title;
             },
             getTags() {
                 return Utility.sortApiObjectArray(this.password.tags, 'label');

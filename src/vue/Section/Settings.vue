@@ -52,7 +52,6 @@
                     <select id="setting-password-title" v-model="settings['client.ui.password.field.title']">
                         <translate tag="option" value="label" say="Name"/>
                         <translate tag="option" value="website" say="Website"/>
-                        <translate tag="option" value="user" say="Username"/>
                     </select>
                     <settings-help text="Show the selected property as title in the list view"/>
 
@@ -86,6 +85,10 @@
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
                     <settings-help text="Shows options to copy the password and user name in the menu"/>
+
+                    <translate tag="label" for="setting-password-username" say="Show username in list view" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-password-username" v-model="settings['client.ui.password.user.show']" v-if="advancedSettings">
+                    <settings-help text="Always show the username related to the password in the list view" v-if="advancedSettings"/>
 
                     <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
