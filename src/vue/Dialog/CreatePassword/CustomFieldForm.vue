@@ -1,6 +1,6 @@
 <template>
     <form class="custom-field-form">
-        <input type="text" placeholder="Name" class="field-name" v-model="name" maxlength="48" :class="{error:!isValidName}">
+        <input type="text" :placeholder="namePlaceholder" class="field-name" v-model="name" maxlength="48" :class="{error:!isValidName}"/>
         <select class="field-type" v-model="type" :disabled="!isValidName">
             <translate tag="option" value="text">Text</translate>
             <translate tag="option" value="secret">Secret</translate>
@@ -9,7 +9,7 @@
             <translate tag="option" value="file">File</translate>
         </select>
         <input class="file-picker" type="button" @click="openNextcloudFile" v-if="showFilePicker" :disabled="!isValidName" :style="getFileButtonStyle" :value="value"/>
-        <input class="field-value" :type="getFieldType" placeholder="Value" v-model="value" maxlength="320" v-if="!showFilePicker" :disabled="!isValidName"/>
+        <input class="field-value" :type="getFieldType" :placeholder="valuePlaceholder" v-model="value" maxlength="320" v-if="!showFilePicker" :disabled="!isValidName"/>
         <button class="fa fa-undo field-button" @click="revertField" :disabled="isRevertable"></button>
         <button class="fa fa-trash field-button" @click="deleteField" :disabled="!isValidName"></button>
         <slot></slot>
@@ -18,8 +18,9 @@
 
 <script>
     import Messages from '@js/Classes/Messages';
-    import Translate from "@/vue/Components/Translate";
-    import SettingsManager from "@/js/Manager/SettingsManager";
+    import Localisation from '@js/Classes/Localisation';
+    import Translate from '@vue/Components/Translate';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         name      : 'custom-field-form',
@@ -74,6 +75,12 @@
                 return {
                     backgroundImage: `url(${SettingsManager.get('server.theme.folder.icon')})`
                 };
+            },
+            namePlaceholder() {
+                return Localisation.translate('Name');
+            },
+            valuePlaceholder() {
+                return Localisation.translate('Value');
             }
         },
         methods : {

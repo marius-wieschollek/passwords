@@ -14,6 +14,7 @@
 
 <script>
     import Utility from '@js/Classes/Utility';
+    import SettingsManager from '@js/Manager/SettingsManager';
     import CustomFieldForm from '@vue/Dialog/CreatePassword/CustomFieldForm';
 
     export default {
@@ -25,15 +26,20 @@
         },
         data() {
             return {
+                showHiddenFields: SettingsManager.get('client.ui.custom.fields.show.hidden'),
                 customFields: this.fields
             };
         },
         computed  : {
             getFields() {
-                let fields = [];
+                let fields = [],
+                    fieldCount = 0;
 
                 for(let name in this.customFields) {
                     if(!this.customFields.hasOwnProperty(name)) continue;
+                    fieldCount++;
+                    if(!this.showHiddenFields && name.substr(0,1) === '_') continue;
+
                     fields.push(
                         {
                             name,
@@ -43,7 +49,7 @@
                     );
                 }
 
-                if(fields.length < 20) fields.push(undefined);
+                if(fieldCount < 20) fields.push(undefined);
                 return fields;
             },
             getTakenNames() {
