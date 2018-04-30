@@ -58,19 +58,11 @@ class Application extends App {
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
 
-        //$this->registerPersonalSettings();
         $this->registerDiClasses();
         $this->registerSystemHooks();
         $this->registerInternalHooks();
         $this->registerMiddleware();
         $this->registerNotificationNotifier();
-    }
-
-    /**
-     *
-     */
-    protected function registerPersonalSettings(): void {
-        \OCP\App::registerPersonal(self::APP_NAME, 'personal/index');
     }
 
     /**
