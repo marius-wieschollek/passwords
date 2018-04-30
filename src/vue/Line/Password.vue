@@ -1,7 +1,7 @@
 <template>
     <div class="row password"
-         @click="rowClickAction($event)"
-         @dblclick="copyUsernameAction($event)"
+         @click="clickAction($event)"
+         @dblclick="doubleClickAction($event)"
          @dragstart="dragStartAction($event)"
          :data-password-id="password.id"
          :data-password-title="password.label">
@@ -117,30 +117,34 @@
         },
 
         methods: {
-            rowClickAction($event) {
-              const action = SettingsManager.get('client.ui.password.click.action');
-              if (action === 'copyPassword') return this.copyPasswordAction($event);
-              if (action === 'showDetails')  return this.detailsAction($event);
-              if (action === 'copyWebsite')  return this.copyUrlAction();
-            },
-            copyPasswordAction($event) {
+            clickAction($event) {
                 if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0)) return;
-                Utility.copyToClipboard(this.password.password);
-
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
-                this.clickTimeout =
-                    setTimeout(function() { Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate('Password')}]); }, 300);
+
+                let action = SettingsManager.get('client.ui.password.click.action');
+                if(this.runClickAction(action)) {
+                    this.clickTimeout =
+                        setTimeout(function() {
+                            Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(action.capitalize())}]);
+                        }, 300);
+                }
+
             },
-            copyUsernameAction($event) {
+            doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
-                Utility.copyToClipboard(this.password.username);
-                Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate('Username')}]);
+                let action = SettingsManager.get('client.ui.password.dblClick.action');
+                if(this.runClickAction(action)) {
+                    Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(action.capitalize())}]);
+                }
             },
-            copyUrlAction() {
-                Utility.copyToClipboard(this.password.url);
-                Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate('Url')}]);
+            runClickAction(action) {
+                if(action === 'password') Utility.copyToClipboard(this.password.password);
+                if(action === 'username') Utility.copyToClipboard(this.password.username);
+                if(action === 'details') this.detailsAction();
+                if(action === 'url') Utility.copyToClipboard(this.password.url);
+                return action !== 'details';
             },
             favouriteAction($event) {
                 $event.stopPropagation();
@@ -157,7 +161,7 @@
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },
-            detailsAction($event, section = null) {
+            detailsAction(section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
                 if(!this.password.hasOwnProperty('revisions')) {
                     API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')

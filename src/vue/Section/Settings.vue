@@ -65,13 +65,23 @@
                     </select>
                     <settings-help text="Sorts passwords by the selected property when sorting by name is selected" v-if="expertSettings"/>
 
-                    <translate tag="label" for="setting-password-click" say="On password row click"/>
-                    <select id="setting-password-click" v-model="settings['client.ui.password.click.action']">
-                        <translate tag="option" value="showDetails" say="Show details"/>
-                        <translate tag="option" value="copyPassword" say="Copy password"/>
-                        <translate tag="option" value="copyWebsite" say="Copy website URL"/>
+                    <translate tag="label" for="setting-password-click" say="Single click action" v-if="expertSettings"/>
+                    <select id="setting-password-click" v-model="settings['client.ui.password.click.action']" v-if="expertSettings">
+                        <translate tag="option" value="password" say="Copy password"/>
+                        <translate tag="option" value="username" say="Copy username"/>
+                        <translate tag="option" value="url" say="Copy website"/>
+                        <translate tag="option" value="details" say="Show details"/>
                     </select>
-                    <settings-help text="Perform the selected action when clicking on an item in the list view"/>
+                    <settings-help text="Action to perform when clicking on a password in the list view" v-if="expertSettings"/>
+
+                    <translate tag="label" for="setting-password-dblClick" say="Double click action" v-if="expertSettings"/>
+                    <select id="setting-password-dblClick" v-model="settings['client.ui.password.dblClick.action']" v-if="expertSettings">
+                        <translate tag="option" value="password" say="Copy password"/>
+                        <translate tag="option" value="username" say="Copy username"/>
+                        <translate tag="option" value="url" say="Copy website"/>
+                        <translate tag="option" value="details" say="Show details"/>
+                    </select>
+                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="expertSettings"/>
 
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
