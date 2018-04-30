@@ -15,7 +15,8 @@ class SettingsManager {
             'client.ui.password.field.sorting'   : 'byTitle',
             'client.ui.password.menu.copy'       : false,
             'client.ui.custom.fields.show.hidden': false,
-            'client.ui.list.tags.show'           : false
+            'client.ui.list.tags.show'           : false,
+            'client.settings.expert'             : false
         };
         this._settings = Utility.cloneObject(this._defaults);
     }
