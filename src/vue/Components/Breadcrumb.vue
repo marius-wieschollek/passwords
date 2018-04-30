@@ -5,12 +5,25 @@
             <div class="crumb svg" data-dir="/">
                 <router-link :to="getBaseRoute"><img class="svg" :src="getHomeIcon" alt="Home"></router-link>
             </div>
-            <div class="crumb svg" v-for="(item, index) in getItems" :class="{current:index === getItems.length - 1}">
+            <div class="crumb svg" v-for="(item, index) in getItems" :class="{first:index===0,current:index === getItems.length - 1}">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
             </div>
-            <div class="actions creatable" v-if="showAddNew" :class="{active: showMenu}">
-                <span class="button new" @click="toggleMenu()"><span class="icon icon-add"></span></span>
-                <div class="newPasswordMenu popovermenu bubble menu menu-left open" @click="toggleMenu()">
+            <div class="crumb svg crumbmenu" :class="{active: showCrumbMenu}" v-if="getCrumbMenuItems.length !== 0">
+                <span class="icon icon-more" @click="toggleCrumbMenu"></span>
+                <div class="popovermenu menu menu-center" @click="toggleCrumbMenu">
+                    <ul>
+                        <li v-for="item in getCrumbMenuItems" class="crumblist">
+                            <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
+                                <span :class="getCrumbItemIcon"></span>
+                                {{ item.label }}
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="passwords-more-menu" v-if="showAddNew" :class="{active: showMoreMenu}">
+                <span class="button new" @click="toggleMoreMenu"><span class="icon icon-add"></span></span>
+                <div class="popovermenu menu menu-center" @click="toggleMoreMenu">
                     <ul>
                         <li>
                         <span class="menuitem" v-if="newFolder" @click="createFolder">
@@ -81,7 +94,7 @@
                 type     : Boolean,
                 'default': false
             },
-            restoreAll  : {
+            restoreAll : {
                 type     : Boolean,
                 'default': false
             },
@@ -104,7 +117,8 @@
         },
         data() {
             return {
-                showMenu: false
+                showMoreMenu : false,
+                showCrumbMenu: false
             };
         },
 
@@ -125,17 +139,40 @@
                 }
 
                 return this.items;
+            },
+            getCrumbMenuItems() {
+                let items = this.getItems;
+                if(items.length > 1) return items.slice(1);
+                return [];
+            },
+            getCrumbItemIcon() {
+                if(this.$route.name === 'Folders') return 'icon icon-folder';
+                if(this.$route.name === 'Tags') return 'icon icon-tag';
+                if(this.$route.name === 'Shared') return 'icon icon-shared';
+                if(this.$route.name === 'Security') return 'fa fa-shield';
+                if(this.$route.name === 'Trash') return 'fa fa-trash';
+                if(this.$route.name === 'Help') return 'fa fa-book';
+                if(this.$route.name === 'Backup') return 'icon icon-category-app-bundles';
+
+                return 'icon icon-menu';
             }
         },
 
         methods: {
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
-                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+            toggleMoreMenu() {
+                this.showMoreMenu = !this.showMoreMenu;
+                this.showMoreMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+                if(this.showMoreMenu && this.showCrumbMenu) this.showCrumbMenu = false;
+            },
+            toggleCrumbMenu() {
+                this.showCrumbMenu = !this.showCrumbMenu;
+                this.showCrumbMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+                if(this.showCrumbMenu && this.showMoreMenu) this.showMoreMenu = false;
             },
             menuEvent($e) {
-                if($($e.target).closest('.actions.creatable').length !== 0) return;
-                this.showMenu = false;
+                if($($e.target).closest('.passwords-more-menu, .crumbmenu').length !== 0) return;
+                this.showCrumbMenu = false;
+                this.showMoreMenu = false;
                 $(document).off('click', this.menuEvent);
             },
             createFolder() {
@@ -164,20 +201,38 @@
     #controls {
         position : sticky;
 
-        .actions.creatable {
-            margin-left : 10px;
-            display     : inline-block;
-            position    : relative;
-            order       : 2;
+        .crumbmenu,
+        .passwords-more-menu {
+            position : relative;
+            order    : 2;
 
-            .newPasswordMenu {
+            &.passwords-more-menu {
+                margin-left : 10px;
+                display     : inline-block;
+            }
+
+            &.crumbmenu {
+                display : none;
+
+                .icon-more {
+                    cursor : pointer;
+                }
+
+                .fa {
+                    padding   : 10px;
+                    font-size : 1rem;
+                }
+            }
+
+            .menu {
                 max-height : 0;
                 margin     : 0;
                 overflow   : hidden;
                 transition : max-height 0.25s ease-in-out;
+                display    : block;
             }
 
-            &.active .newPasswordMenu {
+            &.active .menu {
                 overflow   : visible;
                 max-height : 75px;
                 animation  : 0.25s delay-overflow;
@@ -208,7 +263,15 @@
 
         @media(max-width : $tablet-width) {
             padding-left : 0 !important;
-            overflow-x   : auto;
+
+            .breadcrumb {
+                .crumb:not(.first):not(.crumbmenu) {
+                    display : none;
+                }
+                .crumbmenu {
+                    display : inline-flex;
+                }
+            }
 
             #app-navigation-toggle {
                 display          : block !important;
@@ -218,6 +281,7 @@
                 background-color : $color-white;
                 opacity          : 1;
                 color            : transparentize($color-black, 0.4);
+                z-index          : 1;
 
                 &:hover {
                     color : $color-black
@@ -227,7 +291,6 @@
     }
 
     .edge {
-        .bubble,
         .popovermenu,
         #app-navigation .app-navigation-entry-menu {
             border : none !important;

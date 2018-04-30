@@ -6,6 +6,7 @@
 - Added email default settings
 - Improved password title
 - Improved password details
+- Improved breadcrumb
 
 #### 2018.4.2 - Bugfix Release
 - Fixed reporting of password generator settings

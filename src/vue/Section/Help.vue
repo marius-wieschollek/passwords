@@ -210,6 +210,11 @@
                     color          : transparent;
                     transition     : color .15s ease-in-out;
                     position       : absolute;
+
+                    @media all and (max-width : $width-large) {
+                        position : static;
+                        float    : right;
+                    }
                 }
 
                 &:hover a.help-anchor {

@@ -44,7 +44,6 @@
                     ];
 
                 if(typeof this.currentFolder.parent !== 'string' && this.currentFolder.parent.id !== this.defaultFolder && !this.currentFolder.trashed) {
-                    items[0].label = '…';
                     let parent = this.currentFolder.parent;
                     items.push(
                         {
