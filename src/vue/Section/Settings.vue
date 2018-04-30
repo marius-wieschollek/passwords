@@ -65,6 +65,14 @@
                     </select>
                     <settings-help text="Sorts passwords by the selected property when sorting by name is selected" v-if="expertSettings"/>
 
+                    <translate tag="label" for="setting-password-click" say="On password row click"/>
+                    <select id="setting-password-click" v-model="settings['client.ui.password.click.action']">
+                        <translate tag="option" value="showDetails" say="Show details"/>
+                        <translate tag="option" value="copyPassword" say="Copy password"/>
+                        <translate tag="option" value="copyWebsite" say="Copy website URL"/>
+                    </select>
+                    <settings-help text="Perform the selected action when clicking on an item in the list view"/>
+
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox" id="setting-password-menu" v-model="settings['client.ui.password.menu.copy']">
                     <settings-help text="Shows options to copy the password and user name in the menu"/>
