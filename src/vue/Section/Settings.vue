@@ -37,7 +37,6 @@
                 </select>
                 <settings-help text="The initial section to be shown when the app is opened"/>
 
-                <translate tag="h3" say="Passwords List View"/>
                 <translate tag="label" for="setting-password-title" say="Set title from"/>
                 <select id="setting-password-title" v-model="settings['client.ui.password.field.title']">
                     <translate tag="option" value="label" say="Name"/>
@@ -45,6 +44,15 @@
                     <translate tag="option" value="user" say="Username"/>
                 </select>
                 <settings-help text="Show the selected property as title in the list view"/>
+
+                <translate tag="h3" say="Passwords List Click Action"/>
+                <translate tag="label" for="setting-password-click" say="On password row click"/>
+                <select id="setting-password-click" v-model="settings['client.ui.password.click.action']">
+                    <translate tag="option" value="showDetails" say="Show details"/>
+                    <translate tag="option" value="copyPassword" say="Copy password"/>
+                    <translate tag="option" value="copyWebsite" say="Copy website URL"/>
+                </select>
+                <settings-help text="Perform the selected action when clicking on an item in the list view"/>
 
                 <translate tag="label" for="setting-password-sorting" say="Sort by"/>
                 <select id="setting-password-sorting" v-model="settings['client.ui.password.field.sorting']">
