@@ -183,6 +183,7 @@ class SynchronizeShares extends TimedJob {
                 $sourceRevision->getLabel(),
                 $sourceRevision->getUrl(),
                 $sourceRevision->getNotes(),
+                $sourceRevision->getCustomFields(),
                 FolderService::BASE_FOLDER_UUID,
                 time(),
                 false,
@@ -378,14 +379,15 @@ class SynchronizeShares extends TimedJob {
 
         /** @var PasswordRevision $newRevision */
         $newRevision = $this->passwordRevisionService->clone($currentRevision, [
-            'password' => $sourceRevision->getPassword(),
-            'username' => $sourceRevision->getUsername(),
-            'cseType'  => $sourceRevision->getCseType(),
-            'hash'     => $sourceRevision->getHash(),
-            'label'    => $sourceRevision->getLabel(),
-            'url'      => $sourceRevision->getUrl(),
-            'notes'    => $sourceRevision->getNotes(),
-            'status'   => $sourceRevision->getStatus(),
+            'password'     => $sourceRevision->getPassword(),
+            'username'     => $sourceRevision->getUsername(),
+            'cseType'      => $sourceRevision->getCseType(),
+            'hash'         => $sourceRevision->getHash(),
+            'label'        => $sourceRevision->getLabel(),
+            'url'          => $sourceRevision->getUrl(),
+            'notes'        => $sourceRevision->getNotes(),
+            'customFields' => $sourceRevision->getCustomFields(),
+            'status'       => $sourceRevision->getStatus(),
         ]);
 
         return $this->passwordRevisionService->save($newRevision);
