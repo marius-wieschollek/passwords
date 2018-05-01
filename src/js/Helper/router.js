@@ -5,6 +5,7 @@ import SectionTags from '@vue/Section/Tags';
 import SectionTrash from '@vue/Section/Trash';
 import SectionRecent from '@vue/Section/Recent';
 import SectionShared from '@vue/Section/Shared';
+import SectionSearch from '@vue/Section/Search';
 import SectionFolders from '@vue/Section/Folders';
 import SectionSecurity from '@vue/Section/Security';
 import SectionFavourites from '@vue/Section/Favourites';
@@ -49,6 +50,7 @@ let router = new Router(
             {name: 'Favourites', path: '/favourites', components: {main: SectionFavourites}},
             {name: 'Shared', path: '/shared/:type?', components: {main: SectionShared}},
             {name: 'Security', path: '/security/:status?', components: {main: SectionSecurity}},
+            {name: 'Search', path: '/search/:query?', components: {main: SectionSearch}},
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},

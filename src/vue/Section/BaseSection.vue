@@ -35,8 +35,8 @@
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
     import PasswordDetails from '@vue/Details/Password';
-    import Localisation from '@/js/Classes/Localisation';
-    import SearchManager from '@/js/Manager/SearchManager';
+    import Localisation from '@js/Classes/Localisation';
+    import SearchManager from '@js/Manager/SearchManager';
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
@@ -85,10 +85,14 @@
 
         computed: {
             getContentClass() {
-                return {
-                    'show-details': this.detail.type !== 'none',
-                    'loading'     : this.loading
-                };
+                let classes = {
+                        'show-details': this.detail.type !== 'none',
+                        'loading'     : this.loading
+                    },
+                    section = `section-${this.$route.name.toLowerCase()}`;
+                classes[section] = true;
+
+                return classes;
             },
             showPasswordDetails() {
                 return this.detail.type === 'password';
@@ -104,7 +108,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query:this.search.query});
+                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return undefined;
@@ -127,15 +131,15 @@
                 if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
                 if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
             },
-            updatePasswordList: function(passwords) {
+            updatePasswordList(passwords) {
                 this.loading = false;
                 this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
-            updateFolderList  : function(folders) {
+            updateFolderList(folders) {
                 this.loading = false;
                 this.folders = Utility.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
             },
-            updateTagList     : function(tags) {
+            updateTagList(tags) {
                 this.loading = false;
                 this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },

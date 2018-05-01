@@ -2,6 +2,10 @@
     <div class="row footer">
         <div class="title" :title="getText">
             <translate :say="getText"/>
+            <span v-if="showSearchLink">&nbsp;&#8211;&nbsp;</span>
+            <router-link :to="searchRoute" id="global-search-link" v-if="showSearchLink">
+                <translate say="Search everywhere for &quot;{query}&quot;" :variables="{query: search.query}"/>
+            </router-link>
         </div>
     </div>
 </template>
@@ -43,6 +47,12 @@
                     return this.getSearchText();
                 }
                 return this.getFooterText(this.passwords.length, this.folders.length, this.tags.length);
+            },
+            showSearchLink() {
+                return this.search.active && this.$route.name !== 'Search';
+            },
+            searchRoute() {
+                return { name: 'Search', params: {query: this.search.query}};
             }
         },
 
@@ -120,6 +130,11 @@
                 &:active,
                 &:hover {
                     background-color : initial;
+                }
+
+                #global-search-link,
+                #global-search-link span {
+                    cursor: pointer;
                 }
             }
         }

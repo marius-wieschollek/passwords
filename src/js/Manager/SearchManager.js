@@ -53,8 +53,10 @@ class SearchManager {
 
                 if(SearchManager._checkIfObjectMatchesQuery(object, searchParams)) {
                     if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
+                    el.classList.add('search-visible');
                     stats[key]++;
                 } else {
+                    if(el.classList.contains('search-visible')) el.classList.remove('search-visible');
                     el.classList.add('search-hidden');
                 }
             }
@@ -145,10 +147,11 @@ class SearchManager {
      */
     _resetSearch() {
         this._status.active = false;
-        let elements = document.querySelectorAll('.search-hidden');
+        let elements = document.querySelectorAll('.search-hidden, .search-visible');
 
         elements.forEach((el) => {
             el.classList.remove('search-hidden');
+            el.classList.remove('search-visible');
         });
     }
 

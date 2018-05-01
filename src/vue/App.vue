@@ -23,6 +23,9 @@
                 <router-link class="nav-icon-security" :to="{ name: 'Security'}" active-class="active" tag="li">
                     <translate say="Security"/>
                 </router-link>
+                <router-link class="nav-icon-search" :to="{ name: 'Search'}" active-class="active" tag="li" v-if="showSearch">
+                    <translate say="Search"/>
+                </router-link>
             </ul>
             <ul id="app-settings" :class="{open: showMore}">
                 <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
@@ -73,6 +76,12 @@
             };
         },
 
+        computed: {
+            showSearch() {
+                return this.$route.name === 'Search';
+            }
+        },
+
         methods: {
             openBrowserAddonPage() {
                 if(navigator.userAgent.indexOf('Firefox') !== -1) {
@@ -107,8 +116,6 @@
                 font-family   : FontAwesome, sans-serif;
                 font-size     : 1rem;
                 padding-right : 10px;
-                position      : relative;
-                bottom        : -2px;
                 width         : 1rem;
                 text-align    : center;
                 display       : inline-block;
@@ -121,6 +128,7 @@
             &.nav-icon-security:before { content : "\f132"; }
             &.nav-icon-shared:before { content : "\f1e0"; }
             &.nav-icon-favourites:before { content : "\f005"; }
+            &.nav-icon-search:before { content : "\f002"; }
             &.nav-icon-trash:before { content : "\f014"; }
             &.nav-icon-more:before { content : "\f067"; }
             &.nav-icon-settings:before { content : "\f013"; }
