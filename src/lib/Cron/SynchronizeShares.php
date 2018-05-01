@@ -27,8 +27,6 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  * Class SynchronizeShares
  *
  * @package OCA\Passwords\Cron
- *
- * @TODO    check for deleted users
  */
 class SynchronizeShares extends TimedJob {
 
