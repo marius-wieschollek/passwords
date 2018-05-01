@@ -85,6 +85,7 @@
                 for(let name in this.customFields) {
                     if(!this.customFields.hasOwnProperty(name) || !name.length) continue;
                     let field = this.customFields[name];
+
                     fields[name] = {type: field.type, value: field.value};
                 }
 

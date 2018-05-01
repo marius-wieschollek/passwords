@@ -262,7 +262,7 @@
                     overflow  : auto;
                 }
 
-                @media (max-width : $mobile-width) {
+                @media (max-width : $width-medium) {
                     border-radius : 0;
                     top           : 0;
                     left          : 0;
@@ -434,7 +434,7 @@
                     }
                 }
 
-                @media (max-width : $mobile-width) {
+                @media (max-width : $width-extra-small) {
                     display : block;
 
                     .form.left {

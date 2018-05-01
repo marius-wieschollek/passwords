@@ -1,6 +1,6 @@
 <template>
-    <form class="custom-field-form">
-        <input type="text" :placeholder="namePlaceholder" class="field-name" v-model="name" maxlength="48" :class="{error:!isValidName}"/>
+    <div class="custom-field-form">
+        <input type="text" :placeholder="namePlaceholder" class="field-name" v-model="name" maxlength="48" :class="{error:showNameError}"/>
         <select class="field-type" v-model="type" :disabled="!isValidName">
             <translate tag="option" value="text">Text</translate>
             <translate tag="option" value="secret">Secret</translate>
@@ -9,11 +9,18 @@
             <translate tag="option" value="file">File</translate>
         </select>
         <input class="file-picker" type="button" @click="openNextcloudFile" v-if="showFilePicker" :disabled="!isValidName" :style="getFileButtonStyle" :value="value"/>
-        <input class="field-value" :type="getFieldType" :placeholder="valuePlaceholder" v-model="value" maxlength="320" v-if="!showFilePicker" :disabled="!isValidName"/>
-        <button class="fa fa-undo field-button" @click="revertField" :disabled="isRevertable"></button>
-        <button class="fa fa-trash field-button" @click="deleteField" :disabled="!isValidName"></button>
+        <input class="field-value"
+               :type="getFieldType"
+               :placeholder="valuePlaceholder"
+               v-model="value"
+               maxlength="320"
+               v-if="!showFilePicker"
+               :disabled="!isValidName"
+               :required="this.type!=='text'"
+               :pattern="getPattern"/>
+        <input type="button" class="fa fa-trash field-button" @click="deleteField" :disabled="!isValidName" value=""/>
         <slot></slot>
-    </form>
+    </div>
 </template>
 
 <script>
@@ -57,11 +64,11 @@
         },
 
         computed: {
+            showNameError() {
+                return !this.isValidName && !this.isBlank;
+            },
             isValidName() {
                 return this.name.length && (this.takenNames.indexOf(this.name) === -1 || this.originalName === this.name);
-            },
-            isRevertable() {
-                return this.isValidName && this.field.name.length;
             },
             getFieldType() {
                 if(this.type === 'secret') return 'password';
@@ -76,6 +83,11 @@
                     backgroundImage: `url(${SettingsManager.get('server.theme.folder.icon')})`
                 };
             },
+            getPattern() {
+                if(this.type === 'url') return '\\w+:\/\/.+';
+                if(this.type === 'email') return '\\w+@.+';
+                return false;
+            },
             namePlaceholder() {
                 return Localisation.translate('Name');
             },
@@ -87,15 +99,12 @@
             async openNextcloudFile() {
                 this.value = await Messages.filePicker();
             },
-            revertField() {
-                this.name = this.field.name;
-                this.type = this.field.type;
-                this.value = this.field.value;
-            },
             deleteField() {
                 this.$emit('deleted', this.name);
             },
             updateField() {
+                if(!this.type === 'text' && !this.value) return;
+
                 this.$emit(
                     'updated',
                     {
@@ -157,7 +166,7 @@
 
         .field-value,
         .file-picker {
-            width     : 85.5%;
+            width     : 92.5%;
             max-width : none;
         }
 
@@ -175,6 +184,32 @@
         .field-button {
             width     : 6%;
             max-width : none;
+        }
+
+        @media all and (max-width: $width-small) {
+            .field-type {
+                width     : 22.5%;
+            }
+
+            .field-value,
+            .file-picker {
+                width     : 92%;
+            }
+        }
+
+        @media all and (max-width: $width-extra-small) {
+            .field-type {
+                width     : 21%;
+            }
+
+            .field-value,
+            .file-picker {
+                width     : 85%;
+            }
+
+            .field-button {
+                width     : 12%;
+            }
         }
     }
 </style>
