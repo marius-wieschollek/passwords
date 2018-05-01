@@ -1,5 +1,6 @@
 #### 2018.5.0 - Feature Release
 - Added custom fields
+- Added global search
 - Added advanced settings
 - Added user name in list view
 - Added configurable click actions

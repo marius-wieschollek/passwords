@@ -46,15 +46,16 @@ Scenario('Import the sample database', async (I) => {
 Scenario('Show Create Password Dialog', (I) => {
     I.amOnPage('/index.php/apps/passwords/');
 
-    I.waitForElement('#controls > div.breadcrumb > div.actions.creatable > span', 10);
-    I.click('#controls > div.breadcrumb > div.actions.creatable > span');
-    I.waitForVisible('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(3)', 20);
-    I.click('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(3)');
+    I.waitForElement('#controls > div.breadcrumb > div.passwords-more-menu > span', 10);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > span');
+    I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)', 20);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)');
     I.waitForElement('#passwords-create-new', 10);
     I.fillField('#password-username', 'myuser');
     I.fillField('#password-password', 'LongAndStrongPassword');
     I.fillField('#password-url', 'https://www.example.com');
     I.click('#passwords-create-new');
+    I.click('div.foldout-container:nth-child(2) > div:nth-child(1)');
 
     I.captureWholePage('password-create', 4);
 });
@@ -106,12 +107,21 @@ Scenario('Show Security Section', (I) => {
     I.captureWholePage('security-section', 0);
 });
 
-Scenario('Show Settings Section', (I) => {
+Scenario('Show Search Section', (I) => {
+    I.amOnPage('/index.php/apps/passwords/#/search/soc');
+    I.waitForInvisible('#app-content.loading', 10);
+    I.fillField('#searchbox', 'soc');
+    I.captureWholePage('search-section', 0);
+});
+
+Scenario('Show Settings Section', async (I) => {
     I.amOnPage('/index.php/apps/passwords/#/settings');
     I.refreshPage();
     I.waitForElement('section.security', 10);
     I.click('#app-settings li.nav-icon-more');
-    I.captureWholePage('settings-section', .25);
+    await I.captureWholePage('settings-section', .25);
+    I.selectOption('#setting-settings-advanced', '1');
+    I.captureWholePage('settings-section-advanced', .1);
 });
 
 Scenario('Show Export Section', async (I) => {
@@ -185,9 +195,9 @@ Scenario('Show Trash Section', (I) => {
     I.waitForInvisible('#notification .row', 20);
     I.captureWholePage('trash-section', 0);
 
-    I.click('#controls > div.breadcrumb > div.actions.creatable > span');
-    I.waitForVisible('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(4)', 20);
-    I.click('#controls > div.breadcrumb > div.actions.creatable > div > ul > li:nth-child(4)');
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > span');
+    I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(4)', 20);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(4)');
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
 });

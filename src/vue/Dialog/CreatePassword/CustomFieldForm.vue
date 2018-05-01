@@ -186,6 +186,21 @@
             max-width : none;
         }
 
+        @media all and (min-width: $width-medium) and (max-width: $width-large) {
+            .field-type {
+                width     : 22%;
+            }
+
+            .field-value,
+            .file-picker {
+                width     : 89%;
+            }
+
+            .field-button {
+                width     : 8%;
+            }
+        }
+
         @media all and (max-width: $width-small) {
             .field-type {
                 width     : 22.5%;
