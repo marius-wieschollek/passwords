@@ -41,6 +41,7 @@
             'On the server'                       : 'Auf dem Server',
             'Custom Fields'                       : 'Eigene Felder',
             'Secret'                              : 'Geheimnis',
+            'File'                                : 'Datei',
             'Value'                               : 'Wert',
             'Toggle visibility'                   : 'Sichtbarkeit umschalten',
             'Generate password'                   : 'Passwort generieren',
