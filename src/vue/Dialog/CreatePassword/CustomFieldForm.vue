@@ -16,8 +16,8 @@
                maxlength="320"
                v-if="!showFilePicker"
                :disabled="!isValidName"
-               :required="this.type!=='text'"
-               :pattern="getPattern"/>
+               :pattern="getPattern"
+               required/>
         <input type="button" class="fa fa-trash field-button" @click="deleteField" :disabled="!isValidName" value=""/>
         <slot></slot>
     </div>
@@ -103,7 +103,7 @@
                 this.$emit('deleted', this.name);
             },
             updateField() {
-                if(!this.type === 'text' && !this.value) return;
+                if(!this.value) return;
 
                 this.$emit(
                     'updated',
