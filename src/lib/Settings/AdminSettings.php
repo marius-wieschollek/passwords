@@ -17,6 +17,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\BackgroundJob;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
 
@@ -317,6 +318,7 @@ class AdminSettings implements ISettings {
     protected function getPlatformSupport(): array {
         return [
             'php'   => PHP_VERSION_ID >= 70100,
+            'cron'  => BackgroundJob::getExecutionType() !== 'ajax',
             'https' => \OC::$server->getRequest()->getHttpProtocol() !== 'https'
         ];
     }

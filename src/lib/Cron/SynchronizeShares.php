@@ -22,6 +22,7 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\BackgroundJob;
 
 /**
  * Class SynchronizeShares
@@ -100,6 +101,12 @@ class SynchronizeShares extends TimedJob {
      * @throws \Exception
      */
     protected function run($argument): void {
+        if(BackgroundJob::getExecutionType() === 'ajax') {
+            $this->logger->error('Ajax cron jobs are not supported');
+
+            return;
+        }
+
         $this->deleteOrphanedTargetPasswords();
         $this->deleteExpiredShares();
         $this->createNewShares();

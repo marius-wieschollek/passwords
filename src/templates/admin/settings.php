@@ -38,6 +38,12 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
+    <?php if(!$_['support']['cron']): ?>
+        <div class="message error">
+            <?php p($l->t('Passwords does not support AJAX cron jobs.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
     <?php if(!$_['support']['https']): ?>
         <div class="message error">
             <?php p($l->t('Passwords requires HTTPS.')); ?>

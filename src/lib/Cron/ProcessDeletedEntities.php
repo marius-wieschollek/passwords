@@ -20,6 +20,7 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
+use OCP\BackgroundJob;
 use OCP\IUserManager;
 
 /**
@@ -142,6 +143,12 @@ class ProcessDeletedEntities extends TimedJob {
      * @param $argument
      */
     protected function run($argument): void {
+        if(BackgroundJob::getExecutionType() === 'ajax') {
+            $this->logger->error('Ajax cron jobs are not supported');
+
+            return;
+        }
+
         $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
         if($timeout > 0) $this->time = time() - $timeout;
 

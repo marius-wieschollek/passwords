@@ -16,6 +16,7 @@ use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\BackgroundJob;
 
 /**
  * Class CheckPasswordsJob
@@ -85,6 +86,12 @@ class CheckPasswordsJob extends TimedJob {
      * @throws \Exception
      */
     protected function run($argument): void {
+        if(BackgroundJob::getExecutionType() === 'ajax') {
+            $this->logger->error('Ajax cron jobs are not supported');
+
+            return;
+        }
+
         $securityHelper = $this->helperService->getSecurityHelper();
 
         if($securityHelper->dbUpdateRequired()) {

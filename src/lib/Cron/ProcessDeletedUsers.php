@@ -8,13 +8,10 @@
 namespace OCA\Passwords\Cron;
 
 use OC\BackgroundJob\TimedJob;
-use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
-use OCA\Passwords\Services\Object\FolderService;
-use OCA\Passwords\Services\Object\PasswordService;
-use OCA\Passwords\Services\Object\TagService;
+use OCP\BackgroundJob;
 
 /**
  * Class ProcessDeletedUsers
@@ -64,6 +61,12 @@ class ProcessDeletedUsers extends TimedJob {
      * @throws \Exception
      */
     protected function run($argument): void {
+        if(BackgroundJob::getExecutionType() === 'ajax') {
+            $this->logger->error('Ajax cron jobs are not supported');
+
+            return;
+        }
+
         $usersToDelete   = json_decode($this->config->getAppValue('deleted_users', '{}'), true);
         $usersNotDeleted = [];
         $deleted         = 0;
