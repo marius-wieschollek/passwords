@@ -105,7 +105,7 @@
                     folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId', 'empty'],
                     tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision', 'empty']
                 },
-                nightly: process.env.NIGHTLY_FEATURES
+                nightly   : process.env.NIGHTLY_FEATURES
             };
         },
 
@@ -166,7 +166,9 @@
                     index = this.models.indexOf(model);
 
                 if($e.target.checked) {
-                    if(index === -1) {
+                    if(this.format === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1) {
+                        this.models = [model];
+                    } else if(index === -1) {
                         this.models.push(model);
                     }
                 } else if(index !== -1) {
@@ -231,6 +233,8 @@
             format(value) {
                 if(value === 'customCsv') {
                     this.options = {db: 'passwords', delimiter: ',', header: true, mapping: []};
+                } else if(value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
+                    this.models = [this.models.shift()];
                 } else if(value === 'json') {
                     this.preventPasswordFill();
                 }
