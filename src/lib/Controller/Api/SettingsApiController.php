@@ -44,7 +44,7 @@ class SettingsApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function get(): JSONResponse {
-        $params = $this->getParams();
+        $params = $this->listParameters();
         if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
@@ -65,7 +65,7 @@ class SettingsApiController extends AbstractApiController {
      * @throws PreConditionNotMetException
      */
     public function set(): JSONResponse {
-        $params = $this->getParams();
+        $params = $this->listParameters();
         if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
@@ -100,7 +100,7 @@ class SettingsApiController extends AbstractApiController {
      * @throws PreConditionNotMetException
      */
     public function reset(): JSONResponse {
-        $params = $this->getParams();
+        $params = $this->listParameters();
         if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
@@ -114,7 +114,7 @@ class SettingsApiController extends AbstractApiController {
     /**
      * @return array
      */
-    protected function getParams(): array {
+    protected function listParameters(): array {
         $params = $this->request->getParams();
         unset($params['_route']);
 

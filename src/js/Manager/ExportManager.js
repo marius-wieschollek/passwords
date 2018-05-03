@@ -22,16 +22,16 @@ export class ExportManager {
                 data = await ExportManager.exportJson(model, options);
                 break;
             case 'csv':
-                data = await ExportManager.exportCsv(model, options.includeShared);
+                data = await this.exportCsv(model, options.includeShared);
                 break;
             case 'customCsv':
-                data = await ExportManager.exportCustomCsv(options);
+                data = await this.exportCustomCsv(options);
                 break;
             case 'xlsx':
-                data = await ExportManager.exportOfficeDocument(model, options.includeShared, 'xlsx');
+                data = await this.exportOfficeDocument(model, options.includeShared, 'xlsx');
                 break;
             case 'ods':
-                data = await ExportManager.exportOfficeDocument(model, options.includeShared, 'ods');
+                data = await this.exportOfficeDocument(model, options.includeShared, 'ods');
                 break;
             default:
                 throw new Error(`Invalid export format: ${format}`);
@@ -82,25 +82,25 @@ export class ExportManager {
      * @param includeShared
      * @returns {Promise<{}>}
      */
-    static async exportCsv(model = [], includeShared = false) {
+    async exportCsv(model = [], includeShared = false) {
         let csv = {};
 
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            data = await this._convertDbToExportArray(data, header.clone());
             csv.passwords = ExportManager._createCsvExport(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            data = await this._convertDbToExportArray(data, header.clone());
             csv.folders = ExportManager._createCsvExport(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            data = await this._convertDbToExportArray(data, header.clone());
             csv.tags = ExportManager._createCsvExport(data, header);
         }
 
@@ -114,7 +114,7 @@ export class ExportManager {
      * @param options
      * @returns {Promise<string>}
      */
-    static async exportCustomCsv(options) {
+    async exportCustomCsv(options) {
         let header = [], data;
 
         if(options.db === 'passwords') {
@@ -126,7 +126,7 @@ export class ExportManager {
         }
 
         if(options.header) header = Utility.cloneObject(options.mapping);
-        data = await ExportManager._convertDbToExportArray(data, options.mapping);
+        data = await this._convertDbToExportArray(data, options.mapping);
         return ExportManager._createCsvExport(data, header, options.delimiter);
     }
 
@@ -137,24 +137,24 @@ export class ExportManager {
      * @param format
      * @returns {Promise<void>}
      */
-    static async exportOfficeDocument(model = [], includeShared = false, format) {
+    async exportOfficeDocument(model = [], includeShared = false, format) {
         let sheets = {};
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
                 header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
-            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            data = await this._convertDbToExportArray(data, header.clone());
             sheets.passwords = ExportManager._convertOfficeExport(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
                 header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
-            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            data = await this._convertDbToExportArray(data, header.clone());
             sheets.folders = ExportManager._convertOfficeExport(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
                 header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
-            data = await ExportManager._convertDbToExportArray(data, header.clone());
+            data = await this._convertDbToExportArray(data, header.clone());
             sheets.tags = ExportManager._convertOfficeExport(data, header);
         }
 
@@ -183,9 +183,9 @@ export class ExportManager {
      * @returns {Promise<Array>}
      * @private
      */
-    static async _convertDbToExportArray(db, mapping) {
+    async _convertDbToExportArray(db, mapping) {
         let folderDb = await this._createExportFolderMapping(mapping),
-            tagDb    = await this._createExportTagMapping(mapping),
+            tagDb    = await ExportManager._createExportTagMapping(mapping),
             data     = [];
 
         if(mapping.indexOf('folderId') !== -1) mapping[mapping.indexOf('folderId')] = 'folder';
@@ -194,7 +194,7 @@ export class ExportManager {
 
         for(let i in db) {
             if(!db.hasOwnProperty(i)) continue;
-            let object = this._convertObjectToExportArray(db[i], mapping, folderDb, tagDb);
+            let object = ExportManager._convertObjectToExportArray(db[i], mapping, folderDb, tagDb);
             data.push(object);
         }
 
@@ -314,7 +314,7 @@ export class ExportManager {
             for(let j = 0; j < element.length; j++) {
                 let value = element[j];
                 if(typeof value === 'boolean') value = Localisation.translate(value.toString());
-                line.push(`"${value.toString().replaceAll('"', '""')}"`);
+                line.push(`"${value.toString().replace(/"/g, '""')}"`);
             }
 
             csv.push(line.join(delimiter));
