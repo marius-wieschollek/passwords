@@ -125,7 +125,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $label = '',
         string $url = '',
         string $notes = '',
-        string $customFields = '{}',
+        string $customFields = '',
         string $folder = FolderService::BASE_FOLDER_UUID,
         int $edited = 0,
         bool $hidden = false,
@@ -173,6 +173,7 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
+     * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
@@ -185,7 +186,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $label = '',
         string $url = '',
         string $notes = '',
-        string $customFields = '{}',
+        string $customFields = '',
         string $folder = FolderService::BASE_FOLDER_UUID,
         int $edited = 0,
         bool $hidden = false,
@@ -198,14 +199,15 @@ class PasswordApiController extends AbstractObjectApiController {
         $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
 
         if(!$model->isEditable()) {
-            $password = $oldRevision->getPassword();
-            $username = $oldRevision->getUsername();
-            $cseType  = $oldRevision->getCseType();
-            $edited   = $oldRevision->getEdited();
-            $label    = $oldRevision->getLabel();
-            $notes    = $oldRevision->getNotes();
-            $hash     = $oldRevision->getHash();
-            $url      = $oldRevision->getUrl();
+            $customFields = $oldRevision->getCustomFields();
+            $password     = $oldRevision->getPassword();
+            $username     = $oldRevision->getUsername();
+            $cseType      = $oldRevision->getCseType();
+            $edited       = $oldRevision->getEdited();
+            $label        = $oldRevision->getLabel();
+            $notes        = $oldRevision->getNotes();
+            $hash         = $oldRevision->getHash();
+            $url          = $oldRevision->getUrl();
         } else if(($model->hasShares() || $model->getShareId())) {
             if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
                 throw new ApiException('CSE type does not support sharing', 400);

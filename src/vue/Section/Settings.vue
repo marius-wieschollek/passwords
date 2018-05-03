@@ -60,7 +60,6 @@
                         <translate tag="option" value="byTitle" say="Title field"/>
                         <translate tag="option" value="label" say="Name"/>
                         <translate tag="option" value="website" say="Website"/>
-                        <translate tag="option" value="user" say="Username"/>
                     </select>
                     <settings-help text="Sorts passwords by the selected property when sorting by name is selected" v-if="advancedSettings"/>
 
