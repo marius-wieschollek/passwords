@@ -101,7 +101,7 @@
                     return text[0];
                 }
 
-                return 'Nothing';
+                return Localisation.translate('Nothing');
             }
         }
     };

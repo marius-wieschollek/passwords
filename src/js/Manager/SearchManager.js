@@ -6,7 +6,7 @@ class SearchManager {
 
     constructor() {
         this._db = {};
-        this._status = {active: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
+        this._status = {active: false, available: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
         this._index = null;
         this._indexFields = {
             passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id'],
@@ -24,6 +24,7 @@ class SearchManager {
         if(OC.Plugins) {
             OC.Plugins.register('OCA.Search', this);
             document.querySelector('form.searchbox').style.opacity = '0';
+            this._status.available = false;
         }
     }
 
@@ -119,6 +120,7 @@ class SearchManager {
     clearDatabase() {
         this._db = {};
         this._index = null;
+        this._status.available = false;
         this._resetSearch();
 
         document.querySelector('form.searchbox').style.opacity = '0';
@@ -138,6 +140,7 @@ class SearchManager {
         if(database.passwords.length || database.folders.length || database.tags.length) {
             document.querySelector('form.searchbox').style.opacity = '1';
             document.getElementById('searchbox').value = '';
+            this._status.available = true;
         }
     }
 

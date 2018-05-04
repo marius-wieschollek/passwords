@@ -1,6 +1,7 @@
 <script>
     import API from '@js/Helper/api';
     import BaseSection from '@vue/Section/BaseSection';
+    import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
 
     export default {
@@ -48,25 +49,32 @@
 
                 let db = {passwords: this.passwords, folders: this.folders, tags: this.tags};
                 SearchManager.setDatabase(db);
-                setTimeout(() => {SearchManager.search(this.$route.params.query);}, 1);
+                setTimeout(() => {
+                    let el    = document.getElementById('searchbox'),
+                        query = this.$route.params.query;
+                    if(el.value === '' && query !== '') {
+                        el.value = query;
+                        SearchManager.search(query);
+                    }
+                }, 1);
             }
         },
         watch  : {
-            passwords(passwords) {
+            passwords() {
                 this.hasPasswords = true;
                 this.updateDatabase();
             },
-            folders(folders) {
+            folders() {
                 this.hasFolders = true;
                 this.updateDatabase();
             },
-            tags(tags) {
+            tags() {
                 this.hasTags = true;
                 this.updateDatabase();
             },
             search: {
                 handler(value) {
-                    this.$router.push({name: 'Search', params: {query: value.query}});
+                    if(value.active) this.$router.push({name: 'Search', params: {query: value.query}});
                 },
                 deep: true
             }

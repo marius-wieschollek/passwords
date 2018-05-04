@@ -288,6 +288,7 @@
             '1 folder'                            : '1 Ordner',
             '{tags} tags'                         : '{tags} Tags',
             '1 tag'                               : '1 Tag',
+            'Nothing'                             : 'Nichts',
             ' and '                               : ' und ',
             'match'                               : 'passen zu',
             'matches'                             : 'passt zu',
