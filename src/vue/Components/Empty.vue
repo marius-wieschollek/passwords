@@ -3,9 +3,11 @@
         <img :src="icon" alt="">
         <translate tag="h2" say="There is nothing here"/>
         <translate :say="text"/>
-        <router-link :to="searchRoute" id="global-search-link" v-if="showSearchLink">
-            <translate say="Search everywhere for &quot;{query}&quot;" :variables="{query: search.query}"/>
-        </router-link>
+        <div v-if="showSearchLink">
+            <router-link :to="searchRoute" id="global-search-link">
+                <translate say="Search everywhere for &quot;{query}&quot;" :variables="{query: search.query}"/>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -19,28 +21,28 @@
             Translate
         },
         props     : {
-            text    : {
+            text: {
                 type     : String,
                 'default': 'Click on "+" to add something'
             }
         },
         data() {
             return {
-                search   : SearchManager.status,
-                icon: oc_appswebroots.passwords + '/img/app-themed.svg'
+                search: SearchManager.status,
+                icon  : oc_appswebroots.passwords + '/img/app-themed.svg'
             };
         },
-        computed: {
+        computed  : {
             showSearchLink() {
                 return this.search.active && this.$route.name !== 'Search';
             },
             searchRoute() {
-                return { name: 'Search', params: {query: this.search.query}};
+                return {name: 'Search', params: {query: this.search.query}};
             }
         },
         created() {
             API.getSetting('server.theme.app.icon')
-               .then((d) => {this.icon = d;});
+                .then((d) => {this.icon = d;});
         }
     };
 </script>
@@ -59,10 +61,6 @@
                 display : inline-block;
                 margin  : 0 auto 15px;
                 opacity : 0.4;
-            }
-
-            #global-search-link {
-                display: block;
             }
         }
     }
