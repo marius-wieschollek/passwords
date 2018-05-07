@@ -157,8 +157,9 @@ class ImagickHelper extends AbstractImageHelper {
      */
     public function supportsImage($blob): bool {
         $size = getimagesizefromstring($blob);
-        list($type, $format) = explode('/', $size['mime']);
+        if(!$size || !isset($size['mime'])) return false;
 
+        list($type, $format) = explode('/', $size['mime']);
         if($type != 'image') return false;
 
         return $this->supportsFormat($format);

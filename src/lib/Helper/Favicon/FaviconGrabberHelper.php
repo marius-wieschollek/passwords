@@ -62,7 +62,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      */
     protected function getFaviconData(string $domain): ?string {
         $json = $this->sendApiRequest($domain);
-        $icon = $this->analyzeApiResponse($json);
+        $icon = $this->analyzeApiResponse($json, $domain);
 
         return $icon !== null ? $icon:$this->getDefaultFavicon($domain)->getContent();
     }
@@ -75,7 +75,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected function sendApiRequest(string $domain): ?array {
         $this->checkRequestTimeout();
         $request = new RequestHelper();
-        $data = $request
+        $data    = $request
             ->setAcceptResponseCodes([200, 400])
             ->setUserAgent(
                 'Nextcloud/'.$this->config->getSystemValue('version').
@@ -88,19 +88,21 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     }
 
     /**
-     * @param array $json
+     * @param array  $json
+     * @param string $domain
      *
      * @return null|string
      * @throws \Exception
-     * @throws \Throwable
      */
-    protected function analyzeApiResponse(array $json): ?string {
-        if(isset($json['error'])) throw new \Exception("Favicongrabber said: {$json['error']}");
+    protected function analyzeApiResponse(array $json, string $domain): ?string {
+        if(isset($json['error'])) throw new \Exception("Favicongrabber said: {$json['error']} ({$domain})");
 
-        $iconData = null;
+        $iconData   = null;
         $sizeOffset = null;
         foreach($json['icons'] as $icon) {
-            $ext = pathinfo($icon['src'])['extension'];
+            $info = pathinfo($icon['src']);
+            if(!isset($info['extension'])) continue;
+            $ext = $info['extension'];
             if(!in_array($ext, ['png', 'ico', 'gif', 'jpg', 'jpeg'])) continue;
 
             if($iconData === null) {
@@ -111,7 +113,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
                 $offset = abs(256 - $size);
                 if($offset < $sizeOffset || $sizeOffset === null) {
                     $sizeOffset = $offset;
-                    $iconData = $this->loadIcon($icon['src'], $iconData);
+                    $iconData   = $this->loadIcon($icon['src'], $iconData);
                 }
             }
         }
@@ -126,7 +128,13 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @return null|string
      */
     protected function loadIcon(string $url, string $data = null): ?string {
-        $iconData = $this->getHttpRequest($url);
+        $request = new RequestHelper();
+        $request->setUrl($url);
+        $iconData = $request->sendWithRetry();
+        $mime     = $request->getInfo('content_type');
+
+        if(substr($mime, 0, 5) !== 'image') return $data;
+
         return empty($iconData) ? $data:$iconData;
     }
 
@@ -135,7 +143,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      */
     protected function checkRequestTimeout(): void {
         $lastRequest = $this->config->getAppValue('security/fg/api/request', 0);
-        if(time()-$lastRequest < self::API_WAIT_TIME) {
+        if(time() - $lastRequest < self::API_WAIT_TIME) {
             sleep(self::API_WAIT_TIME);
         }
     }
