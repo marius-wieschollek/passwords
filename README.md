@@ -7,6 +7,7 @@
 * [Apps](#apps)
 * [API](#api)
 * [Installation](#installation)
+* [Support](#support)
 * [Development](#development)
 * [Licenses](Licenses.md)
 
@@ -71,7 +72,13 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 * Nextcloud 12+
 * PHP 7.1+
 
+## Support
+* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
+* [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
+
 ## Development
+* Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/download?job=Assemble).
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
 * Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/home#developers).
 

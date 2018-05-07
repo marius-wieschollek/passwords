@@ -2,7 +2,7 @@
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>passwords</id>
     <name>Passwords</name>
-    <summary>Store, manage and access all your passwords easily.</summary>
+    <summary>Store, manage and access all your passwords with ease.</summary>
     <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter schnell, sicher und überall.</summary>
     <description><![CDATA[Passwords allows you to store your passwords safely with Nextcloud.
 The intuitive and modern web interface of the app makes it easy to update and add new passwords from anywhere.
