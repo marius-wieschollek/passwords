@@ -1,3 +1,7 @@
+#### 2018.5.1 - Bugfix Release
+- Fixed Nextcloud 12 migration step issue
+- Fixed some css styling issues
+
 #### 2018.5.0 - Feature Release
 - Added custom fields
 - Added global search
