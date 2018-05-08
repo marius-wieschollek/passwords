@@ -5,7 +5,6 @@ import SettingsManager from '@js/Manager/SettingsManager';
 class EncryptionTestHelper {
     constructor() {
         this.encryption = new Encryption();
-        this.password = 'EnCrYpT10Np@$$WÖrD';
     }
 
     initTests() {
@@ -22,6 +21,9 @@ class EncryptionTestHelper {
 
     async runTests() {
         try {
+            await this.encryption.ready;
+            this.encryption.createEncryptionKey();
+
             let result = await this.testEncryption();
             if(result !== true) return this.handleError(result);
             result = await this.testPasswords();
@@ -44,16 +46,16 @@ class EncryptionTestHelper {
      * @returns {Promise<*>}
      */
     async testEncryption() {
-        let text = '', password = '✓ à la mode';
+        let text = '';
         for(let i = 0; i < 96; i++) text += `${i}: ✓ à la mode | `;
 
         try {
-            let encData = await this.encryption.encrypt(text, password);
+            let encData = await this.encryption.encrypt(text, this.encryption.key);
 
             try {
                 let json = JSON.stringify(encData),
                     data = JSON.parse(json),
-                    decData = await this.encryption.decrypt(data, password);
+                    decData = await this.encryption.decrypt(data, this.encryption.key);
                 if(text !== decData) {
                     return {
                         type  : 'test',
@@ -90,10 +92,10 @@ class EncryptionTestHelper {
             let object = db[i];
 
             try {
-                let encrypted = await this.encryption.encryptObject(object, this.password, type);
+                let encrypted = await this.encryption.encryptObject(object, type);
 
                 try {
-                    await this.encryption.decryptObject(encrypted, this.password, type);
+                    await this.encryption.decryptObject(encrypted, type);
                 } catch(e) {
                     return {type, stage: 'decrypt', id: i, error: e};
                 }
