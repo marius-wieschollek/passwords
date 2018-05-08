@@ -11,7 +11,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
-use OCP\Migration\IMigrationStep;
+//use OCP\Migration\IMigrationStep;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -19,8 +19,9 @@ use OCP\Migration\IRepairStep;
  * Class CreateCustomFields
  *
  * @package OCA\Passwords\Migration
+ * @TODO Use IMigrationStep after dropping NC 12.x
  */
-class CreateCustomFields implements IMigrationStep, IRepairStep {
+class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
 
     protected static $isMigrated = false;
 
