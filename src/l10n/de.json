@@ -41,6 +41,7 @@
         "Send emails for sharing events"                                                            : "Sende E-Mails beim Teilen",
         "Other Settings"                                                                            : "Weitere Einstellungen",
         "Remove deleted objects from database"                                                      : "Gelöschte Objekte aus der Datenbank entfernen",
+        "Enable Passwords Nightly Builds"                                                           : "Aktiviere Nightly Builds im Updater",
         "Never"                                                                                     : "Nie",
         "Immediately"                                                                               : "Sofort",
         "After two hours"                                                                           : "Nach zwei Stunden",
