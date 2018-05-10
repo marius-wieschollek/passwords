@@ -141,6 +141,8 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
                     <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
+            <label for="passwords-nightly-updates"><?php p($l->t('Enable Passwords Nightly Builds')); ?></label>
+            <input id="passwords-nightly-updates" name="legacy-enable" data-setting="nightly_updates" type="checkbox" <?=$_['nightlyUpdates'] ? 'checked':''?>>
         </div>
     </form>
 

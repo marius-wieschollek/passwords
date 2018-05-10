@@ -12,7 +12,7 @@ use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
 use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\DB\ISchemaWrapper;
-use OCP\Migration\IMigrationStep;
+//use OCP\Migration\IMigrationStep;
 use OCP\Migration\IRepairStep;
 use OCP\Migration\IOutput;
 
@@ -20,8 +20,9 @@ use OCP\Migration\IOutput;
  * Class LegacyDatabaseMigration
  *
  * @package OCA\Passwords\Migration
+ * @TODO Use IMigrationStep after dropping NC 12.x
  */
-class LegacyDatabaseMigration implements IMigrationStep, IRepairStep {
+class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
 
     /**
      * @var LegacyShareMigration

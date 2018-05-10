@@ -367,7 +367,7 @@
 
                 .date {
                     line-height : 50px;
-                    width       : 115px;
+                    width       : 125px;
                     font-size   : 0.8rem;
                     padding     : 0 15px 0 5px;
                     text-align  : right;

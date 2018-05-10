@@ -83,6 +83,7 @@ class AdminSettings implements ISettings {
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
+            'nightlyUpdates'   => $this->config->getAppValue('nightly_updates', false),
             'caches'           => $this->getFileCaches(),
             'support'          => $this->getPlatformSupport(),
             'links'            => [
