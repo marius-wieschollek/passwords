@@ -104,7 +104,7 @@
         "Passwords could not decrypt the API access token."                                         : "Správci hesel se nepodařilo dešifrovat přístupový token API",
         "A new token was created instead."                                                          : "Z tohoto důvodu byl vytvořen nový token.",
         "This can indicate that the data stored on the server has been altered by someone."         : "Což může znamenat, že data uložená na serveru mohla být někým zaměněna.",
-        "Deleted User (%s)"                                                                         : "Smazat uživatele (%s)"
+        "Deleted User (%s)"                                                                         : "Odstraněný uživatel (%s)"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
