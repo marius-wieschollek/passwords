@@ -2,13 +2,17 @@ import sodium from "libsodium-wrappers";
 
 export default class Encryption {
 
+    set key(key) {
+        this._key = sodium.crypto_generichash(32, key);
+    }
+
     constructor() {
         this.fields = {
             password: ['url', 'label', 'notes', 'password', 'username', 'customFields'],
             folder  : ['label'],
             tag     : ['label', 'color']
         };
-        this.key = null;
+        this._key = null;
     }
 
     async ready() {
@@ -31,7 +35,7 @@ export default class Encryption {
                 data  = object[field];
 
             if(data.length === 0) continue;
-            object[field] = await this.encrypt(data, this.key);
+            object[field] = await this.encrypt(data);
         }
 
         return object;
@@ -53,7 +57,7 @@ export default class Encryption {
                 data  = object[field];
 
             if(data.length === 0) continue;
-            object[field] = await this.decrypt(data, this.key);
+            object[field] = await this.decrypt(data);
         }
 
         return object;
@@ -61,46 +65,30 @@ export default class Encryption {
 
     /**
      * @param message
-     * @param key
      *
      * @returns {Promise<string>}
      */
-    async encrypt(message, key) {
+    async encrypt(message) {
         let nonce     = crypto.getRandomValues(new Uint8Array(sodium.crypto_secretbox_NONCEBYTES)),
-            encrypted = new Uint8Array([...nonce, ...sodium.crypto_secretbox_easy(message, nonce, key)]);
+            encrypted = new Uint8Array([...nonce, ...sodium.crypto_secretbox_easy(message, nonce, this._key)]);
 
         return sodium.to_base64(encrypted);
     }
 
     /**
      * @param encodedString
-     * @param key
      *
      * @returns {Promise<void>}
      */
-    async decrypt(encodedString, key) {
+    async decrypt(encodedString) {
         let encryptedString = sodium.from_base64(encodedString);
         if(encryptedString.length < sodium.crypto_secretbox_NONCEBYTES + sodium.crypto_secretbox_MACBYTES) throw new Error('Invalid encrypted text length');
 
         let nonce      = encryptedString.slice(0, sodium.crypto_secretbox_NONCEBYTES),
             ciphertext = encryptedString.slice(sodium.crypto_secretbox_NONCEBYTES),
-            decrypted  = sodium.crypto_secretbox_open_easy(ciphertext, nonce, key);
+            decrypted  = sodium.crypto_secretbox_open_easy(ciphertext, nonce, this._key);
 
         return new TextDecoder().decode(decrypted);
-    }
-
-    createEncryptionKey() {
-        this.key = crypto.getRandomValues(
-            new Uint8Array(sodium.crypto_secretbox_KEYBYTES)
-        );
-    }
-
-    setEncryptionKey(key) {
-        this.key = sodium.from_base64(key);
-    }
-
-    getEncryptionKey(key) {
-        return sodium.to_base64(this.key);
     }
 
     /**

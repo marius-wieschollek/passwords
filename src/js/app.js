@@ -6,6 +6,7 @@ import SectionAll from '@vue/Section/All';
 import Messages from '@js/Classes/Messages';
 import SearchManager from '@/js/Manager/SearchManager';
 import SettingsManager from '@/js/Manager/SettingsManager';
+import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 /**
  * Set global webpack path
@@ -54,6 +55,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         SettingsManager.init();
         initApp();
         SearchManager.init();
+        EncryptionTestHelper.initTests();
     }
 
     if(location.protocol !== 'https:') {

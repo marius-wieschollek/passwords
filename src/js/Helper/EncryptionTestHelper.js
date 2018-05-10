@@ -1,5 +1,6 @@
 import API from '@js/Helper/api';
-import Encryption from '@/js/ApiClient/Encryption';
+import Encryption from '@js/ApiClient/Encryption';
+import EnhancedApi from '@js/ApiClient/EnhancedApi';
 import SettingsManager from '@js/Manager/SettingsManager';
 
 class EncryptionTestHelper {
@@ -22,7 +23,7 @@ class EncryptionTestHelper {
     async runTests() {
         try {
             await this.encryption.ready;
-            this.encryption.createEncryptionKey();
+            this.encryption.key = 'EnCrYpT!0nP@$$w0rD';
 
             let result = await this.testEncryption();
             if(result !== true) return this.handleError(result);
@@ -50,12 +51,12 @@ class EncryptionTestHelper {
         for(let i = 0; i < 96; i++) text += `${i}: ✓ à la mode | `;
 
         try {
-            let encData = await this.encryption.encrypt(text, this.encryption.key);
+            let encData = await this.encryption.encrypt(text);
 
             try {
                 let json = JSON.stringify(encData),
                     data = JSON.parse(json),
-                    decData = await this.encryption.decrypt(data, this.encryption.key);
+                    decData = await this.encryption.decrypt(data);
                 if(text !== decData) {
                     return {
                         type  : 'test',
@@ -90,6 +91,7 @@ class EncryptionTestHelper {
         for(let i in db) {
             if(!db.hasOwnProperty(i)) continue;
             let object = db[i];
+            if(type === 'password') object= EnhancedApi.flattenPassword(object);
 
             try {
                 let encrypted = await this.encryption.encryptObject(object, type);
