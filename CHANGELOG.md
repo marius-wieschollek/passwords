@@ -1,3 +1,6 @@
+#### 2018.5.2 - Bugfix Release
+- Fixed password creation error in the legacy api
+
 #### 2018.5.1 - Bugfix Release
 - Fixed Nextcloud 12 migration step issue
 - Fixed some css styling issues
