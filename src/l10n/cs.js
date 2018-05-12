@@ -19,7 +19,7 @@
             'New Tag'                             : 'Nová značka',
             'Secure'                              : 'Bezpečné',
             'Weak'                                : 'Slabé',
-            'Broken'                              : 'Velmi slabé',
+            'Broken'                              : 'Velmi nebezpečné',
             'Notes'                               : 'Poznámky',
             'Share'                               : 'Sdílet',
             'Revisions'                           : 'Revize',
