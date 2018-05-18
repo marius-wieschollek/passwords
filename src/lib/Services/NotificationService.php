@@ -181,7 +181,8 @@ class NotificationService implements INotifier {
      * @return INotification
      */
     protected function processBadPasswordNotification(INotification $notification, IL10N $localisation): INotification {
-        $count = $notification->getSubjectParameters()['count'];
+        $parameters = $notification->getSubjectParameters();
+        $count = isset($parameters['count']) ? $parameters['count']:1;
         $link  = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/security/2';
 
         $title = $localisation->n('One of your passwords is no longer secure', 'Some of your passwords are no longer secure', $count)
