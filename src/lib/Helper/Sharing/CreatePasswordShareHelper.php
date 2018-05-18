@@ -145,9 +145,9 @@ class CreatePasswordShareHelper {
         $sourceShare = $this->modelService->findByUuid($model->getShareId());
         if($sourceShare->getUserId() === $receiver) throw new ApiException('Invalid receiver uid', 400);
         if(!$sourceShare->isShareable() || !$this->shareSettings->get('resharing')) throw new ApiException('Entity not shareable', 403);
-        if(!$sourceShare->isEditable()) $editable = false;
+        if(!$sourceShare->isEditable()) return false;
 
-        return $editable;
+        return true;
     }
 
     /**
