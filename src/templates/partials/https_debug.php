@@ -56,7 +56,7 @@ $request = \OC::$server->getRequest();
 
 <style>
     #passwords-https-detection-details {
-        position      : absolute;
+        position      : fixed;
         background    : <?=\OC::$server->getThemingDefaults()->getColorPrimary()?>;
         color         : <?=\OC::$server->getThemingDefaults()->getTextColorPrimary()?>;
         z-index       : 10000;
