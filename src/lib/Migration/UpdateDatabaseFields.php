@@ -11,19 +11,21 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
-//use OCP\Migration\IMigrationStep;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
+//use OCP\Migration\IMigrationStep;
+
 /**
- * Class CreateCustomFields
+ * Class UpdateDatabaseFields
  *
  * @package OCA\Passwords\Migration
- * @TODO Use IMigrationStep after dropping NC 12.x
+ * @TODO    Use IMigrationStep after dropping NC 12.x
  */
-class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
+class UpdateDatabaseFields implements /*IMigrationStep,*/
+    IRepairStep {
 
-    protected static $isMigrated = false;
+    protected static $migrationExecuted = [];
 
     /**
      * @var ConfigurationService
@@ -36,14 +38,14 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
     protected $passwordRevisionService;
 
     /**
-     * CreateCustomFields constructor.
+     * UpdateDatabaseFields constructor.
      *
      * @param PasswordRevisionService $passwordRevisionService
      * @param ConfigurationService    $config
      */
     public function __construct(PasswordRevisionService $passwordRevisionService, ConfigurationService $config) {
         $this->passwordRevisionService = $passwordRevisionService;
-        $this->config = $config;
+        $this->config                  = $config;
     }
 
     /**
@@ -53,7 +55,7 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
      * @since 9.1.0
      */
     public function getName() {
-        return 'Create Custom Fields for Passwords';
+        return 'Update Database Passwords Fields';
     }
 
     /**
@@ -66,8 +68,7 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        if(!self::$isMigrated) $this->createCustomFields($output);
-        self::$isMigrated = true;
+        $this->executeMigration('createCustomFields', $output);
     }
 
     /**
@@ -107,6 +108,17 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
     }
 
     /**
+     * @param string  $name
+     * @param IOutput $output
+     */
+    protected function executeMigration(string $name, IOutput $output): void {
+        if(isset(self::$migrationExecuted[ $name ]) && !self::$migrationExecuted[ $name ]) {
+            $this->{$name}($output);
+            self::$migrationExecuted[ $name ] = true;
+        }
+    }
+
+    /**
      * @param IOutput $output
      *
      * @throws \Exception
@@ -116,7 +128,7 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
         $passwordRevisions = $this->passwordRevisionService->findAll(true);
 
         $count = count($passwordRevisions);
-        $output->info("Processing Revisions (total: {$count})");
+        $output->info("Adding Custom Fields to Revisions (total: {$count})");
         $output->startProgress($count);
         foreach($passwordRevisions as $passwordRevision) {
             try {
