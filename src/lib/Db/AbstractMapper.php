@@ -180,18 +180,22 @@ abstract class AbstractMapper extends Mapper {
         if(isset($search[0]) && !is_array($search[0])) $search = [$search];
         list($sql, $params) = $this->getStatement();
 
+        $extraSql = '';
+        $concat   = '';
         foreach($search as $criteria) {
-            list($field, $value, $operator, $concat) = $this->processCriteria($criteria);
+            list($field, $value, $operator, $nextConcat) = $this->processCriteria($criteria);
 
             if($value !== null) {
-                $sql      .= " {$concat} `{$field}` {$operator} ? ";
+                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` {$operator} ? ";
                 $params[] = $value;
             } else if($operator === '!=') {
-                $sql .= " {$concat} `{$field}` IS NOT NULL ";
+                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` IS NOT NULL ";
             } else {
-                $sql .= " {$concat} `{$field}` IS NULL ";
+                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` IS NULL ";
             }
+            $concat = $nextConcat;
         }
+        if($extraSql) $sql .= " AND ($extraSql)";
 
         return $this->findEntities($sql, $params, $limit);
     }

@@ -66,8 +66,7 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        $version = $this->config->getAppValue('installed_version');
-        if(version_compare($version, '2018.5.0') < 0 && !self::$isMigrated) $this->createCustomFields($output);
+        if(!self::$isMigrated) $this->createCustomFields($output);
         self::$isMigrated = true;
     }
 
