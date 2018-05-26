@@ -32,6 +32,11 @@ class UpdateDatabaseFields implements IRepairStep {
     protected static $migrationExecuted = [];
 
     /**
+     * @var null|string
+     */
+    protected   $userId;
+
+    /**
      * @var LoggingService
      */
     protected $logger;
@@ -58,7 +63,9 @@ class UpdateDatabaseFields implements IRepairStep {
         $this->passwordRevisionService = $passwordRevisionService;
         $this->config                  = $config;
         $this->logger                  = $logger;
+        $this->userId = $userId;
         $this->logger->info('executed as '.strval($userId));
+        $this->logger->info(debug_backtrace());
     }
 
     /**
@@ -81,6 +88,7 @@ class UpdateDatabaseFields implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
+        if(!is_null($this->userId)) return;
         $this->executeMigration('createCustomFields', $output);
     }
 
