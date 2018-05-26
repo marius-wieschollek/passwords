@@ -11,6 +11,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
+use OCP\ILogger;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -22,10 +23,17 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  * @TODO    Use IMigrationStep after dropping NC 12.x
  */
-class UpdateDatabaseFields implements /*IMigrationStep,*/
-    IRepairStep {
+class UpdateDatabaseFields implements IRepairStep {
 
+    /**
+     * @var array
+     */
     protected static $migrationExecuted = [];
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
 
     /**
      * @var ConfigurationService
@@ -43,9 +51,10 @@ class UpdateDatabaseFields implements /*IMigrationStep,*/
      * @param PasswordRevisionService $passwordRevisionService
      * @param ConfigurationService    $config
      */
-    public function __construct(PasswordRevisionService $passwordRevisionService, ConfigurationService $config) {
+    public function __construct(PasswordRevisionService $passwordRevisionService, ConfigurationService $config, ILogger $logger) {
         $this->passwordRevisionService = $passwordRevisionService;
         $this->config                  = $config;
+        $this->logger                  = $logger;
     }
 
     /**
@@ -112,9 +121,10 @@ class UpdateDatabaseFields implements /*IMigrationStep,*/
      * @param IOutput $output
      */
     protected function executeMigration(string $name, IOutput $output): void {
-        if(!isset(self::$migrationExecuted[ $name ]) && !self::$migrationExecuted[ $name ]) {
+        if(!isset(self::$migrationExecuted[ $name ]) || !self::$migrationExecuted[ $name ]) {
             $this->{$name}($output);
             self::$migrationExecuted[ $name ] = true;
+            $this->logger->info('Executed Migration: '.$name);
         }
     }
 
@@ -144,6 +154,15 @@ class UpdateDatabaseFields implements /*IMigrationStep,*/
             $output->advance(1);
         }
         $output->finishProgress();
-        $this->config->setAppValue('database_version', 1);
+        $this->setDatabaseVersion(1);
+    }
+
+    /**
+     * @param int $version
+     */
+    protected function setDatabaseVersion(int $version): void {
+        $databaseVersion = intval($this->config->getAppValue('database_version', 0));
+
+        if($databaseVersion < $version) $this->config->setAppValue('database_version', 1);
     }
 }

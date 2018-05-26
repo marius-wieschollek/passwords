@@ -45,13 +45,12 @@ class VersionCheckMiddleware extends Middleware {
     /**
      * @param \OCP\AppFramework\Controller $controller
      * @param string                       $methodName
-     *
-     * @throws ApiException
      */
     public function beforeController($controller, $methodName): void {
         $lastVersion = $this->config->getAppValue('last_version', '2018.5.2');
 
         if(intval($this->config->getAppValue('database_version', 0)) !== self::CURRENT_DATABASE_VERSION) {
+            $this->logger->info('Database version missmatch, triggering upgrade');
             $this->config->setAppValue('installed_version', $lastVersion);
             \OC_Util::redirectToDefaultPage();
         }
