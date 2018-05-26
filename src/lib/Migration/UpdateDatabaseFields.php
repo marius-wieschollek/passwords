@@ -12,7 +12,6 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
-use OCP\ILogger;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -34,7 +33,7 @@ class UpdateDatabaseFields implements IRepairStep {
     /**
      * @var null|string
      */
-    protected   $userId;
+    protected $userId;
 
     /**
      * @var LoggingService
@@ -63,8 +62,7 @@ class UpdateDatabaseFields implements IRepairStep {
         $this->passwordRevisionService = $passwordRevisionService;
         $this->config                  = $config;
         $this->logger                  = $logger;
-        $this->userId = $userId;
-        $this->logger->info(json_encode(debug_backtrace()));
+        $this->userId                  = $userId;
     }
 
     /**
@@ -89,6 +87,7 @@ class UpdateDatabaseFields implements IRepairStep {
     public function run(IOutput $output): void {
         if(!is_null($this->userId)) {
             $this->logger->info('User mode detected. Use ./occ upgrade to upgrade');
+
             return;
         }
         $this->executeMigration('createCustomFields', $output);
