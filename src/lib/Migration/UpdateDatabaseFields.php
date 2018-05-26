@@ -9,6 +9,7 @@ namespace OCA\Passwords\Migration;
 
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
 use OCP\ILogger;
@@ -31,7 +32,7 @@ class UpdateDatabaseFields implements IRepairStep {
     protected static $migrationExecuted = [];
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -48,13 +49,16 @@ class UpdateDatabaseFields implements IRepairStep {
     /**
      * UpdateDatabaseFields constructor.
      *
+     * @param null|string             $userId
      * @param PasswordRevisionService $passwordRevisionService
      * @param ConfigurationService    $config
+     * @param LoggingService          $logger
      */
-    public function __construct(PasswordRevisionService $passwordRevisionService, ConfigurationService $config, ILogger $logger) {
+    public function __construct(?string $userId, PasswordRevisionService $passwordRevisionService, ConfigurationService $config, LoggingService $logger) {
         $this->passwordRevisionService = $passwordRevisionService;
         $this->config                  = $config;
         $this->logger                  = $logger;
+        $this->logger->info('executed as '.strval($userId));
     }
 
     /**

@@ -7,8 +7,8 @@
 
 namespace OCA\Passwords\Middleware;
 
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\LoggingService;
 use OCP\AppFramework\Middleware;
 use OCP\ILogger;
 
@@ -22,7 +22,7 @@ class VersionCheckMiddleware extends Middleware {
     const CURRENT_DATABASE_VERSION = 1;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -34,10 +34,10 @@ class VersionCheckMiddleware extends Middleware {
     /**
      * ApiSecurityMiddleware constructor.
      *
-     * @param ILogger              $logger
+     * @param LoggingService              $logger
      * @param ConfigurationService $config
      */
-    public function __construct(ILogger $logger, ConfigurationService $config) {
+    public function __construct(LoggingService $logger, ConfigurationService $config) {
         $this->logger = $logger;
         $this->config = $config;
     }

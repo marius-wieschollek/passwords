@@ -7,15 +7,14 @@
 
 namespace OCA\Passwords\Middleware;
 
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\LoggingService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Middleware;
-use OCP\ILogger;
 use OCP\IRequest;
 
 /**
@@ -26,7 +25,7 @@ use OCP\IRequest;
 class ApiSecurityMiddleware extends Middleware {
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
@@ -43,13 +42,13 @@ class ApiSecurityMiddleware extends Middleware {
     /**
      * ApiSecurityMiddleware constructor.
      *
-     * @param ILogger              $logger
+     * @param LoggingService       $logger
      * @param ConfigurationService $config
      * @param IRequest             $request
      */
-    public function __construct(ILogger $logger, ConfigurationService $config, IRequest $request) {
-        $this->logger = $logger;
-        $this->config = $config;
+    public function __construct(LoggingService $logger, ConfigurationService $config, IRequest $request) {
+        $this->logger  = $logger;
+        $this->config  = $config;
         $this->request = $request;
     }
 
@@ -84,7 +83,7 @@ class ApiSecurityMiddleware extends Middleware {
         $id         = 0;
         $statusCode = Http::STATUS_SERVICE_UNAVAILABLE;
 
-        $this->logger->logException($exception, ['app' => Application::APP_NAME]);
+        $this->logger->logException($exception);
 
         if(get_class($exception) === ApiException::class || is_subclass_of($exception, ApiException::class)) {
             /** @var ApiException $exception */
