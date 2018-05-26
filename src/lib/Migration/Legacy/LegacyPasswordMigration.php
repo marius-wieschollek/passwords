@@ -135,6 +135,7 @@ class LegacyPasswordMigration {
             $this->getLabel($properties, $password),
             $this->getUrl($properties, $password),
             $this->getNotes($properties, $password, $key),
+            '{}',
             FolderService::BASE_FOLDER_UUID,
             $timestamp, false,
             $this->isTrashed($properties),
