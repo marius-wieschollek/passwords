@@ -31,6 +31,7 @@ use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Hooks\UserHook;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
+use OCA\Passwords\Middleware\VersionCheckMiddleware;
 use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
@@ -100,6 +101,9 @@ class Application extends App {
 
         $container->registerAlias('ApiSecurityMiddleware', ApiSecurityMiddleware::class);
         $container->registerMiddleware('ApiSecurityMiddleware');
+
+        $container->registerAlias('VersionCheckMiddleware', VersionCheckMiddleware::class);
+        $container->registerMiddleware('VersionCheckMiddleware');
 
         if($container->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
             $container->registerAlias('LegacyMiddleware', LegacyMiddleware::class);

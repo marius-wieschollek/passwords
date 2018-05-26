@@ -112,7 +112,7 @@ class UpdateDatabaseFields implements /*IMigrationStep,*/
      * @param IOutput $output
      */
     protected function executeMigration(string $name, IOutput $output): void {
-        if(isset(self::$migrationExecuted[ $name ]) && !self::$migrationExecuted[ $name ]) {
+        if(!isset(self::$migrationExecuted[ $name ]) && !self::$migrationExecuted[ $name ]) {
             $this->{$name}($output);
             self::$migrationExecuted[ $name ] = true;
         }
@@ -144,5 +144,6 @@ class UpdateDatabaseFields implements /*IMigrationStep,*/
             $output->advance(1);
         }
         $output->finishProgress();
+        $this->config->setAppValue('database_version', 1);
     }
 }
