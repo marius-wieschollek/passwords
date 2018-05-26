@@ -64,8 +64,7 @@ class UpdateDatabaseFields implements IRepairStep {
         $this->config                  = $config;
         $this->logger                  = $logger;
         $this->userId = $userId;
-        $this->logger->info('executed as '.strval($userId));
-        $this->logger->info(debug_backtrace());
+        $this->logger->info(json_encode(debug_backtrace()));
     }
 
     /**
@@ -88,7 +87,10 @@ class UpdateDatabaseFields implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        if(!is_null($this->userId)) return;
+        if(!is_null($this->userId)) {
+            $this->logger->info('User mode detected. Use ./occ upgrade to upgrade');
+            return;
+        }
         $this->executeMigration('createCustomFields', $output);
     }
 
