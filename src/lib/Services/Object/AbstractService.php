@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services\Object;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCA\Passwords\Services\EnvironmentService;
 
 /**
  * Class AbstractService
@@ -39,16 +40,16 @@ abstract class AbstractService {
     protected $mapper;
 
     /**
-     * PasswordService constructor.
+     * AbstractService constructor.
      *
-     * @param string      $userId
-     * @param HookManager $hookManager
+     * @param HookManager        $hookManager
+     * @param EnvironmentService $environment
      */
     public function __construct(
-        ?string $userId,
-        HookManager $hookManager
+        HookManager $hookManager,
+        EnvironmentService $environment
     ) {
-        $this->userId      = $userId;
+        $this->userId      = $environment->getUserId();
         $this->hookManager = $hookManager;
     }
 

@@ -104,8 +104,6 @@ class MailService {
     /**
      * @param string $userId
      * @param int    $passwords
-     *
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendBadPasswordMail(string $userId, int $passwords) {
         if(!$this->settings->get('user.mail.security', $userId)) return;
@@ -153,8 +151,6 @@ class MailService {
     /**
      * @param string $userId
      * @param array  $owners
-     *
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     public function sendShareCreateMail(string $userId, array $owners) {
         if(!$this->settings->get('user.mail.shares', $userId)) return;

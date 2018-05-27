@@ -34,11 +34,7 @@ class UserService {
      * @param IL10N        $localisation
      * @param IUserManager $userManager
      */
-    public function __construct(
-        IL10N $localisation,
-        IUserManager $userManager
-    ) {
-
+    public function __construct(IL10N $localisation, IUserManager $userManager) {
         $this->localisation = $localisation;
         $this->userManager = $userManager;
     }

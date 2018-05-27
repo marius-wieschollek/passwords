@@ -7,9 +7,9 @@
 
 namespace OCA\Passwords\Cron;
 
-use OC\BackgroundJob\TimedJob;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\AbstractService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
@@ -20,7 +20,6 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
-use OCP\BackgroundJob;
 use OCP\IUserManager;
 
 /**
@@ -28,12 +27,7 @@ use OCP\IUserManager;
  *
  * @package OCA\Passwords\Cron
  */
-class ProcessDeletedEntities extends TimedJob {
-
-    /**
-     * @var LoggingService
-     */
-    protected $logger;
+class ProcessDeletedEntities extends AbstractCronJob {
 
     /**
      * @var ConfigurationService
@@ -49,6 +43,11 @@ class ProcessDeletedEntities extends TimedJob {
      * @var ShareService
      */
     protected $shareService;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
 
     /**
      * @var FolderService
@@ -81,11 +80,6 @@ class ProcessDeletedEntities extends TimedJob {
     protected $passwordTagRelationService;
 
     /**
-     * @var IUserManager
-     */
-    protected $userManager;
-
-    /**
      * @var array
      */
     protected $userExists = [];
@@ -96,7 +90,7 @@ class ProcessDeletedEntities extends TimedJob {
     protected $time = 0;
 
     /**
-     * ProcessDeletedUsers constructor.
+     * ProcessDeletedEntities constructor.
      *
      * @param LoggingService             $logger
      * @param TagService                 $tagService
@@ -104,6 +98,7 @@ class ProcessDeletedEntities extends TimedJob {
      * @param ShareService               $shareService
      * @param FolderService              $folderService
      * @param ConfigurationService       $config
+     * @param EnvironmentService         $environment
      * @param PasswordService            $passwordService
      * @param TagRevisionService         $tagRevisionService
      * @param FolderRevisionService      $folderRevisionService
@@ -117,16 +112,13 @@ class ProcessDeletedEntities extends TimedJob {
         ShareService $shareService,
         FolderService $folderService,
         ConfigurationService $config,
+        EnvironmentService $environment,
         PasswordService $passwordService,
         TagRevisionService $tagRevisionService,
         FolderRevisionService $folderRevisionService,
         PasswordRevisionService $passwordRevisionService,
         PasswordTagRelationService $passwordTagRelationService
     ) {
-        // Run always
-        $this->setInterval(1);
-
-        $this->logger                     = $logger;
         $this->config                     = $config;
         $this->tagService                 = $tagService;
         $this->userManager                = $userManager;
@@ -137,18 +129,13 @@ class ProcessDeletedEntities extends TimedJob {
         $this->folderRevisionService      = $folderRevisionService;
         $this->passwordRevisionService    = $passwordRevisionService;
         $this->passwordTagRelationService = $passwordTagRelationService;
+        parent::__construct($logger, $environment);
     }
 
     /**
      * @param $argument
      */
-    protected function run($argument): void {
-        if(BackgroundJob::getExecutionType() === 'ajax') {
-            $this->logger->error('Ajax cron jobs are not supported');
-
-            return;
-        }
-
+    protected function runJob($argument): void {
         $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
         if($timeout > 0) $this->time = time() - $timeout;
 
@@ -199,6 +186,7 @@ class ProcessDeletedEntities extends TimedJob {
         if(!isset($this->userExists[ $userId ])) {
             $this->userExists[ $userId ] = $this->userManager->userExists($userId);
         }
+
         return $this->userExists[ $userId ];
     }
 }

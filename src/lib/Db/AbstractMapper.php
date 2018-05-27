@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Db;
 
+use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IConfig;
@@ -44,17 +45,12 @@ abstract class AbstractMapper extends Mapper {
     /**
      * AbstractMapper constructor.
      *
-     * @param IDBConnection $db
-     * @param IConfig       $config
-     * @param string|null   $userId
+     * @param IDBConnection      $db
+     * @param EnvironmentService $environment
      */
-    public function __construct(IDBConnection $db, IConfig $config, string $userId = null) {
+    public function __construct(IDBConnection $db, EnvironmentService $environment) {
         parent::__construct($db, static::TABLE_NAME);
-
-        $this->userId = $userId;
-        if($config->getSystemValue('maintenance', false)) {
-            $this->userId = null;
-        }
+        $this->userId = $environment->getUserId();
     }
 
     /**

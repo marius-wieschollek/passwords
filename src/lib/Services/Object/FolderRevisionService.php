@@ -13,6 +13,7 @@ use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
 
 /**
@@ -29,20 +30,20 @@ class FolderRevisionService extends AbstractRevisionService {
     /**
      * FolderRevisionService constructor.
      *
-     * @param null|string          $userId
      * @param HookManager          $hookManager
+     * @param EnvironmentService   $environment
      * @param FolderRevisionMapper $revisionMapper
      * @param ValidationService    $validationService
      * @param EncryptionService    $encryptionService
      */
     public function __construct(
-        ?string $userId,
         HookManager $hookManager,
+        EnvironmentService $environment,
         FolderRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($userId, $hookManager, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
     }
 
     /**
