@@ -9,6 +9,7 @@ namespace OCA\Passwords\Migration;
 
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
@@ -31,11 +32,6 @@ class UpdateDatabaseFields implements IRepairStep {
     protected static $migrationExecuted = [];
 
     /**
-     * @var null|string
-     */
-    protected $userId;
-
-    /**
      * @var LoggingService
      */
     protected $logger;
@@ -46,6 +42,11 @@ class UpdateDatabaseFields implements IRepairStep {
     protected $config;
 
     /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
@@ -53,16 +54,21 @@ class UpdateDatabaseFields implements IRepairStep {
     /**
      * UpdateDatabaseFields constructor.
      *
-     * @param null|string             $userId
-     * @param PasswordRevisionService $passwordRevisionService
-     * @param ConfigurationService    $config
      * @param LoggingService          $logger
+     * @param ConfigurationService    $config
+     * @param EnvironmentService      $environment
+     * @param PasswordRevisionService $passwordRevisionService
      */
-    public function __construct(?string $userId, PasswordRevisionService $passwordRevisionService, ConfigurationService $config, LoggingService $logger) {
-        $this->passwordRevisionService = $passwordRevisionService;
+    public function __construct(
+        LoggingService $logger,
+        ConfigurationService $config,
+        EnvironmentService $environment,
+        PasswordRevisionService $passwordRevisionService
+    ) {
         $this->config                  = $config;
         $this->logger                  = $logger;
-        $this->userId                  = $userId;
+        $this->environment             = $environment;
+        $this->passwordRevisionService = $passwordRevisionService;
     }
 
     /**
@@ -85,7 +91,7 @@ class UpdateDatabaseFields implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        if(!is_null($this->userId)) {
+        if($this->environment->isGlobalMode()) {
             $this->logger->info('User mode detected. Use ./occ upgrade to upgrade');
 
             return;
