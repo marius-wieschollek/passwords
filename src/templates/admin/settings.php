@@ -41,7 +41,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     <?php endif; ?>
     <?php if(!$_['support']['cron']): ?>
         <div class="message error">
-            <?php p($l->t('Passwords does not support AJAX cron jobs.')); ?>
+            <?php p($l->t('Support for ajax cron jobs are experimental and might cause unexpected behaviour.')); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
