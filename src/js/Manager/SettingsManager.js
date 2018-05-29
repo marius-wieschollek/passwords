@@ -10,7 +10,7 @@ class SettingsManager {
         this._defaults = {
             'local.ui.sort.ascending'            : true,
             'local.ui.sort.field'                : 'label',
-            'client.ui.section.default'          : 'all',
+            'client.ui.section.default'          : 'folders',
             'client.ui.password.field.title'     : 'label',
             'client.ui.password.field.sorting'   : 'byTitle',
             'client.ui.password.click.action'    : 'password',
