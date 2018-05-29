@@ -91,8 +91,8 @@ class UpdateDatabaseFields implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        if($this->environment->isGlobalMode()) {
-            $this->logger->info('User mode detected. Use ./occ upgrade to upgrade');
+        if(!$this->environment->isGlobalMode()) {
+            $this->logger->error('User mode detected. Use ./occ upgrade to upgrade');
 
             return;
         }
