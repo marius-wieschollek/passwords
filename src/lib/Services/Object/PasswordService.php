@@ -11,6 +11,7 @@ use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCA\Passwords\Services\EnvironmentService;
 
 /**
  * Class PasswordService
@@ -32,12 +33,12 @@ class PasswordService extends AbstractModelService {
     /**
      * PasswordService constructor.
      *
-     * @param null|string    $userId
-     * @param HookManager    $hookManager
-     * @param PasswordMapper $mapper
+     * @param HookManager        $hookManager
+     * @param PasswordMapper     $mapper
+     * @param EnvironmentService $environment
      */
-    public function __construct(?string $userId, HookManager $hookManager, PasswordMapper $mapper) {
-        parent::__construct($userId, $hookManager, $mapper);
+    public function __construct(HookManager $hookManager, PasswordMapper $mapper, EnvironmentService $environment) {
+        parent::__construct($hookManager, $mapper, $environment);
     }
 
     /**

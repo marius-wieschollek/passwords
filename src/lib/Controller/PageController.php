@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller;
 use OC\AppFramework\Http\Request;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\TokenHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
@@ -25,9 +26,14 @@ use OCP\Util;
 class PageController extends Controller {
 
     /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
      * @var TokenHelper
      */
-    private $tokenHelper;
+    protected $tokenHelper;
 
     /**
      * @var SettingsService
@@ -37,18 +43,21 @@ class PageController extends Controller {
     /**
      * PageController constructor.
      *
-     * @param IRequest        $request
-     * @param TokenHelper     $tokenHelper
-     * @param SettingsService $settingsService
+     * @param IRequest             $request
+     * @param TokenHelper          $tokenHelper
+     * @param ConfigurationService $config
+     * @param SettingsService      $settingsService
      */
     public function __construct(
         IRequest $request,
         TokenHelper $tokenHelper,
+        ConfigurationService $config,
         SettingsService $settingsService
     ) {
         parent::__construct(Application::APP_NAME, $request);
         $this->tokenHelper     = $tokenHelper;
         $this->settingsService = $settingsService;
+        $this->config          = $config;
     }
 
     /**
@@ -69,7 +78,10 @@ class PageController extends Controller {
         $response = new TemplateResponse(
             $this->appName,
             'index',
-            ['https' => $isSecure]
+            [
+                'https'       => $isSecure,
+                'https_debug' => $this->config->getAppValue('debug/https', false)
+            ]
         );
 
         $response->setContentSecurityPolicy($this->getContentSecurityPolicy());

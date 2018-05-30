@@ -4,4 +4,5 @@
 
 ## Contributors
  - [HanFox](https://github.com/HanFox)
- - [bendikrb](https://github.com/bendikrb)
+ - [Bendik Brenne](https://github.com/bendikrb)
+ - [Ondřej Kadlec](https://github.com/447937)

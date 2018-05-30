@@ -16,7 +16,7 @@
     "dependencies": {},
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
-        "codeceptjs": "^1.1.8",
+        "codeceptjs": "^1.2.1",
         "copy-webpack-plugin": "^4.5.1",
         "css-loader": "^0.28.11",
         "csv-hero": "^0.0.3",
@@ -31,6 +31,7 @@
         "marked": "^0.3.19",
         "node-sass": "^4.9.0",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
+        "prettier": "1.12.1",
         "progress-bar-webpack-plugin": "^1.11.0",
         "random-material-color": "^1.0.3",
         "sass-loader": "^6.0.7",
@@ -46,8 +47,8 @@
         "vue-style-loader": "^4.1.0",
         "vue-template-compiler": "^2.5.16",
         "webdriverio": "^4.12.0",
-        "webpack": "^3.11.0",
-        "xlsx": "^0.12.12"
+        "webpack": "^3.12.0",
+        "xlsx": "^0.12.13"
     },
     "repository": {
         "type": "git",
@@ -58,6 +59,9 @@
         "nextcloud",
         "security"
     ],
+    "prettier": {
+        "parser": "babylon"
+    },
     "eslintConfig": {
         "brace-style": [
             "1tbs",

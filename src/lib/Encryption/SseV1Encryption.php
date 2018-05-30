@@ -13,6 +13,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 
@@ -59,33 +60,39 @@ class SseV1Encryption implements EncryptionInterface {
     protected $crypto;
 
     /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
      * @var ISecureRandom
      */
     protected $secureRandom;
 
     /**
-     * @var ConfigurationService
-     */
-    protected $configurationService;
-
-    /**
      * ShareV1Encryption constructor.
      *
-     * @param null|string          $userId
      * @param ICrypto              $crypto
      * @param ISecureRandom        $secureRandom
+     * @param EnvironmentService   $environment
      * @param ConfigurationService $configurationService
      */
     public function __construct(
-        ?string $userId,
         ICrypto $crypto,
         ISecureRandom $secureRandom,
+        EnvironmentService $environment,
         ConfigurationService $configurationService
     ) {
-        $this->userId               = $userId;
-        $this->crypto               = $crypto;
-        $this->secureRandom         = $secureRandom;
-        $this->configurationService = $configurationService;
+        $this->userId       = $environment->getUserId();
+        $this->crypto       = $crypto;
+        $this->secureRandom = $secureRandom;
+        $this->config       = $configurationService;
+        $this->environment  = $environment;
     }
 
     /**
@@ -123,7 +130,7 @@ class SseV1Encryption implements EncryptionInterface {
 
         $fields = $this->getFieldsToProcess($object);
         foreach($fields as $field) {
-            $value          = $object->getProperty($field);
+            $value = $object->getProperty($field);
             if($value === null) continue;
 
             $decryptedValue = $this->crypto->decrypt($value, $encryptionKey);
@@ -171,11 +178,11 @@ class SseV1Encryption implements EncryptionInterface {
      * @return string
      */
     protected function getServerKey(): string {
-        $serverKey = $this->configurationService->getAppValue('SSEv1ServerKey', null);
+        $serverKey = $this->config->getAppValue('SSEv1ServerKey', null);
 
         if($serverKey === null || strlen($serverKey) < self::MINIMUM_KEY_LENGTH) {
             $serverKey = $this->getSecureRandom();
-            $this->configurationService->setAppValue('SSEv1ServerKey', $serverKey);
+            $this->config->setAppValue('SSEv1ServerKey', $serverKey);
         }
 
         return $serverKey;
@@ -189,14 +196,14 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws \OCP\PreConditionNotMetException
      */
     protected function getUserKey(string $userId): string {
-        if($this->userId !== null && $this->userId !== $userId && !$this->configurationService->getSystemValue('maintenance', false)) {
+        if($this->userId !== $userId && !$this->environment->isGlobalMode()) {
             throw new Exception('User key requested with illegal user id: '.$userId);
         }
-        $userKey = $this->configurationService->getUserValue('SSEv1UserKey', null, $userId);
+        $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
 
         if($userKey === null || strlen($userKey) < self::MINIMUM_KEY_LENGTH) {
             $userKey = $this->getSecureRandom();
-            $this->configurationService->setUserValue('SSEv1UserKey', $userKey, $userId);
+            $this->config->setUserValue('SSEv1UserKey', $userKey, $userId);
         }
 
         return $userKey;

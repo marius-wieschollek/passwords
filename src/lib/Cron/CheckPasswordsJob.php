@@ -7,28 +7,21 @@
 
 namespace OCA\Passwords\Cron;
 
-use OC\BackgroundJob\TimedJob;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
-use OCP\BackgroundJob;
 
 /**
  * Class CheckPasswordsJob
  *
  * @package OCA\Passwords\Cron
  */
-class CheckPasswordsJob extends TimedJob {
-
-    /**
-     * @var LoggingService
-     */
-    protected $logger;
+class CheckPasswordsJob extends AbstractCronJob {
 
     /**
      * @var MailService
@@ -56,11 +49,17 @@ class CheckPasswordsJob extends TimedJob {
     protected $badPasswords = [];
 
     /**
+     * @var float|int
+     */
+    protected $interval = 24 * 60 * 60;
+
+    /**
      * CheckPasswordsJob constructor.
      *
      * @param LoggingService         $logger
      * @param MailService            $mailService
      * @param HelperService          $helperService
+     * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
      * @param NotificationService    $notificationService
      */
@@ -68,16 +67,15 @@ class CheckPasswordsJob extends TimedJob {
         LoggingService $logger,
         MailService $mailService,
         HelperService $helperService,
+        EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
         NotificationService $notificationService
     ) {
-        // Run once per day
-        $this->setInterval(24 * 60 * 60);
-        $this->logger              = $logger;
         $this->helperService       = $helperService;
         $this->revisionMapper      = $revisionMapper;
         $this->mailService         = $mailService;
         $this->notificationService = $notificationService;
+        parent::__construct($logger, $environment);
     }
 
     /**
@@ -85,18 +83,10 @@ class CheckPasswordsJob extends TimedJob {
      *
      * @throws \Exception
      */
-    protected function run($argument): void {
-        if(BackgroundJob::getExecutionType() === 'ajax') {
-            $this->logger->error('Ajax cron jobs are not supported');
-
-            return;
-        }
-
+    protected function runJob($argument): void {
         $securityHelper = $this->helperService->getSecurityHelper();
 
-        if($securityHelper->dbUpdateRequired()) {
-            $securityHelper->updateDb();
-        }
+        if($securityHelper->dbUpdateRequired()) $securityHelper->updateDb();
         $this->checkRevisionStatus($securityHelper);
     }
 
@@ -153,7 +143,7 @@ class CheckPasswordsJob extends TimedJob {
             try {
                 $this->notificationService->sendBadPasswordNotification($user, $count);
                 $this->mailService->sendBadPasswordMail($user, $count);
-            } catch(ApiException $e) {
+            } catch(\Exception $e) {
                 $this->logger->logException($e);
             }
         }

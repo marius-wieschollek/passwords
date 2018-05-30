@@ -11,6 +11,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
 
 /**
@@ -33,20 +34,20 @@ class PasswordRevisionService extends AbstractRevisionService {
     /**
      * PasswordRevisionService constructor.
      *
-     * @param null|string            $userId
      * @param HookManager            $hookManager
+     * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
      * @param EncryptionService      $encryptionService
      */
     public function __construct(
-        ?string $userId,
         HookManager $hookManager,
+        EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($userId, $hookManager, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
     }
 
     /**

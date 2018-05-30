@@ -12,6 +12,7 @@ use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCA\Passwords\Services\EnvironmentService;
 
 /**
  * Class ShareService
@@ -32,16 +33,16 @@ class ShareService extends AbstractService {
     protected $class = Share::class;
 
     /**
-     * AbstractParentEntityService constructor.
+     * ShareService constructor.
      *
-     * @param string      $userId
-     * @param HookManager $hookManager
-     * @param ShareMapper $mapper
+     * @param HookManager        $hookManager
+     * @param ShareMapper        $mapper
+     * @param EnvironmentService $environment
      */
-    public function __construct(?string $userId, HookManager $hookManager, ShareMapper $mapper) {
+    public function __construct(HookManager $hookManager, ShareMapper $mapper, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($userId, $hookManager);
+        parent::__construct($hookManager, $environment);
     }
 
     /**

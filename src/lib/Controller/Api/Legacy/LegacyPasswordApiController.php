@@ -156,8 +156,9 @@ class LegacyPasswordApiController extends ApiController {
             $model->getUuid(),
             $pass, strval($loginname),
             EncryptionService::CSE_ENCRYPTION_NONE,
-            '', strval($loginname).'@'.strval($website),
+            '', strval($website).' – '.strval($loginname),
             strval($address), strval($notes),
+            '{}',
             FolderService::BASE_FOLDER_UUID,
             time(), false, false, false
         );
@@ -201,14 +202,16 @@ class LegacyPasswordApiController extends ApiController {
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
+        if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) return new JSONResponse('Unsupported Encryption Type', 400);
         $website = parse_url($address, PHP_URL_HOST);
 
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
             $model->getUuid(), strval($pass), strval($loginname),
             EncryptionService::CSE_ENCRYPTION_NONE,
-            '', strval($loginname).'@'.strval($website),
+            '', strval($website).' – '.strval($loginname),
             strval($address), strval($notes),
+            $revision->getCustomFields(),
             $revision->getFolder(),
             strtotime($datechanged),
             $revision->isHidden(),

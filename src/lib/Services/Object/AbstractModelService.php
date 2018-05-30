@@ -12,6 +12,7 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 
 /**
@@ -22,16 +23,16 @@ use OCP\AppFramework\Db\Entity;
 abstract class AbstractModelService extends AbstractService {
 
     /**
-     * AbstractParentEntityService constructor.
+     * AbstractModelService constructor.
      *
-     * @param string         $userId
-     * @param HookManager    $hookManager
-     * @param AbstractMapper $mapper
+     * @param HookManager        $hookManager
+     * @param AbstractMapper     $mapper
+     * @param EnvironmentService $environment
      */
-    public function __construct(?string $userId, HookManager $hookManager, AbstractMapper $mapper) {
+    public function __construct(HookManager $hookManager, AbstractMapper $mapper, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($userId, $hookManager);
+        parent::__construct($hookManager, $environment);
     }
 
     /**

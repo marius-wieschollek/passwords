@@ -17,6 +17,7 @@ use OCP\Util;
  * @package OCA\Passwords\Services
  */
 class LoggingService {
+
     /**
      * @var ILogger
      */
