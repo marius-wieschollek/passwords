@@ -80,4 +80,14 @@ abstract class AbstractApiController extends ApiController {
 
         return $filters;
     }
+
+    /**
+     * @return array
+     */
+    protected function getParameterArray(): array {
+        $params = $this->request->getParams();
+        unset($params['_route']);
+
+        return $params;
+    }
 }

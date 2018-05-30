@@ -11,6 +11,11 @@ $routes = [
     ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
     ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
 
+    ['name' => 'authorisation_api#info', 'url' => '/api/1.0/authorisation/info', 'verb' => 'GET'],
+    ['name' => 'authorisation_api#login', 'url' => '/api/1.0/authorisation/login', 'verb' => 'POST'],
+    ['name' => 'authorisation_api#logout', 'url' => '/api/1.0/authorisation/logout', 'verb' => 'GET'],
+    ['name' => 'authorisation_api#update', 'url' => '/api/1.0/authorisation/update', 'verb' => 'POST'],
+
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'GET'],
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'POST', 'postfix' => 'POST'],
     ['name' => 'password_api#show', 'url' => '/api/1.0/password/show', 'verb' => 'POST'],
