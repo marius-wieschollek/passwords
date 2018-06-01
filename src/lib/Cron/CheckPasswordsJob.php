@@ -106,6 +106,7 @@ class CheckPasswordsJob extends AbstractCronJob {
 
             if($oldStatus != $newStatus) {
                 $revision->setStatus($newStatus);
+                $revision->setUpdated(time());
                 $this->revisionMapper->update($revision);
                 $this->sendBadPasswordNotification($revision);
                 $badRevisionCounter++;
