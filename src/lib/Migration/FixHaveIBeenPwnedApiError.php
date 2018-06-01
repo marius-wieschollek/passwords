@@ -81,8 +81,8 @@ class FixHaveIBeenPwnedApiError implements IRepairStep {
         $wasAlreadyExecuted = intval($this->config->getAppValue('migration/hibp', 0)) == 1;
         if($wasAlreadyExecuted) return;
 
-        $usesHibp = $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP) == HelperService::SECURITY_HIBP;
-        if(!$usesHibp) {
+        $securityService = $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP);
+        if($securityService != HelperService::SECURITY_HIBP && $securityService != HelperService::SECURITY_BIGDB_HIBP) {
             $this->config->setAppValue('migration/hibp', 1);
 
             return;
