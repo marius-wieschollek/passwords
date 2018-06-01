@@ -1,3 +1,9 @@
+#### 2018.5.0 - Feature Release
+- Added Czech translation
+- Added Ajax cronjob support
+- Fixed HIBP Api
+- Fixed customFields upgrade
+
 #### 2018.5.2 - Bugfix Release
 - Fixed password creation error in the legacy api
 
