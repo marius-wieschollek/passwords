@@ -96,7 +96,9 @@ class UpdateDatabaseFields implements IRepairStep {
 
             return;
         }
-        $this->executeMigration('createCustomFields', $output);
+
+        $databaseVersion = intval($this->config->getAppValue('database_version', 0));
+        if($databaseVersion < 1) $this->executeMigration('createCustomFields', $output);
     }
 
     /**
