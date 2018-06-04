@@ -40,6 +40,14 @@ $request = \OC::$server->getRequest();
             <td><?=$config->getSystemValue('overwritecondaddr', 'not set')?></td>
         </tr>
         <tr>
+            <td>Nextcloud trusted_proxies</td>
+            <td><?=json_encode($config->getSystemValue('trusted_proxies', []))?></td>
+        </tr>
+        <tr>
+            <td>Nextcloud detected remote address</td>
+            <td><?=$request->getRemoteAddress()?></td>
+        </tr>
+        <tr>
             <td>PHP $_SERVER['HTTPS']</td>
             <td><?php p(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS']:'not set') ?></td>
         </tr>
@@ -48,8 +56,16 @@ $request = \OC::$server->getRequest();
             <td><?php p(isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME']:'not set') ?></td>
         </tr>
         <tr>
+            <td>PHP $_SERVER['REMOTE_ADDR']</td>
+            <td><?php p(isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR']:'not set') ?></td>
+        </tr>
+        <tr>
             <td>PHP $_SERVER['HTTP_X_FORWARDED_PROTO']</td>
             <td><?php p(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? $_SERVER['HTTP_X_FORWARDED_PROTO']:'not set') ?></td>
+        </tr>
+        <tr>
+            <td>PHP $_SERVER['HTTP_X_FORWARDED_FOR']</td>
+            <td><?php p(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR']:'not set') ?></td>
         </tr>
     </table>
 </div>
@@ -70,7 +86,7 @@ $request = \OC::$server->getRequest();
     }
 
     #passwords-https-detection-details:hover {
-        max-height : 15rem;
+        max-height : 20rem;
     }
 
     #passwords-https-detection-details tr:hover {
