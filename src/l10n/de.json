@@ -68,7 +68,7 @@
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s oder %s? Da können wir helfen!",
         "PHP %s is no longer supported."                                                            : "PHP %s wird nicht mehr unterstützt.",
         "Passwords requires HTTPS."                                                                 : "Passwörter benötigt HTTPS.",
-        "Support for ajax cron jobs are experimental and might cause unexpected behaviour."         : "Die Unterstützung von Ajax-Cronjobs ist experimentiell und kann Probleme verursachen.",
+        "Using ajax background jobs is not recommended and might cause issues."                     : "Hintergrund-Aufgaben mit Ajax auszuführen wird nicht empfohlen und kann zu Problemen führen.",
         "Please check the system requirements."                                                     : "Bitte sieh dir unsere Systemanforderungen an.",
         "Password not shared"                                                                       : "Password nicht geteilt",
         "A password was not shared with %1$s because it already is"                                 : "Ein Passwort wurde nicht mit %1$s geteilt, da jemand anderes das bereits getan hat.",
