@@ -16,12 +16,10 @@ use OCA\Passwords\Helper\Http\RequestHelper;
  */
 class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
-    const PASSWORD_DB         = 'hibp';
-    const SERVICE_URL         = 'https://api.pwnedpasswords.com/pwnedpassword/';
-    const SERVICE_BASE_URL    = 'https://api.pwnedpasswords.com/';
-    const MAGIC_NUMBER_OFFSET = 18;
-    const API_WAIT_TIME       = 2;
-    const COOKIE_FILE         = 'nc_pw_hibp_api_cookies.txt';
+    const PASSWORD_DB      = 'hibp';
+    const SERVICE_URL      = 'https://api.pwnedpasswords.com/range/';
+    const SERVICE_BASE_URL = 'https://api.pwnedpasswords.com/';
+    const COOKIE_FILE      = 'nc_pw_hibp_api_cookies.txt';
 
     /**
      * @param string $hash
@@ -31,10 +29,8 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      */
     public function isHashSecure(string $hash): bool {
         if(!isset($this->hashStatusCache[ $hash ])) {
-            if(parent::isHashSecure($hash) && $this->isHashInHibpDb($hash)) {
-                $this->addHashToLocalDb($hash);
-                $this->hashStatusCache[ $hash ] = false;
-            }
+            $isSecure                       = parent::isHashSecure($hash) && !$this->isHashInHibpDb($hash);
+            $this->hashStatusCache[ $hash ] = $isSecure;
         }
 
         return $this->hashStatusCache[ $hash ];
@@ -54,44 +50,29 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      * @throws \Exception
      */
     protected function isHashInHibpDb(string $hash): bool {
-        $this->checkRequestTimeout();
-        $apiUrl  = self::SERVICE_URL.$hash;
-        $request = new RequestHelper();
-        $request->setUrl($apiUrl)
-                ->setAcceptResponseCodes([200, 404, 429, 503])
-                ->setRetryTimeout(self::API_WAIT_TIME)
-                ->setCookieJar($this->config->getTempDir().self::COOKIE_FILE)
-                ->setUserAgent(
-                    'Nextcloud/'.$this->config->getSystemValue('version').
-                    ' Passwords/'.$this->config->getAppValue('installed_version').
-                    ' Instance/'.$this->config->getSystemValue('instanceid')
-                )->sendWithRetry();
+        $range = substr($hash, 0, 5);
 
-        if($request->getInfo('http_code') === 503) {
-            sleep(self::API_WAIT_TIME * 2);
-            $request->setUrl($this->getCloudFlareRedirectUrl($request->getResponseBody()))
-                    ->setAcceptResponseCodes([200, 404])
-                    ->setHeaderData(['Referer' => $apiUrl])
-                    ->sendWithRetry();
-        }
-        $this->setLastRequestTime();
+        $request  = new RequestHelper();
+        $response = $request->setUrl(self::SERVICE_URL.$range)
+                            ->setCookieJar($this->config->getTempDir().self::COOKIE_FILE)
+                            ->setUserAgent('Passwords App for Nextcloud')
+                            ->sendWithRetry();
 
-        if($request->getInfo('http_code') === 429) {
-            return $this->isHashInHibpDb($hash);
-        }
+        if(!$response) throw new \Exception('HIBP API returned invalid response. Status: '.$request->getInfo('http_code'));
 
-        $responseCode = $request->getInfo('http_code');
-        if(!in_array($responseCode, [200, 404])) {
-            throw new \Exception('HIBP API returned invalid response code: '.$responseCode);
-        }
+        $hashes = $this->processResponse($response, $range);
+        $this->addHashToLocalDb($hash, $hashes);
 
-        return $responseCode == 200;
+        return in_array($hash, $hashes);
     }
 
     /**
      * @param string $hash
+     *
+     * @throws \OCP\Files\NotFoundException
+     * @throws \OCP\Files\NotPermittedException
      */
-    protected function addHashToLocalDb(string $hash): void {
+    protected function addHashToLocalDb(string $hash, array $hashes): void {
         $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
 
         $data = [];
@@ -101,8 +82,10 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
             $data = json_decode($data, true);
         }
 
-        $data[] = $hash;
-        $data   = json_encode(array_unique($data));
+        $data = array_merge($data, $hashes);
+        $data = json_encode(array_unique($data));
+
+        // @TODO refactor this duplicate code in all security helpers
         if(extension_loaded('zlib')) {
             $data = gzcompress($data);
             $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_GZIP);
@@ -113,93 +96,23 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
-     * @param string $html
-     *
-     * @return string
-     */
-    protected function getCloudFlareRedirectUrl(string $html): string {
-        $getFields                 = $this->getHiddenFields($html);
-        $getFields['jschl_answer'] = $this->getMagicNumber($html, self::MAGIC_NUMBER_OFFSET);
-        $this->logger->info(["Bypassed cloudflare protection with magic number: %s", $getFields['jschl_answer']]);
-
-        return $this->getTargetUrl($html, self::SERVICE_BASE_URL, $getFields);
-    }
-
-    /**
-     * @param string $html
-     * @param int    $add
-     *
-     * @return int
-     */
-    protected function getMagicNumber(string $html, int $add = 0): int {
-        preg_match("/e,a,k,i,n,g,f, \w+={\"(\w+)\":([+()!\[\]]+)/", $html, $matches);
-        $key  = $matches[1];
-        $calc = $matches[2];
-
-        preg_match_all("/{$key}([+\-\*\/])=([+()!\[\]]+);/", $html, $matches);
-        foreach($matches[1] as $i => $v) {
-            $calc = '('.$calc.')'.$v.'('.$matches[2][ $i ].')';
-        }
-
-        $calc = str_replace('!+[]', 1, $calc);
-        $calc = str_replace('!![]', 1, $calc);
-        $calc = str_replace('[]', 0, $calc);
-
-        $number = 0;
-        preg_match_all("/(\([1+0]+\))/", $calc, $matches);
-        foreach($matches[0] as $match) {
-            eval('$number='.$match.';');
-            $calc = str_replace($match, $number, $calc);
-        }
-        $calc = preg_replace("/([0-9]+)\+/", "$1", $calc);
-        eval('$number='.$calc.';');
-
-        return $number + $add;
-    }
-
-    /**
-     * @param string $html
+     * @param $response
+     * @param $range
      *
      * @return array
      */
-    protected function getHiddenFields(string $html): array {
-        preg_match_all("/input\s+type=\"hidden\"\s+name=\"(\S+)\"\s+value=\"(\S+)\"/", $html, $matches);
+    protected function processResponse($response, $range): array {
+        $response = explode("\n", $response);
+        $hashes   = [];
+        foreach($response as $line) {
+            list($subhash,) = explode(':', $line);
 
-        $fields = [];
-        foreach($matches[1] as $i => $key) {
-            $fields[ $key ] = $matches[2][ $i ];
+            $currentHash = $range.$subhash;
+            $hashes[]    = $currentHash;
+
+            $this->hashStatusCache[ $currentHash ] = false;
         }
 
-        return $fields;
-    }
-
-    /**
-     * @param $html
-     * @param $baseUrl
-     * @param $getFields
-     *
-     * @return string
-     */
-    protected function getTargetUrl($html, $baseUrl, $getFields): string {
-        preg_match_all("/action=\"(\S+)\"/", $html, $matches);
-
-        return $baseUrl.$matches[1][0].'?'.http_build_query($getFields);
-    }
-
-    /**
-     *
-     */
-    protected function checkRequestTimeout(): void {
-        $lastRequest = $this->config->getAppValue('security/hibp/api/request', 0);
-        if(time()-$lastRequest < self::API_WAIT_TIME) {
-            sleep(self::API_WAIT_TIME);
-        }
-    }
-
-    /**
-     *
-     */
-    protected function setLastRequestTime(): void {
-        $this->config->setAppValue('security/hibp/api/request', time());
+        return $hashes;
     }
 }
