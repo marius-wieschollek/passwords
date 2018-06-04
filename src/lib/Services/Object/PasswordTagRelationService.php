@@ -13,6 +13,7 @@ use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Hooks\Manager\HookManager;
+use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 
 /**
@@ -33,16 +34,16 @@ class PasswordTagRelationService extends AbstractService {
     protected $class = PasswordTagRelation::class;
 
     /**
-     * AbstractParentEntityService constructor.
+     * PasswordTagRelationService constructor.
      *
-     * @param string                    $userId
-     * @param PasswordTagRelationMapper $mapper
      * @param HookManager               $hookManager
+     * @param EnvironmentService        $environment
+     * @param PasswordTagRelationMapper $mapper
      */
-    public function __construct(?string $userId, HookManager $hookManager, PasswordTagRelationMapper $mapper) {
+    public function __construct(HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($userId, $hookManager);
+        parent::__construct($hookManager, $environment);
     }
 
     /**

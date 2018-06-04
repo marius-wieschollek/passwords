@@ -81,8 +81,10 @@ class AdminSettings implements ISettings {
             'purgeTimeout'     => $this->getPurgeTimeout(),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
+            'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
+            'nightlyUpdates'   => $this->config->getAppValue('nightly_updates', false),
             'caches'           => $this->getFileCaches(),
             'support'          => $this->getPlatformSupport(),
             'links'            => [

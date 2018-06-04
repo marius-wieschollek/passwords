@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Db;
 
+use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IConfig;
@@ -44,17 +45,12 @@ abstract class AbstractMapper extends Mapper {
     /**
      * AbstractMapper constructor.
      *
-     * @param IDBConnection $db
-     * @param IConfig       $config
-     * @param string|null   $userId
+     * @param IDBConnection      $db
+     * @param EnvironmentService $environment
      */
-    public function __construct(IDBConnection $db, IConfig $config, string $userId = null) {
+    public function __construct(IDBConnection $db, EnvironmentService $environment) {
         parent::__construct($db, static::TABLE_NAME);
-
-        $this->userId = $userId;
-        if($config->getSystemValue('maintenance', false)) {
-            $this->userId = null;
-        }
+        $this->userId = $environment->getUserId();
     }
 
     /**
@@ -180,18 +176,22 @@ abstract class AbstractMapper extends Mapper {
         if(isset($search[0]) && !is_array($search[0])) $search = [$search];
         list($sql, $params) = $this->getStatement();
 
+        $extraSql = '';
+        $concat   = '';
         foreach($search as $criteria) {
-            list($field, $value, $operator, $concat) = $this->processCriteria($criteria);
+            list($field, $value, $operator, $nextConcat) = $this->processCriteria($criteria);
 
             if($value !== null) {
-                $sql      .= " {$concat} `{$field}` {$operator} ? ";
+                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` {$operator} ? ";
                 $params[] = $value;
             } else if($operator === '!=') {
-                $sql .= " {$concat} `{$field}` IS NOT NULL ";
+                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` IS NOT NULL ";
             } else {
-                $sql .= " {$concat} `{$field}` IS NULL ";
+                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` IS NULL ";
             }
+            $concat = $nextConcat;
         }
+        if($extraSql) $sql .= " AND ($extraSql)";
 
         return $this->findEntities($sql, $params, $limit);
     }

@@ -7,12 +7,12 @@
 
 namespace OCA\Passwords\Cron;
 
-use OC\BackgroundJob\TimedJob;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
@@ -22,19 +22,13 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\BackgroundJob;
 
 /**
  * Class SynchronizeShares
  *
  * @package OCA\Passwords\Cron
  */
-class SynchronizeShares extends TimedJob {
-
-    /**
-     * @var LoggingService
-     */
-    protected $logger;
+class SynchronizeShares extends AbstractCronJob {
 
     /**
      * @var MailService
@@ -72,6 +66,7 @@ class SynchronizeShares extends TimedJob {
      * @param LoggingService          $logger
      * @param MailService             $mailService
      * @param ShareService            $shareService
+     * @param EnvironmentService      $environment
      * @param PasswordService         $passwordService
      * @param NotificationService     $notificationService
      * @param PasswordRevisionService $passwordRevisionService
@@ -80,19 +75,17 @@ class SynchronizeShares extends TimedJob {
         LoggingService $logger,
         MailService $mailService,
         ShareService $shareService,
+        EnvironmentService $environment,
         PasswordService $passwordService,
         NotificationService $notificationService,
         PasswordRevisionService $passwordRevisionService
     ) {
-        // Run always
-        $this->setInterval(1);
-
-        $this->logger                  = $logger;
         $this->mailService             = $mailService;
         $this->shareService            = $shareService;
         $this->passwordService         = $passwordService;
         $this->notificationService     = $notificationService;
         $this->passwordRevisionService = $passwordRevisionService;
+        parent::__construct($logger, $environment);
     }
 
     /**
@@ -100,13 +93,7 @@ class SynchronizeShares extends TimedJob {
      *
      * @throws \Exception
      */
-    protected function run($argument): void {
-        if(BackgroundJob::getExecutionType() === 'ajax') {
-            $this->logger->error('Ajax cron jobs are not supported');
-
-            return;
-        }
-
+    protected function runJob($argument): void {
         $this->deleteOrphanedTargetPasswords();
         $this->deleteExpiredShares();
         $this->createNewShares();

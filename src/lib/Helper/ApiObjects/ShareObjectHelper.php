@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\ApiObjects;
 
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Share;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\UserService;
 use OCP\AppFramework\IAppContainer;
@@ -50,22 +51,22 @@ class ShareObjectHelper extends AbstractObjectHelper {
 
     /** @noinspection PhpMissingParentConstructorInspection */
     /**
-     * AbstractObjectHelper constructor.
+     * ShareObjectHelper constructor.
      *
-     * @param null|string     $userId
-     * @param IConfig         $config
-     * @param UserService     $userService
-     * @param IAppContainer   $container
-     * @param PasswordService $passwordService
+     * @param IConfig            $config
+     * @param UserService        $userService
+     * @param IAppContainer      $container
+     * @param EnvironmentService $environment
+     * @param PasswordService    $passwordService
      */
     public function __construct(
-        ?string $userId,
         IConfig $config,
         UserService $userService,
         IAppContainer $container,
+        EnvironmentService $environment,
         PasswordService $passwordService
     ) {
-        $this->userId          = $userId;
+        $this->userId          = $environment->getUserId();
         $this->config          = $config;
         $this->container       = $container;
         $this->userService     = $userService;

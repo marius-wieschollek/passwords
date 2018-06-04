@@ -30,15 +30,12 @@ class ConfigurationService {
     /**
      * FaviconService constructor.
      *
-     * @param string  $userId
-     * @param IConfig $config
+     * @param IConfig            $config
+     * @param EnvironmentService $environment
      */
-    public function __construct(?string $userId, IConfig $config) {
+    public function __construct(IConfig $config, EnvironmentService $environment) {
         $this->config = $config;
-        $this->userId = $userId;
-        if($this->config->getSystemValue('maintenance', false)) {
-            $this->userId = null;
-        }
+        $this->userId = $environment->getUserId();
     }
 
     /**
@@ -49,8 +46,7 @@ class ConfigurationService {
      * @return string
      */
     public function getUserValue(string $key, $default = null, $user = null) {
-        $userId = $this->userId;
-        if($userId === null) $userId = $user;
+        $userId = $this->userId === null ? $user:$this->userId;
 
         return $this->config->getUserValue($userId, Application::APP_NAME, $key, $default);
     }
@@ -84,8 +80,7 @@ class ConfigurationService {
      * @throws \OCP\PreConditionNotMetException
      */
     public function setUserValue(string $key, string $value, ?string $user = null): void {
-        $userId = $this->userId;
-        if($userId === null) $userId = $user;
+        $userId = $this->userId === null ? $user:$this->userId;
         $this->config->setUserValue($userId, Application::APP_NAME, $key, $value);
     }
 
@@ -110,8 +105,7 @@ class ConfigurationService {
      * @param null|string $user
      */
     public function deleteUserValue(string $key, ?string $user = null): void {
-        $userId = $this->userId;
-        if($userId === null) $userId = $user;
+        $userId = $this->userId === null ? $user:$this->userId;
         $this->config->deleteUserValue($userId, Application::APP_NAME, $key);
     }
 

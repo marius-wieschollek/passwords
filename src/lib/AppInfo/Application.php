@@ -63,6 +63,7 @@ class Application extends App {
         $this->registerInternalHooks();
         $this->registerMiddleware();
         $this->registerNotificationNotifier();
+        $this->enableNightlyUpdates();
     }
 
     /**
@@ -205,5 +206,16 @@ class Application extends App {
                 return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
             }
         );
+    }
+
+    /**
+     *
+     */
+    protected function enableNightlyUpdates() {
+        if(
+            $this->getContainer()->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
+            !class_exists('\OC\App\AppStore\Fetcher\AppFetcher', false)) {
+            require_once __DIR__.'/../Plugins/NighltyAppFetcher.php';
+        }
     }
 }

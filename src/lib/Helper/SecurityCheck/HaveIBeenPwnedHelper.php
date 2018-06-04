@@ -17,8 +17,8 @@ use OCA\Passwords\Helper\Http\RequestHelper;
 class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
     const PASSWORD_DB         = 'hibp';
-    const SERVICE_URL         = 'https://haveibeenpwned.com/api/v2/pwnedpassword/';
-    const SERVICE_BASE_URL    = 'https://haveibeenpwned.com/';
+    const SERVICE_URL         = 'https://api.pwnedpasswords.com/pwnedpassword/';
+    const SERVICE_BASE_URL    = 'https://api.pwnedpasswords.com/';
     const MAGIC_NUMBER_OFFSET = 18;
     const API_WAIT_TIME       = 2;
     const COOKIE_FILE         = 'nc_pw_hibp_api_cookies.txt';

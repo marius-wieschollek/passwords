@@ -12,6 +12,7 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\Entity;
 
@@ -38,17 +39,17 @@ abstract class AbstractRevisionService extends AbstractService {
     protected $mapper;
 
     /**
-     * PasswordService constructor.
+     * AbstractRevisionService constructor.
      *
-     * @param string                 $userId
      * @param HookManager            $hookManager
      * @param AbstractRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
      * @param EncryptionService      $encryptionService
+     * @param EnvironmentService     $environment
      */
     public function __construct(
-        ?string $userId,
         HookManager $hookManager,
+        EnvironmentService $environment,
         AbstractRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
@@ -57,7 +58,7 @@ abstract class AbstractRevisionService extends AbstractService {
         $this->validationService = $validationService;
         $this->encryptionService = $encryptionService;
 
-        parent::__construct($userId, $hookManager);
+        parent::__construct($hookManager, $environment);
     }
 
     /**

@@ -3,9 +3,10 @@
  * This file is part of the Passwords App
  * created by Marius David Wieschollek
  * and licensed under the AGPL.
+ *
+ * @var $l \OCP\IL10N
+ * @var $_ array
  */
-
-/** @var $_ array */
 
 $textForum         = $l->t('Need help');
 $textIssues        = $l->t('found a bug');
@@ -40,7 +41,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     <?php endif; ?>
     <?php if(!$_['support']['cron']): ?>
         <div class="message error">
-            <?php p($l->t('Passwords does not support AJAX cron jobs.')); ?>
+            <?php p($l->t('Support for ajax cron jobs are experimental and might cause unexpected behaviour.')); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
@@ -141,6 +142,10 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
                     <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
+            <label for="passwords-https-detection"><?php p($l->t('Enable HTTPS detection debugging')); ?></label>
+            <input id="passwords-https-detection" name="https-detection" data-setting="debug/https" type="checkbox" <?=$_['debugHTTPS'] ? 'checked':''?>>
+            <label for="passwords-nightly-updates"><?php p($l->t('Enable Passwords Nightly Builds')); ?> (Experimental)</label>
+            <input id="passwords-nightly-updates" name="nightly-updates" data-setting="nightly_updates" type="checkbox" <?=$_['nightlyUpdates'] ? 'checked':''?>>
         </div>
     </form>
 

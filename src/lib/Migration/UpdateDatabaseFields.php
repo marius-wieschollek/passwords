@@ -9,21 +9,32 @@ namespace OCA\Passwords\Migration;
 
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\DB\ISchemaWrapper;
-//use OCP\Migration\IMigrationStep;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
+//use OCP\Migration\IMigrationStep;
+
 /**
- * Class CreateCustomFields
+ * Class UpdateDatabaseFields
  *
  * @package OCA\Passwords\Migration
- * @TODO Use IMigrationStep after dropping NC 12.x
+ * @TODO    Use IMigrationStep after dropping NC 12.x
  */
-class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
+class UpdateDatabaseFields implements IRepairStep {
 
-    protected static $isMigrated = false;
+    /**
+     * @var array
+     */
+    protected static $migrationExecuted = [];
+
+    /**
+     * @var LoggingService
+     */
+    protected $logger;
 
     /**
      * @var ConfigurationService
@@ -31,19 +42,33 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
     protected $config;
 
     /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
 
     /**
-     * CreateCustomFields constructor.
+     * UpdateDatabaseFields constructor.
      *
-     * @param PasswordRevisionService $passwordRevisionService
+     * @param LoggingService          $logger
      * @param ConfigurationService    $config
+     * @param EnvironmentService      $environment
+     * @param PasswordRevisionService $passwordRevisionService
      */
-    public function __construct(PasswordRevisionService $passwordRevisionService, ConfigurationService $config) {
+    public function __construct(
+        LoggingService $logger,
+        ConfigurationService $config,
+        EnvironmentService $environment,
+        PasswordRevisionService $passwordRevisionService
+    ) {
+        $this->config                  = $config;
+        $this->logger                  = $logger;
+        $this->environment             = $environment;
         $this->passwordRevisionService = $passwordRevisionService;
-        $this->config = $config;
     }
 
     /**
@@ -53,7 +78,7 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
      * @since 9.1.0
      */
     public function getName() {
-        return 'Create Custom Fields for Passwords';
+        return 'Update Database Passwords Fields';
     }
 
     /**
@@ -66,9 +91,14 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        $version = $this->config->getAppValue('installed_version');
-        if(version_compare($version, '2018.5.0') < 0 && !self::$isMigrated) $this->createCustomFields($output);
-        self::$isMigrated = true;
+        if(!$this->environment->isGlobalMode()) {
+            $this->logger->error('User mode detected. Use ./occ upgrade to upgrade');
+
+            return;
+        }
+
+        $databaseVersion = intval($this->config->getAppValue('database_version', 0));
+        if($databaseVersion < 1) $this->executeMigration('createCustomFields', $output);
     }
 
     /**
@@ -108,6 +138,18 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
     }
 
     /**
+     * @param string  $name
+     * @param IOutput $output
+     */
+    protected function executeMigration(string $name, IOutput $output): void {
+        if(!isset(self::$migrationExecuted[ $name ]) || !self::$migrationExecuted[ $name ]) {
+            $this->{$name}($output);
+            self::$migrationExecuted[ $name ] = true;
+            $this->logger->info('Executed Migration: '.$name);
+        }
+    }
+
+    /**
      * @param IOutput $output
      *
      * @throws \Exception
@@ -117,7 +159,7 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
         $passwordRevisions = $this->passwordRevisionService->findAll(true);
 
         $count = count($passwordRevisions);
-        $output->info("Processing Revisions (total: {$count})");
+        $output->info("Adding Custom Fields to Revisions (total: {$count})");
         $output->startProgress($count);
         foreach($passwordRevisions as $passwordRevision) {
             try {
@@ -133,5 +175,15 @@ class CreateCustomFields implements /*IMigrationStep,*/ IRepairStep {
             $output->advance(1);
         }
         $output->finishProgress();
+        $this->setDatabaseVersion(1);
+    }
+
+    /**
+     * @param int $version
+     */
+    protected function setDatabaseVersion(int $version): void {
+        $databaseVersion = intval($this->config->getAppValue('database_version', 0));
+
+        if($databaseVersion < $version) $this->config->setAppValue('database_version', 1);
     }
 }

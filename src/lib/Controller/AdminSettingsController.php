@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller;
 
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -63,6 +64,8 @@ class AdminSettingsController extends Controller {
             $this->config->setAppValue($key, $value);
         }
 
+        if($key === 'nightly_updates') $this->setNightlyStatus($value);
+
         return new JSONResponse(['status' => 'ok']);
     }
 
@@ -83,5 +86,21 @@ class AdminSettingsController extends Controller {
         }
 
         return new JSONResponse(['status' => 'ok']);
+    }
+
+    /**
+     * @param $enabled
+     */
+    protected function setNightlyStatus($enabled): void {
+        $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
+
+        if($enabled) {
+            if(!in_array(Application::APP_NAME, $nightlyApps)) $nightlyApps[] = Application::APP_NAME;
+        } else {
+            $index = array_search(Application::APP_NAME, $nightlyApps);
+            if($index !== FALSE) unset($nightlyApps[$index]);
+        }
+
+        $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
     }
 }

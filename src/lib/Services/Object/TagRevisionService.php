@@ -11,6 +11,7 @@ use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
 
 /**
@@ -28,20 +29,20 @@ class TagRevisionService extends AbstractRevisionService {
     /**
      * TagRevisionService constructor.
      *
-     * @param null|string       $userId
-     * @param HookManager       $hookManager
-     * @param TagRevisionMapper $revisionMapper
-     * @param ValidationService $validationService
-     * @param EncryptionService $encryptionService
+     * @param HookManager        $hookManager
+     * @param EnvironmentService $environment
+     * @param TagRevisionMapper  $revisionMapper
+     * @param ValidationService  $validationService
+     * @param EncryptionService  $encryptionService
      */
     public function __construct(
-        ?string $userId,
         HookManager $hookManager,
+        EnvironmentService $environment,
         TagRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($userId, $hookManager, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
     }
 
     /**

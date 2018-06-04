@@ -141,6 +141,7 @@ class SearchManager {
             document.querySelector('form.searchbox').style.opacity = '1';
             document.getElementById('searchbox').value = '';
             this._status.available = true;
+            this.search(this._status.query);
         }
     }
 
