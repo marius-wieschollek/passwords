@@ -8,10 +8,10 @@
 use OCA\Passwords\AppInfo\Application;
 
 style(Application::APP_NAME, ['app']);
-script(Application::APP_NAME, ['Helper/compatibility']);
+script(Application::APP_NAME, ['Static/compatibility']);
 
 $linkHttps         = 'https://wikipedia.org/wiki/HTTPS';
-$linkDocumentation = 'https://docs.nextcloud.com/server/12/admin_manual/configuration_server/harden_server.html#use-https';
+$linkDocumentation = 'https://docs.nextcloud.com/server/13/admin_manual/configuration_server/harden_server.html#use-https';
 $linkCertificate   = 'https://letsencrypt.org/getting-started/';
 
 $title              = $l->t('HTTPS Required');
