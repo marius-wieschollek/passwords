@@ -103,7 +103,7 @@ class HandbookRenderer {
      */
     _renderLink(href, title, text, wrap, baseUrl, documentUrl) {
         let target = '_blank',
-            url    = new URL(href, href.substr(0,1) === '#' ? documentUrl:baseUrl);
+            url    = new URL(href, href.substr(0, 1) === '#' ? documentUrl:baseUrl);
 
         href = url.href;
         if(url.href.indexOf(documentUrl) !== -1 && url.hash.length) {
