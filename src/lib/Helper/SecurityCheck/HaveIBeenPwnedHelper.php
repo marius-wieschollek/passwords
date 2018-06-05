@@ -21,6 +21,8 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     const SERVICE_BASE_URL = 'https://api.pwnedpasswords.com/';
     const COOKIE_FILE      = 'nc_pw_hibp_api_cookies.txt';
 
+    protected $checkedRanges = [];
+
     /**
      * @param string $hash
      *
@@ -52,6 +54,12 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     protected function isHashInHibpDb(string $hash): bool {
         $range = substr($hash, 0, 5);
 
+        if(in_array($range, $this->checkedRanges)) {
+            $this->hashStatusCache[ $hash ] = true;
+
+            return false;
+        }
+
         $request  = new RequestHelper();
         $response = $request->setUrl(self::SERVICE_URL.$range)
                             ->setCookieJar($this->config->getTempDir().self::COOKIE_FILE)
@@ -62,6 +70,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
         $hashes = $this->processResponse($response, $range);
         $this->addHashToLocalDb($hash, $hashes);
+        $this->checkedRanges[] = $range;
 
         return in_array($hash, $hashes);
     }
@@ -88,7 +97,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         foreach($response as $line) {
             list($subhash, ) = explode(':', $line);
 
-            $currentHash = $range.$subhash;
+            $currentHash = $range.strtolower($subhash);
             $hashes[]    = $currentHash;
 
             $this->hashStatusCache[ $currentHash ] = false;
