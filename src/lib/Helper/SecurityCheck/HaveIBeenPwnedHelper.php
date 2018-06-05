@@ -68,31 +68,12 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
     /**
      * @param string $hash
-     *
-     * @throws \OCP\Files\NotFoundException
-     * @throws \OCP\Files\NotPermittedException
+     * @param array  $hashes
      */
     protected function addHashToLocalDb(string $hash, array $hashes): void {
-        $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
-
-        $data = [];
-        if($this->fileCacheService->hasFile($file)) {
-            $data = $this->fileCacheService->getFile($file)->getContent();
-            if($this->config->getAppValue(self::CONFIG_DB_ENCODING) === self::ENCODING_GZIP) $data = gzuncompress($data);
-            $data = json_decode($data, true);
-        }
-
+        $data = $this->readPasswordsFile($hash);
         $data = array_merge($data, $hashes);
-        $data = json_encode(array_unique($data));
-
-        // @TODO refactor this duplicate code in all security helpers
-        if(extension_loaded('zlib')) {
-            $data = gzcompress($data);
-            $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_GZIP);
-        } else {
-            $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_PLAIN);
-        }
-        $this->fileCacheService->putFile($file, $data);
+        $this->writePasswordsFile($hash, $data);
     }
 
     /**
@@ -105,7 +86,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         $response = explode("\n", $response);
         $hashes   = [];
         foreach($response as $line) {
-            list($subhash,) = explode(':', $line);
+            list($subhash, ) = explode(':', $line);
 
             $currentHash = $range.$subhash;
             $hashes[]    = $currentHash;

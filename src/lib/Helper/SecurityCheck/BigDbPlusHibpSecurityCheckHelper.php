@@ -57,6 +57,7 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @param string $hash
      *
      * @return bool
+     * @throws \Exception
      */
     public function isHashSecure(string $hash): bool {
         return $this->localSecurityCheck->isHashSecure($hash) && $this->hibpSecurityCheck->isHashSecure($hash);

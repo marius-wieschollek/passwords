@@ -164,14 +164,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      */
     protected function storeHashes(array $hashes): void {
         foreach($hashes as $key => $data) {
-            $data = json_encode(array_keys($data));
-            if(extension_loaded('zlib')) {
-                $data = gzcompress($data);
-                $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_GZIP);
-            } else {
-                $this->config->setAppValue(self::CONFIG_DB_ENCODING, self::ENCODING_PLAIN);
-            }
-            $this->fileCacheService->putFile("$key.json", $data);
+            $this->writePasswordsFile($key, array_keys($data));
         }
     }
 
