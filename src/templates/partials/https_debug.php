@@ -8,9 +8,11 @@
  * @var $_ array
  */
 
+$uid = \OC::$server->getUserSession()->getUser()->getUID();
+if(!\OC_User::isAdminUser($uid)) return;
+
 $config  = \OC::$server->getConfig();
 $request = \OC::$server->getRequest();
-
 ?>
 
 <div id="passwords-https-detection-details">
