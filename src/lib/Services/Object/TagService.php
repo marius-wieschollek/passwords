@@ -29,6 +29,7 @@ class TagService extends AbstractModelService {
      */
     protected $class = Tag::class;
 
+    /** @noinspection PhpMissingParentConstructorInspection */
     /**
      * TagService constructor.
      *
@@ -37,7 +38,9 @@ class TagService extends AbstractModelService {
      * @param EnvironmentService $environment
      */
     public function __construct(HookManager $hookManager, TagMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($hookManager, $mapper, $environment);
+        $this->userId      = $environment->getUserId();
+        $this->hookManager = $hookManager;
+        $this->mapper      = $mapper;
     }
 
     /**
