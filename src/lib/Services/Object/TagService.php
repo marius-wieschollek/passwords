@@ -17,7 +17,7 @@ use OCA\Passwords\Services\EnvironmentService;
  *
  * @package OCA\Passwords\Services\Object
  */
-class TagService extends UpdatedAbstractModelService {
+class TagService extends AbstractModelService {
 
     /**
      * @var TagMapper
@@ -29,6 +29,7 @@ class TagService extends UpdatedAbstractModelService {
      */
     protected $class = Tag::class;
 
+    /** @noinspection PhpMissingParentConstructorInspection */
     /**
      * TagService constructor.
      *
@@ -37,7 +38,13 @@ class TagService extends UpdatedAbstractModelService {
      * @param EnvironmentService $environment
      */
     public function __construct(HookManager $hookManager, TagMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($hookManager, $mapper, $environment);
+        /**
+         * This fixes the update issue 2018.5.2 => 2018.6.0
+         * @TODO remove in 2019.1.0
+         */
+        $this->userId      = $environment->getUserId();
+        $this->hookManager = $hookManager;
+        $this->mapper      = $mapper;
     }
 
     /**

@@ -10,7 +10,7 @@ namespace OCA\Passwords\Helper\User;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\Object\UpdatedAbstractModelService;
+use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
@@ -116,8 +116,8 @@ class DeleteUserDataHelper {
     }
 
     /**
-     * @param UpdatedAbstractModelService|ShareService|AbstractService $service
-     * @param string                                                   $userId
+     * @param AbstractModelService|ShareService|AbstractService $service
+     * @param string                                            $userId
      *
      * @throws \Exception
      */

@@ -20,7 +20,7 @@ use OCA\Passwords\Services\EnvironmentService;
  *
  * @package OCA\Passwords\Services
  */
-class FolderService extends UpdatedAbstractModelService {
+class FolderService extends AbstractModelService {
 
     const BASE_FOLDER_UUID = '00000000-0000-0000-0000-000000000000';
 

@@ -18,7 +18,7 @@ use OCA\Passwords\Services\EnvironmentService;
  *
  * @package OCA\Passwords\Services
  */
-class PasswordService extends UpdatedAbstractModelService {
+class PasswordService extends AbstractModelService {
 
     /**
      * @var PasswordMapper

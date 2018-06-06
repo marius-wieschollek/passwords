@@ -11,7 +11,7 @@ use OCA\Passwords\Db\AbstractModelEntity;
 use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
-use OCA\Passwords\Services\Object\UpdatedAbstractModelService;
+use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Http\JSONResponse;
@@ -25,7 +25,7 @@ use OCP\IRequest;
 abstract class AbstractObjectApiController extends AbstractApiController {
 
     /**
-     * @var UpdatedAbstractModelService
+     * @var AbstractModelService
      */
     protected $modelService;
 
@@ -52,15 +52,15 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     /**
      * AbstractObjectApiController constructor.
      *
-     * @param IRequest                    $request
-     * @param UpdatedAbstractModelService $modelService
-     * @param AbstractObjectHelper        $objectHelper
-     * @param ValidationService           $validationService
-     * @param AbstractRevisionService     $revisionService
+     * @param IRequest                $request
+     * @param AbstractModelService    $modelService
+     * @param AbstractObjectHelper    $objectHelper
+     * @param ValidationService       $validationService
+     * @param AbstractRevisionService $revisionService
      */
     public function __construct(
         IRequest $request,
-        UpdatedAbstractModelService $modelService,
+        AbstractModelService $modelService,
         AbstractObjectHelper $objectHelper,
         ValidationService $validationService,
         AbstractRevisionService $revisionService
