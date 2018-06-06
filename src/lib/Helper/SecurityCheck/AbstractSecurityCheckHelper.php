@@ -20,11 +20,9 @@ use OCA\Passwords\Services\LoggingService;
 abstract class AbstractSecurityCheckHelper {
 
     const PASSWORD_DB          = 'none';
-    const HASH_FILE_KEY_LENGTH = 2;
+    const HASH_FILE_KEY_LENGTH = 3;
     const CONFIG_DB_ENCODING   = 'passwords/localdb/encoding';
     const CONFIG_DB_TYPE       = 'passwords/localdb/type';
-    const ENCODING_GZIP        = 'gzip';
-    const ENCODING_PLAIN       = 'plain';
 
     /**
      * @var FileCacheService
@@ -58,7 +56,7 @@ abstract class AbstractSecurityCheckHelper {
         FileCacheService $fileCacheService,
         ConfigurationService $configurationService
     ) {
-        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
         $this->config           = $configurationService;
         $this->logger           = $logger;
     }
@@ -98,22 +96,8 @@ abstract class AbstractSecurityCheckHelper {
      */
     public function isHashSecure(string $hash): bool {
         if(!isset($this->hashStatusCache[ $hash ])) {
-            $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
-
-            if($this->fileCacheService->hasFile($file)) {
-                $data = $this->fileCacheService->getFile($file)->getContent();
-
-                if($this->config->getAppValue(self::CONFIG_DB_ENCODING) === self::ENCODING_GZIP) $data = gzuncompress($data);
-
-                $hashes = json_decode($data, true);
-                if(is_array($hashes)) {
-                    $this->hashStatusCache[ $hash ] = !in_array($hash, $hashes);
-                } else {
-                    $this->hashStatusCache[ $hash ] = true;
-                }
-            } else {
-                $this->hashStatusCache[ $hash ] = true;
-            }
+            $hashes = $this->readPasswordsFile($hash);
+            $this->hashStatusCache[ $hash ] = !in_array($hash, $hashes);
         }
 
         return $this->hashStatusCache[ $hash ];
@@ -128,6 +112,53 @@ abstract class AbstractSecurityCheckHelper {
         $installedType = $this->config->getAppValue(self::CONFIG_DB_TYPE);
 
         return $installedType != static::PASSWORD_DB;
+    }
+
+    /**
+     * @param string $hash
+     *
+     * @return array
+     */
+    protected function readPasswordsFile(string $hash): array {
+        $file = $this->getPasswordsFileName($hash);
+        if(!$this->fileCacheService->hasFile($file)) return [];
+
+        try {
+            $data = $this->fileCacheService->getFile($file)->getContent();
+            if(extension_loaded('zlib')) $data = gzuncompress($data);
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+
+            return [];
+        }
+
+        $data = json_decode($data, true);
+
+        return is_array($data) ? $data:[];
+    }
+
+    /**
+     * @param string $hash
+     * @param array  $hashes
+     */
+    protected function writePasswordsFile(string $hash, array $hashes): void {
+        $file = $this->getPasswordsFileName($hash);
+
+        $data = json_encode(array_unique($hashes));
+        if(extension_loaded('zlib')) $data = gzcompress($data);
+
+        $this->fileCacheService->putFile($file, $data);
+    }
+
+    /**
+     * @param string $hash
+     *
+     * @return string
+     */
+    protected function getPasswordsFileName(string $hash): string {
+        $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
+
+        return extension_loaded('zlib') ? $file.'.gz':$file;
     }
 
     /**

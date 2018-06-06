@@ -8,9 +8,11 @@
  * @var $_ array
  */
 
+$uid = \OC::$server->getUserSession()->getUser()->getUID();
+if(!\OC_User::isAdminUser($uid)) return;
+
 $config  = \OC::$server->getConfig();
 $request = \OC::$server->getRequest();
-
 ?>
 
 <div id="passwords-https-detection-details">
@@ -63,10 +65,14 @@ $request = \OC::$server->getRequest();
             <td>PHP $_SERVER['HTTP_X_FORWARDED_PROTO']</td>
             <td><?php p(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? $_SERVER['HTTP_X_FORWARDED_PROTO']:'not set') ?></td>
         </tr>
-        <tr>
-            <td>PHP $_SERVER['HTTP_X_FORWARDED_FOR']</td>
-            <td><?php p(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR']:'not set') ?></td>
-        </tr>
+        <?php
+        $headers = $config->getSystemValue('forwarded_for_headers', ['HTTP_X_FORWARDED_FOR']);
+        foreach($headers as $header): ?>
+            <tr>
+                <td>PHP $_SERVER['<?=$header?>']</td>
+                <td><?php p(isset($_SERVER[$header]) ? $_SERVER[$header]:'not set') ?></td>
+            </tr>
+        <?php endforeach; ?>
     </table>
 </div>
 
