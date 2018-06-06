@@ -40,7 +40,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * ... und vieles mehr
 ]]>
     </description>
-    <version>2018.6.1-BUILD</version>
+    <version>2018.6.2-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -82,10 +82,11 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
     </background-jobs>
     <repair-steps>
-        <live-migration>
+        <post-migration>
+            <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
             <step>OCA\Passwords\Migration\UpdateDatabaseFields</step>
             <step>OCA\Passwords\Migration\FixHaveIBeenPwnedApiError</step>
-        </live-migration>
+        </post-migration>
     </repair-steps>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>

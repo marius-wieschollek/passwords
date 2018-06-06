@@ -16,14 +16,15 @@ use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 
 /**
- * Class AbstractModelService
+ * Class UpdatedAbstractModelService
  *
  * @package OCA\AbstractParentEntitys\Services\Object
+ * @TODO The Updated* is supposed to fix an ugly issue in the Nextcloud updater. Rename to AbstractModelService in 2019.1.0
  */
-abstract class AbstractModelService extends AbstractService {
+abstract class UpdatedAbstractModelService extends AbstractService {
 
     /**
-     * AbstractModelService constructor.
+     * UpdatedAbstractModelService constructor.
      *
      * @param HookManager        $hookManager
      * @param AbstractMapper     $mapper

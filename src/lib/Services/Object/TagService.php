@@ -17,7 +17,7 @@ use OCA\Passwords\Services\EnvironmentService;
  *
  * @package OCA\Passwords\Services\Object
  */
-class TagService extends AbstractModelService {
+class TagService extends UpdatedAbstractModelService {
 
     /**
      * @var TagMapper
