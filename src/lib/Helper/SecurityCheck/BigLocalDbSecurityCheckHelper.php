@@ -96,7 +96,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
-     * This way to create the hashes takes only 115MB of ram.
+     * This way to create the hashes takes only 116MB of ram.
      * But it also needs 15x the time.
      *
      * @param string $txtFile
@@ -131,7 +131,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
-     * This way to create the hashes takes up to 1.625GB of ram.
+     * This way to create the hashes takes up to 1.650GB of ram.
      * It is also quite fast.
      *
      * @param string $txtFile
