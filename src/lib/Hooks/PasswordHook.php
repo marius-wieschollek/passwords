@@ -49,10 +49,11 @@ class PasswordHook {
      * @var TagRevisionService
      */
     protected $tagRevisionService;
+
     /**
      * @var HelperService
      */
-    private $helperService;
+    protected $helperService;
 
     /**
      * PasswordHook constructor.
@@ -117,7 +118,7 @@ class PasswordHook {
      * @param Password $password
      *
      * @throws \Exception
-    // @TODO delete shares
+     * // @TODO delete shares
      */
     public function preDelete(Password $password): void {
         $relations = $this->relationService->findByPassword($password->getUuid());

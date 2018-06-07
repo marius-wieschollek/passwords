@@ -1,3 +1,6 @@
+#### 2018.6.3 - Bugfix Release
+- Fixed codebase incompatibility in appstore update
+
 #### 2018.6.0 - Feature Release
 - Added Czech translation
 - Added Ajax cronjob support
