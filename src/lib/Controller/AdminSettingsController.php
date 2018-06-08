@@ -97,8 +97,8 @@ class AdminSettingsController extends Controller {
         if($enabled) {
             if(!in_array(Application::APP_NAME, $nightlyApps)) $nightlyApps[] = Application::APP_NAME;
         } else {
-            $i = array_search(Application::APP_NAME, $nightlyApps);
-            if($i !== FALSE) unset($nightlyApps[$i]);
+            $index = array_search(Application::APP_NAME, $nightlyApps);
+            if($index !== FALSE) unset($nightlyApps[$index]);
         }
 
         $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);

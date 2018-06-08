@@ -1,3 +1,16 @@
+#### 2018.7.0 - Feature Release
+- Added haveibeenpwned V2 support
+
+#### 2018.6.3 - Bugfix Release
+- Fixed codebase incompatibility in appstore update
+
+#### 2018.6.0 - Feature Release
+- Added Czech translation
+- Added Ajax cronjob support
+- Fixed HIBP Api
+- Fixed customFields upgrade
+- Fxied password update error in legacy api
+
 #### 2018.5.2 - Bugfix Release
 - Fixed password creation error in the legacy api
 
