@@ -1,12 +1,11 @@
 FROM nextcloud:fpm
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update -y && \
     apt-get install -y \
     libmagickwand-6.q16-dev \
-    libXrender1 \
+    libxrender1 \
     libfontconfig1 \
-    libXext6 \
+    libxext6 \
     wbritish \
     wamerican \
     wngerman \
@@ -17,6 +16,12 @@ RUN apt-get update -y && \
     msmtp \
     wget \
     tar \
+    gnupg && \
+    apt-get clean
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get update -y && \
+    apt-get install -y \
     nodejs && \
     apt-get clean
 
