@@ -143,6 +143,7 @@ class Application extends App {
     }
 
     /**
+     * @throws \OCP\AppFramework\QueryException
      */
     protected function registerInternalHooks(): void {
         $container = $this->getContainer();
@@ -198,8 +199,7 @@ class Application extends App {
      *
      */
     protected function enableNightlyUpdates(): void {
-        if(
-            $this->getContainer()->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
+        if($this->getContainer()->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
             !class_exists('\OC\App\AppStore\Fetcher\AppFetcher', false)) {
             require_once __DIR__.'/../Plugins/NighltyAppFetcher.php';
         }

@@ -1,3 +1,6 @@
+#### 2018.7.0 - Feature Release
+- Added haveibeenpwned V2 support
+
 #### 2018.6.3 - Bugfix Release
 - Fixed codebase incompatibility in appstore update
 
