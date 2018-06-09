@@ -18,7 +18,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
 (function() {
     let isLoaded     = false,
-        loadInterval = null;
+        loadInterval = null,
+        isLoggedIn   = false;
 
     function initApp() {
         let section = SettingsManager.get('client.ui.section.default');
@@ -29,6 +30,14 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 {path: '*', redirect: {name: section.capitalize()}}
             ]
         );
+
+        router.beforeEach((to, from, next) => {
+            if(!isLoggedIn && to.name !== 'Authorize') {
+                next({path:'/authorize'});
+                isLoggedIn = true;
+            }
+            next();
+        });
 
         new Vue(App);
     }
