@@ -124,7 +124,7 @@
 
         computed: {
             getHomeIcon() {
-                return API.baseUrl + 'core/img/places/home.svg';
+                return API.config.baseUrl + 'core/img/places/home.svg';
             },
             getBaseRoute() {
                 let route = this.$route.path;

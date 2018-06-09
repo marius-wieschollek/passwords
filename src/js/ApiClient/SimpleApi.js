@@ -1,32 +1,18 @@
-import Encryption from './Encryption';
-
 export default class SimpleApi {
-    get encryption() {
-        return this._encryption;
-    }
-
     get headers() {
         return this._headers;
     }
 
-    get endpoint() {
-        return this._endpoint;
-    }
-
-    get debug() {
-        return this._debug;
+    get config() {
+        return this._config;
     }
 
     /**
      * SimpleApi Constructor
-     *
-     * @param debug
      */
-    constructor(debug = false) {
-        this._debug = debug;
-
+    constructor() {
+        this._config = {};
         this._headers = {};
-        this._encryption = new Encryption();
         this._paths = {
             'tag.list'            : 'api/1.0/tag/list',
             'tag.find'            : 'api/1.0/tag/find',
@@ -70,8 +56,7 @@ export default class SimpleApi {
             'authorisation.login' : 'api/1.0/authorisation/login',
             'authorisation.logout': 'api/1.0/authorisation/logout',
             'authorisation.update': 'api/1.0/authorisation/update',
-            'account.reset'       : 'api/1.0/account/reset',
-            'service.resetAccount': 'api/1.0/service/x-reset-user-account',
+            'account.reset'       : 'api/1.0/service/x-reset-user-account',
             'service.coffee'      : 'api/1.0/service/coffee',
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
@@ -81,26 +66,66 @@ export default class SimpleApi {
 
     /**
      *
-     * @param baseUrl
-     * @param username
-     * @param password
-     */
-    login(baseUrl, username = null, password = null) {
-        if(baseUrl.substr(0, 5) !== 'https') throw new Error('HTTPS required for api');
-
-        this._endpoint = baseUrl;
-        if(username !== null && password !== null) {
-            this._headers.Authorization = `Basic ${btoa(`${username}:${password}`)}`;
-        }
-    }
-
-    /**
-     *
      * @param numeric
      * @returns {*}
      */
     static getClientVersion(numeric = false) {
-        return numeric ? 20:'0.2.0';
+        return numeric ? 30:'0.3.0';
+    }
+
+    /**
+     * @param config
+     */
+    initialize(config = {}) {
+        this._config = config;
+        if(config.apiUrl.substr(0, 5) !== 'https') throw new Error('HTTPS required for api');
+
+        this._headers = {};
+        if(config.headers) this._headers = config.headers;
+
+        if(config.user !== null && config.password !== null) {
+            this._headers.Authorization = `Basic ${btoa(`${config.user}:${config.password}`)}`;
+        } else {
+            throw new Error('Api username or password missing');
+        }
+    }
+
+
+
+    /**
+     * Authorisation
+     */
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    getAuthorisationInfo() {
+        return this._createRequest('authorisation.info');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    login() {
+        return this._createRequest('authorisation.login');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    logout() {
+        return this._createRequest('authorisation.logout');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    updateAuthorisationInfo() {
+        return this._createRequest('authorisation.update');
     }
 
 
@@ -114,8 +139,7 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async createPassword(data = {}) {
-        data.hash = await this._encryption.getHash(data.password);
+    createPassword(data = {}) {
         return this._createRequest('password.create', data);
     }
 
@@ -136,8 +160,7 @@ export default class SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    async updatePassword(data = {}) {
-        data.hash = await this._encryption.getHash(data.password);
+    updatePassword(data = {}) {
         return this._createRequest('password.update', data, 'PATCH');
     }
 
@@ -488,7 +511,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     resetUserAccount(password) {
-        return this._createRequest('service.resetAccount', {password});
+        return this._createRequest('account.reset', {password});
     }
 
     /**
@@ -510,7 +533,7 @@ export default class SimpleApi {
      * @returns {*}
      */
     getAvatarUrl(user, size = 32) {
-        return this._endpoint + SimpleApi.processUrl(this._paths['service.avatar'], {user, size});
+        return this._config.apiUrl + SimpleApi.processUrl(this._paths['service.avatar'], {user, size});
     }
 
     /**
@@ -534,7 +557,7 @@ export default class SimpleApi {
      */
     getFaviconUrl(domain, size = 32) {
         if(domain === null || domain.length === 0) domain = 'default';
-        return this._endpoint + SimpleApi.processUrl(this._paths['service.favicon'], {domain, size});
+        return this._config.apiUrl + SimpleApi.processUrl(this._paths['service.favicon'], {domain, size});
     }
 
     /**
@@ -567,7 +590,7 @@ export default class SimpleApi {
      */
     getPreviewUrl(domain, view = 'desktop', width = '640', height = '360...') {
         if(domain === null || domain.length === 0) domain = 'default';
-        return this._endpoint + SimpleApi.processUrl(
+        return this._config.apiUrl + SimpleApi.processUrl(
             this._paths['service.preview'],
             {domain, view, width, height}
         );
@@ -611,7 +634,7 @@ export default class SimpleApi {
         }
 
         return new Promise((resolve, reject) => {
-            fetch(new Request(this._endpoint + path, options))
+            fetch(new Request(this._config.apiUrl + path, options))
                 .then((response) => {
                     let contentType = response.headers.get('content-type');
                     if(contentType && contentType.indexOf('application/json') !== -1) {
@@ -620,25 +643,25 @@ export default class SimpleApi {
                                     if(response.ok) {
                                         resolve(d);
                                     } else {
-                                        if(this._debug) console.error('Request failed', response, d);
+                                        if(this._config.debug) console.error('Request failed', response, d);
                                         reject(d);
                                     }
                                 })
                                 .catch((response) => {
-                                    if(this._debug) console.error('Decoding response failed', response);
+                                    if(this._config.debug) console.error('Decoding response failed', response);
                                     reject(response);
                                 });
                     } else {
                         if(response.ok) {
                             resolve(response.blob());
                         } else {
-                            if(this._debug) console.error('Request failed', response);
+                            if(this._config.debug) console.error('Request failed', response);
                             reject(response);
                         }
                     }
                 })
                 .catch((response) => {
-                    if(this._debug) console.error('Request failed', response);
+                    if(this._config.debug) console.error('Request failed', response);
                     reject(response);
                 });
         });

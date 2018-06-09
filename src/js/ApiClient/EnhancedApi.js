@@ -2,39 +2,25 @@ import SimpleApi from './SimpleApi';
 
 export default class EnhancedApi extends SimpleApi {
 
-    get baseUrl() {
-        return this._baseUrl;
-    }
-
     /**
      *
      * @param numeric
      * @returns {*}
      */
     static getClientVersion(numeric = false) {
-        return numeric ? 20:'0.2.0';
+        return numeric ? 30:'0.3.0';
     }
 
     /**
      *
-     * @param baseUrl
-     * @param username
-     * @param password
+     * @param config
      */
-    login(baseUrl, username = null, password = null) {
-        super.login(`${baseUrl}index.php/apps/passwords/`, username, password);
+    initialize(config = {}) {
+        if(!config.folderIcon) config.folderIcon = `${config.baseUrl}core/img/filetypes/folder.svg`;
+        if(!config.apiUrl) config.apiUrl = `${config.baseUrl}index.php/apps/passwords/`;
+        if(!config.encryption) throw new Error('Encryption support is missing');
 
-        this._baseUrl = baseUrl;
-        this._folderIcon = `${baseUrl}core/img/filetypes/folder.svg`;
-        if(username !== null && password !== null) {
-            if(window.localStorage.pwFolderIcon) this._folderIcon = window.localStorage.pwFolderIcon;
-
-            this.getSetting('server.theme.folder.icon')
-                .then((url) => {
-                    window.localStorage.pwFolderIcon = url;
-                    this._folderIcon = url;
-                });
-        }
+        super.initialize(config);
     }
 
 
@@ -48,7 +34,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    createPassword(data = {}) {
+    async createPassword(data = {}) {
         let object = EnhancedApi._cloneObject(data);
 
         try {
@@ -58,9 +44,10 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
+        object.hash = await this._config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
-        return super.createPassword(object);
+        return await super.createPassword(object);
     }
 
     /**
@@ -70,7 +57,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param data
      * @returns {Promise}
      */
-    updatePassword(data = {}) {
+    async updatePassword(data = {}) {
         if(!data.id) return this.createPassword(data);
         let object = EnhancedApi._cloneObject(data);
 
@@ -81,9 +68,10 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
+        object.hash = await this._config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
-        return super.updatePassword(object);
+        return await super.updatePassword(object);
     }
 
     /**
@@ -761,7 +749,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     _processFolder(folder) {
         folder.type = 'folder';
-        folder.icon = this._folderIcon;
+        folder.icon = this._config.folderIcon;
         if(folder.folders) {
             folder.folders = this._processFolderList(folder.folders);
         }

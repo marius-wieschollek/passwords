@@ -4,6 +4,7 @@ import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import SectionAll from '@vue/Section/All';
 import Messages from '@js/Classes/Messages';
+import Encryption from '@js/ApiClient/Encryption';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsManager from '@js/Manager/SettingsManager';
 import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
@@ -43,7 +44,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         } else {
             baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
         }
-        API.login(baseUrl, user, password);
+
+        API.initialize({baseUrl, user, password, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
     }
 
     async function load() {
