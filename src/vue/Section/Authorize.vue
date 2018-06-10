@@ -4,7 +4,7 @@
         <form id="authorize-window" @submit="submitLogin">
             <div class="passwords">
                 <input type="password" placeholder="Password" v-model="password" required>
-                <input type="password" placeholder="Token" v-model="token" required>
+                <input type="password" placeholder="Token" v-model="token" required v-if="false">
             </div>
             <input type="submit" value="Login">
         </form>
@@ -58,6 +58,10 @@
             display : none !important;
         }
 
+        #content-wrapper {
+            padding-top: 0;
+        }
+
         #app-content {
             position    : fixed;
             top         : 0;
@@ -81,15 +85,17 @@
 
                 &[type=password] {
                     margin: 0;
-                    box-shadow: 0 1px 0 #0000001a inset;
+                    box-shadow: 0 1px 0 transparentize($color-black, 0.9) inset;
 
                     &:first-of-type {
                         box-shadow: none;
-                        border-radius: 0.25rem 0.25rem 0 0;
+                        border-top-left-radius: 0.25rem;
+                        border-top-right-radius: 0.25rem;
                     }
 
                     &:last-of-type {
-                        border-radius: 0 0 0.25rem 0.25rem;
+                        border-bottom-left-radius: 0.25rem;
+                        border-bottom-right-radius: 0.25rem;
                     }
                 }
 
@@ -97,10 +103,15 @@
                     margin-top: 1rem;
                     border: 1px solid #fff;
                     color: #fff;
-                    background-color: #00000080 !important;
+                    background-color: transparentize($color-black, 0.5);
                     background-image: url(/core/img/actions/confirm-white.svg?v=2);
                     background-position: right 16px center;
                     background-repeat: no-repeat;
+
+                    &:hover,
+                    &:active {
+                        background-color: transparentize($color-black, 0.25);
+                    }
                 }
             }
         }
