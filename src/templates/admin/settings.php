@@ -39,16 +39,21 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
+    <?php if(!$_['support']['https']): ?>
+        <div class="message error">
+            <?php p($l->t('Passwords requires HTTPS.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
     <?php if(!$_['support']['cron']): ?>
         <div class="message warn">
             <?php p($l->t('Using ajax background jobs is not recommended and might cause issues.')); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if(!$_['support']['https']): ?>
-        <div class="message error">
-            <?php p($l->t('Passwords requires HTTPS.')); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+    <?php if($_['support']['wkhtml']): ?>
+        <div class="message warn">
+            <?php p($l->t('Generating previews with WKHTML is deprecated and will be removed in version 2019.1.0.')); ?>
         </div>
     <?php endif; ?>
 

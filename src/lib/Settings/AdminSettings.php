@@ -319,9 +319,10 @@ class AdminSettings implements ISettings {
      */
     protected function getPlatformSupport(): array {
         return [
-            'php'   => PHP_VERSION_ID >= 70100,
-            'cron'  => BackgroundJob::getExecutionType() !== 'ajax',
-            'https' => \OC::$server->getRequest()->getHttpProtocol() !== 'https'
+            'php'    => PHP_VERSION_ID >= 70100,
+            'cron'   => BackgroundJob::getExecutionType() !== 'ajax',
+            'https'  => \OC::$server->getRequest()->getHttpProtocol() !== 'https',
+            'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML
         ];
     }
 
