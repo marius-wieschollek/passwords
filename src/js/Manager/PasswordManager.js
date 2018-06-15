@@ -4,7 +4,6 @@ import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
-import CreateDialog from '@vue/Dialog/CreatePassword.vue';
 
 /**
  *
@@ -18,17 +17,21 @@ class PasswordManager {
      * @returns {Promise}
      */
     createPassword(folder = null, tag = null) {
-        return new Promise((resolve, reject) => {
-            let PwCreateDialog = Vue.extend(CreateDialog),
-                DialogWindow   = new PwCreateDialog().$mount('#app-popup div');
+        return new Promise(async (resolve, reject) => {
+            let properties = {},
+                _success   = (p) => {
+                    this.createPasswordFromData(p)
+                        .then(resolve)
+                        .catch(reject);
+                };
 
-            if(folder) DialogWindow.password.folder = folder;
-            if(tag) DialogWindow.password.tags = [{id: tag}];
-            DialogWindow._success = (p) => {
-                this.createPasswordFromData(p)
-                    .then(resolve)
-                    .catch(reject);
-            };
+            if(folder) properties.folder = folder;
+            if(tag) properties.tags = [{id: tag}];
+
+            let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
+                PwCreateDialog = Vue.extend(PasswordDialog.default);
+
+            new PwCreateDialog({propsData: {properties,_success}}).$mount('#app-popup div');
         });
     }
 
@@ -65,12 +68,12 @@ class PasswordManager {
      * @returns {Promise}
      */
     editPassword(password) {
-        return new Promise((resolve, reject) => {
-            let PwCreateDialog = Vue.extend(CreateDialog),
-                DialogWindow = new PwCreateDialog().$mount('#app-popup div');
+        return new Promise(async (resolve, reject) => {
+            let propsData      = {properties: Utility.cloneObject(password), title: 'Edit password'},
+                PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
+                PwCreateDialog = Vue.extend(PasswordDialog.default),
+                DialogWindow   = new PwCreateDialog({propsData}).$mount('#app-popup div');
 
-            DialogWindow.title = 'Edit password';
-            DialogWindow.password = Utility.cloneObject(password);
             DialogWindow._success = (p) => {
                 p = Utility.mergeObject(password, p);
                 if(!p.label) EnhancedApi._generatePasswordTitle(p);

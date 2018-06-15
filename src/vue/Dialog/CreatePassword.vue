@@ -73,23 +73,35 @@
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
+        components: {
+            Foldout,
+            Translate,
+            CustomFields
+        },
+
+        props: {
+            title: {
+                type: String,
+                'default': 'Create password',
+            },
+            properties: {
+                type: Object
+            },
+            _success: {
+                type: Function
+            }
+        },
+
         data() {
+            let password = Object.assign({cseType: 'none', notes: '', customFields: {}}, this.properties);
             return {
-                title       : 'Create password',
                 notesOpen   : window.innerWidth > 641,
                 showPassword: false,
                 showLoader  : false,
                 simplemde   : null,
                 generator   : {numbers: undefined, special: undefined, active: false},
-                password    : {cseType: 'none', notes: '', customFields: {}},
-                _success    : null
+                password
             };
-        },
-
-        components: {
-            Foldout,
-            Translate,
-            CustomFields
         },
 
         mounted() {
