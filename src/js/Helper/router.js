@@ -54,7 +54,7 @@ let router = new Router(
             {name: 'Search', path: '/search/:query?', components: {main: SectionSearch}},
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
-            {name: 'Authorize', path: '/authorize', components: {main: SectionAuthorize}},
+            {name: 'Authorize', path: '/authorize/:target?', components: {main: SectionAuthorize}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},
             {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}}
         ]

@@ -32,7 +32,6 @@
 
         computed: {
             getStyle() {
-                console.log(SettingsManager.get('server.theme.background'));
                 return {
                     'background-color': SettingsManager.get('server.theme.color'),
                     'background-image': `url(${SettingsManager.get('server.theme.background')})`
@@ -42,7 +41,14 @@
 
         methods: {
             submitLogin() {
-                this.$router.push({path:'/'})
+                let target = this.$route.params.target;
+                if(target) {
+                    target = JSON.parse(atob(target));
+                    this.$router.push(target)
+                } else {
+                    this.$router.push({path:'/'})
+                }
+
             }
         }
     };

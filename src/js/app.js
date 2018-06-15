@@ -33,7 +33,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
         router.beforeEach((to, from, next) => {
             if(!isLoggedIn && to.name !== 'Authorize') {
-                next({path:'/authorize'});
+                let target = btoa(JSON.stringify(to));
+                next({name:'Authorize', params: {target}});
                 isLoggedIn = true;
             }
             next();
