@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Vue from 'vue';
 import Localisation from '@js/Classes/Localisation';
 
 class Messages {
@@ -94,27 +95,16 @@ class Messages {
      * @returns {Promise<any>}
      */
     form(form, title = 'Form', message = '') {
-        let html = '',
-            id   = `passwords-form-${Math.round(Math.random() * 10)}`;
-        for(let name in form) {
-            if(!form.hasOwnProperty(name)) continue;
-            let field = form[name],
-                value = field.value ? field.value:'',
-                type  = field.type ? field.type:'text',
-                label = Messages._translate(field.label ? field.label:name.capitalize());
+        let id   = `passwords-form-${Math.round(Math.random() * 10)}`,
+            html = `<div id="${id}"></div>`;
 
-            html += `<label>${label}</label><input type="${type}" value="${value}" name="${name}" id="pw-field-${name}">`;
-        }
+        return new Promise(async (resolve, reject) => {
 
-        if(message.length !== 0) message = `<div class="message">${Messages._translate(message)}</div>`;
-        html = `<form class="passwords-form" id="${id}">${message.replace('\n', '<br>')}${html}</form>`;
-
-        return new Promise((resolve, reject) => {
-            title = Messages._translate(title);
-            let callback = function(success) {
+            let callback = (success) => {
                 if(success) {
-                    let serialized = $(`#${id}`).serializeArray(),
+                    let serialized = $(`#${id} form`).serializeArray(),
                         data       = {};
+                    console.log(Form.fields);
 
                     for(let i = 0; i < serialized.length; i++) {
                         let field = serialized[i];
@@ -128,7 +118,13 @@ class Messages {
                 }
             };
 
+            title = Messages._translate(title);
             OC.dialogs.confirmHtml(html, title, callback, true);
+
+
+            let FormTemplate = await import(/* webpackChunkName: "Form" */ '@vue/Components/Form.vue'),
+                FormComponent = Vue.extend(FormTemplate.default),
+                Form = new FormComponent({propsData: {form,message}}).$mount(`#${id}`);
         });
     }
 
