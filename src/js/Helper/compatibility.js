@@ -29,12 +29,7 @@ function showBrowserCompatibilityWarning() {
 }
 
 function checkSystem() {
-    var link = document.getElementById('pw-link-https');
-    if(link) {
-        link.setAttribute('href', 'https://' + location.host + location.pathname);
-    } else if(!isCompatibleBrowser()) {
-        showBrowserCompatibilityWarning();
-    }
+    if(!isCompatibleBrowser()) showBrowserCompatibilityWarning();
 }
 
 window.addEventListener('load', checkSystem, false);

@@ -8,28 +8,49 @@
 use OCA\Passwords\AppInfo\Application;
 
 style(Application::APP_NAME, ['app']);
-script(Application::APP_NAME, ['Static/compatibility']);
 
-$linkHttps         = 'https://wikipedia.org/wiki/HTTPS';
-$linkDocumentation = 'https://docs.nextcloud.com/server/13/admin_manual/configuration_server/harden_server.html#use-https';
-$linkCertificate   = 'https://letsencrypt.org/getting-started/';
+$linkHttps  = 'https://wikipedia.org/wiki/HTTPS';
+$linkReload = str_replace('http://', 'https://', \OC::$server->getURLGenerator()->linkToRouteAbsolute('passwords.page.index'));
 
-$title              = $l->t('HTTPS Required');
-$reloadPage         = $l->t('reload this page');
-$readDocumentation  = $l->t('documentation');
-$messageHead        = $l->t('This application requires %s in order to work safely.', ["<a href=\"{$linkHttps}\" target=\"_blank\">HTTPS</a>"]);
-$messageConfigure   = $l->t('Consult the %s to configure Nextcloud correctly.', ["<a href=\"{$linkDocumentation}\" target=\"_blank\">{$readDocumentation}</a>"]);
-$messageCertificate = $l->t('If you do not have a HTTPS certificate, get one for free from %s.', ["<a href=\"{$linkCertificate}\" target=\"_blank\">Let's Encrypt</a>"]);
-$messageReload      = $l->t('If you think your server has HTTPS enabled, you can try to %s with HTTPS.', ["<a id=\"pw-link-https\" href=\"?\">{$reloadPage}</a>"]);
+$uid     = \OC::$server->getUserSession()->getUser()->getUID();
+$isAdmin = \OC_User::isAdminUser($uid);
+
+$title         = $l->t('HTTPS Required');
+$reloadPage    = $l->t('reload this page');
+$messageHead   = $l->t('This application requires %s in order to work safely.', ["<a href=\"{$linkHttps}\" target=\"_blank\">HTTPS</a>"]);
+$messageReload = $l->t('You can try to %s the page with HTTPS.', ["<a href=\"{$linkReload}\">{$reloadPage}</a>"]);
+
+if($isAdmin) {
+    $linkDocumentation = 'https://docs.nextcloud.com/server/13/admin_manual/configuration_server/harden_server.html#use-https';
+    $linkCertificate   = 'https://letsencrypt.org/getting-started/';
+    $linkSettings      = \OC::$server->getURLGenerator()->getAbsoluteURL('/index.php/settings/admin/passwords#passwords-https-detection');
+
+    $readDocumentation  = $l->t('documentation');
+    $messageDebugging   = $l->t('Enable %s to troubleshoot this error.', ["<a href=\"{$linkSettings}\" target=\"_blank\">HTTPS debugging</a>"]);
+    $messageConfigure   = $l->t('Consult the %s to configure Nextcloud correctly.', ["<a href=\"{$linkDocumentation}\" target=\"_blank\">{$readDocumentation}</a>"]);
+    $messageCertificate = $l->t('If you do not have a HTTPS certificate, get one for free from %s.', ["<a href=\"{$linkCertificate}\" target=\"_blank\">Let's Encrypt</a>"]);
+} else {
+    $messageAdmin = $l->t('If this problem persists, you should contact your administrator.');
+}
+
 ?>
 <div id="main">
     <div class="passwords-browser-compatibility">
-        <h1 class="title"><?php p($title);?></h1>
+        <h1 class="title"><?php p($title); ?></h1>
         <div class="message">
             <b><?php print_unescaped($messageHead); ?></b>
-            <br><br><?php print_unescaped($messageConfigure); ?>
-            <?php print_unescaped($messageCertificate); ?>
-            <br><br><?php print_unescaped($messageReload); ?>
+
+            <br><br><?php print_unescaped($messageReload); ?><br>
+
+            <?php if($isAdmin) : ?>
+                <ul>
+                    <li><?php print_unescaped($messageDebugging); ?></li>
+                    <li><?php print_unescaped($messageConfigure); ?></li>
+                    <li><?php print_unescaped($messageCertificate); ?></li>
+                </ul>
+            <?php else: ?>
+                <br><?php print_unescaped($messageAdmin); ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
