@@ -23,6 +23,7 @@
                 text-decoration : underline;
             }
         }
+
         .title {
             background     : $color-red-dark;
             color          : $color-white;
@@ -30,6 +31,7 @@
             text-transform : uppercase;
             font-weight    : bold;
         }
+
         .browser {
             margin    : 25px auto 0;
             padding   : 25px 0;
@@ -57,6 +59,13 @@
                     float  : none;
                 }
             }
+        }
+
+        ul {
+            display    : inline-block;
+            text-align : left;
+            margin-top : 2em;
+            list-style : disc;
         }
     }
 }
