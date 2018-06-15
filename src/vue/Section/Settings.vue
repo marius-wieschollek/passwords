@@ -125,9 +125,13 @@
                 <section class="tests" v-if="nightly">
                     <translate tag="h1" say="Field tests"/>
 
-                    <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
-                    <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
+                    <translate tag="label" for="setting-test-encryption" say="Test Encryption"/>
+                    <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
                     <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
+
+                    <translate tag="label" for="setting-test-cse" say="Client Side Encryption"/>
+                    <input type="button" id="setting-test-cse" value="Enable" @click="toggleCSE($event)">
+                    <settings-help text="Use client side encryption for your password database"/>
                 </section>
                 <section class="danger">
                     <translate tag="h1" say="Danger Zone"/>
@@ -183,11 +187,14 @@
                     if(SettingsManager.get(i) !== value) SettingsManager.set(i, value);
                 }
             },
-            async runTests($event) {
+            async testEncryption($event) {
                 $event.target.setAttribute('disabled', 'disabled');
                 let result = await EncryptionTestHelper.runTests();
                 if(result) Messages.info('The client side encryption test completed successfully on this browser', 'Test successful');
                 $event.target.removeAttribute('disabled');
+            },
+            toggleCSE() {
+                Messages.form({password:{type:'password'},passwordConfirm:{type:'password'},save:{type:'checkbox'}});
             },
             resetSettingsAction() {
                 Messages.confirm('This will reset all settings to their defaults. Do you want to continue?', 'Reset all settings')
