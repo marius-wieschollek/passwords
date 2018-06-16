@@ -10,11 +10,11 @@ class Messages {
      */
     notification(notification) {
         return new Promise((resolve) => {
-            let $element = OC.Notification.show(Messages._translate(notification));
+            let $element = OC.Notification.show(Localisation.translateArray(notification));
 
             setTimeout(() => {
                 OC.Notification.hide($element);
-                resolve();
+                resolve({});
             }, 10000);
         });
     }
@@ -27,9 +27,9 @@ class Messages {
      */
     alert(message, title = 'Alert') {
         return new Promise((resolve) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
-            let callback = function() { resolve(); };
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
+            let callback = function() { resolve({}); };
 
             OC.dialogs.alert(message, title, callback, true);
         });
@@ -43,9 +43,9 @@ class Messages {
      */
     info(message, title = 'Info') {
         return new Promise((resolve, reject) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
-            let callback = function(success) { success ? resolve():reject(); };
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
+            let callback = function(success) { success ? resolve({}):reject({}); };
 
             OC.dialogs.info(message, title, callback, true);
         });
@@ -58,9 +58,9 @@ class Messages {
      */
     confirm(message, title = 'Confirm') {
         return new Promise((resolve, reject) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
-            let callback = function(success) { success ? resolve():reject(); };
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
+            let callback = function(success) { success ? resolve({}):reject({}); };
 
             OC.dialogs.confirm(message, title, callback, true);
         });
@@ -76,14 +76,12 @@ class Messages {
      */
     prompt(message, title = 'Prompt', value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
             let callback = function(success, value) { success ? resolve(value):reject(value); };
 
             OC.dialogs.prompt('', title, callback, true, message, isPassword);
-            if(value !== null) {
-                this._setDialogValue(value);
-            }
+            if(value !== null) this._setDialogValue(value);
         });
     }
 
@@ -99,36 +97,47 @@ class Messages {
             html = `<div id="${id}"></div>`;
 
         return new Promise(async (resolve, reject) => {
-
             let callback = (success) => {
                 if(success) {
                     let data = Form.getFormData();
                     if(!data) throw new Error('Invalid Form Data');
 
-                    console.log(data);
-
                     $('.oc-dialog, .oc-dialog-dim').remove();
                     resolve(data);
                 } else {
-                    reject();
+                    reject({});
                 }
             };
 
-            title = Messages._translate(title);
+            title = Localisation.translateArray(title);
             OC.dialogs.confirmHtml(html, title, callback, true);
 
-            let FormTemplate = await import(/* webpackChunkName: "Form" */ '@vue/Components/Form.vue'),
+            let FormTemplate  = await import(/* webpackChunkName: "Form" */ '@vue/Components/Form.vue'),
                 FormComponent = Vue.extend(FormTemplate.default),
-                Form = new FormComponent({propsData: {form,message,id}}).$mount(`#${id}`);
+                Form          = new FormComponent({propsData: {form, message, id}});
+
+            this._loadForm(id, Form);
         });
     }
 
+    /**
+     *
+     * @param title
+     * @param mime
+     * @param multiselect
+     * @returns {Promise<any>}
+     */
     filePicker(title = 'Pick a file', mime, multiselect = false) {
         return new Promise((resolve) => {
             OC.dialogs.filepicker(title, (e, f) => {resolve(e, f);}, multiselect, mime, true, 1);
         });
     }
 
+    /**
+     *
+     * @param title
+     * @returns {*}
+     */
     folderPicker(title) {
         return this.filepicker(title, 'httpd/unix-directory', false);
     }
@@ -150,13 +159,21 @@ class Messages {
 
     /**
      *
-     * @param text
-     * @returns {string}
+     * @param id
+     * @param form
      * @private
-     * @deprecated Use Localisation.translateArray instead
      */
-    static _translate(text) {
-        return Localisation.translateArray(text);
+    _loadForm(id, form) {
+        let $el = document.getElementById(id);
+        if($el === null) {
+            setTimeout(() => { this._loadForm(id, form); }, 10);
+        } else {
+            form.$mount(`#${id}`);
+
+            let buttons = document.querySelectorAll('.oc-dialog-buttonrow.twobuttons button');
+            buttons[0].innerText = Localisation.translate('Cancel');
+            buttons[1].innerText = Localisation.translate('Ok');
+        }
     }
 }
 

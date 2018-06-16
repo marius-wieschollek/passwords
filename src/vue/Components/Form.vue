@@ -1,10 +1,10 @@
 <template>
     <form class="passwords-form" :id="id">
-        <translate v-if="message" :say="message"></translate>
+        <translate tag="div" class="message" :say="message" v-if="message"/>
         <div v-for="field in getFields" class="field" :class="{large: field.button !== null}">
             <translate tag="label" :for="field.id" :say="field.label"/>
             <input v-bind="field.attributes" v-model="fields[field.name]">
-            <translate tag="a" v-if="field.button" :icon="field.button.icon" class="button" :title="field.button.title" @click="field.button.action(field, $event)"/>
+            <translate tag="a" v-if="field.button" :icon="field.button.icon" class="button" :title="field.button.title" @click="executeButtonAction(field, $event)"/>
         </div>
         <input type="submit">
     </form>
@@ -58,7 +58,7 @@
 
                     if(minlength && !pattern) pattern = `.{${minlength},}`;
 
-                    fields.push({name, label, button, attributes: {name, type, id, title, placeholder, required, checked, maxlength, pattern}});
+                    fields.push({name, label, button, attributes: {name, value, type, id, title, placeholder, required, checked, maxlength, pattern}});
                 }
 
                 return fields;
@@ -87,10 +87,18 @@
 
                 return this.fields;
             },
+            executeButtonAction(field, $event) {
+                let $input = document.getElementById(field.attributes.id),
+                    value  = field.button.action(field, $input, $event);
+
+                if(value !== undefined) {
+                    $input.value = value;
+                    this.fields[field.name] = value;
+                }
+            },
             resolveFieldButton(field) {
                 if(field.button) {
                     if(typeof field.button === 'string') {
-
                         if(field.button === 'toggle') {
                             return {
                                 icon  : 'eye',
@@ -104,13 +112,11 @@
                 }
                 return null;
             },
-            toggleButtonAction(field, $event) {
-                let el  = document.getElementById(field.attributes.id),
-                    btn = $event.target;
-                if(btn.tagName !== 'I') btn = btn.getElementsByTagName('i')[0];
+            toggleButtonAction(field, $el, $event) {
+                let btn = $event.target.tagName === 'I' ? $event.target:$event.target.getElementsByTagName('i')[0];
                 btn.classList.toggle('fa-eye-slash');
                 btn.classList.toggle('fa-eye');
-                el.type = el.type === 'text' ? 'password':'text';
+                $el.type = $el.type === 'text' ? 'password':'text';
             }
         }
     };
@@ -124,18 +130,15 @@
         margin    : -25px 0;
 
         .message {
-            grid-column-start : 1;
-            grid-column-end   : 3;
-            margin-bottom     : 5px;
+            margin-bottom : 10px;
         }
 
         div.field {
             display               : grid;
             grid-template-columns : 2fr 3fr;
-            margin-top            : 5px;
 
             &.large {
-                grid-template-columns : 4fr 6fr 2fr;
+                grid-template-columns : 8fr 9fr 3fr;
             }
 
             label {
@@ -143,24 +146,28 @@
             }
 
             input {
-                width  : auto;
+                width  : 100%;
                 cursor : text;
+                margin : 3px 0;
 
-                &[type=checkbox],
                 &[type=color] {
-                    margin-left : 80%;
-                    cursor      : pointer;
+                    padding : 3px 5px;
+                    height  : 34px;
+                    cursor  : pointer;
                 }
 
                 &[type=checkbox] {
                     justify-self : end;
+                    cursor       : pointer;
+                    width        : auto;
                 }
             }
 
             .button {
                 font-size  : 1.25em;
                 text-align : center;
-                cursor     : pointer;
+                margin     : 3px 0 3px 6px;
+                padding    : 6px;
             }
         }
 
