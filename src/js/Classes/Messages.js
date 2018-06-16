@@ -102,14 +102,10 @@ class Messages {
 
             let callback = (success) => {
                 if(success) {
-                    let serialized = $(`#${id} form`).serializeArray(),
-                        data       = {};
-                    console.log(Form.fields);
+                    let data = Form.getFormData();
+                    if(!data) throw new Error('Invalid Form Data');
 
-                    for(let i = 0; i < serialized.length; i++) {
-                        let field = serialized[i];
-                        data[field.name] = field.value;
-                    }
+                    console.log(data);
 
                     $('.oc-dialog, .oc-dialog-dim').remove();
                     resolve(data);
@@ -121,10 +117,9 @@ class Messages {
             title = Messages._translate(title);
             OC.dialogs.confirmHtml(html, title, callback, true);
 
-
             let FormTemplate = await import(/* webpackChunkName: "Form" */ '@vue/Components/Form.vue'),
                 FormComponent = Vue.extend(FormTemplate.default),
-                Form = new FormComponent({propsData: {form,message}}).$mount(`#${id}`);
+                Form = new FormComponent({propsData: {form,message,id}}).$mount(`#${id}`);
         });
     }
 
@@ -158,9 +153,10 @@ class Messages {
      * @param text
      * @returns {string}
      * @private
+     * @deprecated Use Localisation.translateArray instead
      */
     static _translate(text) {
-        return Array.isArray(text) ? Localisation.translate(text[0], text[1]):Localisation.translate(text);
+        return Localisation.translateArray(text);
     }
 }
 

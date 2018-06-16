@@ -13,6 +13,10 @@ export default class Localisation {
         return '';
     }
 
+    static translateArray(text) {
+        return Array.isArray(text) ? Localisation.translate(text[0], text[1]):Localisation.translate(text);
+    }
+
     /**
      *
      * @param date

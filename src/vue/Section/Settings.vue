@@ -194,7 +194,14 @@
                 $event.target.removeAttribute('disabled');
             },
             toggleCSE() {
-                Messages.form({password:{type:'password'},passwordConfirm:{type:'password'},save:{type:'checkbox'}});
+                Messages.form(
+                    {
+                        password: {type: 'password', minlength: 12, required: true, button: 'toggle'},
+                        confirm: {type: 'password', minlength: 12, required: true, button: 'toggle', validator: (a, b) => {return a === b['password'];}},
+                        save: {type: 'checkbox', checked: true, label: 'Save password'}
+                    },
+                    'Master Password',
+                    'Please choose a master password for your passwords.');
             },
             resetSettingsAction() {
                 Messages.confirm('This will reset all settings to their defaults. Do you want to continue?', 'Reset all settings')
@@ -218,9 +225,7 @@
                         'DELETE EVERYTHING',
                         'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'
                     );
-                    if(form.password) {
-                        this.performUserAccountReset(form.password);
-                    }
+                    if(form.password) this.performUserAccountReset(form.password);
                 } catch(e) {
 
                 }
