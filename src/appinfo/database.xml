@@ -733,12 +733,6 @@
                 <notnull>true</notnull>
             </field>
             <field>
-                <name>deleted</name>
-                <type>boolean</type>
-                <notnull>true</notnull>
-                <default>false</default>
-            </field>
-            <field>
                 <name>data</name>
                 <type>clob</type>
             </field>

@@ -14,4 +14,11 @@ namespace OCA\Passwords\Db;
  */
 class SessionMapper extends AbstractMapper {
     const TABLE_NAME = 'passwords_entity_session';
+
+    /**
+     * @inheritdoc
+     */
+    public function findDeleted(): array {
+        return [];
+    }
 }

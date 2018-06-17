@@ -14,12 +14,18 @@ use OCP\AppFramework\Db\Entity;
  *
  * @method string getUuid()
  * @method void setUuid(string $uuid)
+ * @method string getUserId()
+ * @method void setUserId(string $userId)
+ * @method int getCreated()
+ * @method void setCreated(int $created)
+ * @method int getUpdated()
+ * @method void setUpdated(int $updated)
  * @method string getData()
  * @method void setData(string $data)
  *
  * @package OCA\Passwords\Db
  */
-class Session extends AbstractEntity {
+class Session extends Entity {
 
     /**
      * @var string
@@ -32,12 +38,28 @@ class Session extends AbstractEntity {
     protected $data;
 
     /**
+     * @var string
+     */
+    protected $userId;
+
+    /**
+     * @var int
+     */
+    protected $created;
+
+    /**
+     * @var int
+     */
+    protected $updated;
+
+    /**
      * Folder constructor.
      */
     public function __construct() {
         $this->addType('uuid', 'string');
         $this->addType('data', 'string');
-
-        parent::__construct();
+        $this->addType('userId', 'string');
+        $this->addType('created', 'integer');
+        $this->addType('updated', 'integer');
     }
 }

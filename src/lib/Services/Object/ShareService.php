@@ -176,7 +176,6 @@ class ShareService extends AbstractService {
             $saved = $this->mapper->insert($model);
         } else {
             $model->setUpdated(time());
-
             $saved = $this->mapper->update($model);
         }
         $this->hookManager->emit(Share::class, 'postSave', [$saved]);

@@ -99,7 +99,6 @@ abstract class AbstractModelService extends AbstractService {
             $saved = $this->mapper->insert($model);
         } else {
             $model->setUpdated(time());
-
             $saved = $this->mapper->update($model);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);
