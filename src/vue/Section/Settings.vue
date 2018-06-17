@@ -157,6 +157,7 @@
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import EncryptionManager from '@js/Manager/EncryptionManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
     export default {
@@ -201,7 +202,10 @@
                         save: {type: 'checkbox', checked: true, label: 'Save password'}
                     },
                     'Master Password',
-                    'Please choose a master password for your passwords.');
+                    'Please choose a master password for your passwords.')
+                    .then((data) => {
+                        EncryptionManager.setPassword(data.password, data.save);
+                    });
             },
             resetSettingsAction() {
                 Messages.confirm('This will reset all settings to their defaults. Do you want to continue?', 'Reset all settings')
@@ -227,7 +231,7 @@
                     );
                     if(form.password) this.performUserAccountReset(form.password);
                 } catch(e) {
-
+                    console.error(e);
                 }
             },
             async performUserAccountReset(password) {
