@@ -9,8 +9,8 @@ namespace OCA\Passwords\Middleware;
 
 use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\Controller;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
@@ -35,31 +35,23 @@ class ApiSecurityMiddleware extends Middleware {
     protected $request;
 
     /**
-     * @var ConfigurationService
-     */
-    protected $config;
-
-    /**
      * ApiSecurityMiddleware constructor.
      *
-     * @param LoggingService       $logger
-     * @param ConfigurationService $config
-     * @param IRequest             $request
+     * @param LoggingService $logger
+     * @param IRequest       $request
      */
-    public function __construct(LoggingService $logger, ConfigurationService $config, IRequest $request) {
+    public function __construct(LoggingService $logger, IRequest $request) {
         $this->logger  = $logger;
-        $this->config  = $config;
         $this->request = $request;
     }
 
     /**
-     * @param \OCP\AppFramework\Controller $controller
-     * @param string                       $methodName
+     * @param Controller $controller
+     * @param string     $methodName
      *
      * @throws ApiException
      */
     public function beforeController($controller, $methodName): void {
-
         if(get_class($controller) !== PageController::class && $this->request->getServerProtocol() !== 'https') {
             throw new ApiException('HTTPS required', 400);
         }
@@ -68,9 +60,9 @@ class ApiSecurityMiddleware extends Middleware {
     }
 
     /**
-     * @param \OCP\AppFramework\Controller $controller
-     * @param string                       $methodName
-     * @param \Exception                   $exception
+     * @param Controller $controller
+     * @param string     $methodName
+     * @param \Exception $exception
      *
      * @return null|JSONResponse
      */

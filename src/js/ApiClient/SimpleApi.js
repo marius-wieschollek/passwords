@@ -636,7 +636,10 @@ export default class SimpleApi {
         return new Promise((resolve, reject) => {
             fetch(new Request(this._config.apiUrl + path, options))
                 .then((response) => {
-                    let contentType = response.headers.get('content-type');
+                    let contentType = response.headers.get('content-type'),
+                    sessionToken = response.headers.get('x-passwords-session');
+                    if(sessionToken) this._headers['X-Passwords-Session'] = sessionToken;
+
                     if(contentType && contentType.indexOf('application/json') !== -1) {
                         response.json()
                                 .then((d) => {

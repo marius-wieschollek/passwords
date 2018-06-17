@@ -696,4 +696,52 @@
             </field>
         </declaration>
     </table>
+    <table>
+        <name>*dbprefix*passwords_entity_session</name>
+        <declaration>
+            <field>
+                <name>id</name>
+                <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
+                <notnull>true</notnull>
+                <autoincrement>true</autoincrement>
+                <primary>true</primary>
+            </field>
+            <field>
+                <name>user_id</name>
+                <type>text</type>
+                <length>64</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>uuid</name>
+                <type>string</type>
+                <length>36</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>created</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>updated</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>deleted</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
+                <name>data</name>
+                <type>clob</type>
+            </field>
+        </declaration>
+    </table>
 </database>
