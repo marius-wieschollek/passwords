@@ -23,12 +23,7 @@ use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Hooks\FolderHook;
 use OCA\Passwords\Hooks\Manager\HookManager;
-use OCA\Passwords\Hooks\PasswordHook;
-use OCA\Passwords\Hooks\ShareHook;
-use OCA\Passwords\Hooks\TagHook;
-use OCA\Passwords\Hooks\UserHook;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Services\NotificationService;
@@ -154,42 +149,34 @@ class Application extends App {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
         $hookManager = $container->query(HookManager::class);
-        /** @var FolderHook $folderHook */
-        $folderHook = $container->query(FolderHook::class);
-        $hookManager->listen(Folder::class, 'postClone', [$folderHook, 'postClone']);
-        $hookManager->listen(Folder::class, 'preDelete', [$folderHook, 'preDelete']);
-        $hookManager->listen(Folder::class, 'postDelete', [$folderHook, 'postDelete']);
-        $hookManager->listen(Folder::class, 'preSetRevision', [$folderHook, 'preSetRevision']);
-        /** @var PasswordHook $passwordHook */
-        $passwordHook = $container->query(PasswordHook::class);
-        $hookManager->listen(Password::class, 'postClone', [$passwordHook, 'postClone']);
-        $hookManager->listen(Password::class, 'preDelete', [$passwordHook, 'preDelete']);
-        $hookManager->listen(Password::class, 'postDelete', [$passwordHook, 'postDelete']);
-        $hookManager->listen(Password::class, 'preSetRevision', [$passwordHook, 'preSetRevision']);
-        /** @var TagHook $tagHook */
-        $tagHook = $container->query(TagHook::class);
-        $hookManager->listen(Tag::class, 'postClone', [$tagHook, 'postClone']);
-        $hookManager->listen(Tag::class, 'preDelete', [$tagHook, 'preDelete']);
-        $hookManager->listen(Tag::class, 'postDelete', [$tagHook, 'postDelete']);
-        $hookManager->listen(Tag::class, 'preSetRevision', [$tagHook, 'preSetRevision']);
-        /** @var ShareHook $shareHook */
-        $shareHook = $container->query(ShareHook::class);
-        $hookManager->listen(Share::class, 'postDelete', [$shareHook, 'postDelete']);
+
+        $hookManager->listen(Folder::class, 'postClone', [$hookManager, 'folderPostCloneHook']);
+        $hookManager->listen(Folder::class, 'preDelete', [$hookManager, 'folderPreDelete']);
+        $hookManager->listen(Folder::class, 'postDelete', [$hookManager, 'folderPostDelete']);
+        $hookManager->listen(Folder::class, 'preSetRevision', [$hookManager, 'folderPreSetRevision']);
+        $hookManager->listen(Password::class, 'postClone', [$hookManager, 'passwordPostClone']);
+        $hookManager->listen(Password::class, 'preDelete', [$hookManager, 'passwordPreDelete']);
+        $hookManager->listen(Password::class, 'postDelete', [$hookManager, 'passwordPostDelete']);
+        $hookManager->listen(Password::class, 'preSetRevision', [$hookManager, 'passwordPreSetRevision']);
+        $hookManager->listen(Tag::class, 'postClone', [$hookManager, 'tagPostClone']);
+        $hookManager->listen(Tag::class, 'preDelete', [$hookManager, 'tagPreDelete']);
+        $hookManager->listen(Tag::class, 'postDelete', [$hookManager, 'tagPostDelete']);
+        $hookManager->listen(Tag::class, 'preSetRevision', [$hookManager, 'tagPreSetRevision']);
+        $hookManager->listen(Share::class, 'postDelete', [$hookManager, 'sharePostDelete']);
     }
 
     /**
      * @throws \OCP\AppFramework\QueryException
      */
-    protected function registerSystemHooks() {
+    protected function registerSystemHooks(): void {
         $container = $this->getContainer();
-
-        /** @var UserHook $userHook */
-        $userHook = $container->query(UserHook::class);
-
+        /** @var HookManager $hookManager */
+        $hookManager = $container->query(HookManager::class);
         /** @var \OC\User\Manager $userManager */
         $userManager = $container->query(IUserManager::class);
-        $userManager->listen('\OC\User', 'preCreateUser', [$userHook, 'preCreateUser']);
-        $userManager->listen('\OC\User', 'postDelete', [$userHook, 'postDelete']);
+
+        $userManager->listen('\OC\User', 'preCreateUser', [$hookManager, 'userPreCreateUser']);
+        $userManager->listen('\OC\User', 'postDelete', [$hookManager, 'userPostDelete']);
     }
 
     /**
@@ -211,9 +198,8 @@ class Application extends App {
     /**
      *
      */
-    protected function enableNightlyUpdates() {
-        if(
-            $this->getContainer()->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
+    protected function enableNightlyUpdates(): void {
+        if($this->getContainer()->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
             !class_exists('\OC\App\AppStore\Fetcher\AppFetcher', false)) {
             require_once __DIR__.'/../Plugins/NighltyAppFetcher.php';
         }
