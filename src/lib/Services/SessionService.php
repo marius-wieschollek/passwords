@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
 use OCP\IRequest;
+use OCP\ISession;
 
 /**
  * Class SessionService
@@ -26,6 +27,16 @@ class SessionService {
      * @var IRequest
      */
     protected $request;
+
+    /**
+     * @var SessionMapper
+     */
+    protected $mapper;
+
+    /**
+     * @var ISession
+     */
+    protected $userSession;
 
     /**
      * @var \OCA\Passwords\Services\EnvironmentService
@@ -45,21 +56,23 @@ class SessionService {
     /**
      * @var bool
      */
-    protected $updated = false;
+    protected $modified = false;
 
     /**
      * SessionService constructor.
      *
      * @param SessionMapper      $mapper
      * @param IRequest           $request
+     * @param ISession           $session
      * @param LoggingService     $logger
      * @param EnvironmentService $environment
      */
-    public function __construct(SessionMapper $mapper, IRequest $request, LoggingService $logger, EnvironmentService $environment) {
+    public function __construct(SessionMapper $mapper, IRequest $request, ISession $session, LoggingService $logger, EnvironmentService $environment) {
         $this->mapper      = $mapper;
         $this->environment = $environment;
         $this->request     = $request;
         $this->logger      = $logger;
+        $this->userSession = $session;
     }
 
     /**
@@ -78,8 +91,8 @@ class SessionService {
     /**
      * @return bool
      */
-    public function isSessionChanged(): bool {
-        return $this->updated;
+    public function isModified(): bool {
+        return $this->modified;
     }
 
     /**
@@ -96,9 +109,7 @@ class SessionService {
      * @return mixed
      */
     public function get(string $key, $default = null) {
-        if($this->session === null) $this->load();
-
-        return isset($this->data[ $key ]) ? $this->data[ $key ]:$default;
+        return $this->has($key) ? $this->data[ $key ]:$default;
     }
 
     /**
@@ -108,15 +119,33 @@ class SessionService {
     public function set(string $key, $value): void {
         if($this->session === null) $this->load();
 
-        $this->updated      = true;
+        $this->modified     = true;
         $this->data[ $key ] = $value;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function has(string $key): bool {
+        if($this->session === null) $this->load();
+
+        return isset($this->data[ $key ]);
+    }
+
+    /**
+     * @param string $key
+     */
+    public function unset(string $key): void {
+        if($this->has($key)) unset($this->data[ $key ]);
     }
 
     /**
      *
      */
     public function save(): void {
-        if(!$this->updated) return;
+        if(!$this->modified) return;
         $this->session->setData(json_encode($this->data));
 
         if(empty($this->session->getId())) {
@@ -125,7 +154,7 @@ class SessionService {
             $this->session->setUpdated(time());
             $this->session = $this->mapper->update($this->session);
         }
-        $this->updated = false;
+        $this->modified = false;
     }
 
     /**
@@ -144,7 +173,11 @@ class SessionService {
      */
     public function load() {
         if($this->session !== null) return;
-        $sessionId = $this->request->getHeader('X-Passwords-Session');
+        if($this->userSession->exists('passwordsSessionId')) {
+            $sessionId = $this->userSession->get('passwordsSessionId');
+        } else {
+            $sessionId = $this->request->getHeader('X-Passwords-Session');
+        }
 
         if(!empty($sessionId)) {
             try {
@@ -179,7 +212,7 @@ class SessionService {
         $model->setUuid($this->generateUuidV4());
         $model->setCreated(time());
         $model->setUpdated(time());
-        $this->updated = true;
+        $this->modified = true;
 
         return $model;
     }

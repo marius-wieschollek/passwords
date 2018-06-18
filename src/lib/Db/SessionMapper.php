@@ -7,18 +7,74 @@
 
 namespace OCA\Passwords\Db;
 
+use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\Mapper;
+use OCP\IDBConnection;
+
 /**
  * Class SessionMapper
  *
  * @package OCA\Passwords\Db
  */
-class SessionMapper extends AbstractMapper {
+class SessionMapper extends Mapper {
+
     const TABLE_NAME = 'passwords_entity_session';
 
     /**
-     * @inheritdoc
+     * @var null|string
      */
-    public function findDeleted(): array {
-        return [];
+    protected $userId;
+
+    /**
+     * AbstractMapper constructor.
+     *
+     * @param IDBConnection      $db
+     * @param EnvironmentService $environment
+     */
+    public function __construct(IDBConnection $db, EnvironmentService $environment) {
+        parent::__construct($db, static::TABLE_NAME);
+        $this->userId = $environment->getUserId();
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return Session|Entity
+     *
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    public function findByUuid(string $uuid): Session {
+        list($sql, $params) = $this->getStatement();
+
+        $sql      .= ' AND `uuid` = ?';
+        $params[] = $uuid;
+
+        return $this->findEntity($sql, $params);
+    }
+
+    /**
+     * @return EntityInterface[]
+     */
+    public function findAll(): array {
+        list($sql, $params) = $this->getStatement();
+
+        return $this->findEntities($sql, $params);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getStatement(): array {
+        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE ';
+
+        $params = [];
+        if($this->userId !== null) {
+            $sql      .= ' `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
+            $params[] = $this->userId;
+        }
+
+        return [$sql, $params];
     }
 }
