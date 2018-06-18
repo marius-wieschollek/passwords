@@ -14,7 +14,7 @@ namespace OCA\Passwords\Helper\Http;
  */
 class RequestHelper {
 
-    const REQUEST_MAX_RETRIES = 5;
+    const REQUEST_MAX_RETRIES = 3;
     const REQUEST_TIMEOUT     = 15;
 
     /**
