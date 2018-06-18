@@ -55,6 +55,20 @@ class SessionMapper extends Mapper {
     }
 
     /**
+     * @param int $updated
+     *
+     * @return array
+     */
+    public function findAllOlderThan(int $updated): array {
+        list($sql, $params) = $this->getStatement();
+
+        $sql      .= ' AND `updated` <= ?';
+        $params[] = $updated;
+
+        return $this->findEntities($sql, $params);
+    }
+
+    /**
      * @return EntityInterface[]
      */
     public function findAll(): array {
@@ -73,6 +87,8 @@ class SessionMapper extends Mapper {
         if($this->userId !== null) {
             $sql      .= ' `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
             $params[] = $this->userId;
+        } else {
+            $sql .= ' `*PREFIX*'.static::TABLE_NAME.'`.`id` != 0';
         }
 
         return [$sql, $params];
