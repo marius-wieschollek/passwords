@@ -15,6 +15,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\IL10N;
+use OCP\ISession;
 use OCP\IUserManager;
 use OCP\Security\ISecureRandom;
 
@@ -49,6 +50,11 @@ class TokenHelper {
     protected $random;
 
     /**
+     * @var ISession
+     */
+    protected $session;
+
+    /**
      * @var IUserManager
      */
     protected $userManager;
@@ -78,6 +84,7 @@ class TokenHelper {
      *
      * @param null|string          $userId
      * @param IL10N                $localisation
+     * @param ISession             $session
      * @param ISecureRandom        $random
      * @param LoggingService       $logger
      * @param IProvider            $tokenProvider
@@ -89,6 +96,7 @@ class TokenHelper {
     public function __construct(
         ?string $userId,
         IL10N $localisation,
+        ISession $session,
         ISecureRandom $random,
         LoggingService $logger,
         IProvider $tokenProvider,
@@ -101,6 +109,7 @@ class TokenHelper {
         $this->random              = $random;
         $this->logger              = $logger;
         $this->config              = $config;
+        $this->session             = $session;
         $this->encryption          = $encryption;
         $this->userManager         = $userManager;
         $this->localisation        = $localisation;
@@ -131,7 +140,8 @@ class TokenHelper {
      */
     public function createToken(string $name): array {
         $token       = $this->generateRandomDeviceToken();
-        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->userId, null, $name, IToken::PERMANENT_TOKEN);
+        $password    = $this->getUserPassword();
+        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->userId, $password, $name, IToken::PERMANENT_TOKEN);
         $deviceToken->setScope(['filesystem' => false]);
         $this->tokenProvider->updateToken($deviceToken);
 
@@ -162,7 +172,6 @@ class TokenHelper {
 
     /**
      * @return bool|string
-     * @throws \OCA\Passwords\Exception\ApiException
      */
     protected function loadWebUiToken() {
         $token   = $this->config->getUserValue(self::WEBUI_TOKEN, false);
@@ -196,6 +205,22 @@ class TokenHelper {
         $this->config->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
 
         return $token;
+    }
+
+    /**
+     * @return null|string
+     */
+    protected function getUserPassword(): ?string {
+        try {
+            $sessionId    = $this->session->getId();
+            $sessionToken = $this->tokenProvider->getToken($sessionId);
+
+            return $this->tokenProvider->getPassword($sessionToken, $sessionId);
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return null;
     }
 
     /**
