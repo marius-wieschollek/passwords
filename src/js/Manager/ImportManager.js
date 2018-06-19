@@ -210,11 +210,13 @@ export class ImportManager {
      */
     async _importTag(mode, tag, db, idMap) {
         try {
-            if(mode !== 3 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
+            if(mode !== 4 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
                 if(mode === 1 || (mode === 0 && db[tag.id].revision === tag.revision)) {
                     this._countProgress();
                     return;
                 }
+
+                if(mode === 3) tag = Object.assign(db[tag.id], tag);
 
                 idMap[tag.id] = tag.id;
                 await API.updateTag(tag);
@@ -282,11 +284,13 @@ export class ImportManager {
      */
     async _importFolder(mode, folder, db, idMap) {
         try {
-            if(mode !== 3 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
+            if(mode !== 4 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
                 if(mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
                     this._countProgress();
                     return;
                 }
+
+                if(mode === 3) folder = Object.assign(db[folder.id], folder);
 
                 idMap[folder.id] = folder.id;
                 await API.updateFolder(folder);
@@ -397,12 +401,14 @@ export class ImportManager {
      */
     async _importPassword(mode, password, db, skipShared, idMap) {
         try {
-            if(mode !== 3 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
+            if(mode !== 4 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
                 let current = db[password.id];
                 if(mode === 1 || (mode === 0 && current.revision === password.revision) || (skipShared && current.share !== null) || !current.editable) {
                     this._countProgress();
                     return;
                 }
+
+                if(mode === 3) password = Object.assign(db[password.id], password);
 
                 idMap[password.id] = password.id;
                 await API.updatePassword(password);

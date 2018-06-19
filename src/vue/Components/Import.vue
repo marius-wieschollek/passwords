@@ -71,12 +71,13 @@
             <translate tag="h1" say="Select Options"/>
             <div class="step-content">
                 <div>
-                    <translate tag="label" for="passwords-import-mode" say="Import Mode"/>
+                    <translate tag="label" for="passwords-import-mode" say="Conflict handling"/>
                     <select id="passwords-import-mode" v-model="options.mode" :disabled="importing">
                         <translate tag="option" value="0" say="Skip if same revision"/>
-                        <translate tag="option" value="1" say="Skip if id exists"/>
-                        <translate tag="option" value="2" say="Overwrite if id exists"/>
-                        <translate tag="option" value="3" say="Clone if id exists"/>
+                        <translate tag="option" value="1" say="Skip always"/>
+                        <translate tag="option" value="2" say="Overwrite existing"/>
+                        <translate tag="option" value="3" say="Merge with existing"/>
+                        <translate tag="option" value="4" say="Create new entry"/>
                     </select>
                     <div v-if="source === 'json' && nightly">
                         <translate tag="label" for="passwords-import-encrypt" say="Backup password" title="For encrypted backups"/>
@@ -99,8 +100,8 @@
                         <input type="checkbox" id="passwords-import-csv-repair" v-model="options.repair" :disabled="importing"/>
                         <translate tag="label" for="passwords-import-csv-repair" say="Interpolate missing fields"/>
                         <br>
-                        <input type="checkbox" id="passwords-import-csv-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3' && options.db === 'passwords'"/>
-                        <translate tag="label" for="passwords-import-csv-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3' && options.db === 'passwords'"/>
+                        <input type="checkbox" id="passwords-import-csv-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '4' && options.db === 'passwords'"/>
+                        <translate tag="label" for="passwords-import-csv-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '4' && options.db === 'passwords'"/>
                         <br>
                         <br>
 
@@ -121,8 +122,8 @@
                     </div>
                     <div v-else>
                         <br>
-                        <input type="checkbox" id="passwords-import-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '3'"/>
-                        <translate tag="label" for="passwords-import-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '3'"/>
+                        <input type="checkbox" id="passwords-import-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '4'"/>
+                        <translate tag="label" for="passwords-import-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '4'"/>
                     </div>
                 </div>
             </div>
@@ -268,7 +269,6 @@
             },
             csvParseComplete(result) {
                 if(result.errors.length === 0) {
-                    console.log(result.data);
                     this.file = result.data;
                     this.csvReady = true;
                 } else {
