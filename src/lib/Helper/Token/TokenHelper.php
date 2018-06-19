@@ -190,7 +190,7 @@ class TokenHelper {
      * @throws \OCP\PreConditionNotMetException
      */
     protected function createWebUiToken(): string {
-        $name = $this->localisation->t('Passwords WebUI Access (see Passwords F.A.Q)');
+        $name = $this->localisation->t('Passwords App Token (see Passwords F.A.Q)');
         list($token, $deviceToken) = $this->createToken($name);
         $this->config->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
         $this->config->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());

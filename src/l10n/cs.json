@@ -8,7 +8,7 @@
         "Consult the %s to configure Nextcloud correctly."                                          : "Kontaktujte %s pro správné nestavení Nextcloudu.",
         "If you do not have a HTTPS certificate, get one for free from %s."                         : "Nemáte-li HTTPS certifikát, můžete jej zdarma získat z %s",
         "If you think your server has HTTPS enabled, you can try to %s with HTTPS."                 : "Používá-li server HTTPS, zkuste použít %s včetně HTTPS.",
-        "Passwords WebUI Access (see Passwords F.A.Q)"                                              : "Webové rozhraní správce hesel (zkontrolujte F.A.Q Správce hesel)",
+        "Passwords App Token (see Passwords F.A.Q)"                                                 : "Webové rozhraní správce hesel (zkontrolujte F.A.Q Správce hesel)",
         "Open documentation"                                                                        : "Otevřít dokumentaci",
         "Legacy Api Support"                                                                        : "Zastaralé API",
         "Enable Legacy API"                                                                         : "Povolit zastaralé API",
