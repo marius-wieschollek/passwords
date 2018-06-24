@@ -53,7 +53,7 @@
                     let el    = document.getElementById('searchbox'),
                         query = this.$route.params.query;
 
-                    if(el.value === '' && query !== '') {
+                    if(el.value === '' && query !== '' && query !== undefined) {
                         el.value = query;
                         SearchManager.search(query);
                     }

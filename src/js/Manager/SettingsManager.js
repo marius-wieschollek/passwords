@@ -1,5 +1,5 @@
 import API from '@js/Helper/api';
-import Utility from '@/js/Classes/Utility';
+import Utility from '@js/Classes/Utility';
 
 /**
  *
@@ -19,9 +19,12 @@ class SettingsManager {
             'client.ui.password.user.show'       : false,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
+            'client.search.live'                 : true,
+            'client.search.global'               : true,
             'client.settings.advanced'           : false
         };
         this._settings = Utility.cloneObject(this._defaults);
+        this._observers = {};
     }
 
     /**
@@ -32,6 +35,7 @@ class SettingsManager {
     set(setting, value) {
         this._settings[setting] = value;
         SettingsManager._setSetting(setting, value);
+        this._triggerObservers(setting, value);
     }
 
     /**
@@ -63,7 +67,26 @@ class SettingsManager {
             }
         }
 
+        this._triggerObservers(setting, this._settings[setting]);
         return this._settings[setting];
+    }
+
+    /**
+     * Register observer to get updated when a setting is changed
+     *
+     * @param settings
+     * @returns {Promise<any>}
+     */
+    observe(settings) {
+        return new Promise((resolve) => {
+            if(!Array.isArray(settings)) settings = [settings];
+
+            for(let i = 0; i < settings.length; i++) {
+                let setting = settings[i];
+                if(!this._observers.hasOwnProperty(setting)) this._observers[setting] = [];
+                this._observers[setting].push(resolve);
+            }
+        })
     }
 
     /**
@@ -148,6 +171,22 @@ class SettingsManager {
     _addSettings(settings) {
         for(let i in settings) {
             if(settings.hasOwnProperty(i) && settings[i] !== null) this._settings[i] = settings[i];
+        }
+    }
+
+    /**
+     * Trigger observers when a setting is changed
+     *
+     * @param setting
+     * @param value
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _triggerObservers(setting, value) {
+        if(!this._observers.hasOwnProperty(setting)) return;
+
+        for(let i = 0; i < this._observers[setting].length; i++) {
+            this._observers[setting][i]({setting,value});
         }
     }
 }

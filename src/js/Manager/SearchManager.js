@@ -1,3 +1,6 @@
+import router from '@js/Helper/router';
+import SettingsManager from '@js/Manager/SettingsManager';
+
 class SearchManager {
 
     get status() {
@@ -25,6 +28,8 @@ class SearchManager {
             OC.Plugins.register('OCA.Search', this);
             document.querySelector('form.searchbox').style.opacity = '0';
             this._status.available = false;
+
+            this._initializeSearchFeatures();
         }
     }
 
@@ -247,6 +252,47 @@ class SearchManager {
         }
 
         return this._index;
+    }
+
+    /**
+     * Initialize optional search features
+     *
+     * @private
+     */
+    _initializeSearchFeatures() {
+        this._globalSearch();
+        this._initLiveSearch();
+    }
+
+    /**
+     * Search globally when the user presses Enter
+     *
+     * @private
+     */
+    _globalSearch() {
+        document.getElementById('searchbox').addEventListener('keyup', (e) => {
+            if(e.keyCode === 13 && router.history.current.name !== 'Search' && SettingsManager.get('client.search.global')) {
+                router.push({name: 'Search', params: {query: SM.status.query}});
+            }
+        });
+    }
+
+    /**
+     * Search when the user presses a key
+     *
+     * @private
+     */
+    _initLiveSearch() {
+        let searchbox = document.getElementById('searchbox');
+
+        document.addEventListener('keyup', (e) => {
+            if(!this._status.available || e.ctrlKey || e.altKey || e.shiftKey || ['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1 || !SettingsManager.get('client.search.live')) return;
+            if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
+                searchbox.value += e.key;
+                searchbox.focus();
+                this.search(searchbox.value);
+            }
+        });
     }
 }
 
