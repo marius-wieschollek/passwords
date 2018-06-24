@@ -96,6 +96,15 @@
                     <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="advancedSettings"/>
                     <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="advancedSettings">
                     <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="advancedSettings"/>
+
+                    <translate tag="h3" say="Search" v-if="advancedSettings"/>
+                    <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-search-live" v-model="settings['client.search.live']" v-if="advancedSettings">
+                    <settings-help text="Start search when a key is pressed anywhere on the page" v-if="advancedSettings"/>
+
+                    <translate tag="label" for="setting-search-global" say="Search everywhere with Enter" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-search-global" v-model="settings['client.search.global']" v-if="advancedSettings">
+                    <settings-help text="Search everywhere when the enter key is pressed in the search box" v-if="advancedSettings"/>
                 </section>
                 <section class="notifications">
                     <translate tag="h1" say="Notifications"/>

@@ -59,7 +59,7 @@ export default class ImportCsvConversionHelper {
             for(let j = 0; j < mapping.length; j++) {
                 let field = mapping[j];
 
-                if(field.length !== 0) {
+                if(field && field.length !== 0) {
                     let value = line[j];
 
                     if(value === undefined) continue;
@@ -249,12 +249,11 @@ export default class ImportCsvConversionHelper {
      */
     static _repairObject(object) {
         let domain = new RegExp('^([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.){1,}[a-zA-Z]{2,}$');
-        if(object.url && object.url.length !== 0 && object.url.indexOf('://')) {
-            object.url = `http://${object.url}`;
+        if(object.url && object.url.length !== 0 && object.url.indexOf('://') === -1) {
+            object.url = `https://${object.url}`;
         } else if(!object.url || object.url.length === 0) {
             if(object.label && domain.test(object.label)) {
                 object.url = SimpleApi.parseUrl(object.label, 'href');
-                object.label = null;
             }
         }
     }
