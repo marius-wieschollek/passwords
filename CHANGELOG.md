@@ -1,5 +1,8 @@
 #### 2018.7.0 - Feature Release
 - Added haveibeenpwned V2 support
+- Improved search
+- Improved import
+- Fixed missing password in token
 
 #### 2018.6.3 - Bugfix Release
 - Fixed codebase incompatibility in appstore update
