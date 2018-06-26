@@ -285,7 +285,7 @@ class SearchManager {
     _initLiveSearch() {
         let searchbox = document.getElementById('searchbox');
 
-        document.addEventListener('keyup', (e) => {
+        document.addEventListener('keypress', (e) => {
             if(!this._status.available) return;
             if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
             if(['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1) return;
