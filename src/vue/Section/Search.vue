@@ -27,6 +27,9 @@
 
                 return !this.passwords.length && !this.folders.length && !this.tags.length;
             },
+            isNotEmpty() {
+                return SearchManager.status.total !== 0 && SearchManager.status.active;
+            },
             getEmptyText() {
                 if(this.search.active) {
                     return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
