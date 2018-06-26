@@ -271,7 +271,7 @@ class SearchManager {
      */
     _globalSearch() {
         document.getElementById('searchbox').addEventListener('keyup', (e) => {
-            if(e.keyCode === 13 && router.history.current.name !== 'Search' && SettingsManager.get('client.search.global')) {
+            if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsManager.get('client.search.global')) {
                 router.push({name: 'Search', params: {query: SM.status.query}});
             }
         });
@@ -286,7 +286,11 @@ class SearchManager {
         let searchbox = document.getElementById('searchbox');
 
         document.addEventListener('keyup', (e) => {
-            if(!this._status.available || e.ctrlKey || e.altKey || e.shiftKey || ['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1 || !SettingsManager.get('client.search.live')) return;
+            if(!this._status.available) return;
+            if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
+            if(['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1) return;
+            if(!SettingsManager.get('client.search.live')) return;
+
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
                 searchbox.value += e.key;
                 searchbox.focus();
