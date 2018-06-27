@@ -602,7 +602,7 @@ export default class SimpleApi {
         }
         headers.append('Accept', `application/${dataType}, text/plain, */*`);
 
-        let options = {method, headers};
+        let options = {method, headers, credentials: 'omit'};
         if(data) {
             headers.append('Content-Type', 'application/json');
             options.body = JSON.stringify(data);
