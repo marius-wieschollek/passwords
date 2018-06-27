@@ -2,6 +2,11 @@ const download = require('download');
 
 Feature('Handbook');
 
+Before((I) => {
+    I.amOnPage('/index.php/apps/passwords/');
+    I.resizeWindow(1280, 874);
+});
+
 Scenario('Log into Nextcloud', (I) => {
     I.amOnPage('/');
     I.amOnPage('/index.php/login');
@@ -25,7 +30,7 @@ Scenario('Reset the Account', (I) => {
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.wait(11);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
-    I.waitUrlEquals('/index.php/apps/passwords/#/', 30);
+    I.waitUrlEquals('/index.php/apps/passwords/#/folders', 30);
 });
 
 Scenario('Import the sample database', async (I) => {
@@ -40,7 +45,7 @@ Scenario('Import the sample database', async (I) => {
     I.captureWholePage('import-section');
 
     I.click('#passwords-import-execute');
-    I.waitForElement('progress.success', 60);
+    I.waitForElement('progress.success', 80);
 });
 
 Scenario('Show Create Password Dialog', (I) => {
@@ -61,7 +66,7 @@ Scenario('Show Create Password Dialog', (I) => {
 });
 
 Scenario('Show Main Section', (I) => {
-    I.amOnPage('/index.php/apps/passwords/');
+    I.amOnPage('/index.php/apps/passwords/#/all');
     I.waitForElement('div.row', 10);
     I.captureWholePage('main-section', 3);
     I.captureElement('password-single', 'div[data-password-title=Amazon]', 0);
@@ -71,6 +76,7 @@ Scenario('Show Folder Section', async (I) => {
     I.amOnPage('/index.php/apps/passwords/#/folders');
     I.waitForElement('div[data-folder-title=Work]', 10);
     await I.captureElement('folder-single', 'div[data-folder-title=Work]', 0);
+    I.resizeWindow(1280, 874);
     I.click('div[data-folder-title=Work]');
     I.waitForElement('div[data-folder-title=Development]', 10);
     I.captureWholePage('folder-section');
@@ -176,7 +182,7 @@ Scenario('Show Handbook Section', (I) => {
 });
 
 Scenario('Show Trash Section', (I) => {
-    I.amOnPage('/index.php/apps/passwords/');
+    I.amOnPage('/index.php/apps/passwords/#/all');
     I.waitForElement('div.row.password', 10);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(5)');
@@ -203,7 +209,7 @@ Scenario('Show Trash Section', (I) => {
 });
 
 Scenario('Show Password Details', async (I) => {
-    I.amOnPage('/index.php/apps/passwords/');
+    I.amOnPage('/index.php/apps/passwords/#/all');
     I.waitForElement('div.row', 10);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(1)');
@@ -213,8 +219,10 @@ Scenario('Show Password Details', async (I) => {
     I.captureWholePage('password-details', 4);
     I.resizeWindow(1280, 1280);
     await I.captureElement('password-details-details', '.item-details');
+    I.resizeWindow(1280, 1280);
     I.click('.item-details [data-tab=notes]');
     await I.captureElement('password-details-notes', '.item-details');
+    I.resizeWindow(1280, 1280);
     I.click('.item-details [data-tab=share]');
     /**
      * This photo is currently useless
@@ -223,6 +231,7 @@ Scenario('Show Password Details', async (I) => {
     I.click('.item-details [data-tab=qrcode]');
     I.selectOption('#password-details-qrcode', 'url');
     await I.captureElement('password-details-qrcode', '.item-details');
+    I.resizeWindow(1280, 1280);
     I.click('.item-details [data-tab=revisions]');
     await I.captureElement('password-details-revisions', '.item-details');
 });
