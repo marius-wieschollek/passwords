@@ -125,7 +125,7 @@ class SearchManager {
     clearDatabase() {
         this._db = {};
         this._index = null;
-        this._status.available = false;
+        this._status.query = '';
         this._resetSearch();
 
         document.querySelector('form.searchbox').style.opacity = '0';
@@ -146,7 +146,7 @@ class SearchManager {
             document.querySelector('form.searchbox').style.opacity = '1';
             document.getElementById('searchbox').value = '';
             this._status.available = true;
-            this.search(this._status.query);
+            setTimeout(() => {this.search(this._status.query)}, 1);
         }
     }
 

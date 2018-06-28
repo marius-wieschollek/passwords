@@ -69,6 +69,9 @@
 
                 return !this.passwords.length && this.$route.params.type !== undefined;
             },
+            isNotEmpty() {
+                return !this.loading && !this.isEmpty && this.$route.params.type !== undefined;
+            },
             getEmptyText() {
                 if(this.search.active) {
                     return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
