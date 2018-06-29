@@ -185,6 +185,13 @@
                 <default>0</default>
             </field>
             <field>
+                <name>status_code</name>
+                <default>GOOD</default>
+                <type>text</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
                 <name>client</name>
                 <type>text</type>
                 <length>36</length>

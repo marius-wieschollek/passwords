@@ -1,4 +1,5 @@
 #### 2018.7.0 - Feature Release
+- Added user password rules
 - Added haveibeenpwned V2 support
 - Improved search
 - Improved import

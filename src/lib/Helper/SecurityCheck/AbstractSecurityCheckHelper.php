@@ -24,6 +24,14 @@ abstract class AbstractSecurityCheckHelper {
     const CONFIG_DB_ENCODING   = 'passwords/localdb/encoding';
     const CONFIG_DB_TYPE       = 'passwords/localdb/type';
 
+    const STATUS_COMPROMISED = 'COMPROMISED';
+    const STATUS_OUTDATED    = 'OUTDATED';
+    const STATUS_DUPLICATE   = 'DUPLICATE';
+    const STATUS_GOOD        = 'GOOD';
+    const LEVEL_OK           = 0;
+    const LEVEL_WEAK         = 1;
+    const LEVEL_BAD          = 2;
+
     /**
      * @var FileCacheService
      */
@@ -40,6 +48,11 @@ abstract class AbstractSecurityCheckHelper {
     protected $logger;
 
     /**
+     * @var UserRulesSecurityCheck
+     */
+    protected $userRulesCheck;
+
+    /**
      * @var array
      */
     protected $hashStatusCache = [];
@@ -47,33 +60,39 @@ abstract class AbstractSecurityCheckHelper {
     /**
      * BigPasswordDbHelper constructor.
      *
-     * @param FileCacheService     $fileCacheService
-     * @param ConfigurationService $configurationService
-     * @param LoggingService       $logger
+     * @param LoggingService         $logger
+     * @param UserRulesSecurityCheck $userRulesCheck
+     * @param FileCacheService       $fileCacheService
+     * @param ConfigurationService   $configurationService
      */
     public function __construct(
         LoggingService $logger,
         FileCacheService $fileCacheService,
+        UserRulesSecurityCheck $userRulesCheck,
         ConfigurationService $configurationService
     ) {
         $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
         $this->config           = $configurationService;
         $this->logger           = $logger;
+        $this->userRulesCheck   = $userRulesCheck;
     }
 
     /**
      * Checks if the given revision is secure and complies with the users individual password standards
      * No all user password standards can be checked server side
-     * 0 = secure, 1 = user standard violation, 2 = hacked
+     * 0 = secure, 1 = user standard violation, 2 = compromised
      *
      * @param PasswordRevision $revision
      *
-     * @return int
+     * @return array
      */
-    public function getRevisionSecurityLevel(PasswordRevision $revision): int {
-        if(!$this->isHashSecure($revision->getHash())) return 2;
+    public function getRevisionSecurityLevel(PasswordRevision $revision): array {
+        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_COMPROMISED];
 
-        return 0;
+        $userRules = $this->userRulesCheck->getRevisionSecurityLevel($revision);
+        if($userRules !== null) return $userRules;
+
+        return [self::LEVEL_OK, self::STATUS_GOOD];
     }
 
     /**
@@ -96,7 +115,7 @@ abstract class AbstractSecurityCheckHelper {
      */
     public function isHashSecure(string $hash): bool {
         if(!isset($this->hashStatusCache[ $hash ])) {
-            $hashes = $this->readPasswordsFile($hash);
+            $hashes                         = $this->readPasswordsFile($hash);
             $this->hashStatusCache[ $hash ] = !in_array($hash, $hashes);
         }
 

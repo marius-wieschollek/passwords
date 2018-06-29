@@ -118,7 +118,6 @@ class PasswordHook {
      * @param Password $password
      *
      * @throws \Exception
-     * // @TODO delete shares
      */
     public function preDelete(Password $password): void {
         $relations = $this->relationService->findByPassword($password->getUuid());
@@ -210,12 +209,12 @@ class PasswordHook {
 
     /**
      * @param PasswordRevision $newRevision
-     *
-     * @throws \OCP\AppFramework\QueryException
      */
     protected function checkSecurityStatus(PasswordRevision $newRevision): void {
         $securityCheck = $this->helperService->getSecurityHelper();
-        $newRevision->setStatus($securityCheck->getRevisionSecurityLevel($newRevision));
+        list($status, $statusCode) = $securityCheck->getRevisionSecurityLevel($newRevision);
+        $newRevision->setStatus($status);
+        $newRevision->setStatusCode($statusCode);
     }
 
     /**

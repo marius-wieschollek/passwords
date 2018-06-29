@@ -101,15 +101,19 @@ class CheckPasswordsJob extends AbstractCronJob {
 
         $badRevisionCounter = 0;
         foreach($revisions as $revision) {
-            $oldStatus = $revision->getStatus();
-            $newStatus = $securityHelper->getRevisionSecurityLevel($revision);
+            $oldStatusCode = $revision->getStatusCode();
+            list($statusLevel, $statusCode) = $securityHelper->getRevisionSecurityLevel($revision);
 
-            if($oldStatus != $newStatus) {
-                $revision->setStatus($newStatus);
+            if($oldStatusCode != $statusCode) {
+                $revision->setStatus($statusLevel);
+                $revision->setStatusCode($statusCode);
                 $revision->setUpdated(time());
                 $this->revisionMapper->update($revision);
-                $this->sendBadPasswordNotification($revision);
-                $badRevisionCounter++;
+
+                if($statusLevel == AbstractSecurityCheckHelper::LEVEL_BAD) {
+                    $this->sendBadPasswordNotification($revision);
+                    $badRevisionCounter++;
+                }
             }
         }
 

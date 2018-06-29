@@ -28,6 +28,8 @@ namespace OCA\Passwords\Db;
  * @method void setFolder(string $folder)
  * @method int getStatus()
  * @method void setStatus(int $status)
+ * @method string getStatusCode()
+ * @method void setStatusCode(string $statusCode)
  *
  * @package OCA\Passwords\Db
  */
@@ -74,7 +76,12 @@ class PasswordRevision extends AbstractRevisionEntity {
     protected $status;
 
     /**
-     * @var int
+     * @var string
+     */
+    protected $statusCode;
+
+    /**
+     * @var string
      */
     protected $customFields;
 
@@ -89,6 +96,7 @@ class PasswordRevision extends AbstractRevisionEntity {
         $this->addType('folder', 'string');
         $this->addType('username', 'string');
         $this->addType('password', 'string');
+        $this->addType('statusCode', 'string');
         $this->addType('customFields', 'string');
 
         $this->addType('status', 'integer');

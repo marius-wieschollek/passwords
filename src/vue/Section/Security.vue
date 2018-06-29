@@ -44,7 +44,7 @@
             return {
                 loading       : false,
                 securityStatus: [
-                    'Secure', 'Weak', 'Broken'
+                    'Secure', 'Weak', 'Compromised'
                 ]
             };
         },
@@ -55,6 +55,9 @@
                 if(this.search.active && this.search.total === 0) return true;
 
                 return !this.passwords.length && this.$route.params.status !== undefined;
+            },
+            isNotEmpty() {
+                return !this.loading && !this.isEmpty && this.$route.params.status !== undefined;
             },
             getEmptyText() {
                 if(this.search.active) {
