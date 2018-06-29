@@ -79,8 +79,8 @@
             },
             securityTitle() {
                 let label = 'Secure';
-                if(this.password.status === 1) label = 'Weak';
-                if(this.password.status === 2) label = 'Broken';
+                if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
+                if(this.password.status === 2) label = 'Compromised';
 
                 return Localisation.translate(label);
             },

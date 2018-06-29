@@ -44,7 +44,7 @@
             return {
                 loading       : false,
                 securityStatus: [
-                    'Secure', 'Weak', 'Broken'
+                    'Secure', 'Weak', 'Compromised'
                 ]
             };
         },

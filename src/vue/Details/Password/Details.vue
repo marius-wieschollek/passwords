@@ -14,7 +14,7 @@
 
         <translate tag="div" say="Security" class="header"/>
         <translate tag="div" say="Status">
-            <translate :say="getSecurityStatus" :class="getSecurityStatus.toLowerCase()"/>
+            <translate :say="getSecurityStatus" :class="getSecurityClass.toLowerCase()"/>
         </translate>
         <translate tag="div" say="SHA1 Hash"><span>{{ password.hash }}</span></translate>
     </div>
@@ -61,10 +61,15 @@
                 }
                 return count;
             },
-            getSecurityStatus() {
-                let status = ['Secure', 'Weak', 'Broken'];
+            getSecurityClass() {
+                let status = ['secure', 'weak', 'compromised'];
 
                 return status[this.password.status];
+            },
+            getSecurityStatus() {
+                if(this.password.status === 1) return `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
+
+                return this.getSecurityClass.capitalize();
             },
             getCustomFields() {
                 let fields = [],
@@ -128,7 +133,7 @@
 
                 &.secure {color : $color-green;}
                 &.weak {color : $color-yellow;}
-                &.broken {color : $color-red;}
+                &.compromised {color : $color-red;}
             }
 
             a {

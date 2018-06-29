@@ -14,8 +14,17 @@
             <div class="settings-container">
                 <section class="security">
                     <translate tag="h1" say="Security"/>
-                    <translate tag="h3" say="Password Generator"/>
 
+                    <translate tag="h3" say="Password Rules"/>
+                    <translate tag="label" for="setting-check-duplicates" say="Mark duplicates"/>
+                    <input type="checkbox" id="setting-check-duplicates" v-model="settings['user.password.security.duplicates']">
+                    <settings-help text="Mark passwords as weak if they are being used for multiple accounts"/>
+
+                    <translate tag="label" for="setting-check-age" say="Maximum age in days"/>
+                    <input type="number" min="0" id="setting-check-age" v-model="settings['user.password.security.age']">
+                    <settings-help text="Mark passwords as weak if they surpass the specified amount of days"/>
+
+                    <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
                     <select id="setting-security-level" v-model="settings['user.password.generator.strength']">
                         <option value="1">1</option>
@@ -263,7 +272,6 @@
 
 <style lang="scss">
     .app-content-left.settings {
-
         .settings-level {
             color    : $color-grey-dark;
             position : absolute;
@@ -382,6 +390,13 @@
 
             .settings-level label {
                 display : none;
+            }
+        }
+
+        @media all and (max-width : $width-extra-small) {
+            .settings-container {
+                padding      : 10px 10px 10px 0;
+                margin-right : -1em;
             }
         }
     }
