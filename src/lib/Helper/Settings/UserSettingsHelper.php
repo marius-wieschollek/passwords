@@ -26,14 +26,16 @@ class UserSettingsHelper {
      */
     protected $userSettings
         = [
-            'password/generator/strength' => 'integer',
-            'password/generator/numbers'  => 'boolean',
-            'password/generator/special'  => 'boolean',
-            'mail/security'               => 'boolean',
-            'mail/shares'                 => 'boolean',
-            'notification/security'       => 'boolean',
-            'notification/shares'         => 'boolean',
-            'notification/errors'         => 'boolean'
+            'password/generator/strength'  => 'integer',
+            'password/generator/numbers'   => 'boolean',
+            'password/generator/special'   => 'boolean',
+            'password/security/duplicates' => 'boolean',
+            'password/security/age'        => 'integer',
+            'mail/security'                => 'boolean',
+            'mail/shares'                  => 'boolean',
+            'notification/security'        => 'boolean',
+            'notification/shares'          => 'boolean',
+            'notification/errors'          => 'boolean'
         ];
 
     /**
@@ -41,14 +43,16 @@ class UserSettingsHelper {
      */
     protected $userDefaults
         = [
-            'password/generator/strength' => 1,
-            'password/generator/numbers'  => false,
-            'password/generator/special'  => false,
-            'mail/security'               => true,
-            'mail/shares'                 => false,
-            'notification/security'       => true,
-            'notification/shares'         => true,
-            'notification/errors'         => true
+            'password/generator/strength'  => 1,
+            'password/generator/numbers'   => false,
+            'password/generator/special'   => false,
+            'password/security/duplicates' => true,
+            'password/security/age'        => 0,
+            'mail/security'                => true,
+            'mail/shares'                  => false,
+            'notification/security'        => true,
+            'notification/shares'          => true,
+            'notification/errors'          => true
         ];
 
     /**
