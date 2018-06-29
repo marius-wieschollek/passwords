@@ -216,7 +216,7 @@ class LegacyPasswordApiController extends ApiController {
             strtotime($datechanged),
             $revision->isHidden(),
             $deleted==true,
-            $revision->isFavourite()
+            $revision->isFavorite()
         );
         $this->passwordRevisionService->save($revision);
         $this->passwordService->setRevision($model, $revision);

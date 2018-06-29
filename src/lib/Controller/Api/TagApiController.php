@@ -42,7 +42,7 @@ class TagApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favourite'];
+    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favorite'];
 
     /**
      * TagApiController constructor.
@@ -73,7 +73,7 @@ class TagApiController extends AbstractObjectApiController {
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
-     * @param bool   $favourite
+     * @param bool   $favorite
      *
      * @return JSONResponse
      * @throws \Exception
@@ -85,13 +85,13 @@ class TagApiController extends AbstractObjectApiController {
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
-        bool $favourite = false
+        bool $favorite = false
     ): JSONResponse {
         if($edited === 0) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, false, $favourite
+            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, false, $favorite
         );
 
         $this->revisionService->save($revision);
@@ -114,7 +114,7 @@ class TagApiController extends AbstractObjectApiController {
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
-     * @param bool   $favourite
+     * @param bool   $favorite
      *
      * @return JSONResponse
      * @throws \Exception
@@ -129,7 +129,7 @@ class TagApiController extends AbstractObjectApiController {
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
-        bool $favourite = false
+        bool $favorite = false
     ): JSONResponse {
         $model = $this->modelService->findByUuid($id);
 
@@ -137,7 +137,7 @@ class TagApiController extends AbstractObjectApiController {
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
         if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favourite
+            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
         );
 
         $this->revisionService->save($revision);

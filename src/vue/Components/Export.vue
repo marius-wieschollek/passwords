@@ -101,9 +101,9 @@
                 buttonText: 'Export',
                 exporting : false,
                 fieldMap  : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'folderLabel', 'tagLabels', 'edited', 'created', 'favourite', 'id', 'revision', 'folderId', 'tagIds', 'empty'],
-                    folders  : ['label', 'parentLabel', 'edited', 'created', 'favourite', 'id', 'revision', 'parentId', 'empty'],
-                    tags     : ['label', 'color', 'edited', 'created', 'favourite', 'id', 'revision', 'empty']
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'folderLabel', 'tagLabels', 'edited', 'created', 'favorite', 'id', 'revision', 'folderId', 'tagIds', 'empty'],
+                    folders  : ['label', 'parentLabel', 'edited', 'created', 'favorite', 'id', 'revision', 'parentId', 'empty'],
+                    tags     : ['label', 'color', 'edited', 'created', 'favorite', 'id', 'revision', 'empty']
                 },
                 nightly   : process.env.NIGHTLY_FEATURES
             };

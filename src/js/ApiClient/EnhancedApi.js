@@ -974,7 +974,7 @@ export default class EnhancedApi extends SimpleApi {
                 type   : 'boolean',
                 default: false
             },
-            favourite   : {
+            favorite    : {
                 type   : 'boolean',
                 default: false
             },
@@ -991,38 +991,38 @@ export default class EnhancedApi extends SimpleApi {
      */
     static getFolderDefinition() {
         return {
-            id       : {
+            id      : {
                 type  : 'string',
                 length: 36
             },
-            label    : {
+            label   : {
                 type    : 'string',
                 length  : 48,
                 required: true
             },
-            parent   : {
+            parent  : {
                 type   : 'string',
                 length : 36,
                 default: '00000000-0000-0000-0000-000000000000'
             },
-            cseType  : {
+            cseType : {
                 type   : 'string',
                 length : 10,
                 default: 'none'
             },
-            edited   : {
+            edited  : {
                 type   : 'number',
                 default: 0
             },
-            hidden   : {
+            hidden  : {
                 type   : 'boolean',
                 default: false
             },
-            trashed  : {
+            trashed : {
                 type   : 'boolean',
                 default: false
             },
-            favourite: {
+            favorite: {
                 type   : 'boolean',
                 default: false
             }
@@ -1035,38 +1035,38 @@ export default class EnhancedApi extends SimpleApi {
      */
     static getTagDefinition() {
         return {
-            id       : {
+            id      : {
                 type  : 'string',
                 length: 36
             },
-            label    : {
+            label   : {
                 type    : 'string',
                 length  : 48,
                 required: true
             },
-            color    : {
+            color   : {
                 type    : 'string',
                 length  : 48,
                 required: true
             },
-            cseType  : {
+            cseType : {
                 type   : 'string',
                 length : 10,
                 default: 'none'
             },
-            edited   : {
+            edited  : {
                 type   : 'number',
                 default: 0
             },
-            hidden   : {
+            hidden  : {
                 type   : 'boolean',
                 default: false
             },
-            trashed  : {
+            trashed : {
                 type   : 'boolean',
                 default: false
             },
-            favourite: {
+            favorite: {
                 type   : 'boolean',
                 default: false
             }

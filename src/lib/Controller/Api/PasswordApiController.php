@@ -64,7 +64,7 @@ class PasswordApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'status', 'trashed', 'favourite'];
+    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'status', 'trashed', 'favorite'];
 
     /**
      * PasswordApiController constructor.
@@ -111,7 +111,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $folder
      * @param int    $edited
      * @param bool   $hidden
-     * @param bool   $favourite
+     * @param bool   $favorite
      * @param array  $tags
      *
      * @return JSONResponse
@@ -129,7 +129,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $folder = FolderService::BASE_FOLDER_UUID,
         int $edited = 0,
         bool $hidden = false,
-        bool $favourite = false,
+        bool $favorite = false,
         array $tags = []
     ): JSONResponse {
         if($edited === 0) $edited = time();
@@ -137,7 +137,7 @@ class PasswordApiController extends AbstractObjectApiController {
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
             $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden,
-            false, $favourite
+            false, $favorite
         );
 
         $this->revisionService->save($revision);
@@ -168,7 +168,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $folder
      * @param int    $edited
      * @param bool   $hidden
-     * @param bool   $favourite
+     * @param bool   $favorite
      * @param array  $tags
      *
      * @return JSONResponse
@@ -190,7 +190,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $folder = FolderService::BASE_FOLDER_UUID,
         int $edited = 0,
         bool $hidden = false,
-        bool $favourite = false,
+        bool $favorite = false,
         array $tags = []
     ): JSONResponse {
         /** @var Password $model */
@@ -220,7 +220,7 @@ class PasswordApiController extends AbstractObjectApiController {
         if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
             $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
-            $favourite
+            $favorite
         );
 
         $this->revisionService->save($revision);
