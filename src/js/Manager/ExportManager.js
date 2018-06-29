@@ -87,19 +87,19 @@ export class ExportManager {
 
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
             data = await this._convertDbToExportArray(data, header.clone());
             csv.passwords = ExportManager._createCsvExport(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
-                header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
+                header = ['label', 'parentLabel', 'favorite', 'edited', 'id', 'revision', 'parentId'];
             data = await this._convertDbToExportArray(data, header.clone());
             csv.folders = ExportManager._createCsvExport(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
-                header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
+                header = ['label', 'color', 'favorite', 'edited', 'id', 'revision'];
             data = await this._convertDbToExportArray(data, header.clone());
             csv.tags = ExportManager._createCsvExport(data, header);
         }
@@ -141,19 +141,19 @@ export class ExportManager {
         let sheets = {};
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
             data = await this._convertDbToExportArray(data, header.clone());
             sheets.passwords = ExportManager._convertOfficeExport(data, header);
         }
         if(model.indexOf('folders') !== -1) {
             let data   = await ExportManager._getFoldersForExport(),
-                header = ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId'];
+                header = ['label', 'parentLabel', 'favorite', 'edited', 'id', 'revision', 'parentId'];
             data = await this._convertDbToExportArray(data, header.clone());
             sheets.folders = ExportManager._convertOfficeExport(data, header);
         }
         if(model.indexOf('tags') !== -1) {
             let data   = await ExportManager._getTagsForExport(),
-                header = ['label', 'color', 'favourite', 'edited', 'id', 'revision'];
+                header = ['label', 'color', 'favorite', 'edited', 'id', 'revision'];
             data = await this._convertDbToExportArray(data, header.clone());
             sheets.tags = ExportManager._convertOfficeExport(data, header);
         }
@@ -386,7 +386,7 @@ export class ExportManager {
                     customFields: element.customFields,
                     folder      : element.folder,
                     edited      : Math.floor(element.edited.getTime() / 1000),
-                    favourite   : element.favourite
+                    favorite    : element.favorite
                 };
 
             password.tags = [];
@@ -415,12 +415,12 @@ export class ExportManager {
             let element = data[i];
             folders.push(
                 {
-                    id       : element.id,
-                    revision : element.revision,
-                    label    : element.label,
-                    parent   : element.parent,
-                    edited   : Math.floor(element.edited.getTime() / 1000),
-                    favourite: element.favourite
+                    id      : element.id,
+                    revision: element.revision,
+                    label   : element.label,
+                    parent  : element.parent,
+                    edited  : Math.floor(element.edited.getTime() / 1000),
+                    favorite: element.favorite
                 }
             );
         }
@@ -442,12 +442,12 @@ export class ExportManager {
             let element = data[i];
             tags.push(
                 {
-                    id       : element.id,
-                    revision : element.revision,
-                    label    : element.label,
-                    color    : element.color,
-                    edited   : Math.floor(element.edited.getTime() / 1000),
-                    favourite: element.favourite
+                    id      : element.id,
+                    revision: element.revision,
+                    label   : element.label,
+                    color   : element.color,
+                    edited  : Math.floor(element.edited.getTime() / 1000),
+                    favorite: element.favorite
                 }
             );
         }

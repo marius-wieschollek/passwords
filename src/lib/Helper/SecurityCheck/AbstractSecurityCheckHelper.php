@@ -24,13 +24,13 @@ abstract class AbstractSecurityCheckHelper {
     const CONFIG_DB_ENCODING   = 'passwords/localdb/encoding';
     const CONFIG_DB_TYPE       = 'passwords/localdb/type';
 
-    const STATUS_COMPROMISED = 'COMPROMISED';
-    const STATUS_OUTDATED    = 'OUTDATED';
-    const STATUS_DUPLICATE   = 'DUPLICATE';
-    const STATUS_GOOD        = 'GOOD';
-    const LEVEL_OK           = 0;
-    const LEVEL_WEAK         = 1;
-    const LEVEL_BAD          = 2;
+    const STATUS_BREACHED  = 'BREACHED';
+    const STATUS_OUTDATED  = 'OUTDATED';
+    const STATUS_DUPLICATE = 'DUPLICATE';
+    const STATUS_GOOD      = 'GOOD';
+    const LEVEL_OK         = 0;
+    const LEVEL_WEAK       = 1;
+    const LEVEL_BAD        = 2;
 
     /**
      * @var FileCacheService
@@ -87,7 +87,7 @@ abstract class AbstractSecurityCheckHelper {
      * @return array
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): array {
-        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_COMPROMISED];
+        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
 
         $userRules = $this->userRulesCheck->getRevisionSecurityLevel($revision);
         if($userRules !== null) return $userRules;

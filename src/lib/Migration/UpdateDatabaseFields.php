@@ -7,11 +7,15 @@
 
 namespace OCA\Passwords\Migration;
 
+use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
+use OCA\Passwords\Services\Object\AbstractRevisionService;
+use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
+use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
@@ -47,6 +51,16 @@ class UpdateDatabaseFields implements IRepairStep {
     protected $environment;
 
     /**
+     * @var TagRevisionService
+     */
+    protected $tagRevisionService;
+
+    /**
+     * @var FolderRevisionService
+     */
+    protected $folderRevisionService;
+
+    /**
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
@@ -57,18 +71,24 @@ class UpdateDatabaseFields implements IRepairStep {
      * @param LoggingService          $logger
      * @param ConfigurationService    $config
      * @param EnvironmentService      $environment
+     * @param TagRevisionService      $tagRevisionService
+     * @param FolderRevisionService   $folderRevisionService
      * @param PasswordRevisionService $passwordRevisionService
      */
     public function __construct(
         LoggingService $logger,
         ConfigurationService $config,
         EnvironmentService $environment,
+        TagRevisionService $tagRevisionService,
+        FolderRevisionService $folderRevisionService,
         PasswordRevisionService $passwordRevisionService
     ) {
         $this->config                  = $config;
         $this->logger                  = $logger;
         $this->environment             = $environment;
         $this->passwordRevisionService = $passwordRevisionService;
+        $this->tagRevisionService      = $tagRevisionService;
+        $this->folderRevisionService   = $folderRevisionService;
     }
 
     /**
@@ -99,6 +119,7 @@ class UpdateDatabaseFields implements IRepairStep {
 
         $databaseVersion = intval($this->config->getAppValue('database_version', 0));
         if($databaseVersion < 1) $this->executeMigration('createCustomFields', $output);
+        if($databaseVersion < 2) $this->executeMigration('migrateFavoriteStatus', $output);
     }
 
     /**
@@ -179,11 +200,51 @@ class UpdateDatabaseFields implements IRepairStep {
     }
 
     /**
+     * @param IOutput $output
+     *
+     * @throws \Exception
+     */
+    protected function migrateFavoriteStatus(IOutput $output): void {
+        /** @var PasswordRevision[] $passwordRevisions */
+        $passwordRevisions = $this->passwordRevisionService->findAll();
+        $folderRevisions   = $this->folderRevisionService->findAll();
+        $tagRevisions      = $this->tagRevisionService->findAll();
+
+        $count = count($passwordRevisions) + count($folderRevisions) + count($tagRevisions);
+        $output->info("Migrating Favorite Status (total: {$count})");
+        $output->startProgress($count);
+        $this->migrateFavoriteField($output, $passwordRevisions, $this->passwordRevisionService);
+        $this->migrateFavoriteField($output, $folderRevisions, $this->folderRevisionService);
+        $this->migrateFavoriteField($output, $tagRevisions, $this->tagRevisionService);
+        $output->finishProgress();
+        $this->setDatabaseVersion(2);
+    }
+
+    /**
+     * @param IOutput                   $output
+     * @param  AbstractRevisionEntity[] $revisions
+     * @param  AbstractRevisionService  $service
+     */
+    protected function migrateFavoriteField(IOutput $output, array $revisions, AbstractRevisionService $service): void {
+        foreach($revisions as $revision) {
+            try {
+                $revision->setFavorite($revision->getFavourite());
+                $service->save($revision);
+            } catch(\Throwable $e) {
+                $output->warning(
+                    "Failed updating revision #{$revision->getUuid()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
+                );
+            }
+            $output->advance(1);
+        }
+    }
+
+    /**
      * @param int $version
      */
     protected function setDatabaseVersion(int $version): void {
         $databaseVersion = intval($this->config->getAppValue('database_version', 0));
 
-        if($databaseVersion < $version) $this->config->setAppValue('database_version', 1);
+        if($databaseVersion < $version) $this->config->setAppValue('database_version', $version);
     }
 }

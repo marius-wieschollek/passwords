@@ -11,8 +11,8 @@
                 <router-link class="nav-icon-recent" :to="{ name: 'Recent'}" active-class="active" tag="li">
                     <translate say="Recent"/>
                 </router-link>
-                <router-link class="nav-icon-favourites" :to="{ name: 'Favourites'}" active-class="active" tag="li">
-                    <translate say="Favourites"/>
+                <router-link class="nav-icon-favorites" :to="{ name: 'Favorites'}" active-class="active" tag="li">
+                    <translate say="Favorites"/>
                 </router-link>
                 <router-link class="nav-icon-shared" :to="{ name: 'Shared'}" active-class="active" tag="li">
                     <translate say="Shared"/>
@@ -127,7 +127,7 @@
             &.nav-icon-tags:before { content : "\f02c"; }
             &.nav-icon-security:before { content : "\f132"; }
             &.nav-icon-shared:before { content : "\f1e0"; }
-            &.nav-icon-favourites:before { content : "\f005"; }
+            &.nav-icon-favorites:before { content : "\f005"; }
             &.nav-icon-search:before { content : "\f002"; }
             &.nav-icon-trash:before { content : "\f014"; }
             &.nav-icon-more:before { content : "\f067"; }

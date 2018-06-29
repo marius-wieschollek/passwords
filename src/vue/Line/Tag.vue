@@ -1,6 +1,6 @@
 <template>
     <div class="row tag" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
-        <i class="fa fa-star favourite" :class="{ active: tag.favourite }" @click="favouriteAction($event)"></i>
+        <i class="fa fa-star favorite" :class="{ active: tag.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
@@ -55,11 +55,11 @@
         },
 
         methods: {
-            favouriteAction($event) {
+            favoriteAction($event) {
                 $event.stopPropagation();
-                this.tag.favourite = !this.tag.favourite;
+                this.tag.favorite = !this.tag.favorite;
                 TagManager.updateTag(this.tag)
-                          .catch(() => { this.tag.favourite = !this.tag.favourite; });
+                          .catch(() => { this.tag.favorite = !this.tag.favorite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;

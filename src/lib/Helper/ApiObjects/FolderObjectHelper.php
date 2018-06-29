@@ -122,18 +122,18 @@ class FolderObjectHelper extends AbstractObjectHelper {
     protected function getModel(Folder $folder, FolderRevision $revision): array {
 
         return [
-            'id'        => $folder->getUuid(),
-            'created'   => $folder->getCreated(),
-            'updated'   => $folder->getUpdated(),
-            'edited'    => $revision->getEdited(),
-            'revision'  => $revision->getUuid(),
-            'label'     => $revision->getLabel(),
-            'parent'    => $revision->getParent(),
-            'cseType'   => $revision->getCseType(),
-            'sseType'   => $revision->getSseType(),
-            'hidden'    => $revision->isHidden(),
-            'trashed'   => $revision->isTrashed(),
-            'favourite' => $revision->isFavourite()
+            'id'       => $folder->getUuid(),
+            'created'  => $folder->getCreated(),
+            'updated'  => $folder->getUpdated(),
+            'edited'   => $revision->getEdited(),
+            'revision' => $revision->getUuid(),
+            'label'    => $revision->getLabel(),
+            'parent'   => $revision->getParent(),
+            'cseType'  => $revision->getCseType(),
+            'sseType'  => $revision->getSseType(),
+            'hidden'   => $revision->isHidden(),
+            'trashed'  => $revision->isTrashed(),
+            'favorite' => $revision->isFavorite()
         ];
     }
 
@@ -151,17 +151,17 @@ class FolderObjectHelper extends AbstractObjectHelper {
         $object['revisions'] = [];
         foreach($revisions as $revision) {
             $current = [
-                'id'        => $revision->getUuid(),
-                'created'   => $revision->getCreated(),
-                'updated'   => $revision->getUpdated(),
-                'edited'    => $revision->getEdited(),
-                'label'     => $revision->getLabel(),
-                'parent'    => $revision->getParent(),
-                'cseType'   => $revision->getCseType(),
-                'sseType'   => $revision->getSseType(),
-                'hidden'    => $revision->isHidden(),
-                'trashed'   => $revision->isTrashed(),
-                'favourite' => $revision->isFavourite()
+                'id'       => $revision->getUuid(),
+                'created'  => $revision->getCreated(),
+                'updated'  => $revision->getUpdated(),
+                'edited'   => $revision->getEdited(),
+                'label'    => $revision->getLabel(),
+                'parent'   => $revision->getParent(),
+                'cseType'  => $revision->getCseType(),
+                'sseType'  => $revision->getSseType(),
+                'hidden'   => $revision->isHidden(),
+                'trashed'  => $revision->isTrashed(),
+                'favorite' => $revision->isFavorite()
             ];
 
             $object['revisions'][] = $current;

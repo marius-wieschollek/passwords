@@ -8,7 +8,7 @@ import SectionShared from '@vue/Section/Shared';
 import SectionSearch from '@vue/Section/Search';
 import SectionFolders from '@vue/Section/Folders';
 import SectionSecurity from '@vue/Section/Security';
-import SectionFavourites from '@vue/Section/Favourites';
+import SectionFavorites from '@vue/Section/Favorites';
 
 function handleChunkLoadingError(e, module) {
     console.error(e);
@@ -47,7 +47,7 @@ let router = new Router(
             {name: 'Folders', path: '/folders/:folder?', components: {main: SectionFolders}},
             {name: 'Tags', path: '/tags/:tag?', components: {main: SectionTags}},
             {name: 'Recent', path: '/recent', components: {main: SectionRecent}},
-            {name: 'Favourites', path: '/favourites', components: {main: SectionFavourites}},
+            {name: 'Favorites', path: '/favorites', components: {main: SectionFavorites}},
             {name: 'Shared', path: '/shared/:type?', components: {main: SectionShared}},
             {name: 'Security', path: '/security/:status?', components: {main: SectionSecurity}},
             {name: 'Search', path: '/search/:query?', components: {main: SectionSearch}},

@@ -178,6 +178,12 @@
                 <default>false</default>
             </field>
             <field>
+                <name>favorite</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
                 <name>status</name>
                 <type>integer</type>
                 <length>1</length>
@@ -342,6 +348,12 @@
                 <default>false</default>
             </field>
             <field>
+                <name>favorite</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
                 <name>hidden</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
@@ -491,6 +503,12 @@
             </field>
             <field>
                 <name>favourite</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
+                <name>favorite</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
                 <default>false</default>

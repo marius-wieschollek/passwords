@@ -153,7 +153,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             'sseType'      => $revision->getSseType(),
             'hidden'       => $revision->isHidden(),
             'trashed'      => $revision->isTrashed(),
-            'favourite'    => $revision->isFavourite(),
+            'favorite'     => $revision->isFavorite(),
             'editable'     => $password->isEditable()
         ];
     }
@@ -190,7 +190,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
                 'sseType'      => $revision->getSseType(),
                 'hidden'       => $revision->isHidden(),
                 'trashed'      => $revision->isTrashed(),
-                'favourite'    => $revision->isFavourite(),
+                'favorite'     => $revision->isFavorite(),
             ];
 
             $object['revisions'][] = $current;

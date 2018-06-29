@@ -12,15 +12,17 @@ class SearchManager {
         this._status = {active: false, available: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
         this._index = null;
         this._indexFields = {
-            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id'],
-            folders  : ['label', 'type', 'id'],
-            tags     : ['label', 'type', 'id']
+            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType'],
+            folders  : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType'],
+            tags     : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType']
         };
         this._domIdentifiers = {
             passwords: 'data-password-id',
             folders  : 'data-folder-id',
             tags     : 'data-tag-id'
         };
+        this._exactMatchFields = ['status', 'favorite'];
+        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', user: 'username', all: ['website', 'username', 'url', 'notes', 'label']};
     }
 
     init() {
@@ -45,7 +47,7 @@ class SearchManager {
         }
 
         let stats        = {passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
-            searchParams = SearchManager._processQuery(query),
+            searchParams = this._processQuery(query),
             index        = this._getSearchIndex();
         for(let key in index) {
             if(!index.hasOwnProperty(key)) continue;
@@ -57,7 +59,7 @@ class SearchManager {
                     el     = document.querySelector(`[${identifier}="${object.id}"]`);
                 if(!el) continue;
 
-                if(SearchManager._checkIfObjectMatchesQuery(object, searchParams)) {
+                if(this._checkIfObjectMatchesQuery(object, searchParams)) {
                     if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
                     el.classList.add('search-visible');
                     stats[key]++;
@@ -93,26 +95,20 @@ class SearchManager {
      * @returns {boolean}
      * @private
      */
-    static _checkIfObjectMatchesQuery(entry, query) {
+    _checkIfObjectMatchesQuery(entry, query) {
         queryLoop: for(let j = 0; j < query.length; j++) {
-            let fields = query[j].field,
+            let fields = query[j].fields,
                 search = query[j].value;
-
-            if(fields === 'all') {
-                fields = ['website', 'username', 'url', 'notes', 'label'];
-            } else if(fields === 'name' || fields === 'title') {
-                fields = ['label'];
-            } else {
-                fields = [fields];
-            }
 
             for(let k = 0; k < fields.length; k++) {
                 let field = fields[k];
                 if(!entry.hasOwnProperty(field)) continue;
 
-                if(entry[field].indexOf(search) !== -1) {
+                if(this._exactMatchFields.indexOf(search) !== -1 && entry[field] === search) {
                     continue queryLoop;
                 }
+
+                if(entry[field].indexOf(search) !== -1) continue queryLoop;
             }
             return false;
         }
@@ -170,7 +166,7 @@ class SearchManager {
      * @returns {string}
      * @private
      */
-    static _processQuery(query) {
+    _processQuery(query) {
         let isQuoted  = false,
             value     = '',
             substring = '',
@@ -182,7 +178,7 @@ class SearchManager {
             let char = query[i];
 
             if(!isQuoted && char === ':' && substring.length !== 0) {
-                SearchManager._addFieldToSearchParams(params, field, value);
+                this._addFieldToSearchParams(params, field, value);
 
                 field = substring;
                 substring = '';
@@ -192,7 +188,7 @@ class SearchManager {
                 substring = '';
             } else if(char === '"') {
                 if(value.length !== 0 || substring.length !== 0) {
-                    SearchManager._addFieldToSearchParams(params, field, value + substring);
+                    this._addFieldToSearchParams(params, field, value + substring);
                     substring = '';
                     field = 'all';
                     value = '';
@@ -206,7 +202,7 @@ class SearchManager {
             }
         }
         if(substring.length !== 0) value += substring;
-        if(value.length !== 0) SearchManager._addFieldToSearchParams(params, field, value);
+        if(value.length !== 0) this._addFieldToSearchParams(params, field, value);
 
         return params;
     }
@@ -218,9 +214,13 @@ class SearchManager {
      * @param rawValue
      * @private
      */
-    static _addFieldToSearchParams(params, field, rawValue) {
-        let value = rawValue.trim();
-        params.push({field, value});
+    _addFieldToSearchParams(params, field, rawValue) {
+        if(this._aliasFields.hasOwnProperty(field)) field = this._aliasFields[field];
+
+        let fields = Array.isArray(field) ? field:[field],
+            value = rawValue.trim();
+
+        if(value.length !== 0) params.push({fields, value});
     }
 
     /**
@@ -245,7 +245,18 @@ class SearchManager {
                 for(let j = 0; j < fields.length; j++) {
                     let field = fields[j];
 
-                    indexedObject[field] = object.hasOwnProperty(field) ? object[field].toLowerCase():'';
+                    if(object.hasOwnProperty(field)) {
+                        let type = typeof object[field];
+                        if(object[field] instanceof Date) {
+                            indexedObject[field] = Math.floor(object[field].getTime() / 1000);
+                        } else if(type === 'boolean') {
+                            indexedObject[field] = object[field] ? '1':'0';
+                        } else {
+                            indexedObject[field] = object[field].toString().toLowerCase();
+                        }
+                    } else {
+                        indexedObject[field] = '';
+                    }
                 }
                 this._index[key].push(indexedObject);
             }

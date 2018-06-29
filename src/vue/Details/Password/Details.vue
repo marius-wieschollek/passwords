@@ -62,7 +62,7 @@
                 return count;
             },
             getSecurityClass() {
-                let status = ['secure', 'weak', 'compromised'];
+                let status = ['secure', 'weak', 'breached'];
 
                 return status[this.password.status];
             },
@@ -133,7 +133,7 @@
 
                 &.secure {color : $color-green;}
                 &.weak {color : $color-yellow;}
-                &.compromised {color : $color-red;}
+                &.breached {color : $color-red;}
             }
 
             a {
