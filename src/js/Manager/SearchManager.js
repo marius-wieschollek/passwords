@@ -12,9 +12,9 @@ class SearchManager {
         this._status = {active: false, available: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
         this._index = null;
         this._indexFields = {
-            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'status', 'statusCode', 'favorite', 'sseType', 'cseType'],
-            folders  : ['label', 'type', 'id', 'revision', 'sseType', 'cseType'],
-            tags     : ['label', 'type', 'id', 'revision', 'sseType', 'cseType']
+            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType'],
+            folders  : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType'],
+            tags     : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType']
         };
         this._domIdentifiers = {
             passwords: 'data-password-id',
@@ -22,7 +22,7 @@ class SearchManager {
             tags     : 'data-tag-id'
         };
         this._exactMatchFields = ['status', 'favorite'];
-        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', all: ['website', 'username', 'url', 'notes', 'label']};
+        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', user: 'username', all: ['website', 'username', 'url', 'notes', 'label']};
     }
 
     init() {
@@ -247,7 +247,9 @@ class SearchManager {
 
                     if(object.hasOwnProperty(field)) {
                         let type = typeof object[field];
-                        if(type === 'boolean') {
+                        if(object[field] instanceof Date) {
+                            indexedObject[field] = Math.floor(object[field].getTime() / 1000);
+                        } else if(type === 'boolean') {
                             indexedObject[field] = object[field] ? '1':'0';
                         } else {
                             indexedObject[field] = object[field].toString().toLowerCase();
