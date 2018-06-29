@@ -49,12 +49,16 @@
                     <translate tag="label" for="setting-section-default" say="Initial section"/>
                     <select id="setting-section-default" v-model="settings['client.ui.section.default']">
                         <translate tag="option" value="all" say="All Passwords"/>
-                        <translate tag="option" value="favourites" say="Favourites"/>
+                        <translate tag="option" value="favorites" say="Favorites"/>
                         <translate tag="option" value="folders" say="Folders"/>
                         <translate tag="option" value="tags" say="Tags"/>
                         <translate tag="option" value="recent" say="Recent"/>
                     </select>
                     <settings-help text="The initial section to be shown when the app is opened"/>
+
+                    <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="advancedSettings">
+                    <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="advancedSettings"/>
 
                     <translate tag="h3" say="Passwords List View"/>
                     <translate tag="label" for="setting-password-title" say="Set title from"/>
@@ -101,10 +105,6 @@
                     <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
-
-                    <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="advancedSettings"/>
-                    <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="advancedSettings">
-                    <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="advancedSettings"/>
 
                     <translate tag="h3" say="Search" v-if="advancedSettings"/>
                     <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>
