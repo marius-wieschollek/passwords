@@ -11,7 +11,7 @@
                 </div>
             </breadcrumb>
 
-            <div class="settings-container">
+            <div class="settings-container" :class="{advanced: advanced==='1'}">
                 <section class="security">
                     <translate tag="h1" say="Security"/>
 
@@ -144,13 +144,6 @@
                     <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.errors']" v-if="advancedSettings">
                     <settings-help text="Notifies you when a background operation fails" v-if="advancedSettings"/>
                 </section>
-                <section class="tests" v-if="nightly">
-                    <translate tag="h1" say="Field tests"/>
-
-                    <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
-                    <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
-                    <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
-                </section>
                 <section class="danger">
                     <translate tag="h1" say="Danger Zone"/>
 
@@ -161,6 +154,13 @@
                     <translate tag="label" for="danger-purge" say="Delete everything"/>
                     <translate tag="input" type="button" id="danger-purge" value="Delete" @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
+                </section>
+                <section class="tests" v-if="nightly">
+                    <translate tag="h1" say="Field tests"/>
+
+                    <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
+                    <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
+                    <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
                 </section>
             </div>
         </div>
@@ -287,8 +287,16 @@
         }
 
         .settings-container {
-            padding      : 10px;
-            margin-right : -2em;
+            padding               : 10px;
+            margin-right          : -2em;
+            display               : grid;
+            grid-template-columns : 1fr 1fr 1fr 1fr;
+
+            &.advanced section.ui {
+                grid-row-start    : 1;
+                grid-row-end      : 3;
+                grid-column-start : 2;
+            }
         }
 
         h1 {
@@ -304,9 +312,7 @@
         section {
             display               : grid;
             grid-template-columns : 3fr 2fr 30px;
-            width                 : 420px;
-            max-width             : 25%;
-            float                 : left;
+            grid-auto-rows        : max-content;
             padding               : 0 2em 4em 0;
 
             h1,
@@ -348,48 +354,36 @@
         }
 
         @media all and (max-width : $width-extra-large) {
-            padding : 10px 0 0 10px;
-
-            section {
-                width     : 33%;
-                max-width : 33%;
-                padding   : 0 2em 4em 0;
+            .settings-container {
+                grid-template-columns : 1fr 1fr 1fr;
             }
         }
 
         @media all and (max-width : $width-large) {
-            section {
-                width     : 50%;
-                max-width : 50%;
-                padding   : 0 2em 4em 0;
-            }
-        }
+            padding : 0;
 
-        @media all and (max-width : $width-medium) {
-            padding : 44px 0 0 10px;
-            #controls {
-                display  : flex;
-                position : fixed;
-                width    : 100%;
-                margin   : 0 -10px;
+            .settings-container {
+                grid-template-columns : 1fr 1fr;
+                margin-right          : -3em;
             }
         }
 
         @media all and (max-width : $width-medium) {
             margin-right : 0;
-            padding      : 44px 0 0 10px;
-
-            #controls {
-                display  : flex;
-                position : fixed;
-                width    : 100%;
-                margin   : 0 -10px;
-            }
 
             section {
-                width     : 100%;
-                max-width : 100%;
-                padding   : 0 0 4em 0;
+                padding : 0 0 4em 0;
+            }
+
+            .settings-container {
+                grid-template-columns : 1fr;
+                margin-right          : -1em;
+
+                &.advanced section.ui {
+                    grid-row-start    : initial;
+                    grid-row-end      : initial;
+                    grid-column-start : initial;
+                }
             }
 
             .settings-level label {
@@ -397,10 +391,9 @@
             }
         }
 
-        @media all and (max-width : $width-extra-small) {
+        @media all and (max-width : $width-small) {
             .settings-container {
-                padding      : 10px 10px 10px 0;
-                margin-right : -1em;
+                padding : 10px;
             }
         }
     }
