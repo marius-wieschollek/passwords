@@ -3,8 +3,7 @@ const download = require('download');
 Feature('Handbook');
 
 Before((I) => {
-    I.amOnPage('/index.php/apps/passwords/');
-    I.resizeWindow(1280, 874);
+    I.amOnPage('/index.php/apps/passwords');
 });
 
 Scenario('Log into Nextcloud', (I) => {
@@ -37,7 +36,6 @@ Scenario('Import the sample database', async (I) => {
     await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json', 'tests/codecept/data/');
 
     I.amOnPage('/index.php/apps/passwords/#/backup/import');
-    I.refreshPage();
     I.waitForElement('div.import-container', 10);
     I.click('#app-settings li.nav-icon-more');
     I.attachFile('#passwords-import-file', 'tests/codecept/data/SamplePasswords.json');
@@ -74,9 +72,9 @@ Scenario('Show Main Section', (I) => {
 
 Scenario('Show Folder Section', async (I) => {
     I.amOnPage('/index.php/apps/passwords/#/folders');
+    I.wait(10);
     I.waitForElement('div[data-folder-title=Work]', 10);
     await I.captureElement('folder-single', 'div[data-folder-title=Work]', 0);
-    I.resizeWindow(1280, 874);
     I.click('div[data-folder-title=Work]');
     I.waitForElement('div[data-folder-title=Development]', 10);
     I.captureWholePage('folder-section');
@@ -116,13 +114,13 @@ Scenario('Show Security Section', (I) => {
 Scenario('Show Search Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/search/soc');
     I.waitForInvisible('#app-content.loading', 10);
+    I.executeScript(()=> {document.getElementById('searchbox').value=''});
     I.fillField('#searchbox', 'soc');
     I.captureWholePage('search-section', 0);
 });
 
 Scenario('Show Settings Section', async (I) => {
     I.amOnPage('/index.php/apps/passwords/#/settings');
-    I.refreshPage();
     I.waitForElement('section.security', 10);
     I.click('#app-settings li.nav-icon-more');
     await I.captureWholePage('settings-section', .25);
@@ -132,7 +130,6 @@ Scenario('Show Settings Section', async (I) => {
 
 Scenario('Show Export Section', async (I) => {
     I.amOnPage('/index.php/apps/passwords/#/backup/export');
-    I.refreshPage();
     I.waitForElement('#passwords-export-execute');
     I.click('#app-settings li.nav-icon-more');
     I.captureWholePage('export-section', .25);
@@ -152,7 +149,6 @@ Scenario('Show Import Custom CSV', async (I) => {
     await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/PasswordList.csv', 'tests/codecept/data/');
 
     I.amOnPage('/index.php/apps/passwords/#/backup/import');
-    I.refreshPage();
     I.waitForElement('div.import-container', 10);
     I.click('#app-settings li.nav-icon-more');
 
@@ -175,7 +171,6 @@ Scenario('Show Import Custom CSV', async (I) => {
 
 Scenario('Show Handbook Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/help');
-    I.refreshPage();
     I.waitForElement('h1#help-top', 10);
     I.click('#app-settings li.nav-icon-more');
     I.captureWholePage('handbook-section', .25);
@@ -217,12 +212,10 @@ Scenario('Show Password Details', async (I) => {
     I.waitForInvisible('.image-container .image.loading-hidden', 10);
 
     I.captureWholePage('password-details', 4);
-    I.resizeWindow(1280, 1280);
+    I.setWindowSize(1280, 1280);
     await I.captureElement('password-details-details', '.item-details');
-    I.resizeWindow(1280, 1280);
     I.click('.item-details [data-tab=notes]');
     await I.captureElement('password-details-notes', '.item-details');
-    I.resizeWindow(1280, 1280);
     I.click('.item-details [data-tab=share]');
     /**
      * This photo is currently useless
@@ -231,7 +224,6 @@ Scenario('Show Password Details', async (I) => {
     I.click('.item-details [data-tab=qrcode]');
     I.selectOption('#password-details-qrcode', 'url');
     await I.captureElement('password-details-qrcode', '.item-details');
-    I.resizeWindow(1280, 1280);
     I.click('.item-details [data-tab=revisions]');
     await I.captureElement('password-details-revisions', '.item-details');
 });
