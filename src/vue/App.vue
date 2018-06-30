@@ -23,7 +23,7 @@
                 <router-link class="nav-icon-security" :to="{ name: 'Security'}" active-class="active" tag="li">
                     <translate say="Security"/>
                 </router-link>
-                <router-link class="nav-icon-search" :to="{ name: 'Search'}" active-class="active" tag="li" v-if="showSearch">
+                <router-link class="nav-icon-search" :to="{ name: 'Search'}" active-class="active" tag="li" v-if="isSearchVisible">
                     <translate say="Search"/>
                 </router-link>
             </ul>
@@ -68,17 +68,23 @@
         },
 
         data() {
-            let serverVersion = SettingsManager.get('server.version');
+            let serverVersion = SettingsManager.get('server.version'),
+                showSearch    = SettingsManager.get('client.search.show');
 
             return {
-                serverVersion: serverVersion,
-                showMore     : false
+                serverVersion,
+                showSearch,
+                showMore: false
             };
         },
 
+        created() {
+            SettingsManager.observe('client.search.show', (v) => { this.showSearch = v.value; });
+        },
+
         computed: {
-            showSearch() {
-                return this.$route.name === 'Search';
+            isSearchVisible() {
+                return this.$route.name === 'Search' || this.showSearch;
             }
         },
 
@@ -89,9 +95,6 @@
                 } else {
                     Utility.openLink('https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds');
                 }
-            },
-            openWikiPage() {
-                Utility.openLink('https://git.mdns.eu/nextcloud/passwords/wikis/home#users');
             }
         }
     };

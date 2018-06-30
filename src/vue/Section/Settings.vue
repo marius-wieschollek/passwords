@@ -114,6 +114,10 @@
                     <translate tag="label" for="setting-search-global" say="Search everywhere with Enter" v-if="advancedSettings"/>
                     <input type="checkbox" id="setting-search-global" v-model="settings['client.search.global']" v-if="advancedSettings">
                     <settings-help text="Search everywhere when the enter key is pressed in the search box" v-if="advancedSettings"/>
+
+                    <translate tag="label" for="setting-search-show" say="Always show search section" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-search-show" v-model="settings['client.search.show']" v-if="advancedSettings">
+                    <settings-help text="Always show the section for global search in the navigation" v-if="advancedSettings"/>
                 </section>
                 <section class="notifications">
                     <translate tag="h1" say="Notifications"/>
