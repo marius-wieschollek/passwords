@@ -27,22 +27,30 @@
         data() {
             return {
                 showHiddenFields: SettingsManager.get('client.ui.custom.fields.show.hidden'),
-                customFields: this.fields
+                customFields    : this.fields,
+                fieldPositions  : {}
             };
         },
         computed  : {
             getFields() {
-                let fields = [],
+                let fields     = [],
                     fieldCount = 0;
 
                 for(let name in this.customFields) {
                     if(!this.customFields.hasOwnProperty(name)) continue;
                     fieldCount++;
-                    if(!this.showHiddenFields && name.substr(0,1) === '_') continue;
+                    if(!this.showHiddenFields && name.substr(0, 1) === '_') continue;
 
+                    let position = fields.length;
+                    if(this.fieldPositions.hasOwnProperty(name)) {
+                        position = this.fieldPositions[name];
+                    } else {
+                        this.fieldPositions[name] = position;
+                    }
                     fields.push(
                         {
                             name,
+                            position,
                             type : this.customFields[name].type,
                             value: this.customFields[name].value
                         }
@@ -50,7 +58,7 @@
                 }
 
                 if(fieldCount < 20) fields.push(undefined);
-                return fields;
+                return Utility.sortApiObjectArray(fields, 'position');
             },
             getTakenNames() {
                 return Object.keys(this.customFields);
@@ -58,11 +66,20 @@
         },
         methods   : {
             updateField($event) {
-                let fields = Utility.cloneObject(this.customFields);
-                if($event.originalName !== '' && $event.originalName !== $event.name) {
-                    delete fields[$event.originalName];
+                let fields       = Utility.cloneObject(this.customFields),
+                    originalName = $event.originalName,
+                    name         = $event.name;
+
+                if(originalName !== name) {
+                    if(this.fieldPositions.hasOwnProperty(originalName)) {
+                        this.fieldPositions[name] = this.fieldPositions[originalName];
+                        delete this.fieldPositions[originalName];
+                    }
+
+                    if(originalName !== '') delete fields[originalName];
                 }
-                fields[$event.name] = {
+
+                fields[name] = {
                     type : $event.type,
                     value: $event.value
                 };
