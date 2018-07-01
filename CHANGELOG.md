@@ -3,6 +3,7 @@
 - Added haveibeenpwned V2 support
 - Improved search
 - Improved import
+- Improved custom fields editor
 - Fixed missing password in token
 
 #### 2018.6.3 - Bugfix Release
