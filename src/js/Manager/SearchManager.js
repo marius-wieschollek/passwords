@@ -283,7 +283,7 @@ class SearchManager {
     _globalSearch() {
         document.getElementById('searchbox').addEventListener('keyup', (e) => {
             if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsManager.get('client.search.global')) {
-                router.push({name: 'Search', params: {query: SM.status.query}});
+                router.push({name: 'Search', params: {query: btoa(SM.status.query)}});
             }
         });
     }
