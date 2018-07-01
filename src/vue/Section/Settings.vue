@@ -11,11 +11,20 @@
                 </div>
             </breadcrumb>
 
-            <div class="settings-container">
+            <div class="settings-container" :class="{advanced: advanced==='1'}">
                 <section class="security">
                     <translate tag="h1" say="Security"/>
-                    <translate tag="h3" say="Password Generator"/>
 
+                    <translate tag="h3" say="Password Rules"/>
+                    <translate tag="label" for="setting-check-duplicates" say="Mark duplicates"/>
+                    <input type="checkbox" id="setting-check-duplicates" v-model="settings['user.password.security.duplicates']">
+                    <settings-help text="Mark passwords as weak if they are being used for multiple accounts"/>
+
+                    <translate tag="label" for="setting-check-age" say="Maximum age in days"/>
+                    <input type="number" min="0" id="setting-check-age" v-model="settings['user.password.security.age']">
+                    <settings-help text="Mark passwords as weak if they surpass the specified amount of days"/>
+
+                    <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
                     <select id="setting-security-level" v-model="settings['user.password.generator.strength']">
                         <option value="1">1</option>
@@ -40,12 +49,16 @@
                     <translate tag="label" for="setting-section-default" say="Initial section"/>
                     <select id="setting-section-default" v-model="settings['client.ui.section.default']">
                         <translate tag="option" value="all" say="All Passwords"/>
-                        <translate tag="option" value="favourites" say="Favourites"/>
+                        <translate tag="option" value="favorites" say="Favorites"/>
                         <translate tag="option" value="folders" say="Folders"/>
                         <translate tag="option" value="tags" say="Tags"/>
                         <translate tag="option" value="recent" say="Recent"/>
                     </select>
                     <settings-help text="The initial section to be shown when the app is opened"/>
+
+                    <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="advancedSettings">
+                    <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="advancedSettings"/>
 
                     <translate tag="h3" say="Passwords List View"/>
                     <translate tag="label" for="setting-password-title" say="Set title from"/>
@@ -93,10 +106,6 @@
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
 
-                    <translate tag="label" for="setting-password-hidden" say="Show hidden custom fields" v-if="advancedSettings"/>
-                    <input type="checkbox" id="setting-password-hidden" v-model="settings['client.ui.custom.fields.show.hidden']" v-if="advancedSettings">
-                    <settings-help text="Show hidden custom fields in the edit form and detail section of a password" v-if="advancedSettings"/>
-
                     <translate tag="h3" say="Search" v-if="advancedSettings"/>
                     <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>
                     <input type="checkbox" id="setting-search-live" v-model="settings['client.search.live']" v-if="advancedSettings">
@@ -105,6 +114,10 @@
                     <translate tag="label" for="setting-search-global" say="Search everywhere with Enter" v-if="advancedSettings"/>
                     <input type="checkbox" id="setting-search-global" v-model="settings['client.search.global']" v-if="advancedSettings">
                     <settings-help text="Search everywhere when the enter key is pressed in the search box" v-if="advancedSettings"/>
+
+                    <translate tag="label" for="setting-search-show" say="Always show search section" v-if="advancedSettings"/>
+                    <input type="checkbox" id="setting-search-show" v-model="settings['client.search.show']" v-if="advancedSettings">
+                    <settings-help text="Always show the section for global search in the navigation" v-if="advancedSettings"/>
                 </section>
                 <section class="notifications">
                     <translate tag="h1" say="Notifications"/>
@@ -131,17 +144,6 @@
                     <input type="checkbox" id="setting-notification-errors" v-model="settings['user.notification.errors']" v-if="advancedSettings">
                     <settings-help text="Notifies you when a background operation fails" v-if="advancedSettings"/>
                 </section>
-                <section class="tests" v-if="nightly">
-                    <translate tag="h1" say="Field tests"/>
-
-                    <translate tag="label" for="setting-test-encryption" say="Test Encryption"/>
-                    <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
-                    <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
-
-                    <translate tag="label" for="setting-test-cse" say="Client Side Encryption"/>
-                    <input type="button" id="setting-test-cse" value="Enable" @click="toggleCSE($event)">
-                    <settings-help text="Use client side encryption for your password database"/>
-                </section>
                 <section class="danger">
                     <translate tag="h1" say="Danger Zone"/>
 
@@ -152,6 +154,17 @@
                     <translate tag="label" for="danger-purge" say="Delete everything"/>
                     <translate tag="input" type="button" id="danger-purge" value="Delete" @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
+                </section>
+                <section class="tests" v-if="nightly">
+                    <translate tag="h1" say="Field tests"/>
+
+                    <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
+                    <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
+                    <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
+
+                    <translate tag="label" for="setting-test-cse" say="Client Side Encryption"/>
+                    <input type="button" id="setting-test-cse" value="Enable" @click="toggleCSE($event)">
+                    <settings-help text="Use client side encryption for your password database"/>
                 </section>
             </div>
         </div>
@@ -279,7 +292,6 @@
 
 <style lang="scss">
     .app-content-left.settings {
-
         .settings-level {
             color    : $color-grey-dark;
             position : absolute;
@@ -291,8 +303,16 @@
         }
 
         .settings-container {
-            padding      : 10px;
-            margin-right : -2em;
+            padding               : 10px;
+            margin-right          : -2em;
+            display               : grid;
+            grid-template-columns : 1fr 1fr 1fr 1fr;
+
+            &.advanced section.ui {
+                grid-row-start    : 1;
+                grid-row-end      : 3;
+                grid-column-start : 2;
+            }
         }
 
         h1 {
@@ -308,9 +328,7 @@
         section {
             display               : grid;
             grid-template-columns : 3fr 2fr 30px;
-            width                 : 420px;
-            max-width             : 25%;
-            float                 : left;
+            grid-auto-rows        : max-content;
             padding               : 0 2em 4em 0;
 
             h1,
@@ -352,52 +370,46 @@
         }
 
         @media all and (max-width : $width-extra-large) {
-            padding : 10px 0 0 10px;
-
-            section {
-                width     : 33%;
-                max-width : 33%;
-                padding   : 0 2em 4em 0;
+            .settings-container {
+                grid-template-columns : 1fr 1fr 1fr;
             }
         }
 
         @media all and (max-width : $width-large) {
-            section {
-                width     : 50%;
-                max-width : 50%;
-                padding   : 0 2em 4em 0;
-            }
-        }
+            padding : 0;
 
-        @media all and (max-width : $width-medium) {
-            padding : 44px 0 0 10px;
-            #controls {
-                display  : flex;
-                position : fixed;
-                width    : 100%;
-                margin   : 0 -10px;
+            .settings-container {
+                grid-template-columns : 1fr 1fr;
+                margin-right          : -3em;
             }
         }
 
         @media all and (max-width : $width-medium) {
             margin-right : 0;
-            padding      : 44px 0 0 10px;
-
-            #controls {
-                display  : flex;
-                position : fixed;
-                width    : 100%;
-                margin   : 0 -10px;
-            }
 
             section {
-                width     : 100%;
-                max-width : 100%;
-                padding   : 0 0 4em 0;
+                padding : 0 0 4em 0;
+            }
+
+            .settings-container {
+                grid-template-columns : 1fr;
+                margin-right          : -1em;
+
+                &.advanced section.ui {
+                    grid-row-start    : initial;
+                    grid-row-end      : initial;
+                    grid-column-start : initial;
+                }
             }
 
             .settings-level label {
                 display : none;
+            }
+        }
+
+        @media all and (max-width : $width-small) {
+            .settings-container {
+                padding : 10px;
             }
         }
     }

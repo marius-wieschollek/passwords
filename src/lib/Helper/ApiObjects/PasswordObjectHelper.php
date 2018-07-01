@@ -146,13 +146,14 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             'customFields' => $revision->getCustomFields(),
             'url'          => $revision->getUrl(),
             'status'       => $revision->getStatus(),
+            'statusCode'   => $revision->getStatusCode(),
             'hash'         => $revision->getHash(),
             'folder'       => $revision->getFolder(),
             'cseType'      => $revision->getCseType(),
             'sseType'      => $revision->getSseType(),
             'hidden'       => $revision->isHidden(),
             'trashed'      => $revision->isTrashed(),
-            'favourite'    => $revision->isFavourite(),
+            'favorite'     => $revision->isFavorite(),
             'editable'     => $password->isEditable()
         ];
     }
@@ -171,23 +172,25 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         $object['revisions'] = [];
         foreach($revisions as $revision) {
             $current = [
-                'id'        => $revision->getUuid(),
-                'created'   => $revision->getCreated(),
-                'updated'   => $revision->getUpdated(),
-                'edited'    => $revision->getEdited(),
-                'label'     => $revision->getLabel(),
-                'username'  => $revision->getUsername(),
-                'password'  => $revision->getPassword(),
-                'notes'     => $revision->getNotes(),
-                'url'       => $revision->getUrl(),
-                'status'    => $revision->getStatus(),
-                'hash'      => $revision->getHash(),
-                'folder'    => $revision->getFolder(),
-                'cseType'   => $revision->getCseType(),
-                'sseType'   => $revision->getSseType(),
-                'hidden'    => $revision->isHidden(),
-                'trashed'   => $revision->isTrashed(),
-                'favourite' => $revision->isFavourite(),
+                'id'           => $revision->getUuid(),
+                'created'      => $revision->getCreated(),
+                'updated'      => $revision->getUpdated(),
+                'edited'       => $revision->getEdited(),
+                'label'        => $revision->getLabel(),
+                'username'     => $revision->getUsername(),
+                'password'     => $revision->getPassword(),
+                'notes'        => $revision->getNotes(),
+                'customFields' => $revision->getCustomFields(),
+                'url'          => $revision->getUrl(),
+                'status'       => $revision->getStatus(),
+                'statusCode'   => $revision->getStatusCode(),
+                'hash'         => $revision->getHash(),
+                'folder'       => $revision->getFolder(),
+                'cseType'      => $revision->getCseType(),
+                'sseType'      => $revision->getSseType(),
+                'hidden'       => $revision->isHidden(),
+                'trashed'      => $revision->isTrashed(),
+                'favorite'     => $revision->isFavorite(),
             ];
 
             $object['revisions'][] = $current;

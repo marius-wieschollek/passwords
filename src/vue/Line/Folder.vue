@@ -5,7 +5,7 @@
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
          data-drop-type="folder">
-        <i class="fa fa-star favourite" :class="{ active: folder.favourite }" @click="favouriteAction($event)"></i>
+        <i class="fa fa-star favorite" :class="{ active: folder.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
@@ -62,11 +62,11 @@
 
 
         methods: {
-            favouriteAction($event) {
+            favoriteAction($event) {
                 $event.stopPropagation();
-                this.folder.favourite = !this.folder.favourite;
+                this.folder.favorite = !this.folder.favorite;
                 FolderManager.updateFolder(this.folder)
-                             .catch(() => { this.folder.favourite = !this.folder.favourite; });
+                             .catch(() => { this.folder.favorite = !this.folder.favorite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;

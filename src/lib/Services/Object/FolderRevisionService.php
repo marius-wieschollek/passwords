@@ -105,7 +105,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
-     * @param bool   $favourite
+     * @param bool   $favorite
      *
      * @return FolderRevision
      * @throws \OCA\Passwords\Exception\ApiException
@@ -118,9 +118,9 @@ class FolderRevisionService extends AbstractRevisionService {
         int $edited,
         bool $hidden,
         bool $trashed,
-        bool $favourite
+        bool $favorite
     ): FolderRevision {
-        $revision = $this->createModel($folder, $label, $parent, $cseType, $edited, $hidden, $trashed, $favourite);
+        $revision = $this->createModel($folder, $label, $parent, $cseType, $edited, $hidden, $trashed, $favorite);
 
         $revision = $this->validationService->validateFolder($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
@@ -175,7 +175,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
-     * @param bool   $favourite
+     * @param bool   $favorite
      *
      * @return FolderRevision
      */
@@ -187,7 +187,7 @@ class FolderRevisionService extends AbstractRevisionService {
         int $edited,
         bool $hidden,
         bool $trashed,
-        bool $favourite
+        bool $favorite
     ): FolderRevision {
         $revision = new FolderRevision();
         $revision->setUserId($this->userId);
@@ -198,7 +198,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->_setDecrypted(true);
 
         $revision->setModel($model);
-        $revision->setFavourite($favourite);
+        $revision->setFavorite($favorite);
         $revision->setLabel($label);
         $revision->setParent($parent);
         $revision->setCseType($cseType);

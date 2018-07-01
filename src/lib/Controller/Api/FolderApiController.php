@@ -43,7 +43,7 @@ class FolderApiController extends AbstractObjectApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favourite'];
+    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favorite'];
 
     /**
      * FolderApiController constructor.
@@ -74,7 +74,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
-     * @param bool   $favourite
+     * @param bool   $favorite
      *
      * @return JSONResponse
      * @throws ApiException
@@ -86,13 +86,13 @@ class FolderApiController extends AbstractObjectApiController {
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
-        bool $favourite = false
+        bool $favorite = false
     ): JSONResponse {
         if($edited === 0) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, false, $favourite
+            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, false, $favorite
         );
 
         $this->revisionService->save($revision);
@@ -115,7 +115,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
-     * @param bool   $favourite
+     * @param bool   $favorite
      *
      * @return JSONResponse
      * @throws ApiException
@@ -130,7 +130,7 @@ class FolderApiController extends AbstractObjectApiController {
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
-        bool $favourite = false
+        bool $favorite = false
     ): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
 
@@ -140,7 +140,7 @@ class FolderApiController extends AbstractObjectApiController {
 
         if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favourite
+            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
         );
 
         $this->revisionService->save($revision);

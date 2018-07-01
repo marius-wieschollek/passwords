@@ -4,7 +4,7 @@
         <preview :image="object.preview" :icon="object.icon" :link="object.url" :host="object.website"/>
         <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
         <div class="infos">
-            <i class="fa fa-star favourite" :class="{ active: object.favourite }" @click="favouriteAction($event)"></i>
+            <i class="fa fa-star favorite" :class="{ active: object.favorite }" @click="favoriteAction($event)"></i>
             <span class="date">{{ object.edited.toLocaleDateString() }}</span>
             <tags :password="object"/>
         </div>
@@ -86,10 +86,10 @@
         },
 
         methods: {
-            favouriteAction($event) {
+            favoriteAction($event) {
                 $event.stopPropagation();
                 PasswordManager.updatePassword(this.object)
-                               .catch(() => { this.object.favourite = !this.object.favourite; });
+                               .catch(() => { this.object.favorite = !this.object.favorite; });
             },
             closeDetails() {
                 this.$parent.detail = {
@@ -147,7 +147,7 @@
             padding : 0 15px 20px;
             color   : $color-grey-dark;
 
-            .favourite {
+            .favorite {
                 cursor : pointer;
 
                 &:hover,

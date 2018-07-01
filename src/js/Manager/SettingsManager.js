@@ -19,6 +19,7 @@ class SettingsManager {
             'client.ui.password.user.show'       : false,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
+            'client.search.show'                 : false,
             'client.search.live'                 : true,
             'client.search.global'               : true,
             'client.settings.advanced'           : false
@@ -77,16 +78,14 @@ class SettingsManager {
      * @param settings
      * @returns {Promise<any>}
      */
-    observe(settings) {
-        return new Promise((resolve) => {
-            if(!Array.isArray(settings)) settings = [settings];
+    observe(settings, callback) {
+        if(!Array.isArray(settings)) settings = [settings];
 
-            for(let i = 0; i < settings.length; i++) {
-                let setting = settings[i];
-                if(!this._observers.hasOwnProperty(setting)) this._observers[setting] = [];
-                this._observers[setting].push(resolve);
-            }
-        })
+        for(let i = 0; i < settings.length; i++) {
+            let setting = settings[i];
+            if(!this._observers.hasOwnProperty(setting)) this._observers[setting] = [];
+            this._observers[setting].push(callback);
+        }
     }
 
     /**

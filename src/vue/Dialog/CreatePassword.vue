@@ -44,8 +44,8 @@
                     </foldout>
                     <foldout title="More Options">
                         <div class="form-grid">
-                            <translate tag="label" for="password-favourite" say="Favourite"/>
-                            <input id="password-favourite" name="favourite" type="checkbox" v-model="password.favourite">
+                            <translate tag="label" for="password-favorite" say="Favorite"/>
+                            <input id="password-favorite" name="favorite" type="checkbox" v-model="password.favorite">
                             <translate tag="label" for="password-cse" say="Encryption"/>
                             <select id="password-cse" name="cseType" title="There is only one option right now" v-model="password.cseType" disabled>
                                 <translate tag="option" value="none" say="On the server"/>

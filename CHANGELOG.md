@@ -1,7 +1,9 @@
 #### 2018.7.0 - Feature Release
+- Added user password rules
 - Added haveibeenpwned V2 support
 - Improved search
 - Improved import
+- Improved custom fields editor
 - Fixed missing password in token
 
 #### 2018.6.3 - Bugfix Release

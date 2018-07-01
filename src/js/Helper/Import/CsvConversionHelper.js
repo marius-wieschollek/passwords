@@ -269,17 +269,17 @@ export default class ImportCsvConversionHelper {
             passwords: {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favourite', 'edited', 'id', 'revision', 'folderId']
+                mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId']
             },
             folders  : {
                 firstLine: 1,
                 db       : 'folders',
-                mapping  : ['label', 'parentLabel', 'favourite', 'edited', 'id', 'revision', 'parentId']
+                mapping  : ['label', 'parentLabel', 'favorite', 'edited', 'id', 'revision', 'parentId']
             },
             tags     : {
                 firstLine: 1,
                 db       : 'tags',
-                mapping  : ['label', 'color', 'favourite', 'edited', 'id', 'revision']
+                mapping  : ['label', 'color', 'favorite', 'edited', 'id', 'revision']
             },
             legacy   : {
                 firstLine: 1,
@@ -295,7 +295,7 @@ export default class ImportCsvConversionHelper {
             lastpass : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favourite']
+                mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favorite']
             },
             passman  : {
                 firstLine: 1,

@@ -5,7 +5,7 @@
          @dragstart="dragStartAction($event)"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <i class="fa fa-star favourite" :class="{ active: password.favourite }" @click="favouriteAction($event)"></i>
+        <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}" :title="getTitle">&nbsp;</div>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
@@ -79,8 +79,8 @@
             },
             securityTitle() {
                 let label = 'Secure';
-                if(this.password.status === 1) label = 'Weak';
-                if(this.password.status === 2) label = 'Broken';
+                if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
+                if(this.password.status === 2) label = 'Breached';
 
                 return Localisation.translate(label);
             },
@@ -151,11 +151,11 @@
                 if(action === 'url') Utility.copyToClipboard(this.password.url);
                 return action !== 'details';
             },
-            favouriteAction($event) {
+            favoriteAction($event) {
                 $event.stopPropagation();
-                this.password.favourite = !this.password.favourite;
+                this.password.favorite = !this.password.favorite;
                 PasswordManager.updatePassword(this.password)
-                               .catch(() => { this.password.favourite = !this.password.favourite; });
+                               .catch(() => { this.password.favorite = !this.password.favorite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;
@@ -217,7 +217,7 @@
                 cursor        : pointer;
                 display       : flex;
 
-                .favourite {
+                .favorite {
                     line-height : 50px;
                     width       : 40px;
                     text-align  : center;
@@ -379,7 +379,7 @@
                 &:hover {
                     background-color : darken($color-white, 3);
 
-                    .favourite {
+                    .favorite {
                         color : darken($color-grey-light, 3);
 
                         &:hover,

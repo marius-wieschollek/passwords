@@ -24,7 +24,7 @@ use OCP\AppFramework\IAppContainer;
  */
 class TagObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_PASSWORDS = 'passwords';
+    const LEVEL_PASSWORDS     = 'passwords';
     const LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
@@ -108,16 +108,16 @@ class TagObjectHelper extends AbstractObjectHelper {
     protected function getModel(Tag $tag, TagRevision $revision): array {
 
         return [
-            'id'        => $tag->getUuid(),
-            'created'   => $tag->getCreated(),
-            'updated'   => $tag->getUpdated(),
-            'edited'    => $revision->getEdited(),
-            'revision'  => $tag->getRevision(),
-            'label'     => $revision->getLabel(),
-            'color'     => $revision->getColor(),
-            'hidden'    => $revision->isHidden(),
-            'trashed'   => $revision->isTrashed(),
-            'favourite' => $revision->isFavourite()
+            'id'       => $tag->getUuid(),
+            'created'  => $tag->getCreated(),
+            'updated'  => $tag->getUpdated(),
+            'edited'   => $revision->getEdited(),
+            'revision' => $tag->getRevision(),
+            'label'    => $revision->getLabel(),
+            'color'    => $revision->getColor(),
+            'hidden'   => $revision->isHidden(),
+            'trashed'  => $revision->isTrashed(),
+            'favorite' => $revision->isFavorite()
         ];
     }
 
@@ -135,15 +135,15 @@ class TagObjectHelper extends AbstractObjectHelper {
         $object['revisions'] = [];
         foreach($revisions as $revision) {
             $current = [
-                'id'        => $revision->getUuid(),
-                'created'   => $revision->getCreated(),
-                'updated'   => $revision->getUpdated(),
-                'edited'    => $revision->getEdited(),
-                'label'     => $revision->getLabel(),
-                'color'     => $revision->getColor(),
-                'hidden'    => $revision->isHidden(),
-                'trashed'   => $revision->isTrashed(),
-                'favourite' => $revision->isFavourite()
+                'id'       => $revision->getUuid(),
+                'created'  => $revision->getCreated(),
+                'updated'  => $revision->getUpdated(),
+                'edited'   => $revision->getEdited(),
+                'label'    => $revision->getLabel(),
+                'color'    => $revision->getColor(),
+                'hidden'   => $revision->isHidden(),
+                'trashed'  => $revision->isTrashed(),
+                'favorite' => $revision->isFavorite()
             ];
 
             $object['revisions'][] = $current;

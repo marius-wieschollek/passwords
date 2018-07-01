@@ -1,18 +1,17 @@
 const {crop, thumbnail} = require('easyimage');
 
-function getElementPosition(el) {
-    document.querySelector(el).scrollIntoView(false);
-
-    let $el = $(el), data = $el.offset();
-    data.width = $el.width();
-    data.height = $el.height();
-
-    return JSON.stringify(data);
-}
+function gEP(e) {let $e=$(e);$e[0].scrollIntoView(false);let d=$e.offset();d.width=$e.width();d.height=$e.height();return JSON.stringify(d);}
+let window = {width:1280,height:874};
 
 module.exports = function() {
     return actor(
         {
+            setWindowSize(width, height) {
+                window.width = width;
+                window.height = height;
+                this.resizeWindow(window.width, window.height);
+            },
+
             /**
              *
              * @param file     The file name
@@ -25,9 +24,9 @@ module.exports = function() {
             async captureElement(file, element, wait = 1, width = null, height = null) {
 
                 if(wait) this.wait(wait);
-                let data  = await this.executeScript(getElementPosition, element),
+                let data  = await this.executeScript(gEP, element),
                     stats = JSON.parse(data);
-                await this.captureWholePage(file, 0, true, false);
+                await this.captureWholePage(file, 0, false);
 
                 if(width === null || width > stats.width) width = stats.width;
                 if(height === null || height > stats.height) height = stats.height;
@@ -51,10 +50,10 @@ module.exports = function() {
              * @param full     Capture full page
              * @param preview  Create a preview image
              */
-            async captureWholePage(file, wait = 1, full = false, preview = true) {
+            async captureWholePage(file, wait = 1, preview = true) {
                 this.moveCursorTo('#nextcloud');
                 if(wait) this.wait(wait);
-                await this.saveScreenshot(`${file}.png`, full);
+                await this.saveScreenshot(`${file}.png`, false);
 
                 if(preview) {
                     await thumbnail(

@@ -57,8 +57,9 @@
                         query = this.$route.params.query;
 
                     if(el.value === '' && query !== '' && query !== undefined) {
-                        el.value = query;
-                        SearchManager.search(query);
+                        let value = atob(query);
+                        el.value = value;
+                        SearchManager.search(value);
                     }
                 }, 1);
             }
@@ -78,7 +79,7 @@
             },
             search: {
                 handler(value) {
-                    if(value.active) this.$router.push({name: 'Search', params: {query: value.query}});
+                    if(value.active) this.$router.push({name: 'Search', params: {query: btoa(value.query)}});
                 },
                 deep: true
             }

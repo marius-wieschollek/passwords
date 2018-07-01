@@ -37,7 +37,7 @@
                 return this.search.active && this.$route.name !== 'Search';
             },
             searchRoute() {
-                return {name: 'Search', params: {query: this.search.query}};
+                return {name: 'Search', params: {query: btoa(this.search.query)}};
             }
         },
         created() {

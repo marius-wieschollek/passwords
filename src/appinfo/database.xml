@@ -178,11 +178,24 @@
                 <default>false</default>
             </field>
             <field>
+                <name>favorite</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
                 <name>status</name>
                 <type>integer</type>
                 <length>1</length>
                 <notnull>true</notnull>
                 <default>0</default>
+            </field>
+            <field>
+                <name>status_code</name>
+                <default>GOOD</default>
+                <type>text</type>
+                <length>12</length>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>client</name>
@@ -330,6 +343,12 @@
             </field>
             <field>
                 <name>favourite</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
+                <name>favorite</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
                 <default>false</default>
@@ -484,6 +503,12 @@
             </field>
             <field>
                 <name>favourite</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <field>
+                <name>favorite</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
                 <default>false</default>

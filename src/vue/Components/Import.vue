@@ -158,9 +158,9 @@
                 type       : 'json',
                 mime       : 'application/json',
                 fieldMap   : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favourite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
-                    folders  : ['label', 'edited', 'favourite', 'parentLabel', 'parentId', 'id', 'revision'],
-                    tags     : ['label', 'color', 'edited', 'favourite', 'id', 'revision']
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favorite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
+                    folders  : ['label', 'edited', 'favorite', 'parentLabel', 'parentId', 'id', 'revision'],
+                    tags     : ['label', 'color', 'edited', 'favorite', 'id', 'revision']
                 },
                 file       : null,
                 fileMime   : '',
