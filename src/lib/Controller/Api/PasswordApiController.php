@@ -116,6 +116,7 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
+     * @throws \Exception
      */
     public function create(
         string $password,

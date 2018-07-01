@@ -21,9 +21,9 @@
                         <slot name="menu-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyPasswordAction()" icon="clipboard" say="Copy Password"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyUsernameAction()" icon="clipboard" say="Copy User"/>
-                        <translate tag="li" v-if="password.url" @click="copyUrlAction()" icon="clipboard" say="Copy Url"/>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" icon="clipboard" say="Copy Password"/>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('user')" icon="clipboard" say="Copy User"/>
+                        <translate tag="li" v-if="password.url" @click="copyAction('url')" icon="clipboard" say="Copy Url"/>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
                         </li>
@@ -127,29 +127,24 @@
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsManager.get('client.ui.password.click.action');
-                if(this.runClickAction(action)) {
-                    this.clickTimeout =
-                        setTimeout(function() {
-                            Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(action.capitalize())}]);
-                        }, 300);
-                }
-
+                this.runClickAction(action, 300);
             },
             doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsManager.get('client.ui.password.dblClick.action');
-                if(this.runClickAction(action)) {
-                    Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(action.capitalize())}]);
-                }
+                this.runClickAction(action);
             },
-            runClickAction(action) {
-                if(action === 'password') Utility.copyToClipboard(this.password.password);
-                if(action === 'username') Utility.copyToClipboard(this.password.username);
-                if(action === 'details') this.detailsAction();
-                if(action === 'url') Utility.copyToClipboard(this.password.url);
-                return action !== 'details';
+            runClickAction(action, delay = 0) {
+                if(action !== 'details') this.copyAction(action, delay);
+                if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+            },
+            copyAction(attribute, delay = 0) {
+                Utility.copyToClipboard(this.password[attribute]);
+                this.clickTimeout = setTimeout(() => {
+                    Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(attribute.capitalize())}]);
+                }, delay);
             },
             favoriteAction($event) {
                 $event.stopPropagation();

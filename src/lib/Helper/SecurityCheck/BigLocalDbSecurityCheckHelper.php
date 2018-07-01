@@ -34,6 +34,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
     /**
      * @inheritdoc
+     * @throws Throwable
      */
     public function updateDb(): void {
         ini_set('memory_limit', -1);

@@ -6,6 +6,8 @@ RUN apt-get update -y && \
     libxrender1 \
     libfontconfig1 \
     libxext6 \
+    xfonts-base \
+    xfonts-75dpi \
     wbritish \
     wamerican \
     wngerman \
