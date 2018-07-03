@@ -10,8 +10,6 @@ namespace OCA\Passwords\Db;
 /**
  * Class PasswordRevision
  *
- * @method string getLabel()
- * @method void setLabel(string $label)
  * @method string getUrl()
  * @method void setUrl(string $url)
  * @method string getUsername()
@@ -39,11 +37,6 @@ class PasswordRevision extends AbstractRevisionEntity {
      * @var string
      */
     protected $url;
-
-    /**
-     * @var string
-     */
-    protected $label;
 
     /**
      * @var string

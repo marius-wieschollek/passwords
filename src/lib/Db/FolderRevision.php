@@ -10,8 +10,6 @@ namespace OCA\Passwords\Db;
 /**
  * Class FolderRevision
  *
- * @method string getLabel()
- * @method void setLabel(string $title)
  * @method string getParent()
  * @method void setParent(string $parent)
  *
@@ -19,10 +17,6 @@ namespace OCA\Passwords\Db;
  */
 class FolderRevision extends AbstractRevisionEntity {
 
-    /**
-     * @var string
-     */
-    protected $label;
 
     /**
      * @var string

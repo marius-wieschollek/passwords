@@ -10,7 +10,6 @@ namespace OCA\Passwords\Db;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\Mapper;
-use OCP\IConfig;
 use OCP\IDBConnection;
 
 /**

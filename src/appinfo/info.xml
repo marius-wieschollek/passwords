@@ -62,6 +62,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/tags-section.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/security-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/security-section.png]]></screenshot>
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/search-section.jpg">
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/search-section.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/trash-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/trash-section.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/settings-section.jpg">
@@ -84,8 +86,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <repair-steps>
         <post-migration>
             <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
-            <step>OCA\Passwords\Migration\UpdateDatabaseFields</step>
             <step>OCA\Passwords\Migration\FixHaveIBeenPwnedApiError</step>
+            <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
     </repair-steps>
     <settings>
