@@ -2,9 +2,13 @@
 
 namespace OCA\Passwords\Migration;
 
-use OCA\Passwords\Migration\DatabaseCleanup\FolderRevisionMigration;
-use OCA\Passwords\Migration\DatabaseCleanup\PasswordRevisionMigration;
-use OCA\Passwords\Migration\DatabaseCleanup\TagRevisionMigration;
+use OCA\Passwords\Migration\DatabaseRepair\FolderModelRepair;
+use OCA\Passwords\Migration\DatabaseRepair\FolderRevisionRepair;
+use OCA\Passwords\Migration\DatabaseRepair\PasswordModelRepair;
+use OCA\Passwords\Migration\DatabaseRepair\PasswordRevisionRepair;
+use OCA\Passwords\Migration\DatabaseRepair\PasswordTagRelationRepair;
+use OCA\Passwords\Migration\DatabaseRepair\TagModelRepair;
+use OCA\Passwords\Migration\DatabaseRepair\TagRevisionRepair;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -14,37 +18,68 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class DatabaseObjectRepair implements IRepairStep {
-
     /**
-     * @var PasswordRevisionMigration
+     * @var TagModelRepair
      */
-    protected $passwordRevisionRepair;
+    protected $tagModelRepair;
 
     /**
-     * @var FolderRevisionMigration
+     * @var FolderModelRepair
      */
-    protected $folderRevisionRepair;
+    protected $folderModelRepair;
 
     /**
-     * @var TagRevisionMigration
+     * @var TagRevisionRepair
      */
     protected $tagRevisionRepair;
 
     /**
-     * RepairDb constructor.
+     * @var PasswordModelRepair
+     */
+    protected $passwordModelRepair;
+
+    /**
+     * @var FolderRevisionRepair
+     */
+    protected $folderRevisionRepair;
+
+    /**
+     * @var PasswordRevisionRepair
+     */
+    protected $passwordRevisionRepair;
+
+    /**
+     * @var PasswordTagRelationRepair
+     */
+    protected $passwordTagRelationRepair;
+
+    /**
+     * DatabaseObjectRepair constructor.
      *
-     * @param PasswordRevisionMigration $passwordRevisionRepair
-     * @param FolderRevisionMigration   $folderRevisionRepair
-     * @param TagRevisionMigration      $tagRevisionRepair
+     * @param TagModelRepair            $tagModelRepair
+     * @param FolderModelRepair         $folderModelRepair
+     * @param TagRevisionRepair         $tagRevisionRepair
+     * @param PasswordModelRepair       $passwordModelRepair
+     * @param FolderRevisionRepair      $folderRevisionRepair
+     * @param PasswordRevisionRepair    $passwordRevisionRepair
+     * @param PasswordTagRelationRepair $passwordTagRelationRepair
      */
     public function __construct(
-        PasswordRevisionMigration $passwordRevisionRepair,
-        FolderRevisionMigration $folderRevisionRepair,
-        TagRevisionMigration $tagRevisionRepair
+        TagModelRepair $tagModelRepair,
+        FolderModelRepair $folderModelRepair,
+        TagRevisionRepair $tagRevisionRepair,
+        PasswordModelRepair $passwordModelRepair,
+        FolderRevisionRepair $folderRevisionRepair,
+        PasswordRevisionRepair $passwordRevisionRepair,
+        PasswordTagRelationRepair $passwordTagRelationRepair
     ) {
-        $this->passwordRevisionRepair = $passwordRevisionRepair;
-        $this->folderRevisionRepair   = $folderRevisionRepair;
-        $this->tagRevisionRepair      = $tagRevisionRepair;
+        $this->tagModelRepair            = $tagModelRepair;
+        $this->folderModelRepair         = $folderModelRepair;
+        $this->tagRevisionRepair         = $tagRevisionRepair;
+        $this->passwordModelRepair       = $passwordModelRepair;
+        $this->folderRevisionRepair      = $folderRevisionRepair;
+        $this->passwordRevisionRepair    = $passwordRevisionRepair;
+        $this->passwordTagRelationRepair = $passwordTagRelationRepair;
     }
 
     /**
@@ -70,5 +105,9 @@ class DatabaseObjectRepair implements IRepairStep {
         $this->tagRevisionRepair->run($output);
         $this->folderRevisionRepair->run($output);
         $this->passwordRevisionRepair->run($output);
+        $this->tagModelRepair->run($output);
+        $this->folderModelRepair->run($output);
+        $this->passwordModelRepair->run($output);
+        $this->passwordTagRelationRepair->run($output);
     }
 }

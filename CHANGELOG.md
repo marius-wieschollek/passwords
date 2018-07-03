@@ -1,6 +1,7 @@
 #### 2018.7.0 - Feature Release
 - Added user password rules
 - Added haveibeenpwned V2 support
+- Added database repair
 - Improved search
 - Improved import
 - Improved custom fields editor
