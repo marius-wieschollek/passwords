@@ -185,7 +185,7 @@ class SettingsManager {
         if(!this._observers.hasOwnProperty(setting)) return;
 
         for(let i = 0; i < this._observers[setting].length; i++) {
-            this._observers[setting][i]({setting,value});
+            this._observers[setting][i]({setting, value});
         }
     }
 }

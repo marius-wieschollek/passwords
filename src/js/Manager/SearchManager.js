@@ -142,7 +142,7 @@ class SearchManager {
             document.querySelector('form.searchbox').style.opacity = '1';
             document.getElementById('searchbox').value = '';
             this._status.available = true;
-            setTimeout(() => {this.search(this._status.query)}, 1);
+            setTimeout(() => {this.search(this._status.query);}, 1);
         }
     }
 
