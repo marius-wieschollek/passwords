@@ -18,6 +18,7 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class DatabaseObjectRepair implements IRepairStep {
+
     /**
      * @var TagModelRepair
      */
@@ -89,7 +90,7 @@ class DatabaseObjectRepair implements IRepairStep {
      * @since 9.1.0
      */
     public function getName(): string {
-        return 'Repair Database Objects';
+        return 'Repair Passwords Database Objects';
     }
 
     /**
