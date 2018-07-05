@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\User;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractService;
 use OCA\Passwords\Services\Object\FolderService;
@@ -73,24 +74,24 @@ class DeleteUserDataHelper {
     /**
      * DeleteUserDataHelper constructor.
      *
-     * @param null|string          $userId
      * @param TagService           $tagService
      * @param ShareService         $shareService
      * @param UserSettingsHelper   $settings
      * @param FolderService        $folderService
      * @param ConfigurationService $config
+     * @param EnvironmentService   $environment
      * @param PasswordService      $passwordService
      */
     public function __construct(
-        ?string $userId,
         TagService $tagService,
         ShareService $shareService,
         UserSettingsHelper $settings,
         FolderService $folderService,
         ConfigurationService $config,
+        EnvironmentService $environment,
         PasswordService $passwordService
     ) {
-        $this->userId          = $userId;
+        $this->userId          = $environment->getUserId();
         $this->config          = $config;
         $this->settings        = $settings;
         $this->tagService      = $tagService;
@@ -125,7 +126,9 @@ class DeleteUserDataHelper {
         /** @var EntityInterface $objects */
         $objects = $service->findByUserId($userId);
 
-        foreach($objects as $tag) $service->delete($tag);
+        foreach($objects as $tag) {
+            $service->delete($tag);
+        }
     }
 
     /**
@@ -134,13 +137,17 @@ class DeleteUserDataHelper {
     protected function deleteUserSettings(string $userId): void {
         $settings = array_keys($this->settings->list($userId));
 
-        foreach($settings as $setting) $this->settings->reset($setting, $userId);
+        foreach($settings as $setting) {
+            $this->settings->reset($setting, $userId);
+        }
     }
 
     /**
      * @param string $userId
      */
     protected function deleteUserConfig(string $userId): void {
-        foreach($this->userConfigKeys as $key) $this->config->deleteUserValue($key, $userId);
+        foreach($this->userConfigKeys as $key) {
+            $this->config->deleteUserValue($key, $userId);
+        }
     }
 }
