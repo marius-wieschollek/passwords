@@ -1,4 +1,4 @@
-FROM nextcloud:fpm
+FROM nextcloud:beta-fpm
 
 RUN apt-get update -y && \
     apt-get install -y \

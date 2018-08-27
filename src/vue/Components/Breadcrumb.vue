@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="passwords-more-menu" v-if="showAddNew" :class="{active: showMoreMenu}">
+            <div class="passwords-more-menu actions" v-if="showAddNew" :class="{active: showMoreMenu}">
                 <span class="button new" @click="toggleMoreMenu"><span class="icon icon-add"></span></span>
                 <div class="popovermenu menu menu-center" @click="toggleMoreMenu">
                     <ul>

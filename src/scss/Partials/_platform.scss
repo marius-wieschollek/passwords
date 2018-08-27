@@ -21,3 +21,26 @@
         }
     }
 }
+
+[data-server-version="14"] {
+    width: 100%;
+
+    #app-navigation {
+        transform: translateX(0);
+
+        #app-settings {
+            position: relative;
+        }
+    }
+
+    #app-content {
+        overflow-y: initial;
+        overflow-x: initial;
+
+        @media all and (max-width : 1366px) {
+            &.show-details .app-content-right {
+                left: 0;
+            }
+        }
+    }
+}
