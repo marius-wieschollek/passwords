@@ -232,6 +232,10 @@
                 display    : block;
             }
 
+            &:not(.active) .menu {
+                filter: none;
+            }
+
             &.active .menu {
                 overflow   : visible;
                 max-height : 75px;

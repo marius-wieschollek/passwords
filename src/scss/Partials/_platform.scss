@@ -36,6 +36,7 @@
     #app-content {
         overflow-y: initial;
         overflow-x: initial;
+        z-index:    2000;
 
         @media all and (max-width : 1366px) {
             &.show-details .app-content-right {
