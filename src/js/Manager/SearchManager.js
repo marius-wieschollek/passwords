@@ -27,7 +27,11 @@ class SearchManager {
 
     init() {
         if(OC.Plugins) {
-            OC.Plugins.register('OCA.Search', this);
+            if(SettingsManager.get('server.version') > 13) {
+                new OCA.Search((q) => {this.search(q);}, () => {this.search();});
+            } else {
+                OC.Plugins.register('OCA.Search', this);
+            }
             document.querySelector('form.searchbox').style.opacity = '0';
             this._status.available = false;
 
