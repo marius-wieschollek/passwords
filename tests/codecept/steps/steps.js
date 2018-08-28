@@ -47,7 +47,6 @@ module.exports = function() {
              *
              * @param file     The file name
              * @param wait     Wait for x seconds before capturing
-             * @param full     Capture full page
              * @param preview  Create a preview image
              */
             async captureWholePage(file, wait = 1, preview = true) {

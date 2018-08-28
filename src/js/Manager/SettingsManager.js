@@ -76,6 +76,7 @@ class SettingsManager {
      * Register observer to get updated when a setting is changed
      *
      * @param settings
+     * @param callback
      * @returns {Promise<any>}
      */
     observe(settings, callback) {

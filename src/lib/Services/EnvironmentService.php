@@ -111,8 +111,8 @@ class EnvironmentService {
      * @param IRequest $request
      */
     protected function checkIfCronJob(IRequest $request): void {
-        $this->isCronJob = ($request->getRequestUri() === '/cron.php' && in_array(BackgroundJob::getExecutionType(), ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && BackgroundJob::getExecutionType() === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        $this->isCronJob = ($request->getRequestUri() === '/cron.php' && in_array($this->getBackgroundJobType(), ['ajax', 'webcron'])) ||
+                           ($this->isCliMode && $this->getBackgroundJobType() === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
@@ -126,5 +126,15 @@ class EnvironmentService {
             $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
         }
+    }
+
+    /**
+     * @return string
+     * @TODO remove in 2019.1.0
+     */
+    protected function getBackgroundJobType() {
+        if(BackgroundJob::getExecutionType() !== '') return BackgroundJob::getExecutionType();
+
+        return \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
     }
 }
