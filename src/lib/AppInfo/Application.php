@@ -199,9 +199,13 @@ class Application extends App {
      *
      */
     protected function enableNightlyUpdates(): void {
-        if($this->getContainer()->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
+        $config = $this->getContainer()->getServer()->getConfig();
+
+        if($config->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
             !class_exists('\OC\App\AppStore\Fetcher\AppFetcher', false)) {
-            require_once __DIR__.'/../Plugins/NighltyAppFetcher.php';
+            $version = explode('.', $config->getSystemValue('version'), 2)[0];
+
+            require_once __DIR__.'/../Plugins/'.$version.'/NighltyAppFetcher.php';
         }
     }
 }
