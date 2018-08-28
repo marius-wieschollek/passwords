@@ -9,7 +9,7 @@ namespace OCA\Passwords\Db;
 
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
-use OCP\AppFramework\Db\Mapper;
+use \OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
 /**
@@ -17,7 +17,7 @@ use OCP\IDBConnection;
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractMapper extends Mapper {
+abstract class AbstractMapper extends QBMapper {
 
     const TABLE_NAME = 'passwords';
 
@@ -55,6 +55,7 @@ abstract class AbstractMapper extends Mapper {
     /**
      * @return string
      * @deprecated
+     * @throws \Exception
      */
     public function generateUuidV4() {
         return implode('-', [
