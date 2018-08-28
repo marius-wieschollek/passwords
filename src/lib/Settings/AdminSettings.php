@@ -318,11 +318,23 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
+        $ncVersion = intval(explode('.', \OC::$server->getConfig()->getSystemValue('version'), 2)[0]);
+
         return [
-            'php'    => PHP_VERSION_ID >= 70100,
-            'cron'   => BackgroundJob::getExecutionType() !== 'ajax',
-            'https'  => \OC::$server->getRequest()->getHttpProtocol() !== 'https',
-            'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML
+            'cron'   => BackgroundJob::getExecutionType() === 'ajax',
+            'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
+            'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML,
+            'php'    => [
+                'warn'    => PHP_VERSION_ID < 70200,
+                'error'   => PHP_VERSION_ID < 70100,
+                'version' => PHP_VERSION
+            ],
+            'server' => [
+                'warn'    => $ncVersion < 14,
+                'error'   => $ncVersion < 12,
+                'version' => $ncVersion
+            ],
+            'eol'    => (date('Y') + 1).'.1.0'
         ];
     }
 
