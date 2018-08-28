@@ -319,9 +319,13 @@ class AdminSettings implements ISettings {
      */
     protected function getPlatformSupport(): array {
         $ncVersion = intval(explode('.', \OC::$server->getConfig()->getSystemValue('version'), 2)[0]);
+        $cronType = \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+
+        if(BackgroundJob::getExecutionType() !== '') $cronType = BackgroundJob::getExecutionType();
+
 
         return [
-            'cron'   => BackgroundJob::getExecutionType() === 'ajax',
+            'cron'   => $cronType === 'ajax',
             'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
             'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML,
             'php'    => [
