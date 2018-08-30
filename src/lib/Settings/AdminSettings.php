@@ -232,12 +232,6 @@ class AdminSettings implements ISettings {
 
         return [
             [
-                'id'      => HelperService::PREVIEW_WKHTML,
-                'label'   => 'WKHTML (Local)',
-                'current' => $current === HelperService::PREVIEW_WKHTML,
-                'api'     => null
-            ],
-            [
                 'id'      => HelperService::PREVIEW_PAGERES,
                 'label'   => 'Pageres/PhantomJS (Local)',
                 'current' => $current === HelperService::PREVIEW_PAGERES,

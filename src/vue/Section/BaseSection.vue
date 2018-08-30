@@ -170,8 +170,9 @@
     #app-content {
         position   : relative;
         height     : 100%;
-        overflow-y : auto;
-        overflow-x : hidden;
+        overflow-y : initial;
+        overflow-x : initial;
+        z-index    : 2000;
         transition : margin-right 300ms, transform 300ms;
 
         .app-content-right {
@@ -202,7 +203,7 @@
             display : none !important;
         }
 
-        @media(max-width : $tablet-width) {
+        @media(max-width : $width-small) {
             transform : translate3d(0, 0, 0);
 
             .app-content-right {
@@ -228,7 +229,7 @@
             }
         }
 
-        @media(max-width : $desktop-width) {
+        @media(max-width : $width-large) {
             .app-content-right {
                 right : -360px;
             }
@@ -239,6 +240,7 @@
                 .app-content-right {
                     width     : 360px;
                     min-width : 360px;
+                    left      : 0;
                 }
             }
         }

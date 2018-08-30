@@ -101,7 +101,13 @@
 </script>
 
 <style lang="scss">
+    #app {
+        width : 100%;
+    }
+
     #app-navigation {
+        transform : translateX(0);
+
         li {
             line-height   : 44px;
             padding       : 0 12px;
@@ -145,7 +151,7 @@
         }
 
         #app-settings {
-            position         : fixed;
+            position         : relative;
             overflow         : hidden;
             max-height       : 88px;
             background-color : $color-white;

@@ -12,17 +12,15 @@ use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
 use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\DB\ISchemaWrapper;
-//use OCP\Migration\IMigrationStep;
-use OCP\Migration\IRepairStep;
+use OCP\Migration\IMigrationStep;
 use OCP\Migration\IOutput;
 
 /**
  * Class LegacyDatabaseMigration
  *
  * @package OCA\Passwords\Migration
- * @TODO Use IMigrationStep after dropping NC 12.x
  */
-class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
+class LegacyDatabaseMigration implements IMigrationStep {
 
     /**
      * @var LegacyShareMigration
@@ -62,16 +60,6 @@ class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
         $this->categoryMigration    = $categoryMigration;
         $this->configurationService = $configurationService;
         $this->shareMigration       = $shareMigration;
-    }
-
-    /**
-     * Returns the step's name
-     *
-     * @return string
-     * @since 9.1.0
-     */
-    public function getName(): string {
-        return 'Passwords Legacy Database Migration';
     }
 
     /**
@@ -130,5 +118,25 @@ class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
      */
     public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options): ?ISchemaWrapper {
         return null;
+    }
+
+    /**
+     * Human readable name of the migration step
+     *
+     * @return string
+     * @since 14.0.0
+     */
+    public function name(): string {
+        return 'Passwords Legacy Database Migration';
+    }
+
+    /**
+     * Human readable description of the migration steps
+     *
+     * @return string
+     * @since 14.0.0
+     */
+    public function description(): string {
+        return 'Converts the database from tje ocPasswords app to the new format';
     }
 }
