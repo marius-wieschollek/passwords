@@ -72,6 +72,7 @@
 
         methods: {
             open(index = 0) {
+                document.getElementById('app-content').classList.add('blocking');
                 const instance = typeof BlueImp.Gallery !== 'undefined' ? BlueImp.Gallery:BlueImp,
                       options  = Object.assign(
                           {
@@ -85,7 +86,7 @@
                               onslide                   : this.onSlideCustom,
                               onslideend                : (index, slide) => this.$emit('onslideend', {index, slide}),
                               onslidecomplete           : (index, slide) => this.$emit('onslidecomplete', {index, slide}),
-                              onclose                   : () => this.$emit('close'),
+                              onclose                   : () => this.close(),
                               onclosed                  : () => this.$emit('onclosed')
                           },
                           this.options
@@ -103,6 +104,10 @@
                         slide.querySelector('a').click();
                     }
                 }
+            },
+            close() {
+                document.getElementById('app-content').classList.remove('blocking');
+                this.$emit('close')
             }
         }
     };

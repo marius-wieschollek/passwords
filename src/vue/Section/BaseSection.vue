@@ -174,6 +174,10 @@
         overflow-x : hidden;
         transition : margin-right 300ms, transform 300ms;
 
+        &.blocking {
+            z-index: 2000;
+        }
+
         .app-content-right {
             background-color : white;
             z-index          : 50;
