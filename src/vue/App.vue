@@ -93,7 +93,7 @@
                 if(navigator.userAgent.indexOf('Firefox') !== -1) {
                     Utility.openLink('https://addons.mozilla.org/firefox/addon/nextcloud-passwords');
                 } else {
-                    Utility.openLink('https://github.com/marius-wieschollek/passwords-webextension/wiki/chromium-builds');
+                    Utility.openLink('https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi');
                 }
             }
         }
