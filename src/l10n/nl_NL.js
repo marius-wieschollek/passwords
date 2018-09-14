@@ -2,7 +2,7 @@
     let translations = {
             'Passwords'                           : 'Passwords',
             'All'                                 : 'Alle',
-            'Folders'                             : 'Mapen',
+            'Folders'                             : 'Mappen',
             'Recent'                              : 'Recent',
             'Favorites'                           : 'Favorieten',
             'Shared'                              : 'Gedeeld',
@@ -45,7 +45,7 @@
             'Secret'                              : 'Geheim',
             'File'                                : 'Bestand',
             'Value'                               : 'Waarde',
-            'Toggle visibility'                   : 'Zichtbaarheid omschakelen',
+            'Toggle visibility'                   : 'Zichtbaarheid wisselen',
             'Generate password'                   : 'Wachtwoord genereren',
             'Simple Server Side Encryption V1'    : 'Simple Server Side Encryption V1',
             'Take some notes'                     : 'Maak aantekeningen',
@@ -326,7 +326,7 @@
             'Always show the section for global search in the navigation'                : 'Laat altijd de sectie voor globaal zoeken in de navigatie zien',
             'Notifies you about compromised passwords and other security issues'         : 'Berichtgeving aan u over gecompromiteerde wachtwoorden of andere beveiligings problemen',
             'Notifies you when other people share passwords with you'                    : 'Berichtgeving aan u wanneer anderen wachtwoorden met u delen',
-            'Notifies you when a background operation fails'                             : 'Benachrichtigt Sie, wenn Hintergrundaufgaben fehlschlagen',
+            'Notifies you when a background operation fails'                             : 'Berichtgeving aan u wanneer er een achtergrond proces fout gaat',
             'Reset all settings on this page to their defaults'                          : 'Reset alle instellingen op deze pagina naar standaard waarden',
             'This will reset all settings to their defaults. Do you want to continue?'   : 'Dit zal alle instellingen resetten naar hun standaard waarden. Wilt u doorgaan?',
             'Start over and delete all configuration, passwords, folders and tags'       : 'Verwijder ale configuratie, wachtwoorden, mappen en Tags en begin overnieuw',
@@ -341,7 +341,7 @@
         },
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Het bestand heeft type "{actual}" maar "{expected}" wordt verwacht. Misschien heeft u een verkeerd bestand of verkeerde import methode gekozen..',
-            'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Wilt u alle instellingen, wachtwoorden, mapen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen.',
+            'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Wilt u alle instellingen, wachtwoorden, mappen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen.',
             '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} staat erom bekend dat het foutieve export bestanden genereerd. Raadpleeg de handleiding voor hulp wannaar het bestand niet verwerkt kan worden.'
         };
 
