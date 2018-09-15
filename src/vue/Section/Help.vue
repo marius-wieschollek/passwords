@@ -172,6 +172,7 @@
             font-weight : 300;
             margin      : 10px auto 40px;
             max-width   : 975px;
+            line-height : 1;
         }
 
         .handbook-page {

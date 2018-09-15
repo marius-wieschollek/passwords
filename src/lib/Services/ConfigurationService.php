@@ -44,9 +44,10 @@ class ConfigurationService {
      * @param null   $user
      *
      * @return string
+     * @throws \Exception
      */
     public function getUserValue(string $key, $default = null, $user = null) {
-        $userId = $this->userId === null ? $user:$this->userId;
+        $userId = $this->getUserId($user);
 
         return $this->config->getUserValue($userId, Application::APP_NAME, $key, $default);
     }
@@ -77,10 +78,10 @@ class ConfigurationService {
      * @param string      $value
      * @param null|string $user
      *
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     public function setUserValue(string $key, string $value, ?string $user = null): void {
-        $userId = $this->userId === null ? $user:$this->userId;
+        $userId = $this->getUserId($user);
         $this->config->setUserValue($userId, Application::APP_NAME, $key, $value);
     }
 
@@ -103,9 +104,11 @@ class ConfigurationService {
     /**
      * @param string      $key
      * @param null|string $user
+     *
+     * @throws \Exception
      */
     public function deleteUserValue(string $key, ?string $user = null): void {
-        $userId = $this->userId === null ? $user:$this->userId;
+        $userId = $this->getUserId($user);
         $this->config->deleteUserValue($userId, Application::APP_NAME, $key);
     }
 
@@ -144,5 +147,19 @@ class ConfigurationService {
      */
     public function getTempDir(): string {
         return $this->getSystemValue('tempdirectory', '/tmp/');
+    }
+
+    /**
+     * @param $user
+     *
+     * @return null|string
+     * @throws \Exception
+     */
+    protected function getUserId(string $user = null): string {
+        if($this->userId !== null && $user !== null && $this->userId !== $user) {
+            throw new \Exception("Illegal user configuration access request by {$this->userId} for {$user}");
+        }
+
+        return $this->userId === null ? $user:$this->userId;
     }
 }

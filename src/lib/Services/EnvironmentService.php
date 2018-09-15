@@ -128,4 +128,14 @@ class EnvironmentService {
         } catch(\Exception $e) {
         }
     }
+
+    /**
+     * @return string
+     * @TODO remove in 2019.1.0
+     */
+    protected function getBackgroundJobType() {
+        if(BackgroundJob::getExecutionType() !== '') return BackgroundJob::getExecutionType();
+
+        return \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+    }
 }
