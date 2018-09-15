@@ -22,8 +22,6 @@ namespace OCA\Passwords\Db;
  * @method void setModel(string $model)
  * @method string getLabel()
  * @method void setLabel(string $label)
- * @method string getClient()
- * @method void setClient(string $client)
  * @method int getEdited()
  * @method void setEdited(int $edited)
  * @method bool getHidden()
