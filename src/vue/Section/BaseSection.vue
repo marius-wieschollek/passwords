@@ -172,7 +172,6 @@
         height     : 100%;
         overflow-y : initial;
         overflow-x : initial;
-        z-index    : 2000;
         transition : margin-right 300ms, transform 300ms;
 
         &.blocking {
