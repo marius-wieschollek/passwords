@@ -317,7 +317,6 @@ class AdminSettings implements ISettings {
         return [
             'cron'   => $cronType === 'ajax',
             'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
-            'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML,
             'php'    => [
                 'warn'    => false,
                 'error'   => PHP_VERSION_ID < 70200,

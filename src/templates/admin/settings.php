@@ -65,11 +65,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if($_['support']['wkhtml']): ?>
-        <div class="message warn">
-            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['WKHTML', '', $_['support']['eol']])); ?>
-        </div>
-    <?php endif; ?>
     <?php if($_['support']['cron']): ?>
         <div class="message warn">
             <?php p($l->t('Using ajax background jobs is not recommended and might cause issues.')); ?>
