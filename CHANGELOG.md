@@ -1,6 +1,10 @@
+#### 2018.9.0 - Feature Release
+- Added Nextcloud 14 Support
+
 #### 2018.7.0 - Feature Release
 - Added user password rules
 - Added haveibeenpwned V2 support
+- Added database repair
 - Improved search
 - Improved import
 - Improved custom fields editor

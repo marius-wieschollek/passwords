@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="passwords-more-menu" v-if="showAddNew" :class="{active: showMoreMenu}">
+            <div class="passwords-more-menu actions" v-if="showAddNew" :class="{active: showMoreMenu}">
                 <span class="button new" @click="toggleMoreMenu"><span class="icon icon-add"></span></span>
                 <div class="popovermenu menu menu-center" @click="toggleMoreMenu">
                     <ul>
@@ -221,6 +221,7 @@
                 .fa {
                     padding   : 10px;
                     font-size : 1rem;
+                    margin    : 0;
                 }
             }
 
@@ -230,6 +231,10 @@
                 overflow   : hidden;
                 transition : max-height 0.25s ease-in-out;
                 display    : block;
+            }
+
+            &:not(.active) .menu {
+                filter : none;
             }
 
             &.active .menu {

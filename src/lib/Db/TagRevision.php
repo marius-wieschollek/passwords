@@ -10,19 +10,12 @@ namespace OCA\Passwords\Db;
 /**
  * Class TagRevision
  *
- * @method string getLabel()
- * @method void setLabel(string $label)
  * @method string getColor()
  * @method void setColor(string $color)
  *
  * @package OCA\Passwords\Db
  */
 class TagRevision extends AbstractRevisionEntity {
-
-    /**
-     * @var string
-     */
-    protected $label;
 
     /**
      * @var string

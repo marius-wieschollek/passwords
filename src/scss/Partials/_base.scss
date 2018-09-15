@@ -19,3 +19,7 @@ select,
 input[type=button] {
     transition : border-color .1s ease-in-out
 }
+
+body .skip-navigation.skip-content {
+    display: none;
+}

@@ -40,7 +40,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * ... und vieles mehr
 ]]>
     </description>
-    <version>2018.7.0-BUILD</version>
+    <version>2018.10.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -62,6 +62,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/tags-section.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/security-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/security-section.png]]></screenshot>
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/search-section.jpg">
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/search-section.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/trash-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/trash-section.png]]></screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/settings-section.jpg">
@@ -73,7 +75,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <database>sqlite</database>
         <database>mysql</database>
         <database>pgsql</database>
-        <nextcloud min-version="12" max-version="13" />
+        <nextcloud min-version="12" max-version="14" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\ProcessDeletedUsers</job>
@@ -85,8 +87,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <repair-steps>
         <post-migration>
             <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
-            <step>OCA\Passwords\Migration\UpdateDatabaseFields</step>
             <step>OCA\Passwords\Migration\FixHaveIBeenPwnedApiError</step>
+            <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
     </repair-steps>
     <settings>

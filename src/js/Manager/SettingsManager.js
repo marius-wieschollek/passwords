@@ -76,6 +76,7 @@ class SettingsManager {
      * Register observer to get updated when a setting is changed
      *
      * @param settings
+     * @param callback
      * @returns {Promise<any>}
      */
     observe(settings, callback) {
@@ -185,7 +186,7 @@ class SettingsManager {
         if(!this._observers.hasOwnProperty(setting)) return;
 
         for(let i = 0; i < this._observers[setting].length; i++) {
-            this._observers[setting][i]({setting,value});
+            this._observers[setting][i]({setting, value});
         }
     }
 }

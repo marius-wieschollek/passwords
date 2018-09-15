@@ -33,27 +33,47 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
     <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
 
-    <?php if(!$_['support']['php']): ?>
+    <?php if($_['support']['php']['error']): ?>
         <div class="message error">
-            <?php p($l->t('PHP %s is no longer supported.', [PHP_VERSION])); ?>
+            <?php p($l->t('%1$s %2$s is no longer supported.', ['PHP', $_['support']['php']['version']])); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if(!$_['support']['https']): ?>
+    <?php if($_['support']['server']['error']): ?>
+        <div class="message error">
+            <?php p($l->t('%1$s %2$s is no longer supported.', ['Nextcloud', $_['support']['server']['version']])); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
+    <?php if($_['support']['https']): ?>
         <div class="message error">
             <?php p($l->t('Passwords requires HTTPS.')); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if(!$_['support']['cron']): ?>
+
+
+    <?php if($_['support']['php']['warn']): ?>
         <div class="message warn">
-            <?php p($l->t('Using ajax background jobs is not recommended and might cause issues.')); ?>
+            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['PHP', $_['support']['php']['version'], $_['support']['eol']])); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
+    <?php if($_['support']['server']['warn']): ?>
+        <div class="message warn">
+            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['Nextcloud', $_['support']['server']['version'], $_['support']['eol']])); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
     <?php if($_['support']['wkhtml']): ?>
         <div class="message warn">
-            <?php p($l->t('Generating previews with WKHTML is deprecated and will be removed in version 2019.1.0.')); ?>
+            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['WKHTML', '', $_['support']['eol']])); ?>
+        </div>
+    <?php endif; ?>
+    <?php if($_['support']['cron']): ?>
+        <div class="message warn">
+            <?php p($l->t('Using ajax background jobs is not recommended and might cause issues.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
 

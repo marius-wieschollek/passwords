@@ -69,6 +69,7 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * Refresh the locally stored database with password hashes
      *
      * @return void
+     * @throws \Throwable
      */
     function updateDb(): void {
         $this->localSecurityCheck->updateDb();

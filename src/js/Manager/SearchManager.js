@@ -27,7 +27,11 @@ class SearchManager {
 
     init() {
         if(OC.Plugins) {
-            OC.Plugins.register('OCA.Search', this);
+            if(SettingsManager.get('server.version') > 13) {
+                new OCA.Search((q) => {this.search(q);}, () => {this.search();});
+            } else {
+                OC.Plugins.register('OCA.Search', this);
+            }
             document.querySelector('form.searchbox').style.opacity = '0';
             this._status.available = false;
 
@@ -142,7 +146,7 @@ class SearchManager {
             document.querySelector('form.searchbox').style.opacity = '1';
             document.getElementById('searchbox').value = '';
             this._status.available = true;
-            setTimeout(() => {this.search(this._status.query)}, 1);
+            setTimeout(() => {this.search(this._status.query);}, 1);
         }
     }
 

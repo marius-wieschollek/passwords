@@ -1,7 +1,7 @@
 const {crop, thumbnail} = require('easyimage');
 
 function gEP(e) {let $e=$(e);$e[0].scrollIntoView(false);let d=$e.offset();d.width=$e.width();d.height=$e.height();return JSON.stringify(d);}
-let window = {width:1280,height:874};
+let window = {width:1280, height:874};
 
 module.exports = function() {
     return actor(
@@ -47,7 +47,6 @@ module.exports = function() {
              *
              * @param file     The file name
              * @param wait     Wait for x seconds before capturing
-             * @param full     Capture full page
              * @param preview  Create a preview image
              */
             async captureWholePage(file, wait = 1, preview = true) {

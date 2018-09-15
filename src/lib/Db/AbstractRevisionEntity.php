@@ -32,8 +32,6 @@ namespace OCA\Passwords\Db;
  * @method void setTrashed(bool $trashed)
  * @method bool getFavorite()
  * @method void setFavorite(bool $favorite)
- *
- * @deprecated
  * @method bool getFavourite()
  * @method void setFavourite(bool $favourite)
  *

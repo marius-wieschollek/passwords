@@ -47,6 +47,13 @@ class PasswordTagRelationService extends AbstractService {
     }
 
     /**
+     * @return PasswordTagRelation[]
+     */
+    public function findAll(): array {
+        return $this->mapper->findAll();
+    }
+
+    /**
      * @param string $passwordUuid
      *
      * @return PasswordTagRelation[]

@@ -100,25 +100,39 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
         $iconData   = null;
         $sizeOffset = null;
         foreach($json['icons'] as $icon) {
-            $info = pathinfo($icon['src']);
-            if(!isset($info['extension'])) continue;
-            $ext = $info['extension'];
-            if(!in_array($ext, ['png', 'ico', 'gif', 'jpg', 'jpeg'])) continue;
-
-            if($iconData === null) {
-                $iconData = $this->loadIcon($icon['src']);
-            } else if(isset($icon['sizes'])) {
-                $size = explode('x', $icon['sizes'])[0];
-                if(!is_numeric($size)) continue;
-                $offset = abs(256 - $size);
-                if($offset < $sizeOffset || $sizeOffset === null) {
-                    $sizeOffset = $offset;
-                    $iconData   = $this->loadIcon($icon['src'], $iconData);
-                }
-            }
+            list($iconData, $sizeOffset) = $this->analyzeApiIcon($icon, $iconData, $sizeOffset);
         }
 
         return $iconData;
+    }
+
+    /**
+     * @param $icon
+     * @param $iconData
+     * @param $sizeOffset
+     *
+     * @return array
+     */
+    protected function analyzeApiIcon($icon, $iconData, $sizeOffset): array {
+        $info = pathinfo($icon['src']);
+        if(!isset($info['extension'])) return [$iconData, $sizeOffset];
+        $ext = $info['extension'];
+        if(!in_array($ext, ['png', 'ico', 'gif', 'jpg', 'jpeg'])) return [$iconData, $sizeOffset];
+
+        if($iconData === null) {
+            $iconData = $this->loadIcon($icon['src']);
+        } else if(isset($icon['sizes'])) {
+            $size = explode('x', $icon['sizes'])[0];
+            if(!is_numeric($size)) return [$iconData, $sizeOffset];
+
+            $offset = abs(256 - $size);
+            if($offset < $sizeOffset || $sizeOffset === null) {
+                $sizeOffset = $offset;
+                $iconData   = $this->loadIcon($icon['src'], $iconData);
+            }
+        }
+
+        return [$iconData, $sizeOffset];
     }
 
     /**

@@ -18,5 +18,4 @@ namespace OCA\Passwords\Db;
  * @package OCA\Passwords\Db
  */
 interface ModelInterface extends EntityInterface {
-
 }
