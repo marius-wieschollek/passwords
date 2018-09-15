@@ -47,7 +47,7 @@ class PasswordService extends AbstractModelService {
      * @return Password[]
      */
     public function findByFolder(string $uuid): array {
-        return $this->mapper->getByFolder($uuid);
+        return $this->mapper->findAllByFolder($uuid);
     }
 
     /**
@@ -56,8 +56,8 @@ class PasswordService extends AbstractModelService {
      *
      * @return Password[]
      */
-    public function findByTag(string $tagUuid, bool $includeHidden = false): array {
-        return $this->mapper->getByTag($tagUuid, $includeHidden);
+    public function findByTag(string $tagUuid, bool $includeHidden): array {
+        return $this->mapper->findAllByTag($tagUuid, $includeHidden);
     }
 
     /**
@@ -65,14 +65,14 @@ class PasswordService extends AbstractModelService {
      * @throws \Exception
      */
     public function findShared(): array {
-        return $this->mapper->findAllMatching(['has_shares', true]);
+        return $this->mapper->findAllShared();
     }
 
     /**
      * @return Password[]
      */
     public function findOrphanedTargetPasswords(): array {
-        return $this->mapper->findOrphanedTargetPasswords();
+        return $this->mapper->findAllOrphanedTargetPasswords();
     }
 
     /**

@@ -9,7 +9,8 @@ namespace OCA\Passwords\Db;
 
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
-use \OCP\AppFramework\Db\QBMapper;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
 /**
@@ -27,21 +28,6 @@ abstract class AbstractMapper extends QBMapper {
     protected $userId;
 
     /**
-     * @var array
-     */
-    protected $allowedFields = ['id', 'uuid'];
-
-    /**
-     * @var array
-     */
-    protected $logicalOperators = ['AND', 'OR'];
-
-    /**
-     * @var array
-     */
-    protected $comparisonOperators = ['=', '!=', '<', '>'];
-
-    /**
      * AbstractMapper constructor.
      *
      * @param IDBConnection      $db
@@ -53,21 +39,6 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
-     * @return string
-     * @deprecated
-     * @throws \Exception
-     */
-    public function generateUuidV4() {
-        return implode('-', [
-            bin2hex(random_bytes(4)),
-            bin2hex(random_bytes(2)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x0F) | 0x40)).bin2hex(random_bytes(1)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
-            bin2hex(random_bytes(6))
-        ]);
-    }
-
-    /**
      * @param int $id
      *
      * @return EntityInterface|Entity
@@ -76,12 +47,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findById(int $id): EntityInterface {
-        list($sql, $params) = $this->getStatement();
-
-        $sql      .= ' AND `id` = ?';
-        $params[] = $id;
-
-        return $this->findEntity($sql, $params);
+        return $this->findOneByField('id', $id, IQueryBuilder::PARAM_INT);
     }
 
     /**
@@ -93,12 +59,28 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): EntityInterface {
-        list($sql, $params) = $this->getStatement();
+        return $this->findOneByField('uuid', $uuid);
+    }
 
-        $sql      .= ' AND `uuid` = ?';
-        $params[] = $uuid;
+    /**
+     * @param $search
+     *
+     * @return EntityInterface|Entity
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @deprecated
+     */
+    public function findOneByIdOrUuid($search): EntityInterface {
+        $sql = $this->getStatement();
 
-        return $this->findEntity($sql, $params);
+        $sql->andWhere(
+            $sql->expr()->orX(
+                $sql->expr()->eq('id', $sql->createNamedParameter($search, IQueryBuilder::PARAM_INT)),
+                $sql->expr()->eq('uuid', $sql->createNamedParameter($search, IQueryBuilder::PARAM_STR))
+            )
+        );
+
+        return $this->findEntity($sql);
     }
 
     /**
@@ -106,125 +88,205 @@ abstract class AbstractMapper extends QBMapper {
      *
      * @return EntityInterface[]
      */
-    public function findByUserId(string $userId): array {
-        list($sql, $params) = $this->getStatement();
-
-        $sql      .= ' AND `user_id` = ?';
-        $params[] = $userId;
-
-        return $this->findEntities($sql, $params);
+    public function findAllByUserId(string $userId): array {
+        return $this->findAllByField('user_id', $userId);
     }
 
     /**
      * @return EntityInterface[]
      */
-    public function findDeleted(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = ?';
+    public function findAllDeleted(): array {
+        $qb = $this->db->getQueryBuilder();
 
-        $params = [true];
+        $qb->select('*')
+           ->from(static::TABLE_NAME)
+           ->where(
+               $qb->expr()->eq('deleted', $qb->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
+           );
+
         if($this->userId !== null) {
-            $sql      .= ' AND `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
-            $params[] = $this->userId;
+            $qb->andWhere(
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return $this->findEntities($sql, $params);
+        return $this->findEntities($qb);
     }
 
     /**
      * @return EntityInterface[]
      */
     public function findAll(): array {
-        list($sql, $params) = $this->getStatement();
+        $sql = $this->getStatement();
 
-        return $this->findEntities($sql, $params);
+        return $this->findEntities($sql);
     }
 
     /**
-     * @param array $search
+     * @param string $field
+     * @param string $value
+     * @param int    $type
+     *
+     * @return EntityInterface|Entity
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    public function findOneByField(string $field, string $value, $type = IQueryBuilder::PARAM_STR): EntityInterface {
+        $sql = $this->getStatement();
+
+        $sql->andWhere(
+            $sql->expr()->eq($field, $sql->createNamedParameter($value, $type))
+        );
+
+        return $this->findEntity($sql);
+    }
+
+    /**
+     * @param string $field
+     * @param string $value
+     * @param int    $type
      *
      * @return EntityInterface[]
-     * @throws \Exception
      */
-    public function findAllMatching(array $search): array {
-        return $this->findMatching($search);
+    public function findAllByField(string $field, string $value, $type = IQueryBuilder::PARAM_STR): array {
+        $sql = $this->getStatement();
+
+        $sql->andWhere(
+            $sql->expr()->eq($field, $sql->createNamedParameter($value, $type))
+        );
+
+        return $this->findEntities($sql);
     }
 
     /**
-     * @param array $search
-     *
-     * @return null|EntityInterface
-     * @throws \Exception
+     * @return IQueryBuilder
      */
-    public function findOneMatching(array $search): ?EntityInterface {
-        $matches = $this->findMatching($search, 1);
+    protected function getStatement(): IQueryBuilder {
+        $qb = $this->db->getQueryBuilder();
 
-        if(isset($matches[0])) {
-            return $matches[0];
-        }
+        $qb->select('*')
+           ->from(static::TABLE_NAME)
+           ->where(
+               $qb->expr()->eq('deleted', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
+           );
 
-        return null;
-    }
-
-    /**
-     * @param array    $search
-     * @param int|null $limit
-     *
-     * @return EntityInterface[]
-     * @throws \Exception
-     */
-    public function findMatching(array $search = [], int $limit = null): array {
-        if(isset($search[0]) && !is_array($search[0])) $search = [$search];
-        list($sql, $params) = $this->getStatement();
-
-        $extraSql = '';
-        $concat   = '';
-        foreach($search as $criteria) {
-            list($field, $value, $operator, $nextConcat) = $this->processCriteria($criteria);
-
-            if($value !== null) {
-                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` {$operator} ? ";
-                $params[] = $value;
-            } else if($operator === '!=') {
-                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` IS NOT NULL ";
-            } else {
-                $extraSql .= "{$concat} `*PREFIX*".static::TABLE_NAME."`.`{$field}` IS NULL ";
-            }
-            $concat = $nextConcat;
-        }
-        if($extraSql) $sql .= " AND ($extraSql)";
-
-        return $this->findEntities($sql, $params, $limit);
-    }
-
-    /**
-     * @return array
-     */
-    protected function getStatement(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = ?';
-
-        $params = [false];
         if($this->userId !== null) {
-            $sql      .= ' AND `*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?';
-            $params[] = $this->userId;
+            $qb->andWhere(
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return [$sql, $params];
+        return $qb;
     }
 
     /**
-     * @param $criteria
+     * @param string $toTable
+     * @param string $fromField
+     * @param string $toField
      *
-     * @return mixed
-     * @throws \Exception
+     * @return IQueryBuilder
      */
-    protected function processCriteria(array $criteria): array {
-        if(!isset($criteria[2]) || !in_array($criteria[2], $this->comparisonOperators)) $criteria[2] = '=';
-        if(!isset($criteria[3]) || !in_array($criteria[3], $this->logicalOperators)) $criteria[3] = 'AND';
+    protected function getJoinStatement(string $toTable, string $fromField = 'revision', string $toField = 'uuid'): IQueryBuilder {
+        $sql = $this->db->getQueryBuilder();
 
-        if(!in_array($criteria[0], $this->allowedFields)) {
-            throw new \Exception('Illegal field `'.static::TABLE_NAME.'`.`'.$criteria[0].'` in database request');
+        $sql->select('a.*')
+            ->from(static::TABLE_NAME, 'a')
+            ->innerJoin('a', $toTable, 'b', "a.`{$fromField}` = b.`{$toField}`")
+            ->where(
+                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+                $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
+            );
+
+        if($this->userId !== null) {
+            $sql->andWhere(
+                $sql->expr()->eq('a.user_id', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
+                $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return $criteria;
+        return $sql;
+    }
+
+    /**
+     * @param Entity $entity
+     *
+     * @return Entity
+     */
+    public function insert(Entity $entity): Entity {
+        // get updated fields to save, fields have to be set using a setter to
+        // be saved
+        $properties = $entity->getUpdatedFields();
+
+        $qb = $this->db->getQueryBuilder();
+        $qb->insert($this->tableName);
+        $types = $entity->getFieldTypes();
+
+        // build the fields
+        foreach($properties as $property => $updated) {
+            $column = $entity->propertyToColumn($property);
+            $getter = 'get' . ucfirst($property);
+            $value = $entity->$getter();
+
+            if(isset($types[$property]) && $types[$property] === 'boolean') {
+                $qb->setValue($column, $qb->createNamedParameter($value, IQueryBuilder::PARAM_BOOL));
+            } else {
+                $qb->setValue($column, $qb->createNamedParameter($value));
+            }
+        }
+
+        $qb->execute();
+
+        $entity->setId((int) $qb->getLastInsertId());
+
+        return $entity;
+    }
+
+    /**
+     * @param Entity $entity
+     *
+     * @return Entity
+     */
+    public function update(Entity $entity): Entity {
+        // if entity wasn't changed it makes no sense to run a db query
+        $properties = $entity->getUpdatedFields();
+        if(\count($properties) === 0) {
+            return $entity;
+        }
+
+        // entity needs an id
+        $id = $entity->getId();
+        if($id === null){
+            throw new \InvalidArgumentException(
+                'Entity which should be updated has no id');
+        }
+
+        // get updated fields to save, fields have to be set using a setter to
+        // be saved
+        // do not update the id field
+        unset($properties['id']);
+
+        $qb = $this->db->getQueryBuilder();
+        $qb->update($this->tableName);
+        $types = $entity->getFieldTypes();
+
+        // build the fields
+        foreach($properties as $property => $updated) {
+            $column = $entity->propertyToColumn($property);
+            $getter = 'get' . ucfirst($property);
+            $value = $entity->$getter();
+
+            if(isset($types[$property]) && $types[$property] === 'boolean') {
+                $qb->set($column, $qb->createNamedParameter($value, IQueryBuilder::PARAM_BOOL));
+            } else {
+                $qb->set($column, $qb->createNamedParameter($value));
+            }
+        }
+
+        $qb->where(
+            $qb->expr()->eq('id', $qb->createNamedParameter($id))
+        );
+        $qb->execute();
+
+        return $entity;
     }
 }

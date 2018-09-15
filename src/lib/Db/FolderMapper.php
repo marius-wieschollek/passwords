@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class FolderMapper
  *
@@ -21,25 +23,14 @@ class FolderMapper extends AbstractMapper {
      *
      * @return Folder[]
      */
-    public function getByParentFolder(string $parentUuid): array {
-        $folderTable   = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $revisionTable = '`*PREFIX*'.FolderRevisionMapper::TABLE_NAME.'`';
+    public function findAllByParentFolder(string $parentUuid): array {
+        $sql = $this->getJoinStatement(FolderRevisionMapper::TABLE_NAME);
 
-        $sql = "SELECT {$folderTable}.* FROM {$folderTable} ".
-               "INNER JOIN {$revisionTable} ON {$folderTable}.`revision` = {$revisionTable}.`uuid` ".
-               "WHERE {$folderTable}.`deleted` = ? ".
-               "AND {$revisionTable}.`deleted` = ? ".
-               "AND {$revisionTable}.`parent` = ?";
+        $sql->andWhere(
+            $sql->expr()->eq('b.parent', $sql->createNamedParameter($parentUuid, IQueryBuilder::PARAM_STR))
+        );
 
-        $params = [false, false, $parentUuid];
-        if($this->userId !== null) {
-            $sql      .= " AND {$folderTable}.`user_id` = ?";
-            $sql      .= " AND {$revisionTable}.`user_id` = ?";
-            $params[] = $this->userId;
-            $params[] = $this->userId;
-        }
-
-        return $this->findEntities($sql, $params);
+        return $this->findEntities($sql);
     }
 
 }

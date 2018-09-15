@@ -7,6 +7,9 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\AppFramework\Db\Entity;
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class ShareMapper
  *
@@ -17,35 +20,63 @@ class ShareMapper extends AbstractMapper {
     const TABLE_NAME = 'passwords_entity_share';
 
     /**
-     * @var array
+     * @param int $time
+     *
+     * @return Share[]
      */
-    protected $allowedFields
-        = [
-            'id',
-            'uuid',
-            'user_id',
-            'source_password',
-            'target_password',
-            'source_updated',
-            'target_updated',
-            'expires',
-            'receiver'
-        ];
+    public function findAllExpired(int $time): array {
+        $sql = $this->getStatement();
+
+        $sql->andWhere(
+            $sql->expr()->lte('expires', $sql->createNamedParameter($time, IQueryBuilder::PARAM_INT))
+        );
+
+        return $this->findEntities($sql);
+    }
 
     /**
-     * @return array
+     * @param string $passwordUuid
+     * @param string $userId
+     *
+     * @return Share|Entity
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    protected function getStatement(): array {
-        $sql = 'SELECT * FROM `*PREFIX*'.static::TABLE_NAME.'` WHERE `deleted` = ?';
+    public function findOneBySourcePasswordAndReceiver(string $passwordUuid, string $userId): Share {
+        $sql = $this->getStatement();
 
-        $params = [false];
+        $sql->andWhere(
+            $sql->expr()->eq('source_password', $sql->createNamedParameter($passwordUuid, IQueryBuilder::PARAM_STR)),
+            $sql->expr()->eq('receiver', $sql->createNamedParameter($userId, IQueryBuilder::PARAM_STR))
+        );
+
+        return $this->findEntity($sql);
+    }
+
+    /**
+     * @return IQueryBuilder
+     */
+    protected function getStatement(): IQueryBuilder {
+        $qb = $this->db->getQueryBuilder();
+
+        $qb->select('*')
+           ->from(static::TABLE_NAME)
+           ->where(
+               $qb->expr()->eq('deleted', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
+           );
+
         if($this->userId !== null) {
-            $sql      .= ' AND (`*PREFIX*'.static::TABLE_NAME.'`.`user_id` = ?'.
-                         ' OR (`*PREFIX*'.static::TABLE_NAME.'`.`receiver` = ? AND `*PREFIX*'.static::TABLE_NAME.'`.`target_password` IS NOT NULL)) ';
-            $params[] = $this->userId;
-            $params[] = $this->userId;
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
+                    $qb->expr()->andX(
+                        $qb->expr()->eq('receiver', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
+                        $qb->expr()->isNotNull('target_password')
+                    )
+                )
+            );
         }
 
-        return [$sql, $params];
+        return $qb;
     }
 }

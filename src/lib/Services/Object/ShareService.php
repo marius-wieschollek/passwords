@@ -13,6 +13,7 @@ use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
  * Class ShareService
@@ -60,7 +61,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourcePassword(string $passwordUuid): array {
-        return $this->mapper->findAllMatching(['source_password', $passwordUuid]);
+        return $this->mapper->findAllByField('source_password', $passwordUuid);
     }
 
     /**
@@ -71,7 +72,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findByTargetPassword(string $passwordUuid): ?Share {
-        return $this->mapper->findOneMatching(['target_password', $passwordUuid]);
+        return $this->mapper->findOneByField('target_password', $passwordUuid);
     }
 
     /**
@@ -80,7 +81,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourceUpdated(): array {
-        return $this->mapper->findAllMatching(['source_updated', true]);
+        return $this->mapper->findAllByField('source_updated', true, IQueryBuilder::PARAM_BOOL);
     }
 
     /**
@@ -89,7 +90,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findByTargetUpdated(): array {
-        return $this->mapper->findAllMatching(['target_updated', true]);
+        return $this->mapper->findAllByField('target_updated', true, IQueryBuilder::PARAM_BOOL);
     }
 
     /**
@@ -101,7 +102,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourcePasswordAndReceiver(string $passwordUuid, string $userId): ?Share {
-        return $this->mapper->findOneMatching([['source_password', $passwordUuid], ['receiver', $userId]]);
+        return $this->mapper->findOneBySourcePasswordAndReceiver($passwordUuid, $userId);
     }
 
     /**
@@ -109,7 +110,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findNew(): array {
-        return $this->mapper->findAllMatching(['target_password', null]);
+        return $this->mapper->findAllByField('target_password', null, IQueryBuilder::PARAM_NULL);
     }
 
     /**
@@ -117,7 +118,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findExpired(): array {
-        return $this->mapper->findAllMatching(['expires', time(), '']);
+        return $this->mapper->findAllExpired(time());
     }
 
     /**
@@ -129,16 +130,6 @@ class ShareService extends AbstractService {
      */
     public function findByUuid(string $uuid): Share {
         return $this->mapper->findByUuid($uuid);
-    }
-
-    /**
-     * @param string $userId
-     *
-     * @return ModelInterface[]
-     * @throws \Exception
-     */
-    public function findByUserId(string $userId): array {
-        return $this->mapper->findAllMatching([['user_id', $userId, '=', 'OR'], ['receiver', $userId]]);
     }
 
     /**

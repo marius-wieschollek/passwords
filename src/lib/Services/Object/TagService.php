@@ -47,6 +47,6 @@ class TagService extends AbstractModelService {
      * @return Tag[]
      */
     public function findByPassword(string $passwordUuid, bool $includeHidden = false): array {
-        return $this->mapper->getByPassword($passwordUuid, $includeHidden);
+        return $this->mapper->findAllByPassword($passwordUuid, $includeHidden);
     }
 }

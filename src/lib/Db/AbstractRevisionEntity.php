@@ -32,8 +32,6 @@ namespace OCA\Passwords\Db;
  * @method void setTrashed(bool $trashed)
  * @method bool getFavorite()
  * @method void setFavorite(bool $favorite)
- * @method bool getFavourite()
- * @method void setFavourite(bool $favourite)
  *
  * @package OCA\Passwords\Db
  */
@@ -96,12 +94,6 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
 
     /**
      * @var bool
-     * @deprecated
-     */
-    protected $favourite;
-
-    /**
-     * @var bool
      */
     protected $_decrypted = false;
 
@@ -121,7 +113,6 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
         $this->addType('hidden', 'boolean');
         $this->addType('trashed', 'boolean');
         $this->addType('favorite', 'boolean');
-        $this->addType('favourite', 'boolean');
 
         parent::__construct();
     }

@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class AbstractRevisionMapper
  *
@@ -17,36 +19,37 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
     const MODEL_TABLE_NAME = 'passwords_model';
 
     /**
-     * @var array
-     */
-    protected $allowedFields = ['id', 'uuid', 'model'];
-
-    /**
-     * @param string $passwordUuid
+     * @param string $modelUuid
      *
-     * @return null|PasswordRevision|\OCP\AppFramework\Db\Entity
+     * @return null|RevisionInterface|\OCP\AppFramework\Db\Entity
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function findCurrentRevisionByModel(string $passwordUuid): ?RevisionInterface {
-        $revisionTable = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $passwordTable = '`*PREFIX*'.static::MODEL_TABLE_NAME.'`';
+    public function findCurrentRevisionByModel(string $modelUuid): ?RevisionInterface {
+        $sql = $this->getJoinStatement(static::MODEL_TABLE_NAME, 'model');
 
-        $sql = "SELECT {$revisionTable}.* FROM {$revisionTable} ".
-               "INNER JOIN {$passwordTable} ".
-               "ON {$revisionTable}.`model` = {$passwordTable}.`uuid` ".
-               "WHERE {$revisionTable}.`deleted` = ? ".
-               "AND {$passwordTable}.`deleted` = ? ".
-               "AND {$passwordTable}.`user_id` = {$revisionTable}.`user_id` ".
-               "AND {$passwordTable}.`revision` = {$revisionTable}.`uuid` ".
-               "AND {$passwordTable}.`uuid` = ?";
+        $sql->andWhere(
+            $sql->expr()->eq('b.user_id', 'a.user_id'),
+            $sql->expr()->eq('b.revision', 'a.uuid'),
+            $sql->expr()->eq('b.uuid', $sql->createNamedParameter($modelUuid, IQueryBuilder::PARAM_STR))
+        );
 
-        $params = [false, false, $passwordUuid];
-        if($this->userId !== null) {
-            $sql      .= " AND {$passwordTable}.`user_id` = ?";
-            $params[] = $this->userId;
-        }
+        return $this->findEntity($sql);
+    }
 
-        return $this->findEntity($sql, $params);
+    /**
+     * @param string $modelUuid
+     *
+     * @return RevisionInterface[]|\OCP\AppFramework\Db\Entity[]
+     */
+    public function findAllByModel(string $modelUuid): array {
+        $sql = $this->getJoinStatement(static::MODEL_TABLE_NAME, 'model');
+
+        $sql->andWhere(
+            $sql->expr()->eq('b.user_id', 'a.user_id'),
+            $sql->expr()->eq('b.uuid', $sql->createNamedParameter($modelUuid, IQueryBuilder::PARAM_STR))
+        );
+
+        return $this->findEntities($sql);
     }
 }

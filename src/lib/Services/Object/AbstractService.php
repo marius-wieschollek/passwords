@@ -70,7 +70,7 @@ abstract class AbstractService {
      * @return array
      */
     public function findDeleted(): array {
-        return $this->mapper->findDeleted();
+        return $this->mapper->findAllDeleted();
     }
 
     /**
