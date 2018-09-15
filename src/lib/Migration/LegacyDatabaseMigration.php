@@ -11,16 +11,15 @@ use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
 use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
 use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Services\ConfigurationService;
-use OCP\DB\ISchemaWrapper;
-use OCP\Migration\IMigrationStep;
 use OCP\Migration\IOutput;
+use OCP\Migration\IRepairStep;
 
 /**
  * Class LegacyDatabaseMigration
  *
  * @package OCA\Passwords\Migration
  */
-class LegacyDatabaseMigration implements IMigrationStep {
+class LegacyDatabaseMigration implements IRepairStep {
 
     /**
      * @var LegacyShareMigration
@@ -88,55 +87,12 @@ class LegacyDatabaseMigration implements IMigrationStep {
     }
 
     /**
-     * @param IOutput  $output
-     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array    $options
-     *
-     * @since 13.0.0
-     * @throws \Exception
-     */
-    public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {
-        $this->run($output);
-    }
-
-    /**
-     * @param IOutput  $output
-     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array    $options
-     *
-     * @since 13.0.0
-     */
-    public function preSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {}
-
-    /**
-     * @param IOutput  $output
-     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array    $options
-     *
-     * @return null|ISchemaWrapper
-     * @since 13.0.0
-     */
-    public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options): ?ISchemaWrapper {
-        return null;
-    }
-
-    /**
-     * Human readable name of the migration step
+     * Returns the step's name
      *
      * @return string
-     * @since 14.0.0
+     * @since 9.1.0
      */
-    public function name(): string {
+    public function getName() {
         return 'Passwords Legacy Database Migration';
-    }
-
-    /**
-     * Human readable description of the migration steps
-     *
-     * @return string
-     * @since 14.0.0
-     */
-    public function description(): string {
-        return 'Converts the database from tje ocPasswords app to the new format';
     }
 }
