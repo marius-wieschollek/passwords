@@ -86,7 +86,7 @@ $request = \OC::$server->getRequest();
         right         : 20px;
         bottom        : 20px;
         padding       : 3px 0;
-        max-height    : 1.2rem;
+        max-height    : 1.65rem;
         overflow      : hidden;
         transition    : max-height 0.25s ease-in-out;
     }

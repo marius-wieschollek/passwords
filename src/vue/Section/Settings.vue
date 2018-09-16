@@ -5,7 +5,7 @@
                 <div class="settings-level">
                     <translate tag="label" for="setting-settings-advanced" say="View"/>
                     <select id="setting-settings-advanced" v-model="advanced">
-                        <translate tag="option" value="0" say="Normal"/>
+                        <translate tag="option" value="0" say="Default"/>
                         <translate tag="option" value="1" say="Advanced"/>
                     </select>
                 </div>
@@ -291,6 +291,8 @@
             margin-right          : -2em;
             display               : grid;
             grid-template-columns : 1fr 1fr 1fr 1fr;
+            grid-column-gap       : 2em;
+            max-width             : 100%;
 
             &.advanced section.ui {
                 grid-row-start    : 1;
@@ -313,7 +315,7 @@
             display               : grid;
             grid-template-columns : 3fr 2fr 30px;
             grid-auto-rows        : max-content;
-            padding               : 0 2em 4em 0;
+            padding               : 0 0 4em 0;
 
             h1,
             h3 {
