@@ -55,11 +55,6 @@ class TokenHelper {
     protected $session;
 
     /**
-     * @var IUserManager
-     */
-    protected $userManager;
-
-    /**
      * @var SimpleEncryption
      */
     protected $encryption;
@@ -88,7 +83,6 @@ class TokenHelper {
      * @param ISecureRandom        $random
      * @param LoggingService       $logger
      * @param IProvider            $tokenProvider
-     * @param IUserManager         $userManager
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
      * @param NotificationService  $notificationService
@@ -100,7 +94,6 @@ class TokenHelper {
         ISecureRandom $random,
         LoggingService $logger,
         IProvider $tokenProvider,
-        IUserManager $userManager,
         SimpleEncryption $encryption,
         ConfigurationService $config,
         NotificationService $notificationService
@@ -111,7 +104,6 @@ class TokenHelper {
         $this->config              = $config;
         $this->session             = $session;
         $this->encryption          = $encryption;
-        $this->userManager         = $userManager;
         $this->localisation        = $localisation;
         $this->tokenProvider       = $tokenProvider;
         $this->notificationService = $notificationService;
@@ -152,18 +144,10 @@ class TokenHelper {
      * @param string $tokenId
      */
     public function destroyToken(string $tokenId): void {
-        // @TODO remove this for 2019.1.0
-        if($this->getServerVersion() === '14') {
-            $this->tokenProvider->invalidateTokenById(
-                $this->userId,
-                $tokenId
-            );
-        } else {
-            $this->tokenProvider->invalidateTokenById(
-                $this->userManager->get($this->userId),
-                $tokenId
-            );
-        }
+        $this->tokenProvider->invalidateTokenById(
+            $this->userId,
+            $tokenId
+        );
     }
 
     /**
@@ -172,9 +156,9 @@ class TokenHelper {
     public function destroyWebUiToken(): void {
         $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
         if($tokenId !== false) {
-            $this->destroyToken($tokenId);
             $this->config->deleteUserValue(self::WEBUI_TOKEN);
             $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
+            $this->destroyToken($tokenId);
         }
     }
 
@@ -241,16 +225,5 @@ class TokenHelper {
         }
 
         return implode('-', $groups);
-    }
-
-    /**
-     * @return string
-     * @deprecated
-     * @TODO remove this for 2019.1.0
-     */
-    protected function getServerVersion(): string {
-        $version = $this->config->getSystemValue('version');
-
-        return explode('.', $version, 2)[0];
     }
 }
