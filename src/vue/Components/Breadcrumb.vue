@@ -221,6 +221,7 @@
                 .fa {
                     padding   : 10px;
                     font-size : 1rem;
+                    margin    : 0;
                 }
             }
 
@@ -233,7 +234,7 @@
             }
 
             &:not(.active) .menu {
-                filter: none;
+                filter : none;
             }
 
             &.active .menu {
