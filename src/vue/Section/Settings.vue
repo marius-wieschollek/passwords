@@ -5,7 +5,7 @@
                 <div class="settings-level">
                     <translate tag="label" for="setting-settings-advanced" say="View"/>
                     <select id="setting-settings-advanced" v-model="advanced">
-                        <translate tag="option" value="0" say="Normal"/>
+                        <translate tag="option" value="0" say="Default"/>
                         <translate tag="option" value="1" say="Advanced"/>
                     </select>
                 </div>
