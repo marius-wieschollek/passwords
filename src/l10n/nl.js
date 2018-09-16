@@ -140,7 +140,7 @@
             'Export Folders'                      : 'Mappen exporteren',
             'Export Tags'                         : 'Tags exporteren',
             'FolderLabel'                         : 'Maplabel',
-            'TagLabels'                           : 'Tagslabels',
+            'TagLabels'                           : 'Taglabels',
             'ParentLabel'                         : 'Bovenliggende map',
             'FolderId'                            : 'Map Id',
             'TagIds'                              : 'Tag Ids',
@@ -185,7 +185,7 @@
             'Detect unescaped quotes'             : 'Detecteer niet ge-escapete aanhalingstekens',
             'Skip first line'                     : 'Eerste regel overslaan',
             'Interpolate missing fields'          : 'Ontbrekende velden interpoleren',
-            'CSV Field Mapping'                   : 'CSV veld aping',
+            'CSV Field Mapping'                   : 'CSV veld keuze volgorde',
             'Preview Line'                        : 'Regel voorvertonen',
             'Line {line}'                         : 'Regel {line}',
             'Ignore'                              : 'Negeren',
@@ -235,14 +235,14 @@
             'Password Rules'                      : 'Wachtwoord regels',
             'Mark duplicates'                     : 'Markeer duplicaten',
             'Maximum age in days'                 : 'Maximale leeftijd in dagen',
-            'Password Generator'                  : 'Wachtworod generator',
+            'Password Generator'                  : 'Wachtwoord generator',
             'Password strength'                   : 'Wachtwoord sterkte',
             'Include numbers'                     : 'Cijfers gebruiken',
             'Include special characters'          : 'Bijzondere tekens gebruiken',
             'User Interface'                      : 'Gebruikersinterface',
             'Initial section'                     : 'Startpagina',
             'All Passwords'                       : 'Alle wachtwoorden',
-            'Passwords List View'                 : 'Wachtwoorden in lijst overzicht',
+            'Passwords List View'                 : 'Wachtwoorden in lijstweergave',
             'Set title from'                      : 'Dit veld als titel gebruiken',
             'Sort by'                             : 'Sorteer op',
             'Title field'                         : 'Titelveld',
@@ -258,7 +258,7 @@
             'Show hidden custom fields'           : 'Laat verborgen eigen velden zien',
             'Search as i type'                    : 'Zoek terwijl ik tik',
             'Search everywhere with Enter'        : 'Toets Enter om overal te zoeken',
-            'Always show search section'          : 'Altijd de zoekssectie laten zien',
+            'Always show search section'          : 'Altijd de zoeksectie laten zien',
             'Notifications'                       : 'Berichtgeving',
             'Send Emails for'                     : 'Stuur E-Mails voor',
             'Security issues'                     : 'Beveiligingsproblemen',
@@ -342,7 +342,7 @@
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Het bestand heeft type "{actual}" maar "{expected}" wordt verwacht. Misschien heeft u een verkeerd bestand of verkeerde import methode gekozen..',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Wilt u alle instellingen, wachtwoorden, mappen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen.',
-            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} staat erom bekend dat het foutieve export bestanden genereerd. Raadpleeg de handleiding voor hulp wannaar het bestand niet verwerkt kan worden.'
+            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} staat erom bekend dat het foutieve export bestanden genereerd. Raadpleeg de handleiding voor hulp wanneer het bestand niet verwerkt kan worden.'
         };
 
     OC.L10N.register(
