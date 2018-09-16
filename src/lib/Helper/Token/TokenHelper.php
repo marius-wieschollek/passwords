@@ -152,14 +152,22 @@ class TokenHelper {
      * @param string $tokenId
      */
     public function destroyToken(string $tokenId): void {
-        $this->tokenProvider->invalidateTokenById(
-            $this->userManager->get($this->userId),
-            $tokenId
-        );
+        // @TODO remove this for 2019.1.0
+        if($this->getServerVersion() === '14') {
+            $this->tokenProvider->invalidateTokenById(
+                $this->userId,
+                $tokenId
+            );
+        } else {
+            $this->tokenProvider->invalidateTokenById(
+                $this->userManager->get($this->userId),
+                $tokenId
+            );
+        }
     }
 
     /**
-     *
+     * @throws \Exception
      */
     public function destroyWebUiToken(): void {
         $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
@@ -172,6 +180,7 @@ class TokenHelper {
 
     /**
      * @return bool|string
+     * @throws \Exception
      */
     protected function loadWebUiToken() {
         $token   = $this->config->getUserValue(self::WEBUI_TOKEN, false);
@@ -196,7 +205,6 @@ class TokenHelper {
     /**
      * @return string
      * @throws \Exception
-     * @throws \OCP\PreConditionNotMetException
      */
     protected function createWebUiToken(): string {
         $name = $this->localisation->t('Passwords WebUI Access (see Passwords F.A.Q)');
@@ -233,5 +241,16 @@ class TokenHelper {
         }
 
         return implode('-', $groups);
+    }
+
+    /**
+     * @return string
+     * @deprecated
+     * @TODO remove this for 2019.1.0
+     */
+    protected function getServerVersion(): string {
+        $version = $this->config->getSystemValue('version');
+
+        return explode('.', $version, 2)[0];
     }
 }
