@@ -6,6 +6,7 @@ use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -24,6 +25,11 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     protected $folderMapper;
 
     /**
+     * @var EncryptionService
+     */
+    protected $encryptionService;
+
+    /**
      * @var string
      */
     protected $objectName = 'password';
@@ -33,11 +39,18 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      *
      * @param PasswordMapper          $modelMapper
      * @param PasswordRevisionService $revisionService
+     * @param EncryptionService       $encryptionService
      * @param FolderMapper            $folderMapper
      */
-    public function __construct(PasswordMapper $modelMapper, PasswordRevisionService $revisionService, FolderMapper $folderMapper) {
+    public function __construct(
+        FolderMapper $folderMapper,
+        PasswordMapper $modelMapper,
+        EncryptionService $encryptionService,
+        PasswordRevisionService $revisionService
+    ) {
         parent::__construct($modelMapper, $revisionService);
-        $this->folderMapper = $folderMapper;
+        $this->folderMapper      = $folderMapper;
+        $this->encryptionService = $encryptionService;
     }
 
     /**
@@ -48,7 +61,14 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;
+
+        if($revision->_isDecrypted() === false && $revision->getCustomFields() === '{}') {
+            $revision->setCustomFields(null);
+            $fixed = true;
+        }
+
         if($revision->getCustomFields() === null && $revision->getCseType() === 'none') {
+            $this->encryptionService->decrypt($revision);
             $revision->setCustomFields('{}');
             $fixed = true;
         }
