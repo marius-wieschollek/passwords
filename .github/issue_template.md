@@ -1,17 +1,25 @@
-ISSUES ARE NOT FOR SUPPORT. Please go to the Nextcloud forum if you have questions or need help.
+If you have **QUESTIONS** or need **SUPPORT**, please ask in the forum.
  -> https://help.nextcloud.com/c/apps/passwords
-Please check the existing issues before creating a new one.
- -> https://github.com/marius-wieschollek/passwords/issues?utf8=%E2%9C%93&q=is%3Aissue
-If you are reporting a bug, please check if it still exists in the nightly version.
- -> https://apps.nextcloud.com/apps/passwords/releases
-If you are experiencing issues with the browser extension, report the issue in the repository
+ or look into the **MANUAL**
+ -> https://git.mdns.eu/nextcloud/passwords/wikis/home
+
+If you have an issue for the **BROWSER EXTENSION**, there is another repository for that
  -> https://github.com/marius-wieschollek/passwords-webextension
-Describe your issue here and remember not to include personal data as this is public.
+
+If you experience a **BUG** or want to request a **FEATURE** check if there is already a similar issue
+ -> https://github.com/marius-wieschollek/passwords/issues?utf8=%E2%9C%93&q=is%3Aissue
+ or try the NIGHTLY releases
+ -> https://apps.nextcloud.com/apps/passwords/releases
+
+If none of the options above fit you, delete this block and describe your request instead.
+Then fill out the form below.
+_Remember not to include personal data as this is public._
+
 
 ### System Information
 - Nextcloud Version:
 - PHP Version:
-- Passwords Version
+- Passwords Version:
 - Browser and Version:
 - Client OS and Version:
 - Server OS and Version:
