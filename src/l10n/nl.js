@@ -271,10 +271,10 @@
             'Delete everything'                   : 'Alles verwijderen',
             'DELETE EVERYTHING'                   : 'ALLES VERWIJDEREN',
             'Account reset requested'             : 'Account reset aangevraagd',
-			'Field tests'                         : 'Veld tests',
-			'Encryption support'                  : 'Client side Encryptie ondersteuning',
-			'Test'                                : 'Test',
-			'Test successful'                     : 'Test succesvol afgerond',
+	    'Field tests'                         : 'Veld tests',
+	    'Encryption support'                  : 'Client side Encryptie ondersteuning',
+            'Test'                                : 'Test',
+	    'Test successful'                     : 'Test succesvol afgerond',
             'View'                                : 'Weergave',
             'Default'                             : 'Standaard',
             'Advanced'                            : 'Geavanceerd',
@@ -343,8 +343,8 @@
             'The page "{page}" could not be fetched from the handbook server.'           : 'De pagina "{page}" kon niet opgehaald worden van de handleidingsserver.',
             'Some data is waiting to be synchronized'                                    : 'Er staat data gereed om gesynchroniseerd te worden',
             '{message} in line {line} character {character}.'                            : '{message} op regel {line}, Karakter {character}.',
-			'Checks if your passwords, folders and tags can be encrypted without issues' : 'Controleert of uw wachtwoorden, mappen en tags zonder problemen versleuteld kunnen worden',
-			'The client side encryption test completed successfully on this browser'     : 'De client side versleutelingstest is succesvol afgerond met deze browser'
+	    'Checks if your passwords, folders and tags can be encrypted without issues' : 'Controleert of uw wachtwoorden, mappen en tags zonder problemen versleuteld kunnen worden',
+	    'The client side encryption test completed successfully on this browser'     : 'De client side versleutelingstest is succesvol afgerond met deze browser'
         }
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Het bestand heeft type "{actual}" maar "{expected}" wordt verwacht. Misschien heeft u een verkeerd bestand of verkeerde import methode gekozen..',
