@@ -64,7 +64,7 @@ class ProcessDeletedUsers extends AbstractCronJob {
                 $usersNotDeleted[] = $userId;
             };
         }
-        $this->logger->info(['Deleted %s user(s)', $deleted]);
+        $this->logger->debugOrInfo(['Deleted %s user(s)', $deleted], $deleted);
         $this->config->setAppValue('deleted_users', json_encode($usersNotDeleted));
     }
 

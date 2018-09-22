@@ -118,7 +118,7 @@ class CheckPasswordsJob extends AbstractCronJob {
         }
 
         $this->notifyUsers();
-        $this->logger->info(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter]);
+        $this->logger->debugOrInfo(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter], $badRevisionCounter);
     }
 
     /**

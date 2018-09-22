@@ -148,7 +148,7 @@ class ProcessDeletedEntities extends AbstractCronJob {
         $objects += $this->deleteObjects($this->passwordRevisionService);
         $objects += $this->deleteObjects($this->passwordTagRelationService);
 
-        $this->logger->info(['Deleted %s object(s) permanently', $objects]);
+        $this->logger->debugOrInfo(['Deleted %s object(s) permanently', $objects], $objects);
     }
 
     /**
