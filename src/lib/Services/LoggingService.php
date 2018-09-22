@@ -92,7 +92,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function debugOrInfo($message, int $priority, array $context = []): LoggingService {
-        $level = $priority < 1 ? Util::DEBUG:Util::INFO;
+        $level = $priority < 1 ? ILogger::DEBUG:ILogger::INFO;
 
         return $this->log($level, $message, $context);
     }
