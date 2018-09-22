@@ -83,6 +83,22 @@ class LoggingService {
     }
 
     /**
+     * Set log level based on priority
+     * Priority under 1 is debug, over 1 is info
+     *
+     * @param string|array $message
+     * @param int          $priority
+     * @param array        $context
+     *
+     * @return LoggingService
+     */
+    public function debugOrInfo($message, int $priority, array $context = []): LoggingService {
+        $level = $priority < 1 ? Util::DEBUG:Util::INFO;
+
+        return $this->log($level, $message, $context);
+    }
+
+    /**
      * @param int          $level
      * @param string|array $message
      * @param array        $context
@@ -97,6 +113,7 @@ class LoggingService {
         $context['app'] = Application::APP_NAME;
 
         $this->logger->log($level, $message, $context);
+
         return $this;
     }
 
