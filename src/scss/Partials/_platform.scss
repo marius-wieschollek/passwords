@@ -36,11 +36,5 @@
     #app-content {
         overflow-y: initial;
         overflow-x: initial;
-
-        @media all and (max-width : 1366px) {
-            &.show-details .app-content-right {
-                left: 0;
-            }
-        }
     }
 }

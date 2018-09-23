@@ -175,7 +175,7 @@
         transition : margin-right 300ms, transform 300ms;
 
         &.blocking {
-            z-index: 2000;
+            z-index : 2000;
         }
 
         .app-content-right {
@@ -206,7 +206,23 @@
             display : none !important;
         }
 
-        @media(max-width : $tablet-width) {
+        @media(max-width : $desktop-width) {
+            .app-content-right {
+                right   : -360px;
+                z-index : 60;
+            }
+
+            &.show-details {
+                margin-right : 360px;
+
+                .app-content-right {
+                    width     : 360px;
+                    min-width : 360px;
+                }
+            }
+        }
+
+        @media(max-width : $width-extra-small) {
             transform : translate3d(0, 0, 0);
 
             .app-content-right {
@@ -229,21 +245,6 @@
 
             &.mobile-open {
                 transform : translate3d(250px, 0px, 0px);
-            }
-        }
-
-        @media(max-width : $desktop-width) {
-            .app-content-right {
-                right : -360px;
-            }
-
-            &.show-details {
-                margin-right : 360px;
-
-                .app-content-right {
-                    width     : 360px;
-                    min-width : 360px;
-                }
             }
         }
     }
