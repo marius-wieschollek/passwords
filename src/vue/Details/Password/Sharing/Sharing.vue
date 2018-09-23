@@ -18,6 +18,7 @@
     import Messages from '@js/Classes/Messages';
     import Localisation from "@js/Classes/Localisation";
     import ThemeManager from '@js/Manager/ThemeManager';
+    import SettingsManager from '@js/Manager/SettingsManager';
     import Share from '@vue/Details/Password/Sharing/Share';
 
     export default {
@@ -34,18 +35,19 @@
 
         data() {
             return {
-                search     : '',
-                matches    : [],
-                nameMap    : [],
-                idMap      : [],
-                shares     : this.password.shares,
-                placeholder: Localisation.translate('Search user'),
-                interval: null,
-            }
+                search      : '',
+                matches     : [],
+                nameMap     : [],
+                idMap       : [],
+                shares      : this.password.shares,
+                placeholder : Localisation.translate('Search user'),
+                autocomplete: SettingsManager.get('server.sharing.autocomplete'),
+                interval    : null
+            };
         },
 
         created() {
-            this.interval = setInterval(() => { this.refreshShares() }, 10000)
+            this.interval = setInterval(() => { this.refreshShares(); }, 10000);
         },
 
         beforeDestroy() {
@@ -76,12 +78,12 @@
 
         methods: {
             async searchUsers() {
-                if(this.search === '') {
+                if(this.search === '' || !this.autocomplete) {
                     this.matches = [];
                     return;
                 }
 
-                let users = this.getSharedWithUsers,
+                let users   = this.getSharedWithUsers,
                     matches = await API.findSharePartners(this.search);
                 this.matches = [];
 
@@ -89,7 +91,7 @@
                     if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
                     let name = matches[i];
 
-                    this.matches.push({id:i,name});
+                    this.matches.push({id: i, name});
                     this.nameMap[name] = i;
                     this.idMap[i] = name;
                 }
@@ -117,7 +119,11 @@
                         this.$forceUpdate();
                     }
                 ).catch((e) => {
-                    Messages.notification(['Unable to share password: {message}', {message:e.message}]);
+                    if(e.id === '65782183') {
+                        Messages.notification(['The user {uid} does not exist', {uid:receiver}]);
+                    } else {
+                        Messages.notification(['Unable to share password: {message}', {message: e.message}]);
+                    }
                 });
             },
             getHoverStyle($event, on = true) {
@@ -131,7 +137,7 @@
             },
             refreshShares() {
                 API.showPassword(this.password.id, 'shares')
-                    .then((d) => { this.shares = d.shares;});
+                   .then((d) => { this.shares = d.shares;});
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -140,7 +146,7 @@
                         uid = this.nameMap[uid];
                     }
 
-                    if(this.idMap.hasOwnProperty(uid)) {
+                    if(this.idMap.hasOwnProperty(uid) || !this.autocomplete) {
                         this.addShare(uid);
                     } else {
                         Messages.notification(['The user {uid} does not exist', {uid}]);
@@ -165,10 +171,10 @@
                 this.$forceUpdate();
             },
             search  : function(value) {
-                this.searchUsers()
+                this.searchUsers();
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
