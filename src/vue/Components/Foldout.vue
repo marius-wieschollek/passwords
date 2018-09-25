@@ -61,12 +61,12 @@
                     if($el) this.maxHeight = $el.offsetHeight;
                 }
 
-                return {maxHeight: this.maxHeight.toString() + 'px'};
+                return {maxHeight: `${this.maxHeight.toString()}px`};
             }
         },
 
         methods: {
-            toggleContent: function() {
+            toggleContent() {
                 this.open = !this.open;
                 this.firstOpen = false;
             }

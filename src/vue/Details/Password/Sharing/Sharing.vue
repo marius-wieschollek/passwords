@@ -166,11 +166,11 @@
         },
 
         watch: {
-            password: function(value) {
+            password(value) {
                 this.shares = value.shares;
                 this.$forceUpdate();
             },
-            search  : function(value) {
+            search(value) {
                 this.searchUsers();
             }
         }
