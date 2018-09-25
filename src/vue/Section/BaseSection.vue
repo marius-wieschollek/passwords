@@ -206,6 +206,22 @@
             display : none !important;
         }
 
+        @media(max-width : $width-large) {
+            .app-content-right {
+                right : -360px;
+            }
+
+            &.show-details {
+                margin-right : 360px;
+
+                .app-content-right {
+                    width     : 360px;
+                    min-width : 360px;
+                    z-index   : 60;
+                }
+            }
+        }
+
         @media(max-width : $width-small) {
             transform : translate3d(0, 0, 0);
 
@@ -229,22 +245,6 @@
 
             &.mobile-open {
                 transform : translate3d(250px, 0px, 0px);
-            }
-        }
-
-        @media(max-width : $width-large) {
-            .app-content-right {
-                right : -360px;
-            }
-
-            &.show-details {
-                margin-right : 360px;
-
-                .app-content-right {
-                    width     : 360px;
-                    min-width : 360px;
-                    left      : 0;
-                }
             }
         }
     }
