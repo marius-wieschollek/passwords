@@ -175,7 +175,7 @@
         transition : margin-right 300ms, transform 300ms;
 
         &.blocking {
-            z-index: 2000;
+            z-index : 2000;
         }
 
         .app-content-right {
