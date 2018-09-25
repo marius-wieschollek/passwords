@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Middleware;
 
-use OCA\Passwords\Controller\PageController;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
@@ -60,7 +59,7 @@ class ApiSecurityMiddleware extends Middleware {
      */
     public function beforeController($controller, $methodName): void {
 
-        if(get_class($controller) !== PageController::class && $this->request->getServerProtocol() !== 'https') {
+        if($this->isApiClass($controller) && $this->request->getServerProtocol() !== 'https') {
             throw new ApiException('HTTPS required', 400);
         }
 
@@ -72,12 +71,11 @@ class ApiSecurityMiddleware extends Middleware {
      * @param string                       $methodName
      * @param \Exception                   $exception
      *
-     * @return null|JSONResponse
+     * @return JSONResponse
+     * @throws \Exception
      */
-    public function afterException($controller, $methodName, \Exception $exception): ?JSONResponse {
-        if(substr(get_class($controller), 0, 28) !== 'OCA\Passwords\Controller\Api') {
-            return null;
-        }
+    public function afterException($controller, $methodName, \Exception $exception): JSONResponse {
+        if(!$this->isApiClass($controller)) throw $exception;
 
         $message    = 'Unable to complete request';
         $id         = 0;
@@ -107,5 +105,14 @@ class ApiSecurityMiddleware extends Middleware {
         );
 
         return $response;
+    }
+
+    /**
+     * @param $object
+     *
+     * @return bool
+     */
+    protected function isApiClass($object): bool {
+        return substr(get_class($object), 0, 28) === 'OCA\Passwords\Controller\Api';
     }
 }
