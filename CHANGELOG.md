@@ -2,7 +2,7 @@
 - Added Dutch translation
 - Added Russian translation
 - Improved background job logging
-- Fixed admin settings with http
+- Fixed errors in admin settings with http
 
 #### 2018.9.1 - Bugfix Release
 - Fixed custom_fields initialization migration
