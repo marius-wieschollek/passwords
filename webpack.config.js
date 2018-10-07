@@ -18,7 +18,7 @@ module.exports = (env) => {
                 }
             }
         ),
-        new ExtractTextPlugin('css/[name].css'),
+        new ExtractTextPlugin({filename:'css/[name].css', allChunks:true}),
         new CopyWebpackPlugin(
             [
                 {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`},
@@ -121,7 +121,7 @@ module.exports = (env) => {
                     test   : /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
                     loader : 'url-loader',
                     options: {
-                        limit          : 2048,
+                        limit          : 1024,
                         outputPath     : 'css/',
                         publicPath     : './',
                         useRelativePath: false

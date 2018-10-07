@@ -16,7 +16,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
 (function() {
     let isLoaded     = false,
-        loadInterval = null;
+        loadInterval = null,
+        app          = null;
 
     function initApp() {
         let section = SettingsManager.get('client.ui.section.default');
@@ -28,7 +29,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
             ]
         );
 
-        new Vue(App);
+        app = new Vue(App);
     }
 
     async function initApi() {
@@ -54,6 +55,27 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         SettingsManager.init();
         initApp();
         SearchManager.init();
+        initEvents();
+    }
+
+    function initEvents() {
+        let code    = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+            pointer = 0;
+
+        document.addEventListener('keyup', (e) => {
+            let current = code[pointer];
+
+            if(current !== e.keyCode || e.ctrlKey || e.shiftKey || e.metaKey) {
+                pointer = 0;
+                return;
+            }
+
+            pointer++;
+            if(pointer === code.length) {
+                document.getElementById('searchbox').value = '';
+                app.starChaser = true;
+            }
+        }, false);
     }
 
     if(location.protocol !== 'https:') {

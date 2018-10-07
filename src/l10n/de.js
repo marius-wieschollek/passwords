@@ -343,7 +343,8 @@
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.',
-            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.'
+            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.',
+            'Today in 2018, the first version of passwords was published. Thank you for using the app.'                        : 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
         };
 
     OC.L10N.register(
