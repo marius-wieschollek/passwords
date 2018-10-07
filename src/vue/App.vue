@@ -49,6 +49,7 @@
         <div id="app-popup">
             <div></div>
         </div>
+        <star-chaser v-if="starChaser"/>
     </div>
 </template>
 
@@ -63,8 +64,9 @@
         el        : '#main',
         router,
         components: {
-            app: {router},
-            Translate
+            app          : {router},
+            Translate,
+            'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
         data() {
@@ -74,7 +76,8 @@
             return {
                 serverVersion,
                 showSearch,
-                showMore: false
+                showMore  : false,
+                starChaser: false
             };
         },
 
