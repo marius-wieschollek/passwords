@@ -50,6 +50,7 @@
             <div></div>
         </div>
         <star-chaser v-if="starChaser"/>
+        <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </div>
 </template>
 
@@ -58,6 +59,7 @@
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
     import Utility from '@js/Classes/Utility';
+    import Messages from '@js/Classes/Messages';
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
@@ -88,6 +90,12 @@
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
+            },
+            isBirthDay() {
+                let today = new Date(),
+                    bday  = new Date(`${today.getFullYear()}-01-12`);
+
+                return bday.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0);
             }
         },
 
@@ -98,6 +106,10 @@
                 } else {
                     Utility.openLink('https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi');
                 }
+            },
+            birthDayPopup() {
+                document.getElementById('birthday').remove();
+                Messages.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
             }
         }
     };
@@ -160,6 +172,26 @@
 
                 li.nav-icon-more:before { content : "\f068"; }
             }
+        }
+    }
+
+    #birthday {
+        position      : fixed;
+        right         : 20px;
+        bottom        : 20px;
+        background    : $color-theme;
+        color         : $color-white;
+        line-height   : 40px;
+        width         : 40px;
+        text-align    : center;
+        border-radius : 50%;
+        cursor        : pointer;
+        font-size     : 18px;
+        opacity       : 0.5;
+        transition    : opacity .25s ease-in-out;
+
+        &:hover {
+            opacity : 1;
         }
     }
 </style>

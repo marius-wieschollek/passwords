@@ -28,9 +28,8 @@ class Messages {
         return new Promise((resolve) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function() { resolve(); };
 
-            OC.dialogs.alert(message, title, callback, true);
+            OC.dialogs.alert(message, title, resolve, true);
         });
     }
 
@@ -41,12 +40,11 @@ class Messages {
      * @returns {Promise}
      */
     info(message, title = 'Info') {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             message = Messages._translate(message);
             title = Messages._translate(title);
-            let callback = function(success) { success ? resolve():reject(); };
 
-            OC.dialogs.info(message, title, callback, true);
+            OC.dialogs.info(message, title, resolve, true);
         });
     }
 
