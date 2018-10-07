@@ -128,13 +128,14 @@
             padding       : 0 12px;
             white-space   : nowrap;
             text-overflow : ellipsis;
-            color         : $color-grey-darker;
+            color         : var(--color-main-text);
+            opacity       : 0.57;
             cursor        : pointer;
-            transition    : box-shadow .1s ease-in-out, color .1s ease-in-out;
+            transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
             &:hover,
             &:active,
-            &.active { color : $color-black; }
+            &.active { opacity : 1; }
 
             &:before {
                 font-family   : FontAwesome, sans-serif;
@@ -169,14 +170,18 @@
             position         : relative;
             overflow         : hidden;
             max-height       : 88px;
-            background-color : $color-white;
-            border-right     : 1px solid $color-grey-lighter;
+            background-color : var(--color-main-background);
+            border-right     : 1px solid var(--color-border);
             transition       : max-height 0.25s ease-in-out;
 
             &.open {
                 max-height : 264px;
 
-                li.nav-icon-more:before { content : "\f068"; }
+                li.nav-icon-more {
+                    opacity : 1;
+
+                    &:before { content : "\f068"; }
+                }
             }
         }
     }
@@ -185,14 +190,15 @@
         position      : fixed;
         right         : 20px;
         bottom        : 20px;
-        background    : $color-theme;
-        color         : $color-white;
+        background    : var(--color-primary);
+        color         : var(--color-primary-text);
         line-height   : 40px;
         width         : 40px;
         text-align    : center;
         border-radius : 50%;
         cursor        : pointer;
         font-size     : 18px;
+        z-index       : 1000;
         opacity       : 0.5;
         transition    : opacity .25s ease-in-out;
 

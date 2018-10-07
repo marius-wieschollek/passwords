@@ -227,7 +227,12 @@ export default class StarChaser {
     }
 
     _getAsteroidStartPosition() {
-        let pos = this._game.ship.left - ((Math.random() - 0.5) * (window.innerWidth / 2));
+        let pos = null;
+        if(Math.random() < 0.85) {
+            pos = this._game.ship.left - ((Math.random() - 0.5) * (window.innerWidth / 2));
+        } else {
+            pos = Math.random() * window.innerWidth;
+        }
 
         if(pos < 34 || pos > window.innerWidth - 34) return this._getAsteroidStartPosition();
         return pos;
