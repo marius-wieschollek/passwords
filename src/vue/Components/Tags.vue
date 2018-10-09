@@ -21,11 +21,11 @@
 </template>
 
 <script>
-    import $ from "jquery";
+    import $ from 'jquery';
     import API from '@js/Helper/api';
-    import Utility from "@js/Classes/Utility";
+    import Utility from '@js/Classes/Utility';
     import TagManager from '@js/Manager/TagManager';
-    import Localisation from "@js/Classes/Localisation";
+    import Localisation from '@js/Classes/Localisation';
     import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
@@ -61,7 +61,7 @@
             getPopupStyle() {
                 return {
                     color          : ThemeManager.getColor(),
-                    border         : '1px solid ' + ThemeManager.getColor(),
+                    border         : `1px solid ${ThemeManager.getColor()}`,
                     backgroundColor: ThemeManager.getContrastColor(),
                     top            : this.searchBox.top,
                     left           : this.searchBox.left,
@@ -71,11 +71,11 @@
         },
 
         methods: {
-            loadTags       : function() {
+            loadTags() {
                 API.listTags()
                    .then((t) => { this.allTags = Utility.objectToArray(t); });
             },
-            keyUpAction    : function($e) {
+            keyUpAction($e) {
                 let key = $e.keyCode;
                 if([8, 13, 46].indexOf(key) === -1 && $e.key.length === 1 && this.inputText.length !== 0) {
                     this.wasBackspace = false;
@@ -91,7 +91,7 @@
                     this.wasBackspace = false;
                 }
             },
-            searchAction   : function(query) {
+            searchAction(query) {
                 this.searchResults = [];
                 if(query === '') return;
                 query = query.toLowerCase();
@@ -107,7 +107,7 @@
                 }
                 this.updateSearchResults();
             },
-            addTag         : function(tag) {
+            addTag(tag) {
                 this.tags.push(tag);
                 this.inputText = '';
                 this.searchResults = [];
@@ -118,7 +118,7 @@
                 }
                 $('div.tags-container input.add-tags').focus();
             },
-            createAndAddTag: function(label) {
+            createAndAddTag(label) {
                 let query = label.toLowerCase();
 
                 for(let i = 0; i < this.allTags.length; i++) {
@@ -136,7 +136,7 @@
                               this.addTag(tag);
                           });
             },
-            removeLastTag  : function() {
+            removeLastTag() {
                 this.tags.pop();
                 this.inputText = '';
                 this.searchResults = [];
@@ -145,10 +145,10 @@
                     PasswordManager.updatePassword(this.password);
                 }
             },
-            editAction     : function(tag) {
+            editAction(tag) {
                 TagManager.editTag(tag);
             },
-            removeAction   : function($event, tag) {
+            removeAction($event, tag) {
                 $event.stopPropagation();
                 let i = this.tags.indexOf(tag);
 
@@ -166,8 +166,8 @@
                     $search  = $('div.tags-container ul.tag-search'),
                     position = $input.position();
 
-                this.searchBox.top = (position.top + $input.outerHeight()) + 'px';
-                this.searchBox.left = position.left + 'px';
+                this.searchBox.top = `${position.top + $input.outerHeight()}px`;
+                this.searchBox.left = `${position.left}px`;
                 this.searchBox.width = $input.outerWidth();
             },
             getHoverStyle($event, on = true) {
@@ -182,10 +182,10 @@
         },
 
         watch: {
-            password : function(newPassword) {
+            password(newPassword) {
                 this.tags = Utility.sortApiObjectArray(newPassword.tags, 'label');
             },
-            inputText: function(value) {
+            inputText(value) {
                 this.searchAction(value);
             }
         }
@@ -240,6 +240,7 @@
             .result {
                 padding : 3px 5px;
                 cursor  : pointer;
+                white-space: nowrap;
 
                 .fa {
                     margin-right : 5px;

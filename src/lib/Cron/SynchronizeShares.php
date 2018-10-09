@@ -121,7 +121,7 @@ class SynchronizeShares extends AbstractCronJob {
             }
         } while($count !== 0);
 
-        $this->logger->info(['Deleted %s orphaned password(s)', $total]);
+        $this->logger->debugOrInfo(['Deleted %s orphaned password(s)', $total], $total);
     }
 
     /**
@@ -144,7 +144,7 @@ class SynchronizeShares extends AbstractCronJob {
             }
         } while($count !== 0);
 
-        $this->logger->info(['Deleted %s expired share(s)', $total]);
+        $this->logger->debugOrInfo(['Deleted %s expired share(s)', $total], $total);
     }
 
     /**
@@ -196,7 +196,8 @@ class SynchronizeShares extends AbstractCronJob {
             $this->notifications['created'][ $receiverId ][ $userId ]++;
         }
 
-        $this->logger->info(['Created %s new share(s)', count($shares)]);
+        $total = count($shares);
+        $this->logger->debugOrInfo(['Created %s new share(s)', $total], $total);
     }
 
     /**
@@ -256,7 +257,7 @@ class SynchronizeShares extends AbstractCronJob {
             }
         }
 
-        $this->logger->info(['Removed shared attribute from %s password(s)', $total]);
+        $this->logger->debugOrInfo(['Removed shared attribute from %s password(s)', $total], $total);
     }
 
     /**
@@ -272,7 +273,7 @@ class SynchronizeShares extends AbstractCronJob {
             $total += $count;
         } while($count !== 0);
 
-        $this->logger->info(['Updated %s share(s)', $total]);
+        $this->logger->debugOrInfo(['Updated %s share(s)', $total], $total);
     }
 
     /**

@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Token;
 
-use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\Encryption\SimpleEncryption;
@@ -16,7 +15,6 @@ use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\IL10N;
 use OCP\ISession;
-use OCP\IUserManager;
 use OCP\Security\ISecureRandom;
 
 /**
@@ -174,7 +172,6 @@ class TokenHelper {
                 $iToken = $this->tokenProvider->getTokenById($tokenId);
 
                 if($iToken->getId() == $tokenId) return $this->encryption->decrypt($token);
-            } catch(InvalidTokenException $e) {
             } catch(\Throwable $e) {
                 $this->notificationService->sendTokenErrorNotification($this->userId);
                 $this->logger

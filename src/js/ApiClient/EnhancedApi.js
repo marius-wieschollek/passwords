@@ -694,11 +694,12 @@ export default class EnhancedApi extends SimpleApi {
         password.type = 'password';
         if(password.url) {
             let host    = SimpleApi.parseUrl(password.url, 'host'),
+                imgHost = EnhancedApi._removeCommonSubdomains(host),
                 website = EnhancedApi._getWebsiteNameFromDomain(host);
             password.host = host;
             password.website = website;
-            password.icon = this.getFaviconUrl(website);
-            password.preview = this.getPreviewUrl(website);
+            password.icon = this.getFaviconUrl(imgHost);
+            password.preview = this.getPreviewUrl(imgHost);
         } else {
             password.host = null;
             password.website = '';
@@ -902,10 +903,22 @@ export default class EnhancedApi extends SimpleApi {
                 domain = (i === 2 ? '':'.') + part + domain;
             }
         }
-        let subdomains = ['m', 'en', 'www', 'web', 'www2', 'mail', 'email', 'login', 'signin', 'profile', 'account', navigator.language],
-            regex      = RegExp(`^(${subdomains.join('|')})\\.`);
 
-        return domain.replace(regex, '');
+        return EnhancedApi._removeCommonSubdomains(domain, ['www', 'www2', 'www3']);
+    }
+
+    /**
+     *
+     * @param domain
+     * @param extraDomains
+     * @returns {*}
+     * @private
+     */
+    static _removeCommonSubdomains(domain, extraDomains = []) {
+        let subdomains = ['m', 'en', 'web', 'auth', 'mail', 'email', 'login', 'signin', 'profile', 'account', navigator.language].concat(extraDomains),
+            regex      = RegExp(`^(.+\\.)?(${subdomains.join('|')})\\.(.+\\..+)`);
+
+        return domain.replace(regex, '$3');
     }
 
 
