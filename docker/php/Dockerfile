@@ -42,8 +42,3 @@ RUN pecl install xdebug
 
 COPY files/mailhog.ini /usr/local/etc/php/conf.d/mailhog.ini
 COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-
-COPY startup.sh /usr/local/bin/startup
-RUN chmod +x /usr/local/bin/startup
-
-CMD ["/usr/local/bin/startup"]
