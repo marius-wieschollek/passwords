@@ -1,3 +1,8 @@
+## Rules for Contributors
+
+* Git commits have to be [signed](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Contributing/Verify-Git-Commits).
+* Keep any discussions civil
+
 ## Set up the local environment
 #### Requirements
 * [Node](https://nodejs.org/)
@@ -5,30 +10,31 @@
 * [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
 
 #### Project Setup
-* Open a shell on your computer and navigate to the projects directory
-* Run `npm run start`
-* Open your browser and type [http://localhost/](http://localhost/)
-* Allow the connection using a self signed https certificate
-* Log in with the username `admin` and the password `admin`
-* Run `docker exec -u www-data passwords-php /var/www/html/occ app:enable passwords`
-* Run `npm install`
-* Run `npm run build`
-* You can now access the [app](http://localhost/index.php/apps/passwords)
+1. Open a shell on your computer and navigate to the projects directory
+2. Run `npm install`
+3. Run `npm run build`
+4. Run `npm run start`
+5. Open your browser and type [http://localhost/](http://localhost/)
+6. Allow the connection using a self signed https certificate
+7. Log in with the username `admin` and the password `admin`
+8. You can now access the [app](http://localhost/index.php/apps/passwords)
 
 #### Sample Data
 A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json) is available in the wiki and can be imported on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
 #### Helpful commands
+* `npm run watch` - Create development build of JS/CSS files and watch for changes
 * `npm run start` - Start the docker server
 * `npm run stop` - Stop the docker server
 * `npm run cron` - Execute cron jobs
-* `npm run watch` - Create development build of JS/CSS files and watch for changes
+* `npm run shell` - Open a shell in the container
+* `npm run shell:root` - Open a root shell in the container
+* `npm run down` - Remove docker containers and volumes
+* `npm run docker:build` - Start docker and build images
 * `npm run build` - Create production build of JS/CSS files
 * `npm run build:nightly` - Create nightly build of JS/CSS files
 * `docker-compose -f docker-compose.yml -f docker/configs/<service>.yml up -d` starts the system with additional services
 * `docker exec -u www-data passwords-php /var/www/html/occ  config:system:set loglevel --value=0 --type=int` - Set loglevel to info
-* `docker exec -itu www-data passwords-php bash` - Open shell in container as www-data
-* `docker exec -it passwords-php bash` - Open shell in container as root
 
 #### Services
  - [https://localhost](https://localhost) is Nextcloud (with the app)

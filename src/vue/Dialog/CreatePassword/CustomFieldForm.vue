@@ -85,7 +85,7 @@
             },
             getPattern() {
                 if(this.type === 'url') return '\\w+:\/\/.+';
-                if(this.type === 'email') return '\\w+@.+';
+                if(this.type === 'email') return '[\\w\\._-]+@.+';
                 return false;
             },
             namePlaceholder() {
