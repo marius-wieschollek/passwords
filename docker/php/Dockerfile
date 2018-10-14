@@ -43,7 +43,11 @@ RUN pecl install xdebug
 COPY files/mailhog.ini /usr/local/etc/php/conf.d/mailhog.ini
 COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
-COPY startup.sh /usr/local/bin/startup
-RUN chmod +x /usr/local/bin/startup
+COPY files/entrypoint.sh /usr/local/bin/entrypoint
+RUN chmod +x /usr/local/bin/entrypoint
 
-CMD ["/usr/local/bin/startup"]
+COPY files/setup.sh /usr/local/bin/apache
+RUN chmod +x /usr/local/bin/apache
+
+ENTRYPOINT ["/usr/local/bin/entrypoint"]
+CMD ["php-fpm"]
