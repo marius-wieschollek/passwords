@@ -1,3 +1,8 @@
+## Rules for Contributors
+
+* Git commits have to be [signed](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Contributing/Verify-Git-Commits).
+* Keep any discussions civil
+
 ## Set up the local environment
 #### Requirements
 * [Node](https://nodejs.org/)
@@ -30,8 +35,6 @@ A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 * `npm run build:nightly` - Create nightly build of JS/CSS files
 * `docker-compose -f docker-compose.yml -f docker/configs/<service>.yml up -d` starts the system with additional services
 * `docker exec -u www-data passwords-php /var/www/html/occ  config:system:set loglevel --value=0 --type=int` - Set loglevel to info
-* `docker exec -itu www-data passwords-php bash` - Open shell in container as www-data
-* `docker exec -it passwords-php bash` - Open shell in container as root
 
 #### Services
  - [https://localhost](https://localhost) is Nextcloud (with the app)
