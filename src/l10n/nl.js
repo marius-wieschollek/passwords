@@ -290,7 +290,6 @@
             'Figure {count}: {title}'             : 'AFbeelding {count}: {title}',
             'Unable to fetch page: {message}.'    : 'De pagina kan niet geladen worden: {message}.',
             'Not Found'                           : 'Pagina niet gevonden',
-            'Missing something or found an error?': 'Mist u iets of heeft u een fout gevonden?',
             'Tell us!'                            : 'Meld het ons dan!',
             'Network error'                       : 'Netwerkfout',
             'Unable to load {module}'             : 'De module {module} kon niet geladen worden. Mogelijk is de verbinding met Nextcloud verbroken',
