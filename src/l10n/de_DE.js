@@ -43,6 +43,7 @@
             'On the server'                       : 'Auf dem Server',
             'Custom Fields'                       : 'Eigene Felder',
             'Secret'                              : 'Geheimnis',
+            'Text'                                : 'Text',
             'File'                                : 'Datei',
             'Value'                               : 'Wert',
             'Toggle visibility'                   : 'Sichtbarkeit umschalten',
