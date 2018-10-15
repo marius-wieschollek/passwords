@@ -27,7 +27,7 @@
             'Revisions'                           : 'Révisions',
             'QR Code'                             : 'QR Code',
             'Password'                            : 'Mot de passe',
-            'Username'                            : 'Noms d’utilisateur',
+            'Username'                            : 'Nom d’utilisateur',
             'Website'                             : 'Site internet',
             'Add Tags...'                         : 'Ajouter des mots clés…',
             'Color'                               : 'Couleur',
