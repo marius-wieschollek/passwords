@@ -36,6 +36,7 @@ class ClientSettingsHelper {
      * @param string|null $userId
      *
      * @return null
+     * @throws \Exception
      */
     public function get(string $key, string $userId = null) {
         $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
@@ -45,13 +46,13 @@ class ClientSettingsHelper {
     }
 
     /**
-     * @param string $key
-     * @param        $value
+     * @param string      $key
+     * @param             $value
      * @param string|null $userId
      *
      * @return mixed
-     * @throws \OCP\PreConditionNotMetException
      * @throws ApiException
+     * @throws \Exception
      */
     public function set(string $key, $value, string $userId = null) {
         if(strlen($key) > 48) {
@@ -69,11 +70,11 @@ class ClientSettingsHelper {
     }
 
     /**
-     * @param string $key
+     * @param string      $key
      * @param string|null $userId
      *
      * @return null
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     public function reset(string $key, string $userId = null) {
         $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
@@ -87,7 +88,10 @@ class ClientSettingsHelper {
 
     /**
      * @return array
+     *
      * @param string|null $userId
+     *
+     * @throws \Exception
      */
     public function list(string $userId = null): array {
         $settings = [];
