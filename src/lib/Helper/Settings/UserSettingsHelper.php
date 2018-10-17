@@ -178,4 +178,20 @@ class UserSettingsHelper {
 
         return $default;
     }
+
+    /**
+     * @param string|null $userId
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function listRaw(string $userId = null) {
+        $settings = [];
+        foreach(array_keys($this->userSettings) as $key) {
+            $setting              = str_replace('/', '.', $key);
+            $settings[ $setting ] = $this->config->getUserValue($key, null, $userId);
+        }
+
+        return $settings;
+    }
 }

@@ -91,6 +91,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <job>OCA\Passwords\Cron\ProcessDeletedEntities</job>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
+        <job>OCA\Passwords\Cron\BackupJob</job>
     </background-jobs>
     <repair-steps>
         <post-migration>

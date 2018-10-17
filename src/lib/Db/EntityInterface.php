@@ -55,4 +55,9 @@ interface EntityInterface {
      */
     public function hasProperty(string $property): bool;
 
+    /**
+     * @return bool
+     */
+    public function toArray(): array;
+
 }
