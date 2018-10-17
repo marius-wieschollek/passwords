@@ -132,6 +132,12 @@
                 <notnull>true</notnull>
             </field>
             <field>
+                <name>cse_key</name>
+                <type>text</type>
+                <length>36</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
                 <name>sse_type</name>
                 <type>text</type>
                 <length>10</length>
@@ -332,6 +338,12 @@
                 <notnull>true</notnull>
             </field>
             <field>
+                <name>cse_key</name>
+                <type>text</type>
+                <length>36</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
                 <name>sse_type</name>
                 <type>text</type>
                 <length>10</length>
@@ -481,6 +493,12 @@
                 <name>cse_type</name>
                 <type>text</type>
                 <length>10</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>cse_key</name>
+                <type>text</type>
+                <length>36</length>
                 <notnull>true</notnull>
             </field>
             <field>
