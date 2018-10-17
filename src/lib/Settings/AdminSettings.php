@@ -79,6 +79,8 @@ class AdminSettings implements ISettings {
             'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
             'purgeTimeout'     => $this->getPurgeTimeout(),
+            'backupInterval'   => $this->getBackupInterval(),
+            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 10),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
@@ -292,6 +294,21 @@ class AdminSettings implements ISettings {
     /**
      * @return array
      */
+    protected function getBackupInterval(): array {
+        return [
+            'current' => $this->config->getAppValue('backup/interval', 86400),
+            'options' => [
+                86400   => 'Every day',
+                43200   => 'Every week',
+                1209600 => 'Every two weeks',
+                2592000 => 'Every month'
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
     protected function getFileCaches(): array {
         $caches = $this->fileCacheService->listCaches();
 
@@ -319,10 +336,9 @@ class AdminSettings implements ISettings {
      */
     protected function getPlatformSupport(): array {
         $ncVersion = intval(explode('.', \OC::$server->getConfig()->getSystemValue('version'), 2)[0]);
-        $cronType = \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+        $cronType  = \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
         if(BackgroundJob::getExecutionType() !== '') $cronType = BackgroundJob::getExecutionType();
-
 
         return [
             'cron'   => $cronType === 'ajax',

@@ -158,6 +158,21 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
+        <h3><?php p($l->t('Backup Settings')); ?></h3>
+
+        <div class="area backups">
+            <label for="passwords-backup-interval"><?php p($l->t('Backup Interval')); ?></label>
+            <select id="passwords-backup-interval" name="passwords-backup-interval" name="image" data-setting="backup/interval">
+                <?php foreach($_['backupInterval']['options'] as $value => $label): ?>
+                    <option value="<?php p($value); ?>" <?php p($_['backupInterval']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="passwords-backup-files"><?php p($l->t('Amount of backups to keep')); ?></label>
+            <input id="passwords-backup-files" name="backup-files" data-setting="backup/files/maximum" type="number" min="0" value="<?=$_['backupFiles']?>">
+        </div>
+    </form>
+
+    <form>
         <h3><?php p($l->t('Other Settings')); ?></h3>
 
         <div class="area other">
