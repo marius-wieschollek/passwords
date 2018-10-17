@@ -7,12 +7,12 @@
                     <translate tag="h1" :say="getPageTitle" id="help-top"/>
                 </header>
                 <section class="handbook-page" v-html="source"></section>
-                <div class="handbook-footer">
-                    <footer>
-                        <translate say="Missing something or found an error?"/>
-                        <web text="Tell us!" :href="issuesPage"/>
-                    </footer>
-                </div>
+                <footer class="handbook-footer">
+                    <translate say="Still need help?"/>
+                    <web text="Ask in our forum!" :href="forumPage"/>
+                    <br> &nbsp;<translate say="Found an error?"/>
+                    <web text="Tell us!" :href="issuesPage"/>
+                </footer>
             </article>
             <gallery :images="gallery.images" :index="gallery.index" @close="gallery.index = null"/>
         </div>
@@ -41,7 +41,8 @@
                 loading   : true,
                 source    : '',
                 gallery   : {images: [], index: null},
-                issuesPage: 'https://github.com/marius-wieschollek/passwords/issues'
+                forumPage : 'https://help.nextcloud.com/c/apps/passwords',
+                issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue'
             };
         },
 
@@ -178,7 +179,7 @@
         .handbook-page {
             font-size : 0.9rem;
             max-width : 975px;
-            margin    : 0 auto 4rem;
+            margin    : 0 auto 6rem;
 
             * {
                 cursor         : text;
@@ -375,26 +376,31 @@
         }
 
         .handbook-footer {
-            position : absolute;
-            bottom   : 0;
-            left     : 0;
-            right    : 0;
+            position   : absolute;
+            bottom     : 0;
+            left       : 0;
+            right      : 0;
+            font-size  : 0.9rem;
+            max-width  : 975px;
+            margin     : 1em auto;
+            text-align : right;
 
-            footer {
-                font-size  : 0.9rem;
-                max-width  : 975px;
-                margin     : 1em auto;
-                text-align : right;
+            br {
+                display:none;
+            }
 
-                a:hover,
-                a:focus,
-                a:active {
-                    cursor          : pointer;
-                    text-decoration : underline;
-                }
+            a:hover,
+            a:focus,
+            a:active {
+                cursor          : pointer;
+                text-decoration : underline;
+            }
 
-                @media all and (max-width : $width-extra-small) {
-                    padding : 0 1em;
+            @media all and (max-width : $width-extra-small) {
+                padding : 0 1em;
+
+                br {
+                    display: block;
                 }
             }
         }
