@@ -22,6 +22,8 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class CreateBackupHelper {
 
+    const BACKUP_VERSION = 100;
+
     /**
      * @var ConfigurationService
      */
@@ -121,6 +123,7 @@ class CreateBackupHelper {
      */
     public function getData(): array {
         $array = [
+            'version'                => self::BACKUP_VERSION,
             'passwords'              => $this->getModelArray($this->passwordMapper, $this->passwordRevisionMapper),
             'folders'                => $this->getModelArray($this->folderMapper, $this->folderRevisionMapper),
             'tags'                   => $this->getModelArray($this->tagMapper, $this->tagRevisionMapper),

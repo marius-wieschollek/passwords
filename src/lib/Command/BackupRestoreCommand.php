@@ -40,8 +40,9 @@ class BackupRestoreCommand extends Command {
              ->setDescription('Restores a backup')
              ->addArgument('backup', InputArgument::REQUIRED, 'The name of the backup')
              ->addOption('user', 'u', InputOption::VALUE_OPTIONAL, 'Restore data only for this user')
-             ->addOption('data', 'd', InputOption::VALUE_OPTIONAL, 'Restore only the given type of objects. Possible options are passwords, folders, tags, shares, relations or all', 'all')
-             ->addOption('settings', 's', InputOption::VALUE_OPTIONAL, 'Restore system and user settings', false);
+             ->addOption('no-data', null, InputOption::VALUE_NONE, 'Do not restore user data and encryption keys')
+             ->addOption('no-user-settings', null, InputOption::VALUE_NONE, 'Do not restore user settings')
+             ->addOption('no-app-settings', null, InputOption::VALUE_NONE, 'Do not restore application settings');
         parent::configure();
     }
 
@@ -53,7 +54,9 @@ class BackupRestoreCommand extends Command {
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $backup = $this->getBackup($input->getArgument('backup'));
+        $options = $this->getOptions($input);
+
+        $backup  = $this->getBackup($input->getArgument('backup'));
     }
 
     /**
@@ -70,6 +73,23 @@ class BackupRestoreCommand extends Command {
         }
 
         throw new \Exception("Could not find backup '{$name}'");
+    }
+
+    /**
+     * @param InputInterface $input
+     *
+     * @return array
+     */
+    protected function getOptions(InputInterface $input): array {
+        return [
+            'user'     => $input->getOption('user'),
+            'data'     => !$input->getOption('no-data'),
+            'settings' => [
+                'user'        => !$input->getOption('no-user-settings'),
+                'client'      => !$input->getOption('no-user-settings'),
+                'application' => !$input->getOption('no-app-settings') && $input->getOption('user') === null
+            ]
+        ];
     }
 
 }
