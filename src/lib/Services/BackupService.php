@@ -63,7 +63,7 @@ class BackupService {
      * @return \OCP\Files\SimpleFS\ISimpleFile[]
      * @throws \OCP\Files\NotPermittedException
      */
-    public function listBackups(): array {
+    public function getBackups(): array {
         $folder = $this->getBackupFolder();
 
         return $folder->getDirectoryListing();
