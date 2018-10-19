@@ -243,7 +243,7 @@
             'Include special characters'          : 'Inclure des caractères spéciaux',
             'User Interface'                      : 'Interface utilisateur',
             'Initial section'                     : 'Section par défaut',
-            'All Passwords'                       : 'Tous les mots de passes',
+            'All Passwords'                       : 'Tous les mots de passe',
             'Passwords List View'                 : 'Liste des mots de passe',
             'Set title from'                      : 'Définir le titre par',
             'Sort by'                             : 'Trier par',
