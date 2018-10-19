@@ -116,7 +116,7 @@
             'Set expiration date'                 : 'Définir une date d’expiration',
             'Expires {date}'                      : 'Expire le {date}',
             'Choose expiration date'              : 'Choisissez une date d’expiration',
-            'Please choose a date in the future'  : 'La date doit être ultérieur à aujourd’hui',
+            'Please choose a date in the future'  : 'La date doit être ultérieure à aujourd’hui',
             'Invalid date'                        : 'Date non valide',
             'The user {uid} does not exist'       : 'L’utilisateur {uid} n’existe pas',
             'Unable to share password: {message}' : 'Impossible de partager le mot de passe : {message}',
