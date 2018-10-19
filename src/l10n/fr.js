@@ -82,7 +82,7 @@
             'Creating password failed'            : 'Le mot de passe n’a pas pu être créé',
             'Edit password'                       : 'Modifier le mot de passe',
             'Password saved'                      : 'Mot de passe sauvegardé',
-            'Saving password failed'              : 'Le mot de passe n’a pas pu être sauvegardée',
+            'Saving password failed'              : 'Le mot de passe n’a pas pu être sauvegardé',
             'Password moved'                      : 'Mot de passe déplacé',
             'Moving password failed'              : 'Le mot de passe n’a pas pu être déplacé',
             'Delete password'                     : 'Effacer le mot de passe',
