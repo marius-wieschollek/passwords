@@ -132,7 +132,7 @@
             'Backup or export'                    : 'Sauvegarde/Export',
             'Choose Format'                       : 'Choisissez un format',
             'Please choose'                       : 'Merci de choisir',
-            'Database Backup'                     : 'Sauvegarde de la base de donnée',
+            'Database Backup'                     : 'Sauvegarde de la base de données',
             'Predefined CSV'                      : 'Ficher CSV pré-défini',
             'Backup password'                     : 'Mot de passe de la sauvegarde',
             '(Optional) Encrypts the backup'      : '(Optionnel) Chiffrer le ficher de sauvegarde',
