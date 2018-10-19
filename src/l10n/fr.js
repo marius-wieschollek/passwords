@@ -172,7 +172,7 @@
             'Create new entry'                    : 'Créer une nouvelle entrée',
             'For encrypted backups'               : 'Nécessaire pour les sauvegardes chiffrées',
             'CSV Options'                         : 'Options CSV',
-            'Database'                            : 'Base de donnée',
+            'Database'                            : 'Base de données',
             'Quote Character'                     : 'Séparateur de chaîne de caractères',
             'Escape Character'                    : 'Caractère d’échappement',
             'Field delimiter'                     : 'Séparateur de champ',
