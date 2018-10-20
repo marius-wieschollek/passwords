@@ -138,7 +138,7 @@ class CreateBackupHelper {
             'settings'               => [
                 'application' => $this->getApplicationSettings(),
                 'users'       => $this->getUserSettings(),
-                'client'      => $this->getClientSettings()
+                'clients'     => $this->getClientSettings()
             ]
         ];
 

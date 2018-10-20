@@ -2,9 +2,8 @@
 
 namespace OCA\Passwords\Helper\Backup;
 
+use OCA\Passwords\Db\AbstractEntity;
 use OCA\Passwords\Db\AbstractMapper;
-use OCA\Passwords\Db\AbstractModelEntity;
-use OCA\Passwords\Db\AbstractRevisionEntity;
 use OCA\Passwords\Db\AbstractRevisionMapper;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
@@ -14,7 +13,9 @@ use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
+use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
@@ -22,8 +23,6 @@ use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class RestoreBackupHelper
@@ -127,14 +126,21 @@ class RestoreBackupHelper {
      * @param array $options
      *
      * @return bool
+     * @throws \Exception
      */
     public function restore(array $data, array $options): bool {
         if($data['version'] !== self::BACKUP_VERSION) $this->convertData($data);
+        $user = $options['user'];
 
         if($options['data']) {
-            $this->restoreKeys($data, $options);
-            $this->restoreData($data, $options);
+            $this->deleteData($user);
+            $this->restoreKeys($data['keys'], $user);
+            $this->restoreData($data, $user);
         }
+
+        if($options['settings']['application']) $this->restoreApplicationSettings($data['settings']['application']);
+        if($options['settings']['user']) $this->restoreUserSettings($data['settings']['users'], $user);
+        if($options['settings']['client']) $this->restoreClientSettings($data['settings']['clients'], $user);
 
         return false;
     }
@@ -143,59 +149,62 @@ class RestoreBackupHelper {
      * @param array $data
      *
      * @return array
+     * @throws \Exception
      */
     protected function convertData(array $data): array {
-
-        return $data;
+        throw new \Exception('Unsupported backup version: '.$data['version']);
     }
 
     /**
-     * @param array $data
-     * @param array $options
+     * @param null|string $user
+     */
+    protected function deleteData(?string $user): void {
+        $this->deleteEntities($this->passwordMapper, $user);
+        $this->deleteEntities($this->passwordRevisionMapper, $user);
+        $this->deleteEntities($this->folderMapper, $user);
+        $this->deleteEntities($this->folderRevisionMapper, $user);
+        $this->deleteEntities($this->tagMapper, $user);
+        $this->deleteEntities($this->tagRevisionMapper, $user);
+        $this->deleteEntities($this->passwordTagRelationMapper, $user);
+        $this->deleteEntities($this->shareMapper, $user);
+    }
+
+    /**
+     * @param array       $keys
+     * @param null|string $user
      *
      * @throws \Exception
      */
-    protected function restoreKeys(array $data, array $options) {
-        $keys = $data['keys'];
-
-        $sseKeyChanged  = false;
+    protected function restoreKeys(array $keys, ?string $user): void {
         $sseV1ServerKey = $this->config->getAppValue('SSEv1ServerKey', null);
         if($sseV1ServerKey !== $keys['server']['SSEv1ServerKey']) {
-            if($options['user'] !== null && $sseV1ServerKey !== null) {
+            if($user !== null && $sseV1ServerKey !== null) {
                 throw new \Exception('Can not restore single user data because server key has changed');
             }
 
             $this->config->setAppValue('SSEv1ServerKey', $keys['server']['SSEv1ServerKey']);
-            if($options['user'] === null) {
-                $this->deleteAllWithSseV1();
-            } else {
-                $this->deleteAllByUserWithSseV1($options['user']);
-            }
-            $sseKeyChanged = true;
         }
 
         foreach($keys['users'] as $user => $userKeys) {
-            if($options['user'] !== null && $options['user'] !== $user) continue;
+            if($user !== null && $user !== $user) continue;
 
             $sseV1UserKey = $this->config->getUserValue('SSEv1UserKey', null, $user);
             if($sseV1UserKey !== $userKeys['SSEv1UserKey']) {
                 $this->config->setUserValue('SSEv1UserKey', $userKeys['SSEv1UserKey'], $user);
-
-                if(!$sseKeyChanged) $this->deleteAllByUserWithSseV1($options['user']);
             }
         }
     }
 
     /**
-     * @param array $data
-     * @param array $options
-     *
-     * @throws MultipleObjectsReturnedException
+     * @param array       $data
+     * @param null|string $user
      */
-    protected function restoreData(array $data, array $options) {
-        $this->restoreModels($data['passwords'], $this->passwordMapper, $this->passwordRevisionMapper, Password::class, PasswordRevision::class);
-        $this->restoreModels($data['folders'], $this->folderMapper, $this->folderRevisionMapper, Folder::class, FolderRevision::class);
-        $this->restoreModels($data['tags'], $this->tagMapper, $this->tagRevisionMapper, Tag::class, TagRevision::class);
+    protected function restoreData(array $data, ?string $user): void {
+        $this->restoreModels($data['passwords'], $this->passwordMapper, $this->passwordRevisionMapper, Password::class, PasswordRevision::class, $user);
+        $this->restoreModels($data['folders'], $this->folderMapper, $this->folderRevisionMapper, Folder::class, FolderRevision::class, $user);
+        $this->restoreModels($data['tags'], $this->tagMapper, $this->tagRevisionMapper, Tag::class, TagRevision::class, $user);
+        $this->restoreEntities($data['password_tag_relations'], $this->passwordTagRelationMapper, PasswordTagRelation::class, $user);
+        $this->restoreEntities($data['shares'], $this->shareMapper, Share::class, $user);
     }
 
     /**
@@ -204,38 +213,102 @@ class RestoreBackupHelper {
      * @param AbstractRevisionMapper $revisionMapper
      * @param string                 $modelClass
      * @param string                 $revisionClass
-     *
-     * @throws MultipleObjectsReturnedException
+     * @param null|string            $user
      */
-    protected function restoreModels(array $models, AbstractMapper $modelMapper, AbstractRevisionMapper $revisionMapper, string $modelClass, string $revisionClass) {
+    protected function restoreModels(array $models, AbstractMapper $modelMapper, AbstractRevisionMapper $revisionMapper, string $modelClass, string $revisionClass, ?string $user): void {
         foreach($models as $model) {
-
-            try {
-                $object = $modelMapper->findByUuid($model['uuid']);
-                $modelMapper->delete($object);
-                $oldRevisions = $revisionMapper->findAllMatching(['model', $model['uuid']]);
-                foreach($oldRevisions as $oldRevision) $revisionMapper->delete($oldRevision);
-            } catch(DoesNotExistException $e) {
-            }
-
+            if($user !== null && $user !== $model['user_id']) continue;
             $revisions = $model['revisions'];
             unset($model['revisions']);
-            foreach($revisions as $revision) {
-                /** @var AbstractRevisionEntity $revisionObject */
-                $revisionObject = new $revisionClass();
-                foreach($revision as $key => $value) {
-                    if($key === 'id') continue;
-                    $revisionObject->setProperty($key, $value);
-                    $revisionMapper->insert($revisionObject);
+            foreach($revisions as $revision) $this->createAndSaveObject($revision, $revisionMapper, $revisionClass);
+
+            $this->createAndSaveObject($model, $modelMapper, $modelClass);
+        }
+    }
+
+    /**
+     * @param array          $entities
+     * @param AbstractMapper $entityMapper
+     * @param string         $class
+     * @param null|string    $user
+     */
+    protected function restoreEntities(array $entities, AbstractMapper $entityMapper, string $class, ?string $user): void {
+        foreach($entities as $entity) {
+            if($user !== null && $user !== $entity['user_id']) continue;
+            $this->createAndSaveObject($entity, $entityMapper, $class);
+        }
+    }
+
+    /**
+     * @param AbstractMapper $entityMapper
+     * @param string         $class
+     * @param                $entity
+     */
+    protected function createAndSaveObject(array $entity, AbstractMapper $entityMapper, string $class): void {
+        /** @var AbstractEntity $entityObject */
+        $entityObject = new $class();
+        foreach($entity as $key => $value) {
+            if($key === 'id') continue;
+            $entityObject->setProperty($key, $value);
+            $entityMapper->insert($entityObject);
+        }
+    }
+
+    /**
+     * @param AbstractMapper $entityMapper
+     * @param null|string    $user
+     */
+    protected function deleteEntities(AbstractMapper $entityMapper, ?string $user): void {
+        $entities = $entityMapper->findAll();
+        foreach($entities as $entity) {
+            if($user !== null && $user !== $entity['user_id']) continue;
+            $entityMapper->delete($entity);
+        }
+    }
+
+    /**
+     * @param             $userSettings
+     * @param null|string $user
+     *
+     * @throws \Exception
+     */
+    protected function restoreUserSettings($userSettings, ?string $user): void {
+        foreach($userSettings as $uid => $settings) {
+            if($user !== null && $user !== $uid) continue;
+
+            foreach($settings as $key => $value) {
+                if($value === null) {
+                    $this->userSettingsHelper->reset($key, $uid);
+                } else {
+                    $this->userSettingsHelper->set($key, $value, $uid);
                 }
             }
+        }
+    }
 
-            /** @var AbstractModelEntity $modelObject */
-            $modelObject = new $modelClass();
-            foreach($model as $key => $value) {
-                if($key === 'id') continue;
-                $modelObject->setProperty($key, $value);
-                $modelMapper->insert($modelObject);
+    /**
+     * @param             $clientSettings
+     * @param null|string $user
+     *
+     * @throws \Exception
+     */
+    protected function restoreClientSettings($clientSettings, ?string $user): void {
+        foreach($clientSettings as $uid => $value) {
+            if($user !== null && $user !== $uid) continue;
+
+            $this->config->setUserValue('client/settings', $value, $user);
+        }
+    }
+
+    /**
+     * @param $settings
+     */
+    protected function restoreApplicationSettings(array $settings): void {
+        foreach($settings as $key => $value) {
+            if($value === null) {
+                $this->config->deleteAppValue($key);
+            } else {
+                $this->config->setAppValue($key, $value);
             }
         }
     }
