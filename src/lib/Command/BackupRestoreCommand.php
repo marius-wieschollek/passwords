@@ -4,10 +4,12 @@ namespace OCA\Passwords\Command;
 
 use OCA\Passwords\Services\BackupService;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Class BackupRestoreCommand
@@ -55,8 +57,27 @@ class BackupRestoreCommand extends Command {
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
         $options = $this->getOptions($input);
-
         $backup  = $this->getBackup($input->getArgument('backup'));
+
+        $this->printRestoringInformation($output, $backup->getName(), $options);
+        if(!$options['data'] && !$options['settings']['application'] && !$options['settings']['user'] && !$options['settings']['client']) {
+            $output->writeln(' - nothing');
+
+            return;
+        }
+
+        if($options['data']) {
+            $output->writeln('');
+            $output->writeln('Restoring user data means that the current user data will be wiped.');
+        }
+
+        if(!$this->confirmRestoring($input, $output)) return;
+
+        $output->writeln('');
+        $output->write('Restoring backup ...');
+        $this->backupService->restoreBackup($backup->getName(), $options);
+        $output->write(' done');
+        $output->writeln('');
     }
 
     /**
@@ -90,6 +111,49 @@ class BackupRestoreCommand extends Command {
                 'application' => !$input->getOption('no-app-settings') && $input->getOption('user') === null
             ]
         ];
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return bool
+     */
+    protected function confirmRestoring(InputInterface $input, OutputInterface $output): bool {
+        if(!$input->getOption('no-interaction')) {
+            /** @var QuestionHelper $helper */
+            $helper = $this->getHelper('question');
+
+            $question = new Question('Type "yes" to confirm that you want to restore the backup: ');
+            $yes      = $helper->ask($input, $output, $question);
+
+            if($yes !== 'yes') {
+                $output->writeln('aborting');
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param OutputInterface $output
+     * @param                 $backup
+     * @param                 $options
+     */
+    protected function printRestoringInformation(OutputInterface $output, string $backup, array $options): void {
+        $output->writeln('This backup file will be used: '.$backup);
+        $output->writeln('');
+        $output->writeln('The backup will restore the following:');
+        if($options['data']) {
+            $output->writeln(' - Server and user encryption keys');
+            $output->writeln(' - User passwords, folder, tags and shares');
+        }
+
+        if($options['settings']['application']) $output->writeln(' - Application settings');
+        if($options['settings']['user']) $output->writeln(' - User settings');
+        if($options['settings']['client']) $output->writeln(' - Third party client settings');
     }
 
 }
