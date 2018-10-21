@@ -152,7 +152,7 @@ class ConfigurationService {
     /**
      * @param $user
      *
-     * @return null|string
+     * @return string
      * @throws \Exception
      */
     protected function getUserId(string $user = null): string {

@@ -250,8 +250,8 @@ class RestoreBackupHelper {
         foreach($entity as $key => $value) {
             if($key === 'id') continue;
             $entityObject->setProperty($key, $value);
-            $entityMapper->insert($entityObject);
         }
+        $entityMapper->insert($entityObject);
     }
 
     /**
@@ -296,7 +296,7 @@ class RestoreBackupHelper {
         foreach($clientSettings as $uid => $value) {
             if($user !== null && $user !== $uid) continue;
 
-            $this->config->setUserValue('client/settings', $value, $user);
+            $this->config->setUserValue('client/settings', $value, $uid);
         }
     }
 
