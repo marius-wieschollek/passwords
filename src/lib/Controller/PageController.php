@@ -69,7 +69,6 @@ class PageController extends Controller {
         $isSecure = $this->checkIfHttpsUsed();
         if($isSecure) {
             $this->getUserSettings();
-            //$this->includeBrowserPolyfills();
             Util::addHeader('meta', ['name' => 'pwat', 'content' => $this->tokenHelper->getWebUiToken()]);
         } else {
             $this->tokenHelper->destroyWebUiToken();
@@ -109,16 +108,6 @@ class PageController extends Controller {
                 'content' => json_encode($this->settingsService->list())
             ]
         );
-    }
-
-    /**
-     *
-     */
-    protected function includeBrowserPolyfills(): void {
-        if($this->request->isUserAgent([Request::USER_AGENT_MS_EDGE])) {
-            Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding');
-            Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding-indexes');
-        };
     }
 
     /**
