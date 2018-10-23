@@ -6,6 +6,7 @@
         "documentation"                                                                             : "Dokumentation",
         "This application requires %s in order to work safely."                                     : "Diese Anwendung benötigt %s um sicher zu funktionieren.",
         "Consult the %s to configure Nextcloud correctly."                                          : "Lies die %s um Nextcloud korrekt zu konfigurieren.",
+        "If you are using an HTTPS proxy, please read this %s."                                     : "Wenn du einen HTTPS-Proxy verwendest, lies bitte diese %s.",
         "If you do not have a HTTPS certificate, get one for free from %s."                         : "Ein kostenloses HTTPS Zertifikat erhälst du bei %s.",
         "Enable %s to troubleshoot this error."                                                     : "Aktiviere %s um das Problem zu untersuchen.",
         "You can try to %s the page with HTTPS."                                                    : "Du kannst versuchen die Seite %s.",
