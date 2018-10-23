@@ -58,6 +58,8 @@ class AdminSettingsController extends Controller {
         if($value === 'true') $value = true;
         if($value === 'false') $value = false;
 
+        if($key === 'backup/files/maximum' && $value < 0) $value = '';
+
         if($value === '') {
             $this->config->deleteAppValue($key);
         } else {

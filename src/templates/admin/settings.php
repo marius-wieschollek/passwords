@@ -24,9 +24,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     <h2>
         <?php p($l->t('Passwords')); ?>
         <a target="_blank" rel="noreferrer noopener" class="icon-info" title="<?php p($l->t('Open documentation')); ?>" href="<?=$_['links']['help']?>"></a>
-        <span class="msg success saved"><?php p($l->t('Saved')); ?></span>
-        <span class="msg success cleared"><?php p($l->t('Cleared')); ?></span>
-        <span class="msg error"><?php p($l->t('Failed')); ?></span>
     </h2>
 </header>
 <section class="section passwords">
@@ -77,8 +74,13 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
         </div>
     <?php endif; ?>
 
+
     <form>
-        <h3><?php p($l->t('Legacy Api Support')); ?></h3>
+        <h3>
+            <?php p($l->t('Legacy Api Support')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
 
         <div class="area legacy">
             <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
@@ -91,7 +93,11 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
-        <h3><?php p($l->t('Internal Data Processing')); ?></h3>
+        <h3>
+            <?php p($l->t('Internal Data Processing')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
 
         <div class="area processing">
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
@@ -104,7 +110,12 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
-        <h3><?php p($l->t('External Services')); ?></h3>
+        <h3>
+            <?php p($l->t('External Services')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
+
         <div class="area services">
             <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
             <select id="passwords-security" name="passwords-security" name="security" data-setting="service/security">
@@ -147,7 +158,11 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
-        <h3><?php p($l->t('Default Email Settings')); ?></h3>
+        <h3>
+            <?php p($l->t('Default Email Settings')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
 
         <div class="area mails">
             <label for="passwords-mail-security"><?php p($l->t('Send emails for security events')); ?></label>
@@ -158,7 +173,30 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
-        <h3><?php p($l->t('Other Settings')); ?></h3>
+        <h3>
+            <?php p($l->t('Backup Settings')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
+
+        <div class="area backups">
+            <label for="passwords-backup-interval"><?php p($l->t('Backup Interval')); ?></label>
+            <select id="passwords-backup-interval" name="passwords-backup-interval" name="image" data-setting="backup/interval">
+                <?php foreach($_['backupInterval']['options'] as $value => $label): ?>
+                    <option value="<?php p($value); ?>" <?php p($_['backupInterval']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="passwords-backup-files"><?php p($l->t('Amount of backups to keep')); ?></label>
+            <input id="passwords-backup-files" name="backup-files" data-setting="backup/files/maximum" type="number" min="0" value="<?=$_['backupFiles']?>">
+        </div>
+    </form>
+
+    <form>
+        <h3>
+            <?php p($l->t('Other Settings')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
 
         <div class="area other">
             <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
@@ -175,7 +213,11 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </form>
 
     <form>
-        <h3><?php p($l->t('Caches')); ?></h3>
+        <h3>
+            <?php p($l->t('Caches')); ?>
+            <span class="response success cleared"><?php p($l->t('Cleared')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
         <?php foreach($_['caches'] as $cache): ?>
             <div class="area cache">
                 <label><?php p($l->t(ucfirst($cache['name']).' Cache (%s files, %s)', [$cache['files'], human_file_size($cache['size'])])); ?></label>

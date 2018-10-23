@@ -61,8 +61,8 @@ class PasswordsAdminSettings {
      */
     _setValue(key, value) {
         $.post(this.settingsUrl, {key, value})
-            .success(() => {this._showMessage('saved');})
-            .fail(() => {this._showMessage('error');});
+         .success(() => {this._showMessage('saved', `[data-setting="${key}"]`);})
+         .fail(() => {this._showMessage('error', `[data-setting="${key}"]`);});
     }
 
     /**
@@ -73,18 +73,19 @@ class PasswordsAdminSettings {
      */
     _clearCache(key) {
         $.post(this.cacheUrl, {key})
-            .success(() => {this._showMessage('cleared');})
-            .fail(() => {this._showMessage('error');});
+         .success(() => {this._showMessage('cleared', `.area.cache`);})
+         .fail(() => {this._showMessage('error', `.area.cache`);});
     }
 
     /**
      * Show save success/fail message
      *
      * @param type
+     * @param target
      * @private
      */
-    _showMessage(type) {
-        let $el = $('#passwords').find(`.msg.${type}`);
+    _showMessage(type, target) {
+        let $el = $('section.passwords').find(target).parents('form').eq(0).find(`h3 .response.${type}`);
         $el.removeClass('active').addClass('active');
 
         clearTimeout(this._timer[type]);
@@ -93,7 +94,7 @@ class PasswordsAdminSettings {
                 $el.removeClass('active');
                 if(type === 'error') location.reload(true);
             },
-            1500);
+            1000);
     }
 
     /**

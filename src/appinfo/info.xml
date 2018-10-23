@@ -92,6 +92,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
         <job>OCA\Passwords\Cron\CleanUpSessions</job>
+        <job>OCA\Passwords\Cron\BackupJob</job>
     </background-jobs>
     <repair-steps>
         <post-migration>
@@ -100,6 +101,11 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
     </repair-steps>
+    <commands>
+        <command>OCA\Passwords\Command\BackupCreateCommand</command>
+        <command>OCA\Passwords\Command\BackupListCommand</command>
+        <command>OCA\Passwords\Command\BackupRestoreCommand</command>
+    </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>
         <admin-section>OCA\Passwords\Settings\AdminSection</admin-section>

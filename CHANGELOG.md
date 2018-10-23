@@ -1,3 +1,8 @@
+#### 2018.11.0 - Feature release
+- Added server side backups
+- Added french translation
+- Improved admin settings save feedback
+
 #### 2018.10.0 - Feature release
 - Added Dutch translation
 - Added Russian translation

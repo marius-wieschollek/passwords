@@ -9,3 +9,5 @@
  - [Bendik Brenne](https://github.com/bendikrb)
  - [Ondřej Kadlec](https://github.com/447937)
  - [Oleg Boldenkov](https://github.com/olegbolden)
+ - [NodokaMurmevent](https://github.com/NodokaMurmevent)
+ - [Mathieu Brunot](https://github.com/madmath03)
