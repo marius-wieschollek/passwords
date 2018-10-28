@@ -10,7 +10,7 @@
         "Enable %s to troubleshoot this error."                                                     : "Активируйте %s для обработки данной ошибки.",
         "You can try to %s the page with HTTPS."                                                    : "Попробуйте %s эту страницу по HTTPS.",
         "If this problem persists, you should contact your administrator."                          : "Обратитесь к администратору, если проблема будет появляться в дальнейшем.",
-        "Passwords WebUI Access (see Passwords F.A.Q)"                                              : "Доступ к Passwords через WebUi (см. Passwords FAQ)",
+        "Passwords Api Token (%s, see F.A.Q)"                                                       : "Passwords Api Token (%s, см. Passwords FAQ)",
         "Open documentation"                                                                        : "Обратиться к документации",
         "Legacy Api Support"                                                                        : "Поддержка старого API",
         "Enable Legacy API"                                                                         : "Включить поддержку старого API",

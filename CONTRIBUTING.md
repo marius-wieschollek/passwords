@@ -44,7 +44,7 @@ You can also download a [file with sample data](https://git.mdns.eu/nextcloud/pa
  - [http://localhost:8080](http://localhost:8080) is PhpMyAdmin (for the MySQL database)
  - [http://localhost:1080](http://localhost:1080) is MailHog (for Emails)
  - [http://localhost:7070](http://localhost:7070) is Besticon Iconserver (optional)
- - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional)
+ - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
 
 #### First steps
 * [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)

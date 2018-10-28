@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services;
 
+use OC\Authentication\Token\IProvider;
+use OC\Authentication\Token\IToken;
 use OCA\Passwords\AppInfo\Application;
 use OCP\BackgroundJob;
 use OCP\IConfig;
@@ -24,6 +26,16 @@ class EnvironmentService {
      * @var null|string
      */
     protected $userId;
+
+    /**
+     * @var null|string
+     */
+    protected $userLogin;
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
 
     /**
      * @var bool
@@ -70,6 +82,7 @@ class EnvironmentService {
             $logger->debug('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode', ['app' => Application::APP_NAME]);
         }
         if(!$this->isGlobalMode) $this->userId = $userId;
+        $this->logger = $logger;
     }
 
     /**
@@ -77,6 +90,32 @@ class EnvironmentService {
      */
     public function getUserId(): ?string {
         return $this->userId;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUserLogin() {
+        if($this->userId === null) return null;
+        if($this->userLogin !== null) return $this->userLogin;
+
+        try {
+            if(isset($_SERVER['PHP_AUTH_USER'])) {
+                $this->userLogin = $_SERVER['PHP_AUTH_USER'];
+            } else {
+                $sessionId = \OC::$server->getSession()->getId();
+
+                /** @var IToken $sessionToken */
+                $sessionToken = \OC::$server->query(IProvider::class)->getToken($sessionId);
+                $loginName    = $sessionToken->getLoginName();
+
+                $this->userLogin = $loginName !== null ? $loginName:$this->userId;
+            }
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return $this->userLogin;
     }
 
     /**
@@ -125,6 +164,7 @@ class EnvironmentService {
         try {
             $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
+            $this->logger->logException($e);
         }
     }
 

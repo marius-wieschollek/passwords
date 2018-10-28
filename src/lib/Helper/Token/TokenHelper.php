@@ -12,6 +12,7 @@ use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\IL10N;
@@ -80,9 +81,13 @@ class TokenHelper {
     protected $notificationService;
 
     /**
+     * @var EnvironmentService
+     */
+    protected $environmentService;
+
+    /**
      * TokenHelper constructor.
      *
-     * @param null|string          $userId
      * @param IL10N                $localisation
      * @param ISession             $session
      * @param ISecureRandom        $random
@@ -91,10 +96,10 @@ class TokenHelper {
      * @param IUserManager         $userManager
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
+     * @param EnvironmentService   $environmentService
      * @param NotificationService  $notificationService
      */
     public function __construct(
-        ?string $userId,
         IL10N $localisation,
         ISession $session,
         ISecureRandom $random,
@@ -103,9 +108,10 @@ class TokenHelper {
         IUserManager $userManager,
         SimpleEncryption $encryption,
         ConfigurationService $config,
+        EnvironmentService $environmentService,
         NotificationService $notificationService
     ) {
-        $this->userId              = $userId;
+        $this->userId              = $environmentService->getUserId();
         $this->random              = $random;
         $this->logger              = $logger;
         $this->config              = $config;
@@ -115,6 +121,7 @@ class TokenHelper {
         $this->localisation        = $localisation;
         $this->tokenProvider       = $tokenProvider;
         $this->notificationService = $notificationService;
+        $this->environmentService  = $environmentService;
     }
 
     /**
@@ -135,14 +142,17 @@ class TokenHelper {
 
     /**
      * @param string $name
+     * @param bool   $permanent
      *
      * @return array
      */
-    public function createToken(string $name): array {
-        $token       = $this->generateRandomDeviceToken();
-        $password    = $this->getUserPassword();
-        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->userId, $password, $name, IToken::PERMANENT_TOKEN);
-        $deviceToken->setScope(['filesystem' => false]);
+    public function createToken(string $name, bool $permanent = false): array {
+        $token    = $this->generateRandomDeviceToken();
+        $password = $this->getUserPassword();
+        $type     = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
+
+        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->environmentService->getUserLogin(), $password, $name, $type);
+        $deviceToken->setScope(['filesystem' => $this->config->isAppEnabled('encryption')]);
         $this->tokenProvider->updateToken($deviceToken);
 
         return [$token, $deviceToken];
@@ -169,7 +179,7 @@ class TokenHelper {
     /**
      * @throws \Exception
      */
-    public function destroyWebUiToken(): void {
+    protected function destroyLegacyToken(): void {
         $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
         if($tokenId !== false) {
             $this->destroyToken($tokenId);
@@ -179,23 +189,39 @@ class TokenHelper {
     }
 
     /**
+     *
+     */
+    public function destroyWebUiToken(): void {
+        $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
+        if($tokenId !== false) {
+            $this->destroyToken($tokenId);
+            $this->session->remove(self::WEBUI_TOKEN);
+            $this->session->remove(self::WEBUI_TOKEN_ID);
+        }
+    }
+
+    /**
      * @return bool|string
      * @throws \Exception
      */
     protected function loadWebUiToken() {
-        $token   = $this->config->getUserValue(self::WEBUI_TOKEN, false);
-        $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
-        if($token !== false && $tokenId !== false) {
+        if($this->config->getUserValue(self::WEBUI_TOKEN_ID, false) !== false) {
+            $this->destroyLegacyToken();
+        }
+
+        $token   = $this->session->get(self::WEBUI_TOKEN);
+        $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
+        if($token !== null && $tokenId !== null) {
             try {
                 $iToken = $this->tokenProvider->getTokenById($tokenId);
 
-                if($iToken->getId() == $tokenId) return $this->encryption->decrypt($token);
+                if($iToken->getId() == $tokenId) return $token;
             } catch(InvalidTokenException $e) {
             } catch(\Throwable $e) {
                 $this->notificationService->sendTokenErrorNotification($this->userId);
                 $this->logger
                     ->logException($e)
-                    ->error('Failed to decrypt api token for '.$this->userId);
+                    ->error('Failed to load api token for '.$this->userId);
             }
         }
 
@@ -207,10 +233,10 @@ class TokenHelper {
      * @throws \Exception
      */
     protected function createWebUiToken(): string {
-        $name = $this->localisation->t('Passwords WebUI Access (see Passwords F.A.Q)');
+        $name = $this->localisation->t('Passwords Api Token (%s, see F.A.Q)', date('Y-m-d H:i:s'));
         list($token, $deviceToken) = $this->createToken($name);
-        $this->config->setUserValue(self::WEBUI_TOKEN, $this->encryption->encrypt($token));
-        $this->config->setUserValue(self::WEBUI_TOKEN_ID, $deviceToken->getId());
+        $this->session->set(self::WEBUI_TOKEN, $token);
+        $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
 
         return $token;
     }

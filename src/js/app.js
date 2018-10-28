@@ -32,8 +32,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     }
 
     async function initApi() {
-        let user     = document.querySelector('head[data-user]').getAttribute('data-user'),
-            password = document.querySelector('meta[name=pwat]').getAttribute('content');
+        let user     = document.querySelector('meta[name=api-user]').getAttribute('content'),
+            password = document.querySelector('meta[name=api-token]').getAttribute('content');
         if(!password) password = await Messages.prompt('Password', 'Login', '', true);
 
         let baseUrl = location.href;
@@ -46,7 +46,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     }
 
     async function load() {
-        if(isLoaded || !document.querySelector('meta[name=pwat]')) return;
+        if(isLoaded || !document.querySelector('meta[name=api-user]')) return;
         clearInterval(loadInterval);
         isLoaded = true;
 
