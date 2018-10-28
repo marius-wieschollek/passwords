@@ -11,7 +11,7 @@
         "Enable %s to troubleshoot this error."                                                     : "Aktivieren Sie %s um das Problem zu untersuchen.",
         "You can try to %s the page with HTTPS."                                                    : "Sie können versuchen die Seite %s.",
         "If this problem persists, you should contact your administrator."                          : "Wenn der Fehler weiterhin besteht sollten Sie den Administrator kontaktieren.",
-        "Passwords WebUI Access (see Passwords F.A.Q)"                                              : "Passwords WebUi Zugriff (siehe Passwords F.A.Q)",
+        "Passwords Api Token (%s, see F.A.Q)"                                                       : "Passwords Api Token (%s, siehe Passwords F.A.Q)",
         "Open documentation"                                                                        : "Dokumentation öffnen",
         "Legacy Api Support"                                                                        : "Altes API",
         "Enable Legacy API"                                                                         : "Altes API aktivieren",
