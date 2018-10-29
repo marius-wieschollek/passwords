@@ -73,6 +73,7 @@ class EnvironmentService {
     public function __construct(string $userId = null, IConfig $config, IRequest $request, ILogger $logger) {
         $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
         $this->isCliMode          = PHP_SAPI === 'cli';
+        $this->logger             = $logger;
         $this->checkIfCronJob($request);
         $this->checkIfAppUpdate($request);
         $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
@@ -82,7 +83,6 @@ class EnvironmentService {
             $logger->debug('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode', ['app' => Application::APP_NAME]);
         }
         if(!$this->isGlobalMode) $this->userId = $userId;
-        $this->logger = $logger;
     }
 
     /**
