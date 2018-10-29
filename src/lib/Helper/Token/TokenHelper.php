@@ -76,11 +76,6 @@ class TokenHelper {
     protected $tokenProvider;
 
     /**
-     * @var NotificationService
-     */
-    protected $notificationService;
-
-    /**
      * @var EnvironmentService
      */
     protected $environmentService;
@@ -97,7 +92,6 @@ class TokenHelper {
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
      * @param EnvironmentService   $environmentService
-     * @param NotificationService  $notificationService
      */
     public function __construct(
         IL10N $localisation,
@@ -108,8 +102,7 @@ class TokenHelper {
         IUserManager $userManager,
         SimpleEncryption $encryption,
         ConfigurationService $config,
-        EnvironmentService $environmentService,
-        NotificationService $notificationService
+        EnvironmentService $environmentService
     ) {
         $this->userId              = $environmentService->getUserId();
         $this->random              = $random;
@@ -120,7 +113,6 @@ class TokenHelper {
         $this->userManager         = $userManager;
         $this->localisation        = $localisation;
         $this->tokenProvider       = $tokenProvider;
-        $this->notificationService = $notificationService;
         $this->environmentService  = $environmentService;
     }
 
@@ -218,7 +210,6 @@ class TokenHelper {
                 if($iToken->getId() == $tokenId) return $token;
             } catch(InvalidTokenException $e) {
             } catch(\Throwable $e) {
-                $this->notificationService->sendTokenErrorNotification($this->userId);
                 $this->logger
                     ->logException($e)
                     ->error('Failed to load api token for '.$this->userId);

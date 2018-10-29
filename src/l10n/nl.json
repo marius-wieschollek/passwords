@@ -107,9 +107,6 @@
         "Open the passwords app to see your shared passwords."                                      : "Open de Passwords APP om uw gedeelde wachtwoorden te zien.",
         "Sharing a password that has been shared with you can sometimes create a loop."             : "Een wachtwoord delen dat reeds met u gedeeld is kan een loop veroorzaken.",
         "To prevent this, these passwords will not be shared."                                      : "Om dit te voorkomen zullen deze wachtwoorden niet worden gedeeld.",
-        "Passwords could not decrypt the API access token."                                         : "Passwords kon het API-token niet ontsleutelen.",
-        "A new token was created instead."                                                          : "Er is daarom een nieuw token aangemaakt.",
-        "This can indicate that the data stored on the server has been altered by someone."         : "Dit kan erop duiden dat de data op de server door iemand is gewijzigd.",
         "Deleted User (%s)"                                                                         : "Verwijderde Gebruiker (%s)"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
