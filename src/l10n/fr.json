@@ -12,7 +12,7 @@
         "Enable %s to troubleshoot this error."                                                     : "Activez %s pour résoudre cette erreur.",
         "You can try to %s the page with HTTPS."                                                    : "Vous pouvez essayer de %s avec HTTPS d’activé.",
         "If this problem persists, you should contact your administrator."                          : "Si ce problème persiste, vous devriez contacter votre administrateur.",
-        "Passwords Api Token (%s, see F.A.Q)"                                                       : "Passwords Api Token (%s, voir la F.A.Q)",
+        "Passwords Session %s - %s"                                                                 : "Mots de passe Session %s - %s",
         "Open documentation"                                                                        : "Ouvrir la Documentation",
         "Legacy Api Support"                                                                        : "Support de l’ancienne API",
         "Enable Legacy API"                                                                         : "Activer l’ancienne API",
