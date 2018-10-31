@@ -9,8 +9,10 @@ namespace OCA\Passwords\Helper\Preview;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -36,6 +38,11 @@ abstract class AbstractPreviewHelper {
     protected $config;
 
     /**
+     * @var AbstractImageHelper
+     */
+    protected $imageHelper;
+
+    /**
      * @var FileCacheService
      */
     protected $fileCacheService;
@@ -43,12 +50,18 @@ abstract class AbstractPreviewHelper {
     /**
      * BetterIdeaHelper constructor.
      *
-     * @param FileCacheService     $fileCacheService
+     * @param HelperService        $helperService
      * @param ConfigurationService $config
+     * @param FileCacheService     $fileCacheService
      */
-    public function __construct(FileCacheService $fileCacheService, ConfigurationService $config) {
-        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
+    public function __construct(
+        HelperService $helperService,
+        ConfigurationService $config,
+        FileCacheService $fileCacheService
+    ) {
+        $this->imageHelper      = $helperService->getImageHelper();
         $this->config           = $config;
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
     }
 
     /**
@@ -67,6 +80,7 @@ abstract class AbstractPreviewHelper {
 
         $previewData = $this->getPreviewData($domain, $view);
         if(empty($previewData)) throw new \Exception('Website preview service returned no data');
+        if(!$this->imageHelper->supportsImage($previewData)) throw new \Exception('Favicon service returned unsupported data type');
 
         return $this->fileCacheService->putFile($previewFile, $previewData);
     }
