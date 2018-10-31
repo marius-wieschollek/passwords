@@ -224,7 +224,7 @@ class TokenHelper {
      * @throws \Exception
      */
     protected function createWebUiToken(): string {
-        $name = $this->localisation->t('Passwords Api Token (%s, see F.A.Q)', date('Y-m-d H:i:s'));
+        $name = $this->localisation->t('Passwords Session %s - %s', [date('d.m.y H:i'), \OC::$server->getRequest()->getRemoteAddress()]);
         list($token, $deviceToken) = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());

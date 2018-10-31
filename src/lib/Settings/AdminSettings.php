@@ -80,7 +80,7 @@ class AdminSettings implements ISettings {
             'securityServices' => $this->getSecurityServices(),
             'purgeTimeout'     => $this->getPurgeTimeout(),
             'backupInterval'   => $this->getBackupInterval(),
-            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 10),
+            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
@@ -298,10 +298,12 @@ class AdminSettings implements ISettings {
         return [
             'current' => $this->config->getAppValue('backup/interval', 86400),
             'options' => [
+                3600    => 'Every hour',
+                21600   => 'Every six hours',
                 86400   => 'Every day',
+                172800  => 'Every two days',
                 43200   => 'Every week',
-                1209600 => 'Every two weeks',
-                2592000 => 'Every month'
+                1209600 => 'Every two weeks'
             ]
         ];
     }
