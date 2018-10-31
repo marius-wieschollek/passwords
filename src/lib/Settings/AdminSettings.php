@@ -80,7 +80,7 @@ class AdminSettings implements ISettings {
             'securityServices' => $this->getSecurityServices(),
             'purgeTimeout'     => $this->getPurgeTimeout(),
             'backupInterval'   => $this->getBackupInterval(),
-            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 10),
+            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
