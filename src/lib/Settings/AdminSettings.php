@@ -356,7 +356,7 @@ class AdminSettings implements ISettings {
                 'error'   => $ncVersion < 12,
                 'version' => $ncVersion
             ],
-            'eol'    => (date('Y') + 1).'.1.0'
+            'eol'    => '2019.1.0'
         ];
     }
 

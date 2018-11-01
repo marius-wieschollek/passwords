@@ -259,7 +259,7 @@
             'Show hidden custom fields'           : 'Zeige versteckte eigene Felder',
             'Search as i type'                    : 'Suche wenn ich tippe',
             'Search everywhere with Enter'        : 'Enter drücken sucht überall',
-            'Always show search section'          : 'Zeige die Suche-Sketion immer an',
+            'Always show search section'          : 'Zeige die Suche-Sektion immer an',
             'Notifications'                       : 'Benachrichtigungen',
             'Send Emails for'                     : 'Sende E-Mails für',
             'Security issues'                     : 'Sicherheitsrelevante Ereignisse',
