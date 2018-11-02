@@ -85,6 +85,22 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
      * @return bool
      */
     public function hasProperty(string $property): bool {
-        return property_exists($this, $property);
+        $fieldTypes = $this->getFieldTypes();
+
+        return isset($fieldTypes[$property]);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array {
+        $fields = array_keys($this->getFieldTypes());
+
+        $array = [];
+        foreach($fields as $field) {
+            $array[$field] = $this->getProperty($field);
+        }
+
+        return $array;
     }
 }

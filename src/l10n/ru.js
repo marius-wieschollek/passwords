@@ -286,7 +286,6 @@
             'Figure {count}: {title}'             : 'Цифр {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Невозможно открыть страницу: {message}.',
             'Not Found'                           : 'Не найдено',
-            'Missing something or found an error?': 'Не можете что-то найти или столкнулись с ошибкой?',
             'Tell us!'                            : 'Свяжитесь с нами!',
             'Network error'                       : 'Ошибка сети',
             'Unable to load {module}'             : 'Не удаётся загрузить модуль {module}',

@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services;
 
+use OC\Authentication\Token\IProvider;
+use OC\Authentication\Token\IToken;
 use OCA\Passwords\AppInfo\Application;
 use OCP\IConfig;
 use OCP\ILogger;
@@ -23,6 +25,16 @@ class EnvironmentService {
      * @var null|string
      */
     protected $userId;
+
+    /**
+     * @var null|string
+     */
+    protected $userLogin;
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
 
     /**
      * @var bool
@@ -60,6 +72,7 @@ class EnvironmentService {
     public function __construct(string $userId = null, IConfig $config, IRequest $request, ILogger $logger) {
         $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
         $this->isCliMode          = PHP_SAPI === 'cli';
+        $this->logger             = $logger;
         $this->checkIfCronJob($request);
         $this->checkIfAppUpdate($request);
         $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
@@ -76,6 +89,32 @@ class EnvironmentService {
      */
     public function getUserId(): ?string {
         return $this->userId;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUserLogin() {
+        if($this->userId === null) return null;
+        if($this->userLogin !== null) return $this->userLogin;
+
+        try {
+            if(isset($_SERVER['PHP_AUTH_USER'])) {
+                $this->userLogin = $_SERVER['PHP_AUTH_USER'];
+            } else {
+                $sessionId = \OC::$server->getSession()->getId();
+
+                /** @var IToken $sessionToken */
+                $sessionToken = \OC::$server->query(IProvider::class)->getToken($sessionId);
+                $loginName    = $sessionToken->getLoginName();
+
+                $this->userLogin = $loginName !== null ? $loginName:$this->userId;
+            }
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return $this->userLogin;
     }
 
     /**
@@ -126,6 +165,7 @@ class EnvironmentService {
         try {
             $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
+            $this->logger->logException($e);
         }
     }
 }

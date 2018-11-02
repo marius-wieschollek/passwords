@@ -10,7 +10,7 @@
         "Enable %s to troubleshoot this error."                                                     : "Активируйте %s для обработки данной ошибки.",
         "You can try to %s the page with HTTPS."                                                    : "Попробуйте %s эту страницу по HTTPS.",
         "If this problem persists, you should contact your administrator."                          : "Обратитесь к администратору, если проблема будет появляться в дальнейшем.",
-        "Passwords WebUI Access (see Passwords F.A.Q)"                                              : "Доступ к Passwords через WebUi (см. Passwords FAQ)",
+        "Passwords Session %s - %s"                                                                 : "Пароли сеанс %s - %s",
         "Open documentation"                                                                        : "Обратиться к документации",
         "Legacy Api Support"                                                                        : "Поддержка старого API",
         "Enable Legacy API"                                                                         : "Включить поддержку старого API",
@@ -107,9 +107,6 @@
         "Open the passwords app to see your shared passwords."                                      : "Откройте приложение 'Пароли' в вашем облаке, чтобы посмотреть пароли, предоставленные в доступ.",
         "Sharing a password that has been shared with you can sometimes create a loop."             : "Попытка поделиться паролем, который уже был кем-то вам предоставлен, может привести к зацикливанию.",
         "To prevent this, these passwords will not be shared."                                      : "Во избежание этого данные пароли не были предоставлены в доступ.",
-        "Passwords could not decrypt the API access token."                                         : "Приложение не смогло расшифровать токен доступа к API.",
-        "A new token was created instead."                                                          : "Поэтому был создан новый токен.",
-        "This can indicate that the data stored on the server has been altered by someone."         : "Это значит, что данные, хранящиеся на сервере, были кем-то изменены.",
         "Deleted User (%s)"                                                                         : "Удалённый пользователь (%s)"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

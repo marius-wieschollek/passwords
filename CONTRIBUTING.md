@@ -5,6 +5,7 @@
 
 ## Set up the local environment
 #### Requirements
+* Internet Connection
 * [Node](https://nodejs.org/)
 * [Docker](https://store.docker.com/search?type=edition&offering=community)
 * [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
@@ -14,13 +15,15 @@
 2. Run `npm install`
 3. Run `npm run build`
 4. Run `npm run start`
-5. Open your browser and type [http://localhost/](http://localhost/)
+5. Open your browser and type [https://localhost/](https://localhost/)
 6. Allow the connection using a self signed https certificate
 7. Log in with the username `admin` and the password `admin`
 8. You can now access the [app](http://localhost/index.php/apps/passwords)
 
 #### Sample Data
-A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json) is available in the wiki and can be imported on the [backups page](http://localhost/index.php/apps/passwords#/backup).
+The docker setup comes with two test users `max` and `erika` with the password `PasswordsApp`.
+All users have a set of sample data installed.
+You can also download a [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json) from the wiki and can import it on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
@@ -40,8 +43,7 @@ A [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - [https://localhost](https://localhost) is Nextcloud (with the app)
  - [http://localhost:8080](http://localhost:8080) is PhpMyAdmin (for the MySQL database)
  - [http://localhost:1080](http://localhost:1080) is MailHog (for Emails)
- - [http://localhost:7070](http://localhost:7070) is Besticon Iconserver (optional)
- - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional)
+ - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
 
 #### First steps
 * [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)

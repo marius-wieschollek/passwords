@@ -27,14 +27,14 @@ abstract class AbstractFaviconHelper {
     protected $prefix = 'af';
 
     /**
-     * @var FileCacheService
-     */
-    protected $fileCacheService;
-
-    /**
      * @var AbstractImageHelper
      */
     protected $imageHelper;
+
+    /**
+     * @var FileCacheService
+     */
+    protected $fileCacheService;
 
     /**
      * @var FallbackIconGenerator
@@ -75,6 +75,7 @@ abstract class AbstractFaviconHelper {
 
         $faviconData = $this->getFaviconData($domain);
         if(empty($faviconData)) throw new \Exception('Favicon service returned no data');
+        if(!$this->imageHelper->supportsImage($faviconData)) throw new \Exception('Favicon service returned unsupported data type');
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }

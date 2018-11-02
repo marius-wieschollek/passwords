@@ -7,10 +7,10 @@
 
 namespace OCA\Passwords\Controller;
 
-use OC\AppFramework\Http\Request;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\TokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
@@ -41,36 +41,45 @@ class PageController extends Controller {
     protected $settingsService;
 
     /**
+     * @var EnvironmentService
+     */
+    protected $environmentService;
+
+    /**
      * PageController constructor.
      *
      * @param IRequest             $request
      * @param TokenHelper          $tokenHelper
      * @param ConfigurationService $config
      * @param SettingsService      $settingsService
+     * @param EnvironmentService   $environmentService
      */
     public function __construct(
         IRequest $request,
         TokenHelper $tokenHelper,
         ConfigurationService $config,
-        SettingsService $settingsService
+        SettingsService $settingsService,
+        EnvironmentService $environmentService
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->tokenHelper     = $tokenHelper;
-        $this->settingsService = $settingsService;
-        $this->config          = $config;
+        $this->config             = $config;
+        $this->tokenHelper        = $tokenHelper;
+        $this->settingsService    = $settingsService;
+        $this->environmentService = $environmentService;
     }
 
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
+     * @UseSession
      */
     public function index(): TemplateResponse {
 
         $isSecure = $this->checkIfHttpsUsed();
         if($isSecure) {
             $this->getUserSettings();
-            //$this->includeBrowserPolyfills();
-            Util::addHeader('meta', ['name' => 'pwat', 'content' => $this->tokenHelper->getWebUiToken()]);
+            Util::addHeader('meta', ['name' => 'api-user', 'content' => $this->environmentService->getUserLogin()]);
+            Util::addHeader('meta', ['name' => 'api-token', 'content' => $this->tokenHelper->getWebUiToken()]);
         } else {
             $this->tokenHelper->destroyWebUiToken();
         }
@@ -109,16 +118,6 @@ class PageController extends Controller {
                 'content' => json_encode($this->settingsService->list())
             ]
         );
-    }
-
-    /**
-     *
-     */
-    protected function includeBrowserPolyfills(): void {
-        if($this->request->isUserAgent([Request::USER_AGENT_MS_EDGE])) {
-            Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding');
-            Util::addScript(Application::APP_NAME, 'Static/Polyfill/TextEncoder/encoding-indexes');
-        };
     }
 
     /**

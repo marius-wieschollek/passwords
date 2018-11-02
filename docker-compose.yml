@@ -66,5 +66,11 @@ services:
       MH_API_BIND_ADDR: 0.0.0.0:1080
       MH_UI_BIND_ADDR: 0.0.0.0:1080
 
+  iconserver:
+    image: matthiasluedtke/iconserver
+    container_name: "passwords-iconserver"
+    environment:
+      PORT: 7070
+
 volumes:
   mysql:
