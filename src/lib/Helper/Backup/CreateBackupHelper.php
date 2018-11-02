@@ -147,7 +147,7 @@ class CreateBackupHelper {
 
     /**
      * @param AbstractMapper $modelMapper
-     * @param AbstractMapper $revisionMapper
+     * @param \OCA\Passwords\Db\AbstractRevisionMapper $revisionMapper
      *
      * @return array
      * @throws \Exception
@@ -161,7 +161,7 @@ class CreateBackupHelper {
             $array              = $password->toArray();
             $array['revisions'] = [];
 
-            $revisions = $revisionMapper->findAllMatching(['model', $password->getUuid()]);
+            $revisions = $revisionMapper->findAllByModel($password->getUuid());
             foreach($revisions as $revision) {
                 $array['revisions'][] = $revision->toArray();
             }
