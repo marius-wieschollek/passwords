@@ -146,6 +146,9 @@ class BackupRestoreCommand extends Command {
         $output->writeln('This backup file will be used: '.$backup);
         $output->writeln('');
         $output->writeln('The backup will restore the following:');
+        if($options['user']) {
+            $output->writeln(' - Only data for '.escapeshellarg($options['user']));
+        }
         if($options['data']) {
             $output->writeln(' - Server and user encryption keys');
             $output->writeln(' - User passwords, folder, tags and shares');

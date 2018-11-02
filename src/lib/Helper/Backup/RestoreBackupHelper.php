@@ -31,7 +31,7 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class RestoreBackupHelper {
 
-    const BACKUP_VERSION = 100;
+    const BACKUP_VERSION = 101;
 
     /**
      * @var ConfigurationService
@@ -129,7 +129,7 @@ class RestoreBackupHelper {
      * @throws \Exception
      */
     public function restore(array $data, array $options): bool {
-        if($data['version'] !== self::BACKUP_VERSION) $this->convertData($data);
+        if($data['version'] !== self::BACKUP_VERSION) $data = $this->convertData($data);
         $user = $options['user'];
 
         if($options['data']) {
@@ -152,6 +152,14 @@ class RestoreBackupHelper {
      * @throws \Exception
      */
     protected function convertData(array $data): array {
+        if($data['version'] === 100) {
+            $data['passwordTagRelations'] = $data['password_tag_relations'];
+            unset($data['password_tag_relations']);
+            $data['version'] = 101;
+
+            return $data;
+        }
+
         throw new \Exception('Unsupported backup version: '.$data['version']);
     }
 
@@ -203,7 +211,7 @@ class RestoreBackupHelper {
         $this->restoreModels($data['passwords'], $this->passwordMapper, $this->passwordRevisionMapper, Password::class, PasswordRevision::class, $user);
         $this->restoreModels($data['folders'], $this->folderMapper, $this->folderRevisionMapper, Folder::class, FolderRevision::class, $user);
         $this->restoreModels($data['tags'], $this->tagMapper, $this->tagRevisionMapper, Tag::class, TagRevision::class, $user);
-        $this->restoreEntities($data['password_tag_relations'], $this->passwordTagRelationMapper, PasswordTagRelation::class, $user);
+        $this->restoreEntities($data['passwordTagRelations'], $this->passwordTagRelationMapper, PasswordTagRelation::class, $user);
         $this->restoreEntities($data['shares'], $this->shareMapper, Share::class, $user);
     }
 
@@ -217,7 +225,7 @@ class RestoreBackupHelper {
      */
     protected function restoreModels(array $models, AbstractMapper $modelMapper, AbstractRevisionMapper $revisionMapper, string $modelClass, string $revisionClass, ?string $user): void {
         foreach($models as $model) {
-            if($user !== null && $user !== $model['user_id']) continue;
+            if($user !== null && $user !== $model['userId']) continue;
             $revisions = $model['revisions'];
             unset($model['revisions']);
             foreach($revisions as $revision) $this->createAndSaveObject($revision, $revisionMapper, $revisionClass);
@@ -234,7 +242,7 @@ class RestoreBackupHelper {
      */
     protected function restoreEntities(array $entities, AbstractMapper $entityMapper, string $class, ?string $user): void {
         foreach($entities as $entity) {
-            if($user !== null && $user !== $entity['user_id']) continue;
+            if($user !== null && $user !== $entity['userId']) continue;
             $this->createAndSaveObject($entity, $entityMapper, $class);
         }
     }
@@ -261,7 +269,7 @@ class RestoreBackupHelper {
     protected function deleteEntities(AbstractMapper $entityMapper, ?string $user): void {
         $entities = $entityMapper->findAll();
         foreach($entities as $entity) {
-            if($user !== null && $user !== $entity['user_id']) continue;
+            if($user !== null && $user !== $entity->getUserId()) continue;
             $entityMapper->delete($entity);
         }
     }
