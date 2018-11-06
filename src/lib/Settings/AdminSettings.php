@@ -302,7 +302,7 @@ class AdminSettings implements ISettings {
                 21600   => 'Every six hours',
                 86400   => 'Every day',
                 172800  => 'Every two days',
-                43200   => 'Every week',
+                604800  => 'Every week',
                 1209600 => 'Every two weeks'
             ]
         ];
