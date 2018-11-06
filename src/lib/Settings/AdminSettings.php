@@ -78,6 +78,8 @@ class AdminSettings implements ISettings {
             'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
             'purgeTimeout'     => $this->getPurgeTimeout(),
+            'backupInterval'   => $this->getBackupInterval(),
+            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
@@ -285,6 +287,23 @@ class AdminSettings implements ISettings {
     /**
      * @return array
      */
+    protected function getBackupInterval(): array {
+        return [
+            'current' => $this->config->getAppValue('backup/interval', 86400),
+            'options' => [
+                3600    => 'Every hour',
+                21600   => 'Every six hours',
+                86400   => 'Every day',
+                172800  => 'Every two days',
+                43200   => 'Every week',
+                1209600 => 'Every two weeks'
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
     protected function getFileCaches(): array {
         $caches = $this->fileCacheService->listCaches();
 
@@ -327,7 +346,7 @@ class AdminSettings implements ISettings {
                 'error'   => $ncVersion < 14,
                 'version' => $ncVersion
             ],
-            'eol'    => (date('Y') + 1).'.1.0'
+            'eol'    => '2020.1.0'
         ];
     }
 

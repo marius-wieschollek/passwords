@@ -69,6 +69,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return null|string
+     * @throws \Exception
      */
     public function get(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -90,7 +91,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return bool|float|int|null|string
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     public function set(string $key, $value, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -116,6 +117,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return mixed
+     * @throws \Exception
      */
     public function reset(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -133,6 +135,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return array
+     * @throws \Exception
      */
     public function list(string $userId = null): array {
         $settings = [];
@@ -174,5 +177,21 @@ class UserSettingsHelper {
         }
 
         return $default;
+    }
+
+    /**
+     * @param string|null $userId
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function listRaw(string $userId = null) {
+        $settings = [];
+        foreach(array_keys($this->userSettings) as $key) {
+            $setting              = str_replace('/', '.', $key);
+            $settings[ $setting ] = $this->config->getUserValue($key, null, $userId);
+        }
+
+        return $settings;
     }
 }

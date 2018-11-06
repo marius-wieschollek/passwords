@@ -8,7 +8,7 @@
         "Consult the %s to configure Nextcloud correctly."                                          : "Kontaktujte %s pro správné nestavení Nextcloudu.",
         "If you do not have a HTTPS certificate, get one for free from %s."                         : "Nemáte-li HTTPS certifikát, můžete jej zdarma získat z %s",
         "If you think your server has HTTPS enabled, you can try to %s with HTTPS."                 : "Používá-li server HTTPS, zkuste použít %s včetně HTTPS.",
-        "Passwords WebUI Access (see Passwords F.A.Q)"                                              : "Webové rozhraní správce hesel (zkontrolujte F.A.Q Správce hesel)",
+        "Passwords Session %s - %s"                                                                 : "Passwords Session %s - %s",
         "Open documentation"                                                                        : "Otevřít dokumentaci",
         "Legacy Api Support"                                                                        : "Zastaralé API",
         "Enable Legacy API"                                                                         : "Povolit zastaralé API",
@@ -101,9 +101,6 @@
         "Open the passwords app to see your shared passwords."                                      : "Vstupte do aplikace Správce hesel pro zobrazení Vámi sdílených hesel.",
         "Sharing a password that has been shared with you can sometimes create a loop."             : "Sdílení již sdílených hesel může vést ke vzniku smyčky.",
         "To prevent this, these passwords will not be shared."                                      : "Aby jsme tomu předešli, není možné taková hesla sdílet.",
-        "Passwords could not decrypt the API access token."                                         : "Správci hesel se nepodařilo dešifrovat přístupový token API",
-        "A new token was created instead."                                                          : "Z tohoto důvodu byl vytvořen nový token.",
-        "This can indicate that the data stored on the server has been altered by someone."         : "Což může znamenat, že data uložená na serveru mohla být někým zaměněna.",
         "Deleted User (%s)"                                                                         : "Odstraněný uživatel (%s)"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

@@ -28,7 +28,7 @@ RUN apt-get update -y && \
     apt-get clean
 
 RUN npm install --global pageres-cli --unsafe-perm
-RUN touch /var/www/.config
+RUN mkdir -p /var/www/.config
 RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
 
 RUN printf "\n" | pecl install imagick
@@ -42,8 +42,13 @@ RUN pecl install xdebug
 
 COPY files/mailhog.ini /usr/local/etc/php/conf.d/mailhog.ini
 COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY files/pool.conf /usr/local/etc/php-fpm.d/zz-passwords.conf
 
-COPY startup.sh /usr/local/bin/startup
-RUN chmod +x /usr/local/bin/startup
+COPY files/entrypoint.sh /usr/local/bin/entrypoint
+RUN chmod +x /usr/local/bin/entrypoint
 
-CMD ["/usr/local/bin/startup"]
+COPY files/setup.sh /usr/local/bin/apache
+RUN chmod +x /usr/local/bin/apache
+
+ENTRYPOINT ["/usr/local/bin/entrypoint"]
+CMD ["php-fpm"]

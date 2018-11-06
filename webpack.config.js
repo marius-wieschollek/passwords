@@ -22,8 +22,7 @@ module.exports = (env) => {
         new CopyWebpackPlugin(
             [
                 {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`},
-                {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`},
-                {from: `${__dirname}/src/js/Polyfill`, to: `${__dirname}/src/js/Static/Polyfill`}
+                {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`}
             ]
         ),
         new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity})

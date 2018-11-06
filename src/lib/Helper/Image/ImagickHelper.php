@@ -98,6 +98,7 @@ class ImagickHelper extends AbstractImageHelper {
      *
      * @return Gmagick|Imagick
      * @throws \ImagickException
+     * @throws \GmagickException
      */
     public function getImageFromFile(string $file) {
         $image = $this->getNewImageObject();
@@ -111,6 +112,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return bool
+     * @throws \GmagickException
      */
     public function destroyImage($image): bool {
         $image->clear();
@@ -122,6 +124,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return string
+     * @throws \GmagickException
      */
     public function exportJpeg($image) {
 
@@ -138,6 +141,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return string
+     * @throws \GmagickException
      */
     public function exportPng($image) {
 
@@ -170,6 +174,7 @@ class ImagickHelper extends AbstractImageHelper {
      *
      * @return bool
      * @throws \ImagickException
+     * @throws \GmagickException
      */
     public function supportsFormat(string $format): bool {
         $image = $this->getNewImageObject();
