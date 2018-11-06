@@ -12,6 +12,7 @@ use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Services\WordsService;
@@ -30,9 +31,14 @@ use OCP\IUserManager;
 class ServiceApiController extends AbstractApiController {
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $userId;
+
+    /**
+     * @var string|null
+     */
+    protected $userLogin;
 
     /**
      * @var ConfigurationService
@@ -77,19 +83,18 @@ class ServiceApiController extends AbstractApiController {
     /**
      * ServiceApiController constructor.
      *
-     * @param string                $userId
      * @param IRequest              $request
+     * @param IUserManager          $userManager
      * @param WordsService          $wordsService
      * @param AvatarService         $avatarService
-     * @param UserSettingsHelper    $userSettings
      * @param ConfigurationService  $config
      * @param FaviconService        $faviconService
+     * @param UserSettingsHelper    $userSettings
      * @param WebsitePreviewService $previewService
-     * @param IUserManager          $userManager
+     * @param EnvironmentService    $environmentService
      * @param DeleteUserDataHelper  $deleteUserDataHelper
      */
     public function __construct(
-        string $userId,
         IRequest $request,
         IUserManager $userManager,
         WordsService $wordsService,
@@ -98,11 +103,13 @@ class ServiceApiController extends AbstractApiController {
         FaviconService $faviconService,
         UserSettingsHelper $userSettings,
         WebsitePreviewService $previewService,
+        EnvironmentService $environmentService,
         DeleteUserDataHelper $deleteUserDataHelper
     ) {
         parent::__construct($request);
         $this->config               = $config;
-        $this->userId               = $userId;
+        $this->userId               = $environmentService->getUserId();
+        $this->userLogin            = $environmentService->getUserLogin();
         $this->userManager          = $userManager;
         $this->userSettings         = $userSettings;
         $this->wordsService         = $wordsService;
@@ -209,7 +216,7 @@ class ServiceApiController extends AbstractApiController {
      * @throws \Exception
      */
     public function resetUserAccount(string $password): JSONResponse {
-        if(!$this->userManager->checkPassword($this->userId, $password)) {
+        if(!$this->userManager->checkPassword($this->userLogin, $password)) {
             throw new ApiException('Password invalid', 403);
         }
 

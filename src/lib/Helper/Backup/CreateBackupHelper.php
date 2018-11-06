@@ -22,7 +22,7 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class CreateBackupHelper {
 
-    const BACKUP_VERSION = 100;
+    const BACKUP_VERSION = 101;
 
     /**
      * @var ConfigurationService
@@ -123,19 +123,19 @@ class CreateBackupHelper {
      */
     public function getData(): array {
         $array = [
-            'version'                => self::BACKUP_VERSION,
-            'passwords'              => $this->getModelArray($this->passwordMapper, $this->passwordRevisionMapper),
-            'folders'                => $this->getModelArray($this->folderMapper, $this->folderRevisionMapper),
-            'tags'                   => $this->getModelArray($this->tagMapper, $this->tagRevisionMapper),
-            'shares'                 => $this->getEntityArray($this->shareMapper),
-            'password_tag_relations' => $this->getEntityArray($this->passwordTagRelationMapper),
-            'keys'                   => [
+            'version'              => self::BACKUP_VERSION,
+            'passwords'            => $this->getModelArray($this->passwordMapper, $this->passwordRevisionMapper),
+            'folders'              => $this->getModelArray($this->folderMapper, $this->folderRevisionMapper),
+            'tags'                 => $this->getModelArray($this->tagMapper, $this->tagRevisionMapper),
+            'shares'               => $this->getEntityArray($this->shareMapper),
+            'passwordTagRelations' => $this->getEntityArray($this->passwordTagRelationMapper),
+            'keys'                 => [
                 'server' => [
                     'SSEv1ServerKey' => $this->config->getAppValue('SSEv1ServerKey', null)
                 ],
                 'users'  => $this->getUserKeys()
             ],
-            'settings'               => [
+            'settings'             => [
                 'application' => $this->getApplicationSettings(),
                 'users'       => $this->getUserSettings(),
                 'clients'     => $this->getClientSettings()
