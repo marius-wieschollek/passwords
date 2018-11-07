@@ -50,8 +50,9 @@
         },
         methods   : {
             copyValue() {
-                Utility.copyToClipboard(this.value);
-                Messages.notification(['{element} was copied to clipboard', {element: this.name}]);
+                let message = 'Error copying {element} to clipboard';
+                if(Utility.copyToClipboard(this.value)) message = '{element} was copied to clipboard';
+                Messages.notification([message, {element: this.name}]);
             }
         }
     };
