@@ -100,7 +100,7 @@ class EnvironmentService {
         if($this->userLogin !== null) return $this->userLogin;
 
         try {
-            if(isset($_SERVER['PHP_AUTH_USER'])) {
+            if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
                 $this->userLogin = $_SERVER['PHP_AUTH_USER'];
             } else {
                 $sessionId = \OC::$server->getSession()->getId();
@@ -112,7 +112,8 @@ class EnvironmentService {
                 $this->userLogin = $loginName !== null ? $loginName:$this->userId;
             }
         } catch(\Throwable $e) {
-            $this->logger->logException($e);
+            $this->logger->logException($e, ['app' => Application::APP_NAME]);
+            $this->userLogin = $this->userId;
         }
 
         return $this->userLogin;
@@ -164,7 +165,7 @@ class EnvironmentService {
         try {
             $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
-            $this->logger->logException($e);
+            $this->logger->logException($e, ['app' => Application::APP_NAME]);
         }
     }
 
