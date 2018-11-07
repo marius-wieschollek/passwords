@@ -141,9 +141,11 @@
                 if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
-                Utility.copyToClipboard(this.password[attribute]);
+                let message = 'Error copying {element} to clipboard';
+                if(Utility.copyToClipboard(this.password[attribute])) message = '{element} was copied to clipboard';
+
                 this.clickTimeout = setTimeout(() => {
-                    Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(attribute.capitalize())}]);
+                    Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
                 }, delay);
             },
             favoriteAction($event) {

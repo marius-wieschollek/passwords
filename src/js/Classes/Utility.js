@@ -3,16 +3,28 @@ export default class Utility {
     /**
      *
      * @param text
+     * @returns {boolean}
      */
     static copyToClipboard(text) {
-        let $element = $(`<textarea>${text}</textarea>`);
+        let element = document.createElement('textarea');
+        element.value = text;
 
-        $('body').append($element);
-        $element.select();
+        if(navigator.userAgent.match(/ipad|iphone/i)) {
+            let range     = document.createRange(),
+                selection = window.getSelection();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            element.setSelectionRange(0, 999999);
+        } else {
+            element.select();
+        }
 
-        document.execCommand('copy');
+        document.body.appendChild(element);
+        let result = document.execCommand('copy');
+        document.body.removeChild(element);
 
-        $element.remove();
+        return result;
     }
 
     /**
