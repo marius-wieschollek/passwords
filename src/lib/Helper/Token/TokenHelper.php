@@ -185,7 +185,7 @@ class TokenHelper {
      */
     public function destroyWebUiToken(): void {
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
-        if($tokenId !== false) {
+        if(!empty($tokenId)) {
             $this->destroyToken($tokenId);
             $this->session->remove(self::WEBUI_TOKEN);
             $this->session->remove(self::WEBUI_TOKEN_ID);
