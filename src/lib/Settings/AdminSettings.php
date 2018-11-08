@@ -13,6 +13,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -133,7 +134,8 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', HelperService::WORDS_RANDOM);
+        $current = is_file(LocalWordsHelper::WORDS_DEFAULT) ? HelperService::WORDS_LOCAL:HelperService::WORDS_RANDOM;
+        $current = $this->config->getAppValue('service/words', $current);
 
         return [
             [
