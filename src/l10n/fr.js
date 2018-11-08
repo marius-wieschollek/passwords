@@ -121,7 +121,7 @@
             'The user {uid} does not exist'       : 'L’utilisateur {uid} n’existe pas',
             'Unable to share password: {message}' : 'Impossible de partager le mot de passe : {message}',
             'Toggle write permissions'            : 'Changer le droit d’écriture',
-            'Toggle share permissions'            : 'Changer le droit de lecture',
+            'Toggle share permissions'            : 'Changer le droit de partage',
             'Stop sharing'                        : 'Arrêter le partage',
             'Date'                                : 'Date',
             'Default Cache (0 files, 0 B)'        : 'Cache par défaut (0 fichiers, 0 B)',
