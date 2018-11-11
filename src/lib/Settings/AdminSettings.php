@@ -11,6 +11,7 @@ use Gmagick;
 use Imagick;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
@@ -247,6 +248,15 @@ class AdminSettings implements ISettings {
                 'label'   => 'Pageres/PhantomJS (Local)',
                 'current' => $current === HelperService::PREVIEW_PAGERES,
                 'api'     => null
+            ],
+            [
+                'id'      => HelperService::PREVIEW_WEBSHOT,
+                'label'   => 'Passwords Webshot',
+                'current' => $current === HelperService::PREVIEW_WEBSHOT,
+                'api'     => [
+                    'key'   => WebshotHelper::WEBSHOT_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(WebshotHelper::WEBSHOT_CONFIG_KEY)
+                ]
             ],
             [
                 'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
