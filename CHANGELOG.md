@@ -1,3 +1,9 @@
+#### 2018.11.1 - Feature release
+- Fixed copy to clipboard on iOS
+- Fixed deleting empty tokens
+- Fixed empty user name
+- Improved french translation
+
 #### 2018.11.0 - Feature release
 - Added server side backups
 - Added french translation
