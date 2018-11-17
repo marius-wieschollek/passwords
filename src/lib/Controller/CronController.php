@@ -35,6 +35,8 @@ class CronController extends Controller {
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
+     * @UserRateThrottle(limit=2, period=10)
+     * @AnonRateThrottle(limit=1, period=300)
      */
     public function run(): JSONResponse {
         return new JSONResponse(['success' => $this->synchronizeShares->runManually()]);
