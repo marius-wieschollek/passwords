@@ -151,8 +151,12 @@ class EnvironmentService {
      * @param IRequest $request
      */
     protected function checkIfCronJob(IRequest $request): void {
-        $this->isCronJob = ($request->getRequestUri() === '/cron.php' && in_array($this->getBackgroundJobType(), ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $this->getBackgroundJobType() === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        $requestUri = $request->getRequestUri();
+        $cronType = $this->getBackgroundJobType();
+
+        $this->isCronJob   = ($requestUri === '/index.php/apps/passwords/cron') ||
+                             ($requestUri === '/cron.php' && in_array($cronType, ['ajax', 'webcron'])) ||
+                             ($this->isCliMode && $cronType === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**

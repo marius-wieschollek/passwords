@@ -42,16 +42,17 @@
                 shares      : this.password.shares,
                 placeholder : Localisation.translate('Search user'),
                 autocomplete: SettingsManager.get('server.sharing.autocomplete'),
-                interval    : null
+                interval    : null,
+                polling     : {interval: null, mode: null}
             };
         },
 
         created() {
-            this.interval = setInterval(() => { this.refreshShares(); }, 10000);
+            this.startPolling();
         },
 
         beforeDestroy() {
-            clearInterval(this.interval);
+            this.stopPolling();
         },
 
         computed: {
@@ -116,11 +117,11 @@
                         share.receiver = {id: receiver, name: this.idMap[receiver]};
                         this.shares[d.id] = API._processShare(share);
                         this.search = '';
-                        this.$forceUpdate();
+                        this.refreshShares();
                     }
                 ).catch((e) => {
                     if(e.id === '65782183') {
-                        Messages.notification(['The user {uid} does not exist', {uid:receiver}]);
+                        Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
                         Messages.notification(['Unable to share password: {message}', {message: e.message}]);
                     }
@@ -135,7 +136,7 @@
                     $event.target.style.color = null;
                 }
             },
-            refreshShares() {
+            reloadShares() {
                 API.showPassword(this.password.id, 'shares')
                    .then((d) => { this.shares = d.shares;});
             },
@@ -161,7 +162,28 @@
             },
             deleteShare($event) {
                 delete this.shares[$event.id];
+                this.refreshShares();
+            },
+            refreshShares() {
+                API.runShareCron()
+                   .then((d) => { if(d.success) this.reloadShares();});
+
+                this.startPolling();
                 this.$forceUpdate();
+            },
+            startPolling(mode = 'fast') {
+                if(this.polling.mode === mode) return;
+                this.stopPolling();
+
+                let time = mode === 'slow' ? 60000:10000;
+                this.polling.interval = setInterval(() => { this.reloadShares(); }, time);
+            },
+            stopPolling() {
+                if(this.polling.interval !== null) {
+                    clearInterval(this.polling.interval);
+                    this.polling.interval = null;
+                    this.polling.mode = null;
+                }
             }
         },
 
@@ -170,8 +192,18 @@
                 this.shares = value.shares;
                 this.$forceUpdate();
             },
-            search(value) {
+            search() {
                 this.searchUsers();
+            },
+            shares(shares) {
+                for(let id in shares) {
+                    if(shares.hasOwnProperty(id) && shares[id].updatePending) {
+                        API.runShareCron();
+                        this.startPolling();
+                        return;
+                    }
+                }
+                this.startPolling('slow');
             }
         }
     };

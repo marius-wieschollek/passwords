@@ -12,6 +12,7 @@ use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
@@ -29,6 +30,13 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  * @package OCA\Passwords\Cron
  */
 class SynchronizeShares extends AbstractCronJob {
+
+    const EXECUTION_TIMESTAMP = 'cron.sharing.time';
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
 
     /**
      * @var MailService
@@ -66,6 +74,7 @@ class SynchronizeShares extends AbstractCronJob {
      * @param LoggingService          $logger
      * @param MailService             $mailService
      * @param ShareService            $shareService
+     * @param ConfigurationService    $config
      * @param EnvironmentService      $environment
      * @param PasswordService         $passwordService
      * @param NotificationService     $notificationService
@@ -75,11 +84,13 @@ class SynchronizeShares extends AbstractCronJob {
         LoggingService $logger,
         MailService $mailService,
         ShareService $shareService,
+        ConfigurationService $config,
         EnvironmentService $environment,
         PasswordService $passwordService,
         NotificationService $notificationService,
         PasswordRevisionService $passwordRevisionService
     ) {
+        $this->config                  = $config;
         $this->mailService             = $mailService;
         $this->shareService            = $shareService;
         $this->passwordService         = $passwordService;
@@ -94,12 +105,33 @@ class SynchronizeShares extends AbstractCronJob {
      * @throws \Exception
      */
     protected function runJob($argument): void {
+        if(!$this->canExecute()) return;
+        $this->config->setAppValue(self::EXECUTION_TIMESTAMP, time());
+
         $this->deleteOrphanedTargetPasswords();
         $this->deleteExpiredShares();
         $this->createNewShares();
         $this->removeSharedAttribute();
         $this->updatePasswords();
         $this->notifyUsers();
+
+        $this->config->setAppValue(self::EXECUTION_TIMESTAMP, 0);
+    }
+
+    /**
+     * @return bool
+     */
+    public function runManually(): bool {
+        try {
+            if($this->canExecute() ) {
+                $this->runJob($this->getArgument());
+
+                return true;
+            }
+        } catch(\Exception $e) {
+        }
+
+        return false;
     }
 
     /**
@@ -405,5 +437,13 @@ class SynchronizeShares extends AbstractCronJob {
                 $this->logger->logException($e);
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function canExecute(): bool {
+        return $this->environment->isCronJob() &&
+               $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-1 day');
     }
 }

@@ -69,11 +69,12 @@ export default class SimpleApi {
             'authorisation.info'  : 'api/1.0/authorisation/info',
             'authorisation.login' : 'api/1.0/authorisation/login',
             'authorisation.logout': 'api/1.0/authorisation/logout',
-            'service.resetAccount':'/api/1.0/service/x-reset-user-account',
+            'service.resetAccount': 'api/1.0/service/x-reset-user-account',
             'service.coffee'      : 'api/1.0/service/coffee',
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
-            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}'
+            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
+            'service.cron'        : 'cron',
         };
     }
 
@@ -569,6 +570,15 @@ export default class SimpleApi {
             this._paths['service.preview'],
             {domain, view, width, height}
         );
+    }
+
+    /**
+     * Unofficial request to run the sharing update cron job in order to speed up webcron and ajax
+     *
+     * @returns {Promise}
+     */
+    runShareCron() {
+        return this._createRequest('service.cron');
     }
 
 
