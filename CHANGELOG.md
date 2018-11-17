@@ -1,6 +1,7 @@
 #### 2018.11.2 - Feature release
 - Fixed copy to clipboard
 - Fixed Environment Service in cli mode
+- Fixed drag and drop scrolling
 - Fixed search link in footer
 
 #### 2018.11.1 - Feature release
