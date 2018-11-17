@@ -81,7 +81,6 @@
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s wird nicht mehr unterstützt.",
         "Support for %1$s %2$s will be discontinued in version %3$s."                               : "%1$s %2$s wird ab Version %3$s nicht mehr unterstützt.",
         "Passwords requires HTTPS."                                                                 : "Passwörter benötigt HTTPS.",
-        "Using %s to execute background jobs is very slow and not recommended."                     : "Hintergrundaufgaben mit %s auszuführen ist sehr langsam wird nicht empfohlen.",
         "Please check the system requirements."                                                     : "Bitte sieh dir unsere Systemanforderungen an.",
         "Password not shared"                                                                       : "Password nicht geteilt",
         "A password was not shared with %1$s because it already is"                                 : "Ein Passwort wurde nicht mit %1$s geteilt, da jemand anderes das bereits getan hat.",

@@ -79,7 +79,6 @@
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s wordt niet meer ondersteund.",
         "Support for %1$s %2$s will be discontinued in version %3$s."                               : "Ondersteuning voor %1$s %2$s zal worden beeindigd in versie %3$s.",
         "Passwords requires HTTPS."                                                                 : "Wachtwoorden heeft HTTPS nodig.",
-        "Using %s to execute background jobs is very slow and not recommended."                     : "Het gebruik van %s om achtergrondtaken uit te voeren is erg traag en wordt afgeraden.",
         "Please check the system requirements."                                                     : "Controleer de systeemvereisten a.u.b.",
         "Password not shared"                                                                       : "Wachtwoord niet gedeeld",
         "A password was not shared with %1$s because it already is"                                 : "Een wachtwoord is niet gedeeld met %1$s omdat deze al gedeeld is.",
