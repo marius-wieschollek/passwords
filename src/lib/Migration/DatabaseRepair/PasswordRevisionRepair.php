@@ -6,6 +6,7 @@ use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
@@ -70,6 +71,11 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         if($revision->getCustomFields() === null && $revision->getCseType() === 'none') {
             $this->encryptionService->decrypt($revision);
             $revision->setCustomFields('{}');
+            $fixed = true;
+        }
+
+        if($revision->getStatus() === 1 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
+            $revision->setStatus(0);
             $fixed = true;
         }
 
