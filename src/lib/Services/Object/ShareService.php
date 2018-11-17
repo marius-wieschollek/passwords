@@ -99,7 +99,8 @@ class ShareService extends AbstractService {
      *
      * @return Share|EntityInterface|null
      *
-     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findBySourcePasswordAndReceiver(string $passwordUuid, string $userId): ?Share {
         return $this->mapper->findOneBySourcePasswordAndReceiver($passwordUuid, $userId);

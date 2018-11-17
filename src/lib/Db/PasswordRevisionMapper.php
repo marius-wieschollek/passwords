@@ -32,7 +32,7 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
 
         $sql->andWhere(
             $sql->expr()->eq('hash', $sql->createNamedParameter($hash, IQueryBuilder::PARAM_STR)),
-            $sql->expr()->eq('model', $sql->createNamedParameter($model, IQueryBuilder::PARAM_STR))
+            $sql->expr()->neq('model', $sql->createNamedParameter($model, IQueryBuilder::PARAM_STR))
         );
 
         if($user !== null) {

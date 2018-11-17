@@ -122,7 +122,8 @@
                     if(e.id === '65782183') {
                         Messages.notification(['The user {uid} does not exist', {uid:receiver}]);
                     } else {
-                        Messages.notification(['Unable to share password: {message}', {message: e.message}]);
+                        let message = e.hasOwnProperty('message') ? e.message:e.statusText;
+                        Messages.notification(['Unable to share password: {message}', {message}]);
                     }
                 });
             },
