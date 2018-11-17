@@ -107,6 +107,7 @@ class PasswordHook {
         if($newRevision->getStatus() === 0) {
             if($newRevision->getHash() === $oldRevision->getHash()) {
                 $newRevision->setStatus($oldRevision->getStatus());
+                $newRevision->setStatusCode($oldRevision->getStatusCode());
             } else {
                 $this->checkSecurityStatus($newRevision);
             }

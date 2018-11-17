@@ -1,6 +1,7 @@
 #### 2018.11.2 - Feature release
 - Fixed copy to clipboard
 - Fixed Environment Service in cli mode
+- Fixed invalid security status code
 - Fixed drag and drop scrolling
 - Fixed search link in footer
 
