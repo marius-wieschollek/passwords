@@ -160,7 +160,7 @@ class EnvironmentService {
      */
     protected function checkIfAppUpdate(IRequest $request): void {
         $this->isAppUpdate = false;
-        if($this->isCronJob) return;
+        if($this->isCronJob || $this->isCliMode) return;
 
         try {
             $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
