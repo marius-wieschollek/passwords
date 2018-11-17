@@ -71,7 +71,7 @@
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s больше не поддерживается.",
         "Support for %1$s %2$s will be discontinued in version %3$s."                               : "Поддержка %1$s %2$s будет прекращена с версии %3$s.",
         "Passwords requires HTTPS."                                                                 : "Приложение работает только по протоколу HTTPS.",
-        "Using ajax background jobs is not recommended and might cause issues."                     : "Использование Ajax для выполнения фоновых операций не рекомендуется и может вызывать проблемы.",
+        "Using %s to execute background jobs is very slow and not recommended."                     : "Использование %s для выполнения фоновых операций не рекомендуется и может вызывать проблемы.",
         "Please check the system requirements."                                                     : "Пожалуйста, проверьте системные требования.",
         "Password not shared"                                                                       : "Пароль не предоставлялся в общий доступ",
         "A password was not shared with %1$s because it already is"                                 : "Пользователю %1$s уже предоставлен доступ к данному паролю.",

@@ -355,7 +355,7 @@ class AdminSettings implements ISettings {
         if(BackgroundJob::getExecutionType() !== '') $cronType = BackgroundJob::getExecutionType();
 
         return [
-            'cron'   => $cronType === 'ajax',
+            'cron'   => $cronType,
             'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
             'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML,
             'php'    => [

@@ -82,7 +82,7 @@
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s n’est plus supporté.",
         "Support for %1$s %2$s will be discontinued in version %3$s."                               : "Le support pour %1$s %2$s sera stoppé à partir de la version %3$s.",
         "Passwords requires HTTPS."                                                                 : "L’application nécessite HTTPS.",
-        "Using ajax background jobs is not recommended and might cause issues."                     : "L’exécution de tâches en arrière-plan avec ajax n’est pas recommandée et peut entraîner des problèmes.",
+        "Using %s to execute background jobs is very slow and not recommended."                     : "L'utilisation de %s pour exécuter des jobs d'arrière-plan est très lente et non recommandée.",
         "Please check the system requirements."                                                     : "Veuillez vérifier les exigences systèmes.",
         "Password not shared"                                                                       : "Mot de passe non partagé",
         "A password was not shared with %1$s because it already is"                                 : "Un mot de passe n’a pu être partagé avec %1$s, car il l’est déjà",
