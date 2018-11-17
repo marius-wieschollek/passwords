@@ -95,6 +95,7 @@
             'Copy User'                           : 'Benutzer kopieren',
             'Copy Password'                       : 'Passwort kopieren',
             '{element} was copied to clipboard'   : '{element} wurde in die Zwischenablage kopiert',
+            'Error copying {element} to clipboard': '{element} konnte nicht in die Zwischenablage kopiert werden',
             'Last modified on {date}'             : 'Zuletzt geändert am {date}',
             'Restore revision'                    : 'Version wiederherstellen',
             'Revision restored'                   : 'Version wiederhergestellt',

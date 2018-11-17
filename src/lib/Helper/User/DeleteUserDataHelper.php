@@ -126,13 +126,15 @@ class DeleteUserDataHelper {
         /** @var EntityInterface $objects */
         $objects = $service->findByUserId($userId);
 
-        foreach($objects as $tag) {
-            $service->delete($tag);
+        foreach($objects as $object) {
+            $service->delete($object);
         }
     }
 
     /**
      * @param string $userId
+     *
+     * @throws \Exception
      */
     protected function deleteUserSettings(string $userId): void {
         $settings = array_keys($this->settings->list($userId));
@@ -144,6 +146,8 @@ class DeleteUserDataHelper {
 
     /**
      * @param string $userId
+     *
+     * @throws \Exception
      */
     protected function deleteUserConfig(string $userId): void {
         foreach($this->userConfigKeys as $key) {
