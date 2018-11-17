@@ -16,11 +16,12 @@ export default class Utility {
             selection.removeAllRanges();
             selection.addRange(range);
             element.setSelectionRange(0, 999999);
+            document.body.appendChild(element);
         } else {
+            document.body.appendChild(element);
             element.select();
         }
 
-        document.body.appendChild(element);
         let result = document.execCommand('copy');
         document.body.removeChild(element);
 
