@@ -178,17 +178,17 @@ Scenario('Show Handbook Section', (I) => {
 
 Scenario('Show Trash Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/all');
-    I.waitForElement('div.row.password', 10);
+    I.waitForElement('div.row.password', 20);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(5)');
 
     I.amOnPage('/index.php/apps/passwords/#/folders');
-    I.waitForElement('div.row.folder', 10);
+    I.waitForElement('div.row.folder', 20);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(2)');
 
     I.amOnPage('/index.php/apps/passwords/#/tags');
-    I.waitForElement('div.row.tag', 10);
+    I.waitForElement('div.row.tag', 20);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(4) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(4) > div.more > div > ul > li:nth-child(2)');
 
