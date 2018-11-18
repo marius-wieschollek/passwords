@@ -75,6 +75,7 @@ export default class PassmanConversionHelper {
 
             this._processEmail(element, object);
             this._processCustomFields(element, object, errors);
+            this._processOtpValue(element, object);
 
             passwords.push(object);
         }
@@ -150,13 +151,27 @@ export default class PassmanConversionHelper {
             this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', element, field, errors);
         }
 
-        if(value.match(/^[\w._-]+@.+$/)) {
+        if(type === 'password') {
+            type = 'secret';
+        } else if(value.match(/^[\w._-]+@.+$/)) {
             type = 'email';
         } else if(value.match(/^\w+:\/\/.+$/) && value.substr(0, 11) !== 'javascript:') {
             type = 'url';
         }
 
         object.customFields[label] = {type, value};
+    }
+
+    /**
+     *
+     * @param element
+     * @param object
+     * @private
+     */
+    static _processOtpValue(element, object) {
+        if(element.hasOwnProperty('otp') && element.otp.hasOwnProperty('secret')) {
+            object.customFields.otp = {type: 'secret', value: element.otp.secret};
+        }
     }
 
     /**
