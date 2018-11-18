@@ -220,9 +220,9 @@
                             } else if(errors.length) {
                                 this.progress.style = 'warn';
                                 this.progress.status = 'Import partially failed';
-                                let message = Localisation.translate('Some objects were skipped because of errors: ') +
-                                              errors.join(' ') +
-                                              Localisation.translate('More information can be found in the console (Press F12)');
+                                let message = Localisation.translate('Some objects had errors:')
+                                              + ' ' + errors.join(' ') + ' ' +
+                                              Localisation.translate('More information can be found in the log. (Press F12)');
                                 Messages.alert(message, 'Import error');
                             }
                         });
