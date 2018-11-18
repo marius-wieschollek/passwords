@@ -4,6 +4,7 @@ namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\Cron\SynchronizeShares;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -35,10 +36,19 @@ class CronController extends Controller {
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
+     *
      * @UserRateThrottle(limit=2, period=10)
-     * @AnonRateThrottle(limit=1, period=300)
+     *
+     * @param string $job
+     *
+     * @return JSONResponse
      */
-    public function run(): JSONResponse {
-        return new JSONResponse(['success' => $this->synchronizeShares->runManually()]);
+    public function execute(string $job): JSONResponse {
+
+        if($job === 'sharing') {
+            return new JSONResponse(['success' => $this->synchronizeShares->runManually()]);
+        }
+
+        return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
     }
 }

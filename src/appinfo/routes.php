@@ -10,7 +10,7 @@ $routes = [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
     ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
     ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
-    ['name' => 'cron#run', 'url' => '/cron', 'verb' => 'GET'],
+    ['name' => 'cron#execute', 'url' => '/cron/{job}', 'verb' => 'GET'],
 
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'GET'],
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'POST', 'postfix' => 'POST'],

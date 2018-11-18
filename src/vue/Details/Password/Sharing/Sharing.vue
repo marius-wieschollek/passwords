@@ -165,7 +165,7 @@
                 this.refreshShares();
             },
             refreshShares() {
-                API.runShareCron()
+                API.runSharingCron()
                    .then((d) => { if(d.success) this.reloadShares();});
 
                 this.startPolling();
@@ -175,7 +175,7 @@
                 if(this.polling.mode === mode) return;
                 this.stopPolling();
 
-                let time = mode === 'slow' ? 60000:10000;
+                let time = mode === 'slow' ? 60000:5000;
                 this.polling.interval = setInterval(() => { this.reloadShares(); }, time);
             },
             stopPolling() {
@@ -198,7 +198,7 @@
             shares(shares) {
                 for(let id in shares) {
                     if(shares.hasOwnProperty(id) && shares[id].updatePending) {
-                        API.runShareCron();
+                        API.runSharingCron();
                         this.startPolling();
                         return;
                     }

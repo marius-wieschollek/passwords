@@ -154,7 +154,7 @@ class EnvironmentService {
         $requestUri = $request->getRequestUri();
         $cronType = $this->getBackgroundJobType();
 
-        $this->isCronJob   = ($requestUri === '/index.php/apps/passwords/cron') ||
+        $this->isCronJob   = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
                              ($requestUri === '/cron.php' && in_array($cronType, ['ajax', 'webcron'])) ||
                              ($this->isCliMode && $cronType === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }

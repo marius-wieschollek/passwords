@@ -74,7 +74,7 @@ export default class SimpleApi {
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
             'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
-            'service.cron'        : 'cron',
+            'cron.sharing'        : 'cron/sharing',
         };
     }
 
@@ -577,8 +577,8 @@ export default class SimpleApi {
      *
      * @returns {Promise}
      */
-    runShareCron() {
-        return this._createRequest('service.cron');
+    runSharingCron() {
+        return this._createRequest('cron.sharing');
     }
 
 
