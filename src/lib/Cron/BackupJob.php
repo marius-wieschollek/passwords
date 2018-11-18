@@ -43,7 +43,7 @@ class BackupJob extends AbstractCronJob {
      * @throws \Exception
      */
     protected function runJob($argument): void {
-        $time = time() - intval($this->config->getAppValue('backup/timestamp', 0));
+        $time = strtotime('+2 min') - intval($this->config->getAppValue('backup/timestamp', 0));
         $interval = intval($this->config->getAppValue('backup/interval', 86400));
         if($time < $interval) return;
 
