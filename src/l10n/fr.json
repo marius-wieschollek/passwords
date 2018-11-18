@@ -82,6 +82,7 @@
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s n’est plus supporté.",
         "Support for %1$s %2$s will be discontinued in version %3$s."                               : "Le support pour %1$s %2$s sera stoppé à partir de la version %3$s.",
         "Passwords requires HTTPS."                                                                 : "L’application nécessite HTTPS.",
+        "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "L'utilisation de %s pour exécuter des jobs d'arrière-plan peut entraîner de longs temps d'attente. Nous vous recommandons d'utiliser Cron.",
         "Please check the system requirements."                                                     : "Veuillez vérifier les exigences systèmes.",
         "Password not shared"                                                                       : "Mot de passe non partagé",
         "A password was not shared with %1$s because it already is"                                 : "Un mot de passe n’a pu être partagé avec %1$s, car il l’est déjà",

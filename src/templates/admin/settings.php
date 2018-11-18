@@ -67,6 +67,12 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['WKHTML', '', $_['support']['eol']])); ?>
         </div>
     <?php endif; ?>
+    <?php if($_['support']['cron'] !== 'cron'): ?>
+        <div class="message warn">
+            <?php p($l->t('Using %s to execute background jobs may cause delays. We recommend using Cron.', ucfirst($_['support']['cron']))); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
 
 
     <form>
