@@ -6,7 +6,7 @@
         </ul>
         <ul class="user-search" :style="getDropDownStyle" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
-                <img :src="getAvatarUrl(match.id)" :alt="match.name" class="avatar">&nbsp;{{match.name}}
+                <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{match.name}}
             </li>
         </ul>
     </div>
@@ -85,14 +85,14 @@
                 }
 
                 let users   = this.getSharedWithUsers,
-                    matches = await API.findSharePartners(this.search);
+                    matches = await API.findSharePartners(this.search, users.length + 10);
                 this.matches = [];
 
                 for(let i in matches) {
                     if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
                     let name = matches[i];
 
-                    this.matches.push({id: i, name});
+                    if(this.matches.length < 5) this.matches.push({id: i, name});
                     this.nameMap[name] = i;
                     this.idMap[i] = name;
                 }

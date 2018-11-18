@@ -409,9 +409,9 @@ export default class SimpleApi {
      *
      * @returns {Promise}
      */
-    findSharePartners(search = '') {
-        if(search.length === 0) return this._createRequest('share.partners');
-        return this._createRequest('share.partners', {search}, 'POST');
+    findSharePartners(search = '', limit = 5) {
+        if(search.length === 0 && limit === 5) return this._createRequest('share.partners');
+        return this._createRequest('share.partners', {search, limit}, 'POST');
     }
 
 
