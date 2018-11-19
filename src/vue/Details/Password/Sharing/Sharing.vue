@@ -2,7 +2,7 @@
     <div class="sharing-container">
         <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
         <ul class="shares" v-for="share in shares" :key="share.id" :data-share-id="share.id">
-            <share :share="share" v-on:delete="deleteShare($event)"></share>
+            <share :share="share" v-on:delete="deleteShare($event)" v-on:update="refreshShares()"></share>
         </ul>
         <ul class="user-search" :style="getDropDownStyle" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
