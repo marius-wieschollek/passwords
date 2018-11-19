@@ -193,8 +193,7 @@ abstract class AbstractMapper extends QBMapper {
             ->from(static::TABLE_NAME, 'a')
             ->innerJoin('a', $toTable, 'b', "a.`{$fromField}` = b.`{$toField}`")
             ->where(
-                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
-                $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
+                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
             );
 
         if($this->userId !== null) {

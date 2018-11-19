@@ -55,6 +55,7 @@ abstract class AbstractService {
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function generateUuidV4(): string {
         return implode('-', [

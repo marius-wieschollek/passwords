@@ -43,6 +43,7 @@ class UserRulesSecurityCheck {
      * @param PasswordRevision $revision
      *
      * @return array
+     * @throws \Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): ?array {
         $maxAgeInDays = $this->userSettingsHelper->get('password/security/age', $revision->getUserId());

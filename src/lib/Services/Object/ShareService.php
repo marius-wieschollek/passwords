@@ -54,6 +54,15 @@ class ShareService extends AbstractService {
     }
 
     /**
+     * @param string $userId
+     *
+     * @return ModelInterface[]
+     */
+    public function findByUserId(string $userId): array {
+        return $this->mapper->findAllByUserId($userId);
+    }
+
+    /**
      * @param string $passwordUuid
      *
      * @return Share[]
