@@ -112,7 +112,7 @@ Scenario('Show Security Section', (I) => {
 });
 
 Scenario('Show Search Section', (I) => {
-    I.amOnPage('/index.php/apps/passwords/#/search/soc');
+    I.amOnPage('/index.php/apps/passwords/#/search/c29j');
     I.waitForInvisible('#app-content.loading', 10);
     I.executeScript(()=> {document.getElementById('searchbox').value=''});
     I.fillField('#searchbox', 'soc');
