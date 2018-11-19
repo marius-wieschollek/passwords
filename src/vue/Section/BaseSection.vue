@@ -192,7 +192,7 @@
             .app-content-right {
                 display    : block;
                 position   : fixed;
-                top        : 45px;
+                top        : 50px;
                 right      : 0;
                 left       : auto;
                 bottom     : 0;
