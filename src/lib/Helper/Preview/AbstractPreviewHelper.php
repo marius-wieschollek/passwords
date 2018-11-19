@@ -13,6 +13,7 @@ use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\Services\LoggingService;
 use OCP\Files\SimpleFS\ISimpleFile;
 
 /**
@@ -48,19 +49,29 @@ abstract class AbstractPreviewHelper {
     protected $fileCacheService;
 
     /**
+     * @var LoggingService
+     */
+    protected $logger;
+
+    /**
      * BetterIdeaHelper constructor.
      *
      * @param HelperService        $helperService
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
+     * @param LoggingService       $loggingService
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
         HelperService $helperService,
         ConfigurationService $config,
-        FileCacheService $fileCacheService
+        FileCacheService $fileCacheService,
+        LoggingService $loggingService
     ) {
-        $this->imageHelper      = $helperService->getImageHelper();
         $this->config           = $config;
+        $this->logger           = $loggingService;
+        $this->imageHelper      = $helperService->getImageHelper();
         $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
     }
 
@@ -138,17 +149,29 @@ abstract class AbstractPreviewHelper {
      * @return mixed
      * @throws ApiException
      */
-    protected function getHttpRequest(string $url): string {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-        $data = $request->sendWithRetry();
+    protected function executeHttpRequest(string $url): string {
+        $request = $this->getHttpRequest($url);
+        $data    = $request->sendWithRetry();
 
-        $type = $request->getInfo()['content_type'];
-        if(substr($type, 0, 5) != 'image') {
+        $info = $request->getInfo();
+        if(substr($info['content_type'], 0, 5) != 'image' || $info['http_code'] > 400) {
+            $this->logger->error("Invalid Preview Api Response, HTTP {$info['http_code']}, {$info['content_type']}");
             throw new ApiException('API Request Failed', 502);
         }
 
         return $data;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return RequestHelper
+     */
+    protected function getHttpRequest(string $url): RequestHelper {
+        $request = new RequestHelper();
+        $request->setUrl($url);
+
+        return $request;
     }
 
     /**
@@ -162,7 +185,7 @@ abstract class AbstractPreviewHelper {
     protected function getPreviewData(string $domain, string $view): string {
         $url = $this->getPreviewUrl($domain, $view);
 
-        return $this->getHttpRequest($url);
+        return $this->executeHttpRequest($url);
     }
 
     /**

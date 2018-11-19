@@ -62,9 +62,9 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if($_['support']['cron']): ?>
+    <?php if($_['support']['cron'] !== 'cron'): ?>
         <div class="message warn">
-            <?php p($l->t('Using ajax background jobs is not recommended and might cause issues.')); ?>
+            <?php p($l->t('Using %s to execute background jobs may cause delays. We recommend using Cron.', ucfirst($_['support']['cron']))); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>

@@ -112,7 +112,7 @@ Scenario('Show Security Section', (I) => {
 });
 
 Scenario('Show Search Section', (I) => {
-    I.amOnPage('/index.php/apps/passwords/#/search/soc');
+    I.amOnPage('/index.php/apps/passwords/#/search/c29j');
     I.waitForInvisible('#app-content.loading', 10);
     I.executeScript(()=> {document.getElementById('searchbox').value=''});
     I.fillField('#searchbox', 'soc');
@@ -178,17 +178,17 @@ Scenario('Show Handbook Section', (I) => {
 
 Scenario('Show Trash Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/all');
-    I.waitForElement('div.row.password', 10);
+    I.waitForElement('div.row.password', 20);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(5)');
 
     I.amOnPage('/index.php/apps/passwords/#/folders');
-    I.waitForElement('div.row.folder', 10);
+    I.waitForElement('div.row.folder', 20);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(2)');
 
     I.amOnPage('/index.php/apps/passwords/#/tags');
-    I.waitForElement('div.row.tag', 10);
+    I.waitForElement('div.row.tag', 20);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(4) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(4) > div.more > div > ul > li:nth-child(2)');
 
@@ -208,6 +208,7 @@ Scenario('Show Password Details', async (I) => {
     I.waitForElement('div.row', 10);
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more');
     I.click('#app-content > div.app-content-left > div.item-list > div:nth-child(3) > div.more > div > ul > li:nth-child(1)');
+    I.moveCursorTo('#nextcloud', 1, 0);
     I.waitForElement('div.item-details', 10);
     I.waitForInvisible('.image-container .image.loading-hidden', 10);
 

@@ -22,6 +22,16 @@ use OCP\IRequest;
 class EnvironmentService {
 
     /**
+     * @var IConfig
+     */
+    protected $config;
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
+
+    /**
      * @var null|string
      */
     protected $userId;
@@ -30,11 +40,6 @@ class EnvironmentService {
      * @var null|string
      */
     protected $userLogin;
-
-    /**
-     * @var ILogger
-     */
-    protected $logger;
 
     /**
      * @var bool
@@ -73,6 +78,7 @@ class EnvironmentService {
         $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
         $this->isCliMode          = PHP_SAPI === 'cli';
         $this->logger             = $logger;
+        $this->config             = $config;
         $this->checkIfCronJob($request);
         $this->checkIfAppUpdate($request);
         $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
@@ -150,10 +156,13 @@ class EnvironmentService {
      * @param IRequest $request
      */
     protected function checkIfCronJob(IRequest $request): void {
-        $cronMode = \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+        $requestUri = $request->getRequestUri();
+        $cronMode = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
-        $this->isCronJob = ($request->getRequestUri() === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+
+        $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
+                           ($requestUri === '/cron.php' && in_array($cronType, ['ajax', 'webcron'])) ||
+                           ($this->isCliMode && $cronType === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**

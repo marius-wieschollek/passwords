@@ -6,7 +6,7 @@
         </ul>
         <ul class="user-search" :style="getDropDownStyle" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
-                <img :src="getAvatarUrl(match.id)" :alt="match.name" class="avatar">&nbsp;{{match.name}}
+                <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{match.name}}
             </li>
         </ul>
     </div>
@@ -42,16 +42,17 @@
                 shares      : this.password.shares,
                 placeholder : Localisation.translate('Search user'),
                 autocomplete: SettingsManager.get('server.sharing.autocomplete'),
-                interval    : null
+                interval    : null,
+                polling     : {interval: null, mode: null}
             };
         },
 
         created() {
-            this.interval = setInterval(() => { this.refreshShares(); }, 10000);
+            this.startPolling();
         },
 
         beforeDestroy() {
-            clearInterval(this.interval);
+            this.stopPolling();
         },
 
         computed: {
@@ -84,14 +85,14 @@
                 }
 
                 let users   = this.getSharedWithUsers,
-                    matches = await API.findSharePartners(this.search);
+                    matches = await API.findSharePartners(this.search, users.length + 10);
                 this.matches = [];
 
                 for(let i in matches) {
                     if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
                     let name = matches[i];
 
-                    this.matches.push({id: i, name});
+                    if(this.matches.length < 5) this.matches.push({id: i, name});
                     this.nameMap[name] = i;
                     this.idMap[i] = name;
                 }
@@ -116,11 +117,11 @@
                         share.receiver = {id: receiver, name: this.idMap[receiver]};
                         this.shares[d.id] = API._processShare(share);
                         this.search = '';
-                        this.$forceUpdate();
+                        this.refreshShares();
                     }
                 ).catch((e) => {
                     if(e.id === '65782183') {
-                        Messages.notification(['The user {uid} does not exist', {uid:receiver}]);
+                        Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
                         let message = e.hasOwnProperty('message') ? e.message:e.statusText;
                         Messages.notification(['Unable to share password: {message}', {message}]);
@@ -136,7 +137,7 @@
                     $event.target.style.color = null;
                 }
             },
-            refreshShares() {
+            reloadShares() {
                 API.showPassword(this.password.id, 'shares')
                    .then((d) => { this.shares = d.shares;});
             },
@@ -162,7 +163,28 @@
             },
             deleteShare($event) {
                 delete this.shares[$event.id];
+                this.refreshShares();
+            },
+            refreshShares() {
+                API.runSharingCron()
+                   .then((d) => { if(d.success) this.reloadShares();});
+
+                this.startPolling();
                 this.$forceUpdate();
+            },
+            startPolling(mode = 'fast') {
+                if(this.polling.mode === mode) return;
+                this.stopPolling();
+
+                let time = mode === 'slow' ? 60000:5000;
+                this.polling.interval = setInterval(() => { this.reloadShares(); }, time);
+            },
+            stopPolling() {
+                if(this.polling.interval !== null) {
+                    clearInterval(this.polling.interval);
+                    this.polling.interval = null;
+                    this.polling.mode = null;
+                }
             }
         },
 
@@ -171,8 +193,18 @@
                 this.shares = value.shares;
                 this.$forceUpdate();
             },
-            search(value) {
+            search() {
                 this.searchUsers();
+            },
+            shares(shares) {
+                for(let id in shares) {
+                    if(shares.hasOwnProperty(id) && shares[id].updatePending) {
+                        API.runSharingCron();
+                        this.startPolling();
+                        return;
+                    }
+                }
+                this.startPolling('slow');
             }
         }
     };

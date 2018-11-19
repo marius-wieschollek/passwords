@@ -66,16 +66,18 @@ class FileDownloadHelper extends RequestHelper {
     }
 
     /**
-     * @param int $maxRetries
+     * @param int|null $retries
+     * @param int|null $timeout
      *
-     * @return mixed
+     * @return bool|null
      */
-    public function sendWithRetry($maxRetries = self::REQUEST_MAX_RETRIES) {
-        $retries = 0;
-        while($retries < $maxRetries) {
+    public function sendWithRetry(int $retries = null, int $timeout = null) {
+        if($retries === null || $retries < 0) $retries = $this->defaultRetryAttempts;
+        if($timeout === null || $timeout < 0) $timeout = $this->defaultRetryTimeout;
+
+        for($i=0; $i<$retries; $i++) {
             if($this->send()) return true;
-            if($this->retryTimeout) sleep($this->retryTimeout);
-            $retries++;
+            if($timeout) sleep($timeout);
         }
 
         return null;

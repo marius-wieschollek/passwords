@@ -24,8 +24,9 @@
  *
  */
 
-namespace OC\App\AppStore\Fetcher;
+namespace OCA\Passwords\Fetcher;
 
+use OC\App\AppStore\Fetcher\Fetcher;
 use OC\App\AppStore\Version\VersionParser;
 use OC\App\CompareVersion;
 use OC\Files\AppData\Factory;
@@ -39,7 +40,7 @@ use OCP\ILogger;
  *
  * @package OC\App\AppStore\Fetcher
  */
-class AppFetcher extends Fetcher {
+class NightlyAppFetcher extends Fetcher {
 
     /** @var CompareVersion */
     private $compareVersion;
@@ -83,8 +84,10 @@ class AppFetcher extends Fetcher {
      * @throws \Exception
      */
     protected function fetch($ETag, $content) {
+        $ETag = $this->config->getAppValue('passwords', 'nightly.etag', '');
         /** @var mixed[] $response */
         $response = parent::fetch($ETag, $content);
+        $this->config->setAppValue('passwords', 'nightly.etag', $response['ETag']);
 
         foreach($response['data'] as $dataKey => $app) {
             $releases = [];

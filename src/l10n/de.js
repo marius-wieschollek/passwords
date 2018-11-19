@@ -211,9 +211,10 @@
             'Reading passwords'                   : 'Lade Passwörter',
             'Importing passwords'                 : 'Importiere Passwörter',
             'Import failed'                       : 'Import fehlgeschlagen',
-            'Import partially failed'             : 'Import teilweise fehlgeschlagen',
+            'Import partially failed'             : 'Import teilweise fehlerhaft',
             'Import successful'                   : 'Import erfolgreich',
             'Import error'                        : 'Importfehler',
+            'Some objects had errors:'            : 'Einige Einträge hatten Probleme:',
             'Invalid file type "{type}"'          : 'Falscher Dateityp "{type}"',
             'Password required'                   : 'Passwort erforderlich',
             'Password invalid'                    : 'Falsches Passwort',
@@ -342,7 +343,12 @@
             'You have to wait {seconds} seconds before you can reset your account.'      : 'Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',
             'Some data is waiting to be synchronized'                                    : 'Einige Daten warten darauf synchronisiert zu werden',
-            '{message} in line {line} character {character}.'                            : '{message} in Zeile {line}, Zeichen {character}.'
+            '{message} in line {line} character {character}.'                            : '{message} in Zeile {line}, Zeichen {character}.',
+            '"{label}" has files attached which can not be imported.'                    : 'An "{label}" sind Dateien angehängt die nicht importiert werden können.',
+            'The type of "{field}" in "{label}" is unknown and can not be imported.'     : 'Der Typ von "{field}" in "{label}" ist unbekannt und kann nicht importiert werden.',
+            'The label of "{field}" in "{label}" exceeds 48 characters and was cut.'     : 'Der Name von "{field}" in "{label}" ist länger als 48 Zeichen und wurde gekürtzt.',
+            'The value of "{field}" in "{label}" exceeds 320 characters and was cut.'    : 'Der Inhalt von "{field}" in "{label}" ist länger als 320 Zeichen und wurde gekürtzt.',
+            'More information can be found in the log. (Press F12)'                      : 'Mehr Details können im Protokoll gefunden werden. (Drücke F12)'
         },
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',

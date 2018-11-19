@@ -28,19 +28,27 @@ class WordsService {
     protected $logger;
 
     /**
-     * @var HelperService
+     * @var \OCA\Passwords\Helper\Words\AbstractWordsHelper
      */
-    protected $helperService;
+    protected $wordsHelper;
+
+    /**
+     * @var \OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper
+     */
+    protected $securityHelper;
 
     /**
      * FaviconService constructor.
      *
      * @param HelperService  $helperService
      * @param LoggingService $logger
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(HelperService $helperService, LoggingService $logger) {
-        $this->helperService = $helperService;
-        $this->logger        = $logger;
+        $this->wordsHelper    = $helperService->getWordsHelper();
+        $this->securityHelper = $helperService->getSecurityHelper();
+        $this->logger         = $logger;
     }
 
     /**
@@ -60,8 +68,7 @@ class WordsService {
             $this->retries++;
             if($this->retries > 5) throw new Exception('Passwords Service Not Responding');
 
-            $wordsGenerator = $this->helperService->getWordsHelper();
-            $words          = $wordsGenerator->getWords($strength);
+            $words          = $this->wordsHelper->getWords($strength);
             $password       = $this->wordsToPassword($words);
 
             if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters);
@@ -69,6 +76,10 @@ class WordsService {
             $amount = $strength == 1 ? 2:$strength;
             if($addNumbers) $password = $this->addNumbers($password, $amount);
             if($addSpecialCharacters) $password = $this->addSpecialCharacters($password, $amount);
+
+            if(!$this->securityHelper->isPasswordSecure($password)) {
+                return $this->getPassword($strength, $addNumbers, $addSpecialCharacters);
+            }
 
             return [$password, $words];
         } catch(\Throwable $e) {

@@ -1,11 +1,14 @@
-#### 2018.11.2 - Feature release
+#### 2018.12.0 - Feature release
+- Improved shared password synchronisation
+
+#### 2018.11.2 - Bugfix release
 - Fixed copy to clipboard
 - Fixed Environment Service in cli mode
 - Fixed invalid security status code
 - Fixed drag and drop scrolling
 - Fixed search link in footer
 
-#### 2018.11.1 - Feature release
+#### 2018.11.1 - Bugfix release
 - Fixed copy to clipboard on iOS
 - Fixed deleting empty tokens
 - Fixed empty user name

@@ -41,7 +41,8 @@
                 return Localisation.translate(title, {href: this.getHref});
             },
             getHref() {
-                if(!this.href) return location.href;
+                if(!this.href || this.href.substr(0, 11) === 'javascript:') return location.href;
+                if(this.href.substr(0, 7) === 'mailto:') return this.href;
                 return SimpleApi.parseUrl(this.href, 'href');
             },
             getTarget() {

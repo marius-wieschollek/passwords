@@ -275,17 +275,20 @@ class ShareApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
+     * @UserRateThrottle(limit=48, period=300)
+     *
      * @param string $search
+     * @param int    $limit
      *
      * @return JSONResponse
      * @throws ApiException
      */
-    public function partners(string $search = ''): JSONResponse {
+    public function partners(string $search = '', int $limit = 5): JSONResponse {
         $this->checkAccessPermissions();
 
         $partners = [];
         if($this->shareSettings->get('autocomplete')) {
-            $partners = $this->shareUserList->getShareUsers($search);
+            $partners = $this->shareUserList->getShareUsers($search, $limit);
         }
 
         return $this->createJsonResponse($partners);
