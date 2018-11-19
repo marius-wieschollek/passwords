@@ -26,7 +26,7 @@
 
 namespace OCA\Passwords\Fetcher;
 
-use OC\App\AppStore\Fetcher\Fetcher;
+use OC\App\AppStore\Fetcher\AppFetcher;
 use OC\App\AppStore\Version\VersionParser;
 use OC\App\CompareVersion;
 use OC\Files\AppData\Factory;
@@ -40,10 +40,12 @@ use OCP\ILogger;
  *
  * @package OC\App\AppStore\Fetcher
  */
-class NightlyAppFetcher extends Fetcher {
+class NightlyAppFetcher extends AppFetcher {
 
-    /** @var CompareVersion */
-    private $compareVersion;
+    /**
+     * @var CompareVersion
+     */
+    protected $compareVersion;
 
     /**
      * @param Factory        $appDataFactory
@@ -66,11 +68,10 @@ class NightlyAppFetcher extends Fetcher {
             $clientService,
             $timeFactory,
             $config,
+            $compareVersion,
             $logger
         );
 
-        $this->fileName = 'apps.json';
-        $this->setEndpoint();
         $this->compareVersion = $compareVersion;
     }
 
@@ -141,26 +142,6 @@ class NightlyAppFetcher extends Fetcher {
         $response['data'] = array_values($response['data']);
 
         return $response;
-    }
-
-    private function setEndpoint() {
-        $versionArray      = explode('.', $this->getVersion());
-        $this->endpointUrl = sprintf(
-            'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
-            $versionArray[0],
-            $versionArray[1],
-            $versionArray[2]
-        );
-    }
-
-    /**
-     * @param string $version
-     * @param string $fileName
-     */
-    public function setVersion(string $version, string $fileName = 'apps.json') {
-        parent::setVersion($version);
-        $this->fileName = $fileName;
-        $this->setEndpoint();
     }
 
     /**
