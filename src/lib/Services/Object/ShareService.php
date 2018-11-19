@@ -57,6 +57,7 @@ class ShareService extends AbstractService {
      * @param string $userId
      *
      * @return ModelInterface[]
+     * @throws \Exception
      */
     public function findByUserId(string $userId): array {
         return $this->mapper->findAllByUserId($userId);
@@ -90,7 +91,10 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourceUpdated(): array {
-        return $this->mapper->findAllByField('source_updated', true, IQueryBuilder::PARAM_BOOL);
+        return $this->mapper->findAllByFields(
+            ['source_updated', true, IQueryBuilder::PARAM_BOOL],
+            ['target_updated', null, IQueryBuilder::PARAM_NULL, 'neq']
+        );
     }
 
     /**
@@ -151,6 +155,7 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share|ModelInterface
+     * @throws \Exception
      */
     public function create(
         string $passwordId,
@@ -194,6 +199,7 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share
+     * @throws \Exception
      */
     protected function createModel(
         string $passwordId,

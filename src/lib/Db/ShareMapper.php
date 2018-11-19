@@ -23,15 +23,10 @@ class ShareMapper extends AbstractMapper {
      * @param int $time
      *
      * @return Share[]
+     * @throws \Exception
      */
     public function findAllExpired(int $time): array {
-        $sql = $this->getStatement();
-
-        $sql->andWhere(
-            $sql->expr()->lte('expires', $sql->createNamedParameter($time, IQueryBuilder::PARAM_INT))
-        );
-
-        return $this->findEntities($sql);
+        return $this->findAllByField('expires', $time, IQueryBuilder::PARAM_INT, 'lte');
     }
 
     /**
@@ -43,14 +38,10 @@ class ShareMapper extends AbstractMapper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findOneBySourcePasswordAndReceiver(string $passwordUuid, string $userId): Share {
-        $sql = $this->getStatement();
-
-        $sql->andWhere(
-            $sql->expr()->eq('source_password', $sql->createNamedParameter($passwordUuid, IQueryBuilder::PARAM_STR)),
-            $sql->expr()->eq('receiver', $sql->createNamedParameter($userId, IQueryBuilder::PARAM_STR))
+        return $this->findOneByFields(
+            ['source_password', $passwordUuid, IQueryBuilder::PARAM_STR],
+            ['receiver', $userId, IQueryBuilder::PARAM_STR]
         );
-
-        return $this->findEntity($sql);
     }
 
     /**
