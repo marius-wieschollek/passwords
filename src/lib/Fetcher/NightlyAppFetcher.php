@@ -24,9 +24,11 @@
  *
  */
 
-namespace OC\App\AppStore\Fetcher;
+namespace OCA\Passwords\Fetcher;
 
+use OC\App\AppStore\Fetcher\Fetcher;
 use OC\App\AppStore\Version\VersionParser;
+use OC\App\CompareVersion;
 use OC\Files\AppData\Factory;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Http\Client\IClientService;
@@ -38,12 +40,17 @@ use OCP\ILogger;
  *
  * @package OC\App\AppStore\Fetcher
  */
-class AppFetcher extends Fetcher {
+class NightlyAppFetcher extends Fetcher {
+
+    /** @var CompareVersion */
+    private $compareVersion;
+
     /**
      * @param Factory        $appDataFactory
      * @param IClientService $clientService
      * @param ITimeFactory   $timeFactory
      * @param IConfig        $config
+     * @param CompareVersion $compareVersion
      * @param ILogger        $logger
      */
     public function __construct(
@@ -51,6 +58,7 @@ class AppFetcher extends Fetcher {
         IClientService $clientService,
         ITimeFactory $timeFactory,
         IConfig $config,
+        CompareVersion $compareVersion,
         ILogger $logger
     ) {
         parent::__construct(
@@ -63,6 +71,7 @@ class AppFetcher extends Fetcher {
 
         $this->fileName = 'apps.json';
         $this->setEndpoint();
+        $this->compareVersion = $compareVersion;
     }
 
     /**
@@ -75,11 +84,11 @@ class AppFetcher extends Fetcher {
      * @throws \Exception
      */
     protected function fetch($ETag, $content) {
+        $ETag = $this->config->getAppValue('passwords', 'nightly.etag', '');
         /** @var mixed[] $response */
         $response = parent::fetch($ETag, $content);
+        $this->config->setAppValue('passwords', 'nightly.etag', $response['ETag']);
 
-        $ncVersion      = $this->getVersion();
-        $ncMajorVersion = explode('.', $ncVersion)[0];
         foreach($response['data'] as $dataKey => $app) {
             $releases = [];
 
@@ -88,15 +97,20 @@ class AppFetcher extends Fetcher {
                 // Exclude all nightly and pre-releases
                 if($this->releaseMatchesStabilityRequirements($release, $app['id'])) {
                     // Exclude all versions not compatible with the current version
-                    $versionParser = new VersionParser();
-                    $version       = $versionParser->getVersion($release['rawPlatformVersionSpec']);
-                    if(
-                        // Major version is bigger or equals to the minimum version of the app
-                        version_compare($ncMajorVersion, $version->getMinimumVersion(), '>=')
-                        // Major version is smaller or equals to the maximum version of the app
-                        && version_compare($ncMajorVersion, $version->getMaximumVersion(), '<=')
-                    ) {
-                        $releases[] = $release;
+                    try {
+                        $versionParser = new VersionParser();
+                        $version       = $versionParser->getVersion($release['rawPlatformVersionSpec']);
+                        $ncVersion     = $this->getVersion();
+                        $min           = $version->getMinimumVersion();
+                        $max           = $version->getMaximumVersion();
+                        $minFulfilled  = $this->compareVersion->isCompatible($ncVersion, $min, '>=');
+                        $maxFulfilled  = $max !== '' &&
+                                         $this->compareVersion->isCompatible($ncVersion, $max, '<=');
+                        if($minFulfilled && $maxFulfilled) {
+                            $releases[] = $release;
+                        }
+                    } catch(\InvalidArgumentException $e) {
+                        $this->logger->logException($e, ['app' => 'appstoreFetcher', 'level' => ILogger::WARN]);
                     }
                 }
             }
@@ -141,9 +155,11 @@ class AppFetcher extends Fetcher {
 
     /**
      * @param string $version
+     * @param string $fileName
      */
-    public function setVersion($version) {
+    public function setVersion(string $version, string $fileName = 'apps.json') {
         parent::setVersion($version);
+        $this->fileName = $fileName;
         $this->setEndpoint();
     }
 

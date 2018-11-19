@@ -11,8 +11,10 @@ use Gmagick;
 use Imagick;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -133,7 +135,8 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', HelperService::WORDS_RANDOM);
+        $current = is_file(LocalWordsHelper::WORDS_DEFAULT) ? HelperService::WORDS_LOCAL:HelperService::WORDS_RANDOM;
+        $current = $this->config->getAppValue('service/words', $current);
 
         return [
             [
@@ -247,6 +250,15 @@ class AdminSettings implements ISettings {
                 'api'     => null
             ],
             [
+                'id'      => HelperService::PREVIEW_WEBSHOT,
+                'label'   => 'Passwords Webshot',
+                'current' => $current === HelperService::PREVIEW_WEBSHOT,
+                'api'     => [
+                    'key'   => WebshotHelper::WEBSHOT_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(WebshotHelper::WEBSHOT_CONFIG_KEY)
+                ]
+            ],
+            [
                 'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
                 'label'   => 'screenshotapi.io',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
@@ -343,7 +355,7 @@ class AdminSettings implements ISettings {
         if(BackgroundJob::getExecutionType() !== '') $cronType = BackgroundJob::getExecutionType();
 
         return [
-            'cron'   => $cronType === 'ajax',
+            'cron'   => $cronType,
             'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
             'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML,
             'php'    => [

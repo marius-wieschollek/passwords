@@ -122,6 +122,7 @@
                 color      : $color-black-light;
                 text-align : right;
                 cursor     : text;
+                word-wrap: break-word;
 
                 &.secret {
                     cursor : pointer;

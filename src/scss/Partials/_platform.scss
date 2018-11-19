@@ -36,5 +36,9 @@
     #app-content {
         overflow-y: initial;
         overflow-x: initial;
+
+        &.show-details .app-content-right {
+            top: 50px;
+        }
     }
 }

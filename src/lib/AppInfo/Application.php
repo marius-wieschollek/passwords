@@ -23,6 +23,7 @@ use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
@@ -58,7 +59,6 @@ class Application extends App {
         $this->registerInternalHooks();
         $this->registerMiddleware();
         $this->registerNotificationNotifier();
-        $this->enableNightlyUpdates();
     }
 
     /**
@@ -77,6 +77,12 @@ class Application extends App {
         $container->registerService(LocalWordsHelper::class,
             function (IAppContainer $c) {
                 return new LocalWordsHelper(
+                    $c->query(IFactory::class)->get('core')->getLanguageCode()
+                );
+            });
+        $container->registerService(RandomCharactersHelper::class,
+            function (IAppContainer $c) {
+                return new RandomCharactersHelper(
                     $c->query(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
@@ -193,19 +199,5 @@ class Application extends App {
                 return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
             }
         );
-    }
-
-    /**
-     *
-     */
-    protected function enableNightlyUpdates(): void {
-        $config = $this->getContainer()->getServer()->getConfig();
-
-        if($config->getAppValue(Application::APP_NAME, 'nightly_updates', false) &&
-            !class_exists('\OC\App\AppStore\Fetcher\AppFetcher', false)) {
-            $version = explode('.', $config->getSystemValue('version'), 2)[0];
-
-            require_once __DIR__.'/../Plugins/'.$version.'/NighltyAppFetcher.php';
-        }
     }
 }

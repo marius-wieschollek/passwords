@@ -66,6 +66,7 @@
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s nebo %s? Pomůžeme Vám!",
         "PHP %s is no longer supported."                                                            : "PHP %s již není podporováno",
         "Passwords requires HTTPS."                                                                 : "Správce hesel vyžaduje HTTPS",
+        "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "Použití %s k provádění úloh na pozadí může způsobit dlouhé čekací časy. Doporučujeme používat Cron.",
         "Please check the system requirements."                                                     : "Zkontrolujte systémové požadavky, prosím.",
         "Password not shared"                                                                       : "Heslo nebylo sdíleno",
         "A password was not shared with %1$s because it already is"                                 : "Heslo nemohlo být sdíleno s %1$s, protože už je s daným uživatelem sdílené.",

@@ -1,3 +1,6 @@
+#### 2018.12.0 - Feature release
+- Improved shared password synchronisation
+
 #### 2018.11.2 - Bugfix release
 - Fixed copy to clipboard
 - Fixed Environment Service in cli mode

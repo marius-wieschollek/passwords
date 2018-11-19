@@ -24,13 +24,18 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @return array
      */
     public function getWords(int $strength): array {
-
         $options = $this->getServiceOptions($strength);
-        $result  = $this->getHttpRequest($options);
 
-        if(empty($result)) return [];
+        for($i = 0; $i < 24; $i++) {
+            $result = trim($this->getHttpRequest($options));
+            if(empty($result)) continue;
 
-        return explode(' ', $result);
+            $words = explode(' ', $result);
+
+            if($this->isWordsArrayValid($words)) return $words;
+        }
+
+        return [];
     }
 
     /**
@@ -57,19 +62,24 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     protected function getServiceOptions(int $strength): array {
         $options = [
             'Pos1'   => 'a',
-            'Level1' => $strength == 4 ? 50:35,
+            'Level1' => $strength == 1 ? 35:20,
             'Pos2'   => $strength == 1 ? 'n':'a',
-            'Level2' => $strength == 1 ? 35:50,
+            'Level2' => $strength == 1 ? 50:30,
         ];
 
-        if($strength >= 2) {
-            $options['Pos3']   = $strength > 2 ? 'a':'n';
-            $options['Level3'] = $strength == 4 ? 60:50;
+        if($strength > 1) {
+            $options['Pos3']   = $strength == 2 ? 'n':'a';
+            $options['Level3'] = $strength == 2 ? 50:40;
         }
 
-        if($strength >= 3) {
-            $options['Pos4']   = 'n';
-            $options['Level4'] = $strength == 4 ? 70:60;
+        if($strength > 2) {
+            $options['Pos4']   = $strength == 3 ? 'n':'a';
+            $options['Level4'] = 50;
+        }
+
+        if($strength == 4) {
+            $options['Pos5']   = 'n';
+            $options['Level5'] = 60;
         }
 
         return $options;

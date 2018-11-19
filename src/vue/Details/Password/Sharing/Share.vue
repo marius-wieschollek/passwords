@@ -45,17 +45,11 @@
         methods: {
             toggleEditable(share) {
                 share.editable = !share.editable;
-                share.updatePending = true;
-
-                API.updateShare(share);
-                this.$forceUpdate();
+                this.update(share);
             },
             toggleShareable(share) {
                 share.shareable = !share.shareable;
-                share.updatePending = true;
-
-                API.updateShare(share);
-                this.$forceUpdate();
+                this.update(share);
             },
             setExpires(share) {
                 let value = share.expires ? new Date(share.expires).toISOString().substring(0, 10):null,
@@ -81,15 +75,19 @@
                         }
 
                         share.expires = expires;
-                        share.updatePending = true;
-                        API.updateShare(share);
-                        this.$forceUpdate();
+                        this.update(share);
                     });
             },
             async deleteAction(share) {
                 await API.deleteShare(share.id);
                 this.$emit('delete', {id: share.id});
             },
+            update(share) {
+                share.updatePending = true;
+                API.updateShare(share);
+                this.$emit('update', {id: share.id});
+                this.$forceUpdate();
+            }
         },
     };
 </script>

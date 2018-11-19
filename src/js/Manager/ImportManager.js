@@ -2,6 +2,7 @@ import API from '@js/Helper/api';
 import Localisation from '@js/Classes/Localisation';
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
+import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
 
 /**
  *
@@ -31,7 +32,7 @@ export class ImportManager {
         this.processed = 0;
         this.progress = progress;
         this._countProgress('Parsing input file');
-        data = await ImportManager._convertInputData(type, data, options);
+        data = await this._convertInputData(type, data, options);
 
         this.total = 0;
         for(let k in data) {
@@ -55,14 +56,15 @@ export class ImportManager {
      * @returns {Promise<*>}
      * @private
      */
-    static async _convertInputData(type, data, options) {
+    async _convertInputData(type, data, options) {
         switch(type) {
             case 'json':
                 data = await ImportJsonConversionHelper.processBackupJson(data, options);
                 break;
             case 'pmanJson':
-                data = await ImportJsonConversionHelper.processPassmanJson(data);
-                break;
+                let result = await PassmanConversionHelper.processJson(data);
+                this.errors = result.errors;
+                return result.data;
             case 'pmanCsv':
                 data = await ImportCsvConversionHelper.processPassmanCsv(data);
                 break;
@@ -417,8 +419,9 @@ export class ImportManager {
                 idMap[info.id] = info.id;
             }
         } catch(e) {
+            let message = e.hasOwnProperty('message') ? e.message:e.statusText;
             console.error(e, password);
-            this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: e.message}));
+            this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: message}));
         }
 
         this._countProgress();

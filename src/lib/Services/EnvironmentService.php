@@ -23,6 +23,16 @@ use OCP\IRequest;
 class EnvironmentService {
 
     /**
+     * @var IConfig
+     */
+    protected $config;
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
+
+    /**
      * @var null|string
      */
     protected $userId;
@@ -31,11 +41,6 @@ class EnvironmentService {
      * @var null|string
      */
     protected $userLogin;
-
-    /**
-     * @var ILogger
-     */
-    protected $logger;
 
     /**
      * @var bool
@@ -74,6 +79,7 @@ class EnvironmentService {
         $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
         $this->isCliMode          = PHP_SAPI === 'cli';
         $this->logger             = $logger;
+        $this->config             = $config;
         $this->checkIfCronJob($request);
         $this->checkIfAppUpdate($request);
         $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
@@ -151,8 +157,12 @@ class EnvironmentService {
      * @param IRequest $request
      */
     protected function checkIfCronJob(IRequest $request): void {
-        $this->isCronJob = ($request->getRequestUri() === '/cron.php' && in_array($this->getBackgroundJobType(), ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $this->getBackgroundJobType() === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        $requestUri = $request->getRequestUri();
+        $cronType   = $this->getBackgroundJobType();
+
+        $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
+                           ($requestUri === '/cron.php' && in_array($cronType, ['ajax', 'webcron'])) ||
+                           ($this->isCliMode && $cronType === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
@@ -176,6 +186,6 @@ class EnvironmentService {
     protected function getBackgroundJobType() {
         if(BackgroundJob::getExecutionType() !== '') return BackgroundJob::getExecutionType();
 
-        return \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+        return $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
     }
 }
