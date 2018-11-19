@@ -419,8 +419,9 @@ export class ImportManager {
                 idMap[info.id] = info.id;
             }
         } catch(e) {
+            let message = e.hasOwnProperty('message') ? e.message:e.statusText;
             console.error(e, password);
-            this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: e.message}));
+            this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: message}));
         }
 
         this._countProgress();
