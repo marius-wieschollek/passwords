@@ -37,7 +37,7 @@ class PasswordMapper extends AbstractMapper {
         $sql      = $this->db->getQueryBuilder();
         $mapField = $source ? 'source_password':'target_password';
 
-        $sql->select(static::TABLE_NAME.'.*')
+        $sql->select('a.*')
             ->from(static::TABLE_NAME, 'a')
             ->innerJoin('a', ShareMapper::TABLE_NAME, 'b', "a.`uuid` = b.`{$mapField}`")
             ->where(
@@ -67,7 +67,7 @@ class PasswordMapper extends AbstractMapper {
     public function findAllOrphanedTargetPasswords(): array {
         $sql = $this->db->getQueryBuilder();
 
-        $sql->select(static::TABLE_NAME.'.*')
+        $sql->select('a.*')
             ->from(static::TABLE_NAME, 'a')
             ->innerJoin('a', ShareMapper::TABLE_NAME, 'b', 'a.`uuid` = b.`target_password`')
             ->where(
