@@ -20,31 +20,6 @@ class ShareMapper extends AbstractMapper {
     const TABLE_NAME = 'passwords_entity_share';
 
     /**
-     * @param int $time
-     *
-     * @return Share[]
-     * @throws \Exception
-     */
-    public function findAllExpired(int $time): array {
-        return $this->findAllByField('expires', $time, IQueryBuilder::PARAM_INT, 'lte');
-    }
-
-    /**
-     * @param string $passwordUuid
-     * @param string $userId
-     *
-     * @return Share|Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     */
-    public function findOneBySourcePasswordAndReceiver(string $passwordUuid, string $userId): Share {
-        return $this->findOneByFields(
-            ['source_password', $passwordUuid, IQueryBuilder::PARAM_STR],
-            ['receiver', $userId, IQueryBuilder::PARAM_STR]
-        );
-    }
-
-    /**
      * @return IQueryBuilder
      */
     protected function getStatement(): IQueryBuilder {

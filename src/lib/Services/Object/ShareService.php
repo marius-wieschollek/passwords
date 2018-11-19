@@ -116,7 +116,10 @@ class ShareService extends AbstractService {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findBySourcePasswordAndReceiver(string $passwordUuid, string $userId): ?Share {
-        return $this->mapper->findOneBySourcePasswordAndReceiver($passwordUuid, $userId);
+        return $this->mapper->findOneByFields(
+            ['source_password', $passwordUuid],
+            ['receiver', $userId]
+        );
     }
 
     /**
@@ -132,7 +135,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findExpired(): array {
-        return $this->mapper->findAllExpired(time());
+        return $this->mapper->findAllByField('expires', time(), IQueryBuilder::PARAM_INT, 'lte');
     }
 
     /**

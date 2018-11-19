@@ -20,6 +20,7 @@ class PasswordMapper extends AbstractMapper {
 
     /**
      * @return Password[]
+     * @throws \Exception
      */
     public function findAllShared(): array {
         return $this->findAllByField('has_shares', true, IQueryBuilder::PARAM_BOOL);

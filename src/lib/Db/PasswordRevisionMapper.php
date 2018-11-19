@@ -46,14 +46,9 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
 
     /**
      * @return PasswordRevision[]
+     * @throws \Exception
      */
     public function findAllWithGoodStatus(): array {
-        $sql = $this->getStatement();
-
-        $sql->andWhere(
-            $sql->expr()->neq('status', $sql->createNamedParameter(2, IQueryBuilder::PARAM_INT))
-        );
-
-        return $this->findEntities($sql);
+        return $this->findAllByField('status', 2, IQueryBuilder::PARAM_INT, 'neq');
     }
 }

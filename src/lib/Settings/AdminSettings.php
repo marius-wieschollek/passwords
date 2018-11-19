@@ -342,8 +342,8 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion = intval(explode('.', \OC::$server->getConfig()->getSystemValue('version'), 2)[0]);
-        $cronType  = \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $cronType  = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
 
         return [
             'cron'   => $cronType,
