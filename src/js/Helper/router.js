@@ -40,6 +40,14 @@ const SectionSettings = async () => {
     }
 };
 
+const SectionApps = async () => {
+    try {
+        return await import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps');
+    } catch(e) {
+        handleChunkLoadingError(e, 'AppsSection');
+    }
+};
+
 Vue.use(Router);
 let router = new Router(
     {
@@ -54,7 +62,8 @@ let router = new Router(
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},
-            {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}}
+            {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}},
+            {name: 'Apps & Extensions', path: '/apps', components: {main: SectionApps}}
         ]
     }
 );

@@ -41,7 +41,9 @@
                 <router-link class="nav-icon-help" :to="{ name: 'Help'}" active-class="active" tag="li">
                     <translate say="Handbook"/>
                 </router-link>
-                <translate tag="li" class="nav-icon-addon" @click="openBrowserAddonPage" say="Browser Extension"/>
+                <router-link class="nav-icon-addon" :to="{ name: 'Apps & Extensions'}" active-class="active" tag="li">
+                    <translate say="Apps & Extensions"/>
+                </router-link>
             </ul>
         </div>
 
@@ -56,7 +58,6 @@
     import '@scss/app';
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
-    import Utility from '@js/Classes/Utility';
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
@@ -85,16 +86,6 @@
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
-            }
-        },
-
-        methods: {
-            openBrowserAddonPage() {
-                if(navigator.userAgent.indexOf('Firefox') !== -1) {
-                    Utility.openLink('https://addons.mozilla.org/firefox/addon/nextcloud-passwords');
-                } else {
-                    Utility.openLink('https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi');
-                }
             }
         }
     };
