@@ -88,7 +88,7 @@ class AdminSettings implements ISettings {
             'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
-            'nightlyUpdates'   => $this->config->getAppValue('nightly_updates', false),
+            'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
             'caches'           => $this->getFileCaches(),
             'support'          => $this->getPlatformSupport(),
             'links'            => [
