@@ -101,7 +101,6 @@ class NightlyAppFetcher extends Fetcher {
                 if(is_array($json)) {
                     $json['timestamp'] = $file->getMTime();
                     $file->putContent(json_encode($json));
-                    $file->write();
                 }
             }
         } catch(\Exception $e) {
@@ -118,7 +117,6 @@ class NightlyAppFetcher extends Fetcher {
 
             $json['timestamp'] = strtotime('+1 day');
             $file->putContent(json_encode($json));
-            $file->write();
 
             $this->config->setAppValue('passwords', 'nightly/etag', $file->getETag());
             $this->dbUpdated = $eTag !== $file->getETag();
@@ -159,7 +157,6 @@ class NightlyAppFetcher extends Fetcher {
      */
     protected function fetch($ETag, $content) {
         $response = parent::fetch($ETag, $content);
-        $this->config->setAppValue('passwords', 'nightly/etag', $response['ETag']);
 
         foreach($response['data'] as $dataKey => $app) {
             $releases = [];
