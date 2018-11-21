@@ -308,6 +308,11 @@
             ' and '                               : ' und ',
             'match'                               : 'passen zu',
             'matches'                             : 'passt zu',
+            'Browsers'                            : 'Browser',
+            'Official Firefox Client'             : 'Offizieller Firefox Client',
+            'Official Chrome Client'              : 'Offizieller Chrome Client',
+            'official'                            : 'offiziell',
+            'created by {author}'                 : 'erstellt von {author}',
             'true'                                : 'ja',
             'false'                               : 'nein',
             'yes'                                 : 'ja',
@@ -349,7 +354,8 @@
             'The type of "{field}" in "{label}" is unknown and can not be imported.'     : 'Der Typ von "{field}" in "{label}" ist unbekannt und kann nicht importiert werden.',
             'The label of "{field}" in "{label}" exceeds 48 characters and was cut.'     : 'Der Name von "{field}" in "{label}" ist länger als 48 Zeichen und wurde gekürtzt.',
             'The value of "{field}" in "{label}" exceeds 320 characters and was cut.'    : 'Der Inhalt von "{field}" in "{label}" ist länger als 320 Zeichen und wurde gekürtzt.',
-            'More information can be found in the log. (Press F12)'                      : 'Mehr Details können im Protokoll gefunden werden. (Drücken Sie F12)'
+            'More information can be found in the log. (Press F12)'                      : 'Mehr Details können im Protokoll gefunden werden. (Drücken Sie F12)',
+            'This app uses an api which is no longer supported.'                         : 'Diese App verwendet eine nicht mehr unterstützte API.'
         },
         longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
