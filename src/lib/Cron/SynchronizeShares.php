@@ -444,6 +444,6 @@ class SynchronizeShares extends AbstractCronJob {
      */
     protected function canExecute(): bool {
         return $this->environment->isCronJob() &&
-               $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-1 day');
+               $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-4 hours');
     }
 }

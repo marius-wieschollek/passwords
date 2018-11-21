@@ -3,10 +3,13 @@
         position         : absolute;
         top              : 0;
         left             : 0;
-        bottom           : 0;
         right            : 0;
         background-color : rgba(0, 0, 0, 0.7);
         z-index          : 3001;
+
+        @media (min-width : 650px) {
+            bottom : 0;
+        }
 
         .title,
         .message {
@@ -47,6 +50,8 @@
                 background-size : 150px;
                 text-align      : center;
                 border-radius   : 3px;
+                color           : $color-white;
+                font-weight     : bold;
 
                 &:hover {
                     background      : $color-green-dark no-repeat center 10px;
@@ -54,10 +59,15 @@
                 }
 
                 @media (max-width : 649px) {
-                    width  : 360px;
-                    margin : 0 auto 25px;
-                    float  : none;
+                    width     : 100%;
+                    max-width : 360px;
+                    margin    : 0 auto 25px;
+                    float     : none;
                 }
+            }
+
+            @media (max-width : 649px) {
+                width : 100%;
             }
         }
 
