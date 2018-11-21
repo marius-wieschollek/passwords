@@ -19,7 +19,7 @@
                         <translate :say="app.label" tag="h3"/>
                         <web target="_blank" class="author" :href="app.source" :text="app.author"/>
                         <translate :say="app.description" tag="div" class="description"/>
-                        <translate say="This app may be incompatible with future releases." tag="div" class="legacy" v-if="app.legacy"/>
+                        <translate say="This app uses an api which is no longer supported." tag="div" class="legacy" v-if="app.legacy"/>
                     </a>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 return {
                     "firefox": {
                         "label"      : "Official Firefox Client",
-                        "author"     : Localisation.translate("official client"),
+                        "author"     : Localisation.translate("official"),
                         "description": "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.",
                         "link"       : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords",
                         "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
@@ -54,7 +54,7 @@
                     },
                     "chrome" : {
                         "label"      : "Official Chrome Client",
-                        "author"     : Localisation.translate("official client"),
+                        "author"     : Localisation.translate("official"),
                         "description": "Our official Chrome extension lets you manage all your passwords from your browser and is available for a wide range of Chrome based Browsers from the Chrome Web Store.",
                         "link"       : "https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi",
                         "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
