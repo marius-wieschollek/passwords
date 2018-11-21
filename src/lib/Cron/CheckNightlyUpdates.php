@@ -36,6 +36,7 @@ class CheckNightlyUpdates extends AbstractCronJob {
         parent::__construct($logger, $environment);
         $this->nightlyAppFetcher = $nightlyAppFetcher;
         $this->config            = $config;
+        $this->setInterval(0);
     }
 
     /**

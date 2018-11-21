@@ -26,7 +26,6 @@
 
 namespace OCA\Passwords\Fetcher;
 
-use OC\App\AppStore\Fetcher\AppFetcher;
 use OC\App\AppStore\Version\VersionParser;
 use OC\App\CompareVersion;
 use OC\Files\AppData\Factory;
@@ -40,7 +39,7 @@ use OCP\ILogger;
  *
  * @package OC\App\AppStore\Fetcher
  */
-class NightlyAppFetcher extends AppFetcher {
+class NightlyAppFetcher extends \OC\App\AppStore\Fetcher\Fetcher {
 
     /**
      * @var CompareVersion
@@ -68,11 +67,42 @@ class NightlyAppFetcher extends AppFetcher {
             $clientService,
             $timeFactory,
             $config,
-            $compareVersion,
             $logger
         );
 
+        $this->fileName = 'apps.json';
+        $this->setEndpoint();
         $this->compareVersion = $compareVersion;
+    }
+
+    /**
+     * Returns the array with the apps on the appstore server
+     *
+     * @return array
+     */
+    public function get() {
+        try {
+            $rootFolder = $this->appData->getFolder('/');
+            $file       = $rootFolder->getFile($this->fileName);
+
+            $eTag  = $this->config->getAppValue('passwords', 'nightly/etag', '');
+            $mTime = $this->config->getAppValue('passwords', 'nightly/mtime', '');
+            if($eTag !== $file->getETag() || $mTime !== $file->getMTime()) $file->delete();
+        } catch(\Exception $e) {
+        }
+
+        $result = parent::get();
+
+        try {
+            $rootFolder = $this->appData->getFolder('/');
+            $file       = $rootFolder->getFile($this->fileName);
+
+            $this->config->setAppValue('passwords', 'nightly/etag', $file->getETag());
+            $this->config->setAppValue('passwords', 'nightly/mtime', $file->getMTime());
+        } catch(\Exception $e) {
+        }
+
+        return $result;
     }
 
     /**
@@ -85,10 +115,8 @@ class NightlyAppFetcher extends AppFetcher {
      * @throws \Exception
      */
     protected function fetch($ETag, $content) {
-        $ETag = $this->config->getAppValue('passwords', 'nightly.etag', '');
-        /** @var mixed[] $response */
         $response = parent::fetch($ETag, $content);
-        $this->config->setAppValue('passwords', 'nightly.etag', $response['ETag']);
+        $this->config->setAppValue('passwords', 'nightly/etag', $response['ETag']);
 
         foreach($response['data'] as $dataKey => $app) {
             $releases = [];
@@ -154,5 +182,28 @@ class NightlyAppFetcher extends AppFetcher {
         $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
 
         return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || in_array($app, $nightlyApps);
+    }
+
+    /**
+     *
+     */
+    private function setEndpoint() {
+        $versionArray      = explode('.', $this->getVersion());
+        $this->endpointUrl = sprintf(
+            'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
+            $versionArray[0],
+            $versionArray[1],
+            $versionArray[2]
+        );
+    }
+
+    /**
+     * @param string $version
+     * @param string $fileName
+     */
+    public function setVersion(string $version, string $fileName = 'apps.json') {
+        parent::setVersion($version);
+        $this->fileName = $fileName;
+        $this->setEndpoint();
     }
 }
