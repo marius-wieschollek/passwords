@@ -47,7 +47,7 @@ class CheckNightlyUpdates extends AbstractCronJob {
     protected function runJob($argument): void {
         if($this->config->getAppValue('nightly_updates', false)) {
             $this->nightlyAppFetcher->get();
-            $this->logger->info('Fetched app list from appstore');
+            if($this->nightlyAppFetcher->isDbUpdated()) $this->logger->info('Checked appstore for nightly versions');
         }
     }
 }
