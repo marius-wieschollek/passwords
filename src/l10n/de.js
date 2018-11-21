@@ -1,5 +1,5 @@
 (function() {
-    let translations = {
+    let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
             'Folders'                             : 'Ordner',
@@ -317,7 +317,7 @@
             'yes'                                 : 'ja',
             'no'                                  : 'nein'
         },
-        helpTexts    = {
+        helpTexts       = {
             'Mark passwords as weak if they are being used for multiple accounts'        : 'Markiert Passwörter als "Unsicher" wenn sie für mehr als ein Konto verwendet werden',
             'Mark passwords as weak if they surpass the specified amount of days'        : 'Markiert Passwörter als "Unsicher" wenn sie das in Tagen angegebene Alter überschreiten',
             'A higher strength results in longer, more complex passwords'                : 'Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter',
@@ -356,15 +356,21 @@
             'More information can be found in the log. (Press F12)'                      : 'Mehr Details können im Protokoll gefunden werden. (Drücke F12)',
             'This app uses an api which is no longer supported.'                         : 'Diese App verwendet eine nicht mehr unterstützte API.'
         },
-        longTexts    = {
+        longTexts       = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.',
             '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.'
+        },
+        appDescriptions = {
+            'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.'                                     : 'Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store kannst du alle deine Passwörter einfach von Firefox aus zugreifen und verwalten.',
+            'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.': 'Unsere offizielle Chrome-Erweiterung ermöglicht es dir, alle deine Passwörter über deinen Browser zu verwalten und ist für viele auf Chromium basierenden Browsern im Chrome Web Store verfügbar.',
+            'Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.'                              : 'Endlich eine moderne, schnelle und benutzerfreundliche App für den Zugriff und die Verwaltung deiner Passwörter von deinem Android-Gerät aus. Holen Sie dir von Google Play.',
+            'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.'              : 'Cloud Password Manager ist ein Passwortmanager, bei dem du die Kontrolle hast. Von deinem Android-Telefon aus kannst du auf die in deiner Nextcloud gespeicherten Passwörter zugreifen.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts),
+        Object.assign(translations, helpTexts, longTexts, appDescriptions),
         'nplurals=2; plural=(n != 1);'
     );
 }());

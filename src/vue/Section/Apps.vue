@@ -55,7 +55,7 @@
                     "chrome" : {
                         "label"      : "Official Chrome Client",
                         "author"     : Localisation.translate("official"),
-                        "description": "Our official Chrome extension lets you manage all your passwords from your browser and is available for a wide range of Chrome based Browsers from the Chrome Web Store.",
+                        "description": "Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.",
                         "link"       : "https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi",
                         "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
@@ -75,7 +75,7 @@
                     "intirix": {
                         "label"      : "Cloud Password Manager",
                         "author"     : Localisation.translate("created by {author}", {author: "intirix"}),
-                        "description": "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your OwnCloud from your Android Phone.",
+                        "description": "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.",
                         "link"       : "https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager",
                         "source"     : "https://github.com/intirix/cloudpasswordmanager",
                         "legacy"     : true
