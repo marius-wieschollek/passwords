@@ -159,10 +159,9 @@ class EnvironmentService {
         $requestUri = $request->getRequestUri();
         $cronMode = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
-
         $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
-                           ($requestUri === '/cron.php' && in_array($cronType, ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $cronType === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+                           ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
+                           ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
