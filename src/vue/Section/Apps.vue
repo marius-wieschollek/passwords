@@ -7,7 +7,7 @@
                 <translate say="Browsers" tag="h1" icon="globe"/>
                 <translate say="Android" tag="h1" icon="android"/>
                 <div class="app-list">
-                    <a class="app" target="_blank" v-for="(app, id) in getBrowserExtensions" :class="id" :href="app.link">
+                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getBrowserExtensions" :class="id" :href="app.link">
                         <translate :say="app.label" tag="h3"/>
                         <web target="_blank" class="author" :class="{'fa fa-certificate':app.official}" :href="app.source" :text="app.author"/>
                         <translate :say="app.description" tag="div" class="description"/>
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="app-list">
-                    <a class="app" target="_blank" v-for="(app, id) in getAndroidApps" :class="[id, app.legacy ? 'legacy':'']" :href="app.link">
+                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getAndroidApps" :class="[id, app.legacy ? 'legacy':'']" :href="app.link">
                         <translate :say="app.label" tag="h3"/>
                         <web target="_blank" class="author" :href="app.source" :text="app.author"/>
                         <translate :say="app.description" tag="div" class="description"/>
@@ -48,7 +48,7 @@
                         "label"      : "Official Firefox Client",
                         "author"     : Localisation.translate("official"),
                         "description": "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.",
-                        "link"       : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=ext-app-page",
+                        "link"       : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=ext-applist",
                         "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
                     },
