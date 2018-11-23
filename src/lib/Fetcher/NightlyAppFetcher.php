@@ -148,7 +148,6 @@ class NightlyAppFetcher extends Fetcher {
         $json['data'] = array_values($json['data']);
         $json['timestamp'] = strtotime('+1 day');
 
-        $this->logger->info(json_encode($json));
         return $json;
     }
 
