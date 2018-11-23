@@ -309,6 +309,7 @@ class SearchManager {
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
                 searchbox.value += e.key;
                 searchbox.focus();
+                e.preventDefault();
                 this.search(searchbox.value);
             }
         });

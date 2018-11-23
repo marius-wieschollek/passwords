@@ -74,7 +74,7 @@ class AdminSettingsController extends Controller {
             $this->config->setAppValue($key, $value);
         }
 
-        if($key === 'nightly_updates') $this->setNightlyStatus($value);
+        if($key === 'nightly/enabled') $this->setNightlyStatus($value);
 
         return new JSONResponse(['status' => 'ok']);
     }

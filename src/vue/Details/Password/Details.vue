@@ -16,7 +16,7 @@
         <translate tag="div" say="Status">
             <translate :say="getSecurityStatus" :class="getSecurityClass.toLowerCase()"/>
         </translate>
-        <translate tag="div" say="SHA1 Hash"><span>{{ password.hash }}</span></translate>
+        <detail-field name="SHA1 Hash" type="text" :value="password.hash" />
     </div>
 </template>
 
