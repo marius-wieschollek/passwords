@@ -59,7 +59,7 @@ class ValidationService {
         if(empty($password->getHash()) || !preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
             throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }
-        if(empty($password->getEdited()) || $password->getEdited() > strtotime('+1 hour')) {
+        if(empty($password->getEdited()) || $password->getEdited() > strtotime('+2 hour')) {
             $password->setEdited(time());
         }
         $password->setFolder(
