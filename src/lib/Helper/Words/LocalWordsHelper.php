@@ -46,7 +46,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @throws Exception
      */
     public function getWords(int $strength): array {
-        $length = $strength == 1 ? 2:$strength;
+        $length = $strength+1;
         $file   = $this->getWordsFile();
 
         for($i = 0; $i < 24; $i++) {
