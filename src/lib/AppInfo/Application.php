@@ -66,8 +66,6 @@ class Application extends App {
     protected function registerDiClasses(): void {
         $container = $this->getContainer();
 
-        $this->registerCompatibilityClasses();
-
         /**
          * Controllers
          */
@@ -185,30 +183,6 @@ class Application extends App {
 
         $userManager->listen('\OC\User', 'preCreateUser', [$hookManager, 'userPreCreateUser']);
         $userManager->listen('\OC\User', 'postDelete', [$hookManager, 'userPostDelete']);
-    }
-
-    /**
-     * @TODO Remove in 2019.1.0
-     */
-    protected function registerCompatibilityClasses(): void {
-        $version = \OC::$server->getConfig()->getSystemValue('version');
-        $version = intval(explode('.', $version, 2)[0]);
-
-        if($version < 14) {
-            $container = $this->getContainer();
-
-            $container->registerService(\OCA\Passwords\Fetcher\NightlyAppFetcher::class,
-                function (IAppContainer $c) {
-                    return new \OCA\Passwords\Fetcher\NightlyAppFetcher(
-                        $c->query(\OC\Files\AppData\Factory::class),
-                        $c->query(\OCP\Http\Client\IClientService::class),
-                        $c->query(\OCP\AppFramework\Utility\ITimeFactory::class),
-                        $c->query(\OCP\IConfig::class),
-                        new \OCA\Passwords\Compatibility\CompareVersion(),
-                        $c->query(\OCP\ILogger::class)
-                    );
-                });
-        }
     }
 
     /**
