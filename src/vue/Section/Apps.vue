@@ -7,17 +7,19 @@
                 <translate say="Browsers" tag="h1" icon="globe"/>
                 <translate say="Android" tag="h1" icon="android"/>
                 <div class="app-list">
-                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getBrowserExtensions" :class="id" :href="app.link">
+                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getBrowserExtensions" :class="id" :href="app.download">
                         <translate :say="app.label" tag="h3"/>
-                        <web target="_blank" class="author" :class="{'fa fa-certificate':app.official}" :href="app.source" :text="app.author"/>
+                        <web target="_blank" class="author" :class="{'fa fa-certificate':app.official}" :href="app.sources" :text="app.author"/>
                         <translate :say="app.description" tag="div" class="description"/>
                     </a>
                 </div>
 
                 <div class="app-list">
-                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getAndroidApps" :class="[id, app.legacy ? 'legacy':'']" :href="app.link">
+                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getAndroidApps" :class="[id, app.legacy ? 'legacy':'']" :href="app.download">
                         <translate :say="app.label" tag="h3"/>
-                        <web target="_blank" class="author" :href="app.source" :text="app.author"/>
+                        <web target="_blank" class="author" :href="app.web" :text="app.author"/>
+                        <span class="dot">⦁</span>
+                        <web target="_blank" class="author" :href="app.sources" text="sources"/>
                         <translate :say="app.description" tag="div" class="description"/>
                         <translate say="This app uses an api which is no longer supported." tag="div" class="legacy" v-if="app.legacy"/>
                     </a>
@@ -48,16 +50,16 @@
                         "label"      : "Official Firefox Client",
                         "author"     : Localisation.translate("official"),
                         "description": "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.",
-                        "link"       : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=ext-applist",
-                        "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
+                        "download"   : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=ext-applist",
+                        "sources"    : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
                     },
                     "chrome" : {
                         "label"      : "Official Chrome Client",
                         "author"     : Localisation.translate("official"),
                         "description": "Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.",
-                        "link"       : "https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi",
-                        "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
+                        "download"   : "https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi",
+                        "sources"    : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
                     }
                 };
@@ -68,16 +70,18 @@
                         "label"      : "Nextcloud Passwords",
                         "author"     : Localisation.translate("created by {author}", {author: "daper"}),
                         "description": "Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.",
-                        "link"       : "https://play.google.com/store/apps/details?id=com.nextcloudpasswords",
-                        "source"     : "https://github.com/daper/nextcloud-passwords-app",
+                        "download"   : "https://play.google.com/store/apps/details?id=com.nextcloudpasswords",
+                        "sources"    : "https://github.com/daper/nextcloud-passwords-app",
+                        "web"        : "https://github.com/daper",
                         "legacy"     : false
                     },
                     "intirix": {
                         "label"      : "Cloud Password Manager",
                         "author"     : Localisation.translate("created by {author}", {author: "intirix"}),
                         "description": "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.",
-                        "link"       : "https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager",
-                        "source"     : "https://github.com/intirix/cloudpasswordmanager",
+                        "download"   : "https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager",
+                        "sources"    : "https://github.com/intirix/cloudpasswordmanager",
+                        "web"        : "https://github.com/intirix",
                         "legacy"     : true
                     }
                 };
@@ -163,6 +167,11 @@
 
                 .legacy {
                     font-weight : bold;
+                }
+
+                .dot {
+                    color  : $color-theme;
+                    margin : 0 0.5rem;
                 }
 
                 &.chrome {

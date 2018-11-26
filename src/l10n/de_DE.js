@@ -313,6 +313,7 @@
             'Official Chrome Client'              : 'Offizieller Chrome Client',
             'official'                            : 'offiziell',
             'created by {author}'                 : 'erstellt von {author}',
+            'sources'                             : 'Quelltext',
             'true'                                : 'ja',
             'false'                               : 'nein',
             'yes'                                 : 'ja',

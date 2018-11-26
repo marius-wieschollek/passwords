@@ -64,12 +64,14 @@ class WordsService {
         bool $addNumbers = false,
         bool $addSpecialCharacters = false
     ) {
+        $strength = $this->validateStrength($strength);
+
         try {
             $this->retries++;
             if($this->retries > 5) throw new Exception('Passwords Service Not Responding');
 
-            $words          = $this->wordsHelper->getWords($strength);
-            $password       = $this->wordsToPassword($words);
+            $words    = $this->wordsHelper->getWords($strength);
+            $password = $this->wordsToPassword($words);
 
             if(strlen($password) < 12) return $this->getPassword($strength, $addNumbers, $addSpecialCharacters);
 
@@ -81,7 +83,7 @@ class WordsService {
                 return $this->getPassword($strength, $addNumbers, $addSpecialCharacters);
             }
 
-            return [$password, $words];
+            return [$password, $words, $strength];
         } catch(\Throwable $e) {
             $this->logger->logException($e);
 
@@ -156,5 +158,20 @@ class WordsService {
         }
 
         return $word;
+    }
+
+    /**
+     * @param int $strength
+     *
+     * @return int
+     */
+    protected function validateStrength(int $strength): int {
+        if($strength < 1) {
+            return 1;
+        } else if($strength > 4) {
+            return 4;
+        }
+
+        return $strength;
     }
 }

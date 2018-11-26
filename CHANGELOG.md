@@ -1,5 +1,10 @@
 #### 2018.12.0 - Feature release
+- Added apps & extensions section
 - Improved shared password synchronisation
+- Improved password generator
+- Improved nightly updates
+- Fixed instant search in chrome
+- Fixed server side validation in password generator
 
 #### 2018.11.2 - Bugfix release
 - Fixed copy to clipboard
