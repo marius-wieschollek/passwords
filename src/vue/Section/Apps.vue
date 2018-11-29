@@ -197,7 +197,7 @@
                 }
 
                 &:hover {
-                    border : 1px solid var(--color-primary);
+                    border : 1px solid $color-theme;
                 }
             }
 
