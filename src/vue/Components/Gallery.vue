@@ -7,7 +7,7 @@
         <i class="prev fa fa-angle-left" aria-hidden="true"></i>
         <i class="next fa fa-angle-right" aria-hidden="true"></i>
         <i class="close fa fa-close" aria-hidden="true"></i>
-        <web class="open fa fa-external-link" css="" :href="imageUrl" v-if="imageUrl"></web>
+        <web class="open fa fa-external-link" :href="imageUrl" v-if="imageUrl"></web>
     </div>
 </template>
 

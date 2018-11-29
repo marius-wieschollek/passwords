@@ -455,39 +455,39 @@
                 background-color   : $color-grey-lighter;
 
                 &::-moz-progress-bar {
-                    background-color : $color-theme;
+                    background-color : var(--color-primary);
                     border-radius    : 3px;
                     transition       : background-color 0.25s ease-in-out;
                 }
 
                 &::-webkit-progress-value {
-                    background-color : $color-theme;
+                    background-color : var(--color-primary);
                     border-radius    : 3px;
                     transition       : background-color 0.25s ease-in-out;
                 }
 
                 &.success {
                     &::-moz-progress-bar {
-                        background-color : $color-green;
+                        background-color : var(--color-success);
                     }
                     &::-webkit-progress-value {
-                        background-color : $color-green;
+                        background-color : var(--color-success);
                     }
                 }
                 &.warn {
                     &::-moz-progress-bar {
-                        background-color : $color-yellow;
+                        background-color : var(--color-warning);
                     }
                     &::-webkit-progress-value {
-                        background-color : $color-yellow;
+                        background-color : var(--color-warning);
                     }
                 }
                 &.error {
                     &::-moz-progress-bar {
-                        background-color : $color-red-dark;
+                        background-color : var(--color-error)
                     }
                     &::-webkit-progress-value {
-                        background-color : $color-red-dark;
+                        background-color : var(--color-error)
                     }
                 }
             }

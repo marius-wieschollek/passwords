@@ -147,7 +147,7 @@
                     font-style : italic;
 
                     &.fa.fa-certificate {
-                        color       : $color-green !important;
+                        color       : var(--color-success) !important;
                         font-family : var(--font-face);
 
                         &:before {
@@ -170,7 +170,7 @@
                 }
 
                 .dot {
-                    color  : $color-theme;
+                    color  : var(--color-primary);
                     margin : 0 0.5rem;
                 }
 
@@ -187,7 +187,7 @@
                 }
 
                 &.legacy {
-                    background-color : transparentize($color-black, 0.85);
+                    background-color : var(--color-loading-light);
                     opacity          : 0.6;
                     transition       : opacity 0.15s ease-in-out;
 
@@ -197,7 +197,7 @@
                 }
 
                 &:hover {
-                    border : 1px solid $color-theme;
+                    border : 1px solid var(--color-primary);
                 }
             }
 
