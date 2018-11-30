@@ -122,11 +122,11 @@
             cursor    : pointer;
             padding   : 0.75rem;
             font-size : 1.3rem;
-            color     : $color-black;
+            color     : var(--color-main-text);
             z-index   : 1;
 
             &:hover {
-                text-shadow : 0 0 2px $color-white;
+                text-shadow : 0 0 2px var(--color-main-background);
             }
         }
 
@@ -152,7 +152,7 @@
 
                 &:hover,
                 &.active {
-                    color : $color-yellow;
+                    color : var(--color-warning);
                 }
             }
 

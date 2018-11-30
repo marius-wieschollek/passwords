@@ -24,12 +24,12 @@ section.section.passwords {
         margin-bottom : .25em;
 
         &.error {
-            background-color : $color-red-dark;
-            color            : $color-white;
+            background-color : var(--color-error);
+            color            : var(--color-primary-text);
         }
 
         &.warn {
-            background-color : $color-yellow;
+            background-color : var(--color-warning);
         }
 
         &:first-of-type {

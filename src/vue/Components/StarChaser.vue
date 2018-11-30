@@ -363,7 +363,7 @@
                 display      : inline-block;
                 margin-right : 0.25rem;
                 animation    : life .9s linear infinite;
-                color        : $color-white;
+                color        : var(--color-primary-text);
                 font-size    : 42px;
                 font-family  : "Comic Sans MS", sans-serif;
                 line-height  : 36px;
@@ -438,7 +438,7 @@
             }
 
             .text {
-                color         : $color-white;
+                color         : var(--color-primary-text);
                 font-size     : 24px;
                 font-family   : "Comic Sans MS", sans-serif;
                 line-height   : 28px;

@@ -224,7 +224,7 @@
 
                     &:hover,
                     &.active {
-                        color : $color-yellow;
+                        color : var(--color-warning);
                     }
                 }
 
@@ -307,17 +307,17 @@
 
                     &:active,
                     &:hover {
-                        color : $color-black;
+                        color : var(--color-main-text);
                     }
 
                     &.ok {
-                        color : $color-green;
+                        color : var(--color-success);
                     }
                     &.warn {
-                        color : $color-yellow;
+                        color : var(--color-warning);
                     }
                     &.fail {
-                        color : $color-red;
+                        color : var(--color-error);
                     }
                 }
 
@@ -354,9 +354,9 @@
                             &:active,
                             &:hover {
                                 background-color : darken($color-white, 3);
-                                color            : $color-black;
+                                color            : var(--color-main-text);
 
-                                a { color : $color-black; }
+                                a { color : var(--color-main-text); }
                             }
                         }
                     }
@@ -381,7 +381,7 @@
 
                         &:hover,
                         &.active {
-                            color : $color-yellow;
+                            color : var(--color-warning);
                         }
                     }
                 }

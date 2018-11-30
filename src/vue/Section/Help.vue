@@ -229,7 +229,7 @@
 
                     @keyframes Highlight {
                         0% {background-color : transparent}
-                        50% {background-color : $color-green}
+                        50% {background-color : var(--color-success)}
                         100% {background-color : transparent}
                     }
                 }

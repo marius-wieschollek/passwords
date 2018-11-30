@@ -67,7 +67,7 @@
                 position         : absolute;
                 right            : 0;
                 background-color : transparentize($color-black, 0.25);
-                color            : $color-white;
+                color            : var(--color-primary-text);
                 padding          : 10px;
                 border-radius    : 3px;
                 width            : 200px;

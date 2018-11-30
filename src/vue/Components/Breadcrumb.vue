@@ -283,14 +283,8 @@
                 position         : sticky;
                 min-width        : 44px;
                 top              : 0;
-                background-color : $color-white;
                 opacity          : 1;
-                color            : transparentize($color-black, 0.4);
                 z-index          : 1;
-
-                &:hover {
-                    color : $color-black
-                }
             }
         }
     }

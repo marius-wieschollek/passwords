@@ -155,7 +155,7 @@
             max-width : none;
 
             &.error {
-                border : 1px solid $color-red;
+                border : 1px solid var(--color-error);
             }
         }
 

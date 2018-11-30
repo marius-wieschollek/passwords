@@ -55,7 +55,7 @@
                 &.active { border-bottom : 1px solid var(--color-primary); }
 
                 &.active {
-                    color       : $color-black;
+                    color       : var(--color-main-text);
                     font-weight : 600;
                 }
 

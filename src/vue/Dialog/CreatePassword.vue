@@ -1,13 +1,13 @@
 <template>
     <div class="background" id="passwords-create-new">
         <div class="window">
-            <div class="title" :style="getTitleStyle">
+            <div class="title">
                 <translate :say="title"/>
                 <i class="fa fa-times close" @click="closeWindow()"></i>
             </div>
             <form class="content" v-on:submit.prevent="submitAction()">
                 <div class="form left">
-                    <translate tag="div" class="section-title" :style="getSectionStyle" say="Properties"/>
+                    <translate tag="div" class="section-title" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
                         <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username">
@@ -69,7 +69,6 @@
     import Messages from "@js/Classes/Messages";
     import Localisation from '@js/Classes/Localisation';
     import EnhancedApi from "@js/ApiClient/EnhancedApi";
-    import ThemeManager from '@js/Manager/ThemeManager';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
@@ -99,20 +98,6 @@
                 () => {document.getElementById('password-password').removeAttribute('readonly');},
                 250
             );
-        },
-
-        computed: {
-            getTitleStyle() {
-                return {
-                    color          : ThemeManager.getContrastColor(),
-                    backgroundColor: ThemeManager.getColor()
-                };
-            },
-            getSectionStyle() {
-                return {
-                    borderColor: ThemeManager.getColor()
-                };
-            }
         },
 
         methods: {
@@ -238,7 +223,7 @@
                 height                : 88%;
                 z-index               : 9999;
                 overflow              : hidden;
-                background-color      : $color-white;
+                background-color      : var(--color-main-background);
                 border-radius         : 3px;
                 box-sizing            : border-box;
                 display               : grid;
@@ -249,9 +234,11 @@
                 align-items           : stretch;
 
                 .title {
-                    grid-area : title;
-                    padding   : 1rem;
-                    font-size : 1.25rem;
+                    grid-area        : title;
+                    padding          : 1rem;
+                    font-size        : 1.25rem;
+                    color            : var(--color-primary-text);
+                    background-color : var(--color-primary);
 
                     .close {
                         float  : right;
@@ -311,7 +298,7 @@
                     .section-title {
                         font-size     : 1.1rem;
                         padding       : 0 0 0.25rem 0;
-                        border-bottom : 1px solid $color-grey-light;
+                        border-bottom : 1px solid var(--color-primary);
                     }
 
                     .password-field {
