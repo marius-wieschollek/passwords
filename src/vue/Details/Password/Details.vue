@@ -138,8 +138,8 @@
                 &.secret {
                     cursor : pointer;
 
-                    &:hover {
-                        font-family : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
+                    &.visible {
+                        font-family : var(--pw-mono-font-face);
                     }
                 }
 

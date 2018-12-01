@@ -2,7 +2,7 @@
     <div>
         {{name}}
         <web :href="getLink" v-if="['url','email','file'].indexOf(type) !== -1">{{ getLinkLabel }}</web>
-        <span @mouseover="showValue=true" @mouseout="showValue=false" class="secret" v-if="type === 'secret'" @click="copyValue">{{ getSecretValue }}</span>
+        <span @mouseenter="showValue=true" @mouseout="showValue=false" :class="getSecretClass" v-if="type === 'secret'" @click="copyValue">{{ getSecretValue }}</span>
         <span v-if="type === 'text'" @click="copyValue">{{ value }}</span>
     </div>
 </template>
@@ -36,7 +36,10 @@
         },
         computed  : {
             getSecretValue() {
-                return this.showValue ? this.value:''.padStart(this.value.length, '*');
+                return this.showValue ? this.value:''.padStart(12, '⚫');
+            },
+            getSecretClass() {
+                return this.showValue ? 'secret visible':'secret';
             },
             getLinkLabel() {
                 if(this.type === 'file' && this.value.indexOf('/') !== -1) return this.value.substr(this.value.lastIndexOf('/') + 1);
