@@ -65,7 +65,7 @@ class FolderService extends AbstractModelService {
      * @return Folder[]
      */
     public function findByParent(string $uuid): array {
-        return $this->mapper->getByParentFolder($uuid);
+        return $this->mapper->findAllByParentFolder($uuid);
     }
 
     /**

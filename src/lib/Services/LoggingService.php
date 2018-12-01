@@ -9,7 +9,6 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\AppInfo\Application;
 use OCP\ILogger;
-use OCP\Util;
 
 /**
  * Class LoggingService
@@ -39,7 +38,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function fatal($message, array $context = []): LoggingService {
-        return $this->log(Util::FATAL, $message, $context);
+        return $this->log(ILogger::FATAL, $message, $context);
     }
 
     /**
@@ -49,7 +48,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function error($message, array $context = []): LoggingService {
-        return $this->log(Util::ERROR, $message, $context);
+        return $this->log(ILogger::ERROR, $message, $context);
     }
 
     /**
@@ -59,7 +58,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function warning($message, array $context = []): LoggingService {
-        return $this->log(Util::WARN, $message, $context);
+        return $this->log(ILogger::WARN, $message, $context);
     }
 
     /**
@@ -69,7 +68,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function info($message, array $context = []): LoggingService {
-        return $this->log(Util::INFO, $message, $context);
+        return $this->log(ILogger::INFO, $message, $context);
     }
 
     /**
@@ -79,7 +78,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function debug($message, array $context = []): LoggingService {
-        return $this->log(Util::DEBUG, $message, $context);
+        return $this->log(ILogger::DEBUG, $message, $context);
     }
 
     /**
@@ -93,7 +92,7 @@ class LoggingService {
      * @return LoggingService
      */
     public function debugOrInfo($message, int $priority, array $context = []): LoggingService {
-        $level = $priority < 1 ? Util::DEBUG:Util::INFO;
+        $level = $priority < 1 ? ILogger::DEBUG:ILogger::INFO;
 
         return $this->log($level, $message, $context);
     }

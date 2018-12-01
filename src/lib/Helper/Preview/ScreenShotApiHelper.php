@@ -47,11 +47,10 @@ class ScreenShotApiHelper extends AbstractPreviewHelper {
             throw new Exception('screenshotapi.io service refused request: '.$image['message']);
         }
 
-        $start            = time();
-        $maxExecutionTime = (ini_get('max_execution_time') / 2) - 2;
-        while(time() - $start < $maxExecutionTime) {
+        $max = $this->getMaxRequests();
+        for($i = 0; $i < $max; $i++) {
             $request = $this->getAuthorizedRequest(self::RETRIEVE_URL.$image['key']);
-            $check   = json_decode($request->sendWithRetry(1), true);
+            $check   = json_decode($request->send(), true);
 
             if($check['status'] === 'ready') {
                 $load = new RequestHelper($check['imageUrl']);
@@ -139,5 +138,14 @@ class ScreenShotApiHelper extends AbstractPreviewHelper {
 
             return $this->getImageData($options);
         }
+    }
+
+    /**
+     * @return int
+     */
+    protected function getMaxRequests(): int {
+        $time = intval(ini_get('max_execution_time'));
+
+        return $time <= 0 ? 30:($time / 2) - 1;
     }
 }

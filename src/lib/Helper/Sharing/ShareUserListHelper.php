@@ -19,7 +19,8 @@ use OCP\Share\IManager;
  */
 class ShareUserListHelper {
 
-    const USER_SEARCH_LIMIT = 512;
+    const USER_SEARCH_MINIMUM = 5;
+    const USER_SEARCH_LIMIT = 256;
 
     /**
      * @var IUser
@@ -69,30 +70,35 @@ class ShareUserListHelper {
 
     /**
      * @param string $pattern
+     * @param int    $limit
      *
      * @return array
      */
-    public function getShareUsers(string $pattern = ''): array {
-        if($this->shareManager->shareWithGroupMembersOnly()) return $this->getUsersFromUserGroup($pattern);
+    public function getShareUsers(string $pattern = '', int $limit = self::USER_SEARCH_LIMIT): array {
+        if(empty($limit) || $limit < self::USER_SEARCH_MINIMUM) $limit = self::USER_SEARCH_MINIMUM;
+        if($limit > self::USER_SEARCH_LIMIT) $limit = self::USER_SEARCH_LIMIT;
 
-        return $this->getAllUsers($pattern);
+        if($this->shareManager->shareWithGroupMembersOnly()) return $this->getUsersFromUserGroup($pattern, $limit);
+
+        return $this->getAllUsers($pattern, $limit);
     }
 
     /**
      * @param string $pattern
+     * @param int    $limit
      *
      * @return array
      */
-    protected function getUsersFromUserGroup(string $pattern): array {
+    protected function getUsersFromUserGroup(string $pattern, int $limit): array {
         $partners   = [];
         $userGroups = $this->groupManager->getUserGroupIds($this->user);
         foreach($userGroups as $userGroup) {
-            $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, self::USER_SEARCH_LIMIT);
+            $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, $limit);
             foreach($users as $uid => $name) {
                 if($uid == $this->userId) continue;
                 $partners[ $uid ] = $name;
             }
-            if(count($partners) >= self::USER_SEARCH_LIMIT) break;
+            if(count($partners) >= $limit) break;
         }
 
         return $partners;
@@ -100,12 +106,13 @@ class ShareUserListHelper {
 
     /**
      * @param string $pattern
+     * @param int    $limit
      *
-     * @return mixed
+     * @return array
      */
-    protected function getAllUsers(string $pattern) {
+    protected function getAllUsers(string $pattern, int $limit): array {
         $partners = [];
-        $usersTmp = $this->userManager->search($pattern, self::USER_SEARCH_LIMIT);
+        $usersTmp = $this->userManager->search($pattern, $limit);
 
         foreach($usersTmp as $user) {
             if($user->getUID() == $this->userId) continue;

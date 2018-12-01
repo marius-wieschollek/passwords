@@ -13,7 +13,7 @@ use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
 /**
- * Class DeleteOrphanedObjects
+ * Class DatabaseObjectRepair
  *
  * @package OCA\Passwords\Migration
  */

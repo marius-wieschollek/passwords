@@ -178,12 +178,6 @@
                 <notnull>true</notnull>
             </field>
             <field>
-                <name>favourite</name>
-                <type>boolean</type>
-                <notnull>true</notnull>
-                <default>false</default>
-            </field>
-            <field>
                 <name>favorite</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
@@ -201,12 +195,6 @@
                 <default>GOOD</default>
                 <type>text</type>
                 <length>12</length>
-                <notnull>true</notnull>
-            </field>
-            <field>
-                <name>client</name>
-                <type>text</type>
-                <length>36</length>
                 <notnull>true</notnull>
             </field>
             <field>
@@ -354,12 +342,6 @@
                 <type>clob</type>
             </field>
             <field>
-                <name>favourite</name>
-                <type>boolean</type>
-                <notnull>true</notnull>
-                <default>false</default>
-            </field>
-            <field>
                 <name>favorite</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
@@ -376,12 +358,6 @@
                 <type>boolean</type>
                 <notnull>true</notnull>
                 <default>false</default>
-            </field>
-            <field>
-                <name>client</name>
-                <type>text</type>
-                <length>36</length>
-                <notnull>true</notnull>
             </field>
             <field>
                 <name>deleted</name>
@@ -520,12 +496,6 @@
                 <type>clob</type>
             </field>
             <field>
-                <name>favourite</name>
-                <type>boolean</type>
-                <notnull>true</notnull>
-                <default>false</default>
-            </field>
-            <field>
                 <name>favorite</name>
                 <type>boolean</type>
                 <notnull>true</notnull>
@@ -542,12 +512,6 @@
                 <type>boolean</type>
                 <notnull>true</notnull>
                 <default>false</default>
-            </field>
-            <field>
-                <name>client</name>
-                <type>text</type>
-                <length>36</length>
-                <notnull>true</notnull>
             </field>
             <field>
                 <name>deleted</name>

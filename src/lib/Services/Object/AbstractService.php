@@ -55,6 +55,7 @@ abstract class AbstractService {
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function generateUuidV4(): string {
         return implode('-', [
@@ -70,7 +71,7 @@ abstract class AbstractService {
      * @return array
      */
     public function findDeleted(): array {
-        return $this->mapper->findDeleted();
+        return $this->mapper->findAllDeleted();
     }
 
     /**

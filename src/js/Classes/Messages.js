@@ -27,11 +27,10 @@ class Messages {
      */
     alert(message, title = 'Alert') {
         return new Promise((resolve) => {
-            message = Localisation.translateArray(message);
-            title = Localisation.translateArray(title);
-            let callback = function() { resolve({}); };
+            message = Messages._translate(message);
+            title = Messages._translate(title);
 
-            OC.dialogs.alert(message, title, callback, true);
+            OC.dialogs.alert(message, title, resolve, true);
         });
     }
 
@@ -42,12 +41,11 @@ class Messages {
      * @returns {Promise}
      */
     info(message, title = 'Info') {
-        return new Promise((resolve, reject) => {
-            message = Localisation.translateArray(message);
-            title = Localisation.translateArray(title);
-            let callback = function(success) { success ? resolve({}):reject({}); };
+        return new Promise((resolve) => {
+            message = Messages._translate(message);
+            title = Messages._translate(title);
 
-            OC.dialogs.info(message, title, callback, true);
+            OC.dialogs.info(message, title, resolve, true);
         });
     }
 

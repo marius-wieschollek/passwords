@@ -13,6 +13,7 @@ use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
  * Class ShareService
@@ -53,6 +54,16 @@ class ShareService extends AbstractService {
     }
 
     /**
+     * @param string $userId
+     *
+     * @return ModelInterface[]
+     * @throws \Exception
+     */
+    public function findByUserId(string $userId): array {
+        return $this->mapper->findAllByUserId($userId);
+    }
+
+    /**
      * @param string $passwordUuid
      *
      * @return Share[]
@@ -60,7 +71,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourcePassword(string $passwordUuid): array {
-        return $this->mapper->findAllMatching(['source_password', $passwordUuid]);
+        return $this->mapper->findAllByField('source_password', $passwordUuid);
     }
 
     /**
@@ -71,7 +82,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findByTargetPassword(string $passwordUuid): ?Share {
-        return $this->mapper->findOneMatching(['target_password', $passwordUuid]);
+        return $this->mapper->findOneByField('target_password', $passwordUuid);
     }
 
     /**
@@ -80,7 +91,10 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findBySourceUpdated(): array {
-        return $this->mapper->findAllMatching(['source_updated', true]);
+        return $this->mapper->findAllByFields(
+            ['source_updated', true, IQueryBuilder::PARAM_BOOL],
+            ['target_updated', null, IQueryBuilder::PARAM_NULL, 'neq']
+        );
     }
 
     /**
@@ -89,7 +103,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findByTargetUpdated(): array {
-        return $this->mapper->findAllMatching(['target_updated', true]);
+        return $this->mapper->findAllByField('target_updated', true, IQueryBuilder::PARAM_BOOL);
     }
 
     /**
@@ -98,10 +112,14 @@ class ShareService extends AbstractService {
      *
      * @return Share|EntityInterface|null
      *
-     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findBySourcePasswordAndReceiver(string $passwordUuid, string $userId): ?Share {
-        return $this->mapper->findOneMatching([['source_password', $passwordUuid], ['receiver', $userId]]);
+        return $this->mapper->findOneByFields(
+            ['source_password', $passwordUuid],
+            ['receiver', $userId]
+        );
     }
 
     /**
@@ -109,7 +127,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findNew(): array {
-        return $this->mapper->findAllMatching(['target_password', null]);
+        return $this->mapper->findAllByField('target_password', null, IQueryBuilder::PARAM_NULL);
     }
 
     /**
@@ -117,7 +135,7 @@ class ShareService extends AbstractService {
      * @throws \Exception
      */
     public function findExpired(): array {
-        return $this->mapper->findAllMatching(['expires', time(), '']);
+        return $this->mapper->findAllByField('expires', time(), IQueryBuilder::PARAM_INT, 'lte');
     }
 
     /**
@@ -132,16 +150,6 @@ class ShareService extends AbstractService {
     }
 
     /**
-     * @param string $userId
-     *
-     * @return ModelInterface[]
-     * @throws \Exception
-     */
-    public function findByUserId(string $userId): array {
-        return $this->mapper->findAllMatching([['user_id', $userId, '=', 'OR'], ['receiver', $userId]]);
-    }
-
-    /**
      * @param string   $passwordId
      * @param string   $receiverId
      * @param string   $type
@@ -150,6 +158,7 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share|ModelInterface
+     * @throws \Exception
      */
     public function create(
         string $passwordId,
@@ -192,6 +201,7 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share
+     * @throws \Exception
      */
     protected function createModel(
         string $passwordId,

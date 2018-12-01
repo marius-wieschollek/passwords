@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Fetcher\NightlyAppFetcher;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -34,17 +35,24 @@ class AdminSettingsController extends Controller {
     protected $fileCacheService;
 
     /**
+     * @var NightlyAppFetcher
+     */
+    protected $nightlyAppFetcher;
+
+    /**
      * AdminSettingsController constructor.
      *
      * @param string               $appName
      * @param IRequest             $request
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
+     * @param NightlyAppFetcher    $nightlyAppFetcher
      */
-    public function __construct($appName, IRequest $request, ConfigurationService $config, FileCacheService $fileCacheService) {
+    public function __construct($appName, IRequest $request, ConfigurationService $config, FileCacheService $fileCacheService, NightlyAppFetcher $nightlyAppFetcher) {
         parent::__construct($appName, $request);
-        $this->config           = $config;
-        $this->fileCacheService = $fileCacheService;
+        $this->config            = $config;
+        $this->fileCacheService  = $fileCacheService;
+        $this->nightlyAppFetcher = $nightlyAppFetcher;
     }
 
     /**
@@ -66,7 +74,7 @@ class AdminSettingsController extends Controller {
             $this->config->setAppValue($key, $value);
         }
 
-        if($key === 'nightly_updates') $this->setNightlyStatus($value);
+        if($key === 'nightly/enabled') $this->setNightlyStatus($value);
 
         return new JSONResponse(['status' => 'ok']);
     }
@@ -98,9 +106,11 @@ class AdminSettingsController extends Controller {
 
         if($enabled) {
             if(!in_array(Application::APP_NAME, $nightlyApps)) $nightlyApps[] = Application::APP_NAME;
+            $this->nightlyAppFetcher->get();
         } else {
             $index = array_search(Application::APP_NAME, $nightlyApps);
-            if($index !== FALSE) unset($nightlyApps[$index]);
+            if($index !== false) unset($nightlyApps[ $index ]);
+            $this->nightlyAppFetcher->clearDb();
         }
 
         $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);

@@ -7,14 +7,14 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\AppFramework\Db\Entity;
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class PasswordTagRelationMapper
  *
  * @package OCA\Passwords\Db
  */
 class PasswordTagRelationMapper extends AbstractMapper {
-
     const TABLE_NAME = 'passwords_relation_password_tag';
-
-    protected $allowedFields = ['id', 'user', 'password', 'tag'];
 }

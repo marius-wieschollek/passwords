@@ -10,7 +10,6 @@ namespace OCA\Passwords\Services;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\AppInfo\Application;
-use OCP\BackgroundJob;
 use OCP\IConfig;
 use OCP\ILogger;
 use OCP\IRequest;
@@ -23,6 +22,16 @@ use OCP\IRequest;
 class EnvironmentService {
 
     /**
+     * @var IConfig
+     */
+    protected $config;
+
+    /**
+     * @var ILogger
+     */
+    protected $logger;
+
+    /**
      * @var null|string
      */
     protected $userId;
@@ -31,11 +40,6 @@ class EnvironmentService {
      * @var null|string
      */
     protected $userLogin;
-
-    /**
-     * @var ILogger
-     */
-    protected $logger;
 
     /**
      * @var bool
@@ -74,6 +78,7 @@ class EnvironmentService {
         $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
         $this->isCliMode          = PHP_SAPI === 'cli';
         $this->logger             = $logger;
+        $this->config             = $config;
         $this->checkIfCronJob($request);
         $this->checkIfAppUpdate($request);
         $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
@@ -100,7 +105,7 @@ class EnvironmentService {
         if($this->userLogin !== null) return $this->userLogin;
 
         try {
-            if(isset($_SERVER['PHP_AUTH_USER'])) {
+            if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
                 $this->userLogin = $_SERVER['PHP_AUTH_USER'];
             } else {
                 $sessionId = \OC::$server->getSession()->getId();
@@ -112,7 +117,8 @@ class EnvironmentService {
                 $this->userLogin = $loginName !== null ? $loginName:$this->userId;
             }
         } catch(\Throwable $e) {
-            $this->logger->logException($e);
+            $this->logger->logException($e, ['app' => Application::APP_NAME]);
+            $this->userLogin = $this->userId;
         }
 
         return $this->userLogin;
@@ -150,8 +156,12 @@ class EnvironmentService {
      * @param IRequest $request
      */
     protected function checkIfCronJob(IRequest $request): void {
-        $this->isCronJob = ($request->getRequestUri() === '/cron.php' && in_array($this->getBackgroundJobType(), ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $this->getBackgroundJobType() === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        $requestUri = $request->getRequestUri();
+        $cronMode = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+
+        $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
+                           ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
+                           ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
@@ -159,22 +169,12 @@ class EnvironmentService {
      */
     protected function checkIfAppUpdate(IRequest $request): void {
         $this->isAppUpdate = false;
-        if($this->isCronJob) return;
+        if($this->isCronJob || $this->isCliMode) return;
 
         try {
             $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
-            $this->logger->logException($e);
+            $this->logger->logException($e, ['app' => Application::APP_NAME]);
         }
-    }
-
-    /**
-     * @return string
-     * @TODO remove in 2019.1.0
-     */
-    protected function getBackgroundJobType() {
-        if(BackgroundJob::getExecutionType() !== '') return BackgroundJob::getExecutionType();
-
-        return \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
     }
 }

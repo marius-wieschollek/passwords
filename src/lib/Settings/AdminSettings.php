@@ -11,13 +11,14 @@ use Gmagick;
 use Imagick;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\BackgroundJob;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
 
@@ -86,7 +87,7 @@ class AdminSettings implements ISettings {
             'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
-            'nightlyUpdates'   => $this->config->getAppValue('nightly_updates', false),
+            'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
             'caches'           => $this->getFileCaches(),
             'support'          => $this->getPlatformSupport(),
             'links'            => [
@@ -133,7 +134,8 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', HelperService::WORDS_RANDOM);
+        $current = is_file(LocalWordsHelper::WORDS_DEFAULT) ? HelperService::WORDS_LOCAL:HelperService::WORDS_RANDOM;
+        $current = $this->config->getAppValue('service/words', $current);
 
         return [
             [
@@ -235,16 +237,19 @@ class AdminSettings implements ISettings {
 
         return [
             [
-                'id'      => HelperService::PREVIEW_WKHTML,
-                'label'   => 'WKHTML (Local)',
-                'current' => $current === HelperService::PREVIEW_WKHTML,
-                'api'     => null
-            ],
-            [
                 'id'      => HelperService::PREVIEW_PAGERES,
                 'label'   => 'Pageres/PhantomJS (Local)',
                 'current' => $current === HelperService::PREVIEW_PAGERES,
                 'api'     => null
+            ],
+            [
+                'id'      => HelperService::PREVIEW_WEBSHOT,
+                'label'   => 'Passwords Webshot',
+                'current' => $current === HelperService::PREVIEW_WEBSHOT,
+                'api'     => [
+                    'key'   => WebshotHelper::WEBSHOT_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(WebshotHelper::WEBSHOT_CONFIG_KEY)
+                ]
             ],
             [
                 'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
@@ -337,26 +342,23 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion = intval(explode('.', \OC::$server->getConfig()->getSystemValue('version'), 2)[0]);
-        $cronType  = \OC::$server->getConfig()->getAppValue('core', 'backgroundjobs_mode', 'ajax');
-
-        if(BackgroundJob::getExecutionType() !== '') $cronType = BackgroundJob::getExecutionType();
+        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $cronType  = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
 
         return [
-            'cron'   => $cronType === 'ajax',
+            'cron'   => $cronType,
             'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
-            'wkhtml' => $this->config->getAppValue('service/preview') == HelperService::PREVIEW_WKHTML,
             'php'    => [
-                'warn'    => PHP_VERSION_ID < 70200,
-                'error'   => PHP_VERSION_ID < 70100,
+                'warn'    => false,
+                'error'   => PHP_VERSION_ID < 70200,
                 'version' => PHP_VERSION
             ],
             'server' => [
-                'warn'    => $ncVersion < 14,
-                'error'   => $ncVersion < 12,
+                'warn'    => false,
+                'error'   => $ncVersion < 14,
                 'version' => $ncVersion
             ],
-            'eol'    => '2019.1.0'
+            'eol'    => '2020.1.0'
         ];
     }
 

@@ -42,6 +42,7 @@ class Password extends AbstractModelEntity {
     public function __construct() {
         $this->addType('shareId', 'string');
 
+        $this->addType('editable', 'boolean');
         $this->addType('hasShares', 'boolean');
 
         parent::__construct();

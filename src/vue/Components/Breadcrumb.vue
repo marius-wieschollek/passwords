@@ -148,7 +148,7 @@
             getCrumbItemIcon() {
                 if(this.$route.name === 'Folders') return 'icon icon-folder';
                 if(this.$route.name === 'Tags') return 'icon icon-tag';
-                if(this.$route.name === 'Shared') return 'icon icon-shared';
+                if(this.$route.name === 'Shares') return 'icon icon-shared';
                 if(this.$route.name === 'Security') return 'fa fa-shield';
                 if(this.$route.name === 'Trash') return 'fa fa-trash';
                 if(this.$route.name === 'Help') return 'fa fa-book';
@@ -283,14 +283,8 @@
                 position         : sticky;
                 min-width        : 44px;
                 top              : 0;
-                background-color : $color-white;
                 opacity          : 1;
-                color            : transparentize($color-black, 0.4);
                 z-index          : 1;
-
-                &:hover {
-                    color : $color-black
-                }
             }
         }
     }

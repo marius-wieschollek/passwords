@@ -117,7 +117,7 @@
         hr {
             color      : transparent;
             border     : none;
-            border-top : 1px solid $color-grey-light;
+            border-top : 1px solid var(--color-border-dark);
         }
     }
 </style>

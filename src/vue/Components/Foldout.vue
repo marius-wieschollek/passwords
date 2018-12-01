@@ -1,13 +1,12 @@
 <template>
     <div :class="{open:open,'first-open':firstOpen}" class="foldout-container">
-        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :style="titleStyle" :say="title"/>
+        <translate tag="div" class="foldout-title" icon="chevron-right" @click="toggleContent()" :say="title"/>
         <div class="foldout-content" :style="contentStyle"><slot/></div>
     </div>
 </template>
 
 <script>
     import Translate from '@vc/Translate.vue';
-    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         components: {
@@ -45,15 +44,6 @@
         },
 
         computed: {
-            titleStyle() {
-                if(this.open) {
-                    return {
-                        borderColor: ThemeManager.getColor()
-                    };
-                }
-
-                return {};
-            },
             contentStyle() {
                 this.maxHeight = 0;
                 if(this.open) {
@@ -103,7 +93,7 @@
 
         &.open {
             .foldout-title {
-                border-color : $color-grey-light;
+                border-color : var(--color-primary);
 
                 .fa-chevron-right {
                     transform : rotate(90deg);

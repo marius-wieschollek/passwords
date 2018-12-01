@@ -1,5 +1,5 @@
 (function() {
-    let translations = {
+    let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
             'Folders'                             : 'Ordner',
@@ -96,19 +96,23 @@
             'Copy User'                           : 'Benutzer kopieren',
             'Copy Password'                       : 'Passwort kopieren',
             '{element} was copied to clipboard'   : '{element} wurde in die Zwischenablage kopiert',
+            'Error copying {element} to clipboard': '{element} konnte nicht in die Zwischenablage kopiert werden',
             'Last modified on {date}'             : 'Zuletzt geändert am {date}',
             'Restore revision'                    : 'Version wiederherstellen',
             'Revision restored'                   : 'Version wiederhergestellt',
             'Restoring revision failed'           : 'Wiederherstellen der Version fehlgeschlagen',
             'Do you want to restore the revision?': 'Möchtest du die Version wiederherstellen?',
-            'Shared with me'                      : 'Mit mir geteilt',
-            'Shared by me'                        : 'Von mir geteilt',
+            'Shared with you'                      : 'Mit dir geteilt',
+            'Shared by you'                        : 'Von dir geteilt',
             'Statistics'                          : 'Statistiken',
             'Created on'                          : 'Erstellt am',
             'Last updated'                        : 'Zuletzt geändert',
             '{count} revisions'                   : '{count} Versionen',
             'Shares'                              : 'Freigaben',
             '{count} shares'                      : '{count} mal geteilt',
+            'Server-side encryption'              : 'Serverseitige Verschlüsselung',
+            'Advanced server-side encryption'     : 'Erweiterte serverseitige Verschlüsselung',
+            'Client-side encryption'              : 'Verschlüsselung auf dem Endgerät',
             'More'                                : 'Mehr',
             'Backup and Restore'                  : 'Sichern & Wiederherstellen',
             'Browser Extension'                   : 'Browser Extension',
@@ -211,9 +215,10 @@
             'Reading passwords'                   : 'Lade Passwörter',
             'Importing passwords'                 : 'Importiere Passwörter',
             'Import failed'                       : 'Import fehlgeschlagen',
-            'Import partially failed'             : 'Import teilweise fehlgeschlagen',
+            'Import partially failed'             : 'Import teilweise fehlerhaft',
             'Import successful'                   : 'Import erfolgreich',
             'Import error'                        : 'Importfehler',
+            'Some objects had errors:'            : 'Einige Einträge hatten Probleme:',
             'Invalid file type "{type}"'          : 'Falscher Dateityp "{type}"',
             'Password required'                   : 'Passwort erforderlich',
             'Password invalid'                    : 'Falsches Passwort',
@@ -308,12 +313,18 @@
             'matches'                             : 'passt zu',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
+            'Browsers'                            : 'Browser',
+            'Official Firefox Client'             : 'Offizieller Firefox Client',
+            'Official Chrome Client'              : 'Offizieller Chrome Client',
+            'official'                            : 'offiziell',
+            'created by {author}'                 : 'erstellt von {author}',
+            'sources'                             : 'Quelltext',
             'true'                                : 'ja',
             'false'                               : 'nein',
             'yes'                                 : 'ja',
             'no'                                  : 'nein'
         },
-        helpTexts    = {
+        helpTexts       = {
             'Mark passwords as weak if they are being used for multiple accounts'        : 'Markiert Passwörter als "Unsicher" wenn sie für mehr als ein Konto verwendet werden',
             'Mark passwords as weak if they surpass the specified amount of days'        : 'Markiert Passwörter als "Unsicher" wenn sie das in Tagen angegebene Alter überschreiten',
             'A higher strength results in longer, more complex passwords'                : 'Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter',
@@ -344,17 +355,30 @@
             'You have to wait {seconds} seconds before you can reset your account.'      : 'Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',
             'Some data is waiting to be synchronized'                                    : 'Einige Daten warten darauf synchronisiert zu werden',
-            '{message} in line {line} character {character}.'                            : '{message} in Zeile {line}, Zeichen {character}.'
+            '{message} in line {line} character {character}.'                            : '{message} in Zeile {line}, Zeichen {character}.',
+            '"{label}" has files attached which can not be imported.'                    : 'An "{label}" sind Dateien angehängt die nicht importiert werden können.',
+            'The type of "{field}" in "{label}" is unknown and can not be imported.'     : 'Der Typ von "{field}" in "{label}" ist unbekannt und kann nicht importiert werden.',
+            'The label of "{field}" in "{label}" exceeds 48 characters and was cut.'     : 'Der Name von "{field}" in "{label}" ist länger als 48 Zeichen und wurde gekürtzt.',
+            'The value of "{field}" in "{label}" exceeds 320 characters and was cut.'    : 'Der Inhalt von "{field}" in "{label}" ist länger als 320 Zeichen und wurde gekürtzt.',
+            'More information can be found in the log. (Press F12)'                      : 'Mehr Details können im Protokoll gefunden werden. (Drücke F12)',
+            'This app uses an api which is no longer supported.'                         : 'Diese App verwendet eine nicht mehr unterstützte API.'
         },
-        longTexts    = {
+        longTexts       = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.',
-            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.'
+            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.',
+            'Today in 2018, the first version of passwords was published. Thank you for using the app.'                        : 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
+        },
+        appDescriptions = {
+            'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.'                                     : 'Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store kannst du auf alle deine Passwörter einfach von Firefox aus zugreifen und neue hinzufügen.',
+            'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.': 'Unsere offizielle Chrome-Erweiterung ermöglicht es dir, alle deine Passwörter über deinen Browser zu verwalten und ist für viele auf Chromium basierenden Browsern im Chrome Web Store verfügbar.',
+            'Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.'                              : 'Endlich eine moderne, schnelle und benutzerfreundliche App für den Zugriff und die Verwaltung deiner Passwörter von deinem Android-Gerät aus. Holen Sie dir von Google Play.',
+            'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.'              : 'Cloud Password Manager ist ein Passwortmanager, bei dem du die Kontrolle hast. Von deinem Android-Telefon aus kannst du auf die in deiner Nextcloud gespeicherten Passwörter zugreifen.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts),
+        Object.assign(translations, helpTexts, longTexts, appDescriptions),
         'nplurals=2; plural=(n != 1);'
     );
 }());

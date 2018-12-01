@@ -358,14 +358,13 @@
             }
 
             &.danger {
-
                 input[type=button] {
                     transition : color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
 
                     &:hover {
-                        background-color : $color-red;
-                        border-color     : $color-red;
-                        color            : $color-white;
+                        background-color : var(--color-error);
+                        border-color     : var(--color-error);
+                        color            : var(--color-primary-text);
                     }
                 }
             }

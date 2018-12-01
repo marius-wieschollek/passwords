@@ -8,12 +8,7 @@
         </ul>
         <input type="text" :placeholder="placeholder" class="add-tags" v-model="inputText" @keyup="keyUpAction($event)">
         <ul class="tag-search" v-if="searchResults.length !== 0" :style="getPopupStyle">
-            <li class="result"
-                v-for="match in searchResults"
-                :key="match.id"
-                @click="addTag(match)"
-                @mouseover="getHoverStyle($event)"
-                @mouseout="getHoverStyle($event, false)">
+            <li class="result" @click="addTag(match)" :key="match.id" v-for="match in searchResults">
                 <i class="fa fa-tag" :style="{color: match.color}"></i>{{match.label}}
             </li>
         </ul>
@@ -26,7 +21,6 @@
     import Utility from '@js/Classes/Utility';
     import TagManager from '@js/Manager/TagManager';
     import Localisation from '@js/Classes/Localisation';
-    import ThemeManager from '@js/Manager/ThemeManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 
     export default {
@@ -60,12 +54,9 @@
         computed: {
             getPopupStyle() {
                 return {
-                    color          : ThemeManager.getColor(),
-                    border         : `1px solid ${ThemeManager.getColor()}`,
-                    backgroundColor: ThemeManager.getContrastColor(),
-                    top            : this.searchBox.top,
-                    left           : this.searchBox.left,
-                    width          : this.searchBox.width
+                    top  : this.searchBox.top,
+                    left : this.searchBox.left,
+                    width: this.searchBox.width
                 };
             }
         },
@@ -169,15 +160,6 @@
                 this.searchBox.top = `${position.top + $input.outerHeight()}px`;
                 this.searchBox.left = `${position.left}px`;
                 this.searchBox.width = $input.outerWidth();
-            },
-            getHoverStyle($event, on = true) {
-                if(on) {
-                    $event.target.style.backgroundColor = ThemeManager.getColor();
-                    $event.target.style.color = ThemeManager.getContrastColor();
-                } else {
-                    $event.target.style.backgroundColor = null;
-                    $event.target.style.color = null;
-                }
             }
         },
 
@@ -231,19 +213,27 @@
         }
 
         .tag-search {
-            position      : absolute;
-            border-radius : 2px;
-            max-height    : 120px;
-            overflow-y    : auto;
-            z-index       : 1;
+            position         : absolute;
+            border-radius    : 2px;
+            max-height       : 120px;
+            overflow-y       : auto;
+            z-index          : 1;
+            color            : var(--color-primary-element);
+            border           : 1px solid var(--color-primary-element);
+            background-color : var(--color-main-background);
 
             .result {
-                padding : 3px 5px;
-                cursor  : pointer;
-                white-space: nowrap;
+                padding     : 3px 5px;
+                cursor      : pointer;
+                white-space : nowrap;
 
                 .fa {
                     margin-right : 5px;
+                }
+
+                &:hover {
+                    color            : var(--color-primary-text);
+                    background-color : var(--color-primary-element);
                 }
             }
         }

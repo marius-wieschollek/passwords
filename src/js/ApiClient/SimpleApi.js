@@ -60,7 +60,8 @@ export default class SimpleApi {
             'service.coffee'      : 'api/1.0/service/coffee',
             'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
             'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
-            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}'
+            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
+            'cron.sharing'        : 'cron/sharing',
         };
     }
 
@@ -433,9 +434,9 @@ export default class SimpleApi {
      *
      * @returns {Promise}
      */
-    findSharePartners(search = '') {
-        if(search.length === 0) return this._createRequest('share.partners');
-        return this._createRequest('share.partners', {search}, 'POST');
+    findSharePartners(search = '', limit = 5) {
+        if(search.length === 0 && limit === 5) return this._createRequest('share.partners');
+        return this._createRequest('share.partners', {search, limit}, 'POST');
     }
 
 
@@ -594,6 +595,15 @@ export default class SimpleApi {
             this._paths['service.preview'],
             {domain, view, width, height}
         );
+    }
+
+    /**
+     * Unofficial request to run the sharing update cron job in order to speed up webcron and ajax
+     *
+     * @returns {Promise}
+     */
+    runSharingCron() {
+        return this._createRequest('cron.sharing');
     }
 
 

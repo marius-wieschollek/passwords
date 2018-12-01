@@ -14,8 +14,7 @@ namespace OCA\Passwords\Helper\Http;
  */
 class RequestHelper {
 
-    const REQUEST_MAX_RETRIES = 3;
-    const REQUEST_TIMEOUT     = 15;
+    const REQUEST_TIMEOUT = 25;
 
     /**
      * @var string
@@ -55,7 +54,12 @@ class RequestHelper {
     /**
      * @var int
      */
-    protected $retryTimeout = 0;
+    protected $defaultRetryTimeout = 0;
+
+    /**
+     * @var int
+     */
+    protected $defaultRetryAttempts = 5;
 
     /**
      * @var array
@@ -155,12 +159,23 @@ class RequestHelper {
     }
 
     /**
-     * @param int $retryTimeout
+     * @param int $defaultRetryTimeout
      *
      * @return RequestHelper
      */
-    public function setRetryTimeout(int $retryTimeout): RequestHelper {
-        $this->retryTimeout = $retryTimeout;
+    public function setDefaultRetryTimeout(int $defaultRetryTimeout): RequestHelper {
+        $this->defaultRetryTimeout = $defaultRetryTimeout;
+
+        return $this;
+    }
+
+    /**
+     * @param int $defaultRetryAttempts
+     *
+     * @return RequestHelper
+     */
+    public function setDefaultRetryAttempts(int $defaultRetryAttempts): RequestHelper {
+        $this->defaultRetryAttempts = $defaultRetryAttempts;
 
         return $this;
     }
@@ -191,7 +206,7 @@ class RequestHelper {
         $this->info     = curl_getinfo($curl);
         curl_close($curl);
 
-        $headerSize          = $this->info['header_size'];
+        $headerSize           = $this->info['header_size'];
         $this->responseHeader = substr($this->response, 0, $headerSize);
         $this->responseBody   = substr($this->response, $headerSize);
 
@@ -203,18 +218,20 @@ class RequestHelper {
     }
 
     /**
-     * @param int $maxRetries
+     * @param int|null $retries
+     * @param int|null $timeout
      *
      * @return mixed
      */
-    public function sendWithRetry($maxRetries = self::REQUEST_MAX_RETRIES) {
-        $retries = 0;
-        while($retries < $maxRetries) {
+    public function sendWithRetry(int $retries = null, int $timeout = null) {
+        if($retries === null || $retries < 0) $retries = $this->defaultRetryAttempts;
+        if($timeout === null || $timeout < 0) $timeout = $this->defaultRetryTimeout;
+
+        for($i = 0; $i < $retries; $i++) {
             $result = $this->send();
 
             if($result !== false) return $result;
-            if($this->retryTimeout) sleep($this->retryTimeout);
-            $retries++;
+            if($timeout) sleep($timeout);
         }
 
         return null;

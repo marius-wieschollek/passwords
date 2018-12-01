@@ -1,7 +1,5 @@
 import API from '@js/Helper/api';
-import * as randomMC from 'random-material-color';
 import Encryption from '@js/ApiClient/Encryption';
-import Localisation from '@js/Classes/Localisation';
 
 export default class ImportJsonConversionHelper {
 
@@ -49,91 +47,6 @@ export default class ImportJsonConversionHelper {
                 throw new Error(`Failed to decrypt ${i}`);
             }
         }
-    }
-
-    /**
-     *
-     * @param json
-     * @returns {Promise<*>}
-     */
-    static async processPassmanJson(json) {
-        let data = JSON.parse(json);
-
-        return {
-            tags     : await ImportJsonConversionHelper._processPassmanTags(data),
-            passwords: ImportJsonConversionHelper._processPassmanPasswords(data)
-        };
-    }
-
-    /**
-     *
-     * @param db
-     * @returns {Promise<Array>}
-     * @private
-     */
-    static async _processPassmanTags(db) {
-        let tags    = [],
-            mapping = await ImportJsonConversionHelper._getTagLabelMapping();
-
-        for(let i = 0; i < db.length; i++) {
-            let element = db[i];
-
-            if(!element.tags) continue;
-            for(let j = 0; j < element.tags.length; j++) {
-                let label = element.tags[j].text,
-                    id    = label;
-
-                if(mapping.hasOwnProperty(label)) {
-                    id = mapping[label];
-                } else {
-                    mapping[label] = label;
-                    tags.push({
-                                  id   : label,
-                                  label,
-                                  color: randomMC.getColor()
-                              });
-                }
-                element.tags[j] = id;
-            }
-        }
-
-        return tags;
-    }
-
-    /**
-     *
-     * @param db
-     * @returns {Array}
-     * @private
-     */
-    static _processPassmanPasswords(db) {
-        let passwords = [];
-
-        for(let i = 0; i < db.length; i++) {
-            let element = db[i], object = {
-                id      : element.guid,
-                label   : element.label,
-                username: element.username,
-                password: element.password,
-                url     : element.url,
-                notes   : element.description,
-                edited  : element.changed,
-                tags    : element.tags
-            };
-
-            if(element.email) {
-                if(!object.username || object.username.length === 0) {
-                    object.username = element.email;
-                } else {
-                    if(object.notes && object.notes.length !== 0) object.notes += '\n\n';
-                    object.notes += `${Localisation.translate('Email')}: ${element.email}`;
-                }
-            }
-
-            passwords.push(object);
-        }
-
-        return passwords;
     }
 
     /**

@@ -1,10 +1,9 @@
-$color-theme : #0082c9;
 $color-green-dark : #00994d;
-$color-green : #00b377;
 $color-red-dark : #bf0303;
 $color-red : #c00;
 $color-yellow : #ffd500;
 $color-black : #000;
+
 $color-black-light : #333;
 $color-black-lighter : #545454;
 $color-grey-darker : #6e6e6e;
@@ -24,3 +23,9 @@ $width-extra-large : 1680px;
 $mobile-width : $width-extra-small;
 $tablet-width : $width-small;
 $desktop-width : $width-large;
+
+:root {
+    --pw-icon-font-face: FontAwesome, sans-serif;
+    --pw-game-font-face: "Comic Sans MS", sans-serif;
+    --pw-mono-font-face: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'DejaVu Sans Mono', 'source-code-pro', monospace;
+}

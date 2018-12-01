@@ -45,7 +45,7 @@ export default new class DragManager {
 
     static scrollContent(e) {
         let height = window.innerHeight,
-            $app   = $('#app-content'),
+            $app   = $(window),
             offset = $app.scrollTop();
 
         if(e.originalEvent.clientY < height * 0.25) {

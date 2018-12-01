@@ -155,11 +155,14 @@ class CreatePasswordShareHelper {
      * @param        $model
      *
      * @throws ApiException
-     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     protected function checkIfAlreadyShared(string $receiver, Password $model): void {
-        $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
-        if($shares !== null) throw new ApiException('Entity already shared with user', 400);
+        try {
+            $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
+            if($shares !== null) throw new ApiException('Entity already shared with user', 400);
+        } catch(\OCP\AppFramework\Db\DoesNotExistException $e) {
+        }
     }
 
     /**

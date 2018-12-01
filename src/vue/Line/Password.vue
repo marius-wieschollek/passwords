@@ -141,9 +141,11 @@
                 if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
-                Utility.copyToClipboard(this.password[attribute]);
+                let message = 'Error copying {element} to clipboard';
+                if(Utility.copyToClipboard(this.password[attribute])) message = '{element} was copied to clipboard';
+
                 this.clickTimeout = setTimeout(() => {
-                    Messages.notification(['{element} was copied to clipboard', {element: Localisation.translate(attribute.capitalize())}]);
+                    Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
                 }, delay);
             },
             favoriteAction($event) {
@@ -222,7 +224,7 @@
 
                     &:hover,
                     &.active {
-                        color : $color-yellow;
+                        color : var(--color-warning);
                     }
                 }
 
@@ -273,7 +275,7 @@
 
                         &:before {
                             content     : "\F02B";
-                            font-family : FontAwesome, sans-serif;
+                            font-family : var(--pw-icon-font-face);
                             cursor      : pointer;
                         }
                     }
@@ -305,17 +307,17 @@
 
                     &:active,
                     &:hover {
-                        color : $color-black;
+                        color : var(--color-main-text);
                     }
 
                     &.ok {
-                        color : $color-green;
+                        color : var(--color-success);
                     }
                     &.warn {
-                        color : $color-yellow;
+                        color : var(--color-warning);
                     }
                     &.fail {
-                        color : $color-red;
+                        color : var(--color-error);
                     }
                 }
 
@@ -352,9 +354,9 @@
                             &:active,
                             &:hover {
                                 background-color : darken($color-white, 3);
-                                color            : $color-black;
+                                color            : var(--color-main-text);
 
-                                a { color : $color-black; }
+                                a { color : var(--color-main-text); }
                             }
                         }
                     }
@@ -379,7 +381,7 @@
 
                         &:hover,
                         &.active {
-                            color : $color-yellow;
+                            color : var(--color-warning);
                         }
                     }
                 }

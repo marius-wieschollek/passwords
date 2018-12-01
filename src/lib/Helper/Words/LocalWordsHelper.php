@@ -46,21 +46,14 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @throws Exception
      */
     public function getWords(int $strength): array {
-        $length = $strength == 1 ? 2:$strength;
+        $length = $strength+1;
         $file   = $this->getWordsFile();
 
-        $retires = 0;
-        while($retires < 24) {
+        for($i = 0; $i < 24; $i++) {
             $result = [];
             exec("shuf -n {$length} {$file}", $result, $code);
 
-            if($code == 0) {
-                $max = max(array_map('strlen', $result));
-                $min = min(array_map('strlen', $result));
-
-                if($min > 3 && $max < 12) return $result;
-            }
-            $retires++;
+            if($code == 0 && $this->isWordsArrayValid($result)) return $result;
         }
 
         return [];

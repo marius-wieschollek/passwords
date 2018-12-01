@@ -20,4 +20,17 @@ abstract class AbstractWordsHelper {
      * @return array
      */
     abstract public function getWords(int $strength): array;
+
+    /**
+     * @param array $words
+     *
+     * @return bool
+     */
+    protected function isWordsArrayValid(array $words): bool {
+        $map = array_map('strlen', $words);
+        $max = max($map);
+        $min = min($map);
+
+        return $min > 3 && $max < 12;
+    }
 }

@@ -1,5 +1,5 @@
 <template>
-    <a :href="getHref" :target="getTarget" :rel="getRel" :style="getStyle" :title="getTitle">
+    <a :href="getHref" :target="getTarget" :rel="getRel" :class="className" :title="getTitle">
         {{ getText }}
         <slot name="default" v-if="!getText"></slot>
     </a>
@@ -7,7 +7,6 @@
 
 <script>
     import SimpleApi from '@js/ApiClient/SimpleApi';
-    import ThemeManager from '@js/Manager/ThemeManager';
     import Localisation from '@js/Classes/Localisation';
 
     export default {
@@ -19,9 +18,6 @@
                 type     : String,
                 'default': null
             },
-            css   : {
-                'default': null
-            },
             title : {
                 type     : String,
                 'default': null
@@ -29,6 +25,10 @@
             text  : {
                 type     : String,
                 'default': null
+            },
+            className  : {
+                type     : String,
+                'default': 'link'
             }
         },
         computed: {
@@ -41,7 +41,8 @@
                 return Localisation.translate(title, {href: this.getHref});
             },
             getHref() {
-                if(!this.href) return location.href;
+                if(!this.href || this.href.substr(0, 11) === 'javascript:') return location.href;
+                if(this.href.substr(0, 7) === 'mailto:') return this.href;
                 return SimpleApi.parseUrl(this.href, 'href');
             },
             getTarget() {
@@ -51,14 +52,13 @@
             },
             getRel() {
                 return this.getTarget === '_blank' ? 'noreferrer noopener':'';
-            },
-            getStyle() {
-                if(this.css !== null) return this.css;
-
-                return {
-                    color: ThemeManager.getColor()
-                };
             }
         }
     };
 </script>
+
+<style lang="scss">
+    #app.passwords a.link {
+        color: var(--color-primary);
+    }
+</style>

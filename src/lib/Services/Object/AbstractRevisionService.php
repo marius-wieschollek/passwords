@@ -106,7 +106,7 @@ abstract class AbstractRevisionService extends AbstractService {
      */
     public function findByModel(string $modelUuid, bool $decrypt = false): array {
         /** @var RevisionInterface[] $revisions */
-        $revisions = $this->mapper->findAllMatching(['model', $modelUuid]);
+        $revisions = $this->mapper->findAllByModel($modelUuid);
 
         if(!$decrypt) return $revisions;
 

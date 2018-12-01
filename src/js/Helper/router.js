@@ -41,6 +41,14 @@ const SectionSettings = async () => {
     }
 };
 
+const SectionApps = async () => {
+    try {
+        return await import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps');
+    } catch(e) {
+        handleChunkLoadingError(e, 'AppsSection');
+    }
+};
+
 Vue.use(Router);
 let router = new Router(
     {
@@ -49,14 +57,15 @@ let router = new Router(
             {name: 'Tags', path: '/tags/:tag?', components: {main: SectionTags}},
             {name: 'Recent', path: '/recent', components: {main: SectionRecent}},
             {name: 'Favorites', path: '/favorites', components: {main: SectionFavorites}},
-            {name: 'Shared', path: '/shared/:type?', components: {main: SectionShared}},
+            {name: 'Shares', path: '/shared/:type?', components: {main: SectionShared}},
             {name: 'Security', path: '/security/:status?', components: {main: SectionSecurity}},
             {name: 'Search', path: '/search/:query?', components: {main: SectionSearch}},
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
             {name: 'Authorize', path: '/authorize/:target?', components: {main: SectionAuthorize}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},
-            {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}}
+            {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}},
+            {name: 'Apps & Extensions', path: '/apps', components: {main: SectionApps}}
         ]
     }
 );
