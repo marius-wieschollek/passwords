@@ -27,8 +27,8 @@ class Messages {
      */
     alert(message, title = 'Alert') {
         return new Promise((resolve) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
 
             OC.dialogs.alert(message, title, resolve, true);
         });
@@ -42,8 +42,8 @@ class Messages {
      */
     info(message, title = 'Info') {
         return new Promise((resolve) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
 
             OC.dialogs.info(message, title, resolve, true);
         });
