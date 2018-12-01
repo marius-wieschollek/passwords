@@ -50,7 +50,7 @@
                         "label"      : "Official Firefox Client",
                         "author"     : Localisation.translate("official"),
                         "description": "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.",
-                        "download"   : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=ext-applist",
+                        "download"   : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-apps",
                         "sources"    : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
                     },

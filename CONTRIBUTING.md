@@ -36,6 +36,8 @@ You can also download a [file with sample data](https://git.mdns.eu/nextcloud/pa
 * `npm run docker:build` - Start docker and build images
 * `npm run build` - Create production build of JS/CSS files
 * `npm run build:nightly` - Create nightly build of JS/CSS files
+* `npm run selenium` - Start Selenium server for frontend testing
+* `npm run handbook` - Create screenshots for the manual
 * `docker-compose -f docker-compose.yml -f docker/configs/<service>.yml up -d` starts the system with additional services
 * `docker exec -u www-data passwords-php /var/www/html/occ  config:system:set loglevel --value=0 --type=int` - Set loglevel to info
 

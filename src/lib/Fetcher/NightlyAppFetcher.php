@@ -132,7 +132,7 @@ class NightlyAppFetcher extends Fetcher {
         foreach($json['data'] as $dataKey => $app) {
             $latest = null;
             foreach($app['releases'] as $release) {
-                if(($latest === null || version_compare($latest['version'], $release['version']) < 1) &&
+                if(($latest === null || version_compare($latest['version'], $release['version']) < 0) &&
                    $this->releaseAllowedInChannel($release, $app['id']) &&
                    $this->checkVersionRequirements($release)) {
                     $latest = $release;
