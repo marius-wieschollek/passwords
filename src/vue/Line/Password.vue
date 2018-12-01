@@ -275,7 +275,7 @@
 
                         &:before {
                             content     : "\F02B";
-                            font-family : FontAwesome, sans-serif;
+                            font-family : var(--pw-icon-font-face);
                             cursor      : pointer;
                         }
                     }

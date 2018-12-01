@@ -159,7 +159,7 @@
             .tags-container {
                 position    : static;
                 display     : inline;
-                color       : $color-black-light;
+                color       : var(--color-text-light);
                 margin-left : 3px;
             }
         }

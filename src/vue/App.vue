@@ -132,7 +132,7 @@
             &.active { opacity : 1; }
 
             &:before {
-                font-family   : FontAwesome, sans-serif;
+                font-family   : var(--pw-icon-font-face);
                 font-size     : 1rem;
                 padding-right : 10px;
                 width         : 1rem;

@@ -123,14 +123,14 @@
             font-size     : 0.9em;
             font-style    : italic;
             margin-bottom : 5px;
-            color         : $color-grey-darker;
+            color         : var(--color-text-maxcontrast);
 
             a,
             span {
                 display    : block;
                 font-style : normal;
                 font-size  : 1.3em;
-                color      : $color-black-light;
+                color      : var(--color-text-lighter);
                 text-align : right;
                 cursor     : text;
                 word-wrap  : break-word;
@@ -161,7 +161,7 @@
             margin-top  : 20px;
             font-size   : 1.3em;
             font-weight : bold;
-            color       : $color-black-light;
+            color       : var(--color-text-light);
         }
     }
 </style>

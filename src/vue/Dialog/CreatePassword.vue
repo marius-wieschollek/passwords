@@ -224,7 +224,7 @@
                 z-index               : 9999;
                 overflow              : hidden;
                 background-color      : var(--color-main-background);
-                border-radius         : 3px;
+                border-radius         : var(--border-radius);
                 box-sizing            : border-box;
                 display               : grid;
                 grid-template-columns : 100%;
@@ -310,7 +310,7 @@
                         input {
                             max-width     : initial;
                             padding-right : 45px;
-                            font-family   : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
+                            font-family   : var(--pw-mono-font-face);
                         }
 
                         .icons {

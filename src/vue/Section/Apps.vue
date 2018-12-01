@@ -129,7 +129,7 @@
 
             .app {
                 display         : block;
-                border-radius   : 3px;
+                border-radius   : var(--border-radius);
                 padding         : 200px 0.5rem 0.5rem;
                 background      : url(../../img/browser/firefox.svg) no-repeat center 20px;
                 background-size : 160px;
@@ -151,7 +151,7 @@
                         font-family : var(--font-face);
 
                         &:before {
-                            font-family : "FontAwesome", sans-serif;
+                            font-family : var(--pw-icon-font-face);
                             font-style  : normal;
                         }
                     }

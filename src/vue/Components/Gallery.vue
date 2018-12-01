@@ -147,7 +147,7 @@
 
         .next,
         .prev {
-            font-family : FontAwesome, sans-serif;
+            font-family : var(--pw-icon-font-face);
             border      : none;
             background  : none;
             display     : block;

@@ -20,7 +20,7 @@ section.section.passwords {
 
     .message {
         padding       : 3px 5px;
-        border-radius : 3px;
+        border-radius : var(--border-radius);
         margin-bottom : .25em;
 
         &.error {
@@ -48,7 +48,7 @@ section.section.passwords {
         .response.success {
             font-size     : 1em;
             opacity       : 0;
-            border-radius : 3px;
+            border-radius : var(--border-radius);
             transition    : opacity 0.25s ease-in-out;
             line-height   : 1;
             margin-left   : 6px;

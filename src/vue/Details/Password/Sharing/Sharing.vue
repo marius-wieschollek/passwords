@@ -209,7 +209,7 @@
             position         : absolute;
             top              : 37px;
             width            : 100%;
-            border-radius    : 3px;
+            border-radius    : var(--border-radius);
             z-index          : 2;
             background-color : var(--color-main-background);
             color            : var(--color-primary);

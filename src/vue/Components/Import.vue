@@ -449,20 +449,20 @@
             progress {
                 width              : 100%;
                 height             : 34px;
-                border-radius      : 3px;
+                border-radius      : var(--border-radius);
                 border             : none;
                 -webkit-appearance : none;
                 background-color   : $color-grey-lighter;
 
                 &::-moz-progress-bar {
                     background-color : var(--color-primary);
-                    border-radius    : 3px;
+                    border-radius    : var(--border-radius);
                     transition       : background-color 0.25s ease-in-out;
                 }
 
                 &::-webkit-progress-value {
                     background-color : var(--color-primary);
-                    border-radius    : 3px;
+                    border-radius    : var(--border-radius);
                     transition       : background-color 0.25s ease-in-out;
                 }
 
