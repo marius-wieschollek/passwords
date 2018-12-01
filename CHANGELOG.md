@@ -3,7 +3,7 @@
 - Improved shared password synchronisation
 - Improved password generator
 - Improved nightly updates
-- Fixed instant search in chrome
+- Fixed instant search in chromium browsers
 - Fixed server side validation in password generator
 
 #### 2018.11.2 - Bugfix release
