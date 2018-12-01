@@ -50,7 +50,7 @@ class CheckNightlyUpdates extends AbstractCronJob {
 
         if($enabled) {
             $this->nightlyAppFetcher->get();
-            if($this->nightlyAppFetcher->isDbUpdated()) $this->logger->info('Fetched latest app database');
+            if($this->nightlyAppFetcher->isDbUpdated()) $this->logger->debug('Fetched latest app database');
         }
     }
 
