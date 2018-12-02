@@ -98,7 +98,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
             <select id="passwords-image" name="passwords-image" name="image" data-setting="service/images">
                 <?php foreach($_['imageServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

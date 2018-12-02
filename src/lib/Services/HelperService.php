@@ -96,7 +96,7 @@ class HelperService {
     public function getImageHelper(): AbstractImageHelper {
         $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
 
-        if($service == self::IMAGES_IMAGICK && class_exists(Imagick::class) || class_exists(Gmagick::class)) {
+        if($service == self::IMAGES_IMAGICK && HelperService::canUseImagick()) {
             return $this->container->query(ImagickHelper::class);
         }
 
@@ -199,5 +199,12 @@ class HelperService {
      */
     public function getDefaultFaviconHelper(): DefaultFaviconHelper {
         return $this->container->query(DefaultFaviconHelper::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public static function canUseImagick(): bool {
+        return class_exists(Imagick::class) || class_exists(Gmagick::class);
     }
 }

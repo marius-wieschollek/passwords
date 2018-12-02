@@ -7,13 +7,11 @@
 
 namespace OCA\Passwords\Settings;
 
-use Gmagick;
-use Imagick;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -160,22 +158,27 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getImageServices(): array {
-        $current = $this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK);
+        $current = $this->config->getAppValue('service/images', null);
 
-        if($current == HelperService::IMAGES_IMAGICK && !class_exists(Imagick::class) && !class_exists(Gmagick::class)) {
+        if($current == HelperService::IMAGES_IMAGICK && !HelperService::canUseImagick()) {
             $current = HelperService::IMAGES_GDLIB;
+            $this->config->setAppValue('service/images', $current);
+        } else if($current === null && HelperService::canUseImagick()) {
+            $current = HelperService::IMAGES_IMAGICK;
         }
 
         return [
             [
                 'id'      => HelperService::IMAGES_IMAGICK,
                 'label'   => 'Imagick/GMagick (recommended)',
-                'current' => $current === HelperService::IMAGES_IMAGICK
+                'current' => $current === HelperService::IMAGES_IMAGICK,
+                'enabled' => HelperService::canUseImagick(),
             ],
             [
                 'id'      => HelperService::IMAGES_GDLIB,
                 'label'   => 'PHP GDLib',
-                'current' => $current === HelperService::IMAGES_GDLIB
+                'current' => $current === HelperService::IMAGES_GDLIB,
+                'enabled' => true
             ]
         ];
     }

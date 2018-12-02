@@ -26,6 +26,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param int             $maxHeight
      *
      * @return Imagick|Gmagick
+     * @throws \GmagickException
      */
     public function advancedResizeImage($image, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight) {
 
@@ -45,6 +46,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param int             $size
      *
      * @return Imagick|Gmagick
+     * @throws \GmagickException
      */
     public function simpleResizeImage($image, int $size) {
         $image->resizeImage($size, $size, $image::FILTER_LANCZOS, 1, 1);
@@ -56,6 +58,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return Imagick|Gmagick
+     * @throws \GmagickException
      */
     public function cropImageRectangular($image) {
         $width  = $image->getImageWidth();
@@ -130,7 +133,7 @@ class ImagickHelper extends AbstractImageHelper {
 
         $image->setImageFormat('jpg');
         $image->setImageCompression($image::COMPRESSION_JPEG);
-        $image->setImageCompressionQuality(90);
+        if($image instanceof Imagick) $image->setImageCompressionQuality(90);
         $image->setCompressionQuality(100);
         $image->stripImage();
 
@@ -146,7 +149,7 @@ class ImagickHelper extends AbstractImageHelper {
     public function exportPng($image) {
 
         $image->setImageFormat('png');
-        $image->setImageCompressionQuality(9);
+        if($image instanceof Imagick) $image->setImageCompressionQuality(9);
         $image->setCompressionQuality(100);
         $image->stripImage();
 
@@ -158,6 +161,7 @@ class ImagickHelper extends AbstractImageHelper {
      *
      * @return bool
      * @throws \ImagickException
+     * @throws \GmagickException
      */
     public function supportsImage($blob): bool {
         $size = getimagesizefromstring($blob);

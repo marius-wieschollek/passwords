@@ -67,6 +67,9 @@ class AdminSettingsController extends Controller {
         if($value === 'false') $value = false;
 
         if($key === 'backup/files/maximum' && $value < 0) $value = '';
+        if($key === 'service/images' && $value === HelperService::IMAGES_IMAGICK && !HelperService::canUseImagick()) {
+            return new JSONResponse(['status' => 'failed', 'message' => 'Graphics library not installed']);
+        };
 
         if($value === '') {
             $this->config->deleteAppValue($key);
