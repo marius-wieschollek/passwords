@@ -92,7 +92,7 @@ class AdminSettingsController extends Controller {
             $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
             $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL) === BestIconHelper::BESTICON_DEFAULT_URL
         ) {
-            return new JSONResponse(['status' => 'error'], 400);
+            return new JSONResponse(['status' => 'error', 'message' => 'You can not clear this cache']);
         }
 
         return new JSONResponse(['status' => 'ok']);
