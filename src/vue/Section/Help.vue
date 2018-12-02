@@ -24,6 +24,7 @@
     import Gallery from '@vc/Gallery';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
+    import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
 
@@ -83,7 +84,7 @@
                 let path  = this.$route.params.page,
                     title = path.substr(path.lastIndexOf('/') + 1);
 
-                return title.replace('-', ' ');
+                return title.replace(/-{1}/g, ' ');
             }
         },
 
@@ -103,7 +104,10 @@
             jumpToAnchor() {
                 let $el = document.querySelector(`#app-content ${this.$route.hash}`);
                 if($el) {
-                    document.getElementById('app-content').scrollTop = $el.offsetTop - document.getElementById('controls').offsetHeight;
+                    let top      = $el.offsetTop - document.getElementById('controls').offsetHeight,
+                        behavior = this.$route.hash === '' ? 'auto':'smooth';
+
+                    Utility.scrollTo(top, 0, behavior);
                     $el.classList.add('highlight');
                     $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
                 }
@@ -386,7 +390,7 @@
             text-align : right;
 
             br {
-                display:none;
+                display : none;
             }
 
             a:hover,
@@ -400,7 +404,7 @@
                 padding : 0 1em;
 
                 br {
-                    display: block;
+                    display : block;
                 }
             }
         }
