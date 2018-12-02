@@ -68,6 +68,20 @@ export default class Utility {
 
     /**
      *
+     * @param top
+     * @param left
+     * @param behavior
+     */
+    static scrollTo(top = 0, left = 0, behavior = 'smooth') {
+        if(navigator.userAgent.indexOf('MSIE') === -1 && navigator.userAgent.indexOf('Edge') === -1 && navigator.userAgent.indexOf('Safari') === -1) {
+            window.scrollTo({left, top, behavior});
+        } else {
+            window.scrollTo(left, top);
+        }
+    }
+
+    /**
+     *
      * @returns {number}
      */
     static getTimestamp() {
