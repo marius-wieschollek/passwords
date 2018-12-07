@@ -136,7 +136,7 @@ class ServiceApiController extends AbstractApiController {
         if($numbers === null) $numbers = $this->userSettings->get('password.generator.numbers');
         if($special === null) $special = $this->userSettings->get('password.generator.special');
 
-        list($password, $words) = $this->wordsService->getPassword($strength, $numbers, $special);
+        list($password, $words, $strength) = $this->wordsService->getPassword($strength, $numbers, $special);
         if(empty($password)) throw new ApiException('Unable to generate password');
 
         return $this->createJsonResponse(

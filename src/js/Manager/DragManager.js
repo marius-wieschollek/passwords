@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Utility from '@js/Classes/Utility';
 
 /**
  *
@@ -44,14 +45,13 @@ export default new class DragManager {
     }
 
     static scrollContent(e) {
-        let height = window.innerHeight,
-            $app   = $(window),
-            offset = $app.scrollTop();
+        let height    = window.innerHeight,
+            offsetTop = window.scrollY;
 
         if(e.originalEvent.clientY < height * 0.25) {
-            $app.scrollTop(offset - 5);
+            Utility.scrollTo(offsetTop - 50);
         } else if(e.originalEvent.clientY > height * 0.85) {
-            $app.scrollTop(offset + 5);
+            Utility.scrollTo(offsetTop + 50);
         }
         return false;
     }

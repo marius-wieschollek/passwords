@@ -363,9 +363,9 @@
                 display      : inline-block;
                 margin-right : 0.25rem;
                 animation    : life .9s linear infinite;
-                color        : $color-white;
+                color        : var(--color-primary-text);
                 font-size    : 42px;
-                font-family  : "Comic Sans MS", sans-serif;
+                font-family  : var(--pw-game-font-face);
                 line-height  : 36px;
                 font-weight  : bold;
                 text-shadow  : 2px 2px $color-grey-dark;
@@ -438,9 +438,9 @@
             }
 
             .text {
-                color         : $color-white;
+                color         : var(--color-primary-text);
                 font-size     : 24px;
-                font-family   : "Comic Sans MS", sans-serif;
+                font-family   : var(--pw-game-font-face);
                 line-height   : 28px;
                 font-weight   : bold;
                 text-shadow   : 2px 2px $color-grey-dark;

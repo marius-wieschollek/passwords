@@ -26,6 +26,7 @@
 
 namespace OCA\Passwords\Fetcher;
 
+use OC\App\AppStore\Fetcher\Fetcher;
 use OC\App\AppStore\Version\VersionParser;
 use OC\App\CompareVersion;
 use OC\Files\AppData\Factory;
@@ -39,12 +40,17 @@ use OCP\ILogger;
  *
  * @package OC\App\AppStore\Fetcher
  */
-class NightlyAppFetcher extends \OC\App\AppStore\Fetcher\Fetcher {
+class NightlyAppFetcher extends Fetcher {
 
     /**
      * @var CompareVersion
      */
     protected $compareVersion;
+
+    /**
+     * @var bool
+     */
+    protected $dbUpdated;
 
     /**
      * @param Factory        $appDataFactory
@@ -70,7 +76,8 @@ class NightlyAppFetcher extends \OC\App\AppStore\Fetcher\Fetcher {
             $logger
         );
 
-        $this->fileName = 'apps.json';
+        $this->dbUpdated = false;
+        $this->fileName  = 'apps.json';
         $this->setEndpoint();
         $this->compareVersion = $compareVersion;
     }
@@ -81,28 +88,33 @@ class NightlyAppFetcher extends \OC\App\AppStore\Fetcher\Fetcher {
      * @return array
      */
     public function get() {
-        try {
-            $rootFolder = $this->appData->getFolder('/');
-            $file       = $rootFolder->getFile($this->fileName);
+        $this->dbUpdated = false;
 
-            $eTag  = $this->config->getAppValue('passwords', 'nightly/etag', '');
-            $mTime = $this->config->getAppValue('passwords', 'nightly/mtime', '');
-            if($eTag !== $file->getETag() || $mTime !== $file->getMTime()) $file->delete();
-        } catch(\Exception $e) {
-        }
-
+        $eTag   = $this->prepareAppDbForUpdate();
         $result = parent::get();
-
-        try {
-            $rootFolder = $this->appData->getFolder('/');
-            $file       = $rootFolder->getFile($this->fileName);
-
-            $this->config->setAppValue('passwords', 'nightly/etag', $file->getETag());
-            $this->config->setAppValue('passwords', 'nightly/mtime', $file->getMTime());
-        } catch(\Exception $e) {
-        }
+        $this->updateAppDbAfterUpdate($eTag);
 
         return $result;
+    }
+
+    /**
+     *
+     */
+    public function clearDb(): void {
+        try {
+            $rootFolder = $this->appData->getFolder('/');
+            $file       = $rootFolder->getFile($this->fileName);
+            $file->delete();
+            $this->config->deleteAppValue('passwords', 'nightly/etag');
+        } catch(\Exception $e) {
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDbUpdated(): bool {
+        return $this->dbUpdated;
     }
 
     /**
@@ -115,86 +127,28 @@ class NightlyAppFetcher extends \OC\App\AppStore\Fetcher\Fetcher {
      * @throws \Exception
      */
     protected function fetch($ETag, $content) {
-        $response = parent::fetch($ETag, $content);
-        $this->config->setAppValue('passwords', 'nightly/etag', $response['ETag']);
+        $json = parent::fetch($ETag, $content);
 
-        foreach($response['data'] as $dataKey => $app) {
-            $releases = [];
-
-            // Filter all compatible releases
+        foreach($json['data'] as $dataKey => $app) {
+            $latest = null;
             foreach($app['releases'] as $release) {
-                // Exclude all nightly and pre-releases
-                if($this->releaseMatchesStabilityRequirements($release, $app['id'])) {
-                    // Exclude all versions not compatible with the current version
-                    try {
-                        $versionParser = new VersionParser();
-                        $version       = $versionParser->getVersion($release['rawPlatformVersionSpec']);
-                        $ncVersion     = $this->getVersion();
-                        $min           = $version->getMinimumVersion();
-                        $max           = $version->getMaximumVersion();
-                        $minFulfilled  = $this->compareVersion->isCompatible($ncVersion, $min, '>=');
-                        $maxFulfilled  = $max !== '' &&
-                                         $this->compareVersion->isCompatible($ncVersion, $max, '<=');
-                        if($minFulfilled && $maxFulfilled) {
-                            $releases[] = $release;
-                        }
-                    } catch(\InvalidArgumentException $e) {
-                        $this->logger->logException($e, ['app' => 'appstoreFetcher', 'level' => ILogger::WARN]);
-                    }
+                if(($latest === null || version_compare($latest['version'], $release['version']) < 0) &&
+                   $this->releaseAllowedInChannel($release, $app['id']) &&
+                   $this->checkVersionRequirements($release)) {
+                    $latest = $release;
                 }
             }
-
-            // Get the highest version
-            $versions = [];
-            foreach($releases as $release) {
-                $versions[] = $release['version'];
-            }
-            usort($versions, 'version_compare');
-            $versions   = array_reverse($versions);
-            $compatible = false;
-            if(isset($versions[0])) {
-                $highestVersion = $versions[0];
-                foreach($releases as $release) {
-                    if((string) $release['version'] === (string) $highestVersion) {
-                        $compatible                               = true;
-                        $response['data'][ $dataKey ]['releases'] = [$release];
-                        break;
-                    }
-                }
-            }
-            if(!$compatible) {
-                unset($response['data'][ $dataKey ]);
+            if($latest !== null) {
+                $json['data'][ $dataKey ]['releases'] = [$latest];
+            } else {
+                unset($json['data'][ $dataKey ]);
             }
         }
 
-        $response['data'] = array_values($response['data']);
+        $json['data'] = array_values($json['data']);
+        $json['timestamp'] = strtotime('+1 day');
 
-        return $response;
-    }
-
-    /**
-     * @param $release
-     * @param $app
-     *
-     * @return bool
-     */
-    public function releaseMatchesStabilityRequirements($release, $app): bool {
-        $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
-
-        return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || in_array($app, $nightlyApps);
-    }
-
-    /**
-     *
-     */
-    private function setEndpoint() {
-        $versionArray      = explode('.', $this->getVersion());
-        $this->endpointUrl = sprintf(
-            'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
-            $versionArray[0],
-            $versionArray[1],
-            $versionArray[2]
-        );
+        return $json;
     }
 
     /**
@@ -205,5 +159,94 @@ class NightlyAppFetcher extends \OC\App\AppStore\Fetcher\Fetcher {
         parent::setVersion($version);
         $this->fileName = $fileName;
         $this->setEndpoint();
+    }
+
+    /**
+     * @param $release
+     * @param $app
+     *
+     * @return bool
+     */
+    protected function releaseAllowedInChannel($release, $app): bool {
+        $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
+
+        return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || in_array($app, $nightlyApps);
+    }
+
+    /**
+     *
+     */
+    protected function setEndpoint() {
+        $versionArray      = explode('.', $this->getVersion());
+        $this->endpointUrl = sprintf(
+            'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
+            $versionArray[0],
+            $versionArray[1],
+            $versionArray[2]
+        );
+    }
+
+    /**
+     * @return string
+     */
+    protected function prepareAppDbForUpdate(): string {
+        try {
+            $rootFolder = $this->appData->getFolder('/');
+            $file       = $rootFolder->getFile($this->fileName);
+
+            $eTag = $this->config->getAppValue('passwords', 'nightly/etag', '');
+            if($eTag !== $file->getETag()) {
+                $file->delete();
+            } else {
+                $json = json_decode($file->getContent(), true);
+                if(is_array($json)) {
+                    $json['timestamp'] = $file->getMTime();
+                    $file->putContent(json_encode($json));
+                }
+            }
+
+            return $eTag;
+        } catch(\Exception $e) {
+            return '';
+        }
+    }
+
+    /**
+     * @param $eTag
+     */
+    protected function updateAppDbAfterUpdate($eTag): void {
+        try {
+            $rootFolder = $this->appData->getFolder('/');
+
+            $file = $rootFolder->getFile($this->fileName);
+            $this->config->setAppValue('passwords', 'nightly/etag', $file->getETag());
+
+            $this->dbUpdated = $eTag !== $file->getETag();
+        } catch(\Exception $e) {
+        }
+    }
+
+    /**
+     * @param $release
+     *
+     * @return bool
+     */
+    protected function checkVersionRequirements($release): bool {
+        try {
+            $versionParser = new VersionParser();
+            $version       = $versionParser->getVersion($release['rawPlatformVersionSpec']);
+            $ncVersion     = $this->getVersion();
+            $min           = $version->getMinimumVersion();
+            $max           = $version->getMaximumVersion();
+            $minFulfilled  = $this->compareVersion->isCompatible($ncVersion, $min, '>=');
+            $maxFulfilled  = $max !== '' &&
+                             $this->compareVersion->isCompatible($ncVersion, $max, '<=');
+
+            return $minFulfilled && $maxFulfilled;
+        } catch(\Throwable $e) {
+            $this->logger->logException($e, ['app' => 'appstoreFetcher', 'level' => ILogger::WARN]);
+        }
+
+        return false;
     }
 }

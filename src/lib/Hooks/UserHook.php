@@ -47,14 +47,14 @@ class UserHook {
     public function postDelete(IUser $user): void {
         $deletedUsers   = $this->getDeletedUsers();
         $deletedUsers[] = $user->getUID();
-        $this->config->setAppValue('deleted_users', json_encode($deletedUsers));
+        $this->config->setAppValue('users/deleted', json_encode($deletedUsers));
     }
 
     /**
      * @return array
      */
     protected function getDeletedUsers(): array {
-        $deletedUsers = json_decode($this->config->getAppValue('deleted_users', '{}'), true);
+        $deletedUsers = json_decode($this->config->getAppValue('users/deleted', '{}'), true);
 
         return $deletedUsers;
     }

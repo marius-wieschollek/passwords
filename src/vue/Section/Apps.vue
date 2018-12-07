@@ -7,17 +7,19 @@
                 <translate say="Browsers" tag="h1" icon="globe"/>
                 <translate say="Android" tag="h1" icon="android"/>
                 <div class="app-list">
-                    <a class="app" target="_blank" v-for="(app, id) in getBrowserExtensions" :class="id" :href="app.link">
+                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getBrowserExtensions" :class="id" :href="app.download">
                         <translate :say="app.label" tag="h3"/>
-                        <web target="_blank" class="author" :class="{'fa fa-certificate':app.official}" :href="app.source" :text="app.author"/>
+                        <web target="_blank" class="author" :class="{'fa fa-certificate':app.official}" :href="app.sources" :text="app.author"/>
                         <translate :say="app.description" tag="div" class="description"/>
                     </a>
                 </div>
 
                 <div class="app-list">
-                    <a class="app" target="_blank" v-for="(app, id) in getAndroidApps" :class="[id, app.legacy ? 'legacy':'']" :href="app.link">
+                    <a class="app" target="_blank" rel="noreferrer noopener" v-for="(app, id) in getAndroidApps" :class="[id, app.legacy ? 'legacy':'']" :href="app.download">
                         <translate :say="app.label" tag="h3"/>
-                        <web target="_blank" class="author" :href="app.source" :text="app.author"/>
+                        <web target="_blank" class="author" :href="app.web" :text="app.author"/>
+                        <span class="dot">⦁</span>
+                        <web target="_blank" class="author" :href="app.sources" text="sources"/>
                         <translate :say="app.description" tag="div" class="description"/>
                         <translate say="This app uses an api which is no longer supported." tag="div" class="legacy" v-if="app.legacy"/>
                     </a>
@@ -48,16 +50,16 @@
                         "label"      : "Official Firefox Client",
                         "author"     : Localisation.translate("official"),
                         "description": "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.",
-                        "link"       : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords",
-                        "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
+                        "download"   : "https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-apps",
+                        "sources"    : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
                     },
                     "chrome" : {
                         "label"      : "Official Chrome Client",
                         "author"     : Localisation.translate("official"),
-                        "description": "Our official Chrome extension lets you manage all your passwords from your browser and is available for a wide range of Chrome based Browsers from the Chrome Web Store.",
-                        "link"       : "https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi",
-                        "source"     : "https://github.com/marius-wieschollek/passwords-webextension",
+                        "description": "Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.",
+                        "download"   : "https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi",
+                        "sources"    : "https://github.com/marius-wieschollek/passwords-webextension",
                         "official"   : true
                     }
                 };
@@ -68,16 +70,18 @@
                         "label"      : "Nextcloud Passwords",
                         "author"     : Localisation.translate("created by {author}", {author: "daper"}),
                         "description": "Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.",
-                        "link"       : "https://play.google.com/store/apps/details?id=com.nextcloudpasswords",
-                        "source"     : "https://github.com/daper/nextcloud-passwords-app",
+                        "download"   : "https://play.google.com/store/apps/details?id=com.nextcloudpasswords",
+                        "sources"    : "https://github.com/daper/nextcloud-passwords-app",
+                        "web"        : "https://github.com/daper",
                         "legacy"     : false
                     },
                     "intirix": {
                         "label"      : "Cloud Password Manager",
                         "author"     : Localisation.translate("created by {author}", {author: "intirix"}),
-                        "description": "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your OwnCloud from your Android Phone.",
-                        "link"       : "https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager",
-                        "source"     : "https://github.com/intirix/cloudpasswordmanager",
+                        "description": "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.",
+                        "download"   : "https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager",
+                        "sources"    : "https://github.com/intirix/cloudpasswordmanager",
+                        "web"        : "https://github.com/intirix",
                         "legacy"     : true
                     }
                 };
@@ -125,7 +129,7 @@
 
             .app {
                 display         : block;
-                border-radius   : 3px;
+                border-radius   : var(--border-radius);
                 padding         : 200px 0.5rem 0.5rem;
                 background      : url(../../img/browser/firefox.svg) no-repeat center 20px;
                 background-size : 160px;
@@ -143,11 +147,11 @@
                     font-style : italic;
 
                     &.fa.fa-certificate {
-                        color       : $color-green !important;
+                        color       : var(--color-success) !important;
                         font-family : var(--font-face);
 
                         &:before {
-                            font-family : "FontAwesome", sans-serif;
+                            font-family : var(--pw-icon-font-face);
                             font-style  : normal;
                         }
                     }
@@ -165,6 +169,11 @@
                     font-weight : bold;
                 }
 
+                .dot {
+                    color  : var(--color-primary);
+                    margin : 0 0.5rem;
+                }
+
                 &.chrome {
                     background-image : url(../../img/browser/chrome.svg);
                 }
@@ -178,7 +187,7 @@
                 }
 
                 &.legacy {
-                    background-color : transparentize($color-black, 0.85);
+                    background-color : var(--color-loading-light);
                     opacity          : 0.6;
                     transition       : opacity 0.15s ease-in-out;
 

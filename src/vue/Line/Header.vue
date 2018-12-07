@@ -72,7 +72,7 @@
                 .asc::after,
                 .desc::after {
                     content      : "\f0d7";
-                    font-family  : FontAwesome, sans-serif;
+                    font-family  : var(--pw-icon-font-face);
                     padding-left : 5px;
                 }
 

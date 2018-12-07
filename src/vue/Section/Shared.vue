@@ -57,7 +57,7 @@
         data() {
             return {
                 loading   : false,
-                shareType : ['Shared with me', 'Shared by me'],
+                shareType : ['Shared with you', 'Shared by you'],
                 shareUsers: []
             };
         },
@@ -85,7 +85,7 @@
                         label  = this.shareType[status];
 
                     return [
-                        {path: {name: 'Shared'}, label: Localisation.translate('Shared')},
+                        {path: {name: 'Shares'}, label: Localisation.translate('Shares')},
                         {path: this.$route.path, label: Localisation.translate(label)}
                     ];
                 }

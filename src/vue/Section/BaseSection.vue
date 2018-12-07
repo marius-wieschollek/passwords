@@ -181,7 +181,7 @@
         .app-content-right {
             background-color : white;
             z-index          : 50;
-            border-left      : 1px solid $color-grey-light;
+            border-left      : 1px solid var(--color-border-dark);
             transition       : right 300ms;
             right            : -27%;
         }

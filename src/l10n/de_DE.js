@@ -1,5 +1,5 @@
 (function() {
-    let translations = {
+    let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
             'Folders'                             : 'Ordner',
@@ -101,14 +101,17 @@
             'Revision restored'                   : 'Version wiederhergestellt',
             'Restoring revision failed'           : 'Wiederherstellen der Version fehlgeschlagen',
             'Do you want to restore the revision?': 'Möchten Sie die Version wiederherstellen?',
-            'Shared with me'                      : 'Mit mir geteilt',
-            'Shared by me'                        : 'Von mir geteilt',
+            'Shared with you'                      : 'Mit Ihnen geteilt',
+            'Shared by you'                        : 'Von Ihnen geteilt',
             'Statistics'                          : 'Statistiken',
             'Created on'                          : 'Erstellt am',
             'Last updated'                        : 'Zuletzt geändert',
             '{count} revisions'                   : '{count} Versionen',
             'Shares'                              : 'Freigaben',
-            '{count} shares'                      : '{count} mal geteilt',
+            '{count} shares'                      : '{count} Freigaben',
+            'Server-side encryption'              : 'Serverseitige Verschlüsselung',
+            'Advanced server-side encryption'     : 'Erweiterte serverseitige Verschlüsselung',
+            'Client-side encryption'              : 'Verschlüsselung auf dem Endgerät',
             'More'                                : 'Mehr',
             'Backup and Restore'                  : 'Sichern & Wiederherstellen',
             'Browser Extension'                   : 'Browser Extension',
@@ -313,12 +316,13 @@
             'Official Chrome Client'              : 'Offizieller Chrome Client',
             'official'                            : 'offiziell',
             'created by {author}'                 : 'erstellt von {author}',
+            'sources'                             : 'Quelltext',
             'true'                                : 'ja',
             'false'                               : 'nein',
             'yes'                                 : 'ja',
             'no'                                  : 'nein'
         },
-        helpTexts    = {
+        helpTexts       = {
             'Mark passwords as weak if they are being used for multiple accounts'        : 'Markiert Passwörter als "Unsicher" wenn sie für mehr als ein Konto verwendet werden',
             'Mark passwords as weak if they surpass the specified amount of days'        : 'Markiert Passwörter als "Unsicher" wenn sie das in Tagen angegebene Alter überschreiten',
             'A higher strength results in longer, more complex passwords'                : 'Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter',
@@ -357,16 +361,22 @@
             'More information can be found in the log. (Press F12)'                      : 'Mehr Details können im Protokoll gefunden werden. (Drücken Sie F12)',
             'This app uses an api which is no longer supported.'                         : 'Diese App verwendet eine nicht mehr unterstützte API.'
         },
-        longTexts    = {
+        longTexts       = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Möchten Sie wirklich alle Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.',
-            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür fehlerhafte Exportdateien zu erstellen. Sehen Sie im Handbuch nach, wenn die Datei nicht verarbeitet werden kann.'
+            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür fehlerhafte Exportdateien zu erstellen. Sehen Sie im Handbuch nach, wenn die Datei nicht verarbeitet werden kann.',
             'Today in 2018, the first version of passwords was published. Thank you for using the app.'                        : 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen.'
+        },
+        appDescriptions = {
+            'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.'                                     : 'Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store können Sie alle Ihre Passwörter einfach in Firefox verwenden und verwalten.',
+            'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.': 'Unsere offizielle Chrome-Erweiterung ermöglicht es Ihnen, alle Ihre Passwörter über Ihren Browser zu verwalten und ist für viele auf Chromium basierenden Browsern im Chrome Web Store verfügbar.',
+            'Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.'                              : 'Endlich eine moderne, schnelle und benutzerfreundliche App für den Zugriff und die Verwaltung Ihrer Passwörter von Ihrem Android-Gerät aus. Holen Sie sie sich bei Google Play.',
+            'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.'              : 'Cloud Password Manager ist ein Passwortmanager, bei dem Sie die Kontrolle behalten. Greifen Sie von Ihrem Android-Gerät aus auf alle auf Ihrer Nextcloud gespeicherten Passwörter zu.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts),
+        Object.assign(translations, helpTexts, longTexts, appDescriptions),
         'nplurals=2; plural=(n != 1);'
     );
 }());

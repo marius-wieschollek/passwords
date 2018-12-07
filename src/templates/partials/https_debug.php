@@ -79,10 +79,10 @@ $request = \OC::$server->getRequest();
 <style>
     #passwords-https-detection-details {
         position      : fixed;
-        background    : <?=\OC::$server->getThemingDefaults()->getColorPrimary()?>;
-        color         : <?=\OC::$server->getThemingDefaults()->getTextColorPrimary()?>;
+        background    : var(--color-primary);
+        color         : var(--color-primary-text);
         z-index       : 10000;
-        border-radius : 3px;
+        border-radius : var(--border-radius);
         right         : 20px;
         bottom        : 20px;
         padding       : 3px 0;
@@ -96,8 +96,8 @@ $request = \OC::$server->getRequest();
     }
 
     #passwords-https-detection-details tr:hover {
-        color      : <?=\OC::$server->getThemingDefaults()->getColorPrimary()?>;
-        background : <?=\OC::$server->getThemingDefaults()->getTextColorPrimary()?>;
+        color      : var(--color-primary);
+        background : var(--color-primary-text);
     }
 
     #passwords-https-detection-details th {

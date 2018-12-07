@@ -30,7 +30,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  */
 class SynchronizeShares extends AbstractCronJob {
 
-    const EXECUTION_TIMESTAMP = 'cron.sharing.time';
+    const EXECUTION_TIMESTAMP = 'cron/sharing/time';
 
     /**
      * @var ConfigurationService
@@ -114,7 +114,7 @@ class SynchronizeShares extends AbstractCronJob {
         $this->updatePasswords();
         $this->notifyUsers();
 
-        $this->config->setAppValue(self::EXECUTION_TIMESTAMP, 0);
+        $this->config->deleteAppValue(self::EXECUTION_TIMESTAMP);
     }
 
     /**

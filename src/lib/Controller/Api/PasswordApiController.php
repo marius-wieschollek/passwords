@@ -218,11 +218,17 @@ class PasswordApiController extends AbstractObjectApiController {
             }
         }
 
-        if($edited === 0) $edited = $oldRevision->getEdited();
+
         $revision = $this->revisionService->create(
             $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
             $favorite
         );
+
+        if($revision->getHash() !== $oldRevision->getHash()) {
+            if($edited === 0) $revision->setEdited(time());
+        } else {
+            $revision->setEdited($oldRevision->getEdited());
+        }
 
         $this->revisionService->save($revision);
         $this->modelService->setRevision($model, $revision);

@@ -45,9 +45,27 @@ class CheckNightlyUpdates extends AbstractCronJob {
      * @throws \Exception
      */
     protected function runJob($argument): void {
-        if($this->config->getAppValue('nightly_updates', false)) {
+        $enabled = $this->config->getAppValue('nightly/enabled', false) === '1';
+        $enabled = $this->migrateNightlyKey($enabled);
+
+        if($enabled) {
             $this->nightlyAppFetcher->get();
-            $this->logger->info('Fetched app list from appstore');
+            if($this->nightlyAppFetcher->isDbUpdated()) $this->logger->debug('Fetched latest app database');
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function migrateNightlyKey(bool $enabled): bool {
+        if($this->config->getAppValue('nightly_updates', null) !== null) {
+            if($this->config->getAppValue('nightly_updates', false) === '1') {
+                $this->config->setAppValue('nightly/enabled', true);
+                $enabled = true;
+            }
+            $this->config->deleteAppValue('nightly_updates');
+        }
+
+        return $enabled;
     }
 }
