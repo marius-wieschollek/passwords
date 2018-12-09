@@ -1,7 +1,7 @@
 <template>
     <div class="tab-container">
         <ul class="tab-titles">
-            <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" :style="getStyle" @click="setCurrent(name)" :say="tab" :data-tab="name"/>
+            <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" @click="setCurrent(name)" :say="tab" :data-tab="name"/>
         </ul>
         <div class="tab-contents">
             <div class="tab-content active">
@@ -13,7 +13,6 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import ThemeManager from '@js/Manager/ThemeManager';
 
     export default {
         components: {
@@ -29,14 +28,6 @@
         data() {
             return {
                 tab: Object.keys(this.tabs)[0]
-            }
-        },
-
-        computed: {
-            getStyle() {
-                return {
-                    'border-color': ThemeManager.getColor()
-                };
             }
         },
 
@@ -61,10 +52,10 @@
                 color   : $color-black-lighter;
 
                 &:hover,
-                &.active { border-bottom : 1px solid $color-black-light; }
+                &.active { border-bottom : 1px solid var(--color-primary); }
 
                 &.active {
-                    color       : $color-black;
+                    color       : var(--color-main-text);
                     font-weight : 600;
                 }
 

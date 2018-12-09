@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class PasswordRevisionMapper
  *
@@ -18,8 +20,6 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
 
     const MODEL_TABLE_NAME = 'passwords_entity_password';
 
-    protected $allowedFields = ['id', 'uuid', 'model', 'status'];
-
     /**
      * @param string      $hash
      * @param string      $model
@@ -28,17 +28,27 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
      * @return bool
      */
     public function hasDuplicates(string $hash, string $model, string $user = null): bool {
-        list($sql, $params) = $this->getStatement();
+        $sql = $this->getStatement();
 
-        $sql      .= ' AND `hash` = ? AND model != ?';
-        $params[] = $hash;
-        $params[] = $model;
+        $sql->andWhere(
+            $sql->expr()->eq('hash', $sql->createNamedParameter($hash, IQueryBuilder::PARAM_STR)),
+            $sql->expr()->neq('model', $sql->createNamedParameter($model, IQueryBuilder::PARAM_STR))
+        );
 
         if($user !== null) {
-            $sql      .= ' AND `user_id` = ?';
-            $params[] = $user;
+            $sql->andWhere(
+                $sql->expr()->eq('user_id', $sql->createNamedParameter($user, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return count($this->findEntities($sql, $params)) !== 0;
+        return count($this->findEntities($sql)) !== 0;
+    }
+
+    /**
+     * @return PasswordRevision[]
+     * @throws \Exception
+     */
+    public function findAllWithGoodStatus(): array {
+        return $this->findAllByField('status', 2, IQueryBuilder::PARAM_INT, 'neq');
     }
 }

@@ -449,45 +449,45 @@
             progress {
                 width              : 100%;
                 height             : 34px;
-                border-radius      : 3px;
+                border-radius      : var(--border-radius);
                 border             : none;
                 -webkit-appearance : none;
                 background-color   : $color-grey-lighter;
 
                 &::-moz-progress-bar {
-                    background-color : $color-theme;
-                    border-radius    : 3px;
+                    background-color : var(--color-primary);
+                    border-radius    : var(--border-radius);
                     transition       : background-color 0.25s ease-in-out;
                 }
 
                 &::-webkit-progress-value {
-                    background-color : $color-theme;
-                    border-radius    : 3px;
+                    background-color : var(--color-primary);
+                    border-radius    : var(--border-radius);
                     transition       : background-color 0.25s ease-in-out;
                 }
 
                 &.success {
                     &::-moz-progress-bar {
-                        background-color : $color-green;
+                        background-color : var(--color-success);
                     }
                     &::-webkit-progress-value {
-                        background-color : $color-green;
+                        background-color : var(--color-success);
                     }
                 }
                 &.warn {
                     &::-moz-progress-bar {
-                        background-color : $color-yellow;
+                        background-color : var(--color-warning);
                     }
                     &::-webkit-progress-value {
-                        background-color : $color-yellow;
+                        background-color : var(--color-warning);
                     }
                 }
                 &.error {
                     &::-moz-progress-bar {
-                        background-color : $color-red-dark;
+                        background-color : var(--color-error)
                     }
                     &::-webkit-progress-value {
-                        background-color : $color-red-dark;
+                        background-color : var(--color-error)
                     }
                 }
             }

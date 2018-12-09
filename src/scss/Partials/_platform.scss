@@ -1,44 +1,6 @@
-[data-server-version="12"] {
-    #app-content {
-        #controls {
-            top: 0;
-        }
-    }
-
-    #app-navigation {
-        #app-settings {
-            max-height : 90px;
-
-            &.open {
-                max-height : 270px;
-            }
-        }
-    }
-
-    @media all and (max-width : 360px) {
-        #controls #app-navigation-toggle {
-            float: left;
-        }
-    }
-}
-
-[data-server-version="14"] {
-    width: 100%;
-
-    #app-navigation {
-        transform: translateX(0);
-
-        #app-settings {
-            position: relative;
-        }
-    }
-
-    #app-content {
-        overflow-y: initial;
-        overflow-x: initial;
-
-        &.show-details .app-content-right {
-            top: 50px;
-        }
+[data-server-version="15"] {
+    .menu-center {
+        position: relative;
+        left: -126px;
     }
 }

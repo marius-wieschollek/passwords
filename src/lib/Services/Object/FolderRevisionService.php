@@ -206,7 +206,6 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->setTrashed($trashed);
         $revision->setEdited($edited);
         $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $revision->setClient('');
 
         return $revision;
     }

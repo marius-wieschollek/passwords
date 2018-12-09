@@ -56,7 +56,7 @@ let router = new Router(
             {name: 'Tags', path: '/tags/:tag?', components: {main: SectionTags}},
             {name: 'Recent', path: '/recent', components: {main: SectionRecent}},
             {name: 'Favorites', path: '/favorites', components: {main: SectionFavorites}},
-            {name: 'Shared', path: '/shared/:type?', components: {main: SectionShared}},
+            {name: 'Shares', path: '/shared/:type?', components: {main: SectionShared}},
             {name: 'Security', path: '/security/:status?', components: {main: SectionSecurity}},
             {name: 'Search', path: '/search/:query?', components: {main: SectionSearch}},
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},

@@ -101,14 +101,17 @@
             'Revision restored'                   : 'Version wiederhergestellt',
             'Restoring revision failed'           : 'Wiederherstellen der Version fehlgeschlagen',
             'Do you want to restore the revision?': 'Möchtest du die Version wiederherstellen?',
-            'Shared with me'                      : 'Mit mir geteilt',
-            'Shared by me'                        : 'Von mir geteilt',
+            'Shared with you'                      : 'Mit dir geteilt',
+            'Shared by you'                        : 'Von dir geteilt',
             'Statistics'                          : 'Statistiken',
             'Created on'                          : 'Erstellt am',
             'Last updated'                        : 'Zuletzt geändert',
             '{count} revisions'                   : '{count} Versionen',
             'Shares'                              : 'Freigaben',
             '{count} shares'                      : '{count} mal geteilt',
+            'Server-side encryption'              : 'Serverseitige Verschlüsselung',
+            'Advanced server-side encryption'     : 'Erweiterte serverseitige Verschlüsselung',
+            'Client-side encryption'              : 'Verschlüsselung auf dem Endgerät',
             'More'                                : 'Mehr',
             'Backup and Restore'                  : 'Sichern & Wiederherstellen',
             'Browser Extension'                   : 'Browser Extension',
@@ -360,7 +363,8 @@
         longTexts       = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Die Datei ist vom Type "{actual}" aber "{expected}" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen.',
-            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.'
+            '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} ist bekannt dafür, fehlerhafte Exportdateien zu erstellen. Schau in der Hilfe nach, wenn die Datei nicht verarbeitet werden kann.',
+            'Today in 2018, the first version of passwords was published. Thank you for using the app.'                        : 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
         },
         appDescriptions = {
             'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.'                                     : 'Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store kannst du auf alle deine Passwörter einfach von Firefox aus zugreifen und neue hinzufügen.',

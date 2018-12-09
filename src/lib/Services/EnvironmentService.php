@@ -10,7 +10,6 @@ namespace OCA\Passwords\Services;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\AppInfo\Application;
-use OCP\BackgroundJob;
 use OCP\IConfig;
 use OCP\ILogger;
 use OCP\IRequest;
@@ -158,11 +157,11 @@ class EnvironmentService {
      */
     protected function checkIfCronJob(IRequest $request): void {
         $requestUri = $request->getRequestUri();
-        $cronType   = $this->getBackgroundJobType();
+        $cronMode = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
         $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
-                           ($requestUri === '/cron.php' && in_array($cronType, ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $cronType === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+                           ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
+                           ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
@@ -177,15 +176,5 @@ class EnvironmentService {
         } catch(\Exception $e) {
             $this->logger->logException($e, ['app' => Application::APP_NAME]);
         }
-    }
-
-    /**
-     * @return string
-     * @TODO remove in 2019.1.0
-     */
-    protected function getBackgroundJobType() {
-        if(BackgroundJob::getExecutionType() !== '') return BackgroundJob::getExecutionType();
-
-        return $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
     }
 }

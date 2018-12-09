@@ -25,7 +25,6 @@ use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Preview\WkhtmlImageHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
@@ -47,7 +46,6 @@ class HelperService {
     const PREVIEW_SCREEN_SHOT_MACHINE = 'ssm';
     const PREVIEW_SCREEN_SHOT_API     = 'ssa';
     const PREVIEW_WEBSHOT             = 'ws';
-    const PREVIEW_WKHTML              = 'wkhtml';
     const PREVIEW_PAGERES             = 'pageres';
     const PREVIEW_DEFAULT             = 'default';
 
@@ -98,7 +96,7 @@ class HelperService {
     public function getImageHelper(): AbstractImageHelper {
         $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
 
-        if($service == self::IMAGES_IMAGICK && class_exists(Imagick::class) || class_exists(Gmagick::class)) {
+        if($service == self::IMAGES_IMAGICK && HelperService::canUseImagick()) {
             return $this->container->query(ImagickHelper::class);
         }
 
@@ -113,8 +111,6 @@ class HelperService {
         $service = $this->config->getAppValue('service/preview', self::PREVIEW_DEFAULT);
 
         switch($service) {
-            case self::PREVIEW_WKHTML:
-                return $this->container->query(WkhtmlImageHelper::class);
             case self::PREVIEW_PAGERES:
                 return $this->container->query(PageresCliHelper::class);
             case self::PREVIEW_WEBSHOT:
@@ -203,5 +199,12 @@ class HelperService {
      */
     public function getDefaultFaviconHelper(): DefaultFaviconHelper {
         return $this->container->query(DefaultFaviconHelper::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public static function canUseImagick(): bool {
+        return class_exists(Imagick::class) || class_exists(Gmagick::class);
     }
 }

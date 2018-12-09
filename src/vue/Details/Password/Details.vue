@@ -1,6 +1,6 @@
 <template>
     <div slot="details" class="details">
-        <detail-field v-for="(field, index) in getCustomFields" :key="index" :name="field.name" :type="field.type" :value="field.value" />
+        <detail-field v-for="(field, index) in getCustomFields" :key="index" :name="field.name" :type="field.type" :value="field.value"/>
 
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
@@ -16,7 +16,10 @@
         <translate tag="div" say="Status">
             <translate :say="getSecurityStatus" :class="getSecurityClass.toLowerCase()"/>
         </translate>
-        <detail-field name="SHA1 Hash" type="text" :value="password.hash" />
+        <translate tag="div" say="Encryption">
+            <translate :say="getEncryption" />
+        </translate>
+        <detail-field name="SHA-1" type="text" :value="password.hash"/>
     </div>
 </template>
 
@@ -72,13 +75,13 @@
                 return this.getSecurityClass.capitalize();
             },
             getCustomFields() {
-                let fields = [],
+                let fields       = [],
                     customFields = this.password.customFields;
 
-                fields.push({name: Localisation.translate('Name'), value:this.password.label});
-                if(this.password.username) fields.push({name: Localisation.translate('Username'), value:this.password.username});
-                fields.push({name: Localisation.translate('Password'), value:this.password.password, type: 'secret'});
-                if(this.password.url) fields.push({name: Localisation.translate('Website'), value:this.password.url, type:'url'});
+                fields.push({name: Localisation.translate('Name'), value: this.password.label});
+                if(this.password.username) fields.push({name: Localisation.translate('Username'), value: this.password.username});
+                fields.push({name: Localisation.translate('Password'), value: this.password.password, type: 'secret'});
+                if(this.password.url) fields.push({name: Localisation.translate('Website'), value: this.password.url, type: 'url'});
 
 
                 for(let name in customFields) {
@@ -94,6 +97,14 @@
                 }
 
                 return fields;
+            },
+            getEncryption() {
+                let encryption = 'none';
+                if(this.password.sseType === 'SSEv1r1') encryption = 'Server-side encryption';
+                if(this.password.sseType === 'SSEv2r1') encryption = 'Advanced server-side encryption';
+                if(this.password.cseType === 'CSEv1r1') encryption = 'Client-side encryption';
+
+                return Localisation.translate(encryption)
             }
         },
         methods : {
@@ -112,29 +123,29 @@
             font-size     : 0.9em;
             font-style    : italic;
             margin-bottom : 5px;
-            color         : $color-grey-darker;
+            color         : var(--color-text-maxcontrast);
 
             a,
             span {
                 display    : block;
                 font-style : normal;
                 font-size  : 1.3em;
-                color      : $color-black-light;
+                color      : var(--color-text-lighter);
                 text-align : right;
                 cursor     : text;
-                word-wrap: break-word;
+                word-wrap  : break-word;
 
                 &.secret {
                     cursor : pointer;
 
-                    &:hover {
-                        font-family : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
+                    &.visible {
+                        font-family : var(--pw-mono-font-face);
                     }
                 }
 
-                &.secure {color : $color-green;}
-                &.weak {color : $color-yellow;}
-                &.breached {color : $color-red;}
+                &.secure {color : var(--color-success);}
+                &.weak {color : var(--color-warning);}
+                &.breached {color : var(--color-error);}
             }
 
             a {
@@ -150,7 +161,7 @@
             margin-top  : 20px;
             font-size   : 1.3em;
             font-weight : bold;
-            color       : $color-black-light;
+            color       : var(--color-text-light);
         }
     }
 </style>

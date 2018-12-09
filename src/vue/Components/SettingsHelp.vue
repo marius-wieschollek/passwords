@@ -39,7 +39,7 @@
 
         &:before {
             content     : "\f059";
-            font-family : FontAwesome, sans-serif;
+            font-family : var(--pw-icon-font-face);
             line-height : 40px;
             font-size   : 1.4em;
             width       : 26px;
@@ -67,9 +67,9 @@
                 position         : absolute;
                 right            : 0;
                 background-color : transparentize($color-black, 0.25);
-                color            : $color-white;
+                color            : var(--color-primary-text);
                 padding          : 10px;
-                border-radius    : 3px;
+                border-radius    : var(--border-radius);
                 width            : 200px;
 
                 &:after {

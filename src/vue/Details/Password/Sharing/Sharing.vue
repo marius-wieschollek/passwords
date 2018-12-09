@@ -4,8 +4,8 @@
         <ul class="shares" v-for="share in shares" :key="share.id" :data-share-id="share.id">
             <share :share="share" v-on:delete="deleteShare($event)" v-on:update="refreshShares()"></share>
         </ul>
-        <ul class="user-search" :style="getDropDownStyle" v-if="matches.length !== 0">
-            <li v-for="match in matches" @click="shareWithUser(match.id)" @mouseover="getHoverStyle($event)" @mouseout="getHoverStyle($event, false)">
+        <ul class="user-search" v-if="matches.length !== 0">
+            <li v-for="match in matches" @click="shareWithUser(match.id)">
                 <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{match.name}}
             </li>
         </ul>
@@ -17,7 +17,6 @@
     import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
     import Localisation from "@js/Classes/Localisation";
-    import ThemeManager from '@js/Manager/ThemeManager';
     import SettingsManager from '@js/Manager/SettingsManager';
     import Share from '@vue/Details/Password/Sharing/Share';
 
@@ -56,13 +55,6 @@
         },
 
         computed: {
-            getDropDownStyle() {
-                return {
-                    color          : ThemeManager.getColor(),
-                    border         : '1px solid ' + ThemeManager.getColor(),
-                    backgroundColor: ThemeManager.getContrastColor()
-                };
-            },
             getSharedWithUsers() {
                 let users = [];
                 for(let i in this.shares) {
@@ -123,18 +115,10 @@
                     if(e.id === '65782183') {
                         Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
-                        Messages.notification(['Unable to share password: {message}', {message: e.message}]);
+                        let message = e.hasOwnProperty('message') ? e.message:e.statusText;
+                        Messages.notification(['Unable to share password: {message}', {message}]);
                     }
                 });
-            },
-            getHoverStyle($event, on = true) {
-                if(on) {
-                    $event.target.style.backgroundColor = ThemeManager.getColor();
-                    $event.target.style.color = ThemeManager.getContrastColor();
-                } else {
-                    $event.target.style.backgroundColor = null;
-                    $event.target.style.color = null;
-                }
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
@@ -222,17 +206,25 @@
         }
 
         .user-search {
-            position      : absolute;
-            top           : 37px;
-            width         : 100%;
-            border-radius : 3px;
-            z-index       : 2;
+            position         : absolute;
+            top              : 37px;
+            width            : 100%;
+            border-radius    : var(--border-radius);
+            z-index          : 2;
+            background-color : var(--color-main-background);
+            color            : var(--color-primary);
+            border           : 1px solid var(--color-primary);
 
             li {
                 line-height : 32px;
                 display     : flex;
                 padding     : 3px;
                 cursor      : pointer;
+
+                &:hover {
+                    color            : var(--color-primary-text);
+                    background-color : var(--color-primary);
+                }
             }
         }
     }

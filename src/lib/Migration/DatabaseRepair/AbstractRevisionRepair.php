@@ -78,12 +78,6 @@ abstract class AbstractRevisionRepair {
     protected function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;
 
-        if($revision->getFavourite()) {
-            $revision->setFavorite(true);
-            $revision->setFavourite(false);
-            $fixed = true;
-        }
-
         try {
             $this->modelMapper->findByUuid($revision->getModel());
         } catch(DoesNotExistException | MultipleObjectsReturnedException $e) {

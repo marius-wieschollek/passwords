@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class TagMapper
  *
@@ -22,28 +24,18 @@ class TagMapper extends AbstractMapper {
      *
      * @return Tag[]
      */
-    public function getByPassword(string $passwordUuid, bool $includeHidden = false): array {
-        $tagTable      = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $relationTable = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
+    public function findAllByPassword(string $passwordUuid, bool $includeHidden = false): array {
+        $sql = $this->getJoinStatement(PasswordTagRelationMapper::TABLE_NAME, 'uuid', 'tag');
 
-        $sql = "SELECT {$tagTable}.* FROM {$tagTable} ".
-               "INNER JOIN {$relationTable} ON {$tagTable}.`uuid` = {$relationTable}.`tag` ".
-               "WHERE {$tagTable}.`deleted` = ? ".
-               "AND {$relationTable}.`deleted` = ? ".
-               "AND {$relationTable}.`password` = ?";
-
-        $params = [false, false, $passwordUuid];
-        if($this->userId !== null) {
-            $sql      .= " AND {$tagTable}.`user_id` = ?";
-            $sql      .= " AND {$relationTable}.`user_id` = ?";
-            $params[] = $this->userId;
-            $params[] = $this->userId;
-        }
+        $sql->andWhere(
+            $sql->expr()->eq('b.password', $sql->createNamedParameter($passwordUuid, IQueryBuilder::PARAM_STR))
+        );
         if(!$includeHidden) {
-            $sql      .= " AND {$relationTable}.`hidden` = ?";
-            $params[] = false;
+            $sql->andWhere(
+                $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return $this->findEntities($sql, $params);
+        return $this->findEntities($sql);
     }
 }

@@ -14,8 +14,8 @@
                 <router-link class="nav-icon-favorites" :to="{ name: 'Favorites'}" active-class="active" tag="li">
                     <translate say="Favorites"/>
                 </router-link>
-                <router-link class="nav-icon-shared" :to="{ name: 'Shared'}" active-class="active" tag="li">
-                    <translate say="Shared"/>
+                <router-link class="nav-icon-shares" :to="{ name: 'Shares'}" active-class="active" tag="li">
+                    <translate say="Shares"/>
                 </router-link>
                 <router-link class="nav-icon-tags" :to="{ name: 'Tags'}" active-class="active" tag="li">
                     <translate say="Tags"/>
@@ -51,6 +51,8 @@
         <div id="app-popup">
             <div></div>
         </div>
+        <star-chaser v-if="starChaser"/>
+        <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </div>
 </template>
 
@@ -58,14 +60,16 @@
     import '@scss/app';
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
+    import Messages from '@js/Classes/Messages';
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         el        : '#main',
         router,
         components: {
-            app: {router},
-            Translate
+            app          : {router},
+            Translate,
+            'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
         data() {
@@ -75,7 +79,8 @@
             return {
                 serverVersion,
                 showSearch,
-                showMore: false
+                showMore  : false,
+                starChaser: false
             };
         },
 
@@ -86,28 +91,48 @@
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
+            },
+            isBirthDay() {
+                let today = new Date(),
+                    bday  = new Date(`${today.getFullYear()}-01-12`);
+
+                return bday.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0);
+            }
+        },
+
+        methods: {
+            birthDayPopup() {
+                document.getElementById('birthday').remove();
+                Messages.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
             }
         }
     };
 </script>
 
 <style lang="scss">
+    #app {
+        width : 100%;
+    }
+
     #app-navigation {
+        transform : translateX(0);
+
         li {
             line-height   : 44px;
             padding       : 0 12px;
             white-space   : nowrap;
             text-overflow : ellipsis;
-            color         : $color-grey-darker;
+            color         : var(--color-main-text);
+            opacity       : 0.57;
             cursor        : pointer;
-            transition    : box-shadow .1s ease-in-out, color .1s ease-in-out;
+            transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
             &:hover,
             &:active,
-            &.active { color : $color-black; }
+            &.active { opacity : 1; }
 
             &:before {
-                font-family   : FontAwesome, sans-serif;
+                font-family   : var(--pw-icon-font-face);
                 font-size     : 1rem;
                 padding-right : 10px;
                 width         : 1rem;
@@ -120,7 +145,7 @@
             &.nav-icon-recent:before { content : "\f017"; }
             &.nav-icon-tags:before { content : "\f02c"; }
             &.nav-icon-security:before { content : "\f132"; }
-            &.nav-icon-shared:before { content : "\f1e0"; }
+            &.nav-icon-shares:before { content : "\f1e0"; }
             &.nav-icon-favorites:before { content : "\f005"; }
             &.nav-icon-search:before { content : "\f002"; }
             &.nav-icon-trash:before { content : "\f014"; }
@@ -136,18 +161,43 @@
         }
 
         #app-settings {
-            position         : fixed;
+            position         : relative;
             overflow         : hidden;
             max-height       : 88px;
-            background-color : $color-white;
-            border-right     : 1px solid $color-grey-lighter;
+            background-color : var(--color-main-background);
+            border-right     : 1px solid var(--color-border);
             transition       : max-height 0.25s ease-in-out;
 
             &.open {
                 max-height : 264px;
 
-                li.nav-icon-more:before { content : "\f068"; }
+                li.nav-icon-more {
+                    opacity : 1;
+
+                    &:before { content : "\f068"; }
+                }
             }
+        }
+    }
+
+    #birthday {
+        position      : fixed;
+        right         : 20px;
+        bottom        : 20px;
+        background    : var(--color-primary);
+        color         : var(--color-primary-text);
+        line-height   : 40px;
+        width         : 40px;
+        text-align    : center;
+        border-radius : 50%;
+        cursor        : pointer;
+        font-size     : 18px;
+        z-index       : 1000;
+        opacity       : 0.5;
+        transition    : opacity .25s ease-in-out;
+
+        &:hover {
+            opacity : 1;
         }
     }
 </style>
