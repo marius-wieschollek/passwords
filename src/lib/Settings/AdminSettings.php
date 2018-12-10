@@ -358,7 +358,7 @@ class AdminSettings implements ISettings {
             ],
             'server' => [
                 'warn'    => false,
-                'error'   => $ncVersion < 14,
+                'error'   => $ncVersion < 15,
                 'version' => $ncVersion
             ],
             'eol'    => '2020.1.0'
