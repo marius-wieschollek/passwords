@@ -290,7 +290,7 @@
 
         #passwords-export-encrypt.invalid,
         #passwords-export-encrypt:invalid {
-            box-shadow : $color-red 0 0 3px 1px
+            box-shadow : var(--color-error) 0 0 3px 1px
         }
     }
 </style>

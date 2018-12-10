@@ -45,7 +45,7 @@
 <style lang="scss">
     .item-details .notes {
         blockquote {
-            font-family : monospace;
+            font-family : var(--pw-mono-font-face);
             margin      : 5px 0;
             padding     : 10px 0 10px 15px;
             border-left : 2px solid $color-grey-dark;

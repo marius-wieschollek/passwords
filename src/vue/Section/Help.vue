@@ -233,7 +233,7 @@
 
                     @keyframes Highlight {
                         0% {background-color : transparent}
-                        50% {background-color : $color-green}
+                        50% {background-color : var(--color-success)}
                         100% {background-color : transparent}
                     }
                 }
@@ -288,20 +288,20 @@
                 background    : $color-grey-lighter;
                 color         : $color-black-lighter;
                 padding       : 1px 3px;
-                border        : 1px solid $color-grey-light;
-                border-radius : 3px;
+                border        : 1px solid var(--color-border-dark);
+                border-radius : var(--border-radius);
                 white-space   : nowrap;
-                font-family   : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
+                font-family   : var(--pw-mono-font-face);
             }
 
             pre {
                 background    : $color-grey-lighter;
                 color         : $color-black-lighter;
                 padding       : 2px 3px;
-                border        : 1px solid $color-grey-light;
-                border-radius : 3px;
+                border        : 1px solid var(--color-border-dark);
+                border-radius : var(--border-radius);
                 overflow-x    : auto;
-                font-family   : 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', monospace;
+                font-family   : var(--pw-mono-font-face);
 
                 code {
                     background    : inherit;
@@ -329,7 +329,7 @@
                     }
                     th,
                     td {
-                        border  : 1px solid $color-grey-light;
+                        border  : 1px solid var(--color-border-dark);
                         padding : 2px;
                     }
                 }

@@ -59,7 +59,7 @@ abstract class AbstractModelService extends AbstractService {
      * @return ModelInterface[]
      */
     public function findByUserId(string $userId): array {
-        return $this->mapper->findByUserId($userId);
+        return $this->mapper->findAllByUserId($userId);
     }
 
     /**
@@ -70,12 +70,7 @@ abstract class AbstractModelService extends AbstractService {
      * @throws \Exception
      */
     public function findByIdOrUuid($search): ?ModelInterface {
-        return $this->mapper->findOneMatching(
-            [
-                ['id', $search, '=', 'OR'],
-                ['uuid', $search, '=', 'OR']
-            ]
-        );
+        return $this->mapper->findOneByIdOrUuid($search);
     }
 
     /**

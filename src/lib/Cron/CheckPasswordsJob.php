@@ -97,7 +97,7 @@ class CheckPasswordsJob extends AbstractCronJob {
      */
     protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
         /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionMapper->findAllMatching(['status', 2, '!=']);
+        $revisions = $this->revisionMapper->findAllWithGoodStatus();
 
         $badRevisionCounter = 0;
         foreach($revisions as $revision) {

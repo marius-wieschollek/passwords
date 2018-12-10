@@ -11,18 +11,15 @@ use OCA\Passwords\Migration\Legacy\LegacyCategoryMigration;
 use OCA\Passwords\Migration\Legacy\LegacyPasswordMigration;
 use OCA\Passwords\Migration\Legacy\LegacyShareMigration;
 use OCA\Passwords\Services\ConfigurationService;
-use OCP\DB\ISchemaWrapper;
-//use OCP\Migration\IMigrationStep;
-use OCP\Migration\IRepairStep;
 use OCP\Migration\IOutput;
+use OCP\Migration\IRepairStep;
 
 /**
  * Class LegacyDatabaseMigration
  *
  * @package OCA\Passwords\Migration
- * @TODO Use IMigrationStep after dropping NC 12.x
  */
-class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
+class LegacyDatabaseMigration implements IRepairStep {
 
     /**
      * @var LegacyShareMigration
@@ -65,16 +62,6 @@ class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
     }
 
     /**
-     * Returns the step's name
-     *
-     * @return string
-     * @since 9.1.0
-     */
-    public function getName(): string {
-        return 'Passwords Legacy Database Migration';
-    }
-
-    /**
      * Run repair step.
      * Must throw exception on error.
      *
@@ -100,35 +87,12 @@ class LegacyDatabaseMigration implements /*IMigrationStep,*/ IRepairStep {
     }
 
     /**
-     * @param IOutput  $output
-     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array    $options
+     * Returns the step's name
      *
-     * @since 13.0.0
-     * @throws \Exception
+     * @return string
+     * @since 9.1.0
      */
-    public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {
-        $this->run($output);
-    }
-
-    /**
-     * @param IOutput  $output
-     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array    $options
-     *
-     * @since 13.0.0
-     */
-    public function preSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {}
-
-    /**
-     * @param IOutput  $output
-     * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array    $options
-     *
-     * @return null|ISchemaWrapper
-     * @since 13.0.0
-     */
-    public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options): ?ISchemaWrapper {
-        return null;
+    public function getName() {
+        return 'Passwords Legacy Database Migration';
     }
 }

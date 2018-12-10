@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+
 /**
  * Class PasswordMapper
  *
@@ -17,9 +19,12 @@ class PasswordMapper extends AbstractMapper {
     const TABLE_NAME = 'passwords_entity_password';
 
     /**
-     * @var array
+     * @return Password[]
+     * @throws \Exception
      */
-    protected $allowedFields = ['id', 'uuid', 'has_shares'];
+    public function findAllShared(): array {
+        return $this->findAllByField('has_shares', true, IQueryBuilder::PARAM_BOOL);
+    }
 
     /**
      * @param string $shareUuid
@@ -30,43 +35,48 @@ class PasswordMapper extends AbstractMapper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findPasswordByShare(string $shareUuid, bool $source = true): ?Password {
-        $passwordTable = '`*PREFIX*'.PasswordMapper::TABLE_NAME.'`';
-        $shareTable    = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
-        $mapField      = $source ? 'source_password':'target_password';
+        $sql      = $this->db->getQueryBuilder();
+        $mapField = $source ? 'source_password':'target_password';
 
-        $sql = "SELECT {$passwordTable}.* FROM {$passwordTable} ".
-               "INNER JOIN {$shareTable} ".
-               "ON {$passwordTable}.`uuid` = {$shareTable}.`{$mapField}` ".
-               "WHERE {$passwordTable}.`deleted` = ? ".
-               "AND {$shareTable}.`deleted` = ? ".
-               "AND ( {$passwordTable}.`user_id` = {$shareTable}.`user_id` ".
-               "OR {$passwordTable}.`user_id` = {$shareTable}.`receiver` ) ".
-               "AND {$shareTable}.`uuid` = ?";
+        $sql->select('a.*')
+            ->from(static::TABLE_NAME, 'a')
+            ->innerJoin('a', ShareMapper::TABLE_NAME, 'b', "a.`uuid` = b.`{$mapField}`")
+            ->where(
+                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+                $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+                $sql->expr()->eq('b.uuid', $sql->createNamedParameter($shareUuid, IQueryBuilder::PARAM_STR))
+            )->andWhere(
+                $sql->expr()->orX(
+                    $sql->expr()->eq('a.user_id', 'b.user_id'),
+                    $sql->expr()->eq('a.user_id', 'b.receiver')
+                )
+            );
 
-        $params = [false, false, $shareUuid];
         if($this->userId !== null) {
-            $sql      .= " AND ({$shareTable}.`user_id` = ? OR {$shareTable}.`receiver` = ? )";
-            $params[] = $this->userId;
-            $params[] = $this->userId;
+            $sql->andWhere(
+                $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
+                $sql->expr()->eq('b.receiver', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return $this->findEntity($sql, $params);
+        return $this->findEntity($sql);
     }
 
     /**
      * @return Password[]
      */
-    public function findOrphanedTargetPasswords(): array {
-        $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $shareTable     = '`*PREFIX*'.ShareMapper::TABLE_NAME.'`';
+    public function findAllOrphanedTargetPasswords(): array {
+        $sql = $this->db->getQueryBuilder();
 
-        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
-               "INNER JOIN {$shareTable} ".
-               "ON {$passwordsTable}.`uuid` = {$shareTable}.`target_password` ".
-               "WHERE {$passwordsTable}.`deleted` = ? ".
-               "AND {$shareTable}.`deleted` = ? ";
+        $sql->select('a.*')
+            ->from(static::TABLE_NAME, 'a')
+            ->innerJoin('a', ShareMapper::TABLE_NAME, 'b', 'a.`uuid` = b.`target_password`')
+            ->where(
+                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+                $sql->expr()->eq('b.deleted', $sql->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
+            );
 
-        return $this->findEntities($sql, [false, true]);
+        return $this->findEntities($sql);
     }
 
     /**
@@ -74,25 +84,14 @@ class PasswordMapper extends AbstractMapper {
      *
      * @return Password[]
      */
-    public function getByFolder(string $folderUuid): array {
-        $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $revisionTable  = '`*PREFIX*'.PasswordRevisionMapper::TABLE_NAME.'`';
+    public function findAllByFolder(string $folderUuid): array {
+        $sql = $this->getJoinStatement(PasswordRevisionMapper::TABLE_NAME);
 
-        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
-               "INNER JOIN {$revisionTable} ON {$passwordsTable}.`revision` = {$revisionTable}.`uuid` ".
-               "WHERE {$passwordsTable}.`deleted` = ? ".
-               "AND {$revisionTable}.`deleted` = ? ".
-               "AND {$revisionTable}.`folder` = ?";
+        $sql->andWhere(
+            $sql->expr()->eq('b.folder', $sql->createNamedParameter($folderUuid, IQueryBuilder::PARAM_STR))
+        );
 
-        $params = [false, false, $folderUuid];
-        if($this->userId !== null) {
-            $sql      .= " AND {$passwordsTable}.`user_id` = ?";
-            $sql      .= " AND {$revisionTable}.`user_id` = ?";
-            $params[] = $this->userId;
-            $params[] = $this->userId;
-        }
-
-        return $this->findEntities($sql, $params);
+        return $this->findEntities($sql);
     }
 
     /**
@@ -101,28 +100,19 @@ class PasswordMapper extends AbstractMapper {
      *
      * @return Password[]
      */
-    public function getByTag(string $tagUuid, bool $includeHidden = false): array {
-        $passwordsTable = '`*PREFIX*'.static::TABLE_NAME.'`';
-        $relationTable  = '`*PREFIX*'.PasswordTagRelationMapper::TABLE_NAME.'`';
+    public function findAllByTag(string $tagUuid, bool $includeHidden = false): array {
+        $sql = $this->getJoinStatement(PasswordTagRelationMapper::TABLE_NAME, 'uuid', 'password');
 
-        $sql = "SELECT {$passwordsTable}.* FROM {$passwordsTable} ".
-               "INNER JOIN {$relationTable} ON {$passwordsTable}.`uuid` = {$relationTable}.`password` ".
-               "WHERE {$passwordsTable}.`deleted` = ? ".
-               "AND {$relationTable}.`deleted` = ? ".
-               "AND {$relationTable}.`tag` = ?";
+        $sql->andWhere(
+            $sql->expr()->eq('b.tag', $sql->createNamedParameter($tagUuid, IQueryBuilder::PARAM_STR))
+        );
 
-        $params = [false, false, $tagUuid];
-        if($this->userId !== null) {
-            $sql      .= " AND {$passwordsTable}.`user_id` = ?";
-            $sql      .= " AND {$relationTable}.`user_id` = ?";
-            $params[] = $this->userId;
-            $params[] = $this->userId;
-        }
         if(!$includeHidden) {
-            $sql      .= " AND {$relationTable}.`hidden` = ?";
-            $params[] = false;
+            $sql->andWhere(
+                $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_STR))
+            );
         }
 
-        return $this->findEntities($sql, $params);
+        return $this->findEntities($sql);
     }
 }

@@ -86,6 +86,7 @@ class BackupService {
      * @return bool
      * @throws \OCP\Files\NotFoundException
      * @throws \OCP\Files\NotPermittedException
+     * @throws \Exception
      */
     public function restoreBackup(string $name, $options = []): bool {
         $folder = $this->getBackupFolder();

@@ -23,18 +23,18 @@ class PasswordsAdminSettings {
                     value = $target[0].checked ? 'true':'false';
                 }
 
-                this._setValue(key, value);
+                this._sendRequest(this.settingsUrl, {key, value}, `[data-setting="${key}"]`);
             }
         );
         $('[data-clear-cache]').click(
             (e) => {
                 let $target = $(e.target),
                     cache   = $target.data('clear-cache'),
-                    label   = OC.L10N.translate('passwords', `${cache.capitalize()} Cache (0 files, 0 B)`);
+                    label   = PasswordsAdminSettings._translate(`${cache.capitalize()} Cache (0 files, 0 B)`);
 
                 $target.parent().find('label').text(label);
 
-                this._clearCache(cache);
+                this._sendRequest(this.cacheUrl, {key:cache}, '.area.cache', 'cleared');
             }
         );
 
@@ -53,28 +53,25 @@ class PasswordsAdminSettings {
     }
 
     /**
-     * Update configuration value
+     * Send a request to the server
      *
-     * @param key
-     * @param value
+     * @param url
+     * @param data
+     * @param target
+     * @param success
      * @private
      */
-    _setValue(key, value) {
-        $.post(this.settingsUrl, {key, value})
-         .success(() => {this._showMessage('saved', `[data-setting="${key}"]`);})
-         .fail(() => {this._showMessage('error', `[data-setting="${key}"]`);});
-    }
-
-    /**
-     * Clears a cache
-     *
-     * @param key
-     * @private
-     */
-    _clearCache(key) {
-        $.post(this.cacheUrl, {key})
-         .success(() => {this._showMessage('cleared', `.area.cache`);})
-         .fail(() => {this._showMessage('error', `.area.cache`);});
+    _sendRequest(url, data, target, success = 'saved') {
+        $.post(url, data)
+         .success((d) => {
+             if(d.status === 'ok') {
+                 this._showMessage(success, target);
+             } else {
+                 this._showMessage('error', target);
+                 OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+             }
+         })
+         .fail(() => {this._showMessage('error', target);});
     }
 
     /**
@@ -95,6 +92,10 @@ class PasswordsAdminSettings {
                 if(type === 'error') location.reload(true);
             },
             1000);
+    }
+
+    static _translate(text) {
+        return OC.L10N.translate('passwords', text);
     }
 
     /**

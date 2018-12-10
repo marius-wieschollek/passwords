@@ -55,8 +55,6 @@ class FallbackIconGenerator {
      *
      * @param HelperService        $helperService
      * @param ConfigurationService $configurationService
-     *
-     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(HelperService $helperService, ConfigurationService $configurationService) {
         $this->imageHelper          = $helperService->getImageHelper();

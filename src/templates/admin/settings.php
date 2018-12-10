@@ -62,11 +62,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if($_['support']['wkhtml']): ?>
-        <div class="message warn">
-            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['WKHTML', '', $_['support']['eol']])); ?>
-        </div>
-    <?php endif; ?>
     <?php if($_['support']['cron'] !== 'cron'): ?>
         <div class="message warn">
             <?php p($l->t('Using %s to execute background jobs may cause delays. We recommend using Cron.', ucfirst($_['support']['cron']))); ?>
@@ -103,7 +98,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
             <select id="passwords-image" name="passwords-image" name="image" data-setting="service/images">
                 <?php foreach($_['imageServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

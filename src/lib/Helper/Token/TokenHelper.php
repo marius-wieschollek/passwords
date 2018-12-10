@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Token;
 
-use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\Encryption\SimpleEncryption;
@@ -17,7 +16,6 @@ use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\IL10N;
 use OCP\ISession;
-use OCP\IUserManager;
 use OCP\Security\ISecureRandom;
 
 /**
@@ -56,11 +54,6 @@ class TokenHelper {
     protected $session;
 
     /**
-     * @var IUserManager
-     */
-    protected $userManager;
-
-    /**
      * @var SimpleEncryption
      */
     protected $encryption;
@@ -88,7 +81,6 @@ class TokenHelper {
      * @param ISecureRandom        $random
      * @param LoggingService       $logger
      * @param IProvider            $tokenProvider
-     * @param IUserManager         $userManager
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
      * @param EnvironmentService   $environmentService
@@ -99,7 +91,6 @@ class TokenHelper {
         ISecureRandom $random,
         LoggingService $logger,
         IProvider $tokenProvider,
-        IUserManager $userManager,
         SimpleEncryption $encryption,
         ConfigurationService $config,
         EnvironmentService $environmentService
@@ -110,7 +101,6 @@ class TokenHelper {
         $this->config              = $config;
         $this->session             = $session;
         $this->encryption          = $encryption;
-        $this->userManager         = $userManager;
         $this->localisation        = $localisation;
         $this->tokenProvider       = $tokenProvider;
         $this->environmentService  = $environmentService;
@@ -154,18 +144,10 @@ class TokenHelper {
      * @param string $tokenId
      */
     public function destroyToken(string $tokenId): void {
-        // @TODO remove this for 2019.1.0
-        if($this->getServerVersion() === '14') {
-            $this->tokenProvider->invalidateTokenById(
-                $this->userId,
-                $tokenId
-            );
-        } else {
-            $this->tokenProvider->invalidateTokenById(
-                $this->userManager->get($this->userId),
-                $tokenId
-            );
-        }
+        $this->tokenProvider->invalidateTokenById(
+            $this->userId,
+            $tokenId
+        );
     }
 
     /**
@@ -174,9 +156,9 @@ class TokenHelper {
     protected function destroyLegacyToken(): void {
         $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
         if($tokenId !== false) {
-            $this->destroyToken($tokenId);
             $this->config->deleteUserValue(self::WEBUI_TOKEN);
             $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
+            $this->destroyToken($tokenId);
         }
     }
 
@@ -208,7 +190,6 @@ class TokenHelper {
                 $iToken = $this->tokenProvider->getTokenById($tokenId);
 
                 if($iToken->getId() == $tokenId) return $token;
-            } catch(InvalidTokenException $e) {
             } catch(\Throwable $e) {
                 $this->logger
                     ->logException($e)
@@ -258,16 +239,5 @@ class TokenHelper {
         }
 
         return implode('-', $groups);
-    }
-
-    /**
-     * @return string
-     * @deprecated
-     * @TODO remove this for 2019.1.0
-     */
-    protected function getServerVersion(): string {
-        $version = $this->config->getSystemValue('version');
-
-        return explode('.', $version, 2)[0];
     }
 }

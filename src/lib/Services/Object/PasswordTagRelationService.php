@@ -60,7 +60,7 @@ class PasswordTagRelationService extends AbstractService {
      * @throws \Exception
      */
     public function findByPassword(string $passwordUuid): array {
-        return $this->mapper->findAllMatching(['password', $passwordUuid]);
+        return $this->mapper->findAllByField('password', $passwordUuid);
     }
 
     /**
@@ -70,7 +70,7 @@ class PasswordTagRelationService extends AbstractService {
      * @throws \Exception
      */
     public function findByTag(string $tagUuid): array {
-        return $this->mapper->findAllMatching(['tag', $tagUuid]);
+        return $this->mapper->findAllByField('tag', $tagUuid);
     }
 
     /**
@@ -81,11 +81,9 @@ class PasswordTagRelationService extends AbstractService {
      * @throws \Exception
      */
     public function findByTagAndPassword(string $tagUuid, string $passwordUuid): ?PasswordTagRelation {
-        return $this->mapper->findOneMatching(
-            [
-                ['tag', $tagUuid],
-                ['password', $passwordUuid]
-            ]
+        return $this->mapper->findOneByFields(
+            ['password', $passwordUuid],
+            ['tag', $tagUuid]
         );
     }
 

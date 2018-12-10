@@ -22,8 +22,6 @@ namespace OCA\Passwords\Db;
  * @method void setModel(string $model)
  * @method string getLabel()
  * @method void setLabel(string $label)
- * @method string getClient()
- * @method void setClient(string $client)
  * @method int getEdited()
  * @method void setEdited(int $edited)
  * @method bool getHidden()
@@ -32,8 +30,6 @@ namespace OCA\Passwords\Db;
  * @method void setTrashed(bool $trashed)
  * @method bool getFavorite()
  * @method void setFavorite(bool $favorite)
- * @method bool getFavourite()
- * @method void setFavourite(bool $favourite)
  *
  * @package OCA\Passwords\Db
  */
@@ -70,11 +66,6 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
     protected $label;
 
     /**
-     * @var string
-     */
-    protected $client;
-
-    /**
      * @var int
      */
     protected $edited;
@@ -96,12 +87,6 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
 
     /**
      * @var bool
-     * @deprecated
-     */
-    protected $favourite;
-
-    /**
-     * @var bool
      */
     protected $_decrypted = false;
 
@@ -116,12 +101,10 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
         $this->addType('uuid', 'string');
         $this->addType('model', 'string');
         $this->addType('label', 'string');
-        $this->addType('client', 'string');
         $this->addType('edited', 'integer');
         $this->addType('hidden', 'boolean');
         $this->addType('trashed', 'boolean');
         $this->addType('favorite', 'boolean');
-        $this->addType('favourite', 'boolean');
 
         parent::__construct();
     }

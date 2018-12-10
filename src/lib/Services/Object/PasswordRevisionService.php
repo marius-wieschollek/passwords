@@ -155,7 +155,6 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setCustomFields($customFields);
         $revision->setFolder($folder);
         $revision->setFavorite($favorite);
-        $revision->setClient('');
         $revision->setEdited($edited);
         $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
 

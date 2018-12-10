@@ -13,7 +13,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\ContentSecurityPolicy;
+use OCP\AppFramework\Http\StrictContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\Util;
@@ -121,15 +121,17 @@ class PageController extends Controller {
     }
 
     /**
-     * @return ContentSecurityPolicy
+     * @return StrictContentSecurityPolicy
      */
-    protected function getContentSecurityPolicy(): ContentSecurityPolicy {
+    protected function getContentSecurityPolicy(): StrictContentSecurityPolicy {
         $manualHost = parse_url($this->settingsService->get('server.handbook.url'), PHP_URL_HOST);
-        $csp        = new ContentSecurityPolicy();
+        $csp        = new StrictContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
         $csp->addAllowedImageDomain($manualHost);
         $csp->addAllowedMediaDomain($manualHost);
+        $csp->allowEvalScript();
+        $csp->allowInlineStyle();
 
         return $csp;
     }

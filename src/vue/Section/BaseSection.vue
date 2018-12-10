@@ -170,8 +170,8 @@
     #app-content {
         position   : relative;
         height     : 100%;
-        overflow-y : auto;
-        overflow-x : hidden;
+        overflow-y : initial;
+        overflow-x : initial;
         transition : margin-right 300ms, transform 300ms;
 
         &.blocking {
@@ -181,7 +181,7 @@
         .app-content-right {
             background-color : white;
             z-index          : 50;
-            border-left      : 1px solid $color-grey-light;
+            border-left      : 1px solid var(--color-border-dark);
             transition       : right 300ms;
             right            : -27%;
         }
@@ -192,7 +192,7 @@
             .app-content-right {
                 display    : block;
                 position   : fixed;
-                top        : 45px;
+                top        : 50px;
                 right      : 0;
                 left       : auto;
                 bottom     : 0;
@@ -206,10 +206,9 @@
             display : none !important;
         }
 
-        @media(max-width : $desktop-width) {
+        @media(max-width : $width-large) {
             .app-content-right {
-                right   : -360px;
-                z-index : 60;
+                right : -360px;
             }
 
             &.show-details {
@@ -218,11 +217,12 @@
                 .app-content-right {
                     width     : 360px;
                     min-width : 360px;
+                    z-index   : 60;
                 }
             }
         }
 
-        @media(max-width : $width-extra-small) {
+        @media(max-width : $width-small) {
             transform : translate3d(0, 0, 0);
 
             .app-content-right {

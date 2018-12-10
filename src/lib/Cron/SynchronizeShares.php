@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Cron;
 
-use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
@@ -123,12 +122,13 @@ class SynchronizeShares extends AbstractCronJob {
      */
     public function runManually(): bool {
         try {
-            if($this->canExecute() ) {
+            if($this->canExecute()) {
                 $this->runJob($this->getArgument());
 
                 return true;
             }
         } catch(\Exception $e) {
+            $this->logger->logException($e);
         }
 
         return false;
@@ -394,7 +394,7 @@ class SynchronizeShares extends AbstractCronJob {
      * @param string $sourceUuid
      * @param string $targetUuid
      *
-     * @return PasswordRevision|EntityInterface
+     * @return PasswordRevision
      * @throws \Exception
      */
     protected function createNewPasswordRevision(string $sourceUuid, string $targetUuid): PasswordRevision {

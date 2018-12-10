@@ -171,7 +171,7 @@ class TagObjectHelper extends AbstractObjectHelper {
 
         $object['passwords'] = [];
         $objectHelper        = $this->getPasswordObjectHelper();
-        $passwords           = $this->passwordService->findByTag($revision->getModel());
+        $passwords           = $this->passwordService->findByTag($revision->getModel(), $revision->isHidden());
 
         $detailLevel = $includeTags ? self::LEVEL_MODEL.'+'.PasswordObjectHelper::LEVEL_TAGS:self::LEVEL_MODEL;
         foreach($passwords as $password) {

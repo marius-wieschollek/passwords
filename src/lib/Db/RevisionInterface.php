@@ -22,8 +22,6 @@ namespace OCA\Passwords\Db;
  * @method void setModel(string $model)
  * @method string getLabel()
  * @method void setLabel(string $label)
- * @method string getClient()
- * @method void setClient(string $client)
  * @method int getEdited()
  * @method void setEdited(int $edited)
  * @method bool getHidden()
@@ -32,8 +30,6 @@ namespace OCA\Passwords\Db;
  * @method void setTrashed(bool $trashed)
  * @method bool getFavorite()
  * @method void setFavorite(bool $favorite)
- * @method bool getFavourite()
- * @method void setFavourite(bool $favourite)
  *
  * @package OCA\Passwords\Db
  */
