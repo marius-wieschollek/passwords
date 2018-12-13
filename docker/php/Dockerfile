@@ -1,4 +1,4 @@
-FROM nextcloud:15-rc-fpm
+FROM nextcloud:15-fpm
 
 RUN apt-get update -y && \
     apt-get install -y \
