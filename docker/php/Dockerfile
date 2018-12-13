@@ -48,6 +48,7 @@ COPY files/entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
 COPY files/setup.sh /usr/local/bin/apache
+COPY files/502.html /var/www/502.html
 RUN chmod +x /usr/local/bin/apache
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
