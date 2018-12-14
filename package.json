@@ -6,7 +6,7 @@
     "scripts": {
         "start": "docker-compose up -d",
         "stop": "docker-compose stop",
-        "down": "docker-compose down --volumes",
+        "down": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose down --volumes",
         "docker:build": "docker-compose up -d --build",
         "shell": "docker exec -itu www-data passwords-php bash",
         "shell:root": "docker exec -it passwords-php bash",
