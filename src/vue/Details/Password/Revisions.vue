@@ -1,10 +1,10 @@
 <template>
     <ul class="revision-list">
-        <li class="revision" v-for="revision in getRevisions" :key="revision.id" :style="{'background-image': 'url(' + revision.icon + ')'}">
-            <span>{{ revision.label }}<br>
-                <span class="time">{{ getDateTime(revision.created) }}</span>
-            </span>
-            <translate icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== password.revision"/>
+        <li class="revision" v-for="revision in getRevisions" :key="revision.id">
+            <img class="icon" :src="revision.icon" alt="">
+            <span class="label">{{ revision.label }}</span>
+            <span class="time">{{ getDateTime(revision.created) }}</span>
+            <translate class="restore" icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== password.revision"/>
         </li>
     </ul>
 </template>
@@ -46,13 +46,16 @@
 <style lang="scss">
     .revision-list {
         .revision {
-            position        : relative;
-            background      : no-repeat 3px center;
-            background-size : 32px;
-            padding         : 5px 20px 5px 38px;
-            font-size       : 1.1em;
-            cursor          : pointer;
-            border-bottom   : 1px solid $color-grey-lighter;
+            position              : relative;
+            padding               : 5px;
+            font-size             : 1.1em;
+            cursor                : pointer;
+            border-bottom         : 1px solid $color-grey-lighter;
+            display               : grid;
+            grid-template         : "icon label restore" "icon time restore";
+            grid-template-columns : 32px auto 1rem;
+            grid-column-gap       : 5px;
+            grid-row-gap          : 3px;
 
             &:last-child {
                 border-bottom : none;
@@ -67,17 +70,24 @@
                 font-size   : 0.9em;
                 font-style  : italic;
                 line-height : 0.9em;
+                grid-area   : time;
             }
 
-            .fa {
-                position : absolute;
-                right    : 5px;
-                top      : 10px;
+            .label {
+                grid-area : label;
+            }
 
-                &:before {
-                    line-height : 32px;
-                    padding     : 0 5px;
-                }
+            .icon {
+                grid-area     : icon;
+                border-radius : var(--border-radius);
+                align-self    : center;
+            }
+
+            .restore {
+                grid-area  : restore;
+                align-self : center;
+                font-size  : 1rem;
+                text-align : right;
             }
 
             &:hover {

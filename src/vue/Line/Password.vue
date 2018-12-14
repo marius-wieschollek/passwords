@@ -152,7 +152,7 @@
                 $event.stopPropagation();
                 this.password.favorite = !this.password.favorite;
                 PasswordManager.updatePassword(this.password)
-                               .catch(() => { this.password.favorite = !this.password.favorite; });
+                    .catch(() => { this.password.favorite = !this.password.favorite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;
@@ -167,9 +167,9 @@
                 this.$parent.detail = {type: 'password', element: this.password};
                 if(!this.password.hasOwnProperty('revisions')) {
                     API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
-                       .then((p) => {
-                           this.$parent.detail = {type: 'password', element: p};
-                       });
+                        .then((p) => {
+                            this.$parent.detail = {type: 'password', element: p};
+                        });
                 }
             },
             editAction() {
@@ -182,10 +182,10 @@
             },
             dragStartAction($e) {
                 DragManager.start($e, this.password.label, this.password.icon, ['folder'])
-                           .then((data) => {
-                               PasswordManager.movePassword(this.password, data.folderId)
-                                              .then((p) => {this.password = p;});
-                           });
+                    .then((data) => {
+                        PasswordManager.movePassword(this.password, data.folderId)
+                            .then((p) => {this.password = p;});
+                    });
             },
             openTagAction($event, tag) {
                 $event.stopPropagation();
@@ -232,10 +232,13 @@
                     display         : inline-block;
                     background      : no-repeat center;
                     background-size : 32px;
-                    line-height     : 50px;
-                    width           : 50px;
+                    border-radius   : var(--border-radius);
+                    line-height     : 32px;
                     font-size       : 1rem;
                     cursor          : pointer;
+                    width           : 32px;
+                    height          : 32px;
+                    margin          : 9px;
                     flex-shrink     : 0;
                 }
 
