@@ -17,7 +17,7 @@
 
     export default {
         components: {Web},
-        props: {
+        props     : {
             image: {
                 type     : String,
                 'default': ''
@@ -146,13 +146,14 @@
                 left     : 0;
 
                 img {
-                    transform  : translate(-50%, -50%);
-                    position   : absolute;
-                    left       : 50%;
-                    top        : 50%;
-                    width      : 72px;
-                    height     : 72px;
-                    transition : height 0.15s ease-in-out, width 0.15s ease-in-out;
+                    transform     : translate(-50%, -50%);
+                    border-radius : var(--border-radius);
+                    position      : absolute;
+                    left          : 50%;
+                    top           : 50%;
+                    width         : 72px;
+                    height        : 72px;
+                    transition    : height 0.15s ease-in-out, width 0.15s ease-in-out;
                 }
             }
 

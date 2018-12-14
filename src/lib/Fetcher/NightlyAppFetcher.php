@@ -244,7 +244,7 @@ class NightlyAppFetcher extends Fetcher {
 
             return $minFulfilled && $maxFulfilled;
         } catch(\Throwable $e) {
-            $this->logger->logException($e, ['app' => 'appstoreFetcher', 'level' => ILogger::WARN]);
+            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher']);
         }
 
         return false;

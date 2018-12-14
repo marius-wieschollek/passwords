@@ -183,7 +183,7 @@
 
             .tag {
                 display       : inline-block;
-                border-radius : 2px;
+                border-radius : var(--border-radius);
                 margin        : 0 5px 3px 0;
 
                 .label {

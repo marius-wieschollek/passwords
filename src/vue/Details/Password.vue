@@ -2,14 +2,17 @@
     <div class="item-details">
         <i class="fa fa-times" @click="closeDetails()"></i>
         <preview :image="object.preview" :icon="object.icon" :link="object.url" :host="object.website"/>
-        <h3 class="title" :style="{'background-image': 'url(' + object.icon + ')'}">{{ object.label }}</h3>
+        <div class="title" :title="object.label">
+            <img class="icon" :src="object.icon" alt="">
+            <h3>{{ object.label }}</h3>
+        </div>
         <div class="infos">
             <i class="fa fa-star favorite" :class="{ active: object.favorite }" @click="favoriteAction($event)"></i>
             <span class="date">{{ object.edited.toLocaleDateString() }}</span>
             <tags :password="object"/>
         </div>
         <tabs :tabs="getTabs">
-            <pw-details slot="details" :password="object" />
+            <pw-details slot="details" :password="object"/>
             <notes slot="notes" :password="object"/>
             <div slot="share">
                 <tabs :tabs="getSharingTabs">
@@ -58,7 +61,7 @@
 
         data() {
             return {
-                object : this.password
+                object: this.password
             };
         },
 
@@ -89,7 +92,7 @@
             favoriteAction($event) {
                 $event.stopPropagation();
                 PasswordManager.updatePassword(this.object)
-                               .catch(() => { this.object.favorite = !this.object.favorite; });
+                    .catch(() => { this.object.favorite = !this.object.favorite; });
             },
             closeDetails() {
                 this.$parent.detail = {
@@ -100,7 +103,7 @@
             refreshView(event) {
                 if(event.object.id === this.object.id) {
                     API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                       .then((p) => {this.object = p;});
+                        .then((p) => {this.object = p;});
                 }
             }
         },
@@ -131,16 +134,26 @@
         }
 
         .title {
-            white-space     : nowrap;
-            text-overflow   : ellipsis;
-            overflow        : hidden;
-            font-size       : 1rem;
-            font-weight     : 300;
-            margin          : 0;
-            background      : no-repeat 15px 15px;
-            background-size : 32px;
-            padding         : 15px 15px 2px 57px;
-            line-height     : 32px;
+            margin                : 0;
+            padding               : 15px 15px 2px 15px;
+            line-height           : 32px;
+            grid-template-columns : 32px auto;
+            grid-column-gap       : 10px;
+            display               : grid;
+
+            h3 {
+                white-space   : nowrap;
+                text-overflow : ellipsis;
+                overflow      : hidden;
+                font-size     : 1rem;
+                margin        : 0;
+                font-weight   : 300;
+                padding       : 0;
+            }
+
+            .icon {
+                border-radius : var(--border-radius);
+            }
         }
 
         .infos {

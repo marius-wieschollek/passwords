@@ -67,6 +67,9 @@ class AdminSettingsController extends Controller {
         if($value === 'false') $value = false;
 
         if($key === 'backup/files/maximum' && $value < 0) $value = '';
+        if($key === 'service/images' && $value === HelperService::IMAGES_IMAGICK && !HelperService::canUseImagick()) {
+            return new JSONResponse(['status' => 'failed', 'message' => 'Graphics library not installed']);
+        };
 
         if($value === '') {
             $this->config->deleteAppValue($key);
@@ -92,7 +95,7 @@ class AdminSettingsController extends Controller {
             $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
             $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL) === BestIconHelper::BESTICON_DEFAULT_URL
         ) {
-            return new JSONResponse(['status' => 'error'], 400);
+            return new JSONResponse(['status' => 'error', 'message' => 'You can not clear this cache']);
         }
 
         return new JSONResponse(['status' => 'ok']);
@@ -106,13 +109,13 @@ class AdminSettingsController extends Controller {
 
         if($enabled) {
             if(!in_array(Application::APP_NAME, $nightlyApps)) $nightlyApps[] = Application::APP_NAME;
+            $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
             $this->nightlyAppFetcher->get();
         } else {
             $index = array_search(Application::APP_NAME, $nightlyApps);
             if($index !== false) unset($nightlyApps[ $index ]);
+            $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
             $this->nightlyAppFetcher->clearDb();
         }
-
-        $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
     }
 }

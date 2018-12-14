@@ -55,7 +55,7 @@
                     );
                 }
 
-                if(this.currentFolder.id !== this.defaultFolder) {
+                if(this.currentFolder.id !== '' && this.currentFolder.id !== this.defaultFolder) {
                     items.push(
                         {
                             path    : this.$route.path,
