@@ -109,13 +109,13 @@ class AdminSettingsController extends Controller {
 
         if($enabled) {
             if(!in_array(Application::APP_NAME, $nightlyApps)) $nightlyApps[] = Application::APP_NAME;
+            $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
             $this->nightlyAppFetcher->get();
         } else {
             $index = array_search(Application::APP_NAME, $nightlyApps);
             if($index !== false) unset($nightlyApps[ $index ]);
+            $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
             $this->nightlyAppFetcher->clearDb();
         }
-
-        $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
     }
 }
