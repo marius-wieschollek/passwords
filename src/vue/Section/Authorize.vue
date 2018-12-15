@@ -50,6 +50,10 @@
             background : rgba(0, 0, 0, 0) none !important;
         }
 
+        #appmenu li a::before {
+            display: none;
+        }
+
         #app-navigation {
             display : none !important;
         }
