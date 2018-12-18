@@ -244,7 +244,7 @@
             }
 
             &.mobile-open {
-                transform : translate3d(250px, 0px, 0px);
+                transform : translate3d(300px, 0px, 0px);
             }
         }
     }
