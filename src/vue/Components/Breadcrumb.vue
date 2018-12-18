@@ -13,7 +13,7 @@
                 <div class="popovermenu menu menu-center" @click="toggleCrumbMenu">
                     <ul>
                         <li v-for="item in getCrumbMenuItems" class="crumblist">
-                            <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
+                            <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType" :title="item.label">
                                 <span :class="getCrumbItemIcon"></span>
                                 {{ item.label }}
                             </router-link>
@@ -216,12 +216,18 @@
 
                 .icon-more {
                     cursor : pointer;
+                    padding: 12px 1rem;
                 }
 
                 .fa {
                     padding   : 10px;
                     font-size : 1rem;
                     margin    : 0;
+                }
+
+                .menu {
+                    left: auto;
+                    right : 58%;
                 }
             }
 
@@ -231,6 +237,19 @@
                 overflow   : hidden;
                 transition : max-height 0.25s ease-in-out;
                 display    : block;
+                position: relative;
+                left: -126px;
+
+                ul {
+                    padding-right : 0;
+                }
+
+                a {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    display: block;
+                }
             }
 
             &:not(.active) .menu {
@@ -287,15 +306,22 @@
                 z-index          : 1;
             }
         }
-    }
 
-    .edge {
-        .popovermenu,
-        #app-navigation .app-navigation-entry-menu {
-            border : none !important;
+        @media(max-width: $width-extra-small) {
+            .crumbmenu {
+                background-image: none;
 
-            &:after {
-                border : none !important;
+                .menu.menu-center {
+                    position: absolute;
+                }
+
+                &.active .menu.menu-center {
+                    z-index : 111;
+                }
+            }
+
+            .passwords-more-menu {
+
             }
         }
     }
