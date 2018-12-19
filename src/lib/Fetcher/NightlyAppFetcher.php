@@ -77,7 +77,7 @@ class NightlyAppFetcher extends Fetcher {
         );
 
         $this->dbUpdated = false;
-        $this->fileName  = 'apps.json';
+        $this->fileName  = 'apps_nightly.json';
         $this->setEndpoint();
         $this->compareVersion = $compareVersion;
     }
@@ -102,10 +102,12 @@ class NightlyAppFetcher extends Fetcher {
      */
     public function clearDb(): void {
         try {
+            $this->config->deleteAppValue('passwords', 'nightly/etag');
             $rootFolder = $this->appData->getFolder('/');
             $file       = $rootFolder->getFile($this->fileName);
             $file->delete();
-            $this->config->deleteAppValue('passwords', 'nightly/etag');
+            $file = $rootFolder->getFile('apps.json');
+            $file->delete();
         } catch(\Exception $e) {
         }
     }
@@ -146,7 +148,6 @@ class NightlyAppFetcher extends Fetcher {
         }
 
         $json['data'] = array_values($json['data']);
-        $json['timestamp'] = strtotime('+1 day');
 
         return $json;
     }
@@ -155,7 +156,7 @@ class NightlyAppFetcher extends Fetcher {
      * @param string $version
      * @param string $fileName
      */
-    public function setVersion(string $version, string $fileName = 'apps.json') {
+    public function setVersion(string $version, string $fileName = 'apps_nightly.json') {
         parent::setVersion($version);
         $this->fileName = $fileName;
         $this->setEndpoint();
@@ -194,34 +195,32 @@ class NightlyAppFetcher extends Fetcher {
             $rootFolder = $this->appData->getFolder('/');
             $file       = $rootFolder->getFile($this->fileName);
 
-            $eTag = $this->config->getAppValue('passwords', 'nightly/etag', '');
-            if($eTag !== $file->getETag()) {
-                $file->delete();
-            } else {
-                $json = json_decode($file->getContent(), true);
-                if(is_array($json)) {
-                    $json['timestamp'] = $file->getMTime();
-                    $file->putContent(json_encode($json));
-                }
-            }
-
-            return $eTag;
+            return $file->getETag();
         } catch(\Exception $e) {
             return '';
         }
     }
 
     /**
-     * @param $eTag
+     * @param $nightlyEtag
      */
-    protected function updateAppDbAfterUpdate($eTag): void {
+    protected function updateAppDbAfterUpdate($nightlyEtag): void {
         try {
+            $appEtag    = $this->config->getAppValue('passwords', 'nightly/etag', '');
             $rootFolder = $this->appData->getFolder('/');
 
-            $file = $rootFolder->getFile($this->fileName);
-            $this->config->setAppValue('passwords', 'nightly/etag', $file->getETag());
+            $nightlyDb = $rootFolder->getFile($this->fileName);
+            $appDb     = $rootFolder->getFile('apps.json');
 
-            $this->dbUpdated = $eTag !== $file->getETag();
+            if($nightlyEtag !== $nightlyDb->getETag() || $appEtag !== $appDb->getETag()) {
+                $json            = json_decode($nightlyDb->getContent());
+                $json->timestamp = strtotime('+1 day');
+                $appDb->putContent(json_encode($json));
+
+                $this->config->setAppValue('passwords', 'nightly/etag', $appDb->getETag());
+
+                $this->dbUpdated = true;
+            }
         } catch(\Exception $e) {
         }
     }
