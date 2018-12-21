@@ -87,7 +87,7 @@ class WordsService {
         } catch(\Throwable $e) {
             $this->logger->logException($e);
 
-            throw new ApiException('Internal Words API Error'. 502);
+            throw new ApiException('Internal Words API Error', 502, $e);
         }
     }
 

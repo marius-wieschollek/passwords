@@ -97,7 +97,7 @@ class FaviconService {
             } catch(\Throwable $e) {
                 $this->logger->logException($e);
 
-                throw new ApiException('Internal Favicon API Error', 502);
+                throw new ApiException('Internal Favicon API Error', 502, $e);
             }
         }
     }
@@ -109,6 +109,8 @@ class FaviconService {
      *
      * @return ISimpleFile|null
      * @throws \OCP\AppFramework\QueryException
+     * @throws \OCP\Files\NotFoundException
+     * @throws \OCP\Files\NotPermittedException
      */
     protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ?ISimpleFile {
         $faviconData = $favicon->getContent();
