@@ -42,7 +42,6 @@ class RandomCharactersHelper extends AbstractWordsHelper {
      * @throws \Exception
      */
     public function getWords(int $strength): array {
-        throw new \Exception('test');
         $words      = [];
         $characters = $this->getCharacterString();
         $strength   += 2;
