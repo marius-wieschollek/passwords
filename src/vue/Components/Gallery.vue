@@ -118,6 +118,7 @@
 
     .blueimp-gallery {
         background-color : transparentize($color-black, 0.25);
+        max-height: 100vh;
 
         > .description {
             position : absolute;
@@ -142,6 +143,8 @@
                 position : static;
                 width    : auto;
                 height   : auto;
+                max-width: 100%;
+                max-height: 100%;
             }
         }
 
@@ -172,6 +175,10 @@
             &:hover {
                 opacity : 1;
             }
+        }
+
+        @media (max-width : $width-small) {
+            top: -44px;
         }
     }
 </style>
