@@ -203,6 +203,8 @@ class LegacyPasswordApiController extends ApiController {
         /** @var Password $model */
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);
+        if(!$model->isEditable()) return new JSONResponse('Entity not writable', 405);
+
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) return new JSONResponse('Unsupported Encryption Type', 400);
         $website = parse_url($address, PHP_URL_HOST);
