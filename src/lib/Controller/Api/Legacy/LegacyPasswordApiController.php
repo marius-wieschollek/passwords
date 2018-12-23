@@ -193,11 +193,10 @@ class LegacyPasswordApiController extends ApiController {
      * @param $datechanged
      *
      * @return mixed
-     * @throws \Exception
-     * @throws \OCA\Passwords\Exception\ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws \Exception
      */
     public function update($id, $pass, $loginname, $address, $notes, $category, $deleted, $datechanged): JSONResponse {
         /** @var Password $model */
