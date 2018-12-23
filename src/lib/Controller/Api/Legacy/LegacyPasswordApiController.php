@@ -165,12 +165,14 @@ class LegacyPasswordApiController extends ApiController {
         $this->passwordRevisionService->save($revision);
         $this->passwordService->setRevision($model, $revision);
 
-        /** @var Tag $tag */
-        $tag = $this->tagService->findByIdOrUuid($category);
-        if($tag !== null && !$tag->isSuspended()) {
-            /** @var TagRevision $tagRevision */
-            $tagRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
-            $this->passwordTagRelationService->create($revision, $tagRevision);
+        if($category !== null) {
+            /** @var Tag $tag */
+            $tag = $this->tagService->findByIdOrUuid($category);
+            if($tag !== null && !$tag->isSuspended()) {
+                /** @var TagRevision $tagRevision */
+                $tagRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
+                $this->passwordTagRelationService->create($revision, $tagRevision);
+            }
         }
 
         return new JSONResponse($this->getPasswordObject($model));
