@@ -190,7 +190,6 @@ class LegacyPasswordApiController extends ApiController {
      * @param $notes
      * @param $category
      * @param $deleted
-     * @param $datechanged
      *
      * @return mixed
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
@@ -198,33 +197,35 @@ class LegacyPasswordApiController extends ApiController {
      * @throws \OCA\Passwords\Exception\ApiException
      * @throws \Exception
      */
-    public function update($id, $pass, $loginname, $address, $notes, $category, $deleted, $datechanged): JSONResponse {
+    public function update($id, $pass, $loginname, $address, $notes, $category, $deleted): JSONResponse {
         /** @var Password $model */
         $model = $this->passwordService->findByIdOrUuid($id);
         if($model === null) return new JSONResponse('Entity not found', 404);
         if(!$model->isEditable()) return new JSONResponse('Entity not writable', 405);
 
+        /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) return new JSONResponse('Unsupported Encryption Type', 400);
         $website = parse_url($address, PHP_URL_HOST);
+        $edited = $revision->getPassword() === $pass ? $revision->getEdited():time();
 
-        /** @var PasswordRevision $revision */
-        $revision = $this->passwordRevisionService->create(
+        /** @var PasswordRevision $newRevision */
+        $newRevision = $this->passwordRevisionService->create(
             $model->getUuid(), strval($pass), strval($loginname),
             EncryptionService::CSE_ENCRYPTION_NONE,
             '', strval($website).' – '.strval($loginname),
             strval($address), strval($notes),
             $revision->getCustomFields(),
             $revision->getFolder(),
-            strtotime($datechanged),
+            $edited,
             $revision->isHidden(),
             $deleted==true,
             $revision->isFavorite()
         );
-        $this->passwordRevisionService->save($revision);
-        $this->passwordService->setRevision($model, $revision);
+        $this->passwordRevisionService->save($newRevision);
+        $this->passwordService->setRevision($model, $newRevision);
 
-        $this->updatePasswordCategory($category, $model, $revision);
+        $this->updatePasswordCategory($category, $model, $newRevision);
 
         return new JSONResponse($this->getPasswordObject($model));
     }
