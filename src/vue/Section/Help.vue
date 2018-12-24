@@ -216,6 +216,7 @@
                     color          : transparent;
                     transition     : color .15s ease-in-out;
                     position       : absolute;
+                    opacity        : 0.4;
 
                     @media all and (max-width : $width-large) {
                         position : static;
@@ -225,7 +226,7 @@
 
                 &:hover a.help-anchor {
                     text-decoration : none;
-                    color           : $color-grey;
+                    color           : var(--color-main-text);
                 }
 
                 &.highlight {
@@ -285,8 +286,8 @@
             }
 
             code {
-                background    : $color-grey-lighter;
-                color         : $color-black-lighter;
+                background    : var(--color-background-dark);
+                color         : var(--color-main-text);
                 padding       : 1px 3px;
                 border        : 1px solid var(--color-border-dark);
                 border-radius : var(--border-radius);
@@ -295,8 +296,8 @@
             }
 
             pre {
-                background    : $color-grey-lighter;
-                color         : $color-black-lighter;
+                background    : var(--color-background-dark);
+                color         : var(--color-main-text);
                 padding       : 2px 3px;
                 border        : 1px solid var(--color-border-dark);
                 border-radius : var(--border-radius);
@@ -313,8 +314,8 @@
             }
 
             blockquote {
-                border-left   : 4px solid $color-grey;
-                background    : $color-grey-lighter;
+                border-left   : 4px solid var(--color-box-shadow);
+                background    : var(--color-background-dark);
                 padding       : 1em 1em 0 1em;
                 margin-bottom : 1em;
             }
@@ -353,7 +354,7 @@
                 margin-bottom : 1em;
 
                 .md-image-link {
-                    border  : 1px solid $color-grey-lighter;
+                    border  : 1px solid var(--color-border);
                     display : inline-block;
 
                     &:hover,
@@ -371,9 +372,9 @@
 
                 .md-image-caption {
                     display    : block;
-                    border-top : 1px solid $color-grey-lighter;
+                    border-top : 1px solid var(--color-border);
                     padding    : 2px;
-                    color      : $color-black-lighter;
+                    color      : var(--color-main-text);
                     font-style : italic;
                 }
             }

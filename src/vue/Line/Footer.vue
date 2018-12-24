@@ -52,19 +52,19 @@
                 return this.search.active && this.$route.name !== 'Search';
             },
             searchRoute() {
-                return { name: 'Search', params: {query: btoa(this.search.query)}};
+                return {name: 'Search', params: {query: btoa(this.search.query)}};
             }
         },
 
         methods: {
             getSearchText() {
-                let text = this.getFooterText(this.search.passwords, this.search.folders, this.search.tags),
+                let text    = this.getFooterText(this.search.passwords, this.search.folders, this.search.tags),
                     matches = '';
 
                 if(this.search.total < 2) {
-                    matches = Localisation.translate('matches')
+                    matches = Localisation.translate('matches');
                 } else {
-                    matches = Localisation.translate('match')
+                    matches = Localisation.translate('match');
                 }
 
                 return `${text} ${matches} "${this.search.query}"`;
@@ -111,19 +111,20 @@
     #app-content {
         .item-list {
             .row.footer {
-                color               : $color-grey;
+                color               : var(--color-main-text);
                 -webkit-user-select : none;
                 -moz-user-select    : none;
                 -ms-user-select     : none;
                 user-select         : none;
                 border-bottom       : none;
+                opacity             : 0.3;
 
                 .title {
                     padding-left : 99px;
                     cursor       : default;
 
                     span {
-                        cursor       : default;
+                        cursor : default;
                     }
                 }
 
@@ -134,7 +135,7 @@
 
                 #global-search-link,
                 #global-search-link span {
-                    cursor: pointer;
+                    cursor : pointer;
                 }
             }
         }

@@ -124,7 +124,7 @@
             position : absolute;
             top      : 30px;
             left     : 15px;
-            color    : #fff;
+            color    : var(--color-main-text);
             display  : none;
         }
 
@@ -167,7 +167,7 @@
             position        : absolute;
             top             : 18px;
             line-height     : 30px;
-            color           : #fff;
+            color           : var(--color-main-text);
             text-shadow     : 0 0 2px #000;
             opacity         : .8;
             display         : block;
