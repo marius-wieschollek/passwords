@@ -55,9 +55,13 @@ class ThemeSettingsHelper {
     public function get(string $key) {
         switch($key) {
             case 'color':
+            case 'color.primary':
                 return $this->theming->getColorPrimary();
+            case 'color.text':
             case 'text.color':
                 return $this->theming->getTextColorPrimary();
+            case 'color.background':
+                return $this->config->getAppValue('theme', 'none', 'accessibility') === 'themedark' ? '#181818':'#ffffff';
             case 'background':
                 return $this->getBackgroundImage();
             case 'logo':
