@@ -50,7 +50,7 @@
             padding               : 5px;
             font-size             : 1.1em;
             cursor                : pointer;
-            border-bottom         : 1px solid $color-grey-lighter;
+            border-bottom         : 1px solid var(--color-border);
             display               : grid;
             grid-template         : "icon label restore" "icon time restore";
             grid-template-columns : 32px auto 1rem;
@@ -91,7 +91,7 @@
             }
 
             &:hover {
-                background-color : darken($color-white, 3);
+                background-color : var(--color-background-dark);
             }
         }
     }
