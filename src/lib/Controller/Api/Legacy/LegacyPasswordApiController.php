@@ -13,6 +13,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
@@ -34,6 +35,11 @@ class LegacyPasswordApiController extends ApiController {
      * @var TagService
      */
     protected $tagService;
+
+    /**
+     * @var LoggingService
+     */
+    protected $loggingService;
 
     /**
      * @var PasswordService
@@ -60,6 +66,7 @@ class LegacyPasswordApiController extends ApiController {
      *
      * @param IRequest                   $request
      * @param TagService                 $tagService
+     * @param LoggingService             $loggingService
      * @param PasswordService            $passwordService
      * @param TagRevisionService         $tagRevisionService
      * @param PasswordRevisionService    $passwordRevisionService
@@ -68,6 +75,7 @@ class LegacyPasswordApiController extends ApiController {
     public function __construct(
         IRequest $request,
         TagService $tagService,
+        LoggingService $loggingService,
         PasswordService $passwordService,
         TagRevisionService $tagRevisionService,
         PasswordRevisionService $passwordRevisionService,
@@ -81,6 +89,7 @@ class LegacyPasswordApiController extends ApiController {
             1728000
         );
         $this->tagService                 = $tagService;
+        $this->loggingService             = $loggingService;
         $this->passwordService            = $passwordService;
         $this->tagRevisionService         = $tagRevisionService;
         $this->passwordRevisionService    = $passwordRevisionService;
@@ -101,6 +110,8 @@ class LegacyPasswordApiController extends ApiController {
             try {
                 $password = $this->getPasswordObject($model);
             } catch(\Exception $e) {
+                $this->loggingService->logException($e);
+
                 continue;
             }
             if($password !== null) {
@@ -149,7 +160,7 @@ class LegacyPasswordApiController extends ApiController {
      */
     public function create($pass, $loginname, $address, $notes, $category): JSONResponse {
         /** @var Password $model */
-        $model = $this->passwordService->create();
+        $model   = $this->passwordService->create();
         $website = parse_url($address, PHP_URL_HOST);
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
@@ -207,7 +218,7 @@ class LegacyPasswordApiController extends ApiController {
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) return new JSONResponse('Unsupported Encryption Type', 400);
         $website = parse_url($address, PHP_URL_HOST);
-        $edited = $revision->getPassword() === $pass ? $revision->getEdited():time();
+        $edited  = $revision->getPassword() === $pass ? $revision->getEdited():time();
 
         /** @var PasswordRevision $newRevision */
         $newRevision = $this->passwordRevisionService->create(
@@ -219,7 +230,7 @@ class LegacyPasswordApiController extends ApiController {
             $revision->getFolder(),
             $edited,
             $revision->isHidden(),
-            $deleted==true,
+            $deleted == true,
             $revision->isFavorite()
         );
         $this->passwordRevisionService->save($newRevision);
