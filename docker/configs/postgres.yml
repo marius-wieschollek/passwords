@@ -3,14 +3,10 @@ version: '2'
 services:
   app:
     environment:
-      - MYSQL_PASSWORD=
-      - MYSQL_DATABASE=
-      - MYSQL_USER=
-      - MYSQL_HOST=
       - POSTGRES_DB=nextcloud
-      - POSTGRES_USER=nextcloud
-      - POSTGRES_PASSWORD=nextcloud
-      - POSTGRES_HOST=postgres:5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_HOST=postgres
 
   postgres:
     image: postgres:alpine
@@ -21,9 +17,8 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=nextcloud
-      - POSTGRES_USER=nextcloud
-      - POSTGRES_DB=nextcloud
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
 
   pgadmin:
     image: dpage/pgadmin4
@@ -32,7 +27,7 @@ services:
     ports:
       - 8081:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL=user@localhost.com
+      - PGADMIN_DEFAULT_EMAIL=admin@nextcloud
       - PGADMIN_DEFAULT_PASSWORD=nextcloud
 
 volumes:
