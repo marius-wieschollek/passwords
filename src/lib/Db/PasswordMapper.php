@@ -109,7 +109,7 @@ class PasswordMapper extends AbstractMapper {
 
         if(!$includeHidden) {
             $sql->andWhere(
-                $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_STR))
+                $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
             );
         }
 
