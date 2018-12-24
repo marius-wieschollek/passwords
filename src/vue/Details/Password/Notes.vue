@@ -43,7 +43,8 @@
 </script>
 
 <style lang="scss">
-    .item-details .notes {
+    .item-details .notes,
+    .editor-preview.editor-preview-active {
         blockquote {
             font-family : var(--pw-mono-font-face);
             margin      : 5px 0;

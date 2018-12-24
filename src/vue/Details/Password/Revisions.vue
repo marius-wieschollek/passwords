@@ -66,7 +66,7 @@
             }
 
             .time {
-                color       : $color-grey-dark;
+                color       : var(--color-text-maxcontrast);
                 font-size   : 0.9em;
                 font-style  : italic;
                 line-height : 0.9em;
