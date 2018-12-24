@@ -79,7 +79,7 @@ abstract class AbstractMapper extends QBMapper {
         $sql->andWhere(
             $sql->expr()->orX(
                 $sql->expr()->eq('id', $sql->createNamedParameter($search, IQueryBuilder::PARAM_INT)),
-                $sql->expr()->eq('uuid', $sql->createNamedParameter($search, IQueryBuilder::PARAM_STR))
+                $sql->expr()->eq('uuid', $sql->createNamedParameter($search))
             )
         );
 
@@ -110,7 +110,7 @@ abstract class AbstractMapper extends QBMapper {
 
         if($this->userId !== null) {
             $qb->andWhere(
-                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
             );
         }
 
@@ -193,7 +193,7 @@ abstract class AbstractMapper extends QBMapper {
 
         if($this->userId !== null) {
             $qb->andWhere(
-                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
             );
         }
 
@@ -219,8 +219,8 @@ abstract class AbstractMapper extends QBMapper {
 
         if($this->userId !== null) {
             $sql->andWhere(
-                $sql->expr()->eq('a.user_id', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
-                $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+                $sql->expr()->eq('a.user_id', $sql->createNamedParameter($this->userId)),
+                $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId))
             );
         }
 
@@ -271,19 +271,14 @@ abstract class AbstractMapper extends QBMapper {
 
         $qb = $this->db->getQueryBuilder();
         $qb->insert($this->tableName);
-        $types = $entity->getFieldTypes();
 
         // build the fields
         foreach($properties as $property => $updated) {
             $column = $entity->propertyToColumn($property);
-            $getter = 'get'.ucfirst($property);
-            $value  = $entity->$getter();
+            $getter = 'get' . ucfirst($property);
+            $value = $entity->$getter();
 
-            if(isset($types[ $property ]) && $types[ $property ] === 'boolean') {
-                $qb->setValue($column, $qb->createNamedParameter($value, IQueryBuilder::PARAM_BOOL));
-            } else {
-                $qb->setValue($column, $qb->createNamedParameter($value));
-            }
+            $qb->setValue($column, $qb->createNamedParameter($value, $this->getParameterTypeForProperty($property, $entity->getFieldTypes())));
         }
 
         $qb->execute();
@@ -307,7 +302,7 @@ abstract class AbstractMapper extends QBMapper {
 
         // entity needs an id
         $id = $entity->getId();
-        if($id === null) {
+        if($id === null){
             throw new \InvalidArgumentException(
                 'Entity which should be updated has no id');
         }
@@ -319,26 +314,38 @@ abstract class AbstractMapper extends QBMapper {
 
         $qb = $this->db->getQueryBuilder();
         $qb->update($this->tableName);
-        $types = $entity->getFieldTypes();
 
         // build the fields
         foreach($properties as $property => $updated) {
             $column = $entity->propertyToColumn($property);
-            $getter = 'get'.ucfirst($property);
-            $value  = $entity->$getter();
+            $getter = 'get' . ucfirst($property);
+            $value = $entity->$getter();
 
-            if(isset($types[ $property ]) && $types[ $property ] === 'boolean') {
-                $qb->set($column, $qb->createNamedParameter($value, IQueryBuilder::PARAM_BOOL));
-            } else {
-                $qb->set($column, $qb->createNamedParameter($value));
-            }
+            $qb->set($column, $qb->createNamedParameter($value, $this->getParameterTypeForProperty($property, $entity->getFieldTypes())));
         }
 
         $qb->where(
-            $qb->expr()->eq('id', $qb->createNamedParameter($id))
+            $qb->expr()->eq('id', $qb->createNamedParameter($id, IQueryBuilder::PARAM_INT))
         );
         $qb->execute();
 
         return $entity;
+    }
+
+    protected function getParameterTypeForProperty(string $property, array $types) {
+        if(!isset($types[ $property ])) {
+            return IQueryBuilder::PARAM_STR;
+        }
+
+        switch($types[ $property ]) {
+            case 'integer':
+                return IQueryBuilder::PARAM_INT;
+            case 'string':
+                return IQueryBuilder::PARAM_STR;
+            case 'boolean':
+                return IQueryBuilder::PARAM_BOOL;
+        }
+
+        return IQueryBuilder::PARAM_STR;
     }
 }

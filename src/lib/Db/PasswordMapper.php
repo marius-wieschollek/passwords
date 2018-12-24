@@ -44,7 +44,7 @@ class PasswordMapper extends AbstractMapper {
             ->where(
                 $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
                 $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
-                $sql->expr()->eq('b.uuid', $sql->createNamedParameter($shareUuid, IQueryBuilder::PARAM_STR))
+                $sql->expr()->eq('b.uuid', $sql->createNamedParameter($shareUuid))
             )->andWhere(
                 $sql->expr()->orX(
                     $sql->expr()->eq('a.user_id', 'b.user_id'),
@@ -54,8 +54,8 @@ class PasswordMapper extends AbstractMapper {
 
         if($this->userId !== null) {
             $sql->andWhere(
-                $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
-                $sql->expr()->eq('b.receiver', $sql->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR))
+                $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId)),
+                $sql->expr()->eq('b.receiver', $sql->createNamedParameter($this->userId))
             );
         }
 
@@ -88,7 +88,7 @@ class PasswordMapper extends AbstractMapper {
         $sql = $this->getJoinStatement(PasswordRevisionMapper::TABLE_NAME);
 
         $sql->andWhere(
-            $sql->expr()->eq('b.folder', $sql->createNamedParameter($folderUuid, IQueryBuilder::PARAM_STR))
+            $sql->expr()->eq('b.folder', $sql->createNamedParameter($folderUuid))
         );
 
         return $this->findEntities($sql);
@@ -104,7 +104,7 @@ class PasswordMapper extends AbstractMapper {
         $sql = $this->getJoinStatement(PasswordTagRelationMapper::TABLE_NAME, 'uuid', 'password');
 
         $sql->andWhere(
-            $sql->expr()->eq('b.tag', $sql->createNamedParameter($tagUuid, IQueryBuilder::PARAM_STR))
+            $sql->expr()->eq('b.tag', $sql->createNamedParameter($tagUuid))
         );
 
         if(!$includeHidden) {

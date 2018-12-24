@@ -27,7 +27,7 @@ class FolderMapper extends AbstractMapper {
         $sql = $this->getJoinStatement(FolderRevisionMapper::TABLE_NAME);
 
         $sql->andWhere(
-            $sql->expr()->eq('b.parent', $sql->createNamedParameter($parentUuid, IQueryBuilder::PARAM_STR))
+            $sql->expr()->eq('b.parent', $sql->createNamedParameter($parentUuid))
         );
 
         return $this->findEntities($sql);

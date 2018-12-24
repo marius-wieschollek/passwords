@@ -34,9 +34,9 @@ class ShareMapper extends AbstractMapper {
         if($this->userId !== null) {
             $qb->andWhere(
                 $qb->expr()->orX(
-                    $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
+                    $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId)),
                     $qb->expr()->andX(
-                        $qb->expr()->eq('receiver', $qb->createNamedParameter($this->userId, IQueryBuilder::PARAM_STR)),
+                        $qb->expr()->eq('receiver', $qb->createNamedParameter($this->userId)),
                         $qb->expr()->isNotNull('target_password')
                     )
                 )
