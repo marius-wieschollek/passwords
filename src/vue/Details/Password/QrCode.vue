@@ -6,7 +6,7 @@
             <translate tag="option" value="url" v-if="password.url" say="Website"/>
             <translate tag="option" value="hash" say="SHA1 Hash"/>
         </select>
-        <qr-code :text="text" :color="color" :size="256" errorLevel="H"/>
+        <qr-code :text="text" :color="color" :size="256" bgColor="#fff0" errorLevel="H"/>
     </div>
 </template>
 
