@@ -157,7 +157,7 @@
                     this.simplemde = new SimpleMDE(
                         {
                             element                : document.getElementById('password-notes'),
-                            hideIcons              : ['fullscreen', 'side-by-side'],
+                            hideIcons              : ['fullscreen', 'side-by-side', 'image'],
                             autoDownloadFontAwesome: false,
                             spellChecker           : false,
                             placeholder            : Localisation.translate('Take some notes'),
@@ -417,28 +417,37 @@
                                 border-radius : var(--border-radius);
                             }
 
+                            .CodeMirror-code {
+                                width   : auto;
+                                border  : none;
+                                padding : 0;
+                                margin  : 0;
+                            }
+
                             .CodeMirror-scroll {
                                 overflow   : auto !important;
                                 min-height : 300px;
                                 max-height : 300px;
                             }
 
-                            .editor-preview.editor-preview-active {
-                                background: var(--color-background-dark);
-
-                                p {
-                                    margin-bottom : 1em;
-                                }
-                            }
-
-                            .CodeMirror-cursor {
-                                border-color: var(--color-main-text);
+                            .CodeMirror-cursor,
+                            .CodeMirror-cursors {
+                                border      : none;
+                                border-left : 1px solid var(--color-main-text);
                             }
 
                             .CodeMirror-selectedtext,
                             .CodeMirror-selectedtext::selection {
-                                color: var(--color-main-background);
-                                background: var(--color-main-text);
+                                color      : var(--color-main-background);
+                                background : var(--color-main-text);
+                            }
+
+                            .editor-preview.editor-preview-active {
+                                background : var(--color-background-dark);
+
+                                p {
+                                    margin-bottom : 1em;
+                                }
                             }
 
                             .warning {

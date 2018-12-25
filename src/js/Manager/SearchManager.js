@@ -27,11 +27,7 @@ class SearchManager {
 
     init() {
         if(OC.Plugins) {
-            if(SettingsManager.get('server.version') > 13) {
-                new OCA.Search((q) => {this.search(q);}, () => {this.search();});
-            } else {
-                OC.Plugins.register('OCA.Search', this);
-            }
+            new OCA.Search((q) => {this.search(q);}, () => {this.search();});
             document.querySelector('form.searchbox').style.opacity = '0';
             this._status.available = false;
 
@@ -304,6 +300,7 @@ class SearchManager {
             if(!this._status.available) return;
             if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
             if(['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1) return;
+            if(['true', '1', 'on'].indexOf(e.target.contentEditable) !== -1) return;
             if(!SettingsManager.get('client.search.live')) return;
 
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
