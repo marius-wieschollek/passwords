@@ -122,7 +122,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
             <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
                 <?php foreach($_['wordsServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 

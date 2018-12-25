@@ -227,4 +227,11 @@ class ImagickHelper extends AbstractImageHelper {
     protected function getNewImageObject() {
         return class_exists(Imagick::class) ? new Imagick():new Gmagick();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public static function isAvailable(): bool {
+        return class_exists(Imagick::class) || class_exists(Gmagick::class);
+    }
 }

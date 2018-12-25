@@ -179,4 +179,11 @@ abstract class AbstractImageHelper {
      */
     abstract public function convertIcoToPng($data);
 
+    /**
+     * Whether or not this service can be used in the current environment
+     *
+     * @return bool
+     */
+    abstract public static function isAvailable(): bool;
+
 }

@@ -79,4 +79,17 @@ class RandomCharactersHelper extends AbstractWordsHelper {
 
         return $characters;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public static function isAvailable(): bool {
+        try {
+            random_int(1, 10);
+
+            return extension_loaded('mbstring');
+        } catch(\Exception $e) {
+            return false;
+        }
+    }
 }

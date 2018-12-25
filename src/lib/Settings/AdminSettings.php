@@ -9,9 +9,13 @@ namespace OCA\Passwords\Settings;
 
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Helper\Words\RandomCharactersHelper;
+use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -137,17 +141,20 @@ class AdminSettings implements ISettings {
             [
                 'id'      => HelperService::WORDS_LOCAL,
                 'label'   => 'Local dictionary',
-                'current' => $current === HelperService::WORDS_LOCAL
+                'current' => $current === HelperService::WORDS_LOCAL,
+                'enabled' => LocalWordsHelper::isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_SNAKES,
                 'label'   => 'watchout4snakes.com (recommended)',
-                'current' => $current === HelperService::WORDS_SNAKES
+                'current' => $current === HelperService::WORDS_SNAKES,
+                'enabled' => SnakesWordsHelper::isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_RANDOM,
                 'label'   => 'Random Characters',
-                'current' => $current === HelperService::WORDS_RANDOM
+                'current' => $current === HelperService::WORDS_RANDOM,
+                'enabled' => RandomCharactersHelper::isAvailable()
             ]
         ];
     }
@@ -165,7 +172,7 @@ class AdminSettings implements ISettings {
                 'id'      => HelperService::IMAGES_IMAGICK,
                 'label'   => 'Imagick/GMagick (recommended)',
                 'current' => $current === HelperService::IMAGES_IMAGICK,
-                'enabled' => HelperService::canUseImagick(),
+                'enabled' => ImagickHelper::isAvailable(),
             ],
             [
                 'id'      => HelperService::IMAGES_GDLIB,

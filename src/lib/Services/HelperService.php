@@ -7,8 +7,6 @@
 
 namespace OCA\Passwords\Services;
 
-use Gmagick;
-use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
@@ -200,7 +198,17 @@ class HelperService {
      * @return string
      */
     public static function getDefaultWordsHelperName(): string {
-        return is_file(LocalWordsHelper::WORDS_DEFAULT) ? self::WORDS_LOCAL:self::WORDS_RANDOM;
+        if(LocalWordsHelper::isAvailable()) {
+            return self::WORDS_LOCAL;
+        }
+        if(RandomCharactersHelper::isAvailable()) {
+            return self::WORDS_RANDOM;
+        }
+        if(SnakesWordsHelper::isAvailable()) {
+            return self::WORDS_SNAKES;
+        }
+
+        return '';
     }
 
     /**
@@ -209,15 +217,8 @@ class HelperService {
      * @return string
      */
     public static function getImageHelperName(string $current = self::IMAGES_IMAGICK): string {
-        if($current === self::IMAGES_IMAGICK && self::canUseImagick()) return self::IMAGES_IMAGICK;
+        if($current === self::IMAGES_IMAGICK && ImagickHelper::isAvailable()) return self::IMAGES_IMAGICK;
 
         return self::IMAGES_GDLIB;
-    }
-
-    /**
-     * @return bool
-     */
-    public static function canUseImagick(): bool {
-        return class_exists(Imagick::class) || class_exists(Gmagick::class);
     }
 }

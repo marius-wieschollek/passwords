@@ -84,4 +84,13 @@ class SnakesWordsHelper extends AbstractWordsHelper {
 
         return $options;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public static function isAvailable(): bool {
+        $headers = @get_headers(SnakesWordsHelper::SERVICE_URL, 1);
+
+        return $headers !== false && strpos($headers[0], '200') !== false ? true:false;
+    }
 }
