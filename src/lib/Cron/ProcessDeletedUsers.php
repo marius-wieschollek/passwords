@@ -56,15 +56,15 @@ class ProcessDeletedUsers extends AbstractCronJob {
     protected function runJob($argument): void {
         $usersToDelete   = json_decode($this->config->getAppValue('users/deleted', '{}'), true);
         $usersNotDeleted = [];
-        $deleted         = 0;
+        $usersDeleted    = [];
         foreach($usersToDelete as $userId) {
             if($this->deleteUserData($userId)) {
-                $deleted++;
+                $usersDeleted[] = $userId;
             } else {
                 $usersNotDeleted[] = $userId;
             };
         }
-        $this->logger->debugOrInfo(['Deleted %s user(s)', $deleted], $deleted);
+        $this->logger->debugOrInfo(['Database of %s deleted due to user deletion', implode(', ', $usersDeleted)], count($usersDeleted));
         $this->config->setAppValue('users/deleted', json_encode($usersNotDeleted));
     }
 
