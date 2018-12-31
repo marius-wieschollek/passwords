@@ -105,6 +105,7 @@ class ImagickHelper extends AbstractImageHelper {
      */
     public function getImageFromFile(string $file) {
         $image = $this->getNewImageObject();
+        $image->setFont($this->getDefaultFont());
         $image->readImage($file);
         $image->stripImage();
 
