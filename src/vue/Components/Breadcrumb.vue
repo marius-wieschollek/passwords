@@ -250,6 +250,7 @@
 
             &:not(.active) .menu {
                 filter : none;
+                border-color: transparent;
             }
 
             &.active .menu {
