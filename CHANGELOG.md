@@ -1,3 +1,13 @@
+#### 2019.1.0
+- Added Nextcloud 15 support
+- Added Dark Theme support
+- Fixed ImageMagick detection issue
+- Fixed editable status check in legacy api
+- Fixed changedate issues in legacy api
+- Improved automatic words service choice
+- Improved nightly update functionality
+- Removed Nextcloud 12, 13 and 14 support
+
 #### 2018.12.0 - Feature release
 - Added apps & extensions section
 - Improved shared password synchronisation
