@@ -84,7 +84,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <database>sqlite</database>
         <database>mysql</database>
         <database>pgsql</database>
-        <nextcloud min-version="14" max-version="15" />
+        <nextcloud min-version="15" max-version="15" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\ProcessDeletedUsers</job>

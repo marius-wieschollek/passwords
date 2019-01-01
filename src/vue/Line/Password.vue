@@ -210,7 +210,7 @@
             .row {
                 height        : 51px;
                 font-size     : 0;
-                border-bottom : 1px solid $color-grey-lighter;
+                border-bottom : 1px solid var(--color-border);
                 cursor        : pointer;
                 display       : flex;
 
@@ -356,7 +356,7 @@
 
                             &:active,
                             &:hover {
-                                background-color : darken($color-white, 3);
+                                background-color : var(--color-background-dark);
                                 color            : var(--color-main-text);
 
                                 a { color : var(--color-main-text); }
@@ -377,7 +377,7 @@
 
                 &:active,
                 &:hover {
-                    background-color : darken($color-white, 3);
+                    background-color : var(--color-background-dark);
 
                     .favorite {
                         color : darken($color-grey-light, 3);

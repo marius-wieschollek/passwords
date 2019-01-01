@@ -70,14 +70,14 @@
             font-size        : 1.25em;
             padding          : 10px;
             line-height      : 30px;
-            border-top       : 1px solid $color-grey-lighter;
-            border-bottom    : 1px solid $color-grey-lighter;
-            background-color : darken($color-white, 3);
+            border-top       : 1px solid var(--color-border);
+            border-bottom    : 1px solid var(--color-border);
+            background-color : var(--color-background-dark);
 
             &:before {
                 content       : '1';
-                color         : $color-grey-darker;
-                border        : 1px solid $color-grey;
+                color         : var(--color-loading-dark);
+                border        : 1px solid var(--color-loading-light);
                 border-radius : 15px;
                 width         : 30px;
                 display       : inline-block;

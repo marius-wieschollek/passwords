@@ -22,6 +22,13 @@ abstract class AbstractWordsHelper {
     abstract public function getWords(int $strength): array;
 
     /**
+     * Whether or not this service can be used in the current environment
+     *
+     * @return bool
+     */
+    abstract public static function isAvailable(): bool;
+
+    /**
      * @param array $words
      *
      * @return bool

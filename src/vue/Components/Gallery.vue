@@ -118,12 +118,13 @@
 
     .blueimp-gallery {
         background-color : transparentize($color-black, 0.25);
+        max-height: 100vh;
 
         > .description {
             position : absolute;
             top      : 30px;
             left     : 15px;
-            color    : #fff;
+            color    : var(--color-main-text);
             display  : none;
         }
 
@@ -142,6 +143,8 @@
                 position : static;
                 width    : auto;
                 height   : auto;
+                max-width: 100%;
+                max-height: 100%;
             }
         }
 
@@ -164,7 +167,7 @@
             position        : absolute;
             top             : 18px;
             line-height     : 30px;
-            color           : #fff;
+            color           : var(--color-main-text);
             text-shadow     : 0 0 2px #000;
             opacity         : .8;
             display         : block;
@@ -172,6 +175,10 @@
             &:hover {
                 opacity : 1;
             }
+        }
+
+        @media (max-width : $width-small) {
+            top: -44px;
         }
     }
 </style>

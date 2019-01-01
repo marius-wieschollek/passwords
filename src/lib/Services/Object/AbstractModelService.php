@@ -13,7 +13,9 @@ use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class AbstractModelService
@@ -57,6 +59,7 @@ abstract class AbstractModelService extends AbstractService {
      * @param string $userId
      *
      * @return ModelInterface[]
+     * @throws \Exception
      */
     public function findByUserId(string $userId): array {
         return $this->mapper->findAllByUserId($userId);
@@ -67,10 +70,14 @@ abstract class AbstractModelService extends AbstractService {
      *
      * @return ModelInterface|EntityInterface|null
      * @deprecated
-     * @throws \Exception
+     * @throws MultipleObjectsReturnedException
      */
     public function findByIdOrUuid($search): ?ModelInterface {
-        return $this->mapper->findOneByIdOrUuid($search);
+        try {
+            return $this->mapper->findOneByIdOrUuid($search);
+        } catch(DoesNotExistException $e) {
+            return null;
+        }
     }
 
     /**

@@ -55,6 +55,8 @@ class FallbackIconGenerator {
      *
      * @param HelperService        $helperService
      * @param ConfigurationService $configurationService
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(HelperService $helperService, ConfigurationService $configurationService) {
         $this->imageHelper          = $helperService->getImageHelper();
@@ -195,7 +197,7 @@ class FallbackIconGenerator {
         $bgColor = imagecolorallocate($image, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
         imagefill($image, 0, 0, $bgColor);
 
-        $fontFile = __DIR__.'/../../../../../core/fonts/OpenSans-Regular.ttf';
+        $fontFile = $this->imageHelper->getDefaultFont();
         $fontBox  = imagettfbbox($fontSize, 0, $fontFile, $text);
         $fontY    = $center + (abs($fontBox[7])) / 2;
         $fontX    = $center - (abs($fontBox[2]) + $realSize * 0.036) / 2;

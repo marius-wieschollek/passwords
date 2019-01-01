@@ -21,8 +21,8 @@ $messageHead   = $l->t('This application requires %s in order to work safely.', 
 $messageReload = $l->t('You can try to %s the page with HTTPS.', ["<a href=\"{$linkReload}\">{$reloadPage}</a>"]);
 
 if($isAdmin) {
-    $linkDocumentation = 'https://docs.nextcloud.com/server/14/admin_manual/configuration_server/harden_server.html#use-https';
-    $linkReverseProxy  = 'https://docs.nextcloud.com/server/14/admin_manual/configuration_server/reverse_proxy_configuration.html';
+    $linkDocumentation = 'https://docs.nextcloud.com/server/15/admin_manual/configuration_server/harden_server.html#use-https';
+    $linkReverseProxy  = 'https://docs.nextcloud.com/server/15/admin_manual/configuration_server/reverse_proxy_configuration.html';
     $linkCertificate   = 'https://letsencrypt.org/getting-started/';
     $linkSettings      = \OC::$server->getURLGenerator()->getAbsoluteURL('/index.php/settings/admin/passwords#passwords-https-detection');
 

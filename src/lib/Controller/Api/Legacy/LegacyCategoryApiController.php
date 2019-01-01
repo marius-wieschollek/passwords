@@ -11,6 +11,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\ApiController;
@@ -30,6 +31,11 @@ class LegacyCategoryApiController extends ApiController {
     protected $tagService;
 
     /**
+     * @var LoggingService
+     */
+    protected $loggingService;
+
+    /**
      * @var TagRevisionService
      */
     protected $tagRevisionService;
@@ -39,11 +45,13 @@ class LegacyCategoryApiController extends ApiController {
      *
      * @param IRequest           $request
      * @param TagService         $tagService
+     * @param LoggingService     $loggingService
      * @param TagRevisionService $tagRevisionService
      */
     public function __construct(
         IRequest $request,
         TagService $tagService,
+        LoggingService $loggingService,
         TagRevisionService $tagRevisionService
     ) {
         parent::__construct(
@@ -54,6 +62,7 @@ class LegacyCategoryApiController extends ApiController {
             1728000
         );
         $this->tagService         = $tagService;
+        $this->loggingService     = $loggingService;
         $this->tagRevisionService = $tagRevisionService;
     }
 
@@ -71,6 +80,8 @@ class LegacyCategoryApiController extends ApiController {
             try {
                 $category = $this->getCategoryObject($model);
             } catch(\Exception $e) {
+                $this->loggingService->logException($e);
+
                 continue;
             }
             if($category !== null) $categories[] = $category;

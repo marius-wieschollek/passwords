@@ -47,6 +47,7 @@ class UserHook {
     public function postDelete(IUser $user): void {
         $deletedUsers   = $this->getDeletedUsers();
         $deletedUsers[] = $user->getUID();
+        $deletedUsers   = array_unique($deletedUsers);
         $this->config->setAppValue('users/deleted', json_encode($deletedUsers));
     }
 

@@ -28,11 +28,11 @@ class TagMapper extends AbstractMapper {
         $sql = $this->getJoinStatement(PasswordTagRelationMapper::TABLE_NAME, 'uuid', 'tag');
 
         $sql->andWhere(
-            $sql->expr()->eq('b.password', $sql->createNamedParameter($passwordUuid, IQueryBuilder::PARAM_STR))
+            $sql->expr()->eq('b.password', $sql->createNamedParameter($passwordUuid))
         );
         if(!$includeHidden) {
             $sql->andWhere(
-                $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_STR))
+                $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
             );
         }
 

@@ -31,7 +31,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
         $sql->andWhere(
             $sql->expr()->eq('b.user_id', 'a.user_id'),
             $sql->expr()->eq('b.revision', 'a.uuid'),
-            $sql->expr()->eq('b.uuid', $sql->createNamedParameter($modelUuid, IQueryBuilder::PARAM_STR))
+            $sql->expr()->eq('b.uuid', $sql->createNamedParameter($modelUuid))
         );
 
         return $this->findEntity($sql);
@@ -47,7 +47,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
 
         $sql->andWhere(
             $sql->expr()->eq('b.user_id', 'a.user_id'),
-            $sql->expr()->eq('b.uuid', $sql->createNamedParameter($modelUuid, IQueryBuilder::PARAM_STR))
+            $sql->expr()->eq('b.uuid', $sql->createNamedParameter($modelUuid))
         );
 
         return $this->findEntities($sql);

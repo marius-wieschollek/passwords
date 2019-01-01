@@ -3,7 +3,7 @@
         <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
-                <router-link :to="getBaseRoute"><img class="svg" :src="getHomeIcon" alt="Home"></router-link>
+                <router-link :to="getBaseRoute" class="home">&nbsp;</router-link>
             </div>
             <div class="crumb svg" v-for="(item, index) in getItems" :class="{first:index===0,current:index === getItems.length - 1}">
                 <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
@@ -13,7 +13,7 @@
                 <div class="popovermenu menu menu-center" @click="toggleCrumbMenu">
                     <ul>
                         <li v-for="item in getCrumbMenuItems" class="crumblist">
-                            <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">
+                            <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType" :title="item.label">
                                 <span :class="getCrumbItemIcon"></span>
                                 {{ item.label }}
                             </router-link>
@@ -65,7 +65,6 @@
 
 <script>
     import $ from "jquery";
-    import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
     import Localisation from '@js/Classes/Localisation';
@@ -123,9 +122,6 @@
         },
 
         computed: {
-            getHomeIcon() {
-                return API.config.baseUrl + 'core/img/places/home.svg';
-            },
             getBaseRoute() {
                 let route = this.$route.path;
 
@@ -215,13 +211,19 @@
                 display : none;
 
                 .icon-more {
-                    cursor : pointer;
+                    cursor  : pointer;
+                    padding : 12px 1rem;
                 }
 
                 .fa {
                     padding   : 10px;
                     font-size : 1rem;
                     margin    : 0;
+                }
+
+                .menu {
+                    left  : auto;
+                    right : 58%;
                 }
             }
 
@@ -231,10 +233,24 @@
                 overflow   : hidden;
                 transition : max-height 0.25s ease-in-out;
                 display    : block;
+                position   : relative;
+                left       : -126px;
+
+                ul {
+                    padding-right : 0;
+                }
+
+                a {
+                    overflow      : hidden;
+                    white-space   : nowrap;
+                    text-overflow : ellipsis;
+                    display       : block;
+                }
             }
 
             &:not(.active) .menu {
                 filter : none;
+                border-color: transparent;
             }
 
             &.active .menu {
@@ -252,6 +268,11 @@
 
                 &.current {
                     font-weight : 600;
+                }
+
+                .home {
+                    background : var(--icon-home-000) no-repeat center;
+                    width      : 40px;
                 }
             }
         }
@@ -279,23 +300,29 @@
             }
 
             #app-navigation-toggle {
-                display          : block !important;
-                position         : sticky;
-                min-width        : 44px;
-                top              : 0;
-                opacity          : 1;
-                z-index          : 1;
+                display   : block !important;
+                position  : sticky;
+                min-width : 44px;
+                top       : 0;
+                opacity   : 1;
+                z-index   : 1;
             }
         }
-    }
 
-    .edge {
-        .popovermenu,
-        #app-navigation .app-navigation-entry-menu {
-            border : none !important;
+        @media(max-width : $width-extra-small) {
+            .crumbmenu {
+                background-image : none;
 
-            &:after {
-                border : none !important;
+                .menu.menu-center {
+                    position : absolute;
+                }
+
+                &.active .menu.menu-center {
+                    z-index : 111;
+                }
+            }
+
+            .passwords-more-menu {
             }
         }
     }

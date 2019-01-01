@@ -7,8 +7,6 @@
 
 namespace OCA\Passwords\Services;
 
-use Gmagick;
-use Imagick;
 use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
@@ -22,9 +20,9 @@ use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
 use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
 use OCA\Passwords\Helper\Preview\PageresCliHelper;
-use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
@@ -94,13 +92,10 @@ class HelperService {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getImageHelper(): AbstractImageHelper {
-        $service = $this->config->getAppValue('service/images', self::IMAGES_IMAGICK);
+        $service = self::getImageHelperName($this->config->getAppValue('service/images', self::IMAGES_IMAGICK));
+        $class   = $service === self::IMAGES_IMAGICK ? ImagickHelper::class:GdHelper::class;
 
-        if($service == self::IMAGES_IMAGICK && HelperService::canUseImagick()) {
-            return $this->container->query(ImagickHelper::class);
-        }
-
-        return $this->container->query(GdHelper::class);
+        return $this->container->query($class);
     }
 
     /**
@@ -156,7 +151,7 @@ class HelperService {
      * @throws \OCP\AppFramework\QueryException
      */
     public function getWordsHelper(): AbstractWordsHelper {
-        $service = $this->config->getAppValue('service/words', null);
+        $service = $this->config->getAppValue('service/words', $this->getDefaultWordsHelperName());
 
         switch($service) {
             case self::WORDS_LOCAL:
@@ -166,8 +161,6 @@ class HelperService {
             case self::WORDS_RANDOM:
                 return $this->container->query(RandomCharactersHelper::class);
         }
-
-        if(is_file(LocalWordsHelper::WORDS_DEFAULT)) return $this->container->query(LocalWordsHelper::class);
 
         return $this->container->query(RandomCharactersHelper::class);
     }
@@ -202,9 +195,30 @@ class HelperService {
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public static function canUseImagick(): bool {
-        return class_exists(Imagick::class) || class_exists(Gmagick::class);
+    public static function getDefaultWordsHelperName(): string {
+        if(LocalWordsHelper::isAvailable()) {
+            return self::WORDS_LOCAL;
+        }
+        if(RandomCharactersHelper::isAvailable()) {
+            return self::WORDS_RANDOM;
+        }
+        if(SnakesWordsHelper::isAvailable()) {
+            return self::WORDS_SNAKES;
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $current
+     *
+     * @return string
+     */
+    public static function getImageHelperName(string $current = self::IMAGES_IMAGICK): string {
+        if($current === self::IMAGES_IMAGICK && ImagickHelper::isAvailable()) return self::IMAGES_IMAGICK;
+
+        return self::IMAGES_GDLIB;
     }
 }

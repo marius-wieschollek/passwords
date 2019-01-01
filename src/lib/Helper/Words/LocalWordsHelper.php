@@ -46,7 +46,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @throws Exception
      */
     public function getWords(int $strength): array {
-        $length = $strength+1;
+        $length = $strength + 1;
         $file   = $this->getWordsFile();
 
         for($i = 0; $i < 24; $i++) {
@@ -93,7 +93,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
                 break;
         }
 
-        if(is_file($wordsFile)) return $wordsFile;
+        if(is_file($wordsFile) && is_readable($wordsFile)) return $wordsFile;
 
         return $this->getDefaultWordsFile();
     }
@@ -103,8 +103,15 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @throws Exception
      */
     protected function getDefaultWordsFile(): string {
-        if(is_file(self::WORDS_DEFAULT)) return self::WORDS_DEFAULT;
+        if(LocalWordsHelper::isAvailable()) return self::WORDS_DEFAULT;
 
         throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isAvailable(): bool {
+        return is_file(LocalWordsHelper::WORDS_DEFAULT) && is_readable(LocalWordsHelper::WORDS_DEFAULT);
     }
 }

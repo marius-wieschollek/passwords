@@ -179,7 +179,7 @@
         }
 
         .app-content-right {
-            background-color : white;
+            background-color : var(--color-main-background);
             z-index          : 50;
             border-left      : 1px solid var(--color-border-dark);
             transition       : right 300ms;
@@ -244,7 +244,7 @@
             }
 
             &.mobile-open {
-                transform : translate3d(250px, 0px, 0px);
+                transform : translate3d(300px, 0px, 0px);
             }
         }
     }

@@ -10,6 +10,10 @@ namespace OCA\Passwords\Controller;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Fetcher\NightlyAppFetcher;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Helper\Words\RandomCharactersHelper;
+use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -67,9 +71,13 @@ class AdminSettingsController extends Controller {
         if($value === 'false') $value = false;
 
         if($key === 'backup/files/maximum' && $value < 0) $value = '';
-        if($key === 'service/images' && $value === HelperService::IMAGES_IMAGICK && !HelperService::canUseImagick()) {
+        if($key === 'service/images' && $value === HelperService::IMAGES_IMAGICK && !ImagickHelper::isAvailable()) {
             return new JSONResponse(['status' => 'failed', 'message' => 'Graphics library not installed']);
         };
+
+        if($this->checkWordsService($key, $value)) {
+            return new JSONResponse(['status' => 'failed', 'message' => 'Service is not available on this system']);
+        }
 
         if($value === '') {
             $this->config->deleteAppValue($key);
@@ -117,5 +125,21 @@ class AdminSettingsController extends Controller {
             $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
             $this->nightlyAppFetcher->clearDb();
         }
+    }
+
+    /**
+     * @param string $key
+     * @param        $value
+     *
+     * @return bool
+     */
+    protected function checkWordsService(string $key, $value): bool {
+        return $key === 'service/words' &&
+               in_array($value, [HelperService::WORDS_LOCAL, HelperService::WORDS_RANDOM, HelperService::WORDS_SNAKES]) &&
+               (
+                   ($value === HelperService::WORDS_LOCAL && !LocalWordsHelper::isAvailable()) ||
+                   ($value === HelperService::WORDS_RANDOM && !RandomCharactersHelper::isAvailable()) ||
+                   ($value === HelperService::WORDS_SNAKES && !SnakesWordsHelper::isAvailable())
+               );
     }
 }

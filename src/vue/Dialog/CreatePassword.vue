@@ -169,7 +169,7 @@
                     this.simplemde = new SimpleMDE(
                         {
                             element                : document.getElementById('password-notes'),
-                            hideIcons              : ['fullscreen', 'side-by-side'],
+                            hideIcons              : ['fullscreen', 'side-by-side', 'image'],
                             autoDownloadFontAwesome: false,
                             spellChecker           : false,
                             placeholder            : Localisation.translate('Take some notes'),
@@ -395,14 +395,71 @@
                         .notes-container {
                             padding : 0.25em 0;
 
+                            .editor-toolbar {
+                                border  : none;
+                                padding : 0;
+
+                                a {
+                                    background : var(--color-main-background);
+                                    border     : 1px solid transparent;
+
+                                    &:hover,
+                                    &:active,
+                                    &:focus {
+                                        background   : var(--color-main-background);
+                                        border-color : var(--color-border);
+                                        cursor       : pointer;
+                                    }
+
+                                    &:before {
+                                        color : var(--color-main-text);
+                                    }
+                                }
+
+                                .separator {
+                                    border-left  : none;
+                                    border-right : 1px solid var(--color-border);
+                                }
+                            }
+
+                            .CodeMirror {
+                                background    : var(--color-main-background);
+                                color         : var(--color-main-text);
+                                border-color  : var(--color-border);
+                                border-radius : var(--border-radius);
+                            }
+
+                            .CodeMirror-code {
+                                width   : auto;
+                                border  : none;
+                                padding : 0;
+                                margin  : 0;
+                            }
+
                             .CodeMirror-scroll {
                                 overflow   : auto !important;
                                 min-height : 300px;
                                 max-height : 300px;
                             }
 
-                            .editor-preview.editor-preview-active p {
-                                margin-bottom : 1em;
+                            .CodeMirror-cursor,
+                            .CodeMirror-cursors {
+                                border      : none;
+                                border-left : 1px solid var(--color-main-text);
+                            }
+
+                            .CodeMirror-selectedtext,
+                            .CodeMirror-selectedtext::selection {
+                                color      : var(--color-main-background);
+                                background : var(--color-main-text);
+                            }
+
+                            .editor-preview.editor-preview-active {
+                                background : var(--color-background-dark);
+
+                                p {
+                                    margin-bottom : 1em;
+                                }
                             }
 
                             .warning {

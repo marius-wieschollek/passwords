@@ -214,4 +214,11 @@ class GdHelper extends AbstractImageHelper {
     protected function getNewImageObject() {
         return new Image();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public static function isAvailable(): bool {
+        return true;
+    }
 }

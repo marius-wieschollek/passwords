@@ -179,4 +179,17 @@ abstract class AbstractImageHelper {
      */
     abstract public function convertIcoToPng($data);
 
+    /**
+     * Whether or not this service can be used in the current environment
+     *
+     * @return bool
+     */
+    abstract public static function isAvailable(): bool;
+
+    /**
+     * @return string
+     */
+    public function getDefaultFont(): string {
+        return __DIR__.'/../../../../../core/fonts/Nunito-Regular.ttf';
+    }
 }

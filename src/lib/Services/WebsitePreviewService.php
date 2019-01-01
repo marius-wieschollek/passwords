@@ -144,7 +144,7 @@ class WebsitePreviewService {
         } catch(\Throwable $e) {
             $this->logger->logException($e);
 
-            throw new ApiException('Internal Website Preview API Error', 502);
+            throw new ApiException('Internal Website Preview API Error', 502, $e);
         }
     }
 
