@@ -202,7 +202,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             </select>
             <label for="passwords-https-detection"><?php p($l->t('Enable HTTPS detection debugging')); ?></label>
             <input id="passwords-https-detection" name="https-detection" data-setting="debug/https" type="checkbox" <?=$_['debugHTTPS'] ? 'checked':''?>>
-            <label for="passwords-nightly-updates"><?php p($l->t('Enable Passwords Nightly Builds')); ?></label>
+            <label for="passwords-nightly-updates"><?php p($l->t('Show Nightly Updates in "Apps"')); ?></label>
             <input id="passwords-nightly-updates" name="nightly-updates" data-setting="nightly/enabled" type="checkbox" <?=$_['nightlyUpdates'] ? 'checked':''?>>
         </div>
     </form>

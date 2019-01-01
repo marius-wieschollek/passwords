@@ -44,7 +44,7 @@
         "Other Settings"                                                                            : "Другие настройки",
         "Remove deleted objects from database"                                                      : "Очищать базу от удалённых объектов",
         "Enable HTTPS detection debugging"                                                          : "Активировать отладку с учётом HTTPS",
-        "Enable Passwords Nightly Builds"                                                           : "Включить возможность обновления на экспериментальные версии (Nightly Builds)",
+        "Show Nightly Updates in \"Apps\""                                                          : "Показать экспериментальные обновления в разделе \"Приложения\"",
         "Never"                                                                                     : "Никогда",
         "Immediately"                                                                               : "Немедленно",
         "After two hours"                                                                           : "Через 2 часа",

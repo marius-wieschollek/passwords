@@ -44,7 +44,7 @@
         "Other Settings"                                                                            : "Overige Instellingen",
         "Remove deleted objects from database"                                                      : "Verwijderde Objecten uit te database verwijderen",
         "Enable HTTPS detection debugging"                                                          : "Activeer HTTPS detectie debugging",
-        "Enable Passwords Nightly Builds"                                                           : "Activeer Nightly Builds in Updater",
+        "Show Nightly Updates in \"Apps\""                                                          : "Activeer Nightly Builds in \"Apps\"",
         "Never"                                                                                     : "Nooit",
         "Immediately"                                                                               : "Direct",
         "After two hours"                                                                           : "Na twee uur",

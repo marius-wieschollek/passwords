@@ -46,7 +46,7 @@
         "Other Settings"                                                                            : "Autres Options",
         "Remove deleted objects from database"                                                      : "Effacer définitivement les éléments de la base de données",
         "Enable HTTPS detection debugging"                                                          : "Activer le débogage HTTPS",
-        "Enable Passwords Nightly Builds"                                                           : "Utiliser la version instable du logiciel",
+        "Show Nightly Updates in \"Apps\""                                                          : "Afficher Nightly Updates dans \"Apps\"",
         "Never"                                                                                     : "Jamais",
         "Immediately"                                                                               : "Immédiatement",
         "After two hours"                                                                           : "Après deux heures",
