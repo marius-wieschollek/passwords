@@ -1,8 +1,13 @@
 <template>
     <div class="sharing-container">
         <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
-        <ul class="shares" v-for="share in shares" :key="share.id" :data-share-id="share.id">
-            <share :share="share" v-on:delete="deleteShare($event)" v-on:update="refreshShares()"></share>
+        <ul class="shares" v-if="shares.length !== 0">
+            <share :share="share"
+                   v-on:delete="deleteShare($event)"
+                   v-on:update="refreshShares()"
+                   :data-share-id="share.id"
+                   v-for="share in shares"
+                   :key="share.id"/>
         </ul>
         <ul class="user-search" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)">
@@ -16,9 +21,9 @@
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
-    import Localisation from "@js/Classes/Localisation";
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import Localisation from '@js/Classes/Localisation';
     import Share from '@vue/Details/Password/Sharing/Share';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         components: {
@@ -122,7 +127,7 @@
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                   .then((d) => { this.shares = d.shares;});
+                    .then((d) => { this.shares = d.shares;});
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -150,7 +155,7 @@
             },
             refreshShares() {
                 API.runSharingCron()
-                   .then((d) => { if(d.success) this.reloadShares();});
+                    .then((d) => { if(d.success) this.reloadShares();});
 
                 this.startPolling();
                 this.$forceUpdate();
