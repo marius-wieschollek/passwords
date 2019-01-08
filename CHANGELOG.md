@@ -1,4 +1,4 @@
-#### 2019.1.0
+#### 2019.1.0 - Feature release
 - Added Nextcloud 15 support
 - Added Dark Theme support
 - Fixed ImageMagick detection issue

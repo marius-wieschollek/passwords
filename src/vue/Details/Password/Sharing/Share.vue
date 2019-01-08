@@ -53,7 +53,7 @@
             },
             setExpires(share) {
                 let value = share.expires ? new Date(share.expires).toISOString().substring(0, 10):null,
-                    form = {
+                    form  = {
                         expires: {
                             value: value,
                             type : 'date',
@@ -95,7 +95,7 @@
 <style lang="scss">
     .share {
         padding       : 5px 20px 5px 5px;
-        border-bottom : 1px solid $color-grey-lighter;
+        border-bottom : 1px solid var(--color-border);
         display       : flex;
         line-height   : 32px;
         position      : relative;
@@ -105,7 +105,7 @@
         }
 
         &:hover {
-            background-color : darken($color-white, 3);
+            background-color : var(--color-background-dark);
         }
 
         .loading {
@@ -118,7 +118,7 @@
                 height           : 32px;
                 width            : 32px;
                 background-color : transparentize($color-white, 0.75);
-                animation         : ShareUpdating 0.8s infinite ease-in-out, rotate 0.8s infinite linear;
+                animation        : ShareUpdating 0.8s infinite ease-in-out, rotate 0.8s infinite linear;
 
                 @keyframes ShareUpdating {
                     0% {background-color : transparent}
