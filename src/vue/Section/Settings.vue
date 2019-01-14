@@ -109,6 +109,11 @@
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
 
+                    <translate tag="h3" say="Passwords Detail View" v-if="advancedSettings"/>
+                    <translate tag="label" for="setting-website-preview" say="Show website preview"/>
+                    <input type="checkbox" id="setting-website-preview" v-model="settings['client.ui.password.details.preview']">
+                    <settings-help text="Show a preview of the associated website in the details. (Not on mobiles)"/>
+
                     <translate tag="h3" say="Search" v-if="advancedSettings"/>
                     <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>
                     <input type="checkbox" id="setting-search-live" v-model="settings['client.search.live']" v-if="advancedSettings">

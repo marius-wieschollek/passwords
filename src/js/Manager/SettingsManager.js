@@ -17,6 +17,7 @@ class SettingsManager {
             'client.ui.password.dblClick.action' : 'username',
             'client.ui.password.menu.copy'       : false,
             'client.ui.password.user.show'       : false,
+            'client.ui.password.details.preview' : true,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
             'client.search.show'                 : false,

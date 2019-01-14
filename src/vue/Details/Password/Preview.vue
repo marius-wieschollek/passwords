@@ -14,6 +14,7 @@
 <script>
     import Web from '@vc/Web';
     import API from '@js/Helper/api';
+    import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
         components: {Web},
@@ -53,7 +54,7 @@
 
         computed: {
             showPreview() {
-                return window.innerWidth > 640;
+                return window.innerWidth > 640 && SettingsManager.get('client.ui.password.details.preview');
             }
         },
 
