@@ -82,6 +82,7 @@
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
+                        <translate tag="option" value="edit" say="Edit password"/>
                     </select>
                     <settings-help text="Action to perform when clicking on a password in the list view" v-if="advancedSettings"/>
 
@@ -91,6 +92,7 @@
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
+                        <translate tag="option" value="edit" say="Edit password"/>
                     </select>
                     <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advancedSettings"/>
 

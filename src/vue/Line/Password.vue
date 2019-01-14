@@ -137,8 +137,9 @@
                 this.runClickAction(action);
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details') this.copyAction(action, delay);
-                if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+                if(action !== 'details' && action !== 'edit') this.copyAction(action, delay);
+                else if(action === 'edit') this.clickTimeout = setTimeout(this.editAction, delay);
+                else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
                 let message = 'Error copying {element} to clipboard';
