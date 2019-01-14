@@ -131,10 +131,12 @@
             },
             doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
-                if(this.clickTimeout) clearTimeout(this.clickTimeout);
-
                 let action = SettingsManager.get('client.ui.password.dblClick.action');
-                this.runClickAction(action);
+
+                if(action !== 'none') {
+                    if(this.clickTimeout) clearTimeout(this.clickTimeout);
+                    this.runClickAction(action);
+                }
             },
             runClickAction(action, delay = 0) {
                 if(action !== 'details' && action !== 'edit') this.copyAction(action, delay);
