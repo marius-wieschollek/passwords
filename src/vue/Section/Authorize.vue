@@ -12,6 +12,7 @@
 
 <script>
     import SettingsManager from '@js/Manager/SettingsManager';
+    import API from '@js/Helper/api';
 
     export default {
 
@@ -21,8 +22,13 @@
                 token   : ''
             };
         },
+
         created() {
             document.body.classList.add('pw-authorisation');
+            API.getAuthorisationInfo()
+                .then((d) => {
+                    console.log(d);
+                })
         },
 
         beforeDestroy() {

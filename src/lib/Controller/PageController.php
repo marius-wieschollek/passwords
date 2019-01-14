@@ -128,6 +128,7 @@ class PageController extends Controller {
         $csp        = new StrictContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
+        $csp->addAllowedConnectDomain('data:');
         $csp->addAllowedImageDomain($manualHost);
         $csp->addAllowedMediaDomain($manualHost);
         $csp->allowEvalScript();

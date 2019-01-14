@@ -18,6 +18,8 @@ namespace OCA\Passwords\Db;
  * @method void setSseType(string $sseType)
  * @method string getCseType()
  * @method void setCseType(string $cseType)
+ * @method string getCseKey()
+ * @method void setCseKey(string $cseKey)
  * @method string getModel()
  * @method void setModel(string $model)
  * @method string getLabel()
@@ -54,6 +56,11 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
      * @var string
      */
     protected $cseType;
+
+    /**
+     * @var string
+     */
+    protected $cseKey;
 
     /**
      * @var string
@@ -97,6 +104,7 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
         $this->addType('sseType', 'string');
         $this->addType('sseKey', 'string');
         $this->addType('cseType', 'string');
+        $this->addType('cseKey', 'string');
 
         $this->addType('uuid', 'string');
         $this->addType('model', 'string');
