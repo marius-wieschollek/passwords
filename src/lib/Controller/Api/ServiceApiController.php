@@ -264,11 +264,13 @@ class ServiceApiController extends AbstractApiController {
             ['Content-Type' => $file->getMimeType()]
         );
 
-        $expires = new \DateTime();
-        $expires->setTimestamp(time() + 604800);
+        $expires = new \DateTime('@'.(time() + 604800));
         $response->addHeader('Cache-Control', 'public, immutable, max-age=604800')
                  ->addHeader('Expires', $expires->format(\DateTime::RFC2822))
                  ->addHeader('Pragma', 'cache');
+
+        $lastModified = new \DateTime('@'.$file->getMTime());
+        $response->setLastModified($lastModified);
 
         return $response;
     }

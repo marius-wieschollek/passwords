@@ -131,14 +131,17 @@
             },
             doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
-                if(this.clickTimeout) clearTimeout(this.clickTimeout);
-
                 let action = SettingsManager.get('client.ui.password.dblClick.action');
-                this.runClickAction(action);
+
+                if(action !== 'none') {
+                    if(this.clickTimeout) clearTimeout(this.clickTimeout);
+                    this.runClickAction(action);
+                }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details') this.copyAction(action, delay);
-                if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+                if(action !== 'details' && action !== 'edit') this.copyAction(action, delay);
+                else if(action === 'edit') this.clickTimeout = setTimeout(this.editAction, delay);
+                else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
                 let message = 'Error copying {element} to clipboard';

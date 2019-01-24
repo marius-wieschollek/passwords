@@ -85,7 +85,6 @@ class AdminSettings implements ISettings {
             'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
-            'debugHTTPS'       => $this->config->getAppValue('debug/https', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
             'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),

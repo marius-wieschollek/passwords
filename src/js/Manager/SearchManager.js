@@ -136,13 +136,19 @@ class SearchManager {
     setDatabase(database) {
         this._db = database;
         this._index = null;
-        this._resetSearch();
 
         if(database.passwords.length || database.folders.length || database.tags.length) {
             document.querySelector('form.searchbox').style.opacity = '1';
-            document.getElementById('searchbox').value = '';
             this._status.available = true;
-            setTimeout(() => {this.search(this._status.query);}, 1);
+
+            if(this._status.active) {
+                setTimeout(() => {this.search(this._status.query);}, 1);
+            } else {
+                document.getElementById('searchbox').value = '';
+                this._resetSearch();
+            }
+        } else {
+            this._resetSearch();
         }
     }
 

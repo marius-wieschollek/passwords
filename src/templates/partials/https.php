@@ -17,20 +17,22 @@ $isAdmin = \OC_User::isAdminUser($uid);
 
 $title         = $l->t('HTTPS Required');
 $reloadPage    = $l->t('reload this page');
-$messageHead   = $l->t('This application requires %s in order to work safely.', ["<a href=\"{$linkHttps}\" target=\"_blank\">HTTPS</a>"]);
-$messageReload = $l->t('You can try to %s the page with HTTPS.', ["<a href=\"{$linkReload}\">{$reloadPage}</a>"]);
+$messageHead   = $l->t('This application requires %s in order to work safely.', ["<a href='{$linkHttps}' target='_blank'>HTTPS</a>"]);
+$messageReload = $l->t('You can try to %s the page with HTTPS.', ["<a href='{$linkReload}'>{$reloadPage}</a>"]);
 
 if($isAdmin) {
     $linkDocumentation = 'https://docs.nextcloud.com/server/15/admin_manual/configuration_server/harden_server.html#use-https';
     $linkReverseProxy  = 'https://docs.nextcloud.com/server/15/admin_manual/configuration_server/reverse_proxy_configuration.html';
+    $linkForum         = 'https://help.nextcloud.com/c/apps/passwords';
     $linkCertificate   = 'https://letsencrypt.org/getting-started/';
-    $linkSettings      = \OC::$server->getURLGenerator()->getAbsoluteURL('/index.php/settings/admin/passwords#passwords-https-detection');
 
-    $readDocumentation  = $l->t('documentation');
-    $messageDebugging   = $l->t('Enable %s to troubleshoot this error.', ["<a href=\"{$linkSettings}\" target=\"_blank\">HTTPS debugging</a>"]);
-    $messageConfigure   = $l->t('Consult the %s to configure Nextcloud correctly.', ["<a href=\"{$linkDocumentation}\" target=\"_blank\">{$readDocumentation}</a>"]);
-    $messageProxy       = $l->t('If you are using an HTTPS proxy, please read this %s.', ["<a href=\"{$linkReverseProxy}\" target=\"_blank\">{$readDocumentation}</a>"]);
-    $messageCertificate = $l->t('If you do not have a HTTPS certificate, get one for free from %s.', ["<a href=\"{$linkCertificate}\" target=\"_blank\">Let's Encrypt</a>"]);
+    $l10nForum          = $l->t('forum');
+    $l10nDocs           = $l->t('documentation');
+    $messageNoBug       = $l->t('This is NOT a bug. Visit our %s if you need help.', ["<a href='{$linkForum}' target='_blank'>{$l10nForum}</a>"]);
+    $messageDebugging   = $l->t('Review the HTTPS report below to debug the issue.');
+    $messageConfigure   = $l->t('Read this %s to configure your server to use HTTPS.', ["<a href='{$linkDocumentation}' target='_blank'>{$l10nDocs}</a>"]);
+    $messageProxy       = $l->t('Read this %s if you are using any kind of proxy.', ["<a href='{$linkReverseProxy}' target='_blank'>{$l10nDocs}</a>"]);
+    $messageCertificate = $l->t('Go to %s to ge a free HTTPS certificate if you need one.', ["<a href='{$linkCertificate}' target='_blank'>Let's Encrypt</a>"]);
 } else {
     $messageAdmin = $l->t('If this problem persists, you should contact your administrator.');
 }
@@ -45,15 +47,19 @@ if($isAdmin) {
             <br><br><?php print_unescaped($messageReload); ?><br>
 
             <?php if($isAdmin) : ?>
-                <ul>
+                <ol>
+                    <li><b><?php print_unescaped($messageNoBug); ?></b></li>
                     <li><?php print_unescaped($messageDebugging); ?></li>
                     <li><?php print_unescaped($messageConfigure); ?></li>
                     <li><?php print_unescaped($messageProxy); ?></li>
                     <li><?php print_unescaped($messageCertificate); ?></li>
-                </ul>
+                </ol>
             <?php else: ?>
                 <br><?php print_unescaped($messageAdmin); ?>
             <?php endif; ?>
         </div>
+        <?php
+        if($isAdmin) print_unescaped($this->inc('partials/https_debug'));
+        ?>
     </div>
 </div>

@@ -245,8 +245,7 @@ class CreateBackupHelper {
             'backup/files/maximum'   => $this->config->getAppValue('backup/files/maximum', null),
             'entity/purge/timeout'   => $this->config->getAppValue('entity/purge/timeout', null),
             'settings/mail/security' => $this->config->getAppValue('settings/mail/security', null),
-            'settings/mail/shares'   => $this->config->getAppValue('settings/mail/shares', null),
-            'debug/https'            => $this->config->getAppValue('debug/https', null),
+            'settings/mail/shares'   => $this->config->getAppValue('settings/mail/shares', null)
         ];
     }
 }
