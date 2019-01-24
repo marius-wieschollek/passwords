@@ -16,7 +16,7 @@ $request = \OC::$server->getRequest();
 
 
 $headers = $config->getSystemValue('forwarded_for_headers', ['HTTP_X_FORWARDED_FOR']);
-$isProxy = isset($_SERVER['HTTP_X_FORWARDED_FOR']) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']);
+$isProxy = isset($_SERVER['HTTP_X_FORWARDED_FOR']) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || isset($_SERVER['HTTP_X_FORWARDED_PORT']);
 
 $expected = [
         'remote_address' => $_SERVER['REMOTE_ADDR'],
@@ -40,8 +40,14 @@ if($isProxy) {
     $expected['forwarded_proto'] = 'https';
     $expected['forwarded_for'] = $expected['remote_address'];
     $expected['overwriteprotocol'] = 'https';
-    $expected['overwritecondaddr'] = '^'.str_replace('.', '\.', $_SERVER['REMOTE_ADDR']).'$';
-    $expected['trusted_proxies'] = "[\"{$_SERVER['REMOTE_ADDR']}\"]";
+
+    if($expected['remote_address'] !== $_SERVER['REMOTE_ADDR']) {
+        $expected['overwritecondaddr'] = '^'.str_replace('.', '\.', $_SERVER['REMOTE_ADDR']).'$';
+        $expected['trusted_proxies'] = "[\"{$_SERVER['REMOTE_ADDR']}\"]";
+    } else {
+        $expected['overwritecondaddr'] = '^your\.proxy\.ip$';
+        $expected['trusted_proxies'] = '["your.proxy.ip"]';
+    }
 }
 
 ?>
