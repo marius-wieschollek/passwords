@@ -10,10 +10,6 @@
 
 use OCA\Passwords\AppInfo\Application;
 
-if($_['https_debug']) {
-    print_unescaped($this->inc('partials/https_debug', $_));
-}
-
 if($_['https']) {
     style(Application::APP_NAME, ['app']);
     script(Application::APP_NAME, ['Static/compatibility', 'Static/utility', 'Static/common', 'Static/app']);
