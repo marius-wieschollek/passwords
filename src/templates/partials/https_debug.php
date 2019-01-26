@@ -45,8 +45,8 @@ if($isProxy) {
         $expected['overwritecondaddr'] = '^'.str_replace('.', '\.', $_SERVER['REMOTE_ADDR']).'$';
         $expected['trusted_proxies'] = "[\"{$_SERVER['REMOTE_ADDR']}\"]";
     } else {
-        $expected['overwritecondaddr'] = '^your\.proxy\.ip$';
-        $expected['trusted_proxies'] = '["your.proxy.ip"]';
+        $expected['overwritecondaddr'] = '^the\.proxy\.ip$';
+        $expected['trusted_proxies'] = '["the.proxy.ip"]';
     }
 }
 
