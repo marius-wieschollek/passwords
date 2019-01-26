@@ -127,7 +127,7 @@
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsManager.get('client.ui.password.click.action');
-                this.runClickAction(action, 300);
+                if(action !== 'none') this.runClickAction(action, 300);
             },
             doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
