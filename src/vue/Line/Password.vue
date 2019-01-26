@@ -22,7 +22,7 @@
                         <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
                         <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" icon="clipboard" say="Copy Password"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('user')" icon="clipboard" say="Copy User"/>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" icon="clipboard" say="Copy User"/>
                         <translate tag="li" v-if="password.url" @click="copyAction('url')" icon="clipboard" say="Copy Url"/>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
