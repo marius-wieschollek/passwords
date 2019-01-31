@@ -6,6 +6,7 @@
         right            : 0;
         background-color : rgba(0, 0, 0, 0.7);
         z-index          : 3001;
+        overflow         : auto;
 
         @media (min-width : 650px) {
             bottom : 0;
@@ -24,6 +25,43 @@
 
             a {
                 text-decoration : underline;
+                color           : $color-black;
+            }
+
+            &.report {
+                background-color : var(--color-primary);
+                color            : var(--color-primary-text);
+                overflow         : auto;
+
+                table {
+                    margin : 0 auto;
+
+                    tr:hover {
+                        td {
+                            color      : var(--color-primary);
+                            background : var(--color-primary-text);
+                        }
+                        th {
+                            color      : var(--color-primary-text);
+                            background : var(--color-primary);
+                        }
+                    }
+
+                    th {
+                        font-weight : bold;
+                        border-top  : 1rem solid var(--color-primary);
+                    }
+
+                    td {
+                        padding : 0 0.75rem 0 0;
+                        cursor  : text;
+                    }
+
+                    th:first-of-type,
+                    td:first-of-type {
+                        padding-left : 0.75rem;
+                    }
+                }
             }
         }
 
@@ -71,11 +109,15 @@
             }
         }
 
-        ul {
+        ul,
+        ol {
             display    : inline-block;
             text-align : left;
             margin-top : 2em;
-            list-style : disc;
+
+            &ul {
+                list-style : disc;
+            }
         }
     }
 }

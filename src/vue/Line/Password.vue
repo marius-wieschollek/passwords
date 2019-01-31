@@ -22,7 +22,7 @@
                         <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
                         <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" icon="clipboard" say="Copy Password"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('user')" icon="clipboard" say="Copy User"/>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" icon="clipboard" say="Copy User"/>
                         <translate tag="li" v-if="password.url" @click="copyAction('url')" icon="clipboard" say="Copy Url"/>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
@@ -127,18 +127,21 @@
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsManager.get('client.ui.password.click.action');
-                this.runClickAction(action, 300);
+                if(action !== 'none') this.runClickAction(action, 300);
             },
             doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
-                if(this.clickTimeout) clearTimeout(this.clickTimeout);
-
                 let action = SettingsManager.get('client.ui.password.dblClick.action');
-                this.runClickAction(action);
+
+                if(action !== 'none') {
+                    if(this.clickTimeout) clearTimeout(this.clickTimeout);
+                    this.runClickAction(action);
+                }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details') this.copyAction(action, delay);
-                if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+                if(action !== 'details' && action !== 'edit') this.copyAction(action, delay);
+                else if(action === 'edit') this.clickTimeout = setTimeout(this.editAction, delay);
+                else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
                 let message = 'Error copying {element} to clipboard';

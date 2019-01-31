@@ -51,7 +51,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
 
         for($i = 0; $i < 24; $i++) {
             $result = [];
-            exec("shuf -n {$length} {$file}", $result, $code);
+            @exec("shuf -n {$length} {$file}", $result, $code);
 
             if($code == 0 && $this->isWordsArrayValid($result)) return $result;
         }
@@ -112,6 +112,6 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @return bool
      */
     public static function isAvailable(): bool {
-        return is_file(LocalWordsHelper::WORDS_DEFAULT) && is_readable(LocalWordsHelper::WORDS_DEFAULT);
+        return @is_readable(LocalWordsHelper::WORDS_DEFAULT) && @is_file(LocalWordsHelper::WORDS_DEFAULT);
     }
 }

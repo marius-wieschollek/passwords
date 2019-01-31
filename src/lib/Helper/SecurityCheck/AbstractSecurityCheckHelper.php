@@ -85,6 +85,7 @@ abstract class AbstractSecurityCheckHelper {
      * @param PasswordRevision $revision
      *
      * @return array
+     * @throws \Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): array {
         if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];

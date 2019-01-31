@@ -82,6 +82,8 @@
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
+                        <translate tag="option" value="edit" say="Edit password"/>
+                        <translate tag="option" value="none" say="Nothing"/>
                     </select>
                     <settings-help text="Action to perform when clicking on a password in the list view" v-if="advancedSettings"/>
 
@@ -91,6 +93,8 @@
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
+                        <translate tag="option" value="edit" say="Edit password"/>
+                        <translate tag="option" value="none" say="Nothing"/>
                     </select>
                     <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advancedSettings"/>
 
@@ -105,6 +109,11 @@
                     <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
+
+                    <translate tag="h3" say="Passwords Detail View" v-if="advancedSettings"/>
+                    <translate tag="label" for="setting-website-preview" say="Show website preview"/>
+                    <input type="checkbox" id="setting-website-preview" v-model="settings['client.ui.password.details.preview']">
+                    <settings-help text="Show a preview of the associated website in the details. (Not on mobiles)"/>
 
                     <translate tag="h3" say="Search" v-if="advancedSettings"/>
                     <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>

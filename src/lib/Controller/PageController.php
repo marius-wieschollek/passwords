@@ -87,10 +87,7 @@ class PageController extends Controller {
         $response = new TemplateResponse(
             $this->appName,
             'index',
-            [
-                'https'       => $isSecure,
-                'https_debug' => $this->config->getAppValue('debug/https', false)
-            ]
+            ['https' => $isSecure]
         );
 
         $response->setContentSecurityPolicy($this->getContentSecurityPolicy());
