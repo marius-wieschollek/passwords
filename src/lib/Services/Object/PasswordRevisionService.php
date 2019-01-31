@@ -69,6 +69,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @return PasswordRevision
      *
      * @throws \OCA\Passwords\Exception\ApiException
+     * @throws \Exception
      */
     public function create(
         string $model,
@@ -115,6 +116,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param bool   $favorite
      *
      * @return PasswordRevision
+     * @throws \Exception
      */
     protected function createModel(
         string $model,
