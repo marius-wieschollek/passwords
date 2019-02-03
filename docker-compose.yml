@@ -41,6 +41,9 @@ services:
       - app
     volumes_from:
       - app
+    volumes:
+      - ./docker/volumes/nginx/localhost.pem:/etc/ssl/nginx/localhost/default.pem
+      - ./docker/volumes/nginx/localhost.key:/etc/ssl/nginx/localhost/default.key
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
