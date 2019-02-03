@@ -631,7 +631,7 @@ export default class SimpleApi {
                                         resolve(d);
                                     } else {
                                         if(this._debug) console.error('Request failed', response, d);
-                                        if(response.status === 401 || this._endpoint !== null) {
+                                        if(response.status === 401 && this._endpoint !== null) {
                                             this._endpoint = null;
                                             alert('Error 401\nCredentials invalid or expired\nPlease reload page');
                                         }
@@ -647,7 +647,7 @@ export default class SimpleApi {
                             resolve(response.blob());
                         } else {
                             if(this._debug) console.error('Request failed', response);
-                            if(response.status === 401 || this._endpoint !== null) {
+                            if(response.status === 401 && this._endpoint !== null) {
                                 this._endpoint = null;
                                 alert('Error 401\nCredentials invalid or expired\nPlease reload page');
                             }
@@ -657,7 +657,7 @@ export default class SimpleApi {
                 })
                 .catch((response) => {
                     if(this._debug) console.error('Request failed', response);
-                    if(response.status === 401 || this._endpoint !== null) {
+                    if(response.status === 401 && this._endpoint !== null) {
                         this._endpoint = null;
                         alert('Error 401\nCredentials invalid or expired\nPlease reload page');
                     }
