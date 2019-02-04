@@ -13,8 +13,6 @@ export default class SimpleApi {
     constructor() {
         this._config = {};
         this._headers = {};
-        this._endpoint = null;
-        this._encryption = new Encryption();
         this._paths = {
             'tag.list'            : 'api/1.0/tag/list',
             'tag.find'            : 'api/1.0/tag/find',
@@ -80,6 +78,7 @@ export default class SimpleApi {
      * @param config
      */
     initialize(config = {}) {
+        config.enabled = false;
         this._config = config;
         if(config.apiUrl.substr(0, 5) !== 'https') throw new Error('HTTPS required for api');
 
@@ -91,6 +90,8 @@ export default class SimpleApi {
         } else {
             throw new Error('Api username or password missing');
         }
+
+        this._config.enabled = true;
     }
 
 
@@ -646,7 +647,7 @@ export default class SimpleApi {
         }
 
         return new Promise((resolve, reject) => {
-            if(this._endpoint === null) throw new Error('Invalid Login Data');
+            if(!this._config.enabled) throw new Error('Invalid Login Data');
             fetch(new Request(this._config.apiUrl + path, options))
                 .then((response) => {
                     let contentType = response.headers.get('content-type'),
@@ -660,8 +661,8 @@ export default class SimpleApi {
                                         resolve(d);
                                     } else {
                                         if(this._config.debug) console.error('Request failed', response, d);
-                                        if(response.status === 401 && this._endpoint !== null) {
-                                            this._endpoint = null;
+                                        if(response.status === 401 && this._config.enabled) {
+                                            this._config.enabled = false;
                                             alert('Error 401\nCredentials invalid or expired\nPlease reload page');
                                         }
                                         reject(d);
@@ -676,8 +677,8 @@ export default class SimpleApi {
                             resolve(response.blob());
                         } else {
                             if(this._config.debug) console.error('Request failed', response);
-                            if(response.status === 401 && this._endpoint !== null) {
-                                this._endpoint = null;
+                            if(response.status === 401 && this._config.enabled) {
+                                this._config.enabled = false;
                                 alert('Error 401\nCredentials invalid or expired\nPlease reload page');
                             }
                             reject(response);
@@ -686,8 +687,8 @@ export default class SimpleApi {
                 })
                 .catch((response) => {
                     if(this._config.debug) console.error('Request failed', response);
-                    if(response.status === 401 && this._endpoint !== null) {
-                        this._endpoint = null;
+                    if(response.status === 401 && this._config.enabled) {
+                        this._config.enabled = false;
                         alert('Error 401\nCredentials invalid or expired\nPlease reload page');
                     }
                     reject(response);
