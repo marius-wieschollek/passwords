@@ -1,6 +1,6 @@
 {
     "name": "passwords",
-    "version": "2019.1.0",
+    "version": "2019.2.0",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -20,7 +20,8 @@
         "build:nightly": "webpack --env.production --env.features",
         "cron": "docker exec -u www-data passwords-php php /var/www/html/cron.php",
         "handbook": "codeceptjs run --steps",
-        "selenium": "docker run --net=host selenium/standalone-firefox"
+        "selenium": "docker run --net=host selenium/standalone-firefox",
+        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/localhost.pem -key-file docker/volumes/nginx/localhost.key localhost"
     },
     "dependencies": {},
     "devDependencies": {

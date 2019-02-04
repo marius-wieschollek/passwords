@@ -1,11 +1,19 @@
+#### 2019.2.0 - Feature release
+- Added edit/nothing actions for password
+- Added setting to disable website preview
+- Improved https debugging report
+- Fixed copy username menu
+- Fixed continuous HTTP 401 requests
+- Fixed dictionary detection
+
 #### 2019.1.0 - Feature release
 - Added Nextcloud 15 support
 - Added Dark Theme support
+- Improved automatic words service choice
+- Improved nightly update functionality
 - Fixed ImageMagick detection issue
 - Fixed editable status check in legacy api
 - Fixed changedate issues in legacy api
-- Improved automatic words service choice
-- Improved nightly update functionality
 - Removed Nextcloud 12, 13 and 14 support
 
 #### 2018.12.0 - Feature release

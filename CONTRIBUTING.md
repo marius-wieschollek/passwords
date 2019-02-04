@@ -9,14 +9,15 @@
 * [Node](https://nodejs.org/)
 * [Docker](https://store.docker.com/search?type=edition&offering=community)
 * [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
+* [mkcert](https://github.com/FiloSottile/mkcert)
 
 #### Project Setup
 1. Open a shell on your computer and navigate to the projects directory
 2. Run `npm install`
 3. Run `npm run build`
-4. Run `npm run start`
-5. Open your browser and type [https://localhost/](https://localhost/)
-6. Allow the connection using a self signed https certificate
+4. If you have [mkcert](https://github.com/FiloSottile/mkcert), run `npm run mkcert`;
+5. Run `npm run start`
+6. Open your browser and type [https://localhost/](https://localhost/)
 7. Log in with the username `admin` and the password `admin`
 8. You can now access the [app](http://localhost/index.php/apps/passwords)
 
