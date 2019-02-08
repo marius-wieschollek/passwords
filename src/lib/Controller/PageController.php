@@ -78,8 +78,9 @@ class PageController extends Controller {
         $isSecure = $this->checkIfHttpsUsed();
         if($isSecure) {
             $this->getUserSettings();
-            Util::addHeader('meta', ['name' => 'api-user', 'content' => $this->environmentService->getUserLogin()]);
-            Util::addHeader('meta', ['name' => 'api-token', 'content' => $this->tokenHelper->getWebUiToken()]);
+            list($token, $user) = $this->tokenHelper->getWebUiToken();
+            Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
+            Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
         } else {
             $this->tokenHelper->destroyWebUiToken();
         }
