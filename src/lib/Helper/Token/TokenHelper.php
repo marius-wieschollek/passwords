@@ -25,8 +25,8 @@ use OCP\Security\ISecureRandom;
  */
 class TokenHelper {
 
-    const WEBUI_TOKEN    = 'webui_token';
-    const WEBUI_TOKEN_ID = 'webui_token_id';
+    const WEBUI_TOKEN    = 'webui/token';
+    const WEBUI_TOKEN_ID = 'webui/token/id';
 
     /**
      * @var null|string
@@ -127,6 +127,7 @@ class TokenHelper {
      * @param bool   $permanent
      *
      * @return array
+     * @throws \Exception
      */
     public function createToken(string $name, bool $permanent = false): array {
         $token    = $this->generateRandomDeviceToken();
@@ -179,7 +180,7 @@ class TokenHelper {
      * @throws \Exception
      */
     protected function loadWebUiToken() {
-        if($this->config->getUserValue(self::WEBUI_TOKEN_ID, false) !== false) {
+        if($this->config->getUserValue('webui_token_id', false) !== false) {
             $this->destroyLegacyToken();
         }
 
@@ -189,7 +190,11 @@ class TokenHelper {
             try {
                 $iToken = $this->tokenProvider->getTokenById($tokenId);
 
-                if($iToken->getId() == $tokenId) return $token;
+                if($iToken->getId() == $tokenId && $iToken->getUID() === $this->userId) {
+                    return $token;
+                } else {
+                    $this->destroyToken($tokenId);
+                }
             } catch(\Throwable $e) {
                 $this->logger
                     ->logException($e)

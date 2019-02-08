@@ -8,11 +8,11 @@
 namespace OCA\Passwords\Services;
 
 use OC\Authentication\Token\IProvider;
-use OC\Authentication\Token\IToken;
 use OCA\Passwords\AppInfo\Application;
 use OCP\IConfig;
 use OCP\ILogger;
 use OCP\IRequest;
+use OCP\IUserManager;
 
 /**
  * Class EnvironmentService
@@ -65,6 +65,10 @@ class EnvironmentService {
      * @var mixed
      */
     protected $maintenanceEnabled;
+    /**
+     * @var IUserManager
+     */
+    private $userManager;
 
     /**
      * EnvironmentService constructor.
@@ -74,7 +78,7 @@ class EnvironmentService {
      * @param IRequest    $request
      * @param ILogger     $logger
      */
-    public function __construct(string $userId = null, IConfig $config, IRequest $request, ILogger $logger) {
+    public function __construct(string $userId = null, IUserManager $userManager, IConfig $config, IRequest $request, ILogger $logger) {
         $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
         $this->isCliMode          = PHP_SAPI === 'cli';
         $this->logger             = $logger;
@@ -88,6 +92,7 @@ class EnvironmentService {
             $logger->debug('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode', ['app' => Application::APP_NAME]);
         }
         if(!$this->isGlobalMode) $this->userId = $userId;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -99,6 +104,7 @@ class EnvironmentService {
 
     /**
      * @return null|string
+     * @throws \Exception
      */
     public function getUserLogin() {
         if($this->userId === null) return null;
@@ -110,15 +116,28 @@ class EnvironmentService {
             } else {
                 $sessionId = \OC::$server->getSession()->getId();
 
-                /** @var IToken $sessionToken */
-                $sessionToken = \OC::$server->query(IProvider::class)->getToken($sessionId);
-                $loginName    = $sessionToken->getLoginName();
+                /** @var IProvider $tokenProvider */
+                $tokenProvider = \OC::$server->query(IProvider::class);
+                $sessionToken  = $tokenProvider->getToken($sessionId);
 
-                $this->userLogin = $loginName !== null ? $loginName:$this->userId;
+                if($sessionToken->getUID() === $this->userId) {
+                    $loginName     = $sessionToken->getLoginName();
+                    $this->userLogin = $loginName !== null ? $loginName:$this->userId;
+                } else {
+                    $this->logger->error('Cancelling session due to user id mismatch.', ['app' => Application::APP_NAME]);
+                    $tokenProvider->invalidateTokenById($sessionToken->getUID(), $sessionToken->getId());
+                }
             }
         } catch(\Throwable $e) {
             $this->logger->logException($e, ['app' => Application::APP_NAME]);
             $this->userLogin = $this->userId;
+        }
+
+        $loginUser = $this->userManager->get($this->userLogin);
+        $loginUID  = $loginUser === null ? null:$loginUser->getUID();
+        if($loginUID !== $this->userId) {
+            $this->logger->error('User id and login name do not match. Passwords does not support impersonating.', ['app' => Application::APP_NAME]);
+            throw new \Exception("Could not determine login name for {$this->userId}");
         }
 
         return $this->userLogin;
@@ -157,7 +176,7 @@ class EnvironmentService {
      */
     protected function checkIfCronJob(IRequest $request): void {
         $requestUri = $request->getRequestUri();
-        $cronMode = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+        $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
         $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
                            ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
