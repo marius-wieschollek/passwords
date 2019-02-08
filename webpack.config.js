@@ -1,6 +1,7 @@
 let webpack = require('webpack'),
     UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     ProgressBarPlugin = require('progress-bar-webpack-plugin'),
     OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -25,7 +26,8 @@ module.exports = (env) => {
                 {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`}
             ]
         ),
-        new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity})
+        new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity}),
+        new CleanWebpackPlugin(['src/css', 'src/js/Static'])
     ];
 
     if(production) {
