@@ -28,6 +28,7 @@
         "blueimp-gallery": "^2.33.0",
         "codeceptjs": "^2.0.4",
         "copy-webpack-plugin": "^4.6.0",
+        "clean-webpack-plugin": "^0.1.19",
         "css-loader": "^0.28.11",
         "csv-hero": "0.0.4",
         "download": "^7.1.0",
@@ -52,7 +53,7 @@
         "vue-qrcode-component": "^2.1.1",
         "vue-router": "^3.0.2",
         "vue-style-loader": "^4.1.2",
-        "vue-template-compiler": "^2.5.22",
+        "vue-template-compiler": "^2.6.3",
         "webdriverio": "^5.4.17",
         "webpack": "^3.12.0",
         "xlsx": "^0.14.1"
