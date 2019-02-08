@@ -107,9 +107,9 @@ class TokenHelper {
     }
 
     /**
-     * @return null|string
+     * @return array
      */
-    public function getWebUiToken(): string {
+    public function getWebUiToken(): array {
         try {
             $token = $this->loadWebUiToken();
             if($token !== false) return $token;
@@ -118,7 +118,7 @@ class TokenHelper {
         } catch(\Throwable $e) {
             $this->logger->logException($e);
 
-            return '';
+            return ['', ''];
         }
     }
 
@@ -134,7 +134,7 @@ class TokenHelper {
         $password = $this->getUserPassword();
         $type     = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
 
-        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $this->environmentService->getUserLogin(), $password, $name, $type);
+        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, uniqid('pw.'), $password, $name, $type);
         $deviceToken->setScope(['filesystem' => $this->config->isAppEnabled('encryption')]);
         $this->tokenProvider->updateToken($deviceToken);
 
@@ -176,7 +176,7 @@ class TokenHelper {
     }
 
     /**
-     * @return bool|string
+     * @return bool|array
      * @throws \Exception
      */
     protected function loadWebUiToken() {
@@ -191,7 +191,7 @@ class TokenHelper {
                 $iToken = $this->tokenProvider->getTokenById($tokenId);
 
                 if($iToken->getId() == $tokenId && $iToken->getUID() === $this->userId) {
-                    return $token;
+                    return [$token, $iToken->getLoginName()];
                 } else {
                     $this->destroyToken($tokenId);
                 }
@@ -206,16 +206,16 @@ class TokenHelper {
     }
 
     /**
-     * @return string
+     * @return array
      * @throws \Exception
      */
-    protected function createWebUiToken(): string {
+    protected function createWebUiToken(): array {
         $name = $this->localisation->t('Passwords Session %s - %s', [date('d.m.y H:i'), \OC::$server->getRequest()->getRemoteAddress()]);
         list($token, $deviceToken) = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
 
-        return $token;
+        return [$token, $deviceToken->getLoginName()];
     }
 
     /**
