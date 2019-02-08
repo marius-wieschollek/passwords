@@ -91,6 +91,7 @@
         methods: {
             favoriteAction($event) {
                 $event.stopPropagation();
+                this.password.favourite = !this.password.favourite;
                 PasswordManager.updatePassword(this.object)
                     .catch(() => { this.object.favorite = !this.object.favorite; });
             },
