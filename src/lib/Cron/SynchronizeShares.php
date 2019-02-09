@@ -443,7 +443,7 @@ class SynchronizeShares extends AbstractCronJob {
      * @return bool
      */
     protected function canExecute(): bool {
-        return $this->environment->isCronJob() &&
+        return $this->environment->getRunType() === EnvironmentService::TYPE_CRON &&
                $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-4 hours');
     }
 }

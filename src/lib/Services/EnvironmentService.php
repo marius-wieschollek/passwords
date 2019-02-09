@@ -8,10 +8,9 @@
 namespace OCA\Passwords\Services;
 
 use OC\Authentication\Token\IProvider;
-use OCA\Passwords\AppInfo\Application;
 use OCP\IConfig;
-use OCP\ILogger;
 use OCP\IRequest;
+use OCP\ISession;
 use OCP\IUserManager;
 
 /**
@@ -21,15 +20,39 @@ use OCP\IUserManager;
  */
 class EnvironmentService {
 
+    const MODE_PUBLIC = 'public';
+    const MODE_USER   = 'user';
+    const MODE_GLOBAL = 'global';
+
+    const TYPE_REQUEST     = 'request';
+    const TYPE_CRON        = 'cron';
+    const TYPE_CLI         = 'cli';
+    const TYPE_MAINTENANCE = 'maintenance';
+
     /**
      * @var IConfig
      */
     protected $config;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
+
+    /**
+     * @var ISession
+     */
+    protected $session;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
+
+    /**
+     * @var IProvider
+     */
+    protected $tokenProvider;
 
     /**
      * @var null|string
@@ -42,57 +65,59 @@ class EnvironmentService {
     protected $userLogin;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $isCliMode;
+    protected $appMode = self::MODE_PUBLIC;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $isCronJob;
-
-    /**
-     * @var bool
-     */
-    protected $isAppUpdate;
-
-    /**
-     * @var bool
-     */
-    protected $isGlobalMode;
-
-    /**
-     * @var mixed
-     */
-    protected $maintenanceEnabled;
-    /**
-     * @var IUserManager
-     */
-    private $userManager;
+    protected $runType = self::TYPE_REQUEST;
 
     /**
      * EnvironmentService constructor.
      *
-     * @param string|null $userId
-     * @param IConfig     $config
-     * @param IRequest    $request
-     * @param ILogger     $logger
+     * @param null|string    $userId
+     * @param IConfig        $config
+     * @param IRequest       $request
+     * @param ISession       $session
+     * @param LoggingService $logger
+     * @param IProvider      $tokenProvider
+     * @param IUserManager   $userManager
+     *
+     * @throws \Exception
      */
-    public function __construct(string $userId = null, IUserManager $userManager, IConfig $config, IRequest $request, ILogger $logger) {
-        $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
-        $this->isCliMode          = PHP_SAPI === 'cli';
-        $this->logger             = $logger;
-        $this->config             = $config;
-        $this->checkIfCronJob($request);
-        $this->checkIfAppUpdate($request);
-        $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
+    public function __construct(
+        ?string $userId,
+        IConfig $config,
+        IRequest $request,
+        ISession $session,
+        LoggingService $logger,
+        IProvider $tokenProvider,
+        IUserManager $userManager
+    ) {
+        $this->config        = $config;
+        $this->logger        = $logger;
+        $this->session       = $session;
+        $this->userManager   = $userManager;
+        $this->tokenProvider = $tokenProvider;
 
-        if($this->isGlobalMode) {
-            // Debugging info
-            $logger->debug('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode', ['app' => Application::APP_NAME]);
-        }
-        if(!$this->isGlobalMode) $this->userId = $userId;
-        $this->userManager = $userManager;
+        $this->determineRunType($request);
+        $this->determineAppMode($userId, $request);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppMode(): string {
+        return $this->appMode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRunType(): string {
+        return $this->runType;
     }
 
     /**
@@ -104,96 +129,113 @@ class EnvironmentService {
 
     /**
      * @return null|string
-     * @throws \Exception
      */
-    public function getUserLogin() {
-        if($this->userId === null) return null;
-        if($this->userLogin !== null) return $this->userLogin;
-
-        try {
-            if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
-                $this->userLogin = $_SERVER['PHP_AUTH_USER'];
-            } else {
-                $sessionId = \OC::$server->getSession()->getId();
-
-                /** @var IProvider $tokenProvider */
-                $tokenProvider = \OC::$server->query(IProvider::class);
-                $sessionToken  = $tokenProvider->getToken($sessionId);
-
-                if($sessionToken->getUID() === $this->userId) {
-                    $loginName     = $sessionToken->getLoginName();
-                    $this->userLogin = $loginName !== null ? $loginName:$this->userId;
-                } else {
-                    $this->logger->error('Cancelling session due to user id mismatch.', ['app' => Application::APP_NAME]);
-                    $tokenProvider->invalidateTokenById($sessionToken->getUID(), $sessionToken->getId());
-                }
-            }
-        } catch(\Throwable $e) {
-            $this->logger->logException($e, ['app' => Application::APP_NAME]);
-            $this->userLogin = $this->userId;
-        }
-
-        $loginUser = $this->userManager->get($this->userLogin);
-        $loginUID  = $loginUser === null ? null:$loginUser->getUID();
-        if($loginUID !== $this->userId) {
-            $this->logger->error('User id and login name do not match. Passwords does not support impersonating.', ['app' => Application::APP_NAME]);
-            throw new \Exception("Could not determine login name for {$this->userId}");
-        }
-
+    public function getUserLogin(): ?string {
         return $this->userLogin;
     }
 
     /**
-     * @return bool
+     * @param IRequest $request
      */
-    public function isCliMode(): bool {
-        return $this->isCliMode;
-    }
+    protected function determineRunType(IRequest $request): void {
+        $this->runType = self::TYPE_REQUEST;
 
-    /**
-     * @return bool
-     */
-    public function isCronJob(): bool {
-        return $this->isCronJob;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isGlobalMode(): bool {
-        return $this->isGlobalMode;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function isMaintenanceEnabled(): bool {
-        return $this->maintenanceEnabled;
+        if($this->isCronJob($request)) {
+            $this->runType = self::TYPE_CRON;
+        } else if($this->isAppUpgrade($request) || $this->config->getSystemValue('maintenance', false)) {
+            $this->runType = self::TYPE_MAINTENANCE;
+        } else if(PHP_SAPI === 'cli') {
+            $this->runType = self::TYPE_CLI;
+        }
     }
 
     /**
      * @param IRequest $request
+     *
+     * @return bool
      */
-    protected function checkIfCronJob(IRequest $request): void {
+    protected function isCronJob(IRequest $request): bool {
         $requestUri = $request->getRequestUri();
         $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
-        $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
-                           ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        return ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
+               ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
+               (PHP_SAPI === 'cli' && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
      * @param IRequest $request
+     *
+     * @return bool
      */
-    protected function checkIfAppUpdate(IRequest $request): void {
-        $this->isAppUpdate = false;
-        if($this->isCronJob || $this->isCliMode) return;
-
+    protected function isAppUpgrade(IRequest $request): bool {
         try {
-            $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
+            return $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
-            $this->logger->logException($e, ['app' => Application::APP_NAME]);
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param null|string $userId
+     * @param IRequest    $request
+     *
+     * @throws \Exception
+     */
+    protected function determineAppMode(?string $userId, IRequest $request): void {
+        $this->appMode = self::MODE_PUBLIC;
+        if($this->runType !== self::TYPE_REQUEST) {
+            $this->appMode = self::MODE_GLOBAL;
+            $this->logger->info('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode');
+        } else if($this->loadUserInformation($userId)) {
+            $this->appMode = self::MODE_USER;
         }
     }
+
+    /**
+     * @param null|string $userId
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    protected function loadUserInformation(?string $userId): bool {
+        if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
+            $loginName = $_SERVER['PHP_AUTH_USER'];
+            $loginUser = $this->userManager->get($loginName);
+
+            if($loginUser !== null && ($userId === null || $loginUser->getUID() === $userId)) {
+                $this->userId    = $loginUser->getUID();
+                $this->userLogin = $loginName;
+
+                return true;
+            }
+        } else if($userId === null) {
+            return false;
+        } else {
+            try {
+                $sessionToken = $this->tokenProvider->getToken($this->session->getId());
+
+                $sessionUid = $sessionToken->getUID();
+                if($sessionUid === $userId) {
+                    $this->userId    = $sessionUid;
+                    $this->userLogin = $sessionToken->getLoginName();
+
+                    return true;
+                } else if($this->session->get('oldUserId') === $sessionUid && \OC_User::isAdminUser($sessionUid)) {
+                    $this->userId    = $userId;
+                    $this->userLogin = $userId;
+                    $this->logger->warning(['Detected %s impersonating %s', $sessionUid, $userId]);
+
+                    return true;
+                }
+            } catch(\Throwable $e) {
+                $this->logger->logException($e);
+            }
+        }
+
+        throw new \Exception("Login {$loginUser} does not belong to {$userId}");
+    }
+
 }

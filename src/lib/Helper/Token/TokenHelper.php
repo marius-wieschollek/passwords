@@ -130,12 +130,14 @@ class TokenHelper {
      * @throws \Exception
      */
     public function createToken(string $name, bool $permanent = false): array {
+        $userLogin = $this->environmentService->getUserLogin();
         $token    = $this->generateRandomDeviceToken();
         $password = $this->getUserPassword();
         $type     = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
 
-        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, uniqid('pw.'), $password, $name, $type);
+        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, $type);
         $deviceToken->setScope(['filesystem' => $this->config->isAppEnabled('encryption')]);
+        $deviceToken->setExpires(time() + 7200);
         $this->tokenProvider->updateToken($deviceToken);
 
         return [$token, $deviceToken];
@@ -190,7 +192,7 @@ class TokenHelper {
             try {
                 $iToken = $this->tokenProvider->getTokenById($tokenId);
 
-                if($iToken->getId() == $tokenId && $iToken->getUID() === $this->userId) {
+                if($iToken->getLastCheck() > time() - 7200 && $iToken->getId() == $tokenId && $iToken->getUID() === $this->userId) {
                     return [$token, $iToken->getLoginName()];
                 } else {
                     $this->destroyToken($tokenId);
@@ -210,7 +212,7 @@ class TokenHelper {
      * @throws \Exception
      */
     protected function createWebUiToken(): array {
-        $name = $this->localisation->t('Passwords Session %s - %s', [date('d.m.y H:i'), \OC::$server->getRequest()->getRemoteAddress()]);
+        $name = $this->localisation->t('Passwords Session %s - %s@%s', [date('d.m.y H:i'), $this->environmentService->getUserLogin(), \OC::$server->getRequest()->getRemoteAddress()]);
         list($token, $deviceToken) = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
