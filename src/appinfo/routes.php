@@ -12,10 +12,16 @@ $routes = [
     ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
     ['name' => 'cron#execute', 'url' => '/cron/{job}', 'verb' => 'GET'],
 
-    ['name' => 'authorisation_api#info', 'url' => '/api/1.0/authorisation/info', 'verb' => 'GET'],
-    ['name' => 'authorisation_api#login', 'url' => '/api/1.0/authorisation/login', 'verb' => 'POST'],
-    ['name' => 'authorisation_api#logout', 'url' => '/api/1.0/authorisation/logout', 'verb' => 'GET'],
-    ['name' => 'authorisation_api#update', 'url' => '/api/1.0/authorisation/update', 'verb' => 'POST'],
+    ['name' => 'session_api#request', 'url' => '/api/1.0/session/request', 'verb' => 'GET'],
+    ['name' => 'session_api#open', 'url' => '/api/1.0/session/open', 'verb' => 'POST'],
+    ['name' => 'session_api#close', 'url' => '/api/1.0/session/close', 'verb' => 'GET'],
+    ['name' => 'session_api#request_token', 'url' => '/api/1.0/token/{provider}/request', 'verb' => 'GET'],
+
+    ['name' => 'keychain_api#list', 'url' => '/api/1.0/keychain/list', 'verb' => 'GET'],
+    ['name' => 'keychain_api#update', 'url' => '/api/1.0/keychain/update', 'verb' => 'POST'],
+
+    ['name' => 'account_api#reset', 'url' => '/api/1.0/account/reset', 'verb' => 'POST'],
+    ['name' => 'account_api#set_password', 'url' => '/api/1.0/account/password', 'verb' => 'POST'],
 
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'GET'],
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'POST', 'postfix' => 'POST'],
@@ -85,14 +91,16 @@ $routes = [
         'verb'     => 'GET',
         'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 640, 'height' => '360...']
     ],
-    ['name' => 'service_api#reset_user_account', 'url' => '/api/1.0/service/x-reset-user-account', 'verb' => 'POST'],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
 
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'share_api#preflighted_cors', 'url' => '/api/1.0/share/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'folder_api#preflighted_cors', 'url' => '/api/1.0/folder/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+    ['name' => 'session_api#preflighted_cors', 'url' => '/api/1.0/session/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+    ['name' => 'account_api#preflighted_cors', 'url' => '/api/1.0/account/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'service_api#preflighted_cors', 'url' => '/api/1.0/service/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'settings_api#preflighted_cors', 'url' => '/api/1.0/setting/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+    ['name' => 'keychain_api#preflighted_cors', 'url' => '/api/1.0/keychain/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'password_api#preflighted_cors', 'url' => '/api/1.0/password/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']]
 ];
 

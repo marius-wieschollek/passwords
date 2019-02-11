@@ -8,7 +8,9 @@
 namespace OCA\Passwords\AppInfo;
 
 use OCA\Passwords\Controller\AdminSettingsController;
-use OCA\Passwords\Controller\Api\AuthorisationApiController;
+use OCA\Passwords\Controller\Api\AccountApiController;
+use OCA\Passwords\Controller\Api\KeychainApiController;
+use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyCategoryApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
@@ -119,10 +121,12 @@ class Application extends App {
     protected function registerController(): void {
         $container = $this->getContainer();
 
-        $container->registerAlias('AuthorisationApiController', AuthorisationApiController::class);
         $container->registerAlias('AdminSettingsController', AdminSettingsController::class);
+        $container->registerAlias('KeychainApiController', KeychainApiController::class);
         $container->registerAlias('PasswordApiController', PasswordApiController::class);
         $container->registerAlias('SettingsApiController', SettingsApiController::class);
+        $container->registerAlias('AccountApiController', AccountApiController::class);
+        $container->registerAlias('SessionApiController', SessionApiController::class);
         $container->registerAlias('ServiceApiController', ServiceApiController::class);
         $container->registerAlias('FolderApiController', FolderApiController::class);
         $container->registerAlias('ShareApiController', ShareApiController::class);
