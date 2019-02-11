@@ -1,3 +1,7 @@
+#### 2019.2.2 - Bugfix release
+- Fixed broken user login name detection for LDAP users
+- Fixed invalid default font path
+
 #### 2019.2.1 - Bugfix release
 - SECURITY: Fixed user name confusion in environment service
 - Fixed broken favorite button
