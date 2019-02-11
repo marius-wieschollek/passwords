@@ -1,3 +1,8 @@
+#### 2019.2.1 - Bugfix release
+- SECURITY: Fixed user name confusion in environment service
+- Fixed broken favorite button
+- Fixed PHP notice in admin settings
+
 #### 2019.2.0 - Feature release
 - Added edit/nothing actions for password
 - Added setting to disable website preview
