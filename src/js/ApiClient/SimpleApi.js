@@ -14,54 +14,57 @@ export default class SimpleApi {
         this._config = {};
         this._headers = {};
         this._paths = {
-            'tag.list'            : 'api/1.0/tag/list',
-            'tag.find'            : 'api/1.0/tag/find',
-            'tag.show'            : 'api/1.0/tag/show',
-            'tag.create'          : 'api/1.0/tag/create',
-            'tag.update'          : 'api/1.0/tag/update',
-            'tag.delete'          : 'api/1.0/tag/delete',
-            'tag.restore'         : 'api/1.0/tag/restore',
-            'share.list'          : 'api/1.0/share/list',
-            'share.find'          : 'api/1.0/share/find',
-            'share.show'          : 'api/1.0/share/show',
-            'share.create'        : 'api/1.0/share/create',
-            'share.update'        : 'api/1.0/share/update',
-            'share.delete'        : 'api/1.0/share/delete',
-            'share.partners'      : 'api/1.0/share/partners',
-            'client.list'         : 'api/1.0/client/list',
-            'client.show'         : 'api/1.0/client/show',
-            'client.create'       : 'api/1.0/client/create',
-            'client.update'       : 'api/1.0/client/update',
-            'client.delete'       : 'api/1.0/client/delete',
-            'folder.list'         : 'api/1.0/folder/list',
-            'folder.find'         : 'api/1.0/folder/find',
-            'folder.show'         : 'api/1.0/folder/show',
-            'folder.create'       : 'api/1.0/folder/create',
-            'folder.update'       : 'api/1.0/folder/update',
-            'folder.delete'       : 'api/1.0/folder/delete',
-            'folder.restore'      : 'api/1.0/folder/restore',
-            'password.list'       : 'api/1.0/password/list',
-            'password.find'       : 'api/1.0/password/find',
-            'password.show'       : 'api/1.0/password/show',
-            'password.create'     : 'api/1.0/password/create',
-            'password.update'     : 'api/1.0/password/update',
-            'password.delete'     : 'api/1.0/password/delete',
-            'password.restore'    : 'api/1.0/password/restore',
-            'password.generate'   : 'api/1.0/service/password',
-            'settings.get'        : 'api/1.0/settings/get',
-            'settings.set'        : 'api/1.0/settings/set',
-            'settings.list'       : 'api/1.0/settings/list',
-            'settings.reset'      : 'api/1.0/settings/reset',
-            'authorisation.info'  : 'api/1.0/authorisation/info',
-            'authorisation.login' : 'api/1.0/authorisation/login',
-            'authorisation.logout': 'api/1.0/authorisation/logout',
-            'authorisation.update': 'api/1.0/authorisation/update',
-            'account.reset'       : 'api/1.0/service/x-reset-user-account',
-            'service.coffee'      : 'api/1.0/service/coffee',
-            'service.avatar'      : 'api/1.0/service/avatar/{user}/{size}',
-            'service.favicon'     : 'api/1.0/service/favicon/{domain}/{size}',
-            'service.preview'     : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
-            'cron.sharing'        : 'cron/sharing',
+            'tag.list'         : 'api/1.0/tag/list',
+            'tag.find'         : 'api/1.0/tag/find',
+            'tag.show'         : 'api/1.0/tag/show',
+            'tag.create'       : 'api/1.0/tag/create',
+            'tag.update'       : 'api/1.0/tag/update',
+            'tag.delete'       : 'api/1.0/tag/delete',
+            'tag.restore'      : 'api/1.0/tag/restore',
+            'share.list'       : 'api/1.0/share/list',
+            'share.find'       : 'api/1.0/share/find',
+            'share.show'       : 'api/1.0/share/show',
+            'share.create'     : 'api/1.0/share/create',
+            'share.update'     : 'api/1.0/share/update',
+            'share.delete'     : 'api/1.0/share/delete',
+            'share.partners'   : 'api/1.0/share/partners',
+            'client.list'      : 'api/1.0/client/list',
+            'client.show'      : 'api/1.0/client/show',
+            'client.create'    : 'api/1.0/client/create',
+            'client.update'    : 'api/1.0/client/update',
+            'client.delete'    : 'api/1.0/client/delete',
+            'folder.list'      : 'api/1.0/folder/list',
+            'folder.find'      : 'api/1.0/folder/find',
+            'folder.show'      : 'api/1.0/folder/show',
+            'folder.create'    : 'api/1.0/folder/create',
+            'folder.update'    : 'api/1.0/folder/update',
+            'folder.delete'    : 'api/1.0/folder/delete',
+            'folder.restore'   : 'api/1.0/folder/restore',
+            'password.list'    : 'api/1.0/password/list',
+            'password.find'    : 'api/1.0/password/find',
+            'password.show'    : 'api/1.0/password/show',
+            'password.create'  : 'api/1.0/password/create',
+            'password.update'  : 'api/1.0/password/update',
+            'password.delete'  : 'api/1.0/password/delete',
+            'password.restore' : 'api/1.0/password/restore',
+            'password.generate': 'api/1.0/service/password',
+            'settings.get'     : 'api/1.0/settings/get',
+            'settings.set'     : 'api/1.0/settings/set',
+            'settings.list'    : 'api/1.0/settings/list',
+            'settings.reset'   : 'api/1.0/settings/reset',
+            'token.request'    : 'api/1.0/token/{provider}/request',
+            'session.request'  : 'api/1.0/session/request',
+            'session.open'     : 'api/1.0/session/open',
+            'session.close'    : 'api/1.0/session/close',
+            'keychain.show'    : 'api/1.0/keychain/show',
+            'keychain.update'  : 'api/1.0/keychain/update',
+            'account.password' : 'api/1.0/account/password',
+            'account.reset'    : 'api/1.0/account/reset',
+            'service.coffee'   : 'api/1.0/service/coffee',
+            'service.avatar'   : 'api/1.0/service/avatar/{user}/{size}',
+            'service.favicon'  : 'api/1.0/service/favicon/{domain}/{size}',
+            'service.preview'  : 'api/1.0/service/preview/{domain}/{view}/{width}/{height}',
+            'cron.sharing'     : 'cron/sharing'
         };
     }
 
@@ -95,41 +98,40 @@ export default class SimpleApi {
     }
 
 
-
     /**
-     * Authorisation
+     * Authentication
      */
 
     /**
      *
      * @returns {Promise}
      */
-    getAuthorisationInfo() {
-        return this._createRequest('authorisation.info');
+    requestToken(provider) {
+        return this._createRequest(['token.request', {provider}]);
     }
 
     /**
      *
      * @returns {Promise}
      */
-    login() {
-        return this._createRequest('authorisation.login');
+    requestSession() {
+        return this._createRequest('session.request');
     }
 
     /**
      *
      * @returns {Promise}
      */
-    logout() {
-        return this._createRequest('authorisation.logout');
+    openSession(login) {
+        return this._createRequest('session.open', login);
     }
 
     /**
      *
      * @returns {Promise}
      */
-    updateAuthorisationInfo() {
-        return this._createRequest('authorisation.update');
+    closeSession() {
+        return this._createRequest('session.close');
     }
 
 
@@ -650,8 +652,8 @@ export default class SimpleApi {
             if(!this._config.enabled) throw new Error('Invalid Login Data');
             fetch(new Request(this._config.apiUrl + path, options))
                 .then((response) => {
-                    let contentType = response.headers.get('content-type'),
-                    sessionToken = response.headers.get('x-passwords-session');
+                    let contentType  = response.headers.get('content-type'),
+                        sessionToken = response.headers.get('x-passwords-session');
                     if(sessionToken) this._headers['X-Passwords-Session'] = sessionToken;
 
                     if(contentType && contentType.indexOf('application/json') !== -1) {

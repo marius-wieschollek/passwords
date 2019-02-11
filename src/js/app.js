@@ -34,7 +34,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
         router.beforeEach((to, from, next) => {
             if(!isLoggedIn && to.name !== 'Authorize') {
-                let target = btoa(JSON.stringify(to));
+                let target = {name: to.name, path: to.path, hash: to.hash, params: to.params,};
+                target = btoa(JSON.stringify(target));
                 next({name:'Authorize', params: {target}});
                 isLoggedIn = true;
             }
