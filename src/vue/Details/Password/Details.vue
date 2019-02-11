@@ -100,7 +100,8 @@
             },
             getEncryption() {
                 let encryption = 'none';
-                if(this.password.sseType === 'SSEv1r1') encryption = 'Server-side encryption';
+                if(this.password.sseType === 'SSEv1r1') encryption = 'Server-side encryption (Gen. 1)';
+                if(this.password.sseType === 'SSEv1r2') encryption = 'Server-side encryption (Gen. 2)';
                 if(this.password.sseType === 'SSEv2r1') encryption = 'Advanced server-side encryption';
                 if(this.password.cseType === 'CSEv1r1') encryption = 'Client-side encryption';
 

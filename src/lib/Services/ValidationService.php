@@ -47,7 +47,7 @@ class ValidationService {
         if(empty($password->getSseType())) {
             $password->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
-        if($password->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
+        if(!in_array($password->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
             throw new ApiException('Invalid server side encryption type', 400);
         }
         if($password->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
@@ -79,7 +79,7 @@ class ValidationService {
         if(empty($folder->getSseType())) {
             $folder->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
-        if($folder->getSseType() !== EncryptionService::DEFAULT_SSE_ENCRYPTION) {
+        if(!in_array($folder->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
             throw new ApiException('Invalid server side encryption type', 400);
         }
         if($folder->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
@@ -108,7 +108,7 @@ class ValidationService {
         if(empty($tag->getSseType())) {
             $tag->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         }
-        if($tag->getSseType() !== EncryptionService::DEFAULT_SSE_ENCRYPTION) {
+        if(!in_array($tag->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
             throw new ApiException('Invalid server side encryption type', 400);
         }
         if($tag->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {

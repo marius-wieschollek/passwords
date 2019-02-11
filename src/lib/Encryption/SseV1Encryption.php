@@ -13,6 +13,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
@@ -99,7 +100,6 @@ class SseV1Encryption implements EncryptionInterface {
      * @param RevisionInterface $object
      *
      * @return RevisionInterface
-     * @throws \OCP\PreConditionNotMetException
      * @throws Exception
      */
     public function encryptObject(RevisionInterface $object): RevisionInterface {
@@ -115,6 +115,11 @@ class SseV1Encryption implements EncryptionInterface {
 
         $object->setSseKey($sseKey);
 
+        if($object->getSseType() === EncryptionService::SSE_ENCRYPTION_V1) {
+            $object->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
+        }
+
+
         return $object;
     }
 
@@ -126,7 +131,11 @@ class SseV1Encryption implements EncryptionInterface {
      */
     public function decryptObject(RevisionInterface $object): RevisionInterface {
         $sseKey        = $object->getSseKey();
-        $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
+        if($object->getSseType() === EncryptionService::SSE_ENCRYPTION_V1) {
+            $encryptionKey = $this->getLegacyEncryptionKey($sseKey, $object->getUserId());
+        } else {
+            $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
+        }
 
         $fields = $this->getFieldsToProcess($object);
         foreach($fields as $field) {
@@ -165,10 +174,24 @@ class SseV1Encryption implements EncryptionInterface {
      * @param string $userId
      *
      * @return string
-     * @throws \OCP\PreConditionNotMetException
-     * @throws  Exception
+     * @throws Exception
      */
     protected function getEncryptionKey(string $passwordKey, string $userId): string {
+        return $this->config->getSystemValue('secret').
+               $this->getServerKey().
+               $this->getUserKey($userId).
+               $passwordKey;
+    }
+
+    /**
+     * @param string $passwordKey
+     *
+     * @param string $userId
+     *
+     * @return string
+     * @throws Exception
+     */
+    protected function getLegacyEncryptionKey(string $passwordKey, string $userId): string {
         return $this->getServerKey().
                $this->getUserKey($userId).
                $passwordKey;

@@ -178,7 +178,7 @@ class EnvironmentService {
      */
     protected function isAppUpgrade(IRequest $request): bool {
         try {
-            return $request->getPathInfo() === '/settings/ajax/updateapp.php';
+            return PHP_SAPI !== 'cli' && $request->getPathInfo() === '/settings/ajax/updateapp.php';
         } catch(\Exception $e) {
             $this->logger->logException($e);
         }
