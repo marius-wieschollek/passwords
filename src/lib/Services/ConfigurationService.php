@@ -39,14 +39,14 @@ class ConfigurationService {
     }
 
     /**
-     * @param string $key
-     * @param null   $default
-     * @param null   $user
+     * @param string      $key
+     * @param null        $default
+     * @param null|string $user
      *
      * @return string
      * @throws \Exception
      */
-    public function getUserValue(string $key, $default = null, $user = null) {
+    public function getUserValue(string $key, $default = null, ?string $user = null) {
         $userId = $this->getUserId($user);
 
         return $this->config->getUserValue($userId, Application::APP_NAME, $key, $default);
@@ -99,6 +99,33 @@ class ConfigurationService {
      */
     public function setSystemValue(string $key, $value): void {
         $this->config->setSystemValue($key, $value);
+    }
+
+    /**
+     * @param string      $key
+     * @param null|string $user
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function hasUserValue(string $key, ?string $user = null): bool {
+        $userId = $this->getUserId($user);
+
+        $keys = $this->config->getUserKeys($userId, Application::APP_NAME);
+
+        return in_array($key, $keys);
+    }
+
+    /**
+     * @param string $key
+     * @param string $app
+     *
+     * @return bool
+     */
+    public function hasAppValue(string $key, $app = Application::APP_NAME): bool {
+        $keys = $this->config->getAppKeys($app);
+
+        return in_array($key, $keys);
     }
 
     /**
