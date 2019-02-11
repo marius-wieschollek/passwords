@@ -55,7 +55,7 @@
 
                            this.providers.push(d.token[i]);
                            if(this.provider === null && !d.token[i].request) {
-                               this.providerId = i;
+                               this.providerId = this.providers.length-1;
                                this.provider = d.token[i];
                            }
                        }
