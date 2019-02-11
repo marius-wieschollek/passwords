@@ -145,6 +145,23 @@ class ConfigurationService {
     /**
      * @return string
      */
+    public function getRootDir(): string {
+        if(isset($_SERVER['PWD']) && is_dir($_SERVER['PWD'])) {
+            return $_SERVER['PWD'];
+        }
+        if(isset($_SERVER['DOCUMENT_ROOT']) && is_dir($_SERVER['DOCUMENT_ROOT'])) {
+            return $_SERVER['DOCUMENT_ROOT'];
+        }
+        if(isset($_SERVER['SCRIPT_FILENAME']) && is_file($_SERVER['SCRIPT_FILENAME'])) {
+            return dirname($_SERVER['SCRIPT_FILENAME']);
+        }
+
+        return dirname(__DIR__, 4);
+    }
+
+    /**
+     * @return string
+     */
     public function getTempDir(): string {
         return $this->getSystemValue('tempdirectory', '/tmp/');
     }

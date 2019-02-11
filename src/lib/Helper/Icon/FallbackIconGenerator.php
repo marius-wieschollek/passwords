@@ -48,19 +48,19 @@ class FallbackIconGenerator {
     /**
      * @var ConfigurationService
      */
-    protected $configurationService;
+    protected $config;
 
     /**
      * AvatarService constructor.
      *
      * @param HelperService        $helperService
-     * @param ConfigurationService $configurationService
+     * @param ConfigurationService $config
      *
      * @throws \OCP\AppFramework\QueryException
      */
-    public function __construct(HelperService $helperService, ConfigurationService $configurationService) {
-        $this->imageHelper          = $helperService->getImageHelper();
-        $this->configurationService = $configurationService;
+    public function __construct(HelperService $helperService, ConfigurationService $config) {
+        $this->imageHelper = $helperService->getImageHelper();
+        $this->config      = $config;
     }
 
     /**
@@ -117,7 +117,7 @@ class FallbackIconGenerator {
         $svg = str_replace('#000', $color, $svg);
         $svg = str_replace('#TXT', $text, $svg);
 
-        $tempFile = $this->configurationService->getTempDir().uniqid().'.svg';
+        $tempFile = $this->config->getTempDir().uniqid().'.svg';
 
         try {
             file_put_contents($tempFile, $svg);

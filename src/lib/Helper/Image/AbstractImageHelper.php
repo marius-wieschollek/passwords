@@ -190,6 +190,6 @@ abstract class AbstractImageHelper {
      * @return string
      */
     public function getDefaultFont(): string {
-        return __DIR__.'/../../../../../core/fonts/Nunito-Regular.ttf';
+        return $this->config->getRootDir().'/core/fonts/Nunito-Regular.ttf';
     }
 }
