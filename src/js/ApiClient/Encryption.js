@@ -13,6 +13,7 @@ export default class Encryption {
             tag     : ['label', 'color']
         };
         this._key = null;
+        this.ready();
     }
 
     async ready() {
@@ -98,9 +99,14 @@ export default class Encryption {
      * @returns {Promise<string>}
      */
     async getHash(value, algorithm = 'SHA-1') {
+        if(algorithm === 'SHA-1') {
         let msgBuffer  = new TextEncoder('utf-8').encode(value),
             hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer),
             hashArray  = Array.from(new Uint8Array(hashBuffer));
         return hashArray.map((b) => (`00${b.toString(16)}`).slice(-2)).join('');
+        } else {
+            let pwd = sodium.crypto_pwhash_str(value, sodium.crypto_pwhash_OPSLIMIT_MIN, sodium.crypto_pwhash_MEMLIMIT_MIN);
+            console.log(pwd, sodium.crypto_pwhash_str_verify(pwd, value));
+        }
     }
 }

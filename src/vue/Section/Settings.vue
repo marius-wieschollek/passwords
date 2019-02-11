@@ -230,12 +230,13 @@
                     {
                         password: {type: 'password', minlength: 12, required: true, button: 'toggle'},
                         confirm: {type: 'password', minlength: 12, required: true, button: 'toggle', validator: (a, b) => {return a === b['password'];}},
+                        encrypt: {type: 'checkbox', checked: true, label: 'Encrypt existing'},
                         save: {type: 'checkbox', checked: true, label: 'Save password'}
                     },
                     'Master Password',
                     'Please choose a master password for your passwords.')
                     .then((data) => {
-                        EncryptionManager.setPassword(data.password, data.save);
+                        EncryptionManager.setPassword(data.password, data.save, data.encrypt);
                     });
             },
             resetSettingsAction() {

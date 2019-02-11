@@ -5,8 +5,8 @@ class EncryptionManager {
      * @param password
      * @param save
      */
-    setPassword(password, save = false) {
-        console.log(password, save);
+    install(password, save = false, encrypt = false) {
+
     }
 }
 
