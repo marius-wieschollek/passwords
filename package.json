@@ -1,6 +1,6 @@
 {
     "name": "passwords",
-    "version": "2019.2.1",
+    "version": "2019.3.0",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -26,9 +26,9 @@
     "dependencies": {},
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
+        "clean-webpack-plugin": "^0.1.19",
         "codeceptjs": "^2.0.4",
         "copy-webpack-plugin": "^4.6.0",
-        "clean-webpack-plugin": "^0.1.19",
         "css-loader": "^0.28.11",
         "csv-hero": "0.0.4",
         "download": "^7.1.0",

@@ -136,6 +136,7 @@
                 <type>text</type>
                 <length>36</length>
                 <notnull>true</notnull>
+                <default></default>
             </field>
             <field>
                 <name>sse_type</name>
@@ -330,6 +331,7 @@
                 <type>text</type>
                 <length>36</length>
                 <notnull>true</notnull>
+                <default></default>
             </field>
             <field>
                 <name>sse_type</name>
@@ -476,6 +478,7 @@
                 <type>text</type>
                 <length>36</length>
                 <notnull>true</notnull>
+                <default></default>
             </field>
             <field>
                 <name>sse_type</name>
