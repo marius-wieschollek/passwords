@@ -31,7 +31,7 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class RestoreBackupHelper {
 
-    const BACKUP_VERSION = 102;
+    const BACKUP_VERSION = 103;
 
     /**
      * @var ConfigurationService
@@ -158,20 +158,20 @@ class RestoreBackupHelper {
             $data['version'] = 101;
         }
 
-        if($data['version'] === 101) {
+        if($data['version'] === 101 || $data['version'] === 102) {
             foreach(['passwords', 'folders', 'tags'] as $type) {
                 foreach($data[$type] as &$object) {
                     foreach($object['revisions'] as &$revision) {
                         if(isset($revision['client'])) unset($revision['client']);
                         if(isset($revision['favourite'])) unset($revision['favourite']);
+                        $revision['cseKey'] = '';
                     }
                 }
             }
 
-            $data['version'] = 102;
+            $data['version'] = 103;
             return $data;
         }
-
 
         throw new \Exception('Unsupported backup version: '.$data['version']);
     }
