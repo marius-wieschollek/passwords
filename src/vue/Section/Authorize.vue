@@ -65,7 +65,11 @@
                            this.provider = this.providers[0];
                        }
                    }
-                   if(!this.hasPassword && !this.hasToken) this.goToTarget();
+                   if(!this.hasPassword && !this.hasToken) {
+                       API.openSession([])
+                          .then(() => { this.goToTarget(); })
+                          .catch((d) => { this.loginError(d); });
+                   }
                });
         },
 
@@ -146,9 +150,9 @@
 </script>
 
 <style lang="scss">
-    body.pw-authorisation {
+    body#body-user.pw-authorisation {
         #header {
-            background : rgba(0, 0, 0, 0) none !important;
+            background-color: rgba(0, 0, 0, 0);
         }
 
         #appmenu li a::before {
@@ -285,6 +289,10 @@
             #app-content {
                 margin-left : 0;
                 opacity     : 0;
+            }
+            #header {
+                transition : background-color ease-in-out 0.25s 0.25s;
+                background-color: var(--color-primary);
             }
         }
     }
