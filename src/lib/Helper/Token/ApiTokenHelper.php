@@ -190,10 +190,10 @@ class ApiTokenHelper {
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
         if($token !== null && $tokenId !== null) {
             try {
-                $iToken = $this->tokenProvider->getTokenById($tokenId);
+                $webToken = $this->tokenProvider->getTokenById($tokenId);
 
-                if($iToken->getLastCheck() > time() - 7200 && $iToken->getId() == $tokenId && $iToken->getUID() === $this->userId) {
-                    return [$token, $iToken->getLoginName()];
+                if($webToken->getLastCheck() > time() - 7200 && $webToken->getId() == $tokenId && $webToken->getUID() === $this->userId) {
+                    return [$token, $webToken->getLoginName()];
                 } else {
                     $this->destroyToken($tokenId);
                 }

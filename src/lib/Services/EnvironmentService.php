@@ -211,9 +211,10 @@ class EnvironmentService {
     protected function loadUserInformation(?string $userId): bool {
         if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
             $loginName = $_SERVER['PHP_AUTH_USER'];
-            $loginUser = $this->userManager->get($loginName);
+            $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
+            $loginUser = $this->userManager->get($token->getUID());
 
-            if($loginUser !== null && ($userId === null || $loginUser->getUID() === $userId)) {
+            if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
 
@@ -234,11 +235,14 @@ class EnvironmentService {
 
                         return true;
                     } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
-                        $this->user      = $user;
-                        $this->userLogin = $userId;
-                        $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
+                        $iUser = $this->userManager->get($userId);
+                        if($iUser !== null) {
+                            $this->user      = $iUser;
+                            $this->userLogin = $userId;
+                            $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
 
-                        return true;
+                            return true;
+                        }
                     }
                 }
             } catch(\Throwable $e) {
