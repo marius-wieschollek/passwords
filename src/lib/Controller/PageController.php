@@ -8,7 +8,7 @@
 namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Token\TokenHelper;
+use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SettingsService;
@@ -31,7 +31,7 @@ class PageController extends Controller {
     protected $config;
 
     /**
-     * @var TokenHelper
+     * @var ApiTokenHelper
      */
     protected $tokenHelper;
 
@@ -49,14 +49,14 @@ class PageController extends Controller {
      * PageController constructor.
      *
      * @param IRequest             $request
-     * @param TokenHelper          $tokenHelper
+     * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param SettingsService      $settingsService
      * @param EnvironmentService   $environmentService
      */
     public function __construct(
         IRequest $request,
-        TokenHelper $tokenHelper,
+        ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
         SettingsService $settingsService,
         EnvironmentService $environmentService

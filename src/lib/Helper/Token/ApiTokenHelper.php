@@ -19,11 +19,11 @@ use OCP\ISession;
 use OCP\Security\ISecureRandom;
 
 /**
- * Class TokenHelper
+ * Class ApiTokenHelper
  *
  * @package OCA\Passwords\Helper\Token
  */
-class TokenHelper {
+class ApiTokenHelper {
 
     const WEBUI_TOKEN    = 'webui/token';
     const WEBUI_TOKEN_ID = 'webui/token/id';
@@ -74,7 +74,7 @@ class TokenHelper {
     protected $environmentService;
 
     /**
-     * TokenHelper constructor.
+     * ApiTokenHelper constructor.
      *
      * @param IL10N                $localisation
      * @param ISession             $session
