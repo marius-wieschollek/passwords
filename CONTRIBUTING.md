@@ -49,6 +49,18 @@ You can also download a [file with sample data](https://git.mdns.eu/nextcloud/pa
  - [http://localhost:8081](http://localhost:8081) is pgAdmin (for the Postgres database, user `admin@nextcloud`, password `nextcloud`)
  - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
 
+#### LDAP Setup
+ - Enable LDAP App
+ - Go to "Settings" > "LDAP/AD Integration"
+ - Enter `openldap` as server and `389` as port
+ - Enter `cn=admin,dc=nextcloud` as User-DN and `nextcloud` as password
+ - Enter `dc=nextcloud` as Base DN
+ - Click on "Continue"
+ - Select "inetOrgPerson" and "posixAccount" as object classes
+ - Click "Continue"
+ - Check "LDAP-/AP-E-Mail-Address"
+ - Select "cn" and "uid" as login attributes
+
 #### First steps
 * [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)
 * [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)
