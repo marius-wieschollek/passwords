@@ -22,6 +22,10 @@ use OCP\AppFramework\Db\Entity;
  * @method void setUpdated(int $updated)
  * @method string getData()
  * @method void setData(string $data)
+ * @method string getShadowData()
+ * @method void setShadowData(string $data)
+ * @method bool getAuthorized()
+ * @method void setAuthorized(bool $authorized)
  *
  * @package OCA\Passwords\Db
  */
@@ -53,13 +57,42 @@ class Session extends Entity {
     protected $updated;
 
     /**
+     * @var boolean
+     */
+    protected $authorized;
+
+    /**
+     * @var string
+     */
+    protected $shadowData;
+
+    /**
      * Folder constructor.
      */
     public function __construct() {
         $this->addType('uuid', 'string');
         $this->addType('data', 'string');
         $this->addType('userId', 'string');
+        $this->addType('shadowData', 'string');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');
+        $this->addType('authorized', 'boolean');
+    }
+
+    /**
+     * @param string $property
+     *
+     * @return mixed
+     */
+    public function getProperty(string $property) {
+        return $this->getter($property);
+    }
+
+    /**
+     * @param string $property
+     * @param        $value
+     */
+    public function setProperty(string $property, $value): void {
+        $this->setter($property, [$value]);
     }
 }

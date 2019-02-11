@@ -7,8 +7,12 @@
 
 namespace OCA\Passwords\Middleware;
 
+use OCA\Passwords\Controller\Api\ServiceApiController;
+use OCA\Passwords\Controller\Api\SessionApiController;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Response;
 use OCP\AppFramework\Middleware;
 use OCP\ISession;
@@ -44,6 +48,8 @@ class ApiSessionMiddleware extends Middleware {
     /**
      * @param Controller $controller
      * @param string     $methodName
+     *
+     * @throws ApiException
      */
     public function beforeController($controller, $methodName): void {
         if(!$this->isApiRequest($controller)) return;
@@ -52,6 +58,10 @@ class ApiSessionMiddleware extends Middleware {
         $id = $this->sessionService->getId();
         if($id != $this->session->get('passwordsSessionId')) {
             $this->session->set('passwordsSessionId', $id);
+        }
+
+        if(!$this->sessionService->isAuthorized() && $this->requiresAuthorization($controller, $methodName)) {
+            throw new ApiException('Session required', Http::STATUS_PRECONDITION_FAILED);
         }
 
         parent::beforeController($controller, $methodName);
@@ -79,6 +89,27 @@ class ApiSessionMiddleware extends Middleware {
      * @return bool
      */
     protected function isApiRequest(Controller $controller): bool {
-        return substr(get_class($controller), 0, 28) == 'OCA\Passwords\Controller\Api';
+        $class = get_class($controller);
+
+        return substr($class, 0, 28) == 'OCA\Passwords\Controller\Api' && strpos($class, '\\Legacy\\') === false;
+    }
+
+    /**
+     * @param Controller $controller
+     * @param string     $method
+     *
+     * @return bool
+     */
+    protected function requiresAuthorization(Controller $controller, string $method): bool {
+
+        if($controller instanceof SessionApiController && in_array($method, ['open', 'request', 'requestToken'])) {
+            return false;
+        }
+
+        if($controller instanceof ServiceApiController && in_array($method, ['getAvatar', 'getFavicon', 'getPreview'])) {
+            return false;
+        }
+
+        return true;
     }
 }

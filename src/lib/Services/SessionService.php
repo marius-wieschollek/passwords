@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
+use OCA\Passwords\Encryption\SimpleEncryption;
 use OCP\IRequest;
 use OCP\ISession;
 
@@ -34,12 +35,17 @@ class SessionService {
     protected $mapper;
 
     /**
+     * @var SimpleEncryption
+     */
+    protected $encryption;
+
+    /**
      * @var ISession
      */
     protected $userSession;
 
     /**
-     * @var \OCA\Passwords\Services\EnvironmentService
+     * @var EnvironmentService
      */
     protected $environment;
 
@@ -47,6 +53,11 @@ class SessionService {
      * @var array
      */
     protected $data = [];
+
+    /**
+     * @var array
+     */
+    protected $shadowVars = [];
 
     /**
      * @var Session|null
@@ -67,16 +78,18 @@ class SessionService {
      * @param LoggingService     $logger
      * @param EnvironmentService $environment
      */
-    public function __construct(SessionMapper $mapper, IRequest $request, ISession $session, LoggingService $logger, EnvironmentService $environment) {
+    public function __construct(SessionMapper $mapper, IRequest $request, ISession $session, LoggingService $logger, EnvironmentService $environment, SimpleEncryption $encryption) {
         $this->mapper      = $mapper;
         $this->environment = $environment;
         $this->request     = $request;
         $this->logger      = $logger;
         $this->userSession = $session;
+        $this->encryption  = $encryption;
     }
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function generateUuidV4(): string {
         return implode('-', [
@@ -117,6 +130,7 @@ class SessionService {
      * @param        $value
      */
     public function set(string $key, $value): void {
+        if($key === 'password') return;
         if($this->session === null) $this->load();
 
         $this->modified     = true;
@@ -138,15 +152,75 @@ class SessionService {
      * @param string $key
      */
     public function unset(string $key): void {
-        if($this->has($key)) unset($this->data[ $key ]);
+        if($this->has($key) && $key !== 'password') {
+            unset($this->data[ $key ]);
+            $this->modified = true;
+        }
+    }
+
+    /**
+     * @param $name
+     */
+    public function addShadow($name): void {
+        if($this->session === null) $this->load();
+
+        if(!in_array($name, $this->shadowVars)) {
+            $this->shadowVars[] = $name;
+            $this->modified     = true;
+        }
+    }
+
+    /**
+     * @param $name
+     */
+    public function removeShadow($name): void {
+        if($this->session === null) $this->load();
+
+        if(in_array($name, $this->shadowVars)) {
+            $key = array_search($name, $this->shadowVars);
+            unset($this->shadowVars[ $key ]);
+            $this->modified = true;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAuthorized(): bool {
+        if($this->session === null) $this->load();
+
+        return $this->session->getAuthorized();
+    }
+
+    /**
+     * @param string $password
+     */
+    public function authorizeSession(?string $password): void {
+        if($this->session === null) $this->load();
+
+        $this->session->setAuthorized(true);
+        $this->modified = true;
+
+        if($password !== null) {
+            $this->data['password'] = $password;
+        }
     }
 
     /**
      *
      */
     public function save(): void {
-        if(!$this->modified) return;
-        $this->session->setData(json_encode($this->data));
+        if($this->session === null || (!$this->modified && empty($this->session->getId()))) return;
+
+        if($this->modified) {
+            $this->encryptSessionData($this->data);
+
+            $shadowData = [];
+            foreach($this->shadowVars as $name) {
+                $shadowData[ $name ] = $this->userSession->get($name);
+            }
+            $this->encryptSessionData($shadowData, 'shadowData');
+        }
 
         if(empty($this->session->getId())) {
             $this->session = $this->mapper->insert($this->session);
@@ -191,7 +265,13 @@ class SessionService {
                     $this->logger->warning('Cancelled expired session');
                 } else {
                     $this->session = $session;
-                    $this->data    = json_decode($session->getData(), true);
+                    $this->data    = $this->decryptSessionData();
+
+                    $shadow = $this->decryptSessionData('shadowData');
+                    foreach($shadow as $name => $value) {
+                        $this->userSession->set($name, $value);
+                    }
+                    $this->shadowVars = array_keys($shadow);
 
                     return;
                 }
@@ -204,12 +284,45 @@ class SessionService {
     }
 
     /**
+     * @param array  $data
+     * @param string $property
+     */
+    protected function encryptSessionData(array $data, string $property = 'data'): void {
+        try {
+            $value = $this->encryption->encrypt(
+                json_encode($data)
+            );
+            $this->session->setProperty($property, $value);
+        } catch(\Exception $e) {
+            $this->session->setProperty($property, '[]');
+        }
+    }
+
+    /**
+     * @param string $property
+     *
+     * @return array|mixed
+     */
+    protected function decryptSessionData(string $property = 'data') {
+        try {
+            return json_decode(
+                $this->encryption->decrypt(
+                    $this->session->getProperty($property)
+                ),
+                true);
+        } catch(\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
      * @return Session
      */
     protected function create(): Session {
         $model = new Session();
         $model->setUserId($this->environment->getUserId());
         $model->setUuid($this->generateUuidV4());
+        $model->setAuthorized(false);
         $model->setCreated(time());
         $model->setUpdated(time());
         $this->modified = true;
