@@ -11,6 +11,7 @@ use OC\Authentication\Token\IProvider;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;
+use OCP\IUser;
 use OCP\IUserManager;
 
 /**
@@ -55,9 +56,9 @@ class EnvironmentService {
     protected $tokenProvider;
 
     /**
-     * @var null|string
+     * @var IUser
      */
-    protected $userId;
+    protected $user;
 
     /**
      * @var null|string
@@ -121,10 +122,17 @@ class EnvironmentService {
     }
 
     /**
+     * @return null|IUser
+     */
+    public function getUser(): ?IUser {
+        return $this->user;
+    }
+
+    /**
      * @return null|string
      */
     public function getUserId(): ?string {
-        return $this->userId;
+        return $this->user !== null ? $this->user->getUID():null;
     }
 
     /**
@@ -206,7 +214,7 @@ class EnvironmentService {
             $loginUser = $this->userManager->get($loginName);
 
             if($loginUser !== null && ($userId === null || $loginUser->getUID() === $userId)) {
-                $this->userId    = $loginUser->getUID();
+                $this->user      = $loginUser;
                 $this->userLogin = $loginName;
 
                 return true;
@@ -217,18 +225,21 @@ class EnvironmentService {
             try {
                 $sessionToken = $this->tokenProvider->getToken($this->session->getId());
 
-                $sessionUid = $sessionToken->getUID();
-                if($sessionUid === $userId) {
-                    $this->userId    = $sessionUid;
-                    $this->userLogin = $sessionToken->getLoginName();
+                $uid  = $sessionToken->getUID();
+                $user = $this->userManager->get($uid);
+                if($user !== null) {
+                    if($uid === $userId) {
+                        $this->user      = $user;
+                        $this->userLogin = $sessionToken->getLoginName();
 
-                    return true;
-                } else if($this->session->get('oldUserId') === $sessionUid && \OC_User::isAdminUser($sessionUid)) {
-                    $this->userId    = $userId;
-                    $this->userLogin = $userId;
-                    $this->logger->warning(['Detected %s impersonating %s', $sessionUid, $userId]);
+                        return true;
+                    } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
+                        $this->user      = $user;
+                        $this->userLogin = $userId;
+                        $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
 
-                    return true;
+                        return true;
+                    }
                 }
             } catch(\Throwable $e) {
                 $this->logger->logException($e);
