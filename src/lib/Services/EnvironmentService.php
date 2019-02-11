@@ -109,19 +109,24 @@ class EnvironmentService {
     public function getUserLogin() {
         if($this->userId === null) return null;
         if($this->userLogin !== null) return $this->userLogin;
+        $password = null;
 
         try {
+            /** @var IProvider $tokenProvider */
+            $tokenProvider = \OC::$server->query(IProvider::class);
+
             if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
                 $this->userLogin = $_SERVER['PHP_AUTH_USER'];
-            } else {
-                $sessionId = \OC::$server->getSession()->getId();
 
-                /** @var IProvider $tokenProvider */
-                $tokenProvider = \OC::$server->query(IProvider::class);
-                $sessionToken  = $tokenProvider->getToken($sessionId);
+                $token    = $tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
+                $password = $tokenProvider->getPassword($token, $_SERVER['PHP_AUTH_PW']);
+            } else {
+                $sessionId    = \OC::$server->getSession()->getId();
+                $sessionToken = $tokenProvider->getToken($sessionId);
 
                 if($sessionToken->getUID() === $this->userId) {
-                    $loginName     = $sessionToken->getLoginName();
+                    $password        = $tokenProvider->getPassword($sessionToken, $sessionId);
+                    $loginName       = $sessionToken->getLoginName();
                     $this->userLogin = $loginName !== null ? $loginName:$this->userId;
                 } else {
                     $this->logger->error('Cancelling session due to user id mismatch.', ['app' => Application::APP_NAME]);
@@ -133,8 +138,15 @@ class EnvironmentService {
             $this->userLogin = $this->userId;
         }
 
-        $loginUser = $this->userManager->get($this->userLogin);
-        $loginUID  = $loginUser === null ? null:$loginUser->getUID();
+        /** @var \OC\User\User|false $loginResult */
+        $loginResult = $this->userManager->checkPasswordNoLogging($this->userLogin, $password);
+        if($loginResult === false) {
+            $loginUser = $this->userManager->get($this->userLogin);
+            $loginUID  = $loginUser === null ? null:$loginUser->getUID();
+        } else {
+            $loginUID = $loginResult->getUid();
+        }
+
         if($loginUID !== $this->userId) {
             $this->logger->error('User id and login name do not match. Passwords does not support impersonating.', ['app' => Application::APP_NAME]);
             throw new \Exception("Could not determine login name for {$this->userId}");
