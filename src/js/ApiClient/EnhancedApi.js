@@ -1,4 +1,5 @@
 import SimpleApi from './SimpleApi';
+import Encryption from './Encryption';
 
 export default class EnhancedApi extends SimpleApi {
 
@@ -21,6 +22,10 @@ export default class EnhancedApi extends SimpleApi {
         if(!config.encryption) throw new Error('Encryption support is missing');
 
         super.initialize(config);
+
+        if(config.session) {
+            this._headers['X-Passwords-Session'] = config.session;
+        }
     }
 
     /**
@@ -29,7 +34,7 @@ export default class EnhancedApi extends SimpleApi {
      * @param algorithm
      * @returns {Promise<string>}
      */
-    getHash(value, algorithm = 'SHA-1') {
+    static getHash(value, algorithm = 'SHA-1') {
         return Encryption.getHash(value, algorithm);
     }
 

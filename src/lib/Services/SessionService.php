@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Encryption\SimpleEncryption;
+use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCP\IRequest;
 use OCP\ISession;
 
@@ -50,6 +51,11 @@ class SessionService {
     protected $environment;
 
     /**
+     * @var UserSettingsHelper
+     */
+    protected $userSettings;
+
+    /**
      * @var array
      */
     protected $data = [];
@@ -77,14 +83,25 @@ class SessionService {
      * @param ISession           $session
      * @param LoggingService     $logger
      * @param EnvironmentService $environment
+     * @param SimpleEncryption   $encryption
+     * @param UserSettingsHelper $userSettings
      */
-    public function __construct(SessionMapper $mapper, IRequest $request, ISession $session, LoggingService $logger, EnvironmentService $environment, SimpleEncryption $encryption) {
-        $this->mapper      = $mapper;
-        $this->environment = $environment;
-        $this->request     = $request;
-        $this->logger      = $logger;
-        $this->userSession = $session;
-        $this->encryption  = $encryption;
+    public function __construct(
+        SessionMapper $mapper,
+        IRequest $request,
+        ISession $session,
+        LoggingService $logger,
+        EnvironmentService $environment,
+        SimpleEncryption $encryption,
+        UserSettingsHelper $userSettings
+    ) {
+        $this->mapper       = $mapper;
+        $this->environment  = $environment;
+        $this->request      = $request;
+        $this->logger       = $logger;
+        $this->userSession  = $session;
+        $this->encryption   = $encryption;
+        $this->userSettings = $userSettings;
     }
 
     /**
@@ -228,6 +245,7 @@ class SessionService {
             $this->session->setUpdated(time());
             $this->session = $this->mapper->update($this->session);
         }
+        $this->userSession->set('passwordsSessionId', $this->session->getUuid());
         $this->modified = false;
     }
 
@@ -261,7 +279,7 @@ class SessionService {
                 if($this->environment->getUserId() !== $session->getUserId()) {
                     $this->mapper->delete($session);
                     $this->logger->error('Unauthorized session access');
-                } else if(time() > $session->getUpdated() + 15 * 60) {
+                } else if(time() > $session->getUpdated() + $this->userSettings->get('session/lifetime')) {
                     $this->mapper->delete($session);
                     $this->logger->warning('Cancelled expired session');
                 } else {

@@ -13,9 +13,8 @@ use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
-use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\SessionService;
 use OCP\IL10N;
-use OCP\ISession;
 use OCP\Security\ISecureRandom;
 
 /**
@@ -49,7 +48,7 @@ class ApiTokenHelper {
     protected $random;
 
     /**
-     * @var ISession
+     * @var SessionService
      */
     protected $session;
 
@@ -71,39 +70,39 @@ class ApiTokenHelper {
     /**
      * @var EnvironmentService
      */
-    protected $environmentService;
+    protected $environment;
 
     /**
      * ApiTokenHelper constructor.
      *
      * @param IL10N                $localisation
-     * @param ISession             $session
      * @param ISecureRandom        $random
      * @param LoggingService       $logger
+     * @param SessionService       $session
      * @param IProvider            $tokenProvider
      * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
-     * @param EnvironmentService   $environmentService
+     * @param EnvironmentService   $environment
      */
     public function __construct(
         IL10N $localisation,
-        ISession $session,
         ISecureRandom $random,
         LoggingService $logger,
+        SessionService $session,
         IProvider $tokenProvider,
         SimpleEncryption $encryption,
         ConfigurationService $config,
-        EnvironmentService $environmentService
+        EnvironmentService $environment
     ) {
-        $this->userId              = $environmentService->getUserId();
-        $this->random              = $random;
-        $this->logger              = $logger;
-        $this->config              = $config;
-        $this->session             = $session;
-        $this->encryption          = $encryption;
-        $this->localisation        = $localisation;
-        $this->tokenProvider       = $tokenProvider;
-        $this->environmentService  = $environmentService;
+        $this->userId        = $environment->getUserId();
+        $this->random        = $random;
+        $this->logger        = $logger;
+        $this->config        = $config;
+        $this->session       = $session;
+        $this->encryption    = $encryption;
+        $this->localisation  = $localisation;
+        $this->tokenProvider = $tokenProvider;
+        $this->environment   = $environment;
     }
 
     /**
@@ -130,10 +129,10 @@ class ApiTokenHelper {
      * @throws \Exception
      */
     public function createToken(string $name, bool $permanent = false): array {
-        $userLogin = $this->environmentService->getUserLogin();
-        $token    = $this->generateRandomDeviceToken();
-        $password = $this->getUserPassword();
-        $type     = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
+        $userLogin = $this->environment->getUserLogin();
+        $token     = $this->generateRandomDeviceToken();
+        $password  = $this->getUserPassword();
+        $type      = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
 
         $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, $type);
         $deviceToken->setScope(['filesystem' => $this->config->isAppEnabled('encryption')]);
@@ -172,8 +171,8 @@ class ApiTokenHelper {
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
         if(!empty($tokenId)) {
             $this->destroyToken($tokenId);
-            $this->session->remove(self::WEBUI_TOKEN);
-            $this->session->remove(self::WEBUI_TOKEN_ID);
+            $this->session->unset(self::WEBUI_TOKEN);
+            $this->session->unset(self::WEBUI_TOKEN_ID);
         }
     }
 
@@ -212,7 +211,7 @@ class ApiTokenHelper {
      * @throws \Exception
      */
     protected function createWebUiToken(): array {
-        $name = $this->localisation->t('Passwords Session %s - %s@%s', [date('d.m.y H:i'), $this->environmentService->getUserLogin(), \OC::$server->getRequest()->getRemoteAddress()]);
+        $name = $this->localisation->t('Passwords Session %s - %s@%s', [date('d.m.y H:i'), $this->environment->getUserLogin(), \OC::$server->getRequest()->getRemoteAddress()]);
         list($token, $deviceToken) = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
@@ -225,7 +224,7 @@ class ApiTokenHelper {
      */
     protected function getUserPassword(): ?string {
         try {
-            $sessionId    = $this->session->getId();
+            $sessionId    = \OC::$server->getSession()->getId();
             $sessionToken = $this->tokenProvider->getToken($sessionId);
 
             return $this->tokenProvider->getPassword($sessionToken, $sessionId);

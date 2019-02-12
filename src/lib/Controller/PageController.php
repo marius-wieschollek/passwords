@@ -10,7 +10,7 @@ namespace OCA\Passwords\Controller;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\StrictContentSecurityPolicy;
@@ -24,6 +24,11 @@ use OCP\Util;
  * @package OCA\Passwords\Controller
  */
 class PageController extends Controller {
+
+    /**
+     * @var SessionService
+     */
+    protected $session;
 
     /**
      * @var ConfigurationService
@@ -41,31 +46,26 @@ class PageController extends Controller {
     protected $settingsService;
 
     /**
-     * @var EnvironmentService
-     */
-    protected $environmentService;
-
-    /**
      * PageController constructor.
      *
      * @param IRequest             $request
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
+     * @param SessionService       $sessionService
      * @param SettingsService      $settingsService
-     * @param EnvironmentService   $environmentService
      */
     public function __construct(
         IRequest $request,
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
-        SettingsService $settingsService,
-        EnvironmentService $environmentService
+        SessionService $sessionService,
+        SettingsService $settingsService
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->config             = $config;
-        $this->tokenHelper        = $tokenHelper;
-        $this->settingsService    = $settingsService;
-        $this->environmentService = $environmentService;
+        $this->config          = $config;
+        $this->tokenHelper     = $tokenHelper;
+        $this->settingsService = $settingsService;
+        $this->session         = $sessionService;
     }
 
     /**
@@ -74,13 +74,13 @@ class PageController extends Controller {
      * @UseSession
      */
     public function index(): TemplateResponse {
-
         $isSecure = $this->checkIfHttpsUsed();
         if($isSecure) {
             $this->getUserSettings();
             list($token, $user) = $this->tokenHelper->getWebUiToken();
             Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
             Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
+            Util::addHeader('meta', ['name' => 'api-session', 'content' => $this->session->getId()]);
         } else {
             $this->tokenHelper->destroyWebUiToken();
         }
@@ -90,6 +90,7 @@ class PageController extends Controller {
             'index',
             ['https' => $isSecure]
         );
+        $this->session->save();
 
         $response->setContentSecurityPolicy($this->getContentSecurityPolicy());
 

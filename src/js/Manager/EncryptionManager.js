@@ -8,7 +8,7 @@ class EncryptionManager {
      * @param save
      */
     async install(password, save = false, encrypt = false) {
-        let hash = await API.getHash(password, 'BLAKE2b-64');
+        let hash = await EnhancedApi.getHash(password, 'BLAKE2b-64');
         API.setAccountPassword(hash, 'BLAKE2b-64');
     }
 }

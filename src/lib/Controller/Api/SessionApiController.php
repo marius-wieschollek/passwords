@@ -59,15 +59,17 @@ class SessionApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function request(): JSONResponse {
-
         $requirements = [];
-        if($this->passwordHelper->hasPassword()) {
-            $requirements['password'] = $this->passwordHelper->getPasswordAlgorithm();
-        }
 
-        $providers = $this->tokenHelper->getProvidersAsArray();
-        if(!empty($providers)) {
-            $requirements['token'] = $providers;
+        if(!$this->session->isAuthorized()) {
+            if($this->passwordHelper->hasPassword()) {
+                $requirements['password'] = $this->passwordHelper->getPasswordAlgorithm();
+            }
+
+            $providers = $this->tokenHelper->getProvidersAsArray();
+            if(!empty($providers)) {
+                $requirements['token'] = $providers;
+            }
         }
 
         return new JSONResponse($requirements);
@@ -82,20 +84,22 @@ class SessionApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function open(): JSONResponse {
-        $parameters = $this->getParameterArray();
+        if(!$this->session->isAuthorized()) {
+            $parameters = $this->getParameterArray();
 
-        $password = null;
-        if($this->passwordHelper->hasPassword() && (!isset($parameters['password']) || !$this->passwordHelper->validatePassword($parameters['password']))) {
-            return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
-        } else if($this->passwordHelper->hasPassword()) {
-            $password = $parameters['password'];
+            $password = null;
+            if($this->passwordHelper->hasPassword() && (!isset($parameters['password']) || !$this->passwordHelper->validatePassword($parameters['password']))) {
+                return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
+            } else if($this->passwordHelper->hasPassword()) {
+                $password = $parameters['password'];
+            }
+
+            if($this->tokenHelper->tokenRequired() && (!isset($parameters['token']) || !$this->tokenHelper->verifyTokens($parameters['token']))) {
+                return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
+            }
+
+            $this->session->authorizeSession($password);
         }
-
-        if($this->tokenHelper->tokenRequired() && (!isset($parameters['token']) || !$this->tokenHelper->verifyTokens($parameters['token']))) {
-            return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
-        }
-
-        $this->session->authorizeSession($password);
 
         return new JSONResponse(['success' => true, 'keychain' => []], Http::STATUS_OK);
     }

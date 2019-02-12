@@ -52,7 +52,8 @@ class UserSettingsHelper {
             'mail/shares'                  => false,
             'notification/security'        => true,
             'notification/shares'          => true,
-            'notification/errors'          => true
+            'notification/errors'          => true,
+            'session/lifetime'             => 10 * 60
         ];
 
     /**

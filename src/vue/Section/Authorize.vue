@@ -17,6 +17,7 @@
 
 <script>
     import API from '@js/Helper/api';
+    import EnhancedApi from '@js/ApiClient/EnhancedApi';
     import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
 
@@ -88,7 +89,7 @@
                 let data = {};
 
                 if(this.hasPassword) {
-                    data.password = await API.getHash(this.password, this.pwAlgorithm);
+                    data.password = await EnhancedApi.getHash(this.password, this.pwAlgorithm);
                 }
                 if(this.hasToken) {
                     data.token = {};
