@@ -106,6 +106,8 @@ class SessionApiController extends AbstractApiController {
      * @NoAdminRequired
      * @UserRateThrottle(limit=3, period=60)
      *
+     * @param $provider
+     *
      * @return JSONResponse
      */
     public function requestToken($provider): JSONResponse {
@@ -120,7 +122,8 @@ class SessionApiController extends AbstractApiController {
      * @NoAdminRequired
      */
     public function close() {
+        $this->session->delete();
 
-
+        return new JSONResponse(['success' => true], Http::STATUS_OK);
     }
 }

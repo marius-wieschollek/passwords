@@ -238,8 +238,9 @@ class SessionService {
         if(!empty($this->session->getId())) {
             $this->mapper->delete($this->session);
         }
-        $this->data    = [];
-        $this->session = $this->create();
+        $this->data       = [];
+        $this->shadowVars = [];
+        $this->session    = $this->create();
     }
 
     /**
@@ -317,6 +318,7 @@ class SessionService {
 
     /**
      * @return Session
+     * @throws \Exception
      */
     protected function create(): Session {
         $model = new Session();
