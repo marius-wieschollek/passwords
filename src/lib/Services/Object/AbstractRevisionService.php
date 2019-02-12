@@ -141,7 +141,7 @@ abstract class AbstractRevisionService extends AbstractService {
         if(get_class($revision) !== $this->class) throw new \Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preSave', [$revision]);
 
-        if($revision->_isDecrypted()) $revision = $this->encryptionService->encrypt($revision);
+        if($revision->_isDecrypted()) $this->encryptionService->encrypt($revision);
 
         if(empty($revision->getId())) {
             $saved = $this->mapper->insert($revision);

@@ -97,6 +97,13 @@ class SseV1Encryption implements EncryptionInterface {
     }
 
     /**
+     * @return bool
+     */
+    public function isAvailable(): bool {
+        return true;
+    }
+
+    /**
      * @param RevisionInterface $object
      *
      * @return RevisionInterface

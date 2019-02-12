@@ -7,8 +7,10 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Helper\User\UserPasswordHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
+use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
@@ -37,18 +39,25 @@ class SessionApiController extends AbstractApiController {
     protected $passwordHelper;
 
     /**
+     * @var KeychainService
+     */
+    protected $keychainService;
+
+    /**
      * SessionApiController constructor.
      *
      * @param IRequest           $request
      * @param UserTokenHelper    $tokenHelper
      * @param UserPasswordHelper $passwordHelper
      * @param SessionService     $session
+     * @param KeychainService    $keychainService
      */
-    public function __construct(IRequest $request, UserTokenHelper $tokenHelper, UserPasswordHelper $passwordHelper, SessionService $session) {
+    public function __construct(IRequest $request, UserTokenHelper $tokenHelper, UserPasswordHelper $passwordHelper, SessionService $session, KeychainService $keychainService) {
         parent::__construct($request);
-        $this->tokenHelper    = $tokenHelper;
-        $this->passwordHelper = $passwordHelper;
-        $this->session        = $session;
+        $this->tokenHelper     = $tokenHelper;
+        $this->passwordHelper  = $passwordHelper;
+        $this->session         = $session;
+        $this->keychainService = $keychainService;
     }
 
     /**
@@ -82,6 +91,7 @@ class SessionApiController extends AbstractApiController {
      * @UserRateThrottle(limit=4, period=60)
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function open(): JSONResponse {
         if(!$this->session->isAuthorized()) {
@@ -101,7 +111,7 @@ class SessionApiController extends AbstractApiController {
             $this->session->authorizeSession($password);
         }
 
-        return new JSONResponse(['success' => true, 'keychain' => []], Http::STATUS_OK);
+        return new JSONResponse(['success' => true, 'keys' => $this->getKeychains()], Http::STATUS_OK);
     }
 
     /**
@@ -138,5 +148,20 @@ class SessionApiController extends AbstractApiController {
         $this->session->delete();
 
         return new JSONResponse(['success' => true], Http::STATUS_OK);
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    protected function getKeychains(): array {
+        $keychains = $this->keychainService->findByScope(Keychain::SCOPE_CLIENT, true);
+
+        $list = [];
+        foreach($keychains as $keychain) {
+            $list[ $keychain->getType() ] = json_decode($keychain->getData());
+        }
+
+        return $list;
     }
 }

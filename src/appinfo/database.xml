@@ -813,9 +813,15 @@
                 <default>false</default>
             </field>
             <field>
-                <name>name</name>
+                <name>type</name>
                 <type>string</type>
                 <length>36</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>scope</name>
+                <type>string</type>
+                <length>12</length>
                 <notnull>true</notnull>
             </field>
             <field>

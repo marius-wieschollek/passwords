@@ -19,7 +19,6 @@ class SimpleEncryption extends SseV1Encryption {
      *
      * @return string
      * @throws \Exception
-     * @throws \OCP\PreConditionNotMetException
      */
     public function encrypt($string): string {
         $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
@@ -32,7 +31,6 @@ class SimpleEncryption extends SseV1Encryption {
      *
      * @return string
      * @throws \Exception
-     * @throws \OCP\PreConditionNotMetException
      */
     public function decrypt($string): string {
         $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
@@ -45,7 +43,6 @@ class SimpleEncryption extends SseV1Encryption {
      *
      * @return string
      * @throws \Exception
-     * @throws \OCP\PreConditionNotMetException
      */
     protected function getSimpleEncryptionKey(string $userId): string {
         return $this->getServerKey().$this->getUserKey($userId);

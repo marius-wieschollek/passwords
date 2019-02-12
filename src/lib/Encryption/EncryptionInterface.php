@@ -16,7 +16,10 @@ use OCA\Passwords\Db\RevisionInterface;
  */
 interface EncryptionInterface {
 
-    const ENCRYPT_AES_256 = 'aes-256-cbc';
+    /**
+     * @return bool
+     */
+    public function isAvailable(): bool;
 
     /**
      * @param RevisionInterface $object

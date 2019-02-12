@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Encryption\EncryptionInterface;
 use OCA\Passwords\Encryption\SseV1Encryption;
@@ -89,5 +90,35 @@ class EncryptionService {
         $object->_setDecrypted(true);
 
         return $encryption->decryptObject($object);
+    }
+
+    /**
+     * @param Keychain $keychain
+     *
+     * @return Keychain
+     * @throws \Exception
+     */
+    public function encryptKeychain(Keychain $keychain): Keychain {
+        if(!$keychain->_isDecrypted()) return $keychain;
+
+        $encryption = $this->getEncryptionByType($keychain->getType());
+        $keychain->_setDecrypted(false);
+
+        return $encryption->encryptKeychain($keychain);
+    }
+
+    /**
+     * @param Keychain $keychain
+     *
+     * @return Keychain
+     * @throws \Exception
+     */
+    public function decryptKeychain(Keychain $keychain): Keychain {
+        if($keychain->_isDecrypted()) return $keychain;
+
+        $encryption = $this->getEncryptionByType($keychain->getType());
+        $keychain->_setDecrypted(true);
+
+        return $encryption->decryptKeychain($keychain);
     }
 }
