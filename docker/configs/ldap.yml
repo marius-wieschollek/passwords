@@ -18,3 +18,7 @@ services:
       - openldap
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: openldap
+
+  app:
+    links:
+    - openldap
