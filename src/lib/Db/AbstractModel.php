@@ -8,10 +8,8 @@
 namespace OCA\Passwords\Db;
 
 /**
- * Class AbstractModelEntity
+ * Class AbstractModel
  *
- * @method string getUuid()
- * @method void setUuid(string $uuid)
  * @method string getRevision()
  * @method void setRevision(string $revision)
  * @method bool getSuspended()
@@ -19,12 +17,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractModelEntity extends AbstractEntity implements ModelInterface {
-
-    /**
-     * @var string
-     */
-    protected $uuid;
+abstract class AbstractModel extends AbstractEntity implements ModelInterface {
 
     /**
      * @var string
@@ -40,7 +33,6 @@ abstract class AbstractModelEntity extends AbstractEntity implements ModelInterf
      * Password constructor.
      */
     public function __construct() {
-        $this->addType('uuid', 'string');
         $this->addType('revision', 'string');
         $this->addType('suspended', 'boolean');
 

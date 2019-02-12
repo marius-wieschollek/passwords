@@ -8,10 +8,8 @@
 namespace OCA\Passwords\Db;
 
 /**
- * Class AbstractRevisionEntity
+ * Class AbstractRevision
  *
- * @method string getUuid()
- * @method void setUuid(string $uuid)
  * @method string getSseKey()
  * @method void setSseKey(string $sseKey)
  * @method string getSseType()
@@ -35,12 +33,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-abstract class AbstractRevisionEntity extends AbstractEntity implements RevisionInterface {
-
-    /**
-     * @var string
-     */
-    protected $uuid;
+abstract class AbstractRevision extends AbstractEntity implements RevisionInterface {
 
     /**
      * @var string
@@ -98,7 +91,7 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
     protected $_decrypted = false;
 
     /**
-     * AbstractRevisionEntity constructor.
+     * AbstractRevision constructor.
      */
     public function __construct() {
         $this->addType('sseType', 'string');
@@ -106,7 +99,6 @@ abstract class AbstractRevisionEntity extends AbstractEntity implements Revision
         $this->addType('cseType', 'string');
         $this->addType('cseKey', 'string');
 
-        $this->addType('uuid', 'string');
         $this->addType('model', 'string');
         $this->addType('label', 'string');
         $this->addType('edited', 'integer');

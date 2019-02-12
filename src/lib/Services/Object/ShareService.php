@@ -158,7 +158,6 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share|ModelInterface
-     * @throws \Exception
      */
     public function create(
         string $passwordId,
@@ -201,7 +200,6 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share
-     * @throws \Exception
      */
     protected function createModel(
         string $passwordId,

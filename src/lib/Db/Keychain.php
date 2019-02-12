@@ -8,27 +8,33 @@
 namespace OCA\Passwords\Db;
 
 /**
- * Class FolderRevision
+ * Class Keychain
  *
- * @method string getParent()
- * @method void setParent(string $parent)
+ * @method string getData()
+ * @method void setData(string $data)
+ * @method string getName()
+ * @method void setName(string $name)
  *
  * @package OCA\Passwords\Db
  */
-class FolderRevision extends AbstractRevision {
-
+class Keychain extends AbstractEntity {
 
     /**
      * @var string
      */
-    protected $parent;
+    protected $data;
+
+    /**
+     * @var string
+     */
+    protected $name;
 
     /**
      * Folder constructor.
      */
     public function __construct() {
-        $this->addType('label', 'string');
-        $this->addType('parent', 'string');
+        $this->addType('name', 'string');
+        $this->addType('data', 'string');
 
         parent::__construct();
     }

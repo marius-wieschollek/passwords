@@ -343,6 +343,7 @@ class SessionService {
         $model->setUserId($this->environment->getUserId());
         $model->setUuid($this->generateUuidV4());
         $model->setAuthorized(false);
+        $model->setDeleted(false);
         $model->setCreated(time());
         $model->setUpdated(time());
         $this->modified = true;

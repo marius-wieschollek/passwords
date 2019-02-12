@@ -98,6 +98,11 @@ class PasswordTagRelationRepair {
             $fixed = true;
         }
 
+        if(empty($relation->getUuid())) {
+            $relation->setUuid($this->relationService->generateUuidV4());
+            $fixed = true;
+        }
+
         if($fixed) $this->relationService->save($relation);
 
         return $fixed;

@@ -129,6 +129,7 @@ class PasswordTagRelationService extends AbstractService {
      */
     protected function createModel(PasswordRevision $password, TagRevision $tag): PasswordTagRelation {
         $model = new PasswordTagRelation();
+        $model->setUuid($this->generateUuidV4());
         $model->setDeleted(false);
         $model->setUserId($this->userId);
         $model->setCreated(time());

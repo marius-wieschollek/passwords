@@ -8,9 +8,12 @@
 namespace OCA\Passwords\Db;
 
 /**
- * Class Tag
+ * Class KeychainMapper
  *
  * @package OCA\Passwords\Db
  */
-class Tag extends AbstractModel {
+class KeychainMapper extends AbstractMapper {
+
+    const TABLE_NAME = 'passwords_entity_keychain';
+
 }

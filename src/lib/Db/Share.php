@@ -10,8 +10,6 @@ namespace OCA\Passwords\Db;
 /**
  * Class Share
  *
- * @method string getUuid()
- * @method void setUuid(string $uuid)
  * @method string getType()
  * @method void setType(string $type)
  * @method string getSourcePassword()
@@ -36,11 +34,6 @@ class Share extends AbstractEntity implements EntityInterface {
     const TYPE_USER  = 'user';
     const TYPE_GROUP = 'group';
     const TYPE_LINK  = 'link';
-
-    /**
-     * @var string
-     */
-    protected $uuid;
 
     /**
      * @var string
@@ -91,7 +84,6 @@ class Share extends AbstractEntity implements EntityInterface {
      * Password constructor.
      */
     public function __construct() {
-        $this->addType('uuid', 'string');
         $this->addType('type', 'string');
         $this->addType('receiver', 'string');
         $this->addType('sourcePassword', 'string');

@@ -31,7 +31,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class PasswordRevision extends AbstractRevisionEntity {
+class PasswordRevision extends AbstractRevision {
 
     /**
      * @var string

@@ -42,18 +42,6 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
-     * @param int $id
-     *
-     * @return EntityInterface|Entity
-     *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     */
-    public function findById(int $id): EntityInterface {
-        return $this->findOneByField('id', $id, IQueryBuilder::PARAM_INT);
-    }
-
-    /**
      * @param string $uuid
      *
      * @return EntityInterface|Entity
