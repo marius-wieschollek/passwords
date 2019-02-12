@@ -98,15 +98,22 @@ export default class Encryption {
      * @param algorithm
      * @returns {Promise<string>}
      */
-    async getHash(value, algorithm = 'SHA-1') {
-        if(algorithm === 'SHA-1') {
-        let msgBuffer  = new TextEncoder('utf-8').encode(value),
-            hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer),
-            hashArray  = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map((b) => (`00${b.toString(16)}`).slice(-2)).join('');
-        } else {
-            let pwd = sodium.crypto_pwhash_str(value, sodium.crypto_pwhash_OPSLIMIT_MIN, sodium.crypto_pwhash_MEMLIMIT_MIN);
-            console.log(pwd, sodium.crypto_pwhash_str_verify(pwd, value));
+    static async getHash(value, algorithm = 'SHA-1') {
+        if(['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'].indexOf(algorithm)  !== -1) {
+            let msgBuffer  = new TextEncoder('utf-8').encode(value),
+                hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer);
+            return sodium.to_hex(new Uint8Array(hashBuffer));
+        } else if(algorithm.substr(0,7) === 'BLAKE2b') {
+            let bytes = sodium.crypto_generichash_BYTES_MAX;
+            if(algorithm.indexOf('-') !== -1) {
+                let bytes = algorithm.split('-')[1];
+                if(sodium.crypto_generichash_BYTES_MAX < bytes) bytes = sodium.crypto_generichash_BYTES_MAX;
+                if(sodium.crypto_generichash_BYTES_MIN > bytes) bytes = sodium.crypto_generichash_BYTES_MIN;
+            }
+
+            return sodium.to_hex(await sodium.crypto_generichash(bytes, sodium.from_string(value)));
+        } else if(algorithm === 'Argon2') {
+            return sodium.crypto_pwhash_str(value, sodium.crypto_pwhash_OPSLIMIT_MIN, sodium.crypto_pwhash_MEMLIMIT_MIN);
         }
     }
 }

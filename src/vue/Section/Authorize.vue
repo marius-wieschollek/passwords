@@ -32,6 +32,7 @@
                 hasPassword : false,
                 hasToken    : false,
                 hasError    : false,
+                pwAlgorithm    : '',
                 errorMessage: 'Login incorrect',
                 retryClass  : ''
             };
@@ -41,9 +42,12 @@
             document.body.classList.add('pw-authorisation');
             API.requestSession()
                .then((d) => {
-                   this.hasPassword = d.hasOwnProperty('password');
-                   this.hasToken = d.hasOwnProperty('token');
-                   if(this.hasToken) {
+                   if(d.hasOwnProperty('password')) {
+                       this.hasPassword = true;
+                       this.pwAlgorithm = d.password;
+                   }
+                   if(d.hasOwnProperty('token')) {
+                       this.hasToken = true;
                        this.provider = null;
                        this.providerId = -1;
                        this.providers = [];
@@ -80,10 +84,12 @@
         },
 
         methods: {
-            submitLogin() {
+            async submitLogin() {
                 let data = {};
 
-                if(this.hasPassword) data.password = this.password;
+                if(this.hasPassword) {
+                    data.password = await API.getHash(this.password, this.pwAlgorithm);
+                }
                 if(this.hasToken) {
                     data.token = {};
                     data.token[this.provider.id] = this.token;

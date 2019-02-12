@@ -62,7 +62,7 @@ class SessionApiController extends AbstractApiController {
 
         $requirements = [];
         if($this->passwordHelper->hasPassword()) {
-            $requirements['password'] = 'SHA-256';
+            $requirements['password'] = $this->passwordHelper->getPasswordAlgorithm();
         }
 
         $providers = $this->tokenHelper->getProvidersAsArray();

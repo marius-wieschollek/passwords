@@ -236,7 +236,7 @@
                     'Master Password',
                     'Please choose a master password for your passwords.')
                     .then((data) => {
-                        EncryptionManager.setPassword(data.password, data.save, data.encrypt);
+                        EncryptionManager.install(data.password, data.save, data.encrypt);
                     });
             },
             resetSettingsAction() {

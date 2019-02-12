@@ -110,12 +110,14 @@ class AccountApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $password
+     * @param null|string $password
+     * @param null|string $algorithm
      *
      * @return JSONResponse
+     * @throws ApiException
      */
-    public function setPassword(?string $password = null): JSONResponse {
-        if($this->passwordHelper->setPassword($password)) {
+    public function setPassword(?string $password = null, ?string $algorithm = null): JSONResponse {
+        if($this->passwordHelper->setPassword($password, $algorithm)) {
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 

@@ -134,6 +134,14 @@ export default class SimpleApi {
         return this._createRequest('session.close');
     }
 
+    /**
+     *
+     * @returns {Promise}
+     */
+    setAccountPassword(password, algorithm) {
+        return this._createRequest('account.password', {password, algorithm});
+    }
+
 
     /**
      * Passwords

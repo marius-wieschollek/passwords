@@ -23,6 +23,27 @@ export default class EnhancedApi extends SimpleApi {
         super.initialize(config);
     }
 
+    /**
+     *
+     * @param value
+     * @param algorithm
+     * @returns {Promise<string>}
+     */
+    getHash(value, algorithm = 'SHA-1') {
+        return Encryption.getHash(value, algorithm);
+    }
+
+
+    /**
+     * Account Management
+     */
+
+    async setAccountPassword(password, algorithm) {
+        if(password !== null && (algorithm === undefined || algorithm === null)) algorithm = 'BLAKE2b-64';
+
+        let hash = await Encryption.getHash(password, algorithm);
+        return await super.API.setAccountPassword(hash, 'BLAKE2b-64');
+    }
 
     /**
      * Passwords
@@ -44,7 +65,7 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
-        object.hash = await this._config.encryption.getHash(data.password);
+        object.hash = await Encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
         return await super.createPassword(object);
@@ -68,7 +89,7 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
-        object.hash = await this._config.encryption.getHash(data.password);
+        object.hash = await Encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
         return await super.updatePassword(object);
@@ -874,7 +895,7 @@ export default class EnhancedApi extends SimpleApi {
                 l10n     = {'de': 'Passwort', 'cs': 'Heslo', 'fr': 'Mot de passe', 'nl': 'Wachtwoord', 'ru': 'Пароль'},
                 language = navigator.language.substr(0, 2);
             if(l10n.hasOwnProperty(language)) text = l10n[language];
-            date.setTime(data.created ? data.created*1000:Date.now());
+            date.setTime(data.created ? data.created * 1000:Date.now());
 
             data.label = `${text} ${date.toLocaleDateString()}`;
         }

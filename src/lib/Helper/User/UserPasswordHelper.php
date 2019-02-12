@@ -7,35 +7,47 @@
 
 namespace OCA\Passwords\Helper\User;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\LoggingService;
 use OCP\Security\IHasher;
 
 class UserPasswordHelper {
+
+    /**
+     * @var LoggingService
+     */
+    protected $logger;
+
     /**
      * @var IHasher
      */
-    private $hasher;
+    protected $hasher;
+
     /**
      * @var ConfigurationService
      */
-    private $config;
+    protected $config;
+
     /**
      * @var EnvironmentService
      */
-    private $environmentService;
+    protected $environment;
 
     /**
      * UserPasswordHelper constructor.
      *
      * @param IHasher              $hasher
      * @param ConfigurationService $config
-     * @param EnvironmentService   $environmentService
+     * @param EnvironmentService   $environment
+     * @param LoggingService       $logger
      */
-    public function __construct(IHasher $hasher, ConfigurationService $config, EnvironmentService $environmentService) {
-        $this->hasher = $hasher;
-        $this->config = $config;
-        $this->environmentService = $environmentService;
+    public function __construct(IHasher $hasher, ConfigurationService $config, EnvironmentService $environment, LoggingService $logger) {
+        $this->hasher      = $hasher;
+        $this->config      = $config;
+        $this->environment = $environment;
+        $this->logger      = $logger;
     }
 
     /**
@@ -45,7 +57,22 @@ class UserPasswordHelper {
         try {
             return $this->config->hasUserValue('user/account/password');
         } catch(\Exception $e) {
+            $this->logger->logException($e);
+
             return false;
+        }
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPasswordAlgorithm(): ?string {
+        try {
+            return $this->config->getUserValue('user/account/password/algorithm', null);
+        } catch(\Exception $e) {
+            $this->logger->logException($e);
+
+            return null;
         }
     }
 
@@ -58,6 +85,8 @@ class UserPasswordHelper {
         try {
             $hash = $this->config->getUserValue('user/account/password');
         } catch(\Exception $e) {
+            $this->logger->logException($e);
+
             return false;
         }
 
@@ -66,16 +95,24 @@ class UserPasswordHelper {
 
     /**
      * @param string $password
+     * @param string $algorithm
      *
      * @return bool
+     * @throws ApiException
      */
-    public function setPassword(string $password): bool {
+    public function setPassword(string $password, string $algorithm): bool {
+        if(strlen($password) < 128 || !in_array($algorithm, ['BLAKE2b-64', 'SHA-512'])) {
+            throw new ApiException('Invalid password');
+        }
         try {
             $hash = $this->hasher->hash($this->makePassword($password));
             $this->config->setUserValue('user/account/password', $hash);
+            $this->config->setUserValue('user/account/password/algorithm', $algorithm);
 
             return true;
         } catch(\Exception $e) {
+            $this->logger->logException($e);
+
             return false;
         }
     }
