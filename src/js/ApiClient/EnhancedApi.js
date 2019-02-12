@@ -26,6 +26,7 @@ export default class EnhancedApi extends SimpleApi {
         if(config.session) {
             this._headers['X-Passwords-Session'] = config.session;
         }
+        setInterval(() => { this.keepaliveSession(); }, 5*60000);
     }
 
     /**

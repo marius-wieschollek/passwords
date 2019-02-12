@@ -55,6 +55,7 @@ export default class SimpleApi {
             'token.request'    : 'api/1.0/token/{provider}/request',
             'session.request'  : 'api/1.0/session/request',
             'session.open'     : 'api/1.0/session/open',
+            'session.keepalive': 'api/1.0/session/keepalive',
             'session.close'    : 'api/1.0/session/close',
             'keychain.show'    : 'api/1.0/keychain/show',
             'keychain.update'  : 'api/1.0/keychain/update',
@@ -132,6 +133,14 @@ export default class SimpleApi {
      */
     closeSession() {
         return this._createRequest('session.close');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    keepaliveSession() {
+        return this._createRequest('session.keepalive');
     }
 
     /**

@@ -35,7 +35,8 @@ class UserSettingsHelper {
             'mail/shares'                  => 'boolean',
             'notification/security'        => 'boolean',
             'notification/shares'          => 'boolean',
-            'notification/errors'          => 'boolean'
+            'notification/errors'          => 'boolean',
+            'session/lifetime'             => 'integer'
         ];
 
     /**

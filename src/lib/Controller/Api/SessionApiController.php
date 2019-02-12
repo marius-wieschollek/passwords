@@ -125,6 +125,15 @@ class SessionApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      */
+    public function keepAlive() {
+        return new JSONResponse(['success' => true], Http::STATUS_OK);
+    }
+
+    /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     */
     public function close() {
         $this->session->delete();
 

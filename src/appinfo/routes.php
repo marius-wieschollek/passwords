@@ -15,6 +15,7 @@ $routes = [
     ['name' => 'session_api#request', 'url' => '/api/1.0/session/request', 'verb' => 'GET'],
     ['name' => 'session_api#open', 'url' => '/api/1.0/session/open', 'verb' => 'POST'],
     ['name' => 'session_api#close', 'url' => '/api/1.0/session/close', 'verb' => 'GET'],
+    ['name' => 'session_api#keep_alive', 'url' => '/api/1.0/session/keepalive', 'verb' => 'GET'],
     ['name' => 'session_api#request_token', 'url' => '/api/1.0/token/{provider}/request', 'verb' => 'GET'],
 
     ['name' => 'keychain_api#list', 'url' => '/api/1.0/keychain/list', 'verb' => 'GET'],
