@@ -100,6 +100,21 @@ class KeychainService extends AbstractService {
     }
 
     /**
+     * @return array
+     * @throws \Exception
+     */
+    public function getClientKeychainArray(): array {
+        $keychains = $this->findByScope(Keychain::SCOPE_CLIENT, true);
+
+        $list = [];
+        foreach($keychains as $keychain) {
+            $list[ $keychain->getType() ] = $keychain->getDataArray();
+        }
+
+        return $list;
+    }
+
+    /**
      * @param string $type
      * @param array  $data
      *
@@ -151,7 +166,7 @@ class KeychainService extends AbstractService {
         $keychain->_setDecrypted(true);
 
         $keychain->setType($type);
-        $keychain->setData($data);
+        $keychain->setDataArray($data);
         $keychain->setScope($scope);
 
         return $keychain;
