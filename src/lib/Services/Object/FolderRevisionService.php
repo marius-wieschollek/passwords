@@ -85,6 +85,7 @@ class FolderRevisionService extends AbstractRevisionService {
             FolderService::BASE_FOLDER_UUID,
             'Home',
             FolderService::BASE_FOLDER_UUID,
+            '',
             EncryptionService::DEFAULT_CSE_ENCRYPTION,
             time(),
             false,
@@ -101,6 +102,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param string $folder
      * @param string $label
      * @param string $parent
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -114,13 +116,14 @@ class FolderRevisionService extends AbstractRevisionService {
         string $folder,
         string $label,
         string $parent,
+        string $cseKey,
         string $cseType,
         int $edited,
         bool $hidden,
         bool $trashed,
         bool $favorite
     ): FolderRevision {
-        $revision = $this->createModel($folder, $label, $parent, $cseType, $edited, $hidden, $trashed, $favorite);
+        $revision = $this->createModel($folder, $label, $parent, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
         $revision = $this->validationService->validateFolder($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
@@ -172,6 +175,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param string $label
      * @param string $parent
      * @param string $cseType
+     * @param string $cseKey
      * @param int    $edited
      * @param bool   $hidden
      * @param bool   $trashed
@@ -183,6 +187,7 @@ class FolderRevisionService extends AbstractRevisionService {
         string $model,
         string $label,
         string $parent,
+        string $cseKey,
         string $cseType,
         int $edited,
         bool $hidden,
@@ -201,6 +206,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->setFavorite($favorite);
         $revision->setLabel($label);
         $revision->setParent($parent);
+        $revision->setCseKey($cseKey);
         $revision->setCseType($cseType);
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);

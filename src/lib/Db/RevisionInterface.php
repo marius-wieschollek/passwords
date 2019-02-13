@@ -18,6 +18,8 @@ namespace OCA\Passwords\Db;
  * @method void setSseType(string $sseType)
  * @method string getCseType()
  * @method void setCseType(string $cseType)
+ * @method string getCseKey()
+ * @method void setCseKey(string $cseKey)
  * @method string getModel()
  * @method void setModel(string $model)
  * @method string getLabel()

@@ -66,7 +66,12 @@ abstract class AbstractService {
                 bin2hex(random_bytes(6))
             ]);
         } catch(\Exception $e) {
-            return uniqid().'-'.uniqid();
+            $string = uniqid().uniqid().uniqid();
+            return substr($string, 0, 8).'-'.
+                substr($string, 8, 4).'-'.
+                substr($string, 12, 4).'-'.
+                substr($string, 16, 4).'-'.
+                substr($string, 20, 12);
         }
     }
 

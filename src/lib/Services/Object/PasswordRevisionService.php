@@ -54,6 +54,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $model
      * @param string $password
      * @param string $username
+     * @param string $cseKey
      * @param string $cseType
      * @param string $hash
      * @param string $label
@@ -74,6 +75,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $model,
         string $password,
         string $username,
+        string $cseKey,
         string $cseType,
         string $hash,
         string $label,
@@ -89,7 +91,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         if($cseType === EncryptionService::CSE_ENCRYPTION_NONE) $hash = sha1($password);
 
         $revision = $this->createModel(
-            $model, $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $trashed, $favorite
+            $model, $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $trashed, $favorite
         );
 
         $revision = $this->validationService->validatePassword($revision);
@@ -102,6 +104,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param string $model
      * @param string $password
      * @param string $username
+     * @param string $cseKey
      * @param string $cseType
      * @param string $hash
      * @param string $label
@@ -120,6 +123,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         string $model,
         string $password,
         string $username,
+        string $cseKey,
         string $cseType,
         string $hash,
         string $label,
@@ -146,6 +150,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setUsername($username);
         $revision->setPassword($password);
         $revision->setCseType($cseType);
+        $revision->setCseKey($cseKey);
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);
         $revision->setHash($hash);

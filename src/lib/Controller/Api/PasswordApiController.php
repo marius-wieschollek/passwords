@@ -102,6 +102,7 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @param string $password
      * @param string $username
+     * @param string $cseKey
      * @param string $cseType
      * @param string $hash
      * @param string $label
@@ -121,6 +122,7 @@ class PasswordApiController extends AbstractObjectApiController {
     public function create(
         string $password,
         string $username = '',
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $hash = '',
         string $label = '',
@@ -137,7 +139,7 @@ class PasswordApiController extends AbstractObjectApiController {
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden,
+            $model->getUuid(), $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden,
             false, $favorite
         );
 
@@ -160,6 +162,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $id
      * @param string $password
      * @param string $username
+     * @param string $cseKey
      * @param string $cseType
      * @param string $hash
      * @param string $label
@@ -182,6 +185,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $id,
         string $password,
         string $username = '',
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $hash = '',
         string $label = '',
@@ -220,7 +224,7 @@ class PasswordApiController extends AbstractObjectApiController {
 
 
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
+            $model->getUuid(), $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
             $favorite
         );
 

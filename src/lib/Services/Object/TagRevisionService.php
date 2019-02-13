@@ -49,6 +49,7 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $model
      * @param string $label
      * @param string $color
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -63,6 +64,7 @@ class TagRevisionService extends AbstractRevisionService {
         string $model,
         string $label,
         string $color,
+        string $cseKey,
         string $cseType,
         int $edited,
         bool $hidden,
@@ -70,7 +72,7 @@ class TagRevisionService extends AbstractRevisionService {
         bool $favorite
     ): TagRevision {
 
-        $revision = $this->createModel($model, $label, $color, $cseType, $edited, $hidden, $trashed, $favorite);
+        $revision = $this->createModel($model, $label, $color, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
         $revision = $this->validationService->validateTag($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
@@ -82,6 +84,7 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $model
      * @param string $label
      * @param string $color
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -94,6 +97,7 @@ class TagRevisionService extends AbstractRevisionService {
         string $model,
         string $label,
         string $color,
+        string $cseKey,
         string $cseType,
         int $edited,
         bool $hidden,
@@ -110,6 +114,7 @@ class TagRevisionService extends AbstractRevisionService {
         $revision->_setDecrypted(true);
 
         $revision->setModel($model);
+        $revision->setCseKey($cseKey);
         $revision->setCseType($cseType);
         $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $revision->setHidden($hidden);

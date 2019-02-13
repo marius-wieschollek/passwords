@@ -71,6 +71,7 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @param string $label
      * @param string $parent
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -83,6 +84,7 @@ class FolderApiController extends AbstractObjectApiController {
     public function create(
         string $label,
         string $parent,
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
@@ -92,7 +94,7 @@ class FolderApiController extends AbstractObjectApiController {
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, false, $favorite
+            $model->getUuid(), $label, $parent, $cseKey, $cseType, $edited, $hidden, false, $favorite
         );
 
         $this->revisionService->save($revision);
@@ -112,6 +114,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $id
      * @param string $label
      * @param string $parent
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -119,14 +122,15 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
     public function update(
         string $id,
         string $label,
         string $parent,
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
@@ -140,7 +144,7 @@ class FolderApiController extends AbstractObjectApiController {
 
         if($edited === 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
+            $model->getUuid(), $label, $parent, $cseKey, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
         );
 
         $this->revisionService->save($revision);
