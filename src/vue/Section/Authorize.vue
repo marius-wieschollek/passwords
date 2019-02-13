@@ -1,7 +1,8 @@
 <template>
     <div id="app-content">
         <form id="authorize-window" @submit="submitLogin">
-            <translate icon="repeat" v-if="retryVisible" title="Request Token again" :iconClass="retryClass" @click="requestToken()"/>
+            <translate tag="div" icon="user" class="login-message" say="You are logging in as {user}" :variables="loginVars" v-if="impersonating"/>
+            <translate icon="repeat" title="Request Token again" :iconClass="retryClass" @click="requestToken()" v-if="retryVisible"/>
             <div class="passwords">
                 <input type="password" placeholder="Password" v-model="password" required v-if="hasPassword">
                 <select v-model="providerId" v-if="hasToken && providers.length > 1">
@@ -25,17 +26,18 @@
         components: {Translate},
         data() {
             return {
-                password    : '',
-                token       : '',
-                providerId  : -1,
-                provider    : null,
-                providers   : [],
-                hasPassword : false,
-                hasToken    : false,
-                hasError    : false,
-                pwAlgorithm    : '',
-                errorMessage: 'Login incorrect',
-                retryClass  : ''
+                password     : '',
+                token        : '',
+                providerId   : -1,
+                provider     : null,
+                providers    : [],
+                hasPassword  : false,
+                hasToken     : false,
+                hasError     : false,
+                pwAlgorithm  : '',
+                errorMessage : 'Login incorrect',
+                retryClass   : '',
+                impersonating: document.querySelector('meta[name=api-session]') === null
             };
         },
 
@@ -60,7 +62,7 @@
 
                            this.providers.push(d.token[i]);
                            if(this.provider === null && !d.token[i].request) {
-                               this.providerId = this.providers.length-1;
+                               this.providerId = this.providers.length - 1;
                                this.provider = d.token[i];
                            }
                        }
@@ -81,6 +83,11 @@
         computed: {
             retryVisible() {
                 return this.provider !== null && this.provider.request;
+            },
+            loginVars() {
+                return {
+                    user: document.head.getAttribute('data-user-displayname')
+                };
             }
         },
 
@@ -159,7 +166,7 @@
 <style lang="scss">
     body#body-user.pw-authorisation {
         #header {
-            background-color: rgba(0, 0, 0, 0);
+            background-color : rgba(0, 0, 0, 0);
         }
 
         #appmenu li a::before {
@@ -261,6 +268,26 @@
                 }
             }
 
+            .login-message {
+                padding          : 0.75rem 0.25rem 0.75rem 1.75rem;
+                margin-bottom    : 0.75rem;
+                background-color : var(--color-box-shadow);
+                color            : var(--color-primary-text);
+                font-weight      : bold;
+                font-size        : 1rem;
+                border-radius    : var(--border-radius);
+                position         : relative;
+
+                i {
+                    position    : absolute;
+                    left        : 0.5rem;
+                    top         : 0;
+                    bottom      : 0;
+                    display     : flex;
+                    align-items : center;
+                }
+            }
+
             .login-error {
                 color            : var(--color-error);
                 margin-top       : 1rem;
@@ -298,8 +325,8 @@
                 opacity     : 0;
             }
             #header {
-                transition : background-color ease-in-out 0.25s 0.25s;
-                background-color: var(--color-primary);
+                transition       : background-color ease-in-out 0.25s 0.25s;
+                background-color : var(--color-primary);
             }
         }
     }
