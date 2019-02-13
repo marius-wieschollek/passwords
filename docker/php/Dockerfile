@@ -26,7 +26,7 @@ RUN apt-get clean; \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-RUN npm install --global pageres-cli --unsafe-perm
+RUN npm install --global pageres-cli@4.1.0 --unsafe-perm
 RUN mkdir -p /var/www/.config
 RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
 
