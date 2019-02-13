@@ -28,7 +28,7 @@ class ValidationServiceTest extends TestCase {
     /**
      * @throws \ReflectionException
      */
-    protected function setUp() {
+    protected function setUp(): void {
         $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
         $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
     }
