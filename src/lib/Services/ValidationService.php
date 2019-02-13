@@ -44,15 +44,8 @@ class ValidationService {
      * @throws ApiException
      */
     public function validatePassword(PasswordRevision $password): PasswordRevision {
-        if(empty($password->getSseType())) {
-            $password->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        }
-        if(!in_array($password->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
-            throw new ApiException('Invalid server side encryption type', 400);
-        }
-        if($password->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
-            throw new ApiException('Invalid client side encryption type', 400);
-        }
+        $this->validateEncryptionSettings($password);
+
         if(empty($password->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
@@ -76,15 +69,8 @@ class ValidationService {
      * @throws ApiException
      */
     public function validateFolder(FolderRevision $folder): FolderRevision {
-        if(empty($folder->getSseType())) {
-            $folder->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        }
-        if(!in_array($folder->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
-            throw new ApiException('Invalid server side encryption type', 400);
-        }
-        if($folder->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
-            throw new ApiException('Invalid client side encryption type', 400);
-        }
+        $this->validateEncryptionSettings($folder);
+
         if(empty($folder->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
@@ -105,15 +91,8 @@ class ValidationService {
      * @throws ApiException
      */
     public function validateTag(TagRevision $tag): TagRevision {
-        if(empty($tag->getSseType())) {
-            $tag->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        }
-        if(!in_array($tag->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
-            throw new ApiException('Invalid server side encryption type', 400);
-        }
-        if($tag->getCseType() !== EncryptionService::DEFAULT_CSE_ENCRYPTION) {
-            throw new ApiException('Invalid client side encryption type', 400);
-        }
+        $this->validateEncryptionSettings($tag);
+
         if(empty($tag->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
@@ -133,7 +112,6 @@ class ValidationService {
      * @return RevisionInterface
      * @throws ApiException
      * @throws \Exception
-     * @throws \OCP\AppFramework\QueryException
      */
     public function validateObject(RevisionInterface $object): RevisionInterface {
 
@@ -196,5 +174,37 @@ class ValidationService {
         }
 
         return $folderUuid;
+    }
+
+    /**
+     * @param RevisionInterface $revision
+     *
+     * @throws ApiException
+     */
+    protected function validateEncryptionSettings(RevisionInterface $revision): void {
+        if(empty($revision->getSseType())) {
+            $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        }
+        if(empty($revision->getCseType())) {
+            $revision->setCseType(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        }
+
+        $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2];
+        if(!in_array($revision->getSseType(), $validSSE)) {
+            throw new ApiException('Invalid server side encryption type', 400);
+        }
+
+        $validCSE = [EncryptionService::CSE_ENCRYPTION_NONE, EncryptionService::CSE_ENCRYPTION_V1R1];
+        if(!in_array($revision->getCseType(), $validCSE)) {
+            throw new ApiException('Invalid client side encryption type', 400);
+        }
+
+        if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE && empty($revision->getCseKey())) {
+            throw new ApiException('Client side encryption key missing', 400);
+        }
+
+        if($revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE) {
+            throw new ApiException('No encryption specified', 400);
+        }
     }
 }

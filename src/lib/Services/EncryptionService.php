@@ -24,13 +24,15 @@ class EncryptionService {
     const DEFAULT_SSE_ENCRYPTION   = 'SSEv1r1';
     const DEFAULT_SHARE_ENCRYPTION = 'SSSEv1r1';
     const CSE_ENCRYPTION_NONE      = 'none';
+    const CSE_ENCRYPTION_V1R1      = 'CSEv1r1';
+    const SSE_ENCRYPTION_NONE      = 'none';
     const SSE_ENCRYPTION_V1        = 'SSEv1r1';
     const SSE_ENCRYPTION_V1R2      = 'SSEv1r2';
     const SHARE_ENCRYPTION_V1      = 'SSSEv1r1';
 
     protected $encryptionMapping
         = [
-            self::SSE_ENCRYPTION_V1 => SseV1Encryption::class,
+            self::SSE_ENCRYPTION_V1   => SseV1Encryption::class,
             self::SSE_ENCRYPTION_V1R2 => SseV1Encryption::class,
         ];
     /**
