@@ -66,6 +66,11 @@ class EnvironmentService {
     protected $userLogin;
 
     /**
+     * @var bool
+     */
+    protected $impersonating = false;
+
+    /**
      * @var string
      */
     protected $appMode = self::MODE_PUBLIC;
@@ -140,6 +145,13 @@ class EnvironmentService {
      */
     public function getUserLogin(): ?string {
         return $this->userLogin;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImpersonating(): bool {
+        return $this->impersonating;
     }
 
     /**
@@ -237,8 +249,9 @@ class EnvironmentService {
                     } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
                         $iUser = $this->userManager->get($userId);
                         if($iUser !== null) {
-                            $this->user      = $iUser;
-                            $this->userLogin = $userId;
+                            $this->user          = $iUser;
+                            $this->userLogin     = $userId;
+                            $this->impersonating = true;
                             $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
 
                             return true;

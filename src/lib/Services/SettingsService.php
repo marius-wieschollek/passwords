@@ -56,6 +56,7 @@ class SettingsService {
      * @param string|null $userId
      *
      * @return mixed
+     * @throws \Exception
      */
     public function get(string $key, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);

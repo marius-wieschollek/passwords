@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
@@ -26,14 +27,19 @@ use OCP\Util;
 class PageController extends Controller {
 
     /**
+     * @var ConfigurationService
+     */
+    protected $config;
+
+    /**
      * @var SessionService
      */
     protected $session;
 
     /**
-     * @var ConfigurationService
+     * @var SettingsService
      */
-    protected $config;
+    protected $settings;
 
     /**
      * @var ApiTokenHelper
@@ -41,48 +47,50 @@ class PageController extends Controller {
     protected $tokenHelper;
 
     /**
-     * @var SettingsService
+     * @var EnvironmentService
      */
-    protected $settingsService;
+    protected $environment;
 
     /**
      * PageController constructor.
      *
      * @param IRequest             $request
+     * @param SessionService       $session
+     * @param SettingsService      $settings
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
-     * @param SessionService       $sessionService
-     * @param SettingsService      $settingsService
+     * @param EnvironmentService   $environment
      */
     public function __construct(
         IRequest $request,
+        SessionService $session,
+        SettingsService $settings,
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
-        SessionService $sessionService,
-        SettingsService $settingsService
+        EnvironmentService $environment
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->config          = $config;
-        $this->tokenHelper     = $tokenHelper;
-        $this->settingsService = $settingsService;
-        $this->session         = $sessionService;
+        $this->config      = $config;
+        $this->tokenHelper = $tokenHelper;
+        $this->settings    = $settings;
+        $this->session     = $session;
+        $this->environment = $environment;
     }
 
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
      * @UseSession
+     * @throws \Exception
      */
     public function index(): TemplateResponse {
         $isSecure = $this->checkIfHttpsUsed();
+
         if($isSecure) {
-            $this->getUserSettings();
-            list($token, $user) = $this->tokenHelper->getWebUiToken();
-            Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
-            Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
-            Util::addHeader('meta', ['name' => 'api-session', 'content' => $this->session->getId()]);
+            $this->addHeaders();
         } else {
             $this->tokenHelper->destroyWebUiToken();
+            $this->session->delete();
         }
 
         $response = new TemplateResponse(
@@ -90,7 +98,6 @@ class PageController extends Controller {
             'index',
             ['https' => $isSecure]
         );
-        $this->session->save();
 
         $response->setContentSecurityPolicy($this->getContentSecurityPolicy());
 
@@ -109,21 +116,27 @@ class PageController extends Controller {
     /**
      *
      */
-    protected function getUserSettings(): void {
-        Util::addHeader(
-            'meta',
-            [
-                'name'    => 'settings',
-                'content' => json_encode($this->settingsService->list())
-            ]
-        );
+    protected function addHeaders(): void {
+        $userSettings = json_encode($this->settings->list());
+        Util::addHeader('meta', ['name' => 'settings', 'content' => $userSettings]);
+
+        list($token, $user) = $this->tokenHelper->getWebUiToken();
+        Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
+        Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
+
+        if(!$this->environment->isImpersonating()) {
+            $session = ['id' => $this->session->getId(), 'authorized' => $this->session->isAuthorized()];
+            Util::addHeader('meta', ['name' => 'api-session', 'content' => json_encode($session)]);
+            $this->session->save();
+        }
     }
 
     /**
      * @return StrictContentSecurityPolicy
+     * @throws \Exception
      */
     protected function getContentSecurityPolicy(): StrictContentSecurityPolicy {
-        $manualHost = parse_url($this->settingsService->get('server.handbook.url'), PHP_URL_HOST);
+        $manualHost = parse_url($this->settings->get('server.handbook.url'), PHP_URL_HOST);
         $csp        = new StrictContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);

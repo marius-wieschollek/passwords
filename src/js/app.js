@@ -7,7 +7,6 @@ import Messages from '@js/Classes/Messages';
 import Encryption from '@js/ApiClient/Encryption';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsManager from '@js/Manager/SettingsManager';
-import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 /**
  * Set global webpack path
@@ -34,9 +33,9 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
         router.beforeEach((to, from, next) => {
             if(!isLoggedIn && to.name !== 'Authorize') {
-                let target = {name: to.name, path: to.path, hash: to.hash, params: to.params,};
+                let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
-                next({name:'Authorize', params: {target}});
+                next({name: 'Authorize', params: {target}});
                 isLoggedIn = true;
             }
             next();
@@ -48,15 +47,9 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     async function initApi() {
         let user     = document.querySelector('meta[name=api-user]').getAttribute('content'),
             password = document.querySelector('meta[name=api-token]').getAttribute('content'),
-            session  = document.querySelector('meta[name=api-session]').getAttribute('content');
+            session  = getSessionId(),
+            baseUrl  = getBaseUrl();
         if(!password) password = await Messages.prompt('Password', 'Login', '', true);
-
-        let baseUrl = location.href;
-        if(baseUrl.indexOf('index.php') !== -1) {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
-        } else {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
-        }
 
         API.initialize({baseUrl, user, password, session, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
     }
@@ -91,6 +84,31 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 app.starChaser = true;
             }
         }, false);
+    }
+
+    function getSessionId() {
+        let sessionAttr = document.querySelector('meta[name=api-session]');
+
+        if(sessionAttr) {
+            let session = JSON.parse(sessionAttr.getAttribute('content'));
+            isLoggedIn = session.authorized;
+
+            return session.id;
+        }
+
+        return null;
+    }
+
+    function getBaseUrl() {
+        let baseUrl = location.href;
+
+        if(baseUrl.indexOf('index.php') !== -1) {
+            baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
+        } else {
+            baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
+        }
+
+        return baseUrl;
     }
 
     if(location.protocol !== 'https:') {
