@@ -45,9 +45,9 @@
             document.body.classList.add('pw-authorisation');
             API.requestSession()
                .then((d) => {
-                   if(d.hasOwnProperty('password')) {
+                   if(d.hasOwnProperty('challenge')) {
                        this.hasPassword = true;
-                       this.pwAlgorithm = d.password;
+                       this.challenge = d.challenge;
                    }
                    if(d.hasOwnProperty('token')) {
                        this.hasToken = true;
@@ -96,7 +96,8 @@
                 let data = {};
 
                 if(this.hasPassword) {
-                    data.password = await EnhancedApi.getHash(this.password, this.pwAlgorithm);
+                    data.password = this.password;
+                    data.challenge = this.challenge;
                 }
                 if(this.hasToken) {
                     data.token = {};

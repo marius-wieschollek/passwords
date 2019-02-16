@@ -1,5 +1,4 @@
 import SimpleApi from './SimpleApi';
-import Encryption from './Encryption';
 
 export default class EnhancedApi extends SimpleApi {
 
@@ -20,13 +19,14 @@ export default class EnhancedApi extends SimpleApi {
         if(!config.folderIcon) config.folderIcon = `${config.baseUrl}core/img/filetypes/folder.svg`;
         if(!config.apiUrl) config.apiUrl = `${config.baseUrl}index.php/apps/passwords/`;
         if(!config.encryption) throw new Error('Encryption support is missing');
+        config.encrypt = false;
 
         super.initialize(config);
 
         if(config.session && config.session !== null) {
             this._headers['X-Passwords-Session'] = config.session;
         }
-        setInterval(() => { this.keepaliveSession(); }, 5*60000);
+        setInterval(() => { this.keepaliveSession(); }, 5 * 60000);
     }
 
     /**
@@ -36,7 +36,21 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise<string>}
      */
     static getHash(value, algorithm = 'SHA-1') {
-        return Encryption.getHash(value, algorithm);
+        return this.config.encryption.getHash(value, algorithm);
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    async openSession(login) {
+        if(login.hasOwnProperty('password')) {
+            login.secret = await this.config.encryption.solveChallenge(login.challenge, login.password);
+            delete login.challenge;
+            delete login.password;
+        }
+
+        return this._createRequest('session.open', login);
     }
 
 
@@ -44,11 +58,22 @@ export default class EnhancedApi extends SimpleApi {
      * Account Management
      */
 
-    async setAccountPassword(password, algorithm) {
-        if(password !== null && (algorithm === undefined || algorithm === null)) algorithm = 'BLAKE2b-64';
+    /**
+     *
+     * @param password
+     * @param oldPassword
+     * @returns {Promise<void>}
+     */
+    async setAccountChallenge(password, oldPassword = null) {
+        let oldSecret = null;
+        if(oldPassword !== null) {
+            let oldChallenge = await super.getAccountChallenge();
+            oldSecret = this.config.encryption.solveChallenge(oldChallenge.challenge, oldPassword);
+        }
 
-        let hash = await Encryption.getHash(password, algorithm);
-        return await super.API.setAccountPassword(hash, 'BLAKE2b-64');
+        let challenge = await this.config.encryption.createChallenge(password);
+
+        return await super.setAccountChallenge(challenge.challenge, challenge.secret, oldSecret);
     }
 
     /**
@@ -71,8 +96,12 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
-        object.hash = await Encryption.getHash(data.password);
+        object.hash = await this.config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
+
+        if(config.encrypt) {
+            this.config.encryption.encryptObject(object, 'password');
+        }
 
         return await super.createPassword(object);
     }
@@ -95,7 +124,7 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
-        object.hash = await Encryption.getHash(data.password);
+        object.hash = await this.config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
         return await super.updatePassword(object);

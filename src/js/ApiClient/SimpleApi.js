@@ -59,7 +59,8 @@ export default class SimpleApi {
             'session.close'    : 'api/1.0/session/close',
             'keychain.show'    : 'api/1.0/keychain/show',
             'keychain.update'  : 'api/1.0/keychain/update',
-            'account.password' : 'api/1.0/account/password',
+            'challenge.get'    : 'api/1.0/account/challenge/get',
+            'challenge.set'    : 'api/1.0/account/challenge/set',
             'account.reset'    : 'api/1.0/account/reset',
             'service.coffee'   : 'api/1.0/service/coffee',
             'service.avatar'   : 'api/1.0/service/avatar/{user}/{size}',
@@ -141,14 +142,6 @@ export default class SimpleApi {
      */
     keepaliveSession() {
         return this._createRequest('session.keepalive');
-    }
-
-    /**
-     *
-     * @returns {Promise}
-     */
-    setAccountPassword(password, algorithm) {
-        return this._createRequest('account.password', {password, algorithm});
     }
 
 
@@ -528,16 +521,6 @@ export default class SimpleApi {
     }
 
     /**
-     * Resets the user account.
-     * First you get a wait time, then you can reset.
-     *
-     * @returns {Promise}
-     */
-    resetUserAccount(password) {
-        return this._createRequest('account.reset', {password});
-    }
-
-    /**
      * Loads a favicon blob over the avatar service
      *
      * @param user
@@ -618,6 +601,38 @@ export default class SimpleApi {
             {domain, view, width, height}
         );
     }
+
+
+    /**
+     * Account Management
+     */
+
+    getAccountChallenge() {
+        return this._createRequest('challenge.get');
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    setAccountChallenge(challenge, secret, oldSecret = null) {
+        return this._createRequest('challenge.set', {challenge, secret, oldSecret});
+    }
+
+    /**
+     * Resets the user account.
+     * First you get a wait time, then you can reset.
+     *
+     * @returns {Promise}
+     */
+    resetUserAccount(password) {
+        return this._createRequest('account.reset', {password});
+    }
+
+
+    /**
+     * Extra Tasks
+     */
 
     /**
      * Unofficial request to run the sharing update cron job in order to speed up webcron and ajax
