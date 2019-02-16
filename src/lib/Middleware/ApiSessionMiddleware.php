@@ -10,6 +10,7 @@ namespace OCA\Passwords\Middleware;
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
@@ -30,6 +31,11 @@ class ApiSessionMiddleware extends Middleware {
     protected $session;
 
     /**
+     * @var UserChallengeHelper
+     */
+    protected $passwordHelper;
+
+    /**
      * @var SessionService
      */
     protected $sessionService;
@@ -37,12 +43,14 @@ class ApiSessionMiddleware extends Middleware {
     /**
      * ApiSessionMiddleware constructor.
      *
-     * @param SessionService $sessionService
-     * @param ISession       $session
+     * @param SessionService      $sessionService
+     * @param UserChallengeHelper $passwordHelper
+     * @param ISession            $session
      */
-    public function __construct(SessionService $sessionService, ISession $session) {
+    public function __construct(SessionService $sessionService, UserChallengeHelper $passwordHelper, ISession $session) {
         $this->sessionService = $sessionService;
         $this->session        = $session;
+        $this->passwordHelper = $passwordHelper;
     }
 
     /**
@@ -101,6 +109,10 @@ class ApiSessionMiddleware extends Middleware {
      * @return bool
      */
     protected function requiresAuthorization(Controller $controller, string $method): bool {
+
+        if(!$this->passwordHelper->hasChallenge()) {
+            return false;
+        }
 
         if($controller instanceof SessionApiController && in_array($method, ['open', 'request', 'requestToken'])) {
             return false;

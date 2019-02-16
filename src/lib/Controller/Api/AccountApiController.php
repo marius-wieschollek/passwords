@@ -9,7 +9,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
-use OCA\Passwords\Helper\User\UserPasswordHelper;
+use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Http;
@@ -40,9 +40,9 @@ class AccountApiController extends AbstractApiController {
     protected $environment;
 
     /**
-     * @var UserPasswordHelper
+     * @var UserChallengeHelper
      */
-    protected $passwordHelper;
+    protected $challengeHelper;
 
     /**
      * @var DeleteUserDataHelper
@@ -63,7 +63,7 @@ class AccountApiController extends AbstractApiController {
         IUserManager $userManager,
         SessionService $sessionService,
         EnvironmentService $environment,
-        UserPasswordHelper $passwordHelper,
+        UserChallengeHelper $passwordHelper,
         DeleteUserDataHelper $deleteUserDataHelper
     ) {
         parent::__construct($request);
@@ -71,7 +71,7 @@ class AccountApiController extends AbstractApiController {
         $this->deleteUserDataHelper = $deleteUserDataHelper;
         $this->sessionService       = $sessionService;
         $this->environment          = $environment;
-        $this->passwordHelper       = $passwordHelper;
+        $this->challengeHelper      = $passwordHelper;
     }
 
     /**
@@ -110,14 +110,34 @@ class AccountApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param null|string $password
-     * @param null|string $algorithm
+     * @return JSONResponse
+     */
+    public function getChallenge(): JSONResponse {
+        if($this->challengeHelper->hasChallenge()) {
+            return $this->createJsonResponse(['challenge' => $this->challengeHelper->getChallenge()], Http::STATUS_OK);
+        }
+
+        return $this->createJsonResponse([], Http::STATUS_NOT_FOUND);
+    }
+
+    /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param null|string $challenge
+     * @param null|string $secret
+     * @param null        $oldSecret
      *
      * @return JSONResponse
      * @throws ApiException
      */
-    public function setPassword(?string $password = null, ?string $algorithm = null): JSONResponse {
-        if($this->passwordHelper->setPassword($password, $algorithm)) {
+    public function setChallenge(string $challenge, string $secret, $oldSecret = null): JSONResponse {
+        if($this->challengeHelper->hasChallenge() && !$this->challengeHelper->validateChallenge($oldSecret)) {
+            throw new ApiException('Invalid password', Http::STATUS_BAD_REQUEST);
+        }
+
+        if($this->challengeHelper->setChallenge($challenge, $secret)) {
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 

@@ -7,8 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
-use OCA\Passwords\Db\Keychain;
-use OCA\Passwords\Helper\User\UserPasswordHelper;
+use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\SessionService;
@@ -34,9 +33,9 @@ class SessionApiController extends AbstractApiController {
     protected $tokenHelper;
 
     /**
-     * @var UserPasswordHelper
+     * @var UserChallengeHelper
      */
-    protected $passwordHelper;
+    protected $challengeHelper;
 
     /**
      * @var KeychainService
@@ -46,16 +45,16 @@ class SessionApiController extends AbstractApiController {
     /**
      * SessionApiController constructor.
      *
-     * @param IRequest           $request
-     * @param UserTokenHelper    $tokenHelper
-     * @param UserPasswordHelper $passwordHelper
-     * @param SessionService     $session
-     * @param KeychainService    $keychainService
+     * @param IRequest            $request
+     * @param UserTokenHelper     $tokenHelper
+     * @param UserChallengeHelper $challengeHelper
+     * @param SessionService      $session
+     * @param KeychainService     $keychainService
      */
-    public function __construct(IRequest $request, UserTokenHelper $tokenHelper, UserPasswordHelper $passwordHelper, SessionService $session, KeychainService $keychainService) {
+    public function __construct(IRequest $request, UserTokenHelper $tokenHelper, UserChallengeHelper $challengeHelper, SessionService $session, KeychainService $keychainService) {
         parent::__construct($request);
         $this->tokenHelper     = $tokenHelper;
-        $this->passwordHelper  = $passwordHelper;
+        $this->challengeHelper = $challengeHelper;
         $this->session         = $session;
         $this->keychainService = $keychainService;
     }
@@ -71,8 +70,8 @@ class SessionApiController extends AbstractApiController {
         $requirements = [];
 
         if(!$this->session->isAuthorized()) {
-            if($this->passwordHelper->hasPassword()) {
-                $requirements['password'] = $this->passwordHelper->getPasswordAlgorithm();
+            if($this->challengeHelper->hasChallenge()) {
+                $requirements['challenge'] = $this->challengeHelper->getChallenge();
             }
 
             $providers = $this->tokenHelper->getProvidersAsArray();
@@ -98,10 +97,8 @@ class SessionApiController extends AbstractApiController {
             $parameters = $this->getParameterArray();
 
             $password = null;
-            if($this->passwordHelper->hasPassword() && (!isset($parameters['password']) || !$this->passwordHelper->validatePassword($parameters['password']))) {
+            if($this->challengeHelper->hasChallenge() && (!isset($parameters['secret']) || !$this->challengeHelper->validateChallenge($parameters['secret']))) {
                 return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
-            } else if($this->passwordHelper->hasPassword()) {
-                $password = $parameters['password'];
             }
 
             if($this->tokenHelper->tokenRequired() && (!isset($parameters['token']) || !$this->tokenHelper->verifyTokens($parameters['token']))) {
