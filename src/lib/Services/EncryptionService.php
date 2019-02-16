@@ -103,6 +103,12 @@ class EncryptionService {
     public function encryptKeychain(Keychain $keychain): Keychain {
         if(!$keychain->_isDecrypted()) return $keychain;
 
+        if($keychain->getScope() === $keychain::SCOPE_CLIENT) {
+            $keychain->_setDecrypted(false);
+
+            return $keychain;
+        }
+
         $encryption = $this->getEncryptionByType($keychain->getType());
         $keychain->_setDecrypted(false);
 
@@ -117,6 +123,12 @@ class EncryptionService {
      */
     public function decryptKeychain(Keychain $keychain): Keychain {
         if($keychain->_isDecrypted()) return $keychain;
+
+        if($keychain->getScope() === $keychain::SCOPE_CLIENT) {
+            $keychain->_setDecrypted(true);
+
+            return $keychain;
+        }
 
         $encryption = $this->getEncryptionByType($keychain->getType());
         $keychain->_setDecrypted(true);

@@ -29,13 +29,14 @@ class KeychainService extends AbstractService {
     protected $mapper;
 
     /**
+     * @var EncryptionService
+     */
+    protected $encryptionService;
+
+    /**
      * @var string
      */
     protected $class = Keychain::class;
-    /**
-     * @var EncryptionService
-     */
-    private $encryptionService;
 
     /**
      * KeychainService constructor.
@@ -70,7 +71,8 @@ class KeychainService extends AbstractService {
     }
 
     /**
-     * @param bool $decrypt
+     * @param string $scope
+     * @param bool   $decrypt
      *
      * @return Keychain[]
      * @throws \Exception
@@ -83,7 +85,8 @@ class KeychainService extends AbstractService {
     }
 
     /**
-     * @param bool $decrypt
+     * @param string $type
+     * @param bool   $decrypt
      *
      * @return Keychain|null
      * @throws \Exception
@@ -100,7 +103,7 @@ class KeychainService extends AbstractService {
     }
 
     /**
-     * @return array
+     * @return Keychain[]
      * @throws \Exception
      */
     public function getClientKeychainArray(): array {
@@ -108,7 +111,7 @@ class KeychainService extends AbstractService {
 
         $list = [];
         foreach($keychains as $keychain) {
-            $list[ $keychain->getType() ] = $keychain->getDataArray();
+            $list[ $keychain->getType() ] = $keychain->getData();
         }
 
         return $list;
@@ -116,11 +119,12 @@ class KeychainService extends AbstractService {
 
     /**
      * @param string $type
-     * @param array  $data
+     * @param string $data
+     * @param string $scope
      *
      * @return Keychain
      */
-    public function create(string $type, array $data, string $scope): Keychain {
+    public function create(string $type, string $data, string $scope): Keychain {
         $keychain = $this->createModel($type, $data, $scope);
 
         $this->hookManager->emit($this->class, 'postCreate', [$keychain]);
@@ -152,11 +156,12 @@ class KeychainService extends AbstractService {
 
     /**
      * @param string $type
-     * @param array  $data
+     * @param string $data
+     * @param string $scope
      *
      * @return Keychain
      */
-    protected function createModel(string $type, array $data, string $scope): Keychain {
+    protected function createModel(string $type, string $data, string $scope): Keychain {
         $keychain = new Keychain();
         $keychain->setUserId($this->userId);
         $keychain->setUuid($this->generateUuidV4());
@@ -166,7 +171,7 @@ class KeychainService extends AbstractService {
         $keychain->_setDecrypted(true);
 
         $keychain->setType($type);
-        $keychain->setDataArray($data);
+        $keychain->setData($data);
         $keychain->setScope($scope);
 
         return $keychain;

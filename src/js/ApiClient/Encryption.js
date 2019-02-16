@@ -9,8 +9,13 @@ export default class Encryption {
             tag     : ['label', 'color']
         };
         this._enabled = null;
-        this._keychain = {};
+        this._keys = {};
+        this._current = '';
         this.ready();
+    }
+
+    get enabled() {
+        return this._enabled;
     }
 
     // noinspection JSMethodCanBeStatic
@@ -25,17 +30,23 @@ export default class Encryption {
      * @param type
      * @returns {Promise<*>}
      */
-    async encryptObject(object, type) {
+    encryptObject(object, type) {
+        if(!this._enabled) throw new Error('Encryption not available');
         if(!this.fields.hasOwnProperty(type)) throw new Error('Invalid object type');
-        let fields = this.fields[type];
+
+        let fields = this.fields[type],
+            key    = this._getKey(this._current);
 
         for(let i = 0; i < fields.length; i++) {
             let field = fields[i],
                 data  = object[field];
 
-            if(data.length === 0) continue;
-            object[field] = await this.encrypt(data);
+            if(data === null || data.length === 0) continue;
+            object[field] = this.encryptString(data, key);
         }
+
+        object.cseType = 'CSEv1r1';
+        object.cseKey = this._current;
 
         return object;
     }
@@ -47,90 +58,197 @@ export default class Encryption {
      * @param type
      * @returns {Promise<*>}
      */
-    async decryptObject(object, type) {
+    decryptObject(object, type) {
+        if(!this._enabled) throw new Error('Encryption not available');
         if(!this.fields.hasOwnProperty(type)) throw new Error('Invalid object type');
-        let fields = this.fields[type];
+        if(object.cseType !== 'CSEv1r1') throw new Error('Unsupported encryption type');
+
+        let fields = this.fields[type],
+            key    = this._getKey(object.cseKey);
 
         for(let i = 0; i < fields.length; i++) {
             let field = fields[i],
                 data  = object[field];
 
-            if(data.length === 0) continue;
-            object[field] = await this.decrypt(data);
+            if(data === null || data.length === 0) continue;
+            object[field] = this.decryptString(data, key);
         }
 
         return object;
     }
 
     /**
-     * @param message
      *
+     * @param message
      * @param key
-     * @returns {Promise<string>}
+     * @returns {string}
      */
-    async encrypt(message, key) {
-        let nonce     = this._generateRandom(sodium.crypto_secretbox_NONCEBYTES),
-            encrypted = new Uint8Array([...nonce, ...sodium.crypto_secretbox_easy(message, nonce, key)]);
+    encryptString(message, key) {
+        return sodium.to_base64(this.encrypt(message, key));
+    }
 
-        return sodium.to_base64(encrypted);
+    /**
+     *
+     * @param message
+     * @param key
+     * @returns {Uint8Array}
+     */
+    encrypt(message, key) {
+        let nonce = this._generateRandom(sodium.crypto_secretbox_NONCEBYTES);
+
+        return new Uint8Array([...nonce, ...sodium.crypto_secretbox_easy(message, nonce, key)]);
+    }
+
+    /**
+     *
+     * @param encodedString
+     * @param key
+     * @returns {string}
+     */
+    decryptString(encodedString, key) {
+        let encryptedString = sodium.from_base64(encodedString);
+        return sodium.to_string(this.decrypt(encryptedString, key));
     }
 
     // noinspection JSMethodCanBeStatic
     /**
-     * @param encodedString
      *
+     * @param encrypted
      * @param key
-     * @returns {Promise<void>}
+     * @returns {Uint8Array}
      */
-    async decrypt(encodedString, key) {
-        let encryptedString = sodium.from_base64(encodedString);
-        if(encryptedString.length < sodium.crypto_secretbox_NONCEBYTES + sodium.crypto_secretbox_MACBYTES) throw new Error('Invalid encrypted text length');
+    decrypt(encrypted, key) {
+        if(encrypted.length < sodium.crypto_secretbox_NONCEBYTES + sodium.crypto_secretbox_MACBYTES) throw new Error('Invalid encrypted text length');
 
-        let nonce      = encryptedString.slice(0, sodium.crypto_secretbox_NONCEBYTES),
-            ciphertext = encryptedString.slice(sodium.crypto_secretbox_NONCEBYTES),
-            decrypted  = sodium.crypto_secretbox_open_easy(ciphertext, nonce, key);
+        let nonce      = encrypted.slice(0, sodium.crypto_secretbox_NONCEBYTES),
+            ciphertext = encrypted.slice(sodium.crypto_secretbox_NONCEBYTES);
 
-        return new TextDecoder().decode(decrypted);
+        return sodium.crypto_secretbox_open_easy(ciphertext, nonce, key);
     }
 
     /**
      *
      * @param challengeText
      * @param password
-     * @returns {Promise<void>}
+     * @returns {string}
      */
-    async solveChallenge(challengeText, password) {
+    solveChallenge(challengeText, password) {
         let challenge = sodium.from_base64(challengeText),
             salt      = challenge.slice(0, sodium.crypto_pwhash_SALTBYTES),
-            text      = sodium.to_base64(challenge.slice(sodium.crypto_pwhash_SALTBYTES)),
-            key       = await this._passwordToKey(password, salt);
+            text      = challenge.slice(sodium.crypto_pwhash_SALTBYTES),
+            key       = this._passwordToKey(password, salt);
 
-        return await this.decrypt(text, key);
+        return sodium.to_string(this.decrypt(text, key));
     }
 
     /**
      *
      * @param password
-     * @returns {Promise<void>}
+     * @returns {{challenge: *, secret: *}}
      */
-    async createChallenge(password) {
+    createChallenge(password) {
         if(password.length < 12) throw new Error('Password is too short');
         if(password.length > 128) throw new Error('Password is too long');
 
-        let challenge          = sodium.to_hex(this._generateRandom(256)),
-            salt               = this._generateRandom(sodium.crypto_pwhash_SALTBYTES),
-            key                = await this._passwordToKey(password, salt),
-            encryptedChallenge = await this.encrypt(challenge, key);
+        let challenge = sodium.to_hex(this._generateRandom(256)),
+            salt      = this._generateRandom(sodium.crypto_pwhash_SALTBYTES),
+            key       = this._passwordToKey(password, salt),
+            encrypted = this.encrypt(challenge, key);
 
         return {
-            challenge: sodium.to_base64(new Uint8Array([...salt, ...sodium.from_base64(encryptedChallenge)])),
+            challenge: sodium.to_base64(new Uint8Array([...salt, ...encrypted])),
             secret   : challenge
         };
     }
 
+    /**
+     *
+     * @param keychainText
+     * @param password
+     */
+    setKeychain(keychainText, password) {
+        let encrypted = sodium.from_base64(keychainText),
+            salt      = encrypted.slice(0, sodium.crypto_pwhash_SALTBYTES),
+            text      = encrypted.slice(sodium.crypto_pwhash_SALTBYTES),
+            key       = this._passwordToKey(password, salt),
+            keychain  = JSON.parse(sodium.to_string(this.decrypt(text, key)));
+
+        this._current = keychain.current;
+        for(let id in keychain.keys) {
+            if(keychain.keys.hasOwnProperty(id)) {
+                this._keys[id] = sodium.from_hex(keychain.keys[id]);
+            }
+        }
+
+        this._enabled = true;
+    }
+
+    /**
+     *
+     * @param password
+     * @returns {*}
+     */
+    getKeychain(password) {
+        if(this._enabled === false) {
+            this._keys = {};
+        }
+
+        this._current = this.getUuid();
+        this._keys[this._current] = this._generateRandom(sodium.crypto_secretbox_KEYBYTES);
+        this._enabled = true;
+
+        let keychain = {
+            keys   : {},
+            current: this._current
+        };
+
+        for(let id in this._keys) {
+            if(this._keys.hasOwnProperty(id)) {
+                keychain.keys[id] = sodium.to_hex(this._keys[id]);
+            }
+        }
+
+        let salt      = this._generateRandom(sodium.crypto_pwhash_SALTBYTES),
+            key       = this._passwordToKey(password, salt),
+            encrypted = this.encrypt(JSON.stringify(keychain), key);
+
+        return sodium.to_base64(new Uint8Array([...salt, ...encrypted]));
+    }
+
+    /**
+     *
+     * @returns {string}
+     */
+    getUuid() {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+
+    /**
+     *
+     * @param uuid
+     * @returns {Uint8Array}
+     * @private
+     */
+    _getKey(uuid) {
+        if(this._keys.hasOwnProperty(uuid)) {
+            return this._keys[uuid];
+        }
+
+        throw new Error('Unknown CSE key id');
+    }
+
     // noinspection JSMethodCanBeStatic
-    async _passwordToKey(password, salt) {
-        return await sodium.crypto_pwhash(
+    /**
+     *
+     * @param password
+     * @param salt
+     * @returns {Uint8Array}
+     * @private
+     */
+    _passwordToKey(password, salt) {
+        return sodium.crypto_pwhash(
             sodium.crypto_box_SEEDBYTES,
             password,
             salt,
@@ -174,7 +292,7 @@ export default class Encryption {
                 if(sodium.crypto_generichash_BYTES_MIN > bytes) bytes = sodium.crypto_generichash_BYTES_MIN;
             }
 
-            return sodium.to_hex(await sodium.crypto_generichash(bytes, sodium.from_string(value)));
+            return sodium.to_hex(sodium.crypto_generichash(bytes, sodium.from_string(value)));
         } else if(algorithm === 'Argon2') {
             return sodium.crypto_pwhash_str(value, sodium.crypto_pwhash_OPSLIMIT_MIN, sodium.crypto_pwhash_MEMLIMIT_MIN);
         }

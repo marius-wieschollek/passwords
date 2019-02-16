@@ -57,8 +57,8 @@ export default class SimpleApi {
             'session.open'     : 'api/1.0/session/open',
             'session.keepalive': 'api/1.0/session/keepalive',
             'session.close'    : 'api/1.0/session/close',
-            'keychain.show'    : 'api/1.0/keychain/show',
-            'keychain.update'  : 'api/1.0/keychain/update',
+            'keychain.get'     : 'api/1.0/keychain/get',
+            'keychain.set'     : 'api/1.0/keychain/set',
             'challenge.get'    : 'api/1.0/account/challenge/get',
             'challenge.set'    : 'api/1.0/account/challenge/set',
             'account.reset'    : 'api/1.0/account/reset',
@@ -607,6 +607,10 @@ export default class SimpleApi {
      * Account Management
      */
 
+    /**
+     *
+     * @returns {Promise}
+     */
     getAccountChallenge() {
         return this._createRequest('challenge.get');
     }
@@ -616,6 +620,22 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     setAccountChallenge(challenge, secret, oldSecret = null) {
+        return this._createRequest('challenge.set', {challenge, secret, oldSecret});
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    setKeychain(id, data) {
+        return this._createRequest('keychain.set', {id, data});
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    listKeychains() {
         return this._createRequest('challenge.set', {challenge, secret, oldSecret});
     }
 

@@ -18,8 +18,8 @@ $routes = [
     ['name' => 'session_api#keep_alive', 'url' => '/api/1.0/session/keepalive', 'verb' => 'GET'],
     ['name' => 'session_api#request_token', 'url' => '/api/1.0/token/{provider}/request', 'verb' => 'GET'],
 
-    ['name' => 'keychain_api#list', 'url' => '/api/1.0/keychain/list', 'verb' => 'GET'],
-    ['name' => 'keychain_api#update', 'url' => '/api/1.0/keychain/update', 'verb' => 'POST'],
+    ['name' => 'keychain_api#list', 'url' => '/api/1.0/keychain/get', 'verb' => 'GET'],
+    ['name' => 'keychain_api#update', 'url' => '/api/1.0/keychain/set', 'verb' => 'POST'],
 
     ['name' => 'account_api#reset', 'url' => '/api/1.0/account/reset', 'verb' => 'POST'],
     ['name' => 'account_api#get_challenge', 'url' => '/api/1.0/account/challenge/get', 'verb' => 'GET'],

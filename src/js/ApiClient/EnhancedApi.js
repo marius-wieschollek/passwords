@@ -44,13 +44,20 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {Promise}
      */
     async openSession(login) {
+        let password = null;
         if(login.hasOwnProperty('password')) {
-            login.secret = await this.config.encryption.solveChallenge(login.challenge, login.password);
+            login.secret = this.config.encryption.solveChallenge(login.challenge, login.password);
+            password = login.password;
             delete login.challenge;
             delete login.password;
         }
 
-        return this._createRequest('session.open', login);
+        let result = await this._createRequest('session.open', login);
+        if(password !== null && result.hasOwnProperty('keys') && result.keys.hasOwnProperty('CSEv1r1')) {
+            this.config.encryption.setKeychain(result.keys.CSEv1r1, password);
+        }
+
+        return result;
     }
 
 
@@ -71,9 +78,15 @@ export default class EnhancedApi extends SimpleApi {
             oldSecret = this.config.encryption.solveChallenge(oldChallenge.challenge, oldPassword);
         }
 
-        let challenge = await this.config.encryption.createChallenge(password);
+        let challenge = this.config.encryption.createChallenge(password);
 
-        return await super.setAccountChallenge(challenge.challenge, challenge.secret, oldSecret);
+        let result = await super.setAccountChallenge(challenge.challenge, challenge.secret, oldSecret);
+        if(result.success) {
+            let keychain = this.config.encryption.getKeychain(password);
+            await super.setKeychain('CSEv1r1', keychain);
+        }
+
+        return result;
     }
 
     /**
@@ -89,6 +102,7 @@ export default class EnhancedApi extends SimpleApi {
     async createPassword(data = {}) {
         let object = EnhancedApi._cloneObject(data);
 
+        debugger;
         try {
             object = EnhancedApi.flattenPassword(object);
             object = EnhancedApi.validatePassword(object);
@@ -99,7 +113,7 @@ export default class EnhancedApi extends SimpleApi {
         object.hash = await this.config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
-        if(config.encrypt) {
+        if(this.config.encryption.enabled) {
             this.config.encryption.encryptObject(object, 'password');
         }
 
@@ -126,6 +140,10 @@ export default class EnhancedApi extends SimpleApi {
 
         object.hash = await this.config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
+
+        if(this.config.encryption.enabled && (!data.hasOwnProperty('shared') || !data.shared)) {
+            this.config.encryption.encryptObject(object, 'password');
+        }
 
         return await super.updatePassword(object);
     }
@@ -189,6 +207,10 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
+        if(this.config.encryption.enabled) {
+            this.config.encryption.encryptObject(object, 'folder');
+        }
+
         return super.createFolder(object);
     }
 
@@ -208,6 +230,10 @@ export default class EnhancedApi extends SimpleApi {
             object = EnhancedApi.validateFolder(object);
         } catch(e) {
             return this._createRejectedPromise(e);
+        }
+
+        if(this.config.encryption.enabled) {
+            this.config.encryption.encryptObject(object, 'folder');
         }
 
         return super.updateFolder(object);
@@ -272,6 +298,10 @@ export default class EnhancedApi extends SimpleApi {
             return this._createRejectedPromise(e);
         }
 
+        if(this.config.encryption.enabled) {
+            this.config.encryption.encryptObject(object, 'tag');
+        }
+
         return super.createTag(object);
     }
 
@@ -291,6 +321,10 @@ export default class EnhancedApi extends SimpleApi {
             object = EnhancedApi.validateTag(object);
         } catch(e) {
             return this._createRejectedPromise(e);
+        }
+
+        if(this.config.encryption.enabled) {
+            this.config.encryption.encryptObject(object, 'tag');
         }
 
         return super.updateTag(object);
@@ -735,6 +769,10 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processPassword(password) {
+        if(password.cseType !== 'none') {
+            this.config.encryption.decryptObject(password, 'password');
+        }
+
         password.type = 'password';
         if(password.url) {
             let host    = SimpleApi.parseUrl(password.url, 'host'),
@@ -805,6 +843,10 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processFolder(folder) {
+        if(folder.cseType !== 'none') {
+            this.config.encryption.decryptObject(folder, 'tag');
+        }
+
         folder.type = 'folder';
         folder.icon = this._config.folderIcon;
         if(folder.folders) {
@@ -851,6 +893,10 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processTag(tag) {
+        if(tag.cseType !== 'none') {
+            this.config.encryption.decryptObject(tag, 'tag');
+        }
+
         tag.type = 'tag';
         if(tag.passwords) {
             tag.passwords = this._processPasswordList(tag.passwords);
@@ -1019,11 +1065,6 @@ export default class EnhancedApi extends SimpleApi {
                 length : 36,
                 default: '00000000-0000-0000-0000-000000000000'
             },
-            cseType     : {
-                type   : 'string',
-                length : 10,
-                default: 'none'
-            },
             edited      : {
                 type   : 'number',
                 default: 0
@@ -1067,11 +1108,6 @@ export default class EnhancedApi extends SimpleApi {
                 length : 36,
                 default: '00000000-0000-0000-0000-000000000000'
             },
-            cseType : {
-                type   : 'string',
-                length : 10,
-                default: 'none'
-            },
             edited  : {
                 type   : 'number',
                 default: 0
@@ -1110,11 +1146,6 @@ export default class EnhancedApi extends SimpleApi {
                 type    : 'string',
                 length  : 48,
                 required: true
-            },
-            cseType : {
-                type   : 'string',
-                length : 10,
-                default: 'none'
             },
             edited  : {
                 type   : 'number',

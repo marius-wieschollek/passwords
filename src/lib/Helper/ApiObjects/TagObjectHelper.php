@@ -115,6 +115,9 @@ class TagObjectHelper extends AbstractObjectHelper {
             'revision' => $tag->getRevision(),
             'label'    => $revision->getLabel(),
             'color'    => $revision->getColor(),
+            'cseKey'   => $revision->getCseKey(),
+            'cseType'  => $revision->getCseType(),
+            'sseType'  => $revision->getSseType(),
             'hidden'   => $revision->isHidden(),
             'trashed'  => $revision->isTrashed(),
             'favorite' => $revision->isFavorite()
@@ -141,6 +144,9 @@ class TagObjectHelper extends AbstractObjectHelper {
                 'edited'   => $revision->getEdited(),
                 'label'    => $revision->getLabel(),
                 'color'    => $revision->getColor(),
+                'cseKey'   => $revision->getCseKey(),
+                'cseType'  => $revision->getCseType(),
+                'sseType'  => $revision->getSseType(),
                 'hidden'   => $revision->isHidden(),
                 'trashed'  => $revision->isTrashed(),
                 'favorite' => $revision->isFavorite()

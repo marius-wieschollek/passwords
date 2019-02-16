@@ -125,8 +125,8 @@ class PageController extends Controller {
         Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
 
         if(!$this->environment->isImpersonating()) {
-            $session = ['id' => $this->session->getId(), 'authorized' => $this->session->isAuthorized()];
-            Util::addHeader('meta', ['name' => 'api-session', 'content' => json_encode($session)]);
+            //$session = ['id' => $this->session->getId(), 'authorized' => $this->session->isAuthorized()];
+            //Util::addHeader('meta', ['name' => 'api-session', 'content' => json_encode($session)]);
             $this->session->save();
         }
     }

@@ -121,7 +121,7 @@ class UserChallengeHelper {
         try {
             $key = $this->crypto->decrypt($encryptedKey, $this->makePassword($secret));
         } catch(\Exception $e) {
-            throw new ApiException('Secret invalid');
+            throw new ApiException('Invalid Password');
         }
 
         $this->sessionService->set('userKey', $key);
