@@ -225,7 +225,7 @@ class SseV1Encryption implements EncryptionInterface {
      * @throws Exception
      */
     protected function getUserKey(string $userId): string {
-        if($this->userId !== $userId && !$this->environment->getAppMode() !== EnvironmentService::MODE_GLOBAL) {
+        if($this->userId !== $userId && $this->environment->getAppMode() !== EnvironmentService::MODE_GLOBAL) {
             throw new Exception('User key requested with illegal user id: '.$userId);
         }
         $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
