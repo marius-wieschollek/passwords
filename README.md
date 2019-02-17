@@ -48,10 +48,14 @@ Passwords is available in english, german, french, dutch, czech and russian.
 #### Server Side Encryption
 Passwords offers a safe server side encryption using Nextclouds integrated encryption functionality.
 Each password is encrypted with it's own unique key.
-**Soon to come:** A master password will be available for additional security.
 
-#### Client Side Encryption
-**Soon to come:** Passwords supports a strong client side encryption for your passwords.
+#### Client Side Encryption (E2E)
+You can have your passwords encrypted in your browser.
+This will protect them from unauthorized access and even keep them safe if the server is hacked.
+
+#### Access Protection & Two-Factor-Authentication
+Passwords offers the option of a master password for additional safety. (In combination with client side encryption)
+The app also supports most 2FA authentication methods offered by Nextcloud.
 
 ## Apps
 There are no apps for the modern API right now. But there are some for the legacy API.
