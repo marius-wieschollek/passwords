@@ -164,7 +164,7 @@
                     <translate tag="input" type="button" id="danger-purge" value="Delete" @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
                 </section>
-                <section class="tests" v-if="nightly">
+                <section class="tests" v-if="false">
                     <translate tag="h1" say="Field tests"/>
 
                     <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
