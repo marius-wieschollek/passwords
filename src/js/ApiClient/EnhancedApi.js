@@ -768,7 +768,7 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processPassword(password) {
-        if(password.cseType !== 'none') {
+        if(password.hasOwnProperty('cseType') && password.cseType !== 'none') {
             this.config.encryption.decryptObject(password, 'password');
         }
 
@@ -842,7 +842,7 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processFolder(folder) {
-        if(folder.cseType !== 'none') {
+        if(folder.hasOwnProperty('cseType') && folder.cseType !== 'none') {
             this.config.encryption.decryptObject(folder, 'folder');
         }
 
@@ -892,7 +892,7 @@ export default class EnhancedApi extends SimpleApi {
      * @private
      */
     _processTag(tag) {
-        if(tag.cseType !== 'none') {
+        if(tag.hasOwnProperty('cseType') && tag.cseType !== 'none') {
             this.config.encryption.decryptObject(tag, 'tag');
         }
 

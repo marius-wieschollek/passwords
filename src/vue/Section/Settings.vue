@@ -238,7 +238,7 @@
                     .then((data) => {
                         EncryptionManager.install(data.password, data.save, data.encrypt)
                                          .then(() => {Messages.info('Encryption activated')})
-                                         .catch(() => {Messages.info('Activating encryption failed')});
+                                         .catch((e) => { console.log(e); Messages.info('Activating encryption failed')});
                     });
             },
             resetSettingsAction() {
