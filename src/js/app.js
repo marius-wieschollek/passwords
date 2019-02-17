@@ -18,7 +18,6 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 (function() {
     let isLoaded     = false,
         loadInterval = null,
-        isLoggedIn   = false,
         app          = null;
 
     function initApp() {
@@ -32,11 +31,10 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         );
 
         router.beforeEach((to, from, next) => {
-            if(!isLoggedIn && to.name !== 'Authorize') {
+            if(!API.isAuthorized && to.name !== 'Authorize') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});
-                isLoggedIn = true;
             }
             next();
         });

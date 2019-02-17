@@ -4,11 +4,38 @@ export default class EnhancedApi extends SimpleApi {
 
     /**
      *
-     * @param numeric
-     * @returns {*}
+     * @returns {boolean}
      */
-    static getClientVersion(numeric = false) {
-        return numeric ? 30:'0.3.0';
+    get isAuthorized() {
+        return this._isAuthorized;
+    }
+
+    // noinspection JSMethodCanBeStatic
+    /**
+     *
+     * @returns {string}
+     */
+    get versionString() {
+        return '0.5.0';
+    }
+
+    // noinspection JSMethodCanBeStatic
+    /**
+     *
+     * @returns {number}
+     */
+    get version() {
+        return 50;
+    }
+
+    /**
+     *
+     * @param props
+     */
+    constructor(props) {
+        super(props);
+
+        this._isAuthorized = false;
     }
 
     /**
@@ -57,6 +84,18 @@ export default class EnhancedApi extends SimpleApi {
             this.config.encryption.setKeychain(result.keys.CSEv1r1, password);
         }
 
+        this._isAuthorized = true;
+
+        return result;
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     */
+    async closeSession() {
+        let result = await super.closeSession();
+        this._isAuthorized = true;
         return result;
     }
 
