@@ -168,7 +168,7 @@
                     <translate tag="h1" say="Field tests"/>
 
                     <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
-                    <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
+                    <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
                     <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
 
                     <translate tag="label" for="setting-test-cse" say="Client Side Encryption"/>

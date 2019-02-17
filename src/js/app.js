@@ -7,6 +7,7 @@ import Messages from '@js/Classes/Messages';
 import Encryption from '@js/ApiClient/Encryption';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsManager from '@js/Manager/SettingsManager';
+import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 /**
  * Set global webpack path
@@ -62,6 +63,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         initApp();
         SearchManager.init();
         initEvents();
+        EncryptionTestHelper.initTests();
     }
 
     function initEvents() {
