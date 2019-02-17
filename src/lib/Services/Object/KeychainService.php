@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services\Object;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\KeychainMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -41,18 +42,20 @@ class KeychainService extends AbstractService {
     /**
      * KeychainService constructor.
      *
-     * @param HookManager        $hookManager
      * @param KeychainMapper     $mapper
+     * @param UuidHelper         $uuidHelper
+     * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      * @param EncryptionService  $encryptionService
      */
     public function __construct(
-        HookManager $hookManager,
         KeychainMapper $mapper,
+        UuidHelper $uuidHelper,
+        HookManager $hookManager,
         EnvironmentService $environment,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($hookManager, $environment);
+        parent::__construct($uuidHelper, $hookManager, $environment);
         $this->mapper            = $mapper;
         $this->encryptionService = $encryptionService;
     }
@@ -164,7 +167,7 @@ class KeychainService extends AbstractService {
     protected function createModel(string $type, string $data, string $scope): Keychain {
         $keychain = new Keychain();
         $keychain->setUserId($this->userId);
-        $keychain->setUuid($this->generateUuidV4());
+        $keychain->setUuid($this->uuidHelper->generateUuid());
         $keychain->setCreated(time());
         $keychain->setUpdated(time());
         $keychain->setDeleted(false);

@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services\Object;
 use OCA\Passwords\Db\AbstractRevisionMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -26,12 +27,12 @@ abstract class AbstractRevisionService extends AbstractService {
     /**
      * @var ValidationService
      */
-    protected $validationService;
+    protected $validation;
 
     /**
      * @var EncryptionService
      */
-    protected $encryptionService;
+    protected $encryption;
 
     /**
      * @var AbstractRevisionMapper
@@ -41,24 +42,26 @@ abstract class AbstractRevisionService extends AbstractService {
     /**
      * AbstractRevisionService constructor.
      *
+     * @param UuidHelper             $uuidHelper
      * @param HookManager            $hookManager
+     * @param EnvironmentService     $environment
      * @param AbstractRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
      * @param EncryptionService      $encryptionService
-     * @param EnvironmentService     $environment
      */
     public function __construct(
+        UuidHelper $uuidHelper,
         HookManager $hookManager,
         EnvironmentService $environment,
         AbstractRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        $this->mapper            = $revisionMapper;
-        $this->validationService = $validationService;
-        $this->encryptionService = $encryptionService;
+        $this->mapper     = $revisionMapper;
+        $this->validation = $validationService;
+        $this->encryption = $encryptionService;
 
-        parent::__construct($hookManager, $environment);
+        parent::__construct($uuidHelper, $hookManager, $environment);
     }
 
     /**
@@ -73,7 +76,7 @@ abstract class AbstractRevisionService extends AbstractService {
         if(!$decrypt) return $revisions;
 
         foreach($revisions as $revision) {
-            $this->encryptionService->decrypt($revision);
+            $this->encryption->decrypt($revision);
         }
 
         return $revisions;
@@ -93,7 +96,7 @@ abstract class AbstractRevisionService extends AbstractService {
         /** @var RevisionInterface $revision */
         $revision = $this->mapper->findByUuid($uuid);
 
-        return $decrypt ? $this->encryptionService->decrypt($revision):$revision;
+        return $decrypt ? $this->encryption->decrypt($revision):$revision;
     }
 
     /**
@@ -111,7 +114,7 @@ abstract class AbstractRevisionService extends AbstractService {
         if(!$decrypt) return $revisions;
 
         foreach($revisions as $revision) {
-            $this->encryptionService->decrypt($revision);
+            $this->encryption->decrypt($revision);
         }
 
         return $revisions;
@@ -128,7 +131,7 @@ abstract class AbstractRevisionService extends AbstractService {
         /** @var RevisionInterface $revision */
         $revision = $this->mapper->findCurrentRevisionByModel($modelUuid);
 
-        return $decrypt ? $this->encryptionService->decrypt($revision):$revision;
+        return $decrypt ? $this->encryption->decrypt($revision):$revision;
     }
 
     /**
@@ -141,7 +144,7 @@ abstract class AbstractRevisionService extends AbstractService {
         if(get_class($revision) !== $this->class) throw new \Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preSave', [$revision]);
 
-        if($revision->_isDecrypted()) $this->encryptionService->encrypt($revision);
+        if($revision->_isDecrypted()) $this->encryption->encrypt($revision);
 
         if(empty($revision->getId())) {
             $saved = $this->mapper->insert($revision);
@@ -165,7 +168,7 @@ abstract class AbstractRevisionService extends AbstractService {
         /** @var RevisionInterface $clone */
         $clone = parent::cloneModel($original, $overwrites);
         $clone->_setDecrypted($original->_isDecrypted());
-        $clone->setUuid($this->generateUuidV4());
+        $clone->setUuid($this->uuidHelper->generateUuid());
 
         return $clone;
     }

@@ -11,6 +11,7 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -30,6 +31,7 @@ class FolderRevisionService extends AbstractRevisionService {
     /**
      * FolderRevisionService constructor.
      *
+     * @param UuidHelper           $uuidHelper
      * @param HookManager          $hookManager
      * @param EnvironmentService   $environment
      * @param FolderRevisionMapper $revisionMapper
@@ -37,13 +39,14 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param EncryptionService    $encryptionService
      */
     public function __construct(
+        UuidHelper $uuidHelper,
         HookManager $hookManager,
         EnvironmentService $environment,
         FolderRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
     }
 
     /**
@@ -125,7 +128,7 @@ class FolderRevisionService extends AbstractRevisionService {
     ): FolderRevision {
         $revision = $this->createModel($folder, $label, $parent, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
-        $revision = $this->validationService->validateFolder($revision);
+        $revision = $this->validation->validateFolder($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;
@@ -196,7 +199,7 @@ class FolderRevisionService extends AbstractRevisionService {
     ): FolderRevision {
         $revision = new FolderRevision();
         $revision->setUserId($this->userId);
-        $revision->setUuid($this->generateUuidV4());
+        $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setDeleted(false);
         $revision->setCreated(time());
         $revision->setUpdated(time());
@@ -211,7 +214,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);
         $revision->setEdited($edited);
-        $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
 
         return $revision;
     }

@@ -22,6 +22,7 @@ use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -44,14 +45,19 @@ class RestoreBackupHelper {
     protected $tagMapper;
 
     /**
-     * @var FolderMapper
+     * @var UuidHelper
      */
-    protected $folderMapper;
+    protected $uuidHelper;
 
     /**
      * @var ShareMapper
      */
     protected $shareMapper;
+
+    /**
+     * @var FolderMapper
+     */
+    protected $folderMapper;
 
     /**
      * @var PasswordMapper
@@ -87,6 +93,7 @@ class RestoreBackupHelper {
      * CreateBackupHelper constructor.
      *
      * @param TagMapper                 $tagMapper
+     * @param UuidHelper                $uuidHelper
      * @param ShareMapper               $shareMapper
      * @param FolderMapper              $folderMapper
      * @param ConfigurationService      $config
@@ -99,6 +106,7 @@ class RestoreBackupHelper {
      */
     public function __construct(
         TagMapper $tagMapper,
+        UuidHelper $uuidHelper,
         ShareMapper $shareMapper,
         FolderMapper $folderMapper,
         ConfigurationService $config,
@@ -111,6 +119,7 @@ class RestoreBackupHelper {
     ) {
         $this->config                    = $config;
         $this->tagMapper                 = $tagMapper;
+        $this->uuidHelper                = $uuidHelper;
         $this->shareMapper               = $shareMapper;
         $this->folderMapper              = $folderMapper;
         $this->passwordMapper            = $passwordMapper;
@@ -160,7 +169,7 @@ class RestoreBackupHelper {
 
         if($data['version'] === 101 || $data['version'] === 102) {
             foreach(['passwords', 'folders', 'tags'] as $type) {
-                foreach($data[$type] as &$object) {
+                foreach($data[ $type ] as &$object) {
                     foreach($object['revisions'] as &$revision) {
                         if(isset($revision['client'])) unset($revision['client']);
                         if(isset($revision['favourite'])) unset($revision['favourite']);
@@ -169,7 +178,12 @@ class RestoreBackupHelper {
                 }
             }
 
+            foreach($data['passwordTagRelations'] as &$object) {
+                $object['uuid'] = $this->uuidHelper->generateUuid();
+            }
+
             $data['version'] = 103;
+
             return $data;
         }
 

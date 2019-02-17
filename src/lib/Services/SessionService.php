@@ -11,6 +11,7 @@ use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\IRequest;
 use OCP\ISession;
 
@@ -25,6 +26,7 @@ class SessionService {
      * @var LoggingService
      */
     protected $logger;
+
     /**
      * @var IRequest
      */
@@ -34,6 +36,11 @@ class SessionService {
      * @var SessionMapper
      */
     protected $mapper;
+
+    /**
+     * @var UuidHelper
+     */
+    protected $uuidHelper;
 
     /**
      * @var SimpleEncryption
@@ -78,18 +85,20 @@ class SessionService {
     /**
      * SessionService constructor.
      *
-     * @param SessionMapper      $mapper
      * @param IRequest           $request
      * @param ISession           $session
+     * @param SessionMapper      $mapper
+     * @param UuidHelper         $uuidHelper
      * @param LoggingService     $logger
      * @param EnvironmentService $environment
      * @param SimpleEncryption   $encryption
      * @param UserSettingsHelper $userSettings
      */
     public function __construct(
-        SessionMapper $mapper,
         IRequest $request,
         ISession $session,
+        SessionMapper $mapper,
+        UuidHelper $uuidHelper,
         LoggingService $logger,
         EnvironmentService $environment,
         SimpleEncryption $encryption,
@@ -102,20 +111,7 @@ class SessionService {
         $this->userSession  = $session;
         $this->encryption   = $encryption;
         $this->userSettings = $userSettings;
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    public function generateUuidV4(): string {
-        return implode('-', [
-            bin2hex(random_bytes(4)),
-            bin2hex(random_bytes(2)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x0F) | 0x40)).bin2hex(random_bytes(1)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
-            bin2hex(random_bytes(6))
-        ]);
+        $this->uuidHelper   = $uuidHelper;
     }
 
     /**
@@ -341,7 +337,7 @@ class SessionService {
     protected function create(): Session {
         $model = new Session();
         $model->setUserId($this->environment->getUserId());
-        $model->setUuid($this->generateUuidV4());
+        $model->setUuid($this->uuidHelper->generateUuid());
         $model->setAuthorized(false);
         $model->setDeleted(false);
         $model->setCreated(time());

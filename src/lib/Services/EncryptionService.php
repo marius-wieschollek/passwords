@@ -21,7 +21,7 @@ use OCP\AppFramework\IAppContainer;
 class EncryptionService {
 
     const DEFAULT_CSE_ENCRYPTION   = 'none';
-    const DEFAULT_SSE_ENCRYPTION   = 'SSEv1r1';
+    const DEFAULT_SSE_ENCRYPTION   = 'SSEv1r2';
     const DEFAULT_SHARE_ENCRYPTION = 'SSSEv1r1';
     const CSE_ENCRYPTION_NONE      = 'none';
     const CSE_ENCRYPTION_V1R1      = 'CSEv1r1';
@@ -73,8 +73,9 @@ class EncryptionService {
     public function encrypt(RevisionInterface $object): RevisionInterface {
         if(!$object->_isDecrypted()) return $object;
 
-        $encryption = $this->getEncryptionByType($object->getSseType());
         $object->_setDecrypted(false);
+        if($object->getSseType() === self::SSE_ENCRYPTION_NONE) return $object;
+        $encryption = $this->getEncryptionByType($object->getSseType());
 
         return $encryption->encryptObject($object);
     }
@@ -88,8 +89,9 @@ class EncryptionService {
     public function decrypt(RevisionInterface $object): RevisionInterface {
         if($object->_isDecrypted()) return $object;
 
-        $encryption = $this->getEncryptionByType($object->getSseType());
         $object->_setDecrypted(true);
+        if($object->getSseType() === self::SSE_ENCRYPTION_NONE) return $object;
+        $encryption = $this->getEncryptionByType($object->getSseType());
 
         return $encryption->decryptObject($object);
     }
@@ -103,14 +105,10 @@ class EncryptionService {
     public function encryptKeychain(Keychain $keychain): Keychain {
         if(!$keychain->_isDecrypted()) return $keychain;
 
-        if($keychain->getScope() === $keychain::SCOPE_CLIENT) {
-            $keychain->_setDecrypted(false);
-
-            return $keychain;
-        }
+        $keychain->_setDecrypted(false);
+        if($keychain->getScope() === $keychain::SCOPE_CLIENT) return $keychain;
 
         $encryption = $this->getEncryptionByType($keychain->getType());
-        $keychain->_setDecrypted(false);
 
         return $encryption->encryptKeychain($keychain);
     }
@@ -124,15 +122,24 @@ class EncryptionService {
     public function decryptKeychain(Keychain $keychain): Keychain {
         if($keychain->_isDecrypted()) return $keychain;
 
-        if($keychain->getScope() === $keychain::SCOPE_CLIENT) {
-            $keychain->_setDecrypted(true);
-
-            return $keychain;
-        }
+        $keychain->_setDecrypted(true);
+        if($keychain->getScope() === $keychain::SCOPE_CLIENT) return $keychain;
 
         $encryption = $this->getEncryptionByType($keychain->getType());
-        $keychain->_setDecrypted(true);
 
         return $encryption->decryptKeychain($keychain);
+    }
+
+    /**
+     * @param string|null $cseType
+     *
+     * @return string
+     */
+    public function getDefaultEncryption(string $cseType = null): string {
+        if($cseType === self::CSE_ENCRYPTION_NONE || $cseType = null) {
+            return self::DEFAULT_SSE_ENCRYPTION;
+        }
+
+        return self::SSE_ENCRYPTION_NONE;
     }
 }

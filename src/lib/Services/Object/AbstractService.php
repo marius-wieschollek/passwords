@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 
@@ -40,39 +41,25 @@ abstract class AbstractService {
     protected $mapper;
 
     /**
+     * @var UuidHelper
+     */
+    protected $uuidHelper;
+
+    /**
      * AbstractService constructor.
      *
+     * @param UuidHelper         $uuidHelper
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
     public function __construct(
+        UuidHelper $uuidHelper,
         HookManager $hookManager,
         EnvironmentService $environment
     ) {
         $this->userId      = $environment->getUserId();
         $this->hookManager = $hookManager;
-    }
-
-    /**
-     * @return string
-     */
-    public function generateUuidV4(): string {
-        try {
-            return implode('-', [
-                bin2hex(random_bytes(4)),
-                bin2hex(random_bytes(2)),
-                bin2hex(chr((ord(random_bytes(1)) & 0x0F) | 0x40)).bin2hex(random_bytes(1)),
-                bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
-                bin2hex(random_bytes(6))
-            ]);
-        } catch(\Exception $e) {
-            $string = uniqid().uniqid().uniqid();
-            return substr($string, 0, 8).'-'.
-                substr($string, 8, 4).'-'.
-                substr($string, 12, 4).'-'.
-                substr($string, 16, 4).'-'.
-                substr($string, 20, 12);
-        }
+        $this->uuidHelper  = $uuidHelper;
     }
 
     /**

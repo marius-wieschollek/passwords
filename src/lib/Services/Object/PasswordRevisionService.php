@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -34,6 +35,7 @@ class PasswordRevisionService extends AbstractRevisionService {
     /**
      * PasswordRevisionService constructor.
      *
+     * @param UuidHelper             $uuidHelper
      * @param HookManager            $hookManager
      * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
@@ -41,13 +43,14 @@ class PasswordRevisionService extends AbstractRevisionService {
      * @param EncryptionService      $encryptionService
      */
     public function __construct(
+        UuidHelper $uuidHelper,
         HookManager $hookManager,
         EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
     }
 
     /**
@@ -94,7 +97,7 @@ class PasswordRevisionService extends AbstractRevisionService {
             $model, $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $trashed, $favorite
         );
 
-        $revision = $this->validationService->validatePassword($revision);
+        $revision = $this->validation->validatePassword($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;
@@ -139,7 +142,7 @@ class PasswordRevisionService extends AbstractRevisionService {
 
         $revision = new PasswordRevision();
         $revision->setUserId($this->userId);
-        $revision->setUuid($this->generateUuidV4());
+        $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setCreated(time());
         $revision->setUpdated(time());
         $revision->setStatus(0);
@@ -161,7 +164,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setFolder($folder);
         $revision->setFavorite($favorite);
         $revision->setEdited($edited);
-        $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
 
         return $revision;
     }
