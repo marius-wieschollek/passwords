@@ -136,7 +136,6 @@ class ApiTokenHelper {
 
         $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, $type);
         $deviceToken->setScope(['filesystem' => $this->config->isAppEnabled('encryption')]);
-        $deviceToken->setExpires(time() + 7200);
         $this->tokenProvider->updateToken($deviceToken);
 
         return [$token, $deviceToken];
@@ -191,7 +190,7 @@ class ApiTokenHelper {
             try {
                 $webToken = $this->tokenProvider->getTokenById($tokenId);
 
-                if($webToken->getLastCheck() > time() - 7200 && $webToken->getId() == $tokenId && $webToken->getUID() === $this->userId) {
+                if($webToken->getId() == $tokenId && $webToken->getUID() === $this->userId) {
                     return [$token, $webToken->getLoginName()];
                 } else {
                     $this->destroyToken($tokenId);
