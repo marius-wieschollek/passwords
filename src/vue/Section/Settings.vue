@@ -236,7 +236,9 @@
                     'Master Password',
                     'Please choose a master password for your passwords.')
                     .then((data) => {
-                        EncryptionManager.install(data.password, data.save, data.encrypt);
+                        EncryptionManager.install(data.password, data.save, data.encrypt)
+                                         .then(() => {Messages.info('Encryption activated')})
+                                         .catch(() => {Messages.info('Activating encryption failed')});
                     });
             },
             resetSettingsAction() {

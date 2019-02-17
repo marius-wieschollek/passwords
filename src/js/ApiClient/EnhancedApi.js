@@ -102,7 +102,6 @@ export default class EnhancedApi extends SimpleApi {
     async createPassword(data = {}) {
         let object = EnhancedApi._cloneObject(data);
 
-        debugger;
         try {
             object = EnhancedApi.flattenPassword(object);
             object = EnhancedApi.validatePassword(object);
@@ -844,7 +843,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     _processFolder(folder) {
         if(folder.cseType !== 'none') {
-            this.config.encryption.decryptObject(folder, 'tag');
+            this.config.encryption.decryptObject(folder, 'folder');
         }
 
         folder.type = 'folder';
