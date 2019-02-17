@@ -202,6 +202,7 @@ class SynchronizeShares extends AbstractCronJob {
                 $model->getUuid(),
                 $sourceRevision->getPassword(),
                 $sourceRevision->getUsername(),
+                '',
                 $sourceRevision->getCseType(),
                 $sourceRevision->getHash(),
                 $sourceRevision->getLabel(),
@@ -406,6 +407,7 @@ class SynchronizeShares extends AbstractCronJob {
         $newRevision = $this->passwordRevisionService->clone($currentRevision, [
             'password'     => $sourceRevision->getPassword(),
             'username'     => $sourceRevision->getUsername(),
+            'cseKey'       => $sourceRevision->getCseKey(),
             'cseType'      => $sourceRevision->getCseType(),
             'hash'         => $sourceRevision->getHash(),
             'label'        => $sourceRevision->getLabel(),
