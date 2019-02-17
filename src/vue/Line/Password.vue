@@ -168,12 +168,6 @@
             },
             detailsAction(section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
-                if(!this.password.hasOwnProperty('revisions')) {
-                    API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {
-                            this.$parent.detail = {type: 'password', element: p};
-                        });
-                }
             },
             editAction() {
                 PasswordManager

@@ -66,11 +66,11 @@
         },
 
         created() {
-            Events.on('password.changed', this.refreshView);
+            Events.on('password.changed', this.processEvent);
         },
 
         beforeDestroy() {
-            Events.off('password.changed', this.refreshView);
+            Events.off('password.changed', this.processEvent);
         },
 
         computed: {
@@ -93,7 +93,7 @@
                 $event.stopPropagation();
                 this.object.favorite = !this.object.favorite;
                 PasswordManager.updatePassword(this.object)
-                    .catch(() => { this.object.favorite = !this.object.favorite; });
+                               .catch(() => { this.object.favorite = !this.object.favorite; });
             },
             closeDetails() {
                 this.$parent.detail = {
@@ -101,17 +101,21 @@
                     element: null
                 };
             },
-            refreshView(event) {
-                if(event.object.id === this.object.id) {
-                    API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {this.object = p;});
-                }
+            refreshView() {
+                API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
+                   .then(
+                       (p) => { if(this.password.id === p.id) this.object = p; }
+                   );
+            },
+            processEvent(event) {
+                if(event.object.id === this.object.id) this.refreshView();
             }
         },
 
         watch: {
             password(value) {
                 this.object = value;
+                if(!value.hasOwnProperty('revisions')) this.refreshView();
             }
         }
     };

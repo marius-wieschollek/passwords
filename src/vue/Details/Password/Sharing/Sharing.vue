@@ -38,12 +38,14 @@
         },
 
         data() {
+            let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[];
+
             return {
                 search      : '',
                 matches     : [],
                 nameMap     : [],
                 idMap       : [],
-                shares      : this.password.shares,
+                shares,
                 placeholder : Localisation.translate('Search user'),
                 autocomplete: SettingsManager.get('server.sharing.autocomplete'),
                 interval    : null,
@@ -127,7 +129,8 @@
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                    .then((d) => { this.shares = d.shares;});
+                    .then((d) => {this.shares = d.shares;})
+                    .catch(console.error);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -155,7 +158,8 @@
             },
             refreshShares() {
                 API.runSharingCron()
-                    .then((d) => { if(d.success) this.reloadShares();});
+                    .then((d) => { if(d.success) this.reloadShares();})
+                   .catch(console.error);
 
                 this.startPolling();
                 this.$forceUpdate();
@@ -178,7 +182,7 @@
 
         watch: {
             password(value) {
-                this.shares = value.shares;
+                this.shares = value.hasOwnProperty('shares') ? value.shares:[];
                 this.$forceUpdate();
             },
             search() {
