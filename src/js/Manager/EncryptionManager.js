@@ -1,5 +1,6 @@
 import API from "@js/Helper/api";
 import Utility from "@/js/Classes/Utility";
+import Localisation from "@/js/Classes/Localisation";
 
 class EncryptionManager {
 
@@ -31,6 +32,14 @@ class EncryptionManager {
                     this._deleteObjects(folderMap, 'folder')
                 ]
             );
+        }
+
+        if(save) {
+            let username = document.querySelector('meta[name=api-user]').getAttribute('content'),
+                label    = Localisation.translate('Passwords App Master Password'),
+                url      = location.href;
+
+            API.createPassword({username, password, label, url});
         }
     }
 
