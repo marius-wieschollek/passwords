@@ -185,6 +185,7 @@ export class ImportManager {
     async _importTags(tags, mode = 0) {
         this._countProgress('Reading tags');
         let db    = await API.listTags(),
+            queue = [],
             idMap = {};
 
         for(let k in db) {
@@ -194,8 +195,12 @@ export class ImportManager {
 
         this._countProgress('Importing tags');
         for(let i = 0; i < tags.length; i++) {
-            let tag = tags[i];
-            await this._importTag(mode, tag, db, idMap);
+            queue.push(this._importTag(mode, tags[i], db, idMap));
+
+            if(queue.length > 10) {
+                await Promise.all(queue);
+                queue = [];
+            }
         }
 
         return idMap;
@@ -357,6 +362,7 @@ export class ImportManager {
     async _importPasswords(passwords, mode = 0, skipShared = true, tagMapping = {}, folderMapping = {}) {
         this._countProgress('Reading passwords');
         let db    = await API.listPasswords(),
+            queue = [],
             idMap = {};
 
         for(let k in db) {
@@ -366,26 +372,12 @@ export class ImportManager {
 
         this._countProgress('Importing passwords');
         for(let i = 0; i < passwords.length; i++) {
-            let password = passwords[i];
+            queue.push(this._importPassword(mode, passwords[i], db, skipShared, idMap, folderMapping, tagMapping));
 
-            if(password.tags) {
-                let tags = [];
-                for(let j = 0; j < password.tags.length; j++) {
-                    let id = password.tags[j];
-
-                    if(tagMapping.hasOwnProperty(id)) {
-                        tags.push(tagMapping[id]);
-                    }
-                }
-                password.tags = tags;
+            if(queue.length > 10) {
+                await Promise.all(queue);
+                queue = [];
             }
-
-            if(folderMapping.hasOwnProperty(password.folder)) {
-                password.folder = folderMapping[password.folder];
-            } else {
-                password.folder = this.defaultFolder;
-            }
-            await this._importPassword(mode, password, db, skipShared, idMap);
         }
 
         return idMap;
@@ -398,10 +390,31 @@ export class ImportManager {
      * @param db
      * @param skipShared
      * @param idMap
+     * @param folderMapping
+     * @param tagMapping
      * @returns {Promise<void>}
      * @private
      */
-    async _importPassword(mode, password, db, skipShared, idMap) {
+    async _importPassword(mode, password, db, skipShared, idMap, folderMapping, tagMapping) {
+
+        if(password.tags) {
+            let tags = [];
+            for(let j = 0; j < password.tags.length; j++) {
+                let id = password.tags[j];
+
+                if(tagMapping.hasOwnProperty(id)) {
+                    tags.push(tagMapping[id]);
+                }
+            }
+            password.tags = tags;
+        }
+
+        if(folderMapping.hasOwnProperty(password.folder)) {
+            password.folder = folderMapping[password.folder];
+        } else {
+            password.folder = this.defaultFolder;
+        }
+
         try {
             if(mode !== 4 && password.hasOwnProperty('id') && db.hasOwnProperty(password.id)) {
                 let current = db[password.id];
