@@ -188,7 +188,6 @@
 
         #app-navigation {
             transform  : translateX(-100%);
-            z-index    : 1001;
             transition : transform ease-in-out 0.25s 0.25s;
         }
     }
@@ -321,7 +320,6 @@
         }
     }
 
-
     body#body-user {
         &.pw-authorize {
             #app-content {
@@ -338,6 +336,11 @@
                 opacity          : 1;
                 transition       : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
             }
+
+            #app-navigation {
+                z-index    : 1001;
+            }
+
             &.pw-authorized {
                 #app-content {
                     margin-left : 0;
