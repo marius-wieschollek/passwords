@@ -197,11 +197,13 @@ export class ImportManager {
         for(let i = 0; i < tags.length; i++) {
             queue.push(this._importTag(mode, tags[i], db, idMap));
 
-            if(queue.length > 10) {
+            if(queue.length > 15) {
                 await Promise.all(queue);
                 queue = [];
             }
         }
+
+        if(queue.length !== 0) await Promise.all(queue);
 
         return idMap;
     }
@@ -249,6 +251,7 @@ export class ImportManager {
     async _importFolders(folderDb, mode = 0) {
         this._countProgress('Reading folders');
         let db    = await API.listFolders(),
+            queue = [],
             idMap = {};
 
 
@@ -268,14 +271,15 @@ export class ImportManager {
                 continue;
             }
 
-            if(!idMap.hasOwnProperty(folder.parent) || folder.parent === folder.id) {
-                folder.parent = this.defaultFolder;
-            } else {
-                folder.parent = idMap[folder.parent];
+            if(!idMap.hasOwnProperty(folder.parent) || queue.length > 15) {
+                await Promise.all(queue);
+                queue = [];
             }
 
-            await this._importFolder(mode, folder, db, idMap);
+            queue.push(this._importFolder(mode, folder, db, idMap));
         }
+
+        if(queue.length !== 0) await Promise.all(queue);
 
         return idMap;
     }
@@ -290,6 +294,13 @@ export class ImportManager {
      * @private
      */
     async _importFolder(mode, folder, db, idMap) {
+
+        if(!idMap.hasOwnProperty(folder.parent) || folder.parent === folder.id) {
+            folder.parent = this.defaultFolder;
+        } else {
+            folder.parent = idMap[folder.parent];
+        }
+
         try {
             if(mode !== 4 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
                 if(mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
@@ -374,11 +385,13 @@ export class ImportManager {
         for(let i = 0; i < passwords.length; i++) {
             queue.push(this._importPassword(mode, passwords[i], db, skipShared, idMap, folderMapping, tagMapping));
 
-            if(queue.length > 10) {
+            if(queue.length > 15) {
                 await Promise.all(queue);
                 queue = [];
             }
         }
+
+        if(queue.length !== 0) await Promise.all(queue);
 
         return idMap;
     }
