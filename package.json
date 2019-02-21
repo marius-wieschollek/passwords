@@ -22,7 +22,7 @@
         "handbook": "codeceptjs run --steps",
         "selenium": "docker run --net=host selenium/standalone-firefox",
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
-        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/localhost.pem -key-file docker/volumes/nginx/localhost.key localhost"
+        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost"
     },
     "dependencies": {},
     "devDependencies": {
@@ -38,9 +38,9 @@
         "file-loader": "^2.0.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
-        "libsodium": "^0.7.3",
-        "libsodium-wrappers": "^0.7.3",
-        "marked": "^0.6.0",
+        "libsodium": "^0.7.4",
+        "libsodium-wrappers": "^0.7.4",
+        "marked": "^0.6.1",
         "node-sass": "^4.11.0",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
         "progress-bar-webpack-plugin": "^1.12.1",
@@ -57,7 +57,7 @@
         "vue-router": "^3.0.2",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.6",
-        "webdriverio": "^5.4.17",
+        "webdriverio": "^5.6.0",
         "webpack": "^3.12.0",
         "xlsx": "^0.14.1"
     },
