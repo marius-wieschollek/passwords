@@ -58,12 +58,15 @@ class EncryptionManager {
             if(!passwords.hasOwnProperty(id)) continue;
             let password = passwords[id];
 
-            queue.push(
-                this._encryptPassword(password, folderMap, tagMap)
-            );
+            queue.push(this._encryptPassword(password, folderMap, tagMap));
+
+            if(queue.length > 10) {
+                await Promise.all(queue);
+                queue = [];
+            }
         }
 
-        await Promise.all(queue);
+        if(queue.length !== null) await Promise.all(queue);
     }
 
     /**
@@ -117,12 +120,15 @@ class EncryptionManager {
         for(let id in tags) {
             if(!tags.hasOwnProperty(id)) continue;
 
-            queue.push(
-                this._encryptTag(tags[id], idMap)
-            );
+            queue.push(this._encryptTag(tags[id], idMap));
+
+            if(queue.length > 10) {
+                await Promise.all(queue);
+                queue = [];
+            }
         }
 
-        await Promise.all(queue);
+        if(queue.length !== null) await Promise.all(queue);
 
         return idMap;
     }
@@ -153,16 +159,25 @@ class EncryptionManager {
      * @private
      */
     async _encryptFolders(idMap) {
-        let folders = await API.listFolders();
+        let folders = await API.listFolders(),
+        queue = [];
 
         idMap['00000000-0000-0000-0000-000000000000'] = '00000000-0000-0000-0000-000000000000';
         folders = this._sortFoldersForUpgrade(folders);
 
         for(let id in folders) {
             if(!folders.hasOwnProperty(id)) continue;
+            let folder = folders[id];
 
-            await this._encryptFolder(folders[id], idMap);
+            if(!idMap.hasOwnProperty(folder.parent) || queue.length > 10) {
+                await Promise.all(queue);
+                queue = [];
+            }
+
+            queue.push(this._encryptFolder(folder, idMap));
         }
+
+        if(queue.length !== null) await Promise.all(queue);
 
         return idMap;
     }
