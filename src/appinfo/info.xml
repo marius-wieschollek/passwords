@@ -12,7 +12,7 @@ You can also share passwords with other Nextcloud users.
 **Features**
  * Intuitive and modern user interface
  * Password security monitor
- * Server side encryption
+ * End-to-End encryption
  * Folders &amp; Tags
  * Password sharing
  * Password API
@@ -30,7 +30,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
 **Funktionsumfang**
  * Intuitive und moderne Weboberfläche
  * Passwortsicherheitsüberwachung
- * Serverseitige Verschlüsselung
+ * Ende-zu-Ende Verschlüsselung
  * Ordner &amp; Tags
  * Teilen-Funktion
  * Passwort API

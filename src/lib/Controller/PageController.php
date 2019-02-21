@@ -32,11 +32,6 @@ class PageController extends Controller {
     protected $config;
 
     /**
-     * @var SessionService
-     */
-    protected $session;
-
-    /**
      * @var SettingsService
      */
     protected $settings;
@@ -55,7 +50,6 @@ class PageController extends Controller {
      * PageController constructor.
      *
      * @param IRequest             $request
-     * @param SessionService       $session
      * @param SettingsService      $settings
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
@@ -63,7 +57,6 @@ class PageController extends Controller {
      */
     public function __construct(
         IRequest $request,
-        SessionService $session,
         SettingsService $settings,
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
@@ -73,7 +66,6 @@ class PageController extends Controller {
         $this->config      = $config;
         $this->tokenHelper = $tokenHelper;
         $this->settings    = $settings;
-        $this->session     = $session;
         $this->environment = $environment;
     }
 
@@ -90,7 +82,6 @@ class PageController extends Controller {
             $this->addHeaders();
         } else {
             $this->tokenHelper->destroyWebUiToken();
-            $this->session->delete();
         }
 
         $response = new TemplateResponse(
@@ -125,9 +116,7 @@ class PageController extends Controller {
         Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
 
         if(!$this->environment->isImpersonating()) {
-            //$session = ['id' => $this->session->getId(), 'authorized' => $this->session->isAuthorized()];
-            //Util::addHeader('meta', ['name' => 'api-session', 'content' => json_encode($session)]);
-            $this->session->save();
+            Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $this->environment->isImpersonating()]);
         }
     }
 

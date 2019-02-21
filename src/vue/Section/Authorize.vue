@@ -38,7 +38,7 @@
                 pwAlgorithm  : '',
                 errorMessage : 'Login incorrect',
                 retryClass   : '',
-                impersonating: document.querySelector('meta[name=api-session]') === null
+                impersonating: document.querySelector('meta[name=pw-impersonate]') === null
             };
         },
 

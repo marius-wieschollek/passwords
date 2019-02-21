@@ -58,6 +58,11 @@ class ApiTokenHelper {
     protected $encryption;
 
     /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
      * @var IL10N
      */
     protected $localisation;
@@ -66,11 +71,6 @@ class ApiTokenHelper {
      * @var IProvider
      */
     protected $tokenProvider;
-
-    /**
-     * @var EnvironmentService
-     */
-    protected $environment;
 
     /**
      * ApiTokenHelper constructor.
@@ -170,8 +170,7 @@ class ApiTokenHelper {
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
         if(!empty($tokenId)) {
             $this->destroyToken($tokenId);
-            $this->session->unset(self::WEBUI_TOKEN);
-            $this->session->unset(self::WEBUI_TOKEN_ID);
+            $this->session->delete();
         }
     }
 
@@ -214,6 +213,7 @@ class ApiTokenHelper {
         list($token, $deviceToken) = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
+        $this->session->save();
 
         return [$token, $deviceToken->getLoginName()];
     }
