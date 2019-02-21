@@ -60,13 +60,13 @@ class EncryptionManager {
 
             queue.push(this._encryptPassword(password, folderMap, tagMap));
 
-            if(queue.length > 10) {
+            if(queue.length > 15) {
                 await Promise.all(queue);
                 queue = [];
             }
         }
 
-        if(queue.length !== null) await Promise.all(queue);
+        if(queue.length !== 0) await Promise.all(queue);
     }
 
     /**
@@ -128,7 +128,7 @@ class EncryptionManager {
             }
         }
 
-        if(queue.length !== null) await Promise.all(queue);
+        if(queue.length !== 0) await Promise.all(queue);
 
         return idMap;
     }
@@ -177,7 +177,7 @@ class EncryptionManager {
             queue.push(this._encryptFolder(folder, idMap));
         }
 
-        if(queue.length !== null) await Promise.all(queue);
+        await Promise.all(queue);
 
         return idMap;
     }
@@ -243,10 +243,15 @@ class EncryptionManager {
         for(let id in idMap) {
             if(idMap.hasOwnProperty(id) && id !== '00000000-0000-0000-0000-000000000000') {
                 queue.push(this._deleteObject(id, type));
+
+                if(queue.length > 10) {
+                    await Promise.all(queue);
+                    queue = [];
+                }
             }
         }
 
-        await Promise.all(queue);
+        if(queue.length !== 0) await Promise.all(queue);
     }
 
     /**
