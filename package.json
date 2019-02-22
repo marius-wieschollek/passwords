@@ -21,7 +21,8 @@
         "cron": "docker exec -u www-data passwords-php php /var/www/html/cron.php",
         "handbook": "codeceptjs run --steps",
         "selenium": "docker run --net=host selenium/standalone-firefox",
-        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/localhost.pem -key-file docker/volumes/nginx/localhost.key localhost"
+        "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
+        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost"
     },
     "dependencies": {},
     "devDependencies": {
@@ -37,7 +38,7 @@
         "file-loader": "^2.0.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
-        "marked": "^0.6.0",
+        "marked": "^0.6.1",
         "node-sass": "^4.11.0",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
         "progress-bar-webpack-plugin": "^1.12.1",
@@ -48,13 +49,13 @@
         "uglify-es": "3.3.9",
         "uglifyjs-webpack-plugin": "^1.3.0",
         "url-loader": "^1.1.2",
-        "vue": "^2.6.6",
+        "vue": "^2.6.7",
         "vue-loader": "^14.2.4",
         "vue-qrcode-component": "^2.1.1",
         "vue-router": "^3.0.2",
         "vue-style-loader": "^4.1.2",
-        "vue-template-compiler": "^2.6.6",
-        "webdriverio": "^5.4.17",
+        "vue-template-compiler": "^2.6.7",
+        "webdriverio": "^5.6.0",
         "webpack": "^3.12.0",
         "xlsx": "^0.14.1"
     },
