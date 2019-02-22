@@ -67,6 +67,7 @@
 
         created() {
             Events.on('password.changed', this.processEvent);
+            this.refreshView();
         },
 
         beforeDestroy() {

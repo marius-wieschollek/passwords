@@ -8,17 +8,25 @@ export default class Encryption {
             folder  : ['label'],
             tag     : ['label', 'color']
         };
-        this._enabled = null;
+        this._enabled = false;
         this._keys = {};
         this._current = '';
         this.ready();
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     get enabled() {
         return this._enabled;
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     *
+     * @returns {Promise<boolean>}
+     */
     async ready() {
         await sodium.ready;
     }

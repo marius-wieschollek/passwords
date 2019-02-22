@@ -30,6 +30,14 @@ export default class EnhancedApi extends SimpleApi {
 
     /**
      *
+     * @returns {boolean}
+     */
+    get hasEncryption() {
+        return this.config.encryption.enabled;
+    }
+
+    /**
+     *
      * @param props
      */
     constructor(props) {

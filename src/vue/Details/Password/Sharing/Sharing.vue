@@ -1,5 +1,6 @@
 <template>
     <div class="sharing-container">
+        <translate tag="div" class="cse-warning warning" say="End-to-End encryption will be disabled for this password if you share it." v-if="hasCse"/>
         <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
@@ -20,9 +21,11 @@
 <script>
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
+    import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vue/Details/Password/Sharing/Share';
+    import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
@@ -38,7 +41,8 @@
         },
 
         data() {
-            let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[];
+            let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
+                hasCse = this.password.cseType !== 'none';
 
             return {
                 search      : '',
@@ -46,6 +50,7 @@
                 nameMap     : [],
                 idMap       : [],
                 shares,
+                hasCse,
                 placeholder : Localisation.translate('Search user'),
                 autocomplete: SettingsManager.get('server.sharing.autocomplete'),
                 interval    : null,
@@ -54,6 +59,7 @@
         },
 
         created() {
+            this.reloadShares();
             this.startPolling();
         },
 
@@ -96,41 +102,50 @@
                     this.idMap[i] = name;
                 }
             },
-            addShare(receiver) {
+            async disableCse() {
+                let password = Utility.cloneObject(this.password);
+                password.shared = true;
+
+                await PasswordManager.updatePassword(password);
+                this.hasCse = false;
+            },
+            async addShare(receiver) {
+                if(this.hasCse) await this.disableCse();
+
                 let share = {
                     password : this.password.id,
                     expires  : null,
                     editable : false,
                     shareable: true,
-                    receiver : receiver
+                    receiver
                 };
-                API.createShare(share).then(
-                    (d) => {
-                        this.getSharedWithUsers.push(receiver);
-                        share.id = d.id;
-                        share.updatePending = true;
-                        share.owner = {
-                            id  : document.querySelector('head[data-user]').getAttribute('data-user'),
-                            name: document.querySelector('head[data-user-displayname]').getAttribute('data-user-displayname')
-                        };
-                        share.receiver = {id: receiver, name: this.idMap[receiver]};
-                        this.shares[d.id] = API._processShare(share);
-                        this.search = '';
-                        this.refreshShares();
-                    }
-                ).catch((e) => {
+
+                try {
+                    let d = await API.createShare(share);
+                    this.getSharedWithUsers.push(receiver);
+                    share.id = d.id;
+                    share.updatePending = true;
+                    share.owner = {
+                        id  : document.querySelector('head[data-user]').getAttribute('data-user'),
+                        name: document.querySelector('head[data-user-displayname]').getAttribute('data-user-displayname')
+                    };
+                    share.receiver = {id: receiver, name: this.idMap[receiver]};
+                    this.shares[d.id] = API._processShare(share);
+                    this.search = '';
+                    this.refreshShares();
+                } catch(e) {
                     if(e.id === '65782183') {
                         Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
                         let message = e.hasOwnProperty('message') ? e.message:e.statusText;
                         Messages.notification(['Unable to share password: {message}', {message}]);
                     }
-                });
+                }
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                    .then((d) => {this.shares = d.shares;})
-                    .catch(console.error);
+                   .then((d) => {this.shares = d.shares;})
+                   .catch(console.error);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -156,10 +171,10 @@
                 delete this.shares[$event.id];
                 this.refreshShares();
             },
-            refreshShares() {
-                API.runSharingCron()
-                    .then((d) => { if(d.success) this.reloadShares();})
-                   .catch(console.error);
+            async refreshShares() {
+                await API.runSharingCron()
+                         .then((d) => { if(d.success) this.reloadShares();})
+                         .catch(console.error);
 
                 this.startPolling();
                 this.$forceUpdate();
@@ -204,7 +219,12 @@
 
 <style lang="scss">
     .sharing-container {
-        position : relative;
+        position       : relative;
+        padding-bottom : 5rem;
+
+        .cse-warning {
+            margin-bottom : 0.5rem;
+        }
 
         .share-add-user {
             width : 100%;
