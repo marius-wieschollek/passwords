@@ -42,7 +42,7 @@ services:
     volumes_from:
       - app
     volumes:
-      - ./docker/volumes/nginx/:/etc/ssl/nginx/localhost/
+      - ./docker/volumes/nginx:/etc/ssl/nginx/localhost
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
