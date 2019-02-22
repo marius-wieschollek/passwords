@@ -78,10 +78,10 @@ class ShareService extends AbstractService {
      * @param string $passwordUuid
      *
      * @return Share|EntityInterface|null
-     *
-     * @throws \Exception
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function findByTargetPassword(string $passwordUuid): ?Share {
+    public function findByTargetPassword(string $passwordUuid): Share {
         return $this->mapper->findOneByField('target_password', $passwordUuid);
     }
 
