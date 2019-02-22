@@ -12,4 +12,4 @@ node_modules/
 tests/codecept/data/*
 tests/codecept/output/*
 docker/volumes/
-package-lock.json
+# package-lock.json
