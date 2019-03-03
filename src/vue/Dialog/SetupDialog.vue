@@ -123,6 +123,12 @@
             width            : 100%;
             background-color : var(--color-main-background);
             position         : relative;
+
+            @media (max-width : 900px) {
+                width         : 100vw;
+                height        : 100vh;
+                border-radius : 0;
+            }
         }
 
         .setup-header {
@@ -143,6 +149,20 @@
                 line-height : 3rem;
                 margin-top  : 1rem;
             }
+
+            @media (max-width : 900px) {
+                padding : 1rem;
+
+                .logo {
+                    height : 60px;
+                }
+
+                h1 {
+                    font-size   : 2rem;
+                    line-height : 2rem;
+                    margin-top  : 0.5rem;
+                }
+            }
         }
 
         .setup-content {
@@ -153,6 +173,16 @@
                 height : 500px;
                 width  : 900px;
                 float  : left;
+            }
+
+            @media (max-width : 900px) {
+                display : block;
+                height  : 100%;
+
+                .slide {
+                    height: 100%;
+                    width: 100vw;
+                }
             }
         }
 
@@ -177,7 +207,7 @@
                 }
 
                 &.skip {
-                    background-color : rgba(0,0,0,0);
+                    background-color : rgba(0, 0, 0, 0);
                     color            : var(--color-text-lighter)
                 }
 

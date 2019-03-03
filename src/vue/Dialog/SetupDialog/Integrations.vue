@@ -36,6 +36,11 @@
             color            : var(--color-primary-text);
             border-radius    : var(--border-radius-large);
             cursor           : pointer;
+
+            @media (max-width : $width-extra-small) {
+                width  : auto;
+                margin : 1rem 1.5rem;
+            }
         }
     }
 </style>

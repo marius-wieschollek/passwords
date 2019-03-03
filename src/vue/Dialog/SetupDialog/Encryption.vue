@@ -206,6 +206,20 @@
                 color           : var(--color-primary);
                 text-shadow     : 0 0 5px var(--color-box-shadow);
             }
+
+            @media (max-width : 900px) {
+                padding : 1.5rem;
+
+                &:before {
+                    position      : static;
+                    width         : 100%;
+                    display       : block;
+                    font-size     : 6rem;
+                    line-height   : 6rem;
+                    margin-bottom : 0.5rem;
+                    text-align    : center;
+                }
+            }
         }
 
         form {
@@ -222,6 +236,10 @@
                     padding       : 0.75rem;
                     width         : 100%;
                     margin-bottom : 1rem;
+                }
+
+                @media (max-width : $width-extra-small) {
+                    width : 100%;
                 }
             }
         }
@@ -274,6 +292,11 @@
                     background-color : var(--color-error);
                 }
             }
+        }
+
+        @media (max-width : 900px) {
+            font-size   : 1.1rem;
+            line-height : 1.25rem;
         }
     }
 </style>
