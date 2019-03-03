@@ -1,6 +1,7 @@
 #### 2019.3.0
 - Improved legacy api password update
 - Improved import performance
+- Fixed deleting shared passwords issue
 
 #### 2019.2.2 - Bugfix release
 - Fixed broken user login name detection for LDAP users
