@@ -8,7 +8,7 @@
             <ul class="setup-content" :style="getStyle">
                 <start id="setup-slide-start" class="slide"/>
                 <encryption id="setup-slide-encryption" class="slide" :is-current="currentId === 1" v-on:status="updateStatus" v-on:continue="nextSlide"/>
-                <integrations id="setup-slide-integrations" class="slide"/>
+                <integrations id="setup-slide-integrations" class="slide" v-on:redirect="openSection"/>
             </ul>
             <div class="setup-navigation">
                 <translate tag="div" say="Skip" class="skip" @click="nextSlide" v-if="showSkipButton"/>
@@ -51,6 +51,7 @@
             return {
                 current  : slides[0],
                 currentId: 0,
+                route    : {path: '/'},
                 slides
             };
         },
@@ -84,19 +85,26 @@
                 if(this.currentId < this.slides.length - 1) {
                     this.goToSlide(this.currentId + 1);
                 } else {
-                    SettingsManager.set('client.setup.initialized', true);
-                    this.$destroy();
-                    let container = document.getElementById('app-popup'),
-                        div       = document.createElement('div');
-                    container.replaceChild(div, container.childNodes[0]);
-                    router.push({path: '/'});
+                    this.closeWizard();
                 }
+            },
+            openSection($event) {
+                this.route = $event;
+                this.closeWizard();
             },
             updateStatus(e) {
                 if(e.id === this.current.id) {
                     if(e.hasOwnProperty('skippable')) this.current.skippable = e.skippable === true;
                     if(e.hasOwnProperty('action')) this.current.action = e.action;
                 }
+            },
+            closeWizard() {
+                SettingsManager.set('client.setup.initialized', true);
+                this.$destroy();
+                let container = document.getElementById('app-popup'),
+                    div       = document.createElement('div');
+                container.replaceChild(div, container.childNodes[0]);
+                router.push(this.route);
             }
         }
     };
@@ -169,7 +177,7 @@
                 }
 
                 &.skip {
-                    background-color : var(--color-background-dark);
+                    background-color : rgba(0,0,0,0);
                     color            : var(--color-text-lighter)
                 }
 
