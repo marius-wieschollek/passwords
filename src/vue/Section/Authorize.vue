@@ -22,6 +22,7 @@
     import API from '@js/Helper/api';
     import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
+    import SetupManager from '@js/Manager/SetupManager';
 
     export default {
         components: {Translate},
@@ -115,10 +116,10 @@
             },
             loginError(e) {
                 this.password = '';
-                if(this.provider.type !== 'user-token') this.token = '';
+                if(this.hasToken && this.provider.type !== 'user-token') this.token = '';
                 this.hasError = true;
 
-                if(e.status === 403) {
+                if(e.status === 403 || e.message === 'wrong secret key for the given ciphertext') {
                     this.errorMessage = 'Login incorrect';
                 } else if(e.message) {
                     this.errorMessage = e.message;
