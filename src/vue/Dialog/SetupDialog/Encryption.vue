@@ -141,6 +141,7 @@
 
                     if(d[key].status === 'failed') this.hasError = true;
                 }
+                if(d.keychain.status === 'failed') this.hasError = true;
             },
             sendStatusEvent() {
                 let event = {

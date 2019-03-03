@@ -51,6 +51,7 @@ class EncryptionManager {
             this._sendStatus('keychain', 'done');
         } catch(e) {
             this._sendStatus('keychain', 'error', e);
+            throw e;
         }
     }
 
@@ -386,7 +387,7 @@ class EncryptionManager {
         } else if(status === 'error') {
             console.error(data);
             object.errors.push(data);
-            if(section !== cleanup) object.status = 'failed';
+            if(section !== 'cleanup') object.status = 'failed';
         }
 
         this._statusFunc(this.status);
