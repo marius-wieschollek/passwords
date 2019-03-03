@@ -1,17 +1,24 @@
 import API from "@js/Helper/api";
-import Utility from "@/js/Classes/Utility";
-import Localisation from "@/js/Classes/Localisation";
+import Utility from '@js/Classes/Utility';
+import Localisation from '@js/Classes/Localisation';
 
 class EncryptionManager {
+
+    constructor() {
+        this._statusFunc = null;
+        this.status = null;
+    }
 
     /**
      *
      * @param password
      * @param save
      * @param encrypt
+     * @param statusFunc
      */
-    async install(password, save = false, encrypt = false) {
-        await API.setAccountChallenge(password);
+    async install(password, save = false, encrypt = false, statusFunc = null) {
+        this._resetStatus(statusFunc);
+        await this._updateKeychain(password);
 
         if(encrypt !== false) {
             let tagMap    = {},
@@ -25,21 +32,25 @@ class EncryptionManager {
             );
 
             await this._encryptPasswords(folderMap, tagMap);
-
-            await Promise.all(
-                [
-                    this._deleteObjects(tagMap, 'tag'),
-                    this._deleteObjects(folderMap, 'folder')
-                ]
-            );
+            await this._cleanDatabase(tagMap, folderMap);
         }
 
-        if(save) {
-            let username = document.querySelector('meta[name=api-user]').getAttribute('content'),
-                label    = Localisation.translate('Passwords App Master Password'),
-                url      = location.href;
+        if(save) await this._saveMasterPassword(password);
+    }
 
-            API.createPassword({username, password, label, url});
+    /**
+     *
+     * @param password
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _updateKeychain(password) {
+        this._sendStatus('keychain', 'processing', 1);
+        try {
+            await API.setAccountChallenge(password);
+            this._sendStatus('keychain', 'done');
+        } catch(e) {
+            this._sendStatus('keychain', 'error', e);
         }
     }
 
@@ -51,9 +62,11 @@ class EncryptionManager {
      * @private
      */
     async _encryptPasswords(folderMap, tagMap) {
+        this._sendStatus('passwords', 'loading');
         let passwords = await API.listPasswords('model+tags'),
             queue     = [];
 
+        this._sendStatus('passwords', 'processing', Object.keys(passwords).length);
         for(let id in passwords) {
             if(!passwords.hasOwnProperty(id)) continue;
             let password = passwords[id];
@@ -67,6 +80,7 @@ class EncryptionManager {
         }
 
         if(queue.length !== 0) await Promise.all(queue);
+        this._sendStatus('passwords', 'done');
     }
 
     /**
@@ -74,10 +88,12 @@ class EncryptionManager {
      * @param password
      * @param folderMap
      * @param tagMap
+     * @param current
+     * @param total
      * @returns {Promise<void>}
      * @private
      */
-    async _encryptPassword(password, folderMap, tagMap) {
+    async _encryptPassword(password, folderMap, tagMap, current, total) {
         password.folder = folderMap[password.folder];
 
         let tags = [];
@@ -93,16 +109,18 @@ class EncryptionManager {
             try {
                 await API.createPassword(password);
                 console.log(`Encrypted password ${password.id}`);
+                this._sendStatus('passwords');
             } catch(e) {
-                console.error(e);
+                this._sendStatus('passwords', 'error', e);
                 throw e;
             }
         } else {
             try {
                 await API.updatePassword(password);
                 console.log(`Updated password ${password.id}`);
+                this._sendStatus('passwords');
             } catch(e) {
-                console.error(e);
+                this._sendStatus('passwords', 'error', e);
                 throw e;
             }
         }
@@ -114,9 +132,11 @@ class EncryptionManager {
      * @private
      */
     async _encryptTags(idMap) {
+        this._sendStatus('tags', 'loading');
         let tags  = await API.listTags(),
             queue = [];
 
+        this._sendStatus('tags', 'processing', Object.keys(tags).length);
         for(let id in tags) {
             if(!tags.hasOwnProperty(id)) continue;
 
@@ -130,6 +150,7 @@ class EncryptionManager {
 
         if(queue.length !== 0) await Promise.all(queue);
 
+        this._sendStatus('tags', 'done');
         return idMap;
     }
 
@@ -145,9 +166,10 @@ class EncryptionManager {
             let result = await API.createTag(tag);
             idMap[tag.id] = result.id;
 
+            this._sendStatus('tags');
             console.log(`Encrypted tag ${tag.id}`);
         } catch(e) {
-            console.error(e);
+            this._sendStatus('tags', 'error', e);
             throw e;
         }
     }
@@ -159,12 +181,14 @@ class EncryptionManager {
      * @private
      */
     async _encryptFolders(idMap) {
+        this._sendStatus('folders', 'loading');
         let folders = await API.listFolders(),
-        queue = [];
+            queue   = [];
 
         idMap['00000000-0000-0000-0000-000000000000'] = '00000000-0000-0000-0000-000000000000';
         folders = this._sortFoldersForUpgrade(folders);
 
+        this._sendStatus('folders', 'processing', Object.keys(folders).length);
         for(let id in folders) {
             if(!folders.hasOwnProperty(id)) continue;
             let folder = folders[id];
@@ -179,6 +203,7 @@ class EncryptionManager {
 
         await Promise.all(queue);
 
+        this._sendStatus('folders', 'done');
         return idMap;
     }
 
@@ -196,9 +221,10 @@ class EncryptionManager {
             let result = await API.createFolder(folder);
             idMap[folder.id] = result.id;
 
+            this._sendStatus('folders');
             console.log(`Encrypted folder ${folder.id}`);
         } catch(e) {
-            console.error(e);
+            this._sendStatus('folders', 'error', e);
             throw e;
         }
     }
@@ -228,6 +254,26 @@ class EncryptionManager {
         }
 
         return folders;
+    }
+
+    /**
+     *
+     * @param tagMap
+     * @param folderMap
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _cleanDatabase(tagMap, folderMap) {
+        let total = Object.keys(tagMap).length + Object.keys(folderMap).length;
+
+        this._sendStatus('cleanup', 'processing', total);
+        await Promise.all(
+            [
+                this._deleteObjects(tagMap, 'tag'),
+                this._deleteObjects(folderMap, 'folder')
+            ]
+        );
+        this._sendStatus('cleanup', 'done');
     }
 
     /**
@@ -268,8 +314,82 @@ class EncryptionManager {
             await API[deleteFunc](id);
             await API[deleteFunc](id);
         } catch(e) {
-            console.error(e);
+            if(type === 'tag' || e.status && e.status !== 404) {
+                this._sendStatus('cleanup', 'error', e);
+            }
         }
+
+        if(type !== 'password') this._sendStatus('cleanup', 'processing');
+    }
+
+    /**
+     *
+     * @param password
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _saveMasterPassword(password) {
+        this._sendStatus('password', 'processing', 1);
+        let username = document.querySelector('meta[name=api-user]').getAttribute('content'),
+            label    = Localisation.translate('Passwords App Master Password'),
+            url      = location.href;
+
+        try {
+            await API.createPassword({username, password, label, url});
+            this._sendStatus('password', 'done');
+        } catch(e) {
+            this._sendStatus('password', 'error', e);
+        }
+    }
+
+    /**
+     *
+     * @param statusFunc
+     * @private
+     */
+    _resetStatus(statusFunc) {
+        this._statusFunc = statusFunc;
+        this.status = {
+            passwords: {status: 'waiting', total: 0, current: 0, errors: []},
+            keychain : {status: 'waiting', total: 0, current: 0, errors: []},
+            folders  : {status: 'waiting', total: 0, current: 0, errors: []},
+            cleanup  : {status: 'waiting', total: 0, current: 0, errors: []},
+            tags     : {status: 'waiting', total: 0, current: 0, errors: []},
+            save     : {status: 'waiting', total: 0, current: 0, errors: []}
+        };
+    }
+
+    /**
+     *
+     * @param section
+     * @param status
+     * @param data
+     * @private
+     */
+    _sendStatus(section, status = 'processing', data = null) {
+        if(this._statusFunc === null || !this.status.hasOwnProperty(section)) return;
+        let object = this.status[section];
+
+        if(status === 'processing') {
+            object.status = 'processing';
+            if(data !== null) {
+                object.total = data;
+                object.current = 0;
+            } else {
+                object.current++;
+            }
+        } else if(status === 'loading') {
+            object.status = 'loading';
+        } else if(status === 'done') {
+            object.status = object.errors.length === 0 ? 'success':'failed';
+            if(object.status === 'success') object.current = object.total;
+        } else if(status === 'error') {
+            console.error(data);
+            object.errors.push(data);
+            if(section !== cleanup) object.status = 'failed';
+        }
+
+        this._statusFunc(this.status);
     }
 }
 

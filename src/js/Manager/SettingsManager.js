@@ -20,6 +20,7 @@ class SettingsManager {
             'client.ui.password.details.preview' : true,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
+            'client.setup.initialized'           : false,
             'client.search.show'                 : false,
             'client.search.live'                 : true,
             'client.search.global'               : true,

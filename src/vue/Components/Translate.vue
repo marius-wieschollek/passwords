@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import Localisation from "@js/Classes/Localisation";
+    import Localisation from '@js/Classes/Localisation';
 
     export default {
         props: {
