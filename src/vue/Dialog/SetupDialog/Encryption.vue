@@ -11,7 +11,7 @@
             </div>
         </form>
         <div class="encryption-status" v-if="processing">
-            <translate tag="h2" say="Encrypting Database"/>
+            <translate tag="h2" say="Installing Encryption"/>
             <div>
                 <translate say="Folders"/>
                 <span :class="getFolderClass">{{getFolderStatus}}</span>
@@ -28,6 +28,8 @@
                 <translate say="Clean up"/>
                 <span :class="getCleanupClass">{{getCleanupStatus}}</span>
             </div>
+            <translate tag="div" class="result success" say="Success" v-if="ready"/>
+            <translate tag="div" class="result failure" say="Failed" v-if="hasError"/>
         </div>
     </li>
 </template>
@@ -179,7 +181,8 @@
 </script>
 
 <style lang="scss">
-    #setup-slide-encryption {
+    #setup-slide-encryption,
+    #setup-slide-integrations {
         font-size   : 1.25rem;
         line-height : 1.5rem;
 
@@ -255,6 +258,20 @@
                 margin : -9px 0 0 -9px;
                 top    : 10px;
                 left   : -12px;
+            }
+
+            .result {
+                margin           : 1.25rem 0;
+                font-size        : 1rem;
+                background-color : var(--color-success);
+                border-radius    : var(--border-radius);
+                color            : var(--color-primary-text);
+                text-align       : center;
+                padding          : 0.25rem;
+
+                &.failure {
+                    background-color : var(--color-error);
+                }
             }
         }
     }
