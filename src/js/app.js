@@ -46,11 +46,10 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     async function initApi() {
         let user     = document.querySelector('meta[name=api-user]').getAttribute('content'),
             password = document.querySelector('meta[name=api-token]').getAttribute('content'),
-            session  = getSessionId(),
             baseUrl  = getBaseUrl();
         if(!password) password = await Messages.prompt('Password', 'Login', '', true);
 
-        API.initialize({baseUrl, user, password, session, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
+        API.initialize({baseUrl, user, password, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
     }
 
     async function load() {
@@ -84,19 +83,6 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 app.starChaser = true;
             }
         }, false);
-    }
-
-    function getSessionId() {
-        let sessionAttr = document.querySelector('meta[name=api-session]');
-
-        if(sessionAttr) {
-            let session = JSON.parse(sessionAttr.getAttribute('content'));
-            isLoggedIn = session.authorized;
-
-            return session.id;
-        }
-
-        return null;
     }
 
     function getBaseUrl() {
