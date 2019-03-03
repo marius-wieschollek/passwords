@@ -133,7 +133,7 @@ class AccountApiController extends AbstractApiController {
      * @throws ApiException
      */
     public function setChallenge(string $challenge, string $secret, $oldSecret = null): JSONResponse {
-        if($this->challengeHelper->hasChallenge() && !$this->challengeHelper->validateChallenge($oldSecret)) {
+        if($this->challengeHelper->hasChallenge() && ($oldSecret === null || !$this->challengeHelper->validateChallenge($oldSecret))) {
             throw new ApiException('Invalid password', Http::STATUS_BAD_REQUEST);
         }
 
