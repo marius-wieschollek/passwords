@@ -105,6 +105,8 @@ class PasswordMapper extends AbstractMapper {
 
         $sql->andWhere(
             $sql->expr()->eq('b.tag', $sql->createNamedParameter($tagUuid))
+        )->andWhere(
+            $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
         );
 
         if(!$includeHidden) {

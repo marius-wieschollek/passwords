@@ -29,7 +29,10 @@ class TagMapper extends AbstractMapper {
 
         $sql->andWhere(
             $sql->expr()->eq('b.password', $sql->createNamedParameter($passwordUuid))
+        )->andWhere(
+            $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
         );
+
         if(!$includeHidden) {
             $sql->andWhere(
                 $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
