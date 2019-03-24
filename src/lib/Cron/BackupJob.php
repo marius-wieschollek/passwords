@@ -49,6 +49,6 @@ class BackupJob extends AbstractCronJob {
 
         $this->config->setAppValue('backup/timestamp', time());
         $file = $this->backupService->createBackup();
-        $this->logger->info(['Created Backup %s with %s', $file->getName(), \OC_Helper::humanFileSize($file->getSize())]);
+        $this->logger->info(['Created Backup %s with %s', $file->getName(), \OCP\Util::humanFileSize($file->getSize())]);
     }
 }
