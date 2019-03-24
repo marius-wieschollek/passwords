@@ -1,8 +1,9 @@
-#### 2019.4.0
+#### 2019.4.0 - Feature release
 - Improved custom fields
+- Fixed double sse key generation
 - Fixed tags being not removed from passwords
 
-#### 2019.3.0
+#### 2019.3.0 - Feature release
 - Improved legacy api password update
 - Improved import performance
 - Fixed deleting shared passwords issue
