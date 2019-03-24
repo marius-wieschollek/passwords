@@ -143,6 +143,37 @@ class ConfigurationService {
     }
 
     /**
+     * Clear the config cache
+     */
+    public function clearCache(): void {
+        try {
+            $class    = new \ReflectionClass($this->config);
+            $property = $class->getProperty('userCache');
+            $property->setAccessible(true);
+            $property->setValue($this->config, new \OC\Cache\CappedMemoryCache());
+        } catch(\ReflectionException $e) {
+        }
+
+        try {
+            $appConfig = \OC::$server->query(\OC\AppConfig::class);
+            $class     = new \ReflectionClass($appConfig);
+            $property  = $class->getProperty('configLoaded');
+            $property->setAccessible(true);
+            $property->setValue($appConfig, false);
+        } catch(\Exception $e) {
+        }
+
+        try {
+            $systemConfig = \OC::$server->query(\OC\SystemConfig::class);
+            $class        = new \ReflectionClass($systemConfig);
+            $method       = $class->getMethod('readData');
+            $method->setAccessible(true);
+            $method->invoke($systemConfig);
+        } catch(\Exception $e) {
+        }
+    }
+
+    /**
      * @return string
      */
     public function getRootDir(): string {
