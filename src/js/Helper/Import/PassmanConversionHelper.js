@@ -1,6 +1,6 @@
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
-import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
+import API from "@/js/Helper/api";
 
 export default class PassmanConversionHelper {
 
@@ -28,7 +28,7 @@ export default class PassmanConversionHelper {
      */
     static async _processTags(db) {
         let tags    = [],
-            mapping = await ImportJsonConversionHelper._getTagLabelMapping();
+            mapping = await PassmanConversionHelper._getTagLabelMapping();
 
         for(let i = 0; i < db.length; i++) {
             let element = db[i];
@@ -172,6 +172,23 @@ export default class PassmanConversionHelper {
         if(element.hasOwnProperty('otp') && element.otp.hasOwnProperty('secret')) {
             object.customFields.otp = {type: 'secret', value: element.otp.secret};
         }
+    }
+
+    /**
+     *
+     * @returns {Promise<{}>}
+     * @private
+     */
+    static async _getTagLabelMapping() {
+        let tags    = await API.listTags(),
+            mapping = {};
+
+        for(let i in tags) {
+            if(!tags.hasOwnProperty(i)) continue;
+            mapping[tags[i].label] = tags[i].id;
+        }
+
+        return mapping;
     }
 
     /**
