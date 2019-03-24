@@ -236,6 +236,7 @@ class SseV1Encryption implements EncryptionInterface {
         $this->config->setUserValue('sse.generate.lock', $lockCode, $userId);
         $userKey = $this->getSecureRandom();
 
+        $this->config->clearCache();
         $currentLock = $this->config->getUserValue('sse.generate.lock', null, $userId);
         if($currentLock !== $lockCode) {
             sleep(1);
@@ -268,6 +269,7 @@ class SseV1Encryption implements EncryptionInterface {
         $this->config->setAppValue('sse.generate.lock', $lockCode);
         $serverKey = $this->getSecureRandom();
 
+        $this->config->clearCache();
         $currentLock = $this->config->getAppValue('sse.generate.lock', null);
         if($currentLock !== $lockCode) {
             sleep(1);
