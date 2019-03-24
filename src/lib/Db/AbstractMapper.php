@@ -278,7 +278,8 @@ abstract class AbstractMapper extends QBMapper {
             $getter = 'get' . ucfirst($property);
             $value = $entity->$getter();
 
-            $qb->setValue($column, $qb->createNamedParameter($value, $this->getParameterTypeForProperty($property, $entity->getFieldTypes())));
+            $type = $this->getParameterTypeForProperty($entity, $property);
+            $qb->setValue($column, $qb->createNamedParameter($value, $type));
         }
 
         $qb->execute();
@@ -321,7 +322,8 @@ abstract class AbstractMapper extends QBMapper {
             $getter = 'get' . ucfirst($property);
             $value = $entity->$getter();
 
-            $qb->set($column, $qb->createNamedParameter($value, $this->getParameterTypeForProperty($property, $entity->getFieldTypes())));
+            $type = $this->getParameterTypeForProperty($entity, $property);
+            $qb->set($column, $qb->createNamedParameter($value, $type));
         }
 
         $qb->where(
@@ -332,16 +334,28 @@ abstract class AbstractMapper extends QBMapper {
         return $entity;
     }
 
-    protected function getParameterTypeForProperty(string $property, array $types) {
+    /**
+     * Returns the type parameter for the QueryBuilder for a specific property
+     * of the $entity
+     *
+     * @param Entity $entity   The entity to get the types from
+     * @param string $property The property of $entity to get the type for
+     * @return int
+     */
+    protected function getParameterTypeForProperty(Entity $entity, string $property): int {
+        $types = $entity->getFieldTypes();
+
         if(!isset($types[ $property ])) {
             return IQueryBuilder::PARAM_STR;
         }
 
         switch($types[ $property ]) {
+            case 'int':
             case 'integer':
                 return IQueryBuilder::PARAM_INT;
             case 'string':
                 return IQueryBuilder::PARAM_STR;
+            case 'bool':
             case 'boolean':
                 return IQueryBuilder::PARAM_BOOL;
         }
