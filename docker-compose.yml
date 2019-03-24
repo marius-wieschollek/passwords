@@ -4,6 +4,7 @@ services:
   mysql:
     image: mariadb
     container_name: "passwords-mysql"
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: on-failure
     volumes:
       - mysql:/var/lib/mysql

@@ -59,7 +59,8 @@ module.exports = (env) => {
         output : {
             path         : `${__dirname}/src/`,
             filename     : 'js/Static/[name].js',
-            chunkFilename: 'js/Static/[name].[hash].js'
+            chunkFilename: 'js/Static/[name].[hash].js',
+            jsonpFunction: 'passwordsWebpackJsonp'
         },
         resolve: {
             modules   : ['node_modules', 'src'],
