@@ -43,9 +43,9 @@ class BackupMigrationHelper {
             throw new \Exception('Unsupported backup version: '.$version);
         }
 
-        if($version < 100) $data = $this->upgrade100($data);
-        if($version < 101) $data = $this->upgrade101($data);
-        if($version < 102) $data = $this->upgrade102($data);
+        if($version < 101) $data = $this->upgrade100($data);
+        if($version < 102) $data = $this->upgrade101($data);
+        if($version < 103) $data = $this->upgrade102($data);
 
         $data['version'] = RestoreBackupHelper::BACKUP_VERSION;
 
@@ -88,10 +88,10 @@ class BackupMigrationHelper {
      * @return array
      * @throws \Exception
      */
-    protected function upgrade102(array $data): array {
-        $this->encryption->setKeys($data['keys']);
+    protected function upgrade102(array $database): array {
+        $this->encryption->setKeys($database['keys']);
 
-        foreach($data['passwords'] as &$object) {
+        foreach($database['passwords'] as &$object) {
             foreach($object['revisions'] as $key => $revision) {
                 $revision = $this->encryption->decryptArray($revision);
 
@@ -112,6 +112,6 @@ class BackupMigrationHelper {
             }
         }
 
-        return $data;
+        return $database;
     }
 }

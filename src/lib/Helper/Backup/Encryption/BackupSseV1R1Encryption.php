@@ -70,7 +70,7 @@ class BackupSseV1R1Encryption extends SseV1Encryption {
      * @return string
      */
     protected function getUserKey(string $userId): string {
-        return $this->keys['user'][ $userId ]['SSEv1UserKey'];
+        return $this->keys['users'][ $userId ]['SSEv1UserKey'];
     }
 
     /**
@@ -88,7 +88,6 @@ class BackupSseV1R1Encryption extends SseV1Encryption {
         } else if($type === 'tag') {
             $revision = new TagRevision();
         } else {
-
             throw new \Exception('Unknown object type');
         }
 
