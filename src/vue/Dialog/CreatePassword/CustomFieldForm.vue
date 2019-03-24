@@ -1,6 +1,6 @@
 <template>
     <div class="custom-field-form">
-        <input type="text" :placeholder="namePlaceholder" class="field-name" v-model="name" maxlength="48" :class="{error:showNameError}"/>
+        <input type="text" :placeholder="namePlaceholder" class="field-label" v-model="label" maxlength="48" :class="{error:showNameError}"/>
         <select class="field-type" v-model="type" :disabled="!isValidName">
             <translate tag="option" value="text">Text</translate>
             <translate tag="option" value="secret">Secret</translate>
@@ -8,13 +8,13 @@
             <translate tag="option" value="url">Link</translate>
             <translate tag="option" value="file">File</translate>
         </select>
-        <input class="file-picker" type="button" @click="openNextcloudFile" v-if="showFilePicker" :disabled="!isValidName" :style="getFileButtonStyle" :value="value"/>
+        <input class="file-picker" type="button" @click="openNextcloudFile" v-if="type === 'file'" :disabled="!isValidName" :style="getFileButtonStyle" :value="value"/>
         <input class="field-value"
                :type="getFieldType"
                :placeholder="valuePlaceholder"
                v-model="value"
                maxlength="320"
-               v-if="!showFilePicker"
+               v-if="type !== 'file'"
                :disabled="!isValidName"
                :pattern="getPattern"
                required/>
@@ -30,36 +30,27 @@
     import SettingsManager from '@js/Manager/SettingsManager';
 
     export default {
-        name      : 'custom-field-form',
         components: {Translate},
         props     : {
             field     : {
                 type     : Object,
                 'default': () => {
                     return {
-                        name : '',
+                        label: '',
                         type : 'text',
+                        id   : 0,
+                        blank: false,
                         value: null
                     };
                 }
-            },
-            takenNames: {
-                type     : Array,
-                'default': () => {
-                    return [];
-                }
-            },
-            isBlank   : {
-                type     : Boolean,
-                'default': false
             }
         },
         data() {
             return {
-                name        : this.field.name,
-                type        : this.field.type,
-                value       : this.field.value,
-                originalName: this.field.name
+                label  : this.field.label,
+                type   : this.field.type,
+                value  : this.field.value,
+                isBlank: this.field.blank
             };
         },
 
@@ -68,15 +59,12 @@
                 return !this.isValidName && !this.isBlank;
             },
             isValidName() {
-                return this.name.length && (this.takenNames.indexOf(this.name) === -1 || this.originalName === this.name);
+                return this.label.length;
             },
             getFieldType() {
                 if(this.type === 'secret') return 'password';
                 if(this.type === 'email') return 'email';
                 return 'text';
-            },
-            showFilePicker() {
-                return this.type === 'file';
             },
             getFileButtonStyle() {
                 return {
@@ -100,7 +88,7 @@
                 this.value = await Messages.filePicker();
             },
             deleteField() {
-                this.$emit('deleted', this.name);
+                this.$emit('deleted', this.field);
             },
             updateField() {
                 if(!this.value) return;
@@ -108,18 +96,17 @@
                 this.$emit(
                     'updated',
                     {
-                        name        : this.name,
-                        type        : this.type,
-                        value       : this.value,
-                        originalName: this.originalName
+                        label: this.label,
+                        type : this.type,
+                        value: this.value,
+                        id   : this.field.id
                     }
                 );
-                this.originalName = this.name;
             }
         },
 
         watch: {
-            name() {
+            label() {
                 if(this.isValidName) this.updateField();
             },
             type(value) {
@@ -129,20 +116,11 @@
             value() {
                 if(this.isValidName) this.updateField();
             },
-            isBlank(newValue, oldValue) {
-                if(newValue && newValue !== oldValue) {
-                    this.name = '';
-                    this.type = 'text';
-                    this.value = '';
-                }
-            },
             field(newValue) {
-                if(newValue.name !== this.name) {
-                    this.name = newValue.name;
-                    this.originalName = newValue.name;
-                }
-                if(newValue.type !== this.type) this.type = newValue.type;
-                if(newValue.value !== this.value) this.value = newValue.value;
+                this.label = newValue.label;
+                this.type = newValue.type;
+                this.value = newValue.value;
+                this.isBlank = this.field.blank;
             }
         }
     };
@@ -150,7 +128,7 @@
 
 <style lang="scss">
     #app-popup #passwords-create-new #custom-fields .custom-field-form {
-        .field-name {
+        .field-label {
             width     : 75.5%;
             max-width : none;
 
@@ -177,7 +155,7 @@
             text-overflow : ellipsis;
 
             &[value] {
-                background-position : 5px center;
+                background-position : 0.75rem center;
             }
         }
 
@@ -186,44 +164,44 @@
             max-width : none;
         }
 
-        @media all and (min-width: $width-medium) and (max-width: $width-large) {
+        @media all and (min-width : $width-medium) and (max-width : $width-large) {
             .field-type {
-                width     : 22%;
+                width : 22%;
             }
 
             .field-value,
             .file-picker {
-                width     : 89%;
+                width : 89%;
             }
 
             .field-button {
-                width     : 8%;
+                width : 8%;
             }
         }
 
-        @media all and (max-width: $width-small) {
+        @media all and (max-width : $width-small) {
             .field-type {
-                width     : 22.5%;
+                width : 22.5%;
             }
 
             .field-value,
             .file-picker {
-                width     : 92%;
+                width : 92%;
             }
         }
 
-        @media all and (max-width: $width-extra-small) {
+        @media all and (max-width : $width-extra-small) {
             .field-type {
-                width     : 21%;
+                width : 21%;
             }
 
             .field-value,
             .file-picker {
-                width     : 85%;
+                width : 85%;
             }
 
             .field-button {
-                width     : 12%;
+                width : 12%;
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div slot="details" class="details">
-        <detail-field v-for="(field, index) in getCustomFields" :key="index" :name="field.name" :type="field.type" :value="field.value"/>
+        <detail-field v-for="(field, index) in getCustomFields" :key="index" :label="field.label" :type="field.type" :value="field.value"/>
 
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
@@ -19,7 +19,7 @@
         <translate tag="div" say="Encryption">
             <translate :say="getEncryption" />
         </translate>
-        <detail-field name="SHA-1" type="text" :value="password.hash"/>
+        <detail-field label="SHA-1" type="text" :value="password.hash"/>
     </div>
 </template>
 
@@ -78,22 +78,14 @@
                 let fields       = [],
                     customFields = this.password.customFields;
 
-                fields.push({name: Localisation.translate('Name'), value: this.password.label});
-                if(this.password.username) fields.push({name: Localisation.translate('Username'), value: this.password.username});
-                fields.push({name: Localisation.translate('Password'), value: this.password.password, type: 'secret'});
-                if(this.password.url) fields.push({name: Localisation.translate('Website'), value: this.password.url, type: 'url'});
+                fields.push({label: Localisation.translate('Name'), value: this.password.label});
+                if(this.password.username) fields.push({label: Localisation.translate('Username'), value: this.password.username});
+                fields.push({label: Localisation.translate('Password'), value: this.password.password, type: 'secret'});
+                if(this.password.url) fields.push({label: Localisation.translate('Website'), value: this.password.url, type: 'url'});
 
 
-                for(let name in customFields) {
-                    if(!customFields.hasOwnProperty(name) || (!this.showHiddenFields && name.substr(0, 1) === '_')) continue;
-
-                    fields.push(
-                        {
-                            name,
-                            type : customFields[name].type,
-                            value: customFields[name].value
-                        }
-                    );
+                for(let i=0; i<customFields.length; i++) {
+                    if(this.showHiddenFields || customFields[i].type !== 'data') fields.push(customFields[i]);
                 }
 
                 return fields;

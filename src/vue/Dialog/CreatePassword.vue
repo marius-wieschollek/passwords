@@ -80,7 +80,7 @@
                 showLoader  : false,
                 simplemde   : null,
                 generator   : {numbers: undefined, special: undefined, active: false},
-                password    : {cseType: 'none', notes: '', customFields: {}},
+                password    : {cseType: 'none', notes: '', customFields: []},
                 _success    : null
             };
         },
@@ -189,7 +189,7 @@
         watch: {
             password(password) {
                 if(typeof password.customFields === "string") password.customFields = JSON.parse(password.customFields);
-                if(password.customFields === null) password.customFields = {};
+                if(password.customFields === null) password.customFields = [];
                 if(this.simplemde) this.simplemde.value(password.notes);
             },
             'generator.numbers'(value, oldValue) {
