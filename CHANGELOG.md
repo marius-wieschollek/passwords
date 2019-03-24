@@ -1,3 +1,7 @@
+#### 2019.4.0
+- Improved custom fields
+- Fixed tags being not removed from passwords
+
 #### 2019.3.0
 - Improved legacy api password update
 - Improved import performance
