@@ -50,6 +50,11 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * @var bool
      */
+    private $ignoreMaxVersion;
+
+    /**
+     * @var bool
+     */
     protected $dbUpdated;
 
     /**
@@ -79,7 +84,8 @@ class NightlyAppFetcher extends Fetcher {
         $this->dbUpdated = false;
         $this->fileName  = 'apps_nightly.json';
         $this->setEndpoint();
-        $this->compareVersion = $compareVersion;
+        $this->compareVersion   = $compareVersion;
+        $this->ignoreMaxVersion = !$this->isNc15();
     }
 
     /**
@@ -133,6 +139,7 @@ class NightlyAppFetcher extends Fetcher {
 
         foreach($json['data'] as $dataKey => $app) {
             $latest = null;
+            if(empty($app['releases'])) continue;
             foreach($app['releases'] as $release) {
                 if(($latest === null || version_compare($latest['version'], $release['version']) < 0) &&
                    $this->releaseAllowedInChannel($release, $app['id']) &&
@@ -155,9 +162,16 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * @param string $version
      * @param string $fileName
+     * @param bool   $ignoreMaxVersion
      */
-    public function setVersion(string $version, string $fileName = 'apps_nightly.json') {
+    public function setVersion(string $version, string $fileName = 'apps_nightly.json', bool $ignoreMaxVersion = true) {
         parent::setVersion($version);
+
+        if(!$this->isNc15()) {
+            $this->ignoreMaxVersion = $ignoreMaxVersion;
+        } else {
+            $this->ignoreMaxVersion = false;
+        }
         $this->fileName = $fileName;
         $this->setEndpoint();
     }
@@ -178,13 +192,18 @@ class NightlyAppFetcher extends Fetcher {
      *
      */
     protected function setEndpoint() {
-        $versionArray      = explode('.', $this->getVersion());
-        $this->endpointUrl = sprintf(
-            'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
-            $versionArray[0],
-            $versionArray[1],
-            $versionArray[2]
-        );
+
+        if(!$this->isNc15()) {
+            $this->endpointUrl = 'https://apps.nextcloud.com/api/v1/apps.json';
+        } else {
+            $versionArray = explode('.', $this->getVersion());
+            $this->endpointUrl = sprintf(
+                'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
+                $versionArray[0],
+                $versionArray[1],
+                $versionArray[2]
+            );
+        }
     }
 
     /**
@@ -241,11 +260,18 @@ class NightlyAppFetcher extends Fetcher {
             $maxFulfilled  = $max !== '' &&
                              $this->compareVersion->isCompatible($ncVersion, $max, '<=');
 
-            return $minFulfilled && $maxFulfilled;
+            return $minFulfilled && ($this->ignoreMaxVersion || $maxFulfilled);
         } catch(\Throwable $e) {
-            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher']);
+            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
         }
 
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isNc15(): bool {
+        return substr($this->getVersion(), 0, 2) === '15';
     }
 }

@@ -54,7 +54,7 @@ class BackupListCommand extends Command {
         foreach($backups as $backup) {
             $name = $backup->getName();
             $name = substr($name, 0, strpos($name, '.json'));
-            $size = str_pad(\OC_Helper::humanFileSize($backup->getSize()), 7, ' ', STR_PAD_LEFT);
+            $size = str_pad(\OCP\Util::humanFileSize($backup->getSize()), 7, ' ', STR_PAD_LEFT);
             $gzip = substr($backup->getName(), -2) === 'gz' ? 'compressed':'json';
 
             $output->writeln(sprintf('   %s  %s %s', $name, $size, $gzip));

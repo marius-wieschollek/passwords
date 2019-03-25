@@ -61,7 +61,8 @@ The app also supports most 2FA authentication methods offered by Nextcloud.
 There are no apps for the modern API right now. But there are some for the legacy API.
 * [Official Firefox Extension](https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-readme)
 * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
-* [Android App](https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager) by [Intirix](https://github.com/intirix/cloudpasswordmanager)
+* [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
+* [Android App](https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager) by [Intirix](https://github.com/intirix/cloudpasswordmanager) (This app uses an api wich is no longer supported)
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.

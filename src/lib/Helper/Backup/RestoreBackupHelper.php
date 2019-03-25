@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Helper\Backup;
 
@@ -80,6 +85,11 @@ class RestoreBackupHelper {
     protected $folderRevisionMapper;
 
     /**
+     * @var BackupMigrationHelper
+     */
+    protected $backupMigrationHelper;
+
+    /**
      * @var PasswordRevisionMapper
      */
     protected $passwordRevisionMapper;
@@ -101,6 +111,7 @@ class RestoreBackupHelper {
      * @param TagRevisionMapper         $tagRevisionMapper
      * @param UserSettingsHelper        $userSettingsHelper
      * @param FolderRevisionMapper      $folderRevisionMapper
+     * @param BackupMigrationHelper     $backupMigrationHelper
      * @param PasswordRevisionMapper    $passwordRevisionMapper
      * @param PasswordTagRelationMapper $passwordTagRelationMapper
      */
@@ -114,6 +125,7 @@ class RestoreBackupHelper {
         TagRevisionMapper $tagRevisionMapper,
         UserSettingsHelper $userSettingsHelper,
         FolderRevisionMapper $folderRevisionMapper,
+        BackupMigrationHelper $backupMigrationHelper,
         PasswordRevisionMapper $passwordRevisionMapper,
         PasswordTagRelationMapper $passwordTagRelationMapper
     ) {
@@ -126,6 +138,7 @@ class RestoreBackupHelper {
         $this->tagRevisionMapper         = $tagRevisionMapper;
         $this->userSettingsHelper        = $userSettingsHelper;
         $this->folderRevisionMapper      = $folderRevisionMapper;
+        $this->backupMigrationHelper     = $backupMigrationHelper;
         $this->passwordRevisionMapper    = $passwordRevisionMapper;
         $this->passwordTagRelationMapper = $passwordTagRelationMapper;
     }
@@ -161,33 +174,7 @@ class RestoreBackupHelper {
      * @throws \Exception
      */
     protected function convertData(array $data): array {
-        if($data['version'] === 100) {
-            $data['passwordTagRelations'] = $data['password_tag_relations'];
-            unset($data['password_tag_relations']);
-            $data['version'] = 101;
-        }
-
-        if($data['version'] === 101 || $data['version'] === 102) {
-            foreach(['passwords', 'folders', 'tags'] as $type) {
-                foreach($data[ $type ] as &$object) {
-                    foreach($object['revisions'] as &$revision) {
-                        if(isset($revision['client'])) unset($revision['client']);
-                        if(isset($revision['favourite'])) unset($revision['favourite']);
-                        $revision['cseKey'] = '';
-                    }
-                }
-            }
-
-            foreach($data['passwordTagRelations'] as &$object) {
-                $object['uuid'] = $this->uuidHelper->generateUuid();
-            }
-
-            $data['version'] = 103;
-
-            return $data;
-        }
-
-        throw new \Exception('Unsupported backup version: '.$data['version']);
+        return $this->backupMigrationHelper->convert($data);
     }
 
     /**

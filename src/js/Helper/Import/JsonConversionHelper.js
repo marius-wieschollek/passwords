@@ -1,4 +1,3 @@
-import API from '@js/Helper/api';
 import Encryption from '@js/ApiClient/Encryption';
 
 export default class ImportJsonConversionHelper {
@@ -12,11 +11,41 @@ export default class ImportJsonConversionHelper {
     static async processBackupJson(data, options) {
         let json = JSON.parse(data);
 
-        if(json.encrypted) {
-            await this._decryptJsonBackup(options, json);
-        }
+        if(json.encrypted) await this._decryptJsonBackup(options, json);
+
+        if(json.version < 2) this._convertCustomFields(json);
+        if(json.version > 2) throw new Error('Unsupported database version');
 
         return json;
+    }
+
+    /**
+     *
+     * @param json
+     * @private
+     */
+    static _convertCustomFields(json) {
+        if(json.hasOwnProperty('passwords')) {
+            for(let i = 0; i < json.passwords.length; i++) {
+                let oldFields = json.passwords[i].customFields,
+                    newFields = [];
+
+                for(let label in oldFields) {
+                    if(!oldFields.hasOwnProperty(label)) continue;
+                    let type = label.substr(0, 1) === '_' ? 'data':oldFields[label].type;
+
+                    newFields.push(
+                        {
+                            label,
+                            type,
+                            value: oldFields[label].value
+                        }
+                    );
+                }
+
+                json.passwords[i].customFields = newFields;
+            }
+        }
     }
 
     /**
@@ -47,22 +76,5 @@ export default class ImportJsonConversionHelper {
                 throw new Error(`Failed to decrypt ${i}`);
             }
         }
-    }
-
-    /**
-     *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getTagLabelMapping() {
-        let tags    = await API.listTags(),
-            mapping = {};
-
-        for(let i in tags) {
-            if(!tags.hasOwnProperty(i)) continue;
-            mapping[tags[i].label] = tags[i].id;
-        }
-
-        return mapping;
     }
 }

@@ -92,7 +92,7 @@
         },
 
         data() {
-            let password = Object.assign({cseType: 'none', notes: '', customFields: {}}, this.properties);
+            let password = Object.assign({cseType: 'none', notes: '', customFields: []}, this.properties);
             return {
                 notesOpen   : window.innerWidth > 641,
                 showPassword: false,
@@ -201,7 +201,7 @@
         watch: {
             password(password) {
                 if(typeof password.customFields === "string") password.customFields = JSON.parse(password.customFields);
-                if(password.customFields === null) password.customFields = {};
+                if(password.customFields === null) password.customFields = [];
                 if(this.simplemde) this.simplemde.value(password.notes);
             },
             'generator.numbers'(value, oldValue) {

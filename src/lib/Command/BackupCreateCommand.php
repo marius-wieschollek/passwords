@@ -50,7 +50,7 @@ class BackupCreateCommand extends Command {
 
         $name = $backup->getName();
         $name = substr($name, 0, strpos($name, '.json'));
-        $size = \OC_Helper::humanFileSize($backup->getSize());
+        $size = \OCP\Util::humanFileSize($backup->getSize());
         $gzip = substr($backup->getName(), -2) === 'gz' ? 'compressed':'json';
 
         $output->writeln(sprintf('Created new backup: %s, %s %s', $name, $size, $gzip));

@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{name}}
+        {{label}}
         <web :href="getLink" v-if="['url','email','file'].indexOf(type) !== -1">{{ getLinkLabel }}</web>
         <span @mouseenter="showValue=true" @mouseout="showValue=false" :class="getSecretClass" v-if="type === 'secret'" @click="copyValue">{{ getSecretValue }}</span>
         <span v-if="type === 'text'" @click="copyValue">{{ value }}</span>
@@ -18,7 +18,7 @@
             Web
         },
         props     : {
-            name : {
+            label : {
                 type: String
             },
             type : {
@@ -55,7 +55,7 @@
             copyValue() {
                 let message = 'Error copying {element} to clipboard';
                 if(Utility.copyToClipboard(this.value)) message = '{element} was copied to clipboard';
-                Messages.notification([message, {element: this.name}]);
+                Messages.notification([message, {element: this.label}]);
             }
         }
     };
