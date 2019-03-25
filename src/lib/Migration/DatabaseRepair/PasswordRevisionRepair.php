@@ -69,7 +69,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         parent::__construct($modelMapper, $revisionService);
         $this->folderMapper      = $folderMapper;
         $this->encryptionService = $encryption;
-        $this->convertFields     = !$config->getAppValue('migration/customFields', false) || $environment->isCliMode();
+        $this->convertFields     = !$config->getAppValue('migration/customFields', false) || $environment->getRunType() === EnvironmentService::TYPE_CLI;
         $this->config            = $config;
     }
 
