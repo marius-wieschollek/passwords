@@ -16,8 +16,12 @@ services:
       - 9090:443
     links:
       - openldap
+    volumes:
+    - ./docker/volumes/nginx:/container/service/phpldapadmin/assets/apache2/certs
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: openldap
+      PHPLDAPADMIN_HTTPS_CRT_FILENAME: default.pem
+      PHPLDAPADMIN_HTTPS_KEY_FILENAME: default.key
 
   app:
     links:

@@ -24,11 +24,15 @@ services:
     image: dpage/pgadmin4
     container_name: "passwords-pgadmin"
     restart: on-failure
+    volumes:
+      - ./docker/volumes/nginx/default.key:/certs/server.key
+      - ./docker/volumes/nginx/default.pem:/certs/server.cert
     ports:
-      - 8081:80
+      - 8081:443
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@nextcloud
       - PGADMIN_DEFAULT_PASSWORD=nextcloud
+      - PGADMIN_ENABLE_TLS=yes
 
 volumes:
   postgres:
