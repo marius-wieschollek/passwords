@@ -1,6 +1,6 @@
 ---
-name: Bug report
-about: Help us improving by reporting a bug
+name: Bug Report
+about: Report a functional error in Passwords
 labels: bug
 ---
 
@@ -31,9 +31,9 @@ Remember not to include personal data as this is public.
 - Server OS and Version:
 
 ### Steps to reproduce
-1. Tell us how to reproduce your issue.
-2. Provide sample data if needed
-3. Include relevant user settings and app settings if not standard
+1. <!-- Tell us percisely how to reproduce your bug -->
+2. <!-- Provide sample data if needed -->
+3. <!-- Include relevant user settings and app settings if not standard -->
 
 ### Actual result
 What does happen?
