@@ -1,3 +1,10 @@
+---
+name: Bug report
+about: Help us improving by reporting a bug
+labels: bug
+---
+
+<!--
 If you have **QUESTIONS** or need **SUPPORT**, please ask in the forum.
  -> https://help.nextcloud.com/c/apps/passwords
  or look into the **MANUAL**
@@ -6,14 +13,13 @@ If you have **QUESTIONS** or need **SUPPORT**, please ask in the forum.
 If you have an issue for the **BROWSER EXTENSION**, there is another repository for that
  -> https://github.com/marius-wieschollek/passwords-webextension
 
-If you experience a **BUG** or want to request a **FEATURE** check if there is already a similar issue
+Check the issue tracker
  -> https://github.com/marius-wieschollek/passwords/issues?utf8=%E2%9C%93&q=is%3Aissue
  or try the NIGHTLY releases
  -> https://apps.nextcloud.com/apps/passwords/releases
 
-If none of the options above fit you, delete this block and describe your request instead.
-Then fill out the form below.
-_Remember not to include personal data as this is public._
+Remember not to include personal data as this is public.
+-->
 
 
 ### System Information
