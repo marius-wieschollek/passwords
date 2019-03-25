@@ -27,7 +27,6 @@ use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
-use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -37,7 +36,7 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class RestoreBackupHelper {
 
-    const BACKUP_VERSION = 103;
+    const BACKUP_VERSION = 104;
 
     /**
      * @var ConfigurationService
@@ -48,11 +47,6 @@ class RestoreBackupHelper {
      * @var TagMapper
      */
     protected $tagMapper;
-
-    /**
-     * @var UuidHelper
-     */
-    protected $uuidHelper;
 
     /**
      * @var ShareMapper
@@ -103,7 +97,6 @@ class RestoreBackupHelper {
      * CreateBackupHelper constructor.
      *
      * @param TagMapper                 $tagMapper
-     * @param UuidHelper                $uuidHelper
      * @param ShareMapper               $shareMapper
      * @param FolderMapper              $folderMapper
      * @param ConfigurationService      $config
@@ -117,7 +110,6 @@ class RestoreBackupHelper {
      */
     public function __construct(
         TagMapper $tagMapper,
-        UuidHelper $uuidHelper,
         ShareMapper $shareMapper,
         FolderMapper $folderMapper,
         ConfigurationService $config,
@@ -131,7 +123,6 @@ class RestoreBackupHelper {
     ) {
         $this->config                    = $config;
         $this->tagMapper                 = $tagMapper;
-        $this->uuidHelper                = $uuidHelper;
         $this->shareMapper               = $shareMapper;
         $this->folderMapper              = $folderMapper;
         $this->passwordMapper            = $passwordMapper;

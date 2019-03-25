@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\Backup;
 
 use OCA\Passwords\Helper\Backup\Encryption\BackupSseV1R1Encryption;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 
 /**
  * Class BackupMigrationHelper
@@ -17,6 +18,11 @@ use OCA\Passwords\Helper\Backup\Encryption\BackupSseV1R1Encryption;
 class BackupMigrationHelper {
 
     /**
+     * @var UuidHelper
+     */
+    protected $uuidHelper;
+
+    /**
      * @var BackupSseV1R1Encryption
      */
     protected $encryption;
@@ -24,10 +30,12 @@ class BackupMigrationHelper {
     /**
      * BackupMigrationHelper constructor.
      *
+     * @param UuidHelper              $uuidHelper
      * @param BackupSseV1R1Encryption $encryption
      */
-    public function __construct(BackupSseV1R1Encryption $encryption) {
+    public function __construct(UuidHelper $uuidHelper, BackupSseV1R1Encryption $encryption) {
         $this->encryption = $encryption;
+        $this->uuidHelper = $uuidHelper;
     }
 
     /**
@@ -46,6 +54,7 @@ class BackupMigrationHelper {
         if($version < 101) $data = $this->upgrade100($data);
         if($version < 102) $data = $this->upgrade101($data);
         if($version < 103) $data = $this->upgrade102($data);
+        if($version < 104) $data = $this->upgrade103($data);
 
         $data['version'] = RestoreBackupHelper::BACKUP_VERSION;
 
@@ -83,10 +92,10 @@ class BackupMigrationHelper {
     }
 
     /**
-     * @param array $data
+     * @param array $database
      *
      * @return array
-     * @throws \Exception
+     * @throws \OCP\PreConditionNotMetException
      */
     protected function upgrade102(array $database): array {
         $this->encryption->setKeys($database['keys']);
@@ -113,5 +122,26 @@ class BackupMigrationHelper {
         }
 
         return $database;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function upgrade103(array $data): array {
+        foreach(['passwords', 'folders', 'tags'] as $type) {
+            foreach($data[ $type ] as &$object) {
+                foreach($object['revisions'] as &$revision) {
+                    $revision['cseKey'] = '';
+                }
+            }
+        }
+
+        foreach($data['passwordTagRelations'] as &$object) {
+            $object['uuid'] = $this->uuidHelper->generateUuid();
+        }
+
+        return $data;
     }
 }
