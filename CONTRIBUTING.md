@@ -44,9 +44,9 @@ You can also download a [file with sample data](https://git.mdns.eu/nextcloud/pa
 
 #### Services
  - [https://localhost](https://localhost) is Nextcloud (with the app)
- - [http://localhost:8080](http://localhost:8080) is PhpMyAdmin (for the MySQL database)
- - [http://localhost:1080](http://localhost:1080) is MailHog (for Emails)
- - [http://localhost:8081](http://localhost:8081) is pgAdmin (for the Postgres database, user `admin@nextcloud`, password `nextcloud`)
+ - [https://localhost:8080](https://localhost:8080) is PhpMyAdmin (for the MySQL database)
+ - [https://localhost:1080](https://localhost:1080) is MailHog (for Emails)
+ - [https://localhost:8081](https://localhost:8081) is pgAdmin (for the Postgres database, user `admin@nextcloud`, password `nextcloud`)
  - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
 
 #### LDAP Setup
