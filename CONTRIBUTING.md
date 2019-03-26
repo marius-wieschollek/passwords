@@ -1,7 +1,13 @@
-## Rules for Contributors
+## Rules for contributors
 
-* Git commits have to be [signed](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Contributing/Verify-Git-Commits).
+* Git commits have to be [signed](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Contributing/Verify-Git-Commits)
 * Keep any discussions civil
+
+## Rules for issues
+
+* Issues not follwing the template will be closed without review
+* Issues with the browser extension have to be opened in this [repository](https://github.com/marius-wieschollek/passwords-webextension)
+* For questions and support, visit the [forum](https://help.nextcloud.com/c/apps/passwords)
 
 ## Set up the local environment
 #### Requirements
