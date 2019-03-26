@@ -5,17 +5,17 @@ labels: bug
 ---
 
 <!--
-If you have **QUESTIONS** or need **SUPPORT**, please ask in the forum.
+For QUESTIONS or SUPPORT, please visit the forum
  -> https://help.nextcloud.com/c/apps/passwords
- or look into the **MANUAL**
+ or look into the MANUAL
  -> https://git.mdns.eu/nextcloud/passwords/wikis/home
 
-If you have an issue for the **BROWSER EXTENSION**, there is another repository for that
+If your request is about the BROWSER EXTENSION, please go to
  -> https://github.com/marius-wieschollek/passwords-webextension
 
 Check the issue tracker
- -> https://github.com/marius-wieschollek/passwords/issues?utf8=%E2%9C%93&q=is%3Aissue
- or try the NIGHTLY releases
+ -> https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue+label%3Abug
+ and try the NIGHTLY releases
  -> https://apps.nextcloud.com/apps/passwords/releases
 
 Remember not to include personal data as this is public.
@@ -40,3 +40,21 @@ What does happen?
 
 ### Expected result
 What should happen?
+
+### Nextcloud log
+<details>
+<summary>Nextcloud log</summary>
+
+```
+See Settings > Log  (Copy Raw)
+```
+</details>
+
+### Browser log
+<details>
+<summary>Browser log</summary>
+
+```
+Press F12, copy what you see
+```
+</details>
