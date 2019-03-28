@@ -7,12 +7,24 @@
             </div>
             <ul class="setup-content" :style="getStyle">
                 <start id="setup-slide-start" class="slide"/>
-                <encryption id="setup-slide-encryption" class="slide" :is-current="currentId === 1" v-on:status="updateStatus" v-on:continue="nextSlide"/>
+                <encryption id="setup-slide-encryption"
+                            class="slide"
+                            :is-current="currentId === 1"
+                            v-on:status="updateStatus"
+                            v-on:continue="nextSlide"/>
+                <admin-settings id="setup-slide-admin-settings" class="slide"/>
+                <user-settings id="setup-slide-user-settings" class="slide"/>
+                <keep-order id="setup-slide-keep-order" class="slide"/>
                 <integrations id="setup-slide-integrations" class="slide" v-on:redirect="openSection"/>
             </ul>
             <div class="setup-navigation">
                 <translate tag="div" say="Skip" class="skip" @click="nextSlide" v-if="showSkipButton"/>
-                <translate tag="div" :say="current.action.label" class="continue" :class="current.action.class" @click="current.action.click" v-if="showCustomButton"/>
+                <translate tag="div"
+                           :say="current.action.label"
+                           class="continue"
+                           :class="current.action.class"
+                           @click="current.action.click"
+                           v-if="showCustomButton"/>
                 <translate tag="div" :say="continueText" class="continue" @click="nextSlide" v-if="!showCustomButton"/>
             </div>
         </div>
@@ -24,11 +36,14 @@
     import Translate from '@vue/Components/Translate';
     import Start from '@vue/Dialog/SetupDialog/Start';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import KeepOrder from '@vue/Dialog/SetupDialog/KeepOrder';
     import Encryption from '@vue/Dialog/SetupDialog/Encryption';
     import Integrations from '@vue/Dialog/SetupDialog/Integrations';
+    import AdminSettings from '@vue/Dialog/SetupDialog/AdminSettings';
+    import UserSettings from "@/vue/Dialog/SetupDialog/UserSettings";
 
     export default {
-        components: {Integrations, Encryption, Translate, Start},
+        components: {UserSettings, Integrations, Encryption, Translate, KeepOrder, Start, AdminSettings},
         data() {
             let slides = [
                 {
@@ -40,6 +55,18 @@
                     skippable: true,
                     action   : null,
                     id       : 'encryption'
+                },
+                {
+                    title: 'Customize your experience',
+                    id   : 'admin-settings'
+                },
+                {
+                    title: 'Customize your experience',
+                    id   : 'user-settings'
+                },
+                {
+                    title: 'Bring order to your passwords',
+                    id   : 'keep-order'
                 },
                 {
                     title: 'Get connected',
@@ -57,8 +84,8 @@
         },
         computed  : {
             getStyle() {
-                if(this.currentId < 1) return '';
-                if(window.innerWidth > 900) {
+                if (this.currentId < 1) return '';
+                if (window.innerWidth > 900) {
                     return `transform: translateX(-${this.currentId * 900}px);`;
                 }
 
@@ -76,13 +103,13 @@
         },
         methods   : {
             goToSlide(id) {
-                if(!this.slides.hasOwnProperty(id)) return;
+                if (!this.slides.hasOwnProperty(id)) return;
 
                 this.current = this.slides[id];
                 this.currentId = id;
             },
             nextSlide() {
-                if(this.currentId < this.slides.length - 1) {
+                if (this.currentId < this.slides.length - 1) {
                     this.goToSlide(this.currentId + 1);
                 } else {
                     this.closeWizard();
@@ -93,9 +120,9 @@
                 this.closeWizard();
             },
             updateStatus(e) {
-                if(e.id === this.current.id) {
-                    if(e.hasOwnProperty('skippable')) this.current.skippable = e.skippable === true;
-                    if(e.hasOwnProperty('action')) this.current.action = e.action;
+                if (e.id === this.current.id) {
+                    if (e.hasOwnProperty('skippable')) this.current.skippable = e.skippable === true;
+                    if (e.hasOwnProperty('action')) this.current.action = e.action;
                 }
             },
             closeWizard() {
@@ -115,6 +142,7 @@
         display         : flex;
         align-items     : center;
         justify-content : center;
+        flex-wrap       : wrap;
 
         #setup-container {
             border-radius    : var(--border-radius-large);
@@ -128,6 +156,8 @@
                 width         : 100vw;
                 height        : 100vh;
                 border-radius : 0;
+                display       : flex;
+                flex-wrap     : wrap;
             }
         }
 
@@ -137,6 +167,7 @@
             background-size : cover;
             color           : var(--color-primary-text);
             text-align      : center;
+            width           : 100%;
 
             .logo {
                 height          : 120px;
@@ -166,31 +197,24 @@
         }
 
         .setup-content {
-            width      : 10000px;
-            transition : transform 0.25s ease-in-out;
+            width       : 10000px;
+            transition  : transform 0.25s ease-in-out;
+            display     : flex;
+            align-items : stretch;
 
             .slide {
-                height : 500px;
-                width  : 900px;
-                float  : left;
+                width : 900px;
             }
 
             @media (max-width : 900px) {
-                display : block;
-                height  : 100%;
-
                 .slide {
-                    height: 100%;
-                    width: 100vw;
+                    width : 100vw;
                 }
             }
         }
 
         .setup-navigation {
-            position : absolute;
-            bottom   : 0;
-            padding  : 0.5rem;
-            width    : 100%;
+            width : 100%;
 
             .skip,
             .continue {
@@ -201,6 +225,9 @@
                 cursor           : pointer;
                 display          : inline-block;
                 transition       : opacity 0.5s ease-in-out;
+                position         : absolute;
+                right            : .5rem;
+                bottom           : .5rem;
 
                 &.continue {
                     float : right;
@@ -208,13 +235,20 @@
 
                 &.skip {
                     background-color : rgba(0, 0, 0, 0);
-                    color            : var(--color-text-lighter)
+                    color            : var(--color-text-lighter);
+                    right            : auto;
+                    left             : .5rem;
                 }
 
                 &.disabled {
                     opacity : 0.5;
                     cursor  : default;
                 }
+            }
+
+            @media (max-width : 900px) {
+                position: absolute;
+                bottom: 0;
             }
         }
     }
