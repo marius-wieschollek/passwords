@@ -27,10 +27,10 @@
                     <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
                     <select id="setting-security-level" v-model="settings['user.password.generator.strength']">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <option :value="1">1</option>
+                        <option :value="2">2</option>
+                        <option :value="3">3</option>
+                        <option :value="4">4</option>
                     </select>
                     <settings-help text="A higher strength results in longer, more complex passwords"/>
 
@@ -157,11 +157,11 @@
                     <translate tag="h1" say="Danger Zone"/>
 
                     <translate tag="label" for="danger-reset" say="Reset all settings"/>
-                    <translate tag="input" type="button" id="danger-reset" value="Reset" @click="resetSettingsAction"/>
+                    <translate tag="input" type="button" id="danger-reset" localized-value="Reset" @click="resetSettingsAction"/>
                     <settings-help text="Reset all settings on this page to their defaults"/>
 
                     <translate tag="label" for="danger-purge" say="Delete everything"/>
-                    <translate tag="input" type="button" id="danger-purge" value="Delete" @click="resetUserAccount"/>
+                    <translate tag="input" type="button" id="danger-purge" localized-value="Delete" @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
                 </section>
                 <section class="tests" v-if="nightly">
