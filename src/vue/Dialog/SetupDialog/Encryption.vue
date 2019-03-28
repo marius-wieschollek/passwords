@@ -2,29 +2,47 @@
     <li>
         <p>
             <translate say="Passwords offers modern and strong encryption to protect your data from prying eyes."/>
-            <translate say="Coose a secure password below to activate the ultimate protection for your passwords."/>
+            <translate say="Choose a secure password below to activate the ultimate protection for your passwords."/>
         </p>
         <form @submit="setPassword" v-if="!processing">
             <div class="password-setup">
-                <input type="password" placeholder="Password" pattern=".{12,}" v-model="password" readonly>
-                <input type="password" placeholder="Repeat your Password" v-model="confirm">
+                <input type="password"
+                       :placeholder="getPasswordPlaceholder"
+                       pattern=".{12,}"
+                       v-model="password"
+                       readonly>
+                <input type="password" :placeholder="getPasswordRepeatPlaceholder" v-model="confirm">
+                <div class="advanced" v-if="advanced">
+                    <div>
+                        <input type="checkbox" id="encrypt-all" v-model="encryptDb"/>
+                        <translate tag="label" for="encrypt-all" say="Encrypt my existing passwords"/>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="save-password" v-model="savePassword"/>
+                        <translate tag="label" for="save-password" say="Save the password"/>
+                    </div>
+                </div>
             </div>
         </form>
         <div class="encryption-status" v-if="processing">
             <translate tag="h2" say="Installing Encryption"/>
             <div>
+                <translate say="Keychain"/>
+                <span :class="getKeychainClass">{{getKeychainStatus}}</span>
+            </div>
+            <div v-if="encryptDb">
                 <translate say="Folders"/>
                 <span :class="getFolderClass">{{getFolderStatus}}</span>
             </div>
-            <div>
+            <div v-if="encryptDb">
                 <translate say="Tags"/>
                 <span :class="getTagsClass">{{getTagsStatus}}</span>
             </div>
-            <div>
+            <div v-if="encryptDb">
                 <translate say="Passwords"/>
                 <span :class="getPasswordsClass">{{getPasswordsStatus}}</span>
             </div>
-            <div>
+            <div v-if="encryptDb">
                 <translate say="Clean up"/>
                 <span :class="getCleanupClass">{{getCleanupStatus}}</span>
             </div>
@@ -36,6 +54,8 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
+    import Localisation from '@js/Classes/Localisation';
+    import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionManager from '@js/Manager/EncryptionManager';
 
     export default {
@@ -47,13 +67,23 @@
             }
         },
         data() {
+            let advanced = SettingsManager.get('client.settings.advanced');
+
             return {
-                password  : '',
-                confirm   : '',
-                processing: false,
-                ready     : false,
-                hasError  : false,
-                status    : {
+                password    : '',
+                confirm     : '',
+                processing  : false,
+                ready       : false,
+                hasError    : false,
+                advanced,
+                savePassword: true,
+                encryptDb   : true,
+                status      : {
+                    keychain : {
+                        status : 'waiting',
+                        current: 0,
+                        total  : 0
+                    },
                     folders  : {
                         status : 'waiting',
                         current: 0,
@@ -83,6 +113,15 @@
             }, 250);
         },
         computed  : {
+            getPasswordPlaceholder() {
+                return Localisation.translate('Password');
+            },
+            getPasswordRepeatPlaceholder() {
+                return Localisation.translate('Repeat your password');
+            },
+            getKeychainClass() {
+                return this.getStatusClass('keychain');
+            },
             getFolderClass() {
                 return this.getStatusClass('folders');
             },
@@ -94,6 +133,9 @@
             },
             getCleanupClass() {
                 return this.getStatusClass('cleanup');
+            },
+            getKeychainStatus() {
+                return this.getStatusText('keychain');
             },
             getFolderStatus() {
                 return this.getStatusText('folders');
@@ -110,38 +152,43 @@
         },
         methods   : {
             getStatusClass(type) {
-                if(this.hasError && this.status[type].status !== 'success') return 'status failed';
+                if (this.hasError && this.status[type].status !== 'success') return 'status failed';
 
                 return this.status[type].status === 'waiting' ? 'status loading':`status ${this.status[type].status}`;
             },
             getStatusText(type) {
-                if(this.status[type].status === 'failed' || this.hasError) return '✖';
-                if(this.status[type].status === 'processing') {
+                if (this.status[type].status === 'failed' || this.hasError) return '✖';
+                if (this.status[type].status === 'processing') {
                     return this.status[type].current + ' / ' + this.status[type].total;
                 }
-                if(this.status[type].status === 'success') return '✔';
+                if (this.status[type].status === 'success') return '✔';
             },
             async setPassword() {
-                if(this.processing) return;
+                if (this.processing) return;
                 this.processing = true;
                 this.sendStatusEvent();
 
-                await EncryptionManager.install(this.password, true, true, (d) => { this.updateEncryptionStatus(d); });
+                await EncryptionManager.install(
+                    this.password,
+                    this.savePassword,
+                    this.encryptDb,
+                    (d) => {this.updateEncryptionStatus(d);}
+                    );
 
                 this.ready = true;
                 this.sendStatusEvent();
             },
             updateEncryptionStatus(d) {
-                for(let key in this.status) {
-                    if(!this.status.hasOwnProperty(key)) continue;
+                for (let key in this.status) {
+                    if (!this.status.hasOwnProperty(key)) continue;
 
                     this.status[key].current = d[key].current;
                     this.status[key].status = d[key].status;
                     this.status[key].total = d[key].total;
 
-                    if(d[key].status === 'failed') this.hasError = true;
+                    if (d[key].status === 'failed') this.hasError = true;
                 }
-                if(d.keychain.status === 'failed') this.hasError = true;
+                if (d.keychain.status === 'failed') this.hasError = true;
             },
             sendStatusEvent() {
                 let event = {
@@ -154,11 +201,11 @@
                     id       : 'encryption'
                 };
 
-                if(this.password.length > 12 && this.password === this.confirm && !this.processing) {
+                if (this.password.length > 12 && this.password === this.confirm && !this.processing) {
                     event.action.class = '';
                     event.action.click = (e) => { this.setPassword(e); };
                 }
-                if(this.ready) {
+                if (this.ready) {
                     event.action.label = 'Continue';
                     event.action.class = '';
                     event.action.click = (e) => { this.$emit('continue', {}); };
@@ -169,7 +216,7 @@
         },
         watch     : {
             isCurrent(value) {
-                if(value) this.sendStatusEvent();
+                if (value) this.sendStatusEvent();
             },
             confirm() {
                 this.sendStatusEvent();
@@ -183,7 +230,9 @@
 
 <style lang="scss">
     #setup-slide-encryption,
-    #setup-slide-integrations {
+    #setup-slide-keep-order,
+    #setup-slide-integrations,
+    #setup-slide-admin-settings {
         font-size   : 1.25rem;
         line-height : 1.5rem;
 
@@ -231,11 +280,28 @@
             .password-setup {
                 width : 50%;
 
-                input {
+                input[type=password] {
                     display       : block;
                     padding       : 0.75rem;
                     width         : 100%;
                     margin-bottom : 1rem;
+                }
+
+                .advanced {
+                    padding : 0 5.5rem;
+
+                    input {
+                        min-height : auto;
+                        margin     : 0;
+                        padding    : 0;
+                    }
+
+                    label {
+                        line-height : 2rem;
+                        font-size   : 1rem;
+                        display     : inline-block;
+                        margin-left : 0.25rem;
+                    }
                 }
 
                 @media (max-width : $width-extra-small) {
