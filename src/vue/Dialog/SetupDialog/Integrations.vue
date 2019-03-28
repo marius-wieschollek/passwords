@@ -1,8 +1,8 @@
 <template>
     <li>
         <p>
-            <translate say="Access your passwords from everywhere with ease. All thanks to our many great app and extensions."/>
-            <translate say="Click on &quot;More&quot; to open our Apps & Extensions section where you can find all the apps developed by us and our community."/>
+            <translate say="Access your passwords with ease from anywhere, thanks to our apps and extensions."/>
+            <translate say="You can find our Apps & Extensions section in &quot;More&quot; or just click the button below."/>
         </p>
         <translate tag="div" class="setup-cta" say="Go to Apps & Extensions" @click="openApps"/>
     </li>
