@@ -1,0 +1,53 @@
+{
+    "translations": [
+        {
+            "After launch, show my"         : "Nach dem starten zeige meine",
+            "folders"                       : "Ordner",
+            "tags"                          : "Tags",
+            "favorites"                     : "Favoriten",
+            "passwords"                     : "Passwörter",
+            "recently changed"              : "zuletzt Geänderte",
+            "Mark my passwords if..."       : "Markiere meine Passwörter wenn...",
+            "they are older than"           : "sie älter sind als",
+            "three months"                  : "drei Monate",
+            "six months"                    : "sechs Monate",
+            "one year"                      : "ein Jahr",
+            "two years"                     : "zwei Jahre",
+            "{days} days"                   : "{days} Tage",
+            "they are duplicates"           : "sie Duplikate sind",
+            "Make my new passwords"         : "Mache meine neuen Passwörter",
+            "strong"                        : "stark",
+            "stronger"                      : "stärker",
+            "very strong"                   : "sehr stark",
+            "extremely strong"              : "extrem stark",
+            "include numbers"               : "und füge Zahlen ein",
+            "include special characters"    : "und füge Sonderzeichen ein",
+            "A safe home for your passwords": "Ein sicherer Ort für deine Passwörter",
+            "Keep your passwords secret"    : "Schütze deine Daten",
+            "Customize your experience"     : "Vielfältig Anpassbar",
+            "Bring order to your passwords" : "Organisiere deine Passwörter",
+            "Get connected"                 : "Hol dir unsere Apps",
+            "Encrypt my existing passwords" : "Verschlüssele meine bestehenden Passwörter",
+            "Save the password"             : "Speichere das Passwort",
+            "Repeat your password"          : "Wiederhole dein Passwort",
+            "Installing Encryption"         : "Aktiviere Verschlüsselung",
+            "Keychain"                      : "Schlüsselbund",
+            "Clean up"                      : "Aufräumen",
+            "Success"                       : "Erfolgreich",
+            "Failed"                        : "Fehlgeschlagen",
+            "Go to Apps & Extensions"       : "Öffne Apps & Extensions",
+            "Continue"                      : "Weiter",
+            "Skip"                          : "Überspringen",
+            "Close"                         : "Schließen"
+        },
+        {
+            "There are many settings so you can customize your experience."                         : "Es gibt viele Einstellungen, mit denen du die App anpassen kannst.",
+            "You can find all of them in \"More\", but we put the most common here:"                : "Du findest alle unter \"Mehr\", aber die gängigsten haben wir hier zusammengetragen:",
+            "Passwords offers modern and strong encryption to protect your data from prying eyes."  : "Die Passwörter-App bietet eine moderne und starke Verschlüsselung, um deine Daten vor neugierigen Blicken zu schützen.",
+            "Choose a secure password below to activate the ultimate protection for your passwords.": "Wähle unten ein sicheres Passwort, um unseren ultimativen Schutz für deine Passwörter zu aktivieren.",
+            "Access your passwords with ease from anywhere, thanks to our apps and extensions."     : "Greife dank unserer Apps und Erweiterungen einfach und von überall auf deine Passwörter zu.",
+            "You can find our Apps & Extensions section in \"More\" or just click the button below.": "Du findest unseren Apps & Extensions-Bereich unter \"Mehr\" oder klick einfach auf den Button unten."
+        }
+    ],
+    "pluralForm"  : "nplurals=2; plural=(n != 1);"
+}
