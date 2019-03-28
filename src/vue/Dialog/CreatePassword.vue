@@ -17,7 +17,7 @@
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
                                 <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" autocomplete="new-password" v-model="password.password" required>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" autocomplete="new-password" v-model="password.password" required readonly>
                         </div>
                         <div class="settings" :class="{active: generator.active}">
                             <input id="password-password-numbers" type="checkbox" v-model="generator.numbers" :disabled="!generator.active"/>
@@ -94,6 +94,10 @@
         mounted() {
             this.loadSimpleMde();
             document.getElementById('password-username').focus();
+            setTimeout(
+                () => {document.getElementById('password-password').removeAttribute('readonly');},
+                250
+            );
         },
 
         methods: {
