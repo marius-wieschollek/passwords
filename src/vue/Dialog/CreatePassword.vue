@@ -10,14 +10,14 @@
                     <translate tag="div" class="section-title" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
-                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username">
+                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" autocomplete="off">
                         <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
                                 <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
                                 <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" v-model="password.password" required readonly>
+                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" autocomplete="new-password" v-model="password.password" required>
                         </div>
                         <div class="settings" :class="{active: generator.active}">
                             <input id="password-password-numbers" type="checkbox" v-model="generator.numbers" :disabled="!generator.active"/>
@@ -94,10 +94,6 @@
         mounted() {
             this.loadSimpleMde();
             document.getElementById('password-username').focus();
-            setTimeout(
-                () => {document.getElementById('password-password').removeAttribute('readonly');},
-                250
-            );
         },
 
         methods: {
