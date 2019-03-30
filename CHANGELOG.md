@@ -1,6 +1,7 @@
 #### 2019.4.0 - Feature release
 - Added Nextcloud 16 support
 - Improved custom fields
+- Improved autofill prevention in chrome
 - Fixed double sse key generation
 - Fixed tags being not removed from passwords
 
