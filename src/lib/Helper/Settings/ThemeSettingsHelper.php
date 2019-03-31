@@ -53,7 +53,7 @@ class ThemeSettingsHelper {
      * @return null|string
      */
     public function get(string $key) {
-        switch($key) {
+        switch ($key) {
             case 'color':
             case 'color.primary':
                 return $this->theming->getColorPrimary();
@@ -96,7 +96,9 @@ class ThemeSettingsHelper {
      */
     protected function getFolderIcon(): string {
         if($this->config->isAppEnabled('theming')) {
-            return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg']);
+            $version = $this->config->getAppValue('scss.variables', '0', 'core');
+
+            return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => $version]);
         }
 
         return $this->urlGenerator->getAbsoluteURL(
@@ -109,7 +111,9 @@ class ThemeSettingsHelper {
      */
     protected function getAppIcon(): string {
         if($this->config->isAppEnabled('theming')) {
-            return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg']);
+            $version = $this->config->getAppValue('scss.variables', '0', 'core');
+
+            return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => $version]);
         }
 
         return $this->urlGenerator->getAbsoluteURL(
@@ -124,8 +128,7 @@ class ThemeSettingsHelper {
         if(method_exists($this->theming, 'getBackground')) {
             $url = $this->theming->getBackground();
         } else {
-            list($version,) = explode('.', $this->config->getSystemValue('version'), 2);
-            $url = $this->urlGenerator->imagePath('core', 'background.'.($version === '12' ? 'jpg':'png'));
+            $url = $this->urlGenerator->imagePath('core', 'background.png');
         }
         if($this->config->isAppEnabled('unsplash')) {
             return 'https://source.unsplash.com/random/featured';

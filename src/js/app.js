@@ -16,7 +16,7 @@ import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
  */
 __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
-(function() {
+(function () {
     let isLoaded     = false,
         loadInterval = null,
         app          = null;
@@ -32,7 +32,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         );
 
         router.beforeEach((to, from, next) => {
-            if(!API.isAuthorized && to.name !== 'Authorize') {
+            if (!API.isAuthorized && to.name !== 'Authorize') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});
@@ -44,21 +44,22 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     }
 
     async function initApi() {
-        let user     = document.querySelector('meta[name=api-user]').getAttribute('content'),
-            password = document.querySelector('meta[name=api-token]').getAttribute('content'),
-            baseUrl  = getBaseUrl();
-        if(!password) password = await Messages.prompt('Password', 'Login', '', true);
+        let user       = document.querySelector('meta[name=api-user]').getAttribute('content'),
+            password   = document.querySelector('meta[name=api-token]').getAttribute('content'),
+            folderIcon = SettingsManager.get('server.theme.folder.icon'),
+            baseUrl    = getBaseUrl();
+        if (!password) password = await Messages.prompt('Password', 'Login', '', true);
 
-        API.initialize({baseUrl, user, password, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
+        API.initialize({baseUrl, user, password, folderIcon, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
     }
 
     async function load() {
-        if(isLoaded || !document.querySelector('meta[name=api-user]')) return;
+        if (isLoaded || !document.querySelector('meta[name=api-user]')) return;
         clearInterval(loadInterval);
         isLoaded = true;
 
-        await initApi();
         SettingsManager.init();
+        await initApi();
         initApp();
         SearchManager.init();
         initEvents();
@@ -72,13 +73,13 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         document.addEventListener('keyup', (e) => {
             let current = code[pointer];
 
-            if(current !== e.keyCode || e.ctrlKey || e.shiftKey || e.metaKey) {
+            if (current !== e.keyCode || e.ctrlKey || e.shiftKey || e.metaKey) {
                 pointer = 0;
                 return;
             }
 
             pointer++;
-            if(pointer === code.length) {
+            if (pointer === code.length) {
                 document.getElementById('searchbox').value = '';
                 app.starChaser = true;
             }
@@ -88,7 +89,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     function getBaseUrl() {
         let baseUrl = location.href;
 
-        if(baseUrl.indexOf('index.php') !== -1) {
+        if (baseUrl.indexOf('index.php') !== -1) {
             baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
         } else {
             baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
@@ -97,9 +98,9 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         return baseUrl;
     }
 
-    if(location.protocol !== 'https:') {
+    if (location.protocol !== 'https:') {
         location.href = `${location.origin}${location.pathname}?https=false`;
-    } else if(isCompatibleBrowser()) {
+    } else if (isCompatibleBrowser()) {
         window.addEventListener('load', () => { load(); }, false);
         loadInterval = setInterval(() => { load(); }, 10);
     }
