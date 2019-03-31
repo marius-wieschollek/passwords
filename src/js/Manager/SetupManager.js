@@ -1,11 +1,13 @@
 import Vue from 'vue';
-import SettingsManager from '@js/Manager/SettingsManager';
 import Localisation from "@/js/Classes/Localisation";
+import SettingsManager from '@js/Manager/SettingsManager';
+import DeferredActivationService from '@js/Service/DeferredActivationService';
 
 class SetupManager {
 
     async run() {
         if(SettingsManager.get('client.setup.initialized', false)) return;
+        if(await DeferredActivationService.check('firstrunwizard')) return;
         await Localisation.loadSection('tutorial');
 
         let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),

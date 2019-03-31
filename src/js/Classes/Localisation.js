@@ -38,33 +38,32 @@ export default class Localisation {
     /**
      *
      * @param section
-     * @returns {Promise<any>}
+     * @returns {Promise<boolean>}
      */
-    static loadSection(section) {
+    static async loadSection(section) {
         let language = OC.getLanguage().replace('-', '_');
-        if (language === 'en') return;
+        if (language === 'en') return true;
         let url = OC.filePath('passwords', 'l10n', `${section}/${language}.json`);
 
-        return new Promise((resolve, reject) => {
-            fetch(new Request(url))
-                .then((response) => {
-                    response.json()
-                        .then((d) => {
-                            if (response.ok) {
-                                if (d.translations) {
-                                    let translations = d.translations;
-                                    if(Array.isArray(translations)) {
-                                        translations = Object.assign.apply(this, translations);
-                                    }
+        try {
+            let response = fetch(new Request(url));
 
-                                    OC.L10N.register('passwords', translations, d.pluralForm);
-                                }
-                                resolve();
-                            } else {
-                                reject(d);
-                            }
-                        });
-                });
-        });
+            if (response.ok) {
+                let data = await response.json();
+
+                if (data.hasOwnProperty('translations')) {
+                    let translations = data.translations;
+                    if(Array.isArray(translations)) {
+                        translations = Object.assign.apply(this, translations);
+                    }
+
+                    OC.L10N.register('passwords', translations, data.pluralForm);
+                    return true;
+                }
+            }
+        }catch (e) {
+            console.error(e);
+        }
+        return false;
     }
 }

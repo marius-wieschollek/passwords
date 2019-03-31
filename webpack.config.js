@@ -1,10 +1,11 @@
-let webpack = require('webpack'),
-    UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
-    CopyWebpackPlugin = require('copy-webpack-plugin'),
+let webpack            = require('webpack'),
+    config             = require('./package.json'),
+    UglifyJSPlugin     = require('uglifyjs-webpack-plugin'),
+    CopyWebpackPlugin  = require('copy-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    ProgressBarPlugin = require('progress-bar-webpack-plugin'),
-    OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+    ExtractTextPlugin  = require('extract-text-webpack-plugin'),
+    ProgressBarPlugin  = require('progress-bar-webpack-plugin'),
+    OptimizeCSSPlugin  = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env) => {
     let production = !!(env && env.production);
@@ -14,12 +15,14 @@ module.exports = (env) => {
         new webpack.DefinePlugin(
             {
                 'process.env': {
-                    NODE_ENV: production ? '"production"':'"development"',
+                    NODE_ENV        : production ? '"production"':'"development"',
+                    APP_VERSION     : `"config.version"`,
+                    APP_NAME        : '"webapp"',
                     NIGHTLY_FEATURES: !!(env && env.features)
                 }
             }
         ),
-        new ExtractTextPlugin({filename:'css/[name].css', allChunks:true}),
+        new ExtractTextPlugin({filename: 'css/[name].css', allChunks: true}),
         new CopyWebpackPlugin(
             [
                 {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`},
@@ -30,7 +33,7 @@ module.exports = (env) => {
         new CleanWebpackPlugin(['src/css', 'src/js/Static'])
     ];
 
-    if(production) {
+    if (production) {
         plugins.push(new OptimizeCSSPlugin({cssProcessorOptions: {safe: true}}));
         plugins.push(
             new UglifyJSPlugin(

@@ -3,6 +3,7 @@ import sodium from 'libsodium-wrappers';
 import Encryption from '@js/ApiClient/Encryption';
 import EnhancedApi from '@js/ApiClient/EnhancedApi';
 import SettingsManager from '@js/Manager/SettingsManager';
+import DeferredActivationService from "@/js/Service/DeferredActivationService";
 
 class EncryptionTestHelper {
     constructor() {
@@ -13,7 +14,9 @@ class EncryptionTestHelper {
     /**
      *
      */
-    initTests() {
+    async initTests() {
+        if(await DeferredActivationService.check('encryptiontests')) return;
+
         if(!API.isAuthorized) {
             console.log('Encryption tests scheduled after login');
             setTimeout(() => { this.initTests(); }, 5000);
