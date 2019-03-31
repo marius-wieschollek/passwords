@@ -81,7 +81,7 @@
                     </select>
                     <div v-if="source === 'json' && nightly">
                         <translate tag="label" for="passwords-import-encrypt" say="Backup password" title="For encrypted backups"/>
-                        <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" readonly/>
+                        <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" autocomplete="new-password" readonly/>
                     </div>
                     <br>
                     <div v-if="source === 'csv'">

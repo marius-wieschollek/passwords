@@ -15,6 +15,7 @@
                v-model="value"
                maxlength="320"
                v-if="type !== 'file'"
+               :autocomplete="getAutoComplete"
                :disabled="!isValidName"
                :pattern="getPattern"
                required/>
@@ -75,6 +76,10 @@
                 if(this.type === 'url') return '\\w+:\/\/.+';
                 if(this.type === 'email') return '[\\w\\._-]+@.+';
                 return false;
+            },
+            getAutoComplete() {
+                if(this.type === 'secret') return 'new-password';
+                return 'on';
             },
             namePlaceholder() {
                 return Localisation.translate('Name');
