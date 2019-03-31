@@ -96,7 +96,7 @@ class ThemeSettingsHelper {
      */
     protected function getFolderIcon(): string {
         if($this->config->isAppEnabled('theming')) {
-            $version = $this->config->getAppValue('scss.variables', '0', 'core');
+            $version = $this->config->getAppValue('cachebuster', '0', 'theming');
 
             return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => $version]);
         }
@@ -111,7 +111,7 @@ class ThemeSettingsHelper {
      */
     protected function getAppIcon(): string {
         if($this->config->isAppEnabled('theming')) {
-            $version = $this->config->getAppValue('scss.variables', '0', 'core');
+            $version = $this->config->getAppValue('cachebuster', '0', 'theming');
 
             return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => $version]);
         }
