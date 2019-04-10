@@ -198,7 +198,7 @@ class RestoreBackupHelper {
             $this->config->setAppValue('SSEv1ServerKey', $keys['server']['SSEv1ServerKey']);
         }
 
-        foreach($keys['users'] as $user => $userKeys) {
+        foreach ($keys['users'] as $user => $userKeys) {
             if($user !== null && $user !== $user) continue;
 
             $sseV1UserKey = $this->config->getUserValue('SSEv1UserKey', null, $user);
@@ -229,11 +229,13 @@ class RestoreBackupHelper {
      * @param null|string            $user
      */
     protected function restoreModels(array $models, AbstractMapper $modelMapper, AbstractRevisionMapper $revisionMapper, string $modelClass, string $revisionClass, ?string $user): void {
-        foreach($models as $model) {
+        foreach ($models as $model) {
             if($user !== null && $user !== $model['userId']) continue;
             $revisions = $model['revisions'];
             unset($model['revisions']);
-            foreach($revisions as $revision) $this->createAndSaveObject($revision, $revisionMapper, $revisionClass);
+            foreach ($revisions as $revision) {
+                $this->createAndSaveObject($revision, $revisionMapper, $revisionClass);
+            }
 
             $this->createAndSaveObject($model, $modelMapper, $modelClass);
         }
@@ -246,7 +248,7 @@ class RestoreBackupHelper {
      * @param null|string    $user
      */
     protected function restoreEntities(array $entities, AbstractMapper $entityMapper, string $class, ?string $user): void {
-        foreach($entities as $entity) {
+        foreach ($entities as $entity) {
             if($user !== null && $user !== $entity['userId']) continue;
             $this->createAndSaveObject($entity, $entityMapper, $class);
         }
@@ -260,7 +262,7 @@ class RestoreBackupHelper {
     protected function createAndSaveObject(array $entity, AbstractMapper $entityMapper, string $class): void {
         /** @var AbstractEntity $entityObject */
         $entityObject = new $class();
-        foreach($entity as $key => $value) {
+        foreach ($entity as $key => $value) {
             if($key === 'id') continue;
             $entityObject->setProperty($key, $value);
         }
@@ -273,23 +275,23 @@ class RestoreBackupHelper {
      */
     protected function deleteEntities(AbstractMapper $entityMapper, ?string $user): void {
         $entities = $entityMapper->findAll();
-        foreach($entities as $entity) {
+        foreach ($entities as $entity) {
             if($user !== null && $user !== $entity->getUserId()) continue;
             $entityMapper->delete($entity);
         }
     }
 
     /**
-     * @param             $userSettings
+     * @param array       $userSettings
      * @param null|string $user
      *
      * @throws \Exception
      */
-    protected function restoreUserSettings($userSettings, ?string $user): void {
-        foreach($userSettings as $uid => $settings) {
+    protected function restoreUserSettings(array $userSettings, ?string $user): void {
+        foreach ($userSettings as $uid => $settings) {
             if($user !== null && $user !== $uid) continue;
 
-            foreach($settings as $key => $value) {
+            foreach ($settings as $key => $value) {
                 if($value === null) {
                     $this->userSettingsHelper->reset($key, $uid);
                 } else {
@@ -300,13 +302,13 @@ class RestoreBackupHelper {
     }
 
     /**
-     * @param             $clientSettings
+     * @param array       $clientSettings
      * @param null|string $user
      *
      * @throws \Exception
      */
-    protected function restoreClientSettings($clientSettings, ?string $user): void {
-        foreach($clientSettings as $uid => $value) {
+    protected function restoreClientSettings(array $clientSettings, ?string $user): void {
+        foreach ($clientSettings as $uid => $value) {
             if($user !== null && $user !== $uid) continue;
 
             $this->config->setUserValue('client/settings', $value, $uid);
@@ -314,10 +316,10 @@ class RestoreBackupHelper {
     }
 
     /**
-     * @param $settings
+     * @param array $settings
      */
     protected function restoreApplicationSettings(array $settings): void {
-        foreach($settings as $key => $value) {
+        foreach ($settings as $key => $value) {
             if($value === null) {
                 $this->config->deleteAppValue($key);
             } else {
