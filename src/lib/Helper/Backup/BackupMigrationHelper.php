@@ -83,10 +83,10 @@ class BackupMigrationHelper {
     }
 
     /**
-     * @param array $data
+     * @param array $database
      *
      * @return array
-     * @throws \Exception
+     * @throws \OCP\PreConditionNotMetException
      */
     protected function upgrade102(array $database): array {
         $this->encryption->setKeys($database['keys']);
