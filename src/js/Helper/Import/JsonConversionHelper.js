@@ -14,7 +14,10 @@ export default class ImportJsonConversionHelper {
         if(json.encrypted) await this._decryptJsonBackup(options, json);
 
         if(json.version < 2) this._convertCustomFields(json);
-        if(json.version > 2) throw new Error('Unsupported database version');
+        if(json.version > 2) {
+            if(json.version > 99) throw new Error('This seems to be a server backup. It can only be restored using the command line.');
+            throw new Error('Unsupported database version');
+        }
 
         return json;
     }
