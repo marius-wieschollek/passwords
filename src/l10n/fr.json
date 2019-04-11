@@ -106,7 +106,7 @@
         "Open the passwords app to see them."                                                       : "Ouvrez l’application pour voir les mots de passe.",
         "A password was shared with you on %s"                                                      : "Un mot de passe à été partagé avec vous sur %s",
         "Several passwords were shared with you on %s"                                              : "Plusieurs mots de passe ont été partagé avec vous sur %s",
-        "View passwords shared with me"                                                             : "Voir les mots de passe partagé avec moi",
+        "View passwords shared with me"                                                             : "Voir les mots de passe partagés avec moi",
         "One of your passwords could not be shared because the recipient already has access to it." : "Un ou plusieurs mots de passes ne peuvent être partagé, car le destinataire y  déjà accès.",
         "%s of your passwords could not be shared because the recipient already has access to them.": "%s mots de passes ne peuvent être partagé, car le destinataire y a déjà accès.",
         "Open the passwords app to see your shared passwords."                                      : "Ouvrez l’application pour voir vos mots de passe partagés.",

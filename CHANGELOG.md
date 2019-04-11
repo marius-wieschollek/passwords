@@ -1,3 +1,7 @@
+#### 2019.4.1 - Bugfix release
+ - Fixed spelling in french translation
+ - Fixed incorrect backup version
+
 #### 2019.4.0 - Feature release
 - Added Nextcloud 16 support
 - Improved custom fields

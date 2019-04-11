@@ -47,9 +47,7 @@ class BackupMigrationHelper {
     public function convert(array $data): array {
         $version = $data['version'];
 
-        if($version < 100 || $version > RestoreBackupHelper::BACKUP_VERSION) {
-            throw new \Exception('Unsupported backup version: '.$version);
-        }
+        $this->validateBackup($version);
 
         if($version < 101) $data = $this->upgrade100($data);
         if($version < 102) $data = $this->upgrade101($data);
@@ -143,5 +141,20 @@ class BackupMigrationHelper {
         }
 
         return $data;
+    }
+
+    /**
+     * @param $version
+     *
+     * @throws \Exception
+     */
+    protected function validateBackup($version): void {
+        if($version < 100) {
+            throw new \Exception('This seems to be a client backup. It can only be restored using the web interface');
+        }
+
+        if($version > RestoreBackupHelper::BACKUP_VERSION) {
+            throw new \Exception('Unsupported backup version: '.$version);
+        }
     }
 }

@@ -123,7 +123,7 @@ class CreateBackupHelper {
     }
 
     /**
-     * @return string
+     * @return array
      * @throws \Exception
      */
     public function getData(): array {
@@ -155,7 +155,6 @@ class CreateBackupHelper {
      * @param \OCA\Passwords\Db\AbstractRevisionMapper $revisionMapper
      *
      * @return array
-     * @throws \Exception
      */
     protected function getModelArray(AbstractMapper $modelMapper, AbstractMapper $revisionMapper): array {
         /** @var Password[] $passwords */

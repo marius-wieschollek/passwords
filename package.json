@@ -40,7 +40,7 @@
         "jquery": "^3.3.1",
         "libsodium": "^0.7.4",
         "libsodium-wrappers": "^0.7.4",
-        "marked": "^0.6.1",
+        "marked": "^0.6.2",
         "node-sass": "^4.11.0",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
         "progress-bar-webpack-plugin": "^1.12.1",
@@ -54,12 +54,12 @@
         "vue": "^2.6.10",
         "vue-loader": "^14.2.4",
         "vue-qrcode-component": "^2.1.1",
-        "vue-router": "^3.0.2",
+        "vue-router": "^3.0.3",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.10",
-        "webdriverio": "^5.7.8",
+        "webdriverio": "^5.7.12",
         "webpack": "^3.12.0",
-        "xlsx": "^0.14.1"
+        "xlsx": "^0.14.2"
     },
     "repository": {
         "type": "git",
