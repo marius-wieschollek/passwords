@@ -1,4 +1,5 @@
 #### 2019.4.1 - Bugfix release
+ - Fixed invalid font file path in icon generator
  - Fixed spelling in french translation
  - Fixed incorrect backup version
 
