@@ -13,10 +13,10 @@ export default class ImportCsvConversionHelper {
      * @returns {{}}
      */
     static async processGenericCsv(data, options) {
-        let profile = options.profile === 'custom' ? options:ImportCsvConversionHelper._getProfile(options.profile),
-            entries = ImportCsvConversionHelper._processCsv(data, profile);
+        let profile = options.profile === 'custom' ? options:this._getProfile(options.profile),
+            entries = this._processCsv(data, profile);
 
-        return await ImportCsvConversionHelper._convertCsv(entries, profile);
+        return await this._convertCsv(entries, profile);
     }
 
     /**
@@ -33,9 +33,9 @@ export default class ImportCsvConversionHelper {
             data[i][5] = line[5].substr(1, line[5].length - 2);
         }
 
-        let profile = ImportCsvConversionHelper._getProfile('passman'),
-            entries = ImportCsvConversionHelper._processCsv(data, profile);
-        return await ImportCsvConversionHelper._convertCsv(entries, profile);
+        let profile = this._getProfile('passman'),
+            entries = this._processCsv(data, profile);
+        return await this._convertCsv(entries, profile);
     }
 
     /**
@@ -64,11 +64,11 @@ export default class ImportCsvConversionHelper {
 
                     if(value === undefined) continue;
                     let targetField = fieldMap.hasOwnProperty(field) ? fieldMap[field]:field;
-                    object[targetField] = ImportCsvConversionHelper._processCsvValue(value, field);
+                    object[targetField] = this._processCsvValue(value, field);
                 }
             }
 
-            if(options.repair) ImportCsvConversionHelper._repairObject(object);
+            if(options.repair) this._repairObject(object);
             db.push(object);
         }
 
@@ -106,17 +106,17 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static async _convertCsv(data, options) {
-        let [tags, tagIdMap, tagKeyMap]          = await ImportCsvConversionHelper._generateTags(data, options),
-            [folders, folderIdMap, folderKeyMap] = await ImportCsvConversionHelper._generateFolders(data, options),
+        let [tags, tagIdMap, tagKeyMap]          = await this._generateTags(data, options),
+            [folders, folderIdMap, folderKeyMap] = await this._generateFolders(data, options),
             db                                   = {tags, folders, passwords: []};
 
         if(options.db === 'passwords') {
-            let passwordIdMap = ImportCsvConversionHelper._createLabelMapping(await API.listPasswords());
-            ImportCsvConversionHelper._setIds(data, db.passwords, passwordIdMap);
+            let passwordIdMap = this._createLabelMapping(await API.listPasswords());
+            this._setIds(data, db.passwords, passwordIdMap);
         } else if(options.db === 'folders') {
-            ImportCsvConversionHelper._setIds(data, db.folders, folderIdMap, folderKeyMap);
+            this._setIds(data, db.folders, folderIdMap, folderKeyMap);
         } else if(options.db === 'tags') {
-            ImportCsvConversionHelper._setIds(data, db.tags, tagIdMap, tagKeyMap);
+            this._setIds(data, db.tags, tagIdMap, tagKeyMap);
         }
 
         return db;
@@ -154,7 +154,7 @@ export default class ImportCsvConversionHelper {
         if(options.mapping.indexOf('tagLabels') === -1) return [[], {}, {}];
         let tags   = [],
             keyMap = {},
-            idMap  = ImportCsvConversionHelper._createLabelMapping(await API.listTags());
+            idMap  = this._createLabelMapping(await API.listTags());
 
         for(let i = 0; i < db.length; i++) {
             let element = db[i];
@@ -191,7 +191,7 @@ export default class ImportCsvConversionHelper {
         let folders    = [],
             keyMap     = {},
             properties = {folder: 'folderLabel', parent: 'parentLabel'},
-            idMap      = ImportCsvConversionHelper._createLabelMapping(await API.listFolders());
+            idMap      = this._createLabelMapping(await API.listFolders());
         idMap[''] = '00000000-0000-0000-0000-000000000000';
 
         for(let i = 0; i < db.length; i++) {
@@ -256,6 +256,10 @@ export default class ImportCsvConversionHelper {
                 object.url = SimpleApi.parseUrl(object.label, 'href');
             }
         }
+
+        if(!object.hasOwnProperty('password') || typeof object.password !== 'string' || object.password.length < 1) {
+            object.password = 'password-missing-during-import';
+        }
     }
 
     /**
@@ -300,7 +304,8 @@ export default class ImportCsvConversionHelper {
             passman  : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url']
+                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url'],
+                repair   : true
             },
             dashlane : {
                 firstLine: 1,

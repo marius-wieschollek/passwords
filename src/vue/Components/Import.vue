@@ -366,6 +366,7 @@
                         this.options.mode = 1;
                         break;
                     case 'pmanCsv':
+                        this.type = 'pmanCsv';
                     case 'dashlane':
                         this.options.profile = value;
                         this.csv.badQuotes = true;

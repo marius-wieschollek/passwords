@@ -69,7 +69,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         parent::__construct($modelMapper, $revisionService);
         $this->folderMapper      = $folderMapper;
         $this->encryptionService = $encryption;
-        $this->convertFields     = !$config->getAppValue('migration/customFields', false) || $environment->getRunType() === EnvironmentService::TYPE_CLI;
+        $this->convertFields     = $config->getAppValue('migration/customFields') === '2019.4.2' || $environment->getRunType() === EnvironmentService::TYPE_CLI;
         $this->config            = $config;
     }
 
@@ -80,7 +80,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function run(IOutput $output): void {
         parent::run($output);
-        $this->config->getAppValue('migration/customFields', true);
+        $this->config->setAppValue('migration/customFields', '2019.4.2');
     }
 
     /**
