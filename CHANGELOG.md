@@ -1,3 +1,7 @@
+#### 2019.4.2 - Bugfix release
+ - Fixed Passman csv import
+ - Fixed Passman import with empty passwords
+
 #### 2019.4.1 - Bugfix release
  - Fixed invalid font file path in icon generator
  - Fixed spelling in french translation
