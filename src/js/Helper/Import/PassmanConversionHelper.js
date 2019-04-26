@@ -170,7 +170,7 @@ export default class PassmanConversionHelper {
         if (value.length > 320) {
             value = value.substr(0, 320);
 
-            this._logConversionError('The d of "{field}" in "{label}" exceeds 320 characters and was cut.', element, field, errors);
+            this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', element, field, errors);
         }
 
         if (type === 'password') {
