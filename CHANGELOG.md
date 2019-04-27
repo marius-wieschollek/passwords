@@ -1,3 +1,6 @@
+#### 2019.5.0 - Feature release
+ - Added Enpass Json Import
+
 #### 2019.4.2 - Bugfix release
  - Fixed Passman csv import
  - Fixed Passman import with empty passwords
