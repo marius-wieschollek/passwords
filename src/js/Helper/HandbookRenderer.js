@@ -106,7 +106,7 @@ class HandbookRenderer {
             url    = new URL(href, href.substr(0, 1) === '#' ? documentUrl:baseUrl);
 
         href = url.href;
-        if(url.href.indexOf(documentUrl) !== -1 && url.hash.length) {
+        if(url.hash.length && url.href.indexOf(`${documentUrl}#`) !== -1) {
             [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title);
         } else if(url.href.indexOf(this.handbookUrl) !== -1) {
             let mime = url.href.substr(url.href.lastIndexOf('.') + 1);
