@@ -37,6 +37,7 @@ export default class EnpassConversionHelper {
             let tag = data[i],
                 id  = tag.title.toLowerCase();
 
+            if (id === '') continue;
             if (!labelMap.hasOwnProperty(id)) {
                 labelMap[id] = tag.uuid;
                 tagMap[tag.uuid] = tag.uuid;
@@ -260,7 +261,8 @@ export default class EnpassConversionHelper {
         if (element.hasOwnProperty('folders')) {
             for (let i = 0; i < element.folders.length; i++) {
                 let id = element.folders[i].toLowerCase();
-                password.tags.push(tagMap[id]);
+
+                if (tagMap.hasOwnProperty(id)) password.tags.push(tagMap[id]);
             }
         }
     }
