@@ -7,7 +7,7 @@ export default class PassmanConversionHelper {
     /**
      *
      * @param json
-     * @returns {Promise<*>}
+     * @returns {Promise<{data: {tags: Array, passwords: Array}, errors: Array}>}
      */
     static async processJson(json) {
         let data                = JSON.parse(json),
