@@ -3,6 +3,7 @@ import Localisation from '@js/Classes/Localisation';
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
+import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
 
 /**
  *
@@ -71,9 +72,15 @@ export class ImportManager {
             case 'csv':
                 data = await ImportCsvConversionHelper.processGenericCsv(data, options);
                 break;
+            case 'enpass':
+                data = await EnpassConversionHelper.processJson(data, options);
+                this.errors = data.errors;
+                data = data.data;
+                break;
             default:
                 throw new Error(`Invalid import type: ${type}`);
         }
+
         return data;
     }
 

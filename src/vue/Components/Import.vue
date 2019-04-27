@@ -12,10 +12,10 @@
                     <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
-                    <translate tag="option" value="keepass" say="KeePass CSV" v-if="nightly"/>
+                    <translate tag="option" value="enpass" say="Enpass JSON"/>
+                    <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
-                    <translate tag="option" value="enpass" say="Enpass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -84,6 +84,11 @@
                         <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" autocomplete="new-password" readonly/>
                     </div>
                     <br>
+                    <div v-if="source === 'enpass'">
+                        <br>
+                        <input type="checkbox" id="passwords-enpass-empty" v-model="options.skipEmpty" :disabled="importing"/>
+                        <translate tag="label" for="passwords-enpass-empty" say="Don't import empty fields"/>
+                    </div>
                     <div v-if="source === 'csv'">
                         <translate tag="h3" say="Import Options"/>
                         <translate tag="label" for="passwords-import-csv-db" say="Database"/>
@@ -121,7 +126,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <br>
+                        <br v-if="source !== 'enpass'">
                         <input type="checkbox" id="passwords-import-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '4'"/>
                         <translate tag="label" for="passwords-import-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '4'"/>
                     </div>
@@ -167,7 +172,7 @@
                 csvFile    : null,
                 csvReady   : false,
                 csv        : {delimiter: 'auto', quotes: '"', escape: '"', badQuotes: false},
-                options    : {mode: 0, skipShared: true},
+                options    : {mode: 0, skipShared: true, skipEmpty: false},
                 step       : 2,
                 previewLine: 1,
                 importing  : false,
@@ -357,9 +362,13 @@
                         this.mime = 'application/json';
                         this.type = 'pmanJson';
                         break;
+                    case 'enpass':
+                        this.mime = 'application/json';
+                        this.options.skipEmpty = true;
+                        this.type = 'enpass';
+                        break;
                     case 'keepass':
                         this.csv.escape = '\\';
-                    case 'enpass':
                     case 'legacy':
                     case 'lastpass':
                         this.options.profile = value;

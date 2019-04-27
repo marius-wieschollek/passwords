@@ -1,4 +1,4 @@
-(function() {
+(function () {
     let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
@@ -154,6 +154,7 @@
             'Add Header Line'                     : 'Kopfzeile hinzufügen',
             'Export passwords shared with me'     : 'Passwörter exportieren die mit mir geteilt wurden',
             'Don\'t edit passwords shared with me': 'Keine Passwörter ändern, die mit mir geteilt wurden',
+            'Don\'t import empty fields'          : 'Überspringe leere Felder',
             'Run Export'                          : 'Export ausführen',
             'Export'                              : 'Exportieren',
             'Waiting...'                          : 'Läuft...',
