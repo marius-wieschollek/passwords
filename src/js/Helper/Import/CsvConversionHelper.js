@@ -312,12 +312,6 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password', 'notes'],
                 repair   : true
-            },
-            enpass   : {
-                firstLine: 1,
-                db       : 'passwords',
-                mapping  : ['label', '', 'username', '', 'password', '', 'url'],
-                repair   : true
             }
         };
 
