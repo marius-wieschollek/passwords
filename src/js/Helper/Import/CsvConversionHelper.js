@@ -94,8 +94,55 @@ export default class ImportCsvConversionHelper {
             return new Date(value);
         } else if((field === 'tags' || field === 'tagLabels') && value.length !== 0 && !Array.isArray(value)) {
             return value.split(',');
+        } else if(field === 'customFields') {
+            return this._processCustomFields(value);
         }
         return value;
+    }
+
+    /**
+     *
+     * @param value
+     * @returns {Array}
+     * @private
+     */
+    static _processCustomFields(value) {
+        let rawFields    = value.split("\n"),
+            customFields = [];
+
+        for(let i = 0; i < rawFields.length; i++) {
+            if(rawFields[i].trim() === '') continue;
+            let [label, content] = rawFields[i].split(':', 2),
+                type             = 'text';
+
+            label = label.trim();
+            if(label.indexOf(',') !== -1) {
+                [label, type] = label.split(',', 2);
+
+                type = type.trim();
+                if(['text', 'email', 'url', 'file', 'secret', 'data'].indexOf(type) === -1) {
+                    type = 'text';
+                } else if(type === 'email' && !content.match(/^[\w._-]+@.+$/)) {
+                    type = 'text';
+                } else if(type === 'url' && (!content.match(/^\w+:\/\/.+$/) || content.substr(0, 11) === 'javascript:')) {
+                    type = 'text';
+                }
+            }
+
+            if(label.length < 1) label = type.capitalize();
+            if(label.length > 48) label = label.substr(0, 48);
+            if(content.length > 320) content = content.substr(0, 320);
+
+            if(content.match(/^[\w._-]+@.+$/)) {
+                type = 'email';
+            } else if(content.match(/^\w+:\/\/.+$/) && content.substr(0, 11) !== 'javascript:') {
+                type = 'url';
+            }
+
+            customFields.push({label, type, value: content.trim()});
+        }
+
+        return customFields;
     }
 
     /**
@@ -273,7 +320,7 @@ export default class ImportCsvConversionHelper {
             passwords: {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId']
+                mapping  : ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId']
             },
             folders  : {
                 firstLine: 1,

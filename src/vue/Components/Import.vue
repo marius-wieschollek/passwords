@@ -163,7 +163,7 @@
                 type       : 'json',
                 mime       : 'application/json',
                 fieldMap   : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favorite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favorite', 'folderLabel', 'tagLabels', 'customFields', 'folderId', 'tagIds', 'id', 'revision'],
                     folders  : ['label', 'edited', 'favorite', 'parentLabel', 'parentId', 'id', 'revision'],
                     tags     : ['label', 'color', 'edited', 'favorite', 'id', 'revision']
                 },
@@ -325,6 +325,7 @@
                 } else if(this.source === 'csv') {
                     if(
                         (this.options.db === 'passwords' && this.options.mapping.indexOf('password') !== -1) ||
+                        (`${this.options.mode}` === '3' && this.options.mapping.length > 0) ||
                         this.options.mapping.indexOf('label') !== -1
                     ) {
                         this.step = this.csvReady ? 4:2;
@@ -349,13 +350,14 @@
                 let oldMime = this.mime;
                 this.progress.status = null;
                 this.csv.badQuotes = false;
-                this.options.mode = 1;
+                this.options.mode = 3;
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
                 // noinspection FallThroughInSwitchStatementJS
                 switch(value) {
                     case 'json':
+                        this.options.mode = 0;
                         this.mime = 'application/json';
                         this.type = 'json';
                         break;
@@ -382,7 +384,7 @@
                         break;
                     case 'pwdCsv':
                         this.options.profile = 'passwords';
-                        this.options.mode = 3;
+                        this.options.mode = 2;
                         break;
                     case 'fldCsv':
                         this.options.profile = 'folders';
@@ -393,7 +395,7 @@
                         this.options.mode = 2;
                         break;
                     case 'csv':
-                        this.options = {mode: 1, skipShared: true, firstLine: 1, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
+                        this.options = {mode: 3, skipShared: true, firstLine: 1, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
                         break;
                 }
 

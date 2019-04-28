@@ -89,7 +89,7 @@ export class ExportManager {
 
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
             data = await this._convertDbToExportArray(data, header.clone());
             csv.passwords = ExportManager._createCsvExport(data, header);
         }
@@ -113,7 +113,7 @@ export class ExportManager {
             if(!csv.hasOwnProperty(i)) continue;
             zip.file(`${i.capitalize()}.csv`, csv[i]);
         }
-        return await zip.generateAsync({type:"blob",compression: "DEFLATE", compressionOptions: {level: 9}});
+        return await zip.generateAsync({type: "blob", compression: "DEFLATE", compressionOptions: {level: 9}});
     }
 
     /**
@@ -174,7 +174,7 @@ export class ExportManager {
                 let name = Localisation.translate(i.capitalize());
 
                 workbook.SheetNames.push(name);
-                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i], {cellDates:true});
+                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i], {cellDates: true});
             }
 
             return XLSX.write(workbook, {bookType: format, type: 'array'});
@@ -288,12 +288,12 @@ export class ExportManager {
      */
     static _convertCustomFieldsForExport(element, field, object) {
         let customFields = element[field],
-            showHidden = SettingsManager.get('client.ui.custom.fields.show.hidden'),
-            array = [];
-        for (let i = 0; i < customFields.length; i++) {
+            showHidden   = SettingsManager.get('client.ui.custom.fields.show.hidden'),
+            array        = [];
+        for(let i = 0; i < customFields.length; i++) {
             let customField = customFields[i];
-            if (!showHidden && customField.type === 'data') continue;
-            array.push(`${customField.label}: ${customField.value}`)
+            if(!showHidden && customField.type === 'data') continue;
+            array.push(`${customField.label}, ${customField.type}: ${customField.value}`)
         }
         object.push(array.join("\n"));
     }
