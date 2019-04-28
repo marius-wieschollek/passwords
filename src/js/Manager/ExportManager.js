@@ -173,7 +173,7 @@ export class ExportManager {
                 let name = Localisation.translate(i.capitalize());
 
                 workbook.SheetNames.push(name);
-                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i]);
+                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i], {cellDates:true});
             }
 
             return XLSX.write(workbook, {bookType: format, type: 'array'});
@@ -266,7 +266,7 @@ export class ExportManager {
             } else if(field === 'tagLabels') {
                 object.push(ExportManager._convertTagLabelsForExport(element, tagDb));
             } else if(['edited', 'updated', 'created'].indexOf(field) !== -1) {
-                object.push(new Date(element[field] * 1e3).toString());
+                object.push(new Date(element[field] * 1e3));
             } else if(field === 'empty') {
                 object.push('');
             } else {
@@ -355,8 +355,8 @@ export class ExportManager {
             for(let j = 0; j < element.length; j++) {
                 let value = element[j];
 
-                if(typeof value === 'boolean') {
-                    line.push(value ? 1:0);
+                if(value instanceof Date || typeof value === 'boolean') {
+                    line.push(value);
                 } else {
                     line.push(value.toString());
                 }
