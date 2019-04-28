@@ -1,4 +1,5 @@
 import API from '@js/Helper/api';
+import JSZip from 'jszip'
 import Utility from '@js/Classes/Utility';
 import Encryption from '@js/ApiClient/Encryption';
 import Localisation from '@js/Classes/Localisation';
@@ -104,9 +105,14 @@ export class ExportManager {
             csv.tags = ExportManager._createCsvExport(data, header);
         }
 
-        if(model.length === 1) csv = csv[model[0]];
+        if(model.length === 1) return csv[model[0]];
 
-        return csv;
+        let zip = new JSZip();
+        for(let i in csv) {
+            if(!csv.hasOwnProperty(i)) continue;
+            zip.file(`${i.capitalize()}.csv`, csv[i]);
+        }
+        return await zip.generateAsync({type:"blob",compression: "DEFLATE", compressionOptions: {level: 9}});
     }
 
     /**

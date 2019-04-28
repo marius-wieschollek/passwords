@@ -24,7 +24,9 @@
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost"
     },
-    "dependencies": {},
+    "dependencies": {
+        "jszip": "^3.2.1"
+    },
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
         "clean-webpack-plugin": "^0.1.19",

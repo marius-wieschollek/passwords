@@ -211,7 +211,7 @@
         },
 
         created() {
-            if(this.nightly) this.preventPasswordFill(1000);
+            if (this.nightly) this.preventPasswordFill(1000);
         },
 
         methods: {
@@ -269,25 +269,21 @@
                     exports = [],
                     fileExt = this.format === 'customCsv' ? 'csv':this.format;
 
+                if (models.length > 1 && fileExt === 'csv') fileExt = 'zip';
                 for (let i = 0; i < models.length; i++) {
                     exports.push(Localisation.translate(models[i].capitalize()));
                 }
 
-                return exports.join('+') + '_' + date.toLocaleDateString() + '.' + fileExt;
+                return `${exports.join('+')}_${date.toLocaleDateString()}.${fileExt}`;
             },
             downloadFile() {
-                let mime = this.format === 'json' ? 'application/json':'text/csv';
-                if (typeof this.data === 'string' || this.data instanceof ArrayBuffer) {
-                    let filename = this.generateFilename(this.models);
-                    Utility.createDownload(this.data, filename, mime);
-                } else if (this.data !== null) {
-                    for (let i in this.data) {
-                        if (!this.data.hasOwnProperty(i)) continue;
+                let mime = 'text/csv';
+                if(this.format === 'csv' && this.models.length > 1) mime = 'application/zip';
+                if(this.format === 'ods') mime = 'application/vnd.oasis.opendocument.spreadsheet';
+                if(this.format === 'xlsx') mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
-                        let filename = this.generateFilename([i]);
-                        Utility.createDownload(this.data[i], filename, mime);
-                    }
-                }
+                let filename = this.generateFilename(this.models);
+                Utility.createDownload(this.data, filename, mime);
             },
             csvFieldMapping(event, id) {
                 let mapping = this.options.mapping.clone();
@@ -324,7 +320,7 @@
                     this.options = {db: 'passwords', delimiter: ',', header: true, mapping: []};
                 } else if (value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
                     this.models = [this.models.shift()];
-                } else if(value === 'json') {
+                } else if (value === 'json') {
                     this.preventPasswordFill();
                 }
 

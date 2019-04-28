@@ -36,8 +36,9 @@ export default class Utility {
      */
     static createDownload(content, name = null, mime = 'text/plain') {
         if(name === null) name = `${new Date().toISOString()}.txt`;
-        let element = document.createElement('a'),
-            blob    = new Blob([content], {type: mime}),
+
+        let blob    = content instanceof Blob ? content:new Blob([content], {type: mime}),
+            element = document.createElement('a'),
             url     = window.URL.createObjectURL(blob);
 
         element.setAttribute('href', url);
