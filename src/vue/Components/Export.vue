@@ -175,6 +175,7 @@
                         'edited',
                         'created',
                         'favorite',
+                        'customFields',
                         'id',
                         'revision',
                         'folderId',

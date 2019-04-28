@@ -144,6 +144,7 @@
             'Export Passwords'                    : 'Passwörter exportieren',
             'Export Folders'                      : 'Ordner exportieren',
             'Export Tags'                         : 'Tags exportieren',
+            'CustomFields'                        : 'Eigene Felder',
             'FolderLabel'                         : 'Ordner',
             'TagLabels'                           : 'Tags',
             'ParentLabel'                         : 'Überordner',

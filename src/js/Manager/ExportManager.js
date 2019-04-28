@@ -3,6 +3,7 @@ import JSZip from 'jszip'
 import Utility from '@js/Classes/Utility';
 import Encryption from '@js/ApiClient/Encryption';
 import Localisation from '@js/Classes/Localisation';
+import SettingsManager from '@js/Manager/SettingsManager';
 
 /**
  *
@@ -147,7 +148,7 @@ export class ExportManager {
         let sheets = {};
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
             data = await this._convertDbToExportArray(data, header.clone());
             sheets.passwords = ExportManager._convertOfficeExport(data, header);
         }
@@ -265,6 +266,8 @@ export class ExportManager {
                 object.push(folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'');
             } else if(field === 'tagLabels') {
                 object.push(ExportManager._convertTagLabelsForExport(element, tagDb));
+            } else if(field === 'customFields') {
+                this._convertCustomFieldsForExport(element, field, object);
             } else if(['edited', 'updated', 'created'].indexOf(field) !== -1) {
                 object.push(new Date(element[field] * 1e3));
             } else if(field === 'empty') {
@@ -274,6 +277,25 @@ export class ExportManager {
             }
         }
         return object;
+    }
+
+    /**
+     *
+     * @param element
+     * @param field
+     * @param object
+     * @private
+     */
+    static _convertCustomFieldsForExport(element, field, object) {
+        let customFields = element[field],
+            showHidden = SettingsManager.get('client.ui.custom.fields.show.hidden'),
+            array = [];
+        for (let i = 0; i < customFields.length; i++) {
+            let customField = customFields[i];
+            if (!showHidden && customField.type === 'data') continue;
+            array.push(`${customField.label}: ${customField.value}`)
+        }
+        object.push(array.join("\n"));
     }
 
     /**
