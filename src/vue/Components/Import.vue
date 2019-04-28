@@ -349,6 +349,7 @@
                 let oldMime = this.mime;
                 this.progress.status = null;
                 this.csv.badQuotes = false;
+                this.options.mode = 1;
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
@@ -372,23 +373,24 @@
                     case 'legacy':
                     case 'lastpass':
                         this.options.profile = value;
-                        this.options.mode = 1;
                         break;
                     case 'pmanCsv':
                         this.type = 'pmanCsv';
                     case 'dashlane':
                         this.options.profile = value;
                         this.csv.badQuotes = true;
-                        this.options.mode = 1;
                         break;
                     case 'pwdCsv':
                         this.options.profile = 'passwords';
+                        this.options.mode = 3;
                         break;
                     case 'fldCsv':
                         this.options.profile = 'folders';
+                        this.options.mode = 2;
                         break;
                     case 'tagCsv':
                         this.options.profile = 'tags';
+                        this.options.mode = 2;
                         break;
                     case 'csv':
                         this.options = {mode: 1, skipShared: true, firstLine: 1, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
