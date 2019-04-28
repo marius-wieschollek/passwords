@@ -292,6 +292,7 @@
             'Better check the other sections'     : 'Möglicherweise haben Sie noch keine Passwörter',
             'That\'s probably a good sign'        : 'Das ist sicherlich gut so',
             'Go to {href}'                        : 'Gehe zu {href}',
+            'Contents'                            : 'Inhalt',
             'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Die Seite kann nicht angezeigt werden: {message}.',
             'Not Found'                           : 'Seite nicht gefunden',

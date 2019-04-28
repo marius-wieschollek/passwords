@@ -6,6 +6,14 @@
                 <header>
                     <translate tag="h1" :say="getPageTitle" id="help-top"/>
                 </header>
+                <nav v-if="showNavigation">
+                    <translate tag="h2" say="Contents"/>
+                    <ol>
+                        <li v-for="entry in navigation" :class="{active:section===entry.id}">
+                            <a :href="entry.href">{{entry.label}}</a>
+                        </li>
+                    </ol>
+                </nav>
                 <section class="handbook-page" v-html="source"></section>
                 <footer class="handbook-footer">
                     <translate say="Still need help?"/>
@@ -41,6 +49,11 @@
             return {
                 loading   : true,
                 source    : '',
+                navigation: [],
+                media     : [],
+                page      : '',
+                section   : '',
+                anchor    : '',
                 gallery   : {images: [], index: null},
                 forumPage : 'https://help.nextcloud.com/c/apps/passwords',
                 issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue'
@@ -49,15 +62,15 @@
 
         created() {
             this.refreshView();
+            document.addEventListener('scroll', () => { this.setActiveSection() })
+        },
+
+        beforeDestroy() {
+            document.removeEventListener('scroll', () => { this.setActiveSection() })
         },
 
         updated() {
-            let images = document.querySelectorAll('#app-content .handbook-page img');
-            for(let i = 0; i < images.length; i++) {
-                images[i].addEventListener('load', () => { this.jumpToAnchor(); });
-            }
-            this.jumpToAnchor();
-            this.updateImageGallery();
+            this.updateMediaElements();
         },
 
         computed: {
@@ -66,87 +79,124 @@
                     {path: {name: 'Help'}, label: Localisation.translate('Handbook')}
                 ];
 
-                if(this.$route.params.page === undefined) return items;
+                if (this.$route.params.page === undefined) return items;
                 let path    = this.$route.params.page.split('/'),
                     current = '';
 
-                for(let i = 0; i < path.length; i++) {
+                for (let i = 0; i < path.length; i++) {
                     current += path[i];
                     items.push(
-                        {path: {name: 'Help', params: {page: current}}, label: Localisation.translate(path[i].replace(/-{1}/g, ' '))}
+                        {
+                            path : {name: 'Help', params: {page: current}},
+                            label: Localisation.translate(path[i].replace(/-{1}/g, ' '))
+                        }
                     );
                 }
 
                 return items;
             },
             getPageTitle() {
-                if(this.$route.params.page === undefined) return 'Handbook';
-                let path  = this.$route.params.page,
+                if (this.$route.params.page === undefined) return 'Handbook';
+                let path  = this.page,
                     title = path.substr(path.lastIndexOf('/') + 1);
 
                 return title.replace(/-{1}/g, ' ');
+            },
+            showNavigation() {
+                return this.$route.params.page !== undefined;
             }
         },
 
         methods: {
             refreshView() {
-                if(this.$route.params.page === undefined) {
+                if (this.$route.params.page === undefined) {
                     this.showPage('Index');
-                } else {
+                } else if (this.$route.params.page !== this.page) {
                     this.showPage(this.$route.params.page);
+                } else {
+                    this.jumpToAnchor();
                 }
             },
+            setActiveSection() {
+                let footer  = document.querySelector('footer.handbook-footer'),
+                    pos     = window.scrollY,
+                    section = '';
+
+                if (footer && footer.offsetTop < window.innerHeight + window.scrollY) {
+                    let item = this.navigation[this.navigation.length - 1];
+
+                    this.section = item.id;
+                    return;
+                }
+
+                for (let i = 0; i < this.navigation.length; i++) {
+                    let item = this.navigation[i],
+                        el   = document.getElementById(item.id);
+
+                    if (el.offsetTop - el.offsetHeight >= pos) {
+                        this.section = section;
+                        return;
+                    } else {
+                        section = item.id;
+                    }
+                }
+
+                this.section = section;
+            },
             async showPage(page) {
+                if (this.page === page) return;
                 this.loading = true;
-                this.source = await HandbookRenderer.fetchPage(page);
+                let {source, media, navigation} = await HandbookRenderer.fetchPage(page);
+                this.source = source;
+                this.media = media;
+                this.navigation = navigation;
+                this.page = page;
                 this.loading = false;
             },
-            jumpToAnchor() {
+            jumpToAnchor(behavior = 'smooth') {
+                if (!this.$route.hash) {
+                    Utility.scrollTo(0, 0, behavior);
+                    return;
+                }
+
                 let $el = document.querySelector(`#app-content ${this.$route.hash}`);
-                if($el) {
-                    let top      = $el.offsetTop - document.getElementById('controls').offsetHeight,
-                        behavior = this.$route.hash === '' ? 'auto':'smooth';
+                if ($el) {
+                    let top      = $el.offsetTop - document.getElementById('controls').offsetHeight;
 
                     Utility.scrollTo(top, 0, behavior);
                     $el.classList.add('highlight');
                     $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
+                    this.anchor = this.$route.hash;
                 }
+
+                document.querySelectorAll(`#app-content .highlight:not(${this.$route.hash})`).forEach((el) => {
+                    el.classList.remove('highlight');
+                });
             },
-            updateImageGallery() {
-                let images  = document.querySelectorAll('.md-image-link'),
-                    gallery = [];
-                if(this.gallery.images.length === images.length) return;
+            updateMediaElements() {
+                if (this.gallery.images.length === this.media.length) return;
 
-                for(let i = 0; i < images.length; i++) {
-                    let image = images[i],
-                        mime  = image.href.substr(image.href.lastIndexOf('.') + 1);
+                let gallery = [];
+                for (let i = 0; i < this.media.length; i++) {
+                    let image = this.media[i],
+                        el    = document.getElementById(image.id);
 
-                    if(['png', 'jpg', 'jpeg', 'gif'].indexOf(mime) !== -1) {
-                        gallery.push(
-                            {
-                                title : image.title,
-                                href  : image.href,
-                                type  : `image/${mime}`,
-                                poster: image.href
-                            }
-                        );
-                    } else if(['mp4', 'm4v', 'ogg', 'webm'].indexOf(mime) !== -1) {
-                        let poster = image.querySelector('img').src;
-                        gallery.push(
-                            {
-                                title: image.title,
-                                href : image.href,
-                                type : `video/${mime}`,
-                                poster
-                            }
-                        );
-                    } else {
-                        continue;
-                    }
+                    gallery.push(
+                        {
+                            title : image.title,
+                            href  : image.url,
+                            type  : image.mime,
+                            poster: image.thumbnail
+                        }
+                    );
 
-                    image.addEventListener('click', (e) => {
+                    el.querySelector('a').addEventListener('click', (e) => {
                         e.preventDefault();
                         this.gallery.index = i;
+                    });
+
+                    el.querySelector('img').addEventListener('load', () => {
+                        this.jumpToAnchor('auto');
                     });
                 }
 
@@ -154,7 +204,7 @@
             }
         },
         watch  : {
-            $route: function() {
+            $route: function () {
                 this.refreshView();
             }
         }
@@ -172,16 +222,61 @@
             margin : 0 -10px;
         }
 
+        article {
+            display               : grid;
+            grid-template-areas   : ". header ." "nav page ." ". footer .";
+            grid-template-columns : 1fr 975px 1fr;
+
+            @media (max-width : $width-extra-large) {
+                grid-template-areas   : ". header" "nav page" ". footer";
+                grid-template-columns : 1fr 800px;
+                max-width             : 1048px;
+                margin                : 0 auto;
+                width                 : 100%;
+            }
+            @media (max-width : $width-large) {
+                display   : block;
+                max-width : 975px;
+            }
+
+            header {
+                grid-area : header;
+            }
+
+            nav {
+                grid-area    : nav;
+                position     : sticky;
+                top          : 110px;
+                height       : 1px;
+                margin-right : 1rem;
+
+                ol {
+                    list-style  : decimal;
+                    margin-left : 1.5rem;
+                    line-height : 2rem;
+                    font-size   : 1rem;
+
+                    li.active {
+                        font-weight : bold;
+                    }
+                }
+                @media (max-width : $width-large) {
+                    display : none;
+                }
+            }
+        }
+
         header > h1 {
             font-size   : 2.5rem;
             font-weight : 300;
             margin      : 10px auto 40px;
-            max-width   : 975px;
             line-height : 1;
         }
 
         .handbook-page {
+            grid-area : page;
             font-size : 0.9rem;
+            width     : 100%;
             max-width : 975px;
             margin    : 0 auto 6rem;
 
@@ -381,6 +476,7 @@
         }
 
         .handbook-footer {
+            grid-area  : footer;
             position   : absolute;
             bottom     : 0;
             left       : 0;

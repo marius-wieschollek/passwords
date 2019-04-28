@@ -292,6 +292,7 @@
             'Better check the other sections'     : 'Schau besser mal in den anderen Bereichen nach',
             'That\'s probably a good sign'        : 'Das ist wohl besser so',
             'Go to {href}'                        : 'Öffne {href}',
+            'Contents'                            : 'Inhalt',
             'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Die Seite kann nicht angezeigt werden: {message}.',
             'Not Found'                           : 'Seite nicht gefunden',
