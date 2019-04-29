@@ -274,7 +274,7 @@ class RestoreBackupHelper {
      * @param null|string    $user
      */
     protected function deleteEntities(AbstractMapper $entityMapper, ?string $user): void {
-        $entities = $entityMapper->findAll();
+        $entities = array_merge($entityMapper->findAll(), $entityMapper->findAllDeleted());
         foreach ($entities as $entity) {
             if($user !== null && $user !== $entity->getUserId()) continue;
             $entityMapper->delete($entity);
