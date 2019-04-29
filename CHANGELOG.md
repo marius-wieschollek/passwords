@@ -1,4 +1,5 @@
 #### 2019.5.0 - Feature release
+ - Added swedish translation
  - Added Enpass Json Import
  - Added custom fields support in export & import
  - Added password names in legacy api
