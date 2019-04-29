@@ -7,7 +7,7 @@ export default class PassmanConversionHelper {
     /**
      *
      * @param json
-     * @returns {Promise<*>}
+     * @returns {Promise<{data: {tags: Array, passwords: Array}, errors: Array}>}
      */
     static async processJson(json) {
         let data                = JSON.parse(json),
@@ -130,12 +130,20 @@ export default class PassmanConversionHelper {
      * @private
      */
     static _processCustomFields(element, object, errors) {
+        let hasFiles = false;
+
+        if(element.hasOwnProperty('files') && element.custom_fields.length !== 0) {
+            if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', element, 'files', errors);
+            hasFiles = true;
+        }
+
         if (element.hasOwnProperty('custom_fields') && element.custom_fields.length !== 0) {
             for (let j = 0; j < element.custom_fields.length; j++) {
                 let field = element.custom_fields[j];
 
                 if (field.field_type === 'file') {
-                    this._logConversionError('"{label}" has files attached which can not be imported.', element, field, errors);
+                    if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', element, field, errors);
+                    hasFiles = true;
                 } else if (['text', 'password'].indexOf(field.field_type) !== -1) {
                     this._processCustomField(field, element, errors, object);
                 } else {
@@ -162,15 +170,13 @@ export default class PassmanConversionHelper {
         if(label.length < 1) label = type.capitalize();
 
         if (label.length > 48) {
-            label = label.substr(0, 48);
-
             this._logConversionError('The label of "{field}" in "{label}" exceeds 48 characters and was cut.', element, field, errors);
+            label = label.substr(0, 48);
         }
 
         if (value.length > 320) {
-            value = value.substr(0, 320);
-
             this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', element, field, errors);
+            value = value.substr(0, 320);
         }
 
         if (type === 'password') {

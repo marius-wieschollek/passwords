@@ -5,6 +5,7 @@ OC.L10N.register(
         'Favorite'                       : 'Favourite',
         'Favorites'                      : 'Favourites',
         'Passwords'                      : 'Passwords',
+        'CustomFields'                   : 'Custom Fields',
         'FolderLabel'                    : 'Folder',
         'TagLabels'                      : 'Tags',
         'FolderId'                       : 'Folder Id',

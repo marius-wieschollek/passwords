@@ -11,31 +11,34 @@
 
     export default {
         props: {
-            say      : {
+            say           : {
                 type     : String,
                 'default': null
             },
-            variables: {
+            variables     : {
                 type     : Object,
                 'default': () => { return {}; }
             },
-            icon     : {
+            icon          : {
                 type     : String,
                 'default': null
             },
-            iconClass: {
+            iconClass     : {
                 type     : String,
                 'default': null
             },
-            title    : {
+            title         : {
                 type     : String,
                 'default': ''
             },
-            value    : {
-                type     : String,
-                'default': ''
+            value         : {
+                'default': false
             },
-            tag      : {
+            localizedValue: {
+                type     : String,
+                'default': null
+            },
+            tag           : {
                 type     : String,
                 'default': 'span'
             }
@@ -55,7 +58,8 @@
                 return this.title ? Localisation.translate(this.title, this.variables):false;
             },
             getValue() {
-                return this.value ? Localisation.translate(this.value, this.variables):false;
+                if(this.localizedValue !== null) return Localisation.translate(this.localizedValue, this.variables);
+                return this.value;
             },
             getIcon() {
                 return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
@@ -144,6 +144,7 @@
             'Export Passwords'                    : 'Passwörter exportieren',
             'Export Folders'                      : 'Ordner exportieren',
             'Export Tags'                         : 'Tags exportieren',
+            'CustomFields'                        : 'Eigene Felder',
             'FolderLabel'                         : 'Ordner',
             'TagLabels'                           : 'Tags',
             'ParentLabel'                         : 'Überordner',
@@ -154,6 +155,7 @@
             'Add Header Line'                     : 'Kopfzeile hinzufügen',
             'Export passwords shared with me'     : 'Passwörter exportieren die mit mir geteilt wurden',
             'Don\'t edit passwords shared with me': 'Keine Passwörter ändern, die mit mir geteilt wurden',
+            'Don\'t import empty fields'          : 'Überspringe leere Felder',
             'Run Export'                          : 'Export ausführen',
             'Export'                              : 'Exportieren',
             'Waiting...'                          : 'Läuft...',
@@ -291,6 +293,7 @@
             'Better check the other sections'     : 'Schau besser mal in den anderen Bereichen nach',
             'That\'s probably a good sign'        : 'Das ist wohl besser so',
             'Go to {href}'                        : 'Öffne {href}',
+            'Contents'                            : 'Inhalt',
             'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Die Seite kann nicht angezeigt werden: {message}.',
             'Not Found'                           : 'Seite nicht gefunden',

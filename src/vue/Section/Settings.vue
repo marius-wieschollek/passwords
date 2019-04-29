@@ -157,11 +157,11 @@
                     <translate tag="h1" say="Danger Zone"/>
 
                     <translate tag="label" for="danger-reset" say="Reset all settings"/>
-                    <translate tag="input" type="button" id="danger-reset" value="Reset" @click="resetSettingsAction"/>
+                    <translate tag="input" type="button" id="danger-reset" localized-value="Reset" @click="resetSettingsAction"/>
                     <settings-help text="Reset all settings on this page to their defaults"/>
 
                     <translate tag="label" for="danger-purge" say="Delete everything"/>
-                    <translate tag="input" type="button" id="danger-purge" value="Delete" @click="resetUserAccount"/>
+                    <translate tag="input" type="button" id="danger-purge" localized-value="Delete" @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
                 </section>
                 <section class="tests" v-if="false">

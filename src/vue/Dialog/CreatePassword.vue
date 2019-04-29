@@ -54,7 +54,7 @@
                     </foldout>
                 </div>
                 <div class="controls">
-                    <translate tag="input" type="submit" value="Save"/>
+                    <translate tag="input" type="submit" localized-value="Save"/>
                 </div>
             </form>
         </div>
