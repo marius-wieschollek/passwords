@@ -56,6 +56,7 @@ Scenario('Show Create Password Dialog', (I) => {
     I.waitForElement('#passwords-create-new', 10);
     I.fillField('#password-username', 'myuser');
     I.fillField('#password-password', 'LongAndStrongPassword');
+    I.fillField('#password-label', 'Example Password');
     I.fillField('#password-url', 'https://www.example.com');
     I.click('#passwords-create-new');
     I.click('div.foldout-container:nth-child(2) > div:nth-child(1)');
