@@ -3,7 +3,6 @@ import JSZip from 'jszip'
 import Utility from '@js/Classes/Utility';
 import Encryption from '@js/ApiClient/Encryption';
 import Localisation from '@js/Classes/Localisation';
-import SettingsManager from '@js/Manager/SettingsManager';
 
 /**
  *
@@ -288,12 +287,10 @@ export class ExportManager {
      */
     static _convertCustomFieldsForExport(element, field, object) {
         let customFields = element[field],
-            showHidden   = SettingsManager.get('client.ui.custom.fields.show.hidden'),
             array        = [];
         for(let i = 0; i < customFields.length; i++) {
             let customField = customFields[i];
-            if(!showHidden && customField.type === 'data') continue;
-            array.push(`${customField.label}, ${customField.type}: ${customField.value}`)
+            array.push(`${customField.label}, ${customField.type}: ${customField.value.toString().replace("\n", ' ')}`)
         }
         object.push(array.join("\n"));
     }

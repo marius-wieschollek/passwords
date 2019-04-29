@@ -165,6 +165,7 @@ export default class ImportCsvConversionHelper {
                 [label, type] = label.split(',', 2);
 
                 type = type.trim();
+                if(type === 'password') type = 'secret';
                 if((type === 'url' && (!value.match(/^\w+:\/\/.+$/) || value.substr(0, 11) === 'javascript:')) ||
                    ['text', 'email', 'url', 'file', 'secret', 'data'].indexOf(type) === -1 ||
                    (type === 'email' && !value.match(/^[\w._-]+@.+$/))
