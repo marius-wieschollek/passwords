@@ -12,6 +12,7 @@ use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
@@ -63,15 +64,21 @@ class DatabaseDuplicateDeletion implements IRepairStep {
     protected $passwordRevisionService;
 
     /**
+     * @var PasswordTagRelationService
+     */
+    protected $passwordTagRelationService;
+
+    /**
      * DatabaseDuplicateDeletion constructor.
      *
-     * @param TagService              $tagService
-     * @param ShareService            $shareService
-     * @param FolderService           $folderService
-     * @param PasswordService         $passwordService
-     * @param TagRevisionService      $tagRevisionService
-     * @param FolderRevisionService   $folderRevisionService
-     * @param PasswordRevisionService $passwordRevisionService
+     * @param TagService                 $tagService
+     * @param ShareService               $shareService
+     * @param FolderService              $folderService
+     * @param PasswordService            $passwordService
+     * @param TagRevisionService         $tagRevisionService
+     * @param FolderRevisionService      $folderRevisionService
+     * @param PasswordRevisionService    $passwordRevisionService
+     * @param PasswordTagRelationService $passwordTagRelationService
      */
     public function __construct(
         TagService $tagService,
@@ -80,7 +87,8 @@ class DatabaseDuplicateDeletion implements IRepairStep {
         PasswordService $passwordService,
         TagRevisionService $tagRevisionService,
         FolderRevisionService $folderRevisionService,
-        PasswordRevisionService $passwordRevisionService
+        PasswordRevisionService $passwordRevisionService,
+        PasswordTagRelationService $passwordTagRelationService
     ) {
         $this->tagService              = $tagService;
         $this->shareService            = $shareService;
@@ -89,6 +97,7 @@ class DatabaseDuplicateDeletion implements IRepairStep {
         $this->tagRevisionService      = $tagRevisionService;
         $this->folderRevisionService   = $folderRevisionService;
         $this->passwordRevisionService = $passwordRevisionService;
+        $this->passwordTagRelationService = $passwordTagRelationService;
     }
 
     /**
@@ -118,12 +127,13 @@ class DatabaseDuplicateDeletion implements IRepairStep {
         $this->deleteDuplicates($this->tagRevisionService);
         $this->deleteDuplicates($this->folderRevisionService);
         $this->deleteDuplicates($this->passwordRevisionService);
+        $this->deleteRelationDuplicates();
     }
 
     /**
      * @param AbstractService $objectService
      */
-    protected function deleteDuplicates(AbstractService $objectService) {
+    protected function deleteDuplicates(AbstractService $objectService): void {
         /** @var \OCA\Passwords\Db\RevisionInterface[] $allDeleted */
         $allDeleted = $objectService->findDeleted();
         $knownUuids = [];
@@ -140,6 +150,34 @@ class DatabaseDuplicateDeletion implements IRepairStep {
                     $objectService->findByUuid($uuid);
                     $objectService->destroy($entry);
                 } catch (DoesNotExistException | MultipleObjectsReturnedException $e) {
+                    $knownUuids[ $uuid ] = $entry;
+                }
+            } catch (\Exception $e) {
+
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    protected function deleteRelationDuplicates(): void {
+        /** @var \OCA\Passwords\Db\PasswordTagRelation[] $allDeleted */
+        $allDeleted = $this->passwordTagRelationService->findDeleted();
+        $knownUuids = [];
+
+        foreach ($allDeleted as $entry) {
+            try {
+                $uuid = $entry->getPassword().$entry->getTag();
+                if(isset($knownUuids[ $uuid ])) {
+                    $this->passwordTagRelationService->destroy($knownUuids[ $uuid ]);
+                    $knownUuids[ $uuid ] = $entry;
+                    continue;
+                }
+
+                if($this->passwordTagRelationService->findByTagAndPassword($entry->getTag(), $entry->getPassword()) !== null) {
+                    $this->passwordTagRelationService->destroy($entry);
+                } else {
                     $knownUuids[ $uuid ] = $entry;
                 }
             } catch (\Exception $e) {
