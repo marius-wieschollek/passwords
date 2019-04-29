@@ -98,7 +98,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <repair-steps>
         <post-migration>
             <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
-            <step>OCA\Passwords\Migration\DuplicateDeletionHelper</step>
+            <step>OCA\Passwords\Migration\DatabaseDuplicateDeletion</step>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
     </repair-steps>
