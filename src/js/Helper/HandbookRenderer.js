@@ -30,30 +30,25 @@ class HandbookRenderer {
 
             if (response.ok) {
                 if(mime.substr(0, 10) !== 'text/plain') {
-                    return HandbookRenderer._returnErrorResponse(
+                    return HandbookRenderer._generateErrorPage(
                         Localisation.translate('Invalid content type {mime}', {mime})
                     );
                 }
 
-                let page = this.render(await response.text(), baseUrl, url);
+                let data = await response.text();
+                if(!data) return HandbookRenderer._generateErrorPage(Localisation.translate('No content available'));
+
+                let page = this.render(data, baseUrl, url);
                 this.pages[page] = page;
                 return page;
             } else {
-                return HandbookRenderer._returnErrorResponse(response.status + ' – ' + response.statusText);
+                return HandbookRenderer._generateErrorPage(response.status + ' – ' + response.statusText);
             }
         } catch (e) {
             if (process.env.NODE_ENV === 'development') console.error('Request failed', e);
 
-            return HandbookRenderer._returnErrorResponse(e.message);
+            return HandbookRenderer._generateErrorPage(e.message);
         }
-    }
-
-    static _returnErrorResponse(message) {
-        return {
-            source: Localisation.translate('Unable to fetch page: {message}.', {message}),
-            media: [],
-            navigation: []
-        };
     }
 
     /**
@@ -80,6 +75,20 @@ class HandbookRenderer {
         let source = marked(markdown, {renderer});
 
         return {source, media, navigation};
+    }
+
+    /**
+     *
+     * @param message
+     * @returns {{source: string, media: Array, navigation: Array}}
+     * @private
+     */
+    static _generateErrorPage(message) {
+        return {
+            source: '\u{1F480} ' + Localisation.translate('Unable to fetch page: {message}.', {message}),
+            media: [],
+            navigation: []
+        };
     }
 
     /**
