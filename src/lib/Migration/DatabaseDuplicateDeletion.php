@@ -21,43 +21,49 @@ use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
 /**
- * Class DuplicateDeletionHelper
+ * Class DatabaseDuplicateDeletion
  *
- * @package OCA\Passwords\Migration\DatabaseRepair
+ * @package OCA\Passwords\Migration
  */
-class DuplicateDeletionHelper implements IRepairStep {
+class DatabaseDuplicateDeletion implements IRepairStep {
 
     /**
      * @var TagService
      */
     protected $tagService;
+
     /**
      * @var ShareService
      */
     protected $shareService;
+
     /**
      * @var FolderService
      */
     protected $folderService;
+
     /**
      * @var PasswordService
      */
     protected $passwordService;
+
     /**
      * @var TagRevisionService
      */
     protected $tagRevisionService;
+
     /**
      * @var FolderRevisionService
      */
     protected $folderRevisionService;
+
     /**
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
 
     /**
-     * DuplicateDeletionHelper constructor.
+     * DatabaseDuplicateDeletion constructor.
      *
      * @param TagService              $tagService
      * @param ShareService            $shareService
