@@ -289,8 +289,10 @@ export class ExportManager {
         let customFields = element[field],
             array        = [];
         for(let i = 0; i < customFields.length; i++) {
-            let customField = customFields[i];
-            array.push(`${customField.label}, ${customField.type}: ${customField.value.toString().replace("\n", ' ')}`)
+            let customField = customFields[i],
+                value       = customField.value.toString().replace(/(\r\n|\n|\r)/gm, ' ');
+
+            array.push(`${customField.label}, ${customField.type}: ${value}`)
         }
         object.push(array.join("\n"));
     }

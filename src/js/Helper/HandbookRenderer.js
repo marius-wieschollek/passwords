@@ -54,6 +54,10 @@ class HandbookRenderer {
         renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl, media);};
         renderer.image = (href, title, text, nowrap) => { return HandbookRenderer._renderImage(href, title, text, nowrap, baseUrl, media);};
         renderer.heading = (text, level) => { return HandbookRenderer._renderHeader(text, level, navigation);};
+        renderer.code = (code, infostring, escaped) => {
+            let content = new marked.Renderer().code(code, infostring, escaped);
+            return content.replace(/(\r\n|\n|\r)/gm, '<br>');
+        };
         HandbookRenderer._extendMarkedLexer();
 
         let source = marked(markdown, {renderer});
