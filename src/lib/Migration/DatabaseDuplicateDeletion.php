@@ -62,10 +62,6 @@ class DatabaseDuplicateDeletion implements IRepairStep {
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
-    /**
-     * @var PasswordTagRelationService
-     */
-    protected $passwordTagRelationService;
 
     /**
      * @var PasswordTagRelationService
