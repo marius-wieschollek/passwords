@@ -1,4 +1,5 @@
 import API from '@js/Helper/api';
+import JSZip from 'jszip'
 import Utility from '@js/Classes/Utility';
 import Encryption from '@js/ApiClient/Encryption';
 import Localisation from '@js/Classes/Localisation';
@@ -87,7 +88,7 @@ export class ExportManager {
 
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
             data = await this._convertDbToExportArray(data, header.clone());
             csv.passwords = ExportManager._createCsvExport(data, header);
         }
@@ -104,9 +105,14 @@ export class ExportManager {
             csv.tags = ExportManager._createCsvExport(data, header);
         }
 
-        if(model.length === 1) csv = csv[model[0]];
+        if(model.length === 1) return csv[model[0]];
 
-        return csv;
+        let zip = new JSZip();
+        for(let i in csv) {
+            if(!csv.hasOwnProperty(i)) continue;
+            zip.file(`${i.capitalize()}.csv`, csv[i]);
+        }
+        return await zip.generateAsync({type: "blob", compression: "DEFLATE", compressionOptions: {level: 9}});
     }
 
     /**
@@ -141,7 +147,7 @@ export class ExportManager {
         let sheets = {};
         if(model.indexOf('passwords') !== -1) {
             let data   = await ExportManager._getPasswordsForExport(includeShared),
-                header = ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
+                header = ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId'];
             data = await this._convertDbToExportArray(data, header.clone());
             sheets.passwords = ExportManager._convertOfficeExport(data, header);
         }
@@ -167,7 +173,7 @@ export class ExportManager {
                 let name = Localisation.translate(i.capitalize());
 
                 workbook.SheetNames.push(name);
-                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i]);
+                workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i], {cellDates: true});
             }
 
             return XLSX.write(workbook, {bookType: format, type: 'array'});
@@ -259,8 +265,10 @@ export class ExportManager {
                 object.push(folderDb.hasOwnProperty(element.parent) ? folderDb[element.parent]:'');
             } else if(field === 'tagLabels') {
                 object.push(ExportManager._convertTagLabelsForExport(element, tagDb));
+            } else if(field === 'customFields') {
+                this._convertCustomFieldsForExport(element, field, object);
             } else if(['edited', 'updated', 'created'].indexOf(field) !== -1) {
-                object.push(new Date(element[field] * 1e3).toString());
+                object.push(new Date(element[field] * 1e3));
             } else if(field === 'empty') {
                 object.push('');
             } else {
@@ -268,6 +276,25 @@ export class ExportManager {
             }
         }
         return object;
+    }
+
+    /**
+     *
+     * @param element
+     * @param field
+     * @param object
+     * @private
+     */
+    static _convertCustomFieldsForExport(element, field, object) {
+        let customFields = element[field],
+            array        = [];
+        for(let i = 0; i < customFields.length; i++) {
+            let customField = customFields[i],
+                value       = customField.value.toString().replace(/(\r\n|\n|\r)/gm, ' ');
+
+            array.push(`${customField.label}, ${customField.type}: ${value}`)
+        }
+        object.push(array.join("\n"));
     }
 
     /**
@@ -349,8 +376,8 @@ export class ExportManager {
             for(let j = 0; j < element.length; j++) {
                 let value = element[j];
 
-                if(typeof value === 'boolean') {
-                    line.push(value ? 1:0);
+                if(value instanceof Date || typeof value === 'boolean') {
+                    line.push(value);
                 } else {
                     line.push(value.toString());
                 }

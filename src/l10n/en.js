@@ -2,6 +2,7 @@ OC.L10N.register(
     'passwords',
     {
         'Passwords'             : 'Passwords',
+        'CustomFields'          : 'Custom Fields',
         'FolderLabel'           : 'Folder',
         'TagLabels'             : 'Tags',
         'FolderId'              : 'Folder Id',

@@ -63,7 +63,7 @@ abstract class AbstractService {
     }
 
     /**
-     * @return array
+     * @return EntityInterface[]
      */
     public function findDeleted(): array {
         return $this->mapper->findAllDeleted();

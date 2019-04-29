@@ -12,10 +12,10 @@
                     <translate tag="option" value="legacy" say="ownCloud Passwords"/>
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
-                    <translate tag="option" value="keepass" say="KeePass CSV" v-if="nightly"/>
+                    <translate tag="option" value="enpass" say="Enpass JSON"/>
+                    <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
-                    <translate tag="option" value="enpass" say="Enpass CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -84,6 +84,11 @@
                         <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" autocomplete="new-password" readonly/>
                     </div>
                     <br>
+                    <div v-if="source === 'enpass'">
+                        <br>
+                        <input type="checkbox" id="passwords-enpass-empty" v-model="options.skipEmpty" :disabled="importing"/>
+                        <translate tag="label" for="passwords-enpass-empty" say="Don't import empty fields"/>
+                    </div>
                     <div v-if="source === 'csv'">
                         <translate tag="h3" say="Import Options"/>
                         <translate tag="label" for="passwords-import-csv-db" say="Database"/>
@@ -121,7 +126,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <br>
+                        <br v-if="source !== 'enpass'">
                         <input type="checkbox" id="passwords-import-shared" v-model="options.skipShared" :disabled="importing" v-if="options.mode !== '4'"/>
                         <translate tag="label" for="passwords-import-shared" say="Don't edit passwords shared with me" v-if="options.mode !== '4'"/>
                     </div>
@@ -158,7 +163,7 @@
                 type       : 'json',
                 mime       : 'application/json',
                 fieldMap   : {
-                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favorite', 'folderLabel', 'tagLabels', 'folderId', 'tagIds', 'id', 'revision'],
+                    passwords: ['password', 'username', 'label', 'notes', 'url', 'edited', 'favorite', 'folderLabel', 'tagLabels', 'customFields', 'folderId', 'tagIds', 'id', 'revision'],
                     folders  : ['label', 'edited', 'favorite', 'parentLabel', 'parentId', 'id', 'revision'],
                     tags     : ['label', 'color', 'edited', 'favorite', 'id', 'revision']
                 },
@@ -167,7 +172,7 @@
                 csvFile    : null,
                 csvReady   : false,
                 csv        : {delimiter: 'auto', quotes: '"', escape: '"', badQuotes: false},
-                options    : {mode: 0, skipShared: true},
+                options    : {mode: 0, skipShared: true, skipEmpty: false},
                 step       : 2,
                 previewLine: 1,
                 importing  : false,
@@ -320,6 +325,7 @@
                 } else if(this.source === 'csv') {
                     if(
                         (this.options.db === 'passwords' && this.options.mapping.indexOf('password') !== -1) ||
+                        (`${this.options.mode}` === '3' && this.options.mapping.length > 0) ||
                         this.options.mapping.indexOf('label') !== -1
                     ) {
                         this.step = this.csvReady ? 4:2;
@@ -344,12 +350,14 @@
                 let oldMime = this.mime;
                 this.progress.status = null;
                 this.csv.badQuotes = false;
+                this.options.mode = 3;
                 this.mime = 'text/csv';
                 this.type = 'csv';
 
                 // noinspection FallThroughInSwitchStatementJS
                 switch(value) {
                     case 'json':
+                        this.options.mode = 0;
                         this.mime = 'application/json';
                         this.type = 'json';
                         break;
@@ -357,32 +365,37 @@
                         this.mime = 'application/json';
                         this.type = 'pmanJson';
                         break;
+                    case 'enpass':
+                        this.mime = 'application/json';
+                        this.options.skipEmpty = true;
+                        this.type = 'enpass';
+                        break;
                     case 'keepass':
                         this.csv.escape = '\\';
-                    case 'enpass':
                     case 'legacy':
                     case 'lastpass':
                         this.options.profile = value;
-                        this.options.mode = 1;
                         break;
                     case 'pmanCsv':
                         this.type = 'pmanCsv';
                     case 'dashlane':
                         this.options.profile = value;
                         this.csv.badQuotes = true;
-                        this.options.mode = 1;
                         break;
                     case 'pwdCsv':
                         this.options.profile = 'passwords';
+                        this.options.mode = 2;
                         break;
                     case 'fldCsv':
                         this.options.profile = 'folders';
+                        this.options.mode = 2;
                         break;
                     case 'tagCsv':
                         this.options.profile = 'tags';
+                        this.options.mode = 2;
                         break;
                     case 'csv':
-                        this.options = {mode: 1, skipShared: true, firstLine: 1, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
+                        this.options = {mode: 3, skipShared: true, firstLine: 1, delimiter: 'auto', db: 'passwords', mapping: [], repair: true, profile: 'custom'};
                         break;
                 }
 

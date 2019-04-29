@@ -316,6 +316,7 @@ class LegacyPasswordApiController extends ApiController {
 
         return [
             'id'            => $password->getId(),
+            'name'        => $revision->getLabel(),
             'user_id'       => $password->getUserId(),
             'loginname'     => $revision->getUsername(),
             'pass'          => $revision->getPassword(),

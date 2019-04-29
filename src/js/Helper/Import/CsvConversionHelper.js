@@ -13,10 +13,11 @@ export default class ImportCsvConversionHelper {
      * @returns {{}}
      */
     static async processGenericCsv(data, options) {
-        let profile = options.profile === 'custom' ? options:this._getProfile(options.profile),
-            entries = this._processCsv(data, profile);
+        let profile      = options.profile === 'custom' ? options:this._getProfile(options.profile),
+            {db, errors} = this._processCsv(data, profile),
+            entries      = await this._convertCsv(db, profile);
 
-        return await this._convertCsv(entries, profile);
+        return {data: entries, errors};
     }
 
     /**
@@ -26,28 +27,69 @@ export default class ImportCsvConversionHelper {
      * @returns {Promise<*>}
      */
     static async processPassmanCsv(data) {
+        let errors = [];
 
-        for(let i = 0; i < data.length; i++) {
-            let line = data[i];
+        for(let i = 1; i < data.length; i++) {
+            let line = data[i], hasFiles = true;
+
+            if(data[i][8].length > 2) {
+                this._logConversionError('"{label}" has files attached which can not be imported.', {label: line[0]}, errors);
+                hasFiles = true;
+            }
 
             data[i][5] = line[5].substr(1, line[5].length - 2);
+            data[i][7] = this._processPassmanCustomFields(line, errors, hasFiles);
         }
 
-        let profile = this._getProfile('passman'),
-            entries = this._processCsv(data, profile);
-        return await this._convertCsv(entries, profile);
+        let result = await this.processGenericCsv(data, {profile: 'passman'});
+        result.errors = errors.concat(result.errors);
+
+        return result;
+    }
+
+    /**
+     *
+     * @param line
+     * @param errors
+     * @param hasFiles
+     * @returns {string}
+     * @private
+     */
+    static _processPassmanCustomFields(line, errors, hasFiles = false) {
+        let rawFields    = JSON.parse(line[7]),
+            customFields = [];
+
+        if(line[3] !== '') {
+            customFields.push(Localisation.translate('Email') + ',email:' + line[3]);
+        }
+
+        for(let i = 0; i < rawFields.length; i++) {
+            let field = rawFields[i],
+                type  = field.field_type === 'password' ? 'secret':'text';
+
+            if(field.field_type === 'file') {
+                if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', {label: line[0]}, errors);
+                hasFiles = true;
+                continue;
+            }
+
+            customFields.push(`${field.label},${type}:${field.value}`);
+        }
+
+        return customFields.join("\n");
     }
 
     /**
      *
      * @param data
      * @param options
-     * @returns {Promise<{}>}
+     * @returns {{db: Array, errors: Array}}
      * @private
      */
     static _processCsv(data, options) {
         let mapping   = options.mapping,
             fieldMap  = {tagIds: 'tags', folderId: 'folder', parentId: 'parent'},
+            errors    = [],
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
@@ -64,7 +106,7 @@ export default class ImportCsvConversionHelper {
 
                     if(value === undefined) continue;
                     let targetField = fieldMap.hasOwnProperty(field) ? fieldMap[field]:field;
-                    object[targetField] = this._processCsvValue(value, field);
+                    object[targetField] = this._processCsvValue(value, field, errors);
                 }
             }
 
@@ -72,17 +114,18 @@ export default class ImportCsvConversionHelper {
             db.push(object);
         }
 
-        return db;
+        return {db, errors};
     }
 
     /**
      *
      * @param value
      * @param field
+     * @param errors
      * @returns {*}
      * @private
      */
-    static _processCsvValue(value, field) {
+    static _processCsvValue(value, field, errors) {
         let boolYes = Localisation.translate('true'),
             boolNo  = Localisation.translate('false');
 
@@ -94,8 +137,64 @@ export default class ImportCsvConversionHelper {
             return new Date(value);
         } else if((field === 'tags' || field === 'tagLabels') && value.length !== 0 && !Array.isArray(value)) {
             return value.split(',');
+        } else if(field === 'customFields') {
+            return this._processCustomFields(value, errors);
         }
         return value;
+    }
+
+    /**
+     *
+     * @param data
+     * @param errors
+     * @returns {Array}
+     * @private
+     */
+    static _processCustomFields(data, errors) {
+        let rawFields    = data.split("\n"),
+            customFields = [];
+
+        for(let i = 0; i < rawFields.length; i++) {
+            if(rawFields[i].trim() === '') continue;
+            let [label, value] = rawFields[i].split(':', 2),
+                type           = 'text';
+
+            value = value.trim();
+            label = label.trim();
+            if(label.indexOf(',') !== -1) {
+                [label, type] = label.split(',', 2);
+
+                type = type.trim();
+                if(type === 'password') type = 'secret';
+                if((type === 'url' && (!value.match(/^\w+:\/\/.+$/) || value.substr(0, 11) === 'javascript:')) ||
+                   ['text', 'email', 'url', 'file', 'secret', 'data'].indexOf(type) === -1 ||
+                   (type === 'email' && !value.match(/^[\w._-]+@.+$/))
+                ) {
+                    this._logConversionError('The value of "{field}" did not have the type {type} and was changed to text.', {field: label, type, value}, errors);
+                    type = 'text';
+                }
+            }
+
+            if(label.length < 1) label = type.capitalize();
+            if(label.length > 48) {
+                this._logConversionError('The label of "{field}" exceeds 48 characters and was cut.', {field: label}, errors);
+                label = label.substr(0, 48);
+            }
+            if(value.length > 320) {
+                this._logConversionError('The value of "{field}" exceeds 320 characters and was cut.', {field: label}, errors);
+                value = value.substr(0, 320);
+            }
+
+            if(value.match(/^[\w._-]+@.+$/)) {
+                type = 'email';
+            } else if(value.match(/^\w+:\/\/.+$/) && value.substr(0, 11) !== 'javascript:') {
+                type = 'url';
+            }
+
+            customFields.push({label, type, value: value.trim()});
+        }
+
+        return customFields;
     }
 
     /**
@@ -168,7 +267,7 @@ export default class ImportCsvConversionHelper {
                 if(!idMap.hasOwnProperty(label)) {
                     keyMap[label] = tags.length;
                     tags.push({id: label, label, color: randomMC.getColor()});
-                    element.tags[j] = idMap[label];
+                    element.tags[j] = label;
                     idMap[label] = label;
                 } else {
                     element.tags[j] = idMap[label];
@@ -273,7 +372,7 @@ export default class ImportCsvConversionHelper {
             passwords: {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', 'notes', 'url', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId']
+                mapping  : ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId']
             },
             folders  : {
                 firstLine: 1,
@@ -304,7 +403,7 @@ export default class ImportCsvConversionHelper {
             passman  : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url'],
+                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url', 'customFields'],
                 repair   : true
             },
             dashlane : {
@@ -312,15 +411,22 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password', 'notes'],
                 repair   : true
-            },
-            enpass   : {
-                firstLine: 1,
-                db       : 'passwords',
-                mapping  : ['label', '', 'username', '', 'password', '', 'url'],
-                repair   : true
             }
         };
 
         return profiles[name];
+    }
+
+    /**
+     *
+     * @param text
+     * @param vars
+     * @param errors
+     * @private
+     */
+    static _logConversionError(text, vars, errors) {
+        let message = Localisation.translate(text, vars);
+        errors.push(message);
+        console.error(message, vars);
     }
 }
