@@ -12,6 +12,7 @@ use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
@@ -55,17 +56,22 @@ class DuplicateDeletionHelper implements IRepairStep {
      * @var PasswordRevisionService
      */
     protected $passwordRevisionService;
+    /**
+     * @var PasswordTagRelationService
+     */
+    protected $passwordTagRelationService;
 
     /**
      * DuplicateDeletionHelper constructor.
      *
-     * @param TagService              $tagService
-     * @param ShareService            $shareService
-     * @param FolderService           $folderService
-     * @param PasswordService         $passwordService
-     * @param TagRevisionService      $tagRevisionService
-     * @param FolderRevisionService   $folderRevisionService
-     * @param PasswordRevisionService $passwordRevisionService
+     * @param TagService                 $tagService
+     * @param ShareService               $shareService
+     * @param FolderService              $folderService
+     * @param PasswordService            $passwordService
+     * @param TagRevisionService         $tagRevisionService
+     * @param FolderRevisionService      $folderRevisionService
+     * @param PasswordRevisionService    $passwordRevisionService
+     * @param PasswordTagRelationService $passwordTagRelationService
      */
     public function __construct(
         TagService $tagService,
@@ -74,15 +80,17 @@ class DuplicateDeletionHelper implements IRepairStep {
         PasswordService $passwordService,
         TagRevisionService $tagRevisionService,
         FolderRevisionService $folderRevisionService,
-        PasswordRevisionService $passwordRevisionService
+        PasswordRevisionService $passwordRevisionService,
+        PasswordTagRelationService $passwordTagRelationService
     ) {
-        $this->tagService              = $tagService;
-        $this->shareService            = $shareService;
-        $this->folderService           = $folderService;
-        $this->passwordService         = $passwordService;
-        $this->tagRevisionService      = $tagRevisionService;
-        $this->folderRevisionService   = $folderRevisionService;
-        $this->passwordRevisionService = $passwordRevisionService;
+        $this->tagService                 = $tagService;
+        $this->shareService               = $shareService;
+        $this->folderService              = $folderService;
+        $this->passwordService            = $passwordService;
+        $this->tagRevisionService         = $tagRevisionService;
+        $this->folderRevisionService      = $folderRevisionService;
+        $this->passwordRevisionService    = $passwordRevisionService;
+        $this->passwordTagRelationService = $passwordTagRelationService;
     }
 
     /**
@@ -112,6 +120,7 @@ class DuplicateDeletionHelper implements IRepairStep {
         $this->deleteDuplicates($this->tagRevisionService);
         $this->deleteDuplicates($this->folderRevisionService);
         $this->deleteDuplicates($this->passwordRevisionService);
+        $this->deleteDuplicates($this->passwordTagRelationService);
     }
 
     /**
