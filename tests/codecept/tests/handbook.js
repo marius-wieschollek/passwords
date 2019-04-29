@@ -51,11 +51,12 @@ Scenario('Show Create Password Dialog', (I) => {
 
     I.waitForElement('#controls > div.breadcrumb > div.passwords-more-menu > span', 10);
     I.click('#controls > div.breadcrumb > div.passwords-more-menu > span');
-    I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)', 20);
+    I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)', 10);
     I.click('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)');
     I.waitForElement('#passwords-create-new', 10);
     I.fillField('#password-username', 'myuser');
     I.fillField('#password-password', 'LongAndStrongPassword');
+    I.fillField('#password-label', 'Example Password');
     I.fillField('#password-url', 'https://www.example.com');
     I.click('#passwords-create-new');
     I.click('div.foldout-container:nth-child(2) > div:nth-child(1)');
@@ -80,6 +81,19 @@ Scenario('Show Folder Section', async (I) => {
     I.captureWholePage('folder-section');
 });
 
+Scenario('Show Create Folder Dialog', async (I) => {
+    I.amOnPage('/index.php/apps/passwords/#folders');
+
+    I.waitForElement('div[data-folder-title=Work]', 10);
+    I.waitForElement('#controls > div.breadcrumb > div.passwords-more-menu > span', 10);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > span');
+    I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(1)', 10);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(1)');
+    I.waitForElement('div.oc-dialog', 10);
+    I.fillField('div.oc-dialog input', 'Example Folder');
+    await I.captureElement('folder-create', 'div.oc-dialog', 0);
+});
+
 Scenario('Show Recent Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/recent');
     I.waitForElement('div.row', 10);
@@ -95,8 +109,21 @@ Scenario('Show Favourites Section', (I) => {
 Scenario('Show Tags Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/tags');
     I.waitForElement('div[data-tag-title=Communication]', 10);
-    I.captureWholePage('tags-section', 0);
+    I.captureWholePage('tag-section', 0);
     I.captureElement('tag-single', 'div[data-tag-title=Communication]', 0);
+});
+
+Scenario('Show Create Tag Dialog', async (I) => {
+    I.amOnPage('/index.php/apps/passwords/#tags');
+
+    I.waitForElement('div[data-tag-title=Communication]', 10);
+    I.waitForElement('#controls > div.breadcrumb > div.passwords-more-menu > span', 10);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > span');
+    I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(2)', 10);
+    I.click('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(2)');
+    I.waitForElement('div.oc-dialog', 10);
+    I.fillField('#pw-field-label', 'Example Tag');
+    await I.captureElement('tag-create', 'div.oc-dialog', 0);
 });
 
 Scenario('Show Shared Section', (I) => {

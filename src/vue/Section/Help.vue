@@ -62,11 +62,11 @@
 
         created() {
             this.refreshView();
-            document.addEventListener('scroll', () => { this.setActiveSection() })
+            document.addEventListener('scroll', this.setActiveSection);
         },
 
         beforeDestroy() {
-            document.removeEventListener('scroll', () => { this.setActiveSection() })
+            document.removeEventListener('scroll', this.setActiveSection);
         },
 
         updated() {
@@ -103,7 +103,7 @@
                 return title.replace(/-{1}/g, ' ');
             },
             showNavigation() {
-                return this.$route.params.page !== undefined;
+                return this.$route.params.page !== undefined && this.navigation.length > 0;
             }
         },
 
@@ -133,6 +133,7 @@
                     let item = this.navigation[i],
                         el   = document.getElementById(item.id);
 
+                    if(el === null) continue;
                     if (el.offsetTop - el.offsetHeight >= pos) {
                         this.section = section;
                         return;

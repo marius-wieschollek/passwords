@@ -24,18 +24,30 @@ class HandbookRenderer {
 
         try {
             let url      = this.handbookUrl + page,
-                response = await fetch(new Request(`${url}.md`)),
-                baseUrl  = url.substr(url, url.lastIndexOf('/') + 1);
+                response = await fetch(new Request(`${url}.md`), {redirect: 'error', referrerPolicy: 'no-referrer'}),
+                baseUrl  = url.substr(url, url.lastIndexOf('/') + 1),
+                mime = response.headers.get('content-type');
 
             if (response.ok) {
-                let page = this.render(await response.text(), baseUrl, url);
+                if(mime.substr(0, 10) !== 'text/plain') {
+                    return HandbookRenderer._generateErrorPage(
+                        Localisation.translate('Invalid content type {mime}', {mime})
+                    );
+                }
+
+                let data = await response.text();
+                if(!data) return HandbookRenderer._generateErrorPage(Localisation.translate('No content available'));
+
+                let page = this.render(data, baseUrl, url);
                 this.pages[page] = page;
                 return page;
+            } else {
+                return HandbookRenderer._generateErrorPage(response.status + ' – ' + response.statusText);
             }
-            return Localisation.translate('Unable to fetch page: {message}.', {message: Localisation.translate(response.statusText)});
         } catch (e) {
             if (process.env.NODE_ENV === 'development') console.error('Request failed', e);
-            throw e;
+
+            return HandbookRenderer._generateErrorPage(e.message);
         }
     }
 
@@ -54,11 +66,29 @@ class HandbookRenderer {
         renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl, media);};
         renderer.image = (href, title, text, nowrap) => { return HandbookRenderer._renderImage(href, title, text, nowrap, baseUrl, media);};
         renderer.heading = (text, level) => { return HandbookRenderer._renderHeader(text, level, navigation);};
+        renderer.code = (code, infostring, escaped) => {
+            let content = new marked.Renderer().code(code, infostring, escaped);
+            return content.replace(/(\r\n|\n|\r)/gm, '<br>');
+        };
         HandbookRenderer._extendMarkedLexer();
 
         let source = marked(markdown, {renderer});
 
         return {source, media, navigation};
+    }
+
+    /**
+     *
+     * @param message
+     * @returns {{source: string, media: Array, navigation: Array}}
+     * @private
+     */
+    static _generateErrorPage(message) {
+        return {
+            source: '\u{1F480} ' + Localisation.translate('Unable to fetch page: {message}.', {message}),
+            media: [],
+            navigation: []
+        };
     }
 
     /**
