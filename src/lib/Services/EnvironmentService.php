@@ -54,11 +54,6 @@ class EnvironmentService {
     /**
      * @var bool
      */
-    protected $isAppUpdate;
-
-    /**
-     * @var bool
-     */
     protected $isGlobalMode;
 
     /**
@@ -84,8 +79,7 @@ class EnvironmentService {
         $this->logger             = $logger;
         $this->config             = $config;
         $this->checkIfCronJob($request);
-        $this->checkIfAppUpdate($request);
-        $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
+        $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode ||  $this->isCronJob;
 
         if($this->isGlobalMode) {
             // Debugging info
@@ -193,19 +187,5 @@ class EnvironmentService {
         $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
                            ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
                            ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
-    }
-
-    /**
-     * @param IRequest $request
-     */
-    protected function checkIfAppUpdate(IRequest $request): void {
-        $this->isAppUpdate = false;
-        if($this->isCronJob || $this->isCliMode) return;
-
-        try {
-            $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
-        } catch(\Exception $e) {
-            $this->logger->logException($e, ['app' => Application::APP_NAME]);
-        }
     }
 }
