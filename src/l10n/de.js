@@ -1,4 +1,4 @@
-(function () {
+(function() {
     let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
@@ -297,6 +297,8 @@
             'Contents'                            : 'Inhalt',
             'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Die Seite kann nicht angezeigt werden: {message}.',
+            'Invalid content type {mime}'         : 'Falscher Dateityp {mime}',
+            'No content available'                : 'Es ist kein Inhalt vorhanden',
             'Not Found'                           : 'Seite nicht gefunden',
             'Still need help?'                    : 'Noch Fragen?',
             'Ask in our forum!'                   : 'Wir helfen gerne!',

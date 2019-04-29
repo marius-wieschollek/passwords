@@ -236,7 +236,7 @@
                 z-index               : 9999;
                 overflow              : hidden;
                 background-color      : var(--color-main-background);
-                border-radius         : var(--border-radius);
+                border-radius         : var(--border-radius-large);
                 box-sizing            : border-box;
                 display               : grid;
                 grid-template-columns : 100%;

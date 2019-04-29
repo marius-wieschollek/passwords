@@ -297,6 +297,8 @@
             'Contents'                            : 'Inhalt',
             'Figure {count}: {title}'             : 'Abbildung {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Die Seite kann nicht angezeigt werden: {message}.',
+            'Invalid content type {mime}'         : 'Falscher Dateityp {mime}',
+            'No content available'                : 'Es ist kein Inhalt vorhanden',
             'Not Found'                           : 'Seite nicht gefunden',
             'Missing something or found an error?': 'Vermissen Sie etwas oder haben Sie einen Fehler gefunden?',
             'Still need help?'                    : 'Benötigen Sie Hilfe?',
