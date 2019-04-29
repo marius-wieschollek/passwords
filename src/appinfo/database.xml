@@ -75,6 +75,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -186,10 +199,10 @@
             </field>
             <field>
                 <name>status_code</name>
-                <default>GOOD</default>
                 <type>text</type>
                 <length>12</length>
                 <notnull>true</notnull>
+                <default>GOOD</default>
             </field>
             <field>
                 <name>deleted</name>
@@ -215,6 +228,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -271,6 +297,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -371,6 +410,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -421,6 +473,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -519,6 +584,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -587,6 +665,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>tag</name>
+                </field>
+                <field>
+                    <name>password</name>
+                </field>
+                <field>
+                    <name>deleted</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -683,6 +774,19 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>receiver</name>
+                </field>
+            </index>
         </declaration>
     </table>
 </database>
