@@ -62,11 +62,11 @@
 
         created() {
             this.refreshView();
-            document.addEventListener('scroll', () => { this.setActiveSection() })
+            document.addEventListener('scroll', this.setActiveSection);
         },
 
         beforeDestroy() {
-            document.removeEventListener('scroll', () => { this.setActiveSection() })
+            document.removeEventListener('scroll', this.setActiveSection);
         },
 
         updated() {
@@ -133,6 +133,7 @@
                     let item = this.navigation[i],
                         el   = document.getElementById(item.id);
 
+                    if(el === null) continue;
                     if (el.offsetTop - el.offsetHeight >= pos) {
                         this.section = section;
                         return;
