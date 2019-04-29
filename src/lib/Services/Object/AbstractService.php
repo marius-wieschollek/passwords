@@ -70,6 +70,17 @@ abstract class AbstractService {
     }
 
     /**
+     * @param string $uuid
+     *
+     * @return EntityInterface
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    public function findByUuid(string $uuid) {
+        return $this->mapper->findByUuid($uuid);
+    }
+
+    /**
      * @param EntityInterface $model
      *
      * @return mixed
