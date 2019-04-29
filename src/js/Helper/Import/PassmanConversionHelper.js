@@ -130,12 +130,20 @@ export default class PassmanConversionHelper {
      * @private
      */
     static _processCustomFields(element, object, errors) {
+        let hasFiles = false;
+
+        if(element.hasOwnProperty('files') && element.custom_fields.length !== 0) {
+            if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', element, 'files', errors);
+            hasFiles = true;
+        }
+
         if (element.hasOwnProperty('custom_fields') && element.custom_fields.length !== 0) {
             for (let j = 0; j < element.custom_fields.length; j++) {
                 let field = element.custom_fields[j];
 
                 if (field.field_type === 'file') {
-                    this._logConversionError('"{label}" has files attached which can not be imported.', element, field, errors);
+                    if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', element, field, errors);
+                    hasFiles = true;
                 } else if (['text', 'password'].indexOf(field.field_type) !== -1) {
                     this._processCustomField(field, element, errors, object);
                 } else {

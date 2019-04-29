@@ -13,9 +13,9 @@ export default class ImportCsvConversionHelper {
      * @returns {{}}
      */
     static async processGenericCsv(data, options) {
-        let profile = options.profile === 'custom' ? options:this._getProfile(options.profile),
+        let profile      = options.profile === 'custom' ? options:this._getProfile(options.profile),
             {db, errors} = this._processCsv(data, profile),
-            entries = await this._convertCsv(db, profile);
+            entries      = await this._convertCsv(db, profile);
 
         return {data: entries, errors};
     }
@@ -27,14 +27,56 @@ export default class ImportCsvConversionHelper {
      * @returns {Promise<*>}
      */
     static async processPassmanCsv(data) {
+        let errors = [];
 
-        for(let i = 0; i < data.length; i++) {
-            let line = data[i];
+        for(let i = 1; i < data.length; i++) {
+            let line = data[i], hasFiles = true;
+
+            if(data[i][8].length > 2) {
+                this._logConversionError('"{label}" has files attached which can not be imported.', {label: line[0]}, errors);
+                hasFiles = true;
+            }
 
             data[i][5] = line[5].substr(1, line[5].length - 2);
+            data[i][7] = this._processPassmanCustomFields(line, errors, hasFiles);
         }
 
-        return await this.processGenericCsv(data, {profiel:'passman'});
+        let result = await this.processGenericCsv(data, {profile: 'passman'});
+        result.errors = errors.concat(result.errors);
+
+        return result;
+    }
+
+    /**
+     *
+     * @param line
+     * @param errors
+     * @param hasFiles
+     * @returns {string}
+     * @private
+     */
+    static _processPassmanCustomFields(line, errors, hasFiles = false) {
+        let rawFields    = JSON.parse(line[7]),
+            customFields = [];
+
+        if(line[3] !== '') {
+            customFields.push(Localisation.translate('Email') + ',email:' + line[3]);
+        }
+
+        for(let i = 0; i < rawFields.length; i++) {
+            let field = rawFields[i],
+                type  = field.field_type === 'password' ? 'secret':'text';
+
+            if(field.field_type === 'file') {
+                if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', {label: line[0]}, errors);
+                hasFiles = true;
+                continue;
+            }
+
+            customFields.push(`${field.label},${type}:${field.value}`);
+        }
+
+        return customFields.join("\n");
     }
 
     /**
@@ -115,7 +157,7 @@ export default class ImportCsvConversionHelper {
         for(let i = 0; i < rawFields.length; i++) {
             if(rawFields[i].trim() === '') continue;
             let [label, value] = rawFields[i].split(':', 2),
-                type             = 'text';
+                type           = 'text';
 
             value = value.trim();
             label = label.trim();
@@ -224,7 +266,7 @@ export default class ImportCsvConversionHelper {
                 if(!idMap.hasOwnProperty(label)) {
                     keyMap[label] = tags.length;
                     tags.push({id: label, label, color: randomMC.getColor()});
-                    element.tags[j] = idMap[label];
+                    element.tags[j] = label;
                     idMap[label] = label;
                 } else {
                     element.tags[j] = idMap[label];
@@ -360,7 +402,7 @@ export default class ImportCsvConversionHelper {
             passman  : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url'],
+                mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url', 'customFields'],
                 repair   : true
             },
             dashlane : {
