@@ -103,7 +103,7 @@
                 return title.replace(/-{1}/g, ' ');
             },
             showNavigation() {
-                return this.$route.params.page !== undefined;
+                return this.$route.params.page !== undefined && this.navigation.length > 0;
             }
         },
 

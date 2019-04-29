@@ -109,7 +109,7 @@ Scenario('Show Favourites Section', (I) => {
 Scenario('Show Tags Section', (I) => {
     I.amOnPage('/index.php/apps/passwords/#/tags');
     I.waitForElement('div[data-tag-title=Communication]', 10);
-    I.captureWholePage('tags-section', 0);
+    I.captureWholePage('tag-section', 0);
     I.captureElement('tag-single', 'div[data-tag-title=Communication]', 0);
 });
 
