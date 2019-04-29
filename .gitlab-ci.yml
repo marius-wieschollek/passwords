@@ -23,6 +23,7 @@ Assemble:
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
+    - cp CHANGELOG.md passwords/
   artifacts:
     paths:
       - ./passwords
