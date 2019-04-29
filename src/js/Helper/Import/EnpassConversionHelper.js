@@ -210,15 +210,13 @@ export default class EnpassConversionHelper {
 
         if (label.length < 1) label = field.type.capitalize();
         if (label.length > 48) {
-            label = label.substr(0, 48);
-
             this._logConversionError('The label of "{field}" in "{label}" exceeds 48 characters and was cut.', {label: password.label, field: label}, errors);
+            label = label.substr(0, 48);
         }
 
         if (value.length > 320) {
-            value = value.substr(0, 320);
-
             this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', {label: password.label, field: label}, errors);
+            value = value.substr(0, 320);
         }
 
         password.customFields.push({label, type, value})

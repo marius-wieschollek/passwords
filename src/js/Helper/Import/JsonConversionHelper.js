@@ -20,7 +20,7 @@ export default class ImportJsonConversionHelper {
             throw new Error('Unsupported database version');
         }
 
-        return json;
+        return {data:json, errors:{}};
     }
 
     /**

@@ -33,7 +33,10 @@ export class ImportManager {
         this.processed = 0;
         this.progress = progress;
         this._countProgress('Parsing input file');
-        data = await this._convertInputData(type, data, options);
+
+        let result = await ImportManager._convertInputData(type, data, options);
+        this.errors = result.errors;
+        data = result.data;
 
         this.total = 0;
         for(let k in data) {
@@ -57,31 +60,21 @@ export class ImportManager {
      * @returns {Promise<*>}
      * @private
      */
-    async _convertInputData(type, data, options) {
+    static async _convertInputData(type, data, options) {
         switch(type) {
             case 'json':
-                data = await ImportJsonConversionHelper.processBackupJson(data, options);
-                break;
+                return await ImportJsonConversionHelper.processBackupJson(data, options);
             case 'pmanJson':
-                let result = await PassmanConversionHelper.processJson(data);
-                this.errors = result.errors;
-                return result.data;
+                return await PassmanConversionHelper.processJson(data);
             case 'pmanCsv':
-                data = await ImportCsvConversionHelper.processPassmanCsv(data);
-                break;
+                return await ImportCsvConversionHelper.processPassmanCsv(data);
             case 'csv':
-                data = await ImportCsvConversionHelper.processGenericCsv(data, options);
-                break;
+                return await ImportCsvConversionHelper.processGenericCsv(data, options);
             case 'enpass':
-                data = await EnpassConversionHelper.processJson(data, options);
-                this.errors = data.errors;
-                data = data.data;
-                break;
+                return await EnpassConversionHelper.processJson(data, options);
             default:
                 throw new Error(`Invalid import type: ${type}`);
         }
-
-        return data;
     }
 
     /**

@@ -14,9 +14,10 @@ export default class ImportCsvConversionHelper {
      */
     static async processGenericCsv(data, options) {
         let profile = options.profile === 'custom' ? options:this._getProfile(options.profile),
-            entries = this._processCsv(data, profile);
+            {db, errors} = this._processCsv(data, profile),
+            entries = await this._convertCsv(db, profile);
 
-        return await this._convertCsv(entries, profile);
+        return {data: entries, errors};
     }
 
     /**
@@ -33,21 +34,20 @@ export default class ImportCsvConversionHelper {
             data[i][5] = line[5].substr(1, line[5].length - 2);
         }
 
-        let profile = this._getProfile('passman'),
-            entries = this._processCsv(data, profile);
-        return await this._convertCsv(entries, profile);
+        return await this.processGenericCsv(data, {profiel:'passman'});
     }
 
     /**
      *
      * @param data
      * @param options
-     * @returns {Promise<{}>}
+     * @returns {{db: Array, errors: Array}}
      * @private
      */
     static _processCsv(data, options) {
         let mapping   = options.mapping,
             fieldMap  = {tagIds: 'tags', folderId: 'folder', parentId: 'parent'},
+            errors    = [],
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
@@ -64,7 +64,7 @@ export default class ImportCsvConversionHelper {
 
                     if(value === undefined) continue;
                     let targetField = fieldMap.hasOwnProperty(field) ? fieldMap[field]:field;
-                    object[targetField] = this._processCsvValue(value, field);
+                    object[targetField] = this._processCsvValue(value, field, errors);
                 }
             }
 
@@ -72,17 +72,18 @@ export default class ImportCsvConversionHelper {
             db.push(object);
         }
 
-        return db;
+        return {db, errors};
     }
 
     /**
      *
      * @param value
      * @param field
+     * @param errors
      * @returns {*}
      * @private
      */
-    static _processCsvValue(value, field) {
+    static _processCsvValue(value, field, errors) {
         let boolYes = Localisation.translate('true'),
             boolNo  = Localisation.translate('false');
 
@@ -95,51 +96,59 @@ export default class ImportCsvConversionHelper {
         } else if((field === 'tags' || field === 'tagLabels') && value.length !== 0 && !Array.isArray(value)) {
             return value.split(',');
         } else if(field === 'customFields') {
-            return this._processCustomFields(value);
+            return this._processCustomFields(value, errors);
         }
         return value;
     }
 
     /**
      *
-     * @param value
+     * @param data
+     * @param errors
      * @returns {Array}
      * @private
      */
-    static _processCustomFields(value) {
-        let rawFields    = value.split("\n"),
+    static _processCustomFields(data, errors) {
+        let rawFields    = data.split("\n"),
             customFields = [];
 
         for(let i = 0; i < rawFields.length; i++) {
             if(rawFields[i].trim() === '') continue;
-            let [label, content] = rawFields[i].split(':', 2),
+            let [label, value] = rawFields[i].split(':', 2),
                 type             = 'text';
 
+            value = value.trim();
             label = label.trim();
             if(label.indexOf(',') !== -1) {
                 [label, type] = label.split(',', 2);
 
                 type = type.trim();
-                if(['text', 'email', 'url', 'file', 'secret', 'data'].indexOf(type) === -1) {
-                    type = 'text';
-                } else if(type === 'email' && !content.match(/^[\w._-]+@.+$/)) {
-                    type = 'text';
-                } else if(type === 'url' && (!content.match(/^\w+:\/\/.+$/) || content.substr(0, 11) === 'javascript:')) {
+                if((type === 'url' && (!value.match(/^\w+:\/\/.+$/) || value.substr(0, 11) === 'javascript:')) ||
+                   ['text', 'email', 'url', 'file', 'secret', 'data'].indexOf(type) === -1 ||
+                   (type === 'email' && !value.match(/^[\w._-]+@.+$/))
+                ) {
+                    this._logConversionError('The value of "{field}" did not have the type {type} and was changed to text.', {field: label, type, value}, errors);
                     type = 'text';
                 }
             }
 
             if(label.length < 1) label = type.capitalize();
-            if(label.length > 48) label = label.substr(0, 48);
-            if(content.length > 320) content = content.substr(0, 320);
+            if(label.length > 48) {
+                this._logConversionError('The label of "{field}" exceeds 48 characters and was cut.', {field: label}, errors);
+                label = label.substr(0, 48);
+            }
+            if(value.length > 320) {
+                this._logConversionError('The value of "{field}" exceeds 320 characters and was cut.', {field: label}, errors);
+                value = value.substr(0, 320);
+            }
 
-            if(content.match(/^[\w._-]+@.+$/)) {
+            if(value.match(/^[\w._-]+@.+$/)) {
                 type = 'email';
-            } else if(content.match(/^\w+:\/\/.+$/) && content.substr(0, 11) !== 'javascript:') {
+            } else if(value.match(/^\w+:\/\/.+$/) && value.substr(0, 11) !== 'javascript:') {
                 type = 'url';
             }
 
-            customFields.push({label, type, value: content.trim()});
+            customFields.push({label, type, value: value.trim()});
         }
 
         return customFields;
@@ -363,5 +372,18 @@ export default class ImportCsvConversionHelper {
         };
 
         return profiles[name];
+    }
+
+    /**
+     *
+     * @param text
+     * @param vars
+     * @param errors
+     * @private
+     */
+    static _logConversionError(text, vars, errors) {
+        let message = Localisation.translate(text, vars);
+        errors.push(message);
+        console.error(message, vars);
     }
 }

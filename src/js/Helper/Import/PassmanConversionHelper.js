@@ -162,15 +162,13 @@ export default class PassmanConversionHelper {
         if(label.length < 1) label = type.capitalize();
 
         if (label.length > 48) {
-            label = label.substr(0, 48);
-
             this._logConversionError('The label of "{field}" in "{label}" exceeds 48 characters and was cut.', element, field, errors);
+            label = label.substr(0, 48);
         }
 
         if (value.length > 320) {
-            value = value.substr(0, 320);
-
             this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', element, field, errors);
+            value = value.substr(0, 320);
         }
 
         if (type === 'password') {
