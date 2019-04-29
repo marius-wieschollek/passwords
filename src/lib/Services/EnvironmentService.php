@@ -164,7 +164,7 @@ class EnvironmentService {
             $this->runType = self::TYPE_CRON;
         } else if($this->isAppUpgrade($request) || $this->config->getSystemValue('maintenance', false)) {
             $this->runType = self::TYPE_MAINTENANCE;
-        } else if(PHP_SAPI === 'cli') {
+        } else if($this->isCliMode($request)) {
             $this->runType = self::TYPE_CLI;
         }
     }
@@ -190,7 +190,30 @@ class EnvironmentService {
      */
     protected function isAppUpgrade(IRequest $request): bool {
         try {
-            return PHP_SAPI !== 'cli' && $request->getPathInfo() === '/settings/ajax/updateapp.php';
+            return PHP_SAPI !== 'cli' &&
+                   (
+                       $request->getMethod() === 'GET' &&
+                       $request->getPathInfo() === '/settings/apps/update/passwords'
+                   );
+        } catch(\Exception $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
+    /**
+     * @param IRequest $request
+     *
+     * @return bool
+     */
+    protected function isCliMode(IRequest $request): bool {
+        try {
+            return PHP_SAPI === 'cli' ||
+                   (
+                       $request->getMethod() === 'POST' &&
+                       $request->getPathInfo() === '/apps/occweb/cmd' &&
+                       $this->config->getAppValue('occweb', 'enabled', 'no') === 'yes'
+                   );
         } catch(\Exception $e) {
             $this->logger->logException($e);
         }

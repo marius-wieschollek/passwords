@@ -24,8 +24,7 @@
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
         "clean-webpack-plugin": "^0.1.19",
@@ -38,12 +37,12 @@
         "extract-text-webpack-plugin": "^3.0.2",
         "file-loader": "^2.0.0",
         "font-awesome": "^4.7.0",
-        "jszip": "^3.2.1",
         "jquery": "^3.4.0",
+        "jszip": "^3.2.1",
         "libsodium": "^0.7.4",
         "libsodium-wrappers": "^0.7.4",
         "marked": "^0.6.2",
-        "node-sass": "^4.11.0",
+        "node-sass": "^4.12.0",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
         "progress-bar-webpack-plugin": "^1.12.1",
         "random-material-color": "^1.0.3",
