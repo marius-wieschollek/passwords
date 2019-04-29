@@ -162,7 +162,7 @@ class EnvironmentService {
 
         if($this->isCronJob($request)) {
             $this->runType = self::TYPE_CRON;
-        } else if($this->isAppUpgrade($request) || $this->config->getSystemValue('maintenance', false)) {
+        } else if($this->config->getSystemValue('maintenance', false)) {
             $this->runType = self::TYPE_MAINTENANCE;
         } else if($this->isCliMode($request)) {
             $this->runType = self::TYPE_CLI;
@@ -183,24 +183,6 @@ class EnvironmentService {
                (PHP_SAPI === 'cli' && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
-    /**
-     * @param IRequest $request
-     *
-     * @return bool
-     */
-    protected function isAppUpgrade(IRequest $request): bool {
-        try {
-            return PHP_SAPI !== 'cli' &&
-                   (
-                       $request->getMethod() === 'GET' &&
-                       $request->getPathInfo() === '/settings/apps/update/passwords'
-                   );
-        } catch(\Exception $e) {
-            $this->logger->logException($e);
-        }
-
-        return false;
-    }
     /**
      * @param IRequest $request
      *
