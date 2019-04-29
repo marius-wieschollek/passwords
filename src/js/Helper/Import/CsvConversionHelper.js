@@ -168,7 +168,7 @@ export default class ImportCsvConversionHelper {
                 if(!idMap.hasOwnProperty(label)) {
                     keyMap[label] = tags.length;
                     tags.push({id: label, label, color: randomMC.getColor()});
-                    element.tags[j] = idMap[label];
+                    element.tags[j] = label;
                     idMap[label] = label;
                 } else {
                     element.tags[j] = idMap[label];
