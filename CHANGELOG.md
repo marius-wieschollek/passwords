@@ -8,6 +8,7 @@
 ### Changed
  - Improved Passman import
  - Improved help section
+ - Improved sharing ui
 
 ## 2019.4.2 - Bugfix release
 ### Fixed
