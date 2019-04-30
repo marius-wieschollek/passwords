@@ -178,7 +178,7 @@
         }
 
         @media (max-width : $width-small) {
-            top: -44px;
+            top: 0;
         }
     }
 </style>
