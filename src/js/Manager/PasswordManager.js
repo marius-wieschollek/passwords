@@ -84,6 +84,7 @@ class PasswordManager {
                    .then((d) => {
                        p.revision = d.revision;
                        p.updated = new Date();
+                       if(password.hasOwnProperty('tags')) p.tags = password.tags;
                        Events.fire('password.updated', p);
                        Messages.notification('Password saved');
                        resolve(p);

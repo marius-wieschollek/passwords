@@ -81,7 +81,7 @@
                 return {details: 'Details', share: 'Share', revisions: 'Revisions'};
             },
             getSharingTabs() {
-                if(SettingsManager.get('server.sharing.enabled') && (this.object.share === null || this.object.share.shareable === true)) {
+                if(SettingsManager.get('server.sharing.enabled')) {
                     return {nextcloud: 'Share', qrcode: 'QR Code'};
                 }
                 return {qrcode: 'QR Code'};

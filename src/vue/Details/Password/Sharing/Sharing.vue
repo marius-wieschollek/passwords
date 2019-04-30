@@ -1,6 +1,14 @@
 <template>
     <div class="sharing-container">
-        <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
+        <div v-if="password.share && password.share.owner" class="shareby-info" :title="getShareTitle">
+            <img :src="password.share.owner.icon">
+            <translate say="{name} has shared this with you" :variables="password.share.owner"/>
+        </div>
+        <input type="text"
+               v-model="search"
+               class="share-add-user"
+               :placeholder="placeholder"
+               @keypress="submitAction($event)" v-if="shareable"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
                    v-on:delete="deleteShare($event)"
@@ -38,11 +46,14 @@
         },
 
         data() {
+            let shareable = typeof this.password.share === 'object' || this.password.share.shareable;
+
             return {
                 search      : '',
                 matches     : [],
                 nameMap     : [],
                 idMap       : [],
+                shareable,
                 shares      : this.password.shares,
                 placeholder : Localisation.translate('Search user'),
                 autocomplete: SettingsManager.get('server.sharing.autocomplete'),
@@ -71,12 +82,25 @@
                 }
 
                 return users;
+            },
+            getShareTitle() {
+                let editable  = Localisation.translate(this.password.share.editable ? 'Editing allowed':'Editing disallowed'),
+                    shareable = Localisation.translate(this.password.share.shareable ? 'sharing allowed':'sharing disallowed'),
+                    text      = Localisation.translate('{editable} and {shareable}.', {shareable, editable});
+
+                if(this.password.share.expires) {
+                    text +=
+                        ' ' + Localisation.translate('Expires {date}',
+                                                     {date: Localisation.formatDate(this.password.share.expires)});
+                }
+
+                return text;
             }
         },
 
         methods: {
             async searchUsers() {
-                if(this.search === '' || !this.autocomplete) {
+                if(this.search === '' || !this.autocomplete || !this.shareable) {
                     this.matches = [];
                     return;
                 }
@@ -95,6 +119,7 @@
                 }
             },
             addShare(receiver) {
+                if(!this.shareable) return;
                 let share = {
                     password : this.password.id,
                     expires  : null,
@@ -109,7 +134,8 @@
                         share.updatePending = true;
                         share.owner = {
                             id  : document.querySelector('head[data-user]').getAttribute('data-user'),
-                            name: document.querySelector('head[data-user-displayname]').getAttribute('data-user-displayname')
+                            name: document.querySelector('head[data-user-displayname]')
+                                .getAttribute('data-user-displayname')
                         };
                         share.receiver = {id: receiver, name: this.idMap[receiver]};
                         this.shares[d.id] = API._processShare(share);
@@ -178,7 +204,12 @@
 
         watch: {
             password(value) {
-                this.shares = value.shares;
+                if(value.hasOwnProperty('shares')) {
+                    this.shares = value.shares;
+                } else {
+                    this.shares = [];
+                }
+                this.shareable = value.share === null || value.share.shareable;
                 this.$forceUpdate();
             },
             search() {
@@ -201,6 +232,19 @@
 <style lang="scss">
     .sharing-container {
         position : relative;
+
+        .shareby-info {
+            img {
+                border-radius : var(--border-radius-pill);
+                width         : 32px;
+                height        : 32px;
+                margin-right  : 0.5rem;
+                float         : left;
+            }
+
+            line-height   : 32px;
+            margin-bottom : 0.5rem;
+        }
 
         .share-add-user {
             width : 100%;
