@@ -79,11 +79,11 @@
                     {path: {name: 'Help'}, label: Localisation.translate('Handbook')}
                 ];
 
-                if (this.$route.params.page === undefined) return items;
+                if(this.$route.params.page === undefined) return items;
                 let path    = this.$route.params.page.split('/'),
                     current = '';
 
-                for (let i = 0; i < path.length; i++) {
+                for(let i = 0; i < path.length; i++) {
                     current += path[i];
                     items.push(
                         {
@@ -96,7 +96,7 @@
                 return items;
             },
             getPageTitle() {
-                if (this.$route.params.page === undefined) return 'Handbook';
+                if(this.$route.params.page === undefined) return 'Handbook';
                 let path  = this.page,
                     title = path.substr(path.lastIndexOf('/') + 1);
 
@@ -109,9 +109,9 @@
 
         methods: {
             refreshView() {
-                if (this.$route.params.page === undefined) {
+                if(this.$route.params.page === undefined) {
                     this.showPage('Index');
-                } else if (this.$route.params.page !== this.page) {
+                } else if(this.$route.params.page !== this.page) {
                     this.showPage(this.$route.params.page);
                 } else {
                     this.jumpToAnchor();
@@ -122,19 +122,19 @@
                     pos     = window.scrollY,
                     section = '';
 
-                if (footer && footer.offsetTop < window.innerHeight + window.scrollY) {
+                if(footer && footer.offsetTop < window.innerHeight + window.scrollY) {
                     let item = this.navigation[this.navigation.length - 1];
 
                     this.section = item.id;
                     return;
                 }
 
-                for (let i = 0; i < this.navigation.length; i++) {
+                for(let i = 0; i < this.navigation.length; i++) {
                     let item = this.navigation[i],
                         el   = document.getElementById(item.id);
 
                     if(el === null) continue;
-                    if (el.offsetTop - el.offsetHeight >= pos) {
+                    if(el.offsetTop - el.offsetHeight >= pos) {
                         this.section = section;
                         return;
                     } else {
@@ -145,7 +145,7 @@
                 this.section = section;
             },
             async showPage(page) {
-                if (this.page === page) return;
+                if(this.page === page) return;
                 this.loading = true;
                 let {source, media, navigation} = await HandbookRenderer.fetchPage(page);
                 this.source = source;
@@ -155,14 +155,14 @@
                 this.loading = false;
             },
             jumpToAnchor(behavior = 'smooth') {
-                if (!this.$route.hash) {
+                if(!this.$route.hash) {
                     Utility.scrollTo(0, 0, behavior);
                     return;
                 }
 
                 let $el = document.querySelector(`#app-content ${this.$route.hash}`);
-                if ($el) {
-                    let top      = $el.offsetTop - document.getElementById('controls').offsetHeight;
+                if($el) {
+                    let top = $el.offsetTop - document.getElementById('controls').offsetHeight;
 
                     Utility.scrollTo(top, 0, behavior);
                     $el.classList.add('highlight');
@@ -175,10 +175,10 @@
                 });
             },
             updateMediaElements() {
-                if (this.gallery.images.length === this.media.length) return;
+                if(this.gallery.images.length === this.media.length) return;
 
                 let gallery = [];
-                for (let i = 0; i < this.media.length; i++) {
+                for(let i = 0; i < this.media.length; i++) {
                     let image = this.media[i],
                         el    = document.getElementById(image.id);
 
@@ -205,7 +205,7 @@
             }
         },
         watch  : {
-            $route: function () {
+            $route: function() {
                 this.refreshView();
             }
         }
@@ -370,11 +370,27 @@
             ol {
                 padding-left    : 1em;
                 list-style-type : decimal;
+
+                ol {
+                    list-style-type : upper-roman;
+
+                    ol {
+                        list-style-type : lower-alpha;
+                    }
+                }
             }
 
             ul {
                 padding-left    : 1em;
-                list-style-type : circle;
+                list-style-type : disc;
+
+                ul {
+                    list-style-type : circle;
+
+                    ul {
+                        list-style-type : square;
+                    }
+                }
             }
 
             em {

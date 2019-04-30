@@ -2,18 +2,24 @@
     <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
             <breadcrumb
-                    :showAddNew="getBreadcrumb.showAddNew"
-                    :newPassword="getBreadcrumb.newPassword"
-                    :newFolder="getBreadcrumb.newFolder"
-                    :newTag="getBreadcrumb.newTag"
-                    :folder="getBreadcrumb.folder"
-                    :tag="getBreadcrumb.tag"
-                    :items="getBreadcrumb.items"/>
+                :showAddNew="getBreadcrumb.showAddNew"
+                :newPassword="getBreadcrumb.newPassword"
+                :newFolder="getBreadcrumb.newFolder"
+                :newTag="getBreadcrumb.newTag"
+                :folder="getBreadcrumb.folder"
+                :tag="getBreadcrumb.tag"
+                :items="getBreadcrumb.items"/>
             <div class="item-list">
-                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
+                <header-line :field="sorting.field"
+                             :ascending="sorting.ascending"
+                             v-on:updateSorting="updateSorting($event)"
+                             v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="isDraggable"/>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" :draggable="isDraggable"/>
-                <password-line :password="password" v-for="password in passwords" :key="password.id" :draggable="isDraggable"/>
+                <password-line :password="password"
+                               v-for="password in passwords"
+                               :key="password.id"
+                               :draggable="isDraggable"/>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
                 <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
@@ -108,7 +114,8 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                    return Localisation.translate('We could not find anything for "{query}"',
+                                                  {query: this.search.query});
                 }
 
                 return undefined;
@@ -127,13 +134,25 @@
                 SettingsManager.set('local.ui.sorting.field', $event.field);
                 SettingsManager.set('local.ui.sorting.ascending', $event.ascending);
 
-                if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
-                if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
-                if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
+                if(this.passwords) {
+                    this.passwords =
+                        Utility.sortApiObjectArray(this.passwords,
+                                                   this.getPasswordsSortingField(),
+                                                   this.sorting.ascending);
+                }
+                if(this.folders) {
+                    this.folders =
+                        Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
+                }
+                if(this.tags) {
+                    this.tags =
+                        Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
+                }
             },
             updatePasswordList(passwords) {
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                this.passwords =
+                    Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
             updateFolderList(folders) {
                 this.loading = false;
@@ -144,7 +163,8 @@
                 this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },
             getPasswordsSortingField() {
-                let sortingField = this.sorting.field === 'label' ? SettingsManager.get('client.ui.password.field.sorting'):this.sorting.field;
+                let sortingField = this.sorting.field === 'label' ? SettingsManager.get(
+                    'client.ui.password.field.sorting'):this.sorting.field;
                 if(sortingField === 'byTitle') sortingField = SettingsManager.get('client.ui.password.field.title');
                 return sortingField;
             }
@@ -175,7 +195,8 @@
         transition : margin-right 300ms, transform 300ms;
 
         &.blocking {
-            z-index : 2000;
+            position: static;
+            transform : none;
         }
 
         .app-content-right {

@@ -1,4 +1,4 @@
-(function () {
+(function() {
     let translations    = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
@@ -117,6 +117,12 @@
             'Backup and Restore'                  : 'Sichern & Wiederherstellen',
             'Browser Extension'                   : 'Browser Extension',
             'Handbook'                            : 'Handbuch',
+            '{name} has shared this with you'     : '{name} hat dieses Passwort mit Ihnen geteilt',
+            '{editable} and {shareable}.'         : '{editable} und {shareable}.',
+            'Editing allowed'                     : 'Bearbeiten erlaubt',
+            'Editing disallowed'                  : 'Bearbeiten nicht erlaubt',
+            'sharing allowed'                     : 'teilen erlaubt',
+            'sharing disallowed'                  : 'teilen nicht erlaubt',
             'Search user'                         : 'Benutzer suchen',
             'Set expiration date'                 : 'Ablaufdatum setzen',
             'Expires {date}'                      : 'Läuft {date} ab',

@@ -1,6 +1,15 @@
 <template>
     <div class="sharing-container">
-        <translate tag="div" class="cse-warning warning" say="End-to-End encryption will be disabled for this password if you share it." v-if="hasCse"/>
+        <translate tag="div" class="cse-warning warning" say="End-to-End encryption will be disabled for this password if you share it." v-if="hasCse && shareable"/>
+        <div v-if="password.share && password.share.owner" class="shareby-info" :title="getShareTitle">
+            <img :src="password.share.owner.icon">
+            <translate say="{name} has shared this with you" :variables="password.share.owner"/>
+        </div>
+        <input type="text"
+               v-model="search"
+               class="share-add-user"
+               :placeholder="placeholder"
+               @keypress="submitAction($event)" v-if="shareable"/>
         <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
@@ -41,7 +50,8 @@
         },
 
         data() {
-            let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
+            let shareable = typeof this.password.share === 'object' || this.password.share.shareable,
+                shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
                 hasCse = this.password.cseType !== 'none';
 
             return {
@@ -49,6 +59,7 @@
                 matches     : [],
                 nameMap     : [],
                 idMap       : [],
+                shareable,
                 shares,
                 hasCse,
                 placeholder : Localisation.translate('Search user'),
@@ -79,12 +90,25 @@
                 }
 
                 return users;
+            },
+            getShareTitle() {
+                let editable  = Localisation.translate(this.password.share.editable ? 'Editing allowed':'Editing disallowed'),
+                    shareable = Localisation.translate(this.password.share.shareable ? 'sharing allowed':'sharing disallowed'),
+                    text      = Localisation.translate('{editable} and {shareable}.', {shareable, editable});
+
+                if(this.password.share.expires) {
+                    text +=
+                        ' ' + Localisation.translate('Expires {date}',
+                                                     {date: Localisation.formatDate(this.password.share.expires)});
+                }
+
+                return text;
             }
         },
 
         methods: {
             async searchUsers() {
-                if(this.search === '' || !this.autocomplete) {
+                if(this.search === '' || !this.autocomplete || !this.shareable) {
                     this.matches = [];
                     return;
                 }
@@ -110,6 +134,7 @@
                 this.hasCse = false;
             },
             async addShare(receiver) {
+                if(!this.shareable) return;
                 if(this.hasCse) await this.disableCse();
 
                 let share = {
@@ -127,7 +152,8 @@
                     share.updatePending = true;
                     share.owner = {
                         id  : document.querySelector('head[data-user]').getAttribute('data-user'),
-                        name: document.querySelector('head[data-user-displayname]').getAttribute('data-user-displayname')
+                        name: document.querySelector('head[data-user-displayname]')
+                                .getAttribute('data-user-displayname')
                     };
                     share.receiver = {id: receiver, name: this.idMap[receiver]};
                     this.shares[d.id] = API._processShare(share);
@@ -198,6 +224,7 @@
         watch: {
             password(value) {
                 this.shares = value.hasOwnProperty('shares') ? value.shares:[];
+                this.shareable = value.share === null || value.share.shareable;
                 this.$forceUpdate();
             },
             search() {
@@ -223,6 +250,19 @@
         padding-bottom : 5rem;
 
         .cse-warning {
+            margin-bottom : 0.5rem;
+        }
+
+        .shareby-info {
+            img {
+                border-radius : var(--border-radius-pill);
+                width         : 32px;
+                height        : 32px;
+                margin-right  : 0.5rem;
+                float         : left;
+            }
+
+            line-height   : 32px;
             margin-bottom : 0.5rem;
         }
 
