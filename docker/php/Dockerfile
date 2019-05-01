@@ -1,4 +1,4 @@
-FROM nextcloud:fpm
+FROM nextcloud:16-rc-fpm
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -18,7 +18,7 @@ RUN pecl uninstall imagick; \
     pecl install xdebug; \
     pecl install imagick;
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends nodejs
 

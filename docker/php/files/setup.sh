@@ -29,7 +29,7 @@ curl -L -o /var/www/html/data/appdata_${INSTANCE_ID}/passwords/backups/InitialDa
 /var/www/html/occ files:scan-app-data;
 /var/www/html/occ passwords:backup:restore InitialData --no-interaction;"
 
-COUNTER=9
+COUNTER=7
 until [[  ${COUNTER} -lt 1 ]]; do
     LOGIN=$(shuf -n 1 /usr/share/dict/ngerman)
     if [[ ${LOGIN} = *[![:ascii:]]* ]]; then
