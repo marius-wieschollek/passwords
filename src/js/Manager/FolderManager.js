@@ -22,7 +22,7 @@ class FolderManager {
                     let folder = {label: title};
                     if(parent) folder.parent = parent;
 
-                    folder = EnhancedApi.validateFolder(folder);
+                    folder = API.validateFolder(folder);
                     API.createFolder(folder)
                         .then((d) => {
                             folder.id = d.id;

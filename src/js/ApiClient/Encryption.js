@@ -41,6 +41,7 @@ export default class Encryption {
     encryptObject(object, type) {
         if(!this._enabled) throw new Error('Encryption not available');
         if(!this.fields.hasOwnProperty(type)) throw new Error('Invalid object type');
+        if(object.hasOwnProperty('_encrypted') && object._encrypted) return object;
 
         let fields = this.fields[type],
             key    = this._getKey(this._current);
@@ -55,6 +56,7 @@ export default class Encryption {
 
         object.cseType = 'CSEv1r1';
         object.cseKey = this._current;
+        object._encrypted = true;
 
         return object;
     }
@@ -70,6 +72,7 @@ export default class Encryption {
         if(!this._enabled) throw new Error('Encryption not available');
         if(!this.fields.hasOwnProperty(type)) throw new Error('Invalid object type');
         if(object.cseType !== 'CSEv1r1') throw new Error('Unsupported encryption type');
+        if(object.hasOwnProperty('_encrypted') && !object._encrypted) return object;
 
         let fields = this.fields[type],
             key    = this._getKey(object.cseKey);
@@ -81,6 +84,8 @@ export default class Encryption {
             if(data === null || data.length === 0) continue;
             object[field] = this.decryptString(data, key);
         }
+
+        object._encrypted = false;
 
         return object;
     }

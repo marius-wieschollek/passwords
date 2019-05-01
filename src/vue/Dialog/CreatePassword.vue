@@ -10,19 +10,45 @@
                     <translate tag="div" class="section-title" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
-                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" autocomplete="off">
+                        <input id="password-username"
+                               type="text"
+                               name="username"
+                               maxlength="64"
+                               v-model="password.username"
+                               autocomplete="off">
                         <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
-                                <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
-                                <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
+                                <translate tag="i"
+                                           class="fa"
+                                           :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }"
+                                           @click="togglePasswordVisibility()"
+                                           title="Toggle visibility"/>
+                                <translate tag="i"
+                                           class="fa fa-refresh"
+                                           :class="{ 'fa-spin': showLoader }"
+                                           @click="generateRandomPassword()"
+                                           title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" autocomplete="new-password" v-model="password.password" required readonly>
+                            <input id="password-password"
+                                   :type="showPassword ? 'text':'password'"
+                                   name="password"
+                                   pattern=".{0,256}"
+                                   autocomplete="new-password"
+                                   v-model="password.password"
+                                   required
+                                   readonly>
                         </div>
                         <div class="settings" :class="{active: generator.active}">
-                            <input id="password-password-numbers" type="checkbox" v-model="generator.numbers" :disabled="!generator.active"/>
+                            <input id="password-password-numbers"
+                                   type="checkbox"
+                                   v-model="generator.numbers"
+                                   :disabled="!generator.active"/>
                             <translate tag="label" for="password-password-numbers" say="Numbers"/>
-                            <input id="password-password-special" type="checkbox" v-model="generator.special" :disabled="!generator.active"/>
+                            <input id="password-password-special"
+                                   type="checkbox"
+                                   v-model="generator.special"
+                                   :disabled="!generator.active"/>
                             <translate tag="label" for="password-password-special" say="Special Characters"/>
                         </div>
                         <translate tag="label" for="password-label" say="Name"/>
@@ -35,7 +61,10 @@
                 <div class="form right">
                     <foldout title="Notes" :initially-open="notesOpen">
                         <div class="notes-container">
-                            <translate tag="div" class="warning" say="You have reached the maximum length of 4096 characters" v-if="password.notes.length > 4095"/>
+                            <translate tag="div"
+                                       class="warning"
+                                       say="You have reached the maximum length of 4096 characters"
+                                       v-if="password.notes.length > 4095"/>
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
                     </foldout>
@@ -47,8 +76,13 @@
                             <translate tag="label" for="password-favorite" say="Favorite"/>
                             <input id="password-favorite" name="favorite" type="checkbox" v-model="password.favorite">
                             <translate tag="label" for="password-cse" say="Encryption"/>
-                            <select id="password-cse" name="cseType" title="There is only one option right now" v-model="password.cseType" disabled>
+                            <select id="password-cse"
+                                    name="cseType"
+                                    title="Choose the encryption type for this password"
+                                    v-model="password.cseType"
+                                    :disabled="!hasEncryption">
                                 <translate tag="option" value="none" say="On the server"/>
+                                <translate tag="option" value="CSEv1r1" say="Client-side encryption"/>
                             </select>
                         </div>
                     </foldout>
@@ -79,26 +113,29 @@
         },
 
         props: {
-            title: {
-                type: String,
+            title     : {
+                type     : String,
                 'default': 'Create password',
             },
             properties: {
                 type: Object
             },
-            _success: {
+            _success  : {
                 type: Function
             }
         },
 
         data() {
-            let password = Object.assign({cseType: 'none', notes: '', customFields: []}, this.properties);
+            let cseType  = API.hasEncryption ? 'CSEv1r1':'none',
+                password = Object.assign({cseType, notes: '', customFields: []}, this.properties);
+
             return {
-                notesOpen   : window.innerWidth > 641,
-                showPassword: false,
-                showLoader  : false,
-                simplemde   : null,
-                generator   : {numbers: undefined, special: undefined, active: false},
+                notesOpen    : window.innerWidth > 641,
+                showPassword : false,
+                showLoader   : false,
+                simplemde    : null,
+                generator    : {numbers: undefined, special: undefined, active: false},
+                hasEncryption: API.hasEncryption,
                 password
             };
         },
@@ -133,17 +170,17 @@
                 }
 
                 API.generatePassword(undefined, numbers, special)
-                   .then((d) => {
-                       this.password.password = d.password;
-                       if(this.generator.active === false) {
-                           this.generator = {numbers: d.numbers, special: d.special, active: true};
-                       }
-                       this.showPassword = true;
-                       this.showLoader = false;
-                   })
-                   .catch(() => {
-                       this.showLoader = false;
-                   });
+                    .then((d) => {
+                        this.password.password = d.password;
+                        if(this.generator.active === false) {
+                            this.generator = {numbers: d.numbers, special: d.special, active: true};
+                        }
+                        this.showPassword = true;
+                        this.showLoader = false;
+                    })
+                    .catch(() => {
+                        this.showLoader = false;
+                    });
             },
             updateCustomFields($event) {
                 this.password.customFields = $event;
@@ -151,7 +188,7 @@
             submitAction() {
                 let password = Utility.cloneObject(this.password);
                 password = EnhancedApi.flattenPassword(password);
-                password = EnhancedApi.validatePassword(password);
+                password = API.validatePassword(password);
 
                 if(this._success) {
                     try {

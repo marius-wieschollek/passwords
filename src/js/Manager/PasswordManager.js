@@ -55,7 +55,8 @@ class PasswordManager {
                    password = API._processPassword(password);
                    Events.fire('password.created', password);
                })
-               .catch(() => {
+               .catch((e) => {
+                   console.error(e);
                    Messages.notification('Creating password failed');
                    reject(password);
                });
@@ -92,7 +93,8 @@ class PasswordManager {
                        Messages.notification('Password saved');
                        resolve(p);
                    })
-                   .catch(() => {
+                   .catch((e) => {
+                       console.error(e);
                        Messages.notification('Saving password failed');
                        reject(password);
                    });
@@ -118,7 +120,8 @@ class PasswordManager {
                    Messages.notification('Password moved');
                    resolve(password);
                })
-               .catch(() => {
+               .catch((e) => {
+                   console.error(e);
                    Messages.notification('Moving password failed');
                    password.folder = originalFolder;
                    reject(password);
@@ -140,7 +143,8 @@ class PasswordManager {
                    Events.fire('password.updated', password);
                    resolve(password);
                })
-               .catch(() => {
+               .catch((e) => {
+                   console.error(e);
                    reject(password);
                });
         });
@@ -164,7 +168,8 @@ class PasswordManager {
                        Messages.notification('Password deleted');
                        resolve(password);
                    })
-                   .catch(() => {
+                   .catch((e) => {
+                       console.error(e);
                        Messages.notification('Deleting password failed');
                        reject(password);
                    });

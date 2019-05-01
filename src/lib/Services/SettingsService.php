@@ -80,6 +80,7 @@ class SettingsService {
      *
      * @return bool|float|int|mixed|null|string
      * @throws ApiException
+     * @throws \Exception
      */
     public function set(string $key, $value, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);

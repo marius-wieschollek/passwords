@@ -148,15 +148,16 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenPassword(object);
-            object = EnhancedApi.validatePassword(object);
+            object = this.validatePassword(object);
         } catch(e) {
             return this._createRejectedPromise(e);
         }
 
+        if(!object.hasOwnProperty('_encrypted')) object._encrypted = false;
         object.hash = await this.config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
-        if(this.config.encryption.enabled) {
+        if(this.config.encryption.enabled && object.cseType !== 'none') {
             this.config.encryption.encryptObject(object, 'password');
         }
 
@@ -176,11 +177,12 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenPassword(object);
-            object = EnhancedApi.validatePassword(object);
+            object = this.validatePassword(object);
         } catch(e) {
             return this._createRejectedPromise(e);
         }
 
+        if(!object.hasOwnProperty('_encrypted')) object._encrypted = false;
         object.hash = await this.config.encryption.getHash(data.password);
         if(!object.label) EnhancedApi._generatePasswordTitle(object);
 
@@ -245,7 +247,7 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenFolder(object);
-            object = EnhancedApi.validateFolder(object);
+            object = this.validateFolder(object);
         } catch(e) {
             return this._createRejectedPromise(e);
         }
@@ -270,7 +272,7 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenFolder(object);
-            object = EnhancedApi.validateFolder(object);
+            object = this.validateFolder(object);
         } catch(e) {
             return this._createRejectedPromise(e);
         }
@@ -336,7 +338,7 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenTag(object);
-            object = EnhancedApi.validateTag(object);
+            object = this.validateTag(object);
         } catch(e) {
             return this._createRejectedPromise(e);
         }
@@ -361,7 +363,7 @@ export default class EnhancedApi extends SimpleApi {
 
         try {
             object = EnhancedApi.flattenTag(object);
-            object = EnhancedApi.validateTag(object);
+            object = this.validateTag(object);
         } catch(e) {
             return this._createRejectedPromise(e);
         }
@@ -614,8 +616,8 @@ export default class EnhancedApi extends SimpleApi {
      * @param strict
      * @returns {Object}
      */
-    static validatePassword(password, strict = false) {
-        let definitions = EnhancedApi.getPasswordDefinition();
+    validatePassword(password, strict = false) {
+        let definitions = this.getPasswordDefinition();
         return EnhancedApi._validateObject(password, definitions, strict);
     }
 
@@ -625,8 +627,8 @@ export default class EnhancedApi extends SimpleApi {
      * @param strict
      * @returns {Object}
      */
-    static validateFolder(folder, strict = false) {
-        let definitions = EnhancedApi.getFolderDefinition();
+    validateFolder(folder, strict = false) {
+        let definitions = this.getFolderDefinition();
         return EnhancedApi._validateObject(folder, definitions, strict);
     }
 
@@ -636,8 +638,8 @@ export default class EnhancedApi extends SimpleApi {
      * @param strict
      * @returns {Object}
      */
-    static validateTag(tag, strict = false) {
-        let definitions = EnhancedApi.getTagDefinition();
+    validateTag(tag, strict = false) {
+        let definitions = this.getTagDefinition();
         return EnhancedApi._validateObject(tag, definitions, strict);
     }
 
@@ -669,6 +671,13 @@ export default class EnhancedApi extends SimpleApi {
             }
             attribute = this._validateObjectAttributeType(definition, type, attribute, strict, property);
             attribute = this._validateObjectAttributeLength(definition, attribute, strict, property, type);
+
+            if(definition.hasOwnProperty('allowed') && definition.allowed.indexOf(attribute) === -1) {
+                if(!strict || !definition.hasOwnProperty('default')) {
+                    throw new Error(`Property ${property} has invalid value`);
+                }
+                attribute = definition.default;
+            }
 
             object[property] = attribute;
         }
@@ -814,6 +823,8 @@ export default class EnhancedApi extends SimpleApi {
     _processPassword(password) {
         if(password.hasOwnProperty('cseType') && password.cseType !== 'none') {
             this.config.encryption.decryptObject(password, 'password');
+        } else {
+            password._encrypted = false;
         }
 
         password.type = 'password';
@@ -888,6 +899,8 @@ export default class EnhancedApi extends SimpleApi {
     _processFolder(folder) {
         if(folder.hasOwnProperty('cseType') && folder.cseType !== 'none') {
             this.config.encryption.decryptObject(folder, 'folder');
+        } else {
+            folder._encrypted = false;
         }
 
         folder.type = 'folder';
@@ -938,6 +951,8 @@ export default class EnhancedApi extends SimpleApi {
     _processTag(tag) {
         if(tag.hasOwnProperty('cseType') && tag.cseType !== 'none') {
             this.config.encryption.decryptObject(tag, 'tag');
+        } else {
+            tag._encrypted = false;
         }
 
         tag.type = 'tag';
@@ -1068,7 +1083,10 @@ export default class EnhancedApi extends SimpleApi {
      *
      * @returns object
      */
-    static getPasswordDefinition() {
+    getPasswordDefinition() {
+        let cseTypes = ['none'];
+        if(this.hasEncryption) cseTypes.push('CSEv1r1');
+
         return {
             id          : {
                 type  : 'string',
@@ -1124,9 +1142,19 @@ export default class EnhancedApi extends SimpleApi {
                 type   : 'boolean',
                 default: false
             },
+            cseType     : {
+                type   : 'string',
+                length : 10,
+                default: 'none',
+                allowed: cseTypes
+            },
             tags        : {
                 type   : 'array',
                 default: []
+            },
+            _encrypted  : {
+                type   : 'boolean',
+                default: false
             }
         };
     }
@@ -1135,35 +1163,48 @@ export default class EnhancedApi extends SimpleApi {
      *
      * @returns object
      */
-    static getFolderDefinition() {
+    getFolderDefinition() {
+        let cseTypes = ['none'];
+        if(this.hasEncryption) cseTypes.push('CSEv1r1');
+
         return {
-            id      : {
+            id        : {
                 type  : 'string',
                 length: 36
             },
-            label   : {
+            label     : {
                 type    : 'string',
                 length  : 48,
                 required: true
             },
-            parent  : {
+            parent    : {
                 type   : 'string',
                 length : 36,
                 default: '00000000-0000-0000-0000-000000000000'
             },
-            edited  : {
+            edited    : {
                 type   : 'number',
                 default: 0
             },
-            hidden  : {
+            hidden    : {
                 type   : 'boolean',
                 default: false
             },
-            trashed : {
+            trashed   : {
                 type   : 'boolean',
                 default: false
             },
-            favorite: {
+            favorite  : {
+                type   : 'boolean',
+                default: false
+            },
+            cseType   : {
+                type   : 'string',
+                length : 10,
+                default: 'none',
+                allowed: cseTypes
+            },
+            _encrypted: {
                 type   : 'boolean',
                 default: false
             }
@@ -1174,35 +1215,48 @@ export default class EnhancedApi extends SimpleApi {
      *
      * @returns object
      */
-    static getTagDefinition() {
+    getTagDefinition() {
+        let cseTypes = ['none'];
+        if(this.hasEncryption) cseTypes.push('CSEv1r1');
+
         return {
-            id      : {
+            id        : {
                 type  : 'string',
                 length: 36
             },
-            label   : {
+            label     : {
                 type    : 'string',
                 length  : 48,
                 required: true
             },
-            color   : {
+            color     : {
                 type    : 'string',
                 length  : 48,
                 required: true
             },
-            edited  : {
+            edited    : {
                 type   : 'number',
                 default: 0
             },
-            hidden  : {
+            hidden    : {
                 type   : 'boolean',
                 default: false
             },
-            trashed : {
+            trashed   : {
                 type   : 'boolean',
                 default: false
             },
-            favorite: {
+            favorite  : {
+                type   : 'boolean',
+                default: false
+            },
+            cseType   : {
+                type   : 'string',
+                length : 10,
+                default: 'none',
+                allowed: cseTypes
+            },
+            _encrypted: {
                 type   : 'boolean',
                 default: false
             }
