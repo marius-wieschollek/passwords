@@ -80,7 +80,6 @@ class SettingsService {
      *
      * @return bool|float|int|mixed|null|string
      * @throws ApiException
-     * @throws \OCP\PreConditionNotMetException
      */
     public function set(string $key, $value, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);
@@ -100,7 +99,7 @@ class SettingsService {
      * @param string|null $userId
      *
      * @return mixed|null
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     public function reset(string $key, string $userId = null) {
         list($scope, $subKey) = explode('.', $key, 2);
@@ -120,6 +119,7 @@ class SettingsService {
      * @param string|null $userId
      *
      * @return array
+     * @throws \Exception
      */
     public function list(array $scope = null, string $userId = null): array {
         $settings = [];

@@ -73,8 +73,6 @@ class AdminSettings implements ISettings {
      */
     public function getForm(): TemplateResponse {
         return new TemplateResponse('passwords', 'admin/index', [
-            'saveSettingsUrl'  => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.set'),
-            'clearCacheUrl'    => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.cache'),
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
@@ -102,6 +100,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getSecurityServices(): array {
         $current = $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP);
@@ -132,6 +131,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getWordsServices(): array {
         $current = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
@@ -160,6 +160,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getImageServices(): array {
         $current = HelperService::getImageHelperName(
@@ -184,6 +185,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getFaviconServices(): array {
         $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
@@ -200,7 +202,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'Besticon (recommended)',
                 'current' => $current === HelperService::FAVICON_BESTICON,
                 'api'     => [
-                    'key'   => BestIconHelper::BESTICON_CONFIG_KEY,
+                    'key'   => 'service.favicon.api',
                     'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL)
                 ]
             ],
@@ -233,6 +235,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getWebsitePreviewServices(): array {
         $current = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
@@ -249,7 +252,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'screenshotapi.io',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
                 'api'     => [
-                    'key'   => ScreenShotApiHelper::SSA_API_CONFIG_KEY,
+                    'key'   => 'service.preview.api',
                     'value' => $this->config->getAppValue(ScreenShotApiHelper::SSA_API_CONFIG_KEY)
                 ]
             ],
@@ -258,7 +261,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'screenshotmachine.com',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'api'     => [
-                    'key'   => ScreenShotMachineHelper::SSM_API_CONFIG_KEY,
+                    'key'   => 'service.preview.api',
                     'value' => $this->config->getAppValue(ScreenShotMachineHelper::SSM_API_CONFIG_KEY)
                 ]
             ],
@@ -277,7 +280,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'Passwords Webshot',
                 'current' => $current === HelperService::PREVIEW_WEBSHOT,
                 'api'     => [
-                    'key'   => WebshotHelper::WEBSHOT_CONFIG_KEY,
+                    'key'   => 'service.preview.api',
                     'value' => $this->config->getAppValue(WebshotHelper::WEBSHOT_CONFIG_KEY)
                 ]
             ];
@@ -288,6 +291,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getPurgeTimeout(): array {
         return [
@@ -306,6 +310,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getBackupInterval(): array {
         return [
@@ -323,6 +328,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getFileCaches(): array {
         $caches = $this->fileCacheService->listCaches();

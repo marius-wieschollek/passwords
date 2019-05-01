@@ -7,16 +7,17 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OCA\Passwords\Controller\AdminSettingsController;
+use OCA\Passwords\Controller\Admin\CacheController;
+use OCA\Passwords\Controller\Admin\SettingsController;
 use OCA\Passwords\Controller\Api\AccountApiController;
-use OCA\Passwords\Controller\Api\KeychainApiController;
-use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\FolderApiController;
+use OCA\Passwords\Controller\Api\KeychainApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyCategoryApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
+use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
@@ -29,8 +30,8 @@ use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
-use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
+use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
@@ -121,7 +122,8 @@ class Application extends App {
     protected function registerController(): void {
         $container = $this->getContainer();
 
-        $container->registerAlias('AdminSettingsController', AdminSettingsController::class);
+        $container->registerAlias('AdminSettingsController', SettingsController::class);
+        $container->registerAlias('AdminCachesController', CacheController::class);
         $container->registerAlias('KeychainApiController', KeychainApiController::class);
         $container->registerAlias('PasswordApiController', PasswordApiController::class);
         $container->registerAlias('SettingsApiController', SettingsApiController::class);

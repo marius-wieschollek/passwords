@@ -106,6 +106,9 @@ class ApiSecurityMiddleware extends Middleware {
      * @return bool
      */
     protected function isApiClass($object): bool {
-        return substr(get_class($object), 0, 28) === 'OCA\Passwords\Controller\Api';
+        $class = get_class($object);
+
+        return substr($class, 0, 28) === 'OCA\Passwords\Controller\Api' ||
+               substr($class, 0, 30) === 'OCA\Passwords\Controller\Admin';
     }
 }

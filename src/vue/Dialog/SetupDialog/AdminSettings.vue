@@ -6,19 +6,49 @@
         </p>
         <div class="apdmin-settings-container">
             <translate tag="label" say="Check password security with"/>
-            <select>
+            <select v-model="settings.security.value">
+                <translate tag="option"
+                           :value="setting.value"
+                           :say="setting.label"
+                           :disabled="!setting.available"
+                           v-for="(setting,key) in settings.security.options"
+                           :key="key"/>
             </select>
             <translate tag="label" say="Generate passwords using"/>
-            <select>
+            <select v-model="settings.words.value">
+                <translate tag="option"
+                           :value="setting.value"
+                           :say="setting.label"
+                           :disabled="!setting.available"
+                           v-for="(setting,key) in settings.words.options"
+                           :key="key"/>
             </select>
             <translate tag="label" say="Get favicons from"/>
-            <select>
+            <select v-model="settings.favicon.value">
+                <translate tag="option"
+                           :value="setting.value"
+                           :say="setting.label"
+                           :disabled="!setting.available"
+                           v-for="(setting,key) in settings.favicon.options"
+                           :key="key"/>
             </select>
             <translate tag="label" say="Get website previews from"/>
-            <select>
+            <select v-model="settings.preview.value">
+                <translate tag="option"
+                           :value="setting.value"
+                           :say="setting.label"
+                           :disabled="!setting.available"
+                           v-for="(setting,key) in settings.preview.options"
+                           :key="key"/>
             </select>
             <translate tag="label" say="Make backups"/>
-            <select>
+            <select v-model="settings.backups.value">
+                <translate tag="option"
+                           :value="setting.value"
+                           :say="setting.label"
+                           :disabled="!setting.available"
+                           v-for="(setting,key) in settings.backups.options"
+                           :key="key"/>
             </select>
         </div>
         <translate tag="a"
@@ -37,10 +67,79 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
+    import AppSettingsService from '@js/Service/AppSettingsService';
 
     export default {
         components: {Translate},
-        methods   : {}
+        data() {
+            let api = new AppSettingsService();
+
+            return {
+                api,
+                settings   : {
+                    security: {
+                        value  : null,
+                        options: {}
+                    },
+                    words   : {
+                        value  : null,
+                        options: {}
+                    },
+                    favicon : {
+                        value  : null,
+                        options: {}
+                    },
+                    preview : {
+                        value  : null,
+                        options: {}
+                    },
+                    backups : {
+                        value  : null,
+                        options: {}
+                    }
+                },
+                oldSettings: {}
+            }
+        },
+        created() {
+            this.api.get('service.security').then((d) => {
+                this.settings.security = d;
+            });
+            this.api.get('service.words').then((d) => {
+                this.settings.words = d;
+            });
+            this.api.get('service.favicon').then((d) => {
+                this.settings.favicon = d;
+            });
+            this.api.get('service.preview').then((d) => {
+                this.settings.preview = d;
+            });
+            this.api.get('backup.interval').then((d) => {
+                this.settings.backups = d;
+            });
+        },
+        methods   : {},
+        watch     : {
+            settings: {
+                handler(settings) {
+
+                    for(let key in settings) {
+                        if(!settings.hasOwnProperty(key) || !this.oldSettings.hasOwnProperty(key)) continue;
+
+                        if(settings[key].value !== this.oldSettings[key].value && this.oldSettings[key].value !== null) {
+                            if(settings[key].value !== settings[key].default) {
+                                this.api.set(settings[key].name, settings[key].value);
+                            } else {
+                                this.api.reset(settings[key].name);
+                            }
+                        }
+                    }
+
+                    this.oldSettings = JSON.parse(JSON.stringify(settings))
+                },
+                deep: true
+            }
+        }
     };
 </script>
 
@@ -90,6 +189,7 @@
 
         a.cta-admin-settings {
             background-color : var(--color-primary-element);
+            color            : var(--color-primary-text);
             padding          : 0.75rem 1rem;
             border-radius    : var(--border-radius);
             width            : 60%;
