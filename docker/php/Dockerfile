@@ -33,6 +33,9 @@ RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
 COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY files/pool.conf /usr/local/etc/php-fpm.d/zz-passwords.conf
 
+COPY files/create-user.sh /usr/local/bin/create-user
+RUN chmod +x /usr/local/bin/create-user
+
 COPY files/entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
