@@ -8,6 +8,7 @@
 use OCA\Passwords\AppInfo\Application;
 
 style(Application::APP_NAME, ['app']);
+script(Application::APP_NAME, ['Static/https-debug']);
 
 $linkHttps  = 'https://wikipedia.org/wiki/HTTPS';
 $linkReload = str_replace('http://', 'https://', \OC::$server->getURLGenerator()->linkToRouteAbsolute('passwords.page.index'));
