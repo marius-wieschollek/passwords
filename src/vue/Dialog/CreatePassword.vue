@@ -10,19 +10,45 @@
                     <translate tag="div" class="section-title" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
-                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" autocomplete="off">
+                        <input id="password-username"
+                               type="text"
+                               name="username"
+                               maxlength="64"
+                               v-model="password.username"
+                               autocomplete="off">
                         <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
-                                <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
-                                <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
+                                <translate tag="i"
+                                           class="fa"
+                                           :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }"
+                                           @click="togglePasswordVisibility()"
+                                           title="Toggle visibility"/>
+                                <translate tag="i"
+                                           class="fa fa-refresh"
+                                           :class="{ 'fa-spin': showLoader }"
+                                           @click="generateRandomPassword()"
+                                           title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" autocomplete="new-password" v-model="password.password" required readonly>
+                            <input id="password-password"
+                                   :type="showPassword ? 'text':'password'"
+                                   name="password"
+                                   pattern=".{0,256}"
+                                   autocomplete="new-password"
+                                   v-model="password.password"
+                                   required
+                                   readonly>
                         </div>
                         <div class="settings" :class="{active: generator.active}">
-                            <input id="password-password-numbers" type="checkbox" v-model="generator.numbers" :disabled="!generator.active"/>
+                            <input id="password-password-numbers"
+                                   type="checkbox"
+                                   v-model="generator.numbers"
+                                   :disabled="!generator.active"/>
                             <translate tag="label" for="password-password-numbers" say="Numbers"/>
-                            <input id="password-password-special" type="checkbox" v-model="generator.special" :disabled="!generator.active"/>
+                            <input id="password-password-special"
+                                   type="checkbox"
+                                   v-model="generator.special"
+                                   :disabled="!generator.active"/>
                             <translate tag="label" for="password-password-special" say="Special Characters"/>
                         </div>
                         <translate tag="label" for="password-label" say="Name"/>
@@ -35,7 +61,10 @@
                 <div class="form right">
                     <foldout title="Notes" :initially-open="notesOpen">
                         <div class="notes-container">
-                            <translate tag="div" class="warning" say="You have reached the maximum length of 4096 characters" v-if="password.notes.length > 4095"/>
+                            <translate tag="div"
+                                       class="warning"
+                                       say="You have reached the maximum length of 4096 characters"
+                                       v-if="password.notes.length > 4095"/>
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
                     </foldout>
@@ -47,7 +76,11 @@
                             <translate tag="label" for="password-favorite" say="Favorite"/>
                             <input id="password-favorite" name="favorite" type="checkbox" v-model="password.favorite">
                             <translate tag="label" for="password-cse" say="Encryption"/>
-                            <select id="password-cse" name="cseType" title="There is only one option right now" v-model="password.cseType" disabled>
+                            <select id="password-cse"
+                                    name="cseType"
+                                    title="There is only one option right now"
+                                    v-model="password.cseType"
+                                    disabled>
                                 <translate tag="option" value="none" say="On the server"/>
                             </select>
                         </div>
@@ -68,7 +101,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from "@js/Classes/Messages";
     import Localisation from '@js/Classes/Localisation';
-    import EnhancedApi from "@js/ApiClient/EnhancedApi";
+    import EnhancedApi from '@js/ApiClient/EnhancedApi';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
@@ -121,17 +154,17 @@
                 }
 
                 API.generatePassword(undefined, numbers, special)
-                   .then((d) => {
-                       this.password.password = d.password;
-                       if(this.generator.active === false) {
-                           this.generator = {numbers: d.numbers, special: d.special, active: true};
-                       }
-                       this.showPassword = true;
-                       this.showLoader = false;
-                   })
-                   .catch(() => {
-                       this.showLoader = false;
-                   });
+                    .then((d) => {
+                        this.password.password = d.password;
+                        if(this.generator.active === false) {
+                            this.generator = {numbers: d.numbers, special: d.special, active: true};
+                        }
+                        this.showPassword = true;
+                        this.showLoader = false;
+                    })
+                    .catch(() => {
+                        this.showLoader = false;
+                    });
             },
             updateCustomFields($event) {
                 this.password.customFields = $event;
@@ -214,13 +247,11 @@
             height           : 100%;
             background-color : rgba(0, 0, 0, 0.7);
             z-index          : 3001;
+            display          : flex;
+            justify-content  : center;
+            align-items      : center;
 
             .window {
-                position              : fixed;
-                top                   : 6%;
-                left                  : 15%;
-                width                 : 70%;
-                height                : 88%;
                 z-index               : 9999;
                 overflow              : hidden;
                 background-color      : var(--color-main-background);
@@ -239,6 +270,8 @@
                     font-size        : 1.25rem;
                     color            : var(--color-primary-text);
                     background-color : var(--color-primary);
+                    position         : sticky;
+                    top              : 0;
 
                     .close {
                         float  : right;
@@ -264,6 +297,8 @@
         }
 
         #passwords-create-new {
+            height : 88%;
+
             .content {
                 display               : grid;
                 grid-template-columns : 1fr 1fr;
@@ -487,6 +522,10 @@
                         padding-bottom : 1.25rem;
                     }
                 }
+            }
+
+            @media (max-width : $width-medium) {
+                height : 100%;
             }
         }
     }

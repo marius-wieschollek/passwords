@@ -1,6 +1,10 @@
 <template>
     <div slot="details" class="details">
-        <detail-field v-for="(field, index) in getCustomFields" :key="index" :label="field.label" :type="field.type" :value="field.value"/>
+        <detail-field v-for="(field, index) in getCustomFields"
+                      :key="index"
+                      :label="field.label"
+                      :type="field.type"
+                      :value="field.value"/>
 
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
@@ -17,7 +21,7 @@
             <translate :say="getSecurityStatus" :class="getSecurityClass.toLowerCase()"/>
         </translate>
         <translate tag="div" say="Encryption">
-            <translate :say="getEncryption" />
+            <translate :say="getEncryption"/>
         </translate>
         <detail-field label="SHA-1" type="text" :value="password.hash"/>
     </div>
@@ -25,10 +29,10 @@
 
 <script>
     import Web from '@vc/Web';
-    import DetailField from '@vue/Details/Password/DetailField';
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import DetailField from '@vue/Details/Password/DetailField';
 
     export default {
         components: {
@@ -79,11 +83,22 @@
                     customFields = this.password.customFields;
 
                 fields.push({label: Localisation.translate('Name'), value: this.password.label});
-                if(this.password.username) fields.push({label: Localisation.translate('Username'), value: this.password.username});
+                if(this.password.username) {
+                    fields.push({
+                                    label: Localisation.translate('Username'),
+                                    value: this.password.username
+                                });
+                }
                 fields.push({label: Localisation.translate('Password'), value: this.password.password, type: 'secret'});
-                if(this.password.url) fields.push({label: Localisation.translate('Website'), value: this.password.url, type: 'url'});
+                if(this.password.url) {
+                    fields.push({
+                                    label: Localisation.translate('Website'),
+                                    value: this.password.url,
+                                    type : 'url'
+                                });
+                }
 
-                for(let i=0; i<customFields.length; i++) {
+                for(let i = 0; i < customFields.length; i++) {
                     if(this.showHiddenFields || customFields[i].type !== 'data') fields.push(customFields[i]);
                 }
 

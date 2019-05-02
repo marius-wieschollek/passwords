@@ -3,6 +3,7 @@
  - Swedish translation
  - Enpass Json Import
  - Custom fields support in export & import
+ - Password revision detail view
  - Password names in legacy api
  - Changelog in app store
 ### Changed
