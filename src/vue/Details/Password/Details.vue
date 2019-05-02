@@ -83,7 +83,6 @@
                 fields.push({label: Localisation.translate('Password'), value: this.password.password, type: 'secret'});
                 if(this.password.url) fields.push({label: Localisation.translate('Website'), value: this.password.url, type: 'url'});
 
-
                 for(let i=0; i<customFields.length; i++) {
                     if(this.showHiddenFields || customFields[i].type !== 'data') fields.push(customFields[i]);
                 }

@@ -1,13 +1,13 @@
 <template>
     <div class="preview-container" v-if="showPreview">
-        <web :href="link">
+        <component :is="link ? 'web':'div'" :href="link" class="inner-container">
             <div class="loader">
                 <img :src="loadingIcon" alt="">
             </div>
             <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
                 <img :src="image" @load="imageLoaded" alt="">
             </div>
-        </web>
+        </component>
     </div>
 </template>
 
@@ -85,7 +85,7 @@
                 this.loading = false;
                 this.imgClass = '';
             },
-            loadFavicon(url) {
+            loadFavicon() {
                 setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 350);
             }
         },
@@ -112,7 +112,7 @@
         overflow   : hidden;
         position   : relative;
 
-        a {
+        .inner-container {
             display   : block;
             font-size : 0;
 
