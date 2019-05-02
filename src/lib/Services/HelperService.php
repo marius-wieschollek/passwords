@@ -44,7 +44,6 @@ class HelperService {
 
     const PREVIEW_SCREEN_SHOT_MACHINE = 'ssm';
     const PREVIEW_SCREEN_SHOT_LAYER   = 'ssl';
-    const PREVIEW_SCREEN_SHOT_API     = 'ssa';
     const PREVIEW_WEBSHOT             = 'ws';
     const PREVIEW_PAGERES             = 'pageres';
     const PREVIEW_DEFAULT             = 'default';
@@ -112,8 +111,6 @@ class HelperService {
                 return $this->container->query(PageresCliHelper::class);
             case self::PREVIEW_WEBSHOT:
                 return $this->container->query(WebshotHelper::class);
-            case self::PREVIEW_SCREEN_SHOT_API:
-                return $this->container->query(ScreenShotApiHelper::class);
             case self::PREVIEW_SCREEN_SHOT_LAYER:
                 return $this->container->query(ScreenShotLayerHelper::class);
             case self::PREVIEW_SCREEN_SHOT_MACHINE:

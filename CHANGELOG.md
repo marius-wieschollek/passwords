@@ -5,13 +5,17 @@
  - Custom fields support in export & import
  - Password revision detail view
  - Password names in legacy api
+ - screenshotlayer.com integration
  - Changelog in app store
 ### Changed
  - Improved Passman import
  - Improved help section
  - Improved sharing ui
+ - Improved mobile ui
 ### Fixed
  - Editable status of shares of shared password not updated
+### Removed
+ - screenshotapi.io integration
 
 ## 2019.4.2 - Bugfix release
 ### Fixed

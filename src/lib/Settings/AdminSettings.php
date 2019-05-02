@@ -246,15 +246,6 @@ class AdminSettings implements ISettings {
                 'api'     => null
             ],
             [
-                'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
-                'label'   => 'screenshotapi.io',
-                'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
-                'api'     => [
-                    'key'   => ScreenShotApiHelper::SSA_API_CONFIG_KEY,
-                    'value' => $this->config->getAppValue(ScreenShotApiHelper::SSA_API_CONFIG_KEY)
-                ]
-            ],
-            [
                 'id'      => HelperService::PREVIEW_SCREEN_SHOT_LAYER,
                 'label'   => 'screenshotlayer',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_LAYER,
