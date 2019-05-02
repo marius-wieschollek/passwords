@@ -297,7 +297,13 @@
         }
 
         #passwords-create-new {
-            height : 88%;
+            .window {
+                height : 88%;
+
+                @media (max-width : $width-medium) {
+                    height : 100%;
+                }
+            }
 
             .content {
                 display               : grid;
@@ -417,6 +423,7 @@
 
                         .notes-container {
                             padding : 0.25em 0;
+                            width   : 525px;
 
                             .editor-toolbar {
                                 border  : none;
@@ -522,10 +529,6 @@
                         padding-bottom : 1.25rem;
                     }
                 }
-            }
-
-            @media (max-width : $width-medium) {
-                height : 100%;
             }
         }
     }
