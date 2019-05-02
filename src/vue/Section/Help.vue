@@ -268,10 +268,11 @@
         }
 
         header > h1 {
-            font-size   : 2.5rem;
-            font-weight : 300;
-            margin      : 10px auto 40px;
-            line-height : 1;
+            font-size     : 2.5rem;
+            font-weight   : 300;
+            margin        : 10px auto 40px;
+            line-height   : 1;
+            overflow-wrap : break-word;
         }
 
         .handbook-page {
@@ -305,6 +306,7 @@
                 position      : relative;
                 margin        : 0.85rem -3px 0;
                 border-radius : 2px;
+                overflow-wrap : break-word;
 
                 a.help-anchor {
                     vertical-align : middle;
@@ -405,6 +407,10 @@
                 border-radius : var(--border-radius);
                 white-space   : nowrap;
                 font-family   : var(--pw-mono-font-face);
+
+                @media all and (max-width : $width-extra-small) {
+                    white-space : pre-wrap;
+                }
             }
 
             pre {
@@ -435,6 +441,7 @@
             table {
                 border-collapse : collapse;
                 padding-bottom  : 1em;
+                white-space     : normal;
 
                 tr {
                     th {
