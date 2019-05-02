@@ -3,6 +3,7 @@ import App from '@vue/App';
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import SectionAll from '@vue/Section/All';
+import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import Encryption from '@js/ApiClient/Encryption';
 import SearchManager from '@js/Manager/SearchManager';
@@ -44,11 +45,12 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
     }
 
     async function initApi() {
-        let user       = document.querySelector('meta[name=api-user]').getAttribute('content'),
+        let baseUrl    = Utility.generateUrl(),
+            user       = document.querySelector('meta[name=api-user]').getAttribute('content'),
             password   = document.querySelector('meta[name=api-token]').getAttribute('content'),
-            folderIcon = SettingsManager.get('server.theme.folder.icon'),
-            baseUrl    = getBaseUrl();
+            folderIcon = SettingsManager.get('server.theme.folder.icon');
         if (!password) password = await Messages.prompt('Password', 'Login', '', true);
+        if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
         API.initialize({baseUrl, user, password, folderIcon, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
     }
@@ -84,18 +86,6 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 app.starChaser = true;
             }
         }, false);
-    }
-
-    function getBaseUrl() {
-        let baseUrl = location.href;
-
-        if (baseUrl.indexOf('index.php') !== -1) {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
-        } else {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
-        }
-
-        return baseUrl;
     }
 
     if (location.protocol !== 'https:') {

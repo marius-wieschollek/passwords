@@ -1,54 +1,63 @@
+import Utility from "@/js/Classes/Utility";
 
 export default class AdminSettingsService {
 
-    constructor() {
-        this._baseUrl = AdminSettingsService._getBaseUrl();
-    }
-
     /**
      *
-     * @returns {string}
-     * @private
+     * @returns {Promise}
      */
-    static _getBaseUrl() {
-        let baseUrl = location.href;
-
-        if (baseUrl.indexOf('index.php') !== -1) {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
-        } else if(baseUrl.indexOf('settings/') !== -1) {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('settings/'));
-        } else {
-            baseUrl = baseUrl.substr(0, baseUrl.indexOf('apps/'));
-        }
-
-        return baseUrl + 'index.php/apps/passwords/admin/';
-    }
-
     getAll() {
         return this._createRequest('settings');
     }
 
+    /**
+     *
+     * @param setting
+     * @returns {Promise}
+     */
     get(setting) {
         return this._createRequest(`settings/${setting}`);
     }
 
+    /**
+     *
+     * @param setting
+     * @param value
+     * @returns {Promise}
+     */
     set(setting, value) {
         return this._createRequest(`settings/${setting}`, {value}, 'PUT')
     }
 
+
+    /**
+     *
+     * @param setting
+     * @returns {Promise}
+     */
     reset(setting) {
         return this._createRequest(`settings/${setting}`, null, 'DELETE')
     }
 
 
+    /**
+     *
+     * @returns {Promise}
+     */
     listCaches() {
         return this._createRequest('caches');
     }
 
+    /**
+     *
+     * @param cache
+     * @returns {Promise}
+     */
     clearCache(cache) {
         return this._createRequest(`caches/${cache}`, null, 'DELETE')
     }
 
+    // noinspection JSMethodCanBeStatic
     /**
      * Creates an api request
      *
@@ -58,7 +67,7 @@ export default class AdminSettingsService {
      * @returns {Promise}
      * @private
      */
-    async _createRequest(path, data = null, method = 'GET') {
+    static async _createRequest(path, data = null, method = 'GET') {
         let options = {method};
 
         options.headers = new Headers();
@@ -72,7 +81,8 @@ export default class AdminSettingsService {
         }
 
         try {
-            let response = await fetch(new Request(this._baseUrl + path, options));
+            let url = Utility.generateUrl(`/apps/passwords/admin/${path}`),
+                response = await fetch(new Request(url, options));
             return await AdminSettingsService._processResponse(response);
         } catch(e) {
             console.error('Request failed', e);
