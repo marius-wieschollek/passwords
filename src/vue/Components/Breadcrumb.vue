@@ -5,15 +5,23 @@
             <div class="crumb svg" data-dir="/">
                 <router-link :to="getBaseRoute" class="home">&nbsp;</router-link>
             </div>
-            <div class="crumb svg" v-for="(item, index) in getItems" :class="{first:index===0,current:index === getItems.length - 1}">
-                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
+            <div class="crumb svg"
+                 v-for="(item, index) in getItems"
+                 :class="{first:index===0,current:index === getItems.length - 1}">
+                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{
+                                                                                                             item.label
+                                                                                                             }}
+                </router-link>
             </div>
             <div class="crumb svg crumbmenu" :class="{active: showCrumbMenu}" v-if="getCrumbMenuItems.length !== 0">
                 <span class="icon icon-more" @click="toggleCrumbMenu"></span>
                 <div class="popovermenu menu menu-center" @click="toggleCrumbMenu">
                     <ul>
                         <li v-for="item in getCrumbMenuItems" class="crumblist">
-                            <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType" :title="item.label">
+                            <router-link :to="item.path"
+                                         :data-folder-id="item.folderId"
+                                         :data-drop-type="item.dropType"
+                                         :title="item.label">
                                 <span :class="getCrumbItemIcon"></span>
                                 {{ item.label }}
                             </router-link>
@@ -181,7 +189,7 @@
                 PasswordManager.createPassword(this.folder, this.tag);
             },
             showNavigation() {
-                $('#app-content').toggleClass('mobile-open');
+                $('#app-content, #app-navigation').toggleClass('mobile-open');
             },
             deleteAllEvent() {
                 this.$emit('deleteAll');
@@ -249,8 +257,8 @@
             }
 
             &:not(.active) .menu {
-                filter : none;
-                border-color: transparent;
+                filter       : none;
+                border-color : transparent;
             }
 
             &.active .menu {

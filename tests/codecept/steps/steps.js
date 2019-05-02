@@ -1,7 +1,8 @@
 const {crop, thumbnail} = require('easyimage');
 
 function gEP(e) {let $e=$(e);$e[0].scrollIntoView(false);let d=$e.offset();d.width=$e.outerWidth();d.height=$e.outerHeight();return JSON.stringify(d);}
-let window = {width:1280, height:874};
+
+let window = {width: 1280, height: 874};
 
 module.exports = function() {
     return actor(
@@ -19,9 +20,10 @@ module.exports = function() {
              * @param wait     Wait for x seconds before capturing
              * @param width    Width of the cropped area (Use element width by default)
              * @param height   Height of the cropped area (Use element height by default)
+             * @param preview  Create a preview
              * @returns {Promise<void>}
              */
-            async captureElement(file, element, wait = 1, width = null, height = null) {
+            async captureElement(file, element, wait = 1, width = null, height = null, preview = true) {
 
                 if(wait) this.wait(wait);
                 let data  = await this.executeScript(gEP, element),
@@ -41,6 +43,26 @@ module.exports = function() {
                         cropHeight: height
                     }
                 );
+
+                if(preview) {
+                    let thumbWidth  = 320,
+                        thumbHeight = 200;
+                    if(width > height) {
+                        thumbHeight = Math.round(thumbWidth / (width / height));
+                    } else {
+                        thumbWidth = Math.round(thumbHeight / (height / width));
+                    }
+
+                    await thumbnail(
+                        {
+                            src    : `tests/codecept/output/${file}.png`,
+                            dst    : `tests/codecept/output/_previews/${file}.jpg`,
+                            quality: 85,
+                            width  : thumbWidth,
+                            height : thumbHeight
+                        }
+                    );
+                }
             },
 
             /**

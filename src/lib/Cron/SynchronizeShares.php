@@ -344,7 +344,7 @@ class SynchronizeShares extends AbstractCronJob {
                     break;
                 }
 
-                if(!$share->isShareable() && !$share->isEditable()) {
+                if(!$share->isEditable()) {
                     $subShares = $this->shareService->findBySourcePassword($password->getUuid());
                     foreach($subShares as $subShare) {
                         if($subShare->isEditable()) {
@@ -353,7 +353,6 @@ class SynchronizeShares extends AbstractCronJob {
                             $this->shareService->save($subShare);
                         }
                     }
-                    break;
                 }
             }
         } while($count !== 0);

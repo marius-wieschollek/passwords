@@ -20,15 +20,15 @@ class HandbookRenderer {
      * @returns {Promise<*>}
      */
     async fetchPage(page) {
-        if (this.pages.hasOwnProperty(page)) return this.pages[page];
+        if(this.pages.hasOwnProperty(page)) return this.pages[page];
 
         try {
             let url      = this.handbookUrl + page,
                 response = await fetch(new Request(`${url}.md`), {redirect: 'error', referrerPolicy: 'no-referrer'}),
                 baseUrl  = url.substr(url, url.lastIndexOf('/') + 1),
-                mime = response.headers.get('content-type');
+                mime     = response.headers.get('content-type');
 
-            if (response.ok) {
+            if(response.ok) {
                 if(mime.substr(0, 10) !== 'text/plain') {
                     return HandbookRenderer._generateErrorPage(
                         Localisation.translate('Invalid content type {mime}', {mime})
@@ -38,14 +38,14 @@ class HandbookRenderer {
                 let data = await response.text();
                 if(!data) return HandbookRenderer._generateErrorPage(Localisation.translate('No content available'));
 
-                let page = this.render(data, baseUrl, url);
-                this.pages[page] = page;
-                return page;
+                let content = this.render(data, baseUrl, url);
+                this.pages[page] = content;
+                return content;
             } else {
                 return HandbookRenderer._generateErrorPage(response.status + ' – ' + response.statusText);
             }
-        } catch (e) {
-            if (process.env.NODE_ENV === 'development') console.error('Request failed', e);
+        } catch(e) {
+            if(process.env.NODE_ENV === 'development') console.error('Request failed', e);
 
             return HandbookRenderer._generateErrorPage(e.message);
         }
@@ -59,15 +59,16 @@ class HandbookRenderer {
      * @returns {*}
      */
     render(markdown, baseUrl, documentUrl) {
-        let navigation = [],
-            media      = [],
-            renderer   = new marked.Renderer();
+        let navigation    = [],
+            media         = [],
+            blankRenderer = new marked.Renderer(),
+            renderer      = new marked.Renderer();
 
         renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl, media);};
         renderer.image = (href, title, text, nowrap) => { return HandbookRenderer._renderImage(href, title, text, nowrap, baseUrl, media);};
         renderer.heading = (text, level) => { return HandbookRenderer._renderHeader(text, level, navigation);};
         renderer.code = (code, infostring, escaped) => {
-            let content = new marked.Renderer().code(code, infostring, escaped);
+            let content = blankRenderer.code(code, infostring, escaped);
             return content.replace(/(\r\n|\n|\r)/gm, '<br>');
         };
         HandbookRenderer._extendMarkedLexer();
@@ -85,8 +86,8 @@ class HandbookRenderer {
      */
     static _generateErrorPage(message) {
         return {
-            source: '\u{1F480} ' + Localisation.translate('Unable to fetch page: {message}.', {message}),
-            media: [],
+            source    : '\u{1F480} ' + Localisation.translate('Unable to fetch page: {message}.', {message}),
+            media     : [],
             navigation: []
         };
     }
@@ -96,7 +97,7 @@ class HandbookRenderer {
      * @private
      */
     static _extendMarkedLexer() {
-        marked.InlineLexer.prototype.outputLink = function (cap, link) {
+        marked.InlineLexer.prototype.outputLink = function(cap, link) {
             function escape(html) {
                 return html
                     .replace(/&/g, '&amp;')
@@ -108,7 +109,7 @@ class HandbookRenderer {
                 title = link.title ? escape(link.title):null;
 
             this.isRenderingImage = false;
-            if (cap[0].charAt(0) !== '!') {
+            if(cap[0].charAt(0) !== '!') {
                 this.isRenderingLink = true;
                 let value = this.renderer.link(href, title, this.output(cap[1]), this.isRenderingImage);
                 this.isRenderingImage = false;
@@ -137,22 +138,22 @@ class HandbookRenderer {
             url    = new URL(href, href.substr(0, 1) === '#' ? documentUrl:baseUrl);
 
         href = url.href;
-        if (url.hash.length && url.href.indexOf(`${documentUrl}#`) !== -1) {
+        if(url.hash.length && url.href.indexOf(`${documentUrl}#`) !== -1) {
             [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title);
-        } else if (url.href.indexOf(this.handbookUrl) !== -1) {
+        } else if(url.href.indexOf(this.handbookUrl) !== -1) {
             let mime = url.href.substr(url.href.lastIndexOf('.') + 1);
-            if (['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
+            if(['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
                 [href, title, target] = this._processInternalLink(url, title);
             }
         }
 
-        if (wrap) {
+        if(wrap) {
             let element = media[content * 1];
             element.url = href;
             return HandbookRenderer._renderMediaElement(element);
         }
 
-        if (title === null) title = Localisation.translate('Go to {href}', {href});
+        if(title === null) title = Localisation.translate('Go to {href}', {href});
         let rel = target === '_blank' ? 'rel="noreferrer noopener"':'';
 
         return `<a href="${href}" title="${decodeURI(title)}" target="${target}" style="color:${ThemeManager.getColor()}" ${rel}>${content}</a>`;
@@ -168,7 +169,7 @@ class HandbookRenderer {
     static _processAnchorLink(href, title) {
         let hash  = HandbookRenderer._getLinkAnchor(href),
             route = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash});
-        if (title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1).replace(/-{1}/g, ' ')});
+        if(title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1).replace(/-{1}/g, ' ')});
 
         return [route.href, title, '_self'];
     }
@@ -183,13 +184,13 @@ class HandbookRenderer {
     _processInternalLink(url, title) {
         let hash = undefined,
             href = url.href.substr(this.handbookUrl.length);
-        if (url.hash.length) {
+        if(url.hash.length) {
             hash = HandbookRenderer._getLinkAnchor(url.hash);
             href = href.substring(0, href.indexOf(url.hash));
         }
 
         let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash});
-        if (title === null) title = Localisation.translate('Go to {href}', {href: href.replace(/-{1}/g, ' ')});
+        if(title === null) title = Localisation.translate('Go to {href}', {href: href.replace(/-{1}/g, ' ')});
 
         return [route.href, title, '_self'];
     }
@@ -229,25 +230,25 @@ class HandbookRenderer {
      * @private
      */
     static _addNavigationEntry(headers, header) {
-        if (headers.length === 0) {
+        if(headers.length === 0) {
             headers.push(header);
             return;
         }
 
         let lastHeader = headers[headers.length - 1];
-        if (lastHeader.level >= header.level) {
+        if(lastHeader.level >= header.level) {
             headers.push(header);
         } else {
             let current = lastHeader,
                 parent  = null;
 
-            while (1) {
-                if (current.level >= header.level) {
+            while(1) {
+                if(current.level >= header.level) {
                     parent.children.push(header);
                     break;
                 }
 
-                if (current.children.length === 0) {
+                if(current.children.length === 0) {
                     current.children.push(header);
                     break;
                 }
@@ -272,8 +273,8 @@ class HandbookRenderer {
     static _renderImage(href, title, description, nowrap, baseUrl, media) {
         let url = new URL(href, baseUrl);
 
-        if (description === null) description = href;
-        if (title === null) title = description;
+        if(description === null) description = href;
+        if(title === null) title = description;
 
         let index = media.length + 1,
             id    = `help-media-${index}`,
@@ -301,7 +302,7 @@ class HandbookRenderer {
         let caption = Localisation.translate('Figure {count}: {title}', {count: element.index, title: element.title}),
             mime    = element.url.substr(element.url.lastIndexOf('.') + 1);
 
-        if (['mp4', 'm4v', 'ogg', 'webm'].indexOf(mime) !== -1) {
+        if(['mp4', 'm4v', 'ogg', 'webm'].indexOf(mime) !== -1) {
             element.mime = `video/${mime}`;
         } else {
             element.mime = `ìmage/${mime}`;

@@ -23,7 +23,11 @@
                 <router-link class="nav-icon-security" :to="{ name: 'Security'}" active-class="active" tag="li">
                     <translate say="Security"/>
                 </router-link>
-                <router-link class="nav-icon-search" :to="{ name: 'Search'}" active-class="active" tag="li" v-if="isSearchVisible">
+                <router-link class="nav-icon-search"
+                             :to="{ name: 'Search'}"
+                             active-class="active"
+                             tag="li"
+                             v-if="isSearchVisible">
                     <translate say="Search"/>
                 </router-link>
             </ul>
@@ -103,7 +107,8 @@
         methods: {
             birthDayPopup() {
                 document.getElementById('birthday').remove();
-                Messages.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
+                Messages.info(
+                    'Today in 2018, the first version of passwords was published. Thank you for using the app.');
             }
         }
     };
@@ -115,7 +120,12 @@
     }
 
     #app-navigation {
-        transform : translateX(0);
+        transition : z-index 300ms, transform 300ms;
+
+        &.mobile-open {
+            transform : translateX(0);
+            z-index   : 1000;
+        }
 
         li {
             line-height   : 44px;

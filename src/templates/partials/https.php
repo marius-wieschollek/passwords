@@ -8,6 +8,7 @@
 use OCA\Passwords\AppInfo\Application;
 
 style(Application::APP_NAME, ['app']);
+script(Application::APP_NAME, ['Static/https-debug']);
 
 $linkHttps  = 'https://wikipedia.org/wiki/HTTPS';
 $linkReload = str_replace('http://', 'https://', \OC::$server->getURLGenerator()->linkToRouteAbsolute('passwords.page.index'));
@@ -21,8 +22,8 @@ $messageHead   = $l->t('This application requires %s in order to work safely.', 
 $messageReload = $l->t('You can try to %s the page with HTTPS.', ["<a href='{$linkReload}'>{$reloadPage}</a>"]);
 
 if($isAdmin) {
-    $linkDocumentation = 'https://docs.nextcloud.com/server/15/admin_manual/configuration_server/harden_server.html#use-https';
-    $linkReverseProxy  = 'https://docs.nextcloud.com/server/15/admin_manual/configuration_server/reverse_proxy_configuration.html';
+    $linkDocumentation = 'https://docs.nextcloud.com/server/16/admin_manual/configuration_server/harden_server.html#use-https';
+    $linkReverseProxy  = 'https://docs.nextcloud.com/server/16/admin_manual/configuration_server/reverse_proxy_configuration.html';
     $linkForum         = 'https://help.nextcloud.com/c/apps/passwords';
     $linkCertificate   = 'https://letsencrypt.org/getting-started/';
 

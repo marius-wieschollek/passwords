@@ -1,13 +1,13 @@
 <template>
     <div class="preview-container" v-if="showPreview">
-        <web :href="link">
+        <component :is="link ? 'web':'div'" :href="link" class="inner-container">
             <div class="loader">
                 <img :src="loadingIcon" alt="">
             </div>
             <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
                 <img :src="image" @load="imageLoaded($event)" alt="" v-if="showImage">
             </div>
-        </web>
+        </component>
     </div>
 </template>
 
@@ -118,7 +118,7 @@
         overflow   : hidden;
         position   : relative;
 
-        a {
+        .inner-container {
             display   : block;
             font-size : 0;
 

@@ -102,7 +102,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from "@js/Classes/Messages";
     import Localisation from '@js/Classes/Localisation';
-    import EnhancedApi from "@js/ApiClient/EnhancedApi";
+    import EnhancedApi from '@js/ApiClient/EnhancedApi';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
@@ -263,13 +263,11 @@
             height           : 100%;
             background-color : rgba(0, 0, 0, 0.7);
             z-index          : 3001;
+            display          : flex;
+            justify-content  : center;
+            align-items      : center;
 
             .window {
-                position              : fixed;
-                top                   : 6%;
-                left                  : 15%;
-                width                 : 70%;
-                height                : 88%;
                 z-index               : 9999;
                 overflow              : hidden;
                 background-color      : var(--color-main-background);
@@ -288,6 +286,8 @@
                     font-size        : 1.25rem;
                     color            : var(--color-primary-text);
                     background-color : var(--color-primary);
+                    position         : sticky;
+                    top              : 0;
 
                     .close {
                         float  : right;
@@ -313,6 +313,14 @@
         }
 
         #passwords-create-new {
+            .window {
+                height : 88%;
+
+                @media (max-width : $width-medium) {
+                    height : 100%;
+                }
+            }
+
             .content {
                 display               : grid;
                 grid-template-columns : 1fr 1fr;
@@ -431,6 +439,7 @@
 
                         .notes-container {
                             padding : 0.25em 0;
+                            width   : 525px;
 
                             .editor-toolbar {
                                 border  : none;

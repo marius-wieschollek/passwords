@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [ ! -f /var/www/html/version.php ]; then
     cp /var/www/502.html /var/www/html/custom_apps/502.html

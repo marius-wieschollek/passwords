@@ -43,8 +43,8 @@ class PasswordManager {
     createPasswordFromData(password) {
         return new Promise((resolve, reject) => {
             API.createPassword(password)
-               .then((data) => {
-                   Messages.notification('Password created');
+                .then((data) => {
+                    Messages.notification('Password created');
 
                    password.id = data.id;
                    password.status = 0;
@@ -175,8 +175,8 @@ class PasswordManager {
                    });
             } else {
                 Messages.confirm('Do you want to delete the password', 'Delete password')
-                        .then(() => { this.deletePassword(password, false); })
-                        .catch(() => {reject(password);});
+                    .then(() => { this.deletePassword(password, false); })
+                    .catch(() => {reject(password);});
             }
         });
     }
@@ -190,17 +190,17 @@ class PasswordManager {
         return new Promise((resolve, reject) => {
             if(password.trashed) {
                 API.restorePassword(password.id)
-                   .then((d) => {
-                       password.trashed = false;
-                       password.revision = d.revision;
-                       Events.fire('password.restored', password);
-                       Messages.notification('Password restored');
-                       resolve(password);
-                   })
-                   .catch(() => {
-                       Messages.notification('Restoring password failed');
-                       reject(password);
-                   });
+                    .then((d) => {
+                        password.trashed = false;
+                        password.revision = d.revision;
+                        Events.fire('password.restored', password);
+                        Messages.notification('Password restored');
+                        resolve(password);
+                    })
+                    .catch(() => {
+                        Messages.notification('Restoring password failed');
+                        reject(password);
+                    });
             } else {
                 reject(password);
             }
@@ -216,29 +216,44 @@ class PasswordManager {
      */
     restoreRevision(password, revision, confirm = true) {
         return new Promise((resolve, reject) => {
-            if(password.revision === revision.id) reject(password);
+            if(password.revision === revision.id) reject(new Error('Revision is current revision'));
 
             if(!confirm) {
                 API.restorePassword(password.id, revision.id)
-                   .then((d) => {
-                       password = Utility.mergeObject(password, revision);
-                       password.id = d.id;
-                       password.updated = new Date();
-                       password.revision = d.revision;
-                       Events.fire('password.restored', password);
-                       Messages.notification('Revision restored');
-                       resolve(password);
-                   })
-                   .catch(() => {
-                       Messages.notification('Restoring revision failed');
-                       reject(password);
-                   });
+                    .then((d) => {
+                        password = Utility.mergeObject(password, revision);
+                        password.id = d.id;
+                        password.updated = new Date();
+                        password.revision = d.revision;
+                        Events.fire('password.restored', password);
+                        Messages.notification('Revision restored');
+                        resolve(password);
+                    })
+                    .catch((e) => {
+                        Messages.notification('Restoring revision failed');
+                        reject(e);
+                    });
             } else {
                 Messages.confirm('Do you want to restore the revision?', 'Restore revision')
-                        .then(() => { this.restoreRevision(password, revision, false); })
-                        .catch(() => {reject(password);});
+                    .then(() => { this.restoreRevision(password, revision, false).then(resolve).catch(reject); })
+                    .catch(() => {reject(new Error('User aborted revision restore'));});
             }
         });
+    }
+
+    // noinspection JSMethodCanBeStatic
+    /**
+     *
+     * @param password
+     * @param revision
+     *
+     * @returns {Promise}
+     */
+    async viewRevision(password, revision) {
+        let RevisionDialog     = await import(/* webpackChunkName: "ViewRevision" */ '@vue/Dialog/ViewRevision.vue'),
+            ViewRevisionDialog = Vue.extend(RevisionDialog.default);
+
+        new ViewRevisionDialog({propsData: {password, revision}}).$mount('#app-popup div');
     }
 }
 
