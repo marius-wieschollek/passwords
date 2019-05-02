@@ -196,6 +196,6 @@ abstract class AbstractPreviewHelper {
      * @throws \Exception
      */
     protected function getPreviewUrl(string $domain, string $view): string {
-        throw new \Exception('No preview url defined for '.$domain.$view, 502);
+        throw new \Exception('No preview url defined for '.$domain.'@'.$view, 502);
     }
 }
