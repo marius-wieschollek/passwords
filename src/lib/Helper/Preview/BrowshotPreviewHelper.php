@@ -19,6 +19,8 @@ use OCA\Passwords\Services\WebsitePreviewService;
 class BrowshotPreviewHelper extends AbstractPreviewHelper {
 
     const BWS_API_CONFIG_KEY = 'service/preview/bws/key';
+    const BWS_MOBILE_INSTANCE = 'service/preview/bws/mobile';
+    const BWS_DESKTOP_INSTANCE = 'service/preview/bws/desktop';
 
     /**
      * @var string
@@ -89,11 +91,15 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
      * @return string
      */
     protected function getCreateUrl(string $apiKey, string $domain, string $view): string {
+
+        $extra = '';
+        $instance = $this->config->getAppValue(self::BWS_MOBILE_INSTANCE, '67');
         if($view === WebsitePreviewService::VIEWPORT_DESKTOP) {
-            return "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&instance_id=27&size=page";
+            $instance = $this->config->getAppValue(self::BWS_DESKTOP_INSTANCE, '27');
+            $extra = '&screen_width=1600&screen_height=1200';
         }
 
-        return "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&instance_id=67&size=page";
+        return "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&instance_id={$instance}&size=page{$extra}";
     }
 
     /**
