@@ -130,6 +130,7 @@ class PasswordsAdminSettings {
             $apiInput.parent().show();
 
             $apiInput.data('setting', data.key);
+            $apiInput.attr('data-setting', data.key);
             $apiInput.val(data.value);
         }
     }

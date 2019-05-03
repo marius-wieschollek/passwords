@@ -18,9 +18,9 @@ use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
+use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
 use OCA\Passwords\Helper\Preview\PageresCliHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
@@ -44,6 +44,7 @@ class HelperService {
 
     const PREVIEW_SCREEN_SHOT_MACHINE = 'ssm';
     const PREVIEW_SCREEN_SHOT_LAYER   = 'ssl';
+    const PREVIEW_BROW_SHOT           = 'bws';
     const PREVIEW_WEBSHOT             = 'ws';
     const PREVIEW_PAGERES             = 'pageres';
     const PREVIEW_DEFAULT             = 'default';
@@ -111,6 +112,8 @@ class HelperService {
                 return $this->container->query(PageresCliHelper::class);
             case self::PREVIEW_WEBSHOT:
                 return $this->container->query(WebshotHelper::class);
+            case self::PREVIEW_BROW_SHOT:
+                return $this->container->query(BrowshotPreviewHelper::class);
             case self::PREVIEW_SCREEN_SHOT_LAYER:
                 return $this->container->query(ScreenShotLayerHelper::class);
             case self::PREVIEW_SCREEN_SHOT_MACHINE:
