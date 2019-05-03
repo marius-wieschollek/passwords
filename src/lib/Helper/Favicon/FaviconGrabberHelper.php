@@ -71,11 +71,12 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @param string $domain
      *
      * @return array
+     * @throws \Exception
      */
     protected function sendApiRequest(string $domain): ?array {
         $this->checkRequestTimeout();
         $request = new RequestHelper();
-        $data    = $request
+        $response    = $request
             ->setAcceptResponseCodes([200, 400])
             ->setUserAgent(
                 'Nextcloud/'.$this->config->getSystemValue('version').
@@ -84,7 +85,12 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
             )->send(self::FAVICON_GRABBER_URL.'/api/grab/'.$domain);
         $this->setLastRequestTime();
 
-        return json_decode($data, true);
+        if($response === null) {
+            $status = $request->getInfo('http_code');
+            throw new \Exception("Favicongrabber Request Failed, HTTP {$status}");
+        }
+
+        return json_decode($response, true);
     }
 
     /**
@@ -156,7 +162,8 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      *
      */
     protected function checkRequestTimeout(): void {
-        $lastRequest = $this->config->getAppValue('security/fg/api/request', 0);
+        $this->config->clearCache();
+        $lastRequest = $this->config->getAppValue('favicon/fg/api/request', 0);
         if(time() - $lastRequest < self::API_WAIT_TIME) {
             sleep(self::API_WAIT_TIME);
         }
@@ -166,6 +173,6 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      *
      */
     protected function setLastRequestTime(): void {
-        $this->config->setAppValue('security/fg/api/request', time());
+        $this->config->setAppValue('favicon/fg/api/request', time());
     }
 }
