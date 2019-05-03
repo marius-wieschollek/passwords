@@ -10,6 +10,7 @@ namespace OCA\Passwords\Settings;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
@@ -260,6 +261,15 @@ class AdminSettings implements ISettings {
                 'api'     => [
                     'key'   => ScreenShotMachineHelper::SSM_API_CONFIG_KEY,
                     'value' => $this->config->getAppValue(ScreenShotMachineHelper::SSM_API_CONFIG_KEY)
+                ]
+            ],
+            [
+                'id'      => HelperService::PREVIEW_BROW_SHOT,
+                'label'   => 'Browshot',
+                'current' => $current === HelperService::PREVIEW_BROW_SHOT,
+                'api'     => [
+                    'key'   => BrowshotPreviewHelper::BWS_API_CONFIG_KEY,
+                    'value' => $this->config->getAppValue(BrowshotPreviewHelper::BWS_API_CONFIG_KEY)
                 ]
             ],
             [
