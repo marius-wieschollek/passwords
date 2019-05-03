@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\AppSettings;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
@@ -196,9 +197,10 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'string',
             [
                 'service.preview' => [
+                    HelperService::PREVIEW_WEBSHOT,
+                    HelperService::PREVIEW_BROW_SHOT,
                     HelperService::PREVIEW_SCREEN_SHOT_LAYER,
-                    HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
-                    HelperService::PREVIEW_WEBSHOT
+                    HelperService::PREVIEW_SCREEN_SHOT_MACHINE
                 ]
             ]
         );
@@ -216,6 +218,10 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
         if($service === HelperService::PREVIEW_SCREEN_SHOT_MACHINE) {
             return ScreenShotMachineHelper::SSM_API_CONFIG_KEY;
+        }
+
+        if($service === HelperService::PREVIEW_BROW_SHOT) {
+            return BrowshotPreviewHelper::BWS_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_WEBSHOT) {
@@ -314,6 +320,10 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             $this->generateOptionArray(
                 HelperService::PREVIEW_PAGERES,
                 'Pageres/PhantomJS (Local)'
+            ),
+            $this->generateOptionArray(
+                HelperService::PREVIEW_BROW_SHOT,
+                'Browshot'
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_SCREEN_SHOT_LAYER,

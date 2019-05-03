@@ -271,7 +271,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'Browshot',
                 'current' => $current === HelperService::PREVIEW_BROW_SHOT,
                 'api'     => [
-                    'key'   => BrowshotPreviewHelper::BWS_API_CONFIG_KEY,
+                    'key'   => 'service.preview.api',
                     'value' => $this->config->getAppValue(BrowshotPreviewHelper::BWS_API_CONFIG_KEY)
                 ]
             ],
