@@ -94,6 +94,7 @@
                 this.loading = true;
                 this.imgClass = 'loading-hidden';
                 this.style.marginTop = 0;
+                this.$el.scrollTop = 0;
                 this.$forceUpdate();
             },
             icon(value) {
@@ -168,7 +169,19 @@
             display : none;
         }
 
-        @media (max-width : $mobile-width) {
+        @media screen and (hover: none)   {
+            overflow-y   : auto;
+        }
+
+        @media (max-height : 480px) {
+            max-height : 45vh;
+
+            .inner-container .image.loading-hidden {
+                min-height : 45vh;
+            }
+        }
+
+        @media (max-width : $width-extra-small) {
             display : none;
         }
     }
