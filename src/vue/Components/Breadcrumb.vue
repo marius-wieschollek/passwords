@@ -196,7 +196,11 @@
                 PasswordManager.createPassword(this.folder, this.tag);
             },
             showNavigation() {
-                $('#app').toggleClass('mobile-open');
+                let appClasses = document.getElementById('app').classList;
+                if(!appClasses.contains('mobile-open') && this.$parent.detail) {
+                    this.$parent.detail.type = 'none';
+                }
+                appClasses.toggle('mobile-open');
             },
             deleteAllEvent() {
                 this.$emit('deleteAll');

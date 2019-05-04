@@ -198,6 +198,9 @@
                             }
                         });
                 }
+
+                let appClasses = document.getElementById('app').classList;
+                if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
             },
             editAction() {
                 PasswordManager

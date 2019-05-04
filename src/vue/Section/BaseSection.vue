@@ -114,8 +114,10 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"',
-                                                  {query: this.search.query});
+                    return Localisation.translate(
+                        'We could not find anything for "{query}"',
+                        {query: this.search.query}
+                    );
                 }
 
                 return undefined;
@@ -253,23 +255,31 @@
 
         @media(max-width : $width-medium) {
             .app-content-right {
-                width     : calc(100% - 299px);
+                width     : calc(50% - 150px);
                 transform : translate3d(100%, 0, 0);
-            }
-
-            .app-content-left {
-                transition : transform 300ms;
             }
 
             &.show-details {
                 .app-content-left {
-                    width     : 100%;
-                    transform : translate3d(-100%, 0, 0);
+                    width     : 50%;
                 }
             }
         }
 
         @media(max-width : $width-small) {
+            .app-content-right {
+                width     : 50%;
+            }
+
+            &.show-details {
+                .app-content-left {
+                    width     : 50%;
+                    transform : none;
+                }
+            }
+        }
+
+        @media(max-width : $width-extra-small) {
             .app-content-right {
                 width : 100%;
             }
