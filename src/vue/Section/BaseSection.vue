@@ -228,7 +228,7 @@
 
         &.show-details {
             .app-content-left {
-                width : calc(100% - 300px - 27vw);
+                width : calc(100% - 27vw);
             }
 
             .app-content-right {
