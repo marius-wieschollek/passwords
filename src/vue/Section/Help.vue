@@ -316,7 +316,7 @@
                     position       : absolute;
                     opacity        : 0.4;
 
-                    @media all and (max-width : $width-large) {
+                    @media(max-width : $width-large) {
                         position : static;
                         float    : right;
                     }
@@ -408,7 +408,7 @@
                 white-space   : nowrap;
                 font-family   : var(--pw-mono-font-face);
 
-                @media all and (max-width : $width-extra-small) {
+                @media(max-width : $width-extra-small) {
                     white-space : pre-wrap;
                 }
             }
@@ -521,7 +521,7 @@
                 text-decoration : underline;
             }
 
-            @media all and (max-width : $width-extra-small) {
+            @media(max-width : $width-extra-small) {
                 padding : 0 1em;
 
                 br {

@@ -516,7 +516,7 @@
             }
         }
 
-        @media all and (max-width : $width-extra-small) {
+        @media(max-width : $width-extra-small) {
             .csv-mapping-field .value {
                 padding     : 1em 0 .25em;
                 font-weight : bold;

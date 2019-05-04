@@ -135,7 +135,7 @@
                 }
             }
 
-            @media all and (max-width : $width-extra-small) {
+            @media(max-width : $width-extra-small) {
                 display : block;
             }
         }

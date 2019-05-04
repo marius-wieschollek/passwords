@@ -117,15 +117,42 @@
 <style lang="scss">
     #app {
         width : 100%;
+
+        @media(max-width : $width-small) {
+            #app-content {
+                margin-right : 0;
+                width        : 100%;
+                transition   : width 300ms, margin-left 300ms;
+            }
+
+            &.mobile-open {
+                #app-navigation {
+                    transform : translateX(0);
+                }
+
+                #app-content {
+                    background-color : var(--color-main-background);
+                    border-left      : 1px solid var(--color-border);
+                    width            : calc(100% - 299px);
+                    margin-left      : 299px;
+
+                    .item-list .row .date {
+                        display : none;
+                    }
+                }
+            }
+        }
+
+        @media(max-width : $width-extra-small) {
+            &.mobile-open #app-content {
+                width       : 360px;
+                margin-left : 299px;
+            }
+        }
     }
 
     #app-navigation {
-        transition : z-index 300ms, transform 300ms;
-
-        &.mobile-open {
-            transform : translateX(0);
-            z-index   : 1000;
-        }
+        transition : transform 300ms;
 
         li {
             line-height   : 44px;
@@ -187,6 +214,10 @@
                     &:before { content : "\f068"; }
                 }
             }
+        }
+
+        @media(min-width : $width-small) {
+            z-index : 1001;
         }
     }
 
