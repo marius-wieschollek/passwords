@@ -193,7 +193,9 @@
                 if(!this.password.hasOwnProperty('revisions')) {
                     API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
                         .then((p) => {
-                            this.$parent.detail = {type: 'password', element: p};
+                            if(this.$parent.detail.element !== null && this.$parent.detail.element.id === p.id) {
+                                this.$parent.detail = {type: 'password', element: p};
+                            }
                         });
                 }
             },
