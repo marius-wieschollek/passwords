@@ -6,6 +6,15 @@ export default class EnhancedApi extends SimpleApi {
         return this._baseUrl;
     }
 
+    constructor(debug = false) {
+        super(debug);
+
+        this._device = 'desktop';
+        if(window.matchMedia('only screen and (max-width: 768px) and (hover: none)').matches) {
+            this._device = 'mobile';
+        }
+    }
+
     /**
      *
      * @param numeric
@@ -699,7 +708,7 @@ export default class EnhancedApi extends SimpleApi {
             password.host = host;
             password.website = website;
             password.icon = this.getFaviconUrl(imgHost);
-            password.preview = this.getPreviewUrl(imgHost);
+            password.preview = this.getPreviewUrl(imgHost, this._device);
         } else {
             password.host = null;
             password.website = '';
@@ -886,7 +895,7 @@ export default class EnhancedApi extends SimpleApi {
                 l10n     = {'de': 'Passwort', 'cs': 'Heslo', 'fr': 'Mot de passe', 'nl': 'Wachtwoord', 'ru': 'Пароль'},
                 language = navigator.language.substr(0, 2);
             if(l10n.hasOwnProperty(language)) text = l10n[language];
-            date.setTime(data.created ? data.created*1000:Date.now());
+            date.setTime(data.created ? data.created * 1000:Date.now());
 
             data.label = `${text} ${date.toLocaleDateString()}`;
         }
