@@ -137,6 +137,10 @@
                     opacity    : 0;
                     min-height : 274px;
                     transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+
+                    img {
+                        height: 0;
+                    }
                 }
             }
 
