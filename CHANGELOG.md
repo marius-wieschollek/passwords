@@ -1,4 +1,4 @@
-## [Unreleased]
+## 2019.5.0 - Feature release
 ### Added
  - Swedish translation
  - Enpass Json Import
