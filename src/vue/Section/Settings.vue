@@ -302,8 +302,10 @@
                 $event.target.removeAttribute('disabled');
             },
             resetSettingsAction() {
-                Messages.confirm('This will reset all settings to their defaults. Do you want to continue?',
-                                 'Reset all settings')
+                Messages.confirm(
+                    'This will reset all settings to their defaults. Do you want to continue?',
+                                 'Reset all settings'
+                )
                     .then(() => { this.resetSettings(); });
             },
             async resetSettings() {
@@ -363,6 +365,9 @@
             },
             advanced(value) {
                 this.advancedSettings = this.settings['client.settings.advanced'] = value === '1';
+            },
+            locked(value) {
+                document.getElementById('app-content').classList.toggle('blocking');
             }
         }
     };
