@@ -18,7 +18,9 @@ use OCA\Passwords\Services\WebsitePreviewService;
  */
 class BrowshotPreviewHelper extends AbstractPreviewHelper {
 
-    const BWS_API_CONFIG_KEY = 'service/preview/bws/key';
+    const BWS_API_CONFIG_KEY   = 'service/preview/bws/key';
+    const BWS_MOBILE_INSTANCE  = 'service/preview/bws/mobile';
+    const BWS_DESKTOP_INSTANCE = 'service/preview/bws/desktop';
 
     /**
      * @var string
@@ -35,17 +37,8 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
     protected function getPreviewUrl(string $domain, string $view): string {
         $apiKey    = $this->config->getAppValue(self::BWS_API_CONFIG_KEY);
         $createUrl = $this->getCreateUrl($apiKey, $domain, $view);
+        $data      = $this->sendApiRequest($createUrl);
 
-        $request  = parent::getHttpRequest($createUrl);
-        $response = $request->send();
-
-        if($response === null) {
-            $status = $request->getInfo('http_code');
-            $this->logger->error("Browshot Request Failed, HTTP {$status}");
-            throw new ApiException('API Request Failed', 502);
-        }
-
-        $data = json_decode($response);
         return $this->waitForResult($data, $apiKey);
     }
 
@@ -61,20 +54,11 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
 
         while(in_array($data->status, ['in_queue', 'in_process', 'processing'])) {
             sleep(1);
-            $request  = parent::getHttpRequest($infoUrl);
-            $response = $request->send();
-
-            if($response === null) {
-                $status = $request->getInfo('http_code');
-                $this->logger->error("Browshot Request Failed, HTTP {$status}");
-                throw new ApiException('API Request Failed', 502);
-            }
-
-            $data = json_decode($response);
+            $data = $this->sendApiRequest($infoUrl);
         }
 
         if($data->status === 'error') {
-            $this->logger->error("Browshot Request Failed, Error {$data->error}");
+            $this->logger->error("Browshot Request Failed, {$data->error}");
             throw new ApiException('API Request Failed', 502);
         }
 
@@ -87,13 +71,31 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
      * @param string $view
      *
      * @return string
+     * @throws ApiException
      */
     protected function getCreateUrl(string $apiKey, string $domain, string $view): string {
-        if($view === WebsitePreviewService::VIEWPORT_DESKTOP) {
-            return "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&instance_id=27&size=page";
+        $createUrl = "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&size=page&instance_id=";
+        $info      = $this->sendApiRequest("https://api.browshot.com/api/v1/account/info?key={$apiKey}");
+
+        if(intval($info->free_screenshots_left) > 0) {
+            return $createUrl.($view === WebsitePreviewService::VIEWPORT_DESKTOP ? '27':'67');
         }
 
-        return "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&instance_id=67&size=page";
+        $balance = intval($info->balance);
+        if($balance > 0 && $view === WebsitePreviewService::VIEWPORT_DESKTOP) {
+            $instance = $this->config->getAppValue(self::BWS_DESKTOP_INSTANCE, '58');
+
+            return $createUrl.$instance.'&screen_width=1600&screen_height=1200';
+        }
+
+        if($balance > 1 && $view === WebsitePreviewService::VIEWPORT_MOBILE) {
+            $instance = $this->config->getAppValue(self::BWS_MOBILE_INSTANCE, '275');
+
+            return $createUrl.$instance;
+        }
+
+        $this->logger->error("Insufficient Browshot Account Balance");
+        throw new ApiException('API Request Failed', 502);
     }
 
     /**
@@ -104,5 +106,24 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
      */
     protected function getInfoUrl(string $id, string $apiKey): string {
         return "https://api.browshot.com/api/v1/screenshot/info?id={$id}&key={$apiKey}&details=1";
+    }
+
+    /**
+     * @param $url
+     *
+     * @return mixed
+     * @throws ApiException
+     */
+    protected function sendApiRequest($url) {
+        $request  = parent::getHttpRequest($url);
+        $response = $request->send();
+
+        if($response === null) {
+            $status = $request->getInfo('http_code');
+            $this->logger->error("Browshot Request Failed, HTTP {$status}");
+            throw new ApiException('API Request Failed', 502);
+        }
+
+        return json_decode($response);
     }
 }

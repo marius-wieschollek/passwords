@@ -100,6 +100,7 @@
                 this.imgClass = 'loading-hidden';
                 this.style.marginTop = 0;
                 setTimeout(() => { this.showImage = true; }, 100);
+                this.$el.scrollTop = 0;
                 this.$forceUpdate();
             },
             icon(value) {
@@ -142,6 +143,10 @@
                     opacity    : 0;
                     min-height : 274px;
                     transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+
+                    img {
+                        height: 0;
+                    }
                 }
             }
 
@@ -174,7 +179,19 @@
             display : none;
         }
 
-        @media (max-width : $mobile-width) {
+        @media screen and (hover: none)   {
+            overflow-y   : auto;
+        }
+
+        @media (max-height : 480px) {
+            max-height : 45vh;
+
+            .inner-container .image.loading-hidden {
+                min-height : 45vh;
+            }
+        }
+
+        @media (max-width : $width-extra-small) {
             display : none;
         }
     }

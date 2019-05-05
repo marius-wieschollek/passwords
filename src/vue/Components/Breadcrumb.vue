@@ -15,7 +15,7 @@
             </div>
             <div class="crumb svg crumbmenu" :class="{active: showCrumbMenu}" v-if="getCrumbMenuItems.length !== 0">
                 <span class="icon icon-more" @click="toggleCrumbMenu"></span>
-                <div class="popovermenu menu menu-center" @click="toggleCrumbMenu">
+                <div class="popovermenu menu menu-center" @click="toggleCrumbMenu" :style="getCrumbMenuStyle">
                     <ul>
                         <li v-for="item in getCrumbMenuItems" class="crumblist">
                             <router-link :to="item.path"
@@ -149,6 +149,13 @@
                 if(items.length > 1) return items.slice(1);
                 return [];
             },
+            getCrumbMenuStyle() {
+                let height = '0px';
+                if(this.showCrumbMenu) {
+                    height = `${this.getCrumbMenuItems.length * 44}px`;
+                }
+                return {height};
+            },
             getCrumbItemIcon() {
                 if(this.$route.name === 'Folders') return 'icon icon-folder';
                 if(this.$route.name === 'Tags') return 'icon icon-tag';
@@ -189,7 +196,11 @@
                 PasswordManager.createPassword(this.folder, this.tag);
             },
             showNavigation() {
-                $('#app-content, #app-navigation').toggleClass('mobile-open');
+                let appClasses = document.getElementById('app').classList;
+                if(!appClasses.contains('mobile-open') && this.$parent.detail) {
+                    this.$parent.detail.type = 'none';
+                }
+                appClasses.toggle('mobile-open');
             },
             deleteAllEvent() {
                 this.$emit('deleteAll');
@@ -204,6 +215,8 @@
 <style lang="scss">
     #controls {
         position : sticky;
+        top      : 50px;
+        width    : 100%;
 
         .crumbmenu,
         .passwords-more-menu {
@@ -295,7 +308,7 @@
             100% { overflow : visible; }
         }
 
-        @media(max-width : $tablet-width) {
+        @media(max-width : $width-small) {
             padding-left : 0 !important;
 
             .breadcrumb {
@@ -303,13 +316,18 @@
                     display : none;
                 }
                 .crumbmenu {
-                    display : inline-flex;
+                    background-image : none;
+                    display          : inline-flex;
+
+                    .menu.menu-center {
+                        position : absolute;
+                    }
                 }
             }
 
             #app-navigation-toggle {
                 display   : block !important;
-                position  : sticky;
+                position  : static;
                 min-width : 44px;
                 top       : 0;
                 opacity   : 1;
@@ -319,18 +337,9 @@
 
         @media(max-width : $width-extra-small) {
             .crumbmenu {
-                background-image : none;
-
-                .menu.menu-center {
-                    position : absolute;
-                }
-
                 &.active .menu.menu-center {
                     z-index : 111;
                 }
-            }
-
-            .passwords-more-menu {
             }
         }
     }

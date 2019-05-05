@@ -88,7 +88,7 @@ abstract class AbstractFaviconHelper {
      * @throws \Throwable
      */
     public function getDefaultFavicon(string $domain, int $size = 256): ?ISimpleFile {
-        $fileName = $this->getFaviconFilename($domain);
+        $fileName = $this->getFaviconFilename($domain.'_default');
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }

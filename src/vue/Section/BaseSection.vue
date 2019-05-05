@@ -114,8 +114,10 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"',
-                                                  {query: this.search.query});
+                    return Localisation.translate(
+                        'We could not find anything for "{query}"',
+                        {query: this.search.query}
+                    );
                 }
 
                 return undefined;
@@ -188,38 +190,49 @@
 
 <style lang="scss">
     #app-content {
-        position   : relative;
-        height     : 100%;
+        height     : calc(100vh - 50px);
         overflow-y : initial;
         overflow-x : initial;
-        transition : margin-right 300ms, transform 300ms;
 
         &.blocking {
-            position: static;
+            position  : static;
             transform : none;
+
+            .app-content-left {
+                transition : none;
+                transform  : none;
+            }
+        }
+
+        .app-content-left {
+            width      : 100%;
+            transition : width 300ms;
+            transform  : translate3d(0, 0, 0);
+            background : var(--color-main-background);
         }
 
         .app-content-right {
-            background-color : var(--color-main-background);
-            z-index          : 50;
-            border-left      : 1px solid var(--color-border-dark);
-            transition       : right 300ms;
-            right            : -27%;
+            background  : var(--color-main-background);
+            border-left : 1px solid var(--color-border);
+            width       : 27vw;
+            position    : fixed;
+            top         : 50px;
+            right       : 0;
+            overflow-y  : auto;
+            overflow-x  : hidden;
+            z-index     : 1500;
+            height      : calc(100vh - 50px);
+            transform   : translate3d(27vw, 0, 0);
+            transition  : transform 300ms;
         }
 
         &.show-details {
-            margin-right : 27%;
+            .app-content-left {
+                width : calc(100% - 27vw);
+            }
 
             .app-content-right {
-                display    : block;
-                position   : fixed;
-                top        : 50px;
-                right      : 0;
-                left       : auto;
-                bottom     : 0;
-                width      : 27%;
-                min-width  : 360px;
-                overflow-y : auto;
+                transform : translate3d(0, 0, 0);
             }
         }
 
@@ -229,43 +242,46 @@
 
         @media(max-width : $width-large) {
             .app-content-right {
-                right : -360px;
+                width     : 360px;
+                transform : translate3d(360px, 0, 0);
             }
 
             &.show-details {
-                margin-right : 360px;
+                .app-content-left {
+                    width : calc(100% - 360px);
+                }
+            }
+        }
 
-                .app-content-right {
-                    width     : 360px;
-                    min-width : 360px;
-                    z-index   : 60;
+        @media(max-width : $width-medium) {
+            .app-content-right {
+                width     : calc(50% - 150px);
+                transform : translate3d(100%, 0, 0);
+            }
+
+            &.show-details {
+                .app-content-left {
+                    width     : 50%;
                 }
             }
         }
 
         @media(max-width : $width-small) {
-            transform : translate3d(0, 0, 0);
-
             .app-content-right {
-                border-left : none;
-                transition  : width 300ms;
+                width     : 50%;
             }
 
             &.show-details {
-                margin-right : 0;
-
                 .app-content-left {
-                    display : none;
-                }
-                .app-content-right {
-                    width     : 100%;
-                    min-width : auto;
-                    top       : 0;
+                    width     : 50%;
+                    transform : none;
                 }
             }
+        }
 
-            &.mobile-open {
-                transform : translate3d(300px, 0px, 0px);
+        @media(max-width : $width-extra-small) {
+            .app-content-right {
+                width : 100%;
             }
         }
     }

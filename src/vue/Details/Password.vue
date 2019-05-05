@@ -115,6 +115,10 @@
 
         watch: {
             password(value) {
+                if(this.object.id !== value.id) {
+                    this.$el.offsetParent.scrollTop = 0;
+                }
+
                 this.object = value;
                 if(!value.hasOwnProperty('revisions')) this.refreshView();
             }

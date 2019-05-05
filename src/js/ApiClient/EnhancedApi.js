@@ -61,6 +61,15 @@ export default class EnhancedApi extends SimpleApi {
         setInterval(() => { this.keepaliveSession(); }, 5 * 60000);
     }
 
+    constructor(debug = false) {
+        super(debug);
+
+        this._device = 'desktop';
+        if(window.matchMedia('only screen and (max-width: 768px) and (hover: none)').matches) {
+            this._device = 'mobile';
+        }
+    }
+
     /**
      *
      * @param value
@@ -835,7 +844,7 @@ export default class EnhancedApi extends SimpleApi {
             password.host = host;
             password.website = website;
             password.icon = this.getFaviconUrl(imgHost);
-            password.preview = this.getPreviewUrl(imgHost);
+            password.preview = this.getPreviewUrl(imgHost, this._device);
         } else {
             password.host = null;
             password.website = '';

@@ -20,7 +20,8 @@ The licenses and/or terms of service of any service or third party sources used 
 #### Website Previews
 * [wkhtmltoimage](https://wkhtmltopdf.org/) - [LGPL V3](https://github.com/wkhtmltopdf/wkhtmltopdf/blob/master/LICENSE)
 * [pageres-cli](https://github.com/sindresorhus/pageres-cli/) - [MIT](https://github.com/sindresorhus/pageres-cli/blob/master/license)
-* [screenshotapi.io](https://www.screenshotapi.io/)
+* [screenshotlayer.com](https://screenshotlayer.com/) - [ToS](https://screenshotlayer.com/terms) - [Privacy](https://screenshotlayer.com/privacy)
+* [browshot.com](https://browshot.com) - [ToS](https://browshot.com/terms)
 * [Screenshotmachine](https://screenshotmachine.com/) - [ToS](https://screenshotmachine.com/termsandconditions.php) - [Privacy](https://screenshotmachine.com/privacypolicy.php)
 
 #### Favicons

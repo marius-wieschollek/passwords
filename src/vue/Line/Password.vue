@@ -9,7 +9,12 @@
         <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}" :title="getTitle">&nbsp;</div>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
-            <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
+            <li v-for="tag in getTags"
+                :key="tag.id"
+                :title="tag.label"
+                :style="{color: tag.color}"
+                @click="openTagAction($event, tag.id)">&nbsp;
+            </li>
         </ul>
         <slot name="middle"/>
         <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle"></i>
@@ -21,9 +26,21 @@
                         <slot name="menu-top"/>
                         <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" icon="clipboard" say="Copy Password"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" icon="clipboard" say="Copy User"/>
-                        <translate tag="li" v-if="password.url" @click="copyAction('url')" icon="clipboard" say="Copy Url"/>
+                        <translate tag="li"
+                                   v-if="showCopyOptions"
+                                   @click="copyAction('password')"
+                                   icon="clipboard"
+                                   say="Copy Password"/>
+                        <translate tag="li"
+                                   v-if="showCopyOptions"
+                                   @click="copyAction('username')"
+                                   icon="clipboard"
+                                   say="Copy User"/>
+                        <translate tag="li"
+                                   v-if="password.url"
+                                   @click="copyAction('url')"
+                                   icon="clipboard"
+                                   say="Copy Url"/>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
                         </li>
@@ -117,7 +134,10 @@
                 return Localisation.formatDate(this.password.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date: Localisation.formatDateTime(this.password.edited)});
+                return Localisation.translate(
+                    'Last modified on {date}',
+                    {date: Localisation.formatDateTime(this.password.edited)}
+                );
             }
         },
 
@@ -139,9 +159,11 @@
                 }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details' && action !== 'edit') this.copyAction(action, delay);
-                else if(action === 'edit') this.clickTimeout = setTimeout(this.editAction, delay);
-                else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+                if(action !== 'details' && action !== 'edit') {
+                    this.copyAction(action, delay);
+                } else if(action === 'edit') {
+                    this.clickTimeout = setTimeout(this.editAction, delay);
+                } else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
                 let message = 'Error copying {element} to clipboard';
@@ -168,6 +190,17 @@
             },
             detailsAction(section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
+                if(!this.password.hasOwnProperty('revisions')) {
+                    API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
+                        .then((p) => {
+                            if(this.$parent.detail.element !== null && this.$parent.detail.element.id === p.id) {
+                                this.$parent.detail = {type: 'password', element: p};
+                            }
+                        });
+                }
+
+                let appClasses = document.getElementById('app').classList;
+                if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
             },
             editAction() {
                 PasswordManager
@@ -386,7 +419,7 @@
                     }
                 }
 
-                @media(max-width : $mobile-width) {
+                @media(max-width : $width-extra-small) {
                     .date {
                         display : none;
                     }

@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="passwords" :data-server-version="serverVersion">
         <div id="app-navigation">
-            <ul>
+            <ul class="menu-main">
                 <router-link class="nav-icon-all" :to="{ name: 'All'}" active-class="active" :exact="true" tag="li">
                     <translate say="All"/>
                 </router-link>
@@ -31,10 +31,12 @@
                     <translate say="Search"/>
                 </router-link>
             </ul>
-            <ul id="app-settings" :class="{open: showMore}">
+            <ul class="menu-secondary">
                 <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
                     <translate say="Trash"/>
                 </router-link>
+            </ul>
+            <ul id="app-settings" :class="{open: showMore}">
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore" say="More"/>
                 <router-link class="nav-icon-settings" :to="{ name: 'Settings'}" active-class="active" tag="li">
                     <translate say="Settings"/>
@@ -117,15 +119,42 @@
 <style lang="scss">
     #app {
         width : 100%;
+
+        @media(max-width : $width-small) {
+            #app-content {
+                margin-right : 0;
+                width        : 100%;
+                transition   : width 300ms, margin-left 300ms;
+            }
+
+            &.mobile-open {
+                #app-navigation {
+                    transform : translateX(0);
+                }
+
+                #app-content {
+                    background-color : var(--color-main-background);
+                    border-left      : 1px solid var(--color-border);
+                    width            : calc(100% - 299px);
+                    margin-left      : 299px;
+
+                    .item-list .row .date {
+                        display : none;
+                    }
+                }
+            }
+        }
+
+        @media(max-width : $width-extra-small) {
+            &.mobile-open #app-content {
+                width       : 360px;
+                margin-left : 299px;
+            }
+        }
     }
 
     #app-navigation {
-        transition : z-index 300ms, transform 300ms;
-
-        &.mobile-open {
-            transform : translateX(0);
-            z-index   : 1000;
-        }
+        transition : transform 300ms;
 
         li {
             line-height   : 44px;
@@ -170,23 +199,37 @@
             }
         }
 
+        .menu-secondary {
+            height      : auto;
+            flex-shrink : 0;
+        }
+
         #app-settings {
             position         : relative;
             overflow         : hidden;
-            max-height       : 88px;
+            max-height       : 44px;
             background-color : var(--color-main-background);
             border-right     : 1px solid var(--color-border);
             transition       : max-height 0.25s ease-in-out;
 
             &.open {
-                max-height : 264px;
+                max-height : 220px;
 
                 li.nav-icon-more {
                     opacity : 1;
 
                     &:before { content : "\f068"; }
                 }
+
+                @media (max-height : 360px) {
+                    position : fixed;
+                    bottom   : 0;
+                }
             }
+        }
+
+        @media(min-width : $width-small) {
+            z-index : 1001;
         }
     }
 

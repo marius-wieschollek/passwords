@@ -90,11 +90,11 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected function getUrl(string $url): array {
         $request = new RequestHelper();
         $request->setUrl($url);
-        $data = $request->sendWithRetry();
+        $data = $request->sendWithRetry(3);
 
         $url         = $request->getInfo('url');
         $contentType = $request->getInfo('content_type');
-        $isIcon      = substr($contentType, 0, 5) === 'image';
+        $isIcon      = substr($contentType, 0, 5) === 'image' && $this->imageHelper->supportsImage($data);
 
         return [
             $data,
