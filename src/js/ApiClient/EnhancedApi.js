@@ -54,20 +54,17 @@ export default class EnhancedApi extends SimpleApi {
         if(!config.folderIcon) config.folderIcon = `${config.baseUrl}core/img/filetypes/folder.svg`;
         if(!config.apiUrl) config.apiUrl = `${config.baseUrl}index.php/apps/passwords/`;
         if(!config.encryption) throw new Error('Encryption support is missing');
+        if(!config.device) {
+            config.device = 'desktop';
+            if(window.matchMedia('only screen and (max-width: 768px) and (hover: none)').matches) {
+                config.device = 'mobile';
+            }
+        }
         config.encrypt = false;
 
         super.initialize(config);
 
         setInterval(() => { this.keepaliveSession(); }, 5 * 60000);
-    }
-
-    constructor(debug = false) {
-        super(debug);
-
-        this._device = 'desktop';
-        if(window.matchMedia('only screen and (max-width: 768px) and (hover: none)').matches) {
-            this._device = 'mobile';
-        }
     }
 
     /**
@@ -844,7 +841,7 @@ export default class EnhancedApi extends SimpleApi {
             password.host = host;
             password.website = website;
             password.icon = this.getFaviconUrl(imgHost);
-            password.preview = this.getPreviewUrl(imgHost, this._device);
+            password.preview = this.getPreviewUrl(imgHost, this.config.device);
         } else {
             password.host = null;
             password.website = '';
