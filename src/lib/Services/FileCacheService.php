@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services;
 
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Files\SimpleFS\ISimpleFolder;
 
@@ -73,19 +74,21 @@ class FileCacheService {
      *
      * @return array
      * @throws \Exception
-     * @throws \OCP\Files\NotPermittedException
      */
     public function getCacheInfo($cache = null): array {
         $cache = $this->validateCacheName($cache);
-
-        $fileCache   = $this->getCache($cache);
-        $cachedFiles = $fileCache->getDirectoryListing();
-
         $info = [
             'name'  => $cache,
             'size'  => 0,
             'files' => 0
         ];
+
+        try {
+            $fileCache = $this->getCache($cache);
+            $cachedFiles = $fileCache->getDirectoryListing();
+        } catch(NotPermittedException $e) {
+            return $info;
+        }
 
         foreach($cachedFiles as $file) {
             $info['size'] += $file->getSize();

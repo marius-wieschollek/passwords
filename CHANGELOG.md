@@ -1,3 +1,7 @@
+## [Unreleased]
+### Fixed
+ - BigDB+Hibp database update not initiated
+
 ## 2019.5.0 - Feature release
 ### Added
  - Swedish translation
