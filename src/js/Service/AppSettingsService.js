@@ -67,7 +67,7 @@ export default class AdminSettingsService {
      * @returns {Promise}
      * @private
      */
-    static async _createRequest(path, data = null, method = 'GET') {
+    async _createRequest(path, data = null, method = 'GET') {
         let options = {method};
 
         options.headers = new Headers();
