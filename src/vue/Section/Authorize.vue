@@ -1,19 +1,38 @@
 <template>
     <div id="app-content">
         <form id="authorize-window" @submit="submitLogin" :class="getClasses">
-            <translate tag="div" icon="user" class="login-message" say="You are logging in as {user}" :variables="loginVars" v-if="impersonating"/>
+            <translate tag="div"
+                       icon="user"
+                       class="login-message"
+                       say="You are logging in as {user}"
+                       :variables="loginVars"
+                       v-if="impersonating"/>
             <div class="login-container">
-                <translate icon="repeat" title="Request Token again" :iconClass="retryClass" @click="requestToken()" v-if="retryVisible"/>
+                <translate icon="repeat"
+                           title="Request Token again"
+                           :iconClass="retryClass"
+                           @click="requestToken()"
+                           v-if="retryVisible"/>
                 <div>
                     <input type="password" placeholder="Password" v-model="password" required v-if="hasPassword">
                     <select v-model="providerId" v-if="hasToken && providers.length > 0">
-                        <option v-for="(option, id) in providers" :value="id" :title="option.description">{{option.label}}</option>
+                        <option v-for="(option, id) in providers" :value="id" :title="option.description">
+                            {{option.label}}
+                        </option>
                     </select>
-                    <input type="text" placeholder="Token" :title="provider.description" v-model="token" required v-if="hasToken && provider.type === 'user-token'">
+                    <input type="text"
+                           placeholder="Token"
+                           :title="provider.description"
+                           v-model="token"
+                           required
+                           v-if="hasToken && provider.type === 'user-token'">
                 </div>
             </div>
-            <input type="submit" value="Login" v-if="hasToken || hasPassword">
-            <translate class="login-error" :say="errorMessage" tag="div" v-if="hasError"/>
+            <div class="login-confirm" v-if="hasToken || hasPassword">
+                <input type="submit" value="Login" :class="{'no-icon':loggingIn}">
+                <div class="login-icon fa fa-circle-o-notch fa-spin" v-if="loggingIn">&nbsp;</div>
+                <translate class="login-error" :say="errorMessage" tag="div" v-if="hasError"/>
+            </div>
         </form>
     </div>
 </template>
@@ -38,6 +57,7 @@
                 hasError     : false,
                 pwAlgorithm  : '',
                 errorMessage : 'Login incorrect',
+                loggingIn    : false,
                 retryClass   : '',
                 impersonating: document.querySelector('meta[name=pw-impersonate]') === null
             };
@@ -46,40 +66,40 @@
         created() {
             document.body.classList.add('pw-authorize');
             API.requestSession()
-               .then((d) => {
-                   if(d.hasOwnProperty('challenge')) {
-                       this.hasPassword = true;
-                       this.challenge = d.challenge;
-                   }
-                   if(d.hasOwnProperty('token')) {
-                       this.hasToken = true;
-                       this.provider = null;
-                       this.providerId = -1;
-                       this.providers = [];
+                .then((d) => {
+                    if(d.hasOwnProperty('challenge')) {
+                        this.hasPassword = true;
+                        this.challenge = d.challenge;
+                    }
+                    if(d.hasOwnProperty('token')) {
+                        this.hasToken = true;
+                        this.provider = null;
+                        this.providerId = -1;
+                        this.providers = [];
 
-                       for(let i = 0; i < d.token.length; i++) {
-                           if(d.token[i].id === 'twofactor_nextcloud_notification' && d.token.length !== 1 && !process.env.NIGHTLY_FEATURES) {
-                               continue;
-                           }
+                        for(let i = 0; i < d.token.length; i++) {
+                            if(d.token[i].id === 'twofactor_nextcloud_notification' && d.token.length !== 1 && !process.env.NIGHTLY_FEATURES) {
+                                continue;
+                            }
 
-                           this.providers.push(d.token[i]);
-                           if(this.provider === null && !d.token[i].request) {
-                               this.providerId = this.providers.length - 1;
-                               this.provider = d.token[i];
-                           }
-                       }
+                            this.providers.push(d.token[i]);
+                            if(this.provider === null && !d.token[i].request) {
+                                this.providerId = this.providers.length - 1;
+                                this.provider = d.token[i];
+                            }
+                        }
 
-                       if(this.provider === null) {
-                           this.providerId = 0;
-                           this.provider = this.providers[0];
-                       }
-                   }
-                   if(!this.hasPassword && !this.hasToken) {
-                       API.openSession([])
-                          .then(() => { this.goToTarget(); })
-                          .catch((d) => { this.loginError(d); });
-                   }
-               });
+                        if(this.provider === null) {
+                            this.providerId = 0;
+                            this.provider = this.providers[0];
+                        }
+                    }
+                    if(!this.hasPassword && !this.hasToken) {
+                        API.openSession([])
+                            .then(() => { this.goToTarget(); })
+                            .catch((d) => { this.loginError(d); });
+                    }
+                });
         },
 
         computed: {
@@ -97,7 +117,9 @@
         },
 
         methods: {
-            async submitLogin() {
+            submitLogin() {
+                if(this.loggingIn) return;
+                this.loggingIn = true;
                 let data = {};
 
                 if(this.hasPassword) {
@@ -110,9 +132,12 @@
                 }
                 this.hasError = false;
 
-                API.openSession(data)
-                   .then(() => { this.goToTarget(); })
-                   .catch((d) => { this.loginError(d); });
+                setTimeout(() => {
+                    API.openSession(data)
+                        .then(() => { this.goToTarget(); })
+                        .catch((d) => { this.loginError(d); });
+                }, 1);
+
             },
             loginError(e) {
                 this.password = '';
@@ -126,6 +151,7 @@
                 } else {
                     this.errorMessage = 'Unknown Error';
                 }
+                this.loggingIn = false;
             },
             goToTarget() {
                 let target = this.$route.params.target,
@@ -146,14 +172,15 @@
             requestToken() {
                 this.retryClass = 'fa-spin';
                 API.requestToken(this.provider.id)
-                   .then((d) => {
-                       if(this.provider.type === 'request-token') this.token = d.data.code;
-                       setTimeout(() => {this.retryClass = '';}, 1500);
-                   })
-                   .catch(() => {
-                       Messages.alert('You may have requested too many tokens. Please try again later.', 'Token request failed');
-                       this.retryClass = '';
-                   });
+                    .then((d) => {
+                        if(this.provider.type === 'request-token') this.token = d.data.code;
+                        setTimeout(() => {this.retryClass = '';}, 1500);
+                    })
+                    .catch(() => {
+                        Messages.alert('You may have requested too many tokens. Please try again later.',
+                                       'Token request failed');
+                        this.retryClass = '';
+                    });
             }
         },
 
@@ -242,13 +269,6 @@
                     border-bottom-right-radius : 0.25rem;
                 }
             }
-
-            &[type=submit] {
-                margin-top : 1rem;
-                border     : 1px solid var(--color-primary-text);
-                color      : var(--color-primary-text);
-                background : var(--color-primary) url(/core/img/actions/confirm-white.svg?v=2) no-repeat right 16px center;
-            }
         }
 
         select {
@@ -291,6 +311,38 @@
                 bottom      : 0;
                 display     : flex;
                 align-items : center;
+            }
+        }
+
+        .login-confirm {
+            position : relative;
+
+            .login-icon {
+                position    : absolute;
+                width       : 1rem;
+                font-size   : 1rem;
+                line-height : 1rem;
+                right       : 16px;
+                top         : 2rem;
+                color       : var(--color-primary-text);
+            }
+
+            input[type=submit] {
+                margin-top            : 1rem;
+                border                : 1px solid var(--color-primary-text);
+                color                 : var(--color-primary-text);
+                background            : var(--color-primary-element) var(--icon-confirm-fff) no-repeat;
+                background-position-y : 50%;
+                background-position-x : calc(100% - 16px);
+                transition            : background-position-x 0.25s ease-in-out;
+
+                &.no-icon {
+                    background-image : none;
+                }
+
+                &:hover {
+                    background-position-x : calc(100% - 8px);
+                }
             }
         }
 
@@ -340,7 +392,7 @@
             }
 
             #app-navigation {
-                z-index    : 1001;
+                z-index : 1001;
             }
 
             &.pw-authorized {
@@ -350,7 +402,6 @@
                 }
             }
         }
-
 
         &.pw-authorized {
             #app-navigation {
