@@ -411,6 +411,11 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password', 'notes'],
                 repair   : true
+            },
+            roboform : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['label', 'url', '', 'username', 'password', 'notes']
             }
         };
 

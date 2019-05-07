@@ -19,17 +19,26 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
-    const LOW_RAM_LIMIT = 4194304;
-    const ARCHIVE_URL   = 'https://archive.org/download/10MillionPasswords/10-million-combos.zip';
-    const PASSWORD_DB   = 'bigdb';
+    const LOW_RAM_LIMIT     = 4194304;
+    const ARCHIVE_URL       = 'https://archive.org/download/10MillionPasswords/10-million-combos.zip';
+    const CONFIG_DB_VERSION = 'passwords/localdb/version';
+    const PASSWORD_DB       = 'bigdb';
+    const PASSWORD_VERSION  = 1;
 
     /**
      * @inheritdoc
      */
     public function dbUpdateRequired(): bool {
-        $installedType = $this->config->getAppValue(self::CONFIG_DB_TYPE);
+        try {
+            $installedVersion = $this->config->getAppValue(self::CONFIG_DB_VERSION);
+            if($installedVersion !== static::PASSWORD_VERSION) return true;
 
-        return $this->fileCacheService->isCacheEmpty() || $installedType != static::PASSWORD_DB;
+            $info = $this->fileCacheService->getCacheInfo();
+            if($info['files'] < 4096) return true;
+        } catch(Exception $e) {
+        }
+
+        return parent::dbUpdateRequired();
     }
 
     /**
@@ -48,6 +57,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
         }
 
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
+        $this->config->setAppValue(self::CONFIG_DB_VERSION, static::PASSWORD_VERSION);
         $this->logPasswordUpdate();
     }
 

@@ -39,6 +39,10 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 next({name: 'Authorize', params: {target}});
             }
             next();
+            if (to.name !== from.name && window.innerWidth < 660) {
+                let app = document.getElementById('app');
+                if(app) app.classList.remove('mobile-open');
+            }
         });
 
         app = new Vue(App);

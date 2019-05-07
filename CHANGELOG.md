@@ -1,7 +1,12 @@
 ## [Unreleased]
+### Fixed
+ - BigDB+Hibp database update not initiated
+
+## 2019.5.0 - Feature release
 ### Added
  - Swedish translation
  - Enpass Json Import
+ - Roboform CSV Import
  - Custom fields support in export & import
  - Password revision detail view
  - Password names in legacy api
@@ -9,7 +14,7 @@
  - Browshot preview service
  - Changelog in app store
 ### Changed
- - Improved Passman import
+ - Improved Passman import (JSON & CSV)
  - Improved help section
  - Improved sharing ui
  - Improved mobile ui

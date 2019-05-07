@@ -16,6 +16,7 @@
                     <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
+                    <translate tag="option" value="roboform" say="RoboForm CSV"/>
                     <translate tag="option" value="csv" say="Custom CSV"/>
                 </select>
             </div>
@@ -373,6 +374,7 @@
                     case 'keepass':
                         this.csv.escape = '\\';
                     case 'legacy':
+                    case 'roboform':
                     case 'lastpass':
                         this.options.profile = value;
                         break;
