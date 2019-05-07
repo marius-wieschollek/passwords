@@ -22,13 +22,13 @@
         "handbook": "codeceptjs run --steps",
         "selenium": "docker run --net=host selenium/standalone-firefox",
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
-        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost"
+        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local"
     },
     "dependencies": {},
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
         "clean-webpack-plugin": "^0.1.19",
-        "codeceptjs": "^2.1.0",
+        "codeceptjs": "^2.1.1",
         "copy-webpack-plugin": "^4.6.0",
         "css-loader": "^0.28.11",
         "csv-hero": "0.0.4",
@@ -37,7 +37,7 @@
         "extract-text-webpack-plugin": "^3.0.2",
         "file-loader": "^2.0.0",
         "font-awesome": "^4.7.0",
-        "jquery": "^3.4.0",
+        "jquery": "^3.4.1",
         "jszip": "^3.2.1",
         "marked": "^0.6.2",
         "node-sass": "^4.12.0",
@@ -56,7 +56,7 @@
         "vue-router": "^3.0.6",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.10",
-        "webdriverio": "^5.8.1",
+        "webdriverio": "^5.8.2",
         "webpack": "^3.12.0",
         "xlsx": "^0.14.3"
     },
