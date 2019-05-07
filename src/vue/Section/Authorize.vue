@@ -140,7 +140,7 @@
 
                 setTimeout(() => {
                     document.body.classList.remove('pw-authorize');
-                    SetupManager.run();
+                    SetupManager.runAutomatically();
                 }, 500);
             },
             requestToken() {

@@ -5,15 +5,52 @@ import DeferredActivationService from '@js/Service/DeferredActivationService';
 
 class SetupManager {
 
-    async run() {
+    /**
+     * Check if wizard should be executed and run it
+     *
+     * @returns {Promise<void>}
+     */
+    async runAutomatically() {
         if(SettingsManager.get('client.setup.initialized', false)) return;
         if(await DeferredActivationService.check('firstrunwizard')) return;
+
+        this._runWizard();
+    }
+
+    /**
+     * Run the entire wizard manually
+     *
+     * @returns {Promise<void>}
+     */
+    async runManually() {
+        this._runWizard();
+    }
+
+    /**
+     * Run the encryption setup
+     *
+     * @returns {Promise<void>}
+     */
+    async runEncryptionSetup() {
+        this._runWizard(['start', 'encryption'], true, false);
+    }
+
+    /**
+     * Run the wizard with the given settings
+     *
+     * @param enableSlides
+     * @param closable
+     * @param redirect
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _runWizard(enableSlides, closable, redirect) {
         await Localisation.loadSection('tutorial');
 
         let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
             SetupWizard = Vue.extend(SetupDialog.default);
 
-        new SetupWizard({}).$mount('#app-popup div');
+        new SetupWizard({propsData: {enableSlides, closable, redirect}}).$mount('#app-popup div');
     }
 }
 

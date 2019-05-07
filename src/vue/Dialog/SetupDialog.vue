@@ -1,21 +1,25 @@
 <template>
-    <div class="background" id="passwords-setup">
+    <div class="background" id="passwords-setup" @click="closeAction($event)">
         <div id="setup-container">
             <div class="setup-header">
                 <div class="logo"></div>
                 <translate tag="h1" :say="current.title"/>
             </div>
             <ul class="setup-content" :style="getStyle">
-                <start id="setup-slide-start" class="slide"/>
+                <start id="setup-slide-start" class="slide" v-if="hasSlide('start')"/>
                 <encryption id="setup-slide-encryption"
                             class="slide"
                             :is-current="currentId === 1"
                             v-on:status="updateStatus"
-                            v-on:continue="nextSlide"/>
-                <admin-settings id="setup-slide-admin-settings" class="slide"/>
-                <user-settings id="setup-slide-user-settings" class="slide"/>
-                <keep-order id="setup-slide-keep-order" class="slide"/>
-                <integrations id="setup-slide-integrations" class="slide" v-on:redirect="openSection"/>
+                            v-on:continue="nextSlide"
+                            v-if="hasSlide('encryption')"/>
+                <admin-settings id="setup-slide-admin-settings" class="slide" v-if="hasSlide('admin-settings')"/>
+                <user-settings id="setup-slide-user-settings" class="slide" v-if="hasSlide('user-settings')"/>
+                <keep-order id="setup-slide-keep-order" class="slide" v-if="hasSlide('keep-order')"/>
+                <integrations id="setup-slide-integrations"
+                              class="slide"
+                              v-on:redirect="openSection"
+                              v-if="hasSlide('integrations')"/>
             </ul>
             <div class="setup-navigation">
                 <translate tag="div" say="Skip" class="skip" @click="nextSlide" v-if="showSkipButton"/>
@@ -44,6 +48,24 @@
 
     export default {
         components: {UserSettings, Integrations, Encryption, Translate, KeepOrder, Start, AdminSettings},
+
+        props: {
+            enableSlides: {
+                type: Array,
+                default() {
+                    return ['start', 'encryption', 'admin-settings', 'user-settings', 'keep-order', 'integrations'];
+                }
+            },
+            closable    : {
+                type   : Boolean,
+                default: false
+            },
+            redirect    : {
+                type   : Boolean,
+                default: true
+            }
+        },
+
         data() {
             let slides = [
                 {
@@ -74,18 +96,26 @@
                 }
             ];
 
+            for(let i = 0; i < slides.length; i++) {
+                if(this.enableSlides.indexOf(slides[i].id) === -1) {
+                    slides.splice(i, 1);
+                    i--;
+                }
+            }
+
 
             return {
-                current  : slides[0],
-                currentId: 0,
-                route    : {path: '/'},
+                current       : slides[0],
+                currentId     : 0,
+                isDefaultRoute: true,
+                route         : {path: '/'},
                 slides
             };
         },
-        computed  : {
+        computed: {
             getStyle() {
-                if (this.currentId < 1) return '';
-                if (window.innerWidth > 900) {
+                if(this.currentId < 1) return '';
+                if(window.innerWidth > 900) {
                     return `transform: translateX(-${this.currentId * 900}px);`;
                 }
 
@@ -101,15 +131,18 @@
                 return this.current.hasOwnProperty('action') && this.current.action !== null;
             }
         },
-        methods   : {
+        methods : {
+            hasSlide(id) {
+                return this.enableSlides.indexOf(id) !== -1;
+            },
             goToSlide(id) {
-                if (!this.slides.hasOwnProperty(id)) return;
+                if(!this.slides.hasOwnProperty(id)) return;
 
                 this.current = this.slides[id];
                 this.currentId = id;
             },
             nextSlide() {
-                if (this.currentId < this.slides.length - 1) {
+                if(this.currentId < this.slides.length - 1) {
                     this.goToSlide(this.currentId + 1);
                 } else {
                     this.closeWizard();
@@ -117,12 +150,13 @@
             },
             openSection($event) {
                 this.route = $event;
+                this.isDefaultRoute = false;
                 this.closeWizard();
             },
             updateStatus(e) {
-                if (e.id === this.current.id) {
-                    if (e.hasOwnProperty('skippable')) this.current.skippable = e.skippable === true;
-                    if (e.hasOwnProperty('action')) this.current.action = e.action;
+                if(e.id === this.current.id) {
+                    if(e.hasOwnProperty('skippable')) this.current.skippable = e.skippable === true;
+                    if(e.hasOwnProperty('action')) this.current.action = e.action;
                 }
             },
             closeWizard() {
@@ -131,7 +165,13 @@
                 let container = document.getElementById('app-popup'),
                     div       = document.createElement('div');
                 container.replaceChild(div, container.childNodes[0]);
-                router.push(this.route);
+                if(this.redirect || !this.isDefaultRoute) router.push(this.route);
+            },
+            closeAction($e) {
+                if(this.closable && $e.originalTarget.id === 'passwords-setup' && this.current.skippable) {
+                    console.log(this.current);
+                    this.closeWizard();
+                }
             }
         }
     };
@@ -203,7 +243,8 @@
             align-items : stretch;
 
             .slide {
-                width : 900px;
+                width      : 900px;
+                min-height : 450px;
             }
 
             @media (max-width : 900px) {
@@ -247,8 +288,8 @@
             }
 
             @media (max-width : 900px) {
-                position: absolute;
-                bottom: 0;
+                position : absolute;
+                bottom   : 0;
             }
         }
     }

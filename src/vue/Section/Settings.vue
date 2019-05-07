@@ -50,6 +50,10 @@
                            id="setting-include-special"
                            v-model="settings['user.password.generator.special']">
                     <span></span>
+
+                    <translate tag="label" for="setting-setup-encryption" say="Set up Encryption" v-if="!hasEncryption"/>
+                    <input type="button" id="setting-setup-encryption" value="Enable" @click="runWizard()" v-if="!hasEncryption">
+                    <settings-help text="Run the installation wizard to set up encryption for your passwords" v-if="!hasEncryption"/>
                 </section>
                 <section class="ui">
                     <translate tag="h1" say="User Interface"/>
@@ -248,10 +252,6 @@
                     <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
                     <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
                     <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
-
-                    <translate tag="label" for="setting-test-cse" say="Client Side Encryption"/>
-                    <input type="button" id="setting-test-cse" value="Enable" @click="toggleCSE($event)">
-                    <settings-help text="Use client side encryption for your password database"/>
                 </section>
             </div>
         </div>
@@ -266,8 +266,8 @@
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
     import SettingsManager from '@js/Manager/SettingsManager';
-    import EncryptionManager from '@js/Manager/EncryptionManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
+    import SUM from "@js/Manager/SetupManager";
 
     export default {
         components: {
@@ -276,11 +276,13 @@
             Translate
         },
         data() {
-            let advancedSettings = SettingsManager.get('client.settings.advanced');
+            let advancedSettings = SettingsManager.get('client.settings.advanced'),
+                hasEncryption    = API.hasEncryption;
 
             return {
                 settings: SettingsManager.getAll(),
                 advancedSettings,
+                hasEncryption,
                 advanced: advancedSettings ? '1':'0',
                 nightly : process.env.NIGHTLY_FEATURES,
                 noSave  : false,
@@ -306,26 +308,13 @@
                 }
                 $event.target.removeAttribute('disabled');
             },
-            toggleCSE() {
-                Messages.form(
-                    {
-                        password: {type: 'password', minlength: 12, required: true, button: 'toggle'},
-                        confirm: {type: 'password', minlength: 12, required: true, button: 'toggle', validator: (a, b) => {return a === b['password'];}},
-                        encrypt: {type: 'checkbox', checked: true, label: 'Encrypt existing'},
-                        save: {type: 'checkbox', checked: true, label: 'Save password'}
-                    },
-                    'Master Password',
-                    'Please choose a master password for your passwords.')
-                    .then((data) => {
-                        EncryptionManager.install(data.password, data.save, data.encrypt)
-                                         .then(() => {Messages.info('Encryption activated')})
-                                         .catch((e) => { console.log(e); Messages.info('Activating encryption failed')});
-                    });
+            runWizard() {
+                SUM.runEncryptionSetup();
             },
             resetSettingsAction() {
                 Messages.confirm(
                     'This will reset all settings to their defaults. Do you want to continue?',
-                                 'Reset all settings'
+                    'Reset all settings'
                 )
                     .then(() => { this.resetSettings(); });
             },
