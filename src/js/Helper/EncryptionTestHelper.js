@@ -15,7 +15,7 @@ class EncryptionTestHelper {
      *
      */
     async initTests() {
-        if(await DeferredActivationService.check('encryptiontests')) return;
+        if(await DeferredActivationService.check('encryption-tests')) return;
 
         if(!API.isAuthorized) {
             console.log('Encryption tests scheduled after login');

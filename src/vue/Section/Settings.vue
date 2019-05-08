@@ -51,9 +51,18 @@
                            v-model="settings['user.password.generator.special']">
                     <span></span>
 
-                    <translate tag="label" for="setting-setup-encryption" say="Set up Encryption" v-if="!hasEncryption"/>
-                    <input type="button" id="setting-setup-encryption" value="Enable" @click="runWizard()" v-if="!hasEncryption">
-                    <settings-help text="Run the installation wizard to set up encryption for your passwords" v-if="!hasEncryption"/>
+                    <translate tag="label"
+                               for="setting-setup-encryption"
+                               say="Client Side Encryption"
+                               v-if="encryptionFeature"/>
+                    <translate tag="input"
+                               type="button"
+                               id="setting-setup-encryption"
+                               :localized-value="encryptionLabel"
+                               @click="runWizard()"
+                               v-if="encryptionFeature"/>
+                    <settings-help text="Run the installation wizard to set up encryption for your passwords"
+                                   v-if="encryptionFeature"/>
                 </section>
                 <section class="ui">
                     <translate tag="h1" say="User Interface"/>
@@ -268,6 +277,7 @@
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
     import SUM from "@js/Manager/SetupManager";
+    import DAS from "@js/Service/DeferredActivationService";
 
     export default {
         components: {
@@ -276,11 +286,16 @@
             Translate
         },
         data() {
-            let advancedSettings = SettingsManager.get('client.settings.advanced'),
-                hasEncryption    = API.hasEncryption;
+            let advancedSettings  = SettingsManager.get('client.settings.advanced'),
+                encryptionFeature = false,
+                hasEncryption     = API.hasEncryption;
+
+            DAS.check('client-side-encryption')
+                .then((d) => { this.encryptionFeature = d});
 
             return {
                 settings: SettingsManager.getAll(),
+                encryptionFeature,
                 advancedSettings,
                 hasEncryption,
                 advanced: advancedSettings ? '1':'0',
@@ -288,6 +303,11 @@
                 noSave  : false,
                 locked  : false
             };
+        },
+        computed  : {
+            encryptionLabel() {
+                return this.hasEncryption ? 'Manage':'Enable'
+            }
         },
         methods   : {
             saveSettings() {
@@ -303,20 +323,23 @@
                 $event.target.setAttribute('disabled', 'disabled');
                 let result = await EncryptionTestHelper.runTests();
                 if(result) {
-                    Messages.info('The client side encryption test completed successfully on this browser',
-                                  'Test successful');
+                    Messages.info(
+                        'The client side encryption test completed successfully on this browser',
+                        'Test successful'
+                    );
                 }
                 $event.target.removeAttribute('disabled');
             },
             runWizard() {
-                SUM.runEncryptionSetup();
+                if(!this.hasEncryption) {
+                    SUM.runEncryptionSetup();
+                }
             },
             resetSettingsAction() {
                 Messages.confirm(
                     'This will reset all settings to their defaults. Do you want to continue?',
                     'Reset all settings'
-                )
-                    .then(() => { this.resetSettings(); });
+                ).then(() => { this.resetSettings(); });
             },
             async resetSettings() {
                 this.locked = true;
