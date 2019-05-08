@@ -46,7 +46,7 @@ export default class Localisation {
         let url = OC.filePath('passwords', 'l10n', `${section}/${language}.json`);
 
         try {
-            let response = fetch(new Request(url));
+            let response = await fetch(new Request(url));
 
             if (response.ok) {
                 let data = await response.json();
