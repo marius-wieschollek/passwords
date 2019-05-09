@@ -228,14 +228,25 @@ class EnvironmentService {
     protected function loadUserInformation(?string $userId): bool {
         if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
             $loginName = $_SERVER['PHP_AUTH_USER'];
-            $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
-            $loginUser = $this->userManager->get($token->getUID());
+            if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
+                $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
+                $loginUser = $this->userManager->get($token->getUID());
 
-            if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
-                $this->user      = $loginUser;
-                $this->userLogin = $loginName;
+                if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
+                    $this->user      = $loginUser;
+                    $this->userLogin = $loginName;
 
-                return true;
+                    return true;
+                }
+            } else {
+                /** @var false|\OCP\IUser $loginUser */
+                $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
+                if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
+                    $this->user      = $loginUser;
+                    $this->userLogin = $loginName;
+
+                    return true;
+                }
             }
         } else if($userId === null) {
             return false;
@@ -268,7 +279,7 @@ class EnvironmentService {
             }
         }
 
-        throw new \Exception("Login {$loginUser} does not belong to {$userId}");
+        throw new \Exception("Unable to verify user login for {$userId}");
     }
 
 }
