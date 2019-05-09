@@ -93,6 +93,8 @@ class ServiceApiController extends AbstractApiController {
      * @param WebsitePreviewService $previewService
      * @param EnvironmentService    $environmentService
      * @param DeleteUserDataHelper  $deleteUserDataHelper
+     *
+     * @throws \Exception
      */
     public function __construct(
         IRequest $request,
@@ -212,7 +214,6 @@ class ServiceApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \OCP\PreConditionNotMetException
      * @throws \Exception
      */
     public function resetUserAccount(string $password): JSONResponse {
