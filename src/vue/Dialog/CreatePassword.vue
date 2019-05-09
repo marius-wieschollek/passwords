@@ -167,7 +167,7 @@
                     });
             },
             updateCustomFields($event) {
-                this.password.customFields = $event;
+                this.password.customFields = Utility.arrayValues($event);
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);

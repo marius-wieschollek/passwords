@@ -239,4 +239,21 @@ export default class Utility {
 
         return clone;
     }
+
+    /**
+     * Creates a new array with just the values and no empty keys
+     *
+     * @param array
+     * @returns {Array}
+     */
+    static arrayValues(array) {
+        let output = [],
+            iterator = array.values();
+
+        for (let value of iterator) {
+            if(value !== undefined) output.push(value);
+        }
+
+        return output;
+    }
 }

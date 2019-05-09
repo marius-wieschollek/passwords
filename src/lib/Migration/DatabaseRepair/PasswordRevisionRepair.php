@@ -74,7 +74,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         parent::__construct($modelMapper, $revisionService);
         $this->folderMapper      = $folderMapper;
         $this->encryptionService = $encryption;
-        $this->convertFields     = $config->getAppValue('migration/customFields') === '2019.4.2' || $environment->isCliMode();
+        $this->convertFields     = $config->getAppValue('migration/customFields') !== '2019.5.1' || $environment->isCliMode();
         $this->config            = $config;
     }
 
@@ -85,7 +85,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function run(IOutput $output): void {
         parent::run($output);
-        $this->config->setAppValue('migration/customFields', '2019.4.2');
+        $this->config->setAppValue('migration/customFields', '2019.5.1');
     }
 
     /**
@@ -109,6 +109,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         }
 
         if($this->convertCustomFields($revision)) $fixed = true;
+        if($this->cleanCustomFields($revision)) $fixed = true;
 
         if($revision->getStatus() === 1 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
             $revision->setStatus(0);
@@ -130,6 +131,8 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     }
 
     /**
+     * Convert legacy custom fields structure
+     *
      * @param PasswordRevision $revision
      *
      * @return bool
@@ -154,6 +157,33 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
             if(substr($label, 0, 1) === '_') $data['type'] = 'data';
 
             $newFields[] = ['label' => $label, 'type' => $data['type'], 'value' => $data['value']];
+        }
+
+        $revision->setCustomFields(json_encode($newFields));
+
+        return true;
+    }
+
+    /**
+     * Remove messy data from custom fields
+     *
+     * @param PasswordRevision $revision
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function cleanCustomFields(PasswordRevision $revision): bool {
+        if(!$this->convertFields || $revision->getCseType() !== 'none') return false;
+
+        $this->encryptionService->decrypt($revision);
+        $customFields = $revision->getCustomFields();
+
+        if(strpos($customFields, '"blank":') === false && strpos($customFields, '"id":') === false) return false;
+
+        $oldFields = json_decode($customFields, true);
+        $newFields = [];
+        foreach($oldFields as $label => $data) {
+            $newFields[] = ['label' => $data['label'], 'type' => $data['type'], 'value' => $data['value']];
         }
 
         $revision->setCustomFields(json_encode($newFields));

@@ -49,7 +49,7 @@ export class ExportManager {
      */
     static async exportJson(model, options) {
 
-        let json = {version: 2, encrypted: false};
+        let json = {version: 3, encrypted: false};
         if(model.indexOf('passwords') !== -1) {
             json.passwords = await ExportManager._getPasswordsForExport(options.includeShared);
         }
