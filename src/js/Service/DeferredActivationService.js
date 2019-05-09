@@ -19,8 +19,11 @@ class DeferredActivationService {
     async check(id) {
         let features = await this.getFeatures();
 
-        if(features.hasOwnProperty(id)) return features[id] === true;
-        return false;
+        if(features.hasOwnProperty(id)) {
+            return process.env.NIGHTLY_FEATURES || features[id] === true;
+        }
+
+        return process.env.NIGHTLY_FEATURES;
     }
 
     /**
@@ -37,16 +40,38 @@ class DeferredActivationService {
             let response = await fetch(new Request(url, {credentials:'omit', referrerPolicy: 'no-referrer'}));
             if (response.ok) {
                 let data = await response.json();
-
-                if (data.hasOwnProperty(this._app) && data[this._app].hasOwnProperty(this._version)) {
-                    this._features = data[this._app][this._version];
-                }
+                this._processFeatures(data);
             }
         } catch (e) {
             console.error(e);
         }
 
         return this._features;
+    }
+
+    /**
+     *
+     * @param json
+     * @private
+     */
+    _processFeatures(json) {
+        if (!json.hasOwnProperty(this._app)) return;
+        let mainVersion = this._version.substr(0, this._version.lastIndexOf('.')),
+            appFeatures = json[this._app];
+
+        if (appFeatures.hasOwnProperty(mainVersion)) {
+            this._features = appFeatures[mainVersion];
+        }
+
+        if (appFeatures.hasOwnProperty(this._version)) {
+            let versionFeatures = appFeatures[this._version];
+
+            for(let key in versionFeatures) {
+                if(versionFeatures.hasOwnProperty(key)) {
+                    this._features[key] = versionFeatures[key];
+                }
+            }
+        }
     }
 }
 

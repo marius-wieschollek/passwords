@@ -16,7 +16,7 @@ module.exports = (env) => {
             {
                 'process.env': {
                     NODE_ENV        : production ? '"production"':'"development"',
-                    APP_VERSION     : `"config.version"`,
+                    APP_VERSION     : `"${config.version}"`,
                     APP_NAME        : '"webapp"',
                     NIGHTLY_FEATURES: !!(env && env.features)
                 }
