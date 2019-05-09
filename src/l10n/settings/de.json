@@ -1,7 +1,6 @@
 {
     "translations": [
         {
-            "Settings"                    : "Einstellungen",
             "Password Rules"              : "Regeln für Passwörter",
             "Mark duplicates"             : "Markiere Duplikate",
             "Maximum age in days"         : "Maximales Alter in Tagen",
@@ -79,7 +78,8 @@
             "Notifies you when a background operation fails"                             : "Benachrichtigt dich, wenn Hintergrundaufgaben fehlschlagen",
             "Reset all settings on this page to their defaults"                          : "Alle Einstellungen auf dieser Seite zurücksetzen",
             "This will reset all settings to their defaults. Do you want to continue?"   : "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchtest du fortfahren?",
-            "Start over and delete all configuration, passwords, folders and tags"       : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen"
+            "Start over and delete all configuration, passwords, folders and tags"       : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen",
+            "You have to wait {seconds} seconds before you can reset your account."      : "Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst."
         },
         {
             "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.": "Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen."

@@ -28,7 +28,12 @@ const SectionHelp = async () => {
 
 const SectionBackup = async () => {
     try {
-        return await import(/* webpackChunkName: "BackupSection" */ '@vue/Section/Backup');
+        let section      = import(/* webpackChunkName: "BackupSection" */ '@vue/Section/Backup'),
+            translations = Localisation.loadSection('backups');
+
+        await Promise.all([section, translations]);
+
+        return section;
     } catch(e) {
         handleChunkLoadingError(e, 'BackupSection');
     }
