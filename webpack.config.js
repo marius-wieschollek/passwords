@@ -68,7 +68,8 @@ module.exports = (env) => {
                 new CopyWebpackPlugin(
                     [
                         {from: `${__dirname}/src/l10n/*.js`, to: `${__dirname}/`, transform},
-                        {from: `${__dirname}/src/l10n/*.json`, to: `${__dirname}/`, transform: transformJson}
+                        {from: `${__dirname}/src/l10n/*.json`, to: `${__dirname}/`, transform: transformJson},
+                        {from: `${__dirname}/src/l10n/*/*.json`, to: `${__dirname}/`, transform: transformJson}
                     ]
                 ));
         }
