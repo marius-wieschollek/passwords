@@ -43,14 +43,35 @@
                     <input type="checkbox"
                            id="setting-include-numbers"
                            v-model="settings['user.password.generator.numbers']">
-                    <span></span>
+                    <settings-help text="Add numbers to generated passwords"/>
 
                     <translate tag="label" for="setting-include-special" say="Include special characters"/>
                     <input type="checkbox"
                            id="setting-include-special"
                            v-model="settings['user.password.generator.special']">
-                    <span></span>
+                    <settings-help text="Add special characters to generated passwords"/>
 
+
+                    <translate tag="h3" say="Login & Session"/>
+                    <translate tag="label" for="setting-login-2fa" say="Use 2FA when possible"/>
+                    <input type="checkbox" id="setting-login-2fa" v-model="settings['user.login.2fa']">
+                    <settings-help text="Require Two-Factor-Authentication if you have a 2FA service configured for your Nextcloud account"/>
+
+                    <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"/>
+                    <input type="checkbox" id="setting-include-keepalive" v-model="settings['client.session.keepalive']">
+                    <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled"/>
+
+                    <translate tag="label" for="setting-session-lifetime" say="End session after"/>
+                    <select id="setting-session-lifetime" v-model="settings['user.session.lifetime']">
+                        <translate tag="option" say="1 Minute" :value="60" />
+                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:5}" :value="300" />
+                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:10}" :value="600" />
+                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:30}" :value="1800" />
+                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:60}" :value="3600" />
+                    </select>
+                    <settings-help text="Specify the amount of time after a request before the session is cancelled"/>
+
+                    <translate tag="h3" say="Encryption"/>
                     <translate tag="label"
                                for="setting-setup-encryption"
                                say="Client Side Encryption"
