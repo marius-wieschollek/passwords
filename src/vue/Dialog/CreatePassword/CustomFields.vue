@@ -33,7 +33,7 @@
                 let fields = [];
 
                 for(let i = 0; i < this.fields.length; i++) {
-                    let field = this.fields[i];
+                    let field = Utility.cloneObject(this.fields[i]);
                     if(field.type === 'data' && !this.showHidden) continue;
 
                     field.id = i;
@@ -58,6 +58,9 @@
                 let customFields = Utility.cloneObject(this.fields);
                 customFields.splice($event.id, 1);
                 this.$emit('updated', customFields);
+            },
+            cloneFields() {
+
             }
         }
     };
