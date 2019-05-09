@@ -63,11 +63,11 @@
 
                     <translate tag="label" for="setting-session-lifetime" say="End session after"/>
                     <select id="setting-session-lifetime" v-model="settings['user.session.lifetime']">
-                        <translate tag="option" say="1 Minute" :value="60" />
-                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:5}" :value="300" />
-                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:10}" :value="600" />
-                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:30}" :value="1800" />
-                        <translate tag="option" say="{minutes} Minutes" :variables="{minutes:60}" :value="3600" />
+                        <translate tag="option" say="One minute" :value="60" />
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" :value="300" />
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:10}" :value="600" />
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" :value="1800" />
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" :value="3600" />
                     </select>
                     <settings-help text="Specify the amount of time after a request before the session is cancelled"/>
 

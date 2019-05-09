@@ -10,6 +10,7 @@ import SectionFolders from '@vue/Section/Folders';
 import SectionSecurity from '@vue/Section/Security';
 import SectionAuthorize from '@vue/Section/Authorize';
 import SectionFavorites from '@vue/Section/Favorites';
+import Localisation from "@/js/Classes/Localisation";
 
 function handleChunkLoadingError(e, module) {
     console.error(e);
@@ -35,7 +36,12 @@ const SectionBackup = async () => {
 
 const SectionSettings = async () => {
     try {
-        return await import(/* webpackChunkName: "SettingsSection" */ '@vue/Section/Settings');
+        let section      = import(/* webpackChunkName: "SettingsSection" */ '@vue/Section/Settings'),
+            translations = Localisation.loadSection('settings');
+
+        await Promise.all([section, translations]);
+
+        return section;
     } catch(e) {
         handleChunkLoadingError(e, 'SettingsSection');
     }
