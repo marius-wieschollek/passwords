@@ -8,7 +8,7 @@ Compile:
   stage: compiling
   script:
     - npm install
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:prod ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:nightly ; fi
   artifacts:
     paths:
