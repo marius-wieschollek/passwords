@@ -1,6 +1,9 @@
 ## [Unreleased]
+### Changed
+ - Compress language files and plain js
 ### Fixed
  - BigDB+Hibp database update not initiated
+ - Dirty data in custom fields
 
 ## 2019.5.0 - Feature release
 ### Added

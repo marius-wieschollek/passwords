@@ -32,6 +32,9 @@ The docker setup comes with two test users `max` and `erika` with the password `
 All users have a set of sample data installed.
 You can also download a [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json) from the wiki and can import it on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
+#### API Debugging
+We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/insomnia-workspace.json) for the free API debugging tool [Insomnia](https://insomnia.rest/).
+
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
 * `npm run start` - Start the docker server. Add :postgres or :ldap to include these services
