@@ -193,12 +193,6 @@
             ' and '                               : ' und ',
             'match'                               : 'passen zu',
             'matches'                             : 'passt zu',
-            'Browsers'                            : 'Browser',
-            'Official Firefox Client'             : 'Offizieller Firefox Client',
-            'Official Chrome Client'              : 'Offizieller Chrome Client',
-            'official'                            : 'offiziell',
-            'created by {author}'                 : 'erstellt von {author}',
-            'sources'                             : 'Quelltext',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
             'true'                                : 'ja',
@@ -208,22 +202,15 @@
         },
         helpTexts       = {
             'You have reached the maximum length of 4096 characters': 'Du hast die Maximallänge von 4096 Zeichern erreicht',
-            'We could not find anything for "{query}"'              : 'Wir konnten nichts zu "{query}" finden',
-            'This app uses an api which is no longer supported.'    : 'Diese App verwendet eine nicht mehr unterstützte API.'
+            'We could not find anything for "{query}"'              : 'Wir konnten nichts zu "{query}" finden'
         },
         longTexts       = {
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
-        },
-        appDescriptions = {
-            'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.'                                     : 'Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store kannst du auf alle deine Passwörter einfach von Firefox aus zugreifen und neue hinzufügen.',
-            'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.': 'Unsere offizielle Chrome-Erweiterung ermöglicht es dir, alle deine Passwörter über deinen Browser zu verwalten und ist für viele auf Chromium basierenden Browsern im Chrome Web Store verfügbar.',
-            'Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.'                              : 'Endlich eine moderne, schnelle und benutzerfreundliche App für den Zugriff und die Verwaltung deiner Passwörter von deinem Android-Gerät aus. Holen Sie dir von Google Play.',
-            'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.'              : 'Cloud Password Manager ist ein Passwortmanager, bei dem du die Kontrolle hast. Von deinem Android-Telefon aus kannst du auf die in deiner Nextcloud gespeicherten Passwörter zugreifen.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts, appDescriptions),
+        Object.assign(translations, helpTexts, longTexts),
         'nplurals=2; plural=(n != 1);'
     );
 }());

@@ -7,10 +7,10 @@ import SectionRecent from '@vue/Section/Recent';
 import SectionShared from '@vue/Section/Shared';
 import SectionSearch from '@vue/Section/Search';
 import SectionFolders from '@vue/Section/Folders';
+import Localisation from '@js/Classes/Localisation';
 import SectionSecurity from '@vue/Section/Security';
 import SectionAuthorize from '@vue/Section/Authorize';
 import SectionFavorites from '@vue/Section/Favorites';
-import Localisation from "@/js/Classes/Localisation";
 
 function handleChunkLoadingError(e, module) {
     console.error(e);
@@ -54,7 +54,12 @@ const SectionSettings = async () => {
 
 const SectionApps = async () => {
     try {
-        return await import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps');
+        let section      = import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps'),
+            translations = Localisation.loadSection('apps');
+
+        await Promise.all([section, translations]);
+
+        return section;
     } catch(e) {
         handleChunkLoadingError(e, 'AppsSection');
     }
