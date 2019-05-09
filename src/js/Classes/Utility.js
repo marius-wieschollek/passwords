@@ -241,7 +241,24 @@ export default class Utility {
     }
 
     /**
-     * Generates a full url to the nextcloud page
+     * Creates a new array with just the values and no empty keys
+     *
+     * @param array
+     * @returns {Array}
+     */
+    static arrayValues(array) {
+        let output = [],
+            iterator = array.values();
+
+        for (let value of iterator) {
+            if(value !== undefined) output.push(value);
+        }
+
+        return output;
+    }
+
+    /**
+     * Generates a full url to the Nextcloud page
      *
      * @param path
      * @param params

@@ -93,6 +93,8 @@ class ServiceApiController extends AbstractApiController {
      * @param WebsitePreviewService $previewService
      * @param EnvironmentService    $environmentService
      * @param DeleteUserDataHelper  $deleteUserDataHelper
+     *
+     * @throws \Exception
      */
     public function __construct(
         IRequest $request,

@@ -49,10 +49,11 @@ class BackupMigrationHelper {
 
         $this->validateBackup($version);
 
-        if($version < 101) $data = $this->upgrade100($data);
-        if($version < 102) $data = $this->upgrade101($data);
-        if($version < 103) $data = $this->upgrade102($data);
-        if($version < 104) $data = $this->upgrade103($data);
+        if($version < 101) $data = $this->to101($data);
+        if($version < 102) $data = $this->to102($data);
+        if($version < 103) $data = $this->to103($data);
+        if($version < 104) $data = $this->to104($data);
+        if($version < 105) $data = $this->to105($data);
 
         $data['version'] = RestoreBackupHelper::BACKUP_VERSION;
 
@@ -60,11 +61,13 @@ class BackupMigrationHelper {
     }
 
     /**
+     * Rename password <-> tag relation section
+     *
      * @param array $data
      *
      * @return array
      */
-    protected function upgrade100(array $data): array {
+    protected function to101(array $data): array {
         $data['passwordTagRelations'] = $data['password_tag_relations'];
         unset($data['password_tag_relations']);
 
@@ -72,11 +75,13 @@ class BackupMigrationHelper {
     }
 
     /**
+     * Remove legacy fields
+     *
      * @param array $data
      *
      * @return array
      */
-    protected function upgrade101(array $data): array {
+    protected function to102(array $data): array {
         foreach(['passwords', 'folders', 'tags'] as $type) {
             foreach($data[ $type ] as &$object) {
                 foreach($object['revisions'] as &$revision) {
@@ -90,12 +95,14 @@ class BackupMigrationHelper {
     }
 
     /**
+     * Convert old custom fields data structure
+     *
      * @param array $database
      *
      * @return array
      * @throws \OCP\PreConditionNotMetException
      */
-    protected function upgrade102(array $database): array {
+    protected function to103(array $database): array {
         $this->encryption->setKeys($database['keys']);
 
         foreach($database['passwords'] as &$object) {
@@ -123,11 +130,43 @@ class BackupMigrationHelper {
     }
 
     /**
+     * Remove messy values from custom fields
+     *
+     * @param array $database
+     *
+     * @return array
+     * @throws \OCP\PreConditionNotMetException
+     */
+    protected function to104(array $database): array {
+        $this->encryption->setKeys($database['keys']);
+
+        foreach($database['passwords'] as &$object) {
+            foreach($object['revisions'] as $key => $revision) {
+                $revision = $this->encryption->decryptArray($revision);
+                if($revision['customFields'] === '[]') continue;
+
+                $oldFields = json_decode($revision['customFields'], true);
+                $newFields = [];
+                foreach($oldFields as $label => $data) {
+                    $newFields[] = ['label' => $data['label'], 'type' => $data['type'], 'value' => $data['value']];
+                }
+                $revision['customFields'] = json_encode($newFields);
+
+                $object['revisions'][ $key ] = $this->encryption->encryptArray($revision);
+            }
+        }
+
+        return $database;
+    }
+
+    /**
+     * Add blank cse key values
+     *
      * @param array $data
      *
      * @return array
      */
-    protected function upgrade103(array $data): array {
+    protected function to105(array $data): array {
         foreach(['passwords', 'folders', 'tags'] as $type) {
             foreach($data[ $type ] as &$object) {
                 foreach($object['revisions'] as &$revision) {
