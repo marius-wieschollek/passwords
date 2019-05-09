@@ -1,5 +1,6 @@
 let webpack            = require('webpack'),
     config             = require('./package.json'),
+    UglifyJS           = require('uglify-es'),
     UglifyJSPlugin     = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin  = require('copy-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
@@ -11,37 +12,48 @@ module.exports = (env) => {
     let production = !!(env && env.production);
     console.log('Production: ', production);
 
-    let plugins = [
-        new webpack.DefinePlugin(
-            {
-                'process.env': {
-                    NODE_ENV        : production ? '"production"':'"development"',
-                    APP_VERSION     : `"${config.version}"`,
-                    APP_NAME        : '"webapp"',
-                    NIGHTLY_FEATURES: !!(env && env.features)
+    let transform = (content) => {
+            let result = UglifyJS.minify(content.toString('utf8'));
+            if(result.error) console.error(result.error);
+            if(result.warnings) console.warn(result.warnings);
+            return result.code;
+        },
+        plugins   = [
+            new webpack.DefinePlugin(
+                {
+                    'process.env': {
+                        NODE_ENV        : production ? '"production"':'"development"',
+                        APP_VERSION     : `"${config.version}"`,
+                        APP_NAME        : '"webapp"',
+                        NIGHTLY_FEATURES: !!(env && env.features)
+                    }
                 }
-            }
-        ),
-        new ExtractTextPlugin({filename: 'css/[name].css', allChunks: true}),
-        new CopyWebpackPlugin(
-            [
-                {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`},
-                {from: `${__dirname}/src/js/Helper/https-debug.js`, to: `${__dirname}/src/js/Static/https-debug.js`},
-                {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`}
-            ]
-        ),
-        new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity}),
-        new CleanWebpackPlugin(['src/css', 'src/js/Static'])
-    ];
+            ),
+            new ExtractTextPlugin({filename: 'css/[name].css', allChunks: true}),
+            new CopyWebpackPlugin(
+                [
+                    {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`, transform},
+                    {from: `${__dirname}/src/js/Helper/https-debug.js`, to: `${__dirname}/src/js/Static/https-debug.js`, transform},
+                    {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`, transform}
+                ]
+            ),
+            new webpack.optimize.CommonsChunkPlugin({name: 'common', minChunks: Infinity}),
+            new CleanWebpackPlugin(['src/css', 'src/js/Static'])
+        ];
 
-    if (production) {
+    if(production) {
+        let transformJson = (content) => {
+            let data = JSON.parse(content.toString('utf8'));
+            return JSON.stringify(data);
+        };
+
         plugins.push(new OptimizeCSSPlugin({cssProcessorOptions: {safe: true}}));
         plugins.push(
             new UglifyJSPlugin(
                 {
                     uglifyOptions: {
                         beautify: false,
-                        ecma    : 6,
+                        ecma    : 8,
                         compress: true,
                         comments: false,
                         ascii   : true
@@ -51,6 +63,15 @@ module.exports = (env) => {
                 }
             )
         );
+        if(!!(env && env.compress)) {
+            plugins.push(
+                new CopyWebpackPlugin(
+                    [
+                        {from: `${__dirname}/src/l10n/*.js`, to: `${__dirname}/`, transform},
+                        {from: `${__dirname}/src/l10n/*.json`, to: `${__dirname}/`, transform: transformJson}
+                    ]
+                ));
+        }
         plugins.push(new ProgressBarPlugin());
     }
 
