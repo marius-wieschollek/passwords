@@ -251,6 +251,7 @@
             padding   : 0.75rem;
             border    : none;
             font-size : 1rem;
+            height    : auto;
 
             &[type=text],
             &[type=password] {
