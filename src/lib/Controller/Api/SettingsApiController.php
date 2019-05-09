@@ -42,6 +42,7 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function get(): JSONResponse {
         $params = $this->getParameterArray();
@@ -62,7 +63,6 @@ class SettingsApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws PreConditionNotMetException
      */
     public function set(): JSONResponse {
         $params = $this->getParameterArray();
@@ -84,6 +84,7 @@ class SettingsApiController extends AbstractApiController {
      * @param array|null $scopes
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
@@ -97,7 +98,7 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws PreConditionNotMetException
+     * @throws \Exception
      */
     public function reset(): JSONResponse {
         $params = $this->getParameterArray();

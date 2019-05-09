@@ -9,6 +9,7 @@ namespace OCA\Passwords\Middleware;
 
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\SessionApiController;
+use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\SessionService;
@@ -119,6 +120,10 @@ class ApiSessionMiddleware extends Middleware {
         }
 
         if($controller instanceof ServiceApiController && in_array($method, ['getAvatar', 'getFavicon', 'getPreview'])) {
+            return false;
+        }
+
+        if($controller instanceof SettingsApiController && in_array($method, ['get', 'list'])) {
             return false;
         }
 
