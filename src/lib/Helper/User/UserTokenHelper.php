@@ -47,6 +47,13 @@ class UserTokenHelper {
     protected $providers = null;
 
     /**
+     * List of 2fa providers that are known to work
+     *
+     * @var array
+     */
+    protected $enabledProviders = ['totp', 'twofactor_nextcloud_notification', 'admin'];
+
+    /**
      * UserTokenHelper constructor.
      *
      * @param Manager            $twoFactorManager
@@ -80,7 +87,7 @@ class UserTokenHelper {
                 $allProviders = $this->twoFactorManager->getProviderSet($this->user)->getPrimaryProviders();
 
                 foreach($allProviders as $provider) {
-                    if($provider->getId() === 'totp' || $provider->getId() === 'twofactor_nextcloud_notification' || strpos($provider->getId(), 'gateway') !== false) {
+                    if(in_array($provider->getId(), $this->enabledProviders) || strpos($provider->getId(), 'gateway') !== false) {
                         $this->providers[ $provider->getId() ] = $provider;
                     }
                 }
