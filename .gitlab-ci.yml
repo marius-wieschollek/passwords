@@ -13,6 +13,7 @@ Compile:
   artifacts:
     paths:
       - ./src/js/Static/*
+      - ./src/l10n/*
       - ./src/css/*
 
 Assemble:
