@@ -87,7 +87,7 @@ abstract class AbstractObjectHelper {
 
         foreach($filter as $key => $value) {
             $property = $revision->getProperty($key);
-            if(!is_array($value) && $property != $value || !$this->valueMatchesAdvancedFilter($value, $property)) {
+            if(!is_array($value) && $property != $value || is_array($value) && !$this->valueMatchesAdvancedFilter($value, $property)) {
                 return false;
             }
         }
@@ -130,8 +130,8 @@ abstract class AbstractObjectHelper {
      *
      * @return bool
      */
-    protected function valueMatchesAdvancedFilter($value, $property): bool {
-        list($operator, $value) = $value;
+    protected function valueMatchesAdvancedFilter(array $filter, $property): bool {
+        list($operator, $value) = $filter;
         if(($operator === self::OPERATOR_EQUALS && $property != $value) ||
            ($operator === self::OPERATOR_NOT_EQUALS && $property == $value) ||
            ($operator === self::OPERATOR_LESS && $property >= $value) ||
