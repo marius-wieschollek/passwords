@@ -154,20 +154,20 @@ class FolderApiController extends AbstractObjectApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $id
+     * @param string      $id
+     * @param string|null $revision
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
-    public function delete(string $id): JSONResponse {
+    public function delete(string $id, ?string $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) {
             throw new ApiException('Can not edit base folder', 422);
         }
 
-        return parent::delete($id);
+        return parent::delete($id, $revision);
     }
 
     /**

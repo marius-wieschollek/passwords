@@ -149,8 +149,8 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $id
-     * @param null   $revision
+     * @param string      $id
+     * @param null|string $revision
      *
      * @return JSONResponse
      * @throws ApiException
@@ -158,7 +158,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      * @throws \Exception
      */
-    public function delete(string $id, $revision = null): JSONResponse {
+    public function delete(string $id, ?string $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         /** @var AbstractRevisionEntity $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
