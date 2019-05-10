@@ -36,7 +36,7 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class RestoreBackupHelper {
 
-    const BACKUP_VERSION = 104;
+    const BACKUP_VERSION = 105;
 
     /**
      * @var ConfigurationService
