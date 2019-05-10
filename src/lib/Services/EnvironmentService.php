@@ -30,6 +30,11 @@ class EnvironmentService {
     const TYPE_CLI         = 'cli';
     const TYPE_MAINTENANCE = 'maintenance';
 
+    const LOGIN_NONE    = 'none';
+    const LOGIN_BASIC   = 'basic';
+    const LOGIN_BEARER  = 'bearer';
+    const LOGIN_SESSION = 'session';
+
     /**
      * @var IConfig
      */
@@ -61,6 +66,11 @@ class EnvironmentService {
     protected $user;
 
     /**
+     * @var IUser
+     */
+    protected $realUser;
+
+    /**
      * @var null|string
      */
     protected $userLogin;
@@ -79,6 +89,11 @@ class EnvironmentService {
      * @var string
      */
     protected $runType = self::TYPE_REQUEST;
+
+    /**
+     * @var string
+     */
+    protected $loginType = self::LOGIN_NONE;
 
     /**
      * EnvironmentService constructor.
@@ -148,10 +163,24 @@ class EnvironmentService {
     }
 
     /**
+     * @return string
+     */
+    public function getLoginType(): string {
+        return $this->loginType;
+    }
+
+    /**
      * @return bool
      */
     public function isImpersonating(): bool {
         return $this->impersonating;
+    }
+
+    /*
+     * @return null|IUser
+     */
+    public function getRealUser(): ?IUser {
+        return $this->impersonating ? $this->realUser:$this->user;
     }
 
     /**
@@ -235,7 +264,6 @@ class EnvironmentService {
 
             if($type === 'Basic' && $this->loadUserFromBasicAuth($userId)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
-
         } else if($userId === null) {
             return false;
         } else {
@@ -252,7 +280,7 @@ class EnvironmentService {
      * @throws \OC\Authentication\Exceptions\ExpiredTokenException
      * @throws \OC\Authentication\Exceptions\InvalidTokenException
      */
-    protected function loadUserFromBasicAuth(string $userId): bool {
+    protected function loadUserFromBasicAuth(?string $userId): bool {
         if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
         if(!isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_PW'])) return false;
 
@@ -261,18 +289,20 @@ class EnvironmentService {
             $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
             $loginUser = $this->userManager->get($token->getUID());
 
-            if($loginUser !== null && $token->getLoginName() === $loginName && $loginUser->getUID() === $userId) {
+            if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
+                $this->loginType = self::LOGIN_BASIC;
 
                 return true;
             }
         } else {
             /** @var false|\OCP\IUser $loginUser */
             $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
-            if($loginUser !== false && $loginUser->getUID() === $userId) {
+            if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
+                $this->loginType = self::LOGIN_BASIC;
 
                 return true;
             }
@@ -283,7 +313,7 @@ class EnvironmentService {
 
     /**
      * @param string $userId
-     * @param string      $value
+     * @param string $value
      *
      * @return bool
      * @throws \OC\Authentication\Exceptions\ExpiredTokenException
@@ -298,6 +328,7 @@ class EnvironmentService {
         if($loginUser !== null && $loginUser->getUID() === $userId) {
             $this->user      = $loginUser;
             $this->userLogin = $token->getLoginName();
+            $this->loginType = self::LOGIN_BEARER;
 
             return true;
         }
@@ -320,14 +351,17 @@ class EnvironmentService {
                 if($uid === $userId) {
                     $this->user      = $user;
                     $this->userLogin = $sessionToken->getLoginName();
+                    $this->loginType = self::LOGIN_SESSION;
 
                     return true;
                 } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
-                    $iUser = $this->userManager->get($userId);
-                    if($iUser !== null) {
-                        $this->user          = $iUser;
+                    $user = $this->userManager->get($userId);
+                    if($user !== null) {
+                        $this->user          = $user;
                         $this->userLogin     = $userId;
+                        $this->loginType     = self::LOGIN_SESSION;
                         $this->impersonating = true;
+                        $this->realUser      = $this->userManager->get($uid);
                         $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
 
                         return true;
