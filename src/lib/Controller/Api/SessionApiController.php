@@ -124,7 +124,7 @@ class SessionApiController extends AbstractApiController {
     public function requestToken($provider): JSONResponse {
         list($result, $data) = $this->tokenHelper->triggerProvider($provider);
 
-        return new JSONResponse(['success' => $result, 'data' => $data], Http::STATUS_OK);
+        return new JSONResponse(['success' => $result, 'data' => $data], $result ? Http::STATUS_OK:Http::STATUS_BAD_REQUEST);
     }
 
     /**
