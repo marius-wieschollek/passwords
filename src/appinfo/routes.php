@@ -2,10 +2,6 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OCP\AppFramework\QueryException;
-
-$application = new Application();
-
 $routes = [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
     ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
@@ -92,22 +88,18 @@ $routes = [
 ];
 
 $resources = [];
-try {
-    if($application->getContainer()->query('AllConfig')->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
-        $resources = [
-            'legacy_category_api' => ['url' => '/api/0.1/categories'],
-            'legacy_password_api' => ['url' => '/api/0.1/passwords'],
-            'legacy_version_api'  => ['url' => '/api/0.1/version']
-        ];
-        $routes[]  = ['name' => 'legacy_version_api#preflighted_cors', 'url' => '/api/0.1/version/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
-        $routes[]  = ['name' => 'legacy_category_api#preflighted_cors', 'url' => '/api/1.0/category/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
-        $routes[]  = ['name' => 'legacy_password_api#preflighted_cors', 'url' => '/api/1.0/passwords/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
-    }
-} catch(QueryException $e) {
+if(\OC::$server->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+    $resources = [
+        'legacy_category_api' => ['url' => '/api/0.1/categories'],
+        'legacy_password_api' => ['url' => '/api/0.1/passwords'],
+        'legacy_version_api'  => ['url' => '/api/0.1/version']
+    ];
+    $routes[]  = ['name' => 'legacy_version_api#preflighted_cors', 'url' => '/api/0.1/version/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
+    $routes[]  = ['name' => 'legacy_category_api#preflighted_cors', 'url' => '/api/1.0/category/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
+    $routes[]  = ['name' => 'legacy_password_api#preflighted_cors', 'url' => '/api/1.0/passwords/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
 }
 
-/** @var $this \OC\Route\CachingRouter */
-$application->registerRoutes($this, [
+return [
     'resources' => $resources,
     'routes'    => $routes
-]);
+];
