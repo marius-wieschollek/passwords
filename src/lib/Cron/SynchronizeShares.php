@@ -425,7 +425,7 @@ class SynchronizeShares extends AbstractCronJob {
     protected function notifyUsers(): void {
         foreach($this->notifications['created'] as $receiver => $owners) {
             try {
-                $this->notificationService->sendShareCreateNotification($receiver, $owners);
+                $this->notificationService->sendShareCreatedNotification($receiver, $owners);
                 $this->mailService->sendShareCreateMail($receiver, $owners);
             } catch(ApiException $e) {
                 $this->logger->logException($e);

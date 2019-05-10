@@ -88,8 +88,8 @@
         "A password was not shared with %1$s because it already is"                                 : "Ein Passwort wurde nicht mit %1$s geteilt, da dies bereits von einer anderen Person getan wurde.",
         "You have an insecure password"                                                             : "Sie haben ein unsicheres Passwort",
         "You have insecure passwords"                                                               : "Sie haben unsichere Passwörter",
-        "One of your passwords is no longer secure."                                                 : "Eines Ihrer Passwörter ist nicht mehr sicher.",
-        "Some of your passwords are no longer secure."                                               : "Einige Ihrer Passwörter sind nicht mehr sicher.",
+        "One of your passwords is no longer secure."                                                : "Eines Ihrer Passwörter ist nicht mehr sicher.",
+        "Some of your passwords are no longer secure."                                              : "Einige Ihrer Passwörter sind nicht mehr sicher.",
         "Passwords regularly checks if your passwords have been compromised by a data breach."      : "Passwörter prüft regelmäßig ob Ihre Passwörter durch einen Datendiebstahl kompromittiert wurden.",
         "This security check has found that one of your passwords is insecure."                     : "Dieser Sicherheitstest hat festgestellt, dass eines Ihrer Passwörter unsicher ist.",
         "This security check has found that %s of your passwords are insecure."                     : "Dieser Sicherheitstest hat festgestellt, dass %s Ihrer Passwörter unsicher sind.",
@@ -118,6 +118,11 @@
         "Open the passwords app to see your shared passwords."                                      : "Öffnen Sie Passwörter App um Ihre geteilten Passwörter zu sehen.",
         "Sharing a password that has been shared with you can sometimes create a loop."             : "Passwörter zu teilen, die mit Ihnen geteilt wurden, kann manchmal eine rekursive Schleife erzeugen.",
         "To prevent this, these passwords will not be shared."                                      : "Um dies zu verhindern werden diese Passwörter nicht geteilt.",
+        "Administrative access to your account"                                                     : "Administrativer Zugriff auf Ihr Konto",
+        "%s tried to log into your account on %s."                                                  : "%s hat am %s versucht, sich in Ihr Konto anzumelden.",
+        "%s logged into your account on %s."                                                        : "%s sich am %s in Ihrem Konto angemeldet.",
+        "Since you use a master password, this does not mean that access to your data was granted." : "Da Sie ein Master-Passwort verwenden, bedeutet dies nicht, dass Zugriff auf Ihre Daten gewährt wurde.",
+        "To prevent unwanted access to your data, you should set up a master password."             : "Um unerwünschten Zugriff auf Ihre Daten zu verhindern, sollten Sie ein Master-Passwort einrichten.",
         "Deleted User (%s)"                                                                         : "Gelöschter Benutzer (%s)"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

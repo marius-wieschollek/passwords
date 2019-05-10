@@ -11,7 +11,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
-use OCA\Passwords\Services\SessionService;
+use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\SettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\StrictContentSecurityPolicy;
@@ -47,6 +47,11 @@ class PageController extends Controller {
     protected $environment;
 
     /**
+     * @var NotificationService
+     */
+    protected $notifications;
+
+    /**
      * PageController constructor.
      *
      * @param IRequest             $request
@@ -54,19 +59,22 @@ class PageController extends Controller {
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
+     * @param NotificationService  $notifications
      */
     public function __construct(
         IRequest $request,
         SettingsService $settings,
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
-        EnvironmentService $environment
+        EnvironmentService $environment,
+        NotificationService $notifications
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->config      = $config;
-        $this->tokenHelper = $tokenHelper;
-        $this->settings    = $settings;
-        $this->environment = $environment;
+        $this->config        = $config;
+        $this->tokenHelper   = $tokenHelper;
+        $this->settings      = $settings;
+        $this->environment   = $environment;
+        $this->notifications = $notifications;
     }
 
     /**
@@ -80,6 +88,7 @@ class PageController extends Controller {
 
         if($isSecure) {
             $this->addHeaders();
+            $this->checkImpersonation();
         } else {
             $this->tokenHelper->destroyWebUiToken();
         }
@@ -106,6 +115,7 @@ class PageController extends Controller {
 
     /**
      *
+     * @throws \Exception
      */
     protected function addHeaders(): void {
         $userSettings = json_encode($this->settings->list());
@@ -136,5 +146,17 @@ class PageController extends Controller {
         $csp->allowInlineStyle();
 
         return $csp;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function checkImpersonation(): void {
+        if($this->environment->isImpersonating()) {
+            $this->notifications->sendImpersonationNotification(
+                $this->environment->getUserId(),
+                $this->environment->getRealUser()->getUID()
+            );
+        }
     }
 }
