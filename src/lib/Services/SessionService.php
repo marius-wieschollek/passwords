@@ -12,6 +12,7 @@ use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IRequest;
 use OCP\ISession;
 
@@ -290,6 +291,8 @@ class SessionService {
 
                     return;
                 }
+            } catch(DoesNotExistException $e) {
+                $this->logger->warning('Attempt to access expired session');
             } catch(\Throwable $e) {
                 $this->logger->logException($e);
             }
@@ -304,9 +307,7 @@ class SessionService {
      */
     protected function encryptSessionData(array $data, string $property = 'data'): void {
         try {
-            $value = $this->encryption->encrypt(
-                json_encode($data)
-            );
+            $value = $this->encryption->encrypt(json_encode($data));
             $this->session->setProperty($property, $value);
         } catch(\Exception $e) {
             $this->session->setProperty($property, '[]');
