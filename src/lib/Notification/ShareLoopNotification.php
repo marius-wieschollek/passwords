@@ -18,7 +18,7 @@ use OCP\Notification\INotification;
 class ShareLoopNotification extends AbstractNotification {
 
     const NAME = 'share_loop';
-    const TYPE = 'shares';
+    const TYPE = 'errors';
 
     /**
      * Send the notification
