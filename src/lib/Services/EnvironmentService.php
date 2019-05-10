@@ -214,72 +214,130 @@ class EnvironmentService {
         if($this->runType !== self::TYPE_REQUEST) {
             $this->appMode = self::MODE_GLOBAL;
             $this->logger->info('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode');
-        } else if($this->loadUserInformation($userId)) {
+        } else if($this->loadUserInformation($userId, $request)) {
             $this->appMode = self::MODE_USER;
         }
     }
 
     /**
      * @param null|string $userId
+     * @param IRequest    $request
      *
      * @return bool
+     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
+     * @throws \OC\Authentication\Exceptions\InvalidTokenException
      * @throws \Exception
      */
-    protected function loadUserInformation(?string $userId): bool {
-        if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
-            $loginName = $_SERVER['PHP_AUTH_USER'];
-            if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
-                $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
-                $loginUser = $this->userManager->get($token->getUID());
+    protected function loadUserInformation(?string $userId, IRequest $request): bool {
+        $authHeader = $request->getHeader('Authorization');
+        if($authHeader !== '') {
+            list($type, $value) = explode(' ', $authHeader, 2);
 
-                if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
-                    $this->user      = $loginUser;
-                    $this->userLogin = $loginName;
+            if($type === 'Basic' && $this->loadUserFromBasicAuth($userId)) return true;
+            if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
 
-                    return true;
-                }
-            } else {
-                /** @var false|\OCP\IUser $loginUser */
-                $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
-                if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
-                    $this->user      = $loginUser;
-                    $this->userLogin = $loginName;
-
-                    return true;
-                }
-            }
         } else if($userId === null) {
             return false;
         } else {
-            try {
-                $sessionToken = $this->tokenProvider->getToken($this->session->getId());
-
-                $uid  = $sessionToken->getUID();
-                $user = $this->userManager->get($uid);
-                if($user !== null) {
-                    if($uid === $userId) {
-                        $this->user      = $user;
-                        $this->userLogin = $sessionToken->getLoginName();
-
-                        return true;
-                    } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
-                        $iUser = $this->userManager->get($userId);
-                        if($iUser !== null) {
-                            $this->user          = $iUser;
-                            $this->userLogin     = $userId;
-                            $this->impersonating = true;
-                            $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
-
-                            return true;
-                        }
-                    }
-                }
-            } catch(\Throwable $e) {
-                $this->logger->logException($e);
-            }
+            if($this->loadUserFromSession($userId)) return true;
         }
 
         throw new \Exception("Unable to verify user login for {$userId}");
     }
 
+    /**
+     * @param string $userId
+     *
+     * @return bool
+     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
+     * @throws \OC\Authentication\Exceptions\InvalidTokenException
+     */
+    protected function loadUserFromBasicAuth(string $userId): bool {
+        if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
+        if(!isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_PW'])) return false;
+
+        $loginName = $_SERVER['PHP_AUTH_USER'];
+        if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
+            $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
+            $loginUser = $this->userManager->get($token->getUID());
+
+            if($loginUser !== null && $token->getLoginName() === $loginName && $loginUser->getUID() === $userId) {
+                $this->user      = $loginUser;
+                $this->userLogin = $loginName;
+
+                return true;
+            }
+        } else {
+            /** @var false|\OCP\IUser $loginUser */
+            $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
+            if($loginUser !== false && $loginUser->getUID() === $userId) {
+                $this->user      = $loginUser;
+                $this->userLogin = $loginName;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $userId
+     * @param string      $value
+     *
+     * @return bool
+     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
+     * @throws \OC\Authentication\Exceptions\InvalidTokenException
+     */
+    protected function loadUserFromBearerAuth(string $userId, string $value): bool {
+        if(empty($value)) return false;
+
+        $token     = $this->tokenProvider->getToken($value);
+        $loginUser = $this->userManager->get($token->getUID());
+
+        if($loginUser !== null && $loginUser->getUID() === $userId) {
+            $this->user      = $loginUser;
+            $this->userLogin = $token->getLoginName();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param null|string $userId
+     *
+     * @return bool
+     */
+    protected function loadUserFromSession(?string $userId): bool {
+        try {
+            $sessionToken = $this->tokenProvider->getToken($this->session->getId());
+
+            $uid  = $sessionToken->getUID();
+            $user = $this->userManager->get($uid);
+            if($user !== null) {
+                if($uid === $userId) {
+                    $this->user      = $user;
+                    $this->userLogin = $sessionToken->getLoginName();
+
+                    return true;
+                } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
+                    $iUser = $this->userManager->get($userId);
+                    if($iUser !== null) {
+                        $this->user          = $iUser;
+                        $this->userLogin     = $userId;
+                        $this->impersonating = true;
+                        $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
+
+                        return true;
+                    }
+                }
+            }
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
 }
