@@ -184,10 +184,11 @@ export default class SimpleApi {
      * Deletes the existing password with the given id
      *
      * @param id
+     * @param revision
      * @returns {Promise}
      */
-    deletePassword(id) {
-        return this._createRequest('password.delete', {id}, 'DELETE');
+    deletePassword(id, revision) {
+        return this._createRequest('password.delete', {id, revision}, 'DELETE');
     }
 
     /**
@@ -262,10 +263,11 @@ export default class SimpleApi {
      * Deletes the existing folder with the given id
      *
      * @param id
+     * @param revision
      * @returns {Promise}
      */
-    deleteFolder(id) {
-        return this._createRequest('folder.delete', {id}, 'DELETE');
+    deleteFolder(id, revision) {
+        return this._createRequest('folder.delete', {id, revision}, 'DELETE');
     }
 
     /**
@@ -340,10 +342,11 @@ export default class SimpleApi {
      * Deletes the existing tag with the given id
      *
      * @param id
+     * @param revision
      * @returns {Promise}
      */
-    deleteTag(id) {
-        return this._createRequest('tag.delete', {id}, 'DELETE');
+    deleteTag(id, revision) {
+        return this._createRequest('tag.delete', {id, revision}, 'DELETE');
     }
 
     /**

@@ -72,6 +72,12 @@ class FolderManager {
         });
     }
 
+    /**
+     *
+     * @param folder
+     * @param parent
+     * @returns {Promise<any>}
+     */
     moveFolder(folder, parent) {
         return new Promise((resolve, reject) => {
             if(folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
@@ -127,7 +133,7 @@ class FolderManager {
     deleteFolder(folder, confirm = true) {
         return new Promise((resolve, reject) => {
             if(!confirm || !folder.trashed) {
-                API.deleteFolder(folder.id)
+                API.deleteFolder(folder.id, folder.revision)
                     .then((d) => {
                         folder.trashed = true;
                         folder.updated = new Date();
@@ -136,9 +142,16 @@ class FolderManager {
                         Messages.notification('Folder deleted');
                         resolve(folder);
                     })
-                    .catch(() => {
-                        Messages.notification('Deleting folder failed');
-                        reject(folder);
+                    .catch((e) => {
+                        if(e.id && e.id === 'f281915e'){
+                            folder.trashed = true;
+                            folder.updated = new Date();
+                            Events.fire('folder.deleted', folder);
+                            resolve(folder);
+                        } else {
+                            Messages.notification('Deleting folder failed');
+                            reject(folder);
+                        }
                     });
             } else {
                 Messages.confirm('Do you want to delete the folder', 'Delete folder')

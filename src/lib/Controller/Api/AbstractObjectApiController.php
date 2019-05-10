@@ -150,18 +150,24 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @param string $id
+     * @param null   $revision
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws ApiException
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
-    public function delete(string $id): JSONResponse {
+    public function delete(string $id, $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         /** @var AbstractRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
         if($oldRevision->isTrashed()) {
+            if($revision !== null && $revision !== $model->getRevision()){
+                throw new ApiException('Invalid revision id', 400);
+            }
+
             $this->modelService->delete($model);
 
             return $this->createJsonResponse(['id' => $model->getUuid()]);
