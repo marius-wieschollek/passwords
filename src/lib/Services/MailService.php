@@ -15,7 +15,6 @@ use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IUser;
 use OCP\L10N\IFactory;
-use OCP\Mail\IMailer;
 
 /**
  * Class MailService
@@ -23,11 +22,6 @@ use OCP\Mail\IMailer;
  * @package OCA\Passwords\Services
  */
 class MailService {
-
-    /**
-     * @var IMailer
-     */
-    protected $mailer;
 
     /**
      * @var LoggingService
@@ -67,7 +61,6 @@ class MailService {
     /**
      * MailService constructor.
      *
-     * @param IMailer          $mailer
      * @param IConfig          $config
      * @param IFactory         $l10NFactory
      * @param LoggingService   $logger
@@ -77,7 +70,6 @@ class MailService {
      * @param ShareCreatedMail $shareCreatedMail
      */
     public function __construct(
-        IMailer $mailer,
         IConfig $config,
         IFactory $l10NFactory,
         LoggingService $logger,
@@ -86,7 +78,6 @@ class MailService {
         BadPasswordMail $badPasswordMail,
         ShareCreatedMail $shareCreatedMail
     ) {
-        $this->mailer           = $mailer;
         $this->logger           = $logger;
         $this->config           = $config;
         $this->settings         = $settings;
@@ -123,9 +114,7 @@ class MailService {
 
         $localisation = $this->getLocalisation($userId);
 
-        $message = $mail->create($user, $localisation, ...$parameters);
-
-        $this->sendMail($message);
+        $mail->send($user, $localisation, ...$parameters);
     }
 
     /**
@@ -138,23 +127,6 @@ class MailService {
         $localisation = $this->l10NFactory->get(Application::APP_NAME, $lang);
 
         return $localisation;
-    }
-
-    /**
-     * @param $message
-     *
-     * @return bool
-     */
-    protected function sendMail($message): bool {
-        try {
-            $this->mailer->send($message);
-        } catch(\Exception $e) {
-            $this->logger->logException($e);
-
-            return false;
-        }
-
-        return true;
     }
 
     /**

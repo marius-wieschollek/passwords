@@ -145,12 +145,8 @@ class CheckPasswordsJob extends AbstractCronJob {
      */
     protected function notifyUsers(): void {
         foreach($this->badPasswords as $user => $count) {
-            try {
-                $this->notificationService->sendBadPasswordNotification($user, $count);
-                $this->mailService->sendBadPasswordMail($user, $count);
-            } catch(\Exception $e) {
-                $this->logger->logException($e);
-            }
+            $this->notificationService->sendBadPasswordNotification($user, $count);
+            $this->mailService->sendBadPasswordMail($user, $count);
         }
     }
 }

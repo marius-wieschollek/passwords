@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Notification;
 
-use OCA\Passwords\Services\SettingsService;
 use OCA\Passwords\Services\UserService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -23,6 +22,7 @@ use OCP\Notification\INotification;
 class ShareCreatedNotification extends AbstractNotification {
 
     const NAME = 'share_create';
+    const TYPE = 'shares';
 
     /**
      * @var UserService
@@ -32,21 +32,20 @@ class ShareCreatedNotification extends AbstractNotification {
     /**
      * ShareCreatedNotification constructor.
      *
-     * @param IFactory        $l10nFactory
-     * @param UserService     $userService
-     * @param SettingsService $settings
-     * @param IURLGenerator   $urlGenerator
-     * @param IManager        $notificationManager
+     * @param IFactory      $l10nFactory
+     * @param UserService   $userService
+     * @param IURLGenerator $urlGenerator
+     * @param IManager      $notificationManager
      */
     public function __construct(
         IFactory $l10nFactory,
         UserService $userService,
-        SettingsService $settings,
         IURLGenerator $urlGenerator,
         IManager $notificationManager
     ) {
         $this->userService = $userService;
-        parent::__construct($l10nFactory, $settings, $urlGenerator, $notificationManager);
+
+        parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
     }
 
     /**
@@ -54,12 +53,8 @@ class ShareCreatedNotification extends AbstractNotification {
      *
      * @param string $userId
      * @param array  $parameters
-     *
-     * @throws \Exception
      */
     public function send(string $userId, array $parameters = []): void {
-        if(!$this->settings->get('user.notification.shares', $userId)) return;
-
         $notification
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)

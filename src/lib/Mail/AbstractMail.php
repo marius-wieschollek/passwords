@@ -8,12 +8,12 @@
 namespace OCA\Passwords\Mail;
 
 use OC_Defaults;
+use OCA\Passwords\Services\LoggingService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Mail\IEMailTemplate;
 use OCP\Mail\IMailer;
-use OCP\Mail\IMessage;
 use OCP\Util;
 
 /**
@@ -32,9 +32,9 @@ abstract class AbstractMail {
     protected $mailer;
 
     /**
-     * @var IURLGenerator
+     * @var LoggingService
      */
-    protected $urlGenerator;
+    protected $logger;
 
     /**
      * @var OC_Defaults
@@ -42,32 +42,42 @@ abstract class AbstractMail {
     protected $defaults;
 
     /**
+     * @var IURLGenerator
+     */
+    protected $urlGenerator;
+
+    /**
      * AbstractMail constructor.
      *
-     * @param IMailer       $mailer
-     * @param OC_Defaults   $defaults
-     * @param IURLGenerator $urlGenerator
+     * @param IMailer        $mailer
+     * @param OC_Defaults    $defaults
+     * @param LoggingService $logger
+     * @param IURLGenerator  $urlGenerator
      */
     public function __construct(
         IMailer $mailer,
         OC_Defaults $defaults,
+        LoggingService $logger,
         IURLGenerator $urlGenerator
     ) {
         $this->mailer       = $mailer;
+        $this->logger       = $logger;
         $this->defaults     = $defaults;
         $this->urlGenerator = $urlGenerator;
     }
 
     /**
+     * Create and send the mail to the user
+     *
      * @param IUser $user
      * @param IL10N $localisation
      * @param mixed ...$parameters
-     *
-     * @return IMessage
      */
-    abstract function create(IUser $user, IL10N $localisation, ...$parameters): IMessage;
+    abstract function send(IUser $user, IL10N $localisation, ...$parameters): void;
 
     /**
+     * Create a new mail template
+     *
      * @return IEMailTemplate
      */
     protected function getTemplate() {
@@ -79,13 +89,13 @@ abstract class AbstractMail {
     }
 
     /**
+     * Send the mail
+     *
      * @param IUser          $user
      * @param string         $subject
      * @param IEMailTemplate $template
-     *
-     * @return IMessage
      */
-    protected function getMail(IUser $user, string $subject, IEMailTemplate $template): IMessage {
+    protected function sendMessage(IUser $user, string $subject, IEMailTemplate $template): void {
         $template->addFooter();
 
         $message = $this->mailer->createMessage();
@@ -95,6 +105,10 @@ abstract class AbstractMail {
         $message->setHtmlBody($template->renderHtml());
         $message->setPlainBody($template->renderText());
 
-        return $message;
+        try {
+            $this->mailer->send($message);
+        } catch(\Exception $e) {
+            $this->logger->logException($e);
+        }
     }
 }

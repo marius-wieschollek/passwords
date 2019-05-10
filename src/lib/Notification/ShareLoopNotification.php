@@ -18,18 +18,15 @@ use OCP\Notification\INotification;
 class ShareLoopNotification extends AbstractNotification {
 
     const NAME = 'share_loop';
+    const TYPE = 'shares';
 
     /**
      * Send the notification
      *
      * @param string $userId
      * @param array  $parameters
-     *
-     * @throws \Exception
      */
     public function send(string $userId, array $parameters = []): void {
-        if(!$this->settings->get('user.notification.errors', $userId)) return;
-
         $notification
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)

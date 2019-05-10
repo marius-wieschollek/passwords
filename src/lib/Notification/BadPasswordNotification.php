@@ -17,19 +17,16 @@ use OCP\Notification\INotification;
  */
 class BadPasswordNotification extends AbstractNotification {
 
-    const NAME   = 'bad_password';
+    const NAME = 'bad_password';
+    const TYPE = 'security';
 
     /**
      * Send the notification
      *
      * @param string $userId
      * @param array  $parameters
-     *
-     * @throws \Exception
      */
     public function send(string $userId, array $parameters = []): void {
-        if(!$this->settings->get('user.notification.security', $userId)) return;
-
         $parameters['count'] = isset($parameters['count']) && $parameters['count'] > 0 ? $parameters['count']:1;
 
         $notification

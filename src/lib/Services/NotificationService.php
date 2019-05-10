@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Notification\AbstractNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
 use OCA\Passwords\Notification\ShareCreatedNotification;
@@ -22,6 +23,11 @@ use OCP\Notification\INotifier;
  * @package OCA\Passwords\Notification
  */
 class NotificationService implements INotifier {
+
+    /**
+     * @var SettingsService
+     */
+    protected $settings;
 
     /**
      * @var IFactory
@@ -52,6 +58,7 @@ class NotificationService implements INotifier {
      * NotificationService constructor.
      *
      * @param IFactory                  $l10nFactory
+     * @param SettingsService           $settings
      * @param ShareLoopNotification     $shareLoopNotification
      * @param BadPasswordNotification   $badPasswordNotification
      * @param ShareCreatedNotification  $shareCreatedNotification
@@ -59,11 +66,13 @@ class NotificationService implements INotifier {
      */
     public function __construct(
         IFactory $l10nFactory,
+        SettingsService $settings,
         ShareLoopNotification $shareLoopNotification,
         BadPasswordNotification $badPasswordNotification,
         ShareCreatedNotification $shareCreatedNotification,
         ImpersonationNotification $impersonationNotification
     ) {
+        $this->settings                  = $settings;
         $this->l10NFactory               = $l10nFactory;
         $this->shareLoopNotification     = $shareLoopNotification;
         $this->badPasswordNotification   = $badPasswordNotification;
@@ -73,13 +82,14 @@ class NotificationService implements INotifier {
 
     /**
      * @param string $userId
-     * @param int    $passwords
+     * @param int    $passwordCount
      */
-    public function sendBadPasswordNotification(string $userId, int $passwords): void {
-        try {
-            $this->badPasswordNotification->send($userId, ['count' => $passwords]);
-        } catch(\Exception $e) {
-        }
+    public function sendBadPasswordNotification(string $userId, int $passwordCount): void {
+        $this->sendNotification(
+            $this->badPasswordNotification,
+            $userId,
+            ['count' => $passwordCount]
+        );
     }
 
     /**
@@ -87,10 +97,11 @@ class NotificationService implements INotifier {
      * @param array  $owners
      */
     public function sendShareCreatedNotification(string $receiverId, array $owners): void {
-        try {
-            $this->shareCreatedNotification->send($receiverId, ['owners' => $owners]);
-        } catch(\Exception $e) {
-        }
+        $this->sendNotification(
+            $this->shareCreatedNotification,
+            $receiverId,
+            ['owners' => $owners]
+        );
     }
 
     /**
@@ -98,20 +109,34 @@ class NotificationService implements INotifier {
      * @param int    $passwords
      */
     public function sendShareLoopNotification(string $userId, int $passwords): void {
-        try {
-            $this->shareLoopNotification->send($userId, ['passwords' => $passwords]);
-        } catch(\Exception $e) {
-        }
+        $this->sendNotification(
+            $this->shareLoopNotification,
+            $userId,
+            ['passwords' => $passwords]
+        );
     }
 
     /**
      * @param string $userId
      * @param string $impersonatorId
-     *
-     * @throws \Exception
      */
-    public function sendImpersonationNotification(string $userId, string $impersonatorId) {
-        $this->impersonationNotification->send($userId, ['impersonator' => $impersonatorId]);
+    public function sendImpersonationNotification(string $userId, string $impersonatorId): void {
+        $this->sendNotification(
+            $this->impersonationNotification,
+            $userId,
+            ['impersonator' => $impersonatorId]
+        );
+    }
+
+    /**
+     * @param AbstractNotification $notification
+     * @param string               $userId
+     * @param array                $parameters
+     */
+    protected function sendNotification(AbstractNotification $notification, string $userId, array $parameters): void {
+        if($this->isNotificationEnabled($userId, $notification::TYPE)) {
+            $notification->send($userId, $parameters);
+        }
     }
 
     /**
@@ -141,5 +166,19 @@ class NotificationService implements INotifier {
         }
 
         return $notification;
+    }
+
+    /**
+     * @param string $userId
+     * @param string $type
+     *
+     * @return bool
+     */
+    protected function isNotificationEnabled(string $userId, string $type): bool {
+        try {
+            return $this->settings->get('user.notification.'.$type, $userId) === true;
+        } catch(\Exception $e) {
+            return false;
+        }
     }
 }

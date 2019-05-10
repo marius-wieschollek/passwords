@@ -9,7 +9,6 @@ namespace OCA\Passwords\Mail;
 
 use OCP\IL10N;
 use OCP\IUser;
-use OCP\Mail\IMessage;
 
 /**
  * Class BadPasswordMail
@@ -25,10 +24,8 @@ class BadPasswordMail extends AbstractMail {
      * @param IUser $user
      * @param IL10N $localisation
      * @param mixed ...$parameters
-     *
-     * @return IMessage
      */
-    function create(IUser $user, IL10N $localisation, ...$parameters): IMessage {
+    function send(IUser $user, IL10N $localisation, ...$parameters): void {
         list($passwords) = $parameters;
 
         $template = $this->getTemplate();
@@ -48,7 +45,7 @@ class BadPasswordMail extends AbstractMail {
 
         $subject = $this->getSubject($localisation, $passwords);
 
-        return $this->getMail($user, $subject, $template);
+        $this->sendMessage($user, $subject, $template);
     }
 
     /**

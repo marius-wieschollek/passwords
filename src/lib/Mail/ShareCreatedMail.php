@@ -8,12 +8,12 @@
 namespace OCA\Passwords\Mail;
 
 use OC_Defaults;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\UserService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Mail\IMailer;
-use OCP\Mail\IMessage;
 
 /**
  * Class ShareCreatedMail
@@ -33,29 +33,29 @@ class ShareCreatedMail extends AbstractMail {
     /**
      * ShareCreatedMail constructor.
      *
-     * @param IMailer       $mailer
-     * @param OC_Defaults   $defaults
-     * @param UserService   $userService
-     * @param IURLGenerator $urlGenerator
+     * @param IMailer        $mailer
+     * @param OC_Defaults    $defaults
+     * @param LoggingService $logger
+     * @param UserService    $userService
+     * @param IURLGenerator  $urlGenerator
      */
     public function __construct(
         IMailer $mailer,
         OC_Defaults $defaults,
+        LoggingService $logger,
         UserService $userService,
         IURLGenerator $urlGenerator
     ) {
         $this->userService = $userService;
-        parent::__construct($mailer, $defaults, $urlGenerator);
+        parent::__construct($mailer, $defaults, $logger, $urlGenerator);
     }
 
     /**
      * @param IUser $user
      * @param IL10N $localisation
      * @param mixed ...$parameters
-     *
-     * @return IMessage
      */
-    function create(IUser $user, IL10N $localisation, ...$parameters): IMessage {
+    function send(IUser $user, IL10N $localisation, ...$parameters): void {
         list($owners) = $parameters;
         list($passwordCount, $body) = $this->getBody($localisation, $owners);
         $title = $this->getTitle($localisation, $passwordCount);
@@ -69,7 +69,7 @@ class ShareCreatedMail extends AbstractMail {
             $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/0'
         );
 
-        return $this->getMail($user, $title, $template);
+        $this->sendMessage($user, $title, $template);
     }
 
     /**

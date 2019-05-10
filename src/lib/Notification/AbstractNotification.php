@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Notification;
 
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Services\SettingsService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
@@ -23,16 +22,12 @@ use OCP\Notification\INotification;
 abstract class AbstractNotification {
 
     const NAME = self::NAME;
+    const TYPE = self::TYPE;
 
     /**
      * @var IFactory
      */
     protected $l10nFactory;
-
-    /**
-     * @var SettingsService
-     */
-    protected $settings;
 
     /**
      * @var IURLGenerator
@@ -47,18 +42,15 @@ abstract class AbstractNotification {
     /**
      * AbstractNotification constructor.
      *
-     * @param IFactory        $l10nFactory
-     * @param SettingsService $settings
-     * @param IURLGenerator   $urlGenerator
-     * @param IManager        $notificationManager
+     * @param IFactory      $l10nFactory
+     * @param IURLGenerator $urlGenerator
+     * @param IManager      $notificationManager
      */
     public function __construct(
         IFactory $l10nFactory,
-        SettingsService $settings,
         IURLGenerator $urlGenerator,
         IManager $notificationManager
     ) {
-        $this->settings            = $settings;
         $this->l10nFactory         = $l10nFactory;
         $this->urlGenerator        = $urlGenerator;
         $this->notificationManager = $notificationManager;
