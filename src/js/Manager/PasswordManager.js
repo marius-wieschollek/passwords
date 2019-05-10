@@ -98,6 +98,12 @@ class PasswordManager {
         });
     }
 
+    /**
+     *
+     * @param password
+     * @param folder
+     * @returns {Promise<any>}
+     */
     movePassword(password, folder) {
         return new Promise((resolve, reject) => {
             if(password.id === folder || password.folder === folder) {
@@ -152,7 +158,7 @@ class PasswordManager {
     deletePassword(password, confirm = true) {
         return new Promise((resolve, reject) => {
             if(!confirm || !password.trashed) {
-                API.deletePassword(password.id)
+                API.deletePassword(password.id, password.revision)
                     .then((d) => {
                         password.trashed = true;
                         password.updated = new Date();
@@ -161,9 +167,16 @@ class PasswordManager {
                         Messages.notification('Password deleted');
                         resolve(password);
                     })
-                    .catch(() => {
-                        Messages.notification('Deleting password failed');
-                        reject(password);
+                    .catch((e) => {
+                        if(e.id && e.id === 'f281915e'){
+                            password.trashed = true;
+                            password.updated = new Date();
+                            Events.fire('password.deleted', password);
+                            resolve(password);
+                        } else {
+                            Messages.notification('Deleting password failed');
+                            reject(password);
+                        }
                     });
             } else {
                 Messages.confirm('Do you want to delete the password', 'Delete password')

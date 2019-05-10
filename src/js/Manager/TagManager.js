@@ -67,6 +67,11 @@ class TagManager {
         });
     }
 
+    /**
+     *
+     * @param tag
+     * @returns {Promise<any>}
+     */
     editTag(tag) {
         let form = {
             label: {
@@ -134,7 +139,7 @@ class TagManager {
     deleteTag(tag, confirm = true) {
         return new Promise((resolve, reject) => {
             if(!confirm || !tag.trashed) {
-                API.deleteTag(tag.id)
+                API.deleteTag(tag.id, tag.revision)
                     .then((d) => {
                         tag.trashed = true;
                         tag.updated = new Date();
@@ -143,9 +148,16 @@ class TagManager {
                         Messages.notification('Tag deleted');
                         resolve(tag);
                     })
-                    .catch(() => {
-                        Messages.notification('Deleting tag failed');
-                        reject(tag);
+                    .catch((e) => {
+                        if(e.id && e.id === 'f281915e'){
+                            tag.trashed = true;
+                            tag.updated = new Date();
+                            Events.fire('tag.deleted', tag);
+                            resolve(tag);
+                        } else {
+                            Messages.notification('Deleting tag failed');
+                            reject(tag);
+                        }
                     });
             } else {
                 Messages.confirm('Do you want to delete the tag', 'Delete tag')
