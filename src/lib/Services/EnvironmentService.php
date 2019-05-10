@@ -76,6 +76,11 @@ class EnvironmentService {
     protected $userLogin;
 
     /**
+     * @var null|string
+     */
+    protected $client = 'Unknown Client';
+
+    /**
      * @var bool
      */
     protected $impersonating = false;
@@ -183,6 +188,13 @@ class EnvironmentService {
         return $this->impersonating ? $this->realUser:$this->user;
     }
 
+    /*
+     * @return string
+     */
+    public function getClient(): string {
+        return $this->client;
+    }
+
     /**
      * @param IRequest $request
      */
@@ -191,10 +203,13 @@ class EnvironmentService {
 
         if($this->isCronJob($request)) {
             $this->runType = self::TYPE_CRON;
+            $this->client  = 'System Background Job';
         } else if($this->config->getSystemValue('maintenance', false)) {
             $this->runType = self::TYPE_MAINTENANCE;
+            $this->client  = 'System Upgrade';
         } else if($this->isCliMode($request)) {
             $this->runType = self::TYPE_CLI;
+            $this->client  = 'Server CLI';
         }
     }
 
@@ -262,9 +277,11 @@ class EnvironmentService {
         if($authHeader !== '') {
             list($type, $value) = explode(' ', $authHeader, 2);
 
-            if($type === 'Basic' && $this->loadUserFromBasicAuth($userId)) return true;
+            if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
         } else if($userId === null) {
+            $this->client = 'Public Access';
+
             return false;
         } else {
             if($this->loadUserFromSession($userId)) return true;
@@ -274,13 +291,14 @@ class EnvironmentService {
     }
 
     /**
-     * @param string $userId
+     * @param string   $userId
+     * @param IRequest $request
      *
      * @return bool
      * @throws \OC\Authentication\Exceptions\ExpiredTokenException
      * @throws \OC\Authentication\Exceptions\InvalidTokenException
      */
-    protected function loadUserFromBasicAuth(?string $userId): bool {
+    protected function loadUserFromBasicAuth(?string $userId, IRequest $request): bool {
         if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
         if(!isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_PW'])) return false;
 
@@ -292,6 +310,7 @@ class EnvironmentService {
             if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
+                $this->client    = $token->getName();
                 $this->loginType = self::LOGIN_BASIC;
 
                 return true;
@@ -300,8 +319,11 @@ class EnvironmentService {
             /** @var false|\OCP\IUser $loginUser */
             $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
             if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
+                $client = trim($request->getHeader('USER_AGENT'));
+
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
+                $this->client    = empty($client) ? 'Unknown Client':$client;
                 $this->loginType = self::LOGIN_BASIC;
 
                 return true;
@@ -328,6 +350,7 @@ class EnvironmentService {
         if($loginUser !== null && $loginUser->getUID() === $userId) {
             $this->user      = $loginUser;
             $this->userLogin = $token->getLoginName();
+            $this->client    = $token->getName();
             $this->loginType = self::LOGIN_BEARER;
 
             return true;
@@ -351,6 +374,7 @@ class EnvironmentService {
                 if($uid === $userId) {
                     $this->user      = $user;
                     $this->userLogin = $sessionToken->getLoginName();
+                    $this->client    = $sessionToken->getName();
                     $this->loginType = self::LOGIN_SESSION;
 
                     return true;
@@ -359,6 +383,7 @@ class EnvironmentService {
                     if($user !== null) {
                         $this->user          = $user;
                         $this->userLogin     = $userId;
+                        $this->client        = ucfirst($uid).' via Impersonate';
                         $this->loginType     = self::LOGIN_SESSION;
                         $this->impersonating = true;
                         $this->realUser      = $this->userManager->get($uid);
