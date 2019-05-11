@@ -169,6 +169,7 @@ abstract class AbstractRevisionService extends AbstractService {
         $clone = parent::cloneModel($original, $overwrites);
         $clone->_setDecrypted($original->_isDecrypted());
         $clone->setUuid($this->uuidHelper->generateUuid());
+        $clone->setClient($this->environment->getClient());
 
         return $clone;
     }

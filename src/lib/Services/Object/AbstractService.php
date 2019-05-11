@@ -31,6 +31,16 @@ abstract class AbstractService {
     protected $hookManager;
 
     /**
+     * @var UuidHelper
+     */
+    protected $uuidHelper;
+
+    /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
      * @var string
      */
     protected $class;
@@ -39,11 +49,6 @@ abstract class AbstractService {
      * @var AbstractMapper
      */
     protected $mapper;
-
-    /**
-     * @var UuidHelper
-     */
-    protected $uuidHelper;
 
     /**
      * AbstractService constructor.
@@ -58,6 +63,7 @@ abstract class AbstractService {
         EnvironmentService $environment
     ) {
         $this->userId      = $environment->getUserId();
+        $this->environment = $environment;
         $this->hookManager = $hookManager;
         $this->uuidHelper  = $uuidHelper;
     }

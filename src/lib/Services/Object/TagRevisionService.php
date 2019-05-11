@@ -119,13 +119,14 @@ class TagRevisionService extends AbstractRevisionService {
         $revision->setModel($model);
         $revision->setCseKey($cseKey);
         $revision->setCseType($cseType);
-        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);
         $revision->setLabel($label);
         $revision->setColor($color);
         $revision->setEdited($edited);
         $revision->setFavorite($favorite);
+        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
+        $revision->setClient($this->environment->getClient());
 
         return $revision;
     }

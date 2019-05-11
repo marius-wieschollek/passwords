@@ -96,6 +96,7 @@ class FolderRevisionService extends AbstractRevisionService {
             false
         );
         $model->setUuid(self::BASE_REVISION_UUID);
+        $model->setClient(EnvironmentService::CLIENT_SYSTEM);
         $model->_setDecrypted(true);
 
         return $model;
@@ -215,6 +216,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->setTrashed($trashed);
         $revision->setEdited($edited);
         $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
+        $revision->setClient($this->environment->getClient());
 
         return $revision;
     }
