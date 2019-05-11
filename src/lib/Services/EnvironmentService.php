@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Services;
 
 use OC\Authentication\Token\IProvider;
+use OC\Authentication\Token\IToken;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;
@@ -30,10 +31,31 @@ class EnvironmentService {
     const TYPE_CLI         = 'cli';
     const TYPE_MAINTENANCE = 'maintenance';
 
-    const LOGIN_NONE    = 'none';
-    const LOGIN_BASIC   = 'basic';
-    const LOGIN_BEARER  = 'bearer';
-    const LOGIN_SESSION = 'session';
+    const LOGIN_NONE     = 'none';
+    const LOGIN_TOKEN    = 'token';
+    const LOGIN_PASSWORD = 'password';
+    const LOGIN_SESSION  = 'session';
+
+    const CLIENT_MAINTENANCE = 'CLIENT::MAINTENANCE';
+    const CLIENT_UNKNOWN     = 'CLIENT::UNKNOWN';
+    const CLIENT_SYSTEM      = 'CLIENT::SYSTEM';
+    const CLIENT_PUBLIC      = 'CLIENT::PUBLIC';
+    const CLIENT_CRON        = 'CLIENT::CRON';
+    const CLIENT_CLI         = 'CLIENT::CLI';
+
+    /**
+     * @var array
+     */
+    protected static $protectedClients
+        = [
+            self::CLIENT_MAINTENANCE,
+            self::CLIENT_CLI,
+            self::CLIENT_CRON,
+            self::CLIENT_PUBLIC,
+            self::CLIENT_SYSTEM,
+            self::CLIENT_UNKNOWN,
+            self::CLIENT_CRON,
+        ];
 
     /**
      * @var IConfig
@@ -78,7 +100,7 @@ class EnvironmentService {
     /**
      * @var null|string
      */
-    protected $client = 'Unknown Client';
+    protected $client = self::CLIENT_UNKNOWN;
 
     /**
      * @var bool
@@ -203,13 +225,13 @@ class EnvironmentService {
 
         if($this->isCronJob($request)) {
             $this->runType = self::TYPE_CRON;
-            $this->client  = 'System Background Job';
+            $this->client  = self::CLIENT_CRON;
         } else if($this->config->getSystemValue('maintenance', false)) {
             $this->runType = self::TYPE_MAINTENANCE;
-            $this->client  = 'System Upgrade';
+            $this->client  = self::CLIENT_MAINTENANCE;
         } else if($this->isCliMode($request)) {
             $this->runType = self::TYPE_CLI;
-            $this->client  = 'Server CLI';
+            $this->client  = self::CLIENT_CLI;
         }
     }
 
@@ -280,7 +302,7 @@ class EnvironmentService {
             if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
         } else if($userId === null) {
-            $this->client = 'Public Access';
+            $this->client = self::CLIENT_PUBLIC;
 
             return false;
         } else {
@@ -310,8 +332,8 @@ class EnvironmentService {
             if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
-                $this->client    = $token->getName();
-                $this->loginType = self::LOGIN_BASIC;
+                $this->client    = $this->getClientFromToken($token);
+                $this->loginType = self::LOGIN_TOKEN;
 
                 return true;
             }
@@ -319,12 +341,10 @@ class EnvironmentService {
             /** @var false|\OCP\IUser $loginUser */
             $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
             if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
-                $client = trim($request->getHeader('USER_AGENT'));
-
                 $this->user      = $loginUser;
                 $this->userLogin = $loginName;
-                $this->client    = empty($client) ? 'Unknown Client':$client;
-                $this->loginType = self::LOGIN_BASIC;
+                $this->client    = $this->getClientFromRequest($request, $loginName);
+                $this->loginType = self::LOGIN_PASSWORD;
 
                 return true;
             }
@@ -350,8 +370,8 @@ class EnvironmentService {
         if($loginUser !== null && $loginUser->getUID() === $userId) {
             $this->user      = $loginUser;
             $this->userLogin = $token->getLoginName();
-            $this->client    = $token->getName();
-            $this->loginType = self::LOGIN_BEARER;
+            $this->client    = $this->getClientFromToken($token);
+            $this->loginType = self::LOGIN_TOKEN;
 
             return true;
         }
@@ -374,7 +394,7 @@ class EnvironmentService {
                 if($uid === $userId) {
                     $this->user      = $user;
                     $this->userLogin = $sessionToken->getLoginName();
-                    $this->client    = $sessionToken->getName();
+                    $this->client    = $this->getClientFromToken($sessionToken);
                     $this->loginType = self::LOGIN_SESSION;
 
                     return true;
@@ -398,5 +418,39 @@ class EnvironmentService {
         }
 
         return false;
+    }
+
+    /**
+     * @param IRequest $request
+     * @param string   $loginName
+     *
+     * @return string
+     */
+    protected function getClientFromRequest(IRequest $request, string $loginName): string {
+        $client = trim($request->getHeader('USER_AGENT'));
+
+        if(empty($client) ||
+           in_array($client, self::$protectedClients) ||
+           substr($client, 0, 17) === 'Passwords Session') {
+            return $loginName.' via '.$request->getRemoteAddress();
+        }
+
+        if(strlen($client) > 256) return substr($client, 0, 256);
+
+        return $client;
+    }
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+    protected function getClientFromToken(IToken $token): string {
+        $client = trim($token->getName());
+
+        if(empty($client) || in_array($client, self::$protectedClients)) return $token->getUID().' via Token';
+        if(strlen($client) > 256) return substr($client, 0, 256);
+
+        return $client;
     }
 }
