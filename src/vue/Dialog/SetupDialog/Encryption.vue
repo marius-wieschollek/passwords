@@ -288,7 +288,7 @@
                 }
 
                 .advanced {
-                    padding : 0 5.5rem;
+                    padding : 0 5.25rem;
 
                     input {
                         min-height : auto;
