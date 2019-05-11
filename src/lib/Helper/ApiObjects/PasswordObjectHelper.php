@@ -156,7 +156,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
             'hidden'       => $revision->isHidden(),
             'trashed'      => $revision->isTrashed(),
             'favorite'     => $revision->isFavorite(),
-            'editable'     => $password->isEditable()
+            'editable'     => $password->isEditable(),
+            'client'       => $revision->getClient()
         ];
     }
 
@@ -194,6 +195,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
                 'hidden'       => $revision->isHidden(),
                 'trashed'      => $revision->isTrashed(),
                 'favorite'     => $revision->isFavorite(),
+                'client'       => $revision->getClient()
             ];
 
             $object['revisions'][] = $current;
@@ -273,7 +275,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         foreach($shares as $share) {
             $object['shares'][] = $objectHelper->getApiObject($share);
 
-            usort($object['shares'], function ($a, $b) {
+            usort($object['shares'], function($a, $b) {
                 return $a['receiver'] > $b['receiver'] ? 1:-1;
             });
         }

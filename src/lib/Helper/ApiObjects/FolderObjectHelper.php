@@ -134,7 +134,8 @@ class FolderObjectHelper extends AbstractObjectHelper {
             'sseType'  => $revision->getSseType(),
             'hidden'   => $revision->isHidden(),
             'trashed'  => $revision->isTrashed(),
-            'favorite' => $revision->isFavorite()
+            'favorite' => $revision->isFavorite(),
+            'client'   => $revision->getClient()
         ];
     }
 
@@ -163,7 +164,8 @@ class FolderObjectHelper extends AbstractObjectHelper {
                 'sseType'  => $revision->getSseType(),
                 'hidden'   => $revision->isHidden(),
                 'trashed'  => $revision->isTrashed(),
-                'favorite' => $revision->isFavorite()
+                'favorite' => $revision->isFavorite(),
+                'client'   => $revision->getClient()
             ];
 
             $object['revisions'][] = $current;
