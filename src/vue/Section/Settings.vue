@@ -58,32 +58,47 @@
                     <settings-help text="Require Two-Factor-Authentication if you have a 2FA service configured for your Nextcloud account"/>
 
                     <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"/>
-                    <input type="checkbox" id="setting-include-keepalive" v-model="settings['client.session.keepalive']">
+                    <input type="checkbox"
+                           id="setting-include-keepalive"
+                           v-model="settings['client.session.keepalive']">
                     <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled"/>
 
                     <translate tag="label" for="setting-session-lifetime" say="End session after"/>
                     <select id="setting-session-lifetime" v-model="settings['user.session.lifetime']">
-                        <translate tag="option" say="One minute" :value="60" />
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" :value="300" />
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:10}" :value="600" />
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" :value="1800" />
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" :value="3600" />
+                        <translate tag="option" say="One minute" :value="60"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" :value="300"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:10}" :value="600"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" :value="1800"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" :value="3600"/>
                     </select>
                     <settings-help text="Specify the amount of time after a request before the session is cancelled"/>
 
                     <translate tag="h3" say="Encryption"/>
                     <translate tag="label"
-                               for="setting-setup-encryption"
+                               for="setting-encryption-setup"
                                say="Client Side Encryption"
-                               v-if="encryptionFeature"/>
+                               v-if="!hasEncryption && encryptionFeature"/>
                     <translate tag="input"
                                type="button"
-                               id="setting-setup-encryption"
-                               :localized-value="encryptionLabel"
+                               id="setting-encryption-setup"
+                               localized-value="Enable"
                                @click="runWizard()"
-                               v-if="encryptionFeature"/>
+                               v-if="!hasEncryption && encryptionFeature"/>
                     <settings-help text="Run the installation wizard to set up encryption for your passwords"
-                                   v-if="encryptionFeature"/>
+                                   v-if="!hasEncryption && encryptionFeature"/>
+
+                    <translate tag="label"
+                               for="setting-encryption-update"
+                               say="Client Side Encryption"
+                               v-if="hasEncryption && encryptionFeature"/>
+                    <translate tag="input"
+                               type="button"
+                               id="setting-encryption-update"
+                               localized-value="Change Password"
+                               @click="changeCsePassword()"
+                               v-if="hasEncryption && encryptionFeature"/>
+                    <settings-help text="Change the encryption password"
+                                   v-if="hasEncryption && encryptionFeature"/>
                 </section>
                 <section class="ui">
                     <translate tag="h1" say="User Interface"/>
@@ -298,6 +313,7 @@
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
     import SUM from "@js/Manager/SetupManager";
+    import EncryptionManager from "@js/Manager/EncryptionManager";
     import DAS from "@js/Service/DeferredActivationService";
 
     export default {
@@ -325,11 +341,6 @@
                 locked  : false
             };
         },
-        computed  : {
-            encryptionLabel() {
-                return this.hasEncryption ? 'Manage':'Enable'
-            }
-        },
         methods   : {
             saveSettings() {
                 if(this.noSave) return;
@@ -353,7 +364,15 @@
             },
             runWizard() {
                 if(!this.hasEncryption) {
-                    SUM.runEncryptionSetup();
+                    SUM.runEncryptionSetup()
+                        .then(() => {
+                            this.hasEncryption = API.hasEncryption;
+                        });
+                }
+            },
+            changeCsePassword() {
+                if(this.hasEncryption) {
+                    EncryptionManager.updateGui();
                 }
             },
             resetSettingsAction() {

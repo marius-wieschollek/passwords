@@ -4,7 +4,12 @@
         <div v-for="field in getFields" class="field" :class="{large: field.button !== null}">
             <translate tag="label" :for="field.id" :say="field.label"/>
             <input v-bind="field.attributes" v-model="fields[field.name]">
-            <translate tag="a" v-if="field.button" :icon="field.button.icon" class="button" :title="field.button.title" @click="executeButtonAction(field, $event)"/>
+            <translate tag="a"
+                       v-if="field.button"
+                       :icon="field.button.icon"
+                       class="button"
+                       :title="field.button.title"
+                       @click="executeButtonAction(field, $event)"/>
         </div>
         <input type="submit">
     </form>
@@ -58,7 +63,23 @@
 
                     if(minlength && !pattern) pattern = `.{${minlength},}`;
 
-                    fields.push({name, label, button, attributes: {name, value, type, id, title, placeholder, required, checked, maxlength, pattern}});
+                    fields.push({
+                                    name,
+                                    label,
+                                    button,
+                                    attributes: {
+                                        name,
+                                        value,
+                                        type,
+                                        id,
+                                        title,
+                                        placeholder,
+                                        required,
+                                        checked,
+                                        maxlength,
+                                        pattern
+                                    }
+                                });
                 }
 
                 return fields;
@@ -66,23 +87,26 @@
         },
         methods   : {
             getFormData() {
-                let fields = document.querySelectorAll(`#${this.id} input`);
+                let fields = document.querySelectorAll(`#${this.id} input`),
+                    invalid = false;
                 for(let i = 0; i < fields.length; i++) {
                     let field   = fields[i],
-                        name    = field.name,
-                        invalid = false;
+                        name    = field.name;
 
                     if(!name) continue;
                     if(!field.checkValidity()) invalid = true;
-                    if(!invalid && this.form[name].validator && !this.form[name].validator(this.fields[name], this.fields, field)) {
-                        field.setCustomValidity(Localisation.translate('Please correct your input'));
+                    if(!invalid && this.form[name].validator &&
+                       !this.form[name].validator(this.fields[name], this.fields, field)) {
+                        let message = 'Please correct your input';
+                        if(this.form[name].title) message = this.form[name].title;
+                        field.setCustomValidity(Localisation.translate(message));
                         invalid = true;
                     }
+                }
 
-                    if(invalid) {
-                        document.querySelector(`#${this.id} [type=submit]`).click();
-                        return false;
-                    }
+                if(invalid) {
+                    document.querySelector(`#${this.id} [type=submit]`).click();
+                    return false;
                 }
 
                 return this.fields;

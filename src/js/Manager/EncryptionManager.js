@@ -1,5 +1,6 @@
 import API from "@js/Helper/api";
 import Utility from '@js/Classes/Utility';
+import Messages from '@js/Classes/Messages';
 import Localisation from '@js/Classes/Localisation';
 
 class EncryptionManager {
@@ -36,6 +37,68 @@ class EncryptionManager {
         }
 
         if(save) await this._saveMasterPassword(password);
+    }
+
+    /**
+     *
+     * @param password
+     * @returns {Promise<void>}
+     */
+    async update(password, oldPassword) {
+        try {
+            await API.setAccountChallenge(password, oldPassword);
+        } catch(e) {
+            throw e;
+        }
+    }
+
+    /**
+     *
+     * @returns {Promise<void>}
+     */
+    async updateGui() {
+        let data = await Messages.form(
+            {
+                password      : {
+                    label: 'New Password',
+                    type: 'password',
+                    button: 'toggle',
+                    minlength: 12,
+                    required: true,
+                    title: 'Your password must be longer than 12 characters and not the old password',
+                    validator: (value, fields) => {
+                        return value !== fields.oldPassword && value.length >= 12;
+                    }
+                },
+                repeatPassword: {
+                    label    : 'Repeat Password',
+                    type     : 'password',
+                    button   : 'toggle',
+                    required: true,
+                    title: 'Please confirm your new password',
+                    validator: (value, fields) => {
+                        return value === fields.password;
+                    }
+                },
+                oldPassword   : {
+                    label: 'Old Password', type: 'password', button: 'toggle',
+                    title: 'You must enter your old password',
+                    required: true,
+                    validator: (value) => {
+                        return value.length >= 12;
+                    }
+                }
+            },
+            'Change Password',
+            'You can use this dialog to change your master password.'
+        );
+
+        try {
+            await this.update(data.password, data.oldPassword);
+            Messages.alert('Your password has been changed successfully', 'Password changed');
+        } catch(e) {
+            Messages.alert(e.message, 'Changing password failed');
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ class SetupManager {
         if(SettingsManager.get('client.setup.initialized', false)) return;
         if(await DeferredActivationService.check('first-run-wizard')) return;
 
-        this._runWizard();
+        await this._runWizard();
     }
 
     /**
@@ -23,7 +23,7 @@ class SetupManager {
      * @returns {Promise<void>}
      */
     async runManually() {
-        this._runWizard();
+        await this._runWizard();
     }
 
     /**
@@ -32,7 +32,7 @@ class SetupManager {
      * @returns {Promise<void>}
      */
     async runEncryptionSetup() {
-        this._runWizard(['start', 'encryption'], true, false);
+        await this._runWizard(['start', 'encryption'], true, false);
     }
 
     /**
