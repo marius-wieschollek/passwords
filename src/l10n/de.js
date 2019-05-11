@@ -208,8 +208,10 @@
             'no'                                  : 'nein'
         },
         helpTexts    = {
-            'You have reached the maximum length of 4096 characters': 'Du hast die Maximallänge von 4096 Zeichern erreicht',
-            'We could not find anything for "{query}"'              : 'Wir konnten nichts zu "{query}" finden'
+            'You have reached the maximum length of 4096 characters'          : 'Du hast die maximale Länge von 4096 Zeichern erreicht',
+            'We could not find anything for "{query}"'                        : 'Wir konnten nichts zu "{query}" finden',
+            'The page "{page}" could not be fetched from the handbook server.': 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',
+            'Some data is waiting to be synchronized'                         : 'Einige Daten warten darauf synchronisiert zu werden',
         },
         longTexts    = {
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'

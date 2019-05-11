@@ -288,7 +288,6 @@
             'Figure {count}: {title}'             : 'Images {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Impossible d’atteindre la page : {message}.',
             'Not Found'                           : 'Non trouvé',
-            'Missing something or found an error?': 'Il vous manque une fonctionnalité ou vous rencontrez une erreur ?',
             'Tell us!'                            : 'Faites nous en part !',
             'Still need help?'                    : 'Toujours besoin d’aide ?',
             'Ask in our forum!'                   : 'Demandez sur le forum !',
