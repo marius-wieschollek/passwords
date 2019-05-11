@@ -227,6 +227,7 @@ class ShareService extends AbstractService {
         $model->setEditable($editable);
         $model->setExpires($expires);
         $model->setType($type);
+        $model->setClient($this->environment->getClient());
 
         return $model;
     }
@@ -242,6 +243,7 @@ class ShareService extends AbstractService {
         /** @var Share $clone */
         $clone = parent::cloneModel($original, $overwrites);
         $clone->setUuid($this->uuidHelper->generateUuid());
+        $clone->setClient($this->environment->getClient());
 
         return $clone;
     }

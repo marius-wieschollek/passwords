@@ -124,6 +124,20 @@ class PasswordTagRelationService extends AbstractService {
     }
 
     /**
+     * @param EntityInterface|PasswordTagRelation $original
+     * @param array           $overwrites
+     *
+     * @return EntityInterface|PasswordTagRelation
+     */
+    protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
+        /** @var PasswordTagRelation $clone */
+        $clone = parent::cloneModel($original, $overwrites);
+        $clone->setClient($this->environment->getClient());
+
+        return $clone;
+    }
+
+    /**
      * @param PasswordRevision $password
      * @param TagRevision      $tag
      *
@@ -142,6 +156,7 @@ class PasswordTagRelationService extends AbstractService {
         $model->setPassword($password->getModel());
         $model->setPasswordRevision($password->getUuid());
         $model->setHidden($password->isHidden() || $tag->isHidden());
+        $model->setClient($this->environment->getClient());
 
         return $model;
     }
