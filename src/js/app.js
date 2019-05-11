@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from '@vue/App';
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
+import EventEmitter from 'eventemitter3';
 import SectionAll from '@vue/Section/All';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
@@ -20,7 +21,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 (function () {
     let isLoaded     = false,
         loadInterval = null,
-        app          = null;
+        app          = null,
+        events = new EventEmitter();
 
     function initApp() {
         let section = SettingsManager.get('client.ui.section.default');
@@ -56,7 +58,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         if (!password) password = await Messages.prompt('Password', 'Login', '', true);
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
-        API.initialize({baseUrl, user, password, folderIcon, encryption: new Encryption(), debug: process.env.NODE_ENV !== 'production'});
+        API.initialize({baseUrl, user, password, folderIcon, encryption: new Encryption(), events});
     }
 
     async function load() {
@@ -90,6 +92,33 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 app.starChaser = true;
             }
         }, false);
+
+
+        events.on('api.request.failed', async (e) => {
+            if(e.id === 'f84f93d3') {
+                let current = router.currentRoute,
+                    target = {name: current.name, path: current.path, hash: current.hash, params: current.params};
+                target = btoa(JSON.stringify(target));
+                router.push({name: 'Authorize', params: {target}});
+
+                Messages.notification('Authorisation Expired. Please log in')
+            } else if(e.response) {
+                if(e.response.status === 401) {
+                    await Messages.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
+                    location.reload();
+                } else if(e.response.status === 500) {
+                    Messages.notification('Internal Server Error during request');
+                } else {
+                    Messages.notification(`${e.response.status} - ${e.response.statusText}`);
+                    console.log(e);
+                }
+            } else if(e.message) {
+                Messages.notification(e.message);
+                console.log(e);
+            } else {
+                console.log(e);
+            }
+        })
     }
 
     if (location.protocol !== 'https:') {

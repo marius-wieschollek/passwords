@@ -61,10 +61,14 @@ export default class EnhancedApi extends SimpleApi {
             }
         }
         config.encrypt = false;
+        config.events.on('api.request.failed', (e) => {
+            if(e.id && e.id === 'f84f93d3') {
+                this._isAuthorized = false;
+                this.config.encryption.unsetKeychain();
+            }
+        });
 
         super.initialize(config);
-
-        setInterval(() => { this.keepaliveSession(); }, 5 * 60000);
     }
 
     /**
@@ -90,7 +94,7 @@ export default class EnhancedApi extends SimpleApi {
             delete login.password;
         }
 
-        let result = await this._createRequest('session.open', login);
+        let result = await this._sendRequest('session.open', login);
         if(password !== null && result.hasOwnProperty('keys') && result.keys.hasOwnProperty('CSEv1r1')) {
             this.config.encryption.setKeychain(result.keys.CSEv1r1, password);
         }
@@ -106,7 +110,8 @@ export default class EnhancedApi extends SimpleApi {
      */
     async closeSession() {
         let result = await super.closeSession();
-        this._isAuthorized = true;
+        this._isAuthorized = false;
+        this.config.encryption.unsetKeychain();
         return result;
     }
 
@@ -798,7 +803,6 @@ export default class EnhancedApi extends SimpleApi {
     _createRejectedPromise(e) {
         return new Promise((resolve, reject) => {
             let error = {status: 'error', message: e.message, error: e};
-            if(this._debug) console.error(error);
             reject(error);
         });
     }

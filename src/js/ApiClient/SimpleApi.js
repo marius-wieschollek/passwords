@@ -83,7 +83,7 @@ export default class SimpleApi {
      * @param config
      */
     initialize(config = {}) {
-        config.enabled = false;
+        this._enabled = false;
         this._config = config;
         if(config.apiUrl.substr(0, 5) !== 'https') throw new Error('HTTPS required for api');
 
@@ -96,7 +96,7 @@ export default class SimpleApi {
             throw new Error('Api username or password missing');
         }
 
-        this._config.enabled = true;
+        this._enabled = true;
     }
 
 
@@ -109,7 +109,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     requestToken(provider) {
-        return this._createRequest(['token.request', {provider}]);
+        return this._sendRequest(['token.request', {provider}]);
     }
 
     /**
@@ -117,7 +117,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     requestSession() {
-        return this._createRequest('session.request');
+        return this._sendRequest('session.request');
     }
 
     /**
@@ -125,7 +125,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     openSession(login) {
-        return this._createRequest('session.open', login);
+        return this._sendRequest('session.open', login);
     }
 
     /**
@@ -133,7 +133,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     closeSession() {
-        return this._createRequest('session.close');
+        return this._sendRequest('session.close');
     }
 
     /**
@@ -141,7 +141,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     keepaliveSession() {
-        return this._createRequest('session.keepalive');
+        return this._sendRequest('session.keepalive');
     }
 
 
@@ -156,7 +156,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     createPassword(data = {}) {
-        return this._createRequest('password.create', data);
+        return this._sendRequest('password.create', data);
     }
 
     /**
@@ -167,7 +167,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     showPassword(id, details = 'model') {
-        return this._createRequest('password.show', {id, details}, 'POST');
+        return this._sendRequest('password.show', {id, details}, 'POST');
     }
 
     /**
@@ -177,7 +177,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     updatePassword(data = {}) {
-        return this._createRequest('password.update', data, 'PATCH');
+        return this._sendRequest('password.update', data, 'PATCH');
     }
 
     /**
@@ -188,7 +188,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deletePassword(id, revision) {
-        return this._createRequest('password.delete', {id, revision}, 'DELETE');
+        return this._sendRequest('password.delete', {id, revision}, 'DELETE');
     }
 
     /**
@@ -199,7 +199,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     restorePassword(id, revision = null) {
-        return this._createRequest('password.restore', {id, revision}, 'PATCH');
+        return this._sendRequest('password.restore', {id, revision}, 'PATCH');
     }
 
     /**
@@ -209,7 +209,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listPasswords(details = 'model') {
-        return this._createRequest('password.list', {details}, 'POST');
+        return this._sendRequest('password.list', {details}, 'POST');
     }
 
     /**
@@ -220,7 +220,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findPasswords(criteria = {}, details = 'model') {
-        return this._createRequest('password.find', {details, criteria}, 'POST');
+        return this._sendRequest('password.find', {details, criteria}, 'POST');
     }
 
 
@@ -235,7 +235,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     createFolder(data = {}) {
-        return this._createRequest('folder.create', data);
+        return this._sendRequest('folder.create', data);
     }
 
     /**
@@ -246,7 +246,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     showFolder(id = '00000000-0000-0000-0000-000000000000', details = 'model') {
-        return this._createRequest('folder.show', {id, details}, 'POST');
+        return this._sendRequest('folder.show', {id, details}, 'POST');
     }
 
     /**
@@ -256,7 +256,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     updateFolder(data = {}) {
-        return this._createRequest('folder.update', data, 'PATCH');
+        return this._sendRequest('folder.update', data, 'PATCH');
     }
 
     /**
@@ -267,7 +267,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deleteFolder(id, revision) {
-        return this._createRequest('folder.delete', {id, revision}, 'DELETE');
+        return this._sendRequest('folder.delete', {id, revision}, 'DELETE');
     }
 
     /**
@@ -278,7 +278,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     restoreFolder(id, revision = null) {
-        return this._createRequest('folder.restore', {id, revision}, 'PATCH');
+        return this._sendRequest('folder.restore', {id, revision}, 'PATCH');
     }
 
     /**
@@ -288,7 +288,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listFolders(details = 'model') {
-        return this._createRequest('folder.list', {details}, 'POST');
+        return this._sendRequest('folder.list', {details}, 'POST');
     }
 
     /**
@@ -299,7 +299,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findFolders(criteria = {}, details = 'model') {
-        return this._createRequest('folder.find', {details, criteria}, 'POST');
+        return this._sendRequest('folder.find', {details, criteria}, 'POST');
     }
 
 
@@ -314,7 +314,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     createTag(data = {}) {
-        return this._createRequest('tag.create', data);
+        return this._sendRequest('tag.create', data);
     }
 
     /**
@@ -325,7 +325,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     showTag(id, details = 'model') {
-        return this._createRequest('tag.show', {id, details}, 'POST');
+        return this._sendRequest('tag.show', {id, details}, 'POST');
     }
 
     /**
@@ -335,7 +335,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     updateTag(data = {}) {
-        return this._createRequest('tag.update', data, 'PATCH');
+        return this._sendRequest('tag.update', data, 'PATCH');
     }
 
     /**
@@ -346,7 +346,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     deleteTag(id, revision) {
-        return this._createRequest('tag.delete', {id, revision}, 'DELETE');
+        return this._sendRequest('tag.delete', {id, revision}, 'DELETE');
     }
 
     /**
@@ -357,7 +357,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     restoreTag(id, revision = null) {
-        return this._createRequest('tag.restore', {id, revision}, 'PATCH');
+        return this._sendRequest('tag.restore', {id, revision}, 'PATCH');
     }
 
     /**
@@ -367,7 +367,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listTags(details = 'model') {
-        return this._createRequest('tag.list', {details}, 'POST');
+        return this._sendRequest('tag.list', {details}, 'POST');
     }
 
     /**
@@ -378,7 +378,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findTags(criteria = {}, details = 'model') {
-        return this._createRequest('tag.find', {details, criteria}, 'POST');
+        return this._sendRequest('tag.find', {details, criteria}, 'POST');
     }
 
 
@@ -393,7 +393,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     createShare(data = {}) {
-        return this._createRequest('share.create', data);
+        return this._sendRequest('share.create', data);
     }
 
     /**
@@ -404,7 +404,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     showShare(id, details = 'model') {
-        return this._createRequest('share.show', {id, details}, 'POST');
+        return this._sendRequest('share.show', {id, details}, 'POST');
     }
 
     /**
@@ -414,7 +414,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     updateShare(data = {}) {
-        return this._createRequest('share.update', data, 'PATCH');
+        return this._sendRequest('share.update', data, 'PATCH');
     }
 
     /**
@@ -424,7 +424,7 @@ export default class SimpleApi {
      * @param id
      */
     deleteShare(id) {
-        return this._createRequest('share.delete', {id}, 'DELETE');
+        return this._sendRequest('share.delete', {id}, 'DELETE');
     }
 
     /**
@@ -434,7 +434,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listShares(details = 'model') {
-        return this._createRequest('share.list', {details}, 'POST');
+        return this._sendRequest('share.list', {details}, 'POST');
     }
 
     /**
@@ -445,7 +445,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findShares(criteria = {}, details = 'model') {
-        return this._createRequest('share.find', {details, criteria}, 'POST');
+        return this._sendRequest('share.find', {details, criteria}, 'POST');
     }
 
     /**
@@ -453,8 +453,8 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     findSharePartners(search = '', limit = 5) {
-        if(search.length === 0 && limit === 5) return this._createRequest('share.partners');
-        return this._createRequest('share.partners', {search, limit}, 'POST');
+        if(search.length === 0 && limit === 5) return this._sendRequest('share.partners');
+        return this._sendRequest('share.partners', {search, limit}, 'POST');
     }
 
 
@@ -468,7 +468,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getSettings(settings) {
-        return this._createRequest('settings.get', settings, 'POST');
+        return this._sendRequest('settings.get', settings, 'POST');
     }
 
     /**
@@ -477,7 +477,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     setSettings(settings) {
-        return this._createRequest('settings.set', settings, 'POST');
+        return this._sendRequest('settings.set', settings, 'POST');
     }
 
     /**
@@ -486,7 +486,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     resetSettings(settings) {
-        return this._createRequest('settings.reset', settings, 'POST');
+        return this._sendRequest('settings.reset', settings, 'POST');
     }
 
     /**
@@ -495,8 +495,8 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listSettings(scopes = null) {
-        if(scopes === null) return this._createRequest('settings.list');
-        return this._createRequest('settings.list', {scopes}, 'POST');
+        if(scopes === null) return this._sendRequest('settings.list');
+        return this._sendRequest('settings.list', {scopes}, 'POST');
     }
 
 
@@ -514,10 +514,10 @@ export default class SimpleApi {
      */
     generatePassword(strength, numbers, special) {
         if(strength === undefined && numbers === undefined && special === undefined) {
-            return this._createRequest('password.generate');
+            return this._sendRequest('password.generate');
         }
 
-        return this._createRequest(
+        return this._sendRequest(
             'password.generate',
             {strength, numbers, special}
         );
@@ -531,7 +531,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getAvatar(user, size = 32) {
-        return this._createRequest(['service.avatar', {user, size}], null, 'GET', 'text');
+        return this._sendRequest(['service.avatar', {user, size}], null, 'GET', 'text');
     }
 
     /**
@@ -554,7 +554,7 @@ export default class SimpleApi {
      */
     getFavicon(domain, size = 32) {
         if(domain === null || domain.length === 0) domain = 'default';
-        return this._createRequest(['service.favicon', {domain, size}], null, 'GET', 'text');
+        return this._sendRequest(['service.favicon', {domain, size}], null, 'GET', 'text');
     }
 
     /**
@@ -580,7 +580,7 @@ export default class SimpleApi {
      */
     getPreview(domain, view = 'desktop', width = '640', height = '360...') {
         if(domain === null || domain.length === 0) domain = 'default';
-        return this._createRequest(
+        return this._sendRequest(
             ['service.preview', {domain, view, width, height}],
             null,
             'GET',
@@ -615,7 +615,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     getAccountChallenge() {
-        return this._createRequest('challenge.get');
+        return this._sendRequest('challenge.get');
     }
 
     /**
@@ -623,7 +623,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     setAccountChallenge(challenge, secret, oldSecret = null) {
-        return this._createRequest('challenge.set', {challenge, secret, oldSecret});
+        return this._sendRequest('challenge.set', {challenge, secret, oldSecret});
     }
 
     /**
@@ -631,7 +631,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     setKeychain(id, data) {
-        return this._createRequest('keychain.set', {id, data});
+        return this._sendRequest('keychain.set', {id, data});
     }
 
     /**
@@ -639,7 +639,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listKeychains() {
-        return this._createRequest('challenge.set', {challenge, secret, oldSecret});
+        return this._sendRequest('challenge.set', {challenge, secret, oldSecret});
     }
 
     /**
@@ -649,7 +649,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     resetUserAccount(password) {
-        return this._createRequest('account.reset', {password});
+        return this._sendRequest('account.reset', {password});
     }
 
 
@@ -663,7 +663,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     runSharingCron() {
-        return this._createRequest('cron.sharing');
+        return this._sendRequest('cron.sharing');
     }
 
 
@@ -681,14 +681,32 @@ export default class SimpleApi {
      * @returns {Promise}
      * @private
      */
-    _createRequest(path, data = null, method = null, dataType = 'json') {
-        if(method === null || method === 'GET') method = data === null ? 'GET':'POST';
+    async _sendRequest(path, data = null, method = null, dataType = 'json') {
+        if(!this._enabled) throw new Error('API not authorized');
+        let url = this._getRequestUrl(path),
+            options = this._getRequestOptions(method, data, dataType),
+            response = await this._executeRequest(url, options),
+            contentType  = response.headers.get('content-type');
 
-        if(Array.isArray(path)) {
-            path = SimpleApi.processUrl(this._paths[path[0]], path[1]);
+        this._checkSessionToken(response);
+
+        if(contentType && contentType.indexOf('application/json') !== -1) {
+            return await this._processJsonResponse(response);
         } else {
-            path = this._paths[path];
+            return await this._processBinaryResponse(response);
         }
+    }
+
+    /**
+     *
+     * @param method
+     * @param data
+     * @param dataType
+     * @returns {{method: *, headers: Headers, credentials: string}}
+     * @private
+     */
+    _getRequestOptions(method, data, dataType) {
+        if(method === null || method === 'GET') method = data === null ? 'GET':'POST';
 
         let headers = new Headers();
         for(let header in this._headers) {
@@ -703,54 +721,107 @@ export default class SimpleApi {
             options.body = JSON.stringify(data);
         }
 
-        return new Promise((resolve, reject) => {
-            if(!this._config.enabled) throw new Error('Invalid Login Data');
-            fetch(new Request(this._config.apiUrl + path, options))
-                .then((response) => {
-                    let contentType  = response.headers.get('content-type'),
-                        sessionToken = response.headers.get('x-passwords-session');
-                    if(sessionToken) this._headers['X-Passwords-Session'] = sessionToken;
+        return options;
+    }
 
-                    if(contentType && contentType.indexOf('application/json') !== -1) {
-                        response.json()
-                                .then((d) => {
-                                    if(response.ok) {
-                                        resolve(d);
-                                    } else {
-                                        if(this._config.debug) console.error('Request failed', response, d);
-                                        if(response.status === 401 && this._config.enabled) {
-                                            this._config.enabled = false;
-                                            alert('Error 401\nCredentials invalid or expired\nPlease reload page');
-                                        }
-                                        reject(d);
-                                    }
-                                })
-                                .catch((response) => {
-                                    if(this._config.debug) console.error('Decoding response failed', response);
-                                    reject(response);
-                                });
-                    } else {
-                        if(response.ok) {
-                            resolve(response.blob());
-                        } else {
-                            if(this._config.debug) console.error('Request failed', response);
-                            if(response.status === 401 && this._config.enabled) {
-                                this._config.enabled = false;
-                                alert('Error 401\nCredentials invalid or expired\nPlease reload page');
-                            }
-                            reject(response);
-                        }
-                    }
-                })
-                .catch((response) => {
-                    if(this._config.debug) console.error('Request failed', response);
-                    if(response.status === 401 && this._config.enabled) {
-                        this._config.enabled = false;
-                        alert('Error 401\nCredentials invalid or expired\nPlease reload page');
-                    }
-                    reject(response);
-                });
-        });
+    /**
+     *
+     * @param path
+     * @returns {string}
+     * @private
+     */
+    _getRequestUrl(path) {
+        if(Array.isArray(path)) {
+            path = SimpleApi.processUrl(this._paths[path[0]], path[1]);
+        } else {
+            path = this._paths[path];
+        }
+
+        path = this._config.apiUrl + path;
+        return path;
+    }
+
+    /**
+     *
+     * @param url
+     * @param options
+     * @returns {Promise<Response>}
+     * @private
+     */
+    async _executeRequest(url, options) {
+        try {
+            return await fetch(new Request(url, options));
+        } catch(e) {
+            if(e.status === 401 && this._enabled) this._enabled = false;
+
+            this._config.events.emit('api.request.failed', e);
+            throw e;
+        }
+    }
+
+    /**
+     *
+     * @param response
+     * @private
+     */
+    _checkSessionToken(response) {
+        let sessionToken = response.headers.get('x-passwords-session');
+
+        if(sessionToken && sessionToken !== this._config.sessionToken) {
+            this._config.sessionToken = sessionToken;
+            this._headers['X-Passwords-Session'] = sessionToken;
+            this._config.events.emit('api.session.token.changed', {sessionToken});
+        }
+    }
+
+    /**
+     *
+     * @param response
+     * @returns {Promise<{}>}
+     * @private
+     */
+    async _processJsonResponse(response) {
+        let json;
+        try {
+            json = await response.json();
+        } catch(e) {
+            e.response = response;
+            this._config.events.emit('api.response.decoding.failed', e);
+            throw e;
+        }
+
+        if(!response.ok) {
+            json.response = response;
+            this._config.events.emit('api.request.failed', json);
+            throw json;
+        }
+
+        return json;
+    }
+
+    /**
+     *
+     * @param response
+     * @returns {Promise<Blob>}
+     * @private
+     */
+    async _processBinaryResponse(response) {
+        let blob;
+        try {
+            blob = await response.blob();
+        } catch(e) {
+            e.response = response;
+            this._config.events.emit('api.response.decoding.failed', e);
+            throw e;
+        }
+
+        if(!response.ok) {
+            let error = {response, data: blob};
+            this._config.events.emit('api.request.failed', error);
+            throw error;
+        }
+
+        return blob;
     }
 
     /**

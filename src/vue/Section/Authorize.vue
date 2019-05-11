@@ -64,6 +64,7 @@
         },
 
         created() {
+            document.body.classList.remove('pw-authorized');
             document.body.classList.add('pw-authorize');
             API.requestSession()
                 .then((d) => {

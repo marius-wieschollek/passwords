@@ -198,6 +198,15 @@ export default class Encryption {
 
     /**
      *
+     */
+    unsetKeychain() {
+        this._enabled = false;
+        this._keys = {};
+        this._current = '';
+    }
+
+    /**
+     *
      * @param password
      * @returns {*}
      */
