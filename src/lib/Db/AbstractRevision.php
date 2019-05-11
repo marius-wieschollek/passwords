@@ -30,6 +30,8 @@ namespace OCA\Passwords\Db;
  * @method void setTrashed(bool $trashed)
  * @method bool getFavorite()
  * @method void setFavorite(bool $favorite)
+ * @method string getClient()
+ * @method void setClient(string $client)
  *
  * @package OCA\Passwords\Db
  */
@@ -86,6 +88,11 @@ abstract class AbstractRevision extends AbstractEntity implements RevisionInterf
     protected $favorite;
 
     /**
+     * @var string
+     */
+    protected $client;
+
+    /**
      * @var bool
      */
     protected $_decrypted = false;
@@ -101,6 +108,7 @@ abstract class AbstractRevision extends AbstractEntity implements RevisionInterf
 
         $this->addType('model', 'string');
         $this->addType('label', 'string');
+        $this->addType('client', 'string');
         $this->addType('edited', 'integer');
         $this->addType('hidden', 'boolean');
         $this->addType('trashed', 'boolean');

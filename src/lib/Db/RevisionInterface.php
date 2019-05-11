@@ -32,6 +32,8 @@ namespace OCA\Passwords\Db;
  * @method void setTrashed(bool $trashed)
  * @method bool getFavorite()
  * @method void setFavorite(bool $favorite)
+ * @method string getClient()
+ * @method void setClient(string $client)
  *
  * @package OCA\Passwords\Db
  */

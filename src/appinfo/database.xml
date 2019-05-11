@@ -193,10 +193,10 @@
             </field>
             <field>
                 <name>status_code</name>
-                <default>GOOD</default>
                 <type>text</type>
                 <length>12</length>
                 <notnull>true</notnull>
+                <default>GOOD</default>
             </field>
             <field>
                 <name>deleted</name>
@@ -221,6 +221,13 @@
                 <type>integer</type>
                 <length>12</length>
                 <notnull>true</notnull>
+            </field>
+            <field>
+                <name>client</name>
+                <type>text</type>
+                <length>256</length>
+                <notnull>true</notnull>
+                <default>CLIENT::UNKNOWN</default>
             </field>
         </declaration>
     </table>
@@ -385,6 +392,13 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <field>
+                <name>client</name>
+                <type>text</type>
+                <length>256</length>
+                <notnull>true</notnull>
+                <default>CLIENT::UNKNOWN</default>
+            </field>
         </declaration>
     </table>
     <table>
@@ -540,6 +554,13 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <field>
+                <name>client</name>
+                <type>text</type>
+                <length>256</length>
+                <notnull>true</notnull>
+                <default>CLIENT::UNKNOWN</default>
+            </field>
         </declaration>
     </table>
     <table>
@@ -613,6 +634,13 @@
                 <type>integer</type>
                 <length>12</length>
                 <notnull>true</notnull>
+            </field>
+            <field>
+                <name>client</name>
+                <type>text</type>
+                <length>256</length>
+                <notnull>true</notnull>
+                <default>CLIENT::UNKNOWN</default>
             </field>
         </declaration>
     </table>
@@ -710,6 +738,13 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <field>
+                <name>client</name>
+                <type>text</type>
+                <length>256</length>
+                <notnull>true</notnull>
+                <default>CLIENT::UNKNOWN</default>
+            </field>
         </declaration>
     </table>
     <table>
@@ -767,6 +802,13 @@
             <field>
                 <name>shadow_data</name>
                 <type>clob</type>
+            </field>
+            <field>
+                <name>client</name>
+                <type>text</type>
+                <length>256</length>
+                <notnull>true</notnull>
+                <default>CLIENT::UNKNOWN</default>
             </field>
         </declaration>
     </table>

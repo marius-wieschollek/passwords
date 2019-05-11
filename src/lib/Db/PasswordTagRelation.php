@@ -22,6 +22,8 @@ namespace OCA\Passwords\Db;
  * @method void setPasswordRevision(string $passwordRevision)
  * @method bool getHidden()
  * @method void setHidden(bool $hidden)
+ * @method string getClient()
+ * @method void setClient(string $client)
  */
 class PasswordTagRelation extends AbstractEntity {
 
@@ -51,10 +53,16 @@ class PasswordTagRelation extends AbstractEntity {
     protected $hidden;
 
     /**
+     * @var string
+     */
+    protected $client;
+
+    /**
      * PasswordTagRelation constructor.
      */
     public function __construct() {
         $this->addType('tag', 'string');
+        $this->addType('client', 'string');
         $this->addType('password', 'string');
         $this->addType('tagRevision', 'string');
         $this->addType('passwordRevision', 'string');

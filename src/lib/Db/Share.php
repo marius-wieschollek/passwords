@@ -26,6 +26,8 @@ namespace OCA\Passwords\Db;
  * @method bool getTargetUpdated()
  * @method int getExpires()
  * @method void setExpires(int $expires)
+ * @method string getClient()
+ * @method void setClient(string $client)
  *
  * @package OCA\Passwords\Db
  */
@@ -39,6 +41,11 @@ class Share extends AbstractEntity implements EntityInterface {
      * @var string
      */
     protected $type;
+
+    /**
+     * @var string
+     */
+    protected $client;
 
     /**
      * @var string
@@ -85,6 +92,7 @@ class Share extends AbstractEntity implements EntityInterface {
      */
     public function __construct() {
         $this->addType('type', 'string');
+        $this->addType('client', 'string');
         $this->addType('receiver', 'string');
         $this->addType('sourcePassword', 'string');
         $this->addType('targetPassword', 'string');

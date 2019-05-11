@@ -18,6 +18,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setShadowData(string $data)
  * @method bool getAuthorized()
  * @method void setAuthorized(bool $authorized)
+ * @method string getClient()
+ * @method void setClient(string $client)
  *
  * @package OCA\Passwords\Db
  */
@@ -27,6 +29,11 @@ class Session extends AbstractEntity {
      * @var string
      */
     protected $data;
+
+    /**
+     * @var string
+     */
+    protected $client;
 
     /**
      * @var boolean
@@ -43,6 +50,7 @@ class Session extends AbstractEntity {
      */
     public function __construct() {
         $this->addType('data', 'string');
+        $this->addType('client', 'string');
         $this->addType('shadowData', 'string');
         $this->addType('authorized', 'boolean');
 
