@@ -81,6 +81,7 @@
                 if(this.revision.sseType === 'SSEv2r1') encryption = 'Advanced server-side encryption';
                 if(this.revision.cseType === 'CSEv1r1') encryption = 'Client-side encryption';
                 fields.push({label: Localisation.translate('Encryption'), value: Localisation.translate(encryption)});
+                fields.push({label: Localisation.translate('Created by'), value: this.getClientLabel(this.revision.client)});
 
                 return fields;
             },
@@ -100,6 +101,13 @@
                     .then(() => {this.closeWindow()})
                     .catch(console.error);
             },
+            getClientLabel(client) {
+                if(client.substr(0, 8) === 'CLIENT::') {
+                    return Localisation.translate(client);
+                }
+
+                return client;
+            }
         }
     }
 </script>

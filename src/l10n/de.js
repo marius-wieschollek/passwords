@@ -1,5 +1,5 @@
 (function() {
-    let translations    = {
+    let translations = {
             'Passwords'                           : 'Passwörter',
             'All'                                 : 'Alle',
             'Folders'                             : 'Ordner',
@@ -193,6 +193,13 @@
             ' and '                               : ' und ',
             'match'                               : 'passen zu',
             'matches'                             : 'passt zu',
+            'Created by'                          : 'Erstellt von',
+            'CLIENT::MAINTENANCE'                 : 'System Wartungsmodus',
+            'CLIENT::UNKNOWN'                     : 'Nicht Vorhanden',
+            'CLIENT::SYSTEM'                      : 'System',
+            'CLIENT::PUBLIC'                      : 'Öffentlicher Zugriff',
+            'CLIENT::CRON'                        : 'Automatische Hintergrundaufgabe',
+            'CLIENT::CLI'                         : 'Server Kommandozeile',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
             'true'                                : 'ja',
@@ -200,11 +207,11 @@
             'yes'                                 : 'ja',
             'no'                                  : 'nein'
         },
-        helpTexts       = {
+        helpTexts    = {
             'You have reached the maximum length of 4096 characters': 'Du hast die Maximallänge von 4096 Zeichern erreicht',
             'We could not find anything for "{query}"'              : 'Wir konnten nichts zu "{query}" finden'
         },
-        longTexts       = {
+        longTexts    = {
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
         };
 
