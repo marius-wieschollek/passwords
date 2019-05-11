@@ -209,7 +209,7 @@ class ApiTokenHelper {
      * @throws \Exception
      */
     protected function createWebUiToken(): array {
-        $name = $this->localisation->t('Passwords Session %s - %s@%s', [date('d.m.y H:i'), $this->environment->getUserLogin(), \OC::$server->getRequest()->getRemoteAddress()]);
+        $name = $this->getTokenName();
         list($token, $deviceToken) = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
@@ -244,5 +244,32 @@ class ApiTokenHelper {
         }
 
         return implode('-', $groups);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTokenName(): string {
+        if($this->environment->isImpersonating()) {
+            return
+                $this->localisation->t(
+                    '%2$s via Impersonate %1$s - %3$s@%4$s',
+                    [
+                        date('d.m.y H:i'),
+                        $this->environment->getRealUser()->getDisplayName(),
+                        $this->environment->getRealUser()->getUID(),
+                        \OC::$server->getRequest()->getRemoteAddress()
+                    ]
+                );
+        }
+
+        return $this->localisation->t(
+            'Passwords Session %s - %s@%s',
+            [
+                date('d.m.y H:i'),
+                $this->environment->getUserLogin(),
+                \OC::$server->getRequest()->getRemoteAddress()
+            ]
+        );
     }
 }
