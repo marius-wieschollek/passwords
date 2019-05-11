@@ -266,7 +266,7 @@ class SessionService {
         if($this->userSession->exists('passwordsSessionId')) {
             $sessionId = $this->userSession->get('passwordsSessionId');
         } else {
-            $sessionId = $this->request->getHeader('X-Passwords-Session');
+            $sessionId = $this->request->getHeader('X-API-SESSION');
         }
 
         if(!empty($sessionId)) {

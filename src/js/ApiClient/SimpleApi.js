@@ -639,7 +639,7 @@ export default class SimpleApi {
      * @returns {Promise}
      */
     listKeychains() {
-        return this._sendRequest('challenge.set', {challenge, secret, oldSecret});
+        return this._sendRequest('keychain.list');
     }
 
     /**
@@ -765,11 +765,11 @@ export default class SimpleApi {
      * @private
      */
     _checkSessionToken(response) {
-        let sessionToken = response.headers.get('x-passwords-session');
+        let sessionToken = response.headers.get('X-API-SESSION');
 
         if(sessionToken && sessionToken !== this._config.sessionToken) {
             this._config.sessionToken = sessionToken;
-            this._headers['X-Passwords-Session'] = sessionToken;
+            this._headers['X-API-SESSION'] = sessionToken;
             this._config.events.emit('api.session.token.changed', {sessionToken});
         }
     }

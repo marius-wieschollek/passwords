@@ -7,7 +7,7 @@ export default class EnhancedApi extends SimpleApi {
      * @returns {boolean}
      */
     get isAuthorized() {
-        return this._isAuthorized;
+        return this._isAuthorized === true;
     }
 
     // noinspection JSMethodCanBeStatic
@@ -62,10 +62,10 @@ export default class EnhancedApi extends SimpleApi {
         }
         config.encrypt = false;
         config.events.on('api.request.failed', (e) => {
-            if(e.id && e.id === 'f84f93d3') {
-                this._isAuthorized = false;
-                this.config.encryption.unsetKeychain();
-            }
+            if(e.id && e.id === 'f84f93d3') this._resetAuthorisation();
+        });
+        config.events.on('api.session.token.changed', () => {
+            this._resetAuthorisation();
         });
 
         super.initialize(config);
@@ -110,8 +110,7 @@ export default class EnhancedApi extends SimpleApi {
      */
     async closeSession() {
         let result = await super.closeSession();
-        this._isAuthorized = false;
-        this.config.encryption.unsetKeychain();
+        this._resetAuthorisation();
         return result;
     }
 
@@ -1083,6 +1082,21 @@ export default class EnhancedApi extends SimpleApi {
 
         return domain.replace(regex, '$3');
     }
+
+
+    /**
+     * Internal functions
+     */
+
+    /**
+     *
+     * @private
+     */
+    _resetAuthorisation() {
+        this._isAuthorized = false;
+        this.config.encryption.unsetKeychain();
+    }
+
 
 
     /**
