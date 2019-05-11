@@ -53,10 +53,6 @@
 
 
                     <translate tag="h3" say="Login & Session"/>
-                    <translate tag="label" for="setting-login-2fa" say="Use 2FA when possible"/>
-                    <input type="checkbox" id="setting-login-2fa" v-model="settings['user.login.2fa']">
-                    <settings-help text="Require Two-Factor-Authentication if you have a 2FA service configured for your Nextcloud account"/>
-
                     <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"/>
                     <input type="checkbox"
                            id="setting-include-keepalive"
