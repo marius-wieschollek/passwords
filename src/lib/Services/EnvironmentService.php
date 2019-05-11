@@ -301,15 +301,21 @@ class EnvironmentService {
 
             if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
-        } else if($userId === null) {
+
+            $this->logger->warning('Login attempt with invalid authorization header for '.($userId ? $userId:'invalid user id'));
             $this->client = self::CLIENT_PUBLIC;
 
             return false;
-        } else {
+        } else if($userId !== null) {
             if($this->loadUserFromSession($userId)) return true;
+            $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
+        } else {
+            $this->client = self::CLIENT_PUBLIC;
+
+            return false;
         }
 
-        throw new \Exception("Unable to verify user login for {$userId}");
+        throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
     }
 
     /**
