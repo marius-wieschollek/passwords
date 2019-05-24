@@ -135,7 +135,7 @@ class PasswordApiController extends AbstractObjectApiController {
         bool $favorite = false,
         array $tags = []
     ): JSONResponse {
-        if($edited === 0) $edited = time();
+        if($edited < 1) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
@@ -229,7 +229,7 @@ class PasswordApiController extends AbstractObjectApiController {
         );
 
         if($revision->getHash() !== $oldRevision->getHash()) {
-            if($edited === 0) $revision->setEdited(time());
+            if($edited < 1 || $revision->getEdited() === $oldRevision->getEdited()) $revision->setEdited(time());
         } else {
             $revision->setEdited($oldRevision->getEdited());
         }

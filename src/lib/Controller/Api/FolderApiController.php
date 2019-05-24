@@ -90,7 +90,7 @@ class FolderApiController extends AbstractObjectApiController {
         bool $hidden = false,
         bool $favorite = false
     ): JSONResponse {
-        if($edited === 0) $edited = time();
+        if($edited < 1) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
@@ -142,7 +142,7 @@ class FolderApiController extends AbstractObjectApiController {
         /** @var FolderRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
-        if($edited === 0) $edited = $oldRevision->getEdited();
+        if($edited < 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
             $model->getUuid(), $label, $parent, $cseKey, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
         );
