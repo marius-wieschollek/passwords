@@ -37,11 +37,6 @@ class FileCacheService {
     protected $logger;
 
     /**
-     * @var array
-     */
-    protected $folderCache = [];
-
-    /**
      * @var string
      */
     protected $defaultCache = self::DEFAULT_CACHE;
@@ -62,25 +57,16 @@ class FileCacheService {
      *
      * @return ISimpleFolder
      * @throws NotPermittedException
-     * @throws NotFoundException
      * @throws \Exception
      */
     public function getCache(string $cache = null): ISimpleFolder {
         $cache = $this->validateCacheName($cache);
 
-        if(!isset($this->folderCache[ $cache ])) {
-            try {
-                $this->folderCache[ $cache ] = $this->appData->newFolder($cache.'Cache');
-            } catch(NotPermittedException $e) {
-                if($e->getMessage() !== 'Could not create folder') {
-                    throw $e;
-                }
-
-                $this->folderCache[ $cache ] = $this->appData->getFolder($cache.'Cache');
-            }
+        try {
+            return $this->appData->getFolder($cache.'Cache');
+        } catch(NotFoundException $e) {
+            return $this->appData->newFolder($cache.'Cache');
         }
-
-        return $this->folderCache[ $cache ];
     }
 
     /**
@@ -101,6 +87,8 @@ class FileCacheService {
             $fileCache   = $this->getCache($cache);
             $cachedFiles = $fileCache->getDirectoryListing();
         } catch(NotPermittedException $e) {
+            $this->logger->logException($e);
+
             return $info;
         }
 
@@ -152,8 +140,8 @@ class FileCacheService {
      */
     public function clearCache(string $cache = null): void {
         try {
-            $this->getCache($cache)->delete();
-            unset($this->folderCache[ $cache ]);
+            $files = $this->getCache($cache)->getDirectoryListing();
+            foreach($files as $file) $file->delete();
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
@@ -176,9 +164,9 @@ class FileCacheService {
      */
     public function isCacheEmpty(string $cache = null): bool {
         try {
-            $info = $this->getCacheInfo($cache);
+            $files = $this->getCache($cache)->getDirectoryListing();
 
-            return $info['files'] == 0;
+            return count($files) === 0;
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
@@ -212,9 +200,7 @@ class FileCacheService {
         try {
             $cache = $this->getCache($cache);
 
-            if($cache->fileExists($file)) {
-                return $cache->getFile($file);
-            }
+            if($cache->fileExists($file)) return $cache->getFile($file);
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
@@ -255,7 +241,10 @@ class FileCacheService {
      */
     public function removeFile(string $file, string $cache = null): void {
         try {
-            $this->getFile($file, $cache)->delete();
+            $cache = $this->getCache($cache);
+            if($cache->fileExists($file)) {
+                $cache->getFile($file)->delete();
+            }
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
