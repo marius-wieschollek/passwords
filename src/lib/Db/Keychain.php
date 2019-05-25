@@ -10,8 +10,8 @@ namespace OCA\Passwords\Db;
 /**
  * Class Keychain
  *
- * @method string getData()
- * @method void setData(string $data)
+ * @method string|array getData()
+ * @method void setData(string|array $data)
  * @method string getType()
  * @method void setType(string $type)
  * @method string getScope()
@@ -23,6 +23,9 @@ class Keychain extends AbstractEntity {
 
     const SCOPE_CLIENT = 'client';
     const SCOPE_SERVER = 'server';
+
+    const TYPE_CSE_V1V1 = 'CSEv1r1';
+    const TYPE_SSE_V2R1 = 'SSEv2r1';
 
     /**
      * @var string
@@ -53,26 +56,6 @@ class Keychain extends AbstractEntity {
         $this->addType('scope', 'string');
 
         parent::__construct();
-    }
-
-    /**
-     * @return array
-     */
-    public function getDataArray(): array {
-        $data = $this->getData();
-
-        if(empty($data)) return [];
-
-        return json_decode($data, true);
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return void
-     */
-    public function setDataArray(array $data): void {
-        $this->setData(json_encode($data));
     }
 
     /**

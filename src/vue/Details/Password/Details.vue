@@ -18,10 +18,13 @@
 
         <translate tag="div" say="Security" class="header"/>
         <translate tag="div" say="Status">
-            <translate :say="getSecurityStatus" :class="getSecurityClass.toLowerCase()"/>
+            <translate :say="getSecurityStatus" :class="getSecurityClass"/>
         </translate>
-        <translate tag="div" say="Encryption">
-            <translate :say="getEncryption"/>
+        <translate tag="div" say="Encryption on server">
+            <translate :say="getSseType"/>
+        </translate>
+        <translate tag="div" say="Encryption on client">
+            <translate :say="getCseType"/>
         </translate>
         <detail-field label="SHA-1" type="text" :value="password.hash"/>
     </div>
@@ -104,11 +107,16 @@
 
                 return fields;
             },
-            getEncryption() {
+            getSseType() {
                 let encryption = 'none';
                 if(this.password.sseType === 'SSEv1r1') encryption = 'Server-side encryption (Gen. 1)';
                 if(this.password.sseType === 'SSEv1r2') encryption = 'Server-side encryption (Gen. 2)';
                 if(this.password.sseType === 'SSEv2r1') encryption = 'Advanced server-side encryption';
+
+                return Localisation.translate(encryption)
+            },
+            getCseType() {
+                let encryption = 'none';
                 if(this.password.cseType === 'CSEv1r1') encryption = 'Client-side encryption';
 
                 return Localisation.translate(encryption)

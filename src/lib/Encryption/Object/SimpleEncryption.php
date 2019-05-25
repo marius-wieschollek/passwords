@@ -5,7 +5,7 @@
  * and licensed under the AGPL.
  */
 
-namespace OCA\Passwords\Encryption;
+namespace OCA\Passwords\Encryption\Object;
 
 /**
  * Class SimpleEncryption
@@ -13,6 +13,14 @@ namespace OCA\Passwords\Encryption;
  * @package OCA\Passwords\Encryption
  */
 class SimpleEncryption extends SseV1Encryption {
+
+
+    /**
+     * @return string
+     */
+    public function getType(): string {
+        return 'SimpleEncryption';
+    }
 
     /**
      * @param $string

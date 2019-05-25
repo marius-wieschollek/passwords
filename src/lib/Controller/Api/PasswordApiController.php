@@ -213,7 +213,7 @@ class PasswordApiController extends AbstractObjectApiController {
             $notes        = $oldRevision->getNotes();
             $hash         = $oldRevision->getHash();
             $url          = $oldRevision->getUrl();
-        } else if(($model->hasShares() || $model->getShareId())) {
+        } else if($model->hasShares() || $model->getShareId()) {
             if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
                 throw new ApiException('CSE type does not support sharing', 400);
             }
@@ -221,7 +221,6 @@ class PasswordApiController extends AbstractObjectApiController {
                 throw new ApiException('Shared entity can not be hidden', 400);
             }
         }
-
 
         $revision = $this->revisionService->create(
             $model->getUuid(), $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
@@ -232,6 +231,10 @@ class PasswordApiController extends AbstractObjectApiController {
             if($edited < 1 || $revision->getEdited() === $oldRevision->getEdited()) $revision->setEdited(time());
         } else {
             $revision->setEdited($oldRevision->getEdited());
+        }
+
+        if($model->hasShares() || $model->getShareId() || !$model->isEditable()) {
+            $revision->setSseType($oldRevision->getSseType());
         }
 
         $this->revisionService->save($revision);

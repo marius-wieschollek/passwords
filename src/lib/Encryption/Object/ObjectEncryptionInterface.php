@@ -5,21 +5,26 @@
  * and licensed under the AGPL.
  */
 
-namespace OCA\Passwords\Encryption;
+namespace OCA\Passwords\Encryption\Object;
 
 use OCA\Passwords\Db\RevisionInterface;
 
 /**
- * Interface EncryptionInterface
+ * Interface ObjectEncryptionInterface
  *
- * @package OCA\Passwords\Encryption
+ * @package OCA\Passwords\Encryption\Object
  */
-interface EncryptionInterface {
+interface ObjectEncryptionInterface {
 
     /**
      * @return bool
      */
     public function isAvailable(): bool;
+
+    /**
+     * @return string
+     */
+    public function getType(): string ;
 
     /**
      * @param RevisionInterface $object

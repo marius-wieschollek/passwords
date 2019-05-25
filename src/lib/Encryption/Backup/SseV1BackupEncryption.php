@@ -5,19 +5,19 @@
  * and licensed under the AGPL.
  */
 
-namespace OCA\Passwords\Helper\Backup\Encryption;
+namespace OCA\Passwords\Encryption\Backup;
 
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
-use OCA\Passwords\Encryption\SseV1Encryption;
+use OCA\Passwords\Encryption\Object\SseV1Encryption;
 
 /**
- * Class BackupSseV1R1Encryption
+ * Class SseV1BackupEncryption
  *
- * @package OCA\Passwords\Helper\Backup\Encryption
+ * @package OCA\Passwords\Encryption\Backup
  */
-class BackupSseV1R1Encryption extends SseV1Encryption {
+class SseV1BackupEncryption extends SseV1Encryption {
 
     /**
      * @var array
@@ -49,7 +49,7 @@ class BackupSseV1R1Encryption extends SseV1Encryption {
      * @param string $type
      *
      * @return array
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     public function encryptArray(array $data, string $type = 'password'): array {
         $revision = $this->arrayToObject($data, $type);

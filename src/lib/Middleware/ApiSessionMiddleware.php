@@ -65,8 +65,8 @@ class ApiSessionMiddleware extends Middleware {
 
         $this->sessionService->load();
         $id = $this->sessionService->getId();
-        if($id != $this->session->get('passwordsSessionId')) {
-            $this->session->set('passwordsSessionId', $id);
+        if($id != $this->session->get(SessionService::API_SESSION_KEY)) {
+            $this->session->set(SessionService::API_SESSION_KEY, $id);
         }
 
         if(!$this->sessionService->isAuthorized() && $this->requiresAuthorization($controller, $methodName)) {
@@ -87,7 +87,7 @@ class ApiSessionMiddleware extends Middleware {
         if(!$this->isApiRequest($controller)) return $response;
 
         $this->sessionService->save();
-        $response->addHeader('X-API-SESSION', $this->sessionService->getId());
+        $response->addHeader(SessionService::API_SESSION_HEADER, $this->sessionService->getId());
 
         return parent::afterController($controller, $methodName, $response);
     }

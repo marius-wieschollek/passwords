@@ -9,7 +9,6 @@ namespace OCA\Passwords\Helper\Token;
 
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
-use OCA\Passwords\Encryption\SimpleEncryption;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -53,11 +52,6 @@ class ApiTokenHelper {
     protected $session;
 
     /**
-     * @var SimpleEncryption
-     */
-    protected $encryption;
-
-    /**
      * @var EnvironmentService
      */
     protected $environment;
@@ -80,7 +74,6 @@ class ApiTokenHelper {
      * @param LoggingService       $logger
      * @param SessionService       $session
      * @param IProvider            $tokenProvider
-     * @param SimpleEncryption     $encryption
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
      */
@@ -90,7 +83,6 @@ class ApiTokenHelper {
         LoggingService $logger,
         SessionService $session,
         IProvider $tokenProvider,
-        SimpleEncryption $encryption,
         ConfigurationService $config,
         EnvironmentService $environment
     ) {
@@ -99,7 +91,6 @@ class ApiTokenHelper {
         $this->logger        = $logger;
         $this->config        = $config;
         $this->session       = $session;
-        $this->encryption    = $encryption;
         $this->localisation  = $localisation;
         $this->tokenProvider = $tokenProvider;
         $this->environment   = $environment;

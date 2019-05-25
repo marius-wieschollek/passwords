@@ -181,6 +181,8 @@ class Application extends App {
         $hookManager->listen(Tag::class, 'postDelete', [$hookManager, 'tagPostDelete']);
         $hookManager->listen(Tag::class, 'preSetRevision', [$hookManager, 'tagPreSetRevision']);
         $hookManager->listen(Share::class, 'postDelete', [$hookManager, 'sharePostDelete']);
+        $hookManager->listen('\OCA\Passwords\User\Challenge', 'preSetChallenge', [$hookManager, 'challengePreSetChallenge']);
+        $hookManager->listen('\OCA\Passwords\User\Challenge', 'postSetChallenge', [$hookManager, 'challengePostSetChallenge']);
     }
 
     /**

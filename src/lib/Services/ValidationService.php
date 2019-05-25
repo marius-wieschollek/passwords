@@ -189,7 +189,7 @@ class ValidationService {
             $revision->setCseType(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         }
 
-        $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2];
+        $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2, EncryptionService::SSE_ENCRYPTION_V2];
         if(!in_array($revision->getSseType(), $validSSE)) {
             throw new ApiException('Invalid server side encryption type', 400);
         }

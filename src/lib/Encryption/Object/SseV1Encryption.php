@@ -5,7 +5,7 @@
  * and licensed under the AGPL.
  */
 
-namespace OCA\Passwords\Encryption;
+namespace OCA\Passwords\Encryption\Object;
 
 use Exception;
 use OCA\Passwords\Db\FolderRevision;
@@ -21,9 +21,9 @@ use OCP\Security\ISecureRandom;
 /**
  * Class SseV1Encryption
  *
- * @package OCA\Passwords\Encryption
+ * @package OCA\Passwords\Encryption\Object
  */
-class SseV1Encryption implements EncryptionInterface {
+class SseV1Encryption implements ObjectEncryptionInterface {
 
     const MINIMUM_KEY_LENGTH = 1024;
 
@@ -81,18 +81,18 @@ class SseV1Encryption implements EncryptionInterface {
      * @param ICrypto              $crypto
      * @param ISecureRandom        $secureRandom
      * @param EnvironmentService   $environment
-     * @param ConfigurationService $configurationService
+     * @param ConfigurationService $config
      */
     public function __construct(
         ICrypto $crypto,
         ISecureRandom $secureRandom,
-        EnvironmentService $environment,
-        ConfigurationService $configurationService
+        ConfigurationService $config,
+        EnvironmentService $environment
     ) {
         $this->userId       = $environment->getUserId();
         $this->crypto       = $crypto;
         $this->secureRandom = $secureRandom;
-        $this->config       = $configurationService;
+        $this->config       = $config;
         $this->environment  = $environment;
     }
 
@@ -101,6 +101,13 @@ class SseV1Encryption implements EncryptionInterface {
      */
     public function isAvailable(): bool {
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string {
+        return EncryptionService::SSE_ENCRYPTION_V1R2;
     }
 
     /**

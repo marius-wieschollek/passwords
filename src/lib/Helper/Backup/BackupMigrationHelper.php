@@ -7,7 +7,7 @@
 
 namespace OCA\Passwords\Helper\Backup;
 
-use OCA\Passwords\Helper\Backup\Encryption\BackupSseV1R1Encryption;
+use OCA\Passwords\Encryption\Backup\SseV1BackupEncryption;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 
 /**
@@ -23,17 +23,17 @@ class BackupMigrationHelper {
     protected $uuidHelper;
 
     /**
-     * @var BackupSseV1R1Encryption
+     * @var SseV1BackupEncryption
      */
     protected $encryption;
 
     /**
      * BackupMigrationHelper constructor.
      *
-     * @param UuidHelper              $uuidHelper
-     * @param BackupSseV1R1Encryption $encryption
+     * @param UuidHelper            $uuidHelper
+     * @param SseV1BackupEncryption $encryption
      */
-    public function __construct(UuidHelper $uuidHelper, BackupSseV1R1Encryption $encryption) {
+    public function __construct(UuidHelper $uuidHelper, SseV1BackupEncryption $encryption) {
         $this->encryption = $encryption;
         $this->uuidHelper = $uuidHelper;
     }
@@ -100,7 +100,7 @@ class BackupMigrationHelper {
      * @param array $database
      *
      * @return array
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     protected function to103(array $database): array {
         $this->encryption->setKeys($database['keys']);
@@ -135,7 +135,7 @@ class BackupMigrationHelper {
      * @param array $database
      *
      * @return array
-     * @throws \OCP\PreConditionNotMetException
+     * @throws \Exception
      */
     protected function to104(array $database): array {
         $this->encryption->setKeys($database['keys']);
