@@ -15,6 +15,7 @@ use OCA\Passwords\Encryption\Keychain\KeychainEncryptionInterface;
 use OCA\Passwords\Encryption\Keychain\SseV2KeychainEncryption;
 use OCA\Passwords\Encryption\Object\SseV1Encryption;
 use OCA\Passwords\Encryption\Object\SseV2Encryption;
+use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCP\AppFramework\IAppContainer;
 
 /**
@@ -30,16 +31,16 @@ class EncryptionService {
     const CSE_ENCRYPTION_NONE      = 'none';
     const CSE_ENCRYPTION_V1R1      = 'CSEv1r1';
     const SSE_ENCRYPTION_NONE      = 'none';
-    const SSE_ENCRYPTION_V1        = 'SSEv1r1';
+    const SSE_ENCRYPTION_V1R1      = 'SSEv1r1';
     const SSE_ENCRYPTION_V1R2      = 'SSEv1r2';
-    const SSE_ENCRYPTION_V2        = 'SSEv2r1';
+    const SSE_ENCRYPTION_V2R1      = 'SSEv2r1';
     const SHARE_ENCRYPTION_V1      = 'SSSEv1r1';
 
     protected $objectMapping
         = [
-            self::SSE_ENCRYPTION_V1   => SseV1Encryption::class,
+            self::SSE_ENCRYPTION_V1R1 => SseV1Encryption::class,
             self::SSE_ENCRYPTION_V1R2 => SseV1Encryption::class,
-            self::SSE_ENCRYPTION_V2   => SseV2Encryption::class,
+            self::SSE_ENCRYPTION_V2R1 => SseV2Encryption::class,
         ];
 
     protected $keychainMapping
@@ -54,12 +55,18 @@ class EncryptionService {
     private $container;
 
     /**
+     * @var UserSettingsHelper
+     */
+    protected $userSettings;
+
+    /**
      * EncryptionService constructor.
      *
      * @param IAppContainer $container
      */
-    public function __construct(IAppContainer $container) {
+    public function __construct(IAppContainer $container, UserSettingsHelper $userSettings) {
         $this->container = $container;
+        $this->userSettings = $userSettings;
     }
 
     /**
@@ -133,21 +140,21 @@ class EncryptionService {
     /**
      * @param string|null $cseType
      *
+     * @param string|null $userId
+     *
      * @return string
+     * @throws Exception
      */
-    public function getDefaultEncryption(string $cseType = null): string {
-        try {
-            if($this->getObjectEncryptionByType(self::SSE_ENCRYPTION_V2)->isAvailable()) {
-                return self::SSE_ENCRYPTION_V2;
-            }
-        } catch(Exception $e) {
+    public function getDefaultEncryption(string $cseType = null, string $userId = null): string {
+        $sseMode = $this->userSettings->get('encryption.sse', $userId);
+
+        if($sseMode === 0 && $cseType !== self::CSE_ENCRYPTION_NONE) return self::SSE_ENCRYPTION_NONE;
+        if($sseMode === 1) return self::SSE_ENCRYPTION_V1R2;
+        if($sseMode === 2 && $this->getObjectEncryptionByType(self::SSE_ENCRYPTION_V2R1)->isAvailable()) {
+            return self::SSE_ENCRYPTION_V2R1;
         }
 
-        if($cseType === self::CSE_ENCRYPTION_NONE || $cseType = null) {
-            return self::DEFAULT_SSE_ENCRYPTION;
-        }
-
-        return self::SSE_ENCRYPTION_NONE;
+        return self::SSE_ENCRYPTION_V1R2;
     }
 
     /**

@@ -71,8 +71,35 @@
 
                     <translate tag="h3" say="Encryption"/>
                     <translate tag="label"
+                               for="setting-encryption-sse"
+                               say="Server encryption mode"
+                               v-if="hasEncryption && advancedSettings"/>
+                    <select id="setting-encryption-sse"
+                            v-model="settings['user.encryption.sse']"
+                            v-if="hasEncryption && advancedSettings">
+                        <translate tag="option" :value="0" say="None if CSE used"/>
+                        <translate tag="option" :value="1" say="Simple encryption"/>
+                        <translate tag="option" :value="2" say="Advanced encryption"/>
+                    </select>
+                    <settings-help text="Choose the type of encryption used to encrypt data on the server"
+                                   v-if="hasEncryption && advancedSettings"/>
+
+                    <translate tag="label"
+                               for="setting-encryption-cse"
+                               say="Client encryption mode"
+                               v-if="hasEncryption && advancedSettings"/>
+                    <select id="setting-encryption-cse"
+                            v-model="settings['user.encryption.cse']"
+                            v-if="hasEncryption && advancedSettings">
+                        <translate tag="option" :value="0" say="No encryption"/>
+                        <translate tag="option" :value="1" say="Libsodium"/>
+                    </select>
+                    <settings-help text="Choose the type of encryption used to encrypt data on the client before it's sent to the server"
+                                   v-if="hasEncryption && advancedSettings"/>
+
+                    <translate tag="label"
                                for="setting-encryption-setup"
-                               say="Client Side Encryption"
+                               say="Enc-to-end Encryption"
                                v-if="!hasEncryption && encryptionFeature"/>
                     <translate tag="input"
                                type="button"
@@ -85,7 +112,7 @@
 
                     <translate tag="label"
                                for="setting-encryption-update"
-                               say="Client Side Encryption"
+                               say="Enc-to-end Encryption"
                                v-if="hasEncryption && encryptionFeature"/>
                     <translate tag="input"
                                type="button"
