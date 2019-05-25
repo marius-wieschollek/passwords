@@ -622,8 +622,8 @@ export default class SimpleApi {
      *
      * @returns {Promise}
      */
-    setAccountChallenge(challenge, secret, oldSecret = null) {
-        return this._sendRequest('challenge.set', {challenge, secret, oldSecret});
+    setAccountChallenge(salts, secret, oldSecret = null) {
+        return this._sendRequest('challenge.set', {salts, secret, oldSecret});
     }
 
     /**

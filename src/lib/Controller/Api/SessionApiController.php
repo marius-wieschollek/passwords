@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\Object\KeychainService;
@@ -65,13 +66,14 @@ class SessionApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function request(): JSONResponse {
         $requirements = [];
 
         if(!$this->session->isAuthorized()) {
             if($this->challengeHelper->hasChallenge()) {
-                $requirements['challenge'] = $this->challengeHelper->getChallenge();
+                $requirements['salts'] = $this->challengeHelper->getSalts();
             }
 
             $providers = $this->tokenHelper->getProvidersAsArray();
@@ -96,16 +98,21 @@ class SessionApiController extends AbstractApiController {
         if(!$this->session->isAuthorized()) {
             $parameters = $this->getParameterArray();
 
-            $password = null;
-            if($this->challengeHelper->hasChallenge() && (!isset($parameters['secret']) || !$this->challengeHelper->validateChallenge($parameters['secret']))) {
-                return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
+            if($this->tokenHelper->tokenRequired()) {
+                if(!isset($parameters['token'])) throw new ApiException('Token invalid', Http::STATUS_UNAUTHORIZED);
+                if(!$this->tokenHelper->verifyTokens($parameters['token'])) {
+                    throw new ApiException('Token verification failed', Http::STATUS_UNAUTHORIZED);
+                }
             }
 
-            if($this->tokenHelper->tokenRequired() && (!isset($parameters['token']) || !$this->tokenHelper->verifyTokens($parameters['token']))) {
-                return new JSONResponse(['success' => false], Http::STATUS_FORBIDDEN);
+            if($this->challengeHelper->hasChallenge()) {
+                if(!isset($parameters['secret'])) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
+                if(!$this->challengeHelper->validateChallenge($parameters['secret'])) {
+                    throw new ApiException('Password verification failed');
+                }
             }
 
-            $this->session->authorizeSession($password);
+            $this->session->authorizeSession();
         }
 
         return new JSONResponse(['success' => true, 'keys' => $this->keychainService->getClientKeychainArray()], Http::STATUS_OK);

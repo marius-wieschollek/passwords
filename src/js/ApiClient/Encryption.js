@@ -141,37 +141,71 @@ export default class Encryption {
 
     /**
      *
-     * @param challengeText
+     * @param salts
      * @param password
      * @returns {string}
      */
-    solveChallenge(challengeText, password) {
-        let challenge = sodium.from_base64(challengeText),
-            salt      = challenge.slice(0, sodium.crypto_pwhash_SALTBYTES),
-            text      = challenge.slice(sodium.crypto_pwhash_SALTBYTES),
-            key       = this._passwordToKey(password, salt);
+    solveChallenge(password, salts) {
+        if(password.length < 12) throw new Error('Password is too short');
+        if(password.length > 128) throw new Error('Password is too long');
 
-        return sodium.to_string(this.decrypt(text, key));
+        let passwordSalt   = sodium.from_hex(salts[0]),
+            genericHashKey = sodium.from_hex(salts[1]),
+            passwordHashSalt = sodium.from_hex(salts[2]),
+            genericHash    = sodium.crypto_generichash(
+                sodium.crypto_generichash_BYTES_MAX,
+                new Uint8Array([...sodium.from_string(password), ...passwordSalt]),
+                genericHashKey
+            );
+
+        let passwordHash     = sodium.crypto_pwhash(
+            sodium.crypto_box_SEEDBYTES,
+            genericHash,
+            passwordHashSalt,
+            sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE,
+            sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE,
+            sodium.crypto_pwhash_ALG_DEFAULT
+        );
+
+
+        return sodium.to_hex(passwordHash);
     }
 
     /**
      *
      * @param password
-     * @returns {{challenge: *, secret: *}}
+     * @returns {{salts: *[], secret: *}}
      */
     createChallenge(password) {
         if(password.length < 12) throw new Error('Password is too short');
         if(password.length > 128) throw new Error('Password is too long');
 
-        let challenge = sodium.to_hex(this._generateRandom(256)),
-            salt      = this._generateRandom(sodium.crypto_pwhash_SALTBYTES),
-            key       = this._passwordToKey(password, salt),
-            encrypted = this.encrypt(challenge, key);
+        let passwordSalt   = this._generateRandom(256),
+            genericHashKey = this._generateRandom(sodium.crypto_generichash_KEYBYTES_MAX),
+            genericHash    = sodium.crypto_generichash(
+                sodium.crypto_generichash_BYTES_MAX,
+                new Uint8Array([...sodium.from_string(password), ...passwordSalt]),
+                genericHashKey
+            );
+
+        let passwordHashSalt = this._generateRandom(sodium.crypto_pwhash_SALTBYTES),
+            passwordHash     = sodium.crypto_pwhash(
+                sodium.crypto_box_SEEDBYTES,
+                genericHash,
+                passwordHashSalt,
+                sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE,
+                sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE,
+                sodium.crypto_pwhash_ALG_DEFAULT
+            );
 
         return {
-            challenge: sodium.to_base64(new Uint8Array([...salt, ...encrypted])),
-            secret   : challenge
-        };
+            salts  : [
+                sodium.to_hex(passwordSalt),
+                sodium.to_hex(genericHashKey),
+                sodium.to_hex(passwordHashSalt)
+            ],
+            secret: sodium.to_hex(passwordHash)
+        }
     }
 
     /**
@@ -261,7 +295,7 @@ export default class Encryption {
         throw new Error('Unknown CSE key id');
     }
 
-    // noinspection JSMethodCanBeStatic
+// noinspection JSMethodCanBeStatic
     /**
      *
      * @param password
@@ -280,7 +314,7 @@ export default class Encryption {
         );
     }
 
-    // noinspection JSMethodCanBeStatic
+// noinspection JSMethodCanBeStatic
     /**
      *
      * @param length
@@ -294,7 +328,7 @@ export default class Encryption {
         return array;
     }
 
-    // noinspection JSMethodCanBeStatic
+// noinspection JSMethodCanBeStatic
     /**
      *
      * @param value
@@ -304,7 +338,8 @@ export default class Encryption {
     async getHash(value, algorithm = 'SHA-1') {
         if(['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'].indexOf(algorithm) !== -1) {
             let msgBuffer  = new TextEncoder('utf-8').encode(value),
-                hashBuffer = await crypto.subtle.digest(algorithm, msgBuffer);
+                hashBuffer = await
+                    crypto.subtle.digest(algorithm, msgBuffer);
             return sodium.to_hex(new Uint8Array(hashBuffer));
         } else if(algorithm.substr(0, 7) === 'BLAKE2b') {
             let bytes = sodium.crypto_generichash_BYTES_MAX;

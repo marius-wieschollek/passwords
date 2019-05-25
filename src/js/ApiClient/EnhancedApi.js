@@ -88,9 +88,9 @@ export default class EnhancedApi extends SimpleApi {
     async openSession(login) {
         let password = null;
         if(login.hasOwnProperty('password')) {
-            login.secret = this.config.encryption.solveChallenge(login.challenge, login.password);
+            login.secret = this.config.encryption.solveChallenge(login.password, login.salts);
             password = login.password;
-            delete login.challenge;
+            delete login.salts;
             delete login.password;
         }
 
@@ -129,12 +129,12 @@ export default class EnhancedApi extends SimpleApi {
         let oldSecret = null;
         if(oldPassword !== null) {
             let oldChallenge = await super.getAccountChallenge();
-            oldSecret = this.config.encryption.solveChallenge(oldChallenge.challenge, oldPassword);
+            oldSecret = this.config.encryption.solveChallenge(oldPassword, oldChallenge.salts);
         }
 
         let challenge = this.config.encryption.createChallenge(password);
 
-        let result = await super.setAccountChallenge(challenge.challenge, challenge.secret, oldSecret);
+        let result = await super.setAccountChallenge(challenge.salts, challenge.secret, oldSecret);
         if(result.success) {
             let keychain = this.config.encryption.getKeychain(password);
             await super.setKeychain('CSEv1r1', keychain);
@@ -1108,8 +1108,13 @@ export default class EnhancedApi extends SimpleApi {
      * @returns object
      */
     getPasswordDefinition() {
-        let cseTypes = ['none'];
-        if(this.hasEncryption) cseTypes.push('CSEv1r1');
+        let cseTypes = ['none'],
+            cseDefault = 'none';
+
+        if(this.hasEncryption) {
+            cseDefault = 'CSEv1r1';
+            cseTypes.push('CSEv1r1');
+        }
 
         return {
             id          : {
@@ -1169,7 +1174,7 @@ export default class EnhancedApi extends SimpleApi {
             cseType     : {
                 type   : 'string',
                 length : 10,
-                default: 'none',
+                default: cseDefault,
                 allowed: cseTypes
             },
             tags        : {
@@ -1188,8 +1193,13 @@ export default class EnhancedApi extends SimpleApi {
      * @returns object
      */
     getFolderDefinition() {
-        let cseTypes = ['none'];
-        if(this.hasEncryption) cseTypes.push('CSEv1r1');
+        let cseTypes = ['none'],
+            cseDefault = 'none';
+
+        if(this.hasEncryption) {
+            cseDefault = 'CSEv1r1';
+            cseTypes.push('CSEv1r1');
+        }
 
         return {
             id        : {
@@ -1225,7 +1235,7 @@ export default class EnhancedApi extends SimpleApi {
             cseType   : {
                 type   : 'string',
                 length : 10,
-                default: 'none',
+                default: cseDefault,
                 allowed: cseTypes
             },
             _encrypted: {
@@ -1240,8 +1250,13 @@ export default class EnhancedApi extends SimpleApi {
      * @returns object
      */
     getTagDefinition() {
-        let cseTypes = ['none'];
-        if(this.hasEncryption) cseTypes.push('CSEv1r1');
+        let cseTypes = ['none'],
+            cseDefault = 'none';
+
+        if(this.hasEncryption) {
+            cseDefault = 'CSEv1r1';
+            cseTypes.push('CSEv1r1');
+        }
 
         return {
             id        : {
@@ -1277,7 +1292,7 @@ export default class EnhancedApi extends SimpleApi {
             cseType   : {
                 type   : 'string',
                 length : 10,
-                default: 'none',
+                default: cseDefault,
                 allowed: cseTypes
             },
             _encrypted: {

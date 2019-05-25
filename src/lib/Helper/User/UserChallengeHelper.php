@@ -7,11 +7,14 @@
 
 namespace OCA\Passwords\Helper\User;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\SessionService;
+use OCP\AppFramework\Http;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 
@@ -21,10 +24,17 @@ use OCP\Security\ISecureRandom;
  * @package OCA\Passwords\Helper\User
  */
 class UserChallengeHelper {
+
+    const USER_SECRET_KEY = 'user/secret/key';
+
+    const USER_SECRET_SALTS = 'user/secret/salts';
+
+    const USER_SECRET_CRYPT_KEY = 'user/secret/cryptKey';
+
     /**
      * @var ICrypto
      */
-    private $crypto;
+    protected $crypto;
 
     /**
      * @var LoggingService
@@ -35,6 +45,11 @@ class UserChallengeHelper {
      * @var ConfigurationService
      */
     protected $config;
+
+    /**
+     * @var HookManager
+     */
+    protected $hookManager;
 
     /**
      * @var EnvironmentService
@@ -64,6 +79,7 @@ class UserChallengeHelper {
     public function __construct(
         ICrypto $crypto,
         LoggingService $logger,
+        HookManager $hookManager,
         ISecureRandom $secureRandom,
         ConfigurationService $config,
         SessionService $sessionService,
@@ -75,6 +91,7 @@ class UserChallengeHelper {
         $this->secureRandom   = $secureRandom;
         $this->crypto         = $crypto;
         $this->sessionService = $sessionService;
+        $this->hookManager    = $hookManager;
     }
 
     /**
@@ -82,7 +99,7 @@ class UserChallengeHelper {
      */
     public function hasChallenge(): bool {
         try {
-            return $this->config->hasUserValue('user/challenge/challenge');
+            return $this->config->hasUserValue(self::USER_SECRET_KEY);
         } catch(\Exception $e) {
             $this->logger->logException($e);
 
@@ -91,27 +108,36 @@ class UserChallengeHelper {
     }
 
     /**
-     * @return null|string
+     * @return null|array
+     * @throws \Exception
      */
-    public function getChallenge(): ?string {
+    public function getSalts(): ?array {
         try {
-            return $this->config->getUserValue('user/challenge/challenge', null);
+            $encrypted = $this->config->getUserValue(self::USER_SECRET_SALTS, null);
         } catch(\Exception $e) {
             $this->logger->logException($e);
 
             return null;
         }
+
+        $decrypted = $this->crypto->decrypt($encrypted, $this->makePassword(''));
+
+        return json_decode($decrypted, true);
     }
 
     /**
-     * @param string $password
+     * @param string $secret
      *
      * @return bool
      * @throws ApiException
      */
     public function validateChallenge(string $secret): bool {
+        if(strlen($secret) !== 64) {
+            throw new ApiException('Secret length invalid', HTTP::STATUS_BAD_REQUEST);
+        }
+
         try {
-            $encryptedKey = $this->config->getUserValue('user/challenge/key');
+            $encryptedKey = $this->config->getUserValue(self::USER_SECRET_KEY);
         } catch(\Exception $e) {
             $this->logger->logException($e);
 
@@ -121,37 +147,42 @@ class UserChallengeHelper {
         try {
             $key = $this->crypto->decrypt($encryptedKey, $this->makePassword($secret));
         } catch(\Exception $e) {
-            throw new ApiException('Invalid Password');
+            throw new ApiException('Password invalid', HTTP::STATUS_UNAUTHORIZED);
         }
 
-        $this->sessionService->set('userKey', $key);
+        $this->sessionService->set(SessionService::VALUE_USER_SECRET, $key);
 
         return true;
     }
 
     /**
-     * @param string $challenge
+     * @param array  $salts
      * @param string $secret
      *
      * @return bool
      * @throws ApiException
      */
-    public function setChallenge(string $challenge, string $secret): bool {
-        if(strlen($secret) < 512) {
-            throw new ApiException('Secret too short');
+    public function setChallenge(array $salts, string $secret): bool {
+        if(strlen($secret) !== 64) {
+            throw new ApiException('Secret length invalid', HTTP::STATUS_BAD_REQUEST);
         }
+
+        if(strlen($salts[0]) < 512 || strlen($salts[1]) !== 128 || strlen($salts[2]) !== 32) {
+            throw new ApiException('Salt length invalid', HTTP::STATUS_BAD_REQUEST);
+        }
+
+        $backup = $this->backupChallenge();
         try {
-            $key          = $this->secureRandom->generate(512);
-            $encryptedKey = $this->crypto->encrypt($key, $this->makePassword($secret));
-
-            $this->config->setUserValue('user/challenge/challenge', $challenge);
-            $this->config->setUserValue('user/challenge/key', $encryptedKey);
-
-            $this->sessionService->set('userKey', $key);
+            $this->hookManager->emit('\OCA\Passwords\User\Challenge', 'preSetChallenge');
+            $key = $this->updateSaltAndKey($salts, $secret);
+            $this->sessionService->set(SessionService::VALUE_USER_SECRET, $key);
+            $this->hookManager->emit('\OCA\Passwords\User\Challenge', 'postSetChallenge', [$key]);
 
             return true;
         } catch(\Exception $e) {
             $this->logger->logException($e);
+
+            $this->revertChallenge($backup);
 
             return false;
         }
@@ -161,8 +192,84 @@ class UserChallengeHelper {
      * @param string $password
      *
      * @return string
+     * @throws \Exception
      */
     protected function makePassword(string $password): string {
-        return $password.$this->config->getSystemValue('secret');
+        $this->config->clearCache();
+        $cryptKey = $this->config->getUserValue(self::USER_SECRET_CRYPT_KEY, '');
+        if(strlen($cryptKey) < 512) {
+            $cryptKey = $this->getSecureRandom();
+            $this->config->setUserValue(self::USER_SECRET_CRYPT_KEY, $cryptKey);
+        }
+
+        return $this->config->getSystemValue('secret').$cryptKey.$password;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSecureRandom(): string {
+        return $this->secureRandom->generate(512);
+    }
+
+    /**
+     * @param array  $salts
+     * @param string $secret
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function updateSaltAndKey(array $salts, string $secret): string {
+        $json           = json_encode($salts);
+        $encryptedSalts = $this->crypto->encrypt($json, $this->makePassword(''));;
+        $this->config->setUserValue(self::USER_SECRET_SALTS, $encryptedSalts);
+
+        $key          = $this->getSecureRandom();
+        $encryptedKey = $this->crypto->encrypt($key, $this->makePassword($secret));
+        $this->config->setUserValue(self::USER_SECRET_KEY, $encryptedKey);
+
+        return $key;
+    }
+
+    /**
+     * @return array
+     * @throws ApiException
+     */
+    protected function backupChallenge(): array {
+        $backup = [];
+        if($this->hasChallenge()) {
+            try {
+                $backup = [
+                    'salts'   => $this->config->getUserValue(self::USER_SECRET_SALTS),
+                    'key'     => $this->config->getUserValue(self::USER_SECRET_KEY),
+                    'secret' => $this->sessionService->get(SessionService::VALUE_USER_SECRET)
+                ];
+            } catch(Exception $e) {
+                $this->logger->logException($e);
+
+                throw new ApiException('Password update failed');
+            }
+        }
+
+        return $backup;
+    }
+
+    /**
+     * @param $backup
+     */
+    protected function revertChallenge(array $backup): void {
+        try {
+            if(isset($backup['salts'])) {
+                $this->config->setUserValue(self::USER_SECRET_SALTS, $backup['salts']);
+                $this->config->setUserValue(self::USER_SECRET_KEY, $backup['key']);
+                $this->sessionService->set(SessionService::VALUE_USER_SECRET, $backup['secret']);
+            } else {
+                $this->config->deleteUserValue(self::USER_SECRET_SALTS);
+                $this->config->deleteUserValue(self::USER_SECRET_KEY);
+                $this->sessionService->unset(SessionService::VALUE_USER_SECRET);
+            }
+        } catch(Exception $e) {
+            $this->logger->logException($e);
+        }
     }
 }

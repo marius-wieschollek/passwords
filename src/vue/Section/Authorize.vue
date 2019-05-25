@@ -49,6 +49,7 @@
             return {
                 password     : '',
                 token        : '',
+                salts        : [],
                 providerId   : -1,
                 provider     : null,
                 providers    : [],
@@ -68,9 +69,9 @@
             document.body.classList.add('pw-authorize');
             API.requestSession()
                 .then((d) => {
-                    if(d.hasOwnProperty('challenge')) {
+                    if(d.hasOwnProperty('salts')) {
                         this.hasPassword = true;
-                        this.challenge = d.challenge;
+                        this.salts = d.salts;
                     }
                     if(d.hasOwnProperty('token')) {
                         this.hasToken = true;
@@ -125,7 +126,7 @@
 
                 if(this.hasPassword) {
                     data.password = this.password;
-                    data.challenge = this.challenge;
+                    data.salts = this.salts;
                 }
                 if(this.hasToken) {
                     data.token = {};

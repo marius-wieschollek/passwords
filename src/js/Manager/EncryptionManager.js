@@ -60,12 +60,12 @@ class EncryptionManager {
         let data = await Messages.form(
             {
                 password      : {
-                    label: 'New Password',
-                    type: 'password',
-                    button: 'toggle',
+                    label    : 'New Password',
+                    type     : 'password',
+                    button   : 'toggle',
                     minlength: 12,
-                    required: true,
-                    title: 'Your password must be longer than 12 characters and not the old password',
+                    required : true,
+                    title    : 'Your password must be longer than 12 characters and not the old password',
                     validator: (value, fields) => {
                         return value !== fields.oldPassword && value.length >= 12;
                     }
@@ -74,16 +74,18 @@ class EncryptionManager {
                     label    : 'Repeat Password',
                     type     : 'password',
                     button   : 'toggle',
-                    required: true,
-                    title: 'Please confirm your new password',
+                    required : true,
+                    title    : 'Please confirm your new password',
                     validator: (value, fields) => {
                         return value === fields.password;
                     }
                 },
                 oldPassword   : {
-                    label: 'Old Password', type: 'password', button: 'toggle',
-                    title: 'You must enter your old password',
-                    required: true,
+                    label    : 'Old Password',
+                    type     : 'password',
+                    button   : 'toggle',
+                    title    : 'You must enter your old password',
+                    required : true,
                     validator: (value) => {
                         return value.length >= 12;
                     }
@@ -98,6 +100,7 @@ class EncryptionManager {
             Messages.alert('Your password has been changed successfully', 'Password changed');
         } catch(e) {
             Messages.alert(e.message, 'Changing password failed');
+            console.error(e);
         }
     }
 
@@ -169,6 +172,7 @@ class EncryptionManager {
 
         if(!password.shared) {
             await this._deleteObject(password.id, 'password');
+            password.cseType = 'CSEv1r1';
 
             try {
                 await API.createPassword(password);
@@ -227,6 +231,8 @@ class EncryptionManager {
      */
     async _encryptTag(tag, idMap) {
         try {
+            tag.cseType = 'CSEv1r1';
+
             let result = await API.createTag(tag);
             idMap[tag.id] = result.id;
 
@@ -279,9 +285,10 @@ class EncryptionManager {
      * @private
      */
     async _encryptFolder(folder, idMap) {
-
         try {
             folder.parent = idMap[folder.parent];
+            folder.cseType = 'CSEv1r1';
+
             let result = await API.createFolder(folder);
             idMap[folder.id] = result.id;
 

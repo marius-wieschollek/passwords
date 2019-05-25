@@ -56,6 +56,7 @@ class AccountApiController extends AbstractApiController {
      * @param IUserManager         $userManager
      * @param SessionService       $sessionService
      * @param EnvironmentService   $environment
+     * @param UserChallengeHelper  $passwordHelper
      * @param DeleteUserDataHelper $deleteUserDataHelper
      */
     public function __construct(
@@ -111,10 +112,11 @@ class AccountApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function getChallenge(): JSONResponse {
         if($this->challengeHelper->hasChallenge()) {
-            return $this->createJsonResponse(['challenge' => $this->challengeHelper->getChallenge()], Http::STATUS_OK);
+            return $this->createJsonResponse(['salts' => $this->challengeHelper->getSalts()], Http::STATUS_OK);
         }
 
         return $this->createJsonResponse([], Http::STATUS_NOT_FOUND);
@@ -125,22 +127,25 @@ class AccountApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param null|string $challenge
+     * @param array       $salts
      * @param null|string $secret
      * @param null        $oldSecret
      *
      * @return JSONResponse
      * @throws ApiException
      */
-    public function setChallenge(string $challenge, string $secret, $oldSecret = null): JSONResponse {
-        if($this->challengeHelper->hasChallenge() && ($oldSecret === null || !$this->challengeHelper->validateChallenge($oldSecret))) {
-            throw new ApiException('Invalid password', Http::STATUS_BAD_REQUEST);
+    public function setChallenge(array $salts, string $secret, $oldSecret = null): JSONResponse {
+        if($this->challengeHelper->hasChallenge()) {
+            if($oldSecret === null) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
+            if(!$this->challengeHelper->validateChallenge($oldSecret)) {
+                throw new ApiException('Password verification failed');
+            }
         }
 
-        if($this->challengeHelper->setChallenge($challenge, $secret)) {
+        if($this->challengeHelper->setChallenge($salts, $secret)) {
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 
-        return $this->createJsonResponse(['success' => false], Http::STATUS_INTERNAL_SERVER_ERROR);
+        throw new ApiException('Password update failed');
     }
 }

@@ -9,7 +9,7 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
-use OCA\Passwords\Encryption\SimpleEncryption;
+use OCA\Passwords\Encryption\Object\SimpleEncryption;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -22,6 +22,8 @@ use OCP\ISession;
  * @package OCA\Passwords\Services\Object
  */
 class SessionService {
+
+    const VALUE_USER_SECRET = 'userSecret';
 
     /**
      * @var LoggingService
@@ -95,6 +97,10 @@ class SessionService {
      * @param SimpleEncryption   $encryption
      * @param UserSettingsHelper $userSettings
      */
+    const API_SESSION_KEY = 'passwordsSessionId';
+
+    const API_SESSION_HEADER = 'X-API-SESSION';
+
     public function __construct(
         IRequest $request,
         ISession $session,
@@ -144,7 +150,6 @@ class SessionService {
      * @param        $value
      */
     public function set(string $key, $value): void {
-        if($key === 'password') return;
         if($this->session === null) $this->load();
 
         $this->modified     = true;
@@ -166,7 +171,7 @@ class SessionService {
      * @param string $key
      */
     public function unset(string $key): void {
-        if($this->has($key) && $key !== 'password') {
+        if($this->has($key)) {
             unset($this->data[ $key ]);
             $this->modified = true;
         }
@@ -207,17 +212,13 @@ class SessionService {
     }
 
     /**
-     * @param string $password
+     *
      */
-    public function authorizeSession(?string $password): void {
+    public function authorizeSession(): void {
         if($this->session === null) $this->load();
 
         $this->session->setAuthorized(true);
         $this->modified = true;
-
-        if($password !== null) {
-            $this->data['password'] = $password;
-        }
     }
 
     /**
@@ -242,7 +243,7 @@ class SessionService {
             $this->session->setUpdated(time());
             $this->session = $this->mapper->update($this->session);
         }
-        $this->userSession->set('passwordsSessionId', $this->session->getUuid());
+        $this->userSession->set(self::API_SESSION_KEY, $this->session->getUuid());
         $this->modified = false;
     }
 
@@ -263,10 +264,10 @@ class SessionService {
      */
     public function load() {
         if($this->session !== null) return;
-        if($this->userSession->exists('passwordsSessionId')) {
-            $sessionId = $this->userSession->get('passwordsSessionId');
+        if($this->userSession->exists(self::API_SESSION_KEY)) {
+            $sessionId = $this->userSession->get(self::API_SESSION_KEY);
         } else {
-            $sessionId = $this->request->getHeader('X-API-SESSION');
+            $sessionId = $this->request->getHeader(self::API_SESSION_HEADER);
         }
 
         if(!empty($sessionId)) {
