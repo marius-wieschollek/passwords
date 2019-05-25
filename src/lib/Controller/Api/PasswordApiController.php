@@ -215,10 +215,10 @@ class PasswordApiController extends AbstractObjectApiController {
             $url          = $oldRevision->getUrl();
         } else if($model->hasShares() || $model->getShareId()) {
             if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                throw new ApiException('CSE type does not support sharing', 400);
+                throw new ApiException('CSE type does not support sharing', Http::STATUS_BAD_REQUEST);
             }
             if($hidden) {
-                throw new ApiException('Shared entity can not be hidden', 400);
+                throw new ApiException('Shared entity can not be hidden', Http::STATUS_BAD_REQUEST);
             }
         }
 
@@ -269,10 +269,13 @@ class PasswordApiController extends AbstractObjectApiController {
                 $revision = $this->revisionService->findByUuid($revision);
 
                 if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                    throw new ApiException('CSE type does not support sharing', 400);
+                    throw new ApiException('CSE type does not support sharing', Http::STATUS_BAD_REQUEST);
+                }
+                if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1R2) {
+                    throw new ApiException('SSE type does not support sharing', Http::STATUS_BAD_REQUEST);
                 }
                 if($revision->isHidden()) {
-                    throw new ApiException('Shared entity can not be hidden', 400);
+                    throw new ApiException('Shared entity can not be hidden', Http::STATUS_BAD_REQUEST);
                 }
             }
         }
