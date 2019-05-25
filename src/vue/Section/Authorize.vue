@@ -146,8 +146,10 @@
                 if(this.hasToken && this.provider.type !== 'user-token') this.token = '';
                 this.hasError = true;
 
-                if(e.status === 403 || e.message === 'wrong secret key for the given ciphertext') {
-                    this.errorMessage = 'Login incorrect';
+                if(e.response && e.response.status === 403) {
+                    this.errorMessage = 'Too many attempts';
+
+                    setTimeout('location.reload()', 2500);
                 } else if(e.message) {
                     this.errorMessage = e.message;
                 } else {

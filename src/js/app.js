@@ -101,19 +101,15 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
                 target = btoa(JSON.stringify(target));
                 router.push({name: 'Authorize', params: {target}});
 
-                Messages.notification('Authorisation Expired. Please log in')
-            } else if(e.response) {
-                if(e.response.status === 401) {
-                    await Messages.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
-                    location.reload();
-                } else if(e.response.status === 500) {
-                    Messages.notification('Internal Server Error during request');
-                } else {
-                    Messages.notification(`${e.response.status} - ${e.response.statusText}`);
-                    console.log(e);
-                }
+                Messages.notification('Session expired. Please authenticate.')
+            } else if(e.response && e.response.status === 401 && e.message === "CORS requires basic auth") {
+                await Messages.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
+                location.reload();
             } else if(e.message) {
                 Messages.notification(e.message);
+                console.log(e);
+            } else if(e.response) {
+                Messages.notification(`${e.response.status} - ${e.response.statusText}`);
                 console.log(e);
             } else {
                 console.log(e);

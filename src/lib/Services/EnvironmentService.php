@@ -98,6 +98,11 @@ class EnvironmentService {
     protected $userLogin;
 
     /**
+     * @var null|IToken
+     */
+    protected $loginToken;
+
+    /**
      * @var null|string
      */
     protected $client = self::CLIENT_UNKNOWN;
@@ -194,6 +199,13 @@ class EnvironmentService {
      */
     public function getLoginType(): string {
         return $this->loginType;
+    }
+
+    /*
+     * @return IToken|null
+     */
+    public function getLoginToken(): ?IToken {
+        return $this->loginToken;
     }
 
     /**
@@ -336,10 +348,11 @@ class EnvironmentService {
             $loginUser = $this->userManager->get($token->getUID());
 
             if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
-                $this->user      = $loginUser;
-                $this->userLogin = $loginName;
-                $this->client    = $this->getClientFromToken($token);
-                $this->loginType = self::LOGIN_TOKEN;
+                $this->user       = $loginUser;
+                $this->userLogin  = $loginName;
+                $this->client     = $this->getClientFromToken($token);
+                $this->loginToken = $token;
+                $this->loginType  = self::LOGIN_TOKEN;
 
                 return true;
             }
@@ -374,10 +387,11 @@ class EnvironmentService {
         $loginUser = $this->userManager->get($token->getUID());
 
         if($loginUser !== null && $loginUser->getUID() === $userId) {
-            $this->user      = $loginUser;
-            $this->userLogin = $token->getLoginName();
-            $this->client    = $this->getClientFromToken($token);
-            $this->loginType = self::LOGIN_TOKEN;
+            $this->user       = $loginUser;
+            $this->userLogin  = $token->getLoginName();
+            $this->client     = $this->getClientFromToken($token);
+            $this->loginToken = $token;
+            $this->loginType  = self::LOGIN_TOKEN;
 
             return true;
         }
@@ -398,10 +412,11 @@ class EnvironmentService {
             $user = $this->userManager->get($uid);
             if($user !== null) {
                 if($uid === $userId) {
-                    $this->user      = $user;
-                    $this->userLogin = $sessionToken->getLoginName();
-                    $this->client    = $this->getClientFromToken($sessionToken);
-                    $this->loginType = self::LOGIN_SESSION;
+                    $this->user       = $user;
+                    $this->userLogin  = $sessionToken->getLoginName();
+                    $this->client     = $this->getClientFromToken($sessionToken);
+                    $this->loginToken = $sessionToken;
+                    $this->loginType  = self::LOGIN_SESSION;
 
                     return true;
                 } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
@@ -410,6 +425,7 @@ class EnvironmentService {
                         $this->user          = $user;
                         $this->userLogin     = $userId;
                         $this->client        = ucfirst($uid).' via Impersonate';
+                        $this->loginToken    = $sessionToken;
                         $this->loginType     = self::LOGIN_SESSION;
                         $this->impersonating = true;
                         $this->realUser      = $this->userManager->get($uid);

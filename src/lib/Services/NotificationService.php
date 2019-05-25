@@ -12,6 +12,7 @@ use OCA\Passwords\Notification\AbstractNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
 use OCA\Passwords\Notification\LegacyApiNotification;
+use OCA\Passwords\Notification\LoginAttemptNotification;
 use OCA\Passwords\Notification\ShareCreatedNotification;
 use OCA\Passwords\Notification\ShareLoopNotification;
 use OCP\L10N\IFactory;
@@ -56,6 +57,11 @@ class NotificationService implements INotifier {
     protected $shareCreatedNotification;
 
     /**
+     * @var LoginAttemptNotification
+     */
+    protected $loginAttemptNotification;
+
+    /**
      * @var ImpersonationNotification
      */
     protected $impersonationNotification;
@@ -69,6 +75,7 @@ class NotificationService implements INotifier {
      * @param LegacyApiNotification     $legacyApiNotification
      * @param BadPasswordNotification   $badPasswordNotification
      * @param ShareCreatedNotification  $shareCreatedNotification
+     * @param LoginAttemptNotification  $loginAttemptNotification
      * @param ImpersonationNotification $impersonationNotification
      */
     public function __construct(
@@ -78,6 +85,7 @@ class NotificationService implements INotifier {
         LegacyApiNotification $legacyApiNotification,
         BadPasswordNotification $badPasswordNotification,
         ShareCreatedNotification $shareCreatedNotification,
+        LoginAttemptNotification $loginAttemptNotification,
         ImpersonationNotification $impersonationNotification
     ) {
         $this->settings                  = $settings;
@@ -86,6 +94,7 @@ class NotificationService implements INotifier {
         $this->shareLoopNotification     = $shareLoopNotification;
         $this->badPasswordNotification   = $badPasswordNotification;
         $this->shareCreatedNotification  = $shareCreatedNotification;
+        $this->loginAttemptNotification  = $loginAttemptNotification;
         $this->impersonationNotification = $impersonationNotification;
     }
 
@@ -140,6 +149,19 @@ class NotificationService implements INotifier {
     /**
      * @param string $userId
      * @param string $client
+     * @param bool   $revoked
+     */
+    public function sendLoginAttemptNotification(string $userId, string $client, $revoked = false): void {
+        $this->sendNotification(
+            $this->loginAttemptNotification,
+            $userId,
+            ['client' => $client, 'revoked' => $revoked]
+        );
+    }
+
+    /**
+     * @param string $userId
+     * @param string $client
      */
     public function sendLegacyApiNotification(string $userId, string $client): void {
         $this->sendNotification(
@@ -184,6 +206,8 @@ class NotificationService implements INotifier {
                 return $this->shareLoopNotification->process($notification, $localisation);
             case ImpersonationNotification::NAME:
                 return $this->impersonationNotification->process($notification, $localisation);
+            case LoginAttemptNotification::NAME:
+                return $this->loginAttemptNotification->process($notification, $localisation);
             case LegacyApiNotification::NAME:
                 return $this->legacyApiNotification->process($notification, $localisation);
         }

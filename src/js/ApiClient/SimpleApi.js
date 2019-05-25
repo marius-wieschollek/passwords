@@ -713,7 +713,7 @@ export default class SimpleApi {
             if(!this._headers.hasOwnProperty(header)) continue;
             headers.append(header, this._headers[header]);
         }
-        headers.append('Accept', `application/${dataType}, text/plain, */*`);
+        headers.append('Accept', `application/${dataType}`);
 
         let options = {method, headers, credentials: 'omit'};
         if(data) {
