@@ -115,6 +115,6 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
      * @return string
      */
     public function getType(): string {
-        return EncryptionService::SSE_ENCRYPTION_V2;
+        return EncryptionService::SSE_ENCRYPTION_V2R1;
     }
 }

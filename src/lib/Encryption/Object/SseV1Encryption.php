@@ -129,7 +129,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
 
         $object->setSseKey($sseKey);
 
-        if($object->getSseType() === EncryptionService::SSE_ENCRYPTION_V1) {
+        if($object->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R1) {
             $object->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
         }
 
@@ -145,7 +145,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      */
     public function decryptObject(RevisionInterface $object): RevisionInterface {
         $sseKey        = $object->getSseKey();
-        if($object->getSseType() === EncryptionService::SSE_ENCRYPTION_V1) {
+        if($object->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R1) {
             $encryptionKey = $this->getLegacyEncryptionKey($sseKey, $object->getUserId());
         } else {
             $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());

@@ -36,7 +36,9 @@ class UserSettingsHelper {
             'notification/security'        => 'boolean',
             'notification/shares'          => 'boolean',
             'notification/errors'          => 'boolean',
-            'session/lifetime'             => 'integer'
+            'session/lifetime'             => 'integer',
+            'encryption/sse'       => 'integer',
+            'encryption/cse'       => 'integer'
         ];
 
     /**
@@ -54,7 +56,9 @@ class UserSettingsHelper {
             'notification/security'        => true,
             'notification/shares'          => true,
             'notification/errors'          => true,
-            'session/lifetime'             => 600
+            'session/lifetime'             => 600,
+            'encryption/sse'       => 0,
+            'encryption/cse'       => 1
         ];
 
     /**

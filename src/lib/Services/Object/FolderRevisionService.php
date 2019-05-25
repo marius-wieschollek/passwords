@@ -215,7 +215,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);
         $revision->setEdited($edited);
-        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
+        $revision->setSseType($this->encryption->getDefaultEncryption($cseType, $this->userId));
         $revision->setClient($this->environment->getClient());
 
         return $revision;

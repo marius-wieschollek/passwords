@@ -180,7 +180,7 @@ class LegacyCategoryApiController extends ApiController {
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
             return null;
         }
-        if(!in_array($revision->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
+        if(!in_array($revision->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
             return null;
         }
 

@@ -108,7 +108,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
      * @return string
      */
     public function getType(): string {
-        return EncryptionService::SSE_ENCRYPTION_V2;
+        return EncryptionService::SSE_ENCRYPTION_V2R1;
     }
 
     /**
@@ -128,7 +128,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
         }
 
         $object->setSseKey($keyId);
-        $object->setSseType(EncryptionService::SSE_ENCRYPTION_V2);
+        $object->setSseType(EncryptionService::SSE_ENCRYPTION_V2R1);
 
         return $object;
     }

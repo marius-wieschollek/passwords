@@ -164,7 +164,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setFolder($folder);
         $revision->setFavorite($favorite);
         $revision->setEdited($edited);
-        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
+        $revision->setSseType($this->encryption->getDefaultEncryption($cseType, $this->userId));
         $revision->setClient($this->environment->getClient());
 
         return $revision;
