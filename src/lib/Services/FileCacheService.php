@@ -72,11 +72,11 @@ class FileCacheService {
             try {
                 $this->folderCache[ $cache ] = $this->appData->newFolder($cache.'Cache');
             } catch(NotPermittedException $e) {
-                if($e->getMessage() === 'Could not create folder') {
-                    $this->folderCache[ $cache ] = $this->appData->getFolder($cache.'Cache');
-                } else {
+                if($e->getMessage() !== 'Could not create folder') {
                     throw $e;
                 }
+
+                $this->folderCache[ $cache ] = $this->appData->getFolder($cache.'Cache');
             }
         }
 
