@@ -12,7 +12,7 @@ class SetupManager {
      */
     async runAutomatically() {
         if(SettingsManager.get('client.setup.initialized', false)) return;
-        if(await DeferredActivationService.check('first-run-wizard')) return;
+        if(!await DeferredActivationService.check('first-run-wizard')) return;
 
         await this._runWizard();
     }

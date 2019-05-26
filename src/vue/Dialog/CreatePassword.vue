@@ -82,7 +82,7 @@
                                     v-model="password.cseType"
                                     :disabled="!hasEncryption">
                                 <translate tag="option" value="none" say="On the server"/>
-                                <translate tag="option" value="CSEv1r1" say="Client-side encryption"/>
+                                <translate tag="option" value="CSEv1r1" say="Libsodium"/>
                             </select>
                         </div>
                     </foldout>
@@ -103,6 +103,7 @@
     import Messages from "@js/Classes/Messages";
     import Localisation from '@js/Classes/Localisation';
     import EnhancedApi from '@js/ApiClient/EnhancedApi';
+    import SettingsManager from '@js/Manager/SettingsManager';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
@@ -126,7 +127,7 @@
         },
 
         data() {
-            let cseType  = API.hasEncryption ? 'CSEv1r1':'none',
+            let cseType  = SettingsManager.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
                 password = Object.assign({cseType, notes: '', customFields: []}, this.properties);
 
             return {

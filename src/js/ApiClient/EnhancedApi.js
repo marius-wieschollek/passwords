@@ -54,6 +54,7 @@ export default class EnhancedApi extends SimpleApi {
         if(!config.folderIcon) config.folderIcon = `${config.baseUrl}core/img/filetypes/folder.svg`;
         if(!config.apiUrl) config.apiUrl = `${config.baseUrl}index.php/apps/passwords/`;
         if(!config.encryption) throw new Error('Encryption support is missing');
+        if(!config.cseMode || ['none', 'CSEv1r1'].indexOf(config.cseMode) === -1) config.cseMode = 'CSEv1r1';
         if(!config.device) {
             config.device = 'desktop';
             if(window.matchMedia('only screen and (max-width: 768px) and (hover: none)').matches) {
@@ -1112,7 +1113,7 @@ export default class EnhancedApi extends SimpleApi {
             cseDefault = 'none';
 
         if(this.hasEncryption) {
-            cseDefault = 'CSEv1r1';
+            cseDefault = this.config.cseMode;
             cseTypes.push('CSEv1r1');
         }
 
@@ -1197,7 +1198,7 @@ export default class EnhancedApi extends SimpleApi {
             cseDefault = 'none';
 
         if(this.hasEncryption) {
-            cseDefault = 'CSEv1r1';
+            cseDefault = this.config.cseMode;
             cseTypes.push('CSEv1r1');
         }
 
@@ -1254,7 +1255,7 @@ export default class EnhancedApi extends SimpleApi {
             cseDefault = 'none';
 
         if(this.hasEncryption) {
-            cseDefault = 'CSEv1r1';
+            cseDefault = this.config.cseMode;
             cseTypes.push('CSEv1r1');
         }
 
