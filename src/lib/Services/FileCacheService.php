@@ -140,8 +140,11 @@ class FileCacheService {
      */
     public function clearCache(string $cache = null): void {
         try {
-            $files = $this->getCache($cache)->getDirectoryListing();
-            foreach($files as $file) $file->delete();
+            $this->getCache($cache)->delete();
+            $class    = new \ReflectionClass($this->appData);
+            $property = $class->getProperty('folders');
+            $property->setAccessible(true);
+            $property->setValue($this->appData, new \OC\Cache\CappedMemoryCache());
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
