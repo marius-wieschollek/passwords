@@ -54,7 +54,7 @@
                         <translate tag="label" for="password-label" say="Name"/>
                         <input id="password-label" type="text" name="label" maxlength="64" v-model="password.label">
                         <translate tag="label" for="password-url" say="Website"/>
-                        <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
+                        <input id="password-url" type="url" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
                     </div>
                 </div>
@@ -391,6 +391,7 @@
                         font-size : 0.9rem;
                     }
 
+                    input[type=url],
                     input[type=text],
                     input[type=password] {
                         cursor    : text;

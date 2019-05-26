@@ -3,6 +3,7 @@
  - Compress language files and plain js
 ### Fixed
  - BigDB+Hibp database update not initiated
+ - Cache folder not created before write
  - Dirty data in custom fields
 
 ## 2019.5.0 - Feature release

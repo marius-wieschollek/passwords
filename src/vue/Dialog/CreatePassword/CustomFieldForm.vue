@@ -76,6 +76,7 @@
             getFieldType() {
                 if(this.type === 'secret') return 'password';
                 if(this.type === 'email') return 'email';
+                if(this.type === 'url') return 'url';
                 return 'text';
             },
             getFileButtonStyle() {

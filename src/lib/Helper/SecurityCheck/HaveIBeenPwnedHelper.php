@@ -43,6 +43,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      */
     public function updateDb(): void {
         $this->fileCacheService->clearCache();
+        $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
     }
 
     /**
