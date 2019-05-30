@@ -335,9 +335,9 @@
     import SettingsHelp from '@vue/Components/SettingsHelp';
     import SettingsManager from '@js/Manager/SettingsManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
-    import SUM from "@js/Manager/SetupManager";
-    import EncryptionManager from "@js/Manager/EncryptionManager";
-    import DAS from "@js/Service/DeferredActivationService";
+    import SUM from '@js/Manager/SetupManager';
+    import EncryptionManager from '@js/Manager/EncryptionManager';
+    import DAS from '@js/Service/DeferredActivationService';
 
     export default {
         components: {

@@ -93,6 +93,35 @@ export default class Encryption {
     /**
      *
      * @param message
+     * @param password
+     * @returns {*}
+     */
+    encryptWithPassword(message, password) {
+        let salt = this._generateRandom(sodium.crypto_pwhash_SALTBYTES),
+            key  = this._passwordToKey(password, salt),
+            encrypted = this.encrypt(message, key);
+
+        return sodium.to_base64(new Uint8Array([...salt, ...encrypted]));
+    }
+
+    /**
+     *
+     * @param message
+     * @param password
+     * @returns {*}
+     */
+    decryptWithPassword(message, password) {
+        let encrypted = sodium.from_base64(message),
+            salt      = encrypted.slice(0, sodium.crypto_pwhash_SALTBYTES),
+            text      = encrypted.slice(sodium.crypto_pwhash_SALTBYTES),
+            key       = this._passwordToKey(password, salt);
+
+        return sodium.to_string(this.decrypt(text, key));
+    }
+
+    /**
+     *
+     * @param message
      * @param key
      * @returns {string}
      */
@@ -149,16 +178,16 @@ export default class Encryption {
         if(password.length < 12) throw new Error('Password is too short');
         if(password.length > 128) throw new Error('Password is too long');
 
-        let passwordSalt   = sodium.from_hex(salts[0]),
-            genericHashKey = sodium.from_hex(salts[1]),
+        let passwordSalt     = sodium.from_hex(salts[0]),
+            genericHashKey   = sodium.from_hex(salts[1]),
             passwordHashSalt = sodium.from_hex(salts[2]),
-            genericHash    = sodium.crypto_generichash(
+            genericHash      = sodium.crypto_generichash(
                 sodium.crypto_generichash_BYTES_MAX,
                 new Uint8Array([...sodium.from_string(password), ...passwordSalt]),
                 genericHashKey
             );
 
-        let passwordHash     = sodium.crypto_pwhash(
+        let passwordHash = sodium.crypto_pwhash(
             sodium.crypto_box_SEEDBYTES,
             genericHash,
             passwordHashSalt,
@@ -199,7 +228,7 @@ export default class Encryption {
             );
 
         return {
-            salts  : [
+            salts : [
                 sodium.to_hex(passwordSalt),
                 sodium.to_hex(genericHashKey),
                 sodium.to_hex(passwordHashSalt)
