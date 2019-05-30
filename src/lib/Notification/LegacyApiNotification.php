@@ -9,6 +9,7 @@ namespace OCA\Passwords\Notification;
 
 use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\DeferredActivationService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
@@ -36,23 +37,31 @@ class LegacyApiNotification extends AbstractNotification {
     protected $challengeHelper;
 
     /**
+     * @var DeferredActivationService
+     */
+    protected $deferredActivation;
+
+    /**
      * LegacyApiNotification constructor.
      *
-     * @param IFactory             $l10nFactory
-     * @param IURLGenerator        $urlGenerator
-     * @param ConfigurationService $config
-     * @param IManager             $notificationManager
-     * @param UserChallengeHelper  $challengeHelper
+     * @param IFactory                  $l10nFactory
+     * @param IURLGenerator             $urlGenerator
+     * @param ConfigurationService      $config
+     * @param IManager                  $notificationManager
+     * @param UserChallengeHelper       $challengeHelper
+     * @param DeferredActivationService $deferredActivation
      */
     public function __construct(
         IFactory $l10nFactory,
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         IManager $notificationManager,
-        UserChallengeHelper $challengeHelper
+        UserChallengeHelper $challengeHelper,
+        DeferredActivationService $deferredActivation
     ) {
-        $this->config          = $config;
-        $this->challengeHelper = $challengeHelper;
+        $this->config             = $config;
+        $this->challengeHelper    = $challengeHelper;
+        $this->deferredActivation = $deferredActivation;
 
         parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
     }
@@ -64,12 +73,12 @@ class LegacyApiNotification extends AbstractNotification {
      * @param array  $parameters
      */
     public function send(string $userId, array $parameters = []): void {
+        if(!$this->deferredActivation->check('legacy-client-warning')) return;
         if($this->checkIfAlreadyNotified($userId, $parameters['client'])) return;
 
-        $notification
-            = $this->createNotification($userId)
-                   ->setSubject(self::NAME, $parameters)
-                   ->setObject('warning', 'legacy_api');
+        $notification = $this->createNotification($userId)
+                             ->setSubject(self::NAME, $parameters)
+                             ->setObject('warning', 'legacy_api');
 
         $this->notificationManager->notify($notification);
     }
@@ -101,12 +110,11 @@ class LegacyApiNotification extends AbstractNotification {
      *
      * @return string
      */
-    protected function getMessage(IL10N $localisation, $client): string {
+    protected function getMessage(IL10N $localisation, string $client): string {
         $message = $localisation->t('"%s" uses an outdated API which will be removed.', [$client]);
 
         if($this->challengeHelper->hasChallenge()) {
-            $message .= ' '.
-                        $localisation->t('This API does not support encryption and will deliver incomplete data.');
+            $message .= ' '.$localisation->t('This API does not support encryption and will deliver incomplete data.');
         }
 
         return $message

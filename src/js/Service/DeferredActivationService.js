@@ -17,13 +17,12 @@ class DeferredActivationService {
      * @returns {Promise<boolean>}
      */
     async check(id) {
+        if(process.env.NIGHTLY_FEATURES) return true;
+
         let features = await this.getFeatures();
+        if(features.hasOwnProperty(id)) return features[id] === true;
 
-        if(features.hasOwnProperty(id)) {
-            return process.env.NIGHTLY_FEATURES || features[id] === true;
-        }
-
-        return process.env.NIGHTLY_FEATURES;
+        return false;
     }
 
     /**
@@ -31,18 +30,18 @@ class DeferredActivationService {
      * @returns {Promise<object>}
      */
     async getFeatures() {
-        if (this._features !== null) return this._features;
+        if(this._features !== null) return this._features;
 
         let url = SettingsManager.get('server.handbook.url') + '_files/deferred-activation.json';
         this._features = {};
 
         try {
-            let response = await fetch(new Request(url, {credentials:'omit', referrerPolicy: 'no-referrer'}));
-            if (response.ok) {
+            let response = await fetch(new Request(url, {credentials: 'omit', referrerPolicy: 'no-referrer'}));
+            if(response.ok) {
                 let data = await response.json();
                 this._processFeatures(data);
             }
-        } catch (e) {
+        } catch(e) {
             console.error(e);
         }
 
@@ -55,15 +54,15 @@ class DeferredActivationService {
      * @private
      */
     _processFeatures(json) {
-        if (!json.hasOwnProperty(this._app)) return;
+        if(!json.hasOwnProperty(this._app)) return;
         let mainVersion = this._version.substr(0, this._version.lastIndexOf('.')),
             appFeatures = json[this._app];
 
-        if (appFeatures.hasOwnProperty(mainVersion)) {
+        if(appFeatures.hasOwnProperty(mainVersion)) {
             this._features = appFeatures[mainVersion];
         }
 
-        if (appFeatures.hasOwnProperty(this._version)) {
+        if(appFeatures.hasOwnProperty(this._version)) {
             let versionFeatures = appFeatures[this._version];
 
             for(let key in versionFeatures) {

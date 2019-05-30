@@ -10,6 +10,7 @@ namespace OCA\Passwords\Controller\Api;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Helper\User\UserChallengeHelper;
+use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Http;
@@ -50,6 +51,11 @@ class AccountApiController extends AbstractApiController {
     protected $deleteUserDataHelper;
 
     /**
+     * @var DeferredActivationService
+     */
+    protected $deferredActivation;
+
+    /**
      * AccountApiController constructor.
      *
      * @param IRequest             $request
@@ -65,7 +71,8 @@ class AccountApiController extends AbstractApiController {
         SessionService $sessionService,
         EnvironmentService $environment,
         UserChallengeHelper $passwordHelper,
-        DeleteUserDataHelper $deleteUserDataHelper
+        DeleteUserDataHelper $deleteUserDataHelper,
+        DeferredActivationService $deferredActivation
     ) {
         parent::__construct($request);
         $this->userManager          = $userManager;
@@ -73,6 +80,7 @@ class AccountApiController extends AbstractApiController {
         $this->sessionService       = $sessionService;
         $this->environment          = $environment;
         $this->challengeHelper      = $passwordHelper;
+        $this->deferredActivation   = $deferredActivation;
     }
 
     /**
@@ -135,6 +143,10 @@ class AccountApiController extends AbstractApiController {
      * @throws ApiException
      */
     public function setChallenge(array $salts, string $secret, $oldSecret = null): JSONResponse {
+        if(!$this->deferredActivation->check('client-side-encryption')) {
+            throw new ApiException('Feature not enabled');
+        }
+
         if($this->challengeHelper->hasChallenge()) {
             if($oldSecret === null) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
             if(!$this->challengeHelper->validateChallenge($oldSecret)) {
