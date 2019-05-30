@@ -10,6 +10,8 @@ namespace OCA\Passwords\Controller\Api;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\KeychainService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -59,19 +61,21 @@ class KeychainApiController extends AbstractApiController {
      * @param string $data
      *
      * @return JSONResponse
+     * @throws ApiException
+     * @throws MultipleObjectsReturnedException
      * @throws \Exception
      */
     public function update(string $id, string $data): JSONResponse {
-        $keychain = $this->keychainService->findByType($id, true);
+        try {
+            $keychain = $this->keychainService->findByType($id, true);
 
-        if($keychain !== null && $keychain->getScope() !== $keychain::SCOPE_CLIENT) {
-            throw new ApiException('Keychain not found', 404);
-        }
+            if($keychain->getScope() !== $keychain::SCOPE_CLIENT) {
+                throw new ApiException('Keychain not found', 404);
+            }
 
-        if($keychain === null) {
-            $keychain = $this->keychainService->create($id, $data, Keychain::SCOPE_CLIENT);
-        } else {
             $keychain->setData($data);
+        } catch(DoesNotExistException $e) {
+            $keychain = $this->keychainService->create($id, $data, Keychain::SCOPE_CLIENT);
         }
 
         $this->keychainService->save($keychain);

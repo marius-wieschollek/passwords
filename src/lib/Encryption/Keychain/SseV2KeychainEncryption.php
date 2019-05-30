@@ -66,6 +66,24 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
     }
 
     /**
+     * @return bool
+     */
+    public function isAvailable(): bool {
+        try {
+            return $this->sessionService->has(SessionService::VALUE_USER_SECRET);
+        } catch(Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string {
+        return EncryptionService::SSE_ENCRYPTION_V2R1;
+    }
+
+    /**
      * @param Keychain $keychain
      *
      * @return Keychain
@@ -98,23 +116,5 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
         $serverSecret = $this->config->getSystemValue('secret');
 
         return $serverSecret.$userSecret;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAvailable(): bool {
-        try {
-            return $this->sessionService->has(SessionService::VALUE_USER_SECRET);
-        } catch(Exception $e) {
-            return false;
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string {
-        return EncryptionService::SSE_ENCRYPTION_V2R1;
     }
 }

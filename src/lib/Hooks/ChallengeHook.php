@@ -6,6 +6,8 @@ use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\KeychainService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\Security\ISecureRandom;
 
 /**
@@ -63,11 +65,17 @@ class ChallengeHook {
     }
 
     /**
-     * @throws \Exception
+     * @throws MultipleObjectsReturnedException
      */
     public function preSetChallenge(): void {
-        self::$cseV1Keychain = $this->keychainService->findByType(Keychain::TYPE_CSE_V1V1, true);
-        self::$sseV2Keychain = $this->keychainService->findByType(Keychain::TYPE_SSE_V2R1, true);
+        try {
+            self::$cseV1Keychain = $this->keychainService->findByType(Keychain::TYPE_CSE_V1V1, true);
+        } catch(DoesNotExistException $e) {
+        }
+        try {
+            self::$sseV2Keychain = $this->keychainService->findByType(Keychain::TYPE_SSE_V2R1, true);
+        } catch(DoesNotExistException $e) {
+        }
     }
 
     /**

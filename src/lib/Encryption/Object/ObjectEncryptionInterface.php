@@ -24,7 +24,7 @@ interface ObjectEncryptionInterface {
     /**
      * @return string
      */
-    public function getType(): string ;
+    public function getType(): string;
 
     /**
      * @param RevisionInterface $object

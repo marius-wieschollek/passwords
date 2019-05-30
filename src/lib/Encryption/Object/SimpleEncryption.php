@@ -14,7 +14,6 @@ namespace OCA\Passwords\Encryption\Object;
  */
 class SimpleEncryption extends SseV1Encryption {
 
-
     /**
      * @return string
      */

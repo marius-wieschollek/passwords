@@ -91,16 +91,14 @@ class KeychainService extends AbstractService {
      * @param string $type
      * @param bool   $decrypt
      *
-     * @return Keychain|null
+     * @return Keychain
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      * @throws \Exception
      */
-    public function findByType(string $type, bool $decrypt = false): ?Keychain {
+    public function findByType(string $type, bool $decrypt = false): Keychain {
         /** @var Keychain $keychain */
-        try {
-            $keychain = $this->mapper->findOneByType($type);
-        } catch(DoesNotExistException | MultipleObjectsReturnedException $e) {
-            return null;
-        }
+        $keychain = $this->mapper->findOneByType($type);
 
         return $decrypt ? $this->encryptionService->decryptKeychain($keychain):$keychain;
     }

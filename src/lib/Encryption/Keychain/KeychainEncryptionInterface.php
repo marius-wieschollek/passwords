@@ -19,7 +19,7 @@ interface KeychainEncryptionInterface {
     /**
      * @return string
      */
-    public function getType(): string ;
+    public function getType(): string;
 
     /**
      * @param Keychain $object

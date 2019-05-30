@@ -3,20 +3,17 @@
 namespace OCA\Passwords\Encryption\Object;
 
 use Exception;
-use function json_decode;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\SessionService;
 use OCP\Security\ICrypto;
-use OCP\Security\ISecureRandom;
+use function json_decode;
 
 /**
  * Class SseV2Encryption
@@ -74,6 +71,11 @@ class SseV2Encryption implements ObjectEncryptionInterface {
     protected $tag = ['label', 'color'];
 
     /**
+     * @var bool|null
+     */
+    protected $isAvailable;
+
+    /**
      * SseV2Encryption constructor.
      *
      * @param ICrypto         $crypto
@@ -90,18 +92,32 @@ class SseV2Encryption implements ObjectEncryptionInterface {
         $this->keychainService = $keychainService;
         $this->uuidHelper      = $uuidHelper;
         $this->sessionService  = $sessionService;
-        $this->crypto = $crypto;
+        $this->crypto          = $crypto;
     }
 
     /**
      * @return bool
      */
     public function isAvailable(): bool {
+        if($this->isAvailable !== null) return $this->isAvailable;
+
         try {
-            return $this->sessionService->has(SessionService::VALUE_USER_SECRET);
+            if(!$this->sessionService->has(SessionService::VALUE_USER_SECRET)) {
+                $this->isAvailable = false;
+
+                return false;
+            }
+
+            $this->keychainService->findByType(Keychain::TYPE_SSE_V2R1);
         } catch(Exception $e) {
+            $this->isAvailable = false;
+
             return false;
         }
+
+        $this->isAvailable = true;
+
+        return true;
     }
 
     /**
@@ -160,7 +176,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
      */
     protected function getCurrentKey(): array {
         $keys = $this->getKeychainData();
-        $id = $keys['current'];
+        $id   = $keys['current'];
 
         if(isset($keys['keys'][ $id ])) return [$id, $keys['keys'][ $id ]];
 
@@ -186,7 +202,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
      */
     protected function getKeychainData(): array {
         if($this->keychainData === null) {
-            $keychain = $this->keychainService->findByType(Keychain::TYPE_SSE_V2R1, true);
+            $keychain           = $this->keychainService->findByType(Keychain::TYPE_SSE_V2R1, true);
             $this->keychainData = json_decode($keychain->getData(), true);
         }
 
