@@ -34,7 +34,7 @@ class MailService {
     protected $config;
 
     /**
-     * @var SettingsService
+     * @var UserSettingsService
      */
     protected $settings;
 
@@ -61,20 +61,20 @@ class MailService {
     /**
      * MailService constructor.
      *
-     * @param IConfig          $config
-     * @param IFactory         $l10NFactory
-     * @param LoggingService   $logger
-     * @param UserService      $userService
-     * @param SettingsService  $settings
-     * @param BadPasswordMail  $badPasswordMail
-     * @param ShareCreatedMail $shareCreatedMail
+     * @param IConfig             $config
+     * @param IFactory            $l10NFactory
+     * @param LoggingService      $logger
+     * @param UserService         $userService
+     * @param UserSettingsService $settings
+     * @param BadPasswordMail     $badPasswordMail
+     * @param ShareCreatedMail    $shareCreatedMail
      */
     public function __construct(
         IConfig $config,
         IFactory $l10NFactory,
         LoggingService $logger,
         UserService $userService,
-        SettingsService $settings,
+        UserSettingsService $settings,
         BadPasswordMail $badPasswordMail,
         ShareCreatedMail $shareCreatedMail
     ) {

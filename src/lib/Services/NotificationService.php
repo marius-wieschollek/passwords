@@ -27,7 +27,7 @@ use OCP\Notification\INotifier;
 class NotificationService implements INotifier {
 
     /**
-     * @var SettingsService
+     * @var UserSettingsService
      */
     protected $settings;
 
@@ -70,7 +70,7 @@ class NotificationService implements INotifier {
      * NotificationService constructor.
      *
      * @param IFactory                  $l10nFactory
-     * @param SettingsService           $settings
+     * @param UserSettingsService       $settings
      * @param ShareLoopNotification     $shareLoopNotification
      * @param LegacyApiNotification     $legacyApiNotification
      * @param BadPasswordNotification   $badPasswordNotification
@@ -80,7 +80,7 @@ class NotificationService implements INotifier {
      */
     public function __construct(
         IFactory $l10nFactory,
-        SettingsService $settings,
+        UserSettingsService $settings,
         ShareLoopNotification $shareLoopNotification,
         LegacyApiNotification $legacyApiNotification,
         BadPasswordNotification $badPasswordNotification,

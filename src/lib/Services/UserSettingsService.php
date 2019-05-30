@@ -13,11 +13,11 @@ use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 
 /**
- * Class SettingsService
+ * Class UserSettingsService
  *
  * @package OCA\Passwords\Services
  */
-class SettingsService {
+class UserSettingsService {
 
     /**
      * @var UserSettingsHelper
@@ -35,7 +35,7 @@ class SettingsService {
     protected $serverSettings;
 
     /**
-     * SettingsService constructor.
+     * UserSettingsService constructor.
      *
      * @param UserSettingsHelper   $userSettings
      * @param ClientSettingsHelper $clientSettings

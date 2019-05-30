@@ -113,7 +113,7 @@ class UserChallengeHelper {
      */
     public function getSalts(): ?array {
         try {
-            $encrypted = $this->config->getUserValue(self::USER_SECRET_SALTS, null);
+            $encrypted = $this->config->getUserValue(self::USER_SECRET_SALTS, '[]');
         } catch(\Exception $e) {
             $this->logger->logException($e);
 

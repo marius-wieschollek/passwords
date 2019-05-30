@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Backup;
 
 use OCA\Passwords\Encryption\Backup\SseV1BackupEncryption;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
+use OCA\Passwords\Services\ConfigurationService;
 
 /**
  * Class BackupMigrationHelper
@@ -16,6 +17,11 @@ use OCA\Passwords\Helper\Uuid\UuidHelper;
  * @package OCA\Passwords\Helper\Backup
  */
 class BackupMigrationHelper {
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
 
     /**
      * @var UuidHelper
@@ -32,8 +38,10 @@ class BackupMigrationHelper {
      *
      * @param UuidHelper            $uuidHelper
      * @param SseV1BackupEncryption $encryption
+     * @param ConfigurationService  $config
      */
-    public function __construct(UuidHelper $uuidHelper, SseV1BackupEncryption $encryption) {
+    public function __construct(UuidHelper $uuidHelper, SseV1BackupEncryption $encryption, ConfigurationService $config) {
+        $this->config     = $config;
         $this->encryption = $encryption;
         $this->uuidHelper = $uuidHelper;
     }
@@ -160,7 +168,7 @@ class BackupMigrationHelper {
     }
 
     /**
-     * Add blank cse key values
+     * Add required cse values and convert app settings
      *
      * @param array $data
      *
@@ -178,6 +186,32 @@ class BackupMigrationHelper {
         foreach($data['passwordTagRelations'] as &$object) {
             $object['uuid'] = $this->uuidHelper->generateUuid();
         }
+
+        $data['keychains']                = [];
+        $data['keys']['server']['secret'] = $this->config->getSystemValue('secret');
+        foreach($data['keys']['users'] as $user => $keys) {
+            $data['keys']['users'][ $user ]['authentication'] = [
+                'key'      => null,
+                'salts'    => null,
+                'cryptKey' => null
+            ];
+        }
+
+        $oldSettings                  = $data['settings']['application'];
+        $data['settings']['application'] = [
+            'backup.interval'        => $oldSettings['backup/interval'],
+            'backup.files.max'       => $oldSettings['backup/files/maximum'],
+            'service.words'          => $oldSettings['service/words'],
+            'service.images'         => $oldSettings['service/images'],
+            'service.favicon'        => $oldSettings['service/favicon'],
+            'service.preview'        => $oldSettings['service/preview'],
+            'service.security'       => $oldSettings['service/security'],
+            'service.preview.api'    => '',
+            'service.favicon.api'    => '',
+            'entity.purge.timeout'   => $oldSettings['entity/purge/timeout'],
+            'settings.mail.shares'   => $oldSettings['settings/mail/shares'],
+            'settings.mail.security' => $oldSettings['settings/mail/security']
+        ];
 
         return $data;
     }

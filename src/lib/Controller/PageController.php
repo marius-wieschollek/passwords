@@ -12,7 +12,7 @@ use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
-use OCA\Passwords\Services\SettingsService;
+use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\StrictContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -32,7 +32,7 @@ class PageController extends Controller {
     protected $config;
 
     /**
-     * @var SettingsService
+     * @var UserSettingsService
      */
     protected $settings;
 
@@ -55,7 +55,7 @@ class PageController extends Controller {
      * PageController constructor.
      *
      * @param IRequest             $request
-     * @param SettingsService      $settings
+     * @param UserSettingsService  $settings
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
@@ -63,7 +63,7 @@ class PageController extends Controller {
      */
     public function __construct(
         IRequest $request,
-        SettingsService $settings,
+        UserSettingsService $settings,
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
         EnvironmentService $environment,
