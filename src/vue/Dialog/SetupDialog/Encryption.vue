@@ -229,6 +229,7 @@
 </script>
 
 <style lang="scss">
+    #setup-slide-get-help,
     #setup-slide-encryption,
     #setup-slide-keep-order,
     #setup-slide-integrations,

@@ -15,6 +15,7 @@
                             v-if="hasSlide('encryption')"/>
                 <admin-settings id="setup-slide-admin-settings" class="slide" v-if="hasSlide('admin-settings')"/>
                 <user-settings id="setup-slide-user-settings" class="slide" v-if="hasSlide('user-settings')"/>
+                <get-help id="setup-slide-get-help" class="slide" v-if="hasSlide('get-help')"/>
                 <keep-order id="setup-slide-keep-order" class="slide" v-if="hasSlide('keep-order')"/>
                 <integrations id="setup-slide-integrations"
                               class="slide"
@@ -40,20 +41,21 @@
     import Translate from '@vue/Components/Translate';
     import Start from '@vue/Dialog/SetupDialog/Start';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import GetHelp from '@vue/Dialog/SetupDialog/GetHelp';
     import KeepOrder from '@vue/Dialog/SetupDialog/KeepOrder';
     import Encryption from '@vue/Dialog/SetupDialog/Encryption';
     import Integrations from '@vue/Dialog/SetupDialog/Integrations';
+    import UserSettings from '@/vue/Dialog/SetupDialog/UserSettings';
     import AdminSettings from '@vue/Dialog/SetupDialog/AdminSettings';
-    import UserSettings from "@/vue/Dialog/SetupDialog/UserSettings";
 
     export default {
-        components: {UserSettings, Integrations, Encryption, Translate, KeepOrder, Start, AdminSettings},
+        components: {UserSettings, Integrations, Encryption, Translate, KeepOrder, GetHelp, Start, AdminSettings},
 
         props: {
             enableSlides: {
                 type: Array,
                 default() {
-                    return ['start', 'encryption', 'admin-settings', 'user-settings', 'keep-order', 'integrations'];
+                    return ['start', 'encryption', 'admin-settings', 'user-settings', 'get-help', 'integrations'];
                 }
             },
             closable    : {
@@ -89,6 +91,10 @@
                 {
                     title: 'Bring order to your passwords',
                     id   : 'keep-order'
+                },
+                {
+                    title: 'Find help when you need it',
+                    id   : 'get-help'
                 },
                 {
                     title: 'Get connected',
