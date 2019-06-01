@@ -53,12 +53,12 @@
         </div>
         <translate tag="a"
                    icon="cog"
-                   href="/index.php/settings/admin/passwords"
+                   :href="getAppSettingsLink"
                    target="_blank"
                    class="cta-admin-settings"
                    say="View all settings"/>
         <translate tag="a"
-                   href="/index.php/settings/admin/passwords"
+                   href="https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrator-Notes"
                    target="_blank"
                    class="admin-notes"
                    say="Read our tips for admins"/>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+    import Utility from '@js/Classes/Utility';
     import Translate from '@vue/Components/Translate';
     import AppSettingsService from '@js/Service/AppSettingsService';
 
@@ -118,7 +119,11 @@
                 this.settings.backups = d;
             });
         },
-        methods   : {},
+        computed   : {
+            getAppSettingsLink() {
+                return Utility.generateUrl('/settings/admin/passwords')
+            }
+        },
         watch     : {
             settings: {
                 handler(settings) {
