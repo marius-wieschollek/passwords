@@ -6,7 +6,7 @@
             "tags"                          : "Tags",
             "favorites"                     : "Favoriten",
             "passwords"                     : "Passwörter",
-            "recently changed"              : "zuletzt Geänderte",
+            "recently changed"              : "zuletzt Geänderten",
             "Mark my passwords if..."       : "Markiere meine Passwörter wenn...",
             "they are older than"           : "sie älter sind als",
             "three months"                  : "drei Monate",
@@ -38,7 +38,14 @@
             "Go to Apps & Extensions"       : "Öffne Apps & Extensions",
             "Continue"                      : "Weiter",
             "Skip"                          : "Überspringen",
-            "Close"                         : "Schließen"
+            "Close"                         : "Schließen",
+            "Check password security with"  : "Prüfe Passwortsicherheit mit",
+            "Generate passwords using"      : "Generiere Passwörter mit",
+            "Get favicons from"             : "Suche Favicons mit",
+            "Get website previews from"     : "Erstelle Webseitenansichten mit",
+            "Make backups"                  : "Mache Backups",
+            "View all settings"             : "Öffne alle Einstellungen an",
+            "Read our tips for admins"      : "Lies unsere Tips für Administratoren"
         },
         {
             "There are many settings so you can customize your experience."                         : "Es gibt viele Einstellungen, mit denen du die App anpassen kannst.",
@@ -46,7 +53,9 @@
             "Passwords offers modern and strong encryption to protect your data from prying eyes."  : "Die Passwörter-App bietet eine moderne und starke Verschlüsselung, um deine Daten vor neugierigen Blicken zu schützen.",
             "Choose a secure password below to activate the ultimate protection for your passwords.": "Wähle unten ein sicheres Passwort, um unseren ultimativen Schutz für deine Passwörter zu aktivieren.",
             "Access your passwords with ease from anywhere, thanks to our apps and extensions."     : "Greife dank unserer Apps und Erweiterungen einfach und von überall auf deine Passwörter zu.",
-            "You can find our Apps & Extensions section in \"More\" or just click the button below.": "Du findest unseren Apps & Extensions-Bereich unter \"Mehr\" oder klick einfach auf den Button unten."
+            "You can find our Apps & Extensions section in \"More\" or just click the button below.": "Du findest unseren Apps & Extensions-Bereich unter \"Mehr\" oder klick einfach auf den Button unten.",
+            "Passwords can be customized in a lot of different ways."                               : "Die App kann auf vielfältige Weise angepasst werden.",
+            "As administrator you might want to take a look at these common settings."              : "Als Administrator möchtest du vielleicht einen Blick auf diese gängigen Einstellungen werfen."
         }
     ],
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

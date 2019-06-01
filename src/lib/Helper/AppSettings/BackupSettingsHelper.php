@@ -7,12 +7,20 @@
 
 namespace OCA\Passwords\Helper\AppSettings;
 
+use OCA\Passwords\Services\ConfigurationService;
+use OCP\IL10N;
+
 /**
  * Class BackupSettingsHelper
  *
  * @package OCA\Passwords\Helper\AppSettings
  */
 class BackupSettingsHelper extends AbstractSettingsHelper {
+
+    /**
+     * @var IL10N
+     */
+    protected $localisation;
 
     /**
      * @var
@@ -47,33 +55,44 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
         ];
 
     /**
+     * ServiceSettingsHelper constructor.
+     *
+     * @param ConfigurationService $config
+     * @param IL10N                $localisation
+     */
+    public function __construct(ConfigurationService $config, IL10N $localisation) {
+        parent::__construct($config);
+        $this->localisation = $localisation;
+    }
+
+    /**
      * @return array
      */
     protected function getIntervalOptions(): array {
         return [
             $this->generateOptionArray(
                 3600,
-                'Every hour'
+                $this->localisation->t('Every hour')
             ),
             $this->generateOptionArray(
                 21600,
-                'Every six hours'
+                $this->localisation->t('Every six hours')
             ),
             $this->generateOptionArray(
                 86400,
-                'Every day'
+                $this->localisation->t('Every day')
             ),
             $this->generateOptionArray(
                 172800,
-                'Every two days'
+                $this->localisation->t('Every two days')
             ),
             $this->generateOptionArray(
                 604800,
-                'Every week'
+                $this->localisation->t('Every week')
             ),
             $this->generateOptionArray(
                 1209600,
-                'Every two weeks'
+                $this->localisation->t('Every two weeks')
             ),
         ];
     }

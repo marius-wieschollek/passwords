@@ -17,7 +17,9 @@ use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
+use OCP\IL10N;
 
 /**
  * Class ServiceSettingsHelper
@@ -25,6 +27,11 @@ use OCA\Passwords\Services\HelperService;
  * @package OCA\Passwords\Helper\AppSettings
  */
 class ServiceSettingsHelper extends AbstractSettingsHelper {
+
+    /**
+     * @var IL10N
+     */
+    protected $localisation;
 
     /**
      * @var
@@ -54,6 +61,17 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'preview.api' => '',
             'favicon.api' => ''
         ];
+
+    /**
+     * ServiceSettingsHelper constructor.
+     *
+     * @param ConfigurationService $config
+     * @param IL10N                $localisation
+     */
+    public function __construct(ConfigurationService $config, IL10N $localisation) {
+        parent::__construct($config);
+        $this->localisation = $localisation;
+    }
 
     /**
      * @return array
@@ -238,19 +256,19 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::SECURITY_HIBP,
-                'Have I been pwned? (recommended)'
+                $this->localisation->t('Have I been pwned? (recommended)')
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_BIG_LOCAL,
-                '10 Million Passwords (Local)'
+                $this->localisation->t('10 Million Passwords (Local)')
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_SMALL_LOCAL,
-                '1 Million Passwords (Local)'
+                $this->localisation->t('1 Million Passwords (Local)')
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_BIGDB_HIBP,
-                '10Mio Passwords & Hibp?'
+                $this->localisation->t('10Mio Passwords & Hibp?')
             )
         ];
     }
@@ -262,17 +280,17 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::WORDS_LOCAL,
-                'Local dictionary',
+                $this->localisation->t('Local dictionary'),
                 LocalWordsHelper::isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_SNAKES,
-                'watchout4snakes.com (recommended)',
+                $this->localisation->t('watchout4snakes.com (recommended)'),
                 SnakesWordsHelper::isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_RANDOM,
-                'Random Characters',
+                $this->localisation->t('Random Characters'),
                 RandomCharactersHelper::isAvailable()
             )
         ];
@@ -285,27 +303,27 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::FAVICON_LOCAL,
-                'Local analyzer'
+                $this->localisation->t('Local analyzer')
             ),
             $this->generateOptionArray(
                 HelperService::FAVICON_BESTICON,
-                'Besticon (recommended)'
+                $this->localisation->t('Besticon (recommended)')
             ),
             $this->generateOptionArray(
                 HelperService::FAVICON_FAVICON_GRABBER,
-                'favicongrabber.com'
+                $this->localisation->t('favicongrabber.com')
             ),
             $this->generateOptionArray(
                 HelperService::FAVICON_DUCK_DUCK_GO,
-                'DuckDuckGo'
+                $this->localisation->t('DuckDuckGo')
             ),
             $this->generateOptionArray(
                 HelperService::FAVICON_GOOGLE,
-                'Google'
+                $this->localisation->t('Google')
             ),
             $this->generateOptionArray(
                 HelperService::FAVICON_DEFAULT,
-                'None'
+                $this->localisation->t('None')
             )
         ];
     }
@@ -319,30 +337,30 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         $options = [
             $this->generateOptionArray(
                 HelperService::PREVIEW_PAGERES,
-                'Pageres/PhantomJS (Local)'
+                $this->localisation->t('Pageres/PhantomJS (Local)')
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_BROW_SHOT,
-                'Browshot'
+                $this->localisation->t('Browshot')
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_SCREEN_SHOT_LAYER,
-                'screenshotlayer'
+                $this->localisation->t('screenshotlayer')
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
-                'screenshotmachine.com'
+                $this->localisation->t('screenshotmachine.com')
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_DEFAULT,
-                'None'
+                $this->localisation->t('None')
             )
         ];
 
         if($current === HelperService::PREVIEW_WEBSHOT) {
             $services[] = $this->generateOptionArray(
                 HelperService::PREVIEW_WEBSHOT,
-                'Passwords Webshot'
+                $this->localisation->t('Passwords Webshot')
             );
         }
 
@@ -356,12 +374,12 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::IMAGES_IMAGICK,
-                'Imagick/GMagick (recommended)',
+                $this->localisation->t('Imagick/GMagick (recommended)'),
                 ImagickHelper::isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_GDLIB,
-                'PHP GDLib'
+                $this->localisation->t('PHP GDLib')
             )
         ];
     }

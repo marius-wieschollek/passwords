@@ -169,7 +169,6 @@
             },
             closeAction($e) {
                 if(this.closable && $e.originalTarget.id === 'passwords-setup' && this.current.skippable) {
-                    console.log(this.current);
                     this.closeWizard();
                 }
             }
@@ -222,10 +221,21 @@
             }
 
             @media (max-width : 900px) {
-                padding : 1rem;
+                padding         : 1rem;
+                align-items     : center;
+                display         : flex;
+                flex-direction  : column;
+                justify-content : center;
 
                 .logo {
+                    width  : 120px;
+                }
+            }
+
+            @media (max-width : $width-extra-small) {
+                .logo {
                     height : 60px;
+                    width  : 60px;
                 }
 
                 h1 {

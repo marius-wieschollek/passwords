@@ -63,6 +63,10 @@
             "Mark passwords as weak if they are being used for multiple accounts"        : "Markiert Passwörter als \"Unsicher\" wenn sie für mehr als ein Konto verwendet werden",
             "Mark passwords as weak if they surpass the specified amount of days"        : "Markiert Passwörter als \"Unsicher\" wenn sie das in Tagen angegebene Alter überschreiten",
             "A higher strength results in longer, more complex passwords"                : "Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter",
+            "Specify the amount of time after a request before the session is cancelled" : "Stellt die Zeitspanne ein, nach der eine Sitzung beendet wird wenn keine Nutzeraktion erfolgt",
+            "Choose the type of encryption used to encrypt data on the server"           : "Wählen Sie den Verschlüsselungsmodus mit dem der Server Daten verschlüsseln soll",
+            "Run the installation wizard to set up encryption for your passwords"        : "Rufen Sie den Installationsassistenten zum aktivieren der Ende-zu-Ende Verschlüsselung auf",
+            "Change the encryption password"                                             : "Änderen Sie Ihr Verschlüsselungspasswort",
             "Show the selected property as title in the list view"                       : "Zeigt das ausgewählte Attribut in der Listenansicht als Titel an",
             "Sorts passwords by the selected property when sorting by name is selected"  : "Sortiert Passwörter nach dem angegebenen Attribut anstatt nach dem Namen",
             "Action to perform when clicking on a password in the list view"             : "Aktion die beim Klick auf ein Passwort ausgeführt wird",
@@ -87,6 +91,8 @@
             "You have to wait {seconds} seconds before you can reset your account."      : "Sie müssen {seconds} Sekunden warten bevor Sie ihr Benutzerkonto zurücksetzen können."
         },
         {
+            "Send keep-alive requests to the server to prevent the session from being cancelled"                          : "Sendet Keepalive-Anfragen an den Server um das beenden der Sitzung zu verhindern",
+            "Choose the type of encryption used to encrypt data on the client before it's sent to the server"             : "Wählen Sie den Verschlüsselungsmodus mit dem das Endgerät Daten verschlüsselt bevor sie zum Server geschickt werden.",
             "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.": "Möchten Sie wirklich alle Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen."
         }
     ],
