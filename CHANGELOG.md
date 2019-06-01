@@ -1,4 +1,4 @@
-## [Unreleased]
+## 2019.6.0 - Feature release
 ### Changed
  - Compress language files and plain js
 ### Fixed
