@@ -4,7 +4,7 @@
             <breadcrumb :show-add-new="false">
                 <div class="settings-level">
                     <translate tag="label" for="setting-settings-advanced" say="View"/>
-                    <select id="setting-settings-advanced" v-model="advanced">
+                    <select id="setting-settings-advanced" v-model.number="advanced">
                         <translate tag="option" value="0" say="Default"/>
                         <translate tag="option" value="1" say="Advanced"/>
                     </select>
@@ -31,11 +31,11 @@
 
                     <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
-                    <select id="setting-security-level" v-model="settings['user.password.generator.strength']">
-                        <option :value="1">1</option>
-                        <option :value="2">2</option>
-                        <option :value="3">3</option>
-                        <option :value="4">4</option>
+                    <select id="setting-security-level" v-model.number="settings['user.password.generator.strength']">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                     <settings-help text="A higher strength results in longer, more complex passwords"/>
 
@@ -52,22 +52,24 @@
                     <settings-help text="Add special characters to generated passwords"/>
 
 
-                    <translate tag="h3" say="Login & Session"/>
-                    <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"/>
-                    <input type="checkbox"
-                           id="setting-include-keepalive"
-                           v-model="settings['client.session.keepalive']">
-                    <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled"/>
-
-                    <translate tag="label" for="setting-session-lifetime" say="End session after"/>
-                    <select id="setting-session-lifetime" v-model="settings['user.session.lifetime']">
-                        <translate tag="option" say="One minute" :value="60"/>
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" :value="300"/>
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:10}" :value="600"/>
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" :value="1800"/>
-                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" :value="3600"/>
+                    <translate tag="h3" say="Login & Session" v-if="hasEncryption"/>
+                    <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"  v-if="hasEncryption"/>
+                    <select id="setting-session-keepalive" v-model.number="settings['client.session.keepalive']" v-if="hasEncryption">
+                        <translate tag="option" value="0" say="Never" />
+                        <translate tag="option" value="1" say="Always" />
+                        <translate tag="option" value="2" say="When i'm active" />
                     </select>
-                    <settings-help text="Specify the amount of time after a request before the session is cancelled"/>
+                    <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled" v-if="hasEncryption"/>
+
+                    <translate tag="label" for="setting-session-lifetime" say="End session after" v-if="hasEncryption"/>
+                    <select id="setting-session-lifetime" v-model.number="settings['user.session.lifetime']" v-if="hasEncryption">
+                        <translate tag="option" say="One minute" value="60"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" value="300"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:10}" value="600"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" value="1800"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" value="3600"/>
+                    </select>
+                    <settings-help text="Specify the amount of time after a request before the session is cancelled" v-if="hasEncryption"/>
 
                     <translate tag="h3" say="Encryption"/>
                     <translate tag="label"
@@ -75,11 +77,11 @@
                                say="Server encryption mode"
                                v-if="hasEncryption && advancedSettings"/>
                     <select id="setting-encryption-sse"
-                            v-model="settings['user.encryption.sse']"
+                            v-model.number="settings['user.encryption.sse']"
                             v-if="hasEncryption && advancedSettings">
-                        <translate tag="option" :value="0" say="None if CSE used"/>
-                        <translate tag="option" :value="1" say="Simple encryption"/>
-                        <translate tag="option" :value="2" say="Advanced encryption"/>
+                        <translate tag="option" value="0" say="None if CSE used"/>
+                        <translate tag="option" value="1" say="Simple encryption"/>
+                        <translate tag="option" value="2" say="Advanced encryption"/>
                     </select>
                     <settings-help text="Choose the type of encryption used to encrypt data on the server"
                                    v-if="hasEncryption && advancedSettings"/>
@@ -89,10 +91,10 @@
                                say="Client encryption mode"
                                v-if="hasEncryption && advancedSettings"/>
                     <select id="setting-encryption-cse"
-                            v-model="settings['user.encryption.cse']"
+                            v-model.number="settings['user.encryption.cse']"
                             v-if="hasEncryption && advancedSettings">
-                        <translate tag="option" :value="0" say="No encryption"/>
-                        <translate tag="option" :value="1" say="Libsodium"/>
+                        <translate tag="option" value="0" say="No encryption"/>
+                        <translate tag="option" value="1" say="Libsodium"/>
                     </select>
                     <settings-help text="Choose the type of encryption used to encrypt data on the client before it's sent to the server"
                                    v-if="hasEncryption && advancedSettings"/>
@@ -458,7 +460,7 @@
                 deep: true
             },
             advanced(value) {
-                this.advancedSettings = this.settings['client.settings.advanced'] = value === '1';
+                this.advancedSettings = this.settings['client.settings.advanced'] = value === 1;
             },
             locked(value) {
                 document.getElementById('app-content').classList.toggle('blocking');

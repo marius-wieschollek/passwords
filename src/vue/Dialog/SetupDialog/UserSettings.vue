@@ -18,11 +18,11 @@
             <div class="setting">
                 <input type="checkbox" id="settings-has-age" v-model="hasAge"/>
                 <translate tag="label" say="they are older than" for="settings-has-age"/>
-                <select id="settings-age" v-model="maxAge" :disabled="!hasAge">
-                    <translate tag="option" :value="90" say="three months"/>
-                    <translate tag="option" :value="180" say="six months"/>
-                    <translate tag="option" :value="356" say="one year"/>
-                    <translate tag="option" :value="712" say="two years"/>
+                <select id="settings-age" v-model.number="maxAge" :disabled="!hasAge">
+                    <translate tag="option" value="90" say="three months"/>
+                    <translate tag="option" value="180" say="six months"/>
+                    <translate tag="option" value="356" say="one year"/>
+                    <translate tag="option" value="712" say="two years"/>
                     <translate tag="option"
                                :value="customAge"
                                say="{days} days"
@@ -37,11 +37,11 @@
 
             <div class="header">
                 <translate tag="label" say="Make my new passwords" for="settings-strength"/>
-                <select id="settings-strength" v-model="strength">
-                    <translate tag="option" :value="1" say="strong"/>
-                    <translate tag="option" :value="2" say="stronger"/>
-                    <translate tag="option" :value="3" say="very strong"/>
-                    <translate tag="option" :value="4" say="extremely strong"/>
+                <select id="settings-strength" v-model.number="strength">
+                    <translate tag="option" value="1" say="strong"/>
+                    <translate tag="option" value="2" say="stronger"/>
+                    <translate tag="option" value="3" say="very strong"/>
+                    <translate tag="option" value="4" say="extremely strong"/>
                 </select>
             </div>
             <div class="setting">

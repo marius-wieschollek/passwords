@@ -8,7 +8,8 @@ import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import Encryption from '@js/ApiClient/Encryption';
 import SearchManager from '@js/Manager/SearchManager';
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Service/SettingsService';
+import KeepAliveManager from '@/js/Manager/KeepAliveManager';
 import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 /**
@@ -25,7 +26,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         events       = new EventEmitter();
 
     function initApp() {
-        let section = SettingsManager.get('client.ui.section.default');
+        let section = SettingsService.get('client.ui.section.default');
 
         router.addRoutes(
             [
@@ -54,8 +55,8 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         let baseUrl    = Utility.generateUrl(),
             user       = document.querySelector('meta[name=api-user]').getAttribute('content'),
             password   = document.querySelector('meta[name=api-token]').getAttribute('content'),
-            cseMode    = SettingsManager.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-            folderIcon = SettingsManager.get('server.theme.folder.icon');
+            cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
+            folderIcon = SettingsService.get('server.theme.folder.icon');
         if(!password) password = await Messages.prompt('Password', 'Login', '', true);
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
@@ -67,11 +68,12 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         clearInterval(loadInterval);
         isLoaded = true;
 
-        SettingsManager.init();
+        SettingsService.init();
         await initApi();
         initApp();
         SearchManager.init();
         initEvents();
+        KeepAliveManager.init();
         EncryptionTestHelper.initTests();
     }
 
@@ -117,7 +119,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
             }
         });
 
-        SettingsManager.observe('user.encryption.cse', (name, value) => {
+        SettingsService.observe('user.encryption.cse', (name, value) => {
             API.config.cseMode = value === 1 ? 'CSEv1r1':'none'
         });
     }
