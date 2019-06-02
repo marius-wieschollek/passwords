@@ -239,6 +239,4 @@ class TagManager {
     }
 }
 
-let TM = new TagManager();
-
-export default TM;
+export default new TagManager();

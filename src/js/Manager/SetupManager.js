@@ -54,6 +54,4 @@ class SetupManager {
     }
 }
 
-let SUM = new SetupManager();
-
-export default SUM;
+export default new SetupManager();

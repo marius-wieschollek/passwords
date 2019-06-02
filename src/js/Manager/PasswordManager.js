@@ -269,6 +269,4 @@ class PasswordManager {
     }
 }
 
-let PM = new PasswordManager();
-
-export default PM;
+export default new PasswordManager();

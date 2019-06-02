@@ -319,6 +319,4 @@ class SearchManager {
     }
 }
 
-let SM = new SearchManager();
-
-export default SM;
+export default new SearchManager();

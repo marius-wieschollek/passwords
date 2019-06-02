@@ -74,6 +74,4 @@ class DeferredActivationService {
     }
 }
 
-let DAS = new DeferredActivationService();
-
-export default DAS;
+export default new DeferredActivationService();

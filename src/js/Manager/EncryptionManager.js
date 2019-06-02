@@ -464,6 +464,4 @@ class EncryptionManager {
     }
 }
 
-let EM = new EncryptionManager();
-
-export default EM;
+export default new EncryptionManager();

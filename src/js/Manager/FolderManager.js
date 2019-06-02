@@ -223,6 +223,4 @@ class FolderManager {
     }
 }
 
-let FM = new FolderManager();
-
-export default FM;
+export default new FolderManager();
