@@ -1,4 +1,6 @@
 import API from '@js/Helper/api';
+import router from '@js/Helper/router';
+import EventEmitter from 'eventemitter3';
 import SettingsService from '@js/Service/SettingsService';
 
 
@@ -8,70 +10,161 @@ class KeepAliveManager {
         return this._hasTimeout;
     }
 
+    get lastRequest() {
+        return this._lastRequest;
+    }
+
+    get events() {
+        return this._events;
+    }
+
     constructor() {
         this._mode = 0;
         this._timer = null;
-        this._hasTimeout = false;
         this._event = null;
-        this._lifeTime = 0;
+        this._hasTimeout = false;
         this._lastRequest = 0;
+        this._lockTimer = null;
+        this._events = new EventEmitter();
     }
 
+    /**
+     * Initialize keep alive management
+     */
     init() {
         SettingsService.observe('client.session.keepalive', (s) => { this._updateKeepAlive(s.value); });
-        let type = SettingsService.get('client.session.keepalive');
+        SettingsService.observe('user.session.lifetime', () => {
+            let type = SettingsService.get('client.session.keepalive');
+            this._updateKeepAlive(type);
+        });
 
+        let type = SettingsService.get('client.session.keepalive');
         this._updateKeepAlive(type);
     }
 
+    /**
+     * Initialize keep alive timers and events
+     *
+     * @param type
+     * @private
+     */
     _updateKeepAlive(type) {
-
-        if(this._mode === 1) {
-            clearInterval(this._timer);
-            this._timer = null;
-        } else if(this._mode === 2) {
-            document.body.removeEventListener('mouseover', this._event, {passive: true});
-            document.body.removeEventListener('keypress', this._event, {passive: true});
-            document.body.removeEventListener('click', this._event, {passive: true});
-        }
-
+        this._cleanUp();
 
         if(type === 0) {
-            this._hasTimeout = true;
-        } else if(type === 1) {
             this._initPermanentKeepAlive();
+        } else if(type === 1) {
+            this._initPassiveKeepAlive();
         } else if(type === 2) {
             this._initActionKeepAlive();
         }
+
         this._mode = type;
+        this._events.emit('keepalive.updated', {hasTimeout: this._hasTimeout})
     }
 
+    /**
+     * Clean up timers and events when mode changes
+     *
+     * @private
+     */
+    _cleanUp() {
+        if(this._mode === 0) {
+            clearInterval(this._timer);
+            clearInterval(this._lockTimer);
+        } else if(this._mode === 1) {
+            API.events.off('api.request.before', this._event);
+        } else if(this._mode === 2) {
+            clearInterval(this._lockTimer);
+            document.body.removeEventListener('mouseover', this._event, {passive: true});
+            document.body.removeEventListener('keypress', this._event, {passive: true});
+            document.body.removeEventListener('click', this._event, {passive: true});
+            API.events.off('api.request.before', this._event);
+        }
+    }
+
+    /**
+     * Always trigger keep alive requests before session runs out
+     *
+     * @private
+     */
     _initPermanentKeepAlive() {
         this._hasTimeout = false;
         let timeout = SettingsService.get('user.session.lifetime') - 10;
-
         this._timer = setInterval(() => { API.keepaliveSession(); }, timeout * 1000);
     }
 
+    /**
+     * Do not trigger keep alive requests but keep track of timeouts
+     *
+     * @private
+     */
+    _initPassiveKeepAlive() {
+        this._hasTimeout = true;
+
+        this._event = () => {
+            this._lastRequest = Date.now();
+            this._events.emit('keepalive.activity', {time: this._lastRequest})
+        };
+        API.events.on('api.request.before', this._event);
+        this._event();
+
+        this._lifeTime = SettingsService.get('user.session.lifetime') * 1000;
+        this._lockTimer = setInterval(() => { this._checkLockdown(); }, 2000);
+    }
+
+    /**
+     * Trigger keep alive requests when user activity detected
+     *
+     * @private
+     */
     _initActionKeepAlive() {
         this._hasTimeout = true;
-        this._lifeTime = SettingsService.get('user.session.lifetime') * 1000;
-        this._event = () => {this._keepAliveEvent();};
 
+        this._event = (e) => {
+            if(e && e.url && e.url.indexOf('session/keepalive') !== -1) return;
+
+            this._lastRequest = Date.now();
+            this._events.emit('keepalive.activity', {time: this._lastRequest})
+        };
         document.body.addEventListener('click', this._event, {passive: true});
         document.body.addEventListener('keypress', this._event, {passive: true});
         document.body.addEventListener('mouseover', this._event, {passive: true});
-        API.keepaliveSession();
-        this._lastRequest = Date.now();
+        API.events.on('api.request.before', this._event);
+        this._event();
+
+        this._timer = setInterval(() => { this._sendKeepAlive(); }, 10000);
+        this._lockTimer = setInterval(() => { this._checkLockdown(); }, 2000);
+        this._lifeTime = SettingsService.get('user.session.lifetime') * 1000;
     }
 
-    _keepAliveEvent(e) {
-        let minTime = this._lastRequest + 10,
-            maxTime = this._lastRequest + this._lifeTime;
+    /**
+     * Send keep alive request
+     *
+     * @private
+     */
+    _sendKeepAlive() {
+        let maxTime = this._lastRequest + 10000;
 
-        if(Date.now() > minTime && Date.now() < maxTime) {
-            API.keepaliveSession();
-            this._lastRequest = Date.now();
+        if(Date.now() <= maxTime) API.keepaliveSession();
+    }
+
+    /**
+     * Check if session expired and lock app
+     *
+     * @private
+     */
+    async _checkLockdown() {
+        if(this._lastRequest + this._lifeTime < Date.now()) {
+            let current = router.currentRoute,
+                target  = {name: current.name, path: current.path, hash: current.hash, params: current.params};
+
+            if(current.name === 'Authorize') return;
+
+            await API.closeSession();
+
+            target = btoa(JSON.stringify(target));
+            router.push({name: 'Authorize', params: {target}});
         }
     }
 }

@@ -215,7 +215,8 @@
             'You have reached the maximum length of 4096 characters'          : 'Sie haben die maximale Länge von 4096 Zeichern erreicht',
             'We could not find anything for "{query}"'                        : 'Die Suche nach "{query}" erzielte keinen Treffer',
             'The page "{page}" could not be fetched from the handbook server.': 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',
-            'Some data is waiting to be synchronized'                         : 'Es sind Daten zur synchronisation vorhanden'
+            'Some data is waiting to be synchronized'                         : 'Es sind Daten zur synchronisation vorhanden',
+            'You will be logged out in {time} seconds'                        : 'Du wirst in {time} Sekunden ausgeloggt'
         },
         longTexts    = {
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen.'

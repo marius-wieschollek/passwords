@@ -7,6 +7,10 @@ export default class SimpleApi {
         return this._config;
     }
 
+    get events() {
+        return this._config.events;
+    }
+
     /**
      * SimpleApi Constructor
      */
@@ -749,12 +753,16 @@ export default class SimpleApi {
      * @private
      */
     async _executeRequest(url, options) {
+
         try {
-            return await fetch(new Request(url, options));
+            let request = new Request(url, options);
+            this._config.events.emit('api.request.before', request);
+
+            return await fetch(request);
         } catch(e) {
             if(e.status === 401 && this._enabled) this._enabled = false;
 
-            this._config.events.emit('api.request.failed', e);
+            this._config.events.emit('api.request.error', e);
             throw e;
         }
     }
@@ -786,15 +794,17 @@ export default class SimpleApi {
             json = await response.json();
         } catch(e) {
             e.response = response;
-            this._config.events.emit('api.response.decoding.failed', e);
+            this._config.events.emit('api.response.decoding.error', e);
             throw e;
         }
 
         if(!response.ok) {
             json.response = response;
-            this._config.events.emit('api.request.failed', json);
+            this._config.events.emit('api.request.error', json);
             throw json;
         }
+
+        this._config.events.emit('api.request.after', {response, data:json, type:'json'});
 
         return json;
     }
@@ -811,15 +821,17 @@ export default class SimpleApi {
             blob = await response.blob();
         } catch(e) {
             e.response = response;
-            this._config.events.emit('api.response.decoding.failed', e);
+            this._config.events.emit('api.response.decoding.error', e);
             throw e;
         }
 
         if(!response.ok) {
             let error = {response, data: blob};
-            this._config.events.emit('api.request.failed', error);
+            this._config.events.emit('api.request.error', error);
             throw error;
         }
+
+        this._config.events.emit('api.request.after', {response, data:blob, type:'blob'});
 
         return blob;
     }

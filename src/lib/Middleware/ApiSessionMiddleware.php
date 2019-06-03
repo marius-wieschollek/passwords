@@ -70,7 +70,7 @@ class ApiSessionMiddleware extends Middleware {
         }
 
         if(!$this->sessionService->isAuthorized() && $this->requiresAuthorization($controller, $methodName)) {
-            throw new ApiException('Session required', Http::STATUS_PRECONDITION_FAILED);
+            throw new ApiException('Authorized session required', Http::STATUS_PRECONDITION_FAILED);
         }
 
         parent::beforeController($controller, $methodName);
@@ -115,7 +115,7 @@ class ApiSessionMiddleware extends Middleware {
             return false;
         }
 
-        if($controller instanceof SessionApiController && in_array($method, ['open', 'request', 'requestToken'])) {
+        if($controller instanceof SessionApiController && in_array($method, ['open', 'request', 'requestToken', 'keepAlive'])) {
             return false;
         }
 

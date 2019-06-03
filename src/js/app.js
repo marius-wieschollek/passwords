@@ -9,7 +9,7 @@ import Messages from '@js/Classes/Messages';
 import Encryption from '@js/ApiClient/Encryption';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsService from '@js/Service/SettingsService';
-import KeepAliveManager from '@/js/Manager/KeepAliveManager';
+import KeepAliveManager from '@js/Manager/KeepAliveManager';
 import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 /**
@@ -97,10 +97,13 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
         }, false);
 
 
-        events.on('api.request.failed', async (e) => {
+        events.on('api.request.error', async (e) => {
             if(e.id === 'f84f93d3') {
                 let current = router.currentRoute,
                     target  = {name: current.name, path: current.path, hash: current.hash, params: current.params};
+
+                if(current.name === 'Authorize') return;
+
                 target = btoa(JSON.stringify(target));
                 router.push({name: 'Authorize', params: {target}});
 

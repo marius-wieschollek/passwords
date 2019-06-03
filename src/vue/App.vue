@@ -32,6 +32,7 @@
                 </router-link>
             </ul>
             <ul class="menu-secondary">
+                <session-timeout/>
                 <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
                     <translate say="Trash"/>
                 </router-link>
@@ -68,12 +69,13 @@
     import router from '@js/Helper/router';
     import Messages from '@js/Classes/Messages';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import SessionTimeout from '@vue/Components/SessionTimeout';
 
     export default {
         el        : '#main',
         router,
         components: {
-            app          : {router},
+            SessionTimeout,
             Translate,
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
