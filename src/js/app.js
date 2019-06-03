@@ -98,7 +98,7 @@ __webpack_public_path__ = `${oc_appswebroots.passwords}/`;
 
 
         events.on('api.request.error', async (e) => {
-            if(e.id === 'f84f93d3') {
+            if(e.id === '4ad27488') {
                 let current = router.currentRoute,
                     target  = {name: current.name, path: current.path, hash: current.hash, params: current.params};
 
