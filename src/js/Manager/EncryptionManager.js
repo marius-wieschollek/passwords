@@ -2,6 +2,7 @@ import API from "@js/Helper/api";
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import Localisation from '@js/Classes/Localisation';
+import EventManager from '@js/Manager/EventManager';
 
 class EncryptionManager {
 
@@ -42,6 +43,7 @@ class EncryptionManager {
     /**
      *
      * @param password
+     * @param oldPassword
      * @returns {Promise<void>}
      */
     async update(password, oldPassword) {
@@ -338,12 +340,14 @@ class EncryptionManager {
         let total = Object.keys(tagMap).length + Object.keys(folderMap).length;
 
         this._sendStatus('cleanup', 'processing', total);
+        EventManager.ignoreApiErrors = true;
         await Promise.all(
             [
                 this._deleteObjects(tagMap, 'tag'),
                 this._deleteObjects(folderMap, 'folder')
             ]
         );
+        EventManager.ignoreApiErrors = false;
         this._sendStatus('cleanup', 'done');
     }
 

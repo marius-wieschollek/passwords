@@ -78,9 +78,8 @@ module.exports = (env) => {
 
     return {
         entry  : {
-            app     : `${__dirname}/src/js/app.js`,
-            admin   : `${__dirname}/src/js/admin.js`,
-            personal: `${__dirname}/src/js/personal.js`
+            app  : `${__dirname}/src/js/app.js`,
+            admin: `${__dirname}/src/js/admin.js`
         },
         output : {
             path         : `${__dirname}/src/`,
