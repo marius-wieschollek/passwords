@@ -58,11 +58,12 @@ class DeferredActivationService {
      * Check the status of a feature.
      *
      * @param string $id
+     * @param bool   $ignoreNightly
      *
      * @return bool
      */
-    public function check(string $id): bool {
-        if($this->isNightly()) return true;
+    public function check(string $id, bool $ignoreNightly = false): bool {
+        if(!$ignoreNightly && $this->isNightly()) return true;
 
         $features = $this->getFeatures();
         if(isset($features[ $id ])) return $features[ $id ] === true;
@@ -106,6 +107,8 @@ class DeferredActivationService {
         if(!isset($json['server'])) return [];
 
         $version = $this->config->getAppValue('installed_version');
+        if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
+
         list ($major, $minor) = explode('.', $version);
         $mainVersion = $major.'.'.$minor;
         $appFeatures = $json['server'];

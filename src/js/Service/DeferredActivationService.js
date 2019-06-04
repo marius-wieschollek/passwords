@@ -1,4 +1,4 @@
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Service/SettingsService';
 
 class DeferredActivationService {
 
@@ -14,10 +14,11 @@ class DeferredActivationService {
     /**
      *
      * @param id
+     * @param ignoreNightly
      * @returns {Promise<boolean>}
      */
-    async check(id) {
-        if(process.env.NIGHTLY_FEATURES) return true;
+    async check(id, ignoreNightly = false) {
+        if(!ignoreNightly && process.env.NIGHTLY_FEATURES) return true;
 
         let features = await this.getFeatures();
         if(features.hasOwnProperty(id)) return features[id] === true;
@@ -32,7 +33,7 @@ class DeferredActivationService {
     async getFeatures() {
         if(this._features !== null) return this._features;
 
-        let url = SettingsManager.get('server.handbook.url') + '_files/deferred-activation.json';
+        let url = SettingsService.get('server.handbook.url') + '_files/deferred-activation.json';
         this._features = {};
 
         try {

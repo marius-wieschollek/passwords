@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import Localisation from "@/js/Classes/Localisation";
-import SettingsManager from '@js/Manager/SettingsManager';
+import Localisation from "@js/Classes/Localisation";
+import SettingsService from '@js/Service/SettingsService';
 import DeferredActivationService from '@js/Service/DeferredActivationService';
 
 class SetupManager {
@@ -11,8 +11,8 @@ class SetupManager {
      * @returns {Promise<void>}
      */
     async runAutomatically() {
-        if(SettingsManager.get('client.setup.initialized', false)) return;
-        if(!await DeferredActivationService.check('first-run-wizard')) return;
+        if(SettingsService.get('client.setup.initialized', false)) return;
+        if(!await DeferredActivationService.check('first-run-wizard', true)) return;
 
         await this._runWizard();
     }
