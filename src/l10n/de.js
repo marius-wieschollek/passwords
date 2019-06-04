@@ -183,6 +183,8 @@
             'Ask in our forum!'                   : 'Wir helfen gerne!',
             'Found an error?'                     : 'Fehler gefunden?',
             'Tell us!'                            : 'Sag uns bescheid!',
+            'The session has expired'             : 'Die Sitzung ist abgelaufen',
+            'API Session Token expired'           : 'API Token abgelaufen',
             'Network error'                       : 'Netzwerkfehler',
             'Unable to load {module}'             : 'Das Modul {module} konnte nicht geladen werden. Möglicherweise ist die Verbindung zu Nextcloud unterbrochen',
             'Sort by name'                        : 'Sortiere nach Name',
@@ -219,6 +221,7 @@
             'You will be logged out in {time} seconds'                        : 'Du wirst in {time} Sekunden ausgeloggt'
         },
         longTexts    = {
+            'The session token is no longer valid. The app will now reload.'                           : 'Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen.',
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
         };
 
