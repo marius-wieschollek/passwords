@@ -1,5 +1,5 @@
 <template>
-    <translate tag="li"
+    <translate :tag="tag"
                class="session-timeout"
                say="You will be logged out in {time} seconds"
                :variables="{time}"
@@ -12,6 +12,12 @@
 
     export default {
         components: {Translate},
+        props     : {
+            scope: {
+                type   : String,
+                default: 'menu'
+            }
+        },
         data() {
             return {
                 hasTimeout : KeepAliveManager.hasTimeout,
@@ -36,6 +42,9 @@
         computed  : {
             showTimer() {
                 return this.hasTimeout && this.time <= 45;
+            },
+            tag() {
+                return this.scope === 'global' ? 'div':'li';
             }
         },
         methods   : {
@@ -57,6 +66,7 @@
 </script>
 
 <style lang="scss">
+    div.session-timeout,
     #app-navigation li.session-timeout {
 
         &:before {
@@ -67,5 +77,20 @@
         opacity          : 1;
         color            : var(--color-primary-text);
         font-weight      : bold;
+    }
+
+    div.session-timeout {
+        &:before {
+            font-family  : var(--pw-icon-font-face);
+            margin-right : 0.25rem;
+        }
+
+        line-height : 3rem;
+        position    : fixed;
+        bottom      : 0;
+        right       : 0;
+        left        : 0;
+        text-align  : center;
+        z-index     : 1000;
     }
 </style>

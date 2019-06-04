@@ -221,7 +221,7 @@
 
         #app-navigation {
             transform  : translateX(-100%);
-            transition : transform ease-in-out 0.25s 0.25s;
+            transition : transform ease-in-out 300ms;
         }
     }
 
@@ -409,12 +409,15 @@
         }
 
         &.pw-authorized {
-            #app-navigation {
-                transform : translateX(0);
-            }
             #header {
                 transition       : background-color ease-in-out 0.25s 0.25s;
                 background-color : var(--color-primary);
+            }
+
+            @media (min-width: $width-small) {
+                #app-navigation {
+                    transform : translateX(0);
+                }
             }
         }
     }
