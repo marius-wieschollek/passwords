@@ -323,6 +323,10 @@
                     <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
                     <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
                     <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
+
+                    <translate tag="label" for="setting-test-performace" say="Encryption performace"/>
+                    <input type="button" id="setting-test-performace" value="Test" @click="testPerformance($event)">
+                    <settings-help text="Test the performance of encryption operations. (Good is Desktop@30K, Mobile@8K)"/>
                 </section>
             </div>
         </div>
@@ -337,6 +341,7 @@
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
     import SettingsManager from '@js/Manager/SettingsManager';
+    import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
     import SUM from '@js/Manager/SetupManager';
     import EncryptionManager from '@js/Manager/EncryptionManager';
@@ -387,6 +392,21 @@
                     );
                 }
                 $event.target.removeAttribute('disabled');
+            },
+            testPerformance($event) {
+                $event.target.setAttribute('disabled', 'disabled');
+                $event.target.innerHtml = 'Working';
+
+                setTimeout(() => {
+                    EncryptionPerformanceHelper.runTests()
+                        .then((d) => {
+                            let message = `Average Points: ${d.result}`;
+                            Messages.alert(message, 'Benchmark Results');
+                            $event.target.removeAttribute('disabled');
+                            $event.target.innerHtml = 'Test';
+                        })
+                        .catch(console.error);
+                }, 100);
             },
             runWizard() {
                 if(!this.hasEncryption) {
