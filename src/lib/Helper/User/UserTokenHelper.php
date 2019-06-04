@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\User;
 
 use OC\Authentication\TwoFactorAuth\Manager;
+use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
 use OCP\ISession;
@@ -42,6 +43,11 @@ class UserTokenHelper {
     protected $twoFactorManager;
 
     /**
+     * @var DeferredActivationService
+     */
+    private $activationService;
+
+    /**
      * @var null|\OCP\Authentication\TwoFactorAuth\IProvider[]
      */
     protected $providers = null;
@@ -61,18 +67,19 @@ class UserTokenHelper {
      * @param SessionService     $sessionService
      * @param ISession           $session
      */
-    public function __construct(Manager $twoFactorManager, EnvironmentService $environmentService, SessionService $sessionService, ISession $session) {
+    public function __construct(Manager $twoFactorManager, DeferredActivationService $activationService, EnvironmentService $environmentService, SessionService $sessionService, ISession $session) {
         $this->twoFactorManager = $twoFactorManager;
         $this->sessionService   = $sessionService;
         $this->session          = $session;
         $this->user             = $environmentService->getUser();
+        $this->activationService = $activationService;
     }
 
     /**
      * @return bool
      */
-    public function tokenRequired(): bool {
-        return !empty($this->getProviders());
+    public function hasToken(): bool {
+        return $this->activationService->check('two-factor-tokens') && !empty($this->getProviders());
     }
 
     /**

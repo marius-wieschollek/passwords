@@ -94,9 +94,8 @@ class SessionApiController extends AbstractApiController {
                 $requirements['salts'] = $this->challengeHelper->getSalts();
             }
 
-            $providers = $this->tokenHelper->getProvidersAsArray();
-            if(!empty($providers)) {
-                $requirements['token'] = $providers;
+            if($this->tokenHelper->hasToken()) {
+                $requirements['token'] = $this->tokenHelper->getProvidersAsArray();
             }
         }
 
@@ -171,7 +170,7 @@ class SessionApiController extends AbstractApiController {
      * @throws ApiException
      */
     protected function verifyToken($parameters): void {
-        if($this->tokenHelper->tokenRequired()) {
+        if($this->tokenHelper->hasToken()) {
             if(!isset($parameters['token'])) {
                 $this->loginAttempts->registerFailedAttempt();
                 throw new ApiException('Token invalid', Http::STATUS_UNAUTHORIZED);

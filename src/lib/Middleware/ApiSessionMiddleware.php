@@ -12,6 +12,7 @@ use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\UserChallengeHelper;
+use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
@@ -32,9 +33,9 @@ class ApiSessionMiddleware extends Middleware {
     protected $session;
 
     /**
-     * @var UserChallengeHelper
+     * @var UserTokenHelper
      */
-    protected $passwordHelper;
+    protected $tokenHelper;
 
     /**
      * @var SessionService
@@ -42,16 +43,22 @@ class ApiSessionMiddleware extends Middleware {
     protected $sessionService;
 
     /**
+     * @var UserChallengeHelper
+     */
+    protected $challengeHelper;
+
+    /**
      * ApiSessionMiddleware constructor.
      *
      * @param SessionService      $sessionService
-     * @param UserChallengeHelper $passwordHelper
+     * @param UserChallengeHelper $challengeHelper
      * @param ISession            $session
      */
-    public function __construct(SessionService $sessionService, UserChallengeHelper $passwordHelper, ISession $session) {
-        $this->sessionService = $sessionService;
-        $this->session        = $session;
-        $this->passwordHelper = $passwordHelper;
+    public function __construct(SessionService $sessionService, UserChallengeHelper $challengeHelper, UserTokenHelper $tokenHelper, ISession $session) {
+        $this->session         = $session;
+        $this->tokenHelper     = $tokenHelper;
+        $this->sessionService  = $sessionService;
+        $this->challengeHelper = $challengeHelper;
     }
 
     /**
@@ -111,7 +118,7 @@ class ApiSessionMiddleware extends Middleware {
      */
     protected function requiresAuthorization(Controller $controller, string $method): bool {
 
-        if(!$this->passwordHelper->hasChallenge()) {
+        if(!$this->challengeHelper->hasChallenge() && !$this->tokenHelper->hasToken()) {
             return false;
         }
 
