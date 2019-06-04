@@ -102,7 +102,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
             $fixed = true;
         }
 
-        if($revision->getCustomFields() === null && $revision->getCseType() === 'none') {
+        if($revision->getCustomFields() === null && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) {
             $this->encryptionService->decrypt($revision);
             $revision->setCustomFields('[]');
             $fixed = true;
@@ -139,7 +139,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @throws \Exception
      */
     public function convertCustomFields(PasswordRevision $revision): bool {
-        if(!$this->convertFields || $revision->getCseType() !== 'none') return false;
+        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
         $this->encryptionService->decrypt($revision);
         $customFields = $revision->getCustomFields();
@@ -173,7 +173,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @throws \Exception
      */
     public function cleanCustomFields(PasswordRevision $revision): bool {
-        if(!$this->convertFields || $revision->getCseType() !== 'none') return false;
+        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
         $this->encryptionService->decrypt($revision);
         $customFields = $revision->getCustomFields();
