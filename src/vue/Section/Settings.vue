@@ -400,8 +400,8 @@
                 setTimeout(() => {
                     EncryptionPerformanceHelper.runTests()
                         .then((d) => {
-                            let message = `Average Points: ${d.result}`;
-                            Messages.alert(message, 'Benchmark Results');
+                            let message = `Benchmark Result: ${d.result} Points`;
+                            Messages.alert(message, 'Benchmark Completed');
                             $event.target.removeAttribute('disabled');
                             $event.target.innerHtml = 'Test';
                         })
