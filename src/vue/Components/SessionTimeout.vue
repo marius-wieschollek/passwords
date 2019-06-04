@@ -9,6 +9,7 @@
     import SettingsService from '@js/Service/SettingsService';
     import KeepAliveManager from '@js/Manager/KeepAliveManager';
     import Translate from "@/vue/Components/Translate";
+    import Application from '@js/Init/Application';
 
     export default {
         components: {Translate},
@@ -29,10 +30,10 @@
         },
         created() {
             if(this.hasTimeout) this.startInterval();
-            KeepAliveManager.events.on('keepalive.updated', (e) => {
+            Application.events.on('keepalive.updated', (e) => {
                 this.hasTimeout = e.hasTimeout;
             });
-            KeepAliveManager.events.on('keepalive.activity', (e) => {
+            Application.events.on('keepalive.activity', (e) => {
                 this.lastRequest = e.time;
             });
             SettingsService.observe('user.session.lifetime', (s) => {

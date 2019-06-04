@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
-import EventEmitter from 'eventemitter3';
+import Application from '@js/Init/Application';
 import SettingsService from '@js/Service/SettingsService';
 
 
@@ -14,10 +14,6 @@ class KeepAliveManager {
         return this._lastRequest;
     }
 
-    get events() {
-        return this._events;
-    }
-
     constructor() {
         this._mode = 0;
         this._timer = null;
@@ -25,7 +21,6 @@ class KeepAliveManager {
         this._hasTimeout = false;
         this._lastRequest = 0;
         this._lockTimer = null;
-        this._events = new EventEmitter();
     }
 
     /**
@@ -54,13 +49,13 @@ class KeepAliveManager {
         if(type === 0) {
             this._initPermanentKeepAlive();
         } else if(type === 1) {
-            this._initPassiveKeepAlive();
-        } else if(type === 2) {
             this._initActionKeepAlive();
+        } else if(type === 2) {
+            this._initPassiveKeepAlive();
         }
 
         this._mode = type;
-        this._events.emit('keepalive.updated', {hasTimeout: this._hasTimeout})
+        Application.events.emit('keepalive.updated', {hasTimeout: this._hasTimeout})
     }
 
     /**
@@ -71,15 +66,16 @@ class KeepAliveManager {
     _cleanUp() {
         if(this._mode === 0) {
             clearInterval(this._timer);
-            clearInterval(this._lockTimer);
         } else if(this._mode === 1) {
-            API.events.off('api.request.before', this._event);
-        } else if(this._mode === 2) {
+            clearInterval(this._timer);
             clearInterval(this._lockTimer);
             document.body.removeEventListener('mouseover', this._event, {passive: true});
             document.body.removeEventListener('keypress', this._event, {passive: true});
             document.body.removeEventListener('click', this._event, {passive: true});
             API.events.off('api.request.before', this._event);
+        } else if(this._mode === 2) {
+            API.events.off('api.request.before', this._event);
+            clearInterval(this._lockTimer);
         }
     }
 
@@ -104,7 +100,7 @@ class KeepAliveManager {
 
         this._event = () => {
             this._lastRequest = Date.now();
-            this._events.emit('keepalive.activity', {time: this._lastRequest})
+            Application.events.emit('keepalive.activity', {time: this._lastRequest})
         };
         API.events.on('api.request.before', this._event);
         this._event();
@@ -124,8 +120,10 @@ class KeepAliveManager {
         this._event = (e) => {
             if(e && e.url && e.url.indexOf('session/keepalive') !== -1) return;
 
+            if((!e || !e.url) && Date.now() > this._lastRequest + 10000) API.keepaliveSession();
+
             this._lastRequest = Date.now();
-            this._events.emit('keepalive.activity', {time: this._lastRequest})
+            Application.events.emit('keepalive.activity', {time: this._lastRequest})
         };
         document.body.addEventListener('click', this._event, {passive: true});
         document.body.addEventListener('keypress', this._event, {passive: true});

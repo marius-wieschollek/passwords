@@ -56,8 +56,8 @@
                     <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"  v-if="hasEncryption"/>
                     <select id="setting-session-keepalive" v-model.number="settings['client.session.keepalive']" v-if="hasEncryption">
                         <translate tag="option" value="0" say="Always" />
-                        <translate tag="option" value="1" say="When i'm working" />
-                        <translate tag="option" value="2" say="When i'm active" />
+                        <translate tag="option" value="1" say="When i'm active" />
+                        <translate tag="option" value="2" say="When i'm working" />
                     </select>
                     <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled" v-if="hasEncryption"/>
 
