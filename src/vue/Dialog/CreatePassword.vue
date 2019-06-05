@@ -79,7 +79,7 @@
                             <select id="password-cse"
                                     name="cseType"
                                     title="Choose the encryption type for this password"
-                                    v-model="password.cseType"
+                                    v-model.number="password.cseType"
                                     :disabled="!hasEncryption">
                                 <translate tag="option" value="none" say="On the server"/>
                                 <translate tag="option" value="CSEv1r1" say="Libsodium"/>
@@ -512,6 +512,11 @@
 
                             .warning {
                                 margin : 0 0 4px;
+                            }
+
+                            @media (max-width : $width-medium) {
+                                width   : 100%;
+                                max-width   : 525px;
                             }
                         }
 
