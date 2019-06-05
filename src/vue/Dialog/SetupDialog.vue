@@ -178,7 +178,7 @@
                 if(this._close) { this._close(); }
             },
             closeAction($e) {
-                if(this.closable && $e.originalTarget.id === 'passwords-setup' && this.current.skippable) {
+                if(this.closable && $e.target.id === 'passwords-setup' && this.current.skippable) {
                     this.closeWizard();
                 }
             }

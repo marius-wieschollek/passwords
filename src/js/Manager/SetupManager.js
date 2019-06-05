@@ -45,7 +45,7 @@ class SetupManager {
      * @private
      */
     async _runWizard(enableSlides, closable, redirect) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             await Localisation.loadSection('tutorial');
 
             let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
