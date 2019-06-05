@@ -9,6 +9,7 @@
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
         <translate tag="div" say="Last updated"><span>{{ getDateTime(password.edited) }}</span></translate>
+        <detail-field label="Id" type="text" :value="password.id"/>
         <translate tag="div" say="Revisions">
             <translate say="{count} revisions" :variables="{count:countRevisions}"/>
         </translate>

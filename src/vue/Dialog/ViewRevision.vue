@@ -45,6 +45,7 @@
                     showHiddenFields = SettingsManager.get('client.ui.custom.fields.show.hidden');
 
                 fields.push({label: Localisation.translate('Name'), value: this.revision.label});
+                fields.push({label: Localisation.translate('Id'), value: this.revision.id});
                 fields.push({
                                 label: Localisation.translate('Created on'),
                                 value: Localisation.formatDateTime(this.revision.created)
