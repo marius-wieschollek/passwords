@@ -65,6 +65,9 @@
             redirect    : {
                 type   : Boolean,
                 default: true
+            },
+            _close  : {
+                type: Function
             }
         },
 
@@ -172,6 +175,7 @@
                     div       = document.createElement('div');
                 container.replaceChild(div, container.childNodes[0]);
                 if(this.redirect || !this.isDefaultRoute) router.push(this.route);
+                if(this._close) { this._close(); }
             },
             closeAction($e) {
                 if(this.closable && $e.originalTarget.id === 'passwords-setup' && this.current.skippable) {

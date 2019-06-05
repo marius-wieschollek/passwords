@@ -45,12 +45,14 @@ class SetupManager {
      * @private
      */
     async _runWizard(enableSlides, closable, redirect) {
-        await Localisation.loadSection('tutorial');
+        return new Promise(async (resolve, reject) => {
+            await Localisation.loadSection('tutorial');
 
-        let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
-            SetupWizard = Vue.extend(SetupDialog.default);
+            let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
+                SetupWizard = Vue.extend(SetupDialog.default);
 
-        new SetupWizard({propsData: {enableSlides, closable, redirect}}).$mount('#app-popup div');
+            new SetupWizard({propsData: {enableSlides, closable, redirect, _close:resolve}}).$mount('#app-popup div');
+        });
     }
 }
 
