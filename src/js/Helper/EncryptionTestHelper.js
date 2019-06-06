@@ -1,7 +1,6 @@
 import API from '@js/Helper/api';
 import sodium from 'libsodium-wrappers';
-import Encryption from '@js/ApiClient/Encryption';
-import EnhancedApi from '@js/ApiClient/EnhancedApi';
+import {EnhancedApi, Encryption} from 'passwords-client';
 import SettingsManager from '@js/Manager/SettingsManager';
 import DeferredActivationService from "@/js/Service/DeferredActivationService";
 

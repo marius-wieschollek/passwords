@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import SimpleApi from '@js/ApiClient/SimpleApi';
+    import {SimpleApi} from 'passwords-client';
     import Localisation from '@js/Classes/Localisation';
 
     export default {

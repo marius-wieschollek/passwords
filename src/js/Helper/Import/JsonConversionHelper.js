@@ -1,4 +1,4 @@
-import Encryption from '@js/ApiClient/Encryption';
+import {Encryption} from 'passwords-client';
 
 export default class ImportJsonConversionHelper {
 

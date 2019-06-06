@@ -1,5 +1,5 @@
 import API from '@js/Helper/api';
-import SimpleApi from '@js/ApiClient/SimpleApi';
+import {SimpleApi} from 'passwords-client';
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
 

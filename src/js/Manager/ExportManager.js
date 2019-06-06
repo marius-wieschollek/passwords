@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
 import JSZip from 'jszip'
 import Utility from '@js/Classes/Utility';
-import Encryption from '@js/ApiClient/Encryption';
+import {Encryption} from 'passwords-client';
 import Localisation from '@js/Classes/Localisation';
 
 /**

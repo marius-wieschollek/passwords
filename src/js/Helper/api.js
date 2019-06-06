@@ -1,5 +1,3 @@
-import EnhancedApi from '@js/ApiClient/EnhancedApi';
+import EnhancedApi from 'passwords-client';
 
-const api = new EnhancedApi();
-
-export default api;
+export default new EnhancedApi();

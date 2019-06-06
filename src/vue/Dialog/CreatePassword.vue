@@ -100,9 +100,9 @@
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import Messages from "@js/Classes/Messages";
+    import Messages from '@js/Classes/Messages';
+    import EnhancedApi from 'passwords-client';
     import Localisation from '@js/Classes/Localisation';
-    import EnhancedApi from '@js/ApiClient/EnhancedApi';
     import SettingsManager from '@js/Manager/SettingsManager';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 

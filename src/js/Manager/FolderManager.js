@@ -2,7 +2,6 @@ import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
-import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
 /**
  *
