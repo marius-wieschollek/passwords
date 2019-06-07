@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
 import sodium from 'libsodium-wrappers';
-import {EnhancedApi, Encryption} from 'passwords-client';
-import SettingsManager from '@js/Manager/SettingsManager';
+import {Encryption} from 'passwords-client';
+import SettingsService from '@js/Service/SettingsService';
 import DeferredActivationService from "@/js/Service/DeferredActivationService";
 
 class EncryptionTestHelper {
@@ -22,11 +22,11 @@ class EncryptionTestHelper {
             return;
         }
 
-        let testExecuted = SettingsManager.get('local.test.e2e.executed', false),
-            testTimeout  = SettingsManager.get('local.test.e2e.timeout', 0);
+        let testExecuted = SettingsService.get('local.test.e2e.executed', false),
+            testTimeout  = SettingsService.get('local.test.e2e.timeout', 0);
 
         if(testTimeout !== 0) {
-            SettingsManager.set('local.test.e2e.timeout', testTimeout - 1);
+            SettingsService.set('local.test.e2e.timeout', testTimeout - 1);
         } else if(!testExecuted) {
             setTimeout(() => {this.runTests();}, 15000);
         }
@@ -52,7 +52,7 @@ class EncryptionTestHelper {
             if(result !== true) return this.handleError(result);
             result = await this.testTags();
             if(result !== true) return this.handleError(result);
-            SettingsManager.set('local.test.e2e.executed', true);
+            SettingsService.set('local.test.e2e.executed', true);
             console.info('Encryption tests ran successfully');
             return true;
         } catch(e) {
@@ -128,7 +128,7 @@ class EncryptionTestHelper {
         for(let i in db) {
             if(!db.hasOwnProperty(i)) continue;
             let object = db[i];
-            if(type === 'password') object = EnhancedApi.flattenPassword(object);
+            if(type === 'password') object = API.flattenPassword(object);
 
             try {
                 let encrypted = await this.encryption.encryptObject(object, type);
@@ -182,9 +182,9 @@ with this data attached:</p><br><div style="max-width:250px;max-height:200px;ove
             'Encryption Tests Failed',
             (d) => {
                 if(d) {
-                    SettingsManager.set('local.test.e2e.executed', true);
+                    SettingsService.set('local.test.e2e.executed', true);
                 } else {
-                    SettingsManager.set('local.test.e2e.timeout', 10);
+                    SettingsService.set('local.test.e2e.timeout', 10);
                 }
             },
             true

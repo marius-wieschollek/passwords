@@ -43,7 +43,7 @@
     import PasswordDetails from '@vue/Details/Password';
     import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
 
     export default {
         components: {
@@ -68,11 +68,11 @@
                     element: null
                 },
                 sorting  : {
-                    field    : SettingsManager.get('local.ui.sorting.field', 'label'),
-                    ascending: SettingsManager.get('local.ui.sorting.ascending', true)
+                    field    : SettingsService.get('local.ui.sorting.field', 'label'),
+                    ascending: SettingsService.get('local.ui.sorting.ascending', true)
                 },
                 ui       : {
-                    showTags: SettingsManager.get('client.ui.list.tags.show', false) && window.innerWidth > 360
+                    showTags: SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360
                 },
                 search   : SearchManager.status
             };
@@ -133,8 +133,8 @@
         methods: {
             updateSorting($event) {
                 this.sorting = $event;
-                SettingsManager.set('local.ui.sorting.field', $event.field);
-                SettingsManager.set('local.ui.sorting.ascending', $event.ascending);
+                SettingsService.set('local.ui.sorting.field', $event.field);
+                SettingsService.set('local.ui.sorting.ascending', $event.ascending);
 
                 if(this.passwords) {
                     this.passwords =
@@ -165,9 +165,9 @@
                 this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },
             getPasswordsSortingField() {
-                let sortingField = this.sorting.field === 'label' ? SettingsManager.get(
+                let sortingField = this.sorting.field === 'label' ? SettingsService.get(
                     'client.ui.password.field.sorting'):this.sorting.field;
-                if(sortingField === 'byTitle') sortingField = SettingsManager.get('client.ui.password.field.title');
+                if(sortingField === 'byTitle') sortingField = SettingsService.get('client.ui.password.field.title');
                 return sortingField;
             }
         },

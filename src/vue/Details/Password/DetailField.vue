@@ -15,7 +15,7 @@
     import Web from '@vc/Web';
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
 
     export default {
         components: {
@@ -55,7 +55,7 @@
             },
             getLink() {
                 if (this.type === 'email') return `mailto:${this.value}`;
-                if (this.type === 'file') return SettingsManager.get('server.baseUrl.webdav') + this.value.substr(1);
+                if (this.type === 'file') return SettingsService.get('server.baseUrl.webdav') + this.value.substr(1);
                 return this.value;
             }
         },

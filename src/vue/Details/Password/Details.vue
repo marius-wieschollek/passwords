@@ -35,7 +35,7 @@
     import Web from '@vc/Web';
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
     import DetailField from '@vue/Details/Password/DetailField';
 
     export default {
@@ -53,7 +53,7 @@
 
         data() {
             return {
-                showHiddenFields: SettingsManager.get('client.ui.custom.fields.show.hidden')
+                showHiddenFields: SettingsService.get('client.ui.custom.fields.show.hidden')
             };
         },
 

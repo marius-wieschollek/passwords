@@ -336,16 +336,16 @@
 
 <script>
     import API from '@js/Helper/api';
+    import SUM from '@js/Manager/SetupManager';
     import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
-    import SettingsManager from '@js/Manager/SettingsManager';
-    import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
-    import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
-    import SUM from '@js/Manager/SetupManager';
-    import EncryptionManager from '@js/Manager/EncryptionManager';
     import DAS from '@js/Service/DeferredActivationService';
+    import SettingsService from '@js/Service/SettingsService';
+    import EncryptionManager from '@js/Manager/EncryptionManager';
+    import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
+    import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
 
     export default {
         components: {
@@ -354,7 +354,7 @@
             Translate
         },
         data() {
-            let advancedSettings  = SettingsManager.get('client.settings.advanced'),
+            let advancedSettings  = SettingsService.get('client.settings.advanced'),
                 encryptionFeature = false,
                 hasEncryption     = API.hasEncryption;
 
@@ -362,7 +362,7 @@
                 .then((d) => { this.encryptionFeature = d});
 
             return {
-                settings: SettingsManager.getAll(),
+                settings: SettingsService.getAll(),
                 encryptionFeature,
                 advancedSettings,
                 hasEncryption,
@@ -379,7 +379,7 @@
                     if(!this.settings.hasOwnProperty(i)) continue;
                     let value = this.settings[i];
 
-                    if(SettingsManager.get(i) !== value) SettingsManager.set(i, value);
+                    if(SettingsService.get(i) !== value) SettingsService.set(i, value);
                 }
             },
             async testEncryption($event) {
@@ -431,7 +431,7 @@
                 this.locked = true;
                 this.noSave = true;
                 for(let i in this.settings) {
-                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsManager.reset(i);
+                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsService.reset(i);
                 }
                 this.advancedSettings = false;
                 this.advanced = '0';

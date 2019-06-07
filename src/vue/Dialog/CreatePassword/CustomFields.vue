@@ -13,7 +13,7 @@
 
 <script>
     import Utility from '@js/Classes/Utility';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
     import CustomFieldForm from '@vue/Dialog/CreatePassword/CustomFieldForm';
 
     export default {
@@ -25,7 +25,7 @@
         },
         data() {
             return {
-                showHidden  : SettingsManager.get('client.ui.custom.fields.show.hidden')
+                showHidden  : SettingsService.get('client.ui.custom.fields.show.hidden')
             };
         },
         computed  : {

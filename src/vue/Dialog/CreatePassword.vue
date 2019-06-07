@@ -101,9 +101,8 @@
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
-    import EnhancedApi from 'passwords-client';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
@@ -127,7 +126,7 @@
         },
 
         data() {
-            let cseType  = SettingsManager.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
+            let cseType  = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
                 password = Object.assign({cseType, notes: '', customFields: []}, this.properties);
 
             return {
@@ -188,7 +187,7 @@
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
-                password = EnhancedApi.flattenPassword(password);
+                password = API.flattenPassword(password);
                 password = API.validatePassword(password);
 
                 if(this._success) {

@@ -58,18 +58,18 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
 
     export default {
         components: {Translate},
 
         data() {
-            let section    = SettingsManager.get('client.ui.section.default'),
-                maxAge     = SettingsManager.get('user.password.security.age'),
-                numbers    = SettingsManager.get('user.password.generator.numbers'),
-                special    = SettingsManager.get('user.password.generator.special'),
-                strength   = SettingsManager.get('user.password.generator.strength'),
-                duplicates = SettingsManager.get('user.password.security.duplicates'),
+            let section    = SettingsService.get('client.ui.section.default'),
+                maxAge     = SettingsService.get('user.password.security.age'),
+                numbers    = SettingsService.get('user.password.generator.numbers'),
+                special    = SettingsService.get('user.password.generator.special'),
+                strength   = SettingsService.get('user.password.generator.strength'),
+                duplicates = SettingsService.get('user.password.security.duplicates'),
                 hasAge     = maxAge > 0,
                 customAge  = [0, 90, 180, 356, 712].indexOf(maxAge) === -1 ? maxAge:false;
 
@@ -90,25 +90,25 @@
         methods: {},
         watch  : {
             hasAge(value) {
-                SettingsManager.set('user.password.security.age', value ? this.maxAge:0);
+                SettingsService.set('user.password.security.age', value ? this.maxAge:0);
             },
             maxAge(value) {
-                SettingsManager.set('user.password.security.age', this.hasAge ? value:0);
+                SettingsService.set('user.password.security.age', this.hasAge ? value:0);
             },
             duplicates(value) {
-                SettingsManager.set('user.password.security.duplicates', value);
+                SettingsService.set('user.password.security.duplicates', value);
             },
             section(value) {
-                SettingsManager.set('client.ui.section.default', value);
+                SettingsService.set('client.ui.section.default', value);
             },
             strength(value) {
-                SettingsManager.set('user.password.generator.strength', value);
+                SettingsService.set('user.password.generator.strength', value);
             },
             numbers(value) {
-                SettingsManager.set('user.password.generator.numbers', value === true);
+                SettingsService.set('user.password.generator.numbers', value === true);
             },
             special(value) {
-                SettingsManager.set('user.password.generator.special', value === true);
+                SettingsService.set('user.password.generator.special', value === true);
             }
         }
     };

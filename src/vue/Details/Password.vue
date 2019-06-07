@@ -36,7 +36,7 @@
     import Preview from '@vue/Details/Password/Preview';
     import PwDetails from '@vue/Details/Password/Details';
     import Revisions from '@vue/Details/Password/Revisions';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Sharing from '@vue/Details/Password/Sharing/Sharing';
 
@@ -82,7 +82,7 @@
                 return {details: 'Details', share: 'Share', revisions: 'Revisions'};
             },
             getSharingTabs() {
-                if(SettingsManager.get('server.sharing.enabled')) {
+                if(SettingsService.get('server.sharing.enabled')) {
                     return {nextcloud: 'Share', qrcode: 'QR Code'};
                 }
                 return {qrcode: 'QR Code'};

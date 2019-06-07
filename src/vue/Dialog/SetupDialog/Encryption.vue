@@ -55,7 +55,7 @@
 <script>
     import Translate from '@vue/Components/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
 
     export default {
@@ -67,7 +67,7 @@
             }
         },
         data() {
-            let advanced = SettingsManager.get('client.settings.advanced');
+            let advanced = SettingsService.get('client.settings.advanced');
 
             return {
                 password    : '',

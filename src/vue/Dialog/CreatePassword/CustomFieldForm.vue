@@ -37,9 +37,9 @@
 
 <script>
     import Messages from '@js/Classes/Messages';
-    import Localisation from '@js/Classes/Localisation';
     import Translate from '@vue/Components/Translate';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import Localisation from '@js/Classes/Localisation';
+    import SettingsService from '@js/Service/SettingsService';
 
     export default {
         components: {Translate},
@@ -81,7 +81,7 @@
             },
             getFileButtonStyle() {
                 return {
-                    backgroundImage: `url(${SettingsManager.get('server.theme.folder.icon')})`
+                    backgroundImage: `url(${SettingsService.get('server.theme.folder.icon')})`
                 };
             },
             getPattern() {

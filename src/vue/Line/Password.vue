@@ -63,7 +63,7 @@
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
 
     export default {
         components: {
@@ -102,14 +102,14 @@
                 return Localisation.translate(label);
             },
             showCopyOptions() {
-                return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
+                return window.innerWidth < 361 || SettingsService.get('client.ui.password.menu.copy');
             },
             showTags() {
-                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags;
+                return window.innerWidth > 360 && SettingsService.get('client.ui.list.tags.show') && this.password.tags;
             },
             getTitle() {
-                let titleField = SettingsManager.get('client.ui.password.field.title'),
-                    showUser   = SettingsManager.get('client.ui.password.user.show'),
+                let titleField = SettingsService.get('client.ui.password.field.title'),
+                    showUser   = SettingsService.get('client.ui.password.user.show'),
                     title      = this.password[titleField];
 
                 if(!title && this.password.label) title = this.password.label;
@@ -146,12 +146,12 @@
                 if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0)) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
-                let action = SettingsManager.get('client.ui.password.click.action');
+                let action = SettingsService.get('client.ui.password.click.action');
                 if(action !== 'none') this.runClickAction(action, 300);
             },
             doubleClickAction($event) {
                 if($event && $($event.target).closest('.more').length !== 0) return;
-                let action = SettingsManager.get('client.ui.password.dblClick.action');
+                let action = SettingsService.get('client.ui.password.dblClick.action');
 
                 if(action !== 'none') {
                     if(this.clickTimeout) clearTimeout(this.clickTimeout);

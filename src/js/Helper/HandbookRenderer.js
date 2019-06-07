@@ -2,7 +2,7 @@ import marked from 'marked';
 import VueRouter from '@js/Helper/router';
 import ThemeManager from '@js/Manager/ThemeManager';
 import Localisation from '@/js/Classes/Localisation';
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Service/SettingsService';
 
 /**
  *
@@ -10,7 +10,7 @@ import SettingsManager from '@js/Manager/SettingsManager';
 class HandbookRenderer {
 
     constructor() {
-        this.handbookUrl = SettingsManager.get('server.handbook.url');
+        this.handbookUrl = SettingsService.get('server.handbook.url');
         this.pages = [];
     }
 

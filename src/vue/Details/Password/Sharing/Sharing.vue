@@ -35,7 +35,7 @@
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vue/Details/Password/Sharing/Share';
     import PasswordManager from '@js/Manager/PasswordManager';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Service/SettingsService';
 
     export default {
         components: {
@@ -63,7 +63,7 @@
                 shares,
                 hasCse,
                 placeholder : Localisation.translate('Search user'),
-                autocomplete: SettingsManager.get('server.sharing.autocomplete'),
+                autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
                 polling     : {interval: null, mode: null}
             };

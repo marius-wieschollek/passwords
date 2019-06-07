@@ -2,7 +2,6 @@ import Vue from 'vue';
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
-import EnhancedApi from 'passwords-client';
 import Messages from '@js/Classes/Messages';
 
 /**
@@ -51,7 +50,7 @@ class PasswordManager {
                    password.editable = true;
                    password.revision = data.revision;
                    password.edited = password.created = password.updated = Utility.getTimestamp();
-                   if(!password.label) EnhancedApi._generatePasswordTitle(password);
+                   if(!password.label) API._generatePasswordTitle(password);
                    password = API._processPassword(password);
                    Events.fire('password.created', password);
                })
@@ -77,7 +76,7 @@ class PasswordManager {
 
             DialogWindow._success = (p) => {
                 p = Utility.mergeObject(password, p);
-                if(!p.label) EnhancedApi._generatePasswordTitle(p);
+                if(!p.label) API._generatePasswordTitle(p);
                 if(password.password !== p.password) {
                     p.edited = new Date();
                 } else {

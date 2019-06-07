@@ -40,9 +40,9 @@
     import router from '@js/Helper/router';
     import Translate from '@vue/Components/Translate';
     import Start from '@vue/Dialog/SetupDialog/Start';
-    import SettingsManager from '@js/Manager/SettingsManager';
     import GetHelp from '@vue/Dialog/SetupDialog/GetHelp';
     import KeepOrder from '@vue/Dialog/SetupDialog/KeepOrder';
+    import SettingsService from '@js/Service/SettingsService';
     import Encryption from '@vue/Dialog/SetupDialog/Encryption';
     import Integrations from '@vue/Dialog/SetupDialog/Integrations';
     import UserSettings from '@/vue/Dialog/SetupDialog/UserSettings';
@@ -169,7 +169,7 @@
                 }
             },
             closeWizard() {
-                SettingsManager.set('client.setup.initialized', true);
+                SettingsService.set('client.setup.initialized', true);
                 this.$destroy();
                 let container = document.getElementById('app-popup'),
                     div       = document.createElement('div');
