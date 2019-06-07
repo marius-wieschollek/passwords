@@ -42,7 +42,7 @@ Rather than implementing own and possibly error-prone encryption algorithms Pass
 The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
-Passwords is available in english, german, french, dutch, czech and russian.
+Passwords is available in english, german, french, dutch, swedish, czech and russian.
 
 ## Security
 #### Server Side Encryption
@@ -66,7 +66,7 @@ There are no apps for the modern API right now. But there are some for the legac
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.
-**Soon to come:** Documentation and JavaScript Example Implementation will be available soon
+You can use our [javascript client](https://www.npmjs.com/package/passwords-client) or take a look at the [api documentation](https://git.mdns.eu/nextcloud/passwords/wikis/developers/index).
 
 ## Installation
 Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/apps/passwords).
