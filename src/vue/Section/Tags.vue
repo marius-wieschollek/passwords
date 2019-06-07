@@ -46,7 +46,6 @@
 
         methods: {
             refreshView: function() {
-                this.detail.type = 'none';
                 if(this.$route.params.tag !== undefined) {
                     this.tags = [];
                     if(!this.passwords.length) this.loading = true;
@@ -68,6 +67,7 @@
         watch  : {
             $route: function() {
                 this.refreshView();
+                this.detail.type = 'none';
             }
         }
     };
