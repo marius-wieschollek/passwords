@@ -134,11 +134,11 @@
                 }
                 this.hasError = false;
 
-                setTimeout(() => {
+                this.$nextTick(() => {
                     API.openSession(data)
                         .then(() => { this.goToTarget(); })
                         .catch((d) => { this.loginError(d); });
-                }, 1);
+                });
 
             },
             loginError(e) {
