@@ -81,6 +81,27 @@ class ValidateTagTest extends TestCase {
      * @throws \Exception
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
+    public function testValidateTagCseKeyBotNoCse() {
+        $mock = $this->getTagMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
+        $mock->method('getCseKey')->willReturn('cse-key');
+
+        try {
+            $this->validationService->validateTag($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('4e8162e6', $e->getId());
+            $this->assertEquals('Invalid client side encryption type', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws \Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
     public function testValidateTagNoSseAndCse() {
         $mock = $this->getTagMock();
 

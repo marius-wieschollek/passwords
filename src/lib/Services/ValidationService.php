@@ -199,6 +199,10 @@ class ValidationService {
             throw new ApiException('Invalid client side encryption type', 400);
         }
 
+        if($revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && !empty($revision->getCseKey())) {
+            throw new ApiException('Invalid client side encryption type', 400);
+        }
+
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE && empty($revision->getCseKey())) {
             throw new ApiException('Client side encryption key missing', 400);
         }
