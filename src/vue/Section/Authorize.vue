@@ -9,27 +9,26 @@
                        v-if="impersonating"/>
             <div class="login-container">
                 <translate icon="repeat"
-                           title="Request Token again"
+                           title="Request token again"
                            :iconClass="retryClass"
                            @click="requestToken()"
                            v-if="retryVisible"/>
                 <div>
-                    <input type="password" placeholder="Password" v-model="password" required v-if="hasPassword">
+                    <field type="password" placeholder="Password" v-model="password" required v-if="hasPassword"/>
                     <select v-model="providerId" v-if="hasToken && providers.length > 0">
                         <option v-for="(option, id) in providers" :value="id" :title="option.description">
                             {{option.label}}
                         </option>
                     </select>
-                    <input type="text"
-                           placeholder="Token"
+                    <field placeholder="Token"
                            :title="provider.description"
                            v-model="token"
                            required
-                           v-if="hasToken && provider.type === 'user-token'">
+                           v-if="showTokenField"/>
                 </div>
             </div>
             <div class="login-confirm" v-if="hasToken || hasPassword">
-                <input type="submit" value="Login" :class="{'no-icon':loggingIn}">
+                <translate tag="input" type="submit" localized-value="Login" :class="{'no-icon':loggingIn}"/>
                 <div class="login-icon fa fa-circle-o-notch fa-spin" v-if="loggingIn">&nbsp;</div>
                 <translate class="login-error" :say="errorMessage" tag="div" v-if="hasError"/>
             </div>
@@ -38,13 +37,14 @@
 </template>
 
 <script>
+    import Field from '@vc/Field';
     import API from '@js/Helper/api';
+    import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
-    import Translate from '@vue/Components/Translate';
     import SetupManager from '@js/Manager/SetupManager';
 
     export default {
-        components: {Translate},
+        components: {Field, Translate},
         data() {
             return {
                 password     : '',
@@ -57,7 +57,7 @@
                 hasToken     : false,
                 hasError     : false,
                 pwAlgorithm  : '',
-                errorMessage : 'Login incorrect',
+                errorMessage : '',
                 loggingIn    : false,
                 retryClass   : '',
                 impersonating: document.querySelector('meta[name=pw-impersonate]') === null
@@ -115,6 +115,9 @@
             },
             getClasses() {
                 return '' + (this.hasPassword ? ' has-password':'') + (this.hasToken ? ' has-token':'');
+            },
+            showTokenField() {
+                return this.hasToken && this.provider.type === 'user-token'
             }
         },
 
@@ -181,8 +184,10 @@
                         setTimeout(() => {this.retryClass = '';}, 1500);
                     })
                     .catch(() => {
-                        Messages.alert('You may have requested too many tokens. Please try again later.',
-                                       'Token request failed');
+                        Messages.alert(
+                            'You may have requested too many tokens. Please try again later.',
+                            'Token request failed'
+                        );
                         this.retryClass = '';
                     });
             }
@@ -414,7 +419,7 @@
                 background-color : var(--color-primary);
             }
 
-            @media (min-width: $width-small) {
+            @media (min-width : $width-small) {
                 #app-navigation {
                     transform : translateX(0);
                 }

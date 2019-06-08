@@ -200,6 +200,14 @@
             'match'                               : 'passen zu',
             'matches'                             : 'passt zu',
             'Created by'                          : 'Erstellt von',
+            'You are logging in as {user}'        : 'Sie melden sich als {user} an',
+            'Login'                               : 'Anmelden',
+            'Request token again'                 : 'Token erneut anfordern',
+            'Too many attempts'                   : 'Zu viele Versuche',
+            'Password is too short'               : 'Passwort zu kurz',
+            'Password invalid'                    : 'Falsches Passwort',
+            'Unknown Error'                       : 'Unbekannter Fehler',
+            'Token request failed'                : 'Token-Anfrage fehlgeschlagen',
             'CLIENT::MAINTENANCE'                 : 'System Wartungsmodus',
             'CLIENT::UNKNOWN'                     : 'Nicht Vorhanden',
             'CLIENT::SYSTEM'                      : 'System',
@@ -218,9 +226,11 @@
             'We could not find anything for "{query}"'                        : 'Wir konnten nichts zu "{query}" finden',
             'The page "{page}" could not be fetched from the handbook server.': 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',
             'Some data is waiting to be synchronized'                         : 'Einige Daten warten darauf synchronisiert zu werden',
-            'You will be logged out in {time} seconds'                        : 'Du wirst in {time} Sekunden ausgeloggt'
+            'You will be logged out in {time} seconds'                        : 'Du wirst in {time} Sekunden ausgeloggt',
+            'You may have requested too many tokens. Please try again later.' : 'Du hast zu viele Tokens angefragt. Bitte versuche es später erneut.',
         },
         longTexts    = {
+            'End-to-End encryption will be disabled for this password if you share it.'                : 'Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn du das Passwort teilst',
             'The session token is no longer valid. The app will now reload.'                           : 'Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen.',
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.'
         };
