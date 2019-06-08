@@ -2,7 +2,7 @@ let webpack              = require('webpack'),
     config               = require('./package.json'),
     UglifyJS             = require('uglify-es'),
     CopyWebpackPlugin    = require('copy-webpack-plugin'),
-    {CleanWebpackPlugin} = require('clean-webpack-plugin'),
+    CleanWebpackPlugin   = require('clean-webpack-plugin'),
     VueLoaderPlugin      = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     OptimizeCSSPlugin    = require('optimize-css-assets-webpack-plugin');
@@ -37,11 +37,7 @@ module.exports = (env) => {
             ),
             new VueLoaderPlugin(),
             new MiniCssExtractPlugin({filename: 'css/[name].css'}),
-            new CleanWebpackPlugin(
-                {
-                    cleanOnceBeforeBuildPatterns: [`${__dirname}/src/css`, `${__dirname}/src/js/Static`]
-                }
-            )
+            new CleanWebpackPlugin([`${__dirname}/src/css`, `${__dirname}/src/js/Static`])
         ];
 
     if(production) {
@@ -64,6 +60,7 @@ module.exports = (env) => {
     }
 
     return {
+        mode   : production ? 'production':'development',
         entry  : {
             app  : `${__dirname}/src/js/app.js`,
             admin: `${__dirname}/src/js/admin.js`
@@ -97,7 +94,7 @@ module.exports = (env) => {
                     use : [
                         {loader: 'vue-style-loader'},
                         {
-                            loader : MiniCssExtractPlugin.loader
+                            loader: MiniCssExtractPlugin.loader
                         },
                         {
                             loader: 'css-loader'

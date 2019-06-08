@@ -19,7 +19,7 @@
             },
             title      : {
                 type     : String,
-                'default': false
+                'default': null
             },
             value      : {
                 type     : String,
@@ -27,7 +27,7 @@
             },
             placeholder: {
                 type     : String,
-                'default': false
+                'default': null
             },
             type       : {
                 type     : String,
