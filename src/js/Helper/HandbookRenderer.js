@@ -1,7 +1,7 @@
 import marked from 'marked';
 import VueRouter from '@js/Helper/router';
 import ThemeManager from '@js/Manager/ThemeManager';
-import Localisation from '@/js/Classes/Localisation';
+import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
 
 /**

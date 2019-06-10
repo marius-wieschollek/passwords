@@ -1,6 +1,6 @@
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
-import API from "@/js/Helper/api";
+import API from '@js/Helper/api';
 
 export default class PassmanConversionHelper {
 

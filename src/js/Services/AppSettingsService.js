@@ -1,4 +1,4 @@
-import Utility from "@/js/Classes/Utility";
+import Utility from '@js/Classes/Utility';
 
 export default class AdminSettingsService {
 
