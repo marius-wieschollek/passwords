@@ -1,4 +1,4 @@
-import SettingsService from '@js/Service/SettingsService';
+import SettingsService from '@js/Services/SettingsService';
 
 export default class StarChaser {
 

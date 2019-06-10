@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Localisation from "@js/Classes/Localisation";
-import SettingsService from '@js/Service/SettingsService';
-import DeferredActivationService from '@js/Service/DeferredActivationService';
+import SettingsService from '@js/Services/SettingsService';
+import DeferredActivationService from '@js/Services/DeferredActivationService';
 
 class SetupManager {
 

@@ -68,7 +68,7 @@
 <script>
     import Utility from '@js/Classes/Utility';
     import Translate from '@vue/Components/Translate';
-    import AppSettingsService from '@js/Service/AppSettingsService';
+    import AppSettingsService from '@js/Services/AppSettingsService';
 
     export default {
         components: {Translate},

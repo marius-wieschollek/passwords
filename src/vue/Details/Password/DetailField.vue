@@ -15,7 +15,7 @@
     import Web from '@vc/Web';
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {

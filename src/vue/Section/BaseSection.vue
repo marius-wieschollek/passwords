@@ -43,7 +43,7 @@
     import PasswordDetails from '@vue/Details/Password';
     import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {

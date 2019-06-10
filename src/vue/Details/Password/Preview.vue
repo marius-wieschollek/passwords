@@ -14,7 +14,7 @@
 <script>
     import Web from '@vc/Web';
     import API from '@js/Helper/api';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {Web},

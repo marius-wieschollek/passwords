@@ -102,7 +102,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {

@@ -58,7 +58,7 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {Translate},

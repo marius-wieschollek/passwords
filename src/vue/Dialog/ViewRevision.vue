@@ -24,7 +24,7 @@
 <script>
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import DetailField from '@vue/Details/Password/DetailField';
 

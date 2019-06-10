@@ -6,7 +6,7 @@
                v-if="showTimer"/>
 </template>
 <script>
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import KeepAliveManager from '@js/Manager/KeepAliveManager';
     import Translate from "@/vue/Components/Translate";
     import Application from '@js/Init/Application';

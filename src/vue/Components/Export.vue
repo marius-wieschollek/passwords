@@ -148,7 +148,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import DAS from "@js/Service/DeferredActivationService";
+    import DAS from "@js/Services/DeferredActivationService";
 
     export default {
         components: {

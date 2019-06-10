@@ -341,8 +341,8 @@
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
-    import DAS from '@js/Service/DeferredActivationService';
-    import SettingsService from '@js/Service/SettingsService';
+    import DAS from '@js/Services/DeferredActivationService';
+    import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
     import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';

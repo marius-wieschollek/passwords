@@ -2,7 +2,7 @@ import App from '@js/Init/Application';
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import Messages from '@js/Classes/Messages';
-import SettingsService from '@js/Service/SettingsService';
+import SettingsService from '@js/Services/SettingsService';
 
 class EventManager {
 

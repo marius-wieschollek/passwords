@@ -55,7 +55,7 @@
 <script>
     import Translate from '@vue/Components/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
 
     export default {

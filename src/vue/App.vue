@@ -69,7 +69,7 @@
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
     import Messages from '@js/Classes/Messages';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import SessionTimeout from '@vue/Components/SessionTimeout';
 
     export default {

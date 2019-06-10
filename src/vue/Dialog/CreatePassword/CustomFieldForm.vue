@@ -39,7 +39,7 @@
     import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {Translate},

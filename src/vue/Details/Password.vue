@@ -36,7 +36,7 @@
     import Preview from '@vue/Details/Password/Preview';
     import PwDetails from '@vue/Details/Password/Details';
     import Revisions from '@vue/Details/Password/Revisions';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Sharing from '@vue/Details/Password/Sharing/Sharing';
 

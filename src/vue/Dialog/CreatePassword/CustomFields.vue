@@ -13,7 +13,7 @@
 
 <script>
     import Utility from '@js/Classes/Utility';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import CustomFieldForm from '@vue/Dialog/CreatePassword/CustomFieldForm';
 
     export default {

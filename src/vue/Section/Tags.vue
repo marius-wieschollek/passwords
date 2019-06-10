@@ -3,7 +3,7 @@
     import Utility from '@js/Classes/Utility';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         extends: BaseSection,

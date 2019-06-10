@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
 import sodium from 'libsodium-wrappers';
 import {Encryption} from 'passwords-client';
-import SettingsService from '@js/Service/SettingsService';
+import SettingsService from '@js/Services/SettingsService';
 import DeferredActivationService from "@/js/Service/DeferredActivationService";
 
 class EncryptionTestHelper {

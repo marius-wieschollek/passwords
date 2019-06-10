@@ -8,7 +8,7 @@ import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import EventManager from '@js/Manager/EventManager';
 import SearchManager from '@js/Manager/SearchManager';
-import SettingsService from '@js/Service/SettingsService';
+import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
 import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 

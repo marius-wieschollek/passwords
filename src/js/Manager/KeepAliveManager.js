@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import Application from '@js/Init/Application';
-import SettingsService from '@js/Service/SettingsService';
+import SettingsService from '@js/Services/SettingsService';
 
 
 class KeepAliveManager {

@@ -1,5 +1,5 @@
 import '@scss/admin';
-import AppSettingsService from '@js/Service/AppSettingsService'
+import AppSettingsService from '@js/Services/AppSettingsService'
 
 class PasswordsAdminSettings {
 

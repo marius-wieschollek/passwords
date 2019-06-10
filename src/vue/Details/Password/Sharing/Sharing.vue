@@ -1,16 +1,17 @@
 <template>
     <div class="sharing-container">
-        <translate tag="div" class="cse-warning warning" say="End-to-End encryption will be disabled for this password if you share it." v-if="hasCse && shareable"/>
+        <translate tag="div"
+                   class="cse-warning warning"
+                   say="End-to-End encryption will be disabled for this password if you share it."
+                   v-if="hasCse && shareable"/>
         <div v-if="password.share && password.share.owner" class="shareby-info" :title="getShareTitle">
             <img :src="password.share.owner.icon">
             <translate say="{name} has shared this with you" :variables="password.share.owner"/>
         </div>
-        <input type="text"
-               v-model="search"
+        <field v-model="search"
                class="share-add-user"
-               :placeholder="placeholder"
+               placeholder="Search user"
                @keypress="submitAction($event)" v-if="shareable"/>
-        <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
                    v-on:delete="deleteShare($event)"
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+    import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
@@ -35,10 +37,11 @@
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vue/Details/Password/Sharing/Share';
     import PasswordManager from '@js/Manager/PasswordManager';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
+            Field,
             Share,
             Translate
         },
@@ -51,8 +54,8 @@
 
         data() {
             let shareable = typeof this.password.share === 'object' || this.password.share.shareable,
-                shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
-                hasCse = this.password.cseType !== 'none';
+                shares    = this.password.hasOwnProperty('shares') ? this.password.shares:[],
+                hasCse    = this.password.cseType !== 'none';
 
             return {
                 search      : '',
@@ -62,7 +65,6 @@
                 shareable,
                 shares,
                 hasCse,
-                placeholder : Localisation.translate('Search user'),
                 autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
                 polling     : {interval: null, mode: null}
@@ -97,9 +99,10 @@
                     text      = Localisation.translate('{editable} and {shareable}.', {shareable, editable});
 
                 if(this.password.share.expires) {
-                    text +=
-                        ' ' + Localisation.translate('Expires {date}',
-                                                     {date: Localisation.formatDate(this.password.share.expires)});
+                    text += ' ' + Localisation.translate(
+                        'Expires {date}',
+                        {date: Localisation.formatDate(this.password.share.expires)}
+                    );
                 }
 
                 return text;
@@ -153,7 +156,7 @@
                     share.owner = {
                         id  : document.querySelector('head[data-user]').getAttribute('data-user'),
                         name: document.querySelector('head[data-user-displayname]')
-                                .getAttribute('data-user-displayname')
+                            .getAttribute('data-user-displayname')
                     };
                     share.receiver = {id: receiver, name: this.idMap[receiver]};
                     this.shares[d.id] = API._processShare(share);
@@ -170,8 +173,8 @@
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                   .then((d) => {this.shares = d.shares;})
-                   .catch(console.error);
+                    .then((d) => {this.shares = d.shares;})
+                    .catch(console.error);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -199,8 +202,8 @@
             },
             async refreshShares() {
                 await API.runSharingCron()
-                         .then((d) => { if(d.success) this.reloadShares();})
-                         .catch(console.error);
+                    .then((d) => { if(d.success) this.reloadShares();})
+                    .catch(console.error);
 
                 this.startPolling();
                 this.$forceUpdate();

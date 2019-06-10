@@ -42,7 +42,7 @@
     import Start from '@vue/Dialog/SetupDialog/Start';
     import GetHelp from '@vue/Dialog/SetupDialog/GetHelp';
     import KeepOrder from '@vue/Dialog/SetupDialog/KeepOrder';
-    import SettingsService from '@js/Service/SettingsService';
+    import SettingsService from '@js/Services/SettingsService';
     import Encryption from '@vue/Dialog/SetupDialog/Encryption';
     import Integrations from '@vue/Dialog/SetupDialog/Integrations';
     import UserSettings from '@/vue/Dialog/SetupDialog/UserSettings';

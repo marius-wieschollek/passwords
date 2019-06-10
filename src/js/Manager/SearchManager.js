@@ -1,5 +1,5 @@
 import router from '@js/Helper/router';
-import SettingsService from '@js/Service/SettingsService';
+import SettingsService from '@js/Services/SettingsService';
 
 class SearchManager {
 
