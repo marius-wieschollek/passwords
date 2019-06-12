@@ -22,8 +22,8 @@ class SetupManager {
      *
      * @returns {Promise<void>}
      */
-    async runManually() {
-        await this._runWizard();
+    runManually() {
+        return this._runWizard();
     }
 
     /**
@@ -31,8 +31,12 @@ class SetupManager {
      *
      * @returns {Promise<void>}
      */
-    async runEncryptionSetup() {
-        await this._runWizard(['start', 'encryption'], true, false);
+    runEncryptionSetup() {
+        try {
+            return this._runWizard(['start', 'encryption'], true, false);
+        } catch(e) {
+            console.error(e);
+        }
     }
 
     /**
@@ -44,7 +48,7 @@ class SetupManager {
      * @returns {Promise<void>}
      * @private
      */
-    async _runWizard(enableSlides, closable, redirect) {
+    _runWizard(enableSlides, closable, redirect) {
         return new Promise(async (resolve) => {
             await Localisation.loadSection('tutorial');
 

@@ -26,7 +26,7 @@
             async processNotes() {
                 try {
                     let marked = await import(/* webpackChunkName: "marked" */ 'marked');
-                    this.notes = marked(this.password.notes, {breaks: true});
+                    this.notes = marked.default(this.password.notes, {breaks: true});
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
