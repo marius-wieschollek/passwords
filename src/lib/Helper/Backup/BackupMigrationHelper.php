@@ -206,8 +206,6 @@ class BackupMigrationHelper {
             'service.favicon'        => $oldSettings['service/favicon'],
             'service.preview'        => $oldSettings['service/preview'],
             'service.security'       => $oldSettings['service/security'],
-            'service.preview.api'    => '',
-            'service.favicon.api'    => '',
             'entity.purge.timeout'   => $oldSettings['entity/purge/timeout'],
             'settings.mail.shares'   => $oldSettings['settings/mail/shares'],
             'settings.mail.security' => $oldSettings['settings/mail/security']

@@ -378,12 +378,15 @@ class RestoreBackupHelper {
      * @param array $settings
      */
     protected function restoreApplicationSettings(array $settings): void {
-        foreach($settings as $key => $value) {
+        $appSettings = $this->appSettingsService->list();
+
+        foreach($appSettings as $setting) {
             try {
-                if($value === null) {
-                    $this->appSettingsService->reset($key);
+                $name = $setting['name'];
+                if(!isset($settings[ $name ]) || $settings[ $name ] === null) {
+                    $this->appSettingsService->reset($name);
                 } else {
-                    $this->appSettingsService->set($key, $value);
+                    $this->appSettingsService->set($name, $settings[ $name ]);
                 }
             } catch(ApiException $e) {
             }
