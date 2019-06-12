@@ -173,4 +173,20 @@ abstract class AbstractRevisionService extends AbstractService {
 
         return $clone;
     }
+
+    /**
+     * @param string $cseType
+     *
+     * @return string
+     */
+    protected function getSseEncryption(string $cseType): string {
+        if($this->userId) {
+            try {
+                return $this->encryption->getDefaultEncryption($cseType, $this->userId);
+            } catch(\Exception $e) {
+            }
+        }
+
+        return EncryptionService::DEFAULT_SSE_ENCRYPTION;
+    }
 }

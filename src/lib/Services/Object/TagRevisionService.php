@@ -125,7 +125,7 @@ class TagRevisionService extends AbstractRevisionService {
         $revision->setColor($color);
         $revision->setEdited($edited);
         $revision->setFavorite($favorite);
-        $revision->setSseType($this->encryption->getDefaultEncryption($cseType));
+        $revision->setSseType($this->getSseEncryption($cseType));
         $revision->setClient($this->environment->getClient());
 
         return $revision;
