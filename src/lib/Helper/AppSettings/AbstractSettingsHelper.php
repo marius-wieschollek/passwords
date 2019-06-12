@@ -145,8 +145,8 @@ abstract class AbstractSettingsHelper {
 
         if($setting['type'] === 'boolean') {
             if(is_bool($value)) return $value;
-            if($value === 'true') return true;
-            if($value === 'false') return false;
+            if($value === 'true' || $value === '1') return true;
+            if($value === 'false' || $value === '') return false;
 
             throw new ApiException('Invalid setting value', 400);
         }
@@ -215,6 +215,7 @@ abstract class AbstractSettingsHelper {
                 $type = 'select:string';
             }
         }
+        if($type === 'boolean') $value = $value === '1';
 
         return $this->generateSettingArray(
             $key,

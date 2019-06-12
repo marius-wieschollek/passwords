@@ -73,7 +73,7 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
     public function set(string $key, $value): array {
 
         $result = parent::set($key, $value);
-        if($key === 'enabled') $this->setNightlyStatus($result['value'] === true);
+        if($key === 'enabled') $this->setNightlyStatus($result['value'] === "true");
 
         return $result;
     }
