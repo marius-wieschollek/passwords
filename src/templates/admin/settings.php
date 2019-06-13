@@ -93,7 +93,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area processing">
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
-            <select id="passwords-image" name="passwords-image" name="image" data-setting="service.images">
+            <select id="passwords-image" name="passwords-image" data-setting="service.images">
                 <?php foreach($_['imageServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
@@ -173,7 +173,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area backups">
             <label for="passwords-backup-interval"><?php p($l->t('Backup Interval')); ?></label>
-            <select id="passwords-backup-interval" name="passwords-backup-interval" name="image" data-setting="backup.interval">
+            <select id="passwords-backup-interval" name="passwords-backup-interval" data-setting="backup.interval">
                 <?php foreach($_['backupInterval']['options'] as $value => $label): ?>
                     <option value="<?php p($value); ?>" <?php p($_['backupInterval']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
@@ -192,10 +192,16 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area other">
             <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
-            <select id="passwords-purge-timeout" name="passwords-purge-timeout" name="image" data-setting="entity.purge.timeout">
+            <select id="passwords-purge-timeout" name="passwords-purge-timeout" data-setting="entity.purge.timeout">
                 <?php foreach($_['purgeTimeout']['options'] as $value => $label): ?>
                     <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
+            </select>
+            <label for="passwords-server-survey"><?php p($l->t('Server survey participation')); ?></label>
+            <select id="passwords-server-survey" name="passwords-server-survey"  data-setting="survey.server">
+                <option value="0" <?php if($_['serverSurvey'] === 0) p('selected'); ?>><?php p($l->t('None')); ?></option>
+                <option value="1" <?php if($_['serverSurvey'] === 1) p('selected'); ?>><?php p($l->t('Basic')); ?></option>
+                <option value="2" <?php if($_['serverSurvey'] === 2) p('selected'); ?>><?php p($l->t('Full')); ?></option>
             </select>
             <label for="passwords-nightly-updates"><?php p($l->t('Show Nightly Updates in "Apps"')); ?></label>
             <input id="passwords-nightly-updates" name="nightly-updates" data-setting="nightly.enabled" type="checkbox" <?=$_['nightlyUpdates'] ? 'checked':''?>>

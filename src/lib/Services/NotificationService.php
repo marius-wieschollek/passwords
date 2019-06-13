@@ -15,6 +15,7 @@ use OCA\Passwords\Notification\LegacyApiNotification;
 use OCA\Passwords\Notification\LoginAttemptNotification;
 use OCA\Passwords\Notification\ShareCreatedNotification;
 use OCA\Passwords\Notification\ShareLoopNotification;
+use OCA\Passwords\Notification\SurveyNotification;
 use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
@@ -35,6 +36,11 @@ class NotificationService implements INotifier {
      * @var IFactory
      */
     protected $l10NFactory;
+
+    /**
+     * @var SurveyNotification
+     */
+    protected $surveyNotification;
 
     /**
      * @var LegacyApiNotification
@@ -71,6 +77,7 @@ class NotificationService implements INotifier {
      *
      * @param IFactory                  $l10nFactory
      * @param UserSettingsService       $settings
+     * @param SurveyNotification        $surveyNotification
      * @param ShareLoopNotification     $shareLoopNotification
      * @param LegacyApiNotification     $legacyApiNotification
      * @param BadPasswordNotification   $badPasswordNotification
@@ -81,6 +88,7 @@ class NotificationService implements INotifier {
     public function __construct(
         IFactory $l10nFactory,
         UserSettingsService $settings,
+        SurveyNotification $surveyNotification,
         ShareLoopNotification $shareLoopNotification,
         LegacyApiNotification $legacyApiNotification,
         BadPasswordNotification $badPasswordNotification,
@@ -92,6 +100,7 @@ class NotificationService implements INotifier {
         $this->l10NFactory               = $l10nFactory;
         $this->legacyApiNotification     = $legacyApiNotification;
         $this->shareLoopNotification     = $shareLoopNotification;
+        $this->surveyNotification        = $surveyNotification;
         $this->badPasswordNotification   = $badPasswordNotification;
         $this->shareCreatedNotification  = $shareCreatedNotification;
         $this->loginAttemptNotification  = $loginAttemptNotification;
@@ -172,6 +181,13 @@ class NotificationService implements INotifier {
     }
 
     /**
+     * @param string $userId
+     */
+    public function sendSurveyNotification(string $userId): void {
+        $this->surveyNotification->send($userId);
+    }
+
+    /**
      * @param AbstractNotification $notification
      * @param string               $userId
      * @param array                $parameters
@@ -210,6 +226,8 @@ class NotificationService implements INotifier {
                 return $this->loginAttemptNotification->process($notification, $localisation);
             case LegacyApiNotification::NAME:
                 return $this->legacyApiNotification->process($notification, $localisation);
+            case SurveyNotification::NAME:
+                return $this->surveyNotification->process($notification, $localisation);
         }
 
         return $notification;

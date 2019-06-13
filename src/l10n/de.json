@@ -127,7 +127,16 @@
         "\"%s\" uses an outdated API which will be removed."                                        : "\"%s\" verwendet eine veraltete API die bald entfernt wird.",
         "This API does not support encryption and will deliver incomplete data."                    : "Diese API unterstützt keine Verschlüsselung und liefert daher unvollständige Daten.",
         "Please check if an update is available or visit our app section to find a replacement."    : "Bitte prüfe ob es ein Update gibt oder schau in unserer Apps-Sektion nach einem Ersatz.",
-        "Deleted User (%s)"                                                                         : "Gelöschter Benutzer (%s)"
+        "Deleted User (%s)"                                                                         : "Gelöschter Benutzer (%s)",
+        "Help us to improve Passwords"                                                              : "Hilf dabei, die Passwörter App zu verbessern",
+        "You can help us to improve the Passwords app by participating in our server survey."       : "Du kannst uns helfen, die Passwörter App zu verbessern indem du an unserer Server-Umfrage teilnimmst.",
+        "This will send us some anonymized data about your setup and selected settings."            : "Dafür werden manchmal anonyme Daten über deinen Server und spezifische Einstellungen an uns gesendet.",
+        "You can change this at any time in the settings."                                          : "Du kannst das jederzeit in den Einstellungen ändern.",
+        "Later"                                                                                     : "Später",
+        "Participate"                                                                               : "Mitmachen",
+        "Server survey participation"                                                               : "Teilnahme an der Server-Umfrage",
+        "Basic"                                                                                     : "Grunddaten",
+        "Full"                                                                                      : "Vollständig"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

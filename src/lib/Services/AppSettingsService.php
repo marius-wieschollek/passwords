@@ -14,6 +14,7 @@ use OCA\Passwords\Helper\AppSettings\EntitySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\LegacyApiSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\NightlySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\AppSettings\SurveySettingsHelper;
 
 /**
  * Class AppSettingsService
@@ -31,6 +32,11 @@ class AppSettingsService {
      * @var BackupSettingsHelper
      */
     protected $backupSettings;
+
+    /**
+     * @var SurveySettingsHelper
+     */
+    protected $surveySettings;
 
     /**
      * @var ServiceSettingsHelper
@@ -57,6 +63,7 @@ class AppSettingsService {
      *
      * @param EntitySettingsHelper    $entitySettingsHelper
      * @param BackupSettingsHelper    $backupSettingsHelper
+     * @param SurveySettingsHelper    $surveySettingsHelper
      * @param ServiceSettingsHelper   $serviceSettingsHelper
      * @param NightlySettingsHelper   $nightlySettingsHelper
      * @param DefaultSettingsHelper   $defaultSettingsHelper
@@ -65,6 +72,7 @@ class AppSettingsService {
     public function __construct(
         EntitySettingsHelper $entitySettingsHelper,
         BackupSettingsHelper $backupSettingsHelper,
+        SurveySettingsHelper $surveySettingsHelper,
         ServiceSettingsHelper $serviceSettingsHelper,
         NightlySettingsHelper $nightlySettingsHelper,
         DefaultSettingsHelper $defaultSettingsHelper,
@@ -72,6 +80,7 @@ class AppSettingsService {
     ) {
         $this->entitySettings    = $entitySettingsHelper;
         $this->backupSettings    = $backupSettingsHelper;
+        $this->surveySettings    = $surveySettingsHelper;
         $this->serviceSettings   = $serviceSettingsHelper;
         $this->defaultSettings   = $defaultSettingsHelper;
         $this->nightlySettings   = $nightlySettingsHelper;
@@ -92,6 +101,8 @@ class AppSettingsService {
                 return $this->entitySettings->get($subKey);
             case 'backup':
                 return $this->backupSettings->get($subKey);
+            case 'survey':
+                return $this->surveySettings->get($subKey);
             case 'service':
                 return $this->serviceSettings->get($subKey);
             case 'settings':
@@ -120,6 +131,8 @@ class AppSettingsService {
                 return $this->entitySettings->set($subKey, $value);
             case 'backup':
                 return $this->backupSettings->set($subKey, $value);
+            case 'survey':
+                return $this->surveySettings->set($subKey, $value);
             case 'service':
                 return $this->serviceSettings->set($subKey, $value);
             case 'settings':
@@ -147,6 +160,8 @@ class AppSettingsService {
                 return $this->entitySettings->reset($subKey);
             case 'backup':
                 return $this->backupSettings->reset($subKey);
+            case 'survey':
+                return $this->surveySettings->reset($subKey);
             case 'service':
                 return $this->serviceSettings->reset($subKey);
             case 'settings':
@@ -174,6 +189,10 @@ class AppSettingsService {
 
         if($scope === null || in_array('backup', $scope)) {
             $settings = array_merge($settings, $this->backupSettings->list());
+        }
+
+        if($scope === null || in_array('survey', $scope)) {
+            $settings = array_merge($settings, $this->surveySettings->list());
         }
 
         if($scope === null || in_array('service', $scope)) {
