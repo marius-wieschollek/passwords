@@ -1,5 +1,4 @@
 import API from '@js/Helper/api';
-import SimpleApi from '@js/ApiClient/SimpleApi';
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
 
@@ -352,7 +351,7 @@ export default class ImportCsvConversionHelper {
             object.url = `https://${object.url}`;
         } else if(!object.url || object.url.length === 0) {
             if(object.label && domain.test(object.label)) {
-                object.url = SimpleApi.parseUrl(object.label, 'href');
+                object.url = API.parseUrl(object.label, 'href');
             }
         }
 

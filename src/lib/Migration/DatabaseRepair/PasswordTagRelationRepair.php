@@ -10,6 +10,7 @@ namespace OCA\Passwords\Migration\DatabaseRepair;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\TagMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
@@ -28,6 +29,11 @@ class PasswordTagRelationRepair {
     protected $tagMapper;
 
     /**
+     * @var UuidHelper
+     */
+    protected $uuidHelper;
+
+    /**
      * @var PasswordMapper
      */
     protected $passwordMapper;
@@ -42,12 +48,14 @@ class PasswordTagRelationRepair {
      *
      * @param PasswordTagRelationService $relationService
      * @param PasswordMapper             $passwordMapper
+     * @param UuidHelper                 $uuidHelper
      * @param TagMapper                  $tagMapper
      */
-    public function __construct(PasswordTagRelationService $relationService, PasswordMapper $passwordMapper, TagMapper $tagMapper) {
+    public function __construct(PasswordTagRelationService $relationService, PasswordMapper $passwordMapper, UuidHelper $uuidHelper, TagMapper $tagMapper) {
         $this->relationService = $relationService;
         $this->passwordMapper  = $passwordMapper;
         $this->tagMapper       = $tagMapper;
+        $this->uuidHelper = $uuidHelper;
     }
 
     /**
@@ -95,6 +103,11 @@ class PasswordTagRelationRepair {
             }
         } catch(DoesNotExistException | MultipleObjectsReturnedException $e) {
             $relation->setDeleted(true);
+            $fixed = true;
+        }
+
+        if(empty($relation->getUuid())) {
+            $relation->setUuid($this->uuidHelper->generateUuid());
             $fixed = true;
         }
 

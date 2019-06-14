@@ -4,13 +4,13 @@
     import Utility from '@js/Classes/Utility';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         extends: BaseSection,
 
         data() {
-            let showTags    = SettingsManager.get('client.ui.list.tags.show', false) && window.innerWidth > 360,
+            let showTags    = SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360,
                 baseModel   = showTags ? 'model+folders+passwords+password-tags':'model+folders+passwords',
                 folderModel = showTags ? 'model+folders+passwords+password-tags+parent':'model+folders+passwords+parent';
 

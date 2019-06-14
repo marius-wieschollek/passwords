@@ -1,4 +1,4 @@
-import Encryption from '@js/ApiClient/Encryption';
+import {Encryption} from 'passwords-client';
 
 export default class ImportJsonConversionHelper {
 
@@ -93,7 +93,7 @@ export default class ImportJsonConversionHelper {
         let encryption = new Encryption();
 
         try {
-            await encryption.decrypt(json.challenge, `${options.password}challenge`);
+            encryption.decryptWithPassword(json.challenge, `${options.password}challenge`);
         } catch(e) {
             console.error(e);
             throw new Error('Password invalid');
@@ -103,7 +103,7 @@ export default class ImportJsonConversionHelper {
             if(!json.hasOwnProperty(i) || ['version', 'encrypted', 'challenge'].indexOf(i) !== -1) continue;
 
             try {
-                json[i] = JSON.parse(await encryption.decrypt(json[i], options.password + i));
+                json[i] = JSON.parse(encryption.decryptWithPassword(json[i], options.password + i));
             } catch(e) {
                 console.error(e);
                 throw new Error(`Failed to decrypt ${i}`);

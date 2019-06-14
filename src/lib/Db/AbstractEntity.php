@@ -12,6 +12,8 @@ use OCP\AppFramework\Db\Entity;
 /**
  * Class AbstractEntity
  *
+ * @method string getUuid()
+ * @method void setUuid(string $uuid)
  * @method string getUserId()
  * @method void setUserId(string $userId)
  * @method bool getDeleted()
@@ -24,6 +26,11 @@ use OCP\AppFramework\Db\Entity;
  * @package OCA\Passwords\Db
  */
 abstract class AbstractEntity extends Entity implements EntityInterface {
+
+    /**
+     * @var string
+     */
+    protected $uuid;
 
     /**
      * @var string
@@ -49,6 +56,7 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
      * Folder constructor.
      */
     public function __construct() {
+        $this->addType('uuid', 'string');
         $this->addType('userId', 'string');
         $this->addType('deleted', 'boolean');
         $this->addType('created', 'integer');

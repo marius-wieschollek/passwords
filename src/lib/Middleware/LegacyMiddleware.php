@@ -11,6 +11,8 @@ use OCA\Passwords\Controller\Api\Legacy\LegacyCategoryApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
 use OCA\Passwords\Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\Middleware;
 
 /**
@@ -33,12 +35,30 @@ class LegacyMiddleware extends Middleware {
     protected $config;
 
     /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
+     * @var NotificationService
+     */
+    protected $notifications;
+
+    /**
      * LegacyMiddleware constructor.
      *
      * @param ConfigurationService $config
+     * @param EnvironmentService   $environment
+     * @param NotificationService  $notifications
      */
-    public function __construct(ConfigurationService $config) {
-        $this->config = $config;
+    public function __construct(
+        ConfigurationService $config,
+        EnvironmentService $environment,
+        NotificationService $notifications
+    ) {
+        $this->config        = $config;
+        $this->environment   = $environment;
+        $this->notifications = $notifications;
     }
 
     /**
@@ -49,6 +69,11 @@ class LegacyMiddleware extends Middleware {
 
         if(in_array(get_class($controller), $this->legacyControllers)) {
             $this->config->setAppValue('legacy_last_used', time());
+
+            $this->notifications->sendLegacyApiNotification(
+                $this->environment->getUserId(),
+                $this->environment->getClient()
+            );
         }
 
         parent::beforeController($controller, $methodName);

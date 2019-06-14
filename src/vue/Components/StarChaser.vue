@@ -59,7 +59,6 @@
 
         created() {
             this.logic.start(this.game);
-            console.log(this);
         },
 
         computed: {

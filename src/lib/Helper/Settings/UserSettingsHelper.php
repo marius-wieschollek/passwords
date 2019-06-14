@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
+use Exception;
+use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -35,7 +37,10 @@ class UserSettingsHelper {
             'mail/shares'                  => 'boolean',
             'notification/security'        => 'boolean',
             'notification/shares'          => 'boolean',
-            'notification/errors'          => 'boolean'
+            'notification/errors'          => 'boolean',
+            'session/lifetime'             => 'integer',
+            'encryption/sse'               => 'integer',
+            'encryption/cse'               => 'integer'
         ];
 
     /**
@@ -52,7 +57,9 @@ class UserSettingsHelper {
             'mail/shares'                  => false,
             'notification/security'        => true,
             'notification/shares'          => true,
-            'notification/errors'          => true
+            'notification/errors'          => true,
+            'session/lifetime'             => 600,
+            'encryption/sse'               => 0
         ];
 
     /**
@@ -171,12 +178,17 @@ class UserSettingsHelper {
      * @return mixed
      */
     protected function getDefaultValue(string $key) {
-        $default = $this->userDefaults[ $key ];
-        if(in_array($key, ['mail/security', 'mail/shares'])) {
-            $default = $this->config->getAppValue('settings/'.$key, $default);
+        if($key === 'encryption/cse') {
+            try {
+                return $this->config->hasUserValue(UserChallengeHelper::USER_SECRET_KEY) ? 1:0;
+            } catch(Exception $e) {
+                return 0;
+            }
+        } else if(in_array($key, ['mail/security', 'mail/shares'])) {
+            return $this->config->getAppValue('settings/'.$key, $this->userDefaults[ $key ]);
         }
 
-        return $default;
+        return $this->userDefaults[ $key ];
     }
 
     /**

@@ -36,7 +36,7 @@
     import Preview from '@vue/Details/Password/Preview';
     import PwDetails from '@vue/Details/Password/Details';
     import Revisions from '@vue/Details/Password/Revisions';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Sharing from '@vue/Details/Password/Sharing/Sharing';
 
@@ -66,11 +66,12 @@
         },
 
         created() {
-            Events.on('password.changed', this.refreshView);
+            Events.on('password.changed', this.processEvent);
+            this.refreshView();
         },
 
         beforeDestroy() {
-            Events.off('password.changed', this.refreshView);
+            Events.off('password.changed', this.processEvent);
         },
 
         computed: {
@@ -81,7 +82,7 @@
                 return {details: 'Details', share: 'Share', revisions: 'Revisions'};
             },
             getSharingTabs() {
-                if(SettingsManager.get('server.sharing.enabled')) {
+                if(SettingsService.get('server.sharing.enabled')) {
                     return {nextcloud: 'Share', qrcode: 'QR Code'};
                 }
                 return {qrcode: 'QR Code'};
@@ -93,7 +94,7 @@
                 $event.stopPropagation();
                 this.object.favorite = !this.object.favorite;
                 PasswordManager.updatePassword(this.object)
-                    .catch(() => { this.object.favorite = !this.object.favorite; });
+                               .catch(() => { this.object.favorite = !this.object.favorite; });
             },
             closeDetails() {
                 this.$parent.detail = {
@@ -101,11 +102,14 @@
                     element: null
                 };
             },
-            refreshView(event) {
-                if(event.object.id === this.object.id) {
-                    API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {this.object = p;});
-                }
+            refreshView() {
+                API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
+                   .then(
+                       (p) => { if(this.password.id === p.id) this.object = p; }
+                   );
+            },
+            processEvent(event) {
+                if(event.object.id === this.object.id) this.refreshView();
             }
         },
 
@@ -116,6 +120,7 @@
                 }
 
                 this.object = value;
+                if(!value.hasOwnProperty('revisions')) this.refreshView();
             }
         }
     };

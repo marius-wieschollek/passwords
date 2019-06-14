@@ -131,7 +131,8 @@ class ShareObjectHelper extends AbstractObjectHelper {
             'receiver'      => [
                 'id'   => $share->getReceiver(),
                 'name' => $this->userService->getUserName($share->getReceiver())
-            ]
+            ],
+            'client'        => $share->getClient(),
         ];
     }
 

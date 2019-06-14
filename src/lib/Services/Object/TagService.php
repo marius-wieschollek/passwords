@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 
@@ -32,12 +33,13 @@ class TagService extends AbstractModelService {
     /**
      * TagService constructor.
      *
+     * @param UuidHelper         $uuidHelper
      * @param HookManager        $hookManager
      * @param TagMapper          $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(HookManager $hookManager, TagMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($hookManager, $mapper, $environment);
+    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, TagMapper $mapper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $hookManager, $environment);
     }
 
     /**

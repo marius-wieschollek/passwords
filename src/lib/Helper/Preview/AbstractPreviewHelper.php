@@ -102,10 +102,7 @@ abstract class AbstractPreviewHelper {
      * @return ISimpleFile|null
      */
     public function getDefaultPreview(string $domain): ?ISimpleFile {
-        $number = array_sum(str_split(dechex(crc32($domain)), 2));
-        while($number >= 5) {
-            $number -= 5;
-        }
+        $number = array_sum(str_split(hexdec(crc32($domain)), 2)) % 5;
 
         $fileName = "{$this->prefix}_default_{$number}.jpg";
         if($this->fileCacheService->hasFile($fileName)) {

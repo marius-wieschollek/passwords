@@ -42,16 +42,20 @@ Rather than implementing own and possibly error-prone encryption algorithms Pass
 The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
-Passwords is available in english, german, french, dutch, czech and russian.
+Passwords is available in english, german, french, dutch, swedish, czech and russian.
 
 ## Security
 #### Server Side Encryption
 Passwords offers a safe server side encryption using Nextclouds integrated encryption functionality.
 Each password is encrypted with it's own unique key.
-**Soon to come:** A master password will be available for additional security.
 
-#### Client Side Encryption
-**Soon to come:** Passwords supports a strong client side encryption for your passwords.
+#### Client Side Encryption (E2E)
+You can have your passwords encrypted in your browser.
+This will protect them from unauthorized access and even keep them safe if the server is hacked.
+
+#### Access Protection & Two-Factor-Authentication
+Passwords offers the option of a master password for additional safety. (In combination with client side encryption)
+The app also supports most 2FA authentication methods offered by Nextcloud.
 
 ## Apps
 There are no apps for the modern API right now. But there are some for the legacy API.
@@ -62,7 +66,7 @@ There are no apps for the modern API right now. But there are some for the legac
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.
-**Soon to come:** Documentation and JavaScript Example Implementation will be available soon
+You can use our [javascript client](https://www.npmjs.com/package/passwords-client) or take a look at the [api documentation](https://git.mdns.eu/nextcloud/passwords/wikis/developers/index).
 
 ## Installation
 Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/apps/passwords).

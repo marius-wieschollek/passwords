@@ -14,7 +14,7 @@
         </div>
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select Options"/>
-            <div class="step-content" v-if="format === 'json' && nightly">
+            <div class="step-content" v-if="format === 'json' && allowEnc">
                 <translate tag="label"
                            for="passwords-export-encrypt"
                            say="Backup password"
@@ -148,6 +148,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
+    import DAS from "@js/Services/DeferredActivationService";
 
     export default {
         components: {
@@ -195,7 +196,7 @@
                     ],
                     tags     : ['label', 'color', 'edited', 'created', 'favorite', 'id', 'revision', 'empty']
                 },
-                nightly   : process.env.NIGHTLY_FEATURES
+                allowEnc   : DAS.check('backup-encryption')
             };
         },
 
@@ -212,7 +213,7 @@
         },
 
         created() {
-            if (this.nightly) this.preventPasswordFill(1000);
+            if (this.allowEnc) this.preventPasswordFill(1000);
         },
 
         methods: {

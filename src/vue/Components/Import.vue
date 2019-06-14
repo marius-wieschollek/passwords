@@ -80,7 +80,7 @@
                         <translate tag="option" value="3" say="Merge with existing"/>
                         <translate tag="option" value="4" say="Create new entry"/>
                     </select>
-                    <div v-if="source === 'json' && nightly">
+                    <div v-if="source === 'json' && allowEnc">
                         <translate tag="label" for="passwords-import-encrypt" say="Backup password" title="For encrypted backups"/>
                         <input type="password" id="passwords-import-encrypt" minlength="10" :title="backupPasswordTitle" v-model="options.password" :disabled="importing" autocomplete="new-password" readonly/>
                     </div>
@@ -152,6 +152,7 @@
     import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
+    import DAS from '@js/Services/DeferredActivationService';
 
     export default {
         components: {
@@ -184,7 +185,7 @@
                     total    : 0,
                     status   : null
                 },
-                nightly : process.env.NIGHTLY_FEATURES
+                allowEnc : DAS.check('backup-encryption')
             };
         },
 
@@ -201,7 +202,7 @@
 
         methods: {
             preventPasswordFill(t = 300) {
-                if(this.nightly) setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
+                if(this.allowEnc) setTimeout(() => {document.getElementById('passwords-import-encrypt').removeAttribute('readonly');}, t);
             },
             async importDb() {
                 this.progress.style = '';
@@ -255,7 +256,7 @@
 
                 try {
                     let Parser = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero'),
-                        result = await Parser.parse(file, {
+                        result = await Parser.default.parse(file, {
                             delimiter         : this.csv.delimiter,
                             quotes            : this.csv.quotes,
                             escape            : this.csv.escape,

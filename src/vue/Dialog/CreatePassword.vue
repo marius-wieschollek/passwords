@@ -78,10 +78,11 @@
                             <translate tag="label" for="password-cse" say="Encryption"/>
                             <select id="password-cse"
                                     name="cseType"
-                                    title="There is only one option right now"
-                                    v-model="password.cseType"
-                                    disabled>
+                                    title="Choose the encryption type for this password"
+                                    v-model.number="password.cseType"
+                                    :disabled="!hasEncryption">
                                 <translate tag="option" value="none" say="On the server"/>
+                                <translate tag="option" value="CSEv1r1" say="Libsodium"/>
                             </select>
                         </div>
                     </foldout>
@@ -99,29 +100,44 @@
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import Messages from "@js/Classes/Messages";
+    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import EnhancedApi from '@js/ApiClient/EnhancedApi';
+    import SettingsService from '@js/Services/SettingsService';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
-        data() {
-            return {
-                title       : 'Create password',
-                notesOpen   : window.innerWidth > 641,
-                showPassword: false,
-                showLoader  : false,
-                simplemde   : null,
-                generator   : {numbers: undefined, special: undefined, active: false},
-                password    : {cseType: 'none', notes: '', customFields: []},
-                _success    : null
-            };
-        },
-
         components: {
             Foldout,
             Translate,
             CustomFields
+        },
+
+        props: {
+            title     : {
+                type     : String,
+                'default': 'Create password',
+            },
+            properties: {
+                type: Object
+            },
+            _success  : {
+                type: Function
+            }
+        },
+
+        data() {
+            let cseType  = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
+                password = Object.assign({cseType, notes: '', customFields: []}, this.properties);
+
+            return {
+                notesOpen    : window.innerWidth > 641,
+                showPassword : false,
+                showLoader   : false,
+                simplemde    : null,
+                generator    : {numbers: undefined, special: undefined, active: false},
+                hasEncryption: API.hasEncryption,
+                password
+            };
         },
 
         mounted() {
@@ -171,8 +187,8 @@
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
-                password = EnhancedApi.flattenPassword(password);
-                password = EnhancedApi.validatePassword(password);
+                password = API.flattenPassword(password);
+                password = API.validatePassword(password);
 
                 if(this._success) {
                     try {
@@ -187,7 +203,7 @@
                 try {
                     let SimpleMDE = await import(/* webpackChunkName: "simplemde" */ 'simplemde');
 
-                    this.simplemde = new SimpleMDE(
+                    this.simplemde = new SimpleMDE.default(
                         {
                             element                : document.getElementById('password-notes'),
                             hideIcons              : ['fullscreen', 'side-by-side', 'image'],
@@ -238,65 +254,7 @@
 <style lang="scss">
     @import "~simplemde/dist/simplemde.min.css";
 
-    #app-popup {
-        .background {
-            position         : fixed;
-            top              : 0;
-            left             : 0;
-            width            : 100%;
-            height           : 100%;
-            background-color : rgba(0, 0, 0, 0.7);
-            z-index          : 3001;
-            display          : flex;
-            justify-content  : center;
-            align-items      : center;
-
-            .window {
-                z-index               : 9999;
-                overflow              : hidden;
-                background-color      : var(--color-main-background);
-                border-radius         : var(--border-radius-large);
-                box-sizing            : border-box;
-                display               : grid;
-                grid-template-columns : 100%;
-                grid-template-areas   : "title" "content";
-                grid-template-rows    : 3.25rem auto;
-                justify-items         : stretch;
-                align-items           : stretch;
-
-                .title {
-                    grid-area        : title;
-                    padding          : 1rem;
-                    font-size        : 1.25rem;
-                    color            : var(--color-primary-text);
-                    background-color : var(--color-primary);
-                    position         : sticky;
-                    top              : 0;
-
-                    .close {
-                        float  : right;
-                        cursor : pointer;
-                    }
-                }
-
-                .content {
-                    grid-area : content;
-                    overflow  : auto;
-                }
-
-                @media (max-width : $width-medium) {
-                    border-radius : 0;
-                    top           : 0;
-                    left          : 0;
-                    bottom        : 0;
-                    right         : 0;
-                    width         : 100%;
-                    height        : 100%;
-                }
-            }
-        }
-
-        #passwords-create-new {
+    #app-popup #passwords-create-new {
             .window {
                 height : 88%;
 
@@ -496,6 +454,11 @@
                             .warning {
                                 margin : 0 0 4px;
                             }
+
+                            @media (max-width : $width-medium) {
+                                width   : 100%;
+                                max-width   : 525px;
+                            }
                         }
 
                         .foldout-container {
@@ -532,5 +495,4 @@
                 }
             }
         }
-    }
 </style>

@@ -1,13 +1,16 @@
 <template>
     <div class="sharing-container">
+        <translate tag="div"
+                   class="cse-warning warning"
+                   say="End-to-End encryption will be disabled for this password if you share it."
+                   v-if="hasCse && shareable"/>
         <div v-if="password.share && password.share.owner" class="shareby-info" :title="getShareTitle">
             <img :src="password.share.owner.icon">
             <translate say="{name} has shared this with you" :variables="password.share.owner"/>
         </div>
-        <input type="text"
-               v-model="search"
+        <field v-model="search"
                class="share-add-user"
-               :placeholder="placeholder"
+               placeholder="Search user"
                @keypress="submitAction($event)" v-if="shareable"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
@@ -26,15 +29,19 @@
 </template>
 
 <script>
+    import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
+    import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vue/Details/Password/Sharing/Share';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import PasswordManager from '@js/Manager/PasswordManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
+            Field,
             Share,
             Translate
         },
@@ -46,7 +53,9 @@
         },
 
         data() {
-            let shareable = typeof this.password.share === 'object' || this.password.share.shareable;
+            let shareable = typeof this.password.share === 'object' || this.password.share.shareable,
+                shares    = this.password.hasOwnProperty('shares') ? this.password.shares:[],
+                hasCse    = this.password.cseType !== 'none';
 
             return {
                 search      : '',
@@ -54,15 +63,16 @@
                 nameMap     : [],
                 idMap       : [],
                 shareable,
-                shares      : this.password.shares,
-                placeholder : Localisation.translate('Search user'),
-                autocomplete: SettingsManager.get('server.sharing.autocomplete'),
+                shares,
+                hasCse,
+                autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
                 polling     : {interval: null, mode: null}
             };
         },
 
         created() {
+            this.reloadShares();
             this.startPolling();
         },
 
@@ -89,9 +99,10 @@
                     text      = Localisation.translate('{editable} and {shareable}.', {shareable, editable});
 
                 if(this.password.share.expires) {
-                    text +=
-                        ' ' + Localisation.translate('Expires {date}',
-                                                     {date: Localisation.formatDate(this.password.share.expires)});
+                    text += ' ' + Localisation.translate(
+                        'Expires {date}',
+                        {date: Localisation.formatDate(this.password.share.expires)}
+                    );
                 }
 
                 return text;
@@ -118,42 +129,52 @@
                     this.idMap[i] = name;
                 }
             },
-            addShare(receiver) {
+            async disableCse() {
+                let password = Utility.cloneObject(this.password);
+                password.shared = true;
+
+                await PasswordManager.updatePassword(password);
+                this.hasCse = false;
+            },
+            async addShare(receiver) {
                 if(!this.shareable) return;
+                if(this.hasCse) await this.disableCse();
+
                 let share = {
                     password : this.password.id,
                     expires  : null,
                     editable : false,
                     shareable: true,
-                    receiver : receiver
+                    receiver
                 };
-                API.createShare(share).then(
-                    (d) => {
-                        this.getSharedWithUsers.push(receiver);
-                        share.id = d.id;
-                        share.updatePending = true;
-                        share.owner = {
-                            id  : document.querySelector('head[data-user]').getAttribute('data-user'),
-                            name: document.querySelector('head[data-user-displayname]')
-                                .getAttribute('data-user-displayname')
-                        };
-                        share.receiver = {id: receiver, name: this.idMap[receiver]};
-                        this.shares[d.id] = API._processShare(share);
-                        this.search = '';
-                        this.refreshShares();
-                    }
-                ).catch((e) => {
+
+                try {
+                    let d = await API.createShare(share);
+                    this.getSharedWithUsers.push(receiver);
+                    share.id = d.id;
+                    share.updatePending = true;
+                    share.owner = {
+                        id  : document.querySelector('head[data-user]').getAttribute('data-user'),
+                        name: document.querySelector('head[data-user-displayname]')
+                            .getAttribute('data-user-displayname')
+                    };
+                    share.receiver = {id: receiver, name: this.idMap[receiver]};
+                    this.shares[d.id] = API._processShare(share);
+                    this.search = '';
+                    this.refreshShares();
+                } catch(e) {
                     if(e.id === '65782183') {
                         Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
                         let message = e.hasOwnProperty('message') ? e.message:e.statusText;
                         Messages.notification(['Unable to share password: {message}', {message}]);
                     }
-                });
+                }
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                    .then((d) => { this.shares = d.shares;});
+                    .then((d) => {this.shares = d.shares;})
+                    .catch(console.error);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -179,9 +200,10 @@
                 delete this.shares[$event.id];
                 this.refreshShares();
             },
-            refreshShares() {
-                API.runSharingCron()
-                    .then((d) => { if(d.success) this.reloadShares();});
+            async refreshShares() {
+                await API.runSharingCron()
+                    .then((d) => { if(d.success) this.reloadShares();})
+                    .catch(console.error);
 
                 this.startPolling();
                 this.$forceUpdate();
@@ -204,11 +226,7 @@
 
         watch: {
             password(value) {
-                if(value.hasOwnProperty('shares')) {
-                    this.shares = value.shares;
-                } else {
-                    this.shares = [];
-                }
+                this.shares = value.hasOwnProperty('shares') ? value.shares:[];
                 this.shareable = value.share === null || value.share.shareable;
                 this.$forceUpdate();
             },
@@ -231,7 +249,12 @@
 
 <style lang="scss">
     .sharing-container {
-        position : relative;
+        position       : relative;
+        padding-bottom : 5rem;
+
+        .cse-warning {
+            margin-bottom : 0.5rem;
+        }
 
         .shareby-info {
             img {

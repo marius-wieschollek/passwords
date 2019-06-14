@@ -12,5 +12,5 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class Folder extends AbstractModelEntity {
+class Folder extends AbstractModel {
 }

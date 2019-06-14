@@ -32,6 +32,7 @@
                 </router-link>
             </ul>
             <ul class="menu-secondary">
+                <session-timeout v-if="navTimeout"/>
                 <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
                     <translate say="Trash"/>
                 </router-link>
@@ -57,6 +58,7 @@
         <div id="app-popup">
             <div></div>
         </div>
+        <session-timeout scope="global" v-if="globalTimeout"/>
         <star-chaser v-if="starChaser"/>
         <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </div>
@@ -67,20 +69,21 @@
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
     import Messages from '@js/Classes/Messages';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
+    import SessionTimeout from '@vue/Components/SessionTimeout';
 
     export default {
         el        : '#main',
         router,
         components: {
-            app          : {router},
+            SessionTimeout,
             Translate,
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
         data() {
-            let serverVersion = SettingsManager.get('server.version'),
-                showSearch    = SettingsManager.get('client.search.show');
+            let serverVersion = SettingsService.get('server.version'),
+                showSearch    = SettingsService.get('client.search.show');
 
             return {
                 serverVersion,
@@ -91,12 +94,18 @@
         },
 
         created() {
-            SettingsManager.observe('client.search.show', (v) => { this.showSearch = v.value; });
+            SettingsService.observe('client.search.show', (v) => { this.showSearch = v.value; });
         },
 
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
+            },
+            navTimeout() {
+                return window.innerWidth > 768;
+            },
+            globalTimeout() {
+                return window.innerWidth <= 768;
             },
             isBirthDay() {
                 let today = new Date(),
@@ -130,6 +139,7 @@
             &.mobile-open {
                 #app-navigation {
                     transform : translateX(0);
+                    z-index   : 1001;
                 }
 
                 #app-content {

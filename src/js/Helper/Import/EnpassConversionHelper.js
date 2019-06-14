@@ -1,6 +1,6 @@
 import * as randomMC from "random-material-color";
 import API from '@js/Helper/api';
-import Localisation from "@/js/Classes/Localisation";
+import Localisation from '@js/Classes/Localisation';
 
 export default class EnpassConversionHelper {
 

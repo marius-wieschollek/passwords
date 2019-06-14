@@ -4,7 +4,7 @@
             <breadcrumb :show-add-new="false">
                 <div class="settings-level">
                     <translate tag="label" for="setting-settings-advanced" say="View"/>
-                    <select id="setting-settings-advanced" v-model="advanced">
+                    <select id="setting-settings-advanced" v-model.number="advanced">
                         <translate tag="option" value="0" say="Default"/>
                         <translate tag="option" value="1" say="Advanced"/>
                     </select>
@@ -31,7 +31,7 @@
 
                     <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
-                    <select id="setting-security-level" v-model="settings['user.password.generator.strength']">
+                    <select id="setting-security-level" v-model.number="settings['user.password.generator.strength']">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -43,13 +43,88 @@
                     <input type="checkbox"
                            id="setting-include-numbers"
                            v-model="settings['user.password.generator.numbers']">
-                    <span></span>
+                    <settings-help text="Add numbers to generated passwords"/>
 
                     <translate tag="label" for="setting-include-special" say="Include special characters"/>
                     <input type="checkbox"
                            id="setting-include-special"
                            v-model="settings['user.password.generator.special']">
-                    <span></span>
+                    <settings-help text="Add special characters to generated passwords"/>
+
+
+                    <translate tag="h3" say="Login & Session" v-if="hasEncryption"/>
+                    <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"  v-if="hasEncryption"/>
+                    <select id="setting-session-keepalive" v-model.number="settings['client.session.keepalive']" v-if="hasEncryption">
+                        <translate tag="option" value="0" say="Always" />
+                        <translate tag="option" value="1" say="When i'm active" />
+                        <translate tag="option" value="2" say="When i'm working" />
+                    </select>
+                    <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled" v-if="hasEncryption"/>
+
+                    <translate tag="label" for="setting-session-lifetime" say="End session after" v-if="advancedSettings && hasEncryption"/>
+                    <select id="setting-session-lifetime" v-model.number="settings['user.session.lifetime']" v-if="advancedSettings && hasEncryption">
+                        <translate tag="option" say="One minute" value="60"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:2}" value="120"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" value="300"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:10}" value="600"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" value="1800"/>
+                        <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" value="3600"/>
+                    </select>
+                    <settings-help text="Specify the amount of time after a request before the session is cancelled" v-if="advancedSettings && hasEncryption"/>
+
+                    <translate tag="h3" say="Encryption"/>
+                    <translate tag="label"
+                               for="setting-encryption-sse"
+                               say="Server encryption mode"
+                               v-if="hasEncryption && advancedSettings"/>
+                    <select id="setting-encryption-sse"
+                            v-model.number="settings['user.encryption.sse']"
+                            v-if="hasEncryption && advancedSettings">
+                        <translate tag="option" value="0" say="None if CSE used"/>
+                        <translate tag="option" value="1" say="Simple encryption"/>
+                        <translate tag="option" value="2" say="Advanced encryption"/>
+                    </select>
+                    <settings-help text="Choose the type of encryption used to encrypt data on the server"
+                                   v-if="hasEncryption && advancedSettings"/>
+
+                    <translate tag="label"
+                               for="setting-encryption-cse"
+                               say="Client encryption mode"
+                               v-if="hasEncryption && advancedSettings"/>
+                    <select id="setting-encryption-cse"
+                            v-model.number="settings['user.encryption.cse']"
+                            v-if="hasEncryption && advancedSettings">
+                        <translate tag="option" value="0" say="No encryption"/>
+                        <translate tag="option" value="1" say="Libsodium"/>
+                    </select>
+                    <settings-help text="Choose the type of encryption used to encrypt data on the client before it's sent to the server"
+                                   v-if="hasEncryption && advancedSettings"/>
+
+                    <translate tag="label"
+                               for="setting-encryption-setup"
+                               say="Enc-to-end Encryption"
+                               v-if="!hasEncryption && encryptionFeature"/>
+                    <translate tag="input"
+                               type="button"
+                               id="setting-encryption-setup"
+                               localized-value="Enable"
+                               @click="runWizard()"
+                               v-if="!hasEncryption && encryptionFeature"/>
+                    <settings-help text="Run the installation wizard to set up encryption for your passwords"
+                                   v-if="!hasEncryption && encryptionFeature"/>
+
+                    <translate tag="label"
+                               for="setting-encryption-update"
+                               say="Enc-to-end Encryption"
+                               v-if="hasEncryption && encryptionFeature"/>
+                    <translate tag="input"
+                               type="button"
+                               id="setting-encryption-update"
+                               localized-value="Change Password"
+                               @click="changeCsePassword()"
+                               v-if="hasEncryption && encryptionFeature"/>
+                    <settings-help text="Change the encryption password"
+                                   v-if="hasEncryption && encryptionFeature"/>
                 </section>
                 <section class="ui">
                     <translate tag="h1" say="User Interface"/>
@@ -242,12 +317,16 @@
                                @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
                 </section>
-                <section class="tests" v-if="false">
+                <section class="tests" v-if="nightly">
                     <translate tag="h1" say="Field tests"/>
 
                     <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
-                    <input type="button" id="setting-test-encryption" value="Test" @click="runTests($event)">
+                    <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
                     <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
+
+                    <translate tag="label" for="setting-test-performace" say="Encryption performace"/>
+                    <input type="button" id="setting-test-performace" value="Test" @click="testPerformance($event)">
+                    <settings-help text="Test the performance of encryption operations. (Good is Desktop@30K, Mobile@8K)"/>
                 </section>
             </div>
         </div>
@@ -257,12 +336,16 @@
 
 <script>
     import API from '@js/Helper/api';
+    import SUM from '@js/Manager/SetupManager';
     import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import DAS from '@js/Services/DeferredActivationService';
+    import SettingsService from '@js/Services/SettingsService';
+    import EncryptionManager from '@js/Manager/EncryptionManager';
     import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
+    import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
 
     export default {
         components: {
@@ -271,11 +354,18 @@
             Translate
         },
         data() {
-            let advancedSettings = SettingsManager.get('client.settings.advanced');
+            let advancedSettings  = SettingsService.get('client.settings.advanced'),
+                encryptionFeature = false,
+                hasEncryption     = API.hasEncryption;
+
+            DAS.check('client-side-encryption')
+                .then((d) => { this.encryptionFeature = d});
 
             return {
-                settings: SettingsManager.getAll(),
+                settings: SettingsService.getAll(),
+                encryptionFeature,
                 advancedSettings,
+                hasEncryption,
                 advanced: advancedSettings ? '1':'0',
                 nightly : process.env.NIGHTLY_FEATURES,
                 noSave  : false,
@@ -289,30 +379,59 @@
                     if(!this.settings.hasOwnProperty(i)) continue;
                     let value = this.settings[i];
 
-                    if(SettingsManager.get(i) !== value) SettingsManager.set(i, value);
+                    if(SettingsService.get(i) !== value) SettingsService.set(i, value);
                 }
             },
-            async runTests($event) {
+            async testEncryption($event) {
                 $event.target.setAttribute('disabled', 'disabled');
                 let result = await EncryptionTestHelper.runTests();
                 if(result) {
-                    Messages.info('The client side encryption test completed successfully on this browser',
-                                  'Test successful');
+                    Messages.info(
+                        'The client side encryption test completed successfully on this browser',
+                        'Test successful'
+                    );
                 }
                 $event.target.removeAttribute('disabled');
+            },
+            testPerformance($event) {
+                $event.target.setAttribute('disabled', 'disabled');
+                $event.target.innerHtml = 'Working';
+
+                setTimeout(() => {
+                    EncryptionPerformanceHelper.runTests()
+                        .then((d) => {
+                            let message = `Benchmark Result: ${d.result} Points`;
+                            Messages.alert(message, 'Benchmark Completed');
+                            $event.target.removeAttribute('disabled');
+                            $event.target.innerHtml = 'Test';
+                        })
+                        .catch(console.error);
+                }, 100);
+            },
+            runWizard() {
+                if(!this.hasEncryption) {
+                    SUM.runEncryptionSetup()
+                        .then(() => {
+                            this.hasEncryption = API.hasEncryption;
+                        });
+                }
+            },
+            changeCsePassword() {
+                if(this.hasEncryption) {
+                    EncryptionManager.updateGui();
+                }
             },
             resetSettingsAction() {
                 Messages.confirm(
                     'This will reset all settings to their defaults. Do you want to continue?',
-                                 'Reset all settings'
-                )
-                    .then(() => { this.resetSettings(); });
+                    'Reset all settings'
+                ).then(() => { this.resetSettings(); });
             },
             async resetSettings() {
                 this.locked = true;
                 this.noSave = true;
                 for(let i in this.settings) {
-                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsManager.reset(i);
+                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsService.reset(i);
                 }
                 this.advancedSettings = false;
                 this.advanced = '0';
@@ -326,11 +445,9 @@
                         'DELETE EVERYTHING',
                         'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'
                     );
-                    if(form.password) {
-                        this.performUserAccountReset(form.password);
-                    }
+                    if(form.password) this.performUserAccountReset(form.password);
                 } catch(e) {
-
+                    console.error(e);
                 }
             },
             async performUserAccountReset(password) {
@@ -364,7 +481,7 @@
                 deep: true
             },
             advanced(value) {
-                this.advancedSettings = this.settings['client.settings.advanced'] = value === '1';
+                this.advancedSettings = this.settings['client.settings.advanced'] = value === 1;
             },
             locked(value) {
                 document.getElementById('app-content').classList.toggle('blocking');

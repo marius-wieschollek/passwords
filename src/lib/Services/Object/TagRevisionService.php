@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -29,6 +30,7 @@ class TagRevisionService extends AbstractRevisionService {
     /**
      * TagRevisionService constructor.
      *
+     * @param UuidHelper         $uuidHelper
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      * @param TagRevisionMapper  $revisionMapper
@@ -36,19 +38,21 @@ class TagRevisionService extends AbstractRevisionService {
      * @param EncryptionService  $encryptionService
      */
     public function __construct(
+        UuidHelper $uuidHelper,
         HookManager $hookManager,
         EnvironmentService $environment,
         TagRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
     }
 
     /**
      * @param string $model
      * @param string $label
      * @param string $color
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -63,6 +67,7 @@ class TagRevisionService extends AbstractRevisionService {
         string $model,
         string $label,
         string $color,
+        string $cseKey,
         string $cseType,
         int $edited,
         bool $hidden,
@@ -70,9 +75,9 @@ class TagRevisionService extends AbstractRevisionService {
         bool $favorite
     ): TagRevision {
 
-        $revision = $this->createModel($model, $label, $color, $cseType, $edited, $hidden, $trashed, $favorite);
+        $revision = $this->createModel($model, $label, $color, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
-        $revision = $this->validationService->validateTag($revision);
+        $revision = $this->validation->validateTag($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
 
         return $revision;
@@ -82,6 +87,7 @@ class TagRevisionService extends AbstractRevisionService {
      * @param string $model
      * @param string $label
      * @param string $color
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -94,6 +100,7 @@ class TagRevisionService extends AbstractRevisionService {
         string $model,
         string $label,
         string $color,
+        string $cseKey,
         string $cseType,
         int $edited,
         bool $hidden,
@@ -103,21 +110,23 @@ class TagRevisionService extends AbstractRevisionService {
 
         $revision = new TagRevision();
         $revision->setUserId($this->userId);
-        $revision->setUuid($this->generateUuidV4());
+        $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setCreated(time());
         $revision->setUpdated(time());
         $revision->setDeleted(false);
         $revision->_setDecrypted(true);
 
         $revision->setModel($model);
+        $revision->setCseKey($cseKey);
         $revision->setCseType($cseType);
-        $revision->setSseType(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $revision->setHidden($hidden);
         $revision->setTrashed($trashed);
         $revision->setLabel($label);
         $revision->setColor($color);
         $revision->setEdited($edited);
         $revision->setFavorite($favorite);
+        $revision->setSseType($this->getSseEncryption($cseType));
+        $revision->setClient($this->environment->getClient());
 
         return $revision;
     }

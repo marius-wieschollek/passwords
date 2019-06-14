@@ -102,6 +102,7 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @param string $password
      * @param string $username
+     * @param string $cseKey
      * @param string $cseType
      * @param string $hash
      * @param string $label
@@ -121,6 +122,7 @@ class PasswordApiController extends AbstractObjectApiController {
     public function create(
         string $password,
         string $username = '',
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $hash = '',
         string $label = '',
@@ -133,11 +135,11 @@ class PasswordApiController extends AbstractObjectApiController {
         bool $favorite = false,
         array $tags = []
     ): JSONResponse {
-        if($edited === 0) $edited = time();
+        if($edited < 1) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden,
+            $model->getUuid(), $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden,
             false, $favorite
         );
 
@@ -160,6 +162,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param string $id
      * @param string $password
      * @param string $username
+     * @param string $cseKey
      * @param string $cseType
      * @param string $hash
      * @param string $label
@@ -182,6 +185,7 @@ class PasswordApiController extends AbstractObjectApiController {
         string $id,
         string $password,
         string $username = '',
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         string $hash = '',
         string $label = '',
@@ -209,25 +213,28 @@ class PasswordApiController extends AbstractObjectApiController {
             $notes        = $oldRevision->getNotes();
             $hash         = $oldRevision->getHash();
             $url          = $oldRevision->getUrl();
-        } else if(($model->hasShares() || $model->getShareId())) {
+        } else if($model->hasShares() || $model->getShareId()) {
             if($cseType !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                throw new ApiException('CSE type does not support sharing', 400);
+                throw new ApiException('CSE type does not support sharing', Http::STATUS_BAD_REQUEST);
             }
             if($hidden) {
-                throw new ApiException('Shared entity can not be hidden', 400);
+                throw new ApiException('Shared entity can not be hidden', Http::STATUS_BAD_REQUEST);
             }
         }
 
-
         $revision = $this->revisionService->create(
-            $model->getUuid(), $password, $username, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
+            $model->getUuid(), $password, $username, $cseKey, $cseType, $hash, $label, $url, $notes, $customFields, $folder, $edited, $hidden, $oldRevision->isTrashed(),
             $favorite
         );
 
         if($revision->getHash() !== $oldRevision->getHash()) {
-            if($edited === 0) $revision->setEdited(time());
+            if($edited < 1 || $revision->getEdited() === $oldRevision->getEdited()) $revision->setEdited(time());
         } else {
             $revision->setEdited($oldRevision->getEdited());
+        }
+
+        if($model->hasShares() || $model->getShareId() || !$model->isEditable()) {
+            $revision->setSseType($oldRevision->getSseType());
         }
 
         $this->revisionService->save($revision);
@@ -262,10 +269,13 @@ class PasswordApiController extends AbstractObjectApiController {
                 $revision = $this->revisionService->findByUuid($revision);
 
                 if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
-                    throw new ApiException('CSE type does not support sharing', 400);
+                    throw new ApiException('CSE type does not support sharing', Http::STATUS_BAD_REQUEST);
+                }
+                if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1R2) {
+                    throw new ApiException('SSE type does not support sharing', Http::STATUS_BAD_REQUEST);
                 }
                 if($revision->isHidden()) {
-                    throw new ApiException('Shared entity can not be hidden', 400);
+                    throw new ApiException('Shared entity can not be hidden', Http::STATUS_BAD_REQUEST);
                 }
             }
         }

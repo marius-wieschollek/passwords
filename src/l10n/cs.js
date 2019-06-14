@@ -285,7 +285,6 @@
             'Figure {count}: {title}'             : 'Obrázek {count}: {title}',
             'Unable to fetch page: {message}.'    : 'Nepodařilo se načíst stránku: {message}.',
             'Not Found'                           : 'Nenalezeno',
-            'Missing something or found an error?': 'Našli jste chybu nebo Vám chybí nějaká funkce?',
             'Tell us!'                            : 'Dejte nám vědět!',
             'Network error'                       : 'Síťová chyba',
             'Unable to load {module}'             : 'Nepodařilo se načíst modul: {module}',

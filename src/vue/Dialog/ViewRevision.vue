@@ -24,7 +24,7 @@
 <script>
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import DetailField from '@vue/Details/Password/DetailField';
 
@@ -42,9 +42,10 @@
             getFields() {
                 let fields           = [],
                     customFields     = this.revision.customFields,
-                    showHiddenFields = SettingsManager.get('client.ui.custom.fields.show.hidden');
+                    showHiddenFields = SettingsService.get('client.ui.custom.fields.show.hidden');
 
                 fields.push({label: Localisation.translate('Name'), value: this.revision.label});
+                fields.push({label: Localisation.translate('Id'), value: this.revision.id});
                 fields.push({
                                 label: Localisation.translate('Created on'),
                                 value: Localisation.formatDateTime(this.revision.created)
@@ -76,11 +77,16 @@
                 if(this.revision.status === 1) status = `Weak (${this.revision.statusCode.toLowerCase().capitalize()})`;
                 fields.push({label: Localisation.translate('Status'), value: Localisation.translate(status)});
 
-                let encryption = 'none';
-                if(this.revision.sseType === 'SSEv1r1') encryption = 'Server-side encryption';
-                if(this.revision.sseType === 'SSEv2r1') encryption = 'Advanced server-side encryption';
-                if(this.revision.cseType === 'CSEv1r1') encryption = 'Client-side encryption';
-                fields.push({label: Localisation.translate('Encryption'), value: Localisation.translate(encryption)});
+                let sseType = 'No encryption';
+                if(this.revision.sseType === 'SSEv1r1') sseType = 'Simple encryption (Gen. 1)';
+                if(this.revision.sseType === 'SSEv1r2') sseType = 'Simple encryption (Gen. 2)';
+                if(this.revision.sseType === 'SSEv2r1') sseType = 'Advanced encryption (SSE V2)';
+                fields.push({label: Localisation.translate('Encryption on server'), value: Localisation.translate(sseType)});
+
+                let cseType = 'No encryption';
+                if(this.revision.cseType === 'CSEv1r1') cseType = 'Encryption with libsodium';
+                fields.push({label: Localisation.translate('Encryption on client'), value: Localisation.translate(cseType)});
+                fields.push({label: Localisation.translate('Created by'), value: this.getClientLabel(this.revision.client)});
 
                 return fields;
             },
@@ -100,6 +106,13 @@
                     .then(() => {this.closeWindow()})
                     .catch(console.error);
             },
+            getClientLabel(client) {
+                if(client.substr(0, 8) === 'CLIENT::') {
+                    return Localisation.translate(client);
+                }
+
+                return client;
+            }
         }
     }
 </script>

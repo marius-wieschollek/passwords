@@ -9,6 +9,7 @@
         <translate tag="div" say="Statistics" class="header"/>
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
         <translate tag="div" say="Last updated"><span>{{ getDateTime(password.edited) }}</span></translate>
+        <detail-field label="Id" type="text" :value="password.id"/>
         <translate tag="div" say="Revisions">
             <translate say="{count} revisions" :variables="{count:countRevisions}"/>
         </translate>
@@ -18,10 +19,13 @@
 
         <translate tag="div" say="Security" class="header"/>
         <translate tag="div" say="Status">
-            <translate :say="getSecurityStatus" :class="getSecurityClass.toLowerCase()"/>
+            <translate :say="getSecurityStatus" :class="getSecurityClass"/>
         </translate>
-        <translate tag="div" say="Encryption">
-            <translate :say="getEncryption"/>
+        <translate tag="div" say="Encryption on server">
+            <translate :say="getSseType"/>
+        </translate>
+        <translate tag="div" say="Encryption on client">
+            <translate :say="getCseType"/>
         </translate>
         <detail-field label="SHA-1" type="text" :value="password.hash"/>
     </div>
@@ -31,7 +35,7 @@
     import Web from '@vc/Web';
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
     import DetailField from '@vue/Details/Password/DetailField';
 
     export default {
@@ -49,7 +53,7 @@
 
         data() {
             return {
-                showHiddenFields: SettingsManager.get('client.ui.custom.fields.show.hidden')
+                showHiddenFields: SettingsService.get('client.ui.custom.fields.show.hidden')
             };
         },
 
@@ -104,11 +108,17 @@
 
                 return fields;
             },
-            getEncryption() {
-                let encryption = 'none';
-                if(this.password.sseType === 'SSEv1r1') encryption = 'Server-side encryption';
-                if(this.password.sseType === 'SSEv2r1') encryption = 'Advanced server-side encryption';
-                if(this.password.cseType === 'CSEv1r1') encryption = 'Client-side encryption';
+            getSseType() {
+                let encryption = 'No encryption';
+                if(this.password.sseType === 'SSEv1r1') encryption = 'Simple encryption (Gen. 1)';
+                if(this.password.sseType === 'SSEv1r2') encryption = 'Simple encryption (Gen. 2)';
+                if(this.password.sseType === 'SSEv2r1') encryption = 'Advanced encryption (SSE V2)';
+
+                return Localisation.translate(encryption)
+            },
+            getCseType() {
+                let encryption = 'No encryption';
+                if(this.password.cseType === 'CSEv1r1') encryption = 'Encryption with libsodium';
 
                 return Localisation.translate(encryption)
             }

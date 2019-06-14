@@ -210,41 +210,6 @@ class ServiceApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param $password
-     *
-     * @return JSONResponse
-     * @throws ApiException
-     * @throws \Exception
-     */
-    public function resetUserAccount(string $password): JSONResponse {
-        if(!$this->userManager->checkPassword($this->userLogin, $password)) {
-            throw new ApiException('Password invalid', 403);
-        }
-
-        $timeout    = $this->config->getUserValue('reset_timeout', 0);
-        $time       = $this->config->getUserValue('reset_time', 0);
-        $difference = time() - $timeout - $time;
-        if($difference > 0 && $difference < 300) {
-            $this->config->deleteUserValue('reset_time');
-            $this->config->deleteUserValue('reset_timeout');
-            $this->deleteUserDataHelper->deleteUserData($this->userId);
-
-            return $this->createJsonResponse(['status' => 'ok'], 200);
-        }
-
-        $timeout = rand(5, 10);
-        $time    = time();
-        $this->config->setUserValue('reset_time', $time);
-        $this->config->setUserValue('reset_timeout', $timeout);
-
-        return $this->createJsonResponse(['status' => 'accepted', 'wait' => $timeout], 202);
-    }
-
-    /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws ApiException
      */

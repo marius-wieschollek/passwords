@@ -27,9 +27,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </h2>
 </header>
 <section class="section passwords">
-    <span data-constant="settingsUrl" data-value="<?=$_['saveSettingsUrl']?>"></span>
-    <span data-constant="cacheUrl" data-value="<?=$_['clearCacheUrl']?>"></span>
-
     <?php if($_['support']['php']['error']): ?>
         <div class="message error">
             <?php p($l->t('%1$s %2$s is no longer supported.', ['PHP', $_['support']['php']['version']])); ?>
@@ -79,7 +76,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area legacy">
             <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
-            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy_api_enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
+            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy.api.enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
             <?php if($_['legacyApiEnabled']): ?>
                 <label for="passwords-legacy-used"><?php p($l->t('Legacy API was last used on')); ?></label>
                 <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):$l->t('never')?>" disabled>
@@ -96,7 +93,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area processing">
             <label for="passwords-image"><?php p($l->t('Image Rendering')); ?></label>
-            <select id="passwords-image" name="passwords-image" name="image" data-setting="service/images">
+            <select id="passwords-image" name="passwords-image" data-setting="service.images">
                 <?php foreach($_['imageServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
@@ -113,21 +110,21 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area services">
             <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
-            <select id="passwords-security" name="passwords-security" name="security" data-setting="service/security">
+            <select id="passwords-security" name="passwords-security" name="security" data-setting="service.security">
                 <?php foreach($_['securityServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
             <label for="passwords-words"><?php p($l->t('Password Generator Service')); ?></label>
-            <select id="passwords-words" name="passwords-words" name="words" data-setting="service/words">
+            <select id="passwords-words" name="passwords-words" name="words" data-setting="service.words">
                 <?php foreach($_['wordsServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
             <label for="passwords-favicon"><?php p($l->t('Favicon Service')); ?></label>
-            <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service/favicon">
+            <select id="passwords-favicon" name="passwords-favicon" name="favicon" data-setting="service.favicon">
                 <?php foreach($_['faviconServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>
                             data-api="<?php p(json_encode($service['api'])); ?>"><?php p($l->t($service['label'])); ?></option>
@@ -139,7 +136,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             </div>
 
             <label for="passwords-preview"><?php p($l->t('Website Preview Service')); ?></label>
-            <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service/preview">
+            <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service.preview">
                 <?php foreach($_['previewServices'] as $service): ?>
                     <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>
                             data-api="<?php p(json_encode($service['api'])); ?>"><?php p($l->t($service['label'])); ?></option>
@@ -161,9 +158,9 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area mails">
             <label for="passwords-mail-security"><?php p($l->t('Send emails for security events')); ?></label>
-            <input id="passwords-mail-security" name="mail-security" data-setting="settings/mail/security" type="checkbox" <?=$_['mailSecurity'] ? 'checked':''?>>
+            <input id="passwords-mail-security" name="mail-security" data-setting="settings.mail.security" type="checkbox" <?=$_['mailSecurity'] ? 'checked':''?>>
             <label for="passwords-mail-shares"><?php p($l->t('Send emails for sharing events')); ?></label>
-            <input id="passwords-mail-shares" name="mail-shares" data-setting="settings/mail/shares" type="checkbox" <?=$_['mailSharing'] ? 'checked':''?>>
+            <input id="passwords-mail-shares" name="mail-shares" data-setting="settings.mail.shares" type="checkbox" <?=$_['mailSharing'] ? 'checked':''?>>
         </div>
     </form>
 
@@ -176,13 +173,13 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area backups">
             <label for="passwords-backup-interval"><?php p($l->t('Backup Interval')); ?></label>
-            <select id="passwords-backup-interval" name="passwords-backup-interval" name="image" data-setting="backup/interval">
+            <select id="passwords-backup-interval" name="passwords-backup-interval" data-setting="backup.interval">
                 <?php foreach($_['backupInterval']['options'] as $value => $label): ?>
                     <option value="<?php p($value); ?>" <?php p($_['backupInterval']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
             <label for="passwords-backup-files"><?php p($l->t('Amount of backups to keep')); ?></label>
-            <input id="passwords-backup-files" name="backup-files" data-setting="backup/files/maximum" type="number" min="0" value="<?=$_['backupFiles']?>">
+            <input id="passwords-backup-files" name="backup-files" data-setting="backup.files.max" type="number" min="0" value="<?=$_['backupFiles']?>">
         </div>
     </form>
 
@@ -195,13 +192,19 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
         <div class="area other">
             <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
-            <select id="passwords-purge-timeout" name="passwords-purge-timeout" name="image" data-setting="entity/purge/timeout">
+            <select id="passwords-purge-timeout" name="passwords-purge-timeout" data-setting="entity.purge.timeout">
                 <?php foreach($_['purgeTimeout']['options'] as $value => $label): ?>
                     <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
+            <label for="passwords-server-survey"><?php p($l->t('Server survey participation')); ?></label>
+            <select id="passwords-server-survey" name="passwords-server-survey"  data-setting="survey.server">
+                <option value="0" <?php if($_['serverSurvey'] === 0) p('selected'); ?>><?php p($l->t('None')); ?></option>
+                <option value="1" <?php if($_['serverSurvey'] === 1) p('selected'); ?>><?php p($l->t('Basic')); ?></option>
+                <option value="2" <?php if($_['serverSurvey'] === 2) p('selected'); ?>><?php p($l->t('Full')); ?></option>
+            </select>
             <label for="passwords-nightly-updates"><?php p($l->t('Show Nightly Updates in "Apps"')); ?></label>
-            <input id="passwords-nightly-updates" name="nightly-updates" data-setting="nightly/enabled" type="checkbox" <?=$_['nightlyUpdates'] ? 'checked':''?>>
+            <input id="passwords-nightly-updates" name="nightly-updates" data-setting="nightly.enabled" type="checkbox" <?=$_['nightlyUpdates'] ? 'checked':''?>>
         </div>
     </form>
 

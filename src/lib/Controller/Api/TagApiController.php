@@ -70,6 +70,7 @@ class TagApiController extends AbstractObjectApiController {
      *
      * @param string $label
      * @param string $color
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -82,16 +83,17 @@ class TagApiController extends AbstractObjectApiController {
     public function create(
         string $label,
         string $color,
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
         bool $favorite = false
     ): JSONResponse {
-        if($edited === 0) $edited = time();
+        if($edited < 1) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, false, $favorite
+            $model->getUuid(), $label, $color, $cseKey, $cseType, $edited, $hidden, false, $favorite
         );
 
         $this->revisionService->save($revision);
@@ -111,6 +113,7 @@ class TagApiController extends AbstractObjectApiController {
      * @param string $id
      * @param string $label
      * @param string $color
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -126,6 +129,7 @@ class TagApiController extends AbstractObjectApiController {
         string $id,
         string $label,
         string $color,
+        string $cseKey,
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
@@ -135,9 +139,9 @@ class TagApiController extends AbstractObjectApiController {
 
         /** @var TagRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
-        if($edited === 0) $edited = $oldRevision->getEdited();
+        if($edited < 1) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $color, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
+            $model->getUuid(), $label, $color, $cseKey, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
         );
 
         $this->revisionService->save($revision);

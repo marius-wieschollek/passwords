@@ -1,5 +1,5 @@
 import router from '@js/Helper/router';
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Services/SettingsService';
 
 class SearchManager {
 
@@ -169,7 +169,7 @@ class SearchManager {
     /**
      *
      * @param query
-     * @returns {string}
+     * @returns {array}
      * @private
      */
     _processQuery(query) {
@@ -288,8 +288,8 @@ class SearchManager {
      */
     _globalSearch() {
         document.getElementById('searchbox').addEventListener('keyup', (e) => {
-            if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsManager.get('client.search.global')) {
-                router.push({name: 'Search', params: {query: btoa(SM.status.query)}});
+            if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsService.get('client.search.global')) {
+                router.push({name: 'Search', params: {query: btoa(this.status.query)}});
             }
         });
     }
@@ -307,7 +307,7 @@ class SearchManager {
             if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
             if(['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1) return;
             if(['true', '1', 'on'].indexOf(e.target.contentEditable) !== -1) return;
-            if(!SettingsManager.get('client.search.live')) return;
+            if(!SettingsService.get('client.search.live')) return;
 
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
                 searchbox.value += e.key;
@@ -319,6 +319,4 @@ class SearchManager {
     }
 }
 
-let SM = new SearchManager();
-
-export default SM;
+export default new SearchManager();

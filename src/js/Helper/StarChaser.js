@@ -1,4 +1,4 @@
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Services/SettingsService';
 
 export default class StarChaser {
 
@@ -408,11 +408,11 @@ export default class StarChaser {
     }
 
     _checkHighScore() {
-        let current = SettingsManager.get('client.starchaser.highscore');
+        let current = SettingsService.get('client.starchaser.highscore');
 
         if(this._game.stats.points > current) {
             this._game.stats.highscore = true;
-            SettingsManager.set('client.starchaser.highscore', this._game.stats.points);
+            SettingsService.set('client.starchaser.highscore', this._game.stats.points);
         }
     }
 

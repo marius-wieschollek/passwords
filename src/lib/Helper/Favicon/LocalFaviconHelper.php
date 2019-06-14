@@ -29,7 +29,8 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @throws \Throwable
      */
     protected function getFaviconData(string $domain): string {
-        list($html, $url) = $this->getUrl('http://'.$domain);
+        list($html, $url) = $this->getUrl('https://'.$domain);
+        if(!$html) list($html, $url) = $this->getUrl('http://'.$domain);
 
         $icon = $this->getFaviconFromSourceCode($domain, $html);
         if($icon !== null) return $icon;
@@ -66,16 +67,16 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return mixed|null|string
      */
     protected function tryDefaultIconPaths(string $domain, $url): ?string {
-        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.png");
-        if($isIcon && $data) return $data;
-
         list($data, , , $isIcon) = $this->getUrl($url."/favicon.png");
         if($isIcon && $data) return $data;
 
-        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.ico");
-        if($isIcon && $data) return $this->convertIcoFile($data);
+        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.png");
+        if($isIcon && $data) return $data;
 
         list($data, , , $isIcon) = $this->getUrl($url."/favicon.ico");
+        if($isIcon && $data) return $this->convertIcoFile($data);
+
+        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
         return null;

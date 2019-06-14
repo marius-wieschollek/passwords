@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
 import JSZip from 'jszip'
 import Utility from '@js/Classes/Utility';
-import Encryption from '@js/ApiClient/Encryption';
+import {Encryption} from 'passwords-client';
 import Localisation from '@js/Classes/Localisation';
 
 /**
@@ -68,10 +68,10 @@ export class ExportManager {
                 let data = JSON.stringify(json[i]),
                     key  = options.password + i;
 
-                json[i] = await encryption.encrypt(data, key);
+                json[i] = encryption.encryptWithPassword(data, key);
             }
             json.encrypted = true;
-            json.challenge = await encryption.encrypt(options.password, `${options.password}challenge`);
+            json.challenge = encryption.encryptWithPassword('challenge', `${options.password}challenge`);
         }
 
         return JSON.stringify(json);

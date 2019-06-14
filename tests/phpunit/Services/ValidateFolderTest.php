@@ -28,7 +28,7 @@ class ValidateFolderTest extends TestCase {
     /**
      * @throws \ReflectionException
      */
-    protected function setUp() {
+    protected function setUp(): void {
         $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
         $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
     }
@@ -44,6 +44,7 @@ class ValidateFolderTest extends TestCase {
      */
     public function testValidateFolderInvalidSse() {
         $mock = $this->getFolderMock();
+        $mock->method('getSseType')->willReturn('invalid');
 
         try {
             $this->validationService->validateFolder($mock);
@@ -63,6 +64,7 @@ class ValidateFolderTest extends TestCase {
         $mock = $this->getFolderMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn('invalid');
 
         try {
             $this->validationService->validateFolder($mock);
@@ -71,6 +73,67 @@ class ValidateFolderTest extends TestCase {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('4e8162e6', $e->getId());
             $this->assertEquals('Invalid client side encryption type', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws \Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testValidateFolderCseKeyBotNoCse() {
+        $mock = $this->getFolderMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
+        $mock->method('getCseKey')->willReturn('cse-key');
+
+        try {
+            $this->validationService->validateFolder($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('4e8162e6', $e->getId());
+            $this->assertEquals('Invalid client side encryption type', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws \Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testValidateFolderNoSseAndCse() {
+        $mock = $this->getFolderMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
+
+        try {
+            $this->validationService->validateFolder($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('f43e7b82', $e->getId());
+            $this->assertEquals('No encryption specified', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws \Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testValidatePasswordMissingCseKey() {
+        $mock = $this->getFolderMock();
+        $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
+        $mock->method('getCseKey')->willReturn('');
+
+        try {
+            $this->validationService->validateFolder($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('fce89df4', $e->getId());
+            $this->assertEquals('Client side encryption key missing', $e->getMessage());
         }
     }
 
@@ -111,6 +174,26 @@ class ValidateFolderTest extends TestCase {
         $mock->method('getEdited')->willReturn(1);
 
         $mock->expects($this->once())->method('setSseType')->with(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $this->validationService->validateFolder($mock);
+    }
+
+    /**
+     * @throws \Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testValidateFolderSetsCseType() {
+        $mock = $this->getFolderMock();
+
+        $mock->expects($this->any())
+             ->method('getCseType')
+             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getParent')->willReturn(FolderService::BASE_FOLDER_UUID);
+        $mock->method('getEdited')->willReturn(1);
+
+        $mock->expects($this->once())->method('setCseType')->with(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $this->validationService->validateFolder($mock);
     }
 
@@ -173,7 +256,7 @@ class ValidateFolderTest extends TestCase {
     protected function getFolderMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getHidden', 'getLabel', 'getParent', 'setParent', 'getEdited', 'setEdited'])
+            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getParent', 'setParent', 'getEdited', 'setEdited'])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);

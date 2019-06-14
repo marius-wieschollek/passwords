@@ -5,7 +5,7 @@
                 <img :src="loadingIcon" alt="">
             </div>
             <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
-                <img :src="image" @load="imageLoaded" alt="">
+                <img :src="image" @load="imageLoaded($event)" alt="" v-if="showImage">
             </div>
         </component>
     </div>
@@ -14,7 +14,7 @@
 <script>
     import Web from '@vc/Web';
     import API from '@js/Helper/api';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {Web},
@@ -42,6 +42,7 @@
                 loading    : true,
                 loadingIcon: this.icon,
                 imgClass   : 'loading-hidden',
+                showImage  : false,
                 style      : {
                     marginTop: 0
                 }
@@ -50,11 +51,12 @@
 
         created() {
             this.loadFavicon(this.link);
+            setTimeout(() => { this.showImage = true; }, 100);
         },
 
         computed: {
             showPreview() {
-                return window.innerWidth > 640 && SettingsManager.get('client.ui.password.details.preview');
+                return window.innerWidth > 640 && SettingsService.get('client.ui.password.details.preview');
             }
         },
 
@@ -81,19 +83,23 @@
             imageMouseOut() {
                 this.style.marginTop = 0;
             },
-            imageLoaded() {
-                this.loading = false;
-                this.imgClass = '';
+            imageLoaded(event) {
+                if(event.target.src === this.image) {
+                    this.loading = false;
+                    this.imgClass = '';
+                }
             },
             loadFavicon() {
-                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 350);
+                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 450);
             }
         },
         watch  : {
             image() {
                 this.loading = true;
+                this.showImage = false;
                 this.imgClass = 'loading-hidden';
                 this.style.marginTop = 0;
+                setTimeout(() => { this.showImage = true; }, 100);
                 this.$el.scrollTop = 0;
                 this.$forceUpdate();
             },

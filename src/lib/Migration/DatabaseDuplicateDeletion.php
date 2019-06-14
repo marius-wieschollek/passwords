@@ -90,13 +90,13 @@ class DatabaseDuplicateDeletion implements IRepairStep {
         PasswordRevisionService $passwordRevisionService,
         PasswordTagRelationService $passwordTagRelationService
     ) {
-        $this->tagService              = $tagService;
-        $this->shareService            = $shareService;
-        $this->folderService           = $folderService;
-        $this->passwordService         = $passwordService;
-        $this->tagRevisionService      = $tagRevisionService;
-        $this->folderRevisionService   = $folderRevisionService;
-        $this->passwordRevisionService = $passwordRevisionService;
+        $this->tagService                 = $tagService;
+        $this->shareService               = $shareService;
+        $this->folderService              = $folderService;
+        $this->passwordService            = $passwordService;
+        $this->tagRevisionService         = $tagRevisionService;
+        $this->folderRevisionService      = $folderRevisionService;
+        $this->passwordRevisionService    = $passwordRevisionService;
         $this->passwordTagRelationService = $passwordTagRelationService;
     }
 
@@ -127,6 +127,7 @@ class DatabaseDuplicateDeletion implements IRepairStep {
         $this->deleteDuplicates($this->tagRevisionService);
         $this->deleteDuplicates($this->folderRevisionService);
         $this->deleteDuplicates($this->passwordRevisionService);
+        $this->deleteDuplicates($this->passwordTagRelationService);
         $this->deleteRelationDuplicates();
     }
 

@@ -19,7 +19,7 @@ namespace OCA\Passwords\Db;
  * @method bool getHasShares()
  * @method void setHasShares(bool $hasShares)
  */
-class Password extends AbstractModelEntity {
+class Password extends AbstractModel {
 
     /**
      * @var string

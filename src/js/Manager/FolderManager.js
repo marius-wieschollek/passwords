@@ -2,7 +2,6 @@ import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
-import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
 /**
  *
@@ -22,7 +21,7 @@ class FolderManager {
                     let folder = {label: title};
                     if(parent) folder.parent = parent;
 
-                    folder = EnhancedApi.validateFolder(folder);
+                    folder = API.validateFolder(folder);
                     API.createFolder(folder)
                         .then((d) => {
                             folder.id = d.id;
@@ -223,6 +222,4 @@ class FolderManager {
     }
 }
 
-let FM = new FolderManager();
-
-export default FM;
+export default new FolderManager();

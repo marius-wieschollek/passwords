@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Hooks\Manager;
 
 use OC\Hooks\BasicEmitter;
+use OCA\Passwords\Hooks\ChallengeHook;
 use OCA\Passwords\Hooks\FolderHook;
 use OCA\Passwords\Hooks\PasswordHook;
 use OCA\Passwords\Hooks\ShareHook;
@@ -72,6 +73,9 @@ class HookManager extends BasicEmitter {
                 break;
             case 'user':
                 $class = UserHook::class;
+                break;
+            case 'challenge':
+                $class = ChallengeHook::class;
                 break;
         }
 

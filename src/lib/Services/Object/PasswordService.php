@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services\Object;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 
@@ -33,12 +34,13 @@ class PasswordService extends AbstractModelService {
     /**
      * PasswordService constructor.
      *
+     * @param UuidHelper         $uuidHelper
      * @param HookManager        $hookManager
      * @param PasswordMapper     $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(HookManager $hookManager, PasswordMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($hookManager, $mapper, $environment);
+    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, PasswordMapper $mapper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $hookManager, $environment);
     }
 
     /**

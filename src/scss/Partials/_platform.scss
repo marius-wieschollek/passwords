@@ -1,5 +1,11 @@
+#app[data-server-version="15"] {
+    #authorize-window .login-confirm input[type="submit"] {
+        background-image : url(/core/img/actions/confirm-white.svg?v=2);
+    }
+}
+
 #app[data-server-version="16"] {
     #controls .crumbmenu.active .menu, #controls .passwords-more-menu.active .menu {
-        max-height: 90px;
+        max-height : 90px;
     }
 }

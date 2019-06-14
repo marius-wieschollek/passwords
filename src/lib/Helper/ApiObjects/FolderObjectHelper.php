@@ -129,11 +129,13 @@ class FolderObjectHelper extends AbstractObjectHelper {
             'revision' => $revision->getUuid(),
             'label'    => $revision->getLabel(),
             'parent'   => $revision->getParent(),
+            'cseKey'   => $revision->getCseKey(),
             'cseType'  => $revision->getCseType(),
             'sseType'  => $revision->getSseType(),
             'hidden'   => $revision->isHidden(),
             'trashed'  => $revision->isTrashed(),
-            'favorite' => $revision->isFavorite()
+            'favorite' => $revision->isFavorite(),
+            'client'   => $revision->getClient()
         ];
     }
 
@@ -157,11 +159,13 @@ class FolderObjectHelper extends AbstractObjectHelper {
                 'edited'   => $revision->getEdited(),
                 'label'    => $revision->getLabel(),
                 'parent'   => $revision->getParent(),
+                'cseKey'   => $revision->getCseKey(),
                 'cseType'  => $revision->getCseType(),
                 'sseType'  => $revision->getSseType(),
                 'hidden'   => $revision->isHidden(),
                 'trashed'  => $revision->isTrashed(),
-                'favorite' => $revision->isFavorite()
+                'favorite' => $revision->isFavorite(),
+                'client'   => $revision->getClient()
             ];
 
             $object['revisions'][] = $current;

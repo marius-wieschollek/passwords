@@ -3,7 +3,6 @@ import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import * as randomMC from 'random-material-color';
-import EnhancedApi from '@js/ApiClient/EnhancedApi';
 import Localisation from '@js/Classes/Localisation';
 
 /**
@@ -18,13 +17,18 @@ class TagManager {
     createTag() {
         let form = {
             label: {
-                label: 'Name',
-                type : 'text'
+                label   : 'Name',
+                type    : 'text',
+                required: true
             },
             color: {
-                label: 'Color',
-                type : 'color',
-                value: randomMC.getColor()
+                type  : 'color',
+                value : randomMC.getColor(),
+                button: {
+                    icon  : 'refresh',
+                    title : 'Generate random color',
+                    action: () => { return randomMC.getColor();}
+                }
             }
         };
 
@@ -47,7 +51,7 @@ class TagManager {
     createTagFromData(tag) {
         if(!tag.label) tag.label = Localisation.translate('New Tag');
         if(!tag.color) tag.color = randomMC.getColor();
-        tag = EnhancedApi.validateTag(tag);
+        tag = this.validateTag(tag);
 
         return new Promise((resolve, reject) => {
             API.createTag(tag)
@@ -75,14 +79,19 @@ class TagManager {
     editTag(tag) {
         let form = {
             label: {
-                label: 'Name',
-                type : 'text',
-                value: tag.label
+                label   : 'Name',
+                type    : 'text',
+                value   : tag.label,
+                required: true
             },
             color: {
-                label: 'Color',
-                type : 'color',
-                value: tag.color
+                type  : 'color',
+                value : tag.color,
+                button: {
+                    icon  : 'refresh',
+                    title : 'Generate random color',
+                    action: () => { return randomMC.getColor(); }
+                }
             }
         };
 
@@ -149,7 +158,7 @@ class TagManager {
                         resolve(tag);
                     })
                     .catch((e) => {
-                        if(e.id && e.id === 'f281915e'){
+                        if(e.id && e.id === 'f281915e') {
                             tag.trashed = true;
                             tag.updated = new Date();
                             Events.fire('tag.deleted', tag);
@@ -229,6 +238,4 @@ class TagManager {
     }
 }
 
-let TM = new TagManager();
-
-export default TM;
+export default new TagManager();

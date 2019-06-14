@@ -126,7 +126,7 @@ class LegacyCategoryApiController extends ApiController {
         /** @var Tag $model */
         $model    = $this->tagService->create();
         $revision = $this->tagRevisionService->create(
-            $model->getUuid(), strval($categoryName), '#'.strval($categoryColour), EncryptionService::CSE_ENCRYPTION_NONE, time(), false, false, false
+            $model->getUuid(), strval($categoryName), '#'.strval($categoryColour), '', EncryptionService::CSE_ENCRYPTION_NONE, time(), false, false, false
         );
 
         $this->tagRevisionService->save($revision);
@@ -180,7 +180,7 @@ class LegacyCategoryApiController extends ApiController {
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
             return null;
         }
-        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
+        if(!in_array($revision->getSseType(), [EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2])) {
             return null;
         }
 

@@ -115,9 +115,13 @@ class TagObjectHelper extends AbstractObjectHelper {
             'revision' => $tag->getRevision(),
             'label'    => $revision->getLabel(),
             'color'    => $revision->getColor(),
+            'cseKey'   => $revision->getCseKey(),
+            'cseType'  => $revision->getCseType(),
+            'sseType'  => $revision->getSseType(),
             'hidden'   => $revision->isHidden(),
             'trashed'  => $revision->isTrashed(),
-            'favorite' => $revision->isFavorite()
+            'favorite' => $revision->isFavorite(),
+            'client'   => $revision->getClient()
         ];
     }
 
@@ -141,9 +145,13 @@ class TagObjectHelper extends AbstractObjectHelper {
                 'edited'   => $revision->getEdited(),
                 'label'    => $revision->getLabel(),
                 'color'    => $revision->getColor(),
+                'cseKey'   => $revision->getCseKey(),
+                'cseType'  => $revision->getCseType(),
+                'sseType'  => $revision->getSseType(),
                 'hidden'   => $revision->isHidden(),
                 'trashed'  => $revision->isTrashed(),
-                'favorite' => $revision->isFavorite()
+                'favorite' => $revision->isFavorite(),
+                'client'   => $revision->getClient()
             ];
 
             $object['revisions'][] = $current;

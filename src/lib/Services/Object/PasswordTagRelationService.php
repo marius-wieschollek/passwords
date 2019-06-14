@@ -12,6 +12,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
@@ -36,14 +37,15 @@ class PasswordTagRelationService extends AbstractService {
     /**
      * PasswordTagRelationService constructor.
      *
+     * @param UuidHelper                $uuidHelper
      * @param HookManager               $hookManager
      * @param EnvironmentService        $environment
      * @param PasswordTagRelationMapper $mapper
      */
-    public function __construct(HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
+    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($hookManager, $environment);
+        parent::__construct($uuidHelper, $hookManager, $environment);
     }
 
     /**
@@ -122,6 +124,20 @@ class PasswordTagRelationService extends AbstractService {
     }
 
     /**
+     * @param EntityInterface|PasswordTagRelation $original
+     * @param array           $overwrites
+     *
+     * @return EntityInterface|PasswordTagRelation
+     */
+    protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
+        /** @var PasswordTagRelation $clone */
+        $clone = parent::cloneModel($original, $overwrites);
+        $clone->setClient($this->environment->getClient());
+
+        return $clone;
+    }
+
+    /**
      * @param PasswordRevision $password
      * @param TagRevision      $tag
      *
@@ -129,6 +145,7 @@ class PasswordTagRelationService extends AbstractService {
      */
     protected function createModel(PasswordRevision $password, TagRevision $tag): PasswordTagRelation {
         $model = new PasswordTagRelation();
+        $model->setUuid($this->uuidHelper->generateUuid());
         $model->setDeleted(false);
         $model->setUserId($this->userId);
         $model->setCreated(time());
@@ -139,6 +156,7 @@ class PasswordTagRelationService extends AbstractService {
         $model->setPassword($password->getModel());
         $model->setPasswordRevision($password->getUuid());
         $model->setHidden($password->isHidden() || $tag->isHidden());
+        $model->setClient($this->environment->getClient());
 
         return $model;
     }
