@@ -11,6 +11,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
+use OCA\Passwords\Helper\Preview\ScreenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
@@ -216,6 +217,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             [
                 'service.preview' => [
                     HelperService::PREVIEW_WEBSHOT,
+                    HelperService::PREVIEW_SCREENLY,
                     HelperService::PREVIEW_BROW_SHOT,
                     HelperService::PREVIEW_SCREEN_SHOT_LAYER,
                     HelperService::PREVIEW_SCREEN_SHOT_MACHINE
@@ -240,6 +242,10 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
         if($service === HelperService::PREVIEW_BROW_SHOT) {
             return BrowshotPreviewHelper::BWS_API_CONFIG_KEY;
+        }
+
+        if($service === HelperService::PREVIEW_SCREENLY) {
+            return ScreenlyHelper::SCREENLY_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_WEBSHOT) {
@@ -342,6 +348,10 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             $this->generateOptionArray(
                 HelperService::PREVIEW_BROW_SHOT,
                 $this->localisation->t('Browshot')
+            ),
+            $this->generateOptionArray(
+                HelperService::PREVIEW_SCREENLY,
+                $this->localisation->t('screenly')
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_SCREEN_SHOT_LAYER,

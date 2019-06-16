@@ -21,6 +21,7 @@ use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
 use OCA\Passwords\Helper\Preview\PageresCliHelper;
+use OCA\Passwords\Helper\Preview\ScreenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
@@ -47,6 +48,7 @@ class HelperService {
     const PREVIEW_BROW_SHOT           = 'bws';
     const PREVIEW_WEBSHOT             = 'ws';
     const PREVIEW_PAGERES             = 'pageres';
+    const PREVIEW_SCREENLY            = 'screenly';
     const PREVIEW_DEFAULT             = 'default';
 
     const FAVICON_BESTICON        = 'bi';
@@ -118,6 +120,8 @@ class HelperService {
                 return $this->container->query(ScreenShotLayerHelper::class);
             case self::PREVIEW_SCREEN_SHOT_MACHINE:
                 return $this->container->query(ScreenShotMachineHelper::class);
+            case self::PREVIEW_SCREENLY:
+                return $this->container->query(ScreenlyHelper::class);
             case self::PREVIEW_DEFAULT:
                 return $this->container->query(DefaultPreviewHelper::class);
         }

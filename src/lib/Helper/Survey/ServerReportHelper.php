@@ -82,7 +82,7 @@ class ServerReportHelper {
      */
     public function getReport(bool $enhanced = true): array {
         $report = [
-            'versions'    => $this->getVersions(),
+            'version'    => $this->getVersions(),
             'environment' => $this->getEnvironment()
         ];
 
