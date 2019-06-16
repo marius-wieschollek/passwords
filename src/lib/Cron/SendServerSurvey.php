@@ -21,7 +21,7 @@ use OCA\Passwords\Services\NotificationService;
  */
 class SendServerSurvey extends AbstractCronJob {
 
-    const API_URL = 'https://ncpw.mdns.eu/';
+    const API_URL = 'https://ncpw.mdns.eu/api.php';
 
     /**
      * @var ConfigurationService
@@ -42,6 +42,11 @@ class SendServerSurvey extends AbstractCronJob {
      * @var NotificationService
      */
     protected $notifications;
+
+    /**
+     * @var float|int
+     */
+    protected $interval = 604800;
 
     /**
      * SendServerSurvey constructor.
