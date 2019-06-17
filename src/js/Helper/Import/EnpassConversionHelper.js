@@ -11,6 +11,9 @@ export default class EnpassConversionHelper {
      * @returns {Promise<{data: {tags: Array, folders: Array, passwords: Array}, errors: Array}>}
      */
     static async processJson(json, options) {
+        if(!data.items) throw new Error('File does not implement Enpass 6 format');
+        if(!Array.isArray(data.folders)) data.folders = [];
+
         let data                = JSON.parse(json),
             {tags, tagMap}      = await this._processTags(data.folders),
             folders             = await this._processFolders(data.items),
