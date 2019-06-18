@@ -1,3 +1,13 @@
+## [Unreleased]
+### Added
+ - Screenly website previews
+ - Pageres 5.x support
+ - Admin impersonation
+ - Server survey
+ - Improved SSEv1 variant
+### Fixed
+ - Enpass folder import
+
 ## 2019.6.0 - Feature release
 ### Changed
  - Compress language files and plain js
