@@ -53,12 +53,11 @@ class SurveySettingsHelper extends AbstractSettingsHelper {
         $this->localisation = $localisation;
     }
 
-
     /**
      * @return array
      */
     protected function getServerOptions(): array {
-        return [
+        $options = [
             $this->generateOptionArray(
                 0,
                 $this->localisation->t('None')
@@ -72,5 +71,17 @@ class SurveySettingsHelper extends AbstractSettingsHelper {
                 $this->localisation->t('Full')
             ),
         ];
+
+        if(!$this->config->hasAppValue('survey/server/mode')) {
+            array_unshift(
+                $options,
+                $this->generateOptionArray(
+                    -1,
+                    $this->localisation->t('Not set')
+                )
+            );
+        }
+
+        return $options;
     }
 }

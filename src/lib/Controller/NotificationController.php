@@ -55,11 +55,11 @@ class NotificationController extends \OCP\AppFramework\Controller {
      * @param string $answer
      */
     public function survey(string $answer = 'yes'): void {
-        $mode = $this->config->getAppValue('survey/server/mode', -1);
-
-        if($mode < 1) {
-            $this->config->setAppValue('survey/server/mode', $answer === 'no' ? 0:2);
-            $this->removeNotification($answer !== 'no');
+        if($answer === 'yes') {
+            $this->config->setAppValue('survey/server/mode', 2);
+            $this->removeNotification(true);
+        } else {
+            $this->removeNotification(false);
         }
     }
 

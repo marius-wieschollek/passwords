@@ -83,7 +83,7 @@ class AdminSettings implements ISettings {
             'purgeTimeout'     => $this->getPurgeTimeout(),
             'backupInterval'   => $this->getBackupInterval(),
             'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
-            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', 0)),
+            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),

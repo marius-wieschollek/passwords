@@ -199,6 +199,9 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             </select>
             <label for="passwords-server-survey"><?php p($l->t('Server survey participation')); ?></label>
             <select id="passwords-server-survey" name="passwords-server-survey"  data-setting="survey.server">
+                <?php if($_['serverSurvey'] === -1): ?>
+                    <option value="-1" selected><?php p($l->t('Not set')); ?></option>
+                <?php endif ?>
                 <option value="0" <?php if($_['serverSurvey'] === 0) p('selected'); ?>><?php p($l->t('None')); ?></option>
                 <option value="1" <?php if($_['serverSurvey'] === 1) p('selected'); ?>><?php p($l->t('Basic')); ?></option>
                 <option value="2" <?php if($_['serverSurvey'] === 2) p('selected'); ?>><?php p($l->t('Full')); ?></option>

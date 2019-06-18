@@ -64,7 +64,7 @@ class SurveyNotification extends AbstractNotification {
         foreach($notification->getActions() as $action) {
             if($action->getLabel() === 'disable') {
                 $actionUrl = $this->urlGenerator->linkToRouteAbsolute('passwords.notification.survey', ['answer' => 'no']);
-                $action->setLink($actionUrl, 'GET')->setParsedLabel($localisation->t('Later'));
+                $action->setLink($actionUrl, 'GET')->setParsedLabel($localisation->t('Not yet'));
             } else if($action->getLabel() === 'enable') {
                 $actionUrl = $this->urlGenerator->linkToRouteAbsolute('passwords.notification.survey', ['answer' => 'yes']);
                 $action->setLink($actionUrl, 'GET')->setParsedLabel($localisation->t('Participate'));

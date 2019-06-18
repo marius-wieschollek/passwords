@@ -132,11 +132,12 @@
         "You can help us to improve the Passwords app by participating in our server survey."       : "Du kannst uns helfen, die Passwörter App zu verbessern indem du an unserer Server-Umfrage teilnimmst.",
         "This will send us some anonymized data about your setup and selected settings."            : "Dafür werden manchmal anonyme Daten über deinen Server und spezifische Einstellungen an uns gesendet.",
         "You can change this at any time in the settings."                                          : "Du kannst das jederzeit in den Einstellungen ändern.",
-        "Later"                                                                                     : "Später",
+        "Not yet"                                                                                   : "Nicht jetzt",
         "Participate"                                                                               : "Mitmachen",
         "Server survey participation"                                                               : "Teilnahme an der Server-Umfrage",
         "Basic"                                                                                     : "Grunddaten",
-        "Full"                                                                                      : "Vollständig"
+        "Full"                                                                                      : "Vollständig",
+        "Not set"                                                                                   : "Nicht festgelegt"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
