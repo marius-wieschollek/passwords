@@ -44,14 +44,23 @@ class Application {
         if(this._loaded || !document.querySelector('meta[name=api-user]')) return;
         clearInterval(this._timer);
         this._loaded = true;
-
-        SettingsService.init();
+        this._initSettings();
         this._initApi();
         this._initVue();
         SearchManager.init();
         EventManager.init();
         KeepAliveManager.init();
         EncryptionTestHelper.initTests();
+    }
+
+    // noinspection JSMethodCanBeStatic
+    /**
+     *
+     * @private
+     */
+    _initSettings() {
+        SettingsService.init();
+        document.body.style.setProperty('--image-login-background', `url(${SettingsService.get('server.theme.background')})`);
     }
 
     /**

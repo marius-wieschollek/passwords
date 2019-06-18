@@ -208,12 +208,12 @@
 <style lang="scss">
     body#body-user {
         &:not(.pw-authorized) {
-            background-color : var(--color-primary);
-            background-image : var(--image-login-background);
-        }
+            background       : var(--color-primary) var(--image-login-background);
+            background-size  : cover;
 
-        #header {
-            background-color : rgba(0, 0, 0, 0);
+            #header {
+                background : rgba(0, 0, 0, 0) none !important;
+            }
         }
 
         #appmenu li a::before {
@@ -395,8 +395,8 @@
                 margin-left      : 0 !important;
                 display          : flex;
                 align-items      : center;
-                background-color : var(--color-primary);
-                background-image : var(--image-login-background);
+                background       : var(--color-primary) var(--image-login-background);
+                background-size  : cover;
                 opacity          : 1;
                 transition       : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
             }
