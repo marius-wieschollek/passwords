@@ -131,7 +131,7 @@ class ThemeSettingsHelper {
             $url = $this->urlGenerator->imagePath('core', 'background.png');
         }
         if($this->config->isAppEnabled('unsplash')) {
-            return 'https://source.unsplash.com/random/featured';
+            return 'https://source.unsplash.com/random/featured/?nature';
         }
 
         return $this->urlGenerator->getAbsoluteURL($url);
