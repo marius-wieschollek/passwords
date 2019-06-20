@@ -9,8 +9,3 @@
 # System Settings
 /var/www/html/occ config:system:set loglevel --value=0 --type=int;
 /var/www/html/occ config:system:set defaultapp --value=passwords --type=string;
-/var/www/html/occ config:system:set mail_from_address --value=noreply --type=string;
-/var/www/html/occ config:system:set mail_smtpmode --value=smtp --type=string;
-/var/www/html/occ config:system:set mail_domain --value=passwords.app --type=string;
-/var/www/html/occ config:system:set mail_smtphost --value=passwords-mail --type=string;
-/var/www/html/occ config:system:set mail_smtpport --value=1025 --type=int;
