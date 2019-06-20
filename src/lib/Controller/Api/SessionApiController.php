@@ -88,14 +88,14 @@ class SessionApiController extends AbstractApiController {
             throw new ApiException('Login not allowed', Http::STATUS_FORBIDDEN);
         }
 
-        $requirements = [];
+        $requirements = new \stdClass();
         if(!$this->session->isAuthorized()) {
             if($this->challengeHelper->hasChallenge()) {
-                $requirements['salts'] = $this->challengeHelper->getSalts();
+                $requirements->salts = $this->challengeHelper->getSalts();
             }
 
             if($this->tokenHelper->hasToken()) {
-                $requirements['token'] = $this->tokenHelper->getProvidersAsArray();
+                $requirements->token = $this->tokenHelper->getProvidersAsArray();
             }
         }
 
