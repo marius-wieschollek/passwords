@@ -59,7 +59,7 @@ abstract class AbstractSettingsHelper {
 
         foreach($this->keys as $key => $value) {
             try {
-                $settings = $this->getGenericSetting($key);
+                $settings[] = $this->getGenericSetting($key);
             } catch(ApiException $e) {
             }
         }
@@ -201,6 +201,7 @@ abstract class AbstractSettingsHelper {
         $configKey = $this->getSettingKey($key);
         $default   = $this->getSettingDefault($key);
         $value     = $this->config->getAppValue($configKey, $default);
+        $isDefault = !$this->config->hasAppValue($configKey);
 
         $options     = [];
         $optionsFunc = 'get'.str_replace(' ', '', ucwords(str_replace('.', ' ', $key))).'Options';
@@ -222,6 +223,7 @@ abstract class AbstractSettingsHelper {
             $value,
             $options,
             $default,
+            $isDefault,
             $type
         );
     }
@@ -259,12 +261,13 @@ abstract class AbstractSettingsHelper {
      * @param        $value
      * @param array  $options
      * @param string $default
+     * @param bool   $isDefault
      * @param string $type
      * @param array  $depends
      *
      * @return array
      */
-    protected function generateSettingArray($name, $value, $options = [], $default = '', $type = 'select', $depends = []): array {
+    protected function generateSettingArray($name, $value, $options = [], $default = '', $isDefault = false, $type = 'select', $depends = []): array {
 
         if($type === 'string' && $options === []) {
             $options = ['min' => 0, 'max' => 2048];
@@ -274,12 +277,13 @@ abstract class AbstractSettingsHelper {
         }
 
         return [
-            'name'    => $this->scope.'.'.$name,
-            'value'   => $value,
-            'type'    => $type,
-            'default' => $default,
-            'options' => $options,
-            'depends' => $depends
+            'name'      => $this->scope.'.'.$name,
+            'value'     => $value,
+            'type'      => $type,
+            'default'   => $default,
+            'isDefault' => $isDefault,
+            'options'   => $options,
+            'depends'   => $depends
         ];
     }
 

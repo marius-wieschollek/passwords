@@ -10,6 +10,8 @@ namespace OCA\Passwords\Helper\Backup;
 use OCA\Passwords\Db\AbstractEntity;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\AbstractRevisionMapper;
+use OCA\Passwords\Db\Challenge;
+use OCA\Passwords\Db\ChallengeMapper;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevision;
@@ -30,9 +32,9 @@ use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\AppSettingsService;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\UserChallengeService;
 
 /**
  * Class RestoreBackupHelper
@@ -72,6 +74,11 @@ class RestoreBackupHelper {
      * @var KeychainMapper
      */
     protected $keychainMapper;
+
+    /**
+     * @var ChallengeMapper
+     */
+    protected $challengeMapper;
 
     /**
      * @var TagRevisionMapper
@@ -116,8 +123,11 @@ class RestoreBackupHelper {
      * @param FolderMapper              $folderMapper
      * @param ConfigurationService      $config
      * @param PasswordMapper            $passwordMapper
+     * @param KeychainMapper            $keychainMapper
+     * @param ChallengeMapper           $challengeMapper
      * @param TagRevisionMapper         $tagRevisionMapper
      * @param UserSettingsHelper        $userSettingsHelper
+     * @param AppSettingsService        $appSettingsService
      * @param FolderRevisionMapper      $folderRevisionMapper
      * @param BackupMigrationHelper     $backupMigrationHelper
      * @param PasswordRevisionMapper    $passwordRevisionMapper
@@ -130,6 +140,7 @@ class RestoreBackupHelper {
         ConfigurationService $config,
         PasswordMapper $passwordMapper,
         KeychainMapper $keychainMapper,
+        ChallengeMapper $challengeMapper,
         TagRevisionMapper $tagRevisionMapper,
         UserSettingsHelper $userSettingsHelper,
         AppSettingsService $appSettingsService,
@@ -144,6 +155,7 @@ class RestoreBackupHelper {
         $this->folderMapper              = $folderMapper;
         $this->passwordMapper            = $passwordMapper;
         $this->keychainMapper            = $keychainMapper;
+        $this->challengeMapper           = $challengeMapper;
         $this->tagRevisionMapper         = $tagRevisionMapper;
         $this->userSettingsHelper        = $userSettingsHelper;
         $this->appSettingsService        = $appSettingsService;
@@ -196,6 +208,7 @@ class RestoreBackupHelper {
         $this->deleteEntities($this->folderMapper, $user);
         $this->deleteEntities($this->passwordMapper, $user);
         $this->deleteEntities($this->keychainMapper, $user);
+        $this->deleteEntities($this->challengeMapper, $user);
         $this->deleteEntities($this->tagRevisionMapper, $user);
         $this->deleteEntities($this->folderRevisionMapper, $user);
         $this->deleteEntities($this->passwordRevisionMapper, $user);
@@ -254,14 +267,10 @@ class RestoreBackupHelper {
                 $this->config->setUserValue('SSEv1UserKey', $userKeys['SSEv1UserKey'], $user);
             }
 
-            if($userKeys['authentication']['key'] !== null) {
-                $this->config->setUserValue(UserChallengeHelper::USER_SECRET_KEY, $userKeys['authentication']['key'], $user);
-                $this->config->setUserValue(UserChallengeHelper::USER_SECRET_SALTS, $userKeys['authentication']['salts'], $user);
-                $this->config->setUserValue(UserChallengeHelper::USER_SECRET_CRYPT_KEY, $userKeys['authentication']['cryptKey'], $user);
+            if($userKeys['ChallengeId'] !== null) {
+                $this->config->setUserValue(UserChallengeService::USER_CHALLENGE_ID, $userKeys['ChallengeId'], $user);
             } else {
-                $this->config->deleteUserValue(UserChallengeHelper::USER_SECRET_KEY, $user);
-                $this->config->deleteUserValue(UserChallengeHelper::USER_SECRET_SALTS, $user);
-                $this->config->deleteUserValue(UserChallengeHelper::USER_SECRET_CRYPT_KEY, $user);
+                $this->config->deleteUserValue(UserChallengeService::USER_CHALLENGE_ID, $user);
             }
         }
     }
@@ -277,6 +286,7 @@ class RestoreBackupHelper {
         $this->restoreEntities($data['passwordTagRelations'], $this->passwordTagRelationMapper, PasswordTagRelation::class, $user);
         $this->restoreEntities($data['shares'], $this->shareMapper, Share::class, $user);
         $this->restoreEntities($data['keychains'], $this->keychainMapper, Keychain::class, $user);
+        $this->restoreEntities($data['challenges'], $this->challengeMapper, Challenge::class, $user);
     }
 
     /**

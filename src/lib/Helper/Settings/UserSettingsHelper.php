@@ -8,8 +8,8 @@
 namespace OCA\Passwords\Helper\Settings;
 
 use Exception;
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\UserChallengeService;
 
 /**
  * Class UserSettingsHelper
@@ -83,7 +83,7 @@ class UserSettingsHelper {
 
         if(isset($this->userSettings[ $key ])) {
             $type    = $this->userSettings[ $key ];
-            $default = $this->getDefaultValue($key);
+            $default = $this->getDefaultValue($key, $userId);
             $value   = $this->config->getUserValue($key, $default, $userId);
 
             return $this->castValue($type, $value);
@@ -132,7 +132,7 @@ class UserSettingsHelper {
         if(isset($this->userSettings[ $key ])) {
             $this->config->deleteUserValue($key, $userId);
 
-            return $this->getDefaultValue($key);
+            return $this->getDefaultValue($key, $userId);
         }
 
         return null;
@@ -173,14 +173,15 @@ class UserSettingsHelper {
     }
 
     /**
-     * @param string $key
+     * @param string      $key
+     * @param null|string $userId
      *
      * @return mixed
      */
-    protected function getDefaultValue(string $key) {
+    protected function getDefaultValue(string $key, ?string $userId) {
         if($key === 'encryption/cse') {
             try {
-                return $this->config->hasUserValue(UserChallengeHelper::USER_SECRET_KEY) ? 1:0;
+                return $this->config->hasUserValue(UserChallengeService::USER_CHALLENGE_ID, $userId) ? 1:0;
             } catch(Exception $e) {
                 return 0;
             }

@@ -158,17 +158,17 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return array
      */
     protected function getFaviconApiSetting(): array {
-        $default = $this->getFaviconApiSettingDefault();
-        $value   = $this->config->getAppValue(
-            $this->getFaviconApiSettingKey(),
-            $default
-        );
+        $configKey = $this->getFaviconApiSettingKey();
+        $default   = $this->getFaviconApiSettingDefault();
+        $value     = $this->config->getAppValue($configKey, $default);
+        $isDefault = !$this->config->hasAppValue($configKey);
 
         return $this->generateSettingArray(
             'favicon.api',
             $value,
             [],
             $default,
+            $isDefault,
             'string',
             [
                 'service.favicon' => [HelperService::FAVICON_BESTICON]
@@ -206,13 +206,16 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return array
      */
     protected function getPreviewApiSetting(): array {
-        $value = $this->config->getAppValue($this->getPreviewApiSettingKey(), '');
+        $configKey = $this->getPreviewApiSettingKey();
+        $value     = $this->config->getAppValue($configKey, '');
+        $isDefault = !$this->config->hasAppValue($configKey);
 
         return $this->generateSettingArray(
             'preview.api',
             $value,
             [],
             '',
+            $isDefault,
             'string',
             [
                 'service.preview' => [

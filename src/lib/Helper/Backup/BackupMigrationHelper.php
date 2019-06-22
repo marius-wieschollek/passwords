@@ -188,13 +188,10 @@ class BackupMigrationHelper {
         }
 
         $data['keychains']                = [];
+        $data['challenges']                = [];
         $data['keys']['server']['secret'] = $this->config->getSystemValue('secret');
         foreach($data['keys']['users'] as $user => $keys) {
-            $data['keys']['users'][ $user ]['authentication'] = [
-                'key'      => null,
-                'salts'    => null,
-                'cryptKey' => null
-            ];
+            $data['keys']['users'][ $user ]['ChallengeId'] = null;
         }
 
         $oldSettings                  = $data['settings']['application'];

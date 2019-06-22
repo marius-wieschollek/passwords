@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Backup;
 
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\AbstractRevisionMapper;
+use OCA\Passwords\Db\ChallengeMapper;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\KeychainMapper;
@@ -20,9 +21,9 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\AppSettingsService;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\UserChallengeService;
 
 /**
  * Class CreateBackupHelper
@@ -62,6 +63,11 @@ class CreateBackupHelper {
      * @var KeychainMapper
      */
     protected $keychainMapper;
+
+    /**
+     * @var ChallengeMapper
+     */
+    protected $challengeMapper;
 
     /**
      * @var TagRevisionMapper
@@ -107,6 +113,7 @@ class CreateBackupHelper {
      * @param ConfigurationService      $config
      * @param PasswordMapper            $passwordMapper
      * @param KeychainMapper            $keychainMapper
+     * @param ChallengeMapper           $challengeMapper
      * @param TagRevisionMapper         $tagRevisionMapper
      * @param UserSettingsHelper        $userSettingsHelper
      * @param AppSettingsService        $appSettingsService
@@ -121,6 +128,7 @@ class CreateBackupHelper {
         ConfigurationService $config,
         PasswordMapper $passwordMapper,
         KeychainMapper $keychainMapper,
+        ChallengeMapper $challengeMapper,
         TagRevisionMapper $tagRevisionMapper,
         UserSettingsHelper $userSettingsHelper,
         AppSettingsService $appSettingsService,
@@ -134,6 +142,7 @@ class CreateBackupHelper {
         $this->folderMapper              = $folderMapper;
         $this->passwordMapper            = $passwordMapper;
         $this->keychainMapper            = $keychainMapper;
+        $this->challengeMapper           = $challengeMapper;
         $this->tagRevisionMapper         = $tagRevisionMapper;
         $this->userSettingsHelper        = $userSettingsHelper;
         $this->appSettingsService        = $appSettingsService;
@@ -154,6 +163,7 @@ class CreateBackupHelper {
             'tags'                 => $this->getModelArray($this->tagMapper, $this->tagRevisionMapper),
             'shares'               => $this->getEntityArray($this->shareMapper),
             'keychains'            => $this->getEntityArray($this->keychainMapper),
+            'challenges'           => $this->getEntityArray($this->challengeMapper),
             'passwordTagRelations' => $this->getEntityArray($this->passwordTagRelationMapper),
             'keys'                 => [
                 'server' => [
@@ -208,12 +218,8 @@ class CreateBackupHelper {
         $keys = [];
         foreach($this->users as $user) {
             $keys[ $user ] = [
-                'SSEv1UserKey'   => $this->config->getUserValue('SSEv1UserKey', null, $user),
-                'authentication' => [
-                    'key'      => $this->config->getUserValue(UserChallengeHelper::USER_SECRET_KEY, null, $user),
-                    'salts'    => $this->config->getUserValue(UserChallengeHelper::USER_SECRET_SALTS, null, $user),
-                    'cryptKey' => $this->config->getUserValue(UserChallengeHelper::USER_SECRET_CRYPT_KEY, null, $user)
-                ]
+                'SSEv1UserKey' => $this->config->getUserValue('SSEv1UserKey', null, $user),
+                'ChallengeId'  => $this->config->getUserValue(UserChallengeService::USER_CHALLENGE_ID, null, $user)
             ];
         }
 
@@ -266,6 +272,14 @@ class CreateBackupHelper {
      * @return array
      */
     protected function getApplicationSettings(): array {
-        return $this->appSettingsService->list();
+        $options = $this->appSettingsService->list();
+        $settings = [];
+
+        foreach($options as $option) {
+            if($option['name'] === 'legacy.api.last.used') continue;
+            $settings[$option['name']] = $option['isDefault'] ? null:$option['value'];
+        }
+
+        return $settings;
     }
 }
