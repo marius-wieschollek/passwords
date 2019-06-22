@@ -213,7 +213,6 @@
 </script>
 
 <style lang="scss">
-
     #app-content .help {
         padding    : 0 10px 10px;
         position   : relative;
@@ -283,7 +282,7 @@
             margin    : 0 auto 6rem;
 
             * {
-                cursor         : text;
+                cursor         : initial;
                 vertical-align : top;
             }
 
@@ -445,7 +444,7 @@
 
                 tr {
                     th {
-                        background-color : $color-grey-lighter;
+                        background-color : var(--color-background-dark);
                     }
                     th,
                     td {

@@ -79,5 +79,20 @@
         p {
             margin-bottom : 1em;
         }
+        table {
+            border-collapse : collapse;
+            width           : 100%;
+
+            th {
+                text-align  : center;
+                font-weight : bold;
+            }
+
+            td,
+            th {
+                border  : 1px solid var(--color-border-dark);
+                padding : 0.25rem;
+            }
+        }
     }
 </style>
