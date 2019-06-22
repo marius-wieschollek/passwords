@@ -1,5 +1,5 @@
 <template>
-    <form class="passwords-form" :id="id">
+    <form class="passwords-form" :id="id" @submit="preventSubmit($event)">
         <translate tag="div" class="message" :say="message" v-if="message"/>
         <div v-for="field in getFields" class="field" :class="{large: field.button !== null}">
             <translate tag="label" :for="field.id" :say="field.label"/>
@@ -63,39 +63,51 @@
 
                     if(minlength && !pattern) pattern = `.{${minlength},}`;
 
-                    fields.push({
-                                    name,
-                                    label,
-                                    button,
-                                    attributes: {
-                                        name,
-                                        value,
-                                        type,
-                                        id,
-                                        title,
-                                        placeholder,
-                                        required,
-                                        checked,
-                                        maxlength,
-                                        pattern
-                                    }
-                                });
+                    fields.push(
+                        {
+                            name,
+                            label,
+                            button,
+                            attributes: {
+                                name,
+                                value,
+                                type,
+                                id,
+                                title,
+                                placeholder,
+                                required,
+                                checked,
+                                maxlength,
+                                pattern
+                            }
+                        }
+                    );
                 }
 
                 return fields;
             }
         },
         methods   : {
+            preventSubmit($event) {
+                $event.preventDefault();
+            },
             getFormData() {
-                let fields = document.querySelectorAll(`#${this.id} input`),
+                let fields  = document.querySelectorAll(`#${this.id} input`),
                     invalid = false;
+
                 for(let i = 0; i < fields.length; i++) {
-                    let field   = fields[i],
-                        name    = field.name;
+                    let field        = fields[i],
+                        name         = field.name,
+                        fieldInvalid = false;
 
                     if(!name) continue;
-                    if(!field.checkValidity()) invalid = true;
-                    if(!invalid && this.form[name].validator &&
+                    field.setCustomValidity('');
+
+                    if(!field.checkValidity()) {
+                        invalid = true;
+                        fieldInvalid = true;
+                    }
+                    if(!fieldInvalid && this.form[name].validator &&
                        !this.form[name].validator(this.fields[name], this.fields, field)) {
                         let message = 'Please correct your input';
                         if(this.form[name].title) message = this.form[name].title;

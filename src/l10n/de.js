@@ -214,6 +214,8 @@
             'CLIENT::PUBLIC'                      : 'Öffentlicher Zugriff',
             'CLIENT::CRON'                        : 'Automatische Hintergrundaufgabe',
             'CLIENT::CLI'                         : 'Server Kommandozeile',
+            'Please correct your input'           : 'Bitte korrigiere deine Angaben',
+            'Show value'                          : 'Wert anzeigen',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
             'true'                                : 'ja',

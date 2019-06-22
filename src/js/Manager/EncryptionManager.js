@@ -62,7 +62,7 @@ class EncryptionManager {
         let data = await Messages.form(
             {
                 password      : {
-                    label    : 'New Password',
+                    label    : 'New password',
                     type     : 'password',
                     button   : 'toggle',
                     minlength: 12,
@@ -73,7 +73,7 @@ class EncryptionManager {
                     }
                 },
                 repeatPassword: {
-                    label    : 'Repeat Password',
+                    label    : 'Repeat password',
                     type     : 'password',
                     button   : 'toggle',
                     required : true,
@@ -83,7 +83,7 @@ class EncryptionManager {
                     }
                 },
                 oldPassword   : {
-                    label    : 'Old Password',
+                    label    : 'Old password',
                     type     : 'password',
                     button   : 'toggle',
                     title    : 'You must enter your old password',
@@ -98,9 +98,13 @@ class EncryptionManager {
         );
 
         try {
+            this._lockApp();
             await this.update(data.password, data.oldPassword);
-            Messages.alert('Your password has been changed successfully', 'Password changed');
+            this._unlockApp();
+
+            Messages.alert('Your password has been changed successfully.', 'Password changed');
         } catch(e) {
+            this._unlockApp();
             Messages.alert(e.message, 'Changing password failed');
             console.error(e);
         }
@@ -302,6 +306,7 @@ class EncryptionManager {
         }
     }
 
+    // noinspection JSMethodCanBeStatic
     /**
      *
      * @param folderDb
@@ -465,6 +470,27 @@ class EncryptionManager {
         }
 
         this._statusFunc(this.status);
+    }
+
+    // noinspection JSMethodCanBeStatic
+    /**
+     * @private
+     */
+    _unlockApp() {
+        document.getElementById('settings-reset').remove();
+        document.getElementById('app').classList.remove('blocking');
+    }
+
+    // noinspection JSMethodCanBeStatic
+    /**
+     * @private
+     */
+    _lockApp() {
+        document.getElementById('app').classList.add('blocking');
+        let el = document.createElement('div');
+        el.setAttribute('id', 'settings-reset');
+        el.classList.add('loading');
+        document.getElementById('app-content').appendChild(el);
     }
 }
 

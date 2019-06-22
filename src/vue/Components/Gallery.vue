@@ -72,7 +72,7 @@
 
         methods: {
             open(index = 0) {
-                document.getElementById('app-content').classList.add('blocking');
+                document.getElementById('app').classList.add('blocking');
                 const instance = typeof BlueImp.Gallery !== 'undefined' ? BlueImp.Gallery:BlueImp,
                       options  = Object.assign(
                           {
@@ -107,7 +107,7 @@
                 }
             },
             close() {
-                document.getElementById('app-content').classList.remove('blocking');
+                document.getElementById('app').classList.remove('blocking');
                 this.$emit('close')
             }
         }

@@ -129,6 +129,22 @@
     #app {
         width : 100%;
 
+        &.blocking {
+            #app-content {
+                position  : static;
+                transform : none;
+
+                .app-content-left {
+                    transition : none;
+                    transform  : none;
+                }
+            }
+
+            #app-navigation {
+                z-index : 1000;
+            }
+        }
+
         @media(max-width : $width-small) {
             #app-content {
                 margin-right : 0;

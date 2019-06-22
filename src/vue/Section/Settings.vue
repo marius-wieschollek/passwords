@@ -53,16 +53,27 @@
 
 
                     <translate tag="h3" say="Login & Session" v-if="hasEncryption"/>
-                    <translate tag="label" for="setting-session-keepalive" say="Keep me logged in"  v-if="hasEncryption"/>
-                    <select id="setting-session-keepalive" v-model.number="settings['client.session.keepalive']" v-if="hasEncryption">
-                        <translate tag="option" value="0" say="Always" />
-                        <translate tag="option" value="1" say="When i'm active" />
-                        <translate tag="option" value="2" say="When i'm working" />
+                    <translate tag="label"
+                               for="setting-session-keepalive"
+                               say="Keep me logged in"
+                               v-if="hasEncryption"/>
+                    <select id="setting-session-keepalive"
+                            v-model.number="settings['client.session.keepalive']"
+                            v-if="hasEncryption">
+                        <translate tag="option" value="0" say="Always"/>
+                        <translate tag="option" value="1" say="When i'm active"/>
+                        <translate tag="option" value="2" say="When i'm working"/>
                     </select>
-                    <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled" v-if="hasEncryption"/>
+                    <settings-help text="Send keep-alive requests to the server to prevent the session from being cancelled"
+                                   v-if="hasEncryption"/>
 
-                    <translate tag="label" for="setting-session-lifetime" say="End session after" v-if="advancedSettings && hasEncryption"/>
-                    <select id="setting-session-lifetime" v-model.number="settings['user.session.lifetime']" v-if="advancedSettings && hasEncryption">
+                    <translate tag="label"
+                               for="setting-session-lifetime"
+                               say="End session after"
+                               v-if="advancedSettings && hasEncryption"/>
+                    <select id="setting-session-lifetime"
+                            v-model.number="settings['user.session.lifetime']"
+                            v-if="advancedSettings && hasEncryption">
                         <translate tag="option" say="One minute" value="60"/>
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:2}" value="120"/>
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" value="300"/>
@@ -70,7 +81,8 @@
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:30}" value="1800"/>
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" value="3600"/>
                     </select>
-                    <settings-help text="Specify the amount of time after a request before the session is cancelled" v-if="advancedSettings && hasEncryption"/>
+                    <settings-help text="Specify the amount of time after a request before the session is cancelled"
+                                   v-if="advancedSettings && hasEncryption"/>
 
                     <translate tag="h3" say="Encryption"/>
                     <translate tag="label"
@@ -372,7 +384,8 @@
                 locked  : false
             };
         },
-        methods   : {
+
+        methods: {
             saveSettings() {
                 if(this.noSave) return;
                 for(let i in this.settings) {
@@ -473,7 +486,7 @@
                 }
             }
         },
-        watch     : {
+        watch  : {
             settings: {
                 handler() {
                     this.saveSettings();
@@ -484,7 +497,7 @@
                 this.advancedSettings = this.settings['client.settings.advanced'] = value === 1;
             },
             locked(value) {
-                document.getElementById('app-content').classList.toggle('blocking');
+                document.getElementById('app').classList.toggle('blocking');
             }
         }
     };

@@ -194,16 +194,6 @@
         overflow-y : initial;
         overflow-x : initial;
 
-        &.blocking {
-            position  : static;
-            transform : none;
-
-            .app-content-left {
-                transition : none;
-                transform  : none;
-            }
-        }
-
         .app-content-left {
             width      : 100%;
             transition : width 300ms;
@@ -261,14 +251,14 @@
 
             &.show-details {
                 .app-content-left {
-                    width     : 50%;
+                    width : 50%;
                 }
             }
         }
 
         @media(max-width : $width-small) {
             .app-content-right {
-                width     : 50%;
+                width : 50%;
             }
 
             &.show-details {
