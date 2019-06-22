@@ -134,21 +134,21 @@ class KeychainService extends AbstractService {
     }
 
     /**
-     * @param EntityInterface|Keychain $keychain
+     * @param EntityInterface|Keychain $challenge
      *
      * @return mixed
      * @throws \Exception
      */
-    public function save(EntityInterface $keychain): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$keychain]);
+    public function save(EntityInterface $challenge): EntityInterface {
+        $this->hookManager->emit($this->class, 'preSave', [$challenge]);
 
-        if($keychain->_isDecrypted()) $this->encryptionService->encryptKeychain($keychain);
+        if($challenge->_isDecrypted()) $this->encryptionService->encryptKeychain($challenge);
 
-        if(empty($keychain->getId())) {
-            $saved = $this->mapper->insert($keychain);
+        if(empty($challenge->getId())) {
+            $saved = $this->mapper->insert($challenge);
         } else {
-            $keychain->setUpdated(time());
-            $saved = $this->mapper->update($keychain);
+            $challenge->setUpdated(time());
+            $saved = $this->mapper->update($challenge);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);
 

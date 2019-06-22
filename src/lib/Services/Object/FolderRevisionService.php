@@ -36,7 +36,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param EnvironmentService   $environment
      * @param FolderRevisionMapper $revisionMapper
      * @param ValidationService    $validationService
-     * @param EncryptionService    $encryptionService
+     * @param EncryptionService    $encryption
      */
     public function __construct(
         UuidHelper $uuidHelper,
@@ -44,9 +44,9 @@ class FolderRevisionService extends AbstractRevisionService {
         EnvironmentService $environment,
         FolderRevisionMapper $revisionMapper,
         ValidationService $validationService,
-        EncryptionService $encryptionService
+        EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryptionService);
+        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**

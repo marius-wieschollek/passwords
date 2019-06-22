@@ -11,9 +11,9 @@ use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\SessionService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Response;
@@ -43,22 +43,28 @@ class ApiSessionMiddleware extends Middleware {
     protected $sessionService;
 
     /**
-     * @var UserChallengeHelper
+     * @var UserChallengeService
      */
-    protected $challengeHelper;
+    protected $challengeService;
 
     /**
      * ApiSessionMiddleware constructor.
      *
-     * @param SessionService      $sessionService
-     * @param UserChallengeHelper $challengeHelper
-     * @param ISession            $session
+     * @param ISession             $session
+     * @param UserTokenHelper      $tokenHelper
+     * @param SessionService       $sessionService
+     * @param UserChallengeService $challengeService
      */
-    public function __construct(SessionService $sessionService, UserChallengeHelper $challengeHelper, UserTokenHelper $tokenHelper, ISession $session) {
-        $this->session         = $session;
-        $this->tokenHelper     = $tokenHelper;
-        $this->sessionService  = $sessionService;
-        $this->challengeHelper = $challengeHelper;
+    public function __construct(
+        ISession $session,
+        UserTokenHelper $tokenHelper,
+        SessionService $sessionService,
+        UserChallengeService $challengeService
+    ) {
+        $this->session          = $session;
+        $this->tokenHelper      = $tokenHelper;
+        $this->sessionService   = $sessionService;
+        $this->challengeService = $challengeService;
     }
 
     /**
@@ -118,7 +124,7 @@ class ApiSessionMiddleware extends Middleware {
      */
     protected function requiresAuthorization(Controller $controller, string $method): bool {
 
-        if(!$this->challengeHelper->hasChallenge() && !$this->tokenHelper->hasToken()) {
+        if(!$this->challengeService->hasChallenge() && !$this->tokenHelper->hasToken()) {
             return false;
         }
 

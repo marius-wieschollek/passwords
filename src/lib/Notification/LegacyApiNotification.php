@@ -7,9 +7,9 @@
 
 namespace OCA\Passwords\Notification;
 
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\DeferredActivationService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
@@ -32,9 +32,9 @@ class LegacyApiNotification extends AbstractNotification {
     protected $config;
 
     /**
-     * @var UserChallengeHelper
+     * @var UserChallengeService
      */
-    protected $challengeHelper;
+    protected $challengeService;
 
     /**
      * @var DeferredActivationService
@@ -48,7 +48,7 @@ class LegacyApiNotification extends AbstractNotification {
      * @param IURLGenerator             $urlGenerator
      * @param ConfigurationService      $config
      * @param IManager                  $notificationManager
-     * @param UserChallengeHelper       $challengeHelper
+     * @param UserChallengeService      $challengeService
      * @param DeferredActivationService $deferredActivation
      */
     public function __construct(
@@ -56,11 +56,11 @@ class LegacyApiNotification extends AbstractNotification {
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         IManager $notificationManager,
-        UserChallengeHelper $challengeHelper,
+        UserChallengeService $challengeService,
         DeferredActivationService $deferredActivation
     ) {
         $this->config             = $config;
-        $this->challengeHelper    = $challengeHelper;
+        $this->challengeService   = $challengeService;
         $this->deferredActivation = $deferredActivation;
 
         parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
@@ -113,7 +113,7 @@ class LegacyApiNotification extends AbstractNotification {
     protected function getMessage(IL10N $localisation, string $client): string {
         $message = $localisation->t('"%s" uses an outdated API which will be removed.', [$client]);
 
-        if($this->challengeHelper->hasChallenge()) {
+        if($this->challengeService->hasChallenge()) {
             $message .= ' '.$localisation->t('This API does not support encryption and will deliver incomplete data.');
         }
 

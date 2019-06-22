@@ -8,8 +8,11 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
+use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Encryption\Challenge\ChallengeEncryptionInterface;
+use OCA\Passwords\Encryption\Challenge\SimpleChallengeEncryption;
 use OCA\Passwords\Encryption\Object\ObjectEncryptionInterface;
 use OCA\Passwords\Encryption\Keychain\KeychainEncryptionInterface;
 use OCA\Passwords\Encryption\Keychain\SseV2KeychainEncryption;
@@ -47,6 +50,11 @@ class EncryptionService {
         = [
             Keychain::TYPE_CSE_V1V1 => SseV2KeychainEncryption::class,
             Keychain::TYPE_SSE_V2R1 => SseV2KeychainEncryption::class
+        ];
+
+    protected $challengeMapping
+        = [
+            Challenge::TYPE_PWD_V1R1 => SimpleChallengeEncryption::class
         ];
 
     /**
@@ -138,6 +146,38 @@ class EncryptionService {
     }
 
     /**
+     * @param Challenge $challenge
+     *
+     * @return Challenge
+     * @throws \Exception
+     */
+    public function encryptChallenge(Challenge $challenge): Challenge {
+        if(!$challenge->_isDecrypted()) return $challenge;
+
+        $encryption = $this->getChallengeEncryptionByType($challenge->getType());
+        if(!$encryption->isAvailable()) throw new \Exception("Challenge encryption type {$encryption->getType()} is not available");
+        $challenge->_setDecrypted(false);
+
+        return $encryption->encryptChallenge($challenge);
+    }
+
+    /**
+     * @param Challenge $challenge
+     *
+     * @return Challenge
+     * @throws \Exception
+     */
+    public function decryptChallenge(Challenge $challenge): Challenge {
+        if($challenge->_isDecrypted()) return $challenge;
+
+        $encryption = $this->getChallengeEncryptionByType($challenge->getType());
+        if(!$encryption->isAvailable()) throw new \Exception("Challenge encryption type {$encryption->getType()} is not available");
+        $challenge->_setDecrypted(true);
+
+        return $encryption->decryptChallenge($challenge);
+    }
+
+    /**
      * @param string|null $cseType
      *
      * @param string|null $userId
@@ -185,5 +225,20 @@ class EncryptionService {
         }
 
         return $this->container->query($this->keychainMapping[ $type ]);
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return ChallengeEncryptionInterface
+     * @throws \Exception
+     */
+    protected function getChallengeEncryptionByType(string $type): ChallengeEncryptionInterface {
+
+        if(!isset($this->challengeMapping[ $type ])) {
+            throw new \Exception("Challenge encryption not found for {$type}");
+        }
+
+        return $this->container->query($this->challengeMapping[ $type ]);
     }
 }

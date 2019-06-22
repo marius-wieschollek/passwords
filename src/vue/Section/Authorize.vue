@@ -69,9 +69,9 @@
             document.body.classList.add('pw-authorize');
             API.requestSession()
                 .then((d) => {
-                    if(d.hasOwnProperty('salts')) {
+                    if(d.hasOwnProperty('challenge')) {
                         this.hasPassword = true;
-                        this.salts = d.salts;
+                        this.salts = d.challenge.salts;
                     }
                     if(d.hasOwnProperty('token')) {
                         this.hasToken = true;

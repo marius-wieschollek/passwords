@@ -9,10 +9,10 @@ namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -41,9 +41,9 @@ class AccountApiController extends AbstractApiController {
     protected $environment;
 
     /**
-     * @var UserChallengeHelper
+     * @var UserChallengeService
      */
-    protected $challengeHelper;
+    protected $challengeService;
 
     /**
      * @var DeleteUserDataHelper
@@ -58,19 +58,20 @@ class AccountApiController extends AbstractApiController {
     /**
      * AccountApiController constructor.
      *
-     * @param IRequest             $request
-     * @param IUserManager         $userManager
-     * @param SessionService       $sessionService
-     * @param EnvironmentService   $environment
-     * @param UserChallengeHelper  $passwordHelper
-     * @param DeleteUserDataHelper $deleteUserDataHelper
+     * @param IRequest                  $request
+     * @param IUserManager              $userManager
+     * @param SessionService            $sessionService
+     * @param EnvironmentService        $environment
+     * @param UserChallengeService      $challengeService
+     * @param DeleteUserDataHelper      $deleteUserDataHelper
+     * @param DeferredActivationService $deferredActivation
      */
     public function __construct(
         IRequest $request,
         IUserManager $userManager,
         SessionService $sessionService,
         EnvironmentService $environment,
-        UserChallengeHelper $passwordHelper,
+        UserChallengeService $challengeService,
         DeleteUserDataHelper $deleteUserDataHelper,
         DeferredActivationService $deferredActivation
     ) {
@@ -79,7 +80,7 @@ class AccountApiController extends AbstractApiController {
         $this->deleteUserDataHelper = $deleteUserDataHelper;
         $this->sessionService       = $sessionService;
         $this->environment          = $environment;
-        $this->challengeHelper      = $passwordHelper;
+        $this->challengeService     = $challengeService;
         $this->deferredActivation   = $deferredActivation;
     }
 
@@ -123,11 +124,7 @@ class AccountApiController extends AbstractApiController {
      * @throws \Exception
      */
     public function getChallenge(): JSONResponse {
-        if($this->challengeHelper->hasChallenge()) {
-            return $this->createJsonResponse(['salts' => $this->challengeHelper->getSalts()], Http::STATUS_OK);
-        }
-
-        return $this->createJsonResponse([], Http::STATUS_NOT_FOUND);
+        return $this->createJsonResponse($this->challengeService->getChallengeData(), Http::STATUS_OK);
     }
 
     /**
@@ -135,26 +132,26 @@ class AccountApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param array       $salts
      * @param null|string $secret
+     * @param array       $data
      * @param null        $oldSecret
      *
      * @return JSONResponse
      * @throws ApiException
      */
-    public function setChallenge(array $salts, string $secret, $oldSecret = null): JSONResponse {
+    public function setChallenge(string $secret, array $data, $oldSecret = null): JSONResponse {
         if(!$this->deferredActivation->check('client-side-encryption')) {
             throw new ApiException('Feature not enabled');
         }
 
-        if($this->challengeHelper->hasChallenge()) {
+        if($this->challengeService->hasChallenge()) {
             if($oldSecret === null) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
-            if(!$this->challengeHelper->validateChallenge($oldSecret)) {
+            if(!$this->challengeService->validateChallenge($oldSecret)) {
                 throw new ApiException('Password verification failed');
             }
         }
 
-        if($this->challengeHelper->setChallenge($salts, $secret)) {
+        if($this->challengeService->setChallenge($data, $secret)) {
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 

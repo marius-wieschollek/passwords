@@ -8,11 +8,11 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Helper\User\UserLoginAttemptHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\SessionService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -35,9 +35,9 @@ class SessionApiController extends AbstractApiController {
     protected $tokenHelper;
 
     /**
-     * @var UserChallengeHelper
+     * @var UserChallengeService
      */
-    protected $challengeHelper;
+    protected $challengeService;
 
     /**
      * @var KeychainService
@@ -56,23 +56,23 @@ class SessionApiController extends AbstractApiController {
      * @param SessionService         $session
      * @param UserTokenHelper        $tokenHelper
      * @param KeychainService        $keychainService
-     * @param UserChallengeHelper    $challengeHelper
      * @param UserLoginAttemptHelper $loginAttempts
+     * @param UserChallengeService   $challengeService
      */
     public function __construct(
         IRequest $request,
         SessionService $session,
         UserTokenHelper $tokenHelper,
         KeychainService $keychainService,
-        UserChallengeHelper $challengeHelper,
-        UserLoginAttemptHelper $loginAttempts
+        UserLoginAttemptHelper $loginAttempts,
+        UserChallengeService $challengeService
     ) {
         parent::__construct($request);
-        $this->session         = $session;
-        $this->tokenHelper     = $tokenHelper;
-        $this->loginAttempts   = $loginAttempts;
-        $this->challengeHelper = $challengeHelper;
-        $this->keychainService = $keychainService;
+        $this->session          = $session;
+        $this->tokenHelper      = $tokenHelper;
+        $this->loginAttempts    = $loginAttempts;
+        $this->keychainService  = $keychainService;
+        $this->challengeService = $challengeService;
     }
 
     /**
@@ -90,8 +90,8 @@ class SessionApiController extends AbstractApiController {
 
         $requirements = new \stdClass();
         if(!$this->session->isAuthorized()) {
-            if($this->challengeHelper->hasChallenge()) {
-                $requirements->salts = $this->challengeHelper->getSalts();
+            if($this->challengeService->hasChallenge()) {
+                $requirements->challenge = $this->challengeService->getChallengeData();
             }
 
             if($this->tokenHelper->hasToken()) {
@@ -188,13 +188,13 @@ class SessionApiController extends AbstractApiController {
      * @throws ApiException
      */
     protected function verifyChallenge($parameters): void {
-        if($this->challengeHelper->hasChallenge()) {
-            if(!isset($parameters['secret'])) {
+        if($this->challengeService->hasChallenge()) {
+            if(!isset($parameters['challenge'])) {
                 $this->loginAttempts->registerFailedAttempt();
                 throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
             }
             try {
-                if(!$this->challengeHelper->validateChallenge($parameters['secret'])) {
+                if(!$this->challengeService->validateChallenge($parameters['challenge'])) {
                     throw new ApiException('Password verification failed');
                 }
             } catch(ApiException $e) {

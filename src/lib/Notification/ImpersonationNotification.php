@@ -7,8 +7,8 @@
 
 namespace OCA\Passwords\Notification;
 
-use OCA\Passwords\Helper\User\UserChallengeHelper;
 use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -37,19 +37,19 @@ class ImpersonationNotification extends AbstractNotification {
     protected $userService;
 
     /**
-     * @var UserChallengeHelper
+     * @var UserChallengeService
      */
-    protected $challengeHelper;
+    protected $challengeService;
 
     /**
      * ImpersonationNotification constructor.
      *
-     * @param IFactory            $l10nFactory
-     * @param UserService         $userService
-     * @param IURLGenerator       $urlGenerator
-     * @param IManager            $notificationManager
-     * @param EnvironmentService  $environment
-     * @param UserChallengeHelper $challengeHelper
+     * @param IFactory             $l10nFactory
+     * @param UserService          $userService
+     * @param IURLGenerator        $urlGenerator
+     * @param IManager             $notificationManager
+     * @param EnvironmentService   $environment
+     * @param UserChallengeService $challengeService
      */
     public function __construct(
         IFactory $l10nFactory,
@@ -57,11 +57,11 @@ class ImpersonationNotification extends AbstractNotification {
         IURLGenerator $urlGenerator,
         IManager $notificationManager,
         EnvironmentService $environment,
-        UserChallengeHelper $challengeHelper
+        UserChallengeService $challengeService
     ) {
-        $this->environment     = $environment;
-        $this->userService     = $userService;
-        $this->challengeHelper = $challengeHelper;
+        $this->environment      = $environment;
+        $this->userService      = $userService;
+        $this->challengeService = $challengeService;
 
         parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
     }
@@ -121,7 +121,7 @@ class ImpersonationNotification extends AbstractNotification {
         $date         = $formatter->format($dateTime);
         $impersonator = $this->userService->getUserName($parameters['impersonator']);
 
-        if($this->challengeHelper->hasChallenge()) {
+        if($this->challengeService->hasChallenge()) {
             return $localisation->t('%s tried to log into your account on %s.', [$impersonator, $date])
                    .' '.
                    $localisation->t('Since you use a master password, this does not mean that access to your data was granted.');

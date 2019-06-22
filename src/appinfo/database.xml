@@ -837,6 +837,22 @@
                 <notnull>true</notnull>
             </field>
             <field>
+                <name>type</name>
+                <type>string</type>
+                <length>36</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>scope</name>
+                <type>string</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>data</name>
+                <type>clob</type>
+            </field>
+            <field>
                 <name>created</name>
                 <type>integer</type>
                 <length>12</length>
@@ -854,6 +870,32 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+        </declaration>
+    </table>
+    <table>
+        <name>*dbprefix*passwords_entity_challenge</name>
+        <declaration>
+            <field>
+                <name>id</name>
+                <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
+                <notnull>true</notnull>
+                <autoincrement>true</autoincrement>
+                <primary>true</primary>
+            </field>
+            <field>
+                <name>user_id</name>
+                <type>text</type>
+                <length>64</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>uuid</name>
+                <type>string</type>
+                <length>36</length>
+                <notnull>true</notnull>
+            </field>
             <field>
                 <name>type</name>
                 <type>string</type>
@@ -861,14 +903,34 @@
                 <notnull>true</notnull>
             </field>
             <field>
-                <name>scope</name>
-                <type>string</type>
+                <name>secret</name>
+                <type>clob</type>
+            </field>
+            <field>
+                <name>server_data</name>
+                <type>clob</type>
+            </field>
+            <field>
+                <name>client_data</name>
+                <type>clob</type>
+            </field>
+            <field>
+                <name>created</name>
+                <type>integer</type>
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
             <field>
-                <name>data</name>
-                <type>clob</type>
+                <name>updated</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>deleted</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
             </field>
         </declaration>
     </table>

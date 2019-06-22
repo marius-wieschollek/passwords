@@ -47,7 +47,7 @@ abstract class AbstractRevisionService extends AbstractService {
      * @param EnvironmentService     $environment
      * @param AbstractRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
-     * @param EncryptionService      $encryptionService
+     * @param EncryptionService      $encryption
      */
     public function __construct(
         UuidHelper $uuidHelper,
@@ -55,11 +55,11 @@ abstract class AbstractRevisionService extends AbstractService {
         EnvironmentService $environment,
         AbstractRevisionMapper $revisionMapper,
         ValidationService $validationService,
-        EncryptionService $encryptionService
+        EncryptionService $encryption
     ) {
         $this->mapper     = $revisionMapper;
         $this->validation = $validationService;
-        $this->encryption = $encryptionService;
+        $this->encryption = $encryption;
 
         parent::__construct($uuidHelper, $hookManager, $environment);
     }
