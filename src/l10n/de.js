@@ -200,7 +200,7 @@
             'match'                               : 'passen zu',
             'matches'                             : 'passt zu',
             'Created by'                          : 'Erstellt von',
-            'You are logging in as {user}'        : 'Sie melden sich als {user} an',
+            'You are logging in as {user}'        : 'Du meldest dich als {user} an',
             'Login'                               : 'Anmelden',
             'Request token again'                 : 'Token erneut anfordern',
             'Too many attempts'                   : 'Zu viele Versuche',
