@@ -1,6 +1,6 @@
 <template>
     <div id="app-content">
-        <form id="authorize-window" @submit="submitLogin" :class="getClasses">
+        <form id="authorize-window" @submit="submitLogin($event)" :class="getClasses">
             <translate tag="div"
                        icon="user"
                        class="login-message"
@@ -122,7 +122,8 @@
         },
 
         methods: {
-            submitLogin() {
+            submitLogin(e) {
+                e.preventDefault();
                 if(this.loggingIn) return;
                 this.loggingIn = true;
                 let data = {};
