@@ -248,6 +248,8 @@ class ServerReportHelper {
             if($count > $best[0]) $best = [$count, $encryption];
         }
 
+        if($best[0] === 0) return [];
+
         $data['default'] = $best[1];
 
         return $data;
@@ -266,6 +268,8 @@ class ServerReportHelper {
             if($count > $best[0]) $best = [$count, $encryption];
         }
 
+        if($best[0] === 0) return [];
+
         $data['default'] = $best[1];
 
         return $data;
@@ -283,7 +287,7 @@ class ServerReportHelper {
                    + count($this->folderRevisionMapper->findAllByField($field, $value))
                    + count($this->passwordRevisionMapper->findAllByField($field, $value));
         } catch(Exception $e) {
-            return -1;
+            return 0;
         }
     }
 }
