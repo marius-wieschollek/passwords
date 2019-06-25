@@ -143,7 +143,6 @@
                         .then(() => { this.goToTarget(); })
                         .catch((d) => { this.loginError(d); });
                 });
-
             },
             loginError(e) {
                 this.password = '';
