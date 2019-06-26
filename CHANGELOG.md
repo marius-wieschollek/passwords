@@ -1,10 +1,11 @@
 ## [Unreleased]
 ### Added
- - Screenly website previews
+ - Screeenly website previews
  - Pageres 5.x support
  - Admin impersonation
  - Server survey
  - Improved SSEv1 variant
+ - E2E, 2FA, Tutorial support for later activation
 ### Fixed
  - Enpass folder import
 

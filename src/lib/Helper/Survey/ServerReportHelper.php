@@ -146,7 +146,9 @@ class ServerReportHelper {
         $faviconApi = false;
         try {
             $previewApi = $this->serviceSettings->get('preview.api')['value'] !== '';
-            $faviconApi = $this->serviceSettings->get('favicon.api')['value'] !== '';
+
+            $faviconSetting = $this->serviceSettings->get('favicon.api');
+            $faviconApi = $faviconSetting['value'] !== $faviconSetting['default'];
         } catch(ApiException $e) {
         }
 
