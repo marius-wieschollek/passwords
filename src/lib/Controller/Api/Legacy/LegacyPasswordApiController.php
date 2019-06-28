@@ -31,6 +31,8 @@ use OCP\IRequest;
  */
 class LegacyPasswordApiController extends ApiController {
 
+    const COMPATIBLE_SSE_ENCRYPTIONS = [EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2];
+
     /**
      * @var TagService
      */
@@ -72,8 +74,6 @@ class LegacyPasswordApiController extends ApiController {
      * @param PasswordRevisionService    $passwordRevisionService
      * @param PasswordTagRelationService $passwordTagRelationService
      */
-    const COMPATIBLE_SSE_ENCRYPTIONS = [EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2];
-
     public function __construct(
         IRequest $request,
         TagService $tagService,
