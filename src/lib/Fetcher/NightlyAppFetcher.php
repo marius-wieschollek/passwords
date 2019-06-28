@@ -185,7 +185,7 @@ class NightlyAppFetcher extends Fetcher {
     protected function releaseAllowedInChannel($release, $app): bool {
         $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
 
-        return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || in_array($app, $nightlyApps);
+        return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || $app === 'passwords' || in_array($app, $nightlyApps);
     }
 
     /**

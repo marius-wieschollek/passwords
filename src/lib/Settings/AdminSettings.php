@@ -11,7 +11,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\ScreenlyHelper;
+use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
@@ -278,12 +278,12 @@ class AdminSettings implements ISettings {
                 ]
             ],
             [
-                'id'      => HelperService::PREVIEW_SCREENLY,
-                'label'   => 'screenly',
-                'current' => $current === HelperService::PREVIEW_SCREENLY,
+                'id'      => HelperService::PREVIEW_SCREEENLY,
+                'label'   => 'screeenly',
+                'current' => $current === HelperService::PREVIEW_SCREEENLY,
                 'api'     => [
                     'key'   => 'service.preview.api',
-                    'value' => $this->config->getAppValue(ScreenlyHelper::SCREENLY_API_CONFIG_KEY)
+                    'value' => $this->config->getAppValue(ScreeenlyHelper::SCREEENLY_API_CONFIG_KEY)
                 ]
             ],
             [

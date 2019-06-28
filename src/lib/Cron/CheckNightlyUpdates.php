@@ -25,6 +25,11 @@ class CheckNightlyUpdates extends AbstractCronJob {
     protected $nightlyAppFetcher;
 
     /**
+     * @var float|int
+     */
+    protected $interval = 600;
+
+    /**
      * CheckNightlyUpdates constructor.
      *
      * @param NightlyAppFetcher    $nightlyAppFetcher

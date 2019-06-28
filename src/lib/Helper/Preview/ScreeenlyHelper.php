@@ -12,18 +12,18 @@ use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
 
 /**
- * Class ScreenlyHelper
+ * Class ScreeenlyHelper
  *
  * @package OCA\Passwords\Helper\Preview
  */
-class ScreenlyHelper extends AbstractPreviewHelper {
+class ScreeenlyHelper extends AbstractPreviewHelper {
 
-    const SCREENLY_API_CONFIG_KEY = 'service/preview/screenly/key';
+    const SCREEENLY_API_CONFIG_KEY = 'service/preview/screeenly/key';
 
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_SCREENLY;
+    protected $prefix = HelperService::PREVIEW_SCREEENLY;
 
     /**
      * @param string $domain
@@ -44,18 +44,18 @@ class ScreenlyHelper extends AbstractPreviewHelper {
 
         if($data === null) {
             $status = $request->getInfo('http_code');
-            $this->logger->error("Screenly Request Failed, HTTP {$status}");
+            $this->logger->error("Screeenly Request Failed, HTTP {$status}");
             throw new ApiException('API Request Failed', 502);
         }
 
         $json = json_decode($data);
         if(isset($json->message)) {
-            $this->logger->error("Screenly {$json->title}: {$json->message}");
+            $this->logger->error("Screeenly {$json->title}: {$json->message}");
             throw new ApiException('API Request Failed', 502);
         }
 
         if(!isset($json->base64_raw)) {
-            $this->logger->error("Screenly did not return an image body");
+            $this->logger->error("Screeenly did not return an image body");
             throw new ApiException('API Request Failed', 502);
         }
 
@@ -70,7 +70,7 @@ class ScreenlyHelper extends AbstractPreviewHelper {
      * @throws ApiException
      */
     protected function getApiParams(string $domain, string $view): array {
-        $apiKey = $this->config->getAppValue(self::SCREENLY_API_CONFIG_KEY);
+        $apiKey = $this->config->getAppValue(self::SCREEENLY_API_CONFIG_KEY);
 
         $url = 'https://secure.screeenly.com/api/v1';
         if(preg_match('/^https:\/\/(.+)\?key=(\w{50})$/', $apiKey, $matches)) {
@@ -79,7 +79,7 @@ class ScreenlyHelper extends AbstractPreviewHelper {
         }
 
         if(strlen($apiKey) !== 50) {
-            $this->logger->error("Screenly API key is invalid");
+            $this->logger->error("Screeenly API key is invalid");
             throw new ApiException('API Request Failed', 502);
         }
 
