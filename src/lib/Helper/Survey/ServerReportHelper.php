@@ -140,6 +140,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getServices(): array {
+        $words = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
         $images = HelperService::getImageHelperName($this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK));
 
         $previewApi = false;
@@ -157,7 +158,7 @@ class ServerReportHelper {
             'favicons'   => $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT),
             'previews'   => $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT),
             'security'   => $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP),
-            'words'      => HelperService::getDefaultWordsHelperName(),
+            'words'      => $words,
             'previewApi' => $previewApi,
             'faviconApi' => $faviconApi
         ];
