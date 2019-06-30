@@ -91,6 +91,8 @@ class SendServerSurvey extends AbstractCronJob {
      */
     protected function sendReport(bool $enhanced): void {
         $report = $this->serverReport->getReport($enhanced);
+        if($report === null) return;
+
         $this->requestHelper->setJsonData($report);
         $this->requestHelper->send(self::API_URL);
     }

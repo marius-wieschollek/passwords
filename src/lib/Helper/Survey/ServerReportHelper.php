@@ -78,9 +78,11 @@ class ServerReportHelper {
     /**
      * @param bool $enhanced
      *
-     * @return array
+     * @return array|null
      */
-    public function getReport(bool $enhanced = true): array {
+    public function getReport(bool $enhanced = true): ?array {
+        if(!$this->hasData()) return null;
+
         $report = [
             'version'    => $this->getVersions(),
             'environment' => $this->getEnvironment()
@@ -292,5 +294,12 @@ class ServerReportHelper {
         } catch(Exception $e) {
             return 0;
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasData(): bool {
+        return count($this->passwordRevisionMapper->findAll()) > 0;
     }
 }

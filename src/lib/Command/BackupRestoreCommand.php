@@ -150,6 +150,7 @@ class BackupRestoreCommand extends Command {
             $output->writeln(' - Only data for '.escapeshellarg($options['user']));
         }
         if($options['data']) {
+            $output->writeln(' - The Nextcloud server secret');
             $output->writeln(' - Server and user encryption keys');
             $output->writeln(' - User passwords, folder, tags and shares');
         }
