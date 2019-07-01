@@ -55,7 +55,10 @@
             enableSlides: {
                 type: Array,
                 default() {
-                    return ['start', 'encryption', 'admin-settings', 'user-settings', 'get-help', 'integrations'];
+                    if(OC.isUserAdmin()) {
+                        return ['start', 'encryption', 'admin-settings', 'user-settings', 'get-help', 'integrations'];
+                    }
+                    return ['start', 'encryption', 'user-settings', 'get-help', 'integrations'];
                 }
             },
             closable    : {
