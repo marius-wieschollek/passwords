@@ -3,10 +3,15 @@
  - Screeenly website previews
  - Pageres 5.x support
  - Admin impersonation
- - Server survey
+ - Revision view shows name of the client
  - Improved SSEv1 variant
- - E2E, 2FA, Tutorial support for later activation
+ - Server survey
+ - Client-Side-Encrption (not active)
+ - Strong Server-Side-Encryption (not active)
+ - Two-Factor-Authentication support (not active)
+ - Tutorial (not active)
 ### Fixed
+ - Permanent object removal ignoring settings
  - Enpass folder import
 
 ## 2019.6.0 - Feature release
