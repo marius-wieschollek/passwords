@@ -70,6 +70,25 @@ class ChallengeService extends AbstractService {
     }
 
     /**
+     * @param string $userId
+     * @param bool   $decrypt
+     *
+     * @return Challenge[]
+     * @throws \Exception
+     */
+    public function findByUserId(string $userId, bool $decrypt = false): array {
+        /** @var Challenge[] $challenges */
+        $challenges = $this->mapper->findAllByUserId($userId);
+        if(!$decrypt) return $challenges;
+
+        foreach($challenges as $challenge) {
+            $this->encryption->decryptChallenge($challenge);
+        }
+
+        return $challenges;
+    }
+
+    /**
      * @param string $type
      * @param string $secret
      * @param string $clientData

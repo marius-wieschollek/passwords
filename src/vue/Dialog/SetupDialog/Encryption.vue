@@ -46,7 +46,7 @@
                 <translate say="Clean up"/>
                 <span :class="getCleanupClass">{{getCleanupStatus}}</span>
             </div>
-            <translate tag="div" class="result success" say="Success" v-if="ready"/>
+            <translate tag="div" class="result success" say="Success" v-if="ready && !hasError"/>
             <translate tag="div" class="result failure" say="Failed" v-if="hasError"/>
         </div>
     </li>
@@ -168,12 +168,16 @@
                 this.processing = true;
                 this.sendStatusEvent();
 
-                await EncryptionManager.install(
-                    this.password,
-                    this.savePassword,
-                    this.encryptDb,
-                    (d) => {this.updateEncryptionStatus(d);}
+                try {
+                    await EncryptionManager.install(
+                        this.password,
+                        this.savePassword,
+                        this.encryptDb,
+                        (d) => {this.updateEncryptionStatus(d);}
                     );
+                }catch(e) {
+                    console.error(e);
+                }
 
                 this.ready = true;
                 this.sendStatusEvent();

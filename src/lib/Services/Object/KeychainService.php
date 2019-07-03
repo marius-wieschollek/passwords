@@ -74,6 +74,20 @@ class KeychainService extends AbstractService {
     }
 
     /**
+     * @param string $userId
+     * @param bool   $decrypt
+     *
+     * @return Keychain[]
+     * @throws \Exception
+     */
+    public function findByUserId(string $userId, bool $decrypt = false): array {
+        /** @var Keychain[] $keychains */
+        $keychains = $this->mapper->findAllByUserId($userId);
+
+        return $decrypt ? $this->decryptArray($keychains):$keychains;
+    }
+
+    /**
      * @param string $scope
      * @param bool   $decrypt
      *

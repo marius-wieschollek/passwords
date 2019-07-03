@@ -24,6 +24,8 @@ use OCP\ISession;
 class SessionService {
 
     const VALUE_USER_SECRET = 'userSecret';
+    const API_SESSION_KEY = 'passwordsSessionId';
+    const API_SESSION_HEADER = 'X-API-SESSION';
 
     /**
      * @var LoggingService
@@ -97,10 +99,6 @@ class SessionService {
      * @param SimpleEncryption   $encryption
      * @param UserSettingsHelper $userSettings
      */
-    const API_SESSION_KEY = 'passwordsSessionId';
-
-    const API_SESSION_HEADER = 'X-API-SESSION';
-
     public function __construct(
         IRequest $request,
         ISession $session,
