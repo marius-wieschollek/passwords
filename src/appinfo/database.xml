@@ -586,6 +586,8 @@
                 <type>string</type>
                 <length>36</length>
                 <notnull>true</notnull>
+                <!-- @TODO: Remove in 2020.1, fixes #162 -->
+                <default></default>
             </field>
             <field>
                 <name>password</name>
