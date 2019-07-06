@@ -84,7 +84,7 @@
                     <settings-help text="Specify the amount of time after a request before the session is cancelled"
                                    v-if="advancedSettings && hasEncryption"/>
 
-                    <translate tag="h3" say="Encryption"/>
+                    <translate tag="h3" say="Encryption" v-if="hasEncryption || encryptionFeature"/>
                     <translate tag="label"
                                for="setting-encryption-sse"
                                say="Server encryption mode"
