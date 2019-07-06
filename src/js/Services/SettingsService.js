@@ -25,7 +25,7 @@ class SettingsService {
             'client.search.live'                 : true,
             'client.search.global'               : true,
             'client.settings.advanced'           : false,
-            'client.session.keepalive'           : 1
+            'client.session.keepalive'           : 0
         };
         this._settings = Utility.cloneObject(this._defaults);
         this._observers = {};
