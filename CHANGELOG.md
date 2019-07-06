@@ -1,3 +1,9 @@
+[Unreleased]
+### Fixed
+ - Upgrade fails with PostgreSQL
+ - Empty section in settings
+ - Session keep alive not working
+
 ## 2019.7.0 - Feature release
 ### Added
  - Screeenly website previews
