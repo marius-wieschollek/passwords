@@ -1,4 +1,4 @@
-## [Unreleased]
+## 2019.7.0 - Feature release
 ### Added
  - Screeenly website previews
  - Pageres 5.x support
