@@ -313,11 +313,10 @@ class EnvironmentService {
 
             if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
-
             $this->logger->warning('Login attempt with invalid authorization header for '.($userId ? $userId:'invalid user id'));
-            $this->client = self::CLIENT_PUBLIC;
-
-            return false;
+        } else if(isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['PHP_AUTH_PW'])) {
+            if($this->loadUserFromBasicAuth($userId, $request)) return true;
+            $this->logger->warning('Login attempt with invalid basic auth for '.($userId ? $userId:'invalid user id'));
         } else if($userId !== null) {
             if($this->loadUserFromSession($userId)) return true;
             $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
@@ -327,6 +326,7 @@ class EnvironmentService {
             return false;
         }
 
+        $this->client = self::CLIENT_PUBLIC;
         throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
     }
 

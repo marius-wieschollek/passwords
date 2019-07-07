@@ -1,6 +1,7 @@
 [Unreleased]
 ### Fixed
  - Upgrade fails with PostgreSQL
+ - App crash when auth header missing
  - Empty section in settings
  - Session keep alive not working
 
