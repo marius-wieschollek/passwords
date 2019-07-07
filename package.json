@@ -9,7 +9,7 @@
         "down": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose down --volumes",
         "start:ldap": "docker-compose -f docker-compose.yml -f docker/configs/ldap.yml up -d",
         "stop:ldap": "docker-compose -f docker-compose.yml -f docker/configs/ldap.yml stop",
-        "down:postgres": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose -f docker-compose.yml -f docker/configs/ldap.yml down --volumes",
+        "down:ldap": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose -f docker-compose.yml -f docker/configs/ldap.yml down --volumes",
         "start:postgres": "docker-compose -f docker-compose.yml -f docker/configs/postgres.yml up -d",
         "stop:postgres": "docker-compose -f docker-compose.yml -f docker/configs/postgres.yml stop",
         "down:postgres": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose -f docker-compose.yml -f docker/configs/postgres.yml down --volumes",
@@ -31,7 +31,7 @@
     "devDependencies": {
         "blueimp-gallery": "^2.33.0",
         "clean-webpack-plugin": "^1.0.1",
-        "codeceptjs": "^2.1.5",
+        "codeceptjs": "^2.2.0",
         "copy-webpack-plugin": "^5.0.3",
         "css-loader": "^2.1.1",
         "csv-hero": "0.0.4",
