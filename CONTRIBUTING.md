@@ -37,8 +37,8 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
-* `npm run start` - Start the docker server. Add :postgres or :ldap to include these services
-* `npm run stop` - Stop the docker server. Add :postgres or :ldap to include these services
+* `npm run start` - Start the docker server. Use `postgres:start` or `ldap:start` to include these services
+* `npm run stop` - Stop the docker server. Use `postgres:stop` or `ldap:stop` to include these services
 * `npm run cron` - Execute cron jobs
 * `npm run shell` - Open a shell in the container
 * `npm run shell:root` - Open a root shell in the container
