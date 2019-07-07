@@ -128,15 +128,15 @@
                     <translate tag="label"
                                for="setting-encryption-update"
                                say="Enc-to-end Encryption"
-                               v-if="hasEncryption && encryptionFeature"/>
+                               v-if="hasEncryption"/>
                     <translate tag="input"
                                type="button"
                                id="setting-encryption-update"
                                localized-value="Change Password"
                                @click="changeCsePassword()"
-                               v-if="hasEncryption && encryptionFeature"/>
+                               v-if="hasEncryption"/>
                     <settings-help text="Change the encryption password"
-                                   v-if="hasEncryption && encryptionFeature"/>
+                                   v-if="hasEncryption"/>
                 </section>
                 <section class="ui">
                     <translate tag="h1" say="User Interface"/>
