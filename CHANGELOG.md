@@ -4,6 +4,7 @@
  - App crash when auth header missing
  - Empty section in settings
  - Session keep alive not working
+ - Pageres dos not work with https only
 
 ## 2019.7.0 - Feature release
 ### Added
