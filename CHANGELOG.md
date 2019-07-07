@@ -1,4 +1,4 @@
-## [Unreleased]
+## 2019.7.1 - Bugfix release
 ### Fixed
  - Upgrade fails with PostgreSQL
  - App crash when auth header missing
