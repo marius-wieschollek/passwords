@@ -1,4 +1,4 @@
-[Unreleased]
+## [Unreleased]
 ### Fixed
  - Upgrade fails with PostgreSQL
  - App crash when auth header missing
