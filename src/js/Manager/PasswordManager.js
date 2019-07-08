@@ -88,6 +88,8 @@ class PasswordManager {
                        p.revision = d.revision;
                        p.updated = new Date();
                        if(password.hasOwnProperty('tags')) p.tags = password.tags;
+                       if(typeof p.customFields === "string") p.customFields = JSON.parse(p.customFields);
+
                        Events.fire('password.updated', p);
                        Messages.notification('Password saved');
                        resolve(p);
