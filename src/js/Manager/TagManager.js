@@ -51,7 +51,7 @@ class TagManager {
     createTagFromData(tag) {
         if(!tag.label) tag.label = Localisation.translate('New Tag');
         if(!tag.color) tag.color = randomMC.getColor();
-        tag = this.validateTag(tag);
+        tag = API.validateTag(tag);
 
         return new Promise((resolve, reject) => {
             API.createTag(tag)
