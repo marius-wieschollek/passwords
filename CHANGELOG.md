@@ -1,3 +1,10 @@
+## [Unreleased]
+### Fixed
+ - Migration does not create uuids for deleted items
+ - Database cleanup fails with entries without uuid
+ - Tags can not be created
+ - Master password can not be changed
+
 ## 2019.7.1 - Bugfix release
 ### Fixed
  - Upgrade fails with PostgreSQL

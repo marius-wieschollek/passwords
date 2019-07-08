@@ -142,6 +142,8 @@ class DatabaseDuplicateDeletion implements IRepairStep {
         foreach ($allDeleted as $entry) {
             try {
                 $uuid = $entry->getUuid();
+                if(empty($uuid)) continue;
+
                 if(isset($knownUuids[ $uuid ])) {
                     $objectService->destroy($knownUuids[ $uuid ]);
                     $knownUuids[ $uuid ] = $entry;
