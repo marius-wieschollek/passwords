@@ -4,6 +4,7 @@
  - Database cleanup fails with entries without uuid
  - Tags can not be created
  - Master password can not be changed
+ - Corrupted revisions are not removed by database repair
 
 ## 2019.7.1 - Bugfix release
 ### Fixed
