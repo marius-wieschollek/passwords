@@ -155,7 +155,7 @@ class EncryptionTestHelper {
         result.protocol = location.protocol;
         result.crypto = !!window.crypto;
         result.textencoder = !!window.TextEncoder;
-        result.app = '2019.3.0';
+        result.app = process.env.APP_VERSION;
         result.api = API.versionString;
         result.apps = Object.keys(oc_appswebroots);
 

@@ -39,11 +39,6 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     protected $folderMapper;
 
     /**
-     * @var EncryptionService
-     */
-    protected $encryptionService;
-
-    /**
      * @var string
      */
     protected $objectName = 'password';
@@ -71,10 +66,9 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         EnvironmentService $environment,
         PasswordRevisionService $revisionService
     ) {
-        parent::__construct($modelMapper, $revisionService);
+        parent::__construct($modelMapper, $revisionService, $encryption, $environment);
         $this->folderMapper      = $folderMapper;
-        $this->encryptionService = $encryption;
-        $this->convertFields     = $config->getAppValue('migration/customFields') !== '2019.5.1' || $environment->getRunType() === EnvironmentService::TYPE_CLI;
+        $this->convertFields     = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2019.5.1';
         $this->config            = $config;
     }
 
@@ -103,8 +97,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         }
 
         if($revision->getCustomFields() === null && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) {
-            $this->encryptionService->decrypt($revision);
-            $revision->setCustomFields('[]');
+            if($this->decryptOrDelete($revision)) $revision->setCustomFields('[]');
             $fixed = true;
         }
 
@@ -136,12 +129,11 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @param PasswordRevision $revision
      *
      * @return bool
-     * @throws \Exception
      */
     public function convertCustomFields(PasswordRevision $revision): bool {
         if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
-        $this->encryptionService->decrypt($revision);
+        if(!$this->decryptOrDelete($revision)) return true;
         $customFields = $revision->getCustomFields();
 
         if(substr($customFields, 0, 1) === '[') return false;
@@ -170,12 +162,11 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @param PasswordRevision $revision
      *
      * @return bool
-     * @throws \Exception
      */
     public function cleanCustomFields(PasswordRevision $revision): bool {
         if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
-        $this->encryptionService->decrypt($revision);
+        if(!$this->decryptOrDelete($revision)) return true;
         $customFields = $revision->getCustomFields();
 
         if(strpos($customFields, '"blank":') === false && strpos($customFields, '"id":') === false) return false;
