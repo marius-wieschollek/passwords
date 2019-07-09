@@ -10,6 +10,8 @@ namespace OCA\Passwords\Migration\DatabaseRepair;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -32,9 +34,11 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
      *
      * @param FolderMapper          $modelMapper
      * @param FolderRevisionService $revisionService
+     * @param EncryptionService     $encryption
+     * @param EnvironmentService    $environment
      */
-    public function __construct(FolderMapper $modelMapper, FolderRevisionService $revisionService) {
-        parent::__construct($modelMapper, $revisionService);
+    public function __construct(FolderMapper $modelMapper, FolderRevisionService $revisionService, EncryptionService $encryption, EnvironmentService $environment) {
+        parent::__construct($modelMapper, $revisionService, $encryption, $environment);
     }
 
     /**

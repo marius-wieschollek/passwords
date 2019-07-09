@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
 use OCA\Passwords\Db\TagMapper;
+use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 
 /**
@@ -27,8 +29,10 @@ class TagRevisionRepair extends AbstractRevisionRepair {
      *
      * @param TagMapper          $modelMapper
      * @param TagRevisionService $revisionService
+     * @param EncryptionService  $encryption
+     * @param EnvironmentService $environment
      */
-    public function __construct(TagMapper $modelMapper, TagRevisionService $revisionService) {
-        parent::__construct($modelMapper, $revisionService);
+    public function __construct(TagMapper $modelMapper, TagRevisionService $revisionService, EncryptionService $encryption, EnvironmentService $environment) {
+        parent::__construct($modelMapper, $revisionService, $encryption, $environment);
     }
 }
