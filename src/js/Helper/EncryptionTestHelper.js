@@ -160,12 +160,17 @@ class EncryptionTestHelper {
         result.apps = Object.keys(oc_appswebroots);
 
         if(result.error) {
+            let stack = ['no stack'];
+            if(result.error.stack) {
+                stack = result.error.stack.split('\n');
+            }
+
             result.error = {
                 file   : result.error.fileName,
                 line   : result.error.lineNumber,
                 column : result.error.columnNumber,
                 message: result.error.message,
-                stack  : result.error.stack.split('\n')
+                stack
             };
         }
 
