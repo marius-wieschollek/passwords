@@ -132,8 +132,20 @@ class ServerReportHelper {
         $wasUsed    = $this->config->getAppValue('legacy_last_used', 0) > $checkpoint;
         $this->config->setAppValue('legacy_api_checkpoint', time());
 
+        $status = $this->config->getAppValue('legacy_api_enabled', true);
+        $report = -1;
+        if($status === false) {
+            $report = 0;
+        } else if($status === true) {
+            $report = 1;
+        } else if($status == false) {
+            $report = 2;
+        } else if($status == true) {
+            $report = 3;
+        }
+
         return [
-            'enabled' => $this->config->getAppValue('legacy_api_enabled', true),
+            'enabled' => $report,
             'used'    => $wasUsed
         ];
     }
