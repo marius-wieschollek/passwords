@@ -64,16 +64,27 @@ class PasswordTagRelationRepair {
      * @throws \Exception
      */
     public function run(IOutput $output): void {
-        /** @var PasswordTagRelation[] $allRelations */
-        $allRelations = $this->relationService->findAll();
+        /** @var PasswordTagRelation[] $activeRelations */
+        $activeRelations = $this->relationService->findAll();
+        $deletedRelations = $this->relationService->findDeleted();
 
         $fixed = 0;
-        $total = count($allRelations);
+        $total = count($activeRelations) + count($deletedRelations);
         $output->info("Checking {$total} password tag relations");
         $output->startProgress($total);
-        foreach($allRelations as $relation) {
+        foreach($activeRelations as $relation) {
             try {
                 if($this->repairRelation($relation)) $fixed++;
+            } catch(\Throwable $e) {
+                $output->warning(
+                    "Failed to repair relation #{$relation->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
+                );
+            }
+            $output->advance(1);
+        }
+        foreach($deletedRelations as $relation) {
+            try {
+                if($this->repairDeletedRelation($relation)) $fixed++;
             } catch(\Throwable $e) {
                 $output->warning(
                     "Failed to repair relation #{$relation->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
@@ -114,5 +125,21 @@ class PasswordTagRelationRepair {
         if($fixed) $this->relationService->save($relation);
 
         return $fixed;
+    }
+
+    /**
+     * @param PasswordTagRelation $relation
+     *
+     * @return bool
+     */
+    protected function repairDeletedRelation(PasswordTagRelation $relation): bool {
+        if(empty($relation->getUuid())) {
+            $relation->setUuid($this->uuidHelper->generateUuid());
+            $this->relationService->save($relation);
+
+            return true;
+        }
+
+        return false;
     }
 }
