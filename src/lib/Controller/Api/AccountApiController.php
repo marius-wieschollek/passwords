@@ -152,6 +152,7 @@ class AccountApiController extends AbstractApiController {
         }
 
         if($this->challengeService->setChallenge($data, $secret)) {
+            $this->sessionService->authorizeSession();
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 
