@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Changed
+ - Login screen now skipped entirely if not needed
+
+## [Unreleased]
 ### Fixed
  - Migration does not create uuids for deleted items
  - Database cleanup fails with entries without uuid

@@ -16,17 +16,26 @@ import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 class Application {
 
     get app() {
-        return this._app
+        return this._app;
     }
 
     get events() {
-        return this._events
+        return this._events;
+    }
+
+    get loginRequired() {
+        return this._loginRequired;
+    }
+
+    set loginRequired(value) {
+        return this._loginRequired = value;
     }
 
     constructor() {
         this._loaded = false;
-        this._timer  = null;
-        this._app    = null;
+        this._timer = null;
+        this._app = null;
+        this._loginRequired = true;
         this._events = new EventEmitter();
     }
 
@@ -46,6 +55,7 @@ class Application {
         this._loaded = true;
         this._initSettings();
         this._initApi();
+        this._checkLoginRequirement();
         this._initVue();
         SearchManager.init();
         EventManager.init();
@@ -87,6 +97,21 @@ class Application {
     }
 
     /**
+     * Check if the user needs to authenticate
+     *
+     * @private
+     */
+    _checkLoginRequirement() {
+        this._loginRequired = document.querySelector('meta[name=pw-authenticate]').getAttribute('content') === 'true';
+
+        if(!this._loginRequired) {
+            document.body.classList.remove('pw-authorize');
+            document.body.classList.add('pw-no-authorize');
+            API.openSession({});
+        }
+    }
+
+    /**
      *
      * @private
      */
@@ -101,7 +126,7 @@ class Application {
         );
 
         router.beforeEach((to, from, next) => {
-            if(!API.isAuthorized && to.name !== 'Authorize') {
+            if(!API.isAuthorized && this._loginRequired && to.name !== 'Authorize') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});

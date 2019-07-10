@@ -65,7 +65,7 @@
         },
 
         created() {
-            document.body.classList.remove('pw-authorized');
+            document.body.classList.remove('pw-no-authorize', 'pw-authorized');
             document.body.classList.add('pw-authorize');
             API.requestSession()
                 .then((d) => {
@@ -207,7 +207,7 @@
 
 <style lang="scss">
     body#body-user {
-        &:not(.pw-authorized) {
+        &:not(.pw-authorized):not(.pw-no-authorize) {
             background      : var(--color-primary) var(--pw-image-login-background);
             background-size : cover;
 
@@ -405,7 +405,8 @@
                 z-index : 1001;
             }
 
-            &.pw-authorized {
+            &.pw-authorized,
+            &.pw-no-authorize {
                 #app-content {
                     margin-left : 0;
                     opacity     : 0;
@@ -419,6 +420,14 @@
                 background-color : var(--color-primary);
             }
 
+            @media (min-width : $width-small) {
+                #app-navigation {
+                    transform : translateX(0);
+                }
+            }
+        }
+
+        &.pw-no-authorize {
             @media (min-width : $width-small) {
                 #app-navigation {
                     transform : translateX(0);
