@@ -190,14 +190,6 @@
             },
             detailsAction(section = null) {
                 this.$parent.detail = {type: 'password', element: this.password};
-                if(!this.password.hasOwnProperty('revisions')) {
-                    API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {
-                            if(this.$parent.detail.element !== null && this.$parent.detail.element.id === p.id) {
-                                this.$parent.detail = {type: 'password', element: p};
-                            }
-                        });
-                }
 
                 let appClasses = document.getElementById('app').classList;
                 if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
