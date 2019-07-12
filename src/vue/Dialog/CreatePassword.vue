@@ -335,6 +335,7 @@
 
                     input[type=url],
                     input[type=text],
+                    input[type=email],
                     input[type=password] {
                         cursor    : text;
                         width     : 100%;

@@ -172,7 +172,7 @@ class LegacyPasswordApiController extends ApiController {
              '',
              strval($website).' – '.strval($loginname),
             strval($address), strval($notes),
-            '{}',
+            '[]',
             FolderService::BASE_FOLDER_UUID,
             time(), false, false, false
         );
