@@ -24,7 +24,8 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
+                        <translate tag="li" @click="detailsAction()" icon="info" say="Details"/>
+                        <translate tag="li" @click="detailsAction('share')" icon="share-alt" say="Share"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
                         <translate tag="li"
                                    v-if="showCopyOptions"
@@ -188,8 +189,8 @@
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },
-            detailsAction(section = null) {
-                this.$parent.detail = {type: 'password', element: this.password};
+            detailsAction(section = 'details') {
+                this.$parent.detail = {type: 'password', element: this.password, section};
 
                 let appClasses = document.getElementById('app').classList;
                 if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');

@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element" :section="detail.section"/>
         </div>
     </div>
 </template>
@@ -65,7 +65,8 @@
                 loading  : true,
                 detail   : {
                     type   : 'none',
-                    element: null
+                    element: null,
+                    section: 'default'
                 },
                 sorting  : {
                     field    : SettingsService.get('local.ui.sorting.field', 'label'),

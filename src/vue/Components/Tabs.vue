@@ -1,7 +1,14 @@
 <template>
     <div class="tab-container">
         <ul class="tab-titles">
-            <translate tag="li" v-for="(tab, name) in tabs" :key="name" class="tab-title" :class="{ active: isCurrent(name) }" @click="setCurrent(name)" :say="tab" :data-tab="name"/>
+            <translate tag="li"
+                       v-for="(tab, name) in tabs"
+                       :key="name"
+                       class="tab-title"
+                       :class="{ active: isCurrent(name) }"
+                       @click="setCurrent(name)"
+                       :say="tab"
+                       :data-tab="name"/>
         </ul>
         <div class="tab-contents">
             <div class="tab-content active">
@@ -20,15 +27,24 @@
         },
 
         props: {
-            tabs: {
+            tabs      : {
                 type: Object
+            },
+            initialTab: {
+                type   : String,
+                default: null
             }
         },
 
         data() {
-            return {
-                tab: Object.keys(this.tabs)[0]
+            let keys = Object.keys(this.tabs),
+                tab  = keys[0];
+
+            if(this.initialTab !== null && keys.indexOf(this.initialTab) !== -1) {
+                tab = this.initialTab;
             }
+
+            return {tab}
         },
 
         methods: {
@@ -38,6 +54,15 @@
             setCurrent(tab) {
                 this.tab = tab;
             }
+        },
+        watch  : {
+            initialTab(value) {
+                let keys = Object.keys(this.tabs);
+
+                if(value !== null && keys.indexOf(value) !== -1) {
+                    this.tab = value;
+                }
+            }
         }
     }
 </script>
@@ -46,32 +71,36 @@
     .tab-container {
         .tab-titles {
             .tab-title {
-                float   : left;
-                padding : 5px;
-                cursor  : pointer;
-                color   : $color-black-lighter;
+                float: left;
+                padding: 5px;
+                cursor: pointer;
+                color: $color-black-lighter;
 
                 &:hover,
-                &.active { border-bottom : 1px solid var(--color-primary); }
-
                 &.active {
-                    color       : var(--color-main-text);
-                    font-weight : 600;
+                    border-bottom: 1px solid var(--color-primary);
                 }
 
-                span { cursor : pointer; }
+                &.active {
+                    color: var(--color-main-text);
+                    font-weight: 600;
+                }
+
+                span {
+                    cursor: pointer;
+                }
             }
         }
 
         .tab-contents {
-            clear       : both;
-            padding-top : 10px;
+            clear: both;
+            padding-top: 10px;
 
             .tab-content {
-                display : none;
+                display: none;
 
                 &.active {
-                    display : block;
+                    display: block;
                 }
             }
         }

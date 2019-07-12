@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+ - Sharing now available from menu
 ### Changed
  - Login screen now skipped entirely if not needed
 

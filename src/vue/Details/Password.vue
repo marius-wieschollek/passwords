@@ -11,7 +11,7 @@
             <span class="date">{{ object.edited.toLocaleDateString() }}</span>
             <tags :password="object"/>
         </div>
-        <tabs :tabs="getTabs">
+        <tabs :tabs="getTabs" :initial-tab="section">
             <pw-details slot="details" :password="object"/>
             <notes slot="notes" :password="object"/>
             <div slot="share">
@@ -56,6 +56,9 @@
         props: {
             password: {
                 type: Object
+            },
+            section: {
+                type: String
             }
         },
 
