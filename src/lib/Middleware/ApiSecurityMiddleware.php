@@ -74,6 +74,7 @@ class ApiSecurityMiddleware extends Middleware {
         $id         = 0;
         $statusCode = Http::STATUS_SERVICE_UNAVAILABLE;
 
+        $this->logger->error(['Error "%1$s" in %2$s::%3$s', $exception->getMessage(), get_class($controller), $methodName]);
         $this->logger->logException($exception);
 
         if(get_class($exception) === ApiException::class || is_subclass_of($exception, ApiException::class)) {

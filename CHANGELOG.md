@@ -4,7 +4,7 @@
 ### Changed
  - Login screen now skipped entirely if not needed
 
-## [Unreleased]
+## 2019.7.2 - Bugfix release
 ### Fixed
  - Migration does not create uuids for deleted items
  - Database cleanup fails with entries without uuid
