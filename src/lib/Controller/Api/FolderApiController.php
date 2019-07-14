@@ -14,6 +14,8 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -122,8 +124,8 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      * @throws \Exception
      */
     public function update(
@@ -163,8 +165,8 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function delete(string $id, ?string $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) {
@@ -185,8 +187,8 @@ class FolderApiController extends AbstractObjectApiController {
      * @return JSONResponse
      * @throws ApiException
      * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID || $revision == $this->revisionService::BASE_REVISION_UUID) {
