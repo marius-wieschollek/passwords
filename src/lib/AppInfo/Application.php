@@ -33,6 +33,8 @@ use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
@@ -140,10 +142,11 @@ class Application extends App {
                 $server = $c->getServer();
 
                 return new ShareUserListHelper(
-                    $server->getUserSession()->getUser(),
                     $server->getShareManager(),
                     $server->getUserManager(),
-                    $c->query(IGroupManager::class)
+                    $c->query(IGroupManager::class),
+                    $c->query(ConfigurationService::class),
+                    $c->query(EnvironmentService::class)
                 );
             });
     }
