@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Added
  - Sharing now available from menu
+ - Support user hiding in guests app
 ### Changed
  - Login screen now skipped entirely if not needed
 
