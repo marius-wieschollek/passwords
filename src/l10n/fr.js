@@ -162,6 +162,7 @@
             'Folder CSV'                          : 'CSV des dossiers',
             'Tags CSV'                            : 'CSV des étiquettes',
             'Custom CSV'                          : 'CSV personnalisé',
+            'Other / Custom CSV'                  : 'CSV personnalisé',
             'Select File'                         : 'Sélectionner un ficher',
             'Select Options'                      : 'Choisissez les options',
             'Conflict handling'                   : 'Gestion des conflits',

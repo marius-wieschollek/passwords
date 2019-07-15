@@ -165,6 +165,7 @@
             'Passwords CSV'                       : 'Passord CSV',
             'Folder CSV'                          : 'Mapp CSV',
             'Custom CSV'                          : 'Custom CSV',
+            'Other / Custom CSV'                  : 'Other / Custom CSV',
             'Select File'                         : 'Välj fil',
             'Select Options'                      : 'Välj egenskaper',
             'Conflict handling'                   : 'Hantering av konflikter',
