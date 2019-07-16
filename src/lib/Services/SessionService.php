@@ -23,8 +23,8 @@ use OCP\ISession;
  */
 class SessionService {
 
-    const VALUE_USER_SECRET = 'userSecret';
-    const API_SESSION_KEY = 'passwordsSessionId';
+    const VALUE_USER_SECRET  = 'userSecret';
+    const API_SESSION_KEY    = 'passwordsSessionId';
     const API_SESSION_HEADER = 'X-API-SESSION';
 
     /**
@@ -274,10 +274,10 @@ class SessionService {
                 $session = $this->mapper->findByUuid($sessionId);
                 if($this->environment->getUserId() !== $session->getUserId()) {
                     $this->mapper->delete($session);
-                    $this->logger->error('Unauthorized session access');
+                    $this->logger->error(['Unauthorized session access by %s on %s', $this->environment->getUserId(), $session->getUserId()]);
                 } else if(time() > $session->getUpdated() + $this->userSettings->get('session/lifetime')) {
                     $this->mapper->delete($session);
-                    $this->logger->warning('Cancelled expired session');
+                    $this->logger->warning(['Cancelled expired session %s for %s', $session->getUuid(), $session->getUserId()]);
                 } else {
                     $this->session = $session;
                     $this->data    = $this->decryptSessionData();
@@ -291,7 +291,7 @@ class SessionService {
                     return;
                 }
             } catch(DoesNotExistException $e) {
-                $this->logger->warning('Attempt to access expired session');
+                $this->logger->warning(['Attempt to access expired or nonexistent session %s by %s', $sessionId, $this->environment->getUserId()]);
             } catch(\Throwable $e) {
                 $this->logger->logException($e);
             }
