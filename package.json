@@ -29,7 +29,7 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "blueimp-gallery": "^2.33.0",
+        "blueimp-gallery": "^2.34.1",
         "clean-webpack-plugin": "^1.0.1",
         "codeceptjs": "^2.2.0",
         "copy-webpack-plugin": "^5.0.3",
@@ -59,9 +59,9 @@
         "vue-router": "^3.0.7",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.10",
-        "webdriverio": "^5.11.1",
-        "webpack": "^4.35.3",
-        "webpack-cli": "^3.3.5",
+        "webdriverio": "^5.11.6",
+        "webpack": "^4.36.1",
+        "webpack-cli": "^3.3.6",
         "xlsx": "^0.14.3"
     },
     "repository": {
