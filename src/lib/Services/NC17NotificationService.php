@@ -47,7 +47,7 @@ class NC17NotificationService extends NotificationService {
      * @throws InvalidArgumentException When the notification was not prepared by a notifier
      * @since 9.0.0
      */
-    public function prepare(INotification $notification, string $languageCode) {
+    public function prepare(INotification $notification, string $languageCode): INotification {
         return $this->realPrepare($notification, $languageCode);
     }
 }

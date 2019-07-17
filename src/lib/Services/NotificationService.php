@@ -206,7 +206,7 @@ abstract class NotificationService implements INotifier {
      * @throws \InvalidArgumentException When the notification was not prepared by a notifier
      * @since 9.0.0
      */
-    public function realPrepare(INotification $notification, string $languageCode) {
+    public function realPrepare(INotification $notification, string $languageCode): INotification {
         if($notification->getApp() !== Application::APP_NAME) {
             throw new \InvalidArgumentException();
         }
