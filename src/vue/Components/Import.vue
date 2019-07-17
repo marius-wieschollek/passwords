@@ -326,9 +326,10 @@
                 if(this.file === null) {
                     this.step = 2;
                 } else if(this.source === 'csv') {
+                    console.log(this.options.mapping);
                     if(
                         (this.options.db === 'passwords' && this.options.mapping.indexOf('password') !== -1) ||
-                        (`${this.options.mode}` === '3' && this.options.mapping.length > 0) ||
+                        (`${this.options.mode}` === '3' && this.options.mapping.length > 0 && !this.options.mapping.isNull()) ||
                         this.options.mapping.indexOf('label') !== -1
                     ) {
                         this.step = this.csvReady ? 4:2;

@@ -92,7 +92,9 @@ export default class ImportCsvConversionHelper {
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
-        if(data[firstLine].length < mapping.length) throw new Error('CSV file can not be mapped');
+        if(!Array.isArray(data) || data.length < firstLine+1) throw new Error('Import file is empty');
+        if(!mapping || data[firstLine].length < mapping.length) throw new Error('CSV file can not be mapped');
+
         for(let i = firstLine; i < data.length; i++) {
             let line   = data[i],
                 object = {};
