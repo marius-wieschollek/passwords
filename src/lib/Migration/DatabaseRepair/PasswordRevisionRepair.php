@@ -104,7 +104,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         if($this->convertCustomFields($revision)) $fixed = true;
         if($this->cleanCustomFields($revision)) $fixed = true;
 
-        if($revision->getStatus() === 1 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
+        if($revision->getStatus() !== 0 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
             $revision->setStatus(0);
             $fixed = true;
         }
