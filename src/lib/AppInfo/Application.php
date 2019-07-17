@@ -33,7 +33,8 @@ use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
-use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\NC16NotificationService;
+use OCA\Passwords\Services\NC17NotificationService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IGroupManager;
@@ -201,18 +202,26 @@ class Application extends App {
     }
 
     /**
-     *
+     * @TODO: Remove NC16 code in 2020.1
      */
     protected function registerNotificationNotifier(): void {
-        $this->getContainer()->getServer()->getNotificationManager()->registerNotifier(
-            function () {
-                return $this->getContainer()->query(NotificationService::class);
-            },
-            function () {
-                $l = $this->getContainer()->query(IL10N::class);
+        $container = $this->getContainer();
+        $server    = $container->getServer();
+        $version   = $server->getConfig()->getSystemValue('version');
 
-                return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
-            }
-        );
+        if(version_compare($version, '17.0.0.0') >= 0) {
+            $server->getNotificationManager()->registerNotifierService(NC17NotificationService::class);
+        } else {
+            $server->getNotificationManager()->registerNotifier(
+                function () use ($container) {
+                    return $container->query(NC16NotificationService::class);
+                },
+                function () use ($container) {
+                    $l = $container->query(IL10N::class);
+
+                    return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
+                }
+            );
+        }
     }
 }

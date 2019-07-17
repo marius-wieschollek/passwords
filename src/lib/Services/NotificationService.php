@@ -25,7 +25,7 @@ use OCP\Notification\INotifier;
  *
  * @package OCA\Passwords\Notification
  */
-class NotificationService implements INotifier {
+abstract class NotificationService implements INotifier {
 
     /**
      * @var UserSettingsService
@@ -206,7 +206,7 @@ class NotificationService implements INotifier {
      * @throws \InvalidArgumentException When the notification was not prepared by a notifier
      * @since 9.0.0
      */
-    public function prepare(INotification $notification, $languageCode) {
+    public function realPrepare(INotification $notification, string $languageCode) {
         if($notification->getApp() !== Application::APP_NAME) {
             throw new \InvalidArgumentException();
         }
