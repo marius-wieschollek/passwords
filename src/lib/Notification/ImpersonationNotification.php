@@ -86,11 +86,10 @@ class ImpersonationNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
+     * @throws \Exception
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        if($this->environment->isImpersonating()) {
-            throw new \InvalidArgumentException();
-        }
+        if($this->environment->isImpersonating()) throw new \InvalidArgumentException();
 
         $title   = $localisation->t('Administrative access to your account');
         $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index');
@@ -107,6 +106,7 @@ class ImpersonationNotification extends AbstractNotification {
      * @param array $parameters
      *
      * @return string
+     * @throws \Exception
      */
     protected function getMessage(IL10N $localisation, array $parameters): string {
         $dateTime = new \DateTime();
