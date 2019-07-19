@@ -1,9 +1,16 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Command;
 
 use OCA\Passwords\Services\BackupService;
+use OCP\Util;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -35,6 +42,7 @@ class BackupCreateCommand extends Command {
      */
     protected function configure() {
         $this->setName('passwords:backup:create')
+             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the backup')
              ->setDescription('Create a new backup of the password database');
     }
 
@@ -44,13 +52,20 @@ class BackupCreateCommand extends Command {
      *
      * @return int|null|void
      * @throws \OCP\Files\NotPermittedException
+     * @throws \OCP\Files\NotFoundException
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $backup = $this->backupService->createBackup();
+        $argName = null;
+        if($input->hasArgument('name')) {
+            $argName = preg_replace('/[^\w\-\.]/', '', $input->getArgument('name'));
+            if(empty($argName)) $argName = null;
+        }
+
+        $backup = $this->backupService->createBackup($argName);
 
         $name = $backup->getName();
         $name = substr($name, 0, strpos($name, '.json'));
-        $size = \OCP\Util::humanFileSize($backup->getSize());
+        $size = Util::humanFileSize($backup->getSize());
         $gzip = substr($backup->getName(), -2) === 'gz' ? 'compressed':'json';
 
         $output->writeln(sprintf('Created new backup: %s, %s %s', $name, $size, $gzip));

@@ -48,12 +48,17 @@ class BackupService {
     }
 
     /**
+     * @param string|null $name
+     *
      * @return \OCP\Files\SimpleFS\ISimpleFile
+     * @throws \OCP\Files\NotFoundException
      * @throws \OCP\Files\NotPermittedException
      * @throws \Exception
      */
-    public function createBackup(): ISimpleFile {
-        $name = date('Y-m-d_H-i-s').'.json';
+    public function createBackup(?string $name = null): ISimpleFile {
+        if($name === null) $name = date('Y-m-d_H-i-s');
+        $name .= '.json';
+
         $data = json_encode($this->createBackupHelper->getData());
         if(extension_loaded('zlib')) {
             $name .= '.gz';

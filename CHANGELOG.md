@@ -5,6 +5,9 @@
  - SafeInCloud CSV import
 ### Changed
  - Login screen now skipped entirely if not needed
+ - CLI now allows custom backup names
+### Fixed
+ - Correct handling of empty files in import
 
 ## 2019.7.2 - Bugfix release
 ### Fixed
