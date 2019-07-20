@@ -34,7 +34,7 @@ class BackupExportCommand extends Command {
     public function __construct(BackupService $backupService) {
         $this->backupService = $backupService;
 
-        parent::__construct(null);
+        parent::__construct();
     }
 
     /**

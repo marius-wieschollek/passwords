@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Command;
 
 use Exception;
+use OCA\Passwords\Helper\Backup\BackupMigrationHelper;
 use OCA\Passwords\Services\BackupService;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
@@ -30,14 +31,20 @@ class BackupImportCommand extends Command {
     protected $backupService;
 
     /**
+     * @var BackupMigrationHelper
+     */
+    protected $migrationHelper;
+
+    /**
      * BackupListCommand constructor.
      *
      * @param BackupService $backupService
      */
-    public function __construct(BackupService $backupService) {
+    public function __construct(BackupService $backupService, BackupMigrationHelper $migrationHelper) {
         $this->backupService = $backupService;
+        $this->migrationHelper = $migrationHelper;
 
-        parent::__construct(null);
+        parent::__construct();
     }
 
     /**
@@ -72,12 +79,10 @@ class BackupImportCommand extends Command {
     }
 
     /**
-     * @param $file
-     * @param $matches
+     * @param string $file
      *
      * @return array
      * @throws NotFoundException
-     * @throws Exception
      */
     protected function checkIfFileCanBeRead(string $file): array {
         if(!$file || !is_file($file) || !is_readable($file)) throw new NotFoundException();
@@ -120,7 +125,7 @@ class BackupImportCommand extends Command {
             throw new Exception('The file does not contain a valid server backup');
         }
 
-        return $json;
+        return $this->migrationHelper->convert($json);
     }
 
     /**
