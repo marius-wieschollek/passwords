@@ -102,6 +102,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
             <step>OCA\Passwords\Migration\DatabaseDuplicateDeletion</step>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
+        <live-migration>
+            <step>OCA\Passwords\Migration\MoveBackups</step>
+        </live-migration>
     </repair-steps>
     <commands>
         <command>OCA\Passwords\Command\BackupCreateCommand</command>

@@ -2,6 +2,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Services\BackupService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -36,7 +37,7 @@ class BackupJob extends AbstractCronJob {
     public function __construct(LoggingService $logger, EnvironmentService $environment, BackupService $backupService, ConfigurationService $config) {
         parent::__construct($logger, $environment);
         $this->backupService = $backupService;
-        $this->config = $config;
+        $this->config        = $config;
 
         $interval = (int) $this->config->getAppValue('backup/interval', 86400);
         $this->setInterval($interval);
@@ -45,10 +46,10 @@ class BackupJob extends AbstractCronJob {
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($argument): void {
-        $file = $this->backupService->createBackup(null, 'auto_backups');
+        $file = $this->backupService->createBackup(null, BackupService::AUTO_BACKUPS);
         $this->logger->info(['Created Backup %s with %s', $file->getName(), Util::humanFileSize($file->getSize())]);
         $this->backupService->removeOldBackups();
     }

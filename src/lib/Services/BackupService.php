@@ -15,6 +15,8 @@ use OCP\Util;
  * @package OCA\Passwords\Services
  */
 class BackupService {
+    const AUTO_BACKUPS = 'autoBackups';
+    const BACKUPS      = 'backups';
 
     /**
      * @var ConfigurationService
@@ -58,7 +60,7 @@ class BackupService {
      * @throws \OCP\Files\NotPermittedException
      * @throws \Exception
      */
-    public function createBackup(?string $name = null, string $folder = 'backups'): ISimpleFile {
+    public function createBackup(?string $name = null, string $folder = self::BACKUPS): ISimpleFile {
         if(empty($name)) {
             $name = date('Y-m-d_H-i-s');
         } else if(strlen($name) > 20) {
@@ -89,7 +91,7 @@ class BackupService {
      * @throws \OCP\Files\NotPermittedException
      */
     public function getBackups(?string $location = null): array {
-        $folders = ['backups', 'auto_backups'];
+        $folders = [self::BACKUPS, self::AUTO_BACKUPS];
         if(in_array($location, $folders)) $folders = [$location];
 
         $backups = [];
@@ -157,7 +159,7 @@ class BackupService {
         $maxBackups = $this->config->getAppValue('backup/files/maximum', 14);
         if($maxBackups === 0) return;
 
-        $backups = $this->getBackups('auto_backups');
+        $backups = array_values($this->getBackups(self::AUTO_BACKUPS));
         if(count($backups) <= $maxBackups) return;
 
         $delete = count($backups) - $maxBackups;
@@ -172,7 +174,7 @@ class BackupService {
      * @return \OCP\Files\SimpleFS\ISimpleFolder
      * @throws \OCP\Files\NotPermittedException
      */
-    public function getBackupFolder(string $name = 'backups'): ISimpleFolder {
+    public function getBackupFolder(string $name = self::BACKUPS): ISimpleFolder {
         try {
             return $this->appData->getFolder($name);
         } catch(\OCP\Files\NotFoundException $e) {

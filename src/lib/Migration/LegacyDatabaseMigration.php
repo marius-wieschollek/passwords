@@ -18,6 +18,7 @@ use OCP\Migration\IRepairStep;
  * Class LegacyDatabaseMigration
  *
  * @package OCA\Passwords\Migration
+ * @TODO remove in 2020.1
  */
 class LegacyDatabaseMigration implements IRepairStep {
 
@@ -62,6 +63,16 @@ class LegacyDatabaseMigration implements IRepairStep {
     }
 
     /**
+     * Returns the step's name
+     *
+     * @return string
+     * @since 9.1.0
+     */
+    public function getName(): string {
+        return 'Passwords Legacy Database Migration';
+    }
+
+    /**
      * Run repair step.
      * Must throw exception on error.
      *
@@ -84,15 +95,5 @@ class LegacyDatabaseMigration implements IRepairStep {
         } else {
             $output->info('Legacy migration not available for version '.$version);
         }
-    }
-
-    /**
-     * Returns the step's name
-     *
-     * @return string
-     * @since 9.1.0
-     */
-    public function getName() {
-        return 'Passwords Legacy Database Migration';
     }
 }
