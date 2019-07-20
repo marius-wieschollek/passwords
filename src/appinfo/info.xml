@@ -107,6 +107,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <command>OCA\Passwords\Command\BackupCreateCommand</command>
         <command>OCA\Passwords\Command\BackupListCommand</command>
         <command>OCA\Passwords\Command\BackupRestoreCommand</command>
+        <command>OCA\Passwords\Command\BackupExportCommand</command>
+        <command>OCA\Passwords\Command\BackupImportCommand</command>
+        <command>OCA\Passwords\Command\BackupDeleteCommand</command>
     </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>

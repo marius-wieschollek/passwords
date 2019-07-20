@@ -40,7 +40,7 @@ class BackupCreateCommand extends Command {
     /**
      *
      */
-    protected function configure() {
+    protected function configure(): void {
         $this->setName('passwords:backup:create')
              ->addArgument('name', InputArgument::OPTIONAL, 'The name of the backup')
              ->setDescription('Create a new backup of the password database');
@@ -54,7 +54,7 @@ class BackupCreateCommand extends Command {
      * @throws \OCP\Files\NotPermittedException
      * @throws \OCP\Files\NotFoundException
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output): void {
         $argName = null;
         if($input->hasArgument('name')) {
             $argName = preg_replace('/[^\w\-\.]/', '', $input->getArgument('name'));
@@ -62,12 +62,8 @@ class BackupCreateCommand extends Command {
         }
 
         $backup = $this->backupService->createBackup($argName);
+        $info = $this->backupService->getBackupInfo($backup);
 
-        $name = $backup->getName();
-        $name = substr($name, 0, strpos($name, '.json'));
-        $size = Util::humanFileSize($backup->getSize());
-        $gzip = substr($backup->getName(), -2) === 'gz' ? 'compressed':'json';
-
-        $output->writeln(sprintf('Created new backup: %s, %s %s', $name, $size, $gzip));
+        $output->writeln(sprintf('Created new backup: %s, %s %s', $info['label'], $info['size'], $info['format']));
     }
 }
