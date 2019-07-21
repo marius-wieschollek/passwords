@@ -14,7 +14,7 @@ class EncryptionTestHelper {
      *
      */
     async initTests() {
-        if(await DeferredActivationService.check('encryption-tests')) return;
+        if(!await DeferredActivationService.check('encryption-tests')) return;
 
         if(!API.isAuthorized) {
             console.log('Encryption tests scheduled after login');
@@ -99,7 +99,14 @@ class EncryptionTestHelper {
      * @returns {Promise<*|boolean>}
      */
     async testPasswords() {
-        return await this.testObjects(await API.listPasswords(), 'password');
+        let type = 'password', passwords;
+        try {
+            passwords = await API.listPasswords();
+        } catch(e) {
+            return {type, stage: 'fetch', error: e};
+        }
+
+        return await this.testObjects(passwords, type);
     }
 
     /**
@@ -107,7 +114,14 @@ class EncryptionTestHelper {
      * @returns {Promise<*>}
      */
     async testFolders() {
-        return await this.testObjects(await API.listFolders(), 'folder');
+        let type = 'folder', folders;
+        try {
+            folders = await API.listFolders();
+        } catch(e) {
+            return {type, stage: 'fetch', error: e};
+        }
+
+        return await this.testObjects(folders, type);
     }
 
     /**
@@ -115,7 +129,13 @@ class EncryptionTestHelper {
      * @returns {Promise<*>}
      */
     async testTags() {
-        return await this.testObjects(await API.listTags(), 'tag');
+        let type = 'tag', tags;
+        try {
+            tags = await API.listTags();
+        } catch(e) {
+            return {type, stage: 'fetch', error: e};
+        }
+        return await this.testObjects(tags, type);
     }
 
     /**
@@ -156,7 +176,7 @@ class EncryptionTestHelper {
         result.crypto = !!window.crypto;
         result.textencoder = !!window.TextEncoder;
         result.app = process.env.APP_VERSION;
-        result.api = API.versionString;
+        result.api = API.getClientVersion();
         result.apps = Object.keys(oc_appswebroots);
 
         if(result.error) {

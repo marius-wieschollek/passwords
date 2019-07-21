@@ -62,7 +62,7 @@
         "webdriverio": "^5.11.6",
         "webpack": "^4.36.1",
         "webpack-cli": "^3.3.6",
-        "xlsx": "^0.14.3"
+        "xlsx": "^0.14.4"
     },
     "repository": {
         "type": "git",
