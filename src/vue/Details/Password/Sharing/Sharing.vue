@@ -4,7 +4,7 @@
                    class="cse-warning warning"
                    say="End-to-End encryption will be disabled for this password if you share it."
                    v-if="hasCse && shareable"/>
-        <div v-if="password.share && password.share.owner" class="shareby-info" :title="getShareTitle">
+        <div v-if="isSharedWithUser" class="shareby-info" :title="getShareTitle">
             <img :src="password.share.owner.icon">
             <translate say="{name} has shared this with you" :variables="password.share.owner"/>
         </div>
@@ -20,7 +20,7 @@
                    v-for="share in shares"
                    :key="share.id"/>
         </ul>
-        <ul class="user-search" v-if="matches.length !== 0">
+        <ul :class="getDropdownClasses" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)">
                 <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{match.name}}
             </li>
@@ -81,6 +81,9 @@
         },
 
         computed: {
+            isSharedWithUser() {
+                return this.password.share && this.password.share.owner;
+            },
             getSharedWithUsers() {
                 let users = [];
                 for(let i in this.shares) {
@@ -106,6 +109,13 @@
                 }
 
                 return text;
+            },
+            getDropdownClasses() {
+                let classes = ['user-search'];
+
+                if(this.isSharedWithUser) classes.push('shared-with');
+
+                return classes;
             }
         },
 
@@ -286,6 +296,10 @@
             background-color : var(--color-main-background);
             color            : var(--color-primary);
             border           : 1px solid var(--color-primary);
+
+            &.shared-with {
+                top : 77px;
+            }
 
             li {
                 line-height : 32px;
