@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2019.8.0 - Feature release
 ### Added
  - Sharing now available from menu
  - Support user hiding in guests app
