@@ -4,11 +4,14 @@
  - Support user hiding in guests app
  - Backup Import/Export
  - SafeInCloud CSV import
+ - Line break option for custom CSV
 ### Changed
  - Login screen now skipped entirely if not needed
  - CLI now allows custom backup names
 ### Fixed
  - Correct handling of empty files in import
+ - Display file reading errors in import
+ - Respect bad quotes setting in import
 
 ## 2019.7.2 - Bugfix release
 ### Fixed
