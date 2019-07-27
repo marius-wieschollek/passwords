@@ -474,6 +474,7 @@
                 let oldMime = this.mime;
                 this.progress.status = null;
                 this.csv.badQuotes = false;
+                this.csv.newLine = 'auto';
                 this.options.mode = 3;
                 this.mime = 'text/csv';
                 this.type = 'csv';
