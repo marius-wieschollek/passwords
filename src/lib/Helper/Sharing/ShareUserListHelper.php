@@ -7,8 +7,11 @@
 
 namespace OCA\Passwords\Helper\Sharing;
 
+use OC;
+use OCA\Guests\UserBackend;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\QueryException;
 use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\IUserManager;
@@ -158,7 +161,13 @@ class ShareUserListHelper {
         if($this->shareManager->shareWithGroupMembersOnly()) return true;
 
         if($this->config->isAppEnabled('guests') && $this->config->getAppValue('hide_users', 'true', 'guests') === 'true') {
-            return true;
+            try {
+                $guestBackend = OC::$server->query(UserBackend::class);
+
+                return $guestBackend->userExists($this->userId);
+            } catch(QueryException $e) {
+                return true;
+            }
         }
 
         return false;
