@@ -2,6 +2,7 @@
 ## 2019.8.1 - Bugfix release
 ### Fixed
   - "Hide users from guests" applied to all users
+  - Some integrations not reported in server survey
 
 ## 2019.8.0 - Feature release
 ### Added
