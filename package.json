@@ -1,6 +1,6 @@
 {
     "name": "ncpasswords",
-    "version": "2019.8.0",
+    "version": "2019.8.1",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -31,7 +31,7 @@
     "devDependencies": {
         "blueimp-gallery": "^2.34.1",
         "clean-webpack-plugin": "^1.0.1",
-        "codeceptjs": "^2.2.0",
+        "codeceptjs": "^2.2.1",
         "copy-webpack-plugin": "^5.0.4",
         "css-loader": "^2.1.1",
         "csv-hero": "0.0.4",
