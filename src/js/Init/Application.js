@@ -102,7 +102,12 @@ class Application {
      * @private
      */
     _checkLoginRequirement() {
-        this._loginRequired = document.querySelector('meta[name=pw-authenticate]').getAttribute('content') === 'true';
+        let impersonateEl  = document.querySelector('meta[name=pw-impersonate]'),
+            authenticateEl = document.querySelector('meta[name=pw-authenticate]');
+
+        if(authenticateEl && impersonateEl) {
+            this._loginRequired = authenticateEl.getAttribute('content') === 'true' || impersonateEl.getAttribute('content') === 'true';
+        }
 
         if(!this._loginRequired) {
             document.body.classList.remove('pw-authorize');
