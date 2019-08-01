@@ -122,7 +122,7 @@
         "%s tried to log into your account on %s."                                                  : "%s hat am %s versucht, sich in deinem Konto anzumelden.",
         "%s logged into your account on %s."                                                        : "%s sich am %s in deinem Konto angemeldet.",
         "Since you use a master password, this does not mean that access to your data was granted." : "Da du ein Master-Passwort verwendest, bedeutet dies nicht, dass Zugriff auf deine Daten gewährt wurde.",
-        "To prevent unwanted access to your data, you should set up a master password."             : "Um unerwünschten Zugriff auf deine Daten zu verhindern, solltest du ein Master-Passwort einrichten.",
+        "To prevent unwanted access to your data, you should set up a master password."             : "Um unerwünschten Zugriff auf deine Daten zu verhindern solltest du ein Master-Passwort einrichten.",
         "Legacy API: Time to say goodbye!"                                                          : "Legacy API: Das Ende naht!",
         "\"%s\" uses an outdated API which will be removed."                                        : "\"%s\" verwendet eine veraltete API die bald entfernt wird.",
         "This API does not support encryption and will deliver incomplete data."                    : "Diese API unterstützt keine Verschlüsselung und liefert daher unvollständige Daten.",

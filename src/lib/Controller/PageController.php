@@ -71,7 +71,9 @@ class PageController extends Controller {
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
+     * @param UserTokenHelper      $userTokenHelper
      * @param NotificationService  $notifications
+     * @param UserChallengeService $challengeService
      */
     public function __construct(
         IRequest $request,
@@ -144,9 +146,8 @@ class PageController extends Controller {
         $authenticate = $this->challengeService->hasChallenge() || $this->userTokenHelper->hasToken() ? 'true':'false';
         Util::addHeader('meta', ['name' => 'pw-authenticate', 'content' => $authenticate]);
 
-        if(!$this->environment->isImpersonating()) {
-            Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $this->environment->isImpersonating()]);
-        }
+        $impersonate = $this->environment->isImpersonating() ? 'true':'false';
+        Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $impersonate]);
     }
 
     /**

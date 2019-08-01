@@ -46,6 +46,11 @@
     export default {
         components: {Field, Translate},
         data() {
+            let impersonateEl = document.querySelector('meta[name=pw-impersonate]'),
+                impersonating = false;
+
+            if(impersonateEl) impersonating = impersonateEl.getAttribute('content') === 'true';
+
             return {
                 password     : '',
                 token        : '',
@@ -60,7 +65,7 @@
                 errorMessage : '',
                 loggingIn    : false,
                 retryClass   : '',
-                impersonating: document.querySelector('meta[name=pw-impersonate]') === null
+                impersonating
             };
         },
 
