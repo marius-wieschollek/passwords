@@ -15,7 +15,7 @@ if($_['https']) {
     script(Application::APP_NAME, ['Static/compatibility', 'Static/utility', 'Static/app']);
     ?>
     <span data-constant="imagePath" data-value="<?php print_unescaped(image_path('passwords', '')); ?>"></span>
-    <div id="main"></div>
+    <div id="main" class="loading"></div>
 <?php } else {
     print_unescaped($this->inc('partials/https'));
 } ?>
