@@ -52,19 +52,19 @@
             if(impersonateEl) impersonating = impersonateEl.getAttribute('content') === 'true';
 
             return {
-                password     : '',
-                token        : '',
-                salts        : [],
-                providerId   : -1,
-                provider     : null,
-                providers    : [],
-                hasPassword  : false,
-                hasToken     : false,
-                hasError     : false,
-                pwAlgorithm  : '',
-                errorMessage : '',
-                loggingIn    : false,
-                retryClass   : '',
+                password    : '',
+                token       : '',
+                salts       : [],
+                providerId  : -1,
+                provider    : null,
+                providers   : [],
+                hasPassword : false,
+                hasToken    : false,
+                hasError    : false,
+                pwAlgorithm : '',
+                errorMessage: '',
+                loggingIn   : false,
+                retryClass  : '',
                 impersonating
             };
         },
@@ -213,8 +213,9 @@
 <style lang="scss">
     body#body-user {
         &:not(.pw-authorized):not(.pw-no-authorize) {
-            background      : var(--color-primary) var(--pw-image-login-background);
-            background-size : cover;
+            background        : var(--color-primary) var(--pw-image-login-background);
+            background-size   : cover;
+            background-repeat : no-repeat;
 
             #header {
                 background : rgba(0, 0, 0, 0) none !important;
@@ -392,18 +393,19 @@
     body#body-user {
         &.pw-authorize {
             #app-content {
-                position        : fixed;
-                top             : 0;
-                left            : 0;
-                bottom          : 0;
-                right           : 0;
-                margin-left     : 0 !important;
-                display         : flex;
-                align-items     : center;
-                background      : var(--color-primary) var(--pw-image-login-background);
-                background-size : cover;
-                opacity         : 1;
-                transition      : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
+                position          : fixed;
+                top               : 0;
+                left              : 0;
+                bottom            : 0;
+                right             : 0;
+                margin-left       : 0 !important;
+                display           : flex;
+                align-items       : center;
+                background        : var(--color-primary) var(--pw-image-login-background);
+                background-size   : cover;
+                background-repeat : no-repeat;
+                opacity           : 1;
+                transition        : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
             }
 
             #app-navigation {

@@ -1,5 +1,7 @@
 ## [Unreleased]
 ## 2019.8.1 - Bugfix release
+### Changed
+ - Login screen ignores missing meta tags
 ### Fixed
   - "Hide users from guests" applied to all users
   - Some integrations not reported in server survey

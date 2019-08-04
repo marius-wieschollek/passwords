@@ -54,13 +54,14 @@ class Application {
         clearInterval(this._timer);
         this._loaded = true;
         this._initSettings();
-        this._initApi();
-        this._checkLoginRequirement();
-        this._initVue();
-        SearchManager.init();
-        EventManager.init();
-        KeepAliveManager.init();
-        EncryptionTestHelper.initTests();
+        if(this._initApi()) {
+            this._checkLoginRequirement();
+            this._initVue();
+            SearchManager.init();
+            EventManager.init();
+            KeepAliveManager.init();
+            EncryptionTestHelper.initTests();
+        }
     }
 
     // noinspection JSMethodCanBeStatic
@@ -75,25 +76,28 @@ class Application {
 
     /**
      *
-     * @returns {Promise<void>}
+     * @returns {boolean}
      * @private
      */
     _initApi() {
         let baseUrl    = Utility.generateUrl(),
-            user       = document.querySelector('meta[name=api-user]').getAttribute('content'),
-            token      = document.querySelector('meta[name=api-token]').getAttribute('content'),
+            userEl     = document.querySelector('meta[name=api-user]'),
+            tokenEl    = document.querySelector('meta[name=api-token]'),
+            user       = userEl ? userEl.getAttribute('content'):null,
+            token      = tokenEl ? tokenEl.getAttribute('content'):null,
             cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
             folderIcon = SettingsService.get('server.theme.folder.icon');
 
-        if(!token) {
+        if(!user || !token) {
             Messages.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
                 .then(() => { location.reload(); });
-            return;
+            return false;
         }
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
         API.initialize({baseUrl, user, password: token, folderIcon, cseMode, events: this._events});
+        return true;
     }
 
     /**
