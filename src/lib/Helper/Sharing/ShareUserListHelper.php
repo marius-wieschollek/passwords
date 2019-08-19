@@ -106,6 +106,7 @@ class ShareUserListHelper {
         $partners   = [];
         $userGroups = $this->groupManager->getUserGroupIds($this->user);
         foreach($userGroups as $userGroup) {
+            if($userGroup === 'guest_app') continue;
             $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, $limit);
             foreach($users as $uid => $name) {
                 if($uid == $this->userId) continue;
@@ -148,7 +149,7 @@ class ShareUserListHelper {
         $user       = $this->userManager->get($uid);
         $userGroups = $this->groupManager->getUserGroupIds($this->user);
         foreach($userGroups as $userGroup) {
-            if($this->groupManager->get($userGroup)->inGroup($user)) return true;
+            if($this->groupManager->get($userGroup)->inGroup($user) && $userGroup !== 'guest_app') return true;
         }
 
         return false;
