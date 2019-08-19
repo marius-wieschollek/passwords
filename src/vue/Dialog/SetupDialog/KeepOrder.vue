@@ -12,7 +12,7 @@
         components: {Translate},
         computed: {
             imagePath() {
-                return oc_appswebroots.passwords + '/img/demo-folders.webm';
+                return OC.appswebroots.passwords + '/img/demo-folders.webm';
             }
         }
     };

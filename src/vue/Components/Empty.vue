@@ -29,7 +29,7 @@
         data() {
             return {
                 search: SearchManager.status,
-                icon  : oc_appswebroots.passwords + '/img/app-themed.svg'
+                icon  : OC.appswebroots.passwords + '/img/app-themed.svg'
             };
         },
         computed  : {

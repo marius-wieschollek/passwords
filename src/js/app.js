@@ -5,7 +5,7 @@ import Application from '@js/Init/Application';
  *
  * @type {string}
  */
-__webpack_public_path__ = `${oc_appswebroots.passwords}/`;
+__webpack_public_path__ = `${OC.appswebroots.passwords}/`;
 
 (function() {
     if(location.protocol !== 'https:') {

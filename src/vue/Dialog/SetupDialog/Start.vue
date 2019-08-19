@@ -7,7 +7,7 @@
         computed: {
             getStyle() {
                 return {
-                    'background-image': 'url(' + oc_appswebroots.firstrunwizard + '/img/intro.png)'
+                    'background-image': 'url(' + OC.appswebroots.firstrunwizard + '/img/intro.png)'
                 }
             }
         }
