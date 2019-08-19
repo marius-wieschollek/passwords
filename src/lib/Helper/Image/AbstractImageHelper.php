@@ -188,8 +188,13 @@ abstract class AbstractImageHelper {
 
     /**
      * @return string
+     * @TODO: Remove legacy check in 2020.1
      */
     public function getDefaultFont(): string {
+        if(version_compare(\OC::$server->getConfig()->getSystemValue('version'), '17.0.0.0') >= 0) {
+            return \OC::$SERVERROOT.'/core/fonts/NotoSans-Regular.ttf';
+        }
+
         return \OC::$SERVERROOT.'/core/fonts/Nunito-Regular.ttf';
     }
 }
