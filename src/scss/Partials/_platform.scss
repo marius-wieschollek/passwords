@@ -9,3 +9,21 @@
         max-height : 90px;
     }
 }
+
+#app[data-server-version="17"] {
+    #controls .crumbmenu.active .menu, #controls .passwords-more-menu.active .menu {
+        max-height : 90px;
+    }
+
+    > #app-navigation > ul {
+        height: auto;
+
+        &.menu-main {
+            height: 100%;
+        }
+
+        &#app-settings.open {
+            flex-shrink: 0;
+        }
+    }
+}
