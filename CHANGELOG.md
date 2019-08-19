@@ -1,4 +1,11 @@
 ## [Unreleased]
+### Added
+ - Nextcloud 17 support
+### Changed
+ - Virtual guest group by guests app now ignored
+### Fixed
+ - User name input not shown in sharing tab
+
 ## 2019.8.1 - Bugfix release
 ### Changed
  - Login screen ignores missing meta tags
