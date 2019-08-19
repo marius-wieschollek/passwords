@@ -84,7 +84,7 @@ class ServerReportHelper {
         if(!$this->hasData()) return null;
 
         $report = [
-            'version'    => $this->getVersions(),
+            'version'     => $this->getVersions(),
             'environment' => $this->getEnvironment()
         ];
 
@@ -154,7 +154,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getServices(): array {
-        $words = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
+        $words  = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
         $images = HelperService::getImageHelperName($this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK));
 
         $previewApi = false;
@@ -163,7 +163,7 @@ class ServerReportHelper {
             $previewApi = $this->serviceSettings->get('preview.api')['value'] !== '';
 
             $faviconSetting = $this->serviceSettings->get('favicon.api');
-            $faviconApi = $faviconSetting['value'] !== $faviconSetting['default'];
+            $faviconApi     = $faviconSetting['value'] !== $faviconSetting['default'];
         } catch(ApiException $e) {
         }
 
@@ -194,16 +194,13 @@ class ServerReportHelper {
     protected function getApps(): array {
         $appClass = new \OC_App();
         $apps     = $appClass->listAllApps();
-        $data     = [
-            'passman'  => [
+        $data     = [];
+        foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate'] as $app) {
+            $data[ $app ] = [
                 'installed' => false,
-                'enabled'   => false,
-            ],
-            'unsplash' => [
-                'installed' => false,
-                'enabled'   => false,
-            ]
-        ];
+                'enabled'   => false
+            ];
+        }
 
         foreach($apps as $app) {
             if(isset($data[ $app['id'] ])) {

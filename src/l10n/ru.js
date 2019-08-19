@@ -160,6 +160,7 @@
             'Passwords CSV'                       : 'CSV-файл паролей',
             'Folder CSV'                          : 'CSV-файл папок',
             'Custom CSV'                          : 'Пользовательский CSV-файл',
+            'Other / Custom CSV'                  : 'Пользовательский CSV-файл',
             'Select File'                         : 'Выбор файла',
             'Select Options'                      : 'Выбор опций',
             'Conflict handling'                   : 'Обработка конфликтов',

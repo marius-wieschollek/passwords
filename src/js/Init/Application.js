@@ -16,17 +16,26 @@ import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 class Application {
 
     get app() {
-        return this._app
+        return this._app;
     }
 
     get events() {
-        return this._events
+        return this._events;
+    }
+
+    get loginRequired() {
+        return this._loginRequired;
+    }
+
+    set loginRequired(value) {
+        return this._loginRequired = value;
     }
 
     constructor() {
         this._loaded = false;
-        this._timer  = null;
-        this._app    = null;
+        this._timer = null;
+        this._app = null;
+        this._loginRequired = true;
         this._events = new EventEmitter();
     }
 
@@ -45,12 +54,14 @@ class Application {
         clearInterval(this._timer);
         this._loaded = true;
         this._initSettings();
-        this._initApi();
-        this._initVue();
-        SearchManager.init();
-        EventManager.init();
-        KeepAliveManager.init();
-        EncryptionTestHelper.initTests();
+        if(this._initApi()) {
+            this._checkLoginRequirement();
+            this._initVue();
+            SearchManager.init();
+            EventManager.init();
+            KeepAliveManager.init();
+            EncryptionTestHelper.initTests();
+        }
     }
 
     // noinspection JSMethodCanBeStatic
@@ -65,25 +76,48 @@ class Application {
 
     /**
      *
-     * @returns {Promise<void>}
+     * @returns {boolean}
      * @private
      */
     _initApi() {
         let baseUrl    = Utility.generateUrl(),
-            user       = document.querySelector('meta[name=api-user]').getAttribute('content'),
-            token      = document.querySelector('meta[name=api-token]').getAttribute('content'),
+            userEl     = document.querySelector('meta[name=api-user]'),
+            tokenEl    = document.querySelector('meta[name=api-token]'),
+            user       = userEl ? userEl.getAttribute('content'):null,
+            token      = tokenEl ? tokenEl.getAttribute('content'):null,
             cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
             folderIcon = SettingsService.get('server.theme.folder.icon');
 
-        if(!token) {
+        if(!user || !token) {
             Messages.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
                 .then(() => { location.reload(); });
-            return;
+            return false;
         }
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
         API.initialize({baseUrl, user, password: token, folderIcon, cseMode, events: this._events});
+        return true;
+    }
+
+    /**
+     * Check if the user needs to authenticate
+     *
+     * @private
+     */
+    _checkLoginRequirement() {
+        let impersonateEl  = document.querySelector('meta[name=pw-impersonate]'),
+            authenticateEl = document.querySelector('meta[name=pw-authenticate]');
+
+        if(authenticateEl && impersonateEl) {
+            this._loginRequired = authenticateEl.getAttribute('content') === 'true' || impersonateEl.getAttribute('content') === 'true';
+        }
+
+        if(!this._loginRequired) {
+            document.body.classList.remove('pw-authorize');
+            document.body.classList.add('pw-no-authorize');
+            API.openSession({});
+        }
     }
 
     /**
@@ -101,7 +135,7 @@ class Application {
         );
 
         router.beforeEach((to, from, next) => {
-            if(!API.isAuthorized && to.name !== 'Authorize') {
+            if(!API.isAuthorized && this._loginRequired && to.name !== 'Authorize') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});

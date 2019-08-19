@@ -11,7 +11,7 @@
             <span class="date">{{ object.edited.toLocaleDateString() }}</span>
             <tags :password="object"/>
         </div>
-        <tabs :tabs="getTabs">
+        <tabs :tabs="getTabs" :initial-tab="section">
             <pw-details slot="details" :password="object"/>
             <notes slot="notes" :password="object"/>
             <div slot="share">
@@ -56,6 +56,9 @@
         props: {
             password: {
                 type: Object
+            },
+            section: {
+                type: String
             }
         },
 
@@ -102,14 +105,24 @@
                     element: null
                 };
             },
-            refreshView() {
-                API.showPassword(this.object.id, 'model+folder+shares+tags+revisions')
-                   .then(
-                       (p) => { if(this.password.id === p.id) this.object = p; }
-                   );
+            async refreshView() {
+                let password = await API.showPassword(this.object.id, 'model+folder+shares+tags+revisions');
+                if(this.password.id === password.id) {
+                    if(password.trashed && this.$route.name !== 'Trash' || !password.trashed && this.$route.name === 'Trash') {
+                        this.closeDetails();
+                    } else {
+                        this.object = password;
+                    }
+                }
             },
             processEvent(event) {
-                if(event.object.id === this.object.id) this.refreshView();
+                if(event.object.id === this.object.id) {
+                    if(event.object.trashed && this.$route.name !== 'Trash' || !event.object.trashed && this.$route.name === 'Trash') {
+                        this.closeDetails();
+                    } else {
+                        this.refreshView();
+                    }
+                }
             }
         },
 

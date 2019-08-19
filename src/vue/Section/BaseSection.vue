@@ -2,30 +2,30 @@
     <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
             <breadcrumb
-                :showAddNew="getBreadcrumb.showAddNew"
-                :newPassword="getBreadcrumb.newPassword"
-                :newFolder="getBreadcrumb.newFolder"
-                :newTag="getBreadcrumb.newTag"
-                :folder="getBreadcrumb.folder"
-                :tag="getBreadcrumb.tag"
-                :items="getBreadcrumb.items"/>
+                    :showAddNew="getBreadcrumb.showAddNew"
+                    :newPassword="getBreadcrumb.newPassword"
+                    :newFolder="getBreadcrumb.newFolder"
+                    :newTag="getBreadcrumb.newTag"
+                    :folder="getBreadcrumb.folder"
+                    :tag="getBreadcrumb.tag"
+                    :items="getBreadcrumb.items"/>
             <div class="item-list">
                 <header-line :field="sorting.field"
                              :ascending="sorting.ascending"
                              v-on:updateSorting="updateSorting($event)"
                              v-if="isNotEmpty"/>
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="isDraggable"/>
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" :draggable="isDraggable"/>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="isDraggable" v-if="!loading"/>
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" :draggable="isDraggable" v-if="!loading"/>
                 <password-line :password="password"
                                v-for="password in passwords"
                                :key="password.id"
-                               :draggable="isDraggable"/>
+                               :draggable="isDraggable" v-if="!loading"/>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
                 <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element" :section="detail.section"/>
         </div>
     </div>
 </template>
@@ -65,7 +65,8 @@
                 loading  : true,
                 detail   : {
                     type   : 'none',
-                    element: null
+                    element: null,
+                    section: 'default'
                 },
                 sorting  : {
                     field    : SettingsService.get('local.ui.sorting.field', 'label'),
@@ -138,9 +139,11 @@
 
                 if(this.passwords) {
                     this.passwords =
-                        Utility.sortApiObjectArray(this.passwords,
-                                                   this.getPasswordsSortingField(),
-                                                   this.sorting.ascending);
+                        Utility.sortApiObjectArray(
+                            this.passwords,
+                            this.getPasswordsSortingField(),
+                            this.sorting.ascending
+                        );
                 }
                 if(this.folders) {
                     this.folders =

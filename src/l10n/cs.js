@@ -160,6 +160,7 @@
             'Passwords CSV'                       : 'Hesla v CSV',
             'Folder CSV'                          : 'Složky v CSV',
             'Custom CSV'                          : 'Vlastní CSV',
+            'Other / Custom CSV'                  : 'Vlastní CSV',
             'Select File'                         : 'Vyberte soubor',
             'Select Options'                      : 'Možnosti',
             'Conflict handling'                   : 'O konfliktech',

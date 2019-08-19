@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Command;
 
@@ -27,13 +32,13 @@ class BackupListCommand extends Command {
     public function __construct(BackupService $backupService) {
         $this->backupService = $backupService;
 
-        parent::__construct(null);
+        parent::__construct();
     }
 
     /**
      *
      */
-    protected function configure() {
+    protected function configure(): void {
         $this->setName('passwords:backup:list')
              ->setDescription('Print a list of the available backups');
     }
@@ -45,19 +50,16 @@ class BackupListCommand extends Command {
      * @return int|null|void
      * @throws \OCP\Files\NotPermittedException
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output): void {
         $backups = $this->backupService->getBackups();
 
         if(empty($backups)) $output->writeln('No backups found');
 
         $output->writeln('The following backups are available:');
         foreach($backups as $backup) {
-            $name = $backup->getName();
-            $name = substr($name, 0, strpos($name, '.json'));
-            $size = str_pad(\OCP\Util::humanFileSize($backup->getSize()), 7, ' ', STR_PAD_LEFT);
-            $gzip = substr($backup->getName(), -2) === 'gz' ? 'compressed':'json';
+            $info = $this->backupService->getBackupInfo($backup);
 
-            $output->writeln(sprintf('   %s  %s %s', $name, $size, $gzip));
+            $output->writeln(sprintf('   %-20s  %s %s', $info['label'], $info['size'], $info['format']));
         }
     }
 }

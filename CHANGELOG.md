@@ -1,3 +1,26 @@
+## [Unreleased]
+## 2019.8.1 - Bugfix release
+### Changed
+ - Login screen ignores missing meta tags
+### Fixed
+  - "Hide users from guests" applied to all users
+  - Some integrations not reported in server survey
+
+## 2019.8.0 - Feature release
+### Added
+ - Sharing now available from menu
+ - Support user hiding in guests app
+ - Backup Import/Export
+ - SafeInCloud CSV import
+ - Line break option for custom CSV
+### Changed
+ - Login screen now skipped entirely if not needed
+ - CLI now allows custom backup names
+### Fixed
+ - Correct handling of empty files in import
+ - Display file reading errors in import
+ - Respect bad quotes setting in import
+
 ## 2019.7.2 - Bugfix release
 ### Fixed
  - Migration does not create uuids for deleted items

@@ -170,9 +170,9 @@ class ApiTokenHelper {
      * @throws \Exception
      */
     protected function loadWebUiToken() {
-        if($this->config->getUserValue('webui_token_id', false) !== false) {
-            $this->destroyLegacyToken();
-        }
+        // @TODO remove in 2020.1
+        if($this->config->hasUserValue('webui_token_id')) $this->destroyLegacyToken();
+        if($this->environment->isImpersonating()) return false;
 
         $token   = $this->session->get(self::WEBUI_TOKEN);
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);

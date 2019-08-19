@@ -40,7 +40,7 @@ if($isAdmin) {
 
 ?>
 <div id="main">
-    <div class="passwords-browser-compatibility">
+    <div class="passwords-https-report">
         <h1 class="title"><?php p($title); ?></h1>
         <div class="message">
             <b><?php print_unescaped($messageHead); ?></b>

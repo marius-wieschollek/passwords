@@ -46,26 +46,31 @@
     export default {
         components: {Field, Translate},
         data() {
+            let impersonateEl = document.querySelector('meta[name=pw-impersonate]'),
+                impersonating = false;
+
+            if(impersonateEl) impersonating = impersonateEl.getAttribute('content') === 'true';
+
             return {
-                password     : '',
-                token        : '',
-                salts        : [],
-                providerId   : -1,
-                provider     : null,
-                providers    : [],
-                hasPassword  : false,
-                hasToken     : false,
-                hasError     : false,
-                pwAlgorithm  : '',
-                errorMessage : '',
-                loggingIn    : false,
-                retryClass   : '',
-                impersonating: document.querySelector('meta[name=pw-impersonate]') === null
+                password    : '',
+                token       : '',
+                salts       : [],
+                providerId  : -1,
+                provider    : null,
+                providers   : [],
+                hasPassword : false,
+                hasToken    : false,
+                hasError    : false,
+                pwAlgorithm : '',
+                errorMessage: '',
+                loggingIn   : false,
+                retryClass  : '',
+                impersonating
             };
         },
 
         created() {
-            document.body.classList.remove('pw-authorized');
+            document.body.classList.remove('pw-no-authorize', 'pw-authorized');
             document.body.classList.add('pw-authorize');
             API.requestSession()
                 .then((d) => {
@@ -207,9 +212,10 @@
 
 <style lang="scss">
     body#body-user {
-        &:not(.pw-authorized) {
-            background      : var(--color-primary) var(--pw-image-login-background);
-            background-size : cover;
+        &:not(.pw-authorized):not(.pw-no-authorize) {
+            background        : var(--color-primary) var(--pw-image-login-background);
+            background-size   : cover;
+            background-repeat : no-repeat;
 
             #header {
                 background : rgba(0, 0, 0, 0) none !important;
@@ -387,25 +393,27 @@
     body#body-user {
         &.pw-authorize {
             #app-content {
-                position        : fixed;
-                top             : 0;
-                left            : 0;
-                bottom          : 0;
-                right           : 0;
-                margin-left     : 0 !important;
-                display         : flex;
-                align-items     : center;
-                background      : var(--color-primary) var(--pw-image-login-background);
-                background-size : cover;
-                opacity         : 1;
-                transition      : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
+                position          : fixed;
+                top               : 0;
+                left              : 0;
+                bottom            : 0;
+                right             : 0;
+                margin-left       : 0 !important;
+                display           : flex;
+                align-items       : center;
+                background        : var(--color-primary) var(--pw-image-login-background);
+                background-size   : cover;
+                background-repeat : no-repeat;
+                opacity           : 1;
+                transition        : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
             }
 
             #app-navigation {
                 z-index : 1001;
             }
 
-            &.pw-authorized {
+            &.pw-authorized,
+            &.pw-no-authorize {
                 #app-content {
                     margin-left : 0;
                     opacity     : 0;
@@ -419,6 +427,14 @@
                 background-color : var(--color-primary);
             }
 
+            @media (min-width : $width-small) {
+                #app-navigation {
+                    transform : translateX(0);
+                }
+            }
+        }
+
+        &.pw-no-authorize {
             @media (min-width : $width-small) {
                 #app-navigation {
                     transform : translateX(0);

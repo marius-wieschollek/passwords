@@ -1,6 +1,7 @@
 import API from "@js/Helper/api";
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
+import Application from '@js/Init/Application';
 import Localisation from '@js/Classes/Localisation';
 import EventManager from '@js/Manager/EventManager';
 
@@ -38,6 +39,7 @@ class EncryptionManager {
         }
 
         if(save) await this._saveMasterPassword(password);
+        Application.loginRequired = true;
     }
 
     /**

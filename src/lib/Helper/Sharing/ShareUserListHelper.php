@@ -7,6 +7,11 @@
 
 namespace OCA\Passwords\Helper\Sharing;
 
+use OC;
+use OCA\Guests\UserBackend;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\QueryException;
 use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\IUserManager;
@@ -20,7 +25,7 @@ use OCP\Share\IManager;
 class ShareUserListHelper {
 
     const USER_SEARCH_MINIMUM = 5;
-    const USER_SEARCH_LIMIT = 256;
+    const USER_SEARCH_LIMIT   = 256;
 
     /**
      * @var IUser
@@ -31,6 +36,11 @@ class ShareUserListHelper {
      * @var string
      */
     protected $userId;
+
+    /**
+     * @var ConfigurationService
+     */
+    protected $config;
 
     /**
      * @var IUserManager
@@ -50,22 +60,25 @@ class ShareUserListHelper {
     /**
      * ShareUserListHelper constructor.
      *
-     * @param IUser         $user
-     * @param IManager      $shareManager
-     * @param IUserManager  $userManager
-     * @param IGroupManager $groupManager
+     * @param IManager             $shareManager
+     * @param IUserManager         $userManager
+     * @param IGroupManager        $groupManager
+     * @param ConfigurationService $config
+     * @param EnvironmentService   $environment
      */
     public function __construct(
-        IUser $user,
         IManager $shareManager,
         IUserManager $userManager,
-        IGroupManager $groupManager
+        IGroupManager $groupManager,
+        ConfigurationService $config,
+        EnvironmentService $environment
     ) {
-        $this->user         = $user;
-        $this->userId       = $user->getUID();
+        $this->user         = $environment->getUser();
+        $this->userId       = $environment->getUserId();
         $this->userManager  = $userManager;
         $this->groupManager = $groupManager;
         $this->shareManager = $shareManager;
+        $this->config       = $config;
     }
 
     /**
@@ -78,7 +91,7 @@ class ShareUserListHelper {
         if(empty($limit) || $limit < self::USER_SEARCH_MINIMUM) $limit = self::USER_SEARCH_MINIMUM;
         if($limit > self::USER_SEARCH_LIMIT) $limit = self::USER_SEARCH_LIMIT;
 
-        if($this->shareManager->shareWithGroupMembersOnly()) return $this->getUsersFromUserGroup($pattern, $limit);
+        if($this->shareWithGroupMembersOnly()) return $this->getUsersFromUserGroup($pattern, $limit);
 
         return $this->getAllUsers($pattern, $limit);
     }
@@ -130,12 +143,31 @@ class ShareUserListHelper {
     public function canShareWithUser(string $uid): bool {
         if($uid === $this->userId) return false;
         if(!$this->userManager->userExists($uid)) return false;
-        if(!$this->shareManager->shareWithGroupMembersOnly()) return true;
+        if(!$this->shareWithGroupMembersOnly()) return true;
 
         $user       = $this->userManager->get($uid);
         $userGroups = $this->groupManager->getUserGroupIds($this->user);
         foreach($userGroups as $userGroup) {
             if($this->groupManager->get($userGroup)->inGroup($user)) return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function shareWithGroupMembersOnly(): bool {
+        if($this->shareManager->shareWithGroupMembersOnly()) return true;
+
+        if($this->config->isAppEnabled('guests') && $this->config->getAppValue('hide_users', 'true', 'guests') === 'true') {
+            try {
+                $guestBackend = OC::$server->query(UserBackend::class);
+
+                return $guestBackend->userExists($this->userId);
+            } catch(QueryException $e) {
+                return true;
+            }
         }
 
         return false;

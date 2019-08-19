@@ -7,6 +7,7 @@
 
         methods: {
             refreshView: function() {
+                this.loading = true;
                 let model = this.ui.showTags ? 'model+tags':'model';
                 API.listPasswords(model).then(this.updatePasswordList);
             }

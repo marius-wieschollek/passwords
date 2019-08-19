@@ -9,9 +9,11 @@ namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
+use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\StrictContentSecurityPolicy;
@@ -52,6 +54,16 @@ class PageController extends Controller {
     protected $notifications;
 
     /**
+     * @var UserTokenHelper
+     */
+    protected $userTokenHelper;
+
+    /**
+     * @var UserChallengeService
+     */
+    protected $challengeService;
+
+    /**
      * PageController constructor.
      *
      * @param IRequest             $request
@@ -59,7 +71,9 @@ class PageController extends Controller {
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
+     * @param UserTokenHelper      $userTokenHelper
      * @param NotificationService  $notifications
+     * @param UserChallengeService $challengeService
      */
     public function __construct(
         IRequest $request,
@@ -67,14 +81,18 @@ class PageController extends Controller {
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
         EnvironmentService $environment,
-        NotificationService $notifications
+        UserTokenHelper $userTokenHelper,
+        NotificationService $notifications,
+        UserChallengeService $challengeService
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->config        = $config;
-        $this->tokenHelper   = $tokenHelper;
-        $this->settings      = $settings;
-        $this->environment   = $environment;
-        $this->notifications = $notifications;
+        $this->config           = $config;
+        $this->tokenHelper      = $tokenHelper;
+        $this->settings         = $settings;
+        $this->environment      = $environment;
+        $this->notifications    = $notifications;
+        $this->userTokenHelper  = $userTokenHelper;
+        $this->challengeService = $challengeService;
     }
 
     /**
@@ -125,9 +143,11 @@ class PageController extends Controller {
         Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
         Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
 
-        if(!$this->environment->isImpersonating()) {
-            Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $this->environment->isImpersonating()]);
-        }
+        $authenticate = $this->challengeService->hasChallenge() || $this->userTokenHelper->hasToken() ? 'true':'false';
+        Util::addHeader('meta', ['name' => 'pw-authenticate', 'content' => $authenticate]);
+
+        $impersonate = $this->environment->isImpersonating() ? 'true':'false';
+        Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $impersonate]);
     }
 
     /**

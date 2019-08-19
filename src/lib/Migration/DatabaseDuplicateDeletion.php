@@ -25,6 +25,7 @@ use OCP\Migration\IRepairStep;
  * Class DatabaseDuplicateDeletion
  *
  * @package OCA\Passwords\Migration
+ * @TODO remove in 2020.1
  */
 class DatabaseDuplicateDeletion implements IRepairStep {
 
