@@ -37,6 +37,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NC16NotificationService;
 use OCA\Passwords\Services\NC17NotificationService;
+use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IGroupManager;
@@ -214,7 +215,9 @@ class Application extends App {
 
         if(version_compare($version, '17.0.0.0') >= 0) {
             $server->getNotificationManager()->registerNotifierService(NC17NotificationService::class);
+            $container->registerAlias(NotificationService::class, NC17NotificationService::class);
         } else {
+            $container->registerAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
             $server->getNotificationManager()->registerNotifier(
                 function () use ($container) {
                     return $container->query(NC16NotificationService::class);
@@ -225,6 +228,7 @@ class Application extends App {
                     return ['id' => self::APP_NAME, 'name' => $l->t('Passwords'),];
                 }
             );
+            $container->registerAlias(NotificationService::class, NC16NotificationService::class);
         }
     }
 }
