@@ -53,7 +53,9 @@
         },
 
         data() {
-            let shareable = typeof this.password.share === 'object' || this.password.share.shareable,
+            let shareable = this.password.share &&
+                            this.password.share.hasOwnProperty('shareable') &&
+                            this.password.share.shareable,
                 shares    = this.password.hasOwnProperty('shares') ? this.password.shares:[],
                 hasCse    = this.password.cseType !== 'none';
 
