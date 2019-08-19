@@ -15,6 +15,7 @@ class EncryptionTestHelper {
      */
     async initTests() {
         if(!await DeferredActivationService.check('encryption-tests')) return;
+        if(SettingsService.get('local.test.e2e.executed', false)) return;
 
         if(!API.isAuthorized) {
             console.log('Encryption tests scheduled after login');
@@ -22,12 +23,10 @@ class EncryptionTestHelper {
             return;
         }
 
-        let testExecuted = SettingsService.get('local.test.e2e.executed', false),
-            testTimeout  = SettingsService.get('local.test.e2e.timeout', 0);
-
-        if(testTimeout !== 0) {
+        let testTimeout  = SettingsService.get('local.test.e2e.timeout', 0);
+        if(testTimeout > 0) {
             SettingsService.set('local.test.e2e.timeout', testTimeout - 1);
-        } else if(!testExecuted) {
+        } else {
             setTimeout(() => {this.runTests();}, 15000);
         }
     }
@@ -177,7 +176,7 @@ class EncryptionTestHelper {
         result.textencoder = !!window.TextEncoder;
         result.app = process.env.APP_VERSION;
         result.api = API.getClientVersion();
-        result.apps = Object.keys(oc_appswebroots);
+        result.apps = Object.keys(OC.appswebroots);
 
         if(result.error) {
             let stack = ['no stack'];
