@@ -3,6 +3,7 @@
  - Nextcloud 17 support
 ### Changed
  - Virtual guest group by guests app now ignored
+ - Search field can now be reset with escape
 ### Fixed
  - User name input not shown in sharing tab
 
