@@ -316,6 +316,14 @@ class SearchManager {
                 this.search(searchbox.value);
             }
         });
+        document.addEventListener('keyup', (e) => {
+            if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
+            if(e.key !== 'Escape' || e.target.id !== 'searchbox') return;
+            if(!SettingsService.get('client.search.live')) return;
+            e.preventDefault();
+            searchbox.value = '';
+            this.search('');
+        });
     }
 }
 
