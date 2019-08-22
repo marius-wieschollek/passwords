@@ -4,6 +4,7 @@ import Messages from '@js/Classes/Messages';
 import Application from '@js/Init/Application';
 import Localisation from '@js/Classes/Localisation';
 import EventManager from '@js/Manager/EventManager';
+import SettingsService from "@js/Services/SettingsService";
 
 class EncryptionManager {
 
@@ -122,6 +123,7 @@ class EncryptionManager {
         this._sendStatus('keychain', 'processing', 1);
         try {
             await API.setAccountChallenge(password);
+            await Promise.all([await SettingsService.reset('encryption.cse'), await SettingsService.reset('encryption.sse')]);
             this._sendStatus('keychain', 'done');
         } catch(e) {
             this._sendStatus('keychain', 'error', e);
