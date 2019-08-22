@@ -360,11 +360,12 @@ class RestoreBackupHelper {
         foreach($userSettings as $uid => $settings) {
             if($user !== null && $user !== $uid) continue;
 
-            foreach($settings as $key => $value) {
-                if($value === null) {
-                    $this->userSettingsHelper->reset($key, $uid);
+            $keys = array_keys($this->userSettingsHelper->listRaw($uid));
+            foreach($keys as $key) {
+                if(isset($settings[$key]) && $settings[$key] !== null) {
+                    $this->userSettingsHelper->set($key, $settings[$key], $uid);
                 } else {
-                    $this->userSettingsHelper->set($key, $value, $uid);
+                    $this->userSettingsHelper->reset($key, $uid);
                 }
             }
         }
