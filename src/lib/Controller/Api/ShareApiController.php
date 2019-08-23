@@ -195,6 +195,7 @@ class ShareApiController extends AbstractApiController {
     ): JSONResponse {
         $this->checkAccessPermissions();
 
+        $receiver = $this->shareUserList->mapReceiverToUid($receiver);
         if(!$this->shareUserList->canShareWithUser($receiver)) throw new ApiException('Invalid receiver uid', 400);
 
         $share = $this->createPasswordShare->createPasswordShare(

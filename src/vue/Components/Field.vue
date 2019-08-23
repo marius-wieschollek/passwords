@@ -1,11 +1,14 @@
 <template>
     <component :is="tag"
                :type="type"
-               :value="value"
+               :value="userInput"
                ref="field"
                :placeholder="getPlaceholder"
                :title="getTitle"
-               @input="inputEvent()"/>
+               @input="inputEvent()"
+               @keyup="fireEvent($event)"
+               @keydown="fireEvent($event)"
+               @keypress="fireEvent($event)"/>
 </template>
 
 <script>
@@ -38,6 +41,11 @@
                 'default': 'input'
             }
         },
+        data() {
+            return {
+                userInput: this.value
+            }
+        },
         computed: {
             getPlaceholder() {
                 return this.placeholder ? Localisation.translate(this.placeholder, this.variables):false;
@@ -49,6 +57,15 @@
         methods : {
             inputEvent() {
                 this.$emit('input', this.$refs.field.value)
+            },
+            fireEvent($event) {
+                this.$emit($event.type, $event)
+            }
+        },
+        watch: {
+            value(value) {
+                this.$refs.field.value = value;
+                this.userInput = value;
             }
         }
     }

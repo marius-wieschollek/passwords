@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Sharing;
 
 use OC;
 use OCA\Guests\UserBackend;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\QueryException;
@@ -134,6 +135,22 @@ class ShareUserListHelper {
         }
 
         return $partners;
+    }
+
+    /**
+     * @param string $receiver
+     *
+     * @return string
+     * @throws ApiException
+     */
+    public function mapReceiverToUid(string $receiver): string {
+        $receiver = trim($receiver);
+        if($this->userManager->userExists($receiver)) return $receiver;
+
+        $partners = $this->getShareUsers($receiver);
+        if(count($partners) === 1) return array_keys($partners)[0];
+
+        throw new ApiException('Invalid receiver uid', 400);
     }
 
     /**

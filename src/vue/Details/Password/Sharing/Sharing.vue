@@ -3,7 +3,7 @@
         <translate tag="div"
                    class="cse-warning warning"
                    say="End-to-End encryption will be disabled for this password if you share it."
-                   v-if="hasCse && shareable"/>
+                   v-if="hasCse && canBeShared"/>
         <div v-if="isSharedWithUser" class="shareby-info" :title="getShareTitle">
             <img :src="password.share.owner.icon">
             <translate say="{name} has shared this with you" :variables="password.share.owner"/>
@@ -11,7 +11,7 @@
         <field v-model="search"
                class="share-add-user"
                placeholder="Search user"
-               @keypress="submitAction($event)" v-if="shareable"/>
+               @keypress="submitAction($event)" v-if="canBeShared"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
                    v-on:delete="deleteShare($event)"
@@ -53,18 +53,15 @@
         },
 
         data() {
-            let shareable = this.password.share &&
-                            this.password.share.hasOwnProperty('shareable') &&
-                            this.password.share.shareable,
-                shares    = this.password.hasOwnProperty('shares') ? this.password.shares:[],
-                hasCse    = this.password.cseType !== 'none';
+            let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
+                hasCse = this.password.cseType !== 'none';
+
 
             return {
                 search      : '',
                 matches     : [],
                 nameMap     : [],
                 idMap       : [],
-                shareable,
                 shares,
                 hasCse,
                 autocomplete: SettingsService.get('server.sharing.autocomplete'),
@@ -83,6 +80,17 @@
         },
 
         computed: {
+            canBeShared() {
+                return this.password.hasOwnProperty('share') &&
+                       (
+                           this.password.share === null ||
+                           (
+                               typeof this.password.share !== 'string' &&
+                               this.password.share.hasOwnProperty('shareable') &&
+                               this.password.share.shareable
+                           )
+                       );
+            },
             isSharedWithUser() {
                 return this.password.share && this.password.share.owner;
             },
@@ -123,7 +131,7 @@
 
         methods: {
             async searchUsers() {
-                if(this.search === '' || !this.autocomplete || !this.shareable) {
+                if(this.search === '' || !this.autocomplete || !this.canBeShared) {
                     this.matches = [];
                     return;
                 }
@@ -149,7 +157,7 @@
                 this.hasCse = false;
             },
             async addShare(receiver) {
-                if(!this.shareable) return;
+                if(!this.canBeShared) return;
                 if(this.hasCse) await this.disableCse();
 
                 let share = {
@@ -239,7 +247,6 @@
         watch: {
             password(value) {
                 this.shares = value.hasOwnProperty('shares') ? value.shares:[];
-                this.shareable = value.share === null || value.share.shareable;
                 this.$forceUpdate();
             },
             search() {

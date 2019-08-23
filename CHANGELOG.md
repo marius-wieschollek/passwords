@@ -8,6 +8,7 @@
  - User name input not shown in sharing tab
  - Import ignores client side encryption settings
  - Backup does not reset some user settings
+ - Sharing not possible if autocomplete disabled
 
 ## 2019.8.1 - Bugfix release
 ### Changed
