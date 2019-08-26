@@ -22,7 +22,7 @@ class SearchManager {
             tags     : 'data-tag-id'
         };
         this._exactMatchFields = ['status', 'favorite'];
-        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', user: 'username', all: ['website', 'username', 'url', 'notes', 'label']};
+        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', user: 'username', cse: 'cseType', sse: 'sseType', csetype: 'cseType', ssetype: 'ssetype', all: ['website', 'username', 'url', 'notes', 'label']};
     }
 
     init() {
