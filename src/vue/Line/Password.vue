@@ -17,7 +17,8 @@
             </li>
         </ul>
         <slot name="middle"/>
-        <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle"></i>
+        <router-link :to="securityRoute" tag="i" :class="securityCheck" class="fa fa-shield security duplicate" :title="securityTitle" v-if="password.statusCode === 'DUPLICATE'"/>
+        <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle" v-else></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -102,6 +103,9 @@
 
                 return Localisation.translate(label);
             },
+            securityRoute() {
+                return {name: 'Search', params: {query: btoa('hash:'+this.password.hash)}}
+            },
             showCopyOptions() {
                 return window.innerWidth < 361 || SettingsService.get('client.ui.password.menu.copy');
             },
@@ -144,14 +148,14 @@
 
         methods: {
             clickAction($event) {
-                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0)) return;
+                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsService.get('client.ui.password.click.action');
                 if(action !== 'none') this.runClickAction(action, 300);
             },
             doubleClickAction($event) {
-                if($event && $($event.target).closest('.more').length !== 0) return;
+                if($event && ($($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
                 let action = SettingsService.get('client.ui.password.dblClick.action');
 
                 if(action !== 'none') {
@@ -326,14 +330,22 @@
                     color       : $color-grey;
                     transition  : color 0.2s ease-in-out;
 
-                    &.icon,
-                    &.security {
-                        font-size : 1.25rem;
-                    }
-
                     &:active,
                     &:hover {
                         color : var(--color-main-text);
+                    }
+
+                    &.duplicate {
+                        transition  : color 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+                        &:hover {
+                            transform: scale(1.5);
+                        }
+                    }
+
+                    &.icon,
+                    &.security {
+                        font-size : 1.25rem;
                     }
 
                     &.ok {

@@ -1,14 +1,16 @@
 ## [Unreleased]
 ### Added
  - Nextcloud 17 support
+ - Password duplicate search
 ### Changed
- - Virtual guest group by guests app now ignored
+ - Virtual guest group from guests app now ignored in autocomplete
  - Search field can now be reset with escape
 ### Fixed
  - User name input not shown in sharing tab
  - Import ignores client side encryption settings
  - Backup does not reset some user settings
  - Sharing not possible if autocomplete disabled
+ - Some fields do not work in search
 
 ## 2019.8.1 - Bugfix release
 ### Changed

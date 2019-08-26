@@ -12,7 +12,7 @@ class SearchManager {
         this._status = {active: false, available: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
         this._index = null;
         this._indexFields = {
-            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType'],
+            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType', 'hash'],
             folders  : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType'],
             tags     : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType']
         };
@@ -22,7 +22,22 @@ class SearchManager {
             tags     : 'data-tag-id'
         };
         this._exactMatchFields = ['status', 'favorite'];
-        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', user: 'username', cse: 'cseType', sse: 'sseType', csetype: 'cseType', ssetype: 'ssetype', all: ['website', 'username', 'url', 'notes', 'label']};
+        this._aliasFields =
+            {
+                name      : 'label',
+                title     : 'label',
+                colour    : 'color',
+                favourite : 'favorite',
+                user      : 'username',
+                sha       : 'hash',
+                cse       : 'cseType',
+                sse       : 'sseType',
+                status    : 'statusCode',
+                csetype   : 'cseType',
+                ssetype   : 'sseType',
+                statuscode: 'statusCode',
+                all       : ['website', 'username', 'url', 'notes', 'label']
+            };
     }
 
     init() {
@@ -224,7 +239,7 @@ class SearchManager {
         if(this._aliasFields.hasOwnProperty(field)) field = this._aliasFields[field];
 
         let fields = Array.isArray(field) ? field:[field],
-            value = rawValue.trim();
+            value  = rawValue.trim();
 
         if(value.length !== 0) params.push({fields, value});
     }

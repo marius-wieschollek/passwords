@@ -19,7 +19,10 @@
 
         <translate tag="div" say="Security" class="header"/>
         <translate tag="div" say="Status">
-            <translate :say="getSecurityStatus" :class="getSecurityClass"/>
+            <router-link :to="hashSearchRoute" class="security-link" v-if="password.statusCode === 'DUPLICATE'">
+                <translate :say="getSecurityStatus" :class="getSecurityClass"/>
+            </router-link>
+            <translate :say="getSecurityStatus" :class="getSecurityClass" v-else/>
         </translate>
         <translate tag="div" say="Encryption on server">
             <translate :say="getSseType"/>
@@ -81,6 +84,9 @@
                 if(this.password.status === 1) return `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
 
                 return this.getSecurityClass.capitalize();
+            },
+            hashSearchRoute() {
+                return {name: 'Search', params: {query: btoa('hash:'+this.password.hash)}}
             },
             getCustomFields() {
                 let fields       = [],
@@ -156,6 +162,16 @@
 
                     &.visible {
                         font-family : var(--pw-mono-font-face);
+                    }
+                }
+
+                &.security-link {
+                    span {
+                        cursor: pointer;
+                    }
+
+                    &:hover {
+                        text-decoration-color: var(--color-warning);
                     }
                 }
 
