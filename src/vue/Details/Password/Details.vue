@@ -142,7 +142,7 @@
         padding-top : 10px;
 
         div:not(.header) {
-            font-size     : 0.9em;
+            font-size     : 0.8rem;
             font-style    : italic;
             margin-bottom : 5px;
             color         : var(--color-text-maxcontrast);
@@ -151,7 +151,7 @@
             span {
                 display    : block;
                 font-style : normal;
-                font-size  : 1.3em;
+                font-size  : 1rem;
                 color      : var(--color-text-lighter);
                 text-align : right;
                 cursor     : text;
@@ -191,7 +191,7 @@
 
         .header {
             margin-top  : 20px;
-            font-size   : 1.3em;
+            font-size   : 1rem;
             font-weight : bold;
             color       : var(--color-text-light);
         }
