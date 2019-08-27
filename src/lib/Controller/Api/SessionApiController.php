@@ -137,6 +137,7 @@ class SessionApiController extends AbstractApiController {
      * @param $provider
      *
      * @return JSONResponse
+     * @throws \ReflectionException
      */
     public function requestToken($provider): JSONResponse {
         list($result, $data) = $this->tokenHelper->triggerProvider($provider);

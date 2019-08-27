@@ -57,7 +57,7 @@ class UserTokenHelper {
      *
      * @var array
      */
-    protected $enabledProviders = ['totp', 'twofactor_nextcloud_notification', 'admin'];
+    protected $enabledProviders = ['totp', 'twofactor_nextcloud_notification', 'admin', 'email'];
 
     /**
      * UserTokenHelper constructor.
@@ -124,7 +124,7 @@ class UserTokenHelper {
                 'id'          => $id,
                 'label'       => $provider->getDisplayName(),
                 'description' => $provider->getDescription(),
-                'request'     => strpos($id, 'gateway') !== false || strpos($id, 'twofactor_nextcloud_notification') !== false
+                'request'     => strpos($id, 'gateway') !== false || strpos($id, 'twofactor_nextcloud_notification') !== false || $id === 'email'
             ];
         }
 
@@ -135,6 +135,7 @@ class UserTokenHelper {
      * @param $id
      *
      * @return array
+     * @throws \ReflectionException
      */
     public function triggerProvider(string $id): array {
         $providers = $this->getProviders();
@@ -142,17 +143,17 @@ class UserTokenHelper {
             $template = $providers[ $id ]->getTemplate($this->user);
             $data     = [];
 
-            if(strpos($id, 'gateway') !== false) {
-                $pid = substr($id, 8);
-                $this->sessionService->addShadow("twofactor_gateway_{$pid}_secret");
-            }
-
-            if($id === 'twofactor_nextcloud_notification') {
+            if($id === 'email') {
+                $this->sessionService->addShadow('twofactor_email_secret');
+            } else if($id === 'twofactor_nextcloud_notification') {
                 $r = new ReflectionObject($template);
                 $r = $r->getParentClass()->getParentClass();
                 $p = $r->getProperty('vars');
                 $p->setAccessible(true);
                 $data['code'] = $p->getValue($template)['token'];
+            } else if(strpos($id, 'gateway') !== false) {
+                $pid = substr($id, 8);
+                $this->sessionService->addShadow("twofactor_gateway_{$pid}_secret");
             }
 
             return [true, $data];
