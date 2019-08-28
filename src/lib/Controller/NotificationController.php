@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Helper\Survey\ServerReportHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\IRequest;
@@ -36,19 +37,33 @@ class NotificationController extends \OCP\AppFramework\Controller {
     protected $notifications;
 
     /**
+     * @var ServerReportHelper
+     */
+    protected $serverReport;
+
+    /**
      * NotificationController constructor.
      *
      * @param string               $appName
      * @param IRequest             $request
-     * @param ConfigurationService $config
      * @param IManager             $notifications
+     * @param ConfigurationService $config
      * @param EnvironmentService   $environment
+     * @param ServerReportHelper   $serverReport
      */
-    public function __construct(string $appName, IRequest $request, ConfigurationService $config, IManager $notifications, EnvironmentService $environment) {
+    public function __construct(
+        string $appName,
+        IRequest $request,
+        IManager $notifications,
+        ConfigurationService $config,
+        EnvironmentService $environment,
+        ServerReportHelper $serverReport
+    ) {
         parent::__construct($appName, $request);
         $this->config        = $config;
         $this->environment   = $environment;
         $this->notifications = $notifications;
+        $this->serverReport = $serverReport;
     }
 
     /**
@@ -58,6 +73,7 @@ class NotificationController extends \OCP\AppFramework\Controller {
         if($answer === 'yes') {
             $this->config->setAppValue('survey/server/mode', 2);
             $this->removeNotification(true);
+            $this->serverReport->sendReport();
         } else {
             $this->removeNotification(false);
         }

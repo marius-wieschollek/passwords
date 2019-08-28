@@ -9,6 +9,7 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 
@@ -18,6 +19,8 @@ use OCA\Passwords\Services\HelperService;
  * @package OCA\Passwords\Helper\Survey
  */
 class ServerReportHelper {
+
+    const API_URL = 'https://ncpw.mdns.eu/api.php';
 
     /**
      * @var ConfigurationService
@@ -50,6 +53,11 @@ class ServerReportHelper {
     protected $passwordRevisionMapper;
 
     /**
+     * @var RequestHelper
+     */
+    protected $requestHelper;
+
+    /**
      * ServerReportHelper constructor.
      *
      * @param ShareMapper            $shareMapper
@@ -61,6 +69,7 @@ class ServerReportHelper {
      */
     public function __construct(
         ShareMapper $shareMapper,
+        RequestHelper $requestHelper,
         ConfigurationService $config,
         TagRevisionMapper $tagRevisionMapper,
         ServiceSettingsHelper $serviceSettings,
@@ -73,6 +82,24 @@ class ServerReportHelper {
         $this->folderRevisionMapper   = $folderRevisionMapper;
         $this->tagRevisionMapper      = $tagRevisionMapper;
         $this->shareMapper            = $shareMapper;
+        $this->requestHelper = $requestHelper;
+    }
+
+    /**
+     * @param bool $enhanced
+     */
+    public function sendReport(bool $enhanced = true): void {
+        if(!$this->hasData()) return;
+
+        $currentWeek = date('W');
+        if($this->config->getAppValue('survey/server/week', '') === $currentWeek) return;
+
+        $report = $this->getReport($enhanced);
+        if($report === null) return;
+
+        $this->requestHelper->setJsonData($report);
+        $this->requestHelper->send(self::API_URL);
+        $this->config->setAppValue('survey/server/week', $currentWeek);
     }
 
     /**
@@ -81,8 +108,6 @@ class ServerReportHelper {
      * @return array|null
      */
     public function getReport(bool $enhanced = true): ?array {
-        if(!$this->hasData()) return null;
-
         $report = [
             'version'     => $this->getVersions(),
             'environment' => $this->getEnvironment()

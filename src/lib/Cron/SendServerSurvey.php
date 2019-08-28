@@ -21,8 +21,6 @@ use OCA\Passwords\Services\NotificationService;
  */
 class SendServerSurvey extends AbstractCronJob {
 
-    const API_URL = 'https://ncpw.mdns.eu/api.php';
-
     /**
      * @var ConfigurationService
      */
@@ -32,11 +30,6 @@ class SendServerSurvey extends AbstractCronJob {
      * @var ServerReportHelper
      */
     protected $serverReport;
-
-    /**
-     * @var RequestHelper
-     */
-    protected $requestHelper;
 
     /**
      * @var NotificationService
@@ -53,7 +46,6 @@ class SendServerSurvey extends AbstractCronJob {
      *
      * @param LoggingService       $logger
      * @param ConfigurationService $config
-     * @param RequestHelper        $requestHelper
      * @param EnvironmentService   $environment
      * @param ServerReportHelper   $serverReport
      * @param NotificationService  $notifications
@@ -61,14 +53,12 @@ class SendServerSurvey extends AbstractCronJob {
     public function __construct(
         LoggingService $logger,
         ConfigurationService $config,
-        RequestHelper $requestHelper,
         EnvironmentService $environment,
         ServerReportHelper $serverReport,
         NotificationService $notifications
     ) {
         parent::__construct($logger, $environment);
         $this->serverReport  = $serverReport;
-        $this->requestHelper = $requestHelper;
         $this->config        = $config;
         $this->notifications = $notifications;
     }
@@ -90,11 +80,7 @@ class SendServerSurvey extends AbstractCronJob {
      * @return void
      */
     protected function sendReport(bool $enhanced): void {
-        $report = $this->serverReport->getReport($enhanced);
-        if($report === null) return;
-
-        $this->requestHelper->setJsonData($report);
-        $this->requestHelper->send(self::API_URL);
+        $this->serverReport->sendReport($enhanced);
     }
 
     /**
@@ -102,7 +88,6 @@ class SendServerSurvey extends AbstractCronJob {
      */
     protected function getReportMode(): int {
         $mode = $this->config->getAppValue('survey/server/mode', -1);
-
         if($mode === -1) {
             $this->sendNotifications();
 
