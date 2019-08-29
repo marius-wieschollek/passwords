@@ -85,7 +85,7 @@ class EventManager {
             target = btoa(JSON.stringify(target));
             router.push({name: 'Authorize', params: {target}});
 
-            Messages.notification('The session has expired')
+            Messages.notification('The session has expired');
         } else if(e.response && e.response.status === 401 && e.message === "CORS requires basic auth") {
             await Messages.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
             location.reload();

@@ -337,6 +337,7 @@ class SessionService {
     protected function create(): Session {
         $model = new Session();
         $model->setUserId($this->environment->getUserId());
+        $model->setClient($this->environment->getClient());
         $model->setUuid($this->uuidHelper->generateUuid());
         $model->setAuthorized(false);
         $model->setDeleted(false);
