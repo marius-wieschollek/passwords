@@ -67,7 +67,7 @@ class CheckAppSettings implements IRepairStep {
         if($faviconSetting['value'] === HelperService::FAVICON_BESTICON) {
             if(empty($faviconApiSetting['value'])) {
                 $this->sendEmptySettingNotification('favicon');
-            } else if($faviconApiSetting['isDefault']) {
+            } else if($faviconApiSetting['isDefault'] || $faviconApiSetting['value'] === $faviconApiSetting['default']) {
                 $this->sendBesticonApiNotification();
             }
         }
