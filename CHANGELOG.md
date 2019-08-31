@@ -2,6 +2,7 @@
 ### Added
  - Nextcloud 17 support
  - Password duplicate search
+ - Check for incomplete service configuration
 ### Changed
  - Virtual guest group from guests app now ignored in autocomplete
  - Search field can now be reset with escape

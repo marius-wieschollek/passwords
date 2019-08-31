@@ -10,6 +10,8 @@ namespace OCA\Passwords\Services;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Notification\AbstractNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
+use OCA\Passwords\Notification\BesticonApiNotification;
+use OCA\Passwords\Notification\EmptyRequiredSettingNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
 use OCA\Passwords\Notification\LegacyApiNotification;
 use OCA\Passwords\Notification\LoginAttemptNotification;
@@ -58,6 +60,11 @@ abstract class NotificationService implements INotifier {
     protected $badPasswordNotification;
 
     /**
+     * @var BesticonApiNotification
+     */
+    protected $besticonApiNotification;
+
+    /**
      * @var ShareCreatedNotification
      */
     protected $shareCreatedNotification;
@@ -73,17 +80,23 @@ abstract class NotificationService implements INotifier {
     protected $impersonationNotification;
 
     /**
+     * @var EmptyRequiredSettingNotification
+     */
+    protected $emptyRequiredSettingNotification;
+
+    /**
      * NotificationService constructor.
      *
-     * @param IFactory                  $l10nFactory
-     * @param UserSettingsService       $settings
-     * @param SurveyNotification        $surveyNotification
-     * @param ShareLoopNotification     $shareLoopNotification
-     * @param LegacyApiNotification     $legacyApiNotification
-     * @param BadPasswordNotification   $badPasswordNotification
-     * @param ShareCreatedNotification  $shareCreatedNotification
-     * @param LoginAttemptNotification  $loginAttemptNotification
-     * @param ImpersonationNotification $impersonationNotification
+     * @param IFactory                         $l10nFactory
+     * @param UserSettingsService              $settings
+     * @param SurveyNotification               $surveyNotification
+     * @param ShareLoopNotification            $shareLoopNotification
+     * @param LegacyApiNotification            $legacyApiNotification
+     * @param BadPasswordNotification          $badPasswordNotification
+     * @param ShareCreatedNotification         $shareCreatedNotification
+     * @param LoginAttemptNotification         $loginAttemptNotification
+     * @param ImpersonationNotification        $impersonationNotification
+     * @param EmptyRequiredSettingNotification $emptyRequiredSettingNotification
      */
     public function __construct(
         IFactory $l10nFactory,
@@ -92,19 +105,23 @@ abstract class NotificationService implements INotifier {
         ShareLoopNotification $shareLoopNotification,
         LegacyApiNotification $legacyApiNotification,
         BadPasswordNotification $badPasswordNotification,
+        BesticonApiNotification $besticonApiNotification,
         ShareCreatedNotification $shareCreatedNotification,
         LoginAttemptNotification $loginAttemptNotification,
-        ImpersonationNotification $impersonationNotification
+        ImpersonationNotification $impersonationNotification,
+        EmptyRequiredSettingNotification $emptyRequiredSettingNotification
     ) {
-        $this->settings                  = $settings;
-        $this->l10NFactory               = $l10nFactory;
-        $this->legacyApiNotification     = $legacyApiNotification;
-        $this->shareLoopNotification     = $shareLoopNotification;
-        $this->surveyNotification        = $surveyNotification;
-        $this->badPasswordNotification   = $badPasswordNotification;
-        $this->shareCreatedNotification  = $shareCreatedNotification;
-        $this->loginAttemptNotification  = $loginAttemptNotification;
-        $this->impersonationNotification = $impersonationNotification;
+        $this->settings                         = $settings;
+        $this->l10NFactory                      = $l10nFactory;
+        $this->surveyNotification               = $surveyNotification;
+        $this->legacyApiNotification            = $legacyApiNotification;
+        $this->shareLoopNotification            = $shareLoopNotification;
+        $this->badPasswordNotification          = $badPasswordNotification;
+        $this->besticonApiNotification          = $besticonApiNotification;
+        $this->shareCreatedNotification         = $shareCreatedNotification;
+        $this->loginAttemptNotification         = $loginAttemptNotification;
+        $this->impersonationNotification        = $impersonationNotification;
+        $this->emptyRequiredSettingNotification = $emptyRequiredSettingNotification;
     }
 
     /**
@@ -188,6 +205,21 @@ abstract class NotificationService implements INotifier {
     }
 
     /**
+     * @param string $userId
+     * @param string $setting
+     */
+    public function sendEmptyRequiredSettingNotification(string $userId, string $setting): void {
+        $this->emptyRequiredSettingNotification->send($userId, ['setting' => $setting]);
+    }
+
+    /**
+     * @param string $userId
+     */
+    public function sendBesticonApiNotification(string $userId): void {
+        $this->besticonApiNotification->send($userId);
+    }
+
+    /**
      * @param AbstractNotification $notification
      * @param string               $userId
      * @param array                $parameters
@@ -204,6 +236,7 @@ abstract class NotificationService implements INotifier {
      *
      * @return INotification
      * @throws \InvalidArgumentException When the notification was not prepared by a notifier
+     * @throws \Exception
      * @since 9.0.0
      */
     public function realPrepare(INotification $notification, string $languageCode): INotification {
@@ -212,18 +245,21 @@ abstract class NotificationService implements INotifier {
         }
 
         $localisation = $this->l10NFactory->get(Application::APP_NAME, $languageCode);
-
         switch($notification->getSubject()) {
+            case EmptyRequiredSettingNotification::NAME:
+                return $this->emptyRequiredSettingNotification->process($notification, $localisation);
             case BadPasswordNotification::NAME:
                 return $this->badPasswordNotification->process($notification, $localisation);
             case ShareCreatedNotification::NAME:
                 return $this->shareCreatedNotification->process($notification, $localisation);
-            case ShareLoopNotification::NAME:
-                return $this->shareLoopNotification->process($notification, $localisation);
             case ImpersonationNotification::NAME:
                 return $this->impersonationNotification->process($notification, $localisation);
+            case BesticonApiNotification::NAME:
+                return $this->besticonApiNotification->process($notification, $localisation);
             case LoginAttemptNotification::NAME:
                 return $this->loginAttemptNotification->process($notification, $localisation);
+            case ShareLoopNotification::NAME:
+                return $this->shareLoopNotification->process($notification, $localisation);
             case LegacyApiNotification::NAME:
                 return $this->legacyApiNotification->process($notification, $localisation);
             case SurveyNotification::NAME:

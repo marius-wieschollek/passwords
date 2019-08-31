@@ -32,7 +32,6 @@ class SearchManager {
                 sha       : 'hash',
                 cse       : 'cseType',
                 sse       : 'sseType',
-                status    : 'statusCode',
                 csetype   : 'cseType',
                 ssetype   : 'sseType',
                 statuscode: 'statusCode',
