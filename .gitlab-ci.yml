@@ -48,7 +48,8 @@ Sign:
     paths:
       - ./passwords
   only:
-    - sign-app
+    - testing
+    - stable
 
 Pack:
   stage: packaging
