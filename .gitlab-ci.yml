@@ -1,6 +1,7 @@
 stages:
   - compiling
   - assembling
+  - signing
   - packaging
   - publishing
 
@@ -33,7 +34,7 @@ Assemble:
       - ./passwords
 
 Sign:
-  stage: assembling
+  stage: signing
   script:
     - echo "-----BEGIN PRIVATE KEY-----" > sign.key
     - echo $SIGN_KEY | tr " " "\n" >> sign.key
