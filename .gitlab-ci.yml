@@ -1,6 +1,7 @@
 stages:
   - compiling
   - assembling
+  - testing
   - signing
   - packaging
   - publishing
@@ -28,7 +29,14 @@ Assemble:
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
     - cp CHANGELOG.md passwords/
-    - /usr/src/nextcloud/occ
+  artifacts:
+    paths:
+      - ./passwords
+
+PHPUnit:
+  stage: testing
+  script:
+    - npm run phpunit
   artifacts:
     paths:
       - ./passwords
