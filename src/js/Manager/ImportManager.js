@@ -225,7 +225,7 @@ export class ImportManager {
         try {
             if(mode !== 4 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
                 let object = this._processGenericObject(tag, db[tag.id], mode, cseType, idMap);
-                if(object !== null) await API.updateTag(object);
+                if(object !== false) await API.updateTag(object);
             } else {
                 let info = await API.createTag(tag);
                 idMap[tag.id] = info.id;
@@ -303,7 +303,7 @@ export class ImportManager {
         try {
             if(mode !== 4 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
                 let object = this._processGenericObject(folder, db[folder.id], mode, cseType, idMap);
-                if(object !== null) await API.updateFolder(object);
+                if(object !== false) await API.updateFolder(object);
             } else {
                 let info = await API.createFolder(folder);
                 idMap[folder.id] = info.id;

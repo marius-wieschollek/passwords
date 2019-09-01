@@ -323,7 +323,7 @@
                 } else if (value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
                     this.models = [this.models.shift()];
                 } else if (value === 'json') {
-                    this.preventPasswordFill();
+                    if (this.allowEnc) this.preventPasswordFill();
                 }
 
                 this.validateStep();
