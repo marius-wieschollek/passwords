@@ -194,7 +194,6 @@ Scenario('Show Import Custom CSV', async (I) => {
 
     await I.captureElement('import-custom-csv-options', '.step-2', 0, 420);
     await I.captureElement('import-custom-csv-mapping', '.step-3');
-
 });
 
 Scenario('Show Handbook Section', async (I) => {

@@ -1,6 +1,6 @@
 const {crop, thumbnail} = require('easyimage');
 
-function gEP(e) {let $e=$(e);$e[0].scrollIntoView(false);let d=$e.offset();d.width=$e.outerWidth();d.height=$e.outerHeight();return JSON.stringify(d);}
+function gEP(e) {let $e=$(e)[0];$e.scrollIntoView(false);return JSON.stringify($e.getBoundingClientRect());}
 
 let window = {width: 1280, height: 874};
 
@@ -24,7 +24,6 @@ module.exports = function() {
              * @returns {Promise<void>}
              */
             async captureElement(file, element, wait = 1, width = null, height = null, preview = true) {
-
                 if(wait) this.wait(wait);
                 let data  = await this.executeScript(gEP, element),
                     stats = JSON.parse(data);
@@ -37,8 +36,8 @@ module.exports = function() {
                     {
                         src       : `tests/codecept/output/${file}.png`,
                         dst       : `tests/codecept/output/${file}.png`,
-                        y         : stats.top,
-                        x         : stats.left,
+                        y         : stats.y,
+                        x         : stats.x,
                         cropWidth : width,
                         cropHeight: height
                     }
