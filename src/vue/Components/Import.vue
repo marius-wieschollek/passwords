@@ -232,6 +232,9 @@
         },
 
         data() {
+            DAS.check('backup-encryption')
+                .then((d) => { this.allowEnc = d; });
+
             return {
                 source     : 'json',
                 type       : 'json',
@@ -272,7 +275,7 @@
                     total    : 0,
                     status   : null
                 },
-                allowEnc: DAS.check('backup-encryption')
+                allowEnc: false
             };
         },
 

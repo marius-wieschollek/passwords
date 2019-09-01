@@ -156,6 +156,9 @@
         },
 
         data() {
+            DAS.check('backup-encryption')
+                .then((d) => { this.allowEnc = d; });
+
             return {
                 format    : 'json',
                 options   : {includeShared: false},
@@ -196,7 +199,7 @@
                     ],
                     tags     : ['label', 'color', 'edited', 'created', 'favorite', 'id', 'revision', 'empty']
                 },
-                allowEnc   : DAS.check('backup-encryption')
+                allowEnc   : false
             };
         },
 
