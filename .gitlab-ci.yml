@@ -4,6 +4,8 @@ stages:
   - packaging
   - publishing
 
+image: passwords-builder
+
 Compile:
   stage: compiling
   script:
@@ -25,9 +27,27 @@ Assemble:
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
     - cp CHANGELOG.md passwords/
+    - /usr/src/nextcloud/occ
   artifacts:
     paths:
       - ./passwords
+
+Sign:
+  stage: assembling
+  script:
+    - echo "-----BEGIN PRIVATE KEY-----" > sign.key
+    - echo $SIGN_KEY | tr " " "\n" >> sign.key
+    - echo "-----END PRIVATE KEY-----" >> sign.key
+    - echo "-----BEGIN CERTIFICATE-----" > sign.crt
+    - echo $SIGN_CRT | tr " " "\n" >> sign.crt
+    - echo "-----END CERTIFICATE-----" >> sign.crt
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
+    - rm sign.key sign.crt
+  artifacts:
+    paths:
+      - ./passwords
+  only:
+    - sign-app
 
 Pack:
   stage: packaging
