@@ -185,7 +185,7 @@
                 this.retryClass = 'fa-spin';
                 API.requestToken(this.provider.id)
                     .then((d) => {
-                        if(this.provider.type === 'request-token') this.token = d.data.code;
+                        if(this.provider.type === 'request-token') this.token = d.data.token;
                         setTimeout(() => {this.retryClass = '';}, 1500);
                     })
                     .catch(() => {

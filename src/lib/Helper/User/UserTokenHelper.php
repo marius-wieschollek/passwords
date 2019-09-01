@@ -150,7 +150,7 @@ class UserTokenHelper {
                 $r = $r->getParentClass()->getParentClass();
                 $p = $r->getProperty('vars');
                 $p->setAccessible(true);
-                $data['code'] = $p->getValue($template)['token'];
+                $data['token'] = $p->getValue($template)['token'];
             } else if(strpos($id, 'gateway') !== false) {
                 $pid = substr($id, 8);
                 $this->sessionService->addShadow("twofactor_gateway_{$pid}_secret");
