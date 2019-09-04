@@ -68,11 +68,11 @@ export default class AdminSettingsService {
      * @private
      */
     async _createRequest(path, data = null, method = 'GET') {
-        let options = {method};
+        let options = {method, credentials: 'include'};
 
         options.headers = new Headers();
         options.headers.append('Accept', `application/json, text/plain, */*`);
-        options.headers.append('requesttoken', oc_requesttoken);
+        options.headers.append('requesttoken', OC.requestToken);
 
         if(data) {
             if(method === 'GET') options.method = 'POST';
