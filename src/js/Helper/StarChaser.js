@@ -435,7 +435,12 @@ export default class StarChaser {
     }
 
     _startShield() {
-        if(this.shieldTimeout) this._stopShield();
+        if(this.shieldTimeout) {
+            this._stopShield();
+            let ship = document.getElementById('ship');
+            ship.classList.remove('shield');
+            this.shieldTimeout = setTimeout(() => { ship.classList.add('shield') }, 10);
+        }
         this._addPoints(this._game.status.shieldPoints);
         this._game.ship.shield = true;
         this.shieldTimeout = setTimeout(() => { this._stopShield(); }, 10000);
