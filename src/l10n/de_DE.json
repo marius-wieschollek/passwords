@@ -130,8 +130,8 @@
         "Deleted User (%s)"                                                                         : "Gelöschter Benutzer (%s)",
         "Help us to improve Passwords"                                                              : "Helfen Sie dabei, Passwörter zu verbessern",
         "You can help us to improve the Passwords app by participating in our server survey."       : "Sie können uns helfen, die Passwörter App zu verbessern indem Sie an unserer Server-Umfrage teilnehmen.",
-        "This will send us some anonymized data about your setup and selected settings."            : "Dafür werden anonyme Daten über den Server und spezifische Einstellungen an uns gesendet.",
-        "You can change this at any time in the settings."                                          : "Dies kann jederzeit in den Einstellungen geändert werden.",
+        "This will send us some anonymised data about your setup and selected settings."            : "Dafür werden anonyme Daten über den Server und spezifische Einstellungen an uns gesendet.",
+        "You can change this at any time in the app settings."                                      : "Dies kann jederzeit in den Einstellungen geändert werden.",
         "Not yet"                                                                                   : "Später",
         "Participate"                                                                               : "Mitmachen",
         "Server survey participation"                                                               : "Teilnahme an der Server-Umfrage",
@@ -146,7 +146,17 @@
         "Your preview service configuration is invalid"                                             : "Die Konfiguration Ihres Webseitenansichtengenerators ist unvollständig.",
         "Your chosen favicon service requires an api key or endpoint, but none is given."           : "Der von Ihnen gewählte Favicon-Service benötigt einen API-Endpoint um zu funktionieren.",
         "Your chosen preview service requires an api key or endpoint, but none is given."           : "Der von Ihnen gewählte Webseitenansichtengenerator benötigt einen API-Schlüssel oder API-Endpunkt um zu funktionieren.",
-        "Open the admin settings to update the configuration or chose another service."             : "Öffnen Sie die Einstellungen um die Konfiguration abzuschließen oder einen anderen Service zu verwenden."
+        "Open the admin settings to update the configuration or chose another service."             : "Öffnen Sie die Einstellungen um die Konfiguration abzuschließen oder einen anderen Service zu verwenden.",
+        "We have detected several failed attempts to unlock your password database by \"%s\"."      : "Wir haben mehrere fehlgeschlagene Versuche von \"%s\" bemerkt, Ihre Passwortdatenbank zu öffnen.",
+        "This could indicate that someone is trying to break into your account."                    : "Das könnte bedeuten, dass Dritte versuchen, in Ihr Konto einzudringen.",
+        "To prevent further attempts, the API credentials of this client were revoked."             : "Um weitere Versuche zu verhindern, wurden die Zugangsdaten dieses Gerätes widerrufen.",
+        "Also, password based API authentication has been disabled."                                : "Außerdem wurde die passwortbasierte API-Authentifizierung deaktiviert.",
+        "If you want to continue using this client, you need to create a new token for it."         : "Wenn Sie dieses Gerät weiterhin verwenden möchten, müssen Sie ein neues Token dafür anlegen.",
+        "If you don't know this client, please change your password and review your device list."   : "Wenn Sie dieses Gerät nicht kennen, ändern bitte Ihr Passwort und überprüfen Sie Ihre Geräteliste.",
+        "To prevent further attempts, password based API authentication has been disabled."         : "Um weitere Versuche zu verhindern, wurde die passwortbasierte API-Authentifizierung deaktiviert.",
+        "To enable it again, log in with the webapp or any client using token authentication."      : "Um diese wieder zu aktivieren, melden Sie sich mit der Webapp oder einem beliebigen Client über die Token-Authentifizierung an.",
+        "If you don't know this client, please change your master password and Nextcloud password." : "Wenn Sie dieses Gerät nicht kennen, ändern Sie bitte Ihr Master-Passwort und Ihr Nextcloud-Passwort.",
+        "To increase security, we recommend using device specific tokens instead of your password." : "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

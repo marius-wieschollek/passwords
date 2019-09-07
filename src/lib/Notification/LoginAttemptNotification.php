@@ -73,13 +73,13 @@ class LoginAttemptNotification extends AbstractNotification {
                         .' '.
                         $localisation->t('If you want to continue using this client, you need to create a new token for it.')
                         .' '.
-                        $localisation->t('If you don\'t know this client, please change your password and check the list of linked clients.');
+                        $localisation->t('If you don\'t know this client, please change your password and review your device list.');
         } else {
             $message .= $localisation->t('To prevent further attempts, password based API authentication has been disabled.')
                         .' '.
                         $localisation->t('To enable it again, log in with the webapp or any client using token authentication.')
                         .' '.
-                        $localisation->t('If you don\'t know this client, please change your master password and Nextcloud password.');
+                        $localisation->t('To increase security, we recommend using device specific tokens instead of your password.');
         }
 
         return $message;

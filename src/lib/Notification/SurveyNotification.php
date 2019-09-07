@@ -86,8 +86,8 @@ class SurveyNotification extends AbstractNotification {
     protected function getMessage(IL10N $localisation): string {
         return $localisation->t('You can help us to improve the Passwords app by participating in our server survey.')
                .' '.
-               $localisation->t('This will send us some anonymized data about your setup and selected settings.')
+               $localisation->t('This will send us some anonymised data about your setup and selected settings.')
                .' '.
-               $localisation->t('You can change this at any time in the settings.');
+               $localisation->t('You can change this at any time in the app settings.');
     }
 }
