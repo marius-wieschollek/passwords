@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2019.9.0 - Feature release
 ### Added
  - Nextcloud 17 support
  - Password duplicate search
