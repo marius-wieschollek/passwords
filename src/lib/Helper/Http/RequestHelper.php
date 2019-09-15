@@ -7,6 +7,9 @@
 
 namespace OCA\Passwords\Helper\Http;
 
+use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\QueryException;
+
 /**
  * Class RequestHelper
  *
@@ -65,6 +68,11 @@ class RequestHelper {
      * @var array
      */
     protected $info;
+
+    /**
+     * @var string|false
+     */
+    protected $error;
 
     /**
      * @var string
@@ -204,6 +212,7 @@ class RequestHelper {
 
         $this->response = curl_exec($curl);
         $this->info     = curl_getinfo($curl);
+        $this->error    = curl_error($curl);
         curl_close($curl);
 
         $headerSize           = $this->info['header_size'];
@@ -211,7 +220,11 @@ class RequestHelper {
         $this->responseBody   = substr($this->response, $headerSize);
 
         if(!empty($this->acceptResponseCodes)) {
-            if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) return false;
+            if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) {
+                $this->logError();
+
+                return false;
+            }
         }
 
         return $this->responseBody;
@@ -268,6 +281,13 @@ class RequestHelper {
     }
 
     /**
+     * @return string|false
+     */
+    public function getError() {
+        return $this->error;
+    }
+
+    /**
      * @param string $url
      *
      * @return resource
@@ -310,5 +330,23 @@ class RequestHelper {
         }
 
         return $curl;
+    }
+
+    /**
+     *
+     */
+    protected function logError() {
+        try {
+            $logger = \OC::$server->query(LoggingService::class);
+
+            if($this->error !== false) {
+                $message = sprintf('"%s" when fetching %s', $this->error, $this->info['url']);
+            } else {
+                $message = sprintf('"Unknown error HTTP %s" when fetching %s', $this->info['http_code'], $this->info['url']);
+            }
+
+            $logger->error($message);
+        } catch(QueryException $e) {
+        }
     }
 }
