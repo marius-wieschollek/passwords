@@ -34,6 +34,8 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=mysql:3306
+    external_links:
+      - "web:passwords.local"
 
   web:
     build: ./docker/nginx/
