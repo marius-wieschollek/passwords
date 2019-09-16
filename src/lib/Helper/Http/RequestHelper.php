@@ -339,10 +339,10 @@ class RequestHelper {
         try {
             $logger = \OC::$server->query(LoggingService::class);
 
-            if($this->error !== false) {
+            if($this->error !== false && $this->error !== '') {
                 $message = sprintf('"%s" when fetching %s', $this->error, $this->info['url']);
             } else {
-                $message = sprintf('"Unknown error HTTP %s" when fetching %s', $this->info['http_code'], $this->info['url']);
+                $message = sprintf('"Unexpected HTTP %s" when fetching %s (%s redirects)', $this->info['http_code'], $this->info['url'], $this->info['redirect_count']);
             }
 
             $logger->error($message);
