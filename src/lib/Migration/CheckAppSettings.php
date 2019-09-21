@@ -7,10 +7,12 @@
 
 namespace OCA\Passwords\Migration;
 
+use OC\User\User;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\IGroupManager;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -43,16 +45,33 @@ class CheckAppSettings implements IRepairStep {
     protected $notifications;
 
     /**
+     * @var IGroupManager
+     */
+    protected $groupManager;
+
+    /**
+     * @var null|User[]
+     */
+    protected $admins = null;
+
+    /**
      * CheckAppSettings constructor.
      *
-     * @param ServiceSettingsHelper $serviceSettings
-     * @param NotificationService   $notifications
      * @param ConfigurationService  $config
+     * @param IGroupManager         $groupManager
+     * @param NotificationService   $notifications
+     * @param ServiceSettingsHelper $serviceSettings
      */
-    public function __construct(ServiceSettingsHelper $serviceSettings, NotificationService $notifications, ConfigurationService $config) {
-        $this->serviceSettings = $serviceSettings;
-        $this->notifications   = $notifications;
+    public function __construct(
+        IGroupManager $groupManager,
+        ConfigurationService $config,
+        NotificationService $notifications,
+        ServiceSettingsHelper $serviceSettings
+    ) {
         $this->config          = $config;
+        $this->groupManager    = $groupManager;
+        $this->notifications   = $notifications;
+        $this->serviceSettings = $serviceSettings;
     }
 
     /**
@@ -102,8 +121,7 @@ class CheckAppSettings implements IRepairStep {
      * @param string $setting
      */
     protected function sendEmptySettingNotification(string $setting): void {
-        $adminGroup = \OC::$server->getGroupManager()->get('admin');
-        foreach($adminGroup->getUsers() as $admin) {
+        foreach($this->getAdmins() as $admin) {
             $this->notifications->sendEmptyRequiredSettingNotification($admin->getUID(), $setting);
         }
     }
@@ -112,8 +130,7 @@ class CheckAppSettings implements IRepairStep {
      *
      */
     protected function sendBesticonApiNotification(): void {
-        $adminGroup = \OC::$server->getGroupManager()->get('admin');
-        foreach($adminGroup->getUsers() as $admin) {
+        foreach($this->getAdmins() as $admin) {
             $this->notifications->sendBesticonApiNotification($admin->getUID());
         }
     }
@@ -122,8 +139,7 @@ class CheckAppSettings implements IRepairStep {
      *
      */
     protected function sendDeprecatedPlatformNotification(): void {
-        $adminGroup = \OC::$server->getGroupManager()->get('admin');
-        foreach($adminGroup->getUsers() as $admin) {
+        foreach($this->getAdmins() as $admin) {
             $this->notifications->sendUpgradeRequiredNotification(
                 $admin->getUID(),
                 self::APP_BC_BREAK_VERSION,
@@ -131,5 +147,17 @@ class CheckAppSettings implements IRepairStep {
                 self::PHP_RECOMMENDED_VERSION
             );
         }
+    }
+
+    /**
+     * @return User[]
+     */
+    protected function getAdmins(): array {
+        if($this->admins === null) {
+            $adminGroup = $this->groupManager->get('admin');
+            $this->admins = $adminGroup->getUsers();
+        }
+
+        return $this->admins;
     }
 }
