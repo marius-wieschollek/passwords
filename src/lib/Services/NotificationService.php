@@ -18,6 +18,7 @@ use OCA\Passwords\Notification\LoginAttemptNotification;
 use OCA\Passwords\Notification\ShareCreatedNotification;
 use OCA\Passwords\Notification\ShareLoopNotification;
 use OCA\Passwords\Notification\SurveyNotification;
+use OCA\Passwords\Notification\UpgradeRequiredNotification;
 use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
@@ -80,6 +81,11 @@ abstract class NotificationService implements INotifier {
     protected $impersonationNotification;
 
     /**
+     * @var UpgradeRequiredNotification
+     */
+    protected $upgradeRequiredNotification;
+
+    /**
      * @var EmptyRequiredSettingNotification
      */
     protected $emptyRequiredSettingNotification;
@@ -93,9 +99,11 @@ abstract class NotificationService implements INotifier {
      * @param ShareLoopNotification            $shareLoopNotification
      * @param LegacyApiNotification            $legacyApiNotification
      * @param BadPasswordNotification          $badPasswordNotification
+     * @param BesticonApiNotification          $besticonApiNotification
      * @param ShareCreatedNotification         $shareCreatedNotification
      * @param LoginAttemptNotification         $loginAttemptNotification
      * @param ImpersonationNotification        $impersonationNotification
+     * @param UpgradeRequiredNotification      $upgradeRequiredNotification
      * @param EmptyRequiredSettingNotification $emptyRequiredSettingNotification
      */
     public function __construct(
@@ -109,6 +117,7 @@ abstract class NotificationService implements INotifier {
         ShareCreatedNotification $shareCreatedNotification,
         LoginAttemptNotification $loginAttemptNotification,
         ImpersonationNotification $impersonationNotification,
+        UpgradeRequiredNotification $upgradeRequiredNotification,
         EmptyRequiredSettingNotification $emptyRequiredSettingNotification
     ) {
         $this->settings                         = $settings;
@@ -121,6 +130,7 @@ abstract class NotificationService implements INotifier {
         $this->shareCreatedNotification         = $shareCreatedNotification;
         $this->loginAttemptNotification         = $loginAttemptNotification;
         $this->impersonationNotification        = $impersonationNotification;
+        $this->upgradeRequiredNotification      = $upgradeRequiredNotification;
         $this->emptyRequiredSettingNotification = $emptyRequiredSettingNotification;
     }
 
@@ -220,6 +230,16 @@ abstract class NotificationService implements INotifier {
     }
 
     /**
+     * @param string $userId
+     * @param string $release
+     * @param string $ncVersion
+     * @param string $phpVersion
+     */
+    public function sendUpgradeRequiredNotification(string $userId, string $release, string $ncVersion, string $phpVersion): void {
+        $this->upgradeRequiredNotification->send($userId, [$release, $ncVersion, $phpVersion]);
+    }
+
+    /**
      * @param AbstractNotification $notification
      * @param string               $userId
      * @param array                $parameters
@@ -248,6 +268,8 @@ abstract class NotificationService implements INotifier {
         switch($notification->getSubject()) {
             case EmptyRequiredSettingNotification::NAME:
                 return $this->emptyRequiredSettingNotification->process($notification, $localisation);
+            case UpgradeRequiredNotification::NAME:
+                return $this->upgradeRequiredNotification->process($notification, $localisation);
             case BadPasswordNotification::NAME:
                 return $this->badPasswordNotification->process($notification, $localisation);
             case ShareCreatedNotification::NAME:

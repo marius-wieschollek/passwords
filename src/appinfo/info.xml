@@ -81,9 +81,6 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </screenshot>
     <dependencies>
         <php min-version="7.1" />
-        <database>sqlite</database>
-        <database>mysql</database>
-        <database>pgsql</database>
         <nextcloud min-version="15" max-version="17" />
     </dependencies>
     <background-jobs>

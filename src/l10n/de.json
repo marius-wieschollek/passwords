@@ -156,7 +156,10 @@
         "To prevent further attempts, password based API authentication has been disabled."         : "Um weitere Versuche zu verhindern, wurde die passwortbasierte API-Authentifizierung deaktiviert.",
         "To enable it again, log in with the webapp or any client using token authentication."      : "Um diese wieder zu aktivieren, melde dich mit der Webapp oder einem beliebigen Client über die Token-Authentifizierung an.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Wenn du dieses Gerät nicht kennst, ändere bitte dein Master-Passwort und dein Nextcloud-Passwort.",
-        "To increase security, we recommend using device specific tokens instead of your password." : "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden."
+        "To increase security, we recommend using device specific tokens instead of your password." : "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden.",
+        "The passwords app will no longer support your server configuration"                        : "Passwörter beendet die Unterstützung für deine Server-Konfiguration",
+        "The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s."       : "Die kommende Version %s der Passwörter-App erfordert mindestens Nextcloud %s und PHP %s.",
+        "To keep receiving security and feature updates, please update your server."                : "Um weiterhin Sicherheits- und Funktions-Updates zu erhalten, aktualisiere bitte deinen Server."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
