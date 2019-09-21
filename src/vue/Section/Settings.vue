@@ -300,6 +300,13 @@
                            v-model="settings['user.notification.shares']">
                     <settings-help text="Notifies you when other people share passwords with you"/>
 
+
+                    <translate tag="label" for="setting-notification-admin" say="Administration Issues" v-if="isAdmin"/>
+                    <input type="checkbox"
+                           id="setting-notification-admin"
+                           v-model="settings['user.notification.admin']" v-if="isAdmin">
+                    <settings-help text="Notifies you of configuration errors and other administrative issues" v-if="isAdmin"/>
+
                     <translate tag="label"
                                for="setting-notification-errors"
                                say="Other errors"
@@ -378,6 +385,7 @@
                 encryptionFeature,
                 advancedSettings,
                 hasEncryption,
+                isAdmin : OC.isUserAdmin(),
                 advanced: advancedSettings ? '1':'0',
                 nightly : process.env.NIGHTLY_FEATURES,
                 noSave  : false,

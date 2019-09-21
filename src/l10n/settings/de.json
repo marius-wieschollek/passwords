@@ -65,7 +65,8 @@
             "Repeat password"             : "Passwort wiederholen",
             "Old password"                : "Altes Passwort",
             "Password changed"            : "Passwort geändert",
-            "Changing password failed"    : "Passwortänderung fehlgeschlagen"
+            "Changing password failed"    : "Passwortänderung fehlgeschlagen",
+            "Administration Issues"       : "Administrationsprobleme"
         },
         {
             "Mark passwords as weak if they are being used for multiple accounts"        : "Markiert Passwörter als \"Unsicher\" wenn sie für mehr als ein Konto verwendet werden",
@@ -95,6 +96,7 @@
             "Notifies you about compromised passwords and other security issues"         : "Benachrichtigt dich bei kompromittierten Passwörtern und anderen Sicherheitsproblemen",
             "Notifies you when other people share passwords with you"                    : "Benachrichtigt dich, wenn andere Passwörter mit dir teilen",
             "Notifies you when a background operation fails"                             : "Benachrichtigt dich, wenn Hintergrundaufgaben fehlschlagen",
+            "Notifies you of configuration errors and other administrative issues"       : "Benachrichtigt dich über Konfigurationsfehler und andere administrative Probleme.",
             "Reset all settings on this page to their defaults"                          : "Alle Einstellungen auf dieser Seite zurücksetzen",
             "This will reset all settings to their defaults. Do you want to continue?"   : "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchtest du fortfahren?",
             "Start over and delete all configuration, passwords, folders and tags"       : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen",

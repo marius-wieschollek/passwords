@@ -211,7 +211,11 @@ abstract class NotificationService implements INotifier {
      * @param string $userId
      */
     public function sendSurveyNotification(string $userId): void {
-        $this->surveyNotification->send($userId);
+        $this->sendNotification(
+            $this->surveyNotification,
+            $userId,
+            []
+        );
     }
 
     /**
@@ -219,14 +223,22 @@ abstract class NotificationService implements INotifier {
      * @param string $setting
      */
     public function sendEmptyRequiredSettingNotification(string $userId, string $setting): void {
-        $this->emptyRequiredSettingNotification->send($userId, ['setting' => $setting]);
+        $this->sendNotification(
+            $this->emptyRequiredSettingNotification,
+            $userId,
+            ['setting' => $setting]
+        );
     }
 
     /**
      * @param string $userId
      */
     public function sendBesticonApiNotification(string $userId): void {
-        $this->besticonApiNotification->send($userId);
+        $this->sendNotification(
+            $this->besticonApiNotification,
+            $userId,
+            []
+        );
     }
 
     /**
@@ -236,7 +248,11 @@ abstract class NotificationService implements INotifier {
      * @param string $phpVersion
      */
     public function sendUpgradeRequiredNotification(string $userId, string $release, string $ncVersion, string $phpVersion): void {
-        $this->upgradeRequiredNotification->send($userId, [$release, $ncVersion, $phpVersion]);
+        $this->sendNotification(
+            $this->upgradeRequiredNotification,
+            $userId,
+            [$release, $ncVersion, $phpVersion]
+        );
     }
 
     /**

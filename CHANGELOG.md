@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+ - EOL Notification for NC 15, 16 and PHP 7.1
+ - Opt-Out for admin notifications
 
 ## 2019.9.0 - Feature release
 ### Added
