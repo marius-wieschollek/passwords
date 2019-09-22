@@ -75,7 +75,6 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
             $this->checkAppSettings->run(new IOutput());
         } catch(Exception $e) {
@@ -98,7 +97,6 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
             $this->checkAppSettings->run(new IOutput());
         } catch(Exception $e) {
@@ -121,7 +119,6 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
             $this->checkAppSettings->run(new IOutput());
         } catch(Exception $e) {
@@ -144,7 +141,6 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => '', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
             $this->checkAppSettings->run(new IOutput());
         } catch(Exception $e) {
@@ -167,7 +163,6 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'key', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
             $this->checkAppSettings->run(new IOutput());
         } catch(Exception $e) {
