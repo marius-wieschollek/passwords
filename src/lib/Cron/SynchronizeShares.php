@@ -323,6 +323,7 @@ class SynchronizeShares extends AbstractCronJob {
             $total  += $count;
 
             foreach($shares as $share) {
+                if($share->getTargetPassword() === null) continue;
                 /** @var PasswordRevision $revision */
                 $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
