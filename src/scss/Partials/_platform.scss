@@ -4,12 +4,7 @@
     }
 }
 
-#app[data-server-version="16"] {
-    #controls .crumbmenu.active .menu, #controls .passwords-more-menu.active .menu {
-        max-height : 90px;
-    }
-}
-
+#app[data-server-version="16"],
 #app[data-server-version="17"] {
     #controls .crumbmenu.active .menu, #controls .passwords-more-menu.active .menu {
         max-height : 90px;

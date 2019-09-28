@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## 2019.9.1 - Bugfix release
+### Fixed
+ - Navigation in Nextcloud 16.0.5
+
 ## 2019.9.0 - Feature release
 ### Added
  - Nextcloud 17 support
