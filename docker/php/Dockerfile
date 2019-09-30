@@ -1,4 +1,4 @@
-FROM nextcloud:17-rc-fpm
+FROM nextcloud:17-fpm
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
