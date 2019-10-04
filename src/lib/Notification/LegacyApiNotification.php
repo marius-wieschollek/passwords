@@ -73,7 +73,7 @@ class LegacyApiNotification extends AbstractNotification {
      * @param array  $parameters
      */
     public function send(string $userId, array $parameters = []): void {
-        if(!$this->deferredActivation->check('legacy-client-warning')) return;
+        if(!$this->deferredActivation->check('legacy-client-warning', true)) return;
         if($this->checkIfAlreadyNotified($userId, $parameters['client'])) return;
 
         $notification = $this->createNotification($userId)
