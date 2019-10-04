@@ -2,6 +2,8 @@
 ### Added
  - EOL Notification for NC 15, 16 and PHP 7.1
  - Opt-Out for admin notifications
+### Changed
+ - Http issues are now logged
 
 ## 2019.9.1 - Bugfix release
 ### Fixed
