@@ -50,7 +50,7 @@ Passwords offers a safe server side encryption using Nextclouds integrated encry
 Each password is encrypted with it's own unique key.
 
 #### Client Side Encryption (E2E)
-You can have your passwords encrypted in your browser.
+If enabled on your server, you can have your passwords encrypted in your browser.
 This will protect them from unauthorized access and even keep them safe if the server is hacked.
 
 #### Access Protection & Two-Factor-Authentication
