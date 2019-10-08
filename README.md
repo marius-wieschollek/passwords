@@ -21,7 +21,7 @@ The integrated password generator follows the new [NIST Digital Identity Guideli
 It generates long passwords which are easy to remember, yet long and secure.
 Say goodbye to pseudo random letters and numbers, random password requirements and contra productive expiration guidelines without reason.
 Why? Because it is easier for you to remember that your twitter account unlocks with a "FuriousToothbrush" than "fAu*j,4?rQ:25(#c".
-Of course we know that most websites still require numbers and special characters, sou we will help you with that as well.
+Of course we know that most websites still require numbers and special characters, so we will help you with that as well.
 
 #### Integrated security check
 Passwords like "P@55w0rd" may fool most generic security checks, but they are so common that most hackers have them in their lists.
@@ -50,7 +50,7 @@ Passwords offers a safe server side encryption using Nextclouds integrated encry
 Each password is encrypted with it's own unique key.
 
 #### Client Side Encryption (E2E)
-You can have your passwords encrypted in your browser.
+If enabled on your server, you can have your passwords encrypted in your browser.
 This will protect them from unauthorized access and even keep them safe if the server is hacked.
 
 #### Access Protection & Two-Factor-Authentication
