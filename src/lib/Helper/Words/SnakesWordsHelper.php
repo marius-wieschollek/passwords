@@ -19,23 +19,50 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     const SERVICE_URL = 'http://watchout4snakes.com/wo4snakes/Random/RandomPhrase';
 
     /**
-     * @param int $strength
-     *
-     * @return array
+     * @var SpecialCharacterHelper
      */
-    public function getWords(int $strength): array {
-        $options = $this->getServiceOptions($strength);
+    protected $specialCharacters;
 
-        for($i = 0; $i < 24; $i++) {
-            $result = trim($this->getHttpRequest($options));
-            if(empty($result)) continue;
+    /**
+     * AbstractWordsHelper constructor.
+     *
+     * @param SpecialCharacterHelper $specialCharacters
+     */
+    public function __construct(SpecialCharacterHelper $specialCharacters) {
+        $this->specialCharacters = $specialCharacters;
+    }
 
-            $words = explode(' ', $result);
+    /**
+     * @param int  $strength
+     * @param bool $addNumbers
+     * @param bool $addSpecial
+     *
+     * @return array|null
+     */
+    public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
+        $optionSets = $this->getServiceOptions($strength);
 
-            if($this->isWordsArrayValid($words)) return $words;
+        $wordSets = [];
+        foreach($optionSets as $options) {
+            for($i = 0; $i < 24; $i++) {
+                $result = trim($this->getHttpRequest($options));
+                if(empty($result)) continue;
+
+                $words = explode(' ', $result);
+
+                if($this->isWordsArrayValid($words)) {
+                    $wordSets = array_merge($wordSets, $words);
+                    continue 2;
+                };
+            }
+
+            return null;
         }
 
-        return [];
+        return [
+            'password' => $this->wordsArrayToPassword($wordSets, $strength, $addNumbers, $addSpecial),
+            'words'    => $wordSets
+        ];
     }
 
     /**
@@ -60,29 +87,91 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @return array
      */
     protected function getServiceOptions(int $strength): array {
-        $options = [
-            'Pos1'   => 'a',
-            'Level1' => $strength == 1 ? 35:20,
-            'Pos2'   => $strength == 1 ? 'n':'a',
-            'Level2' => $strength == 1 ? 50:30,
+        if($strength === 1) {
+            return [
+                [
+                    'Pos1'   => 'a',
+                    'Level1' => 20,
+                    'Pos2'   => 'a',
+                    'Level2' => 35,
+                    'Pos3'   => 'n',
+                    'Level3' => 50,
+                ]
+            ];
+        }
+
+        if($strength === 2) {
+            return [
+                [
+                    'Pos1'   => 'a',
+                    'Level1' => 20,
+                    'Pos2'   => 'n',
+                    'Level2' => 35,
+                    'Pos3'   => 'a',
+                    'Level3' => 50,
+                    'Pos4'   => 'n',
+                    'Level4' => 50,
+                ]
+            ];
+        }
+
+        if($strength === 3) {
+            return [
+                [
+                    'Pos1'   => 'a',
+                    'Level1' => 20,
+                    'Pos2'   => 'a',
+                    'Level2' => 35,
+                    'Pos3'   => 'n',
+                    'Level3' => 35,
+                ],
+                [
+                    'Pos1'   => 'a',
+                    'Level1' => 35,
+                    'Pos2'   => 'a',
+                    'Level2' => 50,
+                    'Pos3'   => 'n',
+                    'Level3' => 50,
+                ]
+            ];
+        }
+
+        return [
+            [
+                'Pos1'   => 'a',
+                'Level1' => 20,
+                'Pos2'   => 'a',
+                'Level2' => 35,
+                'Pos3'   => 'a',
+                'Level3' => 45,
+                'Pos4'   => 'n',
+                'Level4' => 35,
+            ],
+            [
+                'Pos1'   => 'a',
+                'Level1' => 35,
+                'Pos2'   => 'a',
+                'Level2' => 45,
+                'Pos3'   => 'a',
+                'Level3' => 55,
+                'Pos4'   => 'n',
+                'Level4' => 50
+            ]
         ];
+    }
 
-        if($strength > 1) {
-            $options['Pos3']   = $strength == 2 ? 'n':'a';
-            $options['Level3'] = $strength == 2 ? 50:40;
-        }
+    /**
+     * @param array $words
+     * @param int   $strength
+     * @param bool  $addNumbers
+     * @param bool  $addSpecial
+     *
+     * @return string|void
+     */
+    protected function wordsArrayToPassword(array $words, int $strength = 4, bool $addNumbers = true, bool $addSpecial = true): string {
+        $password = parent::wordsArrayToPassword($words);
 
-        if($strength > 2) {
-            $options['Pos4']   = $strength == 3 ? 'n':'a';
-            $options['Level4'] = 50;
-        }
-
-        if($strength == 4) {
-            $options['Pos5']   = 'n';
-            $options['Level5'] = 60;
-        }
-
-        return $options;
+        return $this->specialCharacters->addSpecialCharacters($password, $strength * 3, $addNumbers, $addSpecial);
     }
 
     /**

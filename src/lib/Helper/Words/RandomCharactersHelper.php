@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Helper\Words;
 
+use Exception;
+
 /**
  * Class RandomCharactersHelper
  *
@@ -20,6 +22,8 @@ class RandomCharactersHelper extends AbstractWordsHelper {
     const CHARACTERS_IT  = 'ÀàÈèÚú';
     const CHARACTERS_ES  = 'ÁáÉéÍíÑñÓóÚú';
     const CHARACTERS_PT  = 'ÁáÂâÀàÃãÇçÉéÊêÍíÔôÓôÕõÚÚ';
+    const NUMBERS        = '0123456789';
+    const SPECIAL        = '!?&%/()[]{}$€@-_';
 
     /**
      * @var string
@@ -36,12 +40,14 @@ class RandomCharactersHelper extends AbstractWordsHelper {
     }
 
     /**
-     * @param int $strength
+     * @param int  $strength
      *
-     * @return array
-     * @throws \Exception
+     * @param bool $addNumbers
+     * @param bool $addSpecial
+     *
+     * @return array|null
      */
-    public function getWords(int $strength): array {
+    public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
         $words      = [];
         $characters = $this->getCharacterString();
         $strength   += 2;
@@ -50,13 +56,20 @@ class RandomCharactersHelper extends AbstractWordsHelper {
         for($i = 0; $i < $length; $i++) {
             $string = '';
             for($j = 0; $j < $strength; $j++) {
-                $pos    = random_int(0, mb_strlen($characters) - 1);
-                $string .= mb_substr($characters, $pos, 1);
+                try {
+                    $pos = random_int(0, mb_strlen($characters) - 1);
+                    $string .= mb_substr($characters, $pos, 1);
+                } catch(Exception $e) {
+                    $j--;
+                }
             }
             $words[] = $string;
         }
 
-        return $words;
+        return [
+            'words'    => $words,
+            'password' => $this->wordsArrayToPassword($words, $strength, $addNumbers, $addSpecial)
+        ];
     }
 
     /**
@@ -91,5 +104,43 @@ class RandomCharactersHelper extends AbstractWordsHelper {
         } catch(\Exception $e) {
             return false;
         }
+    }
+
+    protected function wordsArrayToPassword(array $words, int $strength = 4, bool $addNumbers = true, bool $addSpecial = true): string {
+        $password = implode($words);
+
+        if($addNumbers) {
+            $password = $this->addSpecialCharacters($password, $strength * 2, self::NUMBERS);
+        }
+
+        if($addSpecial) {
+            $password = $this->addSpecialCharacters($password, $strength * 2, self::SPECIAL);
+        }
+
+        return $password;
+    }
+
+    /**
+     * @param string $string
+     * @param int    $amount
+     * @param string $characters
+     *
+     * @return string
+     */
+    protected function addSpecialCharacters(string $string, int $amount, string $characters): string {
+        $parts = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
+
+        for($i = 0; $i < $amount; $i++) {
+            try {
+                $charPos       = random_int(0, mb_strlen($characters) - 1);
+                $character     = mb_substr($characters, $charPos, 1);
+                $pos           = random_int(0, count($parts) - 1);
+                $parts[ $pos ] = $character;
+            } catch(\Exception $e) {
+                $i--;
+            }
+        }
+
+        return implode($parts);
     }
 }
