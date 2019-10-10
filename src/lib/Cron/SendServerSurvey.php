@@ -89,7 +89,7 @@ class SendServerSurvey extends AbstractCronJob {
     protected function getReportMode(): int {
         $mode = $this->config->getAppValue('survey/server/mode', -1);
         if($mode === -1) {
-            $this->sendNotifications();
+            if($this->serverReport->hasData()) $this->sendNotifications();
 
             return 0;
         }

@@ -95,8 +95,6 @@ class ServerReportHelper {
         if($this->config->getAppValue('survey/server/week', '') === $currentWeek) return;
 
         $report = $this->getReport($enhanced);
-        if($report === null) return;
-
         $this->requestHelper->setJsonData($report);
         $this->requestHelper->send(self::API_URL);
         $this->config->setAppValue('survey/server/week', $currentWeek);
@@ -105,9 +103,9 @@ class ServerReportHelper {
     /**
      * @param bool $enhanced
      *
-     * @return array|null
+     * @return array
      */
-    public function getReport(bool $enhanced = true): ?array {
+    public function getReport(bool $enhanced = true): array {
         $report = [
             'version'     => $this->getVersions(),
             'environment' => $this->getEnvironment()
@@ -333,7 +331,7 @@ class ServerReportHelper {
     /**
      * @return bool
      */
-    protected function hasData(): bool {
+    public function hasData(): bool {
         return count($this->passwordRevisionMapper->findAll()) > 0;
     }
 }
