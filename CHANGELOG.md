@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Added
+ - Nextcloud outgoing proxy support
+### Changed
+ - Report notification not showing if app not used
+ - Words services now produce better passwords
 
 ## 2019.10.0 - Feature release
 ### Added

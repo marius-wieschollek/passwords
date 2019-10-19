@@ -314,6 +314,14 @@ class RequestHelper {
             $this->headerData['Content-Length'] = strlen($json);
         }
 
+        if(\OC::$server->getConfig()->getSystemValue('proxy')) {
+            curl_setopt($curl, CURLOPT_PROXY, \OC::$server->getConfig()->getSystemValue('proxy'));
+
+            if(\OC::$server->getConfig()->getSystemValue('proxyuserpwd')) {
+                curl_setopt($curl, CURLOPT_PROXYUSERPWD, \OC::$server->getConfig()->getSystemValue('proxyuserpwd'));
+            }
+        }
+
         if(!empty($this->headerData)) {
             $header = [];
 
