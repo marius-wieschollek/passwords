@@ -58,7 +58,7 @@ class BestIconHelper extends AbstractFaviconHelper {
     protected function getFaviconUrl(string $domain): string {
         $fallbackColor = substr($this->fallbackIconGenerator->stringToColor($domain), 1);
         $serviceUrl    = $this->config->getAppValue(self::BESTICON_CONFIG_KEY, self::BESTICON_DEFAULT_URL);
-        if($serviceUrl === self::BESTICON_DEFAULT_URL) $serviceUrl = $this->getSharedInstanceUrl();
+        if($serviceUrl === self::BESTICON_DEFAULT_URL || empty($serviceUrl)) $serviceUrl = $this->getSharedInstanceUrl();
 
         return "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url={$domain}";
     }
