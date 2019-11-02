@@ -102,6 +102,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <live-migration>
             <step>OCA\Passwords\Migration\MoveBackups</step>
             <step>OCA\Passwords\Migration\CheckAppSettings</step>
+            <step>OCA\Passwords\Migration\ClearAppCaches</step>
         </live-migration>
     </repair-steps>
     <commands>

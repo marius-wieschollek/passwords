@@ -2,6 +2,7 @@
     <testsuites>
         <testsuite name="Services">
             <directory>./tests/phpunit/Services</directory>
+            <directory>./tests/phpunit/Migration</directory>
         </testsuite>
     </testsuites>
 </phpunit>
