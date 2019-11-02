@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Services;
 
@@ -9,6 +14,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+/**
+ * Class DeferredActivationServiceTest
+ *
+ * @package OCA\Passwords\Services
+ */
 class DeferredActivationServiceTest extends TestCase {
 
     /**
@@ -37,7 +47,7 @@ class DeferredActivationServiceTest extends TestCase {
     protected $deferredActivationService;
 
     /**
-     * @throws ReflectionException
+     *
      */
     protected function setUp(): void {
         $this->requestHelper        = $this->createMock(RequestHelper::class);

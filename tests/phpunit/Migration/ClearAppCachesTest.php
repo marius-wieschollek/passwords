@@ -8,11 +8,9 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
-use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
-use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\NotificationService;
 use OCP\Migration\IOutput;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,16 +26,16 @@ class ClearAppCachesTest extends TestCase {
     protected $clearAppCaches;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|FileCacheService
+     * @var MockObject|FileCacheService
      */
     protected $fileCacheService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
         $this->fileCacheService = $this->createMock(FileCacheService::class);
-        $this->clearAppCaches     = new ClearAppCaches($this->fileCacheService);
+        $this->clearAppCaches   = new ClearAppCaches($this->fileCacheService);
     }
 
     /**

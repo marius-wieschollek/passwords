@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Helper\Settings;
 
@@ -6,6 +11,11 @@ use OCA\Passwords\Services\ConfigurationService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class UserSettingsHelperTest
+ *
+ * @package OCA\Passwords\Helper\Settings
+ */
 class UserSettingsHelperTest extends TestCase {
 
     /**
@@ -19,7 +29,7 @@ class UserSettingsHelperTest extends TestCase {
     protected $configurationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
         $this->configurationService = $this->createMock(ConfigurationService::class);

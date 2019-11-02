@@ -1,36 +1,39 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 14.01.18
- * Time: 19:26
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Services;
 
+use Exception;
+use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidatePasswordTest
  *
  * @package OCA\Passwords\Services
- * @covers \OCA\Passwords\Services\ValidationService
+ * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidatePasswordTest extends TestCase {
 
     /**
-     * @var \OCA\Passwords\Services\ValidationService
+     * @var ValidationService
      */
     protected $validationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
-        $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
-        $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
+        $container = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $this->validationService = new ValidationService($container);
     }
 
     /**
@@ -38,8 +41,8 @@ class ValidatePasswordTest extends TestCase {
      */
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidSse() {
         $mock = $this->getPasswordMock();
@@ -56,8 +59,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidCse() {
         $mock = $this->getPasswordMock();
@@ -76,8 +79,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordCseKeyBotNoCse() {
         $mock = $this->getPasswordMock();
@@ -97,8 +100,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordNoSseAndCse() {
         $mock = $this->getPasswordMock();
@@ -116,8 +119,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordMissingCseKey() {
         $mock = $this->getPasswordMock();
@@ -136,8 +139,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordEmptyLabel() {
         $mock = $this->getPasswordMock();
@@ -156,8 +159,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordEmptyHash() {
         $mock = $this->getPasswordMock();
@@ -177,8 +180,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidHash() {
         $mock = $this->getPasswordMock();
@@ -199,8 +202,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsSseType() {
         $mock = $this->getPasswordMock();
@@ -221,8 +224,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsCseType() {
         $mock = $this->getPasswordMock();
@@ -243,8 +246,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordCorrectsInvalidFolderUuid() {
         $mock = $this->getPasswordMock();
@@ -262,8 +265,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsEditedWhenEmpty() {
         $mock = $this->getPasswordMock();
@@ -281,8 +284,8 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsEditedWhenInFuture() {
         $mock = $this->getPasswordMock();
@@ -299,15 +302,27 @@ class ValidatePasswordTest extends TestCase {
         $this->validationService->validatePassword($mock);
     }
 
-
-
     /**
-     * @return \OCA\Passwords\Db\PasswordRevision
+     * @return PasswordRevision
      */
     protected function getPasswordMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getHidden', 'getCseType', 'setCseType', 'getCseKey', 'getLabel', 'getHash', 'getFolder', 'setFolder', 'getStatus', 'getEdited', 'setEdited'])
+            ->setMethods([
+                'getSseType',
+                'setSseType',
+                'getHidden',
+                'getCseType',
+                'setCseType',
+                'getCseKey',
+                'getLabel',
+                'getHash',
+                'getFolder',
+                'setFolder',
+                'getStatus',
+                'getEdited',
+                'setEdited'
+            ])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);

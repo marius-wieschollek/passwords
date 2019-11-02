@@ -1,36 +1,39 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 14.01.18
- * Time: 19:26
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Services;
 
+use Exception;
+use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidateFolderTest
  *
  * @package OCA\Passwords\Services
- * @covers \OCA\Passwords\Services\ValidationService
+ * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidateFolderTest extends TestCase {
 
     /**
-     * @var \OCA\Passwords\Services\ValidationService
+     * @var ValidationService
      */
     protected $validationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
-        $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
-        $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
+        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $this->validationService = new ValidationService($container);
     }
 
     /**
@@ -39,8 +42,8 @@ class ValidateFolderTest extends TestCase {
      *
      */
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderInvalidSse() {
         $mock = $this->getFolderMock();
@@ -57,8 +60,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderInvalidCse() {
         $mock = $this->getFolderMock();
@@ -77,8 +80,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderCseKeyBotNoCse() {
         $mock = $this->getFolderMock();
@@ -98,8 +101,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderNoSseAndCse() {
         $mock = $this->getFolderMock();
@@ -118,8 +121,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordMissingCseKey() {
         $mock = $this->getFolderMock();
@@ -138,8 +141,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderEmptyLabel() {
         $mock = $this->getFolderMock();
@@ -158,8 +161,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsSseType() {
         $mock = $this->getFolderMock();
@@ -178,8 +181,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsCseType() {
         $mock = $this->getFolderMock();
@@ -198,8 +201,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderCorrectsInvalidFolderUuid() {
         $mock = $this->getFolderMock();
@@ -215,8 +218,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsEditedWhenEmpty() {
         $mock = $this->getFolderMock();
@@ -232,8 +235,8 @@ class ValidateFolderTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsEditedWhenInFuture() {
         $mock = $this->getFolderMock();
@@ -248,10 +251,8 @@ class ValidateFolderTest extends TestCase {
         $this->validationService->validateFolder($mock);
     }
 
-
-
     /**
-     * @return \OCA\Passwords\Db\FolderRevision
+     * @return FolderRevision
      */
     protected function getFolderMock() {
         $mock = $this

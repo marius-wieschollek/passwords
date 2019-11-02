@@ -1,36 +1,38 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 14.01.18
- * Time: 19:26
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Services;
 
+use Exception;
+use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidateTagTest
  *
  * @package OCA\Passwords\Services
- * @covers \OCA\Passwords\Services\ValidationService
+ * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidateTagTest extends TestCase {
 
     /**
-     * @var \OCA\Passwords\Services\ValidationService
+     * @var ValidationService
      */
     protected $validationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
-        $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
-        $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
+        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $this->validationService = new ValidationService($container);
     }
 
 
@@ -40,8 +42,8 @@ class ValidateTagTest extends TestCase {
      *
      */
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagInvalidSse() {
         $mock = $this->getTagMock();
@@ -58,8 +60,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagInvalidCse() {
         $mock = $this->getTagMock();
@@ -78,8 +80,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagCseKeyBotNoCse() {
         $mock = $this->getTagMock();
@@ -99,8 +101,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagNoSseAndCse() {
         $mock = $this->getTagMock();
@@ -119,8 +121,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidatePasswordMissingCseKey() {
         $mock = $this->getTagMock();
@@ -139,8 +141,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagEmptyLabel() {
         $mock = $this->getTagMock();
@@ -159,8 +161,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagEmptyColor() {
         $mock = $this->getTagMock();
@@ -180,8 +182,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsSseType() {
         $mock = $this->getTagMock();
@@ -200,8 +202,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsCseType() {
         $mock = $this->getTagMock();
@@ -220,8 +222,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenEmpty() {
         $mock = $this->getTagMock();
@@ -237,8 +239,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenInFuture() {
         $mock = $this->getTagMock();
@@ -253,10 +255,8 @@ class ValidateTagTest extends TestCase {
         $this->validationService->validateTag($mock);
     }
 
-
-
     /**
-     * @return \OCA\Passwords\Db\TagRevision
+     * @return TagRevision
      */
     protected function getTagMock() {
         $mock = $this

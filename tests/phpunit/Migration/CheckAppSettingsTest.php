@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Migration;
 
@@ -15,6 +20,11 @@ use OCP\Migration\IOutput;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class CheckAppSettingsTest
+ *
+ * @package OCA\Passwords\Migration
+ */
 class CheckAppSettingsTest extends TestCase {
 
     /**
@@ -43,7 +53,7 @@ class CheckAppSettingsTest extends TestCase {
     protected $configurationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
         $this->groupManager         = $this->createMock(IGroupManager::class);

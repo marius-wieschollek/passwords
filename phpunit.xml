@@ -1,8 +1,8 @@
 <phpunit bootstrap="tests/phpunit/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Services">
-            <directory>./tests/phpunit/Services</directory>
-            <directory>./tests/phpunit/Migration</directory>
+            <directory>./tests/phpunit/*/*Test.php</directory>
+            <directory>./tests/phpunit/*/*/*Test.php</directory>
         </testsuite>
     </testsuites>
 </phpunit>

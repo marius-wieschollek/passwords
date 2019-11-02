@@ -13,3 +13,4 @@ tests/codecept/data/*
 tests/codecept/output/*
 docker/volumes/
 # package-lock.json
+/.phpunit.result.cache

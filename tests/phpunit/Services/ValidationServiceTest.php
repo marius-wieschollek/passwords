@@ -1,36 +1,37 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 14.01.18
- * Time: 19:26
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Exception\ApiException;
+use Exception;
 use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidationServiceTest
  *
  * @package OCA\Passwords\Services
- * @covers \OCA\Passwords\Services\ValidationService
+ * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidationServiceTest extends TestCase {
 
     /**
-     * @var \OCA\Passwords\Services\ValidationService
+     * @var ValidationService
      */
     protected $validationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
     protected function setUp(): void {
-        $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
-        $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
+        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $this->validationService = new ValidationService($container);
     }
 
 
@@ -39,8 +40,8 @@ class ValidationServiceTest extends TestCase {
      */
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateDomainValid() {
         $this->assertEquals(
@@ -50,8 +51,8 @@ class ValidationServiceTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateDomainInvalid() {
         $this->assertEquals(
@@ -67,8 +68,8 @@ class ValidationServiceTest extends TestCase {
      * Uuid Validation
      */
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateUuidValid() {
         $this->assertEquals(
@@ -78,8 +79,8 @@ class ValidationServiceTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateUuidInvalid() {
         $this->assertEquals(
