@@ -130,6 +130,7 @@ class HandbookRenderer {
      * @param wrap
      * @param baseUrl
      * @param documentUrl
+     * @param media
      * @returns {string}
      * @private
      */
@@ -310,7 +311,7 @@ class HandbookRenderer {
 
         return `<span class="md-image-container" id="${element.id}" data-image-id="${element.index}">
                 <a class="md-image-link" title="${element.title}" href="${element.url}" target="_blank" rel="noreferrer noopener">
-                <img src="${element.thumbnail}" alt="${element.description.replace(/"/g, '&quot;')}" class="md-image">
+                <img src="${element.thumbnail}" alt="${element.description.replace(/"/g, '&quot;')}" class="md-image" loading="lazy">
                 <span class="md-image-caption">${caption}</span>
                 </a></span>`;
     }

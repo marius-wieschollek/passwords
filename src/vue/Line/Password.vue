@@ -6,7 +6,7 @@
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
-        <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}" :title="getTitle">&nbsp;</div>
+        <img class="favicon" :src="password.icon" :title="getTitle" :alt="getTitle" loading="lazy"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
             <li v-for="tag in getTags"

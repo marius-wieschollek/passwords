@@ -14,7 +14,7 @@
                 <password-line :password="password" v-for="password in passwords" :key="password.id">
                     <ul slot="middle" class="line-share-icons">
                         <li v-for="user in getShareUsers(password.id)" :key="user.id" :title="user.name">
-                            <img :src="user.icon" :alt="user.name"/>
+                            <img :src="user.icon" :title="user.name" :alt="user.name" loading="lazy"/>
                             {{user.name}}
                         </li>
                     </ul>
@@ -170,6 +170,7 @@
 
             img {
                 height        : 24px;
+                width         : 24px;
                 border-radius : 12px;
                 margin        : 13px 0;
             }
