@@ -288,6 +288,7 @@
 
             a {
                 cursor : pointer;
+                color  : var(--color-primary);
 
                 &:hover,
                 &:focus,

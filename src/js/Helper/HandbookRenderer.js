@@ -1,6 +1,5 @@
 import marked from 'marked';
 import VueRouter from '@js/Helper/router';
-import ThemeManager from '@js/Manager/ThemeManager';
 import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
 
@@ -157,7 +156,7 @@ class HandbookRenderer {
         if(title === null) title = Localisation.translate('Go to {href}', {href});
         let rel = target === '_blank' ? 'rel="noreferrer noopener"':'';
 
-        return `<a href="${href}" title="${decodeURI(title)}" target="${target}" style="color:${ThemeManager.getColor()}" ${rel}>${content}</a>`;
+        return `<a href="${href}" title="${decodeURI(title)}" target="${target}" ${rel}>${content}</a>`;
     }
 
     /**
