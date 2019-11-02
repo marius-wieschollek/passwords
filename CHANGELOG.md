@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2019.11.0 - Feature release
 ### Added
  - Nextcloud outgoing proxy support
 ### Changed
