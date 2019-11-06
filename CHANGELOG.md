@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+ - Local dictionary password generator issues
 
 ## 2019.11.0 - Feature release
 ### Added

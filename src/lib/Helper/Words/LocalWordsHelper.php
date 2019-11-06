@@ -41,8 +41,8 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @param string                 $langCode
      * @param SpecialCharacterHelper $specialCharacters
      */
-    public function __construct(string $langCode, SpecialCharacterHelper $specialCharacters) {
-        $this->langCode = $langCode;
+    public function __construct(SpecialCharacterHelper $specialCharacters, string $langCode) {
+        $this->langCode          = $langCode;
         $this->specialCharacters = $specialCharacters;
     }
 
@@ -122,7 +122,6 @@ class LocalWordsHelper extends AbstractWordsHelper {
         throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
     }
 
-
     /**
      * @param array $words
      * @param int   $strength
@@ -134,7 +133,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
     protected function wordsArrayToPassword(array $words, int $strength = 4, bool $addNumbers = true, bool $addSpecial = true): string {
         $password = parent::wordsArrayToPassword($words);
 
-        return $this->specialCharacters->addSpecialCharacters($password, $strength*3, $addNumbers, $addSpecial);
+        return $this->specialCharacters->addSpecialCharacters($password, $strength * 3, $addNumbers, $addSpecial);
     }
 
     /**
