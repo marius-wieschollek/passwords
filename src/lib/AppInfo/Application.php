@@ -29,6 +29,7 @@ use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
+use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
@@ -87,9 +88,11 @@ class Application extends App {
         $container->registerService(LocalWordsHelper::class,
             function (IAppContainer $c) {
                 return new LocalWordsHelper(
+                    $c->query(SpecialCharacterHelper::class),
                     $c->query(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
+
         $container->registerService(RandomCharactersHelper::class,
             function (IAppContainer $c) {
                 return new RandomCharactersHelper(

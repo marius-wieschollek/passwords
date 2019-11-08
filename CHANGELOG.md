@@ -2,6 +2,10 @@
 ### Added
  - Lazy loading for favicons and avatars
 
+## 2019.11.1 - Bugfix release
+### Fixed
+ - Local dictionary password generator issues
+
 ## 2019.11.0 - Feature release
 ### Added
  - Nextcloud outgoing proxy support
