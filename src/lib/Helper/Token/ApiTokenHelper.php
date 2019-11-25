@@ -227,6 +227,7 @@ class ApiTokenHelper {
 
     /**
      * @return string
+     * @throws \Exception
      */
     protected function generateRandomDeviceToken(): string {
         $groups = [];
@@ -234,7 +235,12 @@ class ApiTokenHelper {
             $groups[] = $this->random->generate(5, ISecureRandom::CHAR_HUMAN_READABLE);
         }
 
-        return implode('-', $groups);
+        $token = implode('-', $groups);
+        if(strlen($token) < 29) {
+            throw new \Exception('Token generation failed. Did not generate enough random numbers');
+        }
+
+        return $token;
     }
 
     /**
