@@ -10,6 +10,11 @@
         <translate tag="div" say="Created on"><span>{{ getDateTime(password.created) }}</span></translate>
         <translate tag="div" say="Last updated"><span>{{ getDateTime(password.edited) }}</span></translate>
         <detail-field label="Id" type="text" :value="password.id"/>
+        <translate tag="div" say="Folder" v-if="typeof password.folder !== 'string'">
+            <router-link :to="folderRoute" class="link">
+                {{password.folder.label}}
+            </router-link>
+        </translate>
         <translate tag="div" say="Revisions">
             <translate say="{count} revisions" :variables="{count:countRevisions}"/>
         </translate>
@@ -84,6 +89,9 @@
                 if(this.password.status === 1) return `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
 
                 return this.getSecurityClass.capitalize();
+            },
+            folderRoute() {
+                return {name: 'Folders', params: {folder: this.password.folder.id}}
             },
             hashSearchRoute() {
                 return {name: 'Search', params: {query: btoa('hash:'+this.password.hash)}}
