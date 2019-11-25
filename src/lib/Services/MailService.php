@@ -142,6 +142,9 @@ class MailService {
             $this->logger->logException($e);
         }
 
-        return $this->userService->getUser($userId);
+        $user = $this->userService->getUser($userId);
+        if(empty($user->getEMailAddress())) return null;
+
+        return $user;
     }
 }
