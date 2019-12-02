@@ -7,12 +7,17 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Exception\Favicon\FaviconRequestException;
+use OCA\Passwords\Exception\Favicon\InvalidFaviconDataException;
+use OCA\Passwords\Exception\Favicon\NoFaviconDataException;
+use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
+use OCP\Http\Client\IClient;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class AbstractFaviconHelper
@@ -20,6 +25,7 @@ use OCP\Files\SimpleFS\ISimpleFile;
  * @package OCA\Passwords\Helper
  */
 abstract class AbstractFaviconHelper {
+    const COMMON_SUBDOMAIN_PATTERN = '/^(m|de|web|www|www2|mail|email|login|signin)\./';
 
     /**
      * @var string
@@ -30,6 +36,11 @@ abstract class AbstractFaviconHelper {
      * @var AbstractImageHelper
      */
     protected $imageHelper;
+
+    /**
+     * @var IClientService
+     */
+    protected $requestService;
 
     /**
      * @var FileCacheService
@@ -45,6 +56,7 @@ abstract class AbstractFaviconHelper {
      * AbstractFaviconHelper constructor.
      *
      * @param HelperService         $helperService
+     * @param IClientService        $requestService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
      *
@@ -52,9 +64,11 @@ abstract class AbstractFaviconHelper {
      */
     public function __construct(
         HelperService $helperService,
+        IClientService $requestService,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
+        $this->requestService        = $requestService;
         $this->imageHelper           = $helperService->getImageHelper();
         $this->fallbackIconGenerator = $fallbackIconGenerator;
         $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
@@ -64,7 +78,10 @@ abstract class AbstractFaviconHelper {
      * @param string $domain
      *
      * @return ISimpleFile|null
-     * @throws \Exception
+     * @throws FaviconRequestException
+     * @throws InvalidFaviconDataException
+     * @throws NoFaviconDataException
+     * @throws UnexpectedResponseCodeException
      */
     public function getFavicon(string $domain): ?ISimpleFile {
         $faviconFile = $this->getFaviconFilename($domain);
@@ -74,8 +91,8 @@ abstract class AbstractFaviconHelper {
         }
 
         $faviconData = $this->getFaviconData($domain);
-        if(empty($faviconData)) throw new \Exception('Favicon service returned no data');
-        if(!$this->imageHelper->supportsImage($faviconData)) throw new \Exception('Favicon service returned unsupported data type');
+        if(empty($faviconData)) throw new NoFaviconDataException();
+        if(!$this->imageHelper->supportsImage($faviconData)) throw new InvalidFaviconDataException();
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }
@@ -93,7 +110,7 @@ abstract class AbstractFaviconHelper {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $domain  = preg_replace('/^(m|de|web|www|www2|mail|email|login|signin)\./', '', $domain);
+        $domain  = preg_replace(self::COMMON_SUBDOMAIN_PATTERN, '', $domain);
         $content = $this->fallbackIconGenerator->createIcon($domain, $size);
 
         return $this->fileCacheService->putFile($fileName, $content);
@@ -114,34 +131,56 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
-     * @param string $url
-     *
-     * @return string|null
-     */
-    protected function getHttpRequest(string $url): ?string {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-
-        return $request->sendWithRetry();
-    }
-
-    /**
      * @param string $domain
      *
      * @return null|string
+     * @throws FaviconRequestException
+     * @throws UnexpectedResponseCodeException
      */
     protected function getFaviconData(string $domain): ?string {
-        $url = $this->getFaviconUrl($domain);
+        list($uri, $options) = $this->getRequestData($domain);
 
-        return $this->getHttpRequest($url);
+        return $this->executeRequest($uri, $options);
+    }
+
+    /**
+     * @return IClient
+     */
+    protected function createRequest(): IClient {
+        $request = $this->requestService->newClient();
+
+        return $request;
+    }
+
+    /**
+     * @return string
+     * @throws UnexpectedResponseCodeException
+     * @throws FaviconRequestException
+     */
+    protected function executeRequest(string $uri, array $options): string {
+        $request = $this->createRequest();
+        try {
+            $response = $request->get($uri, $options);
+        } catch(\Exception $e) {
+            throw new FaviconRequestException($e);
+        }
+
+        if($response->getStatusCode() === 200) {
+            return $response->getBody();
+        }
+
+        throw new UnexpectedResponseCodeException($response->getStatusCode());
     }
 
     /**
      * @param string $domain
      *
-     * @return string
+     * @return array
      */
-    protected function getFaviconUrl(string $domain): string {
-        return "http://{$domain}/favicon.ico";
+    protected function getRequestData(string $domain): array {
+        return [
+            "http://{$domain}/favicon.ico",
+            []
+        ];
     }
 }

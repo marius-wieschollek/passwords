@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Services\HelperService;
 
 /**
@@ -88,20 +87,28 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return mixed|string
      */
     protected function getUrl(string $url): array {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-        $data = $request->sendWithRetry(3);
+        $request  = $this->createRequest();
+        try {
+            $response = $request->get($url);
+            $data        = $response->getBody();
+            $url         = $response->getHeader('url');
+            $contentType = $response->getHeader('content-type');
+            $isIcon      = substr($contentType, 0, 5) === 'image' && $this->imageHelper->supportsImage($data);
 
-        $url         = $request->getInfo('url');
-        $contentType = $request->getInfo('content_type');
-        $isIcon      = substr($contentType, 0, 5) === 'image' && $this->imageHelper->supportsImage($data);
-
-        return [
-            $data,
-            $url,
-            $contentType,
-            $isIcon
-        ];
+            return [
+                $data,
+                $url,
+                $contentType,
+                $isIcon
+            ];
+        } catch(\Exception $e) {
+            return [
+                '',
+                '',
+                '',
+                false
+            ];
+        }
     }
 
     /**

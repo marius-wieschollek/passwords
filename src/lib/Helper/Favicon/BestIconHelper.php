@@ -11,6 +11,8 @@ use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCP\Http\Client\IClient;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class BetterIdeaHelper
@@ -35,6 +37,7 @@ class BestIconHelper extends AbstractFaviconHelper {
      *
      * @param ConfigurationService  $config
      * @param HelperService         $helperService
+     * @param IClientService        $requestService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
      *
@@ -43,33 +46,45 @@ class BestIconHelper extends AbstractFaviconHelper {
     public function __construct(
         ConfigurationService $config,
         HelperService $helperService,
+        IClientService $requestService,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
         $this->config = $config;
-        parent::__construct($helperService, $fileCacheService, $fallbackIconGenerator);
+        parent::__construct($helperService, $requestService, $fileCacheService, $fallbackIconGenerator);
     }
 
     /**
      * @param string $domain
      *
-     * @return string
+     * @return array
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getRequestData(string $domain): array {
         $fallbackColor = substr($this->fallbackIconGenerator->stringToColor($domain), 1);
-        $serviceUrl    = $this->config->getAppValue(self::BESTICON_CONFIG_KEY, self::BESTICON_DEFAULT_URL);
-        if($serviceUrl === self::BESTICON_DEFAULT_URL || empty($serviceUrl)) $serviceUrl = $this->getSharedInstanceUrl();
+        $options       = [
+            'query'   => [
+                'size'                => '16..128..256',
+                'fallback_icon_color' => $fallbackColor,
+                'url'                 => $domain,
+            ]
+        ];
 
-        return "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url={$domain}";
+        $serviceUrl = $this->config->getAppValue(self::BESTICON_CONFIG_KEY, self::BESTICON_DEFAULT_URL);
+        if($serviceUrl === self::BESTICON_DEFAULT_URL || empty($serviceUrl)) {
+            return $this->getSharedInstanceUrl($options);
+        }
+
+        return [$serviceUrl, $options];
     }
 
     /**
-     * @return string
+     * @return array
      */
-    protected function getSharedInstanceUrl(): string {
-        $user = $this->config->getSystemValue('instanceid');
-        $password = sha1($user.'ncpw');
+    protected function getSharedInstanceUrl($options): array {
+        $user            = $this->config->getSystemValue('instanceid');
+        $password        = sha1($user.'ncpw');
+        $options['auth'] = [$user, $password];
 
-        return "https://{$user}:{$password}@ncpw.mdns.eu/icon";
+        return ["https://{$user}:{$password}@ncpw.mdns.eu/icon", $options];
     }
 }

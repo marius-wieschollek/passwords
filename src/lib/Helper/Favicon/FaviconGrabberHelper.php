@@ -7,11 +7,15 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Exception\Favicon\FaviconRequestException;
+use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class FaviconGrabberHelper
@@ -20,8 +24,7 @@ use OCA\Passwords\Services\HelperService;
  */
 class FaviconGrabberHelper extends AbstractFaviconHelper {
 
-    const FAVICON_GRABBER_URL = 'http://favicongrabber.com';
-    const API_WAIT_TIME       = 1;
+    const FAVICON_GRABBER_URL = 'https://favicongrabber.com';
 
     /**
      * @var ConfigurationService
@@ -34,10 +37,16 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected $prefix = HelperService::FAVICON_FAVICON_GRABBER;
 
     /**
+     * @var string
+     */
+    protected $domain;
+
+    /**
      * BestIconHelper constructor.
      *
      * @param ConfigurationService  $config
      * @param HelperService         $helperService
+     * @param IClientService        $requestService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
      *
@@ -46,62 +55,57 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     public function __construct(
         ConfigurationService $config,
         HelperService $helperService,
+        IClientService $requestService,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
         $this->config = $config;
-        parent::__construct($helperService, $fileCacheService, $fallbackIconGenerator);
-    }
-
-    /**
-     * @param string $domain
-     *
-     * @return string
-     * @throws \Exception
-     * @throws \Throwable
-     */
-    protected function getFaviconData(string $domain): ?string {
-        $json = $this->sendApiRequest($domain);
-        $icon = $this->analyzeApiResponse($json, $domain);
-
-        return $icon !== null ? $icon:$this->getDefaultFavicon($domain)->getContent();
+        parent::__construct($helperService, $requestService, $fileCacheService, $fallbackIconGenerator);
     }
 
     /**
      * @param string $domain
      *
      * @return array
-     * @throws \Exception
      */
-    protected function sendApiRequest(string $domain): ?array {
-        $this->checkRequestTimeout();
-        $request = new RequestHelper();
-        $response    = $request
-            ->setAcceptResponseCodes([200, 400])
-            ->setUserAgent(
-                'Nextcloud/'.$this->config->getSystemValue('version').
-                ' Passwords/'.$this->config->getAppValue('installed_version').
-                ' Instance/'.$this->config->getSystemValue('instanceid')
-            )->send(self::FAVICON_GRABBER_URL.'/api/grab/'.$domain);
-        $this->setLastRequestTime();
+    protected function getRequestData(string $domain): array {
+        $this->domain = $domain;
 
-        if($response === null) {
-            $status = $request->getInfo('http_code');
-            throw new \Exception("Favicongrabber Request Failed, HTTP {$status}");
+        return [
+            self::FAVICON_GRABBER_URL.'/api/grab/'.$domain,
+            []
+        ];
+    }
+
+    /**
+     * @param string $uri
+     * @param array  $options
+     *
+     * @return string
+     * @throws FaviconRequestException
+     * @throws UnexpectedResponseCodeException
+     */
+    protected function executeRequest(string $uri, array $options): string {
+        $response = parent::executeRequest($uri, $options);
+        $json     = json_decode($response, true);
+
+        $result = $this->analyzeApiResponse($json);
+        if($result === null) {
+            return $this->getDefaultFavicon($this->domain)->getContent();
         }
 
-        return json_decode($response, true);
+        return $result;
     }
 
     /**
      * @param array  $json
      * @param string $domain
      *
-     * @return null|string
+     * @return string
      * @throws \Exception
      */
-    protected function analyzeApiResponse(array $json, string $domain): ?string {
-        if(isset($json['error'])) throw new \Exception("Favicongrabber said: {$json['error']} ({$domain})");
+    protected function analyzeApiResponse(array $json): ?string {
+        if(isset($json['error'])) throw new \Exception("Favicongrabber said: {$json['error']} ({$this->domain})");
 
         $iconData   = null;
         $sizeOffset = null;
@@ -148,31 +152,18 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @return null|string
      */
     protected function loadIcon(string $url, string $data = null): ?string {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-        $iconData = $request->sendWithRetry();
-        $mime     = $request->getInfo('content_type');
+        $request = $this->requestService->newClient();
+        try {
+            $response = $request->get($url);
+        } catch(\Exception $e) {
+            return $data;
+        }
 
+        $mime = $response->getHeader('content-type');
         if(substr($mime, 0, 5) !== 'image') return $data;
 
+        $iconData = $response->getBody();
+
         return empty($iconData) ? $data:$iconData;
-    }
-
-    /**
-     *
-     */
-    protected function checkRequestTimeout(): void {
-        $this->config->clearCache();
-        $lastRequest = $this->config->getAppValue('favicon/fg/api/request', 0);
-        if(time() - $lastRequest < self::API_WAIT_TIME) {
-            sleep(self::API_WAIT_TIME);
-        }
-    }
-
-    /**
-     *
-     */
-    protected function setLastRequestTime(): void {
-        $this->config->setAppValue('favicon/fg/api/request', time());
     }
 }

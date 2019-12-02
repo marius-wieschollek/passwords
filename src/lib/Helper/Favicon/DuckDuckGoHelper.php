@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Exception\Favicon\FaviconRequestException;
+use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Services\HelperService;
 
 /**
@@ -29,12 +31,40 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return string
+     * @return array
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getRequestData(string $domain): array {
         $this->domain = $domain;
 
-        return "https://icons.duckduckgo.com/ip2/{$domain}.ico";
+        return [
+            "https://icons.duckduckgo.com/ip2/{$domain}.ico",
+            []
+        ];
+    }
+
+    /**
+     * @return string
+     * @throws UnexpectedResponseCodeException
+     * @throws FaviconRequestException
+     * @throws \Throwable
+     */
+    protected function executeRequest(string $uri, array $options): string {
+        $request = $this->createRequest();
+        try {
+            $response = $request->get($uri, $options);
+        } catch(\Exception $e) {
+            throw new FaviconRequestException($e);
+        }
+
+        if($response->getStatusCode() === 404) {
+            return $this->getDefaultFavicon($this->domain)->getContent();
+        }
+
+        if($response->getStatusCode() === 200) {
+            return $response->getBody();
+        }
+
+        throw new UnexpectedResponseCodeException($response->getStatusCode());
     }
 
     /**
