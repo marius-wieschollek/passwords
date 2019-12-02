@@ -178,8 +178,12 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @inheritdoc
      */
     public static function isAvailable(): bool {
-        $headers = @get_headers(SnakesWordsHelper::SERVICE_URL, 1);
-
-        return $headers !== false && strpos($headers[0], '200') !== false ? true:false;
+        try {
+            $client = \OC::$server->getHTTPClientService()->newClient();
+            $response = $client->head(SnakesWordsHelper::SERVICE_URL);
+            return $response->getStatusCode() === 200;
+        } catch(\Exception $e) {
+            return false;
+        }
     }
 }
