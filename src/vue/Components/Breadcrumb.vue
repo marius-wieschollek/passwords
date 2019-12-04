@@ -243,8 +243,9 @@
                 }
 
                 .menu {
-                    left  : auto;
-                    right : 58%;
+                    left       : auto;
+                    right      : 58%;
+                    max-height : 90px;
                 }
             }
 
@@ -315,6 +316,7 @@
                 .crumb:not(.first):not(.crumbmenu) {
                     display : none;
                 }
+
                 .crumbmenu {
                     background-image : none;
                     display          : inline-flex;

@@ -182,74 +182,96 @@
     #app-navigation {
         transition : transform 300ms;
 
-        li {
-            line-height   : 44px;
-            padding       : 0 12px;
-            white-space   : nowrap;
-            text-overflow : ellipsis;
-            color         : var(--color-main-text);
-            opacity       : 0.57;
-            cursor        : pointer;
-            transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
-            &:hover,
-            &:active,
-            &.active { opacity : 1; }
+        ul {
+            li {
+                line-height   : 44px;
+                padding       : 0 12px;
+                white-space   : nowrap;
+                text-overflow : ellipsis;
+                color         : var(--color-main-text);
+                opacity       : 0.57;
+                cursor        : pointer;
+                transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
-            &:before {
-                font-family   : var(--pw-icon-font-face);
-                font-size     : 1rem;
-                padding-right : 10px;
-                width         : 1rem;
-                text-align    : center;
-                display       : inline-block;
-            }
+                &:hover,
+                &:active,
+                &.active { opacity : 1; }
 
-            &.nav-icon-all:before { content : "\f0ac"; }
-            &.nav-icon-folders:before { content : "\f07b"; }
-            &.nav-icon-recent:before { content : "\f017"; }
-            &.nav-icon-tags:before { content : "\f02c"; }
-            &.nav-icon-security:before { content : "\f132"; }
-            &.nav-icon-shares:before { content : "\f1e0"; }
-            &.nav-icon-favorites:before { content : "\f005"; }
-            &.nav-icon-search:before { content : "\f002"; }
-            &.nav-icon-trash:before { content : "\f014"; }
-            &.nav-icon-more:before { content : "\f067"; }
-            &.nav-icon-settings:before { content : "\f013"; }
-            &.nav-icon-addon:before { content : "\f12e"; }
-            &.nav-icon-help:before { content : "\f059"; }
-            &.nav-icon-backup:before { content : "\f187"; }
-
-            span {
-                cursor : pointer;
-            }
-        }
-
-        .menu-secondary {
-            height      : auto;
-            flex-shrink : 0;
-        }
-
-        #app-settings {
-            position         : relative;
-            overflow         : hidden;
-            max-height       : 44px;
-            background-color : var(--color-main-background);
-            border-right     : 1px solid var(--color-border);
-            transition       : max-height 0.25s ease-in-out;
-
-            &.open {
-                max-height : 220px;
-
-                li.nav-icon-more {
-                    opacity : 1;
-
-                    &:before { content : "\f068"; }
+                &:before {
+                    font-family   : var(--pw-icon-font-face);
+                    font-size     : 1rem;
+                    padding-right : 10px;
+                    width         : 1rem;
+                    text-align    : center;
+                    display       : inline-block;
                 }
 
-                @media (max-height : 360px) {
-                    position : fixed;
-                    bottom   : 0;
+                &.nav-icon-all:before { content : "\f0ac"; }
+
+                &.nav-icon-folders:before { content : "\f07b"; }
+
+                &.nav-icon-recent:before { content : "\f017"; }
+
+                &.nav-icon-tags:before { content : "\f02c"; }
+
+                &.nav-icon-security:before { content : "\f132"; }
+
+                &.nav-icon-shares:before { content : "\f1e0"; }
+
+                &.nav-icon-favorites:before { content : "\f005"; }
+
+                &.nav-icon-search:before { content : "\f002"; }
+
+                &.nav-icon-trash:before { content : "\f014"; }
+
+                &.nav-icon-more:before { content : "\f067"; }
+
+                &.nav-icon-settings:before { content : "\f013"; }
+
+                &.nav-icon-addon:before { content : "\f12e"; }
+
+                &.nav-icon-help:before { content : "\f059"; }
+
+                &.nav-icon-backup:before { content : "\f187"; }
+
+                span {
+                    cursor : pointer;
+                }
+            }
+
+            &.menu-main {
+                height : 100%;
+            }
+
+            &.menu-secondary {
+                height      : auto;
+                flex-shrink : 0;
+            }
+
+            &#app-settings {
+                position         : relative;
+                overflow         : hidden;
+                max-height       : 44px;
+                height           : auto;
+                background-color : var(--color-main-background);
+                border-right     : 1px solid var(--color-border);
+                transition       : max-height 0.25s ease-in-out;
+
+                &.open {
+                    max-height  : 220px;
+                    flex-shrink : 0;
+
+                    li.nav-icon-more {
+                        opacity : 1;
+
+                        &:before { content : "\f068"; }
+                    }
+
+                    @media (max-height : 360px) {
+                        position : fixed;
+                        bottom   : 0;
+                    }
                 }
             }
         }
