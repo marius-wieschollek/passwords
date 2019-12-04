@@ -96,7 +96,6 @@ export default class EnpassConversionHelper {
         return folders;
     }
 
-
     /**
      *
      * @returns {Promise<{}>}

@@ -13,6 +13,7 @@
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
                     <translate tag="option" value="enpass" say="Enpass JSON"/>
+                    <translate tag="option" value="bitwarden" say="Bitwarden JSON"/>
                     <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
@@ -497,6 +498,10 @@
                         this.mime = 'application/json';
                         this.options.skipEmpty = true;
                         this.type = 'enpass';
+                        break;
+                    case 'bitwarden':
+                        this.mime = 'application/json';
+                        this.type = 'bitwarden';
                         break;
                     case 'keepass':
                         this.csv.escape = '\\';
