@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Removed
+ - Nextcloud 15 and 16 support
+ - Legacy ocPasswords migration
+ - Database duplicate deletion
+ - Backup migration
 
 ## 2019.12.0 - Feature release
 ### Added

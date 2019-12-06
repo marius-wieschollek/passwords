@@ -143,18 +143,6 @@ class ApiTokenHelper {
     }
 
     /**
-     * @throws \Exception
-     */
-    protected function destroyLegacyToken(): void {
-        $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
-        if($tokenId !== false) {
-            $this->config->deleteUserValue(self::WEBUI_TOKEN);
-            $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
-            $this->destroyToken($tokenId);
-        }
-    }
-
-    /**
      *
      */
     public function destroyWebUiToken(): void {
@@ -170,8 +158,6 @@ class ApiTokenHelper {
      * @throws \Exception
      */
     protected function loadWebUiToken() {
-        // @TODO remove in 2020.1
-        if($this->config->hasUserValue('webui_token_id')) $this->destroyLegacyToken();
         if($this->environment->isImpersonating()) return false;
 
         $token   = $this->session->get(self::WEBUI_TOKEN);
