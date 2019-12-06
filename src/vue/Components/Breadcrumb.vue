@@ -256,7 +256,7 @@
                 transition : max-height 0.25s ease-in-out;
                 display    : block;
                 position   : relative;
-                left       : -126px;
+                left       : -134px;
 
                 ul {
                     padding-right : 0;
@@ -277,7 +277,7 @@
 
             &.active .menu {
                 overflow   : visible;
-                max-height : 75px;
+                max-height : 90px;
                 animation  : 0.25s delay-overflow;
             }
         }

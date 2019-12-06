@@ -1,6 +1,11 @@
 ## [Unreleased]
 ### Added
  - Lazy loading for favicons and avatars
+### Fixed
+ - Server timeout on settings page
+ - Mobile Layout in NC 17
+ - Navigation in NC 15
+ - Attempt to send mails to users without email
 
 ## 2019.11.1 - Bugfix release
 ### Fixed
