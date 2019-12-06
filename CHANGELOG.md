@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2019.12.0 - Feature release
 ### Added
  - Lazy loading for favicons and avatars
 ### Fixed
