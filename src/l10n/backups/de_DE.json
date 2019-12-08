@@ -90,7 +90,16 @@
             "Failed to decrypt folders"          : "Konnte Ordner nicht entschlüsseln",
             "Failed to decrypt tags"             : "Konnte Tags nicht entschlüsseln",
             "Import file is empty"               : "Die zu importierende Datei enthält keine Daten",
-            "CSV file can not be mapped"         : "CSV Felder passen nicht zur Zuordnung"
+            "CSV file can not be mapped"         : "CSV Felder passen nicht zur Zuordnung",
+            "Logins"                             : "Anmeldedaten",
+            "Notes"                              : "Notizen",
+            "Credit Cards"                       : "Kreditkarten",
+            "Identities"                         : "Identitäten",
+            "Finances"                           : "Finanzen",
+            "Licenses"                           : "Lizenzen",
+            "Travel"                             : "Reisen",
+            "Computers"                          : "Computer",
+            "Miscellaneous"                      : "Verschiedenes"
         },
         {
             "Invalid trailing quote in quoted field"                                     : "Das Feldzeichen ist falsch maskiert",
