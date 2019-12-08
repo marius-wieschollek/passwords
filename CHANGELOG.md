@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+ - Bitwarden JSON import
+### Changed
+ - Enpass JSON now translates folder names
 ### Removed
  - Nextcloud 15 and 16 support
  - Legacy ocPasswords migration
