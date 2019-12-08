@@ -585,9 +585,7 @@
                 <name>uuid</name>
                 <type>string</type>
                 <length>36</length>
-                <!-- @TODO: Add in 2020.1, fixes #162 -->
-                <!-- <notnull>true</notnull> -->
-                <!-- @TODO: Remove in 2020.1, fixes #162 -->
+                <notnull>true</notnull>
                 <default></default>
             </field>
             <field>

@@ -16,7 +16,6 @@ use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\StrictContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\Util;
@@ -117,7 +116,7 @@ class PageController extends Controller {
             ['https' => $isSecure]
         );
 
-        $response->setContentSecurityPolicy($this->getContentSecurityPolicy());
+        $this->getContentSecurityPolicy($response);
 
         return $response;
     }
@@ -151,21 +150,20 @@ class PageController extends Controller {
     }
 
     /**
-     * @return StrictContentSecurityPolicy
      * @throws \Exception
      */
-    protected function getContentSecurityPolicy(): StrictContentSecurityPolicy {
+    protected function getContentSecurityPolicy(TemplateResponse $response): void {
         $manualHost = parse_url($this->settings->get('server.handbook.url'), PHP_URL_HOST);
-        $csp        = new StrictContentSecurityPolicy();
+
+        $csp        = $response->getContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
         $csp->addAllowedConnectDomain('data:');
         $csp->addAllowedImageDomain($manualHost);
         $csp->addAllowedMediaDomain($manualHost);
-        $csp->allowEvalScript();
         $csp->allowInlineStyle();
 
-        return $csp;
+        $response->setContentSecurityPolicy($csp);
     }
 
     /**

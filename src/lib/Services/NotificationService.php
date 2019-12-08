@@ -28,7 +28,7 @@ use OCP\Notification\INotifier;
  *
  * @package OCA\Passwords\Notification
  */
-abstract class NotificationService implements INotifier {
+class NotificationService implements INotifier {
 
     /**
      * @var UserSettingsService
@@ -132,6 +132,26 @@ abstract class NotificationService implements INotifier {
         $this->impersonationNotification        = $impersonationNotification;
         $this->upgradeRequiredNotification      = $upgradeRequiredNotification;
         $this->emptyRequiredSettingNotification = $emptyRequiredSettingNotification;
+    }
+
+    /**
+     * Identifier of the notifier, only use [a-z0-9_]
+     *
+     * @return string
+     * @since 17.0.0
+     */
+    public function getID(): string {
+        return Application::APP_NAME;
+    }
+
+    /**
+     * Human readable name describing the notifier
+     *
+     * @return string
+     * @since 17.0.0
+     */
+    public function getName(): string {
+        return $this->l10NFactory->get(Application::APP_NAME)->t('Passwords');
     }
 
     /**
@@ -268,14 +288,12 @@ abstract class NotificationService implements INotifier {
 
     /**
      * @param INotification $notification
-     * @param string        $languageCode The code of the language that should be used to prepare the notification
+     * @param string        $languageCode
      *
      * @return INotification
-     * @throws \InvalidArgumentException When the notification was not prepared by a notifier
      * @throws \Exception
-     * @since 9.0.0
      */
-    public function realPrepare(INotification $notification, string $languageCode): INotification {
+    public function prepare(INotification $notification, string $languageCode): INotification {
         if($notification->getApp() !== Application::APP_NAME) {
             throw new \InvalidArgumentException();
         }
