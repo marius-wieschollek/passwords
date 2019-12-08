@@ -396,6 +396,12 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', 'url', 'notes']
             },
+            bitwardenCsv  : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['tagLabels', 'favorite', 'folderLabel', 'label', 'notes', 'customFields', 'url', 'username', 'password'],
+                repair   : true
+            },
             lastpass : {
                 firstLine: 1,
                 db       : 'passwords',
