@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Added
  - Bitwarden JSON import
+ - Bitwarden CSV import
 ### Changed
  - Enpass JSON now translates folder names
 ### Removed
