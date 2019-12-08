@@ -14,6 +14,7 @@
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
                     <translate tag="option" value="enpass" say="Enpass JSON"/>
                     <translate tag="option" value="bitwarden" say="Bitwarden JSON"/>
+                    <translate tag="option" value="bitwardenCsv" say="Bitwarden CSV"/>
                     <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
@@ -508,6 +509,7 @@
                     case 'legacy':
                     case 'roboform':
                     case 'lastpass':
+                    case 'bitwardenCsv':
                         this.options.profile = value;
                         break;
                     case 'safeincloud':
