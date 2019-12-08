@@ -82,9 +82,6 @@
                     <name>user_id</name>
                 </field>
                 <field>
-                    <name>deleted</name>
-                </field>
-                <field>
                     <name>uuid</name>
                 </field>
             </index>
@@ -249,9 +246,6 @@
                     <name>user_id</name>
                 </field>
                 <field>
-                    <name>deleted</name>
-                </field>
-                <field>
                     <name>uuid</name>
                 </field>
             </index>
@@ -316,9 +310,6 @@
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
-                </field>
-                <field>
-                    <name>deleted</name>
                 </field>
                 <field>
                     <name>uuid</name>
@@ -445,9 +436,6 @@
                     <name>user_id</name>
                 </field>
                 <field>
-                    <name>deleted</name>
-                </field>
-                <field>
                     <name>uuid</name>
                 </field>
             </index>
@@ -506,9 +494,6 @@
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
-                </field>
-                <field>
-                    <name>deleted</name>
                 </field>
                 <field>
                     <name>uuid</name>
@@ -633,9 +618,6 @@
                     <name>user_id</name>
                 </field>
                 <field>
-                    <name>deleted</name>
-                </field>
-                <field>
                     <name>uuid</name>
                 </field>
             </index>
@@ -729,9 +711,6 @@
                 </field>
                 <field>
                     <name>password</name>
-                </field>
-                <field>
-                    <name>deleted</name>
                 </field>
             </index>
         </declaration>
@@ -915,6 +894,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -975,6 +964,16 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -1037,6 +1036,16 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
 </database>
