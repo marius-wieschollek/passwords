@@ -114,7 +114,7 @@
 
                     <translate tag="label"
                                for="setting-encryption-setup"
-                               say="Enc-to-end Encryption"
+                               say="End-to-end Encryption"
                                v-if="!hasEncryption && encryptionFeature"/>
                     <translate tag="input"
                                type="button"
@@ -127,7 +127,7 @@
 
                     <translate tag="label"
                                for="setting-encryption-update"
-                               say="Enc-to-end Encryption"
+                               say="End-to-end Encryption"
                                v-if="hasEncryption"/>
                     <translate tag="input"
                                type="button"
