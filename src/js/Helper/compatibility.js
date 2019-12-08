@@ -1,7 +1,5 @@
 function isCompatibleBrowser() {
     try {
-        eval('"use strict"; class PasswordsTestBrowserClassSupport {}');
-        eval('"use strict"; let PasswordsTestAsyncBrowserFunctionSupport = async function(){}');
         return window.crypto.subtle && window.TextEncoder;
     } catch(e) {
         console.error(e);

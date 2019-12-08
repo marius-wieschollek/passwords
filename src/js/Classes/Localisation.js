@@ -8,7 +8,7 @@ export default class Localisation {
      */
     static translate(text, variables = {}) {
         if (text === undefined) return '';
-        if (OC !== undefined) return OC.L10N.translate('passwords', text, variables);
+        if (OC !== undefined) return OC.L10N.translate('passwords', text, variables).replace('&amp;', '&');
 
         return '';
     }
