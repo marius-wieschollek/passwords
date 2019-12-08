@@ -1,5 +1,6 @@
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 import API from '@js/Helper/api';
 
 export default class PassmanConversionHelper {
@@ -28,23 +29,23 @@ export default class PassmanConversionHelper {
      */
     static async _processTags(db) {
         let tags    = [],
-            mapping = await this._getTagLabelMapping();
+            mapping = await ImportMappingHelper.getTagLabelMapping();
 
-        for (let i = 0; i < db.length; i++) {
+        for(let i = 0; i < db.length; i++) {
             let element = db[i];
 
-            if (!element.tags) continue;
-            for (let j = 0; j < element.tags.length; j++) {
-                let label = element.tags[j].text,
-                    id    = label;
+            if(!element.tags) continue;
+            for(let j = 0; j < element.tags.length; j++) {
+                let label   = element.tags[j].text,
+                    labelId = label.toLowerCase();
 
-                if (mapping.hasOwnProperty(label)) {
-                    id = mapping[label];
+                if(mapping.hasOwnProperty(labelId)) {
+                    element.tags[j] = mapping[labelId];
                 } else {
-                    mapping[label] = label;
-                    tags.push({id: label, label, color: randomMC.getColor()});
+                    mapping[labelId] = labelId;
+                    element.tags[j] = labelId;
+                    tags.push({id: labelId, label, color: randomMC.getColor()});
                 }
-                element.tags[j] = id;
             }
         }
 
@@ -60,7 +61,7 @@ export default class PassmanConversionHelper {
     static _processPasswords(db) {
         let passwords = [], errors = [];
 
-        for (let i = 0; i < db.length; i++) {
+        for(let i = 0; i < db.length; i++) {
             let element = db[i], object = {
                 id          : element.guid,
                 label       : element.label,
@@ -90,10 +91,10 @@ export default class PassmanConversionHelper {
      * @private
      */
     static _checkPassword(object) {
-        if (typeof object.password === 'string' && object.password.length > 0) return;
+        if(typeof object.password === 'string' && object.password.length > 0) return;
 
-        for (let i = 0; i < object.customFields.length; i++) {
-            if (object.customFields[i].type === 'secret') {
+        for(let i = 0; i < object.customFields.length; i++) {
+            if(object.customFields[i].type === 'secret') {
                 object.password = object.customFields[i].value;
                 return;
             }
@@ -109,8 +110,8 @@ export default class PassmanConversionHelper {
      * @private
      */
     static _processEmail(element, object) {
-        if (element.email) {
-            if (!object.username || object.username.length === 0) {
+        if(element.email) {
+            if(!object.username || object.username.length === 0) {
                 object.username = element.email;
             } else {
                 let label = Localisation.translate('Email'),
@@ -137,14 +138,14 @@ export default class PassmanConversionHelper {
             hasFiles = true;
         }
 
-        if (element.hasOwnProperty('custom_fields') && element.custom_fields.length !== 0) {
-            for (let j = 0; j < element.custom_fields.length; j++) {
+        if(element.hasOwnProperty('custom_fields') && element.custom_fields.length !== 0) {
+            for(let j = 0; j < element.custom_fields.length; j++) {
                 let field = element.custom_fields[j];
 
-                if (field.field_type === 'file') {
+                if(field.field_type === 'file') {
                     if(!hasFiles) this._logConversionError('"{label}" has files attached which can not be imported.', element, field, errors);
                     hasFiles = true;
-                } else if (['text', 'password'].indexOf(field.field_type) !== -1) {
+                } else if(['text', 'password'].indexOf(field.field_type) !== -1) {
                     this._processCustomField(field, element, errors, object);
                 } else {
                     this._logConversionError('The type of "{field}" in "{label}" is unknown and can not be imported.', element, field, errors);
@@ -169,21 +170,21 @@ export default class PassmanConversionHelper {
         if(value.length < 1) return;
         if(label.length < 1) label = type.capitalize();
 
-        if (label.length > 48) {
+        if(label.length > 48) {
             this._logConversionError('The label of "{field}" in "{label}" exceeds 48 characters and was cut.', element, field, errors);
             label = label.substr(0, 48);
         }
 
-        if (value.length > 320) {
+        if(value.length > 320) {
             this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', element, field, errors);
             value = value.substr(0, 320);
         }
 
-        if (type === 'password') {
+        if(type === 'password') {
             type = 'secret';
-        } else if (value.match(/^[\w._-]+@.+$/)) {
+        } else if(value.match(/^[\w._-]+@.+$/)) {
             type = 'email';
-        } else if (value.match(/^\w+:\/\/.+$/) && value.substr(0, 11) !== 'javascript:') {
+        } else if(value.match(/^\w+:\/\/.+$/) && value.substr(0, 11) !== 'javascript:') {
             type = 'url';
         }
 
@@ -197,26 +198,9 @@ export default class PassmanConversionHelper {
      * @private
      */
     static _processOtpValue(element, object) {
-        if (element.hasOwnProperty('otp') && element.otp.hasOwnProperty('secret')) {
+        if(element.hasOwnProperty('otp') && element.otp.hasOwnProperty('secret')) {
             object.customFields.push({label: 'otp', type: 'secret', value: element.otp.secret});
         }
-    }
-
-    /**
-     *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getTagLabelMapping() {
-        let tags    = await API.listTags(),
-            mapping = {};
-
-        for (let i in tags) {
-            if (!tags.hasOwnProperty(i)) continue;
-            mapping[tags[i].label] = tags[i].id;
-        }
-
-        return mapping;
     }
 
     /**

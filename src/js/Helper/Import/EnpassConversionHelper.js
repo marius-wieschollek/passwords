@@ -1,6 +1,7 @@
-import * as randomMC from "random-material-color";
-import API from '@js/Helper/api';
+import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
+import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 
 export default class EnpassConversionHelper {
 
@@ -35,7 +36,7 @@ export default class EnpassConversionHelper {
     static async _processTags(data) {
         let tags     = [],
             tagMap   = {},
-            labelMap = await this._getTagLabelMapping();
+            labelMap = await ImportMappingHelper.getTagLabelMapping();
 
         for(let i = 0; i < data.length; i++) {
             let tag = data[i],
@@ -56,64 +57,33 @@ export default class EnpassConversionHelper {
 
     /**
      *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getTagLabelMapping() {
-        let tags    = await API.listTags(),
-            mapping = {};
-
-        for(let i in tags) {
-            if(!tags.hasOwnProperty(i)) continue;
-            mapping[tags[i].label.toLowerCase()] = tags[i].id;
-        }
-
-        return mapping;
-    }
-
-    /**
-     *
      * @param data
      * @returns {Promise<Array>}
      * @private
      */
     static async _processFolders(data) {
-        let folders  = [],
-            labelMap = await this._getFolderLabelMapping();
+        let folders    = [],
+            categories = this._getCategoryLabels(),
+            labelMap   = await ImportMappingHelper.getFolderLabelMapping();
 
         for(let i = 0; i < data.length; i++) {
             let folder = data[i].category,
-                id     = folder.toLowerCase();
+                label  = folder.capitalize();
 
-            if(!labelMap.hasOwnProperty(id)) {
-                labelMap[id] = folder;
-                folders.push({id, label: folder.capitalize()});
-            } else {
-                data[i].category = labelMap[id];
+            if(categories.hasOwnProperty(folder)) {
+                label = categories[folder];
             }
+
+            let id = label.toLowerCase();
+            if(!labelMap.hasOwnProperty(id)) {
+                labelMap[id] = id;
+                folders.push({id, label});
+            }
+
+            data[i].category = labelMap[id];
         }
 
         return folders;
-    }
-
-    /**
-     *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getFolderLabelMapping() {
-        let folders = await API.findFolders({parent: '00000000-0000-0000-0000-000000000000'}),
-            mapping = {
-                'password': '00000000-0000-0000-0000-000000000000',
-                'login'   : '00000000-0000-0000-0000-000000000000'
-            };
-
-        for(let i in folders) {
-            if(!folders.hasOwnProperty(i)) continue;
-            mapping[folders[i].label.toLowerCase()] = folders[i].id;
-        }
-
-        return mapping;
     }
 
     /**
@@ -127,7 +97,7 @@ export default class EnpassConversionHelper {
     static async _processPasswords(data, tagMap, options) {
         let passwords = [],
             errors    = [],
-            mapping   = await this._getPasswordLabelMapping();
+            mapping   = await ImportMappingHelper.getPasswordLabelMapping();
 
         for(let i = 0; i < data.length; i++) {
             let password = this._processPassword(data[i], mapping, tagMap, options.skipEmpty, errors);
@@ -148,18 +118,24 @@ export default class EnpassConversionHelper {
      * @private
      */
     static _processPassword(element, mapping, tagMap, skipEmpty, errors) {
-        let id       = element.title.toLowerCase(),
-            password = {
-                customFields: [],
-                password    : 'password-missing-during-import',
-                favorite    : element.favorite === 1,
-                folder      : element.category,
-                label       : element.title,
-                notes       : element.note,
-                tags        : []
-            };
+        let label = element.title;
+        if(element.hasOwnProperty('subtitle') && element.subtitle.length !== 0 &&
+           element.subtitle !== label &&
+           (!element.hasOwnProperty('template_type') || element.template_type !== 'login.default')) {
+            label = `${label} – ${element.subtitle}`;
+        }
 
-        this._checkPasswordDuplicate(mapping, id, password);
+        let password = {
+            customFields: [],
+            password    : 'password-missing-during-import',
+            favorite    : element.favorite === 1,
+            folder      : element.category,
+            notes       : element.note,
+            label,
+            tags        : []
+        };
+
+        ImportMappingHelper.checkPasswordDuplicate(mapping, password);
         this._processPasswordTags(element, password, tagMap);
 
         if(element.hasOwnProperty('fields')) {
@@ -192,6 +168,7 @@ export default class EnpassConversionHelper {
 
             this._processCustomField(field, password, errors);
         }
+        if(password.customFields.length === 0) delete password.customFields;
     }
 
     /**
@@ -202,27 +179,8 @@ export default class EnpassConversionHelper {
      * @private
      */
     static _processCustomField(field, password, errors) {
-        let type  = 'text',
-            label = field.label,
-            value = field.value;
-        if(['email', 'url'].indexOf(field.type) !== -1) {
-            type = field.type;
-        } else if(['password', 'totp'].indexOf(field.type) !== -1 || field.sensitive === 1) {
-            type = 'secret';
-        }
-
-        if(label.length < 1) label = field.type.capitalize();
-        if(label.length > 48) {
-            this._logConversionError('The label of "{field}" in "{label}" exceeds 48 characters and was cut.', {label: password.label, field: label}, errors);
-            label = label.substr(0, 48);
-        }
-
-        if(value.length > 320) {
-            this._logConversionError('The value of "{field}" in "{label}" exceeds 320 characters and was cut.', {label: password.label, field: label}, errors);
-            value = value.substr(0, 320);
-        }
-
-        password.customFields.push({label, type, value})
+        let type = field.sensitive ? 'secret':field.type;
+        CustomFieldsHelper.createCustomField(password, errors, field.value, field.label, type);
     }
 
     /**
@@ -270,39 +228,22 @@ export default class EnpassConversionHelper {
 
     /**
      *
-     * @param mapping
-     * @param id
-     * @param password
+     * @returns {{note: string, license: string, password: string, computer: string, identity: string, login: string, travel: string, creditcard: string, finance: string, misc: string}}
      * @private
      */
-    static _checkPasswordDuplicate(mapping, id, password) {
-        if(mapping.hasOwnProperty(id)) {
-            let entry = mapping[id];
-
-            if(entry.folder === password.folder) {
-                password.id = entry.id;
-            }
-        }
-    }
-
-    /**
-     *
-     * @returns {Promise<{}>}
-     * @private
-     */
-    static async _getPasswordLabelMapping() {
-        let passwords = await API.listPasswords(),
-            mapping   = {};
-
-        for(let i in passwords) {
-            if(!passwords.hasOwnProperty(i)) continue;
-            mapping[passwords[i].label.toLowerCase()] = {
-                id    : passwords[i].id,
-                folder: passwords[i].folder
-            };
-        }
-
-        return mapping;
+    static _getCategoryLabels() {
+        return {
+            login     : Localisation.translate('Logins'),
+            creditcard: Localisation.translate('Credit Cards'),
+            identity  : Localisation.translate('Identities'),
+            note      : Localisation.translate('Notes'),
+            password  : Localisation.translate('Passwords'),
+            finance   : Localisation.translate('Finances'),
+            license   : Localisation.translate('Licenses'),
+            travel    : Localisation.translate('Travel'),
+            computer  : Localisation.translate('Computers'),
+            misc      : Localisation.translate('Miscellaneous')
+        };
     }
 
     /**
