@@ -15,11 +15,13 @@ namespace OCA\Passwords\Helper\Words;
 abstract class AbstractWordsHelper {
 
     /**
-     * @param int $strength
+     * @param int  $strength
+     * @param bool $addNumbers
+     * @param bool $addSpecial
      *
-     * @return array
+     * @return array|null
      */
-    abstract public function getWords(int $strength): array;
+    abstract public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array;
 
     /**
      * Whether or not this service can be used in the current environment
@@ -38,6 +40,16 @@ abstract class AbstractWordsHelper {
         $max = max($map);
         $min = min($map);
 
-        return $min > 3 && $max < 12;
+        return $min > 5 && $max < 13;
+    }
+
+    /**
+     * @param array $words
+     *
+     * @return string
+     */
+    protected function wordsArrayToPassword(array $words): string {
+        $words = array_map('ucfirst', $words);
+        return implode('', $words);
     }
 }

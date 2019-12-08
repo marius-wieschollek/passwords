@@ -1,5 +1,5 @@
 import router from '@js/Helper/router';
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Services/SettingsService';
 
 class SearchManager {
 
@@ -12,7 +12,7 @@ class SearchManager {
         this._status = {active: false, available: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
         this._index = null;
         this._indexFields = {
-            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType'],
+            passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType', 'hash'],
             folders  : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType'],
             tags     : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType']
         };
@@ -22,7 +22,21 @@ class SearchManager {
             tags     : 'data-tag-id'
         };
         this._exactMatchFields = ['status', 'favorite'];
-        this._aliasFields = {name: 'label', title: 'label', colour: 'color', favourite: 'favorite', user: 'username', all: ['website', 'username', 'url', 'notes', 'label']};
+        this._aliasFields =
+            {
+                name      : 'label',
+                title     : 'label',
+                colour    : 'color',
+                favourite : 'favorite',
+                user      : 'username',
+                sha       : 'hash',
+                cse       : 'cseType',
+                sse       : 'sseType',
+                csetype   : 'cseType',
+                ssetype   : 'sseType',
+                statuscode: 'statusCode',
+                all       : ['website', 'username', 'url', 'notes', 'label']
+            };
     }
 
     init() {
@@ -169,7 +183,7 @@ class SearchManager {
     /**
      *
      * @param query
-     * @returns {string}
+     * @returns {array}
      * @private
      */
     _processQuery(query) {
@@ -224,7 +238,7 @@ class SearchManager {
         if(this._aliasFields.hasOwnProperty(field)) field = this._aliasFields[field];
 
         let fields = Array.isArray(field) ? field:[field],
-            value = rawValue.trim();
+            value  = rawValue.trim();
 
         if(value.length !== 0) params.push({fields, value});
     }
@@ -288,8 +302,8 @@ class SearchManager {
      */
     _globalSearch() {
         document.getElementById('searchbox').addEventListener('keyup', (e) => {
-            if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsManager.get('client.search.global')) {
-                router.push({name: 'Search', params: {query: btoa(SM.status.query)}});
+            if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsService.get('client.search.global')) {
+                router.push({name: 'Search', params: {query: btoa(this.status.query)}});
             }
         });
     }
@@ -307,7 +321,7 @@ class SearchManager {
             if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
             if(['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1) return;
             if(['true', '1', 'on'].indexOf(e.target.contentEditable) !== -1) return;
-            if(!SettingsManager.get('client.search.live')) return;
+            if(!SettingsService.get('client.search.live')) return;
 
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
                 searchbox.value += e.key;
@@ -316,9 +330,15 @@ class SearchManager {
                 this.search(searchbox.value);
             }
         });
+        document.addEventListener('keyup', (e) => {
+            if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
+            if(e.key !== 'Escape' || e.target.id !== 'searchbox') return;
+            if(!SettingsService.get('client.search.live')) return;
+            e.preventDefault();
+            searchbox.value = '';
+            this.search('');
+        });
     }
 }
 
-let SM = new SearchManager();
-
-export default SM;
+export default new SearchManager();

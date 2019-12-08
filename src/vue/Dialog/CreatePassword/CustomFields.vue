@@ -13,7 +13,7 @@
 
 <script>
     import Utility from '@js/Classes/Utility';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
     import CustomFieldForm from '@vue/Dialog/CreatePassword/CustomFieldForm';
 
     export default {
@@ -25,7 +25,7 @@
         },
         data() {
             return {
-                showHidden  : SettingsManager.get('client.ui.custom.fields.show.hidden')
+                showHidden  : SettingsService.get('client.ui.custom.fields.show.hidden')
             };
         },
         computed  : {
@@ -33,7 +33,7 @@
                 let fields = [];
 
                 for(let i = 0; i < this.fields.length; i++) {
-                    let field = this.fields[i];
+                    let field = Utility.cloneObject(this.fields[i]);
                     if(field.type === 'data' && !this.showHidden) continue;
 
                     field.id = i;
@@ -58,6 +58,9 @@
                 let customFields = Utility.cloneObject(this.fields);
                 customFields.splice($event.id, 1);
                 this.$emit('updated', customFields);
+            },
+            cloneFields() {
+
             }
         }
     };

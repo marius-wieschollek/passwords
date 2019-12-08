@@ -1,20 +1,20 @@
 <template>
     <div class="preview-container" v-if="showPreview">
-        <web :href="link">
+        <component :is="link ? 'web':'div'" :href="link" class="inner-container">
             <div class="loader">
                 <img :src="loadingIcon" alt="">
             </div>
             <div class="image" :class="imgClass" :style="style" @mouseover="imageMouseOver" @mouseout="imageMouseOut">
-                <img :src="image" @load="imageLoaded" alt="">
+                <img :src="image" @load="imageLoaded($event)" alt="" v-if="showImage">
             </div>
-        </web>
+        </component>
     </div>
 </template>
 
 <script>
     import Web from '@vc/Web';
     import API from '@js/Helper/api';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {Web},
@@ -42,6 +42,7 @@
                 loading    : true,
                 loadingIcon: this.icon,
                 imgClass   : 'loading-hidden',
+                showImage  : false,
                 style      : {
                     marginTop: 0
                 }
@@ -50,11 +51,12 @@
 
         created() {
             this.loadFavicon(this.link);
+            setTimeout(() => { this.showImage = true; }, 100);
         },
 
         computed: {
             showPreview() {
-                return window.innerWidth > 640 && SettingsManager.get('client.ui.password.details.preview');
+                return window.innerWidth > 640 && SettingsService.get('client.ui.password.details.preview');
             }
         },
 
@@ -81,19 +83,24 @@
             imageMouseOut() {
                 this.style.marginTop = 0;
             },
-            imageLoaded() {
-                this.loading = false;
-                this.imgClass = '';
+            imageLoaded(event) {
+                if(event.target.src === this.image) {
+                    this.loading = false;
+                    this.imgClass = '';
+                }
             },
-            loadFavicon(url) {
-                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 350);
+            loadFavicon() {
+                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 450);
             }
         },
         watch  : {
             image() {
                 this.loading = true;
+                this.showImage = false;
                 this.imgClass = 'loading-hidden';
                 this.style.marginTop = 0;
+                setTimeout(() => { this.showImage = true; }, 100);
+                this.$el.scrollTop = 0;
                 this.$forceUpdate();
             },
             icon(value) {
@@ -112,7 +119,7 @@
         overflow   : hidden;
         position   : relative;
 
-        a {
+        .inner-container {
             display   : block;
             font-size : 0;
 
@@ -136,6 +143,10 @@
                     opacity    : 0;
                     min-height : 274px;
                     transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+
+                    img {
+                        height: 0;
+                    }
                 }
             }
 
@@ -168,7 +179,19 @@
             display : none;
         }
 
-        @media (max-width : $mobile-width) {
+        @media screen and (hover: none)   {
+            overflow-y   : auto;
+        }
+
+        @media (max-height : 480px) {
+            max-height : 45vh;
+
+            .inner-container .image.loading-hidden {
+                min-height : 45vh;
+            }
+        }
+
+        @media (max-width : $width-extra-small) {
             display : none;
         }
     }

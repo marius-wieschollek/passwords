@@ -39,11 +39,6 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     protected $folderMapper;
 
     /**
-     * @var EncryptionService
-     */
-    protected $encryptionService;
-
-    /**
      * @var string
      */
     protected $objectName = 'password';
@@ -71,10 +66,9 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         EnvironmentService $environment,
         PasswordRevisionService $revisionService
     ) {
-        parent::__construct($modelMapper, $revisionService);
+        parent::__construct($modelMapper, $revisionService, $encryption, $environment);
         $this->folderMapper      = $folderMapper;
-        $this->encryptionService = $encryption;
-        $this->convertFields     = $config->getAppValue('migration/customFields') === '2019.4.2' || $environment->isCliMode();
+        $this->convertFields     = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2019.7.2';
         $this->config            = $config;
     }
 
@@ -85,7 +79,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function run(IOutput $output): void {
         parent::run($output);
-        $this->config->setAppValue('migration/customFields', '2019.4.2');
+        $this->config->setAppValue('migration/customFields', '2019.7.2');
     }
 
     /**
@@ -102,15 +96,15 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
             $fixed = true;
         }
 
-        if($revision->getCustomFields() === null && $revision->getCseType() === 'none') {
-            $this->encryptionService->decrypt($revision);
-            $revision->setCustomFields('[]');
+        if($revision->getCustomFields() === null && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) {
+            if($this->decryptOrDelete($revision)) $revision->setCustomFields('[]');
             $fixed = true;
         }
 
         if($this->convertCustomFields($revision)) $fixed = true;
+        if($this->cleanCustomFields($revision)) $fixed = true;
 
-        if($revision->getStatus() === 1 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
+        if($revision->getStatus() !== 0 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
             $revision->setStatus(0);
             $fixed = true;
         }
@@ -130,15 +124,16 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     }
 
     /**
+     * Convert legacy custom fields structure
+     *
      * @param PasswordRevision $revision
      *
      * @return bool
-     * @throws \Exception
      */
     public function convertCustomFields(PasswordRevision $revision): bool {
-        if(!$this->convertFields || $revision->getCseType() !== 'none') return false;
+        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
-        $this->encryptionService->decrypt($revision);
+        if(!$this->decryptOrDelete($revision)) return true;
         $customFields = $revision->getCustomFields();
 
         if(substr($customFields, 0, 1) === '[') return false;
@@ -154,6 +149,32 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
             if(substr($label, 0, 1) === '_') $data['type'] = 'data';
 
             $newFields[] = ['label' => $label, 'type' => $data['type'], 'value' => $data['value']];
+        }
+
+        $revision->setCustomFields(json_encode($newFields));
+
+        return true;
+    }
+
+    /**
+     * Remove messy data from custom fields
+     *
+     * @param PasswordRevision $revision
+     *
+     * @return bool
+     */
+    public function cleanCustomFields(PasswordRevision $revision): bool {
+        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
+
+        if(!$this->decryptOrDelete($revision)) return true;
+        $customFields = $revision->getCustomFields();
+
+        if(strpos($customFields, '"blank":') === false && strpos($customFields, '"id":') === false) return false;
+
+        $oldFields = json_decode($customFields, true);
+        $newFields = [];
+        foreach($oldFields as $label => $data) {
+            $newFields[] = ['label' => $data['label'], 'type' => $data['type'], 'value' => $data['value']];
         }
 
         $revision->setCustomFields(json_encode($newFields));

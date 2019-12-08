@@ -31,32 +31,46 @@ class LocalWordsHelper extends AbstractWordsHelper {
     protected $langCode;
 
     /**
+     * @var SpecialCharacterHelper
+     */
+    protected $specialCharacters;
+
+    /**
      * LocalWordsHelper constructor.
      *
-     * @param string $langCode
+     * @param string                 $langCode
+     * @param SpecialCharacterHelper $specialCharacters
      */
-    public function __construct(string $langCode) {
-        $this->langCode = $langCode;
+    public function __construct(SpecialCharacterHelper $specialCharacters, string $langCode) {
+        $this->langCode          = $langCode;
+        $this->specialCharacters = $specialCharacters;
     }
 
     /**
-     * @param int $strength
+     * @param int  $strength
+     * @param bool $addNumbers
+     * @param bool $addSpecial
      *
-     * @return array
+     * @return array|null
      * @throws Exception
      */
-    public function getWords(int $strength): array {
-        $length = $strength + 1;
+    public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
+        $length = $strength + 2;
         $file   = $this->getWordsFile();
 
         for($i = 0; $i < 24; $i++) {
             $result = [];
             @exec("shuf -n {$length} {$file}", $result, $code);
 
-            if($code == 0 && $this->isWordsArrayValid($result)) return $result;
+            if($code == 0 && $this->isWordsArrayValid($result)) {
+                return [
+                    'password' => $this->wordsArrayToPassword($result, $strength, $addNumbers, $addSpecial),
+                    'words'    => $result
+                ];
+            }
         }
 
-        return [];
+        return null;
     }
 
     /**
@@ -106,6 +120,20 @@ class LocalWordsHelper extends AbstractWordsHelper {
         if(LocalWordsHelper::isAvailable()) return self::WORDS_DEFAULT;
 
         throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
+    }
+
+    /**
+     * @param array $words
+     * @param int   $strength
+     * @param bool  $addNumbers
+     * @param bool  $addSpecial
+     *
+     * @return string|void
+     */
+    protected function wordsArrayToPassword(array $words, int $strength = 4, bool $addNumbers = true, bool $addSpecial = true): string {
+        $password = parent::wordsArrayToPassword($words);
+
+        return $this->specialCharacters->addSpecialCharacters($password, $strength * 3, $addNumbers, $addSpecial);
     }
 
     /**

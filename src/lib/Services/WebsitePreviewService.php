@@ -54,6 +54,8 @@ class WebsitePreviewService {
      * @param FileCacheService  $fileCacheService
      * @param ValidationService $validationService
      * @param LoggingService    $logger
+     *
+     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
         HelperService $helperService,

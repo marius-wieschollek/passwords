@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Vue from 'vue';
 import Localisation from '@js/Classes/Localisation';
 
 class Messages {
@@ -9,11 +10,11 @@ class Messages {
      */
     notification(notification) {
         return new Promise((resolve) => {
-            let $element = OC.Notification.show(Messages._translate(notification));
+            let $element = OC.Notification.show(Localisation.translateArray(notification));
 
             setTimeout(() => {
                 OC.Notification.hide($element);
-                resolve();
+                resolve({});
             }, 10000);
         });
     }
@@ -26,8 +27,8 @@ class Messages {
      */
     alert(message, title = 'Alert') {
         return new Promise((resolve) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
 
             OC.dialogs.alert(message, title, resolve, true);
         });
@@ -41,8 +42,8 @@ class Messages {
      */
     info(message, title = 'Info') {
         return new Promise((resolve) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
 
             OC.dialogs.info(message, title, resolve, true);
         });
@@ -55,9 +56,9 @@ class Messages {
      */
     confirm(message, title = 'Confirm') {
         return new Promise((resolve, reject) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
-            let callback = function(success) { success ? resolve():reject(); };
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
+            let callback = function(success) { success ? resolve({}):reject({}); };
 
             OC.dialogs.confirm(message, title, callback, true);
         });
@@ -73,14 +74,12 @@ class Messages {
      */
     prompt(message, title = 'Prompt', value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
-            message = Messages._translate(message);
-            title = Messages._translate(title);
+            message = Localisation.translateArray(message);
+            title = Localisation.translateArray(title);
             let callback = function(success, value) { success ? resolve(value):reject(value); };
 
             OC.dialogs.prompt('', title, callback, true, message, isPassword);
-            if(value !== null) {
-                this._setDialogValue(value);
-            }
+            if(value !== null) this._setDialogValue(value);
         });
     }
 
@@ -92,50 +91,51 @@ class Messages {
      * @returns {Promise<any>}
      */
     form(form, title = 'Form', message = '') {
-        let html = '',
-            id   = `passwords-form-${Math.round(Math.random() * 10)}`;
-        for(let name in form) {
-            if(!form.hasOwnProperty(name)) continue;
-            let field = form[name],
-                value = field.value ? field.value:'',
-                type  = field.type ? field.type:'text',
-                label = Messages._translate(field.label ? field.label:name.capitalize());
+        let id   = `passwords-form-${Math.round(Math.random() * 10)}`,
+            html = `<div id="${id}"></div>`;
 
-            html += `<label>${label}</label><input type="${type}" value="${value}" name="${name}" id="pw-field-${name}">`;
-        }
-
-        if(message.length !== 0) message = `<div class="message">${Messages._translate(message)}</div>`;
-        html = `<form class="passwords-form" id="${id}">${message.replace('\n', '<br>')}${html}</form>`;
-
-        return new Promise((resolve, reject) => {
-            title = Messages._translate(title);
-            let callback = function(success) {
+        return new Promise(async (resolve, reject) => {
+            let callback = (success) => {
                 if(success) {
-                    let serialized = $(`#${id}`).serializeArray(),
-                        data       = {};
-
-                    for(let i = 0; i < serialized.length; i++) {
-                        let field = serialized[i];
-                        data[field.name] = field.value;
-                    }
+                    let data = Form.getFormData();
+                    if(!data) throw new Error('Invalid Form Data');
 
                     $('.oc-dialog, .oc-dialog-dim').remove();
                     resolve(data);
                 } else {
-                    reject();
+                    reject({});
                 }
             };
 
+            title = Localisation.translateArray(title);
             OC.dialogs.confirmHtml(html, title, callback, true);
+
+            let FormTemplate  = await import(/* webpackChunkName: "Form" */ '@vue/Components/Form.vue'),
+                FormComponent = Vue.extend(FormTemplate.default),
+                Form          = new FormComponent({propsData: {form, message, id}});
+
+            this._loadForm(id, Form);
         });
     }
 
+    /**
+     *
+     * @param title
+     * @param mime
+     * @param multiselect
+     * @returns {Promise<any>}
+     */
     filePicker(title = 'Pick a file', mime, multiselect = false) {
         return new Promise((resolve) => {
             OC.dialogs.filepicker(title, (e, f) => {resolve(e, f);}, multiselect, mime, true, 1);
         });
     }
 
+    /**
+     *
+     * @param title
+     * @returns {*}
+     */
     folderPicker(title) {
         return this.filepicker(title, 'httpd/unix-directory', false);
     }
@@ -157,12 +157,21 @@ class Messages {
 
     /**
      *
-     * @param text
-     * @returns {string}
+     * @param id
+     * @param form
      * @private
      */
-    static _translate(text) {
-        return Array.isArray(text) ? Localisation.translate(text[0], text[1]):Localisation.translate(text);
+    _loadForm(id, form) {
+        let $el = document.getElementById(id);
+        if($el === null) {
+            setTimeout(() => { this._loadForm(id, form); }, 10);
+        } else {
+            form.$mount(`#${id}`);
+
+            let buttons = document.querySelectorAll('.oc-dialog-buttonrow.twobuttons button');
+            buttons[0].innerText = Localisation.translate('Cancel');
+            buttons[1].innerText = Localisation.translate('Ok');
+        }
     }
 }
 

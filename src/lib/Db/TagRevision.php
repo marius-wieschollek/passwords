@@ -15,7 +15,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class TagRevision extends AbstractRevisionEntity {
+class TagRevision extends AbstractRevision {
 
     /**
      * @var string

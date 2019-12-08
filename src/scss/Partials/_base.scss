@@ -4,7 +4,7 @@
 }
 
 .oc-dialog-dim {
-    z-index : 1000;
+    z-index : 1001;
 }
 
 form.searchbox {
@@ -13,6 +13,10 @@ form.searchbox {
     #searchbox:valid {
         padding-right : 25px;
     }
+}
+
+#main {
+    width: 100vw;
 }
 
 select,

@@ -8,10 +8,11 @@
 namespace OCA\Passwords\Services;
 
 use OC\Authentication\Token\IProvider;
-use OCA\Passwords\AppInfo\Application;
+use OC\Authentication\Token\IToken;
 use OCP\IConfig;
-use OCP\ILogger;
 use OCP\IRequest;
+use OCP\ISession;
+use OCP\IUser;
 use OCP\IUserManager;
 
 /**
@@ -21,20 +22,75 @@ use OCP\IUserManager;
  */
 class EnvironmentService {
 
+    const MODE_PUBLIC = 'public';
+    const MODE_USER   = 'user';
+    const MODE_GLOBAL = 'global';
+
+    const TYPE_REQUEST     = 'request';
+    const TYPE_CRON        = 'cron';
+    const TYPE_CLI         = 'cli';
+    const TYPE_MAINTENANCE = 'maintenance';
+
+    const LOGIN_NONE     = 'none';
+    const LOGIN_TOKEN    = 'token';
+    const LOGIN_PASSWORD = 'password';
+    const LOGIN_SESSION  = 'session';
+
+    const CLIENT_MAINTENANCE = 'CLIENT::MAINTENANCE';
+    const CLIENT_UNKNOWN     = 'CLIENT::UNKNOWN';
+    const CLIENT_SYSTEM      = 'CLIENT::SYSTEM';
+    const CLIENT_PUBLIC      = 'CLIENT::PUBLIC';
+    const CLIENT_CRON        = 'CLIENT::CRON';
+    const CLIENT_CLI         = 'CLIENT::CLI';
+
+    /**
+     * @var array
+     */
+    protected static $protectedClients
+        = [
+            self::CLIENT_MAINTENANCE,
+            self::CLIENT_CLI,
+            self::CLIENT_CRON,
+            self::CLIENT_PUBLIC,
+            self::CLIENT_SYSTEM,
+            self::CLIENT_UNKNOWN,
+            self::CLIENT_CRON,
+        ];
+
     /**
      * @var IConfig
      */
     protected $config;
 
     /**
-     * @var ILogger
+     * @var LoggingService
      */
     protected $logger;
 
     /**
-     * @var null|string
+     * @var ISession
      */
-    protected $userId;
+    protected $session;
+
+    /**
+     * @var IUserManager
+     */
+    protected $userManager;
+
+    /**
+     * @var IProvider
+     */
+    protected $tokenProvider;
+
+    /**
+     * @var IUser
+     */
+    protected $user;
+
+    /**
+     * @var IUser
+     */
+    protected $realUser;
 
     /**
      * @var null|string
@@ -42,170 +98,381 @@ class EnvironmentService {
     protected $userLogin;
 
     /**
-     * @var bool
+     * @var null|IToken
      */
-    protected $isCliMode;
+    protected $loginToken;
+
+    /**
+     * @var null|string
+     */
+    protected $client = self::CLIENT_UNKNOWN;
 
     /**
      * @var bool
      */
-    protected $isCronJob;
+    protected $impersonating = false;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $isAppUpdate;
+    protected $appMode = self::MODE_PUBLIC;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $isGlobalMode;
+    protected $runType = self::TYPE_REQUEST;
 
     /**
-     * @var mixed
+     * @var string
      */
-    protected $maintenanceEnabled;
-    /**
-     * @var IUserManager
-     */
-    private $userManager;
+    protected $loginType = self::LOGIN_NONE;
 
     /**
      * EnvironmentService constructor.
      *
-     * @param string|null $userId
-     * @param IConfig     $config
-     * @param IRequest    $request
-     * @param ILogger     $logger
+     * @param null|string    $userId
+     * @param IConfig        $config
+     * @param IRequest       $request
+     * @param ISession       $session
+     * @param LoggingService $logger
+     * @param IProvider      $tokenProvider
+     * @param IUserManager   $userManager
+     *
+     * @throws \Exception
      */
-    public function __construct(string $userId = null, IUserManager $userManager, IConfig $config, IRequest $request, ILogger $logger) {
-        $this->maintenanceEnabled = $config->getSystemValue('maintenance', false);
-        $this->isCliMode          = PHP_SAPI === 'cli';
-        $this->logger             = $logger;
-        $this->config             = $config;
-        $this->checkIfCronJob($request);
-        $this->checkIfAppUpdate($request);
-        $this->isGlobalMode = $this->maintenanceEnabled || $this->isCliMode || $this->isAppUpdate || $this->isCronJob;
+    public function __construct(
+        ?string $userId,
+        IConfig $config,
+        IRequest $request,
+        ISession $session,
+        LoggingService $logger,
+        IProvider $tokenProvider,
+        IUserManager $userManager
+    ) {
+        $this->config        = $config;
+        $this->logger        = $logger;
+        $this->session       = $session;
+        $this->userManager   = $userManager;
+        $this->tokenProvider = $tokenProvider;
 
-        if($this->isGlobalMode) {
-            // Debugging info
-            $logger->debug('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode', ['app' => Application::APP_NAME]);
-        }
-        if(!$this->isGlobalMode) $this->userId = $userId;
-        $this->userManager = $userManager;
+        $this->determineRunType($request);
+        $this->determineAppMode($userId, $request);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppMode(): string {
+        return $this->appMode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRunType(): string {
+        return $this->runType;
+    }
+
+    /**
+     * @return null|IUser
+     */
+    public function getUser(): ?IUser {
+        return $this->user;
     }
 
     /**
      * @return null|string
      */
     public function getUserId(): ?string {
-        return $this->userId;
+        return $this->user !== null ? $this->user->getUID():null;
     }
 
     /**
      * @return null|string
-     * @throws \Exception
      */
-    public function getUserLogin() {
-        if($this->userId === null) return null;
-        if($this->userLogin !== null) return $this->userLogin;
-        $password = null;
-
-        try {
-            /** @var IProvider $tokenProvider */
-            $tokenProvider = \OC::$server->query(IProvider::class);
-
-            if(isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
-                $this->userLogin = $_SERVER['PHP_AUTH_USER'];
-
-                $token    = $tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
-                $password = $tokenProvider->getPassword($token, $_SERVER['PHP_AUTH_PW']);
-            } else {
-                $sessionId    = \OC::$server->getSession()->getId();
-                $sessionToken = $tokenProvider->getToken($sessionId);
-
-                if($sessionToken->getUID() === $this->userId) {
-                    $password        = $tokenProvider->getPassword($sessionToken, $sessionId);
-                    $loginName       = $sessionToken->getLoginName();
-                    $this->userLogin = $loginName !== null ? $loginName:$this->userId;
-                } else {
-                    $this->logger->error('Cancelling session due to user id mismatch.', ['app' => Application::APP_NAME]);
-                    $tokenProvider->invalidateTokenById($sessionToken->getUID(), $sessionToken->getId());
-                }
-            }
-        } catch(\Throwable $e) {
-            $this->logger->logException($e, ['app' => Application::APP_NAME]);
-            $this->userLogin = $this->userId;
-        }
-
-        /** @var \OC\User\User|false $loginResult */
-        $loginResult = $this->userManager->checkPasswordNoLogging($this->userLogin, $password);
-        if($loginResult === false) {
-            $loginUser = $this->userManager->get($this->userLogin);
-            $loginUID  = $loginUser === null ? null:$loginUser->getUID();
-        } else {
-            $loginUID = $loginResult->getUid();
-        }
-
-        if($loginUID !== $this->userId) {
-            $this->logger->error('User id and login name do not match. Passwords does not support impersonating.', ['app' => Application::APP_NAME]);
-            throw new \Exception("Could not determine login name for {$this->userId}");
-        }
-
+    public function getUserLogin(): ?string {
         return $this->userLogin;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isCliMode(): bool {
-        return $this->isCliMode;
+    public function getLoginType(): string {
+        return $this->loginType;
+    }
+
+    /*
+     * @return IToken|null
+     */
+    public function getLoginToken(): ?IToken {
+        return $this->loginToken;
     }
 
     /**
      * @return bool
      */
-    public function isCronJob(): bool {
-        return $this->isCronJob;
+    public function isImpersonating(): bool {
+        return $this->impersonating;
     }
 
-    /**
-     * @return bool
+    /*
+     * @return null|IUser
      */
-    public function isGlobalMode(): bool {
-        return $this->isGlobalMode;
+    public function getRealUser(): ?IUser {
+        return $this->impersonating ? $this->realUser:$this->user;
     }
 
-    /**
-     * @return mixed
+    /*
+     * @return string
      */
-    public function isMaintenanceEnabled(): bool {
-        return $this->maintenanceEnabled;
+    public function getClient(): string {
+        return $this->client;
     }
 
     /**
      * @param IRequest $request
      */
-    protected function checkIfCronJob(IRequest $request): void {
+    protected function determineRunType(IRequest $request): void {
+        $this->runType = self::TYPE_REQUEST;
+
+        if($this->isCronJob($request)) {
+            $this->runType = self::TYPE_CRON;
+            $this->client  = self::CLIENT_CRON;
+        } else if($this->config->getSystemValue('maintenance', false)) {
+            $this->runType = self::TYPE_MAINTENANCE;
+            $this->client  = self::CLIENT_MAINTENANCE;
+        } else if($this->isCliMode($request)) {
+            $this->runType = self::TYPE_CLI;
+            $this->client  = self::CLIENT_CLI;
+        }
+    }
+
+    /**
+     * @param IRequest $request
+     *
+     * @return bool
+     */
+    protected function isCronJob(IRequest $request): bool {
         $requestUri = $request->getRequestUri();
         $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
 
-        $this->isCronJob = ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
-                           ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
-                           ($this->isCliMode && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        return ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
+               ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
+               (PHP_SAPI === 'cli' && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
     }
 
     /**
      * @param IRequest $request
+     *
+     * @return bool
      */
-    protected function checkIfAppUpdate(IRequest $request): void {
-        $this->isAppUpdate = false;
-        if($this->isCronJob || $this->isCliMode) return;
-
+    protected function isCliMode(IRequest $request): bool {
         try {
-            $this->isAppUpdate = $request->getPathInfo() === '/settings/ajax/updateapp.php';
+            return PHP_SAPI === 'cli' ||
+                   (
+                       $request->getMethod() === 'POST' &&
+                       $request->getPathInfo() === '/apps/occweb/cmd' &&
+                       $this->config->getAppValue('occweb', 'enabled', 'no') === 'yes'
+                   );
         } catch(\Exception $e) {
-            $this->logger->logException($e, ['app' => Application::APP_NAME]);
+            $this->logger->logException($e);
         }
+
+        return false;
+    }
+
+    /**
+     * @param null|string $userId
+     * @param IRequest    $request
+     *
+     * @throws \Exception
+     */
+    protected function determineAppMode(?string $userId, IRequest $request): void {
+        $this->appMode = self::MODE_PUBLIC;
+        if($this->runType !== self::TYPE_REQUEST) {
+            $this->appMode = self::MODE_GLOBAL;
+            $this->logger->info('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode');
+        } else if($this->loadUserInformation($userId, $request)) {
+            $this->appMode = self::MODE_USER;
+        }
+    }
+
+    /**
+     * @param null|string $userId
+     * @param IRequest    $request
+     *
+     * @return bool
+     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
+     * @throws \OC\Authentication\Exceptions\InvalidTokenException
+     * @throws \Exception
+     */
+    protected function loadUserInformation(?string $userId, IRequest $request): bool {
+        $authHeader = $request->getHeader('Authorization');
+        if($authHeader !== '') {
+            list($type, $value) = explode(' ', $authHeader, 2);
+
+            if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
+            if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
+            $this->logger->warning('Login attempt with invalid authorization header for '.($userId ? $userId:'invalid user id'));
+        } else if(isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['PHP_AUTH_PW'])) {
+            if($this->loadUserFromBasicAuth($userId, $request)) return true;
+            $this->logger->warning('Login attempt with invalid basic auth for '.($userId ? $userId:'invalid user id'));
+        } else if($userId !== null) {
+            if($this->loadUserFromSession($userId)) return true;
+            $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
+        } else {
+            $this->client = self::CLIENT_PUBLIC;
+
+            return false;
+        }
+
+        $this->client = self::CLIENT_PUBLIC;
+        throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
+    }
+
+    /**
+     * @param string   $userId
+     * @param IRequest $request
+     *
+     * @return bool
+     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
+     * @throws \OC\Authentication\Exceptions\InvalidTokenException
+     */
+    protected function loadUserFromBasicAuth(?string $userId, IRequest $request): bool {
+        if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
+        if(!isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_PW'])) return false;
+
+        $loginName = $_SERVER['PHP_AUTH_USER'];
+        if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
+            $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
+            $loginUser = $this->userManager->get($token->getUID());
+
+            if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
+                $this->user       = $loginUser;
+                $this->userLogin  = $loginName;
+                $this->client     = $this->getClientFromToken($token);
+                $this->loginToken = $token;
+                $this->loginType  = self::LOGIN_TOKEN;
+
+                return true;
+            }
+        } else {
+            /** @var false|\OCP\IUser $loginUser */
+            $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
+            if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
+                $this->user      = $loginUser;
+                $this->userLogin = $loginName;
+                $this->client    = $this->getClientFromRequest($request, $loginName);
+                $this->loginType = self::LOGIN_PASSWORD;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $userId
+     * @param string $value
+     *
+     * @return bool
+     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
+     * @throws \OC\Authentication\Exceptions\InvalidTokenException
+     */
+    protected function loadUserFromBearerAuth(string $userId, string $value): bool {
+        if(empty($value)) return false;
+
+        $token     = $this->tokenProvider->getToken($value);
+        $loginUser = $this->userManager->get($token->getUID());
+
+        if($loginUser !== null && $loginUser->getUID() === $userId) {
+            $this->user       = $loginUser;
+            $this->userLogin  = $token->getLoginName();
+            $this->client     = $this->getClientFromToken($token);
+            $this->loginToken = $token;
+            $this->loginType  = self::LOGIN_TOKEN;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param null|string $userId
+     *
+     * @return bool
+     */
+    protected function loadUserFromSession(?string $userId): bool {
+        try {
+            $sessionToken = $this->tokenProvider->getToken($this->session->getId());
+
+            $uid  = $sessionToken->getUID();
+            $user = $this->userManager->get($uid);
+            if($user !== null) {
+                if($uid === $userId) {
+                    $this->user       = $user;
+                    $this->userLogin  = $sessionToken->getLoginName();
+                    $this->client     = $this->getClientFromToken($sessionToken);
+                    $this->loginToken = $sessionToken;
+                    $this->loginType  = self::LOGIN_SESSION;
+
+                    return true;
+                } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
+                    $user = $this->userManager->get($userId);
+                    if($user !== null) {
+                        $this->user          = $user;
+                        $this->userLogin     = $userId;
+                        $this->client        = ucfirst($uid).' via Impersonate';
+                        $this->loginToken    = $sessionToken;
+                        $this->loginType     = self::LOGIN_SESSION;
+                        $this->impersonating = true;
+                        $this->realUser      = $this->userManager->get($uid);
+                        $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
+
+                        return true;
+                    }
+                }
+            }
+        } catch(\Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param IRequest $request
+     * @param string   $loginName
+     *
+     * @return string
+     */
+    protected function getClientFromRequest(IRequest $request, string $loginName): string {
+        $client = trim($request->getHeader('USER_AGENT'));
+
+        if(empty($client) ||
+           in_array($client, self::$protectedClients) ||
+           substr($client, 0, 17) === 'Passwords Session') {
+            return $loginName.' via '.$request->getRemoteAddress();
+        }
+
+        if(strlen($client) > 256) return substr($client, 0, 256);
+
+        return $client;
+    }
+
+    /**
+     * @param $token
+     *
+     * @return mixed
+     */
+    protected function getClientFromToken(IToken $token): string {
+        $client = trim($token->getName());
+
+        if(empty($client) || in_array($client, self::$protectedClients)) return $token->getUID().' via Token';
+        if(strlen($client) > 256) return substr($client, 0, 256);
+
+        return $client;
     }
 }

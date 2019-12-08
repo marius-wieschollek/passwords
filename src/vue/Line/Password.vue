@@ -6,24 +6,43 @@
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
-        <div class="favicon" :style="{'background-image': 'url(' + password.icon + ')'}" :title="getTitle">&nbsp;</div>
+        <img class="favicon" :src="password.icon" :title="getTitle" :alt="getTitle" loading="lazy"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
-            <li v-for="tag in getTags" :key="tag.id" :title="tag.label" :style="{color: tag.color}" @click="openTagAction($event, tag.id)">&nbsp;</li>
+            <li v-for="tag in getTags"
+                :key="tag.id"
+                :title="tag.label"
+                :style="{color: tag.color}"
+                @click="openTagAction($event, tag.id)">&nbsp;
+            </li>
         </ul>
         <slot name="middle"/>
-        <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle"></i>
+        <router-link :to="securityRoute" tag="i" :class="securityCheck" class="fa fa-shield security duplicate" :title="securityTitle" v-if="password.statusCode === 'DUPLICATE'"/>
+        <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle" v-else></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/>
+                        <translate tag="li" @click="detailsAction()" icon="info" say="Details"/>
+                        <translate tag="li" @click="detailsAction('share')" icon="share-alt" say="Share"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" icon="clipboard" say="Copy Password"/>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" icon="clipboard" say="Copy User"/>
-                        <translate tag="li" v-if="password.url" @click="copyAction('url')" icon="clipboard" say="Copy Url"/>
+                        <translate tag="li"
+                                   v-if="showCopyOptions"
+                                   @click="copyAction('password')"
+                                   icon="clipboard"
+                                   say="Copy Password"/>
+                        <translate tag="li"
+                                   v-if="showCopyOptions"
+                                   @click="copyAction('username')"
+                                   icon="clipboard"
+                                   say="Copy User"/>
+                        <translate tag="li"
+                                   v-if="password.url"
+                                   @click="copyAction('url')"
+                                   icon="clipboard"
+                                   say="Copy Url"/>
                         <li v-if="password.url">
                             <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
                         </li>
@@ -46,7 +65,7 @@
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
@@ -84,15 +103,18 @@
 
                 return Localisation.translate(label);
             },
+            securityRoute() {
+                return {name: 'Search', params: {query: btoa('hash:'+this.password.hash)}}
+            },
             showCopyOptions() {
-                return window.innerWidth < 361 || SettingsManager.get('client.ui.password.menu.copy');
+                return window.innerWidth < 361 || SettingsService.get('client.ui.password.menu.copy');
             },
             showTags() {
-                return window.innerWidth > 360 && SettingsManager.get('client.ui.list.tags.show') && this.password.tags;
+                return window.innerWidth > 360 && SettingsService.get('client.ui.list.tags.show') && this.password.tags;
             },
             getTitle() {
-                let titleField = SettingsManager.get('client.ui.password.field.title'),
-                    showUser   = SettingsManager.get('client.ui.password.user.show'),
+                let titleField = SettingsService.get('client.ui.password.field.title'),
+                    showUser   = SettingsService.get('client.ui.password.user.show'),
                     title      = this.password[titleField];
 
                 if(!title && this.password.label) title = this.password.label;
@@ -117,21 +139,24 @@
                 return Localisation.formatDate(this.password.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date: Localisation.formatDateTime(this.password.edited)});
+                return Localisation.translate(
+                    'Last modified on {date}',
+                    {date: Localisation.formatDateTime(this.password.edited)}
+                );
             }
         },
 
         methods: {
             clickAction($event) {
-                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0)) return;
+                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
-                let action = SettingsManager.get('client.ui.password.click.action');
+                let action = SettingsService.get('client.ui.password.click.action');
                 if(action !== 'none') this.runClickAction(action, 300);
             },
             doubleClickAction($event) {
-                if($event && $($event.target).closest('.more').length !== 0) return;
-                let action = SettingsManager.get('client.ui.password.dblClick.action');
+                if($event && ($($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
+                let action = SettingsService.get('client.ui.password.dblClick.action');
 
                 if(action !== 'none') {
                     if(this.clickTimeout) clearTimeout(this.clickTimeout);
@@ -139,9 +164,11 @@
                 }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details' && action !== 'edit') this.copyAction(action, delay);
-                else if(action === 'edit') this.clickTimeout = setTimeout(this.editAction, delay);
-                else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+                if(action !== 'details' && action !== 'edit') {
+                    this.copyAction(action, delay);
+                } else if(action === 'edit') {
+                    this.clickTimeout = setTimeout(this.editAction, delay);
+                } else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
             },
             copyAction(attribute, delay = 0) {
                 let message = 'Error copying {element} to clipboard';
@@ -166,14 +193,11 @@
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },
-            detailsAction(section = null) {
-                this.$parent.detail = {type: 'password', element: this.password};
-                if(!this.password.hasOwnProperty('revisions')) {
-                    API.showPassword(this.password.id, 'model+folder+shares+tags+revisions')
-                        .then((p) => {
-                            this.$parent.detail = {type: 'password', element: p};
-                        });
-                }
+            detailsAction(section = 'details') {
+                this.$parent.detail = {type: 'password', element: this.password, section};
+
+                let appClasses = document.getElementById('app').classList;
+                if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
             },
             editAction() {
                 PasswordManager
@@ -306,14 +330,22 @@
                     color       : $color-grey;
                     transition  : color 0.2s ease-in-out;
 
-                    &.icon,
-                    &.security {
-                        font-size : 1.25rem;
-                    }
-
                     &:active,
                     &:hover {
                         color : var(--color-main-text);
+                    }
+
+                    &.duplicate {
+                        transition  : color 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+                        &:hover {
+                            transform: scale(1.5);
+                        }
+                    }
+
+                    &.icon,
+                    &.security {
+                        font-size : 1.25rem;
                     }
 
                     &.ok {
@@ -392,7 +424,7 @@
                     }
                 }
 
-                @media(max-width : $mobile-width) {
+                @media(max-width : $width-extra-small) {
                     .date {
                         display : none;
                     }

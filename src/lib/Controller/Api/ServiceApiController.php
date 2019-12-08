@@ -93,6 +93,8 @@ class ServiceApiController extends AbstractApiController {
      * @param WebsitePreviewService $previewService
      * @param EnvironmentService    $environmentService
      * @param DeleteUserDataHelper  $deleteUserDataHelper
+     *
+     * @throws \Exception
      */
     public function __construct(
         IRequest $request,
@@ -201,42 +203,6 @@ class ServiceApiController extends AbstractApiController {
         $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
         return $this->createFileDisplayResponse($file);
-    }
-
-    /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @param $password
-     *
-     * @return JSONResponse
-     * @throws ApiException
-     * @throws \OCP\PreConditionNotMetException
-     * @throws \Exception
-     */
-    public function resetUserAccount(string $password): JSONResponse {
-        if(!$this->userManager->checkPassword($this->userLogin, $password)) {
-            throw new ApiException('Password invalid', 403);
-        }
-
-        $timeout    = $this->config->getUserValue('reset_timeout', 0);
-        $time       = $this->config->getUserValue('reset_time', 0);
-        $difference = time() - $timeout - $time;
-        if($difference > 0 && $difference < 300) {
-            $this->config->deleteUserValue('reset_time');
-            $this->config->deleteUserValue('reset_timeout');
-            $this->deleteUserDataHelper->deleteUserData($this->userId);
-
-            return $this->createJsonResponse(['status' => 'ok'], 200);
-        }
-
-        $timeout = rand(5, 10);
-        $time    = time();
-        $this->config->setUserValue('reset_time', $time);
-        $this->config->setUserValue('reset_timeout', $timeout);
-
-        return $this->createJsonResponse(['status' => 'accepted', 'wait' => $timeout], 202);
     }
 
     /**

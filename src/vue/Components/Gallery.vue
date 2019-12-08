@@ -20,7 +20,7 @@
 
     export default {
         components: {Web},
-        props: {
+        props     : {
             images: {
                 type: Array,
                 default() {
@@ -72,7 +72,7 @@
 
         methods: {
             open(index = 0) {
-                document.getElementById('app-content').classList.add('blocking');
+                document.getElementById('app').classList.add('blocking');
                 const instance = typeof BlueImp.Gallery !== 'undefined' ? BlueImp.Gallery:BlueImp,
                       options  = Object.assign(
                           {
@@ -85,7 +85,8 @@
                               onopened                  : () => this.$emit('onopened'),
                               onslide                   : this.onSlideCustom,
                               onslideend                : (index, slide) => this.$emit('onslideend', {index, slide}),
-                              onslidecomplete           : (index, slide) => this.$emit('onslidecomplete', {index, slide}),
+                              onslidecomplete           : (index, slide) => this.$emit('onslidecomplete',
+                                                                                       {index, slide}),
                               onclose                   : () => this.close(),
                               onclosed                  : () => this.$emit('onclosed')
                           },
@@ -106,7 +107,7 @@
                 }
             },
             close() {
-                document.getElementById('app-content').classList.remove('blocking');
+                document.getElementById('app').classList.remove('blocking');
                 this.$emit('close')
             }
         }
@@ -118,7 +119,7 @@
 
     .blueimp-gallery {
         background-color : transparentize($color-black, 0.25);
-        max-height: 100vh;
+        max-height       : 100vh;
 
         > .description {
             position : absolute;
@@ -135,16 +136,20 @@
             display : block;
         }
 
+        > .title {
+            margin-right : 6rem;
+        }
+
         > .slides > .slide > .video-content {
             display         : flex;
             justify-content : center;
 
             > video {
-                position : static;
-                width    : auto;
-                height   : auto;
-                max-width: 100%;
-                max-height: 100%;
+                position   : static;
+                width      : auto;
+                height     : auto;
+                max-width  : 100%;
+                max-height : 100%;
             }
         }
 
@@ -178,7 +183,12 @@
         }
 
         @media (max-width : $width-small) {
-            top: -44px;
+            top : 0;
+
+            .prev,
+            .next {
+                display : none;
+            }
         }
     }
 </style>

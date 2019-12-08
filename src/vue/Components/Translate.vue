@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import Localisation from "@js/Classes/Localisation";
+    import Localisation from '@js/Classes/Localisation';
 
     export default {
         props: {
@@ -46,10 +46,10 @@
 
         computed: {
             getText() {
-                if(this.say) {
+                if (this.say) {
                     return Localisation.translate(this.say, this.variables);
                 }
-                if(this.$slots.default) {
+                if (this.$slots.default) {
                     return Localisation.translate(this.$slots.default[0].text.trim(), this.variables);
                 }
                 return '';

@@ -19,6 +19,14 @@ Array.prototype.remove = function(index) {
     return this;
 };
 
+Array.prototype.isNull = function (){
+    let result =  this.some((element) => {
+        return element !== null;
+    });
+
+    return !result;
+};
+
 /**
  * @returns {string}
  */

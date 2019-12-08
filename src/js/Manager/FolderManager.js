@@ -2,7 +2,6 @@ import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
-import EnhancedApi from '@js/ApiClient/EnhancedApi';
 
 /**
  *
@@ -22,7 +21,7 @@ class FolderManager {
                     let folder = {label: title};
                     if(parent) folder.parent = parent;
 
-                    folder = EnhancedApi.validateFolder(folder);
+                    folder = API.validateFolder(folder);
                     API.createFolder(folder)
                         .then((d) => {
                             folder.id = d.id;
@@ -72,6 +71,12 @@ class FolderManager {
         });
     }
 
+    /**
+     *
+     * @param folder
+     * @param parent
+     * @returns {Promise<any>}
+     */
     moveFolder(folder, parent) {
         return new Promise((resolve, reject) => {
             if(folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
@@ -127,7 +132,7 @@ class FolderManager {
     deleteFolder(folder, confirm = true) {
         return new Promise((resolve, reject) => {
             if(!confirm || !folder.trashed) {
-                API.deleteFolder(folder.id)
+                API.deleteFolder(folder.id, folder.revision)
                     .then((d) => {
                         folder.trashed = true;
                         folder.updated = new Date();
@@ -136,9 +141,16 @@ class FolderManager {
                         Messages.notification('Folder deleted');
                         resolve(folder);
                     })
-                    .catch(() => {
-                        Messages.notification('Deleting folder failed');
-                        reject(folder);
+                    .catch((e) => {
+                        if(e.id && e.id === 'f281915e'){
+                            folder.trashed = true;
+                            folder.updated = new Date();
+                            Events.fire('folder.deleted', folder);
+                            resolve(folder);
+                        } else {
+                            Messages.notification('Deleting folder failed');
+                            reject(folder);
+                        }
                     });
             } else {
                 Messages.confirm('Do you want to delete the folder', 'Delete folder')
@@ -210,6 +222,4 @@ class FolderManager {
     }
 }
 
-let FM = new FolderManager();
-
-export default FM;
+export default new FolderManager();

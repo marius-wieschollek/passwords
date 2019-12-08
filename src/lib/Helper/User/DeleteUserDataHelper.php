@@ -13,7 +13,9 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractService;
+use OCA\Passwords\Services\Object\ChallengeService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagService;
@@ -61,14 +63,25 @@ class DeleteUserDataHelper {
     protected $shareService;
 
     /**
+     * @var KeychainService
+     */
+    protected $keychainService;
+
+    /**
+     * @var ChallengeService
+     */
+    protected $challengeService;
+
+    /**
      * @var array
      */
     protected $userConfigKeys
         = [
             'SSEv1UserKey',
             'client/settings',
-            'webui_token',
-            'webui_token_id'
+            'webui/token',
+            'webui/token/id',
+            'user/challenge/id'
         ];
 
     /**
@@ -81,6 +94,8 @@ class DeleteUserDataHelper {
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
      * @param PasswordService      $passwordService
+     * @param KeychainService      $keychainService
+     * @param ChallengeService     $challengeService
      */
     public function __construct(
         TagService $tagService,
@@ -89,7 +104,9 @@ class DeleteUserDataHelper {
         FolderService $folderService,
         ConfigurationService $config,
         EnvironmentService $environment,
-        PasswordService $passwordService
+        PasswordService $passwordService,
+        KeychainService $keychainService,
+        ChallengeService $challengeService
     ) {
         $this->userId          = $environment->getUserId();
         $this->config          = $config;
@@ -98,6 +115,8 @@ class DeleteUserDataHelper {
         $this->shareService    = $shareService;
         $this->folderService   = $folderService;
         $this->passwordService = $passwordService;
+        $this->keychainService = $keychainService;
+        $this->challengeService = $challengeService;
     }
 
     /**
@@ -112,6 +131,8 @@ class DeleteUserDataHelper {
         $this->deleteObjects($this->folderService, $userId);
         $this->deleteObjects($this->passwordService, $userId);
         $this->deleteObjects($this->shareService, $userId);
+        $this->deleteObjects($this->keychainService, $userId);
+        $this->deleteObjects($this->challengeService, $userId);
         $this->deleteUserSettings($userId);
         $this->deleteUserConfig($userId);
     }

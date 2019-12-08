@@ -239,4 +239,38 @@ export default class Utility {
 
         return clone;
     }
+
+    /**
+     * Creates a new array with just the values and no empty keys
+     *
+     * @param array
+     * @returns {Array}
+     */
+    static arrayValues(array) {
+        let output = [],
+            iterator = array.values();
+
+        for (let value of iterator) {
+            if(value !== undefined) output.push(value);
+        }
+
+        return output;
+    }
+
+    /**
+     * Generates a full url to the Nextcloud page
+     *
+     * @param path
+     * @param params
+     * @param options
+     * @returns {*}
+     */
+    static generateUrl(path = '', params = [], options = {}) {
+        let baseUrl = OC.generateUrl(path, params, options);
+        if(baseUrl.indexOf(location.origin) === -1) {
+            return new URL(location.origin + baseUrl).href;
+        }
+
+        return baseUrl;
+    }
 }

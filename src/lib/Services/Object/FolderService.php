@@ -12,6 +12,7 @@ use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 
@@ -39,10 +40,11 @@ class FolderService extends AbstractModelService {
      *
      * @param HookManager        $hookManager
      * @param FolderMapper       $mapper
+     * @param UuidHelper         $uuidHelper
      * @param EnvironmentService $environment
      */
-    public function __construct(HookManager $hookManager, FolderMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($hookManager, $mapper, $environment);
+    public function __construct(HookManager $hookManager, FolderMapper $mapper, UuidHelper $uuidHelper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $hookManager, $environment);
     }
 
     /**

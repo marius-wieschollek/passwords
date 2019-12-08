@@ -3,13 +3,14 @@
   "timeout": 10000,
   "output": "tests/codecept/output",
   "helpers": {
-    "WebDriverIO": {
+    "WebDriver": {
       "url": "https://localhost",
       "browser": "firefox",
       "windowSize": "1280x874",
       "restart": false,
       "keepBrowserState": true,
       "keepCookies": true,
+      "fullPageScreenshots": true,
       "desiredCapabilities": {
         "acceptInsecureCerts": true
       }

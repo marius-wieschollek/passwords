@@ -1,5 +1,4 @@
 import API from '@js/Helper/api';
-import SimpleApi from '@js/ApiClient/SimpleApi';
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
 
@@ -93,7 +92,9 @@ export default class ImportCsvConversionHelper {
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
-        if(data[firstLine].length < mapping.length) throw new Error('CSV file can not be mapped');
+        if(!Array.isArray(data) || data.length < firstLine+1) throw new Error('Import file is empty');
+        if(!mapping || data[firstLine].length < mapping.length) throw new Error('CSV file can not be mapped');
+
         for(let i = firstLine; i < data.length; i++) {
             let line   = data[i],
                 object = {};
@@ -352,7 +353,7 @@ export default class ImportCsvConversionHelper {
             object.url = `https://${object.url}`;
         } else if(!object.url || object.url.length === 0) {
             if(object.label && domain.test(object.label)) {
-                object.url = SimpleApi.parseUrl(object.label, 'href');
+                object.url = API.parseUrl(object.label, 'href');
             }
         }
 
@@ -395,6 +396,12 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', 'url', 'notes']
             },
+            bitwardenCsv  : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['tagLabels', 'favorite', 'folderLabel', 'label', 'notes', 'customFields', 'url', 'username', 'password'],
+                repair   : true
+            },
             lastpass : {
                 firstLine: 1,
                 db       : 'passwords',
@@ -411,6 +418,16 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password', 'notes'],
                 repair   : true
+            },
+            roboform : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['label', 'url', '', 'username', 'password', 'notes']
+            },
+            safeincloud : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['label', 'username', 'password', 'url', 'notes']
             }
         };
 

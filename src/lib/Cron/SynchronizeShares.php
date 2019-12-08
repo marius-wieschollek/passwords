@@ -202,6 +202,7 @@ class SynchronizeShares extends AbstractCronJob {
                 $model->getUuid(),
                 $sourceRevision->getPassword(),
                 $sourceRevision->getUsername(),
+                '',
                 $sourceRevision->getCseType(),
                 $sourceRevision->getHash(),
                 $sourceRevision->getLabel(),
@@ -322,6 +323,7 @@ class SynchronizeShares extends AbstractCronJob {
             $total  += $count;
 
             foreach($shares as $share) {
+                if($share->getTargetPassword() === null) continue;
                 /** @var PasswordRevision $revision */
                 $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
@@ -343,7 +345,7 @@ class SynchronizeShares extends AbstractCronJob {
                     break;
                 }
 
-                if(!$share->isShareable() && !$share->isEditable()) {
+                if(!$share->isEditable()) {
                     $subShares = $this->shareService->findBySourcePassword($password->getUuid());
                     foreach($subShares as $subShare) {
                         if($subShare->isEditable()) {
@@ -352,7 +354,6 @@ class SynchronizeShares extends AbstractCronJob {
                             $this->shareService->save($subShare);
                         }
                     }
-                    break;
                 }
             }
         } while($count !== 0);
@@ -406,6 +407,7 @@ class SynchronizeShares extends AbstractCronJob {
         $newRevision = $this->passwordRevisionService->clone($currentRevision, [
             'password'     => $sourceRevision->getPassword(),
             'username'     => $sourceRevision->getUsername(),
+            'cseKey'       => $sourceRevision->getCseKey(),
             'cseType'      => $sourceRevision->getCseType(),
             'hash'         => $sourceRevision->getHash(),
             'label'        => $sourceRevision->getLabel(),
@@ -423,19 +425,11 @@ class SynchronizeShares extends AbstractCronJob {
      */
     protected function notifyUsers(): void {
         foreach($this->notifications['created'] as $receiver => $owners) {
-            try {
-                $this->notificationService->sendShareCreateNotification($receiver, $owners);
-                $this->mailService->sendShareCreateMail($receiver, $owners);
-            } catch(ApiException $e) {
-                $this->logger->logException($e);
-            }
+            $this->notificationService->sendShareCreatedNotification($receiver, $owners);
+            $this->mailService->sendShareCreateMail($receiver, $owners);
         }
         foreach($this->notifications['loop'] as $user => $amount) {
-            try {
-                $this->notificationService->sendShareLoopNotification($user, $amount);
-            } catch(ApiException $e) {
-                $this->logger->logException($e);
-            }
+            $this->notificationService->sendShareLoopNotification($user, $amount);
         }
     }
 
@@ -443,7 +437,7 @@ class SynchronizeShares extends AbstractCronJob {
      * @return bool
      */
     protected function canExecute(): bool {
-        return $this->environment->isCronJob() &&
+        return $this->environment->getRunType() === EnvironmentService::TYPE_CRON &&
                $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-4 hours');
     }
 }

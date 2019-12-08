@@ -2,15 +2,23 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OCP\AppFramework\QueryException;
-
-$application = new Application();
-
 $routes = [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-    ['name' => 'admin_settings#set', 'url' => '/admin/set', 'verb' => 'POST'],
-    ['name' => 'admin_settings#cache', 'url' => '/admin/cache', 'verb' => 'POST'],
     ['name' => 'cron#execute', 'url' => '/cron/{job}', 'verb' => 'GET'],
+    ['name' => 'notification#survey', 'url' => '/notification/survey/{answer}', 'verb' => 'GET'],
+
+    ['name' => 'session_api#request', 'url' => '/api/1.0/session/request', 'verb' => 'GET'],
+    ['name' => 'session_api#open', 'url' => '/api/1.0/session/open', 'verb' => 'POST'],
+    ['name' => 'session_api#close', 'url' => '/api/1.0/session/close', 'verb' => 'GET'],
+    ['name' => 'session_api#keep_alive', 'url' => '/api/1.0/session/keepalive', 'verb' => 'GET'],
+    ['name' => 'session_api#request_token', 'url' => '/api/1.0/token/{provider}/request', 'verb' => 'GET'],
+
+    ['name' => 'keychain_api#list', 'url' => '/api/1.0/keychain/get', 'verb' => 'GET'],
+    ['name' => 'keychain_api#update', 'url' => '/api/1.0/keychain/set', 'verb' => 'POST'],
+
+    ['name' => 'account_api#reset', 'url' => '/api/1.0/account/reset', 'verb' => 'POST'],
+    ['name' => 'account_api#get_challenge', 'url' => '/api/1.0/account/challenge/get', 'verb' => 'GET'],
+    ['name' => 'account_api#set_challenge', 'url' => '/api/1.0/account/challenge/set', 'verb' => 'POST'],
 
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'GET'],
     ['name' => 'password_api#list', 'url' => '/api/1.0/password/list', 'verb' => 'POST', 'postfix' => 'POST'],
@@ -80,34 +88,34 @@ $routes = [
         'verb'     => 'GET',
         'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 640, 'height' => '360...']
     ],
-    ['name' => 'service_api#reset_user_account', 'url' => '/api/1.0/service/x-reset-user-account', 'verb' => 'POST'],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
 
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'share_api#preflighted_cors', 'url' => '/api/1.0/share/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'folder_api#preflighted_cors', 'url' => '/api/1.0/folder/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+    ['name' => 'session_api#preflighted_cors', 'url' => '/api/1.0/session/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+    ['name' => 'account_api#preflighted_cors', 'url' => '/api/1.0/account/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'service_api#preflighted_cors', 'url' => '/api/1.0/service/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'settings_api#preflighted_cors', 'url' => '/api/1.0/setting/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+    ['name' => 'keychain_api#preflighted_cors', 'url' => '/api/1.0/keychain/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'password_api#preflighted_cors', 'url' => '/api/1.0/password/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']]
 ];
 
-$resources = [];
-try {
-    if($application->getContainer()->query('AllConfig')->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
-        $resources = [
-            'legacy_category_api' => ['url' => '/api/0.1/categories'],
-            'legacy_password_api' => ['url' => '/api/0.1/passwords'],
-            'legacy_version_api'  => ['url' => '/api/0.1/version']
-        ];
-        $routes[]  = ['name' => 'legacy_version_api#preflighted_cors', 'url' => '/api/0.1/version/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
-        $routes[]  = ['name' => 'legacy_category_api#preflighted_cors', 'url' => '/api/1.0/category/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
-        $routes[]  = ['name' => 'legacy_password_api#preflighted_cors', 'url' => '/api/1.0/passwords/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
-    }
-} catch(QueryException $e) {
+$resources = [
+    'admin_settings' => ['url' => '/admin/settings'],
+    'admin_caches' => ['url' => '/admin/caches'],
+];
+
+if(\OC::$server->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+    $resources['legacy_category_api'] = ['url' => '/api/0.1/categories'];
+    $resources['legacy_password_api'] = ['url' => '/api/0.1/passwords'];
+    $resources['legacy_version_api'] = ['url' => '/api/0.1/version'];
+    $routes[]  = ['name' => 'legacy_version_api#preflighted_cors', 'url' => '/api/0.1/version/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
+    $routes[]  = ['name' => 'legacy_category_api#preflighted_cors', 'url' => '/api/1.0/category/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
+    $routes[]  = ['name' => 'legacy_password_api#preflighted_cors', 'url' => '/api/1.0/passwords/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']];
 }
 
-/** @var $this \OC\Route\CachingRouter */
-$application->registerRoutes($this, [
+return [
     'resources' => $resources,
     'routes'    => $routes
-]);
+];

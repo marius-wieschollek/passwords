@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="passwords" :data-server-version="serverVersion">
         <div id="app-navigation">
-            <ul>
+            <ul class="menu-main">
                 <router-link class="nav-icon-all" :to="{ name: 'All'}" active-class="active" :exact="true" tag="li">
                     <translate say="All"/>
                 </router-link>
@@ -23,14 +23,21 @@
                 <router-link class="nav-icon-security" :to="{ name: 'Security'}" active-class="active" tag="li">
                     <translate say="Security"/>
                 </router-link>
-                <router-link class="nav-icon-search" :to="{ name: 'Search'}" active-class="active" tag="li" v-if="isSearchVisible">
+                <router-link class="nav-icon-search"
+                             :to="{ name: 'Search'}"
+                             active-class="active"
+                             tag="li"
+                             v-if="isSearchVisible">
                     <translate say="Search"/>
                 </router-link>
             </ul>
-            <ul id="app-settings" :class="{open: showMore}">
+            <ul class="menu-secondary">
+                <session-timeout v-if="navTimeout"/>
                 <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
                     <translate say="Trash"/>
                 </router-link>
+            </ul>
+            <ul id="app-settings" :class="{open: showMore}">
                 <translate tag="li" class="nav-icon-more" @click="showMore = !showMore" say="More"/>
                 <router-link class="nav-icon-settings" :to="{ name: 'Settings'}" active-class="active" tag="li">
                     <translate say="Settings"/>
@@ -51,6 +58,7 @@
         <div id="app-popup">
             <div></div>
         </div>
+        <session-timeout scope="global" v-if="globalTimeout"/>
         <star-chaser v-if="starChaser"/>
         <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </div>
@@ -61,20 +69,21 @@
     import Translate from '@vc/Translate';
     import router from '@js/Helper/router';
     import Messages from '@js/Classes/Messages';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
+    import SessionTimeout from '@vue/Components/SessionTimeout';
 
     export default {
         el        : '#main',
         router,
         components: {
-            app          : {router},
+            SessionTimeout,
             Translate,
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
         data() {
-            let serverVersion = SettingsManager.get('server.version'),
-                showSearch    = SettingsManager.get('client.search.show');
+            let serverVersion = SettingsService.get('server.version'),
+                showSearch    = SettingsService.get('client.search.show');
 
             return {
                 serverVersion,
@@ -85,12 +94,18 @@
         },
 
         created() {
-            SettingsManager.observe('client.search.show', (v) => { this.showSearch = v.value; });
+            SettingsService.observe('client.search.show', (v) => { this.showSearch = v.value; });
         },
 
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
+            },
+            navTimeout() {
+                return window.innerWidth > 768;
+            },
+            globalTimeout() {
+                return window.innerWidth <= 768;
             },
             isBirthDay() {
                 let today = new Date(),
@@ -103,7 +118,8 @@
         methods: {
             birthDayPopup() {
                 document.getElementById('birthday').remove();
-                Messages.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
+                Messages.info(
+                    'Today in 2018, the first version of passwords was published. Thank you for using the app.');
             }
         }
     };
@@ -112,71 +128,156 @@
 <style lang="scss">
     #app {
         width : 100%;
-    }
 
-    #app-navigation {
-        transform : translateX(0);
+        &.blocking {
+            #app-content {
+                position  : static;
+                transform : none;
 
-        li {
-            line-height   : 44px;
-            padding       : 0 12px;
-            white-space   : nowrap;
-            text-overflow : ellipsis;
-            color         : var(--color-main-text);
-            opacity       : 0.57;
-            cursor        : pointer;
-            transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
-
-            &:hover,
-            &:active,
-            &.active { opacity : 1; }
-
-            &:before {
-                font-family   : var(--pw-icon-font-face);
-                font-size     : 1rem;
-                padding-right : 10px;
-                width         : 1rem;
-                text-align    : center;
-                display       : inline-block;
+                .app-content-left {
+                    transition : none;
+                    transform  : none;
+                }
             }
 
-            &.nav-icon-all:before { content : "\f0ac"; }
-            &.nav-icon-folders:before { content : "\f07b"; }
-            &.nav-icon-recent:before { content : "\f017"; }
-            &.nav-icon-tags:before { content : "\f02c"; }
-            &.nav-icon-security:before { content : "\f132"; }
-            &.nav-icon-shares:before { content : "\f1e0"; }
-            &.nav-icon-favorites:before { content : "\f005"; }
-            &.nav-icon-search:before { content : "\f002"; }
-            &.nav-icon-trash:before { content : "\f014"; }
-            &.nav-icon-more:before { content : "\f067"; }
-            &.nav-icon-settings:before { content : "\f013"; }
-            &.nav-icon-addon:before { content : "\f12e"; }
-            &.nav-icon-help:before { content : "\f059"; }
-            &.nav-icon-backup:before { content : "\f187"; }
-
-            span {
-                cursor : pointer;
+            #app-navigation {
+                z-index : 1000;
             }
         }
 
-        #app-settings {
-            position         : relative;
-            overflow         : hidden;
-            max-height       : 88px;
-            background-color : var(--color-main-background);
-            border-right     : 1px solid var(--color-border);
-            transition       : max-height 0.25s ease-in-out;
+        @media(max-width : $width-small) {
+            #app-content {
+                margin-right : 0;
+                width        : 100%;
+                transition   : width 300ms, margin-left 300ms;
+            }
 
-            &.open {
-                max-height : 264px;
+            &.mobile-open {
+                #app-navigation {
+                    transform : translateX(0);
+                    z-index   : 1001;
+                }
 
-                li.nav-icon-more {
-                    opacity : 1;
+                #app-content {
+                    background-color : var(--color-main-background);
+                    border-left      : 1px solid var(--color-border);
+                    width            : calc(100% - 299px);
+                    margin-left      : 299px;
 
-                    &:before { content : "\f068"; }
+                    .item-list .row .date {
+                        display : none;
+                    }
                 }
             }
+        }
+
+        @media(max-width : $width-extra-small) {
+            &.mobile-open #app-content {
+                width       : 360px;
+                margin-left : 299px;
+            }
+        }
+    }
+
+    #app-navigation {
+        transition : transform 300ms;
+
+
+        ul {
+            li {
+                line-height   : 44px;
+                padding       : 0 12px;
+                white-space   : nowrap;
+                text-overflow : ellipsis;
+                color         : var(--color-main-text);
+                opacity       : 0.57;
+                cursor        : pointer;
+                transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
+
+                &:hover,
+                &:active,
+                &.active { opacity : 1; }
+
+                &:before {
+                    font-family   : var(--pw-icon-font-face);
+                    font-size     : 1rem;
+                    padding-right : 10px;
+                    width         : 1rem;
+                    text-align    : center;
+                    display       : inline-block;
+                }
+
+                &.nav-icon-all:before { content : "\f0ac"; }
+
+                &.nav-icon-folders:before { content : "\f07b"; }
+
+                &.nav-icon-recent:before { content : "\f017"; }
+
+                &.nav-icon-tags:before { content : "\f02c"; }
+
+                &.nav-icon-security:before { content : "\f132"; }
+
+                &.nav-icon-shares:before { content : "\f1e0"; }
+
+                &.nav-icon-favorites:before { content : "\f005"; }
+
+                &.nav-icon-search:before { content : "\f002"; }
+
+                &.nav-icon-trash:before { content : "\f014"; }
+
+                &.nav-icon-more:before { content : "\f067"; }
+
+                &.nav-icon-settings:before { content : "\f013"; }
+
+                &.nav-icon-addon:before { content : "\f12e"; }
+
+                &.nav-icon-help:before { content : "\f059"; }
+
+                &.nav-icon-backup:before { content : "\f187"; }
+
+                span {
+                    cursor : pointer;
+                }
+            }
+
+            &.menu-main {
+                height : 100%;
+            }
+
+            &.menu-secondary {
+                height      : auto;
+                flex-shrink : 0;
+            }
+
+            &#app-settings {
+                position         : relative;
+                overflow         : hidden;
+                max-height       : 44px;
+                height           : auto;
+                background-color : var(--color-main-background);
+                border-right     : 1px solid var(--color-border);
+                transition       : max-height 0.25s ease-in-out;
+
+                &.open {
+                    max-height  : 220px;
+                    flex-shrink : 0;
+
+                    li.nav-icon-more {
+                        opacity : 1;
+
+                        &:before { content : "\f068"; }
+                    }
+
+                    @media (max-height : 360px) {
+                        position : fixed;
+                        bottom   : 0;
+                    }
+                }
+            }
+        }
+
+        @media(min-width : $width-small) {
+            z-index : 1001;
         }
     }
 

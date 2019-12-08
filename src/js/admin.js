@@ -1,17 +1,14 @@
 import '@scss/admin';
+import AppSettingsService from '@js/Services/AppSettingsService'
 
 class PasswordsAdminSettings {
 
     constructor() {
         this._timer = {success: null, error: null};
-        this.cacheUrl = '';
-        this.settingsUrl = '';
+        this.api = new AppSettingsService();
     }
 
     initialize() {
-        this.cacheUrl = $('[data-constant="cacheUrl"]').data().value;
-        this.settingsUrl = $('[data-constant="settingsUrl"]').data().value;
-
         $('[data-setting]').on(
             'change',
             (e) => {
@@ -23,7 +20,14 @@ class PasswordsAdminSettings {
                     value = $target[0].checked ? 'true':'false';
                 }
 
-                this._sendRequest(this.settingsUrl, {key, value}, `[data-setting="${key}"]`);
+                this.api.set(key, value)
+                    .then((d) => {
+                        this._showMessage('saved', `[data-setting="${key}"]`);
+                    })
+                    .catch((d) => {
+                        this._showMessage('error', `[data-setting="${key}"]`);
+                        if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+                    });
             }
         );
         $('[data-clear-cache]').click(
@@ -34,7 +38,14 @@ class PasswordsAdminSettings {
 
                 $target.parent().find('label').text(label);
 
-                this._sendRequest(this.cacheUrl, {key:cache}, '.area.cache', 'cleared');
+                this.api.clearCache(cache)
+                    .then((d) => {
+                        this._showMessage('cleared', '.area.cache');
+                    })
+                    .catch((d) => {
+                        this._showMessage('error', '.area.cache');
+                        if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+                    });
             }
         );
 
@@ -62,16 +73,17 @@ class PasswordsAdminSettings {
      * @private
      */
     _sendRequest(url, data, target, success = 'saved') {
+
         $.post(url, data)
-         .success((d) => {
-             if(d.status === 'ok') {
-                 this._showMessage(success, target);
-             } else {
-                 this._showMessage('error', target);
-                 OC.Notification.show(PasswordsAdminSettings._translate(d.message));
-             }
-         })
-         .fail(() => {this._showMessage('error', target);});
+            .success((d) => {
+                if(d.status === 'ok') {
+                    this._showMessage(success, target);
+                } else {
+                    this._showMessage('error', target);
+                    OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+                }
+            })
+            .fail(() => {this._showMessage('error', target);});
     }
 
     /**
@@ -118,6 +130,7 @@ class PasswordsAdminSettings {
             $apiInput.parent().show();
 
             $apiInput.data('setting', data.key);
+            $apiInput.attr('data-setting', data.key);
             $apiInput.val(data.value);
         }
     }

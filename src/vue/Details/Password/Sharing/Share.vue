@@ -6,7 +6,7 @@
             <translate icon="calendar" :class="{active: share.expires}" :title="getExpirationDateTitle" @click="setExpires(share)"/>
             <translate icon="trash" title="Stop sharing" @click="deleteAction(share)"/>
         </div>
-        <img :src="share.receiver.icon" :alt="share.receiver.name" class="avatar">
+        <img :src="share.receiver.icon" :alt="share.receiver.name" class="avatar" loading="lazy">
         <div v-if="share.updatePending" class="loading"></div>
         {{share.receiver.name}}
     </li>
@@ -132,6 +132,7 @@
             border-radius : 16px;
             margin-right  : 5px;
             height        : 32px;
+            width         : 32px;
         }
 
         .options {

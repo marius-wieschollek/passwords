@@ -11,6 +11,7 @@ use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -27,14 +28,15 @@ abstract class AbstractModelService extends AbstractService {
     /**
      * AbstractModelService constructor.
      *
-     * @param HookManager        $hookManager
      * @param AbstractMapper     $mapper
+     * @param UuidHelper         $uuidHelper
+     * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
-    public function __construct(HookManager $hookManager, AbstractMapper $mapper, EnvironmentService $environment) {
+    public function __construct(AbstractMapper $mapper, UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($hookManager, $environment);
+        parent::__construct($uuidHelper, $hookManager, $environment);
     }
 
     /**
@@ -101,7 +103,6 @@ abstract class AbstractModelService extends AbstractService {
             $saved = $this->mapper->insert($model);
         } else {
             $model->setUpdated(time());
-
             $saved = $this->mapper->update($model);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);
@@ -134,7 +135,7 @@ abstract class AbstractModelService extends AbstractService {
         $model = new $this->class();
         $model->setDeleted(false);
         $model->setUserId($this->userId);
-        $model->setUuid($this->generateUuidV4());
+        $model->setUuid($this->uuidHelper->generateUuid());
         $model->setCreated(time());
         $model->setUpdated(time());
 
@@ -151,7 +152,7 @@ abstract class AbstractModelService extends AbstractService {
 
         /** @var ModelInterface $clone */
         $clone = parent::cloneModel($original, $overwrites);
-        $clone->setUuid($this->generateUuidV4());
+        $clone->setUuid($this->uuidHelper->generateUuid());
 
         return $clone;
     }

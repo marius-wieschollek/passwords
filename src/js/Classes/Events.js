@@ -50,11 +50,20 @@ class Events {
     }
 
     /**
-     *
+     * @deprecated
      * @param event
      * @param object
      */
     fire(event, object = {}) {
+        this.emit(event, object);
+    }
+
+    /**
+     *
+     * @param event
+     * @param object
+     */
+    emit(event, object = {}) {
 
         let events = [event];
         if(this.alias.hasOwnProperty(event)) {
@@ -65,7 +74,7 @@ class Events {
             let event = events[i];
             if(!this.events.hasOwnProperty(event)) continue;
 
-            let data = {event, object},
+            let data      = {event, object},
                 callbacks = this.events[event];
             for(let j = 0; j < callbacks.length; j++) {
                 try {

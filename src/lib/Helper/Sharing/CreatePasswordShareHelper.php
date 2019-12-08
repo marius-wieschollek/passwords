@@ -98,7 +98,7 @@ class CreatePasswordShareHelper {
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
         $this->checkIfRevisionCanBeShared($revision);
 
-        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
+        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1R1) {
             $this->downgradeSSE($revision, $model);
         }
 
@@ -185,7 +185,7 @@ class CreatePasswordShareHelper {
         /** @var PasswordRevision $newRevision */
         $newRevision = $this->passwordRevisionService->clone(
             $revision,
-            ['sseType' => EncryptionService::SSE_ENCRYPTION_V1]
+            ['sseType' => EncryptionService::SSE_ENCRYPTION_V1R1]
         );
         $this->passwordRevisionService->save($newRevision);
         $this->passwordModelService->setRevision($model, $newRevision);

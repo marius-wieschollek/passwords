@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OC\BackgroundJob\TimedJob;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -49,17 +50,19 @@ abstract class AbstractCronJob extends TimedJob {
 
     /**
      * @param $argument
-     *
-     * @throws \Exception
      */
     protected function run($argument): void {
-        if(!$this->environment->isCronJob()) {
+        if($this->environment->getRunType() !== EnvironmentService::TYPE_CRON) {
             $this->logger->error(get_class($this).' must be executed as cron job');
 
             return;
         }
 
-        $this->runJob($argument);
+        try {
+            $this->runJob($argument);
+        } catch(Exception $e) {
+            $this->logger->logException($e);
+        }
     }
 
     /**

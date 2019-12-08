@@ -8,10 +8,9 @@
 namespace OCA\Passwords\Controller\Api;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\SettingsService;
+use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
-use OCP\PreConditionNotMetException;
 
 /**
  * Class SettingsApiController
@@ -21,17 +20,17 @@ use OCP\PreConditionNotMetException;
 class SettingsApiController extends AbstractApiController {
 
     /**
-     * @var SettingsService
+     * @var UserSettingsService
      */
     protected $settings;
 
     /**
      * SettingsApiController constructor.
      *
-     * @param IRequest        $request
-     * @param SettingsService $settings
+     * @param IRequest            $request
+     * @param UserSettingsService $settings
      */
-    public function __construct(IRequest $request, SettingsService $settings) {
+    public function __construct(IRequest $request, UserSettingsService $settings) {
         parent::__construct($request);
         $this->settings = $settings;
     }
@@ -42,9 +41,10 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function get(): JSONResponse {
-        $params = $this->listParameters();
+        $params = $this->getParameterArray();
         if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
@@ -62,10 +62,9 @@ class SettingsApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws PreConditionNotMetException
      */
     public function set(): JSONResponse {
-        $params = $this->listParameters();
+        $params = $this->getParameterArray();
         if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
@@ -84,6 +83,7 @@ class SettingsApiController extends AbstractApiController {
      * @param array|null $scopes
      *
      * @return JSONResponse
+     * @throws \Exception
      */
     public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
@@ -97,10 +97,10 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws PreConditionNotMetException
+     * @throws \Exception
      */
     public function reset(): JSONResponse {
-        $params = $this->listParameters();
+        $params = $this->getParameterArray();
         if(empty($params)) return $this->createJsonResponse([]);
 
         $settings = [];
@@ -109,15 +109,5 @@ class SettingsApiController extends AbstractApiController {
         }
 
         return $this->createJsonResponse($settings);
-    }
-
-    /**
-     * @return array
-     */
-    protected function listParameters(): array {
-        $params = $this->request->getParams();
-        unset($params['_route']);
-
-        return $params;
     }
 }

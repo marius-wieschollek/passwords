@@ -106,11 +106,11 @@
                 display : inline-block;
                 margin  : 0 5px 0;
                 float   : left;
-                height  : 32px;
+                height  : 34px;
             }
 
             input[type=checkbox] + label {
-                line-height : 32px;
+                line-height : 34px;
                 display     : inline-block;
             }
         }
@@ -135,7 +135,7 @@
                 }
             }
 
-            @media all and (max-width : $width-extra-small) {
+            @media(max-width : $width-extra-small) {
                 display : block;
             }
         }

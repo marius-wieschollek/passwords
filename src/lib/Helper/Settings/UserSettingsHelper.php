@@ -7,7 +7,9 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
+use Exception;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\UserChallengeService;
 
 /**
  * Class UserSettingsHelper
@@ -35,7 +37,11 @@ class UserSettingsHelper {
             'mail/shares'                  => 'boolean',
             'notification/security'        => 'boolean',
             'notification/shares'          => 'boolean',
-            'notification/errors'          => 'boolean'
+            'notification/errors'          => 'boolean',
+            'notification/admin'           => 'boolean',
+            'session/lifetime'             => 'integer',
+            'encryption/sse'               => 'integer',
+            'encryption/cse'               => 'integer'
         ];
 
     /**
@@ -52,7 +58,10 @@ class UserSettingsHelper {
             'mail/shares'                  => false,
             'notification/security'        => true,
             'notification/shares'          => true,
-            'notification/errors'          => true
+            'notification/errors'          => true,
+            'notification/admin'           => true,
+            'session/lifetime'             => 600,
+            'encryption/sse'               => 0
         ];
 
     /**
@@ -76,7 +85,7 @@ class UserSettingsHelper {
 
         if(isset($this->userSettings[ $key ])) {
             $type    = $this->userSettings[ $key ];
-            $default = $this->getDefaultValue($key);
+            $default = $this->getDefaultValue($key, $userId);
             $value   = $this->config->getUserValue($key, $default, $userId);
 
             return $this->castValue($type, $value);
@@ -125,7 +134,7 @@ class UserSettingsHelper {
         if(isset($this->userSettings[ $key ])) {
             $this->config->deleteUserValue($key, $userId);
 
-            return $this->getDefaultValue($key);
+            return $this->getDefaultValue($key, $userId);
         }
 
         return null;
@@ -166,17 +175,23 @@ class UserSettingsHelper {
     }
 
     /**
-     * @param string $key
+     * @param string      $key
+     * @param null|string $userId
      *
      * @return mixed
      */
-    protected function getDefaultValue(string $key) {
-        $default = $this->userDefaults[ $key ];
-        if(in_array($key, ['mail/security', 'mail/shares'])) {
-            $default = $this->config->getAppValue('settings/'.$key, $default);
+    protected function getDefaultValue(string $key, ?string $userId) {
+        if($key === 'encryption/cse') {
+            try {
+                return $this->config->hasUserValue(UserChallengeService::USER_CHALLENGE_ID, $userId) ? 1:0;
+            } catch(Exception $e) {
+                return 0;
+            }
+        } else if(in_array($key, ['mail/security', 'mail/shares'])) {
+            return $this->config->getAppValue('settings/'.$key, $this->userDefaults[ $key ]);
         }
 
-        return $default;
+        return $this->userDefaults[ $key ];
     }
 
     /**

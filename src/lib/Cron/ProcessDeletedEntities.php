@@ -12,8 +12,10 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\AbstractService;
+use OCA\Passwords\Services\Object\ChallengeService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
@@ -60,6 +62,16 @@ class ProcessDeletedEntities extends AbstractCronJob {
     protected $passwordService;
 
     /**
+     * @var KeychainService
+     */
+    protected $keychainService;
+
+    /**
+     * @var ChallengeService
+     */
+    protected $challengeService;
+
+    /**
      * @var TagRevisionService
      */
     protected $tagRevisionService;
@@ -100,6 +112,8 @@ class ProcessDeletedEntities extends AbstractCronJob {
      * @param ConfigurationService       $config
      * @param EnvironmentService         $environment
      * @param PasswordService            $passwordService
+     * @param KeychainService            $keychainService
+     * @param ChallengeService           $challengeService
      * @param TagRevisionService         $tagRevisionService
      * @param FolderRevisionService      $folderRevisionService
      * @param PasswordRevisionService    $passwordRevisionService
@@ -114,6 +128,8 @@ class ProcessDeletedEntities extends AbstractCronJob {
         ConfigurationService $config,
         EnvironmentService $environment,
         PasswordService $passwordService,
+        KeychainService $keychainService,
+        ChallengeService $challengeService,
         TagRevisionService $tagRevisionService,
         FolderRevisionService $folderRevisionService,
         PasswordRevisionService $passwordRevisionService,
@@ -125,6 +141,8 @@ class ProcessDeletedEntities extends AbstractCronJob {
         $this->shareService               = $shareService;
         $this->folderService              = $folderService;
         $this->passwordService            = $passwordService;
+        $this->keychainService            = $keychainService;
+        $this->challengeService           = $challengeService;
         $this->tagRevisionService         = $tagRevisionService;
         $this->folderRevisionService      = $folderRevisionService;
         $this->passwordRevisionService    = $passwordRevisionService;
@@ -137,12 +155,14 @@ class ProcessDeletedEntities extends AbstractCronJob {
      */
     protected function runJob($argument): void {
         $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
-        if($timeout > 0) $this->time = time() - $timeout;
+        if($timeout >= 0) $this->time = time() - $timeout;
 
         $objects = $this->deleteObjects($this->tagService);
         $objects += $this->deleteObjects($this->shareService);
         $objects += $this->deleteObjects($this->folderService);
         $objects += $this->deleteObjects($this->passwordService);
+        $objects += $this->deleteObjects($this->keychainService);
+        $objects += $this->deleteObjects($this->challengeService);
         $objects += $this->deleteObjects($this->tagRevisionService);
         $objects += $this->deleteObjects($this->folderRevisionService);
         $objects += $this->deleteObjects($this->passwordRevisionService);

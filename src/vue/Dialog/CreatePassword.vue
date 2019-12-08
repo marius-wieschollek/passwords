@@ -10,32 +10,61 @@
                     <translate tag="div" class="section-title" say="Properties"/>
                     <div class="form-grid">
                         <translate tag="label" for="password-username" say="Username"/>
-                        <input id="password-username" type="text" name="username" maxlength="64" v-model="password.username" autocomplete="off">
+                        <input id="password-username"
+                               type="text"
+                               name="username"
+                               maxlength="64"
+                               v-model="password.username"
+                               autocomplete="off">
                         <translate tag="label" for="password-password" say="Password"/>
                         <div class="password-field">
                             <div class="icons">
-                                <translate tag="i" class="fa" :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }" @click="togglePasswordVisibility()" title="Toggle visibility"/>
-                                <translate tag="i" class="fa fa-refresh" :class="{ 'fa-spin': showLoader }" @click="generateRandomPassword()" title="Generate password"/>
+                                <translate tag="i"
+                                           class="fa"
+                                           :class="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }"
+                                           @click="togglePasswordVisibility()"
+                                           title="Toggle visibility"/>
+                                <translate tag="i"
+                                           class="fa fa-refresh"
+                                           :class="{ 'fa-spin': showLoader }"
+                                           @click="generateRandomPassword()"
+                                           title="Generate password"/>
                             </div>
-                            <input id="password-password" :type="showPassword ? 'text':'password'" name="password" pattern=".{0,256}" autocomplete="new-password" v-model="password.password" required readonly>
+                            <input id="password-password"
+                                   :type="showPassword ? 'text':'password'"
+                                   name="password"
+                                   pattern=".{0,256}"
+                                   autocomplete="new-password"
+                                   v-model="password.password"
+                                   required
+                                   readonly>
                         </div>
                         <div class="settings" :class="{active: generator.active}">
-                            <input id="password-password-numbers" type="checkbox" v-model="generator.numbers" :disabled="!generator.active"/>
+                            <input id="password-password-numbers"
+                                   type="checkbox"
+                                   v-model="generator.numbers"
+                                   :disabled="!generator.active"/>
                             <translate tag="label" for="password-password-numbers" say="Numbers"/>
-                            <input id="password-password-special" type="checkbox" v-model="generator.special" :disabled="!generator.active"/>
+                            <input id="password-password-special"
+                                   type="checkbox"
+                                   v-model="generator.special"
+                                   :disabled="!generator.active"/>
                             <translate tag="label" for="password-password-special" say="Special Characters"/>
                         </div>
                         <translate tag="label" for="password-label" say="Name"/>
                         <input id="password-label" type="text" name="label" maxlength="64" v-model="password.label">
                         <translate tag="label" for="password-url" say="Website"/>
-                        <input id="password-url" type="text" name="url" maxlength="2048" v-model="password.url">
+                        <input id="password-url" type="url" name="url" maxlength="2048" v-model="password.url">
                         <!-- <passwords-tags></passwords-tags> -->
                     </div>
                 </div>
                 <div class="form right">
                     <foldout title="Notes" :initially-open="notesOpen">
                         <div class="notes-container">
-                            <translate tag="div" class="warning" say="You have reached the maximum length of 4096 characters" v-if="password.notes.length > 4095"/>
+                            <translate tag="div"
+                                       class="warning"
+                                       say="You have reached the maximum length of 4096 characters"
+                                       v-if="password.notes.length > 4095"/>
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
                     </foldout>
@@ -47,8 +76,13 @@
                             <translate tag="label" for="password-favorite" say="Favorite"/>
                             <input id="password-favorite" name="favorite" type="checkbox" v-model="password.favorite">
                             <translate tag="label" for="password-cse" say="Encryption"/>
-                            <select id="password-cse" name="cseType" title="There is only one option right now" v-model="password.cseType" disabled>
+                            <select id="password-cse"
+                                    name="cseType"
+                                    title="Choose the encryption type for this password"
+                                    v-model.number="password.cseType"
+                                    :disabled="!hasEncryption">
                                 <translate tag="option" value="none" say="On the server"/>
+                                <translate tag="option" value="CSEv1r1" say="Libsodium"/>
                             </select>
                         </div>
                     </foldout>
@@ -66,29 +100,44 @@
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import Messages from "@js/Classes/Messages";
+    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import EnhancedApi from "@js/ApiClient/EnhancedApi";
+    import SettingsService from '@js/Services/SettingsService';
     import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
 
     export default {
-        data() {
-            return {
-                title       : 'Create password',
-                notesOpen   : window.innerWidth > 641,
-                showPassword: false,
-                showLoader  : false,
-                simplemde   : null,
-                generator   : {numbers: undefined, special: undefined, active: false},
-                password    : {cseType: 'none', notes: '', customFields: []},
-                _success    : null
-            };
-        },
-
         components: {
             Foldout,
             Translate,
             CustomFields
+        },
+
+        props: {
+            title     : {
+                type     : String,
+                'default': 'Create password',
+            },
+            properties: {
+                type: Object
+            },
+            _success  : {
+                type: Function
+            }
+        },
+
+        data() {
+            let cseType  = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
+                password = Object.assign({cseType, notes: '', customFields: []}, this.properties);
+
+            return {
+                notesOpen    : window.innerWidth > 641,
+                showPassword : false,
+                showLoader   : false,
+                simplemde    : null,
+                generator    : {numbers: undefined, special: undefined, active: false},
+                hasEncryption: API.hasEncryption,
+                password
+            };
         },
 
         mounted() {
@@ -121,25 +170,25 @@
                 }
 
                 API.generatePassword(undefined, numbers, special)
-                   .then((d) => {
-                       this.password.password = d.password;
-                       if(this.generator.active === false) {
-                           this.generator = {numbers: d.numbers, special: d.special, active: true};
-                       }
-                       this.showPassword = true;
-                       this.showLoader = false;
-                   })
-                   .catch(() => {
-                       this.showLoader = false;
-                   });
+                    .then((d) => {
+                        this.password.password = d.password;
+                        if(this.generator.active === false) {
+                            this.generator = {numbers: d.numbers, special: d.special, active: true};
+                        }
+                        this.showPassword = true;
+                        this.showLoader = false;
+                    })
+                    .catch(() => {
+                        this.showLoader = false;
+                    });
             },
             updateCustomFields($event) {
-                this.password.customFields = $event;
+                this.password.customFields = Utility.arrayValues($event);
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
-                password = EnhancedApi.flattenPassword(password);
-                password = EnhancedApi.validatePassword(password);
+                password = API.flattenPassword(password);
+                password = API.validatePassword(password);
 
                 if(this._success) {
                     try {
@@ -154,7 +203,7 @@
                 try {
                     let SimpleMDE = await import(/* webpackChunkName: "simplemde" */ 'simplemde');
 
-                    this.simplemde = new SimpleMDE(
+                    this.simplemde = new SimpleMDE.default(
                         {
                             element                : document.getElementById('password-notes'),
                             hideIcons              : ['fullscreen', 'side-by-side', 'image'],
@@ -205,65 +254,15 @@
 <style lang="scss">
     @import "~simplemde/dist/simplemde.min.css";
 
-    #app-popup {
-        .background {
-            position         : fixed;
-            top              : 0;
-            left             : 0;
-            width            : 100%;
-            height           : 100%;
-            background-color : rgba(0, 0, 0, 0.7);
-            z-index          : 3001;
-
+    #app-popup #passwords-create-new {
             .window {
-                position              : fixed;
-                top                   : 6%;
-                left                  : 15%;
-                width                 : 70%;
-                height                : 88%;
-                z-index               : 9999;
-                overflow              : hidden;
-                background-color      : var(--color-main-background);
-                border-radius         : var(--border-radius);
-                box-sizing            : border-box;
-                display               : grid;
-                grid-template-columns : 100%;
-                grid-template-areas   : "title" "content";
-                grid-template-rows    : 3.25rem auto;
-                justify-items         : stretch;
-                align-items           : stretch;
-
-                .title {
-                    grid-area        : title;
-                    padding          : 1rem;
-                    font-size        : 1.25rem;
-                    color            : var(--color-primary-text);
-                    background-color : var(--color-primary);
-
-                    .close {
-                        float  : right;
-                        cursor : pointer;
-                    }
-                }
-
-                .content {
-                    grid-area : content;
-                    overflow  : auto;
-                }
+                height : 88%;
 
                 @media (max-width : $width-medium) {
-                    border-radius : 0;
-                    top           : 0;
-                    left          : 0;
-                    bottom        : 0;
-                    right         : 0;
-                    width         : 100%;
-                    height        : 100%;
+                    height : 100%;
                 }
             }
-        }
 
-        #passwords-create-new {
             .content {
                 display               : grid;
                 grid-template-columns : 1fr 1fr;
@@ -334,7 +333,9 @@
                         font-size : 0.9rem;
                     }
 
+                    input[type=url],
                     input[type=text],
+                    input[type=email],
                     input[type=password] {
                         cursor    : text;
                         width     : 100%;
@@ -382,6 +383,7 @@
 
                         .notes-container {
                             padding : 0.25em 0;
+                            width   : 525px;
 
                             .editor-toolbar {
                                 border  : none;
@@ -453,6 +455,11 @@
                             .warning {
                                 margin : 0 0 4px;
                             }
+
+                            @media (max-width : $width-medium) {
+                                width   : 100%;
+                                max-width   : 525px;
+                            }
                         }
 
                         .foldout-container {
@@ -489,5 +496,4 @@
                 }
             }
         }
-    }
 </style>

@@ -1,8 +1,15 @@
 <?php
+/**
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
+ */
 
 namespace OCA\Passwords\Command;
 
+use Exception;
 use OCA\Passwords\Services\BackupService;
+use OCP\Files\NotPermittedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
@@ -31,7 +38,7 @@ class BackupRestoreCommand extends Command {
     public function __construct(BackupService $backupService) {
         $this->backupService = $backupService;
 
-        parent::__construct(null);
+        parent::__construct();
     }
 
     /**
@@ -53,13 +60,13 @@ class BackupRestoreCommand extends Command {
      * @param OutputInterface $output
      *
      * @return int|null|void
-     * @throws \Exception
+     * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
         $options = $this->getOptions($input);
         $backup  = $this->getBackup($input->getArgument('backup'));
 
-        $this->printRestoringInformation($output, $backup->getName(), $options);
+        $this->printRestoringInformation($output, $backup, $options);
         if(!$options['data'] && !$options['settings']['application'] && !$options['settings']['user'] && !$options['settings']['client']) {
             $output->writeln(' - nothing');
 
@@ -75,7 +82,7 @@ class BackupRestoreCommand extends Command {
 
         $output->writeln('');
         $output->write('Restoring backup ...');
-        $this->backupService->restoreBackup($backup->getName(), $options);
+        $this->backupService->restoreBackup($backup, $options);
         $output->write(' done');
         $output->writeln('');
     }
@@ -83,17 +90,16 @@ class BackupRestoreCommand extends Command {
     /**
      * @param $name
      *
-     * @return \OCP\Files\SimpleFS\ISimpleFile
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \Exception
+     * @return string
+     * @throws NotPermittedException
+     * @throws Exception
      */
-    protected function getBackup($name) {
+    protected function getBackup($name): string {
         $backups = $this->backupService->getBackups();
-        foreach($backups as $backup) {
-            if(substr($backup->getName(), 0, strpos($backup->getName(), '.json')) === $name) return $backup;
-        }
 
-        throw new \Exception("Could not find backup '{$name}'");
+        if(isset($backups[ $name ])) return $name;
+
+        throw new Exception("Could not find backup '{$name}'");
     }
 
     /**
@@ -150,6 +156,7 @@ class BackupRestoreCommand extends Command {
             $output->writeln(' - Only data for '.escapeshellarg($options['user']));
         }
         if($options['data']) {
+            $output->writeln(' - The Nextcloud server secret');
             $output->writeln(' - Server and user encryption keys');
             $output->writeln(' - User passwords, folder, tags and shares');
         }

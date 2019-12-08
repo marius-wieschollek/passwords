@@ -17,9 +17,9 @@ use OCA\Passwords\Services\WebsitePreviewService;
  */
 class PageresCliHelper extends AbstractPreviewHelper {
 
-    const CAPTURE_MAX_RETRIES = 5;
-    const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0';
-    const USER_AGENT_MOBILE   = 'Mozilla/5.0 (Android 7.1.2; Mobile; rv:57.0) Gecko/57.0 Firefox/57.0';
+    const CAPTURE_MAX_RETRIES = 3;
+    const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0';
+    const USER_AGENT_MOBILE   = 'Mozilla/5.0 (Android 9; Mobile; rv:67.0) Gecko/67.0 Firefox/67.0';
 
     /**
      * @var string
@@ -29,16 +29,17 @@ class PageresCliHelper extends AbstractPreviewHelper {
     /**
      * @param string $domain
      * @param string $view
+     * @param string $protocol
      *
      * @return bool|string
      * @throws \Exception
      */
-    protected function getPreviewData(string $domain, string $view): string {
+    protected function getPreviewData(string $domain, string $view, string $protocol = 'https'): string {
         $tempFile = uniqid();
         $tempDir  = $this->config->getTempDir();
         $tempPath = $tempDir.$tempFile.'.png';
         $command  = $this->getPageresBinary();
-        $domain   = escapeshellarg($domain);
+        $domain   = escapeshellarg($protocol.'://'.$domain);
 
         $cmd = "cd {$tempDir} && {$command} {$domain} ".
                ($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::VIEWPORT_DESKTOP:self::VIEWPORT_MOBILE).
@@ -60,6 +61,8 @@ class PageresCliHelper extends AbstractPreviewHelper {
                 $retries++;
             }
         }
+
+        if($protocol === 'https') return $this->getPreviewData($domain, $view, 'http');
 
         throw new \Exception("Pageres Error\nCommand: {$cmd}\nOutput: ".implode(' '.PHP_EOL, $output).PHP_EOL);
     }

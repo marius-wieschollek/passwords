@@ -59,7 +59,6 @@
 
         created() {
             this.logic.start(this.game);
-            console.log(this);
         },
 
         computed: {
@@ -363,7 +362,7 @@
                 display      : inline-block;
                 margin-right : 0.25rem;
                 animation    : life .9s linear infinite;
-                color        : var(--color-primary-text);
+                color        : #f5f6fa;
                 font-size    : 42px;
                 font-family  : var(--pw-game-font-face);
                 line-height  : 36px;
@@ -438,7 +437,7 @@
             }
 
             .text {
-                color         : var(--color-primary-text);
+                color         : #f5f6fa;
                 font-size     : 24px;
                 font-family   : var(--pw-game-font-face);
                 line-height   : 28px;

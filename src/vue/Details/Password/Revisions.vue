@@ -1,10 +1,17 @@
 <template>
     <ul class="revision-list">
-        <li class="revision" v-for="revision in getRevisions" :key="revision.id">
-            <img class="icon" :src="revision.icon" alt="">
+        <li class="revision" v-for="revision in getRevisions" :key="revision.id" @click="viewAction(revision)" :title="getRevisionLabel(revision)">
+            <img class="icon"
+                 :src="revision.icon"
+                 :alt="getRevisionLabel(revision)"
+                 loading="lazy">
             <span class="label">{{ revision.label }}</span>
             <span class="time">{{ getDateTime(revision.created) }}</span>
-            <translate class="restore" icon="undo" title="Restore revision" @click="restoreAction(revision)" v-if="revision.id !== password.revision"/>
+            <translate class="restore"
+                       icon="undo"
+                       title="Restore revision"
+                       @click="restoreAction(revision, $event)"
+                       v-if="revision.id !== password.revision"/>
         </li>
     </ul>
 </template>
@@ -33,11 +40,19 @@
         },
 
         methods: {
-            restoreAction(revision) {
-                PasswordManager.restoreRevision(this.password, revision);
+            restoreAction(revision, $event) {
+                $event.stopPropagation();
+                PasswordManager.restoreRevision(this.password, revision)
+                    .catch(console.error);
+            },
+            viewAction(revision) {
+                PasswordManager.viewRevision(this.password, revision);
             },
             getDateTime(date) {
                 return Localisation.formatDateTime(date);
+            },
+            getRevisionLabel(revision) {
+                return `${revision.label} – ${this.getDateTime(revision.created)}`;
             }
         }
     };
@@ -81,6 +96,8 @@
                 grid-area     : icon;
                 border-radius : var(--border-radius);
                 align-self    : center;
+                width         : 32px;
+                height        : 32px;
             }
 
             .restore {

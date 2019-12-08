@@ -10,16 +10,22 @@
                     :tag="getBreadcrumb.tag"
                     :items="getBreadcrumb.items"/>
             <div class="item-list">
-                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="isDraggable"/>
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" :draggable="isDraggable"/>
-                <password-line :password="password" v-for="password in passwords" :key="password.id" :draggable="isDraggable"/>
+                <header-line :field="sorting.field"
+                             :ascending="sorting.ascending"
+                             v-on:updateSorting="updateSorting($event)"
+                             v-if="isNotEmpty"/>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" :draggable="isDraggable" v-if="!loading"/>
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" :draggable="isDraggable" v-if="!loading"/>
+                <password-line :password="password"
+                               v-for="password in passwords"
+                               :key="password.id"
+                               :draggable="isDraggable" v-if="!loading"/>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
                 <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element" :section="detail.section"/>
         </div>
     </div>
 </template>
@@ -37,7 +43,7 @@
     import PasswordDetails from '@vue/Details/Password';
     import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
@@ -59,14 +65,15 @@
                 loading  : true,
                 detail   : {
                     type   : 'none',
-                    element: null
+                    element: null,
+                    section: 'default'
                 },
                 sorting  : {
-                    field    : SettingsManager.get('local.ui.sorting.field', 'label'),
-                    ascending: SettingsManager.get('local.ui.sorting.ascending', true)
+                    field    : SettingsService.get('local.ui.sorting.field', 'label'),
+                    ascending: SettingsService.get('local.ui.sorting.ascending', true)
                 },
                 ui       : {
-                    showTags: SettingsManager.get('client.ui.list.tags.show', false) && window.innerWidth > 360
+                    showTags: SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360
                 },
                 search   : SearchManager.status
             };
@@ -108,7 +115,10 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                    return Localisation.translate(
+                        'We could not find anything for "{query}"',
+                        {query: this.search.query}
+                    );
                 }
 
                 return undefined;
@@ -124,16 +134,30 @@
         methods: {
             updateSorting($event) {
                 this.sorting = $event;
-                SettingsManager.set('local.ui.sorting.field', $event.field);
-                SettingsManager.set('local.ui.sorting.ascending', $event.ascending);
+                SettingsService.set('local.ui.sorting.field', $event.field);
+                SettingsService.set('local.ui.sorting.ascending', $event.ascending);
 
-                if(this.passwords) this.passwords = Utility.sortApiObjectArray(this.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
-                if(this.folders) this.folders = Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
-                if(this.tags) this.tags = Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
+                if(this.passwords) {
+                    this.passwords =
+                        Utility.sortApiObjectArray(
+                            this.passwords,
+                            this.getPasswordsSortingField(),
+                            this.sorting.ascending
+                        );
+                }
+                if(this.folders) {
+                    this.folders =
+                        Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
+                }
+                if(this.tags) {
+                    this.tags =
+                        Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
+                }
             },
             updatePasswordList(passwords) {
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                this.passwords =
+                    Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
             updateFolderList(folders) {
                 this.loading = false;
@@ -144,8 +168,9 @@
                 this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },
             getPasswordsSortingField() {
-                let sortingField = this.sorting.field === 'label' ? SettingsManager.get('client.ui.password.field.sorting'):this.sorting.field;
-                if(sortingField === 'byTitle') sortingField = SettingsManager.get('client.ui.password.field.title');
+                let sortingField = this.sorting.field === 'label' ? SettingsService.get(
+                    'client.ui.password.field.sorting'):this.sorting.field;
+                if(sortingField === 'byTitle') sortingField = SettingsService.get('client.ui.password.field.title');
                 return sortingField;
             }
         },
@@ -168,37 +193,39 @@
 
 <style lang="scss">
     #app-content {
-        position   : relative;
-        height     : 100%;
+        height     : calc(100vh - 50px);
         overflow-y : initial;
         overflow-x : initial;
-        transition : margin-right 300ms, transform 300ms;
 
-        &.blocking {
-            z-index : 2000;
+        .app-content-left {
+            width      : 100%;
+            transition : width 300ms;
+            transform  : translate3d(0, 0, 0);
+            background : var(--color-main-background);
         }
 
         .app-content-right {
-            background-color : var(--color-main-background);
-            z-index          : 50;
-            border-left      : 1px solid var(--color-border-dark);
-            transition       : right 300ms;
-            right            : -27%;
+            background  : var(--color-main-background);
+            border-left : 1px solid var(--color-border);
+            width       : 27vw;
+            position    : fixed;
+            top         : 50px;
+            right       : 0;
+            overflow-y  : auto;
+            overflow-x  : hidden;
+            z-index     : 1500;
+            height      : calc(100vh - 50px);
+            transform   : translate3d(27vw, 0, 0);
+            transition  : transform 300ms;
         }
 
         &.show-details {
-            margin-right : 27%;
+            .app-content-left {
+                width : calc(100% - 27vw);
+            }
 
             .app-content-right {
-                display    : block;
-                position   : fixed;
-                top        : 50px;
-                right      : 0;
-                left       : auto;
-                bottom     : 0;
-                width      : 27%;
-                min-width  : 360px;
-                overflow-y : auto;
+                transform : translate3d(0, 0, 0);
             }
         }
 
@@ -208,43 +235,46 @@
 
         @media(max-width : $width-large) {
             .app-content-right {
-                right : -360px;
+                width     : 360px;
+                transform : translate3d(360px, 0, 0);
             }
 
             &.show-details {
-                margin-right : 360px;
+                .app-content-left {
+                    width : calc(100% - 360px);
+                }
+            }
+        }
 
-                .app-content-right {
-                    width     : 360px;
-                    min-width : 360px;
-                    z-index   : 60;
+        @media(max-width : $width-medium) {
+            .app-content-right {
+                width     : calc(50% - 150px);
+                transform : translate3d(100%, 0, 0);
+            }
+
+            &.show-details {
+                .app-content-left {
+                    width : 50%;
                 }
             }
         }
 
         @media(max-width : $width-small) {
-            transform : translate3d(0, 0, 0);
-
             .app-content-right {
-                border-left : none;
-                transition  : width 300ms;
+                width : 50%;
             }
 
             &.show-details {
-                margin-right : 0;
-
                 .app-content-left {
-                    display : none;
-                }
-                .app-content-right {
-                    width     : 100%;
-                    min-width : auto;
-                    top       : 0;
+                    width     : 50%;
+                    transform : none;
                 }
             }
+        }
 
-            &.mobile-open {
-                transform : translate3d(300px, 0px, 0px);
+        @media(max-width : $width-extra-small) {
+            .app-content-right {
+                width : 100%;
             }
         }
     }

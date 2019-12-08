@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest a change for Passwords
+about: Suggest a change or something new
 labels: feature
 ---
 

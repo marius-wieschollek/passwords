@@ -7,8 +7,8 @@
 
 namespace OCA\Passwords\Controller\Api;
 
-use OCA\Passwords\Db\AbstractModelEntity;
-use OCA\Passwords\Db\AbstractRevisionEntity;
+use OCA\Passwords\Db\AbstractModel;
+use OCA\Passwords\Db\AbstractRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Services\Object\AbstractModelService;
@@ -82,7 +82,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @return JSONResponse
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
-        /** @var AbstractModelEntity[] $models */
+        /** @var AbstractModel[] $models */
         $models  = $this->modelService->findAll();
         $results = [];
 
@@ -111,7 +111,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
         $filters = $this->processSearchCriteria($criteria);
         if(!isset($filters['trashed'])) $filters['trashed'] = false;
         $filters['hidden'] = false;
-        /** @var AbstractModelEntity[] $models */
+        /** @var AbstractModel[] $models */
         $models  = $this->modelService->findAll();
         $results = [];
 
@@ -149,25 +149,31 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $id
+     * @param string      $id
+     * @param null|string $revision
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws ApiException
      * @throws \OCP\AppFramework\Db\DoesNotExistException
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws \Exception
      */
-    public function delete(string $id): JSONResponse {
+    public function delete(string $id, ?string $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);
-        /** @var AbstractRevisionEntity $oldRevision */
+        /** @var AbstractRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
         if($oldRevision->isTrashed()) {
+            if($revision !== null && $revision !== $model->getRevision()){
+                throw new ApiException('Invalid revision id', 400);
+            }
+
             $this->modelService->delete($model);
 
             return $this->createJsonResponse(['id' => $model->getUuid()]);
         }
 
-        /** @var AbstractRevisionEntity $newRevision */
+        /** @var AbstractRevision $newRevision */
         $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => true]);
         $this->revisionService->save($newRevision);
         $this->modelService->setRevision($model, $newRevision);
@@ -193,7 +199,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
         $model = $this->modelService->findByUuid($id);
 
         if($revision === null) $revision = $model->getRevision();
-        /** @var AbstractRevisionEntity $oldRevision */
+        /** @var AbstractRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($revision, true);
 
         if($oldRevision->getModel() !== $model->getUuid()) {
@@ -204,7 +210,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
             return $this->createJsonResponse(['id' => $model->getUuid(), 'revision' => $oldRevision->getUuid()]);
         }
 
-        /** @var AbstractRevisionEntity $newRevision */
+        /** @var AbstractRevision $newRevision */
         $newRevision = $this->revisionService->clone($oldRevision, ['trashed' => false]);
         $newRevision = $this->validationService->validateObject($newRevision);
         $this->revisionService->save($newRevision);

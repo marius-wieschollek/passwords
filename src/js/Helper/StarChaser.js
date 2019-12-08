@@ -1,4 +1,4 @@
-import SettingsManager from '@js/Manager/SettingsManager';
+import SettingsService from '@js/Services/SettingsService';
 
 export default class StarChaser {
 
@@ -408,11 +408,11 @@ export default class StarChaser {
     }
 
     _checkHighScore() {
-        let current = SettingsManager.get('client.starchaser.highscore');
+        let current = SettingsService.get('client.starchaser.highscore');
 
         if(this._game.stats.points > current) {
             this._game.stats.highscore = true;
-            SettingsManager.set('client.starchaser.highscore', this._game.stats.points);
+            SettingsService.set('client.starchaser.highscore', this._game.stats.points);
         }
     }
 
@@ -435,7 +435,12 @@ export default class StarChaser {
     }
 
     _startShield() {
-        if(this.shieldTimeout) this._stopShield();
+        if(this.shieldTimeout) {
+            this._stopShield();
+            let ship = document.getElementById('ship');
+            ship.classList.remove('shield');
+            this.shieldTimeout = setTimeout(() => { ship.classList.add('shield') }, 10);
+        }
         this._addPoints(this._game.status.shieldPoints);
         this._game.ship.shield = true;
         this.shieldTimeout = setTimeout(() => { this._stopShield(); }, 10000);

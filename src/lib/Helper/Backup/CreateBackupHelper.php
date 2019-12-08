@@ -8,8 +8,11 @@
 namespace OCA\Passwords\Helper\Backup;
 
 use OCA\Passwords\Db\AbstractMapper;
+use OCA\Passwords\Db\AbstractRevisionMapper;
+use OCA\Passwords\Db\ChallengeMapper;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevisionMapper;
+use OCA\Passwords\Db\KeychainMapper;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
@@ -18,7 +21,9 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
+use OCA\Passwords\Services\AppSettingsService;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\UserChallengeService;
 
 /**
  * Class CreateBackupHelper
@@ -27,7 +32,7 @@ use OCA\Passwords\Services\ConfigurationService;
  */
 class CreateBackupHelper {
 
-    const BACKUP_VERSION = 103;
+    const BACKUP_VERSION = 105;
 
     /**
      * @var ConfigurationService
@@ -55,6 +60,16 @@ class CreateBackupHelper {
     protected $passwordMapper;
 
     /**
+     * @var KeychainMapper
+     */
+    protected $keychainMapper;
+
+    /**
+     * @var ChallengeMapper
+     */
+    protected $challengeMapper;
+
+    /**
      * @var TagRevisionMapper
      */
     protected $tagRevisionMapper;
@@ -63,6 +78,11 @@ class CreateBackupHelper {
      * @var UserSettingsHelper
      */
     protected $userSettingsHelper;
+
+    /**
+     * @var AppSettingsService
+     */
+    protected $appSettingsService;
 
     /**
      * @var FolderRevisionMapper
@@ -92,8 +112,11 @@ class CreateBackupHelper {
      * @param FolderMapper              $folderMapper
      * @param ConfigurationService      $config
      * @param PasswordMapper            $passwordMapper
+     * @param KeychainMapper            $keychainMapper
+     * @param ChallengeMapper           $challengeMapper
      * @param TagRevisionMapper         $tagRevisionMapper
      * @param UserSettingsHelper        $userSettingsHelper
+     * @param AppSettingsService        $appSettingsService
      * @param FolderRevisionMapper      $folderRevisionMapper
      * @param PasswordRevisionMapper    $passwordRevisionMapper
      * @param PasswordTagRelationMapper $passwordTagRelationMapper
@@ -104,8 +127,11 @@ class CreateBackupHelper {
         FolderMapper $folderMapper,
         ConfigurationService $config,
         PasswordMapper $passwordMapper,
+        KeychainMapper $keychainMapper,
+        ChallengeMapper $challengeMapper,
         TagRevisionMapper $tagRevisionMapper,
         UserSettingsHelper $userSettingsHelper,
+        AppSettingsService $appSettingsService,
         FolderRevisionMapper $folderRevisionMapper,
         PasswordRevisionMapper $passwordRevisionMapper,
         PasswordTagRelationMapper $passwordTagRelationMapper
@@ -115,8 +141,11 @@ class CreateBackupHelper {
         $this->shareMapper               = $shareMapper;
         $this->folderMapper              = $folderMapper;
         $this->passwordMapper            = $passwordMapper;
+        $this->keychainMapper            = $keychainMapper;
+        $this->challengeMapper           = $challengeMapper;
         $this->tagRevisionMapper         = $tagRevisionMapper;
         $this->userSettingsHelper        = $userSettingsHelper;
+        $this->appSettingsService        = $appSettingsService;
         $this->folderRevisionMapper      = $folderRevisionMapper;
         $this->passwordRevisionMapper    = $passwordRevisionMapper;
         $this->passwordTagRelationMapper = $passwordTagRelationMapper;
@@ -133,9 +162,12 @@ class CreateBackupHelper {
             'folders'              => $this->getModelArray($this->folderMapper, $this->folderRevisionMapper),
             'tags'                 => $this->getModelArray($this->tagMapper, $this->tagRevisionMapper),
             'shares'               => $this->getEntityArray($this->shareMapper),
+            'keychains'            => $this->getEntityArray($this->keychainMapper),
+            'challenges'           => $this->getEntityArray($this->challengeMapper),
             'passwordTagRelations' => $this->getEntityArray($this->passwordTagRelationMapper),
             'keys'                 => [
                 'server' => [
+                    'secret'         => $this->config->getSystemValue('secret'),
                     'SSEv1ServerKey' => $this->config->getAppValue('SSEv1ServerKey', null)
                 ],
                 'users'  => $this->getUserKeys()
@@ -151,8 +183,8 @@ class CreateBackupHelper {
     }
 
     /**
-     * @param AbstractMapper $modelMapper
-     * @param AbstractMapper $revisionMapper
+     * @param AbstractMapper                        $modelMapper
+     * @param AbstractRevisionMapper|AbstractMapper $revisionMapper
      *
      * @return array
      */
@@ -186,7 +218,8 @@ class CreateBackupHelper {
         $keys = [];
         foreach($this->users as $user) {
             $keys[ $user ] = [
-                'SSEv1UserKey' => $this->config->getUserValue('SSEv1UserKey', null, $user)
+                'SSEv1UserKey' => $this->config->getUserValue('SSEv1UserKey', null, $user),
+                'ChallengeId'  => $this->config->getUserValue(UserChallengeService::USER_CHALLENGE_ID, null, $user)
             ];
         }
 
@@ -239,17 +272,14 @@ class CreateBackupHelper {
      * @return array
      */
     protected function getApplicationSettings(): array {
-        return [
-            'service/security'       => $this->config->getAppValue('service/security', null),
-            'service/words'          => $this->config->getAppValue('service/words', null),
-            'service/images'         => $this->config->getAppValue('service/images', null),
-            'service/favicon'        => $this->config->getAppValue('service/favicon', null),
-            'service/preview'        => $this->config->getAppValue('service/preview', null),
-            'backup/interval'        => $this->config->getAppValue('backup/interval', null),
-            'backup/files/maximum'   => $this->config->getAppValue('backup/files/maximum', null),
-            'entity/purge/timeout'   => $this->config->getAppValue('entity/purge/timeout', null),
-            'settings/mail/security' => $this->config->getAppValue('settings/mail/security', null),
-            'settings/mail/shares'   => $this->config->getAppValue('settings/mail/shares', null)
-        ];
+        $options = $this->appSettingsService->list();
+        $settings = [];
+
+        foreach($options as $option) {
+            if($option['name'] === 'legacy.api.last.used') continue;
+            $settings[$option['name']] = $option['isDefault'] ? null:$option['value'];
+        }
+
+        return $settings;
     }
 }

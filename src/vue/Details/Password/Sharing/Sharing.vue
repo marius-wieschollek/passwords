@@ -1,6 +1,17 @@
 <template>
     <div class="sharing-container">
-        <input type="text" v-model="search" class="share-add-user" :placeholder="placeholder" @keypress="submitAction($event)"/>
+        <translate tag="div"
+                   class="cse-warning warning"
+                   say="End-to-End encryption will be disabled for this password if you share it."
+                   v-if="hasCse && canBeShared"/>
+        <div v-if="isSharedWithUser" class="shareby-info" :title="getShareTitle">
+            <img :src="password.share.owner.icon">
+            <translate say="{name} has shared this with you" :variables="password.share.owner"/>
+        </div>
+        <field v-model="search"
+               class="share-add-user"
+               placeholder="Search user"
+               @keypress="submitAction($event)" v-if="canBeShared"/>
         <ul class="shares" v-if="shares.length !== 0">
             <share :share="share"
                    v-on:delete="deleteShare($event)"
@@ -9,7 +20,7 @@
                    v-for="share in shares"
                    :key="share.id"/>
         </ul>
-        <ul class="user-search" v-if="matches.length !== 0">
+        <ul :class="getDropdownClasses" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)">
                 <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{match.name}}
             </li>
@@ -18,15 +29,19 @@
 </template>
 
 <script>
+    import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
+    import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vue/Details/Password/Sharing/Share';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import PasswordManager from '@js/Manager/PasswordManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
+            Field,
             Share,
             Translate
         },
@@ -38,20 +53,25 @@
         },
 
         data() {
+            let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
+                hasCse = this.password.cseType !== 'none';
+
+
             return {
                 search      : '',
                 matches     : [],
                 nameMap     : [],
                 idMap       : [],
-                shares      : this.password.shares,
-                placeholder : Localisation.translate('Search user'),
-                autocomplete: SettingsManager.get('server.sharing.autocomplete'),
+                shares,
+                hasCse,
+                autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
                 polling     : {interval: null, mode: null}
             };
         },
 
         created() {
+            this.reloadShares();
             this.startPolling();
         },
 
@@ -60,6 +80,20 @@
         },
 
         computed: {
+            canBeShared() {
+                return this.password.hasOwnProperty('share') &&
+                       (
+                           this.password.share === null ||
+                           (
+                               typeof this.password.share !== 'string' &&
+                               this.password.share.hasOwnProperty('shareable') &&
+                               this.password.share.shareable
+                           )
+                       );
+            },
+            isSharedWithUser() {
+                return this.password.share && this.password.share.owner;
+            },
             getSharedWithUsers() {
                 let users = [];
                 for(let i in this.shares) {
@@ -71,12 +105,33 @@
                 }
 
                 return users;
+            },
+            getShareTitle() {
+                let editable  = Localisation.translate(this.password.share.editable ? 'Editing allowed':'Editing disallowed'),
+                    shareable = Localisation.translate(this.password.share.shareable ? 'sharing allowed':'sharing disallowed'),
+                    text      = Localisation.translate('{editable} and {shareable}.', {shareable, editable});
+
+                if(this.password.share.expires) {
+                    text += ' ' + Localisation.translate(
+                        'Expires {date}',
+                        {date: Localisation.formatDate(this.password.share.expires)}
+                    );
+                }
+
+                return text;
+            },
+            getDropdownClasses() {
+                let classes = ['user-search'];
+
+                if(this.isSharedWithUser) classes.push('shared-with');
+
+                return classes;
             }
         },
 
         methods: {
             async searchUsers() {
-                if(this.search === '' || !this.autocomplete) {
+                if(this.search === '' || !this.autocomplete || !this.canBeShared) {
                     this.matches = [];
                     return;
                 }
@@ -94,40 +149,52 @@
                     this.idMap[i] = name;
                 }
             },
-            addShare(receiver) {
+            async disableCse() {
+                let password = Utility.cloneObject(this.password);
+                password.shared = true;
+
+                await PasswordManager.updatePassword(password);
+                this.hasCse = false;
+            },
+            async addShare(receiver) {
+                if(!this.canBeShared) return;
+                if(this.hasCse) await this.disableCse();
+
                 let share = {
                     password : this.password.id,
                     expires  : null,
                     editable : false,
                     shareable: true,
-                    receiver : receiver
+                    receiver
                 };
-                API.createShare(share).then(
-                    (d) => {
-                        this.getSharedWithUsers.push(receiver);
-                        share.id = d.id;
-                        share.updatePending = true;
-                        share.owner = {
-                            id  : document.querySelector('head[data-user]').getAttribute('data-user'),
-                            name: document.querySelector('head[data-user-displayname]').getAttribute('data-user-displayname')
-                        };
-                        share.receiver = {id: receiver, name: this.idMap[receiver]};
-                        this.shares[d.id] = API._processShare(share);
-                        this.search = '';
-                        this.refreshShares();
-                    }
-                ).catch((e) => {
+
+                try {
+                    let d = await API.createShare(share);
+                    this.getSharedWithUsers.push(receiver);
+                    share.id = d.id;
+                    share.updatePending = true;
+                    share.owner = {
+                        id  : document.querySelector('head[data-user]').getAttribute('data-user'),
+                        name: document.querySelector('head[data-user-displayname]')
+                            .getAttribute('data-user-displayname')
+                    };
+                    share.receiver = {id: receiver, name: this.idMap[receiver]};
+                    this.shares[d.id] = API._processShare(share);
+                    this.search = '';
+                    this.refreshShares();
+                } catch(e) {
                     if(e.id === '65782183') {
                         Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
                         let message = e.hasOwnProperty('message') ? e.message:e.statusText;
                         Messages.notification(['Unable to share password: {message}', {message}]);
                     }
-                });
+                }
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                    .then((d) => { this.shares = d.shares;});
+                    .then((d) => {this.shares = d.shares;})
+                    .catch(console.error);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -153,9 +220,10 @@
                 delete this.shares[$event.id];
                 this.refreshShares();
             },
-            refreshShares() {
-                API.runSharingCron()
-                    .then((d) => { if(d.success) this.reloadShares();});
+            async refreshShares() {
+                await API.runSharingCron()
+                    .then((d) => { if(d.success) this.reloadShares();})
+                    .catch(console.error);
 
                 this.startPolling();
                 this.$forceUpdate();
@@ -178,7 +246,7 @@
 
         watch: {
             password(value) {
-                this.shares = value.shares;
+                this.shares = value.hasOwnProperty('shares') ? value.shares:[];
                 this.$forceUpdate();
             },
             search() {
@@ -200,7 +268,25 @@
 
 <style lang="scss">
     .sharing-container {
-        position : relative;
+        position       : relative;
+        padding-bottom : 5rem;
+
+        .cse-warning {
+            margin-bottom : 0.5rem;
+        }
+
+        .shareby-info {
+            img {
+                border-radius : var(--border-radius-pill);
+                width         : 32px;
+                height        : 32px;
+                margin-right  : 0.5rem;
+                float         : left;
+            }
+
+            line-height   : 32px;
+            margin-bottom : 0.5rem;
+        }
 
         .share-add-user {
             width : 100%;
@@ -219,6 +305,10 @@
             background-color : var(--color-main-background);
             color            : var(--color-primary);
             border           : 1px solid var(--color-primary);
+
+            &.shared-with {
+                top : 77px;
+            }
 
             li {
                 line-height : 32px;

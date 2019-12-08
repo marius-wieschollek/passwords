@@ -25,6 +25,11 @@ class CheckNightlyUpdates extends AbstractCronJob {
     protected $nightlyAppFetcher;
 
     /**
+     * @var float|int
+     */
+    protected $interval = 600;
+
+    /**
      * CheckNightlyUpdates constructor.
      *
      * @param NightlyAppFetcher    $nightlyAppFetcher
@@ -45,7 +50,7 @@ class CheckNightlyUpdates extends AbstractCronJob {
      * @throws \Exception
      */
     protected function runJob($argument): void {
-        $enabled = $this->config->getAppValue('nightly/enabled', false) === '1';
+        $enabled = $this->config->getAppValue('nightly/enabled', '0') === '1';
         $enabled = $this->migrateNightlyKey($enabled);
 
         if($enabled) {
@@ -55,11 +60,13 @@ class CheckNightlyUpdates extends AbstractCronJob {
     }
 
     /**
+     * @param bool $enabled
+     *
      * @return bool
      */
     protected function migrateNightlyKey(bool $enabled): bool {
         if($this->config->getAppValue('nightly_updates', null) !== null) {
-            if($this->config->getAppValue('nightly_updates', false) === '1') {
+            if($this->config->getAppValue('nightly_updates', '0') === '1') {
                 $this->config->setAppValue('nightly/enabled', true);
                 $enabled = true;
             }

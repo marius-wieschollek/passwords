@@ -8,8 +8,8 @@
 namespace OCA\Passwords\Middleware;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\Controller;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
@@ -34,26 +34,19 @@ class ApiSecurityMiddleware extends Middleware {
     protected $request;
 
     /**
-     * @var ConfigurationService
-     */
-    protected $config;
-
-    /**
      * ApiSecurityMiddleware constructor.
      *
-     * @param LoggingService       $logger
-     * @param ConfigurationService $config
-     * @param IRequest             $request
+     * @param LoggingService $logger
+     * @param IRequest       $request
      */
-    public function __construct(LoggingService $logger, ConfigurationService $config, IRequest $request) {
+    public function __construct(LoggingService $logger, IRequest $request) {
         $this->logger  = $logger;
-        $this->config  = $config;
         $this->request = $request;
     }
 
     /**
-     * @param \OCP\AppFramework\Controller $controller
-     * @param string                       $methodName
+     * @param Controller $controller
+     * @param string     $methodName
      *
      * @throws ApiException
      */
@@ -67,9 +60,9 @@ class ApiSecurityMiddleware extends Middleware {
     }
 
     /**
-     * @param \OCP\AppFramework\Controller $controller
-     * @param string                       $methodName
-     * @param \Exception                   $exception
+     * @param Controller $controller
+     * @param string     $methodName
+     * @param \Exception $exception
      *
      * @return JSONResponse
      * @throws \Exception
@@ -81,6 +74,7 @@ class ApiSecurityMiddleware extends Middleware {
         $id         = 0;
         $statusCode = Http::STATUS_SERVICE_UNAVAILABLE;
 
+        $this->logger->error(['Error "%1$s" in %2$s::%3$s', $exception->getMessage(), get_class($controller), $methodName]);
         $this->logger->logException($exception);
 
         if(get_class($exception) === ApiException::class || is_subclass_of($exception, ApiException::class)) {
@@ -113,6 +107,9 @@ class ApiSecurityMiddleware extends Middleware {
      * @return bool
      */
     protected function isApiClass($object): bool {
-        return substr(get_class($object), 0, 28) === 'OCA\Passwords\Controller\Api';
+        $class = get_class($object);
+
+        return substr($class, 0, 28) === 'OCA\Passwords\Controller\Api' ||
+               substr($class, 0, 30) === 'OCA\Passwords\Controller\Admin';
     }
 }

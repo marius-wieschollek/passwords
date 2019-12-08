@@ -12,6 +12,8 @@ namespace OCA\Passwords\Db;
  *
  * @method integer getId()
  * @method void setId(integer $id)
+ * @method string getUuid()
+ * @method void setUuid(string $uuid)
  * @method string getUserId()
  * @method void setUserId(string $userId)
  * @method bool getDeleted()

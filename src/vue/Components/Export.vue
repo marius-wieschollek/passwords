@@ -14,7 +14,7 @@
         </div>
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select Options"/>
-            <div class="step-content" v-if="format === 'json' && nightly">
+            <div class="step-content" v-if="format === 'json' && allowEnc">
                 <translate tag="label"
                            for="passwords-export-encrypt"
                            say="Backup password"
@@ -148,6 +148,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
+    import DAS from "@js/Services/DeferredActivationService";
 
     export default {
         components: {
@@ -155,6 +156,9 @@
         },
 
         data() {
+            DAS.check('backup-encryption')
+                .then((d) => { this.allowEnc = d; });
+
             return {
                 format    : 'json',
                 options   : {includeShared: false},
@@ -195,7 +199,7 @@
                     ],
                     tags     : ['label', 'color', 'edited', 'created', 'favorite', 'id', 'revision', 'empty']
                 },
-                nightly   : process.env.NIGHTLY_FEATURES
+                allowEnc   : false
             };
         },
 
@@ -212,7 +216,7 @@
         },
 
         created() {
-            if (this.nightly) this.preventPasswordFill(1000);
+            if (this.allowEnc) this.preventPasswordFill(1000);
         },
 
         methods: {
@@ -322,7 +326,7 @@
                 } else if (value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
                     this.models = [this.models.shift()];
                 } else if (value === 'json') {
-                    this.preventPasswordFill();
+                    if (this.allowEnc) this.preventPasswordFill();
                 }
 
                 this.validateStep();

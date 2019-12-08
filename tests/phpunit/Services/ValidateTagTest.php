@@ -1,36 +1,38 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 14.01.18
- * Time: 19:26
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek
+ * and licensed under the AGPL.
  */
 
 namespace OCA\Passwords\Services;
 
+use Exception;
+use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidateTagTest
  *
  * @package OCA\Passwords\Services
- * @covers \OCA\Passwords\Services\ValidationService
+ * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidateTagTest extends TestCase {
 
     /**
-     * @var \OCA\Passwords\Services\ValidationService
+     * @var ValidationService
      */
     protected $validationService;
 
     /**
-     * @throws \ReflectionException
+     *
      */
-    protected function setUp() {
-        $container           = $this->createMock('\OCP\AppFramework\IAppContainer');
-        $this->validationService = new \OCA\Passwords\Services\ValidationService($container);
+    protected function setUp(): void {
+        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $this->validationService = new ValidationService($container);
     }
 
 
@@ -40,11 +42,12 @@ class ValidateTagTest extends TestCase {
      *
      */
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagInvalidSse() {
         $mock = $this->getTagMock();
+        $mock->method('getSseType')->willReturn('invalid');
 
         try {
             $this->validationService->validateTag($mock);
@@ -57,13 +60,14 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagInvalidCse() {
         $mock = $this->getTagMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn('invalid');
 
         try {
             $this->validationService->validateTag($mock);
@@ -76,8 +80,69 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateTagCseKeyBotNoCse() {
+        $mock = $this->getTagMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
+        $mock->method('getCseKey')->willReturn('cse-key');
+
+        try {
+            $this->validationService->validateTag($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('4e8162e6', $e->getId());
+            $this->assertEquals('Invalid client side encryption type', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateTagNoSseAndCse() {
+        $mock = $this->getTagMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
+
+        try {
+            $this->validationService->validateTag($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('f43e7b82', $e->getId());
+            $this->assertEquals('No encryption specified', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidatePasswordMissingCseKey() {
+        $mock = $this->getTagMock();
+        $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
+        $mock->method('getCseKey')->willReturn('');
+
+        try {
+            $this->validationService->validateTag($mock);
+            $this->fail("Expected exception thrown");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('fce89df4', $e->getId());
+            $this->assertEquals('Client side encryption key missing', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagEmptyLabel() {
         $mock = $this->getTagMock();
@@ -96,8 +161,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagEmptyColor() {
         $mock = $this->getTagMock();
@@ -117,8 +182,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsSseType() {
         $mock = $this->getTagMock();
@@ -137,8 +202,28 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateTagSetsCseType() {
+        $mock = $this->getTagMock();
+
+        $mock->expects($this->any())
+             ->method('getCseType')
+             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getColor')->willReturn('color');
+        $mock->method('getEdited')->willReturn(1);
+
+        $mock->expects($this->once())->method('setCseType')->with(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $this->validationService->validateTag($mock);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenEmpty() {
         $mock = $this->getTagMock();
@@ -154,8 +239,8 @@ class ValidateTagTest extends TestCase {
     }
 
     /**
-     * @throws \Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenInFuture() {
         $mock = $this->getTagMock();
@@ -170,15 +255,13 @@ class ValidateTagTest extends TestCase {
         $this->validationService->validateTag($mock);
     }
 
-
-
     /**
-     * @return \OCA\Passwords\Db\TagRevision
+     * @return TagRevision
      */
     protected function getTagMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'getHidden', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
+            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);

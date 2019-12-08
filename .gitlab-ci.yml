@@ -1,18 +1,23 @@
 stages:
   - compiling
   - assembling
+  - testing
+  - signing
   - packaging
   - publishing
+
+image: passwords-builder
 
 Compile:
   stage: compiling
   script:
     - npm install
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:prod ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:nightly ; fi
   artifacts:
     paths:
       - ./src/js/Static/*
+      - ./src/l10n/*
       - ./src/css/*
 
 Assemble:
@@ -23,9 +28,36 @@ Assemble:
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
+    - cp CHANGELOG.md passwords/
   artifacts:
     paths:
       - ./passwords
+
+PHPUnit:
+  stage: testing
+  script:
+    - npm run phpunit
+  artifacts:
+    paths:
+      - ./passwords
+
+Sign:
+  stage: signing
+  script:
+    - echo "-----BEGIN PRIVATE KEY-----" > sign.key
+    - echo $SIGN_KEY | tr " " "\n" >> sign.key
+    - echo "-----END PRIVATE KEY-----" >> sign.key
+    - echo "-----BEGIN CERTIFICATE-----" > sign.crt
+    - echo $SIGN_CRT | tr " " "\n" >> sign.crt
+    - echo "-----END CERTIFICATE-----" >> sign.crt
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
+    - rm sign.key sign.crt
+  artifacts:
+    paths:
+      - ./passwords
+  only:
+    - testing
+    - stable
 
 Pack:
   stage: packaging

@@ -1,7 +1,8 @@
 const {crop, thumbnail} = require('easyimage');
 
-function gEP(e) {let $e=$(e);$e[0].scrollIntoView(false);let d=$e.offset();d.width=$e.width();d.height=$e.height();return JSON.stringify(d);}
-let window = {width:1280, height:874};
+function gEP(e) {let $e=$(e)[0];$e.scrollIntoView(false);return JSON.stringify($e.getBoundingClientRect());}
+
+let window = {width: 1280, height: 874};
 
 module.exports = function() {
     return actor(
@@ -19,10 +20,10 @@ module.exports = function() {
              * @param wait     Wait for x seconds before capturing
              * @param width    Width of the cropped area (Use element width by default)
              * @param height   Height of the cropped area (Use element height by default)
+             * @param preview  Create a preview
              * @returns {Promise<void>}
              */
-            async captureElement(file, element, wait = 1, width = null, height = null) {
-
+            async captureElement(file, element, wait = 1, width = null, height = null, preview = true) {
                 if(wait) this.wait(wait);
                 let data  = await this.executeScript(gEP, element),
                     stats = JSON.parse(data);
@@ -35,12 +36,32 @@ module.exports = function() {
                     {
                         src       : `tests/codecept/output/${file}.png`,
                         dst       : `tests/codecept/output/${file}.png`,
-                        y         : stats.top,
-                        x         : stats.left,
+                        y         : stats.y,
+                        x         : stats.x,
                         cropWidth : width,
                         cropHeight: height
                     }
                 );
+
+                if(preview) {
+                    let thumbWidth  = 320,
+                        thumbHeight = 200;
+                    if(width > height) {
+                        thumbHeight = Math.round(thumbWidth / (width / height));
+                    } else {
+                        thumbWidth = Math.round(thumbHeight / (height / width));
+                    }
+
+                    await thumbnail(
+                        {
+                            src    : `tests/codecept/output/${file}.png`,
+                            dst    : `tests/codecept/output/_previews/${file}.jpg`,
+                            quality: 85,
+                            width  : thumbWidth,
+                            height : thumbHeight
+                        }
+                    );
+                }
             },
 
             /**

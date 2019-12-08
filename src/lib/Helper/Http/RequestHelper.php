@@ -7,6 +7,9 @@
 
 namespace OCA\Passwords\Helper\Http;
 
+use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\QueryException;
+
 /**
  * Class RequestHelper
  *
@@ -44,7 +47,7 @@ class RequestHelper {
     /**
      * @var string
      */
-    protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0';
+    protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0';
 
     /**
      * @var int[]
@@ -65,6 +68,11 @@ class RequestHelper {
      * @var array
      */
     protected $info;
+
+    /**
+     * @var string|false
+     */
+    protected $error;
 
     /**
      * @var string
@@ -204,6 +212,7 @@ class RequestHelper {
 
         $this->response = curl_exec($curl);
         $this->info     = curl_getinfo($curl);
+        $this->error    = curl_error($curl);
         curl_close($curl);
 
         $headerSize           = $this->info['header_size'];
@@ -211,7 +220,11 @@ class RequestHelper {
         $this->responseBody   = substr($this->response, $headerSize);
 
         if(!empty($this->acceptResponseCodes)) {
-            if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) return false;
+            if(!in_array($this->info['http_code'], $this->acceptResponseCodes)) {
+                $this->logError();
+
+                return false;
+            }
         }
 
         return $this->responseBody;
@@ -268,6 +281,13 @@ class RequestHelper {
     }
 
     /**
+     * @return string|false
+     */
+    public function getError() {
+        return $this->error;
+    }
+
+    /**
      * @param string $url
      *
      * @return resource
@@ -294,6 +314,14 @@ class RequestHelper {
             $this->headerData['Content-Length'] = strlen($json);
         }
 
+        if(\OC::$server->getConfig()->getSystemValue('proxy')) {
+            curl_setopt($curl, CURLOPT_PROXY, \OC::$server->getConfig()->getSystemValue('proxy'));
+
+            if(\OC::$server->getConfig()->getSystemValue('proxyuserpwd')) {
+                curl_setopt($curl, CURLOPT_PROXYUSERPWD, \OC::$server->getConfig()->getSystemValue('proxyuserpwd'));
+            }
+        }
+
         if(!empty($this->headerData)) {
             $header = [];
 
@@ -310,5 +338,23 @@ class RequestHelper {
         }
 
         return $curl;
+    }
+
+    /**
+     *
+     */
+    protected function logError() {
+        try {
+            $logger = \OC::$server->query(LoggingService::class);
+
+            if($this->error !== false && $this->error !== '') {
+                $message = sprintf('"%s" when fetching %s', $this->error, $this->info['url']);
+            } else {
+                $message = sprintf('"Unexpected HTTP %s" when fetching %s (%s redirects)', $this->info['http_code'], $this->info['url'], $this->info['redirect_count']);
+            }
+
+            $logger->error($message);
+        } catch(QueryException $e) {
+        }
     }
 }

@@ -75,4 +75,11 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
         $this->localSecurityCheck->updateDb();
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
     }
+
+    /**
+     * @inheritdoc
+     */
+    function dbUpdateRequired(): bool {
+        return $this->localSecurityCheck->dbUpdateRequired() || parent::dbUpdateRequired();
+    }
 }

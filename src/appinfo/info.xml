@@ -12,13 +12,13 @@ You can also share passwords with other Nextcloud users.
 **Features**
  * Intuitive and modern user interface
  * Password security monitor
- * Server side encryption
- * Folders &amp; Tags
- * Password sharing
- * Password API
- * Extensive Handbook
+ * Secure encryption
+ * Folders &amp; tags
+ * Sharing
+ * API for apps
+ * Extensive handbook
  * Import &amp; Export
- * Browser Extensions
+ * Browser extensions
  * ... and many more to come
 ]]>
     </description>
@@ -30,17 +30,17 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
 **Funktionsumfang**
  * Intuitive und moderne Weboberfläche
  * Passwortsicherheitsüberwachung
- * Serverseitige Verschlüsselung
+ * Sichere Verschlüsselung
  * Ordner &amp; Tags
  * Teilen-Funktion
- * Passwort API
+ * Umfangreiche API
  * Import &amp; Export
  * Detailliertes Handbuch
  * Browser Extensions
  * ... und vieles mehr
 ]]>
     </description>
-    <version>2019.5.0-BUILD</version>
+    <version>2020.1.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -61,8 +61,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/folder-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/folder-section.png]]>
     </screenshot>
-    <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/tags-section.jpg">
-        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/tags-section.png]]>
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/tag-section.jpg">
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/tag-section.png]]>
     </screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/security-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/security-section.png]]>
@@ -80,11 +80,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="7.1" />
-        <database>sqlite</database>
-        <database>mysql</database>
-        <database>pgsql</database>
-        <nextcloud min-version="15" max-version="16" />
+        <php min-version="7.2" />
+        <nextcloud min-version="17" max-version="18" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\ProcessDeletedUsers</job>
@@ -92,19 +89,26 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <job>OCA\Passwords\Cron\CheckNightlyUpdates</job>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
+        <job>OCA\Passwords\Cron\SendServerSurvey</job>
+        <job>OCA\Passwords\Cron\CleanUpSessions</job>
         <job>OCA\Passwords\Cron\BackupJob</job>
     </background-jobs>
     <repair-steps>
         <post-migration>
-            <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
-            <step>OCA\Passwords\Migration\DatabaseDuplicateDeletion</step>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
+        <live-migration>
+            <step>OCA\Passwords\Migration\CheckAppSettings</step>
+            <step>OCA\Passwords\Migration\ClearAppCaches</step>
+        </live-migration>
     </repair-steps>
     <commands>
         <command>OCA\Passwords\Command\BackupCreateCommand</command>
         <command>OCA\Passwords\Command\BackupListCommand</command>
         <command>OCA\Passwords\Command\BackupRestoreCommand</command>
+        <command>OCA\Passwords\Command\BackupExportCommand</command>
+        <command>OCA\Passwords\Command\BackupImportCommand</command>
+        <command>OCA\Passwords\Command\BackupDeleteCommand</command>
     </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>

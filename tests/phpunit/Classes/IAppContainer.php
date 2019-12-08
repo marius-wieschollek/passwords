@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: marius
- * Date: 23.01.18
- * Time: 18:43
- */
 
 namespace OCP\AppFramework;
 

@@ -2,10 +2,12 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Services\BackupService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\Util;
 
 /**
  * Class BackupJob
@@ -18,10 +20,11 @@ class BackupJob extends AbstractCronJob {
      * @var BackupService
      */
     protected $backupService;
+
     /**
      * @var ConfigurationService
      */
-    private $config;
+    protected $config;
 
     /**
      * BackupJob constructor.
@@ -34,21 +37,20 @@ class BackupJob extends AbstractCronJob {
     public function __construct(LoggingService $logger, EnvironmentService $environment, BackupService $backupService, ConfigurationService $config) {
         parent::__construct($logger, $environment);
         $this->backupService = $backupService;
-        $this->config = $config;
+        $this->config        = $config;
+
+        $interval = (int) $this->config->getAppValue('backup/interval', 86400);
+        $this->setInterval($interval);
     }
 
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($argument): void {
-        $time = strtotime('+2 min') - intval($this->config->getAppValue('backup/timestamp', 0));
-        $interval = intval($this->config->getAppValue('backup/interval', 86400));
-        if($time < $interval) return;
-
-        $this->config->setAppValue('backup/timestamp', time());
-        $file = $this->backupService->createBackup();
-        $this->logger->info(['Created Backup %s with %s', $file->getName(), \OCP\Util::humanFileSize($file->getSize())]);
+        $file = $this->backupService->createBackup(null, BackupService::AUTO_BACKUPS);
+        $this->logger->info(['Created Backup %s with %s', $file->getName(), Util::humanFileSize($file->getSize())]);
+        $this->backupService->removeOldBackups();
     }
 }

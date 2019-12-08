@@ -1,6 +1,11 @@
 <template>
     <div class="custom-field-form">
-        <input type="text" :placeholder="namePlaceholder" class="field-label" v-model="label" maxlength="48" :class="{error:showNameError}"/>
+        <input type="text"
+               :placeholder="namePlaceholder"
+               class="field-label"
+               v-model="label"
+               maxlength="48"
+               :class="{error:showNameError}"/>
         <select class="field-type" v-model="type" :disabled="!isValidName">
             <translate tag="option" value="text">Text</translate>
             <translate tag="option" value="secret">Secret</translate>
@@ -8,7 +13,13 @@
             <translate tag="option" value="url">Link</translate>
             <translate tag="option" value="file">File</translate>
         </select>
-        <input class="file-picker" type="button" @click="openNextcloudFile" v-if="type === 'file'" :disabled="!isValidName" :style="getFileButtonStyle" :value="value"/>
+        <input class="file-picker"
+               type="button"
+               @click="openNextcloudFile"
+               v-if="type === 'file'"
+               :disabled="!isValidName"
+               :style="getFileButtonStyle"
+               :value="value"/>
         <input class="field-value"
                :type="getFieldType"
                :placeholder="valuePlaceholder"
@@ -26,14 +37,14 @@
 
 <script>
     import Messages from '@js/Classes/Messages';
-    import Localisation from '@js/Classes/Localisation';
     import Translate from '@vue/Components/Translate';
-    import SettingsManager from '@js/Manager/SettingsManager';
+    import Localisation from '@js/Classes/Localisation';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {Translate},
         props     : {
-            field     : {
+            field: {
                 type     : Object,
                 'default': () => {
                     return {
@@ -65,11 +76,12 @@
             getFieldType() {
                 if(this.type === 'secret') return 'password';
                 if(this.type === 'email') return 'email';
+                if(this.type === 'url') return 'url';
                 return 'text';
             },
             getFileButtonStyle() {
                 return {
-                    backgroundImage: `url(${SettingsManager.get('server.theme.folder.icon')})`
+                    backgroundImage: `url(${SettingsService.get('server.theme.folder.icon')})`
                 };
             },
             getPattern() {
@@ -133,8 +145,13 @@
 
 <style lang="scss">
     #app-popup #passwords-create-new #custom-fields .custom-field-form {
+        display               : grid;
+        grid-template-areas   : "label type type" "value value options";
+        grid-template-columns : auto 100px 35px;
+        grid-column-gap       : 0.2rem;
+
         .field-label {
-            width     : 75.5%;
+            grid-area : label;
             max-width : none;
 
             &.error {
@@ -143,13 +160,13 @@
         }
 
         .field-type {
-            width     : 23%;
+            grid-area : type;
             max-width : none;
         }
 
         .field-value,
         .file-picker {
-            width     : 92.5%;
+            grid-area : value;
             max-width : none;
         }
 
@@ -165,49 +182,10 @@
         }
 
         .field-button {
-            width     : 6%;
-            max-width : none;
-        }
-
-        @media all and (min-width : $width-medium) and (max-width : $width-large) {
-            .field-type {
-                width : 22%;
-            }
-
-            .field-value,
-            .file-picker {
-                width : 89%;
-            }
-
-            .field-button {
-                width : 8%;
-            }
-        }
-
-        @media all and (max-width : $width-small) {
-            .field-type {
-                width : 22.5%;
-            }
-
-            .field-value,
-            .file-picker {
-                width : 92%;
-            }
-        }
-
-        @media all and (max-width : $width-extra-small) {
-            .field-type {
-                width : 21%;
-            }
-
-            .field-value,
-            .file-picker {
-                width : 85%;
-            }
-
-            .field-button {
-                width : 12%;
-            }
+            grid-area     : options;
+            max-width     : none;
+            margin-right  : 0;
+            border-radius : var(--border-radius-large);
         }
     }
 </style>

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import SimpleApi from '@js/ApiClient/SimpleApi';
+    import API from '@js/Helper/api';
     import Localisation from '@js/Classes/Localisation';
 
     export default {
@@ -43,10 +43,10 @@
             getHref() {
                 if(!this.href || this.href.substr(0, 11) === 'javascript:') return location.href;
                 if(this.href.substr(0, 7) === 'mailto:') return this.href;
-                return SimpleApi.parseUrl(this.href, 'href');
+                return API.parseUrl(this.href, 'href');
             },
             getTarget() {
-                let host = SimpleApi.parseUrl(this.href, 'host');
+                let host = API.parseUrl(this.href, 'host');
                 if(host !== location.host) return '_blank';
                 return this.target ? this.target:'_self';
             },

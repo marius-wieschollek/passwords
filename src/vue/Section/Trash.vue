@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element"/>
+            <password-details v-if="showPasswordDetails" :password="detail.element" :section="detail.section"/>
         </div>
     </div>
 </template>
@@ -40,7 +40,7 @@
     import TagManager from '@js/Manager/TagManager';
     import BaseSection from '@vue/Section/BaseSection';
     import PasswordDetails from '@vue/Details/Password';
-    import Localisation from '@/js/Classes/Localisation';
+    import Localisation from '@js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
 

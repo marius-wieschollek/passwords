@@ -99,7 +99,7 @@
             grid-column-gap : 1rem;
             grid-row-gap    : 1rem;
 
-            @media all and (max-width : $width-extra-small) {
+            @media(max-width : $width-extra-small) {
                 grid-template : "hAndroid" "cAndroid" "hBrowser" "cBrowser";
             }
         }
@@ -201,7 +201,7 @@
                 }
             }
 
-            @media all and (max-width : $width-large) {
+            @media(max-width : $width-large) {
                 grid-template-columns : 1fr;
             }
         }

@@ -11,6 +11,7 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\DB\QueryBuilder\IQueryBuilder;
@@ -36,14 +37,15 @@ class ShareService extends AbstractService {
     /**
      * ShareService constructor.
      *
+     * @param UuidHelper         $uuidHelper
      * @param HookManager        $hookManager
      * @param ShareMapper        $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(HookManager $hookManager, ShareMapper $mapper, EnvironmentService $environment) {
+    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, ShareMapper $mapper, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($hookManager, $environment);
+        parent::__construct($uuidHelper, $hookManager, $environment);
     }
 
     /**
@@ -158,7 +160,6 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share|ModelInterface
-     * @throws \Exception
      */
     public function create(
         string $passwordId,
@@ -185,7 +186,6 @@ class ShareService extends AbstractService {
             $saved = $this->mapper->insert($model);
         } else {
             $model->setUpdated(time());
-
             $saved = $this->mapper->update($model);
         }
         $this->hookManager->emit(Share::class, 'postSave', [$saved]);
@@ -202,7 +202,6 @@ class ShareService extends AbstractService {
      * @param bool     $shareable
      *
      * @return Share
-     * @throws \Exception
      */
     protected function createModel(
         string $passwordId,
@@ -217,7 +216,7 @@ class ShareService extends AbstractService {
         $model = new Share();
         $model->setDeleted(false);
         $model->setUserId($this->userId);
-        $model->setUuid($this->generateUuidV4());
+        $model->setUuid($this->uuidHelper->generateUuid());
         $model->setCreated(time());
         $model->setUpdated(time());
 
@@ -228,6 +227,7 @@ class ShareService extends AbstractService {
         $model->setEditable($editable);
         $model->setExpires($expires);
         $model->setType($type);
+        $model->setClient($this->environment->getClient());
 
         return $model;
     }
@@ -242,7 +242,8 @@ class ShareService extends AbstractService {
 
         /** @var Share $clone */
         $clone = parent::cloneModel($original, $overwrites);
-        $clone->setUuid($this->generateUuidV4());
+        $clone->setUuid($this->uuidHelper->generateUuid());
+        $clone->setClient($this->environment->getClient());
 
         return $clone;
     }

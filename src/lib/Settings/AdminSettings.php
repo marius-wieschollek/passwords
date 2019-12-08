@@ -10,7 +10,9 @@ namespace OCA\Passwords\Settings;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotApiHelper;
+use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
+use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
@@ -31,7 +33,7 @@ use OCP\Settings\ISettings;
 class AdminSettings implements ISettings {
 
     const LINK_DOCUMENTATION = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index';
-    const LINK_HELP          = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrative-Settings';
+    const LINK_HELP          = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/App-Settings';
     const LINK_REQUIREMENTS  = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/System-Requirements';
     const LINK_ISSUES        = 'https://github.com/marius-wieschollek/passwords/issues';
     const LINK_FORUM         = 'https://help.nextcloud.com/c/apps/passwords';
@@ -73,8 +75,6 @@ class AdminSettings implements ISettings {
      */
     public function getForm(): TemplateResponse {
         return new TemplateResponse('passwords', 'admin/index', [
-            'saveSettingsUrl'  => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.set'),
-            'clearCacheUrl'    => $this->urlGenerator->linkToRouteAbsolute('passwords.admin_settings.cache'),
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
@@ -83,6 +83,7 @@ class AdminSettings implements ISettings {
             'purgeTimeout'     => $this->getPurgeTimeout(),
             'backupInterval'   => $this->getBackupInterval(),
             'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
+            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
@@ -102,6 +103,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getSecurityServices(): array {
         $current = $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP);
@@ -132,6 +134,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getWordsServices(): array {
         $current = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
@@ -160,6 +163,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getImageServices(): array {
         $current = HelperService::getImageHelperName(
@@ -184,6 +188,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getFaviconServices(): array {
         $current = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
@@ -200,7 +205,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'Besticon (recommended)',
                 'current' => $current === HelperService::FAVICON_BESTICON,
                 'api'     => [
-                    'key'   => BestIconHelper::BESTICON_CONFIG_KEY,
+                    'key'   => 'service.favicon.api',
                     'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL)
                 ]
             ],
@@ -233,6 +238,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getWebsitePreviewServices(): array {
         $current = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
@@ -245,12 +251,12 @@ class AdminSettings implements ISettings {
                 'api'     => null
             ],
             [
-                'id'      => HelperService::PREVIEW_SCREEN_SHOT_API,
-                'label'   => 'screenshotapi.io',
-                'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_API,
+                'id'      => HelperService::PREVIEW_SCREEN_SHOT_LAYER,
+                'label'   => 'screenshotlayer',
+                'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_LAYER,
                 'api'     => [
-                    'key'   => ScreenShotApiHelper::SSA_API_CONFIG_KEY,
-                    'value' => $this->config->getAppValue(ScreenShotApiHelper::SSA_API_CONFIG_KEY)
+                    'key'   => 'service.preview.api',
+                    'value' => $this->config->getAppValue(ScreenShotLayerHelper::SSL_API_CONFIG_KEY)
                 ]
             ],
             [
@@ -258,8 +264,26 @@ class AdminSettings implements ISettings {
                 'label'   => 'screenshotmachine.com',
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'api'     => [
-                    'key'   => ScreenShotMachineHelper::SSM_API_CONFIG_KEY,
+                    'key'   => 'service.preview.api',
                     'value' => $this->config->getAppValue(ScreenShotMachineHelper::SSM_API_CONFIG_KEY)
+                ]
+            ],
+            [
+                'id'      => HelperService::PREVIEW_BROW_SHOT,
+                'label'   => 'Browshot',
+                'current' => $current === HelperService::PREVIEW_BROW_SHOT,
+                'api'     => [
+                    'key'   => 'service.preview.api',
+                    'value' => $this->config->getAppValue(BrowshotPreviewHelper::BWS_API_CONFIG_KEY)
+                ]
+            ],
+            [
+                'id'      => HelperService::PREVIEW_SCREEENLY,
+                'label'   => 'screeenly',
+                'current' => $current === HelperService::PREVIEW_SCREEENLY,
+                'api'     => [
+                    'key'   => 'service.preview.api',
+                    'value' => $this->config->getAppValue(ScreeenlyHelper::SCREEENLY_API_CONFIG_KEY)
                 ]
             ],
             [
@@ -277,7 +301,7 @@ class AdminSettings implements ISettings {
                 'label'   => 'Passwords Webshot',
                 'current' => $current === HelperService::PREVIEW_WEBSHOT,
                 'api'     => [
-                    'key'   => WebshotHelper::WEBSHOT_CONFIG_KEY,
+                    'key'   => 'service.preview.api',
                     'value' => $this->config->getAppValue(WebshotHelper::WEBSHOT_CONFIG_KEY)
                 ]
             ];
@@ -288,6 +312,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getPurgeTimeout(): array {
         return [
@@ -306,6 +331,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getBackupInterval(): array {
         return [
@@ -323,6 +349,7 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array
+     * @deprecated
      */
     protected function getFileCaches(): array {
         $caches = $this->fileCacheService->listCaches();
@@ -357,16 +384,16 @@ class AdminSettings implements ISettings {
             'cron'   => $cronType,
             'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
             'php'    => [
-                'warn'    => false,
-                'error'   => PHP_VERSION_ID < 70200,
+                'warn'    => false, // PHP_VERSION_ID < 70400,
+                'error'   => PHP_VERSION_ID < 70300,
                 'version' => PHP_VERSION
             ],
             'server' => [
-                'warn'    => false,
-                'error'   => $ncVersion < 15,
+                'warn'    => false, // $ncVersion < 17,
+                'error'   => $ncVersion < 17,
                 'version' => $ncVersion
             ],
-            'eol'    => '2020.1.0'
+            'eol'    => '2021.1.0'
         ];
     }
 

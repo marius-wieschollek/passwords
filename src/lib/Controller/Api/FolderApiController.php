@@ -14,6 +14,8 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -71,6 +73,7 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @param string $label
      * @param string $parent
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -83,16 +86,17 @@ class FolderApiController extends AbstractObjectApiController {
     public function create(
         string $label,
         string $parent,
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
         bool $favorite = false
     ): JSONResponse {
-        if($edited === 0) $edited = time();
+        if($edited < 1) $edited = time();
 
         $model    = $this->modelService->create();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, false, $favorite
+            $model->getUuid(), $label, $parent, $cseKey, $cseType, $edited, $hidden, false, $favorite
         );
 
         $this->revisionService->save($revision);
@@ -112,6 +116,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @param string $id
      * @param string $label
      * @param string $parent
+     * @param string $cseKey
      * @param string $cseType
      * @param int    $edited
      * @param bool   $hidden
@@ -119,14 +124,15 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function update(
         string $id,
         string $label,
         string $parent,
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
@@ -138,9 +144,9 @@ class FolderApiController extends AbstractObjectApiController {
         /** @var FolderRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
-        if($edited === 0) $edited = $oldRevision->getEdited();
+        if($edited < 0) $edited = $oldRevision->getEdited();
         $revision = $this->revisionService->create(
-            $model->getUuid(), $label, $parent, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
+            $model->getUuid(), $label, $parent, $cseKey, $cseType, $edited, $hidden, $oldRevision->isTrashed(), $favorite
         );
 
         $this->revisionService->save($revision);
@@ -154,20 +160,20 @@ class FolderApiController extends AbstractObjectApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $id
+     * @param string      $id
+     * @param string|null $revision
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
-    public function delete(string $id): JSONResponse {
+    public function delete(string $id, ?string $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) {
             throw new ApiException('Can not edit base folder', 422);
         }
 
-        return parent::delete($id);
+        return parent::delete($id, $revision);
     }
 
     /**
@@ -181,8 +187,8 @@ class FolderApiController extends AbstractObjectApiController {
      * @return JSONResponse
      * @throws ApiException
      * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID || $revision == $this->revisionService::BASE_REVISION_UUID) {

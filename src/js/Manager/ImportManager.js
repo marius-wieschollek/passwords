@@ -1,9 +1,11 @@
 import API from '@js/Helper/api';
 import Localisation from '@js/Classes/Localisation';
+import SettingsService from '@js/Services/SettingsService';
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
+import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
-import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
+import BitwardenConversionHelper from '@js/Helper/Import/BitwardenConversionHelper';
 
 /**
  *
@@ -28,6 +30,7 @@ export class ImportManager {
      */
     async importDatabase(data, type = 'json', options = {}, progress = () => {}) {
         options.mode = Number.parseInt(options.mode);
+        options.cseType = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none';
         this.errors = [];
         this.total = 1;
         this.processed = 0;
@@ -72,6 +75,8 @@ export class ImportManager {
                 return await ImportCsvConversionHelper.processGenericCsv(data, options);
             case 'enpass':
                 return await EnpassConversionHelper.processJson(data, options);
+            case 'bitwarden':
+                return await BitwardenConversionHelper.processJson(data, options);
             default:
                 throw new Error(`Invalid import type: ${type}`);
         }
@@ -87,7 +92,7 @@ export class ImportManager {
      */
     async _runTagImport(data, tagMapping, options) {
         try {
-            if(data.tags) tagMapping = await this._importTags(data.tags, options.mode);
+            if(data.tags) tagMapping = await this._importTags(data.tags, options.mode, options.cseType);
         } catch(e) {
             console.error(e);
             throw new Error('Unable to create tags');
@@ -105,7 +110,7 @@ export class ImportManager {
      */
     async _runFolderImport(data, folderMapping, options) {
         try {
-            if(data.folders) folderMapping = await this._importFolders(data.folders, options.mode);
+            if(data.folders) folderMapping = await this._importFolders(data.folders, options.mode, options.cseType);
         } catch(e) {
             console.error(e);
             throw new Error('Unable to create folders');
@@ -128,7 +133,7 @@ export class ImportManager {
             if(!data.hasOwnProperty('folders')) folderMapping = await this._getFolderMapping();
 
             try {
-                await this._importPasswords(data.passwords, options.mode, options.skipShared, tagMapping, folderMapping);
+                await this._importPasswords(data.passwords, options.mode, options.skipShared, options.cseType, tagMapping, folderMapping);
             } catch(e) {
                 console.error(e);
                 throw new Error('Unable to create passwords');
@@ -179,10 +184,11 @@ export class ImportManager {
      *
      * @param tags
      * @param mode
+     * @param cseType
      * @returns {Promise<{}>}
      * @private
      */
-    async _importTags(tags, mode = 0) {
+    async _importTags(tags, mode = 0, cseType = 'none') {
         this._countProgress('Reading tags');
         let db    = await API.listTags(),
             queue = [],
@@ -195,7 +201,7 @@ export class ImportManager {
 
         this._countProgress('Importing tags');
         for(let i = 0; i < tags.length; i++) {
-            queue.push(this._importTag(mode, tags[i], db, idMap));
+            queue.push(this._importTag(tags[i], mode, cseType, db, idMap));
 
             if(queue.length > 15) {
                 await Promise.all(queue);
@@ -210,25 +216,19 @@ export class ImportManager {
 
     /**
      *
-     * @param mode
      * @param tag
+     * @param mode
+     * @param cseType
      * @param db
      * @param idMap
      * @returns {Promise<void>}
      * @private
      */
-    async _importTag(mode, tag, db, idMap) {
+    async _importTag(tag, mode, cseType, db, idMap) {
         try {
             if(mode !== 4 && tag.hasOwnProperty('id') && db.hasOwnProperty(tag.id)) {
-                if(mode === 1 || (mode === 0 && db[tag.id].revision === tag.revision)) {
-                    this._countProgress();
-                    return;
-                }
-
-                if(mode === 3) tag = Object.assign(db[tag.id], tag);
-
-                idMap[tag.id] = tag.id;
-                await API.updateTag(tag);
+                let object = this._processGenericObject(tag, db[tag.id], mode, cseType, idMap);
+                if(object !== false) await API.updateTag(object);
             } else {
                 let info = await API.createTag(tag);
                 idMap[tag.id] = info.id;
@@ -245,10 +245,11 @@ export class ImportManager {
      *
      * @param folderDb
      * @param mode
+     * @param cseType
      * @returns {Promise<{}>}
      * @private
      */
-    async _importFolders(folderDb, mode = 0) {
+    async _importFolders(folderDb, mode = 0, cseType = 'none') {
         this._countProgress('Reading folders');
         let db    = await API.listFolders(),
             queue = [],
@@ -276,7 +277,7 @@ export class ImportManager {
                 queue = [];
             }
 
-            queue.push(this._importFolder(mode, folder, db, idMap));
+            queue.push(this._importFolder(folder, mode, cseType, db, idMap));
         }
 
         if(queue.length !== 0) await Promise.all(queue);
@@ -286,14 +287,15 @@ export class ImportManager {
 
     /**
      *
-     * @param mode
      * @param folder
+     * @param mode
+     * @param cseType
      * @param db
      * @param idMap
      * @returns {Promise<void>}
      * @private
      */
-    async _importFolder(mode, folder, db, idMap) {
+    async _importFolder(folder, mode, cseType, db, idMap) {
 
         if(!idMap.hasOwnProperty(folder.parent) || folder.parent === folder.id) {
             folder.parent = this.defaultFolder;
@@ -303,15 +305,8 @@ export class ImportManager {
 
         try {
             if(mode !== 4 && folder.hasOwnProperty('id') && db.hasOwnProperty(folder.id)) {
-                if(mode === 1 || (mode === 0 && db[folder.id].revision === folder.revision)) {
-                    this._countProgress();
-                    return;
-                }
-
-                if(mode === 3) folder = Object.assign(db[folder.id], folder);
-
-                idMap[folder.id] = folder.id;
-                await API.updateFolder(folder);
+                let object = this._processGenericObject(folder, db[folder.id], mode, cseType, idMap);
+                if(object !== false) await API.updateFolder(object);
             } else {
                 let info = await API.createFolder(folder);
                 idMap[folder.id] = info.id;
@@ -365,12 +360,13 @@ export class ImportManager {
      * @param passwords
      * @param mode
      * @param skipShared
+     * @param cseType
      * @param tagMapping
      * @param folderMapping
      * @returns {Promise<{}>}
      * @private
      */
-    async _importPasswords(passwords, mode = 0, skipShared = true, tagMapping = {}, folderMapping = {}) {
+    async _importPasswords(passwords, mode = 0, skipShared = true, cseType = 'none', tagMapping = {}, folderMapping = {}) {
         this._countProgress('Reading passwords');
         let db    = await API.listPasswords(),
             queue = [],
@@ -383,7 +379,7 @@ export class ImportManager {
 
         this._countProgress('Importing passwords');
         for(let i = 0; i < passwords.length; i++) {
-            queue.push(this._importPassword(mode, passwords[i], db, skipShared, idMap, folderMapping, tagMapping));
+            queue.push(this._importPassword(mode, passwords[i], db, skipShared, cseType, idMap, folderMapping, tagMapping));
 
             if(queue.length > 15) {
                 await Promise.all(queue);
@@ -402,13 +398,14 @@ export class ImportManager {
      * @param password
      * @param db
      * @param skipShared
+     * @param cseType
      * @param idMap
      * @param folderMapping
      * @param tagMapping
      * @returns {Promise<void>}
      * @private
      */
-    async _importPassword(mode, password, db, skipShared, idMap, folderMapping, tagMapping) {
+    async _importPassword(mode, password, db, skipShared, cseType, idMap, folderMapping, tagMapping) {
 
         if(password.tags) {
             let tags = [];
@@ -436,11 +433,19 @@ export class ImportManager {
                     return;
                 }
 
-                if(mode === 3) password = Object.assign(db[password.id], password);
+                if(mode === 3) {
+                    password = Object.assign(db[password.id], password);
+                } else if(!current.shared && current.share === null) {
+                    console.log(current.shared, current.share);
+                    password.cseType = cseType;
+                } else {
+                    password.cseType = 'none';
+                }
 
                 idMap[password.id] = password.id;
                 await API.updatePassword(password);
             } else {
+                password.cseType = cseType;
                 let info = await API.createPassword(password);
                 idMap[info.id] = info.id;
             }
@@ -451,6 +456,32 @@ export class ImportManager {
         }
 
         this._countProgress();
+    }
+
+    /**
+     *
+     * @param mode
+     * @param object
+     * @param baseObject
+     * @param cseType
+     * @param idMap
+     * @returns {boolean|*}
+     * @private
+     */
+    _processGenericObject(object, baseObject, mode, cseType, idMap) {
+        if(mode === 1 || (mode === 0 && baseObject.revision === object.revision)) {
+            this._countProgress();
+            return false;
+        }
+
+        if(mode === 3) {
+            object = Object.assign(baseObject, object);
+        } else {
+            object.cseType = cseType;
+        }
+
+        idMap[object.id] = object.id;
+        return object;
     }
 
     /**

@@ -7,7 +7,9 @@ import SectionRecent from '@vue/Section/Recent';
 import SectionShared from '@vue/Section/Shared';
 import SectionSearch from '@vue/Section/Search';
 import SectionFolders from '@vue/Section/Folders';
+import Localisation from '@js/Classes/Localisation';
 import SectionSecurity from '@vue/Section/Security';
+import SectionAuthorize from '@vue/Section/Authorize';
 import SectionFavorites from '@vue/Section/Favorites';
 
 function handleChunkLoadingError(e, module) {
@@ -26,7 +28,12 @@ const SectionHelp = async () => {
 
 const SectionBackup = async () => {
     try {
-        return await import(/* webpackChunkName: "BackupSection" */ '@vue/Section/Backup');
+        let section      = import(/* webpackChunkName: "BackupSection" */ '@vue/Section/Backup'),
+            translations = Localisation.loadSection('backups');
+
+        await Promise.all([section, translations]);
+
+        return section;
     } catch(e) {
         handleChunkLoadingError(e, 'BackupSection');
     }
@@ -34,7 +41,12 @@ const SectionBackup = async () => {
 
 const SectionSettings = async () => {
     try {
-        return await import(/* webpackChunkName: "SettingsSection" */ '@vue/Section/Settings');
+        let section      = import(/* webpackChunkName: "SettingsSection" */ '@vue/Section/Settings'),
+            translations = Localisation.loadSection('settings');
+
+        await Promise.all([section, translations]);
+
+        return section;
     } catch(e) {
         handleChunkLoadingError(e, 'SettingsSection');
     }
@@ -42,7 +54,12 @@ const SectionSettings = async () => {
 
 const SectionApps = async () => {
     try {
-        return await import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps');
+        let section      = import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps'),
+            translations = Localisation.loadSection('apps');
+
+        await Promise.all([section, translations]);
+
+        return section;
     } catch(e) {
         handleChunkLoadingError(e, 'AppsSection');
     }
@@ -61,6 +78,7 @@ let router = new Router(
             {name: 'Search', path: '/search/:query?', components: {main: SectionSearch}},
             {name: 'Trash', path: '/trash', components: {main: SectionTrash}},
             {name: 'Settings', path: '/settings', components: {main: SectionSettings}},
+            {name: 'Authorize', path: '/authorize/:target?', components: {main: SectionAuthorize}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},
             {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}},
             {name: 'Apps & Extensions', path: '/apps', components: {main: SectionApps}}

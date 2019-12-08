@@ -160,6 +160,7 @@
             'Passwords CSV'                       : 'Wachtwoorden CSV',
             'Folder CSV'                          : 'Mappen CSV',
             'Custom CSV'                          : 'Overige CSV',
+            'Other / Custom CSV'                  : 'Overige CSV',
             'Select File'                         : 'Selecteer bestand',
             'Select Options'                      : 'Selecteer opties',
             'Conflict handling'                   : 'Conflict afhandeling',

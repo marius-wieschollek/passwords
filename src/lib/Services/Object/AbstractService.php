@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 
@@ -30,6 +31,16 @@ abstract class AbstractService {
     protected $hookManager;
 
     /**
+     * @var UuidHelper
+     */
+    protected $uuidHelper;
+
+    /**
+     * @var EnvironmentService
+     */
+    protected $environment;
+
+    /**
      * @var string
      */
     protected $class;
@@ -42,29 +53,19 @@ abstract class AbstractService {
     /**
      * AbstractService constructor.
      *
+     * @param UuidHelper         $uuidHelper
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
     public function __construct(
+        UuidHelper $uuidHelper,
         HookManager $hookManager,
         EnvironmentService $environment
     ) {
         $this->userId      = $environment->getUserId();
+        $this->environment = $environment;
         $this->hookManager = $hookManager;
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    public function generateUuidV4(): string {
-        return implode('-', [
-            bin2hex(random_bytes(4)),
-            bin2hex(random_bytes(2)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x0F) | 0x40)).bin2hex(random_bytes(1)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
-            bin2hex(random_bytes(6))
-        ]);
+        $this->uuidHelper  = $uuidHelper;
     }
 
     /**
@@ -72,6 +73,17 @@ abstract class AbstractService {
      */
     public function findDeleted(): array {
         return $this->mapper->findAllDeleted();
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return EntityInterface
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
+    public function findByUuid(string $uuid) {
+        return $this->mapper->findByUuid($uuid);
     }
 
     /**

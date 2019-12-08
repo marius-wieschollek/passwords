@@ -31,6 +31,8 @@ use OCP\IRequest;
  */
 class LegacyPasswordApiController extends ApiController {
 
+    const COMPATIBLE_SSE_ENCRYPTIONS = [EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2];
+
     /**
      * @var TagService
      */
@@ -166,10 +168,11 @@ class LegacyPasswordApiController extends ApiController {
         $revision = $this->passwordRevisionService->create(
             $model->getUuid(),
             $pass, strval($loginname),
-            EncryptionService::CSE_ENCRYPTION_NONE,
-            '', strval($website).' – '.strval($loginname),
+            '',EncryptionService::CSE_ENCRYPTION_NONE,
+             '',
+             strval($website).' – '.strval($loginname),
             strval($address), strval($notes),
-            '{}',
+            '[]',
             FolderService::BASE_FOLDER_UUID,
             time(), false, false, false
         );
@@ -217,6 +220,7 @@ class LegacyPasswordApiController extends ApiController {
         /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->findByUuid($model->getRevision(), true);
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) return new JSONResponse('Unsupported Encryption Type', 400);
+        if(!in_array($revision->getSseType(), self::COMPATIBLE_SSE_ENCRYPTIONS)) return new JSONResponse('Unsupported Encryption Type', 400);
 
         $edited = $revision->getPassword() === $pass ? $revision->getEdited():time();
         $label  = $revision->getLabel();
@@ -227,6 +231,7 @@ class LegacyPasswordApiController extends ApiController {
         /** @var PasswordRevision $newRevision */
         $newRevision = $this->passwordRevisionService->create(
             $model->getUuid(), strval($pass), strval($loginname),
+            '',
             EncryptionService::CSE_ENCRYPTION_NONE,
             '',
             $label,
@@ -293,7 +298,7 @@ class LegacyPasswordApiController extends ApiController {
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
             return null;
         }
-        if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) {
+        if(!in_array($revision->getSseType(), self::COMPATIBLE_SSE_ENCRYPTIONS)) {
             return null;
         }
 
@@ -347,7 +352,7 @@ class LegacyPasswordApiController extends ApiController {
 
             if($revision->isTrashed() || $revision->isHidden()) continue;
             if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) continue;
-            if($revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V1) continue;
+            if(!in_array($revision->getSseType(), self::COMPATIBLE_SSE_ENCRYPTIONS)) continue;
 
             return $tag;
         }

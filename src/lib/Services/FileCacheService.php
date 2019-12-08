@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services;
 
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Files\SimpleFS\ISimpleFolder;
 
@@ -55,8 +56,8 @@ class FileCacheService {
      * @param string $cache
      *
      * @return ISimpleFolder
+     * @throws NotPermittedException
      * @throws \Exception
-     * @throws \OCP\Files\NotPermittedException
      */
     public function getCache(string $cache = null): ISimpleFolder {
         $cache = $this->validateCacheName($cache);
@@ -73,19 +74,23 @@ class FileCacheService {
      *
      * @return array
      * @throws \Exception
-     * @throws \OCP\Files\NotPermittedException
      */
     public function getCacheInfo($cache = null): array {
         $cache = $this->validateCacheName($cache);
-
-        $fileCache   = $this->getCache($cache);
-        $cachedFiles = $fileCache->getDirectoryListing();
-
-        $info = [
+        $info  = [
             'name'  => $cache,
             'size'  => 0,
             'files' => 0
         ];
+
+        try {
+            $fileCache   = $this->getCache($cache);
+            $cachedFiles = $fileCache->getDirectoryListing();
+        } catch(NotPermittedException $e) {
+            $this->logger->logException($e);
+
+            return $info;
+        }
 
         foreach($cachedFiles as $file) {
             $info['size'] += $file->getSize();
@@ -124,9 +129,7 @@ class FileCacheService {
      * @throws \Exception
      */
     protected function validateCacheName(string $cache = null): string {
-        if($cache === null) {
-            return $this->defaultCache;
-        }
+        if($cache === null) return $this->defaultCache;
         if(!$this->hasCache($cache)) throw new \Exception('Unknown Cache '.$cache);
 
         return $cache;
@@ -137,8 +140,11 @@ class FileCacheService {
      */
     public function clearCache(string $cache = null): void {
         try {
-            $cache = $this->validateCacheName($cache);
             $this->getCache($cache)->delete();
+            $class    = new \ReflectionClass($this->appData);
+            $property = $class->getProperty('folders');
+            $property->setAccessible(true);
+            $property->setValue($this->appData, new \OC\Cache\CappedMemoryCache());
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
@@ -161,9 +167,9 @@ class FileCacheService {
      */
     public function isCacheEmpty(string $cache = null): bool {
         try {
-            $info = $this->getCacheInfo($cache);
+            $files = $this->getCache($cache)->getDirectoryListing();
 
-            return $info['files'] == 0;
+            return count($files) === 0;
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
@@ -179,8 +185,6 @@ class FileCacheService {
      */
     public function hasFile(string $file, string $cache = null): bool {
         try {
-            $cache = $this->validateCacheName($cache);
-
             return $this->getCache($cache)->fileExists($file);
         } catch(\Throwable $e) {
             $this->logger->logException($e);
@@ -197,12 +201,9 @@ class FileCacheService {
      */
     public function getFile(string $file, string $cache = null): ?ISimpleFile {
         try {
-            $cache = $this->validateCacheName($cache);
             $cache = $this->getCache($cache);
 
-            if($cache->fileExists($file)) {
-                return $cache->getFile($file);
-            }
+            if($cache->fileExists($file)) return $cache->getFile($file);
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }
@@ -219,7 +220,6 @@ class FileCacheService {
      */
     public function putFile(string $file, string $content, string $cache = null): ?ISimpleFile {
         try {
-            $cache = $this->validateCacheName($cache);
             $cache = $this->getCache($cache);
 
             if($cache->fileExists($file)) {
@@ -244,9 +244,10 @@ class FileCacheService {
      */
     public function removeFile(string $file, string $cache = null): void {
         try {
-            $cache = $this->validateCacheName($cache);
-
-            $this->getFile($file, $cache)->delete();
+            $cache = $this->getCache($cache);
+            if($cache->fileExists($file)) {
+                $cache->getFile($file)->delete();
+            }
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }

@@ -17,9 +17,10 @@ use OCA\Passwords\Helper\Http\FileDownloadHelper;
  */
 class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckHelper {
 
-    const LOW_RAM_LIMIT = 262144;
-    const ARCHIVE_URL   = 'https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt';
-    const PASSWORD_DB   = 'smalldb';
+    const LOW_RAM_LIMIT    = 262144;
+    const ARCHIVE_URL      = 'https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt';
+    const PASSWORD_DB      = 'smalldb';
+    const PASSWORD_VERSION = 1;
 
     /**
      * @param string $txtFile

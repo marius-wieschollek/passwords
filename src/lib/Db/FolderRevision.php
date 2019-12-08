@@ -15,7 +15,7 @@ namespace OCA\Passwords\Db;
  *
  * @package OCA\Passwords\Db
  */
-class FolderRevision extends AbstractRevisionEntity {
+class FolderRevision extends AbstractRevision {
 
 
     /**

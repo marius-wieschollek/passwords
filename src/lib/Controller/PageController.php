@@ -8,12 +8,14 @@
 namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Token\TokenHelper;
+use OCA\Passwords\Helper\Token\ApiTokenHelper;
+use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
-use OCA\Passwords\Services\SettingsService;
+use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\UserChallengeService;
+use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\StrictContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\Util;
@@ -31,55 +33,79 @@ class PageController extends Controller {
     protected $config;
 
     /**
-     * @var TokenHelper
+     * @var UserSettingsService
+     */
+    protected $settings;
+
+    /**
+     * @var ApiTokenHelper
      */
     protected $tokenHelper;
 
     /**
-     * @var SettingsService
-     */
-    protected $settingsService;
-
-    /**
      * @var EnvironmentService
      */
-    protected $environmentService;
+    protected $environment;
+
+    /**
+     * @var NotificationService
+     */
+    protected $notifications;
+
+    /**
+     * @var UserTokenHelper
+     */
+    protected $userTokenHelper;
+
+    /**
+     * @var UserChallengeService
+     */
+    protected $challengeService;
 
     /**
      * PageController constructor.
      *
      * @param IRequest             $request
-     * @param TokenHelper          $tokenHelper
+     * @param UserSettingsService  $settings
+     * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
-     * @param SettingsService      $settingsService
-     * @param EnvironmentService   $environmentService
+     * @param EnvironmentService   $environment
+     * @param UserTokenHelper      $userTokenHelper
+     * @param NotificationService  $notifications
+     * @param UserChallengeService $challengeService
      */
     public function __construct(
         IRequest $request,
-        TokenHelper $tokenHelper,
+        UserSettingsService $settings,
+        ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
-        SettingsService $settingsService,
-        EnvironmentService $environmentService
+        EnvironmentService $environment,
+        UserTokenHelper $userTokenHelper,
+        NotificationService $notifications,
+        UserChallengeService $challengeService
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->config             = $config;
-        $this->tokenHelper        = $tokenHelper;
-        $this->settingsService    = $settingsService;
-        $this->environmentService = $environmentService;
+        $this->config           = $config;
+        $this->tokenHelper      = $tokenHelper;
+        $this->settings         = $settings;
+        $this->environment      = $environment;
+        $this->notifications    = $notifications;
+        $this->userTokenHelper  = $userTokenHelper;
+        $this->challengeService = $challengeService;
     }
 
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
      * @UseSession
+     * @throws \Exception
      */
     public function index(): TemplateResponse {
-
         $isSecure = $this->checkIfHttpsUsed();
+
         if($isSecure) {
-            $this->getUserSettings();
-            Util::addHeader('meta', ['name' => 'api-user', 'content' => $this->environmentService->getUserLogin()]);
-            Util::addHeader('meta', ['name' => 'api-token', 'content' => $this->tokenHelper->getWebUiToken()]);
+            $this->addHeaders();
+            $this->checkImpersonation();
         } else {
             $this->tokenHelper->destroyWebUiToken();
         }
@@ -90,7 +116,7 @@ class PageController extends Controller {
             ['https' => $isSecure]
         );
 
-        $response->setContentSecurityPolicy($this->getContentSecurityPolicy());
+        $this->getContentSecurityPolicy($response);
 
         return $response;
     }
@@ -106,30 +132,49 @@ class PageController extends Controller {
 
     /**
      *
+     * @throws \Exception
      */
-    protected function getUserSettings(): void {
-        Util::addHeader(
-            'meta',
-            [
-                'name'    => 'settings',
-                'content' => json_encode($this->settingsService->list())
-            ]
-        );
+    protected function addHeaders(): void {
+        $userSettings = json_encode($this->settings->list());
+        Util::addHeader('meta', ['name' => 'settings', 'content' => $userSettings]);
+
+        list($token, $user) = $this->tokenHelper->getWebUiToken();
+        Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
+        Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
+
+        $authenticate = $this->challengeService->hasChallenge() || $this->userTokenHelper->hasToken() ? 'true':'false';
+        Util::addHeader('meta', ['name' => 'pw-authenticate', 'content' => $authenticate]);
+
+        $impersonate = $this->environment->isImpersonating() ? 'true':'false';
+        Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $impersonate]);
     }
 
     /**
-     * @return StrictContentSecurityPolicy
+     * @throws \Exception
      */
-    protected function getContentSecurityPolicy(): StrictContentSecurityPolicy {
-        $manualHost = parse_url($this->settingsService->get('server.handbook.url'), PHP_URL_HOST);
-        $csp        = new StrictContentSecurityPolicy();
+    protected function getContentSecurityPolicy(TemplateResponse $response): void {
+        $manualHost = parse_url($this->settings->get('server.handbook.url'), PHP_URL_HOST);
+
+        $csp        = $response->getContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
+        $csp->addAllowedConnectDomain('data:');
         $csp->addAllowedImageDomain($manualHost);
         $csp->addAllowedMediaDomain($manualHost);
-        $csp->allowEvalScript();
         $csp->allowInlineStyle();
 
-        return $csp;
+        $response->setContentSecurityPolicy($csp);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function checkImpersonation(): void {
+        if($this->environment->isImpersonating()) {
+            $this->notifications->sendImpersonationNotification(
+                $this->environment->getUserId(),
+                $this->environment->getRealUser()->getUID()
+            );
+        }
     }
 }
