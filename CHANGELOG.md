@@ -10,6 +10,12 @@
  - Database duplicate deletion
  - Backup migration
 
+## 2019.12.1 - Bugfix release
+### Fixed
+ - Encryption setup does not encrypt existing entities
+ - Clean up step in encryption setup always fails
+ - Search globally with enter uses old query
+
 ## 2019.12.0 - Feature release
 ### Added
  - Lazy loading for favicons and avatars
