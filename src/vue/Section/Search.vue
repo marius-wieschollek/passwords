@@ -79,7 +79,12 @@
             },
             search: {
                 handler(value) {
-                    if(value.active) this.$router.push({name: 'Search', params: {query: btoa(value.query)}});
+                    if(value.active) {
+                        let query = btoa(value.query);
+                        if(this.$route.name === 'Search' && this.$route.params.query !== query) {
+                            this.$router.push({name: 'Search', params: {query}});
+                        }
+                    }
                 },
                 deep: true
             }
