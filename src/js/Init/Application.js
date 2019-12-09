@@ -141,7 +141,7 @@ class Application {
                 next({name: 'Authorize', params: {target}});
             }
             next();
-            if(to.name !== from.name && window.innerWidth < 660) {
+            if(to.name !== from.name && window.innerWidth < 768) {
                 let app = document.getElementById('app');
                 if(app) app.classList.remove('mobile-open');
             }

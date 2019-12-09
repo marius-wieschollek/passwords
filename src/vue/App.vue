@@ -2,55 +2,80 @@
     <div id="app" class="passwords" :data-server-version="serverVersion">
         <div id="app-navigation">
             <ul class="menu-main">
-                <router-link class="nav-icon-all" :to="{ name: 'All'}" active-class="active" :exact="true" tag="li">
-                    <translate say="All"/>
-                </router-link>
-                <router-link class="nav-icon-folders" :to="{ name: 'Folders'}" active-class="active" tag="li">
-                    <translate say="Folders"/>
-                </router-link>
-                <router-link class="nav-icon-recent" :to="{ name: 'Recent'}" active-class="active" tag="li">
-                    <translate say="Recent"/>
-                </router-link>
-                <router-link class="nav-icon-favorites" :to="{ name: 'Favorites'}" active-class="active" tag="li">
-                    <translate say="Favorites"/>
-                </router-link>
-                <router-link class="nav-icon-shares" :to="{ name: 'Shares'}" active-class="active" tag="li">
-                    <translate say="Shares"/>
-                </router-link>
-                <router-link class="nav-icon-tags" :to="{ name: 'Tags'}" active-class="active" tag="li">
-                    <translate say="Tags"/>
-                </router-link>
-                <router-link class="nav-icon-security" :to="{ name: 'Security'}" active-class="active" tag="li">
-                    <translate say="Security"/>
-                </router-link>
-                <router-link class="nav-icon-search"
-                             :to="{ name: 'Search'}"
-                             active-class="active"
-                             tag="li"
-                             v-if="isSearchVisible">
-                    <translate say="Search"/>
-                </router-link>
+                <li>
+                    <router-link :to="{ name: 'All'}" active-class="active" :exact="true">
+                        <translate say="All" icon="globe"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Folders'}" active-class="active">
+                        <translate say="Folders" icon="folder"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Recent'}" active-class="active">
+                        <translate say="Recent" icon="clock-o"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Favorites'}" active-class="active">
+                        <translate say="Favorites" icon="star"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Shares'}" active-class="active">
+                        <translate say="Shares" icon="share-alt"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Tags'}" active-class="active">
+                        <translate say="Tags" icon="tag"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Security'}" active-class="active">
+                        <translate say="Security" icon="shield"/>
+                    </router-link>
+                </li>
+                <li v-if="isSearchVisible">
+                    <router-link :to="{ name: 'Search'}"
+                                 active-class="active">
+                        <translate say="Search" icon="search"/>
+                    </router-link>
+                </li>
             </ul>
             <ul class="menu-secondary">
-                <session-timeout v-if="navTimeout"/>
-                <router-link class="nav-icon-trash" :to="{ name: 'Trash'}" active-class="active" tag="li">
-                    <translate say="Trash"/>
-                </router-link>
+                <session-timeout v-if="!isMobile"/>
+                <li>
+                    <router-link :to="{ name: 'Trash'}" active-class="active">
+                        <translate say="Trash" icon="trash"/>
+                    </router-link>
+                </li>
             </ul>
             <ul id="app-settings" :class="{open: showMore}">
-                <translate tag="li" class="nav-icon-more" @click="showMore = !showMore" say="More"/>
-                <router-link class="nav-icon-settings" :to="{ name: 'Settings'}" active-class="active" tag="li">
-                    <translate say="Settings"/>
-                </router-link>
-                <router-link class="nav-icon-backup" :to="{ name: 'Backup'}" active-class="active" tag="li">
-                    <translate say="Backup and Restore"/>
-                </router-link>
-                <router-link class="nav-icon-help" :to="{ name: 'Help'}" active-class="active" tag="li">
-                    <translate say="Handbook"/>
-                </router-link>
-                <router-link class="nav-icon-addon" :to="{ name: 'Apps & Extensions'}" active-class="active" tag="li">
-                    <translate say="Apps & Extensions"/>
-                </router-link>
+                <li class="more">
+                    <translate @click="showMore = !showMore" say="More" :icon="showMore ? 'minus':'plus'" :class="{active:showMore}" tag="a"/>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Settings'}" active-class="active">
+                        <translate say="Settings" icon="cog"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Backup'}" active-class="active">
+                        <translate say="Backup and Restore" icon="archive"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Help'}" active-class="active">
+                        <translate say="Handbook" icon="question-circle"/>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link :to="{ name: 'Apps & Extensions'}" active-class="active">
+                        <translate say="Apps & Extensions" icon="puzzle-piece"/>
+                    </router-link>
+                </li>
             </ul>
         </div>
 
@@ -58,7 +83,7 @@
         <div id="app-popup">
             <div></div>
         </div>
-        <session-timeout scope="global" v-if="globalTimeout"/>
+        <session-timeout scope="global" v-if="isMobile"/>
         <star-chaser v-if="starChaser"/>
         <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </div>
@@ -89,23 +114,30 @@
                 serverVersion,
                 showSearch,
                 showMore  : false,
-                starChaser: false
+                starChaser: false,
+                isMobile  : window.innerWidth <= 768
             };
         },
 
         created() {
             SettingsService.observe('client.search.show', (v) => { this.showSearch = v.value; });
+
+            router.afterEach(async (to, from) => {
+                let moreRoutes = ['Settings', 'Backup', 'Help', 'Apps & Extensions'];
+
+                if(moreRoutes.indexOf(from.name) === -1 && moreRoutes.indexOf(to.name) !== -1) {
+                    return this.showMore = true;
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                this.isMobile = window.innerWidth <= 768;
+            })
         },
 
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
-            },
-            navTimeout() {
-                return window.innerWidth > 768;
-            },
-            globalTimeout() {
-                return window.innerWidth <= 768;
             },
             isBirthDay() {
                 let today = new Date(),
@@ -118,8 +150,7 @@
         methods: {
             birthDayPopup() {
                 document.getElementById('birthday').remove();
-                Messages.info(
-                    'Today in 2018, the first version of passwords was published. Thank you for using the app.');
+                Messages.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
             }
         }
     };
@@ -182,61 +213,27 @@
     #app-navigation {
         transition : transform 300ms;
 
-
         ul {
             li {
                 line-height   : 44px;
-                padding       : 0 12px;
                 white-space   : nowrap;
                 text-overflow : ellipsis;
                 color         : var(--color-main-text);
-                opacity       : 0.57;
-                cursor        : pointer;
-                transition    : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
-                &:hover,
-                &:active,
-                &.active { opacity : 1; }
-
-                &:before {
-                    font-family   : var(--pw-icon-font-face);
-                    font-size     : 1rem;
-                    padding-right : 10px;
-                    width         : 1rem;
-                    text-align    : center;
-                    display       : inline-block;
+                i {
+                    font-size  : 1rem;
+                    width      : 1rem;
+                    box-sizing : content-box !important;
+                    padding    : 0 10px 0 16px;
                 }
 
-                &.nav-icon-all:before { content : "\f0ac"; }
+                a {
+                    cursor     : pointer;
+                    transition : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
-                &.nav-icon-folders:before { content : "\f07b"; }
-
-                &.nav-icon-recent:before { content : "\f017"; }
-
-                &.nav-icon-tags:before { content : "\f02c"; }
-
-                &.nav-icon-security:before { content : "\f132"; }
-
-                &.nav-icon-shares:before { content : "\f1e0"; }
-
-                &.nav-icon-favorites:before { content : "\f005"; }
-
-                &.nav-icon-search:before { content : "\f002"; }
-
-                &.nav-icon-trash:before { content : "\f014"; }
-
-                &.nav-icon-more:before { content : "\f067"; }
-
-                &.nav-icon-settings:before { content : "\f013"; }
-
-                &.nav-icon-addon:before { content : "\f12e"; }
-
-                &.nav-icon-help:before { content : "\f059"; }
-
-                &.nav-icon-backup:before { content : "\f187"; }
-
-                span {
-                    cursor : pointer;
+                    i {
+                        margin-left : -44px;
+                    }
                 }
             }
 
@@ -254,19 +251,22 @@
                 overflow         : hidden;
                 max-height       : 44px;
                 height           : auto;
+                z-index          : 100;
                 background-color : var(--color-main-background);
                 border-right     : 1px solid var(--color-border);
                 transition       : max-height 0.25s ease-in-out;
 
-                &.open {
-                    max-height  : 220px;
-                    flex-shrink : 0;
+                .more {
 
-                    li.nav-icon-more {
-                        opacity : 1;
-
-                        &:before { content : "\f068"; }
+                    a,
+                    a.active {
+                        box-shadow : none;
                     }
+                }
+
+                &.open {
+                    max-height  : 288px;
+                    flex-shrink : 0;
 
                     @media (max-height : 360px) {
                         position : fixed;
