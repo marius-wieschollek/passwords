@@ -1,6 +1,8 @@
 function isCompatibleBrowser() {
     try {
-        return window.crypto.subtle && window.TextEncoder;
+        return window.crypto.subtle &&
+               window.TextEncoder &&
+               typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function";
     } catch(e) {
         console.error(e);
 

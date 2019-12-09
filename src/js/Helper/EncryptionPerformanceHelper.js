@@ -27,7 +27,7 @@ class EncryptionPerformanceHelper {
             "favorite"    : false
         };
 
-        for(let i=0; i< 128; i++) object.notes += ' - Notes'
+        for(let i=0; i< 128; i++) object.notes += ' - Notes';
         let result = await this._runPerformanceTest(object);
 
         return {result};
@@ -43,7 +43,7 @@ class EncryptionPerformanceHelper {
         let startTime = Date.now(),
             counter   = 0;
 
-        while(Date.now() - startTime <= 9000) {
+        while(Date.now() - startTime <= 5000) {
             let encrypted = this.encryption.encryptObject(object, 'password');
             this.encryption.decryptObject(encrypted, 'password');
             counter++;

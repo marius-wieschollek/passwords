@@ -162,6 +162,7 @@ class PageController extends Controller {
         $csp->addAllowedImageDomain($manualHost);
         $csp->addAllowedMediaDomain($manualHost);
         $csp->allowInlineStyle();
+        $csp->allowEvalScript();
 
         $response->setContentSecurityPolicy($csp);
     }
