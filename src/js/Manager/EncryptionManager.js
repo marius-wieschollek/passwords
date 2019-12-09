@@ -123,7 +123,7 @@ class EncryptionManager {
         this._sendStatus('keychain', 'processing', 1);
         try {
             await API.setAccountChallenge(password);
-            await Promise.all([await SettingsService.reset('encryption.cse'), await SettingsService.reset('encryption.sse')]);
+            await Promise.all([await SettingsService.reset('user.encryption.cse'), await SettingsService.reset('user.encryption.sse')]);
             this._sendStatus('keychain', 'done');
         } catch(e) {
             this._sendStatus('keychain', 'error', e);
