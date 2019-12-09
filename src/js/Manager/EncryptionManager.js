@@ -398,7 +398,7 @@ class EncryptionManager {
             await API[deleteFunc](id);
             await API[deleteFunc](id);
         } catch(e) {
-            if(type === 'tag' || e.status && e.status !== 404) {
+            if(!e.hasOwnProperty('id') || e.id !== 404) {
                 this._sendStatus('cleanup', 'error', e);
             }
         }
