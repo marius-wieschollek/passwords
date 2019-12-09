@@ -123,7 +123,7 @@ class EncryptionManager {
         this._sendStatus('keychain', 'processing', 1);
         try {
             await API.setAccountChallenge(password);
-            await Promise.all([await SettingsService.reset('encryption.cse'), await SettingsService.reset('encryption.sse')]);
+            await Promise.all([await SettingsService.reset('user.encryption.cse'), await SettingsService.reset('user.encryption.sse')]);
             this._sendStatus('keychain', 'done');
         } catch(e) {
             this._sendStatus('keychain', 'error', e);
@@ -398,7 +398,7 @@ class EncryptionManager {
             await API[deleteFunc](id);
             await API[deleteFunc](id);
         } catch(e) {
-            if(type === 'tag' || e.status && e.status !== 404) {
+            if(!e.hasOwnProperty('id') || e.id !== 404) {
                 this._sendStatus('cleanup', 'error', e);
             }
         }

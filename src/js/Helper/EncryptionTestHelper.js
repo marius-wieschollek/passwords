@@ -17,7 +17,8 @@ class EncryptionTestHelper {
         if(!await DeferredActivationService.check('encryption-tests')) return;
         if(SettingsService.get('local.test.e2e.executed', false)) return;
 
-        if(!API.isAuthorized) {
+        let authenticateEl = document.querySelector('meta[name=pw-authenticate]');
+        if(!API.isAuthorized && (!authenticateEl || authenticateEl.getAttribute('content') === 'true')) {
             console.log('Encryption tests scheduled after login');
             setTimeout(() => { this.initTests(); }, 5000);
             return;

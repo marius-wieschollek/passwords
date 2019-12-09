@@ -41,8 +41,8 @@ class EventManager {
      * @private
      */
     _registerSettingsObserver() {
-        SettingsService.observe('user.encryption.cse', (name, value) => {
-            API.config.cseMode = value === 1 ? 'CSEv1r1':'none'
+        SettingsService.observe('user.encryption.cse', (setting) => {
+            API.config.cseMode = setting.value === 1 ? 'CSEv1r1':'none'
         });
     }
 
