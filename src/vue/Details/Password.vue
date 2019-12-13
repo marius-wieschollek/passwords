@@ -70,11 +70,13 @@
 
         created() {
             Events.on('password.changed', this.processEvent);
+            Events.on('password.deleted', this.processEvent);
             this.refreshView();
         },
 
         beforeDestroy() {
             Events.off('password.changed', this.processEvent);
+            Events.off('password.deleted', this.processEvent);
         },
 
         computed: {
@@ -106,8 +108,9 @@
                 };
             },
             async refreshView() {
+                if(this.$parent.detail.type !== 'password') return ;
                 let password = await API.showPassword(this.object.id, 'model+folder+shares+tags+revisions');
-                if(this.password.id === password.id) {
+                if(this.password.id === password.id && this.$parent.detail.type === 'password') {
                     if(password.trashed && this.$route.name !== 'Trash' || !password.trashed && this.$route.name === 'Trash') {
                         this.closeDetails();
                     } else {
@@ -116,8 +119,8 @@
                 }
             },
             processEvent(event) {
-                if(event.object.id === this.object.id) {
-                    if(event.object.trashed && this.$route.name !== 'Trash' || !event.object.trashed && this.$route.name === 'Trash') {
+                if(event.object.id === this.object.id && this.$parent.detail.type === 'password') {
+                    if(event.object.trashed && (this.$route.name !== 'Trash' || event.event === 'password.deleted') || !event.object.trashed && this.$route.name === 'Trash') {
                         this.closeDetails();
                     } else {
                         this.refreshView();
