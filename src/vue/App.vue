@@ -208,6 +208,27 @@
                 margin-left : 299px;
             }
         }
+
+        @media (min-width: $width-small) and (max-width : $width-medium) {
+            #app-content {
+                transition: margin-left 0.25s ease-in-out;
+
+                &.show-details {
+                    .app-content-left {
+                        width: calc(100% - 360px);
+                    }
+                    .app-content-right {
+                        width: 360px;
+                    }
+                }
+            }
+
+            &.mobile-open {
+                #app-content {
+                    margin-left: 300px;
+                }
+            }
+        }
     }
 
     #app-navigation {

@@ -301,6 +301,10 @@
 
         #app-navigation-toggle {
             display : none !important;
+
+            @media(max-width : $width-medium) {
+                display   : block !important;
+            }
         }
 
         @keyframes delay-overflow {
