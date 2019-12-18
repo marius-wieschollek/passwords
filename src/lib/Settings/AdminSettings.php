@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Settings;
 
+use Exception;
+use OC;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
@@ -15,6 +17,7 @@ use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
+use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
@@ -147,8 +150,14 @@ class AdminSettings implements ISettings {
                 'enabled' => LocalWordsHelper::isAvailable()
             ],
             [
+                'id'      => HelperService::WORDS_LEIPZIG,
+                'label'   => 'Leipzig Corpora Collection (recommended)',
+                'current' => $current === HelperService::WORDS_LEIPZIG,
+                'enabled' => LeipzigCorporaHelper::isAvailable()
+            ],
+            [
                 'id'      => HelperService::WORDS_SNAKES,
-                'label'   => 'watchout4snakes.com (recommended)',
+                'label'   => 'watchout4snakes.com',
                 'current' => $current === HelperService::WORDS_SNAKES,
                 'enabled' => SnakesWordsHelper::isAvailable()
             ],
@@ -359,7 +368,7 @@ class AdminSettings implements ISettings {
             try {
                 $info[ $cache ]              = $this->fileCacheService->getCacheInfo($cache);
                 $info[ $cache ]['clearable'] = true;
-            } catch(\Exception $e) {
+            } catch(Exception $e) {
             }
         }
 
@@ -382,7 +391,7 @@ class AdminSettings implements ISettings {
 
         return [
             'cron'   => $cronType,
-            'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
+            'https'  => OC::$server->getRequest()->getHttpProtocol() === 'https',
             'php'    => [
                 'warn'    => false, // PHP_VERSION_ID < 70400,
                 'error'   => PHP_VERSION_ID < 70300,

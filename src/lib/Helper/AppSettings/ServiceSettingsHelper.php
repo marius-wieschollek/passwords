@@ -15,6 +15,7 @@ use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
+use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
@@ -293,8 +294,13 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 LocalWordsHelper::isAvailable()
             ),
             $this->generateOptionArray(
+                HelperService::WORDS_LEIPZIG,
+                $this->localisation->t('Leipzig Corpora Collection (recommended)'),
+                LeipzigCorporaHelper::isAvailable()
+            ),
+            $this->generateOptionArray(
                 HelperService::WORDS_SNAKES,
-                $this->localisation->t('watchout4snakes.com (recommended)'),
+                $this->localisation->t('watchout4snakes.com'),
                 SnakesWordsHelper::isAvailable()
             ),
             $this->generateOptionArray(

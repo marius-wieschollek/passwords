@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\AppInfo;
 
+use OC\User\Manager;
 use OCA\Passwords\Controller\Admin\CacheController;
 use OCA\Passwords\Controller\Admin\SettingsController;
 use OCA\Passwords\Controller\Api\AccountApiController;
@@ -27,6 +28,7 @@ use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
+use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
@@ -39,6 +41,8 @@ use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
+use OCP\AppFramework\QueryException;
+use OCP\Http\Client\IClientService;
 use OCP\IGroupManager;
 use OCP\IUserManager;
 use OCP\L10N\IFactory;
@@ -57,7 +61,7 @@ class Application extends App {
      *
      * @param array $urlParams
      *
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
@@ -93,6 +97,15 @@ class Application extends App {
         $container->registerService(RandomCharactersHelper::class,
             function (IAppContainer $c) {
                 return new RandomCharactersHelper(
+                    $c->query(IFactory::class)->get('core')->getLanguageCode()
+                );
+            });
+
+        $container->registerService(LeipzigCorporaHelper::class,
+            function (IAppContainer $c) {
+                return new LeipzigCorporaHelper(
+                    $c->query(SpecialCharacterHelper::class),
+                    $c->query(IClientService::class),
                     $c->query(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
@@ -167,7 +180,7 @@ class Application extends App {
     }
 
     /**
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     protected function registerInternalHooks(): void {
         $container = $this->getContainer();
@@ -192,13 +205,13 @@ class Application extends App {
     }
 
     /**
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     protected function registerSystemHooks(): void {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
         $hookManager = $container->query(HookManager::class);
-        /** @var \OC\User\Manager $userManager */
+        /** @var Manager $userManager */
         $userManager = $container->query(IUserManager::class);
 
         $userManager->listen('\OC\User', 'preCreateUser', [$hookManager, 'userPreCreateUser']);

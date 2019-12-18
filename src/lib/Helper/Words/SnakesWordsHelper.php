@@ -19,6 +19,11 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     const SERVICE_URL = 'http://watchout4snakes.com/wo4snakes/Random/RandomPhrase';
 
     /**
+     * @var bool
+     */
+    protected static $isAvailable = false;
+
+    /**
      * @var SpecialCharacterHelper
      */
     protected $specialCharacters;
@@ -178,10 +183,15 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @inheritdoc
      */
     public static function isAvailable(): bool {
+        if(static::$isAvailable) return static::$isAvailable;
+
         try {
-            $client = \OC::$server->getHTTPClientService()->newClient();
+            $client   = \OC::$server->getHTTPClientService()->newClient();
             $response = $client->head(SnakesWordsHelper::SERVICE_URL);
-            return $response->getStatusCode() === 200;
+
+            static::$isAvailable = $response->getStatusCode() === 200;
+
+            return static::$isAvailable;
         } catch(\Exception $e) {
             return false;
         }
