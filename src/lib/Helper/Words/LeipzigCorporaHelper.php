@@ -41,8 +41,9 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     /**
      * LocalWordsHelper constructor.
      *
-     * @param string                 $langCode
      * @param SpecialCharacterHelper $specialCharacters
+     * @param IClientService         $httpClientService
+     * @param string                 $langCode
      */
     public function __construct(SpecialCharacterHelper $specialCharacters, IClientService $httpClientService, string $langCode) {
         $this->langCode          = $langCode;
@@ -56,11 +57,48 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
      * @throws \Exception
      */
     public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
-        $corpora    = $this->selectCorpora();
-        $httpClient = $this->httpClientService->newClient();
-        $response   = $httpClient->get(static::SERVICE_URL.'words/'.$corpora.'/randomword/?limit=40');
-        $data       = json_decode($response->getBody());
+        $corpora = $this->selectCorpora();
+        $data    = $this->fetchJsonFromApi('words/'.$corpora.'/randomword/?limit=40');
+        $words = $this->processWords($strength, $data);
 
+        return [
+            'words'    => $words,
+            'password' => $this->wordsArrayToPassword($words, $strength, $addNumbers, $addSpecial)
+        ];
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function selectCorpora(): string {
+        $data     = $this->fetchJsonFromApi('corpora/availableCorpora');
+        $prefixes = $this->mapLanguageCode();
+
+        return $this->processCorpora($prefixes, $data);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return array
+     * @throws \Exception
+     */
+    protected function fetchJsonFromApi(string $path): array {
+        $httpClient = $this->httpClientService->newClient();
+        $response   = $httpClient->get(static::SERVICE_URL.$path);
+
+        return json_decode($response->getBody());
+    }
+
+    /**
+     * @param int $strength
+     * @param     $data
+     *
+     * @return array
+     * @throws \Exception
+     */
+    protected function processWords(int $strength, array $data): array {
         $minLength = 16 + $strength * 4;
         $curLength = 0;
         $words     = [];
@@ -77,42 +115,10 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
         }
 
         if($curLength < $minLength || count($words) <= $strength) {
-            throw new \Exception('Unable to find words matching requirements');
+            throw new \Exception('Unable to find enough words matching the requirements');
         }
 
-        return [
-            'words'    => $words,
-            'password' => $this->wordsArrayToPassword($words, $strength, $addNumbers, $addSpecial)
-        ];
-    }
-
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    protected function selectCorpora(): string {
-        $httpClient = $this->httpClientService->newClient();
-        $response   = $httpClient->get(static::SERVICE_URL.'corpora/availableCorpora');
-        $data       = json_decode($response->getBody());
-        $prefixes   = $this->mapLanguageCode();
-
-        foreach($prefixes as $prefix) {
-            $corpora = [];
-            foreach($data as $corpus) {
-                if(substr($corpus->corpusName, 0, 3) === $prefix) {
-                    $corpora[] = $corpus->corpusName;
-                }
-            }
-
-            $matches = count($corpora);
-            if($matches > 0) {
-                $selectedCorpora = random_int(0, $matches - 1);
-
-                return $corpora[ $selectedCorpora ];
-            }
-        }
-
-        throw new \Exception('Unable to find corpora');
+        return $words;
     }
 
     /**
@@ -144,6 +150,33 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
         $prefixes[] = 'eng';
 
         return $prefixes;
+    }
+
+    /**
+     * @param array $prefixes
+     * @param array $data
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function processCorpora(array $prefixes, array $data): string {
+        foreach($prefixes as $prefix) {
+            $corpora = [];
+            foreach($data as $corpus) {
+                if(substr($corpus->corpusName, 0, 3) === $prefix) {
+                    $corpora[] = $corpus->corpusName;
+                }
+            }
+
+            $matches = count($corpora);
+            if($matches > 0) {
+                $selectedCorpora = random_int(0, $matches - 1);
+
+                return $corpora[ $selectedCorpora ];
+            }
+        }
+
+        throw new \Exception('Unable to find corpora');
     }
 
     /**

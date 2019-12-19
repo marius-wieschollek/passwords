@@ -1,11 +1,14 @@
 ## [Unreleased]
 ### Added
+ - Nextcloud 18 support
  - Bitwarden JSON import
  - Bitwarden CSV import
+ - Leipzig Corpora random words service
 ### Changed
  - Enpass JSON now translates folder names
 ### Removed
  - Nextcloud 15 and 16 support
+ - PHP 7.1 support
  - Legacy ocPasswords migration
  - Database duplicate deletion
  - Backup migration
