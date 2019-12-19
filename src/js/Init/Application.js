@@ -72,6 +72,7 @@ class Application {
     _initSettings() {
         SettingsService.init();
         document.body.style.setProperty('--pw-image-login-background', `url(${SettingsService.get('server.theme.background')})`);
+        document.body.setAttribute('data-server-version', SettingsService.get('server.version'))
     }
 
     /**

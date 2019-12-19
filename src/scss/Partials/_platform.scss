@@ -1,3 +1,7 @@
-#app[data-server-version="18"] {
-
+body[data-server-version="18"] {
+    &#body-user.pw-authorize #app #app-content {
+        background-image  : var(--pw-image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+        background-size   : auto;
+        background-repeat : repeat;
+    }
 }

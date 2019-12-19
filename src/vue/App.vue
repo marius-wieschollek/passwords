@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="passwords" :data-server-version="serverVersion">
+    <div id="app" class="passwords">
         <div id="app-navigation">
             <ul class="menu-main">
                 <li>
@@ -107,11 +107,9 @@
         },
 
         data() {
-            let serverVersion = SettingsService.get('server.version'),
-                showSearch    = SettingsService.get('client.search.show');
+            let showSearch    = SettingsService.get('client.search.show');
 
             return {
-                serverVersion,
                 showSearch,
                 showMore  : false,
                 starChaser: false,
