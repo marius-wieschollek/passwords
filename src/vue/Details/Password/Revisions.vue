@@ -3,8 +3,8 @@
         <li class="revision" v-for="revision in getRevisions" :key="revision.id" @click="viewAction(revision)" :title="getRevisionLabel(revision)">
             <img class="icon"
                  :src="revision.icon"
-                 :alt="getRevisionLabel(revision)"
-                 loading="lazy">
+                 loading="lazy"
+                 alt="">
             <span class="label">{{ revision.label }}</span>
             <span class="time">{{ getDateTime(revision.created) }}</span>
             <translate class="restore"
