@@ -59,9 +59,9 @@ class HelperService {
     const FAVICON_LOCAL           = 'local';
     const FAVICON_DEFAULT         = 'default';
 
-    const WORDS_LOCAL  = 'local';
-    const WORDS_RANDOM = 'random';
-    const WORDS_SNAKES = 'wo4snakes';
+    const WORDS_LOCAL   = 'local';
+    const WORDS_RANDOM  = 'random';
+    const WORDS_SNAKES  = 'wo4snakes';
     const WORDS_LEIPZIG = 'leipzig';
 
     const SECURITY_BIGDB_HIBP  = 'bigdb+hibp';
@@ -172,7 +172,7 @@ class HelperService {
                 /** @var DeferredActivationService $das */
                 $das = $this->container->query(DeferredActivationService::class);
 
-                if($das->check('snakes-fallback')) {
+                if($das->check('wo4snakes-fallback')) {
                     if(LeipzigCorporaHelper::isAvailable()) {
                         return $this->container->query(LeipzigCorporaHelper::class);
                     }
