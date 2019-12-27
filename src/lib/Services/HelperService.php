@@ -172,7 +172,7 @@ class HelperService {
                 /** @var DeferredActivationService $das */
                 $das = $this->container->query(DeferredActivationService::class);
 
-                if($das->check('wo4snakes-fallback')) {
+                if($das->check('wo4snakes-fallback', true)) {
                     if(LeipzigCorporaHelper::isAvailable()) {
                         return $this->container->query(LeipzigCorporaHelper::class);
                     }
