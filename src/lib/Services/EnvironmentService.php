@@ -308,8 +308,11 @@ class EnvironmentService {
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
         $authHeader = $request->getHeader('Authorization');
-        if($authHeader !== '') {
-            list($type, $value) = explode(' ', $authHeader, 2);
+        if($this->session->exists('login_credentials')) {
+            if($this->loadUserFromSession($userId, $request)) return true;
+            $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
+        } else if($authHeader !== '') {
+            [$type, $value] = explode(' ', $authHeader, 2);
 
             if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
@@ -318,8 +321,8 @@ class EnvironmentService {
             if($this->loadUserFromBasicAuth($userId, $request)) return true;
             $this->logger->warning('Login attempt with invalid basic auth for '.($userId ? $userId:'invalid user id'));
         } else if($userId !== null) {
-            if($this->loadUserFromSession($userId)) return true;
-            $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
+            if($this->loadUserFromSessionToken($userId)) return true;
+            $this->logger->warning('Login attempt with invalid session token for '.($userId ? $userId:'invalid user id'));
         } else {
             $this->client = self::CLIENT_PUBLIC;
 
@@ -335,38 +338,20 @@ class EnvironmentService {
      * @param IRequest $request
      *
      * @return bool
-     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
-     * @throws \OC\Authentication\Exceptions\InvalidTokenException
      */
     protected function loadUserFromBasicAuth(?string $userId, IRequest $request): bool {
         if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
         if(!isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_PW'])) return false;
 
         $loginName = $_SERVER['PHP_AUTH_USER'];
-        if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
-            $token     = $this->tokenProvider->getToken($_SERVER['PHP_AUTH_PW']);
-            $loginUser = $this->userManager->get($token->getUID());
-
-            if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
-                $this->user       = $loginUser;
-                $this->userLogin  = $loginName;
-                $this->client     = $this->getClientFromToken($token);
-                $this->loginToken = $token;
-                $this->loginType  = self::LOGIN_TOKEN;
-
-                return true;
+        try {
+            if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
+                return $this->getUserInfoFromToken($_SERVER['PHP_AUTH_PW'], $loginName, $userId);
+            } else {
+                return $this->getUserInfoFromPassword($userId, $request, $loginName, $_SERVER['PHP_AUTH_PW']);
             }
-        } else {
-            /** @var false|\OCP\IUser $loginUser */
-            $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $_SERVER['PHP_AUTH_PW']);
-            if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
-                $this->user      = $loginUser;
-                $this->userLogin = $loginName;
-                $this->client    = $this->getClientFromRequest($request, $loginName);
-                $this->loginType = self::LOGIN_PASSWORD;
-
-                return true;
-            }
+        } catch(\Exception $e) {
+            $this->logger->logException($e);
         }
 
         return false;
@@ -377,23 +362,25 @@ class EnvironmentService {
      * @param string $value
      *
      * @return bool
-     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
-     * @throws \OC\Authentication\Exceptions\InvalidTokenException
      */
     protected function loadUserFromBearerAuth(string $userId, string $value): bool {
         if(empty($value)) return false;
 
-        $token     = $this->tokenProvider->getToken($value);
-        $loginUser = $this->userManager->get($token->getUID());
+        try {
+            $token     = $this->tokenProvider->getToken($value);
+            $loginUser = $this->userManager->get($token->getUID());
 
-        if($loginUser !== null && $loginUser->getUID() === $userId) {
-            $this->user       = $loginUser;
-            $this->userLogin  = $token->getLoginName();
-            $this->client     = $this->getClientFromToken($token);
-            $this->loginToken = $token;
-            $this->loginType  = self::LOGIN_TOKEN;
+            if($loginUser !== null && $loginUser->getUID() === $userId) {
+                $this->user       = $loginUser;
+                $this->userLogin  = $token->getLoginName();
+                $this->client     = $this->getClientFromToken($token);
+                $this->loginToken = $token;
+                $this->loginType  = self::LOGIN_TOKEN;
 
-            return true;
+                return true;
+            }
+        } catch(\Exception $e) {
+            $this->logger->logException($e);
         }
 
         return false;
@@ -404,7 +391,7 @@ class EnvironmentService {
      *
      * @return bool
      */
-    protected function loadUserFromSession(?string $userId): bool {
+    protected function loadUserFromSessionToken(?string $userId): bool {
         try {
             $sessionToken = $this->tokenProvider->getToken($this->session->getId());
 
@@ -420,23 +407,111 @@ class EnvironmentService {
 
                     return true;
                 } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
-                    $user = $this->userManager->get($userId);
-                    if($user !== null) {
-                        $this->user          = $user;
-                        $this->userLogin     = $userId;
-                        $this->client        = ucfirst($uid).' via Impersonate';
-                        $this->loginToken    = $sessionToken;
-                        $this->loginType     = self::LOGIN_SESSION;
-                        $this->impersonating = true;
-                        $this->realUser      = $this->userManager->get($uid);
-                        $this->logger->warning(['Detected %s impersonating %s', $uid, $userId]);
-
-                        return true;
-                    }
+                    return $this->impersonateByUid($userId, $uid, self::LOGIN_SESSION);
                 }
             }
         } catch(\Throwable $e) {
             $this->logger->logException($e);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string|null $userId
+     * @param IRequest    $request
+     *
+     * @return bool
+     */
+    protected function loadUserFromSession(?string $userId, IRequest $request): bool {
+        $loginCredentials = json_decode($this->session->get('login_credentials'));
+        $loginName        = $this->session->get('loginname');
+        $uid              = $loginCredentials->uid;
+
+        if($loginCredentials->isTokenLogin) {
+            $tokenId = $this->session->get('app_password');
+
+            return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
+        } else if($uid === $userId) {
+            return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
+        } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
+            return $this->impersonateByUid($userId, $loginName, self::LOGIN_PASSWORD);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string      $tokenId
+     * @param string      $loginName
+     * @param string|null $userId
+     *
+     * @return bool
+     */
+    protected function getUserInfoFromToken(string $tokenId, string $loginName, ?string $userId): bool {
+        try {
+            $token     = $this->tokenProvider->getToken($tokenId);
+            $loginUser = $this->userManager->get($token->getUID());
+
+            if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
+                $this->user       = $loginUser;
+                $this->userLogin  = $loginName;
+                $this->client     = $this->getClientFromToken($token);
+                $this->loginToken = $token;
+                $this->loginType  = self::LOGIN_TOKEN;
+
+                return true;
+            }
+        } catch(\Exception $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string|null $userId
+     * @param IRequest    $request
+     * @param string      $loginName
+     * @param string      $password
+     *
+     * @return bool
+     */
+    protected function getUserInfoFromPassword(?string $userId, IRequest $request, string $loginName, string $password): bool {
+        /** @var false|\OCP\IUser $loginUser */
+        $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $password);
+        if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
+            $this->user      = $loginUser;
+            $this->userLogin = $loginName;
+            $this->client    = $this->getClientFromRequest($request, $loginName);
+            $this->loginType = self::LOGIN_PASSWORD;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $uid
+     * @param string $realUid
+     * @param string $loginType
+     *
+     * @return bool
+     */
+    protected function impersonateByUid(string $uid, string $realUid, string $loginType): bool {
+        $user = $this->userManager->get($uid);
+        if($user !== null) {
+            $realUser            = $this->userManager->get($realUid);
+            $this->user          = $user;
+            $this->userLogin     = $uid;
+            $this->client        = $realUser->getDisplayName().' via Impersonate';
+            $this->loginType     = $loginType;
+            $this->impersonating = true;
+            $this->realUser      = $realUser;
+            $this->logger->warning(['Detected "%s" impersonating "%s"', $realUser->getDisplayName(), $user->getDisplayName()]);
+
+            return true;
         }
 
         return false;
@@ -475,4 +550,5 @@ class EnvironmentService {
 
         return $client;
     }
+
 }

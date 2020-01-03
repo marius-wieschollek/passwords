@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+ - Database indexes
+### Changed
+ - User info now fetched from session
 
 ## 2020.1.0 - Feature release
 ### Added
