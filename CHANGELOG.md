@@ -6,6 +6,9 @@
  - Leipzig Corpora random words service
 ### Changed
  - Enpass JSON now translates folder names
+ - User search in sharing now has less throttling
+### Fixed
+ - Details view now closes when password is deleted from trash
 ### Removed
  - Nextcloud 15 and 16 support
  - PHP 7.1 support
