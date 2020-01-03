@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2020.1.0 - Feature release
 ### Added
  - Nextcloud 18 support
  - Bitwarden JSON import
