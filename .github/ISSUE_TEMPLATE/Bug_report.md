@@ -35,18 +35,18 @@ Remember not to include personal data as this is public.
 2. <!-- Provide sample data if needed -->
 3. <!-- Include relevant user settings and app settings if not standard -->
 
-### Actual result
-What does happen?
-
 ### Expected result
 What should happen?
+
+### Actual result
+What does happen?
 
 ### Nextcloud log
 <details>
 <summary>Nextcloud log</summary>
 
 ```
-See Settings > Log  (Copy Raw)
+See Settings > Log (Copy Raw)
 ```
 </details>
 
@@ -55,6 +55,6 @@ See Settings > Log  (Copy Raw)
 <summary>Browser log</summary>
 
 ```
-Press F12, copy what you see
+Press F12, copy the content of the console tab
 ```
 </details>
