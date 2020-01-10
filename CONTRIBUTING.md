@@ -5,7 +5,7 @@
 
 ## Rules for issues
 
-* Issues not follwing the template will be closed without review
+* Issues not following the template will be closed without review
 * Issues with the browser extension have to be opened in this [repository](https://github.com/marius-wieschollek/passwords-webextension)
 * For questions and support, visit the [forum](https://help.nextcloud.com/c/apps/passwords)
 
