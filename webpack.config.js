@@ -102,7 +102,11 @@ module.exports = (env) => {
                         },
                         {
                             loader : 'sass-loader',
-                            options: {outputStyle: 'compressed'}
+                            options: {
+                                sassOptions: {
+                                    outputStyle: 'compressed'
+                                }
+                            }
                         },
                         {
                             loader : 'sass-resources-loader',

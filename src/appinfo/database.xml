@@ -75,6 +75,16 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -229,6 +239,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -285,6 +305,16 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -399,6 +429,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -449,6 +489,16 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -561,6 +611,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -643,6 +703,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>tag</name>
+                </field>
+                <field>
+                    <name>password</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -746,6 +816,19 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>receiver</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -811,6 +894,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -871,6 +964,16 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -933,6 +1036,16 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+            <index>
+                <name>select_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
 </database>
