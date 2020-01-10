@@ -1,8 +1,12 @@
 ## [Unreleased]
 ### Added
  - Database indexes
+ - Performance improvements
 ### Changed
  - User info now fetched from session
+ - Client side encryption encoding
+### Removed
+ - Nextcloud 15 database layer
 
 ## 2020.1.0 - Feature release
 ### Added
