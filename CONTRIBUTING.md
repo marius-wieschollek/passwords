@@ -70,6 +70,13 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - Check "LDAP-/AP-E-Mail-Address"
  - Select "cn" and "uid" as login attributes
 
+#### Telegram 2FA Gateway Setup
+ - Install the "Two-Factor Gateway" app from the app store
+ - Run `npm run shell` from the terminal
+ - Run `./occ twofactorauth:gateway:configure telegram`
+ - Enter `703713714:AAGUFZfIINIm4_0Qo3i9qHNZVfduDbwHtnY`
+ - Chat with the [get_id_bot](tg://resolve?domain=get_id_bot) to get your Telegram id
+
 #### First steps
 * [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)
 * [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)
