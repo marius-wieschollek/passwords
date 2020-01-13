@@ -524,7 +524,7 @@ class EnvironmentService {
      * @return string
      */
     protected function getClientFromRequest(IRequest $request, string $loginName): string {
-        $client = trim($request->getHeader('USER_AGENT'));
+        $client = trim(filter_var($request->getHeader('USER_AGENT'), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH));
 
         if(empty($client) ||
            in_array($client, self::$protectedClients) ||
