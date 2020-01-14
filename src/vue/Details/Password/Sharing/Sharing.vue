@@ -54,7 +54,7 @@
 
         data() {
             let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
-                hasCse = this.password.cseType !== 'none';
+                hasCse = this.password.cseType !== 'none' && !this.password.shared;
 
 
             return {
@@ -247,6 +247,8 @@
         watch: {
             password(value) {
                 this.shares = value.hasOwnProperty('shares') ? value.shares:[];
+                this.hasCse = value.cseType !== 'none' && !value.shared;
+
                 this.$forceUpdate();
             },
             search() {
