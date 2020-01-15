@@ -56,7 +56,7 @@
         "vue": "^2.6.10",
         "vue-loader": "^15.8.3",
         "vue-qrcode-component": "^2.1.1",
-        "vue-router": "^3.1.4",
+        "vue-router": "^3.1.5",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.10",
         "webdriverio": "^5.18.5",
