@@ -106,7 +106,7 @@ class KeepAliveManager {
         this._event();
 
         this._lifeTime = SettingsService.get('user.session.lifetime') * 1000;
-        this._lockTimer = setInterval(() => { this._checkLockdown(); }, 2000);
+        this._lockTimer = setInterval(() => { this._checkLockdown(); }, 1000);
     }
 
     /**
@@ -132,7 +132,7 @@ class KeepAliveManager {
         this._event();
 
         this._timer = setInterval(() => { this._sendKeepAlive(); }, 10000);
-        this._lockTimer = setInterval(() => { this._checkLockdown(); }, 2000);
+        this._lockTimer = setInterval(() => { this._checkLockdown(); }, 1000);
         this._lifeTime = SettingsService.get('user.session.lifetime') * 1000;
     }
 
@@ -156,13 +156,38 @@ class KeepAliveManager {
         if(this._lastRequest + this._lifeTime < Date.now()) {
             let current = router.currentRoute,
                 target  = {name: current.name, path: current.path, hash: current.hash, params: current.params};
+            this._removePopupWindows();
 
             if(current.name === 'Authorize') return;
 
-            await API.closeSession();
+            try {
+                await API.closeSession();
+            } catch(e) {
+                console.error(e);
+            }
 
             target = btoa(JSON.stringify(target));
+            if(router.currentRoute.name === 'Authorize') return;
             router.push({name: 'Authorize', params: {target}});
+        }
+    }
+
+    /**
+     *
+     * @private
+     */
+    _removePopupWindows() {
+        let popup = document.getElementById('app-popup');
+        if(popup !== null && popup.hasChildNodes()) {
+            for(let child of popup.childNodes) {
+                child.remove()
+            }
+        }
+        popup.append(document.createElement('div'));
+
+        let dialogs = document.querySelectorAll('.oc-dialog-dim, .oc-dialog');
+        for(let dialog of dialogs) {
+            dialog.remove()
         }
     }
 }
