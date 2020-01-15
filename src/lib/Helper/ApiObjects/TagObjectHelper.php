@@ -15,7 +15,10 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
+use OCP\AppFramework\QueryException;
 
 /**
  * Class TagObjectHelper
@@ -25,6 +28,7 @@ use OCP\AppFramework\IAppContainer;
 class TagObjectHelper extends AbstractObjectHelper {
 
     const LEVEL_PASSWORDS     = 'passwords';
+    const LEVEL_PASSWORD_IDS  = 'password-ids';
     const LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
@@ -69,31 +73,36 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @param string              $level
      * @param array               $filter
      *
-     * @return array
+     * @return array|null
      * @throws Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws QueryException
      */
     public function getApiObject(
         EntityInterface $tag,
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array {
+        $detailLevel = explode('+', $level);
+        $withModel = in_array(self::LEVEL_MODEL, $detailLevel);
+
         /** @var TagRevision $revision */
-        $revision = $this->getRevision($tag, $filter);
+        $revision = $this->getRevision($tag, $filter, $withModel);
         if($revision === null) return null;
 
-        $detailLevel = explode('+', $level);
         $object      = [];
-        if(in_array(self::LEVEL_MODEL, $detailLevel)) {
+        if($withModel) {
             $object = $this->getModel($tag, $revision);
         }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($tag, $object);
         }
         if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
-            $object = $this->getPasswords($revision, $object, in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel));
+            $includeTags = in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel);
+            $object = $this->getPasswords($revision, $object, $includeTags);
+        } else if(in_array(self::LEVEL_PASSWORD_IDS, $detailLevel)) {
+            $object = $this->getPasswords($revision, $object, false, false);
         }
 
         return $object;
@@ -106,7 +115,6 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @return array
      */
     protected function getModel(Tag $tag, TagRevision $revision): array {
-
         return [
             'id'       => $tag->getUuid(),
             'created'  => $tag->getCreated(),
@@ -130,7 +138,7 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @param array $object
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getRevisions(Tag $tag, array $object): array {
         /** @var TagRevision[] $revisions */
@@ -164,14 +172,14 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @param TagRevision $revision
      * @param array       $object
      * @param bool        $includeTags
+     * @param bool        $includeModels
      *
      * @return array
-     * @throws Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws QueryException
      */
-    protected function getPasswords(TagRevision $revision, array $object, bool $includeTags = false): array {
+    protected function getPasswords(TagRevision $revision, array $object, bool $includeTags = false, bool $includeModels = true): array {
 
         $filters = [];
         if(!$revision->isHidden()) $filters['hidden'] = false;
@@ -184,9 +192,13 @@ class TagObjectHelper extends AbstractObjectHelper {
         $detailLevel = $includeTags ? self::LEVEL_MODEL.'+'.PasswordObjectHelper::LEVEL_TAGS:self::LEVEL_MODEL;
         foreach($passwords as $password) {
             if(!$revision->isTrashed() && $password->isSuspended()) continue;
-            $obj = $objectHelper->getApiObject($password, $detailLevel, $filters);
+            if($includeModels) {
+                $obj = $objectHelper->getApiObject($password, $detailLevel, $filters);
 
-            if($obj !== null) $object['passwords'][] = $obj;
+                if($obj !== null) $object['passwords'][] = $obj;
+            } else if($objectHelper->matchesFilter($password, $filters)) {
+                $object['passwords'][] = $password->getUuid();
+            }
         }
 
         return $object;
@@ -194,7 +206,7 @@ class TagObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return PasswordObjectHelper
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     protected function getPasswordObjectHelper(): PasswordObjectHelper {
         if(!$this->passwordObjectHelper) {

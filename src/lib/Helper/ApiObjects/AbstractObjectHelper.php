@@ -7,11 +7,14 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
+use Exception;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
 
 /**
@@ -77,6 +80,33 @@ abstract class AbstractObjectHelper {
     }
 
     /**
+     * @param EntityInterface $model
+     * @param string          $level
+     * @param array           $filter
+     *
+     * @return array|null
+     */
+    abstract public function getApiObject(
+        EntityInterface $model,
+        string $level = self::LEVEL_MODEL,
+        $filter = []
+    ): ?array;
+
+    /**
+     * @param EntityInterface $model
+     * @param array           $filter
+     *
+     * @return bool
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     */
+    public function matchesFilter(EntityInterface $model, $filter = []): bool {
+        $revision = $this->revisionService->findByUuid($model->getRevision());
+
+        return $this->filter($revision, $filter);
+    }
+
+    /**
      * @param EntityInterface $revision
      * @param array           $filter
      *
@@ -98,31 +128,19 @@ abstract class AbstractObjectHelper {
     /**
      * @param ModelInterface $model
      * @param array          $filters
+     * @param bool           $decrypt
      *
      * @return null|RevisionInterface
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
      */
-    protected function getRevision(ModelInterface $model, array $filters): ?RevisionInterface {
+    protected function getRevision(ModelInterface $model, array $filters, bool $decrypt = true): ?RevisionInterface {
         $revision = $this->revisionService->findByUuid($model->getRevision());
         if(!$this->filter($revision, $filters)) return null;
 
+        if(!$decrypt) return $revision;
+
         return $this->encryptionService->decrypt($revision);
     }
-
-    /**
-     * @param EntityInterface $model
-     * @param string          $level
-     * @param array           $filter
-     *
-     * @return array|null
-     */
-    abstract public function getApiObject(
-        EntityInterface $model,
-        string $level = self::LEVEL_MODEL,
-        $filter = []
-    ): ?array;
 
     /**
      * @param $value
@@ -131,7 +149,7 @@ abstract class AbstractObjectHelper {
      * @return bool
      */
     protected function valueMatchesAdvancedFilter(array $filter, $property): bool {
-        list($operator, $value) = $filter;
+        [$operator, $value] = $filter;
         if(($operator === self::OPERATOR_EQUALS && $property != $value) ||
            ($operator === self::OPERATOR_NOT_EQUALS && $property == $value) ||
            ($operator === self::OPERATOR_LESS && $property >= $value) ||
