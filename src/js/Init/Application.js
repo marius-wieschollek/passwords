@@ -122,8 +122,8 @@ class Application {
         }
 
         if(!this._loginRequired) {
-            document.body.classList.remove('pw-authorize');
-            document.body.classList.add('pw-no-authorize');
+            document.body.classList.remove('pw-auth-visible');
+            document.body.classList.add('pw-auth-skipped');
             API.openSession({});
         }
     }

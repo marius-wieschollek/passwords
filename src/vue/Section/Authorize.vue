@@ -70,8 +70,8 @@
         },
 
         created() {
-            document.body.classList.remove('pw-no-authorize', 'pw-authorized');
-            document.body.classList.add('pw-authorize');
+            document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
+            document.body.classList.add('pw-auth-visible');
             API.requestSession()
                 .then((d) => {
                     if(d.hasOwnProperty('challenge')) {
@@ -122,7 +122,7 @@
                 return '' + (this.hasPassword ? ' has-password':'') + (this.hasToken ? ' has-token':'');
             },
             showTokenField() {
-                return this.hasToken && this.provider.type === 'user-token'
+                return this.hasToken && this.provider.type === 'user-token';
             }
         },
 
@@ -170,14 +170,14 @@
                     route  = {path: '/'};
 
                 if(target) route = JSON.parse(atob(target));
-                document.body.classList.add('pw-authorized');
+                document.body.classList.add('pw-auth-passed');
 
                 setTimeout(() => {
                     this.$router.push(route);
                 }, 250);
 
                 setTimeout(() => {
-                    document.body.classList.remove('pw-authorize');
+                    document.body.classList.remove('pw-auth-visible');
                     SetupManager.runAutomatically();
                 }, 500);
             },
@@ -212,7 +212,7 @@
 
 <style lang="scss">
     body#body-user {
-        &:not(.pw-authorized):not(.pw-no-authorize) {
+        &:not(.pw-auth-passed):not(.pw-auth-skipped) {
             background        : var(--color-primary) var(--pw-image-login-background);
             background-size   : cover;
             background-repeat : no-repeat;
@@ -391,7 +391,7 @@
     }
 
     body#body-user {
-        &.pw-authorize {
+        &.pw-auth-visible {
             #app-content {
                 position          : fixed;
                 top               : 0;
@@ -406,22 +406,30 @@
                 background-repeat : no-repeat;
                 opacity           : 1;
                 transition        : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
+
+                > * {
+                    transition : opacity ease-in-out 0.25s;
+                }
             }
 
             #app-navigation {
                 z-index : 1001;
             }
 
-            &.pw-authorized,
-            &.pw-no-authorize {
+            &.pw-auth-passed,
+            &.pw-auth-skipped {
                 #app-content {
-                    margin-left : 0;
-                    opacity     : 0;
+                    background-image : none;
+                    background-color : var(--color-main-background);
+
+                    > * {
+                        opacity : 0;
+                    }
                 }
             }
         }
 
-        &.pw-authorized {
+        &.pw-auth-passed {
             #header {
                 transition       : background-color ease-in-out 0.25s 0.25s;
                 background-color : var(--color-primary);
@@ -434,7 +442,13 @@
             }
         }
 
-        &.pw-no-authorize {
+        &.pw-auth-skipped {
+            #app-content {
+                > * {
+                    transition : opacity ease-in-out 0.25s;
+                }
+            }
+
             @media (min-width : $width-small) {
                 #app-navigation {
                     transform : translateX(0);
