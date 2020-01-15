@@ -82,7 +82,7 @@ class ServerReportHelper {
         $this->folderRevisionMapper   = $folderRevisionMapper;
         $this->tagRevisionMapper      = $tagRevisionMapper;
         $this->shareMapper            = $shareMapper;
-        $this->requestHelper = $requestHelper;
+        $this->requestHelper          = $requestHelper;
     }
 
     /**
@@ -145,7 +145,8 @@ class ServerReportHelper {
             'database'     => $this->config->getSystemValue('dbtype'),
             'cron'         => $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core'),
             'proxy'        => !empty($this->config->getSystemValue('proxy', '')),
-            'sslProxy'     => strtolower($this->config->getSystemValue('overwriteprotocol', '')) === 'https'
+            'sslProxy'     => strtolower($this->config->getSystemValue('overwriteprotocol', '')) === 'https',
+            'subdirectory' => strlen($this->config->getSystemValue('overwritewebroot', '')) > 1,
         ];
     }
 
