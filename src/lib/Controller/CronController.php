@@ -42,7 +42,7 @@ class CronController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @UserRateThrottle(limit=2, period=10)
+     * @UserRateThrottle(limit=3, period=10)
      *
      * @param string $job
      *
