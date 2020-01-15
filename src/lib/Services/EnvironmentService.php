@@ -254,7 +254,11 @@ class EnvironmentService {
      */
     protected function isCronJob(IRequest $request): bool {
         $requestUri = $request->getRequestUri();
+        $webroot    = $this->config->getSystemValue('overwritewebroot', '');
         $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+
+        $webrootLength = strlen($webroot);
+        if(substr($requestUri, 0, $webrootLength) === $webroot) $requestUri = substr($requestUri, $webrootLength);
 
         return ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
                ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||

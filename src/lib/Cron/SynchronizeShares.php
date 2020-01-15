@@ -10,7 +10,6 @@ namespace OCA\Passwords\Cron;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
-use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -438,6 +437,6 @@ class SynchronizeShares extends AbstractCronJob {
      */
     protected function canExecute(): bool {
         return $this->environment->getRunType() === EnvironmentService::TYPE_CRON &&
-               $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-4 hours');
+               $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-2 hours');
     }
 }
