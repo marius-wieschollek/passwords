@@ -37,12 +37,12 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
-* `npm run start` - Start the docker server. Use `postgres:start` or `ldap:start` to include these services
-* `npm run stop` - Stop the docker server. Use `postgres:stop` or `ldap:stop` to include these services
+* `npm run start` - Start the docker server. Use `postgres:start`, `ldap:start` or `saml:start` to include these services
+* `npm run stop` - Stop the docker server. Use `postgres:stop`, `ldap:stop` or `saml:stop` to include these services
 * `npm run cron` - Execute cron jobs
 * `npm run shell` - Open a shell in the container
 * `npm run shell:root` - Open a root shell in the container
-* `npm run down` - Remove docker containers and volumes
+* `npm run down` - Remove docker containers and volumes. Use `postgres:down`, `ldap:down` or `saml:down` to include these services
 * `npm run docker:build` - Start docker and build images
 * `npm run build` - Create production build of JS/CSS files
 * `npm run build:nightly` - Create nightly build of JS/CSS files
@@ -57,6 +57,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - [https://localhost:1080](https://localhost:1080) is MailHog (for Emails)
  - [https://localhost:8081](https://localhost:8081) is pgAdmin (for the Postgres database, user `admin@nextcloud`, password `nextcloud`)
  - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
+ - [https://localhost:9091](https://localhost:9091) is Keycloak (for SAML, optional, user `admin`, password `nextcloud`)
 
 #### LDAP Setup
  - Open [PhpLdapAdmin](https://localhost:9090) and log in
@@ -77,6 +78,10 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - Run `./occ twofactorauth:gateway:configure telegram`
  - Enter `703713714:AAGUFZfIINIm4_0Qo3i9qHNZVfduDbwHtnY`
  - Chat with the [get_id_bot](tg://resolve?domain=get_id_bot) to get your Telegram id
+
+#### Keycloak SAML Setup
+ - Open [Keycloak](https://localhost:9091) and log in
+ - Follow [this guide](https://stackoverflow.com/a/48400813) ([internet archive link](https://web.archive.org/web/20200116192513/https://stackoverflow.com/questions/48400812/sso-with-saml-keycloak-and-nextcloud/48400813))
 
 #### First steps
 * [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)
