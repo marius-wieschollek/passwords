@@ -432,7 +432,7 @@ class EnvironmentService {
         $loginName        = $this->session->get('loginname');
         $uid              = $loginCredentials->uid;
 
-        if($loginCredentials->isTokenLogin) {
+        if(isset($loginCredentials->isTokenLogin) && $loginCredentials->isTokenLogin) {
             $tokenId = $this->session->get('app_password');
 
             return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
