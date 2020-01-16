@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Token;
 
+use OC\Authentication\Exceptions\PasswordlessTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\Services\ConfigurationService;
@@ -187,7 +188,7 @@ class ApiTokenHelper {
      */
     protected function createWebUiToken(): array {
         $name = $this->getTokenName();
-        list($token, $deviceToken) = $this->createToken($name);
+        [$token, $deviceToken] = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
         $this->session->save();
@@ -204,6 +205,8 @@ class ApiTokenHelper {
             $sessionToken = $this->tokenProvider->getToken($sessionId);
 
             return $this->tokenProvider->getPassword($sessionToken, $sessionId);
+        } catch (PasswordlessTokenException $ex) {
+            return null;
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }

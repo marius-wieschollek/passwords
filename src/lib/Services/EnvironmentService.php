@@ -312,7 +312,7 @@ class EnvironmentService {
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
         $authHeader = $request->getHeader('Authorization');
-        if($this->session->exists('login_credentials')) {
+        if($this->session->exists('login_credentials') && !$this->session->exists('user_saml.samlUserData')) {
             if($this->loadUserFromSession($userId, $request)) return true;
             $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
         } else if($authHeader !== '') {
