@@ -73,8 +73,8 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 
 #### Requirements
 * Linux based OS
-* Nextcloud 15+
-* PHP 7.1+
+* Nextcloud 17+
+* PHP 7.2+
 
 ## Support
 * [Official Forum](https://help.nextcloud.com/c/apps/passwords)
