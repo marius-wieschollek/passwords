@@ -180,12 +180,10 @@ class NightlyAppFetcher extends Fetcher {
      */
     protected function releaseAllowedInChannel($release, $app): bool {
         $isPreRelease     = strpos($release['version'], '-');
-        $allowPreReleases = $this->getChannel() === 'beta' || $this->getChannel() === 'daily';
-        $allowNightly     = $this->getChannel() === 'daily';
+        $allowNightly     = $this->getChannel() === 'daily' || $app === 'passwords';
+        $allowPreReleases = $this->getChannel() === 'beta' || $allowNightly;
 
-        return ($allowNightly || $release['isNightly'] === false) ||
-               ($allowPreReleases || !$isPreRelease) ||
-               $app === 'passwords';
+        return ($allowNightly || $release['isNightly'] === false) || ($allowPreReleases || !$isPreRelease);
     }
 
     /**
