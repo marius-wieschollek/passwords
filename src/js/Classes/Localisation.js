@@ -54,7 +54,7 @@ class Localisation {
 
         let url = OC.filePath('passwords', 'l10n', `${section}/${language}.json`);
         if(this._fetchAlternative) {
-            url = OC.generateUrl(`/apps/passwords/l10n/${section}/${language}.json`);
+            url = OC.generateUrl(`/apps/passwords/l10n/${section}/${language}.json?_=${process.env.APP_VERSION}`);
         }
 
         let result = await this._loadFile(url);
