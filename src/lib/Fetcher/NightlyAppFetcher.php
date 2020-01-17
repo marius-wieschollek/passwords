@@ -188,7 +188,14 @@ class NightlyAppFetcher extends Fetcher {
      *
      */
     protected function setEndpoint() {
-        $this->endpointUrl = 'https://apps.nextcloud.com/api/v1/apps.json';
+        $this->endpointUrl = $this->getEndpoint();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEndpoint(): string {
+        return $this->config->getSystemValue('appstoreurl', 'https://apps.nextcloud.com/api/v1') . '/apps.json';
     }
 
     /**
