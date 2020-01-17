@@ -17,4 +17,12 @@ body[data-server-version="18"] {
             background-image : var(--pw-image-login-background), linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
         }
     }
+
+    &[data-custom-color="false"] #app-popup .background .window .title {
+        background-image : linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+    }
+
+    &[data-custom-color="true"] #app-popup .background .window .title {
+        background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+    }
 }
