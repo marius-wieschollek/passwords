@@ -168,7 +168,7 @@ class NightlyAppFetcher extends Fetcher {
         parent::setVersion($version);
 
         $this->ignoreMaxVersion = $ignoreMaxVersion;
-        $this->fileName = $fileName;
+        $this->fileName         = $fileName;
         $this->setEndpoint();
     }
 
@@ -179,9 +179,13 @@ class NightlyAppFetcher extends Fetcher {
      * @return bool
      */
     protected function releaseAllowedInChannel($release, $app): bool {
-        $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
+        $isPreRelease     = strpos($release['version'], '-');
+        $allowPreReleases = $this->getChannel() === 'beta' || $this->getChannel() === 'daily';
+        $allowNightly     = $this->getChannel() === 'daily';
 
-        return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || $app === 'passwords' || in_array($app, $nightlyApps);
+        return ($allowNightly || $release['isNightly'] === false) ||
+               ($allowPreReleases || !$isPreRelease) ||
+               $app === 'passwords';
     }
 
     /**
@@ -195,7 +199,7 @@ class NightlyAppFetcher extends Fetcher {
      * @return string
      */
     protected function getEndpoint(): string {
-        return $this->config->getSystemValue('appstoreurl', 'https://apps.nextcloud.com/api/v1') . '/apps.json';
+        return $this->config->getSystemValue('appstoreurl', 'https://apps.nextcloud.com/api/v1').'/apps.json';
     }
 
     /**

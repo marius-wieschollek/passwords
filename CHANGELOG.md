@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Added
+ - Spanish translation
  - Database indexes
  - Performance improvements
 ### Changed
@@ -7,6 +8,8 @@
  - Client side encryption encoding
 ### Removed
  - Nextcloud 15 database layer
+### Fixed
+ - Cron jobs not executed if NC installed in subdirectory
 
 ## 2020.1.0 - Feature release
 ### Added
