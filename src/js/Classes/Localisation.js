@@ -1,24 +1,28 @@
-export default class Localisation {
+class Localisation {
+
+    constructor() {
+        this._fetchAlternative = false;
+    }
 
     /**
      *
-     * @param text
-     * @param variables
+     * @param {string} text
+     * @param {Object} variables
      * @returns {string}
      */
-    static translate(text, variables = {}) {
-        if (text === undefined) return '';
-        if (OC !== undefined) return OC.L10N.translate('passwords', text, variables).replace('&amp;', '&');
+    translate(text, variables = {}) {
+        if(text === undefined) return '';
+        if(OC !== undefined) return OC.L10N.translate('passwords', text, variables).replace('&amp;', '&');
 
         return '';
     }
 
     /**
      *
-     * @param text
+     * @param {string} text
      */
-    static translateArray(text) {
-        return Array.isArray(text) ? Localisation.translate(text[0], text[1]):Localisation.translate(text);
+    translateArray(text) {
+        return Array.isArray(text) ? this.translate(text[0], text[1]):this.translate(text);
     }
 
     /**
@@ -26,7 +30,7 @@ export default class Localisation {
      * @param date
      * @returns {string}
      */
-    static formatDate(date) {
+    formatDate(date) {
         return OC.Util.relativeModifiedDate(date);
     }
 
@@ -35,39 +39,75 @@ export default class Localisation {
      * @param date
      * @returns {string}
      */
-    static formatDateTime(date) {
+    formatDateTime(date) {
         return OC.Util.formatDate(date, 'LLL');
     }
 
     /**
      *
-     * @param section
+     * @param {string} section
      * @returns {Promise<boolean>}
      */
-    static async loadSection(section) {
+    async loadSection(section) {
         let language = OC.getLanguage().replace('-', '_');
-        if (language === 'en') return true;
+        if(language === 'en') return true;
+
         let url = OC.filePath('passwords', 'l10n', `${section}/${language}.json`);
+        if(this._fetchAlternative) {
+            url = OC.generateUrl(`/apps/passwords/l10n/${section}/${language}.json`);
+        }
 
+        let result = await this._loadFile(url);
+        if(!result && language === 'de') {
+            this._fetchAlternative = true;
+            return await this.loadSection(section);
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param {string} url
+     * @return {Promise<boolean>}
+     * @private
+     */
+    async _loadFile(url) {
         try {
-            let response = await fetch(new Request(url));
+            let request  = new Request(url, {redirect: 'error'}),
+                response = await fetch(request);
 
-            if (response.ok) {
+            if(response.ok) {
                 let data = await response.json();
-
-                if (data.hasOwnProperty('translations')) {
-                    let translations = data.translations;
-                    if(Array.isArray(translations)) {
-                        translations = Object.assign.apply(this, translations);
-                    }
-
-                    OC.L10N.register('passwords', translations, data.pluralForm);
-                    return true;
-                }
+                return this._processTranslations(data);
             }
-        }catch (e) {
+        } catch(e) {
             console.error(e);
         }
+
+        return false;
+    }
+
+    /**
+     *
+     * @param {Object} data
+     * @return {boolean}
+     * @private
+     */
+    _processTranslations(data) {
+        if(data.hasOwnProperty('translations')) {
+            let translations = data.translations;
+            if(Array.isArray(translations)) {
+                translations = Object.assign.apply(this, translations);
+            }
+
+            OC.L10N.register('passwords', translations, data.pluralForm);
+
+            return true;
+        }
+
         return false;
     }
 }
+
+export default new Localisation();
