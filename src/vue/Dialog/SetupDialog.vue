@@ -69,7 +69,7 @@
                 type   : Boolean,
                 default: true
             },
-            _close  : {
+            _close      : {
                 type: Function
             }
         },
@@ -241,7 +241,7 @@
                 justify-content : center;
 
                 .logo {
-                    width  : 120px;
+                    width : 120px;
                 }
             }
 

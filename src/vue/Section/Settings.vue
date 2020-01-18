@@ -305,7 +305,8 @@
                     <input type="checkbox"
                            id="setting-notification-admin"
                            v-model="settings['user.notification.admin']" v-if="isAdmin">
-                    <settings-help text="Notifies you of configuration errors and other administrative issues" v-if="isAdmin"/>
+                    <settings-help text="Notifies you of configuration errors and other administrative issues"
+                                   v-if="isAdmin"/>
 
                     <translate tag="label"
                                for="setting-notification-errors"
@@ -378,7 +379,7 @@
                 hasEncryption     = API.hasEncryption;
 
             DAS.check('client-side-encryption')
-                .then((d) => { this.encryptionFeature = d});
+                .then((d) => { this.encryptionFeature = d;});
 
             return {
                 settings: SettingsService.getAll(),
@@ -645,5 +646,6 @@
         background-color : transparentize($color-black, 0.9);
         cursor           : wait;
         z-index          : 2000;
+        backdrop-filter  : blur(3px);
     }
 </style>

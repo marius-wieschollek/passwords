@@ -108,7 +108,7 @@
             },
             close() {
                 document.getElementById('app').classList.remove('blocking');
-                this.$emit('close')
+                this.$emit('close');
             }
         }
     };
@@ -120,6 +120,7 @@
     .blueimp-gallery {
         background-color : transparentize($color-black, 0.25);
         max-height       : 100vh;
+        backdrop-filter  : blur(4px);
 
         > .description {
             position : absolute;
