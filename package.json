@@ -47,7 +47,7 @@
         "libsodium-wrappers": "^0.7.6",
         "marked": "^0.7.0",
         "mini-css-extract-plugin": "^0.9.0",
-        "node-sass": "^4.13.0",
+        "node-sass": "^4.13.1",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "passwords-client": "https://git.mdns.eu/nextcloud/passwords-client/-/archive/stable/passwords-client-stable.tar.gz",
         "random-material-color": "^1.0.5",
@@ -62,7 +62,7 @@
         "vue-router": "^3.1.5",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.10",
-        "webdriverio": "^5.18.5",
+        "webdriverio": "^5.18.6",
         "webpack": "^4.41.5",
         "webpack-cli": "^3.3.10",
         "xlsx": "^0.14.5"
