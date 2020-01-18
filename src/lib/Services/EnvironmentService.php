@@ -334,7 +334,8 @@ class EnvironmentService {
         }
 
         $this->client = self::CLIENT_PUBLIC;
-        throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
+        if($userId !== null) throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
+        return false;
     }
 
     /**
