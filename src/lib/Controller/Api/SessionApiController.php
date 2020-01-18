@@ -106,7 +106,7 @@ class SessionApiController extends AbstractApiController {
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
-     * @UserRateThrottle(limit=4, period=60)
+     * @UserRateThrottle(limit=6, period=60)
      *
      * @return JSONResponse
      * @throws ApiException
