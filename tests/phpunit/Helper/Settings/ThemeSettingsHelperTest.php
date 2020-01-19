@@ -59,6 +59,7 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetPrimaryColor() {
         $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
         $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
+        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
         $this->themingDefaults->expects($this->once())->method('getColorPrimary');
 
         $result = $this->themeSettingsHelper->get('color.primary');
@@ -73,10 +74,59 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetPrimaryColorWithBreezedarkTheme() {
         $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(true);
         $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
+        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
         $this->themingDefaults->expects($this->never())->method('getColorPrimary');
 
         $result = $this->themeSettingsHelper->get('color.primary');
         self::assertEquals('#3daee9', $result);
+    }
+
+    /**
+     * Test if default background color is returned correctly
+     *
+     * @throws \Exception
+     */
+    public function testGetBackgroundColor() {
+        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
+        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
+
+        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
+        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
+
+        $result = $this->themeSettingsHelper->get('color.background');
+        self::assertEquals('#ffffff', $result);
+    }
+
+    /**
+     * Test if accessibility background color is returned if dark theme enabled
+     *
+     * @throws \Exception
+     */
+    public function testGetBackgroundColorWithAccessibility() {
+        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('themedark');
+        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
+
+        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
+        $this->configurationService->expects($this->never())->method('isAppEnabled');
+
+        $result = $this->themeSettingsHelper->get('color.background');
+        self::assertEquals('#181818', $result);
+    }
+
+    /**
+     * Test if breezedark primary color is returned correctly when the app is enabled
+     *
+     * @throws \Exception
+     */
+    public function testGetBackgroundColorWithBreezedarkTheme() {
+        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
+        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(true);
+
+        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
+        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
+
+        $result = $this->themeSettingsHelper->get('color.background');
+        self::assertEquals('#31363b', $result);
     }
 
     /**
