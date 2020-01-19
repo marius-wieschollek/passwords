@@ -47,8 +47,36 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults->method('getTextColorPrimary')->willReturn('#000000');
         $this->themingDefaults->expects($this->once())->method('getTextColorPrimary');
 
-        $result = $this->themeSettingsHelper->get('text.color');
+        $result = $this->themeSettingsHelper->get('color.text');
         self::assertEquals('#000000', $result);
+    }
+
+    /**
+     * Test if default primary color is returned correctly
+     *
+     * @throws \Exception
+     */
+    public function testGetPrimaryColor() {
+        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
+        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
+        $this->themingDefaults->expects($this->once())->method('getColorPrimary');
+
+        $result = $this->themeSettingsHelper->get('color.primary');
+        self::assertEquals('#0082c9', $result);
+    }
+
+    /**
+     * Test if breezedark primary color is returned correctly when the app is enabled
+     *
+     * @throws \Exception
+     */
+    public function testGetPrimaryColorWithBreezedarkTheme() {
+        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(true);
+        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
+        $this->themingDefaults->expects($this->never())->method('getColorPrimary');
+
+        $result = $this->themeSettingsHelper->get('color.primary');
+        self::assertEquals('#3daee9', $result);
     }
 
     /**
