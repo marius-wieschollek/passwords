@@ -223,7 +223,7 @@
 
             .logo {
                 height          : 120px;
-                background      : url(../../img/app.svg) no-repeat center;
+                background      : var(--pw-image-logo) no-repeat center;
                 background-size : contain;
             }
 

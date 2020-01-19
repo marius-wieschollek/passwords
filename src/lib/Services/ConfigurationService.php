@@ -42,14 +42,15 @@ class ConfigurationService {
      * @param string      $key
      * @param null        $default
      * @param null|string $user
+     * @param string      $app
      *
      * @return string
      * @throws \Exception
      */
-    public function getUserValue(string $key, $default = null, ?string $user = null) {
+    public function getUserValue(string $key, $default = null, ?string $user = null, $app = Application::APP_NAME) {
         $userId = $this->getUserId($user);
 
-        return $this->config->getUserValue($userId, Application::APP_NAME, $key, $default);
+        return $this->config->getUserValue($userId, $app, $key, $default);
     }
 
     /**
@@ -77,12 +78,13 @@ class ConfigurationService {
      * @param string      $key
      * @param string      $value
      * @param null|string $user
+     * @param string      $app
      *
      * @throws \Exception
      */
-    public function setUserValue(string $key, string $value, ?string $user = null): void {
+    public function setUserValue(string $key, string $value, ?string $user = null, $app = Application::APP_NAME): void {
         $userId = $this->getUserId($user);
-        $this->config->setUserValue($userId, Application::APP_NAME, $key, $value);
+        $this->config->setUserValue($userId, $app, $key, $value);
     }
 
     /**
@@ -104,14 +106,15 @@ class ConfigurationService {
     /**
      * @param string      $key
      * @param null|string $user
+     * @param string      $app
      *
      * @return bool
      * @throws \Exception
      */
-    public function hasUserValue(string $key, ?string $user = null): bool {
+    public function hasUserValue(string $key, ?string $user = null, $app = Application::APP_NAME): bool {
         $userId = $this->getUserId($user);
 
-        $keys = $this->config->getUserKeys($userId, Application::APP_NAME);
+        $keys = $this->config->getUserKeys($userId, $app);
 
         return in_array($key, $keys);
     }

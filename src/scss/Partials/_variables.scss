@@ -1,32 +1,34 @@
-$color-green-dark : #00994d;
-$color-red-dark : #bf0303;
-$color-red : #c00;
-$color-yellow : #ffd500;
-$color-black : #000;
+$color-green-dark    : #00994d;
+$color-red-dark      : #bf0303;
+$color-red           : #c00;
+$color-yellow        : #ffd500;
+$color-black         : #000;
 
-$color-black-light : #333;
+$color-black-light   : #333;
 $color-black-lighter : #545454;
-$color-grey-darker : #6e6e6e;
-$color-grey-dark : #999;
-$color-grey : #b1b1b1;
-$color-grey-light : #dbdbdb;
-$color-grey-lighter : #eee;
-$color-white : #fff;
+$color-grey-darker   : #6e6e6e;
+$color-grey-dark     : #999;
+$color-grey          : #b1b1b1;
+$color-grey-light    : #dbdbdb;
+$color-grey-lighter  : #eee;
+$color-white         : #fff;
 
-$width-extra-small : 640px;
-$width-small : 768px;
-$width-medium : 1024px;
-$width-large : 1366px;
-$width-extra-large : 1680px;
+$width-extra-small   : 640px;
+$width-small         : 768px;
+$width-medium        : 1024px;
+$width-large         : 1366px;
+$width-extra-large   : 1680px;
 
 /** @deprecated **/
-$mobile-width : $width-extra-small;
-$tablet-width : $width-small;
-$desktop-width : $width-large;
+$mobile-width        : $width-extra-small;
+$tablet-width        : $width-small;
+$desktop-width       : $width-large;
 
 :root {
     --pw-icon-font-face         : FontAwesome, sans-serif;
     --pw-game-font-face         : "Ani", "Purisa", "TSCu_Comic", "Comic Sans MS", sans-serif;
     --pw-mono-font-face         : 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'DejaVu Sans Mono', 'source-code-pro', monospace;
-    --pw-image-login-background : var(--image-login-background)
+    --pw-image-login-background : var(--image-login-background);
+    --pw-image-logo             : url(/apps/passwords/img/app.svg);
+    --pw-image-logo-themed      : url(/apps/passwords/img/app-themed.svg);
 }

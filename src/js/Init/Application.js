@@ -76,10 +76,14 @@ class Application {
         let customBackground = SettingsService.get('server.theme.background').indexOf('/core/') === -1 ? 'true':'false';
         document.body.setAttribute('data-custom-background', customBackground);
 
-        let customColor = SettingsService.get('server.theme.color') === '#0082c9' ? 'false':'true';
+        let customColor = SettingsService.get('server.theme.color.primary') === '#0082c9' ? 'false':'true';
         document.body.setAttribute('data-custom-color', customColor);
 
         document.body.style.setProperty('--pw-image-login-background', `url(${SettingsService.get('server.theme.background')})`);
+        document.body.style.setProperty('--pw-image-logo-themed', `url(${SettingsService.get('server.theme.app.icon')})`);
+
+        let appIcon = SettingsService.get('server.theme.color.text') === '#ffffff' ? 'app':'app-dark';
+        document.body.style.setProperty('--pw-image-logo', `url(${OC.appswebroots.passwords}/img/${appIcon}.svg)`);
     }
 
     /**
