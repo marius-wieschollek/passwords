@@ -82,9 +82,9 @@ class ThemeSettingsHelper {
      */
     public function list(): array {
         return [
-            'server.theme.color.primary'    => $this->get('color.primary'),
+            'server.theme.color.primary'    => $this->getColorPrimary(),
             'server.theme.color.text'       => $this->get('color.text'),
-            'server.theme.color.background' => $this->get('color.background'),
+            'server.theme.color.background' => $this->getBackgroundColor(),
             'server.theme.background'       => $this->getBackgroundImage(),
             'server.theme.logo'             => $this->get('logo'),
             'server.theme.label'            => $this->get('label'),
