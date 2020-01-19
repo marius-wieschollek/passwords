@@ -29,20 +29,13 @@ This is why passwords checks automatically if your passwords have been compromis
 You can get convenient e-mail alerts when one of your passwords has been compromised.
 You can activate additional security checks to make sure your passwords fulfill your standards.
 
-#### Legacy API and APP Migration support
-Are you using Fallon Turners Passwords app for Nextcloud/OwnCloud? No problem!
-Passwords will automatically import all the passwords from the old app.
-Take a look at the [legacy migration guide](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Legacy-Migration) for more details.
-Thanks to the legacy API support you can even keep applications using the old API.
-(But passwords with client side encryption are not available on the old API)
-
 #### Build upon modern standards
 Passwords is fast and uses modern web technology to give you the best experience possible.
 Rather than implementing own and possibly error-prone encryption algorithms Passwords uses standardized and well tested APIs to encrypt your passwords.
 The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
-Passwords is available in english, german, french, dutch, swedish, czech and russian.
+Passwords is available in english, german, french, spanish, dutch, swedish, czech and russian.
 
 ## Security
 #### Server Side Encryption
@@ -82,9 +75,9 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 * [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
 
 ## Development
-* Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/download?job=Assemble).
+* Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
-* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/home#developers).
+* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index).
 
 ## Licenses and Legal Information
 See [Licenses.md](Licenses.md)
