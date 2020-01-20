@@ -76,7 +76,7 @@
                 <notnull>true</notnull>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_password_index</name>
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
@@ -240,7 +240,7 @@
                 <default>CLIENT::UNKNOWN</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_password_revision_index</name>
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
@@ -306,7 +306,7 @@
                 <notnull>true</notnull>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_folder_index</name>
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
@@ -430,7 +430,7 @@
                 <default>CLIENT::UNKNOWN</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_folder_revision_index</name>
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
@@ -490,7 +490,7 @@
                 <notnull>true</notnull>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_tag_index</name>
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
@@ -612,7 +612,7 @@
                 <default>CLIENT::UNKNOWN</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_tag_revision_index</name>
                 <unique>1</unique>
                 <field>
                     <name>user_id</name>
@@ -704,7 +704,7 @@
                 <default>CLIENT::UNKNOWN</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_password_tag_index</name>
                 <unique>1</unique>
                 <field>
                     <name>tag</name>
@@ -817,7 +817,7 @@
                 <default>CLIENT::UNKNOWN</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_share_index</name>
                 <unique>1</unique>
                 <field>
                     <name>uuid</name>
@@ -895,7 +895,7 @@
                 <default>CLIENT::UNKNOWN</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_session_index</name>
                 <unique>1</unique>
                 <field>
                     <name>uuid</name>
@@ -965,7 +965,7 @@
                 <default>false</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_keychain_index</name>
                 <unique>1</unique>
                 <field>
                     <name>uuid</name>
@@ -1037,7 +1037,7 @@
                 <default>false</default>
             </field>
             <index>
-                <name>select_index</name>
+                <name>pw_challenge_index</name>
                 <unique>1</unique>
                 <field>
                     <name>uuid</name>
