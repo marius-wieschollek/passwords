@@ -37,12 +37,12 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
-* `npm run start` - Start the docker server. Use `postgres:start`, `ldap:start` or `saml:start` to include these services
-* `npm run stop` - Stop the docker server. Use `postgres:stop`, `ldap:stop` or `saml:stop` to include these services
+* `npm run start` - Start the docker server. Use `postgres:start`, `sqlite:start`, `ldap:start` or `saml:start` to include these services
+* `npm run stop` - Stop the docker server. Use `postgres:stop`, `sqlite:stop`, `ldap:stop` or `saml:stop` to include these services
 * `npm run cron` - Execute cron jobs
 * `npm run shell` - Open a shell in the container
 * `npm run shell:root` - Open a root shell in the container
-* `npm run down` - Remove docker containers and volumes. Use `postgres:down`, `ldap:down` or `saml:down` to include these services
+* `npm run down` - Remove docker containers and volumes. Use `postgres:down`, `sqlite:down`, `ldap:down` or `saml:down` to include these services
 * `npm run docker:build` - Start docker and build images
 * `npm run build` - Create production build of JS/CSS files
 * `npm run build:nightly` - Create nightly build of JS/CSS files

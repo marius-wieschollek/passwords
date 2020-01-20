@@ -16,6 +16,9 @@
         "postgres:start": "docker-compose -f docker-compose.yml -f docker/configs/postgres.yml up -d",
         "postgres:stop": "docker-compose -f docker-compose.yml -f docker/configs/postgres.yml stop",
         "postgres:down": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose -f docker-compose.yml -f docker/configs/postgres.yml down --volumes",
+        "sqlite:start": "docker-compose -f docker-compose.yml -f docker/configs/sqlite.yml up -d",
+        "sqlite:stop": "docker-compose -f docker-compose.yml -f docker/configs/sqlite.yml stop",
+        "sqlite:down": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose -f docker-compose.yml -f docker/configs/sqlite.yml down --volumes",
         "logs": "docker-compose logs -f app",
         "docker:build": "docker-compose up -d --build",
         "shell": "docker exec -itu www-data passwords-php bash",
@@ -28,7 +31,7 @@
         "handbook": "codeceptjs run --steps",
         "selenium": "docker run --net=host selenium/standalone-firefox",
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
-        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local"
+        "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
     "dependencies": {},
     "devDependencies": {
