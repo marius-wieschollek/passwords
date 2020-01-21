@@ -4,6 +4,7 @@
             <img class="icon"
                  :src="revision.icon"
                  loading="lazy"
+                 width="32" height="32"
                  alt="">
             <span class="label">{{ revision.label }}</span>
             <span class="time">{{ getDateTime(revision.created) }}</span>

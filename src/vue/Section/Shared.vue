@@ -14,7 +14,7 @@
                 <password-line :password="password" v-for="password in passwords" :key="password.id">
                     <ul slot="middle" class="line-share-icons">
                         <li v-for="user in getShareUsers(password.id)" :key="user.id" :title="user.name">
-                            <img :src="user.icon" :title="user.name" :alt="user.name" loading="lazy"/>
+                            <img :src="user.icon" :title="user.name" :alt="user.name" loading="lazy" width="24" height="24"/>
                             {{user.name}}
                         </li>
                     </ul>
