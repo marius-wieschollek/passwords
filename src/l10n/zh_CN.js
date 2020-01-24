@@ -139,7 +139,7 @@
             'Toggle share permissions'            : '切换共享权限',
             'Stop sharing'                        : '停止共享',
             'Date'                                : '日期',
-            'Default Cache (0 files, 0 B)'        : '默认缓存(0 , 0 B',
+            'Default Cache (0 files, 0 B)'        : '默认缓存（0 个文件，0 B）',
             'Avatars Cache (0 files, 0 B)'        : '头像缓存（0 个文件，0 B）',
             'Favicon Cache (0 files, 0 B)'        : '网站图标缓存（0 个文件，0 B）',
             'Preview Cache (0 files, 0 B)'        : '预览缓存（0 个文件，0 B）',
