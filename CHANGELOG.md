@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Added
  - Spanish translation
+ - Chinese translation
  - Database indexes
  - Performance improvements
 ### Changed
