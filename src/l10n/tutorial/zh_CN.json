@@ -35,7 +35,7 @@
             "Clean up"                      : "清理",
             "Success"                       : "成功",
             "Failed"                        : "失败",
-            "Go to Apps & Extensions"       : "前往 应用程序与扩展",
+            "Go to Apps and Extensions"     : "前往 应用程序与扩展",
             "Continue"                      : "继续",
             "Skip"                          : "跳过",
             "Close"                         : "关闭",
@@ -48,14 +48,14 @@
             "Read our tips for admins"      : "阅读我们的管理员提示"
         },
         {
-            "There are many settings so you can customize your experience."                         : "这里有许多设置，您可以个性化您的体验。",
-            "You can find all of them in \"More\", but we put the most common here:"                : "您可以在\"更多\"中找到所有它们，但是我们在这里放了最常用的：",
-            "Passwords offers modern and strong encryption to protect your data from prying eyes."  : "密码提供了现代而强大的加密功能，可保护您的数据免遭窥视。",
-            "Choose a secure password below to activate the ultimate protection for your passwords.": "在下面选择一个安全密码，以开启对密码的终极保护。",
-            "Access your passwords with ease from anywhere, thanks to our apps and extensions."     : "得益于我们的应用和扩展程序，您可以从任何地方轻松访问密码。",
-            "You can find our Apps & Extensions section in \"More\" or just click the button below.": "您可以在\"更多\"中找到我们的“应用程序和扩展”部分，或单击下面的按钮。",
-            "Passwords can be customized in a lot of different ways."                               : "可以通过许多不同的方式自定义密码。",
-            "As administrator you might want to take a look at these common settings."              : "作为管理员，您可能希望查看这些常用设置。"
+            "There are many settings so you can customize your experience."                           : "这里有许多设置，您可以个性化您的体验。",
+            "You can find all of them in \"More\", but we put the most common here:"                  : "您可以在\"更多\"中找到所有它们，但是我们在这里放了最常用的：",
+            "Passwords offers modern and strong encryption to protect your data from prying eyes."    : "密码提供了现代而强大的加密功能，可保护您的数据免遭窥视。",
+            "Choose a secure password below to activate the ultimate protection for your passwords."  : "在下面选择一个安全密码，以开启对密码的终极保护。",
+            "Access your passwords with ease from anywhere, thanks to our apps and extensions."       : "得益于我们的应用和扩展程序，您可以从任何地方轻松访问密码。",
+            "You can find our Apps and Extensions section in \"More\" or just click the button below.": "您可以在\"更多\"中找到我们的“应用程序和扩展”部分，或单击下面的按钮。",
+            "Passwords can be customized in a lot of different ways."                                 : "可以通过许多不同的方式自定义密码。",
+            "As administrator you might want to take a look at these common settings."                : "作为管理员，您可能希望查看这些常用设置。"
         }
     ],
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

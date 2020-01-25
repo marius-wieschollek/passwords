@@ -121,6 +121,7 @@
             'Backup and Restore'                  : '备份与还原',
             "Settings"                            : '设置',
             'Handbook'                            : '参考手册',
+            'Apps and Extensions'                 : 'Apps & Extensions',
             '{name} has shared this with you'     : '{name} 和您共享了这个',
             '{editable} and {shareable}.'         : '{editable} 和 {shareable}。',
             'Editing allowed'                     : '可以编辑',

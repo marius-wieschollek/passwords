@@ -111,6 +111,7 @@
             'Backup and Restore'                  : 'Záloha a obnovení',
             'Browser Extension'                   : 'Rozšíření prohlížeče',
             'Handbook'                            : 'Příručka',
+            'Apps and Extensions'                 : 'Apps & Extensions',
             'Search user'                         : 'Hledat uživatele',
             'Set expiration date'                 : 'Nastavte vypršení platnosti',
             'Expires {date}'                      : 'Vyprší dne {date}',

@@ -72,8 +72,8 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="{ name: 'Apps & Extensions'}" active-class="active">
-                        <translate say="Apps & Extensions" icon="puzzle-piece"/>
+                    <router-link :to="{ name: 'Apps and Extensions'}" active-class="active">
+                        <translate say="Apps and Extensions" icon="puzzle-piece"/>
                     </router-link>
                 </li>
             </ul>
@@ -121,7 +121,7 @@
             SettingsService.observe('client.search.show', (v) => { this.showSearch = v.value; });
 
             router.afterEach(async (to, from) => {
-                let moreRoutes = ['Settings', 'Backup', 'Help', 'Apps & Extensions'];
+                let moreRoutes = ['Settings', 'Backup', 'Help', 'Apps and Extensions'];
 
                 if(moreRoutes.indexOf(from.name) === -1 && moreRoutes.indexOf(to.name) !== -1) {
                     return this.showMore = true;

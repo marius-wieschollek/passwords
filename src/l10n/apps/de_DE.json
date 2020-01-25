@@ -1,6 +1,7 @@
 {
     "translations": [
         {
+            "Android"                : "Android",
             "Browsers"               : "Browser",
             "Official Firefox Client": "Offizieller Firefox Client",
             "Official Chrome Client" : "Offizieller Chrome Client",

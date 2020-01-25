@@ -2,9 +2,9 @@
     <li>
         <p>
             <translate say="Access your passwords with ease from anywhere, thanks to our apps and extensions."/>
-            <translate say="You can find our Apps & Extensions section in &quot;More&quot; or just click the button below."/>
+            <translate say="You can find our Apps and Extensions section in &quot;More&quot; or just click the button below."/>
         </p>
-        <translate tag="div" class="setup-cta" say="Go to Apps & Extensions" @click="openApps"/>
+        <translate tag="div" class="setup-cta" say="Go to Apps and Extensions" @click="openApps"/>
     </li>
 </template>
 
