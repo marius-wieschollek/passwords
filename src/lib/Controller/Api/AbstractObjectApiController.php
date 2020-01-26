@@ -165,7 +165,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
         if($oldRevision->isTrashed()) {
             if($revision !== null && $revision !== $model->getRevision()){
-                throw new ApiException('Invalid revision id', 400);
+                throw new ApiException('Outdated revision id', 400);
             }
 
             $this->modelService->delete($model);
