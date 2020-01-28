@@ -12,7 +12,7 @@ use OCA\Passwords\Services\LoggingService;
  *
  * @package OCA\Passwords\Cron
  */
-class CheckNightlyUpdates extends AbstractCronJob {
+class CheckNightlyUpdates extends AbstractTimedJob {
 
     /**
      * @var ConfigurationService

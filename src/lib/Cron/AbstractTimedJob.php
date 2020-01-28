@@ -17,7 +17,7 @@ use OCA\Passwords\Services\LoggingService;
  *
  * @package OCA\Passwords\Cron
  */
-abstract class AbstractCronJob extends TimedJob {
+abstract class AbstractTimedJob extends TimedJob {
 
     /**
      * @var LoggingService

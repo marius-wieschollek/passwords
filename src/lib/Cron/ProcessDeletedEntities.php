@@ -29,7 +29,7 @@ use OCP\IUserManager;
  *
  * @package OCA\Passwords\Cron
  */
-class ProcessDeletedEntities extends AbstractCronJob {
+class ProcessDeletedEntities extends AbstractTimedJob {
 
     /**
      * @var ConfigurationService

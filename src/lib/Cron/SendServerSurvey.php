@@ -19,7 +19,7 @@ use OCA\Passwords\Services\NotificationService;
  *
  * @package OCA\Passwords\Cron
  */
-class SendServerSurvey extends AbstractCronJob {
+class SendServerSurvey extends AbstractTimedJob {
 
     /**
      * @var ConfigurationService

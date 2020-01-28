@@ -21,7 +21,7 @@ use OCA\Passwords\Services\NotificationService;
  *
  * @package OCA\Passwords\Cron
  */
-class CheckPasswordsJob extends AbstractCronJob {
+class CheckPasswordsJob extends AbstractTimedJob {
 
     /**
      * @var MailService

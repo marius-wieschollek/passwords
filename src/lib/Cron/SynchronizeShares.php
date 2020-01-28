@@ -27,7 +27,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  *
  * @package OCA\Passwords\Cron
  */
-class SynchronizeShares extends AbstractCronJob {
+class SynchronizeShares extends AbstractTimedJob {
 
     const EXECUTION_TIMESTAMP = 'cron/sharing/time';
 
