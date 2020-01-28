@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\User;
 
 use OCA\Passwords\Db\EntityInterface;
+use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -73,14 +74,17 @@ class DeleteUserDataHelper {
     protected $challengeService;
 
     /**
+     * @var SessionMapper
+     */
+    protected $sessionMapper;
+
+    /**
      * @var array
      */
     protected $userConfigKeys
         = [
             'SSEv1UserKey',
             'client/settings',
-            'webui/token',
-            'webui/token/id',
             'user/challenge/id'
         ];
 
@@ -89,6 +93,7 @@ class DeleteUserDataHelper {
      *
      * @param TagService           $tagService
      * @param ShareService         $shareService
+     * @param SessionMapper        $sessionMapper
      * @param UserSettingsHelper   $settings
      * @param FolderService        $folderService
      * @param ConfigurationService $config
@@ -100,6 +105,7 @@ class DeleteUserDataHelper {
     public function __construct(
         TagService $tagService,
         ShareService $shareService,
+        SessionMapper $sessionMapper,
         UserSettingsHelper $settings,
         FolderService $folderService,
         ConfigurationService $config,
@@ -108,14 +114,15 @@ class DeleteUserDataHelper {
         KeychainService $keychainService,
         ChallengeService $challengeService
     ) {
-        $this->userId          = $environment->getUserId();
-        $this->config          = $config;
-        $this->settings        = $settings;
-        $this->tagService      = $tagService;
-        $this->shareService    = $shareService;
-        $this->folderService   = $folderService;
-        $this->passwordService = $passwordService;
-        $this->keychainService = $keychainService;
+        $this->userId           = $environment->getUserId();
+        $this->config           = $config;
+        $this->settings         = $settings;
+        $this->tagService       = $tagService;
+        $this->shareService     = $shareService;
+        $this->sessionMapper    = $sessionMapper;
+        $this->folderService    = $folderService;
+        $this->passwordService  = $passwordService;
+        $this->keychainService  = $keychainService;
         $this->challengeService = $challengeService;
     }
 
@@ -127,6 +134,7 @@ class DeleteUserDataHelper {
     public function deleteUserData(string $userId): void {
         if($this->userId !== null && $this->userId != $userId) throw new \Exception('Invalid user id '.$userId);
 
+        $this->closeSessions($userId);
         $this->deleteObjects($this->tagService, $userId);
         $this->deleteObjects($this->folderService, $userId);
         $this->deleteObjects($this->passwordService, $userId);
@@ -144,7 +152,7 @@ class DeleteUserDataHelper {
      * @throws \Exception
      */
     protected function deleteObjects(AbstractService $service, string $userId): void {
-        /** @var EntityInterface $objects */
+        /** @var EntityInterface[] $objects */
         $objects = $service->findByUserId($userId);
 
         foreach($objects as $object) {
@@ -173,6 +181,19 @@ class DeleteUserDataHelper {
     protected function deleteUserConfig(string $userId): void {
         foreach($this->userConfigKeys as $key) {
             $this->config->deleteUserValue($key, $userId);
+        }
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @throws \Exception
+     */
+    protected function closeSessions(string $userId): void {
+        $sessions = $this->sessionMapper->findAllByUserId($userId);
+
+        foreach($sessions as $session) {
+            $this->sessionMapper->delete($session);
         }
     }
 }
