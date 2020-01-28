@@ -76,6 +76,16 @@ abstract class AbstractService {
     }
 
     /**
+     * @param string $userId
+     *
+     * @return EntityInterface[]
+     * @throws \Exception
+     */
+    public function findByUserId(string $userId): array {
+        return $this->mapper->findAllByUserId($userId);
+    }
+
+    /**
      * @param string $uuid
      *
      * @return EntityInterface
