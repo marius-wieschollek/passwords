@@ -13,6 +13,7 @@ use OCA\Passwords\Helper\User\MoveUserDataHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IUser;
 use OCP\IUserManager;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,7 +25,7 @@ use Symfony\Component\Console\Question\Question;
  *
  * @package OCA\Passwords\Command
  */
-class TransferOwnershipCommand extends \Symfony\Component\Console\Command\Command {
+class TransferOwnershipCommand extends Command {
 
     /**
      * @var ConfigurationService
@@ -183,7 +184,7 @@ class TransferOwnershipCommand extends \Symfony\Component\Console\Command\Comman
         $output->write(' done');
         $output->writeln('');
 
-        return false;
+        return true;
     }
 
     /**
