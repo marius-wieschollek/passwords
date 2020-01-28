@@ -180,7 +180,7 @@ class EncryptionManager {
         }
         password.tags = tags;
 
-        if(!password.shared) {
+        if(!password.shared && password.share === null) {
             await this._deleteObject(password.id, 'password');
             password.cseType = 'CSEv1r1';
 
