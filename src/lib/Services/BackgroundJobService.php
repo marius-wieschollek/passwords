@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use OCA\Passwords\Cron\CheckNightlyUpdates;
 use OCA\Passwords\Cron\ProcessDeletedUser;
 use OCP\BackgroundJob\IJobList;
 
@@ -56,6 +57,27 @@ class BackgroundJobService {
      */
     public function removeDeleteUserJob(string $userId): bool {
         return $this->remove(ProcessDeletedUser::class, $userId);
+    }
+
+    /**
+     * @return bool
+     */
+    public function addNightlyUpdates(): bool {
+        return $this->add(CheckNightlyUpdates::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNightlyUpdates(): bool {
+        return $this->has(CheckNightlyUpdates::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function removeNightlyUpdates(): bool {
+        return $this->remove(CheckNightlyUpdates::class);
     }
 
     /**

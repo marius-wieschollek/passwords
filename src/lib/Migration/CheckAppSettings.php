@@ -9,6 +9,7 @@ namespace OCA\Passwords\Migration;
 
 use OC\User\User;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
@@ -25,7 +26,7 @@ class CheckAppSettings implements IRepairStep {
 
     const APP_BC_BREAK_VERSION          = '2020.1';
     const NEXTCLOUD_MIN_VERSION         = 17;
-    const NEXTCLOUD_RECOMMENDED_VERSION = '17';
+    const NEXTCLOUD_RECOMMENDED_VERSION = '18';
     const PHP_MIN_VERSION               = 70200;
     const PHP_RECOMMENDED_VERSION       = '7.3.0';
 
@@ -50,6 +51,11 @@ class CheckAppSettings implements IRepairStep {
     protected $groupManager;
 
     /**
+     * @var BackgroundJobService
+     */
+    protected $backgroundJobService;
+
+    /**
      * @var null|User[]
      */
     protected $admins = null;
@@ -57,21 +63,24 @@ class CheckAppSettings implements IRepairStep {
     /**
      * CheckAppSettings constructor.
      *
-     * @param ConfigurationService  $config
      * @param IGroupManager         $groupManager
+     * @param ConfigurationService  $config
      * @param NotificationService   $notifications
      * @param ServiceSettingsHelper $serviceSettings
+     * @param BackgroundJobService  $backgroundJobService
      */
     public function __construct(
         IGroupManager $groupManager,
         ConfigurationService $config,
         NotificationService $notifications,
-        ServiceSettingsHelper $serviceSettings
+        ServiceSettingsHelper $serviceSettings,
+        BackgroundJobService $backgroundJobService
     ) {
-        $this->config          = $config;
-        $this->groupManager    = $groupManager;
-        $this->notifications   = $notifications;
-        $this->serviceSettings = $serviceSettings;
+        $this->config               = $config;
+        $this->groupManager         = $groupManager;
+        $this->notifications        = $notifications;
+        $this->serviceSettings      = $serviceSettings;
+        $this->backgroundJobService = $backgroundJobService;
     }
 
     /**
@@ -115,6 +124,10 @@ class CheckAppSettings implements IRepairStep {
         if($ncVersion < self::NEXTCLOUD_MIN_VERSION || PHP_VERSION_ID < self::PHP_MIN_VERSION) {
             $this->sendDeprecatedPlatformNotification();
         }
+
+        if($this->config->getAppValue('nightly/enabled', '0') === '1') {
+            $this->backgroundJobService->addNightlyUpdates();
+        }
     }
 
     /**
@@ -154,7 +167,7 @@ class CheckAppSettings implements IRepairStep {
      */
     protected function getAdmins(): array {
         if($this->admins === null) {
-            $adminGroup = $this->groupManager->get('admin');
+            $adminGroup   = $this->groupManager->get('admin');
             $this->admins = $adminGroup->getUsers();
         }
 

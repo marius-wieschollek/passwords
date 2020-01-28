@@ -50,29 +50,9 @@ class CheckNightlyUpdates extends AbstractTimedJob {
      * @throws \Exception
      */
     protected function runJob($argument): void {
-        $enabled = $this->config->getAppValue('nightly/enabled', '0') === '1';
-        $enabled = $this->migrateNightlyKey($enabled);
-
-        if($enabled) {
+        if($this->config->getAppValue('nightly/enabled', '0') === '1') {
             $this->nightlyAppFetcher->get();
             if($this->nightlyAppFetcher->isDbUpdated()) $this->logger->debug('Fetched latest app database');
         }
-    }
-
-    /**
-     * @param bool $enabled
-     *
-     * @return bool
-     */
-    protected function migrateNightlyKey(bool $enabled): bool {
-        if($this->config->getAppValue('nightly_updates', null) !== null) {
-            if($this->config->getAppValue('nightly_updates', '0') === '1') {
-                $this->config->setAppValue('nightly/enabled', true);
-                $enabled = true;
-            }
-            $this->config->deleteAppValue('nightly_updates');
-        }
-
-        return $enabled;
     }
 }
