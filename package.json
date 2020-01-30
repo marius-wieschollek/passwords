@@ -37,7 +37,7 @@
     "devDependencies": {
         "blueimp-gallery": "^2.36.0",
         "clean-webpack-plugin": "^1.0.1",
-        "codeceptjs": "^2.4.1",
+        "codeceptjs": "^2.4.3",
         "copy-webpack-plugin": "^5.1.1",
         "css-loader": "^3.4.2",
         "csv-hero": "0.0.4",
