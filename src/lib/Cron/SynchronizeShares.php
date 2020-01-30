@@ -436,6 +436,8 @@ class SynchronizeShares extends AbstractTimedJob {
      * @return bool
      */
     protected function canExecute(): bool {
+        $this->config->clearCache();
+
         return $this->environment->getRunType() === EnvironmentService::TYPE_CRON &&
                $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-2 hours');
     }
