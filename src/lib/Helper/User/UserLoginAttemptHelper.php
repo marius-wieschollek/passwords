@@ -71,7 +71,7 @@ class UserLoginAttemptHelper {
      * @return bool
      */
     public function isAttemptAllowed(): bool {
-        if($this->environment->getLoginType() !== EnvironmentService::LOGIN_PASSWORD) return true;
+        if($this->environment->getLoginType() === EnvironmentService::LOGIN_TOKEN) return true;
 
         try {
             $counter = intval($this->config->getUserValue(self::CONFIG_LOGIN_ATTEMPTS, 0));

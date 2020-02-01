@@ -33,8 +33,9 @@ class EnvironmentService {
 
     const LOGIN_NONE     = 'none';
     const LOGIN_TOKEN    = 'token';
-    const LOGIN_PASSWORD = 'password';
     const LOGIN_SESSION  = 'session';
+    const LOGIN_PASSWORD = 'password';
+    const LOGIN_EXTERNAL = 'external';
 
     const CLIENT_MAINTENANCE = 'CLIENT::MAINTENANCE';
     const CLIENT_UNKNOWN     = 'CLIENT::UNKNOWN';
@@ -335,6 +336,7 @@ class EnvironmentService {
 
         $this->client = self::CLIENT_PUBLIC;
         if($userId !== null) throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
+
         return false;
     }
 
@@ -437,8 +439,10 @@ class EnvironmentService {
             $tokenId = $this->session->get('app_password');
 
             return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
-        } else if($uid === $userId) {
+        } else if($uid === $userId && isset($loginCredentials->password) && !empty($loginCredentials->password)) {
             return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
+        } else if($uid === $userId && isset($loginCredentials->password) && empty($loginCredentials->password)) {
+            return $this->getUserInfoFromUserId($userId, $request, $loginName);
         } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
             return $this->impersonateByUid($userId, $loginName, self::LOGIN_PASSWORD);
         }
@@ -490,6 +494,28 @@ class EnvironmentService {
             $this->userLogin = $loginName;
             $this->client    = $this->getClientFromRequest($request, $loginName);
             $this->loginType = self::LOGIN_PASSWORD;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string|null $userId
+     * @param IRequest    $request
+     * @param string      $loginName
+     *
+     * @return bool
+     */
+    protected function getUserInfoFromUserId(?string $userId, IRequest $request, string $loginName): bool {
+        /** @var false|\OCP\IUser $loginUser */
+        $loginUser = $this->userManager->get($loginName);
+        if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
+            $this->user      = $loginUser;
+            $this->userLogin = $loginName;
+            $this->client    = $this->getClientFromRequest($request, $loginName);
+            $this->loginType = self::LOGIN_EXTERNAL;
 
             return true;
         }
