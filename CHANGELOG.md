@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+ - App crashes when social login used
 
 ## 2020.2.0 - Feature release
 ### Added
