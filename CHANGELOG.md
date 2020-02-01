@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2020.2.0 - Feature release
 ### Added
  - Spanish translation
  - Chinese translation
