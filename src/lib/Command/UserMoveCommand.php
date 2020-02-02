@@ -25,7 +25,7 @@ use Symfony\Component\Console\Question\Question;
  *
  * @package OCA\Passwords\Command
  */
-class TransferOwnershipCommand extends Command {
+class UserMoveCommand extends Command {
 
     /**
      * @var ConfigurationService
