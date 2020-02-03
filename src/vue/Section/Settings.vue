@@ -490,6 +490,7 @@
                         location.href = location.href.replace(location.hash, '');
                     }
                 } catch(e) {
+                    this.locked = false;
                     console.error(e);
                     Messages.alert('Invalid Password');
                 }
