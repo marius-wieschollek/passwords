@@ -11,7 +11,7 @@ use OCA\Passwords\Services\LoggingService;
  *
  * @package OCA\Passwords\Cron
  */
-class CleanUpSessions extends AbstractCronJob {
+class CleanUpSessions extends AbstractTimedJob {
 
     /**
      * @var SessionMapper

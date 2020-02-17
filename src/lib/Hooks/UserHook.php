@@ -7,7 +7,9 @@
 
 namespace OCA\Passwords\Hooks;
 
-use OCA\Passwords\Services\ConfigurationService;
+use Exception;
+use InvalidArgumentException;
+use OCA\Passwords\Services\BackgroundJobService;
 use OCP\IUser;
 
 /**
@@ -18,45 +20,34 @@ use OCP\IUser;
 class UserHook {
 
     /**
-     * @var ConfigurationService
+     * @var BackgroundJobService
      */
-    protected $config;
+    protected $backgroundJobService;
 
     /**
      * UserHook constructor.
      *
-     * @param ConfigurationService $config
+     * @param BackgroundJobService $backgroundJobService
      */
-    public function __construct(ConfigurationService $config) {
-        $this->config = $config;
+    public function __construct(BackgroundJobService $backgroundJobService) {
+        $this->backgroundJobService = $backgroundJobService;
     }
 
     /**
-     * @param string $user
+     * @param string $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function preCreateUser(string $user): void {
-        $deletedUsers = $this->getDeletedUsers();
-        if(in_array($user, $deletedUsers)) throw new \InvalidArgumentException("The username {$user} is queued for deletion");
+    public function preCreateUser(string $userId): void {
+        if($this->backgroundJobService->hasDeleteUserJob($userId)) {
+            throw new InvalidArgumentException("The username {$userId} is queued for deletion");
+        }
     }
 
     /**
      * @param IUser $user
      */
     public function postDelete(IUser $user): void {
-        $deletedUsers   = $this->getDeletedUsers();
-        $deletedUsers[] = $user->getUID();
-        $deletedUsers   = array_unique($deletedUsers);
-        $this->config->setAppValue('users/deleted', json_encode($deletedUsers));
-    }
-
-    /**
-     * @return array
-     */
-    protected function getDeletedUsers(): array {
-        $deletedUsers = json_decode($this->config->getAppValue('users/deleted', '{}'), true);
-
-        return $deletedUsers;
+        $this->backgroundJobService->addDeleteUserJob($user->getUID());
     }
 }

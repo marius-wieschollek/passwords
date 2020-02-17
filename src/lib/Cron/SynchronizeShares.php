@@ -27,7 +27,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  *
  * @package OCA\Passwords\Cron
  */
-class SynchronizeShares extends AbstractCronJob {
+class SynchronizeShares extends AbstractTimedJob {
 
     const EXECUTION_TIMESTAMP = 'cron/sharing/time';
 
@@ -436,6 +436,8 @@ class SynchronizeShares extends AbstractCronJob {
      * @return bool
      */
     protected function canExecute(): bool {
+        $this->config->clearCache();
+
         return $this->environment->getRunType() === EnvironmentService::TYPE_CRON &&
                $this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0) < strtotime('-2 hours');
     }

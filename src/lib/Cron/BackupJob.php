@@ -14,7 +14,7 @@ use OCP\Util;
  *
  * @package OCA\Passwords\Cron
  */
-class BackupJob extends AbstractCronJob {
+class BackupJob extends AbstractTimedJob {
 
     /**
      * @var BackupService

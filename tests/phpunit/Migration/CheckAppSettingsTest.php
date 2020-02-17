@@ -9,6 +9,7 @@ namespace OCA\Passwords\Migration;
 
 use Exception;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
@@ -53,6 +54,11 @@ class CheckAppSettingsTest extends TestCase {
     protected $configurationService;
 
     /**
+     * @var MockObject|BackgroundJobService
+     */
+    protected $backgroundService;
+
+    /**
      *
      */
     protected function setUp(): void {
@@ -60,7 +66,8 @@ class CheckAppSettingsTest extends TestCase {
         $this->settingsHelper       = $this->createMock(ServiceSettingsHelper::class);
         $this->notificationService  = $this->createMock(NotificationService::class);
         $this->configurationService = $this->createMock(ConfigurationService::class);
-        $this->checkAppSettings     = new CheckAppSettings($this->groupManager, $this->configurationService, $this->notificationService, $this->settingsHelper);
+        $this->backgroundService    = $this->createMock(BackgroundJobService::class);
+        $this->checkAppSettings     = new CheckAppSettings($this->groupManager, $this->configurationService, $this->notificationService, $this->settingsHelper, $this->backgroundService);
     }
 
     /**
@@ -247,6 +254,54 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
         $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
+        try {
+            $this->checkAppSettings->run(new IOutput());
+        } catch(Exception $e) {
+            $this->fail($e->getMessage());
+        }
+    }
+
+    /**
+     *
+     */
+    public function testSetUpNightlyJobEnabled() {
+        $this->settingsHelper->method('get')->willReturnMap(
+            [
+                ['favicon', ['value' => 'none']],
+                ['favicon.api', ['value' => '']],
+                ['preview', ['value' => 'none']],
+                ['preview.api', ['value' => '', 'depends' => ['service.preview' => []]]],
+            ]
+        );
+
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
+        $this->configurationService->expects($this->once())->method('getAppValue')->with('nightly/enabled', '0')->willReturn('1');
+        $this->backgroundService->expects($this->once())->method('addNightlyUpdates');
+
+        try {
+            $this->checkAppSettings->run(new IOutput());
+        } catch(Exception $e) {
+            $this->fail($e->getMessage());
+        }
+    }
+
+    /**
+     *
+     */
+    public function testSetUpNightlyJobDisabled() {
+        $this->settingsHelper->method('get')->willReturnMap(
+            [
+                ['favicon', ['value' => 'none']],
+                ['favicon.api', ['value' => '']],
+                ['preview', ['value' => 'none']],
+                ['preview.api', ['value' => '', 'depends' => ['service.preview' => []]]],
+            ]
+        );
+
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
+        $this->configurationService->expects($this->once())->method('getAppValue')->with('nightly/enabled', '0')->willReturn('0');
+        $this->backgroundService->expects($this->never())->method('addNightlyUpdates');
+
         try {
             $this->checkAppSettings->run(new IOutput());
         } catch(Exception $e) {

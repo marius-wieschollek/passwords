@@ -40,7 +40,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * ... und vieles mehr
 ]]>
     </description>
-    <version>2020.2.1-BUILD</version>
+    <version>2020.3.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -87,9 +87,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <nextcloud min-version="17" max-version="18" />
     </dependencies>
     <background-jobs>
-        <job>OCA\Passwords\Cron\ProcessDeletedUsers</job>
         <job>OCA\Passwords\Cron\ProcessDeletedEntities</job>
-        <job>OCA\Passwords\Cron\CheckNightlyUpdates</job>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
         <job>OCA\Passwords\Cron\SendServerSurvey</job>
@@ -112,6 +110,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <command>OCA\Passwords\Command\BackupExportCommand</command>
         <command>OCA\Passwords\Command\BackupImportCommand</command>
         <command>OCA\Passwords\Command\BackupDeleteCommand</command>
+        <command>OCA\Passwords\Command\UserMoveCommand</command>
+        <command>OCA\Passwords\Command\UserDeleteCommand</command>
     </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>

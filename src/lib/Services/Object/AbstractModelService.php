@@ -58,16 +58,6 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
-     * @param string $userId
-     *
-     * @return ModelInterface[]
-     * @throws \Exception
-     */
-    public function findByUserId(string $userId): array {
-        return $this->mapper->findAllByUserId($userId);
-    }
-
-    /**
      * @param $search
      *
      * @return ModelInterface|EntityInterface|null
