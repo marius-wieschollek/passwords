@@ -137,7 +137,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         $customFields = $revision->getCustomFields();
 
         if(substr($customFields, 0, 1) === '[') return false;
-        if($customFields === '{}') {
+        if($customFields === '{}' || empty($customFields)) {
             $revision->setCustomFields('[]');
 
             return true;
