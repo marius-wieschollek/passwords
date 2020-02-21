@@ -260,6 +260,7 @@
                         font-weight : bold;
                     }
                 }
+
                 @media (max-width : $width-large) {
                     display : none;
                 }
@@ -432,10 +433,51 @@
             }
 
             blockquote {
-                border-left   : 4px solid var(--color-box-shadow);
-                background    : var(--color-background-dark);
-                padding       : 1em 1em 0 1em;
-                margin-bottom : 1em;
+                border-left : 4px solid var(--color-box-shadow);
+                background  : var(--color-background-dark);
+                padding     : 1em 1em 0 1em;
+                margin      : 0 0 1em 0;
+
+                &.info,
+                &.warning,
+                &.important,
+                &.recommended {
+                    border-color     : var(--color-box-shadow);
+                    background-color : var(--color-primary-element-light);
+                    color            : var(--color-primary-text);
+                    border-radius    : 3px;
+                    padding-left     : .75rem;
+
+                    p:first-of-type:before {
+                        font-family  : var(--pw-icon-font-face);
+                        content      : '\f05a';
+                        margin-right : .5em;
+                    }
+                }
+
+                &.important {
+                    background-color : var(--color-error);
+
+                    p:first-of-type:before {
+                        content : '\f071'
+                    }
+                }
+
+                &.warning {
+                    background-color : var(--color-warning);
+
+                    p:first-of-type:before {
+                        content : '\f06a'
+                    }
+                }
+
+                &.recommended {
+                    background-color : var(--color-success);
+
+                    p:first-of-type:before {
+                        content : '\f055'
+                    }
+                }
             }
 
             table {
@@ -447,6 +489,7 @@
                     th {
                         background-color : var(--color-background-dark);
                     }
+
                     th,
                     td {
                         border  : 1px solid var(--color-border-dark);
