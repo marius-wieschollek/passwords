@@ -149,6 +149,7 @@
         "Your chosen favicon service requires an api key or endpoint, but none is given."           : "Der von Ihnen gewählte Favicon-Service benötigt einen API-Endpoint um zu funktionieren.",
         "Your chosen preview service requires an api key or endpoint, but none is given."           : "Der von Ihnen gewählte Webseitenansichtengenerator benötigt einen API-Schlüssel oder API-Endpunkt um zu funktionieren.",
         "Open the admin settings to update the configuration or chose another service."             : "Öffnen Sie die Einstellungen um die Konfiguration abzuschließen oder einen anderen Service zu verwenden.",
+        "Suspicious amount of failed login attempts detected."                                      : "Verdächtige Häufung fehlgeschlagener Anmeldeversuche entdeckt",
         "We have detected several failed attempts to unlock your password database by \"%s\"."      : "Wir haben mehrere fehlgeschlagene Versuche von \"%s\" bemerkt, Ihre Passwortdatenbank zu öffnen.",
         "This could indicate that someone is trying to break into your account."                    : "Das könnte bedeuten, dass Dritte versuchen, in Ihr Konto einzudringen.",
         "To prevent further attempts, the API credentials of this client were revoked."             : "Um weitere Versuche zu verhindern, wurden die Zugangsdaten dieses Gerätes widerrufen.",
