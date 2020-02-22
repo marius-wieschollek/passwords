@@ -1,4 +1,11 @@
 ## [Unreleased]
+### Added
+ - User delete cli command
+ - User move cli command
+### Changed
+ - 2FA only required if master password is set
+### Fixed
+ - Database repair does not attempt to fix custom fields
 
 ## 2020.2.1 - Bugfix release
 ### Fixed
