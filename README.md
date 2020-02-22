@@ -2,14 +2,21 @@
 > Easy to use yet feature-rich and secure password manager for Nextcloud
 
 ## Contents
+* [Support](#support)
 * [Features](#features)
 * [Security](#security)
 * [Apps](#apps)
 * [API](#api)
 * [Installation](#installation)
-* [Support](#support)
 * [Development](#development)
 * [Licenses](Licenses.md)
+
+## Support
+* [Official Chat](https://t.me/nc_passwords)
+* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+* [User Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index)
+* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
+* [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
 
 ## Features
 #### Easy to use web interface
@@ -68,11 +75,6 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 * Linux based OS
 * Nextcloud 17+
 * PHP 7.2+
-
-## Support
-* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
-* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
-* [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
 
 ## Development
 * Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
