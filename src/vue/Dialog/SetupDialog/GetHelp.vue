@@ -7,18 +7,26 @@
             <translate say="In any other case, our community is the right place to ask your questions."/>
         </p>
         <div class="help-options">
-            <translate tag="a" say="Handbook" icon="book" target="_blank" href="#/help"/>
-            <translate tag="a" say="Forum" icon="users" target="_blank" href="//help.nextcloud.com/c/apps/passwords"/>
-            <!-- <translate tag="a" say="Chat" icon="telegram" href="//t.me/nc-passwords"/> -->
+            <translate tag="a" say="Handbook" icon="book" @click.prevent="openHelp"/>
+            <web text="Forum" icon="users" target="_blank" href="https://help.nextcloud.com/c/apps/passwords"/>
+            <web text="Chat" icon="telegram" href="https://t.me/nc_passwords"/>
         </div>
     </li>
 </template>
 
 <script>
     import Translate from '@vue/Components/Translate';
+    import Messages from '@js/Classes/Messages';
+    import Web from '@vc/Web';
 
     export default {
-        components: {Translate}
+        components: {Web, Translate},
+        methods   : {
+            openHelp() {
+                this.$emit('redirect', {path: '/help'});
+                Messages.notification('Handbook will be opened after the tutorial');
+            }
+        }
     };
 </script>
 
@@ -49,7 +57,7 @@
             a {
                 text-align : center;
                 cursor     : pointer;
-                color      : var(--color-main-text);
+                color      : var(--color-primary);
                 margin     : 0 1.5rem;
 
                 i {

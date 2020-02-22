@@ -1,5 +1,6 @@
 <template>
     <a :href="getHref" :target="getTarget" :rel="getRel" :class="className" :title="getTitle">
+        <i v-if="icon" :class="getIcon" aria-hidden="true"></i>
         {{ getText }}
         <slot name="default" v-if="!getText"></slot>
     </a>
@@ -29,6 +30,14 @@
             className  : {
                 type     : String,
                 'default': 'link'
+            },
+            icon          : {
+                type     : String,
+                'default': null
+            },
+            iconClass     : {
+                type     : String,
+                'default': null
             }
         },
         computed: {
@@ -52,6 +61,9 @@
             },
             getRel() {
                 return this.getTarget === '_blank' ? 'noreferrer noopener':'';
+            },
+            getIcon() {
+                return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);
             }
         }
     };
