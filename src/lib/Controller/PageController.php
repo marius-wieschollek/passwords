@@ -9,7 +9,6 @@ namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
-use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
@@ -53,11 +52,6 @@ class PageController extends Controller {
     protected $notifications;
 
     /**
-     * @var UserTokenHelper
-     */
-    protected $userTokenHelper;
-
-    /**
      * @var UserChallengeService
      */
     protected $challengeService;
@@ -70,7 +64,6 @@ class PageController extends Controller {
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
-     * @param UserTokenHelper      $userTokenHelper
      * @param NotificationService  $notifications
      * @param UserChallengeService $challengeService
      */
@@ -80,7 +73,6 @@ class PageController extends Controller {
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
         EnvironmentService $environment,
-        UserTokenHelper $userTokenHelper,
         NotificationService $notifications,
         UserChallengeService $challengeService
     ) {
@@ -90,7 +82,6 @@ class PageController extends Controller {
         $this->settings         = $settings;
         $this->environment      = $environment;
         $this->notifications    = $notifications;
-        $this->userTokenHelper  = $userTokenHelper;
         $this->challengeService = $challengeService;
     }
 
@@ -138,11 +129,11 @@ class PageController extends Controller {
         $userSettings = json_encode($this->settings->list());
         Util::addHeader('meta', ['name' => 'settings', 'content' => $userSettings]);
 
-        list($token, $user) = $this->tokenHelper->getWebUiToken();
+        [$token, $user] = $this->tokenHelper->getWebUiToken();
         Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
         Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
 
-        $authenticate = $this->challengeService->hasChallenge() || $this->userTokenHelper->hasToken() ? 'true':'false';
+        $authenticate = $this->challengeService->hasChallenge() ? 'true':'false';
         Util::addHeader('meta', ['name' => 'pw-authenticate', 'content' => $authenticate]);
 
         $impersonate = $this->environment->isImpersonating() ? 'true':'false';
@@ -155,7 +146,7 @@ class PageController extends Controller {
     protected function getContentSecurityPolicy(TemplateResponse $response): void {
         $manualHost = parse_url($this->settings->get('server.handbook.url'), PHP_URL_HOST);
 
-        $csp        = $response->getContentSecurityPolicy();
+        $csp = $response->getContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain($manualHost);
         $csp->addAllowedConnectDomain('data:');

@@ -171,7 +171,7 @@ class SessionApiController extends AbstractApiController {
      * @throws ApiException
      */
     protected function verifyToken($parameters): void {
-        if($this->tokenHelper->hasToken()) {
+        if($this->challengeService->hasChallenge() && $this->tokenHelper->hasToken()) {
             if(!isset($parameters['token'])) {
                 $this->loginAttempts->registerFailedAttempt();
                 throw new ApiException('Token invalid', Http::STATUS_UNAUTHORIZED);
