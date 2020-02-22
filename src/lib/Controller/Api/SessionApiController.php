@@ -92,10 +92,10 @@ class SessionApiController extends AbstractApiController {
         if(!$this->session->isAuthorized()) {
             if($this->challengeService->hasChallenge()) {
                 $requirements->challenge = $this->challengeService->getChallengeData();
-            }
 
-            if($this->tokenHelper->hasToken()) {
-                $requirements->token = $this->tokenHelper->getProvidersAsArray();
+                if($this->tokenHelper->hasToken()) {
+                    $requirements->token = $this->tokenHelper->getProvidersAsArray();
+                }
             }
         }
 
