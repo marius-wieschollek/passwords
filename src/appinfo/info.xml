@@ -4,12 +4,12 @@
     <name>Passwords</name>
     <summary>Store, manage and access all your passwords with ease.</summary>
     <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter schnell, sicher und überall.</summary>
-    <description><![CDATA[Passwords allows you to store your passwords safely with Nextcloud.
+    <description><![CDATA[Passwords is the most advanced password manager for Nextcloud and allows you to manage and store your passwords safely in your own cloud.
 The intuitive and modern web interface of the app makes it easy to update and add new passwords from anywhere.
 Included security checks help you to keep your online accounts safe and up-to-date.
 You can also share passwords with other Nextcloud users.
 
-**Features**
+## Features
  * Intuitive and modern user interface
  * Password security monitor
  * Secure encryption
@@ -20,9 +20,20 @@ You can also share passwords with other Nextcloud users.
  * Import &amp; Export
  * Browser extensions
  * ... and many more to come
+
+## Support
+* [Official Chat](https://t.me/nc_passwords)
+* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+* [User Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index)
+* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
+
+## Apps & Extensions
+* [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
+* [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+* [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
     </description>
-    <description lang="de"><![CDATA[Passwords ermöglicht es Ihnen, Ihre Passwörter sicher und einfach mit Nextcloud zu verwalten.
+    <description lang="de"><![CDATA[Passwords ist der beste Passwort-Manager für Nextcloud und ermöglicht es Ihnen, Ihre Passwörter sicher und einfach in Ihrer eigenen Cloud zu verwalten.
 Die intuitive Weboberfläche macht es einfach Passwörter von überall aus hinzuzufügen oder zu aktualisieren.
 Dank des eingebauten Sicherheitstests können Sie Ihre Benutzerkonten sicher und Ihre Passwörter aktuell halten.
 Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
@@ -38,6 +49,17 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * Detailliertes Handbuch
  * Browser Extensions
  * ... und vieles mehr
+
+## Hilfe & Unterstützung
+* [Offizieller Chat](https://t.me/nc_passwords)
+* [Offizielles Forum](https://help.nextcloud.com/c/apps/passwords)
+* [Handbuch für Nutzer](https://git.mdns.eu/nextcloud/passwords/wikis/users/Index)
+* [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/wikis/administrators/Index)
+
+## Apps & Extensions
+* [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
+* [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+* [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) von [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
     </description>
     <version>2020.3.0-BUILD</version>
