@@ -80,8 +80,9 @@ class ServerSettingsHelper {
                 if($subKey === 'webdav') return Util::linkToRemote('webdav');
 
                 return $this->urlGenerator->getBaseUrl();
-            case 'app.version':
-                return $this->getAppVersion();
+            case 'app':
+                if($subKey === 'version') return $this->getAppVersion();
+                return null;
             case 'theme':
                 return $this->themeSettings->get($subKey);
             case 'sharing':
