@@ -67,7 +67,7 @@ class ServerSettingsHelper {
      */
     public function get(string $key) {
         if(strpos($key, '.') !== false) {
-            list($scope, $subKey) = explode('.', $key, 2);
+            [$scope, $subKey] = explode('.', $key, 2);
         } else {
             $scope  = $key;
             $subKey = '';
@@ -78,7 +78,10 @@ class ServerSettingsHelper {
                 return $this->getServerVersion();
             case 'baseUrl':
                 if($subKey === 'webdav') return Util::linkToRemote('webdav');
+
                 return $this->urlGenerator->getBaseUrl();
+            case 'app.version':
+                return $this->getAppVersion();
             case 'theme':
                 return $this->themeSettings->get($subKey);
             case 'sharing':
@@ -101,6 +104,7 @@ class ServerSettingsHelper {
                 'server.baseUrl'        => $this->get('baseUrl'),
                 'server.baseUrl.webdav' => $this->get('baseUrl.webdav'),
                 'server.version'        => $this->get('version'),
+                'server.app.version'    => $this->get('app.version'),
                 'server.handbook.url'   => $this->get('handbook.url')
             ],
             $this->themeSettings->list(),
@@ -115,5 +119,15 @@ class ServerSettingsHelper {
         $version = $this->config->getSystemValue('version');
 
         return explode('.', $version, 2)[0];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAppVersion(): string {
+        $version = $this->config->getAppValue('installed_version');
+        $parts = explode('.', $version, 3);
+
+        return "{$parts[0]}.{$parts[1]}";
     }
 }
