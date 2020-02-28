@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2020.3.0 - Feature release
 ### Added
  - User delete cli command
  - User move cli command
