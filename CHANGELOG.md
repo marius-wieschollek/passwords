@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## 2020.3.1 - Bugfix release
+### Fixed
+ - Missing default value for login_type
+
 ## 2020.3.0 - Feature release
 ### Added
  - User delete cli command
