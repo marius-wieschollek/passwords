@@ -860,6 +860,7 @@
                 <type>string</type>
                 <length>12</length>
                 <notnull>true</notnull>
+                <default>none</default>
             </field>
             <field>
                 <name>created</name>
