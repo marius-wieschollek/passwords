@@ -63,6 +63,7 @@ class DeferredActivationService {
      * @return bool
      */
     public function check(string $id, bool $ignoreNightly = false): bool {
+        if($this->isServiceDisabled()) return false;
         if(!$ignoreNightly && $this->isNightly()) return true;
 
         $features = $this->getFeatures();
@@ -109,7 +110,7 @@ class DeferredActivationService {
         $version = $this->config->getAppValue('installed_version');
         if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
 
-        list ($major, $minor) = explode('.', $version);
+        [$major, $minor] = explode('.', $version);
         $mainVersion = $major.'.'.$minor;
         $appFeatures = $json['server'];
 
@@ -163,10 +164,17 @@ class DeferredActivationService {
     protected function getFeaturesFromRemote(): ?string {
         $url = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';
         $this->httpRequest->setUrl($url);
-        $data = $this->httpRequest->sendWithRetry();
+        $data = $this->httpRequest->send();
 
         if($data !== null) $this->fileCache->putFile('deferred-activation.json', $data);
 
         return $data;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isServiceDisabled(): bool {
+        return $this->config->getAppValue('das/enabled', '1') !== '1' || $this->config->getSystemValue('has_internet_connection', true) === false;
     }
 }
