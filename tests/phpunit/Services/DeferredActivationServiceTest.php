@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -59,9 +60,37 @@ class DeferredActivationServiceTest extends TestCase {
     }
 
     /**
+     *
+     */
+    public function testGetDasValue() {
+        $this->configurationService->method('getSystemValue')->willReturn(true);
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['das/enabled', '1', Application::APP_NAME, '1'],
+                ['installed_version', null, Application::APP_NAME, '2020.4.0'],
+            ]
+        );
+
+        $fakeFile = $this->getFileMock();
+        $fakeFile->method('getMTime')->willReturn(time());
+        $fakeFile->method('getContent')->willReturn('{"server":{"2020.4.0":{"test":true}}}');
+        $this->fileCacheService->method('getFile')->willReturn($fakeFile);
+
+        $this->assertEquals(true, $this->deferredActivationService->check('test'));
+    }
+
+    /**
      * @throws ReflectionException
      */
     public function testLocalStorageIsCheckedBeforeFetchingRemote() {
+        $this->configurationService->method('getSystemValue')->willReturn(true);
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['das/enabled', '1', Application::APP_NAME, '1'],
+                ['installed_version', null, Application::APP_NAME, '2020.4.0'],
+            ]
+        );
+
         $fakeFile = $this->getFileMock();
         $fakeFile->method('getMTime')->willReturn(0);
 
@@ -76,8 +105,16 @@ class DeferredActivationServiceTest extends TestCase {
      *
      */
     public function testFetchResultFromRemoteIfMissing() {
+        $this->configurationService->method('getSystemValue')->willReturn(true);
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['das/enabled', '1', Application::APP_NAME, '1'],
+                ['installed_version', null, Application::APP_NAME, '2020.4.0'],
+            ]
+        );
+
         $this->requestHelper->expects($this->once())->method('setUrl')->with('https://example.com/_files/deferred-activation.json');
-        $this->requestHelper->expects($this->once())->method('sendWithRetry');
+        $this->requestHelper->expects($this->once())->method('send');
 
         $this->fileCacheService->method('getFile')->willReturn(null);
         $this->settingsHelper->method('get')->with('handbook.url')->willReturn('https://example.com/');
@@ -89,6 +126,14 @@ class DeferredActivationServiceTest extends TestCase {
      * @throws ReflectionException
      */
     public function testFetchResultIfOutdated() {
+        $this->configurationService->method('getSystemValue')->willReturn(true);
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['das/enabled', '1', Application::APP_NAME, '1'],
+                ['installed_version', null, Application::APP_NAME, '2020.4.0'],
+            ]
+        );
+
         $fakeFile = $this->getFileMock();
         $fakeFile->method('getMTime')->willReturn(0);
         $this->settingsHelper->method('get')->with('handbook.url')->willReturn('https://example.com/');
@@ -96,9 +141,54 @@ class DeferredActivationServiceTest extends TestCase {
         $fakeFile->expects($this->once())->method('getMTime');
         $this->fileCacheService->expects($this->once())->method('getFile')->with('deferred-activation.json');
         $this->requestHelper->expects($this->once())->method('setUrl')->with('https://example.com/_files/deferred-activation.json');
-        $this->requestHelper->expects($this->once())->method('sendWithRetry');
+        $this->requestHelper->expects($this->once())->method('send');
 
         $this->deferredActivationService->check('test');
+    }
+
+    /**
+     *
+     */
+    public function testDefaultEnabledInNightly() {
+        $this->configurationService->method('getSystemValue')->willReturn(true);
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['das/enabled', '1', Application::APP_NAME, '1'],
+                ['installed_version', null, Application::APP_NAME, '2020.4.0-build1234'],
+            ]
+        );
+
+        $this->assertEquals(true, $this->deferredActivationService->check('test'));
+    }
+
+    /**
+     *
+     */
+    public function testForceCheckInNightly() {
+        $this->configurationService->method('getSystemValue')->willReturn(true);
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['das/enabled', '1', Application::APP_NAME, '1'],
+                ['installed_version', null, Application::APP_NAME, '2020.4.0-build1234'],
+            ]
+        );
+
+        $fakeFile = $this->getFileMock();
+        $fakeFile->method('getMTime')->willReturn(time());
+        $fakeFile->method('getContent')->willReturn('{"server":{"2020.4.0":{"test":false}}}');
+        $this->fileCacheService->method('getFile')->willReturn($fakeFile);
+
+        $this->assertEquals(false, $this->deferredActivationService->check('test', true));
+    }
+
+    /**
+     *
+     */
+    public function testDasDisableSetting() {
+        $this->configurationService->expects($this->never())->method('getSystemValue');
+        $this->configurationService->expects($this->exactly(1))->method('getAppValue')->with('das/enabled', '1', Application::APP_NAME)->willReturn('0');
+
+        $this->assertEquals(false, $this->deferredActivationService->check('test'));
     }
 
     /**
