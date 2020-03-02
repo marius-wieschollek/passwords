@@ -192,6 +192,16 @@ class DeferredActivationServiceTest extends TestCase {
     }
 
     /**
+     *
+     */
+    public function testServerOfflineFlag() {
+        $this->configurationService->expects($this->once())->method('getAppValue')->with('das/enabled', '1', Application::APP_NAME)->willReturn('1');
+        $this->configurationService->expects($this->once())->method('getSystemValue')->with('has_internet_connection', true)->willReturn(false);
+
+        $this->assertEquals(false, $this->deferredActivationService->check('test'));
+    }
+
+    /**
      * @return MockObject
      * @throws ReflectionException
      */
