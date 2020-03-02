@@ -169,21 +169,6 @@ class HelperService {
             case self::WORDS_LEIPZIG:
                 return $this->container->query(LeipzigCorporaHelper::class);
             case self::WORDS_SNAKES:
-                /** @var DeferredActivationService $das */
-                $das = $this->container->query(DeferredActivationService::class);
-
-                if($das->check('wo4snakes-fallback', true)) {
-                    if(LeipzigCorporaHelper::isAvailable()) {
-                        return $this->container->query(LeipzigCorporaHelper::class);
-                    }
-                    if(LocalWordsHelper::isAvailable()) {
-                        return $this->container->query(LocalWordsHelper::class);
-                    }
-                    if(RandomCharactersHelper::isAvailable()) {
-                        return $this->container->query(RandomCharactersHelper::class);
-                    }
-                }
-
                 return $this->container->query(SnakesWordsHelper::class);
             case self::WORDS_RANDOM:
                 return $this->container->query(RandomCharactersHelper::class);
