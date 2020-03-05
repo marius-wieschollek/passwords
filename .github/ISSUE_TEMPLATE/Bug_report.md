@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a functional error in the app. If you need assistance with your setup or have questions please go to our forum.
+about: Report a functional error in the app
 labels: bug
 ---
 

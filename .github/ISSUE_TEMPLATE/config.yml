@@ -8,8 +8,8 @@ contact_links:
     about: Ask questions and discuss with other users
   - name: User Handbook
     url: https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index
-    about: Look trough our guides and help articles
-  - name: Admin Handbook
+    about: Learn how to use the app and all the features
+  - name: Administrator Handbook
     url: https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index
     about: Learn about the app and the configuration options
   - name: Official Browser Extension Bugtracker
