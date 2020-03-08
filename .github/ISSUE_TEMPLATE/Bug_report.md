@@ -12,13 +12,14 @@ labels: bug
 ### System Information
 - Nextcloud Version:
 - PHP Version:
+- Database and Version:
 - Passwords Version:
 - Browser and Version:
 - Client OS and Version:
 - Server OS and Version:
 
 ### Steps to reproduce
-1. <!-- Tell us percisely how to reproduce your bug -->
+1. <!-- Describe PRECISELY and DETAILED how to reproduce the bug -->
 2. <!-- Provide sample data if needed -->
 3. <!-- Include relevant user settings and app settings if not standard -->
 
