@@ -34,7 +34,9 @@ What does happen?
 <summary>Nextcloud log</summary>
 
 ```
-See Settings > Log (Copy Raw)
+ - Open the Nextcloud admin settings
+ - Open the "Log" section
+ - Click the "Copy" icon, then Copy Raw
 ```
 </details>
 

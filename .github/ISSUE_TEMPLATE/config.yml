@@ -13,5 +13,5 @@ contact_links:
     url: https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index
     about: Learn about the app and the configuration options
   - name: Official Browser Extension Bugtracker
-    url: https://github.com/marius-wieschollek/passwords-webextension
+    url: https://github.com/marius-wieschollek/passwords-webextension/issues
     about: Report issues or request a feature for the official browser extension
