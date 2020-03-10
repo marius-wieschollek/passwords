@@ -117,6 +117,20 @@ class ThemeSettingsHelperTest extends TestCase {
     }
 
     /**
+     * Test if dark theme background color is returned if dark theme enabled
+     */
+    public function testGetBackgroundColorWithDarkTheme() {
+        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('dark');
+        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
+
+        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
+        $this->configurationService->expects($this->never())->method('isAppEnabled');
+
+        $result = $this->themeSettingsHelper->get('color.background');
+        self::assertEquals('#181818', $result);
+    }
+
+    /**
      * Test if breezedark primary color is returned correctly when the app is enabled
      */
     public function testGetBackgroundColorWithBreezedarkTheme() {

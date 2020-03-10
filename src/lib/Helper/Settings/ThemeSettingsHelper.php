@@ -144,7 +144,7 @@ class ThemeSettingsHelper {
      */
     protected function getBackgroundColor(): string {
         try {
-            if($this->config->getUserValue('theme', 'none', null, 'accessibility') === 'themedark') {
+            if(in_array($this->config->getUserValue('theme', 'none', null, 'accessibility'), ['themedark', 'dark'])) {
                 return '#181818';
             }
         } catch(\Throwable $e) {
