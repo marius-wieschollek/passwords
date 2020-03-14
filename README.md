@@ -74,7 +74,8 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 #### Requirements
 * Linux OS
 * Nextcloud ([latest](https://nextcloud.com/install/#instructions-server))
-* PHP (with [active support](https://www.php.net/supported-versions.php)))
+* PHP (with [active support](https://www.php.net/supported-versions.php))
+* Database (MariaDB, MySQL, PostgreSQL, Sqlite)
 * [Complete list of requirements](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/System-Requirements)
 
 ## Development
