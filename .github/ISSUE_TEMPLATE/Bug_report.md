@@ -5,9 +5,8 @@ labels: bug
 ---
 
 <!--
- * Remember not to include personal data as this is public.
+ Remember not to include personal data as this is public.
 -->
-
 
 ### System Information
 - Nextcloud Version:

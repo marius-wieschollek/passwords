@@ -72,9 +72,10 @@ You can use our [javascript client](https://www.npmjs.com/package/passwords-clie
 Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/apps/passwords).
 
 #### Requirements
-* Linux based OS
-* Nextcloud 17+
-* PHP 7.2+
+* Linux OS
+* Nextcloud ([latest](https://nextcloud.com/install/#instructions-server))
+* PHP (with [active support](https://www.php.net/supported-versions.php)))
+* [Complete list of requirements](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/System-Requirements)
 
 ## Development
 * Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
