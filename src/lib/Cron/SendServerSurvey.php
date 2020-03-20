@@ -39,7 +39,7 @@ class SendServerSurvey extends AbstractTimedJob {
     /**
      * @var float|int
      */
-    protected $interval = 604800;
+    protected $interval = 259200;
 
     /**
      * SendServerSurvey constructor.
