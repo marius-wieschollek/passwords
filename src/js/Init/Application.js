@@ -7,6 +7,7 @@ import SectionAll from '@vue/Section/All';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import EventManager from '@js/Manager/EventManager';
+import AlertManager from '@js/Manager/AlertManager';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
@@ -60,6 +61,7 @@ class Application {
             SearchManager.init();
             EventManager.init();
             KeepAliveManager.init();
+            AlertManager.init();
             EncryptionTestHelper.initTests();
         }
     }

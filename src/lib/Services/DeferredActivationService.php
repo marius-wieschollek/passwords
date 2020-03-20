@@ -73,6 +73,20 @@ class DeferredActivationService {
     }
 
     /**
+     * @return array|null
+     */
+    public function getUpdateInfo(): ?array {
+        if($this->isServiceDisabled()) return null;
+
+        $features = $this->fetchFeatures();
+        if(isset($features['server']['current'])) {
+            return $features['server']['current'];
+        }
+
+        return null;
+    }
+
+    /**
      * Fetch the feature set for this app
      *
      * @return array
@@ -80,15 +94,11 @@ class DeferredActivationService {
     protected function getFeatures(): array {
         if($this->features !== null) return $this->features;
 
-        $data = $this->getFeaturesFromCache();
+        $data = $this->fetchFeatures();
         if($data === null) {
-            $data = $this->getFeaturesFromRemote();
+            $this->features = [];
 
-            if($data === null) {
-                $this->features = [];
-
-                return [];
-            }
+            return [];
         }
 
         $this->features = $this->processFeatures($data);
@@ -97,14 +107,26 @@ class DeferredActivationService {
     }
 
     /**
+     * @return array|null
+     */
+    protected function fetchFeatures(): ?array {
+        $data = $this->getFeaturesFromCache();
+        if($data !== null) return json_decode($data, true);
+
+        $data = $this->getFeaturesFromRemote();
+        if($data !== null) return json_decode($data, true);
+
+        return null;
+    }
+
+    /**
      * Process the raw json into the feature set for this app
      *
-     * @param $data
+     * @param $json
      *
      * @return array
      */
-    protected function processFeatures($data): array {
-        $json = json_decode($data, true);
+    protected function processFeatures($json): array {
         if(!isset($json['server'])) return [];
 
         $version = $this->config->getAppValue('installed_version');

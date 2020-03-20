@@ -162,7 +162,10 @@
         "To increase security, we recommend using device specific tokens instead of your password." : "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden.",
         "The passwords app will no longer support your server configuration"                        : "Passwörter beendet die Unterstützung für Ihre Server-Konfiguration",
         "The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s."       : "Die kommende Version %s der Passwörter-App erfordert mindestens Nextcloud %s und PHP %s.",
-        "To keep receiving security and feature updates, please update your server."                : "Um weiterhin Sicherheits- und Funktionsaktualisierungen zu erhalten, aktualisieren Sie bitte Ihren Server."
+        "To keep receiving security and feature updates, please update your server."                : "Um weiterhin Sicherheits- und Funktionsaktualisierungen zu erhalten, aktualisieren Sie bitte Ihren Server.",
+        "App upgrade required"                                                                      : "App-Aktualisierung notwendig",
+        "This version of the passwords app is outdated and should be upgraded."                     : "Diese Version der Passwörter-App ist veraltet und sollte aktualisiert werden.",
+        "This upgrade requires Nextcloud %s and PHP %s."                                            : "Diese Aktualisierung benötigt Nextcloud %s und PHP %s."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

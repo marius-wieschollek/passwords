@@ -9,6 +9,7 @@ namespace OCA\Passwords\Controller;
 
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
+use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
@@ -47,6 +48,11 @@ class PageController extends Controller {
     protected $environment;
 
     /**
+     * @var UpgradeCheckHelper
+     */
+    protected $upgradeCheck;
+
+    /**
      * @var NotificationService
      */
     protected $notifications;
@@ -64,6 +70,7 @@ class PageController extends Controller {
      * @param ApiTokenHelper       $tokenHelper
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
+     * @param UpgradeCheckHelper   $upgradeCheck
      * @param NotificationService  $notifications
      * @param UserChallengeService $challengeService
      */
@@ -73,6 +80,7 @@ class PageController extends Controller {
         ApiTokenHelper $tokenHelper,
         ConfigurationService $config,
         EnvironmentService $environment,
+        UpgradeCheckHelper $upgradeCheck,
         NotificationService $notifications,
         UserChallengeService $challengeService
     ) {
@@ -81,6 +89,7 @@ class PageController extends Controller {
         $this->tokenHelper      = $tokenHelper;
         $this->settings         = $settings;
         $this->environment      = $environment;
+        $this->upgradeCheck     = $upgradeCheck;
         $this->notifications    = $notifications;
         $this->challengeService = $challengeService;
     }
@@ -138,6 +147,9 @@ class PageController extends Controller {
 
         $impersonate = $this->environment->isImpersonating() ? 'true':'false';
         Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $impersonate]);
+
+        $upgrade = $this->upgradeCheck->getUpgradeMessage();
+        if($upgrade !== null) Util::addHeader('meta', ['name' => 'pw-alert', 'content' => json_encode([$upgrade])]);
     }
 
     /**
