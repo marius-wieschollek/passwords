@@ -1,4 +1,10 @@
 ## [Unreleased]
+### Added
+ - Remote feature activation can be disabled
+ - App upgrade alert for outdated versions
+### Fixed
+ - Dark theme detection
+ - Broken https setup link
 
 ## 2020.3.1 - Bugfix release
 ### Fixed
