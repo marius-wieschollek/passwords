@@ -1,4 +1,4 @@
-## [Unreleased]
+## 2020.4.0 - Feature release
 ### Added
  - Remote feature activation can be disabled
  - App upgrade alert for outdated versions
