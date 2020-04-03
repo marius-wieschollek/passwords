@@ -1,3 +1,7 @@
+## [Unreleased]
+### Fixed
+ - Passwords causes error in Talk when impersonating user
+
 ## 2020.4.0 - Feature release
 ### Added
  - Remote feature activation can be disabled

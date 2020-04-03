@@ -28,7 +28,7 @@ You can also share passwords with other Nextcloud users.
  * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
 
 **Apps & Extensions**
- * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
+ * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
  * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
@@ -57,12 +57,12 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/wikis/administrators/Index)
 
 **Apps & Extensions**
- * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords/)
+ * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
  * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) von [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
     </description>
-    <version>2020.4.0-BUILD</version>
+    <version>2020.4.1-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
