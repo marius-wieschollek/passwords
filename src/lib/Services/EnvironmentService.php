@@ -435,14 +435,16 @@ class EnvironmentService {
         $loginName        = $this->session->get('loginname');
         $uid              = $loginCredentials->uid;
 
-        if(isset($loginCredentials->isTokenLogin) && $loginCredentials->isTokenLogin) {
-            $tokenId = $this->session->get('app_password');
+        if($uid === $userId) {
+            if(isset($loginCredentials->isTokenLogin) && $loginCredentials->isTokenLogin) {
+                $tokenId = $this->session->get('app_password');
 
-            return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
-        } else if($uid === $userId && isset($loginCredentials->password) && !empty($loginCredentials->password)) {
-            return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
-        } else if($uid === $userId && isset($loginCredentials->password) && empty($loginCredentials->password)) {
-            return $this->getUserInfoFromUserId($userId, $request, $loginName);
+                return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
+            } else if(isset($loginCredentials->password) && !empty($loginCredentials->password)) {
+                return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
+            } else if(isset($loginCredentials->password) && empty($loginCredentials->password)) {
+                return $this->getUserInfoFromUserId($userId, $request, $loginName);
+            }
         } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
             return $this->impersonateByUid($userId, $loginName, self::LOGIN_PASSWORD);
         }
