@@ -138,6 +138,11 @@ class ServerReportHelper {
      * @return array
      */
     protected function getEnvironment(): array {
+        $subdirectory = (
+            strlen(parse_url($this->config->getSystemValue('overwrite.cli.url', ''), PHP_URL_PATH)) > 1 ||
+            strlen($this->config->getSystemValue('overwritewebroot', '')) > 1
+        );
+
         return [
             'os'           => php_uname('s'),
             'architecture' => php_uname('m'),
@@ -146,7 +151,7 @@ class ServerReportHelper {
             'cron'         => $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core'),
             'proxy'        => !empty($this->config->getSystemValue('proxy', '')),
             'sslProxy'     => strtolower($this->config->getSystemValue('overwriteprotocol', '')) === 'https',
-            'subdirectory' => strlen($this->config->getSystemValue('overwritewebroot', '')) > 1,
+            'subdirectory' => $subdirectory,
         ];
     }
 
