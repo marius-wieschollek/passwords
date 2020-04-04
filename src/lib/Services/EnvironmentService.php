@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCP\IConfig;
@@ -254,16 +255,27 @@ class EnvironmentService {
      * @return bool
      */
     protected function isCronJob(IRequest $request): bool {
-        $requestUri = $request->getRequestUri();
-        $webroot    = $this->config->getSystemValue('overwritewebroot', '');
         $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
+        $cronScript = substr($request->getScriptName(), -8) === 'cron.php';
 
-        $webrootLength = strlen($webroot);
-        if($webrootLength !== 0 && substr($requestUri, 0, $webrootLength) === $webroot) $requestUri = substr($requestUri, $webrootLength);
+        if($cronScript && (in_array($cronMode, ['ajax', 'webcron']) || (PHP_SAPI === 'cli' && $cronMode === 'cron'))) {
+            return true;
+        }
 
-        return ($requestUri === '/index.php/apps/passwords/cron/sharing') ||
-               ($requestUri === '/cron.php' && in_array($cronMode, ['ajax', 'webcron'])) ||
-               (PHP_SAPI === 'cli' && $cronMode === 'cron' && strpos($request->getScriptName(), 'cron.php') !== false);
+        try {
+            $requestUri    = $request->getPathInfo();
+            $webroot       = $this->config->getSystemValue('overwritewebroot', '');
+            $webrootLength = strlen($webroot);
+
+            if($webrootLength !== 0 && substr($requestUri, 0, $webrootLength) === $webroot) {
+                $requestUri = substr($requestUri, $webrootLength);
+                if($requestUri[0] !== '/') $requestUri = '/'.$requestUri;
+            }
+
+            return $requestUri === '/apps/passwords/cron/sharing';
+        } catch(Exception $e) {
+            return false;
+        }
     }
 
     /**
