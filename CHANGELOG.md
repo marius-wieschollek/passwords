@@ -1,6 +1,8 @@
 ## [Unreleased]
 ### Fixed
  - Passwords causes error in Talk when impersonating user
+ - Ajax and webcron do not work when installed in subfolder
+ - Disabling server survey resets the setting
 
 ## 2020.4.0 - Feature release
 ### Added

@@ -73,7 +73,7 @@ class SettingsController extends ApiController {
      * @throws \OCA\Passwords\Exception\ApiException
      */
     public function update($id, $value): JSONResponse {
-        if(!empty($value)) {
+        if(!empty($value) || ($id === 'survey.server' && $value === "0")) {
             $data = $this->settingsService->set($id, $value);
 
             return new JSONResponse($data);
