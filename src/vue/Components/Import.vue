@@ -20,6 +20,7 @@
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
                     <translate tag="option" value="roboform" say="RoboForm CSV"/>
                     <translate tag="option" value="safeincloud" say="SafeInCloud CSV"/>
+                    <translate tag="option" value="chrome" say="Chrome / Google Passwords CSV"/>
                     <translate tag="option" value="csv" say="Other / Custom CSV"/>
                 </select>
             </div>
