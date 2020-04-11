@@ -62,7 +62,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) von [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
     </description>
-    <version>2020.4.1-BUILD</version>
+    <version>2020.5.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -106,7 +106,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </screenshot>
     <dependencies>
         <php min-version="7.2" />
-        <nextcloud min-version="17" max-version="18" />
+        <nextcloud min-version="17" max-version="19" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\ProcessDeletedEntities</job>
