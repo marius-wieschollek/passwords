@@ -102,9 +102,48 @@
                 if(image !== undefined) {
                     this.imageUrl = image.href;
                     if(image.type.substr(0, 5) === 'video') {
+                        this.loadCaptions(slide, image.href);
                         slide.querySelector('a').click();
                     }
                 }
+            },
+            /**
+             *
+             * @param {HTMLElement} slide
+             * @param {String} videoUrl
+             * @return {Promise<void>}
+             */
+            async loadCaptions(slide, videoUrl) {
+                let lastSlash = videoUrl.lastIndexOf('/') + 1,
+                    baseUrl   = videoUrl.substr(0, lastSlash) + 'subtitles/',
+                    fileName  = videoUrl.substring(lastSlash, videoUrl.lastIndexOf('.')),
+                    languages = {en: 'English', de: 'Deutsch'};
+
+                for(let language in languages) {
+                    if(languages.hasOwnProperty(language)) {
+                        let url = baseUrl + fileName + '-' + language + '.vtt';
+                        this.addCaption(slide, url, language, languages[language])
+                            .catch(console.error);
+                    }
+                }
+            },
+            async addCaption(slide, url, language, label) {
+                let response = await fetch(new Request(url, {redirect: 'error', referrerPolicy: 'no-referrer'})),
+                    mime     = response.headers.get('content-type');
+
+                if(!response.ok || (mime.substr(0, 10) !== 'text/plain' && mime.substr(0, 8) !== 'text/vtt')) {
+                    return;
+                }
+
+                let data  = await response.blob(),
+                    track = document.createElement('track');
+
+                track.kind = 'captions';
+                track.label = label;
+                track.srclang = language;
+                track.mode = 'showing';
+                track.src = window.URL.createObjectURL(data);
+                slide.querySelector('video').appendChild(track);
             },
             close() {
                 document.getElementById('app').classList.remove('blocking');
@@ -174,7 +213,7 @@
             top             : 18px;
             line-height     : 30px;
             color           : var(--color-main-text);
-            text-shadow     : 0 0 2px #000;
+            text-shadow     : 0 0 2px #000000;
             opacity         : .8;
             display         : block;
 

@@ -122,7 +122,7 @@
                     pos     = window.scrollY,
                     section = '';
 
-                if(footer && footer.offsetTop < window.innerHeight + window.scrollY) {
+                if(footer && footer.offsetTop < window.innerHeight + pos) {
                     let item = this.navigation[this.navigation.length - 1];
 
                     this.section = item.id;

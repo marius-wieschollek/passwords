@@ -164,6 +164,7 @@ class PageController extends Controller {
         $csp->addAllowedConnectDomain('data:');
         $csp->addAllowedImageDomain($manualHost);
         $csp->addAllowedMediaDomain($manualHost);
+        $csp->addAllowedMediaDomain('blob:');
         $csp->allowInlineStyle();
         $csp->allowEvalScript();
 
