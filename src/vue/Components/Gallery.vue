@@ -115,13 +115,13 @@
              */
             async loadCaptions(slide, videoUrl) {
                 let lastSlash = videoUrl.lastIndexOf('/') + 1,
-                    baseUrl   = videoUrl.substr(0, lastSlash) + 'subtitles/',
+                    baseUrl   = `${videoUrl.substr(0, lastSlash)}subtitles/`,
                     fileName  = videoUrl.substring(lastSlash, videoUrl.lastIndexOf('.')),
                     languages = {en: 'English', de: 'Deutsch'};
 
                 for(let language in languages) {
                     if(languages.hasOwnProperty(language)) {
-                        let url = baseUrl + fileName + '-' + language + '.vtt';
+                        let url = `${baseUrl + fileName}-${language}.vtt`;
                         this.addCaption(slide, url, language, languages[language])
                             .catch(console.error);
                     }

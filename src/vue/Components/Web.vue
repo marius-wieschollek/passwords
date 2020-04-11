@@ -27,6 +27,10 @@
                 type     : String,
                 'default': null
             },
+            variables     : {
+                type     : Object,
+                'default': () => { return {}; }
+            },
             className  : {
                 type     : String,
                 'default': 'link'
@@ -42,12 +46,15 @@
         },
         computed: {
             getText() {
-                if(this.text) return Localisation.translate(this.text, {href: this.getHref});
-                return '';
+                return this.text ? Localisation.translate(this.text, this.getVariables):'';
             },
             getTitle() {
                 let title = this.title ? this.title:'Go to {href}';
-                return Localisation.translate(title, {href: this.getHref});
+                return Localisation.translate(title, this.getVariables);
+            },
+            getVariables() {
+                this.variables.href = this.getHref;
+                return this.variables;
             },
             getHref() {
                 if(!this.href || this.href.substr(0, 11) === 'javascript:') return location.href;

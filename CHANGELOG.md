@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+ - Chrome / Google Passwords import
+ - Subtitles in handbook videos
 ### Fixed
  - Passwords causes error in Talk when impersonating user
  - Ajax and webcron do not work when installed in subfolder
