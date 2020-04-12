@@ -184,6 +184,7 @@
             'Not Found'                           : 'Seite nicht gefunden',
             'Still need help?'                    : 'Noch Fragen?',
             'Ask in our forum!'                   : 'Wir helfen gerne!',
+            'Or in our Chat!'                     : 'Auch per Chat!',
             'Found an error?'                     : 'Fehler gefunden?',
             'Tell us!'                            : 'Informieren Sie uns!',
             'The session has expired'             : 'Die Sitzung ist abgelaufen',

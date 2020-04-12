@@ -18,6 +18,7 @@
                 <footer class="handbook-footer">
                     <translate say="Still need help?"/>
                     <web text="Ask in our forum!" :href="forumPage"/>
+                    <web text="Or in our Chat!" :href="chatPage"/>
                     <br> &nbsp;<translate say="Found an error?"/>
                     <web text="Tell us!" :href="issuesPage"/>
                 </footer>
@@ -55,6 +56,7 @@
                 section   : '',
                 anchor    : '',
                 gallery   : {images: [], index: null},
+                chatPage  : 'https://t.me/nc_passwords',
                 forumPage : 'https://help.nextcloud.com/c/apps/passwords',
                 issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue'
             };
@@ -452,10 +454,26 @@
                     border-radius    : 3px;
                     padding-left     : .75rem;
 
-                    > p:first-of-type:before {
-                        font-family  : var(--pw-icon-font-face);
-                        content      : '\f05a';
-                        margin-right : .5em;
+                    > p {
+                        padding-left: 1.5rem;
+
+                        &:first-of-type:before {
+                            font-family  : var(--pw-icon-font-face);
+                            content      : '\f05a';
+                            margin-right : .5em;
+                            margin-left  : -1.5rem;
+                        }
+
+                        a {
+                            color: var(--color-primary-text);
+                            font-weight: bold;
+
+                            &:hover,
+                            &:focus,
+                            &:active {
+                                text-decoration: underline;
+                            }
+                        }
                     }
                 }
 
@@ -479,7 +497,7 @@
                     background-color : var(--color-success);
 
                     > p:first-of-type:before {
-                        content : '\f055'
+                        content : '\f164'
                     }
                 }
             }
