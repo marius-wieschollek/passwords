@@ -3,6 +3,7 @@
  - Chrome / Google Passwords import
  - Subtitles in handbook videos
 ### Fixed
+ - Generating passwords with special characters fails often
  - Passwords causes error in Talk when impersonating user
  - Ajax and webcron do not work when installed in subfolder
  - Disabling server survey resets the setting
