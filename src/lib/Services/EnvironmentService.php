@@ -324,22 +324,23 @@ class EnvironmentService {
      * @throws \Exception
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
-        $authHeader = $request->getHeader('Authorization');
+        $authHeader   = $request->getHeader('Authorization');
+        $userIdString = $userId ? $userId:'invalid user id';
         if($this->session->exists('login_credentials')) {
             if($this->loadUserFromSession($userId, $request)) return true;
-            $this->logger->warning('Login attempt with invalid session for '.($userId ? $userId:'invalid user id'));
+            $this->logger->warning('Login attempt with invalid session for '.$userIdString);
         } else if($authHeader !== '') {
             [$type, $value] = explode(' ', $authHeader, 2);
 
             if($type === 'Basic' && $this->loadUserFromBasicAuth($userId, $request)) return true;
             if($type === 'Bearer' && $this->loadUserFromBearerAuth($userId, $value)) return true;
-            $this->logger->warning('Login attempt with invalid authorization header for '.($userId ? $userId:'invalid user id'));
+            $this->logger->warning('Login attempt with invalid authorization header for '.$userIdString);
         } else if(isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['PHP_AUTH_PW'])) {
             if($this->loadUserFromBasicAuth($userId, $request)) return true;
-            $this->logger->warning('Login attempt with invalid basic auth for '.($userId ? $userId:'invalid user id'));
+            $this->logger->warning('Login attempt with invalid basic auth for '.$userIdString);
         } else if($userId !== null) {
             if($this->loadUserFromSessionToken($userId)) return true;
-            $this->logger->warning('Login attempt with invalid session token for '.($userId ? $userId:'invalid user id'));
+            $this->logger->warning('Login attempt with invalid session token for '.$userIdString);
         } else {
             $this->client = self::CLIENT_PUBLIC;
 
@@ -347,7 +348,7 @@ class EnvironmentService {
         }
 
         $this->client = self::CLIENT_PUBLIC;
-        if($userId !== null) throw new \Exception('Unable to verify user '.($userId ? $userId:'invalid user id'));
+        if($userId !== null) throw new \Exception('Unable to verify user '.$userIdString);
 
         return false;
     }
