@@ -74,7 +74,7 @@ class UpgradeCheckHelper {
      */
     public function upgradeRequired(): array {
         $info = $this->das->getUpdateInfo();
-        if($info === null || !$this->checkAppUpgradeNeeded($info)) return ['app' => false, 'platform' => false, 'php' => false];
+        if($info === null || !$this->checkAppUpgradeNeeded($info)) return ['app' => ['upgrade' => false], 'platform' => ['upgrade' => false], 'php' => ['upgrade' => false]];
 
         return [
             'app'       => [
