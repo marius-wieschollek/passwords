@@ -190,7 +190,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     protected function wordsArrayToPassword(array $words, int $strength = 4, bool $addNumbers = true, bool $addSpecial = true): string {
         $password = parent::wordsArrayToPassword($words);
 
-        return $this->specialCharacters->addSpecialCharacters($password, $strength * 3, $addNumbers, $addSpecial);
+        return $this->specialCharacters->addSpecialCharacters($password, $strength + 2, $addNumbers, $addSpecial);
     }
 
     /**
