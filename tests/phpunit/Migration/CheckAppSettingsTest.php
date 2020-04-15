@@ -9,13 +9,12 @@ namespace OCA\Passwords\Migration;
 
 use Exception;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\ValidationService;
-use OCP\IGroup;
-use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\Migration\IOutput;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -34,9 +33,9 @@ class CheckAppSettingsTest extends TestCase {
     protected $checkAppSettings;
 
     /**
-     * @var MockObject|IGroupManager
+     * @var MockObject|AdminUserHelper
      */
-    protected $groupManager;
+    protected $adminHelper;
 
     /**
      * @var MockObject|ServiceSettingsHelper
@@ -62,12 +61,12 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $this->groupManager         = $this->createMock(IGroupManager::class);
+        $this->adminHelper          = $this->createMock(AdminUserHelper::class);
         $this->settingsHelper       = $this->createMock(ServiceSettingsHelper::class);
         $this->notificationService  = $this->createMock(NotificationService::class);
         $this->configurationService = $this->createMock(ConfigurationService::class);
         $this->backgroundService    = $this->createMock(BackgroundJobService::class);
-        $this->checkAppSettings     = new CheckAppSettings($this->groupManager, $this->configurationService, $this->notificationService, $this->settingsHelper, $this->backgroundService);
+        $this->checkAppSettings     = new CheckAppSettings($this->adminHelper, $this->configurationService, $this->notificationService, $this->settingsHelper, $this->backgroundService);
     }
 
     /**
@@ -81,7 +80,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNotificationIfFaviconApiMissing(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService->expects($this->once())->method('sendEmptyRequiredSettingNotification')->with('admin', 'favicon');
 
         $this->settingsHelper->method('get')->willReturnMap(
@@ -103,7 +102,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNoNotificationIfFaviconApiPresent(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService->expects($this->never())->method('sendEmptyRequiredSettingNotification');
 
         $this->settingsHelper->method('get')->willReturnMap(
@@ -125,7 +124,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNoNotificationIfFaviconApiNotRequired(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService->expects($this->never())->method('sendEmptyRequiredSettingNotification');
 
         $this->settingsHelper->method('get')->willReturnMap(
@@ -147,7 +146,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNotificationIfPreviewApiMissing(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService->expects($this->once())->method('sendEmptyRequiredSettingNotification')->with('admin', 'preview');
 
         $this->settingsHelper->method('get')->willReturnMap(
@@ -169,7 +168,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNoNotificationIfPreviewApiPresent(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService->expects($this->never())->method('sendEmptyRequiredSettingNotification');
 
         $this->settingsHelper->method('get')->willReturnMap(
@@ -191,7 +190,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNotificationIfNextcloudOutdated(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService
             ->expects($this->once())
             ->method('sendUpgradeRequiredNotification')
@@ -217,7 +216,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNoNotificationIfNextcloudCurrent(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService
             ->expects($this->never())
             ->method('sendUpgradeRequiredNotification');
@@ -242,7 +241,7 @@ class CheckAppSettingsTest extends TestCase {
      *
      */
     public function testSendNoNotificationIfPreviewApiNotRequired(): void {
-        $this->setUpGroupManager();
+        $this->setUpAdminHelper();
         $this->notificationService->expects($this->never())->method('sendEmptyRequiredSettingNotification');
 
         $this->settingsHelper->method('get')->willReturnMap(
@@ -312,13 +311,10 @@ class CheckAppSettingsTest extends TestCase {
     /**
      *
      */
-    protected function setUpGroupManager(): void {
+    protected function setUpAdminHelper(): void {
         $admin = $this->createMock(IUser::class);
         $admin->method('getUID')->willReturn('admin');
 
-        $group = $this->createMock(IGroup::class);
-        $group->method('getUsers')->willReturn([$admin]);
-
-        $this->groupManager->method('get')->with('admin')->willReturn($group);
+        $this->adminHelper->method('getAdmins')->willReturn([$admin]);
     }
 }
