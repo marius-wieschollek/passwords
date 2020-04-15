@@ -194,12 +194,6 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return string
      */
     protected function getFaviconApiSettingDefault(): string {
-        $service = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
-
-        if($service === HelperService::FAVICON_BESTICON) {
-            return BestIconHelper::BESTICON_DEFAULT_URL;
-        }
-
         return '';
     }
 

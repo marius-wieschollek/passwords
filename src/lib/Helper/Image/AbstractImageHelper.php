@@ -98,6 +98,32 @@ abstract class AbstractImageHelper {
     }
 
     /**
+     * @param $blob
+     *
+     * @return string
+     */
+    public function getImageMime($blob) {
+        $size = getimagesizefromstring($blob);
+        if(!$size || !isset($size['mime']) || empty($size['mime'])) return 'application/octet-stream';
+
+        return $size['mime'];
+    }
+
+    /**
+     * @param $blob
+     *
+     * @return bool
+     */
+    public function supportsImage($blob): bool {
+        $mime = $this->getImageMime($blob);
+
+        list($type, $format) = explode('/', $mime);
+        if($type != 'image') return false;
+
+        return $this->supportsFormat($format);
+    }
+
+    /**
      * @param     $image
      * @param int $minWidth
      * @param int $minHeight
@@ -157,13 +183,6 @@ abstract class AbstractImageHelper {
      * @return mixed
      */
     abstract public function exportPng($image);
-
-    /**
-     * @param $blob
-     *
-     * @return bool
-     */
-    abstract public function supportsImage($blob): bool;
 
     /**
      * @param string $format

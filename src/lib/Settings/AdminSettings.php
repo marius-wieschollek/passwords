@@ -215,7 +215,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::FAVICON_BESTICON,
                 'api'     => [
                     'key'   => 'service.favicon.api',
-                    'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL)
+                    'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, '')
                 ]
             ],
             [
@@ -374,7 +374,7 @@ class AdminSettings implements ISettings {
 
         if(
             $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
-            $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL) === BestIconHelper::BESTICON_DEFAULT_URL
+            empty($this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, ''))
         ) {
             $info[ $this->fileCacheService::FAVICON_CACHE ]['clearable'] = false;
         }

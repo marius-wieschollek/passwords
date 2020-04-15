@@ -165,30 +165,6 @@ class GdHelper extends AbstractImageHelper {
     }
 
     /**
-     * @param $blob
-     *
-     * @return bool
-     */
-    public function supportsImage($blob): bool {
-        $size = getimagesizefromstring($blob);
-        list($type, $format) = explode('/', $size['mime']);
-
-        if($type != 'image') return false;
-        if($format == 'vnd.microsoft.icon') $format = 'icon';
-
-        return $this->supportsFormat($format);
-        $size = getimagesizefromstring($blob);
-
-        if($size['mime'] == 'image/icon') {
-            return false;
-        } else if($size['mime'] == 'image/vnd.microsoft.icon') {
-            return false;
-        }
-
-        return substr($size['mime'], 0, 5) == 'image';
-    }
-
-    /**
      * @param string $format
      *
      * @return bool

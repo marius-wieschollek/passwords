@@ -75,7 +75,10 @@ abstract class AbstractFaviconHelper {
 
         $faviconData = $this->getFaviconData($domain);
         if(empty($faviconData)) throw new \Exception('Favicon service returned no data');
-        if(!$this->imageHelper->supportsImage($faviconData)) throw new \Exception('Favicon service returned unsupported data type');
+        if(!$this->imageHelper->supportsImage($faviconData)) {
+            $mime = $this->imageHelper->getImageMime($faviconData);
+            throw new \Exception('Favicon service returned unsupported data type: '.$mime);
+        }
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }

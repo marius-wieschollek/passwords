@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Notification;
 
 use OCP\IL10N;
+use OCP\Notification\IAction;
 use OCP\Notification\INotification;
 
 /**
@@ -33,6 +34,12 @@ class BesticonApiNotification extends AbstractNotification {
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('besticon', 'api');
 
+        $linkAction = $notification->createAction();
+        $linkAction->setLabel('tutorial')
+                   ->setLink(self::BESTICON_HOSTING_URL, IAction::TYPE_WEB)
+                   ->setPrimary(true);
+        $notification->addAction($linkAction);
+
         $this->notificationManager->notify($notification);
     }
 
@@ -48,6 +55,11 @@ class BesticonApiNotification extends AbstractNotification {
         $title   = $localisation->t('Please consider self-hosting your favicon api');
         $message = $this->getMessage($localisation);
 
+        foreach($notification->getActions() as $action) {
+            $action->setLink(self::BESTICON_HOSTING_URL, IAction::TYPE_WEB)->setParsedLabel($localisation->t('Open tutorial'));
+            $notification->addParsedAction($action);
+        }
+
         return $notification
             ->setParsedSubject($title)
             ->setParsedMessage($message)
@@ -60,8 +72,9 @@ class BesticonApiNotification extends AbstractNotification {
      * @return string
      */
     protected function getMessage(IL10N $localisation): string {
-        return $localisation->t('You are currently using our default Besticon instance to fetch website favicons.')
-               .' '.$localisation->t('Our shared instance is not strong enough to handle all the traffic.')
+        return $localisation->t('Your Nextcloud uses our shared Besticon instances to fetch website icons.')
+               .' '.$localisation->t('These instances are intended for small Nextcloud setups with very little traffic.')
+               .' '.$localisation->t('Your Nextcloud requests significantly more icons than the average.')
                .' '.$localisation->t('Please click the link and follow our easy tutorial to host Besticon yourself.');
     }
 }
