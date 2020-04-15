@@ -7,13 +7,12 @@
 
 namespace OCA\Passwords\Migration;
 
-use OC\User\User;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
-use OCP\IGroupManager;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -36,9 +35,9 @@ class CheckAppSettings implements IRepairStep {
     protected $config;
 
     /**
-     * @var ServiceSettingsHelper
+     * @var AdminUserHelper
      */
-    protected $serviceSettings;
+    protected $adminHelper;
 
     /**
      * @var NotificationService
@@ -46,9 +45,9 @@ class CheckAppSettings implements IRepairStep {
     protected $notifications;
 
     /**
-     * @var IGroupManager
+     * @var ServiceSettingsHelper
      */
-    protected $groupManager;
+    protected $serviceSettings;
 
     /**
      * @var BackgroundJobService
@@ -56,28 +55,23 @@ class CheckAppSettings implements IRepairStep {
     protected $backgroundJobService;
 
     /**
-     * @var null|User[]
-     */
-    protected $admins = null;
-
-    /**
      * CheckAppSettings constructor.
      *
-     * @param IGroupManager         $groupManager
+     * @param AdminUserHelper       $adminHelper
      * @param ConfigurationService  $config
      * @param NotificationService   $notifications
      * @param ServiceSettingsHelper $serviceSettings
      * @param BackgroundJobService  $backgroundJobService
      */
     public function __construct(
-        IGroupManager $groupManager,
+        AdminUserHelper $adminHelper,
         ConfigurationService $config,
         NotificationService $notifications,
         ServiceSettingsHelper $serviceSettings,
         BackgroundJobService $backgroundJobService
     ) {
         $this->config               = $config;
-        $this->groupManager         = $groupManager;
+        $this->adminHelper          = $adminHelper;
         $this->notifications        = $notifications;
         $this->serviceSettings      = $serviceSettings;
         $this->backgroundJobService = $backgroundJobService;
@@ -109,9 +103,7 @@ class CheckAppSettings implements IRepairStep {
         if($faviconSetting['value'] === HelperService::FAVICON_BESTICON) {
             if(empty($faviconApiSetting['value'])) {
                 $this->sendEmptySettingNotification('favicon');
-            } /*else if($faviconApiSetting['isDefault'] || $faviconApiSetting['value'] === $faviconApiSetting['default']) {
-                $this->sendBesticonApiNotification();
-            }*/
+            }
         }
 
         $previewSetting    = $this->serviceSettings->get('preview');
@@ -134,7 +126,7 @@ class CheckAppSettings implements IRepairStep {
      * @param string $setting
      */
     protected function sendEmptySettingNotification(string $setting): void {
-        foreach($this->getAdmins() as $admin) {
+        foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendEmptyRequiredSettingNotification($admin->getUID(), $setting);
         }
     }
@@ -142,17 +134,8 @@ class CheckAppSettings implements IRepairStep {
     /**
      *
      */
-    protected function sendBesticonApiNotification(): void {
-        foreach($this->getAdmins() as $admin) {
-            $this->notifications->sendBesticonApiNotification($admin->getUID());
-        }
-    }
-
-    /**
-     *
-     */
     protected function sendDeprecatedPlatformNotification(): void {
-        foreach($this->getAdmins() as $admin) {
+        foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendUpgradeRequiredNotification(
                 $admin->getUID(),
                 self::APP_BC_BREAK_VERSION,
@@ -160,17 +143,5 @@ class CheckAppSettings implements IRepairStep {
                 self::PHP_RECOMMENDED_VERSION
             );
         }
-    }
-
-    /**
-     * @return User[]
-     */
-    protected function getAdmins(): array {
-        if($this->admins === null) {
-            $adminGroup   = $this->groupManager->get('admin');
-            $this->admins = $adminGroup->getUsers();
-        }
-
-        return $this->admins;
     }
 }

@@ -7,8 +7,8 @@
 
 namespace OCA\Passwords\Cron;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Survey\ServerReportHelper;
+use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -25,6 +25,11 @@ class SendServerSurvey extends AbstractTimedJob {
      * @var ConfigurationService
      */
     protected $config;
+
+    /**
+     * @var AdminUserHelper
+     */
+    protected $adminHelper;
 
     /**
      * @var ServerReportHelper
@@ -46,6 +51,7 @@ class SendServerSurvey extends AbstractTimedJob {
      *
      * @param LoggingService       $logger
      * @param ConfigurationService $config
+     * @param AdminUserHelper      $adminHelper
      * @param EnvironmentService   $environment
      * @param ServerReportHelper   $serverReport
      * @param NotificationService  $notifications
@@ -53,6 +59,7 @@ class SendServerSurvey extends AbstractTimedJob {
     public function __construct(
         LoggingService $logger,
         ConfigurationService $config,
+        AdminUserHelper $adminHelper,
         EnvironmentService $environment,
         ServerReportHelper $serverReport,
         NotificationService $notifications
@@ -60,6 +67,7 @@ class SendServerSurvey extends AbstractTimedJob {
         parent::__construct($logger, $environment);
         $this->serverReport  = $serverReport;
         $this->config        = $config;
+        $this->adminHelper   = $adminHelper;
         $this->notifications = $notifications;
     }
 
@@ -104,8 +112,7 @@ class SendServerSurvey extends AbstractTimedJob {
         $time = $this->config->getAppValue('survey/server/notification', 0);
         if($time > strtotime('-3 months')) return;
 
-        $adminGroup = \OC::$server->getGroupManager()->get('admin');
-        foreach($adminGroup->getUsers() as $admin) {
+        foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendSurveyNotification($admin->getUID());
         }
         $this->config->setAppValue('survey/server/notification', time());
