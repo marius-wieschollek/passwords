@@ -27,6 +27,11 @@ abstract class AbstractFaviconHelper {
     protected $prefix = 'af';
 
     /**
+     * @var RequestHelper
+     */
+    protected $httpRequest;
+
+    /**
      * @var AbstractImageHelper
      */
     protected $imageHelper;
@@ -44,6 +49,7 @@ abstract class AbstractFaviconHelper {
     /**
      * AbstractFaviconHelper constructor.
      *
+     * @param RequestHelper         $httpRequest
      * @param HelperService         $helperService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
@@ -51,10 +57,12 @@ abstract class AbstractFaviconHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
+        RequestHelper $httpRequest,
         HelperService $helperService,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
+        $this->httpRequest           = $httpRequest;
         $this->imageHelper           = $helperService->getImageHelper();
         $this->fallbackIconGenerator = $fallbackIconGenerator;
         $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
@@ -122,10 +130,9 @@ abstract class AbstractFaviconHelper {
      * @return string|null
      */
     protected function getHttpRequest(string $url): ?string {
-        $request = new RequestHelper();
-        $request->setUrl($url);
+        $this->httpRequest->setUrl($url);
 
-        return $request->sendWithRetry();
+        return $this->httpRequest->sendWithRetry();
     }
 
     /**

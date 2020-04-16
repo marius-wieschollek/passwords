@@ -34,8 +34,9 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected $prefix = HelperService::FAVICON_FAVICON_GRABBER;
 
     /**
-     * BestIconHelper constructor.
+     * FaviconGrabberHelper constructor.
      *
+     * @param RequestHelper         $httpRequest
      * @param ConfigurationService  $config
      * @param HelperService         $helperService
      * @param FileCacheService      $fileCacheService
@@ -44,13 +45,14 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
+        RequestHelper $httpRequest,
         ConfigurationService $config,
         HelperService $helperService,
         FileCacheService $fileCacheService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
         $this->config = $config;
-        parent::__construct($helperService, $fileCacheService, $fallbackIconGenerator);
+        parent::__construct($httpRequest, $helperService, $fileCacheService, $fallbackIconGenerator);
     }
 
     /**
@@ -75,8 +77,8 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      */
     protected function sendApiRequest(string $domain): ?array {
         $this->checkRequestTimeout();
-        $request = new RequestHelper();
-        $response    = $request
+        $request  = clone $this->httpRequest;
+        $response = $request
             ->setAcceptResponseCodes([200, 400])
             ->setUserAgent(
                 'Nextcloud/'.$this->config->getSystemValue('version').
@@ -106,7 +108,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
         $iconData   = null;
         $sizeOffset = null;
         foreach($json['icons'] as $icon) {
-            list($iconData, $sizeOffset) = $this->analyzeApiIcon($icon, $iconData, $sizeOffset);
+            [$iconData, $sizeOffset] = $this->analyzeApiIcon($icon, $iconData, $sizeOffset);
         }
 
         return $iconData;
@@ -148,7 +150,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @return null|string
      */
     protected function loadIcon(string $url, string $data = null): ?string {
-        $request = new RequestHelper();
+        $request = clone $this->httpRequest;
         $request->setUrl($url);
         $iconData = $request->sendWithRetry();
         $mime     = $request->getInfo('content_type');
