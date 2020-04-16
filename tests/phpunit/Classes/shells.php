@@ -46,14 +46,41 @@ namespace OCP {
         public function get() {return new IGroup();}
     }
 
-    class IUser {
-        public function getUID(): string {return '';}
+    interface IUser {
+        public function getUID();
     }
 
     class IURLGenerator {
         public function getAbsoluteURL(string $url): string {return '';}
         public function imagePath(string $appName, string $file): string {return '';}
         public function linkToRouteAbsolute(string $routeName, array $arguments = []): string {return '';}
+    }
+}
+
+namespace OC\User {
+    use \OCP\IUser;
+    class User implements IUser{
+        public function getUID(): string {return '';}
+        public function getDisplayName() {}
+        public function setDisplayName($displayName) {}
+        public function getLastLogin() {}
+        public function updateLastLoginTimestamp() {}
+        public function delete() {}
+        public function setPassword($password, $recoveryPassword = null) {}
+        public function getHome() {}
+        public function getBackendClassName() {}
+        public function getBackend() {}
+        public function canChangeAvatar() {}
+        public function canChangePassword() {}
+        public function canChangeDisplayName() {}
+        public function isEnabled() {}
+        public function setEnabled(bool $enabled = true) {}
+        public function getEMailAddress() {}
+        public function getAvatarImage($size) {}
+        public function getCloudId() {}
+        public function setEMailAddress($mailAddress) {}
+        public function getQuota() {}
+        public function setQuota($quota) {}
     }
 }
 
@@ -105,16 +132,47 @@ namespace OCP\Notification {
 }
 
 namespace OCP\Migration {
-    class IOutput {
+    interface IOutput {
+        public function info($message);
+        public function warning($message);
+        public function startProgress($max = 0);
+        public function advance($step = 1, $description = '');
+        public function finishProgress();
+    }
+
+    interface IRepairStep {
+        public function getName();
+        public function run(IOutput $output);
+    }
+}
+
+namespace OC\Migration {
+    use OCP\Migration\IOutput;
+    class SimpleOutput implements IOutput {
         public function info($message) {}
         public function warning($message) {}
         public function startProgress($max = 0) {}
         public function advance($step = 1, $description = '') {}
         public function finishProgress() {}
     }
+}
 
-    interface IRepairStep {
-        public function getName();
-        public function run(IOutput $output);
+namespace OCP\Files\SimpleFS {
+    interface ISimpleFile {}
+}
+
+namespace OC\Files\SimpleFS {
+    use OCP\Files\SimpleFS\ISimpleFile;
+    class SimpleFile implements ISimpleFile{
+        public function getName() {}
+        public function getSize() {}
+        public function getETag() {}
+        public function getMTime() {}
+        public function getContent() {}
+        public function putContent($data) {}
+        public function delete() {}
+        public function getMimeType() {}
+        public function read() {}
+        public function write() {}
     }
 }

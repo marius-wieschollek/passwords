@@ -10,7 +10,6 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**

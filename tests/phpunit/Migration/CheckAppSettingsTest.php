@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
+use OC\Migration\SimpleOutput;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\BackgroundJobService;
@@ -16,7 +17,6 @@ use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\IUser;
-use OCP\Migration\IOutput;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -92,7 +92,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -114,7 +114,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -136,7 +136,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -158,7 +158,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -180,7 +180,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -206,7 +206,7 @@ class CheckAppSettingsTest extends TestCase {
         );
         $this->configurationService->method('getSystemValue')->with('version')->willReturn('0.0.0.0');
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -231,7 +231,7 @@ class CheckAppSettingsTest extends TestCase {
         );
         $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -254,7 +254,7 @@ class CheckAppSettingsTest extends TestCase {
         );
         $this->configurationService->method('getSystemValue')->with('version')->willReturn(CheckAppSettings::NEXTCLOUD_RECOMMENDED_VERSION.'.0.0.0');
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -278,7 +278,7 @@ class CheckAppSettingsTest extends TestCase {
         $this->backgroundService->expects($this->once())->method('addNightlyUpdates');
 
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -302,7 +302,7 @@ class CheckAppSettingsTest extends TestCase {
         $this->backgroundService->expects($this->never())->method('addNightlyUpdates');
 
         try {
-            $this->checkAppSettings->run(new IOutput());
+            $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }

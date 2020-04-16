@@ -11,7 +11,6 @@ use Exception;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
@@ -51,7 +50,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('7b584c1e', $e->getId());
@@ -71,7 +70,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('4e8162e6', $e->getId());
@@ -92,7 +91,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('4e8162e6', $e->getId());
@@ -112,7 +111,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('f43e7b82', $e->getId());
@@ -132,7 +131,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('fce89df4', $e->getId());
@@ -152,7 +151,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('7c31eb4d', $e->getId());
@@ -173,7 +172,7 @@ class ValidateTagTest extends TestCase {
 
         try {
             $this->validationService->validateTag($mock);
-            $this->fail("Expected exception thrown");
+            $this->fail("Expected exception");
         } catch(ApiException $e) {
             $this->assertEquals(400, $e->getHttpCode());
             $this->assertEquals('2aff026c', $e->getId());
