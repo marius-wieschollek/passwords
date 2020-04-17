@@ -127,16 +127,16 @@ class BestIconHelper extends AbstractFaviconHelper {
         }
 
         $this->config->clearCache();
-        [$week, $count] = explode(':', $this->config->getAppValue(self::BESTICON_COUNTER_KEY, '0:0'));
+        [$week, $count, $notified] = explode(':', $this->config->getAppValue(self::BESTICON_COUNTER_KEY, '0:0:0'));
         if(intval($week) !== $currentWeek) $count = 0;
         $count++;
-        $this->config->setAppValue(self::BESTICON_COUNTER_KEY, "{$currentWeek}:{$count}");
-
-        if($count === self::BESTICON_INSTANCE_LIMIT) {
+        if($count >= self::BESTICON_INSTANCE_LIMIT && $notified === '0') {
+            $notified = '1';
             foreach($this->adminHelper->getAdmins() as $admin) {
                 $this->notifications->sendBesticonApiNotification($admin->getUID());
             }
         }
+        $this->config->setAppValue(self::BESTICON_COUNTER_KEY, "{$currentWeek}:{$count}:{$notified}");
 
         return $currentHour < 12 ? self::BESTICON_INSTANCE_1:self::BESTICON_INSTANCE_2;
     }
