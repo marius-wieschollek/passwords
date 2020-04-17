@@ -218,14 +218,19 @@ class PasswordHook {
 
     /**
      * @param PasswordRevision $revision
+     * @param bool             $searchDuplicates
      *
-     * @throws \Exception
+     * @throws \OCP\AppFramework\QueryException
      */
-    protected function checkSecurityStatus(PasswordRevision $revision): void {
+    protected function checkSecurityStatus(PasswordRevision $revision, bool $searchDuplicates = true): void {
         $securityCheck = $this->helperService->getSecurityHelper();
-        list($status, $statusCode) = $securityCheck->getRevisionSecurityLevel($revision);
+        [$status, $statusCode] = $securityCheck->getRevisionSecurityLevel($revision);
         $revision->setStatus($status);
         $revision->setStatusCode($statusCode);
+
+        if($searchDuplicates && $statusCode === AbstractSecurityCheckHelper::STATUS_DUPLICATE) {
+            $this->updateDuplicateStatus([$revision->getHash()]);
+        }
     }
 
     /**
@@ -255,9 +260,9 @@ class PasswordHook {
             try {
                 $revisions = $this->revisionService->findByHash($hash);
                 foreach($revisions as $revision) {
-                    $this->checkSecurityStatus($revision);
-                    if($revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_DUPLICATE) break;
-                    $this->revisionService->save($revision);
+                    $oldStatus = $revision->getStatusCode();
+                    $this->checkSecurityStatus($revision, false);
+                    if($oldStatus !== $revision->getStatusCode()) $this->revisionService->save($revision);
                 }
             } catch (\Exception $e) {
             }

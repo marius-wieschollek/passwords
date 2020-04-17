@@ -1,7 +1,10 @@
 ## [Unreleased]
 ### Added
+ - Nextcloud 19 support
  - Chrome / Google Passwords import
  - Subtitles in handbook videos
+### Changed
+ - Add/Update password now scans for duplicates
 
 ## 2020.4.1 - Bugfix release
 ### Fixed
