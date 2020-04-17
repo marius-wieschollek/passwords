@@ -2,6 +2,8 @@
 ### Added
  - Chrome / Google Passwords import
  - Subtitles in handbook videos
+
+## 2020.4.1 - Bugfix release
 ### Fixed
  - Generating passwords with special characters fails often
  - Passwords causes error in Talk when impersonating user
