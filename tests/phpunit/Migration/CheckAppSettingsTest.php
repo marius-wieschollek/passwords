@@ -79,14 +79,14 @@ class CheckAppSettingsTest extends TestCase {
     /**
      *
      */
-    public function testSendNotificationIfFaviconApiMissing(): void {
+    public function testRemoveOldDefaultFaviconApiUrl(): void {
         $this->setUpAdminHelper();
-        $this->notificationService->expects($this->once())->method('sendEmptyRequiredSettingNotification')->with('admin', 'favicon');
+        $this->settingsHelper->expects($this->once())->method('reset')->with('favicon.api');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
-                ['favicon', ['value' => HelperService::FAVICON_BESTICON]],
-                ['favicon.api', ['value' => '']],
+                ['favicon', ['value' => 'bi']],
+                ['favicon.api', ['value' => 'https://passwords-app-favicons.herokuapp.com/icon']],
                 ['preview', ['value' => '']],
                 ['preview.api', ['value' => 'value']],
             ]
@@ -101,14 +101,14 @@ class CheckAppSettingsTest extends TestCase {
     /**
      *
      */
-    public function testSendNoNotificationIfFaviconApiPresent(): void {
+    public function testDoNotRemoveCustomFaviconApiUrl(): void {
         $this->setUpAdminHelper();
-        $this->notificationService->expects($this->never())->method('sendEmptyRequiredSettingNotification');
+        $this->settingsHelper->expects($this->never())->method('reset');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
-                ['favicon', ['value' => HelperService::FAVICON_BESTICON]],
-                ['favicon.api', ['value' => 'https://api.example.com']],
+                ['favicon', ['value' => 'bi']],
+                ['favicon.api', ['value' => 'https://my-besticon.herokuapp.com/icon']],
                 ['preview', ['value' => '']],
                 ['preview.api', ['value' => 'value']],
             ]
@@ -123,14 +123,14 @@ class CheckAppSettingsTest extends TestCase {
     /**
      *
      */
-    public function testSendNoNotificationIfFaviconApiNotRequired(): void {
+    public function testIgnoreFaviconUrlIfBesticonNotUsed(): void {
         $this->setUpAdminHelper();
-        $this->notificationService->expects($this->never())->method('sendEmptyRequiredSettingNotification');
+        $this->settingsHelper->expects($this->never())->method('reset');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
                 ['favicon', ['value' => 'none']],
-                ['favicon.api', ['value' => '']],
+                ['favicon.api', ['value' => 'https://passwords-app-favicons.herokuapp.com/icon']],
                 ['preview', ['value' => '']],
                 ['preview.api', ['value' => 'value']],
             ]

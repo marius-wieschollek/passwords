@@ -35,6 +35,7 @@
         "Leipzig Corpora Collection (recommended)"                                                  : "Leipzig Corpora Collection (empfohlen)",
         "Favicon Service"                                                                           : "Favicon Service",
         "Favicon Service Api"                                                                       : "Favicon Service Api",
+        "(optional)"                                                                                : "(optional)",
         "Local analyzer"                                                                            : "Lokaler Icon Suchdienst",
         "Besticon (recommended)"                                                                    : "Besticon (empfohlen)",
         "None"                                                                                      : "Keiner",

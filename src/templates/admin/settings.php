@@ -132,7 +132,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             </select>
             <div class="container" id="passwords-favicon-api-container">
                 <label for="passwords-favicon-api"><?php p($l->t('Favicon Service Api')); ?></label>
-                <input id="passwords-favicon-api" name="favicon-api" data-setting="">
+                <input id="passwords-favicon-api" name="favicon-api" data-setting="" placeholder="<?php p($l->t('(optional)')); ?>">
             </div>
 
             <label for="passwords-preview"><?php p($l->t('Website Preview Service')); ?></label>

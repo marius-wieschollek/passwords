@@ -101,8 +101,8 @@ class CheckAppSettings implements IRepairStep {
         $faviconApiSetting = $this->serviceSettings->get('favicon.api');
 
         if($faviconSetting['value'] === HelperService::FAVICON_BESTICON) {
-            if(empty($faviconApiSetting['value'])) {
-                $this->sendEmptySettingNotification('favicon');
+            if(strpos($faviconApiSetting['value'], 'passwords-app-favicons.herokuapp.com') !== false) {
+                $this->serviceSettings->reset('favicon.api');
             }
         }
 
