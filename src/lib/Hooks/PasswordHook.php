@@ -10,6 +10,7 @@ namespace OCA\Passwords\Hooks;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
@@ -145,9 +146,13 @@ class PasswordHook {
         /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionService->findByModel($password->getUuid());
 
+        $duplicateHashes = [];
         foreach($revisions as $revision) {
+            if($revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
             $this->revisionService->delete($revision);
         }
+
+        $this->updateDuplicateStatus($duplicateHashes);
 
         if($password->getShareId()) {
             try {
@@ -212,15 +217,15 @@ class PasswordHook {
     }
 
     /**
-     * @param PasswordRevision $newRevision
+     * @param PasswordRevision $revision
      *
      * @throws \Exception
      */
-    protected function checkSecurityStatus(PasswordRevision $newRevision): void {
+    protected function checkSecurityStatus(PasswordRevision $revision): void {
         $securityCheck = $this->helperService->getSecurityHelper();
-        list($status, $statusCode) = $securityCheck->getRevisionSecurityLevel($newRevision);
-        $newRevision->setStatus($status);
-        $newRevision->setStatusCode($statusCode);
+        list($status, $statusCode) = $securityCheck->getRevisionSecurityLevel($revision);
+        $revision->setStatus($status);
+        $revision->setStatusCode($statusCode);
     }
 
     /**
@@ -237,6 +242,25 @@ class PasswordHook {
             $tagRevision = $this->tagRevisionService->findByModel($relation->getTag());
             $relation->setHidden($newRevision->isHidden() || $tagRevision->isHidden());
             $this->relationService->save($relation);
+        }
+    }
+
+    /**
+     * @param array $hashes
+     */
+    protected function updateDuplicateStatus(array $hashes): void {
+        $hashes = array_unique($hashes);
+
+        foreach($hashes as $hash) {
+            try {
+                $revisions = $this->revisionService->findByHash($hash);
+                foreach($revisions as $revision) {
+                    $this->checkSecurityStatus($revision);
+                    if($revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_DUPLICATE) break;
+                    $this->revisionService->save($revision);
+                }
+            } catch (\Exception $e) {
+            }
         }
     }
 }

@@ -54,6 +54,27 @@ class PasswordRevisionService extends AbstractRevisionService {
     }
 
     /**
+     * @param string $hash
+     * @param bool   $decrypt
+     *
+     * @return PasswordRevision[]
+     *
+     * @throws \Exception
+     */
+    public function findByHash(string $hash, bool $decrypt = false): array {
+        /** @var PasswordRevision[] $revisions */
+        $revisions = $this->mapper->findAllByField('hash', $hash);
+
+        if(!$decrypt) return $revisions;
+
+        foreach($revisions as $revision) {
+            $this->encryption->decrypt($revision);
+        }
+
+        return $revisions;
+    }
+
+    /**
      * @param string $model
      * @param string $password
      * @param string $username
