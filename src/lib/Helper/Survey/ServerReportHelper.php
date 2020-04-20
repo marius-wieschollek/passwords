@@ -214,6 +214,7 @@ class ServerReportHelper {
      */
     protected function getSettings(): array {
         return [
+            'channel'   => \OC_Util::getChannel(),
             'nightlies' => $this->config->getAppValue('nightly/enabled', '0') === '1',
             'handbook'  => $this->config->getAppValue('handbook/url') !== null,
         ];
