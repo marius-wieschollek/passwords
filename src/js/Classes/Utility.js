@@ -6,21 +6,19 @@ export default class Utility {
      * @returns {boolean}
      */
     static copyToClipboard(text) {
-        let element = document.createElement('textarea');
-        element.value = text;
+        let element   = document.createElement('textarea'),
+            range     = document.createRange(),
+            selection = window.getSelection();
 
-        if(navigator.userAgent.match(/ipad|iphone/i)) {
-            let range     = document.createRange(),
-                selection = window.getSelection();
-            range.selectNodeContents(element);
-            selection.removeAllRanges();
-            selection.addRange(range);
-            element.setSelectionRange(0, 999999);
-            document.body.appendChild(element);
-        } else {
-            document.body.appendChild(element);
-            element.select();
-        }
+        element.value    = text;
+        element.readOnly = true;
+
+        document.body.appendChild(element);
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        element.select();
+        element.setSelectionRange(0, 999999);
 
         let result = document.execCommand('copy');
         document.body.removeChild(element);
