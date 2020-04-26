@@ -15,11 +15,13 @@ use OCP\AppFramework\Db\Entity;
  * @method string getData()
  * @method void setData(string $data)
  * @method string getShadowData()
- * @method void setShadowData(string $data)
+ * @method void setShadowData(string $shadowData)
  * @method bool getAuthorized()
  * @method void setAuthorized(bool $authorized)
  * @method string getClient()
  * @method void setClient(string $client)
+ * @method string getLoginType()
+ * @method void setLoginType(string $loginType)
  *
  * @package OCA\Passwords\Db
  */
@@ -46,11 +48,17 @@ class Session extends AbstractEntity {
     protected $shadowData;
 
     /**
+     * @var string
+     */
+    protected $loginType;
+
+    /**
      * Folder constructor.
      */
     public function __construct() {
         $this->addType('data', 'string');
         $this->addType('client', 'string');
+        $this->addType('loginType', 'string');
         $this->addType('shadowData', 'string');
         $this->addType('authorized', 'boolean');
 

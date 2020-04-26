@@ -22,8 +22,6 @@ use OCP\AppFramework\Db\Entity;
  * @method void setCreated(int $created)
  * @method int getUpdated()
  * @method void setUpdated(int $updated)
- * @method string getLoginType()
- * @method void setLoginType(string $userId)
  *
  * @package OCA\Passwords\Db
  */
@@ -55,11 +53,6 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
     protected $updated;
 
     /**
-     * @var string
-     */
-    protected $loginType;
-
-    /**
      * Folder constructor.
      */
     public function __construct() {
@@ -68,7 +61,6 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
         $this->addType('deleted', 'boolean');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');
-        $this->addType('loginType', 'string');
     }
 
     /**
