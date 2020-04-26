@@ -151,9 +151,9 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     /**
      * @param string $data
      *
-     * @return string
+     * @return string|null
      */
-    protected function convertIcoFile($data): string {
+    protected function convertIcoFile($data): ?string {
         if(empty($data)) return null;
 
         return $this->imageHelper->convertIcoToPng($data);

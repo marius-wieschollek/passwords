@@ -222,6 +222,7 @@
 
         #controls {
             margin : 0 -10px;
+            width  : 100vw;
         }
 
         article {
@@ -236,6 +237,7 @@
                 margin                : 0 auto;
                 width                 : 100%;
             }
+
             @media (max-width : $width-large) {
                 display   : block;
                 max-width : 975px;
@@ -455,7 +457,7 @@
                     padding-left     : .75rem;
 
                     > p {
-                        padding-left: 1.5rem;
+                        padding-left : 1.5rem;
 
                         &:first-of-type:before {
                             font-family  : var(--pw-icon-font-face);
@@ -465,13 +467,13 @@
                         }
 
                         a {
-                            color: var(--color-primary-text);
-                            font-weight: bold;
+                            color       : var(--color-primary-text);
+                            font-weight : bold;
 
                             &:hover,
                             &:focus,
                             &:active {
-                                text-decoration: underline;
+                                text-decoration : underline;
                             }
                         }
                     }

@@ -22,6 +22,7 @@ use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
+use OCA\Passwords\Controller\Link\ConnectController;
 use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\Password;
@@ -150,6 +151,7 @@ class Application extends App {
         $container->registerAlias('ServiceApiController', ServiceApiController::class);
         $container->registerAlias('FolderApiController', FolderApiController::class);
         $container->registerAlias('ShareApiController', ShareApiController::class);
+        $container->registerAlias('ConnectController', ConnectController::class);
         $container->registerAlias('TagApiController', TagApiController::class);
 
         $container->registerService(ShareUserListHelper::class,

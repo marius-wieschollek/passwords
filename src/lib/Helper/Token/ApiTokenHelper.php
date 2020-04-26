@@ -201,12 +201,7 @@ class ApiTokenHelper {
      */
     protected function getUserPassword(): ?string {
         try {
-            $sessionId    = \OC::$server->getSession()->getId();
-            $sessionToken = $this->tokenProvider->getToken($sessionId);
-
-            return $this->tokenProvider->getPassword($sessionToken, $sessionId);
-        } catch (PasswordlessTokenException $ex) {
-            return null;
+            return $this->environment->getUserPassword();
         } catch(\Throwable $e) {
             $this->logger->logException($e);
         }

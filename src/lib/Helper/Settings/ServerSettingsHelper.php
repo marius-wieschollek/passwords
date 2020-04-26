@@ -88,6 +88,7 @@ class ServerSettingsHelper {
             case 'sharing':
                 return $this->shareSettings->get($subKey);
             case 'handbook':
+                if($subKey !== 'url') return null;
                 $handbookUrl = $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
 
                 return empty($handbookUrl) ? self::SERVER_MANUAL_URL:$handbookUrl;

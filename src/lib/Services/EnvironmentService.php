@@ -95,6 +95,11 @@ class EnvironmentService {
     protected $realUser;
 
     /**
+     * @var string
+     */
+    protected $password;
+
+    /**
      * @var null|string
      */
     protected $userLogin;
@@ -197,6 +202,13 @@ class EnvironmentService {
     }
 
     /**
+     * @return null|string
+     */
+    public function getUserPassword(): ?string {
+        return $this->password;
+    }
+
+    /**
      * @return string
      */
     public function getLoginType(): string {
@@ -229,6 +241,13 @@ class EnvironmentService {
      */
     public function getClient(): string {
         return $this->client;
+    }
+
+    /*
+     * @return string[]
+     */
+    public function getProtectedClients(): array {
+        return self::$protectedClients;
     }
 
     /**
@@ -396,6 +415,7 @@ class EnvironmentService {
                 $this->client     = $this->getClientFromToken($token);
                 $this->loginToken = $token;
                 $this->loginType  = self::LOGIN_TOKEN;
+                $this->password   = $this->tokenProvider->getPassword($token, $token->getId());
 
                 return true;
             }
@@ -424,6 +444,7 @@ class EnvironmentService {
                     $this->client     = $this->getClientFromToken($sessionToken);
                     $this->loginToken = $sessionToken;
                     $this->loginType  = self::LOGIN_SESSION;
+                    $this->password   = $this->tokenProvider->getPassword($sessionToken, $sessionToken->getId());
 
                     return true;
                 } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
@@ -509,6 +530,7 @@ class EnvironmentService {
             $this->userLogin = $loginName;
             $this->client    = $this->getClientFromRequest($request, $loginName);
             $this->loginType = self::LOGIN_PASSWORD;
+            $this->password   = $password;
 
             return true;
         }
@@ -574,7 +596,7 @@ class EnvironmentService {
 
         if(empty($client) ||
            in_array($client, self::$protectedClients) ||
-           substr($client, 0, 17) === 'Passwords Session') {
+           strpos($client, 'Passwords Session') !== false) {
             return $loginName.' via '.$request->getRemoteAddress();
         }
 

@@ -15,6 +15,7 @@ use OCA\Passwords\Notification\EmptyRequiredSettingNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
 use OCA\Passwords\Notification\LegacyApiNotification;
 use OCA\Passwords\Notification\LoginAttemptNotification;
+use OCA\Passwords\Notification\NewClientNotification;
 use OCA\Passwords\Notification\ShareCreatedNotification;
 use OCA\Passwords\Notification\ShareLoopNotification;
 use OCA\Passwords\Notification\SurveyNotification;
@@ -49,6 +50,11 @@ class NotificationService implements INotifier {
      * @var LegacyApiNotification
      */
     protected $legacyApiNotification;
+
+    /**
+     * @var NewClientNotification
+     */
+    protected $newClientNotification;
 
     /**
      * @var ShareLoopNotification
@@ -96,6 +102,7 @@ class NotificationService implements INotifier {
      * @param IFactory                         $l10nFactory
      * @param UserSettingsService              $settings
      * @param SurveyNotification               $surveyNotification
+     * @param NewClientNotification            $newClientNotification
      * @param ShareLoopNotification            $shareLoopNotification
      * @param LegacyApiNotification            $legacyApiNotification
      * @param BadPasswordNotification          $badPasswordNotification
@@ -110,6 +117,7 @@ class NotificationService implements INotifier {
         IFactory $l10nFactory,
         UserSettingsService $settings,
         SurveyNotification $surveyNotification,
+        NewClientNotification $newClientNotification,
         ShareLoopNotification $shareLoopNotification,
         LegacyApiNotification $legacyApiNotification,
         BadPasswordNotification $badPasswordNotification,
@@ -123,6 +131,7 @@ class NotificationService implements INotifier {
         $this->settings                         = $settings;
         $this->l10NFactory                      = $l10nFactory;
         $this->surveyNotification               = $surveyNotification;
+        $this->newClientNotification            = $newClientNotification;
         $this->legacyApiNotification            = $legacyApiNotification;
         $this->shareLoopNotification            = $shareLoopNotification;
         $this->badPasswordNotification          = $badPasswordNotification;
@@ -276,6 +285,18 @@ class NotificationService implements INotifier {
     }
 
     /**
+     * @param string $userId
+     * @param string $client
+     */
+    public function sendNewClientNotification(string $userId, string $client): void {
+        $this->sendNotification(
+            $this->newClientNotification,
+            $userId,
+            ['client' => $client]
+        );
+    }
+
+    /**
      * @param AbstractNotification $notification
      * @param string               $userId
      * @param array                $parameters
@@ -314,6 +335,8 @@ class NotificationService implements INotifier {
                 return $this->besticonApiNotification->process($notification, $localisation);
             case LoginAttemptNotification::NAME:
                 return $this->loginAttemptNotification->process($notification, $localisation);
+            case NewClientNotification::NAME:
+                return $this->newClientNotification->process($notification, $localisation);
             case ShareLoopNotification::NAME:
                 return $this->shareLoopNotification->process($notification, $localisation);
             case LegacyApiNotification::NAME:

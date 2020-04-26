@@ -25,7 +25,7 @@ class BadPasswordMail extends AbstractMail {
      * @param IL10N $localisation
      * @param mixed ...$parameters
      */
-    function send(IUser $user, IL10N $localisation, ...$parameters): void {
+    public function send(IUser $user, IL10N $localisation, ...$parameters): void {
         list($passwords) = $parameters;
 
         $template = $this->getTemplate();
