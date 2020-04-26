@@ -211,6 +211,13 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
+     *
+     */
+    public function clearEntityCache(): void {
+        $this->entityCache = [];
+    }
+
+    /**
      * @return IQueryBuilder
      */
     protected function getStatement(): IQueryBuilder {
