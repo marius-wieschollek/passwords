@@ -91,6 +91,14 @@ $routes = [
     ],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
 
+
+    ['name' => 'connect#request', 'url' => 'link/connect/request', 'verb' => 'GET'],
+    ['name' => 'connect#await', 'url' => 'link/connect/await', 'verb' => 'GET'],
+    ['name' => 'connect#reject', 'url' => 'link/connect/reject', 'verb' => 'GET'],
+    ['name' => 'connect#confirm', 'url' => 'link/connect/confirm', 'verb' => 'GET'],
+    ['name' => 'connect#confirm', 'url' => 'link/connect/confirm', 'verb' => 'POST', 'postfix' => 'POST'],
+    ['name' => 'connect#apply', 'url' => 'link/connect/apply', 'verb' => 'POST'],
+
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'share_api#preflighted_cors', 'url' => '/api/1.0/share/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'folder_api#preflighted_cors', 'url' => '/api/1.0/folder/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
