@@ -20,7 +20,7 @@
                 return `message${this.status.success ? '':' error'}`;
             },
             text() {
-                if(this.status.success) return 'You connected successfully';
+                if(this.status.success) return 'Connection successful';
                 if(this.status.reason === 'reject') return 'You cancelled the connection';
                 if(this.status.reason === 'timeout') return 'You did not confirm the connection in time';
             },
