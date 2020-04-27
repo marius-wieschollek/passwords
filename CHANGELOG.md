@@ -3,6 +3,7 @@
  - Nextcloud 19 support
  - Chrome / Google Passwords import
  - Subtitles in handbook videos
+ - PassLink Connect setup for extensions
 ### Changed
  - Add/Update password now scans for duplicates
 
