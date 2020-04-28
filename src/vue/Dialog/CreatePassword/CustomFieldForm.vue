@@ -86,7 +86,7 @@
             },
             getPattern() {
                 if(this.type === 'url') return '\\w+:\/\/.+';
-                if(this.type === 'email') return '[\\w\\._-]+@.+';
+                if(this.type === 'email') return '^.{1,}@[^@]{1,}$';
                 return false;
             },
             getAutoComplete() {
