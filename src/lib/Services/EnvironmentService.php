@@ -75,6 +75,11 @@ class EnvironmentService {
     protected $session;
 
     /**
+     * @var IRequest
+     */
+    protected $request;
+
+    /**
      * @var IUserManager
      */
     protected $userManager;
@@ -159,6 +164,7 @@ class EnvironmentService {
         $this->config        = $config;
         $this->logger        = $logger;
         $this->session       = $session;
+        $this->request       = $request;
         $this->userManager   = $userManager;
         $this->tokenProvider = $tokenProvider;
 
@@ -241,6 +247,15 @@ class EnvironmentService {
      */
     public function getClient(): string {
         return $this->client;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserAgent(): string {
+        $login = $this->getAppMode() === self::MODE_PUBLIC ? 'public access':$this->getUserLogin();
+
+        return $this->getClientFromRequest($this->request, $login);
     }
 
     /*

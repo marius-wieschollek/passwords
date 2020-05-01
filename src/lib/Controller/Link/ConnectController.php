@@ -30,7 +30,7 @@ use Throwable;
  */
 class ConnectController extends Controller {
 
-    const PASSLINK_CONNECT = "ext+passlink://%s/connect?id=%s&theme=%s";
+    const PASSLINK_CONNECT = "ext+passlink:%s/do/connect?id=%s&theme=%s";
     const SESSION_KEY      = 'passlink.connect';
 
     /**
@@ -224,13 +224,13 @@ class ConnectController extends Controller {
      * @UserRateThrottle(limit=2, period=60)
      *
      * @param string $id
-     * @param array  $code
+     * @param array  $codes
      * @param string $label
      *
      * @return JSONResponse
      * @throws Exception
      */
-    public function apply(string $id, array $code, string $label = null): JSONResponse {
+    public function apply(string $id, array $codes, string $label = null): JSONResponse {
         try {
             /** @var Registration $registration */
             $registration = $this->registrationService->findByUuid($id);
@@ -242,7 +242,7 @@ class ConnectController extends Controller {
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
-        if(!$this->validateCodes($code)) {
+        if(!$this->validateCodes($codes)) {
             return new JSONResponse(['success' => false], Http::STATUS_BAD_REQUEST);
         }
 
@@ -252,7 +252,7 @@ class ConnectController extends Controller {
             $registration->setLimit($this->getTimeLimit());
             $registration->setStatus(1);
             $registration->setLabel($label);
-            $registration->setCode(implode(',', $code));
+            $registration->setCode(implode(',', $codes));
             $this->registrationService->save($registration);
         } catch(Throwable $e) {
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
@@ -357,7 +357,7 @@ class ConnectController extends Controller {
            in_array($label, $this->environment->getProtectedClients()) ||
            strpos($label, 'Passwords Session') !== false ||
            !preg_match('/^[\w\s-]{12,48}$/', $label)) {
-            return $fallback === null ? $this->environment->getClient():$fallback;
+            return $fallback === null ? $this->environment->getUserAgent():$fallback;
         }
 
         if(strlen($label) > 256) return substr($label, 0, 256);
