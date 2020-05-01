@@ -6,6 +6,8 @@
  - PassLink Connect setup for extensions
 ### Changed
  - Add/Update password now scans for duplicates
+### Fixed
+ - Email validation to strict
 
 ## 2020.4.1 - Bugfix release
 ### Fixed
