@@ -138,8 +138,9 @@ class ConnectController extends Controller {
      * @return JSONResponse
      */
     public function await(): JSONResponse {
-        $time = 0;
-        while($time < $this->getTimeLimit()) {
+        $time  = 0;
+        $limit = $this->getTimeLimit() * 4;
+        while($time < $limit) {
             $registration = $this->getRegistrationFromSession();
             if($registration === null) {
                 return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
@@ -156,7 +157,7 @@ class ConnectController extends Controller {
                 return new JSONResponse($data);
             }
 
-            sleep(1);
+            usleep(250000);
             $time++;
         }
 
@@ -306,19 +307,21 @@ class ConnectController extends Controller {
      * @return string
      */
     protected function getTheme(?string $baseUrl): string {
-        return base64_encode(
-            gzcompress(
-                json_encode(
-                    [
-                        'label'      => $this->serverSettings->get('theme.label'),
-                        'logo'       => str_replace($baseUrl, '', $this->serverSettings->get('theme.logo')),
-                        'background' => str_replace($baseUrl, '', $this->serverSettings->get('theme.background')),
-                        'color'      => $this->serverSettings->get('theme.color.primary'),
-                        'txtColor'   => $this->serverSettings->get('theme.color.text'),
-                        'bgColor'    => $this->serverSettings->get('theme.color.background'),
-                    ]
-                ),
-                9
+        return urlencode(
+            base64_encode(
+                gzcompress(
+                    json_encode(
+                        [
+                            'label'      => $this->serverSettings->get('theme.label'),
+                            'logo'       => str_replace($baseUrl, '', $this->serverSettings->get('theme.logo')),
+                            'background' => str_replace($baseUrl, '', $this->serverSettings->get('theme.background')),
+                            'color'      => $this->serverSettings->get('theme.color.primary'),
+                            'txtColor'   => $this->serverSettings->get('theme.color.text'),
+                            'bgColor'    => $this->serverSettings->get('theme.color.background'),
+                        ]
+                    ),
+                    9
+                )
             )
         );
     }
@@ -372,8 +375,9 @@ class ConnectController extends Controller {
      * @throws Exception
      */
     protected function waitForConfirmation(string $id): JSONResponse {
-        $time = 0;
-        while($time < $this->getTimeLimit()) {
+        $time  = 0;
+        $limit = $this->getTimeLimit() * 4;
+        while($time < $limit) {
             $this->registrationService->clearCache();
             try {
                 /** @var Registration $registration */
@@ -399,7 +403,7 @@ class ConnectController extends Controller {
                 break;
             }
 
-            sleep(1);
+            usleep(250000);
             $time++;
         }
 
