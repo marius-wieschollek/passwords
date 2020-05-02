@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2020.5.0 - Feature release
 ### Added
  - Nextcloud 19 support
  - Chrome / Google Passwords import
