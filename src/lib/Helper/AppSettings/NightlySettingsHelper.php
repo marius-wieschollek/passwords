@@ -62,6 +62,7 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
      *
      * @param ConfigurationService $config
      * @param NightlyAppFetcher    $nightlyAppFetcher
+     * @param BackgroundJobService $backgroundJobService
      */
     public function __construct(ConfigurationService $config, NightlyAppFetcher $nightlyAppFetcher, BackgroundJobService $backgroundJobService) {
         parent::__construct($config);

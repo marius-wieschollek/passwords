@@ -5,7 +5,7 @@
  * and licensed under the AGPL.
  */
 
-namespace OCA\Passwords\Cron;
+namespace OCA\Passwords\Helper\CleanUp;
 
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Services\ConfigurationService;
@@ -25,11 +25,16 @@ use OCA\Passwords\Services\Object\TagService;
 use OCP\IUserManager;
 
 /**
- * Class ProcessDeletedEntities
+ * Class CleanDeletedEntitiesHelper
  *
- * @package OCA\Passwords\Cron
+ * @package OCA\Passwords\Helper\CleanUp
  */
-class ProcessDeletedEntities extends AbstractTimedJob {
+class CleanDeletedEntitiesHelper {
+
+    /**
+     * @var LoggingService
+     */
+    protected $logger;
 
     /**
      * @var ConfigurationService
@@ -102,7 +107,7 @@ class ProcessDeletedEntities extends AbstractTimedJob {
     protected $time = 0;
 
     /**
-     * ProcessDeletedEntities constructor.
+     * CleanDeletedEntitiesHelper constructor.
      *
      * @param LoggingService             $logger
      * @param TagService                 $tagService
@@ -135,6 +140,7 @@ class ProcessDeletedEntities extends AbstractTimedJob {
         PasswordRevisionService $passwordRevisionService,
         PasswordTagRelationService $passwordTagRelationService
     ) {
+        $this->logger                     = $logger;
         $this->config                     = $config;
         $this->tagService                 = $tagService;
         $this->userManager                = $userManager;
@@ -147,13 +153,12 @@ class ProcessDeletedEntities extends AbstractTimedJob {
         $this->folderRevisionService      = $folderRevisionService;
         $this->passwordRevisionService    = $passwordRevisionService;
         $this->passwordTagRelationService = $passwordTagRelationService;
-        parent::__construct($logger, $environment);
     }
 
     /**
-     * @param $argument
+     *
      */
-    protected function runJob($argument): void {
+    public function run(): void {
         $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
         if($timeout >= 0) $this->time = time() - $timeout;
 
