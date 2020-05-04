@@ -20,7 +20,7 @@
                              :href="app.sources"
                              :text="app.author"/>
                         <translate :say="app.description" tag="div" class="description"/>
-                        <div class="passlink-container" v-if="passlink && app.official">
+                        <div class="passlink-container" v-if="passlink && app.passlink">
                             <translate say="Connect with PassLink"
                                        tag="button"
                                        class="primary passlink-connect"
@@ -88,6 +88,7 @@
                         'description': 'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.',
                         'download'   : 'https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-apps',
                         'sources'    : 'https://github.com/marius-wieschollek/passwords-webextension',
+                        'passlink'   : true,
                         'official'   : true
                     },
                     'chrome' : {
@@ -96,6 +97,7 @@
                         'description': 'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.',
                         'download'   : 'https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi',
                         'sources'    : 'https://github.com/marius-wieschollek/passwords-webextension',
+                        'passlink'   : false,
                         'official'   : true
                     }
                 };
