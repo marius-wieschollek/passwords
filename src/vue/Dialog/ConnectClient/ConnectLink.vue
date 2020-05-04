@@ -3,7 +3,7 @@
         <translate tag="div"
                    class="description"
                    say="To connect a new device or app, simply scan the QR code or click the link."/>
-        <qr-code class="qr-code" :text="link" :color="color" :size="256" bgColor="#fff0" errorLevel="H"/>
+        <qr-code class="qr-code" :text="link" :color="color" :size="300" bgColor="#fff0" errorLevel="H"/>
         <translate tag="a" target="_blank" :href="link" class="share-link button primary" say="Connect via link"/>
     </div>
 </template>
@@ -67,7 +67,7 @@
 
         .qr-code {
             margin : 2rem auto;
-            width  : 256px;
+            width  : 300px;
         }
 
         .share-link {
