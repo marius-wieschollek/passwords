@@ -29,6 +29,7 @@ Scenario('Reset the Account', (I) => {
     I.waitForElement('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary', 10);
     I.wait(11);
     I.click('#body-user > div.oc-dialog > div.oc-dialog-buttonrow.twobuttons > button.primary');
+    I.wait(5);
     I.waitUrlEquals('/index.php/apps/passwords/#/folders', 30);
 });
 
@@ -36,7 +37,9 @@ Scenario('Import the sample database', async (I) => {
     await download('https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json', 'tests/codecept/data/');
 
     I.amOnPage('/index.php/apps/passwords/#/backup/import');
-    I.waitForElement('div.import-container', 10);
+    I.waitForElement('#passwords-import-source', 10);
+    I.selectOption('#passwords-import-source', 'json');
+    I.waitForElement('#passwords-import-file', 10);
     I.attachFile('#passwords-import-file', 'tests/codecept/data/SamplePasswords.json');
     I.waitForElement('#passwords-import-execute');
     await I.openMoreMenu();
@@ -215,6 +218,7 @@ Scenario('Show Trash Section', async (I) => {
 
     I.amOnPage('/index.php/apps/passwords/#/folders');
     I.waitForElement('div[data-folder-title="Work"]', 20);
+    I.closeAllNotifications();
     I.click('div[data-folder-title="Work"] > div.more');
     I.click('div[data-folder-title="Work"] > div.more > div > ul > li:nth-child(2)');
 
