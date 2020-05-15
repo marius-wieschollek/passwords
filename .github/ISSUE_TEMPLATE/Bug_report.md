@@ -6,6 +6,7 @@ labels: bug
 
 <!--
  Remember not to include personal data as this is public.
+ Take a look at https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/App-Debugging to get all information.
 -->
 
 ### System Information
