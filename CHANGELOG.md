@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+ - Edit password as new
 
 ## 2020.5.0 - Feature release
 ### Added

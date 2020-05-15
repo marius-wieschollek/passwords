@@ -30,7 +30,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties,_success}}).$mount('#app-popup div');
+            new PwCreateDialog({propsData: {properties, _success}}).$mount('#app-popup div');
         });
     }
 
@@ -42,23 +42,28 @@ class PasswordManager {
     createPasswordFromData(password) {
         return new Promise((resolve, reject) => {
             API.createPassword(password)
-                .then((data) => {
+                .then(async (data) => {
                     Messages.notification('Password created');
 
-                   password.id = data.id;
-                   password.status = 0;
-                   password.editable = true;
-                   password.revision = data.revision;
-                   password.edited = password.created = password.updated = Utility.getTimestamp();
-                   if(!password.label) API._generatePasswordTitle(password);
-                   password = API._processPassword(password);
-                   Events.fire('password.created', password);
-               })
-               .catch((e) => {
-                   console.error(e);
-                   Messages.notification('Creating password failed');
-                   reject(password);
-               });
+                    if(password.hasOwnProperty('tags')) {
+                        let model = await API.showPassword(data.id, '+tags');
+                        password.tags = model.tags;
+                    }
+
+                    password.id = data.id;
+                    password.status = 0;
+                    password.editable = true;
+                    password.revision = data.revision;
+                    password.edited = password.created = password.updated = Utility.getTimestamp();
+                    if(!password.label) API._generatePasswordTitle(password);
+                    password = API._processPassword(password);
+                    Events.fire('password.created', password);
+                })
+                .catch((e) => {
+                    console.error(e);
+                    Messages.notification('Creating password failed');
+                    reject(password);
+                });
         });
     }
 
@@ -84,23 +89,64 @@ class PasswordManager {
                 }
 
                 API.updatePassword(p)
-                   .then((d) => {
-                       p.revision = d.revision;
-                       p.updated = new Date();
-                       if(password.hasOwnProperty('tags')) p.tags = password.tags;
-                       if(typeof p.customFields === "string") p.customFields = JSON.parse(p.customFields);
+                    .then((d) => {
+                        p.revision = d.revision;
+                        p.updated = new Date();
+                        if(password.hasOwnProperty('tags')) p.tags = password.tags;
+                        if(typeof p.customFields === 'string') p.customFields = JSON.parse(p.customFields);
 
-                       Events.fire('password.updated', p);
-                       Messages.notification('Password saved');
-                       resolve(p);
-                   })
-                   .catch((e) => {
-                       console.error(e);
-                       Messages.notification('Saving password failed');
-                       reject(password);
-                   });
+                        Events.fire('password.updated', p);
+                        Messages.notification('Password saved');
+                        resolve(p);
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                        Messages.notification('Saving password failed');
+                        reject(password);
+                    });
             };
             DialogWindow._fail = reject;
+        });
+    }
+
+    /**
+     *
+     * @param password
+     * @return {Promise<unknown>}
+     */
+    clonePassword(password) {
+        return new Promise(async (resolve, reject) => {
+            let properties = Utility.cloneObject(password);
+            properties.id = null;
+            properties.status = null;
+            properties.revision = null;
+            properties.password = null;
+            properties.updated = null;
+            properties.created = null;
+            properties.edited = null;
+
+            for(let customField of properties.customFields) {
+                if(customField.type === 'secret') {
+                    customField.value = '';
+                }
+            }
+
+            if(!properties.hasOwnProperty('tags')) {
+                let model = await API.showPassword(password.id, '+tags');
+                properties.tags = model.tags;
+            }
+
+            let _success = (p) => {
+                this.createPasswordFromData(p)
+                    .then(resolve)
+                    .catch(reject);
+            };
+
+            let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
+                PwCreateDialog = Vue.extend(PasswordDialog.default);
+
+            new PwCreateDialog({propsData: {properties, _success}}).$mount('#app-popup div');
+            PwCreateDialog._fail = reject;
         });
     }
 
@@ -120,19 +166,19 @@ class PasswordManager {
             let originalFolder = password.folder;
             password.folder = folder;
             API.updatePassword(password)
-               .then((d) => {
-                   password.revision = d.revision;
-                   password.updated = new Date();
-                   Events.fire('password.updated', password);
-                   Messages.notification('Password moved');
-                   resolve(password);
-               })
-               .catch((e) => {
-                   console.error(e);
-                   Messages.notification('Moving password failed');
-                   password.folder = originalFolder;
-                   reject(password);
-               });
+                .then((d) => {
+                    password.revision = d.revision;
+                    password.updated = new Date();
+                    Events.fire('password.updated', password);
+                    Messages.notification('Password moved');
+                    resolve(password);
+                })
+                .catch((e) => {
+                    console.error(e);
+                    Messages.notification('Moving password failed');
+                    password.folder = originalFolder;
+                    reject(password);
+                });
         });
     }
 
@@ -144,16 +190,16 @@ class PasswordManager {
     updatePassword(password) {
         return new Promise((resolve, reject) => {
             API.updatePassword(password)
-               .then((d) => {
-                   password.revision = d.revision;
-                   password.updated = new Date();
-                   Events.fire('password.updated', password);
-                   resolve(password);
-               })
-               .catch((e) => {
-                   console.error(e);
-                   reject(password);
-               });
+                .then((d) => {
+                    password.revision = d.revision;
+                    password.updated = new Date();
+                    Events.fire('password.updated', password);
+                    resolve(password);
+                })
+                .catch((e) => {
+                    console.error(e);
+                    reject(password);
+                });
         });
     }
 
@@ -176,7 +222,7 @@ class PasswordManager {
                         resolve(password);
                     })
                     .catch((e) => {
-                        if(e.id && e.id === 'f281915e'){
+                        if(e.id && e.id === 'f281915e') {
                             password.trashed = true;
                             password.updated = new Date();
                             Events.fire('password.deleted', password);

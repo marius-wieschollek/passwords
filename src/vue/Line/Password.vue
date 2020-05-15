@@ -28,6 +28,7 @@
                         <translate tag="li" @click="detailsAction()" icon="info" say="Details"/>
                         <translate tag="li" @click="detailsAction('share')" icon="share-alt" say="Share"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
+                        <translate tag="li" @click="cloneAction()" icon="files-o" v-if="password.editable" say="Edit as new"/>
                         <translate tag="li"
                                    v-if="showCopyOptions"
                                    @click="copyAction('password')"
@@ -58,7 +59,6 @@
 
 <script>
     import $ from "jquery";
-    import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
@@ -203,6 +203,10 @@
                 PasswordManager
                     .editPassword(this.password)
                     .then((p) => {this.password = p;});
+            },
+            cloneAction() {
+                PasswordManager
+                    .clonePassword(this.password);
             },
             deleteAction() {
                 PasswordManager.deletePassword(this.password);

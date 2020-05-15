@@ -11,6 +11,7 @@
             'Trash'                               : 'Papierkorb',
             'Details'                             : 'Details',
             'Edit'                                : 'Bearbeiten',
+            'Edit as new'                         : 'Als neu bearbeiten',
             'Rename'                              : 'Umbenennen',
             'Delete'                              : 'Löschen',
             'Restore'                             : 'Wiederherstellen',

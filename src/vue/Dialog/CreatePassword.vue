@@ -68,7 +68,7 @@
                             <textarea id="password-notes" name="notes" maxlength="4096"></textarea>
                         </div>
                     </foldout>
-                    <foldout title="Custom Fields">
+                    <foldout title="Custom Fields" :initially-open="customFieldsOpen">
                         <custom-fields :fields="password.customFields" @updated="updateCustomFields"/>
                     </foldout>
                     <foldout title="More Options">
@@ -96,7 +96,7 @@
 </template>
 
 <script>
-    import API from "@js/Helper/api";
+    import API from '@js/Helper/api';
     import Foldout from '@vc/Foldout';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
@@ -115,7 +115,7 @@
         props: {
             title     : {
                 type     : String,
-                'default': 'Create password',
+                'default': 'Create password'
             },
             properties: {
                 type: Object
@@ -130,12 +130,13 @@
                 password = Object.assign({cseType, notes: '', customFields: []}, this.properties);
 
             return {
-                notesOpen    : window.innerWidth > 641,
-                showPassword : false,
-                showLoader   : false,
-                simplemde    : null,
-                generator    : {numbers: undefined, special: undefined, active: false},
-                hasEncryption: API.hasEncryption,
+                notesOpen       : window.innerWidth > 641,
+                customFieldsOpen: window.innerWidth > 641 && password.customFields.length !== 0,
+                showPassword    : false,
+                showLoader      : false,
+                simplemde       : null,
+                generator       : {numbers: undefined, special: undefined, active: false},
+                hasEncryption   : API.hasEncryption,
                 password
             };
         },
@@ -237,7 +238,7 @@
 
         watch: {
             password(password) {
-                if(typeof password.customFields === "string") password.customFields = JSON.parse(password.customFields);
+                if(typeof password.customFields === 'string') password.customFields = JSON.parse(password.customFields);
                 if(password.customFields === null) password.customFields = [];
                 if(this.simplemde) this.simplemde.value(password.notes);
             },
@@ -255,245 +256,245 @@
     @import "~simplemde/dist/simplemde.min.css";
 
     #app-popup #passwords-create-new {
-            .window {
-                height : 88%;
+        .window {
+            height : 88%;
 
-                @media (max-width : $width-medium) {
-                    height : 100%;
-                }
+            @media (max-width : $width-medium) {
+                height : 100%;
             }
+        }
 
-            .content {
-                display               : grid;
-                grid-template-columns : 1fr 1fr;
-                grid-template-rows    : 9fr 1fr;
-                grid-template-areas   : "left right" "controls right";
-                grid-column-gap       : 15px;
-                padding               : 15px;
+        .content {
+            display               : grid;
+            grid-template-columns : 1fr 1fr;
+            grid-template-rows    : 9fr 1fr;
+            grid-template-areas   : "left right" "controls right";
+            grid-column-gap       : 15px;
+            padding               : 15px;
 
-                .form {
-                    grid-area : left;
+            .form {
+                grid-area : left;
 
-                    .form-grid {
-                        display               : grid;
-                        grid-template-columns : auto 3fr;
-                        grid-template-rows    : 1fr;
-                        grid-row-gap          : 5px;
-                        justify-items         : left;
-                        align-items           : end;
+                .form-grid {
+                    display               : grid;
+                    grid-template-columns : auto 3fr;
+                    grid-template-rows    : 1fr;
+                    grid-row-gap          : 5px;
+                    justify-items         : left;
+                    align-items           : end;
 
-                        .tags-container,
-                        .foldout-container {
-                            grid-column  : 1 / span 2;
-                            justify-self : stretch;
-                        }
-
-                        label {
-                            padding : 0 0.9rem 5px 0;
-                            cursor  : pointer;
-                        }
-                    }
-
-                    .section-title {
-                        font-size     : 1.1rem;
-                        padding       : 0 0 0.25rem 0;
-                        border-bottom : 1px solid var(--color-primary);
-                    }
-
-                    .password-field {
-                        display   : block;
-                        width     : 100%;
-                        max-width : 275px;
-                        position  : relative;
-
-                        input {
-                            max-width     : initial;
-                            padding-right : 45px;
-                            font-family   : var(--pw-mono-font-face);
-                        }
-
-                        .icons {
-                            position    : absolute;
-                            top         : 0;
-                            right       : 3px;
-                            bottom      : 0;
-                            display     : flex;
-                            align-items : center;
-
-                            i.fa {
-                                font-size : 1rem;
-                                cursor    : pointer;
-                                margin    : 3px;
-                            }
-                        }
+                    .tags-container,
+                    .foldout-container {
+                        grid-column  : 1 / span 2;
+                        justify-self : stretch;
                     }
 
                     label {
-                        display   : block;
-                        font-size : 0.9rem;
-                    }
-
-                    input[type=url],
-                    input[type=text],
-                    input[type=email],
-                    input[type=password] {
-                        cursor    : text;
-                        width     : 100%;
-                        max-width : 275px;
-                    }
-
-                    input[type=checkbox] {
-                        cursor : pointer;
-                    }
-
-                    select {
-                        width     : 100%;
-                        max-width : 275px;
-                    }
-
-                    textarea {
-                        opacity : 0;
-                    }
-
-                    .settings {
-                        grid-column-start : 2;
-                        grid-column-end   : 3;
-                        line-height       : 30px;
-                        display           : flex;
-                        overflow          : hidden;
-                        max-height        : 0;
-                        transition        : max-height 0.25s ease-in-out;
-
-                        &.active {
-                            max-height : 60px;
-                        }
-
-                        input {
-                            margin : 0;
-                        }
-
-                        label {
-                            padding : 0 10px 0 5px;
-                        }
-                    }
-
-                    &.right {
-                        grid-area  : right;
-                        overflow-y : auto;
-
-                        .notes-container {
-                            padding : 0.25em 0;
-                            width   : 525px;
-
-                            .editor-toolbar {
-                                border  : none;
-                                padding : 0;
-
-                                a {
-                                    background : var(--color-main-background);
-                                    border     : 1px solid transparent;
-
-                                    &:hover,
-                                    &:active,
-                                    &:focus {
-                                        background   : var(--color-main-background);
-                                        border-color : var(--color-border);
-                                        cursor       : pointer;
-                                    }
-
-                                    &:before {
-                                        color : var(--color-main-text);
-                                    }
-                                }
-
-                                .separator {
-                                    border-left  : none;
-                                    border-right : 1px solid var(--color-border);
-                                }
-                            }
-
-                            .CodeMirror {
-                                background    : var(--color-main-background);
-                                color         : var(--color-main-text);
-                                border-color  : var(--color-border);
-                                border-radius : var(--border-radius);
-                            }
-
-                            .CodeMirror-code {
-                                width   : auto;
-                                border  : none;
-                                padding : 0;
-                                margin  : 0;
-                            }
-
-                            .CodeMirror-scroll {
-                                overflow   : auto !important;
-                                min-height : 300px;
-                                max-height : 300px;
-                            }
-
-                            .CodeMirror-cursor,
-                            .CodeMirror-cursors {
-                                border      : none;
-                                border-left : 1px solid var(--color-main-text);
-                            }
-
-                            .CodeMirror-selectedtext,
-                            .CodeMirror-selectedtext::selection {
-                                color      : var(--color-main-background);
-                                background : var(--color-main-text);
-                            }
-
-                            .editor-preview.editor-preview-active {
-                                background : var(--color-background-dark);
-
-                                p {
-                                    margin-bottom : 1em;
-                                }
-                            }
-
-                            .warning {
-                                margin : 0 0 4px;
-                            }
-
-                            @media (max-width : $width-medium) {
-                                width   : 100%;
-                                max-width   : 525px;
-                            }
-                        }
-
-                        .foldout-container {
-                            transition : padding-bottom 0.1s ease-in-out;
-
-                            &.open {
-                                padding-bottom : 1.25rem;
-                            }
-
-                            &.first-open {
-                                transition : none;
-                            }
-                        }
-
+                        padding : 0 0.9rem 5px 0;
+                        cursor  : pointer;
                     }
                 }
 
-                .controls {
-                    grid-area  : controls;
-                    align-self : end;
+                .section-title {
+                    font-size     : 1.1rem;
+                    padding       : 0 0 0.25rem 0;
+                    border-bottom : 1px solid var(--color-primary);
+                }
+
+                .password-field {
+                    display   : block;
+                    width     : 100%;
+                    max-width : 275px;
+                    position  : relative;
 
                     input {
-                        width     : 100%;
-                        font-size : 1.1rem;
+                        max-width     : initial;
+                        padding-right : 45px;
+                        font-family   : var(--pw-mono-font-face);
+                    }
+
+                    .icons {
+                        position    : absolute;
+                        top         : 0;
+                        right       : 3px;
+                        bottom      : 0;
+                        display     : flex;
+                        align-items : center;
+
+                        i.fa {
+                            font-size : 1rem;
+                            cursor    : pointer;
+                            margin    : 3px;
+                        }
                     }
                 }
 
-                @media (max-width : $width-extra-small) {
-                    display : block;
+                label {
+                    display   : block;
+                    font-size : 0.9rem;
+                }
 
-                    .form.left {
-                        padding-bottom : 1.25rem;
+                input[type=url],
+                input[type=text],
+                input[type=email],
+                input[type=password] {
+                    cursor    : text;
+                    width     : 100%;
+                    max-width : 275px;
+                }
+
+                input[type=checkbox] {
+                    cursor : pointer;
+                }
+
+                select {
+                    width     : 100%;
+                    max-width : 275px;
+                }
+
+                textarea {
+                    opacity : 0;
+                }
+
+                .settings {
+                    grid-column-start : 2;
+                    grid-column-end   : 3;
+                    line-height       : 30px;
+                    display           : flex;
+                    overflow          : hidden;
+                    max-height        : 0;
+                    transition        : max-height 0.25s ease-in-out;
+
+                    &.active {
+                        max-height : 60px;
                     }
+
+                    input {
+                        margin : 0;
+                    }
+
+                    label {
+                        padding : 0 10px 0 5px;
+                    }
+                }
+
+                &.right {
+                    grid-area  : right;
+                    overflow-y : auto;
+
+                    .notes-container {
+                        padding : 0.25em 0;
+                        width   : 525px;
+
+                        .editor-toolbar {
+                            border  : none;
+                            padding : 0;
+
+                            a {
+                                background : var(--color-main-background);
+                                border     : 1px solid transparent;
+
+                                &:hover,
+                                &:active,
+                                &:focus {
+                                    background   : var(--color-main-background);
+                                    border-color : var(--color-border);
+                                    cursor       : pointer;
+                                }
+
+                                &:before {
+                                    color : var(--color-main-text);
+                                }
+                            }
+
+                            .separator {
+                                border-left  : none;
+                                border-right : 1px solid var(--color-border);
+                            }
+                        }
+
+                        .CodeMirror {
+                            background    : var(--color-main-background);
+                            color         : var(--color-main-text);
+                            border-color  : var(--color-border);
+                            border-radius : var(--border-radius);
+                        }
+
+                        .CodeMirror-code {
+                            width   : auto;
+                            border  : none;
+                            padding : 0;
+                            margin  : 0;
+                        }
+
+                        .CodeMirror-scroll {
+                            overflow   : auto !important;
+                            min-height : 300px;
+                            max-height : 300px;
+                        }
+
+                        .CodeMirror-cursor,
+                        .CodeMirror-cursors {
+                            border      : none;
+                            border-left : 1px solid var(--color-main-text);
+                        }
+
+                        .CodeMirror-selectedtext,
+                        .CodeMirror-selectedtext::selection {
+                            color      : var(--color-main-background);
+                            background : var(--color-main-text);
+                        }
+
+                        .editor-preview.editor-preview-active {
+                            background : var(--color-background-dark);
+
+                            p {
+                                margin-bottom : 1em;
+                            }
+                        }
+
+                        .warning {
+                            margin : 0 0 4px;
+                        }
+
+                        @media (max-width : $width-medium) {
+                            width     : 100%;
+                            max-width : 525px;
+                        }
+                    }
+
+                    .foldout-container {
+                        transition : padding-bottom 0.1s ease-in-out;
+
+                        &.open {
+                            padding-bottom : 1.25rem;
+                        }
+
+                        &.first-open {
+                            transition : none;
+                        }
+                    }
+
+                }
+            }
+
+            .controls {
+                grid-area  : controls;
+                align-self : end;
+
+                input {
+                    width     : 100%;
+                    font-size : 1.1rem;
+                }
+            }
+
+            @media (max-width : $width-extra-small) {
+                display : block;
+
+                .form.left {
+                    padding-bottom : 1.25rem;
                 }
             }
         }
+    }
 </style>
