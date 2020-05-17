@@ -1,6 +1,14 @@
 ## [Unreleased]
 ### Added
  - Edit password as new
+ - EOL warning for NC < 19
+ - EOL warning for PHP < 7.4
+### Changed
+ - Styling in NC 19
+ - Removed Link option in PassLink for Chrome
+ - HTTPS detection now removes client side flag automatically
+ - Reduced background tasks
+ - Improved QR code compatibility
 
 ## 2020.5.0 - Feature release
 ### Added
