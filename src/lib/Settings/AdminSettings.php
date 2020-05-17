@@ -393,12 +393,12 @@ class AdminSettings implements ISettings {
             'cron'   => $cronType,
             'https'  => OC::$server->getRequest()->getHttpProtocol() === 'https',
             'php'    => [
-                'warn'    => false, // PHP_VERSION_ID < 70400,
+                'warn'    => PHP_VERSION_ID < 70400,
                 'error'   => PHP_VERSION_ID < 70300,
                 'version' => PHP_VERSION
             ],
             'server' => [
-                'warn'    => false, // $ncVersion < 17,
+                'warn'    => $ncVersion < 19,
                 'error'   => $ncVersion < 17,
                 'version' => $ncVersion
             ],
