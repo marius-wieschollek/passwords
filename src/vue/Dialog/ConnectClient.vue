@@ -6,7 +6,7 @@
                 <translate say="Connect a new device"/>
             </div>
             <div class="content">
-                <connect-link v-on:connect="connect($event)" v-if="step === 1"/>
+                <connect-link :show-connect-link="showConnectLink" v-on:connect="connect($event)" v-if="step === 1"/>
                 <connect-confirm :client="client"
                                  v-on:reject="reject($event)"
                                  v-on:confirm="confirm($event)"
@@ -25,6 +25,10 @@
 
     export default {
         components: {ConnectLink, ConnectConfirm, ConnectResult, Translate},
+
+        props: {
+            showConnectLink: Boolean
+        },
 
         data() {
             return {

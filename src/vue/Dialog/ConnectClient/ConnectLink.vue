@@ -1,10 +1,13 @@
 <template>
     <div class="connect-client-link">
-        <translate tag="div"
-                   class="description"
-                   say="To connect a new device or app, simply scan the QR code or click the link."/>
+        <translate tag="div" class="description" :say="description"/>
         <qr-code class="qr-code" :text="link" :color="color" :size="300" bgColor="#fff0" errorLevel="Q"/>
-        <translate tag="a" target="_blank" :href="link" class="share-link button primary" say="Connect via link"/>
+        <translate tag="a"
+                   target="_blank"
+                   :href="link"
+                   class="share-link button primary"
+                   say="Connect via link"
+                   v-if="showConnectLink"/>
     </div>
 </template>
 
@@ -16,6 +19,10 @@
 
     export default {
         components: {Translate, QrCode},
+
+        props: {
+            showConnectLink: Boolean
+        },
 
         data() {
             return {
@@ -35,6 +42,12 @@
 
         beforeDestroy() {
             this.active = false;
+        },
+
+        computed: {
+            description() {
+                return this.showConnectLink ? 'To connect a new device or app, simply scan the QR code or click the link.':'Scan the QR code to connect a new device or app.';
+            }
         },
 
         methods: {
@@ -60,8 +73,8 @@
 <style lang="scss">
     #passlink-connect .connect-client-link {
         .description {
-            margin    : 1rem;
-            text-align: center;
+            margin     : 1rem;
+            text-align : center;
 
         }
 

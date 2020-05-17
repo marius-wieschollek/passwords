@@ -27,6 +27,7 @@
         },
         {
             "To connect a new device or app, simply scan the QR code or click the link."                                                                                     : "Um ein neues Gerät oder eine App zu verbinden, scannen Sie einfach den QR-Code oder klicken Sie auf den Link.",
+            "Scan the QR code to connect a new device or app."                                                                                                               : "Scanne einfach den QR-Code um dich mit einem neuen Gerät oder einer neuen App zu verbinden.",
             "Check if the codes below match with the ones provided by the device or app:"                                                                                    : "Bitte prüfen Sie, ob diese Codes mit denen auf Ihrem Gerät oder in der App übereinstimmen:",
             "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store."                                     : "Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store können Sie alle Ihre Passwörter einfach in Firefox verwenden und verwalten.",
             "Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.": "Unsere offizielle Chrome-Erweiterung ermöglicht es Ihnen, alle Ihre Passwörter über Ihren Browser zu verwalten und ist für viele auf Chromium basierenden Browsern im Chrome Web Store verfügbar.",
