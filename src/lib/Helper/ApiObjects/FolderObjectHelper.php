@@ -95,9 +95,10 @@ class FolderObjectHelper extends AbstractObjectHelper {
         $revision = $this->getRevision($folder, $filter, $withModel);
         if($revision === null) return null;
 
-        $object = [];
         if($withModel) {
             $object = $this->getModel($folder, $revision);
+        } else {
+            $object = ['id' => $folder->getUuid()];
         }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($folder, $object);

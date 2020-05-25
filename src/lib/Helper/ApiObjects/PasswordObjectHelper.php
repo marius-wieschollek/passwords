@@ -111,9 +111,10 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         $revision = $this->getRevision($password, $filter, $withModel);
         if($revision === null) return null;
 
-        $object      = [];
         if($withModel) {
             $object = $this->getModel($password, $revision);
+        } else {
+            $object = ['id' => $password->getUuid()];
         }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($password, $object);
