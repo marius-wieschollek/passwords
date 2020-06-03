@@ -104,8 +104,8 @@ export default class Utility {
                 let aP = a[property], bP = b[property];
                 if(aP === bP) return 0;
                 if(typeof aP === 'string') {
-                    if(ascending) return aP.localeCompare(bP, 'kn', {sensitivity: 'base'});
-                    return bP.localeCompare(aP, 'kn', {sensitivity: 'base'});
+                    if(ascending) return aP.localeCompare(bP, undefined, {numeric: true, sensitivity: 'base'});
+                    return bP.localeCompare(aP, undefined, {numeric: true, sensitivity: 'base'});
                 }
                 if(ascending) return aP < bP ? -1:1;
                 return aP > bP ? -1:1;
