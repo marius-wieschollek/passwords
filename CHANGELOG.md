@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2020.6.0 - Feature release
 ### Added
  - Edit password as new
  - EOL warning for NC < 19
@@ -9,6 +11,9 @@
  - HTTPS detection now removes client side flag automatically
  - Reduced background tasks
  - Improved QR code compatibility
+### Fixed
+ - Missing parent folder id
+ - Incorrect sorting
 
 ## 2020.5.0 - Feature release
 ### Added
