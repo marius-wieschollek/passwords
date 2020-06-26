@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+ - Italian translation
 
 ## 2020.6.0 - Feature release
 ### Added
