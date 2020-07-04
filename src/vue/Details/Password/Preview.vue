@@ -13,8 +13,8 @@
 
 <script>
     import Web from '@vc/Web';
-    import API from '@js/Helper/api';
     import SettingsService from '@js/Services/SettingsService';
+    import FaviconService from "@js/Services/FaviconService";
 
     export default {
         components: {Web},
@@ -90,7 +90,11 @@
                 }
             },
             loadFavicon() {
-                setTimeout(() => {if(this.loading) this.loadingIcon = API.getFaviconUrl(this.host, 96);}, 450);
+                setTimeout(async () => {
+                    if(this.loading) {
+                        this.loadingIcon = await FaviconService.fetch(this.host, 96);
+                    }
+                }, 450);
             }
         },
         watch  : {
@@ -115,34 +119,49 @@
 
 <style lang="scss">
     .preview-container {
-        max-height : 274px;
-        overflow   : hidden;
-        position   : relative;
+        max-height: 274px;
+        overflow: hidden;
+        position: relative;
 
         .inner-container {
-            display   : block;
-            font-size : 0;
+            display: block;
+            font-size: 0;
 
             .image {
-                margin-top : 0;
-                min-height : 0;
-                position   : relative;
-                opacity    : 1;
-                transition : min-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+                margin-top: 0;
+                min-height: 0;
+                position: relative;
+                opacity: 1;
+                transition: min-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
 
                 img {
-                    width : 100%;
+                    width: 100%;
                 }
 
-                &.s1 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 1s ease-in-out; }
-                &.s5 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 5s ease-in-out; }
-                &.s10 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 10s ease-in-out; }
-                &.s15 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 15s ease-in-out; }
-                &.s20 { transition : min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 20s ease-in-out; }
+                &.s1 {
+                    transition: min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 1s ease-in-out;
+                }
+
+                &.s5 {
+                    transition: min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 5s ease-in-out;
+                }
+
+                &.s10 {
+                    transition: min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 10s ease-in-out;
+                }
+
+                &.s15 {
+                    transition: min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 15s ease-in-out;
+                }
+
+                &.s20 {
+                    transition: min-height 0.5s ease-in-out, opacity 0.15s ease-in-out, margin-top 20s ease-in-out;
+                }
+
                 &.loading-hidden {
-                    opacity    : 0;
-                    min-height : 274px;
-                    transition : min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+                    opacity: 0;
+                    min-height: 274px;
+                    transition: min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
 
                     img {
                         height: 0;
@@ -151,48 +170,48 @@
             }
 
             .loader {
-                position : absolute;
-                top      : 0;
-                right    : 0;
-                bottom   : 0;
-                left     : 0;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
 
                 img {
-                    transform     : translate(-50%, -50%);
-                    border-radius : var(--border-radius);
-                    position      : absolute;
-                    left          : 50%;
-                    top           : 50%;
-                    width         : 72px;
-                    height        : 72px;
-                    transition    : height 0.15s ease-in-out, width 0.15s ease-in-out;
+                    transform: translate(-50%, -50%);
+                    border-radius: var(--border-radius);
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 72px;
+                    height: 72px;
+                    transition: height 0.15s ease-in-out, width 0.15s ease-in-out;
                 }
             }
 
             &:hover .loader img {
-                width  : 96px;
-                height : 96px;
+                width: 96px;
+                height: 96px;
             }
         }
 
         &.hidden {
-            display : none;
+            display: none;
         }
 
-        @media screen and (hover: none)   {
-            overflow-y   : auto;
+        @media screen and (hover: none) {
+            overflow-y: auto;
         }
 
-        @media (max-height : 480px) {
-            max-height : 45vh;
+        @media (max-height: 480px) {
+            max-height: 45vh;
 
             .inner-container .image.loading-hidden {
-                min-height : 45vh;
+                min-height: 45vh;
             }
         }
 
-        @media (max-width : $width-extra-small) {
-            display : none;
+        @media (max-width: $width-extra-small) {
+            display: none;
         }
     }
 </style>

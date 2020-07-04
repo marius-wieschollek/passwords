@@ -3,7 +3,7 @@
         <i class="fa fa-times" @click="closeDetails()"></i>
         <preview :image="object.preview" :icon="object.icon" :link="object.url" :host="object.website"/>
         <div class="title" :title="object.label">
-            <img class="icon" :src="object.icon" alt="">
+            <favicon class="icon" :domain="object.website" />
             <h3>{{ object.label }}</h3>
         </div>
         <div class="infos">
@@ -39,9 +39,11 @@
     import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Sharing from '@vue/Details/Password/Sharing/Sharing';
+    import Favicon from "@vc/Favicon";
 
     export default {
         components: {
+            Favicon,
             Tabs,
             Tags,
             Notes,

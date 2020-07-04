@@ -6,7 +6,7 @@
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
-        <img class="favicon" :src="password.icon" :title="getTitle" loading="lazy" width="32" height="32" alt=""/>
+        <favicon class="favicon" :domain="password.website" :title="getTitle"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
             <li v-for="tag in getTags"
@@ -66,9 +66,11 @@
     import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
+    import Favicon from "@vc/Favicon";
 
     export default {
         components: {
+            Favicon,
             Translate
         },
 

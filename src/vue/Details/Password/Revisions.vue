@@ -1,11 +1,7 @@
 <template>
     <ul class="revision-list">
         <li class="revision" v-for="revision in getRevisions" :key="revision.id" @click="viewAction(revision)" :title="getRevisionLabel(revision)">
-            <img class="icon"
-                 :src="revision.icon"
-                 loading="lazy"
-                 width="32" height="32"
-                 alt="">
+            <favicon class="icon" :domain="revision.website" />
             <span class="label">{{ revision.label }}</span>
             <span class="time">{{ getDateTime(revision.created) }}</span>
             <translate class="restore"
@@ -22,9 +18,11 @@
     import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import PasswordManager from '@js/Manager/PasswordManager';
+    import Favicon from "@vc/Favicon";
 
     export default {
         components: {
+            Favicon,
             Translate
         },
 
