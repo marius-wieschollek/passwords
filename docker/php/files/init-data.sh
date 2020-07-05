@@ -15,3 +15,5 @@ curl -L -o /var/www/html/SampleData.json.gz https://github.com/marius-wiescholle
 /var/www/html/occ passwords:backup:import SampleData.json.gz --no-interaction;
 /var/www/html/occ passwords:backup:restore SampleData --no-interaction;
 rm /var/www/html/SampleData.json.gz
+
+pw-init-settings
