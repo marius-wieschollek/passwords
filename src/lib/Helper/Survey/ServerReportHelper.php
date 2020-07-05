@@ -61,6 +61,7 @@ class ServerReportHelper {
      * ServerReportHelper constructor.
      *
      * @param ShareMapper            $shareMapper
+     * @param RequestHelper          $requestHelper
      * @param ConfigurationService   $config
      * @param TagRevisionMapper      $tagRevisionMapper
      * @param ServiceSettingsHelper  $serviceSettings

@@ -7,10 +7,10 @@
 
 namespace OCA\Passwords\Controller;
 
+use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
-use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\UserChallengeService;
@@ -26,11 +26,6 @@ use OCP\Util;
  * @package OCA\Passwords\Controller
  */
 class PageController extends Controller {
-
-    /**
-     * @var ConfigurationService
-     */
-    protected $config;
 
     /**
      * @var UserSettingsService
@@ -68,7 +63,6 @@ class PageController extends Controller {
      * @param IRequest             $request
      * @param UserSettingsService  $settings
      * @param ApiTokenHelper       $tokenHelper
-     * @param ConfigurationService $config
      * @param EnvironmentService   $environment
      * @param UpgradeCheckHelper   $upgradeCheck
      * @param NotificationService  $notifications
@@ -78,14 +72,12 @@ class PageController extends Controller {
         IRequest $request,
         UserSettingsService $settings,
         ApiTokenHelper $tokenHelper,
-        ConfigurationService $config,
         EnvironmentService $environment,
         UpgradeCheckHelper $upgradeCheck,
         NotificationService $notifications,
         UserChallengeService $challengeService
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->config           = $config;
         $this->tokenHelper      = $tokenHelper;
         $this->settings         = $settings;
         $this->environment      = $environment;
@@ -98,7 +90,7 @@ class PageController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      * @UseSession
-     * @throws \Exception
+     * @throws Exception
      */
     public function index(): TemplateResponse {
         $isSecure = $this->checkIfHttpsUsed();
@@ -132,7 +124,7 @@ class PageController extends Controller {
 
     /**
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function addHeaders(): void {
         $userSettings = json_encode($this->settings->list());
@@ -153,7 +145,9 @@ class PageController extends Controller {
     }
 
     /**
-     * @throws \Exception
+     * @param TemplateResponse $response
+     *
+     * @throws Exception
      */
     protected function getContentSecurityPolicy(TemplateResponse $response): void {
         $manualHost = parse_url($this->settings->get('server.handbook.url'), PHP_URL_HOST);
@@ -172,7 +166,7 @@ class PageController extends Controller {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function checkImpersonation(): void {
         if($this->environment->isImpersonating()) {
