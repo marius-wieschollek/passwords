@@ -47,6 +47,23 @@
                                    v-if="app.legacy"/>
                     </a>
                 </div>
+
+                <translate say="Libraries" tag="h1" icon="microchip"/>
+                <div class="library-list">
+                    <a target="_blank"
+                       rel="noreferrer noopener"
+                       v-for="(library, id) in getLibraries"
+                       :class="[id, 'library']"
+                       :href="library.download">
+                        <div>
+                            <b>{{library.label}}</b>
+                            <web target="_blank" class="author" :class="{'fa fa-certificate':library.official}" :href="library.web" :text="library.author"/>
+                            <span class="dot" v-if="!library.official">⦁</span>
+                            <web target="_blank" class="author" :href="library.sources" text="sources" v-if="!library.official"/>
+                        </div>
+                        <translate :say="library.description"/>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -76,7 +93,7 @@
 
         mounted() {
             DAS.check('passlink-connect')
-                .then((d) => { this.passlink = d; });
+               .then((d) => { this.passlink = d; });
         },
 
         computed: {
@@ -123,6 +140,27 @@
                         'legacy'     : true
                     }
                 };
+            },
+            getLibraries() {
+                return {
+                    'npm'   : {
+                        'label'      : 'NPM Package',
+                        'author'     : Localisation.translate('official'),
+                        'description': 'Official JavaScript client for the API',
+                        'download'   : 'https://www.npmjs.com/package/passwords-client',
+                        'web'        : 'https://git.mdns.eu/nextcloud/passwords-client',
+                        'official'   : true
+                    },
+                    'traxys': {
+                        'label'      : 'Rust Library',
+                        'description': 'A Rust library to bind to the API (WIP)',
+                        'author'     : Localisation.translate('created by {author}', {author: 'traxys'}),
+                        'download'   : 'https://github.com/traxys/nextcloud-passwords-client/',
+                        'sources'    : 'https://github.com/traxys/nextcloud-passwords-client/',
+                        'web'        : 'https://github.com/traxys/',
+                        'official'   : false
+                    }
+                };
             }
         },
 
@@ -137,128 +175,170 @@
 <style lang="scss">
     .app-content-left.apps {
         .app-overview {
-            padding         : 0 1rem 1rem;
-            display         : grid;
-            grid-template   : "hBrowser hAndroid" "cBrowser cAndroid";
-            grid-column-gap : 1rem;
-            grid-row-gap    : 1rem;
+            padding: 0 1rem 1rem;
+            display: grid;
+            grid-template: "hBrowser hBrowser hAndroid hAndroid" "cBrowser cBrowser cAndroid cAndroid" "hLibraries . . ." "cLibraries . . .";
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-column-gap: 1rem;
+            grid-row-gap: 1rem;
 
-            @media(max-width : $width-extra-small) {
-                grid-template : "hAndroid" "cAndroid" "hBrowser" "cBrowser";
+            @media(max-width: $width-extra-small) {
+                grid-template: "hAndroid" "cAndroid" "hBrowser" "cBrowser" "hLibraries" "cLibraries";
             }
         }
 
         h1 {
-            font-size   : 2rem;
-            font-weight : bold;
-            line-height : 2rem;
-            margin      : 2rem 0 0.5rem;
-            grid-area   : hBrowser;
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 2rem;
+            margin: 2rem 0 0.5rem;
+            grid-area: hBrowser;
 
             &:nth-child(2) {
-                grid-area : hAndroid;
+                grid-area: hAndroid;
+            }
+
+            &:nth-child(5) {
+                grid-area: hLibraries;
             }
         }
 
         .app-list {
-            display               : grid;
-            grid-template-columns : 1fr 1fr;
-            grid-column-gap       : 1rem;
-            grid-row-gap          : 1rem;
-            grid-area             : cBrowser;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 1rem;
+            grid-row-gap: 1rem;
+            grid-area: cBrowser;
 
             &:nth-child(4) {
-                grid-area : cAndroid;
+                grid-area: cAndroid;
             }
 
             .app {
-                display         : block;
-                border-radius   : var(--border-radius);
-                padding         : 200px 0.5rem 0.5rem;
-                background      : url(../../img/browser/firefox.svg) no-repeat center 20px;
-                background-size : 160px;
-                border          : 1px solid #0000;
-                box-sizing      : border-box;
-                position        : relative;
-                transition      : border-color 0.15s ease-in-out;
+                display: block;
+                border-radius: var(--border-radius);
+                padding: 200px 0.5rem 0.5rem;
+                background: url(../../img/browser/firefox.svg) no-repeat center 20px;
+                background-size: 160px;
+                border: 1px solid #0000;
+                box-sizing: border-box;
+                position: relative;
+                transition: border-color 0.15s ease-in-out;
 
                 h3 {
-                    font-size     : 1.25rem;
-                    font-weight   : bold;
-                    margin-bottom : 0;
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                    margin-bottom: 0;
                 }
 
                 .author {
-                    font-style : italic;
+                    font-style: italic;
 
                     &.fa.fa-certificate {
-                        color       : var(--color-success) !important;
-                        font-family : var(--font-face);
+                        color: var(--color-success) !important;
+                        font-family: var(--font-face);
 
                         &:before {
-                            font-family : var(--pw-icon-font-face);
-                            font-style  : normal;
+                            font-family: var(--pw-icon-font-face);
+                            font-style: normal;
                         }
                     }
 
                     &:hover {
-                        text-decoration : underline;
+                        text-decoration: underline;
                     }
                 }
 
                 .description {
-                    margin-top : 0.5rem;
+                    margin-top: 0.5rem;
                 }
 
                 .legacy {
-                    font-weight : bold;
+                    font-weight: bold;
                 }
 
                 .dot {
-                    color  : var(--color-primary);
-                    margin : 0 0.5rem;
+                    color: var(--color-primary);
+                    margin: 0 0.5rem;
                 }
 
                 .passlink-container {
-                    height : 3rem;
+                    height: 3rem;
 
                     .passlink-connect {
-                        position      : absolute;
-                        bottom        : .25rem;
-                        width         : calc(100% - 1rem);
-                        border-radius : var(--border-radius);
+                        position: absolute;
+                        bottom: .25rem;
+                        width: calc(100% - 1rem);
+                        border-radius: var(--border-radius);
                     }
                 }
 
                 &.chrome {
-                    background-image : url(../../img/browser/chrome.svg);
+                    background-image: url(../../img/browser/chrome.svg);
                 }
 
                 &.daper {
-                    background-image : url(../../img/apps/daper.png);
+                    background-image: url(../../img/apps/daper.png);
                 }
 
                 &.intirix {
-                    background-image : url(../../img/apps/intirix.png);
+                    background-image: url(../../img/apps/intirix.png);
                 }
 
                 &.legacy {
-                    background-color : var(--color-loading-light);
-                    opacity          : 0.6;
-                    transition       : opacity 0.15s ease-in-out;
+                    background-color: var(--color-loading-light);
+                    opacity: 0.6;
+                    transition: opacity 0.15s ease-in-out;
 
                     &:hover {
-                        opacity : 1;
+                        opacity: 1;
                     }
                 }
 
                 &:hover {
-                    border : 1px solid var(--color-primary);
+                    border: 1px solid var(--color-primary);
                 }
             }
 
-            @media(max-width : $width-large) {
-                grid-template-columns : 1fr;
+            @media(max-width: $width-large) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .library-list {
+            grid-area: cLibraries;
+
+            .library {
+                border-radius: var(--border-radius);
+                padding: 0.5rem;
+                border: 1px solid #0000;
+                display: block;
+
+                .label {
+                    font-weight: bold;
+                }
+
+                .author {
+                    font-style: italic;
+
+                    &.fa.fa-certificate {
+                        color: var(--color-success) !important;
+                        font-family: var(--font-face);
+
+                        &:before {
+                            font-family: var(--pw-icon-font-face);
+                            font-style: normal;
+                        }
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                &:hover {
+                    border: 1px solid var(--color-primary);
+                }
             }
         }
     }
