@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+ - Asynchronous loading of favicons
+### Changed
+ - List of recommended browsers
 
 ## 2020.7.0 - Feature release
 ### Added

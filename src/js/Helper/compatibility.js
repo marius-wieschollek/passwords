@@ -19,10 +19,10 @@ function showBrowserCompatibilityWarning() {
         '<div class="message">Your browser is outdated and does not provide the necessary functionality to display this page.' + '<br>' +
         'Please check if an update is available for your browser or choose a modern and compatible browser from the list below.' +
         '</div><div class="browser">' +
-        '<a target="_blank" rel="noreferrer noopener" href="https://www.mozilla.org/de/firefox/new/" style="background-image: url(' + imgpath + 'firefox.png)">Firefox</a>' +
+        '<a target="_blank" rel="noreferrer noopener" href="https://www.mozilla.org/firefox/new/" style="background-image: url(' + imgpath + 'firefox.png)">Firefox</a>' +
         '<a target="_blank" rel="noreferrer noopener" href="https://vivaldi.com/download/" style="background-image: url(' + imgpath + 'vivaldi.png)">Vivaldi</a>' +
         '<a target="_blank" rel="noreferrer noopener" href="https://brave.com/download" style="background-image: url(' + imgpath + 'brave.png)">Brave</a>' +
-        '<a target="_blank" rel="noreferrer noopener" href="https://www.opera.com/de/download" style="background-image: url(' + imgpath + 'opera.png)">Opera</a>' +
+        '<a target="_blank" rel="noreferrer noopener" href="https://www.torproject.org/download/" style="background-image: url(' + imgpath + 'tor.png)">Tor Browser</a>' +
         '</div></div>'
     );
     $main.removeClass('loading');
