@@ -1,6 +1,9 @@
 ## [Unreleased]
+
+## 2020.8.0 - Feature release
 ### Added
  - Asynchronous loading of favicons
+ - List programming resources in apps section
 ### Changed
  - List of recommended browsers
 

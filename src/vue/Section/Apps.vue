@@ -56,7 +56,7 @@
                        :class="[id, 'library']"
                        :href="library.download">
                         <div>
-                            <b>{{library.label}}</b>
+                            <translate :say="library.label" tag="b"/>
                             <web target="_blank" class="author" :class="{'fa fa-certificate':library.official}" :href="library.web" :text="library.author"/>
                             <span class="dot" v-if="!library.official">⦁</span>
                             <web target="_blank" class="author" :href="library.sources" text="sources" v-if="!library.official"/>
