@@ -44,9 +44,12 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\AppFramework\QueryException;
 use OCP\Http\Client\IClientService;
+use OCP\IConfig;
 use OCP\IGroupManager;
 use OCP\IUserManager;
 use OCP\L10N\IFactory;
+use OCP\Notification\IManager;
+use OCP\Share\IManager as ShareManager;
 
 /**
  * Class Application
@@ -129,7 +132,7 @@ class Application extends App {
         $container->registerAlias('ApiSessionMiddleware', ApiSessionMiddleware::class);
         $container->registerMiddleware('ApiSessionMiddleware');
 
-        if($container->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+        if($container->query(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
             $container->registerAlias('LegacyMiddleware', LegacyMiddleware::class);
             $container->registerMiddleware('LegacyMiddleware');
         }
@@ -156,11 +159,9 @@ class Application extends App {
 
         $container->registerService(ShareUserListHelper::class,
             function (IAppContainer $c) {
-                $server = $c->getServer();
-
                 return new ShareUserListHelper(
-                    $server->getShareManager(),
-                    $server->getUserManager(),
+                    $c->query(ShareManager::class),
+                    $c->query(IUserManager::class),
                     $c->query(IGroupManager::class),
                     $c->query(ConfigurationService::class),
                     $c->query(EnvironmentService::class)
@@ -174,7 +175,7 @@ class Application extends App {
     protected function registerLegacyApiControllers(): void {
         $container = $this->getContainer();
 
-        if($container->getServer()->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+        if($container->query(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
             $container->registerAlias('LegacyVersionApiController', LegacyVersionApiController::class);
             $container->registerAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
             $container->registerAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
@@ -222,11 +223,10 @@ class Application extends App {
 
     /**
      * Registers the Notification service
+     *
+     * @throws QueryException
      */
     protected function registerNotificationNotifier(): void {
-        $container = $this->getContainer();
-        $server    = $container->getServer();
-
-        $server->getNotificationManager()->registerNotifierService(NotificationService::class);
+        $this->getContainer()->query(IManager::class)->registerNotifierService(NotificationService::class);
     }
 }

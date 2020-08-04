@@ -99,6 +99,8 @@ class UserMoveCommand extends Command {
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     * @param string          $sourceName
+     * @param string          $targetName
      *
      * @return bool
      */

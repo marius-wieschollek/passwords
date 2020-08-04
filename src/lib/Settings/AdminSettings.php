@@ -25,6 +25,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
 
@@ -47,6 +48,11 @@ class AdminSettings implements ISettings {
     protected $config;
 
     /**
+     * @var IRequest
+     */
+    protected $request;
+
+    /**
      * @var IURLGenerator
      */
     protected $urlGenerator;
@@ -59,15 +65,18 @@ class AdminSettings implements ISettings {
     /**
      * AdminSettings constructor.
      *
+     * @param IRequest             $request
      * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
+        IRequest $request,
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         FileCacheService $fileCacheService
     ) {
+        $this->request = $request;
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
         $this->urlGenerator     = $urlGenerator;
@@ -391,7 +400,7 @@ class AdminSettings implements ISettings {
 
         return [
             'cron'   => $cronType,
-            'https'  => OC::$server->getRequest()->getHttpProtocol() === 'https',
+            'https'  => $this->request->getHttpProtocol() === 'https',
             'php'    => [
                 'warn'    => PHP_VERSION_ID < 70400,
                 'error'   => PHP_VERSION_ID < 70300,

@@ -8,13 +8,19 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
+use OC;
+use OC\Authentication\Exceptions\ExpiredTokenException;
+use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
+use OC_User;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUser;
 use OCP\IUserManager;
+use OCP\IUserSession;
+use Throwable;
 
 /**
  * Class EnvironmentService
@@ -85,6 +91,11 @@ class EnvironmentService {
     protected $userManager;
 
     /**
+     * @var IUserSession
+     */
+    protected $userSession;
+
+    /**
      * @var IProvider
      */
     protected $tokenProvider;
@@ -148,9 +159,10 @@ class EnvironmentService {
      * @param ISession       $session
      * @param LoggingService $logger
      * @param IProvider      $tokenProvider
+     * @param IUserSession   $userSession
      * @param IUserManager   $userManager
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(
         ?string $userId,
@@ -159,6 +171,7 @@ class EnvironmentService {
         ISession $session,
         LoggingService $logger,
         IProvider $tokenProvider,
+        IUserSession $userSession,
         IUserManager $userManager
     ) {
         $this->config        = $config;
@@ -166,6 +179,7 @@ class EnvironmentService {
         $this->session       = $session;
         $this->request       = $request;
         $this->userManager   = $userManager;
+        $this->userSession   = $userSession;
         $this->tokenProvider = $tokenProvider;
 
         $this->determineRunType($request);
@@ -325,7 +339,7 @@ class EnvironmentService {
                        $request->getPathInfo() === '/apps/occweb/cmd' &&
                        $this->config->getAppValue('occweb', 'enabled', 'no') === 'yes'
                    );
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -336,7 +350,7 @@ class EnvironmentService {
      * @param null|string $userId
      * @param IRequest    $request
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function determineAppMode(?string $userId, IRequest $request): void {
         $this->appMode = self::MODE_PUBLIC;
@@ -353,9 +367,9 @@ class EnvironmentService {
      * @param IRequest    $request
      *
      * @return bool
-     * @throws \OC\Authentication\Exceptions\ExpiredTokenException
-     * @throws \OC\Authentication\Exceptions\InvalidTokenException
-     * @throws \Exception
+     * @throws ExpiredTokenException
+     * @throws InvalidTokenException
+     * @throws Exception
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
         $authHeader   = $request->getHeader('Authorization');
@@ -382,7 +396,7 @@ class EnvironmentService {
         }
 
         $this->client = self::CLIENT_PUBLIC;
-        if($userId !== null) throw new \Exception('Unable to verify user '.$userIdString);
+        if($userId !== null) throw new Exception('Unable to verify user '.$userIdString);
 
         return false;
     }
@@ -399,12 +413,12 @@ class EnvironmentService {
 
         $loginName = $_SERVER['PHP_AUTH_USER'];
         try {
-            if(\OC::$server->getUserSession()->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
+            if($this->userSession->isTokenPassword($_SERVER['PHP_AUTH_PW'])) {
                 return $this->getUserInfoFromToken($_SERVER['PHP_AUTH_PW'], $loginName, $userId);
             } else {
                 return $this->getUserInfoFromPassword($userId, $request, $loginName, $_SERVER['PHP_AUTH_PW']);
             }
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -434,7 +448,7 @@ class EnvironmentService {
 
                 return true;
             }
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -462,11 +476,11 @@ class EnvironmentService {
                     $this->password   = $this->tokenProvider->getPassword($sessionToken, $sessionToken->getId());
 
                     return true;
-                } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
+                } else if($this->session->get('oldUserId') === $uid && OC_User::isAdminUser($uid)) {
                     return $this->impersonateByUid($userId, $uid, self::LOGIN_SESSION);
                 }
             }
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
 
@@ -494,7 +508,7 @@ class EnvironmentService {
             } else if(isset($loginCredentials->password) && empty($loginCredentials->password)) {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
             }
-        } else if($this->session->get('oldUserId') === $uid && \OC_User::isAdminUser($uid)) {
+        } else if($this->session->get('oldUserId') === $uid && OC_User::isAdminUser($uid)) {
             return $this->impersonateByUid($userId, $loginName, self::LOGIN_PASSWORD);
         }
 
@@ -522,7 +536,7 @@ class EnvironmentService {
 
                 return true;
             }
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -538,14 +552,14 @@ class EnvironmentService {
      * @return bool
      */
     protected function getUserInfoFromPassword(?string $userId, IRequest $request, string $loginName, string $password): bool {
-        /** @var false|\OCP\IUser $loginUser */
+        /** @var false|IUser $loginUser */
         $loginUser = $this->userManager->checkPasswordNoLogging($loginName, $password);
         if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
             $this->user      = $loginUser;
             $this->userLogin = $loginName;
             $this->client    = $this->getClientFromRequest($request, $loginName);
             $this->loginType = self::LOGIN_PASSWORD;
-            $this->password   = $password;
+            $this->password  = $password;
 
             return true;
         }
@@ -561,7 +575,7 @@ class EnvironmentService {
      * @return bool
      */
     protected function getUserInfoFromUserId(?string $userId, IRequest $request, string $loginName): bool {
-        /** @var false|\OCP\IUser $loginUser */
+        /** @var false|IUser $loginUser */
         $loginUser = $this->userManager->get($loginName);
         if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
             $this->user      = $loginUser;

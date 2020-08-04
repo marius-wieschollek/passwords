@@ -92,6 +92,7 @@ class UserDeleteCommand extends Command {
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     * @param string          $userId
      *
      * @return bool
      */

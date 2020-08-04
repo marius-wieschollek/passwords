@@ -288,7 +288,7 @@ class RequestHelper {
     }
 
     /**
-     * @param string $url
+     * @param string|null $url
      *
      * @return resource
      */
