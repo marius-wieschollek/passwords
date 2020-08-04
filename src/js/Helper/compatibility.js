@@ -34,4 +34,4 @@ function checkSystem() {
     if(!isCompatibleBrowser()) showBrowserCompatibilityWarning();
 }
 
-window.addEventListener('load', checkSystem, false);
+window.addEventListener('DOMContentLoaded', checkSystem, false);

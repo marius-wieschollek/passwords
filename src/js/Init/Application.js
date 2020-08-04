@@ -41,7 +41,7 @@ class Application {
     }
 
     init() {
-        window.addEventListener('load', () => { this._initApp(); }, {once: true, passive: true});
+        window.addEventListener('DOMContentLoaded', () => { this._initApp(); }, {once: true, passive: true});
         this._timer = setInterval(() => { this._initApp(); }, 10);
     }
 
