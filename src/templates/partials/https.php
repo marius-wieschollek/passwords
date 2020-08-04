@@ -3,6 +3,9 @@
  * This file is part of the Passwords App
  * created by Marius David Wieschollek
  * and licensed under the AGPL.
+ *
+ * @var $l \OCP\IL10N
+ * @var $_ array
  */
 
 use OCA\Passwords\AppInfo\Application;
@@ -13,8 +16,7 @@ script(Application::APP_NAME, ['Static/https-debug']);
 $linkHttps  = 'https://wikipedia.org/wiki/HTTPS';
 $linkReload = str_replace('http://', 'https://', \OC::$server->getURLGenerator()->linkToRouteAbsolute('passwords.page.index'));
 
-$uid     = \OC::$server->getUserSession()->getUser()->getUID();
-$isAdmin = \OC_User::isAdminUser($uid);
+$isAdmin = \OC_User::isAdminUser(\OC_User::getUser());
 
 $title         = $l->t('HTTPS Required');
 $reloadPage    = $l->t('reload this page');
@@ -59,8 +61,6 @@ if($isAdmin) {
                 <br><?php print_unescaped($messageAdmin); ?>
             <?php endif; ?>
         </div>
-        <?php
-        if($isAdmin) print_unescaped($this->inc('partials/https_debug'));
-        ?>
+        <?php if($isAdmin) print_unescaped($this->inc('partials/https_debug')); ?>
     </div>
 </div>

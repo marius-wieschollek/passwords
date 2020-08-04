@@ -9,6 +9,7 @@ namespace OCA\Passwords\Controller;
 
 use Exception;
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Helper\Http\SetupReportHelper;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
 use OCA\Passwords\Services\EnvironmentService;
@@ -58,32 +59,40 @@ class PageController extends Controller {
     protected $challengeService;
 
     /**
+     * @var SetupReportHelper
+     */
+    protected $setupReportHelper;
+
+    /**
      * PageController constructor.
      *
      * @param IRequest             $request
-     * @param UserSettingsService  $settings
      * @param ApiTokenHelper       $tokenHelper
+     * @param UserSettingsService  $settings
      * @param EnvironmentService   $environment
      * @param UpgradeCheckHelper   $upgradeCheck
      * @param NotificationService  $notifications
+     * @param SetupReportHelper    $setupReportHelper
      * @param UserChallengeService $challengeService
      */
     public function __construct(
         IRequest $request,
-        UserSettingsService $settings,
         ApiTokenHelper $tokenHelper,
+        UserSettingsService $settings,
         EnvironmentService $environment,
         UpgradeCheckHelper $upgradeCheck,
         NotificationService $notifications,
+        SetupReportHelper $setupReportHelper,
         UserChallengeService $challengeService
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->tokenHelper      = $tokenHelper;
-        $this->settings         = $settings;
-        $this->environment      = $environment;
-        $this->upgradeCheck     = $upgradeCheck;
-        $this->notifications    = $notifications;
-        $this->challengeService = $challengeService;
+        $this->settings          = $settings;
+        $this->tokenHelper       = $tokenHelper;
+        $this->environment       = $environment;
+        $this->upgradeCheck      = $upgradeCheck;
+        $this->notifications     = $notifications;
+        $this->challengeService  = $challengeService;
+        $this->setupReportHelper = $setupReportHelper;
     }
 
     /**
@@ -105,7 +114,7 @@ class PageController extends Controller {
         $response = new TemplateResponse(
             $this->appName,
             'index',
-            ['https' => $isSecure]
+            $this->getTemplateVariables($isSecure)
         );
 
         $this->getContentSecurityPolicy($response);
@@ -175,5 +184,22 @@ class PageController extends Controller {
                 $this->environment->getRealUser()->getUID()
             );
         }
+    }
+
+    /**
+     * @param bool $isSecure
+     *
+     * @return array[]
+     */
+    protected function getTemplateVariables(bool $isSecure): array {
+        $variables = [
+            'https' => $isSecure
+        ];
+
+        if(!$isSecure) {
+            $variables['report'] = $this->setupReportHelper->getHttpsSetupReport();
+        }
+
+        return $variables;
     }
 }
