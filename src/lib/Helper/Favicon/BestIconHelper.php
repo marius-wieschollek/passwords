@@ -8,7 +8,8 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use Exception;
-use OCA\Passwords\Helper\Http\RequestHelper;
+use OCA\Passwords\Exception\Favicon\FaviconRequestException;
+use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
@@ -17,7 +18,6 @@ use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\QueryException;
-use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
 
 /**
@@ -72,7 +72,6 @@ class BestIconHelper extends AbstractFaviconHelper {
      */
     public function __construct(
         DateTimeHelper $dateTime,
-        RequestHelper $httpRequest,
         ConfigurationService $config,
         HelperService $helperService,
         AdminUserHelper $adminHelper,
@@ -95,32 +94,40 @@ class BestIconHelper extends AbstractFaviconHelper {
      *
      * @return array
      */
-    protected function getFaviconUrl(string $domain, string $protocol = 'https'): string {
+    protected function getRequestData(string $domain, string $protocol = 'https'): array {
         $fallbackColor = substr($this->fallbackIconGenerator->stringToColor($domain), 1);
         $serviceUrl    = $this->config->getAppValue(self::BESTICON_CONFIG_KEY, '');
         if(empty($serviceUrl)) $serviceUrl = $this->getSharedInstanceUrl();
 
-        return "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url={$protocol}://{$domain}&formats=png,ico,gif,jpg";
+        return [
+            "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url={$protocol}://{$domain}&formats=png,ico,gif,jpg",
+            []
+        ];
     }
 
     /**
      * @param string $domain
      *
      * @return null|string
+     * @throws FaviconRequestException
+     * @throws UnexpectedResponseCodeException
      */
     protected function getFaviconData(string $domain): ?string {
-        $url  = $this->getFaviconUrl($domain);
-        $data = $this->getHttpRequest($url);
+        [$uri, $options] = $this->getRequestData($domain);
 
-        if($data !== null) return $data;
+        try {
+            $data = $this->executeRequest($uri, $options);
+            if($data !== null) return $data;
+        } catch(\Throwable $e) {
+        }
 
-        $url = $this->getFaviconUrl($domain, 'http');
+        [$uri, $options] = $this->getRequestData($domain, 'http');
 
-        return $this->getHttpRequest($url);
+        return $this->executeRequest($uri, $options);
     }
 
     /**
-     * @return array
+     * @return string
      */
     protected function getSharedInstanceUrl(): string {
         try {

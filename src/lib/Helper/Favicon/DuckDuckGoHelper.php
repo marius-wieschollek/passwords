@@ -7,9 +7,14 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use Exception;
+use GuzzleHttp\Exception\ClientException;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Services\HelperService;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
+use Throwable;
 
 /**
  * Class DuckDuckGoHelper
@@ -43,21 +48,28 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
     }
 
     /**
+     * @param string $uri
+     * @param array  $options
+     *
      * @return string
-     * @throws UnexpectedResponseCodeException
      * @throws FaviconRequestException
-     * @throws \Throwable
+     * @throws UnexpectedResponseCodeException
+     * @throws NotFoundException
+     * @throws NotPermittedException
+     * @throws Throwable
      */
     protected function executeRequest(string $uri, array $options): string {
         $request = $this->createRequest();
         try {
             $response = $request->get($uri, $options);
-        } catch(\Exception $e) {
-            throw new FaviconRequestException($e);
-        }
+        } catch(ClientException $e) {
+            if($e->getCode() === 404) {
+                return $this->getDefaultFavicon($this->domain)->getContent();
+            }
 
-        if($response->getStatusCode() === 404) {
-            return $this->getDefaultFavicon($this->domain)->getContent();
+            throw new UnexpectedResponseCodeException($e->getCode());
+        } catch(Exception $e) {
+            throw new FaviconRequestException($e);
         }
 
         if($response->getStatusCode() === 200) {
@@ -65,22 +77,5 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
         }
 
         throw new UnexpectedResponseCodeException($response->getStatusCode());
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return mixed|string
-     * @throws \Throwable
-     */
-    protected function getHttpRequest(string $url): string {
-        $result = parent::getHttpRequest($url);
-
-        if(!$result) return $this->getDefaultFavicon($this->domain)->getContent();
-
-        $data = @gzdecode($result);
-        if($data) return $data;
-
-        return $result;
     }
 }

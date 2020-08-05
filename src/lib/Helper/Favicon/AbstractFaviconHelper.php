@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use Exception;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\InvalidFaviconDataException;
 use OCA\Passwords\Exception\Favicon\NoFaviconDataException;
@@ -15,9 +16,11 @@ use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
+use OCP\AppFramework\QueryException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class AbstractFaviconHelper
@@ -60,7 +63,7 @@ abstract class AbstractFaviconHelper {
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
      *
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     public function __construct(
         HelperService $helperService,
@@ -94,7 +97,7 @@ abstract class AbstractFaviconHelper {
         if(empty($faviconData)) throw new NoFaviconDataException();
         if(!$this->imageHelper->supportsImage($faviconData)) {
             $mime = $this->imageHelper->getImageMime($faviconData);
-            throw new InvalidFaviconDataException('Favicon service returned unsupported data type: '.$mime);
+            throw new InvalidFaviconDataException($mime);
         }
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
@@ -105,7 +108,7 @@ abstract class AbstractFaviconHelper {
      * @param int    $size
      *
      * @return ISimpleFile|null
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function getDefaultFavicon(string $domain, int $size = 256): ?ISimpleFile {
         $fileName = $this->getFaviconFilename($domain.'_default');
@@ -120,8 +123,8 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
-     * @param string $domain
-     * @param int    $size
+     * @param string   $domain
+     * @param int|null $size
      *
      * @return string
      */
@@ -150,9 +153,7 @@ abstract class AbstractFaviconHelper {
      * @return IClient
      */
     protected function createRequest(): IClient {
-        $request = $this->requestService->newClient();
-
-        return $request;
+        return $this->requestService->newClient();
     }
 
     /**
@@ -167,7 +168,7 @@ abstract class AbstractFaviconHelper {
         $request = $this->createRequest();
         try {
             $response = $request->get($uri, $options);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             throw new FaviconRequestException($e);
         }
 

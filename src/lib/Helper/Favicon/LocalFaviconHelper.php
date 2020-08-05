@@ -28,8 +28,8 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @throws \Throwable
      */
     protected function getFaviconData(string $domain): string {
-        list($html, $url) = $this->getUrl('https://'.$domain);
-        if(!$html) list($html, $url) = $this->getUrl('http://'.$domain);
+        [$html, $url] = $this->getUrl('https://'.$domain);
+        if(!$html) [$html, $url] = $this->getUrl('http://'.$domain);
 
         $icon = $this->getFaviconFromSourceCode($domain, $html);
         if($icon !== null) return $icon;
@@ -66,16 +66,16 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return mixed|null|string
      */
     protected function tryDefaultIconPaths(string $domain, $url): ?string {
-        list($data, , , $isIcon) = $this->getUrl($url."/favicon.png");
+        [$data, , , $isIcon] = $this->getUrl($url."/favicon.png");
         if($isIcon && $data) return $data;
 
-        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.png");
+        [$data, , , $isIcon] = $this->getUrl("http://{$domain}/favicon.png");
         if($isIcon && $data) return $data;
 
-        list($data, , , $isIcon) = $this->getUrl($url."/favicon.ico");
+        [$data, , , $isIcon] = $this->getUrl($url."/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
-        list($data, , , $isIcon) = $this->getUrl("http://{$domain}/favicon.ico");
+        [$data, , , $isIcon] = $this->getUrl("http://{$domain}/favicon.ico");
         if($isIcon && $data) return $this->convertIcoFile($data);
 
         return null;
@@ -87,9 +87,9 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
      * @return mixed|string
      */
     protected function getUrl(string $url): array {
-        $request  = $this->createRequest();
+        $request = $this->createRequest();
         try {
-            $response = $request->get($url);
+            $response    = $request->get($url);
             $data        = $response->getBody();
             $url         = $response->getHeader('url');
             $contentType = $response->getHeader('content-type');
@@ -125,7 +125,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
             foreach($htmlMatches[1] as $tagSource) {
                 if(preg_match($tagPattern, $tagSource, $tagMatches)) {
                     $url = $this->makeUrl($tagMatches[1], $domain);
-                    list($data, , , $isIcon) = $this->getUrl($url);
+                    [$data, , , $isIcon] = $this->getUrl($url);
 
                     if($isIcon && $data) return $data;
                 }
@@ -172,20 +172,8 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected function getSearchPatterns(): array {
         return [
             [
-                'html' => '/(meta[^>]+itemprop[^>]+image[^>]+)/',
-                'tag'  => '/content=[\'"](\S+)[\'"]/'
-            ],
-            [
-                'html' => '/(link[^>]+rel[^>]+fluid-icon[^>]+)/',
-                'tag'  => '/href=[\'"](\S+)[\'"]/'
-            ],
-            [
                 'html' => '/(link[^>]+rel[^>]+apple-touch-icon[^>]+)/',
                 'tag'  => '/href=[\'"](\S+)[\'"]/'
-            ],
-            [
-                'html' => '/(meta[^>]+property[^>]+twitter:image:src[^>]+)/',
-                'tag'  => '/content=[\'"](\S+)[\'"]/'
             ],
             [
                 'html' => '/(meta[^>]+name[^>]+msapplication-TileImage[^>]+)/',
@@ -196,13 +184,17 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
                 'tag'  => '/href=[\'"](\S+)[\'"]/'
             ],
             [
-                // Just for youtube
-                'html' => '/(link[^>]+rel[^>]+icon[^>]+sizes[^>]+1[0-9]+x1[0-9]+[^>]+)/',
+                'html' => '/(link[^>]+rel[^>]+fluid-icon[^>]+)/',
                 'tag'  => '/href=[\'"](\S+)[\'"]/'
             ],
             [
-                'html' => '/(meta[^>]+property[^>]+og:image[^>]+)/',
+                'html' => '/(meta[^>]+itemprop[^>]+image[^>]+)/',
                 'tag'  => '/content=[\'"](\S+)[\'"]/'
+            ],
+            [
+                // Just for youtube
+                'html' => '/(link[^>]+rel[^>]+icon[^>]+sizes[^>]+1[0-9]+x1[0-9]+[^>]+)/',
+                'tag'  => '/href=[\'"](\S+)[\'"]/'
             ],
             [
                 'html' => '/(link[^>]+rel[^>]+shortcut\s+icon[^>]+)/',

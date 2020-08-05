@@ -66,20 +66,6 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return string
-     * @throws \Exception
-     * @throws \Throwable
-     */
-    protected function getFaviconData(string $domain): ?string {
-        $json = $this->sendApiRequest($domain);
-        $icon = $this->analyzeApiResponse($json, $domain);
-
-        return $icon !== null ? $icon:$this->getDefaultFavicon($domain)->getContent();
-    }
-
-    /**
-     * @param string $domain
-     *
      * @return array
      */
     protected function getRequestData(string $domain): array {
@@ -98,6 +84,8 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @return string
      * @throws FaviconRequestException
      * @throws UnexpectedResponseCodeException
+     * @throws \Exception
+     * @throws \Throwable
      */
     protected function executeRequest(string $uri, array $options): string {
         $response = parent::executeRequest($uri, $options);
