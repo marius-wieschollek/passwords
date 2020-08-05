@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+  app:
+    environment:
+      - SQLITE_DATABASE=nextcloud

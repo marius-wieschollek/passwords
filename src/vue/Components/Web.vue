@@ -1,5 +1,6 @@
 <template>
     <a :href="getHref" :target="getTarget" :rel="getRel" :class="className" :title="getTitle">
+        <i v-if="icon" :class="getIcon" aria-hidden="true"></i>
         {{ getText }}
         <slot name="default" v-if="!getText"></slot>
     </a>
@@ -26,19 +27,34 @@
                 type     : String,
                 'default': null
             },
+            variables     : {
+                type     : Object,
+                'default': () => { return {}; }
+            },
             className  : {
                 type     : String,
                 'default': 'link'
+            },
+            icon          : {
+                type     : String,
+                'default': null
+            },
+            iconClass     : {
+                type     : String,
+                'default': null
             }
         },
         computed: {
             getText() {
-                if(this.text) return Localisation.translate(this.text, {href: this.getHref});
-                return '';
+                return this.text ? Localisation.translate(this.text, this.getVariables):'';
             },
             getTitle() {
                 let title = this.title ? this.title:'Go to {href}';
-                return Localisation.translate(title, {href: this.getHref});
+                return Localisation.translate(title, this.getVariables);
+            },
+            getVariables() {
+                this.variables.href = this.getHref;
+                return this.variables;
             },
             getHref() {
                 if(!this.href || this.href.substr(0, 11) === 'javascript:') return location.href;
@@ -52,6 +68,9 @@
             },
             getRel() {
                 return this.getTarget === '_blank' ? 'noreferrer noopener':'';
+            },
+            getIcon() {
+                return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);
             }
         }
     };

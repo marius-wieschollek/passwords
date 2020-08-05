@@ -78,6 +78,7 @@ abstract class AbstractNotification {
      * @param string $userId
      *
      * @return INotification
+     * @throws \Exception
      */
     protected function createNotification(string $userId): INotification {
         $icon = $this->urlGenerator->imagePath(Application::APP_NAME, 'app-dark.svg');

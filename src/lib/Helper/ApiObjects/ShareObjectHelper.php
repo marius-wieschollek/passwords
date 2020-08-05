@@ -93,9 +93,10 @@ class ShareObjectHelper extends AbstractObjectHelper {
         if(!$this->filter($share, $filter)) return null;
 
         $detailLevel = explode('+', $level);
-        $object      = [];
         if(in_array(self::LEVEL_MODEL, $detailLevel)) {
             $object = $this->getModel($share);
+        } else {
+            $object = ['id' => $share->getUuid()];
         }
         if(in_array(self::LEVEL_PASSWORD, $detailLevel)) {
             $object = $this->getPassword($object);

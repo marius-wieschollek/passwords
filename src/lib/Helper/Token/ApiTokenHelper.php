@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Helper\Token;
 
+use Exception;
+use OC;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\Services\ConfigurationService;
@@ -14,7 +16,9 @@ use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\SessionService;
 use OCP\IL10N;
+use OCP\IRequest;
 use OCP\Security\ISecureRandom;
+use Throwable;
 
 /**
  * Class ApiTokenHelper
@@ -47,6 +51,11 @@ class ApiTokenHelper {
     protected $random;
 
     /**
+     * @var IRequest
+     */
+    protected $request;
+
+    /**
      * @var SessionService
      */
     protected $session;
@@ -69,6 +78,7 @@ class ApiTokenHelper {
     /**
      * ApiTokenHelper constructor.
      *
+     * @param IRequest             $request
      * @param IL10N                $localisation
      * @param ISecureRandom        $random
      * @param LoggingService       $logger
@@ -78,6 +88,7 @@ class ApiTokenHelper {
      * @param EnvironmentService   $environment
      */
     public function __construct(
+        IRequest $request,
         IL10N $localisation,
         ISecureRandom $random,
         LoggingService $logger,
@@ -87,9 +98,10 @@ class ApiTokenHelper {
         EnvironmentService $environment
     ) {
         $this->userId        = $environment->getUserId();
+        $this->config        = $config;
         $this->random        = $random;
         $this->logger        = $logger;
-        $this->config        = $config;
+        $this->request       = $request;
         $this->session       = $session;
         $this->localisation  = $localisation;
         $this->tokenProvider = $tokenProvider;
@@ -105,7 +117,7 @@ class ApiTokenHelper {
             if($token !== false) return $token;
 
             return $this->createWebUiToken();
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
 
             return ['', ''];
@@ -117,7 +129,7 @@ class ApiTokenHelper {
      * @param bool   $permanent
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function createToken(string $name, bool $permanent = false): array {
         $userLogin = $this->environment->getUserLogin();
@@ -143,18 +155,6 @@ class ApiTokenHelper {
     }
 
     /**
-     * @throws \Exception
-     */
-    protected function destroyLegacyToken(): void {
-        $tokenId = $this->config->getUserValue(self::WEBUI_TOKEN_ID, false);
-        if($tokenId !== false) {
-            $this->config->deleteUserValue(self::WEBUI_TOKEN);
-            $this->config->deleteUserValue(self::WEBUI_TOKEN_ID);
-            $this->destroyToken($tokenId);
-        }
-    }
-
-    /**
      *
      */
     public function destroyWebUiToken(): void {
@@ -167,11 +167,9 @@ class ApiTokenHelper {
 
     /**
      * @return bool|array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function loadWebUiToken() {
-        // @TODO remove in 2020.1
-        if($this->config->hasUserValue('webui_token_id')) $this->destroyLegacyToken();
         if($this->environment->isImpersonating()) return false;
 
         $token   = $this->session->get(self::WEBUI_TOKEN);
@@ -185,7 +183,7 @@ class ApiTokenHelper {
                 } else {
                     $this->destroyToken($tokenId);
                 }
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $this->logger
                     ->logException($e)
                     ->error('Failed to load api token for '.$this->userId);
@@ -197,11 +195,11 @@ class ApiTokenHelper {
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createWebUiToken(): array {
         $name = $this->getTokenName();
-        list($token, $deviceToken) = $this->createToken($name);
+        [$token, $deviceToken] = $this->createToken($name);
         $this->session->set(self::WEBUI_TOKEN, $token);
         $this->session->set(self::WEBUI_TOKEN_ID, $deviceToken->getId());
         $this->session->save();
@@ -214,11 +212,8 @@ class ApiTokenHelper {
      */
     protected function getUserPassword(): ?string {
         try {
-            $sessionId    = \OC::$server->getSession()->getId();
-            $sessionToken = $this->tokenProvider->getToken($sessionId);
-
-            return $this->tokenProvider->getPassword($sessionToken, $sessionId);
-        } catch(\Throwable $e) {
+            return $this->environment->getUserPassword();
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
 
@@ -227,6 +222,7 @@ class ApiTokenHelper {
 
     /**
      * @return string
+     * @throws Exception
      */
     protected function generateRandomDeviceToken(): string {
         $groups = [];
@@ -234,7 +230,12 @@ class ApiTokenHelper {
             $groups[] = $this->random->generate(5, ISecureRandom::CHAR_HUMAN_READABLE);
         }
 
-        return implode('-', $groups);
+        $token = implode('-', $groups);
+        if(strlen($token) < 29) {
+            throw new Exception('Token generation failed. Did not generate enough random numbers');
+        }
+
+        return $token;
     }
 
     /**
@@ -249,7 +250,7 @@ class ApiTokenHelper {
                         date('d.m.y H:i'),
                         $this->environment->getRealUser()->getDisplayName(),
                         $this->environment->getRealUser()->getUID(),
-                        \OC::$server->getRequest()->getRemoteAddress()
+                        $this->request->getRemoteAddress()
                     ]
                 );
         }
@@ -259,7 +260,7 @@ class ApiTokenHelper {
             [
                 date('d.m.y H:i'),
                 $this->environment->getUserLogin(),
-                \OC::$server->getRequest()->getRemoteAddress()
+                $this->request->getRemoteAddress()
             ]
         );
     }

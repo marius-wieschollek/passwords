@@ -97,8 +97,8 @@ class UserSettingsHelperTest extends TestCase {
         $this->configurationService->method('getAppValue')->willReturn('0');
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['mail/security', '0', null, '0'],
-                ['mail/security', '1', null, '1']
+                ['mail/security', '0', null, 'passwords', '0'],
+                ['mail/security', '1', null, 'passwords', '1']
             ]
         );
         $this->configurationService->expects($this->once())->method('getAppValue')->with('settings/mail/security', true);
@@ -117,8 +117,8 @@ class UserSettingsHelperTest extends TestCase {
         $this->configurationService->method('getAppValue')->willReturn('0');
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['mail/security', '0', null, '1'],
-                ['mail/security', '1', null, '0']
+                ['mail/security', '0', null, 'passwords', '1'],
+                ['mail/security', '1', null, 'passwords', '0']
             ]
         );
         $this->configurationService->expects($this->once())->method('getAppValue')->with('settings/mail/security', true);
@@ -137,8 +137,8 @@ class UserSettingsHelperTest extends TestCase {
         $this->configurationService->method('getAppValue')->willReturn('0');
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['mail/shares', '0', null, '0'],
-                ['mail/shares', '1', null, '1']
+                ['mail/shares', '0', null, 'passwords', '0'],
+                ['mail/shares', '1', null, 'passwords', '1']
             ]
         );
         $this->configurationService->expects($this->once())->method('getAppValue')->with('settings/mail/shares', false);
@@ -157,8 +157,8 @@ class UserSettingsHelperTest extends TestCase {
         $this->configurationService->method('getAppValue')->willReturn('0');
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['mail/shares', '0', null, '1'],
-                ['mail/shares', '1', null, '0']
+                ['mail/shares', '0', null, 'passwords', '1'],
+                ['mail/shares', '1', null, 'passwords', '0']
             ]
         );
         $this->configurationService->expects($this->once())->method('getAppValue')->with('settings/mail/shares', false);
@@ -177,8 +177,8 @@ class UserSettingsHelperTest extends TestCase {
         $this->configurationService->method('hasUserValue')->willReturn(true);
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['encryption/cse', 0, null, '0'],
-                ['encryption/cse', 1, null, '1']
+                ['encryption/cse', 0, null, 'passwords', '0'],
+                ['encryption/cse', 1, null, 'passwords', '1']
             ]
         );
         $this->configurationService->expects($this->once())->method('hasUserValue')->with('user/challenge/id', null);
@@ -197,8 +197,8 @@ class UserSettingsHelperTest extends TestCase {
         $this->configurationService->method('hasUserValue')->willReturn(false);
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['encryption/cse', 0, null, '0'],
-                ['encryption/cse', 1, null, '1']
+                ['encryption/cse', 0, null, 'passwords', '0'],
+                ['encryption/cse', 1, null, 'passwords', '1']
             ]
         );
         $this->configurationService->expects($this->once())->method('hasUserValue')->with('user/challenge/id', null);
@@ -206,5 +206,147 @@ class UserSettingsHelperTest extends TestCase {
 
         $result = $this->userSettingsHelper->get('encryption.cse');
         self::assertEquals(0, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetSessionLifetime() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('session/lifetime', 30, null);
+
+        $result = $this->userSettingsHelper->set('session.lifetime', 30);
+        self::assertEquals(30, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetInvalidSessionLifetime() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('session/lifetime', 600, null);
+
+        $result = $this->userSettingsHelper->set('session.lifetime', 29);
+        self::assertEquals(600, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetPasswordGeneratorStrength() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('password/generator/strength', 2, null);
+
+        $result = $this->userSettingsHelper->set('password.generator.strength', 2);
+        self::assertEquals(2, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetPasswordGeneratorStrengthTooLow() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('password/generator/strength', 1, null);
+
+        $result = $this->userSettingsHelper->set('password.generator.strength', -1);
+        self::assertEquals(1, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetPasswordGeneratorStrengthTooHigh() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('password/generator/strength', 1, null);
+
+        $result = $this->userSettingsHelper->set('password.generator.strength', 5);
+        self::assertEquals(1, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetPasswordSecurityAge() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('password/security/age', 1, null);
+
+        $result = $this->userSettingsHelper->set('password.security.age', 1);
+        self::assertEquals(1, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetPasswordSecurityAgeToZero() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('password/security/age', 0, null);
+
+        $result = $this->userSettingsHelper->set('password.security.age', 0);
+        self::assertEquals(0, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetInvalidPasswordSecurityAge() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('password/security/age', 0, null);
+
+        $result = $this->userSettingsHelper->set('password.security.age', -1);
+        self::assertEquals(0, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetSseEncryption() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('encryption/sse', 2, null);
+
+        $result = $this->userSettingsHelper->set('encryption.sse', 2);
+        self::assertEquals(2, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetSseEncryptionTooLow() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('encryption/sse', 0, null);
+
+        $result = $this->userSettingsHelper->set('encryption.sse', -1);
+        self::assertEquals(0, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetSseEncryptionTooHigh() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('encryption/sse', 0, null);
+
+        $result = $this->userSettingsHelper->set('encryption.sse', 3);
+        self::assertEquals(0, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetCseEncryption() {
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('encryption/cse', 1, null);
+
+        $result = $this->userSettingsHelper->set('encryption.cse', 1);
+        self::assertEquals(1, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetCseEncryptionTooLow() {
+        $this->configurationService->method('hasUserValue')->with('user/challenge/id', null)->willReturn(true);
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('encryption/cse', 1, null);
+
+        $result = $this->userSettingsHelper->set('encryption.cse', -1);
+        self::assertEquals(1, $result);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSetCseEncryptionTooHigh() {
+        $this->configurationService->method('hasUserValue')->with('user/challenge/id', null)->willReturn(true);
+        $this->configurationService->expects($this->once())->method('setUserValue')->with('encryption/cse', 1, null);
+
+        $result = $this->userSettingsHelper->set('encryption.cse', 2);
+        self::assertEquals(1, $result);
     }
 }

@@ -11,7 +11,6 @@ use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\User\UserTokenHelper;
 use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Controller;
@@ -33,11 +32,6 @@ class ApiSessionMiddleware extends Middleware {
     protected $session;
 
     /**
-     * @var UserTokenHelper
-     */
-    protected $tokenHelper;
-
-    /**
      * @var SessionService
      */
     protected $sessionService;
@@ -51,18 +45,15 @@ class ApiSessionMiddleware extends Middleware {
      * ApiSessionMiddleware constructor.
      *
      * @param ISession             $session
-     * @param UserTokenHelper      $tokenHelper
      * @param SessionService       $sessionService
      * @param UserChallengeService $challengeService
      */
     public function __construct(
         ISession $session,
-        UserTokenHelper $tokenHelper,
         SessionService $sessionService,
         UserChallengeService $challengeService
     ) {
         $this->session          = $session;
-        $this->tokenHelper      = $tokenHelper;
         $this->sessionService   = $sessionService;
         $this->challengeService = $challengeService;
     }
@@ -124,7 +115,7 @@ class ApiSessionMiddleware extends Middleware {
      */
     protected function requiresAuthorization(Controller $controller, string $method): bool {
 
-        if(!$this->challengeService->hasChallenge() && !$this->tokenHelper->hasToken()) {
+        if(!$this->challengeService->hasChallenge()) {
             return false;
         }
 

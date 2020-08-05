@@ -108,6 +108,7 @@ class UserSettingsHelper {
         if(isset($this->userSettings[ $key ])) {
             $type  = $this->userSettings[ $key ];
             $value = $this->castValue($type, $value);
+            $value = $this->validateValue($key, $value, $userId);
 
             if($type === 'boolean') {
                 $this->config->setUserValue($key, intval($value), $userId);
@@ -141,6 +142,8 @@ class UserSettingsHelper {
     }
 
     /**
+     * List the settings of the user with the custom value or the default value
+     *
      * @param string|null $userId
      *
      * @return array
@@ -151,6 +154,24 @@ class UserSettingsHelper {
         foreach(array_keys($this->userSettings) as $key) {
             $setting              = 'user.'.str_replace('/', '.', $key);
             $settings[ $setting ] = $this->get($key, $userId);
+        }
+
+        return $settings;
+    }
+
+    /**
+     * List the settings of the user with the custom value or null if the setting is the default
+     *
+     * @param string|null $userId
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function listRaw(string $userId = null) {
+        $settings = [];
+        foreach(array_keys($this->userSettings) as $key) {
+            $setting              = str_replace('/', '.', $key);
+            $settings[ $setting ] = $this->config->getUserValue($key, null, $userId);
         }
 
         return $settings;
@@ -195,18 +216,29 @@ class UserSettingsHelper {
     }
 
     /**
+     * @param string      $key
+     * @param             $value
      * @param string|null $userId
      *
-     * @return array
-     * @throws \Exception
+     * @return int|bool
      */
-    public function listRaw(string $userId = null) {
-        $settings = [];
-        foreach(array_keys($this->userSettings) as $key) {
-            $setting              = str_replace('/', '.', $key);
-            $settings[ $setting ] = $this->config->getUserValue($key, null, $userId);
+    protected function validateValue(string $key, $value, string $userId = null) {
+        if($key === 'session/lifetime' && $value < 30) {
+            return $this->getDefaultValue($key, $userId);
+        }
+        if($key === 'password/generator/strength' && ($value < 0 || $value > 4)) {
+            return $this->getDefaultValue($key, $userId);
+        }
+        if($key === 'password/security/age' && $value < 0) {
+            return $this->getDefaultValue($key, $userId);
+        }
+        if($key === 'encryption/cse' && ($value < 0 || $value > 1)) {
+            return $this->getDefaultValue($key, $userId);
+        }
+        if($key === 'encryption/sse' && ($value < 0 || $value > 2)) {
+            return $this->getDefaultValue($key, $userId);
         }
 
-        return $settings;
+        return $value;
     }
 }

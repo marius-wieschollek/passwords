@@ -75,6 +75,16 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>pw_password_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -229,6 +239,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>pw_password_revision_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -285,6 +305,16 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>pw_folder_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -399,6 +429,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>pw_folder_revision_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -449,6 +489,16 @@
                 <length>12</length>
                 <notnull>true</notnull>
             </field>
+            <index>
+                <name>pw_tag_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -561,6 +611,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>pw_tag_revision_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>uuid</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -585,9 +645,7 @@
                 <name>uuid</name>
                 <type>string</type>
                 <length>36</length>
-                <!-- @TODO: Add in 2020.1, fixes #162 -->
-                <!-- <notnull>true</notnull> -->
-                <!-- @TODO: Remove in 2020.1, fixes #162 -->
+                <notnull>true</notnull>
                 <default></default>
             </field>
             <field>
@@ -645,6 +703,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>pw_password_tag_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>tag</name>
+                </field>
+                <field>
+                    <name>password</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -748,6 +816,19 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>pw_share_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+                <field>
+                    <name>receiver</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -773,6 +854,13 @@
                 <type>string</type>
                 <length>36</length>
                 <notnull>true</notnull>
+            </field>
+            <field>
+                <name>login_type</name>
+                <type>string</type>
+                <length>12</length>
+                <notnull>true</notnull>
+                <default>none</default>
             </field>
             <field>
                 <name>created</name>
@@ -813,6 +901,16 @@
                 <notnull>true</notnull>
                 <default>CLIENT::UNKNOWN</default>
             </field>
+            <index>
+                <name>pw_session_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -873,6 +971,16 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+            <index>
+                <name>pw_keychain_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
     <table>
@@ -935,6 +1043,107 @@
                 <notnull>true</notnull>
                 <default>false</default>
             </field>
+            <index>
+                <name>pw_challenge_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
+        </declaration>
+    </table>
+    <table>
+        <name>*dbprefix*passwords_entity_registration</name>
+        <declaration>
+            <field>
+                <name>id</name>
+                <type>integer</type>
+                <length>8</length>
+                <unsigned>true</unsigned>
+                <notnull>true</notnull>
+                <autoincrement>true</autoincrement>
+                <primary>true</primary>
+            </field>
+            <field>
+                <name>user_id</name>
+                <type>text</type>
+                <length>64</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>uuid</name>
+                <type>string</type>
+                <length>36</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>label</name>
+                <type>string</type>
+                <length>128</length>
+                <notnull>false</notnull>
+            </field>
+            <field>
+                <name>code</name>
+                <type>string</type>
+                <length>128</length>
+                <notnull>false</notnull>
+            </field>
+            <field>
+                <name>login</name>
+                <type>string</type>
+                <length>128</length>
+                <notnull>false</notnull>
+            </field>
+            <field>
+                <name>token</name>
+                <type>string</type>
+                <length>128</length>
+                <notnull>false</notnull>
+            </field>
+            <field>
+                <name>limit</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>false</notnull>
+            </field>
+            <field>
+                <name>status</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>true</notnull>
+                <default>0</default>
+            </field>
+            <field>
+                <name>created</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>updated</name>
+                <type>integer</type>
+                <length>12</length>
+                <notnull>true</notnull>
+            </field>
+            <field>
+                <name>deleted</name>
+                <type>boolean</type>
+                <notnull>true</notnull>
+                <default>false</default>
+            </field>
+            <index>
+                <name>pw_registration_index</name>
+                <unique>1</unique>
+                <field>
+                    <name>uuid</name>
+                </field>
+                <field>
+                    <name>user_id</name>
+                </field>
+            </index>
         </declaration>
     </table>
 </database>

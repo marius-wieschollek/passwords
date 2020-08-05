@@ -42,7 +42,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected $domain;
 
     /**
-     * BestIconHelper constructor.
+     * FaviconGrabberHelper constructor.
      *
      * @param ConfigurationService  $config
      * @param HelperService         $helperService
@@ -61,6 +61,20 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     ) {
         $this->config = $config;
         parent::__construct($helperService, $requestService, $fileCacheService, $fallbackIconGenerator);
+    }
+
+    /**
+     * @param string $domain
+     *
+     * @return string
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    protected function getFaviconData(string $domain): ?string {
+        $json = $this->sendApiRequest($domain);
+        $icon = $this->analyzeApiResponse($json, $domain);
+
+        return $icon !== null ? $icon:$this->getDefaultFavicon($domain)->getContent();
     }
 
     /**
@@ -110,7 +124,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
         $iconData   = null;
         $sizeOffset = null;
         foreach($json['icons'] as $icon) {
-            list($iconData, $sizeOffset) = $this->analyzeApiIcon($icon, $iconData, $sizeOffset);
+            [$iconData, $sizeOffset] = $this->analyzeApiIcon($icon, $iconData, $sizeOffset);
         }
 
         return $iconData;

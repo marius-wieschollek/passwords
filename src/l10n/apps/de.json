@@ -1,20 +1,42 @@
 {
     "translations": [
         {
+            "Android"                : "Android",
             "Browsers"               : "Browser",
             "Official Firefox Client": "Offizieller Firefox Client",
             "Official Chrome Client" : "Offizieller Chrome Client",
             "official"               : "offiziell",
             "created by {author}"    : "erstellt von {author}",
-            "sources"                : "Quelltext"
+            "sources"                : "Quelltext",
+            "Connect with PassLink"  : "Mit PassLink verbinden",
+            "Connect a new device"   : "Ein neues Gerät verbinden",
+            "Connect via link"       : "Mittels Link verbinden",
+            "Choose a name:"         : "Wähle einen Namen:",
+            "The codes don't match"  : "Die Codes passen nicht",
+            "Looks good"             : "Das sieht gut aus",
+            "Connection successful"  : "Verbindung erfolgreich",
+            "I'm done"               : "Das war alles",
+            "Don't try again"        : "Nicht mehr versuchen",
+            "Connect something else" : "Etwas anderes Verbinden",
+            "Try again"              : "Nochmal versuchen",
+            "Libraries"              : "Bibliotheken",
+            "NPM Package"            : "NPM Paket",
+            "Rust Library"           : "Rust Bibliothek"
         },
         {
-            "This app uses an api which is no longer supported.": "Diese App verwendet eine nicht mehr unterstützte API."
+            "You cancelled the connection"                      : "Du hast den Verbindungsaufbau abgebrochen",
+            "You did not confirm the connection in time"        : "Du hast die Verbindung nicht rechtzeitig bestätigt",
+            "This app uses an api which is no longer supported.": "Diese App verwendet eine nicht mehr unterstützte API.",
+            "Official JavaScript client for the API"            : "Offizielles JavaScript-Paket für die API",
+            "A Rust library to bind to the API (WIP)"           : "Eine Rust-Bibliothek zur Anbindung der API"
         },
         {
+            "To connect a new device or app, simply scan the QR code or click the link."                                                                                     : "Um dich mit einem neuen Gerät oder einer neuen App zu verbinden, scanne einfach den QR-Code oder klick auf den Link.",
+            "Scan the QR code to connect a new device or app."                                                                                                               : "Scanne einfach den QR-Code um dich mit einem neuen Gerät oder einer neuen App zu verbinden.",
+            "Check if the codes below match with the ones provided by the device or app:"                                                                                    : "Prüfe ob diese Codes mit denen auf deinem Gerät oder in der App übereinstimmen:",
             "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store."                                     : "Dank unserer offiziellen Erweiterung aus dem Firefox Add-on Store kannst du auf alle deine Passwörter einfach von Firefox aus zugreifen und neue hinzufügen.",
             "Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.": "Unsere offizielle Chrome-Erweiterung ermöglicht es dir, alle deine Passwörter über deinen Browser zu verwalten und ist für viele auf Chromium basierenden Browsern im Chrome Web Store verfügbar.",
-            "Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play."                              : "Endlich eine moderne, schnelle und benutzerfreundliche App für den Zugriff und die Verwaltung deiner Passwörter von deinem Android-Gerät aus. Holen Sie dir von Google Play.",
+            "Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play."                              : "Endlich eine moderne, schnelle und benutzerfreundliche App für den Zugriff und die Verwaltung deiner Passwörter von deinem Android-Gerät aus. Hole sie dir im Google Play Store.",
             "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone."              : "Cloud Password Manager ist ein Passwortmanager, bei dem du die Kontrolle hast. Von deinem Android-Telefon aus kannst du auf die in deiner Nextcloud gespeicherten Passwörter zugreifen."
         }
     ],

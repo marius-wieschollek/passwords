@@ -2,14 +2,21 @@
 > Easy to use yet feature-rich and secure password manager for Nextcloud
 
 ## Contents
+* [Support](#support)
 * [Features](#features)
 * [Security](#security)
 * [Apps](#apps)
 * [API](#api)
 * [Installation](#installation)
-* [Support](#support)
 * [Development](#development)
 * [Licenses](Licenses.md)
+
+## Support
+* [Official Chat](https://t.me/nc_passwords)
+* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+* [User Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index)
+* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
+* [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
 
 ## Features
 #### Easy to use web interface
@@ -29,20 +36,13 @@ This is why passwords checks automatically if your passwords have been compromis
 You can get convenient e-mail alerts when one of your passwords has been compromised.
 You can activate additional security checks to make sure your passwords fulfill your standards.
 
-#### Legacy API and APP Migration support
-Are you using Fallon Turners Passwords app for Nextcloud/OwnCloud? No problem!
-Passwords will automatically import all the passwords from the old app.
-Take a look at the [legacy migration guide](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Legacy-Migration) for more details.
-Thanks to the legacy API support you can even keep applications using the old API.
-(But passwords with client side encryption are not available on the old API)
-
 #### Build upon modern standards
 Passwords is fast and uses modern web technology to give you the best experience possible.
 Rather than implementing own and possibly error-prone encryption algorithms Passwords uses standardized and well tested APIs to encrypt your passwords.
 The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
-Passwords is available in english, german, french, dutch, swedish, czech and russian.
+Passwords is available in english, german, french, spanish, dutch, swedish, czech, russian and italian.
 
 ## Security
 #### Server Side Encryption
@@ -72,19 +72,16 @@ You can use our [javascript client](https://www.npmjs.com/package/passwords-clie
 Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/apps/passwords).
 
 #### Requirements
-* Linux based OS
-* Nextcloud 15+
-* PHP 7.1+
-
-## Support
-* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
-* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
-* [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
+* Linux OS
+* Nextcloud ([latest](https://nextcloud.com/install/#instructions-server))
+* PHP (with [active support](https://www.php.net/supported-versions.php))
+* Database (MariaDB, MySQL, PostgreSQL, Sqlite)
+* [Complete list of requirements](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/System-Requirements)
 
 ## Development
-* Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/download?job=Assemble).
+* Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
-* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/home#developers).
+* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index).
 
 ## Licenses and Legal Information
 See [Licenses.md](Licenses.md)

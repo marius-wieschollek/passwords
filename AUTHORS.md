@@ -12,3 +12,6 @@
  - [NodokaMurmevent](https://github.com/NodokaMurmevent)
  - [Mathieu Brunot](https://github.com/madmath03)
  - [timewindSE](https://github.com/timewindSE)
+ - [Julen](https://larrucea.eu)
+ - [pokon549](https://github.com/pokon549)
+ - [Edoardo Codeglia](https://github.com/edocod1)

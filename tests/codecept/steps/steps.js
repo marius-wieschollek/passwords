@@ -1,12 +1,21 @@
 const {crop, thumbnail} = require('easyimage');
 
 function gEP(e) {let $e=$(e)[0];$e.scrollIntoView(false);return JSON.stringify($e.getBoundingClientRect());}
+function hO() {document.body.style.overflow='hidden';}
+function sO() {document.body.style.overflow='initial';}
+function cN() {$('.toastify').remove();}
+function oM() {$('#app-settings .more a').addClass('active');}
 
 let window = {width: 1280, height: 874};
 
 module.exports = function() {
     return actor(
         {
+            /**
+             *
+             * @param width
+             * @param height
+             */
             setWindowSize(width, height) {
                 window.width = width;
                 window.height = height;
@@ -24,10 +33,13 @@ module.exports = function() {
              * @returns {Promise<void>}
              */
             async captureElement(file, element, wait = 1, width = null, height = null, preview = true) {
+                await this.closeAllNotifications();
+                await this.executeScript(hO);
                 if(wait) this.wait(wait);
                 let data  = await this.executeScript(gEP, element),
                     stats = JSON.parse(data);
-                await this.captureWholePage(file, 0, false);
+                await this.captureWholePage(file, 0, false, false);
+                await this.executeScript(sO);
 
                 if(width === null || width > stats.width) width = stats.width;
                 if(height === null || height > stats.height) height = stats.height;
@@ -69,11 +81,15 @@ module.exports = function() {
              * @param file     The file name
              * @param wait     Wait for x seconds before capturing
              * @param preview  Create a preview image
+             * @param hideScrollbar
              */
-            async captureWholePage(file, wait = 1, preview = true) {
+            async captureWholePage(file, wait = 1, preview = true, hideScrollbar = true) {
                 this.moveCursorTo('#nextcloud');
+                await this.closeAllNotifications();
+                if(hideScrollbar) await this.executeScript(hO);
                 if(wait) this.wait(wait);
                 await this.saveScreenshot(`${file}.png`, false);
+                if(hideScrollbar) await this.executeScript(sO);
 
                 if(preview) {
                     await thumbnail(
@@ -86,6 +102,19 @@ module.exports = function() {
                         }
                     );
                 }
+            },
+
+            /**
+             *
+             * @return {Promise<void>}
+             */
+            async closeAllNotifications() {
+                await this.executeScript(cN);
+            },
+
+            async openMoreMenu() {
+                await this.executeScript(oM);
+                this.waitForVisible('#app-settings .fa-puzzle-piece');
             }
         }
     );

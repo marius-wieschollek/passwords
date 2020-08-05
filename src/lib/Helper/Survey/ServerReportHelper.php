@@ -61,6 +61,7 @@ class ServerReportHelper {
      * ServerReportHelper constructor.
      *
      * @param ShareMapper            $shareMapper
+     * @param RequestHelper          $requestHelper
      * @param ConfigurationService   $config
      * @param TagRevisionMapper      $tagRevisionMapper
      * @param ServiceSettingsHelper  $serviceSettings
@@ -82,7 +83,7 @@ class ServerReportHelper {
         $this->folderRevisionMapper   = $folderRevisionMapper;
         $this->tagRevisionMapper      = $tagRevisionMapper;
         $this->shareMapper            = $shareMapper;
-        $this->requestHelper = $requestHelper;
+        $this->requestHelper          = $requestHelper;
     }
 
     /**
@@ -138,6 +139,11 @@ class ServerReportHelper {
      * @return array
      */
     protected function getEnvironment(): array {
+        $subdirectory = (
+            strlen(parse_url($this->config->getSystemValue('overwrite.cli.url', ''), PHP_URL_PATH)) > 1 ||
+            strlen($this->config->getSystemValue('overwritewebroot', '')) > 1
+        );
+
         return [
             'os'           => php_uname('s'),
             'architecture' => php_uname('m'),
@@ -145,7 +151,8 @@ class ServerReportHelper {
             'database'     => $this->config->getSystemValue('dbtype'),
             'cron'         => $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core'),
             'proxy'        => !empty($this->config->getSystemValue('proxy', '')),
-            'sslProxy'     => strtolower($this->config->getSystemValue('overwriteprotocol', '')) === 'https'
+            'sslProxy'     => strtolower($this->config->getSystemValue('overwriteprotocol', '')) === 'https',
+            'subdirectory' => $subdirectory,
         ];
     }
 
@@ -208,6 +215,7 @@ class ServerReportHelper {
      */
     protected function getSettings(): array {
         return [
+            'channel'   => \OC_Util::getChannel(),
             'nightlies' => $this->config->getAppValue('nightly/enabled', '0') === '1',
             'handbook'  => $this->config->getAppValue('handbook/url') !== null,
         ];

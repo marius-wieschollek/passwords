@@ -85,7 +85,7 @@ class ImagickHelper extends AbstractImageHelper {
     public function getImageFromBlob($imageBlob) {
         $size = getimagesizefromstring($imageBlob);
 
-        if(in_array($size['mime'], ['image/icon', 'image/vnd.microsoft.icon'])) {
+        if($size && in_array($size['mime'], ['image/icon', 'image/vnd.microsoft.icon'])) {
             $imageBlob = $this->convertIcoToPng($imageBlob);
         }
 
@@ -155,23 +155,6 @@ class ImagickHelper extends AbstractImageHelper {
         $image->stripImage();
 
         return $image->getImageBlob();
-    }
-
-    /**
-     * @param $blob
-     *
-     * @return bool
-     * @throws \ImagickException
-     * @throws \GmagickException
-     */
-    public function supportsImage($blob): bool {
-        $size = getimagesizefromstring($blob);
-        if(!$size || !isset($size['mime'])) return false;
-
-        list($type, $format) = explode('/', $size['mime']);
-        if($type != 'image') return false;
-
-        return $this->supportsFormat($format);
     }
 
     /**

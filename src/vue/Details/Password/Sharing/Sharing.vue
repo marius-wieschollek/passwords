@@ -54,7 +54,7 @@
 
         data() {
             let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
-                hasCse = this.password.cseType !== 'none';
+                hasCse = this.password.cseType !== 'none' && !this.password.shared;
 
 
             return {
@@ -66,7 +66,8 @@
                 hasCse,
                 autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
-                polling     : {interval: null, mode: null}
+                polling     : {interval: null, mode: null},
+                cronPromise : null,
             };
         },
 
@@ -221,9 +222,8 @@
                 this.refreshShares();
             },
             async refreshShares() {
-                await API.runSharingCron()
-                    .then((d) => { if(d.success) this.reloadShares();})
-                    .catch(console.error);
+                await this.runCron()
+                    .then((d) => { if(d.success) this.reloadShares();});
 
                 this.startPolling();
                 this.$forceUpdate();
@@ -241,12 +241,32 @@
                     this.polling.interval = null;
                     this.polling.mode = null;
                 }
+            },
+            runCron() {
+                if(this.cronPromise === null) {
+                    this.cronPromise = new Promise((resolve, reject) => {
+                        API.runSharingCron()
+                            .then((d) => {
+                                this.cronPromise = null;
+                                resolve(d);
+                            })
+                            .catch((e) => {
+                                this.cronPromise = null;
+                                console.error(e);
+                                reject(e);
+                            });
+                    });
+                }
+
+                return this.cronPromise;
             }
         },
 
         watch: {
             password(value) {
                 this.shares = value.hasOwnProperty('shares') ? value.shares:[];
+                this.hasCse = value.cseType !== 'none' && !value.shared;
+
                 this.$forceUpdate();
             },
             search() {
@@ -255,7 +275,7 @@
             shares(shares) {
                 for(let id in shares) {
                     if(shares.hasOwnProperty(id) && shares[id].updatePending) {
-                        API.runSharingCron();
+                        this.runCron();
                         this.startPolling();
                         return;
                     }

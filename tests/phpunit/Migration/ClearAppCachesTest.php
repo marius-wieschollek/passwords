@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
+use OC\Log;
+use OC\Migration\SimpleOutput;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Migration\IOutput;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -52,7 +54,7 @@ class ClearAppCachesTest extends TestCase {
         $this->fileCacheService->expects($this->at(0))->method('clearCache')->with(FileCacheService::DEFAULT_CACHE);
 
         try {
-            $this->clearAppCaches->run(new IOutput());
+            $this->clearAppCaches->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -65,7 +67,7 @@ class ClearAppCachesTest extends TestCase {
         $this->fileCacheService->expects($this->at(1))->method('clearCache')->with(FileCacheService::AVATAR_CACHE);
 
         try {
-            $this->clearAppCaches->run(new IOutput());
+            $this->clearAppCaches->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }

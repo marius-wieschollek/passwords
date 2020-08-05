@@ -53,15 +53,15 @@ class ThemeSettingsHelper {
      * @return null|string
      */
     public function get(string $key) {
-        switch ($key) {
+        switch($key) {
             case 'color':
             case 'color.primary':
-                return $this->theming->getColorPrimary();
+                return $this->getColorPrimary();
             case 'color.text':
             case 'text.color':
                 return $this->theming->getTextColorPrimary();
             case 'color.background':
-                return $this->config->getAppValue('theme', 'none', 'accessibility') === 'themedark' ? '#181818':'#ffffff';
+                return $this->getBackgroundColor();
             case 'background':
                 return $this->getBackgroundImage();
             case 'logo':
@@ -69,7 +69,7 @@ class ThemeSettingsHelper {
             case 'label':
                 return $this->theming->getEntity();
             case 'app.icon':
-                return $this->getAppIcon();
+                return $this->getThemedAppIcon();
             case 'folder.icon':
                 return $this->getFolderIcon();
         }
@@ -82,12 +82,14 @@ class ThemeSettingsHelper {
      */
     public function list(): array {
         return [
-            'server.theme.color'       => $this->get('color'),
-            'server.theme.text.color'  => $this->get('text.color'),
-            'server.theme.background'  => $this->getBackgroundImage(),
-            'server.theme.logo'        => $this->get('logo'),
-            'server.theme.app.icon'    => $this->getAppIcon(),
-            'server.theme.folder.icon' => $this->getFolderIcon()
+            'server.theme.color.primary'    => $this->getColorPrimary(),
+            'server.theme.color.text'       => $this->get('color.text'),
+            'server.theme.color.background' => $this->getBackgroundColor(),
+            'server.theme.background'       => $this->getBackgroundImage(),
+            'server.theme.logo'             => $this->get('logo'),
+            'server.theme.label'            => $this->get('label'),
+            'server.theme.app.icon'         => $this->getThemedAppIcon(),
+            'server.theme.folder.icon'      => $this->getFolderIcon()
         ];
     }
 
@@ -109,7 +111,7 @@ class ThemeSettingsHelper {
     /**
      * @return string
      */
-    protected function getAppIcon(): string {
+    protected function getThemedAppIcon(): string {
         if($this->config->isAppEnabled('theming')) {
             $version = $this->config->getAppValue('cachebuster', '0', 'theming');
 
@@ -135,5 +137,35 @@ class ThemeSettingsHelper {
         }
 
         return $this->urlGenerator->getAbsoluteURL($url);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBackgroundColor(): string {
+        try {
+            if(in_array($this->config->getUserValue('theme', 'none', null, 'accessibility'), ['themedark', 'dark'])) {
+                return '#181818';
+            }
+        } catch(\Throwable $e) {
+
+        }
+
+        if($this->config->isAppEnabled('breezedark')) {
+            return '#31363b';
+        }
+
+        return '#ffffff';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getColorPrimary(): string {
+        if($this->config->isAppEnabled('breezedark')) {
+            return '#3daee9';
+        }
+
+        return $this->theming->getColorPrimary();
     }
 }

@@ -16,7 +16,7 @@
             "End session after"           : "Beende Sitzung nach",
             "One minute"                  : "Einer Minute",
             "{minutes} minutes"           : "{minutes} Minuten",
-            "Enc-to-end Encryption"       : "Ende-zu-Ende Verschlüsselung",
+            "End-to-end Encryption"       : "Ende-zu-Ende Verschlüsselung",
             "Server encryption mode"      : "Verschlüsselung auf Server",
             "None if CSE used"            : "Keine wenn CSE verwendet",
             "Simple encryption"           : "Einfache Verschlüsselung",

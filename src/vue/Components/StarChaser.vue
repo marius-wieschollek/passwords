@@ -203,7 +203,7 @@
 
         .powerup,
         .asteroid {
-            background : url(../../img/app.svg) no-repeat center;
+            background : var(--pw-image-logo) no-repeat center;
             width      : 64px;
             height     : 64px;
             position   : fixed;

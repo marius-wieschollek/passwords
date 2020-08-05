@@ -7,8 +7,8 @@
 
 namespace OCA\Passwords\Helper\AppSettings;
 
-use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Fetcher\NightlyAppFetcher;
+use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -22,6 +22,11 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
      * @var NightlyAppFetcher
      */
     protected $nightlyAppFetcher;
+
+    /**
+     * @var BackgroundJobService
+     */
+    protected $backgroundJobService;
 
     /**
      * @var
@@ -57,10 +62,12 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
      *
      * @param ConfigurationService $config
      * @param NightlyAppFetcher    $nightlyAppFetcher
+     * @param BackgroundJobService $backgroundJobService
      */
-    public function __construct(ConfigurationService $config, NightlyAppFetcher $nightlyAppFetcher) {
+    public function __construct(ConfigurationService $config, NightlyAppFetcher $nightlyAppFetcher, BackgroundJobService $backgroundJobService) {
         parent::__construct($config);
-        $this->nightlyAppFetcher = $nightlyAppFetcher;
+        $this->nightlyAppFetcher    = $nightlyAppFetcher;
+        $this->backgroundJobService = $backgroundJobService;
     }
 
     /**
@@ -82,16 +89,11 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
      * @param $enabled
      */
     protected function setNightlyStatus($enabled): void {
-        $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
-
         if($enabled) {
-            if(!in_array(Application::APP_NAME, $nightlyApps)) $nightlyApps[] = Application::APP_NAME;
-            $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
+            $this->backgroundJobService->addNightlyUpdates();
             $this->nightlyAppFetcher->get();
         } else {
-            $index = array_search(Application::APP_NAME, $nightlyApps);
-            if($index !== false) unset($nightlyApps[ $index ]);
-            $this->config->setSystemValue('allowNightlyUpdates', $nightlyApps);
+            $this->backgroundJobService->removeNightlyUpdates();
             $this->nightlyAppFetcher->clearDb();
         }
     }

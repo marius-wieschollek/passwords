@@ -5,6 +5,7 @@
 
             <div class="step-content">
                 <select v-model="source" id="passwords-import-source" :disabled="importing">
+                    <translate tag="option" value="" say="Choose import format" v-if="!source"/>
                     <translate tag="option" value="json" say="Database Backup"/>
                     <translate tag="option" value="pwdCsv" say="Passwords CSV"/>
                     <translate tag="option" value="fldCsv" say="Folder CSV"/>
@@ -13,13 +14,17 @@
                     <translate tag="option" value="pmanJson" say="Passman JSON"/>
                     <translate tag="option" value="pmanCsv" say="Passman CSV"/>
                     <translate tag="option" value="enpass" say="Enpass JSON"/>
+                    <translate tag="option" value="bitwarden" say="Bitwarden JSON"/>
+                    <translate tag="option" value="bitwardenCsv" say="Bitwarden CSV"/>
                     <translate tag="option" value="keepass" say="KeePass CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
                     <translate tag="option" value="roboform" say="RoboForm CSV"/>
                     <translate tag="option" value="safeincloud" say="SafeInCloud CSV"/>
+                    <translate tag="option" value="chrome" say="Chrome / Google Passwords CSV"/>
                     <translate tag="option" value="csv" say="Other / Custom CSV"/>
                 </select>
+                <custom-csv-help v-on:trigger="source = 'csv'" :current="source" />
             </div>
         </div>
 
@@ -225,9 +230,11 @@
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import DAS from '@js/Services/DeferredActivationService';
+    import CustomCsvHelp from '@vue/Import/CustomCsvHelp';
 
     export default {
         components: {
+            CustomCsvHelp,
             Translate
         },
 
@@ -236,7 +243,7 @@
                 .then((d) => { this.allowEnc = d; });
 
             return {
-                source     : 'json',
+                source     : '',
                 type       : 'json',
                 mime       : 'application/json',
                 fieldMap   : {
@@ -265,7 +272,7 @@
                 csvReady   : false,
                 csv        : {newLine: 'auto', delimiter: 'auto', quotes: '"', escape: '"', badQuotes: false},
                 options    : {mode: 0, skipShared: true, skipEmpty: false},
-                step       : 2,
+                step       : 1,
                 previewLine: 1,
                 importing  : false,
 
@@ -498,11 +505,16 @@
                         this.options.skipEmpty = true;
                         this.type = 'enpass';
                         break;
+                    case 'bitwarden':
+                        this.mime = 'application/json';
+                        this.type = 'bitwarden';
+                        break;
                     case 'keepass':
                         this.csv.escape = '\\';
                     case 'legacy':
                     case 'roboform':
                     case 'lastpass':
+                    case 'bitwardenCsv':
                         this.options.profile = value;
                         break;
                     case 'safeincloud':

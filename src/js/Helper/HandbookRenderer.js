@@ -70,6 +70,9 @@ class HandbookRenderer {
             let content = blankRenderer.code(code, infostring, escaped);
             return content.replace(/(\r\n|\n|\r)/gm, '<br>');
         };
+        renderer.blockquote = (quote) => {
+            return HandbookRenderer._renderBlockquote(quote, blankRenderer);
+        };
         HandbookRenderer._extendMarkedLexer();
 
         let source = marked(markdown, {renderer});
@@ -215,7 +218,10 @@ class HandbookRenderer {
      * @private
      */
     static _renderHeader(label, level, headers) {
-        let id     = label.trim().toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, ''),
+        let id     = label.trim().toLowerCase()
+                .replace(/&#{0,1}[a-z0-9]+;/g, '')
+                .replace(/[^\w]+/g, '-')
+                .replace(/^-+|-+$/g, ''),
             [href] = HandbookRenderer._processAnchorLink(`#${id}`, '');
 
         this._addNavigationEntry(headers, {label, href, level, id: `help-${id}`, children: []});
@@ -310,13 +316,36 @@ class HandbookRenderer {
 
         return `<span class="md-image-container" id="${element.id}" data-image-id="${element.index}">
                 <a class="md-image-link" title="${element.title}" href="${element.url}" target="_blank" rel="noreferrer noopener">
-                <img src="${element.thumbnail}" alt="${element.description.replace(/"/g, '&quot;')}" class="md-image" loading="lazy">
+                <img src="${element.thumbnail}" alt="${element.description.replace(/"/g, '&quot;')}" class="md-image">
                 <span class="md-image-caption">${caption}</span>
                 </a></span>`;
     }
+
+    /**
+     *
+     * @param {String} quote
+     * @param {marked.Renderer} blankRenderer
+     * @return {String}
+     * @private
+     */
+    static _renderBlockquote(quote, blankRenderer) {
+        let css   = null,
+            types = [':exclamation:', ':warning:', ':thumbsup:', ':star:'],
+            map   = {':exclamation:': 'important', ':warning:': 'warning', ':thumbsup:': 'recommended', ':star:': 'info'};
+
+        for(let type of types) {
+            if(quote.indexOf(type) !== -1) {
+                quote = quote.replace(type, '');
+                css = map[type];
+            }
+        }
+
+        let content = blankRenderer.blockquote(quote);
+        if(css !== null) content = content.replace('<blockquote>', `<blockquote class="${css}">`);
+        return content;
+    }
 }
 
-let
-    HR = new HandbookRenderer();
+let HR = new HandbookRenderer();
 
 export default HR;

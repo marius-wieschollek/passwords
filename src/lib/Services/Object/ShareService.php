@@ -19,8 +19,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
 /**
  * Class ShareService
  *
- * @package      OCA\Passwords\Services\Object
- * @noinspection PhpSignatureMismatchDuringInheritanceInspection
+ * @package OCA\Passwords\Services\Object
  */
 class ShareService extends AbstractService {
 
@@ -58,11 +57,11 @@ class ShareService extends AbstractService {
     /**
      * @param string $userId
      *
-     * @return ModelInterface[]
+     * @return Share[]
      * @throws \Exception
      */
-    public function findByUserId(string $userId): array {
-        return $this->mapper->findAllByUserId($userId);
+    public function findWithUserId(string $userId): array {
+        return $this->mapper->findAllByUserIdOrReceiverId($userId);
     }
 
     /**

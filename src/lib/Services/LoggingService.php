@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\AppInfo\Application;
 use OCP\ILogger;
+use Throwable;
 
 /**
  * Class LoggingService
@@ -32,53 +33,110 @@ class LoggingService {
     }
 
     /**
+     * System is unusable.
+     *
      * @param string|array $message
      * @param array        $context
      *
      * @return LoggingService
      */
-    public function fatal($message, array $context = []): LoggingService {
-        return $this->log(ILogger::FATAL, $message, $context);
+    public function emergency($message, array $context = []): LoggingService {
+        return $this->log('emergency', $message, $context);
     }
 
     /**
+     * Action must be taken immediately.
+     *
+     * Example: Entire website down, database unavailable, etc. This should
+     * trigger the SMS alerts and wake you up.
+     *
+     * @param string|array $message
+     * @param array        $context
+     *
+     * @return LoggingService
+     */
+    public function alert($message, array $context = []): LoggingService {
+        return $this->log('alert', $message, $context);
+    }
+
+    /**
+     * Critical conditions.
+     *
+     * Example: Application component unavailable, unexpected exception.
+     *
+     * @param string|array $message
+     * @param array        $context
+     *
+     * @return LoggingService
+     */
+    public function critical($message, array $context = []): LoggingService {
+        return $this->log('critical', $message, $context);
+    }
+
+    /**
+     * Runtime errors that do not require immediate action but should typically
+     * be logged and monitored.
+     *
      * @param string|array $message
      * @param array        $context
      *
      * @return LoggingService
      */
     public function error($message, array $context = []): LoggingService {
-        return $this->log(ILogger::ERROR, $message, $context);
+        return $this->log('error', $message, $context);
     }
 
     /**
+     * Exceptional occurrences that are not errors.
+     *
+     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+     * that are not necessarily wrong.
+     *
      * @param string|array $message
      * @param array        $context
      *
      * @return LoggingService
      */
     public function warning($message, array $context = []): LoggingService {
-        return $this->log(ILogger::WARN, $message, $context);
+        return $this->log('warning', $message, $context);
     }
 
     /**
+     * Normal but significant events.
+     *
+     * @param string|array $message
+     * @param array        $context
+     *
+     * @return LoggingService
+     */
+    public function notice($message, array $context = []): LoggingService {
+        return $this->log('notice', $message, $context);
+    }
+
+    /**
+     * Interesting events.
+     *
+     * Example: User logs in, SQL logs.
+     *
      * @param string|array $message
      * @param array        $context
      *
      * @return LoggingService
      */
     public function info($message, array $context = []): LoggingService {
-        return $this->log(ILogger::INFO, $message, $context);
+        return $this->log('info', $message, $context);
     }
 
     /**
+     * Detailed debug information.
+     *
      * @param string|array $message
      * @param array        $context
      *
      * @return LoggingService
      */
     public function debug($message, array $context = []): LoggingService {
-        return $this->log(ILogger::DEBUG, $message, $context);
+        return $this->log('debug', $message, $context);
     }
 
     /**
@@ -92,37 +150,37 @@ class LoggingService {
      * @return LoggingService
      */
     public function debugOrInfo($message, int $priority, array $context = []): LoggingService {
-        $level = $priority < 1 ? ILogger::DEBUG:ILogger::INFO;
+        $level = $priority < 1 ? 'debug':'info';
 
         return $this->log($level, $message, $context);
     }
 
     /**
-     * @param int          $level
+     * @param string       $level
      * @param string|array $message
      * @param array        $context
      *
      * @return LoggingService
      */
-    public function log(int $level, $message, array $context = []): LoggingService {
+    protected function log(string $level, $message, array $context = []): LoggingService {
         if(is_array($message)) {
             $string  = array_shift($message);
             $message = sprintf($string, ...$message);
         }
         $context['app'] = Application::APP_NAME;
 
-        $this->logger->log($level, $message, $context);
+        $this->logger->{$level}($message, $context);
 
         return $this;
     }
 
     /**
-     * @param \Throwable $exception
-     * @param array      $context
+     * @param Throwable $exception
+     * @param array     $context
      *
      * @return LoggingService
      */
-    public function logException(\Throwable $exception, array $context = []): LoggingService {
+    public function logException(Throwable $exception, array $context = []): LoggingService {
         $context['app'] = Application::APP_NAME;
         $this->logger->logException($exception, $context);
 

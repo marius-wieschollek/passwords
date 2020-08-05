@@ -63,12 +63,27 @@ class DeferredActivationService {
      * @return bool
      */
     public function check(string $id, bool $ignoreNightly = false): bool {
+        if($this->isServiceDisabled()) return false;
         if(!$ignoreNightly && $this->isNightly()) return true;
 
         $features = $this->getFeatures();
         if(isset($features[ $id ])) return $features[ $id ] === true;
 
         return false;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getUpdateInfo(): ?array {
+        if($this->isServiceDisabled()) return null;
+
+        $features = $this->fetchFeatures();
+        if(isset($features['server']['current'])) {
+            return $features['server']['current'];
+        }
+
+        return null;
     }
 
     /**
@@ -79,15 +94,11 @@ class DeferredActivationService {
     protected function getFeatures(): array {
         if($this->features !== null) return $this->features;
 
-        $data = $this->getFeaturesFromCache();
+        $data = $this->fetchFeatures();
         if($data === null) {
-            $data = $this->getFeaturesFromRemote();
+            $this->features = [];
 
-            if($data === null) {
-                $this->features = [];
-
-                return [];
-            }
+            return [];
         }
 
         $this->features = $this->processFeatures($data);
@@ -96,20 +107,32 @@ class DeferredActivationService {
     }
 
     /**
+     * @return array|null
+     */
+    protected function fetchFeatures(): ?array {
+        $data = $this->getFeaturesFromCache();
+        if($data !== null) return json_decode($data, true);
+
+        $data = $this->getFeaturesFromRemote();
+        if($data !== null) return json_decode($data, true);
+
+        return null;
+    }
+
+    /**
      * Process the raw json into the feature set for this app
      *
-     * @param $data
+     * @param $json
      *
      * @return array
      */
-    protected function processFeatures($data): array {
-        $json = json_decode($data, true);
+    protected function processFeatures($json): array {
         if(!isset($json['server'])) return [];
 
         $version = $this->config->getAppValue('installed_version');
         if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
 
-        list ($major, $minor) = explode('.', $version);
+        [$major, $minor] = explode('.', $version);
         $mainVersion = $major.'.'.$minor;
         $appFeatures = $json['server'];
 
@@ -163,10 +186,17 @@ class DeferredActivationService {
     protected function getFeaturesFromRemote(): ?string {
         $url = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';
         $this->httpRequest->setUrl($url);
-        $data = $this->httpRequest->sendWithRetry();
+        $data = $this->httpRequest->send();
 
         if($data !== null) $this->fileCache->putFile('deferred-activation.json', $data);
 
         return $data;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isServiceDisabled(): bool {
+        return $this->config->getAppValue('das/enabled', '1') !== '1' || $this->config->getSystemValue('has_internet_connection', true) === false;
     }
 }

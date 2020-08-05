@@ -4,16 +4,16 @@
             <translate tag="option" value="username" v-if="password.username" say="Username"/>
             <translate tag="option" value="password" say="Password"/>
             <translate tag="option" value="url" v-if="password.url" say="Website"/>
-            <translate tag="option" value="hash" say="SHA1 Hash"/>
+            <translate tag="option" value="hash" say="SHA-1"/>
         </select>
-        <qr-code :text="text" :color="color" :size="256" bgColor="#fff0" errorLevel="H"/>
+        <qr-code :text="text" :color="color" :size="256" bgColor="#fff0" errorLevel="Q"/>
     </div>
 </template>
 
 <script>
     import Translate from '@vc/Translate';
     import QrCode from 'vue-qrcode-component';
-    import ThemeManager from '@js/Manager/ThemeManager';
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
@@ -29,7 +29,7 @@
 
         data() {
             return {
-                color   : ThemeManager.getColor(),
+                color   : SettingsService.get('server.theme.color.primary'),
                 text    : this.password.password,
                 property: 'password'
             };

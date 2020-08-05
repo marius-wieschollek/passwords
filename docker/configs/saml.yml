@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  keycloak:
+    image: jboss/keycloak
+    container_name: "passwords-keycloak"
+    ports:
+      - 9091:8443
+    volumes:
+      - ./docker/volumes/nginx/default.pem:/etc/x509/https/tls.crt
+      - ./docker/volumes/nginx/default.key:/etc/x509/https/tls.key
+    environment:
+      DB_VENDOR: h2
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: nextcloud
+
+  app:
+    links:
+      - keycloak

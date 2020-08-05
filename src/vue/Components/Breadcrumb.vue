@@ -243,8 +243,9 @@
                 }
 
                 .menu {
-                    left  : auto;
-                    right : 58%;
+                    left       : auto;
+                    right      : 58%;
+                    max-height : 90px;
                 }
             }
 
@@ -255,7 +256,7 @@
                 transition : max-height 0.25s ease-in-out;
                 display    : block;
                 position   : relative;
-                left       : -126px;
+                left       : -134px;
 
                 ul {
                     padding-right : 0;
@@ -276,7 +277,7 @@
 
             &.active .menu {
                 overflow   : visible;
-                max-height : 75px;
+                max-height : 90px;
                 animation  : 0.25s delay-overflow;
             }
         }
@@ -300,6 +301,10 @@
 
         #app-navigation-toggle {
             display : none !important;
+
+            @media(max-width : $width-medium) {
+                display   : block !important;
+            }
         }
 
         @keyframes delay-overflow {
@@ -315,6 +320,7 @@
                 .crumb:not(.first):not(.crumbmenu) {
                     display : none;
                 }
+
                 .crumbmenu {
                     background-image : none;
                     display          : inline-flex;

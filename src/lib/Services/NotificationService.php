@@ -15,6 +15,7 @@ use OCA\Passwords\Notification\EmptyRequiredSettingNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
 use OCA\Passwords\Notification\LegacyApiNotification;
 use OCA\Passwords\Notification\LoginAttemptNotification;
+use OCA\Passwords\Notification\NewClientNotification;
 use OCA\Passwords\Notification\ShareCreatedNotification;
 use OCA\Passwords\Notification\ShareLoopNotification;
 use OCA\Passwords\Notification\SurveyNotification;
@@ -28,7 +29,7 @@ use OCP\Notification\INotifier;
  *
  * @package OCA\Passwords\Notification
  */
-abstract class NotificationService implements INotifier {
+class NotificationService implements INotifier {
 
     /**
      * @var UserSettingsService
@@ -49,6 +50,11 @@ abstract class NotificationService implements INotifier {
      * @var LegacyApiNotification
      */
     protected $legacyApiNotification;
+
+    /**
+     * @var NewClientNotification
+     */
+    protected $newClientNotification;
 
     /**
      * @var ShareLoopNotification
@@ -96,6 +102,7 @@ abstract class NotificationService implements INotifier {
      * @param IFactory                         $l10nFactory
      * @param UserSettingsService              $settings
      * @param SurveyNotification               $surveyNotification
+     * @param NewClientNotification            $newClientNotification
      * @param ShareLoopNotification            $shareLoopNotification
      * @param LegacyApiNotification            $legacyApiNotification
      * @param BadPasswordNotification          $badPasswordNotification
@@ -110,6 +117,7 @@ abstract class NotificationService implements INotifier {
         IFactory $l10nFactory,
         UserSettingsService $settings,
         SurveyNotification $surveyNotification,
+        NewClientNotification $newClientNotification,
         ShareLoopNotification $shareLoopNotification,
         LegacyApiNotification $legacyApiNotification,
         BadPasswordNotification $badPasswordNotification,
@@ -123,6 +131,7 @@ abstract class NotificationService implements INotifier {
         $this->settings                         = $settings;
         $this->l10NFactory                      = $l10nFactory;
         $this->surveyNotification               = $surveyNotification;
+        $this->newClientNotification            = $newClientNotification;
         $this->legacyApiNotification            = $legacyApiNotification;
         $this->shareLoopNotification            = $shareLoopNotification;
         $this->badPasswordNotification          = $badPasswordNotification;
@@ -132,6 +141,26 @@ abstract class NotificationService implements INotifier {
         $this->impersonationNotification        = $impersonationNotification;
         $this->upgradeRequiredNotification      = $upgradeRequiredNotification;
         $this->emptyRequiredSettingNotification = $emptyRequiredSettingNotification;
+    }
+
+    /**
+     * Identifier of the notifier, only use [a-z0-9_]
+     *
+     * @return string
+     * @since 17.0.0
+     */
+    public function getID(): string {
+        return Application::APP_NAME;
+    }
+
+    /**
+     * Human readable name describing the notifier
+     *
+     * @return string
+     * @since 17.0.0
+     */
+    public function getName(): string {
+        return $this->l10NFactory->get(Application::APP_NAME)->t('Passwords');
     }
 
     /**
@@ -256,6 +285,18 @@ abstract class NotificationService implements INotifier {
     }
 
     /**
+     * @param string $userId
+     * @param string $client
+     */
+    public function sendNewClientNotification(string $userId, string $client): void {
+        $this->sendNotification(
+            $this->newClientNotification,
+            $userId,
+            ['client' => $client]
+        );
+    }
+
+    /**
      * @param AbstractNotification $notification
      * @param string               $userId
      * @param array                $parameters
@@ -268,14 +309,12 @@ abstract class NotificationService implements INotifier {
 
     /**
      * @param INotification $notification
-     * @param string        $languageCode The code of the language that should be used to prepare the notification
+     * @param string        $languageCode
      *
      * @return INotification
-     * @throws \InvalidArgumentException When the notification was not prepared by a notifier
      * @throws \Exception
-     * @since 9.0.0
      */
-    public function realPrepare(INotification $notification, string $languageCode): INotification {
+    public function prepare(INotification $notification, string $languageCode): INotification {
         if($notification->getApp() !== Application::APP_NAME) {
             throw new \InvalidArgumentException();
         }
@@ -296,6 +335,8 @@ abstract class NotificationService implements INotifier {
                 return $this->besticonApiNotification->process($notification, $localisation);
             case LoginAttemptNotification::NAME:
                 return $this->loginAttemptNotification->process($notification, $localisation);
+            case NewClientNotification::NAME:
+                return $this->newClientNotification->process($notification, $localisation);
             case ShareLoopNotification::NAME:
                 return $this->shareLoopNotification->process($notification, $localisation);
             case LegacyApiNotification::NAME:

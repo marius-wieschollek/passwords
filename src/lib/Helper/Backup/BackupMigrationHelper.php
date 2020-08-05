@@ -117,7 +117,7 @@ class BackupMigrationHelper {
             foreach($object['revisions'] as $key => $revision) {
                 $revision = $this->encryption->decryptArray($revision);
 
-                if($revision['customFields'] === '{}') {
+                if($revision['customFields'] === '{}' || empty($revision['customFields'])) {
                     $revision['customFields'] = '[]';
                 } else {
                     $oldFields = json_decode($revision['customFields'], true);

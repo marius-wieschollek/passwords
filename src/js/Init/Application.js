@@ -7,6 +7,7 @@ import SectionAll from '@vue/Section/All';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import EventManager from '@js/Manager/EventManager';
+import AlertManager from '@js/Manager/AlertManager';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
@@ -40,7 +41,7 @@ class Application {
     }
 
     init() {
-        window.addEventListener('load', () => { this._initApp(); }, {once: true, passive: true});
+        window.addEventListener('DOMContentLoaded', () => { this._initApp(); }, {once: true, passive: true});
         this._timer = setInterval(() => { this._initApp(); }, 10);
     }
 
@@ -60,6 +61,7 @@ class Application {
             SearchManager.init();
             EventManager.init();
             KeepAliveManager.init();
+            AlertManager.init();
             EncryptionTestHelper.initTests();
         }
     }
@@ -71,7 +73,19 @@ class Application {
      */
     _initSettings() {
         SettingsService.init();
+        document.body.setAttribute('data-server-version', SettingsService.get('server.version'));
+
+        let customBackground = SettingsService.get('server.theme.background').indexOf('/core/') === -1 ? 'true':'false';
+        document.body.setAttribute('data-custom-background', customBackground);
+
+        let customColor = SettingsService.get('server.theme.color.primary') === '#0082c9' ? 'false':'true';
+        document.body.setAttribute('data-custom-color', customColor);
+
         document.body.style.setProperty('--pw-image-login-background', `url(${SettingsService.get('server.theme.background')})`);
+        document.body.style.setProperty('--pw-image-logo-themed', `url(${SettingsService.get('server.theme.app.icon')})`);
+
+        let appIcon = SettingsService.get('server.theme.color.text') === '#ffffff' ? 'app':'app-dark';
+        document.body.style.setProperty('--pw-image-logo', `url(${OC.appswebroots.passwords}/img/${appIcon}.svg)`);
     }
 
     /**
@@ -114,8 +128,8 @@ class Application {
         }
 
         if(!this._loginRequired) {
-            document.body.classList.remove('pw-authorize');
-            document.body.classList.add('pw-no-authorize');
+            document.body.classList.remove('pw-auth-visible');
+            document.body.classList.add('pw-auth-skipped');
             API.openSession({});
         }
     }
@@ -141,7 +155,7 @@ class Application {
                 next({name: 'Authorize', params: {target}});
             }
             next();
-            if(to.name !== from.name && window.innerWidth < 660) {
+            if(to.name !== from.name && window.innerWidth < 768) {
                 let app = document.getElementById('app');
                 if(app) app.classList.remove('mobile-open');
             }

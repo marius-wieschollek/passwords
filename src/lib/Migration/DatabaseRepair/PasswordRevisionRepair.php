@@ -68,7 +68,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     ) {
         parent::__construct($modelMapper, $revisionService, $encryption, $environment);
         $this->folderMapper      = $folderMapper;
-        $this->convertFields     = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2019.7.2';
+        $this->convertFields     = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2020.3.0';
         $this->config            = $config;
     }
 
@@ -79,7 +79,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function run(IOutput $output): void {
         parent::run($output);
-        $this->config->setAppValue('migration/customFields', '2019.7.2');
+        $this->config->setAppValue('migration/customFields', '2020.2.0');
     }
 
     /**
@@ -131,13 +131,13 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @return bool
      */
     public function convertCustomFields(PasswordRevision $revision): bool {
-        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
+        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
         if(!$this->decryptOrDelete($revision)) return true;
         $customFields = $revision->getCustomFields();
 
         if(substr($customFields, 0, 1) === '[') return false;
-        if($customFields === '{}') {
+        if($customFields === '{}' || empty($customFields)) {
             $revision->setCustomFields('[]');
 
             return true;
@@ -164,7 +164,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @return bool
      */
     public function cleanCustomFields(PasswordRevision $revision): bool {
-        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) return false;
+        if(!$this->convertFields || $revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE || $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V2R1) return false;
 
         if(!$this->decryptOrDelete($revision)) return true;
         $customFields = $revision->getCustomFields();

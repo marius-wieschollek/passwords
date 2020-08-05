@@ -7,9 +7,11 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\KeychainService;
+use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
@@ -28,14 +30,21 @@ class KeychainApiController extends AbstractApiController {
     protected $keychainService;
 
     /**
+     * @var UserChallengeService
+     */
+    protected $challengeService;
+
+    /**
      * KeychainApiController constructor.
      *
-     * @param IRequest        $request
-     * @param KeychainService $keychainService
+     * @param IRequest             $request
+     * @param KeychainService      $keychainService
+     * @param UserChallengeService $challengeService
      */
-    public function __construct(IRequest $request, KeychainService $keychainService) {
+    public function __construct(IRequest $request, KeychainService $keychainService, UserChallengeService $challengeService) {
         parent::__construct($request);
-        $this->keychainService = $keychainService;
+        $this->keychainService  = $keychainService;
+        $this->challengeService = $challengeService;
     }
 
     /**
@@ -44,7 +53,7 @@ class KeychainApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function list(): JSONResponse {
         $results = $this->keychainService->getClientKeychainArray();
@@ -63,9 +72,13 @@ class KeychainApiController extends AbstractApiController {
      * @return JSONResponse
      * @throws ApiException
      * @throws MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(string $id, string $data): JSONResponse {
+        if(!$this->challengeService->hasChallenge()) {
+            throw new ApiException('Encryption not enabled');
+        }
+
         try {
             $keychain = $this->keychainService->findByType($id, true);
 

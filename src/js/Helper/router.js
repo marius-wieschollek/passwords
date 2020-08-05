@@ -81,7 +81,7 @@ let router = new Router(
             {name: 'Authorize', path: '/authorize/:target?', components: {main: SectionAuthorize}},
             {name: 'Backup', path: '/backup/:action?', components: {main: SectionBackup}},
             {name: 'Help', path: '/help/:page?', components: {main: SectionHelp}},
-            {name: 'Apps & Extensions', path: '/apps', components: {main: SectionApps}}
+            {name: 'Apps and Extensions', path: '/apps', components: {main: SectionApps}}
         ]
     }
 );

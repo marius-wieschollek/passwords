@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
+use Exception;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
@@ -14,7 +15,10 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
+use OCP\AppFramework\QueryException;
 
 /**
  * Class FolderObjectHelper
@@ -26,7 +30,9 @@ class FolderObjectHelper extends AbstractObjectHelper {
     const LEVEL_TAGS          = 'tags';
     const LEVEL_PARENT        = 'parent';
     const LEVEL_FOLDERS       = 'folders';
+    const LEVEL_FOLDER_IDS    = 'folder-ids';
     const LEVEL_PASSWORDS     = 'passwords';
+    const LEVEL_PASSWORD_IDS  = 'password-ids';
     const LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
@@ -43,11 +49,6 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @var PasswordObjectHelper
      */
     protected $passwordObjectHelper;
-
-    /**
-     * @var FolderRevision[]
-     */
-    protected $revisionCache = [];
 
     /**
      * FolderObjectHelper constructor.
@@ -76,25 +77,28 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @param string                 $level
      * @param array                  $filter
      *
-     * @return array
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @return array|null
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws QueryException
      */
     public function getApiObject(
         EntityInterface $folder,
         string $level = self::LEVEL_MODEL,
         $filter = []
     ): ?array {
+        $detailLevel = explode('+', $level);
+        $withModel   = in_array(self::LEVEL_MODEL, $detailLevel);
+
         /** @var FolderRevision $revision */
-        $revision = $this->getRevision($folder, $filter);
+        $revision = $this->getRevision($folder, $filter, $withModel);
         if($revision === null) return null;
 
-        $detailLevel = explode('+', $level);
-        $object      = [];
-        if(in_array(self::LEVEL_MODEL, $detailLevel)) {
+        if($withModel) {
             $object = $this->getModel($folder, $revision);
+        } else {
+            $object = ['id' => $folder->getUuid()];
         }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($folder, $object);
@@ -104,9 +108,14 @@ class FolderObjectHelper extends AbstractObjectHelper {
         }
         if(in_array(self::LEVEL_FOLDERS, $detailLevel)) {
             $object = $this->getFolders($revision, $object);
+        } else if(in_array(self::LEVEL_FOLDER_IDS, $detailLevel)) {
+            $object = $this->getFolders($revision, $object, false);
         }
         if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
-            $object = $this->getPasswords($revision, $object, in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel));
+            $includeTags = in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel);
+            $object      = $this->getPasswords($revision, $object, $includeTags);
+        } else if(in_array(self::LEVEL_PASSWORD_IDS, $detailLevel)) {
+            $object = $this->getPasswords($revision, $object, false, false);
         }
 
         return $object;
@@ -144,7 +153,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @param array  $object
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getRevisions(Folder $folder, array $object): array {
         /** @var FolderRevision[] $revisions */
@@ -179,9 +188,9 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @param array          $object
      *
      * @return array
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function getParent(FolderRevision $revision, array $object): array {
 
@@ -202,13 +211,14 @@ class FolderObjectHelper extends AbstractObjectHelper {
     /**
      * @param FolderRevision $revision
      * @param array          $object
+     * @param bool           $includeModels
      *
      * @return array
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
-    protected function getFolders(FolderRevision $revision, array $object): array {
+    protected function getFolders(FolderRevision $revision, array $object, bool $includeModels = true): array {
 
         $filters = ['trashed' => false];
         if(!$revision->isHidden()) $filters['hidden'] = false;
@@ -217,9 +227,13 @@ class FolderObjectHelper extends AbstractObjectHelper {
         $folders           = $this->folderService->findByParent($revision->getModel());
 
         foreach($folders as $folder) {
-            $obj = $this->getApiObject($folder, self::LEVEL_MODEL, $filters);
+            if($includeModels) {
+                $obj = $this->getApiObject($folder, self::LEVEL_MODEL, $filters);
 
-            if($obj !== null) $object['folders'][] = $obj;
+                if($obj !== null) $object['folders'][] = $obj;
+            } else if($this->matchesFilter($folder, $filters)) {
+                $object['folders'][] = $folder->getUuid();
+            }
         }
 
         return $object;
@@ -229,14 +243,14 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @param FolderRevision $revision
      * @param array          $object
      * @param bool           $includeTags
+     * @param bool           $includeModels
      *
      * @return array
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws QueryException
      */
-    protected function getPasswords(FolderRevision $revision, array $object, bool $includeTags = false): array {
+    protected function getPasswords(FolderRevision $revision, array $object, bool $includeTags = false, bool $includeModels = true): array {
 
         $filters = [];
         if(!$revision->isHidden()) $filters['hidden'] = false;
@@ -248,9 +262,13 @@ class FolderObjectHelper extends AbstractObjectHelper {
 
         $detailLevel = $includeTags ? self::LEVEL_MODEL.'+'.self::LEVEL_TAGS:self::LEVEL_MODEL;
         foreach($passwords as $password) {
-            $obj = $objectHelper->getApiObject($password, $detailLevel, $filters);
+            if($includeModels) {
+                $obj = $objectHelper->getApiObject($password, $detailLevel, $filters);
 
-            if($obj !== null) $object['passwords'][] = $obj;
+                if($obj !== null) $object['passwords'][] = $obj;
+            } else if($objectHelper->matchesFilter($password, $filters)) {
+                $object['passwords'][] = $password->getUuid();
+            }
         }
 
         return $object;
@@ -258,7 +276,7 @@ class FolderObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return PasswordObjectHelper
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     protected function getPasswordObjectHelper(): PasswordObjectHelper {
         if(!$this->passwordObjectHelper) {

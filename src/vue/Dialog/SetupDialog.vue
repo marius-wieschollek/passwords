@@ -15,7 +15,10 @@
                             v-if="hasSlide('encryption')"/>
                 <admin-settings id="setup-slide-admin-settings" class="slide" v-if="hasSlide('admin-settings')"/>
                 <user-settings id="setup-slide-user-settings" class="slide" v-if="hasSlide('user-settings')"/>
-                <get-help id="setup-slide-get-help" class="slide" v-if="hasSlide('get-help')"/>
+                <get-help id="setup-slide-get-help"
+                          class="slide"
+                          v-on:redirect="openSection($event, false)"
+                          v-if="hasSlide('get-help')"/>
                 <keep-order id="setup-slide-keep-order" class="slide" v-if="hasSlide('keep-order')"/>
                 <integrations id="setup-slide-integrations"
                               class="slide"
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+    import API from '@js/Helper/api';
     import router from '@js/Helper/router';
     import Translate from '@vue/Components/Translate';
     import Start from '@vue/Dialog/SetupDialog/Start';
@@ -55,10 +59,15 @@
             enableSlides: {
                 type: Array,
                 default() {
-                    if(OC.isUserAdmin()) {
-                        return ['start', 'encryption', 'admin-settings', 'user-settings', 'get-help', 'integrations'];
+                    let slides = ['start', 'user-settings', 'get-help', 'integrations'];
+                    if(!API.hasEncryption) {
+                        slides.splice(1, 0, 'encryption');
                     }
-                    return ['start', 'encryption', 'user-settings', 'get-help', 'integrations'];
+                    if(OC.isUserAdmin()) {
+                        let pos = slides.indexOf('user-settings');
+                        slides.splice(pos, 0, 'admin-settings');
+                    }
+                    return slides;
                 }
             },
             closable    : {
@@ -69,7 +78,7 @@
                 type   : Boolean,
                 default: true
             },
-            _close  : {
+            _close      : {
                 type: Function
             }
         },
@@ -160,10 +169,10 @@
                     this.closeWizard();
                 }
             },
-            openSection($event) {
+            openSection($event, close = true) {
                 this.route = $event;
                 this.isDefaultRoute = false;
-                this.closeWizard();
+                if(close) this.closeWizard();
             },
             updateStatus(e) {
                 if(e.id === this.current.id) {
@@ -223,7 +232,7 @@
 
             .logo {
                 height          : 120px;
-                background      : url(../../img/app.svg) no-repeat center;
+                background      : var(--pw-image-logo) no-repeat center;
                 background-size : contain;
             }
 
@@ -241,7 +250,7 @@
                 justify-content : center;
 
                 .logo {
-                    width  : 120px;
+                    width : 120px;
                 }
             }
 

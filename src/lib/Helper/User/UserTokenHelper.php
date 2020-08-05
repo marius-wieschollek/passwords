@@ -14,6 +14,7 @@ use OCA\Passwords\Services\SessionService;
 use OCP\ISession;
 use OCP\IUser;
 use ReflectionObject;
+use stdClass;
 
 /**
  * Class UserTokenHelper
@@ -141,7 +142,7 @@ class UserTokenHelper {
         $providers = $this->getProviders();
         if(isset($providers[ $id ])) {
             $template = $providers[ $id ]->getTemplate($this->user);
-            $data     = [];
+            $data     = new stdClass();
 
             if($id === 'email') {
                 $this->sessionService->addShadow('twofactor_email_secret');
@@ -150,7 +151,7 @@ class UserTokenHelper {
                 $r = $r->getParentClass()->getParentClass();
                 $p = $r->getProperty('vars');
                 $p->setAccessible(true);
-                $data['token'] = $p->getValue($template)['token'];
+                $data->token = $p->getValue($template)['token'];
             } else if(strpos($id, 'gateway') !== false) {
                 $pid = substr($id, 8);
                 $this->sessionService->addShadow("twofactor_gateway_{$pid}_secret");

@@ -67,7 +67,7 @@ class ServerSettingsHelper {
      */
     public function get(string $key) {
         if(strpos($key, '.') !== false) {
-            list($scope, $subKey) = explode('.', $key, 2);
+            [$scope, $subKey] = explode('.', $key, 2);
         } else {
             $scope  = $key;
             $subKey = '';
@@ -78,12 +78,20 @@ class ServerSettingsHelper {
                 return $this->getServerVersion();
             case 'baseUrl':
                 if($subKey === 'webdav') return Util::linkToRemote('webdav');
+
                 return $this->urlGenerator->getBaseUrl();
+            case 'performance':
+                return $this->getServerPerformanceHint();
+            case 'app':
+                if($subKey === 'version') return $this->getAppVersion();
+
+                return null;
             case 'theme':
                 return $this->themeSettings->get($subKey);
             case 'sharing':
                 return $this->shareSettings->get($subKey);
             case 'handbook':
+                if($subKey !== 'url') return null;
                 $handbookUrl = $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
 
                 return empty($handbookUrl) ? self::SERVER_MANUAL_URL:$handbookUrl;
@@ -101,7 +109,9 @@ class ServerSettingsHelper {
                 'server.baseUrl'        => $this->get('baseUrl'),
                 'server.baseUrl.webdav' => $this->get('baseUrl.webdav'),
                 'server.version'        => $this->get('version'),
-                'server.handbook.url'   => $this->get('handbook.url')
+                'server.app.version'    => $this->get('app.version'),
+                'server.handbook.url'   => $this->get('handbook.url'),
+                'server.performance'    => $this->get('performance')
             ],
             $this->themeSettings->list(),
             $this->shareSettings->list()
@@ -115,5 +125,29 @@ class ServerSettingsHelper {
         $version = $this->config->getSystemValue('version');
 
         return explode('.', $version, 2)[0];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAppVersion(): string {
+        $version = $this->config->getAppValue('installed_version');
+        $parts   = explode('.', $version, 3);
+
+        return "{$parts[0]}.{$parts[1]}";
+    }
+
+    /**
+     * @return int
+     */
+    protected function getServerPerformanceHint(): int {
+        $performance = $this->config->getAppValue('performance', null);
+        if($performance === null) {
+            return in_array(php_uname('m'), ['amd64', 'x86_64']) ? 5:1;
+        }
+
+        $performance = intval($performance);
+
+        return $performance > -1 && $performance < 7 ? $performance:2;
     }
 }

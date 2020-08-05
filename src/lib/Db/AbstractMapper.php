@@ -30,6 +30,11 @@ abstract class AbstractMapper extends QBMapper {
     protected $userId;
 
     /**
+     * @var array
+     */
+    protected $entityCache = [];
+
+    /**
      * AbstractMapper constructor.
      *
      * @param IDBConnection      $db
@@ -39,6 +44,40 @@ abstract class AbstractMapper extends QBMapper {
     public function __construct(IDBConnection $db, EnvironmentService $environment) {
         parent::__construct($db, static::TABLE_NAME);
         $this->userId = $environment->getUserId();
+    }
+    /**
+     * @param Entity|EntityInterface $entity
+     *
+     * @return Entity|EntityInterface
+     */
+    public function delete(Entity $entity): Entity {
+        if(isset($this->entityCache[ $entity->getUuid() ])) {
+            unset($this->entityCache[ $entity->getUuid() ]);
+        }
+
+        return parent::delete($entity);
+    }
+
+    /**
+     * @param Entity|EntityInterface $entity
+     *
+     * @return Entity|EntityInterface
+     */
+    public function insert(Entity $entity): Entity {
+        $this->entityCache[ $entity->getUuid() ] = $entity;
+
+        return parent::insert($entity);
+    }
+
+    /**
+     * @param Entity|EntityInterface $entity
+     *
+     * @return Entity|EntityInterface
+     */
+    public function update(Entity $entity): Entity {
+        $this->entityCache[ $entity->getUuid() ] = $entity;
+
+        return parent::update($entity);
     }
 
     /**
@@ -50,6 +89,10 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): EntityInterface {
+        if(isset($this->entityCache[ $uuid ])) {
+            return $this->entityCache[ $uuid ];
+        }
+
         return $this->findOneByField('uuid', $uuid);
     }
 
@@ -168,6 +211,13 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
+     *
+     */
+    public function clearEntityCache(): void {
+        $this->entityCache = [];
+    }
+
+    /**
      * @return IQueryBuilder
      */
     protected function getStatement(): IQueryBuilder {
@@ -248,106 +298,20 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
-     * @param Entity $entity
+     * @param array $row
      *
      * @return Entity
      */
-    public function insert(Entity $entity): Entity {
-        // get updated fields to save, fields have to be set using a setter to
-        // be saved
-        $properties = $entity->getUpdatedFields();
-
-        $qb = $this->db->getQueryBuilder();
-        $qb->insert($this->tableName);
-
-        // build the fields
-        foreach($properties as $property => $updated) {
-            $column = $entity->propertyToColumn($property);
-            $getter = 'get' . ucfirst($property);
-            $value = $entity->$getter();
-
-            $type = $this->getParameterTypeForProperty($entity, $property);
-            $qb->setValue($column, $qb->createNamedParameter($value, $type));
+    protected function mapRowToEntity(array $row): Entity {
+        if(isset($row['uuid']) && isset($this->entityCache[ $row['uuid'] ])) {
+            return $this->entityCache[ $row['uuid'] ];
         }
 
-        $qb->execute();
-
-        $entity->setId((int) $qb->getLastInsertId());
+        $entity = parent::mapRowToEntity($row);
+        if(isset($row['uuid'])) {
+            $this->entityCache[ $row['uuid'] ] = $entity;
+        }
 
         return $entity;
-    }
-
-    /**
-     * @param Entity $entity
-     *
-     * @return Entity
-     */
-    public function update(Entity $entity): Entity {
-        // if entity wasn't changed it makes no sense to run a db query
-        $properties = $entity->getUpdatedFields();
-        if(\count($properties) === 0) {
-            return $entity;
-        }
-
-        // entity needs an id
-        $id = $entity->getId();
-        if($id === null){
-            throw new \InvalidArgumentException(
-                'Entity which should be updated has no id');
-        }
-
-        // get updated fields to save, fields have to be set using a setter to
-        // be saved
-        // do not update the id field
-        unset($properties['id']);
-
-        $qb = $this->db->getQueryBuilder();
-        $qb->update($this->tableName);
-
-        // build the fields
-        foreach($properties as $property => $updated) {
-            $column = $entity->propertyToColumn($property);
-            $getter = 'get' . ucfirst($property);
-            $value = $entity->$getter();
-
-            $type = $this->getParameterTypeForProperty($entity, $property);
-            $qb->set($column, $qb->createNamedParameter($value, $type));
-        }
-
-        $qb->where(
-            $qb->expr()->eq('id', $qb->createNamedParameter($id, IQueryBuilder::PARAM_INT))
-        );
-        $qb->execute();
-
-        return $entity;
-    }
-
-    /**
-     * Returns the type parameter for the QueryBuilder for a specific property
-     * of the $entity
-     *
-     * @param Entity $entity   The entity to get the types from
-     * @param string $property The property of $entity to get the type for
-     * @return int
-     */
-    protected function getParameterTypeForProperty(Entity $entity, string $property): int {
-        $types = $entity->getFieldTypes();
-
-        if(!isset($types[ $property ])) {
-            return IQueryBuilder::PARAM_STR;
-        }
-
-        switch($types[ $property ]) {
-            case 'int':
-            case 'integer':
-                return IQueryBuilder::PARAM_INT;
-            case 'string':
-                return IQueryBuilder::PARAM_STR;
-            case 'bool':
-            case 'boolean':
-                return IQueryBuilder::PARAM_BOOL;
-        }
-
-        return IQueryBuilder::PARAM_STR;
     }
 }

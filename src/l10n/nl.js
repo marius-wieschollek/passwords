@@ -111,6 +111,7 @@
             'Backup and Restore'                  : 'Backup en Restore',
             'Browser Extension'                   : 'Browser Extensie',
             'Handbook'                            : 'Handboek',
+            'Apps and Extensions'                 : 'Apps & uitbreidingen',
             'Search user'                         : 'Gebruiker zoeken',
             'Set expiration date'                 : 'Stel verloopdatum in',
             'Expires {date}'                      : 'Verloopt op {date}',

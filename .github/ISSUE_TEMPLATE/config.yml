@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community Forum
+    url: https://help.nextcloud.com/c/apps/passwords
+    about: Get support with problems you have
+  - name: Telegram Chat
+    url: https://t.me/nc_passwords
+    about: Ask questions and discuss with other users
+  - name: User Handbook
+    url: https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index
+    about: Learn how to use the app and all the features
+  - name: Administrator Handbook
+    url: https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index
+    about: Learn about the app and the configuration options
+  - name: Official Browser Extension Bugtracker
+    url: https://github.com/marius-wieschollek/passwords-webextension/issues
+    about: Report issues or request a feature for the official browser extension

@@ -116,6 +116,7 @@
             'Backup and Restore'                  : 'Backup & återställ',
             'Browser Extension'                   : 'Browser Extension',
             'Handbook'                            : 'Handbok',
+            'Apps and Extensions'                 : 'Apps & Extensions',
             'Search user'                         : 'Sök användare',
             'Set expiration date'                 : 'Sätt utgångs datum',
             'Expires {date}'                      : 'Utgångdatum {date}',

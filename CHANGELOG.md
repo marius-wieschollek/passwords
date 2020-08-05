@@ -1,6 +1,124 @@
 ## [Unreleased]
+
+## 2020.8.0 - Feature release
+### Added
+ - Asynchronous loading of favicons
+ - List programming resources in apps section
+### Changed
+ - List of recommended browsers
+
+## 2020.7.0 - Feature release
+### Added
+ - Italian translation
+
+## 2020.6.0 - Feature release
+### Added
+ - Edit password as new
+ - EOL warning for NC < 19
+ - EOL warning for PHP < 7.4
+### Changed
+ - Styling in NC 19
+ - Removed Link option in PassLink for Chrome
+ - HTTPS detection now removes client side flag automatically
+ - Reduced background tasks
+ - Improved QR code compatibility
+### Fixed
+ - Missing parent folder id
+ - Incorrect sorting
+
+## 2020.5.0 - Feature release
+### Added
+ - Nextcloud 19 support
+ - Chrome / Google Passwords import
+ - Subtitles in handbook videos
+ - PassLink Connect setup for extensions
+### Changed
+ - Add/Update password now scans for duplicates
+### Fixed
+ - Email validation to strict
+
+## 2020.4.1 - Bugfix release
+### Fixed
+ - Generating passwords with special characters fails often
+ - Passwords causes error in Talk when impersonating user
+ - Ajax and webcron do not work when installed in subfolder
+ - Disabling server survey resets the setting
+
+## 2020.4.0 - Feature release
+### Added
+ - Remote feature activation can be disabled
+ - App upgrade alert for outdated versions
+### Fixed
+ - Dark theme detection
+ - Broken https setup link
+
+## 2020.3.1 - Bugfix release
+### Fixed
+ - Missing default value for login_type
+
+## 2020.3.0 - Feature release
+### Added
+ - User delete cli command
+ - User move cli command
+### Changed
+ - 2FA only required if master password is set
+### Fixed
+ - Database repair does not attempt to fix custom fields
+
+## 2020.2.1 - Bugfix release
+### Fixed
+ - App crashes when social login used
+
+## 2020.2.0 - Feature release
+### Added
+ - Spanish translation
+ - Chinese translation
+ - Database indexes
+ - Performance improvements
+### Changed
+ - User info now fetched from session
+ - Client side encryption encoding
+### Removed
+ - Nextcloud 15 database layer
+### Fixed
+ - Cron jobs not executed if NC installed in subdirectory
+
+## 2020.1.0 - Feature release
+### Added
+ - Nextcloud 18 support
+ - Bitwarden JSON import
+ - Bitwarden CSV import
+ - Leipzig Corpora random words service
+### Changed
+ - Enpass JSON now translates folder names
+ - User search in sharing now has less throttling
+### Fixed
+ - Details view now closes when password is deleted from trash
+### Removed
+ - Nextcloud 15 and 16 support
+ - PHP 7.1 support
+ - Legacy ocPasswords migration
+ - Database duplicate deletion
+ - Backup migration
+
+## 2019.12.1 - Bugfix release
+### Fixed
+ - Encryption setup does not encrypt existing entities
+ - Clean up step in encryption setup always fails
+ - Search globally with enter uses old query
+
+## 2019.12.0 - Feature release
 ### Added
  - Lazy loading for favicons and avatars
+### Fixed
+ - Server timeout on settings page
+ - Mobile Layout in NC 17
+ - Navigation in NC 15
+ - Attempt to send mails to users without email
+
+## 2019.11.1 - Bugfix release
+### Fixed
+ - Local dictionary password generator issues
 
 ## 2019.11.0 - Feature release
 ### Added

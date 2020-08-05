@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Settings;
 
+use Exception;
+use OC;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
@@ -15,6 +17,7 @@ use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
+use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
@@ -22,6 +25,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
 
@@ -44,6 +48,11 @@ class AdminSettings implements ISettings {
     protected $config;
 
     /**
+     * @var IRequest
+     */
+    protected $request;
+
+    /**
      * @var IURLGenerator
      */
     protected $urlGenerator;
@@ -56,15 +65,18 @@ class AdminSettings implements ISettings {
     /**
      * AdminSettings constructor.
      *
+     * @param IRequest             $request
      * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
+        IRequest $request,
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         FileCacheService $fileCacheService
     ) {
+        $this->request = $request;
         $this->config           = $config;
         $this->fileCacheService = $fileCacheService;
         $this->urlGenerator     = $urlGenerator;
@@ -147,8 +159,14 @@ class AdminSettings implements ISettings {
                 'enabled' => LocalWordsHelper::isAvailable()
             ],
             [
+                'id'      => HelperService::WORDS_LEIPZIG,
+                'label'   => 'Leipzig Corpora Collection (recommended)',
+                'current' => $current === HelperService::WORDS_LEIPZIG,
+                'enabled' => LeipzigCorporaHelper::isAvailable()
+            ],
+            [
                 'id'      => HelperService::WORDS_SNAKES,
-                'label'   => 'watchout4snakes.com (recommended)',
+                'label'   => 'watchout4snakes.com',
                 'current' => $current === HelperService::WORDS_SNAKES,
                 'enabled' => SnakesWordsHelper::isAvailable()
             ],
@@ -206,7 +224,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::FAVICON_BESTICON,
                 'api'     => [
                     'key'   => 'service.favicon.api',
-                    'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL)
+                    'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, '')
                 ]
             ],
             [
@@ -359,13 +377,13 @@ class AdminSettings implements ISettings {
             try {
                 $info[ $cache ]              = $this->fileCacheService->getCacheInfo($cache);
                 $info[ $cache ]['clearable'] = true;
-            } catch(\Exception $e) {
+            } catch(Exception $e) {
             }
         }
 
         if(
             $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
-            $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, BestIconHelper::BESTICON_DEFAULT_URL) === BestIconHelper::BESTICON_DEFAULT_URL
+            empty($this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, ''))
         ) {
             $info[ $this->fileCacheService::FAVICON_CACHE ]['clearable'] = false;
         }
@@ -382,18 +400,18 @@ class AdminSettings implements ISettings {
 
         return [
             'cron'   => $cronType,
-            'https'  => \OC::$server->getRequest()->getHttpProtocol() === 'https',
+            'https'  => $this->request->getHttpProtocol() === 'https',
             'php'    => [
-                'warn'    => PHP_VERSION_ID < 70300,
-                'error'   => PHP_VERSION_ID < 70200,
+                'warn'    => PHP_VERSION_ID < 70400,
+                'error'   => PHP_VERSION_ID < 70300,
                 'version' => PHP_VERSION
             ],
             'server' => [
-                'warn'    => $ncVersion < 17,
-                'error'   => $ncVersion < 15,
+                'warn'    => $ncVersion < 19,
+                'error'   => $ncVersion < 17,
                 'version' => $ncVersion
             ],
-            'eol'    => '2020.1.0'
+            'eol'    => '2021.1.0'
         ];
     }
 

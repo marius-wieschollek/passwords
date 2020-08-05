@@ -272,7 +272,7 @@ class SessionService {
             try {
                 /** @var Session $session */
                 $session = $this->mapper->findByUuid($sessionId);
-                if($this->environment->getUserId() !== $session->getUserId()) {
+                if($this->environment->getUserId() !== $session->getUserId() || $this->environment->getLoginType() !== $session->getLoginType()) {
                     $this->mapper->delete($session);
                     $this->logger->error(['Unauthorized session access by %s on %s', $this->environment->getUserId(), $session->getUserId()]);
                 } else if(time() > $session->getUpdated() + $this->userSettings->get('session/lifetime')) {
@@ -336,6 +336,7 @@ class SessionService {
      */
     protected function create(): Session {
         $model = new Session();
+        $model->setLoginType($this->environment->getLoginType());
         $model->setUserId($this->environment->getUserId());
         $model->setClient($this->environment->getClient());
         $model->setUuid($this->uuidHelper->generateUuid());

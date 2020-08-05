@@ -92,10 +92,10 @@ class SessionApiController extends AbstractApiController {
         if(!$this->session->isAuthorized()) {
             if($this->challengeService->hasChallenge()) {
                 $requirements->challenge = $this->challengeService->getChallengeData();
-            }
 
-            if($this->tokenHelper->hasToken()) {
-                $requirements->token = $this->tokenHelper->getProvidersAsArray();
+                if($this->tokenHelper->hasToken()) {
+                    $requirements->token = $this->tokenHelper->getProvidersAsArray();
+                }
             }
         }
 
@@ -106,7 +106,7 @@ class SessionApiController extends AbstractApiController {
      * @CORS
      * @NoCSRFRequired
      * @NoAdminRequired
-     * @UserRateThrottle(limit=4, period=60)
+     * @UserRateThrottle(limit=6, period=60)
      *
      * @return JSONResponse
      * @throws ApiException
@@ -171,7 +171,7 @@ class SessionApiController extends AbstractApiController {
      * @throws ApiException
      */
     protected function verifyToken($parameters): void {
-        if($this->tokenHelper->hasToken()) {
+        if($this->challengeService->hasChallenge() && $this->tokenHelper->hasToken()) {
             if(!isset($parameters['token'])) {
                 $this->loginAttempts->registerFailedAttempt();
                 throw new ApiException('Token invalid', Http::STATUS_UNAUTHORIZED);

@@ -1,52 +1,42 @@
 ---
 name: Bug Report
-about: Report a functional error in the app. If you need assistance with your setup or have questions please go to our forum.
+about: Report a functional error in the app
 labels: bug
 ---
 
 <!--
-For QUESTIONS or SUPPORT, please visit the forum
- -> https://help.nextcloud.com/c/apps/passwords
- or look into the MANUAL
- -> https://git.mdns.eu/nextcloud/passwords/wikis/home
-
-If your request is about the BROWSER EXTENSION, please go to
- -> https://github.com/marius-wieschollek/passwords-webextension
-
-Check the issue tracker
- -> https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue+label%3Abug
- and try the NIGHTLY releases
- -> https://apps.nextcloud.com/apps/passwords/releases
-
-Remember not to include personal data as this is public.
+ Remember not to include personal data as this is public.
+ Take a look at https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/App-Debugging to get all information.
 -->
-
 
 ### System Information
 - Nextcloud Version:
 - PHP Version:
+- Database and Version:
 - Passwords Version:
 - Browser and Version:
 - Client OS and Version:
 - Server OS and Version:
 
 ### Steps to reproduce
-1. <!-- Tell us percisely how to reproduce your bug -->
+1. <!-- Describe PRECISELY and DETAILED how to reproduce the bug -->
 2. <!-- Provide sample data if needed -->
 3. <!-- Include relevant user settings and app settings if not standard -->
 
-### Actual result
-What does happen?
-
 ### Expected result
 What should happen?
+
+### Actual result
+What does happen?
 
 ### Nextcloud log
 <details>
 <summary>Nextcloud log</summary>
 
 ```
-See Settings > Log  (Copy Raw)
+ - Open the Nextcloud admin settings
+ - Open the "Log" section
+ - Click the "Copy" icon, then Copy Raw
 ```
 </details>
 
@@ -55,6 +45,6 @@ See Settings > Log  (Copy Raw)
 <summary>Browser log</summary>
 
 ```
-Press F12, copy what you see
+Press F12, copy the content of the console tab
 ```
 </details>

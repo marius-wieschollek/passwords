@@ -4,7 +4,7 @@
     <name>Passwords</name>
     <summary>Store, manage and access all your passwords with ease.</summary>
     <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter schnell, sicher und überall.</summary>
-    <description><![CDATA[Passwords allows you to store your passwords safely with Nextcloud.
+    <description><![CDATA[Passwords is the most advanced password manager for Nextcloud and allows you to manage and store your passwords safely in your own cloud.
 The intuitive and modern web interface of the app makes it easy to update and add new passwords from anywhere.
 Included security checks help you to keep your online accounts safe and up-to-date.
 You can also share passwords with other Nextcloud users.
@@ -20,9 +20,20 @@ You can also share passwords with other Nextcloud users.
  * Import &amp; Export
  * Browser extensions
  * ... and many more to come
+
+**Support**
+ * [Official Chat](https://t.me/nc_passwords)
+ * [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+ * [User Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index)
+ * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
+
+**Apps & Extensions**
+ * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
+ * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+ * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
     </description>
-    <description lang="de"><![CDATA[Passwords ermöglicht es Ihnen, Ihre Passwörter sicher und einfach mit Nextcloud zu verwalten.
+    <description lang="de"><![CDATA[Passwords ist der beste Passwort-Manager für Nextcloud und ermöglicht es Ihnen, Ihre Passwörter sicher und einfach in Ihrer eigenen Cloud zu verwalten.
 Die intuitive Weboberfläche macht es einfach Passwörter von überall aus hinzuzufügen oder zu aktualisieren.
 Dank des eingebauten Sicherheitstests können Sie Ihre Benutzerkonten sicher und Ihre Passwörter aktuell halten.
 Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
@@ -38,9 +49,20 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * Detailliertes Handbuch
  * Browser Extensions
  * ... und vieles mehr
+
+**Hilfe & Unterstützung**
+ * [Offizieller Chat](https://t.me/nc_passwords)
+ * [Offizielles Forum](https://help.nextcloud.com/c/apps/passwords)
+ * [Handbuch für Nutzer](https://git.mdns.eu/nextcloud/passwords/wikis/users/Index)
+ * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/wikis/administrators/Index)
+
+**Apps & Extensions**
+ * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
+ * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+ * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) von [daper](https://github.com/daper/nextcloud-passwords-app)
 ]]>
     </description>
-    <version>2019.12.0-BUILD</version>
+    <version>2020.8.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -64,6 +86,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/tag-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/tag-section.png]]>
     </screenshot>
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/favorites-section.jpg">
+        <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/favorites-section.png]]>
+    </screenshot>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/security-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/security-section.png]]>
     </screenshot>
@@ -80,27 +105,21 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="7.1" />
-        <nextcloud min-version="15" max-version="17" />
+        <php min-version="7.2" />
+        <nextcloud min-version="17" max-version="19" />
     </dependencies>
     <background-jobs>
-        <job>OCA\Passwords\Cron\ProcessDeletedUsers</job>
-        <job>OCA\Passwords\Cron\ProcessDeletedEntities</job>
-        <job>OCA\Passwords\Cron\CheckNightlyUpdates</job>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
         <job>OCA\Passwords\Cron\SynchronizeShares</job>
         <job>OCA\Passwords\Cron\SendServerSurvey</job>
-        <job>OCA\Passwords\Cron\CleanUpSessions</job>
+        <job>OCA\Passwords\Cron\CleanUpEntities</job>
         <job>OCA\Passwords\Cron\BackupJob</job>
     </background-jobs>
     <repair-steps>
         <post-migration>
-            <step>OCA\Passwords\Migration\LegacyDatabaseMigration</step>
-            <step>OCA\Passwords\Migration\DatabaseDuplicateDeletion</step>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
         <live-migration>
-            <step>OCA\Passwords\Migration\MoveBackups</step>
             <step>OCA\Passwords\Migration\CheckAppSettings</step>
             <step>OCA\Passwords\Migration\ClearAppCaches</step>
         </live-migration>
@@ -112,6 +131,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <command>OCA\Passwords\Command\BackupExportCommand</command>
         <command>OCA\Passwords\Command\BackupImportCommand</command>
         <command>OCA\Passwords\Command\BackupDeleteCommand</command>
+        <command>OCA\Passwords\Command\UserMoveCommand</command>
+        <command>OCA\Passwords\Command\UserDeleteCommand</command>
     </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>

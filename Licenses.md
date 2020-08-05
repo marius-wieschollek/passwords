@@ -6,7 +6,7 @@ THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPL
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #### Nextcloud
-This project is not related to the Nextcloud Open Source project in any way.
+This project is not related to the Nextcloud open source project in any way.
 The software is designed to run on the Nextcloud app platform or a compatible framework.
 
 ## Third Party Services
@@ -18,10 +18,10 @@ The licenses and/or terms of service of any service or third party sources used 
 * [SecLists](https://github.com/danielmiessler/SecLists/tree/master/Passwords)
 
 #### Website Previews
-* [wkhtmltoimage](https://wkhtmltopdf.org/) - [LGPL V3](https://github.com/wkhtmltopdf/wkhtmltopdf/blob/master/LICENSE)
 * [pageres-cli](https://github.com/sindresorhus/pageres-cli/) - [MIT](https://github.com/sindresorhus/pageres-cli/blob/master/license)
 * [screenshotlayer.com](https://screenshotlayer.com/) - [ToS](https://screenshotlayer.com/terms) - [Privacy](https://screenshotlayer.com/privacy)
 * [browshot.com](https://browshot.com) - [ToS](https://browshot.com/terms)
+* [screeenly.com](http://screeenly.com) - [ToS](http://screeenly.com/terms)
 * [Screenshotmachine](https://screenshotmachine.com/) - [ToS](https://screenshotmachine.com/termsandconditions.php) - [Privacy](https://screenshotmachine.com/privacypolicy.php)
 
 #### Favicons
@@ -32,6 +32,7 @@ The licenses and/or terms of service of any service or third party sources used 
 
 #### Random Words
 * [watchout4snakes](http://watchout4snakes.com/wo4snakes/)
+* [Leipzig Corpora Collection](https://wortschatz.uni-leipzig.de/en) - [ToS](https://wortschatz.uni-leipzig.de/en/usage) - [Privacy](https://wortschatz.uni-leipzig.de/en/privacy)
 * [SCOWL](http://wordlist.aspell.net/) - Public Domain
 
 #### Third Party Source Code

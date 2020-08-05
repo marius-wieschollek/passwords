@@ -105,6 +105,7 @@ class AccountApiController extends AbstractApiController {
         if($current >= $time && $current - $time < 60) {
             $this->sessionService->unset('reset/time');
             $this->deleteUserDataHelper->deleteUserData($this->environment->getUserId());
+            $this->sessionService->delete();
 
             return $this->createJsonResponse(['status' => 'ok'], Http::STATUS_OK);
         }

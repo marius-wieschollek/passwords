@@ -85,7 +85,7 @@ class NightlyAppFetcher extends Fetcher {
         $this->fileName  = 'apps_nightly.json';
         $this->setEndpoint();
         $this->compareVersion   = $compareVersion;
-        $this->ignoreMaxVersion = !$this->isNc15();
+        $this->ignoreMaxVersion = false;
     }
 
     /**
@@ -167,12 +167,8 @@ class NightlyAppFetcher extends Fetcher {
     public function setVersion(string $version, string $fileName = 'apps_nightly.json', bool $ignoreMaxVersion = true) {
         parent::setVersion($version);
 
-        if(!$this->isNc15()) {
-            $this->ignoreMaxVersion = $ignoreMaxVersion;
-        } else {
-            $this->ignoreMaxVersion = false;
-        }
-        $this->fileName = $fileName;
+        $this->ignoreMaxVersion = $ignoreMaxVersion;
+        $this->fileName         = $fileName;
         $this->setEndpoint();
     }
 
@@ -183,27 +179,25 @@ class NightlyAppFetcher extends Fetcher {
      * @return bool
      */
     protected function releaseAllowedInChannel($release, $app): bool {
-        $nightlyApps = $this->config->getSystemValue('allowNightlyUpdates', []);
+        $isPreRelease     = strpos($release['version'], '-');
+        $allowNightly     = $this->getChannel() === 'daily' || $app === 'passwords';
+        $allowPreReleases = $this->getChannel() === 'beta' || $allowNightly;
 
-        return ($release['isNightly'] === false && strpos($release['version'], '-') === false) || $app === 'passwords' || in_array($app, $nightlyApps);
+        return ($allowNightly || $release['isNightly'] === false) || ($allowPreReleases || !$isPreRelease);
     }
 
     /**
      *
      */
     protected function setEndpoint() {
+        $this->endpointUrl = $this->getEndpoint();
+    }
 
-        if(!$this->isNc15()) {
-            $this->endpointUrl = 'https://apps.nextcloud.com/api/v1/apps.json';
-        } else {
-            $versionArray = explode('.', $this->getVersion());
-            $this->endpointUrl = sprintf(
-                'https://apps.nextcloud.com/api/v1/platform/%d.%d.%d/apps.json',
-                $versionArray[0],
-                $versionArray[1],
-                $versionArray[2]
-            );
-        }
+    /**
+     * @return string
+     */
+    protected function getEndpoint(): string {
+        return $this->config->getSystemValue('appstoreurl', 'https://apps.nextcloud.com/api/v1').'/apps.json';
     }
 
     /**
@@ -266,12 +260,5 @@ class NightlyAppFetcher extends Fetcher {
         }
 
         return false;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isNc15(): bool {
-        return substr($this->getVersion(), 0, 2) === '15';
     }
 }

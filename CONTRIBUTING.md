@@ -5,7 +5,7 @@
 
 ## Rules for issues
 
-* Issues not follwing the template will be closed without review
+* Issues not following the template will be closed without review
 * Issues with the browser extension have to be opened in this [repository](https://github.com/marius-wieschollek/passwords-webextension)
 * For questions and support, visit the [forum](https://help.nextcloud.com/c/apps/passwords)
 
@@ -37,12 +37,12 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 
 #### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
-* `npm run start` - Start the docker server. Use `postgres:start` or `ldap:start` to include these services
-* `npm run stop` - Stop the docker server. Use `postgres:stop` or `ldap:stop` to include these services
+* `npm run start` - Start the docker server. Use `postgres:start`, `sqlite:start`, `ldap:start` or `saml:start` to include these services
+* `npm run stop` - Stop the docker server. Use `postgres:stop`, `sqlite:stop`, `ldap:stop` or `saml:stop` to include these services
 * `npm run cron` - Execute cron jobs
 * `npm run shell` - Open a shell in the container
 * `npm run shell:root` - Open a root shell in the container
-* `npm run down` - Remove docker containers and volumes
+* `npm run down` - Remove docker containers and volumes. Use `postgres:down`, `sqlite:down`, `ldap:down` or `saml:down` to include these services
 * `npm run docker:build` - Start docker and build images
 * `npm run build` - Create production build of JS/CSS files
 * `npm run build:nightly` - Create nightly build of JS/CSS files
@@ -57,18 +57,31 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - [https://localhost:1080](https://localhost:1080) is MailHog (for Emails)
  - [https://localhost:8081](https://localhost:8081) is pgAdmin (for the Postgres database, user `admin@nextcloud`, password `nextcloud`)
  - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
+ - [https://localhost:9091](https://localhost:9091) is Keycloak (for SAML, optional, user `admin`, password `nextcloud`)
 
 #### LDAP Setup
- - Enable LDAP App
+ - Open [PhpLdapAdmin](https://localhost:9090) and log in
+ - Create a new entry with the template "Generic: Posix Group"
+ - Create a new Entry with the template "Generic: User Account"
+ - Enable "LDAP user and group backend"
  - Go to "Settings" > "LDAP/AD Integration"
  - Enter `openldap` as server and `389` as port
  - Enter `cn=admin,dc=nextcloud` as User-DN and `nextcloud` as password
+ - Click on "Save Credentials"
  - Enter `dc=nextcloud` as Base DN
  - Click on "Continue"
  - Select "inetOrgPerson" and "posixAccount" as object classes
- - Click "Continue"
- - Check "LDAP-/AP-E-Mail-Address"
- - Select "cn" and "uid" as login attributes
+
+#### Telegram 2FA Gateway Setup
+ - Install the "Two-Factor Gateway" app from the app store
+ - Run `npm run shell` from the terminal
+ - Run `./occ twofactorauth:gateway:configure telegram`
+ - Enter `703713714:AAGUFZfIINIm4_0Qo3i9qHNZVfduDbwHtnY`
+ - Chat with the [get_id_bot](tg://resolve?domain=get_id_bot) to get your Telegram id
+
+#### Keycloak SAML Setup
+ - Open [Keycloak](https://localhost:9091) and log in
+ - Follow [this guide](https://stackoverflow.com/a/48400813) ([internet archive link](https://web.archive.org/web/20200116192513/https://stackoverflow.com/questions/48400812/sso-with-saml-keycloak-and-nextcloud/48400813))
 
 #### First steps
 * [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)

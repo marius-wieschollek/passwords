@@ -5,6 +5,7 @@ import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
+import BitwardenConversionHelper from '@js/Helper/Import/BitwardenConversionHelper';
 
 /**
  *
@@ -74,6 +75,8 @@ export class ImportManager {
                 return await ImportCsvConversionHelper.processGenericCsv(data, options);
             case 'enpass':
                 return await EnpassConversionHelper.processJson(data, options);
+            case 'bitwarden':
+                return await BitwardenConversionHelper.processJson(data, options);
             default:
                 throw new Error(`Invalid import type: ${type}`);
         }

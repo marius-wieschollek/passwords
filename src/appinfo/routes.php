@@ -5,6 +5,7 @@ namespace OCA\Passwords\AppInfo;
 $routes = [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
     ['name' => 'cron#execute', 'url' => '/cron/{job}', 'verb' => 'GET'],
+    ['name' => 'language#get_file', 'url' => '/l10n/{section}/{language}.json', 'verb' => 'GET'],
     ['name' => 'notification#survey', 'url' => '/notification/survey/{answer}', 'verb' => 'GET'],
 
     ['name' => 'session_api#request', 'url' => '/api/1.0/session/request', 'verb' => 'GET'],
@@ -89,6 +90,14 @@ $routes = [
         'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 640, 'height' => '360...']
     ],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
+
+
+    ['name' => 'connect#request', 'url' => 'link/connect/request', 'verb' => 'GET'],
+    ['name' => 'connect#await', 'url' => 'link/connect/await', 'verb' => 'GET'],
+    ['name' => 'connect#reject', 'url' => 'link/connect/reject', 'verb' => 'GET'],
+    ['name' => 'connect#confirm', 'url' => 'link/connect/confirm', 'verb' => 'GET'],
+    ['name' => 'connect#confirm', 'url' => 'link/connect/confirm', 'verb' => 'POST', 'postfix' => 'POST'],
+    ['name' => 'connect#apply', 'url' => 'link/connect/apply', 'verb' => 'POST'],
 
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'share_api#preflighted_cors', 'url' => '/api/1.0/share/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],

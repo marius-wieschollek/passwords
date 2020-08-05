@@ -114,7 +114,7 @@
 
                     <translate tag="label"
                                for="setting-encryption-setup"
-                               say="Enc-to-end Encryption"
+                               say="End-to-end Encryption"
                                v-if="!hasEncryption && encryptionFeature"/>
                     <translate tag="input"
                                type="button"
@@ -127,7 +127,7 @@
 
                     <translate tag="label"
                                for="setting-encryption-update"
-                               say="Enc-to-end Encryption"
+                               say="End-to-end Encryption"
                                v-if="hasEncryption"/>
                     <translate tag="input"
                                type="button"
@@ -305,7 +305,8 @@
                     <input type="checkbox"
                            id="setting-notification-admin"
                            v-model="settings['user.notification.admin']" v-if="isAdmin">
-                    <settings-help text="Notifies you of configuration errors and other administrative issues" v-if="isAdmin"/>
+                    <settings-help text="Notifies you of configuration errors and other administrative issues"
+                                   v-if="isAdmin"/>
 
                     <translate tag="label"
                                for="setting-notification-errors"
@@ -378,7 +379,7 @@
                 hasEncryption     = API.hasEncryption;
 
             DAS.check('client-side-encryption')
-                .then((d) => { this.encryptionFeature = d});
+                .then((d) => { this.encryptionFeature = d;});
 
             return {
                 settings: SettingsService.getAll(),
@@ -489,6 +490,7 @@
                         location.href = location.href.replace(location.hash, '');
                     }
                 } catch(e) {
+                    this.locked = false;
                     console.error(e);
                     Messages.alert('Invalid Password');
                 }
@@ -645,5 +647,6 @@
         background-color : transparentize($color-black, 0.9);
         cursor           : wait;
         z-index          : 2000;
+        backdrop-filter  : blur(3px);
     }
 </style>

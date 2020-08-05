@@ -1,0 +1,39 @@
+{
+    "translations": [
+        {
+            "Android"                : "Android",
+            "Browsers"               : "Browser",
+            "Official Firefox Client": "Client Firefox Ufficiale",
+            "Official Chrome Client" : "Client Chrome Ufficiale",
+            "official"               : "ufficiale",
+            "created by {author}"    : "creato da {author}",
+            "sources"                : "Sorgenti",
+            "Connect with PassLink"  : "Connetti con PassLink",
+            "Connect a new device"   : "Connetti un nuovo dispositivo",
+            "Connect via link"       : "Connetti tramite link",
+            "Choose a name:"         : "Scegli un nome:",
+            "The codes don't match"  : "I codici non corrispondono",
+            "Looks good"             : "Sembra ok",
+            "Connection successful"  : "Connesso con successo",
+            "I'm done"               : "Ho finito",
+            "Don't try again"        : "Non riprovare",
+            "Connect something else" : "Connetti qualcos'altro",
+            "Try again"              : "Riprova"
+        },
+        {
+            "You cancelled the connection"                      : "Hai cancellato la connessione",
+            "You did not confirm the connection in time"        : "Non hai confermato la connessione in tempo",
+            "This app uses an api which is no longer supported.": "Questa app usa una API che non è più supportata."
+        },
+        {
+            "To connect a new device or app, simply scan the QR code or click the link."                                                                                     : "Per connettere un nuovo dispositivo o una app, scannerizza il codice QR o premi sul link.",
+            "Scan the QR code to connect a new device or app."                                                                                                               : "Scannerizza il codice QR per connettere un nuovo dispositivo o app.",
+            "Check if the codes below match with the ones provided by the device or app:"                                                                                    : "Controlla se i codici qui sotto corrispondono a quelli forniti dal dispositivo o app:",
+            "Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store."                                     : "Accedi e gestisci tutte le password facilmente all'interno di Firefox grazie alla nostra estensione ufficiale dallo store Add-on.",
+            "Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.": "La nostra estensione Chrome ufficiale ti permette di gestire tutte le password dal tuo browser ed è disponibile per tanti browser basati su Chromium dal Chrome Web Store.",
+            "Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play."                              : "Finalmente una app moderna, veloce e leggera per visualizzare e gestire le password dal tuo dispositivo Android. Scaricala dal Google Play.",
+            "Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone."              : "Cloud Password Manager è un password manager che ti mette al centro del controllo. Accedi a tutte le password salvate sul tuo Nextcloud direttamente dal tuo telefono Android."
+        }
+    ],
+    "pluralForm"  : "nplurals=2; plural=(n != 1);"
+}

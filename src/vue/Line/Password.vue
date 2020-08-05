@@ -6,7 +6,7 @@
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
-        <img class="favicon" :src="password.icon" :title="getTitle" :alt="getTitle" loading="lazy"/>
+        <favicon class="favicon" :domain="password.website" :title="getTitle"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
             <li v-for="tag in getTags"
@@ -28,6 +28,7 @@
                         <translate tag="li" @click="detailsAction()" icon="info" say="Details"/>
                         <translate tag="li" @click="detailsAction('share')" icon="share-alt" say="Share"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
+                        <translate tag="li" @click="cloneAction()" icon="files-o" v-if="password.editable" say="Edit as new"/>
                         <translate tag="li"
                                    v-if="showCopyOptions"
                                    @click="copyAction('password')"
@@ -58,7 +59,6 @@
 
 <script>
     import $ from "jquery";
-    import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
@@ -66,9 +66,11 @@
     import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
+    import Favicon from "@vc/Favicon";
 
     export default {
         components: {
+            Favicon,
             Translate
         },
 
@@ -203,6 +205,10 @@
                 PasswordManager
                     .editPassword(this.password)
                     .then((p) => {this.password = p;});
+            },
+            cloneAction() {
+                PasswordManager
+                    .clonePassword(this.password);
             },
             deleteAction() {
                 PasswordManager.deletePassword(this.password);

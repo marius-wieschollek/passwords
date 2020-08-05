@@ -31,6 +31,7 @@ use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
@@ -58,9 +59,10 @@ class HelperService {
     const FAVICON_LOCAL           = 'local';
     const FAVICON_DEFAULT         = 'default';
 
-    const WORDS_LOCAL  = 'local';
-    const WORDS_RANDOM = 'random';
-    const WORDS_SNAKES = 'wo4snakes';
+    const WORDS_LOCAL   = 'local';
+    const WORDS_RANDOM  = 'random';
+    const WORDS_SNAKES  = 'wo4snakes';
+    const WORDS_LEIPZIG = 'leipzig';
 
     const SECURITY_BIGDB_HIBP  = 'bigdb+hibp';
     const SECURITY_BIG_LOCAL   = 'bigdb';
@@ -164,6 +166,8 @@ class HelperService {
         switch($service) {
             case self::WORDS_LOCAL:
                 return $this->container->query(LocalWordsHelper::class);
+            case self::WORDS_LEIPZIG:
+                return $this->container->query(LeipzigCorporaHelper::class);
             case self::WORDS_SNAKES:
                 return $this->container->query(SnakesWordsHelper::class);
             case self::WORDS_RANDOM:

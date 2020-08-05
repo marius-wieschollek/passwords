@@ -136,7 +136,7 @@ class PasswordsAdminSettings {
     }
 }
 
-$(window).load(() => {
+$(window).on('DOMContentLoaded', () => {
     let PwSettings = new PasswordsAdminSettings();
     PwSettings.initialize();
 });

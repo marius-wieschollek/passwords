@@ -111,6 +111,7 @@
             'Backup and Restore'                  : 'Архивирование и восстановление',
             'Browser Extension'                   : 'Расширения для браузеров',
             'Handbook'                            : 'Руководство пользователя',
+            'Apps and Extensions'                 : 'Приложения и расширения',
             'Search user'                         : 'Поиск пользователей',
             'Set expiration date'                 : 'Установить финальную дату',
             'Expires {date}'                      : 'Срок истекает {date}',

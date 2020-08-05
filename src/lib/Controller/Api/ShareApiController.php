@@ -276,7 +276,7 @@ class ShareApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @UserRateThrottle(limit=48, period=300)
+     * @UserRateThrottle(limit=45, period=60)
      *
      * @param string $search
      * @param int    $limit

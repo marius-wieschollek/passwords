@@ -35,7 +35,8 @@
             "Clean up"                      : "Aufräumen",
             "Success"                       : "Erfolgreich",
             "Failed"                        : "Fehlgeschlagen",
-            "Go to Apps & Extensions"       : "Öffne Apps & Extensions",
+            "Find help when you need it"    : "Hilfe finden, wenn du sie brauchst",
+            "Go to Apps and Extensions"     : "Öffne Apps & Erweiterungen",
             "Continue"                      : "Weiter",
             "Skip"                          : "Überspringen",
             "Close"                         : "Schließen",
@@ -48,14 +49,19 @@
             "Read our tips for admins"      : "Lies unsere Tips für Administratoren"
         },
         {
-            "There are many settings so you can customize your experience."                         : "Es gibt viele Einstellungen, mit denen du die App anpassen kannst.",
-            "You can find all of them in \"More\", but we put the most common here:"                : "Du findest alle unter \"Mehr\", aber die gängigsten haben wir hier zusammengetragen:",
-            "Passwords offers modern and strong encryption to protect your data from prying eyes."  : "Die Passwörter-App bietet eine moderne und starke Verschlüsselung, um deine Daten vor neugierigen Blicken zu schützen.",
-            "Choose a secure password below to activate the ultimate protection for your passwords.": "Wähle unten ein sicheres Passwort, um unseren ultimativen Schutz für deine Passwörter zu aktivieren.",
-            "Access your passwords with ease from anywhere, thanks to our apps and extensions."     : "Greife dank unserer Apps und Erweiterungen einfach und von überall auf deine Passwörter zu.",
-            "You can find our Apps & Extensions section in \"More\" or just click the button below.": "Du findest unseren Apps & Extensions-Bereich unter \"Mehr\" oder klick einfach auf den Button unten.",
-            "Passwords can be customized in a lot of different ways."                               : "Die App kann auf vielfältige Weise angepasst werden.",
-            "As administrator you might want to take a look at these common settings."              : "Als Administrator möchtest du vielleicht einen Blick auf diese gängigen Einstellungen werfen."
+            "There are many settings so you can customize your experience."                                  : "Es gibt viele Einstellungen, mit denen du die App anpassen kannst.",
+            "You can find all of them in \"More\", but we put the most common here:"                         : "Du findest alle unter \"Mehr\", aber die gängigsten haben wir hier zusammengetragen:",
+            "Passwords offers modern and strong encryption to protect your data from prying eyes."           : "Die Passwörter-App bietet eine moderne und starke Verschlüsselung, um deine Daten vor neugierigen Blicken zu schützen.",
+            "Choose a secure password below to activate the ultimate protection for your passwords."         : "Wähle unten ein sicheres Passwort, um unseren ultimativen Schutz für deine Passwörter zu aktivieren.",
+            "Access your passwords with ease from anywhere, thanks to our apps and extensions."              : "Greife dank unserer Apps und Erweiterungen einfach und von überall auf deine Passwörter zu.",
+            "You can find our Apps and Extensions section in \"More\" or just click the button below."       : "Du findest unseren Apps & Erweiterungen-Bereich unter \"Mehr\" oder klick einfach auf den Button unten.",
+            "Passwords can be customized in a lot of different ways."                                        : "Die App kann auf vielfältige Weise angepasst werden.",
+            "As administrator you might want to take a look at these common settings."                       : "Als Administrator möchtest du vielleicht einen Blick auf diese gängigen Einstellungen werfen.",
+            "Whenever you don't know how something works, have questions or need help with a problem:"       : "Falls du mal nicht weiter weißt oder noch Fragen hast:",
+            "Help is just around the corner."                                                                : "Hilfe ist immer in deiner Nähe.",
+            "Our built-in handbook can be found by clicking on \"More\" and explains the app in all details.": "Unser eingebautes Handbuch findest du, wenn du auf \"Mehr\" klickst, und es erklärt dir die App in allen Einzelheiten.",
+            "In any other case, our community is the right place to ask your questions."                     : "In allen anderen Fällen ist unsere Gemeinschaft der richtige Ort, um deine Fragen zu beantworten.",
+            "Handbook will be opened after the tutorial"                                                     : "Das Handbuch wird nach der Einführung geöffnet"
         }
     ],
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

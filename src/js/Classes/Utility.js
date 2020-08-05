@@ -6,21 +6,19 @@ export default class Utility {
      * @returns {boolean}
      */
     static copyToClipboard(text) {
-        let element = document.createElement('textarea');
-        element.value = text;
+        let element   = document.createElement('textarea'),
+            range     = document.createRange(),
+            selection = window.getSelection();
 
-        if(navigator.userAgent.match(/ipad|iphone/i)) {
-            let range     = document.createRange(),
-                selection = window.getSelection();
-            range.selectNodeContents(element);
-            selection.removeAllRanges();
-            selection.addRange(range);
-            element.setSelectionRange(0, 999999);
-            document.body.appendChild(element);
-        } else {
-            document.body.appendChild(element);
-            element.select();
-        }
+        element.value    = text;
+        element.readOnly = true;
+
+        document.body.appendChild(element);
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        element.select();
+        element.setSelectionRange(0, 999999);
 
         let result = document.execCommand('copy');
         document.body.removeChild(element);
@@ -106,8 +104,8 @@ export default class Utility {
                 let aP = a[property], bP = b[property];
                 if(aP === bP) return 0;
                 if(typeof aP === 'string') {
-                    if(ascending) return aP.localeCompare(bP, 'kn', {sensitivity: 'base'});
-                    return bP.localeCompare(aP, 'kn', {sensitivity: 'base'});
+                    if(ascending) return aP.localeCompare(bP, undefined, {numeric: true, sensitivity: 'base'});
+                    return bP.localeCompare(aP, undefined, {numeric: true, sensitivity: 'base'});
                 }
                 if(ascending) return aP < bP ? -1:1;
                 return aP > bP ? -1:1;

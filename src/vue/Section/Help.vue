@@ -18,6 +18,7 @@
                 <footer class="handbook-footer">
                     <translate say="Still need help?"/>
                     <web text="Ask in our forum!" :href="forumPage"/>
+                    <web text="Or in our Chat!" :href="chatPage"/>
                     <br> &nbsp;<translate say="Found an error?"/>
                     <web text="Tell us!" :href="issuesPage"/>
                 </footer>
@@ -55,6 +56,7 @@
                 section   : '',
                 anchor    : '',
                 gallery   : {images: [], index: null},
+                chatPage  : 'https://t.me/nc_passwords',
                 forumPage : 'https://help.nextcloud.com/c/apps/passwords',
                 issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue'
             };
@@ -122,7 +124,7 @@
                     pos     = window.scrollY,
                     section = '';
 
-                if(footer && footer.offsetTop < window.innerHeight + window.scrollY) {
+                if(footer && footer.offsetTop < window.innerHeight + pos) {
                     let item = this.navigation[this.navigation.length - 1];
 
                     this.section = item.id;
@@ -220,6 +222,7 @@
 
         #controls {
             margin : 0 -10px;
+            width  : 100vw;
         }
 
         article {
@@ -234,6 +237,7 @@
                 margin                : 0 auto;
                 width                 : 100%;
             }
+
             @media (max-width : $width-large) {
                 display   : block;
                 max-width : 975px;
@@ -260,6 +264,7 @@
                         font-weight : bold;
                     }
                 }
+
                 @media (max-width : $width-large) {
                     display : none;
                 }
@@ -380,6 +385,10 @@
                         list-style-type : lower-alpha;
                     }
                 }
+
+                > li > p:only-child {
+                    margin-bottom : 0;
+                }
             }
 
             ul {
@@ -432,10 +441,67 @@
             }
 
             blockquote {
-                border-left   : 4px solid var(--color-box-shadow);
-                background    : var(--color-background-dark);
-                padding       : 1em 1em 0 1em;
-                margin-bottom : 1em;
+                border-left : 4px solid var(--color-box-shadow);
+                background  : var(--color-background-dark);
+                padding     : 1em 1em 0 1em;
+                margin      : 0 0 1em 0;
+
+                &.info,
+                &.warning,
+                &.important,
+                &.recommended {
+                    border-color     : var(--color-box-shadow);
+                    background-color : var(--color-primary-element-light);
+                    color            : var(--color-primary-text);
+                    border-radius    : 3px;
+                    padding-left     : .75rem;
+
+                    > p {
+                        padding-left : 1.5rem;
+
+                        &:first-of-type:before {
+                            font-family  : var(--pw-icon-font-face);
+                            content      : '\f05a';
+                            margin-right : .5em;
+                            margin-left  : -1.5rem;
+                        }
+
+                        a {
+                            color       : var(--color-primary-text);
+                            font-weight : bold;
+
+                            &:hover,
+                            &:focus,
+                            &:active {
+                                text-decoration : underline;
+                            }
+                        }
+                    }
+                }
+
+                &.important {
+                    background-color : var(--color-error);
+
+                    > p:first-of-type:before {
+                        content : '\f071'
+                    }
+                }
+
+                &.warning {
+                    background-color : var(--color-warning);
+
+                    > p:first-of-type:before {
+                        content : '\f06a'
+                    }
+                }
+
+                &.recommended {
+                    background-color : var(--color-success);
+
+                    > p:first-of-type:before {
+                        content : '\f164'
+                    }
+                }
             }
 
             table {
@@ -447,6 +513,7 @@
                     th {
                         background-color : var(--color-background-dark);
                     }
+
                     th,
                     td {
                         border  : 1px solid var(--color-border-dark);

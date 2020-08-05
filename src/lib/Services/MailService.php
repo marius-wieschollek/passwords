@@ -7,9 +7,11 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Mail\AbstractMail;
 use OCA\Passwords\Mail\BadPasswordMail;
+use OCA\Passwords\Mail\NewClientMail;
 use OCA\Passwords\Mail\ShareCreatedMail;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -49,6 +51,11 @@ class MailService {
     protected $l10NFactory;
 
     /**
+     * @var NewClientMail
+     */
+    protected $newClientMail;
+
+    /**
      * @var BadPasswordMail
      */
     protected $badPasswordMail;
@@ -66,6 +73,7 @@ class MailService {
      * @param LoggingService      $logger
      * @param UserService         $userService
      * @param UserSettingsService $settings
+     * @param NewClientMail       $newClientMail
      * @param BadPasswordMail     $badPasswordMail
      * @param ShareCreatedMail    $shareCreatedMail
      */
@@ -74,6 +82,7 @@ class MailService {
         IFactory $l10NFactory,
         LoggingService $logger,
         UserService $userService,
+        NewClientMail $newClientMail,
         UserSettingsService $settings,
         BadPasswordMail $badPasswordMail,
         ShareCreatedMail $shareCreatedMail
@@ -83,6 +92,7 @@ class MailService {
         $this->settings         = $settings;
         $this->userService      = $userService;
         $this->l10NFactory      = $l10NFactory;
+        $this->newClientMail    = $newClientMail;
         $this->badPasswordMail  = $badPasswordMail;
         $this->shareCreatedMail = $shareCreatedMail;
     }
@@ -101,6 +111,14 @@ class MailService {
      */
     public function sendShareCreateMail(string $userId, array $owners): void {
         $this->createAndSendMail($userId, $this->shareCreatedMail, $owners);
+    }
+
+    /**
+     * @param string $userId
+     * @param string $client
+     */
+    public function sendNewClientMail(string $userId, string $client): void {
+        $this->createAndSendMail($userId, $this->newClientMail, $client);
     }
 
     /**
@@ -138,10 +156,13 @@ class MailService {
     protected function getReceivingUser(string $userId, string $mailType): ?IUser {
         try {
             if(!$this->settings->get('user.mail.'.$mailType, $userId)) return null;
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
-        return $this->userService->getUser($userId);
+        $user = $this->userService->getUser($userId);
+        if(empty($user->getEMailAddress())) return null;
+
+        return $user;
     }
 }

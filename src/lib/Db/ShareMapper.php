@@ -20,6 +20,23 @@ class ShareMapper extends AbstractMapper {
     const TABLE_NAME = 'passwords_entity_share';
 
     /**
+     * @param string $userId
+     *
+     * @return Share[]
+     * @throws \Exception
+     */
+    public function findAllByUserIdOrReceiverId(string $userId): array {
+        $sql = $this->getStatement();
+
+        $sql->orWhere(
+            $sql->expr()->eq('user_id', $sql->createNamedParameter($userId)),
+            $sql->expr()->eq('receiver', $sql->createNamedParameter($userId))
+        );
+
+        return $this->findEntities($sql);
+    }
+
+    /**
      * @return IQueryBuilder
      */
     protected function getStatement(): IQueryBuilder {

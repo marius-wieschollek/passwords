@@ -85,7 +85,7 @@ class FolderApiController extends AbstractObjectApiController {
      */
     public function create(
         string $label,
-        string $parent,
+        string $parent = FolderService::BASE_FOLDER_UUID,
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
@@ -131,7 +131,7 @@ class FolderApiController extends AbstractObjectApiController {
     public function update(
         string $id,
         string $label,
-        string $parent,
+        string $parent = FolderService::BASE_FOLDER_UUID,
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,

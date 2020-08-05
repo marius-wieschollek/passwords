@@ -1,6 +1,7 @@
 <template>
     <translate :tag="tag"
                class="session-timeout"
+               icon="hourglass-half"
                say="You will be logged out in {time} seconds"
                :variables="{time}"
                v-if="showTimer"/>
@@ -10,6 +11,7 @@
     import KeepAliveManager from '@js/Manager/KeepAliveManager';
     import Translate from "@/vue/Components/Translate";
     import Application from '@js/Init/Application';
+    import API from '@js/Helper/api';
 
     export default {
         components: {Translate},
@@ -42,7 +44,7 @@
         },
         computed  : {
             showTimer() {
-                return this.hasTimeout && this.time <= 45;
+                return this.hasTimeout && this.time <= 45 && API.isAuthorized;
             },
             tag() {
                 return this.scope === 'global' ? 'div':'li';
@@ -69,15 +71,15 @@
 <style lang="scss">
     div.session-timeout,
     #app-navigation li.session-timeout {
-
-        &:before {
-            content : '\f253';
-        }
-
         background-color : var(--color-primary-element);
         opacity          : 1;
         color            : var(--color-primary-text);
         font-weight      : bold;
+
+        i {
+            line-height : 44px;
+            text-align  : center;
+        }
     }
 
     div.session-timeout {
@@ -86,12 +88,16 @@
             margin-right : 0.25rem;
         }
 
+        i {
+            width : 44px;
+        }
+
         line-height : 3rem;
         position    : fixed;
         bottom      : 0;
         right       : 0;
         left        : 0;
         text-align  : center;
-        z-index     : 1000;
+        z-index     : 1001;
     }
 </style>

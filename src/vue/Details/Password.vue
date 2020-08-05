@@ -3,7 +3,7 @@
         <i class="fa fa-times" @click="closeDetails()"></i>
         <preview :image="object.preview" :icon="object.icon" :link="object.url" :host="object.website"/>
         <div class="title" :title="object.label">
-            <img class="icon" :src="object.icon" alt="">
+            <favicon class="icon" :domain="object.website" />
             <h3>{{ object.label }}</h3>
         </div>
         <div class="infos">
@@ -39,9 +39,11 @@
     import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Sharing from '@vue/Details/Password/Sharing/Sharing';
+    import Favicon from "@vc/Favicon";
 
     export default {
         components: {
+            Favicon,
             Tabs,
             Tags,
             Notes,
@@ -70,11 +72,13 @@
 
         created() {
             Events.on('password.changed', this.processEvent);
+            Events.on('password.deleted', this.processEvent);
             this.refreshView();
         },
 
         beforeDestroy() {
             Events.off('password.changed', this.processEvent);
+            Events.off('password.deleted', this.processEvent);
         },
 
         computed: {
@@ -106,8 +110,9 @@
                 };
             },
             async refreshView() {
+                if(this.$parent.detail.type !== 'password') return ;
                 let password = await API.showPassword(this.object.id, 'model+folder+shares+tags+revisions');
-                if(this.password.id === password.id) {
+                if(this.password.id === password.id && this.$parent.detail.type === 'password') {
                     if(password.trashed && this.$route.name !== 'Trash' || !password.trashed && this.$route.name === 'Trash') {
                         this.closeDetails();
                     } else {
@@ -116,8 +121,8 @@
                 }
             },
             processEvent(event) {
-                if(event.object.id === this.object.id) {
-                    if(event.object.trashed && this.$route.name !== 'Trash' || !event.object.trashed && this.$route.name === 'Trash') {
+                if(event.object.id === this.object.id && this.$parent.detail.type === 'password') {
+                    if(event.object.trashed && (this.$route.name !== 'Trash' || event.event === 'password.deleted') || !event.object.trashed && this.$route.name === 'Trash') {
                         this.closeDetails();
                     } else {
                         this.refreshView();

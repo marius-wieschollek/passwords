@@ -1,24 +1,40 @@
-#app[data-server-version="15"] {
-    #authorize-window .login-confirm input[type="submit"] {
-        background-image : url(/core/img/actions/confirm-white.svg?v=2);
-    }
-}
-
-#app[data-server-version="16"],
-#app[data-server-version="17"] {
-    #controls .crumbmenu.active .menu, #controls .passwords-more-menu.active .menu {
-        max-height : 90px;
-    }
-
-    > #app-navigation > ul {
-        height: auto;
-
-        &.menu-main {
-            height: 100%;
+body[data-server-version="18"],
+body[data-server-version="19"] {
+    &#body-user {
+        &.pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+            background-image    : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+            background-size     : cover;
+            background-position : 50% 50%;
         }
 
-        &#app-settings.open {
-            flex-shrink: 0;
+        &[data-custom-background="false"][data-custom-color="false"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+            background-image      : var(--pw-image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+            background-repeat     : repeat;
+            background-size       : 275px, contain;
+            background-attachment : fixed;
         }
+
+        &[data-custom-background="true"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+            background-image : var(--pw-image-login-background), linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+        }
+    }
+
+    &[data-custom-color="false"] #app-popup .background .window .title {
+        background-image : linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+    }
+
+    &[data-custom-color="true"] #app-popup .background .window .title {
+        background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+    }
+
+    &[data-custom-color="false"] #passwords-setup .setup-header {
+        background-image      : var(--image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+        background-repeat     : repeat;
+        background-size       : 275px, contain;
+        background-attachment : fixed;
+    }
+
+    &[data-custom-color="true"] #passwords-setup .setup-header {
+        background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
     }
 }

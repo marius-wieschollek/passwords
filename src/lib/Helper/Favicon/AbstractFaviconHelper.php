@@ -92,7 +92,10 @@ abstract class AbstractFaviconHelper {
 
         $faviconData = $this->getFaviconData($domain);
         if(empty($faviconData)) throw new NoFaviconDataException();
-        if(!$this->imageHelper->supportsImage($faviconData)) throw new InvalidFaviconDataException();
+        if(!$this->imageHelper->supportsImage($faviconData)) {
+            $mime = $this->imageHelper->getImageMime($faviconData);
+            throw new InvalidFaviconDataException('Favicon service returned unsupported data type: '.$mime);
+        }
 
         return $this->fileCacheService->putFile($faviconFile, $faviconData);
     }
@@ -138,7 +141,7 @@ abstract class AbstractFaviconHelper {
      * @throws UnexpectedResponseCodeException
      */
     protected function getFaviconData(string $domain): ?string {
-        list($uri, $options) = $this->getRequestData($domain);
+        [$uri, $options] = $this->getRequestData($domain);
 
         return $this->executeRequest($uri, $options);
     }
@@ -153,9 +156,12 @@ abstract class AbstractFaviconHelper {
     }
 
     /**
+     * @param string $uri
+     * @param array  $options
+     *
      * @return string
-     * @throws UnexpectedResponseCodeException
      * @throws FaviconRequestException
+     * @throws UnexpectedResponseCodeException
      */
     protected function executeRequest(string $uri, array $options): string {
         $request = $this->createRequest();
