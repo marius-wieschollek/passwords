@@ -62,7 +62,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 #### LDAP Setup
  - Open [PhpLdapAdmin](https://localhost:9090) and log in
  - Create a new entry with the template "Generic: Posix Group"
- - Create a new Entry with the template "Generic: User Account"
+ - Create a new Entry with the template "Generic: User Account" as child entry of the group
  - Enable "LDAP user and group backend"
  - Go to "Settings" > "LDAP/AD Integration"
  - Enter `openldap` as server and `389` as port
@@ -71,6 +71,9 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - Enter `dc=nextcloud` as Base DN
  - Click on "Continue"
  - Select "inetOrgPerson" and "posixAccount" as object classes
+ - Click on "Continue"
+ - Click on "Continue"
+ - Select "posixGroup" as object classes
 
 #### Telegram 2FA Gateway Setup
  - Install the "Two-Factor Gateway" app from the app store
