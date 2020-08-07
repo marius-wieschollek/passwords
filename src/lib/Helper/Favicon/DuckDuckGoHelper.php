@@ -7,7 +7,14 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use Exception;
+use GuzzleHttp\Exception\ClientException;
+use OCA\Passwords\Exception\Favicon\FaviconRequestException;
+use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Services\HelperService;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
+use Throwable;
 
 /**
  * Class DuckDuckGoHelper
@@ -29,28 +36,46 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return string
+     * @return array
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getRequestData(string $domain): array {
         $this->domain = $domain;
 
-        return "https://icons.duckduckgo.com/ip2/{$domain}.ico";
+        return [
+            "https://icons.duckduckgo.com/ip2/{$domain}.ico",
+            []
+        ];
     }
 
     /**
-     * @param string $url
+     * @param string $uri
+     * @param array  $options
      *
-     * @return mixed|string
-     * @throws \Throwable
+     * @return string
+     * @throws FaviconRequestException
+     * @throws UnexpectedResponseCodeException
+     * @throws NotFoundException
+     * @throws NotPermittedException
+     * @throws Throwable
      */
-    protected function getHttpRequest(string $url): string {
-        $result = parent::getHttpRequest($url);
+    protected function executeRequest(string $uri, array $options): string {
+        $request = $this->createRequest();
+        try {
+            $response = $request->get($uri, $options);
+        } catch(ClientException $e) {
+            if($e->getCode() === 404) {
+                return $this->getDefaultFavicon($this->domain)->getContent();
+            }
 
-        if(!$result) return $this->getDefaultFavicon($this->domain)->getContent();
+            throw new UnexpectedResponseCodeException($e->getCode());
+        } catch(Exception $e) {
+            throw new FaviconRequestException($e);
+        }
 
-        $data = @gzdecode($result);
-        if($data) return $data;
+        if($response->getStatusCode() === 200) {
+            return $response->getBody();
+        }
 
-        return $result;
+        throw new UnexpectedResponseCodeException($response->getStatusCode());
     }
 }

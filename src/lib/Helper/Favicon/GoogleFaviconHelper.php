@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use OCA\Passwords\Exception\Favicon\FaviconRequestException;
+use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Services\HelperService;
 
 /**
@@ -30,22 +32,30 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
     /**
      * @param string $domain
      *
-     * @return string
+     * @return array
      */
-    protected function getFaviconUrl(string $domain): string {
+    protected function getRequestData(string $domain): array {
         $this->domain = $domain;
 
-        return 'https://www.google.com/s2/favicons?domain='.$domain;
+        return [
+            "https://www.google.com/s2/favicons?domain={$domain}",
+            []
+        ];
     }
 
     /**
-     * @param string $url
+     * @param string $uri
+     * @param array  $options
      *
-     * @return mixed|null|\OCP\Files\SimpleFS\ISimpleFile|string
+     * @return string
+     * @throws FaviconRequestException
+     * @throws UnexpectedResponseCodeException
+     * @throws \OCP\Files\NotFoundException
+     * @throws \OCP\Files\NotPermittedException
      * @throws \Throwable
      */
-    protected function getHttpRequest(string $url): string {
-        $result = parent::getHttpRequest($url);
+    protected function executeRequest(string $uri, array $options): string {
+        $result = parent::executeRequest($uri, $options);
 
         if(md5($result) === self::DEFAULT_ICON_MD5) {
             return $this->getDefaultFavicon($this->domain)->getContent();
@@ -53,4 +63,5 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
 
         return $result;
     }
+
 }
