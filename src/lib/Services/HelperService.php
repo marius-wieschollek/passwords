@@ -119,8 +119,6 @@ class HelperService {
         switch($service) {
             case self::PREVIEW_PAGERES:
                 return $this->container->query(PageresCliHelper::class);
-            case self::PREVIEW_WEBSHOT:
-                return $this->container->query(WebshotHelper::class);
             case self::PREVIEW_BROW_SHOT:
                 return $this->container->query(BrowshotPreviewHelper::class);
             case self::PREVIEW_SCREEN_SHOT_LAYER:

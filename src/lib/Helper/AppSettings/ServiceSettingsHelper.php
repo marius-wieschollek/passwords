@@ -222,7 +222,6 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'string',
             [
                 'service.preview' => [
-                    HelperService::PREVIEW_WEBSHOT,
                     HelperService::PREVIEW_SCREEENLY,
                     HelperService::PREVIEW_BROW_SHOT,
                     HelperService::PREVIEW_SCREEN_SHOT_LAYER,
@@ -252,10 +251,6 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
         if($service === HelperService::PREVIEW_SCREEENLY) {
             return ScreeenlyHelper::SCREEENLY_API_CONFIG_KEY;
-        }
-
-        if($service === HelperService::PREVIEW_WEBSHOT) {
-            return WebshotHelper::WEBSHOT_CONFIG_KEY;
         }
 
         return 'service/preview/api';
@@ -377,13 +372,6 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 $this->localisation->t('None')
             )
         ];
-
-        if($current === HelperService::PREVIEW_WEBSHOT) {
-            $services[] = $this->generateOptionArray(
-                HelperService::PREVIEW_WEBSHOT,
-                $this->localisation->t('Passwords Webshot')
-            );
-        }
 
         return $options;
     }

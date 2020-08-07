@@ -319,19 +319,6 @@ class AdminSettings implements ISettings {
             ]
         ];
 
-        if($current === HelperService::PREVIEW_WEBSHOT) {
-            $services[]
-                = [
-                'id'      => HelperService::PREVIEW_WEBSHOT,
-                'label'   => 'Passwords Webshot',
-                'current' => $current === HelperService::PREVIEW_WEBSHOT,
-                'api'     => [
-                    'key'   => 'service.preview.api',
-                    'value' => $this->config->getAppValue(WebshotHelper::WEBSHOT_CONFIG_KEY)
-                ]
-            ];
-        }
-
         return $services;
     }
 
