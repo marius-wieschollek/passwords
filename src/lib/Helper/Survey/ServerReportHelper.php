@@ -9,9 +9,9 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class ServerReportHelper
@@ -53,22 +53,22 @@ class ServerReportHelper {
     protected $passwordRevisionMapper;
 
     /**
-     * @var RequestHelper
-     */
-    protected $requestHelper;
-
-    /**
      * @var HelperService
      */
     protected $helperService;
 
     /**
+     * @var IClientService
+     */
+    protected $httpClientService;
+
+    /**
      * ServerReportHelper constructor.
      *
      * @param ShareMapper            $shareMapper
-     * @param RequestHelper          $requestHelper
      * @param ConfigurationService   $config
      * @param HelperService          $helperService
+     * @param IClientService         $httpClientService
      * @param TagRevisionMapper      $tagRevisionMapper
      * @param ServiceSettingsHelper  $serviceSettings
      * @param FolderRevisionMapper   $folderRevisionMapper
@@ -76,22 +76,22 @@ class ServerReportHelper {
      */
     public function __construct(
         ShareMapper $shareMapper,
-        RequestHelper $requestHelper,
         ConfigurationService $config,
         HelperService $helperService,
+        IClientService $httpClientService,
         TagRevisionMapper $tagRevisionMapper,
         ServiceSettingsHelper $serviceSettings,
         FolderRevisionMapper $folderRevisionMapper,
         PasswordRevisionMapper $passwordRevisionMapper
     ) {
         $this->config                 = $config;
-        $this->serviceSettings        = $serviceSettings;
-        $this->passwordRevisionMapper = $passwordRevisionMapper;
-        $this->folderRevisionMapper   = $folderRevisionMapper;
-        $this->tagRevisionMapper      = $tagRevisionMapper;
         $this->shareMapper            = $shareMapper;
-        $this->requestHelper          = $requestHelper;
         $this->helperService          = $helperService;
+        $this->serviceSettings        = $serviceSettings;
+        $this->httpClientService      = $httpClientService;
+        $this->tagRevisionMapper      = $tagRevisionMapper;
+        $this->folderRevisionMapper   = $folderRevisionMapper;
+        $this->passwordRevisionMapper = $passwordRevisionMapper;
     }
 
     /**
@@ -104,9 +104,12 @@ class ServerReportHelper {
         if($this->config->getAppValue('survey/server/week', '') === $currentWeek) return;
 
         $report = $this->getReport($enhanced);
-        $this->requestHelper->setJsonData($report);
-        $this->requestHelper->send(self::API_URL);
-        $this->config->setAppValue('survey/server/week', $currentWeek);
+        try {
+            $client = $this->httpClientService->newClient();
+            $client->post(self::API_URL, ['json' => $report]);
+            $this->config->setAppValue('survey/server/week', $currentWeek);
+        } catch(Exception $e) {
+        }
     }
 
     /**
