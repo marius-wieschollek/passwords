@@ -96,7 +96,7 @@ abstract class AbstractFaviconHelper {
         $faviconData = $this->getFaviconData($domain);
         if(empty($faviconData)) throw new NoFaviconDataException();
         if(!$this->imageHelper->supportsImage($faviconData)) {
-            $mime = $this->imageHelper->getImageMime($faviconData);
+            $mime = strval($this->imageHelper->getImageMime($faviconData));
             throw new InvalidFaviconDataException($mime);
         }
 

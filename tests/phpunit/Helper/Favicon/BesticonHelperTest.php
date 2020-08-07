@@ -11,7 +11,6 @@ use Exception;
 use OC\Files\SimpleFS\SimpleFile;
 use OC\User\User;
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
@@ -20,6 +19,9 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\Http\Client\IClient;
+use OCP\Http\Client\IClientService;
+use OCP\Http\Client\IResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -29,6 +31,7 @@ use PHPUnit\Framework\TestCase;
  * @package OCA\Passwords\Helper\Favicon
  */
 class BesticonHelperTest extends TestCase {
+
     /**
      * @var BestIconHelper
      */
@@ -38,11 +41,6 @@ class BesticonHelperTest extends TestCase {
      * @var MockObject|ImagickHelper
      */
     private $imageHelper;
-
-    /**
-     * @var MockObject|RequestHelper
-     */
-    private $httpRequest;
 
     /**
      * @var MockObject|AdminUserHelper
@@ -65,6 +63,11 @@ class BesticonHelperTest extends TestCase {
     private $fileCacheService;
 
     /**
+     * @var MockObject|IClientService
+     */
+    private $httpClientService;
+
+    /**
      * @var MockObject|NotificationService
      */
     private $notificationService;
@@ -83,23 +86,23 @@ class BesticonHelperTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $this->dateTimeHelper        = $this->createMock(DateTimeHelper::class);
-        $this->httpRequest           = $this->createMock(RequestHelper::class);
-        $this->notificationService   = $this->createMock(NotificationService::class);
-        $this->fallbackIconGenerator = $this->createMock(FallbackIconGenerator::class);
+        $this->imageHelper           = $this->createMock(ImagickHelper::class);
         $this->helperService         = $this->createMock(HelperService::class);
+        $this->httpClientService     = $this->createMock(IClientService::class);
+        $this->dateTimeHelper        = $this->createMock(DateTimeHelper::class);
         $this->adminService          = $this->createMock(AdminUserHelper::class);
         $this->fileCacheService      = $this->createMock(FileCacheService::class);
+        $this->notificationService   = $this->createMock(NotificationService::class);
+        $this->fallbackIconGenerator = $this->createMock(FallbackIconGenerator::class);
         $this->configurationService  = $this->createMock(ConfigurationService::class);
-        $this->imageHelper           = $this->createMock(ImagickHelper::class);
         $this->helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
         $this->besticonHelper = new BestIconHelper(
             $this->dateTimeHelper,
-            $this->httpRequest,
             $this->configurationService,
             $this->helperService,
             $this->adminService,
+            $this->httpClientService,
             $this->fileCacheService,
             $this->notificationService,
             $this->fallbackIconGenerator
@@ -149,15 +152,16 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
-        $this->httpRequest->expects($this->once())->method('setUrl')->with($apiRequestUrl);
+        $client->expects($this->once())->method('get')->with($apiRequestUrl);
 
         $this->besticonHelper->getFavicon($domain);
     }
@@ -173,6 +177,7 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(0);
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(11);
@@ -185,10 +190,10 @@ class BesticonHelperTest extends TestCase {
                 [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, '0:0:0'],
             ]
         );
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
-        $this->httpRequest->expects($this->once())->method('setUrl')->with($apiRequestUrl);
+        $client->expects($this->once())->method('get')->with($apiRequestUrl);
 
         $this->besticonHelper->getFavicon($domain);
     }
@@ -204,6 +209,7 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(0);
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
@@ -216,10 +222,10 @@ class BesticonHelperTest extends TestCase {
                 [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, '0:0:0'],
             ]
         );
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
-        $this->httpRequest->expects($this->once())->method('setUrl')->with($apiRequestUrl);
+        $client->expects($this->once())->method('get')->with($apiRequestUrl);
 
         $this->besticonHelper->getFavicon($domain);
     }
@@ -233,6 +239,7 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
@@ -245,7 +252,7 @@ class BesticonHelperTest extends TestCase {
                 [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, '10:5:0'],
             ]
         );
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
         $this->configurationService->expects($this->once())->method('setAppValue')->with($this->besticonHelper::BESTICON_COUNTER_KEY, '10:6:0');
@@ -262,6 +269,7 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
@@ -274,7 +282,7 @@ class BesticonHelperTest extends TestCase {
                 [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, '0:0:0'],
             ]
         );
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
         $this->configurationService->expects($this->once())->method('setAppValue')->with($this->besticonHelper::BESTICON_COUNTER_KEY, '10:1:0');
@@ -292,6 +300,7 @@ class BesticonHelperTest extends TestCase {
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $limit         = $this->besticonHelper::BESTICON_INSTANCE_LIMIT;
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
@@ -304,7 +313,7 @@ class BesticonHelperTest extends TestCase {
                 [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, '10:'.($limit - 1).':0'],
             ]
         );
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
         $user = $this->createMock(User::class);
@@ -327,6 +336,7 @@ class BesticonHelperTest extends TestCase {
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $limit         = $this->besticonHelper::BESTICON_INSTANCE_LIMIT;
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
@@ -339,14 +349,14 @@ class BesticonHelperTest extends TestCase {
                 [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, "10:{$limit}:1"],
             ]
         );
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
         $user = $this->createMock(User::class);
         $user->method('getUID')->willReturn('admin');
         $this->adminService->method('getAdmins')->willReturn([$user]);
 
-        $this->configurationService->expects($this->once())->method('setAppValue')->with($this->besticonHelper::BESTICON_COUNTER_KEY, '10:'.($limit+1).':1');
+        $this->configurationService->expects($this->once())->method('setAppValue')->with($this->besticonHelper::BESTICON_COUNTER_KEY, '10:'.($limit + 1).':1');
         $this->notificationService->expects($this->never())->method('sendBesticonApiNotification');
 
         $this->besticonHelper->getFavicon($domain);
@@ -362,11 +372,12 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
         $this->fileCacheService->expects($this->once())->method('putFile')->with($fileName, $faviconData)->willReturn($file);
@@ -387,14 +398,18 @@ class BesticonHelperTest extends TestCase {
         $fileName       = $this->besticonHelper->getFaviconFilename($domain);
         $file           = new SimpleFile();
 
+        $client  = $this->getHttpClientMock($faviconData, 500);
+        $client2 = $this->getHttpClientMock();
+
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
-        $this->httpRequest->method('sendWithRetry')->willReturnOnConsecutiveCalls(null, $faviconData);
+        $this->httpClientService->method('newClient')->willReturnOnConsecutiveCalls($client, $client2);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
-        $this->httpRequest->expects($this->exactly(2))->method('setUrl')->withConsecutive([$apiRequestUrl1], [$apiRequestUrl2]);
+        $client->expects($this->exactly(1))->method('get')->with($apiRequestUrl1);
+        $client2->expects($this->exactly(1))->method('get')->with($apiRequestUrl2);
 
         $this->besticonHelper->getFavicon($domain);
     }
@@ -406,14 +421,13 @@ class BesticonHelperTest extends TestCase {
         $serviceUrl    = 'https://www.example.com/icon';
         $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
-        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=https://{$domain}&formats=png,ico,gif,jpg";
-        $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
 
+        $client = $this->getHttpClientMock('');
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
-        $this->httpRequest->method('sendWithRetry')->willReturn(null);
+        $this->httpClientService->method('newClient')->willReturn($client);
 
         try {
             $this->besticonHelper->getFavicon($domain);
@@ -432,11 +446,12 @@ class BesticonHelperTest extends TestCase {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(false);
         $this->imageHelper->method('getImageMime')->with($faviconData)->willReturn('text/plain');
 
@@ -458,16 +473,37 @@ class BesticonHelperTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
+        $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
-        $this->httpRequest->method('sendWithRetry')->willReturn($faviconData);
+        $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
         $this->imageHelper->expects($this->once())->method('supportsImage')->with($faviconData);
 
         $this->besticonHelper->getFavicon($domain);
+    }
+
+    /**
+     * @param string $faviconData
+     * @param int    $status
+     *
+     * @return IClient
+     * @throws \ReflectionException
+     */
+    protected function getHttpClientMock($faviconData = 'data', $status = 200) {
+        /** @var IResponse|MockObject $response */
+        $response = $this->createMock(IResponse::class);
+        $response->method('getBody')->willReturn($faviconData);
+        $response->method('getStatusCode')->willReturn($status);
+
+        /** @var IClient|MockObject $client */
+        $client = $this->createMock(IClient::class);
+        $client->method('get')->willReturn($response);
+
+        return $client;
     }
 }

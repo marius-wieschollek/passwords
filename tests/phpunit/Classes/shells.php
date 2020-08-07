@@ -176,3 +176,25 @@ namespace OC\Files\SimpleFS {
         public function write() {}
     }
 }
+
+namespace OCP\Http\Client {
+    class IClientService {
+        public function newClient(): IClient { return new IClient(); }
+    }
+
+    class IClient {
+        public function get(string $uri, array $options = []): IResponse { return new IResponse(); }
+        public function head(string $uri, array $options = []): IResponse { return new IResponse(); }
+        public function post(string $uri, array $options = []): IResponse { return new IResponse(); }
+        public function put(string $uri, array $options = []): IResponse { return new IResponse(); }
+        public function delete(string $uri, array $options = []): IResponse { return new IResponse(); }
+        public function options(string $uri, array $options = []): IResponse { return new IResponse(); }
+    }
+
+    class IResponse {
+        public function getBody() {}
+        public function getStatusCode(): int  { return 0; }
+        public function getHeader(string $key): string { return ''; }
+        public function getHeaders(): array { return []; }
+    }
+}
