@@ -28,7 +28,7 @@ abstract class AbstractWordsHelper {
      *
      * @return bool
      */
-    abstract public static function isAvailable(): bool;
+    abstract public function isAvailable(): bool;
 
     /**
      * @param array $words

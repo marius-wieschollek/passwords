@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\Words;
 
 use OCA\Passwords\Helper\Http\RequestHelper;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class SnakesWordsHelper
@@ -29,12 +30,19 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     protected $specialCharacters;
 
     /**
-     * AbstractWordsHelper constructor.
+     * @var IClientService
+     */
+    protected $httpClientService;
+
+    /**
+     * SnakesWordsHelper constructor.
      *
      * @param SpecialCharacterHelper $specialCharacters
+     * @param IClientService         $httpClientService
      */
-    public function __construct(SpecialCharacterHelper $specialCharacters) {
+    public function __construct(SpecialCharacterHelper $specialCharacters, IClientService $httpClientService) {
         $this->specialCharacters = $specialCharacters;
+        $this->httpClientService = $httpClientService;
     }
 
     /**
@@ -76,14 +84,10 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @return mixed
      */
     protected function getHttpRequest(array $options = []) {
-        $request = new RequestHelper();
-        $request->setUrl(self::SERVICE_URL);
+        $httpClient = $this->httpClientService->newClient();
+        $response   = $httpClient->post(self::SERVICE_URL, ['body' => $options]);
 
-        if(!empty($options)) {
-            $request->setPostData($options);
-        }
-
-        return $request->sendWithRetry();
+        return $response->getBody();
     }
 
     /**
@@ -182,11 +186,11 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     /**
      * @inheritdoc
      */
-    public static function isAvailable(): bool {
+    public function isAvailable(): bool {
         if(static::$isAvailable) return static::$isAvailable;
 
         try {
-            $client   = \OC::$server->getHTTPClientService()->newClient();
+            $client   = $this->httpClientService->newClient();
             $response = $client->head(SnakesWordsHelper::SERVICE_URL);
 
             static::$isAvailable = $response->getStatusCode() === 200;

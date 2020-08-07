@@ -58,11 +58,17 @@ class ServerReportHelper {
     protected $requestHelper;
 
     /**
+     * @var HelperService
+     */
+    protected $helperService;
+
+    /**
      * ServerReportHelper constructor.
      *
      * @param ShareMapper            $shareMapper
      * @param RequestHelper          $requestHelper
      * @param ConfigurationService   $config
+     * @param HelperService          $helperService
      * @param TagRevisionMapper      $tagRevisionMapper
      * @param ServiceSettingsHelper  $serviceSettings
      * @param FolderRevisionMapper   $folderRevisionMapper
@@ -72,6 +78,7 @@ class ServerReportHelper {
         ShareMapper $shareMapper,
         RequestHelper $requestHelper,
         ConfigurationService $config,
+        HelperService $helperService,
         TagRevisionMapper $tagRevisionMapper,
         ServiceSettingsHelper $serviceSettings,
         FolderRevisionMapper $folderRevisionMapper,
@@ -84,6 +91,7 @@ class ServerReportHelper {
         $this->tagRevisionMapper      = $tagRevisionMapper;
         $this->shareMapper            = $shareMapper;
         $this->requestHelper          = $requestHelper;
+        $this->helperService          = $helperService;
     }
 
     /**
@@ -186,7 +194,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getServices(): array {
-        $words  = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
+        $words  = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());
         $images = HelperService::getImageHelperName($this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK));
 
         $previewApi = false;

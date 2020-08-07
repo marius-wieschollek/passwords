@@ -117,7 +117,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @throws Exception
      */
     protected function getDefaultWordsFile(): string {
-        if(LocalWordsHelper::isAvailable()) return self::WORDS_DEFAULT;
+        if($this->isAvailable()) return self::WORDS_DEFAULT;
 
         throw new Exception('No local words file found. Install a words file in '.self::WORDS_DEFAULT);
     }
@@ -139,7 +139,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
     /**
      * @return bool
      */
-    public static function isAvailable(): bool {
+    public function isAvailable(): bool {
         return @is_readable(LocalWordsHelper::WORDS_DEFAULT) && @is_file(LocalWordsHelper::WORDS_DEFAULT);
     }
 }

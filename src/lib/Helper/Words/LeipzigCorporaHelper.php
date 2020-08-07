@@ -196,11 +196,11 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     /**
      * @inheritDoc
      */
-    public static function isAvailable(): bool {
+    public function isAvailable(): bool {
         if(static::$isAvailable) return static::$isAvailable;
 
         try {
-            $client   = \OC::$server->getHTTPClientService()->newClient();
+            $client   = $this->httpClientService->newClient();
             $response = $client->head(LeipzigCorporaHelper::SERVICE_URL);
 
             static::$isAvailable = $response->getStatusCode() === 200;

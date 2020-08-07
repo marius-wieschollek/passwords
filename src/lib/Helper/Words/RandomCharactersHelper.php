@@ -96,7 +96,7 @@ class RandomCharactersHelper extends AbstractWordsHelper {
     /**
      * @inheritdoc
      */
-    public static function isAvailable(): bool {
+    public function isAvailable(): bool {
         try {
             random_int(1, 10);
 
@@ -106,6 +106,14 @@ class RandomCharactersHelper extends AbstractWordsHelper {
         }
     }
 
+    /**
+     * @param array $words
+     * @param int   $strength
+     * @param bool  $addNumbers
+     * @param bool  $addSpecial
+     *
+     * @return string
+     */
     protected function wordsArrayToPassword(array $words, int $strength = 4, bool $addNumbers = true, bool $addSpecial = true): string {
         $password = implode($words);
 

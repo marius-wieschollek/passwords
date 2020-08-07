@@ -21,6 +21,7 @@ use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
+use OCP\AppFramework\QueryException;
 use OCP\IL10N;
 
 /**
@@ -34,6 +35,11 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @var IL10N
      */
     protected $localisation;
+
+    /**
+     * @var HelperService
+     */
+    protected $helperService;
 
     /**
      * @var
@@ -68,11 +74,13 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * ServiceSettingsHelper constructor.
      *
      * @param ConfigurationService $config
+     * @param HelperService        $helperService
      * @param IL10N                $localisation
      */
-    public function __construct(ConfigurationService $config, IL10N $localisation) {
+    public function __construct(ConfigurationService $config, HelperService $helperService, IL10N $localisation) {
         parent::__construct($config);
         $this->localisation = $localisation;
+        $this->helperService = $helperService;
     }
 
     /**
@@ -142,12 +150,12 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @param string $setting
      *
      * @return string
-     * @throws ApiException
+     * @throws ApiException|QueryException
      */
     protected function getSettingDefault(string $setting) {
         switch($setting) {
             case 'words':
-                return HelperService::getDefaultWordsHelperName();
+                return $this->helperService->getDefaultWordsHelperName();
             case 'images':
                 return HelperService::getImageHelperName();
         }
@@ -285,22 +293,22 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             $this->generateOptionArray(
                 HelperService::WORDS_LOCAL,
                 $this->localisation->t('Local dictionary'),
-                LocalWordsHelper::isAvailable()
+                $this->helperService->getWordsHelper(HelperService::WORDS_LOCAL)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_LEIPZIG,
                 $this->localisation->t('Leipzig Corpora Collection (recommended)'),
-                LeipzigCorporaHelper::isAvailable()
+                $this->helperService->getWordsHelper(HelperService::WORDS_LEIPZIG)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_SNAKES,
                 $this->localisation->t('watchout4snakes.com'),
-                SnakesWordsHelper::isAvailable()
+                $this->helperService->getWordsHelper(HelperService::WORDS_SNAKES)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_RANDOM,
                 $this->localisation->t('Random Characters'),
-                RandomCharactersHelper::isAvailable()
+                $this->helperService->getWordsHelper(HelperService::WORDS_RANDOM)->isAvailable()
             )
         ];
     }

@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Settings;
 
 use Exception;
-use OC;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
@@ -58,6 +57,11 @@ class AdminSettings implements ISettings {
     protected $urlGenerator;
 
     /**
+     * @var HelperService
+     */
+    protected $helperService;
+
+    /**
      * @var FileCacheService
      */
     protected $fileCacheService;
@@ -68,18 +72,21 @@ class AdminSettings implements ISettings {
      * @param IRequest             $request
      * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
+     * @param HelperService        $helperService
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
         IRequest $request,
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
+        HelperService $helperService,
         FileCacheService $fileCacheService
     ) {
-        $this->request = $request;
+        $this->request          = $request;
         $this->config           = $config;
-        $this->fileCacheService = $fileCacheService;
         $this->urlGenerator     = $urlGenerator;
+        $this->helperService    = $helperService;
+        $this->fileCacheService = $fileCacheService;
     }
 
     /**
@@ -149,32 +156,32 @@ class AdminSettings implements ISettings {
      * @deprecated
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', HelperService::getDefaultWordsHelperName());
+        $current = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());
 
         return [
             [
                 'id'      => HelperService::WORDS_LOCAL,
                 'label'   => 'Local dictionary',
                 'current' => $current === HelperService::WORDS_LOCAL,
-                'enabled' => LocalWordsHelper::isAvailable()
+                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_LOCAL)->isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_LEIPZIG,
                 'label'   => 'Leipzig Corpora Collection (recommended)',
                 'current' => $current === HelperService::WORDS_LEIPZIG,
-                'enabled' => LeipzigCorporaHelper::isAvailable()
+                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_LEIPZIG)->isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_SNAKES,
                 'label'   => 'watchout4snakes.com',
                 'current' => $current === HelperService::WORDS_SNAKES,
-                'enabled' => SnakesWordsHelper::isAvailable()
+                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_SNAKES)->isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_RANDOM,
                 'label'   => 'Random Characters',
                 'current' => $current === HelperService::WORDS_RANDOM,
-                'enabled' => RandomCharactersHelper::isAvailable()
+                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_RANDOM)->isAvailable()
             ]
         ];
     }
