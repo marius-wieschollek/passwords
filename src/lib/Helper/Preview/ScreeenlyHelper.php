@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Preview;
 
+use GuzzleHttp\Exception\ClientException;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
@@ -31,20 +32,21 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
      *
      * @return string
      * @throws ApiException
-     * @throws \Exception
      */
     protected function getPreviewData(string $domain, string $view): string {
-        list($serviceUrl, $serviceParams) = $this->getApiParams($domain, $view);
+        [$serviceUrl, $serviceParams] = $this->getApiParams($domain, $view);
 
-        $request = $this->getHttpRequest($serviceUrl);
-        $request->setDefaultRetryTimeout(3);
-        $request->setAcceptResponseCodes([200,400]);
-        $request->setJsonData($serviceParams);
-        $data = $request->sendWithRetry();
+        try {
+            $client   = $this->httpClientService->newClient();
+            $response = $client->post($serviceUrl, ['json' => $serviceParams]);
+        } catch(ClientException $e) {
+            $this->logger->error("Screeenly Request Failed, HTTP {$e->getCode()}");
+            throw new ApiException('API Request Failed', 502);
+        }
 
+        $data = $response->getBody();
         if($data === null) {
-            $status = $request->getInfo('http_code');
-            $this->logger->error("Screeenly Request Failed, HTTP {$status}");
+            $this->logger->error("Screeenly Request Failed, HTTP {$response->getStatusCode()}");
             throw new ApiException('API Request Failed', 502);
         }
 

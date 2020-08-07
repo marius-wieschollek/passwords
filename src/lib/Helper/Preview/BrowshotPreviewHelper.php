@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Preview;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
@@ -115,15 +116,15 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
      * @throws ApiException
      */
     protected function sendApiRequest($url) {
-        $request  = parent::getHttpRequest($url);
-        $response = $request->send();
+        $client = $this->httpClientService->newClient();
 
-        if($response === null) {
-            $status = $request->getInfo('http_code');
-            $this->logger->error("Browshot Request Failed, HTTP {$status}");
+        try {
+            $response = $client->get($url);
+
+            return json_decode($response->getBody());
+        } catch(Exception $e) {
+            $this->logger->error("Browshot Request Failed, HTTP {$e->getCode()}");
             throw new ApiException('API Request Failed', 502);
         }
-
-        return json_decode($response);
     }
 }

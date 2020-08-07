@@ -91,20 +91,20 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
         try {
             $response    = $request->get($url);
             $data        = $response->getBody();
-            $url         = $response->getHeader('url');
+            $location    = $response->getHeader('url');
             $contentType = $response->getHeader('content-type');
             $isIcon      = substr($contentType, 0, 5) === 'image' && $this->imageHelper->supportsImage($data);
 
             return [
                 $data,
-                $url,
+                empty($location) ? $url:$location,
                 $contentType,
                 $isIcon
             ];
         } catch(\Exception $e) {
             return [
                 '',
-                '',
+                $url,
                 '',
                 false
             ];

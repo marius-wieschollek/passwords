@@ -10,6 +10,9 @@ namespace OCA\Passwords\Helper\Favicon;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Services\HelperService;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
+use Throwable;
 
 /**
  * Class GoogleFaviconHelper
@@ -50,16 +53,16 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
      * @return string
      * @throws FaviconRequestException
      * @throws UnexpectedResponseCodeException
-     * @throws \OCP\Files\NotFoundException
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \Throwable
+     * @throws NotFoundException
+     * @throws NotPermittedException
+     * @throws Throwable
      */
     protected function executeRequest(string $uri, array $options): string {
         $result = parent::executeRequest($uri, $options);
 
         if(md5($result) === self::DEFAULT_ICON_MD5) {
             return $this->getDefaultFavicon($this->domain)->getContent();
-        };
+        }
 
         return $result;
     }

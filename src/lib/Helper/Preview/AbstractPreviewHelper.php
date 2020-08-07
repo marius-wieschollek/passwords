@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Preview;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
@@ -15,6 +16,7 @@ use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCP\Files\SimpleFS\ISimpleFile;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class AbstractPreviewHelper
@@ -49,6 +51,11 @@ abstract class AbstractPreviewHelper {
     protected $fileCacheService;
 
     /**
+     * @var IClientService
+     */
+    protected $httpClientService;
+
+    /**
      * @var LoggingService
      */
     protected $logger;
@@ -59,6 +66,7 @@ abstract class AbstractPreviewHelper {
      * @param HelperService        $helperService
      * @param ConfigurationService $config
      * @param FileCacheService     $fileCacheService
+     * @param IClientService       $httpClientService
      * @param LoggingService       $loggingService
      *
      * @throws \OCP\AppFramework\QueryException
@@ -67,12 +75,14 @@ abstract class AbstractPreviewHelper {
         HelperService $helperService,
         ConfigurationService $config,
         FileCacheService $fileCacheService,
+        IClientService $httpClientService,
         LoggingService $loggingService
     ) {
-        $this->config           = $config;
-        $this->logger           = $loggingService;
-        $this->imageHelper      = $helperService->getImageHelper();
-        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
+        $this->config            = $config;
+        $this->logger            = $loggingService;
+        $this->httpClientService = $httpClientService;
+        $this->imageHelper       = $helperService->getImageHelper();
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
     }
 
     /**
@@ -147,28 +157,20 @@ abstract class AbstractPreviewHelper {
      * @throws ApiException
      */
     protected function executeHttpRequest(string $url): string {
-        $request = $this->getHttpRequest($url);
-        $data    = $request->sendWithRetry();
+        $client = $this->httpClientService->newClient();
+        try {
+            $response = $client->get($url, ['timeout' => 60]);
+        } catch(Exception $e) {
+            $this->logger->error("Invalid Preview Api Response, HTTP {$e->getCode()}");
+            throw new ApiException('API Request Failed', 502, $e);
+        }
 
-        $info = $request->getInfo();
-        if(substr($info['content_type'], 0, 5) != 'image' || $info['http_code'] > 400) {
-            $this->logger->error("Invalid Preview Api Response, HTTP {$info['http_code']}, {$info['content_type']}");
+        if(substr($response->getHeader('content-type'), 0, 5) != 'image') {
+            $this->logger->error("Invalid Preview Api Response, HTTP {$response->getStatusCode()}, {$response->getHeader('content-type')}");
             throw new ApiException('API Request Failed', 502);
         }
 
-        return $data;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return RequestHelper
-     */
-    protected function getHttpRequest(string $url): RequestHelper {
-        $request = new RequestHelper();
-        $request->setUrl($url);
-
-        return $request;
+        return $response->getBody();
     }
 
     /**

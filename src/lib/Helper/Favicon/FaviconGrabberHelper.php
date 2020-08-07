@@ -100,8 +100,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     }
 
     /**
-     * @param array  $json
-     * @param string $domain
+     * @param array $json
      *
      * @return string
      * @throws \Exception
