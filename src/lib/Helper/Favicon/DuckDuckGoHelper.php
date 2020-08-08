@@ -63,11 +63,11 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
         try {
             $response = $request->get($uri, $options);
         } catch(ClientException $e) {
-            if($e->getCode() === 404) {
+            if($e->getResponse()->getStatusCode() === 404) {
                 return $this->getDefaultFavicon($this->domain)->getContent();
             }
 
-            throw new UnexpectedResponseCodeException($e->getCode());
+            throw new UnexpectedResponseCodeException($e->getResponse()->getStatusCode(), $e);
         } catch(Exception $e) {
             throw new FaviconRequestException($e);
         }

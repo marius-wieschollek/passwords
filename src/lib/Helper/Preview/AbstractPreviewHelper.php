@@ -15,6 +15,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\QueryException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClientService;
 
@@ -61,7 +62,7 @@ abstract class AbstractPreviewHelper {
     protected $logger;
 
     /**
-     * BetterIdeaHelper constructor.
+     * AbstractPreviewHelper constructor.
      *
      * @param HelperService        $helperService
      * @param ConfigurationService $config
@@ -69,7 +70,7 @@ abstract class AbstractPreviewHelper {
      * @param IClientService       $httpClientService
      * @param LoggingService       $loggingService
      *
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     public function __construct(
         HelperService $helperService,

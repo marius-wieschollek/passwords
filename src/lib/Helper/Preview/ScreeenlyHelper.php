@@ -39,9 +39,10 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
         try {
             $client   = $this->httpClientService->newClient();
             $response = $client->post($serviceUrl, ['json' => $serviceParams]);
-        } catch(ClientException $e) {
-            $this->logger->error("Screeenly Request Failed, HTTP {$e->getCode()}");
-            throw new ApiException('API Request Failed', 502);
+        } catch(\Throwable $e) {
+            $code = $e instanceof ClientException ? "HTTP {$e->getResponse()->getStatusCode()}":$e->getMessage();
+            $this->logger->error("Screeenly Request Failed, HTTP {$code}");
+            throw new ApiException('API Request Failed', 502, $e);
         }
 
         $data = $response->getBody();
