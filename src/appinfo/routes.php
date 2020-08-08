@@ -2,6 +2,8 @@
 
 namespace OCA\Passwords\AppInfo;
 
+use OCP\IConfig;
+
 $routes = [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
     ['name' => 'cron#execute', 'url' => '/cron/{job}', 'verb' => 'GET'],
@@ -115,7 +117,7 @@ $resources = [
     'admin_caches' => ['url' => '/admin/caches'],
 ];
 
-if(\OC::$server->getConfig()->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+if(\OC::$server->query(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
     $resources['legacy_category_api'] = ['url' => '/api/0.1/categories'];
     $resources['legacy_password_api'] = ['url' => '/api/0.1/passwords'];
     $resources['legacy_version_api'] = ['url' => '/api/0.1/version'];
