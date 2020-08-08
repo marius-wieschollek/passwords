@@ -1,4 +1,11 @@
 ## [Unreleased]
+### Added
+ - Nextcloud 20 support
+### Changed
+ - Migrated favicon services to Nextcloud http client api
+ - Migrated preview services to Nextcloud http client api
+ - Migrated words services to Nextcloud http client api
+ - Migrated security check services to Nextcloud http client api
 
 ## 2020.8.0 - Feature release
 ### Added
