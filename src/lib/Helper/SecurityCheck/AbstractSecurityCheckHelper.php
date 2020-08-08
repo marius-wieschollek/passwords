@@ -11,6 +11,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class AbstractSecurityCheckHelper
@@ -48,6 +49,11 @@ abstract class AbstractSecurityCheckHelper {
     protected $logger;
 
     /**
+     * @var IClientService
+     */
+    protected $httpClientService;
+
+    /**
      * @var UserRulesSecurityCheck
      */
     protected $userRulesCheck;
@@ -58,15 +64,17 @@ abstract class AbstractSecurityCheckHelper {
     protected $hashStatusCache = [];
 
     /**
-     * BigPasswordDbHelper constructor.
+     * AbstractSecurityCheckHelper constructor.
      *
      * @param LoggingService         $logger
-     * @param UserRulesSecurityCheck $userRulesCheck
+     * @param IClientService         $httpClientService
      * @param FileCacheService       $fileCacheService
+     * @param UserRulesSecurityCheck $userRulesCheck
      * @param ConfigurationService   $configurationService
      */
     public function __construct(
         LoggingService $logger,
+        IClientService $httpClientService,
         FileCacheService $fileCacheService,
         UserRulesSecurityCheck $userRulesCheck,
         ConfigurationService $configurationService
@@ -75,6 +83,7 @@ abstract class AbstractSecurityCheckHelper {
         $this->config           = $configurationService;
         $this->logger           = $logger;
         $this->userRulesCheck   = $userRulesCheck;
+        $this->httpClientService = $httpClientService;
     }
 
     /**

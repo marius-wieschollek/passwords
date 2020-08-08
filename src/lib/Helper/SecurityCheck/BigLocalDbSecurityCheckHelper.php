@@ -8,7 +8,7 @@
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
-use OCA\Passwords\Helper\Http\FileDownloadHelper;
+use OCA\Passwords\Exception\SecurityCheck\PasswordDatabaseDownloadException;
 use Throwable;
 use ZipArchive;
 
@@ -36,6 +36,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             $info = $this->fileCacheService->getCacheInfo();
             if($info['files'] < 4096) return true;
         } catch(Exception $e) {
+            $this->logger->logException($e);
         }
 
         return parent::dbUpdateRequired();
@@ -56,6 +57,9 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             $this->highMemoryHashAlgorithm($txtFile);
         }
 
+        gc_collect_cycles();
+        gc_mem_caches();
+
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
         $this->config->setAppValue(self::CONFIG_DB_VERSION, static::PASSWORD_VERSION);
         $this->logPasswordUpdate();
@@ -64,19 +68,18 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     /**
      * @param string $txtFile
      *
-     * @throws Exception
      * @throws Throwable
      */
     protected function downloadPasswordsFile(string $txtFile): void {
         $zipFile = $this->config->getTempDir().uniqid().'.zip';
 
-        $request = new FileDownloadHelper();
-        $success = $request
-            ->setOutputFile($zipFile)
-            ->setUrl(self::ARCHIVE_URL)
-            ->sendWithRetry();
-        if(!$success) throw new Exception('Failed to download common passwords zip file: HTTP'.$request->getInfo('http_code'));
-        unset($request);
+        try {
+            $client = $this->httpClientService->newClient();
+            $client->get(self::ARCHIVE_URL, ['sink' => $zipFile, 'timeout' => 0]);
+            unset($client);
+        } catch(Exception $e) {
+            throw new PasswordDatabaseDownloadException($e);
+        }
 
         $this->unpackPasswordsFile($zipFile, $txtFile);
     }
@@ -107,7 +110,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
-     * This way to create the hashes takes only 116MB of ram.
+     * This way to create the hashes takes only 120MB of ram.
      * But it also needs 15x the time.
      *
      * @param string $txtFile
@@ -119,7 +122,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             $hashes = [];
             $file   = fopen($txtFile, 'r');
             while(($line = fgets($file)) !== false) {
-                list($first, $second) = explode("\t", "$line\t000000");
+                [$first, $second] = explode("\t", "$line\t000000");
 
                 $hash = sha1($first);
                 if($hash[0] == $hexKey) {
@@ -137,12 +140,15 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             }
             fclose($file);
             $this->storeHashes($hashes);
+            unset($hashes);
+            gc_collect_cycles();
+            gc_mem_caches();
         }
         unlink($txtFile);
     }
 
     /**
-     * This way to create the hashes takes up to 1.650GB of ram.
+     * This way to create the hashes takes up to 1800MB of ram.
      * It is also quite fast.
      *
      * @param string $txtFile
@@ -152,7 +158,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
         $hashes = [];
         $file   = fopen($txtFile, 'r');
         while(($line = fgets($file)) !== false) {
-            list($first, $second) = explode("\t", "$line\t000000");
+            [$first, $second] = explode("\t", "$line\t000000");
 
             $hash = sha1(trim($first));
             $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);

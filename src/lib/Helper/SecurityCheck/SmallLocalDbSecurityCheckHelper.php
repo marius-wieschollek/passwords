@@ -8,7 +8,7 @@
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
-use OCA\Passwords\Helper\Http\FileDownloadHelper;
+use OCA\Passwords\Exception\SecurityCheck\PasswordDatabaseDownloadException;
 
 /**
  * Class SmallLocalDbSecurityCheckHelper
@@ -28,14 +28,12 @@ class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckHelper {
      * @throws Exception
      */
     protected function downloadPasswordsFile(string $txtFile): void {
-        $request = new FileDownloadHelper();
-        $success = $request
-            ->setOutputFile($txtFile)
-            ->setUrl(self::ARCHIVE_URL)
-            ->sendWithRetry();
-        if(!$success) {
-            throw new Exception('Failed to download common passwords text file: HTTP '.$request->getInfo('http_code'));
+        try {
+            $client = $this->httpClientService->newClient();
+            $client->get(self::ARCHIVE_URL, ['sink' => $txtFile, 'timeout' => 0]);
+            unset($client);
+        } catch(Exception $e) {
+            throw new PasswordDatabaseDownloadException($e);
         }
-        unset($request);
     }
 }

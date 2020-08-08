@@ -7,7 +7,9 @@
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
+use Exception;
+use GuzzleHttp\Exception\ClientException;
+use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
 
 /**
  * Class HaveIBeenPwnedHelper
@@ -50,7 +52,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      * @param string $hash
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     protected function isHashInHibpDb(string $hash): bool {
         $range = substr($hash, 0, 5);
@@ -61,15 +63,8 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
             return false;
         }
 
-        $request  = new RequestHelper();
-        $response = $request->setUrl(self::SERVICE_URL.$range)
-                            ->setCookieJar($this->config->getTempDir().self::COOKIE_FILE)
-                            ->setUserAgent('Passwords App for Nextcloud')
-                            ->sendWithRetry();
-
-        if(!$response) throw new \Exception('HIBP API returned invalid response. Status: '.$request->getInfo('http_code'));
-
-        $hashes = $this->processResponse($response, $range);
+        $responseData = $this->executeApiRequest($range);
+        $hashes       = $this->processResponse($responseData, $range);
         $this->addHashToLocalDb($hash, $hashes);
         $this->checkedRanges[] = $range;
 
@@ -96,7 +91,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         $response = explode("\n", $response);
         $hashes   = [];
         foreach($response as $line) {
-            list($subhash, ) = explode(':', $line);
+            [$subhash,] = explode(':', $line);
 
             $currentHash = $range.strtolower($subhash);
             $hashes[]    = $currentHash;
@@ -105,5 +100,33 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         }
 
         return $hashes;
+    }
+
+    /**
+     * Fetch data from the HIBP api
+     *
+     * @param string $range
+     *
+     * @return resource|string
+     * @throws Exception
+     */
+    protected function executeApiRequest(string $range) {
+        try {
+            $client   = $this->httpClientService->newClient();
+            $response = $client->get(self::SERVICE_URL.$range, ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
+        } catch(ClientException $e) {
+            if($e->getResponse()->getStatusCode() === 404) {
+                return '';
+            }
+
+            throw new InvalidHibpApiResponseException(null, $e);
+        } catch(Exception $e) {
+            throw new InvalidHibpApiResponseException(null, $e);
+        }
+
+        $responseData = $response->getBody();
+        if(!$responseData) throw new InvalidHibpApiResponseException($response);
+
+        return $responseData;
     }
 }
