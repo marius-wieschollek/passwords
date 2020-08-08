@@ -7,8 +7,9 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
+use Exception;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class DeferredActivationService
@@ -25,14 +26,9 @@ class DeferredActivationService {
     protected $config;
 
     /**
-     * @var ServerSettingsHelper
+     * @var LoggingService
      */
-    protected $serverSettings;
-
-    /**
-     * @var RequestHelper
-     */
-    protected $httpRequest;
+    protected $logger;
 
     /**
      * @var FileCacheService
@@ -40,18 +36,36 @@ class DeferredActivationService {
     protected $fileCache;
 
     /**
+     * @var ServerSettingsHelper
+     */
+    protected $serverSettings;
+
+    /**
+     * @var IClientService
+     */
+    protected $httpClientService;
+
+    /**
      * DeferredActivationService constructor.
      *
-     * @param ConfigurationService $config
-     * @param ServerSettingsHelper $serverSettings
-     * @param RequestHelper        $httpRequest
+     * @param LoggingService       $logger
      * @param FileCacheService     $fileCache
+     * @param ConfigurationService $config
+     * @param IClientService       $httpClientService
+     * @param ServerSettingsHelper $serverSettings
      */
-    public function __construct(ConfigurationService $config, ServerSettingsHelper $serverSettings, RequestHelper $httpRequest, FileCacheService $fileCache) {
-        $this->config         = $config;
-        $this->serverSettings = $serverSettings;
-        $this->httpRequest    = $httpRequest;
-        $this->fileCache      = $fileCache->getCacheService();
+    public function __construct(
+        LoggingService $logger,
+        FileCacheService $fileCache,
+        ConfigurationService $config,
+        IClientService $httpClientService,
+        ServerSettingsHelper $serverSettings
+    ) {
+        $this->logger            = $logger;
+        $this->config            = $config;
+        $this->serverSettings    = $serverSettings;
+        $this->httpClientService = $httpClientService;
+        $this->fileCache         = $fileCache->getCacheService();
     }
 
     /**
@@ -113,8 +127,12 @@ class DeferredActivationService {
         $data = $this->getFeaturesFromCache();
         if($data !== null) return json_decode($data, true);
 
-        $data = $this->getFeaturesFromRemote();
-        if($data !== null) return json_decode($data, true);
+        try {
+            $data = $this->getFeaturesFromRemote();
+            if($data !== null) return json_decode($data, true);
+        } catch(Exception $e) {
+            $this->logger->logException($e);
+        }
 
         return null;
     }
@@ -182,11 +200,13 @@ class DeferredActivationService {
      * Get current json file from remote server
      *
      * @return null|string
+     * @throws \Exception
      */
     protected function getFeaturesFromRemote(): ?string {
-        $url = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';
-        $this->httpRequest->setUrl($url);
-        $data = $this->httpRequest->send();
+        $url      = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';
+        $client   = $this->httpClientService->newClient();
+        $response = $client->get($url);
+        $data     = $response->getBody();
 
         if($data !== null) $this->fileCache->putFile('deferred-activation.json', $data);
 

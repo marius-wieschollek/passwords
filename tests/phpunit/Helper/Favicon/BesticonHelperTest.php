@@ -48,11 +48,6 @@ class BesticonHelperTest extends TestCase {
     private $adminService;
 
     /**
-     * @var MockObject|HelperService
-     */
-    private $helperService;
-
-    /**
      * @var MockObject|DateTimeHelper
      */
     private $dateTimeHelper;
@@ -87,7 +82,7 @@ class BesticonHelperTest extends TestCase {
      */
     protected function setUp(): void {
         $this->imageHelper           = $this->createMock(ImagickHelper::class);
-        $this->helperService         = $this->createMock(HelperService::class);
+        $helperService               = $this->createMock(HelperService::class);
         $this->httpClientService     = $this->createMock(IClientService::class);
         $this->dateTimeHelper        = $this->createMock(DateTimeHelper::class);
         $this->adminService          = $this->createMock(AdminUserHelper::class);
@@ -95,12 +90,12 @@ class BesticonHelperTest extends TestCase {
         $this->notificationService   = $this->createMock(NotificationService::class);
         $this->fallbackIconGenerator = $this->createMock(FallbackIconGenerator::class);
         $this->configurationService  = $this->createMock(ConfigurationService::class);
-        $this->helperService->method('getImageHelper')->willReturn($this->imageHelper);
+        $helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
         $this->besticonHelper = new BestIconHelper(
             $this->dateTimeHelper,
             $this->configurationService,
-            $this->helperService,
+            $helperService,
             $this->adminService,
             $this->httpClientService,
             $this->fileCacheService,

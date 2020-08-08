@@ -8,9 +8,11 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
 use OCP\Files\SimpleFS\ISimpleFile;
+use OCP\Http\Client\IClient;
+use OCP\Http\Client\IClientService;
+use OCP\Http\Client\IResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -23,9 +25,9 @@ use ReflectionException;
 class DeferredActivationServiceTest extends TestCase {
 
     /**
-     * @var MockObject|RequestHelper
+     * @var MockObject|LoggingService
      */
-    protected $requestHelper;
+    protected $loggingService;
 
     /**
      * @var MockObject|ServerSettingsHelper
@@ -36,6 +38,11 @@ class DeferredActivationServiceTest extends TestCase {
      * @var MockObject|FileCacheService
      */
     protected $fileCacheService;
+
+    /**
+     * @var MockObject|IClientService
+     */
+    protected $httpClientService;
 
     /**
      * @var MockObject|ConfigurationService
@@ -51,12 +58,19 @@ class DeferredActivationServiceTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $this->requestHelper        = $this->createMock(RequestHelper::class);
-        $this->settingsHelper       = $this->createMock(ServerSettingsHelper::class);
+        $this->loggingService       = $this->createMock(LoggingService::class);
+        $this->httpClientService    = $this->createMock(IClientService::class);
         $this->fileCacheService     = $this->createMock(FileCacheService::class);
+        $this->settingsHelper       = $this->createMock(ServerSettingsHelper::class);
         $this->configurationService = $this->createMock(ConfigurationService::class);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
-        $this->deferredActivationService = new DeferredActivationService($this->configurationService, $this->settingsHelper, $this->requestHelper, $this->fileCacheService);
+        $this->deferredActivationService = new DeferredActivationService(
+            $this->loggingService,
+            $this->fileCacheService,
+            $this->configurationService,
+            $this->httpClientService,
+            $this->settingsHelper
+        );
     }
 
     /**
@@ -113,8 +127,17 @@ class DeferredActivationServiceTest extends TestCase {
             ]
         );
 
-        $this->requestHelper->expects($this->once())->method('setUrl')->with('https://example.com/_files/deferred-activation.json');
-        $this->requestHelper->expects($this->once())->method('send');
+        /** @var IResponse|MockObject $response */
+        $response = $this->createMock(IResponse::class);
+        $response->method('getBody')->willReturn('{}');
+        $response->method('getStatusCode')->willReturn(200);
+
+        /** @var IClient|MockObject $client */
+        $client = $this->createMock(IClient::class);
+        $client->method('get')->willReturn($response);
+
+        $this->httpClientService->method('newClient')->willReturn($client);
+        $client->expects($this->once())->method('get')->with('https://example.com/_files/deferred-activation.json');
 
         $this->fileCacheService->method('getFile')->willReturn(null);
         $this->settingsHelper->method('get')->with('handbook.url')->willReturn('https://example.com/');
@@ -140,8 +163,18 @@ class DeferredActivationServiceTest extends TestCase {
 
         $fakeFile->expects($this->once())->method('getMTime');
         $this->fileCacheService->expects($this->once())->method('getFile')->with('deferred-activation.json');
-        $this->requestHelper->expects($this->once())->method('setUrl')->with('https://example.com/_files/deferred-activation.json');
-        $this->requestHelper->expects($this->once())->method('send');
+
+        /** @var IResponse|MockObject $response */
+        $response = $this->createMock(IResponse::class);
+        $response->method('getBody')->willReturn('{}');
+        $response->method('getStatusCode')->willReturn(200);
+
+        /** @var IClient|MockObject $client */
+        $client = $this->createMock(IClient::class);
+        $client->method('get')->willReturn($response);
+
+        $this->httpClientService->method('newClient')->willReturn($client);
+        $client->expects($this->once())->method('get')->with('https://example.com/_files/deferred-activation.json');
 
         $this->deferredActivationService->check('test');
     }

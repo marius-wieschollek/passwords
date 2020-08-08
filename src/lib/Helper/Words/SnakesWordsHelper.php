@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Words;
 
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCP\Http\Client\IClientService;
 
 /**

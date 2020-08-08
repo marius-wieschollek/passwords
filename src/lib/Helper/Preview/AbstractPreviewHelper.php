@@ -9,7 +9,6 @@ namespace OCA\Passwords\Helper\Preview;
 
 use Exception;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Http\RequestHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
