@@ -52,11 +52,14 @@ module.exports = (env) => {
         if(!!(env && env.compress)) {
             plugins.push(
                 new CopyWebpackPlugin(
-                    [
-                        {from: `${__dirname}/src/l10n/*.js`, to: `${__dirname}/`, transform},
-                        {from: `${__dirname}/src/l10n/*.json`, to: `${__dirname}/`, transform: transformJson},
-                        {from: `${__dirname}/src/l10n/*/*.json`, to: `${__dirname}/`, transform: transformJson}
-                    ]
+                    {
+                        patterns:
+                            [
+                                {from: `${__dirname}/src/l10n/*.js`, to: `${__dirname}/`, transform},
+                                {from: `${__dirname}/src/l10n/*.json`, to: `${__dirname}/`, transform: transformJson},
+                                {from: `${__dirname}/src/l10n/*/*.json`, to: `${__dirname}/`, transform: transformJson}
+                            ]
+                    }
                 ));
         }
     }
@@ -97,25 +100,25 @@ module.exports = (env) => {
                     use : [
                         {loader: 'vue-style-loader'},
                         {
-                            loader: MiniCssExtractPlugin.loader,
+                            loader : MiniCssExtractPlugin.loader,
                             options: {
                                 esModule: true
                             }
                         },
                         {
-                            loader: 'css-loader',
+                            loader : 'css-loader',
                             options: {
                                 esModule: true,
-                                url: (url) => {
+                                url     : (url) => {
                                     return url.indexOf('/apps/passwords/') === -1;
                                 }
-                            },
+                            }
                         },
                         {
                             loader : 'sass-loader',
                             options: {
                                 sassOptions: {
-                                    sourceMap: !production,
+                                    sourceMap  : !production,
                                     outputStyle: production ? 'compressed':null
                                 }
                             }
