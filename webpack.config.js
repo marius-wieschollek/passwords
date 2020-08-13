@@ -29,11 +29,13 @@ module.exports = (env) => {
                 }
             ),
             new CopyWebpackPlugin(
-                [
-                    {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`, transform},
-                    {from: `${__dirname}/src/js/Helper/https-debug.js`, to: `${__dirname}/src/js/Static/https-debug.js`, transform},
-                    {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`, transform}
-                ]
+                {
+                    patterns: [
+                        {from: `${__dirname}/src/js/Helper/utility.js`, to: `${__dirname}/src/js/Static/utility.js`, transform},
+                        {from: `${__dirname}/src/js/Helper/https-debug.js`, to: `${__dirname}/src/js/Static/https-debug.js`, transform},
+                        {from: `${__dirname}/src/js/Helper/compatibility.js`, to: `${__dirname}/src/js/Static/compatibility.js`, transform}
+                    ]
+                }
             ),
             new VueLoaderPlugin(),
             new MiniCssExtractPlugin({filename: 'css/[name].css'}),
@@ -95,16 +97,26 @@ module.exports = (env) => {
                     use : [
                         {loader: 'vue-style-loader'},
                         {
-                            loader: MiniCssExtractPlugin.loader
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                esModule: true
+                            }
                         },
                         {
-                            loader: 'css-loader'
+                            loader: 'css-loader',
+                            options: {
+                                esModule: true,
+                                url: (url) => {
+                                    return url.indexOf('/apps/passwords/') === -1;
+                                }
+                            },
                         },
                         {
                             loader : 'sass-loader',
                             options: {
                                 sassOptions: {
-                                    outputStyle: 'compressed'
+                                    sourceMap: !production,
+                                    outputStyle: production ? 'compressed':null
                                 }
                             }
                         },

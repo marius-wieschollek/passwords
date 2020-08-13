@@ -193,12 +193,22 @@
             }
         }
 
+        .close,
         .next,
         .prev {
             font-family : var(--pw-icon-font-face);
+            font-size   : 2rem;
             border      : none;
             background  : none;
             display     : block;
+            color       : var(--color-primary-text);
+        }
+
+        .next,
+        .prev {
+            font-size : 4rem;
+            width     : auto;
+            height    : auto;
         }
 
         .open {
