@@ -52,7 +52,7 @@ class PageresCliHelper extends AbstractPreviewHelper {
             $output = [];
             @exec($cmd, $output, $returnCode);
 
-            if($returnCode == 0 && is_file($tempPath)) {
+            if($returnCode === 0 && is_file($tempPath)) {
                 $content = file_get_contents($tempPath);
                 unlink($tempPath);
 

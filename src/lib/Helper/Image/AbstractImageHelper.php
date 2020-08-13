@@ -61,7 +61,7 @@ abstract class AbstractImageHelper {
             'cropNeeded' => false
         ];
 
-        if($minHeight != 0 && $size['height'] < $minHeight) {
+        if($minHeight !== 0 && $size['height'] < $minHeight) {
             $size['width']  = $minHeight * $widthHeightRatio;
             $size['height'] = $minHeight;
 
@@ -71,7 +71,7 @@ abstract class AbstractImageHelper {
                 $size['cropHeight'] = $size['height'];
                 $size['cropNeeded'] = true;
             }
-        } else if($maxHeight != 0 && $size['height'] > $maxHeight) {
+        } else if($maxHeight !== 0 && $size['height'] > $maxHeight) {
             $size['width'] = $minHeight * $widthHeightRatio;
 
             if($maxWidth !== 0 && $size['width'] > $maxWidth) {
@@ -89,7 +89,7 @@ abstract class AbstractImageHelper {
             }
         }
 
-        if($size['width'] == 0 && $size['height'] == 0) {
+        if($size['width'] === 0 && $size['height'] === 0) {
             $size['width']  = $width;
             $size['height'] = $height;
         }
@@ -118,7 +118,7 @@ abstract class AbstractImageHelper {
         $mime = $this->getImageMime($blob);
 
         list($type, $format) = explode('/', $mime);
-        if($type != 'image') return false;
+        if($type !== 'image') return false;
 
         return $this->supportsFormat($format);
     }

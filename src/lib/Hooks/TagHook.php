@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Hooks;
 
+use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
@@ -14,6 +15,7 @@ use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class TagHook
@@ -59,15 +61,15 @@ class TagHook {
      * @param TagRevision $newRevision
      *
      * @throws DoesNotExistException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws MultipleObjectsReturnedException
      */
     public function preSetRevision(Tag $tag, TagRevision $newRevision): void {
         if($tag->getRevision() === null) return;
         /** @var TagRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($tag->getRevision());
 
-        if($oldRevision->getHidden() != $newRevision->getHidden()) {
+        if($oldRevision->getHidden() !== $newRevision->getHidden()) {
             $relations = $this->relationService->findByTag($tag->getUuid());
 
             foreach($relations as $relation) {
@@ -82,7 +84,7 @@ class TagHook {
     /**
      * @param Tag $tag
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function preDelete(Tag $tag): void {
         $relations = $this->relationService->findByTag($tag->getUuid());
@@ -95,7 +97,7 @@ class TagHook {
     /**
      * @param Tag $tag
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postDelete(Tag $tag): void {
         /** @var TagRevision[] $revisions */
@@ -110,7 +112,7 @@ class TagHook {
      * @param Tag $originalTag
      * @param Tag $clonedTag
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postClone(Tag $originalTag, Tag $clonedTag): void {
         /** @var TagRevision[] $revisions */
@@ -121,7 +123,7 @@ class TagHook {
             /** @var TagRevision $revisionClone */
             $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedTag->getUuid()]);
             $this->revisionService->save($revisionClone);
-            if($revision->getUuid() == $originalTag->getRevision()) {
+            if($revision->getUuid() === $originalTag->getRevision()) {
                 $clonedTag->setRevision($revisionClone->getUuid());
                 $currentClonedRevision = $revisionClone;
             }

@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Helper\Token;
 
 use Exception;
-use OC;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OCA\Passwords\Services\ConfigurationService;
@@ -178,7 +177,7 @@ class ApiTokenHelper {
             try {
                 $webToken = $this->tokenProvider->getTokenById($tokenId);
 
-                if($webToken->getId() == $tokenId && $webToken->getUID() === $this->userId) {
+                if($webToken->getId() === $tokenId && $webToken->getUID() === $this->userId) {
                     return [$token, $webToken->getLoginName()];
                 } else {
                     $this->destroyToken($tokenId);

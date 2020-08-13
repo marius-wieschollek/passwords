@@ -241,7 +241,7 @@ class LegacyPasswordApiController extends ApiController {
             $revision->getFolder(),
             $edited,
             $revision->isHidden(),
-            $deleted == true,
+            (bool) $deleted === true,
             $revision->isFavorite()
         );
         $this->passwordRevisionService->save($newRevision);

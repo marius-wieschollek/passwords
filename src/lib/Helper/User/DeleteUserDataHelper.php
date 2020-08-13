@@ -132,7 +132,7 @@ class DeleteUserDataHelper {
      * @throws \Exception
      */
     public function deleteUserData(string $userId): void {
-        if($this->userId !== null && $this->userId != $userId) throw new \Exception('Invalid user id '.$userId);
+        if($this->userId !== null && $this->userId !== $userId) throw new \Exception('Invalid user id '.$userId);
 
         $this->closeSessions($userId);
         $this->deleteObjects($this->tagService, $userId);

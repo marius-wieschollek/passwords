@@ -145,7 +145,7 @@ class ValidationService {
      * @return bool
      */
     public function isValidUuid(string $uuid): bool {
-        return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) != false;
+        return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) === 1;
     }
 
     /**

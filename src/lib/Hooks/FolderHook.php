@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Hooks;
 
+use Exception;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
@@ -14,6 +15,8 @@ use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class FolderHook
@@ -66,9 +69,9 @@ class FolderHook {
      * @param Folder         $folder
      * @param FolderRevision $revision
      *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function preSetRevision(Folder $folder, FolderRevision $revision): void {
         if($folder->getRevision() === null) return;
@@ -90,7 +93,7 @@ class FolderHook {
     /**
      * @param Folder $folder
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function preDelete(Folder $folder): void {
         $folders = $this->folderService->findByParent($folder->getUuid());
@@ -107,7 +110,7 @@ class FolderHook {
     /**
      * @param Folder $folder
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postDelete(Folder $folder): void {
         /** @var FolderRevision[] $revisions */
@@ -122,7 +125,7 @@ class FolderHook {
      * @param Folder $originalFolder
      * @param Folder $clonedFolder
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postClone(Folder $originalFolder, Folder $clonedFolder): void {
         /** @var FolderRevision[] $revisions */
@@ -132,7 +135,7 @@ class FolderHook {
             /** @var FolderRevision $clone */
             $clone = $this->revisionService->clone($revision, ['folder' => $clonedFolder->getUuid()]);
             $this->revisionService->save($clone);
-            if($revision->getUuid() == $originalFolder->getRevision()) {
+            if($revision->getUuid() === $originalFolder->getRevision()) {
                 $clonedFolder->setRevision($clone->getUuid());
             }
         }
@@ -143,9 +146,9 @@ class FolderHook {
      *
      * @param bool   $suspend
      *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function suspendSubFolders(string $folderId, bool $suspend = true): void {
         $folders = $this->folderService->findByParent($folderId);
@@ -164,9 +167,9 @@ class FolderHook {
      * @param string $folderId
      * @param bool   $suspend
      *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
      */
     protected function suspendSubPasswords(string $folderId, bool $suspend = true): void {
         $passwords = $this->passwordService->findByFolder($folderId);
@@ -183,9 +186,9 @@ class FolderHook {
     /**
      * @param string $folderUuid
      *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function hideSubFolders(string $folderUuid): void {
         $folders = $this->folderService->findByParent($folderUuid);
@@ -204,9 +207,9 @@ class FolderHook {
     /**
      * @param string $folderUuid
      *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function hideSubPasswords(string $folderUuid): void {
         $passwords = $this->passwordService->findByFolder($folderUuid);
@@ -227,9 +230,9 @@ class FolderHook {
      * @param Folder         $folder
      * @param FolderRevision $revision
      *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function checkSuspendedFlag(Folder $folder, FolderRevision $revision): void {
         if($folder->isSuspended()) {

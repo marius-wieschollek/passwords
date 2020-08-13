@@ -53,7 +53,6 @@ abstract class AbstractModelRepair {
      * @throws \Exception
      */
     public function run(IOutput $output): void {
-        /** @var ModelInterface[] $allModels */
         $allModels = $this->modelService->findAll();
 
         $fixed = 0;
@@ -93,7 +92,7 @@ abstract class AbstractModelRepair {
             try {
                 $revision = $this->revisionService->findByUuid($model->getRevision());
 
-                if($revision->getModel() != $model->getUuid()) {
+                if($revision->getModel() !== $model->getUuid()) {
                     $model->setRevision($latestRevision->getUuid());
                     $fixed = true;
                 }

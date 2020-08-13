@@ -170,7 +170,7 @@ class MoveUserDataHelper {
      */
     public function moveUserData(string $sourceUser, string $targetUser): void {
         if($targetUser === $sourceUser) throw new \Exception('Target and source user match');
-        if($this->userId !== null && $this->userId != $sourceUser) throw new \Exception('Invalid user id '.$sourceUser);
+        if($this->userId !== null && $this->userId !== $sourceUser) throw new \Exception('Invalid user id '.$sourceUser);
 
         $this->closeSessions($sourceUser);
         $this->moveObjects($this->tagService, $sourceUser, $targetUser);

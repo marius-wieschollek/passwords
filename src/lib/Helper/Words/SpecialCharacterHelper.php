@@ -164,7 +164,7 @@ class SpecialCharacterHelper {
             $position  = random_int(0, $length);
             $character = $additions[ $position ];
 
-            if($i % 2 == 0) {
+            if($i % 2 === 0) {
                 $result = $character.$result;
             } else {
                 $result .= $character;

@@ -157,7 +157,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-backup-interval"><?php p($l->t('Backup Interval')); ?></label>
             <select id="passwords-backup-interval" name="passwords-backup-interval" data-setting="backup.interval">
                 <?php foreach($_['backupInterval']['options'] as $value => $label): ?>
-                    <option value="<?php p($value); ?>" <?php p($_['backupInterval']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                    <option value="<?php p($value); ?>" <?php p($_['backupInterval']['current'] === $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
             <label for="passwords-backup-files"><?php p($l->t('Amount of backups to keep')); ?></label>
@@ -194,7 +194,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-purge-timeout"><?php p($l->t('Remove deleted objects from database')); ?></label>
             <select id="passwords-purge-timeout" name="passwords-purge-timeout" data-setting="entity.purge.timeout">
                 <?php foreach($_['purgeTimeout']['options'] as $value => $label): ?>
-                    <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] == $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                    <option value="<?php p($value); ?>" <?php p($_['purgeTimeout']['current'] === $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
                 <?php endforeach; ?>
             </select>
             <label for="passwords-server-survey"><?php p($l->t('Server survey participation')); ?></label>

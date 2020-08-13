@@ -69,7 +69,7 @@ class ApiSessionMiddleware extends Middleware {
 
         $this->sessionService->load();
         $id = $this->sessionService->getId();
-        if($id != $this->session->get(SessionService::API_SESSION_KEY)) {
+        if($id !== $this->session->get(SessionService::API_SESSION_KEY)) {
             $this->session->set(SessionService::API_SESSION_KEY, $id);
         }
 
@@ -104,7 +104,7 @@ class ApiSessionMiddleware extends Middleware {
     protected function isApiRequest(Controller $controller): bool {
         $class = get_class($controller);
 
-        return substr($class, 0, 28) == 'OCA\Passwords\Controller\Api' && strpos($class, '\\Legacy\\') === false;
+        return substr($class, 0, 28) === 'OCA\Passwords\Controller\Api' && strpos($class, '\\Legacy\\') === false;
     }
 
     /**

@@ -167,11 +167,11 @@ class ImagickHelper extends AbstractImageHelper {
     public function supportsFormat(string $format): bool {
         $image = $this->getNewImageObject();
 
-        if($format == 'vnd.microsoft.icon') {
+        if($format === 'vnd.microsoft.icon') {
             $format = 'icon';
-        } else if($format == 'x-bmp') {
+        } else if($format === 'x-bmp') {
             $format = 'bmp';
-        } else if($format == 'svg+xml') $format = 'svg';
+        } else if($format === 'svg+xml') $format = 'svg';
         $format = strtoupper($format);
 
         return !empty($image->queryFormats($format));

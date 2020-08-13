@@ -62,7 +62,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
             $result = [];
             @exec("shuf -n {$length} {$file}", $result, $code);
 
-            if($code == 0 && $this->isWordsArrayValid($result)) {
+            if($code === 0 && $this->isWordsArrayValid($result)) {
                 return [
                     'password' => $this->wordsArrayToPassword($result, $strength, $addNumbers, $addSpecial),
                     'words'    => $result

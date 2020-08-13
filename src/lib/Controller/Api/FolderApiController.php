@@ -191,7 +191,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
-        if($id === $this->modelService::BASE_FOLDER_UUID || $revision == $this->revisionService::BASE_REVISION_UUID) {
+        if($id === $this->modelService::BASE_FOLDER_UUID || $revision === $this->revisionService::BASE_REVISION_UUID) {
             throw new ApiException('Can not edit base folder', 422);
         }
 

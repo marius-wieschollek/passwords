@@ -181,9 +181,9 @@ class ServerReportHelper {
             $report = 0;
         } else if($status === true) {
             $report = 1;
-        } else if($status == false) {
+        } else if(boolval($status) === false) {
             $report = 2;
-        } else if($status == true) {
+        } else if(boolval($status) === true) {
             $report = 3;
         }
 

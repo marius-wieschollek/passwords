@@ -7,10 +7,15 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
+use OCP\AppFramework\QueryException;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
+use Throwable;
 
 /**
  * Class WebsitePreviewService
@@ -55,7 +60,7 @@ class WebsitePreviewService {
      * @param ValidationService $validationService
      * @param LoggingService    $logger
      *
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     public function __construct(
         HelperService $helperService,
@@ -89,7 +94,7 @@ class WebsitePreviewService {
         int $maxWidth = 640,
         int $maxHeight = 0
     ): ISimpleFile {
-        list($domain, $minWidth, $minHeight, $maxWidth, $maxHeight)
+        [$domain, $minWidth, $minHeight, $maxWidth, $maxHeight]
             = $this->validateInputData($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
         $fileName = $this->previewService->getPreviewFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
@@ -99,7 +104,7 @@ class WebsitePreviewService {
 
         try {
             return $this->getWebsitePreview($domain, $view, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
 
             return $this->getDefaultPreview($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
@@ -116,7 +121,7 @@ class WebsitePreviewService {
      * @param int    $maxHeight
      *
      * @return null|ISimpleFile
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getWebsitePreview(string $domain, string $view, string $fileName, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ?ISimpleFile {
         if(!$this->validationService->isValidDomain($domain)) {
@@ -143,7 +148,7 @@ class WebsitePreviewService {
             $websitePreview = $this->previewService->getDefaultPreview($domain);
 
             return $this->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
 
             throw new ApiException('Internal Website Preview API Error', 502, $e);
@@ -159,8 +164,8 @@ class WebsitePreviewService {
      * @param int         $maxHeight
      *
      * @return ISimpleFile|null
-     * @throws \OCP\Files\NotFoundException
-     * @throws \OCP\Files\NotPermittedException
+     * @throws NotFoundException
+     * @throws NotPermittedException
      */
     protected function resizePreview(
         ISimpleFile $preview,
@@ -221,9 +226,9 @@ class WebsitePreviewService {
      */
     protected function validateMaximum(int $minimum, int $maximum): int {
         $maximum = round($maximum, -1);
-        if($maximum < $minimum && $maximum != 0) return $minimum;
+        if($maximum < $minimum && $maximum !== 0) return $minimum;
         if($maximum > 1280) return 1280;
-        if($maximum < 240 && $maximum != 0) return 240;
+        if($maximum < 240 && $maximum !== 0) return 240;
 
         return $maximum;
     }

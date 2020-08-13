@@ -140,7 +140,7 @@ abstract class AbstractSecurityCheckHelper {
     function dbUpdateRequired(): bool {
         $installedType = $this->config->getAppValue(self::CONFIG_DB_TYPE);
 
-        return $installedType != static::PASSWORD_DB;
+        return $installedType !== static::PASSWORD_DB;
     }
 
     /**

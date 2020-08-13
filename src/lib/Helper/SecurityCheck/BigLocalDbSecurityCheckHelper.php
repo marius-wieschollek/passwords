@@ -125,14 +125,14 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
                 [$first, $second] = explode("\t", "$line\t000000");
 
                 $hash = sha1($first);
-                if($hash[0] == $hexKey) {
+                if($hash[0] === $hexKey) {
                     $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
                     if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
                     $hashes[ $key ][ $hash ] = &$null;
                 }
 
                 $hash = sha1($second);
-                if($hash[0] == $hexKey) {
+                if($hash[0] === $hexKey) {
                     $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
                     if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
                     $hashes[ $key ][ $hash ] = &$null;

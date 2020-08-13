@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Hooks;
 
+use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
@@ -18,6 +19,8 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\QueryException;
 
 /**
  * Class PasswordHook
@@ -84,8 +87,8 @@ class PasswordHook {
      * @param PasswordRevision $newRevision
      *
      * @throws DoesNotExistException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws MultipleObjectsReturnedException
      */
     public function preSetRevision(Password $password, PasswordRevision $newRevision): void {
         if($password->getRevision() === null) {
@@ -101,7 +104,7 @@ class PasswordHook {
 
         /** @var PasswordRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($password->getRevision());
-        if($oldRevision->getHidden() != $newRevision->getHidden()) {
+        if($oldRevision->getHidden() !== $newRevision->getHidden()) {
             $this->updateRelations($password, $newRevision);
         }
 
@@ -119,7 +122,7 @@ class PasswordHook {
     /**
      * @param Password $password
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function preDelete(Password $password): void {
         $relations = $this->relationService->findByPassword($password->getUuid());
@@ -140,7 +143,7 @@ class PasswordHook {
     /**
      * @param Password $password
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postDelete(Password $password): void {
         /** @var PasswordRevision[] $revisions */
@@ -167,7 +170,7 @@ class PasswordHook {
      * @param Password $originalPassword
      * @param Password $clonedPassword
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function postClone(Password $originalPassword, Password $clonedPassword): void {
         /** @var PasswordRevision[] $revisions */
@@ -178,7 +181,7 @@ class PasswordHook {
             /** @var PasswordRevision $revisionClone */
             $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedPassword->getUuid()]);
             $this->revisionService->save($revisionClone);
-            if($revision->getUuid() == $originalPassword->getRevision()) {
+            if($revision->getUuid() === $originalPassword->getRevision()) {
                 $clonedPassword->setRevision($revisionClone->getUuid());
                 $currentClonedRevision = $revisionClone;
             }
@@ -198,7 +201,7 @@ class PasswordHook {
     /**
      * @param Password $password
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function updateShares(Password $password): void {
         if($password->getShareId()) {
@@ -220,7 +223,7 @@ class PasswordHook {
      * @param PasswordRevision $revision
      * @param bool             $searchDuplicates
      *
-     * @throws \OCP\AppFramework\QueryException
+     * @throws QueryException
      */
     protected function checkSecurityStatus(PasswordRevision $revision, bool $searchDuplicates = true): void {
         $securityCheck = $this->helperService->getSecurityHelper();
@@ -237,7 +240,7 @@ class PasswordHook {
      * @param Password         $password
      * @param PasswordRevision $newRevision
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function updateRelations(Password $password, PasswordRevision $newRevision): void {
         $relations = $this->relationService->findByPassword($password->getUuid());
@@ -264,7 +267,7 @@ class PasswordHook {
                     $this->checkSecurityStatus($revision, false);
                     if($oldStatus !== $revision->getStatusCode()) $this->revisionService->save($revision);
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
             }
         }
     }

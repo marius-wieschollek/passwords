@@ -104,13 +104,13 @@ class CheckPasswordsJob extends AbstractTimedJob {
             $oldStatusCode = $revision->getStatusCode();
             list($statusLevel, $statusCode) = $securityHelper->getRevisionSecurityLevel($revision);
 
-            if($oldStatusCode != $statusCode) {
+            if($oldStatusCode !== $statusCode) {
                 $revision->setStatus($statusLevel);
                 $revision->setStatusCode($statusCode);
                 $revision->setUpdated(time());
                 $this->revisionMapper->update($revision);
 
-                if($statusLevel == AbstractSecurityCheckHelper::LEVEL_BAD) {
+                if($statusLevel === AbstractSecurityCheckHelper::LEVEL_BAD) {
                     $this->sendBadPasswordNotification($revision);
                     $badRevisionCounter++;
                 }

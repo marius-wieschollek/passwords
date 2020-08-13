@@ -110,7 +110,7 @@ class ShareUserListHelper {
             if($userGroup === 'guest_app') continue;
             $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, $limit);
             foreach($users as $uid => $name) {
-                if($uid == $this->userId) continue;
+                if($uid === $this->userId) continue;
                 $partners[ $uid ] = $name;
             }
             if(count($partners) >= $limit) break;
@@ -130,7 +130,7 @@ class ShareUserListHelper {
         $usersTmp = $this->userManager->search($pattern, $limit);
 
         foreach($usersTmp as $user) {
-            if($user->getUID() == $this->userId) continue;
+            if($user->getUID() === $this->userId) continue;
             $partners[ $user->getUID() ] = $user->getDisplayName();
         }
 

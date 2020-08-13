@@ -165,7 +165,7 @@ abstract class AbstractPreviewHelper {
             throw new ApiException('API Request Failed', 502, $e);
         }
 
-        if(substr($response->getHeader('content-type'), 0, 5) != 'image') {
+        if(substr($response->getHeader('content-type'), 0, 5) !== 'image') {
             $this->logger->error("Invalid Preview Api Response, HTTP {$response->getStatusCode()}, {$response->getHeader('content-type')}");
             throw new ApiException('API Request Failed', 502);
         }

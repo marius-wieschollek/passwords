@@ -97,7 +97,7 @@ class PasswordTagRelationService extends AbstractService {
      * @throws \Exception
      */
     public function create(PasswordRevision $password, TagRevision $tag): PasswordTagRelation {
-        if($password->getUserId() != $tag->getUserId()) {
+        if($password->getUserId() !== $tag->getUserId()) {
             throw new \Exception('User ID did not match when creating password to tag relation');
         }
 
