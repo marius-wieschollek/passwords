@@ -20,9 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
+ * Class UserDeleteCommand
  *
+ * @package OCA\Passwords\Command
  */
-class UserDeleteCommand extends Command {
+class UserDeleteCommand extends AbstractInteractiveCommand {
 
     /**
      * @var ConfigurationService
@@ -45,7 +47,7 @@ class UserDeleteCommand extends Command {
     protected $backgroundJobs;
 
     /**
-     * TransferOwnershipCommand constructor.
+     * UserDeleteCommand constructor.
      *
      * @param IUserManager         $userManager
      * @param ConfigurationService $config
@@ -79,6 +81,7 @@ class UserDeleteCommand extends Command {
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
+        parent::execute($input, $output);
         $userId = $input->getArgument('user');
         if($this->confirmDelete($input, $output, $userId)) {
             $output->write('Deleting data ...');
@@ -97,24 +100,10 @@ class UserDeleteCommand extends Command {
      * @return bool
      */
     protected function confirmDelete(InputInterface $input, OutputInterface $output, string $userId): bool {
-        if($input->getOption('no-interaction')) return true;
-
         $user     = $this->userManager->get($userId);
         $userName = $user === null ? $userId:$user->getDisplayName();
 
-        /** @var QuestionHelper $helper */
-        $helper = $this->getHelper('question');
-
-        $question = new Question('Type "yes" to confirm that you want to delete all data from "'.$userName.'": ');
-        $yes      = $helper->ask($input, $output, $question);
-
-        if($yes !== 'yes') {
-            $output->writeln('aborting');
-
-            return false;
-        }
-
-        return true;
+        return $this->requestConfirmation($input, $output, 'This command will delete all data from "'.$userName.'"');
     }
 
 }

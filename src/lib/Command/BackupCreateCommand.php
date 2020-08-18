@@ -27,7 +27,7 @@ class BackupCreateCommand extends Command {
     protected $backupService;
 
     /**
-     * BackupListCommand constructor.
+     * BackupCreateCommand constructor.
      *
      * @param BackupService $backupService
      */

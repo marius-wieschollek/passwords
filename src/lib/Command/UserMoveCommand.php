@@ -21,11 +21,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Class TransferOwnershipCommand
+ * Class UserMoveCommand
  *
  * @package OCA\Passwords\Command
  */
-class UserMoveCommand extends Command {
+class UserMoveCommand extends AbstractInteractiveCommand {
 
     /**
      * @var ConfigurationService
@@ -48,11 +48,12 @@ class UserMoveCommand extends Command {
     protected $deleteUserData;
 
     /**
-     * TransferOwnershipCommand constructor.
+     * UserMoveCommand constructor.
      *
      * @param IUserManager         $userManager
      * @param ConfigurationService $config
      * @param DeleteUserDataHelper $deleteUserData
+     * @param MoveUserDataHelper   $moveUserData
      * @param string|null          $name
      */
     public function __construct(IUserManager $userManager, ConfigurationService $config, DeleteUserDataHelper $deleteUserData, MoveUserDataHelper $moveUserData, string $name = null) {
@@ -82,6 +83,8 @@ class UserMoveCommand extends Command {
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
+        parent::execute($input, $output);
+
         $users = $this->getUsers($input, $output);
         if($users === null) return 1;
         [$sourceUser, $targetUser] = $users;
@@ -105,21 +108,7 @@ class UserMoveCommand extends Command {
      * @return bool
      */
     protected function confirmMove(InputInterface $input, OutputInterface $output, string $sourceName, string $targetName): bool {
-        if($input->getOption('no-interaction')) return true;
-
-        /** @var QuestionHelper $helper */
-        $helper = $this->getHelper('question');
-
-        $question = new Question('Type "yes" to confirm that you want to move all data from "'.$sourceName.'" to "'.$targetName.'": ');
-        $yes      = $helper->ask($input, $output, $question);
-
-        if($yes !== 'yes') {
-            $output->writeln('aborting');
-
-            return false;
-        }
-
-        return true;
+        return $this->requestConfirmation($input, $output, 'This command will move all data from "'.$sourceName.'" to "'.$targetName.'"');
     }
 
     /**
@@ -163,22 +152,12 @@ class UserMoveCommand extends Command {
      * @throws Exception
      */
     protected function checkTargetOverwrite(InputInterface $input, OutputInterface $output, IUser $targetUser): bool {
-        if($input->getOption('no-interaction')) return true;
-
         $userId = $targetUser->getUID();
         if(!$this->userHasData($userId)) return true;
 
-        /** @var QuestionHelper $helper */
-        $helper = $this->getHelper('question');
 
-        $output->writeln('The user "'.$targetUser->getDisplayName().'" already has data.');
-        $question = new Question('Type "yes" to confirm that you want to overwrite the existing data of "'.$targetUser->getDisplayName().'": ');
-        $yes      = $helper->ask($input, $output, $question);
-
-        if($yes !== 'yes') {
-            $output->writeln('aborting');
-
-            return false;
+        if(!$this->requestConfirmation($input, $output, 'The existing data of "'.$targetUser->getDisplayName().'" will be deleted permanently')) {
+            return  false;
         }
 
         $output->write('Deleting data ...');

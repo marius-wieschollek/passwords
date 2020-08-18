@@ -29,7 +29,7 @@ class BackupDeleteCommand extends Command {
     protected $backupService;
 
     /**
-     * BackupListCommand constructor.
+     * BackupDeleteCommand constructor.
      *
      * @param BackupService $backupService
      */

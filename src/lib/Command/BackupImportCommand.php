@@ -36,9 +36,10 @@ class BackupImportCommand extends Command {
     protected $migrationHelper;
 
     /**
-     * BackupListCommand constructor.
+     * BackupImportCommand constructor.
      *
-     * @param BackupService $backupService
+     * @param BackupService         $backupService
+     * @param BackupMigrationHelper $migrationHelper
      */
     public function __construct(BackupService $backupService, BackupMigrationHelper $migrationHelper) {
         $this->backupService = $backupService;
@@ -67,11 +68,11 @@ class BackupImportCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output): void {
         $file = realpath($input->getArgument('file'));
 
-        list($importFile, $isCompressed) = $this->checkIfFileCanBeRead($file);
+        [$importFile, $isCompressed] = $this->checkIfFileCanBeRead($file);
 
         $json = $this->readFile($file, $isCompressed);
         $json = $this->validateData($json);
-        list($name, $data) = $this->encodeData($importFile, $json);
+        [$name, $data] = $this->encodeData($importFile, $json);
         $backup = $this->createBackup($name, $data);
         $info   = $this->backupService->getBackupInfo($backup);
 

@@ -23,7 +23,7 @@ use Symfony\Component\Console\Question\Question;
  *
  * @package OCA\Passwords\Command
  */
-class BackupRestoreCommand extends Command {
+class BackupRestoreCommand extends AbstractInteractiveCommand {
 
     /**
      * @var BackupService
@@ -31,7 +31,7 @@ class BackupRestoreCommand extends Command {
     protected $backupService;
 
     /**
-     * BackupListCommand constructor.
+     * BackupRestoreCommand constructor.
      *
      * @param BackupService $backupService
      */
@@ -63,6 +63,7 @@ class BackupRestoreCommand extends Command {
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
+        parent::execute($input, $output);
         $options = $this->getOptions($input);
         $backup  = $this->getBackup($input->getArgument('backup'));
 
@@ -78,9 +79,8 @@ class BackupRestoreCommand extends Command {
             $output->writeln('Restoring user data means that the current user data will be wiped.');
         }
 
-        if(!$this->confirmRestoring($input, $output)) return;
+        if(!$this->confirmRestoring($input, $output, $backup)) return;
 
-        $output->writeln('');
         $output->write('Restoring backup ...');
         $this->backupService->restoreBackup($backup, $options);
         $output->write(' done');
@@ -122,25 +122,12 @@ class BackupRestoreCommand extends Command {
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     * @param string          $backup
      *
      * @return bool
      */
-    protected function confirmRestoring(InputInterface $input, OutputInterface $output): bool {
-        if(!$input->getOption('no-interaction')) {
-            /** @var QuestionHelper $helper */
-            $helper = $this->getHelper('question');
-
-            $question = new Question('Type "yes" to confirm that you want to restore the backup: ');
-            $yes      = $helper->ask($input, $output, $question);
-
-            if($yes !== 'yes') {
-                $output->writeln('aborting');
-
-                return false;
-            }
-        }
-
-        return true;
+    protected function confirmRestoring(InputInterface $input, OutputInterface $output, string $backup): bool {
+        return $this->requestConfirmation($input, $output, 'The backup "'.$backup.'" will now be restored');
     }
 
     /**
@@ -151,7 +138,7 @@ class BackupRestoreCommand extends Command {
     protected function printRestoringInformation(OutputInterface $output, string $backup, array $options): void {
         $output->writeln('This backup file will be used: '.$backup);
         $output->writeln('');
-        $output->writeln('The backup will restore the following:');
+        $output->writeln('The following will be restored:');
         if($options['user']) {
             $output->writeln(' - Only data for '.escapeshellarg($options['user']));
         }
