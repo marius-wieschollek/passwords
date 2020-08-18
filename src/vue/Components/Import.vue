@@ -512,6 +512,7 @@
                     case 'keepass':
                         this.csv.escape = '\\';
                     case 'legacy':
+                    case 'chrome':
                     case 'roboform':
                     case 'lastpass':
                     case 'bitwardenCsv':
