@@ -1,5 +1,6 @@
 import Application from '@js/Init/Application';
 
+// noinspection JSUnresolvedVariable
 /**
  * Set global webpack path
  *

@@ -16,20 +16,33 @@ import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 class Application {
 
+    /**
+     * @return {Vue}
+     */
     get app() {
         return this._app;
     }
 
+    /**
+     * @return {EventEmitter}
+     */
     get events() {
         return this._events;
     }
 
+    /**
+     * @return {Boolean}
+     */
     get loginRequired() {
         return this._loginRequired;
     }
 
+    /**
+     *
+     * @param {Boolean} value
+     */
     set loginRequired(value) {
-        return this._loginRequired = value;
+        this._loginRequired = value;
     }
 
     constructor() {
@@ -40,6 +53,9 @@ class Application {
         this._events = new EventEmitter();
     }
 
+    /**
+     *
+     */
     init() {
         window.addEventListener('DOMContentLoaded', () => { this._initApp(); }, {once: true, passive: true});
         this._timer = setInterval(() => { this._initApp(); }, 10);

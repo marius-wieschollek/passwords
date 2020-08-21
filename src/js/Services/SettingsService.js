@@ -71,7 +71,8 @@ class SettingsService {
             }
         }
 
-        this._triggerObservers(setting, this._settings[setting]);
+        this._triggerObservers(setting, this._settings[setting])
+            .catch(console.error);
         return this._settings[setting];
     }
 
