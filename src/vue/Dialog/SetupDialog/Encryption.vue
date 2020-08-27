@@ -332,13 +332,15 @@
                 font-size   : 1rem;
 
                 &.success {
-                    color     : var(--color-success);
-                    font-size : 1.5rem;
+                    color       : var(--color-success);
+                    font-family : var(--pw-icon-font-face);
+                    font-size   : 2rem;
                 }
 
                 &.failed {
-                    color     : var(--color-error);
-                    font-size : 1.5rem;
+                    color       : var(--color-error);
+                    font-family : var(--pw-icon-font-face);
+                    font-size   : 2rem;
                 }
             }
 
