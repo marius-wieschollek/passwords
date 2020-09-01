@@ -16,10 +16,6 @@ use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
-use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\RandomCharactersHelper;
-use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -152,8 +148,8 @@ class AdminSettings implements ISettings {
     }
 
     /**
-     * @return array
-     * @deprecated
+     * @return array[]
+     * @throws \OCP\AppFramework\QueryException
      */
     protected function getWordsServices(): array {
         $current = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());
@@ -268,7 +264,7 @@ class AdminSettings implements ISettings {
     protected function getWebsitePreviewServices(): array {
         $current = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
 
-        $services = [
+        return [
             [
                 'id'      => HelperService::PREVIEW_PAGERES,
                 'label'   => 'Pageres/PhantomJS (Local)',
@@ -318,8 +314,6 @@ class AdminSettings implements ISettings {
                 'api'     => null
             ]
         ];
-
-        return $services;
     }
 
     /**

@@ -115,7 +115,6 @@ class CleanDeletedEntitiesHelper {
      * @param ShareService               $shareService
      * @param FolderService              $folderService
      * @param ConfigurationService       $config
-     * @param EnvironmentService         $environment
      * @param PasswordService            $passwordService
      * @param KeychainService            $keychainService
      * @param ChallengeService           $challengeService
@@ -131,7 +130,6 @@ class CleanDeletedEntitiesHelper {
         ShareService $shareService,
         FolderService $folderService,
         ConfigurationService $config,
-        EnvironmentService $environment,
         PasswordService $passwordService,
         KeychainService $keychainService,
         ChallengeService $challengeService,

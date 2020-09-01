@@ -13,8 +13,6 @@ use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
-use OCP\Files\NotFoundException;
-use OCP\Files\NotPermittedException;
 use OCP\Http\Client\IClientService;
 
 /**

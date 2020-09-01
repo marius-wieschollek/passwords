@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Command;
 
 use OCA\Passwords\Services\BackupService;
-use OCP\Util;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -62,7 +61,7 @@ class BackupCreateCommand extends Command {
         }
 
         $backup = $this->backupService->createBackup($argName);
-        $info = $this->backupService->getBackupInfo($backup);
+        $info   = $this->backupService->getBackupInfo($backup);
 
         $output->writeln(sprintf('Created new backup: %s, %s %s', $info['label'], $info['size'], $info['format']));
     }

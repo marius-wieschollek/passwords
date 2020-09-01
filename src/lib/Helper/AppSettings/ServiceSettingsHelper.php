@@ -15,10 +15,6 @@ use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Helper\Preview\WebshotHelper;
-use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\RandomCharactersHelper;
-use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\QueryException;
@@ -79,7 +75,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      */
     public function __construct(ConfigurationService $config, HelperService $helperService, IL10N $localisation) {
         parent::__construct($config);
-        $this->localisation = $localisation;
+        $this->localisation  = $localisation;
         $this->helperService = $helperService;
     }
 
@@ -344,9 +340,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return array
      */
     protected function getPreviewOptions(): array {
-        $current = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
-
-        $options = [
+        return [
             $this->generateOptionArray(
                 HelperService::PREVIEW_PAGERES,
                 $this->localisation->t('Pageres/PhantomJS (Local)')
@@ -372,8 +366,6 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 $this->localisation->t('None')
             )
         ];
-
-        return $options;
     }
 
     /**

@@ -141,10 +141,9 @@ class MailService {
      * @return IL10N
      */
     protected function getLocalisation(string $userId): IL10N {
-        $lang         = $this->config->getUserValue($userId, 'core', 'lang');
-        $localisation = $this->l10NFactory->get(Application::APP_NAME, $lang);
+        $lang = $this->config->getUserValue($userId, 'core', 'lang');
 
-        return $localisation;
+        return $this->l10NFactory->get(Application::APP_NAME, $lang);
     }
 
     /**

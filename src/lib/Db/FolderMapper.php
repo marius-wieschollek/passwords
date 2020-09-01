@@ -7,8 +7,6 @@
 
 namespace OCA\Passwords\Db;
 
-use OCP\DB\QueryBuilder\IQueryBuilder;
-
 /**
  * Class FolderMapper
  *

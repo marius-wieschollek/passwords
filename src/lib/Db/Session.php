@@ -7,8 +7,6 @@
 
 namespace OCA\Passwords\Db;
 
-use OCP\AppFramework\Db\Entity;
-
 /**
  * Class Session
  *

@@ -24,7 +24,6 @@ use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;

@@ -156,7 +156,7 @@ class CreateBackupHelper {
      * @throws \Exception
      */
     public function getData(): array {
-        $array = [
+        return [
             'version'              => self::BACKUP_VERSION,
             'passwords'            => $this->getModelArray($this->passwordMapper, $this->passwordRevisionMapper),
             'folders'              => $this->getModelArray($this->folderMapper, $this->folderRevisionMapper),
@@ -178,8 +178,6 @@ class CreateBackupHelper {
                 'clients'     => $this->getClientSettings()
             ]
         ];
-
-        return $array;
     }
 
     /**

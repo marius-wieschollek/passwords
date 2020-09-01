@@ -259,18 +259,18 @@ class RestoreBackupHelper {
      * @throws \Exception
      */
     protected function restoreUserKeys(array $keys, ?string $user): void {
-        foreach($keys['users'] as $user => $userKeys) {
-            if($user !== null && $user !== $user) continue;
+        foreach($keys['users'] as $userId => $userKeys) {
+            if($user !== null && $userId !== $user) continue;
 
-            $sseV1UserKey = $this->config->getUserValue('SSEv1UserKey', null, $user);
+            $sseV1UserKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
             if($sseV1UserKey !== $userKeys['SSEv1UserKey']) {
-                $this->config->setUserValue('SSEv1UserKey', $userKeys['SSEv1UserKey'], $user);
+                $this->config->setUserValue('SSEv1UserKey', $userKeys['SSEv1UserKey'], $userId);
             }
 
             if($userKeys['ChallengeId'] !== null) {
-                $this->config->setUserValue(UserChallengeService::USER_CHALLENGE_ID, $userKeys['ChallengeId'], $user);
+                $this->config->setUserValue(UserChallengeService::USER_CHALLENGE_ID, $userKeys['ChallengeId'], $userId);
             } else {
-                $this->config->deleteUserValue(UserChallengeService::USER_CHALLENGE_ID, $user);
+                $this->config->deleteUserValue(UserChallengeService::USER_CHALLENGE_ID, $userId);
             }
         }
     }

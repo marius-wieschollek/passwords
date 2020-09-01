@@ -7,9 +7,6 @@
 
 namespace OCA\Passwords\Db;
 
-use OCP\AppFramework\Db\Entity;
-use OCP\DB\QueryBuilder\IQueryBuilder;
-
 /**
  * Class PasswordTagRelationMapper
  *

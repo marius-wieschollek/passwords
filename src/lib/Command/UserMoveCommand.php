@@ -13,12 +13,9 @@ use OCA\Passwords\Helper\User\MoveUserDataHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IUser;
 use OCP\IUserManager;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Class UserMoveCommand
@@ -90,7 +87,7 @@ class UserMoveCommand extends AbstractInteractiveCommand {
         [$sourceUser, $targetUser] = $users;
 
         if(!$this->confirmMove($input, $output, $sourceUser->getDisplayName(), $targetUser->getDisplayName())) return 2;
-        if(!$this->checkSourceHasData($input, $output, $sourceUser)) return 3;
+        if(!$this->checkSourceHasData($output, $sourceUser)) return 3;
         if(!$this->checkTargetOverwrite($input, $output, $targetUser)) return 4;
 
         $output->write('Moving data ...');
@@ -155,9 +152,8 @@ class UserMoveCommand extends AbstractInteractiveCommand {
         $userId = $targetUser->getUID();
         if(!$this->userHasData($userId)) return true;
 
-
         if(!$this->requestConfirmation($input, $output, 'The existing data of "'.$targetUser->getDisplayName().'" will be deleted permanently')) {
-            return  false;
+            return false;
         }
 
         $output->write('Deleting data ...');
@@ -169,14 +165,13 @@ class UserMoveCommand extends AbstractInteractiveCommand {
     }
 
     /**
-     * @param InputInterface  $input
      * @param OutputInterface $output
      * @param IUser           $sourceUser
      *
      * @return bool
      * @throws Exception
      */
-    protected function checkSourceHasData(InputInterface $input, OutputInterface $output, IUser $sourceUser): bool {
+    protected function checkSourceHasData(OutputInterface $output, IUser $sourceUser): bool {
         $userId = $sourceUser->getUID();
         if($this->userHasData($userId)) return true;
 

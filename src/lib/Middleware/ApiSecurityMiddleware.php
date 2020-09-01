@@ -90,15 +90,13 @@ class ApiSecurityMiddleware extends Middleware {
             $statusCode = 404;
         }
 
-        $response = new JSONResponse(
+        return new JSONResponse(
             [
                 'status'  => 'error',
                 'id'      => $id,
                 'message' => $message
             ], $statusCode
         );
-
-        return $response;
     }
 
     /**

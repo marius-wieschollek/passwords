@@ -7,9 +7,6 @@
 
 namespace OCA\Passwords\Exception\Favicon;
 
-use OCA\Passwords\Exception\AbstractException;
-use Throwable;
-
 /**
  * Class InvalidFaviconDataException
  *
@@ -17,7 +14,7 @@ use Throwable;
  */
 class InvalidFaviconDataException extends \Exception {
 
-    const EXCEPTION_CODE = 101;
+    const EXCEPTION_CODE    = 101;
     const EXCEPTION_MESSAGE = 'Favicon service returned unsupported data type: ';
 
     public function __construct(string $mime, \Throwable $previous = null) {

@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OC;
 use OC\Authentication\Exceptions\ExpiredTokenException;
 use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
