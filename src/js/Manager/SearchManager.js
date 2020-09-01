@@ -40,7 +40,20 @@ class SearchManager {
     }
 
     init() {
-        if(OC.Plugins) {
+        if(!document.getElementById('searchbox')) {
+            document.querySelector('.unified-search').remove();
+            this._createSearchBox();
+            this._status.available = false;
+            this._initializeSearchFeatures();
+            document.getElementById('searchbox').addEventListener('keyup', (e) => {
+                if(e.target.value) {
+                    this.search(e.target.value);
+                } else {
+                    this.search();
+                }
+            })
+
+        } else if(OC.Plugins) {
             new OCA.Search((q) => {this.search(q);}, () => {this.search();});
             document.querySelector('form.searchbox').style.opacity = '0';
             this._status.available = false;
@@ -49,7 +62,7 @@ class SearchManager {
         }
     }
 
-    // noinspection JSUnusedGlobalSymbols
+// noinspection JSUnusedGlobalSymbols
     attach(search) {
         search.setFilter('passwords', (q) => { this.search(q); });
     }
@@ -138,8 +151,10 @@ class SearchManager {
         this._status.query = '';
         this._resetSearch();
 
-        document.querySelector('form.searchbox').style.opacity = '0';
-        document.getElementById('searchbox').value = '';
+        let searchForm = document.querySelector('form.searchbox');
+        if(searchForm) document.querySelector('form.searchbox').style.opacity = '0';
+        let searchBox = document.getElementById('searchbox');
+        if(searchBox) searchBox.value = '';
     }
 
     /**
@@ -339,6 +354,25 @@ class SearchManager {
             searchbox.value = '';
             this.search('');
         });
+    }
+
+    /**
+     *
+     * @private
+     */
+    _createSearchBox() {
+        let form = document.createElement('form');
+        form.className = 'searchbox';
+        form.style.opacity = '0';
+        form.setAttribute('action', '#');
+        form.setAttribute('method', 'post');
+        form.setAttribute('role', 'search');
+        form.setAttribute('novalidate', 'novalidate');
+        form.innerHTML = `<label for="searchbox" class="hidden-visually">Search</label>
+                <input id="searchbox" type="search" name="query" value="" required="" class="hidden icon-search-white icon-search-force-white" autocomplete="off" style="display: block;">
+                    <button class="icon-close-white" type="reset"><span class="hidden-visually"></span></button>`;
+        form.addEventListener('submit', (e) => {e.preventDefault();});
+        document.querySelector('.header-right').insertBefore(form, document.querySelector('.notifications'));
     }
 }
 
