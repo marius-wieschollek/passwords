@@ -105,9 +105,19 @@ class SettingsApiController extends AbstractApiController {
 
         $settings = [];
         foreach($params as $key) {
-            if($key !== null) $settings[ $key ] = $this->settings->reset($key);
+            $settings[ $key ] = $this->settings->reset($key);
         }
 
         return $this->createJsonResponse($settings);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getParameterArray(): array {
+        $params = parent::getParameterArray();
+        if(array_key_exists('action', $params)) unset($params['action']);
+
+        return $params;
     }
 }
