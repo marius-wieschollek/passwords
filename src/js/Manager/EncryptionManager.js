@@ -144,13 +144,14 @@ class EncryptionManager {
             queue     = [];
 
         this._sendStatus('passwords', 'processing', Object.keys(passwords).length);
+        let maxQueueLength = this._getMaxRequests();
         for(let id in passwords) {
             if(!passwords.hasOwnProperty(id)) continue;
             let password = passwords[id];
 
             queue.push(this._encryptPassword(password, folderMap, tagMap));
 
-            if(queue.length > 15) {
+            if(queue.length >= maxQueueLength) {
                 await Promise.all(queue);
                 queue = [];
             }
@@ -495,6 +496,18 @@ class EncryptionManager {
         el.setAttribute('id', 'settings-reset');
         el.classList.add('loading');
         document.getElementById('app-content').appendChild(el);
+    }
+
+    /**
+     *
+     * @return {Number}
+     * @private
+     */
+    _getMaxRequests() {
+        let performance = SettingsService.get('server.performance');
+        if(performance !== 0 && performance < 6) return performance * 3;
+        if(performance === 6) return 32;
+        return 1;
     }
 }
 

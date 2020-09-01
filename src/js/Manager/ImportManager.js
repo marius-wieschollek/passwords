@@ -200,10 +200,11 @@ export class ImportManager {
         }
 
         this._countProgress('Importing tags');
+        let maxQueueLength = this._getMaxRequests();
         for(let i = 0; i < tags.length; i++) {
             queue.push(this._importTag(tags[i], mode, cseType, db, idMap));
 
-            if(queue.length > 15) {
+            if(queue.length >= maxQueueLength) {
                 await Promise.all(queue);
                 queue = [];
             }
@@ -264,6 +265,7 @@ export class ImportManager {
         let folders = ImportManager._sortFoldersForImport(folderDb, idMap);
 
         this._countProgress('Importing folders');
+        let maxQueueLength = this._getMaxRequests();
         for(let i = 0; i < folders.length; i++) {
             let folder = folders[i];
 
@@ -272,7 +274,7 @@ export class ImportManager {
                 continue;
             }
 
-            if(!idMap.hasOwnProperty(folder.parent) || queue.length > 15) {
+            if(!idMap.hasOwnProperty(folder.parent) || queue.length >= maxQueueLength) {
                 await Promise.all(queue);
                 queue = [];
             }
@@ -378,10 +380,11 @@ export class ImportManager {
         }
 
         this._countProgress('Importing passwords');
+        let maxQueueLength = this._getMaxRequests();
         for(let i = 0; i < passwords.length; i++) {
             queue.push(this._importPassword(mode, passwords[i], db, skipShared, cseType, idMap, folderMapping, tagMapping));
 
-            if(queue.length > 15) {
+            if(queue.length >= maxQueueLength) {
                 await Promise.all(queue);
                 queue = [];
             }
@@ -496,5 +499,17 @@ export class ImportManager {
             console.info(`Passwords Import: ${status}`);
         }
         this.progress(this.processed, this.total, status);
+    }
+
+    /**
+     *
+     * @return {Number}
+     * @private
+     */
+    _getMaxRequests() {
+        let performance = SettingsService.get('server.performance');
+        if(performance !== 0 && performance < 6) return performance * 3;
+        if(performance === 6) return 32;
+        return 1;
     }
 }
