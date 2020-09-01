@@ -214,7 +214,7 @@ Scenario('Show Trash Section', async (I) => {
     I.click('div[data-tag-title="Shopping"]');
     I.waitForElement('div[data-password-title="Amazon"]', 20);
     I.click('div[data-password-title="Amazon"] > div.more');
-    I.click('div[data-password-title="Amazon"] > div.more > div > ul > li:nth-child(6)');
+    I.click('div[data-password-title="Amazon"] > div.more > div > ul > li:nth-child(7)');
 
     I.amOnPage('/index.php/apps/passwords/#/folders');
     I.waitForElement('div[data-folder-title="Work"]', 20);
