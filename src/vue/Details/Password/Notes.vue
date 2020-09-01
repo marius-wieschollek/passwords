@@ -68,10 +68,18 @@
         ul {
             list-style   : disc;
             padding-left : 15px;
+
+            li {
+                list-style-type: inherit;
+            }
         }
         ol {
             list-style   : decimal;
             padding-left : 15px;
+
+            li {
+                list-style-type: inherit;
+            }
         }
         a {
             text-decoration : underline;

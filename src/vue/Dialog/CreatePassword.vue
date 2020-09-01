@@ -451,6 +451,14 @@
                             p {
                                 margin-bottom : 1em;
                             }
+
+                            ul li {
+                                list-style-type: disc;
+                            }
+
+                            ol li {
+                                list-style-type: decimal;
+                            }
                         }
 
                         .warning {

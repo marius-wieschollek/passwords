@@ -395,6 +395,10 @@
                 padding-left    : 1em;
                 list-style-type : disc;
 
+                li {
+                    list-style-type: inherit;
+                }
+
                 ul {
                     list-style-type : circle;
 

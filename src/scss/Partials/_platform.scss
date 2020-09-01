@@ -1,5 +1,6 @@
 body[data-server-version="18"],
-body[data-server-version="19"] {
+body[data-server-version="19"],
+body[data-server-version="20"] {
     &#body-user {
         &.pw-auth-visible:not(.pw-auth-passed) #app #app-content {
             background-image    : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
@@ -36,5 +37,14 @@ body[data-server-version="19"] {
 
     &[data-custom-color="true"] #passwords-setup .setup-header {
         background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+    }
+}
+
+html body[data-server-version="20"] {
+    &#body-user {
+        &[data-custom-color="false"] #passwords-setup .setup-header,
+        &[data-custom-background="false"][data-custom-color="false"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+            background-size       : contain;
+        }
     }
 }
