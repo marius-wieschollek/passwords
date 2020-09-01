@@ -225,10 +225,15 @@ class ServerReportHelper {
      * @return array
      */
     protected function getSettings(): array {
+        $performance = $this->config->getAppValue('performance', null);
+        if($performance === null) $performance = in_array(php_uname('m'), ['amd64', 'x86_64']) ? 5:1;
+        if($performance < 0 || $performance > 6) $performance = 2;
+
         return [
-            'channel'   => \OC_Util::getChannel(),
-            'nightlies' => $this->config->getAppValue('nightly/enabled', '0') === '1',
-            'handbook'  => $this->config->getAppValue('handbook/url') !== null,
+            'channel'     => \OC_Util::getChannel(),
+            'nightlies'   => $this->config->getAppValue('nightly/enabled', '0') === '1',
+            'handbook'    => $this->config->getAppValue('handbook/url') !== null,
+            'performance' => intval($performance)
         ];
     }
 

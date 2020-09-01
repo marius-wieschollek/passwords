@@ -5,6 +5,7 @@
 /var/www/html/occ config:app:set passwords service/favicon/bi/url --value=http://passwords-iconserver:7070/icon;
 /var/www/html/occ config:app:set passwords service/favicon --value=bi;
 /var/www/html/occ config:app:set passwords service/preview --value=pageres;
+/var/www/html/occ config:app:set passwords performance --value=6;
 
 # System Settings
 /var/www/html/occ config:system:set loglevel --value=0 --type=int;
