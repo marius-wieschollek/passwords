@@ -1,3 +1,5 @@
+import moment from '@nextcloud/moment'
+
 class Localisation {
 
     constructor() {
@@ -31,7 +33,7 @@ class Localisation {
      * @returns {string}
      */
     formatDate(date) {
-        return OC.Util.relativeModifiedDate(date);
+        return moment(date).fromNow();
     }
 
     /**
@@ -40,7 +42,7 @@ class Localisation {
      * @returns {string}
      */
     formatDateTime(date) {
-        return OC.Util.formatDate(date, 'LLL');
+        return moment(date).format('LLL');
     }
 
     /**

@@ -33,17 +33,19 @@
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@nextcloud/moment": "^1.1.1"
+    },
     "devDependencies": {
         "blueimp-gallery": "^3.3.0",
         "clean-webpack-plugin": "^1.0.1",
         "codeceptjs": "^2.6.10",
-        "copy-webpack-plugin": "^6.0.3",
+        "copy-webpack-plugin": "^6.1.0",
         "css-loader": "^4.2.2",
         "csv-hero": "0.0.4",
         "download": "^8.0.0",
         "easyimage": "^3.1.1",
-        "file-loader": "^6.0.0",
+        "file-loader": "^6.1.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.5.1",
         "jszip": "^3.5.0",
@@ -51,7 +53,7 @@
         "marked": "^0.8.2",
         "mini-css-extract-plugin": "^0.10.1",
         "node-sass": "^4.14.1",
-        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
         "passwords-client": "https://git.mdns.eu/nextcloud/passwords-client/-/archive/stable/passwords-client-stable.tar.gz",
         "random-material-color": "^1.0.5",
         "sass-loader": "^9.0.3",
