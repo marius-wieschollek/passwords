@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2020.9.0 - Feature release
 ### Added
  - Nextcloud 20 support
 ### Changed
