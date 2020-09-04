@@ -343,7 +343,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::PREVIEW_PAGERES,
-                $this->localisation->t('Pageres/PhantomJS (Local)')
+                $this->localisation->t('Pageres CLI (Local)')
             ),
             $this->generateOptionArray(
                 HelperService::PREVIEW_BROW_SHOT,

@@ -267,7 +267,7 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::PREVIEW_PAGERES,
-                'label'   => 'Pageres/PhantomJS (Local)',
+                'label'   => 'Pageres CLI (Local)',
                 'current' => $current === HelperService::PREVIEW_PAGERES,
                 'api'     => null
             ],

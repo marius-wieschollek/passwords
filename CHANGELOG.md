@@ -6,6 +6,11 @@
  - Migrated preview services to Nextcloud http client api
  - Migrated words services to Nextcloud http client api
  - Migrated security check services to Nextcloud http client api
+ - Import respects server performance preference
+ - E2E migration respects server performance preference
+### Fixed
+ - Backup restore always restores config for all users
+ - Broken HTTP fallback in pageres cli preview generator
 
 ## 2020.8.0 - Feature release
 ### Added
