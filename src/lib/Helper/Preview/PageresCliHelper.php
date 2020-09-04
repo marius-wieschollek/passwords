@@ -18,8 +18,8 @@ use OCA\Passwords\Services\WebsitePreviewService;
 class PageresCliHelper extends AbstractPreviewHelper {
 
     const CAPTURE_MAX_RETRIES = 3;
-    const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0';
-    const USER_AGENT_MOBILE   = 'Mozilla/5.0 (Android 9; Mobile; rv:67.0) Gecko/67.0 Firefox/67.0';
+    const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0';
+    const USER_AGENT_MOBILE   = 'Mozilla/5.0 (Android 10; Mobile; rv:80.0) Gecko/80.0 Firefox/80.0';
 
     /**
      * @var string
@@ -39,9 +39,9 @@ class PageresCliHelper extends AbstractPreviewHelper {
         $tempDir  = $this->config->getTempDir();
         $tempPath = $tempDir.$tempFile.'.png';
         $command  = $this->getPageresBinary();
-        $domain   = escapeshellarg($protocol.'://'.$domain);
+        $url      = escapeshellarg($protocol.'://'.$domain);
 
-        $cmd = "cd {$tempDir} && {$command} {$domain} ".
+        $cmd = "cd {$tempDir} && {$command} {$url} ".
                ($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::VIEWPORT_DESKTOP:self::VIEWPORT_MOBILE).
                ' --user-agent='.escapeshellarg($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::USER_AGENT_DESKTOP:self::USER_AGENT_MOBILE).
                ' --delay=4 --filename='.escapeshellarg($tempFile).' --overwrite 2>&1';

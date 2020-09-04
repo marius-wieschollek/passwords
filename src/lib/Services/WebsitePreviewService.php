@@ -226,9 +226,9 @@ class WebsitePreviewService {
      */
     protected function validateMaximum(int $minimum, int $maximum): int {
         $maximum = round($maximum, -1);
-        if($maximum < $minimum && $maximum !== 0) return $minimum;
+        if($maximum < $minimum && $maximum !== 0.0) return $minimum;
         if($maximum > 1280) return 1280;
-        if($maximum < 240 && $maximum !== 0) return 240;
+        if($maximum < 240 && $maximum !== 0.0) return 240;
 
         return $maximum;
     }
