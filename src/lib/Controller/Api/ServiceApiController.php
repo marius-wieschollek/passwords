@@ -126,9 +126,9 @@ class ServiceApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param int  $strength
-     * @param bool $numbers
-     * @param bool $special
+     * @param int|null $strength
+     * @param bool     $numbers
+     * @param bool     $special
      *
      * @return JSONResponse
      * @throws ApiException
@@ -138,7 +138,7 @@ class ServiceApiController extends AbstractApiController {
         if($numbers === null) $numbers = $this->userSettings->get('password.generator.numbers');
         if($special === null) $special = $this->userSettings->get('password.generator.special');
 
-        list($password, $words, $strength) = $this->wordsService->getPassword($strength, $numbers, $special);
+        [$password, $words, $strength] = $this->wordsService->getPassword($strength, $numbers, $special);
         if(empty($password)) throw new ApiException('Unable to generate password', 503);
 
         return $this->createJsonResponse(
@@ -197,8 +197,8 @@ class ServiceApiController extends AbstractApiController {
      * @throws ApiException
      */
     public function getPreview(string $domain, string $view = 'desktop', string $width = '640', string $height = '360...'): FileDisplayResponse {
-        list($minWidth, $maxWidth) = $this->validatePreviewSize($width);
-        list($minHeight, $maxHeight) = $this->validatePreviewSize($height);
+        [$minWidth, $maxWidth] = $this->validatePreviewSize($width);
+        [$minHeight, $maxHeight] = $this->validatePreviewSize($height);
 
         $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
 

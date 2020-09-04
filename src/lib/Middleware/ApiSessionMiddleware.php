@@ -15,6 +15,7 @@ use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\Response;
 use OCP\AppFramework\Middleware;
 use OCP\ISession;
@@ -88,7 +89,7 @@ class ApiSessionMiddleware extends Middleware {
      * @return Response
      */
     public function afterController($controller, $methodName, Response $response): Response {
-        if(!$this->isApiRequest($controller)) return $response;
+        if(!$this->isApiRequest($controller) || $response instanceof FileDisplayResponse) return $response;
 
         $this->sessionService->save();
         $response->addHeader(SessionService::API_SESSION_HEADER, $this->sessionService->getId());

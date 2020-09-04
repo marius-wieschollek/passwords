@@ -11,6 +11,7 @@
 ### Fixed
  - Backup restore always restores config for all users
  - Broken HTTP fallback in pageres cli preview generator
+ - Client attempts to use cached session tokens
 
 ## 2020.8.0 - Feature release
 ### Added
