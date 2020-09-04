@@ -18,15 +18,33 @@ RUN pecl uninstall imagick; \
     pecl install xdebug; \
     pecl install imagick;
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends nodejs
+
+RUN apt-get install -y --no-install-recommends \
+        libnss3 \
+        libxrandr2 \
+        libatk1.0-0 \
+        libatk-bridge2.0-0 \
+        libx11-xcb1 \
+        libxcb-dri3-0 \
+        libxcomposite1 \
+        libxcursor1 \
+        libxdamage1 \
+        libcups2 \
+        libdrm2 \
+        libgbm1 \
+        libasound2 \
+        libxss1 \
+        libgtk-3-0 \
+        libxtst6
 
 RUN apt-get clean; \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-RUN npm install --global pageres-cli@4.1.0 --unsafe-perm
+RUN npm install --global pageres-cli --unsafe-perm
 RUN mkdir -p /var/www/.config
 RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
 
