@@ -130,6 +130,15 @@
                         'web'        : 'https://github.com/daper',
                         'legacy'     : false
                     },
+                    'joleaf'  : {
+                        'label'      : 'NC Passwords',
+                        'author'     : Localisation.translate('created by {author}', {author: 'joleaf'}),
+                        'description': 'Android App for the Nextcloud Passwords App',
+                        'download'   : 'https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app',
+                        'sources'    : 'https://gitlab.com/joleaf/nc-passwords-app',
+                        'web'        : 'https://github.com/joleaf',
+                        'legacy'     : false
+                    },
                     'intirix': {
                         'label'      : 'Cloud Password Manager',
                         'author'     : Localisation.translate('created by {author}', {author: 'intirix'}),
@@ -177,7 +186,7 @@
         .app-overview {
             padding: 0 1rem 1rem;
             display: grid;
-            grid-template: "hBrowser hBrowser hAndroid hAndroid" "cBrowser cBrowser cAndroid cAndroid" "hLibraries . . ." "cLibraries . . .";
+            grid-template: "hBrowser hBrowser hAndroid hAndroid" "cBrowser cBrowser cAndroid cAndroid"  "hLibraries . cAndroid cAndroid" "cLibraries . cAndroid cAndroid" ". . cAndroid cAndroid";
             grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-column-gap: 1rem;
             grid-row-gap: 1rem;
@@ -283,6 +292,10 @@
 
                 &.intirix {
                     background-image: url(../../img/apps/intirix.png);
+                }
+
+                &.joleaf {
+                    background-image: url(../../img/apps/joleaf.png);
                 }
 
                 &.legacy {

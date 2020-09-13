@@ -23,11 +23,11 @@ use OCP\Migration\IRepairStep;
  */
 class CheckAppSettings implements IRepairStep {
 
-    const APP_BC_BREAK_VERSION          = '2020.1';
-    const NEXTCLOUD_MIN_VERSION         = 17;
-    const NEXTCLOUD_RECOMMENDED_VERSION = '18';
-    const PHP_MIN_VERSION               = 70200;
-    const PHP_RECOMMENDED_VERSION       = '7.3.0';
+    const APP_BC_BREAK_VERSION          = '2021.1';
+    const NEXTCLOUD_MIN_VERSION         = 20;
+    const NEXTCLOUD_RECOMMENDED_VERSION = '20';
+    const PHP_MIN_VERSION               = 70400;
+    const PHP_RECOMMENDED_VERSION       = '7.4.0';
 
     /**
      * @var ConfigurationService
