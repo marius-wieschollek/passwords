@@ -8,7 +8,7 @@
                 </header>
                 <nav v-if="showNavigation">
                     <translate tag="h2" say="Contents"/>
-                    <ol>
+                    <ol class="help-navigation">
                         <li v-for="entry in navigation" :class="{active:section===entry.id}">
                             <a :href="entry.href">{{entry.label}}</a>
                         </li>
@@ -223,6 +223,12 @@
         #controls {
             margin : 0 -10px;
             width  : 100vw;
+        }
+
+        ol.help-navigation {
+            li {
+                list-style-type: decimal;
+            }
         }
 
         article {
