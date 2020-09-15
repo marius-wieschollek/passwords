@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Admin;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\AppSettingsService;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
@@ -22,7 +23,7 @@ class SettingsController extends ApiController {
     /**
      * @var AppSettingsService
      */
-    protected $settingsService;
+    protected AppSettingsService $settingsService;
 
     /**
      * SettingsController constructor.
@@ -57,7 +58,7 @@ class SettingsController extends ApiController {
      * @param $id
      *
      * @return JSONResponse
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function show($id): JSONResponse {
         $data = $this->settingsService->get($id);
@@ -70,7 +71,7 @@ class SettingsController extends ApiController {
      * @param $value
      *
      * @return JSONResponse
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function update($id, $value): JSONResponse {
         if(!empty($value) || ($id === 'survey.server' && $value === "0")) {
@@ -86,7 +87,7 @@ class SettingsController extends ApiController {
      * @param $id
      *
      * @return JSONResponse
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function destroy($id): JSONResponse {
         $data = $this->settingsService->reset($id);

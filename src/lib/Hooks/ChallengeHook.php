@@ -2,6 +2,7 @@
 
 namespace OCA\Passwords\Hooks;
 
+use Exception;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\EncryptionService;
@@ -22,32 +23,32 @@ class ChallengeHook {
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * @var ISecureRandom
      */
-    protected $secureRandom;
+    protected ISecureRandom $secureRandom;
 
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var EncryptionService
      */
-    protected $encryptionService;
+    protected EncryptionService $encryptionService;
 
     /**
      * @var Keychain|null
      */
-    private static $cseV1Keychain;
+    private static ?Keychain $cseV1Keychain;
 
     /**
      * @var Keychain|null
      */
-    private static $sseV2Keychain;
+    private static ?Keychain $sseV2Keychain;
 
     /**
      * ChallengeHook constructor.
@@ -79,16 +80,16 @@ class ChallengeHook {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function postSetChallenge(): void {
-        if(self::$sseV2Keychain === null) {
+        if(!isset(self::$sseV2Keychain)) {
             self::$sseV2Keychain = $this->createSseV2Keychain();
         }
 
         $this->updateSseV2Keychain(self::$sseV2Keychain);
 
-        if(self::$cseV1Keychain !== null) $this->keychainService->save(self::$cseV1Keychain);
+        if(isset(self::$cseV1Keychain)) $this->keychainService->save(self::$cseV1Keychain);
     }
 
     /**
@@ -101,7 +102,7 @@ class ChallengeHook {
     /**
      * @param Keychain $keychain
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function updateSseV2Keychain(Keychain $keychain): void {
         $uuid = $this->uuidHelper->generateUuid();

@@ -37,22 +37,22 @@ abstract class AbstractObjectHelper {
     /**
      * @var IAppContainer
      */
-    protected $container;
+    protected IAppContainer $container;
 
     /**
      * @var AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var EncryptionService
      */
-    protected $encryptionService;
+    protected EncryptionService $encryptionService;
 
     /**
      * @var array
      */
-    public static $filterOperators
+    public static array $filterOperators
         = [
             self::OPERATOR_EQUALS,
             self::OPERATOR_NOT_EQUALS,

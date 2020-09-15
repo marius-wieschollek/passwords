@@ -12,7 +12,6 @@ use OCA\Guests\UserBackend;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
-use OCP\AppFramework\QueryException;
 use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\IUserManager;
@@ -29,34 +28,34 @@ class ShareUserListHelper {
     const USER_SEARCH_LIMIT   = 256;
 
     /**
-     * @var IUser
+     * @var IUser|null
      */
-    protected $user;
+    protected ?IUser $user;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var IGroupManager
      */
-    protected $groupManager;
+    protected IGroupManager $groupManager;
 
     /**
      * @var IManager
      */
-    protected $shareManager;
+    protected IManager $shareManager;
 
     /**
      * ShareUserListHelper constructor.
@@ -179,13 +178,9 @@ class ShareUserListHelper {
         if($this->shareManager->shareWithGroupMembersOnly()) return true;
 
         if($this->config->isAppEnabled('guests') && $this->config->getAppValue('hide_users', 'true', 'guests') === 'true') {
-            try {
-                $guestBackend = OC::$server->query(UserBackend::class);
+            $guestBackend = OC::$server->get(UserBackend::class);
 
-                return $guestBackend->userExists($this->userId);
-            } catch(QueryException $e) {
-                return true;
-            }
+            return $guestBackend->userExists($this->userId);
         }
 
         return false;

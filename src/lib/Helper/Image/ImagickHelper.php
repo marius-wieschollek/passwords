@@ -8,7 +8,9 @@
 namespace OCA\Passwords\Helper\Image;
 
 use Gmagick;
+use GmagickException;
 use Imagick;
+use ImagickException;
 use Throwable;
 
 /**
@@ -26,7 +28,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param int             $maxHeight
      *
      * @return Imagick|Gmagick
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function advancedResizeImage($image, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight) {
 
@@ -46,7 +48,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param int             $size
      *
      * @return Imagick|Gmagick
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function simpleResizeImage($image, int $size) {
         $image->resizeImage($size, $size, $image::FILTER_LANCZOS, 1, 1);
@@ -58,7 +60,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return Imagick|Gmagick
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function cropImageRectangular($image) {
         $width  = $image->getImageWidth();
@@ -100,8 +102,8 @@ class ImagickHelper extends AbstractImageHelper {
      * @param string $file
      *
      * @return Gmagick|Imagick
-     * @throws \ImagickException
-     * @throws \GmagickException
+     * @throws ImagickException
+     * @throws GmagickException
      */
     public function getImageFromFile(string $file) {
         $image = $this->getNewImageObject();
@@ -116,7 +118,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return bool
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function destroyImage($image): bool {
         $image->clear();
@@ -128,7 +130,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return string
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function exportJpeg($image) {
 
@@ -145,7 +147,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return string
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function exportPng($image) {
 
@@ -161,8 +163,7 @@ class ImagickHelper extends AbstractImageHelper {
      * @param string $format
      *
      * @return bool
-     * @throws \ImagickException
-     * @throws \GmagickException
+     * @throws GmagickException
      */
     public function supportsFormat(string $format): bool {
         $image = $this->getNewImageObject();
@@ -206,7 +207,6 @@ class ImagickHelper extends AbstractImageHelper {
 
     /**
      * @return Imagick|Gmagick
-     * @throws \ImagickException
      */
     protected function getNewImageObject() {
         return class_exists(Imagick::class) ? new Imagick():new Gmagick();

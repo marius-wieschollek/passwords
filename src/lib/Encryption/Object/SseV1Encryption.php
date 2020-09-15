@@ -30,7 +30,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
     /**
      * @var array
      */
-    protected $password
+    protected array $password
         = [
             'url',
             'label',
@@ -43,37 +43,37 @@ class SseV1Encryption implements ObjectEncryptionInterface {
     /**
      * @var array
      */
-    protected $folder = ['label'];
+    protected array $folder = ['label'];
 
     /**
      * @var array
      */
-    protected $tag = ['label', 'color'];
+    protected array $tag = ['label', 'color'];
 
     /**
      * @var null|string
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ICrypto
      */
-    protected $crypto;
+    protected ICrypto $crypto;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var ISecureRandom
      */
-    protected $secureRandom;
+    protected ISecureRandom $secureRandom;
 
     /**
      * ShareV1Encryption constructor.
@@ -287,8 +287,6 @@ class SseV1Encryption implements ObjectEncryptionInterface {
     }
 
     /**
-     * @param string $userId
-     *
      * @return string
      * @throws Exception
      */

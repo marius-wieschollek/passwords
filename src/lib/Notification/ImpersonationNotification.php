@@ -7,6 +7,10 @@
 
 namespace OCA\Passwords\Notification;
 
+use DateTime;
+use Exception;
+use IntlDateFormatter;
+use InvalidArgumentException;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserService;
@@ -29,17 +33,17 @@ class ImpersonationNotification extends AbstractNotification {
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * ImpersonationNotification constructor.
@@ -69,6 +73,8 @@ class ImpersonationNotification extends AbstractNotification {
     /**
      * @param string $userId
      * @param array  $parameters
+     *
+     * @throws Exception
      */
     public function send(string $userId, array $parameters = []): void {
         $parameters['time'] = time();
@@ -86,10 +92,10 @@ class ImpersonationNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
-     * @throws \Exception
+     * @throws Exception
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        if($this->environment->isImpersonating()) throw new \InvalidArgumentException();
+        if($this->environment->isImpersonating()) throw new InvalidArgumentException();
 
         $title   = $localisation->t('Administrative access to your account');
         $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index');
@@ -106,16 +112,16 @@ class ImpersonationNotification extends AbstractNotification {
      * @param array $parameters
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getMessage(IL10N $localisation, array $parameters): string {
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
         $dateTime->setTimestamp($parameters['time']);
 
-        $formatter = new \IntlDateFormatter(
+        $formatter = new IntlDateFormatter(
             $localisation->getLocaleCode(),
-            \IntlDateFormatter::LONG,
-            \IntlDateFormatter::SHORT
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::SHORT
         );
 
         $date         = $formatter->format($dateTime);

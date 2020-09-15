@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Backup;
 
+use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\AbstractRevisionMapper;
 use OCA\Passwords\Db\ChallengeMapper;
@@ -32,77 +33,77 @@ use OCA\Passwords\Services\UserChallengeService;
  */
 class CreateBackupHelper {
 
-    const BACKUP_VERSION = 105;
+    const BACKUP_VERSION = 106;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var TagMapper
      */
-    protected $tagMapper;
+    protected TagMapper $tagMapper;
 
     /**
      * @var FolderMapper
      */
-    protected $folderMapper;
+    protected FolderMapper $folderMapper;
 
     /**
      * @var ShareMapper
      */
-    protected $shareMapper;
+    protected ShareMapper $shareMapper;
 
     /**
      * @var PasswordMapper
      */
-    protected $passwordMapper;
+    protected PasswordMapper $passwordMapper;
 
     /**
      * @var KeychainMapper
      */
-    protected $keychainMapper;
+    protected KeychainMapper $keychainMapper;
 
     /**
      * @var ChallengeMapper
      */
-    protected $challengeMapper;
+    protected ChallengeMapper $challengeMapper;
 
     /**
      * @var TagRevisionMapper
      */
-    protected $tagRevisionMapper;
+    protected TagRevisionMapper $tagRevisionMapper;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $userSettingsHelper;
+    protected UserSettingsHelper $userSettingsHelper;
 
     /**
      * @var AppSettingsService
      */
-    protected $appSettingsService;
+    protected AppSettingsService $appSettingsService;
 
     /**
      * @var FolderRevisionMapper
      */
-    protected $folderRevisionMapper;
+    protected FolderRevisionMapper $folderRevisionMapper;
 
     /**
      * @var PasswordRevisionMapper
      */
-    protected $passwordRevisionMapper;
+    protected PasswordRevisionMapper $passwordRevisionMapper;
 
     /**
      * @var PasswordTagRelationMapper
      */
-    protected $passwordTagRelationMapper;
+    protected PasswordTagRelationMapper $passwordTagRelationMapper;
 
     /**
      * @var array
      */
-    protected $users = [];
+    protected array $users = [];
 
     /**
      * CreateBackupHelper constructor.
@@ -153,7 +154,7 @@ class CreateBackupHelper {
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getData(): array {
         return [
@@ -210,7 +211,7 @@ class CreateBackupHelper {
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getUserKeys(): array {
         $keys = [];
@@ -242,7 +243,7 @@ class CreateBackupHelper {
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getUserSettings(): array {
         $settings = [];
@@ -255,7 +256,7 @@ class CreateBackupHelper {
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getClientSettings(): array {
         $settings = [];

@@ -26,6 +26,7 @@
 
 namespace OCA\Passwords\Fetcher;
 
+use Exception;
 use OC\App\AppStore\Fetcher\Fetcher;
 use OC\App\AppStore\Version\VersionParser;
 use OC\App\CompareVersion;
@@ -34,6 +35,7 @@ use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\ILogger;
+use Throwable;
 
 /**
  * Class AppFetcher
@@ -45,17 +47,22 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * @var CompareVersion
      */
-    protected $compareVersion;
+    protected CompareVersion $compareVersion;
 
     /**
      * @var bool
      */
-    private $ignoreMaxVersion;
+    protected bool $ignoreMaxVersion;
 
     /**
      * @var bool
      */
-    protected $dbUpdated;
+    protected bool $dbUpdated;
+
+    /**
+     * @var string
+     */
+    protected string $endpointUrl;
 
     /**
      * @param Factory        $appDataFactory
@@ -91,13 +98,15 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * Returns the array with the apps on the appstore server
      *
+     * @param bool $allowUnstable
+     *
      * @return array
      */
-    public function get() {
+    public function get($allowUnstable = false) {
         $this->dbUpdated = false;
 
         $eTag   = $this->prepareAppDbForUpdate();
-        $result = parent::get();
+        $result = parent::get($allowUnstable);
         $this->updateAppDbAfterUpdate($eTag);
 
         return $result;
@@ -114,7 +123,7 @@ class NightlyAppFetcher extends Fetcher {
             $file->delete();
             $file = $rootFolder->getFile('apps.json');
             $file->delete();
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
         }
     }
 
@@ -132,7 +141,7 @@ class NightlyAppFetcher extends Fetcher {
      * @param string $content
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function fetch($ETag, $content) {
         $json = parent::fetch($ETag, $content);
@@ -209,7 +218,7 @@ class NightlyAppFetcher extends Fetcher {
             $file       = $rootFolder->getFile($this->fileName);
 
             return $file->getETag();
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return '';
         }
     }
@@ -234,7 +243,7 @@ class NightlyAppFetcher extends Fetcher {
 
                 $this->dbUpdated = true;
             }
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
         }
     }
 
@@ -255,7 +264,7 @@ class NightlyAppFetcher extends Fetcher {
                              $this->compareVersion->isCompatible($ncVersion, $max, '<=');
 
             return $minFulfilled && ($this->ignoreMaxVersion || $maxFulfilled);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
         }
 

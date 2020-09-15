@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Encryption\Backup;
 
+use Exception;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
@@ -22,7 +23,7 @@ class SseV1BackupEncryption extends SseV1Encryption {
     /**
      * @var array
      */
-    protected $keys = [];
+    protected array $keys = [];
 
     /**
      * @param array $keys
@@ -36,7 +37,7 @@ class SseV1BackupEncryption extends SseV1Encryption {
      * @param string $type
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function decryptArray(array $data, string $type = 'password'): array {
         $revision = $this->arrayToObject($data, $type);
@@ -49,7 +50,7 @@ class SseV1BackupEncryption extends SseV1Encryption {
      * @param string $type
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function encryptArray(array $data, string $type = 'password'): array {
         $revision = $this->arrayToObject($data, $type);
@@ -78,7 +79,7 @@ class SseV1BackupEncryption extends SseV1Encryption {
      * @param string $type
      *
      * @return FolderRevision|PasswordRevision|TagRevision
-     * @throws \Exception
+     * @throws Exception
      */
     protected function arrayToObject(array $data, string $type) {
         if($type === 'password') {
@@ -88,7 +89,7 @@ class SseV1BackupEncryption extends SseV1Encryption {
         } else if($type === 'tag') {
             $revision = new TagRevision();
         } else {
-            throw new \Exception('Unknown object type');
+            throw new Exception('Unknown object type');
         }
 
         foreach($data as $key => $value) {

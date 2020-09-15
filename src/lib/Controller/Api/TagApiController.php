@@ -7,12 +7,19 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\TagObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\Object\AbstractModelService;
+use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -25,24 +32,24 @@ use OCP\IRequest;
 class TagApiController extends AbstractObjectApiController {
 
     /**
-     * @var TagService
+     * @var TagService|AbstractModelService
      */
-    protected $modelService;
+    protected AbstractModelService $modelService;
 
     /**
-     * @var TagObjectHelper
+     * @var TagObjectHelper|AbstractObjectHelper
      */
-    protected $objectHelper;
+    protected AbstractObjectHelper $objectHelper;
 
     /**
-     * @var TagRevisionService
+     * @var TagRevisionService|AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favorite'];
+    protected array $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favorite'];
 
     /**
      * TagApiController constructor.
@@ -77,8 +84,8 @@ class TagApiController extends AbstractObjectApiController {
      * @param bool   $favorite
      *
      * @return JSONResponse
-     * @throws \Exception
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws Exception
+     * @throws ApiException
      */
     public function create(
         string $label,
@@ -120,10 +127,10 @@ class TagApiController extends AbstractObjectApiController {
      * @param bool   $favorite
      *
      * @return JSONResponse
-     * @throws \Exception
-     * @throws \OCA\Passwords\Exception\ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws ApiException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function update(
         string $id,

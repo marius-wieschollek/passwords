@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Db;
 
+use BadFunctionCallException;
 use OCP\AppFramework\Db\Entity;
 
 /**
@@ -30,27 +31,27 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
     /**
      * @var string
      */
-    protected $uuid;
+    protected string $uuid;
 
     /**
      * @var string
      */
-    protected $userId;
+    protected string $userId;
 
     /**
      * @var bool
      */
-    protected $deleted;
+    protected bool $deleted;
 
     /**
      * @var int
      */
-    protected $created;
+    protected int $created;
 
     /**
      * @var int
      */
-    protected $updated;
+    protected int $updated;
 
     /**
      * Folder constructor.
@@ -61,6 +62,42 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
         $this->addType('deleted', 'boolean');
         $this->addType('created', 'integer');
         $this->addType('updated', 'integer');
+    }
+
+    /**
+     * @param string $name
+     * @param array  $args
+     */
+    protected function setter($name, $args) {
+        if(property_exists($this, $name)) {
+            if(isset($this->{$name}) && $this->{$name} === $args[0]) {
+                return;
+            }
+            $this->markFieldUpdated($name);
+
+            if($args[0] !== null && array_key_exists($name, $this->getFieldTypes())) {
+                $type = $this->getFieldTypes()[ $name ];
+                if($type === 'blob') $type = 'string';
+
+                settype($args[0], $type);
+            }
+            $this->{$name} = $args[0];
+        } else {
+            throw new BadFunctionCallException($name.' is not a valid attribute');
+        }
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    protected function getter($name) {
+        if(property_exists($this, $name)) {
+            return isset($this->{$name}) ? $this->{$name}:null;
+        } else {
+            throw new BadFunctionCallException($name.' is not a valid attribute');
+        }
     }
 
     /**
@@ -95,7 +132,7 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
     public function hasProperty(string $property): bool {
         $fieldTypes = $this->getFieldTypes();
 
-        return isset($fieldTypes[$property]);
+        return isset($fieldTypes[ $property ]);
     }
 
     /**
@@ -106,7 +143,7 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
 
         $array = [];
         foreach($fields as $field) {
-            $array[$field] = $this->getProperty($field);
+            $array[ $field ] = $this->getProperty($field);
         }
 
         return $array;

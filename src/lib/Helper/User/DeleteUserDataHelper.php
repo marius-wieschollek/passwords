@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\User;
 
+use Exception;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
@@ -31,57 +32,57 @@ class DeleteUserDataHelper {
     /**
      * @var null|string
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $settings;
+    protected UserSettingsHelper $settings;
 
     /**
      * @var FolderService
      */
-    protected $folderService;
+    protected FolderService $folderService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var ChallengeService
      */
-    protected $challengeService;
+    protected ChallengeService $challengeService;
 
     /**
      * @var SessionMapper
      */
-    protected $sessionMapper;
+    protected SessionMapper $sessionMapper;
 
     /**
      * @var array
      */
-    protected $userConfigKeys
+    protected array $userConfigKeys
         = [
             'SSEv1UserKey',
             'client/settings',
@@ -129,10 +130,10 @@ class DeleteUserDataHelper {
     /**
      * @param string $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleteUserData(string $userId): void {
-        if($this->userId !== null && $this->userId !== $userId) throw new \Exception('Invalid user id '.$userId);
+        if($this->userId !== null && $this->userId !== $userId) throw new Exception('Invalid user id '.$userId);
 
         $this->closeSessions($userId);
         $this->deleteObjects($this->tagService, $userId);
@@ -149,10 +150,9 @@ class DeleteUserDataHelper {
      * @param AbstractModelService|ShareService|AbstractService $service
      * @param string                                            $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function deleteObjects(AbstractService $service, string $userId): void {
-        /** @var EntityInterface[] $objects */
         $objects = $service->findByUserId($userId);
 
         foreach($objects as $object) {
@@ -163,7 +163,7 @@ class DeleteUserDataHelper {
     /**
      * @param string $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function deleteUserSettings(string $userId): void {
         $settings = array_keys($this->settings->list($userId));
@@ -176,7 +176,7 @@ class DeleteUserDataHelper {
     /**
      * @param string $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function deleteUserConfig(string $userId): void {
         foreach($this->userConfigKeys as $key) {
@@ -187,7 +187,7 @@ class DeleteUserDataHelper {
     /**
      * @param string $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function closeSessions(string $userId): void {
         $sessions = $this->sessionMapper->findAllByUserId($userId);

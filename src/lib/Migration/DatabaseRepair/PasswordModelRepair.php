@@ -20,7 +20,7 @@ class PasswordModelRepair extends AbstractModelRepair {
     /**
      * @var string
      */
-    protected $objectName = 'password';
+    protected string $objectName = 'password';
 
     /**
      * PasswordModelRepair constructor.

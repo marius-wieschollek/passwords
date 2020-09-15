@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 
@@ -20,7 +21,7 @@ class ClientSettingsHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * ClientSettingsHelper constructor.
@@ -36,7 +37,7 @@ class ClientSettingsHelper {
      * @param string|null $userId
      *
      * @return null
-     * @throws \Exception
+     * @throws Exception
      */
     public function get(string $key, string $userId = null) {
         $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
@@ -52,7 +53,7 @@ class ClientSettingsHelper {
      *
      * @return mixed
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function set(string $key, $value, string $userId = null) {
         if(strlen($key) > 48) {
@@ -74,7 +75,7 @@ class ClientSettingsHelper {
      * @param string|null $userId
      *
      * @return null
-     * @throws \Exception
+     * @throws Exception
      */
     public function reset(string $key, string $userId = null) {
         $data = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);
@@ -91,7 +92,7 @@ class ClientSettingsHelper {
      *
      * @param string|null $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function list(string $userId = null): array {
         $settings = [];

@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
+use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Services\EncryptionService;
@@ -15,6 +16,7 @@ use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\Migration\IOutput;
+use Throwable;
 
 /**
  * Class AbstractRepairHelper
@@ -26,29 +28,29 @@ abstract class AbstractRevisionRepair {
     /**
      * @var AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var AbstractMapper
      */
-    protected $modelMapper;
+    protected AbstractMapper $modelMapper;
 
     /**
      * @var EncryptionService
      */
-    protected $encryption;
+    protected EncryptionService $encryption;
 
     /**
      * @var string
      */
-    protected $objectName = 'abstract';
+    protected string $objectName = 'abstract';
 
     /**
      * Run more time consuming repair jobs if enabled
      *
      * @var bool
      */
-    protected $enhancedRepair = false;
+    protected bool $enhancedRepair = false;
 
     /**
      * AbstractRevisionRepair constructor.
@@ -68,10 +70,9 @@ abstract class AbstractRevisionRepair {
     /**
      * @param IOutput $output
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(IOutput $output): void {
-        /** @var RevisionInterface[] $allRevisions */
         $allRevisions = $this->revisionService->findAll(false);
 
         $fixed = 0;
@@ -81,7 +82,7 @@ abstract class AbstractRevisionRepair {
         foreach($allRevisions as $revision) {
             try {
                 if($this->repairRevision($revision)) $fixed++;
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $output->warning(
                     "Failed to repair revision #{$revision->getUuid()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );
@@ -96,7 +97,7 @@ abstract class AbstractRevisionRepair {
      * @param RevisionInterface $revision
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     protected function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;
@@ -129,7 +130,7 @@ abstract class AbstractRevisionRepair {
             $this->encryption->decrypt($revision);
 
             return true;
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $revision->setDeleted(true);
 
             return false;

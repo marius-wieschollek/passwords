@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Encryption\Object\SimpleEncryption;
@@ -15,6 +16,7 @@ use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IRequest;
 use OCP\ISession;
+use Throwable;
 
 /**
  * Class SessionService
@@ -30,62 +32,62 @@ class SessionService {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * @var SessionMapper
      */
-    protected $mapper;
+    protected SessionMapper $mapper;
 
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * @var SimpleEncryption
      */
-    protected $encryption;
+    protected SimpleEncryption $encryption;
 
     /**
      * @var ISession
      */
-    protected $userSession;
+    protected ISession $userSession;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $userSettings;
+    protected UserSettingsHelper $userSettings;
 
     /**
      * @var array
      */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * @var array
      */
-    protected $shadowVars = [];
+    protected array $shadowVars = [];
 
     /**
      * @var Session|null
      */
-    protected $session = null;
+    protected ?Session $session = null;
 
     /**
      * @var bool
      */
-    protected $modified = false;
+    protected bool $modified = false;
 
     /**
      * SessionService constructor.
@@ -246,7 +248,7 @@ class SessionService {
     }
 
     /**
-     *
+     * @throws Exception
      */
     public function delete() {
         if(!empty($this->session->getId())) {
@@ -292,7 +294,7 @@ class SessionService {
                 }
             } catch(DoesNotExistException $e) {
                 $this->logger->warning(['Attempt to access expired or nonexistent session %s by %s', $sessionId, $this->environment->getUserId()]);
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $this->logger->logException($e);
             }
         }
@@ -308,7 +310,7 @@ class SessionService {
         try {
             $value = $this->encryption->encrypt(json_encode($data));
             $this->session->setProperty($property, $value);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->session->setProperty($property, '[]');
         }
     }
@@ -325,14 +327,14 @@ class SessionService {
                     $this->session->getProperty($property)
                 ),
                 true);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return [];
         }
     }
 
     /**
      * @return Session
-     * @throws \Exception
+     * @throws Exception
      */
     protected function create(): Session {
         $model = new Session();

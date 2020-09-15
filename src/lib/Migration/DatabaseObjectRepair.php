@@ -2,6 +2,7 @@
 
 namespace OCA\Passwords\Migration;
 
+use Exception;
 use OCA\Passwords\Migration\DatabaseRepair\FolderModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\FolderRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordModelRepair;
@@ -22,37 +23,37 @@ class DatabaseObjectRepair implements IRepairStep {
     /**
      * @var TagModelRepair
      */
-    protected $tagModelRepair;
+    protected TagModelRepair $tagModelRepair;
 
     /**
      * @var FolderModelRepair
      */
-    protected $folderModelRepair;
+    protected FolderModelRepair $folderModelRepair;
 
     /**
      * @var TagRevisionRepair
      */
-    protected $tagRevisionRepair;
+    protected TagRevisionRepair $tagRevisionRepair;
 
     /**
      * @var PasswordModelRepair
      */
-    protected $passwordModelRepair;
+    protected PasswordModelRepair $passwordModelRepair;
 
     /**
      * @var FolderRevisionRepair
      */
-    protected $folderRevisionRepair;
+    protected FolderRevisionRepair $folderRevisionRepair;
 
     /**
      * @var PasswordRevisionRepair
      */
-    protected $passwordRevisionRepair;
+    protected PasswordRevisionRepair $passwordRevisionRepair;
 
     /**
      * @var PasswordTagRelationRepair
      */
-    protected $passwordTagRelationRepair;
+    protected PasswordTagRelationRepair $passwordTagRelationRepair;
 
     /**
      * DatabaseObjectRepair constructor.
@@ -99,7 +100,7 @@ class DatabaseObjectRepair implements IRepairStep {
      *
      * @param IOutput $output
      *
-     * @throws \Exception in case of failure
+     * @throws Exception in case of failure
      * @since 9.1.0
      */
     public function run(IOutput $output): void {

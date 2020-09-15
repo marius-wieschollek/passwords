@@ -22,7 +22,7 @@ class UserHook {
     /**
      * @var BackgroundJobService
      */
-    protected $backgroundJobService;
+    protected BackgroundJobService $backgroundJobService;
 
     /**
      * UserHook constructor.

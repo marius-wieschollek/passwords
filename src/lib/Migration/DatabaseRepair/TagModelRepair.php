@@ -20,7 +20,7 @@ class TagModelRepair extends AbstractModelRepair {
     /**
      * @var string
      */
-    protected $objectName = 'tag';
+    protected string $objectName = 'tag';
 
     /**
      * TagModelRepair constructor.

@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Upgrade;
 
+use OC_User;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\DeferredActivationService;
@@ -24,27 +25,27 @@ class UpgradeCheckHelper {
     /**
      * @var DeferredActivationService
      */
-    protected $das;
+    protected DeferredActivationService $das;
 
     /**
      * @var IL10N
      */
-    protected $lang;
+    protected IL10N $lang;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * UpgradeCheckHelper constructor.
@@ -97,7 +98,7 @@ class UpgradeCheckHelper {
      * @return array|null
      */
     public function getUpgradeMessage(): ?array {
-        if(!\OC_User::isAdminUser($this->environment->getUserId())) return null;
+        if(!OC_User::isAdminUser($this->environment->getUserId())) return null;
         $info = $this->upgradeRequired();
         if(!$info['app']['upgrade']) return null;
 

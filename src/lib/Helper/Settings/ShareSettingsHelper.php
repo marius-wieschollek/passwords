@@ -20,17 +20,17 @@ class ShareSettingsHelper {
     /**
      * @var null|string
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IManager
      */
-    protected $shareManager;
+    protected IManager $shareManager;
 
     /**
      * ShareSettingsHelper constructor.

@@ -19,7 +19,6 @@ use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
-use OCP\AppFramework\QueryException;
 
 /**
  * Class PasswordObjectHelper
@@ -36,32 +35,32 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * @var FolderService
      */
-    protected $folderService;
+    protected FolderService $folderService;
 
     /**
      * @var TagObjectHelper
      */
-    protected $tagObjectHelper;
+    protected TagObjectHelper $tagObjectHelper;
 
     /**
      * @var ShareObjectHelper
      */
-    protected $shareObjectHelper;
+    protected ShareObjectHelper $shareObjectHelper;
 
     /**
      * @var FolderObjectHelper
      */
-    protected $folderObjectHelper;
+    protected FolderObjectHelper $folderObjectHelper;
 
     /**
      * PasswordObjectHelper constructor.
@@ -97,7 +96,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     public function getApiObject(
         EntityInterface $password,
@@ -105,7 +103,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         $filter = []
     ): ?array {
         $detailLevel = explode('+', $level);
-        $withModel = in_array(self::LEVEL_MODEL, $detailLevel);
+        $withModel   = in_array(self::LEVEL_MODEL, $detailLevel);
 
         /** @var PasswordRevision $revision */
         $revision = $this->getRevision($password, $filter, $withModel);
@@ -221,7 +219,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @return array
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     protected function getTags(PasswordRevision $revision, array $object, bool $includeModels = true): array {
         $object['tags'] = [];
@@ -253,7 +250,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     protected function getFolder(PasswordRevision $revision, array $object): array {
         $object['folder'] = [];
@@ -288,7 +284,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
         foreach($shares as $share) {
             $object['shares'][] = $objectHelper->getApiObject($share);
 
-            usort($object['shares'], function($a, $b) {
+            usort($object['shares'], function ($a, $b) {
                 return $a['receiver'] > $b['receiver'] ? 1:-1;
             });
         }
@@ -303,11 +299,10 @@ class PasswordObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return TagObjectHelper
-     * @throws QueryException
      */
     protected function getTagObjectHelper(): TagObjectHelper {
-        if(!$this->tagObjectHelper) {
-            $this->tagObjectHelper = $this->container->query(TagObjectHelper::class);
+        if(!isset($this->tagObjectHelper)) {
+            $this->tagObjectHelper = $this->container->get(TagObjectHelper::class);
         }
 
         return $this->tagObjectHelper;
@@ -315,11 +310,10 @@ class PasswordObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return FolderObjectHelper
-     * @throws QueryException
      */
     protected function getFolderObjectHelper(): FolderObjectHelper {
-        if(!$this->folderObjectHelper) {
-            $this->folderObjectHelper = $this->container->query(FolderObjectHelper::class);
+        if(!isset($this->folderObjectHelper)) {
+            $this->folderObjectHelper = $this->container->get(FolderObjectHelper::class);
         }
 
         return $this->folderObjectHelper;
@@ -327,11 +321,10 @@ class PasswordObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return ShareObjectHelper
-     * @throws QueryException
      */
     protected function getShareObjectHelper(): ShareObjectHelper {
-        if(!$this->shareObjectHelper) {
-            $this->shareObjectHelper = $this->container->query(ShareObjectHelper::class);
+        if(!isset($this->shareObjectHelper)) {
+            $this->shareObjectHelper = $this->container->get(ShareObjectHelper::class);
         }
 
         return $this->shareObjectHelper;

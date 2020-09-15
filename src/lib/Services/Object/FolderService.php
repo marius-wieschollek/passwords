@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderMapper;
@@ -15,6 +17,9 @@ use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class FolderService
@@ -26,14 +31,14 @@ class FolderService extends AbstractModelService {
     const BASE_FOLDER_UUID = '00000000-0000-0000-0000-000000000000';
 
     /**
-     * @var FolderMapper
+     * @var FolderMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = Folder::class;
+    protected string $class = Folder::class;
 
     /**
      * FolderService constructor.
@@ -50,10 +55,10 @@ class FolderService extends AbstractModelService {
     /**
      * @param string $uuid
      *
-     * @return \OCA\Passwords\Db\EntityInterface|Folder
+     * @return EntityInterface|Folder
      *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): ModelInterface {
         if($uuid === self::BASE_FOLDER_UUID) return $this->getBaseFolder();
@@ -85,7 +90,7 @@ class FolderService extends AbstractModelService {
     /**
      * @param ModelInterface|EntityInterface $model
      *
-     * @return Folder|\OCP\AppFramework\Db\Entity
+     * @return Folder|Entity
      */
     public function save(EntityInterface $model): EntityInterface {
         if($model->getUuid() === self::BASE_FOLDER_UUID) return $model;
@@ -98,7 +103,7 @@ class FolderService extends AbstractModelService {
      * @param array                          $overwrites
      *
      * @return EntityInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
         if($entity->getUuid() === self::BASE_FOLDER_UUID) return $entity;
@@ -109,7 +114,7 @@ class FolderService extends AbstractModelService {
     /**
      * @param ModelInterface|EntityInterface $model
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function delete(EntityInterface $model): void {
         if($model->getUuid() === self::BASE_FOLDER_UUID) return;
@@ -121,7 +126,7 @@ class FolderService extends AbstractModelService {
      * @param ModelInterface    $model
      * @param RevisionInterface $revision
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function setRevision(ModelInterface $model, RevisionInterface $revision): void {
         if($model->getUuid() === self::BASE_FOLDER_UUID) return;

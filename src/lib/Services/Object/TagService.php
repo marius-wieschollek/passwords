@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
@@ -21,14 +22,14 @@ use OCA\Passwords\Services\EnvironmentService;
 class TagService extends AbstractModelService {
 
     /**
-     * @var TagMapper
+     * @var TagMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = Tag::class;
+    protected string $class = Tag::class;
 
     /**
      * TagService constructor.

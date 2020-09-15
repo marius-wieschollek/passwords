@@ -28,22 +28,22 @@ class FolderHook {
     /**
      * @var FolderRevisionService
      */
-    protected $revisionService;
+    protected FolderRevisionService $revisionService;
 
     /**
      * @var FolderService
      */
-    protected $folderService;
+    protected FolderService $folderService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * FolderHook constructor.

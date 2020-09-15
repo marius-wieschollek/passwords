@@ -11,10 +11,13 @@ use OC\Authentication\TwoFactorAuth\Manager;
 use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
+use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\ISession;
 use OCP\IUser;
+use ReflectionException;
 use ReflectionObject;
 use stdClass;
+use Throwable;
 
 /**
  * Class UserTokenHelper
@@ -24,49 +27,50 @@ use stdClass;
 class UserTokenHelper {
 
     /**
-     * @var IUser
+     * @var IUser|null
      */
-    protected $user;
+    protected ?IUser $user;
 
     /**
      * @var ISession
      */
-    protected $session;
+    protected ISession $session;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var Manager
      */
-    protected $twoFactorManager;
+    protected Manager $twoFactorManager;
 
     /**
      * @var DeferredActivationService
      */
-    private $activationService;
+    private DeferredActivationService $activationService;
 
     /**
-     * @var null|\OCP\Authentication\TwoFactorAuth\IProvider[]
+     * @var null|IProvider[]
      */
-    protected $providers = null;
+    protected ?array $providers = null;
 
     /**
      * List of 2fa providers that are known to work
      *
      * @var array
      */
-    protected $enabledProviders = ['totp', 'twofactor_nextcloud_notification', 'admin', 'email'];
+    protected array $enabledProviders = ['totp', 'twofactor_nextcloud_notification', 'admin', 'email'];
 
     /**
      * UserTokenHelper constructor.
      *
-     * @param Manager            $twoFactorManager
-     * @param EnvironmentService $environmentService
-     * @param SessionService     $sessionService
-     * @param ISession           $session
+     * @param Manager                   $twoFactorManager
+     * @param DeferredActivationService $activationService
+     * @param EnvironmentService        $environmentService
+     * @param SessionService            $sessionService
+     * @param ISession                  $session
      */
     public function __construct(Manager $twoFactorManager, DeferredActivationService $activationService, EnvironmentService $environmentService, SessionService $sessionService, ISession $session) {
         $this->twoFactorManager = $twoFactorManager;
@@ -84,7 +88,7 @@ class UserTokenHelper {
     }
 
     /**
-     * @return \OCP\Authentication\TwoFactorAuth\IProvider[]
+     * @return IProvider[]
      */
     public function getProviders(): array {
         if($this->providers !== null) return $this->providers;
@@ -105,7 +109,7 @@ class UserTokenHelper {
                     if($backupProvider !== null) $this->providers[ $backupProvider->getId() ] = $backupProvider;
                 }
             }
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
         }
 
         return $this->providers;
@@ -136,7 +140,7 @@ class UserTokenHelper {
      * @param $id
      *
      * @return array
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function triggerProvider(string $id): array {
         $providers = $this->getProviders();

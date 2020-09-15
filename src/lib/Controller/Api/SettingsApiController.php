@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Http\JSONResponse;
@@ -22,7 +23,7 @@ class SettingsApiController extends AbstractApiController {
     /**
      * @var UserSettingsService
      */
-    protected $settings;
+    protected UserSettingsService $settings;
 
     /**
      * SettingsApiController constructor.
@@ -41,7 +42,7 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function get(): JSONResponse {
         $params = $this->getParameterArray();
@@ -83,7 +84,7 @@ class SettingsApiController extends AbstractApiController {
      * @param array|null $scopes
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
@@ -97,7 +98,7 @@ class SettingsApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function reset(): JSONResponse {
         $params = $this->getParameterArray();

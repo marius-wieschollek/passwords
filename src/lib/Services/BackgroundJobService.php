@@ -21,7 +21,7 @@ class BackgroundJobService {
     /**
      * @var IJobList
      */
-    protected $jobList;
+    protected IJobList $jobList;
 
     /**
      * BackgroundJobService constructor.

@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Db;
 
+use Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
@@ -46,7 +47,7 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
 
     /**
      * @return PasswordRevision[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllWithGoodStatus(): array {
         return $this->findAllByField('status', 2, IQueryBuilder::PARAM_INT, 'neq');

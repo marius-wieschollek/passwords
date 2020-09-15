@@ -7,8 +7,11 @@
 
 namespace OCA\Passwords\Db;
 
+use Exception;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
@@ -25,14 +28,14 @@ abstract class AbstractMapper extends QBMapper {
     const FORBIDDEN_FIELDS    = [];
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var array
      */
-    protected $entityCache = [];
+    protected array $entityCache = [];
 
     /**
      * AbstractMapper constructor.
@@ -85,8 +88,8 @@ abstract class AbstractMapper extends QBMapper {
      *
      * @return EntityInterface|Entity
      *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): EntityInterface {
         if(isset($this->entityCache[ $uuid ])) {
@@ -100,8 +103,8 @@ abstract class AbstractMapper extends QBMapper {
      * @param $search
      *
      * @return EntityInterface|Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      * @deprecated
      */
     public function findOneByIdOrUuid($search): EntityInterface {
@@ -121,7 +124,7 @@ abstract class AbstractMapper extends QBMapper {
      * @param string $userId
      *
      * @return EntityInterface[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllByUserId(string $userId): array {
         return $this->findAllByField('user_id', $userId);
@@ -164,8 +167,8 @@ abstract class AbstractMapper extends QBMapper {
      * @param string $operator
      *
      * @return EntityInterface|Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findOneByField(string $field, string $value, $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): EntityInterface {
         return $this->findOneByFields([$field, $value, $type, $operator]);
@@ -178,7 +181,7 @@ abstract class AbstractMapper extends QBMapper {
      * @param string $operator
      *
      * @return EntityInterface[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllByField(string $field, $value, $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): array {
         return $this->findAllByFields([$field, $value, $type, $operator]);
@@ -188,9 +191,9 @@ abstract class AbstractMapper extends QBMapper {
      * @param array ...$fields
      *
      * @return EntityInterface|Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
      */
     public function findOneByFields(array ...$fields): EntityInterface {
         $sql = $this->buildQuery($fields);
@@ -202,7 +205,7 @@ abstract class AbstractMapper extends QBMapper {
      * @param array ...$fields
      *
      * @return array|Entity[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllByFields(array ...$fields): array {
         $sql = $this->buildQuery($fields);
@@ -269,20 +272,20 @@ abstract class AbstractMapper extends QBMapper {
      * @param array $fields
      *
      * @return IQueryBuilder
-     * @throws \Exception
+     * @throws Exception
      */
     protected function buildQuery(array $fields): IQueryBuilder {
         $sql = $this->getStatement();
 
         foreach($fields as $field) {
-            if(!isset($field[0])) throw new \Exception('Field name is required but not set');
+            if(!isset($field[0])) throw new Exception('Field name is required but not set');
             $name  = $field[0];
             $value = isset($field[1]) ? $field[1]:'';
             $type  = isset($field[2]) ? $field[2]:IQueryBuilder::PARAM_STR;
             $op    = isset($field[3]) ? $field[3]:'eq';
 
-            if(in_array($name, static::FORBIDDEN_FIELDS)) throw new \Exception('Forbidden field in database query');
-            if(!in_array($op, self::ALLOWED_OPERATORS)) throw new \Exception('Forbidden operator in database query');
+            if(in_array($name, static::FORBIDDEN_FIELDS)) throw new Exception('Forbidden field in database query');
+            if(!in_array($op, self::ALLOWED_OPERATORS)) throw new Exception('Forbidden operator in database query');
 
             if($type !== IQueryBuilder::PARAM_NULL && $value !== null) {
                 $sql->andWhere(

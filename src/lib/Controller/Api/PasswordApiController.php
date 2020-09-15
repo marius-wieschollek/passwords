@@ -7,12 +7,16 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\PasswordObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\Object\AbstractModelService;
+use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
@@ -20,6 +24,8 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -34,37 +40,37 @@ class PasswordApiController extends AbstractObjectApiController {
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
-     * @var PasswordService
+     * @var PasswordService|AbstractModelService
      */
-    protected $modelService;
+    protected AbstractModelService $modelService;
 
     /**
-     * @var PasswordObjectHelper
+     * @var PasswordObjectHelper|AbstractObjectHelper
      */
-    protected $objectHelper;
+    protected AbstractObjectHelper $objectHelper;
 
     /**
-     * @var PasswordRevisionService
+     * @var PasswordRevisionService|AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $relationService;
+    protected PasswordTagRelationService $relationService;
 
     /**
      * @var TagRevisionService
      */
-    protected $tagRevisionService;
+    protected TagRevisionService $tagRevisionService;
 
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'status', 'trashed', 'favorite'];
+    protected array $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'status', 'trashed', 'favorite'];
 
     /**
      * PasswordApiController constructor.
@@ -117,7 +123,7 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(
         string $password,
@@ -177,9 +183,9 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function update(
         string $id,
@@ -255,9 +261,9 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
         if($revision !== null) {
@@ -287,7 +293,7 @@ class PasswordApiController extends AbstractObjectApiController {
      * @param                  $tags
      * @param PasswordRevision $passwordRevision
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function updateTags($tags, PasswordRevision $passwordRevision) {
         $skip         = [];

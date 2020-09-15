@@ -18,7 +18,6 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
-use OCP\AppFramework\QueryException;
 
 /**
  * Class FolderObjectHelper
@@ -38,17 +37,17 @@ class FolderObjectHelper extends AbstractObjectHelper {
     /**
      * @var FolderService
      */
-    protected $folderService;
+    protected FolderService $folderService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var PasswordObjectHelper
      */
-    protected $passwordObjectHelper;
+    protected PasswordObjectHelper $passwordObjectHelper;
 
     /**
      * FolderObjectHelper constructor.
@@ -81,7 +80,6 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     public function getApiObject(
         EntityInterface $folder,
@@ -248,7 +246,6 @@ class FolderObjectHelper extends AbstractObjectHelper {
      * @return array
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     protected function getPasswords(FolderRevision $revision, array $object, bool $includeTags = false, bool $includeModels = true): array {
 
@@ -276,11 +273,10 @@ class FolderObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return PasswordObjectHelper
-     * @throws QueryException
      */
     protected function getPasswordObjectHelper(): PasswordObjectHelper {
-        if(!$this->passwordObjectHelper) {
-            $this->passwordObjectHelper = $this->container->query(PasswordObjectHelper::class);
+        if(!isset($this->passwordObjectHelper)) {
+            $this->passwordObjectHelper = $this->container->get(PasswordObjectHelper::class);
         }
 
         return $this->passwordObjectHelper;

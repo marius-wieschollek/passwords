@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
+use InvalidArgumentException;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Notification\AbstractNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
@@ -34,67 +36,67 @@ class NotificationService implements INotifier {
     /**
      * @var UserSettingsService
      */
-    protected $settings;
+    protected UserSettingsService $settings;
 
     /**
      * @var IFactory
      */
-    protected $l10NFactory;
+    protected IFactory $l10NFactory;
 
     /**
      * @var SurveyNotification
      */
-    protected $surveyNotification;
+    protected SurveyNotification $surveyNotification;
 
     /**
      * @var LegacyApiNotification
      */
-    protected $legacyApiNotification;
+    protected LegacyApiNotification $legacyApiNotification;
 
     /**
      * @var NewClientNotification
      */
-    protected $newClientNotification;
+    protected NewClientNotification $newClientNotification;
 
     /**
      * @var ShareLoopNotification
      */
-    protected $shareLoopNotification;
+    protected ShareLoopNotification $shareLoopNotification;
 
     /**
      * @var BadPasswordNotification
      */
-    protected $badPasswordNotification;
+    protected BadPasswordNotification $badPasswordNotification;
 
     /**
      * @var BesticonApiNotification
      */
-    protected $besticonApiNotification;
+    protected BesticonApiNotification $besticonApiNotification;
 
     /**
      * @var ShareCreatedNotification
      */
-    protected $shareCreatedNotification;
+    protected ShareCreatedNotification $shareCreatedNotification;
 
     /**
      * @var LoginAttemptNotification
      */
-    protected $loginAttemptNotification;
+    protected LoginAttemptNotification $loginAttemptNotification;
 
     /**
      * @var ImpersonationNotification
      */
-    protected $impersonationNotification;
+    protected ImpersonationNotification $impersonationNotification;
 
     /**
      * @var UpgradeRequiredNotification
      */
-    protected $upgradeRequiredNotification;
+    protected UpgradeRequiredNotification $upgradeRequiredNotification;
 
     /**
      * @var EmptyRequiredSettingNotification
      */
-    protected $emptyRequiredSettingNotification;
+    protected EmptyRequiredSettingNotification $emptyRequiredSettingNotification;
 
     /**
      * NotificationService constructor.
@@ -312,12 +314,10 @@ class NotificationService implements INotifier {
      * @param string        $languageCode
      *
      * @return INotification
-     * @throws \Exception
+     * @throws Exception
      */
     public function prepare(INotification $notification, string $languageCode): INotification {
-        if($notification->getApp() !== Application::APP_NAME) {
-            throw new \InvalidArgumentException();
-        }
+        if($notification->getApp() !== Application::APP_NAME) throw new InvalidArgumentException();
 
         $localisation = $this->l10NFactory->get(Application::APP_NAME, $languageCode);
         switch($notification->getSubject()) {
@@ -357,7 +357,7 @@ class NotificationService implements INotifier {
     protected function isNotificationEnabled(string $userId, string $type): bool {
         try {
             return $this->settings->get('user.notification.'.$type, $userId) === true;
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return false;
         }
     }

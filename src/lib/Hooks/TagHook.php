@@ -27,17 +27,17 @@ class TagHook {
     /**
      * @var TagRevisionService
      */
-    protected $revisionService;
+    protected TagRevisionService $revisionService;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $relationService;
+    protected PasswordTagRelationService $relationService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * PasswordHook constructor.

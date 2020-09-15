@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Registration;
 use OCA\Passwords\Db\RegistrationMapper;
@@ -24,12 +25,12 @@ class RegistrationService extends AbstractService {
     /**
      * @var string
      */
-    protected $class = Registration::class;
+    protected string $class = Registration::class;
 
     /**
-     * @var RegistrationMapper
+     * @var RegistrationMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * RegistrationService constructor.

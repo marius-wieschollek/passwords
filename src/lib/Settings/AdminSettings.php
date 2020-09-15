@@ -15,7 +15,6 @@ use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -40,27 +39,27 @@ class AdminSettings implements ISettings {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * AdminSettings constructor.
@@ -149,7 +148,6 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array[]
-     * @throws \OCP\AppFramework\QueryException
      */
     protected function getWordsServices(): array {
         $current = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());

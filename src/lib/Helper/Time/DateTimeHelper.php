@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Time;
 
 use DateTime;
 use DateTimeZone;
+use Exception;
 
 /**
  * Class DateTimeHelper
@@ -27,8 +28,8 @@ class DateTimeHelper {
     }
 
     /**
-     * @return string
-     * @throws \Exception
+     * @return int
+     * @throws Exception
      */
     public function getInternationalWeek(): int {
         $dateTime = $this->getInternationalDateTime();
@@ -37,8 +38,8 @@ class DateTimeHelper {
     }
 
     /**
-     * @return string
-     * @throws \Exception
+     * @return int
+     * @throws Exception
      */
     public function getInternationalHour(): int {
         $dateTime = $this->getInternationalDateTime();
@@ -50,7 +51,7 @@ class DateTimeHelper {
      * @param string $time
      *
      * @return DateTime
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getInternationalDateTime(string $time = 'now'): DateTime {
         return new DateTime($time, new DateTimeZone('Europe/Berlin'));

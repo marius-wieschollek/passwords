@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Encryption\Challenge;
 
+use Exception;
 use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Encryption\Object\SseV1Encryption;
 
@@ -28,7 +29,7 @@ class SimpleChallengeEncryption extends SseV1Encryption implements ChallengeEncr
      * @param Challenge $challenge
      *
      * @return Challenge
-     * @throws \Exception
+     * @throws Exception
      */
     public function encryptChallenge(Challenge $challenge): Challenge {
         $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
@@ -47,7 +48,7 @@ class SimpleChallengeEncryption extends SseV1Encryption implements ChallengeEncr
      * @param Challenge $challenge
      *
      * @return Challenge
-     * @throws \Exception
+     * @throws Exception
      */
     public function decryptChallenge(Challenge $challenge): Challenge {
         $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
@@ -66,7 +67,7 @@ class SimpleChallengeEncryption extends SseV1Encryption implements ChallengeEncr
      * @param string $userId
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getSimpleEncryptionKey(string $userId): string {
         return $this->getServerKey().$this->getUserKey($userId);

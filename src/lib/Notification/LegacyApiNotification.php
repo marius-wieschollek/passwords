@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Notification;
 
+use Exception;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\UserChallengeService;
@@ -29,17 +30,17 @@ class LegacyApiNotification extends AbstractNotification {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * @var DeferredActivationService
      */
-    protected $deferredActivation;
+    protected DeferredActivationService $deferredActivation;
 
     /**
      * LegacyApiNotification constructor.
@@ -71,6 +72,8 @@ class LegacyApiNotification extends AbstractNotification {
      *
      * @param string $userId
      * @param array  $parameters
+     *
+     * @throws Exception
      */
     public function send(string $userId, array $parameters = []): void {
         if(!$this->deferredActivation->check('legacy-client-warning', true)) return;
@@ -134,7 +137,7 @@ class LegacyApiNotification extends AbstractNotification {
             $lastNotified = $this->config->getUserValue($configKey, 0, $userId);
             if($lastNotified > strtotime('-1 week')) return true;
             $this->config->setUserValue($configKey, time(), $userId);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
         }
 
         return false;

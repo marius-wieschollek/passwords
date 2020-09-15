@@ -20,7 +20,7 @@ class FolderModelRepair extends AbstractModelRepair {
     /**
      * @var string
      */
-    protected $objectName = 'folder';
+    protected string $objectName = 'folder';
 
     /**
      * FolderModelRepair constructor.

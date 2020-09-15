@@ -31,37 +31,37 @@ class PageController extends Controller {
     /**
      * @var UserSettingsService
      */
-    protected $settings;
+    protected UserSettingsService $settings;
 
     /**
      * @var ApiTokenHelper
      */
-    protected $tokenHelper;
+    protected ApiTokenHelper $tokenHelper;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var UpgradeCheckHelper
      */
-    protected $upgradeCheck;
+    protected UpgradeCheckHelper $upgradeCheck;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * @var SetupReportHelper
      */
-    protected $setupReportHelper;
+    protected SetupReportHelper $setupReportHelper;
 
     /**
      * PageController constructor.

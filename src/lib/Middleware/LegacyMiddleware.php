@@ -13,6 +13,7 @@ use OCA\Passwords\Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\AppFramework\Controller;
 use OCP\AppFramework\Middleware;
 
 /**
@@ -22,7 +23,7 @@ use OCP\AppFramework\Middleware;
  */
 class LegacyMiddleware extends Middleware {
 
-    protected $legacyControllers
+    protected array $legacyControllers
         = [
             LegacyCategoryApiController::class,
             LegacyPasswordApiController::class,
@@ -32,17 +33,17 @@ class LegacyMiddleware extends Middleware {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * LegacyMiddleware constructor.
@@ -62,8 +63,8 @@ class LegacyMiddleware extends Middleware {
     }
 
     /**
-     * @param \OCP\AppFramework\Controller $controller
-     * @param string                       $methodName
+     * @param Controller $controller
+     * @param string     $methodName
      */
     public function beforeController($controller, $methodName): void {
 

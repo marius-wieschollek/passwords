@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\KeychainMapper;
@@ -25,19 +27,19 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 class KeychainService extends AbstractService {
 
     /**
-     * @var KeychainMapper
+     * @var KeychainMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var EncryptionService
      */
-    protected $encryptionService;
+    protected EncryptionService $encryptionService;
 
     /**
      * @var string
      */
-    protected $class = Keychain::class;
+    protected string $class = Keychain::class;
 
     /**
      * KeychainService constructor.
@@ -64,7 +66,7 @@ class KeychainService extends AbstractService {
      * @param bool $decrypt
      *
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAll(bool $decrypt = false): array {
         /** @var Keychain[] $keychains */
@@ -78,7 +80,7 @@ class KeychainService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByUserId(string $userId, bool $decrypt = false): array {
         /** @var Keychain[] $keychains */
@@ -92,7 +94,7 @@ class KeychainService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByScope(string $scope, bool $decrypt = false): array {
         /** @var Keychain[] $keychains */
@@ -108,7 +110,7 @@ class KeychainService extends AbstractService {
      * @return Keychain
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByType(string $type, bool $decrypt = false): Keychain {
         /** @var Keychain $keychain */
@@ -119,7 +121,7 @@ class KeychainService extends AbstractService {
 
     /**
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function getClientKeychainArray(): array {
         $keychains = $this->findByScope(Keychain::SCOPE_CLIENT, true);
@@ -151,7 +153,7 @@ class KeychainService extends AbstractService {
      * @param EntityInterface|Keychain $challenge
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function save(EntityInterface $challenge): EntityInterface {
         $this->hookManager->emit($this->class, 'preSave', [$challenge]);
@@ -196,7 +198,7 @@ class KeychainService extends AbstractService {
      * @param array $keychains
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function decryptArray(array $keychains): array {
         foreach($keychains as $keychain) {

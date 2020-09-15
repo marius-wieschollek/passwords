@@ -7,9 +7,11 @@
 
 namespace OCA\Passwords\Helper\Backup;
 
+use Exception;
 use OCA\Passwords\Encryption\Backup\SseV1BackupEncryption;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 
 /**
  * Class BackupMigrationHelper
@@ -21,17 +23,17 @@ class BackupMigrationHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * @var SseV1BackupEncryption
      */
-    protected $encryption;
+    protected SseV1BackupEncryption $encryption;
 
     /**
      * BackupMigrationHelper constructor.
@@ -50,7 +52,7 @@ class BackupMigrationHelper {
      * @param array $data
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function convert(array $data): array {
         $version = $data['version'];
@@ -62,6 +64,7 @@ class BackupMigrationHelper {
         if($version < 103) $data = $this->to103($data);
         if($version < 104) $data = $this->to104($data);
         if($version < 105) $data = $this->to105($data);
+        if($version < 106) $data = $this->to106($data);
 
         $data['version'] = RestoreBackupHelper::BACKUP_VERSION;
 
@@ -108,7 +111,7 @@ class BackupMigrationHelper {
      * @param array $database
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function to103(array $database): array {
         $this->encryption->setKeys($database['keys']);
@@ -143,7 +146,7 @@ class BackupMigrationHelper {
      * @param array $database
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function to104(array $database): array {
         $this->encryption->setKeys($database['keys']);
@@ -188,13 +191,13 @@ class BackupMigrationHelper {
         }
 
         $data['keychains']                = [];
-        $data['challenges']                = [];
+        $data['challenges']               = [];
         $data['keys']['server']['secret'] = $this->config->getSystemValue('secret');
         foreach($data['keys']['users'] as $user => $keys) {
             $data['keys']['users'][ $user ]['ChallengeId'] = null;
         }
 
-        $oldSettings                  = $data['settings']['application'];
+        $oldSettings                     = $data['settings']['application'];
         $data['settings']['application'] = [
             'backup.interval'        => $oldSettings['backup/interval'],
             'backup.files.max'       => $oldSettings['backup/files/maximum'],
@@ -212,17 +215,52 @@ class BackupMigrationHelper {
     }
 
     /**
+     * Add required cse values and convert app settings
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function to106(array $data): array {
+        foreach(['passwords', 'folders', 'tags'] as $type) {
+            foreach($data[ $type ] as &$object) {
+                foreach($object['revisions'] as &$revision) {
+                    if(!isset($revision['client'])) {
+                        $revision['client'] = EnvironmentService::CLIENT_UNKNOWN;
+                    }
+                }
+            }
+        }
+
+        foreach(['passwords', 'folders'] as $type) {
+            foreach($data[ $type ] as &$object) {
+                if(!isset($object['suspended'])) {
+                    $object['suspended'] = false;
+                }
+            }
+        }
+
+        foreach($data[ 'tags' ] as &$object) {
+            if(array_key_exists('suspended', $object)) {
+                unset($object['suspended']);
+            }
+        }
+
+        return $data;
+    }
+
+    /**
      * @param $version
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function validateBackup($version): void {
         if($version < 100) {
-            throw new \Exception('This seems to be a client backup. It can only be restored using the web interface');
+            throw new Exception('This seems to be a client backup. It can only be restored using the web interface');
         }
 
         if($version > RestoreBackupHelper::BACKUP_VERSION) {
-            throw new \Exception('Unsupported backup version: '.$version);
+            throw new Exception('Unsupported backup version: '.$version);
         }
     }
 }

@@ -7,14 +7,19 @@
 
 namespace OCA\Passwords\Helper\Sharing;
 
+use Exception;
+use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class CreatePasswordShareHelper
@@ -26,22 +31,22 @@ class CreatePasswordShareHelper {
     /**
      * @var ShareService
      */
-    protected $modelService;
+    protected ShareService $modelService;
 
     /**
      * @var ShareSettingsHelper
      */
-    protected $shareSettings;
+    protected ShareSettingsHelper $shareSettings;
 
     /**
      * @var PasswordService
      */
-    protected $passwordModelService;
+    protected PasswordService $passwordModelService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * CreatePasswordShareHelper constructor.
@@ -71,11 +76,11 @@ class CreatePasswordShareHelper {
      * @param bool     $editable
      * @param bool     $shareable
      *
-     * @return \OCA\Passwords\Db\ModelInterface|\OCA\Passwords\Db\Share
+     * @return ModelInterface|Share
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function createPasswordShare(
         string $password,
@@ -138,8 +143,8 @@ class CreatePasswordShareHelper {
      *
      * @return bool
      * @throws ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function checkSourceShare(string $receiver, Password $model): bool {
         $sourceShare = $this->modelService->findByUuid($model->getShareId());
@@ -155,13 +160,13 @@ class CreatePasswordShareHelper {
      * @param        $model
      *
      * @throws ApiException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws MultipleObjectsReturnedException
      */
     protected function checkIfAlreadyShared(string $receiver, Password $model): void {
         try {
             $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
             if($shares !== null) throw new ApiException('Entity already shared with user', 400);
-        } catch(\OCP\AppFramework\Db\DoesNotExistException $e) {
+        } catch(DoesNotExistException $e) {
         }
     }
 
@@ -179,7 +184,7 @@ class CreatePasswordShareHelper {
      * @param $revision
      * @param $model
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function downgradeSSE(PasswordRevision $revision, Password $model): void {
         /** @var PasswordRevision $newRevision */

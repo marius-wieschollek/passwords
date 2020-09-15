@@ -7,12 +7,14 @@
 
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
+use Exception;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\Migration\IOutput;
+use Throwable;
 
 /**
  * Class AbstractModelRepair
@@ -24,17 +26,17 @@ abstract class AbstractModelRepair {
     /**
      * @var AbstractModelService
      */
-    protected $modelService;
+    protected AbstractModelService $modelService;
 
     /**
      * @var AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var string
      */
-    protected $objectName = 'abstract';
+    protected string $objectName = 'abstract';
 
     /**
      * AbstractModelRepair constructor.
@@ -50,7 +52,7 @@ abstract class AbstractModelRepair {
     /**
      * @param IOutput $output
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(IOutput $output): void {
         $allModels = $this->modelService->findAll();
@@ -62,7 +64,7 @@ abstract class AbstractModelRepair {
         foreach($allModels as $model) {
             try {
                 if($this->repairModel($model)) $fixed++;
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $output->warning(
                     "Failed to repair model #{$model->getUuid()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );
@@ -77,7 +79,7 @@ abstract class AbstractModelRepair {
      * @param ModelInterface $model
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     protected function repairModel(ModelInterface $model): bool {
         $fixed = false;

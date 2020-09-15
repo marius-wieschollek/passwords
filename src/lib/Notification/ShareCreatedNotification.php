@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Notification;
 
+use Exception;
 use OCA\Passwords\Services\UserService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -27,7 +28,7 @@ class ShareCreatedNotification extends AbstractNotification {
     /**
      * @var UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * ShareCreatedNotification constructor.
@@ -53,6 +54,8 @@ class ShareCreatedNotification extends AbstractNotification {
      *
      * @param string $userId
      * @param array  $parameters
+     *
+     * @throws Exception
      */
     public function send(string $userId, array $parameters = []): void {
         $notification
@@ -92,9 +95,9 @@ class ShareCreatedNotification extends AbstractNotification {
         $passwordCount = 0;
 
         if($ownerCount === 1) {
-            list($passwordCount, $title) = $this->getSingleOwnerTitle($localisation, $owners);
+            [$passwordCount, $title] = $this->getSingleOwnerTitle($localisation, $owners);
         } else {
-            list($passwordCount, $title) = $this->getMultiOwnerTitle($localisation, $owners, $passwordCount, $ownerCount);
+            [$passwordCount, $title] = $this->getMultiOwnerTitle($localisation, $owners, $passwordCount, $ownerCount);
         }
 
         return $title

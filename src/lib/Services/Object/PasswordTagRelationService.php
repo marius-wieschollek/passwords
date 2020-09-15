@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordTagRelation;
@@ -25,14 +27,14 @@ use OCP\AppFramework\Db\Entity;
 class PasswordTagRelationService extends AbstractService {
 
     /**
-     * @var PasswordTagRelationMapper
+     * @var PasswordTagRelationMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = PasswordTagRelation::class;
+    protected string $class = PasswordTagRelation::class;
 
     /**
      * PasswordTagRelationService constructor.
@@ -59,7 +61,7 @@ class PasswordTagRelationService extends AbstractService {
      * @param string $passwordUuid
      *
      * @return PasswordTagRelation[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByPassword(string $passwordUuid): array {
         return $this->mapper->findAllByField('password', $passwordUuid);
@@ -69,7 +71,7 @@ class PasswordTagRelationService extends AbstractService {
      * @param string $tagUuid
      *
      * @return PasswordTagRelation[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByTag(string $tagUuid): array {
         return $this->mapper->findAllByField('tag', $tagUuid);
@@ -80,7 +82,7 @@ class PasswordTagRelationService extends AbstractService {
      * @param string $passwordUuid
      *
      * @return PasswordTagRelation|EntityInterface|null
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByTagAndPassword(string $tagUuid, string $passwordUuid): ?PasswordTagRelation {
         return $this->mapper->findOneByFields(
@@ -94,11 +96,11 @@ class PasswordTagRelationService extends AbstractService {
      * @param TagRevision      $tag
      *
      * @return PasswordTagRelation
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(PasswordRevision $password, TagRevision $tag): PasswordTagRelation {
         if($password->getUserId() !== $tag->getUserId()) {
-            throw new \Exception('User ID did not match when creating password to tag relation');
+            throw new Exception('User ID did not match when creating password to tag relation');
         }
 
         $model = $this->createModel($password, $tag);

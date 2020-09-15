@@ -7,11 +7,15 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class AbstractService
@@ -21,34 +25,34 @@ use OCA\Passwords\Services\EnvironmentService;
 abstract class AbstractService {
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var HookManager
      */
-    protected $hookManager;
+    protected HookManager $hookManager;
 
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var string
      */
-    protected $class;
+    protected string $class;
 
     /**
      * @var AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * AbstractService constructor.
@@ -79,7 +83,7 @@ abstract class AbstractService {
      * @param string $userId
      *
      * @return EntityInterface[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByUserId(string $userId): array {
         return $this->mapper->findAllByUserId($userId);
@@ -89,8 +93,8 @@ abstract class AbstractService {
      * @param string $uuid
      *
      * @return EntityInterface
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid) {
         return $this->mapper->findByUuid($uuid);
@@ -108,12 +112,11 @@ abstract class AbstractService {
      * @param array           $overwrites
      *
      * @return EntityInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
-        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
+        if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preClone', [$entity]);
-        /** @var EntityInterface $clone */
         $clone = $this->cloneModel($entity, $overwrites);
         $this->hookManager->emit($this->class, 'postClone', [$entity, $clone]);
 
@@ -123,10 +126,10 @@ abstract class AbstractService {
     /**
      * @param EntityInterface $entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function delete(EntityInterface $entity): void {
-        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
+        if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preDelete', [$entity]);
         $entity->setDeleted(true);
         $this->save($entity);
@@ -134,12 +137,12 @@ abstract class AbstractService {
     }
 
     /**
-     * @param EntityInterface|\OCP\AppFramework\Db\Entity $entity
+     * @param EntityInterface|Entity $entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(EntityInterface $entity): void {
-        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
+        if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preDestroy', [$entity]);
         if(!$entity->isDeleted()) $this->delete($entity);
         $this->mapper->delete($entity);
@@ -154,7 +157,6 @@ abstract class AbstractService {
      */
     protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
         $class = get_class($original);
-        /** @var EntityInterface $clone */
         $clone  = new $class;
         $fields = array_keys($clone->getFieldTypes());
 

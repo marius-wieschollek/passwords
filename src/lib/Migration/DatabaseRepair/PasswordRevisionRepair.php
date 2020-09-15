@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
+use Exception;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevision;
@@ -31,22 +32,22 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var FolderMapper
      */
-    protected $folderMapper;
+    protected FolderMapper $folderMapper;
 
     /**
      * @var string
      */
-    protected $objectName = 'password';
+    protected string $objectName = 'password';
 
     /**
      * @var bool
      */
-    protected $convertFields = false;
+    protected bool $convertFields = false;
 
     /**
      * PasswordRevisionRepair constructor.
@@ -75,7 +76,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     /**
      * @param IOutput $output
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(IOutput $output): void {
         parent::run($output);
@@ -86,7 +87,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @param PasswordRevision|RevisionInterface $revision
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;

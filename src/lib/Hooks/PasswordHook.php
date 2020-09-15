@@ -20,7 +20,6 @@ use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\AppFramework\QueryException;
 
 /**
  * Class PasswordHook
@@ -32,32 +31,32 @@ class PasswordHook {
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $revisionService;
+    protected PasswordRevisionService $revisionService;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $relationService;
+    protected PasswordTagRelationService $relationService;
 
     /**
      * @var TagRevisionService
      */
-    protected $tagRevisionService;
+    protected TagRevisionService $tagRevisionService;
 
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
      * PasswordHook constructor.
@@ -223,7 +222,7 @@ class PasswordHook {
      * @param PasswordRevision $revision
      * @param bool             $searchDuplicates
      *
-     * @throws QueryException
+     * @throws Exception
      */
     protected function checkSecurityStatus(PasswordRevision $revision, bool $searchDuplicates = true): void {
         $securityCheck = $this->helperService->getSecurityHelper();
@@ -267,7 +266,7 @@ class PasswordHook {
                     $this->checkSecurityStatus($revision, false);
                     if($oldStatus !== $revision->getStatusCode()) $this->revisionService->save($revision);
                 }
-            } catch (Exception $e) {
+            } catch(Exception $e) {
             }
         }
     }

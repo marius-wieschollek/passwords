@@ -53,7 +53,7 @@ class EnvironmentService {
     /**
      * @var array
      */
-    protected static $protectedClients
+    protected static array $protectedClients
         = [
             self::CLIENT_MAINTENANCE,
             self::CLIENT_CLI,
@@ -67,87 +67,87 @@ class EnvironmentService {
     /**
      * @var IConfig
      */
-    protected $config;
+    protected IConfig $config;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var ISession
      */
-    protected $session;
+    protected ISession $session;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var IUserSession
      */
-    protected $userSession;
+    protected IUserSession $userSession;
 
     /**
      * @var IProvider
      */
-    protected $tokenProvider;
+    protected IProvider $tokenProvider;
 
     /**
      * @var IUser
      */
-    protected $user;
+    protected IUser $user;
 
     /**
-     * @var IUser
+     * @var IUser|null
      */
-    protected $realUser;
+    protected ?IUser $realUser;
 
     /**
      * @var string
      */
-    protected $password;
+    protected string $password;
 
     /**
      * @var null|string
      */
-    protected $userLogin;
+    protected ?string $userLogin;
 
     /**
      * @var null|IToken
      */
-    protected $loginToken;
+    protected ?IToken $loginToken;
 
     /**
      * @var null|string
      */
-    protected $client = self::CLIENT_UNKNOWN;
+    protected ?string $client = self::CLIENT_UNKNOWN;
 
     /**
      * @var bool
      */
-    protected $impersonating = false;
+    protected bool $impersonating = false;
 
     /**
      * @var string
      */
-    protected $appMode = self::MODE_PUBLIC;
+    protected string $appMode = self::MODE_PUBLIC;
 
     /**
      * @var string
      */
-    protected $runType = self::TYPE_REQUEST;
+    protected string $runType = self::TYPE_REQUEST;
 
     /**
      * @var string
      */
-    protected $loginType = self::LOGIN_NONE;
+    protected string $loginType = self::LOGIN_NONE;
 
     /**
      * EnvironmentService constructor.
@@ -210,7 +210,7 @@ class EnvironmentService {
      * @return null|string
      */
     public function getUserId(): ?string {
-        return $this->user !== null ? $this->user->getUID():null;
+        return isset($this->user) ? $this->user->getUID():null;
     }
 
     /**
@@ -366,8 +366,6 @@ class EnvironmentService {
      * @param IRequest    $request
      *
      * @return bool
-     * @throws ExpiredTokenException
-     * @throws InvalidTokenException
      * @throws Exception
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
@@ -401,8 +399,8 @@ class EnvironmentService {
     }
 
     /**
-     * @param string   $userId
-     * @param IRequest $request
+     * @param string|null $userId
+     * @param IRequest    $request
      *
      * @return bool
      */

@@ -17,8 +17,8 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
-use OCP\AppFramework\QueryException;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class BetterIdeaHelper
@@ -34,27 +34,27 @@ class BestIconHelper extends AbstractFaviconHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var DateTimeHelper
      */
-    protected $dateTime;
+    protected DateTimeHelper $dateTime;
 
     /**
      * @var AdminUserHelper
      */
-    protected $adminHelper;
+    protected AdminUserHelper $adminHelper;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * @var string
      */
-    protected $prefix = HelperService::FAVICON_BESTICON;
+    protected string $prefix = HelperService::FAVICON_BESTICON;
 
     /**
      * BestIconHelper constructor.
@@ -67,8 +67,6 @@ class BestIconHelper extends AbstractFaviconHelper {
      * @param FileCacheService      $fileCacheService
      * @param NotificationService   $notificationService
      * @param FallbackIconGenerator $fallbackIconGenerator
-     *
-     * @throws QueryException
      */
     public function __construct(
         DateTimeHelper $dateTime,
@@ -118,7 +116,7 @@ class BestIconHelper extends AbstractFaviconHelper {
         try {
             $data = $this->executeRequest($uri, $options);
             if($data !== null) return $data;
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
         }
 
         [$uri, $options] = $this->getRequestData($domain, 'http');

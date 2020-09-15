@@ -23,7 +23,7 @@ class CronController extends Controller {
     /**
      * @var SynchronizeShares
      */
-    protected $synchronizeShares;
+    protected SynchronizeShares $synchronizeShares;
 
     /**
      * CronController constructor.

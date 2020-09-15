@@ -20,15 +20,15 @@ class CleanRegistrationsHelper {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var RegistrationMapper
      */
-    protected $registrationMapper;
+    protected RegistrationMapper $registrationMapper;
 
     /**
-     * CleanSessionsHelper constructor.
+     * CleanRegistrationsHelper constructor.
      *
      * @param LoggingService     $logger
      * @param RegistrationMapper $registrationMapper

@@ -7,6 +7,10 @@
 
 namespace OCA\Passwords\Db;
 
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+
 /**
  * Class AbstractRevisionMapper
  *
@@ -19,9 +23,9 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
     /**
      * @param string $modelUuid
      *
-     * @return null|RevisionInterface|\OCP\AppFramework\Db\Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @return null|RevisionInterface|Entity
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findCurrentRevisionByModel(string $modelUuid): ?RevisionInterface {
         $sql = $this->getJoinStatement(static::MODEL_TABLE_NAME, 'model');
@@ -38,7 +42,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
     /**
      * @param string $modelUuid
      *
-     * @return RevisionInterface[]|\OCP\AppFramework\Db\Entity[]
+     * @return RevisionInterface[]|Entity[]
      */
     public function findAllByModel(string $modelUuid): array {
         $sql = $this->getJoinStatement(static::MODEL_TABLE_NAME, 'model');

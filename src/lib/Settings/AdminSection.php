@@ -22,12 +22,12 @@ class AdminSection implements IIconSection {
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * @var IL10N
      */
-    protected $localisation;
+    protected IL10N $localisation;
 
     /**
      * AdminSection constructor.

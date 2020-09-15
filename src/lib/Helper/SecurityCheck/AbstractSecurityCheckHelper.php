@@ -7,11 +7,13 @@
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
+use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class AbstractSecurityCheckHelper
@@ -36,32 +38,32 @@ abstract class AbstractSecurityCheckHelper {
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * @var UserRulesSecurityCheck
      */
-    protected $userRulesCheck;
+    protected UserRulesSecurityCheck $userRulesCheck;
 
     /**
      * @var array
      */
-    protected $hashStatusCache = [];
+    protected array $hashStatusCache = [];
 
     /**
      * AbstractSecurityCheckHelper constructor.
@@ -94,7 +96,7 @@ abstract class AbstractSecurityCheckHelper {
      * @param PasswordRevision $revision
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): array {
         if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
@@ -155,7 +157,7 @@ abstract class AbstractSecurityCheckHelper {
         try {
             $data = $this->fileCacheService->getFile($file)->getContent();
             if(extension_loaded('zlib')) $data = gzuncompress($data);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
 
             return [];

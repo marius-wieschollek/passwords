@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Hooks\Manager;
 
+use Exception;
 use OC\Hooks\BasicEmitter;
 use OCA\Passwords\Hooks\ChallengeHook;
 use OCA\Passwords\Hooks\FolderHook;
@@ -26,7 +27,7 @@ class HookManager extends BasicEmitter {
     /**
      * @var IAppContainer
      */
-    protected $container;
+    protected IAppContainer $container;
 
     /**
      * HookManager constructor.
@@ -50,7 +51,7 @@ class HookManager extends BasicEmitter {
      * @param $name
      * @param $arguments
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __call($name, $arguments): void {
         preg_match("/([a-z]+)([a-zA-Z]+)/", $name, $matches);
@@ -79,9 +80,9 @@ class HookManager extends BasicEmitter {
                 break;
         }
 
-        if($class === null) throw new \Exception("Invalid hook scope {$scope} in {$name}");
+        if($class === null) throw new Exception("Invalid hook scope {$scope} in {$name}");
         $object = $this->container->query($class);
-        if(!method_exists($object, $method)) throw new \Exception("Invalid hook method {$method} in {$name}");
+        if(!method_exists($object, $method)) throw new Exception("Invalid hook method {$method} in {$name}");
 
         $object->{$method}(...$arguments);
     }

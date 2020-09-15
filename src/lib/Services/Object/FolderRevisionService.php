@@ -7,15 +7,20 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\RevisionInterface;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class FolderRevisionService
@@ -26,7 +31,10 @@ class FolderRevisionService extends AbstractRevisionService {
 
     const BASE_REVISION_UUID = '00000000-0000-0000-0000-000000000000';
 
-    protected $class = FolderRevision::class;
+    /**
+     * @var string
+     */
+    protected string $class = FolderRevision::class;
 
     /**
      * FolderRevisionService constructor.
@@ -55,9 +63,9 @@ class FolderRevisionService extends AbstractRevisionService {
      *
      * @return FolderRevision
      *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
      */
     public function findByUuid(string $uuid, bool $decrypt = false): RevisionInterface {
         if($uuid === self::BASE_REVISION_UUID) return $this->getBaseRevision();
@@ -71,7 +79,7 @@ class FolderRevisionService extends AbstractRevisionService {
      *
      * @return FolderRevision
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findCurrentRevisionByModel(string $modelUuid, bool $decrypt = false): RevisionInterface {
         if($modelUuid === FolderService::BASE_FOLDER_UUID) return $this->getBaseRevision();
@@ -114,7 +122,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param bool   $favorite
      *
      * @return FolderRevision
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function create(
         string $folder,
@@ -138,8 +146,8 @@ class FolderRevisionService extends AbstractRevisionService {
     /**
      * @param RevisionInterface|EntityInterface $model
      *
-     * @return FolderRevision|\OCP\AppFramework\Db\Entity
-     * @throws \Exception
+     * @return FolderRevision|Entity
+     * @throws Exception
      */
     public function save(EntityInterface $model): EntityInterface {
         if($model->getUuid() === self::BASE_REVISION_UUID ||
@@ -155,7 +163,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param array                             $overwrites
      *
      * @return EntityInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
         if($entity->getUuid() === self::BASE_REVISION_UUID) return $entity;
@@ -166,7 +174,7 @@ class FolderRevisionService extends AbstractRevisionService {
     /**
      * @param RevisionInterface|EntityInterface $entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function delete(EntityInterface $entity): void {
         if($entity->getUuid() === self::BASE_REVISION_UUID) return;

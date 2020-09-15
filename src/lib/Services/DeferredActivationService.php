@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class DeferredActivationService
@@ -18,32 +19,35 @@ use OCP\Http\Client\IClientService;
  */
 class DeferredActivationService {
 
-    protected $features = null;
+    /**
+     * @var array|null
+     */
+    protected ?array $features = null;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCache;
+    protected FileCacheService $fileCache;
 
     /**
      * @var ServerSettingsHelper
      */
-    protected $serverSettings;
+    protected ServerSettingsHelper $serverSettings;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * DeferredActivationService constructor.
@@ -191,7 +195,7 @@ class DeferredActivationService {
 
         try {
             return $file->getContent();
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             return null;
         }
     }
@@ -200,7 +204,7 @@ class DeferredActivationService {
      * Get current json file from remote server
      *
      * @return null|string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getFeaturesFromRemote(): ?string {
         $url      = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';

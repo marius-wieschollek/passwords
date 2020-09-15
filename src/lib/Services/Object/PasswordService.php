@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
@@ -22,14 +24,14 @@ use OCA\Passwords\Services\EnvironmentService;
 class PasswordService extends AbstractModelService {
 
     /**
-     * @var PasswordMapper
+     * @var PasswordMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = Password::class;
+    protected string $class = Password::class;
 
     /**
      * PasswordService constructor.
@@ -64,7 +66,7 @@ class PasswordService extends AbstractModelService {
 
     /**
      * @return Password[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findShared(): array {
         return $this->mapper->findAllShared();

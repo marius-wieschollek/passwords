@@ -20,16 +20,15 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
     const PASSWORD_DB      = 'hibp';
     const SERVICE_URL      = 'https://api.pwnedpasswords.com/range/';
-    const SERVICE_BASE_URL = 'https://api.pwnedpasswords.com/';
     const COOKIE_FILE      = 'nc_pw_hibp_api_cookies.txt';
 
-    protected $checkedRanges = [];
+    protected array $checkedRanges = [];
 
     /**
      * @param string $hash
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function isHashSecure(string $hash): bool {
         if(!isset($this->hashStatusCache[ $hash ])) {

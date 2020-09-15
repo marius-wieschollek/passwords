@@ -30,27 +30,27 @@ class UserLoginAttemptHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var ApiTokenHelper
      */
-    protected $tokenHelper;
+    protected ApiTokenHelper $tokenHelper;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * UserLoginAttemptHelper constructor.
@@ -58,6 +58,8 @@ class UserLoginAttemptHelper {
      * @param EnvironmentService   $environment
      * @param ConfigurationService $config
      * @param LoggingService       $logger
+     * @param ApiTokenHelper       $tokenHelper
+     * @param NotificationService  $notifications
      */
     public function __construct(EnvironmentService $environment, ConfigurationService $config, LoggingService $logger, ApiTokenHelper $tokenHelper, NotificationService $notifications) {
         $this->environment   = $environment;

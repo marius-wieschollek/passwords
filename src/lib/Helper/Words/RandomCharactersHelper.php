@@ -28,7 +28,7 @@ class RandomCharactersHelper extends AbstractWordsHelper {
     /**
      * @var string
      */
-    protected $langCode;
+    protected string $langCode;
 
     /**
      * LocalWordsHelper constructor.
@@ -101,7 +101,7 @@ class RandomCharactersHelper extends AbstractWordsHelper {
             random_int(1, 10);
 
             return extension_loaded('mbstring');
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return false;
         }
     }
@@ -144,7 +144,7 @@ class RandomCharactersHelper extends AbstractWordsHelper {
                 $character     = mb_substr($characters, $charPos, 1);
                 $pos           = random_int(0, count($parts) - 1);
                 $parts[ $pos ] = $character;
-            } catch(\Exception $e) {
+            } catch(Exception $e) {
                 $i--;
             }
         }

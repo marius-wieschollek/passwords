@@ -22,7 +22,7 @@ class ScreenShotMachineHelper extends AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_SCREEN_SHOT_MACHINE;
+    protected string $prefix = HelperService::PREVIEW_SCREEN_SHOT_MACHINE;
 
     /**
      * @param string $domain

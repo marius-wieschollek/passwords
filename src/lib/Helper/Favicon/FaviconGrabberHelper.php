@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use Exception;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
@@ -14,6 +15,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class FaviconGrabberHelper
@@ -27,17 +29,17 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var string
      */
-    protected $prefix = HelperService::FAVICON_FAVICON_GRABBER;
+    protected string $prefix = HelperService::FAVICON_FAVICON_GRABBER;
 
     /**
      * @var string
      */
-    protected $domain;
+    protected string $domain;
 
     /**
      * FaviconGrabberHelper constructor.
@@ -47,8 +49,6 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @param IClientService        $requestService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
-     *
-     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(
         ConfigurationService $config,
@@ -82,8 +82,8 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @return string
      * @throws FaviconRequestException
      * @throws UnexpectedResponseCodeException
-     * @throws \Exception
-     * @throws \Throwable
+     * @throws Exception
+     * @throws Throwable
      */
     protected function executeRequest(string $uri, array $options): string {
         $response = parent::executeRequest($uri, $options);
@@ -101,10 +101,10 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
      * @param array $json
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function analyzeApiResponse(array $json): ?string {
-        if(isset($json['error'])) throw new \Exception("Favicongrabber said: {$json['error']} ({$this->domain})");
+        if(isset($json['error'])) throw new Exception("Favicongrabber said: {$json['error']} ({$this->domain})");
 
         $iconData   = null;
         $sizeOffset = null;
@@ -154,7 +154,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
         $request = $this->requestService->newClient();
         try {
             $response = $request->get($url);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return $data;
         }
 

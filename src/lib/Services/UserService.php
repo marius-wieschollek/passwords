@@ -21,12 +21,12 @@ class UserService {
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var IL10N
      */
-    protected $localisation;
+    protected IL10N $localisation;
 
     /**
      * UserService constructor.

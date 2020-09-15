@@ -7,8 +7,15 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
+use OC;
+use OC\AppConfig;
+use OC\Cache\CappedMemoryCache;
+use OC\SystemConfig;
 use OCA\Passwords\AppInfo\Application;
 use OCP\IConfig;
+use ReflectionClass;
+use ReflectionException;
 
 /**
  * Class ConfigurationService
@@ -20,12 +27,12 @@ class ConfigurationService {
     /**
      * @var IConfig
      */
-    protected $config;
+    protected IConfig $config;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * FaviconService constructor.
@@ -45,7 +52,7 @@ class ConfigurationService {
      * @param string      $app
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getUserValue(string $key, $default = null, ?string $user = null, $app = Application::APP_NAME) {
         $userId = $this->getUserId($user);
@@ -80,7 +87,7 @@ class ConfigurationService {
      * @param null|string $user
      * @param string      $app
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function setUserValue(string $key, string $value, ?string $user = null, $app = Application::APP_NAME): void {
         $userId = $this->getUserId($user);
@@ -109,7 +116,7 @@ class ConfigurationService {
      * @param string      $app
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function hasUserValue(string $key, ?string $user = null, $app = Application::APP_NAME): bool {
         $userId = $this->getUserId($user);
@@ -135,7 +142,7 @@ class ConfigurationService {
      * @param string      $key
      * @param null|string $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleteUserValue(string $key, ?string $user = null): void {
         $userId = $this->getUserId($user);
@@ -177,29 +184,29 @@ class ConfigurationService {
      */
     public function clearCache(): void {
         try {
-            $class    = new \ReflectionClass($this->config);
+            $class    = new ReflectionClass($this->config);
             $property = $class->getProperty('userCache');
             $property->setAccessible(true);
-            $property->setValue($this->config, new \OC\Cache\CappedMemoryCache());
-        } catch(\ReflectionException $e) {
+            $property->setValue($this->config, new CappedMemoryCache());
+        } catch(ReflectionException $e) {
         }
 
         try {
-            $appConfig = \OC::$server->query(\OC\AppConfig::class);
-            $class     = new \ReflectionClass($appConfig);
+            $appConfig = OC::$server->get(AppConfig::class);
+            $class     = new ReflectionClass($appConfig);
             $property  = $class->getProperty('configLoaded');
             $property->setAccessible(true);
             $property->setValue($appConfig, false);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
         }
 
         try {
-            $systemConfig = \OC::$server->query(\OC\SystemConfig::class);
-            $class        = new \ReflectionClass($systemConfig);
+            $systemConfig = OC::$server->get(SystemConfig::class);
+            $class        = new ReflectionClass($systemConfig);
             $method       = $class->getMethod('readData');
             $method->setAccessible(true);
             $method->invoke($systemConfig);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
         }
     }
 
@@ -214,11 +221,11 @@ class ConfigurationService {
      * @param $user
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getUserId(string $user = null): string {
         if($this->userId !== null && $user !== null && $this->userId !== $user) {
-            throw new \Exception("Illegal user configuration access request by {$this->userId} for {$user}");
+            throw new Exception("Illegal user configuration access request by {$this->userId} for {$user}");
         }
 
         return $this->userId === null ? $user:$this->userId;

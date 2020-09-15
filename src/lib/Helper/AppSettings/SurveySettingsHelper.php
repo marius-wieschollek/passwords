@@ -20,30 +20,30 @@ class SurveySettingsHelper extends AbstractSettingsHelper {
     /**
      * @var IL10N
      */
-    protected $localisation;
+    protected IL10N $localisation;
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'survey';
+    protected string $scope = 'survey';
 
     /**
      * @var array
      */
-    protected $keys = ['server' => 'survey/server/mode'];
+    protected array $keys = ['server' => 'survey/server/mode'];
 
     /**
      * @var array
      */
-    protected $types = ['server' => 'select:number'];
+    protected array $types = ['server' => 'select:number'];
 
     /**
      * @var array
      */
-    protected $defaults = ['server' => 0];
+    protected array $defaults = ['server' => 0];
 
     /**
-     * ServiceSettingsHelper constructor.
+     * SurveySettingsHelper constructor.
      *
      * @param ConfigurationService $config
      * @param IL10N                $localisation

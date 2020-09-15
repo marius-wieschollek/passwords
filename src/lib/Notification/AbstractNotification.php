@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Notification;
 
+use DateTime;
+use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -27,17 +29,17 @@ abstract class AbstractNotification {
     /**
      * @var IFactory
      */
-    protected $l10nFactory;
+    protected IFactory $l10nFactory;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * @var IManager
      */
-    protected $notificationManager;
+    protected IManager $notificationManager;
 
     /**
      * AbstractNotification constructor.
@@ -78,7 +80,7 @@ abstract class AbstractNotification {
      * @param string $userId
      *
      * @return INotification
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createNotification(string $userId): INotification {
         $icon = $this->urlGenerator->imagePath(Application::APP_NAME, 'app-dark.svg');
@@ -86,7 +88,7 @@ abstract class AbstractNotification {
         return $this->notificationManager
             ->createNotification()
             ->setApp(Application::APP_NAME)
-            ->setDateTime(new \DateTime())
+            ->setDateTime(new DateTime())
             ->setUser($userId)
             ->setIcon($icon);
     }

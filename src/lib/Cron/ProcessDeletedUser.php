@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -23,7 +24,7 @@ class ProcessDeletedUser extends AbstractQueuedJob {
     /**
      * @var DeleteUserDataHelper
      */
-    protected $deleteUserDataHelper;
+    protected DeleteUserDataHelper $deleteUserDataHelper;
 
     /**
      * ProcessDeletedUsers constructor.
@@ -48,7 +49,7 @@ class ProcessDeletedUser extends AbstractQueuedJob {
     /**
      * @param $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($userId): void {
         $this->deleteUserDataHelper->deleteUserData($userId);

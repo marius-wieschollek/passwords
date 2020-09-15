@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Backup;
 
+use Exception;
 use OCA\Passwords\Db\AbstractEntity;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\AbstractRevisionMapper;
@@ -43,77 +44,77 @@ use OCA\Passwords\Services\UserChallengeService;
  */
 class RestoreBackupHelper {
 
-    const BACKUP_VERSION = 105;
+    const BACKUP_VERSION = 106;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var TagMapper
      */
-    protected $tagMapper;
+    protected TagMapper $tagMapper;
 
     /**
      * @var ShareMapper
      */
-    protected $shareMapper;
+    protected ShareMapper $shareMapper;
 
     /**
      * @var FolderMapper
      */
-    protected $folderMapper;
+    protected FolderMapper $folderMapper;
 
     /**
      * @var PasswordMapper
      */
-    protected $passwordMapper;
+    protected PasswordMapper $passwordMapper;
 
     /**
      * @var KeychainMapper
      */
-    protected $keychainMapper;
+    protected KeychainMapper $keychainMapper;
 
     /**
      * @var ChallengeMapper
      */
-    protected $challengeMapper;
+    protected ChallengeMapper $challengeMapper;
 
     /**
      * @var TagRevisionMapper
      */
-    protected $tagRevisionMapper;
+    protected TagRevisionMapper $tagRevisionMapper;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $userSettingsHelper;
+    protected UserSettingsHelper $userSettingsHelper;
 
     /**
      * @var AppSettingsService
      */
-    protected $appSettingsService;
+    protected AppSettingsService $appSettingsService;
 
     /**
      * @var FolderRevisionMapper
      */
-    protected $folderRevisionMapper;
+    protected FolderRevisionMapper $folderRevisionMapper;
 
     /**
      * @var BackupMigrationHelper
      */
-    protected $backupMigrationHelper;
+    protected BackupMigrationHelper $backupMigrationHelper;
 
     /**
      * @var PasswordRevisionMapper
      */
-    protected $passwordRevisionMapper;
+    protected PasswordRevisionMapper $passwordRevisionMapper;
 
     /**
      * @var PasswordTagRelationMapper
      */
-    protected $passwordTagRelationMapper;
+    protected PasswordTagRelationMapper $passwordTagRelationMapper;
 
     /**
      * CreateBackupHelper constructor.
@@ -170,7 +171,7 @@ class RestoreBackupHelper {
      * @param array $options
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function restore(array $data, array $options): bool {
         if($data['version'] !== self::BACKUP_VERSION) $data = $this->convertData($data);
@@ -193,7 +194,7 @@ class RestoreBackupHelper {
      * @param array $data
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function convertData(array $data): array {
         return $this->backupMigrationHelper->convert($data);
@@ -219,7 +220,7 @@ class RestoreBackupHelper {
      * @param array       $keys
      * @param null|string $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function restoreKeys(array $keys, ?string $user): void {
         $this->restoreServerKeys($keys, $user);
@@ -230,13 +231,13 @@ class RestoreBackupHelper {
      * @param array       $keys
      * @param null|string $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function restoreServerKeys(array $keys, ?string $user): void {
         $sseV1ServerKey = $this->config->getAppValue('SSEv1ServerKey', null);
         if($sseV1ServerKey !== $keys['server']['SSEv1ServerKey']) {
             if($user !== null && $sseV1ServerKey !== null) {
-                throw new \Exception('Can not restore single user data because server key has changed');
+                throw new Exception('Can not restore single user data because server key has changed');
             }
 
             $this->config->setAppValue('SSEv1ServerKey', $keys['server']['SSEv1ServerKey']);
@@ -245,7 +246,7 @@ class RestoreBackupHelper {
         $serverSecret = $this->config->getSystemValue('secret', null);
         if($serverSecret !== $keys['server']['secret']) {
             if($user !== null && $serverSecret !== null) {
-                throw new \Exception('Can not restore single user data because server secret has changed');
+                throw new Exception('Can not restore single user data because server secret has changed');
             }
 
             $this->config->setSystemValue('secret', $keys['server']['secret']);
@@ -256,7 +257,7 @@ class RestoreBackupHelper {
      * @param array       $keys
      * @param null|string $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function restoreUserKeys(array $keys, ?string $user): void {
         foreach($keys['users'] as $userId => $userKeys) {
@@ -354,7 +355,7 @@ class RestoreBackupHelper {
      * @param array       $userSettings
      * @param null|string $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function restoreUserSettings(array $userSettings, ?string $user): void {
         foreach($userSettings as $uid => $settings) {
@@ -375,7 +376,7 @@ class RestoreBackupHelper {
      * @param array       $clientSettings
      * @param null|string $user
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function restoreClientSettings(array $clientSettings, ?string $user): void {
         foreach($clientSettings as $uid => $value) {

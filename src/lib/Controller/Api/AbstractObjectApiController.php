@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Db\AbstractModel;
 use OCA\Passwords\Db\AbstractRevision;
 use OCA\Passwords\Exception\ApiException;
@@ -14,6 +15,8 @@ use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -27,27 +30,27 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     /**
      * @var AbstractModelService
      */
-    protected $modelService;
+    protected AbstractModelService $modelService;
 
     /**
      * @var AbstractObjectHelper
      */
-    protected $objectHelper;
+    protected AbstractObjectHelper $objectHelper;
 
     /**
      * @var AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var ValidationService
      */
-    protected $validationService;
+    protected ValidationService $validationService;
 
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType'];
+    protected array $allowedFilterFields = ['created', 'updated', 'cseType', 'sseType'];
 
     /**
      * AbstractObjectApiController constructor.
@@ -134,8 +137,8 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $model  = $this->modelService->findByUuid($id);
@@ -154,9 +157,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
      */
     public function delete(string $id, ?string $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);
@@ -191,9 +194,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function restore(string $id, $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);

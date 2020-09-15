@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
+use Exception;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\TagMapper;
@@ -15,6 +16,7 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\Migration\IOutput;
+use Throwable;
 
 /**
  * Class PasswordTagRelationRepair
@@ -26,22 +28,22 @@ class PasswordTagRelationRepair {
     /**
      * @var TagMapper
      */
-    protected $tagMapper;
+    protected TagMapper $tagMapper;
 
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * @var PasswordMapper
      */
-    protected $passwordMapper;
+    protected PasswordMapper $passwordMapper;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $relationService;
+    protected PasswordTagRelationService $relationService;
 
     /**
      * PasswordTagRelationRepair constructor.
@@ -61,11 +63,11 @@ class PasswordTagRelationRepair {
     /**
      * @param IOutput $output
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(IOutput $output): void {
-        /** @var PasswordTagRelation[] $activeRelations */
         $activeRelations = $this->relationService->findAll();
+        /** @var PasswordTagRelation[] $deletedRelations */
         $deletedRelations = $this->relationService->findDeleted();
 
         $fixed = 0;
@@ -75,17 +77,18 @@ class PasswordTagRelationRepair {
         foreach($activeRelations as $relation) {
             try {
                 if($this->repairRelation($relation)) $fixed++;
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $output->warning(
                     "Failed to repair relation #{$relation->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );
             }
             $output->advance(1);
         }
+
         foreach($deletedRelations as $relation) {
             try {
                 if($this->repairDeletedRelation($relation)) $fixed++;
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $output->warning(
                     "Failed to repair relation #{$relation->getId()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );

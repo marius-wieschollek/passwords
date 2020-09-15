@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Db;
 
+use Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
@@ -22,7 +23,7 @@ class ShareMapper extends AbstractMapper {
      * @param string $userId
      *
      * @return Share[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllByUserIdOrReceiverId(string $userId): array {
         $sql = $this->getStatement();

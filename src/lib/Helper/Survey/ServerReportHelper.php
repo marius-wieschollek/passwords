@@ -3,6 +3,8 @@
 namespace OCA\Passwords\Helper\Survey;
 
 use Exception;
+use OC_App;
+use OC_Util;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Db\ShareMapper;
@@ -25,42 +27,42 @@ class ServerReportHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var ShareMapper
      */
-    protected $shareMapper;
+    protected ShareMapper $shareMapper;
 
     /**
      * @var ServiceSettingsHelper
      */
-    protected $serviceSettings;
+    protected ServiceSettingsHelper $serviceSettings;
 
     /**
      * @var TagRevisionMapper
      */
-    protected $tagRevisionMapper;
+    protected TagRevisionMapper $tagRevisionMapper;
 
     /**
      * @var FolderRevisionMapper
      */
-    protected $folderRevisionMapper;
+    protected FolderRevisionMapper $folderRevisionMapper;
 
     /**
      * @var PasswordRevisionMapper
      */
-    protected $passwordRevisionMapper;
+    protected PasswordRevisionMapper $passwordRevisionMapper;
 
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * ServerReportHelper constructor.
@@ -230,7 +232,7 @@ class ServerReportHelper {
         if($performance < 0 || $performance > 6) $performance = 2;
 
         return [
-            'channel'     => \OC_Util::getChannel(),
+            'channel'     => OC_Util::getChannel(),
             'nightlies'   => $this->config->getAppValue('nightly/enabled', '0') === '1',
             'handbook'    => $this->config->getAppValue('handbook/url') !== null,
             'performance' => intval($performance)
@@ -241,7 +243,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getApps(): array {
-        $appClass = new \OC_App();
+        $appClass = new OC_App();
         $apps     = $appClass->listAllApps();
         $data     = [];
         foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate'] as $app) {

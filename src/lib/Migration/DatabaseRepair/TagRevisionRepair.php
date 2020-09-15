@@ -22,7 +22,7 @@ class TagRevisionRepair extends AbstractRevisionRepair {
     /**
      * @var string
      */
-    protected $objectName = 'tag';
+    protected string $objectName = 'tag';
 
     /**
      * TagRevisionRepair constructor.

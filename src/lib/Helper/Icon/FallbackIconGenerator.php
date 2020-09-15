@@ -7,10 +7,12 @@
 
 namespace OCA\Passwords\Helper\Icon;
 
+use OC_Image;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
+use Throwable;
 
 /**
  * Class FallbackIconGenerator
@@ -22,7 +24,7 @@ class FallbackIconGenerator {
     /**
      * @var array
      */
-    protected $colors
+    protected array $colors
         = [
             '1abc9c',
             '16a085',
@@ -43,20 +45,18 @@ class FallbackIconGenerator {
     /**
      * @var AbstractImageHelper
      */
-    protected $imageHelper;
+    protected AbstractImageHelper $imageHelper;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * AvatarService constructor.
      *
      * @param HelperService        $helperService
      * @param ConfigurationService $config
-     *
-     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(HelperService $helperService, ConfigurationService $config) {
         $this->imageHelper = $helperService->getImageHelper();
@@ -68,7 +68,7 @@ class FallbackIconGenerator {
      * @param int    $size
      *
      * @return string
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function createIcon(string $text, int $size): string {
         $color = $this->stringToColor($text);
@@ -109,7 +109,7 @@ class FallbackIconGenerator {
      * @param int    $size
      *
      * @return string
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function createIconFromSvg(string $color, string $text, int $size): string {
         $svg = file_get_contents(__DIR__.'/../../../img/default.svg');
@@ -125,7 +125,7 @@ class FallbackIconGenerator {
             $image = $this->imageHelper->simpleResizeImage($image, $size);
             $image->setImageDepth(8);
             unlink($tempFile);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
             throw $e;
         }
@@ -174,7 +174,7 @@ class FallbackIconGenerator {
         imagestring($image, 5, $fontX, $fontY, $text, $fgColor);
 
         if($realSize !== 24) {
-            $tempImage = new \OC_Image($image);
+            $tempImage = new OC_Image($image);
             $tempImage->resize($realSize);
             $image = $tempImage->resource();
         }

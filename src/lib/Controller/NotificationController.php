@@ -11,6 +11,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Survey\ServerReportHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Controller;
 use OCP\IRequest;
 use OCP\Notification\IManager;
 
@@ -19,27 +20,27 @@ use OCP\Notification\IManager;
  *
  * @package OCA\Passwords\Controller
  */
-class NotificationController extends \OCP\AppFramework\Controller {
+class NotificationController extends Controller {
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var IManager
      */
-    protected $notifications;
+    protected IManager $notifications;
 
     /**
      * @var ServerReportHelper
      */
-    protected $serverReport;
+    protected ServerReportHelper $serverReport;
 
     /**
      * NotificationController constructor.
@@ -63,7 +64,7 @@ class NotificationController extends \OCP\AppFramework\Controller {
         $this->config        = $config;
         $this->environment   = $environment;
         $this->notifications = $notifications;
-        $this->serverReport = $serverReport;
+        $this->serverReport  = $serverReport;
     }
 
     /**

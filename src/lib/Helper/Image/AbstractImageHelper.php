@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Image;
 
+use OC;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -19,7 +20,7 @@ abstract class AbstractImageHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * AbstractImageHelper constructor.
@@ -117,7 +118,7 @@ abstract class AbstractImageHelper {
     public function supportsImage($blob): bool {
         $mime = $this->getImageMime($blob);
 
-        list($type, $format) = explode('/', $mime);
+        [$type, $format] = explode('/', $mime);
         if($type !== 'image') return false;
 
         return $this->supportsFormat($format);
@@ -209,6 +210,6 @@ abstract class AbstractImageHelper {
      * @return string
      */
     public function getDefaultFont(): string {
-        return \OC::$SERVERROOT.'/core/fonts/NotoSans-Regular.ttf';
+        return OC::$SERVERROOT.'/core/fonts/NotoSans-Regular.ttf';
     }
 }

@@ -28,32 +28,32 @@ class UserChallengeService {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var HookManager
      */
-    protected $hookManager;
+    protected HookManager $hookManager;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var ChallengeService
      */
-    protected $challengeService;
+    protected ChallengeService $challengeService;
 
     /**
      * @var ChallengeV1Helper
      */
-    protected $challengeHelper;
+    protected ChallengeV1Helper $challengeHelper;
 
     /**
      * UserChallengeHelper constructor.
@@ -87,7 +87,7 @@ class UserChallengeService {
     public function hasChallenge(): bool {
         try {
             return $this->config->hasUserValue(self::USER_CHALLENGE_ID);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             return false;
@@ -119,7 +119,7 @@ class UserChallengeService {
     public function validateChallenge(string $secret): bool {
         try {
             $challenge = $this->getDefaultChallenge();
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             return false;
@@ -144,13 +144,13 @@ class UserChallengeService {
             $this->hookManager->emit(Challenge::class, 'preSetChallenge');
 
             /** @var $challenge Challenge */
-            list($key, $challenge) = $this->challengeHelper->createChallenge($secret, $clientData);
+            [$key, $challenge] = $this->challengeHelper->createChallenge($secret, $clientData);
             $this->challengeService->save($challenge);
             $this->sessionService->set(SessionService::VALUE_USER_SECRET, $key);
             $this->config->setUserValue(self::USER_CHALLENGE_ID, $challenge->getUuid());
 
             $this->hookManager->emit(Challenge::class, 'postSetChallenge', [$key]);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             $this->revertChallenge($backup);
@@ -176,7 +176,7 @@ class UserChallengeService {
             $id = $this->config->getUserValue(self::USER_CHALLENGE_ID);
 
             return $this->challengeService->findByUuid($id, true);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             throw new ApiException('Loading challenge failed');

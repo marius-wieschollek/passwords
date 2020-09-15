@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\ClientException;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
+use Throwable;
 
 /**
  * Class ScreeenlyHelper
@@ -24,7 +25,7 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_SCREEENLY;
+    protected string $prefix = HelperService::PREVIEW_SCREEENLY;
 
     /**
      * @param string $domain
@@ -39,7 +40,7 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
         try {
             $client   = $this->httpClientService->newClient();
             $response = $client->post($serviceUrl, ['json' => $serviceParams]);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $code = $e instanceof ClientException ? "HTTP {$e->getResponse()->getStatusCode()}":$e->getMessage();
             $this->logger->error("Screeenly Request Failed, HTTP {$code}");
             throw new ApiException('API Request Failed', 502, $e);

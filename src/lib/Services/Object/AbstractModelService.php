@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
@@ -50,8 +51,8 @@ abstract class AbstractModelService extends AbstractService {
      * @param string $uuid
      *
      * @return ModelInterface|EntityInterface
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): ModelInterface {
         return $this->mapper->findByUuid($uuid);
@@ -104,7 +105,7 @@ abstract class AbstractModelService extends AbstractService {
      * @param ModelInterface    $model
      * @param RevisionInterface $revision
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function setRevision(ModelInterface $model, RevisionInterface $revision): void {
         if($revision->getModel() === $model->getUuid()) {
@@ -113,7 +114,7 @@ abstract class AbstractModelService extends AbstractService {
             $this->save($model);
             $this->hookManager->emit($this->class, 'postSetRevision', [$model, $revision]);
         } else {
-            throw new \Exception('Revision did not belong to model when setting model revision');
+            throw new Exception('Revision did not belong to model when setting model revision');
         }
     }
 

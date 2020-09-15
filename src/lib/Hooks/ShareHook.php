@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Hooks;
 
+use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\Object\PasswordService;
@@ -24,12 +25,12 @@ class ShareHook {
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * ShareHook constructor.
@@ -46,7 +47,7 @@ class ShareHook {
      * @param Share $share
      *
      * @throws MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws Exception
      */
     public function postDelete(Share $share) {
         try {

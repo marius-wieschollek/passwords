@@ -26,7 +26,7 @@ class BackupDeleteCommand extends Command {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * BackupDeleteCommand constructor.

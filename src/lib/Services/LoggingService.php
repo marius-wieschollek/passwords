@@ -21,7 +21,7 @@ class LoggingService {
     /**
      * @var ILogger
      */
-    protected $logger;
+    protected ILogger $logger;
 
     /**
      * LoggingService constructor.

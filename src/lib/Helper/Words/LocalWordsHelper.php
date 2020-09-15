@@ -28,12 +28,12 @@ class LocalWordsHelper extends AbstractWordsHelper {
     /**
      * @var string
      */
-    protected $langCode;
+    protected string $langCode;
 
     /**
      * @var SpecialCharacterHelper
      */
-    protected $specialCharacters;
+    protected SpecialCharacterHelper $specialCharacters;
 
     /**
      * LocalWordsHelper constructor.

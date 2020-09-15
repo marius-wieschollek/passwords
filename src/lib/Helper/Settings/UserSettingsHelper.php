@@ -21,12 +21,12 @@ class UserSettingsHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var array
      */
-    protected $userSettings
+    protected array $userSettings
         = [
             'password/generator/strength'  => 'integer',
             'password/generator/numbers'   => 'boolean',
@@ -47,7 +47,7 @@ class UserSettingsHelper {
     /**
      * @var array
      */
-    protected $userDefaults
+    protected array $userDefaults
         = [
             'password/generator/strength'  => 1,
             'password/generator/numbers'   => false,
@@ -78,7 +78,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return null|string
-     * @throws \Exception
+     * @throws Exception
      */
     public function get(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -100,7 +100,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return bool|float|int|null|string
-     * @throws \Exception
+     * @throws Exception
      */
     public function set(string $key, $value, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -127,7 +127,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function reset(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
@@ -147,7 +147,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function list(string $userId = null): array {
         $settings = [];
@@ -165,7 +165,7 @@ class UserSettingsHelper {
      * @param string|null $userId
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function listRaw(string $userId = null) {
         $settings = [];

@@ -9,6 +9,7 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
@@ -25,7 +26,7 @@ class TagRevisionService extends AbstractRevisionService {
     /**
      * @var string
      */
-    protected $class = TagRevision::class;
+    protected string $class = TagRevision::class;
 
     /**
      * TagRevisionService constructor.
@@ -61,7 +62,7 @@ class TagRevisionService extends AbstractRevisionService {
      *
      * @return TagRevision
      *
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function create(
         string $model,

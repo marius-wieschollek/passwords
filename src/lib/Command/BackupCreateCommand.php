@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Command;
 
 use OCA\Passwords\Services\BackupService;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,7 +25,7 @@ class BackupCreateCommand extends Command {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * BackupCreateCommand constructor.
@@ -50,13 +52,13 @@ class BackupCreateCommand extends Command {
      * @param OutputInterface $output
      *
      * @return int|null|void
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \OCP\Files\NotFoundException
+     * @throws NotPermittedException
+     * @throws NotFoundException
      */
     protected function execute(InputInterface $input, OutputInterface $output): void {
         $argName = null;
         if($input->hasArgument('name')) {
-            $argName = preg_replace('/[^\w\-\.]/', '', $input->getArgument('name'));
+            $argName = preg_replace('/[^\w\-.]/', '', $input->getArgument('name'));
             if(empty($argName)) $argName = null;
         }
 

@@ -22,7 +22,7 @@ class ScreenShotLayerHelper extends AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_SCREEN_SHOT_LAYER;
+    protected string $prefix = HelperService::PREVIEW_SCREEN_SHOT_LAYER;
 
     /**
      * @param string $domain

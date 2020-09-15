@@ -15,6 +15,7 @@ use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use Throwable;
 
 /**
  * Class CacheController
@@ -26,17 +27,17 @@ class CacheController extends ApiController {
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var array
      */
-    protected $cacheLabels
+    protected array $cacheLabels
         = [
             FileCacheService::DEFAULT_CACHE   => 'Default Cache',
             FileCacheService::AVATAR_CACHE    => 'Avatar Cache',
@@ -81,7 +82,7 @@ class CacheController extends ApiController {
      * @param $id
      *
      * @return JSONResponse
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function show($id): JSONResponse {
         $info = $this->getCaches();
@@ -97,7 +98,7 @@ class CacheController extends ApiController {
      * @param $id
      *
      * @return JSONResponse
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function destroy($id): JSONResponse {
         $info = $this->getCaches();
@@ -131,7 +132,7 @@ class CacheController extends ApiController {
                 } else {
                     $info[ $cache ]['label'] = '';
                 }
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
             }
         }
 

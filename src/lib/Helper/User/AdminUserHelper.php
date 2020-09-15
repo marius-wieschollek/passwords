@@ -20,12 +20,12 @@ class AdminUserHelper {
     /**
      * @var IGroupManager
      */
-    protected $groupManager;
+    protected IGroupManager $groupManager;
 
     /**
      * @var null|User[]
      */
-    protected $admins = null;
+    protected ?array $admins = null;
 
     /**
      * AdminUserHelper constructor.

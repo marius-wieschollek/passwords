@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Migration;
 
+use Exception;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
@@ -21,7 +22,7 @@ class ClearAppCaches implements IRepairStep {
     /**
      * @var FileCacheService
      */
-    protected $fileCache;
+    protected FileCacheService $fileCache;
 
     /**
      * ClearAppCaches constructor.
@@ -48,7 +49,7 @@ class ClearAppCaches implements IRepairStep {
      *
      * @param IOutput $output
      *
-     * @throws \Exception in case of failure
+     * @throws Exception in case of failure
      * @since 9.1.0
      */
     public function run(IOutput $output) {

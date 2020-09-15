@@ -20,7 +20,7 @@ class DefaultPreviewHelper extends AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_DEFAULT;
+    protected string $prefix = HelperService::PREVIEW_DEFAULT;
 
     /**
      * @param string $domain

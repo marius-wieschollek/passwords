@@ -2,6 +2,8 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Db\ChallengeMapper;
 use OCA\Passwords\Db\EntityInterface;
@@ -9,6 +11,8 @@ use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class ChallengeService
@@ -18,19 +22,19 @@ use OCA\Passwords\Services\EnvironmentService;
 class ChallengeService extends AbstractService {
 
     /**
-     * @var ChallengeMapper
+     * @var ChallengeMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var EncryptionService
      */
-    protected $encryption;
+    protected EncryptionService $encryption;
 
     /**
      * @var string
      */
-    protected $class = Challenge::class;
+    protected string $class = Challenge::class;
 
     /**
      * ChallengeService constructor.
@@ -58,9 +62,9 @@ class ChallengeService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return Challenge
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
      */
     public function findByUuid(string $uuid, bool $decrypt = false): EntityInterface {
         /** @var Challenge $challenge */
@@ -74,7 +78,7 @@ class ChallengeService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return Challenge[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByUserId(string $userId, bool $decrypt = false): array {
         /** @var Challenge[] $challenges */
@@ -108,7 +112,7 @@ class ChallengeService extends AbstractService {
      * @param EntityInterface|Challenge $challenge
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function save(EntityInterface $challenge): EntityInterface {
         $this->hookManager->emit($this->class, 'preSave', [$challenge]);

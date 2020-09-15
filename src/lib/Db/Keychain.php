@@ -30,25 +30,25 @@ class Keychain extends AbstractEntity {
     /**
      * @var string
      */
-    protected $data;
+    protected string $data;
 
     /**
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string
      */
-    protected $scope;
+    protected string $scope;
 
     /**
      * @var bool
      */
-    protected $_decrypted = false;
+    protected bool $_decrypted = false;
 
     /**
-     * Folder constructor.
+     * Keychain constructor.
      */
     public function __construct() {
         $this->addType('data', 'string');

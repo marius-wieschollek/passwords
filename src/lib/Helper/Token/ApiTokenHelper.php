@@ -32,47 +32,47 @@ class ApiTokenHelper {
     /**
      * @var null|string
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var ISecureRandom
      */
-    protected $random;
+    protected ISecureRandom $random;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * @var SessionService
      */
-    protected $session;
+    protected SessionService $session;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var IL10N
      */
-    protected $localisation;
+    protected IL10N $localisation;
 
     /**
      * @var IProvider
      */
-    protected $tokenProvider;
+    protected IProvider $tokenProvider;
 
     /**
      * ApiTokenHelper constructor.

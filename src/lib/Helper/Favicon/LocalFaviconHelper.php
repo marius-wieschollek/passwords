@@ -7,7 +7,9 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
+use Exception;
 use OCA\Passwords\Services\HelperService;
+use Throwable;
 
 /**
  * Class LocalFaviconHelper
@@ -19,13 +21,13 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::FAVICON_LOCAL;
+    protected string $prefix = HelperService::FAVICON_LOCAL;
 
     /**
      * @param string $domain
      *
      * @return null|string
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function getFaviconData(string $domain): string {
         [$html, $url] = $this->getUrl('https://'.$domain);
@@ -101,7 +103,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
                 $contentType,
                 $isIcon
             ];
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             return [
                 '',
                 $url,
@@ -130,7 +132,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
                     if($isIcon && $data) return $data;
                 }
             }
-        };
+        }
 
         return null;
     }
@@ -156,11 +158,11 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     }
 
     /**
-     * @param string $data
+     * @param string|null $data
      *
      * @return string|null
      */
-    protected function convertIcoFile($data): ?string {
+    protected function convertIcoFile(?string $data): ?string {
         if(empty($data)) return null;
 
         return $this->imageHelper->convertIcoToPng($data);

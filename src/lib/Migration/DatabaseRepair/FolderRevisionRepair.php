@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
+use Exception;
 use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\RevisionInterface;
@@ -27,7 +28,7 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
     /**
      * @var string
      */
-    protected $objectName = 'folder';
+    protected string $objectName = 'folder';
 
     /**
      * FolderRevisionRepair constructor.
@@ -45,7 +46,7 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
      * @param FolderRevision|RevisionInterface $revision
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;

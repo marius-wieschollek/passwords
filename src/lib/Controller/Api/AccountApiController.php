@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\DeferredActivationService;
@@ -28,32 +29,32 @@ class AccountApiController extends AbstractApiController {
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * @var DeleteUserDataHelper
      */
-    protected $deleteUserDataHelper;
+    protected DeleteUserDataHelper $deleteUserDataHelper;
 
     /**
      * @var DeferredActivationService
      */
-    protected $deferredActivation;
+    protected DeferredActivationService $deferredActivation;
 
     /**
      * AccountApiController constructor.
@@ -93,7 +94,7 @@ class AccountApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function reset(string $password): JSONResponse {
         if(!$this->userManager->checkPassword($this->environment->getUserLogin(), $password)) {
@@ -122,7 +123,7 @@ class AccountApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function getChallenge(): JSONResponse {
         return $this->createJsonResponse($this->challengeService->getChallengeData(), Http::STATUS_OK);

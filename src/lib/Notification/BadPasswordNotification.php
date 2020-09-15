@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Notification;
 
+use Exception;
 use OCP\IL10N;
 use OCP\Notification\INotification;
 
@@ -25,6 +26,8 @@ class BadPasswordNotification extends AbstractNotification {
      *
      * @param string $userId
      * @param array  $parameters
+     *
+     * @throws Exception
      */
     public function send(string $userId, array $parameters = []): void {
         $parameters['count'] = isset($parameters['count']) && $parameters['count'] > 0 ? $parameters['count']:1;

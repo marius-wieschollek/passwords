@@ -41,8 +41,10 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\IAppContainer;
-use OCP\AppFramework\QueryException;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IGroupManager;
@@ -56,7 +58,7 @@ use OCP\Share\IManager as ShareManager;
  *
  * @package OCA\Passwords\AppInfo
  */
-class Application extends App {
+class Application extends App implements IBootstrap {
 
     const APP_NAME = 'passwords';
 
@@ -64,131 +66,133 @@ class Application extends App {
      * Application constructor.
      *
      * @param array $urlParams
-     *
-     * @throws QueryException
      */
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_NAME, $urlParams);
+    }
 
-        $this->registerDiClasses();
+    /**
+     * @param IRegistrationContext $context
+     */
+    public function register(IRegistrationContext $context): void {
+        $this->registerDiClasses($context);
         $this->registerSystemHooks();
         $this->registerInternalHooks();
-        $this->registerMiddleware();
+        $this->registerMiddleware($context);
+    }
+
+    /**
+     * @param IBootContext $context
+     */
+    public function boot(IBootContext $context): void {
         $this->registerNotificationNotifier();
     }
 
     /**
+     * @param IRegistrationContext $context
      */
-    protected function registerDiClasses(): void {
-        $container = $this->getContainer();
-
+    protected function registerDiClasses(IRegistrationContext $context): void {
         /**
          * Controllers
          */
-        $this->registerController();
+        $this->registerController($context);
 
         /**
          * Helper
          */
-        $container->registerService(LocalWordsHelper::class,
+        $context->registerService(LocalWordsHelper::class,
             function (IAppContainer $c) {
                 return new LocalWordsHelper(
-                    $c->query(SpecialCharacterHelper::class),
-                    $c->query(IFactory::class)->get('core')->getLanguageCode()
+                    $c->get(SpecialCharacterHelper::class),
+                    $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
 
-        $container->registerService(RandomCharactersHelper::class,
+        $context->registerService(RandomCharactersHelper::class,
             function (IAppContainer $c) {
                 return new RandomCharactersHelper(
-                    $c->query(IFactory::class)->get('core')->getLanguageCode()
+                    $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
 
-        $container->registerService(LeipzigCorporaHelper::class,
+        $context->registerService(LeipzigCorporaHelper::class,
             function (IAppContainer $c) {
                 return new LeipzigCorporaHelper(
-                    $c->query(SpecialCharacterHelper::class),
-                    $c->query(IClientService::class),
-                    $c->query(IFactory::class)->get('core')->getLanguageCode()
+                    $c->get(SpecialCharacterHelper::class),
+                    $c->get(IClientService::class),
+                    $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
 
         /**
          * Register Legacy Api Controller Classes
          */
-        $this->registerLegacyApiControllers();
+        $this->registerLegacyApiControllers($context);
     }
 
     /**
-     *
+     * @param IRegistrationContext $context
      */
-    protected function registerMiddleware(): void {
-        $container = $this->getContainer();
+    protected function registerMiddleware(IRegistrationContext $context): void {
+        $context->registerServiceAlias('ApiSecurityMiddleware', ApiSecurityMiddleware::class);
+        $context->registerMiddleware('ApiSecurityMiddleware');
 
-        $container->registerAlias('ApiSecurityMiddleware', ApiSecurityMiddleware::class);
-        $container->registerMiddleware('ApiSecurityMiddleware');
+        $context->registerServiceAlias('ApiSessionMiddleware', ApiSessionMiddleware::class);
+        $context->registerMiddleware('ApiSessionMiddleware');
 
-        $container->registerAlias('ApiSessionMiddleware', ApiSessionMiddleware::class);
-        $container->registerMiddleware('ApiSessionMiddleware');
-
-        if($container->query(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
-            $container->registerAlias('LegacyMiddleware', LegacyMiddleware::class);
-            $container->registerMiddleware('LegacyMiddleware');
+        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+            $context->registerServiceAlias('LegacyMiddleware', LegacyMiddleware::class);
+            $context->registerMiddleware('LegacyMiddleware');
         }
     }
 
     /**
-     *
+     * @param IRegistrationContext $context
      */
-    protected function registerController(): void {
-        $container = $this->getContainer();
+    protected function registerController(IRegistrationContext $context): void {
+        $context->registerServiceAlias('AdminSettingsController', SettingsController::class);
+        $context->registerServiceAlias('AdminCachesController', CacheController::class);
+        $context->registerServiceAlias('KeychainApiController', KeychainApiController::class);
+        $context->registerServiceAlias('PasswordApiController', PasswordApiController::class);
+        $context->registerServiceAlias('SettingsApiController', SettingsApiController::class);
+        $context->registerServiceAlias('AccountApiController', AccountApiController::class);
+        $context->registerServiceAlias('SessionApiController', SessionApiController::class);
+        $context->registerServiceAlias('ServiceApiController', ServiceApiController::class);
+        $context->registerServiceAlias('FolderApiController', FolderApiController::class);
+        $context->registerServiceAlias('ShareApiController', ShareApiController::class);
+        $context->registerServiceAlias('ConnectController', ConnectController::class);
+        $context->registerServiceAlias('TagApiController', TagApiController::class);
 
-        $container->registerAlias('AdminSettingsController', SettingsController::class);
-        $container->registerAlias('AdminCachesController', CacheController::class);
-        $container->registerAlias('KeychainApiController', KeychainApiController::class);
-        $container->registerAlias('PasswordApiController', PasswordApiController::class);
-        $container->registerAlias('SettingsApiController', SettingsApiController::class);
-        $container->registerAlias('AccountApiController', AccountApiController::class);
-        $container->registerAlias('SessionApiController', SessionApiController::class);
-        $container->registerAlias('ServiceApiController', ServiceApiController::class);
-        $container->registerAlias('FolderApiController', FolderApiController::class);
-        $container->registerAlias('ShareApiController', ShareApiController::class);
-        $container->registerAlias('ConnectController', ConnectController::class);
-        $container->registerAlias('TagApiController', TagApiController::class);
-
-        $container->registerService(ShareUserListHelper::class,
+        $context->registerService(ShareUserListHelper::class,
             function (IAppContainer $c) {
                 return new ShareUserListHelper(
-                    $c->query(ShareManager::class),
-                    $c->query(IUserManager::class),
-                    $c->query(IGroupManager::class),
-                    $c->query(ConfigurationService::class),
-                    $c->query(EnvironmentService::class)
+                    $c->get(ShareManager::class),
+                    $c->get(IUserManager::class),
+                    $c->get(IGroupManager::class),
+                    $c->get(ConfigurationService::class),
+                    $c->get(EnvironmentService::class)
                 );
             });
     }
 
     /**
-     *
+     * @param IRegistrationContext $context
      */
-    protected function registerLegacyApiControllers(): void {
-        $container = $this->getContainer();
-
-        if($container->query(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
-            $container->registerAlias('LegacyVersionApiController', LegacyVersionApiController::class);
-            $container->registerAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
-            $container->registerAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
+    protected function registerLegacyApiControllers(IRegistrationContext $context): void {
+        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+            $context->registerServiceAlias('LegacyVersionApiController', LegacyVersionApiController::class);
+            $context->registerServiceAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
+            $context->registerServiceAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
         }
     }
 
     /**
-     * @throws QueryException
+     *
      */
     protected function registerInternalHooks(): void {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
-        $hookManager = $container->query(HookManager::class);
+        $hookManager = $container->get(HookManager::class);
 
         $hookManager->listen(Folder::class, 'postClone', [$hookManager, 'folderPostCloneHook']);
         $hookManager->listen(Folder::class, 'preDelete', [$hookManager, 'folderPreDelete']);
@@ -208,14 +212,14 @@ class Application extends App {
     }
 
     /**
-     * @throws QueryException
+     *
      */
     protected function registerSystemHooks(): void {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
-        $hookManager = $container->query(HookManager::class);
+        $hookManager = $container->get(HookManager::class);
         /** @var Manager $userManager */
-        $userManager = $container->query(IUserManager::class);
+        $userManager = $container->get(IUserManager::class);
 
         $userManager->listen('\OC\User', 'preCreateUser', [$hookManager, 'userPreCreateUser']);
         $userManager->listen('\OC\User', 'postDelete', [$hookManager, 'userPostDelete']);
@@ -223,10 +227,8 @@ class Application extends App {
 
     /**
      * Registers the Notification service
-     *
-     * @throws QueryException
      */
     protected function registerNotificationNotifier(): void {
-        $this->getContainer()->query(IManager::class)->registerNotifierService(NotificationService::class);
+        $this->getContainer()->get(IManager::class)->registerNotifierService(NotificationService::class);
     }
 }

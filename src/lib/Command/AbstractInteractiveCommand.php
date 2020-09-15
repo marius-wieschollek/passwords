@@ -43,7 +43,7 @@ abstract class AbstractInteractiveCommand extends Command {
         } else if(!$input->isInteractive()) {
             $output->writeln('"--no-interaction" is set, will assume yes for all questions.');
             $output->writeln('');
-        };
+        }
     }
 
     /**

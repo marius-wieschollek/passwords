@@ -30,32 +30,32 @@ class PasswordTagRelation extends AbstractEntity {
     /**
      * @var string
      */
-    protected $tag;
+    protected string $tag;
 
     /**
      * @var string
      */
-    protected $password;
+    protected string $password;
 
     /**
      * @var string
      */
-    protected $tagRevision;
+    protected string $tagRevision;
 
     /**
      * @var string
      */
-    protected $passwordRevision;
+    protected string $passwordRevision;
 
     /**
      * @var bool
      */
-    protected $hidden;
+    protected bool $hidden;
 
     /**
      * @var string
      */
-    protected $client;
+    protected string $client;
 
     /**
      * PasswordTagRelation constructor.

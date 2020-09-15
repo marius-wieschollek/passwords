@@ -7,8 +7,11 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
@@ -23,14 +26,14 @@ use OCA\Passwords\Services\ValidationService;
 class PasswordRevisionService extends AbstractRevisionService {
 
     /**
-     * @var PasswordRevisionMapper
+     * @var PasswordRevisionMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = PasswordRevision::class;
+    protected string $class = PasswordRevision::class;
 
     /**
      * PasswordRevisionService constructor.
@@ -59,7 +62,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      *
      * @return PasswordRevision[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByHash(string $hash, bool $decrypt = false): array {
         /** @var PasswordRevision[] $revisions */
@@ -93,7 +96,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      *
      * @return PasswordRevision
      *
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function create(
         string $model,

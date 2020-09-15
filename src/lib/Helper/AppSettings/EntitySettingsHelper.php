@@ -15,14 +15,14 @@ namespace OCA\Passwords\Helper\AppSettings;
 class EntitySettingsHelper extends AbstractSettingsHelper {
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'entity';
+    protected string $scope = 'entity';
 
     /**
      * @var array
      */
-    protected $keys
+    protected array $keys
         = [
             'purge.timeout' => 'entity/purge/timeout'
         ];
@@ -30,7 +30,7 @@ class EntitySettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $types
+    protected array $types
         = [
             'purge.timeout' => 'select:number'
         ];
@@ -38,7 +38,7 @@ class EntitySettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $defaults
+    protected array $defaults
         = [
             'purge.timeout' => -1
         ];

@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
+use stdClass;
 
 /**
  * Class BrowshotPreviewHelper
@@ -26,7 +27,7 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_BROW_SHOT;
+    protected string $prefix = HelperService::PREVIEW_BROW_SHOT;
 
     /**
      * @param string $domain
@@ -44,13 +45,13 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
     }
 
     /**
-     * @param \stdClass $data
+     * @param stdClass $data
      * @param string    $apiKey
      *
      * @return string
      * @throws ApiException
      */
-    protected function waitForResult(\stdClass $data, string $apiKey): string {
+    protected function waitForResult(stdClass $data, string $apiKey): string {
         $infoUrl = $this->getInfoUrl($data->id, $apiKey);
 
         while(in_array($data->status, ['in_queue', 'in_process', 'processing'])) {

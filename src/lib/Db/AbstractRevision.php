@@ -10,8 +10,8 @@ namespace OCA\Passwords\Db;
 /**
  * Class AbstractRevision
  *
- * @method string getSseKey()
- * @method void setSseKey(string $sseKey)
+ * @method string|null getSseKey()
+ * @method void setSseKey(string|null $sseKey)
  * @method string getSseType()
  * @method void setSseType(string $sseType)
  * @method string getCseType()
@@ -38,64 +38,64 @@ namespace OCA\Passwords\Db;
 abstract class AbstractRevision extends AbstractEntity implements RevisionInterface {
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $sseKey;
+    protected ?string $sseKey;
 
     /**
      * @var string
      */
-    protected $sseType;
+    protected string $sseType;
 
     /**
      * @var string
      */
-    protected $cseType;
+    protected string $cseType;
 
     /**
      * @var string
      */
-    protected $cseKey;
+    protected string $cseKey;
 
     /**
      * @var string
      */
-    protected $model;
+    protected string $model;
 
     /**
      * @var string
      */
-    protected $label;
+    protected string $label;
 
     /**
      * @var int
      */
-    protected $edited;
+    protected int $edited;
 
     /**
      * @var bool
      */
-    protected $hidden;
+    protected bool $hidden;
 
     /**
      * @var bool
      */
-    protected $trashed;
+    protected bool $trashed;
 
     /**
      * @var bool
      */
-    protected $favorite;
+    protected bool $favorite;
 
     /**
      * @var string
      */
-    protected $client;
+    protected string $client;
 
     /**
      * @var bool
      */
-    protected $_decrypted = false;
+    protected bool $_decrypted = false;
 
     /**
      * AbstractRevision constructor.

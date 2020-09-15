@@ -22,12 +22,12 @@ abstract class AbstractModel extends AbstractEntity implements ModelInterface {
     /**
      * @var string
      */
-    protected $revision;
+    protected string $revision;
 
     /**
-     * @var string
+     * @var bool
      */
-    protected $suspended;
+    protected bool $suspended;
 
     /**
      * Password constructor.
