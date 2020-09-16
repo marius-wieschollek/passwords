@@ -42,7 +42,7 @@ class SystemReportCommand extends Command {
     protected function configure(): void {
         $this->setName('passwords:system:report')
              ->setDescription('Print system information as detected by the app')
-             ->addArgument('section', InputArgument::OPTIONAL, 'Only print the given section')
+             ->addArgument('sections', InputArgument::IS_ARRAY | InputArgument::IS_ARRAY, 'Only print the given section')
              ->addOption('basic', 'b', InputOption::VALUE_NONE, 'Only print basic report')
              ->setHidden(true);
     }
@@ -54,16 +54,23 @@ class SystemReportCommand extends Command {
      * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output): void {
-        $section = $input->getArgument('section');
-        $basic   = !$input->getOption('basic') && $section === null;
+        $sections = $input->getArgument('sections');
+        $enhanced = !$input->getOption('basic') || !empty($sections);
 
-        $data = $this->serverReportHelper->getReport($basic);
-        if($section !== null) {
-            if(isset($data[ $section ])) {
-                $json = json_encode($data[ $section ], JSON_PRETTY_PRINT);
-            } else {
-                $json = '{}';
+        $data = $this->serverReportHelper->getReport($enhanced);
+        if(!empty($sections)) {
+            if(in_array('debug', $sections)) {
+                $sections = ['version', 'environment', 'legacyApi', 'services', 'settings', 'encryption'];
             }
+
+            $sectionData = [];
+            foreach($sections as $section) {
+                if(isset($data[ $section ])) {
+                    $sectionData[ $section ] = $data[ $section ];
+                }
+            }
+
+            $json = json_encode($sectionData, JSON_PRETTY_PRINT);
         } else {
             $json = json_encode($data, JSON_PRETTY_PRINT);
         }
