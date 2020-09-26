@@ -91,13 +91,15 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * Returns the array with the apps on the appstore server
      *
+     * @param bool $allowUnstable
+     *
      * @return array
      */
-    public function get() {
+    public function get($allowUnstable = false) {
         $this->dbUpdated = false;
 
         $eTag   = $this->prepareAppDbForUpdate();
-        $result = parent::get();
+        $result = parent::get($allowUnstable);
         $this->updateAppDbAfterUpdate($eTag);
 
         return $result;
