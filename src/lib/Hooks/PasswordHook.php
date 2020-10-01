@@ -205,9 +205,12 @@ class PasswordHook {
      */
     protected function updateShares(Password $password): void {
         if($password->getShareId()) {
-            $share = $this->shareService->findByTargetPassword($password->getUuid());
-            $share->setTargetUpdated(true);
-            $this->shareService->save($share);
+            try {
+                $share = $this->shareService->findByTargetPassword($password->getUuid());
+                $share->setTargetUpdated(true);
+                $this->shareService->save($share);
+            } catch(DoesNotExistException $e) {
+            }
         }
 
         if($password->hasShares()) {
