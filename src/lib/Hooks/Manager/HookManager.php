@@ -21,6 +21,7 @@ use OCP\AppFramework\IAppContainer;
  * Class HookManager
  *
  * @package OCA\Passwords\Hooks\Manager
+ * @deprecated
  */
 class HookManager extends BasicEmitter {
 
@@ -42,6 +43,7 @@ class HookManager extends BasicEmitter {
      * @param string $scope
      * @param string $method
      * @param array  $arguments
+     * @deprecated
      */
     public function emit($scope, $method, array $arguments = []): void {
         parent::emit($scope, $method, $arguments);
@@ -52,6 +54,7 @@ class HookManager extends BasicEmitter {
      * @param $arguments
      *
      * @throws Exception
+     * @deprecated
      */
     public function __call($name, $arguments): void {
         preg_match("/([a-z]+)([a-zA-Z]+)/", $name, $matches);

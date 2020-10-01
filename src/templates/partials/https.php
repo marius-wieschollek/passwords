@@ -15,7 +15,7 @@ style(Application::APP_NAME, ['app']);
 script(Application::APP_NAME, ['Static/https-debug']);
 
 $linkHttps  = 'https://wikipedia.org/wiki/HTTPS';
-$linkReload = str_replace('http://', 'https://', \OC::$server->query(IURLGenerator::class)->linkToRouteAbsolute('passwords.page.index'));
+$linkReload = str_replace('http://', 'https://', \OC::$server->get(IURLGenerator::class)->linkToRouteAbsolute('passwords.page.index'));
 $isAdmin = \OC_User::isAdminUser(\OC_User::getUser());
 
 $title         = $l->t('HTTPS Required');

@@ -15,6 +15,7 @@ use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class PasswordService
@@ -37,12 +38,13 @@ class PasswordService extends AbstractModelService {
      * PasswordService constructor.
      *
      * @param UuidHelper         $uuidHelper
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
      * @param PasswordMapper     $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, PasswordMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($mapper, $uuidHelper, $hookManager, $environment);
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, PasswordMapper $mapper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $hookManager, $environment);
     }
 
     /**

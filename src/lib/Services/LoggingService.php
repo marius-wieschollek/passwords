@@ -8,7 +8,7 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\AppInfo\Application;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
@@ -19,16 +19,16 @@ use Throwable;
 class LoggingService {
 
     /**
-     * @var ILogger
+     * @var LoggerInterface
      */
-    protected ILogger $logger;
+    protected LoggerInterface $logger;
 
     /**
      * LoggingService constructor.
      *
-     * @param ILogger $logger
+     * @param LoggerInterface $logger
      */
-    public function __construct(ILogger $logger) {
+    public function __construct(LoggerInterface $logger) {
         $this->logger = $logger;
     }
 
@@ -182,7 +182,8 @@ class LoggingService {
      */
     public function logException(Throwable $exception, array $context = []): LoggingService {
         $context['app'] = Application::APP_NAME;
-        $this->logger->logException($exception, $context);
+        $context['exception'] = $exception;
+        $this->logger->emergency($exception->getMessage(), $context);
 
         return $this;
     }

@@ -16,6 +16,7 @@ use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class AbstractService
@@ -40,6 +41,11 @@ abstract class AbstractService {
     protected UuidHelper $uuidHelper;
 
     /**
+     * @var IEventDispatcher
+     */
+    protected IEventDispatcher $eventDispatcher;
+
+    /**
      * @var EnvironmentService
      */
     protected EnvironmentService $environment;
@@ -58,18 +64,21 @@ abstract class AbstractService {
      * AbstractService constructor.
      *
      * @param UuidHelper         $uuidHelper
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
     public function __construct(
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EnvironmentService $environment
     ) {
-        $this->userId      = $environment->getUserId();
-        $this->environment = $environment;
-        $this->hookManager = $hookManager;
-        $this->uuidHelper  = $uuidHelper;
+        $this->userId          = $environment->getUserId();
+        $this->environment     = $environment;
+        $this->hookManager     = $hookManager;
+        $this->uuidHelper      = $uuidHelper;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -116,8 +125,11 @@ abstract class AbstractService {
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
+        $this->fireEvent('beforeCloned', $entity);
         $this->hookManager->emit($this->class, 'preClone', [$entity]);
         $clone = $this->cloneModel($entity, $overwrites);
+        $this->fireEvent('cloned', $entity, $clone);
+        $this->fireEvent('afterCloned', $entity, $clone);
         $this->hookManager->emit($this->class, 'postClone', [$entity, $clone]);
 
         return $clone;
@@ -132,7 +144,10 @@ abstract class AbstractService {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preDelete', [$entity]);
         $entity->setDeleted(true);
+        $this->fireEvent('beforeDeleted', $entity);
         $this->save($entity);
+        $this->fireEvent('deleted', $entity);
+        $this->fireEvent('afterDeleted', $entity);
         $this->hookManager->emit($this->class, 'postDelete', [$entity]);
     }
 
@@ -145,7 +160,10 @@ abstract class AbstractService {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preDestroy', [$entity]);
         if(!$entity->isDeleted()) $this->delete($entity);
+        $this->fireEvent('beforeDestroyed', $entity);
         $this->mapper->delete($entity);
+        $this->fireEvent('destroyed', $entity);
+        $this->fireEvent('afterDestroyed', $entity);
         $this->hookManager->emit($this->class, 'postDestroy', [$entity]);
     }
 
@@ -156,7 +174,7 @@ abstract class AbstractService {
      * @return EntityInterface
      */
     protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
-        $class = get_class($original);
+        $class  = get_class($original);
         $clone  = new $class;
         $fields = array_keys($clone->getFieldTypes());
 
@@ -173,5 +191,27 @@ abstract class AbstractService {
         $clone->setUpdated(time());
 
         return $clone;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  ...$arguments
+     */
+    protected function fireEvent(string $name, ...$arguments) {
+        $object = substr($this->class, strrpos($this->class, '\\'));
+        if(substr($name, 0, 6) === 'before') {
+            $eventClassName = "\OCA\Passwords\Events\{$object}\{$object}".ucfirst(substr($name, 6));
+        } else if(substr($name, 0, 5) === 'after') {
+            $eventClassName = "\OCA\Passwords\Events\{$object}\{$object}".ucfirst(substr($name, 5));
+        } else {
+            $eventClassName = "\OCA\Passwords\Events\{$object}\{$object}".ucfirst($name);
+        }
+
+        if(class_exists($eventClassName)) {
+            $eventClass = new $eventClassName(...$arguments);
+            $this->eventDispatcher->dispatchTyped($eventClass);
+        } else {
+            \OC::$server->getLogger()->error('Missing Event: '.$eventClassName);
+        }
     }
 }
