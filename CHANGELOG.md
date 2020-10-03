@@ -1,9 +1,13 @@
 ## [Unreleased]
+
+## 2020.10.0 - Feature release
 ### Added
  - Android app by joleaf
 ### Changed
  - Minimum requirement notification now for 2021.1.0 requirements
  - Spanish translation improved
+### Fixed
+ - Shared password can not be deleted
 
 ## 2020.9.0 - Feature release
 ### Added
