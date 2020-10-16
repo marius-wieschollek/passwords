@@ -62,6 +62,8 @@ class LocalWordsHelper extends AbstractWordsHelper {
             $result = [];
             @exec("shuf -n {$length} {$file}", $result, $code);
 
+            $result = $this->sanitizeResult($result);
+
             if($code === 0 && $this->isWordsArrayValid($result)) {
                 return [
                     'password' => $this->wordsArrayToPassword($result, $strength, $addNumbers, $addSpecial),
@@ -134,6 +136,25 @@ class LocalWordsHelper extends AbstractWordsHelper {
         $password = parent::wordsArrayToPassword($words);
 
         return $this->specialCharacters->addSpecialCharacters($password, $strength * 3, $addNumbers, $addSpecial);
+    }
+
+    /**
+     * @param array $words
+     *
+     * @return array
+     */
+    protected function sanitizeResult(array $words) {
+        $lang = substr($this->langCode, 0, 2);
+
+        foreach($words as &$word) {
+            if($lang === 'en') {
+                $word = preg_replace('/\'s$/', '', $word);
+            }
+
+            $word = preg_replace('/[0-9]/', '', $word);
+        }
+
+        return $words;
     }
 
     /**

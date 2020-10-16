@@ -133,7 +133,7 @@
                     'joleaf'  : {
                         'label'      : 'NC Passwords',
                         'author'     : Localisation.translate('created by {author}', {author: 'joleaf'}),
-                        'description': 'Android App for the Nextcloud Passwords App',
+                        'description': 'Android App for the Nextcloud Passwords add-on, which includes actions for viewing, editing and creating the passwords',
                         'download'   : 'https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app',
                         'sources'    : 'https://gitlab.com/joleaf/nc-passwords-app',
                         'web'        : 'https://github.com/joleaf',

@@ -9,4 +9,4 @@ if [ ! -f /var/www/html/version.php ]; then
     echo "<h1>ERROR 502: BAD GATEWAY</h1>" > /var/www/html/custom_apps/502.html
 fi
 
-/entrypoint.sh "$@";
+exec /entrypoint.sh "$@";
