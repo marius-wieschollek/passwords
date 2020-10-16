@@ -22,7 +22,7 @@ labels: bug
 - Server OS and Version:
 
 ### Steps to reproduce
-1. <!-- Describe PRECISELY and DETAILED how to reproduce the bug -->
+1. <!-- Describe PRECISELY and DETAILED the necessary steps to reproduce the bug -->
 2. <!-- Provide sample data if needed -->
 3. <!-- Include relevant user settings and app settings if not standard -->
 
