@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Changed
+ - Local words quality improved
+ - Improved browser compatibility warnings
+### Fixed
+ - BC break warning in app settings not shown
 
 ## 2020.10.0 - Feature release
 ### Added
