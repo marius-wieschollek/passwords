@@ -5,6 +5,9 @@ labels: bug
 ---
 
 <!--
+ YOU MUST FILL OUT THE ENTIRE FORM TO REPORT A BUG
+ THIS FORM IS FOR BUG REPORTS ONLY
+
  Remember not to include personal data as this is public.
  Take a look at https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/App-Debugging to get all information.
 -->

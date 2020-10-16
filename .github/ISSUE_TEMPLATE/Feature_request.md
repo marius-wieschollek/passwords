@@ -5,6 +5,9 @@ labels: feature
 ---
 
 <!--
+ YOU MUST FILL OUT THE ENTIRE FORM FOR A FEATURE REQUEST
+ THIS FORM IS FOR FEATURE REQUESTS ONLY
+
  * Remember not to include personal data as this is public.
 -->
 
