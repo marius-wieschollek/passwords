@@ -2,6 +2,7 @@
 ### Changed
  - Local words quality improved
  - Improved browser compatibility warnings
+ - Ansible integration by markuman
 ### Fixed
  - BC break warning in app settings not shown
 

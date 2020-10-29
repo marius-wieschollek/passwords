@@ -21,14 +21,16 @@
             "Try again"              : "Nochmal versuchen",
             "Libraries"              : "Bibliotheken",
             "NPM Package"            : "NPM Paket",
-            "Rust Library"           : "Rust Bibliothek"
+            "Rust Library"           : "Rust Bibliothek",
+            "Integrations"           : "Integrationen"
         },
         {
             "You cancelled the connection"                      : "Du hast den Verbindungsaufbau abgebrochen",
             "You did not confirm the connection in time"        : "Du hast die Verbindung nicht rechtzeitig bestätigt",
             "This app uses an api which is no longer supported.": "Diese App verwendet eine nicht mehr unterstützte API.",
             "Official JavaScript client for the API"            : "Offizielles JavaScript-Paket für die API",
-            "A Rust library to bind to the API (WIP)"           : "Eine Rust-Bibliothek zur Anbindung der API"
+            "A Rust library to bind to the API (WIP)"           : "Eine Rust-Bibliothek zur Anbindung der API",
+            "Store secrets for your deployment in Nextcloud"    : "Zungangsdaten für Deployments in Nextcloud speichern"
         },
         {
             "To connect a new device or app, simply scan the QR code or click the link."                                                                                     : "Um dich mit einem neuen Gerät oder einer neuen App zu verbinden, scanne einfach den QR-Code oder klick auf den Link.",
