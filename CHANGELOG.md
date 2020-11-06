@@ -1,8 +1,9 @@
 ## [Unreleased]
+## 2020.11.0 - Feature release
 ### Changed
  - Local words quality improved
  - Improved browser compatibility warnings
- - Ansible integration by markuman
+ - Ansible integration app by markuman
 ### Fixed
  - BC break warning in app settings not shown
 
