@@ -117,6 +117,7 @@ class NightlyAppFetcher extends Fetcher {
             $file = $rootFolder->getFile('apps.json');
             $file->delete();
         } catch(\Exception $e) {
+            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
         }
     }
 
@@ -208,10 +209,13 @@ class NightlyAppFetcher extends Fetcher {
     protected function prepareAppDbForUpdate(): string {
         try {
             $rootFolder = $this->appData->getFolder('/');
-            $file       = $rootFolder->getFile($this->fileName);
+            if(!$rootFolder->fileExists($this->fileName)) return '';
+            $file = $rootFolder->getFile($this->fileName);
 
             return $file->getETag();
         } catch(\Exception $e) {
+            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+
             return '';
         }
     }
@@ -225,7 +229,11 @@ class NightlyAppFetcher extends Fetcher {
             $rootFolder = $this->appData->getFolder('/');
 
             $nightlyDb = $rootFolder->getFile($this->fileName);
-            $appDb     = $rootFolder->getFile('apps.json');
+            if($rootFolder->fileExists('apps.json')) {
+                $appDb = $rootFolder->getFile('apps.json');
+            } else {
+                $appDb = $rootFolder->newFile('apps.json');
+            }
 
             if($nightlyEtag !== $nightlyDb->getETag() || $appEtag !== $appDb->getETag()) {
                 $json            = json_decode($nightlyDb->getContent());
@@ -237,6 +245,7 @@ class NightlyAppFetcher extends Fetcher {
                 $this->dbUpdated = true;
             }
         } catch(\Exception $e) {
+            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
         }
     }
 
