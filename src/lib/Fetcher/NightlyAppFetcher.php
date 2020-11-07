@@ -50,7 +50,7 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * @var bool
      */
-    private $ignoreMaxVersion;
+    protected $ignoreMaxVersion;
 
     /**
      * @var bool
