@@ -60,7 +60,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return string
      */
     protected function getTitle(IL10N $localisation): string {
-        return $localisation->t('The passwords app will no longer support your server configuration');
+        return $localisation->t('The passwords app will end support for your platform');
     }
 
     /**

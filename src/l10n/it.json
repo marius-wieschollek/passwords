@@ -158,7 +158,7 @@
         "To enable it again, log in with the webapp or any client using token authentication."      : "Per attivarla di nuovo, puoi entrare nella web app o da qualsiasi dispositivo utilizzando un token.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Se non conosci questo dispositivo, perfavore cambia la tua password principale e la password Nextcloud.",
         "To increase security, we recommend using device specific tokens instead of your password." : "Per migliorare la tua sicurezza, raccomandiamo l'utilizzo di token per i tuoi dispositivi invece che della password.",
-        "The passwords app will no longer support your server configuration"                        : "L'app Passwords non supporterà più la configurazione del tuo server",
+        "The passwords app will end support for your platform"                                      : "L'app Passwords non supporterà più la configurazione del tuo server",
         "The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s."       : "La nuova versione dell'app Passwords %s ha bisogno di almeno Nextcloud %s e PHP %s.",
         "To keep receiving security and feature updates, please update your server."                : "Per continuare a ricevere aggiornamenti funzionali e di sicurezza, aggiorna il tuo server."
     },
