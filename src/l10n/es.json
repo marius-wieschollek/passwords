@@ -158,9 +158,9 @@
         "To enable it again, log in with the webapp or any client using token authentication."      : "Para activarla denuevo, puedes acceded con la webapp o cualquier cliente con un token valido.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Si no conoces este cliente/dispositivo, por favor cambia to contraseña maestra y la de Nextcloud.",
         "To increase security, we recommend using device specific tokens instead of your password." : "Para mejorar la seguridad, recomendamos usar tokes especificos para cada dispositivo, en lugar de contraseñas.",
-        "The passwords app will end support for your platform"                                      : "El App Contraseñas ha dejado de soportar la configuración de tu servidor",
-        "The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s."       : "La nueva version del App Contraseñas %s va a requerir por al menos Nextcloud version %s y PHP %s.",
-        "To keep receiving security and feature updates, please update your server."                : "Para seguir reciviendo noticias sobre seguridad y funcionalidades, por favor actualice su servidor."
+        "The passwords app will discontinue updates for your platform"                              : "El App Contraseñas ha dejado de soportar la configuración de tu servidor",
+        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "La nueva version del App Contraseñas %s va a requerir por al menos Nextcloud version %s y PHP %s.",
+        "We recommend that you update your server so you don't miss out on future updates."         : "Para seguir reciviendo noticias sobre seguridad y funcionalidades, por favor actualice su servidor."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

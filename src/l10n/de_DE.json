@@ -163,12 +163,14 @@
         "To enable it again, log in with the webapp or any client using token authentication."      : "Um diese wieder zu aktivieren, melden Sie sich mit der Webapp oder einem beliebigen Client über die Token-Authentifizierung an.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Wenn Sie dieses Gerät nicht kennen, ändern Sie bitte Ihr Master-Passwort und Ihr Nextcloud-Passwort.",
         "To increase security, we recommend using device specific tokens instead of your password." : "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden.",
-        "The passwords app will end support for your platform"                                      : "Passwörter beendet die Unterstützung für Ihre Plattform",
-        "The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s."       : "Die kommende Version %s der Passwörter-App erfordert mindestens Nextcloud %s und PHP %s.",
-        "To keep receiving security and feature updates, please update your server."                : "Um weiterhin Sicherheits- und Funktionsaktualisierungen zu erhalten, aktualisieren Sie bitte Ihren Server.",
-        "App upgrade required"                                                                      : "App-Aktualisierung notwendig",
-        "This version of the passwords app is outdated and should be upgraded."                     : "Diese Version der Passwörter-App ist veraltet und sollte aktualisiert werden.",
-        "This upgrade requires Nextcloud %s and PHP %s."                                            : "Diese Aktualisierung benötigt Nextcloud %s und PHP %s."
+        "The passwords app will discontinue updates for your platform"                              : "Passwörter wird bald keine Aktualisierungen für Ihre Plattform mehr bereitstellen",
+        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "Mit Version %s der Passwörter-App werden die Systemanforderungen auf Nextcloud %s und PHP %s angehoben.",
+        "We recommend that you update your server so you don't miss out on future updates."         : "Führen Sie eine aktualisierung Ihres Servers durch, um weiterhin Sicherheits- und Funktionsupdates zu erhalten.",
+        "Your installed version will continue to work regardless and you can still use it as it is.": "Die installierte Version der App funktioniert weiterhin und kann wie gewohnt verwendet werden.",
+        "More information"                                                                          : "Weitere Informationen",
+        "App upgrade recommended"                                                                   : "App-Aktualisierung empfohlen",
+        "Your version of the passwords app is outdated and should be upgraded."                     : "Diese Version der Passwörter-App ist veraltet und sollte aktualisiert werden.",
+        "To install the current version, Nextcloud %s and PHP %s are necessary."                    : "Um die aktuelle Version zu installieren sind Nextcloud %s und PHP %s notwendig."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
