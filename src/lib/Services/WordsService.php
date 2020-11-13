@@ -66,8 +66,14 @@ class WordsService {
         try {
             $result = $this->wordsHelper->getWords($strength, $addNumbers, $addSpecialCharacters);
 
-            if($result !== null && $this->isSecure($result['password'], $addNumbers, $addSpecialCharacters, $strength +1 )) {
-                return [$result['password'], $result['words'], $strength];
+            if($result !== null) {
+                if($this->isSecure($result['password'], $addNumbers, $addSpecialCharacters, $strength +1 )) {
+                    return [$result['password'], $result['words'], $strength];
+                } else {
+                    $this->logger->warning('Words service delivered low quality result');
+                }
+            } else {
+                $this->logger->warning('Words service delivered no result');
             }
         } catch(\Throwable $e) {
             $this->logger->logException($e);
@@ -77,6 +83,7 @@ class WordsService {
             return $this->getPassword($strength, $addNumbers, $addSpecialCharacters, $attempts + 1);
         }
 
+        $this->logger->error("Words service failed {$attempts} times. Returning error to client.");
         throw new ApiException('Internal Words API Error', 502);
     }
 
