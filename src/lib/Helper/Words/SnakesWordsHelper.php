@@ -16,7 +16,7 @@ use OCP\Http\Client\IClientService;
  */
 class SnakesWordsHelper extends AbstractWordsHelper {
 
-    const SERVICE_URL = 'http://watchout4snakes.com/wo4snakes/Random/RandomPhrase';
+    const SERVICE_URL = 'http://watchout4snakes.com/Random/RandomPhrase';
 
     /**
      * @var bool
