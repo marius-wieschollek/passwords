@@ -59,6 +59,7 @@ class ShareCreatedNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('share', 'create');
+        $this->addRawLink($notification, $this->getLink());
 
         $this->notificationManager->notify($notification);
     }
@@ -72,8 +73,9 @@ class ShareCreatedNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
+        $link  = $this->getLink();
         $title = $this->getTitle($notification, $localisation);
-        $link  = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/0';
+        $this->processLink($notification, $link, $localisation->t('View shared passwords'));
 
         return $notification
             ->setParsedSubject($title)
@@ -92,9 +94,9 @@ class ShareCreatedNotification extends AbstractNotification {
         $passwordCount = 0;
 
         if($ownerCount === 1) {
-            list($passwordCount, $title) = $this->getSingleOwnerTitle($localisation, $owners);
+            [$passwordCount, $title] = $this->getSingleOwnerTitle($localisation, $owners);
         } else {
-            list($passwordCount, $title) = $this->getMultiOwnerTitle($localisation, $owners, $passwordCount, $ownerCount);
+            [$passwordCount, $title] = $this->getMultiOwnerTitle($localisation, $owners, $passwordCount, $ownerCount);
         }
 
         return $title
@@ -152,5 +154,12 @@ class ShareCreatedNotification extends AbstractNotification {
         $title = $localisation->t($text, $params);
 
         return [$passwordCount, $title];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/0';
     }
 }

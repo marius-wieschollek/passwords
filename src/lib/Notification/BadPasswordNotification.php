@@ -33,6 +33,8 @@ class BadPasswordNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('object', 'password');
+        $this->addRawLink($notification, $this->getLink());
+
         $this->notificationManager->notify($notification);
     }
 
@@ -47,9 +49,10 @@ class BadPasswordNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $parameters = $notification->getSubjectParameters();
 
-        $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/security/2';
+        $link    = $this->getLink();
         $title   = $this->getTitle($localisation, $parameters['count']);
         $message = $this->getMessage($localisation, $parameters['count']);
+        $this->processLink($notification, $link, $localisation->t('View insecure passwords'));
 
         return $notification
             ->setParsedSubject($title)
@@ -93,5 +96,12 @@ class BadPasswordNotification extends AbstractNotification {
                 'This security check has found that %s of your passwords are insecure.',
                 $count, [$count]
             );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/security/2';
     }
 }

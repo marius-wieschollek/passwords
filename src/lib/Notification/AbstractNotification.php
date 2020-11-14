@@ -11,6 +11,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
+use OCP\Notification\IAction;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
 
@@ -89,5 +90,34 @@ abstract class AbstractNotification {
             ->setDateTime(new \DateTime())
             ->setUser($userId)
             ->setIcon($icon);
+    }
+
+    /**
+     * @param INotification $notification
+     * @param string        $link
+     * @param string        $name
+     */
+    protected function addRawLink(INotification $notification, string $link, string $name = 'link'): void {
+        $linkAction = $notification->createAction();
+        $linkAction->setLabel($name)
+                   ->setLink($link, IAction::TYPE_WEB)
+                   ->setPrimary(true);
+        $notification->addAction($linkAction);
+    }
+
+    /**
+     * @param INotification $notification
+     * @param string        $link
+     * @param string        $label
+     * @param string        $name
+     */
+    protected function processLink(INotification $notification, string $link, string $label, string $name = 'link'): void {
+        foreach($notification->getActions() as $action) {
+            if($action->getLabel() === $name) {
+                $action->setLink($link, IAction::TYPE_WEB)
+                       ->setParsedLabel($label);
+                $notification->addParsedAction($action);
+            }
+        }
     }
 }

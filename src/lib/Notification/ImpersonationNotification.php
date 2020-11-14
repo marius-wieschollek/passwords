@@ -77,6 +77,7 @@ class ImpersonationNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('object', 'login');
+        $this->addRawLink($notification, $this->getLink());
 
         $this->notificationManager->notify($notification);
     }
@@ -91,9 +92,10 @@ class ImpersonationNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         if($this->environment->isImpersonating()) throw new \InvalidArgumentException();
 
+        $link    = $this->getLink();
         $title   = $localisation->t('Administrative access to your account');
-        $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index');
         $message = $this->getMessage($localisation, $notification->getSubjectParameters());
+        $this->processLink($notification, $link, $localisation->t('Open passwords'));
 
         return $notification
             ->setParsedSubject($title)
@@ -130,5 +132,12 @@ class ImpersonationNotification extends AbstractNotification {
         return $localisation->t('%s logged into your account on %s.', [$impersonator, $date])
                .' '.
                $localisation->t('To prevent unwanted access to your data, you should set up a master password.');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('passwords.page.index');
     }
 }

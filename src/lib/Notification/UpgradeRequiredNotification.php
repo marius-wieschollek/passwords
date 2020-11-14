@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Notification;
 
 use OCP\IL10N;
-use OCP\Notification\IAction;
 use OCP\Notification\INotification;
 
 /**
@@ -34,11 +33,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('app', 'requirements');
 
-        $linkAction = $notification->createAction();
-        $linkAction->setLabel('information')
-                   ->setLink(self::MANUAL_URL_SYSTEM_REQUIREMENTS, IAction::TYPE_WEB)
-                   ->setPrimary(true);
-        $notification->addAction($linkAction);
+        $this->addRawLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS);
 
         $this->notificationManager->notify($notification);
     }
@@ -54,11 +49,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $title   = $this->getTitle($localisation);
         $message = $this->getMessage($localisation, $notification->getSubjectParameters());
-
-        foreach($notification->getActions() as $action) {
-            $action->setLink(self::MANUAL_URL_SYSTEM_REQUIREMENTS, IAction::TYPE_WEB)->setParsedLabel($localisation->t('More information'));
-            $notification->addParsedAction($action);
-        }
+        $this->processLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS, $localisation->t('More information'));
 
         return $notification
             ->setParsedSubject($title)

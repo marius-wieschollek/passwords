@@ -31,6 +31,7 @@ class ShareLoopNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('share', 'loop');
+        $this->addRawLink($notification, $this->getLink());
 
         $this->notificationManager->notify($notification);
     }
@@ -46,9 +47,10 @@ class ShareLoopNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $count = $notification->getSubjectParameters()['passwords'];
 
+        $link    = $this->getLink();
         $title   = $this->getTitle($localisation, $count);
         $message = $this->getMessage($localisation);
-        $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/1';
+        $this->processLink($notification, $link, $localisation->t('View shared passwords'));
 
         return $notification
             ->setParsedSubject($title)
@@ -69,9 +71,7 @@ class ShareLoopNotification extends AbstractNotification {
                 '%s of your passwords could not be shared because the recipient already has access to them.',
                 $count,
                 [$count]
-            )
-            .' '.
-            $localisation->t('Open the passwords app to see your shared passwords.');
+            );
     }
 
     /**
@@ -83,5 +83,12 @@ class ShareLoopNotification extends AbstractNotification {
         return $localisation->t('Sharing a password that has been shared with you can sometimes create a loop.')
                .' '.
                $localisation->t('To prevent this, these passwords will not be shared.');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/shared/1';
     }
 }

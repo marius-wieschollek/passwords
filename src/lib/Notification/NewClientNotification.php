@@ -53,6 +53,8 @@ class NewClientNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('object', 'password');
+        $this->addRawLink($notification, $this->getLink());
+
         $this->notificationManager->notify($notification);
     }
 
@@ -67,9 +69,10 @@ class NewClientNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $parameters = $notification->getSubjectParameters();
 
-        $link    = $this->urlGenerator->linkToRouteAbsolute('settings.PersonalSettings.index', ['section' => 'security']);
+        $link    = $this->getLink();
         $title   = $this->getTitle($localisation);
         $message = $this->getMessage($localisation, $parameters['client']);
+        $this->processLink($notification, $link, $localisation->t('View apps & devices'));
 
         return $notification
             ->setParsedSubject($title)
@@ -97,5 +100,12 @@ class NewClientNotification extends AbstractNotification {
             $localisation->t('A new client with the name "%s" was connected successfully to Passwords with PassLink.', [$client])
             .' '.
             $localisation->t('You can manage all connected devices and apps in the %s security section.', [$this->themingSettings->get('label')]);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('settings.PersonalSettings.index', ['section' => 'security']);
     }
 }
