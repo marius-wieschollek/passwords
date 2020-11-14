@@ -196,7 +196,7 @@ export default {
                     'author'     : Localisation.translate('created by {author}', {author: 'markuman'}),
                     'download'   : 'https://galaxy.ansible.com/markuman/nextcloud',
                     'sources'    : 'https://git.osuv.de/m/nextcloud_collection',
-                    'web'        : 'https://galaxy.ansible.com/markuman/nextcloud',
+                    'web'        : 'https://galaxy.ansible.com/markuman',
                     'official'   : false
                 }
             };
