@@ -66,7 +66,10 @@
             "Old password"                : "Altes Passwort",
             "Password changed"            : "Passwort geändert",
             "Changing password failed"    : "Passwortänderung fehlgeschlagen",
-            "Administration Issues"       : "Administrationsprobleme"
+            "Administration Issues"       : "Administrationsprobleme",
+            "Password Sharing"            : "Passwörter Teilen",
+            "Share as editable by default": "Bearbeiten standardmäßig erlauben",
+            "Allow sharing by default"    : "Teilen standardmäßig erlauben"
         },
         {
             "Mark passwords as weak if they are being used for multiple accounts"        : "Markiert Passwörter als \"Unsicher\" wenn sie für mehr als ein Konto verwendet werden",
@@ -105,7 +108,9 @@
             "Your password must be longer than 12 characters and not the old password"   : "Dein Passwort muss mindestens 12 Zeichen lang sein und darf nicht das alte sein",
             "Please confirm your new password"                                           : "Bitte wiederhole dein neues Passwort",
             "You must enter your old password"                                           : "Bitte gib dein altes Passwort ein",
-            "Your password has been changed successfully."                               : "Dein Passwort wurde erfolgreich geändert."
+            "Your password has been changed successfully."                               : "Dein Passwort wurde erfolgreich geändert.",
+            "Enable the option to let other users edit a shared password by default"     : "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Bearbeiten des Passworts",
+            "Enable the option to let other users share a shared password by default"    : "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Teilen mit anderen Nutzern"
         },
         {
             "Send keep-alive requests to the server to prevent the session from being cancelled"                          : "Sende Keepalive-Anfragen an den Server um das beenden der Sitzung zu verhindern",

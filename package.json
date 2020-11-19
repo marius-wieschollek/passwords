@@ -40,7 +40,7 @@
         "blueimp-gallery": "^3.3.0",
         "clean-webpack-plugin": "^1.0.1",
         "codeceptjs": "^2.6.11",
-        "copy-webpack-plugin": "^6.3.1",
+        "copy-webpack-plugin": "^6.3.2",
         "css-loader": "^4.3.0",
         "csv-hero": "0.0.4",
         "download": "^8.0.0",
@@ -67,7 +67,7 @@
         "vue-router": "^3.4.9",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.12",
-        "webdriverio": "^6.7.3",
+        "webdriverio": "^6.9.0",
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
         "xlsx": "^0.16.8"

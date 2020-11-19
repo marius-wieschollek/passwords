@@ -38,8 +38,13 @@ class SettingsService {
      */
     set(setting, value) {
         this._settings[setting] = value;
-        SettingsService._setSetting(setting, value);
         this._triggerObservers(setting, value);
+        SettingsService._setSetting(setting, value).then((realValue) => {
+            if(realValue !== value) {
+                this._settings[setting] = realValue;
+                this._triggerObservers(setting, realValue);
+            }
+        });
     }
 
     /**
@@ -79,17 +84,35 @@ class SettingsService {
     /**
      * Register observer to get updated when a setting is changed
      *
-     * @param settings
-     * @param callback
+     * @param {(String|String[])} settings
+     * @param {Function} callback
      * @returns {Promise<any>}
      */
     observe(settings, callback) {
         if(!Array.isArray(settings)) settings = [settings];
 
-        for(let i = 0; i < settings.length; i++) {
-            let setting = settings[i];
+        for(let setting of settings) {
             if(!this._observers.hasOwnProperty(setting)) this._observers[setting] = [];
             this._observers[setting].push(callback);
+        }
+    }
+
+    /**
+     * Remove an observer for the given settings
+     *
+     * @param {(String|String[])} settings
+     * @param {Function} callback
+     */
+    unobserve(settings, callback) {
+        if(!Array.isArray(settings)) settings = [settings];
+
+        for(let setting of settings) {
+            if(!this._observers.hasOwnProperty(setting)) continue;
+            let index = this._observers[setting].indexOf(callback);
+            while(index !== -1) {
+                this._observers[setting].splice(index, 1);
+                index = this._observers[setting].indexOf(callback);
+            }
         }
     }
 
