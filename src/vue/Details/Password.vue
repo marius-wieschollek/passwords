@@ -104,6 +104,7 @@
                                .catch(() => { this.object.favorite = !this.object.favorite; });
             },
             closeDetails() {
+                Events.emit('details.close', this.object);
                 this.$parent.detail = {
                     type   : 'none',
                     element: null
@@ -134,6 +135,7 @@
         watch: {
             password(value) {
                 if(this.object.id !== value.id) {
+                    Events.emit('details.close', this.object);
                     this.$el.offsetParent.scrollTop = 0;
                 }
 
