@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2020.11.1 - Bugfix release
+### Fixed
+ - wo4snakes connection issue
+ - Notifications don't have links in NC 20
+ - Unclear EOL notification
+
 ## 2020.11.0 - Feature release
 ### Changed
  - Local words quality improved
