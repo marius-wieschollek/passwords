@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+ - Configurable default options for sharing
+ - Highlight password entry with details open
+
 ## 2020.11.1 - Bugfix release
 ### Fixed
  - wo4snakes connection issue
