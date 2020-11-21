@@ -3,6 +3,7 @@
          @click="clickAction($event)"
          @dblclick="doubleClickAction($event)"
          @dragstart="dragStartAction($event)"
+         :class="{'details-open': detailsActive}"
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
@@ -67,6 +68,7 @@ import Localisation from "@js/Classes/Localisation";
 import PasswordManager from '@js/Manager/PasswordManager';
 import SettingsService from '@js/Services/SettingsService';
 import Favicon from "@vc/Favicon";
+import Events from "@js/Classes/Events";
 
 export default {
     components: {
@@ -83,7 +85,8 @@ export default {
     data() {
         return {
             clickTimeout: null,
-            showMenu    : false
+            showMenu    : false,
+            detailsActive: false
         };
     },
 
@@ -196,10 +199,20 @@ export default {
             $(document).off('click', this.menuEvent);
         },
         detailsAction(section = 'details') {
+            this.detailsActive = true;
             this.$parent.detail = {type: 'password', element: this.password, section};
 
             let appClasses = document.getElementById('app').classList;
             if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
+
+            let listener = (item) => {
+                if(item.object.id === this.password.id) {
+                    Events.off('details.close', listener);
+                    this.detailsActive = false;
+                }
+            }
+
+            Events.on('details.close', listener);
         },
         editAction() {
             PasswordManager
@@ -426,9 +439,12 @@ export default {
                 flex-shrink : 0;
             }
 
+            &:hover,
             &:active,
-            &:hover {
+            &.details-open {
+                /** @TODO: Remove in 2021.1.0 **/
                 background-color : var(--color-background-dark);
+                background-color : var(--color-background-hover);
 
                 .favorite {
                     color : darken($color-grey-light, 3);
@@ -438,6 +454,10 @@ export default {
                         color : var(--color-warning);
                     }
                 }
+            }
+
+            &.details-open {
+                background-color : var(--color-primary-light);
             }
 
             @media(max-width : $width-extra-small) {

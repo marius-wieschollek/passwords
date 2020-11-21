@@ -5,7 +5,7 @@
                    say="End-to-End encryption will be disabled for this password if you share it."
                    v-if="hasCse && canBeShared"/>
         <div v-if="isSharedWithUser" class="shareby-info" :title="getShareTitle">
-            <img :src="password.share.owner.icon">
+            <img :src="password.share.owner.icon" alt="">
             <translate say="{name} has shared this with you" :variables="password.share.owner"/>
         </div>
         <field v-model="search"
@@ -164,8 +164,8 @@
                 let share = {
                     password : this.password.id,
                     expires  : null,
-                    editable : false,
-                    shareable: true,
+                    editable : SettingsService.get('user.sharing.editable'),
+                    shareable: SettingsService.get('user.sharing.resharing'),
                     receiver
                 };
 
