@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Defaul Users Setup
+# Default Users Setup
 /var/www/html/occ group:add users;
 /var/www/html/occ group:add random &
 pw-create-user max users 'Max Mustermann' &

@@ -158,9 +158,9 @@
         "To enable it again, log in with the webapp or any client using token authentication."      : "要再次启用它，请通过 Webapp 或任何使用令牌的客户端登录。",
         "If you don't know this client, please change your master password and Nextcloud password." : "如果您不认识此客户端，请更改您的主密码和 Nextcloud 密码。",
         "To increase security, we recommend using device specific tokens instead of your password." : "为了提高安全性，我们建议使用设备特定的令牌代替密码。",
-        "The passwords app will no longer support your server configuration"                        : "密码应用将不再支持您的服务器配置",
-        "The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s."       : "即将到来的密码应用版本 %s 需要最低版本为 %s 的 Nextcloud 和 PHP %s。",
-        "To keep receiving security and feature updates, please update your server."                : "为了继续接收安全性和功能更新，请更新您的服务器。"
+        "The passwords app will discontinue updates for your platform"                              : "密码应用将不再支持您的服务器配置",
+        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "即将到来的密码应用版本 %s 需要最低版本为 %s 的 Nextcloud 和 PHP %s。",
+        "We recommend that you update your server so you don't miss out on future updates."         : "为了继续接收安全性和功能更新，请更新您的服务器。"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

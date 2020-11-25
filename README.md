@@ -42,7 +42,7 @@ Rather than implementing own and possibly error-prone encryption algorithms Pass
 The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
-Passwords is available in english, german, french, spanish, dutch, swedish, czech, russian and italian.
+Passwords is available in english, german, french, spanish, italian, dutch, swedish, czech, russian and chinese640.
 
 ## Security
 #### Server Side Encryption

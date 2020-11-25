@@ -59,7 +59,8 @@ class BesticonApiNotification extends AbstractNotification {
         $message = $this->getMessage($localisation);
 
         foreach($notification->getActions() as $action) {
-            $action->setLink(self::BESTICON_HOSTING_URL, IAction::TYPE_WEB)->setParsedLabel($localisation->t('Open tutorial'));
+            $action->setLink(self::BESTICON_HOSTING_URL, IAction::TYPE_WEB)
+                   ->setParsedLabel($localisation->t('Open tutorial'));
             $notification->addParsedAction($action);
         }
 

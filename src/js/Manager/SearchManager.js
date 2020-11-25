@@ -45,13 +45,22 @@ class SearchManager {
             this._createSearchBox();
             this._status.available = false;
             this._initializeSearchFeatures();
-            document.getElementById('searchbox').addEventListener('keyup', (e) => {
-                if(e.target.value) {
-                    this.search(e.target.value);
-                } else {
-                    this.search();
-                }
-            })
+            let searchBox = document.getElementById('searchbox');
+
+            if(searchBox) {
+                document.getElementById('searchbox').addEventListener('keyup', (e) => {
+                    if(e.target.value) {
+                        this.search(e.target.value);
+                    } else {
+                        this.search();
+                    }
+                });
+                document.addEventListener('keyup', (e) => {
+                    if(e.key === 'f' && e.ctrlKey) {
+                        if(document.activeElement !== searchBox) searchBox.focus();
+                    }
+                })
+            }
 
         } else if(OC.Plugins) {
             new OCA.Search((q) => {this.search(q);}, () => {this.search();});

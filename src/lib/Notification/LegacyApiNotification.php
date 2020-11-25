@@ -79,9 +79,11 @@ class LegacyApiNotification extends AbstractNotification {
         if(!$this->deferredActivation->check('legacy-client-warning', true)) return;
         if($this->checkIfAlreadyNotified($userId, $parameters['client'])) return;
 
-        $notification = $this->createNotification($userId)
-                             ->setSubject(self::NAME, $parameters)
-                             ->setObject('warning', 'legacy_api');
+        $notification = $this
+            ->createNotification($userId)
+            ->setSubject(self::NAME, $parameters)
+            ->setObject('warning', 'legacy_api');
+        $this->addRawLink($notification, $this->getLink());
 
         $this->notificationManager->notify($notification);
     }
@@ -97,9 +99,10 @@ class LegacyApiNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $client = $notification->getSubjectParameters()['client'];
 
+        $link    = $this->getLink();
         $title   = $localisation->t('Legacy API: Time to say goodbye!');
         $message = $this->getMessage($localisation, $client);
-        $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/apps';
+        $this->processLink($notification, $link, $localisation->t('View apps'));
 
         return $notification
             ->setParsedSubject($title)
@@ -141,5 +144,12 @@ class LegacyApiNotification extends AbstractNotification {
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('passwords.page.index').'#/apps';
     }
 }

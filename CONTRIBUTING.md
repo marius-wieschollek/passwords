@@ -10,6 +10,9 @@
 * For questions and support, visit the [forum](https://help.nextcloud.com/c/apps/passwords)
 
 ## Set up the local environment
+### Option 1: Development with the Docker environment
+This repository ships with a full docker based development environment that enables you to use all app functionality without much setup.
+
 #### Requirements
 * Internet Connection
 * [Node](https://nodejs.org/)
@@ -17,25 +20,43 @@
 * [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
 * [mkcert](https://github.com/FiloSottile/mkcert)
 
-#### Project Setup
-1. Open a shell on your computer and navigate to the projects directory
-2. Run `npm install`
-3. Run `npm run build`
-4. If you have [mkcert](https://github.com/FiloSottile/mkcert), run `npm run mkcert`;
-5. Run `npm run start`
-6. Open your browser and type [https://localhost/](https://localhost/)
-7. Log in with the username `admin` and the password `admin`
-8. You can now access the [app](http://localhost/index.php/apps/passwords)
+#### Setup
+1. Checkout the project with `git clone git@github.com:marius-wieschollek/passwords.git`
+2. Open the project directory in a terminal
+3. Run `npm install`
+4. Run `npm run build`
+5. If you have [mkcert](https://github.com/FiloSottile/mkcert), run `npm run mkcert`
+6. Run `npm run start`
+7. Open your browser and type [https://localhost/](https://localhost/)
+8. Log in with the username `admin` and the password `admin`
+9. You can now access the [app](http://localhost/index.php/apps/passwords)
 
-#### Sample Data
+
+### Option 2: Development with a Nextcloud Server
+You can start development on the passwords app with your existing Nextcloud installation.
+
+#### Requirements
+* Internet Connection
+* [Node](https://nodejs.org/)
+
+#### Setup
+1. Checkout the project with `git clone git@github.com:marius-wieschollek/passwords.git`
+2. Symlink the /src folder to the /passwords folder in the Nextcloud apps directory
+   or set up a file synchronisation between the folders.
+3. Run `npm install`
+4. Run `npm run build`
+5. Open the apps store in your Nextcloud and enable the Passwords app
+
+
+### Sample Data
 The docker setup comes with two test users `max` and `erika` with the password `PasswordsApp`.
 All users have a set of sample data installed.
 You can also download a [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json) from the wiki and can import it on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
-#### API Debugging
+### API Debugging
 We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/insomnia-workspace.json) for the free API debugging tool [Insomnia](https://insomnia.rest/).
 
-#### Helpful commands
+### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
 * `npm run start` - Start the docker server. Use `postgres:start`, `sqlite:start`, `ldap:start` or `saml:start` to include these services
 * `npm run stop` - Stop the docker server. Use `postgres:stop`, `sqlite:stop`, `ldap:stop` or `saml:stop` to include these services
@@ -51,7 +72,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
 * `docker-compose -f docker-compose.yml -f docker/configs/<service>.yml up -d` starts the system with additional services
 * `docker exec -u www-data passwords-php /var/www/html/occ  config:system:set loglevel --value=0 --type=int` - Set loglevel to info
 
-#### Services
+### Services
  - [https://localhost](https://localhost) is Nextcloud (with the app)
  - [https://localhost:8080](https://localhost:8080) is PhpMyAdmin (for the MySQL database)
  - [https://localhost:1080](https://localhost:1080) is MailHog (for Emails)
@@ -59,7 +80,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
  - [https://localhost:9091](https://localhost:9091) is Keycloak (for SAML, optional, user `admin`, password `nextcloud`)
 
-#### LDAP Setup
+### LDAP Setup
  - Open [PhpLdapAdmin](https://localhost:9090) and log in
  - Create a new entry with the template "Generic: Posix Group"
  - Create a new Entry with the template "Generic: User Account" as child entry of the group
@@ -75,7 +96,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - Click on "Continue"
  - Select "posixGroup" as object classes
 
-#### Telegram 2FA Gateway Setup
+### Telegram 2FA Gateway Setup
  - Install the "Two-Factor Gateway" app from the app store
  - Run `npm run shell` from the terminal
  - Run `./occ twofactorauth:gateway:configure telegram`
@@ -86,6 +107,5 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - Open [Keycloak](https://localhost:9091) and log in
  - Follow [this guide](https://stackoverflow.com/a/48400813) ([internet archive link](https://web.archive.org/web/20200116192513/https://stackoverflow.com/questions/48400812/sso-with-saml-keycloak-and-nextcloud/48400813))
 
-#### First steps
-* [Issues for Beginners](https://github.com/marius-wieschollek/passwords/labels/for%3Astarters)
+## More information
 * [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)

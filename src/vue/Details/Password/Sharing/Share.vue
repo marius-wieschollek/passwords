@@ -2,7 +2,7 @@
     <li class="share" :title="getTitle">
         <div class="options">
             <translate icon="pencil" :class="{active: share.editable}" title="Toggle write permissions" @click="toggleEditable(share)"/>
-            <translate icon="share-alt" :class="{active: share.shareable}" title="Toggle share permissions" @click="toggleShareable(share)"/>
+            <translate icon="share-alt" :class="{active: share.shareable}" title="Toggle share permissions" @click="toggleShareable(share)" v-if="hasShareable"/>
             <translate icon="calendar" :class="{active: share.expires}" :title="getExpirationDateTitle" @click="setExpires(share)"/>
             <translate icon="trash" title="Stop sharing" @click="deleteAction(share)"/>
         </div>
@@ -17,6 +17,7 @@
     import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
+    import SettingsService from "@js/Services/SettingsService";
 
     export default {
         components: {
@@ -26,6 +27,12 @@
         props: {
             share: {
                 type: Object
+            }
+        },
+
+        data() {
+            return {
+                hasShareable: SettingsService.get('server.sharing.resharing')
             }
         },
 

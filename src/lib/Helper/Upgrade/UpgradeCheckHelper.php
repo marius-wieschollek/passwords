@@ -102,16 +102,16 @@ class UpgradeCheckHelper {
         $info = $this->upgradeRequired();
         if(!$info['app']['upgrade']) return null;
 
-        $message = $this->lang->t('This version of the passwords app is outdated and should be upgraded.');
+        $message = $this->lang->t('Your version of the passwords app is outdated and should be upgraded.');
         $link    = $this->urlGenerator->linkToRouteAbsolute('settings.AppSettings.viewApps', ['category' => 'updates', 'id' => Application::APP_NAME]);
 
         if($info['nextcloud']['upgrade'] || $info['php']['upgrade']) {
-            $message .= ' '.$this->lang->t('This upgrade requires Nextcloud %s and PHP %s.', [$info['nextcloud']['version'], $info['php']['version']]);
+            $message .= ' '.$this->lang->t('To install the current version, Nextcloud %s and PHP %s are necessary.', [$info['nextcloud']['version'], $info['php']['version']]);
             $link    = $info['app']['url'];
         }
 
         return [
-            'title'   => $this->lang->t('App upgrade required'),
+            'title'   => $this->lang->t('App upgrade recommended'),
             'message' => $message,
             'link'    => $link
         ];

@@ -34,6 +34,7 @@ class EmptyRequiredSettingNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('setting', $parameters['setting']);
+        $this->addRawLink($notification, $this->getLink($parameters['setting']));
 
         $this->notificationManager->notify($notification);
     }
@@ -51,7 +52,8 @@ class EmptyRequiredSettingNotification extends AbstractNotification {
 
         $title   = $this->getTitle($localisation, $setting);
         $message = $this->getMessage($localisation, $setting);
-        $link    = $this->urlGenerator->getAbsoluteURL("/index.php/settings/admin/passwords#passwords-{$setting}");
+        $link    = $this->getLink($setting);
+        $this->processLink($notification, $link, $localisation->t('Open settings'));
 
         return $notification
             ->setParsedSubject($title)
@@ -77,6 +79,15 @@ class EmptyRequiredSettingNotification extends AbstractNotification {
      */
     protected function getMessage(IL10N $localisation, string $setting): string {
         return $localisation->t("Your chosen {$setting} service requires an api key or endpoint, but none is given.")
-            .' '.$localisation->t('Open the admin settings to update the configuration or chose another service.');
+               .' '.$localisation->t('Open the admin settings to update the configuration or chose another service.');
+    }
+
+    /**
+     * @param $setting
+     *
+     * @return string
+     */
+    protected function getLink($setting): string {
+        return $this->urlGenerator->getAbsoluteURL("/index.php/settings/admin/passwords#passwords-{$setting}");
     }
 }

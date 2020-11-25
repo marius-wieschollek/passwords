@@ -39,6 +39,8 @@ class UserSettingsHelper {
             'notification/shares'          => 'boolean',
             'notification/errors'          => 'boolean',
             'notification/admin'           => 'boolean',
+            'sharing/editable'             => 'boolean',
+            'sharing/resharing'            => 'boolean',
             'session/lifetime'             => 'integer',
             'encryption/sse'               => 'integer',
             'encryption/cse'               => 'integer'
@@ -60,6 +62,8 @@ class UserSettingsHelper {
             'notification/shares'          => true,
             'notification/errors'          => true,
             'notification/admin'           => true,
+            'sharing/editable'             => false,
+            'sharing/resharing'            => true,
             'session/lifetime'             => 600,
             'encryption/sse'               => 0
         ];
@@ -83,6 +87,13 @@ class UserSettingsHelper {
     public function get(string $key, string $userId = null) {
         $key = str_replace('.', '/', $key);
 
+        if(in_array($key, ['sharing/editable', 'sharing/resharing'])) {
+            if($this->config->getAppValue('shareapi_enabled', 'yes', 'core') !== 'yes' ||
+               ($key === 'sharing/resharing' && $this->config->getAppValue('shareapi_allow_resharing', 'yes', 'core') !== 'yes')) {
+                return false;
+            }
+        }
+
         if(isset($this->userSettings[ $key ])) {
             $type    = $this->userSettings[ $key ];
             $default = $this->getDefaultValue($key, $userId);
@@ -104,6 +115,13 @@ class UserSettingsHelper {
      */
     public function set(string $key, $value, string $userId = null) {
         $key = str_replace('.', '/', $key);
+
+        if(in_array($key, ['sharing/editable', 'sharing/resharing'])) {
+            if($this->config->getAppValue('shareapi_enabled', 'yes', 'core') !== 'yes' ||
+               ($key === 'sharing/resharing' && $this->config->getAppValue('shareapi_allow_resharing', 'yes', 'core') !== 'yes')) {
+                return false;
+            }
+        }
 
         if(isset($this->userSettings[ $key ])) {
             $type  = $this->userSettings[ $key ];
@@ -210,6 +228,13 @@ class UserSettingsHelper {
             }
         } else if(in_array($key, ['mail/security', 'mail/shares'])) {
             return $this->config->getAppValue('settings/'.$key, $this->userDefaults[ $key ]);
+        } else if($key === 'sharing/editable') {
+            return $this->config->getAppValue('shareapi_enabled', 'yes', 'core') === 'yes' &&
+                   $this->config->getAppValue('shareapi_default_permission_canupdate', 'yes', 'core') === 'yes';
+        } else if($key === 'sharing/resharing') {
+            return $this->config->getAppValue('shareapi_enabled', 'yes', 'core') === 'yes' &&
+                   $this->config->getAppValue('shareapi_allow_resharing', 'yes', 'core') === 'yes' &&
+                   $this->config->getAppValue('shareapi_default_permission_canshare', 'yes', 'core') === 'yes';
         }
 
         return $this->userDefaults[ $key ];

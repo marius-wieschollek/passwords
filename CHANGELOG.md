@@ -1,7 +1,19 @@
 ## [Unreleased]
+### Added
+ - Configurable default options for sharing
+ - Highlight password entry with details open
+
+## 2020.11.1 - Bugfix release
+### Fixed
+ - wo4snakes connection issue
+ - Notifications don't have links in NC 20
+ - Unclear EOL notification
+
+## 2020.11.0 - Feature release
 ### Changed
  - Local words quality improved
  - Improved browser compatibility warnings
+ - Ansible integration app by markuman
 ### Fixed
  - BC break warning in app settings not shown
 

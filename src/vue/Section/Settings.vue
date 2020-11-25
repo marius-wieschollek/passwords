@@ -237,12 +237,24 @@
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
 
-                    <translate tag="h3" say="Passwords Detail View" v-if="advancedSettings"/>
+                    <translate tag="h3" say="Passwords Detail View"/>
                     <translate tag="label" for="setting-website-preview" say="Show website preview"/>
                     <input type="checkbox"
                            id="setting-website-preview"
                            v-model="settings['client.ui.password.details.preview']">
                     <settings-help text="Show a preview of the associated website in the details. (Not on mobiles)"/>
+
+                    <translate tag="h3" say="Password Sharing" v-if="hasSharing"/>
+                    <translate tag="label" for="setting-sharing-editable" say="Share as editable by default" v-if="hasSharing"/>
+                    <input type="checkbox"
+                           id="setting-sharing-editable"
+                           v-model="settings['user.sharing.editable']" v-if="hasSharing">
+                    <settings-help text="Enable the option to let other users edit a shared password by default" v-if="hasSharing"/>
+                    <translate tag="label" for="setting-sharing-shareable" say="Allow sharing by default" v-if="hasSharing && hasResharing"/>
+                    <input type="checkbox"
+                           id="setting-sharing-shareable"
+                           v-model="settings['user.sharing.resharing']" v-if="hasSharing && hasResharing">
+                    <settings-help text="Enable the option to let other users share a shared password by default" v-if="hasSharing && hasResharing"/>
 
                     <translate tag="h3" say="Search" v-if="advancedSettings"/>
                     <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>
@@ -355,298 +367,312 @@
 </template>
 
 <script>
-    import API from '@js/Helper/api';
-    import SUM from '@js/Manager/SetupManager';
-    import Messages from '@js/Classes/Messages';
-    import Translate from '@vue/Components/Translate';
-    import Breadcrumb from '@vue/Components/Breadcrumb';
-    import SettingsHelp from '@vue/Components/SettingsHelp';
-    import DAS from '@js/Services/DeferredActivationService';
-    import SettingsService from '@js/Services/SettingsService';
-    import EncryptionManager from '@js/Manager/EncryptionManager';
-    import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
-    import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
+import API from '@js/Helper/api';
+import SUM from '@js/Manager/SetupManager';
+import Messages from '@js/Classes/Messages';
+import Translate from '@vue/Components/Translate';
+import Breadcrumb from '@vue/Components/Breadcrumb';
+import SettingsHelp from '@vue/Components/SettingsHelp';
+import DAS from '@js/Services/DeferredActivationService';
+import SettingsService from '@js/Services/SettingsService';
+import EncryptionManager from '@js/Manager/EncryptionManager';
+import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
+import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
 
-    export default {
-        components: {
-            Breadcrumb,
-            SettingsHelp,
-            Translate
-        },
-        data() {
-            let advancedSettings  = SettingsService.get('client.settings.advanced'),
-                encryptionFeature = false,
-                hasEncryption     = API.hasEncryption;
-
-            DAS.check('client-side-encryption')
-                .then((d) => { this.encryptionFeature = d;});
-
-            return {
-                settings: SettingsService.getAll(),
-                encryptionFeature,
-                advancedSettings,
-                hasEncryption,
-                isAdmin : OC.isUserAdmin(),
-                advanced: advancedSettings ? '1':'0',
-                nightly : process.env.NIGHTLY_FEATURES,
-                noSave  : false,
-                locked  : false
+export default {
+    components: {
+        Breadcrumb,
+        SettingsHelp,
+        Translate
+    },
+    data() {
+        let advancedSettings  = SettingsService.get('client.settings.advanced'),
+            encryptionFeature = false,
+            hasEncryption     = API.hasEncryption,
+            settings          = SettingsService.getAll(),
+            observer          = (data) => {
+                if(!settings.hasOwnProperty(data.setting) || settings[data.setting] !== data.value) {
+                    settings[data.setting] = data.value;
+                }
             };
-        },
 
-        methods: {
-            saveSettings() {
-                if(this.noSave) return;
-                for(let i in this.settings) {
-                    if(!this.settings.hasOwnProperty(i)) continue;
-                    let value = this.settings[i];
+        DAS.check('client-side-encryption')
+           .then((d) => { this.encryptionFeature = d;});
 
-                    if(SettingsService.get(i) !== value) SettingsService.set(i, value);
-                }
-            },
-            async testEncryption($event) {
-                $event.target.setAttribute('disabled', 'disabled');
-                let result = await EncryptionTestHelper.runTests();
-                if(result) {
-                    Messages.info(
-                        'The client side encryption test completed successfully on this browser',
-                        'Test successful'
-                    );
-                }
-                $event.target.removeAttribute('disabled');
-            },
-            testPerformance($event) {
-                $event.target.setAttribute('disabled', 'disabled');
-                $event.target.innerHtml = 'Working';
+        SettingsService.observe(Object.keys(settings), observer);
+        return {
+            observer,
+            settings,
+            hasSharing  : SettingsService.get('server.sharing.enabled'),
+            hasResharing: SettingsService.get('server.sharing.resharing'),
+            encryptionFeature,
+            advancedSettings,
+            hasEncryption,
+            isAdmin     : OC.isUserAdmin(),
+            advanced    : advancedSettings ? '1':'0',
+            nightly     : process.env.NIGHTLY_FEATURES,
+            noSave      : false,
+            locked      : false
+        };
+    },
 
-                setTimeout(() => {
-                    EncryptionPerformanceHelper.runTests()
-                        .then((d) => {
-                            let message = `Benchmark Result: ${d.result} Points`;
-                            Messages.alert(message, 'Benchmark Completed');
-                            $event.target.removeAttribute('disabled');
-                            $event.target.innerHtml = 'Test';
-                        })
-                        .catch(console.error);
-                }, 100);
-            },
-            runWizard() {
-                if(!this.hasEncryption) {
-                    SUM.runEncryptionSetup()
-                        .then(() => {
-                            this.hasEncryption = API.hasEncryption;
-                        });
-                }
-            },
-            changeCsePassword() {
-                if(this.hasEncryption) {
-                    EncryptionManager.updateGui();
-                }
-            },
-            resetSettingsAction() {
-                Messages.confirm(
-                    'This will reset all settings to their defaults. Do you want to continue?',
-                    'Reset all settings'
-                ).then(() => { this.resetSettings(); });
-            },
-            async resetSettings() {
-                this.locked = true;
-                this.noSave = true;
-                for(let i in this.settings) {
-                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsService.reset(i);
-                }
-                this.advancedSettings = false;
-                this.advanced = '0';
-                this.noSave = false;
-                this.locked = false;
-            },
-            async resetUserAccount() {
-                try {
-                    let form = await Messages.form(
-                        {password: {type: 'password'}},
-                        'DELETE EVERYTHING',
-                        'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'
-                    );
-                    if(form.password) this.performUserAccountReset(form.password);
-                } catch(e) {
-                    console.error(e);
-                }
-            },
-            async performUserAccountReset(password) {
-                try {
-                    this.locked = true;
-                    let response = await API.resetUserAccount(password);
+    beforeDestroy() {
+        SettingsService.unobserve(Object.keys(this.settings), this.observer);
+    },
 
-                    if(response.status === 'accepted') {
-                        this.locked = false;
-                        Messages.confirm([
-                                             'You have to wait {seconds} seconds before you can reset your account.',
-                                             {seconds: response.wait}
-                                         ], 'Account reset requested')
-                            .then(() => { this.performUserAccountReset(password); });
-                    } else if(response.status === 'ok') {
-                        window.localStorage.removeItem('passwords.settings');
-                        window.localStorage.removeItem('pwFolderIcon');
-                        location.href = location.href.replace(location.hash, '');
-                    }
-                } catch(e) {
-                    this.locked = false;
-                    console.error(e);
-                    Messages.alert('Invalid Password');
-                }
+    methods: {
+        saveSettings() {
+            if(this.noSave) return;
+            for(let i in this.settings) {
+                if(!this.settings.hasOwnProperty(i)) continue;
+                let value = this.settings[i];
+
+                if(SettingsService.get(i) !== value) SettingsService.set(i, value);
             }
         },
-        watch  : {
-            settings: {
-                handler() {
-                    this.saveSettings();
-                },
-                deep: true
-            },
-            advanced(value) {
-                this.advancedSettings = this.settings['client.settings.advanced'] = value === 1;
-            },
-            locked(value) {
-                document.getElementById('app').classList.toggle('blocking');
+        async testEncryption($event) {
+            $event.target.setAttribute('disabled', 'disabled');
+            let result = await EncryptionTestHelper.runTests();
+            if(result) {
+                Messages.info(
+                    'The client side encryption test completed successfully on this browser',
+                    'Test successful'
+                );
+            }
+            $event.target.removeAttribute('disabled');
+        },
+        testPerformance($event) {
+            $event.target.setAttribute('disabled', 'disabled');
+            $event.target.innerHtml = 'Working';
+
+            setTimeout(() => {
+                EncryptionPerformanceHelper.runTests()
+                                           .then((d) => {
+                                               let message = `Benchmark Result: ${d.result} Points`;
+                                               Messages.alert(message, 'Benchmark Completed');
+                                               $event.target.removeAttribute('disabled');
+                                               $event.target.innerHtml = 'Test';
+                                           })
+                                           .catch(console.error);
+            }, 100);
+        },
+        runWizard() {
+            if(!this.hasEncryption) {
+                SUM.runEncryptionSetup()
+                   .then(() => {
+                       this.hasEncryption = API.hasEncryption;
+                   });
+            }
+        },
+        changeCsePassword() {
+            if(this.hasEncryption) {
+                EncryptionManager.updateGui();
+            }
+        },
+        resetSettingsAction() {
+            Messages.confirm(
+                'This will reset all settings to their defaults. Do you want to continue?',
+                'Reset all settings'
+            ).then(() => { this.resetSettings(); });
+        },
+        async resetSettings() {
+            this.locked = true;
+            this.noSave = true;
+            for(let i in this.settings) {
+                if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsService.reset(i);
+            }
+            this.advancedSettings = false;
+            this.advanced = '0';
+            this.noSave = false;
+            this.locked = false;
+        },
+        async resetUserAccount() {
+            try {
+                let form = await Messages.form(
+                    {password: {type: 'password'}},
+                    'DELETE EVERYTHING',
+                    'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'
+                );
+                if(form.password) this.performUserAccountReset(form.password);
+            } catch(e) {
+                console.error(e);
+            }
+        },
+        async performUserAccountReset(password) {
+            try {
+                this.locked = true;
+                let response = await API.resetUserAccount(password);
+
+                if(response.status === 'accepted') {
+                    this.locked = false;
+                    Messages.confirm([
+                                         'You have to wait {seconds} seconds before you can reset your account.',
+                                         {seconds: response.wait}
+                                     ], 'Account reset requested')
+                            .then(() => { this.performUserAccountReset(password); });
+                } else if(response.status === 'ok') {
+                    window.localStorage.removeItem('passwords.settings');
+                    window.localStorage.removeItem('pwFolderIcon');
+                    location.href = location.href.replace(location.hash, '');
+                }
+            } catch(e) {
+                this.locked = false;
+                console.error(e);
+                Messages.alert('Invalid Password');
             }
         }
-    };
+    },
+    watch  : {
+        settings: {
+            handler() {
+                this.saveSettings();
+            },
+            deep: true
+        },
+        advanced(value) {
+            this.advancedSettings = this.settings['client.settings.advanced'] = value === 1;
+        },
+        locked(value) {
+            document.getElementById('app').classList.toggle('blocking');
+        }
+    }
+};
 </script>
 
 <style lang="scss">
-    .app-content-left.settings {
-        .settings-level {
-            color    : $color-grey-dark;
-            position : absolute;
-            right    : 5px;
+.app-content-left.settings {
+    .settings-level {
+        color    : $color-grey-dark;
+        position : absolute;
+        right    : 5px;
 
-            label {
-                margin-right : 5px
+        label {
+            margin-right : 5px
+        }
+    }
+
+    .settings-container {
+        padding               : 10px;
+        margin-right          : -2em;
+        display               : grid;
+        grid-template-columns : 1fr 1fr 1fr;
+        grid-column-gap       : 2em;
+        max-width             : 100%;
+
+        &.advanced section.ui {
+            grid-row-start    : 1;
+            grid-row-end      : 3;
+            grid-column-start : 2;
+        }
+    }
+
+    h1 {
+        font-size   : 2.25em;
+        font-weight : 200;
+        margin      : 0.25em 0 1em;
+    }
+
+    h3 {
+        margin-bottom : 0;
+    }
+
+    section {
+        display               : grid;
+        grid-template-columns : 3fr 2fr 30px;
+        grid-auto-rows        : max-content;
+        padding               : 0 0 4em 0;
+
+        h1,
+        h3 {
+            grid-column-start : 1;
+            grid-column-end   : 4;
+        }
+
+        label {
+            line-height : 40px;
+        }
+
+        select {
+            justify-self : end;
+            width        : 100%;
+        }
+
+        input {
+            justify-self : end;
+            max-height   : 34px;
+
+            &[type=checkbox] {
+                cursor : pointer;
             }
+        }
+
+        &.danger {
+            input[type=button] {
+                transition : color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
+
+                &:hover {
+                    background-color : var(--color-error);
+                    border-color     : var(--color-error);
+                    color            : var(--color-primary-text);
+                }
+            }
+        }
+    }
+
+    @media(min-width : $width-1920-above) {
+        .settings-container {
+            grid-template-columns : 1fr 1fr 1fr 1fr;
+        }
+    }
+
+    @media(max-width : $width-large) {
+        padding : 0;
+
+        .settings-container {
+            grid-template-columns : 1fr 1fr;
+            margin-right          : -3em;
+        }
+    }
+
+    @media(max-width : $width-medium) {
+        margin-right : 0;
+
+        section {
+            padding : 0 0 4em 0;
         }
 
         .settings-container {
-            padding               : 10px;
-            margin-right          : -2em;
-            display               : grid;
-            grid-template-columns : 1fr 1fr 1fr 1fr;
-            grid-column-gap       : 2em;
-            max-width             : 100%;
+            grid-template-columns : 1fr;
+            margin-right          : -1em;
 
             &.advanced section.ui {
-                grid-row-start    : 1;
-                grid-row-end      : 3;
-                grid-column-start : 2;
+                grid-row-start    : initial;
+                grid-row-end      : initial;
+                grid-column-start : initial;
             }
         }
 
-        h1 {
-            font-size   : 2.25em;
-            font-weight : 200;
-            margin      : 0.25em 0 1em;
-        }
-
-        h3 {
-            margin-bottom : 0;
-        }
-
-        section {
-            display               : grid;
-            grid-template-columns : 3fr 2fr 30px;
-            grid-auto-rows        : max-content;
-            padding               : 0 0 4em 0;
-
-            h1,
-            h3 {
-                grid-column-start : 1;
-                grid-column-end   : 4;
-            }
-
-            label {
-                line-height : 40px;
-            }
-
-            select {
-                justify-self : end;
-                width        : 100%;
-            }
-
-            input {
-                justify-self : end;
-                max-height   : 34px;
-
-                &[type=checkbox] {
-                    cursor : pointer;
-                }
-            }
-
-            &.danger {
-                input[type=button] {
-                    transition : color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
-
-                    &:hover {
-                        background-color : var(--color-error);
-                        border-color     : var(--color-error);
-                        color            : var(--color-primary-text);
-                    }
-                }
-            }
-        }
-
-        @media(max-width : $width-extra-large) {
-            .settings-container {
-                grid-template-columns : 1fr 1fr 1fr;
-            }
-        }
-
-        @media(max-width : $width-large) {
-            padding : 0;
-
-            .settings-container {
-                grid-template-columns : 1fr 1fr;
-                margin-right          : -3em;
-            }
-        }
-
-        @media(max-width : $width-medium) {
-            margin-right : 0;
-
-            section {
-                padding : 0 0 4em 0;
-            }
-
-            .settings-container {
-                grid-template-columns : 1fr;
-                margin-right          : -1em;
-
-                &.advanced section.ui {
-                    grid-row-start    : initial;
-                    grid-row-end      : initial;
-                    grid-column-start : initial;
-                }
-            }
-
-            .settings-level label {
-                display : none;
-            }
-        }
-
-        @media(max-width : $width-small) {
-            .settings-container {
-                padding : 10px;
-            }
+        .settings-level label {
+            display : none;
         }
     }
 
-    #settings-reset {
-        position         : fixed;
-        top              : 0;
-        right            : 0;
-        bottom           : 0;
-        left             : 0;
-        background-color : transparentize($color-black, 0.9);
-        cursor           : wait;
-        z-index          : 2000;
-        backdrop-filter  : blur(3px);
+    @media(max-width : $width-small) {
+        .settings-container {
+            padding : 10px;
+        }
     }
+}
+
+#settings-reset {
+    position         : fixed;
+    top              : 0;
+    right            : 0;
+    bottom           : 0;
+    left             : 0;
+    background-color : transparentize($color-black, 0.9);
+    cursor           : wait;
+    z-index          : 2000;
+    backdrop-filter  : blur(3px);
+}
 </style>

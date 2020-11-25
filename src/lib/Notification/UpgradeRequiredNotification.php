@@ -20,7 +20,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
 
     const NAME                           = 'upgrade_required';
     const TYPE                           = 'admin';
-    const MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/System-Requirements';
+    const MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Notifications/Platform-Support-Notification';
 
     /**
      * Send the notification
@@ -36,6 +36,8 @@ class UpgradeRequiredNotification extends AbstractNotification {
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('app', 'requirements');
 
+        $this->addRawLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS);
+
         $this->notificationManager->notify($notification);
     }
 
@@ -50,6 +52,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $title   = $this->getTitle($localisation);
         $message = $this->getMessage($localisation, $notification->getSubjectParameters());
+        $this->processLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS, $localisation->t('More information'));
 
         return $notification
             ->setParsedSubject($title)
@@ -63,7 +66,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return string
      */
     protected function getTitle(IL10N $localisation): string {
-        return $localisation->t('The passwords app will no longer support your server configuration');
+        return $localisation->t('The passwords app will discontinue updates for your platform');
     }
 
     /**
@@ -73,8 +76,10 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return string
      */
     protected function getMessage(IL10N $localisation, array $params): string {
-        return $localisation->t('The upcoming version %s of Passwords will require at least Nextcloud %s and PHP %s.', $params).
+        return $localisation->t('Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s.', $params).
                ' '.
-               $localisation->t('To keep receiving security and feature updates, please update your server.');
+               $localisation->t('We recommend that you update your server so you don\'t miss out on future updates.').
+               ' '.
+               $localisation->t('Your installed version will continue to work regardless and you can still use it as it is.');
     }
 }

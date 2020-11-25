@@ -34,6 +34,7 @@ class LoginAttemptNotification extends AbstractNotification {
             = $this->createNotification($userId)
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('object', 'login');
+        $this->addRawLink($notification, $this->getLink());
 
         $this->notificationManager->notify($notification);
     }
@@ -47,9 +48,10 @@ class LoginAttemptNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
+        $link    = $this->getLink();
         $title   = $localisation->t('Suspicious amount of failed login attempts detected.');
-        $link    = $this->urlGenerator->linkToRouteAbsolute('passwords.page.index');
         $message = $this->getMessage($localisation, $notification->getSubjectParameters());
+        $this->processLink($notification, $link, $localisation->t('Open passwords'));
 
         return $notification
             ->setParsedSubject($title)
@@ -86,5 +88,12 @@ class LoginAttemptNotification extends AbstractNotification {
         }
 
         return $message;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLink(): string {
+        return $this->urlGenerator->linkToRouteAbsolute('passwords.page.index');
     }
 }
