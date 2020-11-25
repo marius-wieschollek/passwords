@@ -28,15 +28,22 @@ class BeforePasswordTagRelationClonedEvent extends Event {
     protected PasswordTagRelation $clone;
 
     /**
+     * @var array
+     */
+    protected array               $overwrites;
+
+    /**
      * BeforePasswordTagRelationClonedEvent constructor.
      *
      * @param PasswordTagRelation $original
      * @param PasswordTagRelation $clone
+     * @param array               $overwrites
      */
-    public function __construct(PasswordTagRelation $original, PasswordTagRelation $clone) {
+    public function __construct(PasswordTagRelation $original, PasswordTagRelation $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforePasswordTagRelationClonedEvent extends Event {
      */
     public function getClone(): PasswordTagRelation {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

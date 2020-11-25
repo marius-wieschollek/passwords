@@ -125,7 +125,6 @@ abstract class AbstractService {
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
-        $this->fireEvent('beforeCloned', $entity);
         $this->hookManager->emit($this->class, 'preClone', [$entity]);
         $clone = $this->cloneModel($entity, $overwrites);
         $this->fireEvent('cloned', $entity, $clone);
@@ -176,7 +175,7 @@ abstract class AbstractService {
     protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
         $class  = get_class($original);
         $clone  = new $class;
-        $this->fireEvent('beforeClone', $original, $clone);
+        $this->fireEvent('beforeCloned', $original, $clone, $overwrites);
         $fields = array_keys($clone->getFieldTypes());
 
         foreach($fields as $field) {
@@ -190,8 +189,6 @@ abstract class AbstractService {
 
         $clone->setCreated(time());
         $clone->setUpdated(time());
-        $this->fireEvent('cloned', $original, $clone);
-        $this->fireEvent('afterClone', $original, $clone);
 
         return $clone;
     }

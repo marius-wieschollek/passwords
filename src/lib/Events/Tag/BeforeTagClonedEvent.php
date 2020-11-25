@@ -28,15 +28,22 @@ class BeforeTagClonedEvent extends Event {
     protected Tag $clone;
 
     /**
+     * @var array
+     */
+    protected array $overwrites;
+
+    /**
      * BeforeTagClonedEvent constructor.
      *
-     * @param Tag $original
-     * @param Tag $clone
+     * @param Tag   $original
+     * @param Tag   $clone
+     * @param array $overwrites
      */
-    public function __construct(Tag $original, Tag $clone) {
+    public function __construct(Tag $original, Tag $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeTagClonedEvent extends Event {
      */
     public function getClone(): Tag {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

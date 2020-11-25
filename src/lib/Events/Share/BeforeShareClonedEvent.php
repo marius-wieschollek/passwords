@@ -28,15 +28,22 @@ class BeforeShareClonedEvent extends Event {
     protected Share $clone;
 
     /**
+     * @var array
+     */
+    protected array $overwrites;
+
+    /**
      * BeforeShareClonedEvent constructor.
      *
      * @param Share $original
      * @param Share $clone
+     * @param array $overwrites
      */
-    public function __construct(Share $original, Share $clone) {
+    public function __construct(Share $original, Share $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeShareClonedEvent extends Event {
      */
     public function getClone(): Share {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

@@ -28,15 +28,22 @@ class BeforePasswordRevisionClonedEvent extends Event {
     protected PasswordRevision $clone;
 
     /**
+     * @var array
+     */
+    protected array            $overwrites;
+
+    /**
      * BeforePasswordRevisionClonedEvent constructor.
      *
      * @param PasswordRevision $original
      * @param PasswordRevision $clone
+     * @param array            $overwrites
      */
-    public function __construct(PasswordRevision $original, PasswordRevision $clone) {
+    public function __construct(PasswordRevision $original, PasswordRevision $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforePasswordRevisionClonedEvent extends Event {
      */
     public function getClone(): PasswordRevision {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

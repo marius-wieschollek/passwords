@@ -28,15 +28,22 @@ class BeforeRegistrationClonedEvent extends Event {
     protected Registration $clone;
 
     /**
+     * @var array
+     */
+    protected array        $overwrites;
+
+    /**
      * BeforeRegistrationClonedEvent constructor.
      *
      * @param Registration $original
      * @param Registration $clone
+     * @param array        $overwrites
      */
-    public function __construct(Registration $original, Registration $clone) {
+    public function __construct(Registration $original, Registration $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeRegistrationClonedEvent extends Event {
      */
     public function getClone(): Registration {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

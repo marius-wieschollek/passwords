@@ -28,15 +28,22 @@ class BeforeChallengeClonedEvent extends Event {
     protected Challenge $clone;
 
     /**
+     * @var array
+     */
+    protected array     $overwrites;
+
+    /**
      * BeforeChallengeClonedEvent constructor.
      *
      * @param Challenge $original
      * @param Challenge $clone
+     * @param array     $overwrites
      */
-    public function __construct(Challenge $original, Challenge $clone) {
+    public function __construct(Challenge $original, Challenge $clone, array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
+        $this->original   = $original;
+        $this->clone      = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeChallengeClonedEvent extends Event {
      */
     public function getClone(): Challenge {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

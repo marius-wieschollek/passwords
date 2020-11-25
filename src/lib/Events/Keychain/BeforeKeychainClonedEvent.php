@@ -28,15 +28,22 @@ class BeforeKeychainClonedEvent extends Event {
     protected Keychain $clone;
 
     /**
+     * @var array
+     */
+    protected array    $overwrites;
+
+    /**
      * BeforeKeychainClonedEvent constructor.
      *
      * @param Keychain $original
      * @param Keychain $clone
+     * @param array    $overwrites
      */
-    public function __construct(Keychain $original, Keychain $clone) {
+    public function __construct(Keychain $original, Keychain $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeKeychainClonedEvent extends Event {
      */
     public function getClone(): Keychain {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

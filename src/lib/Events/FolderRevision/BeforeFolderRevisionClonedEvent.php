@@ -28,15 +28,22 @@ class BeforeFolderRevisionClonedEvent extends Event {
     protected FolderRevision $clone;
 
     /**
+     * @var array
+     */
+    protected array          $overwrites;
+
+    /**
      * BeforeFolderRevisionClonedEvent constructor.
      *
      * @param FolderRevision $original
      * @param FolderRevision $clone
+     * @param array          $overwrites
      */
-    public function __construct(FolderRevision $original, FolderRevision $clone) {
+    public function __construct(FolderRevision $original, FolderRevision $clone, array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
+        $this->original   = $original;
+        $this->clone      = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeFolderRevisionClonedEvent extends Event {
      */
     public function getClone(): FolderRevision {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }

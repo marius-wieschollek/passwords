@@ -28,15 +28,22 @@ class BeforeTagRevisionClonedEvent extends Event {
     protected TagRevision $clone;
 
     /**
+     * @var array
+     */
+    protected array       $overwrites;
+
+    /**
      * BeforeTagRevisionClonedEvent constructor.
      *
      * @param TagRevision $original
      * @param TagRevision $clone
+     * @param array       $overwrites
      */
-    public function __construct(TagRevision $original, TagRevision $clone) {
+    public function __construct(TagRevision $original, TagRevision $clone, array $overwrites) {
         parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
+        $this->overwrites = $overwrites;
     }
 
     /**
@@ -51,5 +58,12 @@ class BeforeTagRevisionClonedEvent extends Event {
      */
     public function getClone(): TagRevision {
         return $this->clone;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOverwrites(): array {
+        return $this->overwrites;
     }
 }
