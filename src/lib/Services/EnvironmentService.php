@@ -203,7 +203,7 @@ class EnvironmentService {
      * @return null|IUser
      */
     public function getUser(): ?IUser {
-        return $this->user;
+        return isset($this->user) ? $this->user:null;
     }
 
     /**
@@ -217,14 +217,14 @@ class EnvironmentService {
      * @return null|string
      */
     public function getUserLogin(): ?string {
-        return $this->userLogin;
+        return isset($this->userLogin) ? $this->userLogin:null;
     }
 
     /**
      * @return null|string
      */
     public function getUserPassword(): ?string {
-        return $this->password;
+        return isset($this->password) ? $this->password:null;
     }
 
     /**
@@ -238,7 +238,7 @@ class EnvironmentService {
      * @return IToken|null
      */
     public function getLoginToken(): ?IToken {
-        return $this->loginToken;
+        return isset($this->loginToken) ? $this->loginToken:null;
     }
 
     /**
