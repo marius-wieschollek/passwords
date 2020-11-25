@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\EventListener\Password;
 
@@ -7,14 +16,13 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\EventDispatcher\Event;
-use OCP\EventDispatcher\IEventListener;
 
 /**
  * Class BeforePasswordSetRevisionListener
  *
  * @package OCA\Passwords\EventListener\Password
  */
-class BeforePasswordSetRevisionListener extends AbstractPasswordListener implements IEventListener {
+class BeforePasswordSetRevisionListener extends AbstractPasswordListener {
 
     /**
      * @param Event $event

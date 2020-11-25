@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\EventListener\Password;
 
@@ -8,9 +17,13 @@ use OCA\Passwords\Events\Password\PasswordDeletedEvent;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\EventDispatcher\Event;
-use OCP\EventDispatcher\IEventListener;
 
-class PasswordDeletedListener extends AbstractPasswordListener implements IEventListener {
+/**
+ * Class PasswordDeletedListener
+ *
+ * @package OCA\Passwords\EventListener\Password
+ */
+class PasswordDeletedListener extends AbstractPasswordListener {
 
     /**
      * @param Event $event

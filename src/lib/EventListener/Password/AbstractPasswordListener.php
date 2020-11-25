@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\EventListener\Password;
 
@@ -14,9 +23,8 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\EventDispatcher\IEventListener;
 
-abstract class AbstractPasswordListener implements IEventListener {
+abstract class AbstractPasswordListener {
 
     /**
      * @var ShareService

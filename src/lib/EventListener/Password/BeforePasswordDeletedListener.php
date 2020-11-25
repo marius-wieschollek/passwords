@@ -1,21 +1,28 @@
 <?php
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\EventListener\Password;
 
 use Exception;
 use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
-use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\EventDispatcher\Event;
-use OCP\EventDispatcher\IEventListener;
 
 /**
  * Class BeforePasswordDeletedListener
  *
  * @package OCA\Passwords\EventListener\Password
  */
-class BeforePasswordDeletedListener implements IEventListener {
+class BeforePasswordDeletedListener {
 
     /**
      * @var ShareService
@@ -34,7 +41,7 @@ class BeforePasswordDeletedListener implements IEventListener {
      * @param PasswordTagRelationService $relationService
      */
     public function __construct(ShareService $shareService, PasswordTagRelationService $relationService) {
-        $this->shareService = $shareService;
+        $this->shareService    = $shareService;
         $this->relationService = $relationService;
     }
 
@@ -45,7 +52,7 @@ class BeforePasswordDeletedListener implements IEventListener {
      */
     public function handle(Event $event): void {
         if(!($event instanceof BeforePasswordDeletedEvent)) return;
-        $password = $event->getPassword();
+        $password  = $event->getPassword();
         $relations = $this->relationService->findByPassword($password->getUuid());
 
         foreach($relations as $relation) {
