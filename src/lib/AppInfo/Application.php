@@ -28,6 +28,14 @@ use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
+use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
+use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
+use OCA\Passwords\EventListener\Password\PasswordClonedListener;
+use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
+use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
+use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
+use OCA\Passwords\Events\Password\PasswordClonedEvent;
+use OCA\Passwords\Events\Password\PasswordDeletedEvent;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
@@ -45,6 +53,7 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\IAppContainer;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IGroupManager;
@@ -86,6 +95,7 @@ class Application extends App implements IBootstrap {
      */
     public function boot(IBootContext $context): void {
         $this->registerNotificationNotifier();
+        $this->registerInternalListeners();
     }
 
     /**
@@ -198,10 +208,6 @@ class Application extends App implements IBootstrap {
         $hookManager->listen(Folder::class, 'preDelete', [$hookManager, 'folderPreDelete']);
         $hookManager->listen(Folder::class, 'postDelete', [$hookManager, 'folderPostDelete']);
         $hookManager->listen(Folder::class, 'preSetRevision', [$hookManager, 'folderPreSetRevision']);
-        $hookManager->listen(Password::class, 'postClone', [$hookManager, 'passwordPostClone']);
-        $hookManager->listen(Password::class, 'preDelete', [$hookManager, 'passwordPreDelete']);
-        $hookManager->listen(Password::class, 'postDelete', [$hookManager, 'passwordPostDelete']);
-        $hookManager->listen(Password::class, 'preSetRevision', [$hookManager, 'passwordPreSetRevision']);
         $hookManager->listen(Tag::class, 'postClone', [$hookManager, 'tagPostClone']);
         $hookManager->listen(Tag::class, 'preDelete', [$hookManager, 'tagPreDelete']);
         $hookManager->listen(Tag::class, 'postDelete', [$hookManager, 'tagPostDelete']);
@@ -209,6 +215,18 @@ class Application extends App implements IBootstrap {
         $hookManager->listen(Share::class, 'postDelete', [$hookManager, 'sharePostDelete']);
         $hookManager->listen(Challenge::class, 'preSetChallenge', [$hookManager, 'challengePreSetChallenge']);
         $hookManager->listen(Challenge::class, 'postSetChallenge', [$hookManager, 'challengePostSetChallenge']);
+    }
+
+    /**
+     *
+     */
+    protected function registerInternalListeners() {
+        /* @var IEventDispatcher $eventDispatcher */
+        $dispatcher = $this->getContainer()->get(IEventDispatcher::class);
+        $dispatcher->addServiceListener(BeforePasswordDeletedEvent::class, BeforePasswordDeletedListener::class);
+        $dispatcher->addServiceListener(BeforePasswordSetRevisionEvent::class, BeforePasswordSetRevisionListener::class);
+        $dispatcher->addServiceListener(PasswordClonedEvent::class, PasswordClonedListener::class);
+        $dispatcher->addServiceListener(PasswordDeletedEvent::class, PasswordDeletedListener::class);
     }
 
     /**
