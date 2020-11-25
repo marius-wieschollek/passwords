@@ -34,6 +34,7 @@ class PasswordClonedEvent extends Event {
      * @param Password $clone
      */
     public function __construct(Password $original, Password $clone) {
+        parent::__construct();
         $this->original = $original;
         $this->clone = $clone;
     }

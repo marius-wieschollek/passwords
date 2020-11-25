@@ -18,6 +18,7 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class KeychainService
@@ -46,6 +47,7 @@ class KeychainService extends AbstractService {
      *
      * @param KeychainMapper     $mapper
      * @param UuidHelper         $uuidHelper
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      * @param EncryptionService  $encryptionService
@@ -53,11 +55,12 @@ class KeychainService extends AbstractService {
     public function __construct(
         KeychainMapper $mapper,
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EnvironmentService $environment,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
         $this->mapper            = $mapper;
         $this->encryptionService = $encryptionService;
     }
@@ -144,27 +147,34 @@ class KeychainService extends AbstractService {
     public function create(string $type, string $data, string $scope): Keychain {
         $keychain = $this->createModel($type, $data, $scope);
 
+        $this->fireEvent('instantiated', $keychain);
         $this->hookManager->emit($this->class, 'postCreate', [$keychain]);
 
         return $keychain;
     }
 
     /**
-     * @param EntityInterface|Keychain $challenge
+     * @param EntityInterface|Keychain $keychain
      *
      * @return mixed
      * @throws Exception
      */
-    public function save(EntityInterface $challenge): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$challenge]);
+    public function save(EntityInterface $keychain): EntityInterface {
+        $this->hookManager->emit($this->class, 'preSave', [$keychain]);
 
-        if($challenge->_isDecrypted()) $this->encryptionService->encryptKeychain($challenge);
+        if($keychain->_isDecrypted()) $this->encryptionService->encryptKeychain($keychain);
 
-        if(empty($challenge->getId())) {
-            $saved = $this->mapper->insert($challenge);
+        if(empty($keychain->getId())) {
+            $this->fireEvent('beforeCreated', $keychain);
+            $saved = $this->mapper->insert($keychain);
+            $this->fireEvent('created', $keychain);
+            $this->fireEvent('afterCreated', $keychain);
         } else {
-            $challenge->setUpdated(time());
-            $saved = $this->mapper->update($challenge);
+            $this->fireEvent('beforeUpdated', $keychain);
+            $keychain->setUpdated(time());
+            $saved = $this->mapper->update($keychain);
+            $this->fireEvent('updated', $keychain);
+            $this->fireEvent('afterUpdated', $keychain);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);
 

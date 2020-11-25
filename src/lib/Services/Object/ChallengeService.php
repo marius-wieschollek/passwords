@@ -13,6 +13,7 @@ use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class ChallengeService
@@ -41,18 +42,20 @@ class ChallengeService extends AbstractService {
      *
      * @param ChallengeMapper    $mapper
      * @param UuidHelper         $uuidHelper
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
-     * @param EnvironmentService $environment
      * @param EncryptionService  $encryption
+     * @param EnvironmentService $environment
      */
     public function __construct(
         ChallengeMapper $mapper,
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EncryptionService $encryption,
         EnvironmentService $environment
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
         $this->mapper     = $mapper;
         $this->encryption = $encryption;
     }
@@ -103,6 +106,7 @@ class ChallengeService extends AbstractService {
     public function create(string $type, string $secret, string $clientData, string $serverData): Challenge {
         $challenge = $this->createModel($type, $secret, $clientData, $serverData);
 
+        $this->fireEvent('instantiated', $challenge);
         $this->hookManager->emit($this->class, 'postCreate', [$challenge]);
 
         return $challenge;
@@ -120,10 +124,16 @@ class ChallengeService extends AbstractService {
         if($challenge->_isDecrypted()) $this->encryption->encryptChallenge($challenge);
 
         if(empty($challenge->getId())) {
+            $this->fireEvent('beforeCreated', $challenge);
             $saved = $this->mapper->insert($challenge);
+            $this->fireEvent('created', $challenge);
+            $this->fireEvent('afterCreated', $challenge);
         } else {
+            $this->fireEvent('beforeUpdated', $challenge);
             $challenge->setUpdated(time());
             $saved = $this->mapper->update($challenge);
+            $this->fireEvent('updated', $challenge);
+            $this->fireEvent('afterUpdated', $challenge);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);
 

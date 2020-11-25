@@ -143,8 +143,8 @@ abstract class AbstractService {
     public function delete(EntityInterface $entity): void {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $this->hookManager->emit($this->class, 'preDelete', [$entity]);
-        $entity->setDeleted(true);
         $this->fireEvent('beforeDeleted', $entity);
+        $entity->setDeleted(true);
         $this->save($entity);
         $this->fireEvent('deleted', $entity);
         $this->fireEvent('afterDeleted', $entity);
@@ -176,6 +176,7 @@ abstract class AbstractService {
     protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
         $class  = get_class($original);
         $clone  = new $class;
+        $this->fireEvent('beforeClone', $original, $clone);
         $fields = array_keys($clone->getFieldTypes());
 
         foreach($fields as $field) {
@@ -189,6 +190,8 @@ abstract class AbstractService {
 
         $clone->setCreated(time());
         $clone->setUpdated(time());
+        $this->fireEvent('cloned', $original, $clone);
+        $this->fireEvent('afterClone', $original, $clone);
 
         return $clone;
     }
@@ -198,14 +201,14 @@ abstract class AbstractService {
      * @param mixed  ...$arguments
      */
     protected function fireEvent(string $name, ...$arguments) {
-        $object = substr($this->class, strrpos($this->class, '\\'));
+        $object = substr($this->class, strrpos($this->class, '\\')+1);
+        $eventClassPart = ucfirst($name);
         if(substr($name, 0, 6) === 'before') {
-            $eventClassName = "\OCA\Passwords\Events\{$object}\{$object}".ucfirst(substr($name, 6));
+            $eventClassPart = ucfirst(substr($name, 6));
         } else if(substr($name, 0, 5) === 'after') {
-            $eventClassName = "\OCA\Passwords\Events\{$object}\{$object}".ucfirst(substr($name, 5));
-        } else {
-            $eventClassName = "\OCA\Passwords\Events\{$object}\{$object}".ucfirst($name);
+            $eventClassPart = ucfirst(substr($name, 5));
         }
+        $eventClassName = "\\OCA\\Passwords\\Events\\{$object}\\{$object}{$eventClassPart}Event";
 
         if(class_exists($eventClassName)) {
             $eventClass = new $eventClassName(...$arguments);

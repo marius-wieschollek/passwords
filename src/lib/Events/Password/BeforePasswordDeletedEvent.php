@@ -7,5 +7,10 @@
 
 namespace OCA\Passwords\Events\Password;
 
+/**
+ * Class BeforePasswordDeletedEvent
+ *
+ * @package OCA\Passwords\Events\Password
+ */
 class BeforePasswordDeletedEvent extends GenericPasswordEvent {
 }

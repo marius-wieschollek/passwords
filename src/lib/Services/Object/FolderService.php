@@ -20,6 +20,7 @@ use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class FolderService
@@ -43,13 +44,14 @@ class FolderService extends AbstractModelService {
     /**
      * FolderService constructor.
      *
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
      * @param FolderMapper       $mapper
      * @param UuidHelper         $uuidHelper
      * @param EnvironmentService $environment
      */
-    public function __construct(HookManager $hookManager, FolderMapper $mapper, UuidHelper $uuidHelper, EnvironmentService $environment) {
-        parent::__construct($mapper, $uuidHelper, $hookManager, $environment);
+    public function __construct(IEventDispatcher $eventDispatcher, HookManager $hookManager, FolderMapper $mapper, UuidHelper $uuidHelper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $hookManager, $environment);
     }
 
     /**
@@ -83,6 +85,7 @@ class FolderService extends AbstractModelService {
         $model = $this->createModel();
         $model->setRevision(FolderRevisionService::BASE_REVISION_UUID);
         $model->setUuid(self::BASE_FOLDER_UUID);
+        $this->fireEvent('instantiated', $model);
 
         return $model;
     }

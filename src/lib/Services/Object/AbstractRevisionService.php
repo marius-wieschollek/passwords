@@ -20,6 +20,7 @@ use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class AbstractRevisionService
@@ -47,6 +48,7 @@ abstract class AbstractRevisionService extends AbstractService {
      * AbstractRevisionService constructor.
      *
      * @param UuidHelper             $uuidHelper
+     * @param IEventDispatcher       $eventDispatcher
      * @param HookManager            $hookManager
      * @param EnvironmentService     $environment
      * @param AbstractRevisionMapper $revisionMapper
@@ -55,6 +57,7 @@ abstract class AbstractRevisionService extends AbstractService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EnvironmentService $environment,
         AbstractRevisionMapper $revisionMapper,
@@ -65,7 +68,7 @@ abstract class AbstractRevisionService extends AbstractService {
         $this->validation = $validationService;
         $this->encryption = $encryption;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
     }
 
     /**
@@ -151,10 +154,16 @@ abstract class AbstractRevisionService extends AbstractService {
         if($revision->_isDecrypted()) $this->encryption->encrypt($revision);
 
         if(empty($revision->getId())) {
+            $this->fireEvent('beforeCreated', $revision);
             $saved = $this->mapper->insert($revision);
+            $this->fireEvent('created', $revision);
+            $this->fireEvent('afterCreated', $revision);
         } else {
+            $this->fireEvent('beforeUpdated', $revision);
             $revision->setUpdated(time());
             $saved = $this->mapper->update($revision);
+            $this->fireEvent('updated', $revision);
+            $this->fireEvent('afterUpdated', $revision);
         }
         $this->hookManager->emit($this->class, 'postSave', [$saved]);
 

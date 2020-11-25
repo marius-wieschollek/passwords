@@ -14,6 +14,7 @@ use OCA\Passwords\Db\RegistrationMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class RegistrationService
@@ -37,13 +38,14 @@ class RegistrationService extends AbstractService {
      *
      * @param RegistrationMapper $mapper
      * @param UuidHelper         $uuidHelper
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
-    public function __construct(RegistrationMapper $mapper, UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment) {
+    public function __construct(RegistrationMapper $mapper, UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
     }
 
     /**
@@ -51,6 +53,7 @@ class RegistrationService extends AbstractService {
      */
     public function create(): Registration {
         $model = $this->createModel();
+        $this->fireEvent('instantiated', $model);
         $this->hookManager->emit(Registration::class, 'postCreate', [$model]);
 
         return $model;
@@ -64,10 +67,16 @@ class RegistrationService extends AbstractService {
     public function save(EntityInterface $model): EntityInterface {
         $this->hookManager->emit(Registration::class, 'preSave', [$model]);
         if(empty($model->getId())) {
+            $this->fireEvent('beforeCreated', $model);
             $saved = $this->mapper->insert($model);
+            $this->fireEvent('created', $model);
+            $this->fireEvent('afterCreated', $model);
         } else {
+            $this->fireEvent('beforeUpdated', $model);
             $model->setUpdated(time());
             $saved = $this->mapper->update($model);
+            $this->fireEvent('updated', $model);
+            $this->fireEvent('afterUpdated', $model);
         }
         $this->hookManager->emit(Registration::class, 'postSave', [$saved]);
 

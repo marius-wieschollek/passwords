@@ -17,6 +17,7 @@ use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class PasswordRevisionService
@@ -39,6 +40,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      * PasswordRevisionService constructor.
      *
      * @param UuidHelper             $uuidHelper
+     * @param IEventDispatcher       $eventDispatcher
      * @param HookManager            $hookManager
      * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
@@ -47,13 +49,14 @@ class PasswordRevisionService extends AbstractRevisionService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -123,6 +126,7 @@ class PasswordRevisionService extends AbstractRevisionService {
 
         $revision = $this->validation->validatePassword($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
+        $this->fireEvent('instantiated', $revision);
 
         return $revision;
     }

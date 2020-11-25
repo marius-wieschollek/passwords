@@ -18,6 +18,7 @@ use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class PasswordTagRelationService
@@ -40,14 +41,15 @@ class PasswordTagRelationService extends AbstractService {
      * PasswordTagRelationService constructor.
      *
      * @param UuidHelper                $uuidHelper
+     * @param IEventDispatcher          $eventDispatcher
      * @param HookManager               $hookManager
      * @param EnvironmentService        $environment
      * @param PasswordTagRelationMapper $mapper
      */
-    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
     }
 
     /**
@@ -104,6 +106,7 @@ class PasswordTagRelationService extends AbstractService {
         }
 
         $model = $this->createModel($password, $tag);
+        $this->fireEvent('instantiated', $model);
         $this->hookManager->emit($this->class, 'postCreate', [$model]);
 
         return $model;
@@ -117,12 +120,19 @@ class PasswordTagRelationService extends AbstractService {
     public function save(EntityInterface $model): EntityInterface {
         $this->hookManager->emit($this->class, 'preSave', [$model]);
         if(empty($model->getId())) {
-            return $this->mapper->insert($model);
+            $this->fireEvent('beforeCreated', $model);
+            $saved = $this->mapper->insert($model);
+            $this->fireEvent('created', $model);
+            $this->fireEvent('afterCreated', $model);
         } else {
+            $this->fireEvent('beforeUpdated', $model);
             $model->setUpdated(time());
-
-            return $this->mapper->update($model);
+            $saved = $this->mapper->update($model);
+            $this->fireEvent('updated', $model);
+            $this->fireEvent('afterUpdated', $model);
         }
+
+        return $saved;
     }
 
     /**

@@ -15,6 +15,7 @@ use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class TagRevisionService
@@ -32,6 +33,7 @@ class TagRevisionService extends AbstractRevisionService {
      * TagRevisionService constructor.
      *
      * @param UuidHelper         $uuidHelper
+     * @param IEventDispatcher   $eventDispatcher
      * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      * @param TagRevisionMapper  $revisionMapper
@@ -40,13 +42,14 @@ class TagRevisionService extends AbstractRevisionService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EnvironmentService $environment,
         TagRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -80,6 +83,7 @@ class TagRevisionService extends AbstractRevisionService {
 
         $revision = $this->validation->validateTag($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
+        $this->fireEvent('instantiated', $revision);
 
         return $revision;
     }

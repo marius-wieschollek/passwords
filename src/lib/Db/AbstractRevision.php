@@ -53,9 +53,9 @@ abstract class AbstractRevision extends AbstractEntity implements RevisionInterf
     protected string $cseType;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $cseKey;
+    protected ?string $cseKey;
 
     /**
      * @var string
@@ -88,9 +88,9 @@ abstract class AbstractRevision extends AbstractEntity implements RevisionInterf
     protected bool $favorite;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $client;
+    protected ?string $client;
 
     /**
      * @var bool

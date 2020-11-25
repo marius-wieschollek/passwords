@@ -7,5 +7,10 @@
 
 namespace OCA\Passwords\Events\Password;
 
+/**
+ * Class AfterPasswordUpdatedEvent
+ *
+ * @package OCA\Passwords\Events\Password
+ */
 class AfterPasswordUpdatedEvent extends GenericPasswordEvent {
 }

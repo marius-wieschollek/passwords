@@ -21,6 +21,7 @@ use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class FolderRevisionService
@@ -40,6 +41,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * FolderRevisionService constructor.
      *
      * @param UuidHelper           $uuidHelper
+     * @param IEventDispatcher     $eventDispatcher
      * @param HookManager          $hookManager
      * @param EnvironmentService   $environment
      * @param FolderRevisionMapper $revisionMapper
@@ -48,13 +50,14 @@ class FolderRevisionService extends AbstractRevisionService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
+        IEventDispatcher $eventDispatcher,
         HookManager $hookManager,
         EnvironmentService $environment,
         FolderRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -91,7 +94,6 @@ class FolderRevisionService extends AbstractRevisionService {
      * @return FolderRevision
      */
     public function getBaseRevision(): FolderRevision {
-
         $model = $this->createModel(
             FolderService::BASE_FOLDER_UUID,
             'Home',
@@ -106,6 +108,7 @@ class FolderRevisionService extends AbstractRevisionService {
         $model->setUuid(self::BASE_REVISION_UUID);
         $model->setClient(EnvironmentService::CLIENT_SYSTEM);
         $model->_setDecrypted(true);
+        $this->fireEvent('instantiated', $model);
 
         return $model;
     }
@@ -139,6 +142,7 @@ class FolderRevisionService extends AbstractRevisionService {
 
         $revision = $this->validation->validateFolder($revision);
         $this->hookManager->emit($this->class, 'postCreate', [$revision]);
+        $this->fireEvent('instantiated', $revision);
 
         return $revision;
     }
