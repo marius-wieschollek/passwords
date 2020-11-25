@@ -67,7 +67,7 @@
         "vue-router": "^3.4.9",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.12",
-        "webdriverio": "^6.9.1",
+        "webdriverio": "^6.10.0",
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
         "xlsx": "^0.16.9"
