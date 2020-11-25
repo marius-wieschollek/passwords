@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\AppInfo;
@@ -24,14 +28,20 @@ use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\Link\ConnectController;
 use OCA\Passwords\Db\Challenge;
-use OCA\Passwords\Db\Folder;
-use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
+use OCA\Passwords\EventListener\Folder\BeforeFolderDeletedListener;
+use OCA\Passwords\EventListener\Folder\BeforeFolderSetRevisionListener;
+use OCA\Passwords\EventListener\Folder\FolderClonedListener;
+use OCA\Passwords\EventListener\Folder\FolderDeletedListener;
 use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
 use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
 use OCA\Passwords\EventListener\Password\PasswordClonedListener;
 use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
+use OCA\Passwords\Events\Folder\BeforeFolderDeletedEvent;
+use OCA\Passwords\Events\Folder\BeforeFolderSetRevisionEvent;
+use OCA\Passwords\Events\Folder\FolderClonedEvent;
+use OCA\Passwords\Events\Folder\FolderDeletedEvent;
 use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCA\Passwords\Events\Password\PasswordClonedEvent;
@@ -204,10 +214,6 @@ class Application extends App implements IBootstrap {
         /** @var HookManager $hookManager */
         $hookManager = $container->get(HookManager::class);
 
-        $hookManager->listen(Folder::class, 'postClone', [$hookManager, 'folderPostCloneHook']);
-        $hookManager->listen(Folder::class, 'preDelete', [$hookManager, 'folderPreDelete']);
-        $hookManager->listen(Folder::class, 'postDelete', [$hookManager, 'folderPostDelete']);
-        $hookManager->listen(Folder::class, 'preSetRevision', [$hookManager, 'folderPreSetRevision']);
         $hookManager->listen(Tag::class, 'postClone', [$hookManager, 'tagPostClone']);
         $hookManager->listen(Tag::class, 'preDelete', [$hookManager, 'tagPreDelete']);
         $hookManager->listen(Tag::class, 'postDelete', [$hookManager, 'tagPostDelete']);
@@ -227,6 +233,11 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(BeforePasswordSetRevisionEvent::class, BeforePasswordSetRevisionListener::class);
         $dispatcher->addServiceListener(PasswordClonedEvent::class, PasswordClonedListener::class);
         $dispatcher->addServiceListener(PasswordDeletedEvent::class, PasswordDeletedListener::class);
+
+        $dispatcher->addServiceListener(BeforeFolderDeletedEvent::class, BeforeFolderDeletedListener::class);
+        $dispatcher->addServiceListener(BeforeFolderSetRevisionEvent::class, BeforeFolderSetRevisionListener::class);
+        $dispatcher->addServiceListener(FolderClonedEvent::class, FolderClonedListener::class);
+        $dispatcher->addServiceListener(FolderDeletedEvent::class, FolderDeletedListener::class);
     }
 
     /**

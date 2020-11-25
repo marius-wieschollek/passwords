@@ -1,29 +1,36 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Hooks;
+namespace OCA\Passwords\EventListener\Folder;
 
 use Exception;
 use OCA\Passwords\Db\Folder;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Events\Folder\BeforeFolderSetRevisionEvent;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
 /**
- * Class FolderHook
+ * Class BeforeFolderSetRevisionListener
  *
- * @package OCA\Passwords\Hooks
+ * @package OCA\Passwords\EventListener\Folder
  */
-class FolderHook {
+class BeforeFolderSetRevisionListener implements IEventListener {
 
     /**
      * @var FolderRevisionService
@@ -66,14 +73,16 @@ class FolderHook {
     }
 
     /**
-     * @param Folder         $folder
-     * @param FolderRevision $revision
+     * @param Event $event
      *
-     * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
-    public function preSetRevision(Folder $folder, FolderRevision $revision): void {
+    public function handle(Event $event): void {
+        if(!($event instanceof BeforeFolderSetRevisionEvent)) return;
+        $folder = $event->getFolder();
+        $revision = $event->getRevision();
+
         if($folder->getRevision() === null) return;
 
         $oldRevision = $this->revisionService->findByUuid($folder->getRevision());
@@ -87,57 +96,6 @@ class FolderHook {
         if($revision->isHidden() && !$oldRevision->isHidden()) {
             $this->hideSubFolders($folder->getUuid());
             $this->hideSubPasswords($folder->getUuid());
-        }
-    }
-
-    /**
-     * @param Folder $folder
-     *
-     * @throws Exception
-     */
-    public function preDelete(Folder $folder): void {
-        $folders = $this->folderService->findByParent($folder->getUuid());
-        foreach($folders as $subFolder) {
-            $this->folderService->delete($subFolder);
-        }
-
-        $passwords = $this->passwordService->findByFolder($folder->getUuid());
-        foreach($passwords as $password) {
-            $this->passwordService->delete($password);
-        }
-    }
-
-    /**
-     * @param Folder $folder
-     *
-     * @throws Exception
-     */
-    public function postDelete(Folder $folder): void {
-        /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($folder->getUuid());
-
-        foreach($revisions as $revision) {
-            $this->revisionService->delete($revision);
-        }
-    }
-
-    /**
-     * @param Folder $originalFolder
-     * @param Folder $clonedFolder
-     *
-     * @throws Exception
-     */
-    public function postClone(Folder $originalFolder, Folder $clonedFolder): void {
-        /** @var FolderRevision[] $revisions */
-        $revisions = $this->revisionService->findByModel($originalFolder->getUuid());
-
-        foreach($revisions as $revision) {
-            /** @var FolderRevision $clone */
-            $clone = $this->revisionService->clone($revision, ['folder' => $clonedFolder->getUuid()]);
-            $this->revisionService->save($clone);
-            if($revision->getUuid() === $originalFolder->getRevision()) {
-                $clonedFolder->setRevision($clone->getUuid());
-            }
         }
     }
 
