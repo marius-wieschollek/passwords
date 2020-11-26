@@ -38,6 +38,10 @@ use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
 use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
 use OCA\Passwords\EventListener\Password\PasswordClonedListener;
 use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
+use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
+use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
+use OCA\Passwords\EventListener\Tag\TagClonedListener;
+use OCA\Passwords\EventListener\Tag\TagDeletedListener;
 use OCA\Passwords\Events\Folder\BeforeFolderDeletedEvent;
 use OCA\Passwords\Events\Folder\BeforeFolderSetRevisionEvent;
 use OCA\Passwords\Events\Folder\FolderClonedEvent;
@@ -46,6 +50,10 @@ use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCA\Passwords\Events\Password\PasswordClonedEvent;
 use OCA\Passwords\Events\Password\PasswordDeletedEvent;
+use OCA\Passwords\Events\Tag\BeforeTagDeletedEvent;
+use OCA\Passwords\Events\Tag\BeforeTagSetRevisionEvent;
+use OCA\Passwords\Events\Tag\TagClonedEvent;
+use OCA\Passwords\Events\Tag\TagDeletedEvent;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
@@ -213,11 +221,6 @@ class Application extends App implements IBootstrap {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
         $hookManager = $container->get(HookManager::class);
-
-        $hookManager->listen(Tag::class, 'postClone', [$hookManager, 'tagPostClone']);
-        $hookManager->listen(Tag::class, 'preDelete', [$hookManager, 'tagPreDelete']);
-        $hookManager->listen(Tag::class, 'postDelete', [$hookManager, 'tagPostDelete']);
-        $hookManager->listen(Tag::class, 'preSetRevision', [$hookManager, 'tagPreSetRevision']);
         $hookManager->listen(Share::class, 'postDelete', [$hookManager, 'sharePostDelete']);
         $hookManager->listen(Challenge::class, 'preSetChallenge', [$hookManager, 'challengePreSetChallenge']);
         $hookManager->listen(Challenge::class, 'postSetChallenge', [$hookManager, 'challengePostSetChallenge']);
@@ -238,6 +241,11 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(BeforeFolderSetRevisionEvent::class, BeforeFolderSetRevisionListener::class);
         $dispatcher->addServiceListener(FolderClonedEvent::class, FolderClonedListener::class);
         $dispatcher->addServiceListener(FolderDeletedEvent::class, FolderDeletedListener::class);
+
+        $dispatcher->addServiceListener(BeforeTagDeletedEvent::class, BeforeTagDeletedListener::class);
+        $dispatcher->addServiceListener(BeforeTagSetRevisionEvent::class, BeforeTagSetRevisionListener::class);
+        $dispatcher->addServiceListener(TagClonedEvent::class, TagClonedListener::class);
+        $dispatcher->addServiceListener(TagDeletedEvent::class, TagDeletedListener::class);
     }
 
     /**
