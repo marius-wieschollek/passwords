@@ -11,7 +11,6 @@ use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
@@ -29,11 +28,6 @@ abstract class AbstractService {
      * @var string|null
      */
     protected ?string $userId;
-
-    /**
-     * @var HookManager
-     */
-    protected HookManager $hookManager;
 
     /**
      * @var UuidHelper
@@ -65,18 +59,15 @@ abstract class AbstractService {
      *
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
     public function __construct(
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EnvironmentService $environment
     ) {
         $this->userId          = $environment->getUserId();
         $this->environment     = $environment;
-        $this->hookManager     = $hookManager;
         $this->uuidHelper      = $uuidHelper;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -125,11 +116,9 @@ abstract class AbstractService {
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preClone', [$entity]);
         $clone = $this->cloneModel($entity, $overwrites);
         $this->fireEvent('cloned', $entity, $clone);
         $this->fireEvent('afterCloned', $entity, $clone);
-        $this->hookManager->emit($this->class, 'postClone', [$entity, $clone]);
 
         return $clone;
     }
@@ -141,13 +130,11 @@ abstract class AbstractService {
      */
     public function delete(EntityInterface $entity): void {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preDelete', [$entity]);
         $this->fireEvent('beforeDeleted', $entity);
         $entity->setDeleted(true);
         $this->save($entity);
         $this->fireEvent('deleted', $entity);
         $this->fireEvent('afterDeleted', $entity);
-        $this->hookManager->emit($this->class, 'postDelete', [$entity]);
     }
 
     /**
@@ -157,13 +144,11 @@ abstract class AbstractService {
      */
     public function destroy(EntityInterface $entity): void {
         if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preDestroy', [$entity]);
         if(!$entity->isDeleted()) $this->delete($entity);
         $this->fireEvent('beforeDestroyed', $entity);
         $this->mapper->delete($entity);
         $this->fireEvent('destroyed', $entity);
         $this->fireEvent('afterDestroyed', $entity);
-        $this->hookManager->emit($this->class, 'postDestroy', [$entity]);
     }
 
     /**

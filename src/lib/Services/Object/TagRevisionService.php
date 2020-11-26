@@ -11,7 +11,6 @@ use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
@@ -34,7 +33,6 @@ class TagRevisionService extends AbstractRevisionService {
      *
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      * @param TagRevisionMapper  $revisionMapper
      * @param ValidationService  $validationService
@@ -43,13 +41,12 @@ class TagRevisionService extends AbstractRevisionService {
     public function __construct(
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EnvironmentService $environment,
         TagRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -82,7 +79,6 @@ class TagRevisionService extends AbstractRevisionService {
         $revision = $this->createModel($model, $label, $color, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
         $revision = $this->validation->validateTag($revision);
-        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
         $this->fireEvent('instantiated', $revision);
 
         return $revision;

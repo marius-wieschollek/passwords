@@ -14,7 +14,6 @@ use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
@@ -42,7 +41,6 @@ class FolderRevisionService extends AbstractRevisionService {
      *
      * @param UuidHelper           $uuidHelper
      * @param IEventDispatcher     $eventDispatcher
-     * @param HookManager          $hookManager
      * @param EnvironmentService   $environment
      * @param FolderRevisionMapper $revisionMapper
      * @param ValidationService    $validationService
@@ -51,13 +49,12 @@ class FolderRevisionService extends AbstractRevisionService {
     public function __construct(
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EnvironmentService $environment,
         FolderRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -141,7 +138,6 @@ class FolderRevisionService extends AbstractRevisionService {
         $revision = $this->createModel($folder, $label, $parent, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
         $revision = $this->validation->validateFolder($revision);
-        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
         $this->fireEvent('instantiated', $revision);
 
         return $revision;

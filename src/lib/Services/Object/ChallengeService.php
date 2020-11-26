@@ -8,7 +8,6 @@ use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Db\ChallengeMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -43,7 +42,6 @@ class ChallengeService extends AbstractService {
      * @param ChallengeMapper    $mapper
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param EncryptionService  $encryption
      * @param EnvironmentService $environment
      */
@@ -51,11 +49,10 @@ class ChallengeService extends AbstractService {
         ChallengeMapper $mapper,
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EncryptionService $encryption,
         EnvironmentService $environment
     ) {
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
         $this->mapper     = $mapper;
         $this->encryption = $encryption;
     }
@@ -105,9 +102,7 @@ class ChallengeService extends AbstractService {
      */
     public function create(string $type, string $secret, string $clientData, string $serverData): Challenge {
         $challenge = $this->createModel($type, $secret, $clientData, $serverData);
-
         $this->fireEvent('instantiated', $challenge);
-        $this->hookManager->emit($this->class, 'postCreate', [$challenge]);
 
         return $challenge;
     }
@@ -119,8 +114,6 @@ class ChallengeService extends AbstractService {
      * @throws Exception
      */
     public function save(EntityInterface $challenge): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$challenge]);
-
         if($challenge->_isDecrypted()) $this->encryption->encryptChallenge($challenge);
 
         if(empty($challenge->getId())) {
@@ -135,7 +128,6 @@ class ChallengeService extends AbstractService {
             $this->fireEvent('updated', $challenge);
             $this->fireEvent('afterUpdated', $challenge);
         }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
 
         return $saved;
     }

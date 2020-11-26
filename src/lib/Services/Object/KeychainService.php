@@ -13,7 +13,6 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\KeychainMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -48,7 +47,6 @@ class KeychainService extends AbstractService {
      * @param KeychainMapper     $mapper
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      * @param EncryptionService  $encryptionService
      */
@@ -56,11 +54,10 @@ class KeychainService extends AbstractService {
         KeychainMapper $mapper,
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EnvironmentService $environment,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
         $this->mapper            = $mapper;
         $this->encryptionService = $encryptionService;
     }
@@ -148,7 +145,6 @@ class KeychainService extends AbstractService {
         $keychain = $this->createModel($type, $data, $scope);
 
         $this->fireEvent('instantiated', $keychain);
-        $this->hookManager->emit($this->class, 'postCreate', [$keychain]);
 
         return $keychain;
     }
@@ -160,8 +156,6 @@ class KeychainService extends AbstractService {
      * @throws Exception
      */
     public function save(EntityInterface $keychain): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$keychain]);
-
         if($keychain->_isDecrypted()) $this->encryptionService->encryptKeychain($keychain);
 
         if(empty($keychain->getId())) {
@@ -176,7 +170,6 @@ class KeychainService extends AbstractService {
             $this->fireEvent('updated', $keychain);
             $this->fireEvent('afterUpdated', $keychain);
         }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
 
         return $saved;
     }

@@ -14,7 +14,6 @@ use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
@@ -44,14 +43,13 @@ class ShareService extends AbstractService {
      *
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param ShareMapper        $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, ShareMapper $mapper, EnvironmentService $environment) {
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, ShareMapper $mapper, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -176,7 +174,6 @@ class ShareService extends AbstractService {
         bool $shareable = true
     ): Share {
         $model = $this->createModel($passwordId, $receiverId, $type, $editable, $expires, $shareable);
-        $this->hookManager->emit(Share::class, 'postCreate', [$model]);
         $this->fireEvent('instantiated', $model);
 
         return $model;
@@ -188,7 +185,6 @@ class ShareService extends AbstractService {
      * @return EntityInterface|Share|Entity
      */
     public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit(Share::class, 'preSave', [$model]);
         if(empty($model->getId())) {
             $this->fireEvent('beforeCreated', $model);
             $saved = $this->mapper->insert($model);
@@ -201,7 +197,6 @@ class ShareService extends AbstractService {
             $this->fireEvent('updated', $model);
             $this->fireEvent('afterUpdated', $model);
         }
-        $this->hookManager->emit(Share::class, 'postSave', [$saved]);
 
         return $saved;
     }

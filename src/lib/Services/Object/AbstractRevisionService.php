@@ -13,7 +13,6 @@ use OCA\Passwords\Db\AbstractRevisionMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
@@ -49,7 +48,6 @@ abstract class AbstractRevisionService extends AbstractService {
      *
      * @param UuidHelper             $uuidHelper
      * @param IEventDispatcher       $eventDispatcher
-     * @param HookManager            $hookManager
      * @param EnvironmentService     $environment
      * @param AbstractRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
@@ -58,7 +56,6 @@ abstract class AbstractRevisionService extends AbstractService {
     public function __construct(
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EnvironmentService $environment,
         AbstractRevisionMapper $revisionMapper,
         ValidationService $validationService,
@@ -68,7 +65,7 @@ abstract class AbstractRevisionService extends AbstractService {
         $this->validation = $validationService;
         $this->encryption = $encryption;
 
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -149,7 +146,6 @@ abstract class AbstractRevisionService extends AbstractService {
      */
     public function save(EntityInterface $revision): EntityInterface {
         if(get_class($revision) !== $this->class) throw new Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preSave', [$revision]);
 
         if($revision->_isDecrypted()) $this->encryption->encrypt($revision);
 
@@ -165,7 +161,6 @@ abstract class AbstractRevisionService extends AbstractService {
             $this->fireEvent('updated', $revision);
             $this->fireEvent('afterUpdated', $revision);
         }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
 
         return $saved;
     }

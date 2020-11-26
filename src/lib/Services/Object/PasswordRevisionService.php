@@ -13,7 +13,6 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
@@ -41,7 +40,6 @@ class PasswordRevisionService extends AbstractRevisionService {
      *
      * @param UuidHelper             $uuidHelper
      * @param IEventDispatcher       $eventDispatcher
-     * @param HookManager            $hookManager
      * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
@@ -50,13 +48,12 @@ class PasswordRevisionService extends AbstractRevisionService {
     public function __construct(
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
-        HookManager $hookManager,
         EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -125,7 +122,6 @@ class PasswordRevisionService extends AbstractRevisionService {
         );
 
         $revision = $this->validation->validatePassword($revision);
-        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
         $this->fireEvent('instantiated', $revision);
 
         return $revision;

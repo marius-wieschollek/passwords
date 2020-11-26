@@ -15,7 +15,6 @@ use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
 use OCP\EventDispatcher\IEventDispatcher;
@@ -42,14 +41,13 @@ class PasswordTagRelationService extends AbstractService {
      *
      * @param UuidHelper                $uuidHelper
      * @param IEventDispatcher          $eventDispatcher
-     * @param HookManager               $hookManager
      * @param EnvironmentService        $environment
      * @param PasswordTagRelationMapper $mapper
      */
-    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -107,7 +105,6 @@ class PasswordTagRelationService extends AbstractService {
 
         $model = $this->createModel($password, $tag);
         $this->fireEvent('instantiated', $model);
-        $this->hookManager->emit($this->class, 'postCreate', [$model]);
 
         return $model;
     }
@@ -118,7 +115,6 @@ class PasswordTagRelationService extends AbstractService {
      * @return mixed
      */
     public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$model]);
         if(empty($model->getId())) {
             $this->fireEvent('beforeCreated', $model);
             $saved = $this->mapper->insert($model);

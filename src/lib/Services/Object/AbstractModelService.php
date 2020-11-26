@@ -13,7 +13,6 @@ use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
@@ -33,13 +32,12 @@ abstract class AbstractModelService extends AbstractService {
      * @param AbstractMapper     $mapper
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param EnvironmentService $environment
      */
-    public function __construct(AbstractMapper $mapper, UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, EnvironmentService $environment) {
+    public function __construct(AbstractMapper $mapper, UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $eventDispatcher, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -80,7 +78,6 @@ abstract class AbstractModelService extends AbstractService {
      */
     public function create(): ModelInterface {
         $model = $this->createModel();
-        $this->hookManager->emit($this->class, 'postCreate', [$model]);
         $this->fireEvent('instantiated', $model);
 
         return $model;
@@ -92,7 +89,6 @@ abstract class AbstractModelService extends AbstractService {
      * @return ModelInterface|Entity
      */
     public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$model]);
         if(empty($model->getId())) {
             $this->fireEvent('beforeCreated', $model);
             $saved = $this->mapper->insert($model);
@@ -105,7 +101,6 @@ abstract class AbstractModelService extends AbstractService {
             $this->fireEvent('updated', $model);
             $this->fireEvent('afterUpdated', $model);
         }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
 
         return $saved;
     }
@@ -118,13 +113,11 @@ abstract class AbstractModelService extends AbstractService {
      */
     public function setRevision(ModelInterface $model, RevisionInterface $revision): void {
         if($revision->getModel() === $model->getUuid()) {
-            $this->hookManager->emit($this->class, 'preSetRevision', [$model, $revision]);
             $this->fireEvent('beforeSetRevision', $model, $revision);
             $model->setRevision($revision->getUuid());
             $this->save($model);
             $this->fireEvent('setRevision', $model, $revision);
             $this->fireEvent('afterSetRevision', $model, $revision);
-            $this->hookManager->emit($this->class, 'postSetRevision', [$model, $revision]);
         } else {
             throw new Exception('Revision did not belong to model when setting model revision');
         }

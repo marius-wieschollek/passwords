@@ -11,7 +11,6 @@ use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\EventDispatcher\IEventDispatcher;
 
@@ -37,12 +36,11 @@ class TagService extends AbstractModelService {
      *
      * @param UuidHelper         $uuidHelper
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param TagMapper          $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, HookManager $hookManager, TagMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $hookManager, $environment);
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, TagMapper $mapper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $environment);
     }
 
     /**

@@ -15,7 +15,6 @@ use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
@@ -45,13 +44,12 @@ class FolderService extends AbstractModelService {
      * FolderService constructor.
      *
      * @param IEventDispatcher   $eventDispatcher
-     * @param HookManager        $hookManager
      * @param FolderMapper       $mapper
      * @param UuidHelper         $uuidHelper
      * @param EnvironmentService $environment
      */
-    public function __construct(IEventDispatcher $eventDispatcher, HookManager $hookManager, FolderMapper $mapper, UuidHelper $uuidHelper, EnvironmentService $environment) {
-        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $hookManager, $environment);
+    public function __construct(IEventDispatcher $eventDispatcher, FolderMapper $mapper, UuidHelper $uuidHelper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
