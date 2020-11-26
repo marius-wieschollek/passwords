@@ -38,6 +38,7 @@ use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
 use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
 use OCA\Passwords\EventListener\Password\PasswordClonedListener;
 use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
+use OCA\Passwords\EventListener\Share\ShareDeletedListener;
 use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
 use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
 use OCA\Passwords\EventListener\Tag\TagClonedListener;
@@ -50,6 +51,7 @@ use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCA\Passwords\Events\Password\PasswordClonedEvent;
 use OCA\Passwords\Events\Password\PasswordDeletedEvent;
+use OCA\Passwords\Events\Share\ShareDeletedEvent;
 use OCA\Passwords\Events\Tag\BeforeTagDeletedEvent;
 use OCA\Passwords\Events\Tag\BeforeTagSetRevisionEvent;
 use OCA\Passwords\Events\Tag\TagClonedEvent;
@@ -221,7 +223,6 @@ class Application extends App implements IBootstrap {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
         $hookManager = $container->get(HookManager::class);
-        $hookManager->listen(Share::class, 'postDelete', [$hookManager, 'sharePostDelete']);
         $hookManager->listen(Challenge::class, 'preSetChallenge', [$hookManager, 'challengePreSetChallenge']);
         $hookManager->listen(Challenge::class, 'postSetChallenge', [$hookManager, 'challengePostSetChallenge']);
     }
@@ -246,6 +247,8 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(BeforeTagSetRevisionEvent::class, BeforeTagSetRevisionListener::class);
         $dispatcher->addServiceListener(TagClonedEvent::class, TagClonedListener::class);
         $dispatcher->addServiceListener(TagDeletedEvent::class, TagDeletedListener::class);
+
+        $dispatcher->addServiceListener(ShareDeletedEvent::class, ShareDeletedListener::class);
     }
 
     /**

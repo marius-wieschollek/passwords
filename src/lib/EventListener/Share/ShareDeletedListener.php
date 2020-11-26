@@ -1,26 +1,32 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Hooks;
+namespace OCA\Passwords\EventListener\Share;
 
 use Exception;
 use OCA\Passwords\Db\Password;
-use OCA\Passwords\Db\Share;
+use OCA\Passwords\Events\Share\ShareDeletedEvent;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
 /**
- * Class ShareHook
+ * Class ShareDeletedListener
  *
- * @package OCA\Passwords\Hooks
+ * @package OCA\Passwords\EventListener\Share
  */
-class ShareHook {
+class ShareDeletedListener implements IEventListener {
 
     /**
      * @var PasswordService
@@ -44,13 +50,15 @@ class ShareHook {
     }
 
     /**
-     * @param Share $share
+     * @param Event $event
      *
      * @throws MultipleObjectsReturnedException
      * @throws Exception
      */
-    public function postDelete(Share $share) {
+    public function handle(Event $event): void {
+        if(!($event instanceof ShareDeletedEvent)) return;
         try {
+            $share  = $event->getShare();
             $shares = $this->shareService->findBySourcePassword($share->getSourcePassword());
 
             if(empty($shares)) {
