@@ -1,22 +1,35 @@
 <?php
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
-namespace OCA\Passwords\Hooks;
+namespace OCA\Passwords\EventListener\Challenge;
 
 use Exception;
 use OCA\Passwords\Db\Keychain;
+use OCA\Passwords\Events\Challenge\BeforeChallengeActivatedEvent;
+use OCA\Passwords\Events\Challenge\ChallengeActivatedEvent;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\Object\KeychainService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 use OCP\Security\ISecureRandom;
 
 /**
- * Class ChallengeHook
+ * Class ChallengeActivatedListener
  *
- * @package OCA\Passwords\Hooks
+ * @package OCA\Passwords\EventListener\Challenge
  */
-class ChallengeHook {
+class ChallengeActivatedListener implements IEventListener {
 
     const MINIMUM_KEY_LENGTH = 1024;
 
@@ -66,9 +79,23 @@ class ChallengeHook {
     }
 
     /**
+     * @param Event $event
+     *
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
+     */
+    public function handle(Event $event): void {
+        if($event instanceof BeforeChallengeActivatedEvent) {
+            $this->beforeSetChallenge();
+        } else if($event instanceof ChallengeActivatedEvent) {
+            $this->afterSetChallenge();
+        }
+    }
+
+    /**
      * @throws MultipleObjectsReturnedException
      */
-    public function preSetChallenge(): void {
+    protected function beforeSetChallenge(): void {
         try {
             self::$cseV1Keychain = $this->keychainService->findByType(Keychain::TYPE_CSE_V1V1, true);
         } catch(DoesNotExistException $e) {
@@ -82,7 +109,7 @@ class ChallengeHook {
     /**
      * @throws Exception
      */
-    public function postSetChallenge(): void {
+    protected function afterSetChallenge(): void {
         if(!isset(self::$sseV2Keychain)) {
             self::$sseV2Keychain = $this->createSseV2Keychain();
         }

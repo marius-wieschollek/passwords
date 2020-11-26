@@ -30,6 +30,7 @@ use OCA\Passwords\Controller\Link\ConnectController;
 use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\Tag;
+use OCA\Passwords\EventListener\Challenge\ChallengeActivatedListener;
 use OCA\Passwords\EventListener\Folder\BeforeFolderDeletedListener;
 use OCA\Passwords\EventListener\Folder\BeforeFolderSetRevisionListener;
 use OCA\Passwords\EventListener\Folder\FolderClonedListener;
@@ -43,6 +44,8 @@ use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
 use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
 use OCA\Passwords\EventListener\Tag\TagClonedListener;
 use OCA\Passwords\EventListener\Tag\TagDeletedListener;
+use OCA\Passwords\Events\Challenge\BeforeChallengeActivatedEvent;
+use OCA\Passwords\Events\Challenge\ChallengeActivatedEvent;
 use OCA\Passwords\Events\Folder\BeforeFolderDeletedEvent;
 use OCA\Passwords\Events\Folder\BeforeFolderSetRevisionEvent;
 use OCA\Passwords\Events\Folder\FolderClonedEvent;
@@ -223,8 +226,6 @@ class Application extends App implements IBootstrap {
         $container = $this->getContainer();
         /** @var HookManager $hookManager */
         $hookManager = $container->get(HookManager::class);
-        $hookManager->listen(Challenge::class, 'preSetChallenge', [$hookManager, 'challengePreSetChallenge']);
-        $hookManager->listen(Challenge::class, 'postSetChallenge', [$hookManager, 'challengePostSetChallenge']);
     }
 
     /**
@@ -249,6 +250,9 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(TagDeletedEvent::class, TagDeletedListener::class);
 
         $dispatcher->addServiceListener(ShareDeletedEvent::class, ShareDeletedListener::class);
+
+        $dispatcher->addServiceListener(BeforeChallengeActivatedEvent::class, ChallengeActivatedListener::class);
+        $dispatcher->addServiceListener(ChallengeActivatedEvent::class, ChallengeActivatedListener::class);
     }
 
     /**

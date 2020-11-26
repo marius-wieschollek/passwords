@@ -9,11 +9,6 @@ namespace OCA\Passwords\Hooks\Manager;
 
 use Exception;
 use OC\Hooks\BasicEmitter;
-use OCA\Passwords\Hooks\ChallengeHook;
-use OCA\Passwords\Hooks\FolderHook;
-use OCA\Passwords\Hooks\PasswordHook;
-use OCA\Passwords\Hooks\ShareHook;
-use OCA\Passwords\Hooks\TagHook;
 use OCA\Passwords\Hooks\UserHook;
 use OCP\AppFramework\IAppContainer;
 
@@ -63,23 +58,8 @@ class HookManager extends BasicEmitter {
         $class = null;
 
         switch($scope) {
-            case 'folder':
-                $class = FolderHook::class;
-                break;
-            case 'password':
-                $class = PasswordHook::class;
-                break;
-            case 'tag':
-                $class = TagHook::class;
-                break;
-            case 'share':
-                $class = ShareHook::class;
-                break;
             case 'user':
                 $class = UserHook::class;
-                break;
-            case 'challenge':
-                $class = ChallengeHook::class;
                 break;
         }
 
