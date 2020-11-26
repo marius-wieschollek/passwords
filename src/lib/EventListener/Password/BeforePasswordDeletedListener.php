@@ -18,7 +18,7 @@ use OCA\Passwords\Services\Object\ShareService;
 use OCP\EventDispatcher\Event;
 
 /**
- * Class BeforePasswordDeletedListener
+ * Class BeforeTagDeletedListener
  *
  * @package OCA\Passwords\EventListener\Password
  */
@@ -35,7 +35,7 @@ class BeforePasswordDeletedListener {
     protected PasswordTagRelationService $relationService;
 
     /**
-     * BeforePasswordDeletedListener constructor.
+     * BeforeTagDeletedListener constructor.
      *
      * @param ShareService               $shareService
      * @param PasswordTagRelationService $relationService

@@ -23,8 +23,14 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\EventDispatcher\IEventListener;
 
-abstract class AbstractPasswordListener {
+/**
+ * Class AbstractPasswordListener
+ *
+ * @package OCA\Passwords\EventListener\Password
+ */
+abstract class AbstractPasswordListener implements IEventListener {
 
     /**
      * @var ShareService
