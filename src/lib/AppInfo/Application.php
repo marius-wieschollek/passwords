@@ -109,7 +109,6 @@ class Application extends App implements IBootstrap {
     public function register(IRegistrationContext $context): void {
         $this->registerDiClasses($context);
         $this->registerSystemHooks();
-        $this->registerInternalHooks();
         $this->registerMiddleware($context);
     }
 
@@ -217,15 +216,6 @@ class Application extends App implements IBootstrap {
             $context->registerServiceAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
             $context->registerServiceAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
         }
-    }
-
-    /**
-     *
-     */
-    protected function registerInternalHooks(): void {
-        $container = $this->getContainer();
-        /** @var HookManager $hookManager */
-        $hookManager = $container->get(HookManager::class);
     }
 
     /**
