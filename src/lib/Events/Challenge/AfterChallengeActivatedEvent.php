@@ -40,7 +40,7 @@ class AfterChallengeActivatedEvent extends Event {
     public function __construct(Challenge $challenge, string $key) {
         parent::__construct();
         $this->challenge = $challenge;
-        $this->key = $key;
+        $this->key       = $key;
     }
 
     /**

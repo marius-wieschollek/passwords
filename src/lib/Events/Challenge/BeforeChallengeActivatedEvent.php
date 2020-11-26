@@ -33,13 +33,13 @@ class BeforeChallengeActivatedEvent extends Event {
     /**
      * BeforeChallengeActivatedEvent constructor.
      *
-     * @param array $clientData
+     * @param array  $clientData
      * @param string $secret
      */
     public function __construct(array $clientData, string $secret) {
         parent::__construct();
         $this->clientData = $clientData;
-        $this->secret = $secret;
+        $this->secret     = $secret;
     }
 
     /**
