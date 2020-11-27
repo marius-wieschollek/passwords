@@ -35,14 +35,20 @@ use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * Class AppFetcher
+ * Class NightlyAppFetcher
  *
- * @package OC\App\AppStore\Fetcher
+ * @package OCA\Passwords\Fetcher
  */
 class NightlyAppFetcher extends Fetcher {
+
+    /**
+     * @var LoggerInterface
+     */
+    protected LoggerInterface $psrLogger;
 
     /**
      * @var CompareVersion
@@ -60,17 +66,12 @@ class NightlyAppFetcher extends Fetcher {
     protected bool $dbUpdated;
 
     /**
-     * @var string
-     */
-    protected string $endpointUrl;
-
-    /**
-     * @param Factory        $appDataFactory
-     * @param IClientService $clientService
-     * @param ITimeFactory   $timeFactory
-     * @param IConfig        $config
-     * @param CompareVersion $compareVersion
-     * @param ILogger        $logger
+     * @param Factory         $appDataFactory
+     * @param IClientService  $clientService
+     * @param ITimeFactory    $timeFactory
+     * @param IConfig         $config
+     * @param CompareVersion  $compareVersion
+     * @param LoggerInterface $logger
      */
     public function __construct(
         Factory $appDataFactory,
@@ -78,21 +79,23 @@ class NightlyAppFetcher extends Fetcher {
         ITimeFactory $timeFactory,
         IConfig $config,
         CompareVersion $compareVersion,
-        ILogger $logger
+        LoggerInterface $logger,
+        ILogger $legacyLogger
     ) {
         parent::__construct(
             $appDataFactory,
             $clientService,
             $timeFactory,
             $config,
-            $logger
+            $legacyLogger
         );
 
-        $this->dbUpdated = false;
-        $this->fileName  = 'apps_nightly.json';
-        $this->setEndpoint();
+        $this->dbUpdated        = false;
+        $this->fileName         = 'apps_nightly.json';
+        $this->endpointName     = 'apps.json';
+        $this->ignoreMaxVersion = true;
+        $this->psrLogger        = $logger;
         $this->compareVersion   = $compareVersion;
-        $this->ignoreMaxVersion = false;
     }
 
     /**
@@ -124,7 +127,7 @@ class NightlyAppFetcher extends Fetcher {
             $file = $rootFolder->getFile('apps.json');
             $file->delete();
         } catch(Exception $e) {
-            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+            $this->logException($e);
         }
     }
 
@@ -174,12 +177,9 @@ class NightlyAppFetcher extends Fetcher {
      * @param string $fileName
      * @param bool   $ignoreMaxVersion
      */
-    public function setVersion(string $version, string $fileName = 'apps_nightly.json', bool $ignoreMaxVersion = true) {
+    public function setVersion(string $version, string $fileName = 'apps.json', bool $ignoreMaxVersion = true) {
         parent::setVersion($version);
-
         $this->ignoreMaxVersion = $ignoreMaxVersion;
-        $this->fileName         = $fileName;
-        $this->setEndpoint();
     }
 
     /**
@@ -197,20 +197,6 @@ class NightlyAppFetcher extends Fetcher {
     }
 
     /**
-     *
-     */
-    protected function setEndpoint() {
-        $this->endpointUrl = $this->getEndpoint();
-    }
-
-    /**
-     * @return string
-     */
-    protected function getEndpoint(): string {
-        return $this->config->getSystemValue('appstoreurl', 'https://apps.nextcloud.com/api/v1').'/apps.json';
-    }
-
-    /**
      * @return string
      */
     protected function prepareAppDbForUpdate(): string {
@@ -221,7 +207,8 @@ class NightlyAppFetcher extends Fetcher {
 
             return $file->getETag();
         } catch(Exception $e) {
-            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+            $this->logger->emergency($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+
             return '';
         }
     }
@@ -251,7 +238,7 @@ class NightlyAppFetcher extends Fetcher {
                 $this->dbUpdated = true;
             }
         } catch(Exception $e) {
-            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+            $this->logException($e);
         }
     }
 
@@ -273,9 +260,19 @@ class NightlyAppFetcher extends Fetcher {
 
             return $minFulfilled && ($this->ignoreMaxVersion || $maxFulfilled);
         } catch(Throwable $e) {
-            $this->logger->logException($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+            $this->logException($e);
         }
 
         return false;
+    }
+
+    /**
+     * @param Throwable $exception
+     * @param array     $context
+     */
+    protected function logException(Throwable $exception, array $context = []): void {
+        $context['app']       = 'nightlyAppstoreFetcher';
+        $context['exception'] = $exception;
+        $this->psrLogger->emergency($exception->getMessage(), $context);
     }
 }
