@@ -48,6 +48,5 @@ class UserHook {
      * @param IUser $user
      */
     public function postDelete(IUser $user): void {
-        $this->backgroundJobService->addDeleteUserJob($user->getUID());
     }
 }

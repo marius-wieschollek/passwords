@@ -11,7 +11,6 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OC\User\Manager;
 use OCA\Passwords\Controller\Admin\CacheController;
 use OCA\Passwords\Controller\Admin\SettingsController;
 use OCA\Passwords\Controller\Api\AccountApiController;
@@ -27,9 +26,6 @@ use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Controller\Api\ShareApiController;
 use OCA\Passwords\Controller\Api\TagApiController;
 use OCA\Passwords\Controller\Link\ConnectController;
-use OCA\Passwords\Db\Challenge;
-use OCA\Passwords\Db\Share;
-use OCA\Passwords\Db\Tag;
 use OCA\Passwords\EventListener\Challenge\ChallengeActivatedListener;
 use OCA\Passwords\EventListener\Folder\BeforeFolderDeletedListener;
 use OCA\Passwords\EventListener\Folder\BeforeFolderSetRevisionListener;
@@ -44,6 +40,8 @@ use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
 use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
 use OCA\Passwords\EventListener\Tag\TagClonedListener;
 use OCA\Passwords\EventListener\Tag\TagDeletedListener;
+use OCA\Passwords\EventListener\User\BeforeUserCreatedListener;
+use OCA\Passwords\EventListener\User\UserDeletedListener;
 use OCA\Passwords\Events\Challenge\BeforeChallengeActivatedEvent;
 use OCA\Passwords\Events\Challenge\ChallengeActivatedEvent;
 use OCA\Passwords\Events\Folder\BeforeFolderDeletedEvent;
@@ -64,7 +62,6 @@ use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
 use OCA\Passwords\Middleware\LegacyMiddleware;
@@ -84,6 +81,9 @@ use OCP\IUserManager;
 use OCP\L10N\IFactory;
 use OCP\Notification\IManager;
 use OCP\Share\IManager as ShareManager;
+use OCP\User\Events\BeforeUserCreatedEvent;
+use OCP\User\Events\CreateUserEvent;
+use OCP\User\Events\UserDeletedEvent;
 
 /**
  * Class Application
@@ -249,14 +249,11 @@ class Application extends App implements IBootstrap {
      *
      */
     protected function registerSystemHooks(): void {
-        $container = $this->getContainer();
-        /** @var HookManager $hookManager */
-        $hookManager = $container->get(HookManager::class);
-        /** @var Manager $userManager */
-        $userManager = $container->get(IUserManager::class);
-
-        $userManager->listen('\OC\User', 'preCreateUser', [$hookManager, 'userPreCreateUser']);
-        $userManager->listen('\OC\User', 'postDelete', [$hookManager, 'userPostDelete']);
+        /* @var IEventDispatcher $eventDispatcher */
+        $dispatcher = $this->getContainer()->get(IEventDispatcher::class);
+        $dispatcher->addServiceListener(CreateUserEvent::class, BeforeUserCreatedListener::class);
+        $dispatcher->addServiceListener(BeforeUserCreatedEvent::class, BeforeUserCreatedListener::class);
+        $dispatcher->addServiceListener(UserDeletedEvent::class, UserDeletedListener::class);
     }
 
     /**

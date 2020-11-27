@@ -9,7 +9,6 @@ namespace OCA\Passwords\Hooks\Manager;
 
 use Exception;
 use OC\Hooks\BasicEmitter;
-use OCA\Passwords\Hooks\UserHook;
 use OCP\AppFramework\IAppContainer;
 
 /**
@@ -56,13 +55,6 @@ class HookManager extends BasicEmitter {
         $scope = $matches[1];
         $method = lcfirst($matches[2]);
         $class = null;
-
-        switch($scope) {
-            case 'user':
-                $class = UserHook::class;
-                break;
-        }
-
         if($class === null) throw new Exception("Invalid hook scope {$scope} in {$name}");
         $object = $this->container->query($class);
         if(!method_exists($object, $method)) throw new Exception("Invalid hook method {$method} in {$name}");
