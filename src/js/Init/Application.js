@@ -67,7 +67,7 @@ class Application {
      * @private
      */
     _initApp() {
-        if(this._loaded || !document.querySelector('meta[name=api-user]')) return;
+        if(this._loaded || !document.querySelector('meta[name=pw-api-user]')) return;
         clearInterval(this._timer);
         this._loaded = true;
         this._initSettings();
@@ -111,8 +111,8 @@ class Application {
      */
     _initApi() {
         let baseUrl    = Utility.generateUrl(),
-            userEl     = document.querySelector('meta[name=api-user]'),
-            tokenEl    = document.querySelector('meta[name=api-token]'),
+            userEl     = document.querySelector('meta[name=pw-api-user]'),
+            tokenEl    = document.querySelector('meta[name=pw-api-token]'),
             user       = userEl ? userEl.getAttribute('content'):null,
             token      = tokenEl ? tokenEl.getAttribute('content'):null,
             cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',

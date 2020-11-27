@@ -22,7 +22,7 @@ class DeferredActivationService {
     /**
      * @var array|null
      */
-    protected ?array $features = null;
+    protected ?array $features = [];
 
     /**
      * @var ConfigurationService
@@ -91,6 +91,15 @@ class DeferredActivationService {
     }
 
     /**
+     * @return array
+     */
+    public function getClientFeatures(): array {
+        if($this->isServiceDisabled()) return [];
+
+        return $this->getFeatures('webapp');
+    }
+
+    /**
      * @return array|null
      */
     public function getUpdateInfo(): ?array {
@@ -107,21 +116,23 @@ class DeferredActivationService {
     /**
      * Fetch the feature set for this app
      *
+     * @param string $section
+     *
      * @return array
      */
-    protected function getFeatures(): array {
-        if($this->features !== null) return $this->features;
+    protected function getFeatures($section = 'server'): array {
+        if(isset($this->features[ $section ])) return $this->features[ $section ];
 
         $data = $this->fetchFeatures();
         if($data === null) {
-            $this->features = [];
+            $this->features[ $section ] = [];
 
             return [];
         }
 
-        $this->features = $this->processFeatures($data);
+        $this->features[ $section ] = $this->processFeatures($data, $section);
 
-        return $this->features;
+        return $this->features[ $section ];
     }
 
     /**
@@ -144,19 +155,20 @@ class DeferredActivationService {
     /**
      * Process the raw json into the feature set for this app
      *
-     * @param $json
+     * @param        $json
+     * @param string $section
      *
      * @return array
      */
-    protected function processFeatures($json): array {
-        if(!isset($json['server'])) return [];
+    protected function processFeatures($json, string $section): array {
+        if(!isset($json[ $section ])) return [];
 
         $version = $this->config->getAppValue('installed_version');
         if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
 
         [$major, $minor] = explode('.', $version);
         $mainVersion = $major.'.'.$minor;
-        $appFeatures = $json['server'];
+        $appFeatures = $json[ $section ];
 
         $features = [];
         if(isset($appFeatures[ $mainVersion ])) {
