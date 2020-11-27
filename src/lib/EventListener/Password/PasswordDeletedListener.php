@@ -16,6 +16,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\PasswordDeletedEvent;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\EventDispatcher\Event;
 
 /**
@@ -28,7 +29,7 @@ class PasswordDeletedListener extends AbstractPasswordListener {
     /**
      * @param Event $event
      *
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws MultipleObjectsReturnedException
      * @throws Exception
      */
     public function handle(Event $event): void {

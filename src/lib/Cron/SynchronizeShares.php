@@ -269,8 +269,6 @@ class SynchronizeShares extends AbstractTimedJob {
                 return false;
             }
         }
-
-        return false;
     }
 
     /**

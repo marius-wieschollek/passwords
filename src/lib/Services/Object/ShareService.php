@@ -180,28 +180,6 @@ class ShareService extends AbstractService {
     }
 
     /**
-     * @param EntityInterface|Share $model
-     *
-     * @return EntityInterface|Share|Entity
-     */
-    public function save(EntityInterface $model): EntityInterface {
-        if(empty($model->getId())) {
-            $this->fireEvent('beforeCreated', $model);
-            $saved = $this->mapper->insert($model);
-            $this->fireEvent('created', $model);
-            $this->fireEvent('afterCreated', $model);
-        } else {
-            $this->fireEvent('beforeUpdated', $model);
-            $model->setUpdated(time());
-            $saved = $this->mapper->update($model);
-            $this->fireEvent('updated', $model);
-            $this->fireEvent('afterUpdated', $model);
-        }
-
-        return $saved;
-    }
-
-    /**
      * @param string   $passwordId
      * @param string   $receiverId
      * @param string   $type

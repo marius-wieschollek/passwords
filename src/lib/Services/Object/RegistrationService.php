@@ -57,28 +57,6 @@ class RegistrationService extends AbstractService {
     }
 
     /**
-     * @param Registration|EntityInterface $model
-     *
-     * @return Registration|EntityInterface
-     */
-    public function save(EntityInterface $model): EntityInterface {
-        if(empty($model->getId())) {
-            $this->fireEvent('beforeCreated', $model);
-            $saved = $this->mapper->insert($model);
-            $this->fireEvent('created', $model);
-            $this->fireEvent('afterCreated', $model);
-        } else {
-            $this->fireEvent('beforeUpdated', $model);
-            $model->setUpdated(time());
-            $saved = $this->mapper->update($model);
-            $this->fireEvent('updated', $model);
-            $this->fireEvent('afterUpdated', $model);
-        }
-
-        return $saved;
-    }
-
-    /**
      *
      */
     public function clearCache(): void {

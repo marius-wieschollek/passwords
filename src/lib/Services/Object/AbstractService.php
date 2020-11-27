@@ -105,7 +105,9 @@ abstract class AbstractService {
      *
      * @return mixed
      */
-    abstract public function save(EntityInterface $model): EntityInterface;
+    public function save(EntityInterface $model): EntityInterface {
+        return $this->saveModel($model);
+    }
 
     /**
      * @param EntityInterface $entity
@@ -149,6 +151,28 @@ abstract class AbstractService {
         $this->mapper->delete($entity);
         $this->fireEvent('destroyed', $entity);
         $this->fireEvent('afterDestroyed', $entity);
+    }
+
+    /**
+     * @param EntityInterface $model
+     *
+     * @return EntityInterface
+     */
+    protected function saveModel(EntityInterface $model): EntityInterface {
+        if(empty($model->getId())) {
+            $this->fireEvent('beforeCreated', $model);
+            $saved = $this->mapper->insert($model);
+            $this->fireEvent('created', $model);
+            $this->fireEvent('afterCreated', $model);
+        } else {
+            $this->fireEvent('beforeUpdated', $model);
+            $model->setUpdated(time());
+            $saved = $this->mapper->update($model);
+            $this->fireEvent('updated', $model);
+            $this->fireEvent('afterUpdated', $model);
+        }
+
+        return $saved;
     }
 
     /**

@@ -116,20 +116,7 @@ class ChallengeService extends AbstractService {
     public function save(EntityInterface $challenge): EntityInterface {
         if($challenge->_isDecrypted()) $this->encryption->encryptChallenge($challenge);
 
-        if(empty($challenge->getId())) {
-            $this->fireEvent('beforeCreated', $challenge);
-            $saved = $this->mapper->insert($challenge);
-            $this->fireEvent('created', $challenge);
-            $this->fireEvent('afterCreated', $challenge);
-        } else {
-            $this->fireEvent('beforeUpdated', $challenge);
-            $challenge->setUpdated(time());
-            $saved = $this->mapper->update($challenge);
-            $this->fireEvent('updated', $challenge);
-            $this->fireEvent('afterUpdated', $challenge);
-        }
-
-        return $saved;
+        return parent::save($challenge);
     }
 
     /**

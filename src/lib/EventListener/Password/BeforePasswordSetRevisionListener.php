@@ -15,6 +15,7 @@ use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\EventDispatcher\Event;
 
 /**
@@ -28,7 +29,7 @@ class BeforePasswordSetRevisionListener extends AbstractPasswordListener {
      * @param Event $event
      *
      * @throws DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws MultipleObjectsReturnedException
      * @throws Exception
      */
     public function handle(Event $event): void {

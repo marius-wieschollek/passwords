@@ -149,20 +149,7 @@ abstract class AbstractRevisionService extends AbstractService {
 
         if($revision->_isDecrypted()) $this->encryption->encrypt($revision);
 
-        if(empty($revision->getId())) {
-            $this->fireEvent('beforeCreated', $revision);
-            $saved = $this->mapper->insert($revision);
-            $this->fireEvent('created', $revision);
-            $this->fireEvent('afterCreated', $revision);
-        } else {
-            $this->fireEvent('beforeUpdated', $revision);
-            $revision->setUpdated(time());
-            $saved = $this->mapper->update($revision);
-            $this->fireEvent('updated', $revision);
-            $this->fireEvent('afterUpdated', $revision);
-        }
-
-        return $saved;
+        return $this->saveModel($revision);
     }
 
     /**

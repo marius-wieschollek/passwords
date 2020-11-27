@@ -158,20 +158,7 @@ class KeychainService extends AbstractService {
     public function save(EntityInterface $keychain): EntityInterface {
         if($keychain->_isDecrypted()) $this->encryptionService->encryptKeychain($keychain);
 
-        if(empty($keychain->getId())) {
-            $this->fireEvent('beforeCreated', $keychain);
-            $saved = $this->mapper->insert($keychain);
-            $this->fireEvent('created', $keychain);
-            $this->fireEvent('afterCreated', $keychain);
-        } else {
-            $this->fireEvent('beforeUpdated', $keychain);
-            $keychain->setUpdated(time());
-            $saved = $this->mapper->update($keychain);
-            $this->fireEvent('updated', $keychain);
-            $this->fireEvent('afterUpdated', $keychain);
-        }
-
-        return $saved;
+        return parent::save($keychain);
     }
 
     /**
