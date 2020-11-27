@@ -209,12 +209,15 @@ abstract class AbstractService {
     protected function fireEvent(string $name, ...$arguments) {
         $object = substr($this->class, strrpos($this->class, '\\')+1);
         $eventClassPart = ucfirst($name);
+        $eventModifier  = '';
         if(substr($name, 0, 6) === 'before') {
+            $eventModifier  = 'Before';
             $eventClassPart = ucfirst(substr($name, 6));
         } else if(substr($name, 0, 5) === 'after') {
+            $eventModifier  = 'After';
             $eventClassPart = ucfirst(substr($name, 5));
         }
-        $eventClassName = "\\OCA\\Passwords\\Events\\{$object}\\{$object}{$eventClassPart}Event";
+        $eventClassName = "\\OCA\\Passwords\\Events\\{$object}\\{$eventModifier}{$object}{$eventClassPart}Event";
 
         if(class_exists($eventClassName)) {
             $eventClass = new $eventClassName(...$arguments);
