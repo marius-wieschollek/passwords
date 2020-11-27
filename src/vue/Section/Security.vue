@@ -86,11 +86,12 @@
                 this.detail.type = 'none';
 
                 if(this.$route.params.status !== undefined) {
-                    let status = this.$route.params.status,
+                    let status = parseInt(this.$route.params.status),
                         model = this.ui.showTags ? 'model+tags':'model';
 
                     API.findPasswords({status: status}, model)
-                        .then((d) => {this.updatePasswordList(d, status);});
+                        .then((d) => {this.updatePasswordList(d, status);})
+                        .catch(console.error);
                     if(!this.passwords.length) this.loading = true;
                 } else {
                     this.loading = false;
@@ -98,7 +99,7 @@
                 }
             },
             updatePasswordList: function(passwords, status) {
-                if(this.$route.params.status === status) {
+                if(parseInt(this.$route.params.status) === status) {
                     this.loading = false;
                     this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                 }
