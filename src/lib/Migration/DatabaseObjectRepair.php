@@ -3,6 +3,7 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
+use OCA\Passwords\Exception\Migration\UpgradeUnsupportedException;
 use OCA\Passwords\Migration\DatabaseRepair\FolderModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\FolderRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordModelRepair;
@@ -10,6 +11,7 @@ use OCA\Passwords\Migration\DatabaseRepair\PasswordRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordTagRelationRepair;
 use OCA\Passwords\Migration\DatabaseRepair\TagModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\TagRevisionRepair;
+use OCA\Passwords\Services\ConfigurationService;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -19,6 +21,12 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class DatabaseObjectRepair implements IRepairStep {
+    const MINIMUM_UPGRADE_VERSION = '2020.1.0';
+
+    /**
+     * @var ConfigurationService
+     */
+    protected ConfigurationService $config;
 
     /**
      * @var TagModelRepair
@@ -58,6 +66,7 @@ class DatabaseObjectRepair implements IRepairStep {
     /**
      * DatabaseObjectRepair constructor.
      *
+     * @param ConfigurationService      $config
      * @param TagModelRepair            $tagModelRepair
      * @param FolderModelRepair         $folderModelRepair
      * @param TagRevisionRepair         $tagRevisionRepair
@@ -67,6 +76,7 @@ class DatabaseObjectRepair implements IRepairStep {
      * @param PasswordTagRelationRepair $passwordTagRelationRepair
      */
     public function __construct(
+        ConfigurationService $config,
         TagModelRepair $tagModelRepair,
         FolderModelRepair $folderModelRepair,
         TagRevisionRepair $tagRevisionRepair,
@@ -75,6 +85,7 @@ class DatabaseObjectRepair implements IRepairStep {
         PasswordRevisionRepair $passwordRevisionRepair,
         PasswordTagRelationRepair $passwordTagRelationRepair
     ) {
+        $this->config                    = $config;
         $this->tagModelRepair            = $tagModelRepair;
         $this->folderModelRepair         = $folderModelRepair;
         $this->tagRevisionRepair         = $tagRevisionRepair;
@@ -104,6 +115,8 @@ class DatabaseObjectRepair implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
+        $this->canUpgradeFromPreviousVersion();
+
         $this->tagRevisionRepair->run($output);
         $this->folderRevisionRepair->run($output);
         $this->passwordRevisionRepair->run($output);
@@ -111,5 +124,17 @@ class DatabaseObjectRepair implements IRepairStep {
         $this->folderModelRepair->run($output);
         $this->passwordModelRepair->run($output);
         $this->passwordTagRelationRepair->run($output);
+    }
+
+    /**
+     * @throws UpgradeUnsupportedException if the previous version is below the minimum requirement
+     */
+    protected function canUpgradeFromPreviousVersion() {
+        $previousVersion = $this->config->getAppValue('installed_version', '0.0.0');
+        if($previousVersion === '0.0.0') return;
+
+        if(version_compare(self::MINIMUM_UPGRADE_VERSION, $previousVersion) === 1) {
+            throw new UpgradeUnsupportedException($previousVersion, self::MINIMUM_UPGRADE_VERSION);
+        }
     }
 }
