@@ -92,7 +92,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         if($withModel) {
             $object = $this->getModel($tag, $revision);
         } else {
-            $object = ['id' => $tag->getUuid()];
+            $object = ['id' => $tag->getUuid(), 'revision' => $revision->getUuid()];
         }
         if(in_array(self::LEVEL_REVISIONS, $detailLevel)) {
             $object = $this->getRevisions($tag, $object);
