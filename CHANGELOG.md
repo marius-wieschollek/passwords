@@ -1,7 +1,14 @@
 ## [Unreleased]
+
+## 2020.12.0 - Feature release
 ### Added
  - Configurable default options for sharing
  - Highlight password entry with details open
+### Changed
+ - API always returns current revision id
+### Fixed
+ - Security section fails to load passwords
+ - Search hotkey missing in NC20
 
 ## 2020.11.1 - Bugfix release
 ### Fixed
