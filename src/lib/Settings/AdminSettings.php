@@ -389,12 +389,12 @@ class AdminSettings implements ISettings {
             'https'  => $this->request->getHttpProtocol() === 'https',
             'php'    => [
                 'warn'    => PHP_VERSION_ID < 70400,
-                'error'   => PHP_VERSION_ID < 70300,
+                'error'   => PHP_VERSION_ID < 70400,
                 'version' => PHP_VERSION
             ],
             'server' => [
                 'warn'    => $ncVersion < 20,
-                'error'   => $ncVersion < 17,
+                'error'   => $ncVersion < 20,
                 'version' => $ncVersion
             ],
             'eol'    => '2021.1.0'

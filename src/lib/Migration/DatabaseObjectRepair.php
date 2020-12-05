@@ -31,7 +31,7 @@ use OCP\Migration\IRepairStep;
  */
 class DatabaseObjectRepair implements IRepairStep {
 
-    const MINIMUM_UPGRADE_VERSION = '2019.12.0';
+    const MINIMUM_UPGRADE_VERSION = '2020.1.0';
 
     /**
      * @var ConfigurationService
