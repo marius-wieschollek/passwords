@@ -1,9 +1,8 @@
 <template>
-    <div class="row password"
-         @click="clickAction($event)"
+    <div @click="clickAction($event)"
          @dblclick="doubleClickAction($event)"
          @dragstart="dragStartAction($event)"
-         :class="{'details-open': detailsActive}"
+         :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
@@ -69,6 +68,7 @@ import PasswordManager from '@js/Manager/PasswordManager';
 import SettingsService from '@js/Services/SettingsService';
 import Favicon from "@vc/Favicon";
 import Events from "@js/Classes/Events";
+import SearchManager from "@js/Manager/SearchManager";
 
 export default {
     components: {
@@ -148,6 +148,20 @@ export default {
                 'Last modified on {date}',
                 {date: Localisation.formatDateTime(this.password.edited)}
             );
+        },
+        className() {
+            let classNames = 'row password';
+
+            if(this.detailsActive) classNames += ' details-open';
+            if(SearchManager.status.active) {
+                if(SearchManager.status.ids.indexOf(this.password.id) !== -1) {
+                    classNames += ' search-visible';
+                } else {
+                    classNames += ' search-hidden';
+                }
+            }
+
+            return classNames;
         }
     },
 

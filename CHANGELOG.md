@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+- Fix search results missing when details opened
 
 ## 2020.12.0 - Feature release
 ### Added

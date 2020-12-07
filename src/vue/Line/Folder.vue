@@ -1,5 +1,5 @@
 <template>
-    <div class="row folder"
+    <div :class="className"
          @click="openAction($event)"
          @dragstart="dragStartAction($event)"
          :data-folder-id="folder.id"
@@ -33,6 +33,7 @@
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
     import FolderManager from '@js/Manager/FolderManager';
+    import SearchManager from "@js/Manager/SearchManager";
 
     export default {
         components: {
@@ -57,6 +58,19 @@
             },
             dateTitle() {
                 return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.folder.edited, 'long')});
+            },
+            className() {
+                let classNames = 'row folder';
+
+                if(SearchManager.status.active) {
+                    if(SearchManager.status.ids.indexOf(this.folder.id) !== -1) {
+                        classNames += ' search-visible';
+                    } else {
+                        classNames += ' search-hidden';
+                    }
+                }
+
+                return classNames;
             }
         },
 

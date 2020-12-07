@@ -9,17 +9,12 @@ class SearchManager {
 
     constructor() {
         this._db = {};
-        this._status = {active: false, available: false, query: '', total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
+        this._status = {active: false, available: false, query: '', ids: [], total: 0, passwords: 0, folders: 0, tags: 0, time: 0};
         this._index = null;
         this._indexFields = {
             passwords: ['website', 'username', 'url', 'type', 'password', 'notes', 'label', 'id', 'revision', 'edited', 'status', 'statusCode', 'favorite', 'sseType', 'cseType', 'hash'],
             folders  : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType'],
             tags     : ['label', 'type', 'id', 'revision', 'edited', 'sseType', 'cseType']
-        };
-        this._domIdentifiers = {
-            passwords: 'data-password-id',
-            folders  : 'data-folder-id',
-            tags     : 'data-tag-id'
         };
         this._exactMatchFields = ['status', 'favorite'];
         this._aliasFields =
@@ -59,9 +54,15 @@ class SearchManager {
                     if(e.key === 'f' && e.ctrlKey) {
                         if(document.activeElement !== searchBox) searchBox.focus();
                     }
-                })
+                });
             }
 
+            let reset = document.querySelector('form.searchbox button[type="reset"]');
+            if(reset) {
+                reset.addEventListener('click', (e) => {
+                    this.search();
+                });
+            }
         } else if(OC.Plugins) {
             new OCA.Search((q) => {this.search(q);}, () => {this.search();});
             document.querySelector('form.searchbox').style.opacity = '0';
@@ -82,26 +83,19 @@ class SearchManager {
             return;
         }
 
-        let stats        = {passwords: 0, folders: 0, tags: 0, start: new Date().getTime()},
+        let stats        = {passwords: 0, folders: 0, tags: 0, ids: [], start: new Date().getTime()},
             searchParams = this._processQuery(query),
             index        = this._getSearchIndex();
         for(let key in index) {
             if(!index.hasOwnProperty(key)) continue;
-            let section    = index[key],
-                identifier = this._domIdentifiers[key];
+            let section    = index[key];
 
             for(let i = 0; i < section.length; i++) {
-                let object = section[i],
-                    el     = document.querySelector(`[${identifier}="${object.id}"]`);
-                if(!el) continue;
+                let object = section[i];
 
                 if(this._checkIfObjectMatchesQuery(object, searchParams)) {
-                    if(el.classList.contains('search-hidden')) el.classList.remove('search-hidden');
-                    el.classList.add('search-visible');
+                    stats.ids.push(object.id);
                     stats[key]++;
-                } else {
-                    if(el.classList.contains('search-visible')) el.classList.remove('search-visible');
-                    el.classList.add('search-hidden');
                 }
             }
         }
@@ -121,6 +115,7 @@ class SearchManager {
         this._status.passwords = stats.passwords;
         this._status.folders = stats.folders;
         this._status.tags = stats.tags;
+        this._status.ids = stats.ids;
         this._status.time = new Date().getTime() - stats.start;
     }
 
@@ -196,12 +191,6 @@ class SearchManager {
      */
     _resetSearch() {
         this._status.active = false;
-        let elements = document.querySelectorAll('.search-hidden, .search-visible');
-
-        elements.forEach((el) => {
-            el.classList.remove('search-hidden');
-            el.classList.remove('search-visible');
-        });
     }
 
     /**
