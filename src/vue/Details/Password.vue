@@ -74,6 +74,7 @@
             Events.on('password.changed', this.processEvent);
             Events.on('password.deleted', this.processEvent);
             this.refreshView();
+            Events.emit('details.open', this.object);
         },
 
         beforeDestroy() {
@@ -141,6 +142,7 @@
 
                 this.object = value;
                 if(!value.hasOwnProperty('revisions')) this.refreshView();
+                Events.emit('details.open', value);
             }
         }
     };

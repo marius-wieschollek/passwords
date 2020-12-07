@@ -1,5 +1,5 @@
 <template>
-    <div class="row tag" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
+    <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
         <i class="fa fa-star favorite" :class="{ active: tag.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
@@ -27,6 +27,7 @@
     import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
     import Localisation from "@js/Classes/Localisation";
+    import SearchManager from "@js/Manager/SearchManager";
 
     export default {
         components: {
@@ -51,6 +52,19 @@
             },
             dateTitle() {
                 return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.tag.edited, 'long')});
+            },
+            className() {
+                let classNames = 'row tag';
+
+                if(SearchManager.status.active) {
+                    if(SearchManager.status.ids.indexOf(this.tag.id) !== -1) {
+                        classNames += ' search-visible';
+                    } else {
+                        classNames += ' search-hidden';
+                    }
+                }
+
+                return classNames;
             }
         },
 
