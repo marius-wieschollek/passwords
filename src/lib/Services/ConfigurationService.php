@@ -207,7 +207,10 @@ class ConfigurationService {
      * @return string
      */
     public function getTempDir(): string {
-        return $this->getSystemValue('tempdirectory', '/tmp/');
+        $tempDir = $this->getSystemValue('tempdirectory', '/tmp/');
+        if(substr($tempDir, -1) !== DIRECTORY_SEPARATOR) $tempDir.=DIRECTORY_SEPARATOR;
+
+        return $tempDir;
     }
 
     /**

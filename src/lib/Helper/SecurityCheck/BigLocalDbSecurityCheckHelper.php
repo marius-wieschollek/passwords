@@ -8,7 +8,9 @@
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
+use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipAccessException;
 use OCA\Passwords\Exception\SecurityCheck\PasswordDatabaseDownloadException;
+use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsFileAccessException;
 use Throwable;
 use ZipArchive;
 
@@ -99,7 +101,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
                 rename($this->config->getTempDir().$name, $txtFile);
                 $zip->close();
             } else {
-                throw new Exception('Unable to read common passwords zip file');
+                throw new BreachedPasswordsZipAccessException();
             }
         } catch(Throwable $e) {
             if(is_file($txtFile)) @unlink($txtFile);
@@ -114,6 +116,8 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * But it also needs 15x the time.
      *
      * @param string $txtFile
+     *
+     * @throws BreachedPasswordsFileAccessException
      */
     protected function lowMemoryHashAlgorithm(string $txtFile): void {
         $null = null;
@@ -121,6 +125,8 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
             $hexKey = dechex($i);
             $hashes = [];
             $file   = fopen($txtFile, 'r');
+            if($file === false) throw new BreachedPasswordsFileAccessException($file);
+
             while(($line = fgets($file)) !== false) {
                 [$first, $second] = explode("\t", "$line\t000000");
 
@@ -152,11 +158,15 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * It is also quite fast.
      *
      * @param string $txtFile
+     *
+     * @throws BreachedPasswordsFileAccessException
      */
     protected function highMemoryHashAlgorithm(string $txtFile): void {
         $null   = null;
         $hashes = [];
         $file   = fopen($txtFile, 'r');
+        if($file === false) throw new BreachedPasswordsFileAccessException($file);
+
         while(($line = fgets($file)) !== false) {
             [$first, $second] = explode("\t", "$line\t000000");
 

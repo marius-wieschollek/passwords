@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
 - Fix search results missing when details opened
+- Fix broken temp directory path
 
 ## 2020.12.0 - Feature release
 ### Added
