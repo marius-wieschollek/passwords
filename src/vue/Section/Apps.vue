@@ -141,7 +141,7 @@ export default {
                 'daper'  : {
                     'label'      : 'Nextcloud Passwords',
                     'author'     : Localisation.translate('created by {author}', {author: 'daper'}),
-                    'description': 'Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.',
+                    'description': 'A modern, fast and lightweight app to access and manage your passwords from your Android device.',
                     'download'   : 'https://play.google.com/store/apps/details?id=com.nextcloudpasswords',
                     'sources'    : 'https://github.com/daper/nextcloud-passwords-app',
                     'web'        : 'https://github.com/daper',
@@ -150,7 +150,7 @@ export default {
                 'joleaf' : {
                     'label'      : 'NC Passwords',
                     'author'     : Localisation.translate('created by {author}', {author: 'joleaf'}),
-                    'description': 'Android App for the Nextcloud Passwords add-on, which includes actions for viewing, editing and creating the passwords',
+                    'description': 'A fast and polished Android App for Passwords to view, edit and create passwords and folders on the go.',
                     'download'   : 'https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app',
                     'sources'    : 'https://gitlab.com/joleaf/nc-passwords-app',
                     'web'        : 'https://github.com/joleaf',
