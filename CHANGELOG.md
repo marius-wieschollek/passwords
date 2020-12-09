@@ -1,7 +1,8 @@
 ## [Unreleased]
 ### Fixed
-- Fix search results missing when details opened
-- Fix broken temp directory path
+ - Fix search results missing when details opened
+ - Fix broken temp directory path
+ - Fix missing app description translations
 
 ## 2020.12.0 - Feature release
 ### Added
