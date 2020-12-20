@@ -2,7 +2,9 @@
 ### Fixed
  - Fix search results missing when details opened
  - Fix broken temp directory path
+ - Fix crash when user token is missing
  - Fix missing app description translations
+ - Fix missing email and notification translations
 
 ## 2020.12.0 - Feature release
 ### Added
