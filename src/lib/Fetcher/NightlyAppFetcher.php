@@ -150,6 +150,8 @@ class NightlyAppFetcher extends Fetcher {
     protected function fetch($ETag, $content) {
         $json = parent::fetch($ETag, $content);
 
+        if(!isset($json['data'])) return $json;
+
         foreach($json['data'] as $dataKey => $app) {
             $latest = null;
             if(empty($app['releases'])) continue;

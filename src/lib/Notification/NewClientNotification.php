@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Notification;
@@ -89,7 +93,7 @@ class NewClientNotification extends AbstractNotification {
      * @return string
      */
     protected function getTitle(IL10N $localisation): string {
-        return $localisation->t('A new client was added');
+        return $localisation->t('A new client or app was connected to your account');
     }
 
     /**
@@ -99,10 +103,12 @@ class NewClientNotification extends AbstractNotification {
      * @return string
      */
     protected function getMessage(IL10N $localisation, string $client): string {
+        $label = $this->themingSettings->get('label');
+
         return
-            $localisation->t('A new client with the name "%s" was connected successfully to Passwords with PassLink.', [$client])
+            $localisation->t('"%s" was granted access to your %s Passwords account via PassLink.', [$client, $label])
             .' '.
-            $localisation->t('You can manage all connected devices and apps in the %s security section.', [$this->themingSettings->get('label')]);
+            $localisation->t('You can manage all connected devices and apps in your %s settings in the security section.', [$label]);
     }
 
     /**

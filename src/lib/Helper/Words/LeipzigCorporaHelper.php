@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Words;
 
+use GuzzleHttp\RequestOptions;
 use Exception;
 use OCP\Http\Client\IClientService;
 
@@ -202,7 +203,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
 
         try {
             $client   = $this->httpClientService->newClient();
-            $response = $client->head(LeipzigCorporaHelper::SERVICE_URL);
+            $response = $client->head(LeipzigCorporaHelper::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
 
             $this->isAvailable = $response->getStatusCode() === 200;
 

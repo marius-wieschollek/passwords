@@ -172,10 +172,14 @@
         "Open passwords"                                                                            : "Passwörter öffnen",
         "View apps"                                                                                 : "Apps anzeigen",
         "View apps & devices"                                                                       : "Apps & Geräte anzeigen",
+        "Manage devices & apps"                                                                     : "Apps & Geräte verwalten",
         "View shared passwords"                                                                     : "Geteilte Passwörter anzeigen",
         "App upgrade recommended"                                                                   : "App-Aktualisierung empfohlen",
         "Your version of the passwords app is outdated and should be upgraded."                     : "Diese Version der Passwörter-App ist veraltet und sollte aktualisiert werden.",
-        "To install the current version, Nextcloud %s and PHP %s are necessary."                    : "Um die aktuelle Version zu installieren sind Nextcloud %s und PHP %s notwendig."
+        "To install the current version, Nextcloud %s and PHP %s are necessary."                    : "Um die aktuelle Version zu installieren sind Nextcloud %s und PHP %s notwendig.",
+        "A new client or app was connected to your account"                                         : "Eine neue App wurde mit deinem Konto verknüpft",
+        "\"%s\" was granted access to your %s Passwords account via PassLink."                      : "\"%s\" wurde Zugriff auf dein %s Passwörter Konto mittels PassLink gewährt.",
+        "You can manage all connected devices and apps in your %s settings in the security section.": "Du kannst alle verknüpften Geräte und Apps in den %s Einstellungen im Bereich \"Sicherheit\" verwalten."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
