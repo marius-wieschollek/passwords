@@ -1,4 +1,11 @@
 ## [Unreleased]
+### Added
+ - System report command
+### Changed
+ - DAS features managed by NC, not Github
+### Removed
+ - Nextcloud 17, 18 and 19 support
+ - PHP 7.2 and PHP 7.3 support
 
 ## 2020.12.1 - Bugfix release
 ### Changed
