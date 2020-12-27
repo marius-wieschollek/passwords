@@ -108,7 +108,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </screenshot>
     <dependencies>
         <php min-version="7.4" />
-        <nextcloud min-version="20" max-version="20" />
+        <nextcloud min-version="20" max-version="21" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>

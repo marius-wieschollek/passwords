@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Added
+ - Nextcloud 21 support
  - System report command
 ### Changed
  - DAS features managed by NC, not Github
