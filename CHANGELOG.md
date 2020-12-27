@@ -1,10 +1,16 @@
 ## [Unreleased]
+
+## 2020.12.1 - Bugfix release
+### Changed
+ - Improved swedish translations
 ### Fixed
  - Fix search results missing when details opened
  - Fix broken temp directory path
  - Fix crash when user token is missing
  - Fix missing app description translations
  - Fix missing email and notification translations
+ - Fix timeout in admin settings
+ - Fix key generation for encryption password change
 
 ## 2020.12.0 - Feature release
 ### Added
