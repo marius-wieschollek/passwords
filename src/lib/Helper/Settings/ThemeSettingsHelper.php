@@ -11,6 +11,7 @@ use OC_Defaults;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
+use Throwable;
 
 /**
  * Class ThemeSettingsHelper
@@ -22,17 +23,17 @@ class ThemeSettingsHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var OC_Defaults
      */
-    protected $theming;
+    protected OC_Defaults $theming;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * ThemeSettingsHelper constructor.
@@ -147,8 +148,7 @@ class ThemeSettingsHelper {
             if(in_array($this->config->getUserValue('theme', 'none', null, 'accessibility'), ['themedark', 'dark'])) {
                 return '#181818';
             }
-        } catch(\Throwable $e) {
-
+        } catch(Throwable $e) {
         }
 
         if($this->config->isAppEnabled('breezedark')) {

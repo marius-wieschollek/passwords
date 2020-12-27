@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\Words;
 
 use GuzzleHttp\RequestOptions;
+use Exception;
 use OCP\Http\Client\IClientService;
 
 /**
@@ -22,22 +23,22 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     /**
      * @var bool
      */
-    protected static $isAvailable = false;
+    protected bool $isAvailable = false;
 
     /**
      * @var string
      */
-    protected $langCode;
+    protected string $langCode;
 
     /**
      * @var SpecialCharacterHelper
      */
-    protected $specialCharacters;
+    protected SpecialCharacterHelper $specialCharacters;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * LocalWordsHelper constructor.
@@ -55,7 +56,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     /**
      * @inheritDoc
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
         $corpora = $this->selectCorpora();
@@ -70,7 +71,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
 
     /**
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     protected function selectCorpora(): string {
         $data     = $this->fetchJsonFromApi('corpora/availableCorpora');
@@ -83,7 +84,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
      * @param string $path
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function fetchJsonFromApi(string $path): array {
         $httpClient = $this->httpClientService->newClient();
@@ -97,7 +98,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
      * @param     $data
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function processWords(int $strength, array $data): array {
         $minLength = 16 + $strength * 4;
@@ -116,7 +117,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
         }
 
         if($curLength < $minLength || count($words) <= $strength) {
-            throw new \Exception('Unable to find enough words matching the requirements');
+            throw new Exception('Unable to find enough words matching the requirements');
         }
 
         return $words;
@@ -158,7 +159,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
      * @param array $data
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function processCorpora(array $prefixes, array $data): string {
         foreach($prefixes as $prefix) {
@@ -177,7 +178,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
             }
         }
 
-        throw new \Exception('Unable to find corpora');
+        throw new Exception('Unable to find corpora');
     }
 
     /**
@@ -198,16 +199,16 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
      * @inheritDoc
      */
     public function isAvailable(): bool {
-        if(static::$isAvailable) return static::$isAvailable;
+        if($this->isAvailable) return $this->isAvailable;
 
         try {
             $client   = $this->httpClientService->newClient();
             $response = $client->head(LeipzigCorporaHelper::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
 
-            static::$isAvailable = $response->getStatusCode() === 200;
+            $this->isAvailable = $response->getStatusCode() === 200;
 
-            return static::$isAvailable;
-        } catch(\Exception $e) {
+            return $this->isAvailable;
+        } catch(Exception $e) {
             return false;
         }
     }

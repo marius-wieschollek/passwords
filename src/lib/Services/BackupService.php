@@ -2,9 +2,12 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\Helper\Backup\CreateBackupHelper;
 use OCA\Passwords\Helper\Backup\RestoreBackupHelper;
 use OCP\Files\IAppData;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Files\SimpleFS\ISimpleFolder;
 use OCP\Util;
@@ -21,27 +24,30 @@ class BackupService {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IAppData
      */
-    protected $appData;
+    protected IAppData $appData;
 
     /**
      * @var CreateBackupHelper
      */
-    protected $createBackupHelper;
+    protected CreateBackupHelper $createBackupHelper;
 
     /**
      * @var RestoreBackupHelper
      */
-    protected $restoreBackupHelper;
+    protected RestoreBackupHelper $restoreBackupHelper;
 
     /**
      * BackupService constructor.
      *
-     * @param CreateBackupHelper $createBackupHelper
+     * @param IAppData             $appData
+     * @param CreateBackupHelper   $createBackupHelper
+     * @param RestoreBackupHelper  $restoreBackupHelper
+     * @param ConfigurationService $config
      */
     public function __construct(IAppData $appData, CreateBackupHelper $createBackupHelper, RestoreBackupHelper $restoreBackupHelper, ConfigurationService $config) {
         $this->appData             = $appData;
@@ -55,10 +61,10 @@ class BackupService {
      *
      * @param string|null $folder
      *
-     * @return \OCP\Files\SimpleFS\ISimpleFile
-     * @throws \OCP\Files\NotFoundException
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \Exception
+     * @return ISimpleFile
+     * @throws NotFoundException
+     * @throws NotPermittedException
+     * @throws Exception
      */
     public function createBackup(?string $name = null, string $folder = self::BACKUPS): ISimpleFile {
         if(empty($name)) {
@@ -87,8 +93,8 @@ class BackupService {
     /**
      * @param string|null $location
      *
-     * @return \OCP\Files\SimpleFS\ISimpleFile[]
-     * @throws \OCP\Files\NotPermittedException
+     * @return ISimpleFile[]
+     * @throws NotPermittedException
      */
     public function getBackups(?string $location = null): array {
         $folders = [self::BACKUPS, self::AUTO_BACKUPS];
@@ -117,7 +123,7 @@ class BackupService {
      */
     public function getBackupInfo(ISimpleFile $backup): array {
         $name = $backup->getName();
-        preg_match('/^([\w\-\.]+)(\.json(\.gz)?)$/', $name, $matches);
+        preg_match('/^([\w\-.]+)(\.json(\.gz)?)$/', $name, $matches);
 
         return [
             'label'  => $matches[1],
@@ -132,9 +138,9 @@ class BackupService {
      * @param array  $options
      *
      * @return bool
-     * @throws \OCP\Files\NotFoundException
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \Exception
+     * @throws NotFoundException
+     * @throws NotPermittedException
+     * @throws Exception
      */
     public function restoreBackup(string $name, $options = []): bool {
         $backups = $this->getBackups();
@@ -143,7 +149,7 @@ class BackupService {
         $file = $backups[ $name ];
         $data = $file->getContent();
         if(substr($file->getName(), -2) === 'gz') {
-            if(!extension_loaded('zlib')) throw new \Exception('PHP extension zlib is required to read compressed backups.');
+            if(!extension_loaded('zlib')) throw new Exception('PHP extension zlib is required to read compressed backups.');
 
             $data = gzdecode($data);
         }
@@ -153,7 +159,7 @@ class BackupService {
     }
 
     /**
-     * @throws \OCP\Files\NotPermittedException
+     * @throws NotPermittedException
      */
     public function removeOldBackups(): void {
         $maxBackups = $this->config->getAppValue('backup/files/maximum', 14);
@@ -171,13 +177,13 @@ class BackupService {
     /**
      * @param string $name
      *
-     * @return \OCP\Files\SimpleFS\ISimpleFolder
-     * @throws \OCP\Files\NotPermittedException
+     * @return ISimpleFolder
+     * @throws NotPermittedException
      */
     public function getBackupFolder(string $name = self::BACKUPS): ISimpleFolder {
         try {
             return $this->appData->getFolder($name);
-        } catch(\OCP\Files\NotFoundException $e) {
+        } catch(NotFoundException $e) {
             return $this->appData->newFolder($name);
         }
     }

@@ -16,7 +16,6 @@ use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
-use OCP\AppFramework\QueryException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
@@ -33,27 +32,27 @@ abstract class AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = 'af';
+    protected string $prefix = 'af';
 
     /**
      * @var AbstractImageHelper
      */
-    protected $imageHelper;
+    protected AbstractImageHelper $imageHelper;
 
     /**
      * @var IClientService
      */
-    protected $requestService;
+    protected IClientService $requestService;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var FallbackIconGenerator
      */
-    protected $fallbackIconGenerator;
+    protected FallbackIconGenerator $fallbackIconGenerator;
 
     /**
      * AbstractFaviconHelper constructor.
@@ -62,8 +61,6 @@ abstract class AbstractFaviconHelper {
      * @param IClientService        $requestService
      * @param FileCacheService      $fileCacheService
      * @param FallbackIconGenerator $fallbackIconGenerator
-     *
-     * @throws QueryException
      */
     public function __construct(
         HelperService $helperService,

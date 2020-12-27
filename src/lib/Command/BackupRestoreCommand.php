@@ -25,7 +25,7 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * BackupRestoreCommand constructor.

@@ -25,7 +25,7 @@ abstract class AbstractApiController extends ApiController {
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated'];
+    protected array $allowedFilterFields = ['created', 'updated'];
 
     /**
      * AbstractApiController constructor.

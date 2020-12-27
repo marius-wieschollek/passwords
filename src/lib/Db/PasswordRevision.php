@@ -36,47 +36,47 @@ class PasswordRevision extends AbstractRevision {
     /**
      * @var string
      */
-    protected $url;
+    protected string $url;
 
     /**
      * @var string
      */
-    protected $username;
+    protected string $username;
 
     /**
      * @var string
      */
-    protected $password;
+    protected string $password;
 
     /**
      * @var string
      */
-    protected $notes;
+    protected string $notes;
 
     /**
      * @var string
      */
-    protected $hash;
+    protected string $hash;
 
     /**
      * @var string
      */
-    protected $folder;
+    protected string $folder;
 
     /**
      * @var int
      */
-    protected $status;
+    protected int $status;
 
     /**
      * @var string
      */
-    protected $statusCode;
+    protected string $statusCode;
 
     /**
      * @var string
      */
-    protected $customFields;
+    protected string $customFields;
 
     /**
      * Password constructor.

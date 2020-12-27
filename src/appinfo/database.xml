@@ -705,7 +705,7 @@
             </field>
             <index>
                 <name>pw_password_tag_index</name>
-                <unique>1</unique>
+                <unique>0</unique>
                 <field>
                     <name>tag</name>
                 </field>

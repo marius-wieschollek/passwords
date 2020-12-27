@@ -1,12 +1,17 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Migration;
 
+use Exception;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
@@ -21,7 +26,7 @@ class ClearAppCaches implements IRepairStep {
     /**
      * @var FileCacheService
      */
-    protected $fileCache;
+    protected FileCacheService $fileCache;
 
     /**
      * ClearAppCaches constructor.
@@ -48,7 +53,7 @@ class ClearAppCaches implements IRepairStep {
      *
      * @param IOutput $output
      *
-     * @throws \Exception in case of failure
+     * @throws Exception in case of failure
      * @since 9.1.0
      */
     public function run(IOutput $output) {

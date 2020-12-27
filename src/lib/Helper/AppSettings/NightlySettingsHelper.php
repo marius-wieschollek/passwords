@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\AppSettings;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Fetcher\NightlyAppFetcher;
 use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
@@ -21,22 +22,22 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
     /**
      * @var NightlyAppFetcher
      */
-    protected $nightlyAppFetcher;
+    protected NightlyAppFetcher $nightlyAppFetcher;
 
     /**
      * @var BackgroundJobService
      */
-    protected $backgroundJobService;
+    protected BackgroundJobService $backgroundJobService;
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'nightly';
+    protected string $scope = 'nightly';
 
     /**
      * @var array
      */
-    protected $keys
+    protected array $keys
         = [
             'enabled' => 'nightly/enabled'
         ];
@@ -44,7 +45,7 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $types
+    protected array $types
         = [
             'enabled' => 'boolean'
         ];
@@ -52,7 +53,7 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $defaults
+    protected array $defaults
         = [
             'enabled' => false
         ];
@@ -75,7 +76,7 @@ class NightlySettingsHelper extends AbstractSettingsHelper {
      * @param        $value
      *
      * @return array
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function set(string $key, $value): array {
 

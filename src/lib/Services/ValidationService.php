@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
@@ -15,6 +16,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCP\AppFramework\IAppContainer;
+use Throwable;
 
 /**
  * Class ValidationService
@@ -26,7 +28,7 @@ class ValidationService {
     /**
      * @var IAppContainer
      */
-    protected $container;
+    protected IAppContainer $container;
 
     /**
      * ValidationService constructor.
@@ -111,20 +113,23 @@ class ValidationService {
      *
      * @return RevisionInterface
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function validateObject(RevisionInterface $object): RevisionInterface {
 
         switch(get_class($object)) {
             case PasswordRevision::class:
+                /** @var $object PasswordRevision */
                 return $this->validatePassword($object);
             case FolderRevision::class:
+                /** @var $object FolderRevision */
                 return $this->validateFolder($object);
             case TagRevision::class:
+                /** @var $object TagRevision */
                 return $this->validateTag($object);
         }
 
-        throw new \Exception('Unknown object type');
+        throw new Exception('Unknown object type');
     }
 
     /**
@@ -133,7 +138,7 @@ class ValidationService {
      * @return bool
      */
     public function isValidDomain(string $domain): bool {
-        if(!preg_match("/^(([\w_-]+\.){1,}[\w_-]+)(:[0-9]+)?$/", $domain, $matches)) return false;
+        if(!preg_match("/^(([\w_-]+\.)+[\w_-]+)(:[0-9]+)?$/", $domain, $matches)) return false;
         if(!checkdnsrr($matches[1], 'A')) return false;
 
         return true;
@@ -145,7 +150,7 @@ class ValidationService {
      * @return bool
      */
     public function isValidUuid(string $uuid): bool {
-        return preg_match("/^[0-9a-z]{8}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{4}\-[0-9a-z]{12}$/", $uuid) === 1;
+        return preg_match("/^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/", $uuid) === 1;
     }
 
     /**
@@ -160,13 +165,13 @@ class ValidationService {
                 return FolderService::BASE_FOLDER_UUID;
             } else {
                 try {
-                    $folderRevisionService = $this->container->query(FolderRevisionService::class);
+                    $folderRevisionService = $this->container->get(FolderRevisionService::class);
                     /** @var FolderRevision $folderRevision */
                     $folderRevision = $folderRevisionService->findCurrentRevisionByModel($folderUuid, false);
                     if($folderRevision->isHidden() && !$isHidden) {
                         return FolderService::BASE_FOLDER_UUID;
                     }
-                } catch(\Throwable $e) {
+                } catch(Throwable $e) {
                     return FolderService::BASE_FOLDER_UUID;
                 }
             }

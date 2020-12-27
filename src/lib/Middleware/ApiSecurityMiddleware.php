@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Middleware;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\LoggingService;
 use OCP\AppFramework\Controller;
@@ -26,12 +27,12 @@ class ApiSecurityMiddleware extends Middleware {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * ApiSecurityMiddleware constructor.
@@ -62,12 +63,12 @@ class ApiSecurityMiddleware extends Middleware {
     /**
      * @param Controller $controller
      * @param string     $methodName
-     * @param \Exception $exception
+     * @param Exception $exception
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
-    public function afterException($controller, $methodName, \Exception $exception): JSONResponse {
+    public function afterException($controller, $methodName, Exception $exception): JSONResponse {
         if(!$this->isApiClass($controller)) throw $exception;
 
         $message    = 'Unable to complete request';

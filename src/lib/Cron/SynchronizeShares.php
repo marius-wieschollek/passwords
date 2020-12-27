@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
@@ -34,37 +35,37 @@ class SynchronizeShares extends AbstractTimedJob {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var MailService
      */
-    protected $mailService;
+    protected MailService $mailService;
 
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var NotificationService
      */
-    protected $notificationService;
+    protected NotificationService $notificationService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * @var array
      */
-    protected $notifications = ['created' => [], 'deleted' => [], 'loop' => []];
+    protected array $notifications = ['created' => [], 'deleted' => [], 'loop' => []];
 
     /**
      * SynchronizeShares constructor.
@@ -100,7 +101,7 @@ class SynchronizeShares extends AbstractTimedJob {
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($argument): void {
         if(!$this->canExecute()) return;
@@ -126,7 +127,7 @@ class SynchronizeShares extends AbstractTimedJob {
 
                 return true;
             }
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -134,7 +135,7 @@ class SynchronizeShares extends AbstractTimedJob {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function deleteOrphanedTargetPasswords(): void {
         $total = 0;
@@ -156,7 +157,7 @@ class SynchronizeShares extends AbstractTimedJob {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function deleteExpiredShares(): void {
         $total = 0;
@@ -179,7 +180,7 @@ class SynchronizeShares extends AbstractTimedJob {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createNewShares(): void {
         $shares = $this->shareService->findNew();
@@ -237,7 +238,7 @@ class SynchronizeShares extends AbstractTimedJob {
      *
      * @return bool
      * @throws MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws Exception
      */
     protected function shareLineageHasLoop(Share $share): bool {
         $sourceUuid = $share->getSourcePassword();
@@ -268,12 +269,10 @@ class SynchronizeShares extends AbstractTimedJob {
                 return false;
             }
         }
-
-        return false;
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function removeSharedAttribute(): void {
         $passwords = $this->passwordService->findShared();
@@ -294,8 +293,8 @@ class SynchronizeShares extends AbstractTimedJob {
 
     /**
      * @throws DoesNotExistException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws MultipleObjectsReturnedException
      */
     protected function updatePasswords(): void {
         $total = 0;
@@ -311,8 +310,8 @@ class SynchronizeShares extends AbstractTimedJob {
     /**
      * @return int
      * @throws DoesNotExistException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws MultipleObjectsReturnedException
      */
     protected function updateTargetPasswords(): int {
         $total = 0;
@@ -323,7 +322,6 @@ class SynchronizeShares extends AbstractTimedJob {
 
             foreach($shares as $share) {
                 if($share->getTargetPassword() === null) continue;
-                /** @var PasswordRevision $revision */
                 $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
                 /** @var Password $password */
@@ -363,8 +361,8 @@ class SynchronizeShares extends AbstractTimedJob {
     /**
      * @return int
      * @throws DoesNotExistException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws MultipleObjectsReturnedException
      */
     protected function updateSourcePasswords(): int {
         $total = 0;
@@ -395,7 +393,7 @@ class SynchronizeShares extends AbstractTimedJob {
      * @param string $targetUuid
      *
      * @return PasswordRevision
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createNewPasswordRevision(string $sourceUuid, string $targetUuid): PasswordRevision {
         /** @var PasswordRevision $sourceRevision */

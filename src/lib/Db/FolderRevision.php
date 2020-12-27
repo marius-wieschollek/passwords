@@ -17,11 +17,10 @@ namespace OCA\Passwords\Db;
  */
 class FolderRevision extends AbstractRevision {
 
-
     /**
      * @var string
      */
-    protected $parent;
+    protected string $parent;
 
     /**
      * Folder constructor.

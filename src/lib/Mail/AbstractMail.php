@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Mail;
 
+use Exception;
 use OC_Defaults;
 use OCA\Passwords\Services\LoggingService;
 use OCP\IL10N;
@@ -29,22 +30,22 @@ abstract class AbstractMail {
     /**
      * @var IMailer
      */
-    protected $mailer;
+    protected IMailer $mailer;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var OC_Defaults
      */
-    protected $defaults;
+    protected OC_Defaults $defaults;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * AbstractMail constructor.
@@ -107,7 +108,7 @@ abstract class AbstractMail {
 
         try {
             $this->mailer->send($message);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
     }

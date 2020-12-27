@@ -14,10 +14,8 @@ use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
-use OCP\AppFramework\QueryException;
 use OCP\IL10N;
 
 /**
@@ -30,22 +28,22 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var IL10N
      */
-    protected $localisation;
+    protected IL10N $localisation;
 
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'service';
+    protected string $scope = 'service';
 
     /**
      * @var array
      */
-    protected $keys
+    protected array $keys
         = [
             'security' => 'service/security',
             'words'    => 'service/words',
@@ -57,7 +55,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $defaults
+    protected array $defaults
         = [
             'security'    => HelperService::SECURITY_HIBP,
             'preview'     => HelperService::PREVIEW_DEFAULT,
@@ -146,7 +144,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @param string $setting
      *
      * @return string
-     * @throws ApiException|QueryException
+     * @throws ApiException
      */
     protected function getSettingDefault(string $setting) {
         switch($setting) {

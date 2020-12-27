@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\Words;
 
 use GuzzleHttp\RequestOptions;
+use Exception;
 use OCP\Http\Client\IClientService;
 
 /**
@@ -22,17 +23,17 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     /**
      * @var bool
      */
-    protected static $isAvailable = false;
+    protected bool $isAvailable = false;
 
     /**
      * @var SpecialCharacterHelper
      */
-    protected $specialCharacters;
+    protected SpecialCharacterHelper $specialCharacters;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * SnakesWordsHelper constructor.
@@ -58,15 +59,18 @@ class SnakesWordsHelper extends AbstractWordsHelper {
         $wordSets = [];
         foreach($optionSets as $options) {
             for($i = 0; $i < 24; $i++) {
-                $result = trim($this->getHttpRequest($options));
-                if(empty($result)) continue;
+                try {
+                    $result = trim($this->getHttpRequest($options));
+                    if(empty($result)) continue;
+                } catch(Exception $e) {
+                    continue;
+                }
 
                 $words = explode(' ', $result);
-
                 if($this->isWordsArrayValid($words)) {
                     $wordSets = array_merge($wordSets, $words);
                     continue 2;
-                };
+                }
             }
 
             return null;
@@ -82,6 +86,7 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @param array $options
      *
      * @return mixed
+     * @throws Exception
      */
     protected function getHttpRequest(array $options = []) {
         $httpClient = $this->httpClientService->newClient();
@@ -187,16 +192,16 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @inheritdoc
      */
     public function isAvailable(): bool {
-        if(static::$isAvailable) return static::$isAvailable;
+        if($this->isAvailable) return $this->isAvailable;
 
         try {
             $client   = $this->httpClientService->newClient();
             $response = $client->head(SnakesWordsHelper::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
 
-            static::$isAvailable = $response->getStatusCode() === 200;
+            $this->isAvailable = $response->getStatusCode() === 200;
 
-            return static::$isAvailable;
-        } catch(\Exception $e) {
+            return $this->isAvailable;
+        } catch(Exception $e) {
             return false;
         }
     }

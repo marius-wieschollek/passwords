@@ -7,9 +7,7 @@
 
 namespace OCA\Passwords\Helper\CleanUp;
 
-use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\AbstractService;
 use OCA\Passwords\Services\Object\ChallengeService;
@@ -23,6 +21,7 @@ use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\IUserManager;
+use Throwable;
 
 /**
  * Class CleanDeletedEntitiesHelper
@@ -34,77 +33,77 @@ class CleanDeletedEntitiesHelper {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var FolderService
      */
-    protected $folderService;
+    protected FolderService $folderService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var ChallengeService
      */
-    protected $challengeService;
+    protected ChallengeService $challengeService;
 
     /**
      * @var TagRevisionService
      */
-    protected $tagRevisionService;
+    protected TagRevisionService $tagRevisionService;
 
     /**
      * @var FolderRevisionService
      */
-    protected $folderRevisionService;
+    protected FolderRevisionService $folderRevisionService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $passwordTagRelationService;
+    protected PasswordTagRelationService $passwordTagRelationService;
 
     /**
      * @var array
      */
-    protected $userExists = [];
+    protected array $userExists = [];
 
     /**
      * @var int
      */
-    protected $time = 0;
+    protected int $time = 0;
 
     /**
      * CleanDeletedEntitiesHelper constructor.
@@ -181,7 +180,6 @@ class CleanDeletedEntitiesHelper {
      */
     protected function deleteObjects(AbstractService $service): int {
         try {
-            /** @var EntityInterface[] $objects */
             $objects = $service->findDeleted();
 
             $counter = 0;
@@ -193,7 +191,7 @@ class CleanDeletedEntitiesHelper {
             }
 
             return $counter;
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
 

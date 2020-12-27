@@ -36,37 +36,37 @@ class ConnectController extends Controller {
     /**
      * @var MailService
      */
-    protected $mails;
+    protected MailService $mails;
 
     /**
      * @var SessionService
      */
-    protected $session;
+    protected SessionService $session;
 
     /**
      * @var ApiTokenHelper
      */
-    protected $tokenHelper;
+    protected ApiTokenHelper $tokenHelper;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * @var ServerSettingsHelper
      */
-    protected $serverSettings;
+    protected ServerSettingsHelper $serverSettings;
 
     /**
      * @var RegistrationService
      */
-    protected $registrationService;
+    protected RegistrationService $registrationService;
 
     /**
      * ConnectController constructor.
@@ -188,7 +188,7 @@ class ConnectController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $label
+     * @param string|null $label
      *
      * @return JSONResponse
      */
@@ -224,9 +224,9 @@ class ConnectController extends Controller {
      *
      * @UserRateThrottle(limit=2, period=60)
      *
-     * @param string $id
-     * @param array  $codes
-     * @param string $label
+     * @param string      $id
+     * @param array       $codes
+     * @param string|null $label
      *
      * @return JSONResponse
      * @throws Exception
@@ -271,6 +271,7 @@ class ConnectController extends Controller {
 
             $this->registrationService->clearCache();
             try {
+                /** @var Registration $registration */
                 $registration = $this->registrationService->findByUuid($id);
             } catch(Throwable $e) {
                 return null;

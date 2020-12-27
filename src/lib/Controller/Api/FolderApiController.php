@@ -7,10 +7,14 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\FolderObjectHelper;
 use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\Object\AbstractModelService;
+use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\ValidationService;
@@ -28,24 +32,24 @@ use OCP\IRequest;
 class FolderApiController extends AbstractObjectApiController {
 
     /**
-     * @var FolderService
+     * @var FolderService|AbstractModelService
      */
-    protected $modelService;
+    protected AbstractModelService $modelService;
 
     /**
-     * @var FolderObjectHelper
+     * @var FolderObjectHelper|AbstractObjectHelper
      */
-    protected $objectHelper;
+    protected AbstractObjectHelper $objectHelper;
 
     /**
-     * @var FolderRevisionService
+     * @var FolderRevisionService|AbstractRevisionService
      */
-    protected $revisionService;
+    protected AbstractRevisionService $revisionService;
 
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favorite', 'parent'];
+    protected array $allowedFilterFields = ['created', 'updated', 'edited', 'cseType', 'sseType', 'trashed', 'favorite', 'parent'];
 
     /**
      * FolderApiController constructor.
@@ -81,7 +85,7 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(
         string $label,
@@ -126,7 +130,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws ApiException
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(
         string $id,
@@ -186,7 +190,7 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */

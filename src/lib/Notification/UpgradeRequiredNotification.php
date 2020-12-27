@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Notification;
 
+use Exception;
 use OCP\IL10N;
 use OCP\Notification\INotification;
 
@@ -26,6 +27,8 @@ class UpgradeRequiredNotification extends AbstractNotification {
      *
      * @param string $userId
      * @param array  $parameters
+     *
+     * @throws Exception
      */
     public function send(string $userId, array $parameters = []): void {
         $notification

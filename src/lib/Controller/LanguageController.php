@@ -25,12 +25,12 @@ class LanguageController extends Controller {
     /**
      * @var AppManager
      */
-    protected $appManager;
+    protected AppManager $appManager;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * LanguageController constructor.
@@ -60,7 +60,7 @@ class LanguageController extends Controller {
             $json = $this->readLanguageFile($section, $language);
 
             if($json !== null) return $this->createJsonResponse($json);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -106,7 +106,7 @@ class LanguageController extends Controller {
 
         $expires = new DateTime('@'.(time() + 2419200));
         $response->addHeader('Cache-Control', 'public, immutable, max-age=2419200')
-                 ->addHeader('Expires', $expires->format(\DateTime::RFC2822))
+                 ->addHeader('Expires', $expires->format(DateTime::RFC2822))
                  ->addHeader('Pragma', 'cache');
 
         return $response;

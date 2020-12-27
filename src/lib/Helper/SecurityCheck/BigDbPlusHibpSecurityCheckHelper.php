@@ -7,10 +7,12 @@
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
+use Exception;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class BigDbPlusHibpSecurityCheckHelper
@@ -24,12 +26,12 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
     /**
      * @var BigLocalDbSecurityCheckHelper
      */
-    protected $localSecurityCheck;
+    protected BigLocalDbSecurityCheckHelper $localSecurityCheck;
 
     /**
      * @var HaveIBeenPwnedHelper
      */
-    protected $hibpSecurityCheck;
+    protected HaveIBeenPwnedHelper $hibpSecurityCheck;
 
     /**
      * BigDbPlusHibpSecurityCheckHelper constructor.
@@ -62,7 +64,7 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @param string $hash
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function isHashSecure(string $hash): bool {
         return $this->localSecurityCheck->isHashSecure($hash) && $this->hibpSecurityCheck->isHashSecure($hash);
@@ -72,7 +74,7 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * Refresh the locally stored database with password hashes
      *
      * @return void
-     * @throws \Throwable
+     * @throws Throwable
      */
     function updateDb(): void {
         $this->localSecurityCheck->updateDb();

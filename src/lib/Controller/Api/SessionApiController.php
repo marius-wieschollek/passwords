@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\UserLoginAttemptHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
@@ -16,6 +17,8 @@ use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use ReflectionException;
+use stdClass;
 
 /**
  * Class SessionApiController
@@ -27,27 +30,27 @@ class SessionApiController extends AbstractApiController {
     /**
      * @var SessionService
      */
-    protected $session;
+    protected SessionService $session;
 
     /**
      * @var UserTokenHelper
      */
-    protected $tokenHelper;
+    protected UserTokenHelper $tokenHelper;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var UserLoginAttemptHelper
      */
-    protected $loginAttempts;
+    protected UserLoginAttemptHelper $loginAttempts;
 
     /**
      * SessionApiController constructor.
@@ -81,14 +84,14 @@ class SessionApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function request(): JSONResponse {
         if(!$this->loginAttempts->isAttemptAllowed()) {
             throw new ApiException('Login not allowed', Http::STATUS_FORBIDDEN);
         }
 
-        $requirements = new \stdClass();
+        $requirements = new stdClass();
         if(!$this->session->isAuthorized()) {
             if($this->challengeService->hasChallenge()) {
                 $requirements->challenge = $this->challengeService->getChallengeData();
@@ -110,7 +113,7 @@ class SessionApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function open(): JSONResponse {
         if(!$this->loginAttempts->isAttemptAllowed()) {
@@ -137,10 +140,10 @@ class SessionApiController extends AbstractApiController {
      * @param $provider
      *
      * @return JSONResponse
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function requestToken($provider): JSONResponse {
-        list($result, $data) = $this->tokenHelper->triggerProvider($provider);
+        [$result, $data] = $this->tokenHelper->triggerProvider($provider);
 
         return new JSONResponse(['success' => $result, 'data' => $data], $result ? Http::STATUS_OK:Http::STATUS_BAD_REQUEST);
     }

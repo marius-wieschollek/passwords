@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\User;
 
+use Exception;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
@@ -35,77 +36,77 @@ class MoveUserDataHelper {
     /**
      * @var null|string
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $settings;
+    protected UserSettingsHelper $settings;
 
     /**
      * @var FolderService
      */
-    protected $folderService;
+    protected FolderService $folderService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var ShareService
      */
-    protected $shareService;
+    protected ShareService $shareService;
 
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var ChallengeService
      */
-    protected $challengeService;
+    protected ChallengeService $challengeService;
 
     /**
      * @var TagRevisionService
      */
-    protected $tagRevisionService;
+    protected TagRevisionService $tagRevisionService;
 
     /**
      * @var FolderRevisionService
      */
-    protected $folderRevisionService;
+    protected FolderRevisionService $folderRevisionService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $passwordTagRelationService;
+    protected PasswordTagRelationService $passwordTagRelationService;
 
     /**
      * @var SessionMapper
      */
-    protected $sessionMapper;
+    protected SessionMapper $sessionMapper;
 
     /**
      * @var array
      */
-    protected $moveConfigKeys
+    protected array $moveConfigKeys
         = [
             'SSEv1UserKey',
             'client/settings',
@@ -166,11 +167,11 @@ class MoveUserDataHelper {
      * @param string $sourceUser
      * @param string $targetUser
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function moveUserData(string $sourceUser, string $targetUser): void {
-        if($targetUser === $sourceUser) throw new \Exception('Target and source user match');
-        if($this->userId !== null && $this->userId !== $sourceUser) throw new \Exception('Invalid user id '.$sourceUser);
+        if($targetUser === $sourceUser) throw new Exception('Target and source user match');
+        if($this->userId !== null && $this->userId !== $sourceUser) throw new Exception('Invalid user id '.$sourceUser);
 
         $this->closeSessions($sourceUser);
         $this->moveObjects($this->tagService, $sourceUser, $targetUser);
@@ -192,10 +193,9 @@ class MoveUserDataHelper {
      * @param string                               $sourceUser
      * @param string                               $targetUser
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function moveObjects(AbstractService $service, string $sourceUser, string $targetUser): void {
-        /** @var EntityInterface[] $objects */
         $objects = $service->findByUserId($sourceUser);
 
         foreach($objects as $object) {
@@ -208,7 +208,7 @@ class MoveUserDataHelper {
      * @param string $sourceUser
      * @param string $targetUser
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function moveShares(string $sourceUser, string $targetUser): void {
         $objects = $this->shareService->findWithUserId($sourceUser);
@@ -223,7 +223,7 @@ class MoveUserDataHelper {
     /**
      * @param string $userId
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function closeSessions(string $userId): void {
         $sessions = $this->sessionMapper->findAllByUserId($userId);
@@ -237,7 +237,7 @@ class MoveUserDataHelper {
      * @param string $sourceUser
      * @param string $targetUser
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function moveUserSettings(string $sourceUser, string $targetUser): void {
         $settings = $this->settings->listRaw($sourceUser);
@@ -254,7 +254,7 @@ class MoveUserDataHelper {
      * @param string $sourceUser
      * @param string $targetUser
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function moveUserConfig(string $sourceUser, string $targetUser): void {
         foreach($this->moveConfigKeys as $key) {

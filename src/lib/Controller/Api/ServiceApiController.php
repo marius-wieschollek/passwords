@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use DateTime;
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
@@ -22,6 +24,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IRequest;
 use OCP\IUserManager;
+use Throwable;
 
 /**
  * Class ServiceApiController
@@ -33,52 +36,52 @@ class ServiceApiController extends AbstractApiController {
     /**
      * @var string|null
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var string|null
      */
-    protected $userLogin;
+    protected ?string $userLogin;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var WordsService
      */
-    protected $wordsService;
+    protected WordsService $wordsService;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $userSettings;
+    protected UserSettingsHelper $userSettings;
 
     /**
      * @var AvatarService
      */
-    protected $avatarService;
+    protected AvatarService $avatarService;
 
     /**
      * @var WebsitePreviewService
      */
-    protected $previewService;
+    protected WebsitePreviewService $previewService;
 
     /**
      * @var FaviconService
      */
-    protected $faviconService;
+    protected FaviconService $faviconService;
 
     /**
      * @var DeleteUserDataHelper
      */
-    protected $deleteUserDataHelper;
+    protected DeleteUserDataHelper $deleteUserDataHelper;
 
     /**
      * ServiceApiController constructor.
@@ -94,7 +97,7 @@ class ServiceApiController extends AbstractApiController {
      * @param EnvironmentService    $environmentService
      * @param DeleteUserDataHelper  $deleteUserDataHelper
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(
         IRequest $request,
@@ -132,6 +135,7 @@ class ServiceApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
+     * @throws Exception
      */
     public function generatePassword(?int $strength = null, ?bool $numbers = null, ?bool $special = null): JSONResponse {
         if($strength === null) $strength = $this->userSettings->get('password.generator.strength');
@@ -160,7 +164,7 @@ class ServiceApiController extends AbstractApiController {
      * @param int    $size
      *
      * @return FileDisplayResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function getAvatar(string $user, int $size = 32): FileDisplayResponse {
         $file = $this->avatarService->getAvatar($user, $size);
@@ -176,7 +180,7 @@ class ServiceApiController extends AbstractApiController {
      * @param int    $size
      *
      * @return FileDisplayResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
         $file = $this->faviconService->getFavicon($domain, $size);
@@ -222,6 +226,7 @@ class ServiceApiController extends AbstractApiController {
      * @param int         $statusCode
      *
      * @return FileDisplayResponse
+     * @throws Exception
      */
     protected function createFileDisplayResponse(ISimpleFile $file, int $statusCode = Http::STATUS_OK): FileDisplayResponse {
         $response = new FileDisplayResponse(
@@ -230,12 +235,12 @@ class ServiceApiController extends AbstractApiController {
             ['Content-Type' => $file->getMimeType()]
         );
 
-        $expires = new \DateTime('@'.(time() + 604800));
+        $expires = new DateTime('@'.(time() + 604800));
         $response->addHeader('Cache-Control', 'public, immutable, max-age=604800')
-                 ->addHeader('Expires', $expires->format(\DateTime::RFC2822))
+                 ->addHeader('Expires', $expires->format(DateTime::RFC2822))
                  ->addHeader('Pragma', 'cache');
 
-        $lastModified = new \DateTime('@'.$file->getMTime());
+        $lastModified = new DateTime('@'.$file->getMTime());
         $response->setLastModified($lastModified);
 
         return $response;

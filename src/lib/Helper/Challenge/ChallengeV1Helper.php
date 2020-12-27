@@ -2,6 +2,7 @@
 
 namespace OCA\Passwords\Helper\Challenge;
 
+use Exception;
 use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\ChallengeService;
@@ -14,15 +15,17 @@ class ChallengeV1Helper {
     /**
      * @var ICrypto
      */
-    protected $crypto;
+    protected ICrypto $crypto;
+
     /**
      * @var ChallengeService
      */
-    private $challengeService;
+    protected ChallengeService $challengeService;
+
     /**
      * @var ISecureRandom
      */
-    private $secureRandom;
+    protected ISecureRandom $secureRandom;
 
     /**
      * ChallengeV1Helper constructor.
@@ -54,7 +57,7 @@ class ChallengeV1Helper {
 
         try {
             return $this->crypto->decrypt($encryptedKey, $serverData->salt.$secret);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             throw new ApiException('Password invalid', HTTP::STATUS_UNAUTHORIZED);
         }
     }

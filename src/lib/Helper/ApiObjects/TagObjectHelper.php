@@ -18,7 +18,6 @@ use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
-use OCP\AppFramework\QueryException;
 
 /**
  * Class TagObjectHelper
@@ -34,17 +33,17 @@ class TagObjectHelper extends AbstractObjectHelper {
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var PasswordObjectHelper
      */
-    protected $passwordObjectHelper;
+    protected PasswordObjectHelper $passwordObjectHelper;
 
     /**
      * TagObjectHelper constructor.
@@ -77,7 +76,6 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     public function getApiObject(
         EntityInterface $tag,
@@ -85,7 +83,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         $filter = []
     ): ?array {
         $detailLevel = explode('+', $level);
-        $withModel = in_array(self::LEVEL_MODEL, $detailLevel);
+        $withModel   = in_array(self::LEVEL_MODEL, $detailLevel);
 
         /** @var TagRevision $revision */
         $revision = $this->getRevision($tag, $filter, $withModel);
@@ -101,7 +99,7 @@ class TagObjectHelper extends AbstractObjectHelper {
         }
         if(in_array(self::LEVEL_PASSWORDS, $detailLevel)) {
             $includeTags = in_array(self::LEVEL_PASSWORD_TAGS, $detailLevel);
-            $object = $this->getPasswords($revision, $object, $includeTags);
+            $object      = $this->getPasswords($revision, $object, $includeTags);
         } else if(in_array(self::LEVEL_PASSWORD_IDS, $detailLevel)) {
             $object = $this->getPasswords($revision, $object, false, false);
         }
@@ -178,7 +176,6 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @return array
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws QueryException
      */
     protected function getPasswords(TagRevision $revision, array $object, bool $includeTags = false, bool $includeModels = true): array {
 
@@ -207,11 +204,10 @@ class TagObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return PasswordObjectHelper
-     * @throws QueryException
      */
     protected function getPasswordObjectHelper(): PasswordObjectHelper {
-        if(!$this->passwordObjectHelper) {
-            $this->passwordObjectHelper = $this->container->query(PasswordObjectHelper::class);
+        if(!isset($this->passwordObjectHelper)) {
+            $this->passwordObjectHelper = $this->container->get(PasswordObjectHelper::class);
         }
 
         return $this->passwordObjectHelper;

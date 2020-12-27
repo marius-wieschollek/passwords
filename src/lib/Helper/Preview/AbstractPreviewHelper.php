@@ -14,7 +14,6 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
-use OCP\AppFramework\QueryException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClientService;
 
@@ -33,32 +32,32 @@ abstract class AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = 'af';
+    protected string $prefix = 'af';
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var AbstractImageHelper
      */
-    protected $imageHelper;
+    protected AbstractImageHelper $imageHelper;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * AbstractPreviewHelper constructor.
@@ -68,8 +67,6 @@ abstract class AbstractPreviewHelper {
      * @param FileCacheService     $fileCacheService
      * @param IClientService       $httpClientService
      * @param LoggingService       $loggingService
-     *
-     * @throws QueryException
      */
     public function __construct(
         HelperService $helperService,
@@ -90,7 +87,7 @@ abstract class AbstractPreviewHelper {
      * @param string $view
      *
      * @return ISimpleFile|null
-     * @throws \Exception
+     * @throws Exception
      */
     function getPreview(string $domain, string $view): ?ISimpleFile {
         $previewFile = $this->getPreviewFilename($domain, $view);
@@ -100,8 +97,8 @@ abstract class AbstractPreviewHelper {
         }
 
         $previewData = $this->getPreviewData($domain, $view);
-        if(empty($previewData)) throw new \Exception('Website preview service returned no data');
-        if(!$this->imageHelper->supportsImage($previewData)) throw new \Exception('Favicon service returned unsupported data type');
+        if(empty($previewData)) throw new Exception('Website preview service returned no data');
+        if(!$this->imageHelper->supportsImage($previewData)) throw new Exception('Favicon service returned unsupported data type');
 
         return $this->fileCacheService->putFile($previewFile, $previewData);
     }
@@ -179,7 +176,7 @@ abstract class AbstractPreviewHelper {
      *
      * @return string
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getPreviewData(string $domain, string $view): string {
         $url = $this->getPreviewUrl($domain, $view);
@@ -192,9 +189,9 @@ abstract class AbstractPreviewHelper {
      * @param string $view
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getPreviewUrl(string $domain, string $view): string {
-        throw new \Exception('No preview url defined for '.$domain.'@'.$view, 502);
+        throw new Exception('No preview url defined for '.$domain.'@'.$view, 502);
     }
 }

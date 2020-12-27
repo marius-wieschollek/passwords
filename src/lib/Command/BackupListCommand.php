@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Command;
 
 use OCA\Passwords\Services\BackupService;
+use OCP\Files\NotPermittedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,7 +23,7 @@ class BackupListCommand extends Command {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * BackupListCommand constructor.
@@ -48,7 +49,7 @@ class BackupListCommand extends Command {
      * @param OutputInterface $output
      *
      * @return int|null|void
-     * @throws \OCP\Files\NotPermittedException
+     * @throws NotPermittedException
      */
     protected function execute(InputInterface $input, OutputInterface $output): void {
         $backups = $this->backupService->getBackups();

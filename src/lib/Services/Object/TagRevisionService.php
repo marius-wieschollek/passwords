@@ -9,11 +9,12 @@ namespace OCA\Passwords\Services\Object;
 
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Db\TagRevisionMapper;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class TagRevisionService
@@ -25,13 +26,13 @@ class TagRevisionService extends AbstractRevisionService {
     /**
      * @var string
      */
-    protected $class = TagRevision::class;
+    protected string $class = TagRevision::class;
 
     /**
      * TagRevisionService constructor.
      *
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param EnvironmentService $environment
      * @param TagRevisionMapper  $revisionMapper
      * @param ValidationService  $validationService
@@ -39,13 +40,13 @@ class TagRevisionService extends AbstractRevisionService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
-        HookManager $hookManager,
+        IEventDispatcher $eventDispatcher,
         EnvironmentService $environment,
         TagRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -61,7 +62,7 @@ class TagRevisionService extends AbstractRevisionService {
      *
      * @return TagRevision
      *
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function create(
         string $model,
@@ -78,7 +79,7 @@ class TagRevisionService extends AbstractRevisionService {
         $revision = $this->createModel($model, $label, $color, $cseKey, $cseType, $edited, $hidden, $trashed, $favorite);
 
         $revision = $this->validation->validateTag($revision);
-        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
+        $this->fireEvent('instantiated', $revision);
 
         return $revision;
     }

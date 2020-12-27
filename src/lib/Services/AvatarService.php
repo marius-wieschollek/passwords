@@ -12,6 +12,7 @@ use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IAvatarManager;
 use OCP\IImage;
 use OCP\IUserManager;
+use Throwable;
 
 /**
  * Class AvatarService
@@ -23,22 +24,22 @@ class AvatarService {
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var IAvatarManager
      */
-    protected $avatarManager;
+    protected IAvatarManager $avatarManager;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var FallbackIconGenerator
      */
-    protected $fallbackIconGenerator;
+    protected FallbackIconGenerator $fallbackIconGenerator;
 
     /**
      * AvatarService constructor.
@@ -64,8 +65,8 @@ class AvatarService {
      * @param string $userId
      * @param int    $size
      *
-     * @return null|\OCP\Files\SimpleFS\ISimpleFile
-     * @throws \Throwable
+     * @return null|ISimpleFile
+     * @throws Throwable
      */
     public function getAvatar(string $userId, int $size = 32): ?ISimpleFile {
         $size = $this->validateSize($size);
@@ -99,7 +100,7 @@ class AvatarService {
      * @param int    $size
      *
      * @return string
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function getImage(IImage $image, string $name, int $size): string {
         ob_start();

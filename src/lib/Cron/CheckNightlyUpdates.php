@@ -2,6 +2,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Fetcher\NightlyAppFetcher;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -17,12 +18,12 @@ class CheckNightlyUpdates extends AbstractTimedJob {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var NightlyAppFetcher
      */
-    protected $nightlyAppFetcher;
+    protected NightlyAppFetcher $nightlyAppFetcher;
 
     /**
      * @var float|int
@@ -47,7 +48,7 @@ class CheckNightlyUpdates extends AbstractTimedJob {
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($argument): void {
         if($this->config->getAppValue('nightly/enabled', '0') === '1') {

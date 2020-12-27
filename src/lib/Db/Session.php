@@ -28,27 +28,27 @@ class Session extends AbstractEntity {
     /**
      * @var string
      */
-    protected $data;
+    protected string $data;
 
     /**
      * @var string
      */
-    protected $client;
+    protected string $client;
 
     /**
      * @var boolean
      */
-    protected $authorized;
+    protected bool $authorized;
 
     /**
      * @var string
      */
-    protected $shadowData;
+    protected string $shadowData;
 
     /**
      * @var string
      */
-    protected $loginType;
+    protected string $loginType;
 
     /**
      * Folder constructor.

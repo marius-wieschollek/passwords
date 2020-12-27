@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Services;
 
+use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\ClientSettingsHelper;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
@@ -22,17 +23,17 @@ class UserSettingsService {
     /**
      * @var UserSettingsHelper
      */
-    protected $userSettings;
+    protected UserSettingsHelper $userSettings;
 
     /**
      * @var ClientSettingsHelper
      */
-    protected $clientSettings;
+    protected ClientSettingsHelper $clientSettings;
 
     /**
      * @var ServerSettingsHelper
      */
-    protected $serverSettings;
+    protected ServerSettingsHelper $serverSettings;
 
     /**
      * UserSettingsService constructor.
@@ -56,10 +57,10 @@ class UserSettingsService {
      * @param string|null $userId
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function get(string $key, string $userId = null) {
-        list($scope, $subKey) = explode('.', $key, 2);
+        [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
             case 'user':
@@ -80,10 +81,10 @@ class UserSettingsService {
      *
      * @return bool|float|int|mixed|null|string
      * @throws ApiException
-     * @throws \Exception
+     * @throws Exception
      */
     public function set(string $key, $value, string $userId = null) {
-        list($scope, $subKey) = explode('.', $key, 2);
+        [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
             case 'user':
@@ -100,10 +101,10 @@ class UserSettingsService {
      * @param string|null $userId
      *
      * @return mixed|null
-     * @throws \Exception
+     * @throws Exception
      */
     public function reset(string $key, string $userId = null) {
-        list($scope, $subKey) = explode('.', $key, 2);
+        [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
             case 'user':
@@ -120,7 +121,7 @@ class UserSettingsService {
      * @param string|null $userId
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function list(array $scope = null, string $userId = null): array {
         $settings = [];

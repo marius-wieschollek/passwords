@@ -12,6 +12,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Http\SetupReportHelper;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
+use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\UserChallengeService;
@@ -31,49 +32,55 @@ class PageController extends Controller {
     /**
      * @var UserSettingsService
      */
-    protected $settings;
+    protected UserSettingsService $settings;
 
     /**
      * @var ApiTokenHelper
      */
-    protected $tokenHelper;
+    protected ApiTokenHelper $tokenHelper;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var UpgradeCheckHelper
      */
-    protected $upgradeCheck;
+    protected UpgradeCheckHelper $upgradeCheck;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * @var SetupReportHelper
      */
-    protected $setupReportHelper;
+    protected SetupReportHelper $setupReportHelper;
+
+    /**
+     * @var DeferredActivationService
+     */
+    protected DeferredActivationService $das;
 
     /**
      * PageController constructor.
      *
-     * @param IRequest             $request
-     * @param ApiTokenHelper       $tokenHelper
-     * @param UserSettingsService  $settings
-     * @param EnvironmentService   $environment
-     * @param UpgradeCheckHelper   $upgradeCheck
-     * @param NotificationService  $notifications
-     * @param SetupReportHelper    $setupReportHelper
-     * @param UserChallengeService $challengeService
+     * @param IRequest                  $request
+     * @param ApiTokenHelper            $tokenHelper
+     * @param UserSettingsService       $settings
+     * @param EnvironmentService        $environment
+     * @param UpgradeCheckHelper        $upgradeCheck
+     * @param NotificationService       $notifications
+     * @param SetupReportHelper         $setupReportHelper
+     * @param UserChallengeService      $challengeService
+     * @param DeferredActivationService $das
      */
     public function __construct(
         IRequest $request,
@@ -83,9 +90,11 @@ class PageController extends Controller {
         UpgradeCheckHelper $upgradeCheck,
         NotificationService $notifications,
         SetupReportHelper $setupReportHelper,
-        UserChallengeService $challengeService
+        UserChallengeService $challengeService,
+        DeferredActivationService $das
     ) {
         parent::__construct(Application::APP_NAME, $request);
+        $this->das               = $das;
         $this->settings          = $settings;
         $this->tokenHelper       = $tokenHelper;
         $this->environment       = $environment;
@@ -137,17 +146,20 @@ class PageController extends Controller {
      */
     protected function addHeaders(): void {
         $userSettings = json_encode($this->settings->list());
-        Util::addHeader('meta', ['name' => 'settings', 'content' => $userSettings]);
+        Util::addHeader('meta', ['name' => 'pw-settings', 'content' => $userSettings]);
 
         [$token, $user] = $this->tokenHelper->getWebUiToken();
-        Util::addHeader('meta', ['name' => 'api-user', 'content' => $user]);
-        Util::addHeader('meta', ['name' => 'api-token', 'content' => $token]);
+        Util::addHeader('meta', ['name' => 'pw-api-user', 'content' => $user]);
+        Util::addHeader('meta', ['name' => 'pw-api-token', 'content' => $token]);
 
         $authenticate = $this->challengeService->hasChallenge() ? 'true':'false';
         Util::addHeader('meta', ['name' => 'pw-authenticate', 'content' => $authenticate]);
 
         $impersonate = $this->environment->isImpersonating() ? 'true':'false';
         Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $impersonate]);
+
+        $features = $this->das->getClientFeatures();
+        Util::addHeader('meta', ['name' => 'pw-features', 'content' => json_encode($features)]);
 
         $upgrade = $this->upgradeCheck->getUpgradeMessage();
         if($upgrade !== null) Util::addHeader('meta', ['name' => 'pw-alert', 'content' => json_encode([$upgrade])]);

@@ -127,7 +127,7 @@ class SettingsService {
      *
      */
     init() {
-        let settings = document.querySelector('meta[name=settings]');
+        let settings = document.querySelector('meta[name=pw-settings]');
         if(settings) {
             this._addSettings(JSON.parse(settings.getAttribute('content')));
         }

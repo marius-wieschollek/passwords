@@ -28,7 +28,7 @@ class ShareCreatedMail extends AbstractMail {
     /**
      * @var UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * ShareCreatedMail constructor.
@@ -56,8 +56,8 @@ class ShareCreatedMail extends AbstractMail {
      * @param mixed ...$parameters
      */
     public function send(IUser $user, IL10N $localisation, ...$parameters): void {
-        list($owners) = $parameters;
-        list($passwordCount, $body) = $this->getBody($localisation, $owners);
+        [$owners] = $parameters;
+        [$passwordCount, $body] = $this->getBody($localisation, $owners);
         $title = $this->getTitle($localisation, $passwordCount);
 
         $template = $this->getTemplate();
@@ -96,9 +96,9 @@ class ShareCreatedMail extends AbstractMail {
     protected function getBody(IL10N $localisation, array $owners): array {
         $ownerCount = count($owners);
         if($ownerCount === 1) {
-            list($passwordCount, $body) = $this->getSingleOwnerBody($localisation, $owners);
+            [$passwordCount, $body] = $this->getSingleOwnerBody($localisation, $owners);
         } else {
-            list($passwordCount, $body) = $this->getMultiOwnerBody($localisation, $owners, $ownerCount);
+            [$passwordCount, $body] = $this->getMultiOwnerBody($localisation, $owners, $ownerCount);
         }
 
         $body .= ' '.$localisation->t('Open the passwords app to see '.($passwordCount === 1 ? 'it.':'them.'));
@@ -129,7 +129,7 @@ class ShareCreatedMail extends AbstractMail {
      *
      * @return array
      */
-    protected function getMultiOwnerBody(IL10N $localisation, array $owners, $ownerCount): array {
+    protected function getMultiOwnerBody(IL10N $localisation, array $owners, int $ownerCount): array {
         $params        = [];
         $passwordCount = 0;
 

@@ -7,11 +7,14 @@
 
 namespace OCA\Passwords\Helper\ApiObjects;
 
+use Exception;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\UserService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
 use OCP\IConfig;
 
@@ -27,27 +30,27 @@ class ShareObjectHelper extends AbstractObjectHelper {
     /**
      * @var null|string
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var IConfig
      */
-    protected $config;
+    protected IConfig $config;
 
     /**
      * @var UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var PasswordObjectHelper
      */
-    protected $passwordObjectHelper;
+    protected PasswordObjectHelper $passwordObjectHelper;
 
     /** @noinspection PhpMissingParentConstructorInspection */
     /**
@@ -79,10 +82,9 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @param array                 $filter
      *
      * @return array|null
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function getApiObject(
         EntityInterface $share,
@@ -141,10 +143,9 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @param array $object
      *
      * @return array
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function getPassword(array $object): array {
         $objectHelper       = $this->getPasswordObjectHelper();
@@ -156,11 +157,10 @@ class ShareObjectHelper extends AbstractObjectHelper {
 
     /**
      * @return PasswordObjectHelper
-     * @throws \OCP\AppFramework\QueryException
      */
     protected function getPasswordObjectHelper(): PasswordObjectHelper {
-        if(!$this->passwordObjectHelper) {
-            $this->passwordObjectHelper = $this->container->query(PasswordObjectHelper::class);
+        if(!isset($this->passwordObjectHelper)) {
+            $this->passwordObjectHelper = $this->container->get(PasswordObjectHelper::class);
         }
 
         return $this->passwordObjectHelper;

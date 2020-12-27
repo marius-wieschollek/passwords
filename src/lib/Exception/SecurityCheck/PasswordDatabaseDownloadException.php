@@ -9,6 +9,7 @@ namespace OCA\Passwords\Exception\SecurityCheck;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use Throwable;
 
 /**
  * Class PasswordDatabaseDownloadException
@@ -22,13 +23,13 @@ class PasswordDatabaseDownloadException extends Exception {
     /**
      * PasswordDatabaseDownloadException constructor.
      *
-     * @param \Throwable|null $previous
+     * @param Throwable|null $previous
      */
-    public function __construct(\Throwable $previous = null) {
+    public function __construct(Throwable $previous = null) {
         $message = 'Failed to download common passwords zip file';
         if($previous instanceof ClientException) {
             $message .= " HTTP {$previous->getResponse()->getStatusCode()}";
-        } else if($previous instanceof \Throwable) {
+        } else if($previous instanceof Throwable) {
             $message .= $previous->getMessage();
         }
 

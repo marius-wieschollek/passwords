@@ -30,17 +30,17 @@ class ApiSessionMiddleware extends Middleware {
     /**
      * @var ISession
      */
-    protected $session;
+    protected ISession $session;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * ApiSessionMiddleware constructor.

@@ -33,8 +33,14 @@ class DeferredActivationService {
     async getFeatures() {
         if(this._features !== null) return this._features;
 
-        let url = SettingsService.get('server.handbook.url') + '_files/deferred-activation.json';
         this._features = {};
+        let features = document.querySelector('meta[name=pw-features]');
+        if(features) {
+            this._features = JSON.parse(features.getAttribute('content'));
+            return this._features;
+        }
+
+        let url = SettingsService.get('server.handbook.url') + '_files/deferred-activation.json';
 
         try {
             let response = await fetch(new Request(url, {credentials: 'omit', referrerPolicy: 'no-referrer'}));

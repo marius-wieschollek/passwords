@@ -7,11 +7,15 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class AbstractService
@@ -21,51 +25,51 @@ use OCA\Passwords\Services\EnvironmentService;
 abstract class AbstractService {
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $userId;
-
-    /**
-     * @var HookManager
-     */
-    protected $hookManager;
+    protected ?string $userId;
 
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
+
+    /**
+     * @var IEventDispatcher
+     */
+    protected IEventDispatcher $eventDispatcher;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var string
      */
-    protected $class;
+    protected string $class;
 
     /**
      * @var AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * AbstractService constructor.
      *
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param EnvironmentService $environment
      */
     public function __construct(
         UuidHelper $uuidHelper,
-        HookManager $hookManager,
+        IEventDispatcher $eventDispatcher,
         EnvironmentService $environment
     ) {
-        $this->userId      = $environment->getUserId();
-        $this->environment = $environment;
-        $this->hookManager = $hookManager;
-        $this->uuidHelper  = $uuidHelper;
+        $this->userId          = $environment->getUserId();
+        $this->environment     = $environment;
+        $this->uuidHelper      = $uuidHelper;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -79,7 +83,7 @@ abstract class AbstractService {
      * @param string $userId
      *
      * @return EntityInterface[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByUserId(string $userId): array {
         return $this->mapper->findAllByUserId($userId);
@@ -89,8 +93,8 @@ abstract class AbstractService {
      * @param string $uuid
      *
      * @return EntityInterface
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid) {
         return $this->mapper->findByUuid($uuid);
@@ -101,21 +105,22 @@ abstract class AbstractService {
      *
      * @return mixed
      */
-    abstract public function save(EntityInterface $model): EntityInterface;
+    public function save(EntityInterface $model): EntityInterface {
+        return $this->saveModel($model);
+    }
 
     /**
      * @param EntityInterface $entity
      * @param array           $overwrites
      *
      * @return EntityInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function clone(EntityInterface $entity, array $overwrites = []): EntityInterface {
-        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preClone', [$entity]);
-        /** @var EntityInterface $clone */
+        if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         $clone = $this->cloneModel($entity, $overwrites);
-        $this->hookManager->emit($this->class, 'postClone', [$entity, $clone]);
+        $this->fireEvent('cloned', $entity, $clone);
+        $this->fireEvent('afterCloned', $entity, $clone);
 
         return $clone;
     }
@@ -123,27 +128,51 @@ abstract class AbstractService {
     /**
      * @param EntityInterface $entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function delete(EntityInterface $entity): void {
-        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preDelete', [$entity]);
+        if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
+        $this->fireEvent('beforeDeleted', $entity);
         $entity->setDeleted(true);
         $this->save($entity);
-        $this->hookManager->emit($this->class, 'postDelete', [$entity]);
+        $this->fireEvent('deleted', $entity);
+        $this->fireEvent('afterDeleted', $entity);
     }
 
     /**
-     * @param EntityInterface|\OCP\AppFramework\Db\Entity $entity
+     * @param EntityInterface|Entity $entity
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(EntityInterface $entity): void {
-        if(get_class($entity) !== $this->class) throw new \Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preDestroy', [$entity]);
+        if(get_class($entity) !== $this->class) throw new Exception('Invalid revision class given');
         if(!$entity->isDeleted()) $this->delete($entity);
+        $this->fireEvent('beforeDestroyed', $entity);
         $this->mapper->delete($entity);
-        $this->hookManager->emit($this->class, 'postDestroy', [$entity]);
+        $this->fireEvent('destroyed', $entity);
+        $this->fireEvent('afterDestroyed', $entity);
+    }
+
+    /**
+     * @param EntityInterface $model
+     *
+     * @return EntityInterface
+     */
+    protected function saveModel(EntityInterface $model): EntityInterface {
+        if(empty($model->getId())) {
+            $this->fireEvent('beforeCreated', $model);
+            $saved = $this->mapper->insert($model);
+            $this->fireEvent('created', $model);
+            $this->fireEvent('afterCreated', $model);
+        } else {
+            $this->fireEvent('beforeUpdated', $model);
+            $model->setUpdated(time());
+            $saved = $this->mapper->update($model);
+            $this->fireEvent('updated', $model);
+            $this->fireEvent('afterUpdated', $model);
+        }
+
+        return $saved;
     }
 
     /**
@@ -153,9 +182,9 @@ abstract class AbstractService {
      * @return EntityInterface
      */
     protected function cloneModel(EntityInterface $original, array $overwrites = []): EntityInterface {
-        $class = get_class($original);
-        /** @var EntityInterface $clone */
+        $class  = get_class($original);
         $clone  = new $class;
+        $this->fireEvent('beforeCloned', $original, $clone, $overwrites);
         $fields = array_keys($clone->getFieldTypes());
 
         foreach($fields as $field) {
@@ -171,5 +200,30 @@ abstract class AbstractService {
         $clone->setUpdated(time());
 
         return $clone;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  ...$arguments
+     */
+    protected function fireEvent(string $name, ...$arguments) {
+        $object = substr($this->class, strrpos($this->class, '\\')+1);
+        $eventClassPart = ucfirst($name);
+        $eventModifier  = '';
+        if(substr($name, 0, 6) === 'before') {
+            $eventModifier  = 'Before';
+            $eventClassPart = ucfirst(substr($name, 6));
+        } else if(substr($name, 0, 5) === 'after') {
+            $eventModifier  = 'After';
+            $eventClassPart = ucfirst(substr($name, 5));
+        }
+        $eventClassName = "\\OCA\\Passwords\\Events\\{$object}\\{$eventModifier}{$object}{$eventClassPart}Event";
+
+        if(class_exists($eventClassName)) {
+            $eventClass = new $eventClassName(...$arguments);
+            $this->eventDispatcher->dispatchTyped($eventClass);
+        } else {
+            \OC::$server->getLogger()->error('Missing Event: '.$eventClassName);
+        }
     }
 }

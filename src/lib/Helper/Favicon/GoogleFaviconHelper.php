@@ -25,12 +25,12 @@ class GoogleFaviconHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::FAVICON_GOOGLE;
+    protected string $prefix = HelperService::FAVICON_GOOGLE;
 
     /**
      * @var string
      */
-    protected $domain;
+    protected string $domain;
 
     /**
      * @param string $domain

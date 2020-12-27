@@ -7,6 +7,8 @@
 
 namespace OCA\Passwords\Encryption\Object;
 
+use Exception;
+
 /**
  * Class SimpleEncryption
  *
@@ -25,7 +27,7 @@ class SimpleEncryption extends SseV1Encryption {
      * @param $string
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function encrypt($string): string {
         $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
@@ -37,7 +39,7 @@ class SimpleEncryption extends SseV1Encryption {
      * @param $string
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function decrypt($string): string {
         $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
@@ -49,7 +51,7 @@ class SimpleEncryption extends SseV1Encryption {
      * @param string $userId
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getSimpleEncryptionKey(string $userId): string {
         return $this->getServerKey().$this->getUserKey($userId);

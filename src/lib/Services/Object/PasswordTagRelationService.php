@@ -7,15 +7,17 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordTagRelation;
 use OCA\Passwords\Db\PasswordTagRelationMapper;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\Entity;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class PasswordTagRelationService
@@ -25,27 +27,27 @@ use OCP\AppFramework\Db\Entity;
 class PasswordTagRelationService extends AbstractService {
 
     /**
-     * @var PasswordTagRelationMapper
+     * @var PasswordTagRelationMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = PasswordTagRelation::class;
+    protected string $class = PasswordTagRelation::class;
 
     /**
      * PasswordTagRelationService constructor.
      *
      * @param UuidHelper                $uuidHelper
-     * @param HookManager               $hookManager
+     * @param IEventDispatcher          $eventDispatcher
      * @param EnvironmentService        $environment
      * @param PasswordTagRelationMapper $mapper
      */
-    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, EnvironmentService $environment, PasswordTagRelationMapper $mapper) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -59,7 +61,7 @@ class PasswordTagRelationService extends AbstractService {
      * @param string $passwordUuid
      *
      * @return PasswordTagRelation[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByPassword(string $passwordUuid): array {
         return $this->mapper->findAllByField('password', $passwordUuid);
@@ -69,7 +71,7 @@ class PasswordTagRelationService extends AbstractService {
      * @param string $tagUuid
      *
      * @return PasswordTagRelation[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByTag(string $tagUuid): array {
         return $this->mapper->findAllByField('tag', $tagUuid);
@@ -80,7 +82,7 @@ class PasswordTagRelationService extends AbstractService {
      * @param string $passwordUuid
      *
      * @return PasswordTagRelation|EntityInterface|null
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByTagAndPassword(string $tagUuid, string $passwordUuid): ?PasswordTagRelation {
         return $this->mapper->findOneByFields(
@@ -94,33 +96,17 @@ class PasswordTagRelationService extends AbstractService {
      * @param TagRevision      $tag
      *
      * @return PasswordTagRelation
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(PasswordRevision $password, TagRevision $tag): PasswordTagRelation {
         if($password->getUserId() !== $tag->getUserId()) {
-            throw new \Exception('User ID did not match when creating password to tag relation');
+            throw new Exception('User ID did not match when creating password to tag relation');
         }
 
         $model = $this->createModel($password, $tag);
-        $this->hookManager->emit($this->class, 'postCreate', [$model]);
+        $this->fireEvent('instantiated', $model);
 
         return $model;
-    }
-
-    /**
-     * @param EntityInterface|Entity $model
-     *
-     * @return mixed
-     */
-    public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$model]);
-        if(empty($model->getId())) {
-            return $this->mapper->insert($model);
-        } else {
-            $model->setUpdated(time());
-
-            return $this->mapper->update($model);
-        }
     }
 
     /**

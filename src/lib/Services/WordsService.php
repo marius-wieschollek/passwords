@@ -8,6 +8,9 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use Throwable;
 
 /**
  * Class WordsService
@@ -19,25 +22,23 @@ class WordsService {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
-     * @var \OCA\Passwords\Helper\Words\AbstractWordsHelper
+     * @var AbstractWordsHelper
      */
-    protected $wordsHelper;
+    protected AbstractWordsHelper $wordsHelper;
 
     /**
-     * @var \OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper
+     * @var AbstractSecurityCheckHelper
      */
-    protected $securityHelper;
+    protected AbstractSecurityCheckHelper $securityHelper;
 
     /**
      * FaviconService constructor.
      *
      * @param HelperService  $helperService
      * @param LoggingService $logger
-     *
-     * @throws \OCP\AppFramework\QueryException
      */
     public function __construct(HelperService $helperService, LoggingService $logger) {
         $this->wordsHelper    = $helperService->getWordsHelper();
@@ -75,7 +76,7 @@ class WordsService {
             } else {
                 $this->logger->warning('Words service delivered no result');
             }
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
 

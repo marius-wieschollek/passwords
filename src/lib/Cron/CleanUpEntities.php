@@ -12,6 +12,7 @@ use OCA\Passwords\Helper\CleanUp\CleanRegistrationsHelper;
 use OCA\Passwords\Helper\CleanUp\CleanSessionsHelper;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
+use Throwable;
 
 /**
  * Class CleanUpEntities
@@ -23,17 +24,17 @@ class CleanUpEntities extends AbstractTimedJob {
     /**
      * @var CleanSessionsHelper
      */
-    protected $sessionsHelper;
+    protected CleanSessionsHelper $sessionsHelper;
 
     /**
      * @var CleanRegistrationsHelper
      */
-    protected $registrationsHelper;
+    protected CleanRegistrationsHelper $registrationsHelper;
 
     /**
      * @var CleanDeletedEntitiesHelper
      */
-    protected $deletedEntitiesHelper;
+    protected CleanDeletedEntitiesHelper $deletedEntitiesHelper;
 
     /**
      * CleanUpEntities constructor.
@@ -63,19 +64,19 @@ class CleanUpEntities extends AbstractTimedJob {
     protected function runJob($argument): void {
         try {
             $this->sessionsHelper->run();
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
 
         try {
             $this->registrationsHelper->run();
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
 
         try {
             $this->deletedEntitiesHelper->run();
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
     }

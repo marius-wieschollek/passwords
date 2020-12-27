@@ -35,46 +35,34 @@ class SearchManager {
     }
 
     init() {
-        if(!document.getElementById('searchbox')) {
-            document.querySelector('.unified-search').remove();
-            this._createSearchBox();
-            this._status.available = false;
-            this._initializeSearchFeatures();
-            let searchBox = document.getElementById('searchbox');
+        document.querySelector('.unified-search, #searchbox').remove();
+        this._createSearchBox();
+        this._status.available = false;
+        this._initializeSearchFeatures();
+        let searchBox = document.getElementById('searchbox');
 
-            if(searchBox) {
-                document.getElementById('searchbox').addEventListener('keyup', (e) => {
-                    if(e.target.value) {
-                        this.search(e.target.value);
-                    } else {
-                        this.search();
-                    }
-                });
-                document.addEventListener('keyup', (e) => {
-                    if(e.key === 'f' && e.ctrlKey) {
-                        if(document.activeElement !== searchBox) searchBox.focus();
-                    }
-                });
-            }
-
-            let reset = document.querySelector('form.searchbox button[type="reset"]');
-            if(reset) {
-                reset.addEventListener('click', (e) => {
-                    this.search();
-                });
-            }
-        } else if(OC.Plugins) {
-            new OCA.Search((q) => {this.search(q);}, () => {this.search();});
-            document.querySelector('form.searchbox').style.opacity = '0';
-            this._status.available = false;
-
-            this._initializeSearchFeatures();
+        if(searchBox) {
+            document.getElementById('searchbox')
+                    .addEventListener('keyup', (e) => {
+                        if(e.target.value) {
+                            this.search(e.target.value);
+                        } else {
+                            this.search();
+                        }
+                    });
+            document.addEventListener('keyup', (e) => {
+                if(e.key === 'f' && e.ctrlKey) {
+                    if(document.activeElement !== searchBox) searchBox.focus();
+                }
+            });
         }
-    }
 
-// noinspection JSUnusedGlobalSymbols
-    attach(search) {
-        search.setFilter('passwords', (q) => { this.search(q); });
+        let reset = document.querySelector('form.searchbox button[type="reset"]');
+        if(reset) {
+            reset.addEventListener('click', (e) => {
+                this.search();
+            });
+        }
     }
 
     search(query) {
@@ -88,7 +76,7 @@ class SearchManager {
             index        = this._getSearchIndex();
         for(let key in index) {
             if(!index.hasOwnProperty(key)) continue;
-            let section    = index[key];
+            let section = index[key];
 
             for(let i = 0; i < section.length; i++) {
                 let object = section[i];

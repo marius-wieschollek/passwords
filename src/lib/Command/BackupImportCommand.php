@@ -28,12 +28,12 @@ class BackupImportCommand extends Command {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * @var BackupMigrationHelper
      */
-    protected $migrationHelper;
+    protected BackupMigrationHelper $migrationHelper;
 
     /**
      * BackupImportCommand constructor.
@@ -84,11 +84,12 @@ class BackupImportCommand extends Command {
      *
      * @return array
      * @throws NotFoundException
+     * @throws Exception
      */
     protected function checkIfFileCanBeRead(string $file): array {
         if(!$file || !is_file($file) || !is_readable($file)) throw new NotFoundException();
         $importFile = basename($file);
-        if(!preg_match('/[\w+\-\.](\.json(\.gz)?)$/', $importFile, $matches)) {
+        if(!preg_match('/[\w+\-.](\.json(\.gz)?)$/', $importFile, $matches)) {
             throw new Exception('Invalid file type');
         }
 

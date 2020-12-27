@@ -7,16 +7,17 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class AbstractModelService
@@ -30,13 +31,13 @@ abstract class AbstractModelService extends AbstractService {
      *
      * @param AbstractMapper     $mapper
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param EnvironmentService $environment
      */
-    public function __construct(AbstractMapper $mapper, UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment) {
+    public function __construct(AbstractMapper $mapper, UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -50,8 +51,8 @@ abstract class AbstractModelService extends AbstractService {
      * @param string $uuid
      *
      * @return ModelInterface|EntityInterface
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): ModelInterface {
         return $this->mapper->findByUuid($uuid);
@@ -77,43 +78,26 @@ abstract class AbstractModelService extends AbstractService {
      */
     public function create(): ModelInterface {
         $model = $this->createModel();
-        $this->hookManager->emit($this->class, 'postCreate', [$model]);
+        $this->fireEvent('instantiated', $model);
 
         return $model;
-    }
-
-    /**
-     * @param EntityInterface|ModelInterface|Entity $model
-     *
-     * @return ModelInterface|Entity
-     */
-    public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$model]);
-        if(empty($model->getId())) {
-            $saved = $this->mapper->insert($model);
-        } else {
-            $model->setUpdated(time());
-            $saved = $this->mapper->update($model);
-        }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
-
-        return $saved;
     }
 
     /**
      * @param ModelInterface    $model
      * @param RevisionInterface $revision
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function setRevision(ModelInterface $model, RevisionInterface $revision): void {
         if($revision->getModel() === $model->getUuid()) {
-            $this->hookManager->emit($this->class, 'preSetRevision', [$model, $revision]);
+            $this->fireEvent('beforeSetRevision', $model, $revision);
             $model->setRevision($revision->getUuid());
             $this->save($model);
-            $this->hookManager->emit($this->class, 'postSetRevision', [$model, $revision]);
+            $this->fireEvent('setRevision', $model, $revision);
+            $this->fireEvent('afterSetRevision', $model, $revision);
         } else {
-            throw new \Exception('Revision did not belong to model when setting model revision');
+            throw new Exception('Revision did not belong to model when setting model revision');
         }
     }
 

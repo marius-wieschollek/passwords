@@ -7,14 +7,19 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\DB\QueryBuilder\IQueryBuilder;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class ShareService
@@ -24,27 +29,27 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
 class ShareService extends AbstractService {
 
     /**
-     * @var ShareMapper
+     * @var ShareMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = Share::class;
+    protected string $class = Share::class;
 
     /**
      * ShareService constructor.
      *
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param ShareMapper        $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, ShareMapper $mapper, EnvironmentService $environment) {
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, ShareMapper $mapper, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -58,7 +63,7 @@ class ShareService extends AbstractService {
      * @param string $userId
      *
      * @return Share[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findWithUserId(string $userId): array {
         return $this->mapper->findAllByUserIdOrReceiverId($userId);
@@ -69,7 +74,7 @@ class ShareService extends AbstractService {
      *
      * @return Share[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findBySourcePassword(string $passwordUuid): array {
         return $this->mapper->findAllByField('source_password', $passwordUuid);
@@ -79,8 +84,8 @@ class ShareService extends AbstractService {
      * @param string $passwordUuid
      *
      * @return Share|EntityInterface|null
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByTargetPassword(string $passwordUuid): Share {
         return $this->mapper->findOneByField('target_password', $passwordUuid);
@@ -89,7 +94,7 @@ class ShareService extends AbstractService {
     /**
      * @return Share[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findBySourceUpdated(): array {
         return $this->mapper->findAllByFields(
@@ -101,7 +106,7 @@ class ShareService extends AbstractService {
     /**
      * @return Share[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByTargetUpdated(): array {
         return $this->mapper->findAllByField('target_updated', true, IQueryBuilder::PARAM_BOOL);
@@ -113,8 +118,8 @@ class ShareService extends AbstractService {
      *
      * @return Share|EntityInterface|null
      *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findBySourcePasswordAndReceiver(string $passwordUuid, string $userId): ?Share {
         return $this->mapper->findOneByFields(
@@ -125,7 +130,7 @@ class ShareService extends AbstractService {
 
     /**
      * @return Share[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findNew(): array {
         return $this->mapper->findAllByField('target_password', null, IQueryBuilder::PARAM_NULL);
@@ -133,7 +138,7 @@ class ShareService extends AbstractService {
 
     /**
      * @return Share[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findExpired(): array {
         return $this->mapper->findAllByField('expires', time(), IQueryBuilder::PARAM_INT, 'lte');
@@ -143,8 +148,8 @@ class ShareService extends AbstractService {
      * @param string $uuid
      *
      * @return Share|EntityInterface
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): Share {
         return $this->mapper->findByUuid($uuid);
@@ -169,27 +174,9 @@ class ShareService extends AbstractService {
         bool $shareable = true
     ): Share {
         $model = $this->createModel($passwordId, $receiverId, $type, $editable, $expires, $shareable);
-        $this->hookManager->emit(Share::class, 'postCreate', [$model]);
+        $this->fireEvent('instantiated', $model);
 
         return $model;
-    }
-
-    /**
-     * @param EntityInterface|Share $model
-     *
-     * @return EntityInterface|Share|\OCP\AppFramework\Db\Entity
-     */
-    public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit(Share::class, 'preSave', [$model]);
-        if(empty($model->getId())) {
-            $saved = $this->mapper->insert($model);
-        } else {
-            $model->setUpdated(time());
-            $saved = $this->mapper->update($model);
-        }
-        $this->hookManager->emit(Share::class, 'postSave', [$saved]);
-
-        return $saved;
     }
 
     /**
@@ -211,7 +198,6 @@ class ShareService extends AbstractService {
         bool $shareable
     ): Share {
 
-        /** @var Share $model */
         $model = new Share();
         $model->setDeleted(false);
         $model->setUserId($this->userId);

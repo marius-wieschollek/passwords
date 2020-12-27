@@ -17,14 +17,14 @@ use OCA\Passwords\Exception\ApiException;
 class LegacyApiSettingsHelper extends AbstractSettingsHelper {
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'legacy';
+    protected string $scope = 'legacy';
 
     /**
      * @var array
      */
-    protected $keys
+    protected array $keys
         = [
             'api.enabled'   => 'legacy_api_enabled',
             'api.last.used' => 'legacy_last_used'
@@ -33,7 +33,7 @@ class LegacyApiSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $types
+    protected array $types
         = [
             'api.enabled'   => 'boolean',
             'api.last.used' => 'number'
@@ -42,7 +42,7 @@ class LegacyApiSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $defaults
+    protected array $defaults
         = [
             'api.enabled'   => true,
             'api.last.used' => 0

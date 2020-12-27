@@ -19,12 +19,12 @@ class BackupJob extends AbstractTimedJob {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * BackupJob constructor.

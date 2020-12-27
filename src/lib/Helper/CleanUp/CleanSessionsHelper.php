@@ -20,12 +20,12 @@ class CleanSessionsHelper {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var SessionMapper
      */
-    protected $sessionMapper;
+    protected SessionMapper $sessionMapper;
 
     /**
      * CleanSessionsHelper constructor.

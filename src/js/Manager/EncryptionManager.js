@@ -415,7 +415,7 @@ class EncryptionManager {
      */
     async _saveMasterPassword(password) {
         this._sendStatus('password', 'processing', 1);
-        let username = document.querySelector('meta[name=api-user]').getAttribute('content'),
+        let username = document.querySelector('meta[name=pw-api-user]').getAttribute('content'),
             label    = Localisation.translate('Passwords App Master Password'),
             url      = location.href;
 

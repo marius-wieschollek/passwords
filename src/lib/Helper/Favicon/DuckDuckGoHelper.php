@@ -26,12 +26,12 @@ class DuckDuckGoHelper extends AbstractFaviconHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::FAVICON_DUCK_DUCK_GO;
+    protected string $prefix = HelperService::FAVICON_DUCK_DUCK_GO;
 
     /**
      * @var string
      */
-    protected $domain;
+    protected string $domain;
 
     /**
      * @param string $domain

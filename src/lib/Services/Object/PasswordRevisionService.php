@@ -7,13 +7,16 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class PasswordRevisionService
@@ -23,20 +26,20 @@ use OCA\Passwords\Services\ValidationService;
 class PasswordRevisionService extends AbstractRevisionService {
 
     /**
-     * @var PasswordRevisionMapper
+     * @var PasswordRevisionMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = PasswordRevision::class;
+    protected string $class = PasswordRevision::class;
 
     /**
      * PasswordRevisionService constructor.
      *
      * @param UuidHelper             $uuidHelper
-     * @param HookManager            $hookManager
+     * @param IEventDispatcher       $eventDispatcher
      * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
@@ -44,13 +47,13 @@ class PasswordRevisionService extends AbstractRevisionService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
-        HookManager $hookManager,
+        IEventDispatcher $eventDispatcher,
         EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
         ValidationService $validationService,
         EncryptionService $encryption
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment, $revisionMapper, $validationService, $encryption);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment, $revisionMapper, $validationService, $encryption);
     }
 
     /**
@@ -59,7 +62,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      *
      * @return PasswordRevision[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByHash(string $hash, bool $decrypt = false): array {
         /** @var PasswordRevision[] $revisions */
@@ -93,7 +96,7 @@ class PasswordRevisionService extends AbstractRevisionService {
      *
      * @return PasswordRevision
      *
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function create(
         string $model,
@@ -119,7 +122,7 @@ class PasswordRevisionService extends AbstractRevisionService {
         );
 
         $revision = $this->validation->validatePassword($revision);
-        $this->hookManager->emit($this->class, 'postCreate', [$revision]);
+        $this->fireEvent('instantiated', $revision);
 
         return $revision;
     }

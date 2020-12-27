@@ -27,12 +27,12 @@ class KeychainApiController extends AbstractApiController {
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var UserChallengeService
      */
-    protected $challengeService;
+    protected UserChallengeService $challengeService;
 
     /**
      * KeychainApiController constructor.

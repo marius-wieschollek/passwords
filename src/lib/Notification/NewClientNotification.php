@@ -11,6 +11,7 @@
 
 namespace OCA\Passwords\Notification;
 
+use Exception;
 use OCA\Passwords\Helper\Settings\ThemeSettingsHelper;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -31,7 +32,7 @@ class NewClientNotification extends AbstractNotification {
     /**
      * @var ThemeSettingsHelper
      */
-    protected $themingSettings;
+    protected ThemeSettingsHelper $themingSettings;
 
     /**
      * NewClientNotification constructor.
@@ -51,6 +52,8 @@ class NewClientNotification extends AbstractNotification {
      *
      * @param string $userId
      * @param array  $parameters
+     *
+     * @throws Exception
      */
     public function send(string $userId, array $parameters = []): void {
         $notification

@@ -7,6 +7,10 @@
 
 namespace OCA\Passwords\Db;
 
+use Exception;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
@@ -20,7 +24,7 @@ class PasswordMapper extends AbstractMapper {
 
     /**
      * @return Password[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllShared(): array {
         return $this->findAllByField('has_shares', true, IQueryBuilder::PARAM_BOOL);
@@ -30,9 +34,9 @@ class PasswordMapper extends AbstractMapper {
      * @param string $shareUuid
      * @param bool   $source
      *
-     * @return null|Password|\OCP\AppFramework\Db\Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @return null|Password|Entity
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findPasswordByShare(string $shareUuid, bool $source = true): ?Password {
         $sql      = $this->db->getQueryBuilder();

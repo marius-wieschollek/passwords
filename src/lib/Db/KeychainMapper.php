@@ -7,6 +7,11 @@
 
 namespace OCA\Passwords\Db;
 
+use Exception;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+
 /**
  * Class KeychainMapper
  *
@@ -19,9 +24,9 @@ class KeychainMapper extends AbstractMapper {
     /**
      * @param string $type
      *
-     * @return Keychain|\OCP\AppFramework\Db\Entity
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @return Keychain|Entity
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function findOneByType(string $type): Keychain {
         return $this->findOneByField('type', $type);
@@ -31,7 +36,7 @@ class KeychainMapper extends AbstractMapper {
      * @param string $scope
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAllByScope(string $scope): array {
         return $this->findAllByField('scope', $scope);

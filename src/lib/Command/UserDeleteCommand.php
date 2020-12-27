@@ -26,22 +26,22 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var DeleteUserDataHelper
      */
-    protected $deleteUserData;
+    protected DeleteUserDataHelper $deleteUserData;
 
     /**
      * @var BackgroundJobService
      */
-    protected $backgroundJobs;
+    protected BackgroundJobService $backgroundJobs;
 
     /**
      * UserDeleteCommand constructor.

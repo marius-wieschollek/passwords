@@ -15,7 +15,6 @@ use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Preview\WebshotHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -40,27 +39,27 @@ class AdminSettings implements ISettings {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * AdminSettings constructor.
@@ -149,7 +148,6 @@ class AdminSettings implements ISettings {
 
     /**
      * @return array[]
-     * @throws \OCP\AppFramework\QueryException
      */
     protected function getWordsServices(): array {
         $current = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());
@@ -391,12 +389,12 @@ class AdminSettings implements ISettings {
             'https'  => $this->request->getHttpProtocol() === 'https',
             'php'    => [
                 'warn'    => PHP_VERSION_ID < 70400,
-                'error'   => PHP_VERSION_ID < 70300,
+                'error'   => PHP_VERSION_ID < 70400,
                 'version' => PHP_VERSION
             ],
             'server' => [
                 'warn'    => $ncVersion < 20,
-                'error'   => $ncVersion < 17,
+                'error'   => $ncVersion < 20,
                 'version' => $ncVersion
             ],
             'eol'    => '2021.1.0'

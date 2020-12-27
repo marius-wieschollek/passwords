@@ -7,14 +7,18 @@
 
 namespace OCA\Passwords\Controller\Api\Legacy;
 
+use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -28,17 +32,17 @@ class LegacyCategoryApiController extends ApiController {
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var LoggingService
      */
-    protected $loggingService;
+    protected LoggingService $loggingService;
 
     /**
      * @var TagRevisionService
      */
-    protected $tagRevisionService;
+    protected TagRevisionService $tagRevisionService;
 
     /**
      * LegacyCategoryApiController constructor.
@@ -79,7 +83,7 @@ class LegacyCategoryApiController extends ApiController {
             if($model->isSuspended()) continue;
             try {
                 $category = $this->getCategoryObject($model);
-            } catch(\Exception $e) {
+            } catch(Exception $e) {
                 $this->loggingService->logException($e);
 
                 continue;
@@ -98,7 +102,7 @@ class LegacyCategoryApiController extends ApiController {
      * @param $id
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function show($id): JSONResponse {
         /** @var Tag $tag */
@@ -119,8 +123,8 @@ class LegacyCategoryApiController extends ApiController {
      * @param $categoryColour
      *
      * @return JSONResponse
-     * @throws \Exception
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws Exception
+     * @throws ApiException
      */
     public function create($categoryName, $categoryColour): JSONResponse {
         /** @var Tag $model */
@@ -143,9 +147,9 @@ class LegacyCategoryApiController extends ApiController {
      * @param $id
      *
      * @return JSONResponse
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function destroy($id): JSONResponse {
         /** @var Tag $tag */
@@ -166,9 +170,9 @@ class LegacyCategoryApiController extends ApiController {
      * @param Tag $tag
      *
      * @return array|null
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function getCategoryObject(Tag $tag): ?array {
         /** @var TagRevision $revision */

@@ -12,5 +12,4 @@ class FolderRevisionMapper extends AbstractRevisionMapper {
     const TABLE_NAME = 'passwords_entity_folder_revision';
 
     const MODEL_TABLE_NAME = 'passwords_entity_folder';
-
 }

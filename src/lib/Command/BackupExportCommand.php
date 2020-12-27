@@ -7,7 +7,9 @@
 
 namespace OCA\Passwords\Command;
 
+use Exception;
 use OCA\Passwords\Services\BackupService;
+use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,7 +26,7 @@ class BackupExportCommand extends Command {
     /**
      * @var BackupService
      */
-    protected $backupService;
+    protected BackupService $backupService;
 
     /**
      * BackupExportCommand constructor.
@@ -52,8 +54,8 @@ class BackupExportCommand extends Command {
      * @param OutputInterface $output
      *
      * @return int|null|void
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \Exception
+     * @throws NotPermittedException
+     * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): void {
         $backup     = $this->getBackup($input->getArgument('backup'));
@@ -67,15 +69,15 @@ class BackupExportCommand extends Command {
      * @param $name
      *
      * @return ISimpleFile
-     * @throws \OCP\Files\NotPermittedException
-     * @throws \Exception
+     * @throws NotPermittedException
+     * @throws Exception
      */
     protected function getBackup($name): ISimpleFile {
         $backups = $this->backupService->getBackups();
 
         if(isset($backups[ $name ])) return $backups[ $name ];
 
-        throw new \Exception("Could not find backup '{$name}'");
+        throw new Exception("Could not find backup '{$name}'");
     }
 
     /**
@@ -83,7 +85,7 @@ class BackupExportCommand extends Command {
      * @param ISimpleFile    $backup
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getFilePath(InputInterface $input, ISimpleFile $backup): string {
         if(!$input->hasArgument('file')) return getcwd().DIRECTORY_SEPARATOR.$backup->getName();
@@ -99,12 +101,12 @@ class BackupExportCommand extends Command {
         }
 
         if(!is_dir($exportFolder)) {
-            if(is_file($exportFolder)) throw new \Exception('Invalid export file path');
+            if(is_file($exportFolder)) throw new Exception('Invalid export file path');
             mkdir($exportFolder, 0777, true);
         }
 
         $exportPath = $exportFolder.DIRECTORY_SEPARATOR.$exportFile;
-        if(file_exists($exportPath) && !is_file($exportPath)) throw new \Exception('Invalid export file path');
+        if(file_exists($exportPath) && !is_file($exportPath)) throw new Exception('Invalid export file path');
 
         return $this->normalizePath($exportPath);
     }

@@ -24,17 +24,17 @@ abstract class AbstractQueuedJob extends QueuedJob {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var BackgroundJobService
      */
-    protected $backgroundJobService;
+    protected BackgroundJobService $backgroundJobService;
 
     /**
      * AbstractCronJob constructor.

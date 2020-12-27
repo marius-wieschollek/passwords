@@ -27,22 +27,22 @@ class UserMoveCommand extends AbstractInteractiveCommand {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IUserManager
      */
-    protected $userManager;
+    protected IUserManager $userManager;
 
     /**
      * @var MoveUserDataHelper
      */
-    protected $moveUserData;
+    protected MoveUserDataHelper $moveUserData;
 
     /**
      * @var DeleteUserDataHelper
      */
-    protected $deleteUserData;
+    protected DeleteUserDataHelper $deleteUserData;
 
     /**
      * UserMoveCommand constructor.

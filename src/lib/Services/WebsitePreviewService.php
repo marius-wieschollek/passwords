@@ -11,7 +11,6 @@ use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
-use OCP\AppFramework\QueryException;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -30,27 +29,27 @@ class WebsitePreviewService {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var AbstractImageHelper
      */
-    protected $imageService;
+    protected AbstractImageHelper $imageService;
 
     /**
      * @var AbstractPreviewHelper
      */
-    protected $previewService;
+    protected AbstractPreviewHelper $previewService;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var ValidationService
      */
-    protected $validationService;
+    protected ValidationService $validationService;
 
     /**
      * FaviconService constructor.
@@ -59,8 +58,6 @@ class WebsitePreviewService {
      * @param FileCacheService  $fileCacheService
      * @param ValidationService $validationService
      * @param LoggingService    $logger
-     *
-     * @throws QueryException
      */
     public function __construct(
         HelperService $helperService,

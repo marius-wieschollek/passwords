@@ -25,27 +25,27 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
     /**
      * @var ICrypto
      */
-    private $crypto;
+    private ICrypto $crypto;
 
     /**
      * @var ISecureRandom
      */
-    protected $secureRandom;
+    protected ISecureRandom $secureRandom;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * SseV2Encryption constructor.

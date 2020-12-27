@@ -28,42 +28,42 @@ class MailService {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var IConfig
      */
-    protected $config;
+    protected IConfig $config;
 
     /**
      * @var UserSettingsService
      */
-    protected $settings;
+    protected UserSettingsService $settings;
 
     /**
      * @var UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * @var IFactory
      */
-    protected $l10NFactory;
+    protected IFactory $l10NFactory;
 
     /**
      * @var NewClientMail
      */
-    protected $newClientMail;
+    protected NewClientMail $newClientMail;
 
     /**
      * @var BadPasswordMail
      */
-    protected $badPasswordMail;
+    protected BadPasswordMail $badPasswordMail;
 
     /**
      * @var ShareCreatedMail
      */
-    protected $shareCreatedMail;
+    protected ShareCreatedMail $shareCreatedMail;
 
     /**
      * MailService constructor.

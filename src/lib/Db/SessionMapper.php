@@ -32,5 +32,4 @@ class SessionMapper extends AbstractMapper {
 
         return $this->findEntities($sql);
     }
-
 }

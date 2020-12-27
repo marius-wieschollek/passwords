@@ -10,6 +10,7 @@ namespace OCA\Passwords\Exception\SecurityCheck;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use OCP\Http\Client\IResponse;
+use Throwable;
 
 /**
  * Class InvalidHibpApiResponseException
@@ -24,15 +25,15 @@ class InvalidHibpApiResponseException extends Exception {
      * InvalidHibpApiResponseException constructor.
      *
      * @param IResponse|null  $response
-     * @param \Throwable|null $previous
+     * @param Throwable|null $previous
      */
-    public function __construct(IResponse $response = null, \Throwable $previous = null) {
+    public function __construct(IResponse $response = null, Throwable $previous = null) {
         $message = 'HIBP API returned invalid response';
         if($response instanceof IResponse) {
             $message .= " HTTP {$response->getStatusCode()}";
         } else if($previous instanceof ClientException) {
             $message .= " HTTP {$previous->getResponse()->getStatusCode()}";
-        } else if($previous instanceof \Throwable) {
+        } else if($previous instanceof Throwable) {
             $message .= $previous->getMessage();
         }
 

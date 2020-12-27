@@ -20,7 +20,7 @@ class TagRevision extends AbstractRevision {
     /**
      * @var string
      */
-    protected $color;
+    protected string $color;
 
     /**
      * TagRevision constructor.

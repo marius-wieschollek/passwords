@@ -20,17 +20,17 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var IL10N
      */
-    protected $localisation;
+    protected IL10N $localisation;
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'backup';
+    protected string $scope = 'backup';
 
     /**
      * @var array
      */
-    protected $keys
+    protected array $keys
         = [
             'interval'  => 'backup/interval',
             'files.max' => 'backup/files/maximum'
@@ -39,7 +39,7 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $types
+    protected array $types
         = [
             'interval'  => 'select:number',
             'files.max' => 'number'
@@ -48,14 +48,14 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $defaults
+    protected array $defaults
         = [
             'interval'  => 86400,
             'files.max' => 14
         ];
 
     /**
-     * ServiceSettingsHelper constructor.
+     * BackupSettingsHelper constructor.
      *
      * @param ConfigurationService $config
      * @param IL10N                $localisation

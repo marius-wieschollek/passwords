@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Migration\DatabaseRepair;
@@ -20,7 +24,7 @@ class PasswordModelRepair extends AbstractModelRepair {
     /**
      * @var string
      */
-    protected $objectName = 'password';
+    protected string $objectName = 'password';
 
     /**
      * PasswordModelRepair constructor.

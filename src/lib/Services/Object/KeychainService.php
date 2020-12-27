@@ -7,15 +7,17 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Db\KeychainMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class KeychainService
@@ -25,37 +27,37 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 class KeychainService extends AbstractService {
 
     /**
-     * @var KeychainMapper
+     * @var KeychainMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var EncryptionService
      */
-    protected $encryptionService;
+    protected EncryptionService $encryptionService;
 
     /**
      * @var string
      */
-    protected $class = Keychain::class;
+    protected string $class = Keychain::class;
 
     /**
      * KeychainService constructor.
      *
      * @param KeychainMapper     $mapper
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param EnvironmentService $environment
      * @param EncryptionService  $encryptionService
      */
     public function __construct(
         KeychainMapper $mapper,
         UuidHelper $uuidHelper,
-        HookManager $hookManager,
+        IEventDispatcher $eventDispatcher,
         EnvironmentService $environment,
         EncryptionService $encryptionService
     ) {
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
         $this->mapper            = $mapper;
         $this->encryptionService = $encryptionService;
     }
@@ -64,7 +66,7 @@ class KeychainService extends AbstractService {
      * @param bool $decrypt
      *
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAll(bool $decrypt = false): array {
         /** @var Keychain[] $keychains */
@@ -78,7 +80,7 @@ class KeychainService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByUserId(string $userId, bool $decrypt = false): array {
         /** @var Keychain[] $keychains */
@@ -92,7 +94,7 @@ class KeychainService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByScope(string $scope, bool $decrypt = false): array {
         /** @var Keychain[] $keychains */
@@ -108,7 +110,7 @@ class KeychainService extends AbstractService {
      * @return Keychain
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByType(string $type, bool $decrypt = false): Keychain {
         /** @var Keychain $keychain */
@@ -119,7 +121,7 @@ class KeychainService extends AbstractService {
 
     /**
      * @return Keychain[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function getClientKeychainArray(): array {
         $keychains = $this->findByScope(Keychain::SCOPE_CLIENT, true);
@@ -142,31 +144,21 @@ class KeychainService extends AbstractService {
     public function create(string $type, string $data, string $scope): Keychain {
         $keychain = $this->createModel($type, $data, $scope);
 
-        $this->hookManager->emit($this->class, 'postCreate', [$keychain]);
+        $this->fireEvent('instantiated', $keychain);
 
         return $keychain;
     }
 
     /**
-     * @param EntityInterface|Keychain $challenge
+     * @param EntityInterface|Keychain $keychain
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
-    public function save(EntityInterface $challenge): EntityInterface {
-        $this->hookManager->emit($this->class, 'preSave', [$challenge]);
+    public function save(EntityInterface $keychain): EntityInterface {
+        if($keychain->_isDecrypted()) $this->encryptionService->encryptKeychain($keychain);
 
-        if($challenge->_isDecrypted()) $this->encryptionService->encryptKeychain($challenge);
-
-        if(empty($challenge->getId())) {
-            $saved = $this->mapper->insert($challenge);
-        } else {
-            $challenge->setUpdated(time());
-            $saved = $this->mapper->update($challenge);
-        }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
-
-        return $saved;
+        return parent::save($keychain);
     }
 
     /**
@@ -196,7 +188,7 @@ class KeychainService extends AbstractService {
      * @param array $keychains
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function decryptArray(array $keychains): array {
         foreach($keychains as $keychain) {

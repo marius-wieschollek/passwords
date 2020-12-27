@@ -22,12 +22,12 @@ abstract class AbstractTimedJob extends TimedJob {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var EnvironmentService
      */
-    protected $environment;
+    protected EnvironmentService $environment;
 
     /**
      * @var float|int
@@ -68,7 +68,7 @@ abstract class AbstractTimedJob extends TimedJob {
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     abstract protected function runJob($argument): void;
 }

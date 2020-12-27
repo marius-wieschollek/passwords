@@ -22,27 +22,27 @@ class Challenge extends AbstractEntity {
     /**
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string
      */
-    protected $clientData;
+    protected string $clientData;
 
     /**
      * @var string
      */
-    protected $serverData;
+    protected string $serverData;
 
     /**
      * @var string
      */
-    protected $secret;
+    protected string $secret;
 
     /**
      * @var bool
      */
-    protected $_decrypted = false;
+    protected bool $_decrypted = false;
 
     /**
      * Folder constructor.

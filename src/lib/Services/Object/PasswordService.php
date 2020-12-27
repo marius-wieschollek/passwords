@@ -7,12 +7,14 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class PasswordService
@@ -22,25 +24,25 @@ use OCA\Passwords\Services\EnvironmentService;
 class PasswordService extends AbstractModelService {
 
     /**
-     * @var PasswordMapper
+     * @var PasswordMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * @var string
      */
-    protected $class = Password::class;
+    protected string $class = Password::class;
 
     /**
      * PasswordService constructor.
      *
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param PasswordMapper     $mapper
      * @param EnvironmentService $environment
      */
-    public function __construct(UuidHelper $uuidHelper, HookManager $hookManager, PasswordMapper $mapper, EnvironmentService $environment) {
-        parent::__construct($mapper, $uuidHelper, $hookManager, $environment);
+    public function __construct(UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, PasswordMapper $mapper, EnvironmentService $environment) {
+        parent::__construct($mapper, $uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -64,7 +66,7 @@ class PasswordService extends AbstractModelService {
 
     /**
      * @return Password[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findShared(): array {
         return $this->mapper->findAllShared();

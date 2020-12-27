@@ -24,8 +24,8 @@ namespace OCA\Passwords\Db;
  * @method void setShareable(bool $shareable)
  * @method bool getSourceUpdated()
  * @method bool getTargetUpdated()
- * @method int getExpires()
- * @method void setExpires(int $expires)
+ * @method int|null getExpires()
+ * @method void setExpires(int|null $expires)
  * @method string getClient()
  * @method void setClient(string $client)
  *
@@ -40,52 +40,52 @@ class Share extends AbstractEntity implements EntityInterface {
     /**
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string
      */
-    protected $client;
+    protected string $client;
 
     /**
      * @var string
      */
-    protected $receiver;
+    protected string $receiver;
 
     /**
      * @var bool
      */
-    protected $editable;
+    protected bool $editable;
 
     /**
      * @var bool
      */
-    protected $shareable;
+    protected bool $shareable;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $expires;
+    protected ?int $expires;
 
     /**
      * @var string
      */
-    protected $sourcePassword;
+    protected string $sourcePassword;
 
     /**
      * @var string
      */
-    protected $targetPassword;
+    protected string $targetPassword;
 
     /**
      * @var bool
      */
-    protected $sourceUpdated;
+    protected bool $sourceUpdated;
 
     /**
      * @var bool
      */
-    protected $targetUpdated;
+    protected bool $targetUpdated;
 
     /**
      * Password constructor.

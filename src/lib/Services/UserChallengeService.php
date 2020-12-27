@@ -9,11 +9,17 @@ namespace OCA\Passwords\Services;
 
 use Exception;
 use OCA\Passwords\Db\Challenge;
+use OCA\Passwords\Events\Challenge\AfterChallengeActivatedEvent;
+use OCA\Passwords\Events\Challenge\AfterChallengeRevertedEvent;
+use OCA\Passwords\Events\Challenge\BeforeChallengeActivatedEvent;
+use OCA\Passwords\Events\Challenge\BeforeChallengeRevertedEvent;
+use OCA\Passwords\Events\Challenge\ChallengeActivatedEvent;
+use OCA\Passwords\Events\Challenge\ChallengeRevertedEvent;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Challenge\ChallengeV1Helper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\Object\ChallengeService;
 use OCP\AppFramework\Http;
+use OCP\EventDispatcher\IEventDispatcher;
 use stdClass;
 
 /**
@@ -28,57 +34,57 @@ class UserChallengeService {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
-
-    /**
-     * @var HookManager
-     */
-    protected $hookManager;
+    protected ConfigurationService $config;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var ChallengeService
      */
-    protected $challengeService;
+    protected ChallengeService $challengeService;
 
     /**
      * @var ChallengeV1Helper
      */
-    protected $challengeHelper;
+    protected ChallengeV1Helper $challengeHelper;
+
+    /**
+     * @var IEventDispatcher
+     */
+    protected IEventDispatcher $eventDispatcher;
 
     /**
      * UserChallengeHelper constructor.
      *
      * @param LoggingService       $logger
-     * @param HookManager          $hookManager
      * @param ConfigurationService $config
      * @param SessionService       $sessionService
+     * @param IEventDispatcher     $eventDispatcher
      * @param ChallengeService     $challengeService
      * @param ChallengeV1Helper    $challengeHelper
      */
     public function __construct(
         LoggingService $logger,
-        HookManager $hookManager,
         ConfigurationService $config,
         SessionService $sessionService,
+        IEventDispatcher $eventDispatcher,
         ChallengeService $challengeService,
         ChallengeV1Helper $challengeHelper
     ) {
         $this->config           = $config;
         $this->logger           = $logger;
         $this->sessionService   = $sessionService;
-        $this->hookManager      = $hookManager;
         $this->challengeService = $challengeService;
         $this->challengeHelper  = $challengeHelper;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -87,7 +93,7 @@ class UserChallengeService {
     public function hasChallenge(): bool {
         try {
             return $this->config->hasUserValue(self::USER_CHALLENGE_ID);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             return false;
@@ -119,7 +125,7 @@ class UserChallengeService {
     public function validateChallenge(string $secret): bool {
         try {
             $challenge = $this->getDefaultChallenge();
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             return false;
@@ -141,16 +147,17 @@ class UserChallengeService {
     public function setChallenge(array $clientData, string $secret): bool {
         $backup = $this->backupChallenge();
         try {
-            $this->hookManager->emit(Challenge::class, 'preSetChallenge');
+            $this->eventDispatcher->dispatchTyped(new BeforeChallengeActivatedEvent($clientData, $secret));
 
             /** @var $challenge Challenge */
-            list($key, $challenge) = $this->challengeHelper->createChallenge($secret, $clientData);
+            [$key, $challenge] = $this->challengeHelper->createChallenge($secret, $clientData);
             $this->challengeService->save($challenge);
             $this->sessionService->set(SessionService::VALUE_USER_SECRET, $key);
             $this->config->setUserValue(self::USER_CHALLENGE_ID, $challenge->getUuid());
 
-            $this->hookManager->emit(Challenge::class, 'postSetChallenge', [$key]);
-        } catch(\Exception $e) {
+            $this->eventDispatcher->dispatchTyped(new ChallengeActivatedEvent($challenge, $key));
+            $this->eventDispatcher->dispatchTyped(new AfterChallengeActivatedEvent($challenge, $key));
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             $this->revertChallenge($backup);
@@ -176,7 +183,7 @@ class UserChallengeService {
             $id = $this->config->getUserValue(self::USER_CHALLENGE_ID);
 
             return $this->challengeService->findByUuid($id, true);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->logException($e);
 
             throw new ApiException('Loading challenge failed');
@@ -210,6 +217,7 @@ class UserChallengeService {
      */
     protected function revertChallenge(array $backup): void {
         try {
+            $this->eventDispatcher->dispatchTyped(new BeforeChallengeRevertedEvent($backup));
             if(isset($backup['challenge'])) {
                 $this->config->setUserValue(self::USER_CHALLENGE_ID, $backup['challenge']->getUuid());
                 $this->sessionService->set(SessionService::VALUE_USER_SECRET, $backup['secret']);
@@ -217,6 +225,8 @@ class UserChallengeService {
                 $this->config->deleteUserValue(self::USER_CHALLENGE_ID);
                 $this->sessionService->unset(SessionService::VALUE_USER_SECRET);
             }
+            $this->eventDispatcher->dispatchTyped(new ChallengeRevertedEvent($backup));
+            $this->eventDispatcher->dispatchTyped(new AfterChallengeRevertedEvent($backup));
         } catch(Exception $e) {
             $this->logger->logException($e);
         }

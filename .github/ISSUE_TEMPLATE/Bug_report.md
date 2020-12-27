@@ -13,13 +13,22 @@ labels: bug
 -->
 
 ### System Information
-- Nextcloud Version:
-- PHP Version:
-- Database and Version:
-- Passwords Version:
-- Browser and Version:
-- Client OS and Version:
-- Server OS and Version:
+**Server:**
+```
+ Put the output of "./occ passwords:system:report" here or fill out the fields below
+
+ Nextcloud Version:
+ PHP Version:
+ Database and Version:
+ Server OS and Version:
+ Passwords Version:
+```
+
+**Client:**
+```
+ Browser and Version:
+ Client OS and Version:
+```
 
 ### Steps to reproduce
 1. <!-- Describe PRECISELY and DETAILED the necessary steps to reproduce the bug -->

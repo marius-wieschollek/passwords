@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
@@ -15,6 +16,7 @@ use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
+use Throwable;
 
 /**
  * Class CheckPasswordsJob
@@ -26,27 +28,27 @@ class CheckPasswordsJob extends AbstractTimedJob {
     /**
      * @var MailService
      */
-    protected $mailService;
+    protected MailService $mailService;
 
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
      * @var PasswordRevisionMapper
      */
-    protected $revisionMapper;
+    protected PasswordRevisionMapper $revisionMapper;
 
     /**
      * @var NotificationService
      */
-    protected $notificationService;
+    protected NotificationService $notificationService;
 
     /**
      * @var array
      */
-    protected $badPasswords = [];
+    protected array $badPasswords = [];
 
     /**
      * @var float|int
@@ -81,7 +83,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($argument): void {
         $securityHelper = $this->helperService->getSecurityHelper();
@@ -93,16 +95,15 @@ class CheckPasswordsJob extends AbstractTimedJob {
     /**
      * @param $securityHelper
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
-        /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionMapper->findAllWithGoodStatus();
 
         $badRevisionCounter = 0;
         foreach($revisions as $revision) {
             $oldStatusCode = $revision->getStatusCode();
-            list($statusLevel, $statusCode) = $securityHelper->getRevisionSecurityLevel($revision);
+            [$statusLevel, $statusCode] = $securityHelper->getRevisionSecurityLevel($revision);
 
             if($oldStatusCode !== $statusCode) {
                 $revision->setStatus($statusLevel);
@@ -135,7 +136,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
                     $this->badPasswords[ $user ]++;
                 }
             }
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
         }
     }

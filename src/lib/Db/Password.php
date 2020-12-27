@@ -13,7 +13,7 @@ namespace OCA\Passwords\Db;
  * @package OCA\Passwords\Db
  *
  * @method string|null getShareId()
- * @method void setShareId(string $shareId)
+ * @method void setShareId(string|null $shareId)
  * @method bool getEditable()
  * @method void setEditable(bool $editable)
  * @method bool getHasShares()
@@ -22,19 +22,19 @@ namespace OCA\Passwords\Db;
 class Password extends AbstractModel {
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $shareId;
+    protected ?string $shareId;
 
     /**
      * @var bool
      */
-    protected $hasShares;
+    protected bool $hasShares;
 
     /**
      * @var bool
      */
-    protected $editable;
+    protected bool $editable;
 
     /**
      * Password constructor.

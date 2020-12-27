@@ -7,12 +7,13 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\Registration;
 use OCA\Passwords\Db\RegistrationMapper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class RegistrationService
@@ -24,25 +25,25 @@ class RegistrationService extends AbstractService {
     /**
      * @var string
      */
-    protected $class = Registration::class;
+    protected string $class = Registration::class;
 
     /**
-     * @var RegistrationMapper
+     * @var RegistrationMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * RegistrationService constructor.
      *
      * @param RegistrationMapper $mapper
      * @param UuidHelper         $uuidHelper
-     * @param HookManager        $hookManager
+     * @param IEventDispatcher   $eventDispatcher
      * @param EnvironmentService $environment
      */
-    public function __construct(RegistrationMapper $mapper, UuidHelper $uuidHelper, HookManager $hookManager, EnvironmentService $environment) {
+    public function __construct(RegistrationMapper $mapper, UuidHelper $uuidHelper, IEventDispatcher $eventDispatcher, EnvironmentService $environment) {
         $this->mapper = $mapper;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
@@ -50,27 +51,9 @@ class RegistrationService extends AbstractService {
      */
     public function create(): Registration {
         $model = $this->createModel();
-        $this->hookManager->emit(Registration::class, 'postCreate', [$model]);
+        $this->fireEvent('instantiated', $model);
 
         return $model;
-    }
-
-    /**
-     * @param Registration|EntityInterface $model
-     *
-     * @return Registration|EntityInterface
-     */
-    public function save(EntityInterface $model): EntityInterface {
-        $this->hookManager->emit(Registration::class, 'preSave', [$model]);
-        if(empty($model->getId())) {
-            $saved = $this->mapper->insert($model);
-        } else {
-            $model->setUpdated(time());
-            $saved = $this->mapper->update($model);
-        }
-        $this->hookManager->emit(Registration::class, 'postSave', [$saved]);
-
-        return $saved;
     }
 
     /**

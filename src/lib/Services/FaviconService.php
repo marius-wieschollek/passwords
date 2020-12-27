@@ -8,7 +8,10 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
+use OCP\Files\NotFoundException;
+use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
+use Throwable;
 
 /**
  * Class FaviconService
@@ -20,22 +23,22 @@ class FaviconService {
     /**
      * @var HelperService
      */
-    protected $helperService;
+    protected HelperService $helperService;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCacheService;
+    protected FileCacheService $fileCacheService;
 
     /**
      * @var ValidationService
      */
-    protected $validationService;
+    protected ValidationService $validationService;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * FaviconService constructor.
@@ -63,11 +66,10 @@ class FaviconService {
      *
      * @return ISimpleFile
      * @throws ApiException
-     * @throws \OCP\AppFramework\QueryException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function getFavicon(string $domain, int $size = 32): ISimpleFile {
-        list($domain, $size) = $this->validateInput($domain, $size);
+        [$domain, $size] = $this->validateInput($domain, $size);
 
         $faviconService = $this->helperService->getFaviconHelper();
         $fileName       = $faviconService->getFaviconFilename($domain, $size);
@@ -89,12 +91,12 @@ class FaviconService {
             $favicon = $faviconService->getFavicon($domain, $size);
 
             return $this->resizeFavicon($favicon, $fileName, $size);
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             $this->logger->logException($e);
 
             try {
                 return $faviconService->getDefaultFavicon($domain, $size);
-            } catch(\Throwable $e) {
+            } catch(Throwable $e) {
                 $this->logger->logException($e);
 
                 throw new ApiException('Internal Favicon API Error', 502, $e);
@@ -108,9 +110,8 @@ class FaviconService {
      * @param int         $size
      *
      * @return ISimpleFile|null
-     * @throws \OCP\AppFramework\QueryException
-     * @throws \OCP\Files\NotFoundException
-     * @throws \OCP\Files\NotPermittedException
+     * @throws NotFoundException
+     * @throws NotPermittedException
      */
     protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ?ISimpleFile {
         $faviconData = $favicon->getContent();

@@ -26,37 +26,37 @@ class AppSettingsService {
     /**
      * @var EntitySettingsHelper
      */
-    protected $entitySettings;
+    protected EntitySettingsHelper $entitySettings;
 
     /**
      * @var BackupSettingsHelper
      */
-    protected $backupSettings;
+    protected BackupSettingsHelper $backupSettings;
 
     /**
      * @var SurveySettingsHelper
      */
-    protected $surveySettings;
+    protected SurveySettingsHelper $surveySettings;
 
     /**
      * @var ServiceSettingsHelper
      */
-    protected $serviceSettings;
+    protected ServiceSettingsHelper $serviceSettings;
 
     /**
      * @var DefaultSettingsHelper
      */
-    protected $defaultSettings;
+    protected DefaultSettingsHelper $defaultSettings;
 
     /**
      * @var NightlySettingsHelper
      */
-    protected $nightlySettings;
+    protected NightlySettingsHelper $nightlySettings;
 
     /**
      * @var LegacyApiSettingsHelper
      */
-    protected $legacyApiSettings;
+    protected LegacyApiSettingsHelper $legacyApiSettings;
 
     /**
      * AppSettingsService constructor.
@@ -91,10 +91,10 @@ class AppSettingsService {
      * @param string $key
      *
      * @return mixed
-     * @throws \OCA\Passwords\Exception\ApiException
+     * @throws ApiException
      */
     public function get(string $key): array {
-        list($scope, $subKey) = explode('.', $key, 2);
+        [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
             case 'entity':
@@ -124,7 +124,7 @@ class AppSettingsService {
      * @throws ApiException
      */
     public function set(string $key, $value) {
-        list($scope, $subKey) = explode('.', $key, 2);
+        [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
             case 'entity':
@@ -153,7 +153,7 @@ class AppSettingsService {
      * @throws ApiException
      */
     public function reset(string $key) {
-        list($scope, $subKey) = explode('.', $key, 2);
+        [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
             case 'entity':

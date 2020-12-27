@@ -7,15 +7,19 @@
 
 namespace OCA\Passwords\Services\Object;
 
+use Exception;
+use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\AbstractRevisionMapper;
 use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Hooks\Manager\HookManager;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\ValidationService;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\EventDispatcher\IEventDispatcher;
 
 /**
  * Class AbstractRevisionService
@@ -27,23 +31,23 @@ abstract class AbstractRevisionService extends AbstractService {
     /**
      * @var ValidationService
      */
-    protected $validation;
+    protected ValidationService $validation;
 
     /**
      * @var EncryptionService
      */
-    protected $encryption;
+    protected EncryptionService $encryption;
 
     /**
-     * @var AbstractRevisionMapper
+     * @var AbstractRevisionMapper|AbstractMapper
      */
-    protected $mapper;
+    protected AbstractMapper $mapper;
 
     /**
      * AbstractRevisionService constructor.
      *
      * @param UuidHelper             $uuidHelper
-     * @param HookManager            $hookManager
+     * @param IEventDispatcher       $eventDispatcher
      * @param EnvironmentService     $environment
      * @param AbstractRevisionMapper $revisionMapper
      * @param ValidationService      $validationService
@@ -51,7 +55,7 @@ abstract class AbstractRevisionService extends AbstractService {
      */
     public function __construct(
         UuidHelper $uuidHelper,
-        HookManager $hookManager,
+        IEventDispatcher $eventDispatcher,
         EnvironmentService $environment,
         AbstractRevisionMapper $revisionMapper,
         ValidationService $validationService,
@@ -61,14 +65,14 @@ abstract class AbstractRevisionService extends AbstractService {
         $this->validation = $validationService;
         $this->encryption = $encryption;
 
-        parent::__construct($uuidHelper, $hookManager, $environment);
+        parent::__construct($uuidHelper, $eventDispatcher, $environment);
     }
 
     /**
      * @param bool $decrypt
      *
      * @return RevisionInterface[]
-     * @throws \Exception
+     * @throws Exception
      */
     public function findAll($decrypt = false): array {
         /** @var RevisionInterface[] $revisions */
@@ -88,9 +92,9 @@ abstract class AbstractRevisionService extends AbstractService {
      *
      * @return RevisionInterface
      *
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     * @throws Exception
      */
     public function findByUuid(string $uuid, bool $decrypt = false): RevisionInterface {
         /** @var RevisionInterface $revision */
@@ -105,7 +109,7 @@ abstract class AbstractRevisionService extends AbstractService {
      *
      * @return RevisionInterface[]
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByModel(string $modelUuid, bool $decrypt = false): array {
         /** @var RevisionInterface[] $revisions */
@@ -125,7 +129,7 @@ abstract class AbstractRevisionService extends AbstractService {
      * @param bool   $decrypt
      *
      * @return RevisionInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function findCurrentRevisionByModel(string $modelUuid, bool $decrypt = false): RevisionInterface {
         /** @var RevisionInterface $revision */
@@ -138,23 +142,14 @@ abstract class AbstractRevisionService extends AbstractService {
      * @param EntityInterface|RevisionInterface|Entity $revision
      *
      * @return RevisionInterface|Entity
-     * @throws \Exception
+     * @throws Exception
      */
     public function save(EntityInterface $revision): EntityInterface {
-        if(get_class($revision) !== $this->class) throw new \Exception('Invalid revision class given');
-        $this->hookManager->emit($this->class, 'preSave', [$revision]);
+        if(get_class($revision) !== $this->class) throw new Exception('Invalid revision class given');
 
         if($revision->_isDecrypted()) $this->encryption->encrypt($revision);
 
-        if(empty($revision->getId())) {
-            $saved = $this->mapper->insert($revision);
-        } else {
-            $revision->setUpdated(time());
-            $saved = $this->mapper->update($revision);
-        }
-        $this->hookManager->emit($this->class, 'postSave', [$saved]);
-
-        return $saved;
+        return $this->saveModel($revision);
     }
 
     /**
@@ -183,7 +178,7 @@ abstract class AbstractRevisionService extends AbstractService {
         if($this->userId) {
             try {
                 return $this->encryption->getDefaultEncryption($cseType, $this->userId);
-            } catch(\Exception $e) {
+            } catch(Exception $e) {
             }
         }
 

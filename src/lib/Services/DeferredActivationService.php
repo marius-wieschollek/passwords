@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class DeferredActivationService
@@ -18,32 +19,35 @@ use OCP\Http\Client\IClientService;
  */
 class DeferredActivationService {
 
-    protected $features = null;
+    /**
+     * @var array|null
+     */
+    protected ?array $features = [];
 
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * @var FileCacheService
      */
-    protected $fileCache;
+    protected FileCacheService $fileCache;
 
     /**
      * @var ServerSettingsHelper
      */
-    protected $serverSettings;
+    protected ServerSettingsHelper $serverSettings;
 
     /**
      * @var IClientService
      */
-    protected $httpClientService;
+    protected IClientService $httpClientService;
 
     /**
      * DeferredActivationService constructor.
@@ -87,6 +91,15 @@ class DeferredActivationService {
     }
 
     /**
+     * @return array
+     */
+    public function getClientFeatures(): array {
+        if($this->isServiceDisabled()) return [];
+
+        return $this->getFeatures('webapp');
+    }
+
+    /**
      * @return array|null
      */
     public function getUpdateInfo(): ?array {
@@ -103,21 +116,23 @@ class DeferredActivationService {
     /**
      * Fetch the feature set for this app
      *
+     * @param string $section
+     *
      * @return array
      */
-    protected function getFeatures(): array {
-        if($this->features !== null) return $this->features;
+    protected function getFeatures($section = 'server'): array {
+        if(isset($this->features[ $section ])) return $this->features[ $section ];
 
         $data = $this->fetchFeatures();
         if($data === null) {
-            $this->features = [];
+            $this->features[ $section ] = [];
 
             return [];
         }
 
-        $this->features = $this->processFeatures($data);
+        $this->features[ $section ] = $this->processFeatures($data, $section);
 
-        return $this->features;
+        return $this->features[ $section ];
     }
 
     /**
@@ -140,19 +155,20 @@ class DeferredActivationService {
     /**
      * Process the raw json into the feature set for this app
      *
-     * @param $json
+     * @param        $json
+     * @param string $section
      *
      * @return array
      */
-    protected function processFeatures($json): array {
-        if(!isset($json['server'])) return [];
+    protected function processFeatures($json, string $section): array {
+        if(!isset($json[ $section ])) return [];
 
         $version = $this->config->getAppValue('installed_version');
         if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
 
         [$major, $minor] = explode('.', $version);
         $mainVersion = $major.'.'.$minor;
-        $appFeatures = $json['server'];
+        $appFeatures = $json[ $section ];
 
         $features = [];
         if(isset($appFeatures[ $mainVersion ])) {
@@ -191,7 +207,7 @@ class DeferredActivationService {
 
         try {
             return $file->getContent();
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             return null;
         }
     }
@@ -200,7 +216,7 @@ class DeferredActivationService {
      * Get current json file from remote server
      *
      * @return null|string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getFeaturesFromRemote(): ?string {
         $url      = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';

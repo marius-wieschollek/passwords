@@ -15,14 +15,14 @@ namespace OCA\Passwords\Helper\AppSettings;
 class DefaultSettingsHelper extends AbstractSettingsHelper {
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope = 'default';
+    protected string $scope = 'default';
 
     /**
      * @var array
      */
-    protected $keys
+    protected array $keys
         = [
             'mail.security' => 'settings/mail/security',
             'mail.shares'   => 'settings/mail/shares'
@@ -31,7 +31,7 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $types
+    protected array $types
         = [
             'mail.security' => 'boolean',
             'mail.shares'   => 'boolean'
@@ -40,7 +40,7 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
     /**
      * @var array
      */
-    protected $defaults
+    protected array $defaults
         = [
             'mail.security' => true,
             'mail.shares'   => false

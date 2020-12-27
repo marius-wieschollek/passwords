@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Preview;
 
+use Exception;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
 
@@ -24,7 +25,7 @@ class PageresCliHelper extends AbstractPreviewHelper {
     /**
      * @var string
      */
-    protected $prefix = HelperService::PREVIEW_PAGERES;
+    protected string $prefix = HelperService::PREVIEW_PAGERES;
 
     /**
      * @param string $domain
@@ -32,7 +33,7 @@ class PageresCliHelper extends AbstractPreviewHelper {
      * @param string $protocol
      *
      * @return bool|string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getPreviewData(string $domain, string $view, string $protocol = 'https'): string {
         $tempFile = uniqid();
@@ -64,16 +65,16 @@ class PageresCliHelper extends AbstractPreviewHelper {
 
         if($protocol === 'https') return $this->getPreviewData($domain, $view, 'http');
 
-        throw new \Exception("Pageres Error\nCommand: {$cmd}\nOutput: ".implode(' '.PHP_EOL, $output).PHP_EOL);
+        throw new Exception("Pageres Error\nCommand: {$cmd}\nOutput: ".implode(' '.PHP_EOL, $output).PHP_EOL);
     }
 
     /**
      * @return null|string
-     * @throws \Exception
+     * @throws Exception
      */
-    public static function getPageresBinary(): string {
-        $path = self::getPageresPath();
-        if($path === null) throw new \Exception('Pageres not found or not accessible');
+    protected function getPageresBinary(): string {
+        $path = $this->getPageresPath();
+        if($path === null) throw new Exception('Pageres not found or not accessible');
 
         return $path;
     }
@@ -81,7 +82,7 @@ class PageresCliHelper extends AbstractPreviewHelper {
     /**
      * @return null|string
      */
-    public static function getPageresPath(): ?string {
+    protected function getPageresPath(): ?string {
 
         $serverPath = @exec('which pageres');
         if(!empty($serverPath) && is_readable($serverPath)) return $serverPath;

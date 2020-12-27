@@ -20,22 +20,22 @@ class SetupReportHelper {
     /**
      * @var IConfig
      */
-    protected $config;
+    protected IConfig $config;
 
     /**
      * @var IRequest
      */
-    protected $request;
+    protected IRequest $request;
 
     /**
      * @var bool
      */
-    protected $isProxy;
+    protected bool $isProxy;
 
     /**
      * @var string
      */
-    protected $remoteAddress;
+    protected string $remoteAddress;
 
     /**
      * SetupReportHelper constructor.

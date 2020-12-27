@@ -7,11 +7,13 @@
 
 namespace OCA\Passwords\Controller\Api\Legacy;
 
+use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Tag;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\Object\FolderService;
@@ -21,8 +23,11 @@ use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use stdClass;
 
 /**
  * Class LegacyPasswordApiController
@@ -36,32 +41,32 @@ class LegacyPasswordApiController extends ApiController {
     /**
      * @var TagService
      */
-    protected $tagService;
+    protected TagService $tagService;
 
     /**
      * @var LoggingService
      */
-    protected $loggingService;
+    protected LoggingService $loggingService;
 
     /**
      * @var PasswordService
      */
-    protected $passwordService;
+    protected PasswordService $passwordService;
 
     /**
      * @var TagRevisionService
      */
-    protected $tagRevisionService;
+    protected TagRevisionService $tagRevisionService;
 
     /**
      * @var PasswordRevisionService
      */
-    protected $passwordRevisionService;
+    protected PasswordRevisionService $passwordRevisionService;
 
     /**
      * @var PasswordTagRelationService
      */
-    protected $passwordTagRelationService;
+    protected PasswordTagRelationService $passwordTagRelationService;
 
     /**
      * LegacyPasswordsApiController constructor.
@@ -105,13 +110,13 @@ class LegacyPasswordApiController extends ApiController {
      */
     public function index(): JSONResponse {
         $counter   = 0;
-        $passwords = new \stdClass();
+        $passwords = new stdClass();
         /** @var Password[] $models */
         $models = $this->passwordService->findAll();
         foreach($models as $model) {
             try {
                 $password = $this->getPasswordObject($model);
-            } catch(\Exception $e) {
+            } catch(Exception $e) {
                 $this->loggingService->logException($e);
 
                 continue;
@@ -133,7 +138,7 @@ class LegacyPasswordApiController extends ApiController {
      * @param int $id
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function show($id): JSONResponse {
         /** @var Password $password */
@@ -157,14 +162,13 @@ class LegacyPasswordApiController extends ApiController {
      * @param $category
      *
      * @return mixed
-     * @throws \OCA\Passwords\Exception\ApiException
-     * @throws \Exception
+     * @throws ApiException
+     * @throws Exception
      */
     public function create($pass, $loginname, $address, $notes, $category): JSONResponse {
         /** @var Password $model */
         $model   = $this->passwordService->create();
         $website = parse_url($address, PHP_URL_HOST);
-        /** @var PasswordRevision $revision */
         $revision = $this->passwordRevisionService->create(
             $model->getUuid(),
             $pass, strval($loginname),
@@ -206,10 +210,10 @@ class LegacyPasswordApiController extends ApiController {
      * @param $deleted
      *
      * @return mixed
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCA\Passwords\Exception\ApiException
-     * @throws \Exception
+     * @throws MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws ApiException
+     * @throws Exception
      */
     public function update($id, $pass, $loginname, $address, $notes, $category, $deleted): JSONResponse {
         /** @var Password $model */
@@ -228,7 +232,6 @@ class LegacyPasswordApiController extends ApiController {
             $label = strval(parse_url($address, PHP_URL_HOST)).' – '.strval($loginname);
         }
 
-        /** @var PasswordRevision $newRevision */
         $newRevision = $this->passwordRevisionService->create(
             $model->getUuid(), strval($pass), strval($loginname),
             '',
@@ -260,7 +263,7 @@ class LegacyPasswordApiController extends ApiController {
      * @param int $id
      *
      * @return JSONResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy($id): JSONResponse {
         /** @var Password $model */
@@ -286,7 +289,7 @@ class LegacyPasswordApiController extends ApiController {
      * @param Password $password
      *
      * @return array|null
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getPasswordObject(Password $password): ?array {
         /** @var PasswordRevision $revision */
@@ -338,9 +341,9 @@ class LegacyPasswordApiController extends ApiController {
      * @param Password $password
      *
      * @return Tag
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function findCategoryForPassword(Password $password): ?Tag {
         $tags = $this->tagService->findByPassword($password->getUuid());
@@ -365,9 +368,9 @@ class LegacyPasswordApiController extends ApiController {
      * @param $model
      * @param $revision
      *
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function updatePasswordCategory($category, Password $model, PasswordRevision $revision): void {
         if($category) {

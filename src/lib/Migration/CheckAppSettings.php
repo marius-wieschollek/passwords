@@ -1,12 +1,17 @@
 <?php
-/**
+/*
+ * @copyright 2020 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Migration;
 
+use Exception;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\BackgroundJobService;
@@ -32,27 +37,27 @@ class CheckAppSettings implements IRepairStep {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var AdminUserHelper
      */
-    protected $adminHelper;
+    protected AdminUserHelper $adminHelper;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * @var ServiceSettingsHelper
      */
-    protected $serviceSettings;
+    protected ServiceSettingsHelper $serviceSettings;
 
     /**
      * @var BackgroundJobService
      */
-    protected $backgroundJobService;
+    protected BackgroundJobService $backgroundJobService;
 
     /**
      * CheckAppSettings constructor.
@@ -93,7 +98,7 @@ class CheckAppSettings implements IRepairStep {
      *
      * @param IOutput $output
      *
-     * @throws \Exception in case of failure
+     * @throws Exception in case of failure
      * @since 9.1.0
      */
     public function run(IOutput $output) {

@@ -32,32 +32,32 @@ class Registration extends AbstractEntity {
     /**
      * @var string
      */
-    protected $label;
+    protected string $label;
 
     /**
      * @var string
      */
-    protected $code;
+    protected string $code;
 
     /**
      * @var string
      */
-    protected $login;
+    protected string $login;
 
     /**
      * @var string
      */
-    protected $token;
+    protected string $token;
 
     /**
      * @var int
      */
-    protected $status;
+    protected int $status;
 
     /**
      * @var int
      */
-    protected $limit;
+    protected int $limit;
 
     /**
      * Registration constructor.

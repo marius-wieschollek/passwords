@@ -31,7 +31,7 @@ class NewClientMail extends AbstractMail {
     /**
      * @var ThemeSettingsHelper
      */
-    protected $themingSettings;
+    protected ThemeSettingsHelper $themingSettings;
 
     /**
      * NewClientMail constructor.

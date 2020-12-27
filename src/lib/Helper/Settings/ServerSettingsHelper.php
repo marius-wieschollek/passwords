@@ -23,22 +23,22 @@ class ServerSettingsHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var IURLGenerator
      */
-    protected $urlGenerator;
+    protected IURLGenerator $urlGenerator;
 
     /**
      * @var ShareSettingsHelper
      */
-    protected $shareSettings;
+    protected ShareSettingsHelper $shareSettings;
 
     /**
      * @var ThemeSettingsHelper
      */
-    protected $themeSettings;
+    protected ThemeSettingsHelper $themeSettings;
 
     /**
      * ServerSettingsHelper constructor.

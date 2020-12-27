@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Uuid;
 
+use Exception;
 use OCA\Passwords\Services\LoggingService;
 
 /**
@@ -19,7 +20,7 @@ class UuidHelper {
     /**
      * @var LoggingService
      */
-    protected $logger;
+    protected LoggingService $logger;
 
     /**
      * UuidHelper constructor.
@@ -36,7 +37,7 @@ class UuidHelper {
     public function generateUuid(): string {
         try {
             return $this->generateUuidV4();
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
             $this->logger->error('Could not generate UUIDv4');
             $this->logger->logException($e);
 
@@ -46,7 +47,7 @@ class UuidHelper {
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function generateUuidV4(): string {
         return implode('-', [

@@ -25,32 +25,32 @@ class SseV2Encryption implements ObjectEncryptionInterface {
     /**
      * @var KeychainService
      */
-    protected $keychainService;
+    protected KeychainService $keychainService;
 
     /**
      * @var UuidHelper
      */
-    protected $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * @var SessionService
      */
-    protected $sessionService;
+    protected SessionService $sessionService;
 
     /**
      * @var array|null
      */
-    protected $keychainData;
+    protected ?array $keychainData;
 
     /**
      * @var ICrypto
      */
-    protected $crypto;
+    protected ICrypto $crypto;
 
     /**
      * @var array
      */
-    protected $password
+    protected array $password
         = [
             'url',
             'label',
@@ -63,17 +63,17 @@ class SseV2Encryption implements ObjectEncryptionInterface {
     /**
      * @var array
      */
-    protected $folder = ['label'];
+    protected array $folder = ['label'];
 
     /**
      * @var array
      */
-    protected $tag = ['label', 'color'];
+    protected array $tag = ['label', 'color'];
 
     /**
      * @var bool|null
      */
-    protected $isAvailable;
+    protected ?bool $isAvailable;
 
     /**
      * SseV2Encryption constructor.
@@ -134,7 +134,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
      * @throws Exception
      */
     public function encryptObject(RevisionInterface $object): RevisionInterface {
-        list($keyId, $encryptionKey) = $this->getCurrentKey();
+        [$keyId, $encryptionKey] = $this->getCurrentKey();
 
         $fields = $this->getFieldsToProcess($object);
         foreach($fields as $field) {
@@ -180,7 +180,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
 
         if(isset($keys['keys'][ $id ])) return [$id, $keys['keys'][ $id ]];
 
-        throw new \Exception('Current key not found in Keychain');
+        throw new Exception('Current key not found in Keychain');
     }
 
     /**
@@ -193,7 +193,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
         $keys = $this->getKeychainData()['keys'];
         if(isset($keys[ $id ])) return $keys[ $id ];
 
-        throw new \Exception('Key not found in Keychain');
+        throw new Exception('Key not found in Keychain');
     }
 
     /**

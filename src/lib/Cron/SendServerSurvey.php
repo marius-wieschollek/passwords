@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Cron;
 
+use Exception;
 use OCA\Passwords\Helper\Survey\ServerReportHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\ConfigurationService;
@@ -24,22 +25,22 @@ class SendServerSurvey extends AbstractTimedJob {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
      * @var AdminUserHelper
      */
-    protected $adminHelper;
+    protected AdminUserHelper $adminHelper;
 
     /**
      * @var ServerReportHelper
      */
-    protected $serverReport;
+    protected ServerReportHelper $serverReport;
 
     /**
      * @var NotificationService
      */
-    protected $notifications;
+    protected NotificationService $notifications;
 
     /**
      * @var float|int
@@ -74,7 +75,7 @@ class SendServerSurvey extends AbstractTimedJob {
     /**
      * @param $argument
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function runJob($argument): void {
         $mode = $this->getReportMode();

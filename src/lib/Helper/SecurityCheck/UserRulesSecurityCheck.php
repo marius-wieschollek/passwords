@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
+use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
@@ -21,12 +22,12 @@ class UserRulesSecurityCheck {
     /**
      * @var PasswordRevisionMapper
      */
-    protected $revisionMapper;
+    protected PasswordRevisionMapper $revisionMapper;
 
     /**
      * @var UserSettingsHelper
      */
-    protected $userSettingsHelper;
+    protected UserSettingsHelper $userSettingsHelper;
 
     /**
      * UserRulesSecurityCheck constructor.
@@ -43,7 +44,7 @@ class UserRulesSecurityCheck {
      * @param PasswordRevision $revision
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): ?array {
         $maxAgeInDays = $this->userSettingsHelper->get('password/security/age', $revision->getUserId());

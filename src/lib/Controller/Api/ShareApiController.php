@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Controller\Api;
 
+use Exception;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
@@ -15,6 +16,8 @@ use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
 use OCA\Passwords\Helper\Sharing\CreatePasswordShareHelper;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Services\Object\ShareService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -27,39 +30,39 @@ use OCP\IRequest;
 class ShareApiController extends AbstractApiController {
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $userId;
+    protected ?string $userId;
 
     /**
      * @var ShareService
      */
-    protected $modelService;
+    protected ShareService $modelService;
 
     /**
      * @var ShareObjectHelper
      */
-    protected $objectHelper;
+    protected ShareObjectHelper $objectHelper;
 
     /**
      * @var ShareSettingsHelper
      */
-    protected $shareSettings;
+    protected ShareSettingsHelper $shareSettings;
 
     /**
      * @var ShareUserListHelper
      */
-    protected $shareUserList;
+    protected ShareUserListHelper $shareUserList;
 
     /**
      * @var CreatePasswordShareHelper
      */
-    protected $createPasswordShare;
+    protected CreatePasswordShareHelper $createPasswordShare;
 
     /**
      * @var array
      */
-    protected $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
+    protected array $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
 
     /**
      * ShareApiController constructor.
@@ -99,10 +102,9 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         /** @var Share[] $models */
@@ -126,10 +128,9 @@ class ShareApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $filters = $this->processSearchCriteria($criteria);
@@ -155,10 +156,9 @@ class ShareApiController extends AbstractApiController {
      * @param string $details
      *
      * @return JSONResponse
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
-     * @throws \OCP\AppFramework\QueryException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $model  = $this->modelService->findByUuid($id);
@@ -181,9 +181,9 @@ class ShareApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function create(
         string $password,
@@ -222,8 +222,8 @@ class ShareApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function update(string $id, int $expires = null, bool $editable = false, bool $shareable = true): JSONResponse {
         $this->checkAccessPermissions();
@@ -256,9 +256,9 @@ class ShareApiController extends AbstractApiController {
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws \Exception
-     * @throws \OCP\AppFramework\Db\DoesNotExistException
-     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     * @throws Exception
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     public function delete(string $id): JSONResponse {
         $model = $this->modelService->findByUuid($id);

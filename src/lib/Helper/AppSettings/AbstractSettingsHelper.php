@@ -20,30 +20,30 @@ abstract class AbstractSettingsHelper {
     /**
      * @var ConfigurationService
      */
-    protected $config;
+    protected ConfigurationService $config;
 
     /**
-     * @var
+     * @var string
      */
-    protected $scope;
+    protected string $scope;
 
     /**
      * @var array
      */
-    protected $keys = [];
+    protected array $keys = [];
 
     /**
      * @var array
      */
-    protected $types = [];
+    protected array $types = [];
 
     /**
      * @var array
      */
-    protected $defaults = [];
+    protected array $defaults = [];
 
     /**
-     * ServiceSettingsHelper constructor.
+     * AbstractSettingsHelper constructor.
      *
      * @param ConfigurationService $config
      */
@@ -191,8 +191,8 @@ abstract class AbstractSettingsHelper {
     }
 
     /**
-     * @param string $key
-     * @param string $type
+     * @param string      $key
+     * @param string|null $type
      *
      * @return array
      * @throws ApiException
