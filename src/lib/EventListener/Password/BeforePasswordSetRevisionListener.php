@@ -14,6 +14,7 @@ namespace OCA\Passwords\EventListener\Password;
 use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
+use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\EventDispatcher\Event;
@@ -62,6 +63,10 @@ class BeforePasswordSetRevisionListener extends AbstractPasswordListener {
                 $this->checkSecurityStatus($newRevision);
             }
             $this->revisionService->save($newRevision);
+        }
+
+        if($oldRevision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_DUPLICATE && $newRevision->getHash() !== $oldRevision->getHash()) {
+            $this->updateDuplicateStatus([$oldRevision->getHash()]);
         }
     }
 }
