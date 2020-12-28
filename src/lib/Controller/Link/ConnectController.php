@@ -13,6 +13,7 @@ use OCA\Passwords\Db\Registration;
 use OCA\Passwords\Helper\Settings\ServerSettingsHelper;
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\Object\RegistrationService;
@@ -37,6 +38,11 @@ class ConnectController extends Controller {
      * @var MailService
      */
     protected MailService $mails;
+
+    /**
+     * @var LoggingService
+     */
+    protected LoggingService $logger;
 
     /**
      * @var SessionService
@@ -78,6 +84,7 @@ class ConnectController extends Controller {
      * @param EnvironmentService   $environment
      * @param ApiTokenHelper       $tokenHelper
      * @param SessionService       $session
+     * @param LoggingService       $logger
      * @param MailService          $mails
      * @param IRequest             $request
      */
@@ -89,6 +96,7 @@ class ConnectController extends Controller {
         EnvironmentService $environment,
         ApiTokenHelper $tokenHelper,
         SessionService $session,
+        LoggingService $logger,
         MailService $mails,
         IRequest $request
     ) {
@@ -99,6 +107,7 @@ class ConnectController extends Controller {
         $this->tokenHelper         = $tokenHelper;
         $this->environment         = $environment;
         $this->session             = $session;
+        $this->logger              = $logger;
         $this->mails               = $mails;
     }
 
@@ -106,7 +115,7 @@ class ConnectController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @UserRateThrottle(limit=2, period=60)
+     * @UserRateThrottle(limit=20, period=60)
      *
      * @return JSONResponse
      */
@@ -204,6 +213,7 @@ class ConnectController extends Controller {
             /** @var $deviceToken IToken */
             [$token, $deviceToken] = $this->tokenHelper->createToken($label, true);
         } catch(Throwable $e) {
+            $this->logger->logException($e);
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
@@ -236,6 +246,7 @@ class ConnectController extends Controller {
             /** @var Registration $registration */
             $registration = $this->registrationService->findByUuid($id);
         } catch(Throwable $e) {
+            $this->logger->logException($e);
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
@@ -256,6 +267,7 @@ class ConnectController extends Controller {
             $registration->setCode(implode(',', $codes));
             $this->registrationService->save($registration);
         } catch(Throwable $e) {
+            $this->logger->logException($e);
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
@@ -274,6 +286,7 @@ class ConnectController extends Controller {
                 /** @var Registration $registration */
                 $registration = $this->registrationService->findByUuid($id);
             } catch(Throwable $e) {
+                $this->logger->logException($e);
                 return null;
             }
 
@@ -298,6 +311,7 @@ class ConnectController extends Controller {
                 $registration = $this->registrationService->findByUuid($id);
                 $this->registrationService->destroy($registration);
             } catch(Throwable $e) {
+                $this->logger->logException($e);
             }
         }
     }
@@ -384,6 +398,7 @@ class ConnectController extends Controller {
                 /** @var Registration $registration */
                 $registration = $this->registrationService->findByUuid($id);
             } catch(Throwable $e) {
+                $this->logger->logException($e);
                 return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
             }
 

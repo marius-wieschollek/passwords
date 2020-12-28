@@ -12,17 +12,17 @@ namespace OCA\Passwords\Db;
  * 
  * @method string getUuid()
  * @method void setUuid(string $uuid)
- * @method string getCode()
+ * @method string|null getCode()
  * @method void setCode(string $code)
- * @method string getLabel()
+ * @method string|null getLabel()
  * @method void setLabel(string $label)
- * @method string getLogin()
+ * @method string|null getLogin()
  * @method void setLogin(string $login)
- * @method string getToken()
+ * @method string|null getToken()
  * @method void setToken(string $token)
  * @method int getStatus()
  * @method void setStatus(int $status)
- * @method int getLimit()
+ * @method int|null getLimit()
  * @method void setLimit(int $limit)
  *
  * @package OCA\Passwords\Db
@@ -30,24 +30,24 @@ namespace OCA\Passwords\Db;
 class Registration extends AbstractEntity {
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $label;
+    protected ?string $label;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $code;
+    protected ?string $code;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $login;
+    protected ?string $login;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $token;
+    protected ?string $token;
 
     /**
      * @var int
@@ -55,9 +55,9 @@ class Registration extends AbstractEntity {
     protected int $status;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected int $limit;
+    protected ?int $limit;
 
     /**
      * Registration constructor.
