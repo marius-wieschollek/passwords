@@ -374,7 +374,7 @@ class ConnectController extends Controller {
         if(empty($label) ||
            in_array($label, $this->environment->getProtectedClients()) ||
            strpos($label, 'Passwords Session') !== false ||
-           !preg_match('/^[\w\s-]{12,48}$/', $label)) {
+           !preg_match('/^[\w\s-]{12,64}$/', $label)) {
             return $fallback === null ? $this->environment->getUserAgent():$fallback;
         }
 

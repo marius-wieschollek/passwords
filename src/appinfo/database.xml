@@ -1082,7 +1082,7 @@
             <field>
                 <name>label</name>
                 <type>string</type>
-                <length>128</length>
+                <length>256</length>
                 <notnull>false</notnull>
             </field>
             <field>

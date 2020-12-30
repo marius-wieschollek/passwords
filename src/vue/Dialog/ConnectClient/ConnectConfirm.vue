@@ -8,7 +8,7 @@
         </div>
         <div class="client-name">
             <translate tag="label" for="client-name" say="Choose a name:"/>
-            <input id="client-name" v-model="label"/>
+            <input id="client-name" maxlength="64" v-model="label"/>
         </div>
         <div class="reject-timer">
             <progress max="100" @click="reject()" :value="progress"/>
