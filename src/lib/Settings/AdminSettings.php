@@ -100,7 +100,7 @@ class AdminSettings implements ISettings {
             'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
             'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
-            'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', true),
+            'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', false),
             'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
             'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
             'caches'           => $this->getFileCaches(),

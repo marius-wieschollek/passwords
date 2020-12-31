@@ -44,7 +44,7 @@ class LegacyApiSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $defaults
         = [
-            'api.enabled'   => true,
+            'api.enabled'   => false,
             'api.last.used' => 0
         ];
 

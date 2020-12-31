@@ -4,6 +4,7 @@
  - System report command
 ### Changed
  - DAS features managed by NC, not Github
+ - Legacy api now disabled by default
 ### Removed
  - Nextcloud 17, 18 and 19 support
  - PHP 7.2 and PHP 7.3 support

@@ -172,7 +172,7 @@ class Application extends App implements IBootstrap {
         $context->registerServiceAlias('ApiSessionMiddleware', ApiSessionMiddleware::class);
         $context->registerMiddleware('ApiSessionMiddleware');
 
-        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', false)) {
             $context->registerServiceAlias('LegacyMiddleware', LegacyMiddleware::class);
             $context->registerMiddleware('LegacyMiddleware');
         }
@@ -211,7 +211,7 @@ class Application extends App implements IBootstrap {
      * @param IRegistrationContext $context
      */
     protected function registerLegacyApiControllers(IRegistrationContext $context): void {
-        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', true)) {
+        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', false)) {
             $context->registerServiceAlias('LegacyVersionApiController', LegacyVersionApiController::class);
             $context->registerServiceAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
             $context->registerServiceAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
