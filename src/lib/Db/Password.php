@@ -16,6 +16,8 @@ namespace OCA\Passwords\Db;
  * @method void setShareId(string|null $shareId)
  * @method bool getEditable()
  * @method void setEditable(bool $editable)
+ * @method bool getSuspended()
+ * @method void setSuspended(bool $suspended)
  * @method bool getHasShares()
  * @method void setHasShares(bool $hasShares)
  */
@@ -37,12 +39,18 @@ class Password extends AbstractModel {
     protected bool $editable;
 
     /**
+     * @var bool
+     */
+    protected bool $suspended;
+
+    /**
      * Password constructor.
      */
     public function __construct() {
         $this->addType('shareId', 'string');
 
         $this->addType('editable', 'boolean');
+        $this->addType('suspended', 'boolean');
         $this->addType('hasShares', 'boolean');
 
         parent::__construct();
@@ -53,6 +61,13 @@ class Password extends AbstractModel {
      */
     public function isEditable(): bool {
         return $this->getEditable();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuspended(): bool {
+        return $this->getSuspended() === true;
     }
 
     /**

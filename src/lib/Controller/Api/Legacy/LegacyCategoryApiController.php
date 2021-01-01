@@ -107,7 +107,7 @@ class LegacyCategoryApiController extends ApiController {
     public function show($id): JSONResponse {
         /** @var Tag $tag */
         $tag = $this->tagService->findByIdOrUuid($id);
-        if($tag === null || $tag->isSuspended()) return new JSONResponse('Entity not found', 404);
+        if($tag === null) return new JSONResponse('Entity not found', 404);
         $category = $this->getCategoryObject($tag);
         if($category === null) return new JSONResponse('Entity not found', 404);
 
@@ -154,7 +154,7 @@ class LegacyCategoryApiController extends ApiController {
     public function destroy($id): JSONResponse {
         /** @var Tag $tag */
         $tag = $this->tagService->findByIdOrUuid($id);
-        if($tag === null || $tag->isSuspended()) return new JSONResponse('Entity not found', 404);
+        if($tag === null) return new JSONResponse('Entity not found', 404);
         /** @var TagRevision $oldRevision */
         $oldRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
 

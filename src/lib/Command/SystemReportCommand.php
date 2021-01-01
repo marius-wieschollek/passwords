@@ -43,8 +43,7 @@ class SystemReportCommand extends Command {
         $this->setName('passwords:system:report')
              ->setDescription('Print system information as detected by the app')
              ->addArgument('sections', InputArgument::IS_ARRAY | InputArgument::IS_ARRAY, 'Only print the given section')
-             ->addOption('basic', 'b', InputOption::VALUE_NONE, 'Only print basic report')
-             ->setHidden(true);
+             ->addOption('basic', 'b', InputOption::VALUE_NONE, 'Only print basic report');
     }
 
     /**

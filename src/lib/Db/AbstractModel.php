@@ -12,8 +12,6 @@ namespace OCA\Passwords\Db;
  *
  * @method string getRevision()
  * @method void setRevision(string $revision)
- * @method bool getSuspended()
- * @method void setSuspended(bool $suspended)
  *
  * @package OCA\Passwords\Db
  */
@@ -25,16 +23,10 @@ abstract class AbstractModel extends AbstractEntity implements ModelInterface {
     protected string $revision;
 
     /**
-     * @var bool
-     */
-    protected bool $suspended;
-
-    /**
      * Password constructor.
      */
     public function __construct() {
         $this->addType('revision', 'string');
-        $this->addType('suspended', 'boolean');
 
         parent::__construct();
     }
@@ -43,6 +35,6 @@ abstract class AbstractModel extends AbstractEntity implements ModelInterface {
      * @return bool
      */
     public function isSuspended(): bool {
-        return $this->getSuspended() === true;
+        return false;
     }
 }

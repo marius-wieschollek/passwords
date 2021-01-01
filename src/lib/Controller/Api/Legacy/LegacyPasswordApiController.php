@@ -186,7 +186,7 @@ class LegacyPasswordApiController extends ApiController {
         if($category !== null) {
             /** @var Tag $tag */
             $tag = $this->tagService->findByIdOrUuid($category);
-            if($tag !== null && !$tag->isSuspended()) {
+            if($tag !== null) {
                 /** @var TagRevision $tagRevision */
                 $tagRevision = $this->tagRevisionService->findByUuid($tag->getRevision());
                 $this->passwordTagRelationService->create($revision, $tagRevision);
@@ -349,7 +349,6 @@ class LegacyPasswordApiController extends ApiController {
         $tags = $this->tagService->findByPassword($password->getUuid());
 
         foreach($tags as $tag) {
-            if($tag->isSuspended()) continue;
             /** @var TagRevision $revision */
             $revision = $this->tagRevisionService->findByUuid($tag->getRevision());
 
@@ -376,7 +375,7 @@ class LegacyPasswordApiController extends ApiController {
         if($category) {
             /** @var Tag $tag */
             $tag = $this->tagService->findByIdOrUuid($category);
-            if($tag !== null && !$tag->isSuspended()) {
+            if($tag !== null) {
                 $relation = $this->passwordTagRelationService->findByTagAndPassword($tag->getUuid(), $model->getUuid());
 
                 if($relation === null) {
