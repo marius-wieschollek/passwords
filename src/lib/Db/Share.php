@@ -73,9 +73,9 @@ class Share extends AbstractEntity implements EntityInterface {
     protected string $sourcePassword;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $targetPassword;
+    protected ?string $targetPassword;
 
     /**
      * @var bool

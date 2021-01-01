@@ -74,9 +74,9 @@ class PasswordRevision extends AbstractRevision {
     protected string $statusCode;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $customFields;
+    protected ?string $customFields;
 
     /**
      * Password constructor.
