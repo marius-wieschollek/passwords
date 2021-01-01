@@ -1,9 +1,11 @@
 ## [Unreleased]
+
+## 2021.1.0 - Feature release
 ### Added
  - Nextcloud 21 support
  - System report command
 ### Changed
- - DAS features managed by NC, not Github
+ - Feature management now within NC
  - Legacy api now disabled by default
 ### Removed
  - Nextcloud 17, 18 and 19 support
