@@ -154,9 +154,3 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         </navigation>
     </navigations>
 </info>
-<script>
-import Install from "../../docker/volumes/nextcloud/core/js/dist/install";
-export default {
-components: {Install}
-}
-</script>
