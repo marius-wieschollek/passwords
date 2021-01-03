@@ -30,7 +30,7 @@ class UpgradeUnsupportedException extends Exception {
      */
     public function __construct($previousVersion, $minimumVersion, Throwable $previous = null) {
         parent::__construct(
-            "Upgrading the passwords app from {$previousVersion} is no longer supported. Please consult the app manual in order to upgrade to {$minimumVersion} before installing this upgrade.",
+            "The upgrade from {$previousVersion} is not supported. Please upgrade to {$minimumVersion} first. See https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Migrations/Unsupported-Upgrade-Error for help",
             E_USER_ERROR,
             $previous
         );

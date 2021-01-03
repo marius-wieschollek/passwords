@@ -28,11 +28,11 @@ use OCP\Migration\IRepairStep;
  */
 class CheckAppSettings implements IRepairStep {
 
-    const APP_BC_BREAK_VERSION          = '2021.1.0';
-    const NEXTCLOUD_MIN_VERSION         = 20;
-    const NEXTCLOUD_RECOMMENDED_VERSION = '20';
-    const PHP_MIN_VERSION               = 70400;
-    const PHP_RECOMMENDED_VERSION       = '7.4.0';
+    const APP_BC_BREAK_VERSION             = '2021.1.0';
+    const NEXTCLOUD_RECOMMENDED_VERSION_ID = 20;
+    const NEXTCLOUD_RECOMMENDED_VERSION    = '20';
+    const PHP_RECOMMENDED_VERSION_ID       = 70400;
+    const PHP_RECOMMENDED_VERSION          = '7.4.0';
 
     /**
      * @var ConfigurationService
@@ -118,7 +118,7 @@ class CheckAppSettings implements IRepairStep {
         }
 
         $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        if($ncVersion < self::NEXTCLOUD_MIN_VERSION || PHP_VERSION_ID < self::PHP_MIN_VERSION) {
+        if($ncVersion < self::NEXTCLOUD_RECOMMENDED_VERSION_ID || PHP_VERSION_ID < self::PHP_RECOMMENDED_VERSION_ID) {
             $this->sendDeprecatedPlatformNotification();
         }
 

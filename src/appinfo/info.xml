@@ -118,6 +118,12 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <job>OCA\Passwords\Cron\BackupJob</job>
     </background-jobs>
     <repair-steps>
+        <pre-migration>
+            <step>OCA\Passwords\Migration\CheckAppRequirements</step>
+        </pre-migration>
+        <install>
+            <step>OCA\Passwords\Migration\CheckAppRequirements</step>
+        </install>
         <post-migration>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
@@ -148,3 +154,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         </navigation>
     </navigations>
 </info>
+<script>
+import Install from "../../docker/volumes/nextcloud/core/js/dist/install";
+export default {
+components: {Install}
+}
+</script>

@@ -12,7 +12,6 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
-use OCA\Passwords\Exception\Migration\UpgradeUnsupportedException;
 use OCA\Passwords\Migration\DatabaseRepair\FolderModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\FolderRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordModelRepair;
@@ -30,8 +29,6 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class DatabaseObjectRepair implements IRepairStep {
-
-    const MINIMUM_UPGRADE_VERSION = '2020.1.0';
 
     /**
      * @var ConfigurationService
@@ -125,8 +122,6 @@ class DatabaseObjectRepair implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output): void {
-        $this->canUpgradeFromPreviousVersion();
-
         $this->tagRevisionRepair->run($output);
         $this->folderRevisionRepair->run($output);
         $this->passwordRevisionRepair->run($output);
@@ -134,17 +129,5 @@ class DatabaseObjectRepair implements IRepairStep {
         $this->folderModelRepair->run($output);
         $this->passwordModelRepair->run($output);
         $this->passwordTagRelationRepair->run($output);
-    }
-
-    /**
-     * @throws UpgradeUnsupportedException if the previous version is below the minimum requirement
-     */
-    protected function canUpgradeFromPreviousVersion() {
-        $previousVersion = $this->config->getAppValue('installed_version', '0.0.0');
-        if($previousVersion === '0.0.0') return;
-
-        if(version_compare(self::MINIMUM_UPGRADE_VERSION, $previousVersion) === 1) {
-            throw new UpgradeUnsupportedException($previousVersion, self::MINIMUM_UPGRADE_VERSION);
-        }
     }
 }
