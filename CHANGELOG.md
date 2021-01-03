@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Changed
+ - Added exception when attempting to upgrade with PHP 7.3
+### Fixed
+ - Nightly app fetcher ignores PHP requirement
 
 ## 2021.1.0 - Feature release
 ### Added
