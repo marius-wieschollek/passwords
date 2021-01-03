@@ -158,7 +158,8 @@ class NightlyAppFetcher extends Fetcher {
             foreach($app['releases'] as $release) {
                 if(($latest === null || version_compare($latest['version'], $release['version']) < 0) &&
                    $this->releaseAllowedInChannel($release, $app['id']) &&
-                   $this->checkVersionRequirements($release)) {
+                   $this->checkNextcloudRequirements($release) &&
+                   $this->checkPhpRequirements($release)) {
                     $latest = $release;
                 }
             }
@@ -249,7 +250,7 @@ class NightlyAppFetcher extends Fetcher {
      *
      * @return bool
      */
-    protected function checkVersionRequirements($release): bool {
+    protected function checkNextcloudRequirements($release): bool {
         try {
             $versionParser = new VersionParser();
             $version       = $versionParser->getVersion($release['rawPlatformVersionSpec']);
@@ -261,6 +262,38 @@ class NightlyAppFetcher extends Fetcher {
                              $this->compareVersion->isCompatible($ncVersion, $max, '<=');
 
             return $minFulfilled && ($this->ignoreMaxVersion || $maxFulfilled);
+        } catch(Throwable $e) {
+            $this->logException($e);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $release
+     *
+     * @return bool
+     */
+    protected function checkPhpRequirements($release): bool {
+        try {
+            if(($release['rawPhpVersionSpec'] ?? '*') === '*') return true;
+            $versionParser = new VersionParser();
+            $phpVersion    = $versionParser->getVersion($release['rawPhpVersionSpec']);
+            $minPhpVersion = $phpVersion->getMinimumVersion();
+            $maxPhpVersion = $phpVersion->getMaximumVersion();
+
+            $minPhpFulfilled = $minPhpVersion === '' || $this->compareVersion->isCompatible(
+                    PHP_VERSION,
+                    $minPhpVersion,
+                    '>='
+                );
+            $maxPhpFulfilled = $maxPhpVersion === '' || $this->compareVersion->isCompatible(
+                    PHP_VERSION,
+                    $maxPhpVersion,
+                    '<='
+                );
+
+            return $minPhpFulfilled && $maxPhpFulfilled;
         } catch(Throwable $e) {
             $this->logException($e);
         }
