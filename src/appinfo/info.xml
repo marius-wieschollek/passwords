@@ -64,7 +64,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) von [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
 ]]>
     </description>
-    <version>2021.1.1-BUILD</version>
+    <version>2021.1.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -108,7 +108,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </screenshot>
     <dependencies>
         <php min-version="7.4" />
-        <nextcloud min-version="20" max-version="21" />
+        <nextcloud min-version="21" max-version="21" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
@@ -121,9 +121,6 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <pre-migration>
             <step>OCA\Passwords\Migration\CheckAppRequirements</step>
         </pre-migration>
-        <install>
-            <step>OCA\Passwords\Migration\CheckAppRequirements</step>
-        </install>
         <post-migration>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
         </post-migration>
@@ -131,6 +128,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
             <step>OCA\Passwords\Migration\CheckAppSettings</step>
             <step>OCA\Passwords\Migration\ClearAppCaches</step>
         </live-migration>
+        <install>
+            <step>OCA\Passwords\Migration\CheckAppRequirements</step>
+        </install>
     </repair-steps>
     <commands>
         <command>OCA\Passwords\Command\BackupCreateCommand</command>

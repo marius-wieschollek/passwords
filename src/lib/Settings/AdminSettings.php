@@ -393,8 +393,8 @@ class AdminSettings implements ISettings {
                 'version' => PHP_VERSION
             ],
             'server' => [
-                'warn'    => $ncVersion < 20,
-                'error'   => $ncVersion < 20,
+                'warn'    => $ncVersion < 21,
+                'error'   => $ncVersion < 21,
                 'version' => $ncVersion
             ],
             'eol'    => '2021.1.0'
