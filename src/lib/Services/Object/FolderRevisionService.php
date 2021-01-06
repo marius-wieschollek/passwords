@@ -207,7 +207,7 @@ class FolderRevisionService extends AbstractRevisionService {
         bool $favorite
     ): FolderRevision {
         $revision = new FolderRevision();
-        $revision->setUserId($this->userId);
+        if($this->userId !== null) $revision->setUserId($this->userId);
         $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setDeleted(false);
         $revision->setCreated(time());

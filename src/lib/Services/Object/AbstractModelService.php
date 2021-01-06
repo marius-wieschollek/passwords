@@ -108,7 +108,7 @@ abstract class AbstractModelService extends AbstractService {
         /** @var ModelInterface $model */
         $model = new $this->class();
         $model->setDeleted(false);
-        $model->setUserId($this->userId);
+        if($this->userId !== null) $model->setUserId($this->userId);
         $model->setUuid($this->uuidHelper->generateUuid());
         $model->setCreated(time());
         $model->setUpdated(time());

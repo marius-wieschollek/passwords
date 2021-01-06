@@ -133,7 +133,7 @@ class PasswordTagRelationService extends AbstractService {
         $model = new PasswordTagRelation();
         $model->setUuid($this->uuidHelper->generateUuid());
         $model->setDeleted(false);
-        $model->setUserId($this->userId);
+        if($this->userId !== null) $model->setUserId($this->userId);
         $model->setCreated(time());
         $model->setUpdated(time());
 

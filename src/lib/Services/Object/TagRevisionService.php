@@ -110,7 +110,7 @@ class TagRevisionService extends AbstractRevisionService {
     ): TagRevision {
 
         $revision = new TagRevision();
-        $revision->setUserId($this->userId);
+        if($this->userId !== null) $revision->setUserId($this->userId);
         $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setCreated(time());
         $revision->setUpdated(time());

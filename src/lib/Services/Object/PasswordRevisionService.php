@@ -165,7 +165,7 @@ class PasswordRevisionService extends AbstractRevisionService {
     ): PasswordRevision {
 
         $revision = new PasswordRevision();
-        $revision->setUserId($this->userId);
+        if($this->userId !== null) $revision->setUserId($this->userId);
         $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setCreated(time());
         $revision->setUpdated(time());
