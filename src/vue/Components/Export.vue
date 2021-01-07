@@ -19,7 +19,8 @@
                            for="passwords-export-encrypt"
                            say="Backup password"
                            title="(Optional) Encrypts the backup"/>
-                <input type="password"
+                <input ref="backupEncrypt"
+                       type="password"
                        id="passwords-export-encrypt"
                        minlength="10"
                        :title="backupPasswordTitle"
@@ -157,7 +158,10 @@
 
         data() {
             DAS.check('backup-encryption')
-                .then((d) => { this.allowEnc = d; });
+               .then((d) => {
+                   this.allowEnc = d;
+                   if(d) this.preventPasswordFill(1000);
+               });
 
             return {
                 format    : 'json',
@@ -199,7 +203,7 @@
                     ],
                     tags     : ['label', 'color', 'edited', 'created', 'favorite', 'id', 'revision', 'empty']
                 },
-                allowEnc   : false
+                allowEnc  : false
             };
         },
 
@@ -216,15 +220,15 @@
         },
 
         created() {
-            if (this.allowEnc) this.preventPasswordFill(1000);
+            if(this.allowEnc) this.preventPasswordFill(1000);
         },
 
         methods: {
             preventPasswordFill(t = 300) {
-                setTimeout(() => {document.getElementById('passwords-export-encrypt').removeAttribute('readonly');}, t);
+                setTimeout(() => { if(this.$refs.backupEncrypt) this.$refs.backupEncrypt.removeAttribute('readonly');}, t);
             },
             async exportDb() {
-                if (this.data) {
+                if(this.data) {
                     this.downloadFile();
                     return;
                 }
@@ -242,15 +246,15 @@
                             Messages.alert(e.message, 'Export error');
                         })
                         .then((d) => {
-                            if (d) {
+                            if(d) {
                                 this.data = d;
                                 this.buttonText = 'Download {format}';
-                            } else if (this.exporting) {
+                            } else if(this.exporting) {
                                 Messages.alert('There is no data to export', 'Nothing to export');
                             }
                             this.exporting = false;
                         });
-                } catch (e) {
+                } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
                 }
@@ -259,13 +263,13 @@
                 let model = $e.target.value,
                     index = this.models.indexOf(model);
 
-                if ($e.target.checked) {
-                    if (this.format === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1) {
+                if($e.target.checked) {
+                    if(this.format === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1) {
                         this.models = [model];
-                    } else if (index === -1) {
+                    } else if(index === -1) {
                         this.models.push(model);
                     }
-                } else if (index !== -1) {
+                } else if(index !== -1) {
                     this.models.remove(index);
                 }
             },
@@ -274,8 +278,8 @@
                     exports = [],
                     fileExt = this.format === 'customCsv' ? 'csv':this.format;
 
-                if (models.length > 1 && fileExt === 'csv') fileExt = 'zip';
-                for (let i = 0; i < models.length; i++) {
+                if(models.length > 1 && fileExt === 'csv') fileExt = 'zip';
+                for(let i = 0; i < models.length; i++) {
                     exports.push(Localisation.translate(models[i].capitalize()));
                 }
 
@@ -294,8 +298,8 @@
                 let mapping = this.options.mapping.clone();
 
                 mapping[id - 1] = event.target.value;
-                for (let i = mapping.length - 1; i > 0; i--) {
-                    if (mapping[i] === 'null' && (mapping[i - 1] === 'null' || i === mapping.length - 1)) {
+                for(let i = mapping.length - 1; i > 0; i--) {
+                    if(mapping[i] === 'null' && (mapping[i - 1] === 'null' || i === mapping.length - 1)) {
                         mapping.pop();
                     } else {
                         break;
@@ -305,11 +309,11 @@
                 this.options.mapping = mapping;
             },
             validateStep() {
-                if (this.models.length === 0) {
+                if(this.models.length === 0) {
                     this.step = 2;
-                } else if (this.format === 'json' && this.options.password && this.options.password.length < 10) {
+                } else if(this.format === 'json' && this.options.password && this.options.password.length < 10) {
                     this.step = 2;
-                } else if (this.format === 'customCsv' && this.options.mapping.length === 0) {
+                } else if(this.format === 'customCsv' && this.options.mapping.length === 0) {
                     this.step = 2;
                 } else {
                     this.step = 3;
@@ -321,12 +325,12 @@
 
         watch: {
             format(value) {
-                if (value === 'customCsv') {
+                if(value === 'customCsv') {
                     this.options = {db: 'passwords', delimiter: ',', header: true, mapping: []};
-                } else if (value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
+                } else if(value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
                     this.models = [this.models.shift()];
-                } else if (value === 'json') {
-                    if (this.allowEnc) this.preventPasswordFill();
+                } else if(value === 'json') {
+                    if(this.allowEnc) this.preventPasswordFill();
                 }
 
                 this.validateStep();
@@ -341,7 +345,7 @@
                 this.validateStep();
             },
             'options.password'(value) {
-                if (value.length !== 0 && value.length < 10) {
+                if(value.length !== 0 && value.length < 10) {
                     document.getElementById('passwords-export-encrypt').className = 'invalid';
                 } else {
                     document.getElementById('passwords-export-encrypt').className = '';
@@ -358,33 +362,33 @@
 </script>
 
 <style lang="scss">
-    .export-container {
-        .step-2 {
-            .step-content {
+.export-container {
+    .step-2 {
+        .step-content {
 
-                .office.warning {
-                    margin  : 5px !important;
-                    display : block;
-                }
+            .office.warning {
+                margin  : 5px !important;
+                display : block;
+            }
 
-                .step-section {
-                    clear : both;
-                }
+            .step-section {
+                clear : both;
+            }
 
-                label {
-                    margin-right : 5px;
-                }
+            label {
+                margin-right : 5px;
+            }
 
-                label {
-                    min-width : 90px;
-                    display   : inline-block;
-                }
+            label {
+                min-width : 90px;
+                display   : inline-block;
             }
         }
-
-        #passwords-export-encrypt.invalid,
-        #passwords-export-encrypt:invalid {
-            box-shadow : var(--color-error) 0 0 3px 1px
-        }
     }
+
+    #passwords-export-encrypt.invalid,
+    #passwords-export-encrypt:invalid {
+        box-shadow : var(--color-error) 0 0 3px 1px
+    }
+}
 </style>

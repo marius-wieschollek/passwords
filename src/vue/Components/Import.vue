@@ -106,7 +106,8 @@
                                    for="passwords-import-encrypt"
                                    say="Backup password"
                                    title="For encrypted backups"/>
-                        <input type="password"
+                        <input ref="backupEncrypt"
+                               type="password"
                                id="passwords-import-encrypt"
                                minlength="10"
                                :title="backupPasswordTitle"
@@ -301,7 +302,7 @@
             preventPasswordFill(t = 300) {
                 if(this.allowEnc) {
                     setTimeout(() => {
-                        document.getElementById('passwords-import-encrypt').removeAttribute('readonly');
+                        this.$refs.backupEncrypt.removeAttribute('readonly');
                     }, t);
                 }
             },
