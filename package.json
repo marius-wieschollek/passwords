@@ -33,16 +33,16 @@
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
-    "dependencies": {
-        "@nextcloud/moment": "^1.1.1"
-    },
     "devDependencies": {
+        "@nextcloud/moment": "^1.1.1",
         "blueimp-gallery": "^3.3.0",
         "clean-webpack-plugin": "^1.0.1",
-        "codeceptjs": "^2.6.11",
+        "codeceptjs": "^3.0.4",
+        "color-convert": "^2.0.1",
         "copy-webpack-plugin": "^6.4.1",
         "css-loader": "^4.3.0",
         "csv-hero": "0.0.4",
+        "delta-e": "0.0.8",
         "download": "^8.0.0",
         "easyimage": "^3.1.1",
         "file-loader": "^6.2.0",

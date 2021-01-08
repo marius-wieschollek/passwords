@@ -1,7 +1,7 @@
 <template>
     <div class="connect-client-link">
         <translate tag="div" class="description" :say="description"/>
-        <qr-code class="qr-code" :text="link" :color="color" :size="300" bgColor="#fff0" errorLevel="Q"/>
+        <qr-code class="qr-code" :text="link" :color="color" :size="300" :bgColor="bgColor" errorLevel="Q"/>
         <translate tag="a"
                    target="_blank"
                    :href="link"
@@ -16,6 +16,8 @@
     import SettingsService from '@js/Services/SettingsService';
     import Translate from '@vc/Translate';
     import API from '@js/Helper/api';
+    import ColorConvert from 'color-convert';
+    import DeltaE from 'delta-e';
 
     export default {
         components: {Translate, QrCode},
@@ -26,7 +28,6 @@
 
         data() {
             return {
-                color : SettingsService.get('server.theme.color.primary'),
                 link  : '',
                 id    : '',
                 active: false
@@ -45,6 +46,28 @@
         },
 
         computed: {
+            color() {
+                let themeColor = SettingsService.get('server.theme.color.primary'),
+                    labColor   = ColorConvert.hex.lab(themeColor.substr(1)),
+                    labBgColor = ColorConvert.hex.lab(this.bgColor.substr(1)),
+                    labWhite   = {L: 100, A: 0, B: 0};
+
+                labColor = {L: labColor[0], A: labColor[1], B: labColor[2]};
+                labBgColor = {L: labBgColor[0], A: labBgColor[1], B: labBgColor[2]};
+
+                if(DeltaE.getDeltaE00(labBgColor, labColor) > 30) {
+                    return themeColor;
+                }
+
+                if(DeltaE.getDeltaE00(labBgColor, labWhite) > 30) {
+                    return '#fff';
+                }
+
+                return '#000';
+            },
+            bgColor() {
+                return '#fff0';
+            },
             description() {
                 return this.showConnectLink ? 'To connect a new device or app, simply scan the QR code or click the link.':'Scan the QR code to connect a new device or app.';
             }
@@ -71,22 +94,22 @@
 </script>
 
 <style lang="scss">
-    #passlink-connect .connect-client-link {
-        .description {
-            margin     : 1rem;
-            text-align : center;
+#passlink-connect .connect-client-link {
+    .description {
+        margin     : 1rem;
+        text-align : center;
 
-        }
-
-        .qr-code {
-            margin : 2rem auto;
-            width  : 300px;
-        }
-
-        .share-link {
-            display    : block;
-            margin     : 1rem;
-            text-align : center;
-        }
     }
+
+    .qr-code {
+        margin : 2rem auto;
+        width  : 300px;
+    }
+
+    .share-link {
+        display    : block;
+        margin     : 1rem;
+        text-align : center;
+    }
+}
 </style>
