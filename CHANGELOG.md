@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2020.12.1 - Bugfix release
+### Fixed
+- Invalid type in custom fields
+- Bad contrast on QR codes
+- Backup password field remains readonly
+- Skip broken tags in Passman import
 
 ## 2020.12.1 - Bugfix release
 ### Changed
