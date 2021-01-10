@@ -1,7 +1,6 @@
 import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
-import API from '@js/Helper/api';
 
 export default class PassmanConversionHelper {
 
@@ -36,7 +35,14 @@ export default class PassmanConversionHelper {
 
             if(!element.tags) continue;
             for(let j = 0; j < element.tags.length; j++) {
-                let label   = element.tags[j].text,
+                let tag = element.tags[j];
+                if(tag === null || typeof tag !== 'object' || !tag.hasOwnProperty('text') || tag.text === undefined || tag.text === null || tag.text === '') {
+                    element.tags.splice(j, 1);
+                    j--;
+                    continue;
+                }
+
+                let label   = tag.text,
                     labelId = label.toLowerCase();
 
                 if(mapping.hasOwnProperty(labelId)) {
