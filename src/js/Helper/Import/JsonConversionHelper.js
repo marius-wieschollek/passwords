@@ -15,7 +15,7 @@ export default class ImportJsonConversionHelper {
 
         if((!json.passwords && !json.tags && !json.folders) || json.items) throw new Error('Invalid backup file.');
         if(json.version < 2) this._convertCustomFields(json);
-        if(json.version < 3) this._cleanCustomFields(json);
+        if(json.version < 4) this._cleanCustomFields(json);
         if(json.version > 3) {
             if(json.version > 99) throw new Error('This seems to be a server backup. It can only be restored using the command line.');
             throw new Error('Unsupported database version');
@@ -67,6 +67,11 @@ export default class ImportJsonConversionHelper {
                     newFields = [];
 
                 for(let j=0; j<oldFields.length; j++) {
+                    if(oldFields[j].type === null) {
+                        if(oldFields[j].value === null) continue;
+                        oldFields[j].type = 'text';
+                    }
+
                     newFields.push(
                         {
                             label: oldFields[j].label,

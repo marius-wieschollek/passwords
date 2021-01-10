@@ -72,9 +72,9 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         PasswordRevisionService $revisionService
     ) {
         parent::__construct($modelMapper, $revisionService, $encryption, $environment);
-        $this->folderMapper      = $folderMapper;
-        $this->convertFields     = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2020.3.0';
-        $this->config            = $config;
+        $this->folderMapper  = $folderMapper;
+        $this->convertFields = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2020.12.2';
+        $this->config        = $config;
     }
 
     /**
@@ -84,7 +84,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function run(IOutput $output): void {
         parent::run($output);
-        $this->config->setAppValue('migration/customFields', '2020.2.0');
+        $this->config->setAppValue('migration/customFields', '2020.12.2');
     }
 
     /**
@@ -174,11 +174,22 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         if(!$this->decryptOrDelete($revision)) return true;
         $customFields = $revision->getCustomFields();
 
-        if(strpos($customFields, '"blank":') === false && strpos($customFields, '"id":') === false) return false;
+        if(strpos($customFields, '"blank":') === false && strpos($customFields, '"id":') === false && strpos($customFields, '"type":null') === false) return false;
 
         $oldFields = json_decode($customFields, true);
+        if(!is_array($oldFields)) {
+            $revision->setCustomFields('[]');
+
+            return true;
+        }
+
         $newFields = [];
         foreach($oldFields as $label => $data) {
+            if($data['type'] === null) {
+                if($data['value'] === null) continue;
+                $data['type'] = 'text';
+            }
+
             $newFields[] = ['label' => $data['label'], 'type' => $data['type'], 'value' => $data['value']];
         }
 
