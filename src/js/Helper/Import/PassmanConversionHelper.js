@@ -33,7 +33,7 @@ export default class PassmanConversionHelper {
         for(let i = 0; i < db.length; i++) {
             let element = db[i];
 
-            if(!element.tags) continue;
+            if(!element.tags || !Array.isArray(element.tags)) continue;
             for(let j = 0; j < element.tags.length; j++) {
                 let tag = element.tags[j];
                 if(tag === null || typeof tag !== 'object' || !tag.hasOwnProperty('text') || tag.text === undefined || tag.text === null || tag.text === '') {
@@ -76,7 +76,7 @@ export default class PassmanConversionHelper {
                 url         : element.url,
                 notes       : element.description,
                 edited      : element.changed,
-                tags        : element.tags,
+                tags        : Array.isArray(element.tags) ? element.tags:[],
                 customFields: []
             };
 
