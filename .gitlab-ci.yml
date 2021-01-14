@@ -101,3 +101,4 @@ Publish Stable:
     name: Stable
   only:
   - stable
+  - lts/stable/2020.12
