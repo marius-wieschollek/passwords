@@ -30,7 +30,7 @@ class CheckAppRequirements implements IRepairStep {
     const UPGRADE_MINIMUM_APP_VERSION   = '2020.1.0';
     const PHP_MINIMUM_REQUIREMENT_ID    = 70400;
     const PHP_MINIMUM_REQUIREMENT       = '7.4.0';
-    const NEXTCLOUD_MINIMUM_REQUIREMENT = 21;
+    const NEXTCLOUD_MINIMUM_REQUIREMENT = 20;
 
     /**
      * @var IConfig
