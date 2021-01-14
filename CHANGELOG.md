@@ -1,8 +1,4 @@
 ## [Unreleased]
-### Changed
- - Added exception when attempting to upgrade with PHP 7.3
-### Fixed
- - Nightly app fetcher ignores PHP requirement
 
 ## 2021.1.0 - Feature release
 ### Added
@@ -11,6 +7,8 @@
 ### Changed
  - Feature management now within NC
  - Legacy api now disabled by default
+### Fixed
+ - Nightly app fetcher ignores PHP requirement
 ### Removed
  - Nextcloud 17, 18 and 19 support
  - PHP 7.2 and PHP 7.3 support
