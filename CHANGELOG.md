@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## 2021.1.1 - Bugfix release
+### Fixed
+- Invalid type in custom fields
+- Bad contrast on QR codes
+- Backup password field remains readonly
+- Skip broken tags in Passman import
+
 ## 2021.1.0 - Feature release
 ### Added
  - Nextcloud 21 support

@@ -1,6 +1,6 @@
 {
     "name": "ncpasswords",
-    "version": "2021.1.0",
+    "version": "2021.1.1",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -68,7 +68,7 @@
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.6.12",
         "webdriverio": "^6.11.3",
-        "webpack": "^4.45.0",
+        "webpack": "^4.46.0",
         "webpack-cli": "^3.3.12",
         "xlsx": "^0.16.9"
     },
