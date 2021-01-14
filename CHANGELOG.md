@@ -1,5 +1,5 @@
 ## [Unreleased]
-## 2020.12.1 - Bugfix release
+## 2020.12.2 - Bugfix release
 ### Fixed
 - Invalid type in custom fields
 - Bad contrast on QR codes
