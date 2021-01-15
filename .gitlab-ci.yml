@@ -12,8 +12,8 @@ Compile:
   stage: compiling
   script:
     - npm install
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:prod ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:nightly ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] || [ "${CI_COMMIT_REF_NAME}" == "lts/stable/2020.12" ] ; then npm run build:prod ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] && [ "${CI_COMMIT_REF_NAME}" != "lts/stable/2020.12" ] ; then npm run build:nightly ; fi
   artifacts:
     paths:
       - ./src/js/Static/*
@@ -24,8 +24,8 @@ Assemble:
   stage: assembling
   script:
     - mkdir passwords
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD//g" ./src/appinfo/info.xml ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] || [ "${CI_COMMIT_REF_NAME}" == "lts/stable/2020.12" ] ; then sed -i -e "s/-BUILD//g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] && [ "${CI_COMMIT_REF_NAME}" != "lts/stable/2020.12" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
     - cp CHANGELOG.md passwords/
@@ -58,6 +58,7 @@ Sign:
   only:
     - testing
     - stable
+    - lts/stable/2020.12
 
 Pack:
   stage: packaging
@@ -71,6 +72,7 @@ Pack:
   only:
   - testing
   - stable
+  - lts/stable/2020.12
 
 Publish Nightly:
   stage: publishing
