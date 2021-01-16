@@ -1,13 +1,13 @@
 <template>
     <div class="connect-client-link">
-        <translate tag="div" class="description" :say="description"/>
-        <qr-code class="qr-code" :text="link" :color="color" :size="300" :bgColor="bgColor" errorLevel="Q"/>
+        <translate tag="div" class="description" say="To connect a new device or app, simply scan the QR code or click the link."/>
+        <qr-code class="qr-code" :text="code" :color="color" :size="300" :bgColor="bgColor" errorLevel="Q"/>
         <translate tag="a"
                    target="_blank"
+                   rel="noopener noreferrer"
                    :href="link"
                    class="share-link button primary"
-                   say="Connect via link"
-                   v-if="showConnectLink"/>
+                   say="Connect via link"/>
     </div>
 </template>
 
@@ -23,12 +23,13 @@
         components: {Translate, QrCode},
 
         props: {
-            showConnectLink: Boolean
+            useAlternativeLink: Boolean
         },
 
         data() {
             return {
                 link  : '',
+                code  : '',
                 id    : '',
                 active: false
             };
@@ -67,9 +68,6 @@
             },
             bgColor() {
                 return '#fff0';
-            },
-            description() {
-                return this.showConnectLink ? 'To connect a new device or app, simply scan the QR code or click the link.':'Scan the QR code to connect a new device or app.';
             }
         },
 
@@ -77,7 +75,12 @@
             async requestConnection() {
                 if(!this.active) return;
                 let data = await API.passLinkConnectRequest();
-                this.link = data.link;
+                if(this.useAlternativeLink) {
+                    this.link = data.alternativeLink;
+                } else {
+                    this.link = data.link;
+                }
+                this.code = data.link;
                 this.id = data.id;
             },
             async awaitResponse() {

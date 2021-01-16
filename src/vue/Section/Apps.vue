@@ -24,7 +24,7 @@
                             <translate say="Connect with PassLink"
                                        tag="button"
                                        class="primary passlink-connect"
-                                       @click.prevent="startPasslink(app.extPassLink)"/>
+                                       @click.prevent="startPasslink(app.altLink)"/>
                         </div>
                     </a>
                 </div>
@@ -88,127 +88,127 @@
 </template>
 
 <script>
-import Web from '@vue/Components/Web';
-import Connect from '@js/PassLink/Connect';
-import Translate from '@vue/Components/Translate';
-import Breadcrumb from '@vue/Components/Breadcrumb';
-import Localisation from '@js/Classes/Localisation';
-import DAS from '@js/Services/DeferredActivationService';
+    import Web from '@vue/Components/Web';
+    import Connect from '@js/PassLink/Connect';
+    import Translate from '@vue/Components/Translate';
+    import Breadcrumb from '@vue/Components/Breadcrumb';
+    import Localisation from '@js/Classes/Localisation';
+    import DAS from '@js/Services/DeferredActivationService';
 
-export default {
-    components: {
-        Web,
-        Breadcrumb,
-        Translate
-    },
+    export default {
+        components: {
+            Web,
+            Breadcrumb,
+            Translate
+        },
 
-    data() {
-        return {
-            passlink: false
-        };
-    },
-
-    mounted() {
-        DAS.check('passlink-connect')
-           .then((d) => { this.passlink = d; });
-    },
-
-    computed: {
-        getBrowserExtensions() {
+        data() {
             return {
-                'firefox': {
-                    'label'      : 'Official Firefox Client',
-                    'author'     : Localisation.translate('official'),
-                    'description': 'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.',
-                    'download'   : 'https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-apps',
-                    'sources'    : 'https://github.com/marius-wieschollek/passwords-webextension',
-                    'extPassLink': true,
-                    'official'   : true
-                },
-                'chrome' : {
-                    'label'      : 'Official Chrome Client',
-                    'author'     : Localisation.translate('official'),
-                    'description': 'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.',
-                    'download'   : 'https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi',
-                    'sources'    : 'https://github.com/marius-wieschollek/passwords-webextension',
-                    'extPassLink': false,
-                    'official'   : true
-                }
+                passlink: false
             };
         },
-        getAndroidApps() {
-            return {
-                'daper'  : {
-                    'label'      : 'Nextcloud Passwords',
-                    'author'     : Localisation.translate('created by {author}', {author: 'daper'}),
-                    'description': 'A modern, fast and lightweight app to access and manage your passwords from your Android device.',
-                    'download'   : 'https://play.google.com/store/apps/details?id=com.nextcloudpasswords',
-                    'sources'    : 'https://github.com/daper/nextcloud-passwords-app',
-                    'web'        : 'https://github.com/daper',
-                    'legacy'     : false
-                },
-                'joleaf' : {
-                    'label'      : 'NC Passwords',
-                    'author'     : Localisation.translate('created by {author}', {author: 'joleaf'}),
-                    'description': 'A fast and polished Android App for Passwords to view, edit and create passwords and folders on the go.',
-                    'download'   : 'https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app',
-                    'sources'    : 'https://gitlab.com/joleaf/nc-passwords-app',
-                    'web'        : 'https://github.com/joleaf',
-                    'legacy'     : false
-                },
-                'intirix': {
-                    'label'      : 'Cloud Password Manager',
-                    'author'     : Localisation.translate('created by {author}', {author: 'intirix'}),
-                    'description': 'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.',
-                    'download'   : 'https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager',
-                    'sources'    : 'https://github.com/intirix/cloudpasswordmanager',
-                    'web'        : 'https://github.com/intirix',
-                    'legacy'     : true
-                }
-            };
+
+        mounted() {
+            DAS.check('passlink-connect')
+               .then((d) => { this.passlink = d; });
         },
-        getLibraries() {
-            return {
-                'npm'   : {
-                    'label'      : 'NPM Package',
-                    'author'     : Localisation.translate('official'),
-                    'description': 'Official JavaScript client for the API',
-                    'download'   : 'https://www.npmjs.com/package/passwords-client',
-                    'web'        : 'https://git.mdns.eu/nextcloud/passwords-client',
-                    'official'   : true
-                },
-                'traxys': {
-                    'label'      : 'Rust Library',
-                    'description': 'A Rust library to bind to the API (WIP)',
-                    'author'     : Localisation.translate('created by {author}', {author: 'traxys'}),
-                    'download'   : 'https://github.com/traxys/nextcloud-passwords-client/',
-                    'sources'    : 'https://github.com/traxys/nextcloud-passwords-client/',
-                    'web'        : 'https://github.com/traxys/',
-                    'official'   : false
-                }
-            };
+
+        computed: {
+            getBrowserExtensions() {
+                return {
+                    'firefox': {
+                        'label'      : 'Official Firefox Client',
+                        'author'     : Localisation.translate('official'),
+                        'description': 'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.',
+                        'download'   : 'https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-apps',
+                        'sources'    : 'https://github.com/marius-wieschollek/passwords-webextension',
+                        'altLink'    : false,
+                        'official'   : true
+                    },
+                    'chrome' : {
+                        'label'      : 'Official Chrome Client',
+                        'author'     : Localisation.translate('official'),
+                        'description': 'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.',
+                        'download'   : 'https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi',
+                        'sources'    : 'https://github.com/marius-wieschollek/passwords-webextension',
+                        'altLink'    : true,
+                        'official'   : true
+                    }
+                };
+            },
+            getAndroidApps() {
+                return {
+                    'daper'  : {
+                        'label'      : 'Nextcloud Passwords',
+                        'author'     : Localisation.translate('created by {author}', {author: 'daper'}),
+                        'description': 'A modern, fast and lightweight app to access and manage your passwords from your Android device.',
+                        'download'   : 'https://play.google.com/store/apps/details?id=com.nextcloudpasswords',
+                        'sources'    : 'https://github.com/daper/nextcloud-passwords-app',
+                        'web'        : 'https://github.com/daper',
+                        'legacy'     : false
+                    },
+                    'joleaf' : {
+                        'label'      : 'NC Passwords',
+                        'author'     : Localisation.translate('created by {author}', {author: 'joleaf'}),
+                        'description': 'A fast and polished Android App for Passwords to view, edit and create passwords and folders on the go.',
+                        'download'   : 'https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app',
+                        'sources'    : 'https://gitlab.com/joleaf/nc-passwords-app',
+                        'web'        : 'https://github.com/joleaf',
+                        'legacy'     : false
+                    },
+                    'intirix': {
+                        'label'      : 'Cloud Password Manager',
+                        'author'     : Localisation.translate('created by {author}', {author: 'intirix'}),
+                        'description': 'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.',
+                        'download'   : 'https://play.google.com/store/apps/details?id=com.intirix.cloudpasswordmanager',
+                        'sources'    : 'https://github.com/intirix/cloudpasswordmanager',
+                        'web'        : 'https://github.com/intirix',
+                        'legacy'     : true
+                    }
+                };
+            },
+            getLibraries() {
+                return {
+                    'npm'   : {
+                        'label'      : 'NPM Package',
+                        'author'     : Localisation.translate('official'),
+                        'description': 'Official JavaScript client for the API',
+                        'download'   : 'https://www.npmjs.com/package/passwords-client',
+                        'web'        : 'https://git.mdns.eu/nextcloud/passwords-client',
+                        'official'   : true
+                    },
+                    'traxys': {
+                        'label'      : 'Rust Library',
+                        'description': 'A Rust library to bind to the API (WIP)',
+                        'author'     : Localisation.translate('created by {author}', {author: 'traxys'}),
+                        'download'   : 'https://github.com/traxys/nextcloud-passwords-client/',
+                        'sources'    : 'https://github.com/traxys/nextcloud-passwords-client/',
+                        'web'        : 'https://github.com/traxys/',
+                        'official'   : false
+                    }
+                };
+            },
+            getIntegrations() {
+                return {
+                    'markuman': {
+                        'label'      : 'Ansible Lookup Plugin',
+                        'description': 'Store secrets for your deployment in Nextcloud',
+                        'author'     : Localisation.translate('created by {author}', {author: 'markuman'}),
+                        'download'   : 'https://galaxy.ansible.com/markuman/nextcloud',
+                        'sources'    : 'https://git.osuv.de/m/nextcloud_collection',
+                        'web'        : 'https://galaxy.ansible.com/markuman',
+                        'official'   : false
+                    }
+                };
+            }
         },
-        getIntegrations() {
-            return {
-                'markuman': {
-                    'label'      : 'Ansible Lookup Plugin',
-                    'description': 'Store secrets for your deployment in Nextcloud',
-                    'author'     : Localisation.translate('created by {author}', {author: 'markuman'}),
-                    'download'   : 'https://galaxy.ansible.com/markuman/nextcloud',
-                    'sources'    : 'https://git.osuv.de/m/nextcloud_collection',
-                    'web'        : 'https://galaxy.ansible.com/markuman',
-                    'official'   : false
-                }
-            };
+
+        methods: {
+            startPasslink(altLink) {
+                Connect.initialize(altLink);
+            }
         }
-    },
-
-    methods: {
-        startPasslink(showConnectLink) {
-            Connect.initialize(showConnectLink);
-        }
-    }
-};
+    };
 </script>
 
 <style lang="scss">

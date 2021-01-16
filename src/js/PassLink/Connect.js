@@ -1,10 +1,10 @@
 import Vue from 'vue';
 
 export default new class Connect {
-    async initialize(showConnectLink = true) {
+    async initialize(useAlternativeLink = true) {
             let PassLinkDialog = await import(/* webpackChunkName: "ConnectClient" */ '@vue/Dialog/ConnectClient.vue'),
                 ConnectDialog = Vue.extend(PassLinkDialog.default);
 
-            new ConnectDialog({propsData: {showConnectLink}}).$mount('#app-popup div');
+            new ConnectDialog({propsData: {useAlternativeLink}}).$mount('#app-popup div');
     }
 }
