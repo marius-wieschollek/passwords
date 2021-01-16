@@ -93,6 +93,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - Click on "Continue"
  - Select "inetOrgPerson" and "posixAccount" as object classes
  - Click on "Continue"
+ - Select "cn" in "other attributes"
  - Click on "Continue"
  - Select "posixGroup" as object classes
 
