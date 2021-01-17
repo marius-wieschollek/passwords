@@ -13,7 +13,6 @@
 
 namespace OCA\Passwords\Migration;
 
-use OCA\Passwords\Exception\Migration\NextcloudRequirementNotMetException;
 use OCA\Passwords\Exception\Migration\PhpRequirementNotMetException;
 use OCA\Passwords\Exception\Migration\UpgradeUnsupportedException;
 use OCP\IConfig;
@@ -30,7 +29,6 @@ class CheckAppRequirements implements IRepairStep {
     const UPGRADE_MINIMUM_APP_VERSION   = '2020.1.0';
     const PHP_MINIMUM_REQUIREMENT_ID    = 70400;
     const PHP_MINIMUM_REQUIREMENT       = '7.4.0';
-    const NEXTCLOUD_MINIMUM_REQUIREMENT = 20;
 
     /**
      * @var IConfig
@@ -56,7 +54,6 @@ class CheckAppRequirements implements IRepairStep {
     /**
      * @param IOutput $output
      *
-     * @throws NextcloudRequirementNotMetException
      * @throws PhpRequirementNotMetException
      * @throws UpgradeUnsupportedException
      */
@@ -78,17 +75,11 @@ class CheckAppRequirements implements IRepairStep {
     }
 
     /**
-     * @throws NextcloudRequirementNotMetException if the used version of Nextcloud is too low
      * @throws PhpRequirementNotMetException if the used version of PHP is too low
      */
     protected function canInstallRelease() {
         if(PHP_VERSION_ID < self::PHP_MINIMUM_REQUIREMENT_ID) {
             throw new PhpRequirementNotMetException(PHP_VERSION, self::PHP_MINIMUM_REQUIREMENT);
-        }
-
-        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        if($ncVersion < self::NEXTCLOUD_MINIMUM_REQUIREMENT) {
-            throw new NextcloudRequirementNotMetException($ncVersion, self::NEXTCLOUD_MINIMUM_REQUIREMENT);
         }
     }
 }

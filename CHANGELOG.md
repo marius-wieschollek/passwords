@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+## 2021.1.2 - Bugfix release
+- Removed Nextcloud minimum check
+
 ## 2021.1.1 - Bugfix release
 ### Fixed
 - Invalid type in custom fields
