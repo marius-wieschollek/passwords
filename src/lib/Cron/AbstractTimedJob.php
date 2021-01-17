@@ -9,6 +9,7 @@ namespace OCA\Passwords\Cron;
 
 use Exception;
 use OC\BackgroundJob\TimedJob;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 
@@ -25,6 +26,11 @@ abstract class AbstractTimedJob extends TimedJob {
     protected LoggingService $logger;
 
     /**
+     * @var ConfigurationService
+     */
+    protected ConfigurationService $config;
+
+    /**
      * @var EnvironmentService
      */
     protected EnvironmentService $environment;
@@ -37,14 +43,17 @@ abstract class AbstractTimedJob extends TimedJob {
     /**
      * AbstractCronJob constructor.
      *
-     * @param LoggingService     $logger
-     * @param EnvironmentService $environment
+     * @param LoggingService       $logger
+     * @param ConfigurationService $config
+     * @param EnvironmentService   $environment
      */
     public function __construct(
         LoggingService $logger,
+        ConfigurationService $config,
         EnvironmentService $environment
     ) {
         $this->logger      = $logger;
+        $this->config      = $config;
         $this->environment = $environment;
     }
 
@@ -57,6 +66,9 @@ abstract class AbstractTimedJob extends TimedJob {
 
             return;
         }
+
+        $this->config->setAppValue('cron/php/version/id', PHP_VERSION_ID);
+        $this->config->setAppValue('cron/php/version/string', PHP_VERSION);
 
         try {
             $this->runJob($argument);

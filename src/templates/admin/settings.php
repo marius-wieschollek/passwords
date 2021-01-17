@@ -33,6 +33,12 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
+    <?php if($_['support']['cronPhp']['error'] && !$_['support']['php']['error']): ?>
+        <div class="message error">
+            <?php p($l->t('%1$s %2$s is no longer supported.', ['PHP', $_['support']['cronPhp']['cronVersion']])); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
     <?php if($_['support']['server']['error']): ?>
         <div class="message error">
             <?php p($l->t('%1$s %2$s is no longer supported.', ['Nextcloud', $_['support']['server']['version']])); ?>
@@ -47,13 +53,24 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     <?php endif; ?>
 
 
-    <?php if($_['support']['php']['warn']): ?>
+    <?php if($_['support']['php']['warn'] && !$_['support']['php']['error']): ?>
         <div class="message warn">
             <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['PHP', $_['support']['php']['version'], $_['support']['eol']])); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
-    <?php if($_['support']['server']['warn']): ?>
+    <?php if($_['support']['cronPhp']['warn'] && !$_['support']['php']['warn'] && !$_['support']['cronPhp']['error']): ?>
+        <div class="message warn">
+            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['PHP', $_['support']['cronPhp']['cronVersion'], $_['support']['eol']])); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
+    <?php if($_['support']['cronPhp']['isDifferent']): ?>
+        <div class="message warn">
+            <?php p($l->t('Background jobs are run with PHP %1$s, the webserver uses PHP %2$s. This may cause issues.', [$_['support']['cronPhp']['cronVersion'], $_['support']['cronPhp']['webVersion']])); ?>
+        </div>
+    <?php endif; ?>
+    <?php if($_['support']['server']['warn'] && !$_['support']['server']['error']): ?>
         <div class="message warn">
             <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['Nextcloud', $_['support']['server']['version'], $_['support']['eol']])); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>

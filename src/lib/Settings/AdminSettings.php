@@ -381,23 +381,32 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        $cronType  = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
+        $ncVersion     = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
+        $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
+        $cronPhpString = $this->config->getAppValue('cron/php/version/string', PHP_VERSION);
 
         return [
-            'cron'   => $cronType,
-            'https'  => $this->request->getHttpProtocol() === 'https',
-            'php'    => [
+            'cron'    => $cronType,
+            'https'   => $this->request->getHttpProtocol() === 'https',
+            'php'     => [
                 'warn'    => PHP_VERSION_ID < 70400,
                 'error'   => PHP_VERSION_ID < 70400,
                 'version' => PHP_VERSION
             ],
-            'server' => [
+            'cronPhp' => [
+                'isDifferent' => PHP_VERSION_ID - $cronPhpId > 99 || $cronPhpId - PHP_VERSION_ID > 99,
+                'warn'        => $cronPhpId < 70400,
+                'error'       => $cronPhpId < 70400,
+                'cronVersion' => $cronPhpString,
+                'webVersion'  => PHP_VERSION
+            ],
+            'server'  => [
                 'warn'    => $ncVersion < 20,
                 'error'   => $ncVersion < 20,
                 'version' => $ncVersion
             ],
-            'eol'    => '2021.1.0'
+            'eol'     => '2021.1.0'
         ];
     }
 

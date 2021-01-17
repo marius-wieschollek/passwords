@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
@@ -60,6 +61,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
      *
      * @param LoggingService         $logger
      * @param MailService            $mailService
+     * @param ConfigurationService   $config
      * @param HelperService          $helperService
      * @param EnvironmentService     $environment
      * @param PasswordRevisionMapper $revisionMapper
@@ -68,6 +70,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
     public function __construct(
         LoggingService $logger,
         MailService $mailService,
+        ConfigurationService $config,
         HelperService $helperService,
         EnvironmentService $environment,
         PasswordRevisionMapper $revisionMapper,
@@ -77,7 +80,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
         $this->revisionMapper      = $revisionMapper;
         $this->mailService         = $mailService;
         $this->notificationService = $notificationService;
-        parent::__construct($logger, $environment);
+        parent::__construct($logger, $config, $environment);
     }
 
     /**

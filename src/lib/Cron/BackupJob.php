@@ -22,11 +22,6 @@ class BackupJob extends AbstractTimedJob {
     protected BackupService $backupService;
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
      * BackupJob constructor.
      *
      * @param LoggingService       $logger
@@ -35,9 +30,8 @@ class BackupJob extends AbstractTimedJob {
      * @param ConfigurationService $config
      */
     public function __construct(LoggingService $logger, EnvironmentService $environment, BackupService $backupService, ConfigurationService $config) {
-        parent::__construct($logger, $environment);
+        parent::__construct($logger, $config, $environment);
         $this->backupService = $backupService;
-        $this->config        = $config;
 
         $interval = (int) $this->config->getAppValue('backup/interval', 86400);
         $this->setInterval($interval);

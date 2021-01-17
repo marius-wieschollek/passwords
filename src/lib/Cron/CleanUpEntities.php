@@ -10,6 +10,7 @@ namespace OCA\Passwords\Cron;
 use OCA\Passwords\Helper\CleanUp\CleanDeletedEntitiesHelper;
 use OCA\Passwords\Helper\CleanUp\CleanRegistrationsHelper;
 use OCA\Passwords\Helper\CleanUp\CleanSessionsHelper;
+use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use Throwable;
@@ -40,6 +41,7 @@ class CleanUpEntities extends AbstractTimedJob {
      * CleanUpEntities constructor.
      *
      * @param LoggingService             $logger
+     * @param ConfigurationService       $config
      * @param EnvironmentService         $environment
      * @param CleanSessionsHelper        $sessionsHelper
      * @param CleanRegistrationsHelper   $registrationsHelper
@@ -47,12 +49,13 @@ class CleanUpEntities extends AbstractTimedJob {
      */
     public function __construct(
         LoggingService $logger,
+        ConfigurationService $config,
         EnvironmentService $environment,
         CleanSessionsHelper $sessionsHelper,
         CleanRegistrationsHelper $registrationsHelper,
         CleanDeletedEntitiesHelper $deletedEntitiesHelper
     ) {
-        parent::__construct($logger, $environment);
+        parent::__construct($logger, $config, $environment);
         $this->sessionsHelper        = $sessionsHelper;
         $this->registrationsHelper   = $registrationsHelper;
         $this->deletedEntitiesHelper = $deletedEntitiesHelper;
