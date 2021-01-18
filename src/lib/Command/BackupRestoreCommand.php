@@ -56,10 +56,10 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         parent::execute($input, $output);
         $options = $this->getOptions($input);
         $backup  = $this->getBackup($input->getArgument('backup'));
@@ -68,7 +68,7 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
         if(!$options['data'] && !$options['settings']['application'] && !$options['settings']['user'] && !$options['settings']['client']) {
             $output->writeln(' - nothing');
 
-            return;
+            return 1;
         }
 
         if($options['data']) {
@@ -76,12 +76,14 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
             $output->writeln('Restoring user data means that the current user data will be wiped.');
         }
 
-        if(!$this->confirmRestoring($input, $output, $backup)) return;
+        if(!$this->confirmRestoring($input, $output, $backup)) return 2;
 
         $output->write('Restoring backup ...');
         $this->backupService->restoreBackup($backup, $options);
         $output->write(' done');
         $output->writeln('');
+
+        return 0;
     }
 
     /**

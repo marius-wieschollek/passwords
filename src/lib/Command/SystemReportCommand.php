@@ -50,9 +50,9 @@ class SystemReportCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $sections = $input->getArgument('sections');
         $enhanced = !$input->getOption('basic') || !empty($sections);
 
@@ -75,5 +75,7 @@ class SystemReportCommand extends Command {
         }
 
         $output->write($json, true);
+
+        return 0;
     }
 }

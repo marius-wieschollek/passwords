@@ -48,13 +48,17 @@ class BackupListCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws NotPermittedException
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $backups = $this->backupService->getBackups();
 
-        if(empty($backups)) $output->writeln('No backups found');
+        if(empty($backups)) {
+            $output->writeln('No backups found');
+
+            return 0;
+        }
 
         $output->writeln('The following backups are available:');
         foreach($backups as $backup) {
@@ -62,5 +66,7 @@ class BackupListCommand extends Command {
 
             $output->writeln(sprintf('   %-20s  %s %s', $info['label'], $info['size'], $info['format']));
         }
+
+        return 0;
     }
 }

@@ -53,16 +53,18 @@ class BackupExportCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws NotPermittedException
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $backup     = $this->getBackup($input->getArgument('backup'));
         $exportPath = $this->getFilePath($input, $backup);
 
         file_put_contents($exportPath, $backup->getContent());
         $output->writeln('Exported backup to '.$exportPath);
+
+        return 0;
     }
 
     /**

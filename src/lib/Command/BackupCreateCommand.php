@@ -51,11 +51,11 @@ class BackupCreateCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws NotPermittedException
      * @throws NotFoundException
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $argName = null;
         if($input->hasArgument('name')) {
             $argName = preg_replace('/[^\w\-.]/', '', $input->getArgument('name'));
@@ -66,5 +66,7 @@ class BackupCreateCommand extends Command {
         $info   = $this->backupService->getBackupInfo($backup);
 
         $output->writeln(sprintf('Created new backup: %s, %s %s', $info['label'], $info['size'], $info['format']));
+
+        return 0;
     }
 }

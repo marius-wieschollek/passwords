@@ -34,16 +34,18 @@ abstract class AbstractInteractiveCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|void
+     * @return int
      * @throws NonInteractiveShellException
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         if(!$input->isInteractive() && !$input->getOption('no-interaction')) {
             throw new NonInteractiveShellException();
         } else if(!$input->isInteractive()) {
             $output->writeln('"--no-interaction" is set, will assume yes for all questions.');
             $output->writeln('');
         }
+
+        return 0;
     }
 
     /**
