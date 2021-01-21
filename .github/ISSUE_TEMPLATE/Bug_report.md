@@ -15,7 +15,7 @@ labels: bug
 ### System Information
 **Server:**
 ```
- Put the output of "./occ passwords:system:report" here or fill out the fields below
+ Put the output of "./occ passwords:system:report debug" here or fill out the fields below
 
  Nextcloud Version:
  PHP Version:
