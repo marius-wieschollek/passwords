@@ -1,6 +1,6 @@
 <template>
     <a :href="getHref" :target="getTarget" :rel="getRel" :class="className" :title="getTitle">
-        <i v-if="icon" :class="getIcon" aria-hidden="true"></i>
+        <icon :icon="icon" :class="iconClass" v-if="icon" />
         {{ getText }}
         <slot name="default" v-if="!getText"></slot>
     </a>
@@ -9,8 +9,10 @@
 <script>
     import API from '@js/Helper/api';
     import Localisation from '@js/Classes/Localisation';
+    import Icon from "@vc/Icon";
 
     export default {
+        components: {Icon},
         props   : {
             href  : {
                 type: String
@@ -68,9 +70,6 @@
             },
             getRel() {
                 return this.getTarget === '_blank' ? 'noreferrer noopener':'';
-            },
-            getIcon() {
-                return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);
             }
         }
     };
