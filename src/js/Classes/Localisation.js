@@ -1,6 +1,17 @@
-import moment from '@nextcloud/moment'
+import moment from '@nextcloud/moment';
 
 class Localisation {
+
+    get lang() {
+        let lang = document.documentElement.lang;
+        return lang ? lang:'en';
+    }
+
+    get locale() {
+        let locale = document.documentElement.dataset.locale;
+        if(!locale) return this.lang;
+        return locale.replace('_', '-');
+    }
 
     constructor() {
         this._fetchAlternative = false;

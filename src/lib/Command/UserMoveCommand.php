@@ -76,10 +76,10 @@ class UserMoveCommand extends AbstractInteractiveCommand {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         parent::execute($input, $output);
 
         $users = $this->getUsers($input, $output);
@@ -94,6 +94,8 @@ class UserMoveCommand extends AbstractInteractiveCommand {
         $this->moveUserData->moveUserData($sourceUser->getUID(), $targetUser->getUID());
         $output->write(' done');
         $output->writeln('');
+
+        return 0;
     }
 
     /**

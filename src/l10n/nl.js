@@ -340,7 +340,6 @@
             'Invalid trailing quote in quoted field'                                     : 'Ongeldig afsluitdend aanhalingsteken in geciteerd veld',
             'We could not find anything for "{query}"'                                   : 'We konden niets vinden voor "{query}"',
             'The file could not be parsed: {errors}'                                     : 'Het bestand kon niet verwerkt worden: {errors}',
-            'You have to wait {seconds} seconds before you can reset your account.'      : 'U dient {seconds} seconden te wachten voordat uw gebruikersaccount gereset kan worden.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'De pagina "{page}" kon niet opgehaald worden van de handleidingsserver.',
             'Some data is waiting to be synchronized'                                    : 'Er staat data gereed om gesynchroniseerd te worden',
             '{message} in line {line} character {character}.'                            : '{message} op regel {line}, Karakter {character}.',

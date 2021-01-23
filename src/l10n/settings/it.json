@@ -100,7 +100,6 @@
             "Reset all settings on this page to their defaults"                          : "Reimposta tutte le impostazioni a quelle predefinite",
             "This will reset all settings to their defaults. Do you want to continue?"   : "Questo cancellerà tutte le impostazioni ai suoi default. Vuoi continuare?",
             "Start over and delete all configuration, passwords, folders and tags"       : "Ricomincia da capo e cancella tutta la tua configurazione, password, cartelle e etichette",
-            "You have to wait {seconds} seconds before you can reset your account."      : "Devi aspettare {seconds} secondi prima di resettare il tuo account.",
             "You can use this dialog to change your master password."                    : "Puoi usare questa finestra per cambiare la tua master password.",
             "Your password must be longer than 12 characters and not the old password"   : "La tua password deve essere più lunga di 12 caratteri e non la tua vecchia password",
             "Please confirm your new password"                                           : "Perfavore conferma la nuova password",

@@ -31,8 +31,9 @@ use Throwable;
  */
 class ConnectController extends Controller {
 
-    const PASSLINK_CONNECT = "ext+passlink:%s/do/connect?id=%s&theme=%s";
-    const SESSION_KEY      = 'passlink.connect';
+    const PASSLINK_CONNECT           = "ext+passlink:%s/do/connect?id=%s&theme=%s";
+    const PASSLINK_ALTERNATE_CONNECT = "https://passlink.mdns.eu/open/%s/do/connect?id=%s&theme=%s";
+    const SESSION_KEY                = 'passlink.connect';
 
     /**
      * @var MailService
@@ -127,14 +128,16 @@ class ConnectController extends Controller {
         $this->session->set(self::SESSION_KEY, $registration->getUuid());
         $this->session->save();
 
-        $baseUrl = $this->serverSettings->get('baseUrl');
-        $linkUrl = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
-        $theme   = $this->getTheme($baseUrl);
-        $link    = sprintf(self::PASSLINK_CONNECT, $linkUrl, $registration->getUuid(), $theme);
+        $baseUrl       = $this->serverSettings->get('baseUrl');
+        $linkUrl       = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
+        $theme         = $this->getTheme($baseUrl);
+        $link          = sprintf(self::PASSLINK_CONNECT, $linkUrl, $registration->getUuid(), $theme);
+        $alternativeLink = sprintf(self::PASSLINK_ALTERNATE_CONNECT, $linkUrl, $registration->getUuid(), $theme);
 
         $data = [
-            'id'   => $registration->getUuid(),
-            'link' => $link
+            'id'            => $registration->getUuid(),
+            'alternativeLink' => $alternativeLink,
+            'link'          => $link
         ];
 
         return new JSONResponse($data);
@@ -214,6 +217,7 @@ class ConnectController extends Controller {
             [$token, $deviceToken] = $this->tokenHelper->createToken($label, true);
         } catch(Throwable $e) {
             $this->logger->logException($e);
+
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
@@ -247,6 +251,7 @@ class ConnectController extends Controller {
             $registration = $this->registrationService->findByUuid($id);
         } catch(Throwable $e) {
             $this->logger->logException($e);
+
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
@@ -268,6 +273,7 @@ class ConnectController extends Controller {
             $this->registrationService->save($registration);
         } catch(Throwable $e) {
             $this->logger->logException($e);
+
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
         }
 
@@ -287,6 +293,7 @@ class ConnectController extends Controller {
                 $registration = $this->registrationService->findByUuid($id);
             } catch(Throwable $e) {
                 $this->logger->logException($e);
+
                 return null;
             }
 
@@ -399,6 +406,7 @@ class ConnectController extends Controller {
                 $registration = $this->registrationService->findByUuid($id);
             } catch(Throwable $e) {
                 $this->logger->logException($e);
+
                 return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
             }
 

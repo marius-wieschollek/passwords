@@ -68,18 +68,30 @@ class Messages {
      *
      * @param message
      * @param title
+     * @param placeholder
      * @param value
+     * @param label
      * @param isPassword
      * @returns {Promise<any>}
      */
-    prompt(message, title = 'Prompt', value = null, isPassword = false) {
+    prompt(label, title = 'Prompt', message = null, placeholder = null, value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
-            message = Localisation.translateArray(message);
-            title = Localisation.translateArray(title);
             let callback = function(success, value) { success ? resolve(value):reject(value); };
+            title = Localisation.translateArray(title);
+            label = Localisation.translateArray(label);
 
-            OC.dialogs.prompt('', title, callback, true, message, isPassword);
+            if(message !== null) {
+                message = Localisation.translateArray(message);
+            } else {
+                message = '';
+            }
+
+            OC.dialogs.prompt(message, title, callback, true, label, isPassword);
             if(value !== null) this._setDialogValue(value);
+            if(placeholder !== null) {
+                placeholder = Localisation.translateArray(placeholder);
+                this._setDialogPlaceholder(placeholder);
+            }
         });
     }
 
@@ -152,6 +164,21 @@ class Messages {
             setTimeout(() => { this._setDialogValue(value); }, 10);
         } else {
             $el.val(value);
+        }
+    }
+
+    /**
+     * Sets the placeholder of an input field because Nextcloud does not support this
+     *
+     * @param value
+     * @private
+     */
+    _setDialogPlaceholder(value) {
+        let $el = $('.oc-dialog-content input');
+        if($el.length === 0) {
+            setTimeout(() => { this._setDialogPlaceholder(value); }, 10);
+        } else {
+            $el.attr('placeholder', value);
         }
     }
 

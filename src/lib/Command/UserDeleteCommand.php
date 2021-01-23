@@ -74,10 +74,10 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         parent::execute($input, $output);
         $userId = $input->getArgument('user');
         if($this->confirmDelete($input, $output, $userId)) {
@@ -86,7 +86,11 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
             $this->backgroundJobs->removeDeleteUserJob($userId);
             $output->write(' done');
             $output->writeln('');
+
+            return 0;
         }
+
+        return 1;
     }
 
     /**

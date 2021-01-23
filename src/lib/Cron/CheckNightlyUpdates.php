@@ -16,11 +16,6 @@ use OCA\Passwords\Services\LoggingService;
 class CheckNightlyUpdates extends AbstractTimedJob {
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
      * @var NightlyAppFetcher
      */
     protected NightlyAppFetcher $nightlyAppFetcher;
@@ -39,9 +34,8 @@ class CheckNightlyUpdates extends AbstractTimedJob {
      * @param EnvironmentService   $environment
      */
     public function __construct(NightlyAppFetcher $nightlyAppFetcher, ConfigurationService $config, LoggingService $logger, EnvironmentService $environment) {
-        parent::__construct($logger, $environment);
+        parent::__construct($logger, $config, $environment);
         $this->nightlyAppFetcher = $nightlyAppFetcher;
-        $this->config            = $config;
         $this->setInterval(0);
     }
 

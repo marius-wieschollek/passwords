@@ -342,7 +342,6 @@
             'Invalid trailing quote in quoted field'                                     : 'Le caractère de fin de champ est incorrecte',
             'We could not find anything for "{query}"'                                   : 'Rien n’à été trouvé pour la recherche "{query}"',
             'The file could not be parsed: {errors}'                                     : 'Le fichier n’a pas pu être traité : {errors}',
-            'You have to wait {seconds} seconds before you can reset your account.'      : 'Vous devez attendre {seconds} secondes avant de pouvoir réinitialiser votre compte.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'La page "{page}" n’a pas pu être extraite du  serveur hébergeant le manuel.',
             'Some data is waiting to be synchronized'                                    : 'Certaines données attendent d’être synchronisées',
             '{message} in line {line} character {character}.'                            : '{message} ligne {line}, colonne {character}.'

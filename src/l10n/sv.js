@@ -1,5 +1,5 @@
 (function() {
-    let translations    = {
+    let translations = {
             'Passwords'                           : 'Lösenord',
             'All'                                 : 'Alla',
             'Folders'                             : 'Mappar',
@@ -314,18 +314,15 @@
             ' and '                               : ' och ',
             'match'                               : 'passa',
             'matches'                             : 'passar',
-            'Browsers'                            : 'Webbläsare',
-            'Official Firefox Client'             : 'Officiell Firefox klient',
-            'Official Chrome Client'              : 'Officiell Chrome klient',
             'official'                            : 'officiell',
-            'created by {author}'                 : 'Skapad av {author}',
-            'sources'                             : 'källtext',
+            'by {author}'                         : 'av {author}',
+            'source code'                         : 'källtext',
             'true'                                : 'ja',
             'false'                               : 'nej',
             'yes'                                 : 'ja',
             'no'                                  : 'nej'
         },
-        helpTexts       = {
+        helpTexts    = {
             'Mark passwords as weak if they are being used for multiple accounts'        : 'Markera lösenord som "osäkert" om det används för flera konton',
             'Mark passwords as weak if they surpass the specified amount of days'        : 'Markera lösenord som "osäkert" om det används längre tid än specifierat',
             'A higher strength results in longer, more complex passwords'                : 'En högre säkerhet kräver längre och mer komplexa lösenord',
@@ -354,7 +351,6 @@
             'Invalid trailing quote in quoted field'                                     : 'Felaktigt tecken i citat fält',
             'We could not find anything for "{query}"'                                   : 'Ingenting kunde hittas för "{query}"',
             'The file could not be parsed: {errors}'                                     : 'Filen kunde inte läsas: {errors}',
-            'You have to wait {seconds} seconds before you can reset your account.'      : 'Du måste vänta {seconds} sekunder innan ditt konto kan återstälals till standardvärden.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'Denan sidan "{page}" kunde inte hämtas från servern.',
             'Some data is waiting to be synchronized'                                    : 'En del data väntar på att synkroniseras',
             '{message} in line {line} character {character}.'                            : '{message} på raden {line}, kolumn {character}.',
@@ -362,25 +358,18 @@
             'The type of "{field}" in "{label}" is unknown and can not be imported.'     : 'Typen för "{field}" i "{label}" är okänd och kan inte importeras.',
             'The label of "{field}" in "{label}" exceeds 48 characters and was cut.'     : 'Namnet på "{field}" i "{label}" har blivit trunkerad (max 48 tecken).',
             'The value of "{field}" in "{label}" exceeds 320 characters and was cut.'    : 'Värdet på "{field}" i "{label}" har blivit trunkerad (max 320 tecken).',
-            'More information can be found in the log. (Press F12)'                      : 'Mer detaljer finns i loggen (F12).',
-            'This app uses an api which is no longer supported.'                         : 'Den här appen använder ett föråldrat API.'
+            'More information can be found in the log. (Press F12)'                      : 'Mer detaljer finns i loggen (F12).'
         },
-        longTexts       = {
+        longTexts    = {
             'The file has the type "{actual}" but "{expected}" is expected. You might have chosen the wrong file or importer.' : 'Filen har en typ "{actual}" men "{expected}" är förväntad. Du har kanske valt fel fil?',
             'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.'     : 'Är du säker på att du vill ta bort alla dina inställningar, lösenord, mappar och taggar?\nDetta kan INTE ångras.',
             '{service} is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.': '{service} är känt för att skapa felaktiga exportfiler. Konsultera hjälpen om filen inte kan läsas..',
             'Today in 2018, the first version of passwords was published. Thank you for using the app.'                        : 'År 2018 släpptes den första versionen av "Lösenord" till NextCloud. Tack för att du använder applikationen.'
-        },
-        appDescriptions = {
-            'Access and manage all your passwords easily within Firefox thanks to our official extension from the Firefox Add-on store.'                                     : 'Med det officiella tillägget för Firefox kan du enkelt komma åt alla dina lösenord från Firefox. Ladda ner tillägget från tilläggs-butiken för Firefox',
-            'Our official Chrome extension lets you manage all your passwords from your browser and is available for many Chromium based Browsers from the Chrome Web Store.': 'Med det officiella tillägget för Chrome kan du enkelt komma åt alla dina lösenord från Chrome. Ladda ner tillägget från tilläggs-butiken för Chrome',
-            'Finally a modern, fast and lightweight app to access and manage your passwords from your Android device. Get it from Google Play.'                              : 'Ett  modernt, snabb och lättanvänd applikation för åtkomst till, och hantering av dina lösenord i din Android-enhet. Ladda ner det från Google Play.',
-            'Cloud Password Manager is a password manager that puts you in control. Access all the passwords stored on your Nextcloud from your Android Phone.'              : 'Cloud Password Manager är en lösenordshanterare som du har kontroll över. Från din Android-enhet kan du komma åt lösenord som finns på din Nextcloud.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts, appDescriptions),
+        Object.assign(translations, helpTexts, longTexts),
         'nplurals=2; plural=(n != 1);'
     );
 }());

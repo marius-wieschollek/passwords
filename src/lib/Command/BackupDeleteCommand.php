@@ -52,11 +52,11 @@ class BackupDeleteCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws NotPermittedException
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $backup  = $input->getArgument('backup');
         $backups = $this->backupService->getBackups('backups');
 
@@ -67,5 +67,7 @@ class BackupDeleteCommand extends Command {
         } else {
             throw new NotFoundException();
         }
+
+        return 0;
     }
 }

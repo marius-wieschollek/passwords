@@ -65,7 +65,7 @@ class SendServerSurvey extends AbstractTimedJob {
         ServerReportHelper $serverReport,
         NotificationService $notifications
     ) {
-        parent::__construct($logger, $environment);
+        parent::__construct($logger, $config, $environment);
         $this->serverReport  = $serverReport;
         $this->config        = $config;
         $this->adminHelper   = $adminHelper;

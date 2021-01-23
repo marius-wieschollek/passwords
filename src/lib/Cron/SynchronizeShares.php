@@ -95,7 +95,7 @@ class SynchronizeShares extends AbstractTimedJob {
         $this->passwordService         = $passwordService;
         $this->notificationService     = $notificationService;
         $this->passwordRevisionService = $passwordRevisionService;
-        parent::__construct($logger, $environment);
+        parent::__construct($logger, $config, $environment);
     }
 
     /**

@@ -11,7 +11,6 @@ import AlertManager from '@js/Manager/AlertManager';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
-import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
 
 
 class Application {
@@ -78,7 +77,6 @@ class Application {
             EventManager.init();
             KeepAliveManager.init();
             AlertManager.init();
-            EncryptionTestHelper.initTests();
         }
     }
 

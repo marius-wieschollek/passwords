@@ -61,11 +61,11 @@ class BackupImportCommand extends Command {
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int
      * @throws NotPermittedException
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $file = realpath($input->getArgument('file'));
 
         [$importFile, $isCompressed] = $this->checkIfFileCanBeRead($file);
@@ -77,6 +77,8 @@ class BackupImportCommand extends Command {
         $info   = $this->backupService->getBackupInfo($backup);
 
         $output->writeln(sprintf('Imported backup: %s, %s %s', $info['label'], $info['size'], $info['format']));
+
+        return 0;
     }
 
     /**

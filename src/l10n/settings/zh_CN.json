@@ -100,7 +100,6 @@
             "Reset all settings on this page to their defaults"                          : "将此页面上的所有设置重置为默认设置",
             "This will reset all settings to their defaults. Do you want to continue?"   : "这会将所有设置重置为默认设置。你想继续吗？",
             "Start over and delete all configuration, passwords, folders and tags"       : "重新开始并删除所有配置，密码，分类和标签",
-            "You have to wait {seconds} seconds before you can reset your account."      : "您必须等待 {seconds} 秒才能重置帐户。",
             "You can use this dialog to change your master password."                    : "您可以使用此对话框更改主密码。",
             "Your password must be longer than 12 characters and not the old password"   : "您的密码必须超过 12 个字符，且不是旧密码",
             "Please confirm your new password"                                           : "请确认您的新密码",

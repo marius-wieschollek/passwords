@@ -1,6 +1,6 @@
 <template>
     <component :is="tag" @click="fireEvent($event)" :title="getTitle" :value="getValue">
-        <i v-if="icon" :class="getIcon" aria-hidden="true"></i>
+        <icon v-if="icon" :icon="icon" :class="iconClass" />
         {{ getText }}
         <slot name="default" v-if="say"></slot>
     </component>
@@ -8,8 +8,10 @@
 
 <script>
     import Localisation from '@js/Classes/Localisation';
+    import Icon from "@vc/Icon";
 
     export default {
+        components: {Icon},
         props: {
             say           : {
                 type     : String,
@@ -60,9 +62,6 @@
             getValue() {
                 if(this.localizedValue !== null) return Localisation.translate(this.localizedValue, this.variables);
                 return this.value;
-            },
-            getIcon() {
-                return 'fa fa-' + this.icon + (this.iconClass === null ? '':' ' + this.iconClass);
             }
         },
         methods : {
