@@ -194,12 +194,12 @@ class DeferredActivationService {
     }
 
     /**
-     * Try to load the deferred-activation.json from cache
+     * Try to load the features.json from cache
      *
      * @return null|string
      */
     protected function getFeaturesFromCache(): ?string {
-        $file = $this->fileCache->getFile('deferred-activation.json');
+        $file = $this->fileCache->getFile('features.json');
 
         if($file === null) return null;
 
@@ -219,12 +219,12 @@ class DeferredActivationService {
      * @throws Exception
      */
     protected function getFeaturesFromRemote(): ?string {
-        $url      = $this->serverSettings->get('handbook.url').'_files/deferred-activation.json';
+        $url      = $this->serverSettings->get('handbook.url').'_features/features-v1.json';
         $client   = $this->httpClientService->newClient();
         $response = $client->get($url);
         $data     = $response->getBody();
 
-        if($data !== null) $this->fileCache->putFile('deferred-activation.json', $data);
+        if($data !== null) $this->fileCache->putFile('features.json', $data);
 
         return $data;
     }

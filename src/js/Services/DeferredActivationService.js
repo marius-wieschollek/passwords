@@ -40,7 +40,7 @@ class DeferredActivationService {
             return this._features;
         }
 
-        let url = SettingsService.get('server.handbook.url') + '_files/deferred-activation.json';
+        let url = SettingsService.get('server.handbook.url') + '_features/features-v1.json';
 
         try {
             let response = await fetch(new Request(url, {credentials: 'omit', referrerPolicy: 'no-referrer'}));
