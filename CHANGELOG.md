@@ -4,6 +4,7 @@
 ### Added
  - PassLink connect by link for chrome
  - Warning in admin settings if cron uses different PHP version
+ - Account reset for password-less accounts
 ### Changed
  - Apps & Extensions section design
 ### Removed
