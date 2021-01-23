@@ -31,8 +31,8 @@ use Throwable;
  */
 class ConnectController extends Controller {
 
-    const PASSLINK_CONNECT           = "ext+passlink:%s/do/connect?id=%s&theme=%s";
-    const PASSLINK_ALTERNATE_CONNECT = "https://passlink.mdns.eu/open/%s/do/connect?id=%s&theme=%s";
+    const PASSLINK_CONNECT           = "ext+passlink:%s/do/connect/%s?t=%s";
+    const PASSLINK_ALTERNATE_CONNECT = "https://passlink.mdns.eu/open/%s/do/connect/%s?t=%s";
     const SESSION_KEY                = 'passlink.connect';
 
     /**
@@ -128,16 +128,16 @@ class ConnectController extends Controller {
         $this->session->set(self::SESSION_KEY, $registration->getUuid());
         $this->session->save();
 
-        $baseUrl       = $this->serverSettings->get('baseUrl');
-        $linkUrl       = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
-        $theme         = $this->getTheme($baseUrl);
-        $link          = sprintf(self::PASSLINK_CONNECT, $linkUrl, $registration->getUuid(), $theme);
+        $baseUrl         = $this->serverSettings->get('baseUrl');
+        $linkUrl         = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
+        $theme           = $this->getTheme($baseUrl);
+        $link            = sprintf(self::PASSLINK_CONNECT, $linkUrl, $registration->getUuid(), $theme);
         $alternativeLink = sprintf(self::PASSLINK_ALTERNATE_CONNECT, $linkUrl, $registration->getUuid(), $theme);
 
         $data = [
-            'id'            => $registration->getUuid(),
+            'id'              => $registration->getUuid(),
             'alternativeLink' => $alternativeLink,
-            'link'          => $link
+            'link'            => $link
         ];
 
         return new JSONResponse($data);
@@ -329,23 +329,26 @@ class ConnectController extends Controller {
      * @return string
      */
     protected function getTheme(?string $baseUrl): string {
-        return urlencode(
-            base64_encode(
-                gzcompress(
-                    json_encode(
-                        [
-                            'label'      => $this->serverSettings->get('theme.label'),
-                            'logo'       => str_replace($baseUrl, '', $this->serverSettings->get('theme.logo')),
-                            'background' => str_replace($baseUrl, '', $this->serverSettings->get('theme.background')),
-                            'color'      => $this->serverSettings->get('theme.color.primary'),
-                            'txtColor'   => $this->serverSettings->get('theme.color.text'),
-                            'bgColor'    => $this->serverSettings->get('theme.color.background'),
-                        ]
-                    ),
-                    9
-                )
-            )
+        if(substr($baseUrl, -1) !== '/') $baseUrl .= "/";
+
+        $logo = str_replace($baseUrl, '', $this->serverSettings->get('theme.logo'));
+        if(strpos($logo, '?') !== false) $logo = substr($logo, 0, strpos($logo, '?'));
+        $background = str_replace($baseUrl, '', $this->serverSettings->get('theme.background'));
+        if(strpos($background, '?') !== false) $background = substr($background, 0, strpos($background, '?'));
+        $background = str_replace('https://', '://', $background);
+
+        $theme = implode('|',
+                         [
+                             str_replace('|', '', $this->serverSettings->get('theme.label')),
+                             $logo,
+                             $background,
+                             str_replace('#', '', $this->serverSettings->get('theme.color.primary')),
+                             str_replace('#', '', $this->serverSettings->get('theme.color.text')),
+                             str_replace('#', '', $this->serverSettings->get('theme.color.background')),
+                         ]
         );
+
+        return urlencode(base64_encode(gzcompress($theme, 9)));
     }
 
     /**

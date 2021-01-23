@@ -7,6 +7,7 @@
  - Account reset for password-less accounts
 ### Changed
  - Apps & Extensions section design
+ - Improved PassLink QrCode
 ### Removed
  - Encryption feature switches
 

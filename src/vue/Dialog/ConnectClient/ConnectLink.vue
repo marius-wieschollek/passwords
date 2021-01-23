@@ -1,7 +1,7 @@
 <template>
     <div class="connect-client-link">
         <translate tag="div" class="description" say="To connect a new device or app, simply scan the QR code or click the link."/>
-        <qr-code class="qr-code" :text="code" :color="color" :size="300" :bgColor="bgColor" errorLevel="Q"/>
+        <qr-code class="qr-code" :text="code" :color="color" :size="300" :bgColor="bgColor" errorLevel="L"/>
         <translate tag="a"
                    target="_blank"
                    rel="noopener noreferrer"
