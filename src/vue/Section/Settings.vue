@@ -84,7 +84,7 @@
                     <settings-help text="Specify the amount of time after a request before the session is cancelled"
                                    v-if="advancedSettings && hasEncryption"/>
 
-                    <translate tag="h3" say="Encryption" v-if="hasEncryption || encryptionFeature"/>
+                    <translate tag="h3" say="Encryption" v-if="hasEncryption"/>
                     <translate tag="label"
                                for="setting-encryption-sse"
                                say="Server encryption mode"
@@ -115,15 +115,15 @@
                     <translate tag="label"
                                for="setting-encryption-setup"
                                say="End-to-end Encryption"
-                               v-if="!hasEncryption && encryptionFeature"/>
+                               v-if="!hasEncryption"/>
                     <translate tag="input"
                                type="button"
                                id="setting-encryption-setup"
                                localized-value="Enable"
                                @click="runWizard()"
-                               v-if="!hasEncryption && encryptionFeature"/>
+                               v-if="!hasEncryption"/>
                     <settings-help text="Run the installation wizard to set up encryption for your passwords"
-                                   v-if="!hasEncryption && encryptionFeature"/>
+                                   v-if="!hasEncryption"/>
 
                     <translate tag="label"
                                for="setting-encryption-update"
@@ -352,10 +352,6 @@
                 <section class="tests" v-if="nightly">
                     <translate tag="h1" say="Field tests"/>
 
-                    <translate tag="label" for="setting-test-encryption" say="Encryption support"/>
-                    <input type="button" id="setting-test-encryption" value="Test" @click="testEncryption($event)">
-                    <settings-help text="Checks if your passwords, folders and tags can be encrypted without issues"/>
-
                     <translate tag="label" for="setting-test-performace" say="Encryption performace"/>
                     <input type="button" id="setting-test-performace" value="Test" @click="testPerformance($event)">
                     <settings-help text="Test the performance of encryption operations. (Good is Desktop@30K, Mobile@8K)"/>
@@ -373,10 +369,8 @@
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/SettingsHelp';
-    import DAS from '@js/Services/DeferredActivationService';
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
-    import EncryptionTestHelper from '@js/Helper/EncryptionTestHelper';
     import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
 
     export default {
@@ -386,18 +380,14 @@
             Translate
         },
         data() {
-            let advancedSettings  = SettingsService.get('client.settings.advanced'),
-                encryptionFeature = false,
-                hasEncryption     = API.hasEncryption,
-                settings          = SettingsService.getAll(),
-                observer          = (data) => {
+            let advancedSettings = SettingsService.get('client.settings.advanced'),
+                hasEncryption    = API.hasEncryption,
+                settings         = SettingsService.getAll(),
+                observer         = (data) => {
                     if(!settings.hasOwnProperty(data.setting) || settings[data.setting] !== data.value) {
                         settings[data.setting] = data.value;
                     }
                 };
-
-            DAS.check('client-side-encryption')
-               .then((d) => { this.encryptionFeature = d;});
 
             SettingsService.observe(Object.keys(settings), observer);
             return {
@@ -405,7 +395,6 @@
                 settings,
                 hasSharing  : SettingsService.get('server.sharing.enabled'),
                 hasResharing: SettingsService.get('server.sharing.resharing'),
-                encryptionFeature,
                 advancedSettings,
                 hasEncryption,
                 isAdmin     : OC.isUserAdmin(),
@@ -429,17 +418,6 @@
 
                     if(SettingsService.get(i) !== value) SettingsService.set(i, value);
                 }
-            },
-            async testEncryption($event) {
-                $event.target.setAttribute('disabled', 'disabled');
-                let result = await EncryptionTestHelper.runTests();
-                if(result) {
-                    Messages.info(
-                        'The client side encryption test completed successfully on this browser',
-                        'Test successful'
-                    );
-                }
-                $event.target.removeAttribute('disabled');
             },
             testPerformance($event) {
                 $event.target.setAttribute('disabled', 'disabled');

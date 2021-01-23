@@ -149,10 +149,6 @@ class AccountApiController extends AbstractApiController {
      * @throws ApiException
      */
     public function setChallenge(string $secret, array $data, $oldSecret = null): JSONResponse {
-        if(!$this->deferredActivation->check('client-side-encryption')) {
-            throw new ApiException('Feature not enabled');
-        }
-
         if($this->challengeService->hasChallenge()) {
             if($oldSecret === null) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
             if(!$this->challengeService->validateChallenge($oldSecret)) {

@@ -14,7 +14,7 @@
         </div>
         <div class="step-2" v-if="step > 1">
             <translate tag="h1" say="Select Options"/>
-            <div class="step-content" v-if="format === 'json' && allowEnc">
+            <div class="step-content" v-if="format === 'json'">
                 <translate tag="label"
                            for="passwords-export-encrypt"
                            say="Backup password"
@@ -157,12 +157,6 @@
         },
 
         data() {
-            DAS.check('backup-encryption')
-               .then((d) => {
-                   this.allowEnc = d;
-                   if(d) this.preventPasswordFill(1000);
-               });
-
             return {
                 format    : 'json',
                 options   : {includeShared: false},
@@ -202,8 +196,7 @@
                         'empty'
                     ],
                     tags     : ['label', 'color', 'edited', 'created', 'favorite', 'id', 'revision', 'empty']
-                },
-                allowEnc  : false
+                }
             };
         },
 
@@ -220,7 +213,7 @@
         },
 
         created() {
-            if(this.allowEnc) this.preventPasswordFill(1000);
+            this.preventPasswordFill(1000);
         },
 
         methods: {
@@ -330,7 +323,7 @@
                 } else if(value === 'csv' && navigator.userAgent.indexOf('WebKit') !== -1 && this.models.length > 1) {
                     this.models = [this.models.shift()];
                 } else if(value === 'json') {
-                    if(this.allowEnc) this.preventPasswordFill();
+                    this.preventPasswordFill();
                 }
 
                 this.validateStep();

@@ -101,7 +101,7 @@
                         <translate tag="option" value="3" say="Merge with existing"/>
                         <translate tag="option" value="4" say="Create new entry"/>
                     </select>
-                    <div v-if="source === 'json' && allowEnc">
+                    <div v-if="source === 'json'">
                         <translate tag="label"
                                    for="passwords-import-encrypt"
                                    say="Backup password"
@@ -240,9 +240,6 @@
         },
 
         data() {
-            DAS.check('backup-encryption')
-                .then((d) => { this.allowEnc = d; });
-
             return {
                 source     : '',
                 type       : 'json',
@@ -282,8 +279,7 @@
                     processed: 0,
                     total    : 0,
                     status   : null
-                },
-                allowEnc: false
+                }
             };
         },
 
@@ -300,11 +296,9 @@
 
         methods: {
             preventPasswordFill(t = 300) {
-                if(this.allowEnc) {
-                    setTimeout(() => {
-                        this.$refs.backupEncrypt.removeAttribute('readonly');
-                    }, t);
-                }
+                setTimeout(() => {
+                    this.$refs.backupEncrypt.removeAttribute('readonly');
+                }, t);
             },
             async importDb() {
                 this.progress.style = '';
