@@ -19,7 +19,8 @@ $routes = [
     ['name' => 'keychain_api#list', 'url' => '/api/1.0/keychain/get', 'verb' => 'GET'],
     ['name' => 'keychain_api#update', 'url' => '/api/1.0/keychain/set', 'verb' => 'POST'],
 
-    ['name' => 'account_api#reset', 'url' => '/api/1.0/account/reset', 'verb' => 'POST'],
+    ['name' => 'account_api#reset', 'url' => '/api/1.0/account/reset', 'verb' => 'GET'],
+    ['name' => 'account_api#reset', 'url' => '/api/1.0/account/reset', 'verb' => 'POST', 'postfix' => 'POST'],
     ['name' => 'account_api#get_challenge', 'url' => '/api/1.0/account/challenge/get', 'verb' => 'GET'],
     ['name' => 'account_api#set_challenge', 'url' => '/api/1.0/account/challenge/set', 'verb' => 'POST'],
 

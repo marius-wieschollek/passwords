@@ -332,7 +332,6 @@
             'Invalid trailing quote in quoted field'                                     : 'Neplatné zakončení pole',
             'We could not find anything for "{query}"'                                   : 'Nebyly nalezeny žádné výsledky pro dotaz "{query}"',
             'The file could not be parsed: {errors}'                                     : 'Soubor nelze pracovat: {errors}',
-            'You have to wait {seconds} seconds before you can reset your account.'      : 'Vyčkejte {seconds} vteřin, než budete moci resetovat Váš účet.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'Stránku "{page}" se nepodařilo načíst ze serveru s nápovědou.',
             'Some data is waiting to be synchronized'                                    : 'Některá data čekají na synchronizaci',
             '{message} in line {line} character {character}.'                            : '{message} na řádku {line}, znak {character}.'

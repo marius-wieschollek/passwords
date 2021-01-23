@@ -69,7 +69,9 @@
             "Administration Issues"       : "Administrationsprobleme",
             "Password Sharing"            : "Passwörter Teilen",
             "Share as editable by default": "Bearbeiten standardmäßig erlauben",
-            "Allow sharing by default"    : "Teilen standardmäßig erlauben"
+            "Allow sharing by default"    : "Teilen standardmäßig erlauben",
+            "Code"                        : "Schlüssel",
+            "Invalid reset code"          : "Der Schlüssel stimmt nicht"
         },
         {
             "Mark passwords as weak if they are being used for multiple accounts"        : "Markiert Passwörter als \"Unsicher\" wenn sie für mehr als ein Konto verwendet werden",
@@ -103,7 +105,7 @@
             "Reset all settings on this page to their defaults"                          : "Alle Einstellungen auf dieser Seite zurücksetzen",
             "This will reset all settings to their defaults. Do you want to continue?"   : "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchten Sie fortfahren?",
             "Start over and delete all configuration, passwords, folders and tags"       : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen",
-            "You have to wait {seconds} seconds before you can reset your account."      : "Sie müssen {seconds} Sekunden warten bevor Sie ihr Benutzerkonto zurücksetzen können.",
+            "Enter \"{code}\" to reset your account and delete everything."              : "Geben Sie \"{code}\" ein um Ihr Konto zurückzusezen und alle Daten zu löschen.",
             "You can use this dialog to change your master password."                    : "Mit diesem Dialog können Sie Ihr Zugangspasswort ändern.",
             "Your password must be longer than 12 characters and not the old password"   : "Das Passwort muss mindestens 12 Zeichen lang sein und darf nicht dem vorherigen entsprechen",
             "Please confirm your new password"                                           : "Bitte wiederholen Sie Ihr neues Passwort",

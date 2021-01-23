@@ -69,7 +69,9 @@
             "Administration Issues"       : "Administrationsprobleme",
             "Password Sharing"            : "Passwörter Teilen",
             "Share as editable by default": "Bearbeiten standardmäßig erlauben",
-            "Allow sharing by default"    : "Teilen standardmäßig erlauben"
+            "Allow sharing by default"    : "Teilen standardmäßig erlauben",
+            "Code"                        : "Schlüssel",
+            "Invalid reset code"          : "Der Schlüssel stimmt nicht"
         },
         {
             "Mark passwords as weak if they are being used for multiple accounts"        : "Markiert Passwörter als \"Unsicher\" wenn sie für mehr als ein Konto verwendet werden",
@@ -103,7 +105,7 @@
             "Reset all settings on this page to their defaults"                          : "Alle Einstellungen auf dieser Seite zurücksetzen",
             "This will reset all settings to their defaults. Do you want to continue?"   : "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchtest du fortfahren?",
             "Start over and delete all configuration, passwords, folders and tags"       : "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen",
-            "You have to wait {seconds} seconds before you can reset your account."      : "Du musst {seconds} Sekunden warten bevor du dein Benutzerkonto zurücksetzen kannst.",
+            "Enter \"{code}\" to reset your account and delete everything."              : "Gib unten \"{code}\" ein um dein Konto zurückzusezen und alle Daten zu löschen.",
             "You can use this dialog to change your master password."                    : "Mit diesem Dialog kannst du dein Zugangspasswort ändern.",
             "Your password must be longer than 12 characters and not the old password"   : "Dein Passwort muss mindestens 12 Zeichen lang sein und darf nicht das alte sein",
             "Please confirm your new password"                                           : "Bitte wiederhole dein neues Passwort",

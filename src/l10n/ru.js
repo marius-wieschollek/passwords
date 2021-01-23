@@ -336,7 +336,6 @@
             'Invalid trailing quote in quoted field'                                     : 'Неверная закрывающая кавычка',
             'We could not find anything for "{query}"'                                   : 'По запросу "{query}" ничего не найдено',
             'The file could not be parsed: {errors}'                                     : 'Разбор файла не выполнен: {errors}',
-            'You have to wait {seconds} seconds before you can reset your account.'      : 'Необходимо выждать {seconds} секунд, прежде чем вы сможете сбросить данные вашего аккаунта.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'Не удаётся отобразить страницу "{page}" с сервера техподдержки.',
             'Some data is waiting to be synchronized'                                    : 'Данные находятся в процессе синхронизации',
             '{message} in line {line} character {character}.'                            : '{message} в строке {line}, символ {character}.'

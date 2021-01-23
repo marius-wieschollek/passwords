@@ -18,6 +18,7 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use OCP\IUserManager;
+use OCP\Security\ISecureRandom;
 
 /**
  * Class AccountApiController
@@ -55,12 +56,17 @@ class AccountApiController extends AbstractApiController {
      * @var DeferredActivationService
      */
     protected DeferredActivationService $deferredActivation;
+    /**
+     * @var ISecureRandom
+     */
+    protected ISecureRandom $secureRandom;
 
     /**
      * AccountApiController constructor.
      *
      * @param IRequest                  $request
      * @param IUserManager              $userManager
+     * @param ISecureRandom             $secureRandom
      * @param SessionService            $sessionService
      * @param EnvironmentService        $environment
      * @param UserChallengeService      $challengeService
@@ -70,6 +76,7 @@ class AccountApiController extends AbstractApiController {
     public function __construct(
         IRequest $request,
         IUserManager $userManager,
+        ISecureRandom $secureRandom,
         SessionService $sessionService,
         EnvironmentService $environment,
         UserChallengeService $challengeService,
@@ -83,6 +90,7 @@ class AccountApiController extends AbstractApiController {
         $this->environment          = $environment;
         $this->challengeService     = $challengeService;
         $this->deferredActivation   = $deferredActivation;
+        $this->secureRandom         = $secureRandom;
     }
 
     /**
@@ -90,31 +98,30 @@ class AccountApiController extends AbstractApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param $password
+     * @param string|null $code
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws Exception
      */
-    public function reset(string $password): JSONResponse {
-        if(!$this->userManager->checkPassword($this->environment->getUserLogin(), $password)) {
-            throw new ApiException('Password invalid', Http::STATUS_FORBIDDEN);
+    public function reset(?string $code): JSONResponse {
+        if($code !== null) {
+            if($code === $this->sessionService->get('reset/code')) {
+                $this->sessionService->unset('reset/code');
+                $this->deleteUserDataHelper->deleteUserData($this->environment->getUserId());
+                $this->sessionService->delete();
+
+                return $this->createJsonResponse(['status' => 'ok']);
+            }
+
+            throw new ApiException('Invalid reset code', Http::STATUS_FORBIDDEN);
         }
 
-        $time    = $this->sessionService->get('reset/time', 0);
-        $current = time();
-        if($current >= $time && $current - $time < 60) {
-            $this->sessionService->unset('reset/time');
-            $this->deleteUserDataHelper->deleteUserData($this->environment->getUserId());
-            $this->sessionService->delete();
+        $code = [];
+        for($i=0; $i<4; $i++) $code[] = $this->secureRandom->generate(4);
+        $code = implode('-', $code);
+        $this->sessionService->set('reset/code', $code);
 
-            return $this->createJsonResponse(['status' => 'ok'], Http::STATUS_OK);
-        }
-
-        $timeout = rand(5, 10);
-        $this->sessionService->set('reset/time', $current + $timeout);
-
-        return $this->createJsonResponse(['status' => 'accepted', 'wait' => $timeout], Http::STATUS_ACCEPTED);
+        return $this->createJsonResponse(['status' => 'accepted', 'code' => $code], Http::STATUS_ACCEPTED);
     }
 
     /**
@@ -155,6 +162,7 @@ class AccountApiController extends AbstractApiController {
 
         if($this->challengeService->setChallenge($data, $secret)) {
             $this->sessionService->authorizeSession();
+
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 

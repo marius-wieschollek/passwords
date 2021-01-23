@@ -354,7 +354,6 @@
             'Invalid trailing quote in quoted field'                                     : 'Felaktigt tecken i citat fält',
             'We could not find anything for "{query}"'                                   : 'Ingenting kunde hittas för "{query}"',
             'The file could not be parsed: {errors}'                                     : 'Filen kunde inte läsas: {errors}',
-            'You have to wait {seconds} seconds before you can reset your account.'      : 'Du måste vänta {seconds} sekunder innan ditt konto kan återstälals till standardvärden.',
             'The page "{page}" could not be fetched from the handbook server.'           : 'Denan sidan "{page}" kunde inte hämtas från servern.',
             'Some data is waiting to be synchronized'                                    : 'En del data väntar på att synkroniseras',
             '{message} in line {line} character {character}.'                            : '{message} på raden {line}, kolumn {character}.',
