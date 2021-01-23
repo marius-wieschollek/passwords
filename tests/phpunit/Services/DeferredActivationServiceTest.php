@@ -109,7 +109,7 @@ class DeferredActivationServiceTest extends TestCase {
         $fakeFile->method('getMTime')->willReturn(0);
 
         $this->fileCacheService->method('getFile')->willReturn($fakeFile);
-        $this->fileCacheService->expects($this->once())->method('getFile')->with('deferred-activation.json');
+        $this->fileCacheService->expects($this->once())->method('getFile')->with('features.json');
         $fakeFile->expects($this->once())->method('getMTime');
 
         $this->deferredActivationService->check('test');
@@ -137,7 +137,7 @@ class DeferredActivationServiceTest extends TestCase {
         $client->method('get')->willReturn($response);
 
         $this->httpClientService->method('newClient')->willReturn($client);
-        $client->expects($this->once())->method('get')->with('https://example.com/_files/deferred-activation.json');
+        $client->expects($this->once())->method('get')->with('https://example.com/_features/features-v1.json');
 
         $this->fileCacheService->method('getFile')->willReturn(null);
         $this->settingsHelper->method('get')->with('handbook.url')->willReturn('https://example.com/');
@@ -162,7 +162,7 @@ class DeferredActivationServiceTest extends TestCase {
         $this->settingsHelper->method('get')->with('handbook.url')->willReturn('https://example.com/');
 
         $fakeFile->expects($this->once())->method('getMTime');
-        $this->fileCacheService->expects($this->once())->method('getFile')->with('deferred-activation.json');
+        $this->fileCacheService->expects($this->once())->method('getFile')->with('features.json');
 
         /** @var IResponse|MockObject $response */
         $response = $this->createMock(IResponse::class);
@@ -174,7 +174,7 @@ class DeferredActivationServiceTest extends TestCase {
         $client->method('get')->willReturn($response);
 
         $this->httpClientService->method('newClient')->willReturn($client);
-        $client->expects($this->once())->method('get')->with('https://example.com/_files/deferred-activation.json');
+        $client->expects($this->once())->method('get')->with('https://example.com/_features/features-v1.json');
 
         $this->deferredActivationService->check('test');
     }
