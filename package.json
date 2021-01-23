@@ -1,6 +1,6 @@
 {
     "name": "ncpasswords",
-    "version": "2021.1.2",
+    "version": "2021.2.0",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {

@@ -1,6 +1,4 @@
 ## [Unreleased]
-
-## 2021.2.0 - Feature release
 ### Added
  - PassLink connect by link for chrome
  - Warning in admin settings if cron uses different PHP version
