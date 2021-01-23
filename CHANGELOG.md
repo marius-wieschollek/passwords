@@ -4,6 +4,10 @@
 ### Added
  - PassLink connect by link for chrome
  - Warning in admin settings if cron uses different PHP version
+### Changed
+ - Apps & Extensions section design
+### Removed
+ - Encryption feature switches
 
 ## 2021.1.2 - Bugfix release
 - Removed Nextcloud minimum check
