@@ -45,6 +45,10 @@
                         label: 'Chrome',
                         link : '#/help/Import%2FImport-from-Chrome'
                     },
+                    firefox  : {
+                        label: 'Firefox',
+                        link : '#/help/Import%2FImport-from-Firefox'
+                    },
                     csv     : {
                         label: Localisation.translate('custom CSV'),
                         link : '#/help/Import%2FImport-from-custom-CSV'

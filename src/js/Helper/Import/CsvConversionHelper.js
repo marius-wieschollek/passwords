@@ -135,6 +135,11 @@ export default class ImportCsvConversionHelper {
         } else if([boolNo, 'no', 'false', '0'].indexOf(value) !== -1) {
             return false;
         } else if(field === 'edited') {
+            if(!isNaN(value)) {
+                if(value.length === 10) return new Date(parseInt(value) * 1000);
+                if(value.length === 13) return new Date(parseInt(value));
+            }
+
             return new Date(value);
         } else if((field === 'tags' || field === 'tagLabels') && value.length !== 0 && !Array.isArray(value)) {
             return value.split(',');
@@ -433,6 +438,11 @@ export default class ImportCsvConversionHelper {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password']
+            },
+            firefox : {
+                firstLine: 1,
+                db       : 'passwords',
+                mapping  : ['url', 'username', 'password', 'notes', '', '', '', '', 'edited']
             }
         };
 

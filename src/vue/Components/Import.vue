@@ -22,6 +22,7 @@
                     <translate tag="option" value="roboform" say="RoboForm CSV"/>
                     <translate tag="option" value="safeincloud" say="SafeInCloud CSV"/>
                     <translate tag="option" value="chrome" say="Chrome / Google Passwords CSV"/>
+                    <translate tag="option" value="firefox" say="Firefox Lockwise CSV"/>
                     <translate tag="option" value="csv" say="Other / Custom CSV"/>
                 </select>
                 <custom-csv-help v-on:trigger="source = 'csv'" :current="source" />
@@ -508,6 +509,7 @@
                         this.csv.escape = '\\';
                     case 'legacy':
                     case 'chrome':
+                    case 'firefox':
                     case 'roboform':
                     case 'lastpass':
                     case 'bitwardenCsv':
