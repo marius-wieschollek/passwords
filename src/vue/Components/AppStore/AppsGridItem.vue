@@ -104,10 +104,11 @@
     .details {
         display               : grid;
         grid-template-columns : 2fr 3fr;
-        grid-column-gap       : .5rem;
+        grid-column-gap       : 1.5rem;
         min-height            : 11rem;
         align-content         : center;
         align-items           : center;
+        padding-left          : .5rem;
 
         img {
             max-width : 100%;
