@@ -18,7 +18,7 @@ You can also share passwords with other Nextcloud users.
  * API for apps
  * Extensive handbook
  * Import &amp; Export
- * Browser extensions
+ * Browser extensions &amp; Apps
  * ... and many more to come
 
 **Support**
@@ -28,8 +28,9 @@ You can also share passwords with other Nextcloud users.
  * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
 
 **Apps & Extensions**
- * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
- * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+ * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
+ * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+ * [Official Microsoft Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cjmlcljdpphgdfpkngjcmeepdpcgpffk)
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) by [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
  * [iOS App](https://apps.apple.com/app/id1546212226) by [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
@@ -49,7 +50,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * Umfangreiche API
  * Import &amp; Export
  * Detailliertes Handbuch
- * Browser Extensions
+ * Browser Extensions &amp; Apps
  * ... und vieles mehr
 
 **Hilfe & Unterstützung**
@@ -59,8 +60,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/wikis/administrators/Index)
 
 **Apps & Extensions**
- * [Firefox Extension](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
- * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+ * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
+ * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
+ * [Official Microsoft Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cjmlcljdpphgdfpkngjcmeepdpcgpffk)
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) von [daper](https://github.com/daper/nextcloud-passwords-app)
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) von [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
  * [iOS App](https://apps.apple.com/app/id1546212226) von [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
