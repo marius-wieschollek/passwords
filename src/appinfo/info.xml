@@ -32,6 +32,7 @@ You can also share passwords with other Nextcloud users.
  * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) by [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
+ * [iOS App](https://apps.apple.com/app/id1546212226) by [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 ]]>
     </description>
     <description lang="de"><![CDATA[Passwords ist der beste Passwort-Manager für Nextcloud und ermöglicht es Ihnen, Ihre Passwörter sicher und einfach in Ihrer eigenen Cloud zu verwalten.
@@ -62,6 +63,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
  * [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) von [daper](https://github.com/daper/nextcloud-passwords-app)
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) von [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
+ * [iOS App](https://apps.apple.com/app/id1546212226) von [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 ]]>
     </description>
     <version>2021.2.0-BUILD</version>
