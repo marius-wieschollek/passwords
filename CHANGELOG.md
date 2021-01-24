@@ -1,8 +1,10 @@
 ## [Unreleased]
 ### Added
  - PassLink connect by link for chrome
+ - Firefox Lockwise import profile
  - Warning in admin settings if cron uses different PHP version
  - Account reset for password-less accounts
+ - Listing for iOS app from johannes-schliephake
 ### Changed
  - Apps & Extensions section design
  - Improved PassLink QrCode

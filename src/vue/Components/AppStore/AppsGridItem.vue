@@ -66,7 +66,7 @@
     background-color : var(--color-primary-light);
     padding          : .5rem;
     border-radius    : var(--border-radius-large);
-    width            : 480px;
+    width            : 460px;
     margin-right     : .5rem;
     margin-bottom    : .5rem;
     white-space      : normal;
