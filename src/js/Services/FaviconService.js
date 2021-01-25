@@ -61,10 +61,15 @@ export default new class FaviconService {
      */
     async _fetchFromApi(domain, size) {
         try {
-            /** @type Blob favicon **/
+            /** @type {Blob} favicon **/
             let favicon = await API.getFavicon(domain, size);
-            this._favicons[`${domain}_${size}`] = window.URL.createObjectURL(favicon);
             delete this._requests[`${domain}_${size}`];
+
+            if(favicon.type.substr(0,6) !== 'image/' || favicon.size < 1) {
+                return SettingsService.get('server.theme.app.icon');
+            }
+
+            this._favicons[`${domain}_${size}`] = window.URL.createObjectURL(favicon);
 
             return this._favicons[`${domain}_${size}`];
         } catch(e) {
