@@ -28,14 +28,14 @@ class SetupReportHelper {
     protected IRequest $request;
 
     /**
-     * @var bool
+     * @var bool|null
      */
-    protected bool $isProxy;
+    protected ?bool $proxy = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $remoteAddress;
+    protected ?string $remoteAddress = null;
 
     /**
      * SetupReportHelper constructor.
@@ -51,7 +51,7 @@ class SetupReportHelper {
     /**
      * @return array[]
      */
-    public function getHttpsSetupReport() {
+    public function getHttpsSetupReport(): array {
         return [
             $this->getHttpsStatus(),
             $this->getProxyStatus(),
@@ -63,7 +63,7 @@ class SetupReportHelper {
     /**
      * @return array
      */
-    protected function getHttpsStatus() {
+    protected function getHttpsStatus(): array {
         return [
             'label' => 'HTTPS detection',
             'items' => [
@@ -84,7 +84,7 @@ class SetupReportHelper {
     /**
      * @return array
      */
-    protected function getProxyStatus() {
+    protected function getProxyStatus(): array {
         $isProxy = $this->isProxy();
 
         return [
@@ -107,7 +107,7 @@ class SetupReportHelper {
     /**
      * @return array
      */
-    protected function getProxySettingsStatus() {
+    protected function getProxySettingsStatus(): array {
         $isProxy       = $this->isProxy();
         $remoteAddress = $this->getRemoteAddress();
 
@@ -148,7 +148,7 @@ class SetupReportHelper {
     /**
      * @return array
      */
-    protected function getPhpStatus() {
+    protected function getPhpStatus(): array {
         $forwardedProto = 'not set';
         $forwardedFor   = 'not set';
 
@@ -199,25 +199,25 @@ class SetupReportHelper {
     /**
      * @return bool
      */
-    protected function isProxy() {
-        if($this->isProxy !== null) return $this->isProxy;
+    protected function isProxy(): bool {
+        if($this->proxy !== null) return $this->proxy;
 
         $headers       = $this->config->getSystemValue('forwarded_for_headers', ['HTTP_X_FORWARDED_FOR']);
-        $this->isProxy = isset($_SERVER['HTTP_X_FORWARDED_FOR']) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || isset($_SERVER['HTTP_X_FORWARDED_PORT']);
+        $this->proxy = isset($_SERVER['HTTP_X_FORWARDED_FOR']) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || isset($_SERVER['HTTP_X_FORWARDED_PORT']);
 
         foreach($headers as $header) {
             if(isset($_SERVER[ $header ])) {
-                $this->isProxy = true;
+                $this->proxy = true;
             }
         }
 
-        return $this->isProxy;
+        return $this->proxy;
     }
 
     /**
      * @return string
      */
-    protected function getRemoteAddress() {
+    protected function getRemoteAddress(): string {
         if($this->remoteAddress !== null) return $this->remoteAddress;
 
         $this->remoteAddress = $_SERVER['REMOTE_ADDR'];
