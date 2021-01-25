@@ -8,6 +8,8 @@
 ### Changed
  - Apps & Extensions section design
  - Improved PassLink QrCode
+### Fixed
+ - HTTPS report causes crash
 ### Removed
  - Encryption feature switches
 
