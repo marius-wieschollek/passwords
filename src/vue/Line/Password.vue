@@ -6,7 +6,7 @@
          :data-password-id="password.id"
          :data-password-title="password.label">
         <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
-        <favicon class="favicon" :domain="password.website" :title="getTitle"/>
+        <favicon class="favicon" :domain="password.website" :title="getTitle" v-if="isVisible"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
             <li v-for="tag in getTags"
@@ -149,16 +149,21 @@ export default {
                 {date: Localisation.formatDateTime(this.password.edited)}
             );
         },
+        isVisible() {
+            if(SearchManager.status.active) {
+                if(SearchManager.status.ids.indexOf(this.password.id) === -1) return false;
+            }
+
+            return true;
+        },
         className() {
             let classNames = 'row password';
 
             if(this.detailsActive) classNames += ' details-open';
-            if(SearchManager.status.active) {
-                if(SearchManager.status.ids.indexOf(this.password.id) !== -1) {
-                    classNames += ' search-visible';
-                } else {
-                    classNames += ' search-hidden';
-                }
+            if(this.isVisible) {
+                classNames += ' search-visible';
+            } else if(SearchManager.status.active) {
+                classNames += ' search-hidden';
             }
 
             return classNames;
