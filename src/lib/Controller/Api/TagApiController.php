@@ -117,17 +117,17 @@ class TagApiController extends AbstractObjectApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $id
-     * @param string $label
-     * @param string $color
-     * @param string $cseKey
-     * @param string $cseType
-     * @param int    $edited
-     * @param bool   $hidden
-     * @param bool   $favorite
+     * @param string      $id
+     * @param string      $label
+     * @param string      $color
+     * @param string|null $revision
+     * @param string      $cseKey
+     * @param string      $cseType
+     * @param int         $edited
+     * @param bool        $hidden
+     * @param bool        $favorite
      *
      * @return JSONResponse
-     * @throws Exception
      * @throws ApiException
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
@@ -136,13 +136,17 @@ class TagApiController extends AbstractObjectApiController {
         string $id,
         string $label,
         string $color,
-        string $cseKey,
+        string $revision = null,
+        string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,
         bool $hidden = false,
         bool $favorite = false
     ): JSONResponse {
         $model = $this->modelService->findByUuid($id);
+        if($revision !== null && $revision !== $model->getRevision()) {
+            throw new ApiException('Outdated revision id', 400);
+        }
 
         /** @var TagRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
