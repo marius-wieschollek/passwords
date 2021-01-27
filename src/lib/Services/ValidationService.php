@@ -207,10 +207,10 @@ class ValidationService {
             throw new ApiException('Invalid client side encryption type', 400);
         }
 
-        if($revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE) {
+        if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
             /** @var UserChallengeService $challengeService */
             $challengeService = $this->container->get(UserChallengeService::class);
-            if($challengeService->hasChallenge()) {
+            if(!$challengeService->hasChallenge()) {
                 throw new ApiException('Invalid client side encryption type', 400);
             }
         }

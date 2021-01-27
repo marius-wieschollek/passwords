@@ -10,6 +10,10 @@ class IAppContainer {
         $this->objects[$key] = $object;
     }
 
+    public function get($key) {
+        return $this->objects[$key];
+    }
+
     public function query($key) {
         return $this->objects[$key];
     }
