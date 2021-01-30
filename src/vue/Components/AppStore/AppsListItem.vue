@@ -30,8 +30,7 @@
 
 <style lang="scss">
 .appstore-list-item {
-    .author,
-    .official {
+    .appstore-item-infos {
         margin-bottom : .25rem;
     }
 
