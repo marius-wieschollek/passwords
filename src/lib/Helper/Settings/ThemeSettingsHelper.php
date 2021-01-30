@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\Settings;
 use OC_Defaults;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Theming\ThemingDefaults;
 use OCP\IURLGenerator;
 use Throwable;
 
@@ -128,7 +129,8 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getBackgroundImage(): string {
-        if(method_exists($this->theming, 'getBackground')) {
+        $themingBackground = $this->config->getAppValue('backgroundMime', '', 'theming');
+        if(method_exists($this->theming, 'getBackground') && (!($this->theming instanceof ThemingDefaults) || (!empty($themingBackground) && $themingBackground !== 'backgroundColor'))) {
             $url = $this->theming->getBackground();
         } else {
             $url = $this->urlGenerator->imagePath('core', 'background.png');
