@@ -85,5 +85,8 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
 * Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index).
 
+## Donations
+See [Donate.md](Donate.md) for a list of developers making the Passwords app for Nextcloud possible.
+
 ## Licenses and Legal Information
 See [Licenses.md](Licenses.md)
