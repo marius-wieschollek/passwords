@@ -57,6 +57,10 @@ export default new class AppStoreService {
                         download: item.links.download,
                         sources : item.links.sources
                     },
+                    features   : {
+                        encryption: item.features.encryption
+                    },
+                    recommended: item.recommended,
                     downloads
                 }
             );

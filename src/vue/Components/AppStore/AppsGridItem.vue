@@ -11,16 +11,7 @@
 <template>
     <div class="appstore-item appstore-grid-item">
         <h3>{{ item.label }}</h3>
-        <web target="_blank"
-             className="official"
-             icon="certificate"
-             :href="item.links.homepage"
-             text="official" v-if="item.official"/>
-        <div class="author" v-else>
-            <web target="_blank" :href="item.author.homepage" :text="author"/>
-            <span class="dot">⦁</span>
-            <web target="_blank" :href="item.links.sources" text="source code"/>
-        </div>
+        <app-info-bar :item="item" />
         <div class="details">
             <img :src="item.logo" alt="">
             <p class="description">
@@ -28,15 +19,7 @@
                 <web target="_blank" :href="item.links.homepage" icon="external-link" text="learn more" v-if="item.links.homepage"/>
             </p>
         </div>
-        <div class="buttons">
-            <translate say="Connect with PassLink" tag="button" @click="initPasslink()" v-if="item.passlink.enabled"/>
-            <web target="_blank"
-                 className="button primary"
-                 :href="download.url"
-                 :text="download.label"
-                 v-for="download in item.downloads"
-                 :key="download.url"/>
-        </div>
+        <app-buttons :item="item" />
     </div>
 </template>
 
@@ -44,22 +27,13 @@
     import Web from "@vc/Web";
     import Translate from "@vc/Translate";
     import Connect from "@js/PassLink/Connect";
-    import Localisation from "@js/Classes/Localisation";
+    import AppInfoBar from "@vc/AppStore/AppInfoBar";
+    import AppButtons from "@vc/AppStore/AppButtons";
 
     export default {
-        components: {Translate, Web},
+        components: {AppButtons, AppInfoBar, Translate, Web},
         props     : {
             item: Object
-        },
-        computed  : {
-            author() {
-                return Localisation.translate('by {author}', {author: this.item.author.name});
-            }
-        },
-        methods   : {
-            initPasslink() {
-                Connect.initialize(this.item.passlink.altLink);
-            }
         }
     };
 </script>
@@ -80,30 +54,6 @@
         font-size   : 1.25rem;
         font-weight : bold;
         margin      : 0;
-    }
-
-    .official {
-        display       : block;
-        color         : var(--color-success);
-        margin-bottom : 1rem;
-
-        &:hover {
-            text-decoration : underline;
-        }
-    }
-
-    .author {
-        color         : var(--color-primary);
-        margin-bottom : 1rem;
-        font-style    : italic;
-
-        a:hover {
-            text-decoration : underline;
-        }
-
-        .dot {
-            margin : 0 0.5rem;
-        }
     }
 
     .details {

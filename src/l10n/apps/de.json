@@ -15,7 +15,8 @@
             "I'm done"              : "Das war alles",
             "Don't try again"       : "Nicht mehr versuchen",
             "Connect something else": "Etwas anderes Verbinden",
-            "Try again"             : "Nochmal versuchen"
+            "Try again"             : "Nochmal versuchen",
+            "Secure Encryption"     : "Sichere Verschlüsselung"
         },
         {
             "Failed to fetch apps: {error}"             : "Die Apps konnten nicht geladen werden: {error}",
@@ -23,8 +24,11 @@
             "You did not confirm the connection in time": "Du hast die Verbindung nicht rechtzeitig bestätigt"
         },
         {
-            "To connect a new device or app, simply scan the QR code or click the link." : "Um dich mit einem neuen Gerät oder einer neuen App zu verbinden, scanne einfach den QR-Code oder klick auf den Link.",
-            "Check if the codes below match with the ones provided by the device or app:": "Prüfe ob diese Codes mit denen auf deinem Gerät oder in der App übereinstimmen:"
+            "To connect a new device or app, simply scan the QR code or click the link."    : "Um dich mit einem neuen Gerät oder einer neuen App zu verbinden, scanne einfach den QR-Code oder klick auf den Link.",
+            "Check if the codes below match with the ones provided by the device or app:"   : "Prüfe ob diese Codes mit denen auf deinem Gerät oder in der App übereinstimmen:",
+            "Link this client to your Nextcloud account without annoying passwords and urls": "Verbinde diese Anwendung mit deinem Nextcloud-Konto ohne nervige Passwörter oder URLs einzugeben",
+            "This client officially supports our secure end-to-end encryption"              : "Diese Anwendung unterstützt offiziell unsere sichere Ende-zu-Ende Verschlüsselung",
+            "This client is maintained by the authors of the Passwords app"                 : "Diese Anwendung wird von den Autoren der Passwörter-App entwickelt"
         }
     ],
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

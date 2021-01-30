@@ -15,7 +15,8 @@
             "I'm done"              : "Assistenten beenden",
             "Don't try again"       : "Assistenten beenden",
             "Connect something else": "Eine weitere Verbindung hinzufügen",
-            "Try again"             : "Erneut versuchen"
+            "Try again"             : "Erneut versuchen",
+            "Secure Encryption"     : "Sichere Verschlüsselung"
         },
         {
             "You cancelled the connection"              : "Sie haben den Verbindungsaufbau abgebrochen",
@@ -23,8 +24,11 @@
             "You did not confirm the connection in time": "Sie haben die Verbindung nicht rechtzeitig bestätigt"
         },
         {
-            "To connect a new device or app, simply scan the QR code or click the link." : "Um ein neues Gerät oder eine App zu verbinden, scannen Sie einfach den QR-Code oder klicken Sie auf den Link.",
-            "Check if the codes below match with the ones provided by the device or app:": "Bitte prüfen Sie, ob diese Codes mit denen auf Ihrem Gerät oder in der App übereinstimmen:"
+            "To connect a new device or app, simply scan the QR code or click the link."    : "Um ein neues Gerät oder eine App zu verbinden, scannen Sie einfach den QR-Code oder klicken Sie auf den Link.",
+            "Check if the codes below match with the ones provided by the device or app:"   : "Bitte prüfen Sie, ob diese Codes mit denen auf Ihrem Gerät oder in der App übereinstimmen:",
+            "Link this client to your Nextcloud account without annoying passwords and urls": "Verbinden Sie diese Anwendung mit Ihrem Nextcloud-Konto ohne Passwörter oder URLs aingeben zu müssen",
+            "This client officially supports our secure end-to-end encryption"              : "Diese Anwendung unterstützt offiziell unsere sichere Ende-zu-Ende Verschlüsselung",
+            "This client is maintained by the authors of the Passwords app"                 : "Diese Anwendung wird von den Autoren der Passwörter-App entwickelt"
         }
     ],
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
