@@ -26,12 +26,20 @@ class ValidateFolderTest extends TestCase {
      * @var ValidationService
      */
     protected $validationService;
+    /**
+     * @var UserChallengeService|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $challengeService;
 
     /**
      *
      */
     protected function setUp(): void {
         $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+
+        $this->challengeService = $this->createMock(UserChallengeService::class);
+        $container->method('get')->willReturn($this->challengeService);
+
         $this->validationService = new ValidationService($container);
     }
 
@@ -123,8 +131,9 @@ class ValidateFolderTest extends TestCase {
      * @throws Exception
      * @throws InvalidArgumentException
      */
-    public function testValidatePasswordMissingCseKey() {
+    public function testValidateFolderMissingCseKey() {
         $mock = $this->getFolderMock();
+        $this->challengeService->method('hasChallenge')->willReturn(true);
         $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
         $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
         $mock->method('getCseKey')->willReturn('');
@@ -188,7 +197,7 @@ class ValidateFolderTest extends TestCase {
 
         $mock->expects($this->any())
              ->method('getCseType')
-             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
+             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
@@ -248,6 +257,25 @@ class ValidateFolderTest extends TestCase {
 
         $mock->expects($this->once())->method('setEdited');
         $this->validationService->validateFolder($mock);
+    }
+
+    /**
+     *
+     */
+    public function testValidateTagCseUsedButNotAvailable() {
+        $mock = $this->getFolderMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
+
+        try {
+            $this->validationService->validateFolder($mock);
+            $this->fail("Expected exception");
+        } catch(ApiException $e) {
+            $this->assertEquals('Invalid client side encryption type', $e->getMessage());
+            $this->assertEquals('4e8162e6', $e->getId());
+            $this->assertEquals(400, $e->getHttpCode());
+        }
     }
 
     /**

@@ -30,7 +30,12 @@
         </div>
         <div class="buttons">
             <translate say="Connect with PassLink" tag="button" @click="initPasslink()" v-if="item.passlink.enabled"/>
-            <web target="_blank" className="button primary" :href="item.links.download" text="Get it!"/>
+            <web target="_blank"
+                 className="button primary"
+                 :href="download.url"
+                 :text="download.label"
+                 v-for="download in item.downloads"
+                 :key="download.url"/>
         </div>
     </div>
 </template>

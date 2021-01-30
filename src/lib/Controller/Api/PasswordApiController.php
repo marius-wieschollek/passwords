@@ -165,31 +165,32 @@ class PasswordApiController extends AbstractObjectApiController {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @param string $id
-     * @param string $password
-     * @param string $username
-     * @param string $cseKey
-     * @param string $cseType
-     * @param string $hash
-     * @param string $label
-     * @param string $url
-     * @param string $notes
-     * @param string $customFields
-     * @param string $folder
-     * @param int    $edited
-     * @param bool   $hidden
-     * @param bool   $favorite
-     * @param array  $tags
+     * @param string      $id
+     * @param string      $password
+     * @param string|null $revision
+     * @param string      $username
+     * @param string      $cseKey
+     * @param string      $cseType
+     * @param string      $hash
+     * @param string      $label
+     * @param string      $url
+     * @param string      $notes
+     * @param string      $customFields
+     * @param string      $folder
+     * @param int         $edited
+     * @param bool        $hidden
+     * @param bool        $favorite
+     * @param array       $tags
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
     public function update(
         string $id,
         string $password,
+        string $revision = null,
         string $username = '',
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
@@ -206,6 +207,10 @@ class PasswordApiController extends AbstractObjectApiController {
     ): JSONResponse {
         /** @var Password $model */
         $model = $this->modelService->findByUuid($id);
+        if($revision !== null && $revision !== $model->getRevision()) {
+            throw new ApiException('Outdated revision id', 400);
+        }
+
         /** @var PasswordRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision(), true);
 

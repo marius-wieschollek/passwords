@@ -26,6 +26,17 @@ export default new class AppStoreService {
             items   = [];
 
         for(let item of data[section].items) {
+            let downloads = [];
+
+            for(let download of item.downloads) {
+                downloads.push(
+                    {
+                        label: this._resolveTranslatableProperty(download.label),
+                        url  : download.url
+                    }
+                );
+            }
+
             items.push(
                 {
                     id         : `${section}-${item.id}`,
@@ -45,7 +56,8 @@ export default new class AppStoreService {
                         homepage: item.links.hasOwnProperty('homepage') ? item.links.homepage:null,
                         download: item.links.download,
                         sources : item.links.sources
-                    }
+                    },
+                    downloads
                 }
             );
         }

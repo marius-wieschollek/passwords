@@ -26,12 +26,20 @@ class ValidatePasswordTest extends TestCase {
      * @var ValidationService
      */
     protected $validationService;
+    /**
+     * @var UserChallengeService|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $challengeService;
 
     /**
      *
      */
     protected function setUp(): void {
-        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $container = $this->createMock('\OCP\AppFramework\IAppContainer');
+
+        $this->challengeService = $this->createMock(UserChallengeService::class);
+        $container->method('get')->willReturn($this->challengeService);
+
         $this->validationService = new ValidationService($container);
     }
 
@@ -123,6 +131,7 @@ class ValidatePasswordTest extends TestCase {
      */
     public function testValidatePasswordMissingCseKey() {
         $mock = $this->getPasswordMock();
+        $this->challengeService->method('hasChallenge')->willReturn(true);
         $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
         $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
         $mock->method('getCseKey')->willReturn('');
@@ -131,9 +140,9 @@ class ValidatePasswordTest extends TestCase {
             $this->validationService->validatePassword($mock);
             $this->fail("Expected exception");
         } catch(ApiException $e) {
-            $this->assertEquals(400, $e->getHttpCode());
-            $this->assertEquals('fce89df4', $e->getId());
             $this->assertEquals('Client side encryption key missing', $e->getMessage());
+            $this->assertEquals('fce89df4', $e->getId());
+            $this->assertEquals(400, $e->getHttpCode());
         }
     }
 
@@ -231,7 +240,7 @@ class ValidatePasswordTest extends TestCase {
 
         $mock->expects($this->any())
              ->method('getCseType')
-             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
+             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
@@ -302,26 +311,45 @@ class ValidatePasswordTest extends TestCase {
     }
 
     /**
+     *
+     */
+    public function testValidateTagCseUsedButNotAvailable() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
+
+        try {
+            $this->validationService->validatePassword($mock);
+            $this->fail("Expected exception");
+        } catch(ApiException $e) {
+            $this->assertEquals('Invalid client side encryption type', $e->getMessage());
+            $this->assertEquals('4e8162e6', $e->getId());
+            $this->assertEquals(400, $e->getHttpCode());
+        }
+    }
+
+    /**
      * @return PasswordRevision
      */
     protected function getPasswordMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
             ->setMethods([
-                'getSseType',
-                'setSseType',
-                'getHidden',
-                'getCseType',
-                'setCseType',
-                'getCseKey',
-                'getLabel',
-                'getHash',
-                'getFolder',
-                'setFolder',
-                'getStatus',
-                'getEdited',
-                'setEdited'
-            ])
+                             'getSseType',
+                             'setSseType',
+                             'getHidden',
+                             'getCseType',
+                             'setCseType',
+                             'getCseKey',
+                             'getLabel',
+                             'getHash',
+                             'getFolder',
+                             'setFolder',
+                             'getStatus',
+                             'getEdited',
+                             'setEdited'
+                         ])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);

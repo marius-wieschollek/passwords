@@ -119,6 +119,7 @@ class FolderApiController extends AbstractObjectApiController {
      *
      * @param string $id
      * @param string $label
+     * @param string|null $revision
      * @param string $parent
      * @param string $cseKey
      * @param string $cseType
@@ -135,6 +136,7 @@ class FolderApiController extends AbstractObjectApiController {
     public function update(
         string $id,
         string $label,
+        string $revision = null,
         string $parent = FolderService::BASE_FOLDER_UUID,
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
@@ -145,6 +147,10 @@ class FolderApiController extends AbstractObjectApiController {
         if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
 
         $model = $this->modelService->findByUuid($id);
+        if($revision !== null && $revision !== $model->getRevision()) {
+            throw new ApiException('Outdated revision id', 400);
+        }
+
         /** @var FolderRevision $oldRevision */
         $oldRevision = $this->revisionService->findByUuid($model->getRevision());
 
