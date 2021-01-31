@@ -68,7 +68,8 @@
     }
 
     .features .feature {
-        cursor : help;
+        cursor      : help;
+        font-weight : 500;
     }
 
     a:hover {
@@ -77,6 +78,10 @@
 
     &.official {
         color : var(--color-success);
+
+        .features .feature {
+            font-weight : normal;
+        }
 
         a.sources {
             color : var(--color-success);
