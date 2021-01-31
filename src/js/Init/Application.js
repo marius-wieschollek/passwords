@@ -11,6 +11,7 @@ import AlertManager from '@js/Manager/AlertManager';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
+import SetupManager from "@js/Manager/SetupManager";
 
 
 class Application {
@@ -145,6 +146,7 @@ class Application {
             document.body.classList.remove('pw-auth-visible');
             document.body.classList.add('pw-auth-skipped');
             API.openSession({});
+            SetupManager.runAutomatically();
         }
     }
 
