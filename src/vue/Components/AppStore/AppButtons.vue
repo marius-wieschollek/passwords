@@ -32,7 +32,7 @@
         },
         methods   : {
             initPassLink() {
-                Connect.initialize(this.item.passlink.altLink);
+                Connect.initialize(this.item.passlink.link, this.item.passlink.qrcode, this.item.passlink.protocol);
             }
         }
     };
