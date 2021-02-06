@@ -149,6 +149,12 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         }
 
         $oldFields = json_decode($customFields, true);
+        if(!is_array($oldFields)) {
+            $revision->setCustomFields('[]');
+
+            return true;
+        }
+
         $newFields = [];
         foreach($oldFields as $label => $data) {
             if(substr($label, 0, 1) === '_') $data['type'] = 'data';
