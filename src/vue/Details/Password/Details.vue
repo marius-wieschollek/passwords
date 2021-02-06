@@ -29,10 +29,10 @@
             </router-link>
             <translate :say="getSecurityStatus" :class="getSecurityClass" v-else/>
         </translate>
-        <translate tag="div" say="Encryption on server">
+        <translate tag="div" say="Encryption applied on server" title="The encryption applied by the server before storing the data in the database">
             <translate :say="getSseType"/>
         </translate>
-        <translate tag="div" say="Encryption on client">
+        <translate tag="div" say="Encryption applied on client" title="The encryption applied by the client before sending the data to the server">
             <translate :say="getCseType"/>
         </translate>
         <detail-field label="SHA-1" type="text" :value="password.hash"/>

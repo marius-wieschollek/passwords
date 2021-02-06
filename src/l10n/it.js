@@ -111,8 +111,8 @@
             '{count} revisions'                   : '{count} versioni',
             'Shares'                              : 'Condivisioni',
             '{count} shares'                      : 'Condivisa {count} volte',
-            'Encryption on server'                : 'Cifrato lato server',
-            'Encryption on client'                : 'Cifrato lato client',
+            'Encryption applied on server'        : 'Cifrato lato server',
+            'Encryption applied on client'        : 'Cifrato lato client',
             'No encryption'                       : 'Sin cifrado',
             'Simple encryption (Gen. 1)'          : 'Crittografia semplice (Generazione 1)',
             'Simple encryption (Gen. 2)'          : 'Crittografia semplice (Generazione 2)',
@@ -122,7 +122,7 @@
             'Backup and Restore'                  : 'Backup e Ripristino',
             "Settings"                            : "Impostazioni",
             'Handbook'                            : 'Manuale di istruzioni',
-            'Apps and Extensions'                : 'App e estensioni',
+            'Apps and Extensions'                 : 'App e estensioni',
             '{name} has shared this with you'     : '{name} ha condiviso questo con te',
             '{editable} and {shareable}.'         : '{editable} e {shareable}.',
             'Editing allowed'                     : 'Modifica permessa',
@@ -231,7 +231,7 @@
             'The page "{page}" could not be fetched from the handbook server.': 'La pagina "{page}" non è stata in grado di essere scaricata dal server di manuali.',
             'Some data is waiting to be synchronized'                         : 'Alcuni dati sono in attesa di sincronizzazione',
             'You will be logged out in {time} seconds'                        : 'La tua sessione scadrà in {time} secondi',
-            'You may have requested too many tokens. Please try again later.' : 'Hai richiesto troppi token. Riprova più tardi.',
+            'You may have requested too many tokens. Please try again later.' : 'Hai richiesto troppi token. Riprova più tardi.'
         },
         longTexts    = {
             'End-to-End encryption will be disabled for this password if you share it.'                : 'La cifratura end-to-end verrà disabilitata per questa password se la condividi.',

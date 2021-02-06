@@ -113,8 +113,8 @@
             '{count} revisions'                   : '{count} Versionen',
             'Shares'                              : 'Freigaben',
             '{count} shares'                      : '{count} Freigaben',
-            'Encryption on server'                : 'Verschlüsselung auf dem Server',
-            'Encryption on client'                : 'Verschlüsselung auf dem Endgerät',
+            'Encryption applied on server'        : 'Verschlüsselung auf dem Server',
+            'Encryption applied on client'        : 'Verschlüsselung auf dem Endgerät',
             'No encryption'                       : 'Keine Verschlüsselung',
             'Simple encryption (Gen. 1)'          : 'Einfache Verschlüsselung (Generation 1)',
             'Simple encryption (Gen. 2)'          : 'Einfache Verschlüsselung (Generation 2)',
@@ -239,7 +239,9 @@
         longTexts    = {
             'End-to-End encryption will be disabled for this password if you share it.'                : 'Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn Sie das Passwort teilen',
             'The session token is no longer valid. The app will now reload.'                           : 'Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen.',
-            'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen.'
+            'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen.',
+            'The encryption applied by the server before storing the data in the database'             : 'Diese Verschlüsselung wurde vom Server vor dem Speichern in der Datenbank angewandt',
+            'The encryption applied by the client before sending the data to the server'               : 'Diese Verschlüsselung wurde auf dem Endgerät angewandt bevor die Daten an den Server gesendet wurden'
         };
 
     OC.L10N.register(

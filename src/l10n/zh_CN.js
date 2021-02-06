@@ -110,8 +110,8 @@
             '{count} revisions'                   : '{count} 个版本',
             'Shares'                              : '分享',
             '{count} shares'                      : '{count} 次分享',
-            'Encryption on server'                : '服务器端加密',
-            'Encryption on client'                : '客户端加密',
+            'Encryption applied on server'        : '服务器端加密',
+            'Encryption applied on client'        : '客户端加密',
             'No encryption'                       : '无加密',
             'Simple encryption (Gen. 1)'          : '简单加密（版本 1）',
             'Simple encryption (Gen. 2)'          : '简单加密（版本 2）',
@@ -230,7 +230,7 @@
             'The page "{page}" could not be fetched from the handbook server.': '页面“{page}”无法从参考手册服务器上获取到。',
             'Some data is waiting to be synchronized'                         : '一些数据正等待被同步',
             'You will be logged out in {time} seconds'                        : '您将在 {time} 秒后被退出登录',
-            'You may have requested too many tokens. Please try again later.' : '您尝试获得了太多令牌。请稍后再试。',
+            'You may have requested too many tokens. Please try again later.' : '您尝试获得了太多令牌。请稍后再试。'
         },
         longTexts    = {
             'End-to-End encryption will be disabled for this password if you share it.'                : '如果共享，端到端加密将对该密码禁用。',
