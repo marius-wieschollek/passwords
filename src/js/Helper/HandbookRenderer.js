@@ -2,6 +2,7 @@ import marked from 'marked';
 import VueRouter from '@js/Helper/router';
 import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
+import mermaid from "mermaid";
 
 /**
  *
@@ -66,13 +67,8 @@ class HandbookRenderer {
         renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl, media);};
         renderer.image = (href, title, text, nowrap) => { return HandbookRenderer._renderImage(href, title, text, nowrap, baseUrl, media);};
         renderer.heading = (text, level) => { return HandbookRenderer._renderHeader(text, level, navigation);};
-        renderer.code = (code, infostring, escaped) => {
-            let content = blankRenderer.code(code, infostring, escaped);
-            return content.replace(/(\r\n|\n|\r)/gm, '<br>');
-        };
-        renderer.blockquote = (quote) => {
-            return HandbookRenderer._renderBlockquote(quote, blankRenderer);
-        };
+        renderer.code = (code, infostring, escaped) => { return HandbookRenderer._renderCode(code, infostring, escaped, blankRenderer); };
+        renderer.blockquote = (quote) => { return HandbookRenderer._renderBlockquote(quote, blankRenderer); };
         HandbookRenderer._extendMarkedLexer();
 
         let source = marked(markdown, {renderer});
@@ -219,9 +215,9 @@ class HandbookRenderer {
      */
     static _renderHeader(label, level, headers) {
         let id     = label.trim().toLowerCase()
-                .replace(/&#{0,1}[a-z0-9]+;/g, '')
-                .replace(/[^\w]+/g, '-')
-                .replace(/^-+|-+$/g, ''),
+                          .replace(/&#{0,1}[a-z0-9]+;/g, '')
+                          .replace(/[^\w]+/g, '-')
+                          .replace(/^-+|-+$/g, ''),
             [href] = HandbookRenderer._processAnchorLink(`#${id}`, '');
 
         this._addNavigationEntry(headers, {label, href, level, id: `help-${id}`, children: []});
@@ -343,6 +339,33 @@ class HandbookRenderer {
         let content = blankRenderer.blockquote(quote);
         if(css !== null) content = content.replace('<blockquote>', `<blockquote class="${css}">`);
         return content;
+    }
+
+    /**
+     *
+     * @param code
+     * @param infostring
+     * @param escaped
+     * @param blankRenderer
+     * @return {*}
+     * @private
+     */
+    static _renderCode(code, infostring, escaped, blankRenderer) {
+        if(infostring === 'mermaid') {
+            let id             = 'help-graph-' + Math.round(Math.random() * 100000),
+                themeVariables = {
+                    primaryColor    : SettingsService.get('server.theme.color.primary'),
+                    background      : SettingsService.get('server.theme.color.background')
+                };
+
+            mermaid.mermaidAPI.initialize({startOnLoad: false, theme: 'base', themeVariables});
+            let graph = mermaid.mermaidAPI.render(id, code);
+
+            return `<div class="handbook-graph">${graph}</div>`;
+        }
+
+        let content = blankRenderer.code(code, infostring, escaped);
+        return content.replace(/(\r\n|\n|\r)/gm, '<br>');
     }
 }
 
