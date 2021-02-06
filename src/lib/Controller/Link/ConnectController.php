@@ -31,9 +31,11 @@ use Throwable;
  */
 class ConnectController extends Controller {
 
-    const PASSLINK_CONNECT           = "ext+passlink:%s/do/connect/%s?t=%s";
-    const PASSLINK_ALTERNATE_CONNECT = "https://passlink.mdns.eu/open/%s/do/connect/%s?t=%s";
-    const SESSION_KEY                = 'passlink.connect';
+    const PASSLINK_CONNECT_EXTENSION = "ext+passlink:%s/do/connect/%s";
+    const PASSLINK_CONNECT_DOMAIN = "https://passlink.mdns.eu/open/%s/do/connect/%s";
+    const PASSLINK_CONNECT_WEB = "web+passlink:%s/do/connect/%s";
+    const PASSLINK_CONNECT_PROTOCOL = "passlink:%s/do/connect/%s";
+    const SESSION_KEY = 'passlink.connect';
 
     /**
      * @var MailService
@@ -118,9 +120,11 @@ class ConnectController extends Controller {
      *
      * @UserRateThrottle(limit=20, period=60)
      *
+     * @param string|null $link
+     * @param bool $theme
      * @return JSONResponse
      */
-    public function request(): JSONResponse {
+    public function request(?string $link = 'protocol', bool $theme = true): JSONResponse {
         $this->destroyCurrentRegistration();
 
         $registration = $this->registrationService->create();
@@ -128,17 +132,23 @@ class ConnectController extends Controller {
         $this->session->set(self::SESSION_KEY, $registration->getUuid());
         $this->session->save();
 
-        $baseUrl         = $this->serverSettings->get('baseUrl');
-        $linkUrl         = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
-        $theme           = $this->getTheme($baseUrl);
-        $link            = sprintf(self::PASSLINK_CONNECT, $linkUrl, $registration->getUuid(), $theme);
-        $alternativeLink = sprintf(self::PASSLINK_ALTERNATE_CONNECT, $linkUrl, $registration->getUuid(), $theme);
+        $baseUrl = $this->serverSettings->get('baseUrl');
+        $linkUrl = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
 
-        $data = [
-            'id'              => $registration->getUuid(),
-            'alternativeLink' => $alternativeLink,
-            'link'            => $link
+        $httpParams = '';
+        if ($theme) $httpParams = '?' . http_build_query(['t' => $this->getTheme($baseUrl)]);
+
+        $links = [
+            'web' => sprintf(self::PASSLINK_CONNECT_WEB, $linkUrl, $registration->getUuid()) . $httpParams,
+            'extension' => sprintf(self::PASSLINK_CONNECT_EXTENSION, $linkUrl, $registration->getUuid()) . $httpParams,
+            'domain' => sprintf(self::PASSLINK_CONNECT_DOMAIN, $linkUrl, $registration->getUuid()) . $httpParams,
+            'protocol' => sprintf(self::PASSLINK_CONNECT_PROTOCOL, $linkUrl, $registration->getUuid()) . $httpParams
         ];
+
+        $data = ['id' => $registration->getUuid(), 'links' => $links];
+        if (!empty($link) && isset($links[$link])) {
+            $data['link'] = $links[$link];
+        }
 
         return new JSONResponse($data);
     }
@@ -348,7 +358,7 @@ class ConnectController extends Controller {
                          ]
         );
 
-        return urlencode(base64_encode(gzcompress($theme, 9)));
+        return rtrim(base64_encode(gzcompress($theme, 9)), '=');
     }
 
     /**

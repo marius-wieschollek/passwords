@@ -24,11 +24,15 @@
             "You did not confirm the connection in time": "Du hast die Verbindung nicht rechtzeitig bestätigt"
         },
         {
-            "To connect a new device or app, simply scan the QR code or click the link."    : "Um dich mit einem neuen Gerät oder einer neuen App zu verbinden, scanne einfach den QR-Code oder klick auf den Link.",
+            "Just scan the QR code with the app to connect it."                             : "Scanne den QR-Code mit der App, um sie zu verbinden.",
+            "Click the button when you are ready to start the connection."                  : "Klicke auf die Schaltfläche wenn du bereit bist um die App zu verbinden.",
             "Check if the codes below match with the ones provided by the device or app:"   : "Prüfe ob diese Codes mit denen auf deinem Gerät oder in der App übereinstimmen:",
             "Link this client to your Nextcloud account without annoying passwords and urls": "Verbinde diese Anwendung mit deinem Nextcloud-Konto ohne nervige Passwörter oder URLs einzugeben",
             "This client officially supports our secure end-to-end encryption"              : "Diese Anwendung unterstützt offiziell unsere sichere Ende-zu-Ende Verschlüsselung",
             "This client is maintained by the authors of the Passwords app"                 : "Diese Anwendung wird von den Autoren der Passwörter-App entwickelt"
+        },
+        {
+            "Click the button to connect an app installed on this device or scan the QR code with the app if it's installed on another device.": "Klicke auf die Schaltfläche um eine lokal installierte App zu verbinden oder scanne den QR-Code wenn die App auf einem anderen Gerät installiert ist."
         }
     ],
     "pluralForm"  : "nplurals=2; plural=(n != 1);"

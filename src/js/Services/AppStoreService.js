@@ -8,7 +8,7 @@
  * created by Marius David Wieschollek.
  */
 
-import Localisation from "@js/Classes/Localisation";
+import Localisation    from "@js/Classes/Localisation";
 import SettingsService from "@js/Services/SettingsService";
 
 export default new class AppStoreService {
@@ -42,18 +42,20 @@ export default new class AppStoreService {
                     id         : `${section}-${item.id}`,
                     label      : this._resolveTranslatableProperty(item.label),
                     description: this._resolveTranslatableProperty(item.description),
-                    logo       : item.hasOwnProperty('logo') ? new URL(item.logo, baseUrl):null,
+                    logo       : item.hasOwnProperty('logo') ? new URL(item.logo, baseUrl) : null,
                     official   : item.official,
                     author     : {
                         name    : item.author.name,
                         homepage: item.author.homepage
                     },
                     passlink   : {
-                        enabled: item.passlink.enabled,
-                        altLink: item.passlink.altLink
+                        enabled : item.passlink.enabled,
+                        link    : item.passlink.enabled && item.passlink.link,
+                        qrcode  : item.passlink.enabled && item.passlink.qrcode,
+                        protocol: item.passlink.enabled ? item.passlink.protocol:null
                     },
                     links      : {
-                        homepage: item.links.hasOwnProperty('homepage') ? item.links.homepage:null,
+                        homepage: item.links.hasOwnProperty('homepage') ? item.links.homepage : null,
                         download: item.links.download,
                         sources : item.links.sources
                     },

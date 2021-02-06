@@ -1,29 +1,32 @@
 <template>
     <div class="connect-client-link">
-        <translate tag="div" class="description" say="To connect a new device or app, simply scan the QR code or click the link."/>
-        <qr-code class="qr-code" :text="code" :color="color" :size="300" :bgColor="bgColor" errorLevel="L"/>
+        <translate tag="div" class="description" :say="description" />
+        <qr-code class="qr-code" :text="code" :color="color" :size="300" :bgColor="bgColor" errorLevel="L" v-if="hasCode" />
         <translate tag="a"
+                   ref="button"
                    target="_blank"
                    rel="noopener noreferrer"
                    :href="link"
                    class="share-link button primary"
-                   say="Connect via link"/>
+                   say="Connect via link" v-if="hasLink" />
     </div>
 </template>
 
 <script>
-    import QrCode from 'vue-qrcode-component';
+    import QrCode          from 'vue-qrcode-component';
     import SettingsService from '@js/Services/SettingsService';
-    import Translate from '@vc/Translate';
-    import API from '@js/Helper/api';
-    import ColorConvert from 'color-convert';
-    import DeltaE from 'delta-e';
+    import Translate       from '@vc/Translate';
+    import API             from '@js/Helper/api';
+    import ColorConvert    from 'color-convert';
+    import DeltaE          from 'delta-e';
 
     export default {
         components: {Translate, QrCode},
 
         props: {
-            useAlternativeLink: Boolean
+            hasLink : Boolean,
+            hasCode : Boolean,
+            protocol: String
         },
 
         data() {
@@ -68,6 +71,14 @@
             },
             bgColor() {
                 return '#fff0';
+            },
+            description() {
+                if(this.hasCode && this.hasLink) {
+                    return 'Click the button to connect an app installed on this device or scan the QR code with the app if it\'s installed on another device.';
+                }
+
+                if(this.hasLink) return 'Click the button when you are ready to start the connection.';
+                if(this.hasCode) return 'Just scan the QR code with the app to connect it.';
             }
         },
 
@@ -75,8 +86,8 @@
             async requestConnection() {
                 if(!this.active) return;
                 let data = await API.passLinkConnectRequest();
-                if(this.useAlternativeLink) {
-                    this.link = data.alternativeLink;
+                if(data.links.hasOwnProperty(this.protocol)) {
+                    this.link = data.links[this.protocol];
                 } else {
                     this.link = data.link;
                 }

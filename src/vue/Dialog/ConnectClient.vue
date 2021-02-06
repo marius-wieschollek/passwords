@@ -6,7 +6,7 @@
                 <translate say="Connect a new device"/>
             </div>
             <div class="content">
-                <connect-link :use-alternative-link="useAlternativeLink" v-on:connect="connect($event)" v-if="step === 1"/>
+                <connect-link :has-link="hasLink" :has-code="hasCode" :protocol="protocol" v-on:connect="connect($event)" v-if="step === 1"/>
                 <connect-confirm :client="client"
                                  v-on:reject="reject($event)"
                                  v-on:confirm="confirm($event)"
@@ -27,7 +27,9 @@
         components: {ConnectLink, ConnectConfirm, ConnectResult, Translate},
 
         props: {
-            useAlternativeLink: Boolean
+            hasLink : Boolean,
+            hasCode : Boolean,
+            protocol: String
         },
 
         data() {
