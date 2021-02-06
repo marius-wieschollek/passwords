@@ -153,7 +153,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected function loadIcon(string $url, string $data = null): ?string {
         $request = $this->requestService->newClient();
         try {
-            $response = $request->get($url);
+            $response = $request->get($url, ['idn_conversion' => true]);
         } catch(Exception $e) {
             return $data;
         }

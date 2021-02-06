@@ -79,10 +79,9 @@ class FaviconService {
 
         if(!$this->validationService->isValidDomain($domain)) {
             if($domain !== 'default') {
-                $pad    = str_pad(' ', strlen($domain), ' ');
-                $domain = $domain[0].$pad;
+                $domain = mb_substr($domain, 0, 1);
             } else {
-                $domain = '      ';
+                $domain = ' ';
             }
             $faviconService = $this->helperService->getDefaultFaviconHelper();
         }
@@ -135,6 +134,8 @@ class FaviconService {
      */
     protected function validateInput(string $domain, int $size): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
+        $domain = idn_to_ascii($domain);
+
         $size = round($size / 8) * 8;
         if($size > 256) {
             $size = 256;

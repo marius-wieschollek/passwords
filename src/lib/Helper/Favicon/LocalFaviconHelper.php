@@ -91,7 +91,7 @@ class LocalFaviconHelper extends AbstractFaviconHelper {
     protected function getUrl(string $url): array {
         $request = $this->createRequest();
         try {
-            $response    = $request->get($url);
+            $response    = $request->get($url, ['idn_conversion' => true]);
             $data        = $response->getBody();
             $location    = $response->getHeader('url');
             $contentType = $response->getHeader('content-type');

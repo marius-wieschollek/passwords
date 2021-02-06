@@ -192,6 +192,7 @@ class WebsitePreviewService {
      */
     protected function validateInputData(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): array {
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
+        $domain = idn_to_ascii($domain);
 
         $minWidth = $this->validateMinimum($minWidth);
         $maxWidth = $this->validateMaximum($minWidth, $maxWidth);

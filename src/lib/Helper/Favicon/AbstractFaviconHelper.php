@@ -114,7 +114,7 @@ abstract class AbstractFaviconHelper {
         }
 
         $domain  = preg_replace(self::COMMON_SUBDOMAIN_PATTERN, '', $domain);
-        $content = $this->fallbackIconGenerator->createIcon($domain, $size);
+        $content = $this->fallbackIconGenerator->createIcon(idn_to_utf8($domain), $size);
 
         return $this->fileCacheService->putFile($fileName, $content);
     }
@@ -126,6 +126,7 @@ abstract class AbstractFaviconHelper {
      * @return string
      */
     public function getFaviconFilename(string $domain, int $size = null): string {
+        $domain = idn_to_utf8($domain);
         if($size !== null) {
             return "{$this->prefix}_{$domain}_{$size}.png";
         }

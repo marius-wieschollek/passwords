@@ -138,7 +138,7 @@ class ValidationService {
      * @return bool
      */
     public function isValidDomain(string $domain): bool {
-        if(!preg_match("/^(([\w_-]+\.)+[\w_-]+)(:[0-9]+)?$/", $domain, $matches)) return false;
+        if(!preg_match("/^(([\w_-]+\.)+[\w_-]+)(:[0-9]+)?$/", idn_to_ascii($domain), $matches)) return false;
         if(!checkdnsrr($matches[1], 'A')) return false;
 
         return true;
