@@ -9,13 +9,14 @@ labels: bug
  THIS FORM IS FOR BUG REPORTS ONLY
 
  Remember not to include personal data as this is public.
- Take a look at https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/App-Debugging to get all information.
+ Take a look at https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Guides/Maintenance/App-Debugging to get all information.
 -->
 
 ### System Information
 **Server:**
-```
- Put the output of "./occ passwords:system:report debug" here or fill out the fields below
+```json
+ Run "php ./occ passwords:system:report debug" in your Nextcloud install directory and put the output here
+ or fill out the fields below
 
  Nextcloud Version:
  PHP Version:
@@ -48,7 +49,7 @@ What does happen?
 ```
  - Open the Nextcloud admin settings
  - Open the "Log" section
- - Click the "Copy" icon, then Copy Raw
+ - Click the "Copy" icon, then "Copy Raw"
 ```
 </details>
 
