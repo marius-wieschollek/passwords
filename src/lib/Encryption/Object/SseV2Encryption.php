@@ -40,7 +40,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
     /**
      * @var array|null
      */
-    protected ?array $keychainData;
+    protected ?array $keychainData = null;
 
     /**
      * @var ICrypto
@@ -73,7 +73,7 @@ class SseV2Encryption implements ObjectEncryptionInterface {
     /**
      * @var bool|null
      */
-    protected ?bool $isAvailable;
+    protected ?bool $isAvailable = null;
 
     /**
      * SseV2Encryption constructor.
