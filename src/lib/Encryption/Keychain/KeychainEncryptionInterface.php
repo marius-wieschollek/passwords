@@ -27,17 +27,17 @@ interface KeychainEncryptionInterface {
     public function getType(): string;
 
     /**
-     * @param Keychain $object
+     * @param Keychain $keychain
      *
      * @return Keychain
      */
-    public function encryptKeychain(Keychain $object): Keychain;
+    public function encryptKeychain(Keychain $keychain): Keychain;
 
     /**
-     * @param Keychain $object
+     * @param Keychain $keychain
      *
      * @return Keychain
      */
-    public function decryptKeychain(Keychain $object): Keychain;
+    public function decryptKeychain(Keychain $keychain): Keychain;
 
 }

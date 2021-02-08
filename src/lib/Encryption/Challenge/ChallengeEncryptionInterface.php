@@ -27,16 +27,16 @@ interface ChallengeEncryptionInterface {
     public function getType(): string;
 
     /**
-     * @param Challenge $object
+     * @param Challenge $challenge
      *
      * @return Challenge
      */
-    public function encryptChallenge(Challenge $object): Challenge;
+    public function encryptChallenge(Challenge $challenge): Challenge;
 
     /**
-     * @param Challenge $object
+     * @param Challenge $challenge
      *
      * @return Challenge
      */
-    public function decryptChallenge(Challenge $object): Challenge;
+    public function decryptChallenge(Challenge $challenge): Challenge;
 }
