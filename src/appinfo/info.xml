@@ -64,7 +64,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) von [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
 ]]>
     </description>
-    <version>2021.1.2-BUILD</version>
+    <version>2021.1.3-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
