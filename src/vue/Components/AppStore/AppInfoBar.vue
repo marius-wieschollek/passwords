@@ -19,7 +19,7 @@
              v-if="official"/>
         <span class="features" v-if="hasFeatures">
             <span class="dot" v-if="official">⦁</span>
-            <translate class="feature" icon="lock" say="Secure Encryption" title="This client officially supports our secure end-to-end encryption" v-if="hasEncryption"/>
+            <translate class="feature" icon="lock" say="Strong Encryption" title="This client officially supports our strong end-to-end encryption" v-if="hasEncryption"/>
             <span class="dot" v-if="!official">⦁</span>
         </span>
         <span class="author" v-if="!official">

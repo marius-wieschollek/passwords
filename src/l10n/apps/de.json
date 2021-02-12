@@ -16,7 +16,7 @@
             "Don't try again"       : "Nicht mehr versuchen",
             "Connect something else": "Etwas anderes Verbinden",
             "Try again"             : "Nochmal versuchen",
-            "Secure Encryption"     : "Sichere Verschlüsselung"
+            "Strong Encryption"     : "Starke Verschlüsselung"
         },
         {
             "Failed to fetch apps: {error}"             : "Die Apps konnten nicht geladen werden: {error}",
@@ -28,7 +28,7 @@
             "Click the button when you are ready to start the connection."                  : "Klicke auf die Schaltfläche wenn du bereit bist um die App zu verbinden.",
             "Check if the codes below match with the ones provided by the device or app:"   : "Prüfe ob diese Codes mit denen auf deinem Gerät oder in der App übereinstimmen:",
             "Link this client to your Nextcloud account without annoying passwords and urls": "Verbinde diese Anwendung mit deinem Nextcloud-Konto ohne nervige Passwörter oder URLs einzugeben",
-            "This client officially supports our secure end-to-end encryption"              : "Diese Anwendung unterstützt offiziell unsere sichere Ende-zu-Ende Verschlüsselung",
+            "This client officially supports our strong end-to-end encryption"              : "Diese Anwendung unterstützt offiziell unsere starke Ende-zu-Ende Verschlüsselung",
             "This client is maintained by the authors of the Passwords app"                 : "Diese Anwendung wird von den Autoren der Passwörter-App entwickelt"
         },
         {
