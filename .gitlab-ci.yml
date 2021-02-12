@@ -11,7 +11,7 @@ image: passwords-builder
 Compile:
   stage: compiling
   script:
-    - npm install
+    - npm ci
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:prod ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:nightly ; fi
   artifacts:
