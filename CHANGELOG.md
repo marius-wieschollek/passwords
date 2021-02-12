@@ -13,8 +13,13 @@
 ### Removed
  - Encryption feature switches
 
+## 2021.1.3 - Bugfix release
+### Fixed
+- SSEv2 initialization error
+
 ## 2021.1.2 - Bugfix release
-- Removed Nextcloud minimum check
+### Removed
+- Nextcloud minimum version check
 
 ## 2021.1.1 - Bugfix release
 ### Fixed
