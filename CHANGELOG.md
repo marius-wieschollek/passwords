@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2021.2.0 - Feature release
 ### Added
  - PassLink connect by link for chrome
  - Firefox Lockwise import profile
