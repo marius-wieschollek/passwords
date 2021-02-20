@@ -8,10 +8,11 @@
             <div class="password-setup">
                 <input type="password"
                        :placeholder="getPasswordPlaceholder"
+                       :title="getPasswordTitle"
                        pattern=".{12,}"
                        v-model="password"
                        readonly>
-                <input type="password" :placeholder="getPasswordRepeatPlaceholder" v-model="confirm">
+                <input type="password" :placeholder="getPasswordRepeatPlaceholder" :title="getPasswordRepeatTitle" v-model="confirm">
                 <div class="advanced" v-if="advanced">
                     <div>
                         <input type="checkbox" id="encrypt-all" v-model="encryptDb"/>
@@ -114,9 +115,15 @@
         },
         computed  : {
             getPasswordPlaceholder() {
-                return Localisation.translate('Password');
+                return Localisation.translate('Password (min. 12 characters)');
+            },
+            getPasswordTitle() {
+                return Localisation.translate('Enter a password with 12 characters or more');
             },
             getPasswordRepeatPlaceholder() {
+                return Localisation.translate('Repeat your password');
+            },
+            getPasswordRepeatTitle() {
                 return Localisation.translate('Repeat your password');
             },
             getKeychainClass() {
@@ -198,6 +205,7 @@
                 let event = {
                     action   : {
                         label: 'Save',
+                        title: 'Your password needs at least 12 characters and the confirmation password must be the same',
                         class: 'disabled',
                         click: () => { }
                     },
@@ -205,13 +213,18 @@
                     id       : 'encryption'
                 };
 
+                if(this.processing) {
+                    event.action.title = 'Encryption in progress…';
+                }
                 if (this.password.length >= 12 && this.password === this.confirm && !this.processing) {
                     event.action.class = '';
+                    event.action.title = 'Continue';
                     event.action.click = (e) => { this.setPassword(e); };
                 }
                 if (this.ready) {
                     event.action.label = 'Continue';
                     event.action.class = '';
+                    event.action.title = '';
                     event.action.click = (e) => { this.$emit('continue', {}); };
                 }
 

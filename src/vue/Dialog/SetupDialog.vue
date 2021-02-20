@@ -30,6 +30,7 @@
                 <translate tag="div"
                            :say="current.action.label"
                            class="continue"
+                           :title="current.action.title"
                            :class="current.action.class"
                            @click="current.action.click"
                            v-if="showCustomButton"/>
