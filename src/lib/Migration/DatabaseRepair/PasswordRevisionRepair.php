@@ -68,7 +68,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
     ) {
         parent::__construct($modelMapper, $revisionService, $encryption, $environment);
         $this->folderMapper  = $folderMapper;
-        $this->convertFields = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2020.12.2';
+        $this->convertFields = $this->enhancedRepair || $config->getAppValue('migration/customFields') !== '2020.12.3';
         $this->config        = $config;
     }
 
@@ -79,7 +79,7 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      */
     public function run(IOutput $output): void {
         parent::run($output);
-        $this->config->setAppValue('migration/customFields', '2020.12.2');
+        $this->config->setAppValue('migration/customFields', '2020.12.3');
     }
 
     /**
@@ -144,6 +144,12 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         }
 
         $oldFields = json_decode($customFields, true);
+        if(!is_array($oldFields)) {
+            $revision->setCustomFields('[]');
+
+            return true;
+        }
+
         $newFields = [];
         foreach($oldFields as $label => $data) {
             if(substr($label, 0, 1) === '_') $data['type'] = 'data';
