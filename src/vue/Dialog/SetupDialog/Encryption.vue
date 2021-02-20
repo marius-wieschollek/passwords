@@ -205,7 +205,7 @@
                     id       : 'encryption'
                 };
 
-                if (this.password.length > 12 && this.password === this.confirm && !this.processing) {
+                if (this.password.length >= 12 && this.password === this.confirm && !this.processing) {
                     event.action.class = '';
                     event.action.click = (e) => { this.setPassword(e); };
                 }
