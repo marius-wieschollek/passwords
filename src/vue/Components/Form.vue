@@ -49,13 +49,13 @@
                         button      = this.resolveFieldButton(field),
                         id          = `password-field-${name}`,
                         label       = field.label ? field.label:name.capitalize(),
-                        title       = field.title ? field.title:field.label,
+                        title       = Localisation.translateArray(field.title ? field.title:field.label),
                         required    = !!field.required,
                         checked     = !!field.checked,
                         minlength   = field.minlength ? field.minlength:null,
                         maxlength   = field.maxlength ? field.maxlength:null,
                         pattern     = field.pattern ? field.pattern:null,
-                        placeholder = field.placeholder ? Localisation.translateArray(field.placeholder):null;
+                        placeholder = Localisation.translateArray(field.placeholder ? field.placeholder:field.label);
 
                     this.fields[name] = value;
                     if(type === 'checkbox' && !field.hasOwnProperty('value')) value = checked;
