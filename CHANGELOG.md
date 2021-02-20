@@ -1,6 +1,10 @@
 ## [Unreleased]
 ## 2020.12.2 - Bugfix release
 ### Fixed
+- e2e password length requirement
+
+## 2020.12.2 - Bugfix release
+### Fixed
 - Invalid type in custom fields
 - Bad contrast on QR codes
 - Backup password field remains readonly
