@@ -279,7 +279,7 @@ class SessionService {
                     $this->logger->error(['Unauthorized session access by %s on %s', $this->environment->getUserId(), $session->getUserId()]);
                 } else if(time() > $session->getUpdated() + $this->userSettings->get('session/lifetime')) {
                     $this->mapper->delete($session);
-                    $this->logger->warning(['Cancelled expired session %s for %s', $session->getUuid(), $session->getUserId()]);
+                    $this->logger->info(['Cancelled expired session %s for %s', $session->getUuid(), $session->getUserId()]);
                 } else {
                     $this->session = $session;
                     $this->data    = $this->decryptSessionData();
@@ -293,7 +293,7 @@ class SessionService {
                     return;
                 }
             } catch(DoesNotExistException $e) {
-                $this->logger->warning(['Attempt to access expired or nonexistent session %s by %s', $sessionId, $this->environment->getUserId()]);
+                $this->logger->info(['Attempt to access expired or nonexistent session %s by %s', $sessionId, $this->environment->getUserId()]);
             } catch(Throwable $e) {
                 $this->logger->logException($e);
             }
