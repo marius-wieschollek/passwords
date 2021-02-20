@@ -178,6 +178,7 @@ class ShareUserListHelper {
         if($this->shareManager->shareWithGroupMembersOnly()) return true;
 
         if($this->config->isAppEnabled('guests') && $this->config->getAppValue('hide_users', 'true', 'guests') === 'true') {
+            // @TODO: Use container instead
             $guestBackend = OC::$server->get(UserBackend::class);
 
             return $guestBackend->userExists($this->userId);

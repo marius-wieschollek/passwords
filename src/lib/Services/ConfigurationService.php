@@ -192,6 +192,7 @@ class ConfigurationService {
         }
 
         try {
+            // @TODO Use container instead
             $appConfig = OC::$server->get(AppConfig::class);
             $class     = new ReflectionClass($appConfig);
             $property  = $class->getProperty('configLoaded');
@@ -201,6 +202,7 @@ class ConfigurationService {
         }
 
         try {
+            // @TODO Use container instead
             $systemConfig = OC::$server->get(SystemConfig::class);
             $class        = new ReflectionClass($systemConfig);
             $method       = $class->getMethod('readData');
