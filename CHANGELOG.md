@@ -1,19 +1,21 @@
 ## [Unreleased]
+### Fixed
+- Encryption setup password length check
 
 ## 2021.2.0 - Feature release
 ### Added
- - PassLink connect by link for chrome
- - Firefox Lockwise import profile
- - Warning in admin settings if cron uses different PHP version
- - Account reset for password-less accounts
- - Listing for iOS app from johannes-schliephake
+- PassLink connect by link for chrome
+- Firefox Lockwise import profile
+- Warning in admin settings if cron uses different PHP version
+- Account reset for password-less accounts
+- Listing for iOS app from johannes-schliephake
 ### Changed
- - Apps & Extensions section design
- - Improved PassLink QrCode
+- Apps & Extensions section design
+- Improved PassLink QrCode
 ### Fixed
- - HTTPS report causes crash
+- HTTPS report causes crash
 ### Removed
- - Encryption feature switches
+- Encryption feature switches
 
 ## 2021.1.3 - Bugfix release
 ### Fixed

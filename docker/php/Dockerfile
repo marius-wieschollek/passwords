@@ -1,4 +1,4 @@
-FROM nextcloud:21-beta-fpm
+FROM nextcloud:21-fpm
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
