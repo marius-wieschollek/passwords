@@ -30,7 +30,7 @@ class UpgradeUnsupportedException extends Exception {
      */
     public function __construct($previousVersion, $minimumVersion, Throwable $previous = null) {
         parent::__construct(
-            "The upgrade from {$previousVersion} is not supported. Please upgrade to {$minimumVersion} first. See https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Migrations/Unsupported-Upgrade-Error for help",
+            "Upgrading from {$previousVersion} is not supported. Please follow the instructions at https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Migrations/Unsupported-Upgrade-Error to upgrade to version",
             E_USER_ERROR,
             $previous
         );
