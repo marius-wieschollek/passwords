@@ -3,7 +3,7 @@
         <i class="fa fa-times" @click="closeDetails()"></i>
         <preview :image="object.preview" :icon="object.icon" :link="object.url" :host="object.website"/>
         <div class="title" :title="object.label">
-            <favicon class="icon" :domain="object.website" />
+            <favicon class="icon" :domain="object.website"/>
             <h3>{{ object.label }}</h3>
         </div>
         <div class="infos">
@@ -59,7 +59,7 @@
             password: {
                 type: Object
             },
-            section: {
+            section : {
                 type: String
             }
         },
@@ -112,7 +112,7 @@
                 };
             },
             async refreshView() {
-                if(this.$parent.detail.type !== 'password') return ;
+                if(this.$parent.detail.type !== 'password') return;
                 let password = await API.showPassword(this.object.id, 'model+folder+shares+tags+revisions');
                 if(this.password.id === password.id && this.$parent.detail.type === 'password') {
                     if(password.trashed && this.$route.name !== 'Trash' || !password.trashed && this.$route.name === 'Trash') {
@@ -149,74 +149,99 @@
 </script>
 
 <style lang="scss">
-    .item-details {
-        & > .fa.fa-times:nth-child(1) {
-            position  : absolute;
-            top       : 5px;
-            right     : 5px;
-            cursor    : pointer;
-            padding   : 0.75rem;
-            font-size : 1.3rem;
-            color     : var(--color-main-text);
-            z-index   : 1;
+.item-details {
+    & > .fa.fa-times:nth-child(1) {
+        position  : absolute;
+        top       : 5px;
+        right     : 5px;
+        cursor    : pointer;
+        padding   : 0.75rem;
+        font-size : 1.3rem;
+        color     : var(--color-main-text);
+        z-index   : 1;
 
-            &:hover {
-                text-shadow : 0 0 2px var(--color-main-background);
+        &:hover {
+            text-shadow : 0 0 2px var(--color-main-background);
+        }
+    }
+
+    .title {
+        margin                : 0;
+        padding               : 15px 15px 2px 15px;
+        line-height           : 32px;
+        grid-template-columns : 32px auto;
+        grid-column-gap       : 10px;
+        display               : grid;
+
+        h3 {
+            white-space   : nowrap;
+            text-overflow : ellipsis;
+            overflow      : hidden;
+            font-size     : 1rem;
+            margin        : 0;
+            font-weight   : 300;
+            padding       : 0;
+        }
+
+        .icon {
+            border-radius : var(--border-radius);
+        }
+    }
+
+    .infos {
+        padding : 0 15px 20px;
+        color   : $color-grey-dark;
+
+        .favorite {
+            cursor : pointer;
+
+            &:hover,
+            &.active {
+                color : var(--color-warning);
             }
         }
 
-        .title {
-            margin                : 0;
-            padding               : 15px 15px 2px 15px;
-            line-height           : 32px;
-            grid-template-columns : 32px auto;
-            grid-column-gap       : 10px;
-            display               : grid;
-
-            h3 {
-                white-space   : nowrap;
-                text-overflow : ellipsis;
-                overflow      : hidden;
-                font-size     : 1rem;
-                margin        : 0;
-                font-weight   : 300;
-                padding       : 0;
-            }
-
-            .icon {
-                border-radius : var(--border-radius);
-            }
+        .tags-container {
+            position    : static;
+            display     : inline;
+            color       : var(--color-text-light);
+            margin-left : 3px;
         }
+    }
 
-        .infos {
-            padding : 0 15px 20px;
-            color   : $color-grey-dark;
+    > .tab-container {
+        padding : 0 15px 15px;
 
-            .favorite {
-                cursor : pointer;
+        .tab-titles {
+            display : flex;
+            margin  : 0 -15px;
 
-                &:hover,
-                &.active {
-                    color : var(--color-warning);
+            .tab-title {
+                flex-grow     : 1;
+                text-align    : center;
+                box-shadow    : inset 0 -1px 0 var(--color-background-darker);
+                border-bottom : 0;
+
+                &:hover {
+                    box-shadow : inset 0 -2px 0 var(--color-background-darker);
                 }
-            }
 
-            .tags-container {
-                position    : static;
-                display     : inline;
-                color       : var(--color-text-light);
-                margin-left : 3px;
-            }
-        }
+                &.active {
+                    box-shadow    : inset 0 -2px 0 var(--color-primary);
+                    border-bottom : 0;
 
-        > .tab-container {
-            padding : 0 15px 15px;
-        }
-
-        @media (max-width : $mobile-width) {
-            .title {
-                margin-bottom : 1rem;
+                    &:hover {
+                        box-shadow : inset 0 -2px 0 var(--color-primary);
+                    }
+                }
             }
         }
     }
+
+    @media (max-width : $mobile-width) {
+        .title {
+            margin-bottom : 1rem;
+        }
+    }
+}
 </style>
