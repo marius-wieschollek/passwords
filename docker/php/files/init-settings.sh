@@ -14,3 +14,4 @@
 /var/www/html/occ config:system:set allow_local_remote_servers --value=true --type=bool;
 /var/www/html/occ config:system:set trusted_domains 1 --value=passwords.local --type=string;
 /var/www/html/occ config:system:set overwrite.cli.url --value=https://localhost --type=string;
+/var/www/html/occ config:system:set default_phone_region --value=DE --type=string;
