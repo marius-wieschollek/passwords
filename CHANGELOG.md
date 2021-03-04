@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Changed
+- Details tab styling for NC21
 ### Fixed
 - Encryption setup password length check
 
