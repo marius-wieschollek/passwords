@@ -1,6 +1,6 @@
 let webpack              = require('webpack'),
     config               = require('./package.json'),
-    UglifyJS             = require('uglify-es'),
+    UglifyJS             = require('uglify-js'),
     CopyWebpackPlugin    = require('copy-webpack-plugin'),
     CleanWebpackPlugin   = require('clean-webpack-plugin'),
     VueLoaderPlugin      = require('vue-loader/lib/plugin'),
