@@ -12,8 +12,8 @@ Compile:
   stage: compiling
   script:
     - npm ci
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:prod ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:nightly ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:stable ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:testing ; fi
   artifacts:
     paths:
       - ./src/js/Static/*
