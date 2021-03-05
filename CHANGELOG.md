@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2021.3.0 - Feature release
 ### Added
 - PHP 8.0 support
 ### Changed
