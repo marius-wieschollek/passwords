@@ -9,8 +9,8 @@
   -->
 
 <template>
-    <div class="password-form-custom-field">
-        <input :type="inputType" :id="id" v-model="data" v-bind="inputAttributes"/>
+    <div class="password-form-custom-field" v-if="isVisible">
+        <input :type="inputType" :id="id" v-model="data" v-bind="inputAttributes" required/>
         <custom-field-type v-model="type"/>
     </div>
 </template>
@@ -33,6 +33,9 @@
         },
 
         computed: {
+            isVisible() {
+                return true;
+            },
             inputType() {
                 return 'text';
             },

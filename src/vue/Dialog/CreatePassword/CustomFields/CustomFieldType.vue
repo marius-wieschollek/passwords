@@ -16,24 +16,27 @@
         <translate tag="option" value="email" say="Email"/>
         <translate tag="option" value="url" say="Link"/>
         <translate tag="option" value="file" say="File"/>
+        <translate tag="option" value="data" say="Data" v-if="showData"/>
     </select>
 </template>
 
 <script>
     import Translate from "@vc/Translate";
+
     export default {
         components: {Translate},
-        props: {
+        props     : {
             value: String,
             empty: {
-                type: Boolean,
+                type   : Boolean,
                 default: false
             }
         },
 
         data() {
             return {
-                model: this.value
+                model   : this.value,
+                showData: false
             };
         },
 

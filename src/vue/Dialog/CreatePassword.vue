@@ -14,7 +14,7 @@
                         <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
                         <text-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
 
-                        <custom-field v-model="password.customFields[i]" v-for="(customField, i) in password.customFields" :key="i"/>
+                        <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
                         <new-custom-field @create="addCustomField"/>
                     </div>
                     <notes-field v-model="password.notes"/>
@@ -93,6 +93,9 @@
             },
             addCustomField($event) {
                 this.password.customFields.push($event);
+            },
+            removeCustomField(index) {
+                this.password.customFields.splice(index, 1);
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);

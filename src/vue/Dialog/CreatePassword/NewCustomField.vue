@@ -45,8 +45,10 @@
             type(type) {
                 if(type !== '') {
                     this.$emit('create', {label: this.label, type, value: ''});
-                    this.label = '';
-                    this.type = '';
+                    this.$nextTick(() => {
+                        this.label = '';
+                        this.type = '';
+                    });
                 }
             }
         }

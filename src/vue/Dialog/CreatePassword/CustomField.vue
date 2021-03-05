@@ -15,9 +15,14 @@
             {{ model.label }}
         </label>
         <div class="area-options">
-            <icon icon="trash-o"/>
+            <icon icon="trash-o" class="delete" @click="deleteField"/>
         </div>
-        <text-custom-field :id="id" class="area-input" v-model="model"/>
+        <text-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'text'"/>
+        <email-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'email'"/>
+        <secret-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'secret'"/>
+        <url-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'url'"/>
+        <file-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'file'"/>
+        <data-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'data'"/>
     </div>
 </template>
 
@@ -26,9 +31,15 @@
     import Translate from "@vc/Translate";
     import AbstractField from "@vue/Dialog/CreatePassword/AbstractField";
     import TextCustomField from "@vue/Dialog/CreatePassword/CustomFields/TextCustomField";
+    import EmailCustomField from "@vue/Dialog/CreatePassword/CustomFields/EmailCustomField";
+    import SecretCustomField from "@vue/Dialog/CreatePassword/CustomFields/SecretCustomField";
+    import UrlCustomField from "@vue/Dialog/CreatePassword/CustomFields/UrlCustomField";
+    import DataCustomField from "@vue/Dialog/CreatePassword/CustomFields/DataCustomField";
+    import FileCustomField from "@vue/Dialog/CreatePassword/CustomFields/FileCustomField";
+    import Messages from "@js/Classes/Messages";
 
     export default {
-        components: {TextCustomField, Icon, Translate},
+        components: {FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
         extends   : AbstractField,
         props     : {
             value: Object
@@ -49,10 +60,28 @@
 
                 return 'question';
             }
+        },
+        methods : {
+            deleteField() {
+                Messages
+                    .confirm(['Do you want to delete the field "{field}"?', {field: this.model.label}], 'Delete field')
+                    .then((success) => {
+                        if(success) this.$emit('delete');
+                    });
+            }
         }
     };
 </script>
 
 <style lang="scss">
+.password-form-field-wrapper {
+    .delete {
+        cursor     : pointer;
+        transition : color .15s ease-in-out;
 
+        &:hover {
+            color : var(--color-error);
+        }
+    }
+}
 </style>
