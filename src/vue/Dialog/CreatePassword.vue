@@ -2,27 +2,30 @@
     <div class="background" id="passwords-create-new">
         <div class="window">
             <div class="title">
-                <translate :say="title" />
-                <favorite-field v-model="password.favorite" />
-                <icon icon="close" class="close" title="Close" @click="closeWindow()" />
+                <translate :say="title"/>
+                <favorite-field v-model="password.favorite"/>
+                <icon icon="close" class="close" title="Close" @click="closeWindow()"/>
             </div>
             <form class="content" v-on:submit.prevent="submitAction()">
                 <div class="password-form">
                     <div class="password-form-fields">
-                        <password-field v-model="password.password" />
-                        <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64" />
-                        <text-field v-model="password.label" id="label" label="Name" icon="pencil" maxlength="64" />
-                        <text-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048" />
+                        <password-field v-model="password.password"/>
+                        <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
+                        <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
+                        <text-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
+
+                        <custom-field v-model="password.customFields[i]" v-for="(customField, i) in password.customFields" :key="i"/>
+                        <new-custom-field @create="addCustomField"/>
                     </div>
-                    <notes-field v-model="password.notes" />
+                    <notes-field v-model="password.notes"/>
                 </div>
 
                 <div class="advanced-options">
-                    <encryption-options :password="password" />
+                    <encryption-options :password="password"/>
                 </div>
 
                 <div class="controls">
-                    <translate class="btn primary" tag="input" type="submit" localized-value="Save" />
+                    <translate class="btn primary" tag="input" type="submit" localized-value="Save"/>
                 </div>
             </form>
         </div>
@@ -30,20 +33,24 @@
 </template>
 
 <script>
-    import API               from '@js/Helper/api';
-    import Translate         from '@vc/Translate';
-    import Icon              from '@vc/Icon';
-    import Utility           from '@js/Classes/Utility';
-    import SettingsService   from '@js/Services/SettingsService';
-    import CustomFields      from '@vue/Dialog/CreatePassword/CustomFields';
-    import PasswordField     from '@vue/Dialog/CreatePassword/PasswordField';
-    import TextField         from '@vue/Dialog/CreatePassword/TextField';
-    import NotesField        from '@vue/Dialog/CreatePassword/NotesField';
+    import API from '@js/Helper/api';
+    import Translate from '@vc/Translate';
+    import Icon from '@vc/Icon';
+    import Utility from '@js/Classes/Utility';
+    import SettingsService from '@js/Services/SettingsService';
+    import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
+    import PasswordField from '@vue/Dialog/CreatePassword/PasswordField';
+    import TextField from '@vue/Dialog/CreatePassword/TextField';
+    import NotesField from '@vue/Dialog/CreatePassword/NotesField';
     import EncryptionOptions from '@vue/Dialog/CreatePassword/EncryptionOptions';
-    import FavoriteField     from '@vue/Dialog/CreatePassword/FavoriteField';
+    import FavoriteField from '@vue/Dialog/CreatePassword/FavoriteField';
+    import NewCustomField from "@vue/Dialog/CreatePassword/NewCustomField";
+    import CustomField from "@vue/Dialog/CreatePassword/CustomField";
 
     export default {
         components: {
+            CustomField,
+            NewCustomField,
             Icon,
             FavoriteField,
             EncryptionOptions,
@@ -68,7 +75,7 @@
         },
 
         data() {
-            let cseType  = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1' : 'none',
+            let cseType  = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
                 password = Object.assign({cseType, notes: '', favorite: false, customFields: []}, this.properties);
 
             return {password};
@@ -84,8 +91,8 @@
                     div       = document.createElement('div');
                 container.replaceChild(div, container.childNodes[0]);
             },
-            updateCustomFields($event) {
-                this.password.customFields = Utility.arrayValues($event);
+            addCustomField($event) {
+                this.password.customFields.push($event);
             },
             submitAction() {
                 let password = Utility.cloneObject(this.password);
@@ -139,6 +146,7 @@
             display        : flex;
             flex-direction : column;
             grid-area      : form;
+            overflow-x     : auto;
 
             .password-form-fields {
                 display               : grid;

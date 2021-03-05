@@ -1,17 +1,28 @@
+<!--
+  - @copyright 2021 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <div class="password-form-notes-wrapper">
-        <translate tag="h3" class="notes-label" say="Notes" icon="sticky-note" />
+        <translate tag="h3" class="notes-label" say="Notes" icon="sticky-note"/>
         <textarea ref="textarea" id="password-notes" name="notes" :maxlength="maxlength"></textarea>
     </div>
 </template>
 
 <script>
-    import SimpleMDE     from 'simplemde';
-    import Messages      from '@js/Classes/Messages';
-    import Localisation  from '@js/Classes/Localisation';
-    import Translate     from '@vc/Translate';
-    import Icon          from '@vc/Icon';
+    import SimpleMDE from 'simplemde';
+    import Messages from '@js/Classes/Messages';
+    import Localisation from '@js/Classes/Localisation';
+    import Translate from '@vc/Translate';
+    import Icon from '@vc/Icon';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
+    import Utility from "@js/Classes/Utility";
 
     const MaxNotesLength = 4096;
 
@@ -52,16 +63,28 @@
             },
             async loadSimpleMde() {
                 try {
-
                     this.simplemde = new SimpleMDE(
                         {
                             element                : this.$refs.textarea,
-                            hideIcons              : ['fullscreen', 'side-by-side', 'image'],
                             autoDownloadFontAwesome: false,
                             spellChecker           : false,
                             placeholder            : Localisation.translate('Take some notes'),
                             forceSync              : true,
                             initialValue           : this.model,
+                            toolbar                : [
+                                'bold', 'italic', 'heading', 'quote', 'code',
+                                '|', 'unordered-list', 'ordered-list', 'table', 'horizontal-rule',
+                                '|', 'link',
+                                '|', 'preview', 'undo', 'redo', '|',
+                                {
+                                    name     : "help",
+                                    action   : Utility.generateUrl('/apps/passwords/#/help/Passwords/Notes-Markdown'),
+                                    className: "fa fa-question-circle",
+                                    title    : "Markdown Guide",
+                                    default  : true
+                                }
+                            ],
+                            blockStyles            : {italic: '_'},
                             status                 : [
                                 {
                                     defaultValue: (el) => { this.updateStatusBar(el); },

@@ -1,3 +1,13 @@
+<!--
+  - @copyright 2021 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <div class="password-form-field-wrapper">
         <translate tag="label" :for="getId" :say="label" :icon="icon" class="area-label" />

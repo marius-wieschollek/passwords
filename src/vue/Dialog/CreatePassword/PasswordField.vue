@@ -1,16 +1,26 @@
+<!--
+  - @copyright 2021 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <div class="password-form-field-wrapper">
-        <translate tag="label" for="password-password" say="Password" icon="key" class="area-label" />
+        <translate tag="label" for="password-password" say="Password" icon="key" class="area-label"/>
         <div class="area-options">
-            <icon :icon="visible ? 'eye':'eye-slash'" @click="visible = !visible" title="Toggle visibility" />
-            <icon icon="refresh" :spin="generating" @click="generatePassword" title="Generate password" />
+            <icon :icon="visible ? 'eye':'eye-slash'" @click="visible = !visible" title="Toggle visibility"/>
+            <icon icon="refresh" :spin="generating" @click="generatePassword" title="Generate password"/>
             <popup-menu>
                 <ul slot="items">
                     <li>
-                        <translate :icon="numbers ? 'check-square-o':'square-o'" @click="numbers = !numbers" say="Numbers" />
+                        <translate :icon="numbers ? 'check-square-o':'square-o'" @click="numbers = !numbers" say="Numbers"/>
                     </li>
                     <li>
-                        <translate :icon="special ? 'check-square-o':'square-o'" @click="special = !special" say="Special Characters" />
+                        <translate :icon="special ? 'check-square-o':'square-o'" @click="special = !special" say="Special Characters"/>
                     </li>
                 </ul>
             </popup-menu>
@@ -28,10 +38,10 @@
 
 <script>
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
-    import Translate  from '@vc/Translate';
-    import API        from '@js/Helper/api';
-    import Icon       from '@vc/Icon';
-    import PopupMenu  from '@vc/PopupMenu';
+    import Translate from '@vc/Translate';
+    import API from '@js/Helper/api';
+    import Icon from '@vc/Icon';
+    import PopupMenu from '@vc/PopupMenu';
 
     export default {
         components: {PopupMenu, Icon, Translate},
