@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Settings\DomainSettingsHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
@@ -42,6 +43,11 @@ class AdminSettings implements ISettings {
     protected ConfigurationService $config;
 
     /**
+     * @var DomainSettingsHelper
+     */
+    protected DomainSettingsHelper $domainSettings;
+
+    /**
      * @var IRequest
      */
     protected IRequest $request;
@@ -69,19 +75,22 @@ class AdminSettings implements ISettings {
      * @param ConfigurationService $config
      * @param HelperService        $helperService
      * @param FileCacheService     $fileCacheService
+     * @param DomainSettingsHelper $domainSettings
      */
     public function __construct(
         IRequest $request,
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         HelperService $helperService,
-        FileCacheService $fileCacheService
+        FileCacheService $fileCacheService,
+        DomainSettingsHelper $domainSettings
     ) {
         $this->request          = $request;
         $this->config           = $config;
         $this->urlGenerator     = $urlGenerator;
         $this->helperService    = $helperService;
         $this->fileCacheService = $fileCacheService;
+        $this->domainSettings   = $domainSettings;
     }
 
     /**
@@ -89,6 +98,9 @@ class AdminSettings implements ISettings {
      */
     public function getForm(): TemplateResponse {
         return new TemplateResponse('passwords', 'admin/index', [
+            'defaultMapping'   => $this->domainSettings->getDefaultMappings(),
+            'customMapping'    => $this->config->getAppValue('domain/mapping/custom', "{\"data\":[]}"),
+            'useDefaultMapping'=> $this->config->getAppValue('domain/mapping/default/enabled', true),
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),

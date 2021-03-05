@@ -41,23 +41,31 @@ class ServerSettingsHelper {
     protected ThemeSettingsHelper $themeSettings;
 
     /**
+     * @var DomainSettingsHelper
+     */
+    protected DomainSettingsHelper $domainSettings;
+
+    /**
      * ServerSettingsHelper constructor.
      *
      * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
      * @param ShareSettingsHelper  $shareSettings
      * @param ThemeSettingsHelper  $themeSettings
+     * @param DomainSettingsHelper $domainSettings
      */
     public function __construct(
         IURLGenerator $urlGenerator,
         ConfigurationService $config,
         ShareSettingsHelper $shareSettings,
-        ThemeSettingsHelper $themeSettings
+        ThemeSettingsHelper $themeSettings,
+        DomainSettingsHelper $domainSettings
     ) {
         $this->urlGenerator  = $urlGenerator;
         $this->shareSettings = $shareSettings;
         $this->themeSettings = $themeSettings;
         $this->config        = $config;
+        $this->domainSettings = $domainSettings;
     }
 
     /**
@@ -90,6 +98,8 @@ class ServerSettingsHelper {
                 return $this->themeSettings->get($subKey);
             case 'sharing':
                 return $this->shareSettings->get($subKey);
+            case 'domain':
+                return $this->domainSettings->get($subKey);
             case 'handbook':
                 if($subKey !== 'url') return null;
                 $handbookUrl = $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
@@ -114,7 +124,8 @@ class ServerSettingsHelper {
                 'server.performance'    => $this->get('performance')
             ],
             $this->themeSettings->list(),
-            $this->shareSettings->list()
+            $this->shareSettings->list(),
+            $this->domainSettings->list()
         );
     }
 

@@ -111,6 +111,22 @@ section.section.passwords {
         }
     }
 
+    .area-table {
+        max-width: 600px;
+        max-height: 200px;
+        overflow-y: scroll;
+
+        table, tbody, tr, td {
+            width: 100%;
+        }
+
+        input[type=text] {
+            width    : calc(100% - 5px);
+            justify-self : left;
+            cursor       : pointer;
+        }
+    }
+
     @media (max-width : $mobile-width) {
         form {
             margin-bottom : 4em;

@@ -180,7 +180,11 @@
         "A new client or app was connected to your account"                                         : "Eine neue App wurde mit deinem Konto verknüpft",
         "\"%s\" was granted access to your %s Passwords account via PassLink."                      : "\"%s\" wurde Zugriff auf dein %s Passwörter Konto mittels PassLink gewährt.",
         "You can manage all connected devices and apps in your %s settings in the security section.": "Du kannst alle verknüpften Geräte und Apps in den %s Einstellungen im Bereich \"Sicherheit\" verwalten.",
-        "Background jobs are run with PHP %1$s, the webserver uses PHP %2$s. This may cause issues.": "Hintergrundaufgaben werden mit PHP %1$s ausgeführt, der Webserver verwendet aber %2$s. Dies kann Probleme verursachen."
+        "Background jobs are run with PHP %1$s, the webserver uses PHP %2$s. This may cause issues.": "Hintergrundaufgaben werden mit PHP %1$s ausgeführt, der Webserver verwendet aber %2$s. Dies kann Probleme verursachen.",
+        "Domain mappings"                                                                           : "Domain Zuordnungen",
+        "Include default domain list in search"                                                     : "Standard Domainliste in die Suche einbeziehen.",
+        "Default domain mapping list"                                                               : "Standard Domain Zuordnungsliste",
+        "Custom domain mapping list"                                                                : "Benutzerdefinierte Domain Zuordnungsliste"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
