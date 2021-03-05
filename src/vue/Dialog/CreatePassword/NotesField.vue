@@ -78,7 +78,7 @@
                                 '|', 'preview', 'undo', 'redo', '|',
                                 {
                                     name     : "help",
-                                    action   : Utility.generateUrl('/apps/passwords/#/help/Passwords/Notes-Markdown'),
+                                    action   : Utility.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes'),
                                     className: "fa fa-question-circle",
                                     title    : "Markdown Guide",
                                     default  : true
