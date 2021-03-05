@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+- PHP 8.0 support
 ### Changed
 - Details tab styling for NC21
 ### Fixed
