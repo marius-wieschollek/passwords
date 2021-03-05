@@ -1,0 +1,30 @@
+<template>
+    <div class="password-form-encryption-wrapper" v-if="hasEncryption">
+        <translate tag="label" for="password-cse" say="Encryption" />
+        <select id="password-cse"
+                name="cseType"
+                title="Choose the encryption type for this password"
+                v-model.number="password.cseType">
+            <translate tag="option" value="none" say="On the server" />
+            <translate tag="option" value="CSEv1r1" say="Libsodium" />
+        </select>
+    </div>
+</template>
+
+<script>
+    import API       from '@js/Helper/api';
+    import Translate from '@vc/Translate';
+
+    export default {
+        components: {Translate},
+        props     : {
+            password: Object
+        },
+
+        data() {
+            return {
+                hasEncryption: API.hasEncryption
+            };
+        }
+    };
+</script>

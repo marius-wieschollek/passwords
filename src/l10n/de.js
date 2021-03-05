@@ -41,6 +41,7 @@
             'Numbers'                             : 'Zahlen',
             'Special Characters'                  : 'Sonderzeichen',
             'More Options'                        : 'Erweiterte Optionen',
+            'Close'                               : 'Schließen',
             'Favorite'                            : 'Favorit',
             'Encryption'                          : 'Verschlüsselung',
             'On the server'                       : 'Auf dem Server',

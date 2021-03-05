@@ -33,10 +33,12 @@
                 background-color : var(--color-primary);
                 position         : sticky;
                 top              : 0;
+                display          : flex;
 
                 .close {
-                    float  : right;
-                    cursor : pointer;
+                    flex-grow   : 0;
+                    cursor      : pointer;
+                    margin-left : auto;
                 }
             }
 

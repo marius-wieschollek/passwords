@@ -9,22 +9,31 @@
   -->
 
 <template>
-    <i :class="getIcon" aria-hidden="true"></i>
+    <i :class="getIcon" v-on="$listeners" :title="getTitle" aria-hidden="true"></i>
 </template>
 
 <script>
+    import Localisation from '@js/Classes/Localisation';
+
     export default {
         props   : {
-            icon: String
+            icon: String,
+            spin: {
+                type: Boolean,
+                default: false
+            },
+            title: {
+                type: String,
+                default: null
+            }
         },
         computed: {
             getIcon() {
-                return 'fa fa-' + this.icon;
+                return 'fa fa-' + this.icon + (this.spin ? ' fa-spin':'');
+            },
+            getTitle() {
+                if(this.title) return Localisation.translate(this.title);
             }
         }
     };
 </script>
-
-<style scoped>
-
-</style>
