@@ -120,7 +120,7 @@ class WordsService {
      * @return int
      */
     protected function validateStrength(int $strength): int {
-        if($strength < 1) {
+        if($strength < 0) {
             return 1;
         } else if($strength > 4) {
             return 4;

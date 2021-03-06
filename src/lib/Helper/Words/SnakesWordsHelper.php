@@ -101,6 +101,19 @@ class SnakesWordsHelper extends AbstractWordsHelper {
      * @return array
      */
     protected function getServiceOptions(int $strength): array {
+        if($strength === 0) {
+            return [
+                [
+                    'Pos1'   => 'a',
+                    'Level1' => 10,
+                    'Pos2'   => 'a',
+                    'Level2' => 20,
+                    'Pos3'   => 'n',
+                    'Level3' => 40,
+                ]
+            ];
+        }
+
         if($strength === 1) {
             return [
                 [
