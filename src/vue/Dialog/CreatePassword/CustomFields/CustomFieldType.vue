@@ -10,7 +10,7 @@
 
 <template>
     <select v-model="model">
-        <translate tag="option" value="" say="Type…" selected v-if="empty"/>
+        <translate tag="option" value="" say="Type" selected v-if="empty"/>
         <translate tag="option" value="text" say="Text"/>
         <translate tag="option" value="secret" say="Secret"/>
         <translate tag="option" value="email" say="Email"/>
@@ -22,6 +22,7 @@
 
 <script>
     import Translate from "@vc/Translate";
+    import SettingsService from "@js/Services/SettingsService";
 
     export default {
         components: {Translate},
@@ -36,7 +37,7 @@
         data() {
             return {
                 model   : this.value,
-                showData: false
+                showData: SettingsService.get('client.ui.custom.fields.show.hidden', false)
             };
         },
 

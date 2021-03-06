@@ -11,7 +11,7 @@
 <template>
     <div class="password-form-field-wrapper">
         <translate tag="label" :for="getId" :say="label" :icon="icon" class="area-label" />
-        <input :id="getId" type="text" class="area-input" :maxlength="maxlength" v-model="model"  :autocomplete="autocomplete">
+        <input :id="getId" type="text" class="area-input" :maxlength="maxlength" v-model="model" :autocomplete="autocomplete">
     </div>
 </template>
 

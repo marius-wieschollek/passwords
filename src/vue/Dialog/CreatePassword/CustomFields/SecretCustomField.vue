@@ -14,16 +14,20 @@
     export default {
         extends: AbstractCustomField,
 
+        props: {
+            visible: Boolean
+        },
+
         computed: {
             inputType() {
-                return 'password';
+                return this.visible ? 'text':'password';
             },
             inputAttributes() {
                 return {
-                    maxlength: 368 - this.value.label.length,
+                    maxlength   : 368 - this.value.label.length,
                     autocomplete: 'new-password'
                 };
             }
-        },
+        }
     };
 </script>

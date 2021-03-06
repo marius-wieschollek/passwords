@@ -9,17 +9,18 @@
   -->
 
 <template>
-    <div class="password-form-field-wrapper">
-        <label :for="id" class="area-label">
+    <div class="password-form-field-wrapper password-form-custom-field-wrapper">
+        <div class="area-label">
             <icon :icon="icon"/>
-            {{ model.label }}
-        </label>
+            <input class="field-label" :placeholder="placeholder" :maxlength="maxlength" v-model="model.label" required/>
+        </div>
         <div class="area-options">
-            <icon icon="trash-o" class="delete" @click="deleteField"/>
+            <icon icon="trash" class="delete" @click="deleteField"/>
+            <password-controls v-model="visible" v-on:generate="generatedPassword" v-if="value.type === 'secret'"/>
         </div>
         <text-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'text'"/>
         <email-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'email'"/>
-        <secret-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'secret'"/>
+        <secret-custom-field :id="id" class="area-input" v-model="model" :visible="visible" v-if="value.type === 'secret'"/>
         <url-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'url'"/>
         <file-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'file'"/>
         <data-custom-field :id="id" class="area-input" v-model="model" v-if="value.type === 'data'"/>
@@ -37,16 +38,19 @@
     import DataCustomField from "@vue/Dialog/CreatePassword/CustomFields/DataCustomField";
     import FileCustomField from "@vue/Dialog/CreatePassword/CustomFields/FileCustomField";
     import Messages from "@js/Classes/Messages";
+    import Localisation from "@js/Classes/Localisation";
+    import PasswordControls from "@vue/Dialog/CreatePassword/PasswordControls";
 
     export default {
-        components: {FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
+        components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
         extends   : AbstractField,
         props     : {
             value: Object
         },
         data() {
             return {
-                id: `ps-custom-field-${this.value.type}-${Math.round(Math.random() * 10000)}`
+                id     : `pw-custom-field-${this.value.type}-${Math.round(Math.random() * 10000)}`,
+                visible: false
             };
         },
         computed: {
@@ -59,6 +63,15 @@
                 if(this.model.type === 'data') return 'file-archive-o';
 
                 return 'question';
+            },
+            maxlength() {
+                return 368 - this.model.value.length;
+            },
+            placeholder() {
+                return Localisation.translate('Name');
+            },
+            deleteTitle() {
+                return Localisation.translate('Delete field');
             }
         },
         methods : {
@@ -68,13 +81,37 @@
                     .then((success) => {
                         if(success) this.$emit('delete');
                     });
+            },
+            generatedPassword(password) {
+                this.model.value = password;
+                this.visible = true;
+                this.$emit('input', this.model);
             }
         }
     };
 </script>
 
 <style lang="scss">
-.password-form-field-wrapper {
+.password-form-custom-field-wrapper {
+    .area-label {
+        display     : flex;
+        align-items : center;
+
+        .field-label {
+            margin       : -5px calc(-.25rem + 1px) -5px .25rem;
+            border-color : rgba(0, 0, 0, 0);
+            font-weight  : bold;
+            flex-grow    : 1;
+
+            &:hover,
+            &:active,
+            &:focus {
+                border-color : var(--color-border-dark);
+                font-weight  : normal;
+            }
+        }
+    }
+
     .delete {
         cursor     : pointer;
         transition : color .15s ease-in-out;

@@ -10,12 +10,13 @@
 
 <script>
     import AbstractCustomField from "@vue/Dialog/CreatePassword/CustomFields/AbstractCustomField";
+    import SettingsService from "@js/Services/SettingsService";
 
     export default {
         extends: AbstractCustomField,
         computed: {
             isVisible() {
-                return false;
+                return SettingsService.get('client.ui.custom.fields.show.hidden', false);
             }
         }
     };

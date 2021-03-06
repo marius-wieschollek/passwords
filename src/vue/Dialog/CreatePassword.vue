@@ -1,5 +1,5 @@
 <template>
-    <div class="background" id="passwords-create-new">
+    <div class="background" id="passwords-edit-dialog">
         <div class="window">
             <div class="title">
                 <translate :say="title"/>
@@ -12,12 +12,13 @@
                         <password-field v-model="password.password"/>
                         <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
                         <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
-                        <text-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
+                        <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
 
                         <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
-                        <new-custom-field @create="addCustomField"/>
+                        <new-custom-field @create="addCustomField" v-if="canAddField"/>
                     </div>
                     <notes-field v-model="password.notes"/>
+                    <encryption-options class="encryption-options" :password="password"/>
                 </div>
 
                 <div class="advanced-options">
@@ -38,7 +39,6 @@
     import Icon from '@vc/Icon';
     import Utility from '@js/Classes/Utility';
     import SettingsService from '@js/Services/SettingsService';
-    import CustomFields from '@vue/Dialog/CreatePassword/CustomFields';
     import PasswordField from '@vue/Dialog/CreatePassword/PasswordField';
     import TextField from '@vue/Dialog/CreatePassword/TextField';
     import NotesField from '@vue/Dialog/CreatePassword/NotesField';
@@ -46,9 +46,11 @@
     import FavoriteField from '@vue/Dialog/CreatePassword/FavoriteField';
     import NewCustomField from "@vue/Dialog/CreatePassword/NewCustomField";
     import CustomField from "@vue/Dialog/CreatePassword/CustomField";
+    import UrlField from "@vue/Dialog/CreatePassword/UrlField";
 
     export default {
         components: {
+            UrlField,
             CustomField,
             NewCustomField,
             Icon,
@@ -57,8 +59,7 @@
             NotesField,
             TextField,
             PasswordField,
-            Translate,
-            CustomFields
+            Translate
         },
 
         props: {
@@ -81,7 +82,10 @@
             return {password};
         },
 
-        mounted() {
+        computed: {
+            canAddField() {
+                return this.password.customFields.length < 20;
+            }
         },
 
         methods: {
@@ -125,16 +129,19 @@
 <style lang="scss">
 @import "~simplemde/dist/simplemde.min.css";
 
-#app-popup #passwords-create-new {
+#app-popup #passwords-edit-dialog {
     .window {
-        height : 88%;
+        height    : 88%;
+        max-width : 76vw;
 
         .title .close {
             margin-left : 0;
         }
 
-        @media (max-width : $width-medium) {
-            height : 100%;
+        @media (max-width : $width-large) {
+            height    : 100%;
+            max-width : 100vw;
+            width     : 100vw;
         }
     }
 
@@ -156,12 +163,26 @@
                 grid-template-columns : 1fr 1fr 1fr;
                 grid-column-gap       : 2rem;
                 grid-row-gap          : 1rem;
-                margin-bottom         : 1rem;
+                margin-bottom         : 2rem;
+
+                @media all and (max-width : $width-extra-large) {
+                    grid-template-columns : 1fr 1fr;
+                }
+
+                @media all and (max-width : $width-small) {
+                    grid-template-columns : 1fr;
+                }
+            }
+
+            .encryption-options {
+                display : none;
             }
         }
 
         .advanced-options {
-            grid-area : advanced;
+            grid-area   : advanced;
+            display     : flex;
+            align-items : flex-end;
         }
 
         .controls {
@@ -171,6 +192,31 @@
             input {
                 width     : 100%;
                 font-size : 1.1rem;
+            }
+        }
+
+        @media (max-width : $width-extra-small) {
+            grid-template-areas   : "form" "controls";
+            grid-template-columns : 1fr;
+
+            .password-form {
+                .encryption-options {
+                    display     : flex;
+                    align-items : center;
+                    margin-top  : .5rem;
+
+                    label {
+                        flex-grow : 1;
+                    }
+                }
+            }
+
+            .advanced-options {
+                display : none;
+            }
+
+            .controls {
+                margin : .5rem 0 -.5rem;
             }
         }
     }

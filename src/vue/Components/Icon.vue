@@ -29,7 +29,7 @@
         },
         computed: {
             getIcon() {
-                return 'fa fa-' + this.icon + (this.spin ? ' fa-spin':'');
+                return 'icon fa fa-' + this.icon + (this.spin ? ' fa-spin':'');
             },
             getTitle() {
                 if(this.title) return Localisation.translate(this.title);

@@ -10,9 +10,9 @@
 
 <template>
     <div class="password-form-field-wrapper">
-        <div class="area-label" />
-        <div class="area-options" />
-        <div class="area-input" />
+        <div class="area-label"/>
+        <div class="area-options"/>
+        <div class="area-input"/>
     </div>
 </template>
 
@@ -51,8 +51,8 @@
     min-width             : 300px;
 
     .area-label {
-        grid-area : label;
-        font-weight: bold;
+        grid-area   : label;
+        font-weight : bold;
     }
 
     .area-options {
@@ -64,6 +64,10 @@
 
         & > * {
             padding : 0 0.25rem;
+        }
+
+        & > .passwords-password-controls {
+            padding : 0;
         }
     }
 

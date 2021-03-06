@@ -10,13 +10,14 @@
 
 <template>
     <div class="password-form-custom-field" v-if="isVisible">
-        <input :type="inputType" :id="id" v-model="data" v-bind="inputAttributes" required/>
+        <input :type="inputType" :placeholder="inputPlaceholder" :id="id" v-model="data" v-bind="inputAttributes" v-on="inputEvents" required/>
         <custom-field-type v-model="type"/>
     </div>
 </template>
 
 <script>
     import CustomFieldType from "@vue/Dialog/CreatePassword/CustomFields/CustomFieldType";
+    import Localisation from "@js/Classes/Localisation";
 
     export default {
         components: {CustomFieldType},
@@ -39,10 +40,16 @@
             inputType() {
                 return 'text';
             },
+            inputPlaceholder() {
+                return Localisation.translate('Value');
+            },
             inputAttributes() {
                 return {
                     maxlength: 368 - this.value.label.length
                 };
+            },
+            inputEvents() {
+                return {};
             }
         },
 
@@ -57,9 +64,12 @@
         },
 
         watch: {
-            value(value) {
-                this.data = value.value;
-                this.type = value.type;
+            value: {
+                deep: true,
+                handler(value) {
+                    this.data = value.value;
+                    this.type = value.type;
+                }
             },
             data(value) {
                 if(this.value.value !== value) {

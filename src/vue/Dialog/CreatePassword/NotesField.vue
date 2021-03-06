@@ -126,6 +126,11 @@
         position    : absolute;
         line-height : 2rem;
         font-weight : bold;
+
+        @media all and (max-width : $width-extra-small) {
+            position    : static;
+            line-height : var(--default-line-height);
+        }
     }
 
     .editor-toolbar {
@@ -153,6 +158,11 @@
         .separator {
             border-left  : none;
             border-right : 1px solid var(--color-border);
+        }
+
+
+        @media all and (max-width : $width-extra-small) {
+            text-align : left;
         }
     }
 
