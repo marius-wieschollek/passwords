@@ -50,14 +50,14 @@ class RandomCharactersHelper extends AbstractWordsHelper {
     public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
         $words      = [];
         $characters = $this->getCharacterString();
-        $strength   += 2;
+        $strength   += 3;
         $length     = $strength === 3 ? 4:$strength;
 
         for($i = 0; $i < $length; $i++) {
             $string = '';
             for($j = 0; $j < $strength; $j++) {
                 try {
-                    $pos = random_int(0, mb_strlen($characters) - 1);
+                    $pos    = random_int(0, mb_strlen($characters) - 1);
                     $string .= mb_substr($characters, $pos, 1);
                 } catch(Exception $e) {
                     $j--;
