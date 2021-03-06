@@ -93,6 +93,7 @@
 
     & > * {
         padding : 0 0.25rem;
+        cursor  : pointer;
     }
 
     li {

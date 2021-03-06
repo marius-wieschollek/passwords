@@ -66,6 +66,10 @@
             padding : 0 0.25rem;
         }
 
+        & .icon {
+            width : 1.5rem;
+        }
+
         & > .passwords-password-controls {
             padding : 0;
         }

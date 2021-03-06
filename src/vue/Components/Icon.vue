@@ -37,3 +37,10 @@
         }
     };
 </script>
+
+<style lang="scss">
+.icon.fa {
+    width: 1em;
+    text-align: center;
+}
+</style>
