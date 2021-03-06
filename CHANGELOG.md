@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Changed
+- Password form redesign
 
 ## 2021.3.0 - Feature release
 ### Added
@@ -40,325 +42,325 @@
 
 ## 2021.1.0 - Feature release
 ### Added
- - Nextcloud 21 support
- - System report command
+- Nextcloud 21 support
+- System report command
 ### Changed
- - Feature management now within NC
- - Legacy api now disabled by default
+- Feature management now within NC
+- Legacy api now disabled by default
 ### Fixed
- - Nightly app fetcher ignores PHP requirement
+- Nightly app fetcher ignores PHP requirement
 ### Removed
- - Nextcloud 17, 18 and 19 support
- - PHP 7.2 and PHP 7.3 support
+- Nextcloud 17, 18 and 19 support
+- PHP 7.2 and PHP 7.3 support
 
 ## 2020.12.1 - Bugfix release
 ### Changed
- - Improved swedish translations
+- Improved swedish translations
 ### Fixed
- - Fix search results missing when details opened
- - Fix broken temp directory path
- - Fix crash when user token is missing
- - Fix missing app description translations
- - Fix missing email and notification translations
- - Fix timeout in admin settings
- - Fix key generation for encryption password change
+- Fix search results missing when details opened
+- Fix broken temp directory path
+- Fix crash when user token is missing
+- Fix missing app description translations
+- Fix missing email and notification translations
+- Fix timeout in admin settings
+- Fix key generation for encryption password change
 
 ## 2020.12.0 - Feature release
 ### Added
- - Configurable default options for sharing
- - Highlight password entry with details open
+- Configurable default options for sharing
+- Highlight password entry with details open
 ### Changed
- - API always returns current revision id
+- API always returns current revision id
 ### Fixed
- - Security section fails to load passwords
- - Search hotkey missing in NC20
+- Security section fails to load passwords
+- Search hotkey missing in NC20
 
 ## 2020.11.1 - Bugfix release
 ### Fixed
- - wo4snakes connection issue
- - Notifications don't have links in NC 20
- - Unclear EOL notification
+- wo4snakes connection issue
+- Notifications don't have links in NC 20
+- Unclear EOL notification
 
 ## 2020.11.0 - Feature release
 ### Changed
- - Local words quality improved
- - Improved browser compatibility warnings
- - Ansible integration app by markuman
+- Local words quality improved
+- Improved browser compatibility warnings
+- Ansible integration app by markuman
 ### Fixed
- - BC break warning in app settings not shown
+- BC break warning in app settings not shown
 
 ## 2020.10.0 - Feature release
 ### Added
- - Android app by joleaf
+- Android app by joleaf
 ### Changed
- - Minimum requirement notification now for 2021.1.0 requirements
- - Spanish translation improved
+- Minimum requirement notification now for 2021.1.0 requirements
+- Spanish translation improved
 ### Fixed
- - Shared password can not be deleted
+- Shared password can not be deleted
 
 ## 2020.9.0 - Feature release
 ### Added
- - Nextcloud 20 support
+- Nextcloud 20 support
 ### Changed
- - Migrated favicon services to Nextcloud http client api
- - Migrated preview services to Nextcloud http client api
- - Migrated words services to Nextcloud http client api
- - Migrated security check services to Nextcloud http client api
- - Import respects server performance preference
- - E2E migration respects server performance preference
+- Migrated favicon services to Nextcloud http client api
+- Migrated preview services to Nextcloud http client api
+- Migrated words services to Nextcloud http client api
+- Migrated security check services to Nextcloud http client api
+- Import respects server performance preference
+- E2E migration respects server performance preference
 ### Fixed
- - Backup restore always restores config for all users
- - Broken HTTP fallback in pageres cli preview generator
- - Client attempts to use cached session tokens
+- Backup restore always restores config for all users
+- Broken HTTP fallback in pageres cli preview generator
+- Client attempts to use cached session tokens
 
 ## 2020.8.0 - Feature release
 ### Added
- - Asynchronous loading of favicons
- - List programming resources in apps section
+- Asynchronous loading of favicons
+- List programming resources in apps section
 ### Changed
- - List of recommended browsers
+- List of recommended browsers
 
 ## 2020.7.0 - Feature release
 ### Added
- - Italian translation
+- Italian translation
 
 ## 2020.6.0 - Feature release
 ### Added
- - Edit password as new
- - EOL warning for NC < 19
- - EOL warning for PHP < 7.4
+- Edit password as new
+- EOL warning for NC < 19
+- EOL warning for PHP < 7.4
 ### Changed
- - Styling in NC 19
- - Removed Link option in PassLink for Chrome
- - HTTPS detection now removes client side flag automatically
- - Reduced background tasks
- - Improved QR code compatibility
+- Styling in NC 19
+- Removed Link option in PassLink for Chrome
+- HTTPS detection now removes client side flag automatically
+- Reduced background tasks
+- Improved QR code compatibility
 ### Fixed
- - Missing parent folder id
- - Incorrect sorting
+- Missing parent folder id
+- Incorrect sorting
 
 ## 2020.5.0 - Feature release
 ### Added
- - Nextcloud 19 support
- - Chrome / Google Passwords import
- - Subtitles in handbook videos
- - PassLink Connect setup for extensions
+- Nextcloud 19 support
+- Chrome / Google Passwords import
+- Subtitles in handbook videos
+- PassLink Connect setup for extensions
 ### Changed
- - Add/Update password now scans for duplicates
+- Add/Update password now scans for duplicates
 ### Fixed
- - Email validation to strict
+- Email validation to strict
 
 ## 2020.4.1 - Bugfix release
 ### Fixed
- - Generating passwords with special characters fails often
- - Passwords causes error in Talk when impersonating user
- - Ajax and webcron do not work when installed in subfolder
- - Disabling server survey resets the setting
+- Generating passwords with special characters fails often
+- Passwords causes error in Talk when impersonating user
+- Ajax and webcron do not work when installed in subfolder
+- Disabling server survey resets the setting
 
 ## 2020.4.0 - Feature release
 ### Added
- - Remote feature activation can be disabled
- - App upgrade alert for outdated versions
+- Remote feature activation can be disabled
+- App upgrade alert for outdated versions
 ### Fixed
- - Dark theme detection
- - Broken https setup link
+- Dark theme detection
+- Broken https setup link
 
 ## 2020.3.1 - Bugfix release
 ### Fixed
- - Missing default value for login_type
+- Missing default value for login_type
 
 ## 2020.3.0 - Feature release
 ### Added
- - User delete cli command
- - User move cli command
+- User delete cli command
+- User move cli command
 ### Changed
- - 2FA only required if master password is set
+- 2FA only required if master password is set
 ### Fixed
- - Database repair does not attempt to fix custom fields
+- Database repair does not attempt to fix custom fields
 
 ## 2020.2.1 - Bugfix release
 ### Fixed
- - App crashes when social login used
+- App crashes when social login used
 
 ## 2020.2.0 - Feature release
 ### Added
- - Spanish translation
- - Chinese translation
- - Database indexes
- - Performance improvements
+- Spanish translation
+- Chinese translation
+- Database indexes
+- Performance improvements
 ### Changed
- - User info now fetched from session
- - Client side encryption encoding
+- User info now fetched from session
+- Client side encryption encoding
 ### Removed
- - Nextcloud 15 database layer
+- Nextcloud 15 database layer
 ### Fixed
- - Cron jobs not executed if NC installed in subdirectory
+- Cron jobs not executed if NC installed in subdirectory
 
 ## 2020.1.0 - Feature release
 ### Added
- - Nextcloud 18 support
- - Bitwarden JSON import
- - Bitwarden CSV import
- - Leipzig Corpora random words service
+- Nextcloud 18 support
+- Bitwarden JSON import
+- Bitwarden CSV import
+- Leipzig Corpora random words service
 ### Changed
- - Enpass JSON now translates folder names
- - User search in sharing now has less throttling
+- Enpass JSON now translates folder names
+- User search in sharing now has less throttling
 ### Fixed
- - Details view now closes when password is deleted from trash
+- Details view now closes when password is deleted from trash
 ### Removed
- - Nextcloud 15 and 16 support
- - PHP 7.1 support
- - Legacy ocPasswords migration
- - Database duplicate deletion
- - Backup migration
+- Nextcloud 15 and 16 support
+- PHP 7.1 support
+- Legacy ocPasswords migration
+- Database duplicate deletion
+- Backup migration
 
 ## 2019.12.1 - Bugfix release
 ### Fixed
- - Encryption setup does not encrypt existing entities
- - Clean up step in encryption setup always fails
- - Search globally with enter uses old query
+- Encryption setup does not encrypt existing entities
+- Clean up step in encryption setup always fails
+- Search globally with enter uses old query
 
 ## 2019.12.0 - Feature release
 ### Added
- - Lazy loading for favicons and avatars
+- Lazy loading for favicons and avatars
 ### Fixed
- - Server timeout on settings page
- - Mobile Layout in NC 17
- - Navigation in NC 15
- - Attempt to send mails to users without email
+- Server timeout on settings page
+- Mobile Layout in NC 17
+- Navigation in NC 15
+- Attempt to send mails to users without email
 
 ## 2019.11.1 - Bugfix release
 ### Fixed
- - Local dictionary password generator issues
+- Local dictionary password generator issues
 
 ## 2019.11.0 - Feature release
 ### Added
- - Nextcloud outgoing proxy support
+- Nextcloud outgoing proxy support
 ### Changed
- - Report notification not showing if app not used
- - Words services now produce better passwords
+- Report notification not showing if app not used
+- Words services now produce better passwords
 
 ## 2019.10.0 - Feature release
 ### Added
- - EOL Notification for NC 15, 16 and PHP 7.1
- - Opt-Out for admin notifications
+- EOL Notification for NC 15, 16 and PHP 7.1
+- Opt-Out for admin notifications
 ### Changed
- - Http issues are now logged
+- Http issues are now logged
 
 ## 2019.9.1 - Bugfix release
 ### Fixed
- - Navigation in Nextcloud 16.0.5
+- Navigation in Nextcloud 16.0.5
 
 ## 2019.9.0 - Feature release
 ### Added
- - Nextcloud 17 support
- - Password duplicate search
- - Check for incomplete service configuration
- - Nextcloud code signing
+- Nextcloud 17 support
+- Password duplicate search
+- Check for incomplete service configuration
+- Nextcloud code signing
 ### Changed
- - Virtual guest group from guests app now ignored in autocomplete
- - Search field can now be reset with escape
+- Virtual guest group from guests app now ignored in autocomplete
+- Search field can now be reset with escape
 ### Fixed
- - User name input not shown in sharing tab
- - Import ignores client side encryption settings
- - Backup does not reset some user settings
- - Sharing not possible if autocomplete disabled
- - Some fields do not work in search
+- User name input not shown in sharing tab
+- Import ignores client side encryption settings
+- Backup does not reset some user settings
+- Sharing not possible if autocomplete disabled
+- Some fields do not work in search
 
 ## 2019.8.1 - Bugfix release
 ### Changed
- - Login screen ignores missing meta tags
+- Login screen ignores missing meta tags
 ### Fixed
   - "Hide users from guests" applied to all users
   - Some integrations not reported in server survey
 
 ## 2019.8.0 - Feature release
 ### Added
- - Sharing now available from menu
- - Support user hiding in guests app
- - Backup Import/Export
- - SafeInCloud CSV import
- - Line break option for custom CSV
+- Sharing now available from menu
+- Support user hiding in guests app
+- Backup Import/Export
+- SafeInCloud CSV import
+- Line break option for custom CSV
 ### Changed
- - Login screen now skipped entirely if not needed
- - CLI now allows custom backup names
+- Login screen now skipped entirely if not needed
+- CLI now allows custom backup names
 ### Fixed
- - Correct handling of empty files in import
- - Display file reading errors in import
- - Respect bad quotes setting in import
+- Correct handling of empty files in import
+- Display file reading errors in import
+- Respect bad quotes setting in import
 
 ## 2019.7.2 - Bugfix release
 ### Fixed
- - Migration does not create uuids for deleted items
- - Database cleanup fails with entries without uuid
- - Tags can not be created
- - Master password can not be changed
- - Corrupted revisions are not removed by database repair
- - Legacy API initializes custom fields wrong
+- Migration does not create uuids for deleted items
+- Database cleanup fails with entries without uuid
+- Tags can not be created
+- Master password can not be changed
+- Corrupted revisions are not removed by database repair
+- Legacy API initializes custom fields wrong
 
 ## 2019.7.1 - Bugfix release
 ### Fixed
- - Upgrade fails with PostgreSQL
- - App crash when auth header missing
- - Empty section in settings
- - Session keep alive not working
- - Pageres dos not work with https only
+- Upgrade fails with PostgreSQL
+- App crash when auth header missing
+- Empty section in settings
+- Session keep alive not working
+- Pageres dos not work with https only
 
 ## 2019.7.0 - Feature release
 ### Added
- - Screeenly website previews
- - Pageres 5.x support
- - Admin impersonation
- - Revision view shows name of the client
- - Improved SSEv1 variant
- - Server survey
- - Client-Side-Encrption (not active)
- - Strong Server-Side-Encryption (not active)
- - Two-Factor-Authentication support (not active)
- - Tutorial (not active)
+- Screeenly website previews
+- Pageres 5.x support
+- Admin impersonation
+- Revision view shows name of the client
+- Improved SSEv1 variant
+- Server survey
+- Client-Side-Encrption (not active)
+- Strong Server-Side-Encryption (not active)
+- Two-Factor-Authentication support (not active)
+- Tutorial (not active)
 ### Fixed
- - Permanent object removal ignoring settings
- - Enpass folder import
+- Permanent object removal ignoring settings
+- Enpass folder import
 
 ## 2019.6.0 - Feature release
 ### Changed
- - Compress language files and plain js
+- Compress language files and plain js
 ### Fixed
- - BigDB+Hibp database update not initiated
- - Cache folder not created before write
- - Dirty data in custom fields
+- BigDB+Hibp database update not initiated
+- Cache folder not created before write
+- Dirty data in custom fields
 
 ## 2019.5.0 - Feature release
 ### Added
- - Swedish translation
- - Enpass Json Import
- - Roboform CSV Import
- - Custom fields support in export & import
- - Password revision detail view
- - Password names in legacy api
- - screenshotlayer.com preview service
- - Browshot preview service
- - Changelog in app store
+- Swedish translation
+- Enpass Json Import
+- Roboform CSV Import
+- Custom fields support in export & import
+- Password revision detail view
+- Password names in legacy api
+- screenshotlayer.com preview service
+- Browshot preview service
+- Changelog in app store
 ### Changed
- - Improved Passman import (JSON & CSV)
- - Improved help section
- - Improved sharing ui
- - Improved mobile ui
+- Improved Passman import (JSON & CSV)
+- Improved help section
+- Improved sharing ui
+- Improved mobile ui
 ### Fixed
- - Editable status of shares of shared password not updated
+- Editable status of shares of shared password not updated
 ### Removed
- - screenshotapi.io preview service
+- screenshotapi.io preview service
 
 ## 2019.4.2 - Bugfix release
 ### Fixed
- - Passman csv import
- - Passman JSON import with empty passwords
+- Passman csv import
+- Passman JSON import with empty passwords
 
 ## 2019.4.1 - Bugfix release
 ### Fixed
- - Invalid font file path in icon generator
- - Spelling mistake in french e-mail
- - Incorrect version in backups
+- Invalid font file path in icon generator
+- Spelling mistake in french e-mail
+- Incorrect version in backups
 
 ## 2019.4.0 - Feature release
 ### Added
