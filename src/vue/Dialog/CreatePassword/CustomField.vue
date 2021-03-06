@@ -9,9 +9,9 @@
   -->
 
 <template>
-    <div class="password-form-field-wrapper password-form-custom-field-wrapper">
+    <div class="password-form-field-wrapper password-form-custom-field-wrapper" :class="{drag:drag}" @dragenter="dragEnter">
         <div class="area-label">
-            <icon :icon="icon"/>
+            <icon :icon="icon" @mouseenter="hover = true" @mouseleave="hover = false" @dragstart="dragStart" draggable="true"/>
             <input class="field-label" :placeholder="placeholder" :maxlength="maxlength" v-model="model.label" required/>
         </div>
         <div class="area-options">
@@ -44,17 +44,20 @@
     export default {
         components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
         extends   : AbstractField,
+        inject    : ['dragService'],
         props     : {
             value: Object
         },
         data() {
             return {
                 id     : `pw-custom-field-${this.value.type}-${Math.round(Math.random() * 10000)}`,
-                visible: false
+                visible: false,
+                hover  : false
             };
         },
         computed: {
             icon() {
+                if(this.hover) return 'bars';
                 if(this.model.type === 'text') return 'font';
                 if(this.model.type === 'secret') return 'lock';
                 if(this.model.type === 'email') return 'envelope';
@@ -72,6 +75,9 @@
             },
             deleteTitle() {
                 return Localisation.translate('Delete field');
+            },
+            drag() {
+                return this.dragService.isCurrent(this.model);
             }
         },
         methods : {
@@ -86,6 +92,12 @@
                 this.model.value = password;
                 this.visible = true;
                 this.$emit('input', this.model);
+            },
+            dragStart($event) {
+                this.dragService.start($event, this.model, this.$el);
+            },
+            dragEnter($event) {
+                this.dragService.dragenter($event, this.model);
             }
         }
     };
@@ -93,9 +105,16 @@
 
 <style lang="scss">
 .password-form-custom-field-wrapper {
+    background-color : var(--color-main-background);
+    border-radius    : var(--border-radius);
+
     .area-label {
         display     : flex;
         align-items : center;
+
+        .icon {
+            cursor : grab;
+        }
 
         .field-label {
             margin       : -5px calc(-.25rem + 1px) -5px .25rem;
@@ -118,6 +137,17 @@
 
         &:hover {
             color : var(--color-error);
+        }
+    }
+
+    &.drag {
+        background-color : var(--color-background-hover);
+        margin           : -.5rem;
+        padding          : .5rem;
+
+        .area-label .field-label {
+            background-color : var(--color-background-hover);
+            border-color     : rgba(0, 0, 0, 0) !important;
         }
     }
 }

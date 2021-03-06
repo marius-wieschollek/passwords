@@ -1,5 +1,5 @@
 <template>
-    <div class="background" id="passwords-edit-dialog">
+    <div class="background" id="passwords-edit-dialog" @drop.stop.prevent="dragDrop">
         <div class="window">
             <div class="title">
                 <translate :say="title"/>
@@ -47,6 +47,7 @@
     import NewCustomField from "@vue/Dialog/CreatePassword/NewCustomField";
     import CustomField from "@vue/Dialog/CreatePassword/CustomField";
     import UrlField from "@vue/Dialog/CreatePassword/UrlField";
+    import CustomFieldsDragService from "@js/PasswordDialog/CustomFieldsDragService";
 
     export default {
         components: {
@@ -60,6 +61,12 @@
             TextField,
             PasswordField,
             Translate
+        },
+
+        provide() {
+            return {
+                dragService: this.dragService
+            };
         },
 
         props: {
@@ -76,10 +83,11 @@
         },
 
         data() {
-            let cseType  = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-                password = Object.assign({cseType, notes: '', favorite: false, customFields: []}, this.properties);
+            let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
+                password    = Object.assign({cseType, notes: '', favorite: false, customFields: []}, this.properties),
+                dragService = new CustomFieldsDragService(password);
 
-            return {password};
+            return {password, dragService};
         },
 
         computed: {
@@ -114,6 +122,9 @@
                         console.error(e);
                     }
                 }
+            },
+            dragDrop($event) {
+                this.dragService.end($event);
             }
         },
 
@@ -121,6 +132,7 @@
             password(password) {
                 if(typeof password.customFields === 'string') password.customFields = JSON.parse(password.customFields);
                 if(password.customFields === null) password.customFields = [];
+                this.dragService.setPassword(password);
             }
         }
     };
