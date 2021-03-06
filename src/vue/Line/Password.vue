@@ -58,206 +58,206 @@
 </template>
 
 <script>
-import $ from "jquery";
-import Translate from '@vc/Translate';
-import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
-import DragManager from '@js/Manager/DragManager';
-import Localisation from "@js/Classes/Localisation";
-import PasswordManager from '@js/Manager/PasswordManager';
-import SettingsService from '@js/Services/SettingsService';
-import Favicon from "@vc/Favicon";
-import Events from "@js/Classes/Events";
-import SearchManager from "@js/Manager/SearchManager";
+    import $ from "jquery";
+    import Translate from '@vc/Translate';
+    import Utility from '@js/Classes/Utility';
+    import Messages from '@js/Classes/Messages';
+    import DragManager from '@js/Manager/DragManager';
+    import Localisation from "@js/Classes/Localisation";
+    import PasswordManager from '@js/Manager/PasswordManager';
+    import SettingsService from '@js/Services/SettingsService';
+    import Favicon from "@vc/Favicon";
+    import Events from "@js/Classes/Events";
+    import SearchManager from "@js/Manager/SearchManager";
 
-export default {
-    components: {
-        Favicon,
-        Translate
-    },
+    export default {
+        components: {
+            Favicon,
+            Translate
+        },
 
-    props: {
-        password: {
-            type: Object
-        }
-    },
-
-    data() {
-        return {
-            clickTimeout: null,
-            showMenu    : false,
-            detailsActive: false
-        };
-    },
-
-    computed: {
-        securityCheck() {
-            switch(this.password.status) {
-                case 0:
-                    return 'ok';
-                case 1:
-                    return 'warn';
-                case 2:
-                    return 'fail';
+        props: {
+            password: {
+                type: Object
             }
         },
-        securityTitle() {
-            let label = 'Secure';
-            if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
-            if(this.password.status === 2) label = 'Breached';
 
-            return Localisation.translate(label);
+        data() {
+            return {
+                clickTimeout : null,
+                showMenu     : false,
+                detailsActive: false
+            };
         },
-        securityRoute() {
-            return {name: 'Search', params: {query: btoa('hash:' + this.password.hash)}};
-        },
-        showCopyOptions() {
-            return window.innerWidth < 361 || SettingsService.get('client.ui.password.menu.copy');
-        },
-        showTags() {
-            return window.innerWidth > 360 && SettingsService.get('client.ui.list.tags.show') && this.password.tags;
-        },
-        getTitle() {
-            let titleField = SettingsService.get('client.ui.password.field.title'),
-                showUser   = SettingsService.get('client.ui.password.user.show'),
-                title      = this.password[titleField];
 
-            if(!title && this.password.label) title = this.password.label;
-            if(!title && this.password.website) title = this.password.website;
-            if(showUser && this.password.username) title = `${title} – ${this.password.username}`;
-            return title;
-        },
-        getTags() {
-            return Utility.sortApiObjectArray(this.password.tags, 'label');
-        },
-        tagStyle() {
-            let length = Utility.objectToArray(this.password.tags).length;
-            if(length) {
-                return {
-                    'padding-left': (length + 18) + 'px'
-                };
-            }
-
-            return {};
-        },
-        getDate() {
-            return Localisation.formatDate(this.password.edited);
-        },
-        dateTitle() {
-            return Localisation.translate(
-                'Last modified on {date}',
-                {date: Localisation.formatDateTime(this.password.edited)}
-            );
-        },
-        isVisible() {
-            if(SearchManager.status.active) {
-                if(SearchManager.status.ids.indexOf(this.password.id) === -1) return false;
-            }
-
-            return true;
-        },
-        className() {
-            let classNames = 'row password';
-
-            if(this.detailsActive) classNames += ' details-open';
-            if(this.isVisible) {
-                classNames += ' search-visible';
-            } else if(SearchManager.status.active) {
-                classNames += ' search-hidden';
-            }
-
-            return classNames;
-        }
-    },
-
-    methods: {
-        clickAction($event) {
-            if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
-            if(this.clickTimeout) clearTimeout(this.clickTimeout);
-
-            let action = SettingsService.get('client.ui.password.click.action');
-            if(action !== 'none') this.runClickAction(action, 300);
-        },
-        doubleClickAction($event) {
-            if($event && ($($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
-            let action = SettingsService.get('client.ui.password.dblClick.action');
-
-            if(action !== 'none') {
-                if(this.clickTimeout) clearTimeout(this.clickTimeout);
-                this.runClickAction(action);
-            }
-        },
-        runClickAction(action, delay = 0) {
-            if(action !== 'details' && action !== 'edit') {
-                this.copyAction(action, delay);
-            } else if(action === 'edit') {
-                this.clickTimeout = setTimeout(this.editAction, delay);
-            } else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
-        },
-        copyAction(attribute, delay = 0) {
-            let message = 'Error copying {element} to clipboard';
-            if(Utility.copyToClipboard(this.password[attribute])) message = '{element} was copied to clipboard';
-
-            this.clickTimeout = setTimeout(() => {
-                Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
-            }, delay);
-        },
-        favoriteAction($event) {
-            $event.stopPropagation();
-            this.password.favorite = !this.password.favorite;
-            PasswordManager.updatePassword(this.password)
-                           .catch(() => { this.password.favorite = !this.password.favorite; });
-        },
-        toggleMenu($event) {
-            this.showMenu = !this.showMenu;
-            this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
-        },
-        menuEvent($e) {
-            if($($e.target).closest('[data-password-id=' + this.password.id + '] .more').length !== 0) return;
-            this.showMenu = false;
-            $(document).off('click', this.menuEvent);
-        },
-        detailsAction(section = 'details') {
-            this.detailsActive = true;
-            this.$parent.detail = {type: 'password', element: this.password, section};
-
-            let appClasses = document.getElementById('app').classList;
-            if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
-
-            let listener = (item) => {
-                if(item.object.id === this.password.id) {
-                    Events.off('details.close', listener);
-                    this.detailsActive = false;
+        computed: {
+            securityCheck() {
+                switch(this.password.status) {
+                    case 0:
+                        return 'ok';
+                    case 1:
+                        return 'warn';
+                    case 2:
+                        return 'fail';
                 }
-            }
+            },
+            securityTitle() {
+                let label = 'Secure';
+                if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
+                if(this.password.status === 2) label = 'Breached';
 
-            Events.on('details.close', listener);
+                return Localisation.translate(label);
+            },
+            securityRoute() {
+                return {name: 'Search', params: {query: btoa('hash:' + this.password.hash)}};
+            },
+            showCopyOptions() {
+                return window.innerWidth < 361 || SettingsService.get('client.ui.password.menu.copy');
+            },
+            showTags() {
+                return window.innerWidth > 360 && SettingsService.get('client.ui.list.tags.show') && this.password.tags;
+            },
+            getTitle() {
+                let titleField = SettingsService.get('client.ui.password.field.title'),
+                    showUser   = SettingsService.get('client.ui.password.user.show'),
+                    title      = this.password[titleField];
+
+                if(!title && this.password.label) title = this.password.label;
+                if(!title && this.password.website) title = this.password.website;
+                if(showUser && this.password.username) title = `${title} – ${this.password.username}`;
+                return title;
+            },
+            getTags() {
+                return Utility.sortApiObjectArray(this.password.tags, 'label');
+            },
+            tagStyle() {
+                let length = Utility.objectToArray(this.password.tags).length;
+                if(length) {
+                    return {
+                        'padding-left': (length + 18) + 'px'
+                    };
+                }
+
+                return {};
+            },
+            getDate() {
+                return Localisation.formatDate(this.password.edited);
+            },
+            dateTitle() {
+                return Localisation.translate(
+                    'Last modified on {date}',
+                    {date: Localisation.formatDateTime(this.password.edited)}
+                );
+            },
+            isVisible() {
+                if(SearchManager.status.active) {
+                    if(SearchManager.status.ids.indexOf(this.password.id) === -1) return false;
+                }
+
+                return true;
+            },
+            className() {
+                let classNames = 'row password';
+
+                if(this.detailsActive) classNames += ' details-open';
+                if(this.isVisible) {
+                    classNames += ' search-visible';
+                } else if(SearchManager.status.active) {
+                    classNames += ' search-hidden';
+                }
+
+                return classNames;
+            }
         },
-        editAction() {
-            PasswordManager
-                .editPassword(this.password)
-                .then((p) => {this.password = p;});
-        },
-        cloneAction() {
-            PasswordManager
-                .clonePassword(this.password);
-        },
-        deleteAction() {
-            PasswordManager.deletePassword(this.password);
-        },
-        dragStartAction($e) {
-            DragManager.start($e, this.password.label, this.password.icon, ['folder'])
-                       .then((data) => {
-                           PasswordManager.movePassword(this.password, data.folderId)
-                                          .then((p) => {this.password = p;});
-                       });
-        },
-        openTagAction($event, tag) {
-            $event.stopPropagation();
-            this.$router.push({name: 'Tags', params: {tag: tag}});
+
+        methods: {
+            clickAction($event) {
+                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
+                if(this.clickTimeout) clearTimeout(this.clickTimeout);
+
+                let action = SettingsService.get('client.ui.password.click.action');
+                if(action !== 'none') this.runClickAction(action, 300);
+            },
+            doubleClickAction($event) {
+                if($event && ($($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
+                let action = SettingsService.get('client.ui.password.dblClick.action');
+
+                if(action !== 'none') {
+                    if(this.clickTimeout) clearTimeout(this.clickTimeout);
+                    this.runClickAction(action);
+                }
+            },
+            runClickAction(action, delay = 0) {
+                if(action !== 'details' && action !== 'edit') {
+                    this.copyAction(action, delay);
+                } else if(action === 'edit') {
+                    this.clickTimeout = setTimeout(this.editAction, delay);
+                } else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+            },
+            copyAction(attribute, delay = 0) {
+                let message = 'Error copying {element} to clipboard';
+                if(Utility.copyToClipboard(this.password[attribute])) message = '{element} was copied to clipboard';
+
+                this.clickTimeout = setTimeout(() => {
+                    Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
+                }, delay);
+            },
+            favoriteAction($event) {
+                $event.stopPropagation();
+                this.password.favorite = !this.password.favorite;
+                PasswordManager.updatePassword(this.password)
+                               .catch(() => { this.password.favorite = !this.password.favorite; });
+            },
+            toggleMenu($event) {
+                this.showMenu = !this.showMenu;
+                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+            },
+            menuEvent($e) {
+                if($($e.target).closest('[data-password-id=' + this.password.id + '] .more').length !== 0) return;
+                this.showMenu = false;
+                $(document).off('click', this.menuEvent);
+            },
+            detailsAction(section = 'details') {
+                this.detailsActive = true;
+                this.$parent.detail = {type: 'password', element: this.password, section};
+
+                let appClasses = document.getElementById('app').classList;
+                if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
+
+                let listener = (item) => {
+                    if(item.object.id === this.password.id) {
+                        Events.off('details.close', listener);
+                        this.detailsActive = false;
+                    }
+                };
+
+                Events.on('details.close', listener);
+            },
+            editAction() {
+                PasswordManager
+                    .editPassword(this.password)
+                    .then((p) => {this.password = p;});
+            },
+            cloneAction() {
+                PasswordManager
+                    .clonePassword(this.password);
+            },
+            deleteAction() {
+                PasswordManager.deletePassword(this.password);
+            },
+            dragStartAction($e) {
+                DragManager.start($e, this.password.label, this.password.icon, ['folder'])
+                           .then((data) => {
+                               PasswordManager.movePassword(this.password, data.folderId)
+                                              .then((p) => {this.password = p;});
+                           });
+            },
+            openTagAction($event, tag) {
+                $event.stopPropagation();
+                this.$router.push({name: 'Tags', params: {tag: tag}});
+            }
         }
-    }
-};
+    };
 </script>
 
 <style lang="scss">
@@ -442,6 +442,10 @@ export default {
                             a {
                                 background-color : var(--color-background-dark);
                                 color            : var(--color-main-text);
+                            }
+
+                            i {
+                                color : var(--color-main-text);
                             }
                         }
                     }
