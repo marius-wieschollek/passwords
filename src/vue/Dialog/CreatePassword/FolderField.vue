@@ -19,7 +19,7 @@
     import AbstractField from "@vue/Dialog/CreatePassword/AbstractField";
     import Translate from "@vc/Translate";
     import API       from '@js/Helper/api';
-    import Messages from "@js/Classes/Messages";
+    import FolderManager from "@js/Manager/FolderManager";
 
     export default {
         components: {Translate},
@@ -38,8 +38,12 @@
 
                 this.valueLabel = folder.label;
             },
-            chooseFolder() {
-                Messages.chooseFolder()
+            async chooseFolder() {
+                let result = await FolderManager.selectFolder(this.model);
+                if(result) {
+                    this.model = result.id;
+                    this.valueLabel = result.label;
+                }
             }
         }
     };

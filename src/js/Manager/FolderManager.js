@@ -2,6 +2,7 @@ import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
+import Vue from "vue";
 
 /**
  *
@@ -218,6 +219,20 @@ class FolderManager {
                     .then(() => { this.restoreRevision(folder, revision, false); })
                     .catch(() => {reject(folder);});
             }
+        });
+    }
+
+    /**
+     *
+     * @param folder
+     * @returns {Promise<(Object|null)>}
+     */
+    selectFolder(folder = '00000000-0000-0000-0000-000000000000') {
+        return new Promise(async (resolve, reject) => {
+            let FolderPicker     = await import(/* webpackChunkName: "FolderPicker" */ '@vue/Dialog/FolderPicker.vue'),
+                FolderPickerDialog = Vue.extend(FolderPicker.default);
+
+            new FolderPickerDialog({propsData: {folder, resolve, reject}}).$mount(Utility.popupContainer());
         });
     }
 }

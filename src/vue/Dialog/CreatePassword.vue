@@ -10,7 +10,7 @@
                 <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
                 <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
                 <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
-                <folder-field v-model="password.folder" v-if="false"/>
+                <folder-field v-model="password.folder" />
                 <tags-field v-model="password.tags" v-if="false"/>
 
                 <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>

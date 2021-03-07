@@ -37,6 +37,7 @@
 
         methods: {
             closeWindow() {
+                this.$emit('close');
                 this.$destroy();
                 this.$el.parentNode.removeChild(this.$el);
             }
