@@ -55,6 +55,11 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
     public function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;
 
+        if($revision->getParent() !== FolderService::BASE_FOLDER_UUID && $revision->getParent() === $revision->getModel()) {
+            $revision->setParent(FolderService::BASE_FOLDER_UUID);
+            $fixed = true;
+        }
+
         if($revision->getParent() !== FolderService::BASE_FOLDER_UUID) {
             try {
                 $this->modelMapper->findByUuid($revision->getParent());
