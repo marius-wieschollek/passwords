@@ -53,6 +53,13 @@ class FolderService extends AbstractModelService {
     }
 
     /**
+     * @return ModelInterface[]|Folder[]
+     */
+    public function findAll(): array {
+        return array_merge($this->mapper->findAll(), [$this->getBaseFolder()]) ;
+    }
+
+    /**
      * @param string $uuid
      *
      * @return EntityInterface|Folder

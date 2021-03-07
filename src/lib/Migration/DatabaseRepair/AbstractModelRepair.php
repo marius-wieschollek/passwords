@@ -15,6 +15,7 @@ use Exception;
 use OCA\Passwords\Db\ModelInterface;
 use OCA\Passwords\Services\Object\AbstractModelService;
 use OCA\Passwords\Services\Object\AbstractRevisionService;
+use OCA\Passwords\Services\Object\FolderService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\Migration\IOutput;
@@ -67,7 +68,7 @@ abstract class AbstractModelRepair {
         $output->startProgress($total);
         foreach($allModels as $model) {
             try {
-                if($this->repairModel($model)) $fixed++;
+                if($model->getId() !== FolderService::BASE_FOLDER_UUID && $this->repairModel($model)) $fixed++;
             } catch(Throwable $e) {
                 $output->warning(
                     "Failed to repair model #{$model->getUuid()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
