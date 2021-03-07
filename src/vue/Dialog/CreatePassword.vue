@@ -1,10 +1,10 @@
 <template>
-    <dialog-window id="passwords-edit-dialog" @drop.stop.prevent="dragDrop">
+    <dialog-window ref="window" id="passwords-edit-dialog" @drop.stop.prevent="dragDrop">
         <translate slot="title" :say="title"/>
         <div slot="window-controls">
             <favorite-field v-model="password.favorite"/>
         </div>
-        <form class="password-form" slot="content" v-on:submit.prevent="submitAction()">
+        <form class="password-form" id="password-edit-form" slot="content" v-on:submit.prevent="submitAction()">
             <div class="password-form-fields">
                 <password-field v-model="password.password"/>
                 <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
@@ -23,7 +23,7 @@
             <div class="advanced-options">
                 <encryption-options :password="password"/>
             </div>
-            <translate class="btn primary btn-save" tag="input" type="submit" localized-value="Save"/>
+            <translate class="btn primary btn-save" tag="input" type="submit" form="password-edit-form" localized-value="Save"/>
         </div>
     </dialog-window>
 
@@ -113,7 +113,7 @@
                 if(this._success) {
                     try {
                         this._success(password);
-                        this.closeWindow();
+                        this.$refs.window.closeWindow();
                     } catch(e) {
                         console.error(e);
                     }
