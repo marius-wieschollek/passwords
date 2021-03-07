@@ -38,7 +38,7 @@ module.exports = (env) => {
                 }
             ),
             new VueLoaderPlugin(),
-            new MiniCssExtractPlugin({filename: 'css/[name].css'}),
+            new MiniCssExtractPlugin({filename: 'css/[name].css', chunkFilename: 'css/[name].[hash].css'}),
             new CleanWebpackPlugin([`${__dirname}/src/css`, `${__dirname}/src/js/Static`])
         ];
 
