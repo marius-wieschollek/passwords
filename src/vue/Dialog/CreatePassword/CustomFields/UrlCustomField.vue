@@ -21,7 +21,7 @@
             inputAttributes() {
                 return {
                     maxlength: 368 - this.value.label.length,
-                    pattern  : '[\\w\-+]+:.+'
+                    pattern  : '[\\w\\-+]+:.+'
                 };
             },
             inputEvents() {
