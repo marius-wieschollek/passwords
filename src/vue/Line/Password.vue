@@ -29,6 +29,7 @@
                         <translate tag="li" @click="detailsAction('share')" icon="share-alt" say="Share"/>
                         <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
                         <translate tag="li" @click="cloneAction()" icon="files-o" v-if="password.editable" say="Edit as new"/>
+                        <translate tag="li" @click="moveAction" icon="external-link" v-if="password.editable" say="Move"/>
                         <translate tag="li"
                                    v-if="showCopyOptions"
                                    @click="copyAction('password')"
@@ -69,6 +70,7 @@
     import Favicon from "@vc/Favicon";
     import Events from "@js/Classes/Events";
     import SearchManager from "@js/Manager/SearchManager";
+    import FolderManager from "@js/Manager/FolderManager";
 
     export default {
         components: {
@@ -205,8 +207,9 @@
             favoriteAction($event) {
                 $event.stopPropagation();
                 this.password.favorite = !this.password.favorite;
-                PasswordManager.updatePassword(this.password)
-                               .catch(() => { this.password.favorite = !this.password.favorite; });
+                PasswordManager
+                    .updatePassword(this.password)
+                    .catch(() => { this.password.favorite = !this.password.favorite; });
             },
             toggleMenu($event) {
                 this.showMenu = !this.showMenu;
@@ -244,6 +247,9 @@
             },
             deleteAction() {
                 PasswordManager.deletePassword(this.password);
+            },
+            moveAction() {
+                PasswordManager.movePassword(this.password);
             },
             dragStartAction($e) {
                 DragManager.start($e, this.password.label, this.password.icon, ['folder'])

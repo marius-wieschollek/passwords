@@ -73,6 +73,13 @@
             }
         }
 
+        &:only-child {
+            font-size           : inherit;
+            width               : auto;
+            padding-left        : 1.75rem;
+            background-position : .25rem center;
+        }
+
         &:before {
             background-image    : url("../../../img/icons/breadcrumb.svg?v=1");
             background-repeat   : no-repeat;

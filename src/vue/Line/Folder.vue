@@ -17,6 +17,7 @@
                         <slot name="menu-top"/>
                         <!-- <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/> -->
                         <translate tag="li" @click="renameAction()" icon="pencil" say="Rename"/>
+                        <translate tag="li" @click="moveAction" icon="external-link" say="Move"/>
                         <translate tag="li" @click="deleteAction()" icon="trash" say="Delete"/>
                         <slot name="menu-bottom"/>
                     </ul>
@@ -101,8 +102,11 @@
                     element: this.folder
                 };
             },
-            deleteAction(skipConfirm = false) {
+            deleteAction() {
                 FolderManager.deleteFolder(this.folder);
+            },
+            moveAction() {
+                FolderManager.moveFolder(this.folder);
             },
             renameAction() {
                 FolderManager.renameFolder(this.folder)

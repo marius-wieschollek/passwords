@@ -9,13 +9,14 @@
   -->
 
 <template>
-    <dialog-window ref="window" v-on:close="close">
+    <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close">
         <translate say="Choose folder" slot="title"/>
         <div class="pw-folder-picker" slot="content" v-if="currentFolder !== null">
             <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder"/>
             <picker-folder-list :folders="currentFolders" v-on:navigate="openFolder"/>
         </div>
-        <div slot="controls" v-if="currentFolder !== null">
+        <div class="pw-folder-picker loading" slot="content" v-else />
+        <div class="buttons" slot="controls" v-if="currentFolder !== null">
             <translate class="button primary" @click="select" say="Select &quot;{folder}&quot;" :variables="{folder: currentFolder.label}"/>
         </div>
     </dialog-window>
@@ -58,7 +59,7 @@
                     }
                 }
 
-                return currentFolders;
+                return Utility.sortApiObjectArray(currentFolders, 'label');
             }
         },
         methods: {
@@ -83,10 +84,18 @@
 </script>
 
 <style lang="scss">
-.pw-folder-picker {
-    width      : calc(100vw - 1rem);
-    max-width  : 525px;
-    min-height : 360px;
-    max-height : 360px;
+.pw-folder-picker-dialog {
+    .pw-folder-picker {
+        width      : calc(100vw - 1rem);
+        max-width  : 525px;
+        min-height : 360px;
+        max-height : 360px;
+    }
+
+    .buttons {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
 }
 </style>
