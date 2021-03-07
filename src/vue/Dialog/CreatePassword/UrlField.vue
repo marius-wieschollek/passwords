@@ -22,7 +22,7 @@
         extends: TextField,
         methods: {
             blur() {
-                let regex = /^[\w\-]+:.+$/;
+                let regex = /^[\w\-+]+:.+$/;
                 if(this.model.trim().length !== 0 && !regex.test(this.model)) {
                     this.model = 'https://' + this.model.trim();
                 }

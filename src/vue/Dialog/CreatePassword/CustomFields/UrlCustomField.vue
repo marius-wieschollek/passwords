@@ -21,13 +21,13 @@
             inputAttributes() {
                 return {
                     maxlength: 368 - this.value.label.length,
-                    pattern  : '[\\w\-]+:.+'
+                    pattern  : '[\\w\-+]+:.+'
                 };
             },
             inputEvents() {
                 return {
                     blur: () => {
-                        let regex = /^[\w\-]+:.+$/;
+                        let regex = /^[\w\-+]+:.+$/;
                         if(this.data.trim().length !== 0 && !regex.test(this.data)) {
                             this.data = 'https://' + this.data.trim();
                         }
