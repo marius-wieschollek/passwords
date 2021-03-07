@@ -45,7 +45,7 @@
         },
         methods : {
             async chooseFile() {
-                this.data = await Messages.filePicker();
+                this.data = await Messages.ncFilePicker();
             }
         }
     };

@@ -137,7 +137,7 @@ class Messages {
      * @param multiselect
      * @returns {Promise<any>}
      */
-    filePicker(title = 'Pick a file', mime, multiselect = false) {
+    ncFilePicker(title = 'Pick a file', mime, multiselect = false) {
         return new Promise((resolve) => {
             OC.dialogs.filepicker(title, (e, f) => {resolve(e, f);}, multiselect, mime, true, 1);
         });
@@ -148,8 +148,8 @@ class Messages {
      * @param title
      * @returns {*}
      */
-    folderPicker(title) {
-        return this.filePicker(title, 'httpd/unix-directory', false);
+    ncFolderPicker(title) {
+        return this.ncFilePicker(title, 'httpd/unix-directory', false);
     }
 
     /**
