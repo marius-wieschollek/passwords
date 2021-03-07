@@ -1,24 +1,17 @@
 <template>
-    <div class="background" id="passwords-revision-details">
-        <div class="window">
-            <div class="title">
-                <i class="fa fa-times close" @click="closeWindow()"></i>
-                <span>{{revision.label}}</span>
-            </div>
-            <div class="content">
-                <div class="details">
-                    <detail-field v-for="(field, index) in getFields"
-                                  :key="index"
-                                  :label="field.label"
-                                  :type="field.type"
-                                  :value="field.value"/>
-                </div>
-            </div>
-            <div class="controls" v-if="canRestore">
-                <translate tag="button" type="submit" say="Restore" @click="restoreAction()"/>
-            </div>
+    <dialog-window id="passwords-revision-details">
+        <span slot="title">{{revision.label}}</span>
+        <div slot="content" class="details">
+            <detail-field v-for="(field, index) in getFields"
+                          :key="index"
+                          :label="field.label"
+                          :type="field.type"
+                          :value="field.value"/>
         </div>
-    </div>
+        <div slot="controls" class="buttons" v-if="canRestore">
+            <translate tag="button" type="submit" say="Restore" @click="restoreAction()"/>
+        </div>
+    </dialog-window>
 </template>
 
 <script>
@@ -27,9 +20,10 @@
     import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import DetailField from '@vue/Details/Password/DetailField';
+    import DialogWindow from "@vue/Dialog/DialogWindow";
 
     export default {
-        components: {DetailField, Translate},
+        components: {DialogWindow, DetailField, Translate},
         props     : {
             password: {
                 type: Object
@@ -95,12 +89,6 @@
             }
         },
         methods   : {
-            closeWindow() {
-                this.$destroy();
-                let container = document.getElementById('app-popup'),
-                    div       = document.createElement('div');
-                container.replaceChild(div, container.childNodes[0]);
-            },
             restoreAction() {
                 PasswordManager.restoreRevision(this.password, this.revision)
                     .then(() => {this.closeWindow()})
@@ -118,7 +106,7 @@
 </script>
 
 <style lang="scss">
-    #app-popup #passwords-revision-details.background .window {
+    #passwords-revision-details.background .window {
         width      : 100%;
         max-width  : 450px;
         max-height : 88%;

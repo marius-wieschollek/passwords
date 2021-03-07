@@ -149,7 +149,7 @@ class Messages {
      * @returns {*}
      */
     folderPicker(title) {
-        return this.filepicker(title, 'httpd/unix-directory', false);
+        return this.filePicker(title, 'httpd/unix-directory', false);
     }
 
     /**

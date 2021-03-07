@@ -1,36 +1,32 @@
 <template>
-    <div class="background" id="passwords-edit-dialog" @drop.stop.prevent="dragDrop">
-        <div class="window">
-            <div class="title">
-                <translate :say="title"/>
-                <favorite-field v-model="password.favorite"/>
-                <icon icon="close" class="close" title="Close" @click="closeWindow()"/>
-            </div>
-            <form class="content" v-on:submit.prevent="submitAction()">
-                <div class="password-form">
-                    <div class="password-form-fields">
-                        <password-field v-model="password.password"/>
-                        <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
-                        <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
-                        <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
-
-                        <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
-                        <new-custom-field @create="addCustomField" v-if="canAddField"/>
-                    </div>
-                    <notes-field v-model="password.notes"/>
-                    <encryption-options class="encryption-options" :password="password"/>
-                </div>
-
-                <div class="advanced-options">
-                    <encryption-options :password="password"/>
-                </div>
-
-                <div class="controls">
-                    <translate class="btn primary" tag="input" type="submit" localized-value="Save"/>
-                </div>
-            </form>
+    <dialog-window id="passwords-edit-dialog" @drop.stop.prevent="dragDrop">
+        <translate slot="title" :say="title"/>
+        <div slot="window-controls">
+            <favorite-field v-model="password.favorite"/>
         </div>
-    </div>
+        <form class="password-form" slot="content" v-on:submit.prevent="submitAction()">
+            <div class="password-form-fields">
+                <password-field v-model="password.password"/>
+                <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
+                <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
+                <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
+                <folder-field v-model="password.folder" v-if="false"/>
+                <tags-field v-model="password.tags" v-if="false"/>
+
+                <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
+                <new-custom-field @create="addCustomField" v-if="canAddField"/>
+            </div>
+            <notes-field v-model="password.notes"/>
+            <encryption-options class="encryption-options" :password="password"/>
+        </form>
+        <div slot="controls" class="buttons">
+            <div class="advanced-options">
+                <encryption-options :password="password"/>
+            </div>
+            <translate class="btn primary btn-save" tag="input" type="submit" localized-value="Save"/>
+        </div>
+    </dialog-window>
+
 </template>
 
 <script>
@@ -48,9 +44,15 @@
     import CustomField from "@vue/Dialog/CreatePassword/CustomField";
     import UrlField from "@vue/Dialog/CreatePassword/UrlField";
     import CustomFieldsDragService from "@js/PasswordDialog/CustomFieldsDragService";
+    import FolderField from "@vue/Dialog/CreatePassword/FolderField";
+    import DialogWindow from "@vue/Dialog/DialogWindow";
+    import TagsField from "@vue/Dialog/CreatePassword/TagsField";
 
     export default {
         components: {
+            TagsField,
+            DialogWindow,
+            FolderField,
             UrlField,
             CustomField,
             NewCustomField,
@@ -97,12 +99,6 @@
         },
 
         methods: {
-            closeWindow() {
-                this.$destroy();
-                let container = document.getElementById('app-popup'),
-                    div       = document.createElement('div');
-                container.replaceChild(div, container.childNodes[0]);
-            },
             addCustomField($event) {
                 this.password.customFields.push($event);
             },
@@ -150,7 +146,7 @@
             margin-left : 0;
         }
 
-        @media (max-width : $width-large) {
+        @media (max-width : $width-1366) {
             height    : 100%;
             max-width : 100vw;
             width     : 100vw;
@@ -158,17 +154,11 @@
     }
 
     .content {
-        display               : grid;
-        grid-template-rows    : auto 3rem;
-        grid-template-columns : 1fr 1fr;
-        grid-template-areas   : "form form" "advanced controls";
-        padding               : 1rem;
-
         .password-form {
             display        : flex;
             flex-direction : column;
-            grid-area      : form;
             overflow-x     : auto;
+            height         : 100%;
 
             .password-form-fields {
                 display               : grid;
@@ -177,12 +167,27 @@
                 grid-row-gap          : 1rem;
                 margin-bottom         : 2rem;
 
-                @media all and (max-width : $width-extra-large) {
+                @media all and (max-width : $width-1680) {
                     grid-template-columns : 1fr 1fr;
                 }
 
                 @media all and (max-width : $width-small) {
                     grid-template-columns : 1fr;
+                }
+
+                @media all and (min-width : $width-1680-above) {
+                    .password-form-tags-wrapper {
+                        grid-row-start    : 1;
+                        grid-row-end      : 2;
+                        grid-column-start : 3;
+                        grid-column-end   : 4;
+                    }
+                    .password-form-folder-wrapper {
+                        grid-row-start    : 2;
+                        grid-row-end      : 3;
+                        grid-column-start : 3;
+                        grid-column-end   : 4;
+                    }
                 }
             }
 
@@ -191,26 +196,7 @@
             }
         }
 
-        .advanced-options {
-            grid-area   : advanced;
-            display     : flex;
-            align-items : flex-end;
-        }
-
-        .controls {
-            grid-area : controls;
-            display   : flex;
-
-            input {
-                width     : 100%;
-                font-size : 1.1rem;
-            }
-        }
-
         @media (max-width : $width-extra-small) {
-            grid-template-areas   : "form" "controls";
-            grid-template-columns : 1fr;
-
             .password-form {
                 .encryption-options {
                     display     : flex;
@@ -222,13 +208,28 @@
                     }
                 }
             }
+        }
+    }
 
-            .advanced-options {
+    .buttons {
+        display : flex;
+
+        .advanced-options {
+            display     : flex;
+            align-items : flex-end;
+            flex-grow   : 1;
+
+            @media (max-width : $width-extra-small) {
                 display : none;
             }
+        }
 
-            .controls {
-                margin : .5rem 0 -.5rem;
+        .btn-save {
+            font-size : 1.1rem;
+            width     : 40%;
+
+            @media (max-width : $width-extra-small) {
+                width : 100%;
             }
         }
     }

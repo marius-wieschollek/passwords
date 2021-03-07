@@ -30,7 +30,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties, _success}}).$mount('#app-popup div');
+            new PwCreateDialog({propsData: {properties, _success}}).$mount(Utility.popupContainer());
         });
     }
 
@@ -77,7 +77,7 @@ class PasswordManager {
             let propsData      = {properties: Utility.cloneObject(password), title: 'Edit password'},
                 PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default),
-                DialogWindow   = new PwCreateDialog({propsData}).$mount('#app-popup div');
+                DialogWindow   = new PwCreateDialog({propsData}).$mount(Utility.popupContainer());
 
             DialogWindow._success = (p) => {
                 p = Utility.mergeObject(password, p);
@@ -145,7 +145,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties, _success}}).$mount('#app-popup div');
+            new PwCreateDialog({propsData: {properties, _success}}).$mount(Utility.popupContainer());
             PwCreateDialog._fail = reject;
         });
     }
@@ -312,7 +312,7 @@ class PasswordManager {
         let RevisionDialog     = await import(/* webpackChunkName: "ViewRevision" */ '@vue/Dialog/ViewRevision.vue'),
             ViewRevisionDialog = Vue.extend(RevisionDialog.default);
 
-        new ViewRevisionDialog({propsData: {password, revision}}).$mount('#app-popup div');
+        new ViewRevisionDialog({propsData: {password, revision}}).$mount(Utility.popupContainer());
     }
 }
 

@@ -10,7 +10,7 @@ export default class Utility {
             range     = document.createRange(),
             selection = window.getSelection();
 
-        element.value    = text;
+        element.value = text;
         element.readOnly = true;
 
         document.body.appendChild(element);
@@ -245,10 +245,10 @@ export default class Utility {
      * @returns {Array}
      */
     static arrayValues(array) {
-        let output = [],
+        let output   = [],
             iterator = array.values();
 
-        for (let value of iterator) {
+        for(let value of iterator) {
             if(value !== undefined) output.push(value);
         }
 
@@ -270,5 +270,16 @@ export default class Utility {
         }
 
         return baseUrl;
+    }
+
+    /**
+     *
+     * @returns {HTMLDivElement}
+     */
+    static popupContainer() {
+        let container = document.getElementById('app-popup'),
+            div       = document.createElement('div');
+        container.appendChild(div);
+        return div;
     }
 }

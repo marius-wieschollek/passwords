@@ -16,20 +16,24 @@ $color-white         : #fff;
 $width-extra-small   : 640px;
 $width-small         : 768px;
 $width-medium        : 1024px;
-$width-large         : 1366px;
-$width-extra-large   : 1680px;
+$width-1366          : 1366px;
+$width-1366-above    : 1367px;
+$width-1680          : 1680px;
+$width-1680-above    : 1681px;
 $width-1920          : 1920px;
 $width-1920-above    : 1921px;
 
 /** @deprecated **/
+$width-extra-large   : $width-1680;
+$width-large         : $width-1366;
 $mobile-width        : $width-extra-small;
 $tablet-width        : $width-small;
-$desktop-width       : $width-large;
+$desktop-width       : $width-1366;
 
 :root {
     --pw-icon-font-face         : FontAwesome, sans-serif;
     --pw-game-font-face         : "Ani", "Purisa", "TSCu_Comic", "Comic Sans MS", sans-serif;
-    --pw-mono-font-face         : 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'DejaVu Sans Mono', 'source-code-pro', monospace;
+    --pw-mono-font-face         : "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "DejaVu Sans Mono", "source-code-pro", monospace;
     --pw-image-login-background : var(--image-login-background);
     --pw-image-logo             : url(/apps/passwords/img/app.svg);
     --pw-image-logo-themed      : url(/apps/passwords/img/app-themed.svg);
