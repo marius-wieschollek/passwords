@@ -184,9 +184,7 @@
             closeWizard() {
                 SettingsService.set('client.setup.initialized', true);
                 this.$destroy();
-                let container = document.getElementById('app-popup'),
-                    div       = document.createElement('div');
-                container.replaceChild(div, container.childNodes[0]);
+                this.$el.parentNode.removeChild(this.$el);
                 if(this.redirect || !this.isDefaultRoute) router.push(this.route);
                 if(this._close) { this._close(); }
             },
@@ -200,130 +198,138 @@
 </script>
 
 <style lang="scss">
-    #passwords-setup {
-        display         : flex;
-        align-items     : center;
-        justify-content : center;
-        flex-wrap       : wrap;
+#passwords-setup {
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    flex-wrap        : wrap;
+    position         : fixed;
+    top              : 0;
+    left             : 0;
+    width            : 100%;
+    height           : 100%;
+    background-color : rgba(0, 0, 0, 0.7);
+    z-index          : 3001;
+    backdrop-filter  : blur(3px);
 
-        #setup-container {
-            border-radius    : var(--border-radius-large);
-            overflow         : hidden !important;
-            max-width        : 900px;
-            width            : 100%;
-            background-color : var(--color-main-background);
-            position         : relative;
+    #setup-container {
+        border-radius    : var(--border-radius-large);
+        overflow         : hidden !important;
+        max-width        : 900px;
+        width            : 100%;
+        background-color : var(--color-main-background);
+        position         : relative;
 
-            @media (max-width : 900px) {
-                width         : 100vw;
-                height        : 100vh;
-                border-radius : 0;
-                display       : flex;
-                flex-wrap     : wrap;
+        @media (max-width : 900px) {
+            width         : 100vw;
+            height        : 100vh;
+            border-radius : 0;
+            display       : flex;
+            flex-wrap     : wrap;
+        }
+    }
+
+    .setup-header {
+        padding         : 1.25rem;
+        background      : var(--color-primary) var(--image-login-background) no-repeat 50% 50%;
+        background-size : cover;
+        color           : var(--color-primary-text);
+        text-align      : center;
+        width           : 100%;
+
+        .logo {
+            height          : 120px;
+            background      : var(--pw-image-logo) no-repeat center;
+            background-size : contain;
+        }
+
+        h1 {
+            font-size   : 3rem;
+            line-height : 3rem;
+            margin-top  : 1rem;
+        }
+
+        @media (max-width : 900px) {
+            padding         : 1rem;
+            align-items     : center;
+            display         : flex;
+            flex-direction  : column;
+            justify-content : center;
+
+            .logo {
+                width : 120px;
             }
         }
 
-        .setup-header {
-            padding         : 1.25rem;
-            background      : var(--color-primary) var(--image-login-background) no-repeat 50% 50%;
-            background-size : cover;
-            color           : var(--color-primary-text);
-            text-align      : center;
-            width           : 100%;
-
+        @media (max-width : $width-extra-small) {
             .logo {
-                height          : 120px;
-                background      : var(--pw-image-logo) no-repeat center;
-                background-size : contain;
+                height : 60px;
+                width  : 60px;
             }
 
             h1 {
-                font-size   : 3rem;
-                line-height : 3rem;
-                margin-top  : 1rem;
-            }
-
-            @media (max-width : 900px) {
-                padding         : 1rem;
-                align-items     : center;
-                display         : flex;
-                flex-direction  : column;
-                justify-content : center;
-
-                .logo {
-                    width : 120px;
-                }
-            }
-
-            @media (max-width : $width-extra-small) {
-                .logo {
-                    height : 60px;
-                    width  : 60px;
-                }
-
-                h1 {
-                    font-size   : 2rem;
-                    line-height : 2rem;
-                    margin-top  : 0.5rem;
-                }
-            }
-        }
-
-        .setup-content {
-            width       : 10000px;
-            transition  : transform 0.25s ease-in-out;
-            display     : flex;
-            align-items : stretch;
-
-            .slide {
-                width      : 900px;
-                min-height : 450px;
-            }
-
-            @media (max-width : 900px) {
-                .slide {
-                    width : 100vw;
-                }
-            }
-        }
-
-        .setup-navigation {
-            width : 100%;
-
-            .skip,
-            .continue {
-                background-color : var(--color-primary-element);
-                padding          : 0.75rem;
-                border-radius    : var(--border-radius-pill);
-                color            : var(--color-primary-text);
-                cursor           : pointer;
-                display          : inline-block;
-                transition       : opacity 0.5s ease-in-out;
-                position         : absolute;
-                right            : .5rem;
-                bottom           : .5rem;
-
-                &.continue {
-                    float : right;
-                }
-
-                &.skip {
-                    background-color : rgba(0, 0, 0, 0);
-                    color            : var(--color-text-lighter);
-                    right            : auto;
-                    left             : .5rem;
-                }
-
-                &.disabled {
-                    opacity : 0.5;
-                    cursor  : default;
-                }
-            }
-
-            @media (max-width : 900px) {
-                position : absolute;
-                bottom   : 0;
+                font-size   : 2rem;
+                line-height : 2rem;
+                margin-top  : 0.5rem;
             }
         }
     }
+
+    .setup-content {
+        width       : 10000px;
+        transition  : transform 0.25s ease-in-out;
+        display     : flex;
+        align-items : stretch;
+
+        .slide {
+            width      : 900px;
+            min-height : 450px;
+        }
+
+        @media (max-width : 900px) {
+            .slide {
+                width : 100vw;
+            }
+        }
+    }
+
+    .setup-navigation {
+        width : 100%;
+
+        .skip,
+        .continue {
+            background-color : var(--color-primary-element);
+            padding          : 0.75rem;
+            border-radius    : var(--border-radius-pill);
+            color            : var(--color-primary-text);
+            cursor           : pointer;
+            display          : inline-block;
+            transition       : opacity 0.5s ease-in-out;
+            position         : absolute;
+            right            : .5rem;
+            bottom           : .5rem;
+
+            &.continue {
+                float : right;
+            }
+
+            &.skip {
+                background-color : rgba(0, 0, 0, 0);
+                color            : var(--color-text-lighter);
+                right            : auto;
+                left             : .5rem;
+            }
+
+            &.disabled {
+                opacity : 0.5;
+                cursor  : default;
+            }
+        }
+
+        @media (max-width : 900px) {
+            position : absolute;
+            bottom   : 0;
+        }
+    }
+}
 </style>
