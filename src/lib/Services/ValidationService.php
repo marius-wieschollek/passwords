@@ -77,9 +77,13 @@ class ValidationService {
         if(empty($folder->getEdited()) || $folder->getEdited() > strtotime('+1 hour')) {
             $folder->setEdited(time());
         }
-        $folder->setParent(
-            $this->validateFolderRelation($folder->getParent(), $folder->isHidden())
-        );
+        if($folder->getModel() === $folder->getParent()) {
+            $folder->setParent(FolderService::BASE_FOLDER_UUID);
+        } else {
+            $folder->setParent(
+                $this->validateFolderRelation($folder->getParent(), $folder->isHidden())
+            );
+        }
 
         return $folder;
     }

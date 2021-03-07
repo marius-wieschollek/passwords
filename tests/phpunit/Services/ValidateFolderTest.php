@@ -220,6 +220,24 @@ class ValidateFolderTest extends TestCase {
      * @throws Exception
      * @throws InvalidArgumentException
      */
+    public function testValidateFolderCorrectsFolderParentLoop() {
+        $mock = $this->getFolderMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getParent')->willReturn('11111111-1111-1111-1111-111111111111');
+        $mock->method('getModel')->willReturn('11111111-1111-1111-1111-111111111111');
+        $mock->method('getEdited')->willReturn(1);
+
+        $mock->expects($this->once())->method('setParent')->with(FolderService::BASE_FOLDER_UUID);
+        $this->validationService->validateFolder($mock);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testValidateFolderSetsEditedWhenEmpty() {
         $mock = $this->getFolderMock();
 
@@ -256,7 +274,7 @@ class ValidateFolderTest extends TestCase {
     protected function getFolderMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getParent', 'setParent', 'getEdited', 'setEdited'])
+            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getParent', 'getModel', 'setParent', 'getEdited', 'setEdited'])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);
