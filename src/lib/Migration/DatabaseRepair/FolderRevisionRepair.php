@@ -50,11 +50,13 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
     public function repairRevision(RevisionInterface $revision): bool {
         $fixed = false;
 
+        // Check if the folder is its own parent
         if($revision->getParent() !== FolderService::BASE_FOLDER_UUID && $revision->getParent() === $revision->getModel()) {
             $revision->setParent(FolderService::BASE_FOLDER_UUID);
             $fixed = true;
         }
 
+        // Check if the parent exists at all
         if($revision->getParent() !== FolderService::BASE_FOLDER_UUID) {
             try {
                 $this->modelMapper->findByUuid($revision->getParent());
@@ -64,8 +66,45 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
             }
         }
 
+        // Check for any recursion in the root structure
+        if($revision->getParent() !== FolderService::BASE_FOLDER_UUID && !$this->checkPathEndsAtRoot($revision)) {
+            $revision->setParent(FolderService::BASE_FOLDER_UUID);
+            $fixed = true;
+        }
+
         if($fixed) $this->revisionService->save($revision);
 
         return $fixed || parent::repairRevision($revision);
+    }
+
+    /**
+     * Check the path of each folder for a root loop
+     *
+     * @param FolderRevision $revision
+     *
+     * @return bool
+     */
+    protected function checkPathEndsAtRoot(FolderRevision $revision): bool {
+        $modelIds        = [];
+        $currentRevision = $revision;
+
+        while(true) {
+            try {
+                /** @var FolderRevision $currentRevision */
+                $currentRevision = $this->revisionService->findCurrentRevisionByModel($currentRevision->getParent());
+
+                if($currentRevision->getParent() === FolderService::BASE_FOLDER_UUID) {
+                    return true;
+                }
+
+                if(in_array($currentRevision->getModel(), $modelIds)) {
+                    return false;
+                }
+
+                $modelIds[] = $currentRevision->getModel();
+            } catch(\Throwable $e) {
+                return false;
+            }
+        }
     }
 }
