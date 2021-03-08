@@ -1,7 +1,9 @@
 ## [Unreleased]
-## 2020.12.2 - Bugfix release
+## 2020.12.3 - Bugfix release
 ### Fixed
+- Recursion in folder path
 - e2e password length requirement
+- Handbook url
 
 ## 2020.12.2 - Bugfix release
 ### Fixed
