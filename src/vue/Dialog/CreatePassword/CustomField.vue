@@ -94,6 +94,7 @@
                 this.$emit('input', this.model);
             },
             dragStart($event) {
+                this.hover = false;
                 this.dragService.start($event, this.model, this.$el);
             },
             dragEnter($event) {
