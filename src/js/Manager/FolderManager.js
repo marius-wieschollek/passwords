@@ -81,7 +81,7 @@ class FolderManager {
     moveFolder(folder, parent = null) {
         return new Promise(async (resolve, reject) => {
             if(parent === null) {
-                let parentModel = await this.selectFolder(folder.parent);
+                let parentModel = await this.selectFolder(folder.parent, [folder.id]);
                 parent = parentModel.id;
             }
             if(folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
@@ -228,16 +228,17 @@ class FolderManager {
     /**
      *
      * @param folder
+     * @param ignoredFolders
      * @returns {Promise<(Object|null)>}
      */
-    selectFolder(folder = '00000000-0000-0000-0000-000000000000') {
+    selectFolder(folder = '00000000-0000-0000-0000-000000000000', ignoredFolders = []) {
         if(typeof folder === 'object') folder = folder.id;
 
         return new Promise(async (resolve, reject) => {
             let FolderPicker       = await import(/* webpackChunkName: "FolderPicker" */ '@vue/Dialog/FolderPicker.vue'),
                 FolderPickerDialog = Vue.extend(FolderPicker.default);
 
-            new FolderPickerDialog({propsData: {folder, resolve, reject}}).$mount(Utility.popupContainer());
+            new FolderPickerDialog({propsData: {folder, ignoredFolders, resolve, reject}}).$mount(Utility.popupContainer());
         });
     }
 }

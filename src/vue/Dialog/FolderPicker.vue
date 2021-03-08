@@ -15,7 +15,7 @@
             <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder"/>
             <picker-folder-list :folders="currentFolders" v-on:navigate="openFolder"/>
         </div>
-        <div class="pw-folder-picker loading" slot="content" v-else />
+        <div class="pw-folder-picker loading" slot="content" v-else/>
         <div class="buttons" slot="controls" v-if="currentFolder !== null">
             <translate class="button primary" @click="select" say="Select &quot;{folder}&quot;" :variables="{folder: currentFolder.label}"/>
         </div>
@@ -33,17 +33,21 @@
     export default {
         components: {PickerFolderList, PickerBreadcrumb, Translate, DialogWindow},
         props     : {
-            folder : {
+            folder        : {
                 type   : String,
                 default: '00000000-0000-0000-0000-000000000000'
             },
-            resolve: Function,
-            reject : Function
+            ignoredFolders: {
+                type   : Array,
+                default: []
+            },
+            resolve       : Function,
+            reject        : Function
         },
         data() {
             return {
-                folderList    : [],
-                currentFolder : null
+                folderList   : [],
+                currentFolder: null
             };
         },
         mounted() {
@@ -54,7 +58,7 @@
                 let currentFolders = [];
 
                 for(let item of this.folderList) {
-                    if(item.parent === this.currentFolder.id && item.id !== item.parent) {
+                    if(item.parent === this.currentFolder.id && item.id !== item.parent && this.ignoredFolders.indexOf(item.id) === -1) {
                         currentFolders.push(item);
                     }
                 }
@@ -62,7 +66,7 @@
                 return Utility.sortApiObjectArray(currentFolders, 'label');
             }
         },
-        methods: {
+        methods : {
             close() {
                 this.reject();
             },
@@ -93,9 +97,9 @@
     }
 
     .buttons {
-        display: flex;
-        width: 100%;
-        justify-content: flex-end;
+        display         : flex;
+        width           : 100%;
+        justify-content : flex-end;
     }
 }
 </style>
