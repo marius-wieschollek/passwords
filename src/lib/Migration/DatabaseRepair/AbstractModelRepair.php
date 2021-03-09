@@ -68,7 +68,7 @@ abstract class AbstractModelRepair {
         $output->startProgress($total);
         foreach($allModels as $model) {
             try {
-                if($model->getId() !== FolderService::BASE_FOLDER_UUID && $this->repairModel($model)) $fixed++;
+                if($model->getUuid() !== FolderService::BASE_FOLDER_UUID && $this->repairModel($model)) $fixed++;
             } catch(Throwable $e) {
                 $output->warning(
                     "Failed to repair model #{$model->getUuid()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
