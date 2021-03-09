@@ -1,6 +1,5 @@
 <template>
-    <dialog-window ref="window" id="passwords-edit-dialog" @drop.stop.prevent="dragDrop">
-        <translate slot="title" :say="title"/>
+    <dialog-window ref="window" id="passwords-edit-dialog" :title="title" @drop.stop.prevent="dragDrop">
         <div slot="window-controls">
             <favorite-field v-model="password.favorite"/>
         </div>
