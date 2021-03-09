@@ -1,20 +1,14 @@
 <template>
-    <div class="background" id="passlink-connect">
-        <div class="window">
-            <div class="title">
-                <i class="fa fa-times close" @click="close"></i>
-                <translate say="Connect a new device"/>
-            </div>
-            <div class="content">
-                <connect-link :has-link="hasLink" :has-code="hasCode" :protocol="protocol" v-on:connect="connect($event)" v-if="step === 1"/>
-                <connect-confirm :client="client"
-                                 v-on:reject="reject($event)"
-                                 v-on:confirm="confirm($event)"
-                                 v-if="step === 2"/>
-                <connect-result :status="status" v-on:restart="restart" v-on:close="close" v-if="step === 3"/>
-            </div>
+    <dialog-window ref="window" id="passlink-connect" title="Connect a new device" :has-controls="false">
+        <div class="content">
+            <connect-link :has-link="hasLink" :has-code="hasCode" :protocol="protocol" v-on:connect="connect($event)" v-if="step === 1"/>
+            <connect-confirm :client="client"
+                             v-on:reject="reject($event)"
+                             v-on:confirm="confirm($event)"
+                             v-if="step === 2"/>
+            <connect-result :status="status" v-on:restart="restart" v-on:close="close" v-if="step === 3"/>
         </div>
-    </div>
+    </dialog-window>
 </template>
 
 <script>
@@ -22,9 +16,10 @@
     import ConnectLink from '@vue/Dialog/ConnectClient/ConnectLink';
     import ConnectConfirm from '@vue/Dialog/ConnectClient/ConnectConfirm';
     import ConnectResult from '@vue/Dialog/ConnectClient/ConnectResult';
+    import DialogWindow from "./DialogWindow";
 
     export default {
-        components: {ConnectLink, ConnectConfirm, ConnectResult, Translate},
+        components: {DialogWindow, ConnectLink, ConnectConfirm, ConnectResult, Translate},
 
         props: {
             hasLink : Boolean,
@@ -42,10 +37,7 @@
 
         methods: {
             close() {
-                this.$destroy();
-                let container = document.getElementById('app-popup'),
-                    div       = document.createElement('div');
-                container.replaceChild(div, container.childNodes[0]);
+                this.$refs.window.closeWindow();
             },
             connect($event) {
                 this.client = $event;

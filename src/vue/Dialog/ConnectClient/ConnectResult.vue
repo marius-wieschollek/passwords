@@ -47,29 +47,30 @@
 </script>
 
 <style lang="scss">
-    #passlink-connect .connect-client-result {
-        .message {
-            text-align  : center;
-            margin      : 0 1rem 2rem;
-            font-weight : bold;
+#passlink-connect .connect-client-result {
+    .message {
+        text-align  : center;
+        margin      : 0 1rem 2rem;
+        font-weight : bold;
 
-            i {
-                display   : block;
-                font-size : 8rem;
-                margin    : 2rem 3rem;
-                color     : var(--color-success);
-            }
-
-            &.error i {
-                color : var(--color-error);
-            }
+        i.icon {
+            display   : block;
+            font-size : 8rem;
+            margin    : 2rem 3rem;
+            width     : auto;
+            color     : var(--color-success);
         }
 
-        button {
-            display    : block;
-            margin     : 1rem;
-            text-align : center;
-            width      : calc(100% - 2rem);
+        &.error i {
+            color : var(--color-error);
         }
     }
+
+    button {
+        display    : block;
+        margin     : 1rem;
+        text-align : center;
+        width      : calc(100% - 2rem);
+    }
+}
 </style>
