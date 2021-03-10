@@ -9,8 +9,7 @@
   -->
 
 <template>
-    <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close">
-        <translate say="Choose folder" slot="title"/>
+    <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close" title="Choose folder">
         <div class="pw-folder-picker" slot="content" v-if="currentFolder !== null">
             <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder"/>
             <picker-folder-list :folders="currentFolders" v-on:navigate="openFolder"/>

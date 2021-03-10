@@ -110,9 +110,8 @@
 <style lang="scss">
 #passlink-connect .connect-client-link {
     .description {
-        margin     : 1rem;
+        margin     : 1rem 0;
         text-align : center;
-
     }
 
     .qr-code {

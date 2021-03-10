@@ -11,8 +11,10 @@
 <template>
     <div class="pw-dialog-window background">
         <div class="window">
-            <div class="title">
-                <slot name="title"/>
+            <div class="title" v-if="hasTitle">
+                <slot name="title">
+                    <translate :say="title" v-if="title !== null" />
+                </slot>
                 <div class="window-controls">
                     <slot name="window-controls"/>
                     <icon icon="close" class="close" title="Close" @click="closeWindow()"/>
@@ -20,8 +22,9 @@
             </div>
             <div class="content">
                 <slot name="content"/>
+                <slot name="default"/>
             </div>
-            <div class="controls">
+            <div class="controls" v-if="hasControls">
                 <slot name="controls"/>
             </div>
         </div>
@@ -30,10 +33,24 @@
 
 <script>
     import Icon from "@vc/Icon";
+    import Translate from "../Components/Translate";
 
     export default {
-        name      : "DialogWindow",
-        components: {Icon},
+        components: {Translate, Icon},
+        props: {
+            title: {
+                type: String,
+                default: null
+            },
+            hasTitle: {
+                type: Boolean,
+                default: true
+            },
+            hasControls: {
+                type: Boolean,
+                default: true
+            }
+        },
 
         methods: {
             closeWindow() {

@@ -14,7 +14,7 @@
         <translate tag="option" value="text" say="Text"/>
         <translate tag="option" value="secret" say="Secret"/>
         <translate tag="option" value="email" say="Email"/>
-        <translate tag="option" value="url" say="Link"/>
+        <translate tag="option" value="url" say="Website"/>
         <translate tag="option" value="file" say="File"/>
         <translate tag="option" value="data" say="Data" v-if="showData"/>
     </select>
