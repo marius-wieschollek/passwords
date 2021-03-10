@@ -67,7 +67,7 @@ class Application {
      * @private
      */
     _initApp() {
-        if(this._loaded || !document.querySelector('meta[name=pw-api-user]')) return;
+        if(document.readyState === 'loading' || this._loaded || !document.querySelector('meta[name=pw-api-user]')) return;
         clearInterval(this._timer);
         this._loaded = true;
         this._initSettings();
