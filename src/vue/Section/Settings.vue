@@ -372,6 +372,7 @@
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
     import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
+    import {getCurrentUser} from '@nextcloud/auth';
 
     export default {
         components: {
@@ -397,9 +398,9 @@
                 hasResharing: SettingsService.get('server.sharing.resharing'),
                 advancedSettings,
                 hasEncryption,
-                isAdmin     : OC.isUserAdmin(),
+                isAdmin     : getCurrentUser().isAdmin,
                 advanced    : advancedSettings ? '1':'0',
-                nightly     : process.env.NIGHTLY_FEATURES,
+                nightly     : APP_NIGHTLY,
                 noSave      : false,
                 locked      : false
             };

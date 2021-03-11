@@ -85,7 +85,7 @@
                         this.providers = [];
 
                         for(let i = 0; i < d.token.length; i++) {
-                            if(d.token[i].id === 'twofactor_nextcloud_notification' && d.token.length !== 1 && !process.env.NIGHTLY_FEATURES) {
+                            if(d.token[i].id === 'twofactor_nextcloud_notification' && d.token.length !== 1 && APP_ENVIRONMENT !== 'development') {
                                 continue;
                             }
 

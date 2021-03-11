@@ -34,7 +34,11 @@
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
     "devDependencies": {
+        "@nextcloud/auth": "^1.3.0",
+        "@nextcloud/dialogs": "^3.1.1",
+        "@nextcloud/l10n": "^1.2.0",
         "@nextcloud/moment": "^1.1.1",
+        "@nextcloud/router": "^1.2.0",
         "blueimp-gallery": "^3.3.0",
         "clean-webpack-plugin": "^1.0.1",
         "codeceptjs": "^3.0.4",

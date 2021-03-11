@@ -1,6 +1,8 @@
-import $ from 'jquery';
-import Vue from 'vue';
+import $            from 'jquery';
+import Vue          from 'vue';
 import Localisation from '@js/Classes/Localisation';
+import ToastService from '@js/Services/ToastService';
+
 
 class Messages {
 
@@ -10,12 +12,10 @@ class Messages {
      */
     notification(notification) {
         return new Promise((resolve) => {
-            let $element = OC.Notification.show(Localisation.translateArray(notification));
-
-            setTimeout(() => {
-                OC.Notification.hide($element);
-                resolve({});
-            }, 10000);
+            ToastService
+                .message(notification, {timeout: 10000})
+                .then(resolve)
+                .catch(resolve);
         });
     }
 
@@ -58,7 +58,7 @@ class Messages {
         return new Promise((resolve, reject) => {
             message = Localisation.translateArray(message);
             title = Localisation.translateArray(title);
-            let callback = function(success) { success ? resolve({}):reject({}); };
+            let callback = function(success) { success ? resolve({}) : reject({}); };
 
             OC.dialogs.confirm(message, title, callback, true);
         });
@@ -76,7 +76,7 @@ class Messages {
      */
     prompt(label, title = 'Prompt', message = null, placeholder = null, value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
-            let callback = function(success, value) { success ? resolve(value):reject(value); };
+            let callback = function(success, value) { success ? resolve(value) : reject(value); };
             title = Localisation.translateArray(title);
             label = Localisation.translateArray(label);
 

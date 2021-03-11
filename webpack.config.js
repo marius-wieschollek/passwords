@@ -20,12 +20,12 @@ module.exports = (env) => {
         plugins   = [
             new webpack.DefinePlugin(
                 {
-                    'process.env': {
-                        NODE_ENV        : production ? '"production"':'"development"',
-                        APP_VERSION     : `"${config.version}"`,
-                        APP_NAME        : '"webapp"',
-                        NIGHTLY_FEATURES: !!(env && env.features)
-                    }
+                    APP_TYPE: '"webapp"',
+                    APP_VERSION: `"${config.version}"`,
+                    APP_MAIN_VERSION: `"${config.version.substr(0, config.version.indexOf('.'))}"`,
+                    APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
+                    APP_ENVIRONMENT:  production ? '"production"':'"development"',
+                    APP_NIGHTLY: !!(env && env.features),
                 }
             ),
             new CopyWebpackPlugin(

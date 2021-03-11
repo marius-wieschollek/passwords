@@ -1,17 +1,18 @@
 import Vue from 'vue';
 import App from '@vue/App';
 import API from '@js/Helper/api';
-import router from '@js/Helper/router';
-import EventEmitter from 'eventemitter3';
-import SectionAll from '@vue/Section/All';
-import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
-import EventManager from '@js/Manager/EventManager';
-import AlertManager from '@js/Manager/AlertManager';
-import SearchManager from '@js/Manager/SearchManager';
-import SettingsService from '@js/Services/SettingsService';
+import router           from '@js/Helper/router';
+import EventEmitter     from 'eventemitter3';
+import SectionAll       from '@vue/Section/All';
+import Utility          from '@js/Classes/Utility';
+import Messages         from '@js/Classes/Messages';
+import EventManager     from '@js/Manager/EventManager';
+import AlertManager     from '@js/Manager/AlertManager';
+import SearchManager    from '@js/Manager/SearchManager';
+import SettingsService  from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
-import SetupManager from "@js/Manager/SetupManager";
+import SetupManager     from "@js/Manager/SetupManager";
+import ToastService     from '@js/Services/ToastService';
 
 
 class Application {
@@ -78,6 +79,7 @@ class Application {
             EventManager.init();
             KeepAliveManager.init();
             AlertManager.init();
+            window.toasts = ToastService;
         }
     }
 

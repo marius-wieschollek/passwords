@@ -45,7 +45,7 @@ class HandbookRenderer {
                 return HandbookRenderer._generateErrorPage(response.status + ' – ' + response.statusText);
             }
         } catch(e) {
-            if(process.env.NODE_ENV === 'development') console.error('Request failed', e);
+            if(APP_ENVIRONMENT === 'development') console.error('Request failed', e);
 
             return HandbookRenderer._generateErrorPage(e.message);
         }

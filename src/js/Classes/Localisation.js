@@ -1,20 +1,24 @@
-import moment from '@nextcloud/moment';
+import moment                              from '@nextcloud/moment';
+import {getLanguage, getLocale, translate} from '@nextcloud/l10n';
+import {generateFilePath, generateUrl}     from '@nextcloud/router';
 
 class Localisation {
 
     get lang() {
-        let lang = document.documentElement.lang;
-        return lang ? lang:'en';
+        let language = getLanguage();
+        if(!language) return 'en';
+        if(language.indexOf('-') !== -1) {
+            return language.substr(0, language.indexOf('-'));
+        }
+        return language;
     }
 
     get locale() {
-        let locale = document.documentElement.dataset.locale;
-        if(!locale) return this.lang;
-        return locale.replace('_', '-');
-    }
-
-    constructor() {
-        this._fetchAlternative = false;
+        let locale = getLocale();
+        if(locale) return locale;
+        let language = getLanguage();
+        if(language) return language.replace('-', '_');
+        return 'en';
     }
 
     /**
@@ -25,7 +29,7 @@ class Localisation {
      */
     translate(text, variables = {}) {
         if(text === undefined) return '';
-        if(OC !== undefined) return OC.L10N.translate('passwords', text, variables).replace('&amp;', '&');
+        if(OC !== undefined) return translate('passwords', text, variables).replace('&amp;', '&');
 
         return '';
     }
@@ -35,7 +39,7 @@ class Localisation {
      * @param {string} text
      */
     translateArray(text) {
-        return Array.isArray(text) ? this.translate(text[0], text[1]):this.translate(text);
+        return Array.isArray(text) ? this.translate(text[0], text[1]) : this.translate(text);
     }
 
     /**
@@ -58,22 +62,22 @@ class Localisation {
 
     /**
      *
-     * @param {string} section
+     * @param {String} section
+     * @param {Boolean} alternative
      * @returns {Promise<boolean>}
      */
-    async loadSection(section) {
-        let language = OC.getLanguage().replace('-', '_');
+    async loadSection(section, alternative = false) {
+        let language = this.locale;
         if(language === 'en') return true;
 
-        let url = OC.filePath('passwords', 'l10n', `${section}/${language}.json`);
-        if(this._fetchAlternative) {
-            url = OC.generateUrl(`/apps/passwords/l10n/${section}/${language}.json?_=${process.env.APP_VERSION}`);
+        let url = generateFilePath('passwords', 'l10n', `${section}/${language}.json?_=${APP_VERSION}`);
+        if(alternative) {
+            url = generateUrl(`/apps/passwords/l10n/${section}/${language}.json`);
         }
 
         let result = await this._loadFile(url);
-        if(!result && language === 'de') {
-            this._fetchAlternative = true;
-            return await this.loadSection(section);
+        if(!result && !alternative) {
+            return await this.loadSection(section, true);
         }
 
         return result;
@@ -114,7 +118,7 @@ class Localisation {
                 translations = Object.assign.apply(this, translations);
             }
 
-            OC.L10N.register('passwords', translations, data.pluralForm);
+            OC.L10N.register('passwords', translations);
 
             return true;
         }

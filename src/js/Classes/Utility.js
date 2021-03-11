@@ -1,3 +1,5 @@
+import {generateUrl}     from '@nextcloud/router';
+
 export default class Utility {
 
     /**
@@ -264,7 +266,7 @@ export default class Utility {
      * @returns {*}
      */
     static generateUrl(path = '', params = [], options = {}) {
-        let baseUrl = OC.generateUrl(path, params, options);
+        let baseUrl = generateUrl(path, params, options);
         if(baseUrl.indexOf(location.origin) === -1) {
             return new URL(location.origin + baseUrl).href;
         }

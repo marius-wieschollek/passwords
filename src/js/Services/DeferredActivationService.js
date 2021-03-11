@@ -6,8 +6,6 @@ class DeferredActivationService {
      *
      */
     constructor() {
-        this._version = process.env.APP_VERSION;
-        this._app = process.env.APP_NAME;
         this._features = null;
     }
 
@@ -18,7 +16,7 @@ class DeferredActivationService {
      * @returns {Promise<boolean>}
      */
     async check(id, ignoreNightly = false) {
-        if(!ignoreNightly && process.env.NIGHTLY_FEATURES) return true;
+        if(!ignoreNightly && APP_NIGHTLY) return true;
 
         let features = await this.getFeatures();
         if(features.hasOwnProperty(id)) return features[id] === true;
@@ -61,16 +59,15 @@ class DeferredActivationService {
      * @private
      */
     _processFeatures(json) {
-        if(!json.hasOwnProperty(this._app)) return;
-        let mainVersion = this._version.substr(0, this._version.lastIndexOf('.')),
-            appFeatures = json[this._app];
+        if(!json.hasOwnProperty(APP_TYPE)) return;
+        let appFeatures = json[APP_TYPE];
 
-        if(appFeatures.hasOwnProperty(mainVersion)) {
-            this._features = appFeatures[mainVersion];
+        if(appFeatures.hasOwnProperty(APP_FEATURE_VERSION)) {
+            this._features = appFeatures[APP_FEATURE_VERSION];
         }
 
-        if(appFeatures.hasOwnProperty(this._version)) {
-            let versionFeatures = appFeatures[this._version];
+        if(appFeatures.hasOwnProperty(APP_VERSION)) {
+            let versionFeatures = appFeatures[APP_VERSION];
 
             for(let key in versionFeatures) {
                 if(versionFeatures.hasOwnProperty(key)) {
