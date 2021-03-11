@@ -399,7 +399,7 @@ export default class ImportCsvConversionHelper {
             keepass  : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'username', 'password', 'url', 'notes']
+                mapping  : ['folderLabel', 'label', 'username', 'password', 'url', 'notes']
             },
             bitwardenCsv  : {
                 firstLine: 1,

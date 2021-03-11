@@ -16,7 +16,7 @@
                     <translate tag="option" value="enpass" say="Enpass JSON"/>
                     <translate tag="option" value="bitwarden" say="Bitwarden JSON"/>
                     <translate tag="option" value="bitwardenCsv" say="Bitwarden CSV"/>
-                    <translate tag="option" value="keepass" say="KeePass CSV"/>
+                    <translate tag="option" value="keepass" say="KeePassX CSV"/>
                     <translate tag="option" value="lastpass" say="LastPass CSV"/>
                     <translate tag="option" value="dashlane" say="Dashlane CSV"/>
                     <translate tag="option" value="roboform" say="RoboForm CSV"/>
