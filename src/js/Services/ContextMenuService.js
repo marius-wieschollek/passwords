@@ -36,6 +36,7 @@ export default new class ContextMenuService {
      */
     _registerPasswordContextMenu(item, element) {
         new RightClick.Menu(element, () => {
+            this._closeContextMenus(element);
             let options = this._createOptions();
 
             this._fetchItemActions(options, element);
@@ -57,6 +58,7 @@ export default new class ContextMenuService {
      */
     _registerGenericContextMenu(item, element) {
         new RightClick.Menu(element, () => {
+            this._closeContextMenus();
             let options = this._createOptions();
 
             if(item.type === 'tag' || item.type === 'folder') {
@@ -133,8 +135,7 @@ export default new class ContextMenuService {
                         () => {
                             actionElement.click();
                             setTimeout(() => {
-                                let menu = element.querySelector('.menu.open');
-                                if(menu) menu.click();
+                                this._closeContextMenus();
                             }, 1);
                         }
                     )
@@ -189,5 +190,16 @@ export default new class ContextMenuService {
         };
 
         return options;
+    }
+
+    /**
+     * @param {HTMLElement} element
+     * @private
+     */
+    _closeContextMenus(element) {
+        let menus = document.querySelectorAll('.item-list .menu.open');
+        menus.forEach((el) => {
+            el.click();
+        })
     }
 };
