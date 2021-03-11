@@ -8,7 +8,12 @@
 namespace OCA\Passwords\Notification;
 
 use Exception;
+use InvalidArgumentException;
+use OCA\Passwords\Services\EnvironmentService;
 use OCP\IL10N;
+use OCP\IURLGenerator;
+use OCP\L10N\IFactory;
+use OCP\Notification\IManager;
 use OCP\Notification\INotification;
 
 /**
@@ -20,6 +25,30 @@ class LoginAttemptNotification extends AbstractNotification {
 
     const NAME = 'user_login_attempts';
     const TYPE = 'security';
+
+    /**
+     * @var EnvironmentService
+     */
+    protected EnvironmentService $environment;
+
+    /**
+     * LoginAttemptNotification constructor.
+     *
+     * @param IFactory           $l10nFactory
+     * @param IURLGenerator      $urlGenerator
+     * @param IManager           $notificationManager
+     * @param EnvironmentService $environment
+     */
+    public function __construct(
+        IFactory $l10nFactory,
+        IURLGenerator $urlGenerator,
+        IManager $notificationManager,
+        EnvironmentService $environment
+    ) {
+        $this->environment = $environment;
+
+        parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
+    }
 
     /**
      * Send the notification
@@ -46,8 +75,10 @@ class LoginAttemptNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
+     * @throws InvalidArgumentException
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
+        if($this->environment->isImpersonating()) throw new InvalidArgumentException();
         $link    = $this->getLink();
         $title   = $localisation->t('Suspicious amount of failed login attempts detected.');
         $message = $this->getMessage($localisation, $notification->getSubjectParameters());

@@ -93,7 +93,7 @@ class ImpersonationNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
         if($this->environment->isImpersonating()) throw new InvalidArgumentException();
@@ -114,7 +114,6 @@ class ImpersonationNotification extends AbstractNotification {
      * @param array $parameters
      *
      * @return string
-     * @throws Exception
      */
     protected function getMessage(IL10N $localisation, array $parameters): string {
         $dateTime = new DateTime();
