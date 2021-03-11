@@ -270,9 +270,8 @@ class EncryptionManager {
         folders = this._sortFoldersForUpgrade(folders);
 
         this._sendStatus('folders', 'processing', Object.keys(folders).length);
-        for(let id in folders) {
-            if(!folders.hasOwnProperty(id)) continue;
-            let folder = folders[id];
+        for(let folder of folders) {
+            if(folder.id === '00000000-0000-0000-0000-000000000000') continue;
 
             if(!idMap.hasOwnProperty(folder.parent) || queue.length > 10) {
                 await Promise.all(queue);
