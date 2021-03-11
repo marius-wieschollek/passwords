@@ -1,6 +1,8 @@
 ## [Unreleased]
-### Changed
-- Password form redesign
+### Added
+- New password form
+- Move functionality for passwords and folders
+- Right click menu
 
 ## 2021.3.0 - Feature release
 ### Added

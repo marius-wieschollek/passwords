@@ -1,6 +1,6 @@
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
-        <i class="fa fa-star favorite" :class="{ active: tag.favorite }" @click="favoriteAction($event)"></i>
+        <i data-item-action="favorite" class="fa fa-star favorite" :class="{ active: tag.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
@@ -11,8 +11,8 @@
                     <ul>
                         <slot name="menu-top"/>
                         <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
-                        <translate tag="li" @click="editAction()" icon="edit">Edit</translate>
-                        <translate tag="li" @click="deleteAction()" icon="trash">Delete</translate>
+                        <translate tag="li" data-item-action="edit" @click="editAction()" icon="edit">Edit</translate>
+                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash">Delete</translate>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -23,11 +23,12 @@
 </template>
 
 <script>
-    import $ from "jquery";
-    import Translate from '@vc/Translate';
-    import TagManager from '@js/Manager/TagManager';
-    import Localisation from "@js/Classes/Localisation";
-    import SearchManager from "@js/Manager/SearchManager";
+    import $                  from "jquery";
+    import Translate          from '@vc/Translate';
+    import TagManager         from '@js/Manager/TagManager';
+    import Localisation       from "@js/Classes/Localisation";
+    import SearchManager      from "@js/Manager/SearchManager";
+    import ContextMenuService from '@js/Services/ContextMenuService';
 
     export default {
         components: {
@@ -68,6 +69,10 @@
             }
         },
 
+        mounted() {
+            ContextMenuService.register(this.tag, this.$el);
+        },
+
         methods: {
             favoriteAction($event) {
                 $event.stopPropagation();
@@ -100,6 +105,12 @@
             editAction() {
                 TagManager.editTag(this.tag)
                           .then((t) => {this.tag = t;});
+            }
+        },
+
+        watch: {
+            tag(value) {
+                ContextMenuService.register(value, this.$el);
             }
         }
     };

@@ -5,7 +5,7 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <i class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
+        <i data-item-action="favorite" class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
         <favicon class="favicon" :domain="password.website" :title="getTitle" v-if="isVisible"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
@@ -25,11 +25,11 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" @click="detailsAction()" icon="info" say="Details"/>
-                        <translate tag="li" @click="detailsAction('share')" icon="share-alt" say="Share"/>
-                        <translate tag="li" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
-                        <translate tag="li" @click="cloneAction()" icon="files-o" v-if="password.editable" say="Edit as new"/>
-                        <translate tag="li" @click="moveAction" icon="external-link" v-if="password.editable" say="Move"/>
+                        <translate tag="li" data-item-action="details" @click="detailsAction()" icon="info" say="Details"/>
+                        <translate tag="li" data-item-action="share" @click="detailsAction('share')" icon="share-alt" say="Share"/>
+                        <translate tag="li" data-item-action="edit" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
+                        <translate tag="li" data-item-action="edit-new" @click="cloneAction()" icon="files-o" v-if="password.editable" say="Edit as new"/>
+                        <translate tag="li" data-item-action="move" @click="moveAction" icon="external-link" v-if="password.editable" say="Move"/>
                         <translate tag="li"
                                    v-if="showCopyOptions"
                                    @click="copyAction('password')"
@@ -46,9 +46,9 @@
                                    icon="clipboard"
                                    say="Copy Url"/>
                         <li v-if="password.url">
-                            <translate tag="a" :href="password.url" target="_blank" icon="link" say="Open Url"/>
+                            <translate tag="a" data-item-action="open-url" :href="password.url" target="_blank" icon="link" say="Open Url"/>
                         </li>
-                        <translate tag="li" @click="deleteAction()" icon="trash" say="Delete"/>
+                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash" say="Delete"/>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -70,7 +70,7 @@
     import Favicon from "@vc/Favicon";
     import Events from "@js/Classes/Events";
     import SearchManager from "@js/Manager/SearchManager";
-    import FolderManager from "@js/Manager/FolderManager";
+    import ContextMenuService from "@js/Services/ContextMenuService";
 
     export default {
         components: {
@@ -172,6 +172,10 @@
             }
         },
 
+        mounted() {
+            ContextMenuService.register(this.password, this.$el);
+        },
+
         methods: {
             clickAction($event) {
                 if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
@@ -261,6 +265,12 @@
             openTagAction($event, tag) {
                 $event.stopPropagation();
                 this.$router.push({name: 'Tags', params: {tag: tag}});
+            }
+        },
+
+        watch: {
+            password(value) {
+                ContextMenuService.register(value, this.$el);
             }
         }
     };

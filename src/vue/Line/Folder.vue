@@ -5,7 +5,7 @@
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
          data-drop-type="folder">
-        <i class="fa fa-star favorite" :class="{ active: folder.favorite }" @click="favoriteAction($event)"></i>
+        <i data-item-action="favorite"  class="fa fa-star favorite" :class="{ active: folder.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
@@ -16,9 +16,9 @@
                     <ul>
                         <slot name="menu-top"/>
                         <!-- <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/> -->
-                        <translate tag="li" @click="renameAction()" icon="pencil" say="Rename"/>
-                        <translate tag="li" @click="moveAction" icon="external-link" say="Move"/>
-                        <translate tag="li" @click="deleteAction()" icon="trash" say="Delete"/>
+                        <translate tag="li" data-item-action="edit" @click="renameAction()" icon="pencil" say="Rename"/>
+                        <translate tag="li" data-item-action="move" @click="moveAction" icon="external-link" say="Move"/>
+                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash" say="Delete"/>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -29,12 +29,13 @@
 </template>
 
 <script>
-    import $ from "jquery";
-    import Translate from '@vc/Translate';
-    import DragManager from '@js/Manager/DragManager';
-    import Localisation from "@js/Classes/Localisation";
-    import FolderManager from '@js/Manager/FolderManager';
-    import SearchManager from "@js/Manager/SearchManager";
+    import $                  from "jquery";
+    import Translate          from '@vc/Translate';
+    import DragManager        from '@js/Manager/DragManager';
+    import Localisation       from "@js/Classes/Localisation";
+    import FolderManager      from '@js/Manager/FolderManager';
+    import SearchManager      from "@js/Manager/SearchManager";
+    import ContextMenuService from '@js/Services/ContextMenuService';
 
     export default {
         components: {
@@ -75,6 +76,9 @@
             }
         },
 
+        mounted() {
+            ContextMenuService.register(this.folder, this.$el);
+        },
 
         methods: {
             favoriteAction($event) {
@@ -118,6 +122,12 @@
                                FolderManager.moveFolder(this.folder, data.folderId)
                                             .then((f) => {this.folder = f;});
                            });
+            }
+        },
+
+        watch: {
+            folder(value) {
+                ContextMenuService.register(value, this.$el);
             }
         }
     };
