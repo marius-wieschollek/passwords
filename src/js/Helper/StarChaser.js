@@ -370,7 +370,6 @@ export default class StarChaser {
     }
 
     _destroyPowerUp(powerup) {
-        if(powerup.hit) console.log(powerup);
         powerup.hit = true;
         powerup.speed = 0;
         powerup.timer = setTimeout(() => {

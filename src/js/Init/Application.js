@@ -79,7 +79,6 @@ class Application {
             EventManager.init();
             KeepAliveManager.init();
             AlertManager.init();
-            window.toasts = ToastService;
         }
     }
 

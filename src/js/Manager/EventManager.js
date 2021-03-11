@@ -91,12 +91,12 @@ class EventManager {
             location.reload();
         } else if(e.message) {
             Messages.notification(e.message);
-            console.log(e);
+            console.error(e);
         } else if(e.response) {
             Messages.notification(`${e.response.status} - ${e.response.statusText}`);
-            console.log(e);
+            console.error(e);
         } else {
-            console.log(e);
+            console.error(e);
         }
     }
 }
