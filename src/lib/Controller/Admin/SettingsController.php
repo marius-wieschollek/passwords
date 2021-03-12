@@ -74,7 +74,7 @@ class SettingsController extends ApiController {
      * @throws ApiException
      */
     public function update($id, $value): JSONResponse {
-        if(!empty($value) || ($id === 'survey.server' && $value === "0")) {
+        if(!empty($value) || ($value === "0" && in_array($id, ['survey.server', 'entity.purge.timeout']))) {
             $data = $this->settingsService->set($id, $value);
 
             return new JSONResponse($data);

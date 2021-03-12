@@ -320,7 +320,7 @@ class AdminSettings implements ISettings {
      */
     protected function getPurgeTimeout(): array {
         return [
-            'current' => $this->config->getAppValue('entity/purge/timeout', -1),
+            'current' => (int) $this->config->getAppValue('entity/purge/timeout', -1),
             'options' => [
                 -1       => 'Never',
                 0        => 'Immediately',
