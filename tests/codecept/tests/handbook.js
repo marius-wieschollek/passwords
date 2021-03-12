@@ -58,14 +58,14 @@ Scenario('Show Create Password Dialog', async ({I}) => {
     I.click('#controls > div.breadcrumb > div.passwords-more-menu > span');
     I.waitForVisible('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)', 10);
     I.click('#controls > div.breadcrumb > div.passwords-more-menu > div > ul > li:nth-child(3)');
-    I.waitForElement('#passwords-create-new', 10);
+    I.waitForElement('#passwords-edit-dialog', 10);
     I.fillField('#password-username', 'myuser');
     I.wait(0.5);
     I.fillField('#password-password', 'LongAndStrongPassword');
     I.fillField('#password-label', 'Example Password');
     I.fillField('#password-url', 'https://www.example.com');
-    I.click('#passwords-create-new');
-    I.click('div.foldout-container:nth-child(2) > div:nth-child(1)');
+    I.click('#passwords-edit-dialog');
+    await I.closeAllNotifications();
 
     await I.captureWholePage('password-create', 4);
 });
@@ -212,17 +212,17 @@ Scenario('Show Trash Section', async ({I}) => {
     I.amOnPage('/index.php/apps/passwords/#/tags');
     I.waitForElement('div[data-tag-title="Communication"]', 20);
     I.click('div[data-tag-title="Communication"] > div.more');
-    I.click('div[data-tag-title="Communication"] > div.more > div > ul > li:nth-child(2)');
+    I.click('div[data-tag-title="Communication"] > div.more [data-item-action="delete"]');
     I.click('div[data-tag-title="Shopping"]');
     I.waitForElement('div[data-password-title="Amazon"]', 20);
     I.click('div[data-password-title="Amazon"] > div.more');
-    I.click('div[data-password-title="Amazon"] > div.more > div > ul > li:nth-child(7)');
+    I.click('div[data-password-title="Amazon"] > div.more [data-item-action="delete"]');
 
     I.amOnPage('/index.php/apps/passwords/#/folders');
     I.waitForElement('div[data-folder-title="Work"]', 20);
     I.closeAllNotifications();
     I.click('div[data-folder-title="Work"] > div.more');
-    I.click('div[data-folder-title="Work"] > div.more > div > ul > li:nth-child(2)');
+    I.click('div[data-folder-title="Work"] > div.more [data-item-action="delete"]');
 
     I.amOnPage('/index.php/apps/passwords/#/trash');
     I.waitForElement('div[data-password-title="Amazon"]', 20);
@@ -243,7 +243,7 @@ Scenario('Show Password Details', async ({I}) => {
     I.click('div[data-folder-title="Shopping"]');
     I.waitForElement('div[data-password-title="Amazon"]', 20);
     I.click('div[data-password-title="Amazon"] > div.more');
-    I.click('div[data-password-title="Amazon"] > div.more > div > ul > li:nth-child(1)');
+    I.click('div[data-password-title="Amazon"] > div.more [data-item-action="details"]');
     I.moveCursorTo('#nextcloud', 1, 0);
     I.waitForElement('div.item-details', 10);
     I.waitForInvisible('.image-container .image.loading-hidden', 10);
