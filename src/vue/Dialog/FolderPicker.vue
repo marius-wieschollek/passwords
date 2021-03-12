@@ -9,25 +9,26 @@
   -->
 
 <template>
-    <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close" title="Choose folder">
+    <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close" title="Select a folder">
         <div class="pw-folder-picker" slot="content" v-if="currentFolder !== null">
-            <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder"/>
-            <picker-folder-list :folders="currentFolders" v-on:navigate="openFolder"/>
+            <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder" />
+            <picker-folder-list :folders="currentFolders" :ignored-folders="ignoredFolders" v-on:navigate="openFolder" />
         </div>
-        <div class="pw-folder-picker loading" slot="content" v-else/>
+        <div class="pw-folder-picker loading" slot="content" v-else />
         <div class="buttons" slot="controls" v-if="currentFolder !== null">
-            <translate class="button primary" @click="select" say="Select &quot;{folder}&quot;" :variables="{folder: currentFolder.label}"/>
+            <translate class="button primary" @click="select" say="Select &quot;{folder}&quot;" :variables="{folder: currentFolder.label}" />
         </div>
     </dialog-window>
 </template>
 
 <script>
-    import DialogWindow from "@vue/Dialog/DialogWindow";
-    import Translate from "@vc/Translate";
-    import API from '@js/Helper/api';
-    import Utility from "@js/Classes/Utility";
-    import PickerBreadcrumb from "@vue/Dialog/FolderPicker/PickerBreadcrumb";
-    import PickerFolderList from "@vue/Dialog/FolderPicker/PickerFolderList";
+    import DialogWindow     from '@vue/Dialog/DialogWindow';
+    import Translate        from '@vc/Translate';
+    import API              from '@js/Helper/api';
+    import Utility          from '@js/Classes/Utility';
+    import PickerBreadcrumb from '@vue/Dialog/FolderPicker/PickerBreadcrumb';
+    import PickerFolderList from '@vue/Dialog/FolderPicker/PickerFolderList';
+    import Localisation     from '@js/Classes/Localisation';
 
     export default {
         components: {PickerFolderList, PickerBreadcrumb, Translate, DialogWindow},
@@ -57,7 +58,7 @@
                 let currentFolders = [];
 
                 for(let item of this.folderList) {
-                    if(item.parent === this.currentFolder.id && item.id !== item.parent && this.ignoredFolders.indexOf(item.id) === -1) {
+                    if(item.parent === this.currentFolder.id && item.id !== item.parent) {
                         currentFolders.push(item);
                     }
                 }
@@ -78,6 +79,11 @@
                 this.currentFolder = current;
                 this.folderList = Utility.objectToArray(current.folders);
                 this.folderList = Utility.objectToArray(await API.listFolders());
+                this.folderList.push({
+                                         id    : '00000000-0000-0000-0000-000000000000',
+                                         parent: '00000000-0000-0000-0000-000000000000',
+                                         label : Localisation.translate('Home')
+                                     });
             },
             openFolder(folder) {
                 this.currentFolder = folder;

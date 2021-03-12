@@ -1,6 +1,7 @@
 {
     "translations": {
         "Passwords"                                                                                 : "Passwörter",
+        "Home"                                                                                      : "Hauptordner",
         "HTTPS Required"                                                                            : "HTTPS erforderlich",
         "reload this page"                                                                          : "mit HTTPS aufzurufen",
         "forum"                                                                                     : "Forum",

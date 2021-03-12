@@ -8,19 +8,20 @@
 namespace OCA\Passwords\Services\Object;
 
 use Exception;
-use OCA\Passwords\Db\EntityInterface;
+use OCP\IL10N;
+use OCP\AppFramework\Db\Entity;
 use OCA\Passwords\Db\FolderRevision;
-use OCA\Passwords\Db\FolderRevisionMapper;
+use OCA\Passwords\Db\EntityInterface;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
-use OCA\Passwords\Services\EncryptionService;
-use OCA\Passwords\Services\EnvironmentService;
-use OCA\Passwords\Services\ValidationService;
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
-use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCA\Passwords\Db\FolderRevisionMapper;
+use OCA\Passwords\Services\EncryptionService;
+use OCA\Passwords\Services\ValidationService;
+use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class FolderRevisionService
@@ -35,10 +36,15 @@ class FolderRevisionService extends AbstractRevisionService {
      * @var string
      */
     protected string $class = FolderRevision::class;
+    /**
+     * @var IL10N
+     */
+    protected IL10N $l10n;
 
     /**
      * FolderRevisionService constructor.
      *
+     * @param IL10N                $l10n
      * @param UuidHelper           $uuidHelper
      * @param IEventDispatcher     $eventDispatcher
      * @param EnvironmentService   $environment
@@ -47,6 +53,7 @@ class FolderRevisionService extends AbstractRevisionService {
      * @param EncryptionService    $encryption
      */
     public function __construct(
+        IL10N $l10n,
         UuidHelper $uuidHelper,
         IEventDispatcher $eventDispatcher,
         EnvironmentService $environment,
@@ -55,6 +62,7 @@ class FolderRevisionService extends AbstractRevisionService {
         EncryptionService $encryption
     ) {
         parent::__construct($uuidHelper, $eventDispatcher, $environment, $revisionMapper, $validationService, $encryption);
+        $this->l10n = $l10n;
     }
 
     /**
@@ -93,7 +101,7 @@ class FolderRevisionService extends AbstractRevisionService {
     public function getBaseRevision(): FolderRevision {
         $model = $this->createModel(
             FolderService::BASE_FOLDER_UUID,
-            'Home',
+            $this->l10n->t('Home'),
             FolderService::BASE_FOLDER_UUID,
             '',
             EncryptionService::DEFAULT_CSE_ENCRYPTION,
@@ -150,8 +158,9 @@ class FolderRevisionService extends AbstractRevisionService {
      * @throws Exception
      */
     public function save(EntityInterface $model): EntityInterface {
-        if($model->getUuid() === self::BASE_REVISION_UUID ||
-           $model->getModel() === FolderService::BASE_FOLDER_UUID) {
+        if(
+            $model->getUuid() === self::BASE_REVISION_UUID ||
+            $model->getModel() === FolderService::BASE_FOLDER_UUID) {
             return $model;
         }
 
