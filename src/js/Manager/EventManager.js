@@ -92,7 +92,7 @@ class EventManager {
         } else if(e.message) {
             Messages.notification(e.message);
             console.error(e);
-        } else if(e.response) {
+        } else if(e.response && (!e.response.url || e.response.url.indexOf('service/favicon') === -1)) {
             Messages.notification(`${e.response.status} - ${e.response.statusText}`);
             console.error(e);
         } else {
