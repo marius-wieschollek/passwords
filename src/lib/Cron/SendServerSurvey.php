@@ -111,7 +111,7 @@ class SendServerSurvey extends AbstractTimedJob {
      */
     protected function sendNotifications(): void {
         $time = $this->config->getAppValue('survey/server/notification', 0);
-        if($time > strtotime('-3 months')) return;
+        if($time > strtotime('-6 months')) return;
 
         foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendSurveyNotification($admin->getUID());
