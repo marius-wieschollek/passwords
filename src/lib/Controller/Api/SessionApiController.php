@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\User\UserLoginAttemptHelper;
 use OCA\Passwords\Helper\User\UserTokenHelper;
+use OCA\Passwords\Services\DeferredActivationService;
 use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\UserChallengeService;
@@ -51,26 +52,33 @@ class SessionApiController extends AbstractApiController {
      * @var UserLoginAttemptHelper
      */
     protected UserLoginAttemptHelper $loginAttempts;
+    /**
+     * @var DeferredActivationService
+     */
+    protected DeferredActivationService $das;
 
     /**
      * SessionApiController constructor.
      *
-     * @param IRequest               $request
-     * @param SessionService         $session
-     * @param UserTokenHelper        $tokenHelper
-     * @param KeychainService        $keychainService
-     * @param UserLoginAttemptHelper $loginAttempts
-     * @param UserChallengeService   $challengeService
+     * @param IRequest                  $request
+     * @param SessionService            $session
+     * @param UserTokenHelper           $tokenHelper
+     * @param DeferredActivationService $das
+     * @param KeychainService           $keychainService
+     * @param UserLoginAttemptHelper    $loginAttempts
+     * @param UserChallengeService      $challengeService
      */
     public function __construct(
         IRequest $request,
         SessionService $session,
         UserTokenHelper $tokenHelper,
+        DeferredActivationService $das,
         KeychainService $keychainService,
         UserLoginAttemptHelper $loginAttempts,
         UserChallengeService $challengeService
     ) {
         parent::__construct($request);
+        $this->das              = $das;
         $this->session          = $session;
         $this->tokenHelper      = $tokenHelper;
         $this->loginAttempts    = $loginAttempts;
@@ -176,6 +184,7 @@ class SessionApiController extends AbstractApiController {
     protected function verifyToken($parameters): void {
         if($this->challengeService->hasChallenge() && $this->tokenHelper->hasToken()) {
             if(!isset($parameters['token'])) {
+                if(!$this->das->check('two-factor-required', true)) return;
                 $this->loginAttempts->registerFailedAttempt();
                 throw new ApiException('Token invalid', Http::STATUS_UNAUTHORIZED);
             }
