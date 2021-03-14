@@ -5,7 +5,7 @@
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
          data-drop-type="folder">
-        <i data-item-action="favorite"  class="fa fa-star favorite" :class="{ active: folder.favorite }" @click="favoriteAction($event)"></i>
+        <i data-item-action="favorite" class="fa fa-star favorite" :class="{ active: folder.favorite }" @click="favoriteAction($event)"></i>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-    import $                  from "jquery";
-    import Translate          from '@vc/Translate';
-    import DragManager        from '@js/Manager/DragManager';
-    import Localisation       from "@js/Classes/Localisation";
-    import FolderManager      from '@js/Manager/FolderManager';
-    import SearchManager      from "@js/Manager/SearchManager";
+    import $ from "jquery";
+    import Translate from '@vc/Translate';
+    import DragManager from '@js/Manager/DragManager';
+    import Localisation from "@js/Classes/Localisation";
+    import FolderManager from '@js/Manager/FolderManager';
+    import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
 
     export default {
@@ -59,7 +59,7 @@
                 return Localisation.formatDate(this.folder.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.folder.edited, 'long')});
+                return Localisation.translate('Last modified on {date}', {date: Localisation.formatDate(this.folder.edited, 'long')});
             },
             className() {
                 let classNames = 'row folder';
@@ -117,11 +117,17 @@
                              .then((f) => {this.folder = f;});
             },
             dragStartAction($e) {
-                DragManager.start($e, this.folder.label, this.folder.icon, ['folder'])
-                           .then((data) => {
-                               FolderManager.moveFolder(this.folder, data.folderId)
-                                            .then((f) => {this.folder = f;});
-                           });
+                DragManager
+                    .start($e, this.folder)
+                    .then((data) => {
+                        if(data.dropType === 'folder') {
+                            FolderManager
+                                .moveFolder(this.folder, data.folderId)
+                                .then((f) => {this.folder = f;});
+                        } else if(data.dropType === 'trash') {
+                            FolderManager.deleteFolder(this.folder);
+                        }
+                    });
             }
         },
 
@@ -134,14 +140,14 @@
 </script>
 
 <style lang="scss">
-    #app-content {
-        .item-list {
-            .row.folder {
-                .favicon {
-                    background-size : 32px;
-                }
+#app-content {
+    .item-list {
+        .row.folder {
+            .favicon {
+                background-size : 32px;
             }
         }
     }
+}
 
 </style>

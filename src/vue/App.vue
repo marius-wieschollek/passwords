@@ -47,7 +47,7 @@
             <ul class="menu-secondary">
                 <session-timeout v-if="!isMobile" />
                 <li>
-                    <router-link :to="{ name: 'Trash'}" active-class="active">
+                    <router-link :to="{ name: 'Trash'}" active-class="active" data-drop-type="trash">
                         <translate say="Trash" icon="trash" />
                     </router-link>
                 </li>

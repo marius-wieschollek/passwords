@@ -256,11 +256,17 @@
                 PasswordManager.movePassword(this.password);
             },
             dragStartAction($e) {
-                DragManager.start($e, this.password.label, this.password.icon, ['folder'])
-                           .then((data) => {
-                               PasswordManager.movePassword(this.password, data.folderId)
-                                              .then((p) => {this.password = p;});
-                           });
+                DragManager
+                    .start($e, this.password)
+                    .then((data) => {
+                        if(data.dropType === 'folder') {
+                            PasswordManager
+                                .movePassword(this.password, data.folderId)
+                                .then((p) => {this.password = p;});
+                        } else if(data.dropType === 'trash') {
+                            PasswordManager.deletePassword(this.password);
+                        }
+                    });
             },
             openTagAction($event, tag) {
                 $event.stopPropagation();

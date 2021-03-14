@@ -14,6 +14,21 @@ export default new class FaviconService {
     }
 
     /**
+     * Return icon if in cache, otherwise return default icon
+     *
+     * @param {String} domain
+     * @param {Number} size
+     * @return {Promise<String>}
+     */
+    get(domain, size = 32) {
+        if(this._favicons.hasOwnProperty(`${domain}_${size}`)) {
+            return this._favicons[`${domain}_${size}`];
+        }
+
+        return SettingsService.get('server.theme.app.icon');
+    }
+
+    /**
      *
      * @param {String} domain
      * @param {Number} size
@@ -65,7 +80,7 @@ export default new class FaviconService {
             let favicon = await API.getFavicon(domain, size);
             delete this._requests[`${domain}_${size}`];
 
-            if(favicon.type.substr(0,6) !== 'image/' || favicon.size < 1) {
+            if(favicon.type.substr(0, 6) !== 'image/' || favicon.size < 1) {
                 return SettingsService.get('server.theme.app.icon');
             }
 
