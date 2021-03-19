@@ -104,7 +104,7 @@ class SessionApiController extends AbstractApiController {
             if($this->challengeService->hasChallenge()) {
                 $requirements->challenge = $this->challengeService->getChallengeData();
 
-                if($this->tokenHelper->hasToken() && !$this->das->check('two-factor-enabled', true)) {
+                if($this->tokenHelper->hasToken() && $this->das->check('two-factor-enabled', true)) {
                     $requirements->token = $this->tokenHelper->getProvidersAsArray();
                 }
             }
