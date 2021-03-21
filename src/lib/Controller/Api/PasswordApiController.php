@@ -241,7 +241,11 @@ class PasswordApiController extends AbstractObjectApiController {
         if($revision->getHash() !== $oldRevision->getHash()) {
             if($edited < 1 || $revision->getEdited() === $oldRevision->getEdited()) $revision->setEdited(time());
         } else {
-            $revision->setEdited($oldRevision->getEdited());
+            if($edited > 0) {
+                $revision->setEdited($edited);
+            } else {
+                $revision->setEdited($oldRevision->getEdited());
+            }
         }
 
         if($model->hasShares() || $model->getShareId() || !$model->isEditable()) {
