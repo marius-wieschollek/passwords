@@ -13,8 +13,6 @@ jobs:
         with:
           github-token: ${{ github.token }}
           issue-lock-inactive-days: 14
-          issue-lock-comment: This issue has been locked automatically since there was no recent activity after it was closed.
           issue-lock-reason: resolved
           pr-lock-inactive-days: 14
-          pr-lock-comment: This pull request has been locked automatically since there was no recent activity after it was closed.
           pr-lock-reason: resolved
