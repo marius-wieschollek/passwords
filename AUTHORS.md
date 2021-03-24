@@ -1,6 +1,5 @@
 # Authors
-
- - Marius Wieschollek <passwords.public@mdns.eu>
+ - [Marius Wieschollek](https://github.com/marius-wieschollek)
 
 ## Contributors
  - [e-alfred](https://github.com/e-alfred)
