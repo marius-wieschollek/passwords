@@ -106,7 +106,7 @@ class ConnectController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @UserRateThrottle(limit=2, period=60)
+     * @UserRateThrottle(limit=4, period=60)
      *
      * @return JSONResponse
      */
@@ -180,6 +180,8 @@ class ConnectController extends Controller {
 
         $registration->setStatus(3);
         $this->registrationService->save($registration);
+        $this->session->unset(self::SESSION_KEY);
+        $this->session->save();
 
         return new JSONResponse(['success' => true]);
     }
@@ -222,7 +224,7 @@ class ConnectController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      *
-     * @UserRateThrottle(limit=2, period=60)
+     * @UserRateThrottle(limit=3, period=60)
      *
      * @param string $id
      * @param array  $codes
@@ -296,6 +298,8 @@ class ConnectController extends Controller {
             try {
                 $registration = $this->registrationService->findByUuid($id);
                 $this->registrationService->destroy($registration);
+                $this->session->unset(self::SESSION_KEY);
+                $this->session->save();
             } catch(Throwable $e) {
             }
         }
