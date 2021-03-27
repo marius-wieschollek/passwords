@@ -329,6 +329,7 @@ class ConnectController extends Controller {
                 $registration = $this->registrationService->findByUuid($id);
                 $this->registrationService->destroy($registration);
                 $this->session->unset(self::SESSION_KEY);
+                $this->session->save();
             } catch(Throwable $e) {
                 $this->logger->logException($e);
             }
