@@ -3,6 +3,7 @@
 - New password form
 - Move functionality for passwords and folders
 - Right click menu
+- Translation for pt_BR
 
 ## 2021.3.0 - Feature release
 ### Added
