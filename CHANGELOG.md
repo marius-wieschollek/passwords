@@ -56,6 +56,24 @@
 - Nextcloud 17, 18 and 19 support
 - PHP 7.2 and PHP 7.3 support
 
+## 2020.12.3 - Bugfix release
+### Fixed
+- Recursion in folder path
+- E2E password length requirement
+- Handbook url
+- Invalid custom fields array
+- Low strength password generation
+- KeePassX import mapping issue
+- Error messages caused by expired PassLink request
+- Outdated besticon guide url
+
+## 2020.12.2 - Bugfix release
+### Fixed
+- Invalid type in custom fields
+- Bad contrast on QR codes
+- Backup password field remains readonly
+- Skip broken tags in Passman import
+
 ## 2020.12.1 - Bugfix release
 ### Changed
 - Improved swedish translations
