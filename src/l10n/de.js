@@ -233,6 +233,7 @@
             'Select a folder'                     : 'Wähle einen Ordner',
             'Select "{folder}"'                   : '"{folder}" wählen',
             '{label} can\'t be used'              : '{label} kann nicht verwendet werden',
+            '"{folder}" contains no folders'      : '"{folder}" hat keine Unterordner',
             'Home'                                : 'Hauptordner',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',

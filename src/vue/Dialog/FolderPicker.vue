@@ -12,7 +12,7 @@
     <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close" title="Select a folder">
         <div class="pw-folder-picker" slot="content" v-if="currentFolder !== null">
             <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder" />
-            <picker-folder-list :folders="currentFolders" :ignored-folders="ignoredFolders" v-on:navigate="openFolder" />
+            <picker-folder-list :current="currentFolder" :folders="currentFolders" :ignored-folders="ignoredFolders" v-on:navigate="openFolder" />
         </div>
         <div class="pw-folder-picker loading" slot="content" v-else />
         <div class="buttons" slot="controls" v-if="currentFolder !== null">

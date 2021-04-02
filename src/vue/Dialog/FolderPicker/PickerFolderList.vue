@@ -12,7 +12,7 @@
     <ul class="folder-picker-list" v-if="folders.length" :style="style">
         <li v-for="item in items" :key="item.id" @click="navigate(item)" :class="{disabled: !item.enabled}" :title="item.title">{{ item.label }}</li>
     </ul>
-    <translate class="folder-picker-empty" say="No content" v-else />
+    <translate class="folder-picker-empty" say="&quot;{folder}&quot; contains no folders" :variables="{folder: current.label}" v-else />
 </template>
 
 <script>
@@ -23,6 +23,7 @@
     export default {
         components: {Translate},
         props     : {
+            current: Object,
             folders       : Array,
             ignoredFolders: Array
         },

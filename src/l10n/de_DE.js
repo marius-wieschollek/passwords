@@ -234,6 +234,7 @@
             'Select "{folder}"'                   : 'Mit "{folder}" fortfahren',
             '{label} can\'t be used'              : '{label} kann nicht verwendet werden',
             'Home'                                : 'Hauptordner',
+            '"{folder}" contains no folders'      : '"{folder}" enthält keine Unterordner',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
             'true'                                : 'ja',
