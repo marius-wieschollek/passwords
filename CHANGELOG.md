@@ -2,8 +2,13 @@
 ## 2020.12.3 - Bugfix release
 ### Fixed
 - Recursion in folder path
-- e2e password length requirement
+- E2E password length requirement
 - Handbook url
+- Invalid custom fields array
+- Low strength password generation
+- KeePassX import mapping issue
+- Error messages caused by expired PassLink request
+- Outdated besticon guide url
 
 ## 2020.12.2 - Bugfix release
 ### Fixed
