@@ -203,6 +203,7 @@ class ConnectController extends Controller {
         $registration->setStatus(3);
         $this->registrationService->save($registration);
         $this->session->unset(self::SESSION_KEY);
+        $this->session->save();
 
         return new JSONResponse(['success' => true]);
     }
