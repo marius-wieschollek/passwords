@@ -246,6 +246,42 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             </div>
         <?php endforeach; ?>
     </form>
+
+    <form>
+        <h3>
+            <?php p($l->t('Domain mappings')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
+
+        <div class="area mappings">
+            <label for="passwords-urlmapping-default-enabled"><?php p($l->t('Include default domain list in search')); ?></label>
+            <input id="passwords-urlmapping-default-enabled" data-setting="domain.mapping.default.enabled" type="checkbox" <?=$_['useDefaultMapping'] ? 'checked':''?>>
+        </div>
+        <h4><?php p($l->t('Default domain mapping list')); ?></h4>
+        <div class="area-table">
+            <table>        
+                <tbody>
+                    <?php
+                        if (is_array($_['defaultMapping'])) {
+                            foreach ( $_['defaultMapping'] as $array_id => $value ) {
+                                echo '<tr><td><input value="' . implode(" ", array_values($value)) . '" type="text" disabled="true"></td></tr>' . "\n\n";
+                            }
+                        } else {
+                            echo '<tr><td colspan="2">Nothing to display :(</td></tr>';
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <h4><?php p($l->t('Custom domain mapping list')); ?></h4>
+        <div class="area-table">
+            <?php echo '<div id="domain-mapping-custom" style="display: none;">' . $_['customMapping'] . '</div>'?>
+            <table>        
+                <tbody id="domain-mapping-table"></tbody>
+            </table>
+        </div>
+    </form>
 </section>
 <footer class="section passwords">
     <?php print_unescaped($footerMessage); ?>

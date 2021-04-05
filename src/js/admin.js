@@ -59,6 +59,13 @@ class PasswordsAdminSettings {
             () => { PasswordsAdminSettings._updateApiField('preview'); }
         );
 
+        var mapping = document.getElementById('domain-mapping-custom').childNodes[0]
+        mapping = JSON.parse(mapping.data);
+        mapping.data.forEach(element => {
+            this._addLineToTable(element.join(' '));
+        });
+        this._addLineToTable();
+
         PasswordsAdminSettings._updateApiField('favicon');
         PasswordsAdminSettings._updateApiField('preview');
     }
@@ -133,6 +140,74 @@ class PasswordsAdminSettings {
             $apiInput.attr('data-setting', data.key);
             $apiInput.val(data.value);
         }
+    }
+
+    /**
+     * Save domain mapping settings back to settings
+     *
+     * @private
+     */
+    _onChangeCustomDomainMapping() {
+        var result = [];
+        for (var i = 0; i < $('.domain-mapping-custom').length; i++) { 
+           var element = $('.domain-mapping-custom').eq(i);
+
+           if(element.val() === "") {
+               element.remove();
+           } else {
+               var mapping = element.val().split(' ').filter(function (el) {
+                    return el != null && el !== "";
+                });
+                result.push(mapping);
+           }
+        }
+        this._addLineToTable();
+        this.api.set('domain.mapping.custom', JSON.stringify({data: result}))
+            .then((d) => {
+                this._showMessage('saved', `[id="domain-mapping-table"]`);
+            })
+            .catch((d) => {
+                this._showMessage('error', `[id="domain-mapping-table"]`);
+                if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+            });
+    }
+
+    /**
+     * Add a new line to the custom domain mapping table
+     *
+     * @param value
+     * @private
+     */
+    _addLineToTable(value = "") {
+        var table = document.getElementById('domain-mapping-table');
+        
+        var input = document.createElement("input");
+        input.type = "text";
+        input.className = "domain-mapping-custom";
+        input.value = value;
+        this._addDomainMappingEventListener(input);
+
+        var td = document.createElement("td");
+        td.appendChild(input);
+
+        var tr = document.createElement("tr");
+        tr.appendChild(td);
+
+        table.appendChild(tr);
+    }
+
+    /**
+     * Add event to custom domain mapping input fields
+     *
+     * @param value
+     * @private
+     */
+    _addDomainMappingEventListener(element) {
+      //  $('.domain-mapping-custom').off('change');
+        $(element).on(
+            'change',
+            () => { this._onChangeCustomDomainMapping(); }
+        );
     }
 }
 
