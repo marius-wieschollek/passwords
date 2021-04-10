@@ -19,7 +19,7 @@
 <script>
     export default {
         props: {
-            value: String
+            value: [String, Number, Boolean]
         },
 
         data() {

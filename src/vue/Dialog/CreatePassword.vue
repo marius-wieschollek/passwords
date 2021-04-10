@@ -11,6 +11,7 @@
                 <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
                 <folder-field v-model="password.folder" />
                 <tags-field v-model="password.tags" v-if="false"/>
+                <checkbox-field v-model="password.hidden" id="hidden" label="Hidden password" checkbox-label="Don't show this password anywhere" icon="eye-slash" v-if="showHidden"/>
 
                 <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
                 <new-custom-field @create="addCustomField" v-if="canAddField"/>
@@ -46,9 +47,11 @@
     import FolderField from "@vue/Dialog/CreatePassword/FolderField";
     import DialogWindow from "@vue/Dialog/DialogWindow";
     import TagsField from "@vue/Dialog/CreatePassword/TagsField";
+    import CheckboxField from "@vue/Dialog/CreatePassword/CheckboxField";
 
     export default {
         components: {
+            CheckboxField,
             TagsField,
             DialogWindow,
             FolderField,
@@ -85,7 +88,7 @@
 
         data() {
             let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-                password    = Object.assign({cseType, notes: '', favorite: false, customFields: []}, this.properties),
+                password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], hidden:false}, this.properties),
                 dragService = new CustomFieldsDragService(password);
 
             return {password, dragService};
@@ -94,6 +97,9 @@
         computed: {
             canAddField() {
                 return this.password.customFields.length < 20;
+            },
+            showHidden() {
+                return this.properties && this.properties.hidden;
             }
         },
 

@@ -50,6 +50,8 @@
             'Mark as favorite'                    : 'Zu den Favoriten hinzufügen',
             'Encryption'                          : 'Verschlüsselung',
             'On the server'                       : 'Auf dem Server',
+            'Hidden password'                     : 'Verstecktes Passwort',
+            'Don\'t show this password anywhere'  : 'Dieses Passwort nicht anzeigen',
             'Secret'                              : 'Geheimnis',
             'Text'                                : 'Text',
             'File'                                : 'Datei',
