@@ -47,8 +47,12 @@
         display : none;
     }
 
-    .area-input .fa-check-square {
-        color : var(--color-primary);
+    .area-input label {
+        cursor : pointer;
+
+        .fa-check-square {
+            color : var(--color-primary);
+        }
     }
 }
 </style>
