@@ -34,6 +34,9 @@
             'Password'                            : 'Passwort',
             'Username'                            : 'Benutzer',
             'Website'                             : 'Webseite',
+            'What did you expect?'                : 'Was haben Sie erwartet?',
+            'Click to show the QR code.'          : 'Klicken, um den QR Code anzuzeigen',
+            'Don\'t warn me again'                : 'Diese Warnung abschalten',
             'Add Tags...'                         : 'Tags hinzufügen...',
             'Color'                               : 'Farbe',
             'Name'                                : 'Name',
@@ -252,7 +255,8 @@
             'You will be logged out in {time} seconds'                        : 'Sie werden in {time} Sekunden ausgeloggt',
             'You may have requested too many tokens. Please try again later.' : 'Sie haben zu viele Tokens angefragt. Bitte versuchen Sie es später erneut.',
             'Choose the encryption type for this password'                    : 'Wählen Sie die Verschlüsselungsart für dieses Passwort',
-            'Do you want to delete the field "{field}"?'                      : 'Möchten Sie das Feld "{field}" löschen?'
+            'Do you want to delete the field "{field}"?'                      : 'Möchten Sie das Feld "{field}" löschen?',
+            'Make sure this QR code is only visible to people you trust.'     : 'Stelln Sie sicher, dass dieser QR Code nur für Berechtigte sichtbar ist.'
         },
         longTexts    = {
             'End-to-End encryption will be disabled for this password if you share it.'                : 'Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn Sie das Passwort teilen',

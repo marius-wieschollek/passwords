@@ -10,6 +10,7 @@ class SettingsService {
         this._defaults = {
             'local.ui.sort.ascending'            : true,
             'local.ui.sort.field'                : 'label',
+            'local.sharing.qrcode.warning'       : true,
             'client.ui.section.default'          : 'folders',
             'client.ui.password.field.title'     : 'label',
             'client.ui.password.field.sorting'   : 'byTitle',
