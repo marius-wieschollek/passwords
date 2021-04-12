@@ -8,12 +8,14 @@
 namespace OCA\Passwords\Command;
 
 use Exception;
-use OCA\Passwords\Helper\User\DeleteUserDataHelper;
-use OCA\Passwords\Services\BackgroundJobService;
-use OCA\Passwords\Services\ConfigurationService;
 use OCP\IUserManager;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\BackgroundJobService;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Input\InputArgument;
+use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -79,7 +81,7 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
      */
     protected function execute(InputInterface $input, OutputInterface $output): int {
         parent::execute($input, $output);
-        $userId = $input->getArgument('user');
+        $userId = $this->getUserId($input, $output);
         if($this->confirmDelete($input, $output, $userId)) {
             $output->write('Deleting data ...');
             $this->deleteUserData->deleteUserData($userId);
@@ -107,4 +109,46 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
         return $this->requestConfirmation($input, $output, 'This command will delete all data from "'.$userName.'"');
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return string
+     */
+    protected function getUserId(InputInterface $input, OutputInterface $output): string {
+        $userId = $input->getArgument('user');
+        $user = $this->userManager->get($userId);
+
+        if($user === null) {
+            $output->write(
+                [
+                    'Found no user for id "'.$userId.'" in database, will continue with provided user id.',
+                    'If you are sure that the user was not deleted and should exist, you might have the wrong id.',
+                    ''
+                ],
+                true
+            );
+        } else if($user->getUID() !== $userId) {
+            $output->writeln('❗❗❗ Found user "'.$user->getDisplayName().'" for user id "'.$userId.'" but it has the id "'.$user->getUID().'" instead ❗❗❗');
+            if(!$input->isInteractive()) {
+                $output->writeln(['ignoring', '']);
+                return $userId;
+            }
+
+            /** @var QuestionHelper $helper */
+            $helper = $this->getHelper('question');
+            $question = new Question('Type "change" to change the user id to "'.$user->getUID().'": ');
+            $response = $helper->ask($input, $output, $question);
+
+            if($response !== 'change') {
+                $output->writeln(['Changed user id to '.$user->getUID(), '']);
+
+                return $user->getUID();
+            }
+
+            $output->writeln(['Continuing with '.$userId, '']);
+        }
+
+        return $userId;
+    }
 }
