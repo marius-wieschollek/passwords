@@ -169,7 +169,7 @@
         "Your installed version will continue to work regardless and you can still use it as it is.": "Die installierte Version wird nach wie vor funktionieren und du kannst sie so wie bisher verwenden.",
         "More information"                                                                          : "Mehr Informationen",
         "View insecure passwords"                                                                   : "Zeige unsichere Passwörter",
-        "Open settings"                                                                             : "Einstelungen öffnen",
+        "Open settings"                                                                             : "Einstellungen öffnen",
         "Open passwords"                                                                            : "Passwörter öffnen",
         "View apps"                                                                                 : "Apps anzeigen",
         "View apps & devices"                                                                       : "Apps & Geräte anzeigen",
@@ -181,7 +181,8 @@
         "A new client or app was connected to your account"                                         : "Eine neue App wurde mit deinem Konto verknüpft",
         "\"%s\" was granted access to your %s Passwords account via PassLink."                      : "\"%s\" wurde Zugriff auf dein %s Passwörter Konto mittels PassLink gewährt.",
         "You can manage all connected devices and apps in your %s settings in the security section.": "Du kannst alle verknüpften Geräte und Apps in den %s Einstellungen im Bereich \"Sicherheit\" verwalten.",
-        "Background jobs are run with PHP %1$s, the webserver uses PHP %2$s. This may cause issues.": "Hintergrundaufgaben werden mit PHP %1$s ausgeführt, der Webserver verwendet aber %2$s. Dies kann Probleme verursachen."
+        "The last background job was executed with PHP %1$s, but the webserver uses PHP %2$s."      : "Die letzte Hintergrundaufgabe wurde mit PHP %1$s ausgeführt, der Webserver verwendet jedoch %2$s.",
+        "Using different major versions of PHP may cause issues."                                   : "Die Verwendung verschiedener Hauptversionen von PHP kann Probleme verursachen."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

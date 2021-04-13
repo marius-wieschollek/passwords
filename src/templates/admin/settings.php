@@ -67,7 +67,8 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     <?php endif; ?>
     <?php if($_['support']['cronPhp']['isDifferent']): ?>
         <div class="message warn">
-            <?php p($l->t('Background jobs are run with PHP %1$s, the webserver uses PHP %2$s. This may cause issues.', [$_['support']['cronPhp']['cronVersion'], $_['support']['cronPhp']['webVersion']])); ?>
+            <?php p($l->t('The last background job was executed with PHP %1$s, but the webserver uses PHP %2$s.', [$_['support']['cronPhp']['cronVersion'], $_['support']['cronPhp']['webVersion']])); ?>
+            <?php p($l->t('Using different major versions of PHP may cause issues.')); ?>
         </div>
     <?php endif; ?>
     <?php if($_['support']['server']['warn'] && !$_['support']['server']['error']): ?>

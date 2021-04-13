@@ -180,8 +180,7 @@
         "To install the current version, Nextcloud %s and PHP %s are necessary."                    : "Para instalar a versão atual, Nextcloud %s e PHP %s são necessários.",
         "A new client or app was connected to your account"                                         : "Um novo cliente ou aplicativo foi conectado à sua conta",
         "\"%s\" was granted access to your %s Passwords account via PassLink."                      : "\"%s\" recebeu acesso à sua conta %s Passwords através do PassLink.",
-        "You can manage all connected devices and apps in your %s settings in the security section.": "Você pode gerenciar todos os dispositivos e aplicativos conectados nas configurações do %s na seção de segurança.",
-        "Background jobs are run with PHP %1$s, the webserver uses PHP %2$s. This may cause issues.": "Trabalhos em segundo plano são executados com PHP %1$s, o servidor web usa PHP %2$s. Isso pode causar problemas."
+        "You can manage all connected devices and apps in your %s settings in the security section.": "Você pode gerenciar todos os dispositivos e aplicativos conectados nas configurações do %s na seção de segurança."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
