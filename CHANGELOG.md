@@ -1,5 +1,9 @@
 ## [Unreleased]
 ### Added
+- Warning for sharing qr code
+
+## 2021.4.0 - Feature release
+### Added
 - New password form
 - Move functionality for passwords and folders
 - Right click menu
