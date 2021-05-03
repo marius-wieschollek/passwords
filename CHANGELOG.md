@@ -1,6 +1,9 @@
 ## [Unreleased]
+
+## 2021.5.0 - Feature release
 ### Added
 - Warning for sharing qr code
+- Allow unhiding of hidden passwords in edit form
 
 ## 2021.4.0 - Feature release
 ### Added
