@@ -51,6 +51,9 @@ class ValidationService {
         if(empty($password->getLabel())) {
             throw new ApiException('Field "label" can not be empty', 400);
         }
+        if(empty($password->getPassword())) {
+            throw new ApiException('Field "password" can not be empty', 400);
+        }
         if(empty($password->getHash()) || !preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
             throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }

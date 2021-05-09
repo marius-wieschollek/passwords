@@ -170,12 +170,34 @@ class ValidatePasswordTest extends TestCase {
      * @throws Exception
      * @throws InvalidArgumentException
      */
+    public function testValidatePasswordEmptyPassword() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+
+        try {
+            $this->validationService->validatePassword($mock);
+            $this->fail("Expected exception");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('2cf30fe7', $e->getId());
+            $this->assertEquals('Field "password" can not be empty', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testValidatePasswordEmptyHash() {
         $mock = $this->getPasswordMock();
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
 
         try {
             $this->validationService->validatePassword($mock);
@@ -197,6 +219,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn('hash');
 
         try {
@@ -222,6 +245,7 @@ class ValidatePasswordTest extends TestCase {
 
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(sha1('hash'));
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
         $mock->method('getStatus')->willReturn(2);
@@ -244,6 +268,7 @@ class ValidatePasswordTest extends TestCase {
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(sha1('hash'));
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
         $mock->method('getStatus')->willReturn(2);
@@ -263,6 +288,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(sha1('hash'));
         $mock->method('getFolder')->willReturn('1-2-3');
         $mock->method('getStatus')->willReturn(2);
@@ -282,6 +308,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(sha1('hash'));
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
         $mock->method('getStatus')->willReturn(2);
@@ -301,6 +328,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(sha1('hash'));
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
         $mock->method('getStatus')->willReturn(2);
@@ -343,6 +371,7 @@ class ValidatePasswordTest extends TestCase {
                              'setCseType',
                              'getCseKey',
                              'getLabel',
+                             'getPassword',
                              'getHash',
                              'getFolder',
                              'setFolder',
