@@ -11,7 +11,7 @@
 <template>
     <div class="appstore-item appstore-grid-item">
         <h3>{{ item.label }}</h3>
-        <app-info-bar :item="item" />
+        <app-info-bar :item="item"/>
         <div class="details">
             <img :src="item.logo" alt="">
             <p class="description">
@@ -19,7 +19,7 @@
                 <web target="_blank" :href="item.links.homepage" icon="external-link" text="learn more" v-if="item.links.homepage"/>
             </p>
         </div>
-        <app-buttons :item="item" />
+        <app-buttons :item="item"/>
     </div>
 </template>
 
@@ -92,6 +92,10 @@
             text-align  : center;
             line-height : normal;
         }
+    }
+
+    @media (max-width : $width-1366) {
+        margin-right : calc(.5rem - 1px);
     }
 
     @media (max-width : $width-extra-small) {
