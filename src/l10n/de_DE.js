@@ -240,6 +240,7 @@
             '{label} can\'t be used'              : '{label} kann nicht verwendet werden',
             'Home'                                : 'Hauptordner',
             '"{folder}" contains no folders'      : '"{folder}" enthält keine Unterordner',
+            'Passwords App Encryption Passphrase' : 'Verschlüsselungspassphrase der Passwörter-App',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
             'true'                                : 'ja',
@@ -264,11 +265,14 @@
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen.',
             'The encryption applied by the server before storing the data in the database'             : 'Diese Verschlüsselung wurde vom Server vor dem Speichern in der Datenbank angewandt',
             'The encryption applied by the client before sending the data to the server'               : 'Diese Verschlüsselung wurde auf dem Endgerät angewandt bevor die Daten an den Server gesendet wurden'
+        },
+        notes        = {
+            'This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook.': 'Dies ist eine Kopie der Passphrase die Sie für die Verschlüsselung gewählt haben. Änderungen an diesem Eintrag haben keine Auswirkungen auf die Verschlüsselung. Die Passphrase kann in den Einstellungen geändert werden. Weitere Informationen finden Sie im Handbuch.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts),
+        Object.assign(translations, helpTexts, longTexts, notes),
         'nplurals=2; plural=(n != 1);'
     );
 }());

@@ -238,8 +238,9 @@
             'Select a folder'                     : 'Wähle einen Ordner',
             'Select "{folder}"'                   : '"{folder}" wählen',
             '{label} can\'t be used'              : '{label} kann nicht verwendet werden',
-            '"{folder}" contains no folders'      : '"{folder}" hat keine Unterordner',
             'Home'                                : 'Hauptordner',
+            '"{folder}" contains no folders'      : '"{folder}" hat keine Unterordner',
+            'Passwords App Encryption Passphrase' : 'Verschlüsselungspassphrase für die Passwörter-App',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
             'true'                                : 'ja',
@@ -260,15 +261,18 @@
         },
         longTexts    = {
             'End-to-End encryption will be disabled for this password if you share it.'                : 'Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn du das Passwort teilst',
-            'The session token is no longer valid. The app will now reload.'                           : 'Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen.',
+            'The session token is no longer valid. The app will now reload.'                           : 'Dast Sitzungs-Token ist nicht mehr valide. Die App wird nun neu geladen.',
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt.',
             'The encryption applied by the server before storing the data in the database'             : 'Diese Verschlüsselung wurde vom Server vor dem Speichern in der Datenbank angewandt',
             'The encryption applied by the client before sending the data to the server'               : 'Diese Verschlüsselung wurde auf dem Endgerät angewandt bevor die Daten an den Server gesendet wurden'
+        },
+        notes        = {
+            'This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook.': 'Dies ist eine Kopie der Passphrase die du für die Verschlüsselung gewählt hast. Den Eintrag zu ändern oder zu löschen hat keine Auswirkungen auf die Verschlüsselung. Die Passphrase kann in den Einstellungen geändert werden. Weitere Informationen findest du im Handbuch.'
         };
 
     OC.L10N.register(
         'passwords',
-        Object.assign(translations, helpTexts, longTexts),
+        Object.assign(translations, helpTexts, longTexts, notes),
         'nplurals=2; plural=(n != 1);'
     );
 }());

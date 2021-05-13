@@ -415,11 +415,13 @@ class EncryptionManager {
     async _saveMasterPassword(password) {
         this._sendStatus('password', 'processing', 1);
         let username = document.querySelector('meta[name=pw-api-user]').getAttribute('content'),
-            label    = Localisation.translate('Passwords App Master Password'),
+            label    = Localisation.translate('Passwords App Encryption Passphrase'),
+            notes    = Localisation.translate(
+                'This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook.'),
             url      = location.href;
 
         try {
-            await API.createPassword({username, password, label, url});
+            await API.createPassword({username, password, label, url, notes});
             this._sendStatus('password', 'done');
         } catch(e) {
             this._sendStatus('password', 'error', e);
