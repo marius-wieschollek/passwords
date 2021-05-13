@@ -2,7 +2,7 @@
 - Donations are always considered as a "Thank you" for the project as it currently is
 - This project does not have any fixed costs and does not depend on donations
 - Donations go to individual people, not to the project
-- This is an open source spare time project. Donations do not pay for features, they do not priorize features and they do not get features done faster
+- This is an open source spare time project. Donations do not pay for features, they do not prioritize features and they do not get features done faster
 
 ## Authors
 - Marius David Wieschollek
