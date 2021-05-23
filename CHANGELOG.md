@@ -1,4 +1,10 @@
 ## [Unreleased]
+### Added
+- Depreaction announcement for NC 20 & PHP 7.4
+### Changed
+- Autocreated encryption password entry now has description
+### Fixed
+- Password api does not check if password property is present
 
 ## 2021.5.0 - Feature release
 ### Added

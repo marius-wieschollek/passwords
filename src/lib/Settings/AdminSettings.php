@@ -390,23 +390,23 @@ class AdminSettings implements ISettings {
             'cron'    => $cronType,
             'https'   => $this->request->getHttpProtocol() === 'https',
             'php'     => [
-                'warn'    => PHP_VERSION_ID < 70400,
+                'warn'    => PHP_VERSION_ID < 80000,
                 'error'   => PHP_VERSION_ID < 70400,
                 'version' => PHP_VERSION
             ],
             'cronPhp' => [
                 'isDifferent' => PHP_VERSION_ID - $cronPhpId > 99 || $cronPhpId - PHP_VERSION_ID > 99,
-                'warn'        => $cronPhpId < 70400,
+                'warn'        => $cronPhpId < 80000,
                 'error'       => $cronPhpId < 70400,
                 'cronVersion' => $cronPhpString,
                 'webVersion'  => PHP_VERSION
             ],
             'server'  => [
-                'warn'    => $ncVersion < 20,
+                'warn'    => $ncVersion < 21,
                 'error'   => $ncVersion < 20,
                 'version' => $ncVersion
             ],
-            'eol'     => '2021.1.0'
+            'eol'     => '2022.1.0'
         ];
     }
 
