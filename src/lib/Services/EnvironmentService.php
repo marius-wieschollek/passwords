@@ -8,8 +8,6 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OC\Authentication\Exceptions\ExpiredTokenException;
-use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OC_User;
@@ -100,9 +98,14 @@ class EnvironmentService {
     protected IProvider $tokenProvider;
 
     /**
-     * @var IUser
+     * @var string|null
      */
-    protected IUser $user;
+    protected ?string $userId;
+
+    /**
+     * @var IUser|null
+     */
+    protected ?IUser $user;
 
     /**
      * @var IUser|null
@@ -110,9 +113,9 @@ class EnvironmentService {
     protected ?IUser $realUser;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $password;
+    protected ?string $password;
 
     /**
      * @var null|string
@@ -173,6 +176,7 @@ class EnvironmentService {
         IUserSession $userSession,
         IUserManager $userManager
     ) {
+        $this->userId        = $userId;
         $this->config        = $config;
         $this->logger        = $logger;
         $this->session       = $session;
@@ -203,34 +207,62 @@ class EnvironmentService {
      * @return null|IUser
      */
     public function getUser(): ?IUser {
-        return isset($this->user) ? $this->user:null;
+        if($this->getAppMode() !== self::MODE_USER) return null;
+        if(isset($this->user)) return $this->user;
+
+        $user       = $this->loadUser($this->userId);
+        $this->user = $user;
+
+        return $user;
     }
 
     /**
      * @return null|string
      */
     public function getUserId(): ?string {
-        return isset($this->user) ? $this->user->getUID():null;
+        $user = $this->getUser();
+
+        return $user === null ? null:$this->user->getUID();
     }
 
     /**
      * @return null|string
      */
     public function getUserLogin(): ?string {
-        return isset($this->userLogin) ? $this->userLogin:null;
+        if(isset($this->userLogin)) {
+            return $this->userLogin;
+        }
+        if($this->isImpersonating()) {
+            $this->userLogin = $this->userId;
+
+            return $this->userLogin;
+        }
+
+        $this->userLogin = $this->loadUserLogin();
+
+        return $this->userLogin;
     }
 
     /**
      * @return null|string
      */
     public function getUserPassword(): ?string {
-        return isset($this->password) ? $this->password:null;
+        if(isset($this->password)) return $this->password;
+        if($this->isImpersonating()) return null;
+
+        $this->password = $this->loadUserPassword();
+
+        return $this->password;
     }
 
     /**
      * @return string
      */
     public function getLoginType(): string {
+        if(isset($this->loginType)) return $this->loginType;
+
+        $this->loginType = $this->loadLoginType();
+
         return $this->loginType;
     }
 
@@ -238,13 +270,21 @@ class EnvironmentService {
      * @return IToken|null
      */
     public function getLoginToken(): ?IToken {
-        return isset($this->loginToken) ? $this->loginToken:null;
+        if(isset($this->loginToken)) return $this->loginToken;
+
+        $this->loginToken = $this->loadLoginToken();
+
+        return $this->loginToken;
     }
 
     /**
      * @return bool
      */
     public function isImpersonating(): bool {
+        if($this->impersonating !== null) return $this->impersonating;
+
+        $this->impersonating = $this->checkIfImpersonating();
+
         return $this->impersonating;
     }
 
@@ -252,13 +292,21 @@ class EnvironmentService {
      * @return null|IUser
      */
     public function getRealUser(): ?IUser {
-        return $this->impersonating ? $this->realUser:$this->user;
+        if(!$this->isImpersonating()) {
+            return $this->getUser();
+        }
+
+        return $this->realUser;
     }
 
     /*
      * @return string
      */
     public function getClient(): string {
+        if(isset($this->client)) return $this->client;
+
+        $this->client = $this->loadClientName();
+
         return $this->client;
     }
 
@@ -367,6 +415,7 @@ class EnvironmentService {
      *
      * @return bool
      * @throws Exception
+     * @deprecated
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
         $authHeader   = $request->getHeader('Authorization');
@@ -403,6 +452,7 @@ class EnvironmentService {
      * @param IRequest    $request
      *
      * @return bool
+     * @deprecated
      */
     protected function loadUserFromBasicAuth(?string $userId, IRequest $request): bool {
         if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
@@ -427,6 +477,7 @@ class EnvironmentService {
      * @param string $value
      *
      * @return bool
+     * @deprecated
      */
     protected function loadUserFromBearerAuth(string $userId, string $value): bool {
         if(empty($value)) return false;
@@ -456,6 +507,7 @@ class EnvironmentService {
      * @param null|string $userId
      *
      * @return bool
+     * @deprecated
      */
     protected function loadUserFromSessionToken(?string $userId): bool {
         try {
@@ -489,6 +541,7 @@ class EnvironmentService {
      * @param IRequest    $request
      *
      * @return bool
+     * @deprecated
      */
     protected function loadUserFromSession(?string $userId, IRequest $request): bool {
         $loginCredentials = json_decode($this->session->get('login_credentials'));
@@ -518,6 +571,7 @@ class EnvironmentService {
      * @param string|null $userId
      *
      * @return bool
+     * @deprecated
      */
     protected function getUserInfoFromToken(string $tokenId, string $loginName, ?string $userId): bool {
         try {
@@ -547,6 +601,7 @@ class EnvironmentService {
      * @param string      $password
      *
      * @return bool
+     * @deprecated
      */
     protected function getUserInfoFromPassword(?string $userId, IRequest $request, string $loginName, string $password): bool {
         /** @var false|IUser $loginUser */
@@ -570,6 +625,7 @@ class EnvironmentService {
      * @param string      $loginName
      *
      * @return bool
+     * @deprecated
      */
     protected function getUserInfoFromUserId(?string $userId, IRequest $request, string $loginName): bool {
         /** @var false|IUser $loginUser */
@@ -592,6 +648,7 @@ class EnvironmentService {
      * @param string $loginType
      *
      * @return bool
+     * @deprecated
      */
     protected function impersonateByUid(string $uid, string $realUid, string $loginType): bool {
         $user = $this->userManager->get($uid);
@@ -616,6 +673,7 @@ class EnvironmentService {
      * @param string   $loginName
      *
      * @return string
+     * @deprecated
      */
     protected function getClientFromRequest(IRequest $request, string $loginName): string {
         $client = trim(filter_var($request->getHeader('USER_AGENT'), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH));
@@ -635,6 +693,7 @@ class EnvironmentService {
      * @param $token
      *
      * @return mixed
+     * @deprecated
      */
     protected function getClientFromToken(IToken $token): string {
         $client = trim($token->getName());
@@ -643,6 +702,92 @@ class EnvironmentService {
         if(strlen($client) > 256) return substr($client, 0, 256);
 
         return $client;
+    }
+
+    protected function loadLoginType(): ?string {
+        if($this->session->exists('app_password')) {
+            if(!empty($this->session->get('app_password'))) return self::LOGIN_TOKEN;
+        }
+        if($this->session->exists('token-id')) {
+            if(!empty($this->session->get('token-id'))) return self::LOGIN_TOKEN;
+        }
+        if($this->session->exists('login_credentials')) {
+            $loginCredentials = json_decode($this->session->get('login_credentials'));
+            if(isset($loginCredentials->isTokenLogin) && $loginCredentials->isTokenLogin === true) {
+                return self::LOGIN_TOKEN;
+            }
+        }
+        if($this->loadUserPassword() !== null) {
+            return self::LOGIN_PASSWORD;
+        }
+        if($this->loadUserToken() !== null) {
+            return self::LOGIN_TOKEN;
+        }
+
+        return self::LOGIN_NONE;
+    }
+
+    /**
+     * @return string
+     */
+    protected function loadUserLogin(): string {
+        if($this->session->exists('loginname')) {
+            $loginName = $this->session->get('loginname');
+            if(!empty($loginName)) return $loginName;
+        }
+        if($this->session->exists('login_credentials')) {
+            $loginCredentials = json_decode($this->session->get('login_credentials'));
+            if(isset($loginCredentials->loginName) && !empty($loginCredentials->loginName)) {
+                return $loginCredentials->loginName;
+            }
+        }
+        if(isset($_SERVER['PHP_AUTH_USER'])) {
+            // @TODO check if this login actually exists and belongs to the uid
+            return $_SERVER['PHP_AUTH_USER'];
+        }
+
+        return $this->userId;
+    }
+
+    protected function loadUserPassword() {
+        if($this->session->exists('login_credentials')) {
+            $loginCredentials = json_decode($this->session->get('login_credentials'));
+            if(isset($loginCredentials->password) && !empty($loginCredentials->password)) {
+                return $loginCredentials->password;
+            }
+        }
+
+        if(isset($_SERVER['PHP_AUTH_PW'])) {
+            // @TODO check if this login actually belongs to the current user and if it is not a token password
+            return $_SERVER['PHP_AUTH_PW'];
+        }
+
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkIfImpersonating(): bool {
+        if($this->session->exists('oldUserId')) {
+            $userId         = $this->session->exists('oldUserId');
+            $this->realUser = $this->loadUser($userId);
+
+            return true;
+        }
+
+        // @TODO check if login name mismatch
+
+        return false;
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return IUser|null
+     */
+    protected function loadUser(string $userId): ?IUser {
+        return $this->userManager->get($userId);
     }
 
 }
