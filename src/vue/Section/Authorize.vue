@@ -17,7 +17,7 @@
                     <field type="password" placeholder="Password" v-model="password" required v-if="hasPassword"/>
                     <select v-model="providerId" v-if="hasToken && providers.length > 0">
                         <option v-for="(option, id) in providers" :value="id" :title="option.description">
-                            {{option.label}}
+                            {{ option.label }}
                         </option>
                     </select>
                     <field placeholder="Token"
@@ -73,40 +73,40 @@
             document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
             document.body.classList.add('pw-auth-visible');
             API.requestSession()
-                .then((d) => {
-                    if(d.hasOwnProperty('challenge')) {
-                        this.hasPassword = true;
-                        this.salts = d.challenge.salts;
-                    }
-                    if(d.hasOwnProperty('token')) {
-                        this.hasToken = true;
-                        this.provider = null;
-                        this.providerId = -1;
-                        this.providers = [];
+               .then((d) => {
+                   if(d.hasOwnProperty('challenge')) {
+                       this.hasPassword = true;
+                       this.salts = d.challenge.salts;
+                   }
+                   if(d.hasOwnProperty('token')) {
+                       this.hasToken = true;
+                       this.provider = null;
+                       this.providerId = -1;
+                       this.providers = [];
 
-                        for(let i = 0; i < d.token.length; i++) {
-                            if(d.token[i].id === 'twofactor_nextcloud_notification' && d.token.length !== 1 && APP_ENVIRONMENT !== 'development') {
-                                continue;
-                            }
+                       for(let i = 0; i < d.token.length; i++) {
+                           if(d.token[i].id === 'twofactor_nextcloud_notification' && d.token.length !== 1 && APP_ENVIRONMENT !== 'development') {
+                               continue;
+                           }
 
-                            this.providers.push(d.token[i]);
-                            if(this.provider === null && !d.token[i].request) {
-                                this.providerId = this.providers.length - 1;
-                                this.provider = d.token[i];
-                            }
-                        }
+                           this.providers.push(d.token[i]);
+                           if(this.provider === null && !d.token[i].request) {
+                               this.providerId = this.providers.length - 1;
+                               this.provider = d.token[i];
+                           }
+                       }
 
-                        if(this.provider === null) {
-                            this.providerId = 0;
-                            this.provider = this.providers[0];
-                        }
-                    }
-                    if(!this.hasPassword && !this.hasToken) {
-                        API.openSession([])
-                            .then(() => { this.goToTarget(); })
-                            .catch((d) => { this.loginError(d); });
-                    }
-                });
+                       if(this.provider === null) {
+                           this.providerId = 0;
+                           this.provider = this.providers[0];
+                       }
+                   }
+                   if(!this.hasPassword && !this.hasToken) {
+                       API.openSession([])
+                          .then(() => { this.goToTarget(); })
+                          .catch((d) => { this.loginError(d); });
+                   }
+               });
         },
 
         computed: {
@@ -145,8 +145,8 @@
 
                 this.$nextTick(() => {
                     API.openSession(data)
-                        .then(() => { this.goToTarget(); })
-                        .catch((d) => { this.loginError(d); });
+                       .then(() => { this.goToTarget(); })
+                       .catch((d) => { this.loginError(d); });
                 });
             },
             loginError(e) {
@@ -184,17 +184,17 @@
             requestToken() {
                 this.retryClass = 'fa-spin';
                 API.requestToken(this.provider.id)
-                    .then((d) => {
-                        if(this.provider.type === 'request-token') this.token = d.data.token;
-                        setTimeout(() => {this.retryClass = '';}, 1500);
-                    })
-                    .catch(() => {
-                        Messages.alert(
-                            'You may have requested too many tokens. Please try again later.',
-                            'Token request failed'
-                        );
-                        this.retryClass = '';
-                    });
+                   .then((d) => {
+                       if(this.provider.type === 'request-token') this.token = d.data.token;
+                       setTimeout(() => {this.retryClass = '';}, 1500);
+                   })
+                   .catch(() => {
+                       Messages.alert(
+                           'You may have requested too many tokens. Please try again later.',
+                           'Token request failed'
+                       );
+                       this.retryClass = '';
+                   });
             }
         },
 
@@ -211,92 +211,69 @@
 </script>
 
 <style lang="scss">
-    body#body-user {
-        &:not(.pw-auth-passed):not(.pw-auth-skipped) {
-            background        : var(--color-primary) var(--pw-image-login-background);
-            background-size   : cover;
-            background-repeat : no-repeat;
+body#body-user {
+    &:not(.pw-auth-passed):not(.pw-auth-skipped) {
+        background        : var(--color-primary) var(--pw-image-login-background);
+        background-size   : cover;
+        background-repeat : no-repeat;
 
-            #header {
-                background : rgba(0, 0, 0, 0) none !important;
-            }
-        }
-
-        #appmenu li a::before {
-            display : none;
-        }
-
-        #content-wrapper {
-            padding-top : 0;
-        }
-
-        #app-navigation {
-            transform  : translateX(-100%);
-            transition : transform ease-in-out 300ms;
+        #header {
+            background : rgba(0, 0, 0, 0) none !important;
         }
     }
 
-    #authorize-window {
-        margin     : 0 auto;
-        width      : 300px;
-        text-align : center;
-        position   : relative;
+    #appmenu li a::before {
+        display : none;
+    }
 
+    #content-wrapper {
+        padding-top : 0;
+    }
+
+    #app-navigation {
+        transform  : translateX(-100%);
+        transition : transform ease-in-out 300ms;
+    }
+}
+
+#authorize-window {
+    margin     : 0 auto;
+    width      : 300px;
+    text-align : center;
+    position   : relative;
+
+    .fa-repeat {
+        position  : absolute;
+        font-size : 1.5rem;
+        color     : var(--color-primary-text);
+        padding   : 0.5rem;
+        cursor    : pointer;
+        right     : -2.5rem;
+        width     : 2.5rem;
+    }
+
+    &.has-password {
         .fa-repeat {
-            position  : absolute;
-            font-size : 1.5rem;
-            color     : var(--color-primary-text);
-            padding   : 0.5rem;
-            cursor    : pointer;
-            right     : -2.5rem;
+            top : 3rem;
         }
+    }
 
-        &.has-password {
-            .fa-repeat {
-                top : 3rem;
-            }
-        }
+    .login-container {
+        position : relative;
+    }
 
-        .login-container {
-            position : relative;
-        }
+    input {
+        width     : 100%;
+        padding   : 0.75rem;
+        border    : none;
+        font-size : 1rem;
+        height    : auto;
 
-        input {
-            width     : 100%;
-            padding   : 0.75rem;
-            border    : none;
-            font-size : 1rem;
-            height    : auto;
-
-            &[type=text],
-            &[type=password] {
-                margin        : 0;
-                box-shadow    : 0 1px 0 transparentize($color-black, 0.9) inset !important;
-                border-radius : 0;
-
-                &:first-child {
-                    box-shadow              : none;
-                    border-top-left-radius  : 0.25rem;
-                    border-top-right-radius : 0.25rem;
-                }
-
-                &:last-child {
-                    border-bottom-left-radius  : 0.25rem;
-                    border-bottom-right-radius : 0.25rem;
-                }
-            }
-        }
-
-        select {
-            width            : 100%;
-            border           : none;
-            font-size        : 1rem;
-            box-shadow       : 0 1px 0 transparentize($color-black, 0.9) inset !important;
-            border-radius    : 0;
-            background-color : var(--color-main-background);
-            padding          : 0.75rem 0.75rem 0.75rem 0.5rem;
-            margin           : 0;
-            height           : 2.75rem;
+        &[type=text],
+        &[type=password] {
+            margin        : 0;
+            box-shadow    : 0 1px 0 transparentize($color-black, 0.9) inset !important;
+            border-radius : 0;
 
             &:first-child {
                 box-shadow              : none;
@@ -309,151 +286,175 @@
                 border-bottom-right-radius : 0.25rem;
             }
         }
+    }
 
-        .login-message {
-            padding          : 0.75rem 0.25rem 0.75rem 1.75rem;
-            margin-bottom    : 0.75rem;
-            background-color : var(--color-box-shadow);
-            color            : var(--color-primary-text);
-            font-weight      : bold;
-            font-size        : 1rem;
-            border-radius    : var(--border-radius);
-            position         : relative;
+    select {
+        width            : 100%;
+        border           : none;
+        font-size        : 1rem;
+        box-shadow       : 0 1px 0 transparentize($color-black, 0.9) inset !important;
+        border-radius    : 0;
+        background-color : var(--color-main-background);
+        padding          : 0.75rem 0.75rem 0.75rem 0.5rem;
+        margin           : 0;
+        height           : 2.75rem;
 
-            i {
-                position    : absolute;
-                left        : 0.5rem;
-                top         : 0;
-                bottom      : 0;
-                display     : flex;
-                align-items : center;
-            }
+        &:first-child {
+            box-shadow              : none;
+            border-top-left-radius  : 0.25rem;
+            border-top-right-radius : 0.25rem;
         }
 
-        .login-confirm {
-            position : relative;
+        &:last-child {
+            border-bottom-left-radius  : 0.25rem;
+            border-bottom-right-radius : 0.25rem;
+        }
+    }
 
-            .login-icon {
-                position    : absolute;
-                width       : 1rem;
-                font-size   : 1rem;
-                line-height : 1rem;
-                right       : 16px;
-                top         : 2rem;
-                color       : var(--color-primary-text);
-            }
+    .login-message {
+        padding          : 0.75rem 0.25rem 0.75rem 1.75rem;
+        margin-bottom    : 0.75rem;
+        background-color : var(--color-box-shadow);
+        color            : var(--color-primary-text);
+        font-weight      : bold;
+        font-size        : 1rem;
+        border-radius    : var(--border-radius);
+        position         : relative;
 
-            input[type=submit] {
-                margin-top            : 1rem;
-                border                : 1px solid var(--color-primary-text);
-                color                 : var(--color-primary-text);
-                background            : var(--color-primary-element) var(--icon-confirm-fff) no-repeat;
-                background-position-y : 50%;
-                background-position-x : calc(100% - 16px);
-                transition            : background-position-x 0.25s ease-in-out;
+        i {
+            position    : absolute;
+            left        : 0.5rem;
+            top         : 0;
+            bottom      : 0;
+            display     : flex;
+            align-items : center;
+        }
+    }
 
-                &.no-icon {
-                    background-image : none;
-                }
+    .login-confirm {
+        position : relative;
 
-                &:hover {
-                    background-position-x : calc(100% - 8px);
-                }
-            }
+        .login-icon {
+            position    : absolute;
+            width       : 1rem;
+            font-size   : 1rem;
+            line-height : 1rem;
+            right       : 16px;
+            top         : 2rem;
+            color       : var(--color-primary-text);
         }
 
-        .login-error {
-            color            : var(--color-error);
-            margin-top       : 1rem;
-            background-color : var(--color-box-shadow);
-            border-radius    : var(--border-radius);
-            padding          : 0.5rem;
-            border           : 1px solid var(--color-error);
-            position         : absolute;
-            width            : 300px;
-            animation        : shake 0.1s ease-in-out 0s 5;
+        input[type=submit] {
+            margin-top            : 1rem;
+            border                : 1px solid var(--color-primary-text);
+            color                 : var(--color-primary-text);
+            background            : var(--color-primary-element) var(--icon-confirm-fff) no-repeat;
+            background-position-y : 50%;
+            background-position-x : calc(100% - 16px);
+            transition            : background-position-x 0.25s ease-in-out;
 
-            @keyframes shake {
-                0% {
-                    margin-left : -5px;
-                }
-                33% {
-                    margin-left : 0;
-                }
-                66% {
-                    margin-left : 5px;
-                }
-                99% {
-                    margin-left : 0;
-                }
+            &.no-icon {
+                background-image : none;
+            }
+
+            &:hover {
+                background-position-x : calc(100% - 8px);
             }
         }
     }
 
-    body#body-user {
-        &.pw-auth-visible {
-            #app-content {
-                position          : fixed;
-                top               : 0;
-                left              : 0;
-                bottom            : 0;
-                right             : 0;
-                margin-left       : 0 !important;
-                display           : flex;
-                align-items       : center;
-                background        : var(--color-primary) var(--pw-image-login-background);
-                background-size   : cover;
-                background-repeat : no-repeat;
-                opacity           : 1;
-                transition        : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
+    .login-error {
+        color            : var(--color-error);
+        margin-top       : 1rem;
+        background-color : var(--color-box-shadow);
+        border-radius    : var(--border-radius);
+        padding          : 0.5rem;
+        border           : 1px solid var(--color-error);
+        position         : absolute;
+        width            : 300px;
+        animation        : shake 0.1s ease-in-out 0s 5;
 
-                > * {
-                    transition : opacity ease-in-out 0.25s;
-                }
+        @keyframes shake {
+            0% {
+                margin-left : -5px;
             }
-
-            #app-navigation {
-                z-index : 1001;
+            33% {
+                margin-left : 0;
             }
+            66% {
+                margin-left : 5px;
+            }
+            99% {
+                margin-left : 0;
+            }
+        }
+    }
+}
 
-            &.pw-auth-passed,
-            &.pw-auth-skipped {
-                #app-content {
-                    background-image : none;
-                    background-color : var(--color-main-background);
+body#body-user {
+    &.pw-auth-visible {
+        #app-content {
+            position          : fixed;
+            top               : 0;
+            left              : 0;
+            bottom            : 0;
+            right             : 0;
+            margin-left       : 0 !important;
+            display           : flex;
+            align-items       : center;
+            background        : var(--color-primary) var(--pw-image-login-background);
+            background-size   : cover;
+            background-repeat : no-repeat;
+            opacity           : 1;
+            transition        : opacity ease-in-out 0.25s, margin-left ease-in-out 0.25s 0.25s;
 
-                    > * {
-                        opacity : 0;
-                    }
-                }
+            > * {
+                transition : opacity ease-in-out 0.25s;
             }
         }
 
-        &.pw-auth-passed {
-            #header {
-                transition       : background-color ease-in-out 0.25s 0.25s;
-                background-color : var(--color-primary);
-            }
-
-            @media (min-width : $width-small) {
-                #app-navigation {
-                    transform : translateX(0);
-                }
-            }
+        #app-navigation {
+            z-index : 1001;
         }
 
+        &.pw-auth-passed,
         &.pw-auth-skipped {
             #app-content {
-                > * {
-                    transition : opacity ease-in-out 0.25s;
-                }
-            }
+                background-image : none;
+                background-color : var(--color-main-background);
 
-            @media (min-width : $width-small) {
-                #app-navigation {
-                    transform : translateX(0);
+                > * {
+                    opacity : 0;
                 }
             }
         }
     }
+
+    &.pw-auth-passed {
+        #header {
+            transition       : background-color ease-in-out 0.25s 0.25s;
+            background-color : var(--color-primary);
+        }
+
+        @media (min-width : $width-small) {
+            #app-navigation {
+                transform : translateX(0);
+            }
+        }
+    }
+
+    &.pw-auth-skipped {
+        #app-content {
+            > * {
+                transition : opacity ease-in-out 0.25s;
+            }
+        }
+
+        @media (min-width : $width-small) {
+            #app-navigation {
+                transform : translateX(0);
+            }
+        }
+    }
+}
 </style>
