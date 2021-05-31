@@ -24,8 +24,8 @@ use OCP\Notification\INotification;
  */
 abstract class AbstractNotification {
 
-    const NAME = self::NAME;
-    const TYPE = self::TYPE;
+    const NAME = 'default';
+    const TYPE = 'default';
 
     /**
      * @var IFactory

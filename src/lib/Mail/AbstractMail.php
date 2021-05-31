@@ -24,8 +24,8 @@ use OCP\Util;
  */
 abstract class AbstractMail {
 
-    const MAIL_ID   = self::MAIL_ID;
-    const MAIL_TYPE = self::MAIL_TYPE;
+    const MAIL_ID   = 'default';
+    const MAIL_TYPE = 'default';
 
     /**
      * @var IMailer
