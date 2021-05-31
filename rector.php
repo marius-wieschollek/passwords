@@ -7,18 +7,19 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Rector\Set\ValueObject\DowngradeSetList;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // get parameters
     $parameters = $containerConfigurator->parameters();
 
-    // paths to refactor; solid alternative to CLI arguments
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/src',
+        __DIR__ . '/src/appinfo',
+        __DIR__ . '/src/lib',
+        __DIR__ . '/src/templates'
     ]);
-
 
     $containerConfigurator->import(DowngradeSetList::PHP_80);
     $containerConfigurator->import(DowngradeSetList::PHP_74);
 
-    // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, '7.3');
+    $parameters->set(Option::BOOTSTRAP_FILES, [
+        __DIR__ . '/rector-shells.php',
+    ]);
 };
