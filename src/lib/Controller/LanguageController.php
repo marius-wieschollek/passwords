@@ -5,6 +5,7 @@ namespace OCA\Passwords\Controller;
 use DateTime;
 use Exception;
 use OC\App\AppManager;
+use DateTimeInterface;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Services\LoggingService;
 use OCP\App\AppPathNotFoundException;
@@ -106,7 +107,7 @@ class LanguageController extends Controller {
 
         $expires = new DateTime('@'.(time() + 2419200));
         $response->addHeader('Cache-Control', 'public, immutable, max-age=2419200')
-                 ->addHeader('Expires', $expires->format(DateTime::RFC2822))
+                 ->addHeader('Expires', $expires->format(DateTimeInterface::RFC2822))
                  ->addHeader('Pragma', 'cache');
 
         return $response;

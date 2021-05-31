@@ -9,6 +9,7 @@ namespace OCA\Passwords\Controller\Api;
 
 use DateTime;
 use Exception;
+use DateTimeInterface;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\User\DeleteUserDataHelper;
@@ -237,7 +238,7 @@ class ServiceApiController extends AbstractApiController {
 
         $expires = new DateTime('@'.(time() + 604800));
         $response->addHeader('Cache-Control', 'public, immutable, max-age=604800')
-                 ->addHeader('Expires', $expires->format(DateTime::RFC2822))
+                 ->addHeader('Expires', $expires->format(DateTimeInterface::RFC2822))
                  ->addHeader('Pragma', 'cache');
 
         $lastModified = new DateTime('@'.$file->getMTime());
