@@ -106,6 +106,7 @@ Publish Nightly:
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - LEGACY_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-legacy.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
+    - 'echo curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-legacy.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":true}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-legacy.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":true}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
