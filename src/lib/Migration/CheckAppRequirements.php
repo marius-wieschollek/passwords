@@ -27,7 +27,7 @@ use OCP\Migration\IRepairStep;
 class CheckAppRequirements implements IRepairStep {
 
     const UPGRADE_MINIMUM_APP_VERSION   = '2020.1.0';
-    const PHP_MINIMUM_REQUIREMENT_ID    = 70400;
+    const PHP_MINIMUM_REQUIREMENT_ID    = 70300;
     const PHP_MINIMUM_REQUIREMENT       = '7.4.0';
 
     /**
@@ -70,7 +70,7 @@ class CheckAppRequirements implements IRepairStep {
         if($previousVersion === '0.0.0') return;
 
         if(version_compare(self::UPGRADE_MINIMUM_APP_VERSION, $previousVersion) === 1) {
-            throw new UpgradeUnsupportedException($previousVersion, self::UPGRADE_MINIMUM_APP_VERSION);
+            //throw new UpgradeUnsupportedException($previousVersion, self::UPGRADE_MINIMUM_APP_VERSION);
         }
     }
 
