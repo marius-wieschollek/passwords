@@ -120,7 +120,7 @@ class DeferredActivationService {
      *
      * @return array
      */
-    protected function getFeatures($section = 'server'): array {
+    protected function getFeatures(string $section = 'server'): array {
         if(isset($this->features[ $section ])) return $this->features[ $section ];
 
         $data = $this->fetchFeatures();
@@ -165,6 +165,7 @@ class DeferredActivationService {
 
         $version = $this->config->getAppValue('installed_version');
         if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
+        $version = str_ireplace('lts', '', $version);
 
         [$major, $minor] = explode('.', $version);
         $mainVersion = $major.'.'.$minor;

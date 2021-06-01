@@ -33,23 +33,23 @@ Assemble:
     paths:
       - ./passwords
       
-Assemble Legacy:
+Assemble Lts:
   stage: assembling
   script:
-    - mkdir passwords-legacy
-    - mv src/lib/AppInfo/SystemRequirementsLE73.php src/lib/AppInfo/SystemRequirements.php
+    - mkdir passwords-lts
+    - mv src/lib/AppInfo/SystemRequirementsLTS.php src/lib/AppInfo/SystemRequirements.php
     - npm run rector
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/LE73/g" ./src/appinfo/info.xml ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}LE73/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/lts/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}lts/g" ./src/appinfo/info.xml ; fi
     - sed -i -e "0,/<name>Passwords</s//<name>Passwords (LE 7.3)</g" ./src/appinfo/info.xml
     - sed -i -e "s/php min-version=\"7.4\" max-version=\"8.0\"/php min-version=\"7.3\" max-version=\"7.3\"/g" ./src/appinfo/info.xml
     - sed -i -e "s/nextcloud min-version=\"20.0.5\"/nextcloud min-version=\"20\"/g" ./src/appinfo/info.xml
-    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-legacy
-    - rsync -r src/js/Static passwords-legacy/js/
-    - cp CHANGELOG.md passwords-legacy/
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lts
+    - rsync -r src/js/Static passwords-lts/js/
+    - cp CHANGELOG.md passwords-lts/
   artifacts:
     paths:
-      - ./passwords-legacy
+      - ./passwords-lts
 
 PHPUnit:
   stage: testing
@@ -58,7 +58,7 @@ PHPUnit:
   artifacts:
     paths:
       - ./passwords
-      - ./passwords-legacy
+      - ./passwords-lts
 
 Sign:
   stage: signing
@@ -70,12 +70,12 @@ Sign:
     - echo $SIGN_CRT | tr " " "\n" >> sign.crt
     - echo "-----END CERTIFICATE-----" >> sign.crt
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-legacy --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lts --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
     - rm sign.key sign.crt
   artifacts:
     paths:
       - ./passwords
-      - ./passwords-legacy
+      - ./passwords-lts
   only:
     - testing
     - stable
@@ -84,12 +84,12 @@ Pack:
   stage: packaging
   script:
     - tar -zcf passwords.tar.gz passwords
-    - tar -zcf passwords-legacy.tar.gz passwords-legacy --transform s/passwords-legacy/passwords/
+    - tar -zcf passwords-lts.tar.gz passwords-lts --transform s/passwords-lts/passwords/
     - echo "export JOB_ID=\"${CI_JOB_ID}\"" > job.id
   artifacts:
     paths:
       - ./passwords.tar.gz
-      - ./passwords-legacy.tar.gz
+      - ./passwords-lts.tar.gz
       - job.id
   only:
   - testing
@@ -103,9 +103,7 @@ Publish Nightly:
     - echo $SIGN_KEY | tr " " "\n" >> sign.key
     - echo "-----END PRIVATE KEY-----" >> sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
-    - LEGACY_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-legacy.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-legacy.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":true}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
@@ -120,9 +118,9 @@ Publish Stable:
     - echo $SIGN_KEY | tr " " "\n" >> sign.key
     - echo "-----END PRIVATE KEY-----" >> sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
-    - LEGACY_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-legacy.tar.gz | openssl base64 | tr -d "\n")
+    - LTS_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-lts.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-legacy.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lts.tar.gz\",\"signature\":\"${LTS_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
     name: Stable

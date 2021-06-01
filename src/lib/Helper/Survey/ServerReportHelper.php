@@ -143,10 +143,10 @@ class ServerReportHelper {
      */
     protected function getVersions(): array {
         return [
-            'server'    => $this->config->getSystemValue('version'),
-            'app'       => $this->config->getAppValue('installed_version'),
-            'appLegacy' => SystemRequirements::APP_LEGACY,
-            'php'       => PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION
+            'server' => $this->config->getSystemValue('version'),
+            'app'    => $this->config->getAppValue('installed_version'),
+            'lts'    => SystemRequirements::APP_LTS,
+            'php'    => PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION
         ];
     }
 
