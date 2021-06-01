@@ -42,7 +42,7 @@ Assemble Legacy:
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}LE73/g" ./src/appinfo/info.xml ; fi
     - sed -i -e "s/<name>Passwords/<name>Passwords (LE 7.3)/g" ./src/appinfo/info.xml
     - sed -i -e "s/php min-version=\"7.4\" max-version=\"8.0\"/php min-version=\"7.3\" max-version=\"7.3\"/g" ./src/appinfo/info.xml
-    - sed -i -e "s/nextcloud min-version=\"20.0.5\" max-version=\"21\"/nextcloud min-version=\"20\" max-version=\"21\"/g" ./src/appinfo/info.xml
+    - sed -i -e "s/nextcloud min-version=\"20.0.5\"/nextcloud min-version=\"20\"/g" ./src/appinfo/info.xml
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-legacy
     - rsync -r src/js/Static passwords-legacy/js/
     - cp CHANGELOG.md passwords-legacy/
