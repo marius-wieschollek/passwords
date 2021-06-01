@@ -36,10 +36,6 @@ Assemble:
 Assemble Legacy:
   stage: assembling
   script:
-    - node -v
-    - npm -v
-    - which node
-    - which npm
     - mkdir passwords-legacy
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/LE73/g" ./src/appinfo/info.xml ; fi
@@ -72,6 +68,7 @@ Sign:
     - echo "-----BEGIN CERTIFICATE-----" > sign.crt
     - echo $SIGN_CRT | tr " " "\n" >> sign.crt
     - echo "-----END CERTIFICATE-----" >> sign.crt
+    - echo ${#SIGN_CRT}
     - ls -lAhs
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-legacy --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
