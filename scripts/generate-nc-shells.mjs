@@ -70,9 +70,10 @@ function extractImplementsInformation(contents, uses, definitions) {
     if(impl !== null) {
         let namespace = '', name = '';
         if(!uses[impl[1]]) {
-            let namespace = namespaceRegex.exec(contents);
-            if(namespace === null) return;
+            let nsmatch = namespaceRegex.exec(contents);
+            if(nsmatch === null) return;
             name = impl[1];
+            namespace = nsmatch[1];
         } else {
             namespace = uses[impl[1]].namespace;
             name = uses[impl[1]].name;
