@@ -32,6 +32,23 @@ Assemble:
   artifacts:
     paths:
       - ./passwords
+      
+Assemble Legacy:
+  stage: assembling
+  script:
+    - mkdir passwords-legacy
+    - npm run rector
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/LE73/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}LE73/g" ./src/appinfo/info.xml ; fi
+    - sed -i -e "s/<name>Passwords/<name>Passwords (LE 7.3)/g" ./src/appinfo/info.xml
+    - sed -i -e "s/php min-version=\"7.4\" max-version=\"8.0\"/php min-version=\"7.3\" max-version=\"7.3\"/g" ./src/appinfo/info.xml
+    - sed -i -e "s/nextcloud min-version=\"20.0.5\" max-version=\"21\"/nextcloud min-version=\"20\" max-version=\"21\"/g" ./src/appinfo/info.xml
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-legacy
+    - rsync -r src/js/Static passwords-legacy/js/
+    - cp CHANGELOG.md passwords-legacy/
+  artifacts:
+    paths:
+      - ./passwords-legacy
 
 PHPUnit:
   stage: testing
@@ -40,6 +57,7 @@ PHPUnit:
   artifacts:
     paths:
       - ./passwords
+      - ./passwords-legacy
 
 Sign:
   stage: signing
@@ -51,26 +69,32 @@ Sign:
     - echo $SIGN_CRT | tr " " "\n" >> sign.crt
     - echo "-----END CERTIFICATE-----" >> sign.crt
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-legacy --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
     - rm sign.key sign.crt
   artifacts:
     paths:
       - ./passwords
+      - ./passwords-legacy
   only:
     - testing
     - stable
+    - rector
 
 Pack:
   stage: packaging
   script:
     - tar -zcf passwords.tar.gz passwords
+    - tar -zcf passwords-legacy.tar.gz passwords-legacy
     - echo "export JOB_ID=\"${CI_JOB_ID}\"" > job.id
   artifacts:
     paths:
       - ./passwords.tar.gz
+      - ./passwords-legacy.tar.gz
       - job.id
   only:
   - testing
   - stable
+  - rector
 
 Publish Nightly:
   stage: publishing
@@ -80,12 +104,15 @@ Publish Nightly:
     - echo $SIGN_KEY | tr " " "\n" >> sign.key
     - echo "-----END PRIVATE KEY-----" >> sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - LEGACY_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-legacy.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":true}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
   only:
   - testing
+  - rector
 
 Publish Stable:
   stage: publishing
@@ -95,7 +122,9 @@ Publish Stable:
     - echo $SIGN_KEY | tr " " "\n" >> sign.key
     - echo "-----END PRIVATE KEY-----" >> sign.key
     - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - LEGACY_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-legacy.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
     name: Stable

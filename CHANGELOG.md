@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Added
+- Legacy Build for PHP7.3
 - Depreaction announcement for NC 20 & PHP 7.4
 ### Changed
 - Autocreated encryption password entry now has description
