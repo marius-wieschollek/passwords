@@ -37,10 +37,11 @@ Assemble Legacy:
   stage: assembling
   script:
     - mkdir passwords-legacy
+    - mv src/lib/AppInfo/SystemRequirementsLE73.php src/lib/AppInfo/SystemRequirements.php
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/LE73/g" ./src/appinfo/info.xml ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}LE73/g" ./src/appinfo/info.xml ; fi
-    - sed -i -e "s/<name>Passwords/<name>Passwords (LE 7.3)/g" ./src/appinfo/info.xml
+    - sed -i -e "0,/<name>Passwords</s//<name>Passwords (LE 7.3)</g" ./src/appinfo/info.xml
     - sed -i -e "s/php min-version=\"7.4\" max-version=\"8.0\"/php min-version=\"7.3\" max-version=\"7.3\"/g" ./src/appinfo/info.xml
     - sed -i -e "s/nextcloud min-version=\"20.0.5\"/nextcloud min-version=\"20\"/g" ./src/appinfo/info.xml
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-legacy
@@ -78,7 +79,6 @@ Sign:
   only:
     - testing
     - stable
-    - rector
 
 Pack:
   stage: packaging
@@ -94,7 +94,6 @@ Pack:
   only:
   - testing
   - stable
-  - rector
 
 Publish Nightly:
   stage: publishing
@@ -107,12 +106,11 @@ Publish Nightly:
     - LEGACY_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-legacy.tar.gz | openssl base64 | tr -d "\n")
     - rm sign.key
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-legacy.tar.gz\",\"signature\":\"${LEGACY_SIGNATURE}\",\"nightly\":true}"'
-#    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
   only:
   - testing
-  - rector
 
 Publish Stable:
   stage: publishing
