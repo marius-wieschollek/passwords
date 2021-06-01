@@ -12,14 +12,15 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
-use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
-use OCA\Passwords\Helper\User\AdminUserHelper;
-use OCA\Passwords\Services\BackgroundJobService;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\HelperService;
-use OCA\Passwords\Services\NotificationService;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
+use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Helper\User\AdminUserHelper;
+use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\BackgroundJobService;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 
 /**
  * Class CheckAppSettings
@@ -27,12 +28,6 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class CheckAppSettings implements IRepairStep {
-
-    const APP_BC_BREAK_VERSION             = '2022.1.0';
-    const NEXTCLOUD_RECOMMENDED_VERSION_ID = 20;
-    const NEXTCLOUD_RECOMMENDED_VERSION    = '20';
-    const PHP_RECOMMENDED_VERSION_ID       = 70300;
-    const PHP_RECOMMENDED_VERSION          = '7.4.0';
 
     /**
      * @var ConfigurationService
@@ -75,10 +70,10 @@ class CheckAppSettings implements IRepairStep {
         ServiceSettingsHelper $serviceSettings,
         BackgroundJobService $backgroundJobService
     ) {
-        $this->config               = $config;
-        $this->adminHelper          = $adminHelper;
-        $this->notifications        = $notifications;
-        $this->serviceSettings      = $serviceSettings;
+        $this->config = $config;
+        $this->adminHelper = $adminHelper;
+        $this->notifications = $notifications;
+        $this->serviceSettings = $serviceSettings;
         $this->backgroundJobService = $backgroundJobService;
     }
 
@@ -102,7 +97,7 @@ class CheckAppSettings implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output) {
-        $faviconSetting    = $this->serviceSettings->get('favicon');
+        $faviconSetting = $this->serviceSettings->get('favicon');
         $faviconApiSetting = $this->serviceSettings->get('favicon.api');
 
         if($faviconSetting['value'] === HelperService::FAVICON_BESTICON) {
@@ -111,14 +106,14 @@ class CheckAppSettings implements IRepairStep {
             }
         }
 
-        $previewSetting    = $this->serviceSettings->get('preview');
+        $previewSetting = $this->serviceSettings->get('preview');
         $previewApiSetting = $this->serviceSettings->get('preview.api');
         if(empty($previewApiSetting['value']) && in_array($previewSetting['value'], $previewApiSetting['depends']['service.preview'])) {
             $this->sendEmptySettingNotification('preview');
         }
 
         $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        if($ncVersion < self::NEXTCLOUD_RECOMMENDED_VERSION_ID || PHP_VERSION_ID < self::PHP_RECOMMENDED_VERSION_ID) {
+        if($ncVersion < SystemRequirements::NC_DEPRECATION_NOTIFICATION_ID || PHP_VERSION_ID < SystemRequirements::PHP_DEPRECATION_NOTIFICATION_ID) {
             $this->sendDeprecatedPlatformNotification();
         }
 
@@ -143,9 +138,9 @@ class CheckAppSettings implements IRepairStep {
         foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendUpgradeRequiredNotification(
                 $admin->getUID(),
-                self::APP_BC_BREAK_VERSION,
-                self::NEXTCLOUD_RECOMMENDED_VERSION,
-                self::PHP_RECOMMENDED_VERSION
+                SystemRequirements::APP_BC_BREAK,
+                SystemRequirements::NC_UPGRADE_RECOMMENDATION,
+                SystemRequirements::PHP_UPGRADE_RECOMMENDATION
             );
         }
     }

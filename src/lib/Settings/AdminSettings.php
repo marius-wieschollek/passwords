@@ -8,20 +8,21 @@
 namespace OCA\Passwords\Settings;
 
 use Exception;
-use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Image\ImagickHelper;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\HelperService;
-use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
+use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Services\HelperService;
+use OCP\AppFramework\Http\TemplateResponse;
+use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
+use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 
 /**
  * Class AdminSettings
@@ -77,10 +78,10 @@ class AdminSettings implements ISettings {
         HelperService $helperService,
         FileCacheService $fileCacheService
     ) {
-        $this->request          = $request;
-        $this->config           = $config;
-        $this->urlGenerator     = $urlGenerator;
-        $this->helperService    = $helperService;
+        $this->request = $request;
+        $this->config = $config;
+        $this->urlGenerator = $urlGenerator;
+        $this->helperService = $helperService;
         $this->fileCacheService = $fileCacheService;
     }
 
@@ -88,7 +89,8 @@ class AdminSettings implements ISettings {
      * @return TemplateResponse returns the instance with all parameters set, ready to be rendered
      */
     public function getForm(): TemplateResponse {
-        return new TemplateResponse('passwords', 'admin/index', [
+        return new TemplateResponse(
+            'passwords', 'admin/index', [
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
@@ -112,7 +114,8 @@ class AdminSettings implements ISettings {
                 'forum'         => self::LINK_FORUM,
                 'help'          => self::LINK_HELP
             ]
-        ]);
+        ]
+        );
     }
 
     /**
@@ -361,8 +364,8 @@ class AdminSettings implements ISettings {
         $info = [];
         foreach($caches as $cache) {
             try {
-                $info[ $cache ]              = $this->fileCacheService->getCacheInfo($cache);
-                $info[ $cache ]['clearable'] = true;
+                $info[$cache] = $this->fileCacheService->getCacheInfo($cache);
+                $info[$cache]['clearable'] = true;
             } catch(Exception $e) {
             }
         }
@@ -371,7 +374,7 @@ class AdminSettings implements ISettings {
             $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
             empty($this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, ''))
         ) {
-            $info[ $this->fileCacheService::FAVICON_CACHE ]['clearable'] = false;
+            $info[$this->fileCacheService::FAVICON_CACHE]['clearable'] = false;
         }
 
         return $info;
@@ -381,32 +384,32 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion     = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
-        $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
+        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $cronType = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
+        $cronPhpId = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
         $cronPhpString = $this->config->getAppValue('cron/php/version/string', PHP_VERSION);
 
         return [
             'cron'    => $cronType,
             'https'   => $this->request->getHttpProtocol() === 'https',
             'php'     => [
-                'warn'    => PHP_VERSION_ID < 80000,
-                'error'   => PHP_VERSION_ID < 70400,
+                'warn'    => PHP_VERSION_ID < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
+                'error'   => PHP_VERSION_ID < SystemRequirements::PHP_MINIMUM_ID,
                 'version' => PHP_VERSION
             ],
             'cronPhp' => [
                 'isDifferent' => PHP_VERSION_ID - $cronPhpId > 99 || $cronPhpId - PHP_VERSION_ID > 99,
-                'warn'        => $cronPhpId < 80000,
-                'error'       => $cronPhpId < 70400,
+                'warn'        => $cronPhpId < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
+                'error'       => $cronPhpId < SystemRequirements::PHP_MINIMUM_ID,
                 'cronVersion' => $cronPhpString,
                 'webVersion'  => PHP_VERSION
             ],
             'server'  => [
-                'warn'    => $ncVersion < 21,
-                'error'   => $ncVersion < 20,
+                'warn'    => $ncVersion < SystemRequirements::NC_DEPRECATION_WARNING_ID,
+                'error'   => $ncVersion < SystemRequirements::NC_MINIMUM_ID,
                 'version' => $ncVersion
             ],
-            'eol'     => '2022.1.0'
+            'eol'     => SystemRequirements::APP_BC_BREAK
         ];
     }
 

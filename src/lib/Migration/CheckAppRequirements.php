@@ -13,6 +13,7 @@
 
 namespace OCA\Passwords\Migration;
 
+use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Exception\Migration\PhpRequirementNotMetException;
 use OCA\Passwords\Exception\Migration\UpgradeUnsupportedException;
 use OCP\IConfig;
@@ -63,23 +64,11 @@ class CheckAppRequirements implements IRepairStep {
     }
 
     /**
-     * @throws UpgradeUnsupportedException if the previous version is below the minimum requirement
-     */
-    protected function canUpgradeFromPreviousVersion() {
-        $previousVersion = $this->config->getAppValue('passwords', 'installed_version', '0.0.0');
-        if($previousVersion === '0.0.0') return;
-
-        if(version_compare(self::UPGRADE_MINIMUM_APP_VERSION, $previousVersion) === 1) {
-            //throw new UpgradeUnsupportedException($previousVersion, self::UPGRADE_MINIMUM_APP_VERSION);
-        }
-    }
-
-    /**
      * @throws PhpRequirementNotMetException if the used version of PHP is too low
      */
     protected function canInstallRelease() {
-        if(PHP_VERSION_ID < self::PHP_MINIMUM_REQUIREMENT_ID) {
-            throw new PhpRequirementNotMetException(PHP_VERSION, self::PHP_MINIMUM_REQUIREMENT);
+        if(PHP_VERSION_ID < SystemRequirements::PHP_MINIMUM_ID) {
+            throw new PhpRequirementNotMetException(PHP_VERSION, SystemRequirements::PHP_MINIMUM);
         }
     }
 }
