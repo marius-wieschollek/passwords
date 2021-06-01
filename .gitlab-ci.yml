@@ -68,8 +68,6 @@ Sign:
     - echo "-----BEGIN CERTIFICATE-----" > sign.crt
     - echo $SIGN_CRT | tr " " "\n" >> sign.crt
     - echo "-----END CERTIFICATE-----" >> sign.crt
-    - echo ${#SIGN_CRT}
-    - ls -lAhs
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-legacy --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
     - rm sign.key sign.crt
