@@ -36,6 +36,10 @@ Assemble:
 Assemble Legacy:
   stage: assembling
   script:
+    - node -v
+    - npm -v
+    - which node
+    - which npm
     - mkdir passwords-legacy
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/LE73/g" ./src/appinfo/info.xml ; fi
