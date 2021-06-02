@@ -145,7 +145,7 @@ class ServerReportHelper {
         return [
             'server' => $this->config->getSystemValue('version'),
             'app'    => $this->config->getAppValue('installed_version'),
-            'lts'    => SystemRequirements::APP_LTS,
+            'lsr'    => SystemRequirements::APP_LSR,
             'php'    => PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION
         ];
     }

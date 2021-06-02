@@ -165,7 +165,7 @@ class DeferredActivationService {
 
         $version = $this->config->getAppValue('installed_version');
         if(strpos($version, '-') !== false) $version = substr($version, 0, strpos($version, '-'));
-        $version = str_ireplace('lts', '', $version);
+        $version = str_ireplace('lsr', '', $version);
 
         [$major, $minor] = explode('.', $version);
         $mainVersion = $major.'.'.$minor;

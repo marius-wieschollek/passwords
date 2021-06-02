@@ -19,7 +19,7 @@ namespace OCA\Passwords\AppInfo;
 class SystemRequirements {
 
     const APP_BC_BREAK = '2022.1.0';
-    const APP_LTS      = false;
+    const APP_LSR      = false;
 
     const NC_MINIMUM                     = '20.0.5';
     const NC_MINIMUM_ID                  = 20;
