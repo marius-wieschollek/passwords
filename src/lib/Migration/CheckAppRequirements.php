@@ -60,7 +60,6 @@ class CheckAppRequirements implements IRepairStep {
      */
     public function run(IOutput $output) {
         $this->canInstallRelease();
-        $this->canUpgradeFromPreviousVersion();
     }
 
     /**
