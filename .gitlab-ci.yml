@@ -24,6 +24,7 @@ Assemble:
   stage: assembling
   script:
     - mkdir passwords
+    - rm src/appinfo/info-lsr.xml src/lib/AppInfo/SystemRequirementsLSR.php
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD//g" ./src/appinfo/info.xml ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
@@ -37,13 +38,11 @@ Assemble Legacy Support Release:
   stage: assembling
   script:
     - mkdir passwords-lsr
+    - mv src/appinfo/info-lsr.xml src/appinfo/info.xml
     - mv src/lib/AppInfo/SystemRequirementsLSR.php src/lib/AppInfo/SystemRequirements.php
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/lsr/g" ./src/appinfo/info.xml ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}lsr/g" ./src/appinfo/info.xml ; fi
-    - sed -i -e "0,/<name>Passwords</ s/<name>Passwords</<name>Passwords (Legacy Support Release)</g" ./src/appinfo/info.xml
-    - sed -i -e "s/php min-version=\"7.4\" max-version=\"8.0\"/php min-version=\"7.3\" max-version=\"7.3\"/g" ./src/appinfo/info.xml
-    - sed -i -e "s/nextcloud min-version=\"20.0.5\"/nextcloud min-version=\"20\"/g" ./src/appinfo/info.xml
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr
     - rsync -r src/js/Static passwords-lsr/js/
     - cp CHANGELOG.md passwords-lsr/
