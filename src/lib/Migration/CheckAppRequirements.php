@@ -15,7 +15,6 @@ namespace OCA\Passwords\Migration;
 
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Exception\Migration\PhpRequirementNotMetException;
-use OCA\Passwords\Exception\Migration\UpgradeUnsupportedException;
 use OCP\IConfig;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
@@ -26,10 +25,6 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Passwords\Migration
  */
 class CheckAppRequirements implements IRepairStep {
-
-    const UPGRADE_MINIMUM_APP_VERSION   = '2020.1.0';
-    const PHP_MINIMUM_REQUIREMENT_ID    = 70300;
-    const PHP_MINIMUM_REQUIREMENT       = '7.4.0';
 
     /**
      * @var IConfig
@@ -56,7 +51,6 @@ class CheckAppRequirements implements IRepairStep {
      * @param IOutput $output
      *
      * @throws PhpRequirementNotMetException
-     * @throws UpgradeUnsupportedException
      */
     public function run(IOutput $output) {
         $this->canInstallRelease();
