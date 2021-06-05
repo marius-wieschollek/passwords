@@ -25,8 +25,8 @@ Assemble:
   script:
     - mkdir passwords
     - rm src/appinfo/info-lsr.xml src/lib/AppInfo/SystemRequirementsLSR.php
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD//g" ./src/appinfo/info.xml ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/\([0-9]\+\)-BUILD/2\1/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/\([0-9]\+\)-BUILD/2\1-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
     - cp CHANGELOG.md passwords/
@@ -41,8 +41,8 @@ Assemble Legacy Support Release:
     - mv src/appinfo/info-lsr.xml src/appinfo/info.xml
     - mv src/lib/AppInfo/SystemRequirementsLSR.php src/lib/AppInfo/SystemRequirements.php
     - npm run rector
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/-BUILD/lsr/g" ./src/appinfo/info.xml ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/-BUILD/-build${CI_PIPELINE_ID}lsr/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then sed -i -e "s/\([0-9]\+\)-BUILD/1\1/g" ./src/appinfo/info.xml ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then sed -i -e "s/\([0-9]\+\)-BUILD/1\1-build${CI_PIPELINE_ID}/g" ./src/appinfo/info.xml ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr
     - rsync -r src/js/Static passwords-lsr/js/
     - cp CHANGELOG.md passwords-lsr/

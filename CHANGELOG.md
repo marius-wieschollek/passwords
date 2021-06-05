@@ -72,6 +72,10 @@
 - Nextcloud 17, 18 and 19 support
 - PHP 7.2 and PHP 7.3 support
 
+## 2020.12.4 - Bugfix release
+- Password api does not check if password property is present
+- CSE can be used by client when not enabled
+
 ## 2020.12.3 - Bugfix release
 ### Fixed
 - Recursion in folder path
