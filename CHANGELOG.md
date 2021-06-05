@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2021.6.0 - Feature release
 ### Added
 - Legacy support releases for PHP 7.3
 - Depreaction announcement for NC 20 & PHP 7.4
