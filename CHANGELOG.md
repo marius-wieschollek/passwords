@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+- Legacy support releases for PHP 7.2
 
 ## 2021.6.0 - Feature release
 ### Added
