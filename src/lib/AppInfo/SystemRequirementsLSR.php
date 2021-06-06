@@ -18,7 +18,7 @@ namespace OCA\Passwords\AppInfo;
  */
 class SystemRequirements {
 
-    const APP_BC_BREAK = '2021.1.0';
+    const APP_BC_BREAK = '2022.1.0';
     const APP_LSR      = true;
 
     const NC_MINIMUM                     = '20.0.0';
@@ -29,7 +29,7 @@ class SystemRequirements {
 
     const PHP_MINIMUM                     = '7.2.0';
     const PHP_MINIMUM_ID                  = 70200;
-    const PHP_DEPRECATION_WARNING_ID      = 70400;
+    const PHP_DEPRECATION_WARNING_ID      = 70300;
     const PHP_DEPRECATION_NOTIFICATION_ID = 70200;
     const PHP_UPGRADE_RECOMMENDATION      = '8.0.0';
 }

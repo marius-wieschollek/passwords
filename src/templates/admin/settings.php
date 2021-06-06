@@ -27,6 +27,12 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </h2>
 </header>
 <section class="section passwords">
+    <?php if($_['support']['lsr']): ?>
+        <div class="message error">
+            <?php p($l->t('This server uses a legacy support release because it does not meet the system requirements and is no longer supported.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
     <?php if($_['support']['php']['error']): ?>
         <div class="message error">
             <?php p($l->t('%1$s %2$s is no longer supported.', ['PHP', $_['support']['php']['version']])); ?>

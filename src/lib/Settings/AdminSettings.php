@@ -392,6 +392,7 @@ class AdminSettings implements ISettings {
         return [
             'cron'    => $cronType,
             'https'   => $this->request->getHttpProtocol() === 'https',
+            'lsr'     => SystemRequirements::APP_LSR,
             'php'     => [
                 'warn'    => PHP_VERSION_ID < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
                 'error'   => PHP_VERSION_ID < SystemRequirements::PHP_MINIMUM_ID,
