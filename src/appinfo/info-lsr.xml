@@ -2,6 +2,7 @@
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>passwords</id>
     <name>Passwords (Legacy Support Release)</name>
+    <name lang="de">Passwörter (Version für veraltete Systeme)</name>
     <summary>Store, manage and access all your passwords with ease.</summary>
     <summary lang="de">Verwalten und verwenden Sie all Ihre Passwörter schnell, sicher und überall.</summary>
     <description><![CDATA[Passwords is the most advanced password manager for Nextcloud and allows you to manage and store your passwords safely in your own cloud.
@@ -111,7 +112,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="7.2" max-version="7.3" />
+        <php min-version="7.2" max-version="8.0" />
         <nextcloud min-version="20" max-version="21" />
     </dependencies>
     <background-jobs>
