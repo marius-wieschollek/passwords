@@ -20,7 +20,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
  */
 class PasswordMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_entity_password';
+    const TABLE_NAME = 'passwords_password';
 
     /**
      * @return Password[]

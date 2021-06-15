@@ -18,7 +18,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  */
 abstract class AbstractRevisionMapper extends AbstractMapper {
 
-    const MODEL_TABLE_NAME = 'passwords_model';
+    const MODEL_TABLE_NAME = '';
 
     /**
      * @param string $modelUuid

@@ -82,12 +82,18 @@ class NightlyAppFetcher extends Fetcher {
         LoggerInterface $logger,
         ILogger $legacyLogger
     ) {
+
+        $parentLogger = $logger;
+        if(intval(explode('.', $config->getSystemValue('version', '0.0.0'), 2)[0]) < 22) {
+            $parentLogger = $legacyLogger;
+        }
+
         parent::__construct(
             $appDataFactory,
             $clientService,
             $timeFactory,
             $config,
-            $legacyLogger
+            $parentLogger
         );
 
         $this->dbUpdated        = false;

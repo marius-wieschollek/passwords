@@ -23,7 +23,7 @@ use OCP\IDBConnection;
  */
 abstract class AbstractMapper extends QBMapper {
 
-    const TABLE_NAME        = 'passwords';
+    const TABLE_NAME        = '';
     const ALLOWED_OPERATORS = ['eq', 'neq', 'lt', 'gt', 'lte', 'gte'];
     const FORBIDDEN_FIELDS    = [];
 

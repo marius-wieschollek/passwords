@@ -19,7 +19,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  */
 class KeychainMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_entity_keychain';
+    const TABLE_NAME = 'passwords_keychain';
 
     /**
      * @param string $type

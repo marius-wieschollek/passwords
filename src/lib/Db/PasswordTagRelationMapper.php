@@ -13,5 +13,5 @@ namespace OCA\Passwords\Db;
  * @package OCA\Passwords\Db
  */
 class PasswordTagRelationMapper extends AbstractMapper {
-    const TABLE_NAME = 'passwords_relation_password_tag';
+    const TABLE_NAME = 'passwords_pw_tag_rel';
 }
