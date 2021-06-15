@@ -19,9 +19,10 @@ section.section.passwords {
     }
 
     .message {
-        padding       : 3px 5px;
+        padding       : 1rem;
+        border-left: 4px solid var(--color-box-shadow);
         border-radius : var(--border-radius);
-        margin-bottom : .25em;
+        margin-bottom : 1rem;
 
         &.error {
             background-color : var(--color-error);
@@ -33,11 +34,15 @@ section.section.passwords {
         }
 
         &:first-of-type {
-            margin-top : 2em;
+            margin-top : 2rem;
         }
 
         &:last-of-type {
-            margin-bottom : 2em;
+            margin-bottom : 2rem;
+        }
+
+        a {
+            text-decoration: underline;
         }
     }
 
