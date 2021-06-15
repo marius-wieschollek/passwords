@@ -69,12 +69,12 @@ class Version20210701 extends SimpleMigrationStep {
             'passwords_entity_keychain'          => 'passwords_keychain',
             'passwords_entity_password'          => 'passwords_password',
             'passwords_entity_password_revision' => 'passwords_password_rv',
-            'passwords_entity_registration'      => 'passwords_pw_tag_rel',
-            'passwords_entity_session'           => 'passwords_registration',
-            'passwords_entity_share'             => 'passwords_session',
-            'passwords_entity_tag'               => 'passwords_share',
-            'passwords_entity_tag_revision'      => 'passwords_tag',
-            'passwords_relation_password_tag'    => 'passwords_tag_rv'
+            'passwords_entity_registration'      => 'passwords_registration',
+            'passwords_entity_session'           => 'passwords_session',
+            'passwords_entity_share'             => 'passwords_share',
+            'passwords_entity_tag'               => 'passwords_tag',
+            'passwords_entity_tag_revision'      => 'passwords_tag_rv',
+            'passwords_relation_password_tag'    => 'passwords_pw_tag_rel'
         ];
 
         foreach($tableMap as $oldTable => $newTable) {

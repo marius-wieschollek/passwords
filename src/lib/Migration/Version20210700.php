@@ -31,19 +31,12 @@ class Version20210700 extends SimpleMigrationStep {
     protected IDBConnection $db;
 
     /**
-     * @var bool
-     */
-    protected bool $isNC20;
-
-    /**
      * Version20210700 constructor.
      *
      * @param IDBConnection $db
-     * @param IConfig       $config
      */
-    public function __construct(IDBConnection $db, IConfig $config) {
+    public function __construct(IDBConnection $db) {
         $this->db = $db;
-        $this->isNC20 = intval(explode('.', $config->getSystemValue('version', '0.0.0'), 2)[0]) === 20;
     }
 
     /**
@@ -1465,6 +1458,9 @@ class Version20210700 extends SimpleMigrationStep {
      * @throws \OCP\DB\Exception
      */
     public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
+        /** @var ISchemaWrapper $schema */
+        $schema = $schemaClosure();
+
         $tableMap = [
             'passwords_entity_challenge'         => 'passwords_challenge',
             'passwords_entity_folder'            => 'passwords_folder',
@@ -1472,31 +1468,49 @@ class Version20210700 extends SimpleMigrationStep {
             'passwords_entity_keychain'          => 'passwords_keychain',
             'passwords_entity_password'          => 'passwords_password',
             'passwords_entity_password_revision' => 'passwords_password_rv',
-            'passwords_entity_registration'      => 'passwords_pw_tag_rel',
-            'passwords_entity_session'           => 'passwords_registration',
-            'passwords_entity_share'             => 'passwords_session',
-            'passwords_entity_tag'               => 'passwords_share',
-            'passwords_entity_tag_revision'      => 'passwords_tag',
-            'passwords_relation_password_tag'    => 'passwords_tag_rv'
+            'passwords_entity_registration'      => 'passwords_registration',
+            'passwords_entity_session'           => 'passwords_session',
+            'passwords_entity_share'             => 'passwords_share',
+            'passwords_entity_tag'               => 'passwords_tag',
+            'passwords_entity_tag_revision'      => 'passwords_tag_rv',
+            'passwords_relation_password_tag'    => 'passwords_pw_tag_rel'
         ];
 
         foreach($tableMap as $oldTable => $newTable) {
-            if($this->isNC20) {
-                $result = $this->db->getQueryBuilder()->select($oldTable.'.*')->from($oldTable)->executeQuery();
+            $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
+
+            /**
+             * @TODO Remove execute() in 2022.1.0
+             */
+            if(method_exists($select, 'executeQuery')) {
+                $result = $select->executeQuery();
             } else {
-                $result = $this->db->getQueryBuilder()->select($oldTable.'.*')->from($oldTable)->execute();
+                $result = $select->execute();
             }
+
             $total = $result->rowCount();
             $items = $result->fetchAll();
+
+
 
             $output->info("Migrating {$total} entries from {$oldTable} to {$newTable}");
             $output->startProgress($total);
             foreach($items as $item) {
                 $query = $this->db->getQueryBuilder()->insert($newTable);
+
                 foreach($item as $key => $value) {
-                    $query->set($key, $value);
+                    $type = $schema->getTable($newTable)->getColumn($key)->getType();
+                    $query->setValue($key, $query->createNamedParameter($value, $type));
                 }
-                $query->executeStatement();
+
+                /**
+                 * @TODO Remove execute() in 2022.1.0
+                 */
+                if(method_exists($query, 'executeStatement')) {
+                    $query->executeStatement();
+                } else {
+                    $query->execute();
+                }
                 $output->advance($total);
             }
             $output->finishProgress();
