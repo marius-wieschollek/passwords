@@ -1,6 +1,9 @@
 ## [Unreleased]
 ### Added
+- Nextcloud 22 support
 - Legacy support releases for PHP 7.2
+### Changed
+- All table names
 
 ## 2021.6.0 - Feature release
 ### Added
