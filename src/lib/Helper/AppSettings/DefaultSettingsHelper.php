@@ -36,7 +36,7 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
         = [
             'mail.security' => 'boolean',
             'mail.shares'   => 'boolean',
-            'password.hash' => 'integer'
+            'password.hash' => 'select:number'
         ];
 
     /**
@@ -48,4 +48,28 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
             'mail.shares'   => false,
             'password.hash' => 40
         ];
+
+    /**
+     * @return array
+     */
+    protected function getPasswordHashOptions(): array {
+        return [
+            $this->generateOptionArray(
+                0,
+                'Don\'t store hashes'
+            ),
+            $this->generateOptionArray(
+                20,
+                'Store 50%% of the hash'
+            ),
+            $this->generateOptionArray(
+                30,
+                'Store 75%% of the hash'
+            ),
+            $this->generateOptionArray(
+                40,
+                'Store the full hash'
+            )
+        ];
+    }
 }

@@ -8,21 +8,21 @@
 namespace OCA\Passwords\Settings;
 
 use Exception;
+use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Helper\Favicon\BestIconHelper;
+use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
+use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
+use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
+use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\Settings\ISettings;
-use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Services\HelperService;
-use OCP\AppFramework\Http\TemplateResponse;
-use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\AppInfo\SystemRequirements;
-use OCA\Passwords\Helper\Image\ImagickHelper;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 
 /**
  * Class AdminSettings
@@ -78,10 +78,10 @@ class AdminSettings implements ISettings {
         HelperService $helperService,
         FileCacheService $fileCacheService
     ) {
-        $this->request = $request;
-        $this->config = $config;
-        $this->urlGenerator = $urlGenerator;
-        $this->helperService = $helperService;
+        $this->request          = $request;
+        $this->config           = $config;
+        $this->urlGenerator     = $urlGenerator;
+        $this->helperService    = $helperService;
         $this->fileCacheService = $fileCacheService;
     }
 
@@ -91,30 +91,31 @@ class AdminSettings implements ISettings {
     public function getForm(): TemplateResponse {
         return new TemplateResponse(
             'passwords', 'admin/index', [
-            'imageServices'    => $this->getImageServices(),
-            'wordsServices'    => $this->getWordsServices(),
-            'faviconServices'  => $this->getFaviconServices(),
-            'previewServices'  => $this->getWebsitePreviewServices(),
-            'securityServices' => $this->getSecurityServices(),
-            'purgeTimeout'     => $this->getPurgeTimeout(),
-            'backupInterval'   => $this->getBackupInterval(),
-            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
-            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
-            'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
-            'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
-            'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', false),
-            'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
-            'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
-            'caches'           => $this->getFileCaches(),
-            'support'          => $this->getPlatformSupport(),
-            'links'            => [
-                'documentation' => self::LINK_DOCUMENTATION,
-                'requirements'  => self::LINK_REQUIREMENTS,
-                'issues'        => self::LINK_ISSUES,
-                'forum'         => self::LINK_FORUM,
-                'help'          => self::LINK_HELP
-            ]
-        ]
+                           'imageServices'    => $this->getImageServices(),
+                           'wordsServices'    => $this->getWordsServices(),
+                           'faviconServices'  => $this->getFaviconServices(),
+                           'previewServices'  => $this->getWebsitePreviewServices(),
+                           'securityServices' => $this->getSecurityServices(),
+                           'purgeTimeout'     => $this->getPurgeTimeout(),
+                           'backupInterval'   => $this->getBackupInterval(),
+                           'securityHash'     => $this->getSecurityHash(),
+                           'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
+                           'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
+                           'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
+                           'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
+                           'legacyApiEnabled' => $this->config->getAppValue('legacy_api_enabled', false),
+                           'legacyLastUsed'   => $this->config->getAppValue('legacy_last_used', null),
+                           'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
+                           'caches'           => $this->getFileCaches(),
+                           'support'          => $this->getPlatformSupport(),
+                           'links'            => [
+                               'documentation' => self::LINK_DOCUMENTATION,
+                               'requirements'  => self::LINK_REQUIREMENTS,
+                               'issues'        => self::LINK_ISSUES,
+                               'forum'         => self::LINK_FORUM,
+                               'help'          => self::LINK_HELP
+                           ]
+                       ]
         );
     }
 
@@ -358,14 +359,30 @@ class AdminSettings implements ISettings {
      * @return array
      * @deprecated
      */
+    protected function getSecurityHash(): array {
+        return [
+            'current' => $this->config->getAppValue('settings/password/security/hash', 40),
+            'options' => [
+                0  => 'Don\'t store hashes',
+                20 => 'Store 50%% of the hash',
+                30 => 'Store 75%% of the hash',
+                40 => 'Store the full hash',
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     * @deprecated
+     */
     protected function getFileCaches(): array {
         $caches = $this->fileCacheService->listCaches();
 
         $info = [];
         foreach($caches as $cache) {
             try {
-                $info[$cache] = $this->fileCacheService->getCacheInfo($cache);
-                $info[$cache]['clearable'] = true;
+                $info[ $cache ]              = $this->fileCacheService->getCacheInfo($cache);
+                $info[ $cache ]['clearable'] = true;
             } catch(Exception $e) {
             }
         }
@@ -374,7 +391,7 @@ class AdminSettings implements ISettings {
             $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
             empty($this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, ''))
         ) {
-            $info[$this->fileCacheService::FAVICON_CACHE]['clearable'] = false;
+            $info[ $this->fileCacheService::FAVICON_CACHE ]['clearable'] = false;
         }
 
         return $info;
@@ -384,9 +401,9 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        $cronType = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
-        $cronPhpId = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
+        $ncVersion     = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
+        $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
         $cronPhpString = $this->config->getAppValue('cron/php/version/string', PHP_VERSION);
 
         return [

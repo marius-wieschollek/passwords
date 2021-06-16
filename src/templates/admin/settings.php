@@ -172,6 +172,23 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
     <form>
         <h3>
+            <?php p($l->t('Default Password Security Settings')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
+
+        <div class="area mails">
+            <label for="passwords-security-hash"><?php p($l->t('Security Check Hash')); ?></label>
+            <select id="passwords-security-hash" name="passwords-security-hash" data-setting="settings.password.hash">
+                <?php foreach($_['securityHash']['options'] as $value => $label): ?>
+                    <option value="<?php p($value); ?>" <?php p($_['securityHash']['current'] === $value ? 'selected':''); ?>><?php p($l->t($label)); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </form>
+
+    <form>
+        <h3>
             <?php p($l->t('Backup Settings')); ?>
             <span class="response success saved"><?php p($l->t('Saved')); ?></span>
             <span class="response error"><?php p($l->t('Failed')); ?></span>

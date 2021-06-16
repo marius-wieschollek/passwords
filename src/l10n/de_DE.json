@@ -182,7 +182,13 @@
         "\"%s\" was granted access to your %s Passwords account via PassLink."                      : "\"%s\" wurde mittels PassLink Zugriff auf Ihr %s Konto gewährt.",
         "You can manage all connected devices and apps in your %s settings in the security section.": "Sie können alle verknüpften Geräte und Apps in den %s Einstellungen im Bereich \"Sicherheit\" verwalten.",
         "The last background job was executed with PHP %1$s, but the webserver uses PHP %2$s."      : "Die letzte Hintergrundaufgabe wurde mit PHP %1$s ausgeführt, der Webserver verwendet jedoch %2$s.",
-        "Using different major versions of PHP may cause issues."                                   : "Die Verwendung verschiedener Hauptversionen von PHP kann Probleme verursachen."
+        "Using different major versions of PHP may cause issues."                                   : "Die Verwendung verschiedener Hauptversionen von PHP kann Probleme verursachen.",
+        "Default Password Security Settings"                                                        : "Passwortsicherheit Standardeinstellungen",
+        "Security Check Hash"                                                                       : "Hash für den Sicherheitstest",
+        "Don't store hashes"                                                                        : "Keinen Hash speichern",
+        "Store 50% of the hash"                                                                     : "50% des Hash speichern",
+        "Store 75% of the hash"                                                                     : "75% des Hash speichern",
+        "Store the full hash"                                                                       : "Kompletten Hash speichern"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
