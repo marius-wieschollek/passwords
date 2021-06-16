@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\HelperService;
@@ -47,6 +48,16 @@ class CheckPasswordsJob extends AbstractTimedJob {
     protected NotificationService $notificationService;
 
     /**
+     * @var UserSettingsHelper
+     */
+    protected UserSettingsHelper $userSettingsHelper;
+
+    /**
+     * @var array
+     */
+    protected array $hashLengths = [];
+
+    /**
      * @var array
      */
     protected array $badPasswords = [];
@@ -64,6 +75,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @param ConfigurationService   $config
      * @param HelperService          $helperService
      * @param EnvironmentService     $environment
+     * @param UserSettingsHelper     $userSettingsHelper
      * @param PasswordRevisionMapper $revisionMapper
      * @param NotificationService    $notificationService
      */
@@ -73,12 +85,14 @@ class CheckPasswordsJob extends AbstractTimedJob {
         ConfigurationService $config,
         HelperService $helperService,
         EnvironmentService $environment,
+        UserSettingsHelper $userSettingsHelper,
         PasswordRevisionMapper $revisionMapper,
         NotificationService $notificationService
     ) {
+        $this->mailService         = $mailService;
         $this->helperService       = $helperService;
         $this->revisionMapper      = $revisionMapper;
-        $this->mailService         = $mailService;
+        $this->userSettingsHelper  = $userSettingsHelper;
         $this->notificationService = $notificationService;
         parent::__construct($logger, $config, $environment);
     }
@@ -105,6 +119,8 @@ class CheckPasswordsJob extends AbstractTimedJob {
 
         $badRevisionCounter = 0;
         foreach($revisions as $revision) {
+            $this->checkHashLength($revision);
+
             $oldStatusCode = $revision->getStatusCode();
             [$statusLevel, $statusCode] = $securityHelper->getRevisionSecurityLevel($revision);
 
@@ -151,6 +167,39 @@ class CheckPasswordsJob extends AbstractTimedJob {
         foreach($this->badPasswords as $user => $count) {
             $this->notificationService->sendBadPasswordNotification($user, $count);
             $this->mailService->sendBadPasswordMail($user, $count);
+        }
+    }
+
+    /**
+     * @param $userId
+     *
+     * @return int
+     */
+    protected function getUserHashLength($userId): int {
+        if(!isset($this->hashLengths[ $userId ])) {
+            try {
+                $this->hashLengths[ $userId ] = $this->userSettingsHelper->get('password.security.hash', $userId);
+            } catch(Throwable $e) {
+                $this->logger->logException($e);
+                $this->hashLengths[ $userId ] = 40;
+            }
+        }
+
+        return $this->hashLengths[ $userId ];
+    }
+
+    /**
+     * @param PasswordRevision $revision
+     */
+    protected function checkHashLength(PasswordRevision $revision): void {
+        $hashLength = $this->getUserHashLength($revision->getUserId());
+        if(strlen($revision->getHash()) > $hashLength) {
+            if($hashLength !== 0) {
+                $revision->setHash(substr($revision->getHash(), 0, $hashLength));
+            } else {
+                $revision->setHash('');
+            }
+            $this->revisionMapper->update($revision);
         }
     }
 }

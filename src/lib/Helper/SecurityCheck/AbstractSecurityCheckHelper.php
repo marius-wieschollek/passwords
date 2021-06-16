@@ -81,10 +81,10 @@ abstract class AbstractSecurityCheckHelper {
         UserRulesSecurityCheck $userRulesCheck,
         ConfigurationService $configurationService
     ) {
-        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
-        $this->config           = $configurationService;
-        $this->logger           = $logger;
-        $this->userRulesCheck   = $userRulesCheck;
+        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
+        $this->config            = $configurationService;
+        $this->logger            = $logger;
+        $this->userRulesCheck    = $userRulesCheck;
         $this->httpClientService = $httpClientService;
     }
 
@@ -99,7 +99,7 @@ abstract class AbstractSecurityCheckHelper {
      * @throws Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): array {
-        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
+        if(!empty($revision->getHash()) && !$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
 
         $userRules = $this->userRulesCheck->getRevisionSecurityLevel($revision);
         if($userRules !== null) return $userRules;
@@ -126,9 +126,11 @@ abstract class AbstractSecurityCheckHelper {
      * @return bool
      */
     public function isHashSecure(string $hash): bool {
+        if(empty($hash)) return false;
+
         if(!isset($this->hashStatusCache[ $hash ])) {
             $hashes                         = $this->readPasswordsFile($hash);
-            $this->hashStatusCache[ $hash ] = !in_array($hash, $hashes);
+            $this->hashStatusCache[ $hash ] = !$this->checkForHashInHashes($hashes, $hash);
         }
 
         return $this->hashStatusCache[ $hash ];
@@ -190,6 +192,27 @@ abstract class AbstractSecurityCheckHelper {
         $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
 
         return extension_loaded('zlib') ? $file.'.gz':$file;
+    }
+
+    /**
+     * @param $hashes
+     * @param $hash
+     *
+     * @return bool
+     */
+    protected function checkForHashInHashes($hashes, $hash): bool {
+        $length = strlen($hash);
+        if($length === 40) {
+            return in_array($hash, $hashes);
+        } else {
+            foreach($hashes as $current) {
+                if(substr($current, 0, $length) === $hash) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
     /**

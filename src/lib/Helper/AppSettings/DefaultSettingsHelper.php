@@ -25,7 +25,8 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
     protected array $keys
         = [
             'mail.security' => 'settings/mail/security',
-            'mail.shares'   => 'settings/mail/shares'
+            'mail.shares'   => 'settings/mail/shares',
+            'password.hash' => 'settings/password/security/hash'
         ];
 
     /**
@@ -34,7 +35,8 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
     protected array $types
         = [
             'mail.security' => 'boolean',
-            'mail.shares'   => 'boolean'
+            'mail.shares'   => 'boolean',
+            'password.hash' => 'integer'
         ];
 
     /**
@@ -43,6 +45,7 @@ class DefaultSettingsHelper extends AbstractSettingsHelper {
     protected array $defaults
         = [
             'mail.security' => true,
-            'mail.shares'   => false
+            'mail.shares'   => false,
+            'password.hash' => 40
         ];
 }

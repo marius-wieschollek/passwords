@@ -29,6 +29,15 @@
                            v-model="settings['user.password.security.age']">
                     <settings-help text="Mark passwords as weak if they surpass the specified amount of days"/>
 
+                    <translate tag="label" for="setting-hash-length" say="Security Check Hash" v-if="advancedSettings"/>
+                    <select id="setting-hash-length" v-model.number="settings['user.password.security.hash']" v-if="advancedSettings">
+                        <translate tag="option" value="0" say="Don't store hashes"></translate>
+                        <translate tag="option" value="20" say="Store 50% of the hash"></translate>
+                        <translate tag="option" value="30" say="Store 75% of the hash"></translate>
+                        <translate tag="option" value="40" say="Store the full hash"></translate>
+                    </select>
+                    <settings-help text="The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached." v-if="advancedSettings"/>
+
                     <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
                     <select id="setting-security-level" v-model.number="settings['user.password.generator.strength']">

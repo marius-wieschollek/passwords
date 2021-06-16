@@ -35,6 +35,7 @@ use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
 use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
 use OCA\Passwords\EventListener\Password\PasswordClonedListener;
 use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
+use OCA\Passwords\EventListener\PasswordRevision\BeforePasswordRevisionSavedEventListener;
 use OCA\Passwords\EventListener\Share\ShareDeletedListener;
 use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
 use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
@@ -52,6 +53,8 @@ use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
 use OCA\Passwords\Events\Password\PasswordClonedEvent;
 use OCA\Passwords\Events\Password\PasswordDeletedEvent;
+use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionCreatedEvent;
+use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
 use OCA\Passwords\Events\Share\ShareDeletedEvent;
 use OCA\Passwords\Events\Tag\BeforeTagDeletedEvent;
 use OCA\Passwords\Events\Tag\BeforeTagSetRevisionEvent;
@@ -228,6 +231,9 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(BeforePasswordSetRevisionEvent::class, BeforePasswordSetRevisionListener::class);
         $dispatcher->addServiceListener(PasswordClonedEvent::class, PasswordClonedListener::class);
         $dispatcher->addServiceListener(PasswordDeletedEvent::class, PasswordDeletedListener::class);
+
+        $dispatcher->addServiceListener(BeforePasswordRevisionCreatedEvent::class, BeforePasswordRevisionSavedEventListener::class);
+        $dispatcher->addServiceListener(BeforePasswordRevisionUpdatedEvent::class, BeforePasswordRevisionSavedEventListener::class);
 
         $dispatcher->addServiceListener(BeforeFolderDeletedEvent::class, BeforeFolderDeletedListener::class);
         $dispatcher->addServiceListener(BeforeFolderSetRevisionEvent::class, BeforeFolderSetRevisionListener::class);

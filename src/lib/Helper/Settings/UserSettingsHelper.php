@@ -33,6 +33,7 @@ class UserSettingsHelper {
             'password/generator/special'   => 'boolean',
             'password/security/duplicates' => 'boolean',
             'password/security/age'        => 'integer',
+            'password/security/hash'       => 'integer',
             'mail/security'                => 'boolean',
             'mail/shares'                  => 'boolean',
             'notification/security'        => 'boolean',
@@ -56,6 +57,7 @@ class UserSettingsHelper {
             'password/generator/special'   => false,
             'password/security/duplicates' => true,
             'password/security/age'        => 0,
+            'password/security/hash'       => 40,
             'mail/security'                => true,
             'mail/shares'                  => false,
             'notification/security'        => true,
@@ -226,7 +228,7 @@ class UserSettingsHelper {
             } catch(Exception $e) {
                 return 0;
             }
-        } else if(in_array($key, ['mail/security', 'mail/shares'])) {
+        } else if(in_array($key, ['mail/security', 'mail/shares', 'password/security/hash'])) {
             return $this->config->getAppValue('settings/'.$key, $this->userDefaults[ $key ]);
         } else if($key === 'sharing/editable') {
             return $this->config->getAppValue('shareapi_enabled', 'yes', 'core') === 'yes' &&
@@ -255,6 +257,9 @@ class UserSettingsHelper {
             return $this->getDefaultValue($key, $userId);
         }
         if($key === 'password/security/age' && $value < 0) {
+            return $this->getDefaultValue($key, $userId);
+        }
+        if($key === 'password/security/hash' && ($value < 0 || $value > 40)) {
             return $this->getDefaultValue($key, $userId);
         }
         if($key === 'encryption/cse' && ($value < 0 || $value > 1)) {

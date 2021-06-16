@@ -18,9 +18,8 @@ use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
  */
 class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
-    const PASSWORD_DB      = 'hibp';
-    const SERVICE_URL      = 'https://api.pwnedpasswords.com/range/';
-    const COOKIE_FILE      = 'nc_pw_hibp_api_cookies.txt';
+    const PASSWORD_DB = 'hibp';
+    const SERVICE_URL = 'https://api.pwnedpasswords.com/range/';
 
     protected array $checkedRanges = [];
 
@@ -57,9 +56,13 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         $range = substr($hash, 0, 5);
 
         if(in_array($range, $this->checkedRanges)) {
-            $this->hashStatusCache[ $hash ] = true;
+            if(!array_key_exists($hash, $this->hashStatusCache)) {
+                $hashes = array_keys($this->hashStatusCache);
 
-            return false;
+                return $this->checkForHashInHashes($hashes, $hash);
+            } else {
+                return !$this->hashStatusCache[ $hash ];
+            }
         }
 
         $responseData = $this->executeApiRequest($range);
@@ -67,7 +70,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         $this->addHashToLocalDb($hash, $hashes);
         $this->checkedRanges[] = $range;
 
-        return in_array($hash, $hashes);
+        return $this->checkForHashInHashes($hashes, $hash);
     }
 
     /**
@@ -114,7 +117,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
             $client   = $this->httpClientService->newClient();
             $response = $client->get(self::SERVICE_URL.$range, ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
         } catch(ClientException $e) {
-            if($e->getResponse()->getStatusCode() === 404) {
+            if($e->getResponse()->getStatusCode() === 404 || $e->getResponse()->getStatusCode() === 502) {
                 return '';
             }
 

@@ -13,6 +13,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCP\AppFramework\IAppContainer;
@@ -54,9 +55,7 @@ class ValidationService {
         if(empty($password->getPassword())) {
             throw new ApiException('Field "password" can not be empty', 400);
         }
-        if(empty($password->getHash()) || !preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
-            throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
-        }
+        $this->checkHash($password);
         if(empty($password->getEdited()) || $password->getEdited() > strtotime('+2 hour')) {
             $password->setEdited(time());
         }
@@ -228,6 +227,36 @@ class ValidationService {
 
         if($revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE) {
             throw new ApiException('No encryption specified', 400);
+        }
+    }
+
+    /**
+     * @param PasswordRevision $password
+     *
+     * @throws ApiException
+     */
+    protected function checkHash(PasswordRevision $password): void {
+        if(empty($password->getHash())) {
+            if(!preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
+
+                if($password->isEditable() && empty($password->getShareId())) {
+                    /** @var UserSettingsHelper $settingsHelper */
+                    $settingsHelper = $this->container->get(UserSettingsHelper::class);
+                    $length         = $settingsHelper->get('password.security.hash');
+
+                    if(preg_match("/^[0-9a-z]{$length}$/", $password->getHash()) !== false) {
+                        return;
+                    }
+                } else {
+                    if(empty($password->getHash()) ||
+                       preg_match("/^[0-9a-z]{20}$/", $password->getHash()) !== false ||
+                       preg_match("/^[0-9a-z]{30}$/", $password->getHash()) !== false) {
+                        return;
+                    }
+                }
+            }
+
+            throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }
     }
 }
