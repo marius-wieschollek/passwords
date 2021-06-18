@@ -16,6 +16,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\IAppContainer;
 use Throwable;
 
@@ -237,26 +238,34 @@ class ValidationService {
      */
     protected function checkHash(PasswordRevision $password): void {
         if(empty($password->getHash())) {
-            if(!preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
+            $settingsHelper = $this->container->get(UserSettingsHelper::class);
+            $length         = $settingsHelper->get('password.security.hash');
 
-                if($password->isEditable() && empty($password->getShareId())) {
-                    /** @var UserSettingsHelper $settingsHelper */
-                    $settingsHelper = $this->container->get(UserSettingsHelper::class);
-                    $length         = $settingsHelper->get('password.security.hash');
+            if($length === 0) return;
+        } else if(preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
+            return;
+        } else {
+            /** @var PasswordService $passwordService */
+            $passwordService = $this->container->get(PasswordService::class);
+            $model           = $passwordService->findByUuid($password->getModel());
 
-                    if(preg_match("/^[0-9a-z]{$length}$/", $password->getHash()) !== false) {
-                        return;
-                    }
-                } else {
-                    if(empty($password->getHash()) ||
-                       preg_match("/^[0-9a-z]{20}$/", $password->getHash()) !== false ||
-                       preg_match("/^[0-9a-z]{30}$/", $password->getHash()) !== false) {
-                        return;
-                    }
+            if($model->isEditable() && empty($model->getShareId())) {
+                /** @var UserSettingsHelper $settingsHelper */
+                $settingsHelper = $this->container->get(UserSettingsHelper::class);
+                $length         = $settingsHelper->get('password.security.hash');
+
+                if($length !== 40 && preg_match("/^[0-9a-z]{{$length}}$/", $password->getHash()) === 1) {
+                    return;
+                }
+            } else {
+                if(empty($password->getHash()) ||
+                   preg_match("/^[0-9a-z]{20}$/", $password->getHash()) === 1 ||
+                   preg_match("/^[0-9a-z]{30}$/", $password->getHash()) === 1) {
+                    return;
                 }
             }
-
-            throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
         }
+
+        throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
     }
 }
