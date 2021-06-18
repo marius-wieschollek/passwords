@@ -35,12 +35,13 @@
         <translate tag="div" say="Encryption applied on client" title="The encryption applied by the client before sending the data to the server">
             <translate :say="getCseType"/>
         </translate>
-        <detail-field label="SHA-1" type="text" :value="password.hash"/>
+        <detail-field label="SHA-1" type="text" :value="hash"/>
     </div>
 </template>
 
 <script>
     import Web from '@vc/Web';
+    import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
@@ -61,8 +62,13 @@
 
         data() {
             return {
-                showHiddenFields: SettingsService.get('client.ui.custom.fields.show.hidden')
+                showHiddenFields: SettingsService.get('client.ui.custom.fields.show.hidden'),
+                hash: ''
             };
+        },
+
+        mounted() {
+            this.computeHash();
         },
 
         computed: {
@@ -140,6 +146,21 @@
         methods : {
             getDateTime(date) {
                 return Localisation.formatDateTime(date);
+            },
+            async computeHash() {
+
+                let hash = this.password.hash;
+
+                if(hash.length === 40) {
+                    this.hash = hash
+                } else {
+                    this.hash = await API.getHash(this.password.password, 'SHA-1', 40)
+                }
+            }
+        },
+        watch: {
+            password() {
+                this.computeHash();
             }
         }
     };

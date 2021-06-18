@@ -12,7 +12,6 @@ import SearchManager    from '@js/Manager/SearchManager';
 import SettingsService  from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
 import SetupManager     from "@js/Manager/SetupManager";
-import ToastService     from '@js/Services/ToastService';
 
 
 class Application {
@@ -116,7 +115,8 @@ class Application {
             user       = userEl ? userEl.getAttribute('content'):null,
             token      = tokenEl ? tokenEl.getAttribute('content'):null,
             cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-            folderIcon = SettingsService.get('server.theme.folder.icon');
+            folderIcon = SettingsService.get('server.theme.folder.icon'),
+            hashLength = SettingsService.get('user.password.security.hash');
 
         if(!user || !token) {
             Messages.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
@@ -126,7 +126,7 @@ class Application {
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
-        API.initialize({baseUrl, user, password: token, folderIcon, cseMode, events: this._events});
+        API.initialize({baseUrl, user, password: token, folderIcon, hashLength, cseMode, events: this._events});
         return true;
     }
 
