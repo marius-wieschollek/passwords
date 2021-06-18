@@ -127,6 +127,10 @@ class Application {
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
         API.initialize({baseUrl, user, password: token, folderIcon, hashLength, cseMode, events: this._events});
+        SettingsService.observe('user.password.security.hash', function(setting) {
+            API.config.hashLength = setting.value;
+        });
+
         return true;
     }
 
