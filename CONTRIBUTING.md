@@ -23,7 +23,7 @@ This repository ships with a full docker based development environment that enab
 #### Setup
 1. Checkout the project with `git clone git@github.com:marius-wieschollek/passwords.git`
 2. Open the project directory in a terminal
-3. Run `npm install`
+3. Run `npm ci`
 4. Run `npm run build`
 5. If you have [mkcert](https://github.com/FiloSottile/mkcert), run `npm run mkcert`
 6. Run `npm run start`

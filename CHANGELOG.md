@@ -2,6 +2,7 @@
 ### Added
 - Nextcloud 22 support
 - Legacy support releases for PHP 7.2
+- Add support for partial hashes
 ### Changed
 - All table names
 
