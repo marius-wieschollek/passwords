@@ -82,7 +82,6 @@ export default class BitwardenConversionHelper {
             }
         }
 
-
         return {folders, folderMap};
     }
 
@@ -115,7 +114,7 @@ export default class BitwardenConversionHelper {
                 password = 'password-missing-during-import';
             if(item.hasOwnProperty('login')) {
                 username = item.login.username;
-                password = item.login.password;
+                if(item.login.password !== null) password = item.login.password;
             }
 
             let object = {
@@ -200,11 +199,13 @@ export default class BitwardenConversionHelper {
      */
     static _processCreditCartFields(item, password, errors) {
         let card = item.card;
-        password.username = card.cardholderName;
-        CustomFieldsHelper.createCustomField(password, errors, card.brand, Localisation.translate('Brand'), 'text');
-        CustomFieldsHelper.createCustomField(password, errors, card.number, Localisation.translate('Number'), 'text');
-        CustomFieldsHelper.createCustomField(password, errors, card.code, Localisation.translate('Code'), 'secret');
-        CustomFieldsHelper.createCustomField(password, errors, `${card.expMonth}/${card.expYear}`, Localisation.translate('Expires'), 'text');
+        if(card.hasOwnProperty('cardholderName') && card.cardholderName) password.username = card.cardholderName;
+        if(card.hasOwnProperty('brand') && card.brand) CustomFieldsHelper.createCustomField(password, errors, card.brand, Localisation.translate('Brand'), 'text');
+        if(card.hasOwnProperty('number') && card.number) CustomFieldsHelper.createCustomField(password, errors, card.number, Localisation.translate('Number'), 'text');
+        if(card.hasOwnProperty('code') && card.code) CustomFieldsHelper.createCustomField(password, errors, card.code, Localisation.translate('Code'), 'secret');
+        if(card.hasOwnProperty('expMonth') && card.expMonth && card.hasOwnProperty('expYear') && card.expYear) {
+            CustomFieldsHelper.createCustomField(password, errors, `${card.expMonth}/${card.expYear}`, Localisation.translate('Expires'), 'text');
+        }
     }
 
     /**
