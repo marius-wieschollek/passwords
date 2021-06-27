@@ -5,6 +5,8 @@
 - Add support for partial hashes
 ### Changed
 - All table names
+### Fixed
+- Bitwarden import fails when credit card fields empty
 
 ## 2021.6.0 - Feature release
 ### Added
