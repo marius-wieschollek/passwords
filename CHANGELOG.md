@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2021.7.0 - Feature release
 ### Added
 - Nextcloud 22 support
 - Legacy support releases for PHP 7.2
