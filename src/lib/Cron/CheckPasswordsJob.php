@@ -110,16 +110,19 @@ class CheckPasswordsJob extends AbstractTimedJob {
     }
 
     /**
-     * @param $securityHelper
+     * @param AbstractSecurityCheckHelper $securityHelper
      *
      * @throws Exception
      */
     protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
-        $revisions = $this->revisionMapper->findAllWithGoodStatus();
+        /** @var PasswordRevision[] $revisions */
+        $revisions = $this->revisionMapper->findAll();
 
         $badRevisionCounter = 0;
         foreach($revisions as $revision) {
             $this->checkHashLength($revision);
+
+            if($revision->getStatus() === 2) continue;
 
             $oldStatusCode = $revision->getStatusCode();
             [$statusLevel, $statusCode] = $securityHelper->getRevisionSecurityLevel($revision);
