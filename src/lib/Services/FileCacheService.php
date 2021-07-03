@@ -24,11 +24,12 @@ use Throwable;
  */
 class FileCacheService {
 
-    const DEFAULT_CACHE   = 'default';
-    const AVATAR_CACHE    = 'avatars';
-    const FAVICON_CACHE   = 'favicon';
-    const PREVIEW_CACHE   = 'preview';
-    const PASSWORDS_CACHE = 'passwords';
+    const DEFAULT_CACHE     = 'default';
+    const AVATAR_CACHE      = 'avatars';
+    const FAVICON_CACHE     = 'favicon';
+    const PREVIEW_CACHE     = 'preview';
+    const PASSWORDS_CACHE   = 'passwords';
+    const CACHEDIR_TAG_FILE = 'CACHEDIR.TAG';
 
     /**
      * @var IAppData
@@ -69,7 +70,7 @@ class FileCacheService {
         try {
             return $this->appData->getFolder($cache.'Cache');
         } catch(NotFoundException $e) {
-            return $this->appData->newFolder($cache.'Cache');
+            return $this->createCacheFolder($cache);
         }
     }
 
@@ -276,5 +277,29 @@ class FileCacheService {
      */
     protected function setDefaultCache(string $defaultCache = self::DEFAULT_CACHE) {
         $this->defaultCache = $defaultCache;
+    }
+
+    /**
+     * @param string $cache
+     *
+     * @return ISimpleFolder
+     * @throws NotPermittedException
+     */
+    protected function createCacheFolder(string $cache): ISimpleFolder {
+        $folder = $this->appData->newFolder($cache.'Cache');
+
+        try {
+            if($folder->fileExists(self::CACHEDIR_TAG_FILE)) {
+                $fileModel = $folder->getFile(self::CACHEDIR_TAG_FILE);
+            } else {
+                $fileModel = $folder->newFile(self::CACHEDIR_TAG_FILE);
+            }
+
+            $fileModel->putContent("Signature: 8a477f597d28d172789f06886806bc55\n# This file is a cache directory tag created by Passwords for Nextcloud.");
+        } catch(Throwable $e) {
+            $this->logger->logException($e);
+        }
+
+        return $folder;
     }
 }
