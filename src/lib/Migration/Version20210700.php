@@ -45,7 +45,7 @@ class Version20210700 extends SimpleMigrationStep {
      * @since 14.0.0
      */
     public function name(): string {
-        return 'Move tables';
+        return 'Create tables and move data';
     }
 
     /**
