@@ -76,7 +76,7 @@ We offer an [import file](https://git.mdns.eu/nextcloud/passwords/wikis/Develope
  - [https://localhost](https://localhost) is Nextcloud (with the app)
  - [https://localhost:8080](https://localhost:8080) is PhpMyAdmin (for the MySQL database)
  - [https://localhost:1080](https://localhost:1080) is MailHog (for Emails)
- - [https://localhost:8081](https://localhost:8081) is pgAdmin (for the Postgres database, user `admin@nextcloud`, password `nextcloud`)
+ - [http://localhost:8081](http://localhost:8081) is pgAdmin (for the Postgres database, user `admin@passwords.local`, password `nextcloud`. The database password is also `nextcloud`)
  - [https://localhost:9090](https://localhost:9090) is PhpLdapAdmin (optional, user `cn=admin,dc=nextcloud`, password `nextcloud`)
  - [https://localhost:9091](https://localhost:9091) is Keycloak (for SAML, optional, user `admin`, password `nextcloud`)
 

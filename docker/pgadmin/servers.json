@@ -1,0 +1,13 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "Nextcloud",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "nextcloud",
+            "Host": "postgres",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres"
+        }
+    }
+}

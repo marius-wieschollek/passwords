@@ -173,7 +173,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_password_index');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_password');
         }
 
         if(!$schema->hasTable('passwords_password_rv')) {
@@ -387,7 +387,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_password_revision_index');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_password_revision');
         }
 
         if(!$schema->hasTable('passwords_folder')) {
@@ -460,7 +460,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_folder_index');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_folder');
         }
 
         if(!$schema->hasTable('passwords_folder_rv')) {
@@ -613,7 +613,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_folder_revision_index');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_folder_revision');
         }
 
         if(!$schema->hasTable('passwords_tag')) {
@@ -678,7 +678,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_tag_index');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_tag');
         }
 
         if(!$schema->hasTable('passwords_tag_rv')) {
@@ -830,7 +830,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_tag_revision_index');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_tag_revision');
         }
 
         if(!$schema->hasTable('passwords_pw_tag_rel')) {
@@ -937,7 +937,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addIndex(['tag', 'password'], 'pw_password_tag_index');
+            $table->addIndex(['tag', 'password'], 'pw_index_password_tag');
         }
 
         if(!$schema->hasTable('passwords_share')) {
@@ -1075,7 +1075,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['uuid', 'user_id', 'receiver'], 'pw_share_index');
+            $table->addUniqueIndex(['uuid', 'user_id', 'receiver'], 'pw_index_share');
         }
 
         if(!$schema->hasTable('passwords_session')) {
@@ -1172,7 +1172,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_session_index');
+            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_index_session');
         }
 
         if(!$schema->hasTable('passwords_keychain')) {
@@ -1252,7 +1252,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_keychain_index');
+            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_index_keychain');
         }
 
         if(!$schema->hasTable('passwords_challenge')) {
@@ -1338,7 +1338,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_challenge_index');
+            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_index_challenge');
         }
 
         if(!$schema->hasTable('passwords_registration')) {
@@ -1444,7 +1444,7 @@ class Version20210700 extends SimpleMigrationStep {
                 ]
             );
             $table->setPrimaryKey(['id']);
-            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_registration_index');
+            $table->addUniqueIndex(['uuid', 'user_id'], 'pw_index_registration');
         }
 
         return $schema;

@@ -2,6 +2,10 @@
 ### Added
 - Cache folders now marked with CACHEDIR.TAG file
 
+## 2021.7.1 - Bugfix release
+### Fixed
+- Index naming issue on PostgreSQL
+
 ## 2021.7.0 - Feature release
 ### Added
 - Nextcloud 22 support
