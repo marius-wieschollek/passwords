@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2021.7.1 - Bugfix release
 ### Fixed
 - Index naming issue on PostgreSQL
 
