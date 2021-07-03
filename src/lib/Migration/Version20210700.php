@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace OCA\Passwords\Migration;
 
 use Closure;
-use OCP\IConfig;
-use OCP\IDBConnection;
 use OCP\DB\ISchemaWrapper;
+use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
@@ -46,7 +45,7 @@ class Version20210700 extends SimpleMigrationStep {
      * @since 14.0.0
      */
     public function name(): string {
-        return 'Move tables';
+        return 'Create tables and move data';
     }
 
     /**
@@ -1477,44 +1476,44 @@ class Version20210700 extends SimpleMigrationStep {
         ];
 
         foreach($tableMap as $oldTable => $newTable) {
-            $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
-
-            /**
-             * @TODO Remove execute() in 2022.1.0
-             */
-            if(method_exists($select, 'executeQuery')) {
-                $result = $select->executeQuery();
-            } else {
-                $result = $select->execute();
-            }
-
-            $total = $result->rowCount();
-            $items = $result->fetchAll();
-
-
-
-            $output->info("Migrating {$total} entries from {$oldTable} to {$newTable}");
-            $output->startProgress($total);
-            foreach($items as $item) {
-                $query = $this->db->getQueryBuilder()->insert($newTable);
-
-                foreach($item as $key => $value) {
-                    $type = $schema->getTable($newTable)->getColumn($key)->getType();
-                    $query->setValue($key, $query->createNamedParameter($value, $type));
-                }
+            if($schema->hasTable($oldTable) && $schema->hasTable($newTable)) {
+                $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
 
                 /**
                  * @TODO Remove execute() in 2022.1.0
                  */
-                if(method_exists($query, 'executeStatement')) {
-                    $query->executeStatement();
+                if(method_exists($select, 'executeQuery')) {
+                    $result = $select->executeQuery();
                 } else {
-                    $query->execute();
+                    $result = $select->execute();
                 }
-                $output->advance($total);
+
+                $total = $result->rowCount();
+                $items = $result->fetchAll();
+
+                $output->info("Migrating {$total} entries from {$oldTable} to {$newTable}");
+                $output->startProgress($total);
+                foreach($items as $item) {
+                    $query = $this->db->getQueryBuilder()->insert($newTable);
+
+                    foreach($item as $key => $value) {
+                        $type = $schema->getTable($newTable)->getColumn($key)->getType();
+                        $query->setValue($key, $query->createNamedParameter($value, $type));
+                    }
+
+                    /**
+                     * @TODO Remove execute() in 2022.1.0
+                     */
+                    if(method_exists($query, 'executeStatement')) {
+                        $query->executeStatement();
+                    } else {
+                        $query->execute();
+                    }
+                    $output->advance($total);
+                }
+                $output->finishProgress();
+                $output->info('Done');
             }
-            $output->finishProgress();
-            $output->info('Done');
         }
     }
 }
