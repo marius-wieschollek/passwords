@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+- Cache folders now marked with CACHEDIR.TAG file
 
 ## 2021.7.0 - Feature release
 ### Added
