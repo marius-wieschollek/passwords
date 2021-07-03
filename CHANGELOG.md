@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+- Index naming issue on PostgreSQL
 
 ## 2021.7.0 - Feature release
 ### Added
