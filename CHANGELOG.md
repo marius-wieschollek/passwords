@@ -3,6 +3,7 @@
 ## 2021.7.1 - Bugfix release
 ### Fixed
 - Index naming issue on PostgreSQL
+- Attempt to migrate data from not existing tables
 
 ## 2021.7.0 - Feature release
 ### Added
