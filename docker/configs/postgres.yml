@@ -4,12 +4,12 @@ services:
   app:
     environment:
       - POSTGRES_DB=nextcloud
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=nextcloud
       - POSTGRES_HOST=postgres
 
   postgres:
-    image: postgres:alpine
+    image: postgres:13-alpine
     container_name: "passwords-postgres"
     restart: on-failure
     volumes:
@@ -18,22 +18,22 @@ services:
       - 5432:5432
     environment:
       POSTGRES_DB: nextcloud
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: nextcloud
 
   pgadmin:
     image: dpage/pgadmin4
     container_name: "passwords-pgadmin"
     restart: on-failure
     volumes:
-      - ./docker/volumes/nginx/default.key:/certs/server.key
-      - ./docker/volumes/nginx/default.pem:/certs/server.cert
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    #  - ./docker/volumes/nginx/default.key:/certs/server.key
+    #  - ./docker/volumes/nginx/default.pem:/certs/server.cert
     ports:
-      - 8081:443
+      - 8081:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@nextcloud
+      - PGADMIN_DEFAULT_EMAIL=admin@passwords.local
       - PGADMIN_DEFAULT_PASSWORD=nextcloud
-      - PGADMIN_ENABLE_TLS=yes
 
 volumes:
   postgres:
