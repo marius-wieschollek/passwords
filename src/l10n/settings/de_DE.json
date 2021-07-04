@@ -117,7 +117,8 @@
             "You must enter your old password"                                           : "Bitte geben Sie Ihr altes Passwort ein",
             "Your password has been changed successfully."                               : "Das Passwort wurde erfolgreich geändert.",
             "Enable the option to let other users edit a shared password by default"     : "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Bearbeiten des Passworts",
-            "Enable the option to let other users share a shared password by default"    : "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Teilen mit anderen Nutzern"
+            "Enable the option to let other users share a shared password by default"    : "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Teilen mit anderen Nutzern",
+            "Open the settings page in the handbook"                                     : "Öffnet die Seite über die Einstellungen im Handbuch"
         },
         {
             "Send keep-alive requests to the server to prevent the session from being cancelled"                          : "Sendet Keepalive-Anfragen an den Server um das beenden der Sitzung zu verhindern",

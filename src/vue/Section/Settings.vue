@@ -8,6 +8,9 @@
                         <translate tag="option" value="0" say="Default"/>
                         <translate tag="option" value="1" say="Advanced"/>
                     </select>
+                    <router-link class="button button-help" :to="{ name: 'Help', params: { page: 'Settings' }}">
+                        <translate icon="question" say="Help" title="Open the settings page in the handbook" />
+                    </router-link>
                 </div>
             </breadcrumb>
 
@@ -539,6 +542,10 @@
 
         label {
             margin-right : 5px
+        }
+
+        .button-help {
+            border-radius: var(--border-radius);
         }
     }
 

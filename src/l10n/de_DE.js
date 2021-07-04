@@ -243,6 +243,7 @@
             'Passwords App Encryption Passphrase' : 'Verschlüsselungspassphrase der Passwörter-App',
             'Cancel'                              : 'Abbrechen',
             'Ok'                                  : 'Ok',
+            'Help'                                : 'Hilfe',
             'true'                                : 'ja',
             'false'                               : 'nein',
             'yes'                                 : 'ja',
