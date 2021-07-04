@@ -52,9 +52,11 @@ class UserRulesSecurityCheck {
             return [AbstractSecurityCheckHelper::LEVEL_WEAK, AbstractSecurityCheckHelper::STATUS_OUTDATED];
         }
 
-        $checkDuplicates = $this->userSettingsHelper->get('password/security/duplicates', $revision->getUserId());
-        if($checkDuplicates && $this->revisionMapper->hasDuplicates($revision->getHash(), $revision->getModel(), $revision->getUserId())) {
-            return [AbstractSecurityCheckHelper::LEVEL_WEAK, AbstractSecurityCheckHelper::STATUS_DUPLICATE];
+        if(!empty($revision->getHash())) {
+            $checkDuplicates = $this->userSettingsHelper->get('password/security/duplicates', $revision->getUserId());
+            if($checkDuplicates && $this->revisionMapper->hasDuplicates($revision->getHash(), $revision->getModel(), $revision->getUserId())) {
+                return [AbstractSecurityCheckHelper::LEVEL_WEAK, AbstractSecurityCheckHelper::STATUS_DUPLICATE];
+            }
         }
 
         return null;

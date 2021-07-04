@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+- Passwords marked as duplicate when no hash stored
 
 ## 2021.7.1 - Bugfix release
 ### Fixed
