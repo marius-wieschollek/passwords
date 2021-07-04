@@ -16,11 +16,11 @@
                     <translate tag="h1" say="Security"/>
 
                     <translate tag="h3" say="Password Rules"/>
-                    <translate tag="label" for="setting-check-duplicates" say="Mark duplicates"/>
+                    <translate tag="label" for="setting-check-duplicates" say="Mark duplicates" v-if="showDuplicateSetting"/>
                     <input type="checkbox"
                            id="setting-check-duplicates"
-                           v-model="settings['user.password.security.duplicates']">
-                    <settings-help text="Mark passwords as weak if they are being used for multiple accounts"/>
+                           v-model="settings['user.password.security.duplicates']" v-if="showDuplicateSetting">
+                    <settings-help text="Mark passwords as weak if they are being used for multiple accounts" v-if="showDuplicateSetting"/>
 
                     <translate tag="label" for="setting-check-age" say="Maximum age in days"/>
                     <input type="number"
@@ -413,6 +413,12 @@
                 noSave      : false,
                 locked      : false
             };
+        },
+
+        computed: {
+            showDuplicateSetting() {
+                return this.settings['user.password.security.hash'] > 0;
+            }
         },
 
         beforeDestroy() {

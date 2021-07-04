@@ -2,6 +2,10 @@
 ### Added
 - Cache folders now marked with CACHEDIR.TAG file
 
+## 2021.7.2 - Bugfix release
+### Fixed
+- Passwords marked as duplicate when no hash stored
+
 ## 2021.7.1 - Bugfix release
 ### Fixed
 - Index naming issue on PostgreSQL
