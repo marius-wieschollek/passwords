@@ -1478,6 +1478,7 @@ class Version20210700 extends SimpleMigrationStep {
         foreach($tableMap as $oldTable => $newTable) {
             if($schema->hasTable($oldTable) && $schema->hasTable($newTable)) {
                 $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
+                $uuids  = $this->getMigratedUuids($newTable);
 
                 /**
                  * @TODO Remove execute() in 2022.1.0
@@ -1495,8 +1496,14 @@ class Version20210700 extends SimpleMigrationStep {
                 $output->startProgress($total);
                 foreach($items as $item) {
                     $query = $this->db->getQueryBuilder()->insert($newTable);
+                    if(in_array($item['uuid'], $uuids)) {
+                        $output->info("Skipping {$item['uuid']} because it exists in new table");
+                        $output->advance($total);
+                        continue;
+                    }
 
                     foreach($item as $key => $value) {
+                        if($key === 'id') continue;
                         $type = $schema->getTable($newTable)->getColumn($key)->getType();
                         $query->setValue($key, $query->createNamedParameter($value, $type));
                     }
@@ -1515,5 +1522,32 @@ class Version20210700 extends SimpleMigrationStep {
                 $output->info('Done');
             }
         }
+    }
+
+    /**
+     * @param string                             $newTable
+     * @param \OCP\DB\QueryBuilder\IQueryBuilder $select
+     *
+     * @return array
+     * @throws \OCP\DB\Exception
+     */
+    protected function getMigratedUuids(string $newTable): array {
+        $select = $this->db->getQueryBuilder()->select('a.uuid')->from($newTable, 'a');
+        /**
+         * @TODO Remove execute() in 2022.1.0
+         */
+        if(method_exists($select, 'executeQuery')) {
+            $result = $select->executeQuery();
+        } else {
+            $result = $select->execute();
+        }
+        $items = $result->fetchAll();
+
+        $uuids = [];
+        foreach($items as $item) {
+            $uuids[] = $item['uuid'];
+        }
+
+        return $uuids;
     }
 }
