@@ -32,7 +32,7 @@ class Version20210800 extends SimpleMigrationStep {
     protected IDBConnection $db;
 
     /**
-     * Version20210700 constructor.
+     * Version20210800 constructor.
      *
      * @param IDBConnection $db
      */
