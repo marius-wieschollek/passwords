@@ -21,7 +21,7 @@ use OCP\Migration\SimpleMigrationStep;
 /**
  * Auto-generated migration step: Please modify to your needs!
  */
-class Version20210701 extends SimpleMigrationStep {
+class Version20210801 extends SimpleMigrationStep {
 
     /**
      * Human readable name of the migration step
@@ -30,7 +30,7 @@ class Version20210701 extends SimpleMigrationStep {
      * @since 14.0.0
      */
     public function name(): string {
-        return 'Delete tables';
+        return 'Delete old tables';
     }
 
     /**
