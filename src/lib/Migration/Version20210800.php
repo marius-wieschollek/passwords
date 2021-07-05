@@ -361,7 +361,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_password_index')) {
+        if($table->hasUniqueConstraint('pw_password_index')) {
             $output->info('Removing index pw_password_index from table passwords_password');
             $table->removeUniqueConstraint('pw_password_index');
         }
@@ -371,9 +371,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_password');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_password_active')) {
-            $output->info('Creating index pw_index_password_active in table passwords_password');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_password_active');
+        if(!$table->hasUniqueConstraint('pw_index_password_ac')) {
+            $output->info('Creating index pw_index_password_ac in table passwords_password');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_password_ac');
         }
     }
 
@@ -707,19 +707,24 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_password_revision_index')) {
+        if($table->hasUniqueConstraint('pw_password_revision_index')) {
             $output->info('Removing index pw_password_revision_index from table passwords_password_rv');
             $table->removeUniqueConstraint('pw_password_revision_index');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_password_revision')) {
-            $output->info('Creating index pw_index_password_revision in table passwords_password_rv');
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_password_revision');
+        if($table->hasUniqueConstraint('pw_index_password_revision')) {
+            $output->info('Removing index pw_index_password_revision from table passwords_password_rv');
+            $table->removeUniqueConstraint('pw_index_password_revision');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_password_revision_active')) {
-            $output->info('Creating index pw_index_password_revision_active in table passwords_password_rv');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_password_revision_active');
+        if(!$table->hasUniqueConstraint('pw_index_password_rv')) {
+            $output->info('Creating index pw_index_password_rv in table passwords_password_rv');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_password_rv');
+        }
+
+        if(!$table->hasUniqueConstraint('pw_index_password_rv_ac')) {
+            $output->info('Creating index pw_index_password_rv_ac in table passwords_password_rv');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_password_rv_ac');
         }
     }
 
@@ -840,7 +845,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_folder_index')) {
+        if($table->hasUniqueConstraint('pw_folder_index')) {
             $output->info('Removing index pw_folder_index from table passwords_folder');
             $table->removeUniqueConstraint('pw_folder_index');
         }
@@ -850,9 +855,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_folder');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_folder_active')) {
-            $output->info('Creating index pw_index_folder_active in table passwords_folder');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_folder_active');
+        if(!$table->hasUniqueConstraint('pw_index_folder_ac')) {
+            $output->info('Creating index pw_index_folder_ac in table passwords_folder');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_folder_ac');
         }
     }
 
@@ -1093,19 +1098,24 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_folder_revision_index')) {
+        if($table->hasUniqueConstraint('pw_folder_revision_index')) {
             $output->info('Removing index pw_folder_revision_index from table passwords_folder_rv');
             $table->removeUniqueConstraint('pw_folder_revision_index');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_folder_revision')) {
-            $output->info('Creating index pw_index_folder in table passwords_folder_rv');
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_folder_revision');
+        if($table->hasUniqueConstraint('pw_index_folder_revision')) {
+            $output->info('Removing index pw_index_folder_revision from table passwords_folder_rv');
+            $table->removeUniqueConstraint('pw_index_folder_revision');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_folder_revision_active')) {
-            $output->info('Creating index pw_index_folder_revision_active in table passwords_folder_rv');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_folder_revision_active');
+        if(!$table->hasUniqueConstraint('pw_index_folder_rv')) {
+            $output->info('Creating index pw_index_folder_rv in table passwords_folder_rv');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_folder_rv');
+        }
+
+        if(!$table->hasUniqueConstraint('pw_index_folder_rv_ac')) {
+            $output->info('Creating index pw_index_folder_rv_ac in table passwords_folder_rv');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_folder_rv_ac');
         }
     }
 
@@ -1214,7 +1224,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_tag_index')) {
+        if($table->hasUniqueConstraint('pw_tag_index')) {
             $output->info('Removing index pw_tag_index from table passwords_tag');
             $table->removeUniqueConstraint('pw_tag_index');
         }
@@ -1224,9 +1234,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_tag');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_tag_active')) {
-            $output->info('Creating index pw_index_tag_active in table passwords_tag');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_tag_active');
+        if(!$table->hasUniqueConstraint('pw_index_tag_ac')) {
+            $output->info('Creating index pw_index_tag_ac in table passwords_tag');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_tag_ac');
         }
     }
 
@@ -1466,19 +1476,24 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_tag_revision_index')) {
+        if($table->hasUniqueConstraint('pw_tag_revision_index')) {
             $output->info('Removing index pw_tag_revision_index from table passwords_tag_rv');
             $table->removeUniqueConstraint('pw_tag_revision_index');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_tag_revision')) {
-            $output->info('Creating index pw_index_tag_revision in table passwords_tag_rv');
-            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_tag_revision');
+        if($table->hasUniqueConstraint('pw_index_tag_revision')) {
+            $output->info('Removing index pw_index_tag_revision from table passwords_tag_rv');
+            $table->removeUniqueConstraint('pw_index_tag_revision');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_tag_revision_active')) {
-            $output->info('Creating index pw_index_tag_revision_active in table passwords_tag_rv');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_tag_revision_active');
+        if(!$table->hasUniqueConstraint('pw_index_tag_rv')) {
+            $output->info('Creating index pw_index_tag_rv in table passwords_tag_rv');
+            $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_tag_rv');
+        }
+
+        if(!$table->hasUniqueConstraint('pw_index_tag_rv_ac')) {
+            $output->info('Creating index pw_index_tag_rv_ac in table passwords_tag_rv');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_tag_rv_ac');
         }
     }
 
@@ -1649,7 +1664,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_password_tag_index')) {
+        if($table->hasUniqueConstraint('pw_password_tag_index')) {
             $output->info('Removing index pw_password_tag_index from table passwords_pw_tag_rel');
             $table->removeUniqueConstraint('pw_password_tag_index');
         }
@@ -1659,9 +1674,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_password_tag');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_password_tag_active')) {
-            $output->info('Creating index pw_index_password_tag_active in table passwords_pw_tag_rel');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_password_tag_active');
+        if(!$table->hasUniqueConstraint('pw_index_pw_tag_rel_ac')) {
+            $output->info('Creating index pw_index_pw_tag_rel_ac in table passwords_pw_tag_rel');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_pw_tag_rel_ac');
         }
     }
 
@@ -1879,7 +1894,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_share_index')) {
+        if($table->hasUniqueConstraint('pw_share_index')) {
             $output->info('Removing index pw_share_index from table passwords_share');
             $table->removeUniqueConstraint('pw_share_index');
         }
@@ -1889,9 +1904,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_share');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_share_active')) {
-            $output->info('Creating index pw_index_share_active in table passwords_share');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_share_active');
+        if(!$table->hasUniqueConstraint('pw_index_share_ac')) {
+            $output->info('Creating index pw_index_share_ac in table passwords_share');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_share_ac');
         }
     }
 
@@ -2048,7 +2063,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_session_index')) {
+        if($table->hasUniqueConstraint('pw_session_index')) {
             $output->info('Removing index pw_session_index from table passwords_session');
             $table->removeUniqueConstraint('pw_session_index');
         }
@@ -2058,9 +2073,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_session');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_session_active')) {
-            $output->info('Creating index pw_index_session_active in table passwords_session');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_session_active');
+        if(!$table->hasUniqueConstraint('pw_index_session_ac')) {
+            $output->info('Creating index pw_index_session_ac in table passwords_session');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_session_ac');
         }
     }
 
@@ -2192,7 +2207,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_keychain_index')) {
+        if($table->hasUniqueConstraint('pw_keychain_index')) {
             $output->info('Removing index pw_keychain_index from table passwords_keychain');
             $table->removeUniqueConstraint('pw_keychain_index');
         }
@@ -2202,9 +2217,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_keychain');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_keychain_active')) {
-            $output->info('Creating index pw_index_keychain_active in table passwords_keychain');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_keychain_active');
+        if(!$table->hasUniqueConstraint('pw_index_keychain_ac')) {
+            $output->info('Creating index pw_index_keychain_ac in table passwords_keychain');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_keychain_ac');
         }
     }
 
@@ -2346,7 +2361,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_challenge_index')) {
+        if($table->hasUniqueConstraint('pw_challenge_index')) {
             $output->info('Removing index pw_challenge_index from table passwords_challenge');
             $table->removeUniqueConstraint('pw_challenge_index');
         }
@@ -2356,9 +2371,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_challenge');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_challenge_active')) {
-            $output->info('Creating index pw_index_challenge_active in table passwords_challenge');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_challenge_active');
+        if(!$table->hasUniqueConstraint('pw_index_challenge_ac')) {
+            $output->info('Creating index pw_index_challenge_ac in table passwords_challenge');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_challenge_ac');
         }
     }
 
@@ -2528,7 +2543,7 @@ class Version20210800 extends SimpleMigrationStep {
             $table->setPrimaryKey(['id']);
         }
 
-        if(!$table->hasUniqueConstraint('pw_registration_index')) {
+        if($table->hasUniqueConstraint('pw_registration_index')) {
             $output->info('Removing index pw_registration_index from table passwords_registration');
             $table->removeUniqueConstraint('pw_registration_index');
         }
@@ -2538,9 +2553,9 @@ class Version20210800 extends SimpleMigrationStep {
             $table->addUniqueIndex(['user_id', 'uuid'], 'pw_index_registration');
         }
 
-        if(!$table->hasUniqueConstraint('pw_index_registration_active')) {
-            $output->info('Creating index pw_index_registration_active in table passwords_registration');
-            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_registration_active');
+        if(!$table->hasUniqueConstraint('pw_index_registration_ac')) {
+            $output->info('Creating index pw_index_registration_ac in table passwords_registration');
+            $table->addUniqueIndex(['user_id', 'uuid', 'deleted'], 'pw_index_registration_ac');
         }
     }
 }
