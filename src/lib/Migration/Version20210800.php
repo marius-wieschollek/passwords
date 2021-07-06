@@ -22,7 +22,9 @@ use OCP\Migration\SimpleMigrationStep;
 use Doctrine\DBAL\Schema\SchemaException;
 
 /**
- * Auto-generated migration step: Please modify to your needs!
+ * Class Version20210800
+ *
+ * @package OCA\Passwords\Migration
  */
 class Version20210800 extends SimpleMigrationStep {
 

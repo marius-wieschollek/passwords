@@ -19,7 +19,9 @@ use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
 /**
- * Auto-generated migration step: Please modify to your needs!
+ * Class Version20210801
+ *
+ * @package OCA\Passwords\Migration
  */
 class Version20210801 extends SimpleMigrationStep {
 
