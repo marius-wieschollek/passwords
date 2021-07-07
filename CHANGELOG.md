@@ -2,6 +2,7 @@
 ### Fixed
 - Passwords marked as duplicate when no hash stored
 - Database migration fails if data partially migrated
+- Incorrect auto_increment values in PostgreSQL
 
 ## 2021.7.1 - Bugfix release
 ### Fixed
