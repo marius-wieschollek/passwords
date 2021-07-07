@@ -126,10 +126,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <pre-migration>
             <step>OCA\Passwords\Migration\CheckAppRequirements</step>
         </pre-migration>
-        <post-migration>
-            <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
-        </post-migration>
         <live-migration>
+            <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
             <step>OCA\Passwords\Migration\CheckAppSettings</step>
             <step>OCA\Passwords\Migration\ClearAppCaches</step>
         </live-migration>
