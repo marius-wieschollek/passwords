@@ -95,7 +95,7 @@ class CreatePasswordShareHelper {
 
         /** @var Password $model */
         $model = $this->passwordModelService->findByUuid($password);
-        if($model->getShareId()) $editable = $this->checkSourceShare($receiver, $model);
+        if($model->getShareId()) [$editable, $expires] = $this->checkSourceShare($receiver, $model, $editable, $expires);
 
         $this->checkIfAlreadyShared($receiver, $model);
 
@@ -146,13 +146,20 @@ class CreatePasswordShareHelper {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
-    protected function checkSourceShare(string $receiver, Password $model): bool {
+    protected function checkSourceShare(string $receiver, Password $model, bool $editable, ?int $expires): array {
         $sourceShare = $this->modelService->findByUuid($model->getShareId());
         if($sourceShare->getUserId() === $receiver) throw new ApiException('Invalid receiver uid', 400);
         if(!$sourceShare->isShareable() || !$this->shareSettings->get('resharing')) throw new ApiException('Entity not shareable', 403);
-        if(!$sourceShare->isEditable()) return false;
+        if(!$sourceShare->isEditable()) $editable = false;
+        if($sourceShare->getExpires() !== null) {
+            if($expires === null) {
+                $expires = $sourceShare->getExpires();
+            } else if($expires > $sourceShare->getExpires()) {
+                $expires = $sourceShare->getExpires();
+            }
+        }
 
-        return true;
+        return [$editable, $expires];
     }
 
     /**

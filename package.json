@@ -63,7 +63,7 @@
         "optimize-css-assets-webpack-plugin": "^5.0.8",
         "passwords-client": "0.0.14",
         "random-material-color": "^1.0.5",
-        "sass": "^1.35.1",
+        "sass": "^1.35.2",
         "sass-loader": "^9.0.3",
         "sass-resources-loader": "^2.2.3",
         "simplemde": "^1.11.2",

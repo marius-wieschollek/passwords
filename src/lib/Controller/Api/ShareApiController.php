@@ -15,6 +15,7 @@ use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
 use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
 use OCA\Passwords\Helper\Sharing\CreatePasswordShareHelper;
 use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
+use OCA\Passwords\Helper\Sharing\UpdatePasswordShareHelper;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
@@ -60,6 +61,11 @@ class ShareApiController extends AbstractApiController {
     protected CreatePasswordShareHelper $createPasswordShare;
 
     /**
+     * @var UpdatePasswordShareHelper
+     */
+    protected UpdatePasswordShareHelper $updatePasswordShareHelper;
+
+    /**
      * @var array
      */
     protected array $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
@@ -74,6 +80,7 @@ class ShareApiController extends AbstractApiController {
      * @param ShareSettingsHelper       $shareSettings
      * @param ShareUserListHelper       $shareUserList
      * @param CreatePasswordShareHelper $createPasswordShare
+     * @param UpdatePasswordShareHelper $updatePasswordShareHelper
      */
     public function __construct(
         ?string $userId,
@@ -82,16 +89,18 @@ class ShareApiController extends AbstractApiController {
         ShareObjectHelper $objectHelper,
         ShareSettingsHelper $shareSettings,
         ShareUserListHelper $shareUserList,
-        CreatePasswordShareHelper $createPasswordShare
+        CreatePasswordShareHelper $createPasswordShare,
+        UpdatePasswordShareHelper $updatePasswordShareHelper
     ) {
         parent::__construct($request);
 
-        $this->userId              = $userId;
-        $this->modelService        = $modelService;
-        $this->objectHelper        = $objectHelper;
-        $this->shareSettings       = $shareSettings;
-        $this->shareUserList       = $shareUserList;
-        $this->createPasswordShare = $createPasswordShare;
+        $this->userId                    = $userId;
+        $this->modelService              = $modelService;
+        $this->objectHelper              = $objectHelper;
+        $this->shareSettings             = $shareSettings;
+        $this->shareUserList             = $shareUserList;
+        $this->createPasswordShare       = $createPasswordShare;
+        $this->updatePasswordShareHelper = $updatePasswordShareHelper;
     }
 
     /**
@@ -238,11 +247,7 @@ class ShareApiController extends AbstractApiController {
             throw new ApiException('Access denied', 403);
         }
 
-        $share->setExpires($expires);
-        $share->setEditable($editable);
-        $share->setShareable($shareable);
-        $share->setSourceUpdated(true);
-        $this->modelService->save($share);
+        $share = $this->updatePasswordShareHelper->updatePasswordShare($share, $expires, $editable, $shareable);
 
         return $this->createJsonResponse(['id' => $share->getUuid()]);
     }

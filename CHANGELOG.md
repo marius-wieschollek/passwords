@@ -3,6 +3,7 @@
 - Passwords marked as duplicate when no hash stored
 - Database migration fails if data partially migrated
 - Incorrect auto_increment values in PostgreSQL
+- Not editable passwords can be shared as editable
 
 ## 2021.7.1 - Bugfix release
 ### Fixed

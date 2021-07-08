@@ -139,7 +139,7 @@
             'Settings'                            : 'Einstellungen',
             'Handbook'                            : 'Handbuch',
             'Apps and Extensions'                 : 'Apps & Erweiterungen',
-            '{name} has shared this with you'     : '{name} hat dieses Passwort mit dir geteilt',
+            'It will expire {date}.'              : 'Es wird {date} ablaufen.',
             '{editable} and {shareable}.'         : '{editable} und {shareable}.',
             'Editing allowed'                     : 'Bearbeiten erlaubt',
             'Editing disallowed'                  : 'Bearbeiten nicht erlaubt',
@@ -147,7 +147,7 @@
             'sharing disallowed'                  : 'teilen nicht erlaubt',
             'Search user'                         : 'Benutzer suchen',
             'Set expiration date'                 : 'Ablaufdatum setzen',
-            'Expires {date}'                      : 'Läuft {date} ab',
+            'Expires {dateTime}'                  : 'Läuft am {dateTime} ab',
             'Choose expiration date'              : 'Wähle ein Ablaufdatum oder lass das Feld leer um endlos zu teilen',
             'Please choose a date in the future'  : 'Bitte Ablaufdatum in der Zukunft auswählen',
             'Invalid date'                        : 'Ungültiges Datum',
@@ -249,6 +249,7 @@
             'no'                                  : 'nein'
         },
         helpTexts    = {
+            '{name} has shared this password with you.'                       : '{name} hat dieses Passwort mit dir geteilt.',
             'You have reached the maximum length of 4096 characters'          : 'Du hast die maximale Länge von 4096 Zeichern erreicht',
             'We could not find anything for "{query}"'                        : 'Wir konnten nichts zu "{query}" finden',
             'The page "{page}" could not be fetched from the handbook server.': 'Die Seite "{page}" konnte nicht vom Handbuch-Server geholt werden.',

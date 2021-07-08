@@ -123,7 +123,6 @@
             'Settings'                            : '设置',
             'Handbook'                            : '参考手册',
             'Apps and Extensions'                 : 'Apps & Extensions',
-            '{name} has shared this with you'     : '{name} 和您共享了这个',
             '{editable} and {shareable}.'         : '{editable} 和 {shareable}。',
             'Editing allowed'                     : '可以编辑',
             'Editing disallowed'                  : '不可编辑',
@@ -131,7 +130,7 @@
             'sharing disallowed'                  : '不可共享',
             'Search user'                         : '搜索用户',
             'Set expiration date'                 : '设置过期日期',
-            'Expires {date}'                      : '过期于 {date}',
+            'Expires {dateTime}'                  : '过期于 {dateTime}',
             'Choose expiration date'              : '选择过期日期',
             'Please choose a date in the future'  : '请选择一个未来的日期',
             'Invalid date'                        : '非法日期',
@@ -226,6 +225,7 @@
             'no'                                  : '否'
         },
         helpTexts    = {
+            '{name} has shared this password with you.'                       : '{name} 和您共享了这个。',
             'You have reached the maximum length of 4096 characters'          : '您已经到达最长 4096 字符的限制',
             'We could not find anything for "{query}"'                        : '我们找不到任何有关“{query}”的内容。',
             'The page "{page}" could not be fetched from the handbook server.': '页面“{page}”无法从参考手册服务器上获取到。',
