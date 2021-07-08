@@ -97,9 +97,6 @@ class Version20210802 extends SimpleMigrationStep {
      * @throws \OCP\DB\Exception
      */
     public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
-        /** @var ISchemaWrapper $schema */
-        $schema = $schemaClosure();
-
         if($this->config->getSystemValue('dbtype') !== 'pgsql') {
             return;
         }
