@@ -61,6 +61,17 @@ class Version20210801 extends SimpleMigrationStep {
      * @return null|ISchemaWrapper
      */
     public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ?ISchemaWrapper {
+        return $schemaClosure();
+    }
+
+    /**
+     * @param IOutput $output
+     * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+     * @param array   $options
+     *
+     * @throws \OCP\DB\Exception
+     */
+    public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
         /** @var ISchemaWrapper $schema */
         $schema = $schemaClosure();
 
@@ -87,17 +98,5 @@ class Version20210801 extends SimpleMigrationStep {
 
             $output->info('Done');
         }
-
-        return $schema;
-    }
-
-    /**
-     * @param IOutput $output
-     * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
-     * @param array   $options
-     *
-     * @throws \OCP\DB\Exception
-     */
-    public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
     }
 }
