@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2021.7.2 - Bugfix release
 ### Fixed
 - Passwords marked as duplicate when no hash stored
 - Database migration fails if data partially migrated
