@@ -11,6 +11,7 @@ use OCA\Passwords\Services\BackupService;
 use OCP\Files\NotPermittedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -41,6 +42,7 @@ class BackupListCommand extends Command {
      */
     protected function configure(): void {
         $this->setName('passwords:backup:list')
+             ->addOption('details', 'd', InputOption::VALUE_NONE, 'Inspect backup files and list contents')
              ->setDescription('Print a list of the available backups');
     }
 
@@ -60,11 +62,30 @@ class BackupListCommand extends Command {
             return 0;
         }
 
+        $details = (bool) $input->getOption('details');
         $output->writeln('The following backups are available:');
         foreach($backups as $backup) {
-            $info = $this->backupService->getBackupInfo($backup);
+            $info = $this->backupService->getBackupInfo($backup, $details);
 
-            $output->writeln(sprintf('   %-20s  %s %s', $info['label'], $info['size'], $info['format']));
+            $output->writeln(sprintf('  %-20s  %s %s', $info['label'], $info['size'], $info['format']));
+
+            if($details) {
+                $space = str_repeat(' ', 4);
+                if(isset($info['error'])) {
+                    $output->writeln(sprintf('%sError %s', $space, $info['error']));
+                }
+                if(isset($info['version'])) {
+                    $output->writeln(sprintf('%sVersion %s', $space, $info['version']));
+                }
+                if(isset($info['users'])) {
+                    $output->writeln(sprintf('%s%-5s users', $space, $info['users']));
+                }
+                if(isset($info['entities'])) {
+                    foreach($info['entities'] as $key => $value) {
+                        $output->writeln(sprintf('%s%-5s %s', $space, $value, $key));
+                    }
+                }
+            }
         }
 
         return 0;
