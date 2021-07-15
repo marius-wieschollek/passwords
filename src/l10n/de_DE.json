@@ -188,7 +188,13 @@
         "Don't store hashes"                                                                        : "Keinen Hash speichern",
         "Store 50% of the hash"                                                                     : "50% des Hash speichern",
         "Store 75% of the hash"                                                                     : "75% des Hash speichern",
-        "Store the full hash"                                                                       : "Kompletten Hash speichern"
+        "Store the full hash"                                                                       : "Kompletten Hash speichern",
+        "Backup automatically restored"                                                             : "Sicherung automatisch wiederhergestellt",
+        "The passwords app seems tho have encountered a database issue."                            : "Es scheint ein Datenbankfehler in der Passwörter-App aufgetreten zu sein.",
+        "Because of this, the app backup \"%s\" was restored automatically."                        : "Daher wurde die App-Sicherung \"%s\" automatisch wiederhergestellt.",
+        "If this was an error, a backup of the database was made before restoring it."              : "Sollte dies ein Fehler gewesen sein, wurde eine Sicherung vor dem Wiederherstellen erstellt.",
+        "You can disable automatic backup restoring in the app settings."                           : "Das automatische Wiederherstellen kann in den Einstellungen deaktiviert werden.",
+        "Restore backups automatically when database wiped"                                         : "Sicherungen automatisch wiederherstellen wenn die Datenbank gelöscht wurde"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

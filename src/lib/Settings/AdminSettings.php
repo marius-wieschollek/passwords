@@ -100,6 +100,7 @@ class AdminSettings implements ISettings {
                            'backupInterval'   => $this->getBackupInterval(),
                            'securityHash'     => $this->getSecurityHash(),
                            'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
+                           'backupRestore'    => $this->config->getAppValue('backup/update/autorestore', true),
                            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
                            'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
                            'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),

@@ -11,6 +11,8 @@ use Exception;
 use InvalidArgumentException;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Notification\AbstractNotification;
+use OCA\Passwords\Notification\BackupFailedNotification;
+use OCA\Passwords\Notification\BackupRestoredNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
 use OCA\Passwords\Notification\BesticonApiNotification;
 use OCA\Passwords\Notification\EmptyRequiredSettingNotification;
@@ -99,6 +101,16 @@ class NotificationService implements INotifier {
     protected EmptyRequiredSettingNotification $emptyRequiredSettingNotification;
 
     /**
+     * @var BackupFailedNotification
+     */
+    protected BackupFailedNotification         $backupFailedNotification;
+
+    /**
+     * @var BackupRestoredNotification
+     */
+    protected BackupRestoredNotification       $backupRestoredNotification;
+
+    /**
      * NotificationService constructor.
      *
      * @param IFactory                         $l10nFactory
@@ -111,7 +123,9 @@ class NotificationService implements INotifier {
      * @param BesticonApiNotification          $besticonApiNotification
      * @param ShareCreatedNotification         $shareCreatedNotification
      * @param LoginAttemptNotification         $loginAttemptNotification
+     * @param BackupFailedNotification         $backupFailedNotification
      * @param ImpersonationNotification        $impersonationNotification
+     * @param BackupRestoredNotification       $backupRestoredNotification
      * @param UpgradeRequiredNotification      $upgradeRequiredNotification
      * @param EmptyRequiredSettingNotification $emptyRequiredSettingNotification
      */
@@ -126,7 +140,9 @@ class NotificationService implements INotifier {
         BesticonApiNotification $besticonApiNotification,
         ShareCreatedNotification $shareCreatedNotification,
         LoginAttemptNotification $loginAttemptNotification,
+        BackupFailedNotification $backupFailedNotification,
         ImpersonationNotification $impersonationNotification,
+        BackupRestoredNotification $backupRestoredNotification,
         UpgradeRequiredNotification $upgradeRequiredNotification,
         EmptyRequiredSettingNotification $emptyRequiredSettingNotification
     ) {
@@ -140,7 +156,9 @@ class NotificationService implements INotifier {
         $this->besticonApiNotification          = $besticonApiNotification;
         $this->shareCreatedNotification         = $shareCreatedNotification;
         $this->loginAttemptNotification         = $loginAttemptNotification;
+        $this->backupFailedNotification         = $backupFailedNotification;
         $this->impersonationNotification        = $impersonationNotification;
+        $this->backupRestoredNotification       = $backupRestoredNotification;
         $this->upgradeRequiredNotification      = $upgradeRequiredNotification;
         $this->emptyRequiredSettingNotification = $emptyRequiredSettingNotification;
     }
@@ -299,6 +317,30 @@ class NotificationService implements INotifier {
     }
 
     /**
+     * @param string $userId
+     * @param string $backup
+     */
+    public function sendBackupRestoredNotification(string $userId, string $backup): void {
+        $this->sendNotification(
+            $this->backupRestoredNotification,
+            $userId,
+            ['backup' => $backup]
+        );
+    }
+
+    /**
+     * @param string $userId
+     * @param string $backup
+     */
+    public function sendBackupFailedNotification(string $userId, string $backup): void {
+        $this->sendNotification(
+            $this->backupFailedNotification,
+            $userId,
+            ['backup' => $backup]
+        );
+    }
+
+    /**
      * @param AbstractNotification $notification
      * @param string               $userId
      * @param array                $parameters
@@ -325,6 +367,10 @@ class NotificationService implements INotifier {
                 return $this->emptyRequiredSettingNotification->process($notification, $localisation);
             case UpgradeRequiredNotification::NAME:
                 return $this->upgradeRequiredNotification->process($notification, $localisation);
+            case BackupRestoredNotification::NAME:
+                return $this->backupRestoredNotification->process($notification, $localisation);
+            case BackupFailedNotification::NAME:
+                return $this->backupFailedNotification->process($notification, $localisation);
             case BadPasswordNotification::NAME:
                 return $this->badPasswordNotification->process($notification, $localisation);
             case ShareCreatedNotification::NAME:

@@ -118,10 +118,11 @@ class BackupService {
 
     /**
      * @param ISimpleFile $backup
+     * @param bool        $details
      *
      * @return array
      */
-    public function getBackupInfo(ISimpleFile $backup, bool $extended = false): array {
+    public function getBackupInfo(ISimpleFile $backup, bool $details = false): array {
         $name = $backup->getName();
         preg_match('/^([\w\-.]+)(\.json(\.gz)?)$/', $name, $matches);
 
@@ -132,7 +133,7 @@ class BackupService {
             'format' => isset($matches[3]) ? 'compressed':'json'
         ];
 
-        if($extended) {
+        if($details) {
             try {
                 $data             = $this->unpackBackupFile($backup);
                 $info['version']  = $data['version'] ?? 0;
