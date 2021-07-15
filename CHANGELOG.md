@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+- Automatic backup restore
 
 ## 2021.7.2 - Bugfix release
 ### Fixed
