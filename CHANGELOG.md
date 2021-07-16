@@ -1,6 +1,8 @@
 ## [Unreleased]
 ### Added
 - Automatic backup restore
+### Changed
+- Default Backup keep time
 
 ## 2021.7.2 - Bugfix release
 ### Fixed
