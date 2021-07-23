@@ -1,0 +1,39 @@
+{
+    "translations": [
+        {
+            "official"              : "oficiální",
+            "by {author}"           : "od {author}",
+            "source code"           : "zdrojové kódy",
+            "learn more"            : "zjistit více",
+            "Connect with PassLink" : "Propojit s PassLink",
+            "Connect a new device"  : "Připojit nové zařízení",
+            "Connect via link"      : "Připojit prostřednictvím odkazu",
+            "Choose a name:"        : "Zvolte jméno:",
+            "The codes don't match" : "Kódy se neshodují",
+            "Looks good"            : "Vypadá dobře",
+            "Connection successful" : "Úspěšně připojeno",
+            "I'm done"              : "Hotovo",
+            "Don't try again"       : "Nezkoušet znovu",
+            "Connect something else": "Připojit něco jiného",
+            "Try again"             : "Zkusit znovu",
+            "Strong Encryption"     : "Silné šifrování"
+        },
+        {
+            "Failed to fetch apps: {error}"             : "Nepodařilo se stáhnout aplikace: {error}",
+            "You cancelled the connection"              : "Přerušili jste spojení",
+            "You did not confirm the connection in time": "Nepotvrdili jste spojení včas"
+        },
+        {
+            "Just scan the QR code with the app to connect it."                             : "Pro připojení stačí naskenovat QR kód danou aplikací.",
+            "Click the button when you are ready to start the connection."                  : "Až budete připraveni zahájit připojování, klikněte na tlačítko.",
+            "Check if the codes below match with the ones provided by the device or app:"   : "Zkontrolujte, zda níže uvedené kódy odpovídají těm poskytnutým zařízením nebo aplikací:",
+            "Link this client to your Nextcloud account without annoying passwords and urls": "Propojte tohoto klienta s vaším Nextcloud účtem bez otravného vypisování hesel a URL adres",
+            "This client officially supports our strong end-to-end encryption"              : "Tento klient oficiálně podporuje silné šifrování mezi koncovými body",
+            "This client is maintained by the authors of the Passwords app"                 : "Tento klient je udržován autory aplikace Hesla"
+        },
+        {
+            "Click the button to connect an app installed on this device or scan the QR code with the app if it's installed on another device.": "Pokud chcete připojit aplikaci nainstalovanou na tomto zařízení, klikněte na tlačítko nebo naskenujte QR kód aplikací, pokud je nainstalována na jiném zařízení."
+        }
+    ],
+    "pluralForm"  : "nplurals=2; plural=(n != 1);"
+}
