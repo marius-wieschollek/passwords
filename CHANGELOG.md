@@ -1,10 +1,17 @@
 ## [Unreleased]
 ### Added
 - Cache folders now marked with CACHEDIR.TAG file
+### Added
+- Automatic backup restore
+### Changed
+- Default Backup keep time
 
 ## 2021.7.2 - Bugfix release
 ### Fixed
 - Passwords marked as duplicate when no hash stored
+- Database migration fails if data partially migrated
+- Incorrect auto_increment values in PostgreSQL
+- Not editable passwords can be shared as editable
 
 ## 2021.7.1 - Bugfix release
 ### Fixed

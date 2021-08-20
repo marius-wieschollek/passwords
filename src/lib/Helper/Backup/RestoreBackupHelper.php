@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Backup;
 
+use BadFunctionCallException;
 use Exception;
 use OCA\Passwords\Db\AbstractEntity;
 use OCA\Passwords\Db\AbstractMapper;
@@ -325,16 +326,19 @@ class RestoreBackupHelper {
     }
 
     /**
+     * @param array          $entity
      * @param AbstractMapper $entityMapper
      * @param string         $class
-     * @param                $entity
      */
     protected function createAndSaveObject(array $entity, AbstractMapper $entityMapper, string $class): void {
         /** @var AbstractEntity $entityObject */
         $entityObject = new $class();
         foreach($entity as $key => $value) {
             if($key === 'id') continue;
-            $entityObject->setProperty($key, $value);
+            try {
+                $entityObject->setProperty($key, $value);
+            } catch(BadFunctionCallException $e) {
+            }
         }
         $entityMapper->insert($entityObject);
     }

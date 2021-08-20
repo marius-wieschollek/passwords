@@ -86,7 +86,8 @@ class DeleteUserDataHelper {
         = [
             'SSEv1UserKey',
             'client/settings',
-            'user/challenge/id'
+            'user/challenge/id',
+            'login/attempts/failed'
         ];
 
     /**

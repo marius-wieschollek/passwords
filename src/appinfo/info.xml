@@ -69,7 +69,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [iOS App](https://apps.apple.com/app/id1546212226) von [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 ]]>
     </description>
-    <version>2021.7.2-BUILD</version>
+    <version>2021.7.3-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -126,10 +126,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <pre-migration>
             <step>OCA\Passwords\Migration\CheckAppRequirements</step>
         </pre-migration>
-        <post-migration>
-            <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
-        </post-migration>
         <live-migration>
+            <step>OCA\Passwords\Migration\AutoBackupRestore</step>
+            <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
             <step>OCA\Passwords\Migration\CheckAppSettings</step>
             <step>OCA\Passwords\Migration\ClearAppCaches</step>
         </live-migration>

@@ -118,19 +118,40 @@ class BackupService {
 
     /**
      * @param ISimpleFile $backup
+     * @param bool        $details
      *
      * @return array
      */
-    public function getBackupInfo(ISimpleFile $backup): array {
+    public function getBackupInfo(ISimpleFile $backup, bool $details = false): array {
         $name = $backup->getName();
         preg_match('/^([\w\-.]+)(\.json(\.gz)?)$/', $name, $matches);
 
-        return [
+        $info = [
             'label'  => $matches[1],
             'name'   => $name,
             'size'   => Util::humanFileSize($backup->getSize()),
             'format' => isset($matches[3]) ? 'compressed':'json'
         ];
+
+        if($details) {
+            try {
+                $data             = $this->unpackBackupFile($backup);
+                $info['version']  = $data['version'] ?? 0;
+                $info['users']    = isset($data['settings']['users']) ? count($data['settings']['users']):0;
+                $info['entities'] = [
+                    'passwords'  => isset($data['passwords']) ? count($data['passwords']):0,
+                    'folders'    => isset($data['folders']) ? count($data['folders']):0,
+                    'tags'       => isset($data['tags']) ? count($data['tags']):0,
+                    'shares'     => isset($data['shares']) ? count($data['shares']):0,
+                    'keychains'  => isset($data['keychains']) ? count($data['keychains']):0,
+                    'challenges' => isset($data['challenges']) ? count($data['challenges']):0
+                ];
+            } catch(\Throwable $e) {
+                $info['error'] = $e->getMessage();
+            }
+        }
+
+        return $info;
     }
 
     /**
@@ -142,18 +163,12 @@ class BackupService {
      * @throws NotPermittedException
      * @throws Exception
      */
-    public function restoreBackup(string $name, $options = []): bool {
+    public function restoreBackup(string $name, array $options = []): bool {
         $backups = $this->getBackups();
         if(!isset($backups[ $name ])) return false;
 
-        $file = $backups[ $name ];
-        $data = $file->getContent();
-        if(substr($file->getName(), -2) === 'gz') {
-            if(!extension_loaded('zlib')) throw new Exception('PHP extension zlib is required to read compressed backups.');
-
-            $data = gzdecode($data);
-        }
-        $backup = json_decode($data, true);
+        $file   = $backups[ $name ];
+        $backup = $this->unpackBackupFile($file);
 
         return $this->restoreBackupHelper->restore($backup, $options);
     }
@@ -162,7 +177,7 @@ class BackupService {
      * @throws NotPermittedException
      */
     public function removeOldBackups(): void {
-        $maxBackups = $this->config->getAppValue('backup/files/maximum', 14);
+        $maxBackups = $this->config->getAppValue('backup/files/maximum', 28);
         if($maxBackups === 0) return;
 
         $backups = array_values($this->getBackups(self::AUTO_BACKUPS));
@@ -186,5 +201,23 @@ class BackupService {
         } catch(NotFoundException $e) {
             return $this->appData->newFolder($name);
         }
+    }
+
+    /**
+     * @param ISimpleFile $file
+     *
+     * @return mixed
+     * @throws NotFoundException
+     * @throws NotPermittedException
+     */
+    protected function unpackBackupFile(ISimpleFile $file) {
+        $data = $file->getContent();
+        if(substr($file->getName(), -2) === 'gz') {
+            if(!extension_loaded('zlib')) throw new Exception('PHP extension zlib is required to read compressed backups.');
+
+            $data = gzdecode($data);
+        }
+
+        return json_decode($data, true);
     }
 }

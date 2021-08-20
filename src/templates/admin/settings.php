@@ -203,6 +203,8 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             </select>
             <label for="passwords-backup-files"><?php p($l->t('Amount of backups to keep')); ?></label>
             <input id="passwords-backup-files" name="backup-files" data-setting="backup.files.max" type="number" min="0" value="<?=$_['backupFiles']?>">
+            <label for="passwords-backup-autorestore"><?php p($l->t('Restore backups automatically when database wiped')); ?></label>
+            <input id="passwords-backup-autorestore" name="backup-autorestore" data-setting="backup.update.autorestore" type="checkbox" <?=$_['backupRestore'] ? 'checked':''?>>
         </div>
     </form>
 

@@ -122,8 +122,7 @@
             'Backup and Restore'                  : 'Copia de seguridad y restaurar',
             "Settings"                            : "Ajustes",
             'Handbook'                            : 'Manuál de instrucciones',
-            'Apps and Extensions'                : 'Aplicaciones y extensiones',
-            '{name} has shared this with you'     : '{name} ha compartido esta contraseña contigo',
+            'Apps and Extensions'                 : 'Aplicaciones y extensiones',
             '{editable} and {shareable}.'         : '{editable} y {shareable}.',
             'Editing allowed'                     : 'Modificación permitida',
             'Editing disallowed'                  : 'Modificación no permitida',
@@ -131,7 +130,7 @@
             'sharing disallowed'                  : 'no se permite compartir',
             'Search user'                         : 'Buscar usuario',
             'Set expiration date'                 : 'Establecer fecha de vencimiento',
-            'Expires {date}'                      : 'Vence el {date}',
+            'Expires {dateTime}'                  : 'Vence el {dateTime}',
             'Choose expiration date'              : 'Elegir fecha de vencimiento',
             'Please choose a date in the future'  : 'Por favor, elige una fecha en el futuro',
             'Invalid date'                        : 'Fecha invalida',
@@ -226,12 +225,13 @@
             'no'                                  : 'no'
         },
         helpTexts    = {
+            '{name} has shared this password with you.'                       : '{name} ha compartido esta contraseña contigo.',
             'You have reached the maximum length of 4096 characters'          : 'Has alcanzado la longitud máxima de 4096 caracteres',
             'We could not find anything for "{query}"'                        : 'No hemos podido encontrar nada para "{query}"',
             'The page "{page}" could not be fetched from the handbook server.': 'La página "{page}" no ha podido ser descargada del servidor de manuales.',
             'Some data is waiting to be synchronized'                         : 'Algunos datos estan esperando a ser sincronizados',
             'You will be logged out in {time} seconds'                        : 'Tu sesión se cerrará en {time} segundos',
-            'You may have requested too many tokens. Please try again later.' : 'Has solicitado demasiados tokens. Por favor, prueba más tarde.',
+            'You may have requested too many tokens. Please try again later.' : 'Has solicitado demasiados tokens. Por favor, prueba más tarde.'
         },
         longTexts    = {
             'End-to-End encryption will be disabled for this password if you share it.'                : 'El cifrado de extremo a extremo se deshabilitará para esta contraseña si la compartes.',

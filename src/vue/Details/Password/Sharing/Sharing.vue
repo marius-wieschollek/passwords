@@ -6,7 +6,8 @@
                    v-if="hasCse && canBeShared"/>
         <div v-if="isSharedWithUser" class="shareby-info" :title="getShareTitle">
             <img :src="password.share.owner.icon" alt="">
-            <translate say="{name} has shared this with you" :variables="password.share.owner"/>
+            <translate say="{name} has shared this password with you." :variables="password.share.owner"/>
+            <translate say="It will expire {date}." :variables="getExpirationDate" v-if="getDefaultExpires"/>
         </div>
         <field v-model="search"
                class="share-add-user"
@@ -17,12 +18,13 @@
                    v-on:delete="deleteShare($event)"
                    v-on:update="refreshShares()"
                    :data-share-id="share.id"
+                   :editable="isEditable"
                    v-for="share in shares"
                    :key="share.id"/>
         </ul>
         <ul :class="getDropdownClasses" v-if="matches.length !== 0">
             <li v-for="match in matches" @click="shareWithUser(match.id)">
-                <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{match.name}}
+                <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{ match.name }}
             </li>
         </ul>
     </div>
@@ -67,7 +69,7 @@
                 autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
                 polling     : {interval: null, mode: null},
-                cronPromise : null,
+                cronPromise : null
             };
         },
 
@@ -92,6 +94,30 @@
                            )
                        );
             },
+            isEditable() {
+                if(this.password.share !== null && typeof this.password.share !== 'string') {
+                    return this.password.share.editable;
+                }
+
+                return this.password.editable;
+            },
+            getDefaultExpires() {
+                if(this.password.share !== null && typeof this.password.share !== 'string') {
+                    return this.password.share.expires;
+                }
+
+                return null;
+            },
+            getExpirationDate() {
+                if(this.password.share !== null && typeof this.password.share !== 'string') {
+                    return {
+                        'date': Localisation.formatDate(this.password.share.expires),
+                        'dateTime': Localisation.formatDateTime(this.password.share.expires),
+                    }
+                }
+
+                return {'date': '', 'dateTime': ''};
+            },
             isSharedWithUser() {
                 return this.password.share && this.password.share.owner;
             },
@@ -114,8 +140,8 @@
 
                 if(this.password.share.expires) {
                     text += ' ' + Localisation.translate(
-                        'Expires {date}',
-                        {date: Localisation.formatDate(this.password.share.expires)}
+                        'Expires {dateTime}',
+                        this.getExpirationDate
                     );
                 }
 
@@ -163,7 +189,7 @@
 
                 let share = {
                     password : this.password.id,
-                    expires  : null,
+                    expires  : this.getDefaultExpires,
                     editable : SettingsService.get('user.sharing.editable'),
                     shareable: SettingsService.get('user.sharing.resharing'),
                     receiver
@@ -177,7 +203,7 @@
                     share.owner = {
                         id  : document.querySelector('head[data-user]').getAttribute('data-user'),
                         name: document.querySelector('head[data-user-displayname]')
-                            .getAttribute('data-user-displayname')
+                                      .getAttribute('data-user-displayname')
                     };
                     share.receiver = {id: receiver, name: this.idMap[receiver]};
                     this.shares[d.id] = API._processShare(share);
@@ -194,8 +220,8 @@
             },
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
-                    .then((d) => {this.shares = d.shares;})
-                    .catch(console.error);
+                   .then((d) => {this.shares = d.shares;})
+                   .catch(console.error);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -223,7 +249,7 @@
             },
             async refreshShares() {
                 await this.runCron()
-                    .then((d) => { if(d.success) this.reloadShares();});
+                          .then((d) => { if(d.success) this.reloadShares();});
 
                 this.startPolling();
                 this.$forceUpdate();
@@ -246,15 +272,15 @@
                 if(this.cronPromise === null) {
                     this.cronPromise = new Promise((resolve, reject) => {
                         API.runSharingCron()
-                            .then((d) => {
-                                this.cronPromise = null;
-                                resolve(d);
-                            })
-                            .catch((e) => {
-                                this.cronPromise = null;
-                                console.error(e);
-                                reject(e);
-                            });
+                           .then((d) => {
+                               this.cronPromise = null;
+                               resolve(d);
+                           })
+                           .catch((e) => {
+                               this.cronPromise = null;
+                               console.error(e);
+                               reject(e);
+                           });
                     });
                 }
 
@@ -287,60 +313,60 @@
 </script>
 
 <style lang="scss">
-    .sharing-container {
-        position       : relative;
-        padding-bottom : 5rem;
+.sharing-container {
+    position       : relative;
+    padding-bottom : 5rem;
 
-        .cse-warning {
-            margin-bottom : 0.5rem;
+    .cse-warning {
+        margin-bottom : 0.5rem;
+    }
+
+    .shareby-info {
+        img {
+            border-radius : var(--border-radius-pill);
+            width         : 32px;
+            height        : 32px;
+            margin-right  : 0.5rem;
+            float         : left;
         }
 
-        .shareby-info {
-            img {
-                border-radius : var(--border-radius-pill);
-                width         : 32px;
-                height        : 32px;
-                margin-right  : 0.5rem;
-                float         : left;
-            }
+        line-height   : 32px;
+        margin-bottom : 0.5rem;
+    }
 
-            line-height   : 32px;
-            margin-bottom : 0.5rem;
+    .share-add-user {
+        width : 100%;
+    }
+
+    .shares {
+        margin-top : 5px;
+    }
+
+    .user-search {
+        position         : absolute;
+        top              : 37px;
+        width            : 100%;
+        border-radius    : var(--border-radius);
+        z-index          : 2;
+        background-color : var(--color-main-background);
+        color            : var(--color-primary);
+        border           : 1px solid var(--color-primary);
+
+        &.shared-with {
+            top : 77px;
         }
 
-        .share-add-user {
-            width : 100%;
-        }
+        li {
+            line-height : 32px;
+            display     : flex;
+            padding     : 3px;
+            cursor      : pointer;
 
-        .shares {
-            margin-top : 5px;
-        }
-
-        .user-search {
-            position         : absolute;
-            top              : 37px;
-            width            : 100%;
-            border-radius    : var(--border-radius);
-            z-index          : 2;
-            background-color : var(--color-main-background);
-            color            : var(--color-primary);
-            border           : 1px solid var(--color-primary);
-
-            &.shared-with {
-                top : 77px;
-            }
-
-            li {
-                line-height : 32px;
-                display     : flex;
-                padding     : 3px;
-                cursor      : pointer;
-
-                &:hover {
-                    color            : var(--color-primary-text);
-                    background-color : var(--color-primary);
-                }
+            &:hover {
+                color            : var(--color-primary-text);
+                background-color : var(--color-primary);
             }
         }
     }
+}
 </style>
