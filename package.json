@@ -55,7 +55,7 @@
         "file-loader": "^6.2.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.6.0",
-        "jszip": "^3.5.0",
+        "jszip": "^3.7.0",
         "libsodium-wrappers": "^0.7.8",
         "marked": "^0.8.2",
         "mermaid": "^8.11.0",
