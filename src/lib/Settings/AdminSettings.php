@@ -362,7 +362,7 @@ class AdminSettings implements ISettings {
      */
     protected function getSecurityHash(): array {
         return [
-            'current' => $this->config->getAppValue('settings/password/security/hash', 40),
+            'current' => intval($this->config->getAppValue('settings/password/security/hash', 40)),
             'options' => [
                 0  => 'Don\'t store hashes',
                 20 => 'Store 50%% of the hash',
