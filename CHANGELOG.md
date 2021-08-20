@@ -1,6 +1,10 @@
 ## [Unreleased]
 ### Added
 - Cache folders now marked with CACHEDIR.TAG file
+### Fixed
+- Security hash admin setting schonw incorrectly
+
+## 2021.7.3 - Bugfix release
 ### Added
 - Automatic backup restore
 ### Changed
