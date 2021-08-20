@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace OCA\Passwords\Migration;
 
 use Closure;
+use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\DB\Exception;
 use OCP\IDBConnection;
 use OCP\DB\ISchemaWrapper;
@@ -34,12 +35,19 @@ class Version20210800 extends SimpleMigrationStep {
     protected IDBConnection $db;
 
     /**
+     * @var UuidHelper
+     */
+    protected UuidHelper    $uuidHelper;
+
+    /**
      * Version20210800 constructor.
      *
      * @param IDBConnection $db
+     * @param UuidHelper    $uuidHelper
      */
-    public function __construct(IDBConnection $db) {
+    public function __construct(IDBConnection $db, UuidHelper $uuidHelper) {
         $this->db = $db;
+        $this->uuidHelper = $uuidHelper;
     }
 
     /**
@@ -156,6 +164,10 @@ class Version20210800 extends SimpleMigrationStep {
                 $output->startProgress($total);
                 foreach($items as $item) {
                     $query = $this->db->getQueryBuilder()->insert($newTable);
+                    if(empty($item['uuid'])) {
+                        $item['uuid'] = $this->uuidHelper->generateUuid();
+                    }
+
                     if(in_array($item['uuid'], $uuids)) {
                         $output->info("Skipping {$item['uuid']} because it exists in new table");
                         $output->advance($total);
