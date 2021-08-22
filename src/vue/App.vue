@@ -254,7 +254,7 @@
                 transition : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
 
                 i {
-                    margin-left : -44px;
+                    margin-left : -1rem;
                 }
             }
         }
