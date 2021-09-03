@@ -1,8 +1,12 @@
 ## [Unreleased]
+## 2021.9.0 - Feature release
 ### Added
 - Cache folders now marked with CACHEDIR.TAG file
+### Changed
+- Improved Czech translation
 ### Fixed
-- Security hash admin setting schonw incorrectly
+- Security hash admin setting shown incorrectly
+- Navigation icons in NC22
 
 ## 2021.7.3 - Bugfix release
 ### Added
