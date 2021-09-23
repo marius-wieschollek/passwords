@@ -42,3 +42,8 @@ body[data-server-version="21"] {
         margin-left: -44px;
     }
 }
+body[data-server-version="20"] {
+    #app-navigation ul li a i {
+        margin-left: -44px;
+    }
+}
