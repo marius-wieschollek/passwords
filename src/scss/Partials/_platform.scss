@@ -37,11 +37,8 @@ body[data-server-version="21"] {
     &[data-custom-color="true"] #passwords-setup .setup-header {
         background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
     }
-
-    #app-navigation ul li a i {
-        margin-left: -44px;
-    }
 }
+
 body[data-server-version="20"] {
     #app-navigation ul li a i {
         margin-left: -44px;
