@@ -32,9 +32,9 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $keys
         = [
-            'interval'    => 'backup/interval',
-            'files.max'   => 'backup/files/maximum',
-            'autorestore' => 'backup/update/autorestore'
+            'interval'           => 'backup/interval',
+            'files.max'          => 'backup/files/maximum',
+            'update.autorestore' => 'backup/update/autorestore'
         ];
 
     /**
@@ -42,9 +42,9 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $types
         = [
-            'interval'    => 'select:number',
-            'files.max'   => 'number',
-            'autorestore' => 'boolean'
+            'interval'           => 'select:number',
+            'files.max'          => 'number',
+            'update.autorestore' => 'boolean'
         ];
 
     /**
@@ -52,9 +52,9 @@ class BackupSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $defaults
         = [
-            'interval'    => 86400,
-            'files.max'   => 28,
-            'autorestore' => true
+            'interval'           => 86400,
+            'files.max'          => 28,
+            'update.autorestore' => true
         ];
 
     /**

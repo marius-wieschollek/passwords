@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Fixed
+- Backup restore setting not working
+
 ## 2021.9.0 - Feature release
 ### Added
 - Cache folders now marked with CACHEDIR.TAG file
