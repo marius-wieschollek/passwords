@@ -23,13 +23,13 @@ class SystemRequirements {
 
     const NC_MINIMUM                     = '20.0.0';
     const NC_MINIMUM_ID                  = 20;
-    const NC_DEPRECATION_WARNING_ID      = 21;
-    const NC_DEPRECATION_NOTIFICATION_ID = 20;
-    const NC_UPGRADE_RECOMMENDATION      = '21';
+    const NC_DEPRECATION_WARNING_ID      = 22;
+    const NC_DEPRECATION_NOTIFICATION_ID = 22;
+    const NC_UPGRADE_RECOMMENDATION      = '22';
 
     const PHP_MINIMUM                     = '7.2.0';
     const PHP_MINIMUM_ID                  = 70200;
     const PHP_DEPRECATION_WARNING_ID      = 70300;
-    const PHP_DEPRECATION_NOTIFICATION_ID = 70200;
+    const PHP_DEPRECATION_NOTIFICATION_ID = 70300;
     const PHP_UPGRADE_RECOMMENDATION      = '8.0.0';
 }
