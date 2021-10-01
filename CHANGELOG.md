@@ -1,5 +1,10 @@
 ## [Unreleased]
+
+## 2021.10.0 - Feature release
+### Changed
+- System requirement notice
 ### Fixed
+- Navigation icons in NC21
 - Backup restore setting not working
 
 ## 2021.9.0 - Feature release
