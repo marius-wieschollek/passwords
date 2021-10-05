@@ -92,7 +92,7 @@ export default class ImportCsvConversionHelper {
             db        = [],
             firstLine = Number.parseInt(0 + options.firstLine);
 
-        if(!Array.isArray(data) || data.length < firstLine+1) throw new Error('Import file is empty');
+        if(!Array.isArray(data) || data.length < firstLine + 1) throw new Error('Import file is empty');
         if(!mapping || data[firstLine].length < mapping.length) throw new Error('CSV file can not be mapped');
 
         for(let i = firstLine; i < data.length; i++) {
@@ -162,14 +162,22 @@ export default class ImportCsvConversionHelper {
 
         for(let i = 0; i < rawFields.length; i++) {
             if(rawFields[i].trim() === '') continue;
-            let [label, value] = rawFields[i].split(':', 2),
-                type           = 'text';
+            let label = '',
+                value = rawFields[i],
+                type  = 'text';
+
+            if(value.indexOf(':') !== -1) {
+                label = value.substr(0, value.indexOf(':'));
+                value = value.substr(value.indexOf(':') + 1);
+            }
 
             value = value.trim();
             label = label.trim();
             if(label.indexOf(',') !== -1) {
-                [label, type] = label.split(',', 2);
+                type = label.substr(label.indexOf(',') + 1);
+                label = label.substr(0, label.indexOf(','));
 
+                label = label.trim();
                 type = type.trim();
                 if(type === 'password') type = 'secret';
                 if((type === 'url' && (!value.match(/^\w+:\/\/.+$/) || value.substr(0, 11) === 'javascript:')) ||
@@ -375,56 +383,56 @@ export default class ImportCsvConversionHelper {
      */
     static _getProfile(name) {
         let profiles = {
-            passwords: {
+            passwords   : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', 'notes', 'url', 'customFields', 'folderLabel', 'tagLabels', 'favorite', 'edited', 'id', 'revision', 'folderId']
             },
-            folders  : {
+            folders     : {
                 firstLine: 1,
                 db       : 'folders',
                 mapping  : ['label', 'parentLabel', 'favorite', 'edited', 'id', 'revision', 'parentId']
             },
-            tags     : {
+            tags        : {
                 firstLine: 1,
                 db       : 'tags',
                 mapping  : ['label', 'color', 'favorite', 'edited', 'id', 'revision']
             },
-            legacy   : {
+            legacy      : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', 'url', 'notes'],
                 repair   : true
             },
-            keepass  : {
+            keepass     : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['folderLabel', 'label', 'username', 'password', 'url', 'notes']
             },
-            bitwardenCsv  : {
+            bitwardenCsv: {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['tagLabels', 'favorite', 'folderLabel', 'label', 'notes', 'customFields', 'url', 'username', 'password'],
                 repair   : true
             },
-            lastpass : {
+            lastpass    : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favorite']
             },
-            passman  : {
+            passman     : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', '', 'notes', 'tagLabels', 'url', 'customFields'],
                 repair   : true
             },
-            dashlane : {
+            dashlane    : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password', 'notes'],
                 repair   : true
             },
-            roboform : {
+            roboform    : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'url', '', 'username', 'password', 'notes']
@@ -434,12 +442,12 @@ export default class ImportCsvConversionHelper {
                 db       : 'passwords',
                 mapping  : ['label', 'username', 'password', 'url', 'notes']
             },
-            chrome : {
+            chrome      : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['label', 'url', 'username', 'password']
             },
-            firefox : {
+            firefox     : {
                 firstLine: 1,
                 db       : 'passwords',
                 mapping  : ['url', 'username', 'password', 'notes', '', '', '', '', 'edited']
