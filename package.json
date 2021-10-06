@@ -20,7 +20,7 @@
         "sqlite:stop": "docker-compose -f docker-compose.yml -f docker/configs/sqlite.yml stop",
         "sqlite:down": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker-compose -f docker-compose.yml -f docker/configs/sqlite.yml down --volumes",
         "logs": "docker-compose logs -f app",
-        "docker:build": "docker-compose up -d --build",
+        "docker:build": "docker-compose build --parallel --pull && docker-compose up -d",
         "shell": "docker exec -itu www-data passwords-php bash",
         "shell:root": "docker exec -it passwords-php bash",
         "watch": "webpack --env.features --watch --progress",

@@ -50,21 +50,13 @@ class ClearAppCachesTest extends TestCase {
     /**
      *
      */
-    public function testClearDefaultCache() {
-        $this->fileCacheService->expects($this->at(0))->method('clearCache')->with(FileCacheService::DEFAULT_CACHE);
-
-        try {
-            $this->clearAppCaches->run(new SimpleOutput());
-        } catch(Exception $e) {
-            $this->fail($e->getMessage());
-        }
-    }
-
-    /**
-     *
-     */
-    public function testClearAvatarCache() {
-        $this->fileCacheService->expects($this->at(1))->method('clearCache')->with(FileCacheService::AVATAR_CACHE);
+    public function testClearsAppCaches() {
+        $this->fileCacheService->expects($this->exactly(2))
+                               ->method('clearCache')
+                               ->withConsecutive(
+                                   [FileCacheService::DEFAULT_CACHE],
+                                   [FileCacheService::AVATAR_CACHE]
+                               );
 
         try {
             $this->clearAppCaches->run(new SimpleOutput());
