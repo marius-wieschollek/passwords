@@ -237,31 +237,37 @@ class ValidationService {
      * @throws ApiException
      */
     protected function checkHash(PasswordRevision $password): void {
-        if(empty($password->getHash())) {
+        if(preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
+            return;
+        } else {
             $settingsHelper = $this->container->get(UserSettingsHelper::class);
             $length         = $settingsHelper->get('password.security.hash');
 
-            if($length === 0) return;
-        } else if(preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {
-            return;
-        } else {
-            /** @var PasswordService $passwordService */
-            $passwordService = $this->container->get(PasswordService::class);
-            $model           = $passwordService->findByUuid($password->getModel());
-
-            if($model->isEditable() && empty($model->getShareId())) {
-                /** @var UserSettingsHelper $settingsHelper */
-                $settingsHelper = $this->container->get(UserSettingsHelper::class);
-                $length         = $settingsHelper->get('password.security.hash');
-
-                if($length !== 40 && preg_match("/^[0-9a-z]{{$length}}$/", $password->getHash()) === 1) {
+            if($password->getId() === null) {
+                if($length === 0 && empty($password->getHash())) {
+                    return;
+                }
+                if(preg_match("/^[0-9a-z]{{$length}}$/", $password->getHash()) === 1) {
                     return;
                 }
             } else {
-                if(empty($password->getHash()) ||
-                   preg_match("/^[0-9a-z]{20}$/", $password->getHash()) === 1 ||
-                   preg_match("/^[0-9a-z]{30}$/", $password->getHash()) === 1) {
-                    return;
+                /** @var PasswordService $passwordService */
+                $passwordService = $this->container->get(PasswordService::class);
+                $model           = $passwordService->findByUuid($password->getModel());
+
+                if($model->isEditable() && empty($model->getShareId())) {
+                    if($length === 0 && empty($password->getHash())) {
+                        return;
+                    }
+                    if(preg_match("/^[0-9a-z]{{$length}}$/", $password->getHash()) === 1) {
+                        return;
+                    }
+                } else {
+                    if(empty($password->getHash()) ||
+                       preg_match("/^[0-9a-z]{20}$/", $password->getHash()) === 1 ||
+                       preg_match("/^[0-9a-z]{30}$/", $password->getHash()) === 1) {
+                        return;
+                    }
                 }
             }
         }

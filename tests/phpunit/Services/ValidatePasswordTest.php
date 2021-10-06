@@ -219,7 +219,14 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
         $mock->method('getPassword')->willReturn('password');
+        $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
         $mock->method('getHash')->willReturn('');
+
+        $modelMock = $this->getPasswordModelMock();
+        $modelMock->method('isEditable')->willReturn(true);
+        $modelMock->method('getShareId')->willReturn('');
+        $this->passwordService->method('findByUuid')->willReturn($modelMock);
 
         $this->userSettingsHelper->method('get')->willReturn(40);
 
@@ -246,6 +253,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn('hash');
         $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
 
         $modelMock = $this->getPasswordModelMock();
         $modelMock->method('isEditable')->willReturn(true);
@@ -277,6 +285,96 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn('hash');
         $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
+
+        $modelMock = $this->getPasswordModelMock();
+        $modelMock->method('isEditable')->willReturn(true);
+        $modelMock->method('getShareId')->willReturn('');
+        $this->passwordService->method('findByUuid')->willReturn($modelMock);
+
+        $this->userSettingsHelper->method('get')->willReturn(30);
+
+        try {
+            $this->validationService->validatePassword($mock);
+            $this->fail("Expected invalid hash exception");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('5b9e3440', $e->getId());
+            $this->assertEquals('Field "hash" must contain a valid sha1 hash', $e->getMessage());
+        }
+    }
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateNewPasswordInvalidEmptyHash() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
+        $mock->method('getHash')->willReturn('');
+        $mock->method('getId')->willReturn(null);
+
+        $this->userSettingsHelper->method('get')->willReturn(40);
+
+        try {
+            $this->validationService->validatePassword($mock);
+            $this->fail("Expected exception");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('5b9e3440', $e->getId());
+            $this->assertEquals('Field "hash" must contain a valid sha1 hash', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateNewPasswordInvalidHash() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
+        $mock->method('getHash')->willReturn('hash');
+        $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn(null);
+
+        $modelMock = $this->getPasswordModelMock();
+        $modelMock->method('isEditable')->willReturn(true);
+        $modelMock->method('getShareId')->willReturn('');
+        $this->passwordService->method('findByUuid')->willReturn($modelMock);
+
+        $this->userSettingsHelper->method('get')->willReturn(40);
+
+        try {
+            $this->validationService->validatePassword($mock);
+            $this->fail("Expected invalid hash exception");
+        } catch(ApiException $e) {
+            $this->assertEquals(400, $e->getHttpCode());
+            $this->assertEquals('5b9e3440', $e->getId());
+            $this->assertEquals('Field "hash" must contain a valid sha1 hash', $e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateNewPasswordInvalidHashWithCustomLength() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
+        $mock->method('getHash')->willReturn('hash');
+        $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn(null);
 
         $modelMock = $this->getPasswordModelMock();
         $modelMock->method('isEditable')->willReturn(true);
@@ -308,6 +406,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn('hash');
         $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
 
         $modelMock = $this->getPasswordModelMock();
         $modelMock->method('isEditable')->willReturn(false);
@@ -335,12 +434,19 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
         $mock->method('getPassword')->willReturn('password');
+        $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
         $mock->method('getHash')->willReturn('');
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
 
+        $modelMock = $this->getPasswordModelMock();
+        $modelMock->method('isEditable')->willReturn(true);
+        $modelMock->method('getShareId')->willReturn('');
+        $this->passwordService->method('findByUuid')->willReturn($modelMock);
+
         $this->userSettingsHelper->method('get')->willReturn(0);
 
-        $mock->expects($this->once())->method('getHash');
+        $mock->expects($this->atLeastOnce())->method('getHash');
         $this->validationService->validatePassword($mock);
     }
 
@@ -357,6 +463,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(sha1('hash'));
         $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
 
         $modelMock = $this->getPasswordModelMock();
@@ -366,7 +473,7 @@ class ValidatePasswordTest extends TestCase {
 
         $this->userSettingsHelper->method('get')->willReturn(40);
 
-        $mock->expects($this->exactly(2))->method('getHash');
+        $mock->expects($this->atLeastOnce())->method('getHash');
         $this->validationService->validatePassword($mock);
     }
 
@@ -383,6 +490,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(substr(sha1('hash'), 0, 30));
         $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
 
         $modelMock = $this->getPasswordModelMock();
@@ -392,7 +500,82 @@ class ValidatePasswordTest extends TestCase {
 
         $this->userSettingsHelper->method('get')->willReturn(30);
 
-        $mock->expects($this->exactly(3))->method('getHash');
+        $mock->expects($this->atLeastOnce())->method('getHash');
+        $this->validationService->validatePassword($mock);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateNewPasswordValidEmptyHash() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
+        $mock->method('getHash')->willReturn('');
+        $mock->method('getId')->willReturn(null);
+        $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
+
+        $this->userSettingsHelper->method('get')->willReturn(0);
+
+        $mock->expects($this->atLeastOnce())->method('getHash');
+        $this->validationService->validatePassword($mock);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateNewPasswordValidFullHash() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
+        $mock->method('getHash')->willReturn(sha1('hash'));
+        $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn(null);
+        $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
+
+        $modelMock = $this->getPasswordModelMock();
+        $modelMock->method('isEditable')->willReturn(true);
+        $modelMock->method('getShareId')->willReturn('');
+        $this->passwordService->method('findByUuid')->willReturn($modelMock);
+
+        $this->userSettingsHelper->method('get')->willReturn(40);
+
+        $mock->expects($this->atLeastOnce())->method('getHash');
+        $this->validationService->validatePassword($mock);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testValidateNewPasswordValidHashWithCustomLength() {
+        $mock = $this->getPasswordMock();
+
+        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
+        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock->method('getLabel')->willReturn('label');
+        $mock->method('getPassword')->willReturn('password');
+        $mock->method('getHash')->willReturn(substr(sha1('hash'), 0, 30));
+        $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn(null);
+        $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
+
+        $modelMock = $this->getPasswordModelMock();
+        $modelMock->method('isEditable')->willReturn(true);
+        $modelMock->method('getShareId')->willReturn('');
+        $this->passwordService->method('findByUuid')->willReturn($modelMock);
+
+        $this->userSettingsHelper->method('get')->willReturn(30);
+
+        $mock->expects($this->atLeastOnce())->method('getHash');
         $this->validationService->validatePassword($mock);
     }
 
@@ -409,6 +592,7 @@ class ValidatePasswordTest extends TestCase {
         $mock->method('getPassword')->willReturn('password');
         $mock->method('getHash')->willReturn(substr(sha1('hash'), 0, 30));
         $mock->method('getModel')->willReturn('model');
+        $mock->method('getId')->willReturn('id');
         $mock->method('getFolder')->willReturn(FolderService::BASE_FOLDER_UUID);
 
         $modelMock = $this->getPasswordModelMock();
@@ -418,7 +602,7 @@ class ValidatePasswordTest extends TestCase {
 
         $this->userSettingsHelper->method('get')->willReturn(30);
 
-        $mock->expects($this->exactly(5))->method('getHash');
+        $mock->expects($this->atLeastOnce())->method('getHash');
         $this->validationService->validatePassword($mock);
     }
 
@@ -554,7 +738,8 @@ class ValidatePasswordTest extends TestCase {
     protected function getPasswordMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\PasswordRevision')
-            ->setMethods([
+            ->addMethods([
+                             'getId',
                              'getSseType',
                              'setSseType',
                              'getHidden',
