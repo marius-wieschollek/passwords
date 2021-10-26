@@ -5,10 +5,10 @@ let webpack              = require('webpack'),
     CleanWebpackPlugin   = require('clean-webpack-plugin'),
     VueLoaderPlugin      = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
-    OptimizeCSSPlugin    = require('optimize-css-assets-webpack-plugin');
+    CssMinimizerPlugin   = require("css-minimizer-webpack-plugin");
 
-module.exports = (env) => {
-    let production = !!(env && env.production);
+module.exports = (env, argv) => {
+    let production = argv.mode !== 'development';
     console.log('Production: ', production);
 
     let transform = (content) => {
@@ -20,12 +20,12 @@ module.exports = (env) => {
         plugins   = [
             new webpack.DefinePlugin(
                 {
-                    APP_TYPE: '"webapp"',
-                    APP_VERSION: `"${config.version}"`,
-                    APP_MAIN_VERSION: `"${config.version.substr(0, config.version.indexOf('.'))}"`,
+                    APP_TYPE           : '"webapp"',
+                    APP_VERSION        : `"${config.version}"`,
+                    APP_MAIN_VERSION   : `"${config.version.substr(0, config.version.indexOf('.'))}"`,
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
-                    APP_ENVIRONMENT:  production ? '"production"':'"development"',
-                    APP_NIGHTLY: !!(env && env.features),
+                    APP_ENVIRONMENT    : production ? '"production"':'"development"',
+                    APP_NIGHTLY        : !!(env && env.features)
                 }
             ),
             new CopyWebpackPlugin(
@@ -48,7 +48,6 @@ module.exports = (env) => {
             return JSON.stringify(data);
         };
 
-        plugins.push(new OptimizeCSSPlugin({cssProcessorOptions: {safe: true}}));
         if(!!(env && env.compress)) {
             plugins.push(
                 new CopyWebpackPlugin(
@@ -65,21 +64,28 @@ module.exports = (env) => {
     }
 
     return {
-        mode   : production ? 'production':'development',
-        devtool: 'none',
-        entry  : {
+        mode        : production ? 'production':'development',
+        entry       : {
             app  : `${__dirname}/src/js/app.js`,
             admin: `${__dirname}/src/js/admin.js`
         },
-        output : {
+        output      : {
             path         : `${__dirname}/src/`,
             filename     : 'js/Static/[name].js',
-            chunkFilename: 'js/Static/[name].[hash].js',
-            jsonpFunction: 'pwWpJsonP'
+            chunkFilename: 'js/Static/[name].[chunkhash].js'
         },
-        resolve: {
+        optimization: {
+            minimizer: [
+                new CssMinimizerPlugin()
+            ]
+        },
+        resolve     : {
             modules   : ['node_modules', 'src'],
             extensions: ['.js', '.vue', '.scss'],
+            fallback  : {
+                path  : false,
+                crypto: false
+            },
             alias     : {
                 'vue$' : 'vue/dist/vue.esm.js',
                 '@'    : `${__dirname}/src`,
@@ -89,7 +95,7 @@ module.exports = (env) => {
                 '@vc'  : `${__dirname}/src/vue/Components`
             }
         },
-        module : {
+        module      : {
             rules: [
                 {
                     test  : /\.vue$/,
@@ -109,8 +115,11 @@ module.exports = (env) => {
                             loader : 'css-loader',
                             options: {
                                 esModule: true,
-                                url     : (url) => {
-                                    return url.indexOf('/apps/passwords/') === -1;
+                                modules : 'global',
+                                url     : {
+                                    filter: (url) => {
+                                        return url.indexOf('/apps/passwords/') === -1;
+                                    }
                                 }
                             }
                         },
@@ -134,12 +143,9 @@ module.exports = (env) => {
                     ]
                 }, {
                     test   : /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                    loader : 'url-loader',
-                    options: {
-                        limit          : 1024,
-                        outputPath     : 'css/',
-                        publicPath     : './',
-                        useRelativePath: false
+                    type: 'asset',
+                    generator: {
+                        filename: 'css/[hash][ext][query]'
                     }
                 }
             ]
