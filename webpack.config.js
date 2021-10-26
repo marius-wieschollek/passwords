@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
                     APP_MAIN_VERSION   : `"${config.version.substr(0, config.version.indexOf('.'))}"`,
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
                     APP_ENVIRONMENT    : production ? '"production"':'"development"',
-                    APP_NIGHTLY        : !!(env && env.features)
+                    APP_NIGHTLY        : !!(env && env.features === 'true')
                 }
             ),
             new CopyWebpackPlugin(
@@ -48,7 +48,7 @@ module.exports = (env, argv) => {
             return JSON.stringify(data);
         };
 
-        if(!!(env && env.compress)) {
+        if(!!(env && env.compress === 'true')) {
             plugins.push(
                 new CopyWebpackPlugin(
                     {
