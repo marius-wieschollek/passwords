@@ -412,6 +412,7 @@ class SynchronizeShares extends AbstractTimedJob {
             'notes'        => $sourceRevision->getNotes(),
             'customFields' => $sourceRevision->getCustomFields(),
             'status'       => $sourceRevision->getStatus(),
+            'edited'       => $sourceRevision->getEdited(),
         ]);
 
         return $this->passwordRevisionService->save($newRevision);
