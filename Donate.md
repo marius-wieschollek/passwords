@@ -7,7 +7,7 @@
 ## Authors
 - Marius David Wieschollek
   - Etherum Address: `0xfeab0bb419aeead202f4516cc674e5868269e5d5`
-  - [buymeacoffee.com](https://www.buymeacoffee.com/mariusdavid) (PayPal, CC, etc. possible)
+  - [buymeacoffee.com](https://www.buymeacoffee.com/mariusdavid) (PayPal, etc.)
 
 ## Don't forget these developers
 The Passwords app for Nextcloud is just one part of a larger community that helps you keep your data safe.
