@@ -1,4 +1,11 @@
 ## [Unreleased]
+## 2021.11.0 - Feature release
+### Fixed
+- Password creation fails when e2e and custom hash length used
+- Edited time of shared passwords not synchronized
+- Bitwarden CSV import mapping incorrect
+- Bitwarden JSON import crashing when required fields are missing
+- Fixed issues with LastPass
 
 ## 2021.10.0 - Feature release
 ### Changed
