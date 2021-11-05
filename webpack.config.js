@@ -8,7 +8,7 @@ let webpack              = require('webpack'),
     CssMinimizerPlugin   = require('css-minimizer-webpack-plugin');
 
 module.exports = (env, argv) => {
-    let production = argv.mode !== 'development';
+    let production = argv.mode === 'production';
     console.log('Production: ', production);
 
     let transform = (content) => {

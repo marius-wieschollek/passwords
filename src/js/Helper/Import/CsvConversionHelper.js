@@ -364,6 +364,9 @@ export default class ImportCsvConversionHelper {
         let domain = new RegExp('^([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.){1,}[a-zA-Z]{2,}$');
         if(object.url && object.url.length !== 0 && object.url.indexOf('://') === -1) {
             object.url = `https://${object.url}`;
+        } else if(object.url && (object.url === 'http://sn' || object.url === 'http://')) {
+            // LastPass CSV specific fix
+            object.url = null;
         } else if(!object.url || object.url.length === 0) {
             if(object.label && domain.test(object.label)) {
                 object.url = API.parseUrl(object.label, 'href');
@@ -412,13 +415,14 @@ export default class ImportCsvConversionHelper {
             bitwardenCsv: {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['tagLabels', 'favorite', 'folderLabel', 'label', 'notes', 'customFields', 'url', 'username', 'password'],
+                mapping  : ['tagLabels', 'favorite', 'folderLabel', 'label', 'notes', 'customFields', '', 'url', 'username', 'password'],
                 repair   : true
             },
             lastpass    : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['url', 'username', 'password', 'notes', 'label', 'folderLabel', 'favorite']
+                mapping  : ['url', 'username', 'password', '', 'notes', 'label', 'tagLabels', 'favorite'],
+                repair   : true
             },
             passman     : {
                 firstLine: 1,

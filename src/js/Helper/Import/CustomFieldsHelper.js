@@ -11,7 +11,8 @@ export default class CustomFieldsHelper {
      * @param label
      * @param type
      */
-    static createCustomField(password, errors, value, label = '', type = text) {
+    static createCustomField(password, errors, value, label = '', type = 'text') {
+        if(value === null || value === undefined) return;
         if(type === 'totp') label = 'otp';
 
         if(['password', 'totp'].indexOf(type) !== -1) {
