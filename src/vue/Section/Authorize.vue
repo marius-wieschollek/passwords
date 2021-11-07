@@ -14,8 +14,8 @@
                            @click="requestToken()"
                            v-if="retryVisible"/>
                 <div>
-                    <field type="password" placeholder="Password" v-model="password" required v-if="hasPassword"/>
-                    <select v-model="providerId" v-if="hasToken && providers.length > 0">
+                    <field type="password" placeholder="Password" v-model="password" :disabled="loggingIn" required v-if="hasPassword"/>
+                    <select v-model="providerId" :disabled="loggingIn" v-if="hasToken && providers.length > 0">
                         <option v-for="(option, id) in providers" :value="id" :title="option.description">
                             {{ option.label }}
                         </option>
@@ -24,6 +24,7 @@
                            :title="provider.description"
                            v-model="token"
                            required
+                           :disabled="loggingIn"
                            v-if="showTokenField"/>
                 </div>
             </div>
@@ -155,9 +156,10 @@
                 this.hasError = true;
 
                 if(e.response && e.response.status === 403) {
-                    this.errorMessage = 'Too many attempts';
+                    this.errorMessage = 'Password invalid. Session revoked for too many failed login attempts.';
 
                     setTimeout('location.reload()', 2500);
+                    return;
                 } else if(e.message) {
                     this.errorMessage = e.message;
                 } else {

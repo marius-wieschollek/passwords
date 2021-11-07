@@ -227,6 +227,7 @@
             'Password invalid'                    : 'Falsches Passwort',
             'Unknown Error'                       : 'Unbekannter Fehler',
             'Token request failed'                : 'Token-Anfrage fehlgeschlagen',
+            'Too many failed login attempts'      : 'Zu viele fehlgeschlagene Anmeldeversuche',
             'CLIENT::MAINTENANCE'                 : 'System Wartungsmodus',
             'CLIENT::UNKNOWN'                     : 'Nicht Vorhanden',
             'CLIENT::SYSTEM'                      : 'System',
@@ -266,7 +267,8 @@
             'The session token is no longer valid. The app will now reload.'                           : 'Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen.',
             'Today in 2018, the first version of passwords was published. Thank you for using the app.': 'Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen.',
             'The encryption applied by the server before storing the data in the database'             : 'Diese Verschlüsselung wurde vom Server vor dem Speichern in der Datenbank angewandt',
-            'The encryption applied by the client before sending the data to the server'               : 'Diese Verschlüsselung wurde auf dem Endgerät angewandt bevor die Daten an den Server gesendet wurden'
+            'The encryption applied by the client before sending the data to the server'               : 'Diese Verschlüsselung wurde auf dem Endgerät angewandt bevor die Daten an den Server gesendet wurden',
+            'Password invalid. Session revoked for too many failed login attempts.'                    : 'Falsches Passwort. Die Sitzung wurde wegen zu vieler fehlgeschlagener Anmeldeversuche beendet.'
         },
         notes        = {
             'This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook.': 'Dies ist eine Kopie der Passphrase die Sie für die Verschlüsselung gewählt haben. Änderungen an diesem Eintrag haben keine Auswirkungen auf die Verschlüsselung. Die Passphrase kann in den Einstellungen geändert werden. Weitere Informationen finden Sie im Handbuch.'
