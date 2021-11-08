@@ -1,7 +1,7 @@
 ## [Unreleased]
 ## 2021.11.0 - Feature release
 ### Changed
-- Updated wording ro too many decryption attempts
+- Updated wording for too many decryption attempts
 ### Fixed
 - Password creation fails when e2e and custom hash length used
 - Edited time of shared passwords not synchronized
