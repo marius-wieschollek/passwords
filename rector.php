@@ -16,6 +16,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/src/templates'
     ]);
 
+    $containerConfigurator->import(DowngradeSetList::PHP_81);
     $containerConfigurator->import(DowngradeSetList::PHP_80);
     $containerConfigurator->import(DowngradeSetList::PHP_74);
     $containerConfigurator->import(DowngradeSetList::PHP_73);
