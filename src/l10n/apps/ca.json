@@ -1,0 +1,39 @@
+{
+    "translations": [
+        {
+            "official"              : "oficial",
+            "by {author}"           : "per {author}",
+            "source code"           : "codi font",
+            "learn more"            : "saber més",
+            "Connect with PassLink" : "Connectar amb PassLink",
+            "Connect a new device"  : "Connectar un nou dispositiu",
+            "Connect via link"      : "Connectar emprant un enllaç",
+            "Choose a name:"        : "Escolliu un nom:",
+            "The codes don't match" : "Els codis no coincideixen",
+            "Looks good"            : "Es veu bé",
+            "Connection successful" : "Connexió amb èxit",
+            "I'm done"              : "Això s'ha fet amb èxit",
+            "Don't try again"       : "No ho intenteu un altre cop",
+            "Connect something else": "Connectar quelcom més",
+            "Try again"             : "Intentar un altre cop",
+            "Strong Encryption"     : "Xifrat fort"
+        },
+        {
+            "Failed to fetch apps: {error}"             : "No s'ha pogut carregar les aplicacions: {error}",
+            "You cancelled the connection"              : "Heu cancel·lat la connexió",
+            "You did not confirm the connection in time": "No heu confirmat la connexió a temps"
+        },
+        {
+            "Just scan the QR code with the app to connect it."                             : "Només cal escanejar el codi QR amb l'aplicació per connectar-se.",
+            "Click the button when you are ready to start the connection."                  : "Premeu el botó quan estigueu preparat per iniciar la connexió.",
+            "Check if the codes below match with the ones provided by the device or app:"   : "Comproveu si els codis següents coincideixen amb els proporcionats pel dispositiu o l'aplicació:",
+            "Link this client to your Nextcloud account without annoying passwords and urls": "Enllaceu aquest client al vostre compte Nextcloud sense contrasenyes ni URL molestos",
+            "This client officially supports our strong end-to-end encryption"              : "Aquest client admet oficialment el nostre xifratge fort d'extrem a extrem",
+            "This client is maintained by the authors of the Passwords app"                 : "Aquest client el mantenen els autors de l'aplicació Contrasenyes"
+        },
+        {
+            "Click the button to connect an app installed on this device or scan the QR code with the app if it's installed on another device.": "Premeu el botó per connectar una aplicació instal·lada en aquest dispositiu o escanegeu el codi QR amb l'aplicació si està instal·lada en un altre dispositiu."
+        }
+    ],
+    "pluralForm"  : "nplurals=2; plural=(n != 1);"
+}

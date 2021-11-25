@@ -4,7 +4,7 @@
             'All'                                 : 'Todas',
             'Folders'                             : 'Carpeta',
             'Recent'                              : 'Recientes',
-            'Favorites'                           : 'Favoritas',
+            'Favorites'                           : 'Favorites',
             'Shared'                              : 'Compartidas',
             'Tags'                                : 'Etiquetas',
             'Security'                            : 'Seguridad',
