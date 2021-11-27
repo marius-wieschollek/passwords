@@ -7,7 +7,6 @@
 
 namespace OCA\Passwords\Helper\Favicon;
 
-use Exception;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
 use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
@@ -25,11 +24,10 @@ use Throwable;
  */
 class BestIconHelper extends AbstractFaviconHelper {
 
-    const BESTICON_INSTANCE_1     = 'https://ncpw-besticon-01.herokuapp.com/icon';
-    const BESTICON_INSTANCE_2     = 'https://ncpw-besticon-02.herokuapp.com/icon';
-    const BESTICON_CONFIG_KEY     = 'service/favicon/bi/url';
-    const BESTICON_COUNTER_KEY    = 'service/favicon/bi/counter';
-    const BESTICON_INSTANCE_LIMIT = 75;
+    const BESTICON_SHARED_INSTANCE = 'https://icons.passwordsapp.org/icon';
+    const BESTICON_CONFIG_KEY      = 'service/favicon/bi/url';
+    const BESTICON_COUNTER_KEY     = 'service/favicon/bi/counter';
+    const BESTICON_INSTANCE_LIMIT  = 250;
 
     /**
      * @var ConfigurationService
@@ -69,13 +67,13 @@ class BestIconHelper extends AbstractFaviconHelper {
      * @param FallbackIconGenerator $fallbackIconGenerator
      */
     public function __construct(
-        DateTimeHelper $dateTime,
-        ConfigurationService $config,
-        HelperService $helperService,
-        AdminUserHelper $adminHelper,
-        IClientService $requestService,
-        FileCacheService $fileCacheService,
-        NotificationService $notificationService,
+        DateTimeHelper        $dateTime,
+        ConfigurationService  $config,
+        HelperService         $helperService,
+        AdminUserHelper       $adminHelper,
+        IClientService        $requestService,
+        FileCacheService      $fileCacheService,
+        NotificationService   $notificationService,
         FallbackIconGenerator $fallbackIconGenerator
     ) {
         $this->config        = $config;
@@ -128,25 +126,34 @@ class BestIconHelper extends AbstractFaviconHelper {
      * @return string
      */
     protected function getSharedInstanceUrl(): string {
+        $this->checkSharedInstanceLimits();
+
+        return self::BESTICON_SHARED_INSTANCE;
+    }
+
+    /**
+     *
+     */
+    protected function checkSharedInstanceLimits(): void {
         try {
             $currentWeek = $this->dateTime->getInternationalWeek();
-            $currentHour = $this->dateTime->getInternationalHour();
-        } catch(Exception $e) {
-            return self::BESTICON_INSTANCE_1;
-        }
+            $this->config->clearCache();
 
-        $this->config->clearCache();
-        [$week, $count, $notified] = explode(':', $this->config->getAppValue(self::BESTICON_COUNTER_KEY, '0:0:0'));
-        if(intval($week) !== $currentWeek) $count = 0;
-        $count++;
-        if($count >= self::BESTICON_INSTANCE_LIMIT && $notified === '0') {
-            $notified = '1';
-            foreach($this->adminHelper->getAdmins() as $admin) {
-                $this->notifications->sendBesticonApiNotification($admin->getUID());
+            [$week, $count, $notified] = explode(':', $this->config->getAppValue(self::BESTICON_COUNTER_KEY, '0:0:0'));
+            if(intval($week) !== $currentWeek) {
+                $count = 0;
+                $notified = '0';
             }
-        }
-        $this->config->setAppValue(self::BESTICON_COUNTER_KEY, "{$currentWeek}:{$count}:{$notified}");
 
-        return $currentHour < 12 ? self::BESTICON_INSTANCE_1:self::BESTICON_INSTANCE_2;
+            $count++;
+            if($count >= self::BESTICON_INSTANCE_LIMIT && $notified === '0') {
+                $notified = '1';
+                foreach($this->adminHelper->getAdmins() as $admin) {
+                    $this->notifications->sendBesticonApiNotification($admin->getUID());
+                }
+            }
+            $this->config->setAppValue(self::BESTICON_COUNTER_KEY, "{$currentWeek}:{$count}:{$notified}");
+        } catch(\Throwable $e) {
+        }
     }
 }

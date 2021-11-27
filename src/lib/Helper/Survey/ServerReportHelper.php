@@ -23,7 +23,7 @@ use OCP\Http\Client\IClientService;
  */
 class ServerReportHelper {
 
-    const API_URL = 'https://ncpw.mdns.eu/api.php';
+    const API_URL = 'https://statistics.passwordsapp.org/api.php';
 
     /**
      * @var ConfigurationService

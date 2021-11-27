@@ -1,4 +1,10 @@
 ## [Unreleased]
+### Added
+ - Added translation for catalan
+### Changed
+ - Improved spanish translation
+ - Changed default besticon instance, removed limitations
+
 ## 2021.11.0 - Feature release
 ### Changed
 - Updated wording for too many decryption attempts

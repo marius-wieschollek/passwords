@@ -136,13 +136,6 @@ class CacheController extends ApiController {
             }
         }
 
-        if(
-            $this->config->getAppValue('service/favicon') === HelperService::FAVICON_BESTICON &&
-            empty($this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, ''))
-        ) {
-            $info[ FileCacheService::FAVICON_CACHE ]['clearable'] = false;
-        }
-
         return $info;
     }
 }
