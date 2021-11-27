@@ -123,7 +123,7 @@
         {
             "Send keep-alive requests to the server to prevent the session from being cancelled"                          : "Enviar solicitudes continuas en segundo plano al servidor para evitar que la sesión finalice",
             "Choose the type of encryption used to encrypt data on the client before it's sent to the server"             : "Modo de cifrado con el que el dispositivo cliente cifra los datos antes de enviarlos al servidor.",
-            "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.": "¿Estás seguro de que deseas borrar todas tus configuraciones, contraseñas, carpetas y etiquetas? \ NEsto NO PUEDE deshacerse."
+            "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.": "¿Estás seguro de que deseas borrar todas tus configuraciones, contraseñas, carpetas y etiquetas? \n Esto NO PUEDE deshacerse."
         },
         {
             "The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached.": "El hash SHA-1 se utiliza para detectar contraseñas comprometidas. Guardar un hash parcial puede dificultar los ataques de fuerza bruta si el servidor es pirateado. Sin embargo, esto también podría señalar incorrectamente a algunas contraseñas como comprometidas."
