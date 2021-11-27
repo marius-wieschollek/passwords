@@ -164,8 +164,8 @@ class BesticonHelperTest extends TestCase {
     /**
      * @throws Exception
      */
-    public function testCallsWithInstance1Api() {
-        $serviceUrl    = $this->besticonHelper::BESTICON_INSTANCE_1;
+    public function testCallsWithSharedApi() {
+        $serviceUrl    = $this->besticonHelper::BESTICON_SHARED_INSTANCE;
         $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=https://{$domain}&formats=png,ico,gif,jpg";
@@ -175,39 +175,6 @@ class BesticonHelperTest extends TestCase {
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(0);
-        $this->dateTimeHelper->method('getInternationalHour')->willReturn(11);
-        $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
-        $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
-        $this->configurationService->method('getAppValue')->willReturnMap(
-            [
-                [$this->besticonHelper::BESTICON_CONFIG_KEY, '', Application::APP_NAME, ''],
-                [$this->besticonHelper::BESTICON_COUNTER_KEY, '0:0:0', Application::APP_NAME, '0:0:0'],
-            ]
-        );
-        $this->httpClientService->method('newClient')->willReturn($client);
-        $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
-
-        $client->expects($this->once())->method('get')->with($apiRequestUrl);
-
-        $this->besticonHelper->getFavicon($domain);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testCallsWithInstance2Api() {
-        $serviceUrl    = $this->besticonHelper::BESTICON_INSTANCE_2;
-        $fallbackColor = 'f0f0f0';
-        $domain        = 'www.example.com';
-        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=https://{$domain}&formats=png,ico,gif,jpg";
-        $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
-        $file          = new SimpleFile();
-        $client        = $this->getHttpClientMock();
-
-        $this->dateTimeHelper->method('getInternationalWeek')->willReturn(0);
-        $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
@@ -237,7 +204,6 @@ class BesticonHelperTest extends TestCase {
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
-        $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
@@ -267,7 +233,6 @@ class BesticonHelperTest extends TestCase {
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
-        $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
@@ -298,7 +263,6 @@ class BesticonHelperTest extends TestCase {
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
-        $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
         $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn($fallbackColor);
