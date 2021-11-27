@@ -123,7 +123,7 @@
         {
             "Send keep-alive requests to the server to prevent the session from being cancelled"                          : "Envir sol·licituds continues en segon pla al servidor per evitar que es tanqui la sessió",
             "Choose the type of encryption used to encrypt data on the client before it's sent to the server"             : "Mode de xifratge amb el qual el dispositiu client xifra les dades abans de que s'enviïn al servidor.",
-            "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.": "Esteu segur que voleu esborrar tota la vostra configuració, contrasenyes, carpetes i etiquetes? \ NAixò NO es pot desfer."
+            "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.": "Esteu segur que voleu esborrar tota la vostra configuració, contrasenyes, carpetes i etiquetes? \nAixò NO es pot desfer."
         },
         {
             "The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached.": "El hash SHA-1 s'utilitza per detectar contrasenyes compromeses. Desar un hash parcial pot dificultar els atacs de força bruta si el servidor és piratejat. Tanmateix, això en algun moment també podria assenyalar incorrectament algunes contrasenyes com a compromeses."
