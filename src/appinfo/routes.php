@@ -101,6 +101,7 @@ $routes = [
     ['name' => 'connect#confirm', 'url' => 'link/connect/confirm', 'verb' => 'GET'],
     ['name' => 'connect#confirm', 'url' => 'link/connect/confirm', 'verb' => 'POST', 'postfix' => 'POST'],
     ['name' => 'connect#apply', 'url' => 'link/connect/apply', 'verb' => 'POST'],
+    ['name' => 'connect#theme', 'url' => 'link/connect/theme', 'verb' => 'POST'],
 
     ['name' => 'tag_api#preflighted_cors', 'url' => '/api/1.0/tag/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'share_api#preflighted_cors', 'url' => '/api/1.0/share/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
