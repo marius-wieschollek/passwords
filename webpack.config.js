@@ -147,7 +147,8 @@ module.exports = (env, argv) => {
                             }
                         }
                     ]
-                }, {
+                },
+                {
                     test     : /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
                     type     : 'asset',
                     generator: {

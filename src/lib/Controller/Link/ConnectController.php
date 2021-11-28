@@ -32,7 +32,7 @@ use Throwable;
 class ConnectController extends Controller {
 
     const PASSLINK_CONNECT_EXTENSION = "ext+passlink:%s/do/connect/%s";
-    const PASSLINK_CONNECT_DOMAIN = "https://passlink.mdns.eu/open/%s/do/connect/%s";
+    const PASSLINK_CONNECT_DOMAIN = "https://link.passwordsapp.org/open/%s/do/connect/%s";
     const PASSLINK_CONNECT_WEB = "web+passlink:%s/do/connect/%s";
     const PASSLINK_CONNECT_PROTOCOL = "passlink:%s/do/connect/%s";
     const SESSION_KEY = 'passlink.connect';
@@ -124,7 +124,7 @@ class ConnectController extends Controller {
      * @param bool $theme
      * @return JSONResponse
      */
-    public function request(?string $link = 'protocol', bool $theme = true): JSONResponse {
+    public function request(?string $link = 'protocol'): JSONResponse {
         $this->destroyCurrentRegistration();
 
         $registration = $this->registrationService->create();
@@ -135,14 +135,11 @@ class ConnectController extends Controller {
         $baseUrl = $this->serverSettings->get('baseUrl');
         $linkUrl = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
 
-        $httpParams = '';
-        if ($theme) $httpParams = '?' . http_build_query(['t' => $this->getTheme($baseUrl)]);
-
         $links = [
-            'web' => sprintf(self::PASSLINK_CONNECT_WEB, $linkUrl, $registration->getUuid()) . $httpParams,
-            'extension' => sprintf(self::PASSLINK_CONNECT_EXTENSION, $linkUrl, $registration->getUuid()) . $httpParams,
-            'domain' => sprintf(self::PASSLINK_CONNECT_DOMAIN, $linkUrl, $registration->getUuid()) . $httpParams,
-            'protocol' => sprintf(self::PASSLINK_CONNECT_PROTOCOL, $linkUrl, $registration->getUuid()) . $httpParams
+            'web' => sprintf(self::PASSLINK_CONNECT_WEB, $linkUrl, $registration->getUuid()),
+            'extension' => sprintf(self::PASSLINK_CONNECT_EXTENSION, $linkUrl, $registration->getUuid()),
+            'domain' => sprintf(self::PASSLINK_CONNECT_DOMAIN, $linkUrl, $registration->getUuid()),
+            'protocol' => sprintf(self::PASSLINK_CONNECT_PROTOCOL, $linkUrl, $registration->getUuid())
         ];
 
         $data = ['id' => $registration->getUuid(), 'links' => $links];
@@ -293,6 +290,35 @@ class ConnectController extends Controller {
     }
 
     /**
+     * @PublicPage
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @UserRateThrottle(limit=6, period=60)
+     *
+     * @param string $id
+     *
+     * @return JSONResponse
+     */
+    public function theme(string $id): JSONResponse {
+        try {
+            /** @var Registration $registration */
+            $registration = $this->registrationService->findByUuid($id);
+        } catch(Throwable $e) {
+            $this->logger->logException($e);
+
+            return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
+        }
+
+        if($registration->getStatus() > 2) {
+            return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
+        }
+
+
+        return new JSONResponse($this->getTheme());
+    }
+
+    /**
      * @return Registration|null
      */
     protected function getRegistrationFromSession(): ?Registration {
@@ -338,31 +364,19 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @param string|null $baseUrl
-     *
-     * @return string
+     * @return array
      */
-    protected function getTheme(?string $baseUrl): string {
-        if(substr($baseUrl, -1) !== '/') $baseUrl .= "/";
-
-        $logo = str_replace($baseUrl, '', $this->serverSettings->get('theme.logo'));
-        if(strpos($logo, '?') !== false) $logo = substr($logo, 0, strpos($logo, '?'));
-        $background = str_replace($baseUrl, '', $this->serverSettings->get('theme.background'));
-        if(strpos($background, '?') !== false) $background = substr($background, 0, strpos($background, '?'));
-        $background = str_replace('https://', '://', $background);
-
-        $theme = implode('|',
-                         [
-                             str_replace('|', '', $this->serverSettings->get('theme.label')),
-                             $logo,
-                             $background,
-                             str_replace('#', '', $this->serverSettings->get('theme.color.primary')),
-                             str_replace('#', '', $this->serverSettings->get('theme.color.text')),
-                             str_replace('#', '', $this->serverSettings->get('theme.color.background')),
-                         ]
-        );
-
-        return rtrim(base64_encode(gzcompress($theme, 9)), '=');
+    protected function getTheme(): array {
+        return [
+            'label' => $this->serverSettings->get('theme.label'),
+            'logo' => $this->serverSettings->get('theme.logo'),
+            'background' => $this->serverSettings->get('theme.background'),
+            'colors' => [
+                'primary' => $this->serverSettings->get('theme.color.primary'),
+                'text' => $this->serverSettings->get('theme.color.text'),
+                'background' => $this->serverSettings->get('theme.color.background')
+            ]
+        ];
     }
 
     /**
