@@ -16,8 +16,9 @@ The developers and projects listed here are part of that community.
 | Who? | Does What? | How to donate? |
 | --- | --- | --- |
 | [joleaf](https://gitlab.com/joleaf) | [Develops an Android App with Flutter](https://gitlab.com/joleaf/nc-passwords-app) | [buymeacoffee.com](https://www.buymeacoffee.com/joleaf), [more options](https://gitlab.com/joleaf/nc-passwords-app#donate) |
-| [daper](https://github.com/daper) | [Develops an Android App with React](https://github.com/daper/nextcloud-passwords-app) | [PayPal](https://paypal.me/daper) |
 | [Johannes Schliephake](https://github.com/johannes-schliephake) | [Develops an iOS App](https://github.com/johannes-schliephake/nextcloud-passwords-ios) | [In-App Purchase](https://apps.apple.com/app/id1546212226) |
+| [ Matthias Fischer ](https://gitlab.com/j0chn) | [Develops an Windows and Linux Client](https://gitlab.com/j0chn/nextcloud_password_client) | [buymeacoffee.com](https://www.buymeacoffee.com/j0chn) |
+| [daper](https://github.com/daper) | [Develops an Android App with React](https://github.com/daper/nextcloud-passwords-app) | [PayPal](https://paypal.me/daper) |
 
 ## Don't forget these projects
 The Passwords app for Nextcloud integrates many third party services.
