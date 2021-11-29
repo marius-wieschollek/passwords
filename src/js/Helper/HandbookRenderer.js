@@ -29,7 +29,7 @@ class HandbookRenderer {
                 mime     = response.headers.get('content-type');
 
             if(response.ok) {
-                if(mime.substr(0, 10) !== 'text/plain') {
+                if(mime.substr(0, 10) !== 'text/plain' && mime.substr(0, 13) !== 'text/markdown') {
                     return HandbookRenderer._generateErrorPage(
                         Localisation.translate('Invalid content type {mime}', {mime})
                     );

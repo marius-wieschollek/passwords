@@ -57,6 +57,14 @@ class LanguageController extends Controller {
      * @return Response
      */
     public function getFile(string $section, string $language): Response {
+        if(!in_array($section, ['apps', 'backups', 'settings', 'tutorial'])) {
+            return new NotFoundResponse();
+        }
+
+        if(preg_match('/^[a-z]{2}(_[A-Z]{2})?$/', $language) !== 1) {
+            return new NotFoundResponse();
+        }
+
         try {
             $json = $this->readLanguageFile($section, $language);
 
@@ -76,13 +84,13 @@ class LanguageController extends Controller {
      * @throws AppPathNotFoundException
      */
     protected function readLanguageFile(string $section, string $language): ?object {
-        $appPath  = $this->appManager->getAppPath(Application::APP_NAME);
-        $filePath = $appPath.DIRECTORY_SEPARATOR.
-                    'l10n'.DIRECTORY_SEPARATOR.
+        $basePath  = $this->appManager->getAppPath(Application::APP_NAME).DIRECTORY_SEPARATOR.'l10n';
+        $filePath = $basePath.DIRECTORY_SEPARATOR.
                     $section.DIRECTORY_SEPARATOR.
                     $language.'.json';
 
-        if(is_file($filePath)) {
+        // @TODO use str_starts_with($filePath, $basePath) in 2022.1
+        if(is_file($filePath) && substr($filePath, 0, strlen($basePath)) === $basePath) {
             $data = file_get_contents($filePath);
             $json = json_decode($data);
 
