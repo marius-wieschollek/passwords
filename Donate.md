@@ -7,7 +7,7 @@
 ## Authors
 - Marius David Wieschollek
   - Etherum Address: `0xfeab0bb419aeead202f4516cc674e5868269e5d5`
-  - [buymeacoffee.com](https://www.buymeacoffee.com/mariusdavid) (PayPal, etc.)
+  - [ko-fi.com](https://ko-fi.com/mariusdavid) (PayPal, etc.)
 
 ## Don't forget these developers
 The Passwords app for Nextcloud is just one part of a larger community that helps you keep your data safe.
@@ -17,7 +17,7 @@ The developers and projects listed here are part of that community.
 | --- | --- | --- |
 | [joleaf](https://gitlab.com/joleaf) | [Develops an Android App with Flutter](https://gitlab.com/joleaf/nc-passwords-app) | [buymeacoffee.com](https://www.buymeacoffee.com/joleaf), [more options](https://gitlab.com/joleaf/nc-passwords-app#donate) |
 | [Johannes Schliephake](https://github.com/johannes-schliephake) | [Develops an iOS App](https://github.com/johannes-schliephake/nextcloud-passwords-ios) | [In-App Purchase](https://apps.apple.com/app/id1546212226) |
-| [ Matthias Fischer ](https://gitlab.com/j0chn) | [Develops an Windows and Linux Client](https://gitlab.com/j0chn/nextcloud_password_client) | [buymeacoffee.com](https://www.buymeacoffee.com/j0chn) |
+| [Matthias Fischer](https://gitlab.com/j0chn) | [Develops a Windows and Linux Client](https://gitlab.com/j0chn/nextcloud_password_client) | [buymeacoffee.com](https://www.buymeacoffee.com/j0chn) |
 | [daper](https://github.com/daper) | [Develops an Android App with React](https://github.com/daper/nextcloud-passwords-app) | [PayPal](https://paypal.me/daper) |
 
 ## Don't forget these projects
