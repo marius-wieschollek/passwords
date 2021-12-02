@@ -23,9 +23,9 @@ class SystemRequirements {
 
     const NC_MINIMUM                     = '20.0.5';
     const NC_MINIMUM_ID                  = 20;
-    const NC_DEPRECATION_WARNING_ID      = 22;
-    const NC_DEPRECATION_NOTIFICATION_ID = 22;
-    const NC_UPGRADE_RECOMMENDATION      = '22';
+    const NC_DEPRECATION_WARNING_ID      = 23;
+    const NC_DEPRECATION_NOTIFICATION_ID = 23;
+    const NC_UPGRADE_RECOMMENDATION      = '23';
 
     const PHP_MINIMUM                     = '7.4.0';
     const PHP_MINIMUM_ID                  = 70400;

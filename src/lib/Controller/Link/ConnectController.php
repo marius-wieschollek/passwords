@@ -121,7 +121,6 @@ class ConnectController extends Controller {
      * @UserRateThrottle(limit=4, period=60)
      *
      * @param string|null $link
-     * @param bool $theme
      * @return JSONResponse
      */
     public function request(?string $link = 'protocol'): JSONResponse {
