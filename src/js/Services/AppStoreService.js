@@ -93,12 +93,11 @@ export default new class AppStoreService {
     }
 
     _resolveTranslatableProperty(property) {
-        let locale = Localisation.locale.replace('_', '-');
-        if(property.hasOwnProperty(locale)) {
-            return property[locale];
+        if(property.hasOwnProperty(Localisation.language)) {
+            return property[Localisation.language];
         }
-        if(property.hasOwnProperty(Localisation.lang)) {
-            return property[Localisation.lang];
+        if(property.hasOwnProperty(Localisation.baseLanguage)) {
+            return property[Localisation.baseLanguage];
         }
         if(property.hasOwnProperty('en')) {
             return property.en;
