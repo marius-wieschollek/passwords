@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Added
+ - Nextcloud 23 support
  - Added translation for catalan
 ### Changed
  - Improved spanish translation

@@ -35,6 +35,7 @@ use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\ILogger;
+use OCP\Support\Subscription\IRegistry;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -80,6 +81,7 @@ class NightlyAppFetcher extends Fetcher {
         IConfig $config,
         CompareVersion $compareVersion,
         LoggerInterface $logger,
+        IRegistry $registry,
         ILogger $legacyLogger
     ) {
 
@@ -93,7 +95,8 @@ class NightlyAppFetcher extends Fetcher {
             $clientService,
             $timeFactory,
             $config,
-            $parentLogger
+            $parentLogger,
+            $registry
         );
 
         $this->dbUpdated        = false;
