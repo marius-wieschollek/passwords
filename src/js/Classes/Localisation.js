@@ -4,12 +4,15 @@ import {generateFilePath, generateUrl}     from '@nextcloud/router';
 
 class Localisation {
 
-    get lang() {
+    get baseLanguage() {
         let language = getLanguage();
         if(!language) return 'en';
-        if(language.indexOf('-') !== -1) {
-            return language.substr(0, language.indexOf('-'));
-        }
+        return language.indexOf('-') === -1  ? language:language.substr(0, language.indexOf('-'));
+    }
+
+    get language() {
+        let language = getLanguage();
+        if(!language) return 'en';
         return language;
     }
 
@@ -67,7 +70,7 @@ class Localisation {
      * @returns {Promise<boolean>}
      */
     async loadSection(section, alternative = false) {
-        let language = this.locale;
+        let language = this.language.replace('-', '_');
         if(language === 'en') return true;
 
         let url = generateFilePath('passwords', 'l10n', `${section}/${language}.json?_=${APP_VERSION}`);
