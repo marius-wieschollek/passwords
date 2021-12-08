@@ -64,6 +64,10 @@
     #passlink-connect {
         .window {
             width : 360px;
+
+            @media all and (max-width: 480px) {
+                width: 100vw;
+            }
         }
     }
 </style>
