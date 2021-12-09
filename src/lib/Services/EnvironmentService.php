@@ -502,7 +502,7 @@ class EnvironmentService {
                 return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
             } else if(isset($loginCredentials->password) && !empty($loginCredentials->password)) {
                 return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
-            } else if(isset($loginCredentials->password) && empty($loginCredentials->password)) {
+            } else if(!isset($loginCredentials->password) || empty($loginCredentials->password)) {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
             }
         } else if($this->session->get('oldUserId') === $uid && OC_User::isAdminUser($uid)) {

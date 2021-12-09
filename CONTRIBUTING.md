@@ -91,7 +91,6 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
  - Click on "Save Credentials"
  - Enter `dc=nextcloud` as Base DN
  - Click on "Continue"
- - Select "inetOrgPerson" and "posixAccount" as object classes
  - Click on "Continue"
  - Select "cn" in "other attributes"
  - Click on "Continue"
