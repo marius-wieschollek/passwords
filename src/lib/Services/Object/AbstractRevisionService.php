@@ -74,7 +74,7 @@ abstract class AbstractRevisionService extends AbstractService {
      * @return RevisionInterface[]
      * @throws Exception
      */
-    public function findAll($decrypt = false): array {
+    public function findAll(bool $decrypt = false): array {
         /** @var RevisionInterface[] $revisions */
         $revisions = $this->mapper->findAll();
         if(!$decrypt) return $revisions;

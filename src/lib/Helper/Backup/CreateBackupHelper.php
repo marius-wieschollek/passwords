@@ -275,7 +275,6 @@ class CreateBackupHelper {
         $settings = [];
 
         foreach($options as $option) {
-            if($option['name'] === 'legacy.api.last.used') continue;
             $settings[$option['name']] = $option['isDefault'] ? null:$option['value'];
         }
 

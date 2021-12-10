@@ -100,27 +100,6 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
-     * @param $search
-     *
-     * @return EntityInterface|Entity
-     * @throws DoesNotExistException
-     * @throws MultipleObjectsReturnedException
-     * @deprecated
-     */
-    public function findOneByIdOrUuid($search): EntityInterface {
-        $sql = $this->getStatement();
-
-        $sql->andWhere(
-            $sql->expr()->orX(
-                $sql->expr()->eq('id', $sql->createNamedParameter($search, IQueryBuilder::PARAM_INT)),
-                $sql->expr()->eq('uuid', $sql->createNamedParameter($search))
-            )
-        );
-
-        return $this->findEntity($sql);
-    }
-
-    /**
      * @param string $userId
      *
      * @return EntityInterface[]

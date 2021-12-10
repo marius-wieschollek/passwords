@@ -19,9 +19,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(DowngradeSetList::PHP_81);
     $containerConfigurator->import(DowngradeSetList::PHP_80);
     $containerConfigurator->import(DowngradeSetList::PHP_74);
-    $containerConfigurator->import(DowngradeSetList::PHP_73);
 
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_72);
+    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_73);
     $parameters->set(Option::BOOTSTRAP_FILES, [
         __DIR__ . '/rector-shells.php',
     ]);

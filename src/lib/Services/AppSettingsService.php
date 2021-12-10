@@ -11,7 +11,6 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\BackupSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\DefaultSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\EntitySettingsHelper;
-use OCA\Passwords\Helper\AppSettings\LegacyApiSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\NightlySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\SurveySettingsHelper;
@@ -54,11 +53,6 @@ class AppSettingsService {
     protected NightlySettingsHelper $nightlySettings;
 
     /**
-     * @var LegacyApiSettingsHelper
-     */
-    protected LegacyApiSettingsHelper $legacyApiSettings;
-
-    /**
      * AppSettingsService constructor.
      *
      * @param EntitySettingsHelper    $entitySettingsHelper
@@ -67,7 +61,6 @@ class AppSettingsService {
      * @param ServiceSettingsHelper   $serviceSettingsHelper
      * @param NightlySettingsHelper   $nightlySettingsHelper
      * @param DefaultSettingsHelper   $defaultSettingsHelper
-     * @param LegacyApiSettingsHelper $legacyApiSettingsHelper
      */
     public function __construct(
         EntitySettingsHelper $entitySettingsHelper,
@@ -75,8 +68,7 @@ class AppSettingsService {
         SurveySettingsHelper $surveySettingsHelper,
         ServiceSettingsHelper $serviceSettingsHelper,
         NightlySettingsHelper $nightlySettingsHelper,
-        DefaultSettingsHelper $defaultSettingsHelper,
-        LegacyApiSettingsHelper $legacyApiSettingsHelper
+        DefaultSettingsHelper $defaultSettingsHelper
     ) {
         $this->entitySettings    = $entitySettingsHelper;
         $this->backupSettings    = $backupSettingsHelper;
@@ -84,7 +76,6 @@ class AppSettingsService {
         $this->serviceSettings   = $serviceSettingsHelper;
         $this->defaultSettings   = $defaultSettingsHelper;
         $this->nightlySettings   = $nightlySettingsHelper;
-        $this->legacyApiSettings = $legacyApiSettingsHelper;
     }
 
     /**
@@ -109,8 +100,6 @@ class AppSettingsService {
                 return $this->defaultSettings->get($subKey);
             case 'nightly':
                 return $this->nightlySettings->get($subKey);
-            case 'legacy':
-                return $this->legacyApiSettings->get($subKey);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -139,8 +128,6 @@ class AppSettingsService {
                 return $this->defaultSettings->set($subKey, $value);
             case 'nightly':
                 return $this->nightlySettings->set($subKey, $value);
-            case 'legacy':
-                return $this->legacyApiSettings->set($subKey, $value);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -168,8 +155,6 @@ class AppSettingsService {
                 return $this->defaultSettings->reset($subKey);
             case 'nightly':
                 return $this->nightlySettings->reset($subKey);
-            case 'legacy':
-                return $this->legacyApiSettings->reset($subKey);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -205,10 +190,6 @@ class AppSettingsService {
 
         if($scope === null || in_array('nightly', $scope)) {
             $settings = array_merge($settings, $this->nightlySettings->list());
-        }
-
-        if($scope === null || in_array('legacy', $scope)) {
-            $settings = array_merge($settings, $this->legacyApiSettings->list());
         }
 
         return $settings;

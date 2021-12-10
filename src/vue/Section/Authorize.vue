@@ -236,6 +236,23 @@ body#body-user {
         transform  : translateX(-100%);
         transition : transform ease-in-out 300ms;
     }
+
+    &.pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+        background-image    : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+        background-size     : cover;
+        background-position : 50% 50%;
+    }
+
+    &[data-custom-background="false"][data-custom-color="false"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+        background-image      : var(--pw-image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+        background-repeat     : repeat;
+        background-size       : contain;
+        background-attachment : fixed;
+    }
+
+    &[data-custom-background="true"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+        background-image : var(--pw-image-login-background), linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+    }
 }
 
 #authorize-window {

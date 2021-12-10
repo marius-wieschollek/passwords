@@ -487,8 +487,6 @@
             &:hover,
             &:active,
             &.details-open {
-                /** @TODO: Remove in 2021.1.0 **/
-                background-color : var(--color-background-dark);
                 background-color : var(--color-background-hover);
 
                 .favorite {

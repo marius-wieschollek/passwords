@@ -211,23 +211,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
     <form>
         <h3>
-            <?php p($l->t('Legacy Api Support')); ?>
-            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
-            <span class="response error"><?php p($l->t('Failed')); ?></span>
-        </h3>
-
-        <div class="area legacy">
-            <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
-            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy.api.enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
-            <?php if($_['legacyApiEnabled']): ?>
-                <label for="passwords-legacy-used"><?php p($l->t('Legacy API was last used on')); ?></label>
-                <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):$l->t('never')?>" disabled>
-            <?php endif; ?>
-        </div>
-    </form>
-
-    <form>
-        <h3>
             <?php p($l->t('Other Settings')); ?>
             <span class="response success saved"><?php p($l->t('Saved')); ?></span>
             <span class="response error"><?php p($l->t('Failed')); ?></span>

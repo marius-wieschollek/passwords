@@ -120,15 +120,7 @@ class Version20210802 extends SimpleMigrationStep {
             $queryBuilder = $this->db->getQueryBuilder();
             $select       = $queryBuilder->selectAlias($queryBuilder->createFunction('MAX(`a`.`id`)'), 'count')->from($table, 'a');
 
-            /**
-             * @TODO Remove execute() in 2022.1.0
-             */
-            if(method_exists($select, 'executeQuery')) {
-                $result = $select->executeQuery();
-            } else {
-                $result = $select->execute();
-            }
-
+            $result = $select->executeQuery();
             $count = $result->fetch()['count'];
             if($count === null) {
                 $output->info("Table {$table} seems to be empty, not updating auto_increment");

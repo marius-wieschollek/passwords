@@ -148,14 +148,7 @@ class Version20210800 extends SimpleMigrationStep {
                 $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
                 $uuids = $this->getMigratedUuids($newTable);
 
-                /**
-                 * @TODO Remove execute() in 2022.1.0
-                 */
-                if(method_exists($select, 'executeQuery')) {
-                    $result = $select->executeQuery();
-                } else {
-                    $result = $select->execute();
-                }
+                $result = $select->executeQuery();
 
                 $total = $result->rowCount();
                 $items = $result->fetchAll();
@@ -180,14 +173,7 @@ class Version20210800 extends SimpleMigrationStep {
                         $query->setValue($key, $query->createNamedParameter($value, $type));
                     }
 
-                    /**
-                     * @TODO Remove execute() in 2022.1.0
-                     */
-                    if(method_exists($query, 'executeStatement')) {
-                        $query->executeStatement();
-                    } else {
-                        $query->execute();
-                    }
+                    $query->executeStatement();
                     $output->advance($total);
                 }
                 $output->finishProgress();
@@ -204,14 +190,7 @@ class Version20210800 extends SimpleMigrationStep {
      */
     protected function getMigratedUuids(string $newTable): array {
         $select = $this->db->getQueryBuilder()->select('a.uuid')->from($newTable, 'a');
-        /**
-         * @TODO Remove execute() in 2022.1.0
-         */
-        if(method_exists($select, 'executeQuery')) {
-            $result = $select->executeQuery();
-        } else {
-            $result = $select->execute();
-        }
+        $result = $select->executeQuery();
         $items = $result->fetchAll();
 
         $uuids = [];
