@@ -1,10 +1,13 @@
 ## [Unreleased]
+
+## 2021.12.0 - Feature release
 ### Added
  - Nextcloud 23 support
  - Added translation for catalan
 ### Changed
  - Improved spanish translation
  - Changed default besticon instance, removed limitations
+ - Changed passlink domains
 
 ## 2021.11.0 - Feature release
 ### Changed
