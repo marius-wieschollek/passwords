@@ -162,6 +162,7 @@ class PasswordManager {
             if(folder === null) {
                 let folderModel = await FolderManager.selectFolder(password.folder);
                 folder = folderModel.id;
+                if(password.hidden && !folderModel.hidden) password.hidden = false;
             }
             if(password.id === folder || password.folder === folder) {
                 reject(password);
