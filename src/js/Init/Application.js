@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import App from '@vue/App';
 import API from '@js/Helper/api';
+import { loadState } from '@nextcloud/initial-state'
 import router           from '@js/Helper/router';
 import EventEmitter     from 'eventemitter3';
 import SectionAll       from '@vue/Section/All';
 import Utility          from '@js/Classes/Utility';
 import Messages         from '@js/Classes/Messages';
 import EventManager     from '@js/Manager/EventManager';
-import AlertManager     from '@js/Manager/AlertManager';
 import SearchManager    from '@js/Manager/SearchManager';
 import SettingsService  from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
@@ -67,7 +67,7 @@ class Application {
      * @private
      */
     _initApp() {
-        if(document.readyState === 'loading' || this._loaded || !document.querySelector('meta[name=pw-api-user]')) return;
+        if(document.readyState === 'loading' || this._loaded) return;
         clearInterval(this._timer);
         this._loaded = true;
         this._initSettings();
@@ -77,7 +77,6 @@ class Application {
             SearchManager.init();
             EventManager.init();
             KeepAliveManager.init();
-            AlertManager.init();
         }
     }
 
@@ -110,10 +109,8 @@ class Application {
      */
     _initApi() {
         let baseUrl    = Utility.generateUrl(),
-            userEl     = document.querySelector('meta[name=pw-api-user]'),
-            tokenEl    = document.querySelector('meta[name=pw-api-token]'),
-            user       = userEl ? userEl.getAttribute('content'):null,
-            token      = tokenEl ? tokenEl.getAttribute('content'):null,
+            user       = loadState('passwords', 'api-user', null),
+            token      = loadState('passwords', 'api-token', null),
             cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
             folderIcon = SettingsService.get('server.theme.folder.icon'),
             hashLength = SettingsService.get('user.password.security.hash');
@@ -140,12 +137,9 @@ class Application {
      * @private
      */
     _checkLoginRequirement() {
-        let impersonateEl  = document.querySelector('meta[name=pw-impersonate]'),
-            authenticateEl = document.querySelector('meta[name=pw-authenticate]');
-
-        if(authenticateEl && impersonateEl) {
-            this._loginRequired = authenticateEl.getAttribute('content') === 'true' || impersonateEl.getAttribute('content') === 'true';
-        }
+        let impersonate  = loadState('passwords', 'impersonate', false),
+            authenticate = loadState('passwords', 'authenticate', true);
+        this._loginRequired = authenticate || impersonate;
 
         if(!this._loginRequired) {
             document.body.classList.remove('pw-auth-visible');

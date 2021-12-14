@@ -1,5 +1,6 @@
 import API from '@js/Helper/api';
 import Utility from '@js/Classes/Utility';
+import { loadState } from '@nextcloud/initial-state';
 
 /**
  *
@@ -128,9 +129,9 @@ class SettingsService {
      *
      */
     init() {
-        let settings = document.querySelector('meta[name=pw-settings]');
+        let settings = loadState('passwords', 'settings', null);
         if(settings) {
-            this._addSettings(JSON.parse(settings.getAttribute('content')));
+            this._addSettings(settings);
         }
 
         if(window.localStorage.hasOwnProperty('passwords.settings')) {

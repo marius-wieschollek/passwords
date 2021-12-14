@@ -361,13 +361,6 @@
                                @click="resetUserAccount"/>
                     <settings-help text="Start over and delete all configuration, passwords, folders and tags"/>
                 </section>
-                <section class="tests" v-if="nightly">
-                    <translate tag="h1" say="Field tests"/>
-
-                    <translate tag="label" for="setting-test-performace" say="Encryption performace"/>
-                    <input type="button" id="setting-test-performace" value="Test" @click="testPerformance($event)">
-                    <settings-help text="Test the performance of encryption operations. (Good is Desktop@30K, Mobile@8K)"/>
-                </section>
             </div>
         </div>
         <div id="settings-reset" class="loading" v-if="locked"></div>
@@ -383,7 +376,6 @@
     import SettingsHelp from '@vue/Components/SettingsHelp';
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
-    import EncryptionPerformanceHelper from '@js/Helper/EncryptionPerformanceHelper';
     import {getCurrentUser} from '@nextcloud/auth';
 
     export default {
@@ -437,21 +429,6 @@
 
                     if(SettingsService.get(i) !== value) SettingsService.set(i, value);
                 }
-            },
-            testPerformance($event) {
-                $event.target.setAttribute('disabled', 'disabled');
-                $event.target.innerHtml = 'Working';
-
-                setTimeout(() => {
-                    EncryptionPerformanceHelper.runTests()
-                                               .then((d) => {
-                                                   let message = `Benchmark Result: ${d.result} Points`;
-                                                   Messages.alert(message, 'Benchmark Completed');
-                                                   $event.target.removeAttribute('disabled');
-                                                   $event.target.innerHtml = 'Test';
-                                               })
-                                               .catch(console.error);
-                }, 100);
             },
             runWizard() {
                 if(!this.hasEncryption) {
