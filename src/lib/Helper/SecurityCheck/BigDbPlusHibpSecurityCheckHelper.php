@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2021 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\SecurityCheck;
@@ -79,6 +83,13 @@ class BigDbPlusHibpSecurityCheckHelper extends AbstractSecurityCheckHelper {
     function updateDb(): void {
         $this->localSecurityCheck->updateDb();
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isAvailable(): bool {
+        return $this->localSecurityCheck->isAvailable() && $this->hibpSecurityCheck->isAvailable();
     }
 
     /**

@@ -261,19 +261,23 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::SECURITY_HIBP,
-                $this->localisation->t('Have I been pwned? (recommended)')
+                $this->localisation->t('Have I been pwned? (recommended)'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_HIBP)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_BIG_LOCAL,
-                $this->localisation->t('Big local database (25M passwords)')
+                $this->localisation->t('Big local database (25M passwords)'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_BIG_LOCAL)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_SMALL_LOCAL,
-                $this->localisation->t('Small local database (5M passwords)')
+                $this->localisation->t('Small local database (5M passwords)'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_SMALL_LOCAL)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_BIGDB_HIBP,
-                $this->localisation->t('Big local database & Hibp?')
+                $this->localisation->t('Big local database & Hibp?'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_BIGDB_HIBP)->isAvailable()
             )
         ];
     }

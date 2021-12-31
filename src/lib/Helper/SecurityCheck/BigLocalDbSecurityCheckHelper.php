@@ -63,6 +63,13 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
+     * @inheritdoc
+     */
+    public function isAvailable(): bool {
+        return extension_loaded('zip');
+    }
+
+    /**
      * @throws Throwable
      */
     protected function downloadPasswordsFile(): string {

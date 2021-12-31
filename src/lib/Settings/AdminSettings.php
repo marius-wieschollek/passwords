@@ -133,22 +133,26 @@ class AdminSettings implements ISettings {
             [
                 'id'      => HelperService::SECURITY_HIBP,
                 'label'   => 'Have I been pwned? (recommended)',
-                'current' => $current === HelperService::SECURITY_HIBP
+                'current' => $current === HelperService::SECURITY_HIBP,
+                'enabled' => $this->helperService->getSecurityHelper(HelperService::SECURITY_HIBP)->isAvailable()
             ],
             [
                 'id'      => HelperService::SECURITY_BIG_LOCAL,
                 'label'   => 'Big local database (25M passwords)',
-                'current' => $current === HelperService::SECURITY_BIG_LOCAL
+                'current' => $current === HelperService::SECURITY_BIG_LOCAL,
+                'enabled' => $this->helperService->getSecurityHelper(HelperService::SECURITY_BIG_LOCAL)->isAvailable()
             ],
             [
                 'id'      => HelperService::SECURITY_SMALL_LOCAL,
                 'label'   => 'Small local database (5M passwords)',
-                'current' => $current === HelperService::SECURITY_SMALL_LOCAL
+                'current' => $current === HelperService::SECURITY_SMALL_LOCAL,
+                'enabled' => $this->helperService->getSecurityHelper(HelperService::SECURITY_SMALL_LOCAL)->isAvailable()
             ],
             [
                 'id'      => HelperService::SECURITY_BIGDB_HIBP,
                 'label'   => 'Big local database & Hibp?',
-                'current' => $current === HelperService::SECURITY_BIGDB_HIBP
+                'current' => $current === HelperService::SECURITY_BIGDB_HIBP,
+                'enabled' => $this->helperService->getSecurityHelper(HelperService::SECURITY_BIGDB_HIBP)->isAvailable()
             ]
         ];
     }

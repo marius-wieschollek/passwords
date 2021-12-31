@@ -111,22 +111,14 @@ class HelperService {
     public function getWebsitePreviewHelper(string $service = null): AbstractPreviewHelper {
         if($service === null) $service = $this->config->getAppValue('service/preview', self::PREVIEW_DEFAULT);
 
-        switch($service) {
-            case self::PREVIEW_PAGERES:
-                return $this->container->get(PageresCliHelper::class);
-            case self::PREVIEW_BROW_SHOT:
-                return $this->container->get(BrowshotPreviewHelper::class);
-            case self::PREVIEW_SCREEN_SHOT_LAYER:
-                return $this->container->get(ScreenShotLayerHelper::class);
-            case self::PREVIEW_SCREEN_SHOT_MACHINE:
-                return $this->container->get(ScreenShotMachineHelper::class);
-            case self::PREVIEW_SCREEENLY:
-                return $this->container->get(ScreeenlyHelper::class);
-            case self::PREVIEW_DEFAULT:
-                return $this->container->get(DefaultPreviewHelper::class);
-        }
-
-        return $this->container->get(DefaultPreviewHelper::class);
+        return match ($service) {
+            self::PREVIEW_PAGERES => $this->container->get(PageresCliHelper::class),
+            self::PREVIEW_BROW_SHOT => $this->container->get(BrowshotPreviewHelper::class),
+            self::PREVIEW_SCREEN_SHOT_LAYER => $this->container->get(ScreenShotLayerHelper::class),
+            self::PREVIEW_SCREEN_SHOT_MACHINE => $this->container->get(ScreenShotMachineHelper::class),
+            self::PREVIEW_SCREEENLY => $this->container->get(ScreeenlyHelper::class),
+            default => $this->container->get(DefaultPreviewHelper::class),
+        };
     }
 
     /**
@@ -137,22 +129,14 @@ class HelperService {
     public function getFaviconHelper(string $service = null): AbstractFaviconHelper {
         if($service === null) $service = $this->config->getAppValue('service/favicon', self::FAVICON_DEFAULT);
 
-        switch($service) {
-            case self::FAVICON_BESTICON:
-                return $this->container->get(BestIconHelper::class);
-            case self::FAVICON_FAVICON_GRABBER:
-                return $this->container->get(FaviconGrabberHelper::class);
-            case self::FAVICON_DUCK_DUCK_GO:
-                return $this->container->get(DuckDuckGoHelper::class);
-            case self::FAVICON_GOOGLE:
-                return $this->container->get(GoogleFaviconHelper::class);
-            case self::FAVICON_LOCAL:
-                return $this->container->get(LocalFaviconHelper::class);
-            case self::FAVICON_DEFAULT:
-                return $this->container->get(DefaultFaviconHelper::class);
-        }
-
-        return $this->container->get(DefaultFaviconHelper::class);
+        return match ($service) {
+            self::FAVICON_BESTICON => $this->container->get(BestIconHelper::class),
+            self::FAVICON_FAVICON_GRABBER => $this->container->get(FaviconGrabberHelper::class),
+            self::FAVICON_DUCK_DUCK_GO => $this->container->get(DuckDuckGoHelper::class),
+            self::FAVICON_GOOGLE => $this->container->get(GoogleFaviconHelper::class),
+            self::FAVICON_LOCAL => $this->container->get(LocalFaviconHelper::class),
+            default => $this->container->get(DefaultFaviconHelper::class),
+        };
     }
 
     /**
@@ -163,38 +147,28 @@ class HelperService {
     public function getWordsHelper(string $service = null): AbstractWordsHelper {
         if($service === null) $service = $this->config->getAppValue('service/words', $this->getDefaultWordsHelperName());
 
-        switch($service) {
-            case self::WORDS_LOCAL:
-                return $this->container->get(LocalWordsHelper::class);
-            case self::WORDS_LEIPZIG:
-                return $this->container->get(LeipzigCorporaHelper::class);
-            case self::WORDS_SNAKES:
-                return $this->container->get(SnakesWordsHelper::class);
-            case self::WORDS_RANDOM:
-                return $this->container->get(RandomCharactersHelper::class);
-        }
-
-        return $this->container->get(RandomCharactersHelper::class);
+        return match ($service) {
+            self::WORDS_LOCAL => $this->container->get(LocalWordsHelper::class),
+            self::WORDS_LEIPZIG => $this->container->get(LeipzigCorporaHelper::class),
+            self::WORDS_SNAKES => $this->container->get(SnakesWordsHelper::class),
+            default => $this->container->get(RandomCharactersHelper::class),
+        };
     }
 
     /**
+     * @param string|null $service
+     *
      * @return AbstractSecurityCheckHelper
      */
-    public function getSecurityHelper(): AbstractSecurityCheckHelper {
-        $service = $this->config->getAppValue('service/security', self::SECURITY_HIBP);
+    public function getSecurityHelper(string $service = null): AbstractSecurityCheckHelper {
+        $service = $this->config->getAppValue('service/security', $service ?? self::SECURITY_HIBP);
 
-        switch($service) {
-            case self::SECURITY_HIBP:
-                return $this->container->get(HaveIBeenPwnedHelper::class);
-            case self::SECURITY_BIG_LOCAL:
-                return $this->container->get(BigLocalDbSecurityCheckHelper::class);
-            case self::SECURITY_SMALL_LOCAL:
-                return $this->container->get(SmallLocalDbSecurityCheckHelper::class);
-            case self::SECURITY_BIGDB_HIBP:
-                return $this->container->get(BigDbPlusHibpSecurityCheckHelper::class);
-        }
-
-        return $this->container->get(HaveIBeenPwnedHelper::class);
+        return match ($service) {
+            self::SECURITY_BIG_LOCAL => $this->container->get(BigLocalDbSecurityCheckHelper::class),
+            self::SECURITY_SMALL_LOCAL => $this->container->get(SmallLocalDbSecurityCheckHelper::class),
+            self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckHelper::class),
+            default => $this->container->get(HaveIBeenPwnedHelper::class),
+        };
     }
 
     /**

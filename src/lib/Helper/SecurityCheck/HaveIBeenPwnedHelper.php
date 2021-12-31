@@ -1,14 +1,19 @@
 <?php
-/**
+/*
+ * @copyright 2021 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\RequestOptions;
 use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
 
 /**
@@ -21,7 +26,15 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     const PASSWORD_DB = 'hibp';
     const SERVICE_URL = 'https://api.pwnedpasswords.com/range/';
 
+    /**
+     * @var array
+     */
     protected array $checkedRanges = [];
+
+    /**
+     * @var bool
+     */
+    protected bool $isAvailable = false;
 
     /**
      * @param string $hash
@@ -44,6 +57,24 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     public function updateDb(): void {
         $this->fileCacheService->clearCache();
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isAvailable(): bool {
+        if($this->isAvailable) return $this->isAvailable;
+
+        try {
+            $client   = $this->httpClientService->newClient();
+            $response = $client->head(static::SERVICE_URL.'fffff', [RequestOptions::TIMEOUT => 5]);
+
+            $this->isAvailable = $response->getStatusCode() === 200;
+
+            return $this->isAvailable;
+        } catch(Exception $e) {
+            return false;
+        }
     }
 
     /**

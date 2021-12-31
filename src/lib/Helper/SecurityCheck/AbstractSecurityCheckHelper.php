@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2021 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\SecurityCheck;
@@ -221,4 +225,11 @@ abstract class AbstractSecurityCheckHelper {
      * @return void
      */
     abstract function updateDb(): void;
+
+    /**
+     * Refresh the locally stored database with password hashes
+     *
+     * @return void
+     */
+    abstract function isAvailable(): bool;
 }

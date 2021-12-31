@@ -1,9 +1,14 @@
 <?php
-/**
- * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+/*
+ * @copyright 2021 Passwords App
  *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
+/**
  * @var $l \OCP\IL10N
  * @var $_ array
  */
@@ -118,7 +123,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
             <select id="passwords-security" name="passwords-security" name="security" data-setting="service.security">
                 <?php foreach($_['securityServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
