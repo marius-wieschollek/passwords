@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2021 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Settings;
@@ -133,17 +137,17 @@ class AdminSettings implements ISettings {
             ],
             [
                 'id'      => HelperService::SECURITY_BIG_LOCAL,
-                'label'   => '10 Million Passwords (Local)',
+                'label'   => 'Big local database (25M passwords)',
                 'current' => $current === HelperService::SECURITY_BIG_LOCAL
             ],
             [
                 'id'      => HelperService::SECURITY_SMALL_LOCAL,
-                'label'   => '1 Million Passwords (Local)',
+                'label'   => 'Small local database (5M passwords)',
                 'current' => $current === HelperService::SECURITY_SMALL_LOCAL
             ],
             [
                 'id'      => HelperService::SECURITY_BIGDB_HIBP,
-                'label'   => '10Mio Passwords & Hibp?',
+                'label'   => 'Big local database & Hibp?',
                 'current' => $current === HelperService::SECURITY_BIGDB_HIBP
             ]
         ];

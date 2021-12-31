@@ -1,14 +1,17 @@
 <?php
-/**
+/*
+ * @copyright 2021 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
-use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsFileAccessException;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipAccessException;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipExtractException;
 use OCA\Passwords\Exception\SecurityCheck\PasswordDatabaseDownloadException;
@@ -22,18 +25,19 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
-    const LOW_RAM_LIMIT     = 4194304;
-    const ARCHIVE_URL       = 'https://archive.org/download/10MillionPasswords/10-million-combos.zip';
+    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-json.zip';
+    const ARCHIVE_URL_GZ    = 'https://breached.passwordsapp.org/databases/25-million-gzip.zip';
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
+    const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';
-    const PASSWORD_VERSION  = 1;
+    const PASSWORD_VERSION  = 8;
 
     /**
      * @inheritdoc
      */
     public function dbUpdateRequired(): bool {
         try {
-            $installedVersion = $this->config->getAppValue(self::CONFIG_DB_VERSION);
+            $installedVersion = intval($this->config->getAppValue(self::CONFIG_DB_VERSION));
             if($installedVersion !== static::PASSWORD_VERSION) return true;
 
             $info = $this->fileCacheService->getCacheInfo();
@@ -50,18 +54,8 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @throws Throwable
      */
     public function updateDb(): void {
-        ini_set('memory_limit', -1);
-        $txtFile = $this->config->getTempDir().uniqid().'.txt';
-
-        $this->downloadPasswordsFile($txtFile);
-        if($this->isLowMemorySystem()) {
-            $this->lowMemoryHashAlgorithm($txtFile);
-        } else {
-            $this->highMemoryHashAlgorithm($txtFile);
-        }
-
-        gc_collect_cycles();
-        gc_mem_caches();
+        $zipFile = $this->downloadPasswordsFile();
+        $this->unpackPasswordsFile($zipFile);
 
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
         $this->config->setAppValue(self::CONFIG_DB_VERSION, static::PASSWORD_VERSION);
@@ -69,149 +63,54 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     }
 
     /**
-     * @param string $txtFile
-     *
      * @throws Throwable
      */
-    protected function downloadPasswordsFile(string $txtFile): void {
+    protected function downloadPasswordsFile(): string {
         $zipFile = $this->config->getTempDir().uniqid().'.zip';
 
         try {
             $client = $this->httpClientService->newClient();
-            $client->get(self::ARCHIVE_URL, ['sink' => $zipFile, 'timeout' => 0]);
-            unset($client);
+            $client->get($this->getArchiveUrl(), ['sink' => $zipFile, 'timeout' => 0]);
+
+            return $zipFile;
         } catch(Exception $e) {
             throw new PasswordDatabaseDownloadException($e);
         }
-
-        $this->unpackPasswordsFile($zipFile, $txtFile);
     }
 
     /**
-     * @param $zipFile
-     * @param $txtFile
+     * @param string $zipFile
      *
+     * @throws BreachedPasswordsZipAccessException
+     * @throws BreachedPasswordsZipExtractException
      * @throws Throwable
      */
-    protected function unpackPasswordsFile(string $zipFile, string $txtFile): void {
+    protected function unpackPasswordsFile(string $zipFile): void {
         try {
             $zip    = new ZipArchive;
             $result = $zip->open($zipFile);
             if($result === true) {
-                $name = $zip->getNameIndex(0);
-                if($zip->extractTo($this->config->getTempDir(), $name)) {
-                    if(!rename($this->config->getTempDir().$name, $txtFile)) {
-                        throw new BreachedPasswordsFileAccessException($txtFile);
-                    };
+                for($i = 0; $i < $zip->numFiles; $i++) {
+                    $contents = $zip->getFromIndex($i);
+                    if(!$contents) {
+                        throw new BreachedPasswordsZipExtractException($zip->getStatusString());
+                    }
 
-                    $zip->close();
-                } else {
-                    throw new BreachedPasswordsZipExtractException($name);
-                };
+                    $name = $zip->getNameIndex($i);
+                    if(!$name) {
+                        throw new BreachedPasswordsZipExtractException($name);
+                    }
+
+                    $this->fileCacheService->putFile($name, $contents);
+                }
             } else {
                 throw new BreachedPasswordsZipAccessException($result);
             }
         } catch(Throwable $e) {
-            if(is_file($txtFile)) @unlink($txtFile);
             if(is_file($zipFile)) @unlink($zipFile);
             throw $e;
         }
         unlink($zipFile);
-    }
-
-    /**
-     * This way to create the hashes takes only 120MB of ram.
-     * But it also needs 15x the time.
-     *
-     * @param string $txtFile
-     *
-     * @throws BreachedPasswordsFileAccessException
-     */
-    protected function lowMemoryHashAlgorithm(string $txtFile): void {
-        $null = null;
-        for($i = 0; $i < 16; $i++) {
-            $hexKey = dechex($i);
-            $hashes = [];
-            $file   = fopen($txtFile, 'r');
-            if($file === false) throw new BreachedPasswordsFileAccessException($file);
-
-            while(($line = fgets($file)) !== false) {
-                [$first, $second] = explode("\t", "$line\t000000");
-
-                $hash = sha1($first);
-                if($hash[0] === $hexKey) {
-                    $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
-                    if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
-                    $hashes[ $key ][ $hash ] = &$null;
-                }
-
-                $hash = sha1($second);
-                if($hash[0] === $hexKey) {
-                    $key = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
-                    if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
-                    $hashes[ $key ][ $hash ] = &$null;
-                }
-            }
-            fclose($file);
-            $this->storeHashes($hashes);
-            unset($hashes);
-            gc_collect_cycles();
-            gc_mem_caches();
-        }
-        unlink($txtFile);
-    }
-
-    /**
-     * This way to create the hashes takes up to 1800MB of ram.
-     * It is also quite fast.
-     *
-     * @param string $txtFile
-     *
-     * @throws BreachedPasswordsFileAccessException
-     */
-    protected function highMemoryHashAlgorithm(string $txtFile): void {
-        $null   = null;
-        $hashes = [];
-        $file   = fopen($txtFile, 'r');
-        if($file === false) throw new BreachedPasswordsFileAccessException($file);
-
-        while(($line = fgets($file)) !== false) {
-            [$first, $second] = explode("\t", "$line\t000000");
-
-            $hash = sha1(trim($first));
-            $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
-            if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
-            $hashes[ $key ][ $hash ] = &$null;
-
-            $hash = sha1($second);
-            $key  = substr($hash, 0, self::HASH_FILE_KEY_LENGTH);
-            if(!isset($hashes[ $key ])) $hashes[ $key ] = [];
-            $hashes[ $key ][ $hash ] = &$null;
-        }
-        fclose($file);
-        $this->storeHashes($hashes);
-
-        unlink($txtFile);
-    }
-
-    /**
-     * @param array $hashes
-     */
-    protected function storeHashes(array $hashes): void {
-        foreach($hashes as $key => $data) {
-            $this->writePasswordsFile($key, array_keys($data));
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isLowMemorySystem(): bool {
-        if(preg_match('/MemAvailable:\s+([0-9]+)/', @file_get_contents('/proc/meminfo'), $matches)) {
-            return $matches[1] < static::LOW_RAM_LIMIT;
-        }
-
-        return true;
     }
 
     /**
@@ -220,5 +119,12 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     protected function logPasswordUpdate(): void {
         $ram = round(memory_get_peak_usage(true) / 1024 / 1024, 2);
         $this->logger->info(["Updated local password db. DB: %s, RAM: %s MiB", static::PASSWORD_DB, $ram]);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getArchiveUrl(): string {
+        return $this->config->getAppValue(static::CONFIG_DB_SOURCE, extension_loaded('zlib') ? static::ARCHIVE_URL_GZ:static::ARCHIVE_URL);
     }
 }

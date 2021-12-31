@@ -1,8 +1,13 @@
 ## [Unreleased]
+### Changed
+- Big local database now with 25M passwords from Hibp?
+- Small local database now with 5M passwords from Hibp?
+### Fixed
+- Passwords now unhidden when moved out of hidden folder
 ### Removed
+- The legacy api
 - Support for Nextcloud 20, 21, 22
 - Support for PHP 7.4 (7.2 in LSR)
-- Support for the legacy api
 
 ## 2021.12.0 - Feature release
 ### Added
@@ -10,8 +15,8 @@
 - Added translation for catalan
 ### Changed
 - Improved spanish translation
-- Changed default besticon instance, removed limitations
-- Changed passlink domains
+- Default besticon instance, removed limitations
+- Passlink domains
 
 ## 2021.11.0 - Feature release
 ### Changed

@@ -146,6 +146,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <command>OCA\Passwords\Command\UserMoveCommand</command>
         <command>OCA\Passwords\Command\UserDeleteCommand</command>
         <command>OCA\Passwords\Command\SystemReportCommand</command>
+        <command>OCA\Passwords\Command\ProcessPwnedPasswordsList</command>
     </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>
