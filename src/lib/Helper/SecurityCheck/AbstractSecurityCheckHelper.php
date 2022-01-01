@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -31,13 +31,15 @@ abstract class AbstractSecurityCheckHelper {
     const CONFIG_DB_ENCODING   = 'passwords/localdb/encoding';
     const CONFIG_DB_TYPE       = 'passwords/localdb/type';
 
-    const STATUS_BREACHED  = 'BREACHED';
-    const STATUS_OUTDATED  = 'OUTDATED';
-    const STATUS_DUPLICATE = 'DUPLICATE';
-    const STATUS_GOOD      = 'GOOD';
-    const LEVEL_OK         = 0;
-    const LEVEL_WEAK       = 1;
-    const LEVEL_BAD        = 2;
+    const STATUS_BREACHED    = 'BREACHED';
+    const STATUS_OUTDATED    = 'OUTDATED';
+    const STATUS_DUPLICATE   = 'DUPLICATE';
+    const STATUS_GOOD        = 'GOOD';
+    const STATUS_NOT_CHECKED = 'NOT_CHECKED';
+    const LEVEL_OK           = 0;
+    const LEVEL_WEAK         = 1;
+    const LEVEL_BAD          = 2;
+    const LEVEL_UNKNOWN      = 3;
 
     /**
      * @var FileCacheService
@@ -79,11 +81,11 @@ abstract class AbstractSecurityCheckHelper {
      * @param ConfigurationService   $configurationService
      */
     public function __construct(
-        LoggingService $logger,
-        IClientService $httpClientService,
-        FileCacheService $fileCacheService,
+        LoggingService         $logger,
+        IClientService         $httpClientService,
+        FileCacheService       $fileCacheService,
         UserRulesSecurityCheck $userRulesCheck,
-        ConfigurationService $configurationService
+        ConfigurationService   $configurationService
     ) {
         $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
         $this->config            = $configurationService;
@@ -103,7 +105,8 @@ abstract class AbstractSecurityCheckHelper {
      * @throws Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): array {
-        if(!empty($revision->getHash()) && !$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
+        if(empty($revision->getHash())) return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
+        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
 
         $userRules = $this->userRulesCheck->getRevisionSecurityLevel($revision);
         if($userRules !== null) return $userRules;

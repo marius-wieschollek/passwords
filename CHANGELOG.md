@@ -2,6 +2,7 @@
 ### Changed
 - Big local database now with 25M passwords from Hibp?
 - Small local database now with 5M passwords from Hibp?
+- Security status now marked as unknown if hash disabled
 ### Fixed
 - Passwords now unhidden when moved out of hidden folder
 ### Removed

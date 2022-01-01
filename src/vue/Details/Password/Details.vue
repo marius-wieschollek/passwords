@@ -87,12 +87,13 @@
                 return count;
             },
             getSecurityClass() {
-                let status = ['secure', 'weak', 'breached'];
+                let status = ['secure', 'weak', 'breached', 'unknown'];
 
                 return status[this.password.status];
             },
             getSecurityStatus() {
                 if(this.password.status === 1) return `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
+                if(this.password.status === 3) return `Unknown (${this.password.statusCode.toLowerCase().capitalize()})`;
 
                 return this.getSecurityClass.capitalize();
             },

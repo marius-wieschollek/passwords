@@ -101,10 +101,13 @@
                         return 'warn';
                     case 2:
                         return 'fail';
+                    case 3:
+                        return 'unknown';
                 }
             },
             securityTitle() {
-                let label = 'Secure';
+                let label = 'Unknown';
+                if(this.password.status === 0) label = 'Secure';
                 if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
                 if(this.password.status === 2) label = 'Breached';
 

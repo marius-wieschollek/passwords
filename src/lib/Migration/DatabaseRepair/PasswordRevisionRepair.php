@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -64,11 +64,11 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
      * @param PasswordRevisionService $revisionService
      */
     public function __construct(
-        FolderMapper $folderMapper,
-        PasswordMapper $modelMapper,
-        ConfigurationService $config,
-        EncryptionService $encryption,
-        EnvironmentService $environment,
+        FolderMapper            $folderMapper,
+        PasswordMapper          $modelMapper,
+        ConfigurationService    $config,
+        EncryptionService       $encryption,
+        EnvironmentService      $environment,
         PasswordRevisionService $revisionService
     ) {
         parent::__construct($modelMapper, $revisionService, $encryption, $environment);
@@ -109,15 +109,20 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         if($this->convertCustomFields($revision)) $fixed = true;
         if($this->cleanCustomFields($revision)) $fixed = true;
 
-        if($revision->getStatus() !== 0 && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
-            $revision->setStatus(0);
+        if($revision->getStatus() !== AbstractSecurityCheckHelper::LEVEL_OK && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
+            $revision->setStatus(AbstractSecurityCheckHelper::LEVEL_OK);
+            $fixed = true;
+        }
+
+        if(empty($revision->getHash()) && $revision->getStatus() !== AbstractSecurityCheckHelper::LEVEL_UNKNOWN) {
+            $revision->setStatus(AbstractSecurityCheckHelper::LEVEL_UNKNOWN);
             $fixed = true;
         }
 
         if($revision->getFolder() !== FolderService::BASE_FOLDER_UUID) {
             try {
                 $this->folderMapper->findByUuid($revision->getFolder());
-            } catch(DoesNotExistException | MultipleObjectsReturnedException $e) {
+            } catch(DoesNotExistException|MultipleObjectsReturnedException $e) {
                 $revision->setFolder(FolderService::BASE_FOLDER_UUID);
                 $fixed = true;
             }
