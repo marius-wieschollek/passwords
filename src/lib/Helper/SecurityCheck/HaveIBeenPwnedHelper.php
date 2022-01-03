@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -23,8 +23,9 @@ use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
  */
 class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
-    const PASSWORD_DB = 'hibp';
-    const SERVICE_URL = 'https://api.pwnedpasswords.com/range/';
+    const PASSWORD_DB        = 'hibp';
+    const CONFIG_SERVICE_URL = 'passwords/hibp/url';
+    const SERVICE_URL        = 'https://api.pwnedpasswords.com/range/';
 
     /**
      * @var array
@@ -67,7 +68,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
         try {
             $client   = $this->httpClientService->newClient();
-            $response = $client->head(static::SERVICE_URL.'fffff', [RequestOptions::TIMEOUT => 5]);
+            $response = $client->head($this->getApiUrl('fffff'), [RequestOptions::TIMEOUT => 5]);
 
             $this->isAvailable = $response->getStatusCode() === 200;
 
@@ -146,7 +147,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     protected function executeApiRequest(string $range) {
         try {
             $client   = $this->httpClientService->newClient();
-            $response = $client->get(self::SERVICE_URL.$range, ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
+            $response = $client->get($this->getApiUrl($range), ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
         } catch(ClientException $e) {
             if($e->getResponse()->getStatusCode() === 404 || $e->getResponse()->getStatusCode() === 502) {
                 return '';
@@ -161,5 +162,14 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         if(!$responseData) throw new InvalidHibpApiResponseException($response);
 
         return $responseData;
+    }
+
+    /**
+     * @param string $range
+     *
+     * @return string
+     */
+    protected function getApiUrl(string $range): string {
+        return str_replace(':range', $range, $this->config->getAppValue(static::CONFIG_SERVICE_URL, static::SERVICE_URL));
     }
 }

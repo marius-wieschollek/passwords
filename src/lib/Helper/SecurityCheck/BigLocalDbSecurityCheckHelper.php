@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -25,8 +25,7 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
-    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-json.zip';
-    const ARCHIVE_URL_GZ    = 'https://breached.passwordsapp.org/databases/25-million-gzip.zip';
+    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-:format.zip';
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
     const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';
@@ -132,6 +131,8 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @return string
      */
     protected function getArchiveUrl(): string {
-        return $this->config->getAppValue(static::CONFIG_DB_SOURCE, extension_loaded('zlib') ? static::ARCHIVE_URL_GZ:static::ARCHIVE_URL);
+        $format = extension_loaded('zlib') ? 'gzip':'json';
+
+        return str_replace(':format', $format, $this->config->getAppValue(static::CONFIG_DB_SOURCE, static::ARCHIVE_URL));
     }
 }

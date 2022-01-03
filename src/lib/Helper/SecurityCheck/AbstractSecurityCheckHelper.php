@@ -28,7 +28,6 @@ abstract class AbstractSecurityCheckHelper {
 
     const PASSWORD_DB          = 'none';
     const HASH_FILE_KEY_LENGTH = 3;
-    const CONFIG_DB_ENCODING   = 'passwords/localdb/encoding';
     const CONFIG_DB_TYPE       = 'passwords/localdb/type';
 
     const STATUS_BREACHED    = 'BREACHED';
@@ -232,7 +231,7 @@ abstract class AbstractSecurityCheckHelper {
     /**
      * Refresh the locally stored database with password hashes
      *
-     * @return void
+     * @return bool
      */
     abstract function isAvailable(): bool;
 }
