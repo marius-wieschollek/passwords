@@ -25,7 +25,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
     const PASSWORD_DB        = 'hibp';
     const CONFIG_SERVICE_URL = 'passwords/hibp/url';
-    const SERVICE_URL        = 'https://api.pwnedpasswords.com/range/';
+    const SERVICE_URL        = 'https://api.pwnedpasswords.com/range/:range';
 
     /**
      * @var array
