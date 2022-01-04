@@ -25,7 +25,7 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
 
-    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-:format.zip';
+    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-v:version-:format.zip';
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
     const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';
@@ -133,6 +133,6 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
     protected function getArchiveUrl(): string {
         $format = extension_loaded('zlib') ? 'gzip':'json';
 
-        return str_replace(':format', $format, $this->config->getAppValue(static::CONFIG_DB_SOURCE, static::ARCHIVE_URL));
+        return str_replace([':format', ':version'], [$format, static::PASSWORD_VERSION], $this->config->getAppValue(static::CONFIG_DB_SOURCE, static::ARCHIVE_URL));
     }
 }

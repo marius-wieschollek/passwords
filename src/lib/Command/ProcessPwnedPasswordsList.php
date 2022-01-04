@@ -157,7 +157,7 @@ class ProcessPwnedPasswordsList extends Command {
      * @return string
      */
     protected function writeZipFile(int $size, string $mode, array $hashes, bool $import): string {
-        $fileName = "{$size}-million-{$mode}.zip";
+        $fileName = "{$size}-million-v".BigLocalDbSecurityCheckHelper::PASSWORD_VERSION."-{$mode}.zip";
         if(is_file($fileName)) {
             unlink($fileName);
         }
