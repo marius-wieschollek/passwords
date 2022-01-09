@@ -137,7 +137,7 @@
             'Backup or export'                    : 'Säkerhetskopiera eller exportera',
             'Choose Format'                       : 'Välj format',
             'Please choose'                       : 'Välj',
-            'Database Backup'                     : 'Säkerhetskopiera Databas',
+            'Database Backup JSON'                     : 'Säkerhetskopiera Databas JSON',
             'Predefined CSV'                      : 'Fördefinerad CSV',
             'Backup password'                     : 'Säkerhetskopiera Lösenord',
             '(Optional) Encrypts the backup'      : 'Kryptera säkerhetskopian (frivilligt)',

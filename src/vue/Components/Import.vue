@@ -6,7 +6,7 @@
             <div class="step-content">
                 <select v-model="source" id="passwords-import-source" :disabled="importing">
                     <translate tag="option" value="" say="Choose import format" v-if="!source"/>
-                    <translate tag="option" value="json" say="Database Backup"/>
+                    <translate tag="option" value="json" say="Database Backup JSON"/>
                     <translate tag="option" value="pwdCsv" say="Passwords CSV"/>
                     <translate tag="option" value="fldCsv" say="Folder CSV"/>
                     <translate tag="option" value="tagCsv" say="Tags CSV"/>

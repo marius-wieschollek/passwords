@@ -132,7 +132,7 @@
             'Backup or export'                    : 'Создание резервной копии или экспорт',
             'Choose Format'                       : 'Выбор формата',
             'Please choose'                       : 'Выберите формат',
-            'Database Backup'                     : 'Резервная копия в БД',
+            'Database Backup JSON'                     : 'Резервная копия в БД JSON',
             'Predefined CSV'                      : 'Стандартный CSV',
             'Backup password'                     : 'Создать резервную копию пароля',
             '(Optional) Encrypts the backup'      : '(Опционально) Зашифровать резервную копию',

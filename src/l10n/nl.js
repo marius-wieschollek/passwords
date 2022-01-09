@@ -132,7 +132,7 @@
             'Backup or export'                    : 'Backup of Exporteren',
             'Choose Format'                       : 'Kies Format',
             'Please choose'                       : 'Alstublieft kiezen',
-            'Database Backup'                     : 'Database Backup',
+            'Database Backup JSON'                     : 'Database Backup JSON',
             'Predefined CSV'                      : 'Voorgedefinieerde CSV',
             'Backup password'                     : 'Backup Wachtwoord',
             '(Optional) Encrypts the backup'      : '(Optional) Versleutel de backup met een wachtwoord dat minimaal 10 karakters lang is',

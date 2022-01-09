@@ -132,7 +132,7 @@
             'Backup or export'                    : 'Záloha a export',
             'Choose Format'                       : 'Zvolte formát',
             'Please choose'                       : 'Zvolte',
-            'Database Backup'                     : 'Záloha databáze',
+            'Database Backup JSON'                     : 'Záloha databáze JSON',
             'Predefined CSV'                      : 'Předdefinované CSV',
             'Backup password'                     : 'Heslo k záloze',
             '(Optional) Encrypts the backup'      : '(Volitelné) Zašifruje zálohu',
