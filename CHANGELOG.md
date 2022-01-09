@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2022.1.0 - Feature release
 ### Changed
 - Big local database now with 25M passwords from Hibp?
 - Small local database now with 5M passwords from Hibp?
