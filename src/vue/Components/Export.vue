@@ -4,7 +4,7 @@
             <translate tag="h1" say="Choose Format"/>
             <div class="step-content">
                 <select v-model="format" id="passwords-export-target" :disabled="exporting">
-                    <translate tag="option" value="json" say="Database Backup"/>
+                    <translate tag="option" value="json" say="Database Backup JSON"/>
                     <translate tag="option" value="csv" say="Predefined CSV"/>
                     <translate tag="option" value="xlsx" say="Microsoft Excel"/>
                     <translate tag="option" value="ods" say="Open Office Calc"/>
