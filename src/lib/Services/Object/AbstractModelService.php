@@ -59,21 +59,6 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
-     * @param $search
-     *
-     * @return ModelInterface|EntityInterface|null
-     * @deprecated
-     * @throws MultipleObjectsReturnedException
-     */
-    public function findByIdOrUuid($search): ?ModelInterface {
-        try {
-            return $this->mapper->findOneByIdOrUuid($search);
-        } catch(DoesNotExistException $e) {
-            return null;
-        }
-    }
-
-    /**
      * @return ModelInterface
      */
     public function create(): ModelInterface {

@@ -83,6 +83,7 @@ class FolderManager {
             if(parent === null) {
                 let parentModel = await this.selectFolder(folder.parent, [folder.id]);
                 parent = parentModel.id;
+                if(folder.hidden && !parentModel.hidden) folder.hidden = false;
             }
             if(folder.id === parent || folder.parent === parent || folder.parent.id === parent) {
                 reject(folder);

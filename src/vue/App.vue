@@ -32,7 +32,7 @@
                         <translate say="Tags" icon="tag" />
                     </router-link>
                 </li>
-                <li>
+                <li v-if="isSecurityVisible">
                     <router-link :to="{ name: 'Security'}" active-class="active">
                         <translate say="Security" icon="shield" />
                     </router-link>
@@ -107,10 +107,12 @@
         },
 
         data() {
-            let showSearch = SettingsService.get('client.search.show');
+            let showSearch = SettingsService.get('client.search.show'),
+                showSecurity = SettingsService.get('user.password.security.hash') > 0;
 
             return {
                 showSearch,
+                showSecurity,
                 showMore           : false,
                 starChaser         : false,
                 APP_MAIN_VERSION   : APP_MAIN_VERSION,
@@ -138,6 +140,9 @@
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
+            },
+            isSecurityVisible() {
+                return this.$route.name === 'Security' || this.showSecurity;
             },
             isBirthDay() {
                 let today = new Date(),

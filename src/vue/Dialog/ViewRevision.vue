@@ -1,6 +1,6 @@
 <template>
     <dialog-window id="passwords-revision-details">
-        <span slot="title">{{revision.label}}</span>
+        <span slot="title">{{ revision.label }}</span>
         <div slot="content" class="details">
             <detail-field v-for="(field, index) in getFields"
                           :key="index"
@@ -67,8 +67,9 @@
                     if(showHiddenFields || customFields[i].type !== 'data') fields.push(customFields[i]);
                 }
 
-                let status = ['secure', 'weak', 'breached'][this.revision.status].capitalize();
+                let status = ['secure', 'weak', 'breached', 'unknown'][this.revision.status].capitalize();
                 if(this.revision.status === 1) status = `Weak (${this.revision.statusCode.toLowerCase().capitalize()})`;
+                if(this.revision.status === 3) status = `Unknown (${this.revision.statusCode.toLowerCase().capitalize()})`;
                 fields.push({label: Localisation.translate('Status'), value: Localisation.translate(status)});
 
                 let sseType = 'No encryption';
@@ -85,14 +86,14 @@
                 return fields;
             },
             canRestore() {
-                return this.password.revision !== this.revision.id
+                return this.password.revision !== this.revision.id;
             }
         },
         methods   : {
             restoreAction() {
                 PasswordManager.restoreRevision(this.password, this.revision)
-                    .then(() => {this.closeWindow()})
-                    .catch(console.error);
+                               .then(() => {this.closeWindow();})
+                               .catch(console.error);
             },
             getClientLabel(client) {
                 if(client.substr(0, 8) === 'CLIENT::') {
@@ -102,84 +103,86 @@
                 return client;
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
-    #passwords-revision-details.background .window {
-        width      : 100%;
-        max-width  : 450px;
-        max-height : 88%;
-        overflow   : auto;
+#passwords-revision-details.background .window {
+    width      : 100%;
+    max-width  : 450px;
+    max-height : 88%;
+    overflow   : auto;
 
-        .title {
-            span {
-                white-space   : nowrap;
-                display       : block;
-                text-overflow : ellipsis;
-                overflow      : hidden;
-            }
+    .title {
+        span {
+            white-space   : nowrap;
+            display       : block;
+            text-overflow : ellipsis;
+            overflow      : hidden;
         }
+    }
 
-        .content {
-            padding : 0.5rem 0;
+    .content {
+        padding : 0.5rem 0;
 
-            .details {
-                div {
-                    font-size     : 1.15em;
-                    font-style    : italic;
-                    margin-bottom : 5px;
-                    color         : var(--color-text-maxcontrast);
-                    padding       : 0.25rem 0.5rem;
+        .details {
+            div {
+                font-size     : 1.15em;
+                font-style    : italic;
+                margin-bottom : 5px;
+                color         : var(--color-text-maxcontrast);
+                padding       : 0.25rem 0.5rem;
 
-                    a,
-                    span {
-                        display    : block;
-                        font-style : normal;
-                        color      : var(--color-text-lighter);
-                        text-align : right;
-                        cursor     : text;
-                        word-wrap  : break-word;
+                a,
+                span {
+                    display    : block;
+                    font-style : normal;
+                    color      : var(--color-text-lighter);
+                    text-align : right;
+                    cursor     : text;
+                    word-wrap  : break-word;
 
-                        &.secret {
-                            cursor : pointer;
-
-                            &.visible {
-                                font-family : var(--pw-mono-font-face);
-                            }
-                        }
-
-                        &.secure {color : var(--color-success);}
-                        &.weak {color : var(--color-warning);}
-                        &.breached {color : var(--color-error);}
-                    }
-
-                    a {
+                    &.secret {
                         cursor : pointer;
 
-                        &:hover {
-                            text-decoration : underline;
+                        &.visible {
+                            font-family : var(--pw-mono-font-face);
                         }
                     }
 
+                    &.secure {color : var(--color-success);}
+
+                    &.weak {color : var(--color-warning);}
+
+                    &.breached {color : var(--color-error);}
+                }
+
+                a {
+                    cursor : pointer;
+
                     &:hover {
-                        background-color : var(--color-background-dark);
+                        text-decoration : underline;
                     }
+                }
+
+                &:hover {
+                    background-color : var(--color-background-dark);
                 }
             }
         }
-
-        .controls {
-            display          : flex;
-            align-items      : end;
-            padding          : 0.5rem;
-            background-color : var(--color-main-background);
-            position         : sticky;
-            bottom           : 0;
-        }
-
-        @media (max-width : $width-extra-small) {
-            max-height : 100%;
-        }
     }
+
+    .controls {
+        display          : flex;
+        align-items      : end;
+        padding          : 0.5rem;
+        background-color : var(--color-main-background);
+        position         : sticky;
+        bottom           : 0;
+    }
+
+    @media (max-width : $width-extra-small) {
+        max-height : 100%;
+    }
+}
 </style>

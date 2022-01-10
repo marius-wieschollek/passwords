@@ -127,7 +127,6 @@ class ServerReportHelper {
         ];
 
         if($enhanced) {
-            $report['legacyApi']  = $this->getLegacyApi();
             $report['services']   = $this->getServices();
             $report['settings']   = $this->getSettings();
             $report['status']     = $this->getStatus();
@@ -169,32 +168,6 @@ class ServerReportHelper {
             'proxy'        => !empty($this->config->getSystemValue('proxy', '')),
             'sslProxy'     => strtolower($this->config->getSystemValue('overwriteprotocol', '')) === 'https',
             'subdirectory' => $subdirectory,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getLegacyApi(): array {
-        $checkpoint = $this->config->getAppValue('legacy_api_checkpoint', strtotime('last Monday'));
-        $wasUsed    = $this->config->getAppValue('legacy_last_used', 0) > $checkpoint;
-        $this->config->setAppValue('legacy_api_checkpoint', time());
-
-        $status = $this->config->getAppValue('legacy_api_enabled', false);
-        $report = -1;
-        if($status === false) {
-            $report = 0;
-        } else if($status === true) {
-            $report = 1;
-        } else if(boolval($status) === false) {
-            $report = 2;
-        } else if(boolval($status) === true) {
-            $report = 3;
-        }
-
-        return [
-            'enabled' => $report,
-            'used'    => $wasUsed
         ];
     }
 
@@ -260,7 +233,7 @@ class ServerReportHelper {
         $appClass = new OC_App();
         $apps     = $appClass->listAllApps();
         $data     = [];
-        foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate'] as $app) {
+        foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate', 'passwords_handbook'] as $app) {
             $data[ $app ] = [
                 'installed' => false,
                 'enabled'   => false

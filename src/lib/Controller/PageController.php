@@ -19,6 +19,7 @@ use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Services\IInitialState;
 use OCP\IRequest;
 use OCP\Util;
 
@@ -45,11 +46,6 @@ class PageController extends Controller {
     protected EnvironmentService $environment;
 
     /**
-     * @var UpgradeCheckHelper
-     */
-    protected UpgradeCheckHelper $upgradeCheck;
-
-    /**
      * @var NotificationService
      */
     protected NotificationService $notifications;
@@ -70,27 +66,30 @@ class PageController extends Controller {
     protected DeferredActivationService $das;
 
     /**
-     * PageController constructor.
-     *
+     * @var IInitialState
+     */
+    protected IInitialState             $initialState;
+
+    /**
      * @param IRequest                  $request
      * @param ApiTokenHelper            $tokenHelper
+     * @param IInitialState             $initialState
      * @param UserSettingsService       $settings
      * @param EnvironmentService        $environment
-     * @param UpgradeCheckHelper        $upgradeCheck
      * @param NotificationService       $notifications
      * @param SetupReportHelper         $setupReportHelper
      * @param UserChallengeService      $challengeService
      * @param DeferredActivationService $das
      */
     public function __construct(
-        IRequest $request,
-        ApiTokenHelper $tokenHelper,
-        UserSettingsService $settings,
-        EnvironmentService $environment,
-        UpgradeCheckHelper $upgradeCheck,
-        NotificationService $notifications,
-        SetupReportHelper $setupReportHelper,
-        UserChallengeService $challengeService,
+        IRequest                  $request,
+        ApiTokenHelper            $tokenHelper,
+        IInitialState             $initialState,
+        UserSettingsService       $settings,
+        EnvironmentService        $environment,
+        NotificationService       $notifications,
+        SetupReportHelper         $setupReportHelper,
+        UserChallengeService      $challengeService,
         DeferredActivationService $das
     ) {
         parent::__construct(Application::APP_NAME, $request);
@@ -98,7 +97,7 @@ class PageController extends Controller {
         $this->settings          = $settings;
         $this->tokenHelper       = $tokenHelper;
         $this->environment       = $environment;
-        $this->upgradeCheck      = $upgradeCheck;
+        $this->initialState      = $initialState;
         $this->notifications     = $notifications;
         $this->challengeService  = $challengeService;
         $this->setupReportHelper = $setupReportHelper;
@@ -145,24 +144,15 @@ class PageController extends Controller {
      * @throws Exception
      */
     protected function addHeaders(): void {
-        $userSettings = json_encode($this->settings->list());
-        Util::addHeader('meta', ['name' => 'pw-settings', 'content' => $userSettings]);
+        $this->initialState->provideInitialState('settings', $this->settings->list());
 
         [$token, $user] = $this->tokenHelper->getWebUiToken();
-        Util::addHeader('meta', ['name' => 'pw-api-user', 'content' => $user]);
-        Util::addHeader('meta', ['name' => 'pw-api-token', 'content' => $token]);
+        $this->initialState->provideInitialState('api-user', $user);
+        $this->initialState->provideInitialState('api-token', $token);
 
-        $authenticate = $this->challengeService->hasChallenge() ? 'true':'false';
-        Util::addHeader('meta', ['name' => 'pw-authenticate', 'content' => $authenticate]);
-
-        $impersonate = $this->environment->isImpersonating() ? 'true':'false';
-        Util::addHeader('meta', ['name' => 'pw-impersonate', 'content' => $impersonate]);
-
-        $features = $this->das->getClientFeatures();
-        Util::addHeader('meta', ['name' => 'pw-features', 'content' => json_encode($features)]);
-
-        $upgrade = $this->upgradeCheck->getUpgradeMessage();
-        if($upgrade !== null) Util::addHeader('meta', ['name' => 'pw-alert', 'content' => json_encode([$upgrade])]);
+        $this->initialState->provideInitialState('authenticate', $this->challengeService->hasChallenge());
+        $this->initialState->provideInitialState('impersonate', $this->environment->isImpersonating());
+        $this->initialState->provideInitialState('features', $this->das->getClientFeatures());
     }
 
     /**

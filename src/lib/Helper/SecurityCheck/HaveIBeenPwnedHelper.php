@@ -1,14 +1,19 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\SecurityCheck;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\RequestOptions;
 use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
 
 /**
@@ -18,10 +23,19 @@ use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
  */
 class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
 
-    const PASSWORD_DB = 'hibp';
-    const SERVICE_URL = 'https://api.pwnedpasswords.com/range/';
+    const PASSWORD_DB        = 'hibp';
+    const CONFIG_SERVICE_URL = 'passwords/hibp/url';
+    const SERVICE_URL        = 'https://api.pwnedpasswords.com/range/:range';
 
+    /**
+     * @var array
+     */
     protected array $checkedRanges = [];
+
+    /**
+     * @var bool
+     */
+    protected bool $isAvailable = false;
 
     /**
      * @param string $hash
@@ -44,6 +58,24 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     public function updateDb(): void {
         $this->fileCacheService->clearCache();
         $this->config->setAppValue(self::CONFIG_DB_TYPE, static::PASSWORD_DB);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isAvailable(): bool {
+        if($this->isAvailable) return $this->isAvailable;
+
+        try {
+            $client   = $this->httpClientService->newClient();
+            $response = $client->head($this->getApiUrl('fffff'), [RequestOptions::TIMEOUT => 5]);
+
+            $this->isAvailable = $response->getStatusCode() === 200;
+
+            return $this->isAvailable;
+        } catch(Exception $e) {
+            return false;
+        }
     }
 
     /**
@@ -115,7 +147,7 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
     protected function executeApiRequest(string $range) {
         try {
             $client   = $this->httpClientService->newClient();
-            $response = $client->get(self::SERVICE_URL.$range, ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
+            $response = $client->get($this->getApiUrl($range), ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
         } catch(ClientException $e) {
             if($e->getResponse()->getStatusCode() === 404 || $e->getResponse()->getStatusCode() === 502) {
                 return '';
@@ -130,5 +162,14 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         if(!$responseData) throw new InvalidHibpApiResponseException($response);
 
         return $responseData;
+    }
+
+    /**
+     * @param string $range
+     *
+     * @return string
+     */
+    protected function getApiUrl(string $range): string {
+        return str_replace(':range', $range, $this->config->getAppValue(static::CONFIG_SERVICE_URL, static::SERVICE_URL));
     }
 }

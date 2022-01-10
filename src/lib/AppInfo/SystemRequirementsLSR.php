@@ -21,14 +21,14 @@ class SystemRequirements {
     const APP_BC_BREAK = '2022.1.0';
     const APP_LSR      = true;
 
-    const NC_MINIMUM                     = '20.0.0';
-    const NC_MINIMUM_ID                  = 20;
+    const NC_MINIMUM                     = '23.0.0';
+    const NC_MINIMUM_ID                  = 23;
     const NC_DEPRECATION_WARNING_ID      = 23;
     const NC_DEPRECATION_NOTIFICATION_ID = 23;
     const NC_UPGRADE_RECOMMENDATION      = '23';
 
-    const PHP_MINIMUM                     = '7.2.0';
-    const PHP_MINIMUM_ID                  = 70200;
+    const PHP_MINIMUM                     = '7.3.0';
+    const PHP_MINIMUM_ID                  = 70300;
     const PHP_DEPRECATION_WARNING_ID      = 70300;
     const PHP_DEPRECATION_NOTIFICATION_ID = 70300;
     const PHP_UPGRADE_RECOMMENDATION      = '8.0.0';

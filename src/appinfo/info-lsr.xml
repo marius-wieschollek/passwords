@@ -69,7 +69,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [iOS App](https://apps.apple.com/app/id1546212226) von [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 ]]>
     </description>
-    <version>2021.12.0-BUILD</version>
+    <version>2022.1.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -112,8 +112,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="7.2" max-version="8.0" />
-        <nextcloud min-version="20" max-version="23" />
+        <php min-version="7.3" max-version="8.0" />
+        <nextcloud min-version="23" max-version="23" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
@@ -146,6 +146,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <command>OCA\Passwords\Command\UserMoveCommand</command>
         <command>OCA\Passwords\Command\UserDeleteCommand</command>
         <command>OCA\Passwords\Command\SystemReportCommand</command>
+        <command>OCA\Passwords\Command\ProcessPwnedPasswordsList</command>
     </commands>
     <settings>
         <admin>OCA\Passwords\Settings\AdminSettings</admin>

@@ -52,13 +52,19 @@ class PasswordManager {
                    }
 
                    password.id = data.id;
-                   password.status = 0;
+                   password.status = 3;
+                   password.statusCode = 'NOT_CHECKED';
                    password.editable = true;
                    password.revision = data.revision;
                    password.edited = password.created = password.updated = Utility.getTimestamp();
                    if(!password.label) API._generatePasswordTitle(password);
                    password = API._processPassword(password);
                    Events.fire('password.created', password);
+                   API.showPassword(password.id)
+                      .then((data) => {
+                          password.status = data.status;
+                          password.statusCode = data.statusCode;
+                      });
                })
                .catch((e) => {
                    console.error(e);
@@ -162,6 +168,7 @@ class PasswordManager {
             if(folder === null) {
                 let folderModel = await FolderManager.selectFolder(password.folder);
                 folder = folderModel.id;
+                if(password.hidden && !folderModel.hidden) password.hidden = false;
             }
             if(password.id === folder || password.folder === folder) {
                 reject(password);

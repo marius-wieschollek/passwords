@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2021 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\AppSettings;
@@ -257,19 +261,23 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::SECURITY_HIBP,
-                $this->localisation->t('Have I been pwned? (recommended)')
+                $this->localisation->t('Have I been pwned? (recommended)'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_HIBP)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_BIG_LOCAL,
-                $this->localisation->t('10 Million Passwords (Local)')
+                $this->localisation->t('Big local database (25M passwords)'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_BIG_LOCAL)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_SMALL_LOCAL,
-                $this->localisation->t('1 Million Passwords (Local)')
+                $this->localisation->t('Small local database (5M passwords)'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_SMALL_LOCAL)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::SECURITY_BIGDB_HIBP,
-                $this->localisation->t('10Mio Passwords & Hibp?')
+                $this->localisation->t('Big local database & Hibp?'),
+                $this->helperService->getSecurityHelper(HelperService::SECURITY_BIGDB_HIBP)->isAvailable()
             )
         ];
     }

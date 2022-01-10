@@ -21,15 +21,15 @@ class SystemRequirements {
     const APP_BC_BREAK = '2022.1.0';
     const APP_LSR      = false;
 
-    const NC_MINIMUM                     = '20.0.5';
-    const NC_MINIMUM_ID                  = 20;
+    const NC_MINIMUM                     = '23.0.0';
+    const NC_MINIMUM_ID                  = 23;
     const NC_DEPRECATION_WARNING_ID      = 23;
     const NC_DEPRECATION_NOTIFICATION_ID = 23;
     const NC_UPGRADE_RECOMMENDATION      = '23';
 
-    const PHP_MINIMUM                     = '7.4.0';
-    const PHP_MINIMUM_ID                  = 70400;
+    const PHP_MINIMUM                     = '8.0.0';
+    const PHP_MINIMUM_ID                  = 80000;
     const PHP_DEPRECATION_WARNING_ID      = 80000;
-    const PHP_DEPRECATION_NOTIFICATION_ID = 70400;
+    const PHP_DEPRECATION_NOTIFICATION_ID = 80000;
     const PHP_UPGRADE_RECOMMENDATION      = '8.0.0';
 }

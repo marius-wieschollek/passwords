@@ -81,14 +81,10 @@ class NightlyAppFetcher extends Fetcher {
         IConfig $config,
         CompareVersion $compareVersion,
         LoggerInterface $logger,
-        IRegistry $registry,
-        ILogger $legacyLogger
+        IRegistry $registry
     ) {
 
         $parentLogger = $logger;
-        if(intval(explode('.', $config->getSystemValue('version', '0.0.0'), 2)[0]) < 22) {
-            $parentLogger = $legacyLogger;
-        }
 
         parent::__construct(
             $appDataFactory,

@@ -89,8 +89,7 @@ class LanguageController extends Controller {
                     $section.DIRECTORY_SEPARATOR.
                     $language.'.json';
 
-        // @TODO use str_starts_with($filePath, $basePath) in 2022.1
-        if(is_file($filePath) && substr($filePath, 0, strlen($basePath)) === $basePath) {
+        if(is_file($filePath) && str_starts_with($filePath, $basePath)) {
             $data = file_get_contents($filePath);
             $json = json_decode($data);
 

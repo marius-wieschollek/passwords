@@ -332,4 +332,17 @@
         }
     }
 }
+
+body {
+    &[data-custom-color="false"] #passwords-setup .setup-header {
+        background-image      : var(--image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+        background-repeat     : repeat;
+        background-size       : contain;
+        background-attachment : fixed;
+    }
+
+    &[data-custom-color="true"] #passwords-setup .setup-header {
+        background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+    }
+}
 </style>

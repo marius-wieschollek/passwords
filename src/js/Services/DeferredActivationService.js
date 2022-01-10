@@ -1,4 +1,5 @@
 import SettingsService from '@js/Services/SettingsService';
+import { loadState } from '@nextcloud/initial-state'
 
 class DeferredActivationService {
 
@@ -32,9 +33,9 @@ class DeferredActivationService {
         if(this._features !== null) return this._features;
 
         this._features = {};
-        let features = document.querySelector('meta[name=pw-features]');
+        let features = loadState('passwords', 'features', null);
         if(features) {
-            this._features = JSON.parse(features.getAttribute('content'));
+            this._features = features;
             return this._features;
         }
 

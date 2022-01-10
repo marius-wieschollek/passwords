@@ -1,10 +1,25 @@
 ## [Unreleased]
-### Added
- - Nextcloud 23 support
- - Added translation for catalan
+
+## 2022.1.0 - Feature release
 ### Changed
- - Improved spanish translation
- - Changed default besticon instance, removed limitations
+- Big local database now with 25M passwords from Hibp?
+- Small local database now with 5M passwords from Hibp?
+- Security status now marked as unknown if hash disabled
+### Fixed
+- Passwords now unhidden when moved out of hidden folder
+### Removed
+- The legacy api
+- Support for Nextcloud 20, 21, 22
+- Support for PHP 7.4 (7.2 in LSR)
+
+## 2021.12.0 - Feature release
+### Added
+- Nextcloud 23 support
+- Added translation for catalan
+### Changed
+- Improved spanish translation
+- Default besticon instance, removed limitations
+- Passlink domains
 
 ## 2021.11.0 - Feature release
 ### Changed

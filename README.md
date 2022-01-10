@@ -62,8 +62,11 @@ The app also supports most 2FA authentication methods offered by Nextcloud.
 * [Official Firefox Add-On](https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-readme)
 * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
 * [Official Microsoft Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cjmlcljdpphgdfpkngjcmeepdpcgpffk)
-* [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
 * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) by [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
+* [Android App](https://play.google.com/store/apps/details?id=com.nextcloudpasswords) by [daper](https://github.com/daper/nextcloud-passwords-app)
+* [Windows App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#windows) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
+* [Linux App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#linux) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
+* [macOS App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#mac-os) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
 * [iOS App](https://apps.apple.com/app/id1546212226) by [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 
 ## API
@@ -83,7 +86,8 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 ## Development
 * Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
-* Do you want do want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index).
+* Do you want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index).
+* For questions and announcements, visit the [Telegram Group for Developers](https://t.me/nc_passwords_dev)
 
 ## Donations
 See [Donate.md](Donate.md) for a list of developers making the Passwords app for Nextcloud possible.

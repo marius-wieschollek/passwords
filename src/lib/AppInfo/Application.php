@@ -16,9 +16,6 @@ use OCA\Passwords\Controller\Admin\SettingsController;
 use OCA\Passwords\Controller\Api\AccountApiController;
 use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\KeychainApiController;
-use OCA\Passwords\Controller\Api\Legacy\LegacyCategoryApiController;
-use OCA\Passwords\Controller\Api\Legacy\LegacyPasswordApiController;
-use OCA\Passwords\Controller\Api\Legacy\LegacyVersionApiController;
 use OCA\Passwords\Controller\Api\PasswordApiController;
 use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\SessionApiController;
@@ -67,7 +64,6 @@ use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
-use OCA\Passwords\Middleware\LegacyMiddleware;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
@@ -158,11 +154,6 @@ class Application extends App implements IBootstrap {
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
             });
-
-        /**
-         * Register Legacy Api Controller Classes
-         */
-        $this->registerLegacyApiControllers($context);
     }
 
     /**
@@ -174,11 +165,6 @@ class Application extends App implements IBootstrap {
 
         $context->registerServiceAlias('ApiSessionMiddleware', ApiSessionMiddleware::class);
         $context->registerMiddleware('ApiSessionMiddleware');
-
-        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', false)) {
-            $context->registerServiceAlias('LegacyMiddleware', LegacyMiddleware::class);
-            $context->registerMiddleware('LegacyMiddleware');
-        }
     }
 
     /**
@@ -208,17 +194,6 @@ class Application extends App implements IBootstrap {
                     $c->get(EnvironmentService::class)
                 );
             });
-    }
-
-    /**
-     * @param IRegistrationContext $context
-     */
-    protected function registerLegacyApiControllers(IRegistrationContext $context): void {
-        if($this->getContainer()->get(IConfig::class)->getAppValue(Application::APP_NAME, 'legacy_api_enabled', false)) {
-            $context->registerServiceAlias('LegacyVersionApiController', LegacyVersionApiController::class);
-            $context->registerServiceAlias('LegacyPasswordApiController', LegacyPasswordApiController::class);
-            $context->registerServiceAlias('LegacyCategoryApiController', LegacyCategoryApiController::class);
-        }
     }
 
     /**

@@ -1,9 +1,14 @@
 <?php
-/**
- * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+/*
+ * @copyright 2021 Passwords App
  *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
+/**
  * @var $l \OCP\IL10N
  * @var $_ array
  */
@@ -118,7 +123,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <label for="passwords-security"><?php p($l->t('Password Security Checks')); ?></label>
             <select id="passwords-security" name="passwords-security" name="security" data-setting="service.security">
                 <?php foreach($_['securityServices'] as $service): ?>
-                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?>><?php p($l->t($service['label'])); ?></option>
+                    <option value="<?php p($service['id']); ?>" <?php p($service['current'] ? 'selected':''); ?> <?php p($service['enabled'] ? '':'disabled'); ?>><?php p($l->t($service['label'])); ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -208,23 +213,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
         </div>
     </form>
 
-
-    <form>
-        <h3>
-            <?php p($l->t('Legacy Api Support')); ?>
-            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
-            <span class="response error"><?php p($l->t('Failed')); ?></span>
-        </h3>
-
-        <div class="area legacy">
-            <label for="passwords-legacy-enable"><?php p($l->t('Enable Legacy API')); ?></label>
-            <input id="passwords-legacy-enable" name="legacy-enable" data-setting="legacy.api.enabled" type="checkbox" <?=$_['legacyApiEnabled'] ? 'checked':''?>>
-            <?php if($_['legacyApiEnabled']): ?>
-                <label for="passwords-legacy-used"><?php p($l->t('Legacy API was last used on')); ?></label>
-                <input id="passwords-legacy-used" name="legacy-used" value="<?=$_['legacyLastUsed'] ? date('Y-m-d H:i:s', $_['legacyLastUsed']):$l->t('never')?>" disabled>
-            <?php endif; ?>
-        </div>
-    </form>
 
     <form>
         <h3>

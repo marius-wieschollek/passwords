@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
@@ -80,14 +84,14 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @param NotificationService    $notificationService
      */
     public function __construct(
-        LoggingService $logger,
-        MailService $mailService,
-        ConfigurationService $config,
-        HelperService $helperService,
-        EnvironmentService $environment,
-        UserSettingsHelper $userSettingsHelper,
+        LoggingService         $logger,
+        MailService            $mailService,
+        ConfigurationService   $config,
+        HelperService          $helperService,
+        EnvironmentService     $environment,
+        UserSettingsHelper     $userSettingsHelper,
         PasswordRevisionMapper $revisionMapper,
-        NotificationService $notificationService
+        NotificationService    $notificationService
     ) {
         $this->mailService         = $mailService;
         $this->helperService       = $helperService;
@@ -122,7 +126,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
         foreach($revisions as $revision) {
             $this->checkHashLength($revision);
 
-            if($revision->getStatus() === 2) continue;
+            if($revision->getStatus() === AbstractSecurityCheckHelper::LEVEL_BAD || $revision->getStatus() === AbstractSecurityCheckHelper::LEVEL_UNKNOWN) continue;
 
             $oldStatusCode = $revision->getStatusCode();
             [$statusLevel, $statusCode] = $securityHelper->getRevisionSecurityLevel($revision);
