@@ -62,15 +62,8 @@ PHPUnit:
 Sign:
   stage: signing
   script:
-    - echo "-----BEGIN PRIVATE KEY-----" > sign.key
-    - echo $SIGN_KEY | tr " " "\n" >> sign.key
-    - echo "-----END PRIVATE KEY-----" >> sign.key
-    - echo "-----BEGIN CERTIFICATE-----" > sign.crt
-    - echo $SIGN_CRT | tr " " "\n" >> sign.crt
-    - echo "-----END CERTIFICATE-----" >> sign.crt
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr --privateKey=$(pwd)/sign.key --certificate=$(pwd)/sign.crt
-    - rm sign.key sign.crt
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
   artifacts:
     paths:
       - ./passwords
@@ -98,11 +91,7 @@ Publish Nightly:
   stage: publishing
   script:
     - source job.id
-    - echo "-----BEGIN PRIVATE KEY-----" > sign.key
-    - echo $SIGN_KEY | tr " " "\n" >> sign.key
-    - echo "-----END PRIVATE KEY-----" >> sign.key
-    - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
-    - rm sign.key
+    - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
@@ -113,12 +102,8 @@ Publish Stable:
   stage: publishing
   script:
     - source job.id
-    - echo "-----BEGIN PRIVATE KEY-----" > sign.key
-    - echo $SIGN_KEY | tr " " "\n" >> sign.key
-    - echo "-----END PRIVATE KEY-----" >> sign.key
-    - SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords.tar.gz | openssl base64 | tr -d "\n")
-    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ./sign.key ./passwords-lsr.tar.gz | openssl base64 | tr -d "\n")
-    - rm sign.key
+    - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr.tar.gz | openssl base64 | tr -d "\n")
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
