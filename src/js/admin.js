@@ -64,29 +64,6 @@ class PasswordsAdminSettings {
     }
 
     /**
-     * Send a request to the server
-     *
-     * @param url
-     * @param data
-     * @param target
-     * @param success
-     * @private
-     */
-    _sendRequest(url, data, target, success = 'saved') {
-
-        $.post(url, data)
-            .success((d) => {
-                if(d.status === 'ok') {
-                    this._showMessage(success, target);
-                } else {
-                    this._showMessage('error', target);
-                    OC.Notification.show(PasswordsAdminSettings._translate(d.message));
-                }
-            })
-            .fail(() => {this._showMessage('error', target);});
-    }
-
-    /**
      * Show save success/fail message
      *
      * @param type
