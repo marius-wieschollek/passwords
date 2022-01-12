@@ -5,6 +5,7 @@ stages:
   - signing
   - packaging
   - publishing
+  - hooks
 
 image: passwords-builder
 
@@ -109,4 +110,24 @@ Publish Stable:
   environment:
     name: Stable
   only:
+  - stable
+
+Hooks:
+  stage: hooks
+  script:
+    - APP_VERSION=$(node -p "require('./package.json').version")
+    - git clone --branch ${CI_COMMIT_REF_NAME} ${HANDBOOK_REPOSITORY} passwords-handbook
+    - cd passwords-handbook
+    - CURRENT_VERSION=$(node -p "require('./package.json').version")
+    - if [ "${CURRENT_VERSION}" == "${NEW_VERSION}" ] ; then exit 0 ; fi
+    - sed -i '' "s/${CURRENT_VERSION}/${NEW_VERSION}/" package.json
+    - echo "Raised version from ${CURRENT_VERSION} to ${NEW_VERSION}"
+    - git config --global user.name "Gitlab CI"
+    - git config --global user.email "gitlab@git.mdns.eu"
+    - git commit -am "Raise version"
+    - mkdir -p ~/.ssh/ && cp ${HANDBOOK_PUBLISH_KEY} ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
+    - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
+    - git push origin
+  only:
+  - testing
   - stable
