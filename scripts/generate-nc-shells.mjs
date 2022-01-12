@@ -4,6 +4,7 @@ const useRegex = /use\s+([\w\\]+)(\s+as\s+(\w+))?\s*;/gm;
 const extendsRegex = /extends\s+([\w\\]+)\s*{/gm;
 const implementsRegex = /implements\s+([\w\\]+)\s*{/gm;
 const namespaceRegex = /namespace\s+([\w\\]+)\s*;/;
+const classRegex = /(abstract\s+)?(class|interface|trait)\s+(\w+)/;
 
 async function main() {
     let definitions = await analyzeDirectory('src/lib'),
@@ -52,6 +53,23 @@ function extractImports(contents, definitions) {
             addClassDefinition(definitions, namespace, name);
         }
     }
+
+    let classMatches = classRegex.exec(contents);
+    if(classMatches !== null) {
+        let name = classMatches[3],
+            namespace = '',
+            namespaceMatches = namespaceRegex.exec(contents);
+
+        if(namespaceMatches) {
+            namespace = namespaceMatches[1];
+        }
+
+        uses['self'] = {namespace, name};
+        uses['static'] = {namespace, name};
+        addClassDefinition(definitions, namespace, name);
+        definitions[namespace][name].type = classMatches[2];
+    }
+
     return uses;
 }
 
