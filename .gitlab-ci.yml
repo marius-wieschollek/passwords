@@ -116,6 +116,7 @@ Hooks:
   stage: hooks
   script:
     - APP_VERSION=$(node -p "require('./package.json').version")
+    - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
     - git clone --branch ${CI_COMMIT_REF_NAME} ${HANDBOOK_REPOSITORY} passwords-handbook
     - cd passwords-handbook
     - CURRENT_VERSION=$(node -p "require('./package.json').version")
@@ -126,7 +127,6 @@ Hooks:
     - git config --global user.email "gitlab@git.mdns.eu"
     - git commit -am "Raise version"
     - mkdir -p ~/.ssh/ && cp ${HANDBOOK_PUBLISH_KEY} ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
-    - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
     - git push origin
   only:
   - testing
