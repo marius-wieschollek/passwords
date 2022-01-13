@@ -127,7 +127,6 @@ Update Handbook:
     - git config --global user.email "gitlab@git.mdns.eu"
     - git commit -am "Raise version"
     - git push origin
-    - echo "Raised version from ${CURRENT_VERSION} to ${NEW_VERSION}"
+    - echo "Raised version from ${CURRENT_VERSION} to ${APP_VERSION}"
   only:
-  - testing
   - stable
