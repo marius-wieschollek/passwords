@@ -122,7 +122,7 @@ Update Handbook:
     - cd passwords-handbook
     - CURRENT_VERSION=$(node -p "require('./package.json').version")
     - if [ "${CURRENT_VERSION}" == "${APP_VERSION}" ] ; then exit 0 ; fi
-    - sed -i '' "s/${CURRENT_VERSION}/${APP_VERSION}/" package.json
+    - 'sed -i -e "s|${CURRENT_VERSION}|${APP_VERSION}|g" ./package.json'
     - git config --global user.name "Gitlab CI"
     - git config --global user.email "gitlab@git.mdns.eu"
     - git commit -am "Raise version"
