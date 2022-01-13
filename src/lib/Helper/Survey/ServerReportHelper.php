@@ -219,7 +219,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getStatus(): array {
-        $autoBackupRestored = $this->config->getAppValue('backup/update/restored', 0);
+        $autoBackupRestored = $this->config->getAppValue('backup/update/restored', '0') === '1';
 
         return [
             'autoBackupRestored' => $autoBackupRestored
