@@ -8,20 +8,20 @@
 namespace OCA\Passwords\Controller;
 
 use Exception;
-use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Http\SetupReportHelper;
-use OCA\Passwords\Helper\Token\ApiTokenHelper;
-use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
-use OCA\Passwords\Services\DeferredActivationService;
-use OCA\Passwords\Services\EnvironmentService;
-use OCA\Passwords\Services\NotificationService;
-use OCA\Passwords\Services\UserChallengeService;
-use OCA\Passwords\Services\UserSettingsService;
+use OCP\IRequest;
 use OCP\AppFramework\Controller;
+use OCA\Passwords\AppInfo\Application;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Services\IInitialState;
-use OCP\IRequest;
-use OCP\Util;
+use OCA\Passwords\Helper\Token\ApiTokenHelper;
+use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\UserSettingsService;
+use OCA\Passwords\Helper\Http\SetupReportHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\UserChallengeService;
+use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
+use OCA\Passwords\Services\DeferredActivationService;
 
 /**
  * Class PageController
@@ -68,7 +68,12 @@ class PageController extends Controller {
     /**
      * @var IInitialState
      */
-    protected IInitialState             $initialState;
+    protected IInitialState        $initialState;
+
+    /**
+     * @var ConfigurationService
+     */
+    protected ConfigurationService $config;
 
     /**
      * @param IRequest                  $request
@@ -90,16 +95,18 @@ class PageController extends Controller {
         NotificationService       $notifications,
         SetupReportHelper         $setupReportHelper,
         UserChallengeService      $challengeService,
-        DeferredActivationService $das
+        DeferredActivationService $das,
+        ConfigurationService      $config,
     ) {
         parent::__construct(Application::APP_NAME, $request);
-        $this->das               = $das;
-        $this->settings          = $settings;
-        $this->tokenHelper       = $tokenHelper;
-        $this->environment       = $environment;
-        $this->initialState      = $initialState;
-        $this->notifications     = $notifications;
-        $this->challengeService  = $challengeService;
+        $this->das = $das;
+        $this->config = $config;
+        $this->settings = $settings;
+        $this->tokenHelper = $tokenHelper;
+        $this->environment = $environment;
+        $this->initialState = $initialState;
+        $this->notifications = $notifications;
+        $this->challengeService = $challengeService;
         $this->setupReportHelper = $setupReportHelper;
     }
 
@@ -126,6 +133,9 @@ class PageController extends Controller {
         );
 
         $this->getContentSecurityPolicy($response);
+
+        $this->config->setAppValue('web/php/version/id', PHP_VERSION_ID);
+        $this->config->setAppValue('web/php/version/string', phpversion());
 
         return $response;
     }

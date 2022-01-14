@@ -404,7 +404,9 @@ class AdminSettings implements ISettings {
         $ncVersion     = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
         $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
         $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
-        $cronPhpString = $this->config->getAppValue('cron/php/version/string', PHP_VERSION);
+        $cronPhpString = $this->config->getAppValue('cron/php/version/string', phpversion());
+        $this->config->setAppValue('web/php/version/id', PHP_VERSION_ID);
+        $this->config->setAppValue('web/php/version/string', phpversion());
 
         return [
             'cron'    => $cronType,
@@ -413,14 +415,14 @@ class AdminSettings implements ISettings {
             'php'     => [
                 'warn'    => PHP_VERSION_ID < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
                 'error'   => PHP_VERSION_ID < SystemRequirements::PHP_MINIMUM_ID,
-                'version' => PHP_VERSION
+                'version' => phpversion()
             ],
             'cronPhp' => [
                 'isDifferent' => PHP_VERSION_ID - $cronPhpId > 99 || $cronPhpId - PHP_VERSION_ID > 99,
                 'warn'        => $cronPhpId < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
                 'error'       => $cronPhpId < SystemRequirements::PHP_MINIMUM_ID,
                 'cronVersion' => $cronPhpString,
-                'webVersion'  => PHP_VERSION
+                'webVersion'  => phpversion()
             ],
             'server'  => [
                 'warn'    => $ncVersion < SystemRequirements::NC_DEPRECATION_WARNING_ID,
