@@ -59,7 +59,7 @@ class SystemReportCommand extends Command {
         $data = $this->serverReportHelper->getReport($enhanced);
         if(!empty($sections)) {
             if(in_array('debug', $sections)) {
-                $sections = ['version', 'environment', 'services', 'settings', 'encryption'];
+                $sections = ['version', 'environment', 'services', 'status', 'settings', 'encryption'];
             }
 
             $sectionData = [];
