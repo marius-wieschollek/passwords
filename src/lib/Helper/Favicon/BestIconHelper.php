@@ -113,7 +113,7 @@ class BestIconHelper extends AbstractFaviconHelper {
 
         try {
             $data = $this->executeRequest($uri, $options);
-            if($data !== null) return $data;
+            if(!empty($data)) return $data;
         } catch(Throwable $e) {
         }
 
@@ -153,7 +153,7 @@ class BestIconHelper extends AbstractFaviconHelper {
                 }
             }
             $this->config->setAppValue(self::BESTICON_COUNTER_KEY, "{$currentWeek}:{$count}:{$notified}");
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
         }
     }
 }
