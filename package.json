@@ -59,7 +59,7 @@
         "jquery": "^3.6.0",
         "jszip": "^3.7.1",
         "libsodium-wrappers": "^0.7.9",
-        "marked": "^0.8.2",
+        "marked": "^4.0.10",
         "mermaid": "^8.13.3",
         "mini-css-extract-plugin": "^2.4.3",
         "passwords-client": "0.0.14",
