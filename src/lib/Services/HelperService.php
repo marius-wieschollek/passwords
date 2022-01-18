@@ -30,6 +30,7 @@ use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use OCA\Passwords\Helper\Words\AutoWordsHelper;
 use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
@@ -61,6 +62,7 @@ class HelperService {
     const WORDS_RANDOM  = 'random';
     const WORDS_SNAKES  = 'wo4snakes';
     const WORDS_LEIPZIG = 'leipzig';
+    const WORDS_AUTO    = 'auto';
 
     const SECURITY_BIGDB_HIBP  = 'bigdb+hibp';
     const SECURITY_BIG_LOCAL   = 'bigdb';
@@ -145,13 +147,14 @@ class HelperService {
      * @return AbstractWordsHelper
      */
     public function getWordsHelper(string $service = null): AbstractWordsHelper {
-        if($service === null) $service = $this->config->getAppValue('service/words', $this->getDefaultWordsHelperName());
+        if($service === null) $service = $this->config->getAppValue('service/words', HelperService::WORDS_AUTO);
 
         return match ($service) {
             self::WORDS_LOCAL => $this->container->get(LocalWordsHelper::class),
             self::WORDS_LEIPZIG => $this->container->get(LeipzigCorporaHelper::class),
             self::WORDS_SNAKES => $this->container->get(SnakesWordsHelper::class),
-            default => $this->container->get(RandomCharactersHelper::class),
+            self::WORDS_RANDOM => $this->container->get(RandomCharactersHelper::class),
+            default => $this->container->get(AutoWordsHelper::class),
         };
     }
 
@@ -176,23 +179,6 @@ class HelperService {
      */
     public function getDefaultFaviconHelper(): DefaultFaviconHelper {
         return $this->container->get(DefaultFaviconHelper::class);
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultWordsHelperName(): string {
-        if($this->container->get(LocalWordsHelper::class)->isAvailable()) {
-            return self::WORDS_LOCAL;
-        }
-        if($this->container->get(RandomCharactersHelper::class)->isAvailable()) {
-            return self::WORDS_RANDOM;
-        }
-        if($this->container->get(SnakesWordsHelper::class)->isAvailable()) {
-            return self::WORDS_SNAKES;
-        }
-
-        return '';
     }
 
     /**

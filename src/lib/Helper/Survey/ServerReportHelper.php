@@ -2,19 +2,19 @@
 
 namespace OCA\Passwords\Helper\Survey;
 
+use Exception;
 use OC_App;
 use OC_Util;
-use Exception;
-use OCA\Passwords\Db\ShareMapper;
-use OCP\Http\Client\IClientService;
-use OCA\Passwords\Db\TagRevisionMapper;
-use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
-use OCA\Passwords\AppInfo\SystemRequirements;
-use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Db\ShareMapper;
+use OCA\Passwords\Db\TagRevisionMapper;
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\HelperService;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class ServerReportHelper
@@ -87,13 +87,13 @@ class ServerReportHelper {
         FolderRevisionMapper   $folderRevisionMapper,
         PasswordRevisionMapper $passwordRevisionMapper
     ) {
-        $this->config = $config;
-        $this->shareMapper = $shareMapper;
-        $this->helperService = $helperService;
-        $this->serviceSettings = $serviceSettings;
-        $this->httpClientService = $httpClientService;
-        $this->tagRevisionMapper = $tagRevisionMapper;
-        $this->folderRevisionMapper = $folderRevisionMapper;
+        $this->config                 = $config;
+        $this->shareMapper            = $shareMapper;
+        $this->helperService          = $helperService;
+        $this->serviceSettings        = $serviceSettings;
+        $this->httpClientService      = $httpClientService;
+        $this->tagRevisionMapper      = $tagRevisionMapper;
+        $this->folderRevisionMapper   = $folderRevisionMapper;
         $this->passwordRevisionMapper = $passwordRevisionMapper;
     }
 
@@ -127,11 +127,11 @@ class ServerReportHelper {
         ];
 
         if($enhanced) {
-            $report['services'] = $this->getServices();
-            $report['settings'] = $this->getSettings();
-            $report['status'] = $this->getStatus();
-            $report['apps'] = $this->getApps();
-            $report['sharing'] = $this->getSharing();
+            $report['services']   = $this->getServices();
+            $report['settings']   = $this->getSettings();
+            $report['status']     = $this->getStatus();
+            $report['apps']       = $this->getApps();
+            $report['sharing']    = $this->getSharing();
             $report['encryption'] = $this->getEncryption();
         }
 
@@ -176,7 +176,6 @@ class ServerReportHelper {
      * @return array
      */
     protected function getServices(): array {
-        $words = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());
         $images = HelperService::getImageHelperName($this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK));
 
         $previewApi = false;
@@ -185,7 +184,7 @@ class ServerReportHelper {
             $previewApi = $this->serviceSettings->get('preview.api')['value'] !== '';
 
             $faviconSetting = $this->serviceSettings->get('favicon.api');
-            $faviconApi = $faviconSetting['value'] !== $faviconSetting['default'];
+            $faviconApi     = $faviconSetting['value'] !== $faviconSetting['default'];
         } catch(ApiException $e) {
         }
 
@@ -194,7 +193,7 @@ class ServerReportHelper {
             'favicons'   => $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT),
             'previews'   => $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT),
             'security'   => $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP),
-            'words'      => $words,
+            'words'      => $this->config->getAppValue('service/words', HelperService::WORDS_AUTO),
             'previewApi' => $previewApi,
             'faviconApi' => $faviconApi
         ];
@@ -232,18 +231,18 @@ class ServerReportHelper {
      */
     protected function getApps(): array {
         $appClass = new OC_App();
-        $apps = $appClass->listAllApps();
-        $data = [];
+        $apps     = $appClass->listAllApps();
+        $data     = [];
         foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate', 'passwords_handbook'] as $app) {
-            $data[$app] = [
+            $data[ $app ] = [
                 'installed' => false,
                 'enabled'   => false
             ];
         }
 
         foreach($apps as $app) {
-            if(isset($data[$app['id']])) {
-                $data[$app['id']] = [
+            if(isset($data[ $app['id'] ])) {
+                $data[ $app['id'] ] = [
                     'installed' => true,
                     'enabled'   => $app['active']
                 ];
@@ -296,8 +295,8 @@ class ServerReportHelper {
         $best = [0, 'none'];
 
         foreach(['SSEv1r1', 'SSEv1r2', 'SSEv2r1', 'none'] as $encryption) {
-            $count = $this->countEntitiesByField($encryption);
-            $data[$encryption] = $count > 0;
+            $count               = $this->countEntitiesByField($encryption);
+            $data[ $encryption ] = $count > 0;
             if($count > $best[0]) $best = [$count, $encryption];
         }
 
@@ -316,8 +315,8 @@ class ServerReportHelper {
         $best = [0, 'none'];
 
         foreach(['CSEv1r1', 'none'] as $encryption) {
-            $count = $this->countEntitiesByField($encryption, 'cse_type');
-            $data[$encryption] = $count > 0;
+            $count               = $this->countEntitiesByField($encryption, 'cse_type');
+            $data[ $encryption ] = $count > 0;
             if($count > $best[0]) $best = [$count, $encryption];
         }
 
@@ -337,8 +336,8 @@ class ServerReportHelper {
     protected function countEntitiesByField($value, $field = 'sse_type'): int {
         try {
             return count($this->tagRevisionMapper->findAllByField($field, $value))
-                + count($this->folderRevisionMapper->findAllByField($field, $value))
-                + count($this->passwordRevisionMapper->findAllByField($field, $value));
+                   + count($this->folderRevisionMapper->findAllByField($field, $value))
+                   + count($this->passwordRevisionMapper->findAllByField($field, $value));
         } catch(Exception $e) {
             return 0;
         }

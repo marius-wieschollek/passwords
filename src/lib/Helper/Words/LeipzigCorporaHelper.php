@@ -94,8 +94,8 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     }
 
     /**
-     * @param int $strength
-     * @param     $data
+     * @param int   $strength
+     * @param array $data
      *
      * @return array
      * @throws Exception

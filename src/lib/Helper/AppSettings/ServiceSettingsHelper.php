@@ -64,6 +64,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'security'    => HelperService::SECURITY_HIBP,
             'preview'     => HelperService::PREVIEW_DEFAULT,
             'favicon'     => HelperService::FAVICON_DEFAULT,
+            'words'       => HelperService::WORDS_AUTO,
             'preview.api' => '',
             'favicon.api' => ''
         ];
@@ -151,11 +152,8 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @throws ApiException
      */
     protected function getSettingDefault(string $setting) {
-        switch($setting) {
-            case 'words':
-                return $this->helperService->getDefaultWordsHelperName();
-            case 'images':
-                return HelperService::getImageHelperName();
+        if($setting == 'images') {
+            return HelperService::getImageHelperName();
         }
 
         return parent::getSettingDefault($setting);
@@ -288,14 +286,19 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     protected function getWordsOptions(): array {
         return [
             $this->generateOptionArray(
-                HelperService::WORDS_LOCAL,
-                $this->localisation->t('Local dictionary'),
-                $this->helperService->getWordsHelper(HelperService::WORDS_LOCAL)->isAvailable()
+                HelperService::WORDS_AUTO,
+                $this->localisation->t('Select automatically'),
+                $this->helperService->getWordsHelper(HelperService::WORDS_AUTO)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_LEIPZIG,
                 $this->localisation->t('Leipzig Corpora Collection (recommended)'),
                 $this->helperService->getWordsHelper(HelperService::WORDS_LEIPZIG)->isAvailable()
+            ),
+            $this->generateOptionArray(
+                HelperService::WORDS_LOCAL,
+                $this->localisation->t('Local dictionary'),
+                $this->helperService->getWordsHelper(HelperService::WORDS_LOCAL)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_SNAKES,

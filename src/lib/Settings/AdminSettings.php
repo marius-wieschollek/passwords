@@ -161,20 +161,26 @@ class AdminSettings implements ISettings {
      * @return array[]
      */
     protected function getWordsServices(): array {
-        $current = $this->config->getAppValue('service/words', $this->helperService->getDefaultWordsHelperName());
+        $current = $this->config->getAppValue('service/words', HelperService::WORDS_AUTO);
 
         return [
             [
-                'id'      => HelperService::WORDS_LOCAL,
-                'label'   => 'Local dictionary',
-                'current' => $current === HelperService::WORDS_LOCAL,
-                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_LOCAL)->isAvailable()
+                'id'      => HelperService::WORDS_AUTO,
+                'label'   => 'Select automatically',
+                'current' => $current === HelperService::WORDS_AUTO,
+                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_AUTO)->isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_LEIPZIG,
                 'label'   => 'Leipzig Corpora Collection (recommended)',
                 'current' => $current === HelperService::WORDS_LEIPZIG,
                 'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_LEIPZIG)->isAvailable()
+            ],
+            [
+                'id'      => HelperService::WORDS_LOCAL,
+                'label'   => 'Local dictionary',
+                'current' => $current === HelperService::WORDS_LOCAL,
+                'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_LOCAL)->isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_SNAKES,
