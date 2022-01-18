@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Encryption\Object;
@@ -12,6 +16,7 @@ use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Db\TagRevision;
+use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -124,6 +129,10 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         foreach($fields as $field) {
             $value          = $object->getProperty($field);
             $encryptedValue = $this->crypto->encrypt($value, $encryptionKey);
+            if($value === $encryptedValue) {
+                throw new InvalidEncryptionResultException();
+            }
+
             $object->setProperty($field, $encryptedValue);
         }
 

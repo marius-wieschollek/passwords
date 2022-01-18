@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Db;
 
+use OCA\Passwords\Exception\Database\DecryptedDataException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
@@ -53,5 +54,31 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
         );
 
         return $this->findEntities($sql);
+    }
+
+    /**
+     * @param AbstractRevision $entity
+     *
+     * @return AbstractRevision
+     */
+    public function insert(Entity $entity): AbstractRevision {
+        if($entity->_isDecrypted()) {
+            throw new DecryptedDataException($entity);
+        }
+
+        return parent::insert($entity);
+    }
+
+    /**
+     * @param AbstractRevision $entity
+     *
+     * @return AbstractRevision
+     */
+    public function update(Entity $entity): AbstractRevision {
+        if($entity->_isDecrypted()) {
+            throw new DecryptedDataException($entity);
+        }
+
+        return parent::update($entity);
     }
 }

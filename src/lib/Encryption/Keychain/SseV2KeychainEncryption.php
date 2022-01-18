@@ -1,14 +1,19 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Encryption\Keychain;
 
 use Exception;
 use OCA\Passwords\Db\Keychain;
+use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
@@ -95,6 +100,11 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
      */
     public function encryptKeychain(Keychain $keychain): Keychain {
         $encryptedData = $this->crypto->encrypt($keychain->getData(), $this->getEncryptionPassword());
+
+        if($encryptedData === $keychain->getData()) {
+            throw new InvalidEncryptionResultException();
+        }
+
         $keychain->setData($encryptedData);
 
         return $keychain;

@@ -48,10 +48,12 @@ abstract class AbstractMapper extends QBMapper {
         parent::__construct($db, static::TABLE_NAME);
         $this->userId = $environment->getUserId();
     }
+
     /**
      * @param Entity|EntityInterface $entity
      *
      * @return Entity|EntityInterface
+     * @throws \OCP\DB\Exception
      */
     public function delete(Entity $entity): Entity {
         if(isset($this->entityCache[ $entity->getUuid() ])) {
@@ -65,6 +67,7 @@ abstract class AbstractMapper extends QBMapper {
      * @param Entity|EntityInterface $entity
      *
      * @return Entity|EntityInterface
+     * @throws \OCP\DB\Exception
      */
     public function insert(Entity $entity): Entity {
         $this->entityCache[ $entity->getUuid() ] = $entity;
@@ -76,6 +79,7 @@ abstract class AbstractMapper extends QBMapper {
      * @param Entity|EntityInterface $entity
      *
      * @return Entity|EntityInterface
+     * @throws \OCP\DB\Exception
      */
     public function update(Entity $entity): Entity {
         $this->entityCache[ $entity->getUuid() ] = $entity;
@@ -111,6 +115,7 @@ abstract class AbstractMapper extends QBMapper {
 
     /**
      * @return EntityInterface[]
+     * @throws \OCP\DB\Exception
      */
     public function findAllDeleted(): array {
         $qb = $this->db->getQueryBuilder();
@@ -132,6 +137,7 @@ abstract class AbstractMapper extends QBMapper {
 
     /**
      * @return EntityInterface[]
+     * @throws \OCP\DB\Exception
      */
     public function findAll(): array {
         $sql = $this->getStatement();

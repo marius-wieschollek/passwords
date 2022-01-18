@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Encryption\Challenge;
@@ -10,6 +14,7 @@ namespace OCA\Passwords\Encryption\Challenge;
 use Exception;
 use OCA\Passwords\Db\Challenge;
 use OCA\Passwords\Encryption\Object\SseV1Encryption;
+use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 
 /**
  * Class SimpleChallengeEncryption
@@ -38,6 +43,10 @@ class SimpleChallengeEncryption extends SseV1Encryption implements ChallengeEncr
         foreach($fields as $field) {
             $value          = $challenge->getProperty($field);
             $encryptedValue = $this->crypto->encrypt($value, $encryptionKey);
+            if($value === $encryptedValue) {
+                throw new InvalidEncryptionResultException();
+            }
+
             $challenge->setProperty($field, $encryptedValue);
         }
 

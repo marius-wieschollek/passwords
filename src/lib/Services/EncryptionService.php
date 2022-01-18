@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -96,13 +100,19 @@ class EncryptionService {
     public function encrypt(RevisionInterface $object): RevisionInterface {
         if(!$object->_isDecrypted()) return $object;
 
-        $object->_setDecrypted(false);
-        if($object->getSseType() === self::SSE_ENCRYPTION_NONE) return $object;
+        if($object->getSseType() === self::SSE_ENCRYPTION_NONE) {
+            $object->_setDecrypted(false);
+
+            return $object;
+        }
         $encryption = $this->getObjectEncryptionByType($object->getSseType());
 
         if(!$encryption->isAvailable()) throw new Exception("Object encryption type {$encryption->getType()} is not available");
 
-        return $encryption->encryptObject($object);
+        $encryptedObject = $encryption->encryptObject($object);
+        $encryptedObject->_setDecrypted(false);
+
+        return $encryptedObject;
     }
 
     /**
@@ -134,9 +144,10 @@ class EncryptionService {
 
         $encryption = $this->getKeychainEncryptionByType($keychain->getType());
         if(!$encryption->isAvailable()) throw new Exception("Keychain encryption type {$encryption->getType()} is not available");
-        $keychain->_setDecrypted(false);
+        $encryptedKeychain = $encryption->encryptKeychain($keychain);
+        $encryptedKeychain->_setDecrypted(false);
 
-        return $encryption->encryptKeychain($keychain);
+        return $encryptedKeychain;
     }
 
     /**
@@ -166,9 +177,10 @@ class EncryptionService {
 
         $encryption = $this->getChallengeEncryptionByType($challenge->getType());
         if(!$encryption->isAvailable()) throw new Exception("Challenge encryption type {$encryption->getType()} is not available");
-        $challenge->_setDecrypted(false);
+        $encryptedChallenge = $encryption->encryptChallenge($challenge);
+        $encryptedChallenge->_setDecrypted(false);
 
-        return $encryption->encryptChallenge($challenge);
+        return $encryptedChallenge;
     }
 
     /**

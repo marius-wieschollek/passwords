@@ -1,13 +1,18 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Encryption\Object;
 
 use Exception;
+use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 
 /**
  * Class SimpleEncryption
@@ -30,9 +35,14 @@ class SimpleEncryption extends SseV1Encryption {
      * @throws Exception
      */
     public function encrypt($string): string {
-        $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
+        $encryptionKey  = $this->getSimpleEncryptionKey($this->userId);
+        $encryptedValue = $this->crypto->encrypt($string, $encryptionKey);
 
-        return $this->crypto->encrypt($string, $encryptionKey);
+        if($string === $encryptedValue) {
+            throw new InvalidEncryptionResultException();
+        }
+
+        return $encryptedValue;
     }
 
     /**
