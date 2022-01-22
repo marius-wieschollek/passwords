@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\Backup;
@@ -186,8 +190,10 @@ class CreateBackupHelper {
      * @param AbstractRevisionMapper|AbstractMapper $revisionMapper
      *
      * @return array
+     * @throws \OCP\DB\Exception
      */
     protected function getModelArray(AbstractMapper $modelMapper, AbstractMapper $revisionMapper): array {
+        $modelMapper->clearEntityCache();
         /** @var Password[] $passwords */
         $passwords = $modelMapper->findAll();
 
@@ -229,8 +235,10 @@ class CreateBackupHelper {
      * @param AbstractMapper $mapper
      *
      * @return array
+     * @throws \OCP\DB\Exception
      */
     protected function getEntityArray(AbstractMapper $mapper): array {
+        $mapper->clearEntityCache();
         $entities = $mapper->findAll();
 
         $entityArray = [];

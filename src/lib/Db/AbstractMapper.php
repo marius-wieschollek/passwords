@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Db;
@@ -25,7 +29,7 @@ abstract class AbstractMapper extends QBMapper {
 
     const TABLE_NAME        = '';
     const ALLOWED_OPERATORS = ['eq', 'neq', 'lt', 'gt', 'lte', 'gte'];
-    const FORBIDDEN_FIELDS    = [];
+    const FORBIDDEN_FIELDS  = [];
 
     /**
      * @var string|null
@@ -199,7 +203,7 @@ abstract class AbstractMapper extends QBMapper {
     }
 
     /**
-     *
+     * Clears the entity cache
      */
     public function clearEntityCache(): void {
         $this->entityCache = [];
