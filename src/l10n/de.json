@@ -183,7 +183,8 @@
         "Restore backups automatically when database wiped"                                         : "Backups automatisch wiederherstellen wenn die Datenbank gelöscht wurde",
         "Passwords ends updates for Nextcloud %s"                                                   : "Passwörter beendet Updates für Nextcloud %s",
         "%s is the final update of Passwords for Nextcloud %s."                                     : "%s ist das letzte Update von Passwörter für Nextcloud %s.",
-        "Future updates will require Nextcloud %s and PHP %s or PHP %s for the LSR version."        : "Zukünftige Updates benötigen Nextcloud %s und PHP %s oder PHP %s für die LSR-Version."
+        "Future updates will require Nextcloud %s and PHP %s or PHP %s for the LSR version."        : "Zukünftige Updates benötigen Nextcloud %s und PHP %s oder PHP %s für die LSR-Version.",
+        "Select automatically"                                                                      : "Automatisch auswählen"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
