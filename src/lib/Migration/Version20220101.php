@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -23,11 +23,11 @@ use OCP\Migration\SimpleMigrationStep;
 use Doctrine\DBAL\Schema\SchemaException;
 
 /**
- * Class Version20210800
+ * Class Version20220101
  *
  * @package OCA\Passwords\Migration
  */
-class Version20210800 extends SimpleMigrationStep {
+class Version20220101 extends SimpleMigrationStep {
 
     /**
      * @var IDBConnection
@@ -40,7 +40,7 @@ class Version20210800 extends SimpleMigrationStep {
     protected UuidHelper    $uuidHelper;
 
     /**
-     * Version20210800 constructor.
+     * Version20220101 constructor.
      *
      * @param IDBConnection $db
      * @param UuidHelper    $uuidHelper
@@ -85,6 +85,7 @@ class Version20210800 extends SimpleMigrationStep {
      *
      * @return null|ISchemaWrapper
      * @throws SchemaException
+     * @throws Exception
      */
     public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ?ISchemaWrapper {
         /** @var ISchemaWrapper $schema */
@@ -147,6 +148,9 @@ class Version20210800 extends SimpleMigrationStep {
             if($schema->hasTable($oldTable) && $schema->hasTable($newTable)) {
                 $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
                 $uuids = $this->getMigratedUuids($newTable);
+                if(!empty($uuids) && $this->tablesMigrated()) {
+                    return;
+                }
 
                 $result = $select->executeQuery();
 
@@ -199,6 +203,22 @@ class Version20210800 extends SimpleMigrationStep {
         }
 
         return $uuids;
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    protected function tablesMigrated(): bool {
+        $qb = $this->db->getQueryBuilder();
+        $select = $qb->select('a.*')
+                     ->from('migrations', 'a')
+                                    ->where($qb->expr()->eq('a.app', 'passwords'))
+                                    ->where($qb->expr()->eq('a.version', '20210800'));
+
+        $result = $select->executeQuery();
+
+        return $result->rowCount() > 0;
     }
 
     /**
@@ -1678,6 +1698,7 @@ class Version20210800 extends SimpleMigrationStep {
      * @param IOutput        $output
      *
      * @throws SchemaException
+     * @throws Exception
      */
     protected function createShareTable(ISchemaWrapper $schema, IOutput $output): void {
         if(!$schema->hasTable('passwords_share')) {
@@ -1685,6 +1706,27 @@ class Version20210800 extends SimpleMigrationStep {
             $table = $schema->createTable('passwords_share');
         } else {
             $table = $schema->getTable('passwords_share');
+
+            if($table->hasColumn('pwid')) {
+                $qb = $this->db->getQueryBuilder();
+                $delete = $this->db->getQueryBuilder()
+                         ->delete()
+                         ->from('passwords_share', 'a')
+                          ->where($qb->expr()->isNotNull('a.pwid'));
+                $delete->executeQuery();
+
+                $output->info('Removing column pwid from table passwords_share');
+                $table->dropColumn('pwid');
+            }
+
+            if($table->hasColumn('sharedto')) {
+                $output->info('Removing column sharedto from table passwords_share');
+                $table->dropColumn('sharedto');
+            }
+            if($table->hasColumn('sharekey')) {
+                $output->info('Removing column sharekey from table passwords_share');
+                $table->dropColumn('sharekey');
+            }
         }
 
         if(!$table->hasColumn('id')) {

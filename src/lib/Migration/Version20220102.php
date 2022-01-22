@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -21,11 +21,11 @@ use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
 /**
- * Class Version20210802
+ * Class Version20220102
  *
  * @package OCA\Passwords\Migration
  */
-class Version20210802 extends SimpleMigrationStep {
+class Version20220102 extends SimpleMigrationStep {
 
     /**
      * @var IDBConnection
@@ -38,7 +38,7 @@ class Version20210802 extends SimpleMigrationStep {
     protected IConfig $config;
 
     /**
-     * Version20210802 constructor.
+     * Version20220102 constructor.
      *
      * @param IDBConnection $db
      * @param IConfig       $config
