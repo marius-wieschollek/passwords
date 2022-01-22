@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\AppSettings;
@@ -68,7 +72,7 @@ abstract class AbstractSettingsHelper {
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return array
      * @throws ApiException
@@ -210,11 +214,7 @@ abstract class AbstractSettingsHelper {
         }
 
         if($type === null) {
-            if(isset($this->types[ $key ])) {
-                $type = $this->types[ $key ];
-            } else {
-                $type = 'select:string';
-            }
+            $type = $this->types[ $key ] ?? 'select:string';
         }
         if($type === 'boolean') $value = $value === '1';
 
@@ -224,7 +224,8 @@ abstract class AbstractSettingsHelper {
             $options,
             $default,
             $isDefault,
-            $type
+            $type,
+            $this->getSettingDepends($key)
         );
     }
 
@@ -237,6 +238,11 @@ abstract class AbstractSettingsHelper {
     protected function getSettingKey(string $setting): string {
         if(isset($this->keys[ $setting ])) {
             return $this->keys[ $setting ];
+        }
+
+        $optionsFunc = 'get'.str_replace(' ', '', ucwords(str_replace('.', ' ', $setting))).'Key';
+        if(method_exists($this, $optionsFunc)) {
+            return $this->{$optionsFunc}($setting);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -253,7 +259,31 @@ abstract class AbstractSettingsHelper {
             return $this->defaults[ $setting ];
         }
 
+        $optionsFunc = 'get'.str_replace(' ', '', ucwords(str_replace('.', ' ', $setting))).'Defaults';
+        if(method_exists($this, $optionsFunc)) {
+            return $this->{$optionsFunc}($setting);
+        }
+
         throw new ApiException('Unknown setting identifier', 400);
+    }
+
+    /**
+     * @param string $setting
+     *
+     * @return array
+     * @throws ApiException
+     */
+    protected function getSettingDepends(string $setting): array {
+        if(isset($this->depends[ $setting ])) {
+            return $this->depends[ $setting ];
+        }
+
+        $optionsFunc = 'get'.str_replace(' ', '', ucwords(str_replace('.', ' ', $setting))).'Depends';
+        if(method_exists($this, $optionsFunc)) {
+            return $this->{$optionsFunc}($setting);
+        }
+
+        return [];
     }
 
     /**

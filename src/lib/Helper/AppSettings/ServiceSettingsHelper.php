@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2022 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -18,6 +18,8 @@ use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
+use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCP\IL10N;
@@ -49,11 +51,13 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $keys
         = [
-            'security' => 'service/security',
-            'words'    => 'service/words',
-            'images'   => 'service/images',
-            'preview'  => 'service/preview',
-            'favicon'  => 'service/favicon'
+            'security'           => 'service/security',
+            'words'              => 'service/words',
+            'images'             => 'service/images',
+            'preview'            => 'service/preview',
+            'favicon'            => 'service/favicon',
+            'security.hibp.url'  => HaveIBeenPwnedHelper::CONFIG_SERVICE_URL,
+            'security.local.url' => BigLocalDbSecurityCheckHelper::CONFIG_DB_SOURCE
         ];
 
     /**
@@ -61,12 +65,60 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $defaults
         = [
-            'security'    => HelperService::SECURITY_HIBP,
-            'preview'     => HelperService::PREVIEW_DEFAULT,
-            'favicon'     => HelperService::FAVICON_DEFAULT,
-            'words'       => HelperService::WORDS_AUTO,
-            'preview.api' => '',
-            'favicon.api' => ''
+            'security'           => HelperService::SECURITY_HIBP,
+            'preview'            => HelperService::PREVIEW_DEFAULT,
+            'favicon'            => HelperService::FAVICON_DEFAULT,
+            'words'              => HelperService::WORDS_AUTO,
+            'preview.api'        => '',
+            'favicon.api'        => '',
+            'security.hibp.url'  => null,
+            'security.local.url' => null
+        ];
+
+    /**
+     * @var array
+     */
+    protected array $types
+        = [
+            'preview.api'        => 'string',
+            'favicon.api'        => 'string',
+            'security.hibp.url'  => 'string',
+            'security.local.url' => 'string'
+        ];
+
+    /**
+     * @var array
+     */
+    protected array $depends
+        = [
+            'preview.api'        =>
+                [
+                    'service.preview' => [
+                        HelperService::PREVIEW_SCREEENLY,
+                        HelperService::PREVIEW_BROW_SHOT,
+                        HelperService::PREVIEW_SCREEN_SHOT_LAYER,
+                        HelperService::PREVIEW_SCREEN_SHOT_MACHINE
+                    ]
+                ],
+            'favicon.api'        =>
+                [
+                    'service.favicon' => [HelperService::FAVICON_BESTICON]
+                ],
+            'security.hibp.url'  =>
+                [
+                    'service.security' => [
+                        HelperService::SECURITY_HIBP,
+                        HelperService::SECURITY_BIGDB_HIBP
+                    ]
+                ],
+            'security.local.url' =>
+                [
+                    'service.favicon' => [
+                        HelperService::SECURITY_BIG_LOCAL,
+                        HelperService::SECURITY_SMALL_LOCAL,
+                        HelperService::SECURITY_BIGDB_HIBP
+                    ]
+                ],
         ];
 
     /**
@@ -94,7 +146,9 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 $this->get('preview'),
                 $this->get('security'),
                 $this->get('favicon.api'),
-                $this->get('preview.api')
+                $this->get('preview.api'),
+                $this->get('security.hibp.url'),
+                $this->get('security.local.url')
             ];
         } catch(ApiException $e) {
             return [];
@@ -110,19 +164,15 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     public function get(string $key): array {
         switch($key) {
             case 'words':
-                return $this->getGenericSetting('words');
             case 'images':
-                return $this->getGenericSetting('images');
             case 'favicon':
-                return $this->getGenericSetting('favicon');
             case 'preview':
-                return $this->getGenericSetting('preview');
             case 'security':
-                return $this->getGenericSetting('security');
             case 'favicon.api':
-                return $this->getFaviconApiSetting();
             case 'preview.api':
-                return $this->getPreviewApiSetting();
+            case 'security.hibp.url':
+            case 'security.local.url':
+                return $this->getGenericSetting($key);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -134,24 +184,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return string
      * @throws ApiException
      */
-    protected function getSettingKey(string $setting): string {
-        switch($setting) {
-            case 'preview.api':
-                return $this->getPreviewApiSettingKey();
-            case 'favicon.api':
-                return $this->getFaviconApiSettingKey();
-        }
-
-        return parent::getSettingKey($setting);
-    }
-
-    /**
-     * @param string $setting
-     *
-     * @return string
-     * @throws ApiException
-     */
-    protected function getSettingDefault(string $setting) {
+    protected function getSettingDefault(string $setting): string {
         if($setting == 'images') {
             return HelperService::getImageHelperName();
         }
@@ -160,29 +193,8 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     }
 
     /**
-     * @return array
-     */
-    protected function getFaviconApiSetting(): array {
-        $configKey = $this->getFaviconApiSettingKey();
-        $default   = $this->getFaviconApiSettingDefault();
-        $value     = $this->config->getAppValue($configKey, $default);
-        $isDefault = !$this->config->hasAppValue($configKey);
-
-        return $this->generateSettingArray(
-            'favicon.api',
-            $value,
-            [],
-            $default,
-            $isDefault,
-            'string',
-            [
-                'service.favicon' => [HelperService::FAVICON_BESTICON]
-            ]
-        );
-    }
-
-    /**
      * @return string
+     * @noinspection PhpUnused
      */
     protected function getFaviconApiSettingKey(): string {
         $service = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
@@ -196,39 +208,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
     /**
      * @return string
-     */
-    protected function getFaviconApiSettingDefault(): string {
-        return '';
-    }
-
-    /**
-     * @return array
-     */
-    protected function getPreviewApiSetting(): array {
-        $configKey = $this->getPreviewApiSettingKey();
-        $value     = $this->config->getAppValue($configKey, '');
-        $isDefault = !$this->config->hasAppValue($configKey);
-
-        return $this->generateSettingArray(
-            'preview.api',
-            $value,
-            [],
-            '',
-            $isDefault,
-            'string',
-            [
-                'service.preview' => [
-                    HelperService::PREVIEW_SCREEENLY,
-                    HelperService::PREVIEW_BROW_SHOT,
-                    HelperService::PREVIEW_SCREEN_SHOT_LAYER,
-                    HelperService::PREVIEW_SCREEN_SHOT_MACHINE
-                ]
-            ]
-        );
-    }
-
-    /**
-     * @return string
+     * @noinspection PhpUnused
      */
     protected function getPreviewApiSettingKey(): string {
         $service = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
@@ -282,6 +262,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
     /**
      * @return array
+     * @noinspection PhpUnused
      */
     protected function getWordsOptions(): array {
         return [
@@ -315,6 +296,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
     /**
      * @return array
+     * @noinspection PhpUnused
      */
     protected function getFaviconOptions(): array {
         return [
@@ -347,6 +329,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
     /**
      * @return array
+     * @noinspection PhpUnused
      */
     protected function getPreviewOptions(): array {
         return [
@@ -379,6 +362,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
 
     /**
      * @return array
+     * @noinspection PhpUnused
      */
     protected function getImagesOptions(): array {
         return [
