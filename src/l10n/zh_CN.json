@@ -78,7 +78,6 @@
         "looking for the documentation"                                                             : "查询文档",
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s 还是 %s？我们都考虑到了！",
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s 已不再受到支持。",
-        "Support for %1$s %2$s will be discontinued in version %3$s."                               : "对于 %1$s %2$s 的支持将在版本 %3$s 后停止。",
         "Passwords requires HTTPS."                                                                 : "密码需要 HTTPS。",
         "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "使用 %s 来执行后台任务可能导致延迟。我们推荐使用 Cron。",
         "Please check the system requirements."                                                     : "请检查系统需求。",
@@ -150,10 +149,7 @@
         "To prevent further attempts, password based API authentication has been disabled."         : "为防止进一步尝试，已禁用基于密码的 API 身份验证。",
         "To enable it again, log in with the webapp or any client using token authentication."      : "要再次启用它，请通过 Webapp 或任何使用令牌的客户端登录。",
         "If you don't know this client, please change your master password and Nextcloud password." : "如果您不认识此客户端，请更改您的主密码和 Nextcloud 密码。",
-        "To increase security, we recommend using device specific tokens instead of your password." : "为了提高安全性，我们建议使用设备特定的令牌代替密码。",
-        "The passwords app will discontinue updates for your platform"                              : "密码应用将不再支持您的服务器配置",
-        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "即将到来的密码应用版本 %s 需要最低版本为 %s 的 Nextcloud 和 PHP %s。",
-        "We recommend that you update your server so you don't miss out on future updates."         : "为了继续接收安全性和功能更新，请更新您的服务器。"
+        "To increase security, we recommend using device specific tokens instead of your password." : "为了提高安全性，我们建议使用设备特定的令牌代替密码。"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

@@ -78,7 +78,6 @@
         "looking for the documentation"                                                             : "cerqueu la documentació",
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s o %s? Podem ajudar-vos!",
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s ha deixat de tenir suport.",
-        "Support for %1$s %2$s will be discontinued in version %3$s."                               : "%1$s %2$s deixarà de tenir suport a partir de la versió %3$s.",
         "Passwords requires HTTPS."                                                                 : "L'aplicació Contrasenyes requereix emprar HTTPS.",
         "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "L'ús de %s per executar tasques en segon pla pot provocar retards. Recomanem utilitzar Cron.",
         "Please check the system requirements."                                                     : "Reviseu els requeriments del sistema.",
@@ -150,10 +149,7 @@
         "To prevent further attempts, password based API authentication has been disabled."         : "Per evitar més intents, s'ha desactivat l'autenticació de l'API emprant contrasenya.",
         "To enable it again, log in with the webapp or any client using token authentication."      : "Per tornar-lo a activar, inicieu sessió amb l'aplicació web o amb qualsevol client mitjançant l'autenticació amb token.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Si no coneixeu aquest client, canvieu la contrasenya mestra i la contrasenya de Nextcloud.",
-        "To increase security, we recommend using device specific tokens instead of your password." : "Per augmentar la seguretat, us recomanem utilitzar tokens específics per dispositiu en lloc de la vostra contrasenya.",
-        "The passwords app will discontinue updates for your platform"                              : "L'aplicació Contrasenyes interromprà les actualitzacions per la vostra plataforma",
-        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "L'aplicació Contrasenyes %s elevarà els requisits mínims del sistema a Nextcloud %s i PHP %s.",
-        "We recommend that you update your server so you don't miss out on future updates."         : "Us recomanem actualitzar el vostre servidor perquè no us perdeu futures actualitzacions."
+        "To increase security, we recommend using device specific tokens instead of your password." : "Per augmentar la seguretat, us recomanem utilitzar tokens específics per dispositiu en lloc de la vostra contrasenya."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

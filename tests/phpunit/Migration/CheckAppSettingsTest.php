@@ -196,7 +196,7 @@ class CheckAppSettingsTest extends TestCase {
         $this->notificationService
             ->expects($this->once())
             ->method('sendUpgradeRequiredNotification')
-            ->with('admin', SystemRequirements::APP_BC_BREAK, SystemRequirements::NC_UPGRADE_RECOMMENDATION, SystemRequirements::PHP_UPGRADE_RECOMMENDATION);
+            ->with('admin');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
@@ -231,7 +231,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'none']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_RECOMMENDATION.'.0.0.0');
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -254,7 +254,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => '', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_RECOMMENDATION.'.0.0.0');
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -275,7 +275,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
 
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_RECOMMENDATION.'.0.0.0');
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         $this->configurationService->expects($this->once())->method('getAppValue')->with('nightly/enabled', '0')->willReturn('1');
         $this->backgroundService->expects($this->once())->method('addNightlyUpdates');
 
@@ -299,7 +299,7 @@ class CheckAppSettingsTest extends TestCase {
             ]
         );
 
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_RECOMMENDATION.'.0.0.0');
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         $this->configurationService->expects($this->once())->method('getAppValue')->with('nightly/enabled', '0')->willReturn('0');
         $this->backgroundService->expects($this->never())->method('addNightlyUpdates');
 

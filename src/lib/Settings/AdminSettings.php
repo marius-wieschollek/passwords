@@ -419,23 +419,18 @@ class AdminSettings implements ISettings {
             'https'   => $this->request->getHttpProtocol() === 'https',
             'lsr'     => SystemRequirements::APP_LSR,
             'php'     => [
-                'warn'    => PHP_VERSION_ID < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
                 'error'   => PHP_VERSION_ID < SystemRequirements::PHP_MINIMUM_ID,
                 'version' => phpversion()
             ],
             'cronPhp' => [
                 'isDifferent' => PHP_VERSION_ID - $cronPhpId > 99 || $cronPhpId - PHP_VERSION_ID > 99,
-                'warn'        => $cronPhpId < SystemRequirements::PHP_DEPRECATION_WARNING_ID,
                 'error'       => $cronPhpId < SystemRequirements::PHP_MINIMUM_ID,
-                'cronVersion' => $cronPhpString,
-                'webVersion'  => phpversion()
+                'cronVersion' => $cronPhpString
             ],
             'server'  => [
-                'warn'    => $ncVersion < SystemRequirements::NC_DEPRECATION_WARNING_ID,
                 'error'   => $ncVersion < SystemRequirements::NC_MINIMUM_ID,
                 'version' => $ncVersion
-            ],
-            'eol'     => SystemRequirements::APP_BC_BREAK
+            ]
         ];
     }
 

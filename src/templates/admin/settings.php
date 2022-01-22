@@ -32,12 +32,6 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
     </h2>
 </header>
 <section class="section passwords">
-    <?php if($_['support']['lsr']): ?>
-        <div class="message error">
-            <?php p($l->t('This server uses a legacy support release because it does not meet the system requirements and is no longer supported.')); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
-        </div>
-    <?php endif; ?>
     <?php if($_['support']['php']['error']): ?>
         <div class="message error">
             <?php p($l->t('%1$s %2$s is no longer supported.', ['PHP', $_['support']['php']['version']])); ?>
@@ -63,35 +57,23 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
         </div>
     <?php endif; ?>
 
-
-    <?php if($_['support']['php']['warn'] && !$_['support']['php']['error']): ?>
-        <div class="message warn">
-            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['PHP', $_['support']['php']['version'], $_['support']['eol']])); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
-        </div>
-    <?php endif; ?>
-    <?php if($_['support']['cronPhp']['warn'] && !$_['support']['php']['warn'] && !$_['support']['cronPhp']['error']): ?>
-        <div class="message warn">
-            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['PHP', $_['support']['cronPhp']['cronVersion'], $_['support']['eol']])); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
-        </div>
-    <?php endif; ?>
     <?php if($_['support']['cronPhp']['isDifferent']): ?>
         <div class="message warn">
-            <?php p($l->t('The last background job was executed with PHP %1$s, but the webserver uses PHP %2$s.', [$_['support']['cronPhp']['cronVersion'], $_['support']['cronPhp']['webVersion']])); ?>
+            <?php p($l->t('The last background job was executed with PHP %1$s, but the webserver uses PHP %2$s.', [$_['support']['cronPhp']['cronVersion'], $_['support']['php']['version']])); ?>
             <?php p($l->t('Using different major versions of PHP may cause issues.')); ?>
-        </div>
-    <?php endif; ?>
-    <?php if($_['support']['server']['warn'] && !$_['support']['server']['error']): ?>
-        <div class="message warn">
-            <?php p($l->t('Support for %1$s %2$s will be discontinued in version %3$s.', ['Nextcloud', $_['support']['server']['version'], $_['support']['eol']])); ?>
-            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
         </div>
     <?php endif; ?>
     <?php if($_['support']['cron'] !== 'cron'): ?>
         <div class="message warn">
             <?php p($l->t('Using %s to execute background jobs may cause delays. We recommend using Cron.', ucfirst($_['support']['cron']))); ?>
             <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Please check the system requirements.')); ?></a>
+        </div>
+    <?php endif; ?>
+    <?php if($_['support']['lsr']): ?>
+        <div class="message warn">
+            <?php p($l->t('You are using a legacy support release of the passwords app.')); ?>
+            <?php p($l->t('The developers do not provide support for legacy support releases.')); ?>
+            <a target="_blank" rel="noreferrer noopener" href="<?=$_['links']['requirements']?>"><?php p($l->t('Upgrade your server to use the regular version.')); ?></a>
         </div>
     <?php endif; ?>
 

@@ -78,7 +78,6 @@
         "looking for the documentation"                                                             : "buscas la documentación",
         "%s, %s or %s? We've got you covered!"                                                      : "¿%s, %s o %s? ¡Podemos ayudarte!",
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s ha dejado de tener soporte.",
-        "Support for %1$s %2$s will be discontinued in version %3$s."                               : "%1$s %2$s dejará de tener soporte a partir de la versión %3$s.",
         "Passwords requires HTTPS."                                                                 : "La aplicación Contraseñas requiere usar HTTPS.",
         "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "Las tareas en segundo plano con %s pueden tardar mucho. Recomendamos usar Cron.",
         "Please check the system requirements."                                                     : "Por favor, revisa los requerimientos del sistema.",
@@ -150,10 +149,7 @@
         "To prevent further attempts, password based API authentication has been disabled."         : "Para prevenir nuevos intentos, ha sido deshabilitada la autentificación por contraseña de la API.",
         "To enable it again, log in with the webapp or any client using token authentication."      : "Para activarla de nuevo, puedes acceder con la webapp o cualquier cliente con un token válido.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Si no conoces este cliente/dispositivo, por favor cambia la contraseña maestra y la de Nextcloud.",
-        "To increase security, we recommend using device specific tokens instead of your password." : "Para mejorar la seguridad, recomendamos usar tokens específicos para cada dispositivo, en lugar de contraseñas.",
-        "The passwords app will discontinue updates for your platform"                              : "La app Contraseñas ha dejado de soportar la configuración de tu servidor",
-        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "La nueva versión de la app Contraseñas %s va a requerir al menos la versión %s de Nextcloud y la versión %s de PHP.",
-        "We recommend that you update your server so you don't miss out on future updates."         : "Para seguir recibiendo noticias sobre seguridad y funcionalidades, por favor actualiza tu servidor."
+        "To increase security, we recommend using device specific tokens instead of your password." : "Para mejorar la seguridad, recomendamos usar tokens específicos para cada dispositivo, en lugar de contraseñas."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }

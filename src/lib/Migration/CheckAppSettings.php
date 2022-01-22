@@ -12,15 +12,15 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
-use OCP\Migration\IOutput;
-use OCP\Migration\IRepairStep;
-use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
-use OCA\Passwords\Services\NotificationService;
 use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Services\HelperService;
+use OCA\Passwords\Services\NotificationService;
+use OCP\Migration\IOutput;
+use OCP\Migration\IRepairStep;
 
 /**
  * Class CheckAppSettings
@@ -64,16 +64,16 @@ class CheckAppSettings implements IRepairStep {
      * @param BackgroundJobService  $backgroundJobService
      */
     public function __construct(
-        AdminUserHelper $adminHelper,
-        ConfigurationService $config,
-        NotificationService $notifications,
+        AdminUserHelper       $adminHelper,
+        ConfigurationService  $config,
+        NotificationService   $notifications,
         ServiceSettingsHelper $serviceSettings,
-        BackgroundJobService $backgroundJobService
+        BackgroundJobService  $backgroundJobService
     ) {
-        $this->config = $config;
-        $this->adminHelper = $adminHelper;
-        $this->notifications = $notifications;
-        $this->serviceSettings = $serviceSettings;
+        $this->config               = $config;
+        $this->adminHelper          = $adminHelper;
+        $this->notifications        = $notifications;
+        $this->serviceSettings      = $serviceSettings;
         $this->backgroundJobService = $backgroundJobService;
     }
 
@@ -97,23 +97,23 @@ class CheckAppSettings implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output) {
-        $faviconSetting = $this->serviceSettings->get('favicon');
+        $faviconSetting    = $this->serviceSettings->get('favicon');
         $faviconApiSetting = $this->serviceSettings->get('favicon.api');
 
         if($faviconSetting['value'] === HelperService::FAVICON_BESTICON) {
-            if(strpos($faviconApiSetting['value'], 'passwords-app-favicons.herokuapp.com') !== false) {
+            if(str_contains($faviconApiSetting['value'], 'passwords-app-favicons.herokuapp.com')) {
                 $this->serviceSettings->reset('favicon.api');
             }
         }
 
-        $previewSetting = $this->serviceSettings->get('preview');
+        $previewSetting    = $this->serviceSettings->get('preview');
         $previewApiSetting = $this->serviceSettings->get('preview.api');
         if(empty($previewApiSetting['value']) && in_array($previewSetting['value'], $previewApiSetting['depends']['service.preview'])) {
             $this->sendEmptySettingNotification('preview');
         }
 
         $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
-        if($ncVersion < SystemRequirements::NC_DEPRECATION_NOTIFICATION_ID || PHP_VERSION_ID < SystemRequirements::PHP_DEPRECATION_NOTIFICATION_ID) {
+        if($ncVersion < SystemRequirements::NC_NOTIFICATION_ID || PHP_VERSION_ID < SystemRequirements::PHP_NOTIFICATION_ID) {
             $this->sendDeprecatedPlatformNotification();
         }
 
@@ -137,10 +137,7 @@ class CheckAppSettings implements IRepairStep {
     protected function sendDeprecatedPlatformNotification(): void {
         foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendUpgradeRequiredNotification(
-                $admin->getUID(),
-                SystemRequirements::APP_BC_BREAK,
-                SystemRequirements::NC_UPGRADE_RECOMMENDATION,
-                SystemRequirements::PHP_UPGRADE_RECOMMENDATION
+                $admin->getUID()
             );
         }
     }

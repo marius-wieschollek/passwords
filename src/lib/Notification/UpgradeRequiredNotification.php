@@ -8,7 +8,12 @@
 namespace OCA\Passwords\Notification;
 
 use Exception;
+use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Services\ConfigurationService;
 use OCP\IL10N;
+use OCP\IURLGenerator;
+use OCP\L10N\IFactory;
+use OCP\Notification\IManager;
 use OCP\Notification\INotification;
 
 /**
@@ -21,6 +26,22 @@ class UpgradeRequiredNotification extends AbstractNotification {
     const NAME                           = 'upgrade_required';
     const TYPE                           = 'admin';
     const MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Notifications/Platform-Support-Notification';
+
+    /**
+     * @var ConfigurationService
+     */
+    protected ConfigurationService $config;
+
+    /**
+     * @param IFactory             $l10nFactory
+     * @param IURLGenerator        $urlGenerator
+     * @param IManager             $notificationManager
+     * @param ConfigurationService $config
+     */
+    public function __construct(IFactory $l10nFactory, IURLGenerator $urlGenerator, IManager $notificationManager, ConfigurationService $config) {
+        parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
+        $this->config = $config;
+    }
 
     /**
      * Send the notification
@@ -50,8 +71,10 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        $title   = $this->getTitle($localisation);
-        $message = $this->getMessage($localisation, $notification->getSubjectParameters());
+        $ncVersion = explode('.', $this->config->getSystemValue('version'), 2)[0];
+
+        $title   = $this->getTitle($localisation, $ncVersion);
+        $message = $this->getMessage($localisation, $ncVersion);
         $this->processLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS, $localisation->t('More information'));
 
         return $notification
@@ -61,25 +84,38 @@ class UpgradeRequiredNotification extends AbstractNotification {
     }
 
     /**
-     * @param IL10N $localisation
+     * @param IL10N  $localisation
+     * @param string $ncVersion
      *
      * @return string
      */
-    protected function getTitle(IL10N $localisation): string {
-        return $localisation->t('The passwords app will discontinue updates for your platform');
+    protected function getTitle(IL10N $localisation, string $ncVersion): string {
+        return $localisation->t('Passwords ends updates for Nextcloud %s', [$ncVersion]);
     }
 
     /**
-     * @param IL10N $localisation
-     * @param array $params
+     * @param IL10N  $localisation
+     * @param string $ncVersion
      *
      * @return string
      */
-    protected function getMessage(IL10N $localisation, array $params): string {
-        return $localisation->t('Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s.', $params).
-               ' '.
-               $localisation->t('We recommend that you update your server so you don\'t miss out on future updates.').
-               ' '.
-               $localisation->t('Your installed version will continue to work regardless and you can still use it as it is.');
+    protected function getMessage(IL10N $localisation, string $ncVersion): string {
+        return
+            $localisation->t(
+                '%s is the final update of Passwords for Nextcloud %s.',
+                [
+                    $this->config->getAppValue('installed_version'),
+                    $ncVersion,
+                ]
+            ).
+            ' '.
+            $localisation->t(
+                'Future updates will require Nextcloud %s and PHP %s or PHP %s for the LSR version.',
+                [
+                    SystemRequirements::NC_UPGRADE_MINIMUM,
+                    SystemRequirements::PHP_UPGRADE_MINIMUM,
+                    SystemRequirements::PHP_UPGRADE_MINIMUM_LSR,
+                ]
+            );
     }
 }

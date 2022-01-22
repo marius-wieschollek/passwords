@@ -78,7 +78,6 @@
         "looking for the documentation"                                                             : "letar efter dokumentationen",
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s eller %s? Vi kan hjälpa till!",
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s stöds inte längre.",
-        "Support for %1$s %2$s will be discontinued in version %3$s."                               : "Stöd för %1$s %2$s kommer att upphöra i version %3$s.",
         "Passwords requires HTTPS."                                                                 : "Lösenordsappen kräver https.",
         "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "Användande av %s kan orsaka långa väntetider.",
         "Please check the system requirements."                                                     : "Kontrollera systemkrav.",

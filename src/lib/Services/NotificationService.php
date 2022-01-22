@@ -271,15 +271,12 @@ class NotificationService implements INotifier {
 
     /**
      * @param string $userId
-     * @param string $release
-     * @param string $ncVersion
-     * @param string $phpVersion
      */
-    public function sendUpgradeRequiredNotification(string $userId, string $release, string $ncVersion, string $phpVersion): void {
+    public function sendUpgradeRequiredNotification(string $userId): void {
         $this->sendNotification(
             $this->upgradeRequiredNotification,
             $userId,
-            [$release, $ncVersion, $phpVersion]
+            []
         );
     }
 

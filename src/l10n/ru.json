@@ -63,7 +63,6 @@
         "looking for the documentation"                                                             : "ищете документацию",
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s или %s? Обязательно поможем!",
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s больше не поддерживается.",
-        "Support for %1$s %2$s will be discontinued in version %3$s."                               : "Поддержка %1$s %2$s будет прекращена с версии %3$s.",
         "Passwords requires HTTPS."                                                                 : "Приложение работает только по протоколу HTTPS.",
         "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "Использование %s для выполнения фоновых заданий может привести к длительному времени ожидания. Мы рекомендуем использовать Cron.",
         "Please check the system requirements."                                                     : "Пожалуйста, проверьте системные требования.",

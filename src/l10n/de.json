@@ -81,7 +81,6 @@
         "looking for the documentation"                                                             : "auf der Suche nach der Dokumentation",
         "%s, %s or %s? We've got you covered!"                                                      : "%s, %s oder %s? Da können wir helfen!",
         "%1$s %2$s is no longer supported."                                                         : "%1$s %2$s wird nicht mehr unterstützt.",
-        "Support for %1$s %2$s will be discontinued in version %3$s."                               : "%1$s %2$s wird ab Version %3$s nicht mehr unterstützt.",
         "Passwords requires HTTPS."                                                                 : "Passwörter benötigt HTTPS.",
         "Using %s to execute background jobs may cause delays. We recommend using Cron."            : "Hintergrundaufgaben mit %s auszuführen kann lange Wartezeiten verursachen. Wir empfehlen Cron zu verwenden.",
         "Please check the system requirements."                                                     : "Bitte sieh dir unsere Systemanforderungen an.",
@@ -156,10 +155,6 @@
         "To enable it again, log in with the webapp or any client using token authentication."      : "Um diese wieder zu aktivieren, melde dich mit der Webapp oder einem beliebigen Client über die Token-Authentifizierung an.",
         "If you don't know this client, please change your master password and Nextcloud password." : "Wenn du dieses Gerät nicht kennst, ändere bitte dein Master-Passwort und dein Nextcloud-Passwort.",
         "To increase security, we recommend using device specific tokens instead of your password." : "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden.",
-        "The passwords app will discontinue updates for your platform"                              : "Passwörter wird bald keine Updates für deine Plattform mehr anbieten",
-        "Passwords %s will raise the minimum system requirements to Nextcloud %s and PHP %s."       : "Mit Passwörter %s werden die Systemanforderungen auf Nextcloud %s und PHP %s angehoben.",
-        "We recommend that you update your server so you don't miss out on future updates."         : "Wir empfehlen dir, deinen Server zu aktialisieren um keine wichtigen Updates zu verpassen.",
-        "Your installed version will continue to work regardless and you can still use it as it is.": "Die installierte Version wird nach wie vor funktionieren und du kannst sie so wie bisher verwenden.",
         "More information"                                                                          : "Mehr Informationen",
         "View insecure passwords"                                                                   : "Zeige unsichere Passwörter",
         "Open settings"                                                                             : "Einstellungen öffnen",
@@ -185,7 +180,10 @@
         "Because of this, the app backup \"%s\" was restored automatically."                        : "Daher wurde das App-Backup \"%s\" automatisch wiederhergestellt.",
         "If this was an error, a backup of the database was made before restoring it."              : "Sollte dies ein Fehler gewesen sein, wurde ein Backup vor dem Wiederherstellen erstellt.",
         "You can disable automatic backup restoring in the app settings."                           : "Das automatische Wiederherstellen kann in den Einstellungen deaktiviert werden.",
-        "Restore backups automatically when database wiped"                                         : "Backups automatisch wiederherstellen wenn die Datenbank gelöscht wurde"
+        "Restore backups automatically when database wiped"                                         : "Backups automatisch wiederherstellen wenn die Datenbank gelöscht wurde",
+        "Passwords ends updates for Nextcloud %s"                                                   : "Passwörter beendet Updates für Nextcloud %s",
+        "%s is the final update of Passwords for Nextcloud %s."                                     : "%s ist das letzte Update von Passwörter für Nextcloud %s.",
+        "Future updates will require Nextcloud %s and PHP %s or PHP %s for the LSR version."        : "Zukünftige Updates benötigen Nextcloud %s und PHP %s oder PHP %s für die LSR-Version."
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
 }
