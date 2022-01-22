@@ -68,7 +68,7 @@ abstract class AbstractRevisionRepair {
         $this->modelMapper     = $modelMapper;
         $this->revisionService = $revisionService;
         $this->encryption      = $encryption;
-        $this->enhancedRepair  = $environment->getRunType() === EnvironmentService::TYPE_CLI;
+        $this->enhancedRepair  = $environment->getRunType() === EnvironmentService::TYPE_CRON || $environment->getRunType() === EnvironmentService::TYPE_CLI;
     }
 
     /**
@@ -91,7 +91,7 @@ abstract class AbstractRevisionRepair {
                     "Failed to repair revision #{$revision->getUuid()}: {$e->getMessage()} in {$e->getFile()} line ".$e->getLine()
                 );
             }
-            $output->advance(1);
+            $output->advance();
         }
         $output->finishProgress();
         $output->info("Fixed {$fixed} {$this->objectName} revisions");
@@ -118,7 +118,10 @@ abstract class AbstractRevisionRepair {
         }
 
         if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R1) {
-            if(!$this->decryptOrDelete($revision)) $fixed = true;
+            if(!$this->decryptOrDelete($revision)) {
+                $revision->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
+                $fixed = true;
+            }
         }
 
         if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE) {
