@@ -117,6 +117,14 @@ abstract class AbstractRevisionRepair {
             if(!$this->decryptOrDelete($revision)) $fixed = true;
         }
 
+        if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R1) {
+            if(!$this->decryptOrDelete($revision)) $fixed = true;
+        }
+
+        if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE) {
+            if(!$this->decryptOrDelete($revision)) $fixed = true;
+        }
+
         if($fixed) $this->revisionService->save($revision);
 
         return $fixed;
