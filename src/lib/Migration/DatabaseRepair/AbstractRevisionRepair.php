@@ -69,6 +69,7 @@ abstract class AbstractRevisionRepair {
         $this->revisionService = $revisionService;
         $this->encryption      = $encryption;
         $this->enhancedRepair  = $environment->getRunType() === EnvironmentService::TYPE_CRON || $environment->getRunType() === EnvironmentService::TYPE_CLI;
+        \OC::$server->getLogger()->critical('EnvironmentService: '.$environment->getRunType());
     }
 
     /**
