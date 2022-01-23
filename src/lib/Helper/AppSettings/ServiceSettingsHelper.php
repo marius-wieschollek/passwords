@@ -196,7 +196,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return string
      * @noinspection PhpUnused
      */
-    protected function getFaviconApiSettingKey(): string {
+    protected function getFaviconApiKey(): string {
         $service = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
 
         if($service === HelperService::FAVICON_BESTICON) {
@@ -210,7 +210,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      * @return string
      * @noinspection PhpUnused
      */
-    protected function getPreviewApiSettingKey(): string {
+    protected function getPreviewApiKey(): string {
         $service = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
 
         if($service === HelperService::PREVIEW_SCREEN_SHOT_LAYER) {

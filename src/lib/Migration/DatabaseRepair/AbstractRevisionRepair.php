@@ -12,6 +12,7 @@
 namespace OCA\Passwords\Migration\DatabaseRepair;
 
 use Exception;
+use JetBrains\PhpStorm\Pure;
 use OCA\Passwords\Db\AbstractMapper;
 use OCA\Passwords\Db\RevisionInterface;
 use OCA\Passwords\Services\EncryptionService;
@@ -64,7 +65,7 @@ abstract class AbstractRevisionRepair {
      * @param EncryptionService       $encryption
      * @param EnvironmentService      $environment
      */
-    public function __construct(AbstractMapper $modelMapper, AbstractRevisionService $revisionService, EncryptionService $encryption, EnvironmentService $environment) {
+    #[Pure] public function __construct(AbstractMapper $modelMapper, AbstractRevisionService $revisionService, EncryptionService $encryption, EnvironmentService $environment) {
         $this->modelMapper     = $modelMapper;
         $this->revisionService = $revisionService;
         $this->encryption      = $encryption;
@@ -119,14 +120,17 @@ abstract class AbstractRevisionRepair {
         }
 
         if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R1) {
-            if(!$this->decryptOrDelete($revision)) {
+            if($this->decryptOrDelete($revision)) {
                 $revision->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
                 $fixed = true;
             }
         }
 
         if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE) {
-            if(!$this->decryptOrDelete($revision)) $fixed = true;
+            if($this->decryptOrDelete($revision)) {
+                $revision->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
+                $fixed = true;
+            }
         }
 
         if($fixed) $this->revisionService->save($revision);

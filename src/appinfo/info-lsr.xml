@@ -126,6 +126,9 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <pre-migration>
             <step>OCA\Passwords\Migration\CheckAppRequirements</step>
         </pre-migration>
+        <post-migration>
+            <step>OCA\Passwords\Migration\CliDatabaseObjectRepair</step>
+        </post-migration>
         <live-migration>
             <step>OCA\Passwords\Migration\AutoBackupRestore</step>
             <step>OCA\Passwords\Migration\DatabaseObjectRepair</step>
