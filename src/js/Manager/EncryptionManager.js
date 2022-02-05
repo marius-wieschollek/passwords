@@ -5,6 +5,7 @@ import Application from '@js/Init/Application';
 import Localisation from '@js/Classes/Localisation';
 import EventManager from '@js/Manager/EventManager';
 import SettingsService from "@js/Services/SettingsService";
+import {loadState} from "@nextcloud/initial-state";
 
 class EncryptionManager {
 
@@ -414,7 +415,7 @@ class EncryptionManager {
      */
     async _saveMasterPassword(password) {
         this._sendStatus('password', 'processing', 1);
-        let username = document.querySelector('meta[name=pw-api-user]').getAttribute('content'),
+        let username = loadState('passwords', 'api-user', null),
             label    = Localisation.translate('Passwords App Encryption Passphrase'),
             notes    = Localisation.translate(
                 'This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook.'),

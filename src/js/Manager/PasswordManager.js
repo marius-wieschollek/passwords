@@ -65,6 +65,7 @@ class PasswordManager {
                           password.status = data.status;
                           password.statusCode = data.statusCode;
                       });
+                   resolve(password);
                })
                .catch((e) => {
                    console.error(e);
@@ -104,6 +105,11 @@ class PasswordManager {
 
                        Events.fire('password.updated', p);
                        Messages.notification('Password saved');
+                       API.showPassword(p.id)
+                          .then((data) => {
+                              p.status = data.status;
+                              p.statusCode = data.statusCode;
+                          });
                        resolve(p);
                    })
                    .catch((e) => {
@@ -126,6 +132,7 @@ class PasswordManager {
             let properties = Utility.cloneObject(password);
             properties.id = null;
             properties.status = null;
+            properties.statusCode = null;
             properties.revision = null;
             properties.password = null;
             properties.updated = null;
