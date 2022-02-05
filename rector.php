@@ -7,6 +7,9 @@ use Rector\Core\ValueObject\PhpVersion;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Rector\Set\ValueObject\DowngradeSetList;
 
+require_once ".rector/RemovePureAnnotation.php";
+require_once ".rector/FixReturnTypeExtension.php";
+
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
@@ -24,4 +27,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::BOOTSTRAP_FILES, [
         __DIR__ . '/rector-shells.php',
     ]);
+
+    $services = $containerConfigurator->services();
+    $services->set(\Utils\Rector\Rector\RemovePureAnnotation::class);
+    $services->set(\Utils\Rector\Rector\FixReturnTypeExtension::class);
 };
