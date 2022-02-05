@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace OCA\Passwords\Migration;
 
 use Closure;
+use Doctrine\DBAL\Schema\SchemaException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\DB\Exception;
-use OCP\IDBConnection;
 use OCP\DB\ISchemaWrapper;
+use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
-use Doctrine\DBAL\Schema\SchemaException;
 
 /**
  * Class Version20220101
@@ -37,7 +37,7 @@ class Version20220101 extends SimpleMigrationStep {
     /**
      * @var UuidHelper
      */
-    protected UuidHelper    $uuidHelper;
+    protected UuidHelper $uuidHelper;
 
     /**
      * Version20220101 constructor.
@@ -46,7 +46,7 @@ class Version20220101 extends SimpleMigrationStep {
      * @param UuidHelper    $uuidHelper
      */
     public function __construct(IDBConnection $db, UuidHelper $uuidHelper) {
-        $this->db = $db;
+        $this->db         = $db;
         $this->uuidHelper = $uuidHelper;
     }
 
@@ -147,7 +147,7 @@ class Version20220101 extends SimpleMigrationStep {
         foreach($tableMap as $oldTable => $newTable) {
             if($schema->hasTable($oldTable) && $schema->hasTable($newTable)) {
                 $select = $this->db->getQueryBuilder()->select('a.*')->from($oldTable, 'a');
-                $uuids = $this->getMigratedUuids($newTable);
+                $uuids  = $this->getMigratedUuids($newTable);
                 if(!empty($uuids) && $this->tablesMigrated()) {
                     return;
                 }
@@ -195,7 +195,7 @@ class Version20220101 extends SimpleMigrationStep {
     protected function getMigratedUuids(string $newTable): array {
         $select = $this->db->getQueryBuilder()->select('a.uuid')->from($newTable, 'a');
         $result = $select->executeQuery();
-        $items = $result->fetchAll();
+        $items  = $result->fetchAll();
 
         $uuids = [];
         foreach($items as $item) {
@@ -210,11 +210,11 @@ class Version20220101 extends SimpleMigrationStep {
      * @throws Exception
      */
     protected function tablesMigrated(): bool {
-        $qb = $this->db->getQueryBuilder();
+        $qb     = $this->db->getQueryBuilder();
         $select = $qb->select('a.*')
                      ->from('migrations', 'a')
-                                    ->where($qb->expr()->eq('a.app', 'passwords'))
-                                    ->where($qb->expr()->eq('a.version', '20210800'));
+                     ->where($qb->expr()->eq('a.app', $qb->createNamedParameter('passwords')))
+                     ->where($qb->expr()->eq('a.version', $qb->createNamedParameter('20210800')));
 
         $result = $select->executeQuery();
 
@@ -1708,11 +1708,11 @@ class Version20220101 extends SimpleMigrationStep {
             $table = $schema->getTable('passwords_share');
 
             if($table->hasColumn('pwid')) {
-                $qb = $this->db->getQueryBuilder();
+                $qb     = $this->db->getQueryBuilder();
                 $delete = $this->db->getQueryBuilder()
-                         ->delete()
-                         ->from('passwords_share', 'a')
-                          ->where($qb->expr()->isNotNull('a.pwid'));
+                                   ->delete()
+                                   ->from('passwords_share', 'a')
+                                   ->where($qb->expr()->isNotNull('a.pwid'));
                 $delete->executeQuery();
 
                 $output->info('Removing column pwid from table passwords_share');

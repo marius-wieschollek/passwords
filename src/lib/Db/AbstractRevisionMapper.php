@@ -60,6 +60,8 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
      * @param AbstractRevision $entity
      *
      * @return AbstractRevision
+     * @throws DecryptedDataException
+     * @throws \OCP\DB\Exception
      */
     public function insert(Entity $entity): AbstractRevision {
         if($entity->_isDecrypted()) {
@@ -73,6 +75,8 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
      * @param AbstractRevision $entity
      *
      * @return AbstractRevision
+     * @throws DecryptedDataException
+     * @throws \OCP\DB\Exception
      */
     public function update(Entity $entity): AbstractRevision {
         if($entity->_isDecrypted()) {

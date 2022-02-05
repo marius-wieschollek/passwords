@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## 2022.2.1 - Bugfix release
+### Fixed
+- Migration is missing createNamedParameter
+- Language level incompatibilities in LSR
+
 ## 2022.2.0 - Feature release
 ### Added
 - Auto selection for words service
