@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2022.2.0 - Feature release
 ### Added
 - Auto selection for words service
 ### Changed
