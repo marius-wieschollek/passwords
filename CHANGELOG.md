@@ -1,4 +1,15 @@
 ## [Unreleased]
+### Added
+- Auto selection for words service
+### Changed
+- Improved PHP version mismatch warnings
+- Simplified system requirement warnings
+### Fixed
+- Background migration does not upgrade SSEv1r1
+- Failed NC encryption api response ignored
+- Passwords security service settings missing from backup
+- ocPasswords tables cause table migration to fail
+- Password security status not updated in ui
 
 ## 2022.1.0 - Feature release
 ### Changed
