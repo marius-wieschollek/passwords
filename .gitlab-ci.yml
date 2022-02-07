@@ -63,13 +63,8 @@ PHPUnit:
 Sign:
   stage: signing
   script:
-    - echo ${SIGN_KEY}
-    - ls -lAhs ${SIGN_KEY}
-    - echo ${SIGN_CRT}
-    - ls -lAhs ${SIGN_CRT}
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
-    - cat ./passwords/appinfo/signature.json
   artifacts:
     paths:
       - ./passwords
