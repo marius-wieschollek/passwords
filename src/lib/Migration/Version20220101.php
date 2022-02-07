@@ -1708,6 +1708,7 @@ class Version20220101 extends SimpleMigrationStep {
             $table = $schema->getTable('passwords_share');
 
             if($table->hasColumn('pwid')) {
+                $qb = $this->db->getQueryBuilder();
                 $delete = $qb
                     ->delete()
                     ->from('passwords_share', 'a')
