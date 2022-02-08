@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2022.2.2 - Bugfix release
 ### Fixed
 - Invalid certificate in signature
 - Broken delete statement if table entries from ocPasswords found
