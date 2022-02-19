@@ -99,6 +99,11 @@ class SetupReportHelper {
                     'label'    => 'Detected remote address',
                     'expected' => $this->request->getRemoteAddress(),
                     'actual'   => $this->getRemoteAddress()
+                ],
+                [
+                    'label'    => 'Detected proxy address',
+                    'expected' => $isProxy ? 'The proxy ip':'',
+                    'actual'   => $isProxy ? $_SERVER['REMOTE_ADDR']:''
                 ]
             ]
         ];
@@ -118,8 +123,8 @@ class SetupReportHelper {
                 $overwritecondaddr = '^'.str_replace('.', '\.', $_SERVER['REMOTE_ADDR']).'$';
                 $trustedProxies    = "[\"{$_SERVER['REMOTE_ADDR']}\"]";
             } else {
-                $overwritecondaddr = '^the\.proxy\.ip$';
-                $trustedProxies    = '["the.proxy.ip"]';
+                $overwritecondaddr = 'Regex matching proxy address, e.g. ^'.str_replace('.', '\.', $_SERVER['REMOTE_ADDR']).'$';
+                $trustedProxies    = "Array including proxy address, e.g. [\"{$_SERVER['REMOTE_ADDR']}\"]";
             }
         }
 
@@ -151,10 +156,12 @@ class SetupReportHelper {
     protected function getPhpStatus(): array {
         $forwardedProto = 'not set';
         $forwardedFor   = 'not set';
+        $remoteAddr     = 'yours';
 
         if($this->isProxy()) {
             $forwardedProto = 'https';
             $forwardedFor   = $this->getRemoteAddress();
+            $remoteAddr     = 'proxy ip, matching overwritecondaddr';
         }
 
         $items = [
@@ -170,7 +177,7 @@ class SetupReportHelper {
             ],
             [
                 'label'    => '$_SERVER[\'REMOTE_ADDR\']',
-                'expected' => '',
+                'expected' => $remoteAddr,
                 'actual'   => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR']:'not set'
             ],
             [
