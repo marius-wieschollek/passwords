@@ -1,5 +1,5 @@
 import API from '@js/Helper/api';
-import JSZip from 'jszip'
+import JSZip from 'jszip';
 import Utility from '@js/Classes/Utility';
 import {Encryption} from 'passwords-client';
 import Localisation from '@js/Classes/Localisation';
@@ -289,10 +289,15 @@ export class ExportManager {
         let customFields = element[field],
             array        = [];
         for(let i = 0; i < customFields.length; i++) {
-            let customField = customFields[i],
-                value       = customField.value.toString().replace(/(\r\n|\n|\r)/gm, ' ');
+            let customField = customFields[i];
 
-            array.push(`${customField.label}, ${customField.type}: ${value}`)
+            if(!customField.hasOwnProperty('value')) {
+                continue;
+            }
+
+            let value = customField.value.toString().replace(/(\r\n|\n|\r)/gm, ' ');
+
+            array.push(`${customField.label}, ${customField.type}: ${value}`);
         }
         object.push(array.join("\n"));
     }
