@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Fixed
+- Bitwarden import crashes on error
+
 ## 2022.3.0 - Feature release
 ### Changed
 - Improved HTTPS setup report
