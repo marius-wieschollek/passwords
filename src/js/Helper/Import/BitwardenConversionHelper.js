@@ -128,7 +128,7 @@ export default class BitwardenConversionHelper {
             };
 
             ImportMappingHelper.checkPasswordDuplicate(passwordMap, object);
-            this._processPasswordCustomFields(object, item);
+            this._processPasswordCustomFields(object, item, errors);
 
             passwords.push(object);
         }
