@@ -67,7 +67,7 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
      */
     protected function configure() {
         $this->setName('passwords:user:delete')
-             ->setDescription('Deletes the data of a user')
+             ->setDescription('Deletes the passwords app data of a user')
              ->addArgument('user', InputArgument::REQUIRED, 'The id of the user');
         parent::configure();
     }
@@ -83,7 +83,7 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
         parent::execute($input, $output);
         $userId = $this->getUserId($input, $output);
         if($this->confirmDelete($input, $output, $userId)) {
-            $output->write('Deleting data ...');
+            $output->write('Deleting passwords app data ...');
             $this->deleteUserData->deleteUserData($userId);
             $this->backgroundJobs->removeDeleteUserJob($userId);
             $output->write(' done');
@@ -106,7 +106,7 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
         $user     = $this->userManager->get($userId);
         $userName = $user === null ? $userId:$user->getDisplayName();
 
-        return $this->requestConfirmation($input, $output, 'This command will delete all data from "'.$userName.'"');
+        return $this->requestConfirmation($input, $output, 'This command will delete all data for the passwords app from "'.$userName.'"');
     }
 
     /**
