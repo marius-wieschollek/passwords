@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2022.4.0 - Feature release
+### Added
+- Support for Nextcloud 24
+- Support for PHP 8.1
 ### Fixed
 - Bitwarden import crashes on error
 
