@@ -152,7 +152,7 @@ class NightlyAppFetcher extends Fetcher {
      * @return array
      * @throws Exception
      */
-    protected function fetch($ETag, $content) {
+    protected function fetch($ETag, $content, $allowUnstable = false) {
         $json = parent::fetch($ETag, $content);
 
         if(!isset($json['data'])) return $json;
@@ -162,7 +162,7 @@ class NightlyAppFetcher extends Fetcher {
             if(empty($app['releases'])) continue;
             foreach($app['releases'] as $release) {
                 if(($latest === null || version_compare($latest['version'], $release['version']) < 0) &&
-                   $this->releaseAllowedInChannel($release, $app['id']) &&
+                   $this->releaseAllowedInChannel($release, $app['id'], $allowUnstable) &&
                    $this->checkNextcloudRequirements($release) &&
                    $this->checkPhpRequirements($release)) {
                     $latest = $release;
@@ -193,15 +193,16 @@ class NightlyAppFetcher extends Fetcher {
     /**
      * @param $release
      * @param $app
+     * @param $allowUnstable
      *
      * @return bool
      */
-    protected function releaseAllowedInChannel($release, $app): bool {
+    protected function releaseAllowedInChannel($release, $app, $allowUnstable): bool {
         $isPreRelease     = strpos($release['version'], '-');
-        $allowNightly     = $this->getChannel() === 'daily' || $app === 'passwords';
+        $allowNightly     = $allowUnstable|| $this->getChannel() === 'daily' || $app === 'passwords';
         $allowPreReleases = $this->getChannel() === 'beta' || $allowNightly;
 
-        return ($allowNightly || $release['isNightly'] === false) || ($allowPreReleases || !$isPreRelease);
+        return (!$isPreRelease && !$release['isNightly']) || ($allowNightly && $release['isNightly']) || ($allowPreReleases && $isPreRelease);
     }
 
     /**

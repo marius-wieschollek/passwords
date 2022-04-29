@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Fixed
+- Version check in nightly updater
+
 ## 2022.4.0 - Feature release
 ### Added
 - Support for Nextcloud 24
