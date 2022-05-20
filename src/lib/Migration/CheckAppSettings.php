@@ -114,7 +114,7 @@ class CheckAppSettings implements IRepairStep {
 
         $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
         if($ncVersion < SystemRequirements::NC_NOTIFICATION_ID || PHP_VERSION_ID < SystemRequirements::PHP_NOTIFICATION_ID) {
-            $this->sendDeprecatedPlatformNotification();
+            $this->sendDeprecatedPlatformNotification($ncVersion);
         }
 
         if($this->config->getAppValue('nightly/enabled', '0') === '1') {
@@ -134,10 +134,13 @@ class CheckAppSettings implements IRepairStep {
     /**
      *
      */
-    protected function sendDeprecatedPlatformNotification(): void {
+    protected function sendDeprecatedPlatformNotification(int $ncVersion): void {
+        $appVersion = $this->config->getAppValue('installed_version');
         foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notifications->sendUpgradeRequiredNotification(
-                $admin->getUID()
+                $admin->getUID(),
+                $ncVersion,
+                $appVersion
             );
         }
     }

@@ -72,9 +72,18 @@ class UpgradeRequiredNotification extends AbstractNotification {
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
         $ncVersion = explode('.', $this->config->getSystemValue('version'), 2)[0];
+        $parameters = $notification->getSubjectParameters();
+        if(!isset($parameters['ncVersion']) || $parameters['ncVersion'] < intval($ncVersion)) {
+            if(intval($ncVersion) >= SystemRequirements::NC_NOTIFICATION_ID) {
+                return $notification
+                    ->setParsedSubject($localisation->t('This notification can be deleted.'))
+                    ->setParsedMessage('');
+            }
+        }
+
 
         $title   = $this->getTitle($localisation, $ncVersion);
-        $message = $this->getMessage($localisation, $ncVersion);
+        $message = $this->getMessage($localisation, $ncVersion, $parameters['appVersion']);
         $this->processLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS, $localisation->t('More information'));
 
         return $notification
@@ -96,21 +105,22 @@ class UpgradeRequiredNotification extends AbstractNotification {
     /**
      * @param IL10N  $localisation
      * @param string $ncVersion
+     * @param string $appVersion
      *
      * @return string
      */
-    protected function getMessage(IL10N $localisation, string $ncVersion): string {
+    protected function getMessage(IL10N $localisation, string $ncVersion, string $appVersion): string {
         return
             $localisation->t(
-                '%s is the final update of Passwords for Nextcloud %s.',
+                'Passwords %s is the last update for Nextcloud %s.',
                 [
-                    $this->config->getAppValue('installed_version'),
+                    $appVersion,
                     $ncVersion,
                 ]
             ).
             ' '.
             $localisation->t(
-                'Future updates will require Nextcloud %s and PHP %s or PHP %s for the LSR version.',
+                'Upgrade to Nextcloud %s and PHP %s (or PHP %s for LSR) for future upgrades.',
                 [
                     SystemRequirements::NC_UPGRADE_MINIMUM,
                     SystemRequirements::PHP_UPGRADE_MINIMUM,

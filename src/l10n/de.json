@@ -182,8 +182,8 @@
         "You can disable automatic backup restoring in the app settings."                           : "Das automatische Wiederherstellen kann in den Einstellungen deaktiviert werden.",
         "Restore backups automatically when database wiped"                                         : "Backups automatisch wiederherstellen wenn die Datenbank gelöscht wurde",
         "Passwords ends updates for Nextcloud %s"                                                   : "Passwörter beendet Updates für Nextcloud %s",
-        "%s is the final update of Passwords for Nextcloud %s."                                     : "%s ist das letzte Update von Passwörter für Nextcloud %s.",
-        "Future updates will require Nextcloud %s and PHP %s or PHP %s for the LSR version."        : "Zukünftige Updates benötigen Nextcloud %s und PHP %s oder PHP %s für die LSR-Version.",
+        "Passwords %s is the last update for Nextcloud %s."                                         : "Passwörter %s ist das letzte Update für Nextcloud %s.",
+        "Upgrade to Nextcloud %s and PHP %s (or PHP %s for LSR) for future upgrades."               : "Aktualisiere auf Nextcloud %s und PHP %s (oder PHP %s für die LSR-Version) um zukünftige Updates zu erhalten.",
         "Select automatically"                                                                      : "Automatisch auswählen"
     },
     "pluralForm"  : "nplurals=2; plural=(n != 1);"
