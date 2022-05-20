@@ -11,6 +11,7 @@ use Exception;
 use OCP\IUser;
 use OC\Migration\SimpleOutput;
 use PHPUnit\Framework\TestCase;
+use OCA\Passwords\AppInfo\Application;
 use PHPUnit\Framework\MockObject\MockObject;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Services\ValidationService;
@@ -93,6 +94,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -115,6 +117,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -137,6 +140,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -159,6 +163,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => '', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -181,6 +186,7 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'key', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
@@ -196,7 +202,7 @@ class CheckAppSettingsTest extends TestCase {
         $this->notificationService
             ->expects($this->once())
             ->method('sendUpgradeRequiredNotification')
-            ->with('admin');
+            ->with('admin', 0, '2022.1.0');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
@@ -204,6 +210,12 @@ class CheckAppSettingsTest extends TestCase {
                 ['favicon.api', ['value' => '']],
                 ['preview', ['value' => '']],
                 ['preview.api', ['value' => 'none']],
+            ]
+        );
+        $this->configurationService->method('getAppValue')->willReturnMap(
+            [
+                ['installed_version', null, Application::APP_NAME, '2022.1.0'],
+                ['nightly/enabled', null, Application::APP_NAME, '0'],
             ]
         );
         $this->configurationService->method('getSystemValue')->with('version')->willReturn('0.0.0.0');
