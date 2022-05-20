@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2022.5.0 - Feature release
 ### Fixed
 - Version check in nightly updater
 
