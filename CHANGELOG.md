@@ -1,4 +1,7 @@
 ## [Unreleased]
+## 2022.6.0 - Feature release
+### Fixed
+- Support notification uses incorrect NC version
 
 ## 2022.5.0 - Feature release
 ### Fixed
