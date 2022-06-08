@@ -77,9 +77,9 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
         $apiKey = $this->config->getAppValue(self::SCREEENLY_API_CONFIG_KEY);
 
         $url = 'https://secure.screeenly.com/api/v1';
-        if(preg_match('/^https:\/\/(.+)\?key=(\w{50})$/', $apiKey, $matches)) {
-            $url    = 'https://'.$matches[1];
-            $apiKey = $matches[2];
+        if(preg_match('/^(http|https):\/\/(.+)\?key=(\w{50})$/', $apiKey, $matches)) {
+            $url    = $matches[1].'://'.$matches[2];
+            $apiKey = $matches[3];
         }
 
         if(strlen($apiKey) !== 50) {
