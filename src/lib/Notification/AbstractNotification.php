@@ -84,7 +84,7 @@ abstract class AbstractNotification {
      * @throws Exception
      */
     protected function createNotification(string $userId): INotification {
-        $icon = $this->urlGenerator->imagePath(Application::APP_NAME, 'app-dark.svg');
+        $icon = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath(Application::APP_NAME, 'app-dark.svg'));
 
         return $this->notificationManager
             ->createNotification()
@@ -114,8 +114,8 @@ abstract class AbstractNotification {
      * @param string        $name
      */
     protected function processLink(INotification $notification, string $link, string $label, string $name = 'link'): void {
-        foreach($notification->getActions() as $action) {
-            if($action->getLabel() === $name) {
+        foreach ($notification->getActions() as $action) {
+            if ($action->getLabel() === $name) {
                 $action->setLink($link, IAction::TYPE_WEB)
                        ->setParsedLabel($label);
                 $notification->addParsedAction($action);
