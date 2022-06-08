@@ -1,8 +1,9 @@
-import marked from 'marked';
+import { marked, Renderer as MarkedRenderer} from 'marked';
 import VueRouter from '@js/Helper/router';
 import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
 import mermaid from "mermaid";
+import DOMPurify from 'dompurify';
 
 /**
  *
@@ -61,17 +62,17 @@ class HandbookRenderer {
     render(markdown, baseUrl, documentUrl) {
         let navigation    = [],
             media         = [],
-            blankRenderer = new marked.Renderer(),
-            renderer      = new marked.Renderer();
+            blankRenderer = new MarkedRenderer(),
+            renderer      = new MarkedRenderer();
 
         renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl, media);};
         renderer.image = (href, title, text, nowrap) => { return HandbookRenderer._renderImage(href, title, text, nowrap, baseUrl, media);};
         renderer.heading = (text, level) => { return HandbookRenderer._renderHeader(text, level, navigation);};
         renderer.code = (code, infostring, escaped) => { return HandbookRenderer._renderCode(code, infostring, escaped, blankRenderer); };
         renderer.blockquote = (quote) => { return HandbookRenderer._renderBlockquote(quote, blankRenderer); };
-        HandbookRenderer._extendMarkedLexer();
 
-        let source = marked(markdown, {renderer});
+        marked.use({renderer});
+        let source = DOMPurify.sanitize(marked.parse(markdown));
 
         return {source, media, navigation};
     }
@@ -87,36 +88,6 @@ class HandbookRenderer {
             source    : '\u{1F480} ' + Localisation.translate('Unable to fetch page: {message}.', {message}),
             media     : [],
             navigation: []
-        };
-    }
-
-    /**
-     *
-     * @private
-     */
-    static _extendMarkedLexer() {
-        marked.InlineLexer.prototype.outputLink = function(cap, link) {
-            function escape(html) {
-                return html
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
-            }
-
-            let href  = escape(link.href),
-                title = link.title ? escape(link.title):null;
-
-            this.isRenderingImage = false;
-            if(cap[0].charAt(0) !== '!') {
-                this.isRenderingLink = true;
-                let value = this.renderer.link(href, title, this.output(cap[1]), this.isRenderingImage);
-                this.isRenderingImage = false;
-                this.isRenderingLink = false;
-                return value;
-            }
-
-            this.isRenderingImage = true;
-            return this.renderer.image(href, title, escape(cap[1]), this.isRenderingLink);
         };
     }
 
@@ -145,9 +116,9 @@ class HandbookRenderer {
                 [href, title, target] = this._processInternalLink(url, title);
             }
         }
-
-        if(wrap) {
-            let element = media[content * 1];
+        let matches = content.match(/data-image-id="(\d+)"/)
+        if(matches && matches.length > 1) {
+            let element = media[matches[1] * 1 - 1];
             element.url = href;
             return HandbookRenderer._renderMediaElement(element);
         }

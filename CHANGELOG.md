@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2022.7.0 - Feature release
+### Changed
+- Markdown renderer upgraded
+- Self-hosted Screeenly instances now allow HTTP
+- Notifiactions now use full image url for icon
+
 ## 2022.6.0 - Feature release
 ### Fixed
 - Support notification uses incorrect NC version

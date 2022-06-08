@@ -183,6 +183,10 @@
                 for(let i = 0; i < this.media.length; i++) {
                     let image = this.media[i],
                         el    = document.getElementById(image.id);
+                    if(!el) {
+                        console.log(image);
+                        continue;
+                    }
 
                     gallery.push(
                         {
@@ -193,12 +197,12 @@
                         }
                     );
 
-                    el.querySelector('a').addEventListener('click', (e) => {
+                    el.querySelector('a')?.addEventListener('click', (e) => {
                         e.preventDefault();
                         this.gallery.index = i;
                     });
 
-                    el.querySelector('img').addEventListener('load', () => {
+                    el.querySelector('img')?.addEventListener('load', () => {
                         this.jumpToAnchor('auto');
                     });
                 }

@@ -4,6 +4,7 @@
 
 <script>
     import Messages from '@js/Classes/Messages';
+    import DOMPurify from 'dompurify';
 
     export default {
         props: {
@@ -26,7 +27,8 @@
             async processNotes() {
                 try {
                     let marked = await import(/* webpackChunkName: "marked" */ 'marked');
-                    this.notes = marked.default(this.password.notes, {breaks: true});
+                    marked.setOptions({breaks: true});
+                    this.notes = DOMPurify.sanitize(marked.marked.parse(this.password.notes));
                 } catch(e) {
                     console.error(e);
                     Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
