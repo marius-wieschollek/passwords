@@ -140,7 +140,6 @@
 </script>
 
 <style lang="scss">
-@import "~simplemde/dist/simplemde.min.css";
 
 #app-popup #passwords-edit-dialog {
     .window {
