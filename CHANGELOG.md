@@ -1,6 +1,7 @@
 ## [Unreleased]
 ## 2022.7.0 - Feature release
 ### Changed
+- Markdown editor switched to ToastUI Editor
 - Markdown renderer upgraded
 - Self-hosted Screeenly instances now allow HTTP
 - Notifiactions now use full image url for icon
