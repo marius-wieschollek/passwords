@@ -15,7 +15,8 @@ $color-white         : #fff;
 
 $width-extra-small   : 640px;
 $width-small         : 768px;
-$width-medium        : 1024px;
+$width-1024          : 1024px;
+$width-1024-above    : 1025px;
 $width-1366          : 1366px;
 $width-1366-above    : 1367px;
 $width-1680          : 1680px;
@@ -26,6 +27,7 @@ $width-1920-above    : 1921px;
 /** @deprecated **/
 $width-extra-large   : $width-1680;
 $width-large         : $width-1366;
+$width-medium        : $width-1024;
 $mobile-width        : $width-extra-small;
 $tablet-width        : $width-small;
 $desktop-width       : $width-1366;

@@ -11,18 +11,20 @@
 <template>
     <div class="password-form-notes-wrapper">
         <translate tag="h3" class="notes-label" say="Notes" icon="sticky-note"/>
-        <textarea ref="textarea" id="password-notes" name="notes" :maxlength="maxlength"></textarea>
+        <translate ref="label" tag="h3" class="notes-label" say="Notes" icon="sticky-note"/>
+        <div ref="textarea" id="password-notes"></div>
+        <div class="notes-status" :class="{warning:isOverMaxlength}">{{ statusText }}</div>
     </div>
 </template>
 
 <script>
-    import SimpleMDE from 'simplemde';
+    import Editor from '@toast-ui/editor';
+    import Utility from "@js/Classes/Utility";
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import Translate from '@vc/Translate';
     import Icon from '@vc/Icon';
+    import Translate from '@vc/Translate';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
-    import Utility from "@js/Classes/Utility";
 
     const MaxNotesLength = 4096;
 
@@ -33,84 +35,110 @@
         data() {
             return {
                 maxlength: MaxNotesLength,
-                simplemde: null
+                editor   : null
             };
         },
 
         computed: {
+            statusText() {
+                if(!this.isOverMaxlength) {
+                    return `${this.model.length}/${MaxNotesLength}`;
+                } else {
+                    return Localisation.translate('You have reached the maximum length of 4096 characters');
+                }
+            },
             isOverMaxlength() {
                 return this.model.length >= MaxNotesLength;
             }
         },
 
         mounted() {
-            this.loadSimpleMde();
+            this.loadEditor();
         },
 
         methods: {
+            getHelpButton() {
+                const button = document.createElement('button');
+                button.style.backgroundImage = 'none';
+                button.style.margin = '0';
+                button.innerHTML = ' ';
+                button.className = 'toastui-editor-toolbar-icons last fa fa-question-circle';
+                button.addEventListener('click', () => {
+                    let url = Utility.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes');
+                    Utility.openLink(url);
+                });
+                return button;
+            },
             /**
              *
-             * @param {HTMLDivElement} el
              */
-            updateStatusBar(el) {
-                if(!this.isOverMaxlength) {
-                    el.classList.remove('warning');
-                    el.innerText = `${this.model.length}/${MaxNotesLength}`;
-                } else {
-                    el.classList.add('warning');
-                    el.innerText = Localisation.translate('You have reached the maximum length of 4096 characters');
-                }
-            },
-            async loadSimpleMde() {
+            async loadEditor() {
                 try {
-                    this.simplemde = new SimpleMDE(
+
+                    this.editor = new Editor(
                         {
-                            element                : this.$refs.textarea,
-                            autoDownloadFontAwesome: false,
-                            spellChecker           : false,
-                            placeholder            : Localisation.translate('Take some notes'),
-                            forceSync              : true,
-                            initialValue           : this.model,
-                            toolbar                : [
-                                'bold', 'italic', 'heading', 'quote', 'code',
-                                '|', 'unordered-list', 'ordered-list', 'table', 'horizontal-rule',
-                                '|', 'link',
-                                '|', 'preview', 'undo', 'redo', '|',
-                                {
-                                    name     : "help",
-                                    action   : Utility.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes'),
-                                    className: "fa fa-question-circle",
-                                    title    : "Markdown Guide",
-                                    default  : true
-                                }
+                            el             : this.$refs.textarea,
+                            height         : '100%',
+                            initialValue   : this.model,
+                            previewStyle   : window.innerWidth <= 640 ? 'tab':'vertical',
+                            usageStatistics: false,
+                            language       : Localisation.locale,
+                            placeholder    : Localisation.translate('Take some notes'),
+                            hideModeSwitch : true,
+                            toolbarItems   : [
+                                [
+                                    {
+                                        el: this.$refs.label.$el
+                                    },
+                                    'heading', 'bold', 'italic', 'strike'
+                                ],
+                                ['hr', 'quote'],
+                                ['ul', 'ol', 'indent', 'outdent'],
+                                ['table', 'link'],
+                                ['code', 'codeblock'],
+                                [
+                                    {
+                                        name     : 'undo',
+                                        command  : 'undo',
+                                        className: 'toastui-editor-toolbar-icons fa fa-undo',
+                                        tooltip  : Localisation.translate('Undo')
+                                    },
+                                    {
+                                        name     : 'redo',
+                                        command  : 'redo',
+                                        className: 'toastui-editor-toolbar-icons fa fa-repeat',
+                                        tooltip  : Localisation.translate('Redo')
+                                    },
+                                    {
+                                        el     : this.getHelpButton(),
+                                        command: '',
+                                        tooltip: Localisation.translate('Markdown Guide')
+                                    }
+                                ]
                             ],
-                            blockStyles            : {italic: '_'},
-                            status                 : [
-                                {
-                                    defaultValue: (el) => { this.updateStatusBar(el); },
-                                    onUpdate    : (el) => { this.updateStatusBar(el); }
+                            events         : {
+                                change: () => {
+                                    let value = this.editor.getMarkdown();
+                                    if(value.length > MaxNotesLength) {
+                                        value = value.substring(0, MaxNotesLength);
+                                        this.editor.setMarkdown(value, true);
+                                        this.editor.blur();
+                                    }
+                                    this.model = value;
                                 }
-                            ]
+                            }
                         }
                     );
-                    this.simplemde.codemirror.on('change', () => {
-                        let value = this.simplemde.value();
-                        if(value.length > MaxNotesLength) {
-                            value = value.substring(0, MaxNotesLength);
-                            this.simplemde.value(value);
-                        }
-                        this.model = value;
-                    });
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'SimpleMde'}], 'Network error');
+                    Messages.alert(['Unable to load {module}', {module: 'ToastUI Editor'}], 'Network error');
                 }
             }
         },
         watch  : {
             value(value) {
                 if(this.model !== value) {
-                    if(this.simplemde) this.simplemde.value(value);
+                    if(this.editor) this.editor.setMarkdown(value, true);
                 }
             }
         }
@@ -118,107 +146,124 @@
 </script>
 
 <style lang="scss">
+@import "@toast-ui/editor/dist/toastui-editor.css";
+
 .password-form-notes-wrapper {
-    position   : relative;
-    margin-top : auto;
+    position    : relative;
+    margin-top  : auto;
+    padding-top : 6rem;
+    height      : 100%;
 
-    h3.notes-label {
-        position    : absolute;
-        line-height : 2rem;
-        font-weight : bold;
+    > h3.notes-label {
+        display     : none;
+        white-space : nowrap;
+    }
 
-        @media all and (max-width : $width-extra-small) {
-            position    : static;
+    #password-notes {
+        .toastui-editor-defaultUI {
+            font-family : inherit;
+
+            .toastui-editor-toolbar {
+                .toastui-editor-popup-add-heading h1 {
+                    font-weight : bold;
+                }
+
+                .toastui-editor-defaultUI-toolbar {
+                    background-color : var(--color-background-hover);
+                    border-color     : var(--color-border);
+
+                    .toastui-editor-toolbar-group {
+                        .toastui-editor-toolbar-icons {
+                            background-color      : transparent;
+                            border-color          : var(--color-background-hover);
+                            background-position-y : 4px;
+
+                            &:not(:disabled).active {
+                                background-color      : var(--color-primary-element-hover);
+                                background-position-y : -48px;
+                            }
+
+                            &:not(:disabled):hover {
+                                background-position-y : -23px;
+                                background-color      : var(--color-main-background);
+                            }
+
+                            &.fa {
+                                background-image : none;
+                                color            : var(--color-text-lighter);
+
+                                &:hover {
+                                    padding-bottom : 2px;
+                                    color          : var(--color-primary-element-light);
+                                }
+                            }
+                        }
+
+                        .toastui-editor-toolbar-item-wrapper {
+                            h3.notes-label {
+                                margin      : 0 7.5rem 0 -1rem;
+                                line-height : 2rem;
+                                white-space : nowrap;
+                            }
+                        }
+                    }
+                }
+            }
+
+            div[contenteditable="true"] {
+                width  : auto;
+                border : none;
+                height : 100%;
+            }
+
+            .toastui-editor.md-mode,
+            .toastui-editor.md-mode div,
+            .toastui-editor.md-mode span {
+                cursor : text;
+            }
+
+            .toastui-editor-contents {
+                p {
+                    margin-bottom : 1em;
+                }
+
+                ol li {
+                    list-style-type : decimal;
+                }
+
+                h1, h2 {
+                    border-bottom : none;
+                }
+            }
+        }
+    }
+
+    .notes-status {
+        position : absolute;
+        right    : 0.5rem;
+        bottom   : 0.25rem;
+        color    : var(--color-primary-text-dark);
+
+        &.warning {
+            color       : var(--color-primary-text);
+            margin      : 0 0 4px;
+            text-align  : left;
+            font-weight : bold;
+        }
+    }
+
+    @media all and (max-width : $width-1024) {
+        h3.notes-label {
+            font-weight : bold;
             line-height : var(--default-line-height);
+            display     : block;
         }
-    }
 
-    .editor-toolbar {
-        border     : none;
-        padding    : 0;
-        text-align : right;
-
-        a {
-            background : var(--color-main-background);
-            border     : 1px solid transparent;
-
-            &:hover,
-            &:active,
-            &:focus {
-                background   : var(--color-main-background);
-                border-color : var(--color-border);
-                cursor       : pointer;
-            }
-
-            &:before {
-                color : var(--color-main-text);
+        .toastui-editor-toolbar-item-wrapper {
+            h3.notes-label {
+                display : none;
             }
         }
-
-        .separator {
-            border-left  : none;
-            border-right : 1px solid var(--color-border);
-        }
-
-
-        @media all and (max-width : $width-extra-small) {
-            text-align : left;
-        }
-    }
-
-    .CodeMirror {
-        background    : var(--color-main-background);
-        color         : var(--color-main-text);
-        border-color  : var(--color-border);
-        border-radius : var(--border-radius);
-    }
-
-    .CodeMirror-code {
-        width   : auto;
-        border  : none;
-        padding : 0;
-        margin  : 0;
-    }
-
-    .CodeMirror-scroll {
-        overflow   : auto !important;
-        min-height : 300px;
-        max-height : 300px;
-    }
-
-    .CodeMirror-cursor,
-    .CodeMirror-cursors {
-        border      : none;
-        border-left : 1px solid var(--color-main-text);
-    }
-
-    .CodeMirror-selectedtext,
-    .CodeMirror-selectedtext::selection {
-        color      : var(--color-main-background);
-        background : var(--color-main-text);
-    }
-
-    .editor-preview.editor-preview-active {
-        background : var(--color-background-dark);
-
-        p {
-            margin-bottom : 1em;
-        }
-
-        ul li {
-            list-style-type : disc;
-        }
-
-        ol li {
-            list-style-type : decimal;
-        }
-    }
-
-    .warning {
-        margin      : 0 0 4px;
-        width       : 100%;
-        text-align  : left;
-        font-weight : bold;
     }
 }
 </style>
