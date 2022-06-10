@@ -1,5 +1,5 @@
-import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import RandomColorService from '@js/Services/RandomColorService';
 import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 
@@ -46,7 +46,7 @@ export default class EnpassConversionHelper {
             if(!labelMap.hasOwnProperty(id)) {
                 labelMap[id] = tag.uuid;
                 tagMap[tag.uuid] = tag.uuid;
-                tags.push({id: tag.uuid, label: tag.title, color: randomMC.getColor()});
+                tags.push({id: tag.uuid, label: tag.title, color: RandomColorService.color()});
             } else {
                 tagMap[tag.uuid] = labelMap[id];
             }

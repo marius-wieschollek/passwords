@@ -1,5 +1,5 @@
-import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import RandomColorService from '@js/Services/RandomColorService';
 import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 
@@ -43,7 +43,7 @@ export default class BitwardenConversionHelper {
                 tagMap[folder.id] = labelMap[labelId];
             } else {
                 tagMap[folder.id] = id;
-                tags.push({id, label: folder.name, color: randomMC.getColor()});
+                tags.push({id, label: folder.name, color: RandomColorService.color()});
             }
         }
 

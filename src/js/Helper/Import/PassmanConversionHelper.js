@@ -1,5 +1,5 @@
-import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import RandomColorService from '@js/Services/RandomColorService';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 
 export default class PassmanConversionHelper {
@@ -50,7 +50,7 @@ export default class PassmanConversionHelper {
                 } else {
                     mapping[labelId] = labelId;
                     element.tags[j] = labelId;
-                    tags.push({id: labelId, label, color: randomMC.getColor()});
+                    tags.push({id: labelId, label, color: RandomColorService.color()});
                 }
             }
         }

@@ -5,6 +5,7 @@
 - Markdown renderer upgraded
 - Self-hosted Screeenly instances now allow HTTP
 - Notifiactions now use full image url for icon
+- Replaced external random color generator
 
 ## 2022.6.0 - Feature release
 ### Fixed

@@ -2,8 +2,8 @@ import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
-import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import RandomColorService from '@js/Services/RandomColorService';
 
 /**
  *
@@ -23,11 +23,11 @@ class TagManager {
             },
             color: {
                 type  : 'color',
-                value : randomMC.getColor(),
+                value : RandomColorService.color(),
                 button: {
                     icon  : 'refresh',
                     title : 'Generate random color',
-                    action: () => { return randomMC.getColor();}
+                    action: () => { return RandomColorService.color();}
                 }
             }
         };
@@ -50,7 +50,7 @@ class TagManager {
      */
     createTagFromData(tag) {
         if(!tag.label) tag.label = Localisation.translate('New Tag');
-        if(!tag.color) tag.color = randomMC.getColor();
+        if(!tag.color) tag.color = RandomColorService.color();
         tag = API.validateTag(tag);
 
         return new Promise((resolve, reject) => {
@@ -90,7 +90,7 @@ class TagManager {
                 button: {
                     icon  : 'refresh',
                     title : 'Generate random color',
-                    action: () => { return randomMC.getColor(); }
+                    action: () => { return RandomColorService.color(); }
                 }
             }
         };

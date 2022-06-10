@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
-import * as randomMC from 'random-material-color';
 import Localisation from '@js/Classes/Localisation';
+import RandomColorService from '@js/Services/RandomColorService';
 
 export default class ImportCsvConversionHelper {
 
@@ -280,7 +280,7 @@ export default class ImportCsvConversionHelper {
 
                 if(!idMap.hasOwnProperty(label)) {
                     keyMap[label] = tags.length;
-                    tags.push({id: label, label, color: randomMC.getColor()});
+                    tags.push({id: label, label, color: RandomColorService.color()});
                     element.tags[j] = label;
                     idMap[label] = label;
                 } else {
