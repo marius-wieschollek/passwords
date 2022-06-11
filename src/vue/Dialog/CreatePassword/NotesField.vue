@@ -112,7 +112,7 @@
                                     {
                                         el     : this.getHelpButton(),
                                         command: '',
-                                        tooltip: Localisation.translate('Markdown Guide')
+                                        tooltip: Localisation.translate('Open Markdown Guide')
                                     }
                                 ]
                             ],
@@ -161,7 +161,8 @@
 
     #password-notes {
         .toastui-editor-defaultUI {
-            font-family : inherit;
+            font-family  : inherit;
+            border-color : var(--color-border);
 
             .toastui-editor-toolbar {
                 .toastui-editor-popup-add-heading h1 {
@@ -210,6 +211,10 @@
                 }
             }
 
+            .toastui-editor-main .toastui-editor-md-splitter {
+                background-color : var(--color-border);
+            }
+
             div[contenteditable="true"] {
                 width  : auto;
                 border : none;
@@ -220,9 +225,15 @@
             .toastui-editor.md-mode div,
             .toastui-editor.md-mode span {
                 cursor : text;
+
+                .placeholder {
+                    color : var(--color-placeholder-dark);
+                }
             }
 
             .toastui-editor-contents {
+                font-family : inherit;
+
                 p {
                     margin-bottom : 1em;
                 }
@@ -262,6 +273,24 @@
         .toastui-editor-toolbar-item-wrapper {
             h3.notes-label {
                 display : none;
+            }
+        }
+    }
+}
+
+body.theme--dark {
+    .password-form-notes-wrapper {
+        #password-notes {
+            .toastui-editor-defaultUI {
+                .toastui-editor-toolbar {
+                    .toastui-editor-defaultUI-toolbar {
+                        .toastui-editor-toolbar-group {
+                            .toastui-editor-toolbar-icons {
+                                background-position-y : -48px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
