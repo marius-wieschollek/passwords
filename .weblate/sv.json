@@ -1259,19 +1259,19 @@
   "backend-000376": {
     "message": "År 2018 släpptes den första versionen av \"Lösenord\" till NextCloud. Tack för att du använder applikationen."
   },
-  "fronted-000377": {
+  "frontend-000377": {
     "message": "HTTPS krävs"
   },
-  "fronted-000378": {
+  "frontend-000378": {
     "message": "ladda om sidan"
   },
-  "fronted-000379": {
+  "frontend-000379": {
     "message": "forum"
   },
-  "fronted-000380": {
+  "frontend-000380": {
     "message": "dokumentation"
   },
-  "fronted-000381": {
+  "frontend-000381": {
     "message": "Du kan prova att $STR_1$ sidan med https.",
     "placeholders": {
       "str_1": {
@@ -1279,7 +1279,7 @@
       }
     }
   },
-  "fronted-000382": {
+  "frontend-000382": {
     "message": "Denna applikation kräver $STR_1$ för att fungera säkert.",
     "placeholders": {
       "str_1": {
@@ -1287,7 +1287,7 @@
       }
     }
   },
-  "fronted-000383": {
+  "frontend-000383": {
     "message": "Detta är inget fel. Besök $STR_1$ om du behöver hjälp.",
     "placeholders": {
       "str_1": {
@@ -1295,10 +1295,10 @@
       }
     }
   },
-  "fronted-000384": {
+  "frontend-000384": {
     "message": "Läs rapporten nedan för att felsöka problemet."
   },
-  "fronted-000385": {
+  "frontend-000385": {
     "message": "Läs $STR_1$ för att sätta upp servern att använda https.",
     "placeholders": {
       "str_1": {
@@ -1306,7 +1306,7 @@
       }
     }
   },
-  "fronted-000386": {
+  "frontend-000386": {
     "message": "Läs $STR_1$ om du använder en proxy.",
     "placeholders": {
       "str_1": {
@@ -1314,7 +1314,7 @@
       }
     }
   },
-  "fronted-000387": {
+  "frontend-000387": {
     "message": "Besök $STR_1$ för att skaffa ett gratis HTTPS-certifikat.",
     "placeholders": {
       "str_1": {
@@ -1322,10 +1322,10 @@
       }
     }
   },
-  "fronted-000388": {
+  "frontend-000388": {
     "message": "Om felet kvarstår bör du kontakta administratören."
   },
-  "fronted-000389": {
+  "frontend-000389": {
     "message": "Lösenord $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1336,151 +1336,151 @@
       }
     }
   },
-  "fronted-000390": {
+  "frontend-000390": {
     "message": "Öppna dokumentationen"
   },
-  "fronted-000391": {
+  "frontend-000391": {
     "message": "aldrig"
   },
-  "fronted-000392": {
+  "frontend-000392": {
     "message": "Intern databehandling"
   },
-  "fronted-000393": {
+  "frontend-000393": {
     "message": "Bildbehandling"
   },
-  "fronted-000394": {
+  "frontend-000394": {
     "message": "Imagick/GMagick (rekommenderas)"
   },
-  "fronted-000395": {
+  "frontend-000395": {
     "message": "Externa tjänster"
   },
-  "fronted-000396": {
+  "frontend-000396": {
     "message": "Säkerhetskontrollera lösenord"
   },
-  "fronted-000397": {
+  "frontend-000397": {
     "message": "Har jag blivit 'pwned'? (rekommenderas)"
   },
-  "fronted-000398": {
+  "frontend-000398": {
     "message": "25 miljoner lösenord (lokal)"
   },
-  "fronted-000399": {
+  "frontend-000399": {
     "message": "5 miljoner lösenord (lokal)"
   },
-  "fronted-000400": {
+  "frontend-000400": {
     "message": "25Mio lösenord & Hibp?"
   },
-  "fronted-000401": {
+  "frontend-000401": {
     "message": "Lösenordsgenerator"
   },
-  "fronted-000402": {
+  "frontend-000402": {
     "message": "Lokal ordbok"
   },
-  "fronted-000403": {
+  "frontend-000403": {
     "message": "Slumpmässiga tecken"
   },
-  "fronted-000404": {
+  "frontend-000404": {
     "message": "watchout4snakes.com"
   },
-  "fronted-000405": {
+  "frontend-000405": {
     "message": "Leipzig Corpora Collection (rekommenderas)"
   },
-  "fronted-000406": {
+  "frontend-000406": {
     "message": "Favicon tjänst"
   },
-  "fronted-000407": {
+  "frontend-000407": {
     "message": "Lokal ikonsökningstjänst"
   },
-  "fronted-000408": {
+  "frontend-000408": {
     "message": "Besticon (rekommenderas)"
   },
-  "fronted-000409": {
+  "frontend-000409": {
     "message": "Ingen"
   },
-  "fronted-000410": {
+  "frontend-000410": {
     "message": "Förhandsgrnaska webbsida"
   },
-  "fronted-000411": {
+  "frontend-000411": {
     "message": "Förhandsgranska API"
   },
-  "fronted-000412": {
+  "frontend-000412": {
     "message": "Pageres/PhantomJS (lokal)"
   },
-  "fronted-000413": {
+  "frontend-000413": {
     "message": "WKHTML (lokal)"
   },
-  "fronted-000414": {
+  "frontend-000414": {
     "message": "Screenshotapi.io"
   },
-  "fronted-000415": {
+  "frontend-000415": {
     "message": "Standardinställningar fär e-post"
   },
-  "fronted-000416": {
+  "frontend-000416": {
     "message": "Skicka e-post vid säkerhetsproblem"
   },
-  "fronted-000417": {
+  "frontend-000417": {
     "message": "Skicka e-post vid delningar"
   },
-  "fronted-000418": {
+  "frontend-000418": {
     "message": "Andra inställningar"
   },
-  "fronted-000419": {
+  "frontend-000419": {
     "message": "Ta bort raderade objekt från databasen"
   },
-  "fronted-000420": {
+  "frontend-000420": {
     "message": "Visa \"Nightly Updates\""
   },
-  "fronted-000421": {
+  "frontend-000421": {
     "message": "Aldrig"
   },
-  "fronted-000422": {
+  "frontend-000422": {
     "message": "Omedelbart"
   },
-  "fronted-000423": {
+  "frontend-000423": {
     "message": "Efter två timmar"
   },
-  "fronted-000424": {
+  "frontend-000424": {
     "message": "Efter en dag"
   },
-  "fronted-000425": {
+  "frontend-000425": {
     "message": "Efter två veckor"
   },
-  "fronted-000426": {
+  "frontend-000426": {
     "message": "Efter en månad"
   },
-  "fronted-000427": {
+  "frontend-000427": {
     "message": "Efter ett år"
   },
-  "fronted-000428": {
+  "frontend-000428": {
     "message": "Inställningar för säkerhetskopia"
   },
-  "fronted-000429": {
+  "frontend-000429": {
     "message": "Intervall för säkerhetskopia"
   },
-  "fronted-000430": {
+  "frontend-000430": {
     "message": "Varje timme"
   },
-  "fronted-000431": {
+  "frontend-000431": {
     "message": "Varje sex timmar"
   },
-  "fronted-000432": {
+  "frontend-000432": {
     "message": "Varje dag"
   },
-  "fronted-000433": {
+  "frontend-000433": {
     "message": "Varje två dagar"
   },
-  "fronted-000434": {
+  "frontend-000434": {
     "message": "Varje vecka"
   },
-  "fronted-000435": {
+  "frontend-000435": {
     "message": "Varje två veckor"
   },
-  "fronted-000436": {
+  "frontend-000436": {
     "message": "Antal kopior att spara"
   },
-  "fronted-000437": {
+  "frontend-000437": {
     "message": "Caches"
   },
-  "fronted-000438": {
+  "frontend-000438": {
     "message": "Standard cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1491,7 +1491,7 @@
       }
     }
   },
-  "fronted-000439": {
+  "frontend-000439": {
     "message": "Profil cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1502,7 +1502,7 @@
       }
     }
   },
-  "fronted-000440": {
+  "frontend-000440": {
     "message": "Favicon cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1513,7 +1513,7 @@
       }
     }
   },
-  "fronted-000441": {
+  "frontend-000441": {
     "message": "Förhandsgranska cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1524,7 +1524,7 @@
       }
     }
   },
-  "fronted-000442": {
+  "frontend-000442": {
     "message": "Lösenord cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1535,34 +1535,34 @@
       }
     }
   },
-  "fronted-000443": {
+  "frontend-000443": {
     "message": "Töm"
   },
-  "fronted-000444": {
+  "frontend-000444": {
     "message": "Töm denna cache"
   },
-  "fronted-000445": {
+  "frontend-000445": {
     "message": "Du kan inte tömma denna cache om du använder en gemensam tjänst"
   },
-  "fronted-000446": {
+  "frontend-000446": {
     "message": "Sparad"
   },
-  "fronted-000447": {
+  "frontend-000447": {
     "message": "Tömd"
   },
-  "fronted-000448": {
+  "frontend-000448": {
     "message": "Misslyckad"
   },
-  "fronted-000449": {
+  "frontend-000449": {
     "message": "Behöver du hjälp"
   },
-  "fronted-000450": {
+  "frontend-000450": {
     "message": "hittat ett programeringsfel"
   },
-  "fronted-000451": {
+  "frontend-000451": {
     "message": "letar efter dokumentationen"
   },
-  "fronted-000452": {
+  "frontend-000452": {
     "message": "$STR_1$, $STR_1$ eller $STR_1$? Vi kan hjälpa till!",
     "placeholders": {
       "str_1": {
@@ -1576,7 +1576,7 @@
       }
     }
   },
-  "fronted-000453": {
+  "frontend-000453": {
     "message": "$STRING_1$ $STRING_2$ stöds inte längre.",
     "placeholders": {
       "string_1": {
@@ -1587,10 +1587,10 @@
       }
     }
   },
-  "fronted-000454": {
+  "frontend-000454": {
     "message": "Lösenordsappen kräver https."
   },
-  "fronted-000455": {
+  "frontend-000455": {
     "message": "Användande av $STR_1$ kan orsaka långa väntetider.",
     "placeholders": {
       "str_1": {
@@ -1598,13 +1598,13 @@
       }
     }
   },
-  "fronted-000456": {
+  "frontend-000456": {
     "message": "Kontrollera systemkrav."
   },
-  "fronted-000457": {
+  "frontend-000457": {
     "message": "Lösenordet har inte delats"
   },
-  "fronted-000458": {
+  "frontend-000458": {
     "message": "Lösenordet kunde inte delas med $STRING_1$ då en delning redan existerar.",
     "placeholders": {
       "string_1": {
@@ -1612,25 +1612,25 @@
       }
     }
   },
-  "fronted-000459": {
+  "frontend-000459": {
     "message": "Du har ett osäkert lösenord"
   },
-  "fronted-000460": {
+  "frontend-000460": {
     "message": "Du har osäkera lösenord"
   },
-  "fronted-000461": {
+  "frontend-000461": {
     "message": "Ett av dina lösenord är inte längre säkert."
   },
-  "fronted-000462": {
+  "frontend-000462": {
     "message": "Ett eller flera av dina lösenord är inte längre säkra."
   },
-  "fronted-000463": {
+  "frontend-000463": {
     "message": "Lösenordsappen kontrollerar regelbundet om dina lösenord har läkts i en lösenordsläcka."
   },
-  "fronted-000464": {
+  "frontend-000464": {
     "message": "Detta säkerhetstest har visat att ett av dina lösenord är osäkert."
   },
-  "fronted-000465": {
+  "frontend-000465": {
     "message": "Detta säkerhetstest har visat att $STR_1$ av dina lösenord är osäkert.",
     "placeholders": {
       "str_1": {
@@ -1638,37 +1638,37 @@
       }
     }
   },
-  "fronted-000466": {
+  "frontend-000466": {
     "message": "Det betyder att lösenordet finns på internet och äventyrar säkerheten på ditt konto."
   },
-  "fronted-000467": {
+  "frontend-000467": {
     "message": "Det betyder att lösenorden kan hittas på internet och äventyrar säkerheten på dina konton."
   },
-  "fronted-000468": {
+  "frontend-000468": {
     "message": "Lösenordet var därför märkt som osäkert och bör ändras."
   },
-  "fronted-000469": {
+  "frontend-000469": {
     "message": "Lösenorden märktes därför som osäkra och bör ändras."
   },
-  "fronted-000470": {
+  "frontend-000470": {
     "message": "Du kan skapa ett nytt, säkert lösenord i lösenordsappen."
   },
-  "fronted-000471": {
+  "frontend-000471": {
     "message": "Du kan skapa nya, säkra lösenord i lösenordsappen."
   },
-  "fronted-000472": {
+  "frontend-000472": {
     "message": "Ändra ditt lösenord nu"
   },
-  "fronted-000473": {
+  "frontend-000473": {
     "message": "Ändra dina lösenord nu"
   },
-  "fronted-000474": {
+  "frontend-000474": {
     "message": "Öppna lösenordsappen för att ändra det."
   },
-  "fronted-000475": {
+  "frontend-000475": {
     "message": "Öppna lösenordsappen för att ändra dem."
   },
-  "fronted-000476": {
+  "frontend-000476": {
     "message": "$STR_1$ delar ett lösenord med dig.",
     "placeholders": {
       "str_1": {
@@ -1676,7 +1676,7 @@
       }
     }
   },
-  "fronted-000477": {
+  "frontend-000477": {
     "message": "$STR_1$ delar $STR_1$ lösenord med dig.",
     "placeholders": {
       "str_1": {
@@ -1687,7 +1687,7 @@
       }
     }
   },
-  "fronted-000478": {
+  "frontend-000478": {
     "message": "$STRING_4$ och $STRING_3$ delar $STRING_1$ lösenord med dig.",
     "placeholders": {
       "string_4": {
@@ -1701,7 +1701,7 @@
       }
     }
   },
-  "fronted-000479": {
+  "frontend-000479": {
     "message": "$STRING_5$, $STRING_4$ och $STRING_3$ delar $STRING_1$ lösenord med dig.",
     "placeholders": {
       "string_5": {
@@ -1718,7 +1718,7 @@
       }
     }
   },
-  "fronted-000480": {
+  "frontend-000480": {
     "message": "$STRING_5$, $STRING_4$ och $STRING_2$ andra delar $STRING_1$ lösenord med dig.",
     "placeholders": {
       "string_5": {
@@ -1735,13 +1735,13 @@
       }
     }
   },
-  "fronted-000481": {
+  "frontend-000481": {
     "message": "Öppna lösenordssappen för att se den."
   },
-  "fronted-000482": {
+  "frontend-000482": {
     "message": "Öppna lösenordssappen för att se dem."
   },
-  "fronted-000483": {
+  "frontend-000483": {
     "message": "Ett lösenord delades med dig $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1749,7 +1749,7 @@
       }
     }
   },
-  "fronted-000484": {
+  "frontend-000484": {
     "message": "Flera lösenord delades med dig $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1757,13 +1757,13 @@
       }
     }
   },
-  "fronted-000485": {
+  "frontend-000485": {
     "message": "Visa lösenord delade med mig"
   },
-  "fronted-000486": {
+  "frontend-000486": {
     "message": "Ett av dina lösenord kunde inte delas eftersom mottagaren redan har tillgång till det."
   },
-  "fronted-000487": {
+  "frontend-000487": {
     "message": "$STR_1$ av dina lösenord kunde inte delas eftersom mottagaren redan har tillgång till dem.",
     "placeholders": {
       "str_1": {
@@ -1771,13 +1771,13 @@
       }
     }
   },
-  "fronted-000489": {
+  "frontend-000489": {
     "message": "Att dela lösenord som delas med dig kan ibland skapa en rekursiv loop."
   },
-  "fronted-000490": {
+  "frontend-000490": {
     "message": "För att undvika detta delas inte dessa lösenord."
   },
-  "fronted-000496": {
+  "frontend-000496": {
     "message": "Borttagen användare ($STR_1$)",
     "placeholders": {
       "str_1": {

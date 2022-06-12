@@ -1339,16 +1339,16 @@
   "backend-000590": {
     "message": "Opravdu chcete smazat veškerá vaše nastavení, hesla, složky a štítky?\nToto NEBUDE možné vzít zpět."
   },
-  "fronted-000377": {
+  "frontend-000377": {
     "message": "Je vyžadováno HTTPS"
   },
-  "fronted-000378": {
+  "frontend-000378": {
     "message": "znovu načíst tuto stránku"
   },
-  "fronted-000380": {
+  "frontend-000380": {
     "message": "dokumentace"
   },
-  "fronted-000382": {
+  "frontend-000382": {
     "message": "Tato aplikace vyžaduje $STR_1$ pro bezpečné fungování.",
     "placeholders": {
       "str_1": {
@@ -1356,7 +1356,7 @@
       }
     }
   },
-  "fronted-000591": {
+  "frontend-000591": {
     "message": "Pokud si myslíte, že vámi využívaný server má zapnuté HTTPS, můžete zkusit použít $STR_1$ s HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1364,7 +1364,7 @@
       }
     }
   },
-  "fronted-000389": {
+  "frontend-000389": {
     "message": "Relace Hesel $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1375,121 +1375,121 @@
       }
     }
   },
-  "fronted-000390": {
+  "frontend-000390": {
     "message": "Otevřít dokumentaci"
   },
-  "fronted-000391": {
+  "frontend-000391": {
     "message": "nikdy"
   },
-  "fronted-000392": {
+  "frontend-000392": {
     "message": "Interní zpracování dat"
   },
-  "fronted-000393": {
+  "frontend-000393": {
     "message": "Vykreslování obrázků"
   },
-  "fronted-000394": {
+  "frontend-000394": {
     "message": "Imagick/GMagick (doporučeno)"
   },
-  "fronted-000395": {
+  "frontend-000395": {
     "message": "Externí služby"
   },
-  "fronted-000396": {
+  "frontend-000396": {
     "message": "Kontrola bezpečnosti hesel"
   },
-  "fronted-000397": {
+  "frontend-000397": {
     "message": "Have I been pwned? (doporučeno)"
   },
-  "fronted-000398": {
+  "frontend-000398": {
     "message": "25 Million Passwords (místní)"
   },
-  "fronted-000399": {
+  "frontend-000399": {
     "message": "5 Million Passwords (místní)"
   },
-  "fronted-000400": {
+  "frontend-000400": {
     "message": "Big local database & Hibp?"
   },
-  "fronted-000401": {
+  "frontend-000401": {
     "message": "Služba pro generování hesel"
   },
-  "fronted-000402": {
+  "frontend-000402": {
     "message": "Místní slovník"
   },
-  "fronted-000403": {
+  "frontend-000403": {
     "message": "Náhodné znaky"
   },
-  "fronted-000404": {
+  "frontend-000404": {
     "message": "watchout4snakes.com"
   },
-  "fronted-000405": {
+  "frontend-000405": {
     "message": "Leipzig Corpora Collection (doporučeno)"
   },
-  "fronted-000406": {
+  "frontend-000406": {
     "message": "Služba pro ikony webů"
   },
-  "fronted-000407": {
+  "frontend-000407": {
     "message": "Místní služba"
   },
-  "fronted-000408": {
+  "frontend-000408": {
     "message": "Besticon (doporučeno)"
   },
-  "fronted-000409": {
+  "frontend-000409": {
     "message": "Nic"
   },
-  "fronted-000410": {
+  "frontend-000410": {
     "message": "Služba pro náhledy stránek"
   },
-  "fronted-000411": {
+  "frontend-000411": {
     "message": "klíč k API pro náhled stránek"
   },
-  "fronted-000412": {
+  "frontend-000412": {
     "message": "Pageres/PhantomJS (místní)"
   },
-  "fronted-000413": {
+  "frontend-000413": {
     "message": "WKHTML (místní)"
   },
-  "fronted-000414": {
+  "frontend-000414": {
     "message": "screenshotapi.io"
   },
-  "fronted-000415": {
+  "frontend-000415": {
     "message": "Výchozí nastavení e-mailu"
   },
-  "fronted-000416": {
+  "frontend-000416": {
     "message": "Posílat e-maily při bezpečnostních incidentech"
   },
-  "fronted-000417": {
+  "frontend-000417": {
     "message": "Posílat e-maily při sdílení"
   },
-  "fronted-000418": {
+  "frontend-000418": {
     "message": "Další nastavení"
   },
-  "fronted-000419": {
+  "frontend-000419": {
     "message": "Odstranit smazané objekty z databáze"
   },
-  "fronted-000421": {
+  "frontend-000421": {
     "message": "Nikdy"
   },
-  "fronted-000422": {
+  "frontend-000422": {
     "message": "Okamžitě"
   },
-  "fronted-000423": {
+  "frontend-000423": {
     "message": "Po dvou hodinách"
   },
-  "fronted-000424": {
+  "frontend-000424": {
     "message": "Po jednom dni"
   },
-  "fronted-000425": {
+  "frontend-000425": {
     "message": "Po dvou týdnech"
   },
-  "fronted-000426": {
+  "frontend-000426": {
     "message": "Po jednom měsíci"
   },
-  "fronted-000427": {
+  "frontend-000427": {
     "message": "Po jednom roce"
   },
-  "fronted-000437": {
+  "frontend-000437": {
     "message": "Mezipaměť"
   },
-  "fronted-000438": {
+  "frontend-000438": {
     "message": "Výchozí mezipaměť ($STR_1$ souborů, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1500,7 +1500,7 @@
       }
     }
   },
-  "fronted-000439": {
+  "frontend-000439": {
     "message": "Mezipaměť profilových obrázků ($STR_1$ souborů, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1511,7 +1511,7 @@
       }
     }
   },
-  "fronted-000440": {
+  "frontend-000440": {
     "message": "Mezipaměť ikon webů ($STR_1$ souborů, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1522,7 +1522,7 @@
       }
     }
   },
-  "fronted-000441": {
+  "frontend-000441": {
     "message": "Mezipaměť náhledů ($STR_1$ souborů, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1533,7 +1533,7 @@
       }
     }
   },
-  "fronted-000442": {
+  "frontend-000442": {
     "message": "Mezipaměť hesel ($STR_1$ souborů, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1544,34 +1544,34 @@
       }
     }
   },
-  "fronted-000443": {
+  "frontend-000443": {
     "message": "vymazat"
   },
-  "fronted-000444": {
+  "frontend-000444": {
     "message": "Odstranit tuto mezipaměť"
   },
-  "fronted-000445": {
+  "frontend-000445": {
     "message": "Při používání sdílené služby není možné mezipaměť vymazat"
   },
-  "fronted-000446": {
+  "frontend-000446": {
     "message": "Uloženo"
   },
-  "fronted-000447": {
+  "frontend-000447": {
     "message": "Vymazáno"
   },
-  "fronted-000448": {
+  "frontend-000448": {
     "message": "Nezdařilo se"
   },
-  "fronted-000449": {
+  "frontend-000449": {
     "message": "Potřebujete pomoc"
   },
-  "fronted-000450": {
+  "frontend-000450": {
     "message": "našli jste chybu"
   },
-  "fronted-000451": {
+  "frontend-000451": {
     "message": "hledáte dokumentaci"
   },
-  "fronted-000452": {
+  "frontend-000452": {
     "message": "$STR_1$, $STR_1$ nebo $STR_1$? Pomůžeme Vám!",
     "placeholders": {
       "str_1": {
@@ -1585,7 +1585,7 @@
       }
     }
   },
-  "fronted-000592": {
+  "frontend-000592": {
     "message": "PHP verze $STR_1$ už není podporováno",
     "placeholders": {
       "str_1": {
@@ -1593,10 +1593,10 @@
       }
     }
   },
-  "fronted-000454": {
+  "frontend-000454": {
     "message": "Aplikace Hesla vyžaduje HTTPS"
   },
-  "fronted-000455": {
+  "frontend-000455": {
     "message": "Použití $STR_1$ k provádění úloh na pozadí může způsobovat prodlevy. Doporučujeme používat plánovač Cron.",
     "placeholders": {
       "str_1": {
@@ -1604,13 +1604,13 @@
       }
     }
   },
-  "fronted-000456": {
+  "frontend-000456": {
     "message": "Zkontrolujte systémové požadavky."
   },
-  "fronted-000457": {
+  "frontend-000457": {
     "message": "Heslo nebylo nasdíleno"
   },
-  "fronted-000458": {
+  "frontend-000458": {
     "message": "Heslo nemohlo být nasdíleno $STRING_1$, protože už je danýmu uživatelem sdílené.",
     "placeholders": {
       "string_1": {
@@ -1618,25 +1618,25 @@
       }
     }
   },
-  "fronted-000459": {
+  "frontend-000459": {
     "message": "Používáte nebezpečné heslo"
   },
-  "fronted-000460": {
+  "frontend-000460": {
     "message": "Používáte nebezpečná hesla"
   },
-  "fronted-000461": {
+  "frontend-000461": {
     "message": "Jedno z vašich hesel už není bezpečné."
   },
-  "fronted-000462": {
+  "frontend-000462": {
     "message": "Některá vaše hesla už nejsou bezpečná."
   },
-  "fronted-000463": {
+  "frontend-000463": {
     "message": "Správce hesel pravidelně kontroluje, zda nedošlo ke kompromitaci hesel únikem dat."
   },
-  "fronted-000464": {
+  "frontend-000464": {
     "message": "Poslední kontrola odhalila, že jedno z vašich hesel není bezpečné."
   },
-  "fronted-000465": {
+  "frontend-000465": {
     "message": "Poslední kontrola odhalila, že $STR_1$ z vašich hesel není bezpečných.",
     "placeholders": {
       "str_1": {
@@ -1644,37 +1644,37 @@
       }
     }
   },
-  "fronted-000466": {
+  "frontend-000466": {
     "message": "Znamená to, že uvedené heslo je volně dostupné na Internetu a účty které takové heslo využívají jsou v ohrožení."
   },
-  "fronted-000467": {
+  "frontend-000467": {
     "message": "Znamená to, že uvedená hesla jsou volně dostupná na Internetu a účty které taková hesla využívají jsou v ohrožení."
   },
-  "fronted-000468": {
+  "frontend-000468": {
     "message": "Proto bylo heslo označené jako nebezpečné a mělo by být okamžitě změněno."
   },
-  "fronted-000469": {
+  "frontend-000469": {
     "message": "Proto byla hesla označena jako nebezpečná a měly by být okamžitě změněny."
   },
-  "fronted-000470": {
+  "frontend-000470": {
     "message": "Nové a bezpečné heslo si můžete nechat vytvořit v aplikaci Hesla."
   },
-  "fronted-000471": {
+  "frontend-000471": {
     "message": "Nová a bezpečná hesla si můžete nechat vytvořit v aplikaci Hesla."
   },
-  "fronted-000472": {
+  "frontend-000472": {
     "message": "Změnit heslo nyní"
   },
-  "fronted-000473": {
+  "frontend-000473": {
     "message": "Změnit hesla nyní"
   },
-  "fronted-000474": {
+  "frontend-000474": {
     "message": "Pokud ho chcete změnit, otevřete aplikaci Hesla."
   },
-  "fronted-000475": {
+  "frontend-000475": {
     "message": "Pokud je chcete změnit, otevřete aplikaci Hesla."
   },
-  "fronted-000476": {
+  "frontend-000476": {
     "message": "$STR_1$ vám nasdílel(a) heslo.",
     "placeholders": {
       "str_1": {
@@ -1682,7 +1682,7 @@
       }
     }
   },
-  "fronted-000477": {
+  "frontend-000477": {
     "message": "$STR_1$ vám nasdílel(a) $STR_1$ hesel.",
     "placeholders": {
       "str_1": {
@@ -1693,7 +1693,7 @@
       }
     }
   },
-  "fronted-000478": {
+  "frontend-000478": {
     "message": "$STRING_4$ a $STRING_3$ vám nasdíleli $STRING_1$ hesel.",
     "placeholders": {
       "string_4": {
@@ -1707,7 +1707,7 @@
       }
     }
   },
-  "fronted-000479": {
+  "frontend-000479": {
     "message": "$STRING_5$, $STRING_4$ a $STRING_3$ vám nasdíleli $STRING_1$ hesel.",
     "placeholders": {
       "string_5": {
@@ -1724,7 +1724,7 @@
       }
     }
   },
-  "fronted-000480": {
+  "frontend-000480": {
     "message": "$STRING_5$, $STRING_4$ a $STRING_2$ dalších vám nasdíleli $STRING_1$ hesel.",
     "placeholders": {
       "string_5": {
@@ -1741,13 +1741,13 @@
       }
     }
   },
-  "fronted-000481": {
+  "frontend-000481": {
     "message": "Pokud si ho chcete zobrazit, otevřete aplikaci Hesla."
   },
-  "fronted-000482": {
+  "frontend-000482": {
     "message": "Pokud si je chcete zobrazit, otevřete aplikaci Hesla."
   },
-  "fronted-000483": {
+  "frontend-000483": {
     "message": "Dne $STR_1$ vám bylo nasdíleno heslo",
     "placeholders": {
       "str_1": {
@@ -1755,7 +1755,7 @@
       }
     }
   },
-  "fronted-000484": {
+  "frontend-000484": {
     "message": "Dne $STR_1$ vám bylo nasdíleno několik hesel",
     "placeholders": {
       "str_1": {
@@ -1763,13 +1763,13 @@
       }
     }
   },
-  "fronted-000485": {
+  "frontend-000485": {
     "message": "Zobrazit Vám sdílená hesla"
   },
-  "fronted-000486": {
+  "frontend-000486": {
     "message": "Jedno z Vašich hesel nemohlo být nasdíleno, protože příjemce už k němu přístup má."
   },
-  "fronted-000487": {
+  "frontend-000487": {
     "message": "$STR_1$ z Vašich hesel nemohlo být sdíleno, protože příjemce k nim už mají přístup.",
     "placeholders": {
       "str_1": {
@@ -1777,13 +1777,13 @@
       }
     }
   },
-  "fronted-000489": {
+  "frontend-000489": {
     "message": "Sdílení hesel, která vám samotným už byla někým nasdílena, může někdy vést ke vzniku smyčky."
   },
-  "fronted-000490": {
+  "frontend-000490": {
     "message": "Aby se tomu předešlo, tato hesla nebudou sdílena."
   },
-  "fronted-000496": {
+  "frontend-000496": {
     "message": "Odstraněný uživatel ($STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1886,19 +1886,19 @@
   "settings-000706": {
     "message": "Neplatný resetovací kód"
   },
-  "fronted-000652": {
+  "frontend-000652": {
     "message": "Otisk pro kontrolu bezpečnosti"
   },
-  "fronted-000653": {
+  "frontend-000653": {
     "message": "Neukládat žádný otisk"
   },
-  "fronted-000654": {
+  "frontend-000654": {
     "message": "Ukládat 50% otisku"
   },
-  "fronted-000655": {
+  "frontend-000655": {
     "message": "Ukládat 75% otisku "
   },
-  "fronted-000656": {
+  "frontend-000656": {
     "message": "Úplný otisk hesla"
   },
   "settings-000707": {

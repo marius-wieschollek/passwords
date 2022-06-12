@@ -1336,19 +1336,19 @@
   "backend-000376": {
     "message": "Today in 2018, the first version of passwords was published. Thank you for using the app."
   },
-  "fronted-000377": {
+  "frontend-000377": {
     "message": "HTTPS Required"
   },
-  "fronted-000378": {
+  "frontend-000378": {
     "message": "reload this page"
   },
-  "fronted-000379": {
+  "frontend-000379": {
     "message": "forum"
   },
-  "fronted-000380": {
+  "frontend-000380": {
     "message": "documentation"
   },
-  "fronted-000381": {
+  "frontend-000381": {
     "message": "You can try to $STR_1$ the page with HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1356,7 +1356,7 @@
       }
     }
   },
-  "fronted-000382": {
+  "frontend-000382": {
     "message": "This application requires $STR_1$ in order to work safely.",
     "placeholders": {
       "str_1": {
@@ -1364,7 +1364,7 @@
       }
     }
   },
-  "fronted-000383": {
+  "frontend-000383": {
     "message": "This is NOT a bug. Visit our $STR_1$ if you need help.",
     "placeholders": {
       "str_1": {
@@ -1372,10 +1372,10 @@
       }
     }
   },
-  "fronted-000384": {
+  "frontend-000384": {
     "message": "Review the HTTPS report below to debug the issue."
   },
-  "fronted-000385": {
+  "frontend-000385": {
     "message": "Read this $STR_1$ to configure your server to use HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1383,7 +1383,7 @@
       }
     }
   },
-  "fronted-000386": {
+  "frontend-000386": {
     "message": "Read this $STR_1$ if you are using any kind of proxy.",
     "placeholders": {
       "str_1": {
@@ -1391,7 +1391,7 @@
       }
     }
   },
-  "fronted-000387": {
+  "frontend-000387": {
     "message": "Go to $STR_1$ to ge a free HTTPS certificate if you need one.",
     "placeholders": {
       "str_1": {
@@ -1399,10 +1399,10 @@
       }
     }
   },
-  "fronted-000388": {
+  "frontend-000388": {
     "message": "If this problem persists, you should contact your administrator."
   },
-  "fronted-000389": {
+  "frontend-000389": {
     "message": "Passwords Session $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1413,151 +1413,151 @@
       }
     }
   },
-  "fronted-000390": {
+  "frontend-000390": {
     "message": "Open documentation"
   },
-  "fronted-000391": {
+  "frontend-000391": {
     "message": "never"
   },
-  "fronted-000392": {
+  "frontend-000392": {
     "message": "Internal Data Processing"
   },
-  "fronted-000393": {
+  "frontend-000393": {
     "message": "Image Rendering"
   },
-  "fronted-000394": {
+  "frontend-000394": {
     "message": "Imagick/GMagick (recommended)"
   },
-  "fronted-000395": {
+  "frontend-000395": {
     "message": "External Services"
   },
-  "fronted-000396": {
+  "frontend-000396": {
     "message": "Password Security Checks"
   },
-  "fronted-000397": {
+  "frontend-000397": {
     "message": "Have I been pwned? (recommended)"
   },
-  "fronted-000398": {
+  "frontend-000398": {
     "message": "Big local database (25M passwords)"
   },
-  "fronted-000399": {
+  "frontend-000399": {
     "message": "Small local database (5M passwords)"
   },
-  "fronted-000400": {
+  "frontend-000400": {
     "message": "Big local database & Hibp?"
   },
-  "fronted-000401": {
+  "frontend-000401": {
     "message": "Password Generator Service"
   },
-  "fronted-000402": {
+  "frontend-000402": {
     "message": "Local dictionary"
   },
-  "fronted-000403": {
+  "frontend-000403": {
     "message": "Random Characters"
   },
-  "fronted-000404": {
+  "frontend-000404": {
     "message": "watchout4snakes.com"
   },
-  "fronted-000405": {
+  "frontend-000405": {
     "message": "Leipzig Corpora Collection (recommended)"
   },
-  "fronted-000406": {
+  "frontend-000406": {
     "message": "Favicon Service"
   },
-  "fronted-000407": {
+  "frontend-000407": {
     "message": "Local analyzer"
   },
-  "fronted-000408": {
+  "frontend-000408": {
     "message": "Besticon (recommended)"
   },
-  "fronted-000409": {
+  "frontend-000409": {
     "message": "None"
   },
-  "fronted-000410": {
+  "frontend-000410": {
     "message": "Website Preview Service"
   },
-  "fronted-000411": {
+  "frontend-000411": {
     "message": "Website Preview API Key"
   },
-  "fronted-000412": {
+  "frontend-000412": {
     "message": "Pageres/PhantomJS (Local)"
   },
-  "fronted-000413": {
+  "frontend-000413": {
     "message": "WKHTML (Local)"
   },
-  "fronted-000414": {
+  "frontend-000414": {
     "message": "screenshotapi.io"
   },
-  "fronted-000415": {
+  "frontend-000415": {
     "message": "Default Email Settings"
   },
-  "fronted-000416": {
+  "frontend-000416": {
     "message": "Send emails for security events"
   },
-  "fronted-000417": {
+  "frontend-000417": {
     "message": "Send emails for sharing events"
   },
-  "fronted-000418": {
+  "frontend-000418": {
     "message": "Other Settings"
   },
-  "fronted-000419": {
+  "frontend-000419": {
     "message": "Remove deleted objects from database"
   },
-  "fronted-000420": {
+  "frontend-000420": {
     "message": "Show Nightly Updates in \"Apps\""
   },
-  "fronted-000421": {
+  "frontend-000421": {
     "message": "Never"
   },
-  "fronted-000422": {
+  "frontend-000422": {
     "message": "Immediately"
   },
-  "fronted-000423": {
+  "frontend-000423": {
     "message": "After two hours"
   },
-  "fronted-000424": {
+  "frontend-000424": {
     "message": "After one day"
   },
-  "fronted-000425": {
+  "frontend-000425": {
     "message": "After two weeks"
   },
-  "fronted-000426": {
+  "frontend-000426": {
     "message": "After one month"
   },
-  "fronted-000427": {
+  "frontend-000427": {
     "message": "After one year"
   },
-  "fronted-000428": {
+  "frontend-000428": {
     "message": "Backup Settings"
   },
-  "fronted-000429": {
+  "frontend-000429": {
     "message": "Backup Interval"
   },
-  "fronted-000430": {
+  "frontend-000430": {
     "message": "Every hour"
   },
-  "fronted-000431": {
+  "frontend-000431": {
     "message": "Every six hours"
   },
-  "fronted-000432": {
+  "frontend-000432": {
     "message": "Every day"
   },
-  "fronted-000433": {
+  "frontend-000433": {
     "message": "Every two days"
   },
-  "fronted-000434": {
+  "frontend-000434": {
     "message": "Every week"
   },
-  "fronted-000435": {
+  "frontend-000435": {
     "message": "Every two weeks"
   },
-  "fronted-000436": {
+  "frontend-000436": {
     "message": "Amount of backups to keep"
   },
-  "fronted-000437": {
+  "frontend-000437": {
     "message": "Caches"
   },
-  "fronted-000438": {
+  "frontend-000438": {
     "message": "Default Cache ($STR_1$ files, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1568,7 +1568,7 @@
       }
     }
   },
-  "fronted-000439": {
+  "frontend-000439": {
     "message": "Avatars Cache ($STR_1$ files, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1579,7 +1579,7 @@
       }
     }
   },
-  "fronted-000440": {
+  "frontend-000440": {
     "message": "Favicon Cache ($STR_1$ files, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1590,7 +1590,7 @@
       }
     }
   },
-  "fronted-000441": {
+  "frontend-000441": {
     "message": "Preview Cache ($STR_1$ files, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1601,7 +1601,7 @@
       }
     }
   },
-  "fronted-000442": {
+  "frontend-000442": {
     "message": "Passwords Cache ($STR_1$ files, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1612,34 +1612,34 @@
       }
     }
   },
-  "fronted-000443": {
+  "frontend-000443": {
     "message": "clear"
   },
-  "fronted-000444": {
+  "frontend-000444": {
     "message": "Clear this cache"
   },
-  "fronted-000445": {
+  "frontend-000445": {
     "message": "You can not clear a cache using a shared service"
   },
-  "fronted-000446": {
+  "frontend-000446": {
     "message": "Saved"
   },
-  "fronted-000447": {
+  "frontend-000447": {
     "message": "Cleared"
   },
-  "fronted-000448": {
+  "frontend-000448": {
     "message": "Failed"
   },
-  "fronted-000449": {
+  "frontend-000449": {
     "message": "Need help"
   },
-  "fronted-000450": {
+  "frontend-000450": {
     "message": "found a bug"
   },
-  "fronted-000451": {
+  "frontend-000451": {
     "message": "looking for the documentation"
   },
-  "fronted-000452": {
+  "frontend-000452": {
     "message": "$STR_1$, $STR_1$ or $STR_1$? We've got you covered!",
     "placeholders": {
       "str_1": {
@@ -1653,7 +1653,7 @@
       }
     }
   },
-  "fronted-000453": {
+  "frontend-000453": {
     "message": "$STRING_1$ $STRING_2$ is no longer supported.",
     "placeholders": {
       "string_1": {
@@ -1664,10 +1664,10 @@
       }
     }
   },
-  "fronted-000454": {
+  "frontend-000454": {
     "message": "Passwords requires HTTPS."
   },
-  "fronted-000455": {
+  "frontend-000455": {
     "message": "Using $STR_1$ to execute background jobs may cause delays. We recommend using Cron.",
     "placeholders": {
       "str_1": {
@@ -1675,13 +1675,13 @@
       }
     }
   },
-  "fronted-000456": {
+  "frontend-000456": {
     "message": "Please check the system requirements."
   },
-  "fronted-000457": {
+  "frontend-000457": {
     "message": "Password not shared"
   },
-  "fronted-000458": {
+  "frontend-000458": {
     "message": "A password was not shared with $STRING_1$ because it already is",
     "placeholders": {
       "string_1": {
@@ -1689,25 +1689,25 @@
       }
     }
   },
-  "fronted-000459": {
+  "frontend-000459": {
     "message": "You have an insecure password"
   },
-  "fronted-000460": {
+  "frontend-000460": {
     "message": "You have insecure passwords"
   },
-  "fronted-000461": {
+  "frontend-000461": {
     "message": "One of your passwords is no longer secure."
   },
-  "fronted-000462": {
+  "frontend-000462": {
     "message": "Some of your passwords are no longer secure."
   },
-  "fronted-000463": {
+  "frontend-000463": {
     "message": "Passwords regularly checks if your passwords have been compromised by a data breach."
   },
-  "fronted-000464": {
+  "frontend-000464": {
     "message": "This security check has found that one of your passwords is insecure."
   },
-  "fronted-000465": {
+  "frontend-000465": {
     "message": "This security check has found that $STR_1$ of your passwords are insecure.",
     "placeholders": {
       "str_1": {
@@ -1715,37 +1715,37 @@
       }
     }
   },
-  "fronted-000466": {
+  "frontend-000466": {
     "message": "That means that the password is out on the internet and puts your account at risk."
   },
-  "fronted-000467": {
+  "frontend-000467": {
     "message": "That means that the passwords are out on the internet and puts your accounts at risk."
   },
-  "fronted-000468": {
+  "frontend-000468": {
     "message": "Therefore the password has been marked as insecure and should be changed now."
   },
-  "fronted-000469": {
+  "frontend-000469": {
     "message": "Therefore the passwords have been marked as insecure and should be changed now."
   },
-  "fronted-000470": {
+  "frontend-000470": {
     "message": "You can create a new secure password in the passwords app."
   },
-  "fronted-000471": {
+  "frontend-000471": {
     "message": "You can create new secure passwords in the passwords app."
   },
-  "fronted-000472": {
+  "frontend-000472": {
     "message": "Change password now"
   },
-  "fronted-000473": {
+  "frontend-000473": {
     "message": "Change passwords now"
   },
-  "fronted-000474": {
+  "frontend-000474": {
     "message": "Open the passwords app to change it."
   },
-  "fronted-000475": {
+  "frontend-000475": {
     "message": "Open the passwords app to change them."
   },
-  "fronted-000476": {
+  "frontend-000476": {
     "message": "$STR_1$ shared a password with you.",
     "placeholders": {
       "str_1": {
@@ -1753,7 +1753,7 @@
       }
     }
   },
-  "fronted-000477": {
+  "frontend-000477": {
     "message": "$STR_1$ shared $STR_1$ passwords with you.",
     "placeholders": {
       "str_1": {
@@ -1764,7 +1764,7 @@
       }
     }
   },
-  "fronted-000478": {
+  "frontend-000478": {
     "message": "$STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
     "placeholders": {
       "string_4": {
@@ -1778,7 +1778,7 @@
       }
     }
   },
-  "fronted-000479": {
+  "frontend-000479": {
     "message": "$STRING_5$, $STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
     "placeholders": {
       "string_5": {
@@ -1795,7 +1795,7 @@
       }
     }
   },
-  "fronted-000480": {
+  "frontend-000480": {
     "message": "$STRING_5$, $STRING_4$ and $STRING_2$ others shared $STRING_1$ passwords with you.",
     "placeholders": {
       "string_5": {
@@ -1812,13 +1812,13 @@
       }
     }
   },
-  "fronted-000481": {
+  "frontend-000481": {
     "message": "Open the passwords app to see it."
   },
-  "fronted-000482": {
+  "frontend-000482": {
     "message": "Open the passwords app to see them."
   },
-  "fronted-000483": {
+  "frontend-000483": {
     "message": "A password was shared with you on $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1826,7 +1826,7 @@
       }
     }
   },
-  "fronted-000484": {
+  "frontend-000484": {
     "message": "Several passwords were shared with you on $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1834,13 +1834,13 @@
       }
     }
   },
-  "fronted-000485": {
+  "frontend-000485": {
     "message": "View passwords shared with me"
   },
-  "fronted-000486": {
+  "frontend-000486": {
     "message": "One of your passwords could not be shared because the recipient already has access to it."
   },
-  "fronted-000487": {
+  "frontend-000487": {
     "message": "$STR_1$ of your passwords could not be shared because the recipient already has access to them.",
     "placeholders": {
       "str_1": {
@@ -1848,16 +1848,16 @@
       }
     }
   },
-  "fronted-000489": {
+  "frontend-000489": {
     "message": "Sharing a password that has been shared with you can sometimes create a loop."
   },
-  "fronted-000490": {
+  "frontend-000490": {
     "message": "To prevent this, these passwords will not be shared."
   },
-  "fronted-000491": {
+  "frontend-000491": {
     "message": "Administrative access to your account"
   },
-  "fronted-000492": {
+  "frontend-000492": {
     "message": "$STR_1$ tried to log into your account on $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1868,7 +1868,7 @@
       }
     }
   },
-  "fronted-000493": {
+  "frontend-000493": {
     "message": "$STR_1$ logged into your account on $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1879,13 +1879,13 @@
       }
     }
   },
-  "fronted-000494": {
+  "frontend-000494": {
     "message": "Since you use a master password, this does not mean that access to your data was granted."
   },
-  "fronted-000495": {
+  "frontend-000495": {
     "message": "To prevent unwanted access to your data, you should set up a master password."
   },
-  "fronted-000496": {
+  "frontend-000496": {
     "message": "Deleted User ($STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1893,64 +1893,64 @@
       }
     }
   },
-  "fronted-000497": {
+  "frontend-000497": {
     "message": "Help us to improve Passwords"
   },
-  "fronted-000498": {
+  "frontend-000498": {
     "message": "You can help us to improve the Passwords app by participating in our server survey."
   },
-  "fronted-000499": {
+  "frontend-000499": {
     "message": "This will send us some anonymised data about your setup and selected settings."
   },
-  "fronted-000500": {
+  "frontend-000500": {
     "message": "You can change this at any time in the app settings."
   },
-  "fronted-000501": {
+  "frontend-000501": {
     "message": "Not yet"
   },
-  "fronted-000502": {
+  "frontend-000502": {
     "message": "Participate"
   },
-  "fronted-000503": {
+  "frontend-000503": {
     "message": "Server survey participation"
   },
-  "fronted-000504": {
+  "frontend-000504": {
     "message": "Basic"
   },
-  "fronted-000505": {
+  "frontend-000505": {
     "message": "Full"
   },
-  "fronted-000506": {
+  "frontend-000506": {
     "message": "Not set"
   },
-  "fronted-000507": {
+  "frontend-000507": {
     "message": "Please consider self-hosting your favicon api"
   },
-  "fronted-000508": {
+  "frontend-000508": {
     "message": "Your Nextcloud uses our shared Besticon instances to fetch website icons."
   },
-  "fronted-000509": {
+  "frontend-000509": {
     "message": "These instances are intended for small Nextcloud setups with very little traffic."
   },
-  "fronted-000510": {
+  "frontend-000510": {
     "message": "Please click the link and follow our easy tutorial to host Besticon yourself."
   },
-  "fronted-000511": {
+  "frontend-000511": {
     "message": "Your favicon service configuration is invalid"
   },
-  "fronted-000512": {
+  "frontend-000512": {
     "message": "Your preview service configuration is invalid"
   },
-  "fronted-000513": {
+  "frontend-000513": {
     "message": "Your chosen favicon service requires an api key or endpoint, but none is given."
   },
-  "fronted-000514": {
+  "frontend-000514": {
     "message": "Your chosen preview service requires an api key or endpoint, but none is given."
   },
-  "fronted-000515": {
+  "frontend-000515": {
     "message": "Open the admin settings to update the configuration or chose another service."
   },
-  "fronted-000516": {
+  "frontend-000516": {
     "message": "We have detected several failed attempts to unlock your password database by \"$STR_1$\".",
     "placeholders": {
       "str_1": {
@@ -1958,31 +1958,31 @@
       }
     }
   },
-  "fronted-000517": {
+  "frontend-000517": {
     "message": "This could indicate that someone is trying to break into your account."
   },
-  "fronted-000518": {
+  "frontend-000518": {
     "message": "To prevent further attempts, the API credentials of this client were revoked."
   },
-  "fronted-000519": {
+  "frontend-000519": {
     "message": "Also, password based API authentication has been disabled."
   },
-  "fronted-000520": {
+  "frontend-000520": {
     "message": "If you want to continue using this client, you need to create a new token for it."
   },
-  "fronted-000521": {
+  "frontend-000521": {
     "message": "If you don't know this client, please change your password and review your device list."
   },
-  "fronted-000522": {
+  "frontend-000522": {
     "message": "To prevent further attempts, password based API authentication has been disabled."
   },
-  "fronted-000523": {
+  "frontend-000523": {
     "message": "To enable it again, log in with the webapp or any client using token authentication."
   },
-  "fronted-000524": {
+  "frontend-000524": {
     "message": "If you don't know this client, please change your master password and Nextcloud password."
   },
-  "fronted-000525": {
+  "frontend-000525": {
     "message": "To increase security, we recommend using device specific tokens instead of your password."
   },
   "backend-000526": {
@@ -2185,7 +2185,7 @@
   "backend-000590": {
     "message": "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this."
   },
-  "fronted-000591": {
+  "frontend-000591": {
     "message": "If you think your server has HTTPS enabled, you can try to $STR_1$ with HTTPS.",
     "placeholders": {
       "str_1": {
@@ -2193,7 +2193,7 @@
       }
     }
   },
-  "fronted-000592": {
+  "frontend-000592": {
     "message": "PHP $STR_1$ is no longer supported.",
     "placeholders": {
       "str_1": {
@@ -2348,52 +2348,52 @@
   "backend-000631": {
     "message": "This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook."
   },
-  "fronted-000632": {
+  "frontend-000632": {
     "message": "Favicon Service Api"
   },
-  "fronted-000633": {
+  "frontend-000633": {
     "message": "(optional)"
   },
-  "fronted-000634": {
+  "frontend-000634": {
     "message": "Your Nextcloud requests significantly more icons than the average."
   },
-  "fronted-000635": {
+  "frontend-000635": {
     "message": "Open tutorial"
   },
-  "fronted-000636": {
+  "frontend-000636": {
     "message": "Suspicious amount of failed login attempts detected."
   },
-  "fronted-000637": {
+  "frontend-000637": {
     "message": "More information"
   },
-  "fronted-000638": {
+  "frontend-000638": {
     "message": "View insecure passwords"
   },
-  "fronted-000639": {
+  "frontend-000639": {
     "message": "Open settings"
   },
-  "fronted-000640": {
+  "frontend-000640": {
     "message": "Open passwords"
   },
-  "fronted-000641": {
+  "frontend-000641": {
     "message": "View apps"
   },
-  "fronted-000642": {
+  "frontend-000642": {
     "message": "View apps & devices"
   },
-  "fronted-000643": {
+  "frontend-000643": {
     "message": "Manage devices & apps"
   },
-  "fronted-000644": {
+  "frontend-000644": {
     "message": "View shared passwords"
   },
-  "fronted-000645": {
+  "frontend-000645": {
     "message": "App upgrade recommended"
   },
-  "fronted-000646": {
+  "frontend-000646": {
     "message": "A new client or app was connected to your account"
   },
-  "fronted-000647": {
+  "frontend-000647": {
     "message": "\"$STR_1$\" was granted access to your $STR_1$ Passwords account via PassLink.",
     "placeholders": {
       "str_1": {
@@ -2404,7 +2404,7 @@
       }
     }
   },
-  "fronted-000648": {
+  "frontend-000648": {
     "message": "You can manage all connected devices and apps in your $STR_1$ settings in the security section.",
     "placeholders": {
       "str_1": {
@@ -2412,7 +2412,7 @@
       }
     }
   },
-  "fronted-000649": {
+  "frontend-000649": {
     "message": "The last background job was executed with PHP $STRING_1$, but the webserver uses PHP $STRING_2$.",
     "placeholders": {
       "string_1": {
@@ -2423,34 +2423,34 @@
       }
     }
   },
-  "fronted-000650": {
+  "frontend-000650": {
     "message": "Using different major versions of PHP may cause issues."
   },
-  "fronted-000651": {
+  "frontend-000651": {
     "message": "Default Password Security Settings"
   },
-  "fronted-000652": {
+  "frontend-000652": {
     "message": "Security Check Hash"
   },
-  "fronted-000653": {
+  "frontend-000653": {
     "message": "Don't store hashes"
   },
-  "fronted-000654": {
+  "frontend-000654": {
     "message": "Store 50% of the hash"
   },
-  "fronted-000655": {
+  "frontend-000655": {
     "message": "Store 75% of the hash"
   },
-  "fronted-000656": {
+  "frontend-000656": {
     "message": "Store the full hash"
   },
-  "fronted-000657": {
+  "frontend-000657": {
     "message": "Backup automatically restored"
   },
-  "fronted-000658": {
+  "frontend-000658": {
     "message": "The passwords app seems tho have encountered a database issue."
   },
-  "fronted-000659": {
+  "frontend-000659": {
     "message": "Because of this, the app backup \"$STR_1$\" was restored automatically.",
     "placeholders": {
       "str_1": {
@@ -2458,16 +2458,16 @@
       }
     }
   },
-  "fronted-000660": {
+  "frontend-000660": {
     "message": "If this was an error, a backup of the database was made before restoring it."
   },
-  "fronted-000661": {
+  "frontend-000661": {
     "message": "You can disable automatic backup restoring in the app settings."
   },
-  "fronted-000662": {
+  "frontend-000662": {
     "message": "Restore backups automatically when database wiped"
   },
-  "fronted-000663": {
+  "frontend-000663": {
     "message": "Passwords ends updates for Nextcloud $STR_1$",
     "placeholders": {
       "str_1": {
@@ -2475,7 +2475,7 @@
       }
     }
   },
-  "fronted-000664": {
+  "frontend-000664": {
     "message": "Passwords $STR_1$ is the last update for Nextcloud $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -2486,7 +2486,7 @@
       }
     }
   },
-  "fronted-000665": {
+  "frontend-000665": {
     "message": "Upgrade to Nextcloud $STR_1$ and PHP $STR_1$ (or PHP $STR_1$ for LSR) for future upgrades.",
     "placeholders": {
       "str_1": {
@@ -2500,7 +2500,7 @@
       }
     }
   },
-  "fronted-000666": {
+  "frontend-000666": {
     "message": "Select automatically"
   },
   "backend-000667": {
@@ -2890,7 +2890,7 @@
   "tutorial-000790": {
     "message": "Your password needs at least 12 characters and the confirmation password must be the same"
   },
-  "fronted-000791": {
+  "frontend-000791": {
     "message": "WKHTML (local)"
   }
 }

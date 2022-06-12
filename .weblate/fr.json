@@ -1175,16 +1175,16 @@
   "backend-000590": {
     "message": "Êtes-vous sûr de vouloir supprimer tous vos paramètres, mots de passe, dossiers et étiquettes et recommencer depuis le début ? \nCette action n’est PAS réversible."
   },
-  "fronted-000377": {
+  "frontend-000377": {
     "message": "HTTPS Requis"
   },
-  "fronted-000378": {
+  "frontend-000378": {
     "message": "recharger cette page"
   },
-  "fronted-000380": {
+  "frontend-000380": {
     "message": "documentation"
   },
-  "fronted-000382": {
+  "frontend-000382": {
     "message": "Cette application dépend de $STR_1$ afin de fonctionner correctement",
     "placeholders": {
       "str_1": {
@@ -1192,7 +1192,7 @@
       }
     }
   },
-  "fronted-000381": {
+  "frontend-000381": {
     "message": "Vous pouvez essayer de $STR_1$ avec HTTPS d’activé.",
     "placeholders": {
       "str_1": {
@@ -1200,10 +1200,10 @@
       }
     }
   },
-  "fronted-000388": {
+  "frontend-000388": {
     "message": "Si ce problème persiste, vous devriez contacter votre administrateur."
   },
-  "fronted-000389": {
+  "frontend-000389": {
     "message": "Mots de passe Session $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1214,151 +1214,151 @@
       }
     }
   },
-  "fronted-000390": {
+  "frontend-000390": {
     "message": "Ouvrir la Documentation"
   },
-  "fronted-000391": {
+  "frontend-000391": {
     "message": "Jamais"
   },
-  "fronted-000392": {
+  "frontend-000392": {
     "message": "Traitement des données interne"
   },
-  "fronted-000393": {
+  "frontend-000393": {
     "message": "Génération des images"
   },
-  "fronted-000394": {
+  "frontend-000394": {
     "message": "Imagick/GMagick (recommandé)"
   },
-  "fronted-000395": {
+  "frontend-000395": {
     "message": "Services Externes"
   },
-  "fronted-000396": {
+  "frontend-000396": {
     "message": "Contrôle de la qualité du mot de passe"
   },
-  "fronted-000397": {
+  "frontend-000397": {
     "message": "Have I been pwned? (recommandé)"
   },
-  "fronted-000398": {
+  "frontend-000398": {
     "message": "25 Million de mots de passe (Local)"
   },
-  "fronted-000399": {
+  "frontend-000399": {
     "message": "5 Million de mots de passe (Local)"
   },
-  "fronted-000400": {
+  "frontend-000400": {
     "message": "25M de mots de passe & HIbp ?"
   },
-  "fronted-000401": {
+  "frontend-000401": {
     "message": "Générateur de mot de passe"
   },
-  "fronted-000402": {
+  "frontend-000402": {
     "message": "Dictionnaire local"
   },
-  "fronted-000403": {
+  "frontend-000403": {
     "message": "Caractères Aléatoires"
   },
-  "fronted-000404": {
+  "frontend-000404": {
     "message": "watchout4snakes.com"
   },
-  "fronted-000405": {
+  "frontend-000405": {
     "message": "Leipzig Corpora Collection (recommandé)"
   },
-  "fronted-000406": {
+  "frontend-000406": {
     "message": "Service de Favicon"
   },
-  "fronted-000407": {
+  "frontend-000407": {
     "message": "Analyseur local"
   },
-  "fronted-000408": {
+  "frontend-000408": {
     "message": "Besticon (recommandé)"
   },
-  "fronted-000409": {
+  "frontend-000409": {
     "message": "Aucun"
   },
-  "fronted-000410": {
+  "frontend-000410": {
     "message": "Service d’aperçus des sites internet"
   },
-  "fronted-000411": {
+  "frontend-000411": {
     "message": "Clé d’API service d’aperçus"
   },
-  "fronted-000412": {
+  "frontend-000412": {
     "message": "Pageres/PhantomJS (local)"
   },
-  "fronted-000413": {
+  "frontend-000413": {
     "message": "WKHTML (local)"
   },
-  "fronted-000414": {
+  "frontend-000414": {
     "message": "screenshotapi.io"
   },
-  "fronted-000415": {
+  "frontend-000415": {
     "message": "Options par défaut des courriels"
   },
-  "fronted-000416": {
+  "frontend-000416": {
     "message": "Envoyer un courriel à chaque événement de sécurité"
   },
-  "fronted-000417": {
+  "frontend-000417": {
     "message": "Envoyer un courriel à chaque événement de partage"
   },
-  "fronted-000418": {
+  "frontend-000418": {
     "message": "Autres Options"
   },
-  "fronted-000419": {
+  "frontend-000419": {
     "message": "Effacer définitivement les éléments de la base de données"
   },
-  "fronted-000420": {
+  "frontend-000420": {
     "message": "Afficher Nightly Updates dans \"Apps\""
   },
-  "fronted-000421": {
+  "frontend-000421": {
     "message": "Jamais"
   },
-  "fronted-000422": {
+  "frontend-000422": {
     "message": "Immédiatement"
   },
-  "fronted-000423": {
+  "frontend-000423": {
     "message": "Après deux heures"
   },
-  "fronted-000424": {
+  "frontend-000424": {
     "message": "Après une journée"
   },
-  "fronted-000425": {
+  "frontend-000425": {
     "message": "Après deux semaines"
   },
-  "fronted-000426": {
+  "frontend-000426": {
     "message": "Après un mois"
   },
-  "fronted-000427": {
+  "frontend-000427": {
     "message": "Après un an"
   },
-  "fronted-000428": {
+  "frontend-000428": {
     "message": "Réglages de sauvegarde"
   },
-  "fronted-000429": {
+  "frontend-000429": {
     "message": "Intervalle de sauvegarde"
   },
-  "fronted-000430": {
+  "frontend-000430": {
     "message": "Toutes les heures"
   },
-  "fronted-000431": {
+  "frontend-000431": {
     "message": "Toutes les six heures"
   },
-  "fronted-000432": {
+  "frontend-000432": {
     "message": "Tous les jours"
   },
-  "fronted-000433": {
+  "frontend-000433": {
     "message": "Tous les deux jours"
   },
-  "fronted-000434": {
+  "frontend-000434": {
     "message": "Toutes les semaines"
   },
-  "fronted-000435": {
+  "frontend-000435": {
     "message": "Toutes les deux semaines"
   },
-  "fronted-000436": {
+  "frontend-000436": {
     "message": "Nombre de sauvegardes à garder"
   },
-  "fronted-000437": {
+  "frontend-000437": {
     "message": "Caches"
   },
-  "fronted-000438": {
+  "frontend-000438": {
     "message": "Cache par défaut ($STR_1$ fichiers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1369,7 +1369,7 @@
       }
     }
   },
-  "fronted-000439": {
+  "frontend-000439": {
     "message": "Avatars ($STR_1$ fichiers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1380,7 +1380,7 @@
       }
     }
   },
-  "fronted-000440": {
+  "frontend-000440": {
     "message": "Favicon ($STR_1$ fichiers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1391,7 +1391,7 @@
       }
     }
   },
-  "fronted-000441": {
+  "frontend-000441": {
     "message": "Aperçus ($STR_1$ fichiers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1402,7 +1402,7 @@
       }
     }
   },
-  "fronted-000442": {
+  "frontend-000442": {
     "message": "Mots de passe ($STR_1$ fichiers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1413,34 +1413,34 @@
       }
     }
   },
-  "fronted-000443": {
+  "frontend-000443": {
     "message": "Purger"
   },
-  "fronted-000444": {
+  "frontend-000444": {
     "message": "Purger ce cache"
   },
-  "fronted-000445": {
+  "frontend-000445": {
     "message": "Vous ne pouvez pas vider ce cache tant que le service utilise une instance d’API partagée."
   },
-  "fronted-000446": {
+  "frontend-000446": {
     "message": "Sauvé"
   },
-  "fronted-000447": {
+  "frontend-000447": {
     "message": "Purgé"
   },
-  "fronted-000448": {
+  "frontend-000448": {
     "message": "Échec"
   },
-  "fronted-000449": {
+  "frontend-000449": {
     "message": "Besoin d’aide"
   },
-  "fronted-000450": {
+  "frontend-000450": {
     "message": "Bogue trouvé"
   },
-  "fronted-000451": {
+  "frontend-000451": {
     "message": "vous cherchez la documentation (anglais uniquement)"
   },
-  "fronted-000452": {
+  "frontend-000452": {
     "message": "$STR_1$, $STR_1$ ou $STR_1$ ? Toute l’aide est par ici.",
     "placeholders": {
       "str_1": {
@@ -1454,7 +1454,7 @@
       }
     }
   },
-  "fronted-000453": {
+  "frontend-000453": {
     "message": "$STRING_1$ $STRING_2$ n’est plus supporté.",
     "placeholders": {
       "string_1": {
@@ -1465,10 +1465,10 @@
       }
     }
   },
-  "fronted-000454": {
+  "frontend-000454": {
     "message": "L’application nécessite HTTPS."
   },
-  "fronted-000455": {
+  "frontend-000455": {
     "message": "L'utilisation de $STR_1$ pour exécuter des jobs d'arrière-plan peut entraîner de longs temps d'attente. Nous vous recommandons d'utiliser Cron.",
     "placeholders": {
       "str_1": {
@@ -1476,13 +1476,13 @@
       }
     }
   },
-  "fronted-000456": {
+  "frontend-000456": {
     "message": "Veuillez vérifier les exigences systèmes."
   },
-  "fronted-000457": {
+  "frontend-000457": {
     "message": "Mot de passe non partagé"
   },
-  "fronted-000458": {
+  "frontend-000458": {
     "message": "Un mot de passe n’a pu être partagé avec $STRING_1$, car il l’est déjà",
     "placeholders": {
       "string_1": {
@@ -1490,25 +1490,25 @@
       }
     }
   },
-  "fronted-000459": {
+  "frontend-000459": {
     "message": "Vous avez un mot de passe non sûr"
   },
-  "fronted-000460": {
+  "frontend-000460": {
     "message": "Vous avez plusieurs mot de passe non sûrs"
   },
-  "fronted-000461": {
+  "frontend-000461": {
     "message": "Un de vos mots de passe n’est plus sûr d’utilisation."
   },
-  "fronted-000462": {
+  "frontend-000462": {
     "message": "Plusieurs de vos mots de passe ne sont plus sûr d’utilisation."
   },
-  "fronted-000463": {
+  "frontend-000463": {
     "message": "L’application vérifiera régulièrement si vos mots de passe on été compromis suite à une fuite de données sur un site."
   },
-  "fronted-000464": {
+  "frontend-000464": {
     "message": "Le test de sécurité a déterminé que l’un de vos mots de passe n’est pas sécurisé."
   },
-  "fronted-000465": {
+  "frontend-000465": {
     "message": "Le test de sécurité a déterminé que $STR_1$ de vos mots de passe ne sont pas sécurisés.",
     "placeholders": {
       "str_1": {
@@ -1516,37 +1516,37 @@
       }
     }
   },
-  "fronted-000466": {
+  "frontend-000466": {
     "message": "Cela signifie que votre mot de passe a fuité sur internet et met en danger tous les comptes qui l’utilise."
   },
-  "fronted-000467": {
+  "frontend-000467": {
     "message": "Cela signifie que vos mots de passe ont fuité sur internet et mettent en danger tous les comptes qui les utilises."
   },
-  "fronted-000468": {
+  "frontend-000468": {
     "message": "Le mot de passe est donc marqué comme 'Faible' et devrait être changé."
   },
-  "fronted-000469": {
+  "frontend-000469": {
     "message": "Les mots de passe sont donc marqués comme 'Faible' et devraient être changés."
   },
-  "fronted-000470": {
+  "frontend-000470": {
     "message": "Vous pouvez créer un nouveau mot de passe sécurisé dans l’application."
   },
-  "fronted-000471": {
+  "frontend-000471": {
     "message": "Vous pouvez créer des nouveaux mots de passe sécurisés dans l’application"
   },
-  "fronted-000472": {
+  "frontend-000472": {
     "message": "Changer le mot de passe maintenant"
   },
-  "fronted-000473": {
+  "frontend-000473": {
     "message": "Changer les mots de passe maintenant"
   },
-  "fronted-000474": {
+  "frontend-000474": {
     "message": "Ouvrez l’application pour changer le mot de passe."
   },
-  "fronted-000475": {
+  "frontend-000475": {
     "message": "Ouvrez l’application pour changer les mots de passe."
   },
-  "fronted-000476": {
+  "frontend-000476": {
     "message": "$STR_1$ à partagé un mot de passe avec vous.",
     "placeholders": {
       "str_1": {
@@ -1554,7 +1554,7 @@
       }
     }
   },
-  "fronted-000477": {
+  "frontend-000477": {
     "message": "$STR_1$ à partagé $STR_1$ mots de passe avec vous ",
     "placeholders": {
       "str_1": {
@@ -1565,7 +1565,7 @@
       }
     }
   },
-  "fronted-000478": {
+  "frontend-000478": {
     "message": "$STRING_4$ et $STRING_3$ ont partagés $STRING_1$ mots de passe avec vous.",
     "placeholders": {
       "string_4": {
@@ -1579,7 +1579,7 @@
       }
     }
   },
-  "fronted-000479": {
+  "frontend-000479": {
     "message": "$STRING_5$, $STRING_4$ et $STRING_3$ ont partagés $STRING_1$ mots de passe avec vous.",
     "placeholders": {
       "string_5": {
@@ -1596,7 +1596,7 @@
       }
     }
   },
-  "fronted-000480": {
+  "frontend-000480": {
     "message": "$STRING_5$, $STRING_4$ et $STRING_2$ autres ont partagés $STRING_1$ mots de passe avec vous.",
     "placeholders": {
       "string_5": {
@@ -1613,13 +1613,13 @@
       }
     }
   },
-  "fronted-000481": {
+  "frontend-000481": {
     "message": "Ouvrez l’application pour voir le mot de passe."
   },
-  "fronted-000482": {
+  "frontend-000482": {
     "message": "Ouvrez l’application pour voir les mots de passe."
   },
-  "fronted-000483": {
+  "frontend-000483": {
     "message": "Un mot de passe à été partagé avec vous sur $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1627,7 +1627,7 @@
       }
     }
   },
-  "fronted-000484": {
+  "frontend-000484": {
     "message": "Plusieurs mots de passe ont été partagé avec vous sur $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1635,13 +1635,13 @@
       }
     }
   },
-  "fronted-000485": {
+  "frontend-000485": {
     "message": "Voir les mots de passe partagés avec moi"
   },
-  "fronted-000486": {
+  "frontend-000486": {
     "message": "Un ou plusieurs mots de passes ne peuvent être partagé, car le destinataire y  déjà accès."
   },
-  "fronted-000487": {
+  "frontend-000487": {
     "message": "$STR_1$ mots de passes ne peuvent être partagé, car le destinataire y a déjà accès.",
     "placeholders": {
       "str_1": {
@@ -1649,13 +1649,13 @@
       }
     }
   },
-  "fronted-000489": {
+  "frontend-000489": {
     "message": "Partager un mot de passe qui a déjà été partagé avec vous peut créer un boucle."
   },
-  "fronted-000490": {
+  "frontend-000490": {
     "message": "Pour éviter cela, ces mots de passe ne devraient pas être partagé"
   },
-  "fronted-000496": {
+  "frontend-000496": {
     "message": "Utilisateur effacé ($STR_1$)",
     "placeholders": {
       "str_1": {

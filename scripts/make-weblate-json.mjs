@@ -13,7 +13,7 @@ import crypto from 'crypto';
 async function processJsonFile(file, database) {
     let content = JSON.parse(await readFile(file, {encoding: 'utf-8'})),
         subpath = file.replace('src/l10n/', ''),
-        section = 'fronted';
+        section = 'frontend';
     if(subpath.indexOf('/') !== -1) {
         section = subpath.substr(0, subpath.indexOf('/'));
         subpath = subpath.substr(subpath.indexOf('/') + 1);

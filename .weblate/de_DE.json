@@ -1471,19 +1471,19 @@
     "backend-000631": {
         "message": "Dies ist eine Kopie der Passphrase die Sie für die Verschlüsselung gewählt haben. Änderungen an diesem Eintrag haben keine Auswirkungen auf die Verschlüsselung. Die Passphrase kann in den Einstellungen geändert werden. Weitere Informationen finden Sie im Handbuch."
     },
-    "fronted-000377": {
+    "frontend-000377": {
         "message": "HTTPS erforderlich"
     },
-    "fronted-000378": {
+    "frontend-000378": {
         "message": "mit HTTPS aufzurufen"
     },
-    "fronted-000379": {
+    "frontend-000379": {
         "message": "Forum"
     },
-    "fronted-000380": {
+    "frontend-000380": {
         "message": "Dokumentation"
     },
-    "fronted-000381": {
+    "frontend-000381": {
         "message": "Sie können versuchen die Seite $STR_1$.",
         "placeholders": {
             "str_1": {
@@ -1491,7 +1491,7 @@
             }
         }
     },
-    "fronted-000382": {
+    "frontend-000382": {
         "message": "Diese Anwendung benötigt $STR_1$ um sicher zu funktionieren.",
         "placeholders": {
             "str_1": {
@@ -1499,7 +1499,7 @@
             }
         }
     },
-    "fronted-000383": {
+    "frontend-000383": {
         "message": "Dies ist KEIN Bug. Besuchen Sie unser $STR_1$ falls Sie Hilfe benötigen.",
         "placeholders": {
             "str_1": {
@@ -1507,10 +1507,10 @@
             }
         }
     },
-    "fronted-000384": {
+    "frontend-000384": {
         "message": "Lesen Sie den unten stehenden HTTPS Bericht um das Problem zu analysieren."
     },
-    "fronted-000385": {
+    "frontend-000385": {
         "message": "Lesen Sie diese $STR_1$ um den Server auf HTTPS umzustellen.",
         "placeholders": {
             "str_1": {
@@ -1518,7 +1518,7 @@
             }
         }
     },
-    "fronted-000386": {
+    "frontend-000386": {
         "message": "Lesen Sie diese $STR_1$ falls Sie einen Proxy jedweder Art verwenden.",
         "placeholders": {
             "str_1": {
@@ -1526,7 +1526,7 @@
             }
         }
     },
-    "fronted-000387": {
+    "frontend-000387": {
         "message": "Installieren Sie ein kostenloses Zertifikat von $STR_1$ falls Sie keines haben.",
         "placeholders": {
             "str_1": {
@@ -1534,10 +1534,10 @@
             }
         }
     },
-    "fronted-000388": {
+    "frontend-000388": {
         "message": "Wenn der Fehler weiterhin besteht sollten Sie den Administrator kontaktieren."
     },
-    "fronted-000389": {
+    "frontend-000389": {
         "message": "Passwörter App Sitzung $STR_1$ - $STR_1$",
         "placeholders": {
             "str_1": {
@@ -1548,157 +1548,157 @@
             }
         }
     },
-    "fronted-000390": {
+    "frontend-000390": {
         "message": "Dokumentation öffnen"
     },
-    "fronted-000391": {
+    "frontend-000391": {
         "message": "nie"
     },
-    "fronted-000392": {
+    "frontend-000392": {
         "message": "Interne Datenverarbeitung"
     },
-    "fronted-000393": {
+    "frontend-000393": {
         "message": "Bildverarbeitung"
     },
-    "fronted-000394": {
+    "frontend-000394": {
         "message": "Imagick/GMagick (empfohlen)"
     },
-    "fronted-000395": {
+    "frontend-000395": {
         "message": "Externe Dienste"
     },
-    "fronted-000396": {
+    "frontend-000396": {
         "message": "Passwort Sicherheitsprüfung"
     },
-    "fronted-000397": {
+    "frontend-000397": {
         "message": "Have I been pwned? (empfohlen)"
     },
-    "fronted-000398": {
+    "frontend-000398": {
         "message": "Große lokale Datenbank (25M Passwörter)"
     },
-    "fronted-000399": {
+    "frontend-000399": {
         "message": "Kleine lokale Datenbank (5M Passwörter)"
     },
-    "fronted-000400": {
+    "frontend-000400": {
         "message": "Große lokale Datenbank & Hibp?"
     },
-    "fronted-000401": {
+    "frontend-000401": {
         "message": "Passwort Generator"
     },
-    "fronted-000402": {
+    "frontend-000402": {
         "message": "Lokales Wörterbuch"
     },
-    "fronted-000403": {
+    "frontend-000403": {
         "message": "Zufällige Buchstaben"
     },
-    "fronted-000404": {
+    "frontend-000404": {
         "message": "watchout4snakes.com"
     },
-    "fronted-000405": {
+    "frontend-000405": {
         "message": "Leipzig Corpora Collection (empfohlen)"
     },
-    "fronted-000406": {
+    "frontend-000406": {
         "message": "Favicon Service"
     },
-    "fronted-000632": {
+    "frontend-000632": {
         "message": "Favicon Service Api"
     },
-    "fronted-000633": {
+    "frontend-000633": {
         "message": "(optional)"
     },
-    "fronted-000407": {
+    "frontend-000407": {
         "message": "Lokaler Icon Suchdienst"
     },
-    "fronted-000408": {
+    "frontend-000408": {
         "message": "Besticon (empfohlen)"
     },
-    "fronted-000409": {
+    "frontend-000409": {
         "message": "Keiner"
     },
-    "fronted-000410": {
+    "frontend-000410": {
         "message": "Webseitenansichtengenerator"
     },
-    "fronted-000411": {
+    "frontend-000411": {
         "message": "API Schlüssel"
     },
-    "fronted-000412": {
+    "frontend-000412": {
         "message": "Pageres/PhantomJS (Lokal)"
     },
-    "fronted-000413": {
+    "frontend-000413": {
         "message": "WKHTML (Lokal)"
     },
-    "fronted-000414": {
+    "frontend-000414": {
         "message": "screenshotapi.io"
     },
-    "fronted-000415": {
+    "frontend-000415": {
         "message": "E-Mail Standardeinstellungen"
     },
-    "fronted-000416": {
+    "frontend-000416": {
         "message": "Sende E-Mails für Sicherheitsprobleme"
     },
-    "fronted-000417": {
+    "frontend-000417": {
         "message": "Sende E-Mails beim Teilen"
     },
-    "fronted-000418": {
+    "frontend-000418": {
         "message": "Weitere Einstellungen"
     },
-    "fronted-000419": {
+    "frontend-000419": {
         "message": "Gelöschte Objekte aus der Datenbank entfernen"
     },
-    "fronted-000420": {
+    "frontend-000420": {
         "message": "Zeige Nightly Updates in \"Apps\""
     },
-    "fronted-000421": {
+    "frontend-000421": {
         "message": "Nie"
     },
-    "fronted-000422": {
+    "frontend-000422": {
         "message": "Sofort"
     },
-    "fronted-000423": {
+    "frontend-000423": {
         "message": "Nach zwei Stunden"
     },
-    "fronted-000424": {
+    "frontend-000424": {
         "message": "Nach einem Tag"
     },
-    "fronted-000425": {
+    "frontend-000425": {
         "message": "Nach zwei Wochen"
     },
-    "fronted-000426": {
+    "frontend-000426": {
         "message": "Nach einem Monat"
     },
-    "fronted-000427": {
+    "frontend-000427": {
         "message": "Nach einem Jahr"
     },
-    "fronted-000428": {
+    "frontend-000428": {
         "message": "Backup Einstellungen"
     },
-    "fronted-000429": {
+    "frontend-000429": {
         "message": "Sicherungsintervall"
     },
-    "fronted-000430": {
+    "frontend-000430": {
         "message": "Jede Stunde"
     },
-    "fronted-000431": {
+    "frontend-000431": {
         "message": "Alle sechs Stunden"
     },
-    "fronted-000432": {
+    "frontend-000432": {
         "message": "Jeden Tag"
     },
-    "fronted-000433": {
+    "frontend-000433": {
         "message": "Alle zwei Tage"
     },
-    "fronted-000434": {
+    "frontend-000434": {
         "message": "Jede Woche"
     },
-    "fronted-000435": {
+    "frontend-000435": {
         "message": "Alle zwei Wochen"
     },
-    "fronted-000436": {
+    "frontend-000436": {
         "message": "Anzahl der zu speichernden Backups"
     },
-    "fronted-000437": {
+    "frontend-000437": {
         "message": "Zwischenspeicher"
     },
-    "fronted-000438": {
+    "frontend-000438": {
         "message": "Standard Cache ($STR_1$ Dateien, $STR_1$)",
         "placeholders": {
             "str_1": {
@@ -1709,7 +1709,7 @@
             }
         }
     },
-    "fronted-000439": {
+    "frontend-000439": {
         "message": "Profilbilder ($STR_1$ Dateien, $STR_1$)",
         "placeholders": {
             "str_1": {
@@ -1720,7 +1720,7 @@
             }
         }
     },
-    "fronted-000440": {
+    "frontend-000440": {
         "message": "Favicon ($STR_1$ Dateien, $STR_1$)",
         "placeholders": {
             "str_1": {
@@ -1731,7 +1731,7 @@
             }
         }
     },
-    "fronted-000441": {
+    "frontend-000441": {
         "message": "Webseitenansichten ($STR_1$ Dateien, $STR_1$)",
         "placeholders": {
             "str_1": {
@@ -1742,7 +1742,7 @@
             }
         }
     },
-    "fronted-000442": {
+    "frontend-000442": {
         "message": "Schlechte Passwörter ($STR_1$ Dateien, $STR_1$)",
         "placeholders": {
             "str_1": {
@@ -1753,34 +1753,34 @@
             }
         }
     },
-    "fronted-000443": {
+    "frontend-000443": {
         "message": "leeren"
     },
-    "fronted-000444": {
+    "frontend-000444": {
         "message": "Diesen Zwischenspeicher leeren"
     },
-    "fronted-000445": {
+    "frontend-000445": {
         "message": "Sie können diesen Zwischenspeicher nicht leeren solange der Dienst eine geteilte API-Instanz nutzt"
     },
-    "fronted-000446": {
+    "frontend-000446": {
         "message": "Gespeichert"
     },
-    "fronted-000447": {
+    "frontend-000447": {
         "message": "Geleert"
     },
-    "fronted-000448": {
+    "frontend-000448": {
         "message": "Fehlgeschlagen"
     },
-    "fronted-000449": {
+    "frontend-000449": {
         "message": "Benötigen Sie Hilfe"
     },
-    "fronted-000450": {
+    "frontend-000450": {
         "message": "haben Sie einen Fehler gefunden"
     },
-    "fronted-000451": {
+    "frontend-000451": {
         "message": "suchen Sie die Dokumentation"
     },
-    "fronted-000452": {
+    "frontend-000452": {
         "message": "$STR_1$, $STR_1$ oder $STR_1$? Wir stehen gerne bereit!",
         "placeholders": {
             "str_1": {
@@ -1794,7 +1794,7 @@
             }
         }
     },
-    "fronted-000453": {
+    "frontend-000453": {
         "message": "$STRING_1$ $STRING_2$ wird nicht mehr unterstützt.",
         "placeholders": {
             "string_1": {
@@ -1805,10 +1805,10 @@
             }
         }
     },
-    "fronted-000454": {
+    "frontend-000454": {
         "message": "Passwörter benötigt HTTPS."
     },
-    "fronted-000455": {
+    "frontend-000455": {
         "message": "Hintergrundaufgaben mit $STR_1$ auszuführen kann lange Wartezeiten verursachen. Wir empfehlen Cron zu verwenden.",
         "placeholders": {
             "str_1": {
@@ -1816,13 +1816,13 @@
             }
         }
     },
-    "fronted-000456": {
+    "frontend-000456": {
         "message": "Bitte sehen Sie sich unsere Systemanforderungen an."
     },
-    "fronted-000457": {
+    "frontend-000457": {
         "message": "Password nicht geteilt"
     },
-    "fronted-000458": {
+    "frontend-000458": {
         "message": "Ein Passwort wurde nicht mit $STRING_1$ geteilt, da dies bereits von einer anderen Person getan wurde.",
         "placeholders": {
             "string_1": {
@@ -1830,25 +1830,25 @@
             }
         }
     },
-    "fronted-000459": {
+    "frontend-000459": {
         "message": "Sie haben ein unsicheres Passwort"
     },
-    "fronted-000460": {
+    "frontend-000460": {
         "message": "Sie haben unsichere Passwörter"
     },
-    "fronted-000461": {
+    "frontend-000461": {
         "message": "Eines Ihrer Passwörter ist nicht mehr sicher."
     },
-    "fronted-000462": {
+    "frontend-000462": {
         "message": "Einige Ihrer Passwörter sind nicht mehr sicher."
     },
-    "fronted-000463": {
+    "frontend-000463": {
         "message": "Passwörter prüft regelmäßig ob Ihre Passwörter durch einen Datendiebstahl kompromittiert wurden."
     },
-    "fronted-000464": {
+    "frontend-000464": {
         "message": "Dieser Sicherheitstest hat festgestellt, dass eines Ihrer Passwörter unsicher ist."
     },
-    "fronted-000465": {
+    "frontend-000465": {
         "message": "Dieser Sicherheitstest hat festgestellt, dass $STR_1$ Ihrer Passwörter unsicher sind.",
         "placeholders": {
             "str_1": {
@@ -1856,37 +1856,37 @@
             }
         }
     },
-    "fronted-000466": {
+    "frontend-000466": {
         "message": "Das bedeutet, dass das Passwort im Internet gefunden werden kann und gefährdet Ihrer Account."
     },
-    "fronted-000467": {
+    "frontend-000467": {
         "message": "Das bedeutet, dass die Passwörter im Internet gefunden werden können und gefährdet Ihre Accounts."
     },
-    "fronted-000468": {
+    "frontend-000468": {
         "message": "Daher wurde das Passwort als unsicher markiert und sollte geändert werden."
     },
-    "fronted-000469": {
+    "frontend-000469": {
         "message": "Daher wurden die Passwörter als unsicher markiert und sollten geändert werden."
     },
-    "fronted-000470": {
+    "frontend-000470": {
         "message": "Sie können in der Passwörter App ein neues, sicheres Passwort erzeugen."
     },
-    "fronted-000471": {
+    "frontend-000471": {
         "message": "Sie können in der Passwörter App ein neue, sichere Passwörter erzeugen."
     },
-    "fronted-000472": {
+    "frontend-000472": {
         "message": "Passwort jetzt ändern"
     },
-    "fronted-000473": {
+    "frontend-000473": {
         "message": "Passwörter jetzt ändern"
     },
-    "fronted-000474": {
+    "frontend-000474": {
         "message": "Öffnen Sie die Passwörter App um es zu ändern."
     },
-    "fronted-000475": {
+    "frontend-000475": {
         "message": "Öffnen Sie die Passwörter App um sie zu ändern."
     },
-    "fronted-000476": {
+    "frontend-000476": {
         "message": "$STR_1$ hat ein Passwort mit Ihnen geteilt.",
         "placeholders": {
             "str_1": {
@@ -1894,7 +1894,7 @@
             }
         }
     },
-    "fronted-000477": {
+    "frontend-000477": {
         "message": "$STR_1$ hat $STR_1$ Passwörter mit Ihnen geteilt.",
         "placeholders": {
             "str_1": {
@@ -1905,7 +1905,7 @@
             }
         }
     },
-    "fronted-000478": {
+    "frontend-000478": {
         "message": "$STRING_4$ und $STRING_3$ haben $STRING_1$ Passwörter mit Ihnen geteilt.",
         "placeholders": {
             "string_4": {
@@ -1919,7 +1919,7 @@
             }
         }
     },
-    "fronted-000479": {
+    "frontend-000479": {
         "message": "$STRING_5$, $STRING_4$ und $STRING_3$ haben $STRING_1$ Passwörter mit Ihnen geteilt.",
         "placeholders": {
             "string_5": {
@@ -1936,7 +1936,7 @@
             }
         }
     },
-    "fronted-000480": {
+    "frontend-000480": {
         "message": "$STRING_5$, $STRING_4$ und $STRING_2$ andere haben $STRING_1$ Passwörter mit Ihnen geteilt.",
         "placeholders": {
             "string_5": {
@@ -1953,13 +1953,13 @@
             }
         }
     },
-    "fronted-000481": {
+    "frontend-000481": {
         "message": "Öffnen Sie Passwörter App um es zu sehen."
     },
-    "fronted-000482": {
+    "frontend-000482": {
         "message": "Öffnen Sie Passwörter App um sie zu sehen."
     },
-    "fronted-000483": {
+    "frontend-000483": {
         "message": "Ein Passwort wurde mit Ihnen auf $STR_1$ geteilt",
         "placeholders": {
             "str_1": {
@@ -1967,7 +1967,7 @@
             }
         }
     },
-    "fronted-000484": {
+    "frontend-000484": {
         "message": "Mehrere Passwörter wurden mit Ihnen auf $STR_1$ geteilt",
         "placeholders": {
             "str_1": {
@@ -1975,13 +1975,13 @@
             }
         }
     },
-    "fronted-000485": {
+    "frontend-000485": {
         "message": "Mit mir geteilte Passwörter ansehen"
     },
-    "fronted-000486": {
+    "frontend-000486": {
         "message": "Eines Ihrer Passwörter konnte nicht geteilt werden, da der Empfänger bereits Zugriff darauf hat."
     },
-    "fronted-000487": {
+    "frontend-000487": {
         "message": "$STR_1$ Ihrer Passwörter konnten nicht geteilt werden, da der Empfänger bereits Zugriff darauf hat.",
         "placeholders": {
             "str_1": {
@@ -1989,16 +1989,16 @@
             }
         }
     },
-    "fronted-000489": {
+    "frontend-000489": {
         "message": "Passwörter zu teilen, die mit Ihnen geteilt wurden, kann manchmal eine rekursive Schleife erzeugen."
     },
-    "fronted-000490": {
+    "frontend-000490": {
         "message": "Um dies zu verhindern werden diese Passwörter nicht geteilt."
     },
-    "fronted-000491": {
+    "frontend-000491": {
         "message": "Administrativer Zugriff auf Ihr Konto"
     },
-    "fronted-000492": {
+    "frontend-000492": {
         "message": "$STR_1$ hat am $STR_1$ versucht, sich in Ihr Konto anzumelden.",
         "placeholders": {
             "str_1": {
@@ -2009,7 +2009,7 @@
             }
         }
     },
-    "fronted-000493": {
+    "frontend-000493": {
         "message": "$STR_1$ sich am $STR_1$ in Ihrem Konto angemeldet.",
         "placeholders": {
             "str_1": {
@@ -2020,13 +2020,13 @@
             }
         }
     },
-    "fronted-000494": {
+    "frontend-000494": {
         "message": "Da Sie ein Master-Passwort verwenden, bedeutet dies nicht, dass Zugriff auf Ihre Daten gewährt wurde."
     },
-    "fronted-000495": {
+    "frontend-000495": {
         "message": "Um unerwünschten Zugriff auf Ihre Daten zu verhindern sollten Sie ein Master-Passwort einrichten."
     },
-    "fronted-000496": {
+    "frontend-000496": {
         "message": "Gelöschter Benutzer ($STR_1$)",
         "placeholders": {
             "str_1": {
@@ -2034,73 +2034,73 @@
             }
         }
     },
-    "fronted-000497": {
+    "frontend-000497": {
         "message": "Helfen Sie dabei, Passwörter zu verbessern"
     },
-    "fronted-000498": {
+    "frontend-000498": {
         "message": "Sie können uns helfen, die Passwörter App zu verbessern indem Sie an unserer Server-Umfrage teilnehmen."
     },
-    "fronted-000499": {
+    "frontend-000499": {
         "message": "Dafür werden anonyme Daten über den Server und spezifische Einstellungen an uns gesendet."
     },
-    "fronted-000500": {
+    "frontend-000500": {
         "message": "Dies kann jederzeit in den Einstellungen geändert werden."
     },
-    "fronted-000501": {
+    "frontend-000501": {
         "message": "Später"
     },
-    "fronted-000502": {
+    "frontend-000502": {
         "message": "Mitmachen"
     },
-    "fronted-000503": {
+    "frontend-000503": {
         "message": "Teilnahme an der Server-Umfrage"
     },
-    "fronted-000504": {
+    "frontend-000504": {
         "message": "Grunddaten"
     },
-    "fronted-000505": {
+    "frontend-000505": {
         "message": "Vollständig"
     },
-    "fronted-000506": {
+    "frontend-000506": {
         "message": "Nicht festgelegt"
     },
-    "fronted-000507": {
+    "frontend-000507": {
         "message": "Bitte verwenden Sie eine eigene Besticon-Instanz"
     },
-    "fronted-000508": {
+    "frontend-000508": {
         "message": "Ihre Nextcloud verwendet unsere geteilten Besticon-Instanzen um Favicons zu finden."
     },
-    "fronted-000509": {
+    "frontend-000509": {
         "message": "Diese Instanzen sind für kleine Nextcloud-Installationen mit wenigen Anfragen gedacht."
     },
-    "fronted-000634": {
+    "frontend-000634": {
         "message": "Ihre Nextcloud fordert deutlich mehr Icons als der Durchschnitt an."
     },
-    "fronted-000510": {
+    "frontend-000510": {
         "message": "Bitte folgen Sie dem Link zu unserer einfachen Anleitung zum selbsthosten von Besticon."
     },
-    "fronted-000635": {
+    "frontend-000635": {
         "message": "Anleitung öffnen"
     },
-    "fronted-000511": {
+    "frontend-000511": {
         "message": "Die Konfiguration Ihres Favicon-Service ist unvollständig."
     },
-    "fronted-000512": {
+    "frontend-000512": {
         "message": "Die Konfiguration Ihres Webseitenansichtengenerators ist unvollständig."
     },
-    "fronted-000513": {
+    "frontend-000513": {
         "message": "Der von Ihnen gewählte Favicon-Service benötigt einen API-Endpoint um zu funktionieren."
     },
-    "fronted-000514": {
+    "frontend-000514": {
         "message": "Der von Ihnen gewählte Webseitenansichtengenerator benötigt einen API-Schlüssel oder API-Endpunkt um zu funktionieren."
     },
-    "fronted-000515": {
+    "frontend-000515": {
         "message": "Öffnen Sie die Einstellungen um die Konfiguration abzuschließen oder einen anderen Service zu verwenden."
     },
-    "fronted-000636": {
+    "frontend-000636": {
         "message": "Verdächtige Häufung fehlgeschlagener Anmeldeversuche entdeckt"
     },
-    "fronted-000516": {
+    "frontend-000516": {
         "message": "Wir haben mehrere fehlgeschlagene Versuche von \"$STR_1$\" bemerkt, Ihre Passwortdatenbank zu öffnen.",
         "placeholders": {
             "str_1": {
@@ -2108,64 +2108,64 @@
             }
         }
     },
-    "fronted-000517": {
+    "frontend-000517": {
         "message": "Das könnte bedeuten, dass Dritte versuchen, in Ihr Konto einzudringen."
     },
-    "fronted-000518": {
+    "frontend-000518": {
         "message": "Um weitere Versuche zu verhindern, wurden die Zugangsdaten dieses Gerätes widerrufen."
     },
-    "fronted-000519": {
+    "frontend-000519": {
         "message": "Außerdem wurde die passwortbasierte API-Authentifizierung deaktiviert."
     },
-    "fronted-000520": {
+    "frontend-000520": {
         "message": "Wenn Sie dieses Gerät weiterhin verwenden möchten, müssen Sie ein neues Token dafür anlegen."
     },
-    "fronted-000521": {
+    "frontend-000521": {
         "message": "Wenn Sie dieses Gerät nicht kennen, ändern bitte Ihr Passwort und überprüfen Sie Ihre Geräteliste."
     },
-    "fronted-000522": {
+    "frontend-000522": {
         "message": "Um weitere Versuche zu verhindern, wurde die passwortbasierte API-Authentifizierung deaktiviert."
     },
-    "fronted-000523": {
+    "frontend-000523": {
         "message": "Um diese wieder zu aktivieren, melden Sie sich mit der Webapp oder einem beliebigen Client über die Token-Authentifizierung an."
     },
-    "fronted-000524": {
+    "frontend-000524": {
         "message": "Wenn Sie dieses Gerät nicht kennen, ändern Sie bitte Ihr Master-Passwort und Ihr Nextcloud-Passwort."
     },
-    "fronted-000525": {
+    "frontend-000525": {
         "message": "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden."
     },
-    "fronted-000637": {
+    "frontend-000637": {
         "message": "Weitere Informationen"
     },
-    "fronted-000638": {
+    "frontend-000638": {
         "message": "Unsichere Passwörter anzeigen"
     },
-    "fronted-000639": {
+    "frontend-000639": {
         "message": "Einstellungen öffnen"
     },
-    "fronted-000640": {
+    "frontend-000640": {
         "message": "Passwörter öffnen"
     },
-    "fronted-000641": {
+    "frontend-000641": {
         "message": "Apps anzeigen"
     },
-    "fronted-000642": {
+    "frontend-000642": {
         "message": "Apps & Geräte anzeigen"
     },
-    "fronted-000643": {
+    "frontend-000643": {
         "message": "Apps & Geräte verwalten"
     },
-    "fronted-000644": {
+    "frontend-000644": {
         "message": "Geteilte Passwörter anzeigen"
     },
-    "fronted-000645": {
+    "frontend-000645": {
         "message": "App-Aktualisierung empfohlen"
     },
-    "fronted-000646": {
+    "frontend-000646": {
         "message": "Eine neue App wurde mit Ihrem Konto verknüpft"
     },
-    "fronted-000647": {
+    "frontend-000647": {
         "message": "\"$STR_1$\" wurde mittels PassLink Zugriff auf Ihr $STR_1$ Konto gewährt.",
         "placeholders": {
             "str_1": {
@@ -2176,7 +2176,7 @@
             }
         }
     },
-    "fronted-000648": {
+    "frontend-000648": {
         "message": "Sie können alle verknüpften Geräte und Apps in den $STR_1$ Einstellungen im Bereich \"Sicherheit\" verwalten.",
         "placeholders": {
             "str_1": {
@@ -2184,7 +2184,7 @@
             }
         }
     },
-    "fronted-000649": {
+    "frontend-000649": {
         "message": "Die letzte Hintergrundaufgabe wurde mit PHP $STRING_1$ ausgeführt, der Webserver verwendet jedoch $STRING_2$.",
         "placeholders": {
             "string_1": {
@@ -2195,34 +2195,34 @@
             }
         }
     },
-    "fronted-000650": {
+    "frontend-000650": {
         "message": "Die Verwendung verschiedener Hauptversionen von PHP kann Probleme verursachen."
     },
-    "fronted-000651": {
+    "frontend-000651": {
         "message": "Passwortsicherheit Standardeinstellungen"
     },
-    "fronted-000652": {
+    "frontend-000652": {
         "message": "Hash für den Sicherheitstest"
     },
-    "fronted-000653": {
+    "frontend-000653": {
         "message": "Keinen Hash speichern"
     },
-    "fronted-000654": {
+    "frontend-000654": {
         "message": "50% des Hash speichern"
     },
-    "fronted-000655": {
+    "frontend-000655": {
         "message": "75% des Hash speichern"
     },
-    "fronted-000656": {
+    "frontend-000656": {
         "message": "Kompletten Hash speichern"
     },
-    "fronted-000657": {
+    "frontend-000657": {
         "message": "Sicherung automatisch wiederhergestellt"
     },
-    "fronted-000658": {
+    "frontend-000658": {
         "message": "Es scheint ein Datenbankfehler in der Passwörter-App aufgetreten zu sein."
     },
-    "fronted-000659": {
+    "frontend-000659": {
         "message": "Daher wurde die App-Sicherung \"$STR_1$\" automatisch wiederhergestellt.",
         "placeholders": {
             "str_1": {
@@ -2230,16 +2230,16 @@
             }
         }
     },
-    "fronted-000660": {
+    "frontend-000660": {
         "message": "Sollte dies ein Fehler gewesen sein, wurde eine Sicherung vor dem Wiederherstellen erstellt."
     },
-    "fronted-000661": {
+    "frontend-000661": {
         "message": "Das automatische Wiederherstellen kann in den Einstellungen deaktiviert werden."
     },
-    "fronted-000662": {
+    "frontend-000662": {
         "message": "Sicherungen automatisch wiederherstellen wenn die Datenbank gelöscht wurde"
     },
-    "fronted-000663": {
+    "frontend-000663": {
         "message": "Passwörter wird keine Aktualisierungen mehr für Nextcloud $STR_1$ erhalten",
         "placeholders": {
             "str_1": {
@@ -2247,7 +2247,7 @@
             }
         }
     },
-    "fronted-000664": {
+    "frontend-000664": {
         "message": "Passwörter $STR_1$ ist die letzte Aktualisierung für Nextcloud $STR_1$.",
         "placeholders": {
             "str_1": {
@@ -2258,7 +2258,7 @@
             }
         }
     },
-    "fronted-000665": {
+    "frontend-000665": {
         "message": "Aktualisieren Sie auf Nextcloud $STR_1$ und PHP $STR_1$ (oder PHP $STR_1$ für die LSR-Version) um zukünftige Versionen von Passwörter zu erhalten.",
         "placeholders": {
             "str_1": {
@@ -2272,7 +2272,7 @@
             }
         }
     },
-    "fronted-000666": {
+    "frontend-000666": {
         "message": "Automatisch auswählen"
     },
     "backend-000528": {

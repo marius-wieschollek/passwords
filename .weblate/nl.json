@@ -1172,16 +1172,16 @@
   "backend-000590": {
     "message": "Wilt u alle instellingen, wachtwoorden, mappen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen."
   },
-  "fronted-000377": {
+  "frontend-000377": {
     "message": "HTTPS verplicht"
   },
-  "fronted-000378": {
+  "frontend-000378": {
     "message": "herladen"
   },
-  "fronted-000380": {
+  "frontend-000380": {
     "message": "Documentatie"
   },
-  "fronted-000382": {
+  "frontend-000382": {
     "message": "Deze applicatie heeft $STR_1$ nodig om veilig te functioneren.",
     "placeholders": {
       "str_1": {
@@ -1189,7 +1189,7 @@
       }
     }
   },
-  "fronted-000381": {
+  "frontend-000381": {
     "message": "U kan proberen om de pagina te $STR_1$ met HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1197,10 +1197,10 @@
       }
     }
   },
-  "fronted-000388": {
+  "frontend-000388": {
     "message": "Neem contact op met uw beheerder wanneer het probleem zich weer voordoet."
   },
-  "fronted-000389": {
+  "frontend-000389": {
     "message": "Wachtwoorden sessie $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1211,148 +1211,148 @@
       }
     }
   },
-  "fronted-000390": {
+  "frontend-000390": {
     "message": "Documentatie openen"
   },
-  "fronted-000391": {
+  "frontend-000391": {
     "message": "nooit"
   },
-  "fronted-000392": {
+  "frontend-000392": {
     "message": "Interne Data Verwerking"
   },
-  "fronted-000393": {
+  "frontend-000393": {
     "message": "Beeldverwerking"
   },
-  "fronted-000394": {
+  "frontend-000394": {
     "message": "Imagick/GMagick (aanbevolen)"
   },
-  "fronted-000395": {
+  "frontend-000395": {
     "message": "Externe Diensten"
   },
-  "fronted-000396": {
+  "frontend-000396": {
     "message": "Wachtwoord Beveiligingscontroles"
   },
-  "fronted-000397": {
+  "frontend-000397": {
     "message": "Have I been pwned? (aanbevolen)"
   },
-  "fronted-000398": {
+  "frontend-000398": {
     "message": "25 Miljoen Wachtwoorden (Lokaal)"
   },
-  "fronted-000399": {
+  "frontend-000399": {
     "message": "5 Miljoen Wachtwoorden (Lokaal)"
   },
-  "fronted-000400": {
+  "frontend-000400": {
     "message": "25Mio Wachtwoorden & Hibp?"
   },
-  "fronted-000401": {
+  "frontend-000401": {
     "message": "Wachtwoord Generator"
   },
-  "fronted-000402": {
+  "frontend-000402": {
     "message": "Lokaal Woordenboek"
   },
-  "fronted-000403": {
+  "frontend-000403": {
     "message": "Random Karakters"
   },
-  "fronted-000404": {
+  "frontend-000404": {
     "message": "watchout4snakes.com"
   },
-  "fronted-000405": {
+  "frontend-000405": {
     "message": "Leipzig Corpora Collection (aanbevolen)"
   },
-  "fronted-000406": {
+  "frontend-000406": {
     "message": "Favicon Service"
   },
-  "fronted-000407": {
+  "frontend-000407": {
     "message": "Lokale Icon Zoekdienst"
   },
-  "fronted-000408": {
+  "frontend-000408": {
     "message": "Besticon (aanbevolen)"
   },
-  "fronted-000409": {
+  "frontend-000409": {
     "message": "Geen"
   },
-  "fronted-000410": {
+  "frontend-000410": {
     "message": "Website Voorvertoning Service"
   },
-  "fronted-000411": {
+  "frontend-000411": {
     "message": "API Sleuten"
   },
-  "fronted-000412": {
+  "frontend-000412": {
     "message": "Pageres/PhantomJS (Lokaal)"
   },
-  "fronted-000413": {
+  "frontend-000413": {
     "message": "WKHTML (Lokaal)"
   },
-  "fronted-000414": {
+  "frontend-000414": {
     "message": "screenshotapi.io"
   },
-  "fronted-000415": {
+  "frontend-000415": {
     "message": "E-Mail Standaardinstellingen"
   },
-  "fronted-000416": {
+  "frontend-000416": {
     "message": "Verstuur E-Mails voor Beveiligingsproblemen"
   },
-  "fronted-000417": {
+  "frontend-000417": {
     "message": "Verstuur E-Mails bij Delen"
   },
-  "fronted-000418": {
+  "frontend-000418": {
     "message": "Overige Instellingen"
   },
-  "fronted-000419": {
+  "frontend-000419": {
     "message": "Verwijderde Objecten uit te database verwijderen"
   },
-  "fronted-000420": {
+  "frontend-000420": {
     "message": "Activeer Nightly Builds in \"Apps\""
   },
-  "fronted-000421": {
+  "frontend-000421": {
     "message": "Nooit"
   },
-  "fronted-000422": {
+  "frontend-000422": {
     "message": "Direct"
   },
-  "fronted-000423": {
+  "frontend-000423": {
     "message": "Na twee uur"
   },
-  "fronted-000424": {
+  "frontend-000424": {
     "message": "Na een dag"
   },
-  "fronted-000425": {
+  "frontend-000425": {
     "message": "Na twee weken"
   },
-  "fronted-000426": {
+  "frontend-000426": {
     "message": "Na een maand"
   },
-  "fronted-000427": {
+  "frontend-000427": {
     "message": "Nach een jaar"
   },
-  "fronted-000428": {
+  "frontend-000428": {
     "message": "Backup Instellingen"
   },
-  "fronted-000430": {
+  "frontend-000430": {
     "message": "Elk uur"
   },
-  "fronted-000431": {
+  "frontend-000431": {
     "message": "Om de zes uur"
   },
-  "fronted-000432": {
+  "frontend-000432": {
     "message": "Yeden Tag"
   },
-  "fronted-000433": {
+  "frontend-000433": {
     "message": "Elke twee dagen"
   },
-  "fronted-000434": {
+  "frontend-000434": {
     "message": "Elke week"
   },
-  "fronted-000435": {
+  "frontend-000435": {
     "message": "Elke twee weken"
   },
-  "fronted-000436": {
+  "frontend-000436": {
     "message": "Aantal backups om bij te houden"
   },
-  "fronted-000437": {
+  "frontend-000437": {
     "message": "Cache"
   },
-  "fronted-000438": {
+  "frontend-000438": {
     "message": "Standard Cache ($STR_1$ Bestanden, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1363,7 +1363,7 @@
       }
     }
   },
-  "fronted-000439": {
+  "frontend-000439": {
     "message": "Avatar Cache ($STR_1$ Bestanden, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1374,7 +1374,7 @@
       }
     }
   },
-  "fronted-000440": {
+  "frontend-000440": {
     "message": "Favicon ($STR_1$ Bestanden, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1385,7 +1385,7 @@
       }
     }
   },
-  "fronted-000441": {
+  "frontend-000441": {
     "message": "Voorvertoning Cache ($STR_1$ Bestanden, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1396,7 +1396,7 @@
       }
     }
   },
-  "fronted-000442": {
+  "frontend-000442": {
     "message": "Wachtwoorden Cache ($STR_1$ Bestanden, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1407,34 +1407,34 @@
       }
     }
   },
-  "fronted-000443": {
+  "frontend-000443": {
     "message": "Legen"
   },
-  "fronted-000444": {
+  "frontend-000444": {
     "message": "Deze cache legen"
   },
-  "fronted-000445": {
+  "frontend-000445": {
     "message": "U kan deze cache niet legen omdat deze gebuikt wordt door een gedeelde dienst"
   },
-  "fronted-000446": {
+  "frontend-000446": {
     "message": "Opgeslagen"
   },
-  "fronted-000447": {
+  "frontend-000447": {
     "message": "Geleegd"
   },
-  "fronted-000448": {
+  "frontend-000448": {
     "message": "Mislukt"
   },
-  "fronted-000449": {
+  "frontend-000449": {
     "message": "Heeft u hulp nodig"
   },
-  "fronted-000450": {
+  "frontend-000450": {
     "message": "heeft u een bug gevonden"
   },
-  "fronted-000451": {
+  "frontend-000451": {
     "message": "zoekt u naar de documentatie"
   },
-  "fronted-000452": {
+  "frontend-000452": {
     "message": "$STR_1$, $STR_1$ of $STR_1$? We staan voor u klaar!",
     "placeholders": {
       "str_1": {
@@ -1448,7 +1448,7 @@
       }
     }
   },
-  "fronted-000453": {
+  "frontend-000453": {
     "message": "$STRING_1$ $STRING_2$ wordt niet meer ondersteund.",
     "placeholders": {
       "string_1": {
@@ -1459,10 +1459,10 @@
       }
     }
   },
-  "fronted-000454": {
+  "frontend-000454": {
     "message": "Wachtwoorden heeft HTTPS nodig."
   },
-  "fronted-000455": {
+  "frontend-000455": {
     "message": "Het gebruik van $STR_1$ om achtergrondtaken uit te voeren kan lange wachttijden veroorzaken. Wij raden het gebruik van Cron aan.",
     "placeholders": {
       "str_1": {
@@ -1470,13 +1470,13 @@
       }
     }
   },
-  "fronted-000456": {
+  "frontend-000456": {
     "message": "Controleer de systeemvereisten a.u.b."
   },
-  "fronted-000457": {
+  "frontend-000457": {
     "message": "Wachtwoord niet gedeeld"
   },
-  "fronted-000458": {
+  "frontend-000458": {
     "message": "Een wachtwoord is niet gedeeld met $STRING_1$ omdat deze al gedeeld is.",
     "placeholders": {
       "string_1": {
@@ -1484,25 +1484,25 @@
       }
     }
   },
-  "fronted-000459": {
+  "frontend-000459": {
     "message": "U heeft een onveilig wachtwoord"
   },
-  "fronted-000460": {
+  "frontend-000460": {
     "message": "U heeft onveilige wachtwoorden"
   },
-  "fronted-000461": {
+  "frontend-000461": {
     "message": "Een van uw wachtwoorden is niet meer veilig."
   },
-  "fronted-000462": {
+  "frontend-000462": {
     "message": "Sommige van uw wachtwoorden zijn niet meer veilig."
   },
-  "fronted-000463": {
+  "frontend-000463": {
     "message": "Passwords controleert regelmatig of uw wachtwoorden zijn gecompromiteerd zijn door data diefstal."
   },
-  "fronted-000464": {
+  "frontend-000464": {
     "message": "Deze veiligheidscontrole heeft vastgesteld dat een van uw wachtwoorden onveilig is."
   },
-  "fronted-000465": {
+  "frontend-000465": {
     "message": "Deze veiligheidscontrole heeft vastgesteld dat $STR_1$ van uw wachtwoorden onveilig zijn.",
     "placeholders": {
       "str_1": {
@@ -1510,37 +1510,37 @@
       }
     }
   },
-  "fronted-000466": {
+  "frontend-000466": {
     "message": "Dit betekent dat het wachtwoord op het internet te vinden is en dat het account niet meer veilig is."
   },
-  "fronted-000467": {
+  "frontend-000467": {
     "message": "Dit betekent dat de wachtwoorden op het internet te vinden zijn en de bijbehorende accounts niet meer veilig zijn."
   },
-  "fronted-000468": {
+  "frontend-000468": {
     "message": "Daarom is het wachtwoord als onveilig gemarkeerd en dient deze gewijzigd te worden."
   },
-  "fronted-000469": {
+  "frontend-000469": {
     "message": "Daarom zijn de wachtwoorden als onveilig gemarkeerd en dienen deze gewijzigd te worden."
   },
-  "fronted-000470": {
+  "frontend-000470": {
     "message": "U kan in de Passwords app een nieuw veilig wachtwoord aanmaken."
   },
-  "fronted-000471": {
+  "frontend-000471": {
     "message": "U kan in de Passwords app nieuwe veilige wachtwoorden aanmaken."
   },
-  "fronted-000472": {
+  "frontend-000472": {
     "message": "Verander het wachtwoord nu"
   },
-  "fronted-000473": {
+  "frontend-000473": {
     "message": "Verander de wachtwoorden nu"
   },
-  "fronted-000474": {
+  "frontend-000474": {
     "message": "Open de Passwords APP om hem te veranderen."
   },
-  "fronted-000475": {
+  "frontend-000475": {
     "message": "Open de Passwords APP om ze te veranderen."
   },
-  "fronted-000476": {
+  "frontend-000476": {
     "message": "$STR_1$ heeft een wachtwoord met u gedeeld.",
     "placeholders": {
       "str_1": {
@@ -1548,7 +1548,7 @@
       }
     }
   },
-  "fronted-000477": {
+  "frontend-000477": {
     "message": "$STR_1$ heeft $STR_1$ wachtwoorden met u gedeeld.",
     "placeholders": {
       "str_1": {
@@ -1559,7 +1559,7 @@
       }
     }
   },
-  "fronted-000478": {
+  "frontend-000478": {
     "message": "$STRING_4$ en $STRING_3$ hebben $STRING_1$ wachtwoorden met u gedeeld.",
     "placeholders": {
       "string_4": {
@@ -1573,7 +1573,7 @@
       }
     }
   },
-  "fronted-000479": {
+  "frontend-000479": {
     "message": "$STRING_5$, $STRING_4$ en $STRING_3$ hebben $STRING_1$ wachtwoorden met u gedeeld.",
     "placeholders": {
       "string_5": {
@@ -1590,7 +1590,7 @@
       }
     }
   },
-  "fronted-000480": {
+  "frontend-000480": {
     "message": "$STRING_5$, $STRING_4$ en $STRING_2$ anderen hebben $STRING_1$ wachtwoorden met u gedeeld.",
     "placeholders": {
       "string_5": {
@@ -1607,13 +1607,13 @@
       }
     }
   },
-  "fronted-000481": {
+  "frontend-000481": {
     "message": "Open de Passwords APP om hem te zien."
   },
-  "fronted-000482": {
+  "frontend-000482": {
     "message": "Open de Passwords APP om ze te zien."
   },
-  "fronted-000483": {
+  "frontend-000483": {
     "message": "Er is een wachtwoord met u gedeeld op $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1621,7 +1621,7 @@
       }
     }
   },
-  "fronted-000484": {
+  "frontend-000484": {
     "message": "Er zijn meerdere wachtwoorden met u gedeeld op $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1629,13 +1629,13 @@
       }
     }
   },
-  "fronted-000485": {
+  "frontend-000485": {
     "message": "Laat met mij gedeelde wachtwoorden zien"
   },
-  "fronted-000486": {
+  "frontend-000486": {
     "message": "Een van uw wachtwoorden kon niet gedeeld worden omdat de ontvanger reeds toegang tot dit wachtwoorden heeft."
   },
-  "fronted-000487": {
+  "frontend-000487": {
     "message": "$STR_1$ van uw wachtwoorden konden niet gedeeld worden omdat de ontvanger reeds toegang tot deze wachtwoorden heeft.",
     "placeholders": {
       "str_1": {
@@ -1643,13 +1643,13 @@
       }
     }
   },
-  "fronted-000489": {
+  "frontend-000489": {
     "message": "Een wachtwoord delen dat reeds met u gedeeld is kan een loop veroorzaken."
   },
-  "fronted-000490": {
+  "frontend-000490": {
     "message": "Om dit te voorkomen zullen deze wachtwoorden niet worden gedeeld."
   },
-  "fronted-000496": {
+  "frontend-000496": {
     "message": "Verwijderde Gebruiker ($STR_1$)",
     "placeholders": {
       "str_1": {

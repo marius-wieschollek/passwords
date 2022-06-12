@@ -1327,19 +1327,19 @@
   "backend-000376": {
     "message": "Avui, al 2018, es va publicar la primera versió de l'app passwords. Gràcies per utilitzar aquesta aplicació."
   },
-  "fronted-000377": {
+  "frontend-000377": {
     "message": "Es requereix HTTPS"
   },
-  "fronted-000378": {
+  "frontend-000378": {
     "message": "recarregar aquesta plana amb HTTPS"
   },
-  "fronted-000379": {
+  "frontend-000379": {
     "message": "fòrum"
   },
-  "fronted-000380": {
+  "frontend-000380": {
     "message": "Documentació"
   },
-  "fronted-000381": {
+  "frontend-000381": {
     "message": "Podeu intentar $STR_1$ la plana amb HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1347,7 +1347,7 @@
       }
     }
   },
-  "fronted-000382": {
+  "frontend-000382": {
     "message": "Aquesta aplicació requereix $STR_1$ per funcionar amb seguretat.",
     "placeholders": {
       "str_1": {
@@ -1355,7 +1355,7 @@
       }
     }
   },
-  "fronted-000383": {
+  "frontend-000383": {
     "message": "Això NO és un error. Visiteu el nostre $STR_1$ si necessiteu ajuda.",
     "placeholders": {
       "str_1": {
@@ -1363,10 +1363,10 @@
       }
     }
   },
-  "fronted-000384": {
+  "frontend-000384": {
     "message": "Reviseu l'informe HTTPS següent per resoldre el problema."
   },
-  "fronted-000385": {
+  "frontend-000385": {
     "message": "Llegiu aquest $STR_1$ per configurar el vostre servidor perquè utilitzi HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1374,7 +1374,7 @@
       }
     }
   },
-  "fronted-000386": {
+  "frontend-000386": {
     "message": "Llegiu aquest $STR_1$ si feu servir qualsevol tipus de proxy.",
     "placeholders": {
       "str_1": {
@@ -1382,7 +1382,7 @@
       }
     }
   },
-  "fronted-000387": {
+  "frontend-000387": {
     "message": "Aneu a $STR_1$ per obtenir un certificat HTTPS gratuït si el necessiteu.",
     "placeholders": {
       "str_1": {
@@ -1390,10 +1390,10 @@
       }
     }
   },
-  "fronted-000388": {
+  "frontend-000388": {
     "message": "Si aquest problema persisteix, hauríeu de contactar amb el vostre administrador."
   },
-  "fronted-000389": {
+  "frontend-000389": {
     "message": "Sessió de l'aplicació Contrasenyes $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1404,151 +1404,151 @@
       }
     }
   },
-  "fronted-000390": {
+  "frontend-000390": {
     "message": "Obrir la documentació"
   },
-  "fronted-000391": {
+  "frontend-000391": {
     "message": "mai"
   },
-  "fronted-000392": {
+  "frontend-000392": {
     "message": "Processament de dades internes"
   },
-  "fronted-000393": {
+  "frontend-000393": {
     "message": "Renderitzat d'imatges"
   },
-  "fronted-000394": {
+  "frontend-000394": {
     "message": "Imagick/GMagick (recomanat)"
   },
-  "fronted-000395": {
+  "frontend-000395": {
     "message": "Serveis externs"
   },
-  "fronted-000396": {
+  "frontend-000396": {
     "message": "Comprovacions de la seguretat de la contrasenya"
   },
-  "fronted-000397": {
+  "frontend-000397": {
     "message": "Have I been pwned? (recomanat, 600 milions de contr. vulnerades)"
   },
-  "fronted-000398": {
+  "frontend-000398": {
     "message": "25 milions de contrasenyes (local)"
   },
-  "fronted-000399": {
+  "frontend-000399": {
     "message": "5 milió de contrasenyes (local)"
   },
-  "fronted-000400": {
+  "frontend-000400": {
     "message": "25 milions de contrasenyes i HIBP?"
   },
-  "fronted-000401": {
+  "frontend-000401": {
     "message": "Servei de generació de contrasenyes"
   },
-  "fronted-000402": {
+  "frontend-000402": {
     "message": "Diccionari local"
   },
-  "fronted-000403": {
+  "frontend-000403": {
     "message": "Caràcters aleatoris"
   },
-  "fronted-000404": {
+  "frontend-000404": {
     "message": "watchout4snakes.com"
   },
-  "fronted-000405": {
+  "frontend-000405": {
     "message": "Leipzig Corpora Collection (recomanat)"
   },
-  "fronted-000406": {
+  "frontend-000406": {
     "message": "Servei de Favicons"
   },
-  "fronted-000407": {
+  "frontend-000407": {
     "message": "Analitzador local"
   },
-  "fronted-000408": {
+  "frontend-000408": {
     "message": "Besticon (recomanat)"
   },
-  "fronted-000409": {
+  "frontend-000409": {
     "message": "Cap"
   },
-  "fronted-000410": {
+  "frontend-000410": {
     "message": "Servei de vista prèvia de llocs web"
   },
-  "fronted-000411": {
+  "frontend-000411": {
     "message": "Clau per a l'API del servei de vista prèvia de llocs web"
   },
-  "fronted-000412": {
+  "frontend-000412": {
     "message": "Pageres/PhantomJS (local)"
   },
-  "fronted-000413": {
+  "frontend-000413": {
     "message": "WKHTML (local)"
   },
-  "fronted-000414": {
+  "frontend-000414": {
     "message": "screenshotapi.io"
   },
-  "fronted-000415": {
+  "frontend-000415": {
     "message": "Paràmetres de correu per defecte"
   },
-  "fronted-000416": {
+  "frontend-000416": {
     "message": "Enviar correus per events de seguretat"
   },
-  "fronted-000417": {
+  "frontend-000417": {
     "message": "Enviar correus en compartir"
   },
-  "fronted-000418": {
+  "frontend-000418": {
     "message": "Altres paràmetres"
   },
-  "fronted-000419": {
+  "frontend-000419": {
     "message": "Esborrar permanentment en esborrar objectes de la base de dades"
   },
-  "fronted-000420": {
+  "frontend-000420": {
     "message": "Mostrar a \"Apps\" les versions Nightly (fase de proves)"
   },
-  "fronted-000421": {
+  "frontend-000421": {
     "message": "Mai"
   },
-  "fronted-000422": {
+  "frontend-000422": {
     "message": "Immediatament"
   },
-  "fronted-000423": {
+  "frontend-000423": {
     "message": "Després de dues hores"
   },
-  "fronted-000424": {
+  "frontend-000424": {
     "message": "Després d'un dia"
   },
-  "fronted-000425": {
+  "frontend-000425": {
     "message": "Després de dues setmanes"
   },
-  "fronted-000426": {
+  "frontend-000426": {
     "message": "Després d'un mes"
   },
-  "fronted-000427": {
+  "frontend-000427": {
     "message": "Després d'un any"
   },
-  "fronted-000428": {
+  "frontend-000428": {
     "message": "Paràmetres de còpies de seguretat"
   },
-  "fronted-000429": {
+  "frontend-000429": {
     "message": "Interval entre còpies"
   },
-  "fronted-000430": {
+  "frontend-000430": {
     "message": "Cada hora"
   },
-  "fronted-000431": {
+  "frontend-000431": {
     "message": "Cada sis hores"
   },
-  "fronted-000432": {
+  "frontend-000432": {
     "message": "Cada dia"
   },
-  "fronted-000433": {
+  "frontend-000433": {
     "message": "Cada dos dies"
   },
-  "fronted-000434": {
+  "frontend-000434": {
     "message": "Cada setmana"
   },
-  "fronted-000435": {
+  "frontend-000435": {
     "message": "Cada dues setmanes"
   },
-  "fronted-000436": {
+  "frontend-000436": {
     "message": "Quantitat de còpies a mantenir"
   },
-  "fronted-000437": {
+  "frontend-000437": {
     "message": "Memòria cau"
   },
-  "fronted-000438": {
+  "frontend-000438": {
     "message": "Memòria cau per defecte ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1559,7 +1559,7 @@
       }
     }
   },
-  "fronted-000439": {
+  "frontend-000439": {
     "message": "Memòria cau per imatges ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1570,7 +1570,7 @@
       }
     }
   },
-  "fronted-000440": {
+  "frontend-000440": {
     "message": "Memòria cau per Favicons ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1581,7 +1581,7 @@
       }
     }
   },
-  "fronted-000441": {
+  "frontend-000441": {
     "message": "Memòria cau per vistes prèvies ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1592,7 +1592,7 @@
       }
     }
   },
-  "fronted-000442": {
+  "frontend-000442": {
     "message": "Memòria cau per contrasenyes ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1603,34 +1603,34 @@
       }
     }
   },
-  "fronted-000443": {
+  "frontend-000443": {
     "message": "buidar"
   },
-  "fronted-000444": {
+  "frontend-000444": {
     "message": "Buidar aquesta memòria cau"
   },
-  "fronted-000445": {
+  "frontend-000445": {
     "message": "No podeu esborrar una memòria cau emprant un servei compartit"
   },
-  "fronted-000446": {
+  "frontend-000446": {
     "message": "Desada"
   },
-  "fronted-000447": {
+  "frontend-000447": {
     "message": "Buidada"
   },
-  "fronted-000448": {
+  "frontend-000448": {
     "message": "Fallit"
   },
-  "fronted-000449": {
+  "frontend-000449": {
     "message": "Necessiteu ajuda"
   },
-  "fronted-000450": {
+  "frontend-000450": {
     "message": "heu trobat un error"
   },
-  "fronted-000451": {
+  "frontend-000451": {
     "message": "cerqueu la documentació"
   },
-  "fronted-000452": {
+  "frontend-000452": {
     "message": "$STR_1$, $STR_1$ o $STR_1$? Podem ajudar-vos!",
     "placeholders": {
       "str_1": {
@@ -1644,7 +1644,7 @@
       }
     }
   },
-  "fronted-000453": {
+  "frontend-000453": {
     "message": "$STRING_1$ $STRING_2$ ha deixat de tenir suport.",
     "placeholders": {
       "string_1": {
@@ -1655,10 +1655,10 @@
       }
     }
   },
-  "fronted-000454": {
+  "frontend-000454": {
     "message": "L'aplicació Contrasenyes requereix emprar HTTPS."
   },
-  "fronted-000455": {
+  "frontend-000455": {
     "message": "L'ús de $STR_1$ per executar tasques en segon pla pot provocar retards. Recomanem utilitzar Cron.",
     "placeholders": {
       "str_1": {
@@ -1666,13 +1666,13 @@
       }
     }
   },
-  "fronted-000456": {
+  "frontend-000456": {
     "message": "Reviseu els requeriments del sistema."
   },
-  "fronted-000457": {
+  "frontend-000457": {
     "message": "Contrasenya no compartida"
   },
-  "fronted-000458": {
+  "frontend-000458": {
     "message": "Alguna contrasenya no s'ha compartit ara amb $STRING_1$ perquè ja s'havia compartit",
     "placeholders": {
       "string_1": {
@@ -1680,25 +1680,25 @@
       }
     }
   },
-  "fronted-000459": {
+  "frontend-000459": {
     "message": "Teniu una contrasenya insegura"
   },
-  "fronted-000460": {
+  "frontend-000460": {
     "message": "Teniu algunes contrasenyes insegures"
   },
-  "fronted-000461": {
+  "frontend-000461": {
     "message": "Una de les vostres contrasenyes ha deixat de ser segura."
   },
-  "fronted-000462": {
+  "frontend-000462": {
     "message": "Algunes de les vostres contrasenyes han deixat de ser segures."
   },
-  "fronted-000463": {
+  "frontend-000463": {
     "message": "L'aplicació Contrasenyes comprova regularment si les vostres contrasenyes han estat compromeses per una violació de dades."
   },
-  "fronted-000464": {
+  "frontend-000464": {
     "message": "Aquesta comprovació de seguretat ha detectat que una de les vostres contrasenyes no és segura."
   },
-  "fronted-000465": {
+  "frontend-000465": {
     "message": "Aquesta comprovació de seguretat ha trobat que $STR_1$ de les vostres contrasenyes no són segures.",
     "placeholders": {
       "str_1": {
@@ -1706,37 +1706,37 @@
       }
     }
   },
-  "fronted-000466": {
+  "frontend-000466": {
     "message": "Això vol dir que la contrasenya està disponible a Internet i posa en perill el vostre compte."
   },
-  "fronted-000467": {
+  "frontend-000467": {
     "message": "Això vol dir que les contrasenyes estan disponibles a Internet i posen en perill els vostres comptes."
   },
-  "fronted-000468": {
+  "frontend-000468": {
     "message": "Per tant, la contrasenya s'ha marcat com a insegura i s'hauria de canviar ara mateix."
   },
-  "fronted-000469": {
+  "frontend-000469": {
     "message": "Per tant, les contrasenyes s'han marcat com a insegures i s'haurien de canviar ara mateix."
   },
-  "fronted-000470": {
+  "frontend-000470": {
     "message": "Podeu crear una nova contrasenya segura a l'aplicació Contrasenyes."
   },
-  "fronted-000471": {
+  "frontend-000471": {
     "message": "Podeu crear noves contrasenyes segures a l'aplicació Contrasenyes."
   },
-  "fronted-000472": {
+  "frontend-000472": {
     "message": "Canviar ara la contrasenya"
   },
-  "fronted-000473": {
+  "frontend-000473": {
     "message": "Canviar ara les contrasenyes"
   },
-  "fronted-000474": {
+  "frontend-000474": {
     "message": "Obriu l'aplicació Contrasenyes per canviar-la."
   },
-  "fronted-000475": {
+  "frontend-000475": {
     "message": "Obriu l'aplicació Contrasenyes per canviar-les."
   },
-  "fronted-000476": {
+  "frontend-000476": {
     "message": "$STR_1$ us ha compartit una contrasenya.",
     "placeholders": {
       "str_1": {
@@ -1744,7 +1744,7 @@
       }
     }
   },
-  "fronted-000477": {
+  "frontend-000477": {
     "message": "$STR_1$ us ha compartit $STR_1$ contrasenyes.",
     "placeholders": {
       "str_1": {
@@ -1755,7 +1755,7 @@
       }
     }
   },
-  "fronted-000478": {
+  "frontend-000478": {
     "message": "$STRING_4$ i $STRING_3$ us han compartit $STRING_1$ contrasenyes.",
     "placeholders": {
       "string_4": {
@@ -1769,7 +1769,7 @@
       }
     }
   },
-  "fronted-000479": {
+  "frontend-000479": {
     "message": "$STRING_5$, $STRING_4$ i $STRING_3$ us han compartit $STRING_1$ contrasenyes.",
     "placeholders": {
       "string_5": {
@@ -1786,7 +1786,7 @@
       }
     }
   },
-  "fronted-000480": {
+  "frontend-000480": {
     "message": "$STRING_5$, $STRING_4$ i $STRING_2$ altres us han compartit $STRING_1$ contrasenyes.",
     "placeholders": {
       "string_5": {
@@ -1803,13 +1803,13 @@
       }
     }
   },
-  "fronted-000481": {
+  "frontend-000481": {
     "message": "Obriu l'aplicació Contrasenyes per veure-la."
   },
-  "fronted-000482": {
+  "frontend-000482": {
     "message": "Obriu l'aplicació Contrasenyes per veure-les."
   },
-  "fronted-000483": {
+  "frontend-000483": {
     "message": "Us han compartit una contrasenya a $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1817,7 +1817,7 @@
       }
     }
   },
-  "fronted-000484": {
+  "frontend-000484": {
     "message": "Us han compartit vàries contrasenyes a $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1825,25 +1825,25 @@
       }
     }
   },
-  "fronted-000485": {
+  "frontend-000485": {
     "message": "Veure les contrasenyes que m'han compartit'"
   },
-  "fronted-000486": {
+  "frontend-000486": {
     "message": "No s'ha pogut compartir una de les vostres contrasenyes perquè el destinatari ja hi té accés."
   },
-  "fronted-000487": {
+  "frontend-000487": {
     "message": "No s'ha pogut compartir %2 de les vostres contrasenyes perquè el destinatari ja hi té accés."
   },
-  "fronted-000489": {
+  "frontend-000489": {
     "message": "Compartir una contrasenya que s'ha compartit amb tu de vegades pot crear un bucle."
   },
-  "fronted-000490": {
+  "frontend-000490": {
     "message": "Per evitar-ho, aquestes contrasenyes no es compartiran."
   },
-  "fronted-000491": {
+  "frontend-000491": {
     "message": "Accés administratiu al vostre compte"
   },
-  "fronted-000492": {
+  "frontend-000492": {
     "message": "$STR_1$ ha intentat iniciar sessió al vostre compte a $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1854,7 +1854,7 @@
       }
     }
   },
-  "fronted-000493": {
+  "frontend-000493": {
     "message": "$STR_1$ va iniciar sessió al vostre compte a $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1865,13 +1865,13 @@
       }
     }
   },
-  "fronted-000494": {
+  "frontend-000494": {
     "message": "Com que utilitzeu una contrasenya mestra, això no vol dir que s'hagi concedit l'accés a les vostres dades."
   },
-  "fronted-000495": {
+  "frontend-000495": {
     "message": "Per evitar l'accés no desitjat a les vostres dades, hauríeu de configurar una contrasenya mestra."
   },
-  "fronted-000496": {
+  "frontend-000496": {
     "message": "Usuari esborrat ($STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1879,64 +1879,64 @@
       }
     }
   },
-  "fronted-000497": {
+  "frontend-000497": {
     "message": "Ajudeu-nos a millorar l'aplicació Contrasenyes"
   },
-  "fronted-000498": {
+  "frontend-000498": {
     "message": "Podeu ajudar-nos a millorar l'aplicació Contrasenyes participant a la nostra enquesta de servidors."
   },
-  "fronted-000499": {
+  "frontend-000499": {
     "message": "Això ens enviarà algunes dades anònimes sobre la vostra configuració i els paràmetres seleccionats."
   },
-  "fronted-000500": {
+  "frontend-000500": {
     "message": "Podeu canviar-ho en qualsevol moment als paràmetres de l'aplicació."
   },
-  "fronted-000501": {
+  "frontend-000501": {
     "message": "Encara no"
   },
-  "fronted-000502": {
+  "frontend-000502": {
     "message": "Participar"
   },
-  "fronted-000503": {
+  "frontend-000503": {
     "message": "Participar a l'enquesta de servidors"
   },
-  "fronted-000504": {
+  "frontend-000504": {
     "message": "Bàsica"
   },
-  "fronted-000505": {
+  "frontend-000505": {
     "message": "Completa"
   },
-  "fronted-000506": {
+  "frontend-000506": {
     "message": "No definida"
   },
-  "fronted-000507": {
+  "frontend-000507": {
     "message": "Si us plau, considereu allotjar la vostra API de favicon al vostre servidor"
   },
-  "fronted-000508": {
+  "frontend-000508": {
     "message": "El vostre Nextcloud utilitza les nostres instàncies compartides de Besticon per obtenir icones de llocs web."
   },
-  "fronted-000509": {
+  "frontend-000509": {
     "message": "Aquestes instàncies estan pensades per a configuracions petites de Nextcloud amb molt poc trànsit."
   },
-  "fronted-000510": {
+  "frontend-000510": {
     "message": "Si us plau, feu clic a l'enllaç i seguiu el nostre senzill tutorial per allotjar Besticon al vostre servidor."
   },
-  "fronted-000511": {
+  "frontend-000511": {
     "message": "La vostra configuració del servei de favicon no és vàlida"
   },
-  "fronted-000512": {
+  "frontend-000512": {
     "message": "La vostra configuració del servei de vista prèvia no és vàlida"
   },
-  "fronted-000513": {
+  "frontend-000513": {
     "message": "El servei de favicon que heu triat requereix una clau API o un Endpoint, però no s'ha proporcionat cap."
   },
-  "fronted-000514": {
+  "frontend-000514": {
     "message": "El servei de vista prèvia que heu triat requereix una clau API o un Endpoint, però no s'ha proporcionat cap."
   },
-  "fronted-000515": {
+  "frontend-000515": {
     "message": "Aneu als paràmetres de l'aplicació per actualitzar la configuració o triar un altre servei."
   },
-  "fronted-000516": {
+  "frontend-000516": {
     "message": "Hem detectat diversos intents fallits de desbloquejar la vostra base de dades de contrasenyes per part de \"$STR_1$\".",
     "placeholders": {
       "str_1": {
@@ -1944,31 +1944,31 @@
       }
     }
   },
-  "fronted-000517": {
+  "frontend-000517": {
     "message": "Això podria indicar que algú està intentant entrar al vostre compte."
   },
-  "fronted-000518": {
+  "frontend-000518": {
     "message": "Per evitar més intents, s'han revocat les credencials de l'API per a aquest client."
   },
-  "fronted-000519": {
+  "frontend-000519": {
     "message": "A més, s'ha desactivat l'autenticació de l'API emprant contrasenya."
   },
-  "fronted-000520": {
+  "frontend-000520": {
     "message": "Si voleu continuar utilitzant aquest client, li heu de crear un nou token."
   },
-  "fronted-000521": {
+  "frontend-000521": {
     "message": "Si no coneixeu aquest client, canvieu la contrasenya i reviseu la llista de dispositius."
   },
-  "fronted-000522": {
+  "frontend-000522": {
     "message": "Per evitar més intents, s'ha desactivat l'autenticació de l'API emprant contrasenya."
   },
-  "fronted-000523": {
+  "frontend-000523": {
     "message": "Per tornar-lo a activar, inicieu sessió amb l'aplicació web o amb qualsevol client mitjançant l'autenticació amb token."
   },
-  "fronted-000524": {
+  "frontend-000524": {
     "message": "Si no coneixeu aquest client, canvieu la contrasenya mestra i la contrasenya de Nextcloud."
   },
-  "fronted-000525": {
+  "frontend-000525": {
     "message": "Per augmentar la seguretat, us recomanem utilitzar tokens específics per dispositiu en lloc de la vostra contrasenya."
   },
   "backend-000528": {
@@ -2189,19 +2189,19 @@
   "settings-000706": {
     "message": "Clau de restabliment no vàlida"
   },
-  "fronted-000652": {
+  "frontend-000652": {
     "message": "Verificar \"hash\" de contrasenyes"
   },
-  "fronted-000653": {
+  "frontend-000653": {
     "message": "No guardar \"hashes\""
   },
-  "fronted-000654": {
+  "frontend-000654": {
     "message": "Guardar el 50% del \"hash\""
   },
-  "fronted-000655": {
+  "frontend-000655": {
     "message": "Guardar el 75% del \"hash\""
   },
-  "fronted-000656": {
+  "frontend-000656": {
     "message": "Guardar el \"hash\" sencer"
   },
   "backend-000569": {
