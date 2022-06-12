@@ -13,6 +13,25 @@ const fsO = require('fs');
 const {readFile, writeFile} = require("fs/promises");
 
 class CompileLanguageFilesPlugin {
+
+    get FORCE_KEYS() {
+        return {
+            'CustomFields'   : 'Custom Fields',
+            'FolderLabel'    : 'Folder',
+            'TagLabels'      : 'Tags',
+            'FolderId'       : 'Folder Id',
+            'TagIds'         : 'Tag Ids',
+            'frontend-000256': '{count} shares',
+            'frontend-000277': 'Choose expiration date',
+            'frontend-000353': 'CLIENT::MAINTENANCE',
+            'frontend-000354': 'CLIENT::UNKNOWN',
+            'frontend-000355': 'CLIENT::SYSTEM',
+            'frontend-000356': 'CLIENT::PUBLIC',
+            'frontend-000357': 'CLIENT::CRON',
+            'frontend-000358': 'CLIENT::CLI'
+        };
+    }
+
     constructor(options = {}) {
         if(!options.hasOwnProperty('sourcePath')) {
             options.sourcePath = '.weblate';
@@ -111,6 +130,10 @@ class CompileLanguageFilesPlugin {
             let value      = this._processEntry(languageKeys[key]),
                 baseString = this._index[key],
                 section    = 'frontend';
+
+            if(this.FORCE_KEYS.hasOwnProperty(key)) {
+                baseString = this.FORCE_KEYS[key];
+            }
 
             if(value === baseString) {
                 continue;
