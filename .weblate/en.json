@@ -2639,15 +2639,6 @@
   "settings-000726": {
     "message": "The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached."
   },
-  "frontend-000727": {
-    "message": "Server-side encryption"
-  },
-  "frontend-000728": {
-    "message": "Advanced server-side encryption"
-  },
-  "frontend-000729": {
-    "message": "Client-side encryption"
-  },
   "tutorial-000730": {
     "message": "After launch, show my"
   },

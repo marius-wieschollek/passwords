@@ -720,15 +720,6 @@
       }
     }
   },
-  "frontend-000727": {
-    "message": "Kryptering på server-sidan"
-  },
-  "frontend-000728": {
-    "message": "Avancerad kryptering på servern"
-  },
-  "frontend-000729": {
-    "message": "Kryptering på klient-sidan"
-  },
   "frontend-000264": {
     "message": "Mer"
   },
