@@ -5,55 +5,55 @@
   "backups-000119": {
     "message": "Senha inválida"
   },
-  "backend-000148": {
+  "frontend-000148": {
     "message": "Senhas"
   },
-  "backend-000149": {
+  "frontend-000149": {
     "message": "Todo"
   },
-  "backend-000150": {
+  "frontend-000150": {
     "message": "Pastas"
   },
-  "backend-000151": {
+  "frontend-000151": {
     "message": "Recente"
   },
-  "backend-000152": {
+  "frontend-000152": {
     "message": "Favoritos"
   },
-  "backend-000153": {
+  "frontend-000153": {
     "message": "Compartilhado"
   },
   "backups-000145": {
     "message": "Etiquetas"
   },
-  "backend-000154": {
+  "frontend-000154": {
     "message": "Segurança"
   },
-  "backend-000155": {
+  "frontend-000155": {
     "message": "Lixo"
   },
-  "backend-000156": {
+  "frontend-000156": {
     "message": "Detalhes"
   },
-  "backend-000157": {
+  "frontend-000157": {
     "message": "Editar"
   },
-  "backend-000593": {
+  "frontend-000593": {
     "message": "Editar como novo"
   },
-  "backend-000594": {
+  "frontend-000594": {
     "message": "Mover"
   },
-  "backend-000158": {
+  "frontend-000158": {
     "message": "Renomear"
   },
-  "backend-000159": {
+  "frontend-000159": {
     "message": "Excluir"
   },
-  "backend-000160": {
+  "frontend-000160": {
     "message": "Restaurar"
   },
-  "backend-000595": {
+  "frontend-000595": {
     "message": "Abra $LABEL$",
     "placeholders": {
       "label": {
@@ -61,274 +61,274 @@
       }
     }
   },
-  "backend-000161": {
+  "frontend-000161": {
     "message": "Nova Senha"
   },
-  "backend-000162": {
+  "frontend-000162": {
     "message": "Nova Pasta"
   },
-  "backend-000163": {
+  "frontend-000163": {
     "message": "Nova etiqueta"
   },
-  "backend-000165": {
+  "frontend-000165": {
     "message": "Status"
   },
-  "backend-000164": {
+  "frontend-000164": {
     "message": "Seguro"
   },
-  "backend-000166": {
+  "frontend-000166": {
     "message": "Fraco"
   },
-  "backend-000167": {
+  "frontend-000167": {
     "message": "Fraco (duplicado)"
   },
-  "backend-000168": {
+  "frontend-000168": {
     "message": "Fraco (desatualizado)"
   },
-  "backend-000169": {
+  "frontend-000169": {
     "message": "Quebrado"
   },
-  "backend-000597": {
+  "frontend-000597": {
     "message": "SHA-1"
   },
-  "backend-000170": {
+  "frontend-000170": {
     "message": "Compartilhar"
   },
-  "backend-000171": {
+  "frontend-000171": {
     "message": "Revisões"
   },
-  "backend-000172": {
+  "frontend-000172": {
     "message": "QR Code"
   },
-  "backend-000173": {
+  "frontend-000173": {
     "message": "Senha"
   },
-  "backend-000174": {
+  "frontend-000174": {
     "message": "Nome de usuário"
   },
-  "backend-000175": {
+  "frontend-000175": {
     "message": "Webseite"
   },
-  "backend-000176": {
+  "frontend-000176": {
     "message": "Adicionar etiquetas ..."
   },
-  "backend-000177": {
+  "frontend-000177": {
     "message": "Cor"
   },
-  "backend-000178": {
+  "frontend-000178": {
     "message": "Nome"
   },
-  "backend-000179": {
+  "frontend-000179": {
     "message": "Rótulo"
   },
-  "backend-000180": {
+  "frontend-000180": {
     "message": "Em geral"
   },
-  "backend-000181": {
+  "frontend-000181": {
     "message": "Propriedades"
   },
-  "backend-000182": {
+  "frontend-000182": {
     "message": "Números"
   },
-  "backend-000183": {
+  "frontend-000183": {
     "message": "Caracteres especiais"
   },
-  "backend-000601": {
+  "frontend-000601": {
     "message": "Força"
   },
-  "backend-000184": {
+  "frontend-000184": {
     "message": "Mais opções"
   },
-  "backend-000602": {
+  "frontend-000602": {
     "message": "Fechar"
   },
-  "backend-000185": {
+  "frontend-000185": {
     "message": "Favorito"
   },
-  "backend-000603": {
+  "frontend-000603": {
     "message": "Remover dos favoritos"
   },
-  "backend-000604": {
+  "frontend-000604": {
     "message": "Marcar como favorito"
   },
-  "backend-000186": {
+  "frontend-000186": {
     "message": "Criptografia"
   },
-  "backend-000187": {
+  "frontend-000187": {
     "message": "No servidor"
   },
-  "backend-000189": {
+  "frontend-000189": {
     "message": "Segredo"
   },
-  "backend-000190": {
+  "frontend-000190": {
     "message": "Texto"
   },
-  "backend-000191": {
+  "frontend-000191": {
     "message": "Arquivo"
   },
-  "backend-000607": {
+  "frontend-000607": {
     "message": "Dados"
   },
-  "backend-000608": {
+  "frontend-000608": {
     "message": "Modelo"
   },
-  "backend-000192": {
+  "frontend-000192": {
     "message": "Valor"
   },
-  "backend-000609": {
+  "frontend-000609": {
     "message": "Novo campo"
   },
-  "backend-000610": {
+  "frontend-000610": {
     "message": "Apagar campo"
   },
-  "backend-000193": {
+  "frontend-000193": {
     "message": "Alternar visibilidade"
   },
-  "backend-000194": {
+  "frontend-000194": {
     "message": "Gerar senha"
   },
-  "backend-000195": {
+  "frontend-000195": {
     "message": "Criptografia simples do lado do servidor V1"
   },
-  "backend-000196": {
+  "frontend-000196": {
     "message": "Faça algumas anotações"
   },
-  "backend-000197": {
+  "frontend-000197": {
     "message": "Salvar"
   },
-  "backend-000198": {
+  "frontend-000198": {
     "message": "Criar pasta"
   },
-  "backend-000199": {
+  "frontend-000199": {
     "message": "Pasta criada"
   },
-  "backend-000200": {
+  "frontend-000200": {
     "message": "Falha ao criar pasta"
   },
-  "backend-000201": {
+  "frontend-000201": {
     "message": "Renomear pasta"
   },
-  "backend-000202": {
+  "frontend-000202": {
     "message": "Pasta renomeada"
   },
-  "backend-000203": {
+  "frontend-000203": {
     "message": "Falha ao renomear pasta"
   },
-  "backend-000204": {
+  "frontend-000204": {
     "message": "Pasta movida"
   },
-  "backend-000205": {
+  "frontend-000205": {
     "message": "Falha ao mover a pasta"
   },
-  "backend-000206": {
+  "frontend-000206": {
     "message": "Excluir pasta"
   },
-  "backend-000207": {
+  "frontend-000207": {
     "message": "Você quer deletar a pasta?"
   },
-  "backend-000208": {
+  "frontend-000208": {
     "message": "Pasta excluída"
   },
-  "backend-000209": {
+  "frontend-000209": {
     "message": "Falha ao excluir pasta"
   },
-  "backend-000210": {
+  "frontend-000210": {
     "message": "Pasta restaurada"
   },
-  "backend-000211": {
+  "frontend-000211": {
     "message": "Falha ao restaurar a pasta"
   },
-  "backend-000212": {
+  "frontend-000212": {
     "message": "Criar etiqueta"
   },
-  "backend-000213": {
+  "frontend-000213": {
     "message": "Etiqueta criada"
   },
-  "backend-000214": {
+  "frontend-000214": {
     "message": "Falha ao criar etiqueta"
   },
-  "backend-000215": {
+  "frontend-000215": {
     "message": "Editar etiqueta"
   },
-  "backend-000216": {
+  "frontend-000216": {
     "message": "Gerar cor aleatória"
   },
-  "backend-000217": {
+  "frontend-000217": {
     "message": "Etiqueta salva"
   },
-  "backend-000218": {
+  "frontend-000218": {
     "message": "Falha ao salvar etiqueta"
   },
-  "backend-000219": {
+  "frontend-000219": {
     "message": "Excluir etiqueta"
   },
-  "backend-000220": {
+  "frontend-000220": {
     "message": "Você quer deletar a etiqueta?"
   },
-  "backend-000221": {
+  "frontend-000221": {
     "message": "Etiqueta deletada"
   },
-  "backend-000222": {
+  "frontend-000222": {
     "message": "Falha ao excluir etiqueta"
   },
-  "backend-000223": {
+  "frontend-000223": {
     "message": "Etiqueta restaurada"
   },
-  "backend-000224": {
+  "frontend-000224": {
     "message": "Falha ao restaurar etiqueta"
   },
-  "backend-000225": {
+  "frontend-000225": {
     "message": "Criar senha"
   },
-  "backend-000226": {
+  "frontend-000226": {
     "message": "Senha criada"
   },
-  "backend-000227": {
+  "frontend-000227": {
     "message": "Falha ao criar senha"
   },
-  "backend-000228": {
+  "frontend-000228": {
     "message": "Editar senha"
   },
-  "backend-000229": {
+  "frontend-000229": {
     "message": "Senha salva"
   },
-  "backend-000230": {
+  "frontend-000230": {
     "message": "Falha ao salvar senha"
   },
-  "backend-000231": {
+  "frontend-000231": {
     "message": "Senha movida"
   },
-  "backend-000232": {
+  "frontend-000232": {
     "message": "Falha ao mover a senha"
   },
-  "backend-000233": {
+  "frontend-000233": {
     "message": "Excluir senha"
   },
-  "backend-000234": {
+  "frontend-000234": {
     "message": "Você quer deletar a senha?"
   },
-  "backend-000235": {
+  "frontend-000235": {
     "message": "Senha excluída"
   },
-  "backend-000236": {
+  "frontend-000236": {
     "message": "Senha restaurada"
   },
-  "backend-000237": {
+  "frontend-000237": {
     "message": "Falha ao restaurar a senha"
   },
-  "backend-000238": {
+  "frontend-000238": {
     "message": "Abrir URL"
   },
-  "backend-000239": {
+  "frontend-000239": {
     "message": "Copiar URL"
   },
-  "backend-000240": {
+  "frontend-000240": {
     "message": "Copiar usuário"
   },
-  "backend-000241": {
+  "frontend-000241": {
     "message": "Copiar senha"
   },
-  "backend-000242": {
+  "frontend-000242": {
     "message": "$ELEMENT$ foi copiado para a área de transferência",
     "placeholders": {
       "element": {
@@ -336,7 +336,7 @@
       }
     }
   },
-  "backend-000243": {
+  "frontend-000243": {
     "message": "Erro ao copiar $ELEMENT$ para a área de transferência",
     "placeholders": {
       "element": {
@@ -344,7 +344,7 @@
       }
     }
   },
-  "backend-000244": {
+  "frontend-000244": {
     "message": "Última modificação em $DATE$",
     "placeholders": {
       "date": {
@@ -352,34 +352,34 @@
       }
     }
   },
-  "backend-000245": {
+  "frontend-000245": {
     "message": "Restaurar revisão"
   },
-  "backend-000246": {
+  "frontend-000246": {
     "message": "Revisão restaurada"
   },
-  "backend-000247": {
+  "frontend-000247": {
     "message": "Falha ao restaurar a revisão"
   },
-  "backend-000248": {
+  "frontend-000248": {
     "message": "Você deseja restaurar a revisão?"
   },
-  "backend-000249": {
+  "frontend-000249": {
     "message": "Compartilhado com você"
   },
-  "backend-000250": {
+  "frontend-000250": {
     "message": "Compartilhado por você"
   },
-  "backend-000251": {
+  "frontend-000251": {
     "message": "Estatisticas"
   },
-  "backend-000252": {
+  "frontend-000252": {
     "message": "Criado em"
   },
-  "backend-000253": {
+  "frontend-000253": {
     "message": "Ultima atualização"
   },
-  "backend-000254": {
+  "frontend-000254": {
     "message": "$COUNT$ revisões",
     "placeholders": {
       "count": {
@@ -387,10 +387,10 @@
       }
     }
   },
-  "backend-000255": {
+  "frontend-000255": {
     "message": "Ações"
   },
-  "backend-000256": {
+  "frontend-000256": {
     "message": "$COUNT$ compartilhamentos",
     "placeholders": {
       "count": {
@@ -398,43 +398,43 @@
       }
     }
   },
-  "backend-000257": {
+  "frontend-000257": {
     "message": "Criptografia aplicada no servidor"
   },
-  "backend-000258": {
+  "frontend-000258": {
     "message": "Criptografia aplicada no cliente"
   },
-  "backend-000259": {
+  "frontend-000259": {
     "message": "Sem criptografia"
   },
-  "backend-000260": {
+  "frontend-000260": {
     "message": "Criptografia simples (Geração 1)"
   },
-  "backend-000261": {
+  "frontend-000261": {
     "message": "Criptografia simples (Geração 2)"
   },
-  "backend-000262": {
+  "frontend-000262": {
     "message": "Criptografia avançada (SSE V2)"
   },
-  "backend-000263": {
+  "frontend-000263": {
     "message": "Criptografia com libsodium"
   },
-  "backend-000264": {
+  "frontend-000264": {
     "message": "Mais"
   },
-  "backend-000265": {
+  "frontend-000265": {
     "message": "Backup e restauração"
   },
-  "backend-000266": {
+  "frontend-000266": {
     "message": "Configurações"
   },
-  "backend-000267": {
+  "frontend-000267": {
     "message": "Manual"
   },
-  "backend-000268": {
+  "frontend-000268": {
     "message": "Aplicativos e extensões"
   },
-  "backend-000269": {
+  "frontend-000269": {
     "message": "$EDITABLE$ e $SHAREABLE$.",
     "placeholders": {
       "editable": {
@@ -445,25 +445,25 @@
       }
     }
   },
-  "backend-000270": {
+  "frontend-000270": {
     "message": "Edição permitida"
   },
-  "backend-000271": {
+  "frontend-000271": {
     "message": "Edição não permitida"
   },
-  "backend-000272": {
+  "frontend-000272": {
     "message": "compartilhamento permitido"
   },
-  "backend-000273": {
+  "frontend-000273": {
     "message": "compartilhamento não permitido"
   },
-  "backend-000274": {
+  "frontend-000274": {
     "message": "Pesquisar usuário"
   },
-  "backend-000275": {
+  "frontend-000275": {
     "message": "Definir data de validade"
   },
-  "backend-000276": {
+  "frontend-000276": {
     "message": "Expira em $DATETIME$",
     "placeholders": {
       "datetime": {
@@ -471,16 +471,16 @@
       }
     }
   },
-  "backend-000277": {
+  "frontend-000277": {
     "message": "Escolha a data de validade"
   },
-  "backend-000278": {
+  "frontend-000278": {
     "message": "Por favor, escolha uma data no futuro"
   },
-  "backend-000279": {
+  "frontend-000279": {
     "message": "Data inválida"
   },
-  "backend-000280": {
+  "frontend-000280": {
     "message": "O usuário $UID$ não existe",
     "placeholders": {
       "uid": {
@@ -488,7 +488,7 @@
       }
     }
   },
-  "backend-000281": {
+  "frontend-000281": {
     "message": "Incapaz de compartilhar a senha: $MESSAGE$",
     "placeholders": {
       "message": {
@@ -496,91 +496,91 @@
       }
     }
   },
-  "backend-000282": {
+  "frontend-000282": {
     "message": "Alternar permissões de gravação"
   },
-  "backend-000283": {
+  "frontend-000283": {
     "message": "Alternar permissões de compartilhamento"
   },
-  "backend-000284": {
+  "frontend-000284": {
     "message": "Pare de compartilhar"
   },
-  "backend-000285": {
+  "frontend-000285": {
     "message": "Data"
   },
-  "backend-000286": {
+  "frontend-000286": {
     "message": "Cache padrão (0 arquivos, 0 B)"
   },
-  "backend-000287": {
+  "frontend-000287": {
     "message": "Cache de Avatares (0 arquivos, 0 B)"
   },
-  "backend-000288": {
+  "frontend-000288": {
     "message": "Favicon Cache (0 arquivos, 0 B)"
   },
-  "backend-000289": {
+  "frontend-000289": {
     "message": "Cache de visualização (0 arquivos, 0 B)"
   },
-  "backend-000290": {
+  "frontend-000290": {
     "message": "Cache de senhas (0 arquivos, 0 B)"
   },
-  "backend-000291": {
+  "frontend-000291": {
     "message": "Alterado"
   },
-  "backend-000292": {
+  "frontend-000292": {
     "message": "Modificado"
   },
-  "backend-000293": {
+  "frontend-000293": {
     "message": "Editado"
   },
-  "backend-000294": {
+  "frontend-000294": {
     "message": "Criado"
   },
   "backups-000144": {
     "message": "Pasta"
   },
-  "backend-000295": {
+  "frontend-000295": {
     "message": "Revisão"
   },
-  "backend-000296": {
+  "frontend-000296": {
     "message": "Url"
   },
-  "backend-000297": {
+  "frontend-000297": {
     "message": "Pai"
   },
-  "backend-000298": {
+  "frontend-000298": {
     "message": "Excluir todos os itens"
   },
-  "backend-000299": {
+  "frontend-000299": {
     "message": "Restaurar todos os itens"
   },
-  "backend-000300": {
+  "frontend-000300": {
     "message": "Restaurar Itens"
   },
-  "backend-000301": {
+  "frontend-000301": {
     "message": "Restaurar todos os itens no lixo?"
   },
-  "backend-000302": {
+  "frontend-000302": {
     "message": "Restaurar este item"
   },
-  "backend-000303": {
+  "frontend-000303": {
     "message": "Itens restaurados"
   },
-  "backend-000304": {
+  "frontend-000304": {
     "message": "Lixo vazio"
   },
-  "backend-000305": {
+  "frontend-000305": {
     "message": "Excluir todos os itens da lixeira?"
   },
-  "backend-000306": {
+  "frontend-000306": {
     "message": "Lixo esvaziado"
   },
-  "backend-000307": {
+  "frontend-000307": {
     "message": "Procurar"
   },
-  "backend-000308": {
+  "frontend-000308": {
     "message": "Use a caixa de pesquisa para pesquisar"
   },
-  "backend-000309": {
+  "frontend-000309": {
     "message": "Pesquisar em todos os lugares por \"$QUERY$\"",
     "placeholders": {
       "query": {
@@ -588,31 +588,31 @@
       }
     }
   },
-  "backend-000310": {
+  "frontend-000310": {
     "message": "Não há nada aqui"
   },
-  "backend-000311": {
+  "frontend-000311": {
     "message": "Clique em \"+\" para adicionar algo"
   },
-  "backend-000312": {
+  "frontend-000312": {
     "message": "Itens excluídos aparecerão aqui"
   },
-  "backend-000313": {
+  "frontend-000313": {
     "message": "Nenhuma senha foi compartilhada com você"
   },
-  "backend-000314": {
+  "frontend-000314": {
     "message": "Você não compartilhou nenhuma senha"
   },
-  "backend-000315": {
+  "frontend-000315": {
     "message": "Seus favoritos aparecerão aqui"
   },
-  "backend-000316": {
+  "frontend-000316": {
     "message": "Melhor verificar as outras seções"
   },
-  "backend-000317": {
+  "frontend-000317": {
     "message": "Provavelmente é um bom sinal"
   },
-  "backend-000318": {
+  "frontend-000318": {
     "message": "Vá para $HREF$",
     "placeholders": {
       "href": {
@@ -620,10 +620,10 @@
       }
     }
   },
-  "backend-000319": {
+  "frontend-000319": {
     "message": "Conteúdo"
   },
-  "backend-000320": {
+  "frontend-000320": {
     "message": "Figura $COUNT$: $TITLE$",
     "placeholders": {
       "count": {
@@ -634,7 +634,7 @@
       }
     }
   },
-  "backend-000321": {
+  "frontend-000321": {
     "message": "Incapaz de obter a página: $MESSAGE$.",
     "placeholders": {
       "message": {
@@ -642,7 +642,7 @@
       }
     }
   },
-  "backend-000322": {
+  "frontend-000322": {
     "message": "Tipo de conteúdo inválido $MIME$",
     "placeholders": {
       "mime": {
@@ -650,37 +650,37 @@
       }
     }
   },
-  "backend-000323": {
+  "frontend-000323": {
     "message": "Nenhum conteúdo disponível"
   },
-  "backend-000324": {
+  "frontend-000324": {
     "message": "Não encontrado"
   },
-  "backend-000325": {
+  "frontend-000325": {
     "message": "Ainda precisa de ajuda?"
   },
-  "backend-000326": {
+  "frontend-000326": {
     "message": "Pergunte em nosso fórum!"
   },
-  "backend-000615": {
+  "frontend-000615": {
     "message": "Ou no nosso chat!"
   },
-  "backend-000327": {
+  "frontend-000327": {
     "message": "Encontrou um erro?"
   },
-  "backend-000328": {
+  "frontend-000328": {
     "message": "Nos digam!"
   },
-  "backend-000329": {
+  "frontend-000329": {
     "message": "A sessão expirou"
   },
-  "backend-000330": {
+  "frontend-000330": {
     "message": "Token de sessão API expirado"
   },
-  "backend-000331": {
+  "frontend-000331": {
     "message": "Erro de rede"
   },
-  "backend-000332": {
+  "frontend-000332": {
     "message": "Incapaz de carregar $MODULE$",
     "placeholders": {
       "module": {
@@ -688,13 +688,13 @@
       }
     }
   },
-  "backend-000333": {
+  "frontend-000333": {
     "message": "Classificar por nome"
   },
-  "backend-000334": {
+  "frontend-000334": {
     "message": "Classificar por data de modificação"
   },
-  "backend-000335": {
+  "frontend-000335": {
     "message": "$PASSWORDS$ Senhas",
     "placeholders": {
       "passwords": {
@@ -702,10 +702,10 @@
       }
     }
   },
-  "backend-000336": {
+  "frontend-000336": {
     "message": "1 Senha"
   },
-  "backend-000337": {
+  "frontend-000337": {
     "message": "$FOLDERS$ Pastas",
     "placeholders": {
       "folders": {
@@ -713,10 +713,10 @@
       }
     }
   },
-  "backend-000338": {
+  "frontend-000338": {
     "message": "1 Pasta"
   },
-  "backend-000339": {
+  "frontend-000339": {
     "message": "$TAGS$ Etiquetas",
     "placeholders": {
       "tags": {
@@ -724,25 +724,25 @@
       }
     }
   },
-  "backend-000340": {
+  "frontend-000340": {
     "message": "1 Etiqueta"
   },
-  "backend-000341": {
+  "frontend-000341": {
     "message": "Nenhuma coisa"
   },
-  "backend-000342": {
+  "frontend-000342": {
     "message": " e "
   },
-  "backend-000343": {
+  "frontend-000343": {
     "message": "Combine"
   },
-  "backend-000344": {
+  "frontend-000344": {
     "message": "partidas"
   },
-  "backend-000345": {
+  "frontend-000345": {
     "message": "Criado por"
   },
-  "backend-000346": {
+  "frontend-000346": {
     "message": "Você está fazendo login como $USER$",
     "placeholders": {
       "user": {
@@ -750,52 +750,52 @@
       }
     }
   },
-  "backend-000347": {
+  "frontend-000347": {
     "message": "Conecte-se"
   },
-  "backend-000348": {
+  "frontend-000348": {
     "message": "Solicitar token novamente"
   },
-  "backend-000349": {
+  "frontend-000349": {
     "message": "Muitas tentativas"
   },
-  "backend-000350": {
+  "frontend-000350": {
     "message": "A senha é muito curta"
   },
-  "backend-000351": {
+  "frontend-000351": {
     "message": "Erro desconhecido"
   },
-  "backend-000352": {
+  "frontend-000352": {
     "message": "Falha na solicitação de token"
   },
-  "backend-000353": {
+  "frontend-000353": {
     "message": "Modo de manutenção do sistema"
   },
-  "backend-000354": {
+  "frontend-000354": {
     "message": "Indisponível"
   },
-  "backend-000355": {
+  "frontend-000355": {
     "message": "Sistema"
   },
-  "backend-000356": {
+  "frontend-000356": {
     "message": "Acesso público"
   },
-  "backend-000357": {
+  "frontend-000357": {
     "message": "Tarefa automática em segundo plano"
   },
-  "backend-000358": {
+  "frontend-000358": {
     "message": "Linha de comando do servidor"
   },
-  "backend-000359": {
+  "frontend-000359": {
     "message": "Por favor, corrija sua entrada"
   },
-  "backend-000360": {
+  "frontend-000360": {
     "message": "Mostrar valor"
   },
-  "backend-000617": {
+  "frontend-000617": {
     "message": "Selecione uma pasta"
   },
-  "backend-000618": {
+  "frontend-000618": {
     "message": "Selecione a \"$FOLDER$\"",
     "placeholders": {
       "folder": {
@@ -803,7 +803,7 @@
       }
     }
   },
-  "backend-000619": {
+  "frontend-000619": {
     "message": "$LABEL$ não pode ser usado",
     "placeholders": {
       "label": {
@@ -811,28 +811,28 @@
       }
     }
   },
-  "backend-000620": {
+  "frontend-000620": {
     "message": "Home"
   },
-  "backend-000361": {
+  "frontend-000361": {
     "message": "Cancelar"
   },
-  "backend-000362": {
+  "frontend-000362": {
     "message": "Ok"
   },
-  "backend-000363": {
+  "frontend-000363": {
     "message": "verdade"
   },
-  "backend-000364": {
+  "frontend-000364": {
     "message": "falso"
   },
-  "backend-000365": {
+  "frontend-000365": {
     "message": "sim"
   },
-  "backend-000366": {
+  "frontend-000366": {
     "message": "não"
   },
-  "backend-000367": {
+  "frontend-000367": {
     "message": "$NAME$ compartilhou isso com você.",
     "placeholders": {
       "name": {
@@ -840,10 +840,10 @@
       }
     }
   },
-  "backend-000368": {
+  "frontend-000368": {
     "message": "Você atingiu o comprimento máximo de 4096 caracteres"
   },
-  "backend-000369": {
+  "frontend-000369": {
     "message": "Não conseguimos encontrar nada para \"$QUERY$\"",
     "placeholders": {
       "query": {
@@ -851,7 +851,7 @@
       }
     }
   },
-  "backend-000370": {
+  "frontend-000370": {
     "message": "A página \"$PAGE$\" não pôde ser obtida do servidor de manuais.",
     "placeholders": {
       "page": {
@@ -859,10 +859,10 @@
       }
     }
   },
-  "backend-000371": {
+  "frontend-000371": {
     "message": "Alguns dados estão esperando para serem sincronizados"
   },
-  "backend-000372": {
+  "frontend-000372": {
     "message": "Você será desconectado em $TIME$ segundos",
     "placeholders": {
       "time": {
@@ -870,13 +870,13 @@
       }
     }
   },
-  "backend-000373": {
+  "frontend-000373": {
     "message": "Você pode ter solicitado muitos tokens. Por favor, tente novamente mais tarde."
   },
-  "backend-000625": {
+  "frontend-000625": {
     "message": "Escolha o tipo de criptografia para esta senha"
   },
-  "backend-000626": {
+  "frontend-000626": {
     "message": "Quer excluir o campo \"$FIELD$\"?",
     "placeholders": {
       "field": {
@@ -884,34 +884,34 @@
       }
     }
   },
-  "backend-000374": {
+  "frontend-000374": {
     "message": "A criptografia de ponta a ponta será desabilitada para esta senha se você compartilhá-la."
   },
-  "backend-000375": {
+  "frontend-000375": {
     "message": "O token de sessão não é mais válido. O aplicativo será recarregado agora."
   },
-  "backend-000376": {
+  "frontend-000376": {
     "message": "Hoje, em 2018, foi publicada a primeira versão de senhas. Obrigado por usar o aplicativo."
   },
-  "backend-000628": {
+  "frontend-000628": {
     "message": "A criptografia aplicada pelo servidor antes de armazenar os dados no banco de dados"
   },
-  "backend-000629": {
+  "frontend-000629": {
     "message": "A criptografia aplicada pelo cliente antes de enviar os dados para o servidor"
   },
-  "frontend-000377": {
+  "backend-000377": {
     "message": "HTTPS necessário"
   },
-  "frontend-000378": {
+  "backend-000378": {
     "message": "recarregar esta página"
   },
-  "frontend-000379": {
+  "backend-000379": {
     "message": "fórum"
   },
-  "frontend-000380": {
+  "backend-000380": {
     "message": "documentação"
   },
-  "frontend-000381": {
+  "backend-000381": {
     "message": "Você pode tentar $STR_1$ a página com HTTPS.",
     "placeholders": {
       "str_1": {
@@ -919,7 +919,7 @@
       }
     }
   },
-  "frontend-000382": {
+  "backend-000382": {
     "message": "Este aplicativo requer $STR_1$ para funcionar com segurança.",
     "placeholders": {
       "str_1": {
@@ -927,7 +927,7 @@
       }
     }
   },
-  "frontend-000383": {
+  "backend-000383": {
     "message": "Isso NÃO é um bug. Visite nosso $STR_1$ se precisar de ajuda.",
     "placeholders": {
       "str_1": {
@@ -935,10 +935,10 @@
       }
     }
   },
-  "frontend-000384": {
+  "backend-000384": {
     "message": "Reveja o relatório HTTPS abaixo para depurar o problema."
   },
-  "frontend-000385": {
+  "backend-000385": {
     "message": "Leia este $STR_1$ para configurar seu servidor para usar HTTPS.",
     "placeholders": {
       "str_1": {
@@ -946,7 +946,7 @@
       }
     }
   },
-  "frontend-000386": {
+  "backend-000386": {
     "message": "Leia este $STR_1$ se estiver usando qualquer tipo de proxy.",
     "placeholders": {
       "str_1": {
@@ -954,7 +954,7 @@
       }
     }
   },
-  "frontend-000387": {
+  "backend-000387": {
     "message": "Vá para $STR_1$ para obter um certificado HTTPS gratuito se precisar de um.",
     "placeholders": {
       "str_1": {
@@ -962,10 +962,10 @@
       }
     }
   },
-  "frontend-000388": {
+  "backend-000388": {
     "message": "Se o problema persistir, você deve entrar em contato com o administrador."
   },
-  "frontend-000389": {
+  "backend-000389": {
     "message": "Sessão de senhas $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -976,157 +976,157 @@
       }
     }
   },
-  "frontend-000390": {
+  "backend-000390": {
     "message": "Documentação aberta"
   },
-  "frontend-000391": {
+  "backend-000391": {
     "message": "Nunca"
   },
-  "frontend-000392": {
+  "backend-000392": {
     "message": "Processamento Interno de Dados"
   },
-  "frontend-000393": {
+  "backend-000393": {
     "message": "Renderização de imagem"
   },
-  "frontend-000394": {
+  "backend-000394": {
     "message": "Imagick/GMagick (recomendado)"
   },
-  "frontend-000395": {
+  "backend-000395": {
     "message": "Serviços externos"
   },
-  "frontend-000396": {
+  "backend-000396": {
     "message": "Verificações de segurança de senha"
   },
-  "frontend-000397": {
+  "backend-000397": {
     "message": "Fui questionado? (Recomendado)"
   },
-  "frontend-000398": {
+  "backend-000398": {
     "message": "25 milhões de senhas (locais)"
   },
-  "frontend-000399": {
+  "backend-000399": {
     "message": "5 milhão de senhas (local)"
   },
-  "frontend-000400": {
+  "backend-000400": {
     "message": "25 milhões de senhas e Hibp?"
   },
-  "frontend-000401": {
+  "backend-000401": {
     "message": "Serviço Gerador de Senha"
   },
-  "frontend-000402": {
+  "backend-000402": {
     "message": "Dicionário local"
   },
-  "frontend-000403": {
+  "backend-000403": {
     "message": "Personagens Aleatórios"
   },
-  "frontend-000404": {
+  "backend-000404": {
     "message": "watchout4snakes.com"
   },
-  "frontend-000405": {
+  "backend-000405": {
     "message": "Coleção Leipzig Corpora (recomendado)"
   },
-  "frontend-000406": {
+  "backend-000406": {
     "message": "Serviço Favicon"
   },
-  "frontend-000632": {
+  "backend-000632": {
     "message": "Favicon Service Api"
   },
-  "frontend-000633": {
+  "backend-000633": {
     "message": "(opcional)"
   },
-  "frontend-000407": {
+  "backend-000407": {
     "message": "Analisador local"
   },
-  "frontend-000408": {
+  "backend-000408": {
     "message": "Besticon (recomendado)"
   },
-  "frontend-000409": {
+  "backend-000409": {
     "message": "Nenhum"
   },
-  "frontend-000410": {
+  "backend-000410": {
     "message": "Serviço de visualização de sites"
   },
-  "frontend-000411": {
+  "backend-000411": {
     "message": "Chave da API de visualização do site"
   },
-  "frontend-000412": {
+  "backend-000412": {
     "message": "Pageres / PhantomJS (Local)"
   },
-  "frontend-000413": {
+  "backend-000413": {
     "message": "WKHTML (Local)"
   },
-  "frontend-000414": {
+  "backend-000414": {
     "message": "screenshotapi.io"
   },
-  "frontend-000415": {
+  "backend-000415": {
     "message": "Configurações de e-mail padrão"
   },
-  "frontend-000416": {
+  "backend-000416": {
     "message": "Enviar e-mails para eventos de segurança"
   },
-  "frontend-000417": {
+  "backend-000417": {
     "message": "Enviar e-mails para compartilhar eventos"
   },
-  "frontend-000418": {
+  "backend-000418": {
     "message": "Outros ajustes"
   },
-  "frontend-000419": {
+  "backend-000419": {
     "message": "Remover objetos excluídos do banco de dados"
   },
-  "frontend-000420": {
+  "backend-000420": {
     "message": "Mostrar atualizações noturnas em \"Apps\""
   },
-  "frontend-000421": {
+  "backend-000421": {
     "message": "Nunca"
   },
-  "frontend-000422": {
+  "backend-000422": {
     "message": "Imediatamente"
   },
-  "frontend-000423": {
+  "backend-000423": {
     "message": "Depois de duas horas"
   },
-  "frontend-000424": {
+  "backend-000424": {
     "message": "Depois de um dia"
   },
-  "frontend-000425": {
+  "backend-000425": {
     "message": "Depois de duas semanas"
   },
-  "frontend-000426": {
+  "backend-000426": {
     "message": "Depois de um mês"
   },
-  "frontend-000427": {
+  "backend-000427": {
     "message": "Depois de um ano"
   },
-  "frontend-000428": {
+  "backend-000428": {
     "message": "Configurações de backup"
   },
-  "frontend-000429": {
+  "backend-000429": {
     "message": "Intervalo de backup"
   },
-  "frontend-000430": {
+  "backend-000430": {
     "message": "Toda hora"
   },
-  "frontend-000431": {
+  "backend-000431": {
     "message": "A cada seis horas"
   },
-  "frontend-000432": {
+  "backend-000432": {
     "message": "Todos os dias"
   },
-  "frontend-000433": {
+  "backend-000433": {
     "message": "A cada dois dias"
   },
-  "frontend-000434": {
+  "backend-000434": {
     "message": "Toda semana"
   },
-  "frontend-000435": {
+  "backend-000435": {
     "message": "A cada duas semanas"
   },
-  "frontend-000436": {
+  "backend-000436": {
     "message": "Quantidade de backups para manter"
   },
-  "frontend-000437": {
+  "backend-000437": {
     "message": "Caches"
   },
-  "frontend-000438": {
+  "backend-000438": {
     "message": "Cache padrão ($STR_1$ arquivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1137,7 +1137,7 @@
       }
     }
   },
-  "frontend-000439": {
+  "backend-000439": {
     "message": "Cache de Avatars ($STR_1$ arquivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1148,7 +1148,7 @@
       }
     }
   },
-  "frontend-000440": {
+  "backend-000440": {
     "message": "Favicon ($STR_1$ Dateien, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1159,7 +1159,7 @@
       }
     }
   },
-  "frontend-000441": {
+  "backend-000441": {
     "message": "Cache de visualização ($STR_1$ arquivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1170,7 +1170,7 @@
       }
     }
   },
-  "frontend-000442": {
+  "backend-000442": {
     "message": "Cache de senhas ($STR_1$ arquivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1181,34 +1181,34 @@
       }
     }
   },
-  "frontend-000443": {
+  "backend-000443": {
     "message": "Limpar"
   },
-  "frontend-000444": {
+  "backend-000444": {
     "message": "Limpe este cache"
   },
-  "frontend-000445": {
+  "backend-000445": {
     "message": "Você não pode limpar um cache usando um serviço compartilhado"
   },
-  "frontend-000446": {
+  "backend-000446": {
     "message": "Salvo"
   },
-  "frontend-000447": {
+  "backend-000447": {
     "message": "Apagado"
   },
-  "frontend-000448": {
+  "backend-000448": {
     "message": "Fracassado"
   },
-  "frontend-000449": {
+  "backend-000449": {
     "message": "Preciso de ajuda"
   },
-  "frontend-000450": {
+  "backend-000450": {
     "message": "encontrou um bug"
   },
-  "frontend-000451": {
+  "backend-000451": {
     "message": "procurando a documentação"
   },
-  "frontend-000452": {
+  "backend-000452": {
     "message": "$STR_1$, $STR_1$ ou $STR_1$? Nós ajudamos você!",
     "placeholders": {
       "str_1": {
@@ -1222,7 +1222,7 @@
       }
     }
   },
-  "frontend-000453": {
+  "backend-000453": {
     "message": "$STRING_1$ $STRING_2$ não é mais compatível.",
     "placeholders": {
       "string_1": {
@@ -1233,10 +1233,10 @@
       }
     }
   },
-  "frontend-000454": {
+  "backend-000454": {
     "message": "As senhas requerem HTTPS."
   },
-  "frontend-000455": {
+  "backend-000455": {
     "message": "Usar $STR_1$ para executar trabalhos em segundo plano pode causar atrasos. Recomendamos o uso do Cron.",
     "placeholders": {
       "str_1": {
@@ -1244,13 +1244,13 @@
       }
     }
   },
-  "frontend-000456": {
+  "backend-000456": {
     "message": "Verifique os requisitos do sistema."
   },
-  "frontend-000457": {
+  "backend-000457": {
     "message": "Senha não compartilhada"
   },
-  "frontend-000458": {
+  "backend-000458": {
     "message": "A senha não foi compartilhada com $STRING_1$ porque já é",
     "placeholders": {
       "string_1": {
@@ -1258,25 +1258,25 @@
       }
     }
   },
-  "frontend-000459": {
+  "backend-000459": {
     "message": "Você tem uma senha insegura"
   },
-  "frontend-000460": {
+  "backend-000460": {
     "message": "Você tem senhas inseguras"
   },
-  "frontend-000461": {
+  "backend-000461": {
     "message": "Uma de suas senhas não é mais segura."
   },
-  "frontend-000462": {
+  "backend-000462": {
     "message": "Algumas de suas senhas não são mais seguras."
   },
-  "frontend-000463": {
+  "backend-000463": {
     "message": "As senhas verificam regularmente se suas senhas foram comprometidas por uma violação de dados."
   },
-  "frontend-000464": {
+  "backend-000464": {
     "message": "Esta verificação de segurança descobriu que uma de suas senhas não é segura."
   },
-  "frontend-000465": {
+  "backend-000465": {
     "message": "Esta verificação de segurança descobriu que $STR_1$ das suas senhas não são seguras.",
     "placeholders": {
       "str_1": {
@@ -1284,37 +1284,37 @@
       }
     }
   },
-  "frontend-000466": {
+  "backend-000466": {
     "message": "Isso significa que a senha está na internet e coloca sua conta em risco."
   },
-  "frontend-000467": {
+  "backend-000467": {
     "message": "Isso significa que as senhas estão na Internet e colocam suas contas em risco."
   },
-  "frontend-000468": {
+  "backend-000468": {
     "message": "Portanto, a senha foi marcada como insegura e deve ser alterada agora."
   },
-  "frontend-000469": {
+  "backend-000469": {
     "message": "Portanto, as senhas foram marcadas como inseguras e devem ser alteradas agora."
   },
-  "frontend-000470": {
+  "backend-000470": {
     "message": "Você pode criar uma nova senha segura no aplicativo de senhas."
   },
-  "frontend-000471": {
+  "backend-000471": {
     "message": "Você pode criar novas senhas seguras no aplicativo de senhas."
   },
-  "frontend-000472": {
+  "backend-000472": {
     "message": "Alterar senha agora"
   },
-  "frontend-000473": {
+  "backend-000473": {
     "message": "Altere as senhas agora"
   },
-  "frontend-000474": {
+  "backend-000474": {
     "message": "Abra o aplicativo de senhas para alterá-lo."
   },
-  "frontend-000475": {
+  "backend-000475": {
     "message": "Abra o aplicativo de senhas para alterá-las."
   },
-  "frontend-000476": {
+  "backend-000476": {
     "message": "$STR_1$ compartilhou uma senha com você.",
     "placeholders": {
       "str_1": {
@@ -1322,7 +1322,7 @@
       }
     }
   },
-  "frontend-000477": {
+  "backend-000477": {
     "message": "$STR_1$ compartilhou $STR_1$ senhas com você.",
     "placeholders": {
       "str_1": {
@@ -1333,7 +1333,7 @@
       }
     }
   },
-  "frontend-000478": {
+  "backend-000478": {
     "message": "$STRING_4$ e $STRING_3$ compartilharam $STRING_1$ senhas com você.",
     "placeholders": {
       "string_4": {
@@ -1347,7 +1347,7 @@
       }
     }
   },
-  "frontend-000479": {
+  "backend-000479": {
     "message": "$STRING_5$, $STRING_4$ e $STRING_3$ compartilharam $STRING_1$ senhas com você.",
     "placeholders": {
       "string_5": {
@@ -1364,7 +1364,7 @@
       }
     }
   },
-  "frontend-000480": {
+  "backend-000480": {
     "message": "$STRING_5$, $STRING_4$ e $STRING_2$ outros compartilharam $STRING_1$ senhas com você.",
     "placeholders": {
       "string_5": {
@@ -1381,13 +1381,13 @@
       }
     }
   },
-  "frontend-000481": {
+  "backend-000481": {
     "message": "Abra o aplicativo de senhas para vê-lo."
   },
-  "frontend-000482": {
+  "backend-000482": {
     "message": "Abra o aplicativo de senhas para vê-los."
   },
-  "frontend-000483": {
+  "backend-000483": {
     "message": "Uma senha foi compartilhada com você em $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1395,7 +1395,7 @@
       }
     }
   },
-  "frontend-000484": {
+  "backend-000484": {
     "message": "Várias senhas foram compartilhadas com você em $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1403,13 +1403,13 @@
       }
     }
   },
-  "frontend-000485": {
+  "backend-000485": {
     "message": "Ver senhas compartilhadas comigo"
   },
-  "frontend-000486": {
+  "backend-000486": {
     "message": "Uma de suas senhas não pôde ser compartilhada porque o destinatário já tem acesso a ela."
   },
-  "frontend-000487": {
+  "backend-000487": {
     "message": "$STR_1$ das suas senhas não puderam ser compartilhadas porque o destinatário já tem acesso a elas.",
     "placeholders": {
       "str_1": {
@@ -1417,16 +1417,16 @@
       }
     }
   },
-  "frontend-000489": {
+  "backend-000489": {
     "message": "Compartilhar uma senha que foi compartilhada com você às vezes pode criar um loop."
   },
-  "frontend-000490": {
+  "backend-000490": {
     "message": "Para evitar isso, essas senhas não serão compartilhadas."
   },
-  "frontend-000491": {
+  "backend-000491": {
     "message": "Acesso administrativo à sua conta"
   },
-  "frontend-000492": {
+  "backend-000492": {
     "message": "$STR_1$ tentou entrar na sua conta em $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1437,7 +1437,7 @@
       }
     }
   },
-  "frontend-000493": {
+  "backend-000493": {
     "message": "$STR_1$ logou em sua conta em $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1448,13 +1448,13 @@
       }
     }
   },
-  "frontend-000494": {
+  "backend-000494": {
     "message": "Como você usa uma senha mestra, isso não significa que o acesso aos seus dados foi concedido."
   },
-  "frontend-000495": {
+  "backend-000495": {
     "message": "Para evitar o acesso indesejado aos seus dados, você deve configurar uma senha mestra."
   },
-  "frontend-000496": {
+  "backend-000496": {
     "message": "Usuário excluído ($STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1462,73 +1462,73 @@
       }
     }
   },
-  "frontend-000497": {
+  "backend-000497": {
     "message": "Ajude-nos a melhorar as senhas"
   },
-  "frontend-000498": {
+  "backend-000498": {
     "message": "Você pode nos ajudar a melhorar o aplicativo Passwords participando de nossa pesquisa de servidor."
   },
-  "frontend-000499": {
+  "backend-000499": {
     "message": "Isso nos enviará alguns dados anônimos sobre sua configuração e configurações selecionadas."
   },
-  "frontend-000500": {
+  "backend-000500": {
     "message": "Você pode alterar isso a qualquer momento nas configurações do aplicativo."
   },
-  "frontend-000501": {
+  "backend-000501": {
     "message": "Ainda não"
   },
-  "frontend-000502": {
+  "backend-000502": {
     "message": "Participar"
   },
-  "frontend-000503": {
+  "backend-000503": {
     "message": "Participação na pesquisa do servidor"
   },
-  "frontend-000504": {
+  "backend-000504": {
     "message": "Básico"
   },
-  "frontend-000505": {
+  "backend-000505": {
     "message": "Completo"
   },
-  "frontend-000506": {
+  "backend-000506": {
     "message": "Não configurado"
   },
-  "frontend-000507": {
+  "backend-000507": {
     "message": "Por favor, considere auto-hospedar sua API de favicon"
   },
-  "frontend-000508": {
+  "backend-000508": {
     "message": "Seu Nextcloud usa nossas instâncias compartilhadas do Besticon para buscar ícones de sites."
   },
-  "frontend-000509": {
+  "backend-000509": {
     "message": "Essas instâncias são destinadas a pequenas configurações do Nextcloud com muito pouco tráfego."
   },
-  "frontend-000634": {
+  "backend-000634": {
     "message": "Seu Nextcloud requer significativamente mais ícones do que a média."
   },
-  "frontend-000510": {
+  "backend-000510": {
     "message": "Clique no link e siga nosso tutorial fácil para hospedar o Besticon você mesmo."
   },
-  "frontend-000635": {
+  "backend-000635": {
     "message": "Tutorial aberto"
   },
-  "frontend-000511": {
+  "backend-000511": {
     "message": "Sua configuração de serviço favicon é inválida"
   },
-  "frontend-000512": {
+  "backend-000512": {
     "message": "Sua configuração de serviço de visualização é inválida"
   },
-  "frontend-000513": {
+  "backend-000513": {
     "message": "O serviço favicon escolhido requer uma chave de API ou ponto de extremidade, mas nenhum é fornecido."
   },
-  "frontend-000514": {
+  "backend-000514": {
     "message": "O serviço de visualização escolhido requer uma chave de API ou ponto de extremidade, mas nenhum é fornecido."
   },
-  "frontend-000515": {
+  "backend-000515": {
     "message": "Abra as configurações de administrador para atualizar a configuração ou escolha outro serviço."
   },
-  "frontend-000636": {
+  "backend-000636": {
     "message": "Quantidade suspeita de tentativas de login com falha detectadas."
   },
-  "frontend-000516": {
+  "backend-000516": {
     "message": "Detectamos várias tentativas fracassadas de desbloquear seu banco de dados de senhas por \"$STR_1$\".",
     "placeholders": {
       "str_1": {
@@ -1536,64 +1536,64 @@
       }
     }
   },
-  "frontend-000517": {
+  "backend-000517": {
     "message": "Isso pode indicar que alguém está tentando invadir sua conta."
   },
-  "frontend-000518": {
+  "backend-000518": {
     "message": "Para evitar novas tentativas, as credenciais de API deste cliente foram revogadas."
   },
-  "frontend-000519": {
+  "backend-000519": {
     "message": "Além disso, a autenticação da API baseada em senha foi desativada."
   },
-  "frontend-000520": {
+  "backend-000520": {
     "message": "Se você deseja continuar usando este cliente, você precisa criar um novo token para ele."
   },
-  "frontend-000521": {
+  "backend-000521": {
     "message": "Se você não conhece este cliente, altere sua senha e revise sua lista de dispositivos."
   },
-  "frontend-000522": {
+  "backend-000522": {
     "message": "Para evitar novas tentativas, a autenticação da API baseada em senha foi desabilitada."
   },
-  "frontend-000523": {
+  "backend-000523": {
     "message": "Para habilitá-lo novamente, faça login com o webapp ou qualquer cliente usando autenticação de token."
   },
-  "frontend-000524": {
+  "backend-000524": {
     "message": "Se você não conhece este cliente, altere sua senha mestra e a senha do Nextcloud."
   },
-  "frontend-000525": {
+  "backend-000525": {
     "message": "Para aumentar a segurança, recomendamos o uso de tokens específicos do dispositivo em vez de sua senha."
   },
-  "frontend-000637": {
+  "backend-000637": {
     "message": "Mais Informações"
   },
-  "frontend-000638": {
+  "backend-000638": {
     "message": "Visualizar senhas inseguras"
   },
-  "frontend-000639": {
+  "backend-000639": {
     "message": "Abrir configurações"
   },
-  "frontend-000640": {
+  "backend-000640": {
     "message": "Abrir senhas"
   },
-  "frontend-000641": {
+  "backend-000641": {
     "message": "Visualizar aplicativos"
   },
-  "frontend-000642": {
+  "backend-000642": {
     "message": "Visualizar aplicativos e dispositivos"
   },
-  "frontend-000643": {
+  "backend-000643": {
     "message": "Gerenciar dispositivos e aplicativos"
   },
-  "frontend-000644": {
+  "backend-000644": {
     "message": "Visualizar senhas compartilhadas"
   },
-  "frontend-000645": {
+  "backend-000645": {
     "message": "Atualização de aplicativo recomendada"
   },
-  "frontend-000646": {
+  "backend-000646": {
     "message": "Um novo cliente ou aplicativo foi conectado à sua conta"
   },
-  "frontend-000647": {
+  "backend-000647": {
     "message": "\"$STR_1$\" recebeu acesso à sua conta $STR_1$ Passwords através do PassLink.",
     "placeholders": {
       "str_1": {
@@ -1604,7 +1604,7 @@
       }
     }
   },
-  "frontend-000648": {
+  "backend-000648": {
     "message": "Você pode gerenciar todos os dispositivos e aplicativos conectados nas configurações do $STR_1$ na seção de segurança.",
     "placeholders": {
       "str_1": {

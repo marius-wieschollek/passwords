@@ -513,292 +513,292 @@
       }
     }
   },
-  "backend-000148": {
+  "frontend-000148": {
     "message": "Contraseñas"
   },
-  "backend-000149": {
+  "frontend-000149": {
     "message": "Todas"
   },
-  "backend-000150": {
+  "frontend-000150": {
     "message": "Carpeta"
   },
-  "backend-000151": {
+  "frontend-000151": {
     "message": "Recientes"
   },
-  "backend-000152": {
+  "frontend-000152": {
     "message": "Favorites"
   },
-  "backend-000153": {
+  "frontend-000153": {
     "message": "Compartidas"
   },
   "backups-000145": {
     "message": "Etiquetas"
   },
-  "backend-000154": {
+  "frontend-000154": {
     "message": "Seguridad"
   },
-  "backend-000155": {
+  "frontend-000155": {
     "message": "Papelera"
   },
-  "backend-000156": {
+  "frontend-000156": {
     "message": "Detalles"
   },
-  "backend-000157": {
+  "frontend-000157": {
     "message": "Modificar"
   },
-  "backend-000158": {
+  "frontend-000158": {
     "message": "Renombrar"
   },
-  "backend-000159": {
+  "frontend-000159": {
     "message": "Borrar"
   },
-  "backend-000160": {
+  "frontend-000160": {
     "message": "Restaurar"
   },
-  "backend-000161": {
+  "frontend-000161": {
     "message": "Nueva contraseña"
   },
-  "backend-000162": {
+  "frontend-000162": {
     "message": "Nueva carpeta"
   },
-  "backend-000163": {
+  "frontend-000163": {
     "message": "Nueva etiqueta"
   },
-  "backend-000164": {
+  "frontend-000164": {
     "message": "Segura"
   },
-  "backend-000165": {
+  "frontend-000165": {
     "message": "Estado"
   },
-  "backend-000166": {
+  "frontend-000166": {
     "message": "Débil"
   },
-  "backend-000167": {
+  "frontend-000167": {
     "message": "Débil (Repetida)"
   },
-  "backend-000168": {
+  "frontend-000168": {
     "message": "Débil (Anticuada)"
   },
-  "backend-000169": {
+  "frontend-000169": {
     "message": "Violada"
   },
-  "backend-000170": {
+  "frontend-000170": {
     "message": "Compartir"
   },
-  "backend-000171": {
+  "frontend-000171": {
     "message": "Versiones"
   },
-  "backend-000172": {
+  "frontend-000172": {
     "message": "Codigo QR"
   },
-  "backend-000173": {
+  "frontend-000173": {
     "message": "Contraseña"
   },
-  "backend-000174": {
+  "frontend-000174": {
     "message": "Usuario"
   },
-  "backend-000175": {
+  "frontend-000175": {
     "message": "Sitio web"
   },
-  "backend-000176": {
+  "frontend-000176": {
     "message": "Añadir etiqueta…"
   },
-  "backend-000177": {
+  "frontend-000177": {
     "message": "Color"
   },
-  "backend-000178": {
+  "frontend-000178": {
     "message": "Nombre"
   },
-  "backend-000179": {
+  "frontend-000179": {
     "message": "Etiqueta"
   },
-  "backend-000180": {
+  "frontend-000180": {
     "message": "General"
   },
-  "backend-000181": {
+  "frontend-000181": {
     "message": "Propiedades"
   },
-  "backend-000182": {
+  "frontend-000182": {
     "message": "Números"
   },
-  "backend-000183": {
+  "frontend-000183": {
     "message": "Caracteres especiales"
   },
-  "backend-000184": {
+  "frontend-000184": {
     "message": "Opciones avanzadas"
   },
-  "backend-000185": {
+  "frontend-000185": {
     "message": "Favorita"
   },
-  "backend-000186": {
+  "frontend-000186": {
     "message": "Cifrado"
   },
-  "backend-000187": {
+  "frontend-000187": {
     "message": "En el servidor"
   },
-  "backend-000188": {
+  "frontend-000188": {
     "message": "Campos personalizados"
   },
-  "backend-000189": {
+  "frontend-000189": {
     "message": "Secreto"
   },
-  "backend-000190": {
+  "frontend-000190": {
     "message": "Texto"
   },
-  "backend-000191": {
+  "frontend-000191": {
     "message": "Archivo"
   },
-  "backend-000192": {
+  "frontend-000192": {
     "message": "Valor"
   },
-  "backend-000193": {
+  "frontend-000193": {
     "message": "Alternar visibilidad"
   },
-  "backend-000194": {
+  "frontend-000194": {
     "message": "Generar contraseña"
   },
-  "backend-000195": {
+  "frontend-000195": {
     "message": "Usar cifrado simple V1 en el servidor"
   },
-  "backend-000196": {
+  "frontend-000196": {
     "message": "Escribir alguna nota"
   },
-  "backend-000197": {
+  "frontend-000197": {
     "message": "Guardar"
   },
-  "backend-000198": {
+  "frontend-000198": {
     "message": "Crear Carpeta"
   },
-  "backend-000199": {
+  "frontend-000199": {
     "message": "Carpeta creada"
   },
-  "backend-000200": {
+  "frontend-000200": {
     "message": "Fallo al crear carpeta"
   },
-  "backend-000201": {
+  "frontend-000201": {
     "message": "Renombrar carpeta"
   },
-  "backend-000202": {
+  "frontend-000202": {
     "message": "Carpeta renombrada"
   },
-  "backend-000203": {
+  "frontend-000203": {
     "message": "Error al renombrar carpeta"
   },
-  "backend-000204": {
+  "frontend-000204": {
     "message": "Carpeta movida"
   },
-  "backend-000205": {
+  "frontend-000205": {
     "message": "Error al mover carpeta"
   },
-  "backend-000206": {
+  "frontend-000206": {
     "message": "Borrar carpeta"
   },
-  "backend-000207": {
+  "frontend-000207": {
     "message": "Deseas borrar esta carpeta?"
   },
-  "backend-000208": {
+  "frontend-000208": {
     "message": "Carpeta borrada"
   },
-  "backend-000209": {
+  "frontend-000209": {
     "message": "Error al borrar carpeta"
   },
-  "backend-000210": {
+  "frontend-000210": {
     "message": "Carpeta restaurada"
   },
-  "backend-000211": {
+  "frontend-000211": {
     "message": "Error al restaurar carpeta"
   },
-  "backend-000212": {
+  "frontend-000212": {
     "message": "Crear etiqueta"
   },
-  "backend-000213": {
+  "frontend-000213": {
     "message": "Etiqueta creada"
   },
-  "backend-000214": {
+  "frontend-000214": {
     "message": "Error al crear etiqueta"
   },
-  "backend-000215": {
+  "frontend-000215": {
     "message": "Modificar etiqueta"
   },
-  "backend-000216": {
+  "frontend-000216": {
     "message": "Generar un color al azar"
   },
-  "backend-000217": {
+  "frontend-000217": {
     "message": "Etiqueta guardada"
   },
-  "backend-000218": {
+  "frontend-000218": {
     "message": "Error al guardar etiqueta"
   },
-  "backend-000219": {
+  "frontend-000219": {
     "message": "Borrar etiqueta"
   },
-  "backend-000220": {
+  "frontend-000220": {
     "message": "¿Deseas borrar la etiqueta?"
   },
-  "backend-000221": {
+  "frontend-000221": {
     "message": "Etiqueta borrada"
   },
-  "backend-000222": {
+  "frontend-000222": {
     "message": "Error al borrar etiqueta"
   },
-  "backend-000223": {
+  "frontend-000223": {
     "message": "Etiqueta restaurada"
   },
-  "backend-000224": {
+  "frontend-000224": {
     "message": "Error al restaurar etiqueta"
   },
-  "backend-000225": {
+  "frontend-000225": {
     "message": "Crear nueva contraseña"
   },
-  "backend-000226": {
+  "frontend-000226": {
     "message": "Contraseña creada"
   },
-  "backend-000227": {
+  "frontend-000227": {
     "message": "Error al crear contraseña"
   },
-  "backend-000228": {
+  "frontend-000228": {
     "message": "Modificar contraseña"
   },
-  "backend-000229": {
+  "frontend-000229": {
     "message": "Contraseña guardada"
   },
-  "backend-000230": {
+  "frontend-000230": {
     "message": "Error al guardar contraseña"
   },
-  "backend-000231": {
+  "frontend-000231": {
     "message": "Contraseña movida"
   },
-  "backend-000232": {
+  "frontend-000232": {
     "message": "Error al mover contraseña"
   },
-  "backend-000233": {
+  "frontend-000233": {
     "message": "Borrar contraseña"
   },
-  "backend-000234": {
+  "frontend-000234": {
     "message": "Deseas borrar la contraseña?"
   },
-  "backend-000235": {
+  "frontend-000235": {
     "message": "Contraseña borrada"
   },
-  "backend-000236": {
+  "frontend-000236": {
     "message": "Contraseña restaurada"
   },
-  "backend-000237": {
+  "frontend-000237": {
     "message": "Error al restaurar la contraseña"
   },
-  "backend-000238": {
+  "frontend-000238": {
     "message": "Abrir sitio web"
   },
-  "backend-000239": {
+  "frontend-000239": {
     "message": "Copiar sito web"
   },
-  "backend-000240": {
+  "frontend-000240": {
     "message": "Copiar usuario"
   },
-  "backend-000241": {
+  "frontend-000241": {
     "message": "Copiar contraseña"
   },
-  "backend-000242": {
+  "frontend-000242": {
     "message": "$ELEMENT$ copiada al portapapeles",
     "placeholders": {
       "element": {
@@ -806,7 +806,7 @@
       }
     }
   },
-  "backend-000243": {
+  "frontend-000243": {
     "message": "Error al copiar $ELEMENT$ al portapapeles",
     "placeholders": {
       "element": {
@@ -814,7 +814,7 @@
       }
     }
   },
-  "backend-000244": {
+  "frontend-000244": {
     "message": "Última modificación el $DATE$",
     "placeholders": {
       "date": {
@@ -822,34 +822,34 @@
       }
     }
   },
-  "backend-000245": {
+  "frontend-000245": {
     "message": "Restaurar versión"
   },
-  "backend-000246": {
+  "frontend-000246": {
     "message": "Versión restaurada"
   },
-  "backend-000247": {
+  "frontend-000247": {
     "message": "Error al restaurar versión"
   },
-  "backend-000248": {
+  "frontend-000248": {
     "message": "¿Deseas restaurar la versión?"
   },
-  "backend-000249": {
+  "frontend-000249": {
     "message": "Compartidas conmigo"
   },
-  "backend-000250": {
+  "frontend-000250": {
     "message": "Compartidas por mi"
   },
-  "backend-000251": {
+  "frontend-000251": {
     "message": "Estadísticas"
   },
-  "backend-000252": {
+  "frontend-000252": {
     "message": "Creada el"
   },
-  "backend-000253": {
+  "frontend-000253": {
     "message": "Ùltima actualización"
   },
-  "backend-000254": {
+  "frontend-000254": {
     "message": "$COUNT$ versiones",
     "placeholders": {
       "count": {
@@ -857,10 +857,10 @@
       }
     }
   },
-  "backend-000255": {
+  "frontend-000255": {
     "message": "Compartidas"
   },
-  "backend-000256": {
+  "frontend-000256": {
     "message": "Compartida $COUNT$ veces",
     "placeholders": {
       "count": {
@@ -868,43 +868,43 @@
       }
     }
   },
-  "backend-000257": {
+  "frontend-000257": {
     "message": "Cifrado del lado del servidor"
   },
-  "backend-000258": {
+  "frontend-000258": {
     "message": "Cifrado del lado del cliente"
   },
-  "backend-000259": {
+  "frontend-000259": {
     "message": "Sin cifrado"
   },
-  "backend-000260": {
+  "frontend-000260": {
     "message": "Cifrado simple (Generación 1)"
   },
-  "backend-000261": {
+  "frontend-000261": {
     "message": "Cifrado simple (Generación 2)"
   },
-  "backend-000262": {
+  "frontend-000262": {
     "message": "Cifrado avanzado (SSE V2)"
   },
-  "backend-000263": {
+  "frontend-000263": {
     "message": "Cifrado con libsodium"
   },
-  "backend-000264": {
+  "frontend-000264": {
     "message": "Más"
   },
-  "backend-000265": {
+  "frontend-000265": {
     "message": "Copia de seguridad y restaurar"
   },
-  "backend-000266": {
+  "frontend-000266": {
     "message": "Ajustes"
   },
-  "backend-000267": {
+  "frontend-000267": {
     "message": "Manual de instrucciones"
   },
-  "backend-000268": {
+  "frontend-000268": {
     "message": "Aplicaciones y extensiones"
   },
-  "backend-000269": {
+  "frontend-000269": {
     "message": "$EDITABLE$ y $SHAREABLE$.",
     "placeholders": {
       "editable": {
@@ -915,25 +915,25 @@
       }
     }
   },
-  "backend-000270": {
+  "frontend-000270": {
     "message": "Modificación permitida"
   },
-  "backend-000271": {
+  "frontend-000271": {
     "message": "Modificación no permitida"
   },
-  "backend-000272": {
+  "frontend-000272": {
     "message": "se permite compartir"
   },
-  "backend-000273": {
+  "frontend-000273": {
     "message": "no se permite compartir"
   },
-  "backend-000274": {
+  "frontend-000274": {
     "message": "Buscar usuario"
   },
-  "backend-000275": {
+  "frontend-000275": {
     "message": "Definir fecha de vencimiento"
   },
-  "backend-000276": {
+  "frontend-000276": {
     "message": "Vence el $DATETIME$",
     "placeholders": {
       "datetime": {
@@ -941,16 +941,16 @@
       }
     }
   },
-  "backend-000277": {
+  "frontend-000277": {
     "message": "Elegir fecha de vencimiento"
   },
-  "backend-000278": {
+  "frontend-000278": {
     "message": "Por favor, elige una fecha en el futuro"
   },
-  "backend-000279": {
+  "frontend-000279": {
     "message": "Fecha inválida"
   },
-  "backend-000280": {
+  "frontend-000280": {
     "message": "El usuario $UID$ no existe",
     "placeholders": {
       "uid": {
@@ -958,7 +958,7 @@
       }
     }
   },
-  "backend-000281": {
+  "frontend-000281": {
     "message": "No es posible compartir contraseña: $MESSAGE$",
     "placeholders": {
       "message": {
@@ -966,91 +966,91 @@
       }
     }
   },
-  "backend-000282": {
+  "frontend-000282": {
     "message": "Cambiar permisos de escritura"
   },
-  "backend-000283": {
+  "frontend-000283": {
     "message": "Cambiar permisos para compartir"
   },
-  "backend-000284": {
+  "frontend-000284": {
     "message": "Dejar de compartir"
   },
-  "backend-000285": {
+  "frontend-000285": {
     "message": "Fecha"
   },
-  "backend-000286": {
+  "frontend-000286": {
     "message": "Memoria caché por defecto (0 archivos, 0 B)"
   },
-  "backend-000287": {
+  "frontend-000287": {
     "message": "Memoria caché de avatares (0 archivos, 0 B)"
   },
-  "backend-000288": {
+  "frontend-000288": {
     "message": "Memoria caché de faviconos (0 archivos, 0 B)"
   },
-  "backend-000289": {
+  "frontend-000289": {
     "message": "Memoria caché de vistas preliminares (0 archivos, 0 B)"
   },
-  "backend-000290": {
+  "frontend-000290": {
     "message": "Memoria caché de contraseñas (0 archivos, 0 B)"
   },
-  "backend-000291": {
+  "frontend-000291": {
     "message": "Cambiada"
   },
-  "backend-000292": {
+  "frontend-000292": {
     "message": "Modificada"
   },
-  "backend-000293": {
+  "frontend-000293": {
     "message": "Editada"
   },
-  "backend-000294": {
+  "frontend-000294": {
     "message": "Creada"
   },
   "backups-000144": {
     "message": "Carpeta"
   },
-  "backend-000295": {
+  "frontend-000295": {
     "message": "Versión"
   },
-  "backend-000296": {
+  "frontend-000296": {
     "message": "Dirección URL"
   },
-  "backend-000297": {
+  "frontend-000297": {
     "message": "Carpeta superior"
   },
-  "backend-000298": {
+  "frontend-000298": {
     "message": "Borrar todos los elementos"
   },
-  "backend-000299": {
+  "frontend-000299": {
     "message": "Restaurar todos los elementos"
   },
-  "backend-000300": {
+  "frontend-000300": {
     "message": "Restaurar los elementos"
   },
-  "backend-000301": {
+  "frontend-000301": {
     "message": "¿Deseas restaurar todos los elementos en la papelera?"
   },
-  "backend-000302": {
+  "frontend-000302": {
     "message": "Restaurar este elemento"
   },
-  "backend-000303": {
+  "frontend-000303": {
     "message": "Elemento restaurado"
   },
-  "backend-000304": {
+  "frontend-000304": {
     "message": "Vaciar papelera"
   },
-  "backend-000305": {
+  "frontend-000305": {
     "message": "Deseas borrar permanentemente todos los elementos en la papelera?"
   },
-  "backend-000306": {
+  "frontend-000306": {
     "message": "Papelera vaciada"
   },
-  "backend-000307": {
+  "frontend-000307": {
     "message": "Búsqueda"
   },
-  "backend-000308": {
+  "frontend-000308": {
     "message": "Usa la caja de búsqueda para buscar"
   },
-  "backend-000309": {
+  "frontend-000309": {
     "message": "Buscar \"$QUERY$\" globalmente",
     "placeholders": {
       "query": {
@@ -1058,31 +1058,31 @@
       }
     }
   },
-  "backend-000310": {
+  "frontend-000310": {
     "message": "No hay nada aquí"
   },
-  "backend-000311": {
+  "frontend-000311": {
     "message": "Pulsa \"+\" para añadir algo"
   },
-  "backend-000312": {
+  "frontend-000312": {
     "message": "Los elementos borrados aparecerán aquí"
   },
-  "backend-000313": {
+  "frontend-000313": {
     "message": "No hay contraseñas compartidas contigo"
   },
-  "backend-000314": {
+  "frontend-000314": {
     "message": "No estás compartiendo ninguna contraseña"
   },
-  "backend-000315": {
+  "frontend-000315": {
     "message": "Tus favoritas aparecerán aquí"
   },
-  "backend-000316": {
+  "frontend-000316": {
     "message": "Mejor si miras en las otras secciones"
   },
-  "backend-000317": {
+  "frontend-000317": {
     "message": "Probablemente eso es una buena señal"
   },
-  "backend-000318": {
+  "frontend-000318": {
     "message": "Visitar $HREF$",
     "placeholders": {
       "href": {
@@ -1090,10 +1090,10 @@
       }
     }
   },
-  "backend-000319": {
+  "frontend-000319": {
     "message": "Contenido"
   },
-  "backend-000320": {
+  "frontend-000320": {
     "message": "Imagen $COUNT$: $TITLE$",
     "placeholders": {
       "count": {
@@ -1104,7 +1104,7 @@
       }
     }
   },
-  "backend-000321": {
+  "frontend-000321": {
     "message": "No es posible obtener la página: $MESSAGE$.",
     "placeholders": {
       "message": {
@@ -1112,7 +1112,7 @@
       }
     }
   },
-  "backend-000322": {
+  "frontend-000322": {
     "message": "Contenido inválido de tipo $MIME$",
     "placeholders": {
       "mime": {
@@ -1120,34 +1120,34 @@
       }
     }
   },
-  "backend-000323": {
+  "frontend-000323": {
     "message": "Contenido no disponible"
   },
-  "backend-000324": {
+  "frontend-000324": {
     "message": "No encontrado"
   },
-  "backend-000325": {
+  "frontend-000325": {
     "message": "¿Todavía necesitas ayuda?"
   },
-  "backend-000326": {
+  "frontend-000326": {
     "message": "¡Pregunta en nuestro foro!"
   },
-  "backend-000327": {
+  "frontend-000327": {
     "message": "¿Has encontrado algún fallo?"
   },
-  "backend-000328": {
+  "frontend-000328": {
     "message": "¡Cuéntanos!"
   },
-  "backend-000329": {
+  "frontend-000329": {
     "message": "La sesión ha expirado"
   },
-  "backend-000330": {
+  "frontend-000330": {
     "message": "El token de sesión de la API ha expirado"
   },
-  "backend-000331": {
+  "frontend-000331": {
     "message": "Error de red"
   },
-  "backend-000332": {
+  "frontend-000332": {
     "message": "No ha sido posible cargar el módulo $MODULE$. Posiblemente se ha cortado la conexion con el servidor Nextcloud",
     "placeholders": {
       "module": {
@@ -1155,13 +1155,13 @@
       }
     }
   },
-  "backend-000333": {
+  "frontend-000333": {
     "message": "Ordenar por nombre"
   },
-  "backend-000334": {
+  "frontend-000334": {
     "message": "Ordenar por fecha de modificación"
   },
-  "backend-000335": {
+  "frontend-000335": {
     "message": "$PASSWORDS$ contraseñas",
     "placeholders": {
       "passwords": {
@@ -1169,10 +1169,10 @@
       }
     }
   },
-  "backend-000336": {
+  "frontend-000336": {
     "message": "1 contraseña"
   },
-  "backend-000337": {
+  "frontend-000337": {
     "message": "$FOLDERS$ carpetas",
     "placeholders": {
       "folders": {
@@ -1180,10 +1180,10 @@
       }
     }
   },
-  "backend-000338": {
+  "frontend-000338": {
     "message": "1 carpeta"
   },
-  "backend-000339": {
+  "frontend-000339": {
     "message": "$TAGS$ etiquetas",
     "placeholders": {
       "tags": {
@@ -1191,25 +1191,25 @@
       }
     }
   },
-  "backend-000340": {
+  "frontend-000340": {
     "message": "1 etiqueta"
   },
-  "backend-000341": {
+  "frontend-000341": {
     "message": "Nada"
   },
-  "backend-000342": {
+  "frontend-000342": {
     "message": " y "
   },
-  "backend-000343": {
+  "frontend-000343": {
     "message": "coincidencia"
   },
-  "backend-000344": {
+  "frontend-000344": {
     "message": "coincidencias"
   },
-  "backend-000345": {
+  "frontend-000345": {
     "message": "Creado por"
   },
-  "backend-000346": {
+  "frontend-000346": {
     "message": "Estás conectado/a como $USER$",
     "placeholders": {
       "user": {
@@ -1217,67 +1217,67 @@
       }
     }
   },
-  "backend-000347": {
+  "frontend-000347": {
     "message": "Iniciar sesión"
   },
-  "backend-000348": {
+  "frontend-000348": {
     "message": "Solicitar el token otra vez"
   },
-  "backend-000349": {
+  "frontend-000349": {
     "message": "Demasiados intentos"
   },
-  "backend-000350": {
+  "frontend-000350": {
     "message": "Contraseña demasiado corta"
   },
-  "backend-000351": {
+  "frontend-000351": {
     "message": "Error desconocido"
   },
-  "backend-000352": {
+  "frontend-000352": {
     "message": "Fallo al solicitar token"
   },
-  "backend-000353": {
+  "frontend-000353": {
     "message": "Sistema en mantenimiento"
   },
-  "backend-000354": {
+  "frontend-000354": {
     "message": "Desconocido"
   },
-  "backend-000355": {
+  "frontend-000355": {
     "message": "Sistema"
   },
-  "backend-000356": {
+  "frontend-000356": {
     "message": "Público"
   },
-  "backend-000357": {
+  "frontend-000357": {
     "message": "Tarea automática en segundo plano"
   },
-  "backend-000358": {
+  "frontend-000358": {
     "message": "Línea de comando del servidor"
   },
-  "backend-000359": {
+  "frontend-000359": {
     "message": "Por favor, corrije tu entrada"
   },
-  "backend-000360": {
+  "frontend-000360": {
     "message": "Mostrar valor"
   },
-  "backend-000361": {
+  "frontend-000361": {
     "message": "Cancelar"
   },
-  "backend-000362": {
+  "frontend-000362": {
     "message": "Ok"
   },
-  "backend-000363": {
+  "frontend-000363": {
     "message": "verdadero"
   },
-  "backend-000364": {
+  "frontend-000364": {
     "message": "falso"
   },
-  "backend-000365": {
+  "frontend-000365": {
     "message": "sí"
   },
-  "backend-000366": {
+  "frontend-000366": {
     "message": "no"
   },
-  "backend-000367": {
+  "frontend-000367": {
     "message": "$NAME$ ha compartido esta contraseña contigo.",
     "placeholders": {
       "name": {
@@ -1285,10 +1285,10 @@
       }
     }
   },
-  "backend-000368": {
+  "frontend-000368": {
     "message": "Has alcanzado la longitud máxima de 4096 caracteres"
   },
-  "backend-000369": {
+  "frontend-000369": {
     "message": "No hemos podido encontrar nada por \"$QUERY$\"",
     "placeholders": {
       "query": {
@@ -1296,7 +1296,7 @@
       }
     }
   },
-  "backend-000370": {
+  "frontend-000370": {
     "message": "La página \"$PAGE$\" no ha podido ser descargada del manual en el servidor.",
     "placeholders": {
       "page": {
@@ -1304,10 +1304,10 @@
       }
     }
   },
-  "backend-000371": {
+  "frontend-000371": {
     "message": "Algunos datos están esperando a ser sincronizados"
   },
-  "backend-000372": {
+  "frontend-000372": {
     "message": "Tu sesión se cerrará en $TIME$ segundos",
     "placeholders": {
       "time": {
@@ -1315,31 +1315,31 @@
       }
     }
   },
-  "backend-000373": {
+  "frontend-000373": {
     "message": "Has solicitado demasiados tokens. Por favor, prueba más tarde."
   },
-  "backend-000374": {
+  "frontend-000374": {
     "message": "El cifrado de extremo a extremo se deshabilitará para esta contraseña si la compartes."
   },
-  "backend-000375": {
+  "frontend-000375": {
     "message": "El token de sesión ya no es válido. La aplicación se volverá a cargar."
   },
-  "backend-000376": {
+  "frontend-000376": {
     "message": "Hoy en 2018, se publicó la primera versión de \"passwords\". Gracias por usar la aplicación."
   },
-  "frontend-000377": {
+  "backend-000377": {
     "message": "HTTPS requerido"
   },
-  "frontend-000378": {
+  "backend-000378": {
     "message": "recargar esta página con HTTPS"
   },
-  "frontend-000379": {
+  "backend-000379": {
     "message": "foro"
   },
-  "frontend-000380": {
+  "backend-000380": {
     "message": "Documentación"
   },
-  "frontend-000381": {
+  "backend-000381": {
     "message": "Puedes intentar $STR_1$ la página con HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1347,7 +1347,7 @@
       }
     }
   },
-  "frontend-000382": {
+  "backend-000382": {
     "message": "Esta aplicación necesita $STR_1$ para funcionar de manera segura.",
     "placeholders": {
       "str_1": {
@@ -1355,7 +1355,7 @@
       }
     }
   },
-  "frontend-000383": {
+  "backend-000383": {
     "message": "Esto no es un error. Visita nuestro $STR_1$ si necesitas ayuda.",
     "placeholders": {
       "str_1": {
@@ -1363,10 +1363,10 @@
       }
     }
   },
-  "frontend-000384": {
+  "backend-000384": {
     "message": "Revisa el informe HTTPS a continuación para resolver el problema."
   },
-  "frontend-000385": {
+  "backend-000385": {
     "message": "Lee este $STR_1$ para configurar tu servidor con HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1374,7 +1374,7 @@
       }
     }
   },
-  "frontend-000386": {
+  "backend-000386": {
     "message": "Lee este $STR_1$ si usas algun tipo de proxy.",
     "placeholders": {
       "str_1": {
@@ -1382,7 +1382,7 @@
       }
     }
   },
-  "frontend-000387": {
+  "backend-000387": {
     "message": "Visita $STR_1$ para obtener un certificado gratuito, en caso de que no tengas uno.",
     "placeholders": {
       "str_1": {
@@ -1390,10 +1390,10 @@
       }
     }
   },
-  "frontend-000388": {
+  "backend-000388": {
     "message": "Si el problema persiste, contacta con el administrador del sistema."
   },
-  "frontend-000389": {
+  "backend-000389": {
     "message": "Sesión de la App Contraseñas $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1404,151 +1404,151 @@
       }
     }
   },
-  "frontend-000390": {
+  "backend-000390": {
     "message": "Abrir la documentación"
   },
-  "frontend-000391": {
+  "backend-000391": {
     "message": "nunca"
   },
-  "frontend-000392": {
+  "backend-000392": {
     "message": "Procesado de datos internos"
   },
-  "frontend-000393": {
+  "backend-000393": {
     "message": "Renderizado de imágenes"
   },
-  "frontend-000394": {
+  "backend-000394": {
     "message": "Imagick/GMagick (recomendado)"
   },
-  "frontend-000395": {
+  "backend-000395": {
     "message": "Servicios externos"
   },
-  "frontend-000396": {
+  "backend-000396": {
     "message": "Comprobaciones de la seguridad de la contraseña"
   },
-  "frontend-000397": {
+  "backend-000397": {
     "message": "Have I been pwned? (recomendado, 600 millones de contr. vulneradas)"
   },
-  "frontend-000398": {
+  "backend-000398": {
     "message": "25 millones de contraseñas (local)"
   },
-  "frontend-000399": {
+  "backend-000399": {
     "message": "5 millón de contraseñas (local)"
   },
-  "frontend-000400": {
+  "backend-000400": {
     "message": "25 millones de contraseñas & HIBP?"
   },
-  "frontend-000401": {
+  "backend-000401": {
     "message": "Servicio generador de contraseñas"
   },
-  "frontend-000402": {
+  "backend-000402": {
     "message": "Diccionario local"
   },
-  "frontend-000403": {
+  "backend-000403": {
     "message": "Carácteres aleatorios"
   },
-  "frontend-000404": {
+  "backend-000404": {
     "message": "watchout4snakes.com"
   },
-  "frontend-000405": {
+  "backend-000405": {
     "message": "Leipzig Corpora Collection (recomendado)"
   },
-  "frontend-000406": {
+  "backend-000406": {
     "message": "Servicio de Faviconos"
   },
-  "frontend-000407": {
+  "backend-000407": {
     "message": "Analizador local"
   },
-  "frontend-000408": {
+  "backend-000408": {
     "message": "Besticon (recomendado)"
   },
-  "frontend-000409": {
+  "backend-000409": {
     "message": "Ninguno"
   },
-  "frontend-000410": {
+  "backend-000410": {
     "message": "Servicio de vista preliminar de sitios web"
   },
-  "frontend-000411": {
+  "backend-000411": {
     "message": "Clave para la API del servicio de vista preliminar de sitos web"
   },
-  "frontend-000412": {
+  "backend-000412": {
     "message": "Pageres/PhantomJS (Local)"
   },
-  "frontend-000413": {
+  "backend-000413": {
     "message": "WKHTML (Local)"
   },
-  "frontend-000414": {
+  "backend-000414": {
     "message": "screenshotapi.io"
   },
-  "frontend-000415": {
+  "backend-000415": {
     "message": "Ajustes de correo por defecto"
   },
-  "frontend-000416": {
+  "backend-000416": {
     "message": "Enviar correos por eventos de seguridad"
   },
-  "frontend-000417": {
+  "backend-000417": {
     "message": "Enviar correos al compartir"
   },
-  "frontend-000418": {
+  "backend-000418": {
     "message": "Otros ajustes"
   },
-  "frontend-000419": {
+  "backend-000419": {
     "message": "Borrar objetos borrados de la base de datos"
   },
-  "frontend-000420": {
+  "backend-000420": {
     "message": "Mostrar actualizaciones Nightly en \"Apps\" (fase de pruebas)"
   },
-  "frontend-000421": {
+  "backend-000421": {
     "message": "Nunca"
   },
-  "frontend-000422": {
+  "backend-000422": {
     "message": "Inmediatamente"
   },
-  "frontend-000423": {
+  "backend-000423": {
     "message": "Después de dos horas"
   },
-  "frontend-000424": {
+  "backend-000424": {
     "message": "Después de un dia"
   },
-  "frontend-000425": {
+  "backend-000425": {
     "message": "Después de dos semanas"
   },
-  "frontend-000426": {
+  "backend-000426": {
     "message": "Después de un mes"
   },
-  "frontend-000427": {
+  "backend-000427": {
     "message": "Después de un año"
   },
-  "frontend-000428": {
+  "backend-000428": {
     "message": "Ajustes de copias de seguridad"
   },
-  "frontend-000429": {
+  "backend-000429": {
     "message": "Intervalo entre copias"
   },
-  "frontend-000430": {
+  "backend-000430": {
     "message": "Cada hora"
   },
-  "frontend-000431": {
+  "backend-000431": {
     "message": "Cada seis horas"
   },
-  "frontend-000432": {
+  "backend-000432": {
     "message": "Cada día"
   },
-  "frontend-000433": {
+  "backend-000433": {
     "message": "Cada dos días"
   },
-  "frontend-000434": {
+  "backend-000434": {
     "message": "Cada semana"
   },
-  "frontend-000435": {
+  "backend-000435": {
     "message": "Cada dos semanas"
   },
-  "frontend-000436": {
+  "backend-000436": {
     "message": "Cantidad de copias a mantener"
   },
-  "frontend-000437": {
+  "backend-000437": {
     "message": "Memoria caché"
   },
-  "frontend-000438": {
+  "backend-000438": {
     "message": "Memoria caché por defecto ($STR_1$ archivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1559,7 +1559,7 @@
       }
     }
   },
-  "frontend-000439": {
+  "backend-000439": {
     "message": "Memoria caché de imágenes ($STR_1$ archivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1570,7 +1570,7 @@
       }
     }
   },
-  "frontend-000440": {
+  "backend-000440": {
     "message": "Memoria caché de Faviconos ($STR_1$ archivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1581,7 +1581,7 @@
       }
     }
   },
-  "frontend-000441": {
+  "backend-000441": {
     "message": "Memoria caché de vistas previas ($STR_1$ archivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1592,7 +1592,7 @@
       }
     }
   },
-  "frontend-000442": {
+  "backend-000442": {
     "message": "Memoria caché de contraseñas ($STR_1$ archivos, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1603,34 +1603,34 @@
       }
     }
   },
-  "frontend-000443": {
+  "backend-000443": {
     "message": "vaciar"
   },
-  "frontend-000444": {
+  "backend-000444": {
     "message": "Vaciar esta caché"
   },
-  "frontend-000445": {
+  "backend-000445": {
     "message": "No puedes vaciar una memoria caché usando un servicio compartido"
   },
-  "frontend-000446": {
+  "backend-000446": {
     "message": "Guardada"
   },
-  "frontend-000447": {
+  "backend-000447": {
     "message": "Vaciada"
   },
-  "frontend-000448": {
+  "backend-000448": {
     "message": "Fallido"
   },
-  "frontend-000449": {
+  "backend-000449": {
     "message": "Necesitas ayuda"
   },
-  "frontend-000450": {
+  "backend-000450": {
     "message": "has encontrado un error"
   },
-  "frontend-000451": {
+  "backend-000451": {
     "message": "buscas la documentación"
   },
-  "frontend-000452": {
+  "backend-000452": {
     "message": "¿$STR_1$, $STR_1$ o $STR_1$? ¡Podemos ayudarte!",
     "placeholders": {
       "str_1": {
@@ -1644,7 +1644,7 @@
       }
     }
   },
-  "frontend-000453": {
+  "backend-000453": {
     "message": "$STRING_1$ $STRING_2$ ha dejado de tener soporte.",
     "placeholders": {
       "string_1": {
@@ -1655,10 +1655,10 @@
       }
     }
   },
-  "frontend-000454": {
+  "backend-000454": {
     "message": "La aplicación Contraseñas requiere usar HTTPS."
   },
-  "frontend-000455": {
+  "backend-000455": {
     "message": "Las tareas en segundo plano con $STR_1$ pueden tardar mucho. Recomendamos usar Cron.",
     "placeholders": {
       "str_1": {
@@ -1666,13 +1666,13 @@
       }
     }
   },
-  "frontend-000456": {
+  "backend-000456": {
     "message": "Por favor, revisa los requerimientos del sistema."
   },
-  "frontend-000457": {
+  "backend-000457": {
     "message": "Contraseña no compartida"
   },
-  "frontend-000458": {
+  "backend-000458": {
     "message": "Alguna contraseña no ha sido compartida ahora con $STRING_1$ porqué ya había sido compartida",
     "placeholders": {
       "string_1": {
@@ -1680,25 +1680,25 @@
       }
     }
   },
-  "frontend-000459": {
+  "backend-000459": {
     "message": "Tienes una contraseña insegura"
   },
-  "frontend-000460": {
+  "backend-000460": {
     "message": "Tienes algunas contraseñas inseguras"
   },
-  "frontend-000461": {
+  "backend-000461": {
     "message": "Una de tus contraseñas ha dejado de ser segura."
   },
-  "frontend-000462": {
+  "backend-000462": {
     "message": "Algunas de tus contraseñas han dejado de ser seguras."
   },
-  "frontend-000463": {
+  "backend-000463": {
     "message": "La aplicación Contraseñas comprueba regularmente si tu contraseña ha sido violada en alguna filtración de datos."
   },
-  "frontend-000464": {
+  "backend-000464": {
     "message": "Esta comprobación de seguridad ha establecido que una de tus contraseñas es insegura."
   },
-  "frontend-000465": {
+  "backend-000465": {
     "message": "Esta comprobación de seguridad ha establecido que $STR_1$ de tus contraseñas son inseguras.",
     "placeholders": {
       "str_1": {
@@ -1706,37 +1706,37 @@
       }
     }
   },
-  "frontend-000466": {
+  "backend-000466": {
     "message": "Esto significa que la contraseña esta expuesta en internet poniendo tu cuenta en riesgo."
   },
-  "frontend-000467": {
+  "backend-000467": {
     "message": "Esto significa que las contraseñas estan expuestas en internet poniendo tus cuentas en riesgo."
   },
-  "frontend-000468": {
+  "backend-000468": {
     "message": "Por eso se ha marcado la contraseña como insegura y deberías cambiarla ahora."
   },
-  "frontend-000469": {
+  "backend-000469": {
     "message": "Por eso se han marcado las contraseñas como inseguras y deberías cambiarlas ahora."
   },
-  "frontend-000470": {
+  "backend-000470": {
     "message": "Puedes crear una nueva contraseña en la app de contraseñas."
   },
-  "frontend-000471": {
+  "backend-000471": {
     "message": "Puedes crear nuevas contraseñas en la app de contraseñas."
   },
-  "frontend-000472": {
+  "backend-000472": {
     "message": "Cambiar ahora la contraseña"
   },
-  "frontend-000473": {
+  "backend-000473": {
     "message": "Cambiar ahora las contraseñas"
   },
-  "frontend-000474": {
+  "backend-000474": {
     "message": "Abrir la app Contraseñas para cambiarla."
   },
-  "frontend-000475": {
+  "backend-000475": {
     "message": "Abrir la app Contraseñas para cambiarlas."
   },
-  "frontend-000476": {
+  "backend-000476": {
     "message": "$STR_1$ ha compartido una contraseña contigo.",
     "placeholders": {
       "str_1": {
@@ -1744,7 +1744,7 @@
       }
     }
   },
-  "frontend-000477": {
+  "backend-000477": {
     "message": "$STR_1$ ha compartido $STR_1$ contraseñas contigo.",
     "placeholders": {
       "str_1": {
@@ -1755,7 +1755,7 @@
       }
     }
   },
-  "frontend-000478": {
+  "backend-000478": {
     "message": "$STRING_4$ y $STRING_3$ han compartido $STRING_1$ contraseñas contigo.",
     "placeholders": {
       "string_4": {
@@ -1769,7 +1769,7 @@
       }
     }
   },
-  "frontend-000479": {
+  "backend-000479": {
     "message": "$STRING_5$, $STRING_4$ y $STRING_3$ han compartido $STRING_1$ contraseñas contigo.",
     "placeholders": {
       "string_5": {
@@ -1786,7 +1786,7 @@
       }
     }
   },
-  "frontend-000480": {
+  "backend-000480": {
     "message": "$STRING_5$, $STRING_4$ y otros $STRING_2$ han compartido $STRING_1$ contraseñas.",
     "placeholders": {
       "string_5": {
@@ -1803,13 +1803,13 @@
       }
     }
   },
-  "frontend-000481": {
+  "backend-000481": {
     "message": "Abre la app de contraseñas para verla."
   },
-  "frontend-000482": {
+  "backend-000482": {
     "message": "Abre la app de contraseñas para verlas."
   },
-  "frontend-000483": {
+  "backend-000483": {
     "message": "Una contraseña ha sido compartida contigo en $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1817,7 +1817,7 @@
       }
     }
   },
-  "frontend-000484": {
+  "backend-000484": {
     "message": "Varias contraseñas han sido compartidas contigo en $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1825,13 +1825,13 @@
       }
     }
   },
-  "frontend-000485": {
+  "backend-000485": {
     "message": "Ver contraseñas compartidas conmigo"
   },
-  "frontend-000486": {
+  "backend-000486": {
     "message": "Una de tus contraseñas no ha podido ser compartida porque el que la iba a recibir ya tiene acceso a ella."
   },
-  "frontend-000487": {
+  "backend-000487": {
     "message": "$STR_1$ de tus contraseñas no han podido ser compartidas porque el que las iba a recibir ya tiene acceso a ellas.",
     "placeholders": {
       "str_1": {
@@ -1839,16 +1839,16 @@
       }
     }
   },
-  "frontend-000489": {
+  "backend-000489": {
     "message": "Compartir contraseñas que han sido compartidas contigo, a veces puede crear un bucle."
   },
-  "frontend-000490": {
+  "backend-000490": {
     "message": "Para evitar esto, estas contraseñas no serán compartidas."
   },
-  "frontend-000491": {
+  "backend-000491": {
     "message": "Acceso administrativo a tu cuenta"
   },
-  "frontend-000492": {
+  "backend-000492": {
     "message": "$STR_1$ ha intentado acceder a tu cuenta en $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1859,7 +1859,7 @@
       }
     }
   },
-  "frontend-000493": {
+  "backend-000493": {
     "message": "$STR_1$ ha accedido a tu cuenta en $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1870,13 +1870,13 @@
       }
     }
   },
-  "frontend-000494": {
+  "backend-000494": {
     "message": "Como usas una contraseña maestra, esto no significa que se diera el acceso a tus datos."
   },
-  "frontend-000495": {
+  "backend-000495": {
     "message": "Para impedir el acceso no deseado a tus datos, deberías establecer una contraseña maestra."
   },
-  "frontend-000496": {
+  "backend-000496": {
     "message": "Usuario eliminado ($STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1884,64 +1884,64 @@
       }
     }
   },
-  "frontend-000497": {
+  "backend-000497": {
     "message": "Ayudanos a mejorar la app Contraseñas"
   },
-  "frontend-000498": {
+  "backend-000498": {
     "message": "Puedes ayudarnos a mejorar la App Contraseñas participando en nuestra encuesta de servidores."
   },
-  "frontend-000499": {
+  "backend-000499": {
     "message": "Esto nos enviará algunos datos anonimizados de tu servidor y ajustes."
   },
-  "frontend-000500": {
+  "backend-000500": {
     "message": "Puedes cambiarlo en todo momento desde los ajustes de tu app."
   },
-  "frontend-000501": {
+  "backend-000501": {
     "message": "Todavía no"
   },
-  "frontend-000502": {
+  "backend-000502": {
     "message": "Participar"
   },
-  "frontend-000503": {
+  "backend-000503": {
     "message": "Participar en la encuesta de servidores"
   },
-  "frontend-000504": {
+  "backend-000504": {
     "message": "Datos basicos"
   },
-  "frontend-000505": {
+  "backend-000505": {
     "message": "Datos completos"
   },
-  "frontend-000506": {
+  "backend-000506": {
     "message": "No especificado"
   },
-  "frontend-000507": {
+  "backend-000507": {
     "message": "Por favor, condidera montar tu propia instancia de API de faviconos"
   },
-  "frontend-000508": {
+  "backend-000508": {
     "message": "Estás usando nuestra instancia de faviconos por defecto de Besticon para encontrar faviconos de sitios web."
   },
-  "frontend-000509": {
+  "backend-000509": {
     "message": "Lamentablemente, nuestra instancia compartida no es suficientemente potente para abastecer todo el tráfico."
   },
-  "frontend-000510": {
+  "backend-000510": {
     "message": "Por favor, haz click en el enlace y sigue el sencillo tutorial para montar tu propio Besticon."
   },
-  "frontend-000511": {
+  "backend-000511": {
     "message": "Tu configuración del servicio de faviconos es inválida"
   },
-  "frontend-000512": {
+  "backend-000512": {
     "message": "Tu configuración del servicio de vistas preliminares es inválida"
   },
-  "frontend-000513": {
+  "backend-000513": {
     "message": "El servicio de faviconos que has elegido requiere una clave de API o un Endpoint, pero ninguno de los dos ha sido especificado."
   },
-  "frontend-000514": {
+  "backend-000514": {
     "message": "El servicio de vistas preliminares que has elegido requiere una clave de API o un Endpoint, pero ninguno de los dos ha sido especificado."
   },
-  "frontend-000515": {
+  "backend-000515": {
     "message": "Abre los ajustes de administrador para modificar la configuración, o elige un nuevo servicio."
   },
-  "frontend-000516": {
+  "backend-000516": {
     "message": "Hemos detectado varios intentos fallidos para desbloquear la base de datos de tus contraseñas, perpetrados por \"$STR_1$\".",
     "placeholders": {
       "str_1": {
@@ -1949,52 +1949,52 @@
       }
     }
   },
-  "frontend-000517": {
+  "backend-000517": {
     "message": "Eso puede significar que alguien está intentando irrumpir en tu cuenta."
   },
-  "frontend-000518": {
+  "backend-000518": {
     "message": "Para prevenir nuevos intentos, las credenciales de la API para este cliente han sido revocadas."
   },
-  "frontend-000519": {
+  "backend-000519": {
     "message": "Además, la autentificación por contraseña de la API ha sido deshabilitada."
   },
-  "frontend-000520": {
+  "backend-000520": {
     "message": "Si quieres seguir usando este cliente, tienes que generarle un nuevo token."
   },
-  "frontend-000521": {
+  "backend-000521": {
     "message": "Si no conoces este dispositivo, por favor cambia tu contraseña y comprueba tu lista de dispositivos."
   },
-  "frontend-000522": {
+  "backend-000522": {
     "message": "Para prevenir nuevos intentos, ha sido deshabilitada la autentificación por contraseña de la API."
   },
-  "frontend-000523": {
+  "backend-000523": {
     "message": "Para activarla de nuevo, puedes acceder con la webapp o cualquier cliente con un token válido."
   },
-  "frontend-000524": {
+  "backend-000524": {
     "message": "Si no conoces este cliente/dispositivo, por favor cambia la contraseña maestra y la de Nextcloud."
   },
-  "frontend-000525": {
+  "backend-000525": {
     "message": "Para mejorar la seguridad, recomendamos usar tokens específicos para cada dispositivo, en lugar de contraseñas."
   },
-  "backend-000528": {
+  "frontend-000528": {
     "message": "Reglas para contraseñas"
   },
-  "backend-000529": {
+  "frontend-000529": {
     "message": "Marcar duplicados"
   },
-  "backend-000530": {
+  "frontend-000530": {
     "message": "Duración máxima en días"
   },
-  "backend-000531": {
+  "frontend-000531": {
     "message": "Generador de contraseñas"
   },
-  "backend-000532": {
+  "frontend-000532": {
     "message": "Fuerza"
   },
-  "backend-000533": {
+  "frontend-000533": {
     "message": "Usar números"
   },
-  "backend-000534": {
+  "frontend-000534": {
     "message": "Usar carácteres especiales"
   },
   "settings-000678": {
@@ -2050,52 +2050,52 @@
   "settings-000693": {
     "message": "Cambiar la contraseña"
   },
-  "backend-000535": {
+  "frontend-000535": {
     "message": "Interfaz de usuario"
   },
-  "backend-000536": {
+  "frontend-000536": {
     "message": "Sección inicial"
   },
-  "backend-000537": {
+  "frontend-000537": {
     "message": "Todas las contraseñas"
   },
-  "backend-000538": {
+  "frontend-000538": {
     "message": "Listado de contraseñas"
   },
-  "backend-000539": {
+  "frontend-000539": {
     "message": "Tomar como título"
   },
-  "backend-000540": {
+  "frontend-000540": {
     "message": "Ordenar por"
   },
-  "backend-000541": {
+  "frontend-000541": {
     "message": "Campo título"
   },
-  "backend-000542": {
+  "frontend-000542": {
     "message": "Acción al hacer un clic"
   },
-  "backend-000543": {
+  "frontend-000543": {
     "message": "Acción al hacer doble clic"
   },
-  "backend-000544": {
+  "frontend-000544": {
     "message": "Copiar la contraseña"
   },
-  "backend-000545": {
+  "frontend-000545": {
     "message": "Copiar el nombre de usuario"
   },
-  "backend-000546": {
+  "frontend-000546": {
     "message": "Copiar el sitio web"
   },
-  "backend-000547": {
+  "frontend-000547": {
     "message": "Mostrar detalles"
   },
-  "backend-000548": {
+  "frontend-000548": {
     "message": "Mostrar opciones de copiado en el menú"
   },
-  "backend-000549": {
+  "frontend-000549": {
     "message": "Mostrar nombre de usuario en la lista de contraseñas"
   },
-  "backend-000550": {
+  "frontend-000550": {
     "message": "Mostrar etiquetas en la lista de contraseñas"
   },
   "settings-000694": {
@@ -2104,61 +2104,61 @@
   "settings-000695": {
     "message": "Mostrar previsualización de la web"
   },
-  "backend-000551": {
+  "frontend-000551": {
     "message": "Mostrar campos personalizados"
   },
-  "backend-000552": {
+  "frontend-000552": {
     "message": "Buscar mientras escribo"
   },
-  "backend-000553": {
+  "frontend-000553": {
     "message": "Buscar en todas partes con \"Enter\""
   },
-  "backend-000554": {
+  "frontend-000554": {
     "message": "Mostrar siempre la sección de búsqueda"
   },
-  "backend-000555": {
+  "frontend-000555": {
     "message": "Notificaciones"
   },
-  "backend-000556": {
+  "frontend-000556": {
     "message": "Cuándo enviar correos"
   },
-  "backend-000557": {
+  "frontend-000557": {
     "message": "Eventos relacionados con la seguridad"
   },
-  "backend-000558": {
+  "frontend-000558": {
     "message": "Contraseñas compartidas conmigo"
   },
-  "backend-000559": {
+  "frontend-000559": {
     "message": "Cuándo mostrar notificaciones"
   },
-  "backend-000560": {
+  "frontend-000560": {
     "message": "Otros errores"
   },
-  "backend-000561": {
+  "frontend-000561": {
     "message": "Zona peligrosa"
   },
-  "backend-000562": {
+  "frontend-000562": {
     "message": "Restablecer la configuración predeterminada"
   },
-  "backend-000563": {
+  "frontend-000563": {
     "message": "Restablecer"
   },
-  "backend-000564": {
+  "frontend-000564": {
     "message": "Eliminar todo"
   },
-  "backend-000565": {
+  "frontend-000565": {
     "message": "ELIMINAR TODO"
   },
-  "backend-000566": {
+  "frontend-000566": {
     "message": "Restablecer la cuenta de usuario"
   },
-  "backend-000567": {
+  "frontend-000567": {
     "message": "Vista"
   },
-  "backend-000669": {
+  "frontend-000669": {
     "message": "Básica"
   },
-  "backend-000568": {
+  "frontend-000568": {
     "message": "Completa"
   },
   "settings-000696": {
@@ -2194,28 +2194,28 @@
   "settings-000706": {
     "message": "Clave de restablecimiento no válida"
   },
-  "frontend-000652": {
+  "backend-000652": {
     "message": "Verificar \"hash\" de contraseñas"
   },
-  "frontend-000653": {
+  "backend-000653": {
     "message": "No almacenar \"hashes\""
   },
-  "frontend-000654": {
+  "backend-000654": {
     "message": "Almacenar el 50% del \"hash\""
   },
-  "frontend-000655": {
+  "backend-000655": {
     "message": "Almacenar el 75% del \"hash\""
   },
-  "frontend-000656": {
+  "backend-000656": {
     "message": "Almacenar el \"hash\" completo"
   },
-  "backend-000569": {
+  "frontend-000569": {
     "message": "Marcar las contraseñas como \"inseguras\" cuando se utilicen en más de una cuenta"
   },
-  "backend-000570": {
+  "frontend-000570": {
     "message": "Marcar las contraseñas como \"inseguras\" si tienen una antigüedad superior a la cantidad de días especificada"
   },
-  "backend-000571": {
+  "frontend-000571": {
     "message": "Un nivel de seguridad más alto crea contraseñas más largas y complejas"
   },
   "settings-000707": {
@@ -2236,70 +2236,70 @@
   "settings-000712": {
     "message": "Cambiar la contraseña de cifrado"
   },
-  "backend-000572": {
+  "frontend-000572": {
     "message": "Mostrar el atributo seleccionado como título en la vista de lista."
   },
-  "backend-000573": {
+  "frontend-000573": {
     "message": "Ordenar las contraseñas por el atributo especificado en lugar de por nombre"
   },
-  "backend-000574": {
+  "frontend-000574": {
     "message": "Acción a realizar cuando se hace clic en una contraseña de la lista"
   },
-  "backend-000575": {
+  "frontend-000575": {
     "message": "Acción a realizar cuando se hace doble clic en una contraseña"
   },
-  "backend-000576": {
+  "frontend-000576": {
     "message": "Mostrar en el menú las opciones para copiar la contraseña y el nombre de usuario."
   },
-  "backend-000577": {
+  "frontend-000577": {
     "message": "La sección a mostrar cuando se abre la aplicación"
   },
-  "backend-000578": {
+  "frontend-000578": {
     "message": "Mostrar siempre el nombre de usuario de una contraseña en la lista de contraseñas"
   },
-  "backend-000579": {
+  "frontend-000579": {
     "message": "Mostrar las etiquetas de cada contraseña en la lista de contraseñas. Ten en cuenta que esto aumenta el tiempo de carga"
   },
   "settings-000713": {
     "message": "Mostrar una vista previa del sitio web en los detalles (no en dispositivos móviles)."
   },
-  "backend-000580": {
+  "frontend-000580": {
     "message": "Mostrar los campos autodefinidos en el formulario de edición y en los detalles de la contraseña"
   },
-  "backend-000670": {
+  "frontend-000670": {
     "message": "Iniciar la búsqueda tan pronto como se presiona una tecla en cualquier lugar de la página"
   },
-  "backend-000671": {
+  "frontend-000671": {
     "message": "Buscar en todas partes cuando se presiona la tecla \"Enter\" en la caja de búsqueda"
   },
-  "backend-000583": {
+  "frontend-000583": {
     "message": "Siempre mostrar la sección para la búsqueda global en la navegación"
   },
-  "backend-000581": {
+  "frontend-000581": {
     "message": "Enviarte correos cuando las contraseñas se vean comprometidas o surjan problemas de seguridad"
   },
-  "backend-000582": {
+  "frontend-000582": {
     "message": "Enviarte correos cuando otros compartan contraseñas contigo"
   },
-  "backend-000584": {
+  "frontend-000584": {
     "message": "Avisarte sobre contraseñas comprometidas y otros problemas de seguridad"
   },
-  "backend-000585": {
+  "frontend-000585": {
     "message": "Avisarte cuando otras personas te compartan contraseñas"
   },
-  "backend-000586": {
+  "frontend-000586": {
     "message": "Avisarte cuando fallen las tareas en segundo plano"
   },
   "settings-000714": {
     "message": "Avisarte de errores de configuración y otros problemas administrativos"
   },
-  "backend-000587": {
+  "frontend-000587": {
     "message": "Restablecer todas las configuraciones en esta página (incluídas las avanzadas)"
   },
-  "backend-000588": {
+  "frontend-000588": {
     "message": "Esto restablecerá todas las configuraciones a sus valores predeterminados. ¿Quieres continuar?"
   },
-  "backend-000589": {
+  "frontend-000589": {
     "message": "Restaurar la configuración de fábrica y eliminar contraseñas, carpetas y etiquetas creadas"
   },
   "settings-000715": {
@@ -2340,7 +2340,7 @@
   "settings-000725": {
     "message": "Modo de cifrado con el que el dispositivo cliente cifra los datos antes de enviarlos al servidor."
   },
-  "backend-000590": {
+  "frontend-000590": {
     "message": "¿Estás seguro de que deseas borrar todas tus configuraciones, contraseñas, carpetas y etiquetas? \n Esto NO PUEDE deshacerse."
   },
   "settings-000726": {

@@ -513,292 +513,292 @@
       }
     }
   },
-  "backend-000148": {
+  "frontend-000148": {
     "message": "Contrasenyes"
   },
-  "backend-000149": {
+  "frontend-000149": {
     "message": "Totes"
   },
-  "backend-000150": {
+  "frontend-000150": {
     "message": "Carpetes"
   },
-  "backend-000151": {
+  "frontend-000151": {
     "message": "Recents"
   },
-  "backend-000152": {
+  "frontend-000152": {
     "message": "Favorites"
   },
-  "backend-000153": {
+  "frontend-000153": {
     "message": "Compartides"
   },
   "backups-000145": {
     "message": "Etiquetes"
   },
-  "backend-000154": {
+  "frontend-000154": {
     "message": "Seguretat"
   },
-  "backend-000155": {
+  "frontend-000155": {
     "message": "Paperera"
   },
-  "backend-000156": {
+  "frontend-000156": {
     "message": "Detalls"
   },
-  "backend-000157": {
+  "frontend-000157": {
     "message": "Modificar"
   },
-  "backend-000158": {
+  "frontend-000158": {
     "message": "Reanomenar"
   },
-  "backend-000159": {
+  "frontend-000159": {
     "message": "Esborrar"
   },
-  "backend-000160": {
+  "frontend-000160": {
     "message": "Restaurar"
   },
-  "backend-000161": {
+  "frontend-000161": {
     "message": "Nova contrasenya"
   },
-  "backend-000162": {
+  "frontend-000162": {
     "message": "Nova carpeta"
   },
-  "backend-000163": {
+  "frontend-000163": {
     "message": "Nova etiqueta"
   },
-  "backend-000164": {
+  "frontend-000164": {
     "message": "Segura"
   },
-  "backend-000165": {
+  "frontend-000165": {
     "message": "Estat"
   },
-  "backend-000166": {
+  "frontend-000166": {
     "message": "Feble"
   },
-  "backend-000167": {
+  "frontend-000167": {
     "message": "Feble (Repetida)"
   },
-  "backend-000168": {
+  "frontend-000168": {
     "message": "Feble (Antiquada)"
   },
-  "backend-000169": {
+  "frontend-000169": {
     "message": "Violada"
   },
-  "backend-000170": {
+  "frontend-000170": {
     "message": "Compartir"
   },
-  "backend-000171": {
+  "frontend-000171": {
     "message": "Versions"
   },
-  "backend-000172": {
+  "frontend-000172": {
     "message": "Codi QR"
   },
-  "backend-000173": {
+  "frontend-000173": {
     "message": "Contrasenya"
   },
-  "backend-000174": {
+  "frontend-000174": {
     "message": "Usuari"
   },
-  "backend-000175": {
+  "frontend-000175": {
     "message": "Lloc web"
   },
-  "backend-000176": {
+  "frontend-000176": {
     "message": "Afegir etiqueta…"
   },
-  "backend-000177": {
+  "frontend-000177": {
     "message": "Color"
   },
-  "backend-000178": {
+  "frontend-000178": {
     "message": "Nom"
   },
-  "backend-000179": {
+  "frontend-000179": {
     "message": "Etiqueta"
   },
-  "backend-000180": {
+  "frontend-000180": {
     "message": "General"
   },
-  "backend-000181": {
+  "frontend-000181": {
     "message": "Propietats"
   },
-  "backend-000182": {
+  "frontend-000182": {
     "message": "Nombres"
   },
-  "backend-000183": {
+  "frontend-000183": {
     "message": "Caràcters especials"
   },
-  "backend-000184": {
+  "frontend-000184": {
     "message": "Opcions avançades"
   },
-  "backend-000185": {
+  "frontend-000185": {
     "message": "Favorita"
   },
-  "backend-000186": {
+  "frontend-000186": {
     "message": "Xifrat"
   },
-  "backend-000187": {
+  "frontend-000187": {
     "message": "Al servidor"
   },
-  "backend-000188": {
+  "frontend-000188": {
     "message": "Camps personalizats"
   },
-  "backend-000189": {
+  "frontend-000189": {
     "message": "Secret"
   },
-  "backend-000190": {
+  "frontend-000190": {
     "message": "Text"
   },
-  "backend-000191": {
+  "frontend-000191": {
     "message": "Fitxer"
   },
-  "backend-000192": {
+  "frontend-000192": {
     "message": "Valor"
   },
-  "backend-000193": {
+  "frontend-000193": {
     "message": "Alternar visibilitat"
   },
-  "backend-000194": {
+  "frontend-000194": {
     "message": "Generar una contrasenya"
   },
-  "backend-000195": {
+  "frontend-000195": {
     "message": "Emprar xifrat simple V1 al servidor"
   },
-  "backend-000196": {
+  "frontend-000196": {
     "message": "Pren alguna nota"
   },
-  "backend-000197": {
+  "frontend-000197": {
     "message": "Desar"
   },
-  "backend-000198": {
+  "frontend-000198": {
     "message": "Crear una carpeta"
   },
-  "backend-000199": {
+  "frontend-000199": {
     "message": "S'ha creat la carpeta"
   },
-  "backend-000200": {
+  "frontend-000200": {
     "message": "No s'ha pogut crear la carpeta"
   },
-  "backend-000201": {
+  "frontend-000201": {
     "message": "Reanomenar la carpeta"
   },
-  "backend-000202": {
+  "frontend-000202": {
     "message": "S'ha reanomenat la carpeta"
   },
-  "backend-000203": {
+  "frontend-000203": {
     "message": "Ha fallat el canvi de nom de la carpeta"
   },
-  "backend-000204": {
+  "frontend-000204": {
     "message": "S'ha mogut la carpeta"
   },
-  "backend-000205": {
+  "frontend-000205": {
     "message": "No s'ha pogut moure la carpeta"
   },
-  "backend-000206": {
+  "frontend-000206": {
     "message": "Esborrar la carpeta"
   },
-  "backend-000207": {
+  "frontend-000207": {
     "message": "Voleu esborrar aquesta carpeta?"
   },
-  "backend-000208": {
+  "frontend-000208": {
     "message": "S'ha esborrat la carpeta"
   },
-  "backend-000209": {
+  "frontend-000209": {
     "message": "No s'ha pogut esborrar la carpeta"
   },
-  "backend-000210": {
+  "frontend-000210": {
     "message": "S'ha restaurat la carpeta"
   },
-  "backend-000211": {
+  "frontend-000211": {
     "message": "No s'ha pogut restaurar la carpeta"
   },
-  "backend-000212": {
+  "frontend-000212": {
     "message": "Crear una etiqueta"
   },
-  "backend-000213": {
+  "frontend-000213": {
     "message": "S'ha creat l'etiqueta"
   },
-  "backend-000214": {
+  "frontend-000214": {
     "message": "No s'ha pogut crear l'etiqueta"
   },
-  "backend-000215": {
+  "frontend-000215": {
     "message": "Modificar l'etiqueta"
   },
-  "backend-000216": {
+  "frontend-000216": {
     "message": "Generar un color a l'atzar"
   },
-  "backend-000217": {
+  "frontend-000217": {
     "message": "S'ha desat l'etiqueta"
   },
-  "backend-000218": {
+  "frontend-000218": {
     "message": "No s'ha pogut desar l'etiqueta"
   },
-  "backend-000219": {
+  "frontend-000219": {
     "message": "Esborrar l'etiqueta"
   },
-  "backend-000220": {
+  "frontend-000220": {
     "message": "Voleu esborrar l'etiqueta?"
   },
-  "backend-000221": {
+  "frontend-000221": {
     "message": "S'ha esborrat l'etiqueta"
   },
-  "backend-000222": {
+  "frontend-000222": {
     "message": "No s'ha pogut esborrar l'etiqueta"
   },
-  "backend-000223": {
+  "frontend-000223": {
     "message": "S'ha restaurat l'etiqueta"
   },
-  "backend-000224": {
+  "frontend-000224": {
     "message": "No s'ha pogut restaurar l'etiqueta"
   },
-  "backend-000225": {
+  "frontend-000225": {
     "message": "Crear una nova contrasenya"
   },
-  "backend-000226": {
+  "frontend-000226": {
     "message": "S'ha creat la contrasenya"
   },
-  "backend-000227": {
+  "frontend-000227": {
     "message": "No s'ha pogut crear la contrasenya"
   },
-  "backend-000228": {
+  "frontend-000228": {
     "message": "Modificar la contrasenya"
   },
-  "backend-000229": {
+  "frontend-000229": {
     "message": "S'ha desat la contrasenya"
   },
-  "backend-000230": {
+  "frontend-000230": {
     "message": "No s'ha pogut desar la contrasenya"
   },
-  "backend-000231": {
+  "frontend-000231": {
     "message": "S'ha mogut la contrasenya"
   },
-  "backend-000232": {
+  "frontend-000232": {
     "message": "No s'ha pogut moure la contrasenya"
   },
-  "backend-000233": {
+  "frontend-000233": {
     "message": "Esborrar la contrasenya"
   },
-  "backend-000234": {
+  "frontend-000234": {
     "message": "Voleu esborrar la contrasenya?"
   },
-  "backend-000235": {
+  "frontend-000235": {
     "message": "S'ha esborrat la contrasenya"
   },
-  "backend-000236": {
+  "frontend-000236": {
     "message": "S'ha restaurat la contrasenya"
   },
-  "backend-000237": {
+  "frontend-000237": {
     "message": "No s'ha pogut restaurar la contrasenya"
   },
-  "backend-000238": {
+  "frontend-000238": {
     "message": "Visitar el lloc web"
   },
-  "backend-000239": {
+  "frontend-000239": {
     "message": "Copiar l'adreça URL"
   },
-  "backend-000240": {
+  "frontend-000240": {
     "message": "Copiar l'usuari"
   },
-  "backend-000241": {
+  "frontend-000241": {
     "message": "Copiar la contrasenya"
   },
-  "backend-000242": {
+  "frontend-000242": {
     "message": "$ELEMENT$ s'ha copia al portaretalls",
     "placeholders": {
       "element": {
@@ -806,7 +806,7 @@
       }
     }
   },
-  "backend-000243": {
+  "frontend-000243": {
     "message": "No s'ha pogut copiar $ELEMENT$ al portaretalls",
     "placeholders": {
       "element": {
@@ -814,7 +814,7 @@
       }
     }
   },
-  "backend-000244": {
+  "frontend-000244": {
     "message": "Modificat per darrer cop el $DATE$",
     "placeholders": {
       "date": {
@@ -822,34 +822,34 @@
       }
     }
   },
-  "backend-000245": {
+  "frontend-000245": {
     "message": "Restaurar aquesta versió"
   },
-  "backend-000246": {
+  "frontend-000246": {
     "message": "S'ha restaurat la versió"
   },
-  "backend-000247": {
+  "frontend-000247": {
     "message": "No s'ha pogut restaurar la versió"
   },
-  "backend-000248": {
+  "frontend-000248": {
     "message": "Voleu restaurar aquesta versió?"
   },
-  "backend-000249": {
+  "frontend-000249": {
     "message": "Compartides amb mi"
   },
-  "backend-000250": {
+  "frontend-000250": {
     "message": "Compartides per mi"
   },
-  "backend-000251": {
+  "frontend-000251": {
     "message": "Estadístiques"
   },
-  "backend-000252": {
+  "frontend-000252": {
     "message": "Creada el"
   },
-  "backend-000253": {
+  "frontend-000253": {
     "message": "Darrera actualització"
   },
-  "backend-000254": {
+  "frontend-000254": {
     "message": "$COUNT$ versions",
     "placeholders": {
       "count": {
@@ -857,10 +857,10 @@
       }
     }
   },
-  "backend-000255": {
+  "frontend-000255": {
     "message": "Comparticions"
   },
-  "backend-000256": {
+  "frontend-000256": {
     "message": "$COUNT$ comparticions",
     "placeholders": {
       "count": {
@@ -868,43 +868,43 @@
       }
     }
   },
-  "backend-000257": {
+  "frontend-000257": {
     "message": "Xifrat al servidor"
   },
-  "backend-000258": {
+  "frontend-000258": {
     "message": "Xifrat al dispositiu client"
   },
-  "backend-000259": {
+  "frontend-000259": {
     "message": "Sense xifrat"
   },
-  "backend-000260": {
+  "frontend-000260": {
     "message": "Xifrat simple (Generació 1)"
   },
-  "backend-000261": {
+  "frontend-000261": {
     "message": "Xifrat simple (Generació 2)"
   },
-  "backend-000262": {
+  "frontend-000262": {
     "message": "Xifrat avançat (SSE V2)"
   },
-  "backend-000263": {
+  "frontend-000263": {
     "message": "Xifrat amb libsodium"
   },
-  "backend-000264": {
+  "frontend-000264": {
     "message": "Més"
   },
-  "backend-000265": {
+  "frontend-000265": {
     "message": "Còpia de seguretat i restauració"
   },
-  "backend-000266": {
+  "frontend-000266": {
     "message": "Paràmetres"
   },
-  "backend-000267": {
+  "frontend-000267": {
     "message": "Manual d'instruccions"
   },
-  "backend-000268": {
+  "frontend-000268": {
     "message": "Aplicacions i extensions"
   },
-  "backend-000269": {
+  "frontend-000269": {
     "message": "$EDITABLE$ i $SHAREABLE$.",
     "placeholders": {
       "editable": {
@@ -915,25 +915,25 @@
       }
     }
   },
-  "backend-000270": {
+  "frontend-000270": {
     "message": "Permesa la modificació"
   },
-  "backend-000271": {
+  "frontend-000271": {
     "message": "No permesa la modificació"
   },
-  "backend-000272": {
+  "frontend-000272": {
     "message": "Permesa la compartició"
   },
-  "backend-000273": {
+  "frontend-000273": {
     "message": "No permesa la compartició"
   },
-  "backend-000274": {
+  "frontend-000274": {
     "message": "Cercar usuari"
   },
-  "backend-000275": {
+  "frontend-000275": {
     "message": "Definir data de venciment"
   },
-  "backend-000276": {
+  "frontend-000276": {
     "message": "Venç el $DATETIME$",
     "placeholders": {
       "datetime": {
@@ -941,16 +941,16 @@
       }
     }
   },
-  "backend-000277": {
+  "frontend-000277": {
     "message": "Escollir una data de venciment"
   },
-  "backend-000278": {
+  "frontend-000278": {
     "message": "Heu d'escollir una data futura"
   },
-  "backend-000279": {
+  "frontend-000279": {
     "message": "Data invàlida"
   },
-  "backend-000280": {
+  "frontend-000280": {
     "message": "L'usuari $UID$ no existeix",
     "placeholders": {
       "uid": {
@@ -958,7 +958,7 @@
       }
     }
   },
-  "backend-000281": {
+  "frontend-000281": {
     "message": "No es pot compartir la contrasenya: $MESSAGE$",
     "placeholders": {
       "message": {
@@ -966,91 +966,91 @@
       }
     }
   },
-  "backend-000282": {
+  "frontend-000282": {
     "message": "Canviar permisos d'edició"
   },
-  "backend-000283": {
+  "frontend-000283": {
     "message": "Canviar permisos de compartició"
   },
-  "backend-000284": {
+  "frontend-000284": {
     "message": "Deixar de compartir"
   },
-  "backend-000285": {
+  "frontend-000285": {
     "message": "Data"
   },
-  "backend-000286": {
+  "frontend-000286": {
     "message": "Memòria cau per defecte (0 fitxers, 0 B)"
   },
-  "backend-000287": {
+  "frontend-000287": {
     "message": "Memòria cau per avatars (0 fitxers, 0 B)"
   },
-  "backend-000288": {
+  "frontend-000288": {
     "message": "Memòria cau per favicons (0 fitxers, 0 B)"
   },
-  "backend-000289": {
+  "frontend-000289": {
     "message": "Memòria cau per vistes preliminars (0 fitxers, 0 B)"
   },
-  "backend-000290": {
+  "frontend-000290": {
     "message": "Memòria cau per contrasenyes (0 fitxers, 0 B)"
   },
-  "backend-000291": {
+  "frontend-000291": {
     "message": "Canviada"
   },
-  "backend-000292": {
+  "frontend-000292": {
     "message": "Modificada"
   },
-  "backend-000293": {
+  "frontend-000293": {
     "message": "Editada"
   },
-  "backend-000294": {
+  "frontend-000294": {
     "message": "Creada"
   },
   "backups-000144": {
     "message": "Carpeta"
   },
-  "backend-000295": {
+  "frontend-000295": {
     "message": "Versió"
   },
-  "backend-000296": {
+  "frontend-000296": {
     "message": "Adreça URL"
   },
-  "backend-000297": {
+  "frontend-000297": {
     "message": "Carpeta superior"
   },
-  "backend-000298": {
+  "frontend-000298": {
     "message": "Esborrar tots els elements"
   },
-  "backend-000299": {
+  "frontend-000299": {
     "message": "Restaurar tots els elements"
   },
-  "backend-000300": {
+  "frontend-000300": {
     "message": "Restaurar els elements"
   },
-  "backend-000301": {
+  "frontend-000301": {
     "message": "Voleu restaurar tots els elements a la paperera?"
   },
-  "backend-000302": {
+  "frontend-000302": {
     "message": "Restaurar aquest objete"
   },
-  "backend-000303": {
+  "frontend-000303": {
     "message": "S'han restaurat els elements"
   },
-  "backend-000304": {
+  "frontend-000304": {
     "message": "Buidar la paperera"
   },
-  "backend-000305": {
+  "frontend-000305": {
     "message": "Voleu esborrar permanentment tots els elements a la paperera?"
   },
-  "backend-000306": {
+  "frontend-000306": {
     "message": "S'ha buidat la paperera"
   },
-  "backend-000307": {
+  "frontend-000307": {
     "message": "Cercar"
   },
-  "backend-000308": {
+  "frontend-000308": {
     "message": "Empreu la caixa de cerca per cercar"
   },
-  "backend-000309": {
+  "frontend-000309": {
     "message": "Cercar \"$QUERY$\" globalment",
     "placeholders": {
       "query": {
@@ -1058,31 +1058,31 @@
       }
     }
   },
-  "backend-000310": {
+  "frontend-000310": {
     "message": "No hi ha res aquí"
   },
-  "backend-000311": {
+  "frontend-000311": {
     "message": "Premeu a \"+\" per afegir quelcom"
   },
-  "backend-000312": {
+  "frontend-000312": {
     "message": "Els elements eliminats apareixeran aquí"
   },
-  "backend-000313": {
+  "frontend-000313": {
     "message": "No se us ha compartit cap contrasenya"
   },
-  "backend-000314": {
+  "frontend-000314": {
     "message": "No heu compartit cap contrasenya"
   },
-  "backend-000315": {
+  "frontend-000315": {
     "message": "Les favorites apareixeran aquí"
   },
-  "backend-000316": {
+  "frontend-000316": {
     "message": "Seria bo que comproveu altres seccions"
   },
-  "backend-000317": {
+  "frontend-000317": {
     "message": "Probablement és un bon senyal"
   },
-  "backend-000318": {
+  "frontend-000318": {
     "message": "Visitar $HREF$",
     "placeholders": {
       "href": {
@@ -1090,10 +1090,10 @@
       }
     }
   },
-  "backend-000319": {
+  "frontend-000319": {
     "message": "Contingut"
   },
-  "backend-000320": {
+  "frontend-000320": {
     "message": "Imatge $COUNT$: $TITLE$",
     "placeholders": {
       "count": {
@@ -1104,7 +1104,7 @@
       }
     }
   },
-  "backend-000321": {
+  "frontend-000321": {
     "message": "No s'ha pogut obtenir la plana: $MESSAGE$.",
     "placeholders": {
       "message": {
@@ -1112,7 +1112,7 @@
       }
     }
   },
-  "backend-000322": {
+  "frontend-000322": {
     "message": "No és un contingut vàlid del tipus $MIME$",
     "placeholders": {
       "mime": {
@@ -1120,34 +1120,34 @@
       }
     }
   },
-  "backend-000323": {
+  "frontend-000323": {
     "message": "Contingut no disponible"
   },
-  "backend-000324": {
+  "frontend-000324": {
     "message": "No s'ha trobat"
   },
-  "backend-000325": {
+  "frontend-000325": {
     "message": "Encara necessiteu ajuda?"
   },
-  "backend-000326": {
+  "frontend-000326": {
     "message": "Pregunteu al nostre fòrum!"
   },
-  "backend-000327": {
+  "frontend-000327": {
     "message": "Heu trobat cap error?"
   },
-  "backend-000328": {
+  "frontend-000328": {
     "message": "Explica'ns!"
   },
-  "backend-000329": {
+  "frontend-000329": {
     "message": "La sessió ha expirat"
   },
-  "backend-000330": {
+  "frontend-000330": {
     "message": "El token de sessió de la API ha expirat"
   },
-  "backend-000331": {
+  "frontend-000331": {
     "message": "Error de xarxa"
   },
-  "backend-000332": {
+  "frontend-000332": {
     "message": "No ha estat possible carregar el mòdul $MODULE$. Possiblement s'ha tallat la connexió amb el servidor Nextcloud",
     "placeholders": {
       "module": {
@@ -1155,13 +1155,13 @@
       }
     }
   },
-  "backend-000333": {
+  "frontend-000333": {
     "message": "Ordenar per nom"
   },
-  "backend-000334": {
+  "frontend-000334": {
     "message": "Ordenar per data de modificació"
   },
-  "backend-000335": {
+  "frontend-000335": {
     "message": "$PASSWORDS$ contrasenyes",
     "placeholders": {
       "passwords": {
@@ -1169,10 +1169,10 @@
       }
     }
   },
-  "backend-000336": {
+  "frontend-000336": {
     "message": "1 contrasenya"
   },
-  "backend-000337": {
+  "frontend-000337": {
     "message": "$FOLDERS$ carpetes",
     "placeholders": {
       "folders": {
@@ -1180,10 +1180,10 @@
       }
     }
   },
-  "backend-000338": {
+  "frontend-000338": {
     "message": "1 carpeta"
   },
-  "backend-000339": {
+  "frontend-000339": {
     "message": "$TAGS$ etiquetes",
     "placeholders": {
       "tags": {
@@ -1191,25 +1191,25 @@
       }
     }
   },
-  "backend-000340": {
+  "frontend-000340": {
     "message": "1 etiqueta"
   },
-  "backend-000341": {
+  "frontend-000341": {
     "message": "Res"
   },
-  "backend-000342": {
+  "frontend-000342": {
     "message": " i "
   },
-  "backend-000343": {
+  "frontend-000343": {
     "message": "coincidència"
   },
-  "backend-000344": {
+  "frontend-000344": {
     "message": "coincidències"
   },
-  "backend-000345": {
+  "frontend-000345": {
     "message": "Creat per"
   },
-  "backend-000346": {
+  "frontend-000346": {
     "message": "Heu iniciat sessió com a $USER$",
     "placeholders": {
       "user": {
@@ -1217,67 +1217,67 @@
       }
     }
   },
-  "backend-000347": {
+  "frontend-000347": {
     "message": "Iniciar sessió"
   },
-  "backend-000348": {
+  "frontend-000348": {
     "message": "Sol·licitar el token un altre cop"
   },
-  "backend-000349": {
+  "frontend-000349": {
     "message": "Masses intents"
   },
-  "backend-000350": {
+  "frontend-000350": {
     "message": "La contraseña és massa curta"
   },
-  "backend-000351": {
+  "frontend-000351": {
     "message": "Error desconegut"
   },
-  "backend-000352": {
+  "frontend-000352": {
     "message": "Ha fallat la sol·licitud del token"
   },
-  "backend-000353": {
+  "frontend-000353": {
     "message": "Sistema en manteniment"
   },
-  "backend-000354": {
+  "frontend-000354": {
     "message": "Desconegut"
   },
-  "backend-000355": {
+  "frontend-000355": {
     "message": "Sistema"
   },
-  "backend-000356": {
+  "frontend-000356": {
     "message": "Públic"
   },
-  "backend-000357": {
+  "frontend-000357": {
     "message": "Tarea programada en segon pla"
   },
-  "backend-000358": {
+  "frontend-000358": {
     "message": "Línia de consola"
   },
-  "backend-000359": {
+  "frontend-000359": {
     "message": "Corregiu la vostra entrada"
   },
-  "backend-000360": {
+  "frontend-000360": {
     "message": "Mostrar valor"
   },
-  "backend-000361": {
+  "frontend-000361": {
     "message": "Cancel·lar"
   },
-  "backend-000362": {
+  "frontend-000362": {
     "message": "Ok"
   },
-  "backend-000363": {
+  "frontend-000363": {
     "message": "veritable"
   },
-  "backend-000364": {
+  "frontend-000364": {
     "message": "fals"
   },
-  "backend-000365": {
+  "frontend-000365": {
     "message": "sí"
   },
-  "backend-000366": {
+  "frontend-000366": {
     "message": "no"
   },
-  "backend-000367": {
+  "frontend-000367": {
     "message": "$NAME$ us ha compartit aquesta contrasenya.",
     "placeholders": {
       "name": {
@@ -1285,10 +1285,10 @@
       }
     }
   },
-  "backend-000368": {
+  "frontend-000368": {
     "message": "Heu assolit la longitud màxima de 4096 caràcters"
   },
-  "backend-000369": {
+  "frontend-000369": {
     "message": "No s'ha trobat res per a \"$QUERY$\"",
     "placeholders": {
       "query": {
@@ -1296,7 +1296,7 @@
       }
     }
   },
-  "backend-000370": {
+  "frontend-000370": {
     "message": "La pàgina \"$PAGE$\" no s'ha pogut obtenir del manual al servidor.",
     "placeholders": {
       "page": {
@@ -1304,10 +1304,10 @@
       }
     }
   },
-  "backend-000371": {
+  "frontend-000371": {
     "message": "Algunes dades estan esperant per ser sincronitzades"
   },
-  "backend-000372": {
+  "frontend-000372": {
     "message": "Se us tancarà la sessió d'aquí a $TIME$ segons",
     "placeholders": {
       "time": {
@@ -1315,31 +1315,31 @@
       }
     }
   },
-  "backend-000373": {
+  "frontend-000373": {
     "message": "És possible que hagueu sol·licitat massa tokens. Proveu més tard un altre cop."
   },
-  "backend-000374": {
+  "frontend-000374": {
     "message": "El xifratge d'extrem a extrem es desactivarà per a aquesta contrasenya si la compartiu."
   },
-  "backend-000375": {
+  "frontend-000375": {
     "message": "El token de sessió ja no és vàlid. Ara l'app es tornarà a carregar."
   },
-  "backend-000376": {
+  "frontend-000376": {
     "message": "Avui, al 2018, es va publicar la primera versió de l'app passwords. Gràcies per utilitzar aquesta aplicació."
   },
-  "frontend-000377": {
+  "backend-000377": {
     "message": "Es requereix HTTPS"
   },
-  "frontend-000378": {
+  "backend-000378": {
     "message": "recarregar aquesta plana amb HTTPS"
   },
-  "frontend-000379": {
+  "backend-000379": {
     "message": "fòrum"
   },
-  "frontend-000380": {
+  "backend-000380": {
     "message": "Documentació"
   },
-  "frontend-000381": {
+  "backend-000381": {
     "message": "Podeu intentar $STR_1$ la plana amb HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1347,7 +1347,7 @@
       }
     }
   },
-  "frontend-000382": {
+  "backend-000382": {
     "message": "Aquesta aplicació requereix $STR_1$ per funcionar amb seguretat.",
     "placeholders": {
       "str_1": {
@@ -1355,7 +1355,7 @@
       }
     }
   },
-  "frontend-000383": {
+  "backend-000383": {
     "message": "Això NO és un error. Visiteu el nostre $STR_1$ si necessiteu ajuda.",
     "placeholders": {
       "str_1": {
@@ -1363,10 +1363,10 @@
       }
     }
   },
-  "frontend-000384": {
+  "backend-000384": {
     "message": "Reviseu l'informe HTTPS següent per resoldre el problema."
   },
-  "frontend-000385": {
+  "backend-000385": {
     "message": "Llegiu aquest $STR_1$ per configurar el vostre servidor perquè utilitzi HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1374,7 +1374,7 @@
       }
     }
   },
-  "frontend-000386": {
+  "backend-000386": {
     "message": "Llegiu aquest $STR_1$ si feu servir qualsevol tipus de proxy.",
     "placeholders": {
       "str_1": {
@@ -1382,7 +1382,7 @@
       }
     }
   },
-  "frontend-000387": {
+  "backend-000387": {
     "message": "Aneu a $STR_1$ per obtenir un certificat HTTPS gratuït si el necessiteu.",
     "placeholders": {
       "str_1": {
@@ -1390,10 +1390,10 @@
       }
     }
   },
-  "frontend-000388": {
+  "backend-000388": {
     "message": "Si aquest problema persisteix, hauríeu de contactar amb el vostre administrador."
   },
-  "frontend-000389": {
+  "backend-000389": {
     "message": "Sessió de l'aplicació Contrasenyes $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1404,151 +1404,151 @@
       }
     }
   },
-  "frontend-000390": {
+  "backend-000390": {
     "message": "Obrir la documentació"
   },
-  "frontend-000391": {
+  "backend-000391": {
     "message": "mai"
   },
-  "frontend-000392": {
+  "backend-000392": {
     "message": "Processament de dades internes"
   },
-  "frontend-000393": {
+  "backend-000393": {
     "message": "Renderitzat d'imatges"
   },
-  "frontend-000394": {
+  "backend-000394": {
     "message": "Imagick/GMagick (recomanat)"
   },
-  "frontend-000395": {
+  "backend-000395": {
     "message": "Serveis externs"
   },
-  "frontend-000396": {
+  "backend-000396": {
     "message": "Comprovacions de la seguretat de la contrasenya"
   },
-  "frontend-000397": {
+  "backend-000397": {
     "message": "Have I been pwned? (recomanat, 600 milions de contr. vulnerades)"
   },
-  "frontend-000398": {
+  "backend-000398": {
     "message": "25 milions de contrasenyes (local)"
   },
-  "frontend-000399": {
+  "backend-000399": {
     "message": "5 milió de contrasenyes (local)"
   },
-  "frontend-000400": {
+  "backend-000400": {
     "message": "25 milions de contrasenyes i HIBP?"
   },
-  "frontend-000401": {
+  "backend-000401": {
     "message": "Servei de generació de contrasenyes"
   },
-  "frontend-000402": {
+  "backend-000402": {
     "message": "Diccionari local"
   },
-  "frontend-000403": {
+  "backend-000403": {
     "message": "Caràcters aleatoris"
   },
-  "frontend-000404": {
+  "backend-000404": {
     "message": "watchout4snakes.com"
   },
-  "frontend-000405": {
+  "backend-000405": {
     "message": "Leipzig Corpora Collection (recomanat)"
   },
-  "frontend-000406": {
+  "backend-000406": {
     "message": "Servei de Favicons"
   },
-  "frontend-000407": {
+  "backend-000407": {
     "message": "Analitzador local"
   },
-  "frontend-000408": {
+  "backend-000408": {
     "message": "Besticon (recomanat)"
   },
-  "frontend-000409": {
+  "backend-000409": {
     "message": "Cap"
   },
-  "frontend-000410": {
+  "backend-000410": {
     "message": "Servei de vista prèvia de llocs web"
   },
-  "frontend-000411": {
+  "backend-000411": {
     "message": "Clau per a l'API del servei de vista prèvia de llocs web"
   },
-  "frontend-000412": {
+  "backend-000412": {
     "message": "Pageres/PhantomJS (local)"
   },
-  "frontend-000413": {
+  "backend-000413": {
     "message": "WKHTML (local)"
   },
-  "frontend-000414": {
+  "backend-000414": {
     "message": "screenshotapi.io"
   },
-  "frontend-000415": {
+  "backend-000415": {
     "message": "Paràmetres de correu per defecte"
   },
-  "frontend-000416": {
+  "backend-000416": {
     "message": "Enviar correus per events de seguretat"
   },
-  "frontend-000417": {
+  "backend-000417": {
     "message": "Enviar correus en compartir"
   },
-  "frontend-000418": {
+  "backend-000418": {
     "message": "Altres paràmetres"
   },
-  "frontend-000419": {
+  "backend-000419": {
     "message": "Esborrar permanentment en esborrar objectes de la base de dades"
   },
-  "frontend-000420": {
+  "backend-000420": {
     "message": "Mostrar a \"Apps\" les versions Nightly (fase de proves)"
   },
-  "frontend-000421": {
+  "backend-000421": {
     "message": "Mai"
   },
-  "frontend-000422": {
+  "backend-000422": {
     "message": "Immediatament"
   },
-  "frontend-000423": {
+  "backend-000423": {
     "message": "Després de dues hores"
   },
-  "frontend-000424": {
+  "backend-000424": {
     "message": "Després d'un dia"
   },
-  "frontend-000425": {
+  "backend-000425": {
     "message": "Després de dues setmanes"
   },
-  "frontend-000426": {
+  "backend-000426": {
     "message": "Després d'un mes"
   },
-  "frontend-000427": {
+  "backend-000427": {
     "message": "Després d'un any"
   },
-  "frontend-000428": {
+  "backend-000428": {
     "message": "Paràmetres de còpies de seguretat"
   },
-  "frontend-000429": {
+  "backend-000429": {
     "message": "Interval entre còpies"
   },
-  "frontend-000430": {
+  "backend-000430": {
     "message": "Cada hora"
   },
-  "frontend-000431": {
+  "backend-000431": {
     "message": "Cada sis hores"
   },
-  "frontend-000432": {
+  "backend-000432": {
     "message": "Cada dia"
   },
-  "frontend-000433": {
+  "backend-000433": {
     "message": "Cada dos dies"
   },
-  "frontend-000434": {
+  "backend-000434": {
     "message": "Cada setmana"
   },
-  "frontend-000435": {
+  "backend-000435": {
     "message": "Cada dues setmanes"
   },
-  "frontend-000436": {
+  "backend-000436": {
     "message": "Quantitat de còpies a mantenir"
   },
-  "frontend-000437": {
+  "backend-000437": {
     "message": "Memòria cau"
   },
-  "frontend-000438": {
+  "backend-000438": {
     "message": "Memòria cau per defecte ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1559,7 +1559,7 @@
       }
     }
   },
-  "frontend-000439": {
+  "backend-000439": {
     "message": "Memòria cau per imatges ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1570,7 +1570,7 @@
       }
     }
   },
-  "frontend-000440": {
+  "backend-000440": {
     "message": "Memòria cau per Favicons ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1581,7 +1581,7 @@
       }
     }
   },
-  "frontend-000441": {
+  "backend-000441": {
     "message": "Memòria cau per vistes prèvies ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1592,7 +1592,7 @@
       }
     }
   },
-  "frontend-000442": {
+  "backend-000442": {
     "message": "Memòria cau per contrasenyes ($STR_1$ fitxers, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1603,34 +1603,34 @@
       }
     }
   },
-  "frontend-000443": {
+  "backend-000443": {
     "message": "buidar"
   },
-  "frontend-000444": {
+  "backend-000444": {
     "message": "Buidar aquesta memòria cau"
   },
-  "frontend-000445": {
+  "backend-000445": {
     "message": "No podeu esborrar una memòria cau emprant un servei compartit"
   },
-  "frontend-000446": {
+  "backend-000446": {
     "message": "Desada"
   },
-  "frontend-000447": {
+  "backend-000447": {
     "message": "Buidada"
   },
-  "frontend-000448": {
+  "backend-000448": {
     "message": "Fallit"
   },
-  "frontend-000449": {
+  "backend-000449": {
     "message": "Necessiteu ajuda"
   },
-  "frontend-000450": {
+  "backend-000450": {
     "message": "heu trobat un error"
   },
-  "frontend-000451": {
+  "backend-000451": {
     "message": "cerqueu la documentació"
   },
-  "frontend-000452": {
+  "backend-000452": {
     "message": "$STR_1$, $STR_1$ o $STR_1$? Podem ajudar-vos!",
     "placeholders": {
       "str_1": {
@@ -1644,7 +1644,7 @@
       }
     }
   },
-  "frontend-000453": {
+  "backend-000453": {
     "message": "$STRING_1$ $STRING_2$ ha deixat de tenir suport.",
     "placeholders": {
       "string_1": {
@@ -1655,10 +1655,10 @@
       }
     }
   },
-  "frontend-000454": {
+  "backend-000454": {
     "message": "L'aplicació Contrasenyes requereix emprar HTTPS."
   },
-  "frontend-000455": {
+  "backend-000455": {
     "message": "L'ús de $STR_1$ per executar tasques en segon pla pot provocar retards. Recomanem utilitzar Cron.",
     "placeholders": {
       "str_1": {
@@ -1666,13 +1666,13 @@
       }
     }
   },
-  "frontend-000456": {
+  "backend-000456": {
     "message": "Reviseu els requeriments del sistema."
   },
-  "frontend-000457": {
+  "backend-000457": {
     "message": "Contrasenya no compartida"
   },
-  "frontend-000458": {
+  "backend-000458": {
     "message": "Alguna contrasenya no s'ha compartit ara amb $STRING_1$ perquè ja s'havia compartit",
     "placeholders": {
       "string_1": {
@@ -1680,25 +1680,25 @@
       }
     }
   },
-  "frontend-000459": {
+  "backend-000459": {
     "message": "Teniu una contrasenya insegura"
   },
-  "frontend-000460": {
+  "backend-000460": {
     "message": "Teniu algunes contrasenyes insegures"
   },
-  "frontend-000461": {
+  "backend-000461": {
     "message": "Una de les vostres contrasenyes ha deixat de ser segura."
   },
-  "frontend-000462": {
+  "backend-000462": {
     "message": "Algunes de les vostres contrasenyes han deixat de ser segures."
   },
-  "frontend-000463": {
+  "backend-000463": {
     "message": "L'aplicació Contrasenyes comprova regularment si les vostres contrasenyes han estat compromeses per una violació de dades."
   },
-  "frontend-000464": {
+  "backend-000464": {
     "message": "Aquesta comprovació de seguretat ha detectat que una de les vostres contrasenyes no és segura."
   },
-  "frontend-000465": {
+  "backend-000465": {
     "message": "Aquesta comprovació de seguretat ha trobat que $STR_1$ de les vostres contrasenyes no són segures.",
     "placeholders": {
       "str_1": {
@@ -1706,37 +1706,37 @@
       }
     }
   },
-  "frontend-000466": {
+  "backend-000466": {
     "message": "Això vol dir que la contrasenya està disponible a Internet i posa en perill el vostre compte."
   },
-  "frontend-000467": {
+  "backend-000467": {
     "message": "Això vol dir que les contrasenyes estan disponibles a Internet i posen en perill els vostres comptes."
   },
-  "frontend-000468": {
+  "backend-000468": {
     "message": "Per tant, la contrasenya s'ha marcat com a insegura i s'hauria de canviar ara mateix."
   },
-  "frontend-000469": {
+  "backend-000469": {
     "message": "Per tant, les contrasenyes s'han marcat com a insegures i s'haurien de canviar ara mateix."
   },
-  "frontend-000470": {
+  "backend-000470": {
     "message": "Podeu crear una nova contrasenya segura a l'aplicació Contrasenyes."
   },
-  "frontend-000471": {
+  "backend-000471": {
     "message": "Podeu crear noves contrasenyes segures a l'aplicació Contrasenyes."
   },
-  "frontend-000472": {
+  "backend-000472": {
     "message": "Canviar ara la contrasenya"
   },
-  "frontend-000473": {
+  "backend-000473": {
     "message": "Canviar ara les contrasenyes"
   },
-  "frontend-000474": {
+  "backend-000474": {
     "message": "Obriu l'aplicació Contrasenyes per canviar-la."
   },
-  "frontend-000475": {
+  "backend-000475": {
     "message": "Obriu l'aplicació Contrasenyes per canviar-les."
   },
-  "frontend-000476": {
+  "backend-000476": {
     "message": "$STR_1$ us ha compartit una contrasenya.",
     "placeholders": {
       "str_1": {
@@ -1744,7 +1744,7 @@
       }
     }
   },
-  "frontend-000477": {
+  "backend-000477": {
     "message": "$STR_1$ us ha compartit $STR_1$ contrasenyes.",
     "placeholders": {
       "str_1": {
@@ -1755,7 +1755,7 @@
       }
     }
   },
-  "frontend-000478": {
+  "backend-000478": {
     "message": "$STRING_4$ i $STRING_3$ us han compartit $STRING_1$ contrasenyes.",
     "placeholders": {
       "string_4": {
@@ -1769,7 +1769,7 @@
       }
     }
   },
-  "frontend-000479": {
+  "backend-000479": {
     "message": "$STRING_5$, $STRING_4$ i $STRING_3$ us han compartit $STRING_1$ contrasenyes.",
     "placeholders": {
       "string_5": {
@@ -1786,7 +1786,7 @@
       }
     }
   },
-  "frontend-000480": {
+  "backend-000480": {
     "message": "$STRING_5$, $STRING_4$ i $STRING_2$ altres us han compartit $STRING_1$ contrasenyes.",
     "placeholders": {
       "string_5": {
@@ -1803,13 +1803,13 @@
       }
     }
   },
-  "frontend-000481": {
+  "backend-000481": {
     "message": "Obriu l'aplicació Contrasenyes per veure-la."
   },
-  "frontend-000482": {
+  "backend-000482": {
     "message": "Obriu l'aplicació Contrasenyes per veure-les."
   },
-  "frontend-000483": {
+  "backend-000483": {
     "message": "Us han compartit una contrasenya a $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1817,7 +1817,7 @@
       }
     }
   },
-  "frontend-000484": {
+  "backend-000484": {
     "message": "Us han compartit vàries contrasenyes a $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1825,25 +1825,25 @@
       }
     }
   },
-  "frontend-000485": {
+  "backend-000485": {
     "message": "Veure les contrasenyes que m'han compartit'"
   },
-  "frontend-000486": {
+  "backend-000486": {
     "message": "No s'ha pogut compartir una de les vostres contrasenyes perquè el destinatari ja hi té accés."
   },
-  "frontend-000487": {
+  "backend-000487": {
     "message": "No s'ha pogut compartir %2 de les vostres contrasenyes perquè el destinatari ja hi té accés."
   },
-  "frontend-000489": {
+  "backend-000489": {
     "message": "Compartir una contrasenya que s'ha compartit amb tu de vegades pot crear un bucle."
   },
-  "frontend-000490": {
+  "backend-000490": {
     "message": "Per evitar-ho, aquestes contrasenyes no es compartiran."
   },
-  "frontend-000491": {
+  "backend-000491": {
     "message": "Accés administratiu al vostre compte"
   },
-  "frontend-000492": {
+  "backend-000492": {
     "message": "$STR_1$ ha intentat iniciar sessió al vostre compte a $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1854,7 +1854,7 @@
       }
     }
   },
-  "frontend-000493": {
+  "backend-000493": {
     "message": "$STR_1$ va iniciar sessió al vostre compte a $STR_1$.",
     "placeholders": {
       "str_1": {
@@ -1865,13 +1865,13 @@
       }
     }
   },
-  "frontend-000494": {
+  "backend-000494": {
     "message": "Com que utilitzeu una contrasenya mestra, això no vol dir que s'hagi concedit l'accés a les vostres dades."
   },
-  "frontend-000495": {
+  "backend-000495": {
     "message": "Per evitar l'accés no desitjat a les vostres dades, hauríeu de configurar una contrasenya mestra."
   },
-  "frontend-000496": {
+  "backend-000496": {
     "message": "Usuari esborrat ($STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1879,64 +1879,64 @@
       }
     }
   },
-  "frontend-000497": {
+  "backend-000497": {
     "message": "Ajudeu-nos a millorar l'aplicació Contrasenyes"
   },
-  "frontend-000498": {
+  "backend-000498": {
     "message": "Podeu ajudar-nos a millorar l'aplicació Contrasenyes participant a la nostra enquesta de servidors."
   },
-  "frontend-000499": {
+  "backend-000499": {
     "message": "Això ens enviarà algunes dades anònimes sobre la vostra configuració i els paràmetres seleccionats."
   },
-  "frontend-000500": {
+  "backend-000500": {
     "message": "Podeu canviar-ho en qualsevol moment als paràmetres de l'aplicació."
   },
-  "frontend-000501": {
+  "backend-000501": {
     "message": "Encara no"
   },
-  "frontend-000502": {
+  "backend-000502": {
     "message": "Participar"
   },
-  "frontend-000503": {
+  "backend-000503": {
     "message": "Participar a l'enquesta de servidors"
   },
-  "frontend-000504": {
+  "backend-000504": {
     "message": "Bàsica"
   },
-  "frontend-000505": {
+  "backend-000505": {
     "message": "Completa"
   },
-  "frontend-000506": {
+  "backend-000506": {
     "message": "No definida"
   },
-  "frontend-000507": {
+  "backend-000507": {
     "message": "Si us plau, considereu allotjar la vostra API de favicon al vostre servidor"
   },
-  "frontend-000508": {
+  "backend-000508": {
     "message": "El vostre Nextcloud utilitza les nostres instàncies compartides de Besticon per obtenir icones de llocs web."
   },
-  "frontend-000509": {
+  "backend-000509": {
     "message": "Aquestes instàncies estan pensades per a configuracions petites de Nextcloud amb molt poc trànsit."
   },
-  "frontend-000510": {
+  "backend-000510": {
     "message": "Si us plau, feu clic a l'enllaç i seguiu el nostre senzill tutorial per allotjar Besticon al vostre servidor."
   },
-  "frontend-000511": {
+  "backend-000511": {
     "message": "La vostra configuració del servei de favicon no és vàlida"
   },
-  "frontend-000512": {
+  "backend-000512": {
     "message": "La vostra configuració del servei de vista prèvia no és vàlida"
   },
-  "frontend-000513": {
+  "backend-000513": {
     "message": "El servei de favicon que heu triat requereix una clau API o un Endpoint, però no s'ha proporcionat cap."
   },
-  "frontend-000514": {
+  "backend-000514": {
     "message": "El servei de vista prèvia que heu triat requereix una clau API o un Endpoint, però no s'ha proporcionat cap."
   },
-  "frontend-000515": {
+  "backend-000515": {
     "message": "Aneu als paràmetres de l'aplicació per actualitzar la configuració o triar un altre servei."
   },
-  "frontend-000516": {
+  "backend-000516": {
     "message": "Hem detectat diversos intents fallits de desbloquejar la vostra base de dades de contrasenyes per part de \"$STR_1$\".",
     "placeholders": {
       "str_1": {
@@ -1944,52 +1944,52 @@
       }
     }
   },
-  "frontend-000517": {
+  "backend-000517": {
     "message": "Això podria indicar que algú està intentant entrar al vostre compte."
   },
-  "frontend-000518": {
+  "backend-000518": {
     "message": "Per evitar més intents, s'han revocat les credencials de l'API per a aquest client."
   },
-  "frontend-000519": {
+  "backend-000519": {
     "message": "A més, s'ha desactivat l'autenticació de l'API emprant contrasenya."
   },
-  "frontend-000520": {
+  "backend-000520": {
     "message": "Si voleu continuar utilitzant aquest client, li heu de crear un nou token."
   },
-  "frontend-000521": {
+  "backend-000521": {
     "message": "Si no coneixeu aquest client, canvieu la contrasenya i reviseu la llista de dispositius."
   },
-  "frontend-000522": {
+  "backend-000522": {
     "message": "Per evitar més intents, s'ha desactivat l'autenticació de l'API emprant contrasenya."
   },
-  "frontend-000523": {
+  "backend-000523": {
     "message": "Per tornar-lo a activar, inicieu sessió amb l'aplicació web o amb qualsevol client mitjançant l'autenticació amb token."
   },
-  "frontend-000524": {
+  "backend-000524": {
     "message": "Si no coneixeu aquest client, canvieu la contrasenya mestra i la contrasenya de Nextcloud."
   },
-  "frontend-000525": {
+  "backend-000525": {
     "message": "Per augmentar la seguretat, us recomanem utilitzar tokens específics per dispositiu en lloc de la vostra contrasenya."
   },
-  "backend-000528": {
+  "frontend-000528": {
     "message": "Regles per a contrasenyes"
   },
-  "backend-000529": {
+  "frontend-000529": {
     "message": "Marcar els duplicats"
   },
-  "backend-000530": {
+  "frontend-000530": {
     "message": "Duració màxima en dies"
   },
-  "backend-000531": {
+  "frontend-000531": {
     "message": "Generador de contrasenyes"
   },
-  "backend-000532": {
+  "frontend-000532": {
     "message": "Força de les contrasenyes"
   },
-  "backend-000533": {
+  "frontend-000533": {
     "message": "Incloure números"
   },
-  "backend-000534": {
+  "frontend-000534": {
     "message": "Incloure caràcters especials"
   },
   "settings-000678": {
@@ -2045,52 +2045,52 @@
   "settings-000693": {
     "message": "Canviar la contrasenya"
   },
-  "backend-000535": {
+  "frontend-000535": {
     "message": "Interfície d'usuari"
   },
-  "backend-000536": {
+  "frontend-000536": {
     "message": "Secció inicial"
   },
-  "backend-000537": {
+  "frontend-000537": {
     "message": "Totes les contrasenyes"
   },
-  "backend-000538": {
+  "frontend-000538": {
     "message": "Llistat de contrasenyes"
   },
-  "backend-000539": {
+  "frontend-000539": {
     "message": "Prendre com a títol"
   },
-  "backend-000540": {
+  "frontend-000540": {
     "message": "Ordenar per"
   },
-  "backend-000541": {
+  "frontend-000541": {
     "message": "Camp títol"
   },
-  "backend-000542": {
+  "frontend-000542": {
     "message": "Acció en fer un clic"
   },
-  "backend-000543": {
+  "frontend-000543": {
     "message": "Acció en fer doble clic"
   },
-  "backend-000544": {
+  "frontend-000544": {
     "message": "Copiar la contrasenya"
   },
-  "backend-000545": {
+  "frontend-000545": {
     "message": "Copiar el nom d'usuari"
   },
-  "backend-000546": {
+  "frontend-000546": {
     "message": "Copiar el lloc web"
   },
-  "backend-000547": {
+  "frontend-000547": {
     "message": "Mostrar els detalls"
   },
-  "backend-000548": {
+  "frontend-000548": {
     "message": "Mostrar opcions de copiat al menú"
   },
-  "backend-000549": {
+  "frontend-000549": {
     "message": "Mostrar nom d'usuari al llistat de contrasenyes"
   },
-  "backend-000550": {
+  "frontend-000550": {
     "message": "Mostrar etiquetes al llistat de contrasenyes"
   },
   "settings-000694": {
@@ -2099,61 +2099,61 @@
   "settings-000695": {
     "message": "Mostrar vista prèvia del lloc web"
   },
-  "backend-000551": {
+  "frontend-000551": {
     "message": "Mostrar els camps personalitzats"
   },
-  "backend-000552": {
+  "frontend-000552": {
     "message": "Cercar mentre escric"
   },
-  "backend-000553": {
+  "frontend-000553": {
     "message": "Cercar a tot arreu amb \"Enter\""
   },
-  "backend-000554": {
+  "frontend-000554": {
     "message": "Mostrar sempre la secció de cerca"
   },
-  "backend-000555": {
+  "frontend-000555": {
     "message": "Notificacions"
   },
-  "backend-000556": {
+  "frontend-000556": {
     "message": "Quan enviar correus"
   },
-  "backend-000557": {
+  "frontend-000557": {
     "message": "Esdeveniments relacionats amb la seguretat"
   },
-  "backend-000558": {
+  "frontend-000558": {
     "message": "Contrasenyes compartides amb mi"
   },
-  "backend-000559": {
+  "frontend-000559": {
     "message": "Quan mostrar notificacions"
   },
-  "backend-000560": {
+  "frontend-000560": {
     "message": "Altres errors"
   },
-  "backend-000561": {
+  "frontend-000561": {
     "message": "Zona perillosa"
   },
-  "backend-000562": {
+  "frontend-000562": {
     "message": "Restablir els paràmetres per defecte"
   },
-  "backend-000563": {
+  "frontend-000563": {
     "message": "Restablir"
   },
-  "backend-000564": {
+  "frontend-000564": {
     "message": "Esborrar-ho tot"
   },
-  "backend-000565": {
+  "frontend-000565": {
     "message": "ELIMINAR TOT"
   },
-  "backend-000566": {
+  "frontend-000566": {
     "message": "Restableix el compte d'usuari"
   },
-  "backend-000567": {
+  "frontend-000567": {
     "message": "Vista"
   },
-  "backend-000669": {
+  "frontend-000669": {
     "message": "Bàsica"
   },
-  "backend-000568": {
+  "frontend-000568": {
     "message": "Completa"
   },
   "settings-000696": {
@@ -2189,28 +2189,28 @@
   "settings-000706": {
     "message": "Clau de restabliment no vàlida"
   },
-  "frontend-000652": {
+  "backend-000652": {
     "message": "Verificar \"hash\" de contrasenyes"
   },
-  "frontend-000653": {
+  "backend-000653": {
     "message": "No guardar \"hashes\""
   },
-  "frontend-000654": {
+  "backend-000654": {
     "message": "Guardar el 50% del \"hash\""
   },
-  "frontend-000655": {
+  "backend-000655": {
     "message": "Guardar el 75% del \"hash\""
   },
-  "frontend-000656": {
+  "backend-000656": {
     "message": "Guardar el \"hash\" sencer"
   },
-  "backend-000569": {
+  "frontend-000569": {
     "message": "Marcar les contrasenyes com a \"insegures\" quan s'utilitzin en més d'un compte"
   },
-  "backend-000570": {
+  "frontend-000570": {
     "message": "Marcar les contrasenyes com a \"insegures\" si són més antigues que el nombre de dies especificat"
   },
-  "backend-000571": {
+  "frontend-000571": {
     "message": "Un nivell de força més alt crea contrasenyes més llargues i complexes"
   },
   "settings-000707": {
@@ -2231,70 +2231,70 @@
   "settings-000712": {
     "message": "Canviar la contrasenya de xifratge"
   },
-  "backend-000572": {
+  "frontend-000572": {
     "message": "Mostrar l'atribut seleccionat com a títol a la vista de llista"
   },
-  "backend-000573": {
+  "frontend-000573": {
     "message": "Ordenar les contrasenyes per l'atribut especificat en lloc de per nom"
   },
-  "backend-000574": {
+  "frontend-000574": {
     "message": "Acció a realitzar quan es fa clic en una contrasenya de la llista"
   },
-  "backend-000575": {
+  "frontend-000575": {
     "message": "Acció a realitzar quan es fa doble clic en una contrasenya"
   },
-  "backend-000576": {
+  "frontend-000576": {
     "message": "Mostrar al menú les opcions per copiar la contrasenya i el nom d'usuari"
   },
-  "backend-000577": {
+  "frontend-000577": {
     "message": "La secció a mostrar quan s'obre l'aplicació"
   },
-  "backend-000578": {
+  "frontend-000578": {
     "message": "Mostrar sempre el nom d'usuari d'una contrasenya al llistat de contrasenyes"
   },
-  "backend-000579": {
+  "frontend-000579": {
     "message": "Mostrar les etiquetes de cada contrasenya al llistat de contrasenyes. Tingueu en compte que augmenta el temps de càrrega"
   },
   "settings-000713": {
     "message": "Mostrar una vista prèvia del lloc web als detalls (no en dispositius mòbils)."
   },
-  "backend-000580": {
+  "frontend-000580": {
     "message": "Mostrar els camps autodefinits al formulari d'edició i als detalls de la contrasenya"
   },
-  "backend-000670": {
+  "frontend-000670": {
     "message": "Iniciar la cerca tan bon punt es prem una tecla a qualsevol lloc de la plana"
   },
-  "backend-000671": {
+  "frontend-000671": {
     "message": "Cercar a tot arreu quan es prem la tecla \"Intro\" a la caixa de cerca"
   },
-  "backend-000583": {
+  "frontend-000583": {
     "message": "Mostrar sempre la secció per a la cerca global a la navegació"
   },
-  "backend-000581": {
+  "frontend-000581": {
     "message": "Enviar-vos correus quan les contrasenyes es comprometin o sorgeixin problemes de seguretat"
   },
-  "backend-000582": {
+  "frontend-000582": {
     "message": "Enviar-vos correus quan altres persones us comparteixin contrasenyes"
   },
-  "backend-000584": {
+  "frontend-000584": {
     "message": "Avisar-vos sobre contrasenyes compromeses i altres problemes de seguretat"
   },
-  "backend-000585": {
+  "frontend-000585": {
     "message": "Avisar-vos quan altres persones us comparteixin contrasenyes"
   },
-  "backend-000586": {
+  "frontend-000586": {
     "message": "Avisar-vos quan fallin les tasques en segon pla"
   },
   "settings-000714": {
     "message": "Avisar-vos d'errors de configuració i altres problemes administratius"
   },
-  "backend-000587": {
+  "frontend-000587": {
     "message": "Restablir totes la configuracions d'aquesta pàgina (incloses les avançades)"
   },
-  "backend-000588": {
+  "frontend-000588": {
     "message": "Això restablirà tots els paràmetres als seus valors predeterminats. Voleu continuar?"
   },
-  "backend-000589": {
+  "frontend-000589": {
     "message": "Restaurar la configuració de fàbrica i eliminar totes les contrasenyes, carpetes i etiquetes creades"
   },
   "settings-000715": {
@@ -2335,7 +2335,7 @@
   "settings-000725": {
     "message": "Mode de xifratge amb el qual el dispositiu client xifra les dades abans de que s'enviïn al servidor."
   },
-  "backend-000590": {
+  "frontend-000590": {
     "message": "Esteu segur que voleu esborrar tota la vostra configuració, contrasenyes, carpetes i etiquetes? \nAixò NO es pot desfer."
   },
   "settings-000726": {

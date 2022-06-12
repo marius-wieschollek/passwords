@@ -152,7 +152,7 @@ class CompileLanguageFilesPlugin {
             }
 
             let content = '';
-            if(section !== 'backend') {
+            if(section !== 'frontend') {
                 content = JSON.stringify(
                     {
                         translations: translations[section],

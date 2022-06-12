@@ -374,283 +374,283 @@
   "settings-000713": {
     "message": "Visar en förhandsvisning av webbplatsen i detaljerna (ej mobila enheter)"
   },
-  "backend-000148": {
+  "frontend-000148": {
     "message": "Lösenord"
   },
-  "backend-000149": {
+  "frontend-000149": {
     "message": "Alla"
   },
-  "backend-000150": {
+  "frontend-000150": {
     "message": "Mappar"
   },
-  "backend-000151": {
+  "frontend-000151": {
     "message": "Aktuell"
   },
-  "backend-000152": {
+  "frontend-000152": {
     "message": "Favoriter"
   },
-  "backend-000153": {
+  "frontend-000153": {
     "message": "Delade"
   },
-  "backend-000154": {
+  "frontend-000154": {
     "message": "Säkerhet"
   },
-  "backend-000155": {
+  "frontend-000155": {
     "message": "Papperkorg"
   },
-  "backend-000156": {
+  "frontend-000156": {
     "message": "Detaljer"
   },
-  "backend-000157": {
+  "frontend-000157": {
     "message": "Editera"
   },
-  "backend-000158": {
+  "frontend-000158": {
     "message": "Byt namn"
   },
-  "backend-000159": {
+  "frontend-000159": {
     "message": "Radera"
   },
-  "backend-000160": {
+  "frontend-000160": {
     "message": "Återställ"
   },
-  "backend-000161": {
+  "frontend-000161": {
     "message": "Nytt lösenord"
   },
-  "backend-000162": {
+  "frontend-000162": {
     "message": "Ny mapp"
   },
-  "backend-000163": {
+  "frontend-000163": {
     "message": "Ny tagg"
   },
-  "backend-000164": {
+  "frontend-000164": {
     "message": "Säker"
   },
-  "backend-000166": {
+  "frontend-000166": {
     "message": "Osäker"
   },
-  "backend-000167": {
+  "frontend-000167": {
     "message": "Osäker (duplikat)"
   },
-  "backend-000168": {
+  "frontend-000168": {
     "message": "Osäker (föråldrad)"
   },
-  "backend-000169": {
+  "frontend-000169": {
     "message": "Läkt"
   },
-  "backend-000170": {
+  "frontend-000170": {
     "message": "Dela"
   },
-  "backend-000171": {
+  "frontend-000171": {
     "message": "Versioner"
   },
-  "backend-000172": {
+  "frontend-000172": {
     "message": "QR kod"
   },
-  "backend-000173": {
+  "frontend-000173": {
     "message": "Lösenord"
   },
-  "backend-000174": {
+  "frontend-000174": {
     "message": "Användarnamn"
   },
-  "backend-000175": {
+  "frontend-000175": {
     "message": "Webbsida"
   },
-  "backend-000176": {
+  "frontend-000176": {
     "message": "Lägg till taggar..."
   },
-  "backend-000177": {
+  "frontend-000177": {
     "message": "Färg"
   },
-  "backend-000178": {
+  "frontend-000178": {
     "message": "Namn"
   },
-  "backend-000179": {
+  "frontend-000179": {
     "message": "Namn"
   },
-  "backend-000180": {
+  "frontend-000180": {
     "message": "Allmän"
   },
-  "backend-000181": {
+  "frontend-000181": {
     "message": "Egenskaper"
   },
-  "backend-000182": {
+  "frontend-000182": {
     "message": "Nummer"
   },
-  "backend-000183": {
+  "frontend-000183": {
     "message": "Speciella tecken"
   },
-  "backend-000184": {
+  "frontend-000184": {
     "message": "Fler egenskaper"
   },
-  "backend-000185": {
+  "frontend-000185": {
     "message": "Favorit"
   },
-  "backend-000186": {
+  "frontend-000186": {
     "message": "Kryptering"
   },
-  "backend-000187": {
+  "frontend-000187": {
     "message": "På servern"
   },
-  "backend-000188": {
+  "frontend-000188": {
     "message": "Egendefinerade fält"
   },
-  "backend-000189": {
+  "frontend-000189": {
     "message": "Hemlig"
   },
-  "backend-000190": {
+  "frontend-000190": {
     "message": "Text"
   },
-  "backend-000191": {
+  "frontend-000191": {
     "message": "Fil"
   },
-  "backend-000192": {
+  "frontend-000192": {
     "message": "Värde"
   },
-  "backend-000193": {
+  "frontend-000193": {
     "message": "Toggla synlighet"
   },
-  "backend-000194": {
+  "frontend-000194": {
     "message": "Skapa lösenord"
   },
-  "backend-000195": {
+  "frontend-000195": {
     "message": "Enkel server kryptering V1"
   },
-  "backend-000196": {
+  "frontend-000196": {
     "message": "Notera"
   },
-  "backend-000197": {
+  "frontend-000197": {
     "message": "Spara"
   },
-  "backend-000198": {
+  "frontend-000198": {
     "message": "Skapa mapp"
   },
-  "backend-000199": {
+  "frontend-000199": {
     "message": "Mapp skapad"
   },
-  "backend-000200": {
+  "frontend-000200": {
     "message": "Misslyckades med att skapa mapp"
   },
-  "backend-000201": {
+  "frontend-000201": {
     "message": "Byt namn på mapp"
   },
-  "backend-000202": {
+  "frontend-000202": {
     "message": "Mapp har bytt namn"
   },
-  "backend-000203": {
+  "frontend-000203": {
     "message": "Misslyckades med att byta namn på mapp"
   },
-  "backend-000204": {
+  "frontend-000204": {
     "message": "Mapp flyttad"
   },
-  "backend-000205": {
+  "frontend-000205": {
     "message": "Misslyckadess med att flytta mapp"
   },
-  "backend-000206": {
+  "frontend-000206": {
     "message": "Radera mapp"
   },
-  "backend-000207": {
+  "frontend-000207": {
     "message": "Vill du radera mappen?"
   },
-  "backend-000208": {
+  "frontend-000208": {
     "message": "Mapp raderad"
   },
-  "backend-000209": {
+  "frontend-000209": {
     "message": "Misslyckadess med att radera mapp"
   },
-  "backend-000210": {
+  "frontend-000210": {
     "message": "Mapp återstääld"
   },
-  "backend-000211": {
+  "frontend-000211": {
     "message": "Misslyckadess med att åsterställa mapp"
   },
-  "backend-000212": {
+  "frontend-000212": {
     "message": "Skapa tagg"
   },
-  "backend-000213": {
+  "frontend-000213": {
     "message": "Tagg skapad"
   },
-  "backend-000214": {
+  "frontend-000214": {
     "message": "Misslyckadess med att skapa tagg"
   },
-  "backend-000215": {
+  "frontend-000215": {
     "message": "Editera tagg"
   },
-  "backend-000217": {
+  "frontend-000217": {
     "message": "Tagg sparad"
   },
-  "backend-000218": {
+  "frontend-000218": {
     "message": "Misslyckadess med att spara tagg"
   },
-  "backend-000219": {
+  "frontend-000219": {
     "message": "Radera tagg"
   },
-  "backend-000220": {
+  "frontend-000220": {
     "message": "Vill du radera taggen?"
   },
-  "backend-000221": {
+  "frontend-000221": {
     "message": "Tagg raderad"
   },
-  "backend-000222": {
+  "frontend-000222": {
     "message": "Misslyckadess med att radera tagg"
   },
-  "backend-000223": {
+  "frontend-000223": {
     "message": "Tagg återställd"
   },
-  "backend-000224": {
+  "frontend-000224": {
     "message": "Misslyckadess med att åsterställa tagg"
   },
-  "backend-000225": {
+  "frontend-000225": {
     "message": "Skapa lösenord"
   },
-  "backend-000226": {
+  "frontend-000226": {
     "message": "Lösenord skapat"
   },
-  "backend-000227": {
+  "frontend-000227": {
     "message": "Misslyckadess med att skapa lösenord"
   },
-  "backend-000228": {
+  "frontend-000228": {
     "message": "Editera lösenord"
   },
-  "backend-000229": {
+  "frontend-000229": {
     "message": "Lösenord sparat"
   },
-  "backend-000230": {
+  "frontend-000230": {
     "message": "Misslyckadess med att spara lösenord"
   },
-  "backend-000231": {
+  "frontend-000231": {
     "message": "Lösenord flyttat"
   },
-  "backend-000232": {
+  "frontend-000232": {
     "message": "Misslyckadess med att flytta lösenord"
   },
-  "backend-000233": {
+  "frontend-000233": {
     "message": "Radera lösenord"
   },
-  "backend-000234": {
+  "frontend-000234": {
     "message": "Vill du radera lösenordet?"
   },
-  "backend-000235": {
+  "frontend-000235": {
     "message": "Lösenord raderat"
   },
-  "backend-000236": {
+  "frontend-000236": {
     "message": "Lösenord återställt"
   },
-  "backend-000237": {
+  "frontend-000237": {
     "message": "Misslyckadess med att åsterställa lösenord"
   },
-  "backend-000238": {
+  "frontend-000238": {
     "message": "Öppna URL"
   },
-  "backend-000239": {
+  "frontend-000239": {
     "message": "Kopiera URL"
   },
-  "backend-000240": {
+  "frontend-000240": {
     "message": "Kopiera användare"
   },
-  "backend-000241": {
+  "frontend-000241": {
     "message": "Kopiera lösenord"
   },
-  "backend-000242": {
+  "frontend-000242": {
     "message": "$ELEMENT$ är kopierad till clipboard",
     "placeholders": {
       "element": {
@@ -658,7 +658,7 @@
       }
     }
   },
-  "backend-000243": {
+  "frontend-000243": {
     "message": "Misslyckades med att kopiera $ELEMENT$ till clipboard",
     "placeholders": {
       "element": {
@@ -666,7 +666,7 @@
       }
     }
   },
-  "backend-000244": {
+  "frontend-000244": {
     "message": "Senast ändrad $DATE$",
     "placeholders": {
       "date": {
@@ -674,34 +674,34 @@
       }
     }
   },
-  "backend-000245": {
+  "frontend-000245": {
     "message": "Återställ version"
   },
-  "backend-000246": {
+  "frontend-000246": {
     "message": "Version återställd"
   },
-  "backend-000247": {
+  "frontend-000247": {
     "message": "Misslyckadess med att återställa version"
   },
-  "backend-000248": {
+  "frontend-000248": {
     "message": "Vill du återställa version?"
   },
-  "backend-000249": {
+  "frontend-000249": {
     "message": "Delad med dig"
   },
-  "backend-000250": {
+  "frontend-000250": {
     "message": "Delad av dig"
   },
-  "backend-000251": {
+  "frontend-000251": {
     "message": "Statistik"
   },
-  "backend-000252": {
+  "frontend-000252": {
     "message": "Skapad"
   },
-  "backend-000253": {
+  "frontend-000253": {
     "message": "Senaste uppdaterad"
   },
-  "backend-000254": {
+  "frontend-000254": {
     "message": "$COUNT$ versioner",
     "placeholders": {
       "count": {
@@ -709,10 +709,10 @@
       }
     }
   },
-  "backend-000255": {
+  "frontend-000255": {
     "message": "Delningar"
   },
-  "backend-000256": {
+  "frontend-000256": {
     "message": "$COUNT$ delningar",
     "placeholders": {
       "count": {
@@ -720,37 +720,37 @@
       }
     }
   },
-  "backend-000727": {
+  "frontend-000727": {
     "message": "Kryptering på server-sidan"
   },
-  "backend-000728": {
+  "frontend-000728": {
     "message": "Avancerad kryptering på servern"
   },
-  "backend-000729": {
+  "frontend-000729": {
     "message": "Kryptering på klient-sidan"
   },
-  "backend-000264": {
+  "frontend-000264": {
     "message": "Mer"
   },
-  "backend-000265": {
+  "frontend-000265": {
     "message": "Backup & återställ"
   },
-  "backend-000526": {
+  "frontend-000526": {
     "message": "Browser Extension"
   },
-  "backend-000267": {
+  "frontend-000267": {
     "message": "Handbok"
   },
-  "backend-000268": {
+  "frontend-000268": {
     "message": "Applikationer & Tillägg"
   },
-  "backend-000274": {
+  "frontend-000274": {
     "message": "Sök användare"
   },
-  "backend-000275": {
+  "frontend-000275": {
     "message": "Sätt utgångs datum"
   },
-  "backend-000276": {
+  "frontend-000276": {
     "message": "Utgångdatum $DATETIME$",
     "placeholders": {
       "datetime": {
@@ -758,16 +758,16 @@
       }
     }
   },
-  "backend-000277": {
+  "frontend-000277": {
     "message": "Välj utgångsdatum"
   },
-  "backend-000278": {
+  "frontend-000278": {
     "message": "Välj ett giltigt datum"
   },
-  "backend-000279": {
+  "frontend-000279": {
     "message": "Ogiltigt datum"
   },
-  "backend-000280": {
+  "frontend-000280": {
     "message": "Användaren $UID$ existerar ej",
     "placeholders": {
       "uid": {
@@ -775,7 +775,7 @@
       }
     }
   },
-  "backend-000281": {
+  "frontend-000281": {
     "message": "Misslyckades med att dela lösenord: $MESSAGE$",
     "placeholders": {
       "message": {
@@ -783,31 +783,31 @@
       }
     }
   },
-  "backend-000282": {
+  "frontend-000282": {
     "message": "Toggla skriv-behörighet"
   },
-  "backend-000283": {
+  "frontend-000283": {
     "message": "Toggla delnings-behörighet"
   },
-  "backend-000284": {
+  "frontend-000284": {
     "message": "Avbryt delning"
   },
-  "backend-000285": {
+  "frontend-000285": {
     "message": "Datum"
   },
-  "backend-000286": {
+  "frontend-000286": {
     "message": "Standard Cache (0 filer, 0 B)"
   },
-  "backend-000287": {
+  "frontend-000287": {
     "message": "Profilbilder (0 filer, 0 B)"
   },
-  "backend-000288": {
+  "frontend-000288": {
     "message": "Favicons (0 filer, 0 B)"
   },
-  "backend-000289": {
+  "frontend-000289": {
     "message": "Förhandsgranska (0 filer, 0 B)"
   },
-  "backend-000290": {
+  "frontend-000290": {
     "message": "Lösenord (0 filer, 0 B)"
   },
   "backups-000046": {
@@ -825,61 +825,61 @@
   "backups-000092": {
     "message": "Tab"
   },
-  "backend-000291": {
+  "frontend-000291": {
     "message": "Ändrad"
   },
-  "backend-000292": {
+  "frontend-000292": {
     "message": "Ändrad"
   },
-  "backend-000293": {
+  "frontend-000293": {
     "message": "Editerad"
   },
-  "backend-000294": {
+  "frontend-000294": {
     "message": "Skapad"
   },
-  "backend-000295": {
+  "frontend-000295": {
     "message": "Version"
   },
-  "backend-000296": {
+  "frontend-000296": {
     "message": "URL"
   },
-  "backend-000297": {
+  "frontend-000297": {
     "message": "Överårdnad"
   },
-  "backend-000298": {
+  "frontend-000298": {
     "message": "Radera alla objekt"
   },
-  "backend-000299": {
+  "frontend-000299": {
     "message": "Återställ alla objekt"
   },
-  "backend-000300": {
+  "frontend-000300": {
     "message": "Återställ objekt"
   },
-  "backend-000301": {
+  "frontend-000301": {
     "message": "Återställ alla kastade objekt?"
   },
-  "backend-000302": {
+  "frontend-000302": {
     "message": "Återställ detta objekt"
   },
-  "backend-000303": {
+  "frontend-000303": {
     "message": "Objekt återställda"
   },
-  "backend-000304": {
+  "frontend-000304": {
     "message": "Töm papperskorgen"
   },
-  "backend-000305": {
+  "frontend-000305": {
     "message": "Radera alla objekt i papperskorgen?"
   },
-  "backend-000306": {
+  "frontend-000306": {
     "message": "Papperskorg tömd"
   },
-  "backend-000307": {
+  "frontend-000307": {
     "message": "Sök"
   },
-  "backend-000308": {
+  "frontend-000308": {
     "message": "Använd sökrutan för att söka"
   },
-  "backend-000309": {
+  "frontend-000309": {
     "message": "Sök överallt för \"$QUERY$\"",
     "placeholders": {
       "query": {
@@ -887,160 +887,160 @@
       }
     }
   },
-  "backend-000266": {
+  "frontend-000266": {
     "message": "Inställningar"
   },
-  "backend-000528": {
+  "frontend-000528": {
     "message": "Regler för lösenord"
   },
-  "backend-000529": {
+  "frontend-000529": {
     "message": "Markera duplikat"
   },
-  "backend-000530": {
+  "frontend-000530": {
     "message": "Maximal ålder i dagar"
   },
-  "backend-000531": {
+  "frontend-000531": {
     "message": "Lösenordsgenerator"
   },
-  "backend-000532": {
+  "frontend-000532": {
     "message": "Styrka"
   },
-  "backend-000533": {
+  "frontend-000533": {
     "message": "Inkludera siffror"
   },
-  "backend-000534": {
+  "frontend-000534": {
     "message": "Inkludera special tecken"
   },
-  "backend-000535": {
+  "frontend-000535": {
     "message": "Användargränssnitt"
   },
-  "backend-000536": {
+  "frontend-000536": {
     "message": "Inledande sektion"
   },
-  "backend-000537": {
+  "frontend-000537": {
     "message": "Alla lösenord"
   },
-  "backend-000538": {
+  "frontend-000538": {
     "message": "Lösenord i listvy"
   },
-  "backend-000539": {
+  "frontend-000539": {
     "message": "Använd detta fält som titel"
   },
-  "backend-000540": {
+  "frontend-000540": {
     "message": "Sortera efter"
   },
-  "backend-000541": {
+  "frontend-000541": {
     "message": "Titel fält"
   },
-  "backend-000542": {
+  "frontend-000542": {
     "message": "Åtgärd för enkelklick"
   },
-  "backend-000543": {
+  "frontend-000543": {
     "message": "Åtgärd för dubbelklick"
   },
-  "backend-000544": {
+  "frontend-000544": {
     "message": "Kopiera lösenord"
   },
-  "backend-000545": {
+  "frontend-000545": {
     "message": "Kopiera användarnamn"
   },
-  "backend-000546": {
+  "frontend-000546": {
     "message": "Kopiera Webbsida"
   },
-  "backend-000547": {
+  "frontend-000547": {
     "message": "Visa detailjer"
   },
-  "backend-000548": {
+  "frontend-000548": {
     "message": "Visa \"Kopiera\" alternativ i menyn"
   },
-  "backend-000549": {
+  "frontend-000549": {
     "message": "Visa användarnamn i listvyn"
   },
-  "backend-000550": {
+  "frontend-000550": {
     "message": "Visa taggar i listvyn"
   },
-  "backend-000551": {
+  "frontend-000551": {
     "message": "Visa dolda \"custom\" poster"
   },
-  "backend-000552": {
+  "frontend-000552": {
     "message": "Sök när jag skriver"
   },
-  "backend-000553": {
+  "frontend-000553": {
     "message": "Sök överallt med \"enter\""
   },
-  "backend-000554": {
+  "frontend-000554": {
     "message": "Visa alltid söksektionen"
   },
-  "backend-000555": {
+  "frontend-000555": {
     "message": "Notifieringar"
   },
-  "backend-000556": {
+  "frontend-000556": {
     "message": "Skicka e-post för"
   },
-  "backend-000557": {
+  "frontend-000557": {
     "message": "Säkerhetsrelaterade händelser"
   },
-  "backend-000558": {
+  "frontend-000558": {
     "message": "Lösenord delade med mig"
   },
-  "backend-000559": {
+  "frontend-000559": {
     "message": "Visa meddelanden för"
   },
-  "backend-000560": {
+  "frontend-000560": {
     "message": "Andra fel"
   },
-  "backend-000561": {
+  "frontend-000561": {
     "message": "Riskområde"
   },
-  "backend-000562": {
+  "frontend-000562": {
     "message": "Återställ alla inställningar"
   },
-  "backend-000563": {
+  "frontend-000563": {
     "message": "Återställ"
   },
-  "backend-000564": {
+  "frontend-000564": {
     "message": "Radera allt"
   },
-  "backend-000565": {
+  "frontend-000565": {
     "message": "RADERA ALLT"
   },
-  "backend-000566": {
+  "frontend-000566": {
     "message": "Återställ användarkonto"
   },
-  "backend-000567": {
+  "frontend-000567": {
     "message": "Vy"
   },
-  "backend-000669": {
+  "frontend-000669": {
     "message": "Standard"
   },
-  "backend-000568": {
+  "frontend-000568": {
     "message": "Avancerat"
   },
-  "backend-000310": {
+  "frontend-000310": {
     "message": "Det finns inget här"
   },
-  "backend-000311": {
+  "frontend-000311": {
     "message": "Tryck på \"+\" för att lägga till något"
   },
-  "backend-000312": {
+  "frontend-000312": {
     "message": "Raderade objekt kommer att visas här"
   },
-  "backend-000313": {
+  "frontend-000313": {
     "message": "Det finns för tillfället inga lösenord som delas med dig"
   },
-  "backend-000314": {
+  "frontend-000314": {
     "message": "Du har inte delat några lösenord"
   },
-  "backend-000315": {
+  "frontend-000315": {
     "message": "Dina favoriter visas här"
   },
-  "backend-000316": {
+  "frontend-000316": {
     "message": "Du bör kontrollera övriga sektioner"
   },
-  "backend-000317": {
+  "frontend-000317": {
     "message": "Detta är förmodligen bra"
   },
-  "backend-000318": {
+  "frontend-000318": {
     "message": "Gå till $HREF$",
     "placeholders": {
       "href": {
@@ -1048,7 +1048,7 @@
       }
     }
   },
-  "backend-000320": {
+  "frontend-000320": {
     "message": "Bild $COUNT$: $TITLE$",
     "placeholders": {
       "count": {
@@ -1059,7 +1059,7 @@
       }
     }
   },
-  "backend-000321": {
+  "frontend-000321": {
     "message": "Kan inte hämta följande sida: $MESSAGE$.",
     "placeholders": {
       "message": {
@@ -1067,25 +1067,25 @@
       }
     }
   },
-  "backend-000324": {
+  "frontend-000324": {
     "message": "Sidan hittades inte"
   },
-  "backend-000325": {
+  "frontend-000325": {
     "message": "Några frågor?"
   },
-  "backend-000326": {
+  "frontend-000326": {
     "message": "Vi hjälper dig gärna!"
   },
-  "backend-000327": {
+  "frontend-000327": {
     "message": "Hittat ett fel?"
   },
-  "backend-000328": {
+  "frontend-000328": {
     "message": "Berätta!"
   },
-  "backend-000331": {
+  "frontend-000331": {
     "message": "Nätverksfel"
   },
-  "backend-000332": {
+  "frontend-000332": {
     "message": "Kan inte ladda $MODULE$",
     "placeholders": {
       "module": {
@@ -1093,13 +1093,13 @@
       }
     }
   },
-  "backend-000333": {
+  "frontend-000333": {
     "message": "Sortera på namn"
   },
-  "backend-000334": {
+  "frontend-000334": {
     "message": "Sortera på datum"
   },
-  "backend-000335": {
+  "frontend-000335": {
     "message": "$PASSWORDS$ lösenord",
     "placeholders": {
       "passwords": {
@@ -1107,10 +1107,10 @@
       }
     }
   },
-  "backend-000336": {
+  "frontend-000336": {
     "message": "1 lösenord"
   },
-  "backend-000337": {
+  "frontend-000337": {
     "message": "$FOLDERS$ mappar",
     "placeholders": {
       "folders": {
@@ -1118,10 +1118,10 @@
       }
     }
   },
-  "backend-000338": {
+  "frontend-000338": {
     "message": "1 mapp"
   },
-  "backend-000339": {
+  "frontend-000339": {
     "message": "$TAGS$ tagg",
     "placeholders": {
       "tags": {
@@ -1129,106 +1129,106 @@
       }
     }
   },
-  "backend-000340": {
+  "frontend-000340": {
     "message": "1 tagg"
   },
-  "backend-000341": {
+  "frontend-000341": {
     "message": "Ingenting"
   },
-  "backend-000342": {
+  "frontend-000342": {
     "message": " och "
   },
-  "backend-000343": {
+  "frontend-000343": {
     "message": "passa"
   },
-  "backend-000344": {
+  "frontend-000344": {
     "message": "passar"
   },
-  "backend-000363": {
+  "frontend-000363": {
     "message": "ja"
   },
-  "backend-000364": {
+  "frontend-000364": {
     "message": "nej"
   },
-  "backend-000365": {
+  "frontend-000365": {
     "message": "ja"
   },
-  "backend-000366": {
+  "frontend-000366": {
     "message": "nej"
   },
-  "backend-000569": {
+  "frontend-000569": {
     "message": "Markera lösenord som \"osäkert\" om det används för flera konton"
   },
-  "backend-000570": {
+  "frontend-000570": {
     "message": "Markera lösenord som \"osäkert\" om det används längre tid än specifierat"
   },
-  "backend-000571": {
+  "frontend-000571": {
     "message": "En högre säkerhet kräver längre och mer komplexa lösenord"
   },
-  "backend-000572": {
+  "frontend-000572": {
     "message": "Visar det valda attributet som titel i listvyn"
   },
-  "backend-000573": {
+  "frontend-000573": {
     "message": "Sorterar lösenorden efter det valda attributet när sortering efter namn är valt"
   },
-  "backend-000574": {
+  "frontend-000574": {
     "message": "Åtgärd som utförs när du klickar på ett lösenord i listvyn"
   },
-  "backend-000575": {
+  "frontend-000575": {
     "message": "Åtgärd som utförs när du dubbelklickar på ett lösenord i listvyn"
   },
-  "backend-000576": {
+  "frontend-000576": {
     "message": "Visar alternativen för kopiering av lösenord och användarnamn i menyn"
   },
-  "backend-000577": {
+  "frontend-000577": {
     "message": "Området som kommer att visas när appen öppnas"
   },
-  "backend-000578": {
+  "frontend-000578": {
     "message": "Visa alltid relaterat användarnamnet för lösenordet i listvyn"
   },
-  "backend-000579": {
+  "frontend-000579": {
     "message": "Visar taggarna för varje lösenord i listvyn. Ökar laddningstiden"
   },
-  "backend-000580": {
+  "frontend-000580": {
     "message": "Visar dolda anpassade fält i redigeringsformuläret och i lösenordsinformationen"
   },
-  "backend-000670": {
+  "frontend-000670": {
     "message": "Startar sökningen så snart som en tangent trycks ned"
   },
-  "backend-000671": {
+  "frontend-000671": {
     "message": "Sök var som helst när \"Enter\" trycks ned i sökrutan"
   },
-  "backend-000583": {
+  "frontend-000583": {
     "message": "Visar alltid global sökning i navigeringen"
   },
-  "backend-000581": {
+  "frontend-000581": {
     "message": "Skicka e-postmeddelanden om läkta lösenord eller andra säkerhetsproblem"
   },
-  "backend-000582": {
+  "frontend-000582": {
     "message": "Skicka e-postmeddelanden när andra vill dela lösenord med dig"
   },
-  "backend-000584": {
+  "frontend-000584": {
     "message": "Uppmärksammar dig om läkta lösenord eller andra säkerhetsproblem"
   },
-  "backend-000585": {
+  "frontend-000585": {
     "message": "Uppmärksammar dig när andra vill dela lösenord med dig"
   },
-  "backend-000586": {
+  "frontend-000586": {
     "message": "Uppmärksammar dig när bakgrundsprocesser misslyckas"
   },
-  "backend-000587": {
+  "frontend-000587": {
     "message": "Återställ alla inställningar på den här sidan till standardvärden"
   },
-  "backend-000588": {
+  "frontend-000588": {
     "message": "Detta återställer alla inställningar till standardvärden. Vill du fortsätta?"
   },
-  "backend-000589": {
+  "frontend-000589": {
     "message": "Återställ inställningar till standardvärden och radera lösenord, mappar och taggar"
   },
-  "backend-000368": {
+  "frontend-000368": {
     "message": "Du har nått maximal längd på 4096 tecken"
   },
-  "backend-000369": {
+  "frontend-000369": {
     "message": "Ingenting kunde hittas för \"$QUERY$\"",
     "placeholders": {
       "query": {
@@ -1236,7 +1236,7 @@
       }
     }
   },
-  "backend-000370": {
+  "frontend-000370": {
     "message": "Denan sidan \"$PAGE$\" kunde inte hämtas från servern.",
     "placeholders": {
       "page": {
@@ -1244,28 +1244,28 @@
       }
     }
   },
-  "backend-000371": {
+  "frontend-000371": {
     "message": "En del data väntar på att synkroniseras"
   },
-  "backend-000590": {
+  "frontend-000590": {
     "message": "Är du säker på att du vill ta bort alla dina inställningar, lösenord, mappar och taggar?\nDetta kan INTE ångras."
   },
-  "backend-000376": {
+  "frontend-000376": {
     "message": "År 2018 släpptes den första versionen av \"Lösenord\" till NextCloud. Tack för att du använder applikationen."
   },
-  "frontend-000377": {
+  "backend-000377": {
     "message": "HTTPS krävs"
   },
-  "frontend-000378": {
+  "backend-000378": {
     "message": "ladda om sidan"
   },
-  "frontend-000379": {
+  "backend-000379": {
     "message": "forum"
   },
-  "frontend-000380": {
+  "backend-000380": {
     "message": "dokumentation"
   },
-  "frontend-000381": {
+  "backend-000381": {
     "message": "Du kan prova att $STR_1$ sidan med https.",
     "placeholders": {
       "str_1": {
@@ -1273,7 +1273,7 @@
       }
     }
   },
-  "frontend-000382": {
+  "backend-000382": {
     "message": "Denna applikation kräver $STR_1$ för att fungera säkert.",
     "placeholders": {
       "str_1": {
@@ -1281,7 +1281,7 @@
       }
     }
   },
-  "frontend-000383": {
+  "backend-000383": {
     "message": "Detta är inget fel. Besök $STR_1$ om du behöver hjälp.",
     "placeholders": {
       "str_1": {
@@ -1289,10 +1289,10 @@
       }
     }
   },
-  "frontend-000384": {
+  "backend-000384": {
     "message": "Läs rapporten nedan för att felsöka problemet."
   },
-  "frontend-000385": {
+  "backend-000385": {
     "message": "Läs $STR_1$ för att sätta upp servern att använda https.",
     "placeholders": {
       "str_1": {
@@ -1300,7 +1300,7 @@
       }
     }
   },
-  "frontend-000386": {
+  "backend-000386": {
     "message": "Läs $STR_1$ om du använder en proxy.",
     "placeholders": {
       "str_1": {
@@ -1308,7 +1308,7 @@
       }
     }
   },
-  "frontend-000387": {
+  "backend-000387": {
     "message": "Besök $STR_1$ för att skaffa ett gratis HTTPS-certifikat.",
     "placeholders": {
       "str_1": {
@@ -1316,10 +1316,10 @@
       }
     }
   },
-  "frontend-000388": {
+  "backend-000388": {
     "message": "Om felet kvarstår bör du kontakta administratören."
   },
-  "frontend-000389": {
+  "backend-000389": {
     "message": "Lösenord $STR_1$ - $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1330,151 +1330,151 @@
       }
     }
   },
-  "frontend-000390": {
+  "backend-000390": {
     "message": "Öppna dokumentationen"
   },
-  "frontend-000391": {
+  "backend-000391": {
     "message": "aldrig"
   },
-  "frontend-000392": {
+  "backend-000392": {
     "message": "Intern databehandling"
   },
-  "frontend-000393": {
+  "backend-000393": {
     "message": "Bildbehandling"
   },
-  "frontend-000394": {
+  "backend-000394": {
     "message": "Imagick/GMagick (rekommenderas)"
   },
-  "frontend-000395": {
+  "backend-000395": {
     "message": "Externa tjänster"
   },
-  "frontend-000396": {
+  "backend-000396": {
     "message": "Säkerhetskontrollera lösenord"
   },
-  "frontend-000397": {
+  "backend-000397": {
     "message": "Har jag blivit 'pwned'? (rekommenderas)"
   },
-  "frontend-000398": {
+  "backend-000398": {
     "message": "25 miljoner lösenord (lokal)"
   },
-  "frontend-000399": {
+  "backend-000399": {
     "message": "5 miljoner lösenord (lokal)"
   },
-  "frontend-000400": {
+  "backend-000400": {
     "message": "25Mio lösenord & Hibp?"
   },
-  "frontend-000401": {
+  "backend-000401": {
     "message": "Lösenordsgenerator"
   },
-  "frontend-000402": {
+  "backend-000402": {
     "message": "Lokal ordbok"
   },
-  "frontend-000403": {
+  "backend-000403": {
     "message": "Slumpmässiga tecken"
   },
-  "frontend-000404": {
+  "backend-000404": {
     "message": "watchout4snakes.com"
   },
-  "frontend-000405": {
+  "backend-000405": {
     "message": "Leipzig Corpora Collection (rekommenderas)"
   },
-  "frontend-000406": {
+  "backend-000406": {
     "message": "Favicon tjänst"
   },
-  "frontend-000407": {
+  "backend-000407": {
     "message": "Lokal ikonsökningstjänst"
   },
-  "frontend-000408": {
+  "backend-000408": {
     "message": "Besticon (rekommenderas)"
   },
-  "frontend-000409": {
+  "backend-000409": {
     "message": "Ingen"
   },
-  "frontend-000410": {
+  "backend-000410": {
     "message": "Förhandsgrnaska webbsida"
   },
-  "frontend-000411": {
+  "backend-000411": {
     "message": "Förhandsgranska API"
   },
-  "frontend-000412": {
+  "backend-000412": {
     "message": "Pageres/PhantomJS (lokal)"
   },
-  "frontend-000413": {
+  "backend-000413": {
     "message": "WKHTML (lokal)"
   },
-  "frontend-000414": {
+  "backend-000414": {
     "message": "Screenshotapi.io"
   },
-  "frontend-000415": {
+  "backend-000415": {
     "message": "Standardinställningar fär e-post"
   },
-  "frontend-000416": {
+  "backend-000416": {
     "message": "Skicka e-post vid säkerhetsproblem"
   },
-  "frontend-000417": {
+  "backend-000417": {
     "message": "Skicka e-post vid delningar"
   },
-  "frontend-000418": {
+  "backend-000418": {
     "message": "Andra inställningar"
   },
-  "frontend-000419": {
+  "backend-000419": {
     "message": "Ta bort raderade objekt från databasen"
   },
-  "frontend-000420": {
+  "backend-000420": {
     "message": "Visa \"Nightly Updates\""
   },
-  "frontend-000421": {
+  "backend-000421": {
     "message": "Aldrig"
   },
-  "frontend-000422": {
+  "backend-000422": {
     "message": "Omedelbart"
   },
-  "frontend-000423": {
+  "backend-000423": {
     "message": "Efter två timmar"
   },
-  "frontend-000424": {
+  "backend-000424": {
     "message": "Efter en dag"
   },
-  "frontend-000425": {
+  "backend-000425": {
     "message": "Efter två veckor"
   },
-  "frontend-000426": {
+  "backend-000426": {
     "message": "Efter en månad"
   },
-  "frontend-000427": {
+  "backend-000427": {
     "message": "Efter ett år"
   },
-  "frontend-000428": {
+  "backend-000428": {
     "message": "Inställningar för säkerhetskopia"
   },
-  "frontend-000429": {
+  "backend-000429": {
     "message": "Intervall för säkerhetskopia"
   },
-  "frontend-000430": {
+  "backend-000430": {
     "message": "Varje timme"
   },
-  "frontend-000431": {
+  "backend-000431": {
     "message": "Varje sex timmar"
   },
-  "frontend-000432": {
+  "backend-000432": {
     "message": "Varje dag"
   },
-  "frontend-000433": {
+  "backend-000433": {
     "message": "Varje två dagar"
   },
-  "frontend-000434": {
+  "backend-000434": {
     "message": "Varje vecka"
   },
-  "frontend-000435": {
+  "backend-000435": {
     "message": "Varje två veckor"
   },
-  "frontend-000436": {
+  "backend-000436": {
     "message": "Antal kopior att spara"
   },
-  "frontend-000437": {
+  "backend-000437": {
     "message": "Caches"
   },
-  "frontend-000438": {
+  "backend-000438": {
     "message": "Standard cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1485,7 +1485,7 @@
       }
     }
   },
-  "frontend-000439": {
+  "backend-000439": {
     "message": "Profil cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1496,7 +1496,7 @@
       }
     }
   },
-  "frontend-000440": {
+  "backend-000440": {
     "message": "Favicon cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1507,7 +1507,7 @@
       }
     }
   },
-  "frontend-000441": {
+  "backend-000441": {
     "message": "Förhandsgranska cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1518,7 +1518,7 @@
       }
     }
   },
-  "frontend-000442": {
+  "backend-000442": {
     "message": "Lösenord cache ($STR_1$ filer, $STR_1$)",
     "placeholders": {
       "str_1": {
@@ -1529,34 +1529,34 @@
       }
     }
   },
-  "frontend-000443": {
+  "backend-000443": {
     "message": "Töm"
   },
-  "frontend-000444": {
+  "backend-000444": {
     "message": "Töm denna cache"
   },
-  "frontend-000445": {
+  "backend-000445": {
     "message": "Du kan inte tömma denna cache om du använder en gemensam tjänst"
   },
-  "frontend-000446": {
+  "backend-000446": {
     "message": "Sparad"
   },
-  "frontend-000447": {
+  "backend-000447": {
     "message": "Tömd"
   },
-  "frontend-000448": {
+  "backend-000448": {
     "message": "Misslyckad"
   },
-  "frontend-000449": {
+  "backend-000449": {
     "message": "Behöver du hjälp"
   },
-  "frontend-000450": {
+  "backend-000450": {
     "message": "hittat ett programeringsfel"
   },
-  "frontend-000451": {
+  "backend-000451": {
     "message": "letar efter dokumentationen"
   },
-  "frontend-000452": {
+  "backend-000452": {
     "message": "$STR_1$, $STR_1$ eller $STR_1$? Vi kan hjälpa till!",
     "placeholders": {
       "str_1": {
@@ -1570,7 +1570,7 @@
       }
     }
   },
-  "frontend-000453": {
+  "backend-000453": {
     "message": "$STRING_1$ $STRING_2$ stöds inte längre.",
     "placeholders": {
       "string_1": {
@@ -1581,10 +1581,10 @@
       }
     }
   },
-  "frontend-000454": {
+  "backend-000454": {
     "message": "Lösenordsappen kräver https."
   },
-  "frontend-000455": {
+  "backend-000455": {
     "message": "Användande av $STR_1$ kan orsaka långa väntetider.",
     "placeholders": {
       "str_1": {
@@ -1592,13 +1592,13 @@
       }
     }
   },
-  "frontend-000456": {
+  "backend-000456": {
     "message": "Kontrollera systemkrav."
   },
-  "frontend-000457": {
+  "backend-000457": {
     "message": "Lösenordet har inte delats"
   },
-  "frontend-000458": {
+  "backend-000458": {
     "message": "Lösenordet kunde inte delas med $STRING_1$ då en delning redan existerar.",
     "placeholders": {
       "string_1": {
@@ -1606,25 +1606,25 @@
       }
     }
   },
-  "frontend-000459": {
+  "backend-000459": {
     "message": "Du har ett osäkert lösenord"
   },
-  "frontend-000460": {
+  "backend-000460": {
     "message": "Du har osäkera lösenord"
   },
-  "frontend-000461": {
+  "backend-000461": {
     "message": "Ett av dina lösenord är inte längre säkert."
   },
-  "frontend-000462": {
+  "backend-000462": {
     "message": "Ett eller flera av dina lösenord är inte längre säkra."
   },
-  "frontend-000463": {
+  "backend-000463": {
     "message": "Lösenordsappen kontrollerar regelbundet om dina lösenord har läkts i en lösenordsläcka."
   },
-  "frontend-000464": {
+  "backend-000464": {
     "message": "Detta säkerhetstest har visat att ett av dina lösenord är osäkert."
   },
-  "frontend-000465": {
+  "backend-000465": {
     "message": "Detta säkerhetstest har visat att $STR_1$ av dina lösenord är osäkert.",
     "placeholders": {
       "str_1": {
@@ -1632,37 +1632,37 @@
       }
     }
   },
-  "frontend-000466": {
+  "backend-000466": {
     "message": "Det betyder att lösenordet finns på internet och äventyrar säkerheten på ditt konto."
   },
-  "frontend-000467": {
+  "backend-000467": {
     "message": "Det betyder att lösenorden kan hittas på internet och äventyrar säkerheten på dina konton."
   },
-  "frontend-000468": {
+  "backend-000468": {
     "message": "Lösenordet var därför märkt som osäkert och bör ändras."
   },
-  "frontend-000469": {
+  "backend-000469": {
     "message": "Lösenorden märktes därför som osäkra och bör ändras."
   },
-  "frontend-000470": {
+  "backend-000470": {
     "message": "Du kan skapa ett nytt, säkert lösenord i lösenordsappen."
   },
-  "frontend-000471": {
+  "backend-000471": {
     "message": "Du kan skapa nya, säkra lösenord i lösenordsappen."
   },
-  "frontend-000472": {
+  "backend-000472": {
     "message": "Ändra ditt lösenord nu"
   },
-  "frontend-000473": {
+  "backend-000473": {
     "message": "Ändra dina lösenord nu"
   },
-  "frontend-000474": {
+  "backend-000474": {
     "message": "Öppna lösenordsappen för att ändra det."
   },
-  "frontend-000475": {
+  "backend-000475": {
     "message": "Öppna lösenordsappen för att ändra dem."
   },
-  "frontend-000476": {
+  "backend-000476": {
     "message": "$STR_1$ delar ett lösenord med dig.",
     "placeholders": {
       "str_1": {
@@ -1670,7 +1670,7 @@
       }
     }
   },
-  "frontend-000477": {
+  "backend-000477": {
     "message": "$STR_1$ delar $STR_1$ lösenord med dig.",
     "placeholders": {
       "str_1": {
@@ -1681,7 +1681,7 @@
       }
     }
   },
-  "frontend-000478": {
+  "backend-000478": {
     "message": "$STRING_4$ och $STRING_3$ delar $STRING_1$ lösenord med dig.",
     "placeholders": {
       "string_4": {
@@ -1695,7 +1695,7 @@
       }
     }
   },
-  "frontend-000479": {
+  "backend-000479": {
     "message": "$STRING_5$, $STRING_4$ och $STRING_3$ delar $STRING_1$ lösenord med dig.",
     "placeholders": {
       "string_5": {
@@ -1712,7 +1712,7 @@
       }
     }
   },
-  "frontend-000480": {
+  "backend-000480": {
     "message": "$STRING_5$, $STRING_4$ och $STRING_2$ andra delar $STRING_1$ lösenord med dig.",
     "placeholders": {
       "string_5": {
@@ -1729,13 +1729,13 @@
       }
     }
   },
-  "frontend-000481": {
+  "backend-000481": {
     "message": "Öppna lösenordssappen för att se den."
   },
-  "frontend-000482": {
+  "backend-000482": {
     "message": "Öppna lösenordssappen för att se dem."
   },
-  "frontend-000483": {
+  "backend-000483": {
     "message": "Ett lösenord delades med dig $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1743,7 +1743,7 @@
       }
     }
   },
-  "frontend-000484": {
+  "backend-000484": {
     "message": "Flera lösenord delades med dig $STR_1$",
     "placeholders": {
       "str_1": {
@@ -1751,13 +1751,13 @@
       }
     }
   },
-  "frontend-000485": {
+  "backend-000485": {
     "message": "Visa lösenord delade med mig"
   },
-  "frontend-000486": {
+  "backend-000486": {
     "message": "Ett av dina lösenord kunde inte delas eftersom mottagaren redan har tillgång till det."
   },
-  "frontend-000487": {
+  "backend-000487": {
     "message": "$STR_1$ av dina lösenord kunde inte delas eftersom mottagaren redan har tillgång till dem.",
     "placeholders": {
       "str_1": {
@@ -1765,13 +1765,13 @@
       }
     }
   },
-  "frontend-000489": {
+  "backend-000489": {
     "message": "Att dela lösenord som delas med dig kan ibland skapa en rekursiv loop."
   },
-  "frontend-000490": {
+  "backend-000490": {
     "message": "För att undvika detta delas inte dessa lösenord."
   },
-  "frontend-000496": {
+  "backend-000496": {
     "message": "Borttagen användare ($STR_1$)",
     "placeholders": {
       "str_1": {

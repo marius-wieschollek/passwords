@@ -1,14 +1,14 @@
 {
-  "backend-000177": {
+  "frontend-000177": {
     "message": "Colour"
   },
-  "backend-000185": {
+  "frontend-000185": {
     "message": "Favourite"
   },
-  "backend-000152": {
+  "frontend-000152": {
     "message": "Favourites"
   },
-  "backend-000148": {
+  "frontend-000148": {
     "message": "Passwords"
   },
   "backups-000045": {
@@ -26,7 +26,7 @@
   "backups-000050": {
     "message": "Tag Ids"
   },
-  "backend-000256": {
+  "frontend-000256": {
     "message": "Shared $COUNT$ times",
     "placeholders": {
       "count": {
@@ -34,28 +34,28 @@
       }
     }
   },
-  "backend-000315": {
+  "frontend-000315": {
     "message": "Your favourites will appear here"
   },
-  "backend-000277": {
+  "frontend-000277": {
     "message": "Choose an expiration date or leave empty to share forever"
   },
-  "backend-000353": {
+  "frontend-000353": {
     "message": "System Maintenance"
   },
-  "backend-000354": {
+  "frontend-000354": {
     "message": "Not Available"
   },
-  "backend-000355": {
+  "frontend-000355": {
     "message": "System"
   },
-  "backend-000356": {
+  "frontend-000356": {
     "message": "Public Access"
   },
-  "backend-000357": {
+  "frontend-000357": {
     "message": "Automatic Background Task"
   },
-  "backend-000358": {
+  "frontend-000358": {
     "message": "Server Command Line"
   }
 }
