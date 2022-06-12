@@ -5,6 +5,7 @@
 src/css/
 
 # JS files
+src/l10n/
 src/js/Static/
 
 # Other files

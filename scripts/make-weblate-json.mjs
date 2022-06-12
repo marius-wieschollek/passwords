@@ -68,37 +68,30 @@ function processStrings(language, section, translations, database) {
 
 function createTranslationItem(string) {
     let placeholders = {},
-        matches      = string.match(/%\d+\$([ds])/g),
+        matches      = string.match(/%(\d+\$)?([ds])/g),
         counter      = 0;
 
     if(matches) {
         for(let match of matches) {
-            let i    = parseInt(match[1]),
-                type = match[3];
-            if(i > counter) {
-                counter = i;
+            let key,
+                index;
+
+            if(match.length === 2) {
+                let type = match[1];
+                counter++;
+                index = counter;
+
+                key = `${type === 's' ? 'STR_':'NUM_'}${counter}`;
+            } else {
+                let i    = parseInt(match[1]),
+                    type = match[3];
+
+                index = i;
+                key = `${type === 's' ? 'STRING_':'NUMBER_'}${i}`;
             }
 
-            let key = `${type === 's' ? 'STRING_':'NUMBER_'}${i}`;
             placeholders[key.toLowerCase()] = {
-                content: `$${i}`
-            };
-
-            while(string.indexOf(match) !== -1) {
-                string = string.replace(match, '$' + key + '$');
-            }
-        }
-    }
-
-    matches = string.match(/%([ds])/g);
-    if(matches) {
-        for(let match of matches) {
-            counter++;
-            let type = match[1];
-
-            let key = `${type === 's' ? 'STR_':'NUM_'}${counter}`;
-            placeholders[key.toLowerCase()] = {
-                content: `$${counter}`
+                content: `$${index}`
             };
 
             while(string.indexOf(match) !== -1) {
@@ -124,7 +117,7 @@ function createTranslationItem(string) {
         }
     }
 
-    if(counter) {
+    if(Object.keys(placeholders).length > 0) {
         return {message: string, placeholders};
     }
 
