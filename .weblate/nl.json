@@ -41,9 +41,6 @@
   "backups-000048": {
     "message": "Bovenliggende map"
   },
-  "backups-000146": {
-    "message": "Map Id"
-  },
   "backups-000051": {
     "message": "Bovenliggende map Id"
   },
@@ -649,10 +646,10 @@
   "backend-000275": {
     "message": "Stel verloopdatum in"
   },
-  "backend-000527": {
-    "message": "Verloopt op $DATE$",
+  "backend-000276": {
+    "message": "Verloopt op $DATETIME$",
     "placeholders": {
-      "date": {
+      "datetime": {
         "content": "$1"
       }
     }
@@ -920,18 +917,6 @@
   "backend-000566": {
     "message": "Account reset aangevraagd"
   },
-  "backend-000672": {
-    "message": "Veld tests"
-  },
-  "backend-000673": {
-    "message": "Client side Encryptie ondersteuning"
-  },
-  "backend-000674": {
-    "message": "Test"
-  },
-  "backend-000675": {
-    "message": "Test succesvol afgerond"
-  },
   "backend-000567": {
     "message": "Weergave"
   },
@@ -1162,12 +1147,6 @@
   },
   "backend-000371": {
     "message": "Er staat data gereed om gesynchroniseerd te worden"
-  },
-  "backend-000676": {
-    "message": "Controleert of uw wachtwoorden, mappen en tags zonder problemen versleuteld kunnen worden"
-  },
-  "backend-000677": {
-    "message": "De client side versleutelingstest is succesvol afgerond met deze browser"
   },
   "backend-000590": {
     "message": "Wilt u alle instellingen, wachtwoorden, mappen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen."

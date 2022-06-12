@@ -58,12 +58,6 @@
   "backups-000048": {
     "message": "Överårdnad"
   },
-  "backups-000146": {
-    "message": "Mapp Id"
-  },
-  "backups-000147": {
-    "message": "Tagg Ids"
-  },
   "backups-000051": {
     "message": "Överårdnad Id"
   },
@@ -756,10 +750,10 @@
   "backend-000275": {
     "message": "Sätt utgångs datum"
   },
-  "backend-000527": {
-    "message": "Utgångdatum $DATE$",
+  "backend-000276": {
+    "message": "Utgångdatum $DATETIME$",
     "placeholders": {
-      "date": {
+      "datetime": {
         "content": "$1"
       }
     }

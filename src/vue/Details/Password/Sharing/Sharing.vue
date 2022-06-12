@@ -140,7 +140,7 @@
 
                 if(this.password.share.expires) {
                     text += ' ' + Localisation.translate(
-                        'Expires {dateTime}',
+                        'Expires {datetime}',
                         this.getExpirationDate
                     );
                 }

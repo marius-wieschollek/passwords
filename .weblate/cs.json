@@ -872,10 +872,10 @@
   "backend-000275": {
     "message": "Nastavte datum skončení platnosti"
   },
-  "backend-000527": {
-    "message": "Platnost skončí $DATE$",
+  "backend-000276": {
+    "message": "Platnost skončí $DATETIME$",
     "placeholders": {
-      "date": {
+      "datetime": {
         "content": "$1"
       }
     }
@@ -1356,7 +1356,7 @@
       }
     }
   },
-  "frontend-000591": {
+  "frontend-000381": {
     "message": "Pokud si myslíte, že vámi využívaný server má zapnuté HTTPS, můžete zkusit použít $STR_1$ s HTTPS.",
     "placeholders": {
       "str_1": {
@@ -1585,8 +1585,8 @@
       }
     }
   },
-  "frontend-000592": {
-    "message": "PHP verze $STR_1$ už není podporováno",
+  "frontend-000453": {
+    "message": "PHP verze $STR_1$ $STRING_2$ už není podporováno",
     "placeholders": {
       "str_1": {
         "content": "$1"

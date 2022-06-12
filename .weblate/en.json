@@ -87,9 +87,6 @@
   "apps-000026": {
     "message": "Click the button to connect an app installed on this device or scan the QR code with the app if it's installed on another device."
   },
-  "apps-000027": {
-    "message": "To connect a new device or app, simply scan the QR code or click the link."
-  },
   "backups-000028": {
     "message": "Backup or export"
   },
@@ -521,12 +518,6 @@
   },
   "backups-000145": {
     "message": "Tags"
-  },
-  "backups-000146": {
-    "message": "Folder Id"
-  },
-  "backups-000147": {
-    "message": "Tag Ids"
   },
   "backend-000148": {
     "message": "Passwords"
@@ -1988,14 +1979,6 @@
   "backend-000526": {
     "message": "Browser Extension"
   },
-  "backend-000527": {
-    "message": "Expires $DATE$",
-    "placeholders": {
-      "date": {
-        "content": "$1"
-      }
-    }
-  },
   "backend-000528": {
     "message": "Password Rules"
   },
@@ -2184,22 +2167,6 @@
   },
   "backend-000590": {
     "message": "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this."
-  },
-  "frontend-000591": {
-    "message": "If you think your server has HTTPS enabled, you can try to $STR_1$ with HTTPS.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000592": {
-    "message": "PHP $STR_1$ is no longer supported.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
   },
   "backend-000593": {
     "message": "Edit as new"
@@ -2506,9 +2473,6 @@
   "backend-000667": {
     "message": "Tags CSV"
   },
-  "backend-000668": {
-    "message": "Field delimiter"
-  },
   "backend-000669": {
     "message": "Default"
   },
@@ -2517,24 +2481,6 @@
   },
   "backend-000671": {
     "message": "Search everywhere when the enter key is pressed in the search box"
-  },
-  "backend-000672": {
-    "message": "Field tests"
-  },
-  "backend-000673": {
-    "message": "Encryption support"
-  },
-  "backend-000674": {
-    "message": "Test"
-  },
-  "backend-000675": {
-    "message": "Test successful"
-  },
-  "backend-000676": {
-    "message": "Checks if your passwords, folders and tags can be encrypted without issues"
-  },
-  "backend-000677": {
-    "message": "The client side encryption test completed successfully on this browser"
   },
   "settings-000678": {
     "message": "Login & Session"
@@ -2889,8 +2835,5 @@
   },
   "tutorial-000790": {
     "message": "Your password needs at least 12 characters and the confirmation password must be the same"
-  },
-  "frontend-000791": {
-    "message": "WKHTML (local)"
   }
 }

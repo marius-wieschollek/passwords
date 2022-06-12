@@ -72,9 +72,6 @@
     "apps-000021": {
         "message": "Klicken Sie auf die Schaltfläche wenn Sie bereit sind um die App zu verbinden."
     },
-    "apps-000027": {
-        "message": "Um ein neues Gerät oder eine App zu verbinden, scannen Sie einfach den QR-Code oder klicken Sie auf den Link."
-    },
     "apps-000022": {
         "message": "Bitte prüfen Sie, ob diese Codes mit denen auf Ihrem Gerät oder in der App übereinstimmen:"
     },
@@ -2820,9 +2817,6 @@
     },
     "backups-000065": {
         "message": "Importformat wählen"
-    },
-    "backups-000146": {
-        "message": "Ordner Id"
     },
     "backend-000188": {
         "message": "Eigene Felder"
