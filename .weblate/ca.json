@@ -1834,9 +1834,6 @@
   "fronted-000487": {
     "message": "No s'ha pogut compartir %2 de les vostres contrasenyes perquè el destinatari ja hi té accés."
   },
-  "fronted-000488": {
-    "message": "Obriu l'aplicació Contrasenyes per veure les vostres contrasenyes compartides."
-  },
   "fronted-000489": {
     "message": "Compartir una contrasenya que s'ha compartit amb tu de vegades pot crear un bucle."
   },

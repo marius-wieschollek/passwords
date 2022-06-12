@@ -1649,9 +1649,6 @@
       }
     }
   },
-  "fronted-000488": {
-    "message": "Ouvrez l’application pour voir vos mots de passe partagés."
-  },
   "fronted-000489": {
     "message": "Partager un mot de passe qui a déjà été partagé avec vous peut créer un boucle."
   },

@@ -1810,9 +1810,6 @@
       }
     }
   },
-  "fronted-000488": {
-    "message": "Apri l'app Passwords per vedere le password condivise."
-  },
   "fronted-000489": {
     "message": "Condividere una password che è stata condivisa con te ogni tanto può causare un loop."
   },

@@ -1848,9 +1848,6 @@
       }
     }
   },
-  "fronted-000488": {
-    "message": "Open the passwords app to see your shared passwords."
-  },
   "fronted-000489": {
     "message": "Sharing a password that has been shared with you can sometimes create a loop."
   },

@@ -1771,9 +1771,6 @@
       }
     }
   },
-  "fronted-000488": {
-    "message": "Öppna lösenordssappen för att se dina delade lösenord."
-  },
   "fronted-000489": {
     "message": "Att dela lösenord som delas med dig kan ibland skapa en rekursiv loop."
   },

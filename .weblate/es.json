@@ -1839,9 +1839,6 @@
       }
     }
   },
-  "fronted-000488": {
-    "message": "Abre el app the contraseñas para ver tus contraseñas compartidas."
-  },
   "fronted-000489": {
     "message": "Compartir contraseñas que han sido compartidas contigo, a veces puede crear un bucle."
   },
