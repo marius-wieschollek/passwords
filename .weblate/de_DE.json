@@ -1,0 +1,2821 @@
+{
+  "apps-000001": {
+    "message": "offiziell"
+  },
+  "apps-000002": {
+    "message": "von $AUTHOR$",
+    "placeholders": {
+      "author": {
+        "content": "$1"
+      }
+    }
+  },
+  "apps-000003": {
+    "message": "Quelltext"
+  },
+  "apps-000004": {
+    "message": "mehr erfahren"
+  },
+  "apps-000005": {
+    "message": "Mit PassLink verbinden"
+  },
+  "apps-000006": {
+    "message": "Ein neues Gerät verbinden"
+  },
+  "apps-000007": {
+    "message": "Mittels Link verbinden"
+  },
+  "apps-000008": {
+    "message": "Namen festlegen:"
+  },
+  "apps-000009": {
+    "message": "Die Codes passen nicht"
+  },
+  "apps-000010": {
+    "message": "Die Codes stimmen überein"
+  },
+  "apps-000011": {
+    "message": "Verbindungsaufbau erfolgreich"
+  },
+  "apps-000012": {
+    "message": "Assistenten beenden"
+  },
+  "apps-000013": {
+    "message": "Assistenten beenden"
+  },
+  "apps-000014": {
+    "message": "Eine weitere Verbindung hinzufügen"
+  },
+  "apps-000015": {
+    "message": "Erneut versuchen"
+  },
+  "apps-000016": {
+    "message": "Starke Verschlüsselung"
+  },
+  "apps-000018": {
+    "message": "Sie haben den Verbindungsaufbau abgebrochen"
+  },
+  "apps-000017": {
+    "message": "Die Apps konnten nicht geladen werden: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "apps-000019": {
+    "message": "Sie haben die Verbindung nicht rechtzeitig bestätigt"
+  },
+  "apps-000020": {
+    "message": "Scannen Sie den QR-Code mit der App, um die Verbindung herzustellen."
+  },
+  "apps-000021": {
+    "message": "Klicken Sie auf die Schaltfläche wenn Sie bereit sind um die App zu verbinden."
+  },
+  "apps-000027": {
+    "message": "Um ein neues Gerät oder eine App zu verbinden, scannen Sie einfach den QR-Code oder klicken Sie auf den Link."
+  },
+  "apps-000022": {
+    "message": "Bitte prüfen Sie, ob diese Codes mit denen auf Ihrem Gerät oder in der App übereinstimmen:"
+  },
+  "apps-000023": {
+    "message": "Verbinden Sie diese Anwendung mit Ihrem Nextcloud-Konto ohne Passwörter oder URLs aingeben zu müssen"
+  },
+  "apps-000024": {
+    "message": "Diese Anwendung unterstützt offiziell unsere starke Ende-zu-Ende Verschlüsselung"
+  },
+  "apps-000025": {
+    "message": "Diese Anwendung wird von den Autoren der Passwörter-App entwickelt"
+  },
+  "apps-000026": {
+    "message": "Klicken Sie auf die Schaltfläche um eine lokal installierte App zu verbinden oder scanneen Sie den QR-Code wenn die App auf einem anderen Gerät installiert ist."
+  },
+  "backups-000028": {
+    "message": "Sichern/Exportieren"
+  },
+  "backups-000029": {
+    "message": "Format auswählen"
+  },
+  "backups-000030": {
+    "message": "Bitte wählen"
+  },
+  "backups-000031": {
+    "message": "Datenbank Backup"
+  },
+  "backups-000032": {
+    "message": "Vordefiniertes CSV"
+  },
+  "backups-000033": {
+    "message": "Lesen Sie den $LABEL$ Import-Leitfaden",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000034": {
+    "message": "oder"
+  },
+  "backups-000035": {
+    "message": "Datenbank Backup"
+  },
+  "backups-000036": {
+    "message": "generischen CSV"
+  },
+  "backups-000037": {
+    "message": "probieren Sie den generischen CSV import"
+  },
+  "backups-000038": {
+    "message": "Kein Importer für Ihr CSV?"
+  },
+  "backups-000039": {
+    "message": "Backup-Passwort"
+  },
+  "backups-000040": {
+    "message": "(Optional) Verschlüsselt das Backup mit einem mindestens 10 Zeichen langen Passwort"
+  },
+  "backups-000041": {
+    "message": "Der Import unterstützt nur CSV-Dateien"
+  },
+  "backups-000042": {
+    "message": "Passwörter exportieren"
+  },
+  "backups-000043": {
+    "message": "Ordner exportieren"
+  },
+  "backups-000044": {
+    "message": "Tags exportieren"
+  },
+  "backups-000045": {
+    "message": "Eigene Felder"
+  },
+  "backups-000046": {
+    "message": "Ordner"
+  },
+  "backups-000047": {
+    "message": "Tags"
+  },
+  "backups-000048": {
+    "message": "Überordner"
+  },
+  "backups-000049": {
+    "message": "Ordner Id"
+  },
+  "backups-000050": {
+    "message": "Tag Ids"
+  },
+  "backups-000051": {
+    "message": "Überordner Id"
+  },
+  "backups-000052": {
+    "message": "Leer"
+  },
+  "backups-000053": {
+    "message": "Kopfzeile hinzufügen"
+  },
+  "backups-000054": {
+    "message": "Passwörter exportieren die mit mir geteilt wurden"
+  },
+  "backups-000055": {
+    "message": "Keine Passwörter ändern, die mit mir geteilt wurden"
+  },
+  "backups-000056": {
+    "message": "Überspringe leere Felder"
+  },
+  "backups-000057": {
+    "message": "Export ausführen"
+  },
+  "backups-000058": {
+    "message": "Exportieren"
+  },
+  "backups-000059": {
+    "message": "Läuft..."
+  },
+  "backups-000060": {
+    "message": "Export Fehler"
+  },
+  "backups-000061": {
+    "message": "$FORMAT$-Datei herunterladen",
+    "placeholders": {
+      "format": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000062": {
+    "message": "Nichts zu exportieren"
+  },
+  "backups-000063": {
+    "message": "Es sind keine Daten zum Exportieren vorhanden"
+  },
+  "backups-000064": {
+    "message": "Wiederherstellen/Importieren"
+  },
+  "backups-000066": {
+    "message": "Passwörter CSV"
+  },
+  "backups-000067": {
+    "message": "Ordner CSV"
+  },
+  "backups-000068": {
+    "message": "Eigenes CSV"
+  },
+  "backups-000069": {
+    "message": "Generisches / Eigenes CSV"
+  },
+  "backups-000070": {
+    "message": "Datei auswählen"
+  },
+  "backups-000071": {
+    "message": "Optionen auswählen"
+  },
+  "backups-000072": {
+    "message": "Bei Konflikten"
+  },
+  "backups-000073": {
+    "message": "Überschreiben wenn andere Version"
+  },
+  "backups-000074": {
+    "message": "Immer überspringen"
+  },
+  "backups-000075": {
+    "message": "Bestehendes überschreiben"
+  },
+  "backups-000076": {
+    "message": "Mit Bestehendem zusammenführen"
+  },
+  "backups-000077": {
+    "message": "Neuen Eintrag erstellen"
+  },
+  "backups-000078": {
+    "message": "Notwendig bei verschlüsselten Backups"
+  },
+  "backups-000079": {
+    "message": "CSV Optionen"
+  },
+  "backups-000080": {
+    "message": "Datenbank"
+  },
+  "backups-000081": {
+    "message": "Feldzeichen"
+  },
+  "backups-000082": {
+    "message": "Fluchtsymbol"
+  },
+  "backups-000083": {
+    "message": "Trennzeichen"
+  },
+  "backups-000084": {
+    "message": "Zeilenumbruch"
+  },
+  "backups-000085": {
+    "message": "Hochkomma"
+  },
+  "backups-000086": {
+    "message": "Einfaches Hochkomma"
+  },
+  "backups-000087": {
+    "message": "Umgekehrter Schrägstrich"
+  },
+  "backups-000088": {
+    "message": "Automatisch ermitteln"
+  },
+  "backups-000089": {
+    "message": "Komma"
+  },
+  "backups-000090": {
+    "message": "Semikolon"
+  },
+  "backups-000091": {
+    "message": "Leerzeichen"
+  },
+  "backups-000092": {
+    "message": "Tabulator"
+  },
+  "backups-000093": {
+    "message": "Nicht maskierte Fluchtzeichen erkennen"
+  },
+  "backups-000094": {
+    "message": "Kopfzeile überspringen"
+  },
+  "backups-000095": {
+    "message": "Fehlende Felder interpolieren"
+  },
+  "backups-000096": {
+    "message": "CSV Felder zuordnen"
+  },
+  "backups-000097": {
+    "message": "Zeige Zeile"
+  },
+  "backups-000098": {
+    "message": "Zeile $LINE$",
+    "placeholders": {
+      "line": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000099": {
+    "message": "(Kein Wert)"
+  },
+  "backups-000100": {
+    "message": "Ignorieren"
+  },
+  "backups-000101": {
+    "message": "Import ausführen"
+  },
+  "backups-000102": {
+    "message": "Importieren"
+  },
+  "backups-000103": {
+    "message": "Verarbeite Eingabedatei"
+  },
+  "backups-000104": {
+    "message": "Analysiere Tags"
+  },
+  "backups-000105": {
+    "message": "Analysiere Ordner"
+  },
+  "backups-000106": {
+    "message": "Lade Tags"
+  },
+  "backups-000107": {
+    "message": "Importiere Tags"
+  },
+  "backups-000108": {
+    "message": "Lade Ordner"
+  },
+  "backups-000109": {
+    "message": "Importiere Ordner"
+  },
+  "backups-000110": {
+    "message": "Lade Passwörter"
+  },
+  "backups-000111": {
+    "message": "Importiere Passwörter"
+  },
+  "backups-000112": {
+    "message": "Import fehlgeschlagen"
+  },
+  "backups-000113": {
+    "message": "Import teilweise fehlerhaft"
+  },
+  "backups-000114": {
+    "message": "Import erfolgreich"
+  },
+  "backups-000115": {
+    "message": "Importfehler"
+  },
+  "backups-000116": {
+    "message": "Einige Einträge hatten Probleme:"
+  },
+  "backups-000117": {
+    "message": "Falscher Dateityp \"$TYPE$\"",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000118": {
+    "message": "Passwort erforderlich"
+  },
+  "backups-000119": {
+    "message": "Falsches Passwort"
+  },
+  "backups-000120": {
+    "message": "Konnte Passwörter nicht entschlüsseln"
+  },
+  "backups-000121": {
+    "message": "Konnte Ordner nicht entschlüsseln"
+  },
+  "backups-000122": {
+    "message": "Konnte Tags nicht entschlüsseln"
+  },
+  "backups-000123": {
+    "message": "Die zu importierende Datei enthält keine Daten"
+  },
+  "backups-000124": {
+    "message": "CSV Felder passen nicht zur Zuordnung"
+  },
+  "backups-000125": {
+    "message": "Anmeldedaten"
+  },
+  "backups-000126": {
+    "message": "Notizen"
+  },
+  "backups-000127": {
+    "message": "Kreditkarten"
+  },
+  "backups-000128": {
+    "message": "Identitäten"
+  },
+  "backups-000129": {
+    "message": "Finanzen"
+  },
+  "backups-000130": {
+    "message": "Lizenzen"
+  },
+  "backups-000131": {
+    "message": "Reisen"
+  },
+  "backups-000132": {
+    "message": "Computer"
+  },
+  "backups-000133": {
+    "message": "Verschiedenes"
+  },
+  "backups-000134": {
+    "message": "Das Feldzeichen ist falsch maskiert"
+  },
+  "backups-000135": {
+    "message": "Die Datei konnte nicht verarbeitet werden: $ERRORS$",
+    "placeholders": {
+      "errors": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000136": {
+    "message": "$MESSAGE$ in Zeile $LINE$, Zeichen $CHARACTER$.",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      },
+      "line": {
+        "content": "$2"
+      },
+      "character": {
+        "content": "$3"
+      }
+    }
+  },
+  "backups-000137": {
+    "message": "An \"$LABEL$\" sind Dateien angehängt die nicht importiert werden können.",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000138": {
+    "message": "Der Typ von \"$FIELD$\" in \"$LABEL$\" ist unbekannt und kann nicht importiert werden.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000139": {
+    "message": "Der Name von \"$FIELD$\" in \"$LABEL$\" ist länger als 48 Zeichen und wurde gekürtzt.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000140": {
+    "message": "Der Inhalt von \"$FIELD$\" in \"$LABEL$\" ist länger als 320 Zeichen und wurde gekürtzt.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000141": {
+    "message": "Mehr Details können im Protokoll gefunden werden. (Drücken Sie F12)"
+  },
+  "backups-000142": {
+    "message": "Die Datei ist vom Type \"$ACTUAL$\" aber \"$EXPECTED$\" wird erwartet. Möglicherweise wurde die falsche Datei oder der falschen Importer dafür gewählt.",
+    "placeholders": {
+      "actual": {
+        "content": "$1"
+      },
+      "expected": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000143": {
+    "message": "$SERVICE$ ist bekannt dafür fehlerhafte Exportdateien zu erstellen. Sehen Sie im Handbuch nach, wenn die Datei nicht verarbeitet werden kann.",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000144": {
+    "message": "Passwörter"
+  },
+  "backend-000145": {
+    "message": "Alle"
+  },
+  "backend-000146": {
+    "message": "Ordner"
+  },
+  "backend-000147": {
+    "message": "Aktuelle"
+  },
+  "backend-000148": {
+    "message": "Favoriten"
+  },
+  "backend-000149": {
+    "message": "Geteilt"
+  },
+  "backend-000150": {
+    "message": "Tags"
+  },
+  "backend-000151": {
+    "message": "Sicherheit"
+  },
+  "backend-000152": {
+    "message": "Papierkorb"
+  },
+  "backend-000153": {
+    "message": "Details"
+  },
+  "backend-000154": {
+    "message": "Bearbeiten"
+  },
+  "backend-000591": {
+    "message": "Als neu bearbeiten"
+  },
+  "backend-000592": {
+    "message": "Verschieben"
+  },
+  "backend-000155": {
+    "message": "Umbenennen"
+  },
+  "backend-000156": {
+    "message": "Löschen"
+  },
+  "backend-000157": {
+    "message": "Wiederherstellen"
+  },
+  "backend-000593": {
+    "message": "$LABEL$ öffnen",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000158": {
+    "message": "Neues Passwort"
+  },
+  "backend-000159": {
+    "message": "Neuer Ordner"
+  },
+  "backend-000160": {
+    "message": "Neuer Tag"
+  },
+  "backend-000162": {
+    "message": "Status"
+  },
+  "backend-000161": {
+    "message": "Sicher"
+  },
+  "backend-000163": {
+    "message": "Unsicher"
+  },
+  "backend-000164": {
+    "message": "Unsicher (Duplikat)"
+  },
+  "backend-000165": {
+    "message": "Unsicher (Veraltet)"
+  },
+  "backend-000594": {
+    "message": "Unbekannt (Nicht getestet)"
+  },
+  "backend-000166": {
+    "message": "Kompromittiert"
+  },
+  "backend-000595": {
+    "message": "SHA-1"
+  },
+  "backend-000167": {
+    "message": "Teilen"
+  },
+  "backend-000168": {
+    "message": "Versionen"
+  },
+  "backend-000169": {
+    "message": "QR Code"
+  },
+  "backend-000170": {
+    "message": "Passwort"
+  },
+  "backend-000171": {
+    "message": "Benutzer"
+  },
+  "backend-000172": {
+    "message": "Webseite"
+  },
+  "backend-000596": {
+    "message": "Was haben Sie erwartet?"
+  },
+  "backend-000597": {
+    "message": "Klicken, um den QR Code anzuzeigen"
+  },
+  "backend-000598": {
+    "message": "Diese Warnung abschalten"
+  },
+  "backend-000173": {
+    "message": "Tags hinzufügen..."
+  },
+  "backend-000174": {
+    "message": "Farbe"
+  },
+  "backend-000175": {
+    "message": "Name"
+  },
+  "backend-000176": {
+    "message": "Name"
+  },
+  "backend-000177": {
+    "message": "Allgemein"
+  },
+  "backend-000178": {
+    "message": "Eigenschaften"
+  },
+  "backend-000179": {
+    "message": "Zahlen"
+  },
+  "backend-000180": {
+    "message": "Sonderzeichen"
+  },
+  "backend-000599": {
+    "message": "Stärke"
+  },
+  "backend-000181": {
+    "message": "Erweiterte Optionen"
+  },
+  "backend-000600": {
+    "message": "Schließen"
+  },
+  "backend-000182": {
+    "message": "Favorit"
+  },
+  "backend-000601": {
+    "message": "Aus den Favoriten entfernen"
+  },
+  "backend-000602": {
+    "message": "Zu den Favoriten hinzufügen"
+  },
+  "backend-000183": {
+    "message": "Verschlüsselung"
+  },
+  "backend-000184": {
+    "message": "Auf dem Server"
+  },
+  "backend-000603": {
+    "message": "Verstecktes Passwort"
+  },
+  "backend-000604": {
+    "message": "Dieses Passwort nicht anzeigen"
+  },
+  "backend-000186": {
+    "message": "Geheimnis"
+  },
+  "backend-000187": {
+    "message": "Text"
+  },
+  "backend-000188": {
+    "message": "Datei"
+  },
+  "backend-000605": {
+    "message": "Daten"
+  },
+  "backend-000606": {
+    "message": "Typ"
+  },
+  "backend-000189": {
+    "message": "Wert"
+  },
+  "backend-000607": {
+    "message": "Feld hinzufügen"
+  },
+  "backend-000608": {
+    "message": "Feld löschen"
+  },
+  "backend-000190": {
+    "message": "Sichtbarkeit umschalten"
+  },
+  "backend-000191": {
+    "message": "Passwort generieren"
+  },
+  "backend-000192": {
+    "message": "Verwenden Sie die einfache serverseitige Verschlüsselung in Variante 1"
+  },
+  "backend-000193": {
+    "message": "Machen Sie sich Notizen"
+  },
+  "backend-000609": {
+    "message": "Hilfe für Markdown öffnen"
+  },
+  "backend-000610": {
+    "message": "Rückgängig"
+  },
+  "backend-000611": {
+    "message": "Wiederholen"
+  },
+  "backend-000194": {
+    "message": "Speichern"
+  },
+  "backend-000195": {
+    "message": "Ordner erstellen"
+  },
+  "backend-000196": {
+    "message": "Ordner erstellt"
+  },
+  "backend-000197": {
+    "message": "Erstellen des Ordners fehlgeschlagen"
+  },
+  "backend-000198": {
+    "message": "Ordner umbenennen"
+  },
+  "backend-000199": {
+    "message": "Ordner umbenannt"
+  },
+  "backend-000200": {
+    "message": "Umbenennen des Ordners fehlgeschlagen"
+  },
+  "backend-000201": {
+    "message": "Ordner verschoben"
+  },
+  "backend-000202": {
+    "message": "Verschieben des Ordners fehlgeschlagen"
+  },
+  "backend-000203": {
+    "message": "Ordner löschen"
+  },
+  "backend-000204": {
+    "message": "Möchten Sie den Ordner und alle enthaltenen Elemente löschen?"
+  },
+  "backend-000205": {
+    "message": "Ordner gelöscht"
+  },
+  "backend-000206": {
+    "message": "Löschen des Ordners fehlgeschlagen"
+  },
+  "backend-000207": {
+    "message": "Ordner wiederhergestellt"
+  },
+  "backend-000208": {
+    "message": "Wiederherstellen des Ordners fehlgeschlagen"
+  },
+  "backend-000209": {
+    "message": "Tag erstellen"
+  },
+  "backend-000210": {
+    "message": "Tag erstellt"
+  },
+  "backend-000211": {
+    "message": "Erstellen des Tags fehlgeschlagen"
+  },
+  "backend-000212": {
+    "message": "Tag bearbeiten"
+  },
+  "backend-000213": {
+    "message": "Zufällige Farbe auswählen"
+  },
+  "backend-000214": {
+    "message": "Tag gespeichert"
+  },
+  "backend-000215": {
+    "message": "Speichern des Tags fehlgeschlagen"
+  },
+  "backend-000216": {
+    "message": "Tag löschen"
+  },
+  "backend-000217": {
+    "message": "Möchten Sie den Tag löschen?"
+  },
+  "backend-000218": {
+    "message": "Tag gelöscht"
+  },
+  "backend-000219": {
+    "message": "Löschen des Tags fehlgeschlagen"
+  },
+  "backend-000220": {
+    "message": "Tag wiederhergestellt"
+  },
+  "backend-000221": {
+    "message": "Wiederherstellen des Tags fehlgeschlagen"
+  },
+  "backend-000222": {
+    "message": "Neues Passwort erstellen"
+  },
+  "backend-000223": {
+    "message": "Passwort erstellt"
+  },
+  "backend-000224": {
+    "message": "Erstellen des Passworts fehlgeschlagen"
+  },
+  "backend-000225": {
+    "message": "Passwort bearbeiten"
+  },
+  "backend-000226": {
+    "message": "Passwort gespeichert"
+  },
+  "backend-000227": {
+    "message": "Speichern des Passworts fehlgeschlagen"
+  },
+  "backend-000228": {
+    "message": "Passwort verschoben"
+  },
+  "backend-000229": {
+    "message": "Verschieben des Passworts fehlgeschlagen"
+  },
+  "backend-000230": {
+    "message": "Passwort löschen"
+  },
+  "backend-000231": {
+    "message": "Möchten Sie das Passwort löschen?"
+  },
+  "backend-000232": {
+    "message": "Passwort gelöscht"
+  },
+  "backend-000233": {
+    "message": "Passwort wiederhergestellt"
+  },
+  "backend-000234": {
+    "message": "Wiederherstellen des Passworts fehlgeschlagen"
+  },
+  "backend-000235": {
+    "message": "Webseite öffnen"
+  },
+  "backend-000236": {
+    "message": "Webseite kopieren"
+  },
+  "backend-000237": {
+    "message": "Benutzer kopieren"
+  },
+  "backend-000238": {
+    "message": "Passwort kopieren"
+  },
+  "backend-000239": {
+    "message": "$ELEMENT$ wurde in die Zwischenablage kopiert",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000240": {
+    "message": "$ELEMENT$ konnte nicht in die Zwischenablage kopiert werden",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000241": {
+    "message": "Zuletzt geändert am $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000242": {
+    "message": "Version wiederherstellen"
+  },
+  "backend-000243": {
+    "message": "Version wiederhergestellt"
+  },
+  "backend-000244": {
+    "message": "Wiederherstellen der Version fehlgeschlagen"
+  },
+  "backend-000245": {
+    "message": "Möchten Sie die Version wiederherstellen?"
+  },
+  "backend-000246": {
+    "message": "Mit Ihnen geteilt"
+  },
+  "backend-000247": {
+    "message": "Von Ihnen geteilt"
+  },
+  "backend-000248": {
+    "message": "Statistiken"
+  },
+  "backend-000249": {
+    "message": "Erstellt am"
+  },
+  "backend-000250": {
+    "message": "Zuletzt geändert"
+  },
+  "backend-000251": {
+    "message": "$COUNT$ Versionen",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000252": {
+    "message": "Freigaben"
+  },
+  "backend-000253": {
+    "message": "$COUNT$ Freigaben",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000254": {
+    "message": "Verschlüsselung auf dem Server"
+  },
+  "backend-000255": {
+    "message": "Verschlüsselung auf dem Endgerät"
+  },
+  "backend-000256": {
+    "message": "Keine Verschlüsselung"
+  },
+  "backend-000257": {
+    "message": "Einfache Verschlüsselung (Generation 1)"
+  },
+  "backend-000258": {
+    "message": "Einfache Verschlüsselung (Generation 2)"
+  },
+  "backend-000259": {
+    "message": "Erweiterte Verschlüsselung (SSE V2)"
+  },
+  "backend-000260": {
+    "message": "Verschlüsselung mit Libsodium"
+  },
+  "backend-000261": {
+    "message": "Mehr"
+  },
+  "backend-000262": {
+    "message": "Sichern & Wiederherstellen"
+  },
+  "backend-000263": {
+    "message": "Einstellungen"
+  },
+  "backend-000264": {
+    "message": "Handbuch"
+  },
+  "backend-000265": {
+    "message": "Apps & Erweiterungen"
+  },
+  "backend-000612": {
+    "message": "Es wird $DATE$ ablaufen.",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000266": {
+    "message": "$EDITABLE$ und $SHAREABLE$.",
+    "placeholders": {
+      "editable": {
+        "content": "$1"
+      },
+      "shareable": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000267": {
+    "message": "Bearbeiten erlaubt"
+  },
+  "backend-000268": {
+    "message": "Bearbeiten nicht erlaubt"
+  },
+  "backend-000269": {
+    "message": "teilen erlaubt"
+  },
+  "backend-000270": {
+    "message": "teilen nicht erlaubt"
+  },
+  "backend-000271": {
+    "message": "Benutzer suchen"
+  },
+  "backend-000272": {
+    "message": "Ablaufdatum setzen"
+  },
+  "backend-000273": {
+    "message": "Läuft am $DATETIME$ ab",
+    "placeholders": {
+      "datetime": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000274": {
+    "message": "Wählen Sie ein Ablaufdatum oder lassen Sie das Feld leer um endlos zu teilen"
+  },
+  "backend-000275": {
+    "message": "Bitte Ablaufdatum in der Zukunft auswählen"
+  },
+  "backend-000276": {
+    "message": "Ungültiges Datum"
+  },
+  "backend-000277": {
+    "message": "Der Nutzer $UID$ existiert nicht",
+    "placeholders": {
+      "uid": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000278": {
+    "message": "Kann Passwort nicht teilen: $MESSAGE$",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000279": {
+    "message": "Schreibrechte umschalten"
+  },
+  "backend-000280": {
+    "message": "Weiterverteilrechte umschalten"
+  },
+  "backend-000281": {
+    "message": "Teilen beenden"
+  },
+  "backend-000282": {
+    "message": "Datum"
+  },
+  "backend-000283": {
+    "message": "Standard Cache (0 Dateien, 0 B)"
+  },
+  "backend-000284": {
+    "message": "Profilbilder (0 Dateien, 0 B)"
+  },
+  "backend-000285": {
+    "message": "Favicon (0 Dateien, 0 B)"
+  },
+  "backend-000286": {
+    "message": "Webseitenansichten (0 Dateien, 0 B)"
+  },
+  "backend-000287": {
+    "message": "Schlechte Passwörter (0 Dateien, 0 B)"
+  },
+  "backend-000288": {
+    "message": "Geändert"
+  },
+  "backend-000289": {
+    "message": "Geändert"
+  },
+  "backend-000290": {
+    "message": "Bearbeitet am"
+  },
+  "backend-000291": {
+    "message": "Erstellt am"
+  },
+  "backend-000292": {
+    "message": "Ordner"
+  },
+  "backend-000293": {
+    "message": "Version"
+  },
+  "backend-000294": {
+    "message": "Webseite"
+  },
+  "backend-000295": {
+    "message": "Überordner"
+  },
+  "backend-000296": {
+    "message": "Alles löschen"
+  },
+  "backend-000297": {
+    "message": "Alles wiederherstellen"
+  },
+  "backend-000298": {
+    "message": "Objekte wiederherstellen"
+  },
+  "backend-000299": {
+    "message": "öchten Sie alle Objekte im Papierkorb wiederherstellen?"
+  },
+  "backend-000300": {
+    "message": "Dieses Objekt wiederherstellen"
+  },
+  "backend-000301": {
+    "message": "Objekte wiederhergestellt"
+  },
+  "backend-000302": {
+    "message": "Papierkorb leeren"
+  },
+  "backend-000303": {
+    "message": "öchten Sie alle Objekte im Papierkorb permanent löschen?"
+  },
+  "backend-000304": {
+    "message": "Papierkorb geleert"
+  },
+  "backend-000305": {
+    "message": "Suche"
+  },
+  "backend-000306": {
+    "message": "Benutze die Suchbox zum suchen"
+  },
+  "backend-000307": {
+    "message": "Suche überall nach \"$QUERY$\"",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000308": {
+    "message": "Hier ist nichts"
+  },
+  "backend-000309": {
+    "message": "Drücken Sie auf das \"+\"-Symbol, um etwas hinzuzufügen"
+  },
+  "backend-000310": {
+    "message": "Gelöschte Objekte werden hier erscheinen"
+  },
+  "backend-000311": {
+    "message": "Es sind derzeit keine Passwörter mit Ihnen geteilt"
+  },
+  "backend-000312": {
+    "message": "Sie haben derzeit keine Passwörter geteilt"
+  },
+  "backend-000313": {
+    "message": "Ihre Favoriten werden hier erscheinen"
+  },
+  "backend-000314": {
+    "message": "Möglicherweise haben Sie noch keine Passwörter"
+  },
+  "backend-000315": {
+    "message": "Das ist sicherlich gut so"
+  },
+  "backend-000316": {
+    "message": "Gehe zu $HREF$",
+    "placeholders": {
+      "href": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000317": {
+    "message": "Inhalt"
+  },
+  "backend-000318": {
+    "message": "Abbildung $COUNT$: $TITLE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "title": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000319": {
+    "message": "Die Seite kann nicht angezeigt werden: $MESSAGE$.",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000320": {
+    "message": "Falscher Dateityp $MIME$",
+    "placeholders": {
+      "mime": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000321": {
+    "message": "Es ist kein Inhalt vorhanden"
+  },
+  "backend-000322": {
+    "message": "Seite nicht gefunden"
+  },
+  "backend-000323": {
+    "message": "Noch Fragen?"
+  },
+  "backend-000324": {
+    "message": "Wir helfen gerne!"
+  },
+  "backend-000613": {
+    "message": "Auch per Chat!"
+  },
+  "backend-000325": {
+    "message": "Fehler gefunden?"
+  },
+  "backend-000326": {
+    "message": "Informieren Sie uns!"
+  },
+  "backend-000327": {
+    "message": "Die Sitzung ist abgelaufen"
+  },
+  "backend-000328": {
+    "message": "API Token abgelaufen"
+  },
+  "backend-000329": {
+    "message": "Netzwerkfehler"
+  },
+  "backend-000330": {
+    "message": "Das Modul $MODULE$ konnte nicht geladen werden. Möglicherweise ist die Verbindung zu Nextcloud unterbrochen",
+    "placeholders": {
+      "module": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000331": {
+    "message": "Sortiere nach Name"
+  },
+  "backend-000332": {
+    "message": "Sortiere nach zuletzt geändert"
+  },
+  "backend-000333": {
+    "message": "$PASSWORDS$ Passwörter",
+    "placeholders": {
+      "passwords": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000334": {
+    "message": "1 Passwort"
+  },
+  "backend-000335": {
+    "message": "$FOLDERS$ Ordner",
+    "placeholders": {
+      "folders": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000336": {
+    "message": "1 Ordner"
+  },
+  "backend-000337": {
+    "message": "$TAGS$ Tags",
+    "placeholders": {
+      "tags": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000338": {
+    "message": "1 Tag"
+  },
+  "backend-000339": {
+    "message": "Nichts"
+  },
+  "backend-000340": {
+    "message": " und "
+  },
+  "backend-000341": {
+    "message": "passen zu"
+  },
+  "backend-000342": {
+    "message": "passt zu"
+  },
+  "backend-000343": {
+    "message": "Erstellt von"
+  },
+  "backend-000344": {
+    "message": "Sie melden sich als $USER$ an",
+    "placeholders": {
+      "user": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000345": {
+    "message": "Anmelden"
+  },
+  "backend-000346": {
+    "message": "Token erneut anfordern"
+  },
+  "backend-000347": {
+    "message": "Zu viele Versuche"
+  },
+  "backend-000348": {
+    "message": "Passwort zu kurz"
+  },
+  "backend-000349": {
+    "message": "Unbekannter Fehler"
+  },
+  "backend-000350": {
+    "message": "Token-Anfrage fehlgeschlagen"
+  },
+  "backend-000614": {
+    "message": "Zu viele fehlgeschlagene Anmeldeversuche"
+  },
+  "backend-000351": {
+    "message": "System Wartungsmodus"
+  },
+  "backend-000352": {
+    "message": "Nicht Vorhanden"
+  },
+  "backend-000353": {
+    "message": "System"
+  },
+  "backend-000354": {
+    "message": "Öffentlicher Zugriff"
+  },
+  "backend-000355": {
+    "message": "Automatische Hintergrundaufgabe"
+  },
+  "backend-000356": {
+    "message": "Server Kommandozeile"
+  },
+  "backend-000357": {
+    "message": "Bitte korrigieren Sie Ihre Angaben"
+  },
+  "backend-000358": {
+    "message": "Wert anzeigen"
+  },
+  "backend-000615": {
+    "message": "Wählen Sie einen Ordner"
+  },
+  "backend-000616": {
+    "message": "Mit \"$FOLDER$\" fortfahren",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000617": {
+    "message": "$LABEL$ kann nicht verwendet werden",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000618": {
+    "message": "Hauptordner"
+  },
+  "backend-000619": {
+    "message": "\"$FOLDER$\" enthält keine Unterordner",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000620": {
+    "message": "Verschlüsselungspassphrase der Passwörter-App"
+  },
+  "backend-000621": {
+    "message": "Unbekannt"
+  },
+  "backend-000359": {
+    "message": "Abbrechen"
+  },
+  "backend-000360": {
+    "message": "Ok"
+  },
+  "backend-000622": {
+    "message": "Hilfe"
+  },
+  "backend-000361": {
+    "message": "ja"
+  },
+  "backend-000362": {
+    "message": "nein"
+  },
+  "backend-000363": {
+    "message": "ja"
+  },
+  "backend-000364": {
+    "message": "nein"
+  },
+  "backend-000365": {
+    "message": "$NAME$ hat dieses Passwort mit dir geteilt.",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000366": {
+    "message": "Sie haben die maximale Länge von 4096 Zeichern erreicht"
+  },
+  "backend-000367": {
+    "message": "Die Suche nach \"$QUERY$\" erzielte keinen Treffer",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000368": {
+    "message": "Die Seite \"$PAGE$\" konnte nicht vom Handbuch-Server geholt werden.",
+    "placeholders": {
+      "page": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000369": {
+    "message": "Es sind Daten zur synchronisation vorhanden"
+  },
+  "backend-000370": {
+    "message": "Sie werden in $TIME$ Sekunden ausgeloggt",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000371": {
+    "message": "Sie haben zu viele Tokens angefragt. Bitte versuchen Sie es später erneut."
+  },
+  "backend-000623": {
+    "message": "Wählen Sie die Verschlüsselungsart für dieses Passwort"
+  },
+  "backend-000624": {
+    "message": "Möchten Sie das Feld \"$FIELD$\" löschen?",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000625": {
+    "message": "Stelln Sie sicher, dass dieser QR Code nur für Berechtigte sichtbar ist."
+  },
+  "backend-000372": {
+    "message": "Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn Sie das Passwort teilen"
+  },
+  "backend-000373": {
+    "message": "Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen."
+  },
+  "backend-000374": {
+    "message": "Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass Sie die App benutzen."
+  },
+  "backend-000626": {
+    "message": "Diese Verschlüsselung wurde vom Server vor dem Speichern in der Datenbank angewandt"
+  },
+  "backend-000627": {
+    "message": "Diese Verschlüsselung wurde auf dem Endgerät angewandt bevor die Daten an den Server gesendet wurden"
+  },
+  "backend-000628": {
+    "message": "Falsches Passwort. Die Sitzung wurde wegen zu vieler fehlgeschlagener Anmeldeversuche beendet."
+  },
+  "backend-000629": {
+    "message": "Dies ist eine Kopie der Passphrase die Sie für die Verschlüsselung gewählt haben. Änderungen an diesem Eintrag haben keine Auswirkungen auf die Verschlüsselung. Die Passphrase kann in den Einstellungen geändert werden. Weitere Informationen finden Sie im Handbuch."
+  },
+  "fronted-000375": {
+    "message": "HTTPS erforderlich"
+  },
+  "fronted-000376": {
+    "message": "mit HTTPS aufzurufen"
+  },
+  "fronted-000377": {
+    "message": "Forum"
+  },
+  "fronted-000378": {
+    "message": "Dokumentation"
+  },
+  "fronted-000379": {
+    "message": "Sie können versuchen die Seite $STR_1$.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000380": {
+    "message": "Diese Anwendung benötigt $STR_1$ um sicher zu funktionieren.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000381": {
+    "message": "Dies ist KEIN Bug. Besuchen Sie unser $STR_1$ falls Sie Hilfe benötigen.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000382": {
+    "message": "Lesen Sie den unten stehenden HTTPS Bericht um das Problem zu analysieren."
+  },
+  "fronted-000383": {
+    "message": "Lesen Sie diese $STR_1$ um den Server auf HTTPS umzustellen.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000384": {
+    "message": "Lesen Sie diese $STR_1$ falls Sie einen Proxy jedweder Art verwenden.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000385": {
+    "message": "Installieren Sie ein kostenloses Zertifikat von $STR_1$ falls Sie keines haben.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000386": {
+    "message": "Wenn der Fehler weiterhin besteht sollten Sie den Administrator kontaktieren."
+  },
+  "fronted-000387": {
+    "message": "Passwörter App Sitzung $STR_1$ - $STR_1$",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000388": {
+    "message": "Dokumentation öffnen"
+  },
+  "fronted-000389": {
+    "message": "nie"
+  },
+  "fronted-000390": {
+    "message": "Interne Datenverarbeitung"
+  },
+  "fronted-000391": {
+    "message": "Bildverarbeitung"
+  },
+  "fronted-000392": {
+    "message": "Imagick/GMagick (empfohlen)"
+  },
+  "fronted-000393": {
+    "message": "Externe Dienste"
+  },
+  "fronted-000394": {
+    "message": "Passwort Sicherheitsprüfung"
+  },
+  "fronted-000395": {
+    "message": "Have I been pwned? (empfohlen)"
+  },
+  "fronted-000396": {
+    "message": "Große lokale Datenbank (25M Passwörter)"
+  },
+  "fronted-000397": {
+    "message": "Kleine lokale Datenbank (5M Passwörter)"
+  },
+  "fronted-000398": {
+    "message": "Große lokale Datenbank & Hibp?"
+  },
+  "fronted-000399": {
+    "message": "Passwort Generator"
+  },
+  "fronted-000400": {
+    "message": "Lokales Wörterbuch"
+  },
+  "fronted-000401": {
+    "message": "Zufällige Buchstaben"
+  },
+  "fronted-000402": {
+    "message": "watchout4snakes.com"
+  },
+  "fronted-000403": {
+    "message": "Leipzig Corpora Collection (empfohlen)"
+  },
+  "fronted-000404": {
+    "message": "Favicon Service"
+  },
+  "fronted-000630": {
+    "message": "Favicon Service Api"
+  },
+  "fronted-000631": {
+    "message": "(optional)"
+  },
+  "fronted-000405": {
+    "message": "Lokaler Icon Suchdienst"
+  },
+  "fronted-000406": {
+    "message": "Besticon (empfohlen)"
+  },
+  "fronted-000407": {
+    "message": "Keiner"
+  },
+  "fronted-000408": {
+    "message": "Webseitenansichtengenerator"
+  },
+  "fronted-000409": {
+    "message": "API Schlüssel"
+  },
+  "fronted-000410": {
+    "message": "Pageres/PhantomJS (Lokal)"
+  },
+  "fronted-000411": {
+    "message": "WKHTML (Lokal)"
+  },
+  "fronted-000412": {
+    "message": "screenshotapi.io"
+  },
+  "fronted-000413": {
+    "message": "E-Mail Standardeinstellungen"
+  },
+  "fronted-000414": {
+    "message": "Sende E-Mails für Sicherheitsprobleme"
+  },
+  "fronted-000415": {
+    "message": "Sende E-Mails beim Teilen"
+  },
+  "fronted-000416": {
+    "message": "Weitere Einstellungen"
+  },
+  "fronted-000417": {
+    "message": "Gelöschte Objekte aus der Datenbank entfernen"
+  },
+  "fronted-000418": {
+    "message": "Zeige Nightly Updates in \"Apps\""
+  },
+  "fronted-000419": {
+    "message": "Nie"
+  },
+  "fronted-000420": {
+    "message": "Sofort"
+  },
+  "fronted-000421": {
+    "message": "Nach zwei Stunden"
+  },
+  "fronted-000422": {
+    "message": "Nach einem Tag"
+  },
+  "fronted-000423": {
+    "message": "Nach zwei Wochen"
+  },
+  "fronted-000424": {
+    "message": "Nach einem Monat"
+  },
+  "fronted-000425": {
+    "message": "Nach einem Jahr"
+  },
+  "fronted-000426": {
+    "message": "Backup Einstellungen"
+  },
+  "fronted-000427": {
+    "message": "Sicherungsintervall"
+  },
+  "fronted-000428": {
+    "message": "Jede Stunde"
+  },
+  "fronted-000429": {
+    "message": "Alle sechs Stunden"
+  },
+  "fronted-000430": {
+    "message": "Jeden Tag"
+  },
+  "fronted-000431": {
+    "message": "Alle zwei Tage"
+  },
+  "fronted-000432": {
+    "message": "Jede Woche"
+  },
+  "fronted-000433": {
+    "message": "Alle zwei Wochen"
+  },
+  "fronted-000434": {
+    "message": "Anzahl der zu speichernden Backups"
+  },
+  "fronted-000435": {
+    "message": "Zwischenspeicher"
+  },
+  "fronted-000436": {
+    "message": "Standard Cache ($STR_1$ Dateien, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000437": {
+    "message": "Profilbilder ($STR_1$ Dateien, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000438": {
+    "message": "Favicon ($STR_1$ Dateien, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000439": {
+    "message": "Webseitenansichten ($STR_1$ Dateien, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000440": {
+    "message": "Schlechte Passwörter ($STR_1$ Dateien, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000441": {
+    "message": "leeren"
+  },
+  "fronted-000442": {
+    "message": "Diesen Zwischenspeicher leeren"
+  },
+  "fronted-000443": {
+    "message": "Sie können diesen Zwischenspeicher nicht leeren solange der Dienst eine geteilte API-Instanz nutzt"
+  },
+  "fronted-000444": {
+    "message": "Gespeichert"
+  },
+  "fronted-000445": {
+    "message": "Geleert"
+  },
+  "fronted-000446": {
+    "message": "Fehlgeschlagen"
+  },
+  "fronted-000447": {
+    "message": "Benötigen Sie Hilfe"
+  },
+  "fronted-000448": {
+    "message": "haben Sie einen Fehler gefunden"
+  },
+  "fronted-000449": {
+    "message": "suchen Sie die Dokumentation"
+  },
+  "fronted-000450": {
+    "message": "$STR_1$, $STR_1$ oder $STR_1$? Wir stehen gerne bereit!",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      },
+      "str_3": {
+        "content": "$3"
+      }
+    }
+  },
+  "fronted-000451": {
+    "message": "$STRING_1$ $STRING_2$ wird nicht mehr unterstützt.",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      },
+      "string_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000452": {
+    "message": "Passwörter benötigt HTTPS."
+  },
+  "fronted-000453": {
+    "message": "Hintergrundaufgaben mit $STR_1$ auszuführen kann lange Wartezeiten verursachen. Wir empfehlen Cron zu verwenden.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000454": {
+    "message": "Bitte sehen Sie sich unsere Systemanforderungen an."
+  },
+  "fronted-000455": {
+    "message": "Password nicht geteilt"
+  },
+  "fronted-000456": {
+    "message": "Ein Passwort wurde nicht mit $STRING_1$ geteilt, da dies bereits von einer anderen Person getan wurde.",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000457": {
+    "message": "Sie haben ein unsicheres Passwort"
+  },
+  "fronted-000458": {
+    "message": "Sie haben unsichere Passwörter"
+  },
+  "fronted-000459": {
+    "message": "Eines Ihrer Passwörter ist nicht mehr sicher."
+  },
+  "fronted-000460": {
+    "message": "Einige Ihrer Passwörter sind nicht mehr sicher."
+  },
+  "fronted-000461": {
+    "message": "Passwörter prüft regelmäßig ob Ihre Passwörter durch einen Datendiebstahl kompromittiert wurden."
+  },
+  "fronted-000462": {
+    "message": "Dieser Sicherheitstest hat festgestellt, dass eines Ihrer Passwörter unsicher ist."
+  },
+  "fronted-000463": {
+    "message": "Dieser Sicherheitstest hat festgestellt, dass $STR_1$ Ihrer Passwörter unsicher sind.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000464": {
+    "message": "Das bedeutet, dass das Passwort im Internet gefunden werden kann und gefährdet Ihrer Account."
+  },
+  "fronted-000465": {
+    "message": "Das bedeutet, dass die Passwörter im Internet gefunden werden können und gefährdet Ihre Accounts."
+  },
+  "fronted-000466": {
+    "message": "Daher wurde das Passwort als unsicher markiert und sollte geändert werden."
+  },
+  "fronted-000467": {
+    "message": "Daher wurden die Passwörter als unsicher markiert und sollten geändert werden."
+  },
+  "fronted-000468": {
+    "message": "Sie können in der Passwörter App ein neues, sicheres Passwort erzeugen."
+  },
+  "fronted-000469": {
+    "message": "Sie können in der Passwörter App ein neue, sichere Passwörter erzeugen."
+  },
+  "fronted-000470": {
+    "message": "Passwort jetzt ändern"
+  },
+  "fronted-000471": {
+    "message": "Passwörter jetzt ändern"
+  },
+  "fronted-000472": {
+    "message": "Öffnen Sie die Passwörter App um es zu ändern."
+  },
+  "fronted-000473": {
+    "message": "Öffnen Sie die Passwörter App um sie zu ändern."
+  },
+  "fronted-000474": {
+    "message": "$STR_1$ hat ein Passwort mit Ihnen geteilt.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000475": {
+    "message": "$STR_1$ hat $STR_1$ Passwörter mit Ihnen geteilt.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000476": {
+    "message": "$STRING_4$ und $STRING_3$ haben $STRING_1$ Passwörter mit Ihnen geteilt.",
+    "placeholders": {
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000477": {
+    "message": "$STRING_5$, $STRING_4$ und $STRING_3$ haben $STRING_1$ Passwörter mit Ihnen geteilt.",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000478": {
+    "message": "$STRING_5$, $STRING_4$ und $STRING_2$ andere haben $STRING_1$ Passwörter mit Ihnen geteilt.",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_2": {
+        "content": "$2"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000479": {
+    "message": "Öffnen Sie Passwörter App um es zu sehen."
+  },
+  "fronted-000480": {
+    "message": "Öffnen Sie Passwörter App um sie zu sehen."
+  },
+  "fronted-000481": {
+    "message": "Ein Passwort wurde mit Ihnen auf $STR_1$ geteilt",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000482": {
+    "message": "Mehrere Passwörter wurden mit Ihnen auf $STR_1$ geteilt",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000483": {
+    "message": "Mit mir geteilte Passwörter ansehen"
+  },
+  "fronted-000484": {
+    "message": "Eines Ihrer Passwörter konnte nicht geteilt werden, da der Empfänger bereits Zugriff darauf hat."
+  },
+  "fronted-000485": {
+    "message": "$STR_1$ Ihrer Passwörter konnten nicht geteilt werden, da der Empfänger bereits Zugriff darauf hat.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000487": {
+    "message": "Passwörter zu teilen, die mit Ihnen geteilt wurden, kann manchmal eine rekursive Schleife erzeugen."
+  },
+  "fronted-000488": {
+    "message": "Um dies zu verhindern werden diese Passwörter nicht geteilt."
+  },
+  "fronted-000489": {
+    "message": "Administrativer Zugriff auf Ihr Konto"
+  },
+  "fronted-000490": {
+    "message": "$STR_1$ hat am $STR_1$ versucht, sich in Ihr Konto anzumelden.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000491": {
+    "message": "$STR_1$ sich am $STR_1$ in Ihrem Konto angemeldet.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000492": {
+    "message": "Da Sie ein Master-Passwort verwenden, bedeutet dies nicht, dass Zugriff auf Ihre Daten gewährt wurde."
+  },
+  "fronted-000493": {
+    "message": "Um unerwünschten Zugriff auf Ihre Daten zu verhindern sollten Sie ein Master-Passwort einrichten."
+  },
+  "fronted-000494": {
+    "message": "Gelöschter Benutzer ($STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000495": {
+    "message": "Helfen Sie dabei, Passwörter zu verbessern"
+  },
+  "fronted-000496": {
+    "message": "Sie können uns helfen, die Passwörter App zu verbessern indem Sie an unserer Server-Umfrage teilnehmen."
+  },
+  "fronted-000497": {
+    "message": "Dafür werden anonyme Daten über den Server und spezifische Einstellungen an uns gesendet."
+  },
+  "fronted-000498": {
+    "message": "Dies kann jederzeit in den Einstellungen geändert werden."
+  },
+  "fronted-000499": {
+    "message": "Später"
+  },
+  "fronted-000500": {
+    "message": "Mitmachen"
+  },
+  "fronted-000501": {
+    "message": "Teilnahme an der Server-Umfrage"
+  },
+  "fronted-000502": {
+    "message": "Grunddaten"
+  },
+  "fronted-000503": {
+    "message": "Vollständig"
+  },
+  "fronted-000504": {
+    "message": "Nicht festgelegt"
+  },
+  "fronted-000505": {
+    "message": "Bitte verwenden Sie eine eigene Besticon-Instanz"
+  },
+  "fronted-000506": {
+    "message": "Ihre Nextcloud verwendet unsere geteilten Besticon-Instanzen um Favicons zu finden."
+  },
+  "fronted-000507": {
+    "message": "Diese Instanzen sind für kleine Nextcloud-Installationen mit wenigen Anfragen gedacht."
+  },
+  "fronted-000632": {
+    "message": "Ihre Nextcloud fordert deutlich mehr Icons als der Durchschnitt an."
+  },
+  "fronted-000508": {
+    "message": "Bitte folgen Sie dem Link zu unserer einfachen Anleitung zum selbsthosten von Besticon."
+  },
+  "fronted-000633": {
+    "message": "Anleitung öffnen"
+  },
+  "fronted-000509": {
+    "message": "Die Konfiguration Ihres Favicon-Service ist unvollständig."
+  },
+  "fronted-000510": {
+    "message": "Die Konfiguration Ihres Webseitenansichtengenerators ist unvollständig."
+  },
+  "fronted-000511": {
+    "message": "Der von Ihnen gewählte Favicon-Service benötigt einen API-Endpoint um zu funktionieren."
+  },
+  "fronted-000512": {
+    "message": "Der von Ihnen gewählte Webseitenansichtengenerator benötigt einen API-Schlüssel oder API-Endpunkt um zu funktionieren."
+  },
+  "fronted-000513": {
+    "message": "Öffnen Sie die Einstellungen um die Konfiguration abzuschließen oder einen anderen Service zu verwenden."
+  },
+  "fronted-000634": {
+    "message": "Verdächtige Häufung fehlgeschlagener Anmeldeversuche entdeckt"
+  },
+  "fronted-000514": {
+    "message": "Wir haben mehrere fehlgeschlagene Versuche von \"$STR_1$\" bemerkt, Ihre Passwortdatenbank zu öffnen.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000515": {
+    "message": "Das könnte bedeuten, dass Dritte versuchen, in Ihr Konto einzudringen."
+  },
+  "fronted-000516": {
+    "message": "Um weitere Versuche zu verhindern, wurden die Zugangsdaten dieses Gerätes widerrufen."
+  },
+  "fronted-000517": {
+    "message": "Außerdem wurde die passwortbasierte API-Authentifizierung deaktiviert."
+  },
+  "fronted-000518": {
+    "message": "Wenn Sie dieses Gerät weiterhin verwenden möchten, müssen Sie ein neues Token dafür anlegen."
+  },
+  "fronted-000519": {
+    "message": "Wenn Sie dieses Gerät nicht kennen, ändern bitte Ihr Passwort und überprüfen Sie Ihre Geräteliste."
+  },
+  "fronted-000520": {
+    "message": "Um weitere Versuche zu verhindern, wurde die passwortbasierte API-Authentifizierung deaktiviert."
+  },
+  "fronted-000521": {
+    "message": "Um diese wieder zu aktivieren, melden Sie sich mit der Webapp oder einem beliebigen Client über die Token-Authentifizierung an."
+  },
+  "fronted-000522": {
+    "message": "Wenn Sie dieses Gerät nicht kennen, ändern Sie bitte Ihr Master-Passwort und Ihr Nextcloud-Passwort."
+  },
+  "fronted-000523": {
+    "message": "Um die Sicherheit zu erhöhen, empfehlen wir, anstelle des Passworts gerätespezifische Token zu verwenden."
+  },
+  "fronted-000635": {
+    "message": "Weitere Informationen"
+  },
+  "fronted-000636": {
+    "message": "Unsichere Passwörter anzeigen"
+  },
+  "fronted-000637": {
+    "message": "Einstellungen öffnen"
+  },
+  "fronted-000638": {
+    "message": "Passwörter öffnen"
+  },
+  "fronted-000639": {
+    "message": "Apps anzeigen"
+  },
+  "fronted-000640": {
+    "message": "Apps & Geräte anzeigen"
+  },
+  "fronted-000641": {
+    "message": "Apps & Geräte verwalten"
+  },
+  "fronted-000642": {
+    "message": "Geteilte Passwörter anzeigen"
+  },
+  "fronted-000643": {
+    "message": "App-Aktualisierung empfohlen"
+  },
+  "fronted-000644": {
+    "message": "Eine neue App wurde mit Ihrem Konto verknüpft"
+  },
+  "fronted-000645": {
+    "message": "\"$STR_1$\" wurde mittels PassLink Zugriff auf Ihr $STR_1$ Konto gewährt.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000646": {
+    "message": "Sie können alle verknüpften Geräte und Apps in den $STR_1$ Einstellungen im Bereich \"Sicherheit\" verwalten.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000647": {
+    "message": "Die letzte Hintergrundaufgabe wurde mit PHP $STRING_1$ ausgeführt, der Webserver verwendet jedoch $STRING_2$.",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      },
+      "string_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000648": {
+    "message": "Die Verwendung verschiedener Hauptversionen von PHP kann Probleme verursachen."
+  },
+  "fronted-000649": {
+    "message": "Passwortsicherheit Standardeinstellungen"
+  },
+  "fronted-000650": {
+    "message": "Hash für den Sicherheitstest"
+  },
+  "fronted-000651": {
+    "message": "Keinen Hash speichern"
+  },
+  "fronted-000652": {
+    "message": "50% des Hash speichern"
+  },
+  "fronted-000653": {
+    "message": "75% des Hash speichern"
+  },
+  "fronted-000654": {
+    "message": "Kompletten Hash speichern"
+  },
+  "fronted-000655": {
+    "message": "Sicherung automatisch wiederhergestellt"
+  },
+  "fronted-000656": {
+    "message": "Es scheint ein Datenbankfehler in der Passwörter-App aufgetreten zu sein."
+  },
+  "fronted-000657": {
+    "message": "Daher wurde die App-Sicherung \"$STR_1$\" automatisch wiederhergestellt.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000658": {
+    "message": "Sollte dies ein Fehler gewesen sein, wurde eine Sicherung vor dem Wiederherstellen erstellt."
+  },
+  "fronted-000659": {
+    "message": "Das automatische Wiederherstellen kann in den Einstellungen deaktiviert werden."
+  },
+  "fronted-000660": {
+    "message": "Sicherungen automatisch wiederherstellen wenn die Datenbank gelöscht wurde"
+  },
+  "fronted-000661": {
+    "message": "Passwörter wird keine Aktualisierungen mehr für Nextcloud $STR_1$ erhalten",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000662": {
+    "message": "Passwörter $STR_1$ ist die letzte Aktualisierung für Nextcloud $STR_1$.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000663": {
+    "message": "Aktualisieren Sie auf Nextcloud $STR_1$ und PHP $STR_1$ (oder PHP $STR_1$ für die LSR-Version) um zukünftige Versionen von Passwörter zu erhalten.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      },
+      "str_3": {
+        "content": "$3"
+      }
+    }
+  },
+  "fronted-000664": {
+    "message": "Automatisch auswählen"
+  },
+  "backend-000526": {
+    "message": "Passwortvorgaben"
+  },
+  "backend-000527": {
+    "message": "Markiere Duplikate"
+  },
+  "backend-000528": {
+    "message": "Maximales Alter in Tagen"
+  },
+  "backend-000529": {
+    "message": "Passwortgenerator"
+  },
+  "backend-000530": {
+    "message": "Stärke"
+  },
+  "backend-000531": {
+    "message": "Nummern verwenden"
+  },
+  "backend-000532": {
+    "message": "Sonderzeichen verwenden"
+  },
+  "settings-000676": {
+    "message": "Anmeldung & Sitzung"
+  },
+  "settings-000677": {
+    "message": "Mich eingeloggt lassen"
+  },
+  "settings-000678": {
+    "message": "Immer"
+  },
+  "settings-000679": {
+    "message": "Bei Serverinteraktion"
+  },
+  "settings-000680": {
+    "message": "Bei Aktivität"
+  },
+  "settings-000681": {
+    "message": "Beende Sitzung nach"
+  },
+  "settings-000682": {
+    "message": "Einer Minute"
+  },
+  "settings-000683": {
+    "message": "$MINUTES$ Minuten",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000684": {
+    "message": "Ende-zu-Ende Verschlüsselung"
+  },
+  "settings-000685": {
+    "message": "Verschlüsselung auf Server"
+  },
+  "settings-000686": {
+    "message": "Keine wenn CSE verwendet"
+  },
+  "settings-000687": {
+    "message": "Einfache Verschlüsselung"
+  },
+  "settings-000688": {
+    "message": "Erweiterte Verschlüsselung"
+  },
+  "settings-000689": {
+    "message": "Verschlüsselung auf Endgerät"
+  },
+  "settings-000690": {
+    "message": "Aktivieren"
+  },
+  "settings-000691": {
+    "message": "Passwort ändern"
+  },
+  "backend-000533": {
+    "message": "Benutzeroberfläche"
+  },
+  "backend-000534": {
+    "message": "Initialer Bereich"
+  },
+  "backend-000535": {
+    "message": "Alle Passwörter"
+  },
+  "backend-000536": {
+    "message": "Passwörter in der Listenansicht"
+  },
+  "backend-000537": {
+    "message": "Dieses Feld als Titel verwenden"
+  },
+  "backend-000538": {
+    "message": "Sortiere nach"
+  },
+  "backend-000539": {
+    "message": "Titel-Feld"
+  },
+  "backend-000540": {
+    "message": "Aktion bei Klick"
+  },
+  "backend-000541": {
+    "message": "Aktion bei Doppelklick"
+  },
+  "backend-000542": {
+    "message": "Kopiere Passwort"
+  },
+  "backend-000543": {
+    "message": "Kopiere Benutzer"
+  },
+  "backend-000544": {
+    "message": "Kopiere Webseite"
+  },
+  "backend-000545": {
+    "message": "Zeige Details"
+  },
+  "backend-000546": {
+    "message": "Zeige \"Kopieren\"-Menüeinträge"
+  },
+  "backend-000547": {
+    "message": "Zeige Benutzername im Titel"
+  },
+  "backend-000548": {
+    "message": "Zeige Tags in der Liste"
+  },
+  "settings-000692": {
+    "message": "Detailansicht für Passwörter"
+  },
+  "settings-000693": {
+    "message": "Zeige Webseitenvorschau"
+  },
+  "backend-000549": {
+    "message": "Zeige versteckte eigene Felder"
+  },
+  "backend-000550": {
+    "message": "Tippen startet die Suche"
+  },
+  "backend-000551": {
+    "message": "Suche überall mit \"Enter\""
+  },
+  "backend-000552": {
+    "message": "Zeige die Suche-Sektion immer an"
+  },
+  "backend-000553": {
+    "message": "Benachrichtigungen"
+  },
+  "backend-000554": {
+    "message": "Sende E-Mails für"
+  },
+  "backend-000555": {
+    "message": "Sicherheitsrelevante Ereignisse"
+  },
+  "backend-000556": {
+    "message": "Mit mir geteilte Passwörter"
+  },
+  "backend-000557": {
+    "message": "Sende Benachrichtigungen für"
+  },
+  "backend-000558": {
+    "message": "Andere Fehler"
+  },
+  "backend-000559": {
+    "message": "Gefahrenzone"
+  },
+  "backend-000560": {
+    "message": "Einstellungen Zurücksetzen"
+  },
+  "backend-000561": {
+    "message": "Zurücksetzen"
+  },
+  "backend-000562": {
+    "message": "Alles löschen"
+  },
+  "backend-000563": {
+    "message": "ALLES LÖSCHEN"
+  },
+  "backend-000564": {
+    "message": "Benutzerkonto zurücksetzen"
+  },
+  "backend-000565": {
+    "message": "Ansicht"
+  },
+  "backend-000667": {
+    "message": "Standard"
+  },
+  "backend-000566": {
+    "message": "Erweitert"
+  },
+  "settings-000694": {
+    "message": "Neues Passwort"
+  },
+  "settings-000695": {
+    "message": "Passwort wiederholen"
+  },
+  "settings-000696": {
+    "message": "Altes Passwort"
+  },
+  "settings-000697": {
+    "message": "Passwort geändert"
+  },
+  "settings-000698": {
+    "message": "Passwortänderung fehlgeschlagen"
+  },
+  "settings-000699": {
+    "message": "Administrationsprobleme"
+  },
+  "settings-000700": {
+    "message": "Passwörter Teilen"
+  },
+  "settings-000701": {
+    "message": "Bearbeiten standardmäßig erlauben"
+  },
+  "settings-000702": {
+    "message": "Teilen standardmäßig erlauben"
+  },
+  "settings-000703": {
+    "message": "Schlüssel"
+  },
+  "settings-000704": {
+    "message": "Der Schlüssel stimmt nicht"
+  },
+  "backend-000567": {
+    "message": "Markiert Passwörter als \"Unsicher\" wenn sie für mehr als ein Konto verwendet werden"
+  },
+  "backend-000568": {
+    "message": "Markiert Passwörter als \"Unsicher\" wenn sie das in Tagen angegebene Alter überschreiten"
+  },
+  "backend-000569": {
+    "message": "Ein höherer Stärke-Level erzeugt längere und komplexere Passwörter"
+  },
+  "settings-000705": {
+    "message": "Füge generierten Passwörtern Zahlen hinzu"
+  },
+  "settings-000706": {
+    "message": "Füge generierten Passwörtern Sonderzeichen hinzu"
+  },
+  "settings-000707": {
+    "message": "Stellt die Zeitspanne ein, nach der eine Sitzung beendet wird wenn keine Nutzeraktion erfolgt"
+  },
+  "settings-000708": {
+    "message": "Wählen Sie den Verschlüsselungsmodus mit dem der Server Daten verschlüsseln soll"
+  },
+  "settings-000709": {
+    "message": "Rufen Sie den Installationsassistenten zum aktivieren der Ende-zu-Ende Verschlüsselung auf"
+  },
+  "settings-000710": {
+    "message": "Änderen Sie Ihr Verschlüsselungspasswort"
+  },
+  "backend-000570": {
+    "message": "Zeigt das ausgewählte Attribut in der Listenansicht als Titel an"
+  },
+  "backend-000571": {
+    "message": "Sortiert Passwörter nach dem angegebenen Attribut anstatt nach dem Namen"
+  },
+  "backend-000572": {
+    "message": "Aktion die beim Klick auf ein Passwort ausgeführt wird"
+  },
+  "backend-000573": {
+    "message": "Aktion die beim Doppelklick auf ein Passwort ausgeführt wird"
+  },
+  "backend-000574": {
+    "message": "Zeigt die Optionen zum Kopieren von Passwort und Benutzername im Menü"
+  },
+  "backend-000575": {
+    "message": "Der Bereich der angezeigt wird wenn die App geöffnet wird"
+  },
+  "backend-000576": {
+    "message": "Zeigt immer den Benutzernamen für ein Passwort in der Listenansicht an"
+  },
+  "backend-000577": {
+    "message": "Zeigt die Tags für jedes Passwort in der Listenansicht. Erhöht die Ladezeit"
+  },
+  "settings-000711": {
+    "message": "Zeigt eine Vorschau der Webseite in den Details. (Nicht auf Mobilgeräten)"
+  },
+  "backend-000578": {
+    "message": "Zeigt versteckte selbst definierte Felder im Bearbeiten-Formular und in den Passwortdetails"
+  },
+  "backend-000668": {
+    "message": "Startet die Suche sobald eine Taste gedrückt wird"
+  },
+  "backend-000669": {
+    "message": "Sucht überall wenn die Enter-Taste im Suchfeld gedrückt wird"
+  },
+  "backend-000581": {
+    "message": "Zeigt die Sektion für die globale Suche immer in der Navigation an"
+  },
+  "backend-000579": {
+    "message": "Sendet Ihnen E-Mails wenn Passwörter komprommitiert werden oder Sicherheitsprobleme auftreten"
+  },
+  "backend-000580": {
+    "message": "Sendet Ihnen E-Mails wenn andere Passwörter mit Ihnen teilen"
+  },
+  "backend-000582": {
+    "message": "Benachrichtigt Sie bei kompromittierten Passwörtern und anderen Sicherheitsproblemen"
+  },
+  "backend-000583": {
+    "message": "Benachrichtigt Sie, wenn andere Passwörter mit Ihnen teilen"
+  },
+  "backend-000584": {
+    "message": "Benachrichtigt Sie, wenn Hintergrundaufgaben fehlschlagen"
+  },
+  "settings-000712": {
+    "message": "Benachrichtigt Sie über Konfigurationsfehler und andere administrative Probleme."
+  },
+  "backend-000585": {
+    "message": "Alle Einstellungen auf dieser Seite zurücksetzen"
+  },
+  "backend-000586": {
+    "message": "Dies wird alle Einstellungen auf den Standardwert zurücksetzen. Möchten Sie fortfahren?"
+  },
+  "backend-000587": {
+    "message": "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen"
+  },
+  "settings-000713": {
+    "message": "Geben Sie \"$CODE$\" ein um Ihr Konto zurückzusezen und alle Daten zu löschen.",
+    "placeholders": {
+      "code": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000714": {
+    "message": "Mit diesem Dialog können Sie Ihr Zugangspasswort ändern."
+  },
+  "settings-000715": {
+    "message": "Das Passwort muss mindestens 12 Zeichen lang sein und darf nicht dem vorherigen entsprechen"
+  },
+  "settings-000716": {
+    "message": "Bitte wiederholen Sie Ihr neues Passwort"
+  },
+  "settings-000717": {
+    "message": "Bitte geben Sie Ihr altes Passwort ein"
+  },
+  "settings-000718": {
+    "message": "Das Passwort wurde erfolgreich geändert."
+  },
+  "settings-000719": {
+    "message": "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Bearbeiten des Passworts"
+  },
+  "settings-000720": {
+    "message": "Erlaubt dem Empfänger bei neuen Freigaben standardmäßig das Teilen mit anderen Nutzern"
+  },
+  "settings-000721": {
+    "message": "Öffnet die Seite über die Einstellungen im Handbuch"
+  },
+  "settings-000722": {
+    "message": "Sendet Keepalive-Anfragen an den Server um das beenden der Sitzung zu verhindern"
+  },
+  "settings-000723": {
+    "message": "Wählen Sie den Verschlüsselungsmodus mit dem das Endgerät Daten verschlüsselt bevor sie zum Server geschickt werden."
+  },
+  "backend-000588": {
+    "message": "Möchten Sie wirklich alle Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen."
+  },
+  "settings-000724": {
+    "message": "Mit dem SHA-1 Hash wird nach kompromittierten Passwörtern gesucht. Einen teilweisen Hash zu speichern kann Brute-Force Attacken erschweren, falls der Server gehackt wird. Dadurch können aber auch Passwörter fälschlicherweise als kompromittiert markiert werden."
+  },
+  "tutorial-000728": {
+    "message": "Nach dem starten zeige die"
+  },
+  "tutorial-000729": {
+    "message": "Ordner"
+  },
+  "tutorial-000730": {
+    "message": "Tags"
+  },
+  "tutorial-000731": {
+    "message": "Favoriten"
+  },
+  "tutorial-000732": {
+    "message": "Passwörter"
+  },
+  "tutorial-000733": {
+    "message": "neuesten Änderungen"
+  },
+  "tutorial-000734": {
+    "message": "Passwörter markieren wenn..."
+  },
+  "tutorial-000735": {
+    "message": "sie älter sind als"
+  },
+  "tutorial-000736": {
+    "message": "drei Monate"
+  },
+  "tutorial-000737": {
+    "message": "sechs Monate"
+  },
+  "tutorial-000738": {
+    "message": "ein Jahr"
+  },
+  "tutorial-000739": {
+    "message": "zwei Jahre"
+  },
+  "tutorial-000740": {
+    "message": "$DAYS$ Tage",
+    "placeholders": {
+      "days": {
+        "content": "$1"
+      }
+    }
+  },
+  "tutorial-000741": {
+    "message": "sie Duplikate sind"
+  },
+  "tutorial-000742": {
+    "message": "Generierte Passwörter sind"
+  },
+  "tutorial-000743": {
+    "message": "stark"
+  },
+  "tutorial-000744": {
+    "message": "stärker"
+  },
+  "tutorial-000745": {
+    "message": "sehr stark"
+  },
+  "tutorial-000746": {
+    "message": "extrem stark"
+  },
+  "tutorial-000747": {
+    "message": "und haben Zahlen"
+  },
+  "tutorial-000748": {
+    "message": "und haben Sonderzeichen"
+  },
+  "tutorial-000749": {
+    "message": "Ein sicherer Ort für Ihre Passwörter"
+  },
+  "tutorial-000750": {
+    "message": "Schützen Sie Ihre Daten"
+  },
+  "tutorial-000751": {
+    "message": "Vielfältig Anpassbar"
+  },
+  "tutorial-000752": {
+    "message": "Organisieren Sie Ihre Passwörter"
+  },
+  "tutorial-000753": {
+    "message": "Verwenden Sie unsere Apps"
+  },
+  "tutorial-000754": {
+    "message": "Bestehende Daten verschlüsseln"
+  },
+  "tutorial-000755": {
+    "message": "Passwort speichern"
+  },
+  "tutorial-000756": {
+    "message": "Passwort wiederholen"
+  },
+  "tutorial-000757": {
+    "message": "Aktiviere Verschlüsselung"
+  },
+  "tutorial-000758": {
+    "message": "Schlüsselbund"
+  },
+  "tutorial-000759": {
+    "message": "Aufräumen"
+  },
+  "tutorial-000760": {
+    "message": "Erfolgreich"
+  },
+  "tutorial-000761": {
+    "message": "Wir helfen Ihnen gerne"
+  },
+  "tutorial-000762": {
+    "message": "Öffne Apps & Erweiterungen"
+  },
+  "tutorial-000763": {
+    "message": "Weiter"
+  },
+  "tutorial-000764": {
+    "message": "Überspringen"
+  },
+  "tutorial-000765": {
+    "message": "Prüfe Passwortsicherheit mit"
+  },
+  "tutorial-000766": {
+    "message": "Generiere Passwörter mit"
+  },
+  "tutorial-000767": {
+    "message": "Suche Favicons mit"
+  },
+  "tutorial-000768": {
+    "message": "Erstelle Webseitenansichten mit"
+  },
+  "tutorial-000769": {
+    "message": "Mache Backups"
+  },
+  "tutorial-000770": {
+    "message": "Öffne alle Einstellungen an"
+  },
+  "tutorial-000771": {
+    "message": "Empfehlungen für Administratoren aufrufen"
+  },
+  "tutorial-000772": {
+    "message": "Ihr Passwort (mindestens 12 Zeichen)"
+  },
+  "tutorial-000773": {
+    "message": "Verschlüsselung läuft…"
+  },
+  "tutorial-000774": {
+    "message": "Es gibt viele Einstellungen, mit denen die App angepasst werden kann."
+  },
+  "tutorial-000775": {
+    "message": "Sie finden alle unter \"Mehr\", aber die gängigsten sind hier zusammengetragen:"
+  },
+  "tutorial-000776": {
+    "message": "Die Passwörter-App bietet eine moderne und starke Verschlüsselung, um Ihre Daten vor neugierigen Blicken zu schützen."
+  },
+  "tutorial-000777": {
+    "message": "Wählen Sie unten ein sicheres Passwort, um unseren ultimativen Schutz für Ihre Passwörter zu aktivieren."
+  },
+  "tutorial-000778": {
+    "message": "Greifen Sie mit unseren Apps und Erweiterungen einfach und von überall auf Ihre Passwörter zu."
+  },
+  "tutorial-000779": {
+    "message": "Sie finden unseren Apps & Erweiterungen-Bereich unter \"Mehr\" oder durch einen Klick auf die Schaltfläche unten."
+  },
+  "tutorial-000780": {
+    "message": "Die App kann auf vielfältige Weise angepasst werden."
+  },
+  "tutorial-000781": {
+    "message": "Als Administrator möchten Sie vielleicht diese gängigen Einstellungen überprüfen."
+  },
+  "tutorial-000782": {
+    "message": "Falls Sie noch Fragen haben oder bei einem Problem nicht weiter wissen:"
+  },
+  "tutorial-000783": {
+    "message": "Wir sind gerne jederzeit bereit, zu helfen."
+  },
+  "tutorial-000784": {
+    "message": "Unser eingebautes Handbuch finden Sie, wenn Sie rechts unten auf \"Mehr\" klicken. Dort wird die App in allen Einzelheiten erklärt."
+  },
+  "tutorial-000785": {
+    "message": "In allen anderen Fällen ist unsere Gemeinschaft der richtige Ort, um Ihre Fragen zu beantworten."
+  },
+  "tutorial-000786": {
+    "message": "Das Handbuch wird nach der Einführung geöffnet"
+  },
+  "tutorial-000787": {
+    "message": "Geben Sie ein starkes Passwort mit mindestens 12 Zeichen ein"
+  },
+  "tutorial-000788": {
+    "message": "Ihr Passwort muss mindestens 12 Zeichen lang sein und mit der Passwort-Wiederholung übereinstimmen"
+  }
+}

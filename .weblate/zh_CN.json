@@ -1,0 +1,2360 @@
+{
+  "apps-000001": {
+    "message": "官方"
+  },
+  "apps-000002": {
+    "message": "由 $AUTHOR$ 制作",
+    "placeholders": {
+      "author": {
+        "content": "$1"
+      }
+    }
+  },
+  "apps-000003": {
+    "message": "来源"
+  },
+  "backups-000028": {
+    "message": "备份 / 导出"
+  },
+  "backups-000029": {
+    "message": "选择格式"
+  },
+  "backups-000030": {
+    "message": "请选择"
+  },
+  "backups-000031": {
+    "message": "数据库备份"
+  },
+  "backups-000032": {
+    "message": "预定义 CSV"
+  },
+  "backups-000039": {
+    "message": "备份密码"
+  },
+  "backups-000040": {
+    "message": "（可选）加密备份"
+  },
+  "backups-000041": {
+    "message": "仅支持导入 CSV"
+  },
+  "backups-000042": {
+    "message": "导出密码"
+  },
+  "backups-000043": {
+    "message": "导出分类"
+  },
+  "backups-000044": {
+    "message": "导出标签"
+  },
+  "backups-000045": {
+    "message": "自定义字段"
+  },
+  "backups-000046": {
+    "message": "分类名"
+  },
+  "backups-000047": {
+    "message": "标签名"
+  },
+  "backups-000048": {
+    "message": "上级项名"
+  },
+  "backups-000049": {
+    "message": "分类编号"
+  },
+  "backups-000050": {
+    "message": "标签编号"
+  },
+  "backups-000051": {
+    "message": "上级项编号"
+  },
+  "backups-000052": {
+    "message": "空空如也"
+  },
+  "backups-000053": {
+    "message": "添加头行"
+  },
+  "backups-000054": {
+    "message": "导出和我共享的密码"
+  },
+  "backups-000055": {
+    "message": "不要编辑和我共享的密码"
+  },
+  "backups-000056": {
+    "message": "不要导入空白字段"
+  },
+  "backups-000057": {
+    "message": "执行导出"
+  },
+  "backups-000058": {
+    "message": "导出"
+  },
+  "backups-000059": {
+    "message": "请等候..."
+  },
+  "backups-000060": {
+    "message": "导出出错"
+  },
+  "backups-000061": {
+    "message": "下载 $FORMAT$",
+    "placeholders": {
+      "format": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000062": {
+    "message": "无可导出项"
+  },
+  "backups-000063": {
+    "message": "没有可以导出的数据"
+  },
+  "backups-000064": {
+    "message": "恢复 / 导入"
+  },
+  "backups-000066": {
+    "message": "密码 CSV"
+  },
+  "backups-000067": {
+    "message": "分类 CSV"
+  },
+  "backups-000068": {
+    "message": "自定义 CSV"
+  },
+  "backups-000069": {
+    "message": "其它 / 自定义 CSV"
+  },
+  "backups-000070": {
+    "message": "选择文件"
+  },
+  "backups-000071": {
+    "message": "选择选项"
+  },
+  "backups-000072": {
+    "message": "处理冲突项"
+  },
+  "backups-000073": {
+    "message": "若版本相同，则跳过"
+  },
+  "backups-000074": {
+    "message": "总是跳过"
+  },
+  "backups-000075": {
+    "message": "覆盖已有项"
+  },
+  "backups-000076": {
+    "message": "与已有项合并"
+  },
+  "backups-000077": {
+    "message": "创建新条目"
+  },
+  "backups-000078": {
+    "message": "对于加密的备份"
+  },
+  "backups-000079": {
+    "message": "CSV 选项"
+  },
+  "backups-000080": {
+    "message": "数据库"
+  },
+  "backups-000081": {
+    "message": "引号字符"
+  },
+  "backups-000082": {
+    "message": "退格字符"
+  },
+  "backups-000083": {
+    "message": "字段定界符"
+  },
+  "backups-000084": {
+    "message": "折行"
+  },
+  "backups-000085": {
+    "message": "引号"
+  },
+  "backups-000086": {
+    "message": "单引号"
+  },
+  "backups-000087": {
+    "message": "反斜杠"
+  },
+  "backups-000088": {
+    "message": "检测"
+  },
+  "backups-000089": {
+    "message": "逗号"
+  },
+  "backups-000090": {
+    "message": "分号"
+  },
+  "backups-000091": {
+    "message": "空格"
+  },
+  "backups-000092": {
+    "message": "Tab"
+  },
+  "backups-000093": {
+    "message": "检测未转义的引号"
+  },
+  "backups-000094": {
+    "message": "跳过第一行"
+  },
+  "backups-000095": {
+    "message": "插值缺失的字段"
+  },
+  "backups-000096": {
+    "message": "CSV 字段映射"
+  },
+  "backups-000097": {
+    "message": "前一行"
+  },
+  "backups-000098": {
+    "message": "$LINE$ 行",
+    "placeholders": {
+      "line": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000099": {
+    "message": "（无值）"
+  },
+  "backups-000100": {
+    "message": "忽略"
+  },
+  "backups-000101": {
+    "message": "执行导入"
+  },
+  "backups-000102": {
+    "message": "导入"
+  },
+  "backups-000103": {
+    "message": "解析导入的文件"
+  },
+  "backups-000104": {
+    "message": "正在解析标签"
+  },
+  "backups-000105": {
+    "message": "正在解析分类"
+  },
+  "backups-000106": {
+    "message": "读取标签中"
+  },
+  "backups-000107": {
+    "message": "导入标签中"
+  },
+  "backups-000108": {
+    "message": "读取分类中"
+  },
+  "backups-000109": {
+    "message": "导入标签中"
+  },
+  "backups-000110": {
+    "message": "读取密码中"
+  },
+  "backups-000111": {
+    "message": "导入密码中"
+  },
+  "backups-000112": {
+    "message": "导入失败"
+  },
+  "backups-000113": {
+    "message": "部分导入失败"
+  },
+  "backups-000114": {
+    "message": "导入成功"
+  },
+  "backups-000115": {
+    "message": "导入出错"
+  },
+  "backups-000116": {
+    "message": "一些对象出错："
+  },
+  "backups-000117": {
+    "message": "非法的文件类型 \"$TYPE$\"",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000118": {
+    "message": "需要密码"
+  },
+  "backups-000119": {
+    "message": "密码非法"
+  },
+  "backups-000120": {
+    "message": "解密密码出错"
+  },
+  "backups-000121": {
+    "message": "解密分类出错"
+  },
+  "backups-000122": {
+    "message": "解密标签出错"
+  },
+  "backups-000123": {
+    "message": "导入的是空文件"
+  },
+  "backups-000124": {
+    "message": "CSV 文件不能被映射"
+  },
+  "backups-000125": {
+    "message": "登录"
+  },
+  "backups-000126": {
+    "message": "笔记"
+  },
+  "backups-000127": {
+    "message": "借记卡"
+  },
+  "backups-000128": {
+    "message": "身份"
+  },
+  "backups-000129": {
+    "message": "金融"
+  },
+  "backups-000130": {
+    "message": "协议"
+  },
+  "backups-000131": {
+    "message": "旅行"
+  },
+  "backups-000132": {
+    "message": "计算机"
+  },
+  "backups-000133": {
+    "message": "杂项"
+  },
+  "backups-000134": {
+    "message": "引号字段中末端引号非法"
+  },
+  "backups-000135": {
+    "message": "该文件不能被解析：$ERRORS$",
+    "placeholders": {
+      "errors": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000136": {
+    "message": "$MESSAGE$ 在第 $LINE$ 行，字符 $CHARACTER$。",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      },
+      "line": {
+        "content": "$2"
+      },
+      "character": {
+        "content": "$3"
+      }
+    }
+  },
+  "backups-000137": {
+    "message": "\"$LABEL$\" 包含不能被导入的文件。",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000138": {
+    "message": "在 \"$LABEL$\" 中的类型 \"$FIELD$\" 未知，不能导入。",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "field": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000139": {
+    "message": "在 \"$LABEL$\" 中的标签 \"$FIELD$\" 超过 48 个字符，已被截短。",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "field": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000140": {
+    "message": "在 \"$LABEL$\" 中的值 \"$FIELD$\" 超过 320 个字符，已被截短。",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "field": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000141": {
+    "message": "更多信息可在该日志中找到。（按 F12）"
+  },
+  "backups-000142": {
+    "message": "该文件的类型是 \"$ACTUAL$\"，但需要类型 \"$EXPECTED$\"。你也许选择了错误的文件或导入器。",
+    "placeholders": {
+      "actual": {
+        "content": "$1"
+      },
+      "expected": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000143": {
+    "message": "已知 $SERVICE$ 会生成错误的导出文件。如果导出文件无法被解析，请查阅手册以获取帮助。",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000526": {
+    "message": "密码规则"
+  },
+  "backend-000527": {
+    "message": "重复标记"
+  },
+  "backend-000528": {
+    "message": "最长寿命（天）"
+  },
+  "backend-000529": {
+    "message": "密码生成器"
+  },
+  "backend-000530": {
+    "message": "密码强度"
+  },
+  "backend-000531": {
+    "message": "包含数字"
+  },
+  "backend-000532": {
+    "message": "包含特殊字符"
+  },
+  "settings-000676": {
+    "message": "登录与会话"
+  },
+  "settings-000677": {
+    "message": "保持我的登录状态"
+  },
+  "settings-000678": {
+    "message": "一直"
+  },
+  "settings-000679": {
+    "message": "当我工作时"
+  },
+  "settings-000680": {
+    "message": "当我活跃时"
+  },
+  "settings-000681": {
+    "message": "在退出会话后"
+  },
+  "settings-000682": {
+    "message": "一分钟"
+  },
+  "settings-000683": {
+    "message": "$MINUTES$ 分钟",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000684": {
+    "message": "端到端加密"
+  },
+  "settings-000685": {
+    "message": "服务器加密模式"
+  },
+  "settings-000686": {
+    "message": "如果使用了 CSE，置空"
+  },
+  "settings-000687": {
+    "message": "简单加密"
+  },
+  "settings-000688": {
+    "message": "高级加密"
+  },
+  "settings-000689": {
+    "message": "客户端加密模式"
+  },
+  "settings-000690": {
+    "message": "启用"
+  },
+  "settings-000691": {
+    "message": "更改密码"
+  },
+  "backend-000533": {
+    "message": "用户界面"
+  },
+  "backend-000534": {
+    "message": "初始部分"
+  },
+  "backend-000535": {
+    "message": "所有密码"
+  },
+  "backend-000536": {
+    "message": "列表密码视图"
+  },
+  "backend-000537": {
+    "message": "标题设置依据"
+  },
+  "backend-000538": {
+    "message": "排序方式"
+  },
+  "backend-000539": {
+    "message": "标题字段"
+  },
+  "backend-000540": {
+    "message": "单击动作"
+  },
+  "backend-000541": {
+    "message": "双击动作"
+  },
+  "backend-000542": {
+    "message": "复制密码"
+  },
+  "backend-000543": {
+    "message": "复制用户名"
+  },
+  "backend-000544": {
+    "message": "复制网站"
+  },
+  "backend-000545": {
+    "message": "显示详情"
+  },
+  "backend-000546": {
+    "message": "将复制选项添加到菜单中"
+  },
+  "backend-000547": {
+    "message": "在列表中显示用户名"
+  },
+  "backend-000548": {
+    "message": "在列表中显示标签"
+  },
+  "settings-000692": {
+    "message": "密码详情界面"
+  },
+  "settings-000693": {
+    "message": "显示网站预览"
+  },
+  "backend-000549": {
+    "message": "显示隐藏的自定义字段"
+  },
+  "backend-000550": {
+    "message": "当键入 i 时搜索"
+  },
+  "backend-000551": {
+    "message": "以 Enter 随处搜索"
+  },
+  "backend-000552": {
+    "message": "总显示搜索部分"
+  },
+  "backend-000553": {
+    "message": "通知"
+  },
+  "backend-000554": {
+    "message": "发送电子邮件的原因"
+  },
+  "backend-000555": {
+    "message": "安全事件"
+  },
+  "backend-000556": {
+    "message": "和我共享的密码"
+  },
+  "backend-000557": {
+    "message": "显示通知的原因"
+  },
+  "backend-000558": {
+    "message": "其它错误"
+  },
+  "backend-000559": {
+    "message": "高危区域"
+  },
+  "backend-000560": {
+    "message": "重置所有设定"
+  },
+  "backend-000561": {
+    "message": "重置"
+  },
+  "backend-000562": {
+    "message": "清空所有内容"
+  },
+  "backend-000563": {
+    "message": "清空所有内容"
+  },
+  "backend-000564": {
+    "message": "请求账户重置"
+  },
+  "backend-000565": {
+    "message": "视图"
+  },
+  "backend-000667": {
+    "message": "默认"
+  },
+  "backend-000566": {
+    "message": "高级"
+  },
+  "settings-000694": {
+    "message": "新密码"
+  },
+  "settings-000695": {
+    "message": "再次输入密码"
+  },
+  "settings-000696": {
+    "message": "旧密码"
+  },
+  "settings-000697": {
+    "message": "密码已修改"
+  },
+  "settings-000698": {
+    "message": "修改密码失败"
+  },
+  "settings-000699": {
+    "message": "管理因素"
+  },
+  "backend-000567": {
+    "message": "如果密码用于多个帐户，则将其标记为弱密码"
+  },
+  "backend-000568": {
+    "message": "如果密码超过指定的天数，则将其标记为弱密码"
+  },
+  "backend-000569": {
+    "message": "更高的强度意味着更长，更复杂的密码"
+  },
+  "settings-000705": {
+    "message": "在生成的密码中添加数字"
+  },
+  "settings-000706": {
+    "message": "在生成的密码中添加特殊字符"
+  },
+  "settings-000707": {
+    "message": "指定请求后会话取消之前的时间"
+  },
+  "settings-000708": {
+    "message": "选择用于加密服务器上数据的加密类型"
+  },
+  "settings-000709": {
+    "message": "运行安装向导为您的密码设置加密"
+  },
+  "settings-000710": {
+    "message": "更改加密密钥"
+  },
+  "backend-000570": {
+    "message": "在列表视图中将所选属性显示为标题"
+  },
+  "backend-000571": {
+    "message": "选择按名称排序时，按所选属性对密码进行排序"
+  },
+  "backend-000572": {
+    "message": "在列表视图中单击密码时执行的操作"
+  },
+  "backend-000573": {
+    "message": "在列表视图中双击密码时执行的操作"
+  },
+  "backend-000574": {
+    "message": "在菜单中显示用于复制密码和用户名的选项"
+  },
+  "backend-000575": {
+    "message": "打开应用程序时显示的初始部分"
+  },
+  "backend-000576": {
+    "message": "始终在列表视图中显示与密码相关的用户名"
+  },
+  "backend-000577": {
+    "message": "在列表视图中显示每个密码的标签。增加载入时长"
+  },
+  "settings-000711": {
+    "message": "在详细信息中显示关联网站的预览。（不适用于手机）"
+  },
+  "backend-000578": {
+    "message": "在密码的编辑表单和详细信息部分中显示隐藏的自定义字段"
+  },
+  "backend-000668": {
+    "message": "在页面上的任何地方按下键时开始搜索"
+  },
+  "backend-000669": {
+    "message": "在搜索框中按下Enter键时，搜索所有内容"
+  },
+  "backend-000581": {
+    "message": "始终在导航中显示用于全局搜索的部分"
+  },
+  "backend-000579": {
+    "message": "向您发送有关密码泄露和其他安全问题的电子邮件"
+  },
+  "backend-000580": {
+    "message": "当其他人与您共享密码时向您发送电子邮件"
+  },
+  "backend-000582": {
+    "message": "通知您有关密码泄露和其他安全问题的信息"
+  },
+  "backend-000583": {
+    "message": "当其他人与您共享密码时通知您"
+  },
+  "backend-000584": {
+    "message": "后台操作失败时通知您"
+  },
+  "settings-000712": {
+    "message": "通知您配置错误和其他管理问题"
+  },
+  "backend-000585": {
+    "message": "将此页面上的所有设置重置为默认设置"
+  },
+  "backend-000586": {
+    "message": "这会将所有设置重置为默认设置。你想继续吗？"
+  },
+  "backend-000587": {
+    "message": "重新开始并删除所有配置，密码，分类和标签"
+  },
+  "settings-000714": {
+    "message": "您可以使用此对话框更改主密码。"
+  },
+  "settings-000715": {
+    "message": "您的密码必须超过 12 个字符，且不是旧密码"
+  },
+  "settings-000716": {
+    "message": "请确认您的新密码"
+  },
+  "settings-000717": {
+    "message": "您必须输入旧密码"
+  },
+  "settings-000718": {
+    "message": "您已经成功更改密码。"
+  },
+  "settings-000722": {
+    "message": "向服务器发送保持活动请求，以防止会话被取消"
+  },
+  "settings-000723": {
+    "message": "选择用于在客户端上将数据发送到服务器之前对其进行加密的加密类型"
+  },
+  "backend-000588": {
+    "message": "您要删除所有设置，密码，分类和标签吗？\n此操作无法撤销。"
+  },
+  "tutorial-000728": {
+    "message": "启动后，显示我的"
+  },
+  "tutorial-000729": {
+    "message": "分类"
+  },
+  "tutorial-000730": {
+    "message": "标签"
+  },
+  "tutorial-000731": {
+    "message": "收藏"
+  },
+  "tutorial-000732": {
+    "message": "密码"
+  },
+  "tutorial-000733": {
+    "message": "最近更改"
+  },
+  "tutorial-000734": {
+    "message": "如果...，高亮我的密码"
+  },
+  "tutorial-000735": {
+    "message": "它们比...久"
+  },
+  "tutorial-000736": {
+    "message": "三个月"
+  },
+  "tutorial-000737": {
+    "message": "六个月"
+  },
+  "tutorial-000738": {
+    "message": "一年"
+  },
+  "tutorial-000739": {
+    "message": "两年"
+  },
+  "tutorial-000740": {
+    "message": "$DAYS$ 天",
+    "placeholders": {
+      "days": {
+        "content": "$1"
+      }
+    }
+  },
+  "tutorial-000741": {
+    "message": "它们是重复的"
+  },
+  "tutorial-000742": {
+    "message": "高亮我的新密码"
+  },
+  "tutorial-000743": {
+    "message": "强"
+  },
+  "tutorial-000744": {
+    "message": "更加强"
+  },
+  "tutorial-000745": {
+    "message": "非常强"
+  },
+  "tutorial-000746": {
+    "message": "极其之强"
+  },
+  "tutorial-000747": {
+    "message": "包含数字"
+  },
+  "tutorial-000748": {
+    "message": "包含特殊字符"
+  },
+  "tutorial-000749": {
+    "message": "为你的密码提供一个安全的家"
+  },
+  "tutorial-000750": {
+    "message": "使你的密码持续保密"
+  },
+  "tutorial-000751": {
+    "message": "个性化你的体验"
+  },
+  "tutorial-000752": {
+    "message": "整理您的密码"
+  },
+  "tutorial-000753": {
+    "message": "保持社交"
+  },
+  "tutorial-000754": {
+    "message": "加密我已有的密码"
+  },
+  "tutorial-000755": {
+    "message": "保存密码"
+  },
+  "tutorial-000756": {
+    "message": "重复你的密码"
+  },
+  "tutorial-000757": {
+    "message": "正在安装加密"
+  },
+  "tutorial-000758": {
+    "message": "密钥链"
+  },
+  "tutorial-000759": {
+    "message": "清理"
+  },
+  "tutorial-000760": {
+    "message": "成功"
+  },
+  "fronted-000446": {
+    "message": "已失败"
+  },
+  "tutorial-000762": {
+    "message": "前往 应用程序与扩展"
+  },
+  "tutorial-000763": {
+    "message": "继续"
+  },
+  "tutorial-000764": {
+    "message": "跳过"
+  },
+  "tutorial-000765": {
+    "message": "如何检查密码的安全性"
+  },
+  "tutorial-000766": {
+    "message": "如何生成密码"
+  },
+  "tutorial-000767": {
+    "message": "如何获取收藏夹图标"
+  },
+  "tutorial-000768": {
+    "message": "如何获取网站预览"
+  },
+  "tutorial-000769": {
+    "message": "进行备份"
+  },
+  "tutorial-000770": {
+    "message": "查看所有设定"
+  },
+  "tutorial-000771": {
+    "message": "阅读我们的管理员提示"
+  },
+  "tutorial-000774": {
+    "message": "这里有许多设置，您可以个性化您的体验。"
+  },
+  "tutorial-000775": {
+    "message": "您可以在\"更多\"中找到所有它们，但是我们在这里放了最常用的："
+  },
+  "tutorial-000776": {
+    "message": "密码提供了现代而强大的加密功能，可保护您的数据免遭窥视。"
+  },
+  "tutorial-000777": {
+    "message": "在下面选择一个安全密码，以开启对密码的终极保护。"
+  },
+  "tutorial-000778": {
+    "message": "得益于我们的应用和扩展程序，您可以从任何地方轻松访问密码。"
+  },
+  "tutorial-000779": {
+    "message": "您可以在\"更多\"中找到我们的“应用程序和扩展”部分，或单击下面的按钮。"
+  },
+  "tutorial-000780": {
+    "message": "可以通过许多不同的方式自定义密码。"
+  },
+  "tutorial-000781": {
+    "message": "作为管理员，您可能希望查看这些常用设置。"
+  },
+  "backend-000144": {
+    "message": "密码"
+  },
+  "backend-000145": {
+    "message": "全部"
+  },
+  "backend-000146": {
+    "message": "标签"
+  },
+  "backend-000147": {
+    "message": "最近"
+  },
+  "backend-000148": {
+    "message": "收藏"
+  },
+  "backend-000149": {
+    "message": "共享"
+  },
+  "backend-000150": {
+    "message": "标签"
+  },
+  "backend-000151": {
+    "message": "安全性"
+  },
+  "backend-000152": {
+    "message": "回收站"
+  },
+  "backend-000153": {
+    "message": "详情"
+  },
+  "backend-000154": {
+    "message": "编辑"
+  },
+  "backend-000155": {
+    "message": "重命名"
+  },
+  "backend-000156": {
+    "message": "删除"
+  },
+  "backend-000157": {
+    "message": "恢复"
+  },
+  "backend-000158": {
+    "message": "创建密码"
+  },
+  "backend-000159": {
+    "message": "创建分类"
+  },
+  "backend-000160": {
+    "message": "创建标签"
+  },
+  "backend-000161": {
+    "message": "安全"
+  },
+  "backend-000163": {
+    "message": "弱"
+  },
+  "backend-000164": {
+    "message": "弱（重复）"
+  },
+  "backend-000165": {
+    "message": "若（已过期）"
+  },
+  "backend-000166": {
+    "message": "已泄露"
+  },
+  "backend-000167": {
+    "message": "分享"
+  },
+  "backend-000168": {
+    "message": "版本"
+  },
+  "backend-000169": {
+    "message": "二维码"
+  },
+  "backend-000170": {
+    "message": "密码"
+  },
+  "backend-000171": {
+    "message": "用户名"
+  },
+  "backend-000172": {
+    "message": "网站"
+  },
+  "backend-000173": {
+    "message": "创建标签..."
+  },
+  "backend-000174": {
+    "message": "颜色"
+  },
+  "backend-000175": {
+    "message": "名字"
+  },
+  "backend-000176": {
+    "message": "标签"
+  },
+  "backend-000177": {
+    "message": "一般性"
+  },
+  "backend-000178": {
+    "message": "属性"
+  },
+  "backend-000179": {
+    "message": "数字"
+  },
+  "backend-000180": {
+    "message": "特殊字符"
+  },
+  "backend-000181": {
+    "message": "更多选项"
+  },
+  "backend-000600": {
+    "message": "关闭"
+  },
+  "backend-000182": {
+    "message": "收藏"
+  },
+  "backend-000183": {
+    "message": "加密"
+  },
+  "backend-000184": {
+    "message": "服务器上"
+  },
+  "backend-000185": {
+    "message": "自定义字段"
+  },
+  "backend-000186": {
+    "message": "密钥"
+  },
+  "backend-000187": {
+    "message": "文本"
+  },
+  "backend-000188": {
+    "message": "文件"
+  },
+  "backend-000189": {
+    "message": "值"
+  },
+  "backend-000190": {
+    "message": "切换可见性"
+  },
+  "backend-000191": {
+    "message": "生成密码"
+  },
+  "backend-000192": {
+    "message": "简单服务端加密 V1"
+  },
+  "backend-000193": {
+    "message": "做些笔记"
+  },
+  "backend-000194": {
+    "message": "保存"
+  },
+  "backend-000195": {
+    "message": "创建分类"
+  },
+  "backend-000196": {
+    "message": "分类已创建"
+  },
+  "backend-000197": {
+    "message": "创建分类失败"
+  },
+  "backend-000198": {
+    "message": "重命名分类"
+  },
+  "backend-000199": {
+    "message": "分类已重命名"
+  },
+  "backend-000200": {
+    "message": "重命名分类失败"
+  },
+  "backend-000201": {
+    "message": "分类已移动"
+  },
+  "backend-000202": {
+    "message": "移动分类失败"
+  },
+  "backend-000203": {
+    "message": "删除分类"
+  },
+  "backend-000204": {
+    "message": "你想删除这个分类吗"
+  },
+  "backend-000205": {
+    "message": "分类已删除"
+  },
+  "backend-000206": {
+    "message": "删除分类失败"
+  },
+  "backend-000207": {
+    "message": "分类已恢复"
+  },
+  "backend-000208": {
+    "message": "恢复分类失败"
+  },
+  "backend-000209": {
+    "message": "创建标签"
+  },
+  "backend-000210": {
+    "message": "标签已创建"
+  },
+  "backend-000211": {
+    "message": "标签创建失败"
+  },
+  "backend-000212": {
+    "message": "编辑标签"
+  },
+  "backend-000213": {
+    "message": "生成随机颜色"
+  },
+  "backend-000214": {
+    "message": "标签已保存"
+  },
+  "backend-000215": {
+    "message": "保存标签失败"
+  },
+  "backend-000216": {
+    "message": "删除标签"
+  },
+  "backend-000217": {
+    "message": "你想删除这个标签吗"
+  },
+  "backend-000218": {
+    "message": "标签已删除"
+  },
+  "backend-000219": {
+    "message": "标签删除失败"
+  },
+  "backend-000220": {
+    "message": "标签已还原"
+  },
+  "backend-000221": {
+    "message": "标签还原失败"
+  },
+  "backend-000222": {
+    "message": "创建密码"
+  },
+  "backend-000223": {
+    "message": "密码已创建"
+  },
+  "backend-000224": {
+    "message": "创建密码失败"
+  },
+  "backend-000225": {
+    "message": "编辑密码"
+  },
+  "backend-000226": {
+    "message": "密码已保存"
+  },
+  "backend-000227": {
+    "message": "保存密码失败"
+  },
+  "backend-000228": {
+    "message": "密码已移动"
+  },
+  "backend-000229": {
+    "message": "移动密码失败"
+  },
+  "backend-000230": {
+    "message": "删除密码"
+  },
+  "backend-000231": {
+    "message": "你想删除这个密码吗"
+  },
+  "backend-000232": {
+    "message": "密码已删除"
+  },
+  "backend-000233": {
+    "message": "密码已恢复"
+  },
+  "backend-000234": {
+    "message": "密码已恢复"
+  },
+  "backend-000235": {
+    "message": "打开链接"
+  },
+  "backend-000236": {
+    "message": "复制链接"
+  },
+  "backend-000237": {
+    "message": "复制用户名"
+  },
+  "backend-000238": {
+    "message": "复制密码"
+  },
+  "backend-000239": {
+    "message": "$ELEMENT$ 已被复制到剪切板",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000240": {
+    "message": "复制 $ELEMENT$ 到剪切板时失败",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000241": {
+    "message": "最后修改于 $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000242": {
+    "message": "恢复版本"
+  },
+  "backend-000243": {
+    "message": "版本已恢复"
+  },
+  "backend-000244": {
+    "message": "版本恢复失败"
+  },
+  "backend-000245": {
+    "message": "你想恢复版本吗？"
+  },
+  "backend-000246": {
+    "message": "与您共享"
+  },
+  "backend-000247": {
+    "message": "由您共享"
+  },
+  "backend-000248": {
+    "message": "统计"
+  },
+  "backend-000249": {
+    "message": "创建于"
+  },
+  "backend-000250": {
+    "message": "最后更新于"
+  },
+  "backend-000251": {
+    "message": "$COUNT$ 个版本",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000252": {
+    "message": "分享"
+  },
+  "backend-000253": {
+    "message": "$COUNT$ 次分享",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000254": {
+    "message": "服务器端加密"
+  },
+  "backend-000255": {
+    "message": "客户端加密"
+  },
+  "backend-000256": {
+    "message": "无加密"
+  },
+  "backend-000257": {
+    "message": "简单加密（版本 1）"
+  },
+  "backend-000258": {
+    "message": "简单加密（版本 2）"
+  },
+  "backend-000259": {
+    "message": "高级加密（SSE V2）"
+  },
+  "backend-000260": {
+    "message": "使用 libsodium 加密"
+  },
+  "backend-000261": {
+    "message": "更多"
+  },
+  "backend-000262": {
+    "message": "备份与还原"
+  },
+  "backend-000263": {
+    "message": "设置"
+  },
+  "backend-000264": {
+    "message": "参考手册"
+  },
+  "backend-000265": {
+    "message": "Apps & Extensions"
+  },
+  "backend-000266": {
+    "message": "$EDITABLE$ 和 $SHAREABLE$。",
+    "placeholders": {
+      "editable": {
+        "content": "$1"
+      },
+      "shareable": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000267": {
+    "message": "可以编辑"
+  },
+  "backend-000268": {
+    "message": "不可编辑"
+  },
+  "backend-000269": {
+    "message": "可以共享"
+  },
+  "backend-000270": {
+    "message": "不可共享"
+  },
+  "backend-000271": {
+    "message": "搜索用户"
+  },
+  "backend-000272": {
+    "message": "设置过期日期"
+  },
+  "backend-000273": {
+    "message": "过期于 $DATETIME$",
+    "placeholders": {
+      "datetime": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000274": {
+    "message": "选择过期日期"
+  },
+  "backend-000275": {
+    "message": "请选择一个未来的日期"
+  },
+  "backend-000276": {
+    "message": "非法日期"
+  },
+  "backend-000277": {
+    "message": "该用户 $UID$ 不存在",
+    "placeholders": {
+      "uid": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000278": {
+    "message": "无法共享密码：$MESSAGE$",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000279": {
+    "message": "切换写入权限"
+  },
+  "backend-000280": {
+    "message": "切换共享权限"
+  },
+  "backend-000281": {
+    "message": "停止共享"
+  },
+  "backend-000282": {
+    "message": "日期"
+  },
+  "backend-000283": {
+    "message": "默认缓存（0 个文件，0 B）"
+  },
+  "backend-000284": {
+    "message": "头像缓存（0 个文件，0 B）"
+  },
+  "backend-000285": {
+    "message": "网站图标缓存（0 个文件，0 B）"
+  },
+  "backend-000286": {
+    "message": "预览缓存（0 个文件，0 B）"
+  },
+  "backend-000287": {
+    "message": "密码缓存（0 个文件，0 B）"
+  },
+  "backend-000288": {
+    "message": "已改变"
+  },
+  "backend-000289": {
+    "message": "已修改"
+  },
+  "backend-000290": {
+    "message": "已编辑"
+  },
+  "backend-000291": {
+    "message": "已创建"
+  },
+  "backend-000292": {
+    "message": "分类"
+  },
+  "backend-000293": {
+    "message": "版本"
+  },
+  "backend-000294": {
+    "message": "链接"
+  },
+  "backend-000295": {
+    "message": "上级项"
+  },
+  "backend-000296": {
+    "message": "删除所有项"
+  },
+  "backend-000297": {
+    "message": "恢复所有项"
+  },
+  "backend-000298": {
+    "message": "恢复项"
+  },
+  "backend-000299": {
+    "message": "恢复所有回收站中的项？"
+  },
+  "backend-000300": {
+    "message": "恢复该项"
+  },
+  "backend-000301": {
+    "message": "项已恢复"
+  },
+  "backend-000302": {
+    "message": "清空回收站"
+  },
+  "backend-000303": {
+    "message": "删除所有回收站中的项？"
+  },
+  "backend-000304": {
+    "message": "回收站已清空"
+  },
+  "backend-000305": {
+    "message": "搜索"
+  },
+  "backend-000306": {
+    "message": "使用搜索框以搜索"
+  },
+  "backend-000307": {
+    "message": "在所有地方搜索 \"$QUERY$\"",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000308": {
+    "message": "这里空空如也"
+  },
+  "backend-000309": {
+    "message": "点击“+”来创建些什么"
+  },
+  "backend-000310": {
+    "message": "已删除项会出现这里"
+  },
+  "backend-000311": {
+    "message": "没有密码与您共享"
+  },
+  "backend-000312": {
+    "message": "您没有共享任何密码"
+  },
+  "backend-000313": {
+    "message": "您的收藏会出现在这里"
+  },
+  "backend-000314": {
+    "message": "最好看看其它部分"
+  },
+  "backend-000315": {
+    "message": "那也许是个好事"
+  },
+  "backend-000316": {
+    "message": "跳转到 $HREF$",
+    "placeholders": {
+      "href": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000317": {
+    "message": "内容"
+  },
+  "backend-000318": {
+    "message": "数据 $COUNT$：$TITLE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "title": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000319": {
+    "message": "无法取得页面：$MESSAGE$。",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000320": {
+    "message": "非法的内容类型：$MIME$",
+    "placeholders": {
+      "mime": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000321": {
+    "message": "没有内容可用"
+  },
+  "backend-000322": {
+    "message": "未找到"
+  },
+  "backend-000323": {
+    "message": "仍需要帮助？"
+  },
+  "backend-000324": {
+    "message": "在我们的论坛中询问！"
+  },
+  "backend-000325": {
+    "message": "发现一个错误？"
+  },
+  "backend-000326": {
+    "message": "告诉我们！"
+  },
+  "backend-000327": {
+    "message": "该会话已过期"
+  },
+  "backend-000328": {
+    "message": "API 会话令牌已过期"
+  },
+  "backend-000329": {
+    "message": "网络错误"
+  },
+  "backend-000330": {
+    "message": "无法载入 $MODULE$",
+    "placeholders": {
+      "module": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000331": {
+    "message": "按名字排序"
+  },
+  "backend-000332": {
+    "message": "按修改日期排序"
+  },
+  "backend-000333": {
+    "message": "$PASSWORDS$ 个密码",
+    "placeholders": {
+      "passwords": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000334": {
+    "message": "1 个密码"
+  },
+  "backend-000335": {
+    "message": "$FOLDERS$ 个分类",
+    "placeholders": {
+      "folders": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000336": {
+    "message": "1 个分类"
+  },
+  "backend-000337": {
+    "message": "$TAGS$ 个标签",
+    "placeholders": {
+      "tags": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000338": {
+    "message": "1 个标签"
+  },
+  "backend-000339": {
+    "message": "什么都没有"
+  },
+  "backend-000340": {
+    "message": " 和 "
+  },
+  "backend-000341": {
+    "message": "匹配"
+  },
+  "backend-000342": {
+    "message": "匹配"
+  },
+  "backend-000343": {
+    "message": "创建于"
+  },
+  "backend-000344": {
+    "message": "您正以 $USER$ 身份登录",
+    "placeholders": {
+      "user": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000345": {
+    "message": "登录"
+  },
+  "backend-000346": {
+    "message": "再次请求令牌"
+  },
+  "backend-000347": {
+    "message": "尝试次数过多"
+  },
+  "backend-000348": {
+    "message": "密码过短"
+  },
+  "backend-000349": {
+    "message": "未知错误"
+  },
+  "backend-000350": {
+    "message": "令牌请求错误"
+  },
+  "backend-000351": {
+    "message": "维护中"
+  },
+  "backend-000352": {
+    "message": "未知"
+  },
+  "backend-000353": {
+    "message": "系统"
+  },
+  "backend-000354": {
+    "message": "公开"
+  },
+  "backend-000355": {
+    "message": "后台任务"
+  },
+  "backend-000356": {
+    "message": "命令行终端"
+  },
+  "backend-000357": {
+    "message": "请更正您的输入"
+  },
+  "backend-000358": {
+    "message": "显示值"
+  },
+  "backend-000359": {
+    "message": "取消"
+  },
+  "backend-000360": {
+    "message": "好"
+  },
+  "backend-000361": {
+    "message": "真"
+  },
+  "backend-000362": {
+    "message": "假"
+  },
+  "backend-000363": {
+    "message": "是"
+  },
+  "backend-000364": {
+    "message": "否"
+  },
+  "backend-000365": {
+    "message": "$NAME$ 和您共享了这个。",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000366": {
+    "message": "您已经到达最长 4096 字符的限制"
+  },
+  "backend-000367": {
+    "message": "我们找不到任何有关“$QUERY$”的内容。",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000368": {
+    "message": "页面“$PAGE$”无法从参考手册服务器上获取到。",
+    "placeholders": {
+      "page": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000369": {
+    "message": "一些数据正等待被同步"
+  },
+  "backend-000370": {
+    "message": "您将在 $TIME$ 秒后被退出登录",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000371": {
+    "message": "您尝试获得了太多令牌。请稍后再试。"
+  },
+  "backend-000372": {
+    "message": "如果共享，端到端加密将对该密码禁用。"
+  },
+  "backend-000373": {
+    "message": "该会话令牌不再合法。应用将立刻重载。"
+  },
+  "backend-000374": {
+    "message": "2018 年的今天，Passwords 推出了第一个公开版本。感谢您使用此应用。"
+  },
+  "fronted-000375": {
+    "message": "需要 HTTPS"
+  },
+  "fronted-000376": {
+    "message": "重新加载此页"
+  },
+  "fronted-000377": {
+    "message": "论坛"
+  },
+  "fronted-000378": {
+    "message": "文档"
+  },
+  "fronted-000379": {
+    "message": "你可以尝试通过 HTTPS 来 $STR_1$ 此页面。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000380": {
+    "message": "该应用需要 $STR_1$ 来确保安全运作。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000381": {
+    "message": "这不是一只臭虫！如果你需要帮助，浏览我们的 $STR_1$。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000382": {
+    "message": "查看下面的 HTTPS 报告以调试问题。"
+  },
+  "fronted-000383": {
+    "message": "阅读 $STR_1$ 以设置你的服务器使用 HTTPS。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000384": {
+    "message": "如果你使用了任何形式的代理，阅读 $STR_1$。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000385": {
+    "message": "如需要，前往 $STR_1$ 以获得免费的 HTTPS 证书。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000386": {
+    "message": "如果此问题仍然存在，您应与管理员联系。"
+  },
+  "fronted-000387": {
+    "message": "密码令牌 $STR_1$ - $STR_1$",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000388": {
+    "message": "打开文档"
+  },
+  "fronted-000389": {
+    "message": "永不"
+  },
+  "fronted-000390": {
+    "message": "内部数据处理"
+  },
+  "fronted-000391": {
+    "message": "影像渲染"
+  },
+  "fronted-000392": {
+    "message": "Imagick / GMagick（推荐）"
+  },
+  "fronted-000393": {
+    "message": "外部服务"
+  },
+  "fronted-000394": {
+    "message": "密码安全度检验"
+  },
+  "fronted-000395": {
+    "message": "Have I been pwned?（推荐）"
+  },
+  "fronted-000396": {
+    "message": "25 Million Passwords（本地）"
+  },
+  "fronted-000397": {
+    "message": "5 Million Passwords（本地）"
+  },
+  "fronted-000398": {
+    "message": "Big local database & Hibp?"
+  },
+  "fronted-000399": {
+    "message": "密码生成器服务"
+  },
+  "fronted-000400": {
+    "message": "本地词典"
+  },
+  "fronted-000401": {
+    "message": "随机字符"
+  },
+  "fronted-000402": {
+    "message": "watchout4snakes.com"
+  },
+  "fronted-000403": {
+    "message": "Leipzig Corpora Collection（推荐）"
+  },
+  "fronted-000404": {
+    "message": "网站图标服务"
+  },
+  "fronted-000405": {
+    "message": "本地分析器"
+  },
+  "fronted-000406": {
+    "message": "Besticon（推荐）"
+  },
+  "fronted-000407": {
+    "message": "无"
+  },
+  "fronted-000408": {
+    "message": "网站预览服务"
+  },
+  "fronted-000409": {
+    "message": "网站预览 API Key"
+  },
+  "fronted-000410": {
+    "message": "Pageres / PhantomJS（本地）"
+  },
+  "fronted-000789": {
+    "message": "WKHTML（本地）"
+  },
+  "fronted-000412": {
+    "message": "screenshotapi.io"
+  },
+  "fronted-000413": {
+    "message": "默认邮箱设置"
+  },
+  "fronted-000414": {
+    "message": "发送有关安全事件的电子邮件"
+  },
+  "fronted-000415": {
+    "message": "发送有关共享事件的电子邮件"
+  },
+  "fronted-000416": {
+    "message": "其它设置"
+  },
+  "fronted-000417": {
+    "message": "从数据库中删除已删除的对象"
+  },
+  "fronted-000418": {
+    "message": "展示位于 \"Apps\" 的每日更新"
+  },
+  "fronted-000419": {
+    "message": "永不"
+  },
+  "fronted-000420": {
+    "message": "立即"
+  },
+  "fronted-000421": {
+    "message": "两小时后"
+  },
+  "fronted-000422": {
+    "message": "一天后"
+  },
+  "fronted-000423": {
+    "message": "两周后"
+  },
+  "fronted-000424": {
+    "message": "一月后"
+  },
+  "fronted-000425": {
+    "message": "一年后"
+  },
+  "fronted-000426": {
+    "message": "备份设置"
+  },
+  "fronted-000427": {
+    "message": "定期备份"
+  },
+  "fronted-000428": {
+    "message": "每小时"
+  },
+  "fronted-000429": {
+    "message": "每六小时"
+  },
+  "fronted-000430": {
+    "message": "每天"
+  },
+  "fronted-000431": {
+    "message": "每两天"
+  },
+  "fronted-000432": {
+    "message": "每周"
+  },
+  "fronted-000433": {
+    "message": "每两周"
+  },
+  "fronted-000434": {
+    "message": "备份保存的数量"
+  },
+  "fronted-000435": {
+    "message": "缓存"
+  },
+  "fronted-000436": {
+    "message": "默认缓存（$STR_1$ 个文件，$STR_1$）",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000437": {
+    "message": "头像缓存（$STR_1$ 个文件，$STR_1$）",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000438": {
+    "message": "网站图标缓存（$STR_1$ 个文件，$STR_1$）",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000439": {
+    "message": "预览缓存（$STR_1$ 个文件，$STR_1$）",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000440": {
+    "message": "密码缓存（$STR_1$ 个文件，$STR_1$）",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000441": {
+    "message": "清除"
+  },
+  "fronted-000442": {
+    "message": "清除该缓存"
+  },
+  "fronted-000443": {
+    "message": "您不能清除一个使用了共享服务的缓存"
+  },
+  "fronted-000444": {
+    "message": "已保存"
+  },
+  "fronted-000445": {
+    "message": "已清除"
+  },
+  "fronted-000447": {
+    "message": "需要帮助"
+  },
+  "fronted-000448": {
+    "message": "发现一只臭虫"
+  },
+  "fronted-000449": {
+    "message": "查询文档"
+  },
+  "fronted-000450": {
+    "message": "$STR_1$, $STR_1$ 还是 $STR_1$？我们都考虑到了！",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      },
+      "str_3": {
+        "content": "$3"
+      }
+    }
+  },
+  "fronted-000451": {
+    "message": "$STRING_1$ $STRING_2$ 已不再受到支持。",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      },
+      "string_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000452": {
+    "message": "密码需要 HTTPS。"
+  },
+  "fronted-000453": {
+    "message": "使用 $STR_1$ 来执行后台任务可能导致延迟。我们推荐使用 Cron。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000454": {
+    "message": "请检查系统需求。"
+  },
+  "fronted-000455": {
+    "message": "密码未分享"
+  },
+  "fronted-000456": {
+    "message": "未与 $STRING_1$ 共享密码，因为该密码已经被共享",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000457": {
+    "message": "您有一个不安全的密码"
+  },
+  "fronted-000458": {
+    "message": "您有一些不安全的密码"
+  },
+  "fronted-000459": {
+    "message": "您的其中一个密码已不再安全。"
+  },
+  "fronted-000460": {
+    "message": "您的其中一些密码已不再安全。"
+  },
+  "fronted-000461": {
+    "message": "密码会定期检查您的密码是否已因数据泄露而受到破坏。"
+  },
+  "fronted-000462": {
+    "message": "本次安全检查发现您的一个密码已不再安全。"
+  },
+  "fronted-000463": {
+    "message": "本次安全检查发现您的 $STR_1$ 个密码已不再安全。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000464": {
+    "message": "这意味着该密码已暴露于互联网，您的帐户处于风险状态。"
+  },
+  "fronted-000465": {
+    "message": "这意味着这些密码已暴露于互联网，您的这些帐户处于风险状态。"
+  },
+  "fronted-000466": {
+    "message": "先前该密码已被标记为不安全，应立即更改。"
+  },
+  "fronted-000467": {
+    "message": "先前这些密码已被标记为不安全，应立即更改。"
+  },
+  "fronted-000468": {
+    "message": "你可以在密码应用中创建新的安全密码。"
+  },
+  "fronted-000469": {
+    "message": "你可以在密码应用中创建新的安全密码。"
+  },
+  "fronted-000470": {
+    "message": "立即更改密码"
+  },
+  "fronted-000471": {
+    "message": "立即更改密码"
+  },
+  "fronted-000472": {
+    "message": "打开密码应用更改它。"
+  },
+  "fronted-000473": {
+    "message": "打开密码应用更改它们。"
+  },
+  "fronted-000474": {
+    "message": "$STR_1$ 共享给您一个密码。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000475": {
+    "message": "$STR_1$ 共享给您 $STR_1$ 个密码。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000476": {
+    "message": "$STRING_4$ 和 $STRING_3$ 共享给您 $STRING_1$ 个密码。",
+    "placeholders": {
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000477": {
+    "message": "$STRING_5$、$STRING_4$ 和 $STRING_3$ 共享给您 $STRING_1$ 个密码。",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000478": {
+    "message": "$STRING_5$、$STRING_4$ 和其它 $STRING_2$ 个人共享给您 $STRING_1$ 个密码。",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_2": {
+        "content": "$2"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000479": {
+    "message": "打开密码应用以查看。"
+  },
+  "fronted-000480": {
+    "message": "打开密码应用以查看。"
+  },
+  "fronted-000481": {
+    "message": "一个密码在 $STR_1$ 上与您分享。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000482": {
+    "message": "一些密码在 $STR_1$ 上与您分享。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000483": {
+    "message": "查看共享给我的密码"
+  },
+  "fronted-000484": {
+    "message": "您的一个密码无法共享，因为收件人已经有访问它的权限。"
+  },
+  "fronted-000485": {
+    "message": "您的 $STR_1$ 个密码无法共享，因为收件人已经有访问它们的权限。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000486": {
+    "message": "打开密码应用程序以查看您的共享密码。"
+  },
+  "fronted-000487": {
+    "message": "共享与您共享的密码有时可以创建一个循环。"
+  },
+  "fronted-000488": {
+    "message": "为防止这种情况，将不会共享这些密码。"
+  },
+  "fronted-000489": {
+    "message": "对您帐户的管理权限"
+  },
+  "fronted-000490": {
+    "message": "$STR_1$ 于 $STR_1$ 尝试登录您的账号。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000491": {
+    "message": "$STR_1$ 于 $STR_1$ 登录您的账号。",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000492": {
+    "message": "由于您使用的是主密码，因此这并不意味着已授予对您的数据的访问权限。"
+  },
+  "fronted-000493": {
+    "message": "为防止意外的数据访问，您应该设置一个主密码。"
+  },
+  "fronted-000494": {
+    "message": "已删除用户（$STR_1$）",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000495": {
+    "message": "帮助我们改进密码应用"
+  },
+  "fronted-000496": {
+    "message": "你可以参与服务器调查来帮助我们改进密码应用。"
+  },
+  "fronted-000497": {
+    "message": "这将向我们发送一些有关您的设置和所选设置的匿名数据。"
+  },
+  "fronted-000498": {
+    "message": "您可以随时在应用设置中更改此设置。"
+  },
+  "fronted-000499": {
+    "message": "暂时不"
+  },
+  "fronted-000500": {
+    "message": "参与"
+  },
+  "fronted-000501": {
+    "message": "服务器调查参与"
+  },
+  "fronted-000502": {
+    "message": "基本"
+  },
+  "fronted-000503": {
+    "message": "完整"
+  },
+  "fronted-000504": {
+    "message": "未设定"
+  },
+  "fronted-000505": {
+    "message": "请考虑自托管您的网站图标 API"
+  },
+  "fronted-000506": {
+    "message": "您当前正在使用我们的默认 Besticon 实例来获取网站图标。"
+  },
+  "fronted-000507": {
+    "message": "我们的公开实例不够强大，无法处理所有流量。"
+  },
+  "fronted-000508": {
+    "message": "请单击链接，然后按照我们的简单教程自行托管 Besticon。"
+  },
+  "fronted-000509": {
+    "message": "您的网页图标服务设定不合法"
+  },
+  "fronted-000510": {
+    "message": "您的预览服务设定不合法"
+  },
+  "fronted-000511": {
+    "message": "您选择的网站图标服务需要 API 密钥或终结点。"
+  },
+  "fronted-000512": {
+    "message": "您选择的预览服务需要 API 密钥或终结点。"
+  },
+  "fronted-000513": {
+    "message": "打开管理员设置以更新配置或选择其他服务。"
+  },
+  "fronted-000514": {
+    "message": "我们检测到几次通过 \"$STR_1$\" 解密您密码数据库的失败尝试",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000515": {
+    "message": "这可能表明有人试图闯入您的帐户。"
+  },
+  "fronted-000516": {
+    "message": "为防止进一步尝试，该客户端的 API 凭据被吊销。"
+  },
+  "fronted-000517": {
+    "message": "此外，基于密码的 API 身份验证已被禁用。"
+  },
+  "fronted-000518": {
+    "message": "如果要继续使用此客户端，则需要为其创建一个新令牌。"
+  },
+  "fronted-000519": {
+    "message": "如果您不认识此客户端，请更改密码并检视设备列表。"
+  },
+  "fronted-000520": {
+    "message": "为防止进一步尝试，已禁用基于密码的 API 身份验证。"
+  },
+  "fronted-000521": {
+    "message": "要再次启用它，请通过 Webapp 或任何使用令牌的客户端登录。"
+  },
+  "fronted-000522": {
+    "message": "如果您不认识此客户端，请更改您的主密码和 Nextcloud 密码。"
+  },
+  "fronted-000523": {
+    "message": "为了提高安全性，我们建议使用设备特定的令牌代替密码。"
+  }
+}

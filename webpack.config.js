@@ -1,11 +1,12 @@
-let webpack              = require('webpack'),
-    config               = require('./package.json'),
-    UglifyJS             = require('uglify-js'),
-    CopyWebpackPlugin    = require('copy-webpack-plugin'),
-    CleanWebpackPlugin   = require('clean-webpack-plugin'),
-    VueLoaderPlugin      = require('vue-loader/lib/plugin'),
-    MiniCssExtractPlugin = require('mini-css-extract-plugin'),
-    CssMinimizerPlugin   = require('css-minimizer-webpack-plugin');
+let webpack                    = require('webpack'),
+    config                     = require('./package.json'),
+    UglifyJS                   = require('uglify-js'),
+    CopyWebpackPlugin          = require('copy-webpack-plugin'),
+    CleanWebpackPlugin         = require('clean-webpack-plugin'),
+    VueLoaderPlugin            = require('vue-loader/lib/plugin'),
+    MiniCssExtractPlugin       = require('mini-css-extract-plugin'),
+    CssMinimizerPlugin         = require('css-minimizer-webpack-plugin'),
+    CompileLanguageFilesPlugin = require("./scripts/compile-language-files.js");
 
 module.exports = (env, argv) => {
     let production = argv.mode === 'production';
@@ -24,7 +25,7 @@ module.exports = (env, argv) => {
                     APP_VERSION        : `"${config.version}"`,
                     APP_MAIN_VERSION   : `"${config.version.substr(0, config.version.indexOf('.'))}"`,
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
-                    APP_ENVIRONMENT    : production ? '"production"' : '"development"',
+                    APP_ENVIRONMENT    : production ? '"production"':'"development"',
                     APP_NIGHTLY        : !!(env && env.features === 'true')
                 }
             ),
@@ -39,32 +40,12 @@ module.exports = (env, argv) => {
             ),
             new VueLoaderPlugin(),
             new MiniCssExtractPlugin({filename: 'css/[name].css', chunkFilename: 'css/[name].[chunkhash].css'}),
-            new CleanWebpackPlugin([`${__dirname}/src/css`, `${__dirname}/src/js/Static`])
+            new CleanWebpackPlugin([`${__dirname}/src/css`, `${__dirname}/src/js/Static`]),
+            new CompileLanguageFilesPlugin()
         ];
 
-    if(production) {
-        let transformJson = (content) => {
-            let data = JSON.parse(content.toString('utf8'));
-            return JSON.stringify(data);
-        };
-
-        if(!!(env && env.compress === 'true')) {
-            plugins.push(
-                new CopyWebpackPlugin(
-                    {
-                        patterns:
-                            [
-                                {from: `${__dirname}/src/l10n/*.js`, to: `${__dirname}/`, transform},
-                                {from: `${__dirname}/src/l10n/*.json`, to: `${__dirname}/`, transform: transformJson},
-                                {from: `${__dirname}/src/l10n/*/*.json`, to: `${__dirname}/`, transform: transformJson}
-                            ]
-                    }
-                ));
-        }
-    }
-
     return {
-        mode        : production ? 'production' : 'development',
+        mode        : production ? 'production':'development',
         entry       : {
             app  : `${__dirname}/src/js/app.js`,
             admin: `${__dirname}/src/js/admin.js`
@@ -75,7 +56,7 @@ module.exports = (env, argv) => {
             chunkFilename: 'js/Static/[name].[chunkhash].js'
         },
         optimization: {
-            minimize: production,
+            minimize : production,
             minimizer: [
                 `...`,
                 new CssMinimizerPlugin(
@@ -134,7 +115,7 @@ module.exports = (env, argv) => {
                             options: {
                                 sassOptions: {
                                     sourceMap  : !production,
-                                    outputStyle: production ? 'compressed' : null
+                                    outputStyle: production ? 'compressed':null
                                 }
                             }
                         },

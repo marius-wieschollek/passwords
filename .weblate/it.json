@@ -1,0 +1,2449 @@
+{
+  "apps-000001": {
+    "message": "ufficiale"
+  },
+  "apps-000002": {
+    "message": "da $AUTHOR$",
+    "placeholders": {
+      "author": {
+        "content": "$1"
+      }
+    }
+  },
+  "apps-000003": {
+    "message": "Sorgenti"
+  },
+  "apps-000005": {
+    "message": "Connetti con PassLink"
+  },
+  "apps-000006": {
+    "message": "Connetti un nuovo dispositivo"
+  },
+  "apps-000007": {
+    "message": "Connetti tramite link"
+  },
+  "apps-000008": {
+    "message": "Scegli un nome:"
+  },
+  "apps-000009": {
+    "message": "I codici non corrispondono"
+  },
+  "apps-000010": {
+    "message": "Sembra ok"
+  },
+  "apps-000011": {
+    "message": "Connesso con successo"
+  },
+  "apps-000012": {
+    "message": "Ho finito"
+  },
+  "apps-000013": {
+    "message": "Non riprovare"
+  },
+  "apps-000014": {
+    "message": "Connetti qualcos'altro"
+  },
+  "apps-000015": {
+    "message": "Riprova"
+  },
+  "apps-000018": {
+    "message": "Hai cancellato la connessione"
+  },
+  "apps-000019": {
+    "message": "Non hai confermato la connessione in tempo"
+  },
+  "apps-000022": {
+    "message": "Controlla se i codici qui sotto corrispondono a quelli forniti dal dispositivo o app:"
+  },
+  "backups-000028": {
+    "message": "Backup/Esporta"
+  },
+  "backups-000029": {
+    "message": "Seleziona formato"
+  },
+  "backups-000030": {
+    "message": "Perfavore scegli"
+  },
+  "backups-000031": {
+    "message": "Backup database"
+  },
+  "backups-000032": {
+    "message": "CSV Predefinito"
+  },
+  "backups-000033": {
+    "message": "Leggi la guida di importazione di $LABEL$",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000034": {
+    "message": "o"
+  },
+  "backups-000035": {
+    "message": "backup database"
+  },
+  "backups-000036": {
+    "message": "CSV personalizzato"
+  },
+  "backups-000037": {
+    "message": "prova l'import CSV generico"
+  },
+  "backups-000038": {
+    "message": "Nessun import per il tuo CSV?"
+  },
+  "backups-000039": {
+    "message": "Backup password"
+  },
+  "backups-000040": {
+    "message": "(Opzionale) Cripta il backup con una password di almeno 10 caratteri"
+  },
+  "backups-000041": {
+    "message": "Questo import supporta solo CSV"
+  },
+  "backups-000042": {
+    "message": "Esporta password"
+  },
+  "backups-000043": {
+    "message": "Esporta cartelle"
+  },
+  "backups-000044": {
+    "message": "Esporta tag"
+  },
+  "backups-000045": {
+    "message": "Campi personalizzati"
+  },
+  "backups-000046": {
+    "message": "Cartella"
+  },
+  "backups-000047": {
+    "message": "Etichette"
+  },
+  "backups-000048": {
+    "message": "Cartella superiore"
+  },
+  "backups-000049": {
+    "message": "ID Cartella"
+  },
+  "backups-000050": {
+    "message": "ID Etichette"
+  },
+  "backups-000051": {
+    "message": "ID Cartella Superiore"
+  },
+  "backups-000052": {
+    "message": "Vuoto"
+  },
+  "backups-000053": {
+    "message": "Aggiungi intestazione"
+  },
+  "backups-000054": {
+    "message": "Esporta password condivise con me"
+  },
+  "backups-000055": {
+    "message": "Non modificare password condivise con me"
+  },
+  "backups-000056": {
+    "message": "Non importare campi vuoti"
+  },
+  "backups-000057": {
+    "message": "Avvia esportazione"
+  },
+  "backups-000058": {
+    "message": "Esporta"
+  },
+  "backups-000059": {
+    "message": "Aspettando..."
+  },
+  "backups-000060": {
+    "message": "Errore esportazione"
+  },
+  "backups-000061": {
+    "message": "Scarica $FORMAT$",
+    "placeholders": {
+      "format": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000062": {
+    "message": "Niente da esportare"
+  },
+  "backups-000063": {
+    "message": "Non ci sono dati da esportare"
+  },
+  "backups-000064": {
+    "message": "Ripristina/Importa"
+  },
+  "backups-000065": {
+    "message": "Seleziona formato di importazione"
+  },
+  "backups-000066": {
+    "message": "CSV Password"
+  },
+  "backups-000067": {
+    "message": "CSV Cartelle"
+  },
+  "backups-000068": {
+    "message": "CSV Personalizzato"
+  },
+  "backups-000069": {
+    "message": "CSV Peronalizzato / Altro"
+  },
+  "backups-000070": {
+    "message": "Seleziona file"
+  },
+  "backups-000071": {
+    "message": "Seleziona opzioni"
+  },
+  "backups-000072": {
+    "message": "Gestione conflitti"
+  },
+  "backups-000073": {
+    "message": "Ignora se la stessa revisione"
+  },
+  "backups-000074": {
+    "message": "Ignora sempre"
+  },
+  "backups-000075": {
+    "message": "Sovrascrivi esistente"
+  },
+  "backups-000076": {
+    "message": "Unisci con esistente"
+  },
+  "backups-000077": {
+    "message": "Crea nuova voce"
+  },
+  "backups-000078": {
+    "message": "Per backup criptati"
+  },
+  "backups-000079": {
+    "message": "Opzioni CSV"
+  },
+  "backups-000080": {
+    "message": "Database"
+  },
+  "backups-000081": {
+    "message": "Carattere delimitatore"
+  },
+  "backups-000082": {
+    "message": "Carattere di escaping"
+  },
+  "backups-000083": {
+    "message": "Separatore"
+  },
+  "backups-000084": {
+    "message": "Interruzione di linea"
+  },
+  "backups-000085": {
+    "message": "Virgolette"
+  },
+  "backups-000086": {
+    "message": "Apostrofo"
+  },
+  "backups-000087": {
+    "message": "Backslash"
+  },
+  "backups-000088": {
+    "message": "Rileva"
+  },
+  "backups-000089": {
+    "message": "Virgola"
+  },
+  "backups-000090": {
+    "message": "Punto e virgola"
+  },
+  "backups-000091": {
+    "message": "Spazio"
+  },
+  "backups-000092": {
+    "message": "Tab"
+  },
+  "backups-000093": {
+    "message": "Rileva campi non delimitati"
+  },
+  "backups-000094": {
+    "message": "Salta prima riga"
+  },
+  "backups-000095": {
+    "message": "Interpola campi mancanti"
+  },
+  "backups-000096": {
+    "message": "Mappatura colonne CSV"
+  },
+  "backups-000097": {
+    "message": "Linea Anteprima"
+  },
+  "backups-000098": {
+    "message": "Linea $LINE$",
+    "placeholders": {
+      "line": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000099": {
+    "message": "(nessun valore)"
+  },
+  "backups-000100": {
+    "message": "Ignora"
+  },
+  "backups-000101": {
+    "message": "Esegui importazione"
+  },
+  "backups-000102": {
+    "message": "Importa"
+  },
+  "backups-000103": {
+    "message": "Analisi del file di ingresso"
+  },
+  "backups-000104": {
+    "message": "Analisi delle etichette"
+  },
+  "backups-000105": {
+    "message": "Analisi delle cartelle"
+  },
+  "backups-000106": {
+    "message": "Leggo le etichette"
+  },
+  "backups-000107": {
+    "message": "Importo le etichette"
+  },
+  "backups-000108": {
+    "message": "Leggo le cartelle"
+  },
+  "backups-000109": {
+    "message": "Importo le cartelle"
+  },
+  "backups-000110": {
+    "message": "Leggo le password"
+  },
+  "backups-000111": {
+    "message": "Importo le password"
+  },
+  "backups-000112": {
+    "message": "Importazione fallita"
+  },
+  "backups-000113": {
+    "message": "Importazione fallita parzialmente"
+  },
+  "backups-000114": {
+    "message": "Importazione eseguita con successo"
+  },
+  "backups-000115": {
+    "message": "Errore importazione"
+  },
+  "backups-000116": {
+    "message": "Alcuni oggetti presentano errori:"
+  },
+  "backups-000117": {
+    "message": "Tipo file \"$TYPE$\" non valido",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000118": {
+    "message": "Password richiesta"
+  },
+  "backups-000119": {
+    "message": "Password non valida"
+  },
+  "backups-000120": {
+    "message": "Impossibile decriptare le password"
+  },
+  "backups-000121": {
+    "message": "Impossibile decriptare le cartelle"
+  },
+  "backups-000122": {
+    "message": "Impossibile decriptare le etichette"
+  },
+  "backups-000123": {
+    "message": "Il file di importazione è vuoto"
+  },
+  "backups-000124": {
+    "message": "Il vile CSV non può essere mappato"
+  },
+  "backups-000125": {
+    "message": "Login"
+  },
+  "backups-000126": {
+    "message": "Note"
+  },
+  "backups-000127": {
+    "message": "Carte di Credito"
+  },
+  "backups-000128": {
+    "message": "Identità"
+  },
+  "backups-000129": {
+    "message": "Finanze"
+  },
+  "backups-000130": {
+    "message": "Licenze"
+  },
+  "backups-000131": {
+    "message": "Viaggi"
+  },
+  "backups-000132": {
+    "message": "Computer"
+  },
+  "backups-000133": {
+    "message": "Misto"
+  },
+  "backups-000134": {
+    "message": "Delimitatore finale non valido nel campo"
+  },
+  "backups-000135": {
+    "message": "Questo file non può essere analizzato: $ERRORS$",
+    "placeholders": {
+      "errors": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000136": {
+    "message": "$MESSAGE$ nella linea $LINE$, carattere $CHARACTER$.",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      },
+      "line": {
+        "content": "$2"
+      },
+      "character": {
+        "content": "$3"
+      }
+    }
+  },
+  "backups-000137": {
+    "message": "\"$LABEL$\" ha file allegati che non possono essere importati.",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000138": {
+    "message": "Il tipo di \"$FIELD$\" in \"$LABEL$\" è sconosciuto e non può essere importato.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000139": {
+    "message": "L'etichetta di \"$FIELD$\" in \"$LABEL$\" eccede 48 caratteri ed è stata tagliata.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000140": {
+    "message": "Il valore di \"$FIELD$\" in \"$LABEL$\" eccede 320 caratteri ed è stato tagliato.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000141": {
+    "message": "Più informazioni disponibili nel log. (Premi F12)"
+  },
+  "backups-000142": {
+    "message": "Il file è di tipo \"$ACTUAL$\" ma mi aspettavo \"$EXPECTED$\". Hai scelto il file o l'importatore sbagliato.",
+    "placeholders": {
+      "actual": {
+        "content": "$1"
+      },
+      "expected": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000143": {
+    "message": "$SERVICE$ è risaputo generi file corrotti. Consulta il manuale per avere aiuto nel caso non venga importato.",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000144": {
+    "message": "Password"
+  },
+  "backend-000145": {
+    "message": "Tutte"
+  },
+  "backend-000146": {
+    "message": "Cartella"
+  },
+  "backend-000147": {
+    "message": "Recenti"
+  },
+  "backend-000148": {
+    "message": "Preferite"
+  },
+  "backend-000149": {
+    "message": "Condivise"
+  },
+  "backend-000150": {
+    "message": "Etichetta"
+  },
+  "backend-000151": {
+    "message": "Sicurezza"
+  },
+  "backend-000152": {
+    "message": "Cestino"
+  },
+  "backend-000153": {
+    "message": "Dettagli"
+  },
+  "backend-000154": {
+    "message": "Modifica"
+  },
+  "backend-000155": {
+    "message": "Rinomina"
+  },
+  "backend-000156": {
+    "message": "Cancella"
+  },
+  "backend-000157": {
+    "message": "Ripristina"
+  },
+  "backend-000158": {
+    "message": "Nuova password"
+  },
+  "backend-000159": {
+    "message": "Nuova cartella"
+  },
+  "backend-000160": {
+    "message": "Nuova etichetta"
+  },
+  "backend-000161": {
+    "message": "Sicura"
+  },
+  "backend-000162": {
+    "message": "Stato"
+  },
+  "backend-000163": {
+    "message": "Debole"
+  },
+  "backend-000164": {
+    "message": "Debole (Duplicata)"
+  },
+  "backend-000165": {
+    "message": "Debole (Vecchia)"
+  },
+  "backend-000166": {
+    "message": "Violata"
+  },
+  "backend-000167": {
+    "message": "Condividi"
+  },
+  "backend-000168": {
+    "message": "Versione"
+  },
+  "backend-000169": {
+    "message": "Codice QR"
+  },
+  "backend-000170": {
+    "message": "Password"
+  },
+  "backend-000171": {
+    "message": "Utente"
+  },
+  "backend-000172": {
+    "message": "Sito web"
+  },
+  "backend-000173": {
+    "message": "Aggiungi etichetta..."
+  },
+  "backend-000174": {
+    "message": "Colore"
+  },
+  "backend-000175": {
+    "message": "Nome"
+  },
+  "backend-000176": {
+    "message": "Etichetta"
+  },
+  "backend-000177": {
+    "message": "Generale"
+  },
+  "backend-000178": {
+    "message": "Proprietà"
+  },
+  "backend-000179": {
+    "message": "Numeri"
+  },
+  "backend-000180": {
+    "message": "Caratteri speciali"
+  },
+  "backend-000181": {
+    "message": "Opzioni avanzate"
+  },
+  "backend-000600": {
+    "message": "Chiudi"
+  },
+  "backend-000182": {
+    "message": "Preferita"
+  },
+  "backend-000183": {
+    "message": "Crittografia"
+  },
+  "backend-000184": {
+    "message": "Sul server"
+  },
+  "backend-000185": {
+    "message": "Campi personalizzati"
+  },
+  "backend-000186": {
+    "message": "Segreto"
+  },
+  "backend-000187": {
+    "message": "Testo"
+  },
+  "backend-000188": {
+    "message": "File"
+  },
+  "backend-000189": {
+    "message": "Valore"
+  },
+  "backend-000190": {
+    "message": "Cambia visibilità"
+  },
+  "backend-000191": {
+    "message": "Genera password"
+  },
+  "backend-000192": {
+    "message": "Crittografia lato Server Semplice V1"
+  },
+  "backend-000193": {
+    "message": "Scrivi delle note"
+  },
+  "backend-000194": {
+    "message": "Salva"
+  },
+  "backend-000195": {
+    "message": "Crea cartella"
+  },
+  "backend-000196": {
+    "message": "Creata cartella"
+  },
+  "backend-000197": {
+    "message": "Creazione cartella fallita"
+  },
+  "backend-000198": {
+    "message": "Rinomina cartella"
+  },
+  "backend-000199": {
+    "message": "Cartella rinominata"
+  },
+  "backend-000200": {
+    "message": "Impossibile rinominare cartella"
+  },
+  "backend-000201": {
+    "message": "Cartella spostata"
+  },
+  "backend-000202": {
+    "message": "Impossibile spostare cartella"
+  },
+  "backend-000203": {
+    "message": "Cancella cartella"
+  },
+  "backend-000204": {
+    "message": "Desideri cancellare questa cartella?"
+  },
+  "backend-000205": {
+    "message": "Cartella cancellata"
+  },
+  "backend-000206": {
+    "message": "Impossibile cancellare cartella"
+  },
+  "backend-000207": {
+    "message": "Cartella recuperata"
+  },
+  "backend-000208": {
+    "message": "Impossibile recuperare cartella"
+  },
+  "backend-000209": {
+    "message": "Crea etichetta"
+  },
+  "backend-000210": {
+    "message": "Etichetta creata"
+  },
+  "backend-000211": {
+    "message": "Impossibile creare etichetta"
+  },
+  "backend-000212": {
+    "message": "Modifica etichetta"
+  },
+  "backend-000213": {
+    "message": "Genera un colore casuale"
+  },
+  "backend-000214": {
+    "message": "Etichetta salvata"
+  },
+  "backend-000215": {
+    "message": "Impossibile salvare etichetta"
+  },
+  "backend-000216": {
+    "message": "Cancella etichetta"
+  },
+  "backend-000217": {
+    "message": "Desideri cancellare questa etichetta?"
+  },
+  "backend-000218": {
+    "message": "Etichetta cancellata"
+  },
+  "backend-000219": {
+    "message": "Impossibile cancellare etichetta"
+  },
+  "backend-000220": {
+    "message": "Etichetta recuperata"
+  },
+  "backend-000221": {
+    "message": "Impossibile recuperare etichetta"
+  },
+  "backend-000222": {
+    "message": "Crea nuova password"
+  },
+  "backend-000223": {
+    "message": "Password creata"
+  },
+  "backend-000224": {
+    "message": "Impossibile creare password"
+  },
+  "backend-000225": {
+    "message": "Modifica password"
+  },
+  "backend-000226": {
+    "message": "Password salvata"
+  },
+  "backend-000227": {
+    "message": "Impossibile salvare la password"
+  },
+  "backend-000228": {
+    "message": "Password spostata"
+  },
+  "backend-000229": {
+    "message": "Impossibile spostare la password"
+  },
+  "backend-000230": {
+    "message": "Cancella password"
+  },
+  "backend-000231": {
+    "message": "Vuoi cancellare questa password?"
+  },
+  "backend-000232": {
+    "message": "Password cancellata"
+  },
+  "backend-000233": {
+    "message": "Password recuperata"
+  },
+  "backend-000234": {
+    "message": "Impossibile recuperare la password"
+  },
+  "backend-000235": {
+    "message": "Apri sito web"
+  },
+  "backend-000236": {
+    "message": "Copia sito web"
+  },
+  "backend-000237": {
+    "message": "Copia utente"
+  },
+  "backend-000238": {
+    "message": "Copia password"
+  },
+  "backend-000239": {
+    "message": "$ELEMENT$ copiata negli appunti",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000240": {
+    "message": "Impossibile copiare $ELEMENT$ negli appunti",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000241": {
+    "message": "Ultima modifica il $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000242": {
+    "message": "Recupera revisione"
+  },
+  "backend-000243": {
+    "message": "Revisione recuperata"
+  },
+  "backend-000244": {
+    "message": "Impossibile recuperare la revisione"
+  },
+  "backend-000245": {
+    "message": "Vuoi recuperare questa revisione?"
+  },
+  "backend-000246": {
+    "message": "Condivise con me"
+  },
+  "backend-000247": {
+    "message": "Condivise da me"
+  },
+  "backend-000248": {
+    "message": "Statistiche"
+  },
+  "backend-000249": {
+    "message": "Creata il"
+  },
+  "backend-000250": {
+    "message": "Ultima versione"
+  },
+  "backend-000251": {
+    "message": "$COUNT$ versioni",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000252": {
+    "message": "Condivisioni"
+  },
+  "backend-000253": {
+    "message": "Condivisa $COUNT$ volte",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000254": {
+    "message": "Cifrato lato server"
+  },
+  "backend-000255": {
+    "message": "Cifrato lato client"
+  },
+  "backend-000256": {
+    "message": "Sin cifrado"
+  },
+  "backend-000257": {
+    "message": "Crittografia semplice (Generazione 1)"
+  },
+  "backend-000258": {
+    "message": "Crittografia semplice (Generazione 2)"
+  },
+  "backend-000259": {
+    "message": "Crittografia avanzata (SSE V2)"
+  },
+  "backend-000260": {
+    "message": "Crittografia con libsodium"
+  },
+  "backend-000261": {
+    "message": "Di più"
+  },
+  "backend-000262": {
+    "message": "Backup e Ripristino"
+  },
+  "backend-000263": {
+    "message": "Impostazioni"
+  },
+  "backend-000264": {
+    "message": "Manuale di istruzioni"
+  },
+  "backend-000265": {
+    "message": "App e estensioni"
+  },
+  "backend-000266": {
+    "message": "$EDITABLE$ e $SHAREABLE$.",
+    "placeholders": {
+      "editable": {
+        "content": "$1"
+      },
+      "shareable": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000267": {
+    "message": "Modifica permessa"
+  },
+  "backend-000268": {
+    "message": "Modifica non permessa"
+  },
+  "backend-000269": {
+    "message": "Condivisione consentita"
+  },
+  "backend-000270": {
+    "message": "Condivisione non consentita"
+  },
+  "backend-000271": {
+    "message": "Cerca utente"
+  },
+  "backend-000272": {
+    "message": "Imposta data di scadenza"
+  },
+  "backend-000273": {
+    "message": "Scade $DATETIME$",
+    "placeholders": {
+      "datetime": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000274": {
+    "message": "Seleziona data di scadenza"
+  },
+  "backend-000275": {
+    "message": "Per favore, seleziona una data in futuro"
+  },
+  "backend-000276": {
+    "message": "Data non valida"
+  },
+  "backend-000277": {
+    "message": "L'utente $UID$ non esiste",
+    "placeholders": {
+      "uid": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000278": {
+    "message": "Non è possibile condividere la password: $MESSAGE$",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000279": {
+    "message": "Cambia permessi scrittura"
+  },
+  "backend-000280": {
+    "message": "Cambia permessi condivisione"
+  },
+  "backend-000281": {
+    "message": "Annulla condivisione"
+  },
+  "backend-000282": {
+    "message": "Data"
+  },
+  "backend-000283": {
+    "message": "Cache predefinita (0 file, 0 B)"
+  },
+  "backend-000284": {
+    "message": "Cache avatar (0 file, 0 B)"
+  },
+  "backend-000285": {
+    "message": "Cache favicon (0 file, 0 B)"
+  },
+  "backend-000286": {
+    "message": "Cache anteprime (0 file, 0 B)"
+  },
+  "backend-000287": {
+    "message": "Cache password (0 file, 0 B)"
+  },
+  "backend-000288": {
+    "message": "Cambiata"
+  },
+  "backend-000289": {
+    "message": "Modificata"
+  },
+  "backend-000290": {
+    "message": "Modificata"
+  },
+  "backend-000291": {
+    "message": "Creata"
+  },
+  "backend-000292": {
+    "message": "Cartella"
+  },
+  "backend-000293": {
+    "message": "Versione"
+  },
+  "backend-000294": {
+    "message": "Sito web"
+  },
+  "backend-000295": {
+    "message": "Cartella superiore"
+  },
+  "backend-000296": {
+    "message": "Cancella tutti gli oggetti"
+  },
+  "backend-000297": {
+    "message": "Recupera tutti gli oggetti"
+  },
+  "backend-000298": {
+    "message": "Recupera oggetti"
+  },
+  "backend-000299": {
+    "message": "Vuoi recuperare tutti gli oggetti del cestino?"
+  },
+  "backend-000300": {
+    "message": "Recupera questo oggetto"
+  },
+  "backend-000301": {
+    "message": "Oggetti recuperati"
+  },
+  "backend-000302": {
+    "message": "Svuota cestino"
+  },
+  "backend-000303": {
+    "message": "Vuoi cancellare permanentemente tutti gli oggetti nel cestino?"
+  },
+  "backend-000304": {
+    "message": "Cestino svuotato"
+  },
+  "backend-000305": {
+    "message": "Cerca"
+  },
+  "backend-000306": {
+    "message": "Usa la barra di ricerca per cercare"
+  },
+  "backend-000307": {
+    "message": "Cerca \"$QUERY$\" globalmente",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000308": {
+    "message": "Qui non c'è nulla"
+  },
+  "backend-000309": {
+    "message": "Clicca su \"+\" per aggiungere qualcosa"
+  },
+  "backend-000310": {
+    "message": "Oggetti cancellati appariranno qui"
+  },
+  "backend-000311": {
+    "message": "Nessuno condivide password con te"
+  },
+  "backend-000312": {
+    "message": "Non stai condividendo nessuna password"
+  },
+  "backend-000313": {
+    "message": "I tuoi preferiti appariranno qui"
+  },
+  "backend-000314": {
+    "message": "Meglio controllare le altre sezioni"
+  },
+  "backend-000315": {
+    "message": "Probabilment è un buon segno"
+  },
+  "backend-000316": {
+    "message": "Vai a $HREF$",
+    "placeholders": {
+      "href": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000317": {
+    "message": "Contenuti"
+  },
+  "backend-000318": {
+    "message": "Immagine $COUNT$: $TITLE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "title": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000319": {
+    "message": "Impossibile recuperare la pagina: $MESSAGE$.",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000320": {
+    "message": "Tipo di contenuto invalido $MIME$",
+    "placeholders": {
+      "mime": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000321": {
+    "message": "Contenuto non disponibile"
+  },
+  "backend-000322": {
+    "message": "Pagina non trovata"
+  },
+  "backend-000323": {
+    "message": "Serve aiuto?"
+  },
+  "backend-000324": {
+    "message": "Chiedi nel nostro forum!"
+  },
+  "backend-000325": {
+    "message": "Hai trovato un errore?"
+  },
+  "backend-000326": {
+    "message": "Faccelo sapere!"
+  },
+  "backend-000327": {
+    "message": "La sessione è scaduta"
+  },
+  "backend-000328": {
+    "message": "Il token della API è scaduto"
+  },
+  "backend-000329": {
+    "message": "Errore di rete"
+  },
+  "backend-000330": {
+    "message": "Non è stato possibile caricare il modulo $MODULE$. Controllare la connessione al server Nextcloud",
+    "placeholders": {
+      "module": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000331": {
+    "message": "Ordina per numero"
+  },
+  "backend-000332": {
+    "message": "Ordina per data di modifica"
+  },
+  "backend-000333": {
+    "message": "$PASSWORDS$ password",
+    "placeholders": {
+      "passwords": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000334": {
+    "message": "1 password"
+  },
+  "backend-000335": {
+    "message": "$FOLDERS$ cartelle",
+    "placeholders": {
+      "folders": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000336": {
+    "message": "1 cartella"
+  },
+  "backend-000337": {
+    "message": "$TAGS$ etichiette",
+    "placeholders": {
+      "tags": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000338": {
+    "message": "1 etichetta"
+  },
+  "backend-000339": {
+    "message": "Niente"
+  },
+  "backend-000340": {
+    "message": " e "
+  },
+  "backend-000341": {
+    "message": "coincidenza"
+  },
+  "backend-000342": {
+    "message": "coincide con"
+  },
+  "backend-000343": {
+    "message": "Creato da"
+  },
+  "backend-000344": {
+    "message": "Sei connesso come $USER$",
+    "placeholders": {
+      "user": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000345": {
+    "message": "Entra"
+  },
+  "backend-000346": {
+    "message": "Richiedi nuovamente il token"
+  },
+  "backend-000347": {
+    "message": "Troppi tentativi"
+  },
+  "backend-000348": {
+    "message": "Password troppo corta"
+  },
+  "backend-000349": {
+    "message": "Errore sconosciuto"
+  },
+  "backend-000350": {
+    "message": "Richiesta del token fallita"
+  },
+  "backend-000351": {
+    "message": "Sistema di manutenzione"
+  },
+  "backend-000352": {
+    "message": "Sconosciuto"
+  },
+  "backend-000353": {
+    "message": "Sistema"
+  },
+  "backend-000354": {
+    "message": "Pubblico"
+  },
+  "backend-000355": {
+    "message": "Attività automatiche in secondo piano"
+  },
+  "backend-000356": {
+    "message": "Linea di comando del server"
+  },
+  "backend-000357": {
+    "message": "Per favore, correggi questo valore"
+  },
+  "backend-000358": {
+    "message": "Mostra valore"
+  },
+  "backend-000359": {
+    "message": "Cancella"
+  },
+  "backend-000360": {
+    "message": "Ok"
+  },
+  "backend-000361": {
+    "message": "vero"
+  },
+  "backend-000362": {
+    "message": "falso"
+  },
+  "backend-000363": {
+    "message": "si"
+  },
+  "backend-000364": {
+    "message": "no"
+  },
+  "backend-000365": {
+    "message": "$NAME$ ha condiviso questo con te.",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000366": {
+    "message": "Hai raggiunto la lunghezza massima di 4096 caratteri"
+  },
+  "backend-000367": {
+    "message": "Non sono riuscito a trovare nulla per \"$QUERY$\"",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000368": {
+    "message": "La pagina \"$PAGE$\" non è stata in grado di essere scaricata dal server di manuali.",
+    "placeholders": {
+      "page": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000369": {
+    "message": "Alcuni dati sono in attesa di sincronizzazione"
+  },
+  "backend-000370": {
+    "message": "La tua sessione scadrà in $TIME$ secondi",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000371": {
+    "message": "Hai richiesto troppi token. Riprova più tardi."
+  },
+  "backend-000372": {
+    "message": "La cifratura end-to-end verrà disabilitata per questa password se la condividi."
+  },
+  "backend-000373": {
+    "message": "Il token di sessione non è più valido. Questa app verrà riavviata."
+  },
+  "backend-000374": {
+    "message": "Oggi nel 2018, la prima versione della app Passwords venne pubblicata. Grazie per usare l'app."
+  },
+  "fronted-000375": {
+    "message": "HTTPS Richiesto"
+  },
+  "fronted-000376": {
+    "message": "ricarica questa pagina con HTTPS"
+  },
+  "fronted-000377": {
+    "message": "forum"
+  },
+  "fronted-000378": {
+    "message": "documentazione"
+  },
+  "fronted-000379": {
+    "message": "Puoi provare a $STR_1$ la pagina con HTTPS.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000380": {
+    "message": "Questa applicazione ha bisogno di $STR_1$ per funzionare in maniera sicura.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000381": {
+    "message": "Questo NON è un bug. Visita $STR_1$ se ti serve aiuto.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000382": {
+    "message": "Controlla il report HTTPS qui sotto per risolvere questo problema."
+  },
+  "fronted-000383": {
+    "message": "Leggi questo $STR_1$ per configurare il tuo server con HTTPS.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000384": {
+    "message": "Leggi questo $STR_1$ se stai usando qualsiasi tipo di proxy.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000385": {
+    "message": "Visita $STR_1$ per ottenere un certificato gratuito, nel caso ru non ne abbia uno.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000386": {
+    "message": "Se il problema persiste, contatta l'amministratore di sistema."
+  },
+  "fronted-000387": {
+    "message": "Sessione Password $STR_1$ - $STR_1$",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000388": {
+    "message": "Apri documentazione"
+  },
+  "fronted-000389": {
+    "message": "mai"
+  },
+  "fronted-000390": {
+    "message": "Processo dei dati interni"
+  },
+  "fronted-000391": {
+    "message": "Renderizzazione delle immagini"
+  },
+  "fronted-000392": {
+    "message": "Imagick/GMagick (raccomandato)"
+  },
+  "fronted-000393": {
+    "message": "Servizi esterni"
+  },
+  "fronted-000394": {
+    "message": "Controllo della sicurezza della password"
+  },
+  "fronted-000395": {
+    "message": "Have I been pwned? (raccomandato)"
+  },
+  "fronted-000396": {
+    "message": "25 Milioni di password (Locale)"
+  },
+  "fronted-000397": {
+    "message": "5 Milione di password (Locale)"
+  },
+  "fronted-000398": {
+    "message": "25Mio di password & Hibp?"
+  },
+  "fronted-000399": {
+    "message": "Generatore di password"
+  },
+  "fronted-000400": {
+    "message": "Dizionario locale"
+  },
+  "fronted-000401": {
+    "message": "Caratteri casuali"
+  },
+  "fronted-000402": {
+    "message": "watchout4snakes.com"
+  },
+  "fronted-000403": {
+    "message": "Leipzig Corpora Collection (raccomandato)"
+  },
+  "fronted-000404": {
+    "message": "Servizio Favicon"
+  },
+  "fronted-000405": {
+    "message": "Servizio di analisi di icone locale"
+  },
+  "fronted-000406": {
+    "message": "Besticon (raccomandato)"
+  },
+  "fronted-000407": {
+    "message": "Nessuno"
+  },
+  "fronted-000408": {
+    "message": "Servizio di visualizzazione anteprime web"
+  },
+  "fronted-000409": {
+    "message": "Chiave per la API di visualizzazione anteprime"
+  },
+  "fronted-000410": {
+    "message": "Pageres/PhantomJS (Locale)"
+  },
+  "fronted-000411": {
+    "message": "WKHTML (Locale)"
+  },
+  "fronted-000412": {
+    "message": "screenshotapi.io"
+  },
+  "fronted-000413": {
+    "message": "Impostazioni email predefinite"
+  },
+  "fronted-000414": {
+    "message": "Invia email per eventi di sicurezza"
+  },
+  "fronted-000415": {
+    "message": "Invia email per condivisioni"
+  },
+  "fronted-000416": {
+    "message": "Altre impostazioni"
+  },
+  "fronted-000417": {
+    "message": "Rimuovi oggetti cancellati dal database"
+  },
+  "fronted-000418": {
+    "message": "Mostra aggiornamenti nightly in \"App\""
+  },
+  "fronted-000419": {
+    "message": "Mai"
+  },
+  "fronted-000420": {
+    "message": "Immediatamente"
+  },
+  "fronted-000421": {
+    "message": "Dopo due ore"
+  },
+  "fronted-000422": {
+    "message": "Dopo un giorno"
+  },
+  "fronted-000423": {
+    "message": "Dopo due settimane"
+  },
+  "fronted-000424": {
+    "message": "Dopo un mese"
+  },
+  "fronted-000425": {
+    "message": "Dopo un anno"
+  },
+  "fronted-000426": {
+    "message": "Impostazioni di backup"
+  },
+  "fronted-000427": {
+    "message": "Intervallo backup"
+  },
+  "fronted-000428": {
+    "message": "Ogni ora"
+  },
+  "fronted-000429": {
+    "message": "Ogni sei ore"
+  },
+  "fronted-000430": {
+    "message": "Ogni giorno"
+  },
+  "fronted-000431": {
+    "message": "Ogni due giorni"
+  },
+  "fronted-000432": {
+    "message": "Ogni settimana"
+  },
+  "fronted-000433": {
+    "message": "Ogni due settimane"
+  },
+  "fronted-000434": {
+    "message": "Quantità di backup da mantenere"
+  },
+  "fronted-000435": {
+    "message": "Cache"
+  },
+  "fronted-000436": {
+    "message": "Cache predefinita ($STR_1$ file, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000437": {
+    "message": "Cache immagini ($STR_1$ file, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000438": {
+    "message": "Cache favicon ($STR_1$ file, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000439": {
+    "message": "Cache anteprime ($STR_1$ file, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000440": {
+    "message": "Cache password ($STR_1$ file, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000441": {
+    "message": "cancella"
+  },
+  "fronted-000442": {
+    "message": "Cancella questa cache"
+  },
+  "fronted-000443": {
+    "message": "Non puoi cancellare la cache utilizzando un servizio condiviso"
+  },
+  "fronted-000444": {
+    "message": "Salvata"
+  },
+  "fronted-000445": {
+    "message": "Cancellata"
+  },
+  "fronted-000446": {
+    "message": "Fallito"
+  },
+  "fronted-000447": {
+    "message": "Serve aiuto"
+  },
+  "fronted-000448": {
+    "message": "trovato un bug"
+  },
+  "fronted-000449": {
+    "message": "cerchi documentazione"
+  },
+  "fronted-000450": {
+    "message": "$STR_1$, $STR_1$ o $STR_1$? Possiamo aiutarti!",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      },
+      "str_3": {
+        "content": "$3"
+      }
+    }
+  },
+  "fronted-000451": {
+    "message": "$STRING_1$ $STRING_2$ non è più supportato.",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      },
+      "string_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000452": {
+    "message": "Passwords ha bisogno di HTTPS."
+  },
+  "fronted-000453": {
+    "message": "Eseguire i compiti in background usando $STR_1$ potrebbero causare ritardi. Ti raccomandiamo di usare Cron.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000454": {
+    "message": "Per favore, controlla i requisiti di sistema."
+  },
+  "fronted-000455": {
+    "message": "Password non condivisa"
+  },
+  "fronted-000456": {
+    "message": "La password non è stata condivisa con $STRING_1$ perchè ha già l'accesso (da qualcun'altro)",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000457": {
+    "message": "Hai una password insicura"
+  },
+  "fronted-000458": {
+    "message": "Hai delle password insicure"
+  },
+  "fronted-000459": {
+    "message": "Una delle tue password non è più sicura."
+  },
+  "fronted-000460": {
+    "message": "Alcune delle tue password non sono più sicure."
+  },
+  "fronted-000461": {
+    "message": "Passwords controlla periodicamente se le tue password sono state compromesse da un data breach."
+  },
+  "fronted-000462": {
+    "message": "Questo controllo di sicurezza ha stabilito che una tua password è insicura."
+  },
+  "fronted-000463": {
+    "message": "Questo controllo di sicurezza ha stabilito che $STR_1$ tue password sono insicure.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000464": {
+    "message": "Questo significa che la tua password è pubblica e quindi il tuo account è a rischio."
+  },
+  "fronted-000465": {
+    "message": "Questo significa che le tue password sono pubbliche e quindi i tuoi account sono a rischio."
+  },
+  "fronted-000466": {
+    "message": "Per questo la password è stata contrassegnata come insicura e dovrebbe venir cambiata ora."
+  },
+  "fronted-000467": {
+    "message": "Per questo le password sono state contrassegnate come insicure e dovrebbero venire cambiate ora."
+  },
+  "fronted-000468": {
+    "message": "Puoi creare una nuova password sicura nell'app Passwords."
+  },
+  "fronted-000469": {
+    "message": "Puoi creare nuove password sicure nell'app Passwords."
+  },
+  "fronted-000470": {
+    "message": "Cambia password ora"
+  },
+  "fronted-000471": {
+    "message": "Cambia password ora"
+  },
+  "fronted-000472": {
+    "message": "Apri l'app Passwords per cambiarla."
+  },
+  "fronted-000473": {
+    "message": "Apri l'app Passwords per cambiarle."
+  },
+  "fronted-000474": {
+    "message": "$STR_1$ ha condiviso una password con te.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000475": {
+    "message": "$STR_1$ ha condiviso $STR_1$ password con te.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000476": {
+    "message": "$STRING_4$ e $STRING_3$ hanno condiviso $STRING_1$ password con te.",
+    "placeholders": {
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000477": {
+    "message": "$STRING_5$, $STRING_4$ e $STRING_3$ hanno condiviso $STRING_1$ password con te.",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000478": {
+    "message": "$STRING_5$, $STRING_4$ e $STRING_2$ altri hanno condiviso $STRING_1$ password con te.",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_2": {
+        "content": "$2"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000479": {
+    "message": "Apri l'app Passwords per vederla."
+  },
+  "fronted-000480": {
+    "message": "Apri l'app Passwords per vederle."
+  },
+  "fronted-000481": {
+    "message": "Una password è stata condivisa con te su $STR_1$",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000482": {
+    "message": "Varie password sono state condivise con te su $STR_1$",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000483": {
+    "message": "Mostra password condivise con me"
+  },
+  "fronted-000484": {
+    "message": "Non è stato possibile condividere una delle password perchè il destinatario ne ha già l'accesso."
+  },
+  "fronted-000485": {
+    "message": "Non è stato possibile condividere $STR_1$ password perchè il destinatario ne ha già l'accesso.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000486": {
+    "message": "Apri l'app Passwords per vedere le password condivise."
+  },
+  "fronted-000487": {
+    "message": "Condividere una password che è stata condivisa con te ogni tanto può causare un loop."
+  },
+  "fronted-000488": {
+    "message": "Per evitare ciò, queste password non verranno condivise."
+  },
+  "fronted-000489": {
+    "message": "Accesso amministratore al tuo account"
+  },
+  "fronted-000490": {
+    "message": "$STR_1$ ha provato a entrare nel tuo account con $STR_1$.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000491": {
+    "message": "$STR_1$ è entrato nel suo account con $STR_1$.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000492": {
+    "message": "Siccome stai usando una master password, questo non significa che l'accesso ai tuoi dati sia garantito."
+  },
+  "fronted-000493": {
+    "message": "Per prevenire accessi non autorizzati ai tuoi dati, dovresti impostare una master password."
+  },
+  "fronted-000494": {
+    "message": "Cancellato l'utente ($STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000495": {
+    "message": "Aiutaci a migliorare Passwords"
+  },
+  "fronted-000496": {
+    "message": "Puoi aiutarci a migliorare l'app Password per partecipando al nostro sondaggio server."
+  },
+  "fronted-000497": {
+    "message": "Questo ci invierà alcuni dati anonimi sul tuo setup e le impostazioni selezionate."
+  },
+  "fronted-000498": {
+    "message": "Puoi cambiare questo in qualsiasi momento nelle impostazioni app."
+  },
+  "fronted-000499": {
+    "message": "Non ancora"
+  },
+  "fronted-000500": {
+    "message": "Partecipa"
+  },
+  "fronted-000501": {
+    "message": "Partecipa al sondaggio server"
+  },
+  "fronted-000502": {
+    "message": "Base"
+  },
+  "fronted-000503": {
+    "message": "Completo"
+  },
+  "fronted-000504": {
+    "message": "Non impostato"
+  },
+  "fronted-000505": {
+    "message": "Per favore, considera il self-hosting della api favicon"
+  },
+  "fronted-000506": {
+    "message": "Stai utilizzando la nostra istanza condivisa Besticon per recuperare le icone dei siti web."
+  },
+  "fronted-000507": {
+    "message": "Queste istanze sono intese per piccole istanze Nextcloud con molto poco traffico."
+  },
+  "fronted-000508": {
+    "message": "Per favore, clicca sul link e segui il nostro semplice tutorial per hostare Besticon."
+  },
+  "fronted-000509": {
+    "message": "La configurazione del servizio favicon non è valida"
+  },
+  "fronted-000510": {
+    "message": "La configurazione del servizio anteprime non è valida"
+  },
+  "fronted-000511": {
+    "message": "Questo servizio di favicon richiede una chiave API o un endpoint, e non ne hai specificato nessuno."
+  },
+  "fronted-000512": {
+    "message": "Questo servizio di anteprime richiede una chiave API o un endpoint, e non ne hai specificato nessuno."
+  },
+  "fronted-000513": {
+    "message": "Apri le impostazioni amministratore per aggiornare la configurazione o scegliere un altro servizio."
+  },
+  "fronted-000514": {
+    "message": "Abbiamo rilevato diversi tentativi falliti di sblocco password da parte di \"$STR_1$\".",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000515": {
+    "message": "Ciò potrebbe significare che qualcuno sta cercando di entrare nel tuo account."
+  },
+  "fronted-000516": {
+    "message": "Per prevenire nuovi tentativi, le credenziali API di questo dispositivo sono state disabilitate."
+  },
+  "fronted-000517": {
+    "message": "In più, l'autenticazione API basata su password è stata disabilitata."
+  },
+  "fronted-000518": {
+    "message": "Se vuoi continuare a usare questo dispositivo, devi creare un nuovo token."
+  },
+  "fronted-000519": {
+    "message": "Se non conosci questo dispositivo, perfavore cambia la password e controlla la lista dei dispositivi."
+  },
+  "fronted-000520": {
+    "message": "Per prevenire nuovi tentativi, l'accesso alle API tramite password è stata disabilitata."
+  },
+  "fronted-000521": {
+    "message": "Per attivarla di nuovo, puoi entrare nella web app o da qualsiasi dispositivo utilizzando un token."
+  },
+  "fronted-000522": {
+    "message": "Se non conosci questo dispositivo, perfavore cambia la tua password principale e la password Nextcloud."
+  },
+  "fronted-000523": {
+    "message": "Per migliorare la tua sicurezza, raccomandiamo l'utilizzo di token per i tuoi dispositivi invece che della password."
+  },
+  "backend-000526": {
+    "message": "Regole password"
+  },
+  "backend-000527": {
+    "message": "Segnala duplicati"
+  },
+  "backend-000528": {
+    "message": "Età massima in giorni"
+  },
+  "backend-000529": {
+    "message": "Genera password"
+  },
+  "backend-000530": {
+    "message": "Forza password"
+  },
+  "backend-000531": {
+    "message": "Includi numeri"
+  },
+  "backend-000532": {
+    "message": "Includi caratteri speciali"
+  },
+  "settings-000676": {
+    "message": "Login & Sessione"
+  },
+  "settings-000677": {
+    "message": "Mantieni la sessione"
+  },
+  "settings-000678": {
+    "message": "Sempre"
+  },
+  "settings-000679": {
+    "message": "Mentre lavoro"
+  },
+  "settings-000680": {
+    "message": "Mentre sono attivo"
+  },
+  "settings-000681": {
+    "message": "Finisci la sessione dopo"
+  },
+  "settings-000682": {
+    "message": "un minuto"
+  },
+  "settings-000683": {
+    "message": "$MINUTES$ minuti",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000684": {
+    "message": "Crittografia End-to-end"
+  },
+  "settings-000685": {
+    "message": "Modalità crittografia server"
+  },
+  "settings-000686": {
+    "message": "Nessuna se CSE è usato"
+  },
+  "settings-000687": {
+    "message": "Crittografia Semplice"
+  },
+  "settings-000688": {
+    "message": "Crittografia Avanzata"
+  },
+  "settings-000689": {
+    "message": "Modalità crittografia client"
+  },
+  "settings-000690": {
+    "message": "Attiva"
+  },
+  "settings-000691": {
+    "message": "Cambia password"
+  },
+  "backend-000533": {
+    "message": "Interfaccia utente"
+  },
+  "backend-000534": {
+    "message": "Sezione iniziale"
+  },
+  "backend-000535": {
+    "message": "Tutte le password"
+  },
+  "backend-000536": {
+    "message": "Visualizza lista password"
+  },
+  "backend-000537": {
+    "message": "Imposta il titolo da"
+  },
+  "backend-000538": {
+    "message": "Ordina per"
+  },
+  "backend-000539": {
+    "message": "Campo titolo"
+  },
+  "backend-000540": {
+    "message": "Azione click singolo"
+  },
+  "backend-000541": {
+    "message": "Azione doppio click"
+  },
+  "backend-000542": {
+    "message": "Copia password"
+  },
+  "backend-000543": {
+    "message": "Copia utente"
+  },
+  "backend-000544": {
+    "message": "Copia sito web"
+  },
+  "backend-000545": {
+    "message": "Mostra dettagli"
+  },
+  "backend-000546": {
+    "message": "Aggiugi opzioni copia nel menù"
+  },
+  "backend-000547": {
+    "message": "Mostra username nella lista"
+  },
+  "backend-000548": {
+    "message": "Mostra etichette nella lista"
+  },
+  "settings-000692": {
+    "message": "Mostra dettagli password"
+  },
+  "settings-000693": {
+    "message": "Mostra anteprima sito web"
+  },
+  "backend-000549": {
+    "message": "Mostra campi personalizzati vuoti"
+  },
+  "backend-000550": {
+    "message": "Cerca mentre scrivo"
+  },
+  "backend-000551": {
+    "message": "Cerca dappertutto con \"Invio\""
+  },
+  "backend-000552": {
+    "message": "Mostra sempre sezione ricerca"
+  },
+  "backend-000553": {
+    "message": "Notifiche"
+  },
+  "backend-000554": {
+    "message": "Invia email per"
+  },
+  "backend-000555": {
+    "message": "Problemi di sicurezza"
+  },
+  "backend-000556": {
+    "message": "Password condivise con me"
+  },
+  "backend-000557": {
+    "message": "Mostra notifiche per"
+  },
+  "backend-000558": {
+    "message": "Altri errori"
+  },
+  "backend-000559": {
+    "message": "Zona di pericolo"
+  },
+  "backend-000560": {
+    "message": "Reimposta tutte le impostazioni"
+  },
+  "backend-000561": {
+    "message": "Reimposta"
+  },
+  "backend-000562": {
+    "message": "Cancella tutto"
+  },
+  "backend-000563": {
+    "message": "CANCELLA TUTTO"
+  },
+  "backend-000564": {
+    "message": "Reset account richiesto"
+  },
+  "backend-000565": {
+    "message": "Mostra"
+  },
+  "backend-000667": {
+    "message": "Predefinito"
+  },
+  "backend-000566": {
+    "message": "Avanzate"
+  },
+  "settings-000694": {
+    "message": "Nuova password"
+  },
+  "settings-000695": {
+    "message": "Ripeti password"
+  },
+  "settings-000696": {
+    "message": "Vecchia password"
+  },
+  "settings-000697": {
+    "message": "Password cambiata"
+  },
+  "settings-000698": {
+    "message": "Cambio password fallito"
+  },
+  "settings-000699": {
+    "message": "Problemi di Amministrazione"
+  },
+  "backend-000567": {
+    "message": "Segnala password come non sicure se utilizzate da più account"
+  },
+  "backend-000568": {
+    "message": "Segnala password come non sicure se sorpassano il numero specificato di giorni"
+  },
+  "backend-000569": {
+    "message": "Una sicurezza più alta indica password più lunghe e complesse"
+  },
+  "settings-000705": {
+    "message": "Aggiungi numeri alle password generate"
+  },
+  "settings-000706": {
+    "message": "Aggiungi caratteri speciali alle password generate"
+  },
+  "settings-000707": {
+    "message": "Specifica la quantità di tempo dopo il quale la sessione viene cancellata dopo l'ultima richiesta"
+  },
+  "settings-000708": {
+    "message": "Scegli il tipo di crittografia usato per criptare dati sul server"
+  },
+  "settings-000709": {
+    "message": "Esegui il wizard di installazione per impostare la crittografia delle tue password"
+  },
+  "settings-000710": {
+    "message": "Cambia la password di crittografia"
+  },
+  "backend-000570": {
+    "message": "Mostra le proprietà selezionate come titolo nella lista"
+  },
+  "backend-000571": {
+    "message": "Ordina le password per la proprietà selezionata quando la lista viene ordinata per nome"
+  },
+  "backend-000572": {
+    "message": "Azione da eseguire premendo su una password nella lista"
+  },
+  "backend-000573": {
+    "message": "Azione da eseguire facendo doppio click su una password nella lista"
+  },
+  "backend-000574": {
+    "message": "Mostra opzioni per copiare la password e l'utente nel menù"
+  },
+  "backend-000575": {
+    "message": "La sezione iniziale viene mostrata quando l'app viene aperta"
+  },
+  "backend-000576": {
+    "message": "Mostra sempre il nome utente relativo ad una password nella lista"
+  },
+  "backend-000577": {
+    "message": "Mostra le etichette per ogni password nella lista. Aumenta i tempi di caricamento"
+  },
+  "settings-000711": {
+    "message": "Mostra un anteprima del sito web associato nei dettagli. (Non da telefono)"
+  },
+  "backend-000578": {
+    "message": "Mostra campi personalizzati nascosti sul form di modifica e dettagli delle password"
+  },
+  "backend-000668": {
+    "message": "Inizia a cercare quando un tasto qualsiasi è premuto sulla pagina"
+  },
+  "backend-000669": {
+    "message": "Cerca dappertutto quando l'invio viene premuto nella barra di ricerca"
+  },
+  "backend-000581": {
+    "message": "Mostra sempre la sezione per la ricerca globale nella navigazione"
+  },
+  "backend-000579": {
+    "message": "Invia email in caso di password compromesse o altri problemi di sicurezza"
+  },
+  "backend-000580": {
+    "message": "Invia email quando altre persone condividono password con me"
+  },
+  "backend-000582": {
+    "message": "Notificami in caso di password compromesse o altri problemi di sicurezza"
+  },
+  "backend-000583": {
+    "message": "Notificami quando altre persone condividono password con me"
+  },
+  "backend-000584": {
+    "message": "Notificami quando una azione in secondo piano fallisce"
+  },
+  "settings-000712": {
+    "message": "Notificami in caso di errori di configurazione e altri problemi di amministrazione"
+  },
+  "backend-000585": {
+    "message": "Reimposta tutte le impostazioni a quelle predefinite"
+  },
+  "backend-000586": {
+    "message": "Questo cancellerà tutte le impostazioni ai suoi default. Vuoi continuare?"
+  },
+  "backend-000587": {
+    "message": "Ricomincia da capo e cancella tutta la tua configurazione, password, cartelle e etichette"
+  },
+  "settings-000714": {
+    "message": "Puoi usare questa finestra per cambiare la tua master password."
+  },
+  "settings-000715": {
+    "message": "La tua password deve essere più lunga di 12 caratteri e non la tua vecchia password"
+  },
+  "settings-000716": {
+    "message": "Perfavore conferma la nuova password"
+  },
+  "settings-000717": {
+    "message": "Devi inserire la vecchia password"
+  },
+  "settings-000718": {
+    "message": "La tua password è stata cambiata con successo."
+  },
+  "settings-000722": {
+    "message": "Invia richieste keep-alive per prevenire che la sessione venga eliminata"
+  },
+  "settings-000723": {
+    "message": "Scegli il tipo di crittografia usato per criptare i dati sul client prima di inviarlo al server."
+  },
+  "backend-000588": {
+    "message": "Vuoi cancellare tutte le tue impostazioni, password, cartelle e etichette?\nNON sarà possibile annullare questo."
+  },
+  "tutorial-000728": {
+    "message": "Dopo l'avvio mostra..."
+  },
+  "tutorial-000729": {
+    "message": "cartelle"
+  },
+  "tutorial-000730": {
+    "message": "etichette"
+  },
+  "tutorial-000731": {
+    "message": "preferiti"
+  },
+  "tutorial-000732": {
+    "message": "password"
+  },
+  "tutorial-000733": {
+    "message": "cambiati recentemente"
+  },
+  "tutorial-000734": {
+    "message": "Segnala le mie password se..."
+  },
+  "tutorial-000735": {
+    "message": "sono più vecchie di"
+  },
+  "tutorial-000736": {
+    "message": "tre mesi"
+  },
+  "tutorial-000737": {
+    "message": "sei mesi"
+  },
+  "tutorial-000738": {
+    "message": "un anno"
+  },
+  "tutorial-000739": {
+    "message": "due anni"
+  },
+  "tutorial-000740": {
+    "message": "$DAYS$ giorni",
+    "placeholders": {
+      "days": {
+        "content": "$1"
+      }
+    }
+  },
+  "tutorial-000741": {
+    "message": "sono duplicati"
+  },
+  "tutorial-000742": {
+    "message": "Rendi le mie nuove password"
+  },
+  "tutorial-000743": {
+    "message": "robuste"
+  },
+  "tutorial-000744": {
+    "message": "più robuste"
+  },
+  "tutorial-000745": {
+    "message": "molto robuste"
+  },
+  "tutorial-000746": {
+    "message": "incredibilmente robuste"
+  },
+  "tutorial-000747": {
+    "message": "includi numeri"
+  },
+  "tutorial-000748": {
+    "message": "includi caratteri speciali"
+  },
+  "tutorial-000749": {
+    "message": "Una casa sicura per le tue password"
+  },
+  "tutorial-000750": {
+    "message": "Tieni le tue password segrete"
+  },
+  "tutorial-000751": {
+    "message": "Personalizza la tua esperienza"
+  },
+  "tutorial-000752": {
+    "message": "Organizza le tue password"
+  },
+  "tutorial-000753": {
+    "message": "Connettiti"
+  },
+  "tutorial-000754": {
+    "message": "Cifra le mie password esistenti"
+  },
+  "tutorial-000755": {
+    "message": "Salva la password"
+  },
+  "tutorial-000756": {
+    "message": "Ripeti la password"
+  },
+  "tutorial-000757": {
+    "message": "Installazione della cifratura"
+  },
+  "tutorial-000758": {
+    "message": "Portachiavi"
+  },
+  "tutorial-000759": {
+    "message": "Pulishi"
+  },
+  "tutorial-000760": {
+    "message": "Successo"
+  },
+  "tutorial-000761": {
+    "message": "Trova aiuto quando ne hai bisogno"
+  },
+  "tutorial-000762": {
+    "message": "Vai in App e Estensioni"
+  },
+  "tutorial-000763": {
+    "message": "Continua"
+  },
+  "tutorial-000764": {
+    "message": "Salta"
+  },
+  "tutorial-000765": {
+    "message": "Controlla la sicurezza della password con"
+  },
+  "tutorial-000766": {
+    "message": "Genera password con"
+  },
+  "tutorial-000767": {
+    "message": "Prendi le favicon da"
+  },
+  "tutorial-000768": {
+    "message": "Prendi le anteprime da"
+  },
+  "tutorial-000769": {
+    "message": "Crea backup"
+  },
+  "tutorial-000770": {
+    "message": "Visualizza tutte le impostazioni"
+  },
+  "tutorial-000771": {
+    "message": "Leggi i nostri consigli per admin"
+  },
+  "tutorial-000774": {
+    "message": "Ci sono molte impostazioni in modo da personalizzare la tua esperienza."
+  },
+  "tutorial-000775": {
+    "message": "Puoi trovarle tutte in \"Di più\", ma metteremo le più comuni qui:"
+  },
+  "tutorial-000776": {
+    "message": "Passwords offre crittografia moderna e robusta per proteggere i tuoi dati da occhi di spioni."
+  },
+  "tutorial-000777": {
+    "message": "Scegli una password sicura qui sotto per attivare la migliore protezione per le tue password."
+  },
+  "tutorial-000778": {
+    "message": "Accedi alle tue password con facilità dappertutto, grazie alle nostre applicazioni ed estensioni."
+  },
+  "tutorial-000779": {
+    "message": "Puoi trovare le nostra sezione App e Estensioni nella sezione \"Di più\", o clicca qui sotto.."
+  },
+  "tutorial-000780": {
+    "message": "Le password possono essere personalizzate in un sacco di modi."
+  },
+  "tutorial-000781": {
+    "message": "Come amministratore potresti volere dare un occhiata a queste impostazioni."
+  },
+  "tutorial-000782": {
+    "message": "Nel caso tu non sappia come funziona qualcosa, abbia qualche domanda o bisogno di aiuto con un problema:"
+  },
+  "tutorial-000783": {
+    "message": "L'aiuto è dietro l'angolo."
+  },
+  "tutorial-000784": {
+    "message": "Il nostro manuale può essere trovato nella sezione \"Di più\" e spiega l'applicazione in tutti i dettagli."
+  },
+  "tutorial-000785": {
+    "message": "In qualsiasi altro caso, la nostra comunità è il posto giusto dove fare domande."
+  },
+  "tutorial-000786": {
+    "message": "Il manuale verrà aperto dopo questo tutorial"
+  }
+}

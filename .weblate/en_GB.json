@@ -1,0 +1,61 @@
+{
+  "backend-000174": {
+    "message": "Colour"
+  },
+  "backend-000182": {
+    "message": "Favourite"
+  },
+  "backend-000148": {
+    "message": "Favourites"
+  },
+  "backend-000144": {
+    "message": "Passwords"
+  },
+  "backups-000045": {
+    "message": "Custom Fields"
+  },
+  "backups-000046": {
+    "message": "Folder"
+  },
+  "backups-000047": {
+    "message": "Tags"
+  },
+  "backups-000049": {
+    "message": "Folder Id"
+  },
+  "backups-000050": {
+    "message": "Tag Ids"
+  },
+  "backend-000253": {
+    "message": "Shared $COUNT$ times",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000313": {
+    "message": "Your favourites will appear here"
+  },
+  "backend-000274": {
+    "message": "Choose an expiration date or leave empty to share forever"
+  },
+  "backend-000351": {
+    "message": "System Maintenance"
+  },
+  "backend-000352": {
+    "message": "Not Available"
+  },
+  "backend-000353": {
+    "message": "System"
+  },
+  "backend-000354": {
+    "message": "Public Access"
+  },
+  "backend-000355": {
+    "message": "Automatic Background Task"
+  },
+  "backend-000356": {
+    "message": "Server Command Line"
+  }
+}

@@ -1,0 +1,2163 @@
+{
+  "apps-000001": {
+    "message": "oficiální"
+  },
+  "apps-000002": {
+    "message": "od $AUTHOR$",
+    "placeholders": {
+      "author": {
+        "content": "$1"
+      }
+    }
+  },
+  "apps-000003": {
+    "message": "zdrojové kódy"
+  },
+  "apps-000004": {
+    "message": "zjistit více"
+  },
+  "apps-000005": {
+    "message": "Propojit s PassLink"
+  },
+  "apps-000006": {
+    "message": "Připojit nové zařízení"
+  },
+  "apps-000007": {
+    "message": "Připojit prostřednictvím odkazu"
+  },
+  "apps-000008": {
+    "message": "Zvolte jméno:"
+  },
+  "apps-000009": {
+    "message": "Kódy se neshodují"
+  },
+  "apps-000010": {
+    "message": "Vypadá dobře"
+  },
+  "apps-000011": {
+    "message": "Úspěšně připojeno"
+  },
+  "apps-000012": {
+    "message": "Hotovo"
+  },
+  "apps-000013": {
+    "message": "Nezkoušet znovu"
+  },
+  "apps-000014": {
+    "message": "Připojit něco jiného"
+  },
+  "apps-000015": {
+    "message": "Zkusit znovu"
+  },
+  "apps-000016": {
+    "message": "Silné šifrování"
+  },
+  "apps-000017": {
+    "message": "Nepodařilo se stáhnout aplikace: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "apps-000018": {
+    "message": "Přerušili jste spojení"
+  },
+  "apps-000019": {
+    "message": "Nepotvrdili jste spojení včas"
+  },
+  "apps-000020": {
+    "message": "Pro připojení stačí naskenovat QR kód danou aplikací."
+  },
+  "apps-000021": {
+    "message": "Až budete připraveni zahájit připojování, klikněte na tlačítko."
+  },
+  "apps-000022": {
+    "message": "Zkontrolujte, zda níže uvedené kódy odpovídají těm poskytnutým zařízením nebo aplikací:"
+  },
+  "apps-000023": {
+    "message": "Propojte tohoto klienta s vaším Nextcloud účtem bez otravného vypisování hesel a URL adres"
+  },
+  "apps-000024": {
+    "message": "Tento klient oficiálně podporuje silné šifrování mezi koncovými body"
+  },
+  "apps-000025": {
+    "message": "Tento klient je udržován autory aplikace Hesla"
+  },
+  "apps-000026": {
+    "message": "Pokud chcete připojit aplikaci nainstalovanou na tomto zařízení, klikněte na tlačítko nebo naskenujte QR kód aplikací, pokud je nainstalována na jiném zařízení."
+  },
+  "backups-000028": {
+    "message": "Záloha a export"
+  },
+  "backups-000029": {
+    "message": "Zvolte formát"
+  },
+  "backups-000030": {
+    "message": "Zvolte"
+  },
+  "backups-000031": {
+    "message": "Záloha databáze"
+  },
+  "backups-000032": {
+    "message": "Předdefinované CSV"
+  },
+  "backups-000033": {
+    "message": "Přečtěte si příručku k importu $LABEL$",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000034": {
+    "message": "nebo"
+  },
+  "backups-000035": {
+    "message": "záloha databáze"
+  },
+  "backups-000036": {
+    "message": "generické CSV"
+  },
+  "backups-000037": {
+    "message": "zkusit generický import CSV"
+  },
+  "backups-000038": {
+    "message": "Žádný import pro vaše CSV data?"
+  },
+  "backups-000039": {
+    "message": "Heslo k záloze"
+  },
+  "backups-000040": {
+    "message": "(Volitelné) Zašifruje zálohu"
+  },
+  "backups-000041": {
+    "message": "Import je možný pouze z CSV souboru"
+  },
+  "backups-000042": {
+    "message": "Exportovat hesla"
+  },
+  "backups-000043": {
+    "message": "Exportovat složky"
+  },
+  "backups-000044": {
+    "message": "Exportovat štítky"
+  },
+  "backups-000045": {
+    "message": "Uživatelsky ručené kolonky"
+  },
+  "backups-000046": {
+    "message": "OznaceniSlozky"
+  },
+  "backups-000047": {
+    "message": "JmenovkyStitku"
+  },
+  "backups-000048": {
+    "message": "JmenovkaNadrazeneho"
+  },
+  "backups-000049": {
+    "message": "IdentifSlozky"
+  },
+  "backups-000050": {
+    "message": "IdentifStitku"
+  },
+  "backups-000051": {
+    "message": "IdentifNadrazeneho"
+  },
+  "backups-000052": {
+    "message": "Prázdné"
+  },
+  "backups-000053": {
+    "message": "Přidat záhlaví"
+  },
+  "backups-000054": {
+    "message": "Exportovat i vám nasdílená hesla"
+  },
+  "backups-000055": {
+    "message": "Neupravovat vám nasdílená hesla "
+  },
+  "backups-000056": {
+    "message": "Neimportovat prázdné kolonky"
+  },
+  "backups-000057": {
+    "message": "Spustit export"
+  },
+  "backups-000058": {
+    "message": "Export"
+  },
+  "backups-000059": {
+    "message": "Čekání…"
+  },
+  "backups-000060": {
+    "message": "Export se nezdařil"
+  },
+  "backups-000061": {
+    "message": "Stáhnout $FORMAT$",
+    "placeholders": {
+      "format": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000062": {
+    "message": "Není co exportovat"
+  },
+  "backups-000063": {
+    "message": "Nejsou k dispozici žádná data pro export"
+  },
+  "backups-000064": {
+    "message": "Obnovit/importovat"
+  },
+  "backups-000065": {
+    "message": "Zvolte formát importovaného"
+  },
+  "backups-000066": {
+    "message": "Hesla v CSV"
+  },
+  "backups-000067": {
+    "message": "Složky v CSV"
+  },
+  "backups-000068": {
+    "message": "Uživatelsky určené CSV"
+  },
+  "backups-000069": {
+    "message": "Ostatní / uživatelsky určené CSV"
+  },
+  "backups-000070": {
+    "message": "Vyberte soubor"
+  },
+  "backups-000071": {
+    "message": "Vyberte možnosti"
+  },
+  "backups-000072": {
+    "message": "Zacházení s konflikty"
+  },
+  "backups-000073": {
+    "message": "Přeskočit, pokud je stejná revizi"
+  },
+  "backups-000074": {
+    "message": "Vždy přeskočit"
+  },
+  "backups-000075": {
+    "message": "Přepsat existující"
+  },
+  "backups-000076": {
+    "message": "Sloučit s existujícím"
+  },
+  "backups-000077": {
+    "message": "Vytvořit nový záznam"
+  },
+  "backups-000078": {
+    "message": "Pro šifrované zálohy"
+  },
+  "backups-000079": {
+    "message": "Možnosti CSV"
+  },
+  "backups-000080": {
+    "message": "Databáze"
+  },
+  "backups-000081": {
+    "message": "Znak pro citování"
+  },
+  "backups-000082": {
+    "message": "Funkce zbavující znak (escape)"
+  },
+  "backups-000083": {
+    "message": "Oddělovač"
+  },
+  "backups-000084": {
+    "message": "Zalomení řádku"
+  },
+  "backups-000085": {
+    "message": "Uvozovky"
+  },
+  "backups-000086": {
+    "message": "Apostrof"
+  },
+  "backups-000087": {
+    "message": "Zpětné lomítko"
+  },
+  "backups-000088": {
+    "message": "Rozpoznat"
+  },
+  "backups-000089": {
+    "message": "Čárka"
+  },
+  "backups-000090": {
+    "message": "Středník"
+  },
+  "backups-000091": {
+    "message": "Mezera"
+  },
+  "backups-000092": {
+    "message": "Tabulátor"
+  },
+  "backups-000093": {
+    "message": "Rozpoznat uvozovky, u kterých nebyla zrušena funkce (escape)"
+  },
+  "backups-000094": {
+    "message": "Přeskočit první řádek"
+  },
+  "backups-000095": {
+    "message": "Odhadnout chybějící kolonky z těch okolních"
+  },
+  "backups-000096": {
+    "message": "Mapování CSV kolonek"
+  },
+  "backups-000097": {
+    "message": "Náhled řádku"
+  },
+  "backups-000098": {
+    "message": "Řádek $LINE$",
+    "placeholders": {
+      "line": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000099": {
+    "message": "(žádná hodnota)"
+  },
+  "backups-000100": {
+    "message": "Ignorovat"
+  },
+  "backups-000101": {
+    "message": "Spustit import"
+  },
+  "backups-000102": {
+    "message": "Importovat"
+  },
+  "backups-000103": {
+    "message": "Zpracování vstupního souboru"
+  },
+  "backups-000104": {
+    "message": "Analýza štítků"
+  },
+  "backups-000105": {
+    "message": "Analýza složek"
+  },
+  "backups-000106": {
+    "message": "Čtení štítků"
+  },
+  "backups-000107": {
+    "message": "Import štítků"
+  },
+  "backups-000108": {
+    "message": "Čtení složek"
+  },
+  "backups-000109": {
+    "message": "Import složek"
+  },
+  "backups-000110": {
+    "message": "Čtení hesel"
+  },
+  "backups-000111": {
+    "message": "Import hesel"
+  },
+  "backups-000112": {
+    "message": "Import se nezdařil"
+  },
+  "backups-000113": {
+    "message": "Import se z části nezdařil"
+  },
+  "backups-000114": {
+    "message": "Import proběhl úspěšně"
+  },
+  "backups-000115": {
+    "message": "Během importu došlo k chybě"
+  },
+  "backups-000116": {
+    "message": "U některých objektů došlo k chybám:"
+  },
+  "backups-000117": {
+    "message": "Neplatný typ souboru „$TYPE$“",
+    "placeholders": {
+      "type": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000118": {
+    "message": "Je vyžadováno heslo"
+  },
+  "backups-000119": {
+    "message": "Neplatné heslo"
+  },
+  "backups-000120": {
+    "message": "Nepodařilo se rozšifrovat hesla"
+  },
+  "backups-000121": {
+    "message": "Nepodařilo se rozšifrovat složky"
+  },
+  "backups-000122": {
+    "message": "Nepodařilo se rozšifrovat štítky"
+  },
+  "backups-000123": {
+    "message": "Soubor k importu je prázdný"
+  },
+  "backups-000124": {
+    "message": "Mapování CSV souboru se nezdařilo"
+  },
+  "backups-000125": {
+    "message": "Přihlašovací údaje"
+  },
+  "backups-000126": {
+    "message": "Poznámky"
+  },
+  "backups-000127": {
+    "message": "Platební karty"
+  },
+  "backups-000128": {
+    "message": "Identity"
+  },
+  "backups-000129": {
+    "message": "Finance"
+  },
+  "backups-000130": {
+    "message": "Licence"
+  },
+  "backups-000131": {
+    "message": "Cestování"
+  },
+  "backups-000132": {
+    "message": "Počítače"
+  },
+  "backups-000133": {
+    "message": "Různé"
+  },
+  "backups-000134": {
+    "message": "Neplatná ukončovací uvozovka v citované kolonce"
+  },
+  "backups-000135": {
+    "message": "Soubor nelze pracovat: $ERRORS$",
+    "placeholders": {
+      "errors": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000136": {
+    "message": "$MESSAGE$ na řádku $LINE$, znak $CHARACTER$.",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      },
+      "line": {
+        "content": "$2"
+      },
+      "character": {
+        "content": "$3"
+      }
+    }
+  },
+  "backups-000137": {
+    "message": "U „$LABEL$“ jsou přiložené soubory, které není možné importovat.",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      }
+    }
+  },
+  "backups-000138": {
+    "message": "Typ „$FIELD$“ v „$LABEL$“ není znám a není možné ho importovat.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000139": {
+    "message": "Délka názvu „$FIELD$“ v „$LABEL$“ přesahuje 48 znaků a byla zkrácena.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000140": {
+    "message": "Délka hodnoty „$FIELD$“ v „$LABEL$“ přesahuje 320 znaků a byla zkrácena.",
+    "placeholders": {
+      "field": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000141": {
+    "message": "Podrobnosti viz záznam událostí (log). (Stiskněte F12)"
+  },
+  "backups-000142": {
+    "message": "Typ souboru je „$ACTUAL$“, ale očekává se „$EXPECTED$“. Pravděpodobně jste vybrali nesprávný soubor nebo typ importu.",
+    "placeholders": {
+      "actual": {
+        "content": "$1"
+      },
+      "expected": {
+        "content": "$2"
+      }
+    }
+  },
+  "backups-000143": {
+    "message": "O $SERVICE$ je známo, že často chybně exportuje data. V případě, že se z ní získaný soubor nedaří zpracovat, podívejte se do příručky.",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000144": {
+    "message": "Hesla"
+  },
+  "backend-000145": {
+    "message": "Vše"
+  },
+  "backend-000146": {
+    "message": "Složky"
+  },
+  "backend-000147": {
+    "message": "Nedávné"
+  },
+  "backend-000148": {
+    "message": "Oblíbené"
+  },
+  "backend-000149": {
+    "message": "Sdílené"
+  },
+  "backend-000150": {
+    "message": "Štítky"
+  },
+  "backend-000151": {
+    "message": "Bezpečnost"
+  },
+  "backend-000152": {
+    "message": "Koš"
+  },
+  "backend-000153": {
+    "message": "Podrobnosti"
+  },
+  "backend-000154": {
+    "message": "Upravit"
+  },
+  "backend-000155": {
+    "message": "Přejmenovat"
+  },
+  "backend-000156": {
+    "message": "Smazat"
+  },
+  "backend-000157": {
+    "message": "Obnovit"
+  },
+  "backend-000158": {
+    "message": "Nové heslo"
+  },
+  "backend-000159": {
+    "message": "Nová složka"
+  },
+  "backend-000160": {
+    "message": "Nový štítek"
+  },
+  "backend-000161": {
+    "message": "Bezpečné"
+  },
+  "backend-000163": {
+    "message": "Slabé"
+  },
+  "backend-000164": {
+    "message": "Slabé (duplikát)"
+  },
+  "backend-000165": {
+    "message": "Slabé (zastaralé)"
+  },
+  "backend-000166": {
+    "message": "Velmi nebezpečné (prolomené)"
+  },
+  "backend-000167": {
+    "message": "Sdílet"
+  },
+  "backend-000168": {
+    "message": "Revize"
+  },
+  "backend-000169": {
+    "message": "QR kód"
+  },
+  "backend-000170": {
+    "message": "Heslo"
+  },
+  "backend-000171": {
+    "message": "Uživatelské jméno"
+  },
+  "backend-000172": {
+    "message": "Web"
+  },
+  "backend-000173": {
+    "message": "Přidat štítky…"
+  },
+  "backend-000174": {
+    "message": "Barva"
+  },
+  "backend-000175": {
+    "message": "Název"
+  },
+  "backend-000176": {
+    "message": "Označení"
+  },
+  "backend-000177": {
+    "message": "Obecné"
+  },
+  "backend-000178": {
+    "message": "Vlastnosti"
+  },
+  "backend-000179": {
+    "message": "Čísla"
+  },
+  "backend-000180": {
+    "message": "Speciální znaky"
+  },
+  "backend-000181": {
+    "message": "Další možnosti"
+  },
+  "backend-000182": {
+    "message": "Oblíbené"
+  },
+  "backend-000183": {
+    "message": "Šifrování"
+  },
+  "backend-000184": {
+    "message": "Na serveru"
+  },
+  "backend-000185": {
+    "message": "Uživatelsky určené kolonky"
+  },
+  "backend-000186": {
+    "message": "Tajemství"
+  },
+  "backend-000188": {
+    "message": "Soubor"
+  },
+  "backend-000189": {
+    "message": "Hodnota"
+  },
+  "backend-000190": {
+    "message": "Vyp/zap. viditelnost"
+  },
+  "backend-000191": {
+    "message": "Vygenerovat heslo"
+  },
+  "backend-000192": {
+    "message": "Jednoduché šifrování na straně serveru v1"
+  },
+  "backend-000193": {
+    "message": "Prostor pro vaše poznámky."
+  },
+  "backend-000194": {
+    "message": "Uložit"
+  },
+  "backend-000195": {
+    "message": "Vytvořit složku"
+  },
+  "backend-000196": {
+    "message": "Složka vytvořena"
+  },
+  "backend-000197": {
+    "message": "Vytvoření složky se nezdařilo"
+  },
+  "backend-000198": {
+    "message": "Přejmenovat složku"
+  },
+  "backend-000199": {
+    "message": "Složka přejmenována"
+  },
+  "backend-000200": {
+    "message": "Přejmenování se nezdařilo"
+  },
+  "backend-000201": {
+    "message": "Složka přesunuta"
+  },
+  "backend-000202": {
+    "message": "Přesunutí složky se nezdařilo"
+  },
+  "backend-000203": {
+    "message": "Smazat složku"
+  },
+  "backend-000204": {
+    "message": "Opravdu si přejete tuto složku smazat"
+  },
+  "backend-000205": {
+    "message": "Složka smazána"
+  },
+  "backend-000206": {
+    "message": "Mazání složky se nezdařilo"
+  },
+  "backend-000207": {
+    "message": "Složka obnovena"
+  },
+  "backend-000208": {
+    "message": "Obnova složky se nezdařila"
+  },
+  "backend-000209": {
+    "message": "Vytvořit štítek"
+  },
+  "backend-000210": {
+    "message": "Štítek vytvořen"
+  },
+  "backend-000211": {
+    "message": "Vytvoření štítku se nezdařilo"
+  },
+  "backend-000212": {
+    "message": "Upravit štítek"
+  },
+  "backend-000214": {
+    "message": "Štítek uložen"
+  },
+  "backend-000215": {
+    "message": "Uložení štítku se nezdařilo"
+  },
+  "backend-000216": {
+    "message": "Odstranit štítek"
+  },
+  "backend-000217": {
+    "message": "Opravdu si přejete tento štítek odstranit?"
+  },
+  "backend-000218": {
+    "message": "Štítek odstraněn"
+  },
+  "backend-000219": {
+    "message": "Mazání štítku se nezdařilo"
+  },
+  "backend-000220": {
+    "message": "Štítek obnoven"
+  },
+  "backend-000221": {
+    "message": "Obnovení štítku se nezdařilo"
+  },
+  "backend-000222": {
+    "message": "Vytvořit heslo"
+  },
+  "backend-000223": {
+    "message": "Heslo vytvořeno"
+  },
+  "backend-000224": {
+    "message": "Vytváření heslo se nezdařilo"
+  },
+  "backend-000225": {
+    "message": "Upravit heslo"
+  },
+  "backend-000226": {
+    "message": "Heslo uloženo"
+  },
+  "backend-000227": {
+    "message": "Uložení hesla se nezdařilo"
+  },
+  "backend-000228": {
+    "message": "Heslo přesunuto"
+  },
+  "backend-000229": {
+    "message": "Přesunutí hesla se nezdařilo"
+  },
+  "backend-000230": {
+    "message": "Smazat heslo"
+  },
+  "backend-000231": {
+    "message": "Opravdu si přejete toto heslo smazat?"
+  },
+  "backend-000232": {
+    "message": "Heslo odstraněno"
+  },
+  "backend-000233": {
+    "message": "Heslo obnoveno"
+  },
+  "backend-000234": {
+    "message": "Obnova hesla se nezdařila"
+  },
+  "backend-000235": {
+    "message": "Otevřít URL"
+  },
+  "backend-000236": {
+    "message": "Kopírovat URL"
+  },
+  "backend-000237": {
+    "message": "Zkopírovat uživatele"
+  },
+  "backend-000238": {
+    "message": "Zkopírovat heslo"
+  },
+  "backend-000239": {
+    "message": "$ELEMENT$ bylo zkopírováno do schránky",
+    "placeholders": {
+      "element": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000241": {
+    "message": "Naposledy upraveno: $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000242": {
+    "message": "Obnovit předchozí verzi"
+  },
+  "backend-000243": {
+    "message": "Obnoveno do podoby předchozí verze"
+  },
+  "backend-000244": {
+    "message": "Obnovení do podoby předchozí verze se nezdařilo"
+  },
+  "backend-000245": {
+    "message": "Chcete obnovit do podoby předchozí verze?"
+  },
+  "backend-000246": {
+    "message": "Nasíleno vám"
+  },
+  "backend-000247": {
+    "message": "Nasdíleno vámi"
+  },
+  "backend-000248": {
+    "message": "Statistika"
+  },
+  "backend-000249": {
+    "message": "Vytvořeno dne"
+  },
+  "backend-000250": {
+    "message": "Naposledy upraveno"
+  },
+  "backend-000251": {
+    "message": "$COUNT$ revizí",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000252": {
+    "message": "Sdílení"
+  },
+  "backend-000253": {
+    "message": "$COUNT$ sdílení",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000261": {
+    "message": "Další"
+  },
+  "backend-000262": {
+    "message": "Záloha a obnovení"
+  },
+  "backend-000524": {
+    "message": "Rozšíření pro webový prohlížeč"
+  },
+  "backend-000264": {
+    "message": "Příručka"
+  },
+  "backend-000265": {
+    "message": "Aplikace a rozšíření"
+  },
+  "backend-000271": {
+    "message": "Hledat uživatele"
+  },
+  "backend-000272": {
+    "message": "Nastavte datum skončení platnosti"
+  },
+  "backend-000525": {
+    "message": "Platnost skončí $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000274": {
+    "message": "Vyberte datum skončení platnosti"
+  },
+  "backend-000275": {
+    "message": "Vyberte datum z budoucnosti"
+  },
+  "backend-000276": {
+    "message": "Neplatné datum"
+  },
+  "backend-000277": {
+    "message": "Uživatel $UID$ neexistuje",
+    "placeholders": {
+      "uid": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000278": {
+    "message": "Heslo není možné sdílet: $MESSAGE$",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000279": {
+    "message": "Vyp/zap. oprávnění k zápisu"
+  },
+  "backend-000280": {
+    "message": "Vyp/zap. oprávnění ke sdílení"
+  },
+  "backend-000281": {
+    "message": "Přestat sdílet"
+  },
+  "backend-000282": {
+    "message": "Datum"
+  },
+  "backend-000283": {
+    "message": "Výchozí mezipaměť (0 souborů, 0 B)"
+  },
+  "backend-000284": {
+    "message": "Mezipaměť profilových obrázků (0 souborů, 0 B)"
+  },
+  "backend-000285": {
+    "message": "Mezipaměť Favicon (0 souborů, 0 B)"
+  },
+  "backend-000286": {
+    "message": "Mezipaměť náhledů (0 souborů, 0 B)"
+  },
+  "backend-000287": {
+    "message": "Mezipaměť hesel (0 souborů, 0 B)"
+  },
+  "backend-000288": {
+    "message": "Změněno"
+  },
+  "backend-000289": {
+    "message": "Upraveno"
+  },
+  "backend-000290": {
+    "message": "Upraveno dne"
+  },
+  "backend-000291": {
+    "message": "Vytvořeno dne"
+  },
+  "backend-000292": {
+    "message": "Složka"
+  },
+  "backend-000293": {
+    "message": "Verze"
+  },
+  "backend-000294": {
+    "message": "URL"
+  },
+  "backend-000295": {
+    "message": "Nadřazené"
+  },
+  "backend-000296": {
+    "message": "Smazat všechny položky"
+  },
+  "backend-000297": {
+    "message": "Obnovit všechny položky"
+  },
+  "backend-000298": {
+    "message": "Obnovit položky"
+  },
+  "backend-000299": {
+    "message": "Obnovit všechny položky koše?"
+  },
+  "backend-000300": {
+    "message": "Obnovit tuto položku"
+  },
+  "backend-000301": {
+    "message": "Položky obnoveny"
+  },
+  "backend-000302": {
+    "message": "Vysypat koš"
+  },
+  "backend-000303": {
+    "message": "Opravdu chcete všechny položky trvale odstranit?"
+  },
+  "backend-000304": {
+    "message": "Koš vyprázdněn"
+  },
+  "backend-000305": {
+    "message": "Hledat"
+  },
+  "backend-000306": {
+    "message": "Vyhledávejte pomocí k tomu určené kolonky"
+  },
+  "backend-000307": {
+    "message": "Hledat všude „$QUERY$“",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000263": {
+    "message": "Nastavení"
+  },
+  "backend-000526": {
+    "message": "Regeln für Passwörter"
+  },
+  "backend-000527": {
+    "message": "Markiere Duplikate"
+  },
+  "backend-000528": {
+    "message": "Maximales Alter in Tagen"
+  },
+  "backend-000529": {
+    "message": "Passwortgenerator"
+  },
+  "backend-000530": {
+    "message": "Stärke"
+  },
+  "backend-000531": {
+    "message": "Nummern verwenden"
+  },
+  "backend-000532": {
+    "message": "Sonderzeichen verwenden"
+  },
+  "backend-000533": {
+    "message": "Uživatelské rozhraní"
+  },
+  "backend-000534": {
+    "message": "Úvodní sekce"
+  },
+  "backend-000535": {
+    "message": "Všechna hesla"
+  },
+  "backend-000536": {
+    "message": "Zobrazení hesel v seznamu"
+  },
+  "backend-000537": {
+    "message": "Nastavit nadpis z"
+  },
+  "backend-000538": {
+    "message": "Seřadit podle"
+  },
+  "backend-000539": {
+    "message": "Kolonky nadpis"
+  },
+  "backend-000540": {
+    "message": "Akce při kliknutí"
+  },
+  "backend-000541": {
+    "message": "Akce při dvojkliku"
+  },
+  "backend-000542": {
+    "message": "Zkopírovat heslo"
+  },
+  "backend-000543": {
+    "message": "Zkopírovat uživatelské jméno"
+  },
+  "backend-000544": {
+    "message": "Zkopírovat adresu webu"
+  },
+  "backend-000545": {
+    "message": "Zobrazit podrobnosti"
+  },
+  "backend-000546": {
+    "message": "Přidat do nabídky položky pro kopírování"
+  },
+  "backend-000547": {
+    "message": "V zobrazení v seznamu zobrazovat uživatelské jméno"
+  },
+  "backend-000548": {
+    "message": "V zobrazení v seznamu zobrazovat štítky"
+  },
+  "backend-000549": {
+    "message": "Zobrazit skryté uživatelsky určené kolonky"
+  },
+  "backend-000550": {
+    "message": "Hledat v průběhu psaní"
+  },
+  "backend-000551": {
+    "message": "Hledat všude klávesou Enter"
+  },
+  "backend-000552": {
+    "message": "Vždy zobrazit sekci hledání"
+  },
+  "backend-000553": {
+    "message": "Upozorňování"
+  },
+  "backend-000554": {
+    "message": "Odeslat e-maily pro"
+  },
+  "backend-000555": {
+    "message": "Problémy se zabezpečením"
+  },
+  "backend-000556": {
+    "message": "Hesla která mi někdo nasdílel"
+  },
+  "backend-000557": {
+    "message": "Zobrazit upozornění pro"
+  },
+  "backend-000558": {
+    "message": "Ostatní chyby"
+  },
+  "backend-000559": {
+    "message": "Nebezpečná oblast"
+  },
+  "backend-000560": {
+    "message": "Resetovat veškerá nastavení"
+  },
+  "backend-000561": {
+    "message": "Resetovat"
+  },
+  "backend-000562": {
+    "message": "Vše smazat"
+  },
+  "backend-000563": {
+    "message": "VŠE SMAZAT"
+  },
+  "backend-000564": {
+    "message": "Vyžádán reset účtu"
+  },
+  "backend-000565": {
+    "message": "Zobrazit"
+  },
+  "backend-000566": {
+    "message": "Pokročilé"
+  },
+  "backend-000308": {
+    "message": "Tady nic není…"
+  },
+  "backend-000309": {
+    "message": "Nové položky přidáte kliknutím na „+“"
+  },
+  "backend-000310": {
+    "message": "Smazané položky se zobrazí zde"
+  },
+  "backend-000311": {
+    "message": "Nejsou vám nasdílena žádná hesla"
+  },
+  "backend-000312": {
+    "message": "Nesdílíte žádné heslo"
+  },
+  "backend-000313": {
+    "message": "Oblíbené položky se objeví zde"
+  },
+  "backend-000314": {
+    "message": "Zkuste prozkoumat další sekce"
+  },
+  "backend-000315": {
+    "message": "Tohle je pravděpodobně dobré znamení"
+  },
+  "backend-000316": {
+    "message": "Jít na $HREF$",
+    "placeholders": {
+      "href": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000318": {
+    "message": "Obrázek $COUNT$: $TITLE$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "title": {
+        "content": "$2"
+      }
+    }
+  },
+  "backend-000319": {
+    "message": "Nepodařilo se načíst stránku: $MESSAGE$.",
+    "placeholders": {
+      "message": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000322": {
+    "message": "Nenalezeno"
+  },
+  "backend-000326": {
+    "message": "Dejte nám vědět!"
+  },
+  "backend-000329": {
+    "message": "Chyba sítě"
+  },
+  "backend-000330": {
+    "message": "Nepodařilo se načíst modul: $MODULE$",
+    "placeholders": {
+      "module": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000331": {
+    "message": "Seřadit podle názvu"
+  },
+  "backend-000332": {
+    "message": "Seřadit podle data úpravy"
+  },
+  "backend-000333": {
+    "message": "$PASSWORDS$ hesel",
+    "placeholders": {
+      "passwords": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000334": {
+    "message": "1 heslo"
+  },
+  "backend-000335": {
+    "message": "$FOLDERS$ složek",
+    "placeholders": {
+      "folders": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000336": {
+    "message": "1 složka"
+  },
+  "backend-000337": {
+    "message": "$TAGS$ štítků",
+    "placeholders": {
+      "tags": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000338": {
+    "message": "1 štítek"
+  },
+  "backend-000340": {
+    "message": " a"
+  },
+  "backend-000341": {
+    "message": "shoda s"
+  },
+  "backend-000342": {
+    "message": "shody s"
+  },
+  "backend-000361": {
+    "message": "pravda"
+  },
+  "backend-000362": {
+    "message": "nepravda"
+  },
+  "backend-000363": {
+    "message": "ano"
+  },
+  "backend-000364": {
+    "message": "ne"
+  },
+  "backend-000567": {
+    "message": "Označit hesla jako slabá pokud jsou použita pro vícero účtů"
+  },
+  "backend-000568": {
+    "message": "Označit hesla jako slabá pokud jsou starší než zadaný počet dnů"
+  },
+  "backend-000569": {
+    "message": "Vyšší odolnost vede k delším, komplexnějším heslům"
+  },
+  "backend-000570": {
+    "message": "Zobrazit označenou vlastnost jako nadpis v zobrazení v seznamu"
+  },
+  "backend-000571": {
+    "message": "Seřadí hesla podle vybrané vlastnosti, když je zvoleno řazení podle názvu"
+  },
+  "backend-000572": {
+    "message": "Akce kteoru provést při kliknutí na heslo v zobrazení v seznamu"
+  },
+  "backend-000573": {
+    "message": "Akce kterou provést při dvojkliku na heslo v zobrazení v seznamu"
+  },
+  "backend-000574": {
+    "message": "V nabídce zobrazit položky pro kopírování hesla a uživatelského jména"
+  },
+  "backend-000575": {
+    "message": "Úvodní sekce kterou zobrazit při otevření aplikace"
+  },
+  "backend-000576": {
+    "message": "V zobrazení v seznamu vždy zobrazit uživatelské jméno, související s heslem"
+  },
+  "backend-000577": {
+    "message": "Zobrazit šítky pro každé z hesel v zobrazení v seznamu. Prodlouží ale doby načítání"
+  },
+  "backend-000578": {
+    "message": "Zobrazit skryté uživatelsky určené kolonky ve formuláři úprav a sekci podrobností o hesle"
+  },
+  "backend-000579": {
+    "message": "Pošle vám e-maily o kompromitovaných heslech a ostatních problémech se zabezpečením"
+  },
+  "backend-000580": {
+    "message": "Pošle vám e-maily když vám ostatní lidé nasdílí hesla"
+  },
+  "backend-000581": {
+    "message": "V navigaci vždy zobrazit sekci pro globální vyhledávání"
+  },
+  "backend-000582": {
+    "message": "Upozorní vás na kompromitovaná hesla a ostatní problémy se zabezpečením"
+  },
+  "backend-000583": {
+    "message": "Upozorní vás když vám ostatní lidé nasdílí hesla"
+  },
+  "backend-000584": {
+    "message": "Upozorní vás když se operace na pozadí nezdaří"
+  },
+  "backend-000585": {
+    "message": "Resetovat veškerá nastavení na této stránce do výchozích hodnot"
+  },
+  "backend-000586": {
+    "message": "Toto resetuje veškerá nastavení na jejich výchozí hodnoty. Opravdu chcete pokračovat?"
+  },
+  "backend-000587": {
+    "message": "Začít znovu a smazat veškeré nastavení, hesla, složky a štítky"
+  },
+  "backend-000366": {
+    "message": "Dosáhli jste maximální délky 4094 znaků"
+  },
+  "backend-000367": {
+    "message": "Nebyly nalezeny žádné výsledky pro dotaz „$QUERY$“",
+    "placeholders": {
+      "query": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000368": {
+    "message": "Stránku „$PAGE$“ se nepodařilo načíst ze serveru s příručkou.",
+    "placeholders": {
+      "page": {
+        "content": "$1"
+      }
+    }
+  },
+  "backend-000369": {
+    "message": "Některá data čekají na synchronizaci"
+  },
+  "backend-000588": {
+    "message": "Opravdu chcete smazat veškerá vaše nastavení, hesla, složky a štítky?\nToto NEBUDE možné vzít zpět."
+  },
+  "fronted-000375": {
+    "message": "Je vyžadováno HTTPS"
+  },
+  "fronted-000376": {
+    "message": "znovu načíst tuto stránku"
+  },
+  "fronted-000378": {
+    "message": "dokumentace"
+  },
+  "fronted-000380": {
+    "message": "Tato aplikace vyžaduje $STR_1$ pro bezpečné fungování.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000589": {
+    "message": "Pokud si myslíte, že vámi využívaný server má zapnuté HTTPS, můžete zkusit použít $STR_1$ s HTTPS.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000387": {
+    "message": "Relace Hesel $STR_1$ - $STR_1$",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000388": {
+    "message": "Otevřít dokumentaci"
+  },
+  "fronted-000389": {
+    "message": "nikdy"
+  },
+  "fronted-000390": {
+    "message": "Interní zpracování dat"
+  },
+  "fronted-000391": {
+    "message": "Vykreslování obrázků"
+  },
+  "fronted-000392": {
+    "message": "Imagick/GMagick (doporučeno)"
+  },
+  "fronted-000393": {
+    "message": "Externí služby"
+  },
+  "fronted-000394": {
+    "message": "Kontrola bezpečnosti hesel"
+  },
+  "fronted-000395": {
+    "message": "Have I been pwned? (doporučeno)"
+  },
+  "fronted-000396": {
+    "message": "25 Million Passwords (místní)"
+  },
+  "fronted-000397": {
+    "message": "5 Million Passwords (místní)"
+  },
+  "fronted-000398": {
+    "message": "Big local database & Hibp?"
+  },
+  "fronted-000399": {
+    "message": "Služba pro generování hesel"
+  },
+  "fronted-000400": {
+    "message": "Místní slovník"
+  },
+  "fronted-000401": {
+    "message": "Náhodné znaky"
+  },
+  "fronted-000402": {
+    "message": "watchout4snakes.com"
+  },
+  "fronted-000403": {
+    "message": "Leipzig Corpora Collection (doporučeno)"
+  },
+  "fronted-000404": {
+    "message": "Služba pro ikony webů"
+  },
+  "fronted-000405": {
+    "message": "Místní služba"
+  },
+  "fronted-000406": {
+    "message": "Besticon (doporučeno)"
+  },
+  "fronted-000407": {
+    "message": "Nic"
+  },
+  "fronted-000408": {
+    "message": "Služba pro náhledy stránek"
+  },
+  "fronted-000409": {
+    "message": "klíč k API pro náhled stránek"
+  },
+  "fronted-000410": {
+    "message": "Pageres/PhantomJS (místní)"
+  },
+  "fronted-000411": {
+    "message": "WKHTML (místní)"
+  },
+  "fronted-000412": {
+    "message": "screenshotapi.io"
+  },
+  "fronted-000413": {
+    "message": "Výchozí nastavení e-mailu"
+  },
+  "fronted-000414": {
+    "message": "Posílat e-maily při bezpečnostních incidentech"
+  },
+  "fronted-000415": {
+    "message": "Posílat e-maily při sdílení"
+  },
+  "fronted-000416": {
+    "message": "Další nastavení"
+  },
+  "fronted-000417": {
+    "message": "Odstranit smazané objekty z databáze"
+  },
+  "fronted-000419": {
+    "message": "Nikdy"
+  },
+  "fronted-000420": {
+    "message": "Okamžitě"
+  },
+  "fronted-000421": {
+    "message": "Po dvou hodinách"
+  },
+  "fronted-000422": {
+    "message": "Po jednom dni"
+  },
+  "fronted-000423": {
+    "message": "Po dvou týdnech"
+  },
+  "fronted-000424": {
+    "message": "Po jednom měsíci"
+  },
+  "fronted-000425": {
+    "message": "Po jednom roce"
+  },
+  "fronted-000435": {
+    "message": "Mezipaměť"
+  },
+  "fronted-000436": {
+    "message": "Výchozí mezipaměť ($STR_1$ souborů, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000437": {
+    "message": "Mezipaměť profilových obrázků ($STR_1$ souborů, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000438": {
+    "message": "Mezipaměť ikon webů ($STR_1$ souborů, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000439": {
+    "message": "Mezipaměť náhledů ($STR_1$ souborů, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000440": {
+    "message": "Mezipaměť hesel ($STR_1$ souborů, $STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000441": {
+    "message": "vymazat"
+  },
+  "fronted-000442": {
+    "message": "Odstranit tuto mezipaměť"
+  },
+  "fronted-000443": {
+    "message": "Při používání sdílené služby není možné mezipaměť vymazat"
+  },
+  "fronted-000444": {
+    "message": "Uloženo"
+  },
+  "fronted-000445": {
+    "message": "Vymazáno"
+  },
+  "fronted-000446": {
+    "message": "Nezdařilo se"
+  },
+  "fronted-000447": {
+    "message": "Potřebujete pomoc"
+  },
+  "fronted-000448": {
+    "message": "našli jste chybu"
+  },
+  "fronted-000449": {
+    "message": "hledáte dokumentaci"
+  },
+  "fronted-000450": {
+    "message": "$STR_1$, $STR_1$ nebo $STR_1$? Pomůžeme Vám!",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      },
+      "str_3": {
+        "content": "$3"
+      }
+    }
+  },
+  "fronted-000590": {
+    "message": "PHP verze $STR_1$ už není podporováno",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000452": {
+    "message": "Aplikace Hesla vyžaduje HTTPS"
+  },
+  "fronted-000453": {
+    "message": "Použití $STR_1$ k provádění úloh na pozadí může způsobovat prodlevy. Doporučujeme používat plánovač Cron.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000454": {
+    "message": "Zkontrolujte systémové požadavky."
+  },
+  "fronted-000455": {
+    "message": "Heslo nebylo nasdíleno"
+  },
+  "fronted-000456": {
+    "message": "Heslo nemohlo být nasdíleno $STRING_1$, protože už je danýmu uživatelem sdílené.",
+    "placeholders": {
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000457": {
+    "message": "Používáte nebezpečné heslo"
+  },
+  "fronted-000458": {
+    "message": "Používáte nebezpečná hesla"
+  },
+  "fronted-000459": {
+    "message": "Jedno z vašich hesel už není bezpečné."
+  },
+  "fronted-000460": {
+    "message": "Některá vaše hesla už nejsou bezpečná."
+  },
+  "fronted-000461": {
+    "message": "Správce hesel pravidelně kontroluje, zda nedošlo ke kompromitaci hesel únikem dat."
+  },
+  "fronted-000462": {
+    "message": "Poslední kontrola odhalila, že jedno z vašich hesel není bezpečné."
+  },
+  "fronted-000463": {
+    "message": "Poslední kontrola odhalila, že $STR_1$ z vašich hesel není bezpečných.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000464": {
+    "message": "Znamená to, že uvedené heslo je volně dostupné na Internetu a účty které takové heslo využívají jsou v ohrožení."
+  },
+  "fronted-000465": {
+    "message": "Znamená to, že uvedená hesla jsou volně dostupná na Internetu a účty které taková hesla využívají jsou v ohrožení."
+  },
+  "fronted-000466": {
+    "message": "Proto bylo heslo označené jako nebezpečné a mělo by být okamžitě změněno."
+  },
+  "fronted-000467": {
+    "message": "Proto byla hesla označena jako nebezpečná a měly by být okamžitě změněny."
+  },
+  "fronted-000468": {
+    "message": "Nové a bezpečné heslo si můžete nechat vytvořit v aplikaci Hesla."
+  },
+  "fronted-000469": {
+    "message": "Nová a bezpečná hesla si můžete nechat vytvořit v aplikaci Hesla."
+  },
+  "fronted-000470": {
+    "message": "Změnit heslo nyní"
+  },
+  "fronted-000471": {
+    "message": "Změnit hesla nyní"
+  },
+  "fronted-000472": {
+    "message": "Pokud ho chcete změnit, otevřete aplikaci Hesla."
+  },
+  "fronted-000473": {
+    "message": "Pokud je chcete změnit, otevřete aplikaci Hesla."
+  },
+  "fronted-000474": {
+    "message": "$STR_1$ vám nasdílel(a) heslo.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000475": {
+    "message": "$STR_1$ vám nasdílel(a) $STR_1$ hesel.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      },
+      "str_2": {
+        "content": "$2"
+      }
+    }
+  },
+  "fronted-000476": {
+    "message": "$STRING_4$ a $STRING_3$ vám nasdíleli $STRING_1$ hesel.",
+    "placeholders": {
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000477": {
+    "message": "$STRING_5$, $STRING_4$ a $STRING_3$ vám nasdíleli $STRING_1$ hesel.",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_3": {
+        "content": "$3"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000478": {
+    "message": "$STRING_5$, $STRING_4$ a $STRING_2$ dalších vám nasdíleli $STRING_1$ hesel.",
+    "placeholders": {
+      "string_5": {
+        "content": "$5"
+      },
+      "string_4": {
+        "content": "$4"
+      },
+      "string_2": {
+        "content": "$2"
+      },
+      "string_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000479": {
+    "message": "Pokud si ho chcete zobrazit, otevřete aplikaci Hesla."
+  },
+  "fronted-000480": {
+    "message": "Pokud si je chcete zobrazit, otevřete aplikaci Hesla."
+  },
+  "fronted-000481": {
+    "message": "Dne $STR_1$ vám bylo nasdíleno heslo",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000482": {
+    "message": "Dne $STR_1$ vám bylo nasdíleno několik hesel",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000483": {
+    "message": "Zobrazit Vám sdílená hesla"
+  },
+  "fronted-000484": {
+    "message": "Jedno z Vašich hesel nemohlo být nasdíleno, protože příjemce už k němu přístup má."
+  },
+  "fronted-000485": {
+    "message": "$STR_1$ z Vašich hesel nemohlo být sdíleno, protože příjemce k nim už mají přístup.",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "fronted-000486": {
+    "message": "Pokud chcete vidět vámi sdílená hesla, otevřete aplikaci Hesla."
+  },
+  "fronted-000487": {
+    "message": "Sdílení hesel, která vám samotným už byla někým nasdílena, může někdy vést ke vzniku smyčky."
+  },
+  "fronted-000488": {
+    "message": "Aby se tomu předešlo, tato hesla nebudou sdílena."
+  },
+  "fronted-000494": {
+    "message": "Odstraněný uživatel ($STR_1$)",
+    "placeholders": {
+      "str_1": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000676": {
+    "message": "Anmeldung & Sitzung"
+  },
+  "settings-000677": {
+    "message": "Ponechat mne přihlášeného"
+  },
+  "settings-000678": {
+    "message": "Vždy"
+  },
+  "settings-000679": {
+    "message": "Když pracuji"
+  },
+  "settings-000680": {
+    "message": "Když jsem aktivní"
+  },
+  "settings-000681": {
+    "message": "Ukončit relaci po nečinnosti trvající"
+  },
+  "settings-000682": {
+    "message": "Minutu"
+  },
+  "settings-000683": {
+    "message": "$MINUTES$ minut",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000684": {
+    "message": "Šifrování mezi koncovými body"
+  },
+  "settings-000685": {
+    "message": "Režim šifrování na serveru"
+  },
+  "settings-000686": {
+    "message": "Žádné pokud použito šifrování na straně klienta"
+  },
+  "settings-000687": {
+    "message": "Jednoduché šifrování"
+  },
+  "settings-000688": {
+    "message": "Pokročilé šifrování"
+  },
+  "settings-000689": {
+    "message": "Režim šifrování na klientovi"
+  },
+  "settings-000690": {
+    "message": "Zapnout"
+  },
+  "settings-000691": {
+    "message": "Změnit heslo"
+  },
+  "settings-000692": {
+    "message": "Zobrazení podrobností o heslech"
+  },
+  "settings-000693": {
+    "message": "Zobrazit náhled webu"
+  },
+  "backend-000667": {
+    "message": "Výchozí"
+  },
+  "settings-000694": {
+    "message": "Nové heslo"
+  },
+  "settings-000695": {
+    "message": "Zopakování zadání hesla"
+  },
+  "settings-000696": {
+    "message": "Původní heslo"
+  },
+  "settings-000697": {
+    "message": "Heslo změněno"
+  },
+  "settings-000698": {
+    "message": "Změna hesla se nezdařila"
+  },
+  "settings-000699": {
+    "message": "Problémy správy"
+  },
+  "settings-000700": {
+    "message": "Sdílení hesla"
+  },
+  "settings-000701": {
+    "message": "Ve výchozím stavu sdílet jako upravitelné"
+  },
+  "settings-000702": {
+    "message": "Ve výchozím stavu umožnit sdílení"
+  },
+  "settings-000703": {
+    "message": "Kód"
+  },
+  "settings-000704": {
+    "message": "Neplatný resetovací kód"
+  },
+  "fronted-000650": {
+    "message": "Otisk pro kontrolu bezpečnosti"
+  },
+  "fronted-000651": {
+    "message": "Neukládat žádný otisk"
+  },
+  "fronted-000652": {
+    "message": "Ukládat 50% otisku"
+  },
+  "fronted-000653": {
+    "message": "Ukládat 75% otisku "
+  },
+  "fronted-000654": {
+    "message": "Úplný otisk hesla"
+  },
+  "settings-000705": {
+    "message": "Přidávat do vytvářených hesel číslice"
+  },
+  "settings-000706": {
+    "message": "Přidávat do vytvářených hesel speciální znaky"
+  },
+  "settings-000707": {
+    "message": "Zadejte dobu po požadavku po jejímž uplynutí zrušit relaci"
+  },
+  "settings-000708": {
+    "message": "Zvolte typ šifrování, který použít pro data na serveru"
+  },
+  "settings-000709": {
+    "message": "Pokud chcete nastavit šifrování svých hesel, spusťte průvodce instalací"
+  },
+  "settings-000710": {
+    "message": "Změnit šifrovací heslo"
+  },
+  "settings-000711": {
+    "message": "Zobrazit náhled souvisejícího webu v podrobnostech. (Ne na mobilních)"
+  },
+  "backend-000668": {
+    "message": "Začít hledat když je klávesa stisknuta kdekoli na stránce"
+  },
+  "backend-000669": {
+    "message": "Hledat všude když je klávesa Enter stisknuta v kolonce pro vyhledávání"
+  },
+  "settings-000712": {
+    "message": "Upozorní vás na chyby v nastavení a ostatní problémy se správou."
+  },
+  "settings-000713": {
+    "message": "Pokud chcete resetovat svůj uživatelský účet a všechno smazat, zadejte „$CODE$“.",
+    "placeholders": {
+      "code": {
+        "content": "$1"
+      }
+    }
+  },
+  "settings-000714": {
+    "message": "Pomocí tohoto dialotu je možné změnit hlavní heslo."
+  },
+  "settings-000715": {
+    "message": "Je třeba, aby heslo bylo delší než 12 znaků a nejednalo se o to původní"
+  },
+  "settings-000716": {
+    "message": "Zopakujte zadání nového hesla"
+  },
+  "settings-000717": {
+    "message": "Je třeba zadat původní heslo"
+  },
+  "settings-000718": {
+    "message": "Vaše heslo bylo úspěšně změněno."
+  },
+  "settings-000719": {
+    "message": "Tuto volbu zapněte pokud chcete ve výchozím stavu umožnit ostatním uživatelům upravovoat jim nasdílená hesla"
+  },
+  "settings-000720": {
+    "message": "Tuto volbu zapněte pokud chcete ve výchozím stavu umožnit ostatním uživatelům jim nasdílená hesla dál dalším uživatelům"
+  },
+  "settings-000722": {
+    "message": "Posílat požadavky pro udržení spojení a bránit tak zrušení relace"
+  },
+  "settings-000723": {
+    "message": "Zvolte typ šifrování použitý pro šifrování dat naklientovi dříve, než budou odeslána na server."
+  },
+  "settings-000724": {
+    "message": "Otisk algoritmem SHA-1 slouží pro kontrolu prolomených hesel. Částečný otisk může pomoci zabránit útoku hrubou silou v případě že je server kompromitován ale také může způsobovat, že i bezpečná hesla budou chybně označována jako prolomená."
+  },
+  "tutorial-000728": {
+    "message": "Po spuštění, zobrazit moje"
+  },
+  "tutorial-000729": {
+    "message": "složky"
+  },
+  "tutorial-000730": {
+    "message": "štítky"
+  },
+  "tutorial-000731": {
+    "message": "oblíbené"
+  },
+  "tutorial-000732": {
+    "message": "hesla"
+  },
+  "tutorial-000733": {
+    "message": "nedávno změněné"
+  },
+  "tutorial-000734": {
+    "message": "označovat moje hesla když…"
+  },
+  "tutorial-000735": {
+    "message": "jsou starší než"
+  },
+  "tutorial-000736": {
+    "message": "tři měsíce"
+  },
+  "tutorial-000737": {
+    "message": "šest měsíců"
+  },
+  "tutorial-000738": {
+    "message": "jeden rok"
+  },
+  "tutorial-000739": {
+    "message": "dva roky"
+  },
+  "tutorial-000740": {
+    "message": "$DAYS$ dnů",
+    "placeholders": {
+      "days": {
+        "content": "$1"
+      }
+    }
+  },
+  "tutorial-000741": {
+    "message": "jsou duplikáty"
+  },
+  "tutorial-000742": {
+    "message": "Vytvářet moje nová hesla"
+  },
+  "tutorial-000743": {
+    "message": "odolná"
+  },
+  "tutorial-000744": {
+    "message": "odolnější"
+  },
+  "tutorial-000745": {
+    "message": "velmi odolná"
+  },
+  "tutorial-000746": {
+    "message": "extrémně odolná"
+  },
+  "tutorial-000747": {
+    "message": "zahrnout číslice"
+  },
+  "tutorial-000748": {
+    "message": "zahrnout speciální znaky"
+  },
+  "tutorial-000749": {
+    "message": "Bezpečný domov pro vaše hesla"
+  },
+  "tutorial-000750": {
+    "message": "Uchovávejte svá hesla v tajnosti"
+  },
+  "tutorial-000751": {
+    "message": "Přizpůsobte si svůj dojem z používání aplikace"
+  },
+  "tutorial-000752": {
+    "message": "Udělejte si pořádek ve svých heslech"
+  },
+  "tutorial-000753": {
+    "message": "Propojte si pomocí dalších aplikací"
+  },
+  "tutorial-000754": {
+    "message": "Zašifrovat moje stávající hesla"
+  },
+  "tutorial-000755": {
+    "message": "Uložit heslo"
+  },
+  "tutorial-000756": {
+    "message": "Zopakujte zadání hesla"
+  },
+  "tutorial-000757": {
+    "message": "Instaluje se šifrování"
+  },
+  "tutorial-000758": {
+    "message": "Klíčenka"
+  },
+  "tutorial-000759": {
+    "message": "Úklid"
+  },
+  "tutorial-000760": {
+    "message": "Úspěch"
+  },
+  "tutorial-000761": {
+    "message": "Najděte pomoc, když ji potřebujete"
+  },
+  "tutorial-000762": {
+    "message": "Přejít na aplikace a rozšíření"
+  },
+  "tutorial-000763": {
+    "message": "Pokračovat"
+  },
+  "tutorial-000764": {
+    "message": "Přeskočit"
+  },
+  "tutorial-000765": {
+    "message": "Kontrolovat bezpečnost hesel prostřednictvím"
+  },
+  "tutorial-000766": {
+    "message": "Vytvářet hesla prostřednictvím"
+  },
+  "tutorial-000767": {
+    "message": "Hledat ikony webů z"
+  },
+  "tutorial-000768": {
+    "message": "Získávat náhledy webových stránek z"
+  },
+  "tutorial-000769": {
+    "message": "Pořídit zálohy"
+  },
+  "tutorial-000770": {
+    "message": "Zobrazit veškerá nastavení"
+  },
+  "tutorial-000771": {
+    "message": "Přečtěte si tipy pro správce"
+  },
+  "tutorial-000772": {
+    "message": "Heslo (přinejmenším 12 znaků)"
+  },
+  "tutorial-000773": {
+    "message": "Probíhá zašifrovávání…"
+  },
+  "tutorial-000774": {
+    "message": "K dispozici je mnoho nastavení, takže si aplikace můžete přizpůsobit dle svých potřeb."
+  },
+  "tutorial-000775": {
+    "message": "Všechny naleznete pod „Více“, ale nejběžnější jsme umístili přímo sem:"
+  },
+  "tutorial-000776": {
+    "message": "Aplikace Hesla poskytuje moderní a odolné šifrování, díky kterému budou vaše data ochráněna před slídily."
+  },
+  "tutorial-000777": {
+    "message": "Níže zvolte bezpečné heslo a aktivujte tak ultimátní ochranu svých hesel."
+  },
+  "tutorial-000778": {
+    "message": "Snadný přístup k vašim heslům odkudkoli, díky doprovodným aplikacím a rozšířením pro webové prohlížeče."
+  },
+  "tutorial-000779": {
+    "message": "Doprovodné aplikace a rozšíření pro webové prohlížeče naleznete v sekci „Více“, nebo jen klikněte na tlačítko níže."
+  },
+  "tutorial-000780": {
+    "message": "Aplikaci hesla je možné si přizpůsobit v mnoha různých ohledech."
+  },
+  "tutorial-000781": {
+    "message": "Coby správce by vás mohla zajímat tato běžná nastavení."
+  },
+  "tutorial-000782": {
+    "message": "Kdykoli nevíte, jak něco funguje, máte dotazy nebo potřebujete pomoci s problémem:"
+  },
+  "tutorial-000783": {
+    "message": "Pomoc je vždy nablízku."
+  },
+  "tutorial-000784": {
+    "message": "Vestavěná příručka je k dispozici kliknutím na „Více“ a vysvětluje veškeré podrobnosti o aplikaci."
+  },
+  "tutorial-000785": {
+    "message": "Ve všech ostatních případech je naše komunita tím pravým místem, kde se ptát."
+  },
+  "tutorial-000786": {
+    "message": "Příručka se otevře po dokončení tohoto průvodce"
+  },
+  "tutorial-000787": {
+    "message": "Zadejte heslo s 12 a více znaky"
+  },
+  "tutorial-000788": {
+    "message": "Je třeba, aby heslo bylo přinejmenším 12 znaků dlouhé a potvrzení hesla bylo zadáno shodně"
+  }
+}
