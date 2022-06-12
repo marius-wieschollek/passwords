@@ -111,14 +111,5 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
 * [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)
 
 ## Translations
-1. Clone/Fork the Repository
-2. The most up to date translation is the german one. Use these files as basis for a new language:
-    - [src/l10n/de.js](src/l10n/de.js)
-    - [src/l10n/de.json](src/l10n/de.json)
-    - [src/l10n/apps/de.json](src/l10n/apps/de.json)
-    - [src/l10n/backups/de.json](src/l10n/backups/de.json)
-    - [src/l10n/settings/de.json](src/l10n/settings/de.json)
-    - [src/l10n/tutorial/de.json](src/l10n/tutorial/de.json)
-3. Create the files with the correct language code.
-4. Translate
-5. [Make signed commit](#rules-for-contributors), Push and make a [pull request](https://github.com/marius-wieschollek/passwords/pulls).
+1. You can translate the app on our [Weblate](https://weblate.passwordsapp.org/projects/passwords/passwords/)
+2. If you want to add a new language, make a [feature request](https://github.com/marius-wieschollek/passwords/issues/new/choose) and it will be added.

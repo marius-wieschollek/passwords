@@ -86,6 +86,7 @@ Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com
 ## Development
 * Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
+* Do you want to translate the app? You can do so on [Weblate](https://weblate.passwordsapp.org/projects/passwords/passwords/).
 * Do you want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index).
 * For questions and announcements, visit the [Telegram Group for Developers](https://t.me/nc_passwords_dev)
 
