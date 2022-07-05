@@ -62,7 +62,7 @@
         "jszip": "^3.10.0",
         "libsodium-wrappers": "^0.7.10",
         "marked": "^4.0.16",
-        "mermaid": "^9.1.1",
+        "mermaid": "^9.1.2",
         "mini-css-extract-plugin": "^2.4.3",
         "passwords-client": "0.0.14",
         "sass": "^1.43.3",
