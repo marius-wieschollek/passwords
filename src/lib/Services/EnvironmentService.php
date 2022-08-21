@@ -622,7 +622,7 @@ class EnvironmentService {
 
         if(empty($client) ||
            in_array($client, self::$protectedClients) ||
-           strpos($client, 'Passwords Session') !== false) {
+           str_contains($client, 'Passwords Session')) {
             return $loginName.' via '.$request->getRemoteAddress();
         }
 

@@ -70,10 +70,8 @@ class Localisation {
      * @returns {Promise<boolean>}
      */
     async loadSection(section, alternative = false) {
-        let language = this.language.replace('-', '_');
-        if(language === 'en') return true;
-
-        let url = generateFilePath('passwords', 'l10n', `${section}/${language}.json?_=${APP_VERSION}`);
+        let language = this.language.replace('-', '_'),
+            url = generateFilePath('passwords', 'l10n', `${section}/${language}.json?_=${APP_VERSION}`);
         if(alternative) {
             url = generateUrl(`/apps/passwords/l10n/${section}/${language}.json`);
         }

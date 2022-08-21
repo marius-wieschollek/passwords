@@ -15,21 +15,7 @@ const {readFile, writeFile} = require("fs/promises");
 class CompileLanguageFilesPlugin {
 
     get FORCE_KEYS() {
-        return {
-            'CustomFields'   : 'Custom Fields',
-            'FolderLabel'    : 'Folder',
-            'TagLabels'      : 'Tags',
-            'FolderId'       : 'Folder Id',
-            'TagIds'         : 'Tag Ids',
-            'frontend-000256': '{count} shares',
-            'frontend-000277': 'Choose expiration date',
-            'frontend-000353': 'CLIENT::MAINTENANCE',
-            'frontend-000354': 'CLIENT::UNKNOWN',
-            'frontend-000355': 'CLIENT::SYSTEM',
-            'frontend-000356': 'CLIENT::PUBLIC',
-            'frontend-000357': 'CLIENT::CRON',
-            'frontend-000358': 'CLIENT::CLI'
-        };
+        return this._keys;
     }
 
     constructor(options = {}) {
@@ -47,6 +33,7 @@ class CompileLanguageFilesPlugin {
         this._initialized = false;
         this._mtimes = {};
         this._index = {};
+        this._keys = {};
         this._isWorking = false;
     }
 
@@ -75,19 +62,21 @@ class CompileLanguageFilesPlugin {
             }
             await fs.mkdir(this._options.targetPath);
 
+            await this._readKeysFile();
             await this._processDefaultLanguageFile();
             this._initialized = true;
         } else {
+            await this._readKeysFile();
             await this._processDefaultLanguageFile();
         }
 
         let files = await fs.readdir(this._options.sourcePath, {withFileTypes: true});
         for(let file of files) {
-            if(file.isFile()) {
-                let path = `${this._options.sourcePath}/${file.name}`;
+            if(file.isDirectory()) {
+                let path = `${this._options.sourcePath}/${file.name}/messages.json`;
                 let stats = await fs.stat(path);
                 if(!this._mtimes.hasOwnProperty(file.name) || this._mtimes[file.name] !== stats.mtime) {
-                    await this._processLanguageFile(path).catch(console.error);
+                    await this._processLanguageFile(path, file.name).catch(console.error);
 
                     this._mtimes[file.name] = stats.mtime;
                 }
@@ -101,12 +90,12 @@ class CompileLanguageFilesPlugin {
      * Processes a single language file
      *
      * @param {String} file
+     * @param language
      * @returns {Promise<void>}
      * @private
      */
-    async _processLanguageFile(file) {
-        let language     = file.substr(file.lastIndexOf('/') + 1).replace('.json', ''),
-            languageKeys = JSON.parse(await readFile(file, {encoding: 'utf-8'})),
+    async _processLanguageFile(file, language) {
+        let languageKeys = JSON.parse(await readFile(file, {encoding: 'utf-8'})),
             translations = this._processLanguageKeys(languageKeys);
         await this._writeSectionL10nFiles(translations, language);
     }
@@ -119,6 +108,13 @@ class CompileLanguageFilesPlugin {
      */
     _processLanguageKeys(languageKeys) {
         let translations = {};
+
+        for(let indexKey in this._index) {
+            if(!languageKeys.hasOwnProperty(indexKey)) {
+                languageKeys[indexKey] = this._index[indexKey];
+            }
+        }
+
         for(let key in languageKeys) {
             if(!languageKeys.hasOwnProperty(key)) {
                 continue;
@@ -200,14 +196,13 @@ class CompileLanguageFilesPlugin {
      * @private
      */
     async _processDefaultLanguageFile() {
-        let file  = `${this._options.defaultLanguage}.json`,
-            path  = `${this._options.sourcePath}/${file}`,
+        let path  = `${this._options.sourcePath}/${this._options.defaultLanguage}/messages.json`,
             stats = await fs.stat(path);
 
-        if(this._mtimes.hasOwnProperty(file) && this._mtimes[file] === stats.mtime) {
+        if(this._mtimes.hasOwnProperty(this._options.defaultLanguage) && this._mtimes[this._options.defaultLanguage] === stats.mtime) {
             return;
         }
-        this._mtimes[file] = stats.mtime;
+        this._mtimes[this._options.defaultLanguage] = stats.mtime;
 
         this._index = {};
         let content = JSON.parse(await readFile(path, {encoding: 'utf-8'}));
@@ -216,6 +211,19 @@ class CompileLanguageFilesPlugin {
                 this._index[key] = this._processEntry(content[key]);
             }
         }
+    }
+
+    async _readKeysFile() {
+        let path  = `${this._options.sourcePath}/keys.json`,
+            stats = await fs.stat(path);
+
+        if(this._mtimes.hasOwnProperty('keys') && this._mtimes['keys'] === stats.mtime) {
+            return;
+        }
+        this._mtimes['keys'] = stats.mtime;
+
+        this._index = {};
+        this._keys = JSON.parse(await readFile(path, {encoding: 'utf-8'}));
     }
 
     /**

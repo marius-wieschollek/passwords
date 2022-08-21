@@ -1,9 +1,19 @@
 <?php
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\Controller;
 
 use DateTime;
 use Exception;
+use OC;
 use OC\App\AppManager;
 use DateTimeInterface;
 use OCA\Passwords\AppInfo\Application;
@@ -15,6 +25,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\AppFramework\Http\Response;
 use OCP\IRequest;
+use OCP\L10N\IFactory;
 
 /**
  * Class LanguageController
@@ -31,18 +42,25 @@ class LanguageController extends Controller {
     /**
      * @var LoggingService
      */
-    protected LoggingService $logger;
+    protected LoggingService     $logger;
+
+    /**
+     * @var IFactory
+     */
+    protected IFactory $l10nFactory;
 
     /**
      * LanguageController constructor.
      *
      * @param                $appName
      * @param IRequest       $request
+     * @param IFactory       $l10nFactory
      * @param AppManager     $appManager
      * @param LoggingService $logger
      */
-    public function __construct($appName, IRequest $request, AppManager $appManager, LoggingService $logger) {
+    public function __construct($appName, IRequest $request, IFactory $l10nFactory, AppManager $appManager, LoggingService $logger) {
         parent::__construct($appName, $request);
+        $this->l10nFactory = $l10nFactory;
         $this->appManager = $appManager;
         $this->logger     = $logger;
     }
@@ -68,7 +86,16 @@ class LanguageController extends Controller {
         try {
             $json = $this->readLanguageFile($section, $language);
 
-            if($json !== null) return $this->createJsonResponse($json);
+            if($json !== null) {
+                return $this->createJsonResponse($json);
+            } else {
+                $fallbackLanguage = $this->l10nFactory->findLanguage(Application::APP_NAME);
+
+                if($language !== $fallbackLanguage) {
+                    $json = $this->readLanguageFile($section, $fallbackLanguage);
+                    if($json !== null) return $this->createJsonResponse($json);
+                }
+            }
         } catch(Exception $e) {
             $this->logger->logException($e);
         }

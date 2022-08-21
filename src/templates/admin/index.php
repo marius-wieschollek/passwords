@@ -9,8 +9,10 @@
  */
 
 use OCA\Passwords\AppInfo\Application;
+use OCP\Util;
 
-script('passwords', ['Static/utility', 'Static/admin']);
+Util::addScript('passwords', 'Static/utility');
+Util::addScript('passwords', 'Static/admin');
 style(Application::APP_NAME, 'admin');
 
 print_unescaped($this->inc('admin/settings'));

@@ -164,6 +164,21 @@
   "backups-000051": {
     "message": "ParentId"
   },
+  "backups-CustomFields": {
+    "message": "Custom Fields"
+  },
+  "backups-FolderLabel": {
+    "message": "Folder"
+  },
+  "backups-TagLabels": {
+    "message": "Tags"
+  },
+  "backups-FolderId": {
+    "message": "Folder Id"
+  },
+  "backups-TagIds": {
+    "message": "Tag Ids"
+  },
   "backups-000052": {
     "message": "Empty"
   },
@@ -1394,7 +1409,7 @@
     "message": "If this problem persists, you should contact your administrator."
   },
   "backend-000389": {
-    "message": "Passwords Session $STR_1$ - $STR_1$",
+    "message": "Passwords Session $STR_1$ - $STR_2$",
     "placeholders": {
       "str_1": {
         "content": "$1"

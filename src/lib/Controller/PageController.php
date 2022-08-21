@@ -85,6 +85,7 @@ class PageController extends Controller {
      * @param SetupReportHelper         $setupReportHelper
      * @param UserChallengeService      $challengeService
      * @param DeferredActivationService $das
+     * @param ConfigurationService      $config
      */
     public function __construct(
         IRequest                  $request,

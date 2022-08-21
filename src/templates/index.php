@@ -4,15 +4,17 @@
  * created by Marius David Wieschollek
  * and licensed under the AGPL.
  *
- * @var $l \OCP\IL10N
  * @var $_ array
  */
 
 use OCA\Passwords\AppInfo\Application;
+use OCP\Util;
 
 if($_['https']) {
     style(Application::APP_NAME, ['app']);
-    script(Application::APP_NAME, ['Static/compatibility', 'Static/utility', 'Static/app']);
+    Util::addScript(Application::APP_NAME, 'Static/compatibility');
+    Util::addScript(Application::APP_NAME, 'Static/utility');
+    Util::addScript(Application::APP_NAME, 'Static/app');
     ?>
     <span data-constant="imagePath" data-value="<?php print_unescaped(image_path('passwords', '')); ?>"></span>
     <div id="main" class="loading"></div>
