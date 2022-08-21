@@ -2823,5 +2823,23 @@
     },
     "frontend-000526": {
         "message": "Browsererweiterung"
+    },
+    "frontend-000667": {
+        "message": "Tags CSV"
+    },
+    "backups-CustomFields": {
+        "message": "Eigene Felder"
+    },
+    "backups-FolderLabel": {
+        "message": "Ordner"
+    },
+    "backups-TagLabels": {
+        "message": "Tags"
+    },
+    "backups-FolderId": {
+        "message": "Ordner Id"
+    },
+    "backups-TagIds": {
+        "message": "Tag Ids"
     }
 }
