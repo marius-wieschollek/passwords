@@ -124,7 +124,7 @@ class CompileLanguageFilesPlugin {
                 continue;
             }
             let value      = this._processEntry(languageKeys[key]),
-                baseString = this._index[key],
+                baseString = key.substring(key.indexOf('-') + 1),
                 section    = 'frontend';
 
             if(this.FORCE_KEYS.hasOwnProperty(key)) {
@@ -136,7 +136,7 @@ class CompileLanguageFilesPlugin {
             }
 
             if(key.indexOf('-') !== -1) {
-                section = key.substr(0, key.indexOf('-'));
+                section = key.substring(0, key.indexOf('-'));
             }
 
             if(!translations.hasOwnProperty(section)) {
