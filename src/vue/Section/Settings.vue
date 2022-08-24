@@ -223,10 +223,22 @@
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="details" say="Show details"/>
                         <translate tag="option" value="edit" say="Edit password"/>
+                        <translate tag="option" value="open-url" say="Open Url"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="Action to perform when double clicking on a password in the list view"
-                                   v-if="advancedSettings"/>
+                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advancedSettings"/>
+
+                    <translate tag="label" for="setting-password-wheel" say="SettingsMouseWheelAction" v-if="advancedSettings"/>
+                    <select id="setting-password-wheel" v-model="settings['client.ui.password.wheel.action']" v-if="advancedSettings">
+                        <translate tag="option" value="password" say="Copy password"/>
+                        <translate tag="option" value="username" say="Copy username"/>
+                        <translate tag="option" value="url" say="Copy website"/>
+                        <translate tag="option" value="details" say="Show details"/>
+                        <translate tag="option" value="edit" say="Edit password"/>
+                        <translate tag="option" value="open-url" say="Open Url"/>
+                        <translate tag="option" value="none" say="Nothing"/>
+                    </select>
+                    <settings-help text="SettingsMouseWheelActionHelp" v-if="advancedSettings"/>
 
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox"

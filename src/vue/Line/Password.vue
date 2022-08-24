@@ -1,5 +1,6 @@
 <template>
     <div @click="clickAction($event)"
+         @click.middle="wheelClickAction($event)"
          @dblclick="doubleClickAction($event)"
          @dragstart="dragStartAction($event)"
          :class="className"
@@ -187,6 +188,10 @@
                 let action = SettingsService.get('client.ui.password.click.action');
                 if(action !== 'none') this.runClickAction(action, 300);
             },
+            wheelClickAction($event) {
+                let action = SettingsService.get('client.ui.password.wheel.action');
+                if(action !== 'none') this.runClickAction(action);
+            },
             doubleClickAction($event) {
                 if($event && ($($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
                 let action = SettingsService.get('client.ui.password.dblClick.action');
@@ -197,11 +202,15 @@
                 }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details' && action !== 'edit') {
+                if(action !== 'details' && action !== 'edit' && action !== 'open-url') {
                     this.copyAction(action, delay);
                 } else if(action === 'edit') {
                     this.clickTimeout = setTimeout(this.editAction, delay);
-                } else if(action === 'details') this.clickTimeout = setTimeout(this.detailsAction, delay);
+                } else if(action === 'details') {
+                    this.clickTimeout = setTimeout(this.detailsAction, delay);
+                } else if(action === 'open-url' && this.password.url) {
+                    this.clickTimeout = setTimeout(() => {Utility.openLink(this.password.url)}, delay);
+                }
             },
             copyAction(attribute, delay = 0) {
                 let message = 'Error copying {element} to clipboard';

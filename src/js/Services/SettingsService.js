@@ -17,6 +17,7 @@ class SettingsService {
             'client.ui.password.field.sorting'   : 'byTitle',
             'client.ui.password.click.action'    : 'password',
             'client.ui.password.dblClick.action' : 'username',
+            'client.ui.password.wheel.action'    : 'open-url',
             'client.ui.password.menu.copy'       : false,
             'client.ui.password.user.show'       : false,
             'client.ui.password.details.preview' : true,

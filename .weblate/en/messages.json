@@ -2654,6 +2654,12 @@
   "settings-000726": {
     "message": "The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached."
   },
+  "settings-SettingsMouseWheelAction": {
+    "message": "Mousewheel click action"
+  },
+  "settings-SettingsMouseWheelActionHelp": {
+    "message": "Action to be performed when the mouse wheel is clicked on a password entry"
+  },
   "tutorial-000730": {
     "message": "After launch, show my"
   },
