@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+- Mousewheel click action for passwords
+
 ## 2022.8.0 - Feature release
 ### Changed
 - Markdown editor switched to ToastUI Editor
