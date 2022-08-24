@@ -20,6 +20,7 @@
         <slot name="middle"/>
         <router-link :to="securityRoute" tag="i" :class="securityCheck" class="fa fa-shield security duplicate" :title="securityTitle" v-if="password.statusCode === 'DUPLICATE'"/>
         <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle" v-else></i>
+        <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
@@ -173,6 +174,12 @@
                 }
 
                 return classNames;
+            },
+            hasCustomAction() {
+                return SettingsService.get('client.ui.password.custom.action') !== 'none';
+            },
+            customActionClass() {
+                return SettingsService.get('client.ui.password.custom.action') === 'details' ? 'fa-info':'fa-share-alt';
             }
         },
 
@@ -182,7 +189,7 @@
 
         methods: {
             clickAction($event) {
-                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
+                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate') || $event.target.classList.contains('action-button'))) return;
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsService.get('client.ui.password.click.action');
@@ -220,6 +227,9 @@
                     Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
                 }, delay);
             },
+            runCustomAction() {
+                this.detailsAction(SettingsService.get('client.ui.password.custom.action'));
+            },
             favoriteAction($event) {
                 $event.stopPropagation();
                 this.password.favorite = !this.password.favorite;
@@ -227,7 +237,7 @@
                     .updatePassword(this.password)
                     .catch(() => { this.password.favorite = !this.password.favorite; });
             },
-            toggleMenu($event) {
+            toggleMenu() {
                 this.showMenu = !this.showMenu;
                 this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
@@ -393,7 +403,8 @@
 
             .more,
             .icon,
-            .security {
+            .security,
+            .action-button {
                 line-height : 50px;
                 width       : 50px;
                 font-size   : 1rem;
@@ -516,7 +527,8 @@
             }
 
             @media(max-width : $width-extra-small) {
-                .date {
+                .date,
+                .action-button {
                     display : none;
                 }
             }
@@ -525,7 +537,8 @@
 
     @media(max-width : $width-large) {
         &.show-details .item-list .row {
-            .date {
+            .date,
+            .action-button {
                 display : none;
             }
         }
@@ -535,7 +548,8 @@
         &.show-details .item-list .row {
             .tags,
             .date,
-            .security {
+            .security,
+            .action-button {
                 display : none;
             }
         }

@@ -240,6 +240,14 @@
                     </select>
                     <settings-help text="SettingsMouseWheelActionHelp" v-if="advancedSettings"/>
 
+                    <translate tag="label" for="setting-password-custom-action" say="SettingsCustomAction" v-if="advancedSettings"/>
+                    <select id="setting-password-custom-action" v-model="settings['client.ui.password.custom.action']" v-if="advancedSettings">
+                        <translate tag="option" value="details" say="Show details"/>
+                        <translate tag="option" value="share" say="SettingsShowShareTab"/>
+                        <translate tag="option" value="none" say="Nothing"/>
+                    </select>
+                    <settings-help text="SettingsCustomActionHelp" v-if="advancedSettings"/>
+
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox"
                            id="setting-password-menu"
