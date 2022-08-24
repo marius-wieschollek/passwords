@@ -208,7 +208,7 @@ class CompileLanguageFilesPlugin {
         let content = JSON.parse(await readFile(path, {encoding: 'utf-8'}));
         for(let key in content) {
             if(content.hasOwnProperty(key)) {
-                this._index[key] = this._processEntry(content[key]);
+                this._index[key] = content[key];
             }
         }
     }
