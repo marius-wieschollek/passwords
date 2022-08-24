@@ -130,10 +130,21 @@
                 return fields;
             },
             getSseType() {
-                let encryption = 'No encryption';
-                if(this.password.sseType === 'SSEv1r1') encryption = 'Simple encryption (Gen. 1)';
-                if(this.password.sseType === 'SSEv1r2') encryption = 'Simple encryption (Gen. 2)';
-                if(this.password.sseType === 'SSEv2r1') encryption = 'Advanced encryption (SSE V2)';
+                let encryption = 'Encryption'+this.password.sseType;
+                switch(this.password.sseType) {
+                    case 'none':
+                        encryption = 'No encryption';
+                        break;
+                    case 'SSEv1r1':
+                        encryption = 'Simple encryption (Gen. 1)';
+                        break;
+                    case 'SSEv1r2':
+                        encryption = 'Simple encryption (Gen. 2)';
+                        break;
+                    case 'SSEv2r1':
+                        encryption = 'Advanced encryption (SSE V2)';
+                        break;
+                }
 
                 return Localisation.translate(encryption)
             },

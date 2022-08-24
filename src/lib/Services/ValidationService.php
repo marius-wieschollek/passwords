@@ -17,6 +17,8 @@ use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\Object\FolderRevisionService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
 use Throwable;
 
@@ -200,7 +202,7 @@ class ValidationService {
             $revision->setCseType(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         }
 
-        $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2, EncryptionService::SSE_ENCRYPTION_V2R1];
+        $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2, EncryptionService::SSE_ENCRYPTION_V2R1, EncryptionService::SSE_ENCRYPTION_V3R1];
         if(!in_array($revision->getSseType(), $validSSE)) {
             throw new ApiException('Invalid server side encryption type', 400);
         }
@@ -235,6 +237,8 @@ class ValidationService {
      * @param PasswordRevision $password
      *
      * @throws ApiException
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
      */
     protected function checkHash(PasswordRevision $password): void {
         if(preg_match("/^[0-9a-z]{40}$/", $password->getHash())) {

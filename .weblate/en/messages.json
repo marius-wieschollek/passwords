@@ -1342,6 +1342,10 @@
     "frontend-000376"                      : {
         "message": "Today in 2018, the first version of passwords was published. Thank you for using the app."
     },
+    "frontend-EncryptionSSEv3r1"           : {
+        "message": "Encryption with third party key",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
     "backend-000377"                       : {
         "message": "HTTPS Required"
     },

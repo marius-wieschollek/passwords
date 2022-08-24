@@ -72,12 +72,7 @@
                 if(this.revision.status === 3) status = `Unknown (${this.revision.statusCode.toLowerCase().capitalize()})`;
                 fields.push({label: Localisation.translate('Status'), value: Localisation.translate(status)});
 
-                let sseType = 'No encryption';
-                if(this.revision.sseType === 'SSEv1r1') sseType = 'Simple encryption (Gen. 1)';
-                if(this.revision.sseType === 'SSEv1r2') sseType = 'Simple encryption (Gen. 2)';
-                if(this.revision.sseType === 'SSEv2r1') sseType = 'Advanced encryption (SSE V2)';
-                fields.push({label: Localisation.translate('Encryption on server'), value: Localisation.translate(sseType)});
-
+                fields.push({label: Localisation.translate('Encryption on server'), value: this.sseTypeLabel});
                 let cseType = 'No encryption';
                 if(this.revision.cseType === 'CSEv1r1') cseType = 'Encryption with libsodium';
                 fields.push({label: Localisation.translate('Encryption on client'), value: Localisation.translate(cseType)});
@@ -87,7 +82,26 @@
             },
             canRestore() {
                 return this.password.revision !== this.revision.id;
-            }
+            },
+            sseTypeLabel() {
+                let encryption = 'Encryption'+this.revision.sseType;
+                switch(this.revision.sseType) {
+                    case 'none':
+                        encryption = 'No encryption';
+                        break;
+                    case 'SSEv1r1':
+                        encryption = 'Simple encryption (Gen. 1)';
+                        break;
+                    case 'SSEv1r2':
+                        encryption = 'Simple encryption (Gen. 2)';
+                        break;
+                    case 'SSEv2r1':
+                        encryption = 'Advanced encryption (SSE V2)';
+                        break;
+                }
+
+                return Localisation.translate(encryption)
+            },
         },
         methods   : {
             restoreAction() {
