@@ -2841,5 +2841,11 @@
     },
     "backups-TagIds": {
         "message": "Tag IDs"
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Aktion bei Mausradklick"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Aktion die ausgeführt wird, wenn mit dem Mausrad geklickt wird"
     }
 }
